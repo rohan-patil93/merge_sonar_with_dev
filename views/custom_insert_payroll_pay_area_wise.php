@@ -61,12 +61,12 @@ foreach($payrolldatas as $payrolldata){
 
   function resetthepayarea(payYear, payMonth, payAreaId){
     swal({
-      title: 'Confirm Reset',
-      text: 'Are you sure you want to reset the payroll data for this pay area? This action will delete all payroll records for the selected month and year.',
+      title: <?php echo json_encode(__('Confirm Reset')); ?>,
+      text: <?php echo json_encode(__('Are you sure you want to reset the payroll data for this pay area? This action will delete all payroll records for the selected month and year.')); ?>,
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, Reset',
-      cancelButtonText: 'Cancel',
+      confirmButtonText: <?php echo json_encode(__('Yes, Reset')); ?>,
+      cancelButtonText: <?php echo json_encode(__('Cancel')); ?>,
       confirmButtonClass: 'btn btn-danger',
       cancelButtonClass: 'btn btn-secondary'
     }, function(isConfirm){
@@ -83,13 +83,13 @@ foreach($payrolldatas as $payrolldata){
           },
           success: function(response){
             if(response && ((response.status === 'success' || response.status === true) || (Array.isArray(response) && response.length > 0))){
-              var msg = response.message ? response.message : 'Payroll reset completed successfully';
+              var msg = response.message ? response.message : <?php echo json_encode(__('Payroll reset completed successfully')); ?>;
               swal('<?php echo ucwords($_SESSION['config']['name']); ?>', msg, 'success');
               setTimeout(function(){
                 window.location.reload();
               }, 800);
             }else{
-              var errMsg = (response && response.message) ? response.message : 'Unable to reset payroll for selected pay area';
+              var errMsg = (response && response.message) ? response.message : <?php echo json_encode(__('Unable to reset payroll for selected pay area')); ?>;
               swal('<?php echo ucwords($_SESSION['config']['name']); ?>', errMsg, 'error');
             }
           },
@@ -112,7 +112,7 @@ foreach($payrolldatas as $payrolldata){
               <div class="card-header-right table-card-header text-right">
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                   <i class="icofont icofont-reply"></i>
-                  Back
+                  <?php echo __('Back'); ?>
                 </a>
               </div>
             </div>
@@ -142,7 +142,7 @@ foreach($payrolldatas as $payrolldata){
             <div class="row">
               <div class="card-header table-card-header ">
                 <h5 class="">
-                  <b class="text-dark f-18 f-w-600"><?php echo date("F", mktime(0, 0, 0, $_GET['PAY_MONTH'], 10))." ".$_GET["PAY_YEAR"]; ?>  Payroll </b>
+                  <b class="text-dark f-18 f-w-600"><?php echo date("F", mktime(0, 0, 0, $_GET['PAY_MONTH'], 10))." ".$_GET["PAY_YEAR"]; ?>  <?php echo __('Payroll'); ?> </b>
                 </h5>
                 <?php
                 $date2 = date("Y-m-d", strtotime('+1 months', strtotime($date1)));
@@ -150,12 +150,12 @@ foreach($payrolldatas as $payrolldata){
                 ?>
                 <div class="card-header-right table-card-header text-right">
                     <?php if(count((array)$pay_areas)>0){ ?>
-                    <button type="button" onclick="passpayrollsteps()" class="btn btn-success mb-2 desktop-view"> Generate Payroll - Steps
+                    <button type="button" onclick="passpayrollsteps()" class="btn btn-success mb-2 desktop-view"> <?php echo __('Generate Payroll - Steps'); ?>
                     </button>
                     <?php } ?>
 
                                   <?php if(count((array)$check)>1){ ?>
-                    <a href="index.php?option=COM_INSERT_PAYAREA_PAYROLL&PAY_YEAR=<?php echo $_GET['PAY_YEAR']; ?>&PAY_MONTH=<?php echo $_GET['PAY_MONTH']; ?>&PPJ=<?php echo implode(",",(array)$payareaids); ?>"  class="btn btn-success mb-2 desktop-view" > View All Payroll
+                    <a href="index.php?option=COM_INSERT_PAYAREA_PAYROLL&PAY_YEAR=<?php echo $_GET['PAY_YEAR']; ?>&PAY_MONTH=<?php echo $_GET['PAY_MONTH']; ?>&PPJ=<?php echo implode(",",(array)$payareaids); ?>"  class="btn btn-success mb-2 desktop-view" > <?php echo __('View All Payroll'); ?>
                     </a>
                     <?php } ?>
                 </div>
@@ -170,11 +170,11 @@ foreach($payrolldatas as $payrolldata){
                     <th scope="col">
 
                     </th>
-                    <th scope="col">Sl No</th>
-                    <th scope="col">Payroll Name</th>
-                    <th scope="col">Earnings</th>
-                      <th scope="col">Deductions </th>
-                    <th scope="col">View Payroll</th>
+                    <th scope="col"><?php echo __('Sl No'); ?></th>
+                    <th scope="col"><?php echo __('Payroll Name'); ?></th>
+                    <th scope="col"><?php echo __('Earnings'); ?></th>
+                      <th scope="col"><?php echo __('Deductions'); ?> </th>
+                    <th scope="col"><?php echo __('View Payroll'); ?></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -185,7 +185,7 @@ foreach($payrolldatas as $payrolldata){
                     <td>
                       <div class="checkbox-fade fade-in-primary" name="individual_approvalcheck">
                         <label class="checkbox checkbox-success">
-                          <input aria-label="Checkbox" type="checkbox"<?php if(in_array($data['id'],(array)$payrolls)){ echo "disabled";
+                          <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"<?php if(in_array($data['id'],(array)$payrolls)){ echo __('disabled');
 } ?>  onclick="tocheckdrodownhrwork()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $data['id']; ?>" onkeydown="">
                           <span class="cr">
                             <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -200,11 +200,11 @@ foreach($payrolldatas as $payrolldata){
                     <td>
                       <?php if(in_array($data['id'],(array)$payrolls)){ ?>
                           <a href="index.php?option=COM_INSERT_PAYAREA_PAYROLL&PAY_YEAR=<?php echo $_GET['PAY_YEAR']; ?>&PAY_MONTH=<?php echo $_GET['PAY_MONTH']; ?>&PPJ=<?php echo $data['id']; ?>"  class="btn btn-success mb-2 desktop-view">
-                              View
+                              <?php echo __('View'); ?>
                        </a>
 
                        <button type="button" onclick="resetthepayarea(<?php echo $_GET['PAY_YEAR'].", ".$_GET['PAY_MONTH'].", ".$data['id']; ?>)"  class="btn btn-primary mb-2 desktop-view m-l-5">
-                        ReSet
+                        <?php echo __('ReSet'); ?>
                        </button>
                             <?php } ?>
 

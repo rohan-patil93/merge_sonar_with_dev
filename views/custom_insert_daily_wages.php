@@ -330,11 +330,11 @@ function monthlytoyearlycat(val,id){
             <thead>
                 <tr class="text-uppercase">
                     <th scope="col" style="width: 30%" class="pl-7">
-                                <span class="text-dark-75">Component Name</span>
+                                <span class="text-dark-75"><?= __('Component Name') ?></span>
                             </th>
-                    <th scope="col" style="width: 20%;text-align: center;">Wage Rate</th>
-                    <th scope="col" style="width: 20%;text-align: center;">No of Days</th>
-                    <th scope="col" style="width: 20%;text-align: center;">Amount Daily</th>
+                    <th scope="col" style="width: 20%;text-align: center;"><?= __('Wage Rate') ?></th>
+                    <th scope="col" style="width: 20%;text-align: center;"><?= __('No of Days') ?></th>
+                    <th scope="col" style="width: 20%;text-align: center;"><?= __('Amount Daily') ?></th>
                 </tr>
             </thead>
         </table>
@@ -361,9 +361,9 @@ function monthlytoyearlycat(val,id){
                                                         $codedetail = "% ".str_replace("_", "", strtoupper($value['calculation_category']));
                                                         $read_only = "";
                                                     }elseif($value['calculation_type'] == 'F'){
-                                                     $codedetail = "Formula";
+                                                     $codedetail = __("Formula");
                                                  }else{
-                                                     $codedetail = "Fixed";
+                                                     $codedetail = __("Fixed");
                                                      $read_only = "";
                                                  }
                                                  $note = urlencode($value['note']);

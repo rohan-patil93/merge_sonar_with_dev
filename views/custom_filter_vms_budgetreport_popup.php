@@ -57,9 +57,9 @@ if($emp_list_names!="") {
 ?>   
 <div class="modal-header">
  <h5 class="modal-title">
-  Filter Options 
+  <?php echo __('Filter Options'); ?> 
 </h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
  <i aria-hidden="true" class="ki ki-close"></i>
 </button>
 </div>
@@ -97,7 +97,7 @@ if($emp_list_names!="") {
                 </g>
               </svg>
             </span>
-            <div class="card-label pl-4"><?php echo $filter['filter_name']; ?></div>
+            <div class="card-label pl-4"><?php echo htmlspecialchars(__($filter['filter_name'] ?? '')); ?></div>
           </div>
         </div>
         <div id="aaa<?php echo $targetid; ?>" class="collapse mb-5" data-parent="#accordionExample7">
@@ -113,7 +113,7 @@ if($emp_list_names!="") {
           <select onchange="selectemployee()" class="form-control mt-5" id="kt_select2_4<?php echo $index;?>" name="empstatus[]" multiple="multiple">
            <?php 
            foreach ($table_details as $key => $value) { ?>
-             <option value="<?php echo $key;?>" <?php if(in_array($key, array_keys((array)$selectedlist[$targettable_field]))) { ?> selected <?php  } ?> ><?php echo $value;?></option>
+             <option value="<?php echo $key;?>" <?php if(in_array($key, array_keys((array)$selectedlist[$targettable_field]))) { ?> selected <?php  } ?> ><?php echo htmlspecialchars(__($value ?? ''));?></option>
              <?php
            }
            ?>
@@ -142,8 +142,8 @@ if($emp_list_names!="") {
 <!-- </div> -->
 </div>
 <div class="modal-footer mt-5" >
-  <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal">Close</button>
-  <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Select</button>
+  <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?php echo __('Close'); ?></button>
+  <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?php echo __('Select'); ?></button>
 </div>
 </form>
 <script type="text/javascript">

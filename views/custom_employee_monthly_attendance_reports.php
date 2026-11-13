@@ -33,7 +33,7 @@ if (isset($_GET['employee_id']) || isset($_GET['month'])) {
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Employee Monthly Report</h5>
+            <h5><?= __('Employee Monthly Report') ?></h5>
         </div>
         <div class="card-body p-4">
             <form method="get" id="attendanceReportForm">
@@ -41,9 +41,9 @@ if (isset($_GET['employee_id']) || isset($_GET['month'])) {
                 <div class="row">
                     <!-- Employee -->
                     <div class="form-group col-md-4">
-                        <label>Employee <span style="color:red;">*</span></label>
+                        <label><?= __('Employee') ?> <span style="color:red;">*</span></label>
                         <select class="form-select js-example-basic-single" id="employee_id" name="employee_id">
-                            <option value="0">Select Employee</option>
+                            <option value="0"><?= __('Select Employee') ?></option>
                             <?php foreach ($employees as $row): ?>
                                 <option value="<?= $row['id']; ?>" <?= ((int)$row['id'] === (int)$employee_id) ? 'selected' : ''; ?>>
                                     <?= $row['display_name'].' ('. $row['emp_code'].')'; ?>
@@ -54,7 +54,7 @@ if (isset($_GET['employee_id']) || isset($_GET['month'])) {
 
                     <!-- Month -->
                     <div class="form-group col-md-3">
-                        <label>Month <span style="color:red;">*</span></label>
+                        <label><?= __('Month') ?> <span style="color:red;">*</span></label>
                         <input type="month" class="form-control" id="report_month" name="month" value="<?= htmlspecialchars($report_month, ENT_QUOTES); ?>">
                     </div>
 
@@ -62,7 +62,7 @@ if (isset($_GET['employee_id']) || isset($_GET['month'])) {
                     <div class="form-group col-md-2">
                         <label>&nbsp;</label>
                         <button type="submit" class="btn btn-primary form-control" id="searchBtn">
-                            Search
+                            <?= __('Search') ?>
                         </button>
                     </div>
 

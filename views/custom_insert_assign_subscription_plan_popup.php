@@ -60,7 +60,7 @@ foreach($bulkdata as $bulkd){
           <div class="col-lg-9"></div>
           <div class="col-lg-3">
                   <div class="input-group input-group-button mb-3">
-                    <input aria-label="Search The Name" type="text" id="filter1111" class="form-control form-control-sm width1"  placeholder="Search The Name" data-bs-toggle="tooltip" data-placement="bottom" title="Search The Name">
+                    <input aria-label="Search The Name" type="text" id="filter1111" class="form-control form-control-sm width1"  placeholder="<?= __('Search The Name') ?>" data-bs-toggle="tooltip" data-placement="bottom" title="Search The Name">
                     <span class="input-group-text addon-style">
                         <span class=""><i class="ti-search"></i></span>
                     </span>
@@ -179,6 +179,6 @@ foreach($bulkdata as $bulkd){
 </div>
 
 <div class="modal-footer">
-    <button name="" type="button" class="btn btn-primary mr-2"  data-bs-dismiss="modal" >OK</button>
+    <button name="" type="button" class="btn btn-primary mr-2"  data-bs-dismiss="modal" ><?= __('OK') ?></button>
 </div>
 

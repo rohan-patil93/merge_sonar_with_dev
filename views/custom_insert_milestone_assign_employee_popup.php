@@ -134,15 +134,15 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
 }
 </style>
 <div class="modal-header">
-    <h5 class="modal-title">Assign Employees s</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?php echo __('Assign Employees s'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
     <div class="modal-body  j-pro">
         <div class="row kt-margin-b-20 mb-2 j-content" >
         <div class="col-lg-2  form-group kt-margin-b-10-tablet-and-mobile">
-            <span><?php echo "Vendors"; ?>:</span>
-            <select aria-label="Vendor" class=" form-select js-example-basic-single" id="vendor" name="">
-                <option value=""> All  </option>
+            <span><?php echo __('Vendors'); ?>:</span>
+            <select aria-label="<?php echo __('Vendor'); ?>" class=" form-select js-example-basic-single" id="vendor" name="">
+                <option value=""> <?php echo __('All'); ?>  </option>
                 <?php foreach($empven as $ven){ $emp_ven[$ven['id']]= $ven['display_name']; ?>
                 <option   <?php if($ress['vendor'] == $ven['id'] ){ ?> selected <?php
 } ?> value="<?php echo $ven['id']; ?>"><?php echo $ven['display_name']; ?></option>
@@ -151,9 +151,9 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
         </div>
 
         <div class="col-lg-2 form-group kt-margin-b-10-tablet-and-mobile">
-                <span><?php echo "Cost Center"; ?>:</span>
-                <select aria-label="Cost Center Pp" class=" form-select js-example-basic-single" id="cost_center_pp" name="">
-                    <option value=""> All  </option>
+                <span><?php echo __('Cost Center'); ?>:</span>
+                <select aria-label="<?php echo __('Cost Center Pp'); ?>" class=" form-select js-example-basic-single" id="cost_center_pp" name="">
+                    <option value=""> <?php echo __('All'); ?>  </option>
                     <?php foreach($empcos as $cos){ $emp_cos[$cos['id']]= $cos['cost_center_name']; ?>
                     <option   <?php if($ress['cost_center_pp'] == $cos['id'] ){ ?> selected <?php
 } ?> value="<?php echo $cos['id']; ?>"><?php echo $cos['cost_center_name']; ?></option>
@@ -163,9 +163,9 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
 
         <input type="hidden" name="department" id="department_2" value="">
         <div class="col-lg-2 form-group kt-margin-b-10-tablet-and-mobile">
-            <span><?php echo "Designation"; ?>:</span>
-            <select aria-label="Category" class=" form-select js-example-basic-single" id="designation" name="category_id">
-                <option value=""> All  </option>
+            <span><?php echo __('Designation'); ?>:</span>
+            <select aria-label="<?php echo __('Category'); ?>" class=" form-select js-example-basic-single" id="designation" name="category_id">
+                <option value=""> <?php echo __('All'); ?>  </option>
                 <?php foreach($empdes as $des){  $emp_des[$des['id']]= $des['designation_name'];  ?>
                 <option  <?php if($ress['designation'] == $des['id'] ){ ?> selected <?php
 } ?> value="<?php echo $des['id']; ?>"><?php echo $des['designation_name']; ?></option>
@@ -173,9 +173,9 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
             </select>
         </div>
         <div class="col-lg-2  form-group kt-margin-b-10-tablet-and-mobile ">
-            <span><?php echo "Location"; ?>:</span>
-            <select aria-label="Location" class=" form-select js-example-basic-single" id="location" name="">
-                <option value=""> All  </option>
+            <span><?php echo __('Location'); ?>:</span>
+            <select aria-label="<?php echo __('Location'); ?>" class=" form-select js-example-basic-single" id="location" name="">
+                <option value=""> <?php echo __('All'); ?>  </option>
                 <?php foreach($emploc as $loc){ $emp_loc[$loc['id']]= $loc['location_name']; ?>
                 <option   <?php if($ress['location'] == $loc['id'] ){ ?> selected <?php
 } ?> value="<?php echo $loc['id']; ?>"><?php echo $loc['location_name']; ?></option>
@@ -184,8 +184,8 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
         </div>
         <input type="hidden" name="check_list" id="check_list_2" value="">
         <div class="col-lg-2 form-group kt-margin-b-10-tablet-and-mobile">
-            <span>Enetr Employee Name/Code</span>
-            <input aria-label="Emp Name Code" type="text" class="form-control" name="emp_name_code"  value="<?php echo $_POST['emp_name_code']; ?>" id="emp_name_code">
+            <span><?php echo __('Enetr Employee Name/Code'); ?></span>
+            <input aria-label="<?php echo __('Emp Name Code'); ?>" type="text" class="form-control" name="emp_name_code"  value="<?php echo $_POST['emp_name_code']; ?>" id="emp_name_code">
         </div>
 
         <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile">
@@ -195,7 +195,7 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
                 <button class="btn btn-primary btn-brand--icon" type="button" id="kt_search" onclick="assignemployeelist()">
                     <span>
 
-                        <span>Search</span>
+                        <span><?php echo __('Search'); ?></span>
                     </span>
                 </button>
             </div>
@@ -208,11 +208,11 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
             <tr>
                 <th scope="col" style="width: 2%;">&nbsp;</th>
                 <th scope="col" style="width: 2%;">#</th>
-                <th scope="col" style="width: 15%;">Name </th>
-                <th scope="col" style="width: 10%;">Vendor</th>
-                <th scope="col" style="width: 15%;">Cost Center</th>
-                <th scope="col" style="width: 10%;">Designation</th>
-                <th scope="col" style="width: 10%;">Location</th>
+                <th scope="col" style="width: 15%;"><?php echo __('Name'); ?> </th>
+                <th scope="col" style="width: 10%;"><?php echo __('Vendor'); ?></th>
+                <th scope="col" style="width: 15%;"><?php echo __('Cost Center'); ?></th>
+                <th scope="col" style="width: 10%;"><?php echo __('Designation'); ?></th>
+                <th scope="col" style="width: 10%;"><?php echo __('Location'); ?></th>
 
 
             </tr>
@@ -223,16 +223,16 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
                 <tr >
                     <td class="p-2">
                         <label class="kt-checkbox">
-                            <input aria-label="Input field" onclick="msemployeeassign(<?php echo $row['id']; ?>,'<?php echo $row['display_name']; ?>')" class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_ids)){ echo "checked";
+                            <input aria-label="<?php echo __('Input field'); ?>" onclick="msemployeeassign(<?php echo $row['id']; ?>,'<?php echo $row['display_name']; ?>')" class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_ids)){ echo __('checked');
 }?> id="checkbox_<?php echo $row['id']; ?>" type="checkbox" value="<?php echo $row['id']; ?>" onkeydown="">  <span> </span> </label>
                     </td>
                     <td class="p-2"><?php echo $i; ?></td>
                     <td class="p-2">
                         <div class="align-middle">
                             <?php if($row['image']!="") {?>
-                                <img src="uploads/all/<?php echo $row['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                <img src="uploads/all/<?php echo $row['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?php echo __('Attachment Preview'); ?>">
                             <?php } else { ?>
-                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($row['display_name']); ?></span>
+                                <span  alt="<?php echo __('user'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($row['display_name']); ?></span>
                             <?php } ?>
                             <div class="d-inline-block width73">
                                 <a href="#!" class="text-danger text-capitalize"><h6>   <?php echo $row['display_name']." - ".$row['emp_code']; ?></h6></a>

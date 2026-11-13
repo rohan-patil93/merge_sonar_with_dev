@@ -3,7 +3,7 @@ include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
 
-$category = array('1' => 'Survey', '2' => 'Poll');
+$category = array('1' => __('Survey'), '2' => __('Poll'));
 $status_filter = isset($_POST['status_filter']) ? trim($_POST['status_filter']) : 'assigned';
 $company_id = isset($_POST['company_id']) ? (int)$_POST['company_id'] : (int)($_SESSION['company_id'] ?? 0);
 $emp_id = isset($_POST['emp_id']) && $_POST['emp_id'] != "" ? $_POST['emp_id'] : ($_SESSION['emp_id'] ?? '');
@@ -31,12 +31,12 @@ if(count((array)$rows) > 0) {
 <div class="table-responsive survey_dashboard">
 	<table class="table table-bordered table-sm">
 		<tr bgcolor="#eeeeee">
-			<th scope="col"><?php echo $display_tag; ?> Name</th>
-			<th scope="col">Category</th>
-			<th scope="col">Start Date</th>
-			<th scope="col">End Date</th>
-			<th scope="col">Status</th>
-			<th scope="col">Action</th>
+			<th scope="col"><?php echo $display_tag; ?> <?= __('Name') ?></th>
+			<th scope="col"><?= __('Category') ?></th>
+			<th scope="col"><?= __('Start Date') ?></th>
+			<th scope="col"><?= __('End Date') ?></th>
+			<th scope="col"><?= __('Status') ?></th>
+			<th scope="col"><?= __('Action') ?></th>
 		</tr>
 		<?php foreach($rows as $surveyRow) {
 			$surveyRow = is_array($surveyRow) ? $surveyRow : (array)$surveyRow;
@@ -61,22 +61,22 @@ if(count((array)$rows) > 0) {
 					</div>
 				</div>
 			</td>
-			<td><?php echo htmlspecialchars($surveyRow['category_label']); ?></td>
+			<td><?php echo htmlspecialchars(__($surveyRow['category_label'])); ?></td>
 			<td><?php echo htmlspecialchars($surveyRow['survey_start_date']); ?></td>
 			<td><?php echo htmlspecialchars($surveyRow['survey_end_date']); ?></td>
 			<td>
-				<button class="btn btn-sm card-info text-<?php echo $statusColor; ?> f-w-600 f-12 btn-outline-<?php echo $statusColor; ?> b-radius-5 mb-1"><?php echo htmlspecialchars($surveyRow['status_label']); ?></button>
+				<button class="btn btn-sm card-info text-<?php echo $statusColor; ?> f-w-600 f-12 btn-outline-<?php echo $statusColor; ?> b-radius-5 mb-1"><?php echo htmlspecialchars(__($surveyRow['status_label'])); ?></button>
 			</td>
 			<td>
 				<?php if($surveyRow['action'] == 'view_result') { ?>
 				<a href="<?php echo $resultUrl; ?>" class="btn btn-sm btn-outline-primary f-w-600 f-12 text-primary p-2 b-radius-5 mb-1">
-					<i class="fa fa-eye m-r-5"></i> <?php echo htmlspecialchars($surveyRow['action_label']); ?>
+					<i class="fa fa-eye m-r-5"></i> <?php echo htmlspecialchars(__($surveyRow['action_label'])); ?>
 				</a>
 				<?php } else if($surveyRow['action'] == 'expired') { ?>
-				<button type="button" class="btn btn-sm btn-warning f-w-600 f-12 p-2 b-radius-5 mb-1" disabled><?php echo htmlspecialchars($surveyRow['action_label']); ?></button>
+				<button type="button" class="btn btn-sm btn-warning f-w-600 f-12 p-2 b-radius-5 mb-1" disabled><?php echo htmlspecialchars(__($surveyRow['action_label'])); ?></button>
 				<?php } else { ?>
 				<a href="<?php echo $responseUrl; ?>" class="btn btn-sm btn-outline-primary f-w-600 f-12 text-primary p-2 b-radius-5 mb-1">
-					<i class="fa fa-play m-r-5"></i> <?php echo htmlspecialchars($surveyRow['action_label']); ?>
+					<i class="fa fa-play m-r-5"></i> <?php echo htmlspecialchars(__($surveyRow['action_label'])); ?>
 				</a>
 				<?php } ?>
 				<?php /*
@@ -97,7 +97,7 @@ if(count((array)$rows) > 0) {
 </div>
 <?php } else { ?>
 <div class="card-px text-center py-20 mt-2">
-	<p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> No <?php echo $display_tag; ?>s Found</p>
+	<p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> <?= __('No') ?> <?php echo $display_tag; ?><?= __('s Found') ?></p>
 	<div class="text-center px-4">
 		<img class="mw-100" style="max-height: 400px;" alt="" src="assets/images/work.png">
 	</div>

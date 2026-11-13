@@ -144,7 +144,7 @@ if($dekitting['current_status'] !=""){
 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
     <?php echo $workflowsteps['current_status_ribbon']; ?>
     <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Dekitting Process</h5>
+        <h5 class="mb-0"><?= __('Dekitting Process') ?></h5>
         <div class="card-header-right">
             <?php echo $workflowsteps['workflow_btn']; ?>
             <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light  m-r-50">
@@ -171,21 +171,21 @@ if($dekitting['current_status'] !=""){
             <div class="row" <?php echo $dyncss; ?>>
 
                 <div class="col-md-6 mb-3">
-                    <label for="process_name" class="form-label">Dekitting Process Name <span
+                    <label for="process_name" class="form-label"><?= __('Dekitting Process Name') ?> <span
                             class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="process_name" name="dekitting_name"
                         value="<?php  echo $dekitting['dekitting_name']; ?>" required>
                     <input type="hidden" class="form-control" id="rid" name="rid" value="<?= $rid ?>" required>
                 </div>
                 <div class="col-md-6 mb-3 w-full">
-                    <label for="final_item_name" class="form-label d-block">Parent Item Name <span
+                    <label for="final_item_name" class="form-label d-block"><?= __('Parent Item Name') ?> <span
                             class="text-danger">*</span></label>
                     <select aria-label="Parent Item" class="js-example-basic-single" id="final_item_name" name="parent_item_id" onchange="updateItemOptions()" required>
-                        <option value="">Select Any one</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($items as $item){
                         if($item['sold_in_groups'] == 0){  ?>
                             <option value="<?= $item['id'] ?>" <?= ($dekitting['parent_item_id'] == $item['id']) ? 'selected' : '' ?>>
-                                <?= $item['item_name'] ?>
+                                <?= htmlspecialchars(__($item['item_name'] ?? '')) ?>
                             </option>
                         <?php } ?>
                         <?php } ?>
@@ -193,21 +193,21 @@ if($dekitting['current_status'] !=""){
                 </div>
 
                 <div class="col-md-2 mb-3">
-                    <label for="quantity" class="form-label">Parent Quantity <span
+                    <label for="quantity" class="form-label"><?= __('Parent Quantity') ?> <span
                             class="text-danger">*</span></label>
                     <input type="number" class="form-control" id="quantity" name="parent_quantity" min="1"
                         value="<?php echo $dekitting['parent_quantity']!=""?$dekitting['parent_quantity']:0; ?>" required>
                 </div>
                 <div class="col-md-2 mb-3">
-                    <label for="parent_item_day_rate" class="form-label">Day Rate <span class="text-danger">*</span></label>
+                    <label for="parent_item_day_rate" class="form-label"><?= __('Day Rate') ?> <span class="text-danger">*</span></label>
                     <input type="number" class="form-control" id="parent_item_day_rate" name="parent_item_day_rate" min="0" step="any" value="<?php echo $dekitting['parent_item_day_rate']!=""?$dekitting['parent_item_day_rate']:0; ?>" onblur="updateCalculation()" readonly required>
                 </div>
                 <div class="col-md-2 mb-3">
-                    <label for="parent_item_total" class="form-label">Total <span class="text-danger">*</span></label>
+                    <label for="parent_item_total" class="form-label"><?= __('Total') ?> <span class="text-danger">*</span></label>
                     <input type="number" class="form-control" id="parent_item_total" name="parent_item_total" min="0" step="any" value="<?php echo $dekitting['parent_item_total']!=""?$dekitting['parent_item_total']:0; ?>" readonly required>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="date" class="form-label">Dekitting Date <span
+                    <label for="date" class="form-label"><?= __('Dekitting Date') ?> <span
                             class="text-danger">*</span></label>
                     <input type="text" class="form-control datepicker" id="date" name="transaction_date"
                         value="<?php echo fromDate($dekitting['transaction_date']); ?>"
@@ -219,18 +219,18 @@ if($dekitting['current_status'] !=""){
                 <!-- Breakdown Items Section -->
                 <div class="breakdown-items-section" <?php if($dekitting['parent_item_id'] ==""){ ?>style="display: none;" <?php
 } ?>>
-                    <h6 class="mb-3">Dekitted Components</h6>
+                    <h6 class="mb-3"><?= __('Dekitted Components') ?></h6>
 
                     <div class="table-responsive">
                         <table class="table table-bordered" id="components-table">
                             <thead class="bg-light">
                                 <tr>
-                                    <th scope="col" style="width: 50%;">Component Item Name</th>
-                                    <th scope="col" style="width: 20%;">Component UOM</th>
-                                    <th scope="col" style="width: 10%;">Component Quantity</th>
-                                    <th scope="col" style="width: 10%;">Day Rate</th>
-                                    <th scope="col" style="width: 10%;">Total</th>
-                                    <th scope="col" style="width: 10%;">Action</th>
+                                    <th scope="col" style="width: 50%;"><?= __('Component Item Name') ?></th>
+                                    <th scope="col" style="width: 20%;"><?= __('Component UOM') ?></th>
+                                    <th scope="col" style="width: 10%;"><?= __('Component Quantity') ?></th>
+                                    <th scope="col" style="width: 10%;"><?= __('Day Rate') ?></th>
+                                    <th scope="col" style="width: 10%;"><?= __('Total') ?></th>
+                                    <th scope="col" style="width: 10%;"><?= __('Action') ?></th>
                                 </tr>
                             </thead>
                                     <tbody>
@@ -241,12 +241,12 @@ if($dekitting['current_status'] !=""){
                                                     <td class="w-full">
                                                         <select aria-label="Component Items[]" class="js-example-basic-single component-item"
                                                             name="component_items[]" required onchange="setUomForRow(this.closest('tr')); updateItemOptions()">
-                                                            <option value="">Select Any one</option>
+                                                            <option value=""><?= __('Select Any One') ?></option>
                                                             <?php foreach ($items as $item){
                                                             if($item['sold_individually'] == '0'){ ?>
                                                                 <option value="<?= $item['id'] ?>"
                                                                     <?= ($component['item_id'] == $item['id']) ? 'selected' : '' ?>>
-                                                                    <?= $item['item_name'] ?>
+                                                                    <?= htmlspecialchars(__($item['item_name'] ?? '')) ?>
                                                                 </option>
                                                             <?php } ?>
                                                             <?php } ?>
@@ -255,7 +255,7 @@ if($dekitting['current_status'] !=""){
                                                     <td class="w-full">
                                                         <select aria-label="Component Uoms[]" class="js-example-basic-single component-uom"
                                                             name="component_uoms[]" required>
-                                                            <option value="">Select Any one</option>
+                                                            <option value=""><?= __('Select Any One') ?></option>
                                                             <?php foreach ($uom as $value): ?>
                                                                 <option value="<?= $value['id'] ?>"
                                                                     <?= ($component['uom_id'] == $value['id']) ? 'selected' : '' ?>>
@@ -286,12 +286,12 @@ if($dekitting['current_status'] !=""){
                                                 <td class="w-full">
                                                     <select aria-label="Component Items[]" class="js-example-basic-single component-item"
                                                         name="component_items[]" required onchange="setUomForRow(this.closest('tr')); updateItemOptions()">
-                                                        <option value="">Select Any one</option>
+                                                        <option value=""><?= __('Select Any One') ?></option>
                                                         <?php foreach ($items as $item){
                                                         if($item['sold_individually'] == '0'){
                                                          ?>
                                                             <option value="<?= $item['id'] ?>">
-                                                                <?= $item['item_name'] ?>
+                                                                <?= htmlspecialchars(__($item['item_name'] ?? '')) ?>
                                                             </option>
                                                         <?php } ?>
                                                         <?php } ?>
@@ -300,7 +300,7 @@ if($dekitting['current_status'] !=""){
                                                 <td class="w-full">
                                                     <select aria-label="Component Uoms[]" class="js-example-basic-single component-uom"
                                                         name="component_uoms[]" required>
-                                                        <option value="">Select Any one</option>
+                                                        <option value=""><?= __('Select Any One') ?></option>
                                                         <?php foreach ($uom as $value): ?>
                                                             <option value="<?= $value['id'] ?>">
                                                                 <?= $value['uom_short_code'] ?>
@@ -331,25 +331,23 @@ if($dekitting['current_status'] !=""){
 
                     <div class="row mt-3">
                         <div class="col-md-6">
-                            <button type="button" id="add-row-btn" class="btn btn-sm btn-primary">
-                                <i class="fa fa-plus mr-1"></i> Add Components
-                            </button>
+                            <button type="button" id="add-row-btn" class="btn btn-sm btn-primary"><i class="fa fa-plus mr-1"></i> <?= __('Add Components') ?></button>
                             <div id="error-message" class="text-danger mt-2" style="display: none;" >
-                                Please fill all fields in the existing row before adding a new one.
+                                <?= __('Please fill all fields in the existing row before adding a new one.') ?>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <label for="date" class="form-label">Parent Total </label>
+                                    <label for="date" class="form-label"><?= __('Parent Total') ?> </label>
                                     <input aria-label="Parent Total" type="number" class="form-control" id="parent_total" name="parent_total" min="0" value="<?= $component['parent_total'] ?>" readonly required>
                                 </div>
                                 <div class="col-lg-4">
-                                    <label for="date" class="form-label">Child Total </label>
+                                    <label for="date" class="form-label"><?= __('Child Total') ?> </label>
                                     <input aria-label="Child Total" type="number" class="form-control" id="child_total" name="child_total" min="0" value="<?= $component['child_total'] ?>" readonly required>
                                 </div>
                                 <div class="col-lg-4">
-                                    <label for="date" class="form-label">Suspense Amount </label>
+                                    <label for="date" class="form-label"><?= __('Suspense Amount') ?> </label>
                                     <input aria-label="Suspense Total" type="number" class="form-control" id="suspense_total" name="suspense_total" min="0" value="<?= $component['suspense_total']; ?>" readonly required>
                                 </div>
                             </div>
@@ -503,7 +501,7 @@ document.getElementById('final_item_name').addEventListener('change', function (
         newRow.className = 'item-row w-full';
 
         const itemCell = document.createElement('td');
-        let itemOptionsHtml = '<option value="">Select Any one</option>';
+        let itemOptionsHtml = '<option value=""><?= __('Select Any One') ?></option>';
 
         itemsData.forEach(function(item) {
             itemOptionsHtml += `<option value="${item.id}">${item.item_name}</option>`;
@@ -517,7 +515,7 @@ document.getElementById('final_item_name').addEventListener('change', function (
 
         // Create the UOM cell with dropdown options
         const uomCell = document.createElement('td');
-        let uomOptionsHtml = '<option value="">Select Any one</option>';
+        let uomOptionsHtml = '<option value=""><?= __('Select Any One') ?></option>';
 
         const uomOptions = Array.from(document.querySelector('.component-uom').options);
         uomOptions.forEach(function(option) {

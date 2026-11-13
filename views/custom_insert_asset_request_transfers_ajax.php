@@ -27,16 +27,16 @@ if(count((array)$assets) != "0"){
             <div class="col-lg-7">
                 <table>
                     <tr>
-                        <th scope="col" style="width: 30%;">Asset Name</th><td style="width: 70%;"><?php echo $assdetails['asset_description']; ?></td>
+                        <th scope="col" style="width: 30%;"><?= __('Asset Name') ?></th><td style="width: 70%;"><?php echo $assdetails['asset_description']; ?></td>
                     </tr>
                     <tr>
-                        <th scope="col">Category</th><td><?php echo $asset_categories[$assdetails['category_id']]['category_description']; ?></td>
+                        <th scope="col"><?= __('Category') ?></th><td><?php echo $asset_categories[$assdetails['category_id']]['category_description']; ?></td>
                     </tr>
                     <tr>
-                        <th scope="col">Status</th><td><?php echo $asset_status[$assdetails['asset_status']]['name']; ?></td>
+                        <th scope="col"><?= __('Status') ?></th><td><?php echo $asset_status[$assdetails['asset_status']]['name']; ?></td>
                     </tr>
                     <tr>
-                        <th scope="col">Return Date</th><td> - </td>
+                        <th scope="col"><?= __('Return Date') ?></th><td> - </td>
                     </tr>
                 </table>
             </div>

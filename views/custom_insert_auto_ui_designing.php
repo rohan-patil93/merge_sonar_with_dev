@@ -307,7 +307,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
 } //}    ?>
     </div>
     <div class="col-12 mt-3">
-        <button type="button" class="btn btn-primary mr-3 addnewfillds"><i class="flaticon2-plus"></i> ADD Item</button>
+        <button type="button" class="btn btn-primary mr-3 addnewfillds"><i class="flaticon2-plus"></i> <?= __('ADD Item') ?></button>
     </div>
 </div>
 </div>
@@ -458,7 +458,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                     <?php } ?>
                 </div>
                 <div class="col-12 mt-3">
-                    <button type="button" class="btn btn-primary mr-3 addnewbutton"><i class="flaticon2-plus"></i> Add Button</button>
+                    <button type="button" class="btn btn-primary mr-3 addnewbutton"><i class="flaticon2-plus"></i> <?= __('Add Button') ?></button>
                 </div>
             </div>
         </div>
@@ -669,7 +669,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
 <div class="card-footer">
     <div class="row">
         <input type="hidden" name="option" value="COM_AUTO_UI_DESIGNING">
-        <button type="submit" class="btn btn-primary mr-2" name="submit" value="submit" ><i class="la la-check">    </i>Save Atrributes</button>
+        <button type="submit" class="btn btn-primary mr-2" name="submit" value="submit" ><i class="la la-check">    </i><?= __('Save Attributes') ?></button>
     </div>
 </div>
 </div>

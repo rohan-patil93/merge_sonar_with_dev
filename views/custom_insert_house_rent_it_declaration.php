@@ -43,7 +43,7 @@
   </script>
   <div class="card">
       <div class="card-header mb-3">
-        <h5>House on Rent</h5>
+        <h5><?php echo __('House on Rent'); ?></h5>
       </div>
       <div id="collapseOne5" class="collapse show" data-parent="#accordionExample5">
          <div class="card-body">
@@ -53,58 +53,58 @@
                     <input type="hidden" name="assessment_year" value="<?php echo $_GET['assessment_year']; ?>">
                <div class="form-group row">
                   <div class="form-group col-lg-6">
-                     <span>From Date</span>
+                     <span><?php echo __('From Date'); ?></span>
                      <div class="input-group date">
                         <?php   $date_pic = $emphousedata['start_date'] !=''? $emphousedata['start_date'] : nowDate(); ?>
-                        <input aria-label="Input field" type="month" class="form-control"  value="<?php echo  date("Y-m",strtotime($date_pic)); ?>"  onchange="convertToYearRent()" name="start_date"  id="start_month_date" />
+                        <input aria-label="<?php echo __('Input field'); ?>" type="month" class="form-control"  value="<?php echo  date("Y-m",strtotime($date_pic)); ?>"  onchange="convertToYearRent()" name="start_date"  id="start_month_date" />
 
                      </div>
                   </div>
                   <div class="form-group  col-lg-6">
-                     <span>To Date</span>
+                     <span><?php echo __('To Date'); ?></span>
                      <div class="input-group date">
                         <?php $date_pic = $emphousedata['end_date'] !=''? $emphousedata['end_date'] : nowDate(); ?>
-                        <input aria-label="Input field" type="month" class="form-control"  value="<?php echo  date("Y-m",strtotime($date_pic)); ?>"  onchange="convertToYearRent()" name="end_date"  id="end_month_date" />
+                        <input aria-label="<?php echo __('Input field'); ?>" type="month" class="form-control"  value="<?php echo  date("Y-m",strtotime($date_pic)); ?>"  onchange="convertToYearRent()" name="end_date"  id="end_month_date" />
 
                      </div>
                   </div>
                   <div class="form-group col-lg-6">
-                     <span>Monthly Rent</span>
-                     <input aria-label="Monthly Rent" type="text" class="form-control text-right" name="monthly_rent" id="monthly_rent" onblur="convertToYearRent()" value="<?php echo $emphousedata['monthly_rent']; ?>" />
+                     <span><?php echo __('Monthly Rent'); ?></span>
+                     <input aria-label="<?php echo __('Monthly Rent'); ?>" type="text" class="form-control text-right" name="monthly_rent" id="monthly_rent" onblur="convertToYearRent()" value="<?php echo $emphousedata['monthly_rent']; ?>" />
                   </div>
                   <div class="form-group  col-lg-6">
-                     <span>Annual Rent</span>
-                     <input aria-label="Input field" type="text" class="form-control text-right" readonly value="<?php echo $emphousedata['annual_rent']; ?>"  id="annual_rent" name="annual_rent"   />
+                     <span><?php echo __('Annual Rent'); ?></span>
+                     <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control text-right" readonly value="<?php echo $emphousedata['annual_rent']; ?>"  id="annual_rent" name="annual_rent"   />
                   </div>
                   <div class="form-group  col-lg-6">
-                     <span>Adderss</span>
-                     <textarea aria-label="Address" class="form-control" name="address"><?php echo $emphousedata['address']; ?></textarea>
+                     <span><?php echo __('Adderss'); ?></span>
+                     <textarea aria-label="<?php echo __('Address'); ?>" class="form-control" name="address"><?php echo $emphousedata['address']; ?></textarea>
                   </div>
                   <div class="form-group  col-lg-6">
                      &nbsp;
                   </div>
                   <div class="form-group  col-lg-6">
-                     <span>Landlord Name</span>
-                     <input aria-label="Input field" type="text" class="form-control"  value="<?php echo $emphousedata['lanlord_name']; ?>"  name="lanlord_name"  />
+                     <span><?php echo __('Landlord Name'); ?></span>
+                     <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"  value="<?php echo $emphousedata['lanlord_name']; ?>"  name="lanlord_name"  />
                   </div>
                   <div class="form-group  col-lg-6">
-                     <span>Landlord Adderss</span>
-                     <textarea aria-label="Landlord Address" class="form-control" name="landlord_address"><?php echo $emphousedata['landlord_address']; ?></textarea>
+                     <span><?php echo __('Landlord Adderss'); ?></span>
+                     <textarea aria-label="<?php echo __('Landlord Address'); ?>" class="form-control" name="landlord_address"><?php echo $emphousedata['landlord_address']; ?></textarea>
                   </div>
                   <div class="form-group  col-lg-6">
 
-                     <span>Does You Landlord has PAN?</span></br>
+                     <span><?php echo __('Does You Landlord has PAN?'); ?></span></br>
                      <div class="radio-inline">
-                     <label class="radio"> <input aria-label="Radio option" type="radio"  <?php if($emphousedata['landlord_pan_flag']=='0'){ echo "checked";
-} ?>  name="landlord_pan_flag" value='0' onchange="checkpan()">   <span></span>Yes </label>
-                     <label class="radio"> <input aria-label="Radio option" type="radio" <?php if($emphousedata['landlord_pan_flag']=='1'){ echo "checked";
-} ?>  name="landlord_pan_flag" value='1' onchange="checkpan()">   <span></span>No </label></div>
+                     <label class="radio"> <input aria-label="<?php echo __('Radio option'); ?>" type="radio"  <?php if($emphousedata['landlord_pan_flag']=='0'){ echo __('checked');
+} ?>  name="landlord_pan_flag" value='0' onchange="checkpan()">   <span></span><?php echo __('Yes'); ?> </label>
+                     <label class="radio"> <input aria-label="<?php echo __('Radio option'); ?>" type="radio" <?php if($emphousedata['landlord_pan_flag']=='1'){ echo __('checked');
+} ?>  name="landlord_pan_flag" value='1' onchange="checkpan()">   <span></span><?php echo __('No'); ?> </label></div>
                   </div>
                   <div class="form-group  col-lg-6 landlord_pan_number" <?php if($emphousedata['landlord_pan_flag']=='1'){ ?> style="display:none" <?php
 } ?>>
 
-                     <span>PAN Number</span>
-                     <input aria-label="Input field" type="text" class="form-control"  value="<?php echo $emphousedata['landlord_pan_number']; ?>"  name="landlord_pan_number"  />
+                     <span><?php echo __('PAN Number'); ?></span>
+                     <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"  value="<?php echo $emphousedata['landlord_pan_number']; ?>"  name="landlord_pan_number"  />
                   </div>
                </div>
                <?php  if($viewfilemanger!="" ){
@@ -115,7 +115,7 @@
                       <input type="hidden" value="<?php echo $emphousedata['id']; ?>" name="house_id">
                       <input type="hidden" value="<?php echo $assessment_year; ?>" name="assessment_year">
                       <input type="hidden" value="<?php echo $version; ?>" name="version">
-                     <button type="submit" name="AddExemption" class="btn btn-primary waves-effect waves-light float-right" value="Submit"/>Submit</button>
+                     <button type="submit" name="AddExemption" class="btn btn-primary waves-effect waves-light float-right" value="Submit"/><?php echo __('Submit'); ?></button>
 
                </div>
             </form>

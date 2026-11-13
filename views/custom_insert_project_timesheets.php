@@ -93,7 +93,7 @@ foreach($dates as $ddates){
 }
 $vendor_id = $_SESSION['employee']['vendor_id'];
 $check_user_id = $_SESSION['employee']['user_id'];
-$show_error = 'N';
+$show_error = __('N');
 if($emp_id!=""){
   if($_SESSION['emp_id'] == $emp_id){
     $userdisplayname = $_SESSION['employee']['display_name'];
@@ -113,7 +113,7 @@ if($emp_id!=""){
   $userdisplayname = $_SESSION['users'][$useriddisplayname];
 }
 if($data_employee['billable'] == 2){
-    $show_error = 'Y';
+    $show_error = __('Y');
 }
 $row_id = $projectdetails['id'];
 $empurl = API."?mode=singlerowtabledata&fid=id&rid=".$emp_id."&table=employees";
@@ -171,7 +171,7 @@ if(isset($_POST['savetimesheet'])){
 <script type="text/javascript">
   Swal.fire({
   icon: 'error',
-  title: 'Oops...',
+  title: <?php echo json_encode(__('Oops...')); ?>,
   text: '<?php echo $_SESSION['error_message']['9028']; ?>'
   });
   </script>
@@ -343,24 +343,24 @@ if(isset($_POST['savetimesheet'])){
          <?php $xk=1; $i=0; foreach($dates as $kef => $datev){
            $datevalidation = checkValidationholidayworkingdays($holidaylist,$working_days,$datev,$leavesemp);
            ?>
-          temmpp += '<td style="<?php echo $datevalidation['color']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $datevalidation['msg']; ?>"><input aria-label="Input field" class="form-control itemRow  text-right  timesheet_time <?php if($empbillablestatus == "1" && TIMESHEET_BILLABLE_CHECk == "Y"){ echo "d-none";
+          temmpp += '<td style="<?php echo $datevalidation['color']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $datevalidation['msg']; ?>"><input aria-label="<?php echo __('Input field'); ?>" class="form-control itemRow  text-right  timesheet_time <?php if($empbillablestatus == "1" && TIMESHEET_BILLABLE_CHECk == "Y"){ echo "d-none";
 }?>" <?php echo $datevalidation['error']; ?> type="text" onblur="calculateRowSum('+index+','+'<?php echo $xk; ?>'+')" value="00.00" name="'+datename+'_billable[]"
  <?php if($emp_bill==1){ echo "readonly";
 } ?>
  <?php if($datevalidation['read'] == "Y"){ echo "readonly";
-} ?>  id="'+billable+'<?php echo $xk; ?>" maxlength="5" tabindex="" data-rowcol="'+index+'-<?php echo $xk; ?>" ><input aria-label="Input field" class="form-control  text-right mt-2  timesheet_time
+} ?>  id="'+billable+'<?php echo $xk; ?>" maxlength="5" tabindex="" data-rowcol="'+index+'-<?php echo $xk; ?>" ><input aria-label="<?php echo __('Input field'); ?>" class="form-control  text-right mt-2  timesheet_time
  <?php if($empbillablestatus == "0" && TIMESHEET_BILLABLE_CHECk == "Y"){ echo "d-none";
 }?>" type="text" <?php echo $datevalidation['error']; ?> onblur="calculateRowSum('+index+','+'<?php echo $xk; ?>'+')"  value="00.00" name="'+datename+'_nonbillable[]" id="'+nonbillable+'<?php echo $xk; ?>" maxlength="5" data-rowcol="'+index+'-<?php echo $xk; ?>"></td>';
           <?php  $xk++; $i++;
 } ?>
 
-          htmlRows += '<td> <input type="hidden" name="rownumber[]" value="'+index+'"> <input type="hidden" name="rowidscomin[]" value="'+index+'"><div class="checkbox-fade fade-in-primary checkbox mt-2 ml-2"> <label class="form-label"><input aria-label="Checkbox" class="itemRow" type="checkbox"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span></label></div></td><td><input aria-label="Task Name[]" class="form-control " type="text" name="task_name[]"></td>  <input type="hidden" id="rowid" name="'+datename+'_rowid[]" value="" /> <td class="text-center"> <span class="symbol symbol-35 symbol-info <?php if(TIMESHEET_BILLABLE_CHECk == "Y"){ echo "d-none";
-}?>"><span class="form-label badge bg-success font-weight-bold f-14 m-t-15"> B</span> </span></br><span class="symbol symbol-35 symbol-info mt-2
+          htmlRows += '<td> <input type="hidden" name="rownumber[]" value="'+index+'"> <input type="hidden" name="rowidscomin[]" value="'+index+'"><div class="checkbox-fade fade-in-primary checkbox mt-2 ml-2"> <label class="form-label"><input aria-label="<?php echo __('Checkbox'); ?>" class="itemRow" type="checkbox"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span></label></div></td><td><input aria-label="<?php echo __('Task Name[]'); ?>" class="form-control " type="text" name="task_name[]"></td>  <input type="hidden" id="rowid" name="'+datename+'_rowid[]" value="" /> <td class="text-center"> <span class="symbol symbol-35 symbol-info <?php if(TIMESHEET_BILLABLE_CHECk == "Y"){ echo "d-none";
+}?>"><span class="form-label badge bg-success font-weight-bold f-14 m-t-15"> <?php echo __('B'); ?></span> </span></br><span class="symbol symbol-35 symbol-info mt-2
  <?php if(TIMESHEET_BILLABLE_CHECk == "Y"){ echo "d-none";
-}?>"><span class="form-label badge bg-danger font-weight-bold f-14 m-t-10">NB</span></span></td>';
+}?>"><span class="form-label badge bg-danger font-weight-bold f-14 m-t-10"><?php echo __('NB'); ?></span></span></td>';
           htmlRows += temmpp;
-          htmlRows += '<td ><input aria-label="Input field" class="form-control text-right font-weight-bolder <?php if($empbillablestatus == "1" && TIMESHEET_BILLABLE_CHECk == "Y"){ echo "d-none";
-}?>" tabindex="-1"  value="00.00" type="text" readonly id="total_billable_row'+index+'" > <input aria-label="Input field" class="form-control text-right mt-2 font-weight-bolder
+          htmlRows += '<td ><input aria-label="<?php echo __('Input field'); ?>" class="form-control text-right font-weight-bolder <?php if($empbillablestatus == "1" && TIMESHEET_BILLABLE_CHECk == "Y"){ echo "d-none";
+}?>" tabindex="-1"  value="00.00" type="text" readonly id="total_billable_row'+index+'" > <input aria-label="<?php echo __('Input field'); ?>" class="form-control text-right mt-2 font-weight-bolder
  <?php if($empbillablestatus == "0" && TIMESHEET_BILLABLE_CHECk == "Y"){ echo "d-none";
 }?>" value="00.00"  tabindex="-1" type="text" readonly id="total_nonbillable_row'+index+'"> </td>';
           htmlRows += '</tr>';
@@ -456,11 +456,11 @@ function changeselectdate(){
   $(".errorworkorder").text("");
   if(getwork_order == '0'){
     error = 1;
-    $(".errorworkorder").text("Please Select Work Order");
+    $(".errorworkorder").text(<?php echo json_encode(__('Please Select Work Order')); ?>);
   }
   if(selected_date == ''){
     error = 1;
-    $(".errordate").text("Please Select Date");
+    $(".errordate").text(<?php echo json_encode(__('Please Select Date')); ?>);
   }
   if(error == "0" || $("#getwork_order option").length == '1'){
    window.location = "index.php?option="+option+"&EMP="+emp_id+"&CHANGE_DATE="+selected_date+"&WID="+getwork_order+"&mode="+mode;
@@ -480,17 +480,17 @@ function changeselectdate(){
       <?php if($_GET['error'] !=''){ ?>
       <div class="alert alert-warning alert-dismissible">
         <strong><?php echo $_GET['error']." : ".$_SESSION['error_message'][$_GET['error']]; ?> </strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
       </div>
       <?php } ?>
       <div class="card">
         <div class="card-header table-card-header mb-2">
-          <h5><?php echo "Weekly Time Log";  ?>
+          <h5><?php echo __('Weekly Time Log');  ?>
             <span class="form-label badge bg-primary p-2 m-l-5">
               <i class='ti-user'></i> <?php echo $userdisplayname; ?>
             </span>
           </h5>
-          <button type="button" class="btn p-0 border-0 bg-transparent ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Go Tour" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+          <button type="button" class="btn p-0 border-0 bg-transparent ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Go Tour'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
           <div class="card-header-right table-card-header ">
             <?php
             $table_name = 'project_timesheets';
@@ -503,7 +503,7 @@ function changeselectdate(){
             </div>
             <?php } ?> &nbsp;
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-              <i class="icofont icofont-reply"></i>Back
+              <i class="icofont icofont-reply"></i><?php echo __('Back'); ?>
             </a>
             &nbsp;
           </div>
@@ -519,22 +519,22 @@ function changeselectdate(){
               <input type="hidden" name="mode" id="mode" value="<?php echo $_GET['mode']; ?>">
               <div class="row align-items-center">
                 <div class="col-lg-1 text-end">
-                  <span class="f-w-600">Date</span>
+                  <span class="f-w-600"><?php echo __('Date'); ?></span>
                 </div>
                 <div class="col-lg-3">
                   <div class="">
-                    <input aria-label="Select date" type="text" class="form-control datepickerprevious"  placeholder="Select date" value="<?php echo fromDate($selected_date); ?>" name="selected_date" id="selected_datess"  onchange="changeselectdate()"/>
+                    <input aria-label="<?php echo __('Select date'); ?>" type="text" class="form-control datepickerprevious"  placeholder="<?php echo __('Select date'); ?>" value="<?php echo fromDate($selected_date); ?>" name="selected_date" id="selected_datess"  onchange="changeselectdate()"/>
                     <p class="text-danger f-12 errordate position-absolute"></p>
                   </div>
                 </div>
                 <div class="col-lg-2 text-end">
-                  <span class="f-w-600">Purchase Order</span>
+                  <span class="f-w-600"><?php echo __('Purchase Order'); ?></span>
                 </div>
                 <div class="col-lg-2">
-                  <select aria-label="Work Order" class="form-select js-example-basic-single" name="work_order" id="getwork_order" onchange="changeselectdate()">
-                    <option value="0">Select Any one</option>
+                  <select aria-label="<?php echo __('Work Order'); ?>" class="form-select js-example-basic-single" name="work_order" id="getwork_order" onchange="changeselectdate()">
+                    <option value="0"><?php echo __('Select Any one'); ?></option>
                       <?php $getworkordravailable = "0"; foreach($woidresplist as $woidresplists){ ?>
-                    <option <?php if($getworkorderid== $woidresplists['id'] || count($woidresplist)=='1'){ $getworkordravailable=$woidresplists['id']; echo "selected";
+                    <option <?php if($getworkorderid== $woidresplists['id'] || count($woidresplist)=='1'){ $getworkordravailable=$woidresplists['id']; echo __('selected');
 } ?> value="<?php echo $woidresplists['id']; ?>"> <?php echo $woidresplists['transaction_number']; ?> </option>
                     <?php }  ?>
                   </select>
@@ -546,25 +546,25 @@ function changeselectdate(){
 } ?> >
               <div class=" text-right" style="text-align: right;">
                 <div class="btn btn-icon w-auto btn-clean d-inline-flex align-items-center btn-sm px-2 mr-2">
-                  <span class="text-dark-50 font-weight-bolder font-size-base f-w-600 f-14">Submited Hrs : <span class=" form-label badge bg-primary f-14"><?php echo $submit; ?></span></span>
+                  <span class="text-dark-50 font-weight-bolder font-size-base f-w-600 f-14"><?php echo __('Submited Hrs :'); ?> <span class=" form-label badge bg-primary f-14"><?php echo $submit; ?></span></span>
                 </div>
                 <div class="btn btn-icon w-auto btn-clean d-inline-flex align-items-center btn-sm px-2 mr-2">
-                  <span class="text-dark-50 font-weight-bolder font-size-base f-w-600 f-14">Approved Hrs :
+                  <span class="text-dark-50 font-weight-bolder font-size-base f-w-600 f-14"><?php echo __('Approved Hrs :'); ?>
                     <span class="form-label badge bg-info f-14"><?php echo $approve; ?></span>
                   </span>
                 </div>
-                <div class="btn btn-icon w-auto btn-clean d-inline-flex align-items-center btn-sm px-2 mr-2 <?php if(TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                <div class="btn btn-icon w-auto btn-clean d-inline-flex align-items-center btn-sm px-2 mr-2 <?php if(TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>">
-                  <span class="text-dark-50 font-weight-bolder font-size-base mr-3 f-w-600 f-14">Billable&nbsp;</span>
+                  <span class="text-dark-50 font-weight-bolder font-size-base mr-3 f-w-600 f-14"><?php echo __('Billable&nbsp;'); ?></span>
                   <span class="symbol symbol-35 symbol-info">
-                    <span class="form-label badge bg-success font-weight-bold f-14 m-t-5">B</span>
+                    <span class="form-label badge bg-success font-weight-bold f-14 m-t-5"><?php echo __('B'); ?></span>
                   </span>
                 </div>
-                <div class="btn btn-icon w-auto btn-clean d-inline-flex align-items-center btn-sm px-2 mr-2 <?php if(TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                <div class="btn btn-icon w-auto btn-clean d-inline-flex align-items-center btn-sm px-2 mr-2 <?php if(TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>">
-                  <span class="text-dark-50 font-weight-bolder font-size-base mr-3 f-w-600 f-14">Non Billable&nbsp;</span>
+                  <span class="text-dark-50 font-weight-bolder font-size-base mr-3 f-w-600 f-14"><?php echo __('Non Billable&nbsp;'); ?></span>
                   <span class="symbol symbol-35 symbol-info">
-                    <span class="form-label badge bg-danger font-weight-bold f-14 m-t-5">NB</span>
+                    <span class="form-label badge bg-danger font-weight-bold f-14 m-t-5"><?php echo __('NB'); ?></span>
                   </span>
                 </div>
               </div>
@@ -583,7 +583,7 @@ function changeselectdate(){
                     <thead>
                       <tr>
                         <th scope="col"></th>
-                        <th scope="col" style="width: 12%;">Task</th>
+                        <th scope="col" style="width: 12%;"><?php echo __('Task'); ?></th>
                         <th scope="col" style="width: 4%;"></th>
                         <?php  foreach($timesheet_dates as $datekey =>$timesheetdate) { $d=0; $d++; $datename = "day".$d."date";
                         $datevalidation = checkValidationholidayworkingdays($holidaylist,$working_days,$timesheetdate,$leavesemp);
@@ -617,7 +617,7 @@ function changeselectdate(){
                       <td>
                         <div class="checkbox-fade fade-in-primary checkbox mt-2 ml-2">
                           <label class="form-label">
-                            <input aria-label="Checkbox" class="itemRow" type="checkbox" value="<?php echo implode(",",$idss[$taskslist]); ?>">
+                            <input aria-label="<?php echo __('Checkbox'); ?>" class="itemRow" type="checkbox" value="<?php echo implode(",",$idss[$taskslist]); ?>">
                             <span class="cr">
                               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                             </span>
@@ -626,16 +626,16 @@ function changeselectdate(){
                       </td>
                       <td>
                         <input type="hidden" name="rownumber[]" value="<?php echo $j;?>">
-                        <input aria-label="Task Name[]" class="form-control" type="text" name="task_name[]"  value="<?php echo $taskslistdata[$timesheet_dates[$j-1]]['task_name'];?>" >
+                        <input aria-label="<?php echo __('Task Name[]'); ?>" class="form-control" type="text" name="task_name[]"  value="<?php echo $taskslistdata[$timesheet_dates[$j-1]]['task_name'];?>" >
                       </td>
                       <td class="text-center">
-                        <span class="symbol symbol-35 d-inline-block symbol-info <?php if(TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                        <span class="symbol symbol-35 d-inline-block symbol-info <?php if(TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" >
-                          <span class="form-label badge bg-success font-weight-bold f-14 m-t-15"> B</span>
+                          <span class="form-label badge bg-success font-weight-bold f-14 m-t-15"> <?php echo __('B'); ?></span>
                         </span>
-                        <span class="symbol symbol-35 d-inline-block symbol-info mt-2 <?php if(TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                        <span class="symbol symbol-35 d-inline-block symbol-info mt-2 <?php if(TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>">
-                          <span class="form-label badge bg-danger font-weight-bold f-14 m-t-10">NB</span>
+                          <span class="form-label badge bg-danger font-weight-bold f-14 m-t-10"><?php echo __('NB'); ?></span>
                         </span>
                       </td>
                       <?php
@@ -656,14 +656,14 @@ function changeselectdate(){
                        ?>
                       <td style="<?php echo $datevalidation['color']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $datevalidation['msg']; ?>">
                          <input type="hidden" id="rowid_2" name="<?php echo $datename;?>_rowid[]" value="<?php echo $id;?>" />
-                         <input aria-label="Input field" <?php echo $datevalidation['error']; ?> <?php if($datevalidation['read'] == 'Y'){ echo "readonly";
+                         <input aria-label="<?php echo __('Input field'); ?>" <?php echo $datevalidation['error']; ?> <?php if($datevalidation['read'] == 'Y'){ echo __('readonly');
 } ?>  class="form-control itemRow bg-success-o-40 text-right timesheet_time
- <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+ <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" type="text" onblur="calculateRowSum('<?php echo $j;?>','<?php echo $r;?>')"
- <?php if($emp_bill==1){ echo "readonly";
+ <?php if($emp_bill==1){ echo __('readonly');
 } ?>  name="<?php echo $datename;?>_billable[]" id="task_r<?php echo $j;?>_billable_c<?php echo $r;?>" value="<?php echo $taskslistdata[$timesheet_dates[$r-1]]['billable_hrs']=='0'?'00.00':$billable_hrs; ?>" maxlength="5" tabindex=""  data-rowcol="<?php echo $j.'-'.$r; ?>">
 
-                         <input aria-label="Input field" <?php echo $datevalidation['error']; ?> class="form-control bg-warning-o-40 text-right timesheet_time <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                         <input aria-label="<?php echo __('Input field'); ?>" <?php echo $datevalidation['error']; ?> class="form-control bg-warning-o-40 text-right timesheet_time <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" type="text" onblur="calculateRowSum('<?php echo $j;?>','<?php echo $r;?>')" value="<?php echo $taskslistdata[$timesheet_dates[$r-1]]['nonbillable_hrs']=='0'?'00.00':$nonbillable_hrs; ?>" name="<?php echo $datename;?>_nonbillable[]" id="task_r<?php echo $j;?>_nonbillable_c<?php echo $r;?>" maxlength="5" data-rowcol="<?php echo $j.'-'.$r; ?>">
                       </td>
                       <?php }
@@ -676,9 +676,9 @@ function changeselectdate(){
                         $totalbillable = numberformatechnagetime($totalbillable);
                         $total_nonbillable = numberformatechnagetime($total_nonbillable);
                         ?>
-                        <input aria-label="Input field" class="form-control font-weight-bolder text-right <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                        <input aria-label="<?php echo __('Input field'); ?>" class="form-control font-weight-bolder text-right <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" tabindex="-1"  type="text" id="total_billable_row<?php echo $j;?>" name="<?php echo $datename;?>_totalbillable" readonly value="<?php echo houreConvertRounvalue($totalbillable); ?>">
-                        <input aria-label="Input field" class="form-control font-weight-bolder text-right <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                        <input aria-label="<?php echo __('Input field'); ?>" class="form-control font-weight-bolder text-right <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" type="text" tabindex="-1" name="<?php echo $datename;?>total_nonbillable"  id="total_nonbillable_row<?php echo $j;?>" readonly value="<?php echo houreConvertRounvalue($total_nonbillable); ?>">
                       </td>
                     </tr>
@@ -691,7 +691,7 @@ function changeselectdate(){
                         <input type="hidden" name="rownumber[]" value="<?php echo 1;?>">
                         <div class="checkbox-fade fade-in-primary checkbox mt-2 ml-2">
                           <label class="form-label">
-                            <input aria-label="Checkbox" class="itemRow" type="checkbox" value="-1">
+                            <input aria-label="<?php echo __('Checkbox'); ?>" class="itemRow" type="checkbox" value="-1">
                             <span class="cr">
                              <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                            </span>
@@ -699,16 +699,16 @@ function changeselectdate(){
                         </div>
                       </td>
                       <td>
-                        <input aria-label="Task Name[]" class="form-control" type="text" name="task_name[]" >
+                        <input aria-label="<?php echo __('Task Name[]'); ?>" class="form-control" type="text" name="task_name[]" >
                       </td>
                       <td class="text-center">
-                        <span class="symbol symbol-35 d-inline-block symbol-info <?php if(TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                        <span class="symbol symbol-35 d-inline-block symbol-info <?php if(TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>">
-                          <span class="form-label badge bg-success font-weight-bold f-14 m-t-15"> B</span>
+                          <span class="form-label badge bg-success font-weight-bold f-14 m-t-15"> <?php echo __('B'); ?></span>
                         </span>
-                        <span class="symbol symbol-35 d-inline-block symbol-info  mt-2 <?php if(TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                        <span class="symbol symbol-35 d-inline-block symbol-info  mt-2 <?php if(TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>">
-                          <span class="form-label badge bg-danger font-weight-bold f-14 m-t-10">NB</span>
+                          <span class="form-label badge bg-danger font-weight-bold f-14 m-t-10"><?php echo __('NB'); ?></span>
                         </span>
                       </td>
                       <?php
@@ -723,20 +723,20 @@ function changeselectdate(){
                       ?>
                       <td style="<?php echo $datevalidation['color']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $datevalidation['msg']; ?>">
                         <input type="hidden" id="rowid_3" name="<?php echo $datename;?>_rowid[]" value="" />
-                        <input aria-label="Input field" <?php echo $datevalidation['error']; ?> <?php if($datevalidation['read'] == 'Y'){ echo "readonly";
+                        <input aria-label="<?php echo __('Input field'); ?>" <?php echo $datevalidation['error']; ?> <?php if($datevalidation['read'] == 'Y'){ echo __('readonly');
 } ?>  class="form-control itemRow  text-right timesheet_time
- <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+ <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" type="text" onblur="calculateRowSum('<?php echo $j;?>','<?php echo $r;?>')"
- <?php if($emp_bill==1){ echo "readonly";
+ <?php if($emp_bill==1){ echo __('readonly');
 } ?> name="<?php echo $datename;?>_billable[]" id="task_r<?php echo $j;?>_billable_c<?php echo $r;?>" value="<?php echo customeummarmonyformatenew($taskslistdata[$timesheet_dates[$r-1]]['billable_hrs']=='0'?'0':$taskslistdata[$timesheet_dates[$r-1]]['billable_hrs']); ?>" maxlength="5" tabindex="" data-rowcol="<?php echo $j.'-'.$r; ?>">
-                        <input aria-label="Input field"  class="form-control  text-right mt-2  timesheet_time <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                        <input aria-label="<?php echo __('Input field'); ?>"  class="form-control  text-right mt-2  timesheet_time <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" <?php echo $datevalidation['error']; ?> type="text" onblur="calculateRowSum('<?php echo $j;?>','<?php echo $r;?>')" value="<?php echo $taskslistdata[$timesheet_dates[$r-1]]['nonbillable_hrs']=='0'?'0':customeummarmonyformatenew($taskslistdata[$timesheet_dates[$r-1]]['nonbillable_hrs']); ?>" name="<?php echo $datename;?>_nonbillable[]" id="task_r<?php echo $j;?>_nonbillable_c<?php echo $r;?>" maxlength="5" data-rowcol="<?php echo $j.'-'.$r; ?>">
                       </td>
                       <?php } ?>
                       <td >
-                        <input aria-label="Input field"  class="form-control text-right  font-weight-bolder <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                        <input aria-label="<?php echo __('Input field'); ?>"  class="form-control text-right  font-weight-bolder <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" type="text" id="total_billable_row<?php echo $j;?>" readonly name="<?php echo $datename;?>_totalbillable"  tabindex="-1" value="<?php echo customeummarmonyformatenew($totalbillable); ?>">
-                        <input aria-label="Input field"  class="form-control text-right mt-2  font-weight-bolder <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                        <input aria-label="<?php echo __('Input field'); ?>"  class="form-control text-right mt-2  font-weight-bolder <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" type="text" id="total_nonbillable_row<?php echo $j;?>" name="<?php echo $datename;?>total_nonbillable" tabindex="-1"  readonly value="<?php echo customeummarmonyformatenew($total_nonbillable); ?>">
                       </td>
                     </tr>
@@ -745,24 +745,24 @@ function changeselectdate(){
                     <tfoot>
                       <tr>
                         <td></td>
-                        <th scope="col" colspan="2"> Total</th>
+                        <th scope="col" colspan="2"> <?php echo __('Total'); ?></th>
                         <?php
                         for($r=1; $r<=$rfmdfvsize; $r++){
 
                         ?>
                         <th scope="col">
-                          <input aria-label="Input field" class="form-control font-weight-bolder text-right  <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                          <input aria-label="<?php echo __('Input field'); ?>" class="form-control font-weight-bolder text-right  <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" name="total_bilable_date" tabindex="-1" type="text" readonly id="task_r<?php echo $r;?>_total_billable" value="<?php echo houreConvertRounvalue(numberformatechnagetime($gt[$r-1]['billable']));?>">
 
-                          <input aria-label="Input field" class="form-control font-weight-bolder text-right mt-2 <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                          <input aria-label="<?php echo __('Input field'); ?>" class="form-control font-weight-bolder text-right mt-2 <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>"  name="total_non_bilable_date" tabindex="-1" type="text" readonly id="task_r<?php echo $r;?>_total_nonbillable" value="<?php echo houreConvertRounvalue(numberformatechnagetime($gt[$r-1]['nonbillable']));?>">
                         </th>
                         <?php } ?>
                         <th scope="col">
-                          <input aria-label="Input field" class="form-control font-weight-bolder text-right font-weight-bolder <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                          <input aria-label="<?php echo __('Input field'); ?>" class="form-control font-weight-bolder text-right font-weight-bolder <?php if($empbillablestatus == '1' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" tabindex="-1" type="text" readonly id="weekly_total_billable" name="weekly_total_billable" value="<?php echo houreConvertRounvalue(customeummarmonyformatenew($gtt['billable'])); ?>">
 
-                          <input aria-label="Input field" class="form-control font-weight-bolder text-right mt-2 font-weight-bolder  <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo "d-none";
+                          <input aria-label="<?php echo __('Input field'); ?>" class="form-control font-weight-bolder text-right mt-2 font-weight-bolder  <?php if($empbillablestatus == '0' && TIMESHEET_BILLABLE_CHECk == 'Y'){ echo __('d-none');
 }?>" tabindex="-1" type="text" readonly id="weekly_total_nonbillable" name="weekly_total_nonbillable" value="<?php echo houreConvertRounvalue(customeummarmonyformatenew($gtt['nonbillable'])); ?>">
                         </th>
                       </tr>
@@ -779,17 +779,17 @@ function changeselectdate(){
 
 
                 <div class="mt-2">
-                  <button class="btn btn-danger waves-effect waves-light btn-sm f-14" id="removeRows" onclick="removetaskrows()" name="delete_btn" type="button">- Delete</button> &nbsp;
+                  <button class="btn btn-danger waves-effect waves-light btn-sm f-14" id="removeRows" onclick="removetaskrows()" name="delete_btn" type="button"><?php echo __('- Delete'); ?></button> &nbsp;
 
-                  <button class="btn btn-primary waves-effect waves-light btn-sm f-14" onclick="addtaskrows('task')" id="addRows" name="add_more_btn"  type="button">+ Add More</button>
+                  <button class="btn btn-primary waves-effect waves-light btn-sm f-14" onclick="addtaskrows('task')" id="addRows" name="add_more_btn"  type="button"><?php echo __('+ Add More'); ?></button>
                 </div>
                 <div class="card-footer mt-4 p-0">
                   <input type="hidden" id="kt_login_signin_submit"  class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 ml-5" name="savetimesheet" value="Save">
                   <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 btn-sm f-14" name="submit_value" <?php echo $edisable;  ?>  value="continue">
-                    <i class="la la-check-circle"></i>Save
+                    <i class="la la-check-circle"></i><?php echo __('Save'); ?>
                   </button>
                   <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2 btn-sm f-14">
-                    <i class="la la-close"></i>Cancel
+                    <i class="la la-close"></i><?php echo __('Cancel'); ?>
                   </button>
                 </div>
               </div>

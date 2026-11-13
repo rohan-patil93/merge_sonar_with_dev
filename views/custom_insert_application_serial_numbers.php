@@ -247,16 +247,16 @@ function formSubmitBTN(){
 </script>
 <div class="card">
 	<div class="card-header">
-        <h5>Transaction Serial Numbers</h5>
+        <h5><?= __('Transaction Serial Numbers') ?></h5>
         <div class="card-header-right">
           	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back </a>
         </div>
     </div>
 	<div class="card-body">
 		<div class="form-group col-lg-6">
-			<label class="form-label">Process Name</label>
+			<label class="form-label"><?= __('Process Name') ?></label>
 			<select class="form-select js-example-basic-single" name="process_name" id="process_name" onchange="selectProcessName(this.value)">
-				<option value="">Select Any One</option>
+				<option value=""><?= __('Select Any One') ?></option>
 				<?php foreach($dynamic_mapping_tables as $process){ ?>
 					<option value="<?php echo $process['application_table_name']; ?>" <?php echo $workflowconfiguration['process_name']==$process['application_table_name']?"selected":"" ?> ><?php echo ucwords(str_replace("_"," ",($process['application_table_name']))); ?></option>
 				<?php } ?>

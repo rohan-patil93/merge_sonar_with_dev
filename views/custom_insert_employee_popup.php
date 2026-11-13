@@ -72,7 +72,7 @@ if(returnres.error = "1" && returnres.errer_name == "insert"){
             type: "error",
             showCancelButton: true,
             showConfirmButton: false,
-            cancelButtonText: "Ok",
+            cancelButtonText: "<?= __('Ok') ?>",
             confirmButtonClass: "btn-danger",
             closeOnCancel: false
         });
@@ -83,14 +83,14 @@ if(returnres.error = "1" && returnres.errer_name == "email"){
     // Swal.fire({
     //   icon: 'error',
     //   title: 'Oops...',
-    //   text: 'Email Id Already Used :'+returnres.email_repeated,
+    //   text: "<?= __('Email Id Already Used :') ?>"+returnres.email_repeated,
     swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: 'Email Id Already Used :'+returnres.email_repeated,
+            text: "<?= __('Email Id Already Used :') ?>"+returnres.email_repeated,
             type: "error",
             showCancelButton: true,
             showConfirmButton: false,
-            cancelButtonText: "Ok",
+            cancelButtonText: "<?= __('Ok') ?>",
             confirmButtonClass: "btn-danger",
             closeOnCancel: false
         });
@@ -105,12 +105,12 @@ if(returnres.error = "0"){
     //   denyButtonText: `No`,
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: 'Employee Successfully Inserted - Do You Want Defind The Salary',
+        text: "<?= __('Employee Successfully Inserted - Do You Want Defind The Salary') ?>",
         type: "info",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: "<?= __('Yes') ?>",
+        cancelButtonText: "<?= __('No') ?>",
         closeOnConfirm: true,
         closeOnCancel: true
     },
@@ -137,15 +137,15 @@ if(returnres.error = "0"){
 
 </style>
 <div class="modal-header">
-    <h4 class="modal-title">View Employee details</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('View Employee details') ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 </div>
 
 <div class="modal-body j-pro">
     <div class="row">
         <div class="col-lg-12 col-xl-12 ">
             <div class="card-header  ">
-                <h5>Basic Info</h5>
+                <h5><?= __('Basic Info') ?></h5>
             </div>
             <div class="">
                 <table class="table m-0">
@@ -154,7 +154,7 @@ if(returnres.error = "0"){
                             <?php $mk= 0; foreach($employee_details as $key=>$employee_detail){
                                 if(in_array($key, (array)$basicinfo)){
                              ?>
-                                <th scope="row"><?php echo ucwords(strtolower(str_replace('_', ' ', $key))); ?></th>
+                                <th scope="row"><?php echo __(ucwords(strtolower(str_replace('_', ' ', $key)))); ?></th>
                                 <td><?php echo $employee_detail !=""?$employee_detail:"-"; ?></td>
                                 <?php if($mk==1){ echo "</tr><tr>"; $mk=0;
 }else{ $mk++;
@@ -168,7 +168,7 @@ if(returnres.error = "0"){
         </div>
         <div class="col-lg-12 col-xl-12 mt-5">
             <div class="card-header  ">
-                <h5>Working Details</h5>
+                <h5><?= __('Working Details') ?></h5>
             </div>
             <table class="table m-0">
                 <tbody>
@@ -194,11 +194,11 @@ if($key == "location_id"){ $employee_detail =$location_id[0]['location_name'];
 }
 if($key == "employee_type"){ $employee_detail =$employee_type[0]['genc_detail_name'];
 }
-if($key == "billable"){ $employee_detail = $_POST['billable'] == '0'?"Billable":"Non-Billable";
+if($key == "billable"){ $employee_detail = $_POST['billable'] == '0'?__('Billable'):__('Non-Billable');
 }
 
                          ?>
-                        <th scope="row"><?php echo ucwords(strtolower(str_replace('_', ' ', $key))); ?></th>
+                        <th scope="row"><?php echo __(ucwords(strtolower(str_replace('_', ' ', $key)))); ?></th>
                         <td><?php echo $employee_detail !=""?$employee_detail:"-";
                          ?></td>
                         <?php if($mk==1){ echo "</tr><tr>"; $mk=0;
@@ -212,7 +212,7 @@ if($key == "billable"){ $employee_detail = $_POST['billable'] == '0'?"Billable":
         </div>
         <div class="col-lg-12 col-xl-12 mt-5">
             <div class="card-header  ">
-                <h5>Personal Details</h5>
+                <h5><?= __('Personal Details') ?></h5>
             </div>
             <table class="table m-0">
                 <tbody>
@@ -223,7 +223,7 @@ if($key == "billable"){ $employee_detail = $_POST['billable'] == '0'?"Billable":
             if($key == "blood_group"){ $employee_detail = $blood_group[0]['blood_group'];
 }
                          ?>
-                        <th scope="row"><?php echo ucwords(strtolower(str_replace('_', ' ', $key))); ?></th>
+                        <th scope="row"><?php echo __(ucwords(strtolower(str_replace('_', ' ', $key)))); ?></th>
                         <td><?php echo $employee_detail !=""?$employee_detail:"-"; ?></td>
                         <?php if($mk==1){ echo "</tr><tr>"; $mk=0;
 }else{ $mk++;
@@ -237,16 +237,16 @@ if($key == "billable"){ $employee_detail = $_POST['billable'] == '0'?"Billable":
 
             <div class="col-lg-6 col-xl-6 mt-4 p-2">
                 <div class="card-header  ">
-                    <h5>Experience Details</h5>
+                    <h5><?= __('Experience Details') ?></h5>
                 </div>
                 <div class="">
                     <table class="table m-0">
                         <thead>
                             <tr>
-                                <th scope="col">Company Name</th>
-                                <th scope="col">Job Descrption</th>
-                                <th scope="col">Work From</th>
-                                <th scope="col">Work To</th>
+                                <th scope="col"><?= __('Company Name') ?></th>
+                                <th scope="col"><?= __('Job Descrption') ?></th>
+                                <th scope="col"><?= __('Work From') ?></th>
+                                <th scope="col"><?= __('Work To') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -260,7 +260,7 @@ if($key == "billable"){ $employee_detail = $_POST['billable'] == '0'?"Billable":
                                     </tr>
                                 <?php }
 } if($exper=="0"){
-                                        echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> No Experience Details</h4></td</tr>";
+                                        echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Experience Details') . "</h4></td</tr>";
                                     } ?>
                             </tbody>
                         </table>
@@ -268,17 +268,17 @@ if($key == "billable"){ $employee_detail = $_POST['billable'] == '0'?"Billable":
                 </div>
                 <div class="col-lg-6 col-xl-6 mt-4 p-2">
                     <div class="card-header  ">
-                    <h5>Qualification Details</h5>
+                    <h5><?= __('Qualification Details') ?></h5>
                 </div>
                 <div class="">
                     <table class="table m-0">
                         <thead>
                             <tr>
-                                <th scope="col">Institute Name</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">End Date</th>
-                                <th scope="col">Score</th>
+                                <th scope="col"><?= __('Institute Name') ?></th>
+                                <th scope="col"><?= __('Type') ?></th>
+                                <th scope="col"><?= __('Start Date') ?></th>
+                                <th scope="col"><?= __('End Date') ?></th>
+                                <th scope="col"><?= __('Score') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -288,14 +288,14 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
                                  ?>
                                     <tr>
                                         <td><?php echo $valueinstitute; ?></td>
-                                        <td><?php echo $type[0]['genc_detail_name']; ?></td>
+                                        <td><?php echo __($type[0]['genc_detail_name'] ?? ''); ?></td>
                                         <td><?php echo $employee_details['start_date'][$k2y]; ?></td>
                                         <td><?php echo $employee_details['end_date'][$k2y]; ?></td>
                                         <td><?php echo $employee_details['score'][$k2y]; ?></td>
                                     </tr>
                                 <?php }
 } if($qualifi=="0"){
-                                        echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> No Qualification Details</h4></td</tr>";
+                                        echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Qualification Details') . "</h4></td</tr>";
                                     } ?>
                             </tbody>
                         </table>
@@ -303,15 +303,15 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
                 </div>
                 <div class="col-lg-6 col-xl-6 mt-4 p-2">
                     <div class="card-header  ">
-                    <h5>Dependents Details</h5>
+                    <h5><?= __('Dependents Details') ?></h5>
                 </div>
                 <div class="">
                     <table class="table m-0">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Relationship</th>
-                                <th scope="col">Date Of Birth</th>
+                                <th scope="col"><?= __('Name') ?></th>
+                                <th scope="col"><?= __('Relationship') ?></th>
+                                <th scope="col"><?= __('Date Of Birth') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -319,12 +319,12 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
                                 {  if($valuedepende !=""){  $depend++; ?>
                                     <tr>
                                         <td><?php echo $valuedepende; ?></td>
-                                        <td><?php echo $relationtype[$employee_details['dependent_relationship_type'][$ky3]]; ?></td>
+                                        <td><?php echo __($relationtype[$employee_details['dependent_relationship_type'][$ky3]] ?? ''); ?></td>
                                         <td><?php echo $employee_details['dependent_date_of_birth'][$ky3]; ?></td>
                                     </tr>
                                 <?php }
 } if($depend=="0"){
-                                        echo "<tr><td colspan='3' class='text-center'><h4><i class='ti-help-alt'></i> No Dependents Details</h4></td</tr>";
+                                        echo "<tr><td colspan='3' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Dependents Details') . "</h4></td</tr>";
                                     } ?>
 
                             </tbody>
@@ -333,16 +333,16 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
                 </div>
                 <div class="col-lg-6 col-xl-6 mt-4 p-2">
                     <div class="card-header  ">
-                        <h5>Emergency Contact</h5>
+                        <h5><?= __('Emergency Contact') ?></h5>
                     </div>
                     <div class="">
                         <table class="table m-0">
                             <thead>
                                 <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Relationship</th>
-                                    <th scope="col">Home No</th>
-                                    <th scope="col">Mobile No</th>
+                                    <th scope="col"><?= __('Name') ?></th>
+                                    <th scope="col"><?= __('Relationship') ?></th>
+                                    <th scope="col"><?= __('Home No') ?></th>
+                                    <th scope="col"><?= __('Mobile No') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -350,14 +350,14 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
                                     { if($valueemerg !=""){ $emrg++; ?>
                                         <tr>
                                             <td><?php echo $valueemerg; ?></td>
-                                            <td><?php echo $relationtype[$employee_details['contact_relationship'][$ky3]]; ?></td>
+                                            <td><?php echo __($relationtype[$employee_details['contact_relationship'][$ky3]] ?? ''); ?></td>
                                             <td><?php echo $employee_details['contact_home_no'][$ky3]; ?></td>
                                             <td><?php echo $employee_details['contact_mobile_no'][$ky3]; ?></td>
                                         </tr>
                                     <?php } ?>
                                     <?php }
                                     if($emrg=="0"){
-                                        echo "<tr><td colspan='4' class='text-center'><h4><i class='ti-help-alt'></i> No Emergency Contact</h4></td</tr>";
+                                        echo "<tr><td colspan='4' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Emergency Contact') . "</h4></td</tr>";
                                     }
 
                                      ?>
@@ -368,6 +368,6 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()">Submit</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
+            <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()"><?= __('Submit') ?></button>
         </div>

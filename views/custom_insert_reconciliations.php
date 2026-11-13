@@ -75,10 +75,10 @@ if($reconciliations['reconciliation_type'] == "BTG"){
         var count = $(".itemRow").length;
          count++;
         var html = '';
-        html = '<td> <select aria-label="Cont[]" name="cont[]" class="form-control form-select js-example-basic-single" ><option value="0">Select Any One </option><?php foreach($chart_of_accounts as $coa){ ?><option  value="<?php echo $coa['account_code']; ?>"><?php echo $coa['account_name']; ?></option><?php
+        html = '<td> <select aria-label="<?php echo __('Cont[]'); ?>" name="cont[]" class="form-control form-select js-example-basic-single" ><option value="0"><?php echo __('Select Any One'); ?> </option><?php foreach($chart_of_accounts as $coa){ ?><option  value="<?php echo $coa['account_code']; ?>"><?php echo $coa['account_name']; ?></option><?php
 } ?></select></td>';
-        html +='<td><input aria-label="Cont[" type="number" name="cont['+count+'][value]" class="form-control text-right"></td>';
-        html +='<td><input aria-label="Cont[" type="number" name="cont['+count+'][days]" class="form-control text-right"></td>';
+        html +='<td><input aria-label="<?php echo __('Cont['); ?>" type="number" name="cont['+count+'][value]" class="form-control text-right"></td>';
+        html +='<td><input aria-label="<?php echo __('Cont['); ?>" type="number" name="cont['+count+'][days]" class="form-control text-right"></td>';
         html +='<td><div class="form-group cursor-pointer"  onclick="deletRow('+count+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-trash" ></i> </div></td></tr>';
         $("#addmoreinvoice").append(html);
 
@@ -110,9 +110,9 @@ if($reconciliations['reconciliation_type'] == "BTG"){
 </script>
 <div class="card">
     <div class="card-header">
-        <h5>Reconciliations</h5>
+        <h5><?php echo __('Reconciliations'); ?></h5>
         <div class="card-header-right table-card-header">
-            <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</button>
+            <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?php echo __('Back'); ?></button>
         </div>
     </div>
     <div class="card-body p-l-50 p-r-50">
@@ -120,18 +120,18 @@ if($reconciliations['reconciliation_type'] == "BTG"){
             <div class="row">
                 <input type="hidden" name="depreciation_method"  id="depreciation_method" value="SL">
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Reconciliations Name</span>
-                    <input aria-label="Reconciliation Name" class="form-control"  type="text"  name="reconciliation_name"  value="<?php echo $reconciliations['reconciliation_name']; ?>" required>
+                    <span class="form-label"><?php echo __('Reconciliations Name'); ?></span>
+                    <input aria-label="<?php echo __('Reconciliation Name'); ?>" class="form-control"  type="text"  name="reconciliation_name"  value="<?php echo $reconciliations['reconciliation_name']; ?>" required>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <span class="form-label">Type</span>
+                            <span class="form-label"><?php echo __('Type'); ?></span>
                             <div class="form-radio">
                                 <?php foreach($reconciliationtype as $codeval=>$codelabel){ ?>
                                 <div class="radio radio-inline d-block">
                                       <label class="form-label">
-                                        <input aria-label="Reconciliation Type" type="radio" name="reconciliation_type" value="<?php echo $codeval; ?>"  onclick="getReconciliationsType(this.value)"  <?php echo $reconciliations['reconciliation_type'] ==$codeval?"checked":""; ?> onkeydown="">
+                                        <input aria-label="<?php echo __('Reconciliation Type'); ?>" type="radio" name="reconciliation_type" value="<?php echo $codeval; ?>"  onclick="getReconciliationsType(this.value)"  <?php echo $reconciliations['reconciliation_type'] ==$codeval?"checked":""; ?> onkeydown="">
                                         <i class="helper"></i><?php echo $codelabel; ?>
                                       </label>
                                 </div>
@@ -141,12 +141,12 @@ if($reconciliations['reconciliation_type'] == "BTG"){
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <span class="form-label d-block">Auto Validate</span>
-                            <input aria-label="Auto Validate" class="js-primary-sm" type="checkbox" name="auto_validate" <?php echo $reconciliations['auto_validate'] =='0'?"checked":""; ?> value="0">
+                            <span class="form-label d-block"><?php echo __('Auto Validate'); ?></span>
+                            <input aria-label="<?php echo __('Auto Validate'); ?>" class="js-primary-sm" type="checkbox" name="auto_validate" <?php echo $reconciliations['auto_validate'] =='0'?"checked":""; ?> value="0">
                         </div>
                         <div class="form-group">
-                            <span class="form-label">Search Month Limit</span>
-                            <input aria-label="Search Month Limit" class="form-control"  type="text" name="search_month_limit"  value="<?php echo $reconciliations['search_month_limit']; ?>" >
+                            <span class="form-label"><?php echo __('Search Month Limit'); ?></span>
+                            <input aria-label="<?php echo __('Search Month Limit'); ?>" class="form-control"  type="text" name="search_month_limit"  value="<?php echo $reconciliations['search_month_limit']; ?>" >
                         </div>
 
                     </div>
@@ -156,14 +156,14 @@ if($reconciliations['reconciliation_type'] == "BTG"){
 
                             <div class="card mb-2">
                                 <div class="card-header">
-                                    <h5> Bank Transaction Condition </h5>
+                                    <h5> <?php echo __('Bank Transaction Condition'); ?> </h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="form-group col-lg-4">
                                             <?php $journal_availability = json_decode($reconciliations['journal_availability'],1);?>
-                                            <span class="form-label">Journal Availability</span>
-                                            <select aria-label="Journal Availability[]" class="form-control form-select js-example-basic-multiple" name="journal_availability[]" multiple>
+                                            <span class="form-label"><?php echo __('Journal Availability'); ?></span>
+                                            <select aria-label="<?php echo __('Journal Availability[]'); ?>" class="form-control form-select js-example-basic-multiple" name="journal_availability[]" multiple>
                                                 <?php foreach ($journals as $jour) {  ?>
                                                     <option  <?php if(in_array($jour['id'], (array)$journal_availability)){ ?> selected  <?php
 } ?> value = <?php echo $jour['id']; ?>   > <?php echo $jour['journal_name']; ?>
@@ -172,9 +172,9 @@ if($reconciliations['reconciliation_type'] == "BTG"){
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-2 class_rts" style="<?php echo $rts; ?>">
-                                            <span class="form-label">Amount Type</span>
-                                             <select aria-label="Amount Type" class="form-control form-select js-example-basic-single"  name="amount_type">
-                                                <option value=""> Select Any One </option>
+                                            <span class="form-label"><?php echo __('Amount Type'); ?></span>
+                                             <select aria-label="<?php echo __('Amount Type'); ?>" class="form-control form-select js-example-basic-single"  name="amount_type">
+                                                <option value=""> <?php echo __('Select Any One'); ?> </option>
                                                 <?php foreach ($amounttype as $at) {  ?>
                                                     <option  <?php if($reconciliations['amount_type'] == $at['value']){ ?> selected  <?php
 } ?> value = <?php echo $at['value']; ?>   > <?php echo $at['label']; ?>
@@ -183,9 +183,9 @@ if($reconciliations['reconciliation_type'] == "BTG"){
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-2 class_rts" style="<?php echo $rts; ?>">
-                                            <span class="form-label">Transaction Type</span>
-                                             <select aria-label="Transaction Type" class="form-control form-select js-example-basic-single"  name="transaction_type">
-                                                <option value=""> Select Any One </option>
+                                            <span class="form-label"><?php echo __('Transaction Type'); ?></span>
+                                             <select aria-label="<?php echo __('Transaction Type'); ?>" class="form-control form-select js-example-basic-single"  name="transaction_type">
+                                                <option value=""> <?php echo __('Select Any One'); ?> </option>
                                                 <?php foreach ($transactiontype as $keyval=>$lable) {  ?>
                                                     <option  value="<?php echo $keyval; ?>" <?php if($reconciliations['transaction_type'] == $keyval){ ?> selected  <?php
 } ?> > <?php echo $lable; ?>
@@ -194,9 +194,9 @@ if($reconciliations['reconciliation_type'] == "BTG"){
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-2 class_rts" style="<?php echo $rts; ?>">
-                                            <span class="form-label">Amount Condition</span>
-                                             <select aria-label="Amount Condition" class="form-control form-select js-example-basic-single" name="amount_condition">
-                                                <option value=""> Select Any One </option>
+                                            <span class="form-label"><?php echo __('Amount Condition'); ?></span>
+                                             <select aria-label="<?php echo __('Amount Condition'); ?>" class="form-control form-select js-example-basic-single" name="amount_condition">
+                                                <option value=""> <?php echo __('Select Any One'); ?> </option>
                                                 <?php foreach ($amountcondition as $ac) {  ?>
                                                     <option  <?php if($reconciliations['amount_condition'] == $ac['id']){ ?> selected  <?php
 } ?> value = <?php echo $ac['value']; ?>   > <?php echo $ac['label']; ?>
@@ -205,13 +205,13 @@ if($reconciliations['reconciliation_type'] == "BTG"){
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-2 class_rts" style="<?php echo $rts; ?>">
-                                            <span class="form-label">Amount</span>
-                                            <input aria-label="Amount" class="form-control text-right"  type="text"  id="amount" name="amount"  value="<?php echo $reconciliations['amount']; ?>" >
+                                            <span class="form-label"><?php echo __('Amount'); ?></span>
+                                            <input aria-label="<?php echo __('Amount'); ?>" class="form-control text-right"  type="text"  id="amount" name="amount"  value="<?php echo $reconciliations['amount']; ?>" >
                                         </div>
                                         <div class="form-group col-lg-6 class_rts" style="<?php echo $rts; ?>">
                                             <?php $vendor_ids = json_decode($reconciliations['vendor_ids'],1); ?>
-                                            <span class="form-label">Vendor</span>
-                                            <select aria-label="Vendor Ids[]" class="form-control form-select js-example-basic-multiple" name="vendor_ids[]" multiple>
+                                            <span class="form-label"><?php echo __('Vendor'); ?></span>
+                                            <select aria-label="<?php echo __('Vendor Ids[]'); ?>" class="form-control form-select js-example-basic-multiple" name="vendor_ids[]" multiple>
                                                 <?php foreach ($vendors as $ven) {  ?>
                                                     <option  value="<?php echo $ven['id']; ?>" <?php if(in_array($ven['id'], (array)$vendor_ids)){ ?> selected  <?php
 } ?>> <?php echo $ven['display_name']; ?>
@@ -221,8 +221,8 @@ if($reconciliations['reconciliation_type'] == "BTG"){
                                         </div>
                                         <div class="form-group col-lg-6 class_rts" style="<?php echo $rts; ?>">
                                             <?php $customer_ids = json_decode($reconciliations['customer_ids'],1);?>
-                                            <span class="form-label">Customer</span>
-                                            <select aria-label="Customer Ids[]" class="form-control form-select js-example-basic-multiple" name="customer_ids[]" multiple>
+                                            <span class="form-label"><?php echo __('Customer'); ?></span>
+                                            <select aria-label="<?php echo __('Customer Ids[]'); ?>" class="form-control form-select js-example-basic-multiple" name="customer_ids[]" multiple>
                                                 <?php foreach ($customers as $cust) {  ?>
                                                     <option value ="<?php echo $cust['id']; ?>"    <?php if(in_array($cust['id'], (array)$customer_ids)){ ?> selected  <?php
 } ?>> <?php echo $cust['display_name']; ?>
@@ -231,8 +231,8 @@ if($reconciliations['reconciliation_type'] == "BTG"){
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-4 class_rts" style="<?php echo $rts; ?>">
-                                            <span class="form-label d-block">Same Currency</span>
-                                            <input aria-label="Same Currency" class="js-primary-sm" type="checkbox" name="same_currency" <?php echo $reconciliations['same_currency'] =='0'?"checked":""; ?> value="0">
+                                            <span class="form-label d-block"><?php echo __('Same Currency'); ?></span>
+                                            <input aria-label="<?php echo __('Same Currency'); ?>" class="js-primary-sm" type="checkbox" name="same_currency" <?php echo $reconciliations['same_currency'] =='0'?"checked":""; ?> value="0">
                                         </div>
 
 
@@ -241,9 +241,9 @@ if($reconciliations['reconciliation_type'] == "BTG"){
                                          <table class="table table-hover m-b-0" style="font-size:13px;"  id="addmoreinvoice">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 50%;">Account</th>
-                                    <th scope="col" style="width: 25%;">Amount Type</th>
-                                    <th scope="col" style="width: 20%;">Amount</th>
+                                    <th scope="col" style="width: 50%;"><?php echo __('Account'); ?></th>
+                                    <th scope="col" style="width: 25%;"><?php echo __('Amount Type'); ?></th>
+                                    <th scope="col" style="width: 20%;"><?php echo __('Amount'); ?></th>
                                     <th scope="col" style="width: 5%;"></th>
                                 </tr>
                             </thead>
@@ -257,8 +257,8 @@ if($reconciliations['reconciliation_type'] == "BTG"){
 
                                 <tr class="itemRow" id="delete_row_<?php echo $i; ?>">
                                     <td>
-                                        <select aria-label="Chart Of Account []" name="chart_of_account_id[]" class="form-control form-select js-example-basic-single" >
-                                            <option value="">Select Any One </option>
+                                        <select aria-label="<?php echo __('Chart Of Account []'); ?>" name="chart_of_account_id[]" class="form-control form-select js-example-basic-single" >
+                                            <option value=""><?php echo __('Select Any One'); ?> </option>
                                             <?php foreach($chart_of_accounts as $coa){ ?>
                                             <option value="<?php echo $coa['account_code']; ?>" <?php echo $row['chart_of_account_id']==$coa['account_code']?"selected":""; ?>><?php echo $coa['account_name']; ?></option>
                                         <?php } ?>
@@ -266,15 +266,15 @@ if($reconciliations['reconciliation_type'] == "BTG"){
                                         </select>
                                     </td>
                                     <td>
-                                        <select aria-label="Counter Part Amount Type[]" name="counter_part_amount_type[]" class="form-control form-select js-example-basic-single" >
-                                            <option value="">Select Any One </option>
+                                        <select aria-label="<?php echo __('Counter Part Amount Type[]'); ?>" name="counter_part_amount_type[]" class="form-control form-select js-example-basic-single" >
+                                            <option value=""><?php echo __('Select Any One'); ?> </option>
                                             <?php foreach($transamounttype as $tat){ ?>
                                             <option  value="<?php echo $tat['value']; ?>" <?php echo $row['counter_part_amount_type']==$tat['value']?"selected":""; ?>><?php echo $tat['label']; ?></option>
                                         <?php } ?>
                                         </select>
                                     </td>
                                     <td>
-                                        <input aria-label="Counter Part Amount[]" type="number" name="counter_part_amount[]" class="form-control text-right" value="<?php echo $row['counter_part_amount'];  ?>" >
+                                        <input aria-label="<?php echo __('Counter Part Amount[]'); ?>" type="number" name="counter_part_amount[]" class="form-control text-right" value="<?php echo $row['counter_part_amount'];  ?>" >
                                     </td>
                                     <td>
                                         <div class="form-group cursor-pointer" onclick="deletRow('<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
@@ -287,7 +287,7 @@ if($reconciliations['reconciliation_type'] == "BTG"){
                             </tbody>
                         </table>
                         <div class="mt-3">
-                            <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn" onclick="addMorerows()"><i class="icofont icofont-plus icon-white "></i> Add More</button>
+                            <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn" onclick="addMorerows()"><i class="icofont icofont-plus icon-white "></i> <?php echo __('Add More'); ?></button>
                         </div>
                     </div>
                 </div>
@@ -297,7 +297,7 @@ if($reconciliations['reconciliation_type'] == "BTG"){
             </div>
             <div class="card-footer">
                 <input type="hidden" name="rid" value="<?php echo $rid; ?>">
-                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submitreconcilation" value="submitreconcilation"> Submit</button>
+                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submitreconcilation" value="submitreconcilation"> <?php echo __('Submit'); ?></button>
             </div>
         </form>
     </div>

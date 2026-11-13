@@ -25,11 +25,11 @@ if (isset($_POST['save'])) {
     $saveResult   = json_decode($saveResponse, true);
 
     if ($saveResult['status'] == 'success') {
-        $_SESSION['msg_show'] = "Loan/Advance saved successfully";
+        $_SESSION['msg_show'] = __('Loan/Advance saved successfully');
         header("location:index.php?option=COM_LIST_EMPLOYEE_LOANS");
         exit;
     } else {
-        $error_message = $saveResult['message'] ?? 'Error saving loan';
+        $error_message = !empty($saveResult['message']) ? __($saveResult['message']) : __('Error saving loan');
     }
 }
 ?>
@@ -60,12 +60,12 @@ if (isset($_POST['save'])) {
     function submitDynamicWorkflow(table_name, transaction_id, current_status, next_status, old_status_name, new_status_name) {
         swal({
                 title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-                text: "Please note the status of the document will change to " + new_status_name,
+                text: "<?= __('Please note the status of the document will change to') ?> " + new_status_name,
                 type: "info",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes",
-                cancelButtonText: "No",
+                confirmButtonText: "<?= __('Yes') ?>",
+                cancelButtonText: "<?= __('No') ?>",
                 closeOnConfirm: false
             },
             function() {
@@ -92,12 +92,12 @@ if (isset($_POST['save'])) {
                             });
                         } else {
                             swal({
-                                title: "Oops...",
+                                title: "<?= __('Oops...') ?>",
                                 text: res.transaction_update.message,
                                 type: "error",
                                 showCancelButton: true,
                                 showConfirmButton: false,
-                                cancelButtonText: "Ok",
+                                cancelButtonText: "<?= __('Ok') ?>",
                                 confirmButtonClass: "btn-danger",
                                 closeOnCancel: false
                             });
@@ -118,7 +118,7 @@ if (isset($loan_data['id']) && $loan_data['current_status'] != "") {
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0">Employee Advance / Loan</h5>
+            <h5 class="mb-0"><?= __('Employee Advance / Loan') ?></h5>
             <div class="card-header-right">
                 <?php
                 echo $workflowsteps['workflow_btn'];
@@ -136,7 +136,7 @@ if (isset($loan_data['id']) && $loan_data['current_status'] != "") {
                 ?>
                 <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light m-r-50">
                     <i class="icofont icofont-reply mr-1"></i>
-                    Back
+                    <?= __('Back') ?>
                 </a>
             </div>
         </div>
@@ -151,9 +151,9 @@ if (isset($loan_data['id']) && $loan_data['current_status'] != "") {
                 <div class="row">
                     <!-- Employee -->
                     <div class="col-lg-4 form-group">
-                        <span class="form-label">Employee</span>
-                        <select aria-label="Employee" name="employee_id" id="employee_id" class="form-select js-example-basic-single">
-                            <option value="">Select Employee</option>
+                        <span class="form-label"><?= __('Employee') ?></span>
+                        <select aria-label="<?= __('Employee') ?>" name="employee_id" id="employee_id" class="form-select js-example-basic-single">
+                            <option value=""><?= __('Select Employee') ?></option>
                             <?php foreach ($employees as $emp) { ?>
                                 <option value="<?php echo $emp['id']; ?>"
                                     <?php if (!empty($loan['employee_id']) && $loan['employee_id'] == $emp['id']) { echo "selected";
@@ -166,32 +166,32 @@ if (isset($loan_data['id']) && $loan_data['current_status'] != "") {
 
                     <!-- Type -->
                     <div class="col-lg-2">
-                        <span class="form-label">Type</span>
-                        <select aria-label="Loan Type" name="loan_type" id="loan_type" class="form-select js-example-basic-single">
+                        <span class="form-label"><?= __('Type') ?></span>
+                        <select aria-label="<?= __('Loan Type') ?>" name="loan_type" id="loan_type" class="form-select js-example-basic-single">
                             <option value="ADVANCE" <?php if (($loan['loan_type'] ?? '') == "ADVANCE") { echo "selected";
-} ?>>Advance</option>
+} ?>><?= __('Advance') ?></option>
                             <option value="LOAN" <?php if (($loan['loan_type'] ?? '') == "LOAN") { echo "selected";
-} ?>>Loan</option>
+} ?>><?= __('Loan') ?></option>
                         </select>
                     </div>
                     <!-- Taken Date -->
                     <div class="col-lg-2">
-                        <span class="form-label">Taken Date</span>
-                        <input aria-label="Start Date" type="date" name="start_date" id="start_date" class="form-control"
+                        <span class="form-label"><?= __('Taken Date') ?></span>
+                        <input aria-label="<?= __('Start Date') ?>" type="date" name="start_date" id="start_date" class="form-control"
                             value="<?php echo $loan['start_date'] ?? date('Y-m-d'); ?>" required>
                     </div>
                     <!-- Amount -->
                     <div class="col-lg-2">
-                        <span class="form-label">Amount</span>
-                        <input aria-label="Amount" type="number" step="any" class="form-control"
+                        <span class="form-label"><?= __('Amount') ?></span>
+                        <input aria-label="<?= __('Amount') ?>" type="number" step="any" class="form-control"
                             name="amount" id="amount"
                             value="<?php echo $loan['principal_amount'] ?? 0; ?>" required>
                     </div>
 
 
                     <div class="col-lg-2">
-                        <span class="form-label">No. of Months</span>
-                        <input aria-label="No Of Months" type="number" class="form-control" name="no_of_months" id="no_of_months"
+                        <span class="form-label"><?= __('No. of Months') ?></span>
+                        <input aria-label="<?= __('No Of Months') ?>" type="number" class="form-control" name="no_of_months" id="no_of_months"
                             value="<?php echo $loan['no_of_months'] ?? 0; ?>" required>
                     </div>
 
@@ -204,7 +204,7 @@ if (isset($loan_data['id']) && $loan_data['current_status'] != "") {
 
                 <div class="row mt-3">
                     <div class="col-lg-12">
-                        <button type="button" class="btn btn-info" onclick="calculateSchedule()">Calculate Installments</button>
+                        <button type="button" class="btn btn-info" onclick="calculateSchedule()"><?= __('Calculate Installments') ?></button>
                     </div>
                 </div>
 
@@ -225,12 +225,12 @@ if (isset($loan_data['id']) && $loan_data['current_status'] != "") {
                                     <div id="installments_table">
                                         <?php if (!empty($installments)) { ?>
                                             <div class="table-responsive">
-                                                <h5>Monthly Installments</h5>
+                                                <h5><?= __('Monthly Installments') ?></h5>
                                                 <table class="table table-hover table-sm">
                                                     <tr>
                                                         <th scope="col">#</th>
-                                                        <th scope="col">Date</th>
-                                                        <th scope="col">Amount</th>
+                                                        <th scope="col"><?= __('Date') ?></th>
+                                                        <th scope="col"><?= __('Amount') ?></th>
                                                     </tr>
 
                                                     <?php foreach ($installments as $inst) { ?>
@@ -296,57 +296,57 @@ if (isset($loan_data['id']) && $loan_data['current_status'] != "") {
 
                                         echo "
                                             <div class='summary-box'>
-                                            <h5 class='mb-3'>Advance / Loan Summary</h5>
+                                            <h5 class='mb-3'>" . __('Advance / Loan Summary') . "</h5>
 
                                             <div class='row mb-2'>
-                                                <div class='col-6 text-muted'>Employee Name</div>
+                                                <div class='col-6 text-muted'>" . __('Employee Name') . "</div>
                                                 <div class='col-6 fw-bold text-end'>{$empName
 }</div>
                                             </div>
 
                                             <div class='row mb-2'>
-                                                <div class='col-6 text-muted'>Type</div>
+                                                <div class='col-6 text-muted'>" . __('Type') . "</div>
                                                 <div class='col-6 fw-bold text-end'>{$typeVal
 }</div>
                                             </div>
 
                                             <div class='row mb-2'>
-                                                <div class='col-6 text-muted'>Amount</div>
+                                                <div class='col-6 text-muted'>" . __('Amount') . "</div>
                                                 <div class='col-6 fw-bold text-end'>{$amountVal
 }</div>
                                             </div>
 
                                             <div class='row mb-2'>
-                                                <div class='col-6 text-muted'>Date Taken</div>
+                                                <div class='col-6 text-muted'>" . __('Date Taken') . "</div>
                                                 <div class='col-6 fw-bold text-end'>{$dateVal
 }</div>
                                             </div>
 
                                             <div class='row mb-2'>
-                                                <div class='col-6 text-muted'>No. of Months</div>
+                                                <div class='col-6 text-muted'>" . __('No. of Months') . "</div>
                                                 <div class='col-6 fw-bold text-end'>{$monthsVal
 }</div>
                                             </div>";
                                         if ($typeVal == "LOAN") {
                                             echo "<div class='row mb-2'>
-                                                <div class='col-6 text-muted'>Interest Rate</div>
+                                                <div class='col-6 text-muted'>" . __('Interest Rate') . "</div>
                                                 <div class='col-6 fw-bold text-end'>{$rateVal
 }</div>
                                             </div>
                                             <div class='row mb-2'>
-                                                <div class='col-6 text-muted'>Monthly Interest</div>
+                                                <div class='col-6 text-muted'>" . __('Monthly Interest') . "</div>
                                                 <div class='col-6 fw-bold text-end'>" . number_format($monthlyInterest, 2) . "</div>
                                             </div>
 
                                             <div class='row mb-2'>
-                                                <div class='col-6 text-muted'>Total Interest</div>
+                                                <div class='col-6 text-muted'>" . __('Total Interest') . "</div>
                                                 <div class='col-6 fw-bold text-end'>" . number_format($totalInterest, 2) . "</div>
                                             </div>";
                                         }
                                         echo "<hr class='my-2' />
 
                                             <div class='row'>
-                                                <div class='col-6 text-muted'>Total Amount Payable</div>
+                                                <div class='col-6 text-muted'>" . __('Total Amount Payable') . "</div>
                                                 <div class='col-6 fw-bold text-end text-primary'>" . number_format($totalPayable, 2) . "</div>
                                             </div>
                                             </div>
@@ -362,7 +362,7 @@ if (isset($loan_data['id']) && $loan_data['current_status'] != "") {
 
                     <div class="row mt-3">
                         <div class="col-lg-12 text-start">
-                            <button type="submit" name="save" class="btn btn-primary">Save</button>
+                            <button type="submit" name="save" class="btn btn-primary"><?= __('Save') ?></button>
                         </div>
                     </div>
                 </div>
@@ -384,15 +384,15 @@ if (isset($loan_data['id']) && $loan_data['current_status'] != "") {
 
         if (!amount || !startDate || !months) {
             tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX',
-                'Please enter Amount, Date Taken and No. of Months', '');
+                '<?= __('Please enter Amount, Date Taken and No. of Months') ?>', '');
             return;
         }
 
         var scheduleHtml = '';
         scheduleHtml += '<div class="table-responsive">';
-        scheduleHtml += '<h5>Monthly Installments</h5>';
+        scheduleHtml += '<h5><?= __('Monthly Installments') ?></h5>';
         scheduleHtml += '<table class="table table-hover table-sm">';
-        scheduleHtml += '<tr><th scope="col">#</th><th scope="col">Date</th><th scope="col">Amount</th></tr>';
+        scheduleHtml += '<tr><th scope="col">#</th><th scope="col"><?= __('Date') ?></th><th scope="col"><?= __('Amount') ?></th></tr>';
 
         var totalPayable = 0;
 
@@ -547,44 +547,44 @@ if (isset($loan_data['id']) && $loan_data['current_status'] != "") {
 
         var summaryHtml = `
             <div class="summary-box">
-            <h5 class="mb-3">Advance / Loan Summary</h5>
+            <h5 class="mb-3"><?= __('Advance / Loan Summary') ?></h5>
 
             <div class="row mb-2">
-                <div class="col-6 text-muted">Employee Name</div>
+                <div class="col-6 text-muted"><?= __('Employee Name') ?></div>
                 <div class="col-6 fw-bold text-end">${empName}</div>
             </div>
 
             <div class="row mb-2">
-                <div class="col-6 text-muted">Type</div>
+                <div class="col-6 text-muted"><?= __('Type') ?></div>
                 <div class="col-6 fw-bold text-end">${type}</div>
             </div>
 
             <div class="row mb-2">
-                <div class="col-6 text-muted">Amount</div>
+                <div class="col-6 text-muted"><?= __('Amount') ?></div>
                 <div class="col-6 fw-bold text-end">${amountVal}</div>
             </div>
 
             <div class="row mb-2">
-                <div class="col-6 text-muted">Date Taken</div>
+                <div class="col-6 text-muted"><?= __('Date Taken') ?></div>
                 <div class="col-6 fw-bold text-end">${dateVal}</div>
             </div>
 
             <div class="row mb-2">
-                <div class="col-6 text-muted">No. of Months</div>
+                <div class="col-6 text-muted"><?= __('No. of Months') ?></div>
                 <div class="col-6 fw-bold text-end">${monthsVal}</div>
             </div>`
         if (loanType === 'LOAN') {
             summaryHtml += `<div class="row mb-2">
-                <div class="col-6 text-muted">Interest Rate</div>
+                <div class="col-6 text-muted"><?= __('Interest Rate') ?></div>
                 <div class="col-6 fw-bold text-end">${rateVal}</div>
             </div>
             <div class="row mb-2">
-                <div class="col-6 text-muted">Monthly Interest</div>
+                <div class="col-6 text-muted"><?= __('Monthly Interest') ?></div>
                 <div class="col-6 fw-bold text-end">${perMonthInterest}</div>
             </div>
 
             <div class="row mb-2">
-                <div class="col-6 text-muted">Total Interest</div>
+                <div class="col-6 text-muted"><?= __('Total Interest') ?></div>
                 <div class="col-6 fw-bold text-end">${totalInterestValue}</div>
             </div>`;
         }
@@ -592,7 +592,7 @@ if (isset($loan_data['id']) && $loan_data['current_status'] != "") {
             <hr class="my-2" />
 
             <div class="row">
-                <div class="col-6 text-muted">Total Amount Payable</div>
+                <div class="col-6 text-muted"><?= __('Total Amount Payable') ?></div>
                 <div class="col-6 fw-bold text-end text-primary">${totalPay}</div>
             </div>
         </div>

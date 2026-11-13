@@ -51,15 +51,15 @@ if ($item_id != "") {
         var item_name = $("#edit_item_name").val();
 
         if (!location_id) {
-            tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', 'Please select location', '');
+            tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', <?= json_encode(__('Please select location')) ?>, '');
             return false;
         }
         if (!category_id) {
-            tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', 'Please select category', '');
+            tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', <?= json_encode(__('Please select category')) ?>, '');
             return false;
         }
         if (!item_name) {
-            tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', 'Please enter product name', '');
+            tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', <?= json_encode(__('Please enter product name')) ?>, '');
             return false;
         }
 
@@ -76,16 +76,16 @@ if ($item_id != "") {
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">Edit Item</h5>
-    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Edit Item') ?></h5>
+    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 </div>
 <div class="modal-body">
     <form class="kt-form" id="submitformeditstationeryitem">
         <div class="row">
             <div class="form-group w-full col-md-6">
-                <label for="edit_location_id">Location <span class="text-danger">*</span></label>
-                <select class="form-select js-example-basic-single" name="location_id" id="edit_location_id" aria-label="Location">
-                    <option value="">Select Location</option>
+                <label for="edit_location_id"><?= __('Location') ?> <span class="text-danger">*</span></label>
+                <select class="form-select js-example-basic-single" name="location_id" id="edit_location_id" aria-label="<?= __('Location') ?>">
+                    <option value=""><?= __('Select Location') ?></option>
                     <?php if (count((array)$loc_data) > 0) {
                         foreach ((array)$loc_data as $loc) { ?>
                             <option <?php if ($item_details['location_id'] == $loc['id']) { echo "selected"; } ?> value="<?php echo $loc['id']; ?>"><?php echo $loc['location_name']; ?></option>
@@ -94,37 +94,37 @@ if ($item_id != "") {
                 </select>
             </div>
             <div class="form-group w-full col-md-6">
-                <label for="edit_category_id">Category <span class="text-danger">*</span></label>
-                <select class="form-select js-example-basic-single" name="category_id" id="edit_category_id" aria-label="Category">
-                    <option value="">Select Category</option>
+                <label for="edit_category_id"><?= __('Category') ?> <span class="text-danger">*</span></label>
+                <select class="form-select js-example-basic-single" name="category_id" id="edit_category_id" aria-label="<?= __('Category') ?>">
+                    <option value=""><?= __('Select Category') ?></option>
                     <?php if (count((array)$cat_data) > 0) {
                         foreach ((array)$cat_data as $cat) { ?>
-                            <option <?php if ($item_details['category_id'] == $cat['id']) { echo "selected"; } ?> value="<?php echo $cat['id']; ?>"><?php echo $cat['name']; ?></option>
+                            <option <?php if ($item_details['category_id'] == $cat['id']) { echo "selected"; } ?> value="<?php echo $cat['id']; ?>"><?php echo __($cat['name']); ?></option>
                     <?php }
                     } ?>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label for="edit_item_name">Product Name <span class="text-danger">*</span></label>
-            <input placeholder="Please Enter Your Product Name" type="text" name="item_name" id="edit_item_name" class="form-control" value="<?php echo $item_details['item_name']; ?>" aria-label="Product Name">
+            <label for="edit_item_name"><?= __('Product Name') ?> <span class="text-danger">*</span></label>
+            <input placeholder="<?= __('Please Enter Your Product Name') ?>" type="text" name="item_name" id="edit_item_name" class="form-control" value="<?php echo $item_details['item_name']; ?>" aria-label="<?= __('Product Name') ?>">
         </div>
         <div class="form-group">
-            <label for="edit_available_qty">Quantity <span class="text-danger">*</span></label>
-            <input placeholder="Please Enter Your Quantity" name="available_qty" id="edit_available_qty" type="text" class="form-control text-right fill" value="<?php echo $item_details['available_qty']; ?>" readonly disabled aria-label="Quantity">
+            <label for="edit_available_qty"><?= __('Quantity') ?> <span class="text-danger">*</span></label>
+            <input placeholder="<?= __('Please Enter Your Quantity') ?>" name="available_qty" id="edit_available_qty" type="text" class="form-control text-right fill" value="<?php echo $item_details['available_qty']; ?>" readonly disabled aria-label="<?= __('Quantity') ?>">
         </div>
         <div class="form-group">
-            <label for="edit_cost">Price</label>
-            <input name="cost" id="edit_cost" type="text" class="form-control text-right fill" value="<?php echo $item_details['cost']; ?>" aria-label="Price">
+            <label for="edit_cost"><?= __('Price') ?></label>
+            <input name="cost" id="edit_cost" type="text" class="form-control text-right fill" value="<?php echo $item_details['cost']; ?>" aria-label="<?= __('Price') ?>">
         </div>
         <div class="form-group">
-            <label for="edit_description">Description</label>
-            <textarea class="form-control" name="description" id="edit_description" placeholder="Please describe your product" aria-label="Description"><?php echo $item_details['description']; ?></textarea>
+            <label for="edit_description"><?= __('Description') ?></label>
+            <textarea class="form-control" name="description" id="edit_description" placeholder="<?= __('Please describe your product') ?>" aria-label="<?= __('Description') ?>"><?php echo $item_details['description']; ?></textarea>
         </div>
         <div class="modal-footer">
             <input type="hidden" name="id" id="edit_id" value="<?php echo $item_details['id']; ?>">
-            <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitupdatestationeryitemfrom()">Save</button>
+            <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal"><?= __('Close') ?></button>
+            <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitupdatestationeryitemfrom()"><?= __('Save') ?></button>
         </div>
     </form>
 </div>

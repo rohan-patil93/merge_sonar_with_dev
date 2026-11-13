@@ -65,12 +65,12 @@ function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,nex
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: "Please note the status of the document will change to "+new_status_name,
+        text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
         type: "info",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+        cancelButtonText: <?php echo json_encode(__('No')); ?>,
         closeOnConfirm: false
     },
     function(){
@@ -97,12 +97,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                     });
                 }else{
                     swal({
-                        title: "Oops...",
+                        title: <?php echo json_encode(__('Oops...')); ?>,
                         text: res.transaction_update.message,
                         type: "error",
                         showCancelButton: true,
                         showConfirmButton: false,
-                        cancelButtonText: "Ok",
+                        cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                         confirmButtonClass: "btn-danger",
                         closeOnCancel: false
                     });
@@ -116,7 +116,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
 <?php } ?>
 
@@ -128,12 +128,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
         }
     ?>
     <div class="card-header">
-        <h5>Peety Cash Request</h5>
+        <h5><?php echo __('Peety Cash Request'); ?></h5>
         <div class="card-header-right table-card-header">
             <?php echo $workflowsteps['workflow_btn'];  ?>
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -144,54 +144,54 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
         <form method="post" class="<?php echo ($pcbtr['current_status'] ==ST_ACTIVE || $pcbtr['current_status'] =="")?"":"event_disabled"; ?>">
             <div class="row" style="padding-left: 200px;padding-right: 200px;">
                 <div class="form-group col-lg-6 w-full">
-                    <span class="form-label">Petty Cash</span>
-                    <select aria-label="Petty Cash Boxe" name="petty_cash_boxe_id" class="form-control form-select js-example-basic-single" required="">
-                    <option value="">Select Any One </option>
+                    <span class="form-label"><?php echo __('Petty Cash'); ?></span>
+                    <select aria-label="<?php echo __('Petty Cash Boxe'); ?>" name="petty_cash_boxe_id" class="form-control form-select js-example-basic-single" required="">
+                    <option value=""><?php echo __('Select Any One'); ?> </option>
                     <?php foreach($petty_cash_boxes as $pcb) {  ?>
                         <option value="<?php echo $pcb['pc_box_id']; ?>" <?php echo $pcb['pc_box_id'] ==$pcbtr['petty_cash_boxe_id']?"selected":""; ?>><?php echo $pcb['pc_box_code']."-".$pcb['pc_box_description']." (Limit -".$pcb['pc_limit'].")"; ?></option>
                     <?php } ?>
                 </select>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Request Type</span>
+                    <span class="form-label"><?php echo __('Request Type'); ?></span>
                     <div class="form-radio">
                         <div class="radio radio-inline" style="pointer-events: none;">
                           <label class="form-label">
-                            <input aria-label="Request Type" type="radio" name="request_type" value="A" <?php echo $pcbtr['request_type'] =="A"?"checked":""; ?> readonly>
-                            <i class="helper"></i>Auto
+                            <input aria-label="<?php echo __('Request Type'); ?>" type="radio" name="request_type" value="A" <?php echo $pcbtr['request_type'] =="A"?"checked":""; ?> readonly>
+                            <i class="helper"></i><?php echo __('Auto'); ?>
                           </label>
                         </div>
                         <div class="radio radio-inline">
                           <label class="form-label">
-                            <input aria-label="Request Type" type="radio" name="request_type" value="M" <?php echo ($pcbtr['request_type'] =="M" || $petty_cash_requests['request_type'] =="")?"checked":""; ?>>
-                            <i class="helper"></i>Manual
+                            <input aria-label="<?php echo __('Request Type'); ?>" type="radio" name="request_type" value="M" <?php echo ($pcbtr['request_type'] =="M" || $petty_cash_requests['request_type'] =="")?"checked":""; ?>>
+                            <i class="helper"></i><?php echo __('Manual'); ?>
                           </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Request Amount</span>
-                    <input aria-label="Request Amount" type="numbert" class="form-control text-right" name="request_amount" value="<?php echo $pcbtr['request_amount']; ?>" required>
+                    <span class="form-label"><?php echo __('Request Amount'); ?></span>
+                    <input aria-label="<?php echo __('Request Amount'); ?>" type="numbert" class="form-control text-right" name="request_amount" value="<?php echo $pcbtr['request_amount']; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Request Date</span>
-                    <input aria-label="Transaction Date" type="text" class="form-control datepickernotprevious" name="transaction_date" value="<?php echo fromDate($pcbtr['transaction_date']); ?>" required>
+                    <span class="form-label"><?php echo __('Request Date'); ?></span>
+                    <input aria-label="<?php echo __('Transaction Date'); ?>" type="text" class="form-control datepickernotprevious" name="transaction_date" value="<?php echo fromDate($pcbtr['transaction_date']); ?>" required>
                 </div>
                 <div class="col-lg-12 form-group">
-                    <span class="form-label">Description</span>
-                    <textarea aria-label="Description" type="text" class="form-control" name="description" style="height: 125px;"><?php echo $pcbtr['description']; ?></textarea>
+                    <span class="form-label"><?php echo __('Description'); ?></span>
+                    <textarea aria-label="<?php echo __('Description'); ?>" type="text" class="form-control" name="description" style="height: 125px;"><?php echo $pcbtr['description']; ?></textarea>
                 </div>
             </div>
             <div class="row" style="padding-left: 200px;padding-right: 200px;">
                 <div class="form-group col-lg-6 <?php echo ($workflowsteps['next_status'] ==ST_APPROVED && $workflowsteps['next_step_owner'] == $_SESSION['userid'])?"":"event_disabled"; ?>">
-                    <span class="form-label">Final Topup Amount</span>
-                    <input aria-label="Final Amount" type="numbert" class="form-control text-right" name="final_amount" value="<?php echo $pcbtr['final_amount']; ?>" required>
+                    <span class="form-label"><?php echo __('Final Topup Amount'); ?></span>
+                    <input aria-label="<?php echo __('Final Amount'); ?>" type="numbert" class="form-control text-right" name="final_amount" value="<?php echo $pcbtr['final_amount']; ?>" required>
                 </div>
             </div>
             <div class="mt-5 <?php echo ($pcbtr['current_status'] ==ST_ACTIVE || $pcbtr['current_status'] =="" || ($workflowsteps['next_status'] ==ST_APPROVED && $workflowsteps['next_step_owner'] == $_SESSION['userid']))?"":"event_disabled"; ?>">
 
                 <input type="hidden" name="rid" value="<?php echo $rid; ?>">
-                <button type="submit" class="btn btn-primary waves-effect waves-light" name="getpettycashrequestsbtn"><i class="fa fa-check m-r-10"></i> <?php echo $rid ==""?"Submit":"Update"; ?></button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" name="getpettycashrequestsbtn"><i class="fa fa-check m-r-10"></i> <?php echo $rid ==""?__('Submit'):__('Update'); ?></button>
             </div>
         </form>
     </div>

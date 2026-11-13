@@ -7,7 +7,7 @@
             </li>
             <?php }else{ ?>
             <li class="nav-item">
-                <a class="nav-link active  activehomecomments removeallactivetab" data-bs-toggle="tab" href="#comment" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Comment</a>
+                <a class="nav-link active  activehomecomments removeallactivetab" data-bs-toggle="tab" href="#comment" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Comment') ?></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link removeallactivetab" data-bs-toggle="tab" href="#wait" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Wait</a>
@@ -43,32 +43,32 @@
                     <?php
                     if($task_crm_history['lead_type'] == '2' || $task_crm_history['lead_type'] == '3'){ ?>
                         <div class="col-lg-4">
-                            <span class="form-label d-block">Date</span>
+                            <span class="form-label d-block"><?= __('Date') ?></span>
                             <span><?php echo $task_crm_history['date']; ?></span>
                         </div>
                         <div class="col-lg-4">
-                            <span class="form-label d-block">Time</span>
+                            <span class="form-label d-block"><?= __('Time') ?></span>
                             <span class="form-label"><?php echo $task_crm_history['time']; ?></span>
                         </div>
                         <div class="col-lg-4">
-                            <span class="form-label d-block">Comment</span>
+                            <span class="form-label d-block"><?= __('Comment') ?></span>
                             <span class="form-label"><?php echo $task_crm_history['comment']; ?></span>
                         </div>
                    <?php  }elseif($task_crm_history['lead_type'] == '7' || $task_crm_history['lead_type'] == '6'){ ?>
                         <div class="col-lg-4">
-                            <span class="form-label d-block">Date</span>
+                            <span class="form-label d-block"><?= __('Date') ?></span>
                             <span class="form-label"><?php echo $task_crm_history['date']; ?></span>
                         </div>
                         <div class="col-lg-4">
-                            <span class="form-label d-block">Time</span>
+                            <span class="form-label d-block"><?= __('Time') ?></span>
                             <span class="form-label"><?php echo $task_crm_history['time']; ?></span>
                         </div>
                         <div class="col-lg-4">
-                            <span class="form-label d-block">Comment</span>
+                            <span class="form-label d-block"><?= __('Comment') ?></span>
                             <span class="form-label"><?php echo $task_crm_history['comment']; ?></span>
                         </div>
                         <div class="col-lg-12 mt-2">
-                            <span class="form-label d-block">Members</span>
+                            <span class="form-label d-block"><?= __('Members') ?></span>
                             <?php
                             $member = json_decode($task_crm_history['member'],1);
                             $rr = 1;
@@ -79,24 +79,24 @@
                         </div>
                    <?php }elseif($task_crm_history['lead_type'] == '8'){ ?>
                     <div class="col-lg-4">
-                            <span class="form-label d-block">Comment</span>
+                            <span class="form-label d-block"><?= __('Comment') ?></span>
                             <span class="form-label"><?php echo $task_crm_history['comment']; ?></span>
                         </div>
                         <div class="col-lg-4">
-                            <span class="form-label d-block">Date</span>
+                            <span class="form-label d-block"><?= __('Date') ?></span>
                             <span class="form-label"><?php echo $task_crm_history['date']; ?></span>
                         </div>
 
                         <div class="col-lg-4">
-                            <span class="form-label d-block">Time</span>
+                            <span class="form-label d-block"><?= __('Time') ?></span>
                             <span class="form-label"><?php echo $task_crm_history['time']; ?></span>
                         </div>
                         <div class="col-lg-4 mt-2">
-                            <span class="form-label d-block">Address</span>
+                            <span class="form-label d-block"><?= __('Address') ?></span>
                             <span class="form-label"><?php echo $task_crm_history['address']; ?></span>
                         </div>
                         <div class="col-lg-4 mt-2">
-                            <span class="form-label d-block">Post Code</span>
+                            <span class="form-label d-block"><?= __('Post Code') ?></span>
                             <span class="form-label"><?php echo $task_crm_history['post_code']; ?></span>
                         </div>
 
@@ -108,7 +108,7 @@
                         <textarea aria-label="Comment" class="form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value" name="comment"></textarea>
                     </div>
                     <div class="mt-2">
-                        <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_comment')">Submit</button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_comment')"><?= __('Submit') ?></button>
                     </div>
                 </form>
             </div>
@@ -122,7 +122,7 @@
                     <textarea aria-label="Comment" class="form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value" name="comment"></textarea>
                 </div>
                 <div class="mt-2">
-                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_comment')">Submit</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_comment')"><?= __('Submit') ?></button>
                 </div>
                 </form>
             </div>
@@ -144,7 +144,7 @@
                     </div>
                 </div>
                 <div class="mt-2">
-                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_wait')">Submit</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_wait')"><?= __('Submit') ?></button>
                 </div>
                 </form>
             </div>
@@ -166,7 +166,7 @@
                     </div>
                 </div>
                 <div class="mt-2">
-                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_call')">Submit</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_call')"><?= __('Submit') ?></button>
                 </div>
                 </form>
             </div>
@@ -184,7 +184,7 @@
                     </div>
                 </div>
                 <div class="mt-2">
-                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_sms')">Submit</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_sms')"><?= __('Submit') ?></button>
                     <span class="text-info f-12">*SMS service is not activated, so SMS could not be sent.</span>
                 </div>
                 </form>
@@ -213,7 +213,7 @@
                     </div>
                 </div>
                 <div class="mt-2">
-                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_email')">Submit</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_email')"><?= __('Submit') ?></button>
                 </div>
                 </form>
             </div>
@@ -232,7 +232,7 @@
                     <div class="col-lg-12 form-group w-full">
                         <span class="form-label">User <span class="requried text-danger">*</span></span>
                         <select aria-label="Member[]" class="form-control js-example-basic-single resetmulyiselect" name="member[]">
-                            <option value="">Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
                        <?php foreach($application_users_role as $uval){ ?>
                             <option value="<?php echo $uval['id']; ?>" <?php echo $responsible == $uval['id']?"selected":"";?>><?php echo $uval['display_name']; ?></option>
                         <?php } ?>
@@ -244,7 +244,7 @@
                     </div>
                 </div>
                 <div class="mt-2">
-                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_task')">Submit</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_task')"><?= __('Submit') ?></button>
                 </div>
                 </form>
             </div>
@@ -274,7 +274,7 @@
                     </div>
                 </div>
                 <div class="mt-2">
-                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_meeting')">Submit</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_meeting')"><?= __('Submit') ?></button>
                 </div>
                 </form>
             </div>
@@ -294,13 +294,13 @@
                     <div class="col-lg-12 form-group">
                     <span class="form-label">Address <span class="requried text-danger">*</span></span>
                     <div class="grow-wrap">
-                        <textarea aria-label="Address" name="address" placeholder="Address" class="border form-control" rows="3" name="address" oninput="this.parentNode.dataset.replicatedValue = this.value" ><?php echo $transaction['address']; ?></textarea>
+                        <textarea aria-label="Address" name="address" placeholder="<?= __('Address') ?>" class="border form-control" rows="3" name="address" oninput="this.parentNode.dataset.replicatedValue = this.value" ><?php echo $transaction['address']; ?></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6 form-group w-full">
                     <span class="form-label">Country <span class="requried text-danger">*</span></span>
                     <select aria-label="Country" class="form-control js-example-basic-single resetmulyiselect" name="country_id" onchange="selectedcategory(this.value,'state_idd','states','country_id')">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach($countries as $cval){ ?>
                             <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['country_id'] == $cval['id']?"selected":"";?>><?php echo $cval['country_name']; ?></option>
                         <?php } ?>
@@ -309,7 +309,7 @@
                 <div class="col-lg-6 form-group w-full">
                     <span class="form-label">State <span class="requried text-danger">*</span></span>
                     <select aria-label="State Idd" class="form-control js-example-basic-single resetmulyiselect" name="state_idd" id="state_idd" onchange="selectedcategory(this.value,'city_idd','cities','state_id')">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach($states as $cval){ ?>
                             <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['state_id'] == $cval['id']?"selected":"";?>><?php echo $cval['state_name']; ?></option>
                         <?php } ?>
@@ -318,7 +318,7 @@
                 <div class="col-lg-6 form-group w-full">
                     <span class="form-label">City <span class="requried text-danger">*</span></span>
                     <select aria-label="City" class="form-control js-example-basic-single resetmulyiselect" name="city_id" id="city_idd">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach($cities as $cval){ ?>
                             <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['city_id'] == $cval['id']?"selected":"";?>><?php echo $cval['city_name']; ?></option>
                         <?php } ?>
@@ -326,7 +326,7 @@
                 </div>
                 <div class="col-lg-6 form-group">
                     <span class="form-label">Post Code <span class="requried text-danger">*</span></span>
-                    <input aria-label="Postal Code" class="form-control" type="text" name="post_code" placeholder="Postal Code" value="<?php echo $transaction['post_code']; ?>">
+                    <input aria-label="Postal Code" class="form-control" type="text" name="post_code" placeholder="<?= __('Postal Code') ?>" value="<?php echo $transaction['post_code']; ?>">
                 </div>
                     <div class="col-lg-12 form-group">
                         <span class="form-label">Comment <span class="requried text-danger">*</span></span>
@@ -334,7 +334,7 @@
                     </div>
                 </div>
                 <div class="mt-2">
-                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_visit')">Submit</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitLeadFormDetail('form_visit')"><?= __('Submit') ?></button>
                 </div>
              </form>
             </div>

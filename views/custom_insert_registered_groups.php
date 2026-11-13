@@ -81,16 +81,16 @@ function validationcheck(){
  if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
 <?php } ?>
         <div class="card card-custom card-sticky ">
             <div class="card-header">
-                <h5>Invited User</h5>
+                <h5><?php echo __('Invited User'); ?></h5>
                 <div class="card-header-right">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?php echo __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -99,24 +99,24 @@ function validationcheck(){
                 <div class="card-body card-infisuite">
                     <div class="row">
                         <div class="form-group col-lg-4">
-                            <span class="form-label">Domain Name</span>
+                            <span class="form-label"><?php echo __('Domain Name'); ?></span>
                             <div class="input-group input-group-button mb-0">
-                                <input aria-label="Domain Name" type="text" class="b-radius-5 f-w-600 text-muted form-control width1 text-lowercase" name="domain_name" id="domain_name" data-bs-toggle="tooltip" value="" data-placement="bottom" title="Domain Name" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" onblur="checkdomainname('domain_name','domain_name','doimainregistererrer')">
+                                <input aria-label="<?php echo __('Domain Name'); ?>" type="text" class="b-radius-5 f-w-600 text-muted form-control width1 text-lowercase" name="domain_name" id="domain_name" data-bs-toggle="tooltip" value="" data-placement="bottom" title="<?php echo __('Domain Name'); ?>" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" onblur="checkdomainname('domain_name','domain_name','doimainregistererrer')">
                                 <span class="input-group-text addon-style">
                                     <span class=""><?php echo getMainDomainName(); ?></span>
                                     <input type="hidden" name="host_domain_name" value="<?php echo $_SERVER['HTTP_HOST']; ?>">
                                 </span>
                             </div>
-                            <span class="text-danger f-12" id="doimainregistererrer" style="display:none">Domain Already Register</span>
+                            <span class="text-danger f-12" id="doimainregistererrer" style="display:none"><?php echo __('Domain Already Register'); ?></span>
                         </div>
 
                         <div class="form-group col-lg-4">
-                            <span class="form-label">Company Name</span>
-                            <input aria-label="Company Name" class="form-control" type="text" id="company_name" name="company_name" value="" required="">
+                            <span class="form-label"><?php echo __('Company Name'); ?></span>
+                            <input aria-label="<?php echo __('Company Name'); ?>" class="form-control" type="text" id="company_name" name="company_name" value="" required="">
                         </div>
                         <div class="form-group col-lg-4">
-                            <span class="form-label">Module</span>
-                            <select aria-label="Module" class="form-control js-example-basic-single" required="" name="module_id">
+                            <span class="form-label"><?php echo __('Module'); ?></span>
+                            <select aria-label="<?php echo __('Module'); ?>" class="form-control js-example-basic-single" required="" name="module_id">
                             <?php foreach($module as $key=>$modulename){
                                     ?>
                                     <option value="<?php echo $key; ?>"><?php echo $modulename; ?></option>
@@ -124,21 +124,21 @@ function validationcheck(){
                             </select>
                         </div>
                         <div class="form-group col-lg-3">
-                            <span class="form-label">First Name</span>
-                            <input aria-label="First Name" class="form-control" type="text" id="first_name" name="first_name" value="" required="">
+                            <span class="form-label"><?php echo __('First Name'); ?></span>
+                            <input aria-label="<?php echo __('First Name'); ?>" class="form-control" type="text" id="first_name" name="first_name" value="" required="">
                         </div>
                         <div class="form-group col-lg-3">
-                            <span class="form-label">Last Name</span>
-                            <input aria-label="Last Name" class="form-control" type="text" id="last_name" name="last_name" value="" required="">
+                            <span class="form-label"><?php echo __('Last Name'); ?></span>
+                            <input aria-label="<?php echo __('Last Name'); ?>" class="form-control" type="text" id="last_name" name="last_name" value="" required="">
                         </div>
                         <div class="form-group col-lg-3">
-                            <span class="form-label">Email Id</span>
-                            <input aria-label="Email" class="form-control" type="email" id="email_id" name="email_id" value="" required="" onblur="checkdomainname('email_id','email_id','emailregistererrer')">
-                            <span class="text-danger f-12" id="emailregistererrer" style="display:none">Email Id Already Register</span>
+                            <span class="form-label"><?php echo __('Email Id'); ?></span>
+                            <input aria-label="<?php echo __('Email'); ?>" class="form-control" type="email" id="email_id" name="email_id" value="" required="" onblur="checkdomainname('email_id','email_id','emailregistererrer')">
+                            <span class="text-danger f-12" id="emailregistererrer" style="display:none"><?php echo __('Email Id Already Register'); ?></span>
                         </div>
                         <div class="form-group col-lg-3">
-                            <span class="form-label">Mobile No.</span>
-                            <input aria-label="User Mobile" class="form-control" type="number" id="user_mobile" name="user_mobile" value="" required="">
+                            <span class="form-label"><?php echo __('Mobile No.'); ?></span>
+                            <input aria-label="<?php echo __('User Mobile'); ?>" class="form-control" type="number" id="user_mobile" name="user_mobile" value="" required="">
                         </div>
 
                     </div>
@@ -149,7 +149,7 @@ function validationcheck(){
                             <input type="hidden" class="doimainregistererrer" value="1">
                               <input type="hidden" class="emailregistererrer" value="1">
                             <input type="hidden" name="submit" value="submit">
-                            <button  class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 disabled" name="submit_value_exit" id="submit_value_exit" value="exit" ><i class="la la-check"></i>Save &amp; exit</button>
+                            <button  class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 disabled" name="submit_value_exit" id="submit_value_exit" value="exit" ><i class="la la-check"></i><?php echo __('Save &amp; exit'); ?></button>
                         </div>
                     </div>
                 </div>

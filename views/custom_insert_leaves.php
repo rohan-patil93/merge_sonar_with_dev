@@ -114,15 +114,15 @@ $weekdays = ['Sunday'=>'Sunday','Monday'=>'Monday','Tuesday'=>'Tuesday','Wednesd
   function addrows(){
    var htrow = "";
    htrow+='<div style="clear: both"></div>';
-   htrow+='<div class="col-xl-9 t-3 p-2"><div class="stage label font-weight-boldest label-rounded label-primary" >Stage 2 </div>  <h6> Starts ..</h6> <input type="hidden" name="levelrowid[]" value=""> <div class="col-lg-2  group mb-5 p-1" style="float: left;">  <input aria-label="10" class=" form-control" type="text" name="action_number[]"  placeholder="10" value="" required />  </div>';
-   htrow+=' <div class="col-lg-6 p-1" style="float: left;"><select aria-label="Action Frequency[]" class="form-control  form-select js-example-basic-single" id="kt_select2_48"  name="action_frequency[]"><option value="">Select Any One </option><?php foreach ($first_accrual_list as $falkey => $falvalue) { ?> <option value="<?php echo $falkey; ?>" ><?php echo $falvalue;?></option><?php
+   htrow+='<div class="col-xl-9 t-3 p-2"><div class="stage label font-weight-boldest label-rounded label-primary" ><?php echo __('Stage 2'); ?> </div>  <h6> <?php echo __('Starts ..'); ?></h6> <input type="hidden" name="levelrowid[]" value=""> <div class="col-lg-2  group mb-5 p-1" style="float: left;">  <input aria-label="10" class=" form-control" type="text" name="action_number[]"  placeholder="10" value="" required />  </div>';
+   htrow+=' <div class="col-lg-6 p-1" style="float: left;"><select aria-label="<?php echo __('Action Frequency[]'); ?>" class="form-control  form-select js-example-basic-single" id="kt_select2_48"  name="action_frequency[]"><option value=""><?php echo __('Select Any One'); ?> </option><?php foreach ($first_accrual_list as $falkey => $falvalue) { ?> <option value="<?php echo $falkey; ?>" ><?php echo $falvalue;?></option><?php
 } ?></select></div>';
-   htrow+='  <div class="col-lg-3  p-1" style="float: left;"><select aria-label="Before Or After[]" class="form-control  form-select js-example-basic-single" id="kt_select2_49"  name="before_or_after[]"><option value="">Select Any One </option><?php foreach ($accruals_befaf_list as $bakey => $bavalue) { ?><option value="<?php echo $bakey; ?>" ><?php echo $bavalue;?></option><?php
+   htrow+='  <div class="col-lg-3  p-1" style="float: left;"><select aria-label="<?php echo __('Before Or After[]'); ?>" class="form-control  form-select js-example-basic-single" id="kt_select2_49"  name="before_or_after[]"><option value=""><?php echo __('Select Any One'); ?> </option><?php foreach ($accruals_befaf_list as $bakey => $bavalue) { ?><option value="<?php echo $bakey; ?>" ><?php echo $bavalue;?></option><?php
 } ?></select></div>';
-   htrow+=' <div style="clear: both"></div> <div class="col-lg-12 " > <h6> Amount Accrued ..</h6><div class="col-lg-2 p-1  group mb-5" style="float: left;"> <input aria-label="10" class="form-control min-w-50px" type="text" name="base_on[]"  placeholder="10" value="" required />  </div> <div class="col-lg-6 p-1" style="float: left;"> <select aria-label="Accured Action Based[]" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_31"  name="accured_action_based[]"><option value="">Select Any One </option><?php foreach ($accured_action_numberlist as $falkey => $falvalue) { ?><option value="<?php echo $falkey; ?>" <?php echo $acvalue['accured_action_number']==$falkey ? 'selected':'';?> ><?php echo $falvalue;?></option><?php
+   htrow+=' <div style="clear: both"></div> <div class="col-lg-12 " > <h6> <?php echo __('Amount Accrued ..'); ?></h6><div class="col-lg-2 p-1  group mb-5" style="float: left;"> <input aria-label="10" class="form-control min-w-50px" type="text" name="base_on[]"  placeholder="10" value="" required />  </div> <div class="col-lg-6 p-1" style="float: left;"> <select aria-label="<?php echo __('Accured Action Based[]'); ?>" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_31"  name="accured_action_based[]"><option value=""><?php echo __('Select Any One'); ?> </option><?php foreach ($accured_action_numberlist as $falkey => $falvalue) { ?><option value="<?php echo $falkey; ?>" <?php echo $acvalue['accured_action_number']==$falkey ? 'selected':'';?> ><?php echo $falvalue;?></option><?php
 } ?></select> </div> </div>';
-   htrow+=' <div style="clear: both"></div>    <div class="col-lg-12 mt-2"> <div class="col-lg-4 p-1 group mb-5" style="float: left;"><span class="">  Max Accrual  </span>   <input aria-label="Max Accured Limit[]" class="form-control " type="text" name="max_accured_limit[]"   />  </div> <div class="col-lg-4 p-1" style="float: left;"><span>Carryover </span> <select aria-label="Carry Over Limit[]" class="form-control selectlist form-select js-example-basic-single"  name="carry_over_limit[]"><option value="">Select Any One </option><?php foreach ($carryover_list as $coakey => $coavalue) { ?><option value="<?php echo $coakey; ?>"><?php echo $coavalue;?></option><?php
-} ?></select></div><div class="col-lg-4 p-1" style="float: left;"><span>Carryover Type</span>  <select aria-label="Carry Over Limit Type[]" class="form-control selectlist form-select js-example-basic-single"  name="carry_over_limit_type[]"<option value="">Select Any One </option><?php foreach ($percentage_list as $plkey => $plvalue) { ?><option value="<?php echo $plkey; ?>" ><?php echo $plvalue;?></option> <?php
+   htrow+=' <div style="clear: both"></div>    <div class="col-lg-12 mt-2"> <div class="col-lg-4 p-1 group mb-5" style="float: left;"><span class="">  <?php echo __('Max Accrual'); ?>  </span>   <input aria-label="<?php echo __('Max Accured Limit[]'); ?>" class="form-control " type="text" name="max_accured_limit[]"   />  </div> <div class="col-lg-4 p-1" style="float: left;"><span><?php echo __('Carryover'); ?> </span> <select aria-label="<?php echo __('Carry Over Limit[]'); ?>" class="form-control selectlist form-select js-example-basic-single"  name="carry_over_limit[]"><option value=""><?php echo __('Select Any One'); ?> </option><?php foreach ($carryover_list as $coakey => $coavalue) { ?><option value="<?php echo $coakey; ?>"><?php echo $coavalue;?></option><?php
+} ?></select></div><div class="col-lg-4 p-1" style="float: left;"><span><?php echo __('Carryover Type'); ?></span>  <select aria-label="<?php echo __('Carry Over Limit Type[]'); ?>" class="form-control selectlist form-select js-example-basic-single"  name="carry_over_limit_type[]"<option value=""><?php echo __('Select Any One'); ?> </option><?php foreach ($percentage_list as $plkey => $plvalue) { ?><option value="<?php echo $plkey; ?>" ><?php echo $plvalue;?></option> <?php
 } ?></select>  </div>  </div>';
     $('#lavel').append(htrow);
   }
@@ -173,11 +173,11 @@ function scehduleaction(){
 
 
       <div class="card-header mb-3">
-        <h5>Leave Type</h5>
+        <h5><?php echo __('Leave Type'); ?></h5>
         <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
             <i class="icofont icofont-reply"></i>
-            Back
+            <?php echo __('Back'); ?>
           </a>
         </div>
       </div>
@@ -201,9 +201,9 @@ function scehduleaction(){
 
                 <div class="row">
                   <div class="form-group col-lg-9 ">
-                    <span>Leave Category</span><?php //print_r($lcdata);?>
-                    <select aria-label="Category Name" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_47"  name="category_name">
-                      <option value=""> Select Any one</option>
+                    <span><?php echo __('Leave Category'); ?></span><?php //print_r($lcdata);?>
+                    <select aria-label="<?php echo __('Category Name'); ?>" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_47"  name="category_name">
+                      <option value=""> <?php echo __('Select Any one'); ?></option>
                       <?php foreach ($lcdata as $lc) {  ?>
                         <option value="<?php echo $lc['id'];?>" <?php if($ltdata['leave_category_id'] == $lc['id']){ ?>selected <?php
 } ?> ><?php echo $lc['name'];?></option>
@@ -211,11 +211,11 @@ function scehduleaction(){
                     </select>
                   </div>
                   <div class="form-group col-lg-9">
-                   <span> Leave Policy Name </span>
-                   <input aria-label="Leave Type Name" class="form-control" type="text" name="leave_type_name"  value="<?php echo $ltdata['leave_type_name'];?>" required />
+                   <span> <?php echo __('Leave Policy Name'); ?> </span>
+                   <input aria-label="<?php echo __('Leave Type Name'); ?>" class="form-control" type="text" name="leave_type_name"  value="<?php echo $ltdata['leave_type_name'];?>" required />
                  </div>
                  <div class=" col-xl-9 separator separator-dashed my-10"></div>
-                 <div class="col-xl-9"><h4>Accrual Schedule</h4></div>
+                 <div class="col-xl-9"><h4><?php echo __('Accrual Schedule'); ?></h4></div>
                  <?php
                  $stage_index = 0;
                  foreach ($ltldata as $ackey => $acvalue) {
@@ -223,19 +223,19 @@ function scehduleaction(){
                    ?>
                    <div style="border-left: 3px solid #3699FF;" id="lavel" class="m-l-35">
                     <div class="col-xl-9 p-2 form-group">
-                      <div class="stage label font-weight-boldest label-rounded label-primary" >Stage <?php echo $stage_index; ?> </div>
-                      <span class="form-label col-lg-12"> leave Starts</span>
+                      <div class="stage label font-weight-boldest label-rounded label-primary" ><?php echo __('Stage'); ?> <?php echo $stage_index; ?> </div>
+                      <span class="form-label col-lg-12"> <?php echo __('leave Starts'); ?></span>
                       <input type="hidden" name="levelrowid[]" value="<?php echo $acvalue['id'];?>" >
                       <div class="col-lg-2  group mb-5 p-1" style="float: left;">
 
-                        <input aria-label="Action Number[]" class="form-control" type="text" name="action_number[]" value="<?php echo $acvalue['action_number'];?>" placeholder="10" required />
+                        <input aria-label="<?php echo __('Action Number[]'); ?>" class="form-control" type="text" name="action_number[]" value="<?php echo $acvalue['action_number'];?>" placeholder="10" required />
 
                       </div>
                       <div class="col-lg-6 p-1" style="float: left;">
 
 
-                        <select aria-label="Action Frequency[]" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_48_2"  name="action_frequency[]">
-                          <option value="">Select Any One </option>
+                        <select aria-label="<?php echo __('Action Frequency[]'); ?>" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_48_2"  name="action_frequency[]">
+                          <option value=""><?php echo __('Select Any One'); ?> </option>
 
                           <?php foreach ($first_accrual_list as $falkey => $falvalue) { ?>
                             <option value="<?php echo $falkey; ?>" <?php echo $acvalue['action_frequency']==$falkey ? 'selected':'';?> ><?php echo $falvalue;?></option>
@@ -244,7 +244,7 @@ function scehduleaction(){
                         </select>
                       </div>
                       <div class="col-lg-3 p-1" style="float: left;">
-                        <select aria-label="Before Or After[]" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_49_2"  name="before_or_after[]">
+                        <select aria-label="<?php echo __('Before Or After[]'); ?>" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_49_2"  name="before_or_after[]">
                           <?php foreach ($accruals_befaf_list as $bakey => $bavalue) { ?>
                             <option value="<?php echo $bakey; ?>" <?php echo $acvalue['before_or_after']==$bakey ? 'selected':'';?> ><?php echo $bavalue;?></option>
                           <?php } ?>
@@ -253,13 +253,13 @@ function scehduleaction(){
                     </div>
                     <div style="clear: both"></div>
                     <div class="col-xl-12 row form-group" >
-                     <span class="form-label ">  Amount Accrued</span>
+                     <span class="form-label ">  <?php echo __('Amount Accrued'); ?></span>
                      <div class="col-lg-1  group mb-5 p-1  m-l-15" style="float: left;">
                       <input aria-label="10" class="form-control" type="text" name="base_on[]"  placeholder="10" value="<?php echo $acvalue['base_on'];?>" required />
                     </div>
                     <div class="col-lg-4 p-1" style="float: left;">
-                      <select aria-label="Accured Action Based[]" class="form-control selectlist form-select js-example-basic-single"   name="accured_action_based[]"   id="selectscehduleaction" onchange="scehduleaction()">
-                        <option value="">Select Any One </option>
+                      <select aria-label="<?php echo __('Accured Action Based[]'); ?>" class="form-control selectlist form-select js-example-basic-single"   name="accured_action_based[]"   id="selectscehduleaction" onchange="scehduleaction()">
+                        <option value=""><?php echo __('Select Any One'); ?> </option>
                         <?php foreach ($accured_action_numberlist as $falkey => $falvalue) { ?>
                           <option value="<?php echo $falkey; ?>" <?php echo $acvalue['accured_action_based']==$falkey ? 'selected':'';?> ><?php echo $falvalue;?></option>
                         <?php } ?>
@@ -267,15 +267,15 @@ function scehduleaction(){
                     </div>
                     <div class="col-lg-6" id="monthlyschedule" style="<?php echo $acvalue['accured_action_based']=="M"?'':'display:none'; ?>">
                         <div class="row form-group">
-                          <span class="form-label col-lg-8  text-center mt-3">Select Day Of The Month</span>
-                          <div class="col-lg-4"><input aria-label="On The Day[]" type="number" class="form-control col-lg-4" name="on_the_day[]" value="<?php echo  $acvalue['day']; ?>" ></div>
+                          <span class="form-label col-lg-8  text-center mt-3"><?php echo __('Select Day Of The Month'); ?></span>
+                          <div class="col-lg-4"><input aria-label="<?php echo __('On The Day[]'); ?>" type="number" class="form-control col-lg-4" name="on_the_day[]" value="<?php echo  $acvalue['day']; ?>" ></div>
                         </div>
                     </div>
                     <div class="col-lg-6" id="yearlyschedule" style="<?php echo $acvalue['accured_action_based']=="Y"?'':'display:none'; ?>">
                         <div class="row form-group">
-                            <span class="form-label col-lg-3  text-center mt-3">Select Month</span>
+                            <span class="form-label col-lg-3  text-center mt-3"><?php echo __('Select Month'); ?></span>
                             <div class="col-lg-4">
-                                <select aria-label="On The Month[]" name="on_the_month[]"  style="width:150px;" class="form-control form-select js-example-basic-single">
+                                <select aria-label="<?php echo __('On The Month[]'); ?>" name="on_the_month[]"  style="width:150px;" class="form-control form-select js-example-basic-single">
                                   <?php foreach ($montharray as $mont=>$montname) {    ?>
                                     <option value="<?php echo $mont;?>" <?php if($mont == $acvalue['month_year_weeck']){ ?>selected <?php
 } ?> ><?php echo $montname;?></option>
@@ -283,15 +283,15 @@ function scehduleaction(){
                                 </select>
                             </div>
                             <div class="col-lg-4">
-                                <input aria-label="On The Day Year[]" type="text" class="form-control col-lg-4" name="on_the_day_year[]" value="<?php echo $acvalue['day']; ?>" />
+                                <input aria-label="<?php echo __('On The Day Year[]'); ?>" type="text" class="form-control col-lg-4" name="on_the_day_year[]" value="<?php echo $acvalue['day']; ?>" />
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6" id="weeklyschedule" style="<?php echo $acvalue['accured_action_based']=="W"?'':'display:none'; ?>">
                         <div class="row form-group">
-                            <span class="form-label col-lg-4  text-center mt-3">Select Week Day</span>
+                            <span class="form-label col-lg-4  text-center mt-3"><?php echo __('Select Week Day'); ?></span>
                             <div class="col-lg-8">
-                                <select aria-label="On The Week[]" name="on_the_week[]"  style="width:150px;" class="form-control form-select js-example-basic-single">
+                                <select aria-label="<?php echo __('On The Week[]'); ?>" name="on_the_week[]"  style="width:150px;" class="form-control form-select js-example-basic-single">
                                   <?php foreach ($weekdays as $weekkey=>$weekvalue) {    ?>
                                     <option value="<?php echo $weekkey;?>" <?php if($weekkey == $acvalue['month_year_weeck']){ ?>selected <?php
 } ?> ><?php echo $weekvalue;?></option>
@@ -309,24 +309,24 @@ function scehduleaction(){
                   <div style="clear: both"></div>
                   <div class="col-xl-9 mt-2">
                     <div class="col-xl-4 p-1 group mb-5 form-group" style="float: left;">
-                     <span class="form-label ">  Max Accrual  </span>
-                     <input aria-label="Max Accured Limit[]" class="form-control" type="text" name="max_accured_limit[]"  value="<?php echo $acvalue['max_accured_limit'];?>" required />
+                     <span class="form-label ">  <?php echo __('Max Accrual'); ?>  </span>
+                     <input aria-label="<?php echo __('Max Accured Limit[]'); ?>" class="form-control" type="text" name="max_accured_limit[]"  value="<?php echo $acvalue['max_accured_limit'];?>" required />
 
 
                    </div>
                    <div class="col-xl-4 p-1 form-group" style="float: left;">
-                     <span class="form-label ">Carryover </span>
-                     <select aria-label="Carry Over Limit[]" class="form-control  form-select js-example-basic-single"  name="carry_over_limit[]">
-                      <option value="">Select Any One </option>
+                     <span class="form-label "><?php echo __('Carryover'); ?> </span>
+                     <select aria-label="<?php echo __('Carry Over Limit[]'); ?>" class="form-control  form-select js-example-basic-single"  name="carry_over_limit[]">
+                      <option value=""><?php echo __('Select Any One'); ?> </option>
                       <?php foreach ($carryover_list as $coakey => $coavalue) { ?>
                         <option value="<?php echo $coakey; ?>" <?php echo $acvalue['carry_over_limit']==$coakey ? 'selected':'';?> ><?php echo $coavalue;?></option>
                       <?php } ?>
                     </select>
                   </div>
                   <div class="col-xl-4 p-1 form-group" style="float: left;">
-                   <span class="form-label ">Carryover Type</span>
-                   <select aria-label="Carry Over Limit Type[]" class="form-control selectlist form-select js-example-basic-single"  name="carry_over_limit_type[]">
-                    <option value="">Select Any One </option>
+                   <span class="form-label "><?php echo __('Carryover Type'); ?></span>
+                   <select aria-label="<?php echo __('Carry Over Limit Type[]'); ?>" class="form-control selectlist form-select js-example-basic-single"  name="carry_over_limit_type[]">
+                    <option value=""><?php echo __('Select Any One'); ?> </option>
                     <?php foreach ($percentage_list as $plkey => $plvalue) { ?>
                       <option value="<?php echo $plkey; ?>" <?php echo $acvalue['carry_over_limit_type']==$plkey ? 'selected':'';?> ><?php echo $plvalue;?></option>
                     <?php } ?>
@@ -336,8 +336,8 @@ function scehduleaction(){
                <div style="clear: both"></div>
                   <div class="col-xl-9 mt-2">
                     <div class="col-xl-4 p-1 group mb-5 form-group" style="float: left;">
-                     <span class="form-label ">  Leave Span  </span>
-                     <input aria-label="Leave Span[]" class="form-control" type="text" name="leave_span[]"  value="<?php echo $acvalue['leave_span'];?>" required />
+                     <span class="form-label ">  <?php echo __('Leave Span'); ?>  </span>
+                     <input aria-label="<?php echo __('Leave Span[]'); ?>" class="form-control" type="text" name="leave_span[]"  value="<?php echo $acvalue['leave_span'];?>" required />
                    </div>
                  </div>
 
@@ -346,14 +346,14 @@ function scehduleaction(){
           <?php } ?>
 
           <div class=" col-xl-9 separator separator-dashed my-10"></div>
-          <div><button type="button" class="btn btn-success float-right" onclick="addrows()">Add Stage</button></div>
+          <div><button type="button" class="btn btn-success float-right" onclick="addrows()"><?php echo __('Add Stage'); ?></button></div>
 
-          <div class="col-xl-9"><h4>Accrual Options</h4></div>
+          <div class="col-xl-9"><h4><?php echo __('Accrual Options'); ?></h4></div>
 
           <div class="col-lg-4 mt-5 form-group">
-            <span class="form-label ">First Accrualy</span>
-            <select aria-label="First Accrual" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_4555"   name="first_accrual">
-              <option value="">Select Any One </option>
+            <span class="form-label "><?php echo __('First Accrualy'); ?></span>
+            <select aria-label="<?php echo __('First Accrual'); ?>" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_4555"   name="first_accrual">
+              <option value=""><?php echo __('Select Any One'); ?> </option>
 
               <?php foreach ($first_accruals as $key => $value) {
                ?>
@@ -364,9 +364,9 @@ function scehduleaction(){
            </select>
          </div>
          <div class="col-lg-5 mt-5 form-group">
-          <span class="form-label ">Accruals Happen </span>
-          <select aria-label="Accruals Happen" class="form-control selectlist form-select js-example-basic-single"   name="accruals_happen">
-            <option value="">Select Any One </option>
+          <span class="form-label "><?php echo __('Accruals Happen'); ?> </span>
+          <select aria-label="<?php echo __('Accruals Happen'); ?>" class="form-control selectlist form-select js-example-basic-single"   name="accruals_happen">
+            <option value=""><?php echo __('Select Any One'); ?> </option>
             <?php foreach ($accruals_happen_list as $ahlkey => $ahlvalue) {
              ?>
              <option value="<?php echo $ahlkey;?>" <?php if($ahlkey == $ltdata['accruals_happen']){ ?> selected <?php
@@ -375,43 +375,43 @@ function scehduleaction(){
          </select>
        </div>
        <div class="form-group col-lg-4 mt-2">
-        <span class=""> Encashment </span>
-        <input aria-label="Encashment" class="form-control" type="text" name="encashment"  value="<?php echo $ltdata['encashment'];?>" required />
+        <span class=""> <?php echo __('Encashment'); ?> </span>
+        <input aria-label="<?php echo __('Encashment'); ?>" class="form-control" type="text" name="encashment"  value="<?php echo $ltdata['encashment'];?>" required />
 
 
       </div>
 
       <div class="col-lg-5 mt-2">
         <span>&nbsp;</span>
-        <select aria-label="Percentage" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_46"  name="percentage">
+        <select aria-label="<?php echo __('Percentage'); ?>" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_46"  name="percentage">
          <?php foreach ($percentage_list as $key => $value) {
            ?>
            <option value="<?php echo $key;?>" <?php if($key == $ltdata['percentage']){ ?> selected <?php
 } ?>  ><?php echo $value;?></option>
          <?php } ?>
-         <option value="">Select Any One </option>
+         <option value=""><?php echo __('Select Any One'); ?> </option>
        </select>
      </div>
      <div class=" col-xl-9 separator separator-dashed my-10"></div>
-     <div class="col-xl-9"><h4>Policy Restrictions</h4></div>
+     <div class="col-xl-9"><h4><?php echo __('Policy Restrictions'); ?></h4></div>
      <div class=" col-xl-9 form-group">
       <div>
-       <span class="">Weekends Between Leave Period:</span>
+       <span class=""><?php echo __('Weekends Between Leave Period:'); ?></span>
        <div class="ml-10 mb-2 mt-2">
         <div style="float:left;">
           <div class="form-radio">
             <div class="radio radio-inline">
               <label class="form-label">
-                <input aria-label="Radio option" class="form-check-input" style="display:none" type="radio" <?php if($ltdata['weekends_between_leave_period'] == '0'){ ?>checked <?php
+                <input aria-label="<?php echo __('Radio option'); ?>" class="form-check-input" style="display:none" type="radio" <?php if($ltdata['weekends_between_leave_period'] == '0'){ ?>checked <?php
 } ?> name="weekends_between_leave_period" value='0' />
-                <i class="helper"></i> <span> Count as Leave: Count after</span>
+                <i class="helper"></i> <span> <?php echo __('Count as Leave: Count after'); ?></span>
               </label>
             </div>
           </div>
         </div>
         <div style="float:left;">
-          <input aria-label="Weekend Leave Count" class="form-control" type="text" name="weekend_leave_count"  value="<?php echo $ltdata['weekend_leave_count'];?>" style="width:50px;height:30px;margin-top:-5px" />
-        </div><div >&nbsp; Days </div>
+          <input aria-label="<?php echo __('Weekend Leave Count'); ?>" class="form-control" type="text" name="weekend_leave_count"  value="<?php echo $ltdata['weekend_leave_count'];?>" style="width:50px;height:30px;margin-top:-5px" />
+        </div><div ><?php echo __('&nbsp; Days'); ?> </div>
         <span class="circle">
           <span class="check"></span>
         </span>
@@ -423,9 +423,9 @@ function scehduleaction(){
     <div class="form-radio">
       <div class="radio radio-inline">
         <label class="form-label">
-         <input aria-label="Radio option" class="form-check-input" type="radio" <?php if($ltdata['weekends_between_leave_period'] == '1'){ ?>checked <?php
+         <input aria-label="<?php echo __('Radio option'); ?>" class="form-check-input" type="radio" <?php if($ltdata['weekends_between_leave_period'] == '1'){ ?>checked <?php
 } ?> name="weekends_between_leave_period" value='1' />
-         <i class="helper"></i> <span>Don't count as leave</span>
+         <i class="helper"></i> <span><?php echo __('Don\'t count as leave'); ?></span>
        </label>
      </div>
    </div>
@@ -434,22 +434,22 @@ function scehduleaction(){
 
 <div class=" col-xl-9 mt-4">
   <div>
-   <span>Holidays Between Leave Period:</span>
+   <span><?php echo __('Holidays Between Leave Period:'); ?></span>
    <div class="ml-10 mb-2 mt-2">
     <div style="float:left;">
       <div class="form-radio">
         <div class="radio radio-inline">
           <label class="form-label">
-            <input aria-label="Radio option" class="form-check-input" type="radio"  <?php if($ltdata['holidays_between_leave_period'] == '0'){ ?>checked <?php
+            <input aria-label="<?php echo __('Radio option'); ?>" class="form-check-input" type="radio"  <?php if($ltdata['holidays_between_leave_period'] == '0'){ ?>checked <?php
 } ?> name="holidays_between_leave_period" value='0' />
-            <i class="helper"></i> <span>Count as Leave: Count after</span>
+            <i class="helper"></i> <span><?php echo __('Count as Leave: Count after'); ?></span>
           </label>
         </div>
       </div>
     </div>
     <div style="float:left;">
-      <input aria-label="Holiday Leave Count" class="form-control" type="text" name="holiday_leave_count"  value="<?php echo $ltdata['holiday_leave_count'];?>" style="width:50px;height:30px;margin-top:-5px" />
-    </div><div >&nbsp; Days </div>
+      <input aria-label="<?php echo __('Holiday Leave Count'); ?>" class="form-control" type="text" name="holiday_leave_count"  value="<?php echo $ltdata['holiday_leave_count'];?>" style="width:50px;height:30px;margin-top:-5px" />
+    </div><div ><?php echo __('&nbsp; Days'); ?> </div>
     <span class="circle">
       <span class="check"></span>
     </span>
@@ -460,9 +460,9 @@ function scehduleaction(){
   <div class="form-radio">
     <div class="radio radio-inline">
       <label class="form-label">
-       <input aria-label="Radio option" class="form-check-input" type="radio" <?php if($ltdata['holidays_between_leave_period'] == '1'){ ?>checked <?php
+       <input aria-label="<?php echo __('Radio option'); ?>" class="form-check-input" type="radio" <?php if($ltdata['holidays_between_leave_period'] == '1'){ ?>checked <?php
 } ?> name="holidays_between_leave_period" value='1' />
-       <i class="helper"></i> <span>Don't count as leave</span>
+       <i class="helper"></i> <span><?php echo __('Don\'t count as leave'); ?></span>
      </label>
    </div>
  </div>
@@ -475,7 +475,7 @@ function scehduleaction(){
 
 
                         <div class=" col-xl-9 mt-4">
-                          <span>While Applying Leave,Exceed Leave Blance: </span>
+                          <span><?php echo __('While Applying Leave,Exceed Leave Blance:'); ?> </span>
                           <div class="ml-10 mt-2">
 
 
@@ -488,23 +488,23 @@ function scehduleaction(){
 
                                 <div class="radio radio-inline">
                                   <label class="form-label">
-                                    <input aria-label="Radio option" class="form-check-input" type="radio" <?php if($ltdata['exceed_leave_balance'] == '0'){ ?>checked <?php
+                                    <input aria-label="<?php echo __('Radio option'); ?>" class="form-check-input" type="radio" <?php if($ltdata['exceed_leave_balance'] == '0'){ ?>checked <?php
 } ?> name="exceed_leave_balance" value='0' />
-                                    <i class="helper"></i>Don't Allow
+                                    <i class="helper"></i><?php echo __('Don\'t Allow'); ?>
                                   </label>
                                 </div>
                                 <div class="radio radio-inline">
                                   <label class="form-label">
-                                   <input aria-label="Radio option" class="form-check-input" type="radio" <?php if($ltdata['exceed_leave_balance'] == '1'){ ?>checked <?php
+                                   <input aria-label="<?php echo __('Radio option'); ?>" class="form-check-input" type="radio" <?php if($ltdata['exceed_leave_balance'] == '1'){ ?>checked <?php
 } ?> name="exceed_leave_balance" value='1' />
-                                   <i class="helper"></i>Allow
+                                   <i class="helper"></i><?php echo __('Allow'); ?>
                                  </label>
                                </div>
                                <div class="radio radio-inline">
                                 <label class="form-label">
-                                 <input aria-label="Radio option" class="form-check-input" type="radio" <?php if($ltdata['exceed_leave_balance'] == '2'){ ?>checked <?php
+                                 <input aria-label="<?php echo __('Radio option'); ?>" class="form-check-input" type="radio" <?php if($ltdata['exceed_leave_balance'] == '2'){ ?>checked <?php
 } ?> name="exceed_leave_balance" value='2' />
-                                 <i class="helper"></i> Allow and Mark as LOP
+                                 <i class="helper"></i> <?php echo __('Allow and Mark as LOP'); ?>
                                </label>
                              </div>
 
@@ -518,22 +518,22 @@ function scehduleaction(){
                      </div>
 
                      <div class=" col-xl-9 mt-4">
-                       <span>Duration(s) Allowed:</span>
+                       <span><?php echo __('Duration(s) Allowed:'); ?></span>
                        <div class="ml-10 mb-2 mt-2">
                         <div style="float:left;">
                          <div class="form-radio">
                            <div class="radio radio-inline">
                             <label class="form-label">
-                              <input aria-label="Radio option" class="form-check-input" type="radio"  <?php if($ltdata['duration_allowed'] == '0'){ ?>checked <?php
+                              <input aria-label="<?php echo __('Radio option'); ?>" class="form-check-input" type="radio"  <?php if($ltdata['duration_allowed'] == '0'){ ?>checked <?php
 } ?> name="duration_allowed" value='0' />
-                              <i class="helper"></i> Count as Leave: Count after
+                              <i class="helper"></i> <?php echo __('Count as Leave: Count after'); ?>
                             </label>
                           </div>
                         </div>
                       </div>
                       <div style="float:left;">
-                        <input aria-label="Duration Leave Count" class="form-control" type="text" name="duration_leave_count"  value="<?php echo $ltdata['duration_leave_count'];?>" style="width:50px;height:30px;margin-top:-5px" />
-                      </div><div >&nbsp; Days </div>
+                        <input aria-label="<?php echo __('Duration Leave Count'); ?>" class="form-control" type="text" name="duration_leave_count"  value="<?php echo $ltdata['duration_leave_count'];?>" style="width:50px;height:30px;margin-top:-5px" />
+                      </div><div ><?php echo __('&nbsp; Days'); ?> </div>
                       <span class="circle">
                         <span class="check"></span>
                       </span>
@@ -543,28 +543,28 @@ function scehduleaction(){
                  <div class="form-radio">
                    <div class="radio radio-inline">
                     <label class="form-label">
-                      <input aria-label="Radio option" class="form-check-input" type="radio" <?php if($ltdata['duration_allowed'] == '1'){ ?>checked <?php
+                      <input aria-label="<?php echo __('Radio option'); ?>" class="form-check-input" type="radio" <?php if($ltdata['duration_allowed'] == '1'){ ?>checked <?php
 } ?> name="duration_allowed" value='1' />
-                      <i class="helper"></i> Don't count as leave
+                      <i class="helper"></i> <?php echo __('Don\'t count as leave'); ?>
                     </label>
                   </div>
                 </div>
               </div>
             </div>
               <div class=" col-xl-9 mt-4">
-                       <span>Half Day Allowed:</span>
+                       <span><?php echo __('Half Day Allowed:'); ?></span>
                        <div class="ml-10 mb-2 mt-2">
                         <div style="float:left;">
-                              <input aria-label="Checkbox" type="checkbox" class="js-switch" <?php if($ltdata['half_day'] == '0'){ ?>checked <?php
+                              <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" class="js-switch" <?php if($ltdata['half_day'] == '0'){ ?>checked <?php
 } ?> name="half_day" value="0">
                       </div>
                     </div>
                   </div>
 
             <div class=" col-xl-9 separator separator-dashed my-10"></div>
-            <div class="col-xl-9 mt-3"><h4>Leave Applicable To</h4>  <button type="button" class="btn btn-outline-secondary btn-success " onclick="showpopup();"><i class="flaticon2-hourglass-1"></i>Add Applicable Criteria</button></div>
+            <div class="col-xl-9 mt-3"><h4><?php echo __('Leave Applicable To'); ?></h4>  <button type="button" class="btn btn-outline-secondary btn-success " onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?php echo __('Add Applicable Criteria'); ?></button></div>
                       </div>
-                      <button name="Save" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 mb-5 m-t-50">Submit</button>
+                      <button name="Save" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 mb-5 m-t-50"><?php echo __('Submit'); ?></button>
                     </form>
                   </div>
                 </div>

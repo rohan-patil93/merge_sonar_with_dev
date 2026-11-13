@@ -26,16 +26,16 @@ $_SESSION['download_data'] = [];
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>CSR MASTER DATA</h5>
+            <h5><?= __('CSR MASTER DATA') ?></h5>
             <div class="card-header-right">
                 <div class="dropdown-primary dropdown open">
                     <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More') ?></button>
                     <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                         <a class="dropdown-item waves-light waves-effect"
-                            href="custom_view_download.php?page=ProjectFinancial&format=csv" target="_blank">CSV</a>
+                            href="custom_view_download.php?page=ProjectFinancial&format=csv" target="_blank"><?= __('CSV') ?></a>
                         <a class="dropdown-item waves-light waves-effect"
-                            href="custom_view_download.php?page=ProjectFinancial&format=excel" target="_blank">Excel</a>
+                            href="custom_view_download.php?page=ProjectFinancial&format=excel" target="_blank"><?= __('Excel') ?></a>
                     </div>
                 </div>
             </div>
@@ -47,39 +47,39 @@ $_SESSION['download_data'] = [];
                     <table class="table table-bordered table-sm  align-middle">
                         <thead>
                             <tr class="bg-light">
-                                <th scope="col" class="text-right">SL No</th>
-                                <th scope="col">Entity</th>
-                                <th scope="col">Project Name</th>
-                                <th scope="col">Type of Project</th>
-                                <th scope="col">Nature of Work Done</th>
-                                <th scope="col">Type of Work</th>
-                                <th scope="col">Project Related to FY</th>
-                                <th scope="col">PO Issued Year</th>
-                                <th scope="col">PO No</th>
-                                <th scope="col">PO Date</th>
-                                <th scope="col" class="text-right">PO Value (Excl. Tax)</th>
-                                <th scope="col" class="text-right">GST @ 18%</th>
-                                <th scope="col" class="text-right">PO Value (Incl. Tax)</th>
-                                <th scope="col">Business Partner Code</th>
-                                <th scope="col">Business Partner Name</th>
-                                <th scope="col">Invoice Accounting Year</th>
-                                <th scope="col">Invoice Number</th>
-                                <th scope="col">Invoice Date</th>
-                                <th scope="col" class="text-right">Taxable Value</th>
-                                <th scope="col" class="text-right">GST Amt</th>
-                                <th scope="col" class="text-right">Other Cost</th>
-                                <th scope="col" class="text-right">Total Spent (Incl. GST)</th>
-                                <th scope="col" class="text-right">TDS Deducted</th>
-                                <th scope="col" class="text-right">Any Other Deduction</th>
-                                <th scope="col" class="text-right fw-bold">Net Payable</th>
-                                <th scope="col" class="text-right">Spent %</th>
-                                <th scope="col" class="text-right">Unspent %</th>
-                                <th scope="col" class="text-right">Paid Amount</th>
-                                <th scope="col" class="text-right">Delta</th>
-                                <th scope="col">Paid Date</th>
-                                <th scope="col">Paid From Which Bank</th>
-                                <th scope="col">Project Completion Date</th>
-                                <th scope="col">Project Status</th>
+                                <th scope="col" class="text-right"><?= __('SL No') ?></th>
+                                <th scope="col"><?= __('Entity') ?></th>
+                                <th scope="col"><?= __('Project Name') ?></th>
+                                <th scope="col"><?= __('Type of Project') ?></th>
+                                <th scope="col"><?= __('Nature of Work Done') ?></th>
+                                <th scope="col"><?= __('Type of Work') ?></th>
+                                <th scope="col"><?= __('Project Related to FY') ?></th>
+                                <th scope="col"><?= __('PO Issued Year') ?></th>
+                                <th scope="col"><?= __('PO No') ?></th>
+                                <th scope="col"><?= __('PO Date') ?></th>
+                                <th scope="col" class="text-right"><?= __('PO Value (Excl. Tax)') ?></th>
+                                <th scope="col" class="text-right"><?= __('GST @ 18%') ?></th>
+                                <th scope="col" class="text-right"><?= __('PO Value (Incl. Tax)') ?></th>
+                                <th scope="col"><?= __('Business Partner Code') ?></th>
+                                <th scope="col"><?= __('Business Partner Name') ?></th>
+                                <th scope="col"><?= __('Invoice Accounting Year') ?></th>
+                                <th scope="col"><?= __('Invoice Number') ?></th>
+                                <th scope="col"><?= __('Invoice Date') ?></th>
+                                <th scope="col" class="text-right"><?= __('Taxable Value') ?></th>
+                                <th scope="col" class="text-right"><?= __('GST Amt') ?></th>
+                                <th scope="col" class="text-right"><?= __('Other Cost') ?></th>
+                                <th scope="col" class="text-right"><?= __('Total Spent (Incl. GST)') ?></th>
+                                <th scope="col" class="text-right"><?= __('TDS Deducted') ?></th>
+                                <th scope="col" class="text-right"><?= __('Any Other Deduction') ?></th>
+                                <th scope="col" class="text-right fw-bold"><?= __('Net Payable') ?></th>
+                                <th scope="col" class="text-right"><?= __('Spent %') ?></th>
+                                <th scope="col" class="text-right"><?= __('Unspent %') ?></th>
+                                <th scope="col" class="text-right"><?= __('Paid Amount') ?></th>
+                                <th scope="col" class="text-right"><?= __('Delta') ?></th>
+                                <th scope="col"><?= __('Paid Date') ?></th>
+                                <th scope="col"><?= __('Paid From Which Bank') ?></th>
+                                <th scope="col"><?= __('Project Completion Date') ?></th>
+                                <th scope="col"><?= __('Project Status') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -121,7 +121,7 @@ $_SESSION['download_data'] = [];
                                     <td class=""><?php echo fromDate($r['paid_date']) ?? '-'; ?></td>
                                     <td class=""><?php echo $r['paid_from_bank'] ?? '-'; ?></td>
                                     <td class=""><?php echo fromDate($r['project_completion_date']) ?? '-'; ?></td>
-                                    <td class=""><?php echo $r['project_status'] ?? '-'; ?></td>
+                                    <td class=""><?php echo htmlspecialchars(__($r['project_status'] ?? '-')); ?></td>
                                 </tr>
                             <?php
                                 $cssdata[] = [
@@ -167,7 +167,7 @@ $_SESSION['download_data'] = [];
                 </div>
             <?php } else { ?>
                 <div class="text-center py-4">
-                    <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> No Data Available</p>
+                    <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> <?= __('No Data Available') ?></p>
                     <div class="text-center px-4">
                         <img class="mw-100 mh-300px max-h-300" alt="" src="assets/images/work.png" >
                     </div>

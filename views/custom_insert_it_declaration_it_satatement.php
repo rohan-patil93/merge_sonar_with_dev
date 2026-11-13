@@ -32,7 +32,7 @@
     <div class="card-header" id="headingOne7">
       <div class="card-title" data-bs-toggle="collapse" href="#collapseOne7" data-target="#collapseOne7">
         <?php include_once 'it_declaration_icon.php'; ?>
-        <div class="card-label p-2">A Income</div>
+        <div class="card-label p-2"><?php echo __('A Income'); ?></div>
       </div>
     </div>
     <div id="collapseOne7" class="collapse show" data-parent="#accordionExample7_it">
@@ -40,14 +40,14 @@
           <div class="row col-lg-12">
             <div class="col-lg-3">
               <table class="table table-bordered">
-                 <tr class="table-primary text-white"><th scope="col">Items</th> <th scope="col">Annual total</th></tr>
+                 <tr class="table-primary text-white"><th scope="col"><?php echo __('Items'); ?></th> <th scope="col"><?php echo __('Annual total'); ?></th></tr>
                  <?php $a_total =0 ;foreach ($pcsal as $earnings) { ?>
                    <tr><td><b><?php echo $earnings['component_name']; ?></b></td> <td><?php echo $earnings['yearly_amount']; ?></td></tr>
                 <?php $a_total = $a_total+$earnings['yearly_amount'];
 } ?>
 
 
-                <tr><td><b>Total</b></td> <td><?php echo $a_total; ?> </td></tr>
+                <tr><td><b><?php echo __('Total'); ?></b></td> <td><?php echo $a_total; ?> </td></tr>
               </table>
             </div>
             <div class="col-lg-9 ">
@@ -88,7 +88,7 @@
     <div class="card-header" id="headingTwo7">
       <div class="card-title " data-bs-toggle="collapse" href="#collapseTwoB7" data-target="#collapseTwoB7"  >
         <?php include_once 'it_declaration_icon.php'; ?>
-        <div class="card-label p-2 float-left">B Deduction</div>
+        <div class="card-label p-2 float-left"><?php echo __('B Deduction'); ?></div>
       </div>
     </div>
     <div id="collapseTwoB7" class="collapse" data-parent="#accordionExample7">
@@ -97,14 +97,14 @@
              <div class="row col-lg-12">
                 <div class="col-lg-3">
               <table class="table table-bordered">
-                 <tr class="table-primary text-white"><th scope="col">Items</th> <th scope="col">Annual total</th></tr>
+                 <tr class="table-primary text-white"><th scope="col"><?php echo __('Items'); ?></th> <th scope="col"><?php echo __('Annual total'); ?></th></tr>
                  <?php $b_total =0 ;foreach ($dedpcsal as $deductions) { ?>
                    <tr><td><b><?php echo $deductions['component_name']; ?></b></td> <td><?php echo $deductions['yearly_amount']; ?></td></tr>
                 <?php $b_total = $b_total+$deductions['yearly_amount'];
 } ?>
 
 
-                <tr><td><b>Total</b></td> <td><?php echo $b_total; ?> </td></tr>
+                <tr><td><b><?php echo __('Total'); ?></b></td> <td><?php echo $b_total; ?> </td></tr>
               </table>
             </div>
             <div class="col-lg-9">
@@ -146,21 +146,21 @@
   <div class="card-header" id="headingThree7">
    <div class="card-title collapsed" data-bs-toggle="collapse" href="#collapseOneC7" data-target="#collapseThreeC7">
     <?php include_once 'it_declaration_icon.php'; ?>
-    <div class="card-label p-2">C Perquisite Tax</div>
+    <div class="card-label p-2"><?php echo __('C Perquisite Tax'); ?></div>
    </div>
   </div>
   <div id="collapseOneC7" class="collapse" data-parent="#accordionExample7">
    <div class="row col-lg-12 ">
                 <div class="col-lg-3">
               <table class="table table-bordered">
-                 <tr class="table-primary text-white"><th scope="col">Items</th> <th scope="col">Annual total</th></tr>
+                 <tr class="table-primary text-white"><th scope="col"><?php echo __('Items'); ?></th> <th scope="col"><?php echo __('Annual total'); ?></th></tr>
                  <?php $c_total =0 ;foreach ($sadata['perquisite'] as $perquisite) { ?>
                    <tr><td><b><?php echo $perquisite['component_name']; ?></b></td> <td><?php echo $perquisite['yearly_amount']; ?></td></tr>
                 <?php $c_total = $c_total+$perquisite['yearly_amount'];
 } ?>
 
 
-                <tr><td><b>Total</b></td> <td><?php echo $c_total; ?> </td></tr>
+                <tr><td><b><?php echo __('Total'); ?></b></td> <td><?php echo $c_total; ?> </td></tr>
               </table>
             </div>
             <div class="col-lg-9">
@@ -201,7 +201,7 @@
     <div class="card-header" id="headingTwo7_2">
       <div class="card-title collapsed" data-bs-toggle="collapse" href="#collapseTwoD"  data-target="#collapseTwoD">
         <?php include_once 'it_declaration_icon.php'; ?>
-        <div class="card-label p-2">D Income Excluded From Tax</div>
+        <div class="card-label p-2"><?php echo __('D Income Excluded From Tax'); ?></div>
       </div>
     </div>
     <div id="collapseTwoD" class="collapse" data-parent="#accordionExample7">
@@ -209,7 +209,7 @@
             <!-- start -->
           <div class="row col-lg-12 text-dark">
          <div class="col-lg-10 p-l-40">
-              <b>Income Excluded From Tax </b>
+              <b><?php echo __('Income Excluded From Tax'); ?> </b>
             </div>
             <div class="col-lg-2">
               <b> <?php $d_total=0; echo  $d_total; ?> </b>
@@ -226,7 +226,7 @@
     <div class="card-header" id="headingTwo7_3">
       <div class="card-title collapsed" data-bs-toggle="collapse" href="#collapseTwoE"  data-target="#collapseTwoE">
         <?php include_once 'it_declaration_icon.php'; ?>
-        <div class="card-label p-2">E Gross Salary</div>
+        <div class="card-label p-2"><?php echo __('E Gross Salary'); ?></div>
       </div>
     </div>
     <div id="collapseTwoE" class="collapse" data-parent="#accordionExample7">
@@ -234,7 +234,7 @@
             <!-- start -->
           <div class="row col-lg-12 text-dark">
             <div class="col-lg-10 p-l-40">
-              <b> Gross Salary (A+C-D) </b>
+              <b> <?php echo __('Gross Salary (A+C-D)'); ?> </b>
             </div>
             <div class="col-lg-2">
               <b> <?php $e_total =  $a_total+$c_total-$d_total; echo  $e_total; ?> </b>
@@ -250,7 +250,7 @@
     <div class="card-header" id="headingTwo7_4">
       <div class="card-title collapsed" data-bs-toggle="collapse" href="#collapseTwoF" data-target="#collapseTwoF">
         <?php include_once 'it_declaration_icon.php'; ?>
-        <div class="card-label p-2"> F Exemption Under Section 10</div>
+        <div class="card-label p-2"> <?php echo __('F Exemption Under Section 10'); ?></div>
       </div>
     </div>
     <div id="collapseTwoF" class="collapse" data-parent="#accordionExample7">
@@ -259,14 +259,14 @@
           <div class="row col-lg-12">
            <table class="table table-bordered">
                 <tr class="table-primary text-white">
-                  <th scope="col">Month</th>
+                  <th scope="col"><?php echo __('Month'); ?></th>
                   <th scope="col">%</th>
-                  <th scope="col">Rent</th>
-                  <th scope="col">HRA</th>
-                  <th scope="col">Basic DA</th>
-                  <th scope="col">Basic DA Value</th>
-                  <th scope="col">Excess Rent</th>
-                  <th scope="col">HRA Exemption</th>
+                  <th scope="col"><?php echo __('Rent'); ?></th>
+                  <th scope="col"><?php echo __('HRA'); ?></th>
+                  <th scope="col"><?php echo __('Basic DA'); ?></th>
+                  <th scope="col"><?php echo __('Basic DA Value'); ?></th>
+                  <th scope="col"><?php echo __('Excess Rent'); ?></th>
+                  <th scope="col"><?php echo __('HRA Exemption'); ?></th>
                 </tr>
                     <?php
                     $start = $start_now;
@@ -306,7 +306,7 @@
                   <?php  $start = strtotime("+1 month", $start);
 } ?>
                  <tr class="">
-                  <td colspan="2">Total</td>
+                  <td colspan="2"><?php echo __('Total'); ?></td>
 
                   <td><?php echo $total_rent_hu; ?></td>
                   <td><?php echo $total_hra_hu; ?></td>
@@ -327,7 +327,7 @@
     <div class="card-header" id="headingTwo7_5">
       <div class="card-title collapsed" data-bs-toggle="collapse" href="#collapseTwoG" data-target="#collapseTwoG">
         <?php include_once 'it_declaration_icon.php';  $g_total =0.00;?>
-        <div class="card-label p-2">G Income From Perevious Employer</div>
+        <div class="card-label p-2"><?php echo __('G Income From Perevious Employer'); ?></div>
       </div>
     </div>
     <div id="collapseTwoG" class="collapse" data-parent="#accordionExample7">
@@ -336,11 +336,11 @@
           <div class="row col-lg-12">
             <table class="table table-bordered">
                  <tr class="table-primary text-white">
-                  <th scope="col"> Pay Items</th> <th scope="col">Amount </th></tr>
-                <tr><td><b>Total Income</b></td> <td>0.00</td></tr>
-                <tr><td><b>Income Tax</b></td> <td>0.00</td></tr>
-                <tr><td><b>Professional Tax</b></td> <td>0.00</td></tr>
-                <tr><td><b>Provident Fund </b></td> <td>0.00</td></tr>
+                  <th scope="col"> <?php echo __('Pay Items'); ?></th> <th scope="col"><?php echo __('Amount'); ?> </th></tr>
+                <tr><td><b><?php echo __('Total Income'); ?></b></td> <td>0.00</td></tr>
+                <tr><td><b><?php echo __('Income Tax'); ?></b></td> <td>0.00</td></tr>
+                <tr><td><b><?php echo __('Professional Tax'); ?></b></td> <td>0.00</td></tr>
+                <tr><td><b><?php echo __('Provident Fund'); ?> </b></td> <td>0.00</td></tr>
               </table>
           </div>
             <!-- END -->
@@ -353,7 +353,7 @@
     <div class="card-header" id="headingTwo7_6">
       <div class="card-title collapsed" data-bs-toggle="collapse" href="#collapseTwoH" data-target="#collapseTwoH">
         <?php include_once 'it_declaration_icon.php'; ?>
-        <div class="card-label p-2">H Deduction Under Section 16(Profesional tax)</div>
+        <div class="card-label p-2"><?php echo __('H Deduction Under Section 16(Profesional tax)'); ?></div>
       </div>
     </div>
     <div id="collapseTwoH" class="collapse" data-parent="#accordionExample7">
@@ -362,7 +362,7 @@
           <div class="row col-lg-12 text-dark">
 
             <div class="col-lg-10 p-l-40">
-              <b>Tax on employment under section 16(Profesional tax) </b>
+              <b><?php echo __('Tax on employment under section 16(Profesional tax)'); ?> </b>
             </div>
             <div class="col-lg-2">
               <b> <?php $h_total = 2400.00 ; echo $h_total; ?> </b>
@@ -378,7 +378,7 @@
     <div class="card-header" id="headingTwo7_7">
       <div class="card-title collapsed" data-bs-toggle="collapse" href="#collapseTwoI" data-target="#collapseTwoI">
         <?php include_once 'it_declaration_icon.php'; ?>
-        <div class="card-label p-2">I Income chargeable under the head salaries</div>
+        <div class="card-label p-2"><?php echo __('I Income chargeable under the head salaries'); ?></div>
       </div>
     </div>
     <div id="collapseTwoI" class="collapse" data-parent="#accordionExample7">
@@ -386,7 +386,7 @@
             <!-- start -->
           <div class="row col-lg-12 text-dark">
              <div class="col-lg-10 p-l-40">
-              <b>Income chargeable under the head salaries (E-F+G-H) </b>
+              <b><?php echo __('Income chargeable under the head salaries (E-F+G-H)'); ?> </b>
             </div>
             <div class="col-lg-2">
               <b> <?php $i_total = $e_total-$f_total+$g_total-$h_total;  echo $i_total; ?>  </b>
@@ -402,7 +402,7 @@
     <div class="card-header" id="headingTwo7_8">
       <div class="card-title collapsed" data-bs-toggle="collapse" href="#collapseTwoJ" data-target="#collapseTwoJ">
         <?php include_once 'it_declaration_icon.php'; ?>
-        <div class="card-label p-2">J Income from other sources (include house properties)</div>
+        <div class="card-label p-2"><?php echo __('J Income from other sources (include house properties)'); ?></div>
       </div>
     </div>
     <div id="collapseTwoJ" class="collapse" data-parent="#accordionExample7">
@@ -411,9 +411,9 @@
           <div class="row col-lg-12">
             <table class="table table-bordered">
                 <tr class="table-primary text-white">
-                  <th scope="col"> Description</th> <th scope="col">Amount </th></tr>
-                <tr><td><b>Other income 1</b></td> <td>0.00</td></tr>
-                <tr><td><b>Total</b></td> <td>0.00</td></tr>
+                  <th scope="col"> <?php echo __('Description'); ?></th> <th scope="col"><?php echo __('Amount'); ?> </th></tr>
+                <tr><td><b><?php echo __('Other income 1'); ?></b></td> <td>0.00</td></tr>
+                <tr><td><b><?php echo __('Total'); ?></b></td> <td>0.00</td></tr>
               </table>
               <?php $j_total=0.00;  ?>
           </div>
@@ -427,7 +427,7 @@
     <div class="card-header" id="headingTwo7_9">
       <div class="card-title collapsed" data-bs-toggle="collapse" href="#collapseTwoK" data-target="#collapseTwoK">
         <?php include_once 'it_declaration_icon.php'; ?>
-        <div class="card-label p-2">K Deduction Under Chapter VI(A)</div>
+        <div class="card-label p-2"><?php echo __('K Deduction Under Chapter VI(A)'); ?></div>
       </div>
     </div>
     <div id="collapseTwoK" class="collapse" data-parent="#accordionExample7">
@@ -436,13 +436,13 @@
           <div class="row col-lg-12">
              <table class="table table-bordered">
                 <tr class="table-primary text-white">
-                  <th scope="col"> Description</th> <th scope="col">Amount </th></tr>
+                  <th scope="col"> <?php echo __('Description'); ?></th> <th scope="col"><?php echo __('Amount'); ?> </th></tr>
                   <?php $tax80_total=0; foreach ($tax80c as $tax80) {
                     $tax80_total = $tax80_total + $tax80['amount'];?>
                 <tr><td><b><?php echo $tax80['name']; ?> </b></td> <td><?php echo $tax80['amount']; ?> </td></tr>
               <?php } ?>
 
-                <tr><td><b>Total</b></td> <td><?php echo $tax80_total; ?></td></tr>
+                <tr><td><b><?php echo __('Total'); ?></b></td> <td><?php echo $tax80_total; ?></td></tr>
               </table>
               <?php $k_total = $tax80_total; ?>
           </div>
@@ -456,7 +456,7 @@
     <div class="card-header" id="headingTwo7_10">
       <div class="card-title collapsed" data-bs-toggle="collapse" href="#collapseTwoL" data-target="#collapseTwoL">
         <?php include_once 'it_declaration_icon.php'; ?>
-        <div class="card-label p-2">L Standard Deduction</div>
+        <div class="card-label p-2"><?php echo __('L Standard Deduction'); ?></div>
       </div>
     </div>
     <div id="collapseTwoL" class="collapse" data-parent="#accordionExample7">
@@ -464,7 +464,7 @@
             <!-- start -->
           <div class="row col-lg-12 text-dark">
            <div class="col-lg-10 p-l-40">
-              <b>Standard Deduction </b>
+              <b><?php echo __('Standard Deduction'); ?> </b>
             </div>
             <div class="col-lg-2">
               <b> <?php $l_total=0; ?> 0.00 </b>
@@ -480,7 +480,7 @@
     <div class="card-header" id="headingTwo7_11">
       <div class="card-title collapsed" data-bs-toggle="collapse" href="#collapseTwoM" data-target="#collapseTwoM">
         <?php include_once 'it_declaration_icon.php'; ?>
-        <div class="card-label p-2">M Taxable Income</div>
+        <div class="card-label p-2"><?php echo __('M Taxable Income'); ?></div>
       </div>
     </div>
     <div id="collapseTwoM" class="collapse" data-parent="#accordionExample7">
@@ -489,7 +489,7 @@
           <div class="row col-lg-12 text-dark">
 
             <div class="col-lg-10 p-l-40">
-              <b>Taxable Income (I+J-K-L) </b>
+              <b><?php echo __('Taxable Income (I+J-K-L)'); ?> </b>
             </div>
             <div class="col-lg-2">
               <b> <?php $m_total = $i_total+$j_total-$k_total-$l_total; echo $m_total; ?>  </b>
@@ -524,7 +524,7 @@
     <div class="card-header" id="headingTwo7_12">
       <div class="card-title collapsed" data-bs-toggle="collapse" href="#collapseTwoN" data-target="#collapseTwoN">
         <?php include_once 'it_declaration_icon.php'; ?>
-        <div class="card-label p-2">N Annual Tax</div>
+        <div class="card-label p-2"><?php echo __('N Annual Tax'); ?></div>
       </div>
     </div>
     <div id="collapseTwoN" class="collapse" data-parent="#accordionExample7">
@@ -532,9 +532,9 @@
             <!-- start -->
           <div class="row col-lg-12">
               <table class="table table-bordered">
-                  <tr class="table-primary text-white"><th scope="col"> Tax</th> <th scope="col">Amount </th></tr>
-                  <tr><td><b>Income Tax</b></td> <td><?php echo $cal_intax; ?></td></tr>
-                  <tr><td><b>Total </b></td> <td><?php echo $cal_intax; ?></td></tr>
+                  <tr class="table-primary text-white"><th scope="col"> <?php echo __('Tax'); ?></th> <th scope="col"><?php echo __('Amount'); ?> </th></tr>
+                  <tr><td><b><?php echo __('Income Tax'); ?></b></td> <td><?php echo $cal_intax; ?></td></tr>
+                  <tr><td><b><?php echo __('Total'); ?> </b></td> <td><?php echo $cal_intax; ?></td></tr>
               </table>
           </div>
             <!-- END -->
@@ -555,7 +555,7 @@
     <input type="hidden" name="current_status" value="0">
     <input type="hidden" name="it_declaration" value="it_declaration">
 
-    <button type="submit" name="Submit" class="btn btn-primary waves-effect waves-light" value="Submit">Submit</button>
+    <button type="submit" name="Submit" class="btn btn-primary waves-effect waves-light" value="Submit"><?php echo __('Submit'); ?></button>
   </form>
   <!-- End accodion -->
 </div>

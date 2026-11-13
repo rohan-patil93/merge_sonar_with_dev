@@ -14,11 +14,11 @@ $earnings = json_decode($cr_data,1);
         count++;
         var htmlRows = '';
 
-        htmlRows += '<div class="row align-items-center sfitemRow" id="static_div_'+count+'" style="margin-top: 10px;"><div class="col-lg-3"><select aria-label="Earning Component []" class="form-control form-select js-example-basic-single" name="earning_component_id[]" id="earning_component_id_'+count+'"><option value=""> Select Any One</option><?php foreach($earnings as $earn){ ?><option  value="<?php echo $earn['id']; ?>"> <?php echo $earn['name']; ?></option><?php
+        htmlRows += '<div class="row align-items-center sfitemRow" id="static_div_'+count+'" style="margin-top: 10px;"><div class="col-lg-3"><select aria-label="Earning Component []" class="form-control form-select js-example-basic-single" name="earning_component_id[]" id="earning_component_id_'+count+'"><option value=""><?= __('Select Any One') ?></option><?php foreach($earnings as $earn){ ?><option  value="<?php echo $earn['id']; ?>"> <?php echo $earn['name']; ?></option><?php
 } ?></select></div>';
          htmlRows += '<div class="col-lg-3"><input aria-label="Transaction Date[]" type="text"class="form-control datepicker"  id="transaction_date_'+count+'"  value=""   name="transaction_date[]"> </div>';
         htmlRows += '<div class="col-lg-3"><input aria-label="0.00" type="text" class="form-control text-right"  id="amount_'+count+'"  value=""  name="amount[]" placeholder="0.00"> </div><div class="col-lg-2"><textarea aria-label="Comments" name="comments" ></textarea></div>';
-        htmlRows += '<div class="col-lg-1"><input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)">Delete</button></div></div>';
+        htmlRows += '<div class="col-lg-1"><input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)"><?= __('Delete') ?></button></div></div>';
         console.log(htmlRows);
         $('#append_staticks').append(htmlRows);
         $(".js-example-basic-single").select2();
@@ -28,7 +28,7 @@ $earnings = json_decode($cr_data,1);
 </script>
 <div class="modal-header card-header">
 
-    <h5 class="text-white">Currency Convertor</h5>
+    <h5 class="text-white"><?= __('Currency Convertor') ?></h5>
 
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
@@ -61,7 +61,7 @@ $earnings = json_decode($cr_data,1);
                         <div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
                             <div class="col-lg-3">
                                 <select aria-label="Earning Component []" class="form-control form-select js-example-basic-single" name="earning_component_id[]" id="earning_component_id_<?php echo $i; ?>">
-                                    <option value=""> Select Any One</option>
+                                    <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($earnings as $earn){ ?>
                                         <option <?php if($data['earning_component_id'] == $earn['id']){ echo "selected";
 } ?> value="<?php echo $earn['id']; ?>"> <?php echo $earn['name']; ?></option>
@@ -80,20 +80,20 @@ $earnings = json_decode($cr_data,1);
                             </div>
                             <div class="col-lg-1">
                                 <input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >
-                                <button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)">Delete</button>
+                                <button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)"><?= __('Delete') ?></button>
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="row align-items-center m-l-5 mt-4  col-lg-2" >
-                    <button class="btn btn-success" id="addstatickRows" type="button" onclick="addstatickRowsadataq()">+ Add More</button>&nbsp;&nbsp;
+                    <button class="btn btn-success" id="addstatickRows" type="button" onclick="addstatickRowsadataq()"><?= __('+ Add More') ?></button>&nbsp;&nbsp;
                 </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Submit</button>
+        <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?= __('Close') ?></button>
+        <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?= __('Submit') ?></button>
     </div>
 
 </form>

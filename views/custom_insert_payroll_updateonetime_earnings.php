@@ -6,10 +6,10 @@
             const file = fileInput.files[0];
 
             if (!file) {
-                alert('Please select a file first!');
+                alert(<?php echo json_encode(__('Please select a file first!')); ?>);
                 return;
             }
-            $('#showdetailear').html('<img src="assets/images/spiner/spiner5.gif" alt="Loading...">').show();
+            $('#showdetailear').html('<img src="assets/images/spiner/spiner5.gif" alt="<?php echo htmlspecialchars(__('Loading...'), ENT_QUOTES); ?>">').show();
             const reader = new FileReader();
 
             reader.onload = function(e) {
@@ -64,7 +64,7 @@
 <div class="card card-custom gutter-b">
     <div class="card-header border-0 ">
         <div class="card-header table-card-header">
-            <h5>  Update Onetime Earnings</h5>
+            <h5>  <?php echo __('Update Onetime Earnings'); ?></h5>
         </div>
     </div>
     <div class="card-body py-0">
@@ -73,10 +73,10 @@
                 <div class="row">
                     <div class="col-xl-8">
                         <div class="form-group row">
-                            <span class="col-4">Update Onetime</span>
+                            <span class="col-4"><?php echo __('Update Onetime'); ?></span>
                             <div class="col-8">
                                 <div class="custom-file">
-                                    <input aria-label="File" type="file" class="form-control fill" id="fileInput" name="file">
+                                    <input aria-label="<?php echo __('File'); ?>" type="file" class="form-control fill" id="fileInput" name="file">
                                 </div>
                             </div>
                         </div>
@@ -85,11 +85,11 @@
                                 &nbsp;
                             </span>
                             <div class="col-5">
-                                <span> Sample CSV file for <a target="_blank" class="text-primary" href="csv_download.php?table=employee_other_earnings"> Download</a></span>
+                                <span> <?php echo __('Sample CSV file for'); ?> <a target="_blank" class="text-primary" href="csv_download.php?table=employee_other_earnings"> <?php echo __('Download'); ?></a></span>
                             </div>
                             <div class="col-3 text-right">
 
-                                 <button type="button" onclick="uploadFile()" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" >Upload</button>
+                                 <button type="button" onclick="uploadFile()" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" ><?php echo __('Upload'); ?></button>
 
                             </div>
                         </div>

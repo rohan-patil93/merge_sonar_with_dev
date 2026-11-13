@@ -21,7 +21,7 @@
                         <span class="kt-portlet__head-icon">
                                     <i class="kt-font-brand flaticon-add-circular-button"></i>
                                 </span>
-                        <h3 class="card-label">&nbsp;  Candidates </h3>
+                        <h3 class="card-label">&nbsp;  <?= __('Candidates') ?> </h3>
                     </div>
                     <div class="card-toolbar">
                         &nbsp;
@@ -56,8 +56,8 @@
                                                                 </span>
                                                             </div>
                                                             <div class="wizard-label">
-                                                                <h3 class="wizard-title">Step 1</h3>
-                                                                <div class="wizard-desc">Setup Your Account Details</div>
+                                                                <h3 class="wizard-title"><?= __('Step') ?> 1</h3>
+                                                                <div class="wizard-desc"><?= __('Setup Your Account Details') ?></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -79,8 +79,8 @@
                                                                 </span>
                                                             </div>
                                                             <div class="wizard-label">
-                                                                <h3 class="wizard-title">Step 2</h3>
-                                                                <div class="wizard-desc">Setup Your Account Details</div>
+                                                                <h3 class="wizard-title"><?= __('Step') ?> 2</h3>
+                                                                <div class="wizard-desc"><?= __('Setup Your Account Details') ?></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -102,8 +102,8 @@
                                                                 </span>
                                                             </div>
                                                             <div class="wizard-label">
-                                                                <h3 class="wizard-title">Step 3</h3>
-                                                                <div class="wizard-desc">Setup Your Account Details</div>
+                                                                <h3 class="wizard-title"><?= __('Step') ?> 3</h3>
+                                                                <div class="wizard-desc"><?= __('Setup Your Account Details') ?></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -125,8 +125,8 @@
                                                                 </span>
                                                             </div>
                                                             <div class="wizard-label">
-                                                                <h3 class="wizard-title">Step 4</h3>
-                                                                <div class="wizard-desc">Setup Your Account Details</div>
+                                                                <h3 class="wizard-title"><?= __('Step') ?> 4</h3>
+                                                                <div class="wizard-desc"><?= __('Setup Your Account Details') ?></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -148,8 +148,8 @@
                                                                 </span>
                                                             </div>
                                                             <div class="wizard-label">
-                                                                <h3 class="wizard-title">Step 5</h3>
-                                                                <div class="wizard-desc">Setup Your Account Details</div>
+                                                                <h3 class="wizard-title"><?= __('Step') ?> 5</h3>
+                                                                <div class="wizard-desc"><?= __('Setup Your Account Details') ?></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -171,8 +171,8 @@
                                                                 </span>
                                                             </div>
                                                             <div class="wizard-label">
-                                                                <h3 class="wizard-title">Step 6</h3>
-                                                                <div class="wizard-desc">Setup Your Account Details</div>
+                                                                <h3 class="wizard-title"><?= __('Step') ?> 6</h3>
+                                                                <div class="wizard-desc"><?= __('Setup Your Account Details') ?></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -194,8 +194,8 @@
                                                                 </span>
                                                             </div>
                                                             <div class="wizard-label">
-                                                                <h3 class="wizard-title">Step 7</h3>
-                                                                <div class="wizard-desc">Setup Your Account Details</div>
+                                                                <h3 class="wizard-title"><?= __('Step') ?> 7</h3>
+                                                                <div class="wizard-desc"><?= __('Setup Your Account Details') ?></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -212,18 +212,18 @@
                 <div class="pb-5" data-wizard-type="step-content" >
                     <div class="row">
                                      <div class="form-group col-lg-12">
-                 <span>Image</span>
+                 <span><?= __('Image') ?></span>
                 <div class="col-lg-9 col-xl-6">
                     <div class="image-input image-input-outline" id="kt_image_61">
                         <div class="image-input-wrapper" style="background-image: url(uploads/all/no-image.jpg)"></div>
 
-                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="<?= __('Change avatar') ?>">
                             <i class="fa fa-pen icon-sm text-muted"></i>
                             <input aria-label="Image" type="file" name="image" id="image" accept=".png, .jpg, .jpeg">
                         <input type="hidden" name="hidimage" value="">
                         </label>
 
-                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="<?= __('Cancel avatar') ?>">
                             <i class="ki ki-bold-close icon-xs text-muted"></i>
                         </span>
                     </div>
@@ -232,39 +232,39 @@
             </div>
 
             <div class="form-group col-lg-12">
-        <span>First Name</span>
+        <span><?= __('First Name') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="First Name" class="form-control"  type="text"  id="first_name" name="first_name"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="first_name_err"> Please enter First Name </div>
+        <div style="display: none;color: red;" id="first_name_err"> <?= __('Please enter First Name') ?> </div>
     </div>
 
             <div class="form-group col-lg-12">
-        <span>Middle Name</span>
+        <span><?= __('Middle Name') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Middle Name" class="form-control"  type="text"  id="middle_name" name="middle_name"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="middle_name_err"> Please enter Middle Name </div>
+        <div style="display: none;color: red;" id="middle_name_err"> <?= __('Please enter Middle Name') ?> </div>
     </div>
 
             <div class="form-group col-lg-12">
-        <span>Last Name</span>
+        <span><?= __('Last Name') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Last Name" class="form-control"  type="text"  id="last_name" name="last_name"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="last_name_err"> Please enter Last Name </div>
+        <div style="display: none;color: red;" id="last_name_err"> <?= __('Please enter Last Name') ?> </div>
     </div>
 
             <div class="form-group col-lg-12">
-        <span>Display Name</span>
+        <span><?= __('Display Name') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Display Name" class="form-control"  type="text"  id="display_name" name="display_name"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="display_name_err"> Please enter Display Name </div>
+        <div style="display: none;color: red;" id="display_name_err"> <?= __('Please enter Display Name') ?> </div>
     </div>
 
                         </div>
@@ -274,34 +274,34 @@
                 <div class="pb-5" data-wizard-type="step-content" >
                     <div class="row">
                                     <div class="form-group col-lg-12">
-            <span>Address</span>
+            <span><?= __('Address') ?></span>
             <div class="kt-radio-inline">
             <textarea aria-label="Address" type="text" class="form-control" id="address" name="address" ></textarea>
             </div>
-            <div style="display: none;color: red;" id="address_err"> Please Select Address </div>
+            <div style="display: none;color: red;" id="address_err"> <?= __('Please Select Address') ?> </div>
         </div>
 
 
             <div class="form-group col-lg-6">
-        <span>Post Code</span>
+        <span><?= __('Post Code') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Post Code" class="form-control"  type="text"  id="post_code" name="post_code"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="post_code_err"> Please enter Post Code </div>
+        <div style="display: none;color: red;" id="post_code_err"> <?= __('Please enter Post Code') ?> </div>
     </div>
 
             <div class="form-group col-lg-6">
-        <span>Phone</span>
+        <span><?= __('Phone') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Phone" class="form-control"  type="text"  id="phone" name="phone"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="phone_err"> Please enter Phone </div>
+        <div style="display: none;color: red;" id="phone_err"> <?= __('Please enter Phone') ?> </div>
     </div>
 
             <div class="form-group col-lg-12">
-        <span>Email</span>
+        <span><?= __('Email') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Email" class="form-control"  type="text"  id="email_id" name="email_id"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -316,7 +316,7 @@
                 <div class="pb-5" data-wizard-type="step-content" >
                     <div class="row">
                                         <div class="form-group col-lg-6">
-            <span>Gender</span>
+            <span><?= __('Gender') ?></span>
             <div class="radio-inline">
 
             <label class="radio"> <input aria-label="Gender" type="radio"   name="gender" value='F'>    <span></span>F </label>
@@ -327,14 +327,14 @@
         </div>
 
                         <div class="form-group col-lg-6">
-        <span>Marital Status</span>
+        <span><?= __('Marital Status') ?></span>
         <select aria-label="Marital Status" class="form-control kt-select2" id="kt_select2_41" name="marital_status">
-            <option value=""> Select Any one Marital Status</option>
+            <option value=""> <?= __('Select Any one Marital Status') ?></option>
 
-                <option  value="M">Married</option>
+                <option  value="M"><?= __('Married') ?></option>
             </optgroup>
 
-                <option  value="S">Single</option>
+                <option  value="S"><?= __('Single') ?></option>
             </optgroup>
             </select>
         <div style="display: none;color: red;" id="marital_status_err"> Please Select Marital Status </div>
@@ -342,7 +342,7 @@
 
 
         <div class="form-group col-lg-6" >
-            <span>Date Of Birth</span>
+            <span><?= __('Date Of Birth') ?></span>
 
                 <div class="input-group date">
                                         <input aria-label="Date Of Birth" type="text" class="form-control"  value="11/09/2020"  name="date_of_birth"  id="kt_datepicker_31" />
@@ -356,7 +356,7 @@
         </div>
 
             <div class="form-group col-lg-6">
-        <span>Hiring Source</span>
+        <span><?= __('Hiring Source') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Hiring Source" class="form-control"  type="text"  id="hiring_source" name="hiring_source"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -371,7 +371,7 @@
                 <div class="pb-5" data-wizard-type="step-content" >
                     <div class="row">
                                 <div class="form-group col-lg-6">
-        <span>Total Experiance</span>
+        <span><?= __('Total Experiance') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Total Experiance" class="form-control"  type="text"  id="total_experiance" name="total_experiance"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -380,7 +380,7 @@
     </div>
 
             <div class="form-group col-lg-6">
-        <span>Notice Period</span>
+        <span><?= __('Notice Period') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Notice Period" class="form-control"  type="text"  id="notice_period" name="notice_period"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -389,14 +389,14 @@
     </div>
 
                         <div class="form-group col-lg-6">
-        <span>Negotiatable</span>
+        <span><?= __('Negotiatable') ?></span>
         <select aria-label="Np Negotiatable" class="form-control kt-select2" id="kt_select2_42" name="np_negotiatable">
-            <option value=""> Select Any one Negotiatable</option>
+            <option value=""> <?= __('Select Any one Negotiatable') ?></option>
 
-                <option  value="1">NO</option>
+                <option  value="1"><?= __('NO') ?></option>
             </optgroup>
 
-                <option  selected  value="0">YES</option>
+                <option  selected  value="0"><?= __('YES') ?></option>
             </optgroup>
             </select>
         <div style="display: none;color: red;" id="np_negotiatable_err"> Please Select Negotiatable </div>
@@ -404,7 +404,7 @@
 
 
             <div class="form-group col-lg-6">
-        <span>Candidate Experiances</span>
+        <span><?= __('Candidate Experiances') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Candidate Experiances" class="form-control"  type="text"  id="candidate_experiances" name="candidate_experiances"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -419,7 +419,7 @@
                 <div class="pb-5" data-wizard-type="step-content" >
                     <div class="row">
                                 <div class="form-group col-lg-6">
-        <span>Candidate Qualifications</span>
+        <span><?= __('Candidate Qualifications') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Candidate Qualifications" class="form-control"  type="text"  id="candidate_qualifications" name="candidate_qualifications"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -434,7 +434,7 @@
                 <div class="pb-5" data-wizard-type="step-content" >
                     <div class="row">
                                 <div class="form-group col-lg-6">
-        <span>Employee Dependents</span>
+        <span><?= __('Employee Dependents') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Employee Dependents" class="form-control"  type="text"  id="employee_dependents" name="employee_dependents"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -449,7 +449,7 @@
                 <div class="pb-5" data-wizard-type="step-content" >
                     <div class="row">
                                 <div class="form-group col-lg-6">
-        <span>Employee Contacts</span>
+        <span><?= __('Employee Contacts') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Employee Contacts" class="form-control"  type="text"  id="employee_contacts" name="employee_contacts"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -458,7 +458,7 @@
     </div>
 
             <div class="form-group col-lg-6">
-        <span>Current Location</span>
+        <span><?= __('Current Location') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Current Location" class="form-control"  type="text"  id="current_location" name="current_location"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -467,7 +467,7 @@
     </div>
 
             <div class="form-group col-lg-6">
-        <span>Reason For Change</span>
+        <span><?= __('Reason For Change') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Reason For Change" class="form-control"  type="text"  id="reason_for_change" name="reason_for_change"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -476,7 +476,7 @@
     </div>
 
             <div class="form-group col-lg-6">
-        <span>Relocate</span>
+        <span><?= __('Relocate') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Relocate" class="form-control"  type="text"  id="relocate" name="relocate"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -485,7 +485,7 @@
     </div>
 
             <div class="form-group col-lg-6">
-        <span>Current Ctc</span>
+        <span><?= __('Current Ctc') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Current Ctc" class="form-control"  type="text"  id="current_ctc" name="current_ctc"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -494,7 +494,7 @@
     </div>
 
             <div class="form-group col-lg-6">
-        <span>Expected Ctc</span>
+        <span><?= __('Expected Ctc') ?></span>
         <div class="input-group input-icon-right">
             <input aria-label="Expected Ctc" class="form-control"  type="text"  id="expected_ctc" name="expected_ctc"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -507,11 +507,11 @@
 
     <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                                                 <div class="mr-2">
-                                                                    <button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev">Previous</button>
+                                                                    <button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev"><?= __('Previous') ?></button>
                                                                 </div>
                                                                 <div>
-                                                                    <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit">Submit</button>
-                                                                    <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">Next</button>
+                                                                    <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit"><?= __('Submit') ?></button>
+                                                                    <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next"><?= __('Next') ?></button>
                                                                 </div>
                                                             </div>
                                                         </div>

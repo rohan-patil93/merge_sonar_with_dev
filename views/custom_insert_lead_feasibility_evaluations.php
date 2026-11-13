@@ -24,19 +24,19 @@ $users_res = $res['users_res'];
     <form id="evaluationForm" <?php echo isset($feasibility_requirement_res['current_status']) && $feasibility_requirement_res['current_status'] == ST_APPROVED ? 'style="pointer-events:none; opacity:0.7"' : '';  ?>>
         <div class="row mt-4">
             <div class="col-lg-12 m-t-10 m-b-10 ">
-                <h5 style="font-weight: bold;">Evaluation</h5>
+                <h5 style="font-weight: bold;"><?php echo __('Evaluation'); ?></h5>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <span class="form-label">Evaluation Date <span class='text-danger'>*</span></span>
-                    <input aria-label="Evaluation Date" type="text" class="form-control datepicker" name="evaluation_date" value="<?php echo isset($data['evaluation_date']) ? htmlspecialchars(fromDate($data['evaluation_date'])) : ''; ?>" required>
+                    <span class="form-label"><?php echo __('Evaluation Date'); ?> <span class='text-danger'>*</span></span>
+                    <input aria-label="<?php echo __('Evaluation Date'); ?>" type="text" class="form-control datepicker" name="evaluation_date" value="<?php echo isset($data['evaluation_date']) ? htmlspecialchars(fromDate($data['evaluation_date'])) : ''; ?>" required>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <span class="form-label">Evaluation By <span class='text-danger'>*</span></span>
-                    <select aria-label="Evaluated By" class="form-select js-example-basic-single form-control" name="evaluated_by" required>
-                        <option value="">Select Evaluator</option>
+                    <span class="form-label"><?php echo __('Evaluation By'); ?> <span class='text-danger'>*</span></span>
+                    <select aria-label="<?php echo __('Evaluated By'); ?>" class="form-select js-example-basic-single form-control" name="evaluated_by" required>
+                        <option value=""><?php echo __('Select Evaluator'); ?></option>
                         <?php foreach ($users_res as $id => $name) { ?>
                             <option value="<?php echo $id; ?>"
                                 <?php
@@ -54,31 +54,31 @@ $users_res = $res['users_res'];
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <span class="form-label">Start Date <span class='text-danger'>*</span></span>
-                    <input aria-label="Start Date" type="text" class="form-control datepicker" name="start_date" value="<?php echo isset($data['start_date']) ? htmlspecialchars(fromDate($data['start_date'])) : ''; ?>" required>
+                    <span class="form-label"><?php echo __('Start Date'); ?> <span class='text-danger'>*</span></span>
+                    <input aria-label="<?php echo __('Start Date'); ?>" type="text" class="form-control datepicker" name="start_date" value="<?php echo isset($data['start_date']) ? htmlspecialchars(fromDate($data['start_date'])) : ''; ?>" required>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <span class="form-label">End Date <span class='text-danger'>*</span></span>
-                    <input aria-label="End Date" type="text" class="form-control datepicker" name="end_date" value="<?php echo isset($data['end_date']) ? htmlspecialchars(fromDate($data['end_date'])) : ''; ?>" required onchange="validateEndDate()">
+                    <span class="form-label"><?php echo __('End Date'); ?> <span class='text-danger'>*</span></span>
+                    <input aria-label="<?php echo __('End Date'); ?>" type="text" class="form-control datepicker" name="end_date" value="<?php echo isset($data['end_date']) ? htmlspecialchars(fromDate($data['end_date'])) : ''; ?>" required onchange="validateEndDate()">
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <span class="form-label">Estimated Budget <span class='text-danger'>*</span></span>
-                    <input aria-label="Estimated Budget" type="number" class="form-control text-right" name="estimated_budget" value="<?php echo isset($data['estimated_budget']) ? htmlspecialchars($data['estimated_budget']) : ''; ?>" required>
+                    <span class="form-label"><?php echo __('Estimated Budget'); ?> <span class='text-danger'>*</span></span>
+                    <input aria-label="<?php echo __('Estimated Budget'); ?>" type="number" class="form-control text-right" name="estimated_budget" value="<?php echo isset($data['estimated_budget']) ? htmlspecialchars($data['estimated_budget']) : ''; ?>" required>
                 </div>
             </div>
             <div class="col-lg-6"></div>
             <div style="pointer-events: auto; opacity: 1;" class="col-lg-6 mt-3">
-                <button type="button" class="btn btn-secondary prev-btn" onclick="previous('custom_insert_feasibility_requirements', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)">Previous</button>
+                <button type="button" class="btn btn-secondary prev-btn" onclick="previous('custom_insert_feasibility_requirements', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)"><?php echo __('Previous'); ?></button>
             </div>
             <div style="pointer-events: auto; opacity: 1;" class="col-lg-6 text-end mt-3">
                 <?php if ($feasibility_requirement_res['current_status'] == ST_APPROVED) { ?>
-                    <button class="btn btn-primary next-btn" type="button" id="saveNextBtn" onclick="withOutSaving('custom_insert_lead_feasibility_boms', <?php echo $data['id']; ?>, <?php echo $_GET['lead_id']; ?>, <?php echo $feasibility_id; ?>)">Save & Next</button>
+                    <button class="btn btn-primary next-btn" type="button" id="saveNextBtn" onclick="withOutSaving('custom_insert_lead_feasibility_boms', <?php echo $data['id']; ?>, <?php echo $_GET['lead_id']; ?>, <?php echo $feasibility_id; ?>)"><?php echo __('Save & Next'); ?></button>
                 <?php } else { ?>
-                    <button type="button" class="btn btn-primary next-btn" onclick="saveAndNext('custom_insert_lead_feasibility_boms', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)">Save & Next</button>
+                    <button type="button" class="btn btn-primary next-btn" onclick="saveAndNext('custom_insert_lead_feasibility_boms', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)"><?php echo __('Save & Next'); ?></button>
                 <?php } ?>
             </div>
         </div>
@@ -108,7 +108,7 @@ $users_res = $res['users_res'];
         var form = document.getElementById('evaluationForm');
         var formData = new FormData(form);
         var rid = document.getElementById('feasibilty_rid').value;
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?php echo htmlspecialchars(__('Preview'), ENT_QUOTES); ?>"></div>';
         $("#feasibilitySlides").html(loader);
         formData.append('page', 'insertFeasibility');
         formData.append('table_name', 'lead_feasibility_evaluations');
@@ -183,7 +183,7 @@ $users_res = $res['users_res'];
             text: errorMessage,
             type: "error",
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "OK"
+            confirmButtonText: <?php echo json_encode(__('OK')); ?>
         });
 
         console.error("AJAX Error:", {
@@ -202,7 +202,7 @@ $users_res = $res['users_res'];
             const endDate = new Date(end.value);
 
             if (endDate < startDate) {
-                alert("End Date cannot be earlier than Start Date.");
+                alert(<?php echo json_encode(__('End Date cannot be earlier than Start Date.')); ?>);
                 end.value = ''; // clear the incorrect value
                 end.focus();
             }
@@ -210,7 +210,7 @@ $users_res = $res['users_res'];
     }
 
     function withOutSaving(page, rid, lead_id, feasibility_id) {
-        var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?php echo htmlspecialchars(__('Preview'), ENT_QUOTES); ?>"></div>';
         $("#feasibilitySlides").html(loader);
 
         $.ajax({
@@ -233,7 +233,7 @@ $users_res = $res['users_res'];
                 reinitSelect2(); // Reinitialize select2 after loading new content
             },
             error: function(xhr, status, error) {
-                alert('Error loading next page: ' + error);
+                alert(<?php echo json_encode(__('Error loading next page:')); ?> + error);
             }
         });
     }

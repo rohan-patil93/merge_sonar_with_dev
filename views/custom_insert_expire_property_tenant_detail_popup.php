@@ -12,14 +12,14 @@ $property_tenant_details = $result['property_tenant_details'];
 ?>
 <script type="text/javascript">
 	function submitUnlockTenant(){
-		$("#popupsubmtbtn").text("Please Wait........");
+		$("#popupsubmtbtn").text(<?php echo json_encode(__('Please Wait........')); ?>);
 		$("#popupsubmtbtn").addClass("disabled");
 		$("#popupshowerror").hide();
 		var un_lock_date = $("#un_lock_date").val();
 		var remarks = $("#remarks").val();
 		if(un_lock_date =="" || remarks == ""){
 			$("#popupshowerror").show();
-			$("#popupsubmtbtn").text("Expire Tenant Agreement");
+			$("#popupsubmtbtn").text(<?php echo json_encode(__('Expire Tenant Agreement')); ?>);
 			$("#popupsubmtbtn").removeClass("disabled");
 		}else{
 			swal({
@@ -28,8 +28,8 @@ $property_tenant_details = $result['property_tenant_details'];
 				type: "warning",
 				showCancelButton: true,
 				confirmButtonClass: "btn-danger",
-				confirmButtonText: "Yes",
-				cancelButtonText: "No",
+				confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+				cancelButtonText: <?php echo json_encode(__('No')); ?>,
 				closeOnConfirm: true,
 				closeOnCancel: true
 			},
@@ -53,8 +53,8 @@ $property_tenant_details = $result['property_tenant_details'];
 									type: "success",
 									showCancelButton: false,
 									confirmButtonClass: "btn-danger",
-									confirmButtonText: "Yes",
-									cancelButtonText: "No",
+									confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+									cancelButtonText: <?php echo json_encode(__('No')); ?>,
 									closeOnConfirm: true,
 									closeOnCancel: true
 								},
@@ -102,24 +102,24 @@ $property_tenant_details = $result['property_tenant_details'];
 
 </script>
 <div class="modal-header">
-	<h4 class="modal-title">Expire Tenant Agreement</h4>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<h4 class="modal-title"><?php echo __('Expire Tenant Agreement'); ?></h4>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body m-l-50 m-r-50">
     <div class="alert alert-danger alert-dismissible">
         <strong class="f-16"><i class="ti-alert "></i></strong> <?php echo ucwords($_SESSION['error_message']['9132']); ?>
-        <button type="button" class="btn-close text-danger" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close text-danger" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
     </div>
     <div class="row">
 		<div class="col-lg-12">
 			<form id="unlocktenantform" method="post">
 				<div class="row">
 					<div class="form-group col-lg-6">
-						<label class="form-label">Tenant Agreement Expiry Date <span class="text-danger">*</span></label>
+						<label class="form-label"><?php echo __('Tenant Agreement Expiry Date'); ?> <span class="text-danger">*</span></label>
 						<input type="text" class="form-control datepicker" name="un_lock_date" id="un_lock_date" onchange="GetDateToRentalInvoices()">
 					</div>
 					<div class="form-group col-lg-6">
-						<label class="form-label ">Remarks <span class="text-danger">*</span></label>
+						<label class="form-label "><?php echo __('Remarks'); ?> <span class="text-danger">*</span></label>
 						<textarea class="form-control" name="remarks" id="remarks"></textarea>
 					</div>
 				</div>
@@ -130,7 +130,7 @@ $property_tenant_details = $result['property_tenant_details'];
 	</div>
 </div>
 <div class="modal-footer" >
-	<span class="text-danger f-w-700" id="popupshowerror" style="display: none">Please fill out all required fields</span>
-	<button type="button" class="btn btn-danger waves-effect waves-light disabled" id="popupsubmtbtn" onclick="submitUnlockTenant()"> Expire Tenant Agreement</button>
-	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+	<span class="text-danger f-w-700" id="popupshowerror" style="display: none"><?php echo __('Please fill out all required fields'); ?></span>
+	<button type="button" class="btn btn-danger waves-effect waves-light disabled" id="popupsubmtbtn" onclick="submitUnlockTenant()"> <?php echo __('Expire Tenant Agreement'); ?></button>
+	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
 </div>

@@ -46,11 +46,11 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
 
-        <h6 class="contract-amc-section-title mb-0">Repair Order</h6>
+        <h6 class="contract-amc-section-title mb-0"><?= __('Repair Order') ?></h6>
 
         <?php if (!$isRepairEditable) { ?>
 
-        <span class="badge bg-secondary">Locked — job completed</span>
+        <span class="badge bg-secondary"><?= __('Locked — job completed') ?></span>
 
         <?php } ?>
 
@@ -58,7 +58,7 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
     <?php if ($isRepairEditable) { ?>
 
-    <p class="text-muted small mb-2">Capture parts and PO numbers while the job is in progress. Save before Finish Job.</p>
+    <p class="text-muted small mb-2"><?= __('Capture parts and PO numbers while the job is in progress. Save before Finish Job.') ?></p>
 
     <?php } ?>
 
@@ -82,11 +82,11 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
             <div class="col-md-3">
 
-                <label for="repair_servicenow_ref" class="form-label small mb-0">ServiceNow Ref</label>
+                <label for="repair_servicenow_ref" class="form-label small mb-0"><?= __('ServiceNow Ref') ?></label>
 
                 <?php if ($isRepairEditable) { ?>
 
-                <input type="text" class="form-control form-control-sm" name="servicenow_ref" id="repair_servicenow_ref" value="<?php echo htmlspecialchars($repairOrder['servicenow_ref'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Optional" aria-label="ServiceNow Ref">
+                <input type="text" class="form-control form-control-sm" name="servicenow_ref" id="repair_servicenow_ref" value="<?php echo htmlspecialchars($repairOrder['servicenow_ref'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= htmlspecialchars(__('Optional'), ENT_QUOTES, 'UTF-8') ?>" aria-label="<?= htmlspecialchars(__('ServiceNow Ref'), ENT_QUOTES, 'UTF-8') ?>">
 
                 <?php } else { ?>
 
@@ -98,11 +98,11 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
             <div class="col-md-3">
 
-                <label for="repair_default_po" class="form-label small mb-0">Default PO</label>
+                <label for="repair_default_po" class="form-label small mb-0"><?= __('Default PO') ?></label>
 
                 <?php if ($isRepairEditable) { ?>
 
-                <input type="text" class="form-control form-control-sm" name="default_po_number" id="repair_default_po" value="<?php echo htmlspecialchars($repairOrder['default_po_number'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Optional" aria-label="Default PO">
+                <input type="text" class="form-control form-control-sm" name="default_po_number" id="repair_default_po" value="<?php echo htmlspecialchars($repairOrder['default_po_number'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= htmlspecialchars(__('Optional'), ENT_QUOTES, 'UTF-8') ?>" aria-label="<?= htmlspecialchars(__('Default PO'), ENT_QUOTES, 'UTF-8') ?>">
 
                 <?php } else { ?>
 
@@ -114,7 +114,7 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
             <div class="col-md-3">
 
-                <span class="form-label small mb-0 d-block">Contract</span>
+                <span class="form-label small mb-0 d-block"><?= __('Contract') ?></span>
 
                 <div class="form-control form-control-sm bg-light"><?php echo $repairContractName != '' ? $repairContractName : '—'; ?></div>
 
@@ -122,7 +122,7 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
             <div class="col-md-3">
 
-                <span class="form-label small mb-0 d-block">Vendor</span>
+                <span class="form-label small mb-0 d-block"><?= __('Vendor') ?></span>
 
                 <div class="form-control form-control-sm bg-light"><?php echo $repairVendorName != '' ? $repairVendorName : '—'; ?></div>
 
@@ -138,17 +138,17 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
                     <tr>
 
-                        <th scope="col">Item</th>
+                        <th scope="col"><?= __('Item') ?></th>
 
-                        <th scope="col">Part / Description</th>
+                        <th scope="col"><?= __('Part / Description') ?></th>
 
-                        <th scope="col" style="width:70px;">Qty</th>
+                        <th scope="col" style="width:70px;"><?= __('Qty') ?></th>
 
-                        <th scope="col">PO No.</th>
+                        <th scope="col"><?= __('PO No.') ?></th>
 
-                        <th scope="col" style="width:90px;">Amount</th>
+                        <th scope="col" style="width:90px;"><?= __('Amount') ?></th>
 
-                        <?php if ($isRepairEditable) { ?><th scope="col" style="width:40px;" aria-label="Actions"><span class="visually-hidden">Actions</span></th><?php } ?>
+                        <?php if ($isRepairEditable) { ?><th scope="col" style="width:40px;" aria-label="<?= htmlspecialchars(__('Actions'), ENT_QUOTES, 'UTF-8') ?>"><span class="visually-hidden"><?= __('Actions') ?></span></th><?php } ?>
 
                     </tr>
 
@@ -200,19 +200,19 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
         <button type="button" class="btn btn-outline-success btn-sm mb-2" id="contractAmcRepairAddLine">
 
-            <i class="ti-plus" aria-hidden="true"></i> Add Item
+            <i class="ti-plus" aria-hidden="true"></i> <?= __('Add Item') ?>
 
         </button>
 
         <button type="button" class="btn btn-primary btn-sm" id="contractAmcRepairSaveBtn">
 
-            <i class="ti-save" aria-hidden="true"></i> Save Repair Order
+            <i class="ti-save" aria-hidden="true"></i> <?= __('Save Repair Order') ?>
 
         </button>
 
         <?php } elseif (count((array)$repairOrderLines) == 0) { ?>
 
-        <p class="text-muted small mb-0">No repair items recorded for this visit.</p>
+        <p class="text-muted small mb-0"><?= __('No repair items recorded for this visit.') ?></p>
 
         <?php } ?>
 

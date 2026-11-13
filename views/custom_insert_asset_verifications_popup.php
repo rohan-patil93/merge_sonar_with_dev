@@ -64,7 +64,7 @@ function verificationSubmitdetails(){
             <div class="col-lg-4 from-group w-full">
                 <span class="form-label d-block">Verify Asset User</span>
                 <select aria-label="Verification User"  class="form-select js-example-basic-single " name="verification_user_id" id="user_id" >
-                    <option value="">Select Any One</option>
+                    <option value=""><?= __('Select Any One') ?></option>
                     <?php foreach ($users as $userlist) { ?>
                         <option value="<?php echo $userlist['id']; ?>" ><?php echo ucwords($userlist['display_name']); ?></option>
                     <?php } ?>
@@ -89,10 +89,10 @@ function verificationSubmitdetails(){
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Asset Code</th>
-                        <th scope="col">Asset Name</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Asset Custodian</th>
+                        <th scope="col"><?= __('Asset Code') ?></th>
+                        <th scope="col"><?= __('Asset Name') ?></th>
+                        <th scope="col"><?= __('Location') ?></th>
+                        <th scope="col"><?= __('Asset Custodian') ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -120,8 +120,8 @@ function verificationSubmitdetails(){
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="verificationSubmitdetails()" <?php echo $btndisable; ?>>Submit</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="verificationSubmitdetails()" <?php echo $btndisable; ?>><?= __('Submit') ?></button>
 </div>
 <script type="text/javascript">
     $(".js-example-basic-single").select2();

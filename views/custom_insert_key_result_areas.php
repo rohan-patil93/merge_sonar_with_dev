@@ -66,15 +66,15 @@ foreach($kpilistres as $kpilistre){
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td class="p-2"><div class="checkbox-fade fade-in-primary m-0"><label class="form-label"><input aria-label="Checkbox" class="form-control itemRow" type="checkbox"> <span class="cr  m-0"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
-        htmlRows += '<td class="p-2"><input aria-label="Name[" type="text" name="name['+kpi_id+'][]"  class="form-control"   autocomplete="off"> </td>';
-        htmlRows += '<td><select aria-label="Model[" class="form-control form-select js-example-basic-single" name="model['+kpi_id+'][]" ><option value="0">Select Any One</option><?php foreach ($modellist as  $model) { ?><option value="<?php echo $model['genc_detail_code']; ?>"><?php echo $model['genc_detail_name']; ?></option><?php
+        htmlRows += '<td class="p-2"><div class="checkbox-fade fade-in-primary m-0"><label class="form-label"><input aria-label="<?php echo __('Checkbox'); ?>" class="form-control itemRow" type="checkbox"> <span class="cr  m-0"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
+        htmlRows += '<td class="p-2"><input aria-label="<?php echo __('Name['); ?>" type="text" name="name['+kpi_id+'][]"  class="form-control"   autocomplete="off"> </td>';
+        htmlRows += '<td><select aria-label="<?php echo __('Model['); ?>" class="form-control form-select js-example-basic-single" name="model['+kpi_id+'][]" ><option value="0"><?php echo __('Select Any One'); ?></option><?php foreach ($modellist as  $model) { ?><option value="<?php echo $model['genc_detail_code']; ?>"><?php echo $model['genc_detail_name']; ?></option><?php
 } ?></select></td>';
 
-        htmlRows += '<td class="p-2"><select aria-label="Uom[" class="form-control form-select js-example-basic-single" name="uom['+kpi_id+'][]" ><option value="0">Select Any One</option><?php foreach ($upmllist as  $uom) { ?><option value="<?php echo $uom['genc_detail_code']; ?>"><?php echo $uom['genc_detail_name']; ?></option><?php
+        htmlRows += '<td class="p-2"><select aria-label="<?php echo __('Uom['); ?>" class="form-control form-select js-example-basic-single" name="uom['+kpi_id+'][]" ><option value="0"><?php echo __('Select Any One'); ?></option><?php foreach ($upmllist as  $uom) { ?><option value="<?php echo $uom['genc_detail_code']; ?>"><?php echo $uom['genc_detail_name']; ?></option><?php
 } ?></select></td>';
 
-        htmlRows += '<td class="p-2"><input aria-label="Weightage[" type="text text-right" name="weightage['+kpi_id+'][]"  onblur="weightagecheck('+kpi_id+')" class="form-control amount weightage_'+kpi_id+' text-right" value="0" autocomplete="off"><input type="hidden" name="kpi_tasks_ids['+kpi_id+'][]" id="kpi_tasks_ids_'+kpi_id+count+'" value=""></td>';
+        htmlRows += '<td class="p-2"><input aria-label="<?php echo __('Weightage['); ?>" type="text text-right" name="weightage['+kpi_id+'][]"  onblur="weightagecheck('+kpi_id+')" class="form-control amount weightage_'+kpi_id+' text-right" value="0" autocomplete="off"><input type="hidden" name="kpi_tasks_ids['+kpi_id+'][]" id="kpi_tasks_ids_'+kpi_id+count+'" value=""></td>';
         htmlRows += '</tr>';
         if(returnhtml == "Y"){
             return htmlRows;
@@ -112,7 +112,7 @@ function addrowskra(type){ // insert or update
     }
     checkepmty.forEach(function(filedname) {
         if($("#"+filedname).val() ==""){
-            $("#error_"+filedname).text("required this field");
+            $("#error_"+filedname).text(<?php echo json_encode(__('required this field')); ?>);
             error = 1;
         }
     });
@@ -180,10 +180,10 @@ function addkraHTML(id,area_name){
 
     htmlRows +='<div class="card-body"><div class="row">';
     htmlRows +='<table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer" id="invoiceItem_'+id+'">';
-    htmlRows +='<tr><th scope="col" style="width: 2%;"></th><th scope="col" class="text-center" style="width: 25%;">Indicator Name</th><th scope="col" class="text-center" style="width: 25%;">Model </th><th scope="col" class="text-center" style="width: 20%;">UoM </th><th scope="col" class="text-center" style="width: 20%;">Weightage </th></tr>';
+    htmlRows +='<tr><th scope="col" style="width: 2%;"></th><th scope="col" class="text-center" style="width: 25%;"><?php echo __('Indicator Name'); ?></th><th scope="col" class="text-center" style="width: 25%;"><?php echo __('Model'); ?> </th><th scope="col" class="text-center" style="width: 20%;"><?php echo __('UoM'); ?> </th><th scope="col" class="text-center" style="width: 20%;"><?php echo __('Weightage'); ?> </th></tr>';
     htmlRows += addrows(id,'Y');
     htmlRows +='</table>';
-    htmlRows +='<table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" ><tr><th scope="col" class="amount" style="width: 80%;"><span>Total</span></th><td style="width: 20%;"><span><input aria-label="Dis Total" type="text" class="form-control amount" readonly value="0" id="dis_Total_'+id+'" ></span></td></tr>';
+    htmlRows +='<table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" ><tr><th scope="col" class="amount" style="width: 80%;"><span><?php echo __('Total'); ?></span></th><td style="width: 20%;"><span><input aria-label="<?php echo __('Dis Total'); ?>" type="text" class="form-control amount" readonly value="0" id="dis_Total_'+id+'" ></span></td></tr>';
     htmlRows +='</table></div></div></div></div>';
     $('#newhpirow').append(htmlRows);
     $(".js-example-basic-single").select2();
@@ -198,12 +198,12 @@ function removerows(){
     var kratable = '<?php echo $kratable; ?>';
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: 'Do you want to Delete KPI?',
+        text: <?php echo json_encode(__('Do you want to Delete KPI?')); ?>,
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+        cancelButtonText: <?php echo json_encode(__('No')); ?>,
         closeOnConfirm: true,
         closeOnCancel: true
     },
@@ -223,12 +223,12 @@ function removekra(id){
     var kratable = '<?php echo $kratable; ?>';
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: 'Do you want to Delete KRA?',
+        text: <?php echo json_encode(__('Do you want to Delete KRA?')); ?>,
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+        cancelButtonText: <?php echo json_encode(__('No')); ?>,
         closeOnConfirm: true,
         closeOnCancel: true
     },
@@ -263,10 +263,10 @@ function getOldKRA(id){
 
 <div class="card" id="kt_page_sticky_card">
     <div class="card-header">
-        <h5>KRA And KPI </h5>
+        <h5><?php echo __('KRA And KPI'); ?> </h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                <i class="icofont icofont-reply"></i>  Back
+                <i class="icofont icofont-reply"></i>  <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -274,34 +274,34 @@ function getOldKRA(id){
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6 col-12">
                 <div class="form-group">
-                    <span class="form-label">KRA Name <span class="text-danger">*</span></span>
-                    <input aria-label="Text Area Name" type="text"  class="form-control text-capitalize"  id="text_area_name"  />
+                    <span class="form-label"><?php echo __('KRA Name'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Text Area Name'); ?>" type="text"  class="form-control text-capitalize"  id="text_area_name"  />
                     <span class="text-danger errorepmty f-12 text-capitalize" id="error_text_area_name"></span>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-12">
                 <div class="form-group">
-                    <span class="form-label">Description <span class="text-danger">*</span></span>
-                    <textarea aria-label="Text Descrption" class="form-control"   id="text_descrption"></textarea>
+                    <span class="form-label"><?php echo __('Description'); ?> <span class="text-danger">*</span></span>
+                    <textarea aria-label="<?php echo __('Text Descrption'); ?>" class="form-control"   id="text_descrption"></textarea>
                     <span class="text-danger errorepmty f-12 text-capitalize" id="error_text_descrption"></span>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-12">
                 <div class="form-group">
-                    <span class="form-label">Weightage<span class="text-danger">*</span></span>
-                    <input aria-label="Text Weightage" type="text"  class="form-control text-right"  id="text_weightage"  />
+                    <span class="form-label"><?php echo __('Weightage'); ?><span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Text Weightage'); ?>" type="text"  class="form-control text-right"  id="text_weightage"  />
                     <span class="text-danger errorepmty f-12 text-capitalize" id="error_text_weightage"></span>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-12">
                 <div class="form-group w-full">
-                    <span class="form-label">Type<span class="text-danger">*</span></span>
-                    <select aria-label="Textkra Type" class="form-control  form-select js-example-basic-single" name="textkra_type" id="textkra_type" ><option value="1">Professional</option><option value="2">Personal</option></select>
+                    <span class="form-label"><?php echo __('Type'); ?><span class="text-danger">*</span></span>
+                    <select aria-label="<?php echo __('Textkra Type'); ?>" class="form-control  form-select js-example-basic-single" name="textkra_type" id="textkra_type" ><option value="1"><?php echo __('Professional'); ?></option><option value="2"><?php echo __('Personal'); ?></option></select>
                     <span class="text-danger errorepmty f-12 text-capitalize" id="error_textkra_type"></span>
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary btn-shadow-hover font-weight-bold mt-4" onclick="addrowskra('insert')" ><i class="fa fa-plus"></i> Add KRA</button>
+        <button class="btn btn-primary btn-shadow-hover font-weight-bold mt-4" onclick="addrowskra('insert')" ><i class="fa fa-plus"></i> <?php echo __('Add KRA'); ?></button>
     </div>
 </div>
 <form method="post" id="formsubmitid">
@@ -318,10 +318,10 @@ function getOldKRA(id){
                         <table class="table table-striped table-bordered table-hover1 table-checkable dataTable no-footer" id="invoiceItem_<?php echo $kralist['id']; ?>">
                             <tr>
                                 <th scope="col" style="width: 2%;"></th>
-                                <th scope="col" class="text-center" style="width: 50%;">Indicator Name <span class="text-danger">*</span></th>
-                                <th scope="col" class="text-center" style="width: 20%;">Model </th>
-                                <th scope="col" class="text-center" style="width: 20%;">UoM </th>
-                                <th scope="col" class="text-center" style="width: 8%;">Weightage </th>
+                                <th scope="col" class="text-center" style="width: 50%;"><?php echo __('Indicator Name'); ?> <span class="text-danger">*</span></th>
+                                <th scope="col" class="text-center" style="width: 20%;"><?php echo __('Model'); ?> </th>
+                                <th scope="col" class="text-center" style="width: 20%;"><?php echo __('UoM'); ?> </th>
+                                <th scope="col" class="text-center" style="width: 8%;"><?php echo __('Weightage'); ?> </th>
 
                             </tr>
                             <?php $i=1;  $total = 0;
@@ -333,7 +333,7 @@ function getOldKRA(id){
                                 <td class="p-2">
                                     <div class="checkbox-fade fade-in-primary m-0">
                                         <label class="form-label">
-                                            <input aria-label="Checkbox" class="form-control itemRow" type="checkbox" data-parentid='<?php echo $kralist['id']; ?>'>
+                                            <input aria-label="<?php echo __('Checkbox'); ?>" class="form-control itemRow" type="checkbox" data-parentid='<?php echo $kralist['id']; ?>'>
                                             <span class="cr m-0">
                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                             </span>
@@ -341,11 +341,11 @@ function getOldKRA(id){
                                     </div>
                                 </td>
                                 <td class="p-2">
-                                    <input aria-label="Input field" type="text" name="name[<?php echo $kralist['id']; ?>][]"  class="form-control" value="<?php echo $res['indicator_name']; ?>"  autocomplete="off">
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" name="name[<?php echo $kralist['id']; ?>][]"  class="form-control" value="<?php echo $res['indicator_name']; ?>"  autocomplete="off">
                                 </td>
                                 <td class="w-full p-2">
-                                    <select aria-label="Select option" class="form-control form-select js-example-basic-single" name="model[<?php echo $kralist['id']; ?>][]" >
-                                        <option value="0">Select Any One</option>
+                                    <select aria-label="<?php echo __('Select option'); ?>" class="form-control form-select js-example-basic-single" name="model[<?php echo $kralist['id']; ?>][]" >
+                                        <option value="0"><?php echo __('Select Any One'); ?></option>
                                         <?php foreach ($modellist as  $model) { ?>
                                             <option <?php if($res['model'] == $model['genc_detail_code']){ ?> selected <?php
 } ?>  value="<?php echo $model['genc_detail_code']; ?>"><?php echo $model['genc_detail_name']; ?></option>
@@ -354,8 +354,8 @@ function getOldKRA(id){
                                     </select>
                                 </td>
                                 <td class="w-full p-2">
-                                    <select aria-label="Select option" class="form-control form-select js-example-basic-single" name="uom[<?php echo $kralist['id']; ?>][]" >
-                                        <option value="0">Select Any One</option>
+                                    <select aria-label="<?php echo __('Select option'); ?>" class="form-control form-select js-example-basic-single" name="uom[<?php echo $kralist['id']; ?>][]" >
+                                        <option value="0"><?php echo __('Select Any One'); ?></option>
                                         <?php foreach ($upmllist as  $uom) { ?>
                                             <option <?php if($res['uom'] == $uom['genc_detail_code']){ ?> selected <?php
 } ?> value="<?php echo $uom['genc_detail_code']; ?>"><?php echo $uom['genc_detail_name']; ?></option>
@@ -364,7 +364,7 @@ function getOldKRA(id){
                                     </select>
                                 </td>
                                 <td class="p-2">
-                                    <input aria-label="Input field" type="text" name="weightage[<?php echo $kralist['id']; ?>][]"  onblur="weightagecheck(<?php echo $kralist['id']; ?>)"  class="form-control amount text-right weightage_<?php echo $kralist['id']; ?>" value="<?php echo $res['weightage']; ?>"  autocomplete="off">
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" name="weightage[<?php echo $kralist['id']; ?>][]"  onblur="weightagecheck(<?php echo $kralist['id']; ?>)"  class="form-control amount text-right weightage_<?php echo $kralist['id']; ?>" value="<?php echo $res['weightage']; ?>"  autocomplete="off">
                                     <input type="hidden" name="kpi_id[<?php echo $kralist['id']; ?>][]"  value="<?php echo $res['id']; ?>">
                                     <input type="hidden" name="kpi_tasks_ids[<?php echo $kralist['id']; ?>][]" id="kpi_tasks_ids_<?php echo $kralist['id'].$i; ?>" value="<?php echo $res['kpi_tasks_ids']; ?>">
                                 </td>
@@ -375,15 +375,15 @@ function getOldKRA(id){
                         <div class="p-2 mt-2">
                             <table class="" >
                                 <tr>
-                                    <th scope="col" style="width: 60%;"><button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold  m-l-5"  onclick="addrows(<?php echo $kralist['id']; ?>)"><i class="la la-check"></i>Add KPI</button>
-                                        <button class="btn btn-danger delete" id="removeRows" onclick="removerows()"  type="button"> Delete Delete</button>
+                                    <th scope="col" style="width: 60%;"><button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold  m-l-5"  onclick="addrows(<?php echo $kralist['id']; ?>)"><i class="la la-check"></i><?php echo __('Add KPI'); ?></button>
+                                        <button class="btn btn-danger delete" id="removeRows" onclick="removerows()"  type="button"> <?php echo __('Delete Delete'); ?></button>
                                     </th>
                                     <th scope="col" class="amount text-center" style="width: 20%;">
-                                        <span>Total</span>
+                                        <span><?php echo __('Total'); ?></span>
                                     </th>
                                     <td style="width: 20%;">
                                         <span>
-                                            <input aria-label="Input field"  type="text" class="form-control amount totalkra text-right" readonly value="<?php echo $total; ?>" data-kraid="<?php echo $kralist['id']; ?>" id="dis_Total_<?php echo $kralist['id']; ?>"  >
+                                            <input aria-label="<?php echo __('Input field'); ?>"  type="text" class="form-control amount totalkra text-right" readonly value="<?php echo $total; ?>" data-kraid="<?php echo $kralist['id']; ?>" id="dis_Total_<?php echo $kralist['id']; ?>"  >
                                         </span>
                                     </td>
                                 </tr>
@@ -405,7 +405,7 @@ function getOldKRA(id){
             <?php  $disable = "disabled";     if($total == 100) { $disable = "";
 } ?>
             <input type="hidden" name="submit_value"  value="insertkpiandkra">
-            <button type="button" onclick="submitForm()" class="btn btn-primary mr-2"   ><i class="la la-check"></i>Submit</button>
+            <button type="button" onclick="submitForm()" class="btn btn-primary mr-2"   ><i class="la la-check"></i><?php echo __('Submit'); ?></button>
         </div>
     </div>
 </form>

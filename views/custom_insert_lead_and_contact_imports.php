@@ -26,7 +26,7 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'upload_csv' && isset($_FILE
 
         if (strtolower(trim($response['status'])) === 'success') {
             $summary = $response['summary'] ?? null;
-            $msg = "CSV imported successfully.";
+            $msg = __('CSV imported successfully.');
 
             if ($summary) {
                 $msg .= " Total: {$summary['total_rows']
@@ -78,11 +78,11 @@ if (!empty($_SESSION['upload_msg'])) {
 
 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
     <div class="card-header table-card-header">
-        <h5>Leads/Contacts Import</h5>
+        <h5><?php echo __('Leads/Contacts Import'); ?></h5>
         <div class="card-header-right table-card-header ">
             <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light  m-r-50">
                 <i class="icofont icofont-reply mr-1"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -90,16 +90,16 @@ if (!empty($_SESSION['upload_msg'])) {
         <form method="post" enctype="multipart/form-data">
             <div class="form-group row">
                 <div class="form-group col-lg-6">
-                    <span>File Name <span class="text-danger">*</span></span>
+                    <span><?php echo __('File Name'); ?> <span class="text-danger">*</span></span>
                     <div>
-                        <input aria-label="Enter Upload File Name" class="form-control" type="text" id="file_name" name="file_name" value="" placeholder="Enter Upload File Name" required>
+                        <input aria-label="<?php echo __('Enter Upload File Name'); ?>" class="form-control" type="text" id="file_name" name="file_name" value="" placeholder="<?php echo __('Enter Upload File Name'); ?>" required>
                     </div>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span>Lead/Contact Source Type <span class="text-danger">*</span> </span>
+                    <span><?php echo __('Lead/Contact Source Type'); ?> <span class="text-danger">*</span> </span>
                     <div>
-                        <select aria-label="Source Type" class="form-select js-example-basic-single" name="source_type" id="source_type" required>
-                            <option value=""> Select Any One</option>
+                        <select aria-label="<?php echo __('Source Type'); ?>" class="form-select js-example-basic-single" name="source_type" id="source_type" required>
+                            <option value=""> <?php echo __('Select Any One'); ?></option>
                             <?php
                             if (!empty($sources)) {
                                 foreach ($sources as $source) {
@@ -116,22 +116,22 @@ if (!empty($_SESSION['upload_msg'])) {
                 </div>
                 <div class="form-group col-lg-6">
                     <span>
-                        Select Type <span class="text-danger">*</span>
+                        <?php echo __('Select Type'); ?> <span class="text-danger">*</span>
                     </span>
                     <div>
-                        <input aria-label="Import Type" type="radio" id="import_type_leads" name="import_type" value="leads" checked> Leads
-                        <input aria-label="Import Type" type="radio" id="import_type_contacts" name="import_type" value="contacts"> Contacts
+                        <input aria-label="<?php echo __('Import Type'); ?>" type="radio" id="import_type_leads" name="import_type" value="leads" checked> <?php echo __('Leads'); ?>
+                        <input aria-label="<?php echo __('Import Type'); ?>" type="radio" id="import_type_contacts" name="import_type" value="contacts"> <?php echo __('Contacts'); ?>
                     </div>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span>CSV File <span class="text-danger">*</span> </span>
+                    <span><?php echo __('CSV File'); ?> <span class="text-danger">*</span> </span>
                     <div>
-                        <input aria-label="Csv File" class="form-control" type="file" id="csv_file" name="csv_file" accept=".csv" required>
+                        <input aria-label="<?php echo __('Csv File'); ?>" class="form-control" type="file" id="csv_file" name="csv_file" accept=".csv" required>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                    <button  type="submit" class="btn btn-primary" name="submit" value="upload_csv"> Submit</button>
+                    <button  type="submit" class="btn btn-primary" name="submit" value="upload_csv"> <?php echo __('Submit'); ?></button>
             </div>
         </form>
     </div>

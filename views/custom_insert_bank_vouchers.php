@@ -119,7 +119,7 @@ $locations =$result['locations'];
 
         htmlRows += '<td class="p-2"><input aria-label="Amount[]" type="text" name="amount[]" onblur="checkdebitandcredit()" id="debit_'+count+'" class="form-control price amount all_amount text-right" value="" autocomplete="off"></td>';
 
-       htmlRows += '<td class="p-2"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRow(\''+rowid+'\')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></td>';
+       htmlRows += '<td class="p-2"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRow(\''+rowid+'')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></td>';
         htmlRows += '</tr>';
         $('#invoiceItem').append(htmlRows);
         $('.tooltip').remove();
@@ -146,9 +146,9 @@ $locations =$result['locations'];
 </script>
 <div class="card">
       <div class="card-header">
-        <h5>Bank Voucher</h5>
+        <h5><?= __('Bank Voucher') ?></h5>
         <div class="card-header-right table-card-header">
-              <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</button>
+              <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back') ?></button>
         </div>
       </div>
       <form method="post" class="<?php echo $journal_vouchers['current_status'] == ST_APPROVED?"event_disabled":""; ?>">
@@ -198,7 +198,7 @@ $locations =$result['locations'];
                       <div class="radio radio-inline">
                         <label class="form-label">
                         <input aria-label="Voucher Type" type="radio" name="voucher_type"  value="<?php echo $key; ?>" <?php echo ($key ==$journal_vouchers['voucher_type'] || ($journal_vouchers['voucher_type']=="" && $key == 'PV'))?"checked":""; ?>>
-                            <i class="helper"></i><?php echo $valu; ?>
+                            <i class="helper"></i><?php echo htmlspecialchars(__($valu ?? '')); ?>
                         </label>
                     </div>
                     <?php } ?>
@@ -226,13 +226,13 @@ $locations =$result['locations'];
             <table class="table table-hover"  id="invoiceItem" style="table-layout: fixed;">
             <thead>
                 <tr>
-                    <th scope="col" style="width: 23%;">Account <span class="requried"></span></th>
+                    <th scope="col" style="width: 23%;"><?= __('Account') ?> <span class="requried"></span></th>
 
-                    <th scope="col" style="width: 15%;">Party</th>
-                    <th scope="col" style="width: 15%;">Location</th>
-                    <th scope="col" style="width: 15%;">Department</th>
-                    <th scope="col" style="width: 15%;">Cost Center</th>
-                    <th scope="col" class="text-right" style="width: 15%;">Debits</th>
+                    <th scope="col" style="width: 15%;"><?= __('Party') ?></th>
+                    <th scope="col" style="width: 15%;"><?= __('Location') ?></th>
+                    <th scope="col" style="width: 15%;"><?= __('Department') ?></th>
+                    <th scope="col" style="width: 15%;"><?= __('Cost Center') ?></th>
+                    <th scope="col" class="text-right" style="width: 15%;"><?= __('Debits') ?></th>
                     <th scope="col" class="text-right" style="width: 2%;"></th>
                 </tr>
             </thead>
@@ -320,7 +320,7 @@ $locations =$result['locations'];
                 <tfoot>
                     <tr>
                         <td class="p-2">
-                            <button class="btn btn-success btn_mobile" id="addRows" type="button" onclick="addMoreRow()">+ Add More</button>
+                            <button class="btn btn-success btn_mobile" id="addRows" type="button" onclick="addMoreRow()">+ <?= __('Add More') ?></button>
                         </td>
                         <td colspan="4" class="p-2 text-right f-w-700"> Total </td>
                         <td class="text-right" class="p-2">
@@ -358,13 +358,13 @@ $locations =$result['locations'];
               ?>
             <?php if(isset($_GET['Rid']) && $_GET['Rid'] !=''){ ?>
                     <input type="hidden" id="rid"name="rid" value="<?php echo $rid; ?>" />
-                    <button class="btn btn-primary mr-2 mb-2 submit_btn <?php echo $disbledbtn; ?>" value="update"  name="submitjournal" value="exit"><i class="la la-check"></i>Update</button>
+                    <button class="btn btn-primary mr-2 mb-2 submit_btn <?php echo $disbledbtn; ?>" value="update"  name="submitjournal" value="exit"><i class="la la-check"></i><?= __('Update') ?></button>
 
             <?php } else{ ?>
                     <input type="hidden" name="submit1" value="Add" />
-                    <button class="btn btn-primary mr-2 mb-2 submit_btn <?php echo $disbledbtn; ?>" name="submitjournal" value="exit"><i class="la la-check"></i>Save & exit</button>
-                    <button class="btn btn-primary mr-2 mb-2 submit_btn <?php echo $disbledbtn; ?>" name="submitjournal" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
-                    <button type="reset" class="btn btn-secondary mb-2" ><i class="la la-close"></i>Cancel</button>
+                    <button class="btn btn-primary mr-2 mb-2 submit_btn <?php echo $disbledbtn; ?>" name="submitjournal" value="exit"><i class="la la-check"></i><?= __('Save & exit') ?></button>
+                    <button class="btn btn-primary mr-2 mb-2 submit_btn <?php echo $disbledbtn; ?>" name="submitjournal" value="continue"><i class="la la-check-circle"></i><?= __('Save & continue') ?></button>
+                    <button type="reset" class="btn btn-secondary mb-2" ><i class="la la-close"></i><?= __('Cancel') ?></button>
             <?php } ?>
             </div>
         </div>

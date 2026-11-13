@@ -65,14 +65,14 @@ $defaultProcess = $_GET['process'] ?? 'manufacturing_product_notes';
 <div class="page-body process-qc-page">
     <div class="card shadow-sm border-0">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Process Quality Check</h5>
+            <h5 class="mb-0"><?php echo __('Process Quality Check'); ?></h5>
         </div>
         <div class="card-body p-4">
             <div class="row">
                 <div class="form-group col-lg-4">
-                    <span>Process</span>
-                    <select aria-label="Process Qc Process" class="form-select js-example-basic-single" id="process_qc_process">
-                        <option value="">Select Any One</option>
+                    <span><?php echo __('Process'); ?></span>
+                    <select aria-label="<?php echo __('Process Qc Process'); ?>" class="form-select js-example-basic-single" id="process_qc_process">
+                        <option value=""><?php echo __('Select Any One'); ?></option>
                         <?php foreach((array)$processes as $processKey => $processLabel){ ?>
                             <option value="<?php echo htmlspecialchars($processKey); ?>" <?php echo $processKey == $defaultProcess ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($processLabel); ?>
@@ -81,14 +81,14 @@ $defaultProcess = $_GET['process'] ?? 'manufacturing_product_notes';
                     </select>
                 </div>
                 <div class="form-group col-lg-5">
-                    <span>Transaction No</span>
-                    <select aria-label="Process Qc Transaction" class="form-select js-example-basic-single" id="process_qc_transaction">
-                        <option value="">Select process first</option>
+                    <span><?php echo __('Transaction No'); ?></span>
+                    <select aria-label="<?php echo __('Process Qc Transaction'); ?>" class="form-select js-example-basic-single" id="process_qc_transaction">
+                        <option value=""><?php echo __('Select process first'); ?></option>
                     </select>
                 </div>
                 <div class="form-group col-lg-3 d-flex align-items-end">
                     <button type="button" class="btn btn-primary w-100" id="process_qc_open_btn" disabled>
-                        Open QC Check
+                        <?php echo __('Open QC Check'); ?>
                     </button>
                 </div>
             </div>
@@ -99,49 +99,49 @@ $defaultProcess = $_GET['process'] ?? 'manufacturing_product_notes';
 
     <div id="process_qc_workspace" class="mt-3" style="display:none;">
         <div class="process-qc-summary mb-3">
-            <div class="process-qc-kpi"><div class="label">Total</div><div class="value" id="pqc_total">0</div></div>
-            <div class="process-qc-kpi"><div class="label">Passed</div><div class="value text-success" id="pqc_passed">0</div></div>
-            <div class="process-qc-kpi"><div class="label">Failed</div><div class="value text-danger" id="pqc_failed">0</div></div>
-            <div class="process-qc-kpi"><div class="label">In Progress</div><div class="value text-warning" id="pqc_draft">0</div></div>
-            <div class="process-qc-kpi"><div class="label">Pending</div><div class="value text-secondary" id="pqc_pending">0</div></div>
+            <div class="process-qc-kpi"><div class="label"><?php echo __('Total'); ?></div><div class="value" id="pqc_total">0</div></div>
+            <div class="process-qc-kpi"><div class="label"><?php echo __('Passed'); ?></div><div class="value text-success" id="pqc_passed">0</div></div>
+            <div class="process-qc-kpi"><div class="label"><?php echo __('Failed'); ?></div><div class="value text-danger" id="pqc_failed">0</div></div>
+            <div class="process-qc-kpi"><div class="label"><?php echo __('In Progress'); ?></div><div class="value text-warning" id="pqc_draft">0</div></div>
+            <div class="process-qc-kpi"><div class="label"><?php echo __('Pending'); ?></div><div class="value text-secondary" id="pqc_pending">0</div></div>
         </div>
         <div class="process-qc-workspace">
             <div class="process-qc-list">
                 <div class="process-qc-list-head">
                     <div class="row g-2">
                         <div class="col-7">
-                            <input aria-label="Search item / serial / lot" type="text" class="form-control" id="process_qc_search" placeholder="Search item / serial / lot">
+                            <input aria-label="<?php echo __('Search item / serial / lot'); ?>" type="text" class="form-control" id="process_qc_search" placeholder="<?php echo __('Search item / serial / lot'); ?>">
                         </div>
                         <div class="col-5">
-                            <select aria-label="Process Qc Status Filter" class="form-select" id="process_qc_status_filter">
-                                <option value="all">All</option>
-                                <option value="0">Pending</option>
-                                <option value="1">In Progress</option>
-                                <option value="2">Passed</option>
-                                <option value="3">Failed</option>
+                            <select aria-label="<?php echo __('Process Qc Status Filter'); ?>" class="form-select" id="process_qc_status_filter">
+                                <option value="all"><?php echo __('All'); ?></option>
+                                <option value="0"><?php echo __('Pending'); ?></option>
+                                <option value="1"><?php echo __('In Progress'); ?></option>
+                                <option value="2"><?php echo __('Passed'); ?></option>
+                                <option value="3"><?php echo __('Failed'); ?></option>
                             </select>
                         </div>
                         <div class="col-6">
-                            <select aria-label="Process Qc Limit" class="form-select" id="process_qc_limit">
-                                <option value="25">25 rows</option>
-                                <option value="50">50 rows</option>
-                                <option value="100">100 rows</option>
+                            <select aria-label="<?php echo __('Process Qc Limit'); ?>" class="form-select" id="process_qc_limit">
+                                <option value="25"><?php echo __('25 rows'); ?></option>
+                                <option value="50"><?php echo __('50 rows'); ?></option>
+                                <option value="100"><?php echo __('100 rows'); ?></option>
                             </select>
                         </div>
                         <div class="col-6">
-                            <button type="button" class="btn btn-outline-primary w-100" id="process_qc_next_pending">Next Pending</button>
+                            <button type="button" class="btn btn-outline-primary w-100" id="process_qc_next_pending"><?php echo __('Next Pending'); ?></button>
                         </div>
                     </div>
                 </div>
                 <div class="process-qc-items custom-scroll" id="process_qc_items"></div>
                 <div class="p-2 d-flex justify-content-between align-items-center border-top">
-                    <button type="button" class="btn btn-light btn-sm" id="process_qc_prev">Previous</button>
-                    <span id="process_qc_page_text" class="text-muted small">Page 1</span>
-                    <button type="button" class="btn btn-light btn-sm" id="process_qc_next">Next</button>
+                    <button type="button" class="btn btn-light btn-sm" id="process_qc_prev"><?php echo __('Previous'); ?></button>
+                    <span id="process_qc_page_text" class="text-muted small"><?php echo __('Page 1'); ?></span>
+                    <button type="button" class="btn btn-light btn-sm" id="process_qc_next"><?php echo __('Next'); ?></button>
                 </div>
             </div>
             <div class="process-qc-form-panel" id="process_qc_form_panel">
-                <div class="process-qc-empty">Select a serial/lot row to start QC.</div>
+                <div class="process-qc-empty"><?php echo __('Select a serial/lot row to start QC.'); ?></div>
             </div>
         </div>
     </div>

@@ -95,7 +95,7 @@ $application_pages = $return['application_pages'];
                             class="text-danger">*</span></label>
                     <select class="js-example-basic-single form-select" id="module_id" name="module_id"
                         onchange="handleModuleChange(this.value)" required>
-                        <option value="">Select Any one</option>
+                        <option value=""><?= __('Select Any one') ?></option>
                         <?php foreach ($modules as $module): ?>
                             <option value="<?= $module['module_id'] ?>"><?= $module['module_name'] ?></option>
                         <?php endforeach; ?>
@@ -110,9 +110,9 @@ $application_pages = $return['application_pages'];
                     <table class="table table-bordered" id="process-table">
                         <thead class="bg-light">
                             <tr>
-                                <th scope="col" width="25%">Process Name</th>
-                                <th scope="col" width="65%">Pages</th>
-                                <th scope="col" width="10%">Action</th>
+                                <th scope="col" width="25%"><?= __('Process Name') ?></th>
+                                <th scope="col" width="65%"><?= __('Pages') ?></th>
+                                <th scope="col" width="10%"><?= __('Action') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -148,7 +148,7 @@ $application_pages = $return['application_pages'];
             </div>
         </div>
         <button type="button" class="btn btn-sm btn-success add-page-btn mt-2  mb-3">
-            <i class="fa fa-plus"></i> Add Page
+            <i class="fa fa-plus"></i> <?= __('Add Page') ?>
         </button>
     </div>
 </template>
@@ -389,7 +389,7 @@ $application_pages = $return['application_pages'];
         </td>
         <td class="process-pages-cell">
             <button type="button" class="btn btn-sm btn-info add-process-pages-btn">
-                <i class="fa fa-list mr-1"></i> Configure Pages
+                <i class="fa fa-list mr-1"></i> <?= __('Configure Pages') ?>
             </button>
             <div class="process-pages-container custom-scroll" style="display: none; max-height: 300px; min-height: 300px;"></div>
         </td>
@@ -426,7 +426,7 @@ $application_pages = $return['application_pages'];
                 }
             } else {
                 processPagesContainer.style.display = 'none';
-                configPagesBtn.innerHTML = '<i class="fa fa-list mr-1"></i> Configure Pages';
+                configPagesBtn.innerHTML = '<i class="fa fa-list mr-1"></i> <?= __('Configure Pages') ?>';
             }
         });
     }
@@ -443,7 +443,7 @@ $application_pages = $return['application_pages'];
         </td>
         <td class="process-pages-cell">
             <button type="button" class="btn btn-sm btn-info add-process-pages-btn">
-                <i class="fa fa-list mr-1"></i> Configure Pages
+                <i class="fa fa-list mr-1"></i> <?= __('Configure Pages') ?>
             </button>
             <div class="process-pages-container" style="display: none;"></div>
         </td>
@@ -484,7 +484,7 @@ $application_pages = $return['application_pages'];
                 }
             } else {
                 processPagesContainer.style.display = 'none';
-                configPagesBtn.innerHTML = '<i class="fa fa-list mr-1"></i> Configure Pages';
+                configPagesBtn.innerHTML = '<i class="fa fa-list mr-1"></i> <?= __('Configure Pages') ?>';
             }
         });
 
@@ -492,7 +492,7 @@ $application_pages = $return['application_pages'];
         row.querySelector('.process-input').addEventListener('input', function () {
             processPagesContainer.innerHTML = '';
             processPagesContainer.style.display = 'none';
-            configPagesBtn.innerHTML = '<i class="fa fa-list mr-1"></i> Configure Pages';
+            configPagesBtn.innerHTML = '<i class="fa fa-list mr-1"></i> <?= __('Configure Pages') ?>';
         });
     }
 
@@ -666,9 +666,9 @@ $application_pages = $return['application_pages'];
             </div>
             <div class="col-4 w-full">
                 <select class="js-example-basic-single form-select page-select" name="process_pages[${processIndex}][type][]" required onchange="if(this.value==='other'){this.closest('.row').querySelector('.other-input-container').style.display='';this.closest('.row').querySelector('.other-page-input').required=true;}else{this.closest('.row').querySelector('.other-input-container').style.display='none';this.closest('.row').querySelector('.other-page-input').required=false;if(this.value){this.closest('.row').querySelector('.page-name-input').value=this.value;}}">
-                    <option value="">Select Page</option>
+                    <option value=""><?= __('Select Page') ?></option>
                     ${pageOptions}
-                    <option value="other">Other</option>
+                    <option value="other"><?= __('Other') ?></option>
                 </select>
             </div>
             <div class="col-2 other-input-container" style="display:none;">

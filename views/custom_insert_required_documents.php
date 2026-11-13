@@ -97,7 +97,7 @@
                        <div class="" id="kt_page_sticky_card">
 
                          <div class="card-header table-card-header">
-                          <h5> Required Documents</h5>
+                          <h5> <?php echo __('Required Documents'); ?></h5>
                           <div class="card-header-right table-card-header ">
                            <?php if($_GET['Rid']!="" || $data['current_status']!=""){ $nmm= ViewStatusValue($data['current_status'],'candidates');  ?>
                            <div class="btn-group">
@@ -107,7 +107,7 @@
                         <?php } ?>
                         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                           <i class="icofont icofont-reply"></i>
-                          Back
+                          <?php echo __('Back'); ?>
                         </a>
                       </div>
                     </div>
@@ -132,7 +132,7 @@
                                     <li>
                                       <div class="checkbox-fade fade-in-primary">
                                        <label class="form-label">
-                                         <input aria-label="Checkbox" type="checkbox"  <?php if(in_array($details['id'], $checkl)){ ?> checked  disabled="disabled" <?php
+                                         <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  <?php if(in_array($details['id'], $checkl)){ ?> checked  disabled="disabled" <?php
 }else{ ?> name="document[]" <?php
 } ?> value="<?php echo $details['id']; ?>" />
                                          <span class="cr">
@@ -163,7 +163,7 @@
                       <div class="col-lg-4">
                         <input type="hidden" name="candidate_id" value="<?php echo $candidate_id;  ?>" />
                         <input type="hidden" name="submit" value="submit" />
-                        <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i>Submit</button>
+                        <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i><?php echo __('Submit'); ?></button>
                       </div>
                     </div>
                   </div>

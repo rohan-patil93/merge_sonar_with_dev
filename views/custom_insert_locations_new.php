@@ -32,13 +32,13 @@ $application_users = $result['application_users'];
 
     <div class="card">
         <div class="card-header">
-            <h5>Locations </h5>
+            <h5><?php echo __('Locations'); ?> </h5>
 
             <div class="card-header-right">
 
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?php echo __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -48,30 +48,30 @@ $application_users = $result['application_users'];
 
                     <div class="row">
                         <div class="form-group col-lg-4">
-                            <span>Short Name <span style="color: red;">*</span></span>
-                            <input aria-label="Short Name" class="form-control" id="short_name" name="short_name" />
+                            <span><?php echo __('Short Name'); ?> <span style="color: red;">*</span></span>
+                            <input aria-label="<?php echo __('Short Name'); ?>" class="form-control" id="short_name" name="short_name" />
                             <div style="display: none; color: red;" id="short_name_err"></div>
                         </div>
                         <div class="form-group col-lg-4">
-                            <span>Location Name <span style="color: red;">*</span></span>
-                            <input aria-label="Location Name" class="form-control" id="location_name" name="location_name" />
+                            <span><?php echo __('Location Name'); ?> <span style="color: red;">*</span></span>
+                            <input aria-label="<?php echo __('Location Name'); ?>" class="form-control" id="location_name" name="location_name" />
                             <div style="display: none; color: red;" id="location_name_err"></div>
                         </div>
                         <div class="form-group col-lg-4">
-                            <span>Location Address <span style="color: red;">*</span></span>
-                            <textarea aria-label="Location Address" class="form-control" id="location_address" name="location_address" ></textarea>
+                            <span><?php echo __('Location Address'); ?> <span style="color: red;">*</span></span>
+                            <textarea aria-label="<?php echo __('Location Address'); ?>" class="form-control" id="location_address" name="location_address" ></textarea>
                             <div style="display: none; color: red;" id="location_address_err"></div>
                         </div>
 
                         <div class="form-group col-lg-4">
-                            <span>Tax Reference</span>
-                            <input aria-label="Tax Ref" class="form-control" id="tax_ref" name="tax_ref" />
+                            <span><?php echo __('Tax Reference'); ?></span>
+                            <input aria-label="<?php echo __('Tax Ref'); ?>" class="form-control" id="tax_ref" name="tax_ref" />
                             <div style="display: none; color: red;" id="tax_ref_err"></div>
                         </div>
                         <div class="form-group col-lg-4">
-                            <span>Parent Location ID</span>
-                            <select aria-label="Parent Location" class="form-select js-example-basic-single" id="parent_location_id" name="parent_location_id">
-                                <option value="0">Select Any one</option>
+                            <span><?php echo __('Parent Location ID'); ?></span>
+                            <select aria-label="<?php echo __('Parent Location'); ?>" class="form-select js-example-basic-single" id="parent_location_id" name="parent_location_id">
+                                <option value="0"><?php echo __('Select Any one'); ?></option>
                                 <?php foreach ($locations as $row) {
                                    echo  "<option value='{$row['id']
 }'>{$row['location_name']
@@ -82,9 +82,9 @@ $application_users = $result['application_users'];
                         </div>
 
                         <div class="form-group col-lg-4">
-                            <span>Location Country</span>
-                            <select aria-label="Location Country" class="form-select js-example-basic-single" id="location_country" name="location_country">
-                                <option value="0">Select Any one</option>
+                            <span><?php echo __('Location Country'); ?></span>
+                            <select aria-label="<?php echo __('Location Country'); ?>" class="form-select js-example-basic-single" id="location_country" name="location_country">
+                                <option value="0"><?php echo __('Select Any one'); ?></option>
                                 <?php foreach ($countries as $row) {
                                    echo  "<option value='{$row['id']
 }'>{$row['country_name']
@@ -97,49 +97,49 @@ $application_users = $result['application_users'];
                         </div>
 
                         <div class="form-group col-lg-4">
-                            <span>Location State</span>
-                            <select aria-label="Location State" class="form-select js-example-basic-single" id="location_state" name="location_state">
-                                <option value="0">Select Any one</option>
+                            <span><?php echo __('Location State'); ?></span>
+                            <select aria-label="<?php echo __('Location State'); ?>" class="form-select js-example-basic-single" id="location_state" name="location_state">
+                                <option value="0"><?php echo __('Select Any one'); ?></option>
                             </select>
                             <div style="display: none; color: red;" id="location_state_err"></div>
                         </div>
                         <div class="form-group col-lg-4">
-                            <span>Location City</span>
-                            <select aria-label="Location City" class="form-select js-example-basic-single" id="location_city" name="location_city">
-                                <option value="0">Select Any one</option>
+                            <span><?php echo __('Location City'); ?></span>
+                            <select aria-label="<?php echo __('Location City'); ?>" class="form-select js-example-basic-single" id="location_city" name="location_city">
+                                <option value="0"><?php echo __('Select Any one'); ?></option>
                             </select>
                             <div style="display: none; color: red;" id="location_city_err"></div>
                         </div>
                         <div class="form-group col-lg-4">
-                            <span>Location Post Code</span>
-                            <input aria-label="Location Post Code" class="form-control" id="location_post_code" name="location_post_code" />
+                            <span><?php echo __('Location Post Code'); ?></span>
+                            <input aria-label="<?php echo __('Location Post Code'); ?>" class="form-control" id="location_post_code" name="location_post_code" />
                             <div style="display: none; color: red;" id="location_post_code_err"></div>
                         </div>
 
                         <div class="form-group col-lg-3">
-                            <span>Latitude</span>
-                            <input aria-label="Loc Latitude" class="form-control" id="loc_latitude" name="loc_latitude" readonly/>
+                            <span><?php echo __('Latitude'); ?></span>
+                            <input aria-label="<?php echo __('Loc Latitude'); ?>" class="form-control" id="loc_latitude" name="loc_latitude" readonly/>
                             <div style="display: none; color: red;" id="loc_latitude_err"></div>
                         </div>
                         <div class="form-group col-lg-3">
-                            <span>Longitude</span>
-                            <input aria-label="Loc Longitude" class="form-control" id="loc_longitude" name="loc_longitude" readonly/>
+                            <span><?php echo __('Longitude'); ?></span>
+                            <input aria-label="<?php echo __('Loc Longitude'); ?>" class="form-control" id="loc_longitude" name="loc_longitude" readonly/>
                             <div style="display: none; color: red;" id="loc_longitude_err"></div>
                         </div>
                         <div class="form-group col-lg-4">
-                            <span>Location Description</span>
-                            <textarea aria-label="Location Description" class="form-control" id="location_description" name="location_description" readonly></textarea>
+                            <span><?php echo __('Location Description'); ?></span>
+                            <textarea aria-label="<?php echo __('Location Description'); ?>" class="form-control" id="location_description" name="location_description" readonly></textarea>
                             <div style="display: none; color: red;" id="location_description_err"></div>
                         </div>
                         <div class="form-group col-lg-2">
                             <span>&nbsp;</span>
-                            <button type="button" class="btn btn-success form-control" id="getLocationBtn">Add Map Point</button>
+                            <button type="button" class="btn btn-success form-control" id="getLocationBtn"><?php echo __('Add Map Point'); ?></button>
                         </div>
 
                         <div class="form-group col-lg-3">
-                            <span>In Location</span>
-                            <select aria-label="In Location" class="form-select js-example-basic-single" id="in_location" name="in_location">
-                                <option value="0">Select Any one</option>
+                            <span><?php echo __('In Location'); ?></span>
+                            <select aria-label="<?php echo __('In Location'); ?>" class="form-select js-example-basic-single" id="in_location" name="in_location">
+                                <option value="0"><?php echo __('Select Any one'); ?></option>
                                 <?php foreach ($locations as $row) {
                                    echo  "<option value='{$row['id']
 }'>{$row['location_name']
@@ -150,9 +150,9 @@ $application_users = $result['application_users'];
                             <div style="display: none; color: red;" id="in_location_err"></div>
                         </div>
                         <div class="form-group col-lg-3">
-                            <span>WIP Location</span>
-                            <select aria-label="Wip Location" class="form-select js-example-basic-single" id="wip_location" name="wip_location">
-                                <option value="0">Select Any one</option>
+                            <span><?php echo __('WIP Location'); ?></span>
+                            <select aria-label="<?php echo __('Wip Location'); ?>" class="form-select js-example-basic-single" id="wip_location" name="wip_location">
+                                <option value="0"><?php echo __('Select Any one'); ?></option>
                                 <?php foreach ($locations as $row) {
                                    echo  "<option value='{$row['id']
 }'>{$row['location_name']
@@ -163,9 +163,9 @@ $application_users = $result['application_users'];
                             <div style="display: none; color: red;" id="wip_location_err"></div>
                         </div>
                         <div class="form-group col-lg-3">
-                            <span>FG Location</span>
-                            <select aria-label="Fg Location" class="form-select js-example-basic-single" id="fg_location" name="fg_location">
-                                <option value="0">Select Any one</option>
+                            <span><?php echo __('FG Location'); ?></span>
+                            <select aria-label="<?php echo __('Fg Location'); ?>" class="form-select js-example-basic-single" id="fg_location" name="fg_location">
+                                <option value="0"><?php echo __('Select Any one'); ?></option>
                                 <?php foreach ($locations as $row) {
                                    echo  "<option value='{$row['id']
 }'>{$row['location_name']
@@ -176,9 +176,9 @@ $application_users = $result['application_users'];
                             <div style="display: none; color: red;" id="fg_location_err"></div>
                         </div>
                         <div class="form-group col-lg-3">
-                            <span>Rejection Location</span>
-                            <select aria-label="Rej Location" class="form-select js-example-basic-single" id="rej_location" name="rej_location">
-                                <option value="0">Select Any one</option>
+                            <span><?php echo __('Rejection Location'); ?></span>
+                            <select aria-label="<?php echo __('Rej Location'); ?>" class="form-select js-example-basic-single" id="rej_location" name="rej_location">
+                                <option value="0"><?php echo __('Select Any one'); ?></option>
                                 <?php foreach ($locations as $row) {
                                    echo  "<option value='{$row['id']
 }'>{$row['location_name']
@@ -190,9 +190,9 @@ $application_users = $result['application_users'];
                         </div>
 
                         <div class="form-group col-lg-4">
-                            <span>HR Connect</span>
-                            <select aria-label="Hr Connect" class="form-select js-example-basic-single" id="hr_connect" name="hr_connect">
-                                <option value="0">Select Any one</option>
+                            <span><?php echo __('HR Connect'); ?></span>
+                            <select aria-label="<?php echo __('Hr Connect'); ?>" class="form-select js-example-basic-single" id="hr_connect" name="hr_connect">
+                                <option value="0"><?php echo __('Select Any one'); ?></option>
                                 <?php foreach ($application_users as $row) {
                                    echo  "<option value='{$row['id']
 }'>{$row['display_name']
@@ -202,9 +202,9 @@ $application_users = $result['application_users'];
                             <div style="display: none; color: red;" id="hr_connect_err"></div>
                         </div>
                         <div class="form-group col-lg-4">
-                            <span>Admin Connect</span>
-                            <select aria-label="Admin Connect" class="form-select js-example-basic-single" id="admin_connect" name="admin_connect">
-                                <option value="0">Select Any one</option>
+                            <span><?php echo __('Admin Connect'); ?></span>
+                            <select aria-label="<?php echo __('Admin Connect'); ?>" class="form-select js-example-basic-single" id="admin_connect" name="admin_connect">
+                                <option value="0"><?php echo __('Select Any one'); ?></option>
                                 <?php foreach ($application_users as $row) {
                                    echo  "<option value='{$row['id']
 }'>{$row['display_name']
@@ -214,9 +214,9 @@ $application_users = $result['application_users'];
                             <div style="display: none; color: red;" id="admin_connect_err"></div>
                         </div>
                         <div class="form-group col-lg-4">
-                            <span>Finance Connect</span>
-                            <select aria-label="Finance Connect" class="form-select js-example-basic-single" id="finance_connect" name="finance_connect">
-                                <option value="0">Select Any one</option>
+                            <span><?php echo __('Finance Connect'); ?></span>
+                            <select aria-label="<?php echo __('Finance Connect'); ?>" class="form-select js-example-basic-single" id="finance_connect" name="finance_connect">
+                                <option value="0"><?php echo __('Select Any one'); ?></option>
                                 <?php foreach ($application_users as $row) {
                                    echo  "<option value='{$row['id']
 }'>{$row['display_name']
@@ -230,7 +230,7 @@ $application_users = $result['application_users'];
                     <div class="border-top">
 
                         <button name='submit' value='insert' class="btn waves-effect waves-light btn-primary mt-2">
-                            Save
+                            <?php echo __('Save'); ?>
                         </button>
 
                     </div>
@@ -250,8 +250,8 @@ $application_users = $result['application_users'];
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="mapModalLabel">Select Location</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="mapModalLabel"><?php echo __('Select Location'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
             <div class="modal-body">
                 <div id="map" style="height: 32rem; width: 100%;"></div>
@@ -304,7 +304,7 @@ $application_users = $result['application_users'];
                 success: function (response) {
                     response = JSON.parse(response);
                     const stateSelect = $("#location_state");
-                    stateSelect.empty().append('<option value="0"> Select Any one </option>');
+                    stateSelect.empty().append('<option value="0"> <?php echo __('Select Any one'); ?> </option>');
                     const tableData = Object.values(response.table);
                     if (tableData && tableData.length > 0) {
                         tableData.forEach(function (row) {
@@ -336,7 +336,7 @@ $application_users = $result['application_users'];
                 success: function (response) {
                     response = JSON.parse(response);
                     const citySelect = $("#location_city");
-                    citySelect.empty().append('<option value="0"> Select Any one </option>');
+                    citySelect.empty().append('<option value="0"> <?php echo __('Select Any one'); ?> </option>');
                     const tableData = Object.values(response.table);
                     if (tableData && tableData.length > 0) {
                         tableData.forEach(function (row) {
@@ -362,8 +362,8 @@ $application_users = $result['application_users'];
             if (countryId && countryId !== "0") {
                 loadStates(countryId);
             } else {
-                $("#location_state").empty().append('<option value="0"> Select Any one </option>');
-                $("#location_city").empty().append('<option value="0"> Select Any one </option>');
+                $("#location_state").empty().append('<option value="0"> <?php echo __('Select Any one'); ?> </option>');
+                $("#location_city").empty().append('<option value="0"> <?php echo __('Select Any one'); ?> </option>');
             }
         });
 
@@ -373,7 +373,7 @@ $application_users = $result['application_users'];
             if (stateId && stateId !== "0") {
                 loadCites(stateId);
             } else {
-                $("#location_city").empty().append('<option value="0"> Select Any one </option>');
+                $("#location_city").empty().append('<option value="0"> <?php echo __('Select Any one'); ?> </option>');
             }
         });
     });
@@ -391,7 +391,7 @@ $application_users = $result['application_users'];
         }
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright"><?php echo __('OpenStreetMap'); ?></a> contributors'
         }).addTo(map);
         const searchControl = new L.Control.Search({
             url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
@@ -459,15 +459,15 @@ $application_users = $result['application_users'];
         const locationAddress = $("#location_address").val();
 
         if (!shortName) {
-            $("#short_name_err").text("Please enter the Short Name").show();
+            $("#short_name_err").text(<?php echo json_encode(__('Please enter the Short Name')); ?>).show();
             isValid = false;
         }
         if (!locationName) {
-            $("#location_name_err").text("Please enter the Location Name").show();
+            $("#location_name_err").text(<?php echo json_encode(__('Please enter the Location Name')); ?>).show();
             isValid = false;
         }
         if (!locationAddress) {
-            $("#location_address_err").text("Please enter the Location Address").show();
+            $("#location_address_err").text(<?php echo json_encode(__('Please enter the Location Address')); ?>).show();
             isValid = false;
         }
 

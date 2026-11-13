@@ -28,7 +28,7 @@ $display_answer = json_decode($employee_feedbacks['display_answer'],1);
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">Feed Back Respons</h5>
+    <h5 class="modal-title"><?= __('Feed Back Respons') ?></h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body" <?php if($_POST['emp_id'] == $_SESSION['emp_id']){
@@ -51,7 +51,7 @@ $display_answer = json_decode($employee_feedbacks['display_answer'],1);
                 <?php } ?>
                 <?php }elseif($employee_feedbacks['answer_type'] == 'O'){?>
                     <select aria-label="Response" class="form-control js-example-basic-single" name="response">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach($question_options as $qo){ ?>
                                 <option value="<?php echo $qo; ?>" <?php echo $qo ==$emp_answer?"selected":""; ?>><?php echo $qo; ?></option>
                         <?php } ?>
@@ -62,6 +62,6 @@ $display_answer = json_decode($employee_feedbacks['display_answer'],1);
         </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitfeedbackform()">Submit</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitfeedbackform()"><?= __('Submit') ?></button>
 </div>

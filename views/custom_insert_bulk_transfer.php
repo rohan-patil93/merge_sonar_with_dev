@@ -205,25 +205,25 @@ foreach ($defalut_fields as $dfield) {
                     <div class="card card-custom " id="kt_page_sticky_card">
                         <div class="card-header">
                             <div class="card-title col-lg-12">
-                                <h3 class="card-label">Employees Bulk Transfer</h3>
+                                <h3 class="card-label"><?= __('Employees Bulk Transfer') ?></h3>
                                 <div class="col-lg-4">
                                     <input aria-label="Month Year Cal" class="form-control" type="month" name="month_year_cal" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
                                 </div>
                                 <div class="col-lg-1">
-                                    <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i>Filter</button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Filter') ?></button>
                                 </div>
 
                                 <div class="col-lg-3 w-full">
                                     <select aria-label="Displayattributes[]" class="form-control selectpicker" name="displayattributes[]" multiple="multiple">
                                         <?php foreach ($employees_fieldlist as $fkey => $fieldvalue) { ?>
-                                            <option value="<?php echo $fkey; ?>" <?php echo in_array($fkey, (array)$defalut_fields) ? 'selected' : ''; ?>  > <?php echo $fieldvalue['lable']; ?> </option>
+                                            <option value="<?php echo $fkey; ?>" <?php echo in_array($fkey, (array)$defalut_fields) ? 'selected' : ''; ?>  > <?php echo htmlspecialchars(__($fieldvalue['lable'] ?? '')); ?> </option>
                                         <?php }    ?>
 
                                     </select>
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="hidden" id="filterby" name="filterby">
-                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
+                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply"><?= __('Apply') ?></button>
                                 </div>
                             </div>
                         </div>
@@ -238,16 +238,16 @@ foreach ($defalut_fields as $dfield) {
         <div class="card card-custom col-lg-12">
             <div class="row ">
                 <div class="form-group col-lg-3 mt-10 mb-10 w-full"  id="bulkcategory" style="display: none">
-                    <span>Transfer Category</span>
+                    <span><?= __('Transfer Category') ?></span>
                     <select aria-label="Bulkchangecategory" onchange="showbulkchangefilter(this.value);" id="bulkchangecategory" name="bulkchangecategory" class="form-control" >
                         <?php
                         foreach ($bulkchangecategory as $filter) {
                             ?>
                             <option <?php if($selectedoption==$filter['application_tablename']) {?> selected <?php
-} ?> value="<?php echo $filter['application_tablename']."|".$filter['application_table_fieldname'].'|'.$filter['id'].'|'.$filter['update_employees_fieldname'].'|'.$filter['insert_history_tablename'];?>"><?php echo $filter['category_name'];?></option>
+} ?> value="<?php echo $filter['application_tablename']."|".$filter['application_table_fieldname'].'|'.$filter['id'].'|'.$filter['update_employees_fieldname'].'|'.$filter['insert_history_tablename'];?>"><?php echo htmlspecialchars(__($filter['category_name'] ?? ''));?></option>
                         <?php } ?>
                     </select>
-                    <span class="form-text text-muted">Select Bulk Transfer Category</span>
+                    <span class="form-text text-muted"><?= __('Select Bulk Transfer Category') ?></span>
 
                 </div>
 
@@ -255,7 +255,7 @@ foreach ($defalut_fields as $dfield) {
 
                 </div>
                 <div class="col-lg-3 mt-10 mb-10" id="effectdate" style="display: none">
-                    <span>Effective From</span>
+                    <span><?= __('Effective From') ?></span>
                     <div class="input-group date">
                         <input aria-label="Effective Date" type="text" class="form-control"  id="kt_datepicker_4_1"  name="effective_date" />
                         <div class="input-group-append">
@@ -264,7 +264,7 @@ foreach ($defalut_fields as $dfield) {
                             </span>
                         </div>
                     </div>
-                    <span class="form-text text-muted">Enter Effective From</span>
+                    <span class="form-text text-muted"><?= __('Enter Effective From') ?></span>
 
                 </div>
                 <div class="col-lg-2 mt-10 mb-10">
@@ -275,7 +275,7 @@ foreach ($defalut_fields as $dfield) {
                     <input type="hidden" id="bulkmove_empids">
                     <input type="hidden" id="bulkchange_categoryid">
                     <input type="hidden" id="bulkmove_toid">
-                    <button id="previewbtn"  style="display: none" class="btn btn-primary btn-shadow-hover font-weight-bold mt-8" onclick="bulkconfirmpopup()">Preview</button>
+                    <button id="previewbtn"  style="display: none" class="btn btn-primary btn-shadow-hover font-weight-bold mt-8" onclick="bulkconfirmpopup()"><?= __('Preview') ?></button>
 
                 </div>
 
@@ -290,13 +290,13 @@ foreach ($defalut_fields as $dfield) {
                     <thead>
                         <tr>
                             <th scope="col" style="width: 5%;">&nbsp;&nbsp;&nbsp;&nbsp;<i class="flaticon-list-3"> </i> </th>
-                            <th scope="col" style="width: 15%;">NAME </th>
+                            <th scope="col" style="width: 15%;"><?= __('NAME') ?> </th>
 
                             <?php foreach ($employees_fieldlist as $empkey => $empfield) {
                             if(in_array($empkey, (array)$defalut_fields))  {
                                 ?>
                                 <th scope="col">
-                                    <?php echo $empfield['lable']; ?> </th>
+                                    <?php echo htmlspecialchars(__($empfield['lable'] ?? '')); ?> </th>
                                 <?php } ?>
                                 <?php } ?>
                             </tr>

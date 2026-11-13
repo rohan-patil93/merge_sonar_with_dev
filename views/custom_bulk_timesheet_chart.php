@@ -18,7 +18,7 @@ foreach($vendor_charts as $vendor_chart){
 <div class="card card-custom gutter-b">
 	<div class="card-header">
 		<div class="card-title">
-			<h5 class="card-label">Vendor-Wise Budget Vs Actuals <?php //print_r($chart_data); ?></h5>
+			<h5 class="card-label"><?= __("Vendor-Wise Budget Vs Actuals") ?> <?php //print_r($chart_data); ?></h5>
 		</div>
 	</div>
 	<div class="card-body">
@@ -49,9 +49,9 @@ foreach($vendor_charts as $vendor_chart){
 				<thead>
 					<tr class="">
 						<th scope="col" class=""></th>
-						<th scope="col" class="" name="vendors_count"> Vendor Name</th>
-						<th scope="col" class="text-right" name="resources_count"> Budget Amount</th>
-						<th scope="col" class="text-right" name="leaves_count"> Available</th>
+						<th scope="col" class="" name="vendors_count"> <?= __("Vendor Name") ?></th>
+						<th scope="col" class="text-right" name="resources_count"> <?= __("Budget Amount") ?></th>
+						<th scope="col" class="text-right" name="leaves_count"> <?= __("Available") ?></th>
 						
 					</tr>
 				</thead>
@@ -71,7 +71,7 @@ foreach($vendor_charts as $vendor_chart){
 							</td>
 							<td class="">
 								<a  class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-sm">&nbsp;
-									<?php echo $vendor_chart['display_name']; ?> </a>	</br><small>(<?php echo $vendor_chart['esign_ref_no']; ?> ) Exp From : <?php echo fromDate($vendor_chart['effective_from_date']); ?>  Exp To : <?php echo fromDate($vendor_chart['effective_to_date']); ?></small>
+									<?php echo $vendor_chart['display_name']; ?> </a>	</br><small>(<?php echo $vendor_chart['esign_ref_no']; ?> ) <?= __("Exp From :") ?> <?php echo fromDate($vendor_chart['effective_from_date']); ?>  <?= __("Exp To :") ?> <?php echo fromDate($vendor_chart['effective_to_date']); ?></small>
 										
 								</td>
 								<td class="text-right">

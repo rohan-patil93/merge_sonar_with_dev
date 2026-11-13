@@ -53,15 +53,13 @@ if ($rid != '') {
 <div class="page-body">
     <div class="card proj-progress-card">
         <div class="card-header">
-            <h5>CSR Yearly Budget</h5>
+            <h5><?= __('CSR Yearly Budget') ?></h5>
             <div class="card-header-right">
                 <a href="javascript:void(0);" id="showFormBtn" class="btn btn-success mb-2 desktop-view">
-                    <i class="icofont icofont-plus icon-white"></i>
-                    Budget
+                    <i class="icofont icofont-plus icon-white"></i> <?= __('Budget') ?>
                 </a>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-reply"></i>
-                    Back
+                    <i class="icofont icofont-reply"></i> <?= __('Back') ?>
                 </a>
             </div>
         </div>
@@ -70,22 +68,22 @@ if ($rid != '') {
             <form method="POST" action="" class="form-inline mb-3 d-none" id="budgetForm" autocomplete="off">
                 <div class="row">
                     <div class="col-md-4 form-group mr-3">
-                        <label for="base_year" class="mr-2">Base Year</label>
+                        <label for="base_year" class="mr-2"><?= __('Base Year') ?></label>
                         <input type="number" id="base_year" name="base_year" class="form-control js-base-year" required
                             value="<?php if(isset($rid) && $rid != ''){ echo $valueData['base_year'];
 } ?>"
                             >
-                        <span id="baseYearError" class="text-danger base-year-error">Base Year already exists!</span>
+                        <span id="baseYearError" class="text-danger base-year-error"><?= __('Base Year already exists!') ?></span>
                     </div>
                     <div class="col-md-4 form-group">
-                        <label for="finance_budget">Finance Budget</label>
+                        <label for="finance_budget"><?= __('Finance Budget') ?></label>
                         <input type="number" step="any" id="finance_budget" name="finance_budget" class="form-control" required
                             value="<?php if(isset($rid) && $rid != ''){ echo $valueData['finance_budget'];
 } ?>">
                     </div>
                     <div class="col-md-4 align-self-end form-group">
                         <input type="hidden" id="rid" name="rid" value="">
-                        <button name="submit" value="insert" type="submit" class="btn btn-primary" id="budgetSubmitBtn">Submit</button>
+                        <button name="submit" value="insert" type="submit" class="btn btn-primary" id="budgetSubmitBtn"><?= __('Submit') ?></button>
                     </div>
                 </div>
             </form>
@@ -95,13 +93,13 @@ if ($rid != '') {
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Sr. No</th>
-                            <th scope="col">Creator</th>
-                            <th scope="col">Base Year</th>
-                            <th scope="col">Finance Budget</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('Sr. No') ?></th>
+                            <th scope="col"><?= __('Creator') ?></th>
+                            <th scope="col"><?= __('Base Year') ?></th>
+                            <th scope="col"><?= __('Finance Budget') ?></th>
+                            <th scope="col"><?= __('Date') ?></th>
+                            <th scope="col"><?= __('Status') ?></th>
+                            <th scope="col"><?= __('Action') ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -127,17 +125,17 @@ if ($rid != '') {
       data-bg="<?php echo $_SESSION['status'][$row['current_status']]['background_color'] ?? 'blue'; ?>">
                                             <?php
                                             if ($row['current_status'] == 0) {
-                                                echo "Active";
+                                                echo __('Active');
                                             } elseif ($row['current_status'] > 0 && $row['current_status'] < 199) {
-                                                echo "In Progress";
+                                                echo __('In Progress');
                                             } elseif ($row['current_status'] == 199 && $row['tracking_status'] == 0) {
-                                                echo "Tracking";
+                                                echo __('Tracking');
                                             } elseif ($row['current_status'] == 199 && $row['tracking_status'] == 1) {
-                                                echo "Completed";
+                                                echo __('Completed');
                                             } elseif ($row['current_status'] == 199) {
-                                                echo "Approved";
+                                                echo __('Approved');
                                             } else {
-                                                echo "Unknown";
+                                                echo __('Unknown');
                                             }
                                             ?>
                                         </span>
@@ -161,7 +159,7 @@ if ($rid != '') {
                         <?php }
                         } else {
                             echo '<tr> <td colspan="7" class="text-center">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i>' . __('No Records') . '</p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px no-record-img" alt="" src="assets/images/work.png" >
                                         </div>

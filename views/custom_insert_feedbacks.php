@@ -82,7 +82,7 @@ $feedbacks = $result['feedbacks'];
     var maxoption = 10000;
     function addMoreQuestionOption(){
         maxoption++;
-        var html = '<div class="input-group input-group-button" id="deletoption_'+maxoption+'"><input aria-label="Question Options[]" type="text" name="question_options[]" class="form-control width1" value="" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><span class="input-group-text addon-style bg-danger"><span class=""><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-white" onclick="deletRowOption('+maxoption+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </span></span></div>';
+        var html = '<div class="input-group input-group-button" id="deletoption_'+maxoption+'"><input aria-label="<?php echo __('Question Options[]'); ?>" type="text" name="question_options[]" class="form-control width1" value="" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><span class="input-group-text addon-style bg-danger"><span class=""><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-white" onclick="deletRowOption('+maxoption+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </span></span></div>';
         $("#options").append(html);
     }
 </script>
@@ -90,13 +90,13 @@ $feedbacks = $result['feedbacks'];
 } ?>>
     <form method="post">
         <div class="card-header">
-            <h5>Feed Backs</h5>
+            <h5><?php echo __('Feed Backs'); ?></h5>
             <div class="card-header-right table-card-header">
                 <input type="hidden" name="rid" value="<?php echo $rid; ?>" />
                 <?php if($feedbacks['shared'] =='1'){ ?>
-                <button type="submit" name="start_feedback" class="btn btn-primary mb-2 desktop-view"> Share FeedBack</button>
+                <button type="submit" name="start_feedback" class="btn btn-primary mb-2 desktop-view"> <?php echo __('Share FeedBack'); ?></button>
                 <?php } ?>
-                <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</button>
+                <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?php echo __('Back'); ?></button>
             </div>
         </div>
     </form>
@@ -106,17 +106,17 @@ $feedbacks = $result['feedbacks'];
                 <div class="col-lg-8">
                     <div class="row">
                         <div class="form-group col-lg-5">
-                            <span class="form-label">Question<span class="text-danger">*</span></span>
-                            <textarea aria-label="Question" class="form-control header_comment_text" name="question" spellcheck="false"><?php echo $feedbacks['question']; ?></textarea>
+                            <span class="form-label"><?php echo __('Question'); ?><span class="text-danger">*</span></span>
+                            <textarea aria-label="<?php echo __('Question'); ?>" class="form-control header_comment_text" name="question" spellcheck="false"><?php echo $feedbacks['question']; ?></textarea>
 
                         </div>
                         <div class="form-group col-lg-5">
-                            <span class="form-label">Description<span class="text-danger">*</span></span>
-                            <textarea aria-label="Description" class="form-control header_comment_text" name="description" spellcheck="false"><?php echo $feedbacks['description']; ?></textarea>
+                            <span class="form-label"><?php echo __('Description'); ?><span class="text-danger">*</span></span>
+                            <textarea aria-label="<?php echo __('Description'); ?>" class="form-control header_comment_text" name="description" spellcheck="false"><?php echo $feedbacks['description']; ?></textarea>
                         </div>
                         <div class="form-group col-lg-2">
-                            <span class="form-label">Answer Type<span class="text-danger">*</span></span>
-                            <select aria-label="Answer Type" class="form-select js-example-basic-single" name="answer_type" id="answer_type" onchange="getAnswerType()">
+                            <span class="form-label"><?php echo __('Answer Type'); ?><span class="text-danger">*</span></span>
+                            <select aria-label="<?php echo __('Answer Type'); ?>" class="form-select js-example-basic-single" name="answer_type" id="answer_type" onchange="getAnswerType()">
                                 <?php foreach($answertype as $key=>$keyval){ ?>
                                 <option value="<?php echo $key; ?>" <?php echo $feedbacks['answer_type'] ==$key?"selected":""; ?>><?php echo $keyval; ?></option>
                                 <?php } ?>
@@ -124,9 +124,9 @@ $feedbacks = $result['feedbacks'];
                         </div>
 
                         <div class="form-group col-lg-5 w-full">
-                            <span class="form-label">Frequency</span>
-                            <select aria-label="Action Frequency" class="form-control js-example-basic-single" name="action_frequency" >
-                                <option value="0">Select Any One</option>
+                            <span class="form-label"><?php echo __('Frequency'); ?></span>
+                            <select aria-label="<?php echo __('Action Frequency'); ?>" class="form-control js-example-basic-single" name="action_frequency" >
+                                <option value="0"><?php echo __('Select Any One'); ?></option>
                                 <?php foreach ($frequency as  $uom) { ?>
                                     <option <?php if($uom['genc_detail_code'] == $feedbacks['action_frequency']){ ?> selected <?php
 } ?> value="<?php echo $uom['genc_detail_code']; ?>"><?php echo $uom['genc_detail_name']; ?></option>
@@ -136,8 +136,8 @@ $feedbacks = $result['feedbacks'];
 
                         <div class="form-group col-lg-5">
                             <?php $employee_ids = json_decode($feedbacks['employee_ids'],1);  ?>
-                            <span class="form-label">Employees<span class="text-danger">*</span></span>
-                            <select aria-label="Employee Ids[]" class="form-select js-example-basic-multiple" name="employee_ids[]"  multiple>
+                            <span class="form-label"><?php echo __('Employees'); ?><span class="text-danger">*</span></span>
+                            <select aria-label="<?php echo __('Employee Ids[]'); ?>" class="form-select js-example-basic-multiple" name="employee_ids[]"  multiple>
                                 <?php foreach($employees as $empid=>$dname){ ?>
                                 <option value="<?php echo $empid; ?>" <?php echo (in_array($empid, (array)$employee_ids))?"selected":"";?> <?php echo $empid==$_SESSION['emp_id']?"disabled":""; ?>><?php echo $dname; ?></option>
                                 <?php } ?>
@@ -147,7 +147,7 @@ $feedbacks = $result['feedbacks'];
                     </div>
                 </div>
                 <div class="col-lg-4" id="enter_option" style="<?php echo ($feedbacks['answer_type'] =='O')?"":"display: none"; ?>">
-                    <span class="form-label d-block">Option<span class="text-danger">*</span></span>
+                    <span class="form-label d-block"><?php echo __('Option'); ?><span class="text-danger">*</span></span>
                     <div id="options">
                     <?php
                     $paoption = json_decode($feedbacks['question_options'],1);
@@ -155,7 +155,7 @@ $feedbacks = $result['feedbacks'];
                         $paoption[] = "";
                     } foreach($paoption as $paopt){ ?>
                         <div class="input-group input-group-button" id="deletoption_<?php echo $optionseq; ?>">
-                            <input aria-label="Question Options[]" type="text" name="question_options[]" class="form-control width1" value="<?php echo $paopt; ?>">
+                            <input aria-label="<?php echo __('Question Options[]'); ?>" type="text" name="question_options[]" class="form-control width1" value="<?php echo $paopt; ?>">
                             <span class="input-group-text addon-style bg-danger">
                                 <span class="cursor-pointer"><i class="ti-trash text-white"  onclick="deletRowOption('<?php echo $optionseq; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i> </span>
                             </span>
@@ -163,11 +163,11 @@ $feedbacks = $result['feedbacks'];
                         <?php $optionseq++;
 } ?>
                     </div>
-                    <button type="button" class="btn btn-success waves-effect waves-light float-left mt-2" onclick="addMoreQuestionOption()"><i class="icofont icofont-plus icon-white m-r-10"></i>Add More</button>
+                    <button type="button" class="btn btn-success waves-effect waves-light float-left mt-2" onclick="addMoreQuestionOption()"><i class="icofont icofont-plus icon-white m-r-10"></i><?php echo __('Add More'); ?></button>
                 </div>
                 <div class="col-lg-4" id="enter_ratting" style="<?php echo ($feedbacks['answer_type'] =='R')?"":"display: none"; ?>">
-                    <span class="form-label d-block">Ratting From 1 To<span class="text-danger">*</span></span>
-                    <input aria-label="Max Ratting" type="text" name="max_ratting" class="form-control" value="<?php echo $feedbacks['max_ratting']; ?>" >
+                    <span class="form-label d-block"><?php echo __('Ratting From 1 To'); ?><span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Max Ratting'); ?>" type="text" name="max_ratting" class="form-control" value="<?php echo $feedbacks['max_ratting']; ?>" >
                 </div>
             </div>
             <input type="hidden" name="rid" value="<?php echo $rid; ?>" />

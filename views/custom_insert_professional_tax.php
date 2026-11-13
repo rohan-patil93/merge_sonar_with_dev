@@ -67,11 +67,11 @@ $months = array(
         fcount++;
         var htmlRows = '';
         htmlRows += '<tr class="rowclass'+fcount+'"><td><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger" onclick="deleterowpt('+fcount+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></td>';
-        htmlRows += '<td><input aria-label="Fstart Range[]" type="text" name="fstart_range[]" class="form-control fitemRow text-right" value="0.00" style="width: 130px;"></td> ';
-        htmlRows += '<td><input aria-label="Fend Range[]"  type="text" name="fend_range[]" class="form-control text-right" value="0.00" style="width: 130px;"></td>';
-        htmlRows += '<td><input aria-label="Ftax Amount[]"  type="text" name="ftax_amount[]"   onblur="monthamontcalculation('+fcount+')" class="form-control taxamountcheck tax_amountpt'+fcount+'  text-right"  data-checkid="'+fcount+'" value="0.00" style="width: 130px;"></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Fstart Range[]'); ?>" type="text" name="fstart_range[]" class="form-control fitemRow text-right" value="0.00" style="width: 130px;"></td> ';
+        htmlRows += '<td><input aria-label="<?php echo __('Fend Range[]'); ?>"  type="text" name="fend_range[]" class="form-control text-right" value="0.00" style="width: 130px;"></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Ftax Amount[]'); ?>"  type="text" name="ftax_amount[]"   onblur="monthamontcalculation('+fcount+')" class="form-control taxamountcheck tax_amountpt'+fcount+'  text-right"  data-checkid="'+fcount+'" value="0.00" style="width: 130px;"></td>';
             <?php foreach($months as $keyy=>$value3){ ?>
-        htmlRows += '<td ><input aria-label="Input field"  type="text" name="fmonthvalue[<?php echo $keyy; ?>][]" class="form-control text-right monthamount'+fcount+'" onblur="monthamontcalculation('+fcount+')" value="0.00" style="width: 110px;"></td>';
+        htmlRows += '<td ><input aria-label="<?php echo __('Input field'); ?>"  type="text" name="fmonthvalue[<?php echo $keyy; ?>][]" class="form-control text-right monthamount'+fcount+'" onblur="monthamontcalculation('+fcount+')" value="0.00" style="width: 110px;"></td>';
                     <?php } ?>
         htmlRows += '</tr>';
         $('#finvoiceItem').append(htmlRows);
@@ -81,11 +81,11 @@ $months = array(
          count++;
         var htmlRows = '';
         htmlRows += '<tr class="rowclass'+count+'"><td><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger" onclick="deleterowpt('+count+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></td>';
-        htmlRows += '<td><input aria-label="Start Range[]" type="text" name="start_range[]" class="form-control itemRow text-right" value="0.00" style="width: 130px;"></td> ';
-        htmlRows += '<td><input aria-label="End Range[]"  type="text" name="end_range[]" class="form-control text-right" value="0.00" style="width: 130px;"></td>';
-        htmlRows += '<td><input aria-label="Tax Amount[]"  type="text" name="tax_amount[]"   onblur="monthamontcalculation('+count+')" class="form-control taxamountcheck tax_amountpt'+count+'  text-right"  data-checkid="'+count+'" value="0.00" style="width: 130px;"></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Start Range[]'); ?>" type="text" name="start_range[]" class="form-control itemRow text-right" value="0.00" style="width: 130px;"></td> ';
+        htmlRows += '<td><input aria-label="<?php echo __('End Range[]'); ?>"  type="text" name="end_range[]" class="form-control text-right" value="0.00" style="width: 130px;"></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Tax Amount[]'); ?>"  type="text" name="tax_amount[]"   onblur="monthamontcalculation('+count+')" class="form-control taxamountcheck tax_amountpt'+count+'  text-right"  data-checkid="'+count+'" value="0.00" style="width: 130px;"></td>';
             <?php foreach($months as $keyy=>$value3){ ?>
-        htmlRows += '<td ><input aria-label="Input field"  type="text" name="monthvalue[<?php echo $keyy; ?>][]" class="form-control text-right monthamount'+count+'" onblur="monthamontcalculation('+count+')" value="0.00" style="width: 110px;"></td>';
+        htmlRows += '<td ><input aria-label="<?php echo __('Input field'); ?>"  type="text" name="monthvalue[<?php echo $keyy; ?>][]" class="form-control text-right monthamount'+count+'" onblur="monthamontcalculation('+count+')" value="0.00" style="width: 110px;"></td>';
                     <?php } ?>
         htmlRows += '</tr>';
         $('#invoiceItem').append(htmlRows);
@@ -109,8 +109,8 @@ function monthamontcalculation(id){
     if(tax_amountpt < total){
        Swal.fire({
   icon: 'error',
-  title: 'Oops...',
-  text: 'Error message',
+  title: <?php echo json_encode(__('Oops...')); ?>,
+  text: <?php echo json_encode(__('Error message')); ?>,
 })
     }
     console.log(total);
@@ -182,32 +182,32 @@ function viewexemption(){
 <div class="modal-content" style="overflow-y: scroll;">
     <div class="j-pro">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Professional Tax</h5><br />
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="exampleModalLabel"><?php echo __('Professional Tax'); ?></h5><br />
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
         <form method="post" action="" class=" ">
         <div class="modal-body" >
             <div class="form-group row">
                 <div class="form-group col-lg-4">
-                    <span class="form-label">PT Number:</span>
-                    <input aria-label="Pt Number" type="text" class="form-control" name="pt_number" placeholder="" value="<?php echo $pfftdata['pt_number']; ?>">
+                    <span class="form-label"><?php echo __('PT Number:'); ?></span>
+                    <input aria-label="<?php echo __('Pt Number'); ?>" type="text" class="form-control" name="pt_number" placeholder="" value="<?php echo $pfftdata['pt_number']; ?>">
                 </div>
                 <div class="col-lg-4">
-                    <span class="form-label">Work Location:</span>
-                    <select aria-label="Wrok Location" class="form-control form-select js-example-basic-single" name="wrok_location_id" onchange="locationselection(this.value)" id="kt_select2_41">
-                        <option value="0"> Select Any One </option>
+                    <span class="form-label"><?php echo __('Work Location:'); ?></span>
+                    <select aria-label="<?php echo __('Wrok Location'); ?>" class="form-control form-select js-example-basic-single" name="wrok_location_id" onchange="locationselection(this.value)" id="kt_select2_41">
+                        <option value="0"> <?php echo __('Select Any One'); ?> </option>
                         <?php foreach ($locationdata as $location) { ?>
-                            <option  <?php if($location['id'] == $pfftdata['work_location_id']) { echo "selected";
+                            <option  <?php if($location['id'] == $pfftdata['work_location_id']) { echo __('selected');
 } ?> value="<?php echo $location['id']."||".$location['location_state'];  ?>"><?php echo $location['location_name'];  ?></option>
                        <?php  } ?>
                     </select>
                 </div>
                 <div class="form-group col-lg-4">
-                    <span class="form-label">State :</span>
-                    <select aria-label="State" class="form-control  form-select js-example-basic-single selectstatedrop" name="state" id="kt_select2_42">
-                        <option value="0"> Select Any One </option>
+                    <span class="form-label"><?php echo __('State :'); ?></span>
+                    <select aria-label="<?php echo __('State'); ?>" class="form-control  form-select js-example-basic-single selectstatedrop" name="state" id="kt_select2_42">
+                        <option value="0"> <?php echo __('Select Any One'); ?> </option>
                         <?php foreach ($satedata as $state) { ?>
-                            <option  <?php if($state['id'] == $pfftdata['state_id']) { echo "selected";
+                            <option  <?php if($state['id'] == $pfftdata['state_id']) { echo __('selected');
 } ?> value="<?php echo $state['id'];  ?>"><?php echo $state['state_name'];  ?></option>
                        <?php  } ?>
 
@@ -217,7 +217,7 @@ function viewexemption(){
             <div>
                 <div class="row col-lg-8 p-2 text-white" onclick="viewexemption()" style="background-color: #4099ff;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                     <div class="col-lg-11">
-                        Professional Tax Exemptions
+                        <?php echo __('Professional Tax Exemptions'); ?>
                     </div>
                     <div class=" col-lg-1 text-right f-w-600 f-16 cursor-pointer"  id="exemptionicon">
                         +
@@ -235,7 +235,7 @@ function viewexemption(){
                      <div class="col-lg-1 f-w-600 mt-1">
                         <div class="checkbox-zoom zoom-primary mt-1">
                             <label class="form-label">
-                                <input aria-label="Checkbox" type="checkbox" <?php if(in_array($exdata['id'], (array)$chek_ex_id)){ ?> checked <?php
+                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php if(in_array($exdata['id'], (array)$chek_ex_id)){ ?> checked <?php
 } ?>  name="ptexemption[<?php echo $exdata['id']; ?>]" value= "1" >
                                 <span class="cr">
                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -244,7 +244,7 @@ function viewexemption(){
                         </div>
                     </div>
                     <div class="col-lg-7 f-w-600">
-                      <input aria-label="Input field" type="text" class="form-control" readonly value="<?php echo $exdata['exemption_name']." (".$exdata['exemption_code'].")"; ?>">
+                      <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" readonly value="<?php echo $exdata['exemption_name']." (".$exdata['exemption_code'].")"; ?>">
                       <input type="hidden" name="ptexemptionmin[<?php echo $exdata['id']; ?>][id]" value="<?php echo $exdata['id']; ?>">
                       <input type="hidden" name="ptexemptionmin[<?php echo $exdata['id']; ?>][exemption_name]" value="<?php echo $exdata['exemption_name']; ?>">
                       <input type="hidden" name="ptexemptionmin[<?php echo $exdata['id']; ?>][exemption_code]" value="<?php echo $exdata['exemption_code']; ?>">
@@ -254,7 +254,7 @@ function viewexemption(){
                         $minmum_range = $chek_ex[$exdata['id']]['minmum_range'] !="" ? $chek_ex[$exdata['id']]['minmum_range'] : $exdata['minmum_range'];
                     ?>
                     <div class="col-lg-2 f-w-600">
-                        <input aria-label="Input field" type="text" <?php if($exdata['range_type']=='yes_no'){ echo "readonly";
+                        <input aria-label="<?php echo __('Input field'); ?>" type="text" <?php if($exdata['range_type']=='yes_no'){ echo __('readonly');
 } ?>  class="form-control" name="ptexemptionmin[<?php echo $exdata['id']; ?>][minmum_range]" value="<?php echo $minmum_range; ?>">
                     </div>
                     <div class="col-lg-2 f-w-600 mt-2">
@@ -267,10 +267,10 @@ function viewexemption(){
             <div class="form-group">
                 <div class="example mb-10 mt-5">
                     <div class="btn waves-effect waves-light btn-primary p-2 m-r-5" style="border-radius: 5px;" id="maledivtab" onclick="showslabs('malediv')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                        <i class="fa fa-male" ></i> Male
+                        <i class="fa fa-male" ></i> <?php echo __('Male'); ?>
                     </div>
                     <div class="btn waves-effect waves-light  p-2  m-r-5"  id="femaledivtab" style="border-radius: 5px;" onclick="showslabs('femalediv')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                        <i class="fa fa-female" ></i> Female
+                        <i class="fa fa-female" ></i> <?php echo __('Female'); ?>
                     </div>
                 </div>
                 <div class="mt-5" id="maindiv">
@@ -280,9 +280,9 @@ function viewexemption(){
                                 <thead>
                                     <tr>
                                         <th scope="col" ></th>
-                                        <th scope="col" class="text-right">Start Range</th>
-                                        <th scope="col" class="text-right">End Range</th>
-                                        <th scope="col" class="text-right">Tax Amount</th>
+                                        <th scope="col" class="text-right"><?php echo __('Start Range'); ?></th>
+                                        <th scope="col" class="text-right"><?php echo __('End Range'); ?></th>
+                                        <th scope="col" class="text-right"><?php echo __('Tax Amount'); ?></th>
                                          <?php foreach($months as $key=>$value){?>
                                                 <th scope="col" class="text-right"><?php echo $value;?></th>
                                         <?php } ?>
@@ -292,13 +292,13 @@ function viewexemption(){
                                     <tr class="rowclass<?php echo $i; ?>">
                                         <td><i class="ti-trash text-danger" onclick="deleterowpt(<?php echo $i; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i></td>
                                         <td scope="row">
-                                            <input aria-label="Start Range[]" type="text" name="start_range[]" class="form-control itemRow text-right" placeholder="" value="<?php echo $slabs_value['start_range']; ?>" style="width: 130px;">
+                                            <input aria-label="<?php echo __('Start Range[]'); ?>" type="text" name="start_range[]" class="form-control itemRow text-right" placeholder="" value="<?php echo $slabs_value['start_range']; ?>" style="width: 130px;">
                                         </td>
-                                        <td><input aria-label="End Range[]"  type="text" name="end_range[]" class="form-control text-right" placeholder="" value="<?php echo $slabs_value['end_range']; ?>" style="width: 130px;"></td>
-                                        <td><input aria-label="Tax Amount[]" type="text" name="tax_amount[]" class="form-control text-right taxamountcheck tax_amountpt<?php echo $i; ?>" placeholder="" data-checkid="<?php echo $i; ?>" value="<?php echo $slabs_value['tax_amount']; ?>" onblur="monthamontcalculation(<?php echo $i; ?>)" style="width: 130px;"></td>
+                                        <td><input aria-label="<?php echo __('End Range[]'); ?>"  type="text" name="end_range[]" class="form-control text-right" placeholder="" value="<?php echo $slabs_value['end_range']; ?>" style="width: 130px;"></td>
+                                        <td><input aria-label="<?php echo __('Tax Amount[]'); ?>" type="text" name="tax_amount[]" class="form-control text-right taxamountcheck tax_amountpt<?php echo $i; ?>" placeholder="" data-checkid="<?php echo $i; ?>" value="<?php echo $slabs_value['tax_amount']; ?>" onblur="monthamontcalculation(<?php echo $i; ?>)" style="width: 130px;"></td>
                                     <?php foreach($months as $keys=>$value2){ ?>
                                     <td >
-                                        <input aria-label="Input field"  type="text" name="monthvalue[<?php echo $keys; ?>][]" class="form-control  text-right monthamount<?php echo $i; ?>" onblur="monthamontcalculation(<?php echo $i; ?>)" value="<?php echo $slabs_value['months'][$keys]; ?>" style="width: 110px;">
+                                        <input aria-label="<?php echo __('Input field'); ?>"  type="text" name="monthvalue[<?php echo $keys; ?>][]" class="form-control  text-right monthamount<?php echo $i; ?>" onblur="monthamontcalculation(<?php echo $i; ?>)" value="<?php echo $slabs_value['months'][$keys]; ?>" style="width: 110px;">
                                     </td>
                                 <?php } ?>
                                     </tr>
@@ -309,15 +309,15 @@ function viewexemption(){
                         <div class="row">
                                 <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
 
-                                    <button class="btn btn-success"  onclick="addrows()" id="addRows_male" type="button">+ Add More</button>
+                                    <button class="btn btn-success"  onclick="addrows()" id="addRows_male" type="button"><?php echo __('+ Add More'); ?></button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="" id="femalediv" style="display: none;">
                         <div onclick="sameaschange()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                            <span> Same as Male slabs </span>
-                            <input aria-label="Checkbox" type="checkbox" <?php if($pfftdata['femaie_check']==0 ){ echo 'checked';
+                            <span> <?php echo __('Same as Male slabs'); ?> </span>
+                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php if($pfftdata['femaie_check']==0 ){ echo __('checked');
 }  ?> class="js-switch" value="1"  name="sameasfemale"/>
                             <?php $sameasval = isset($pfftdata['femaie_check']) ? $pfftdata['femaie_check'] : 1;  ?>
                             <input type="hidden"  value="<?php echo $sameasval; ?>" name="sameasval"  id="sameasval" />
@@ -329,9 +329,9 @@ function viewexemption(){
                                     <thead>
                                         <tr>
                                             <th scope="col" ></th>
-                                            <th scope="col" class="text-right">Start Range</th>
-                                            <th scope="col" class="text-right">End Range</th>
-                                            <th scope="col" class="text-right">Tax Amount</th>
+                                            <th scope="col" class="text-right"><?php echo __('Start Range'); ?></th>
+                                            <th scope="col" class="text-right"><?php echo __('End Range'); ?></th>
+                                            <th scope="col" class="text-right"><?php echo __('Tax Amount'); ?></th>
                                              <?php foreach($months as $key=>$value){?>
                                                     <th scope="col" class="text-right"><?php echo $value;?></th>
                                             <?php } ?>
@@ -341,13 +341,13 @@ function viewexemption(){
                                         <tr class="rowclass<?php echo $i; ?>">
                                             <td><i class="ti-trash text-danger" onclick="deleterowpt(<?php echo $i; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i></td>
                                             <td scope="row">
-                                                <input aria-label="Fstart Range[]" type="text" name="fstart_range[]" class="form-control fitemRow text-right" placeholder="" value="<?php echo $slabs_value['start_range']; ?>" style="width: 130px;">
+                                                <input aria-label="<?php echo __('Fstart Range[]'); ?>" type="text" name="fstart_range[]" class="form-control fitemRow text-right" placeholder="" value="<?php echo $slabs_value['start_range']; ?>" style="width: 130px;">
                                             </td>
-                                            <td><input aria-label="Fend Range[]"  type="text" name="fend_range[]" class="form-control text-right" placeholder="" value="<?php echo $slabs_value['end_range']; ?>" style="width: 130px;"></td>
-                                            <td><input aria-label="Ftax Amount[]" type="text" name="ftax_amount[]" class="form-control text-right taxamountcheck tax_amountpt<?php echo $i; ?>" placeholder="" data-checkid="<?php echo $i; ?>" value="<?php echo $slabs_value['tax_amount']; ?>" onblur="monthamontcalculation(<?php echo $i; ?>)" style="width: 130px;"></td>
+                                            <td><input aria-label="<?php echo __('Fend Range[]'); ?>"  type="text" name="fend_range[]" class="form-control text-right" placeholder="" value="<?php echo $slabs_value['end_range']; ?>" style="width: 130px;"></td>
+                                            <td><input aria-label="<?php echo __('Ftax Amount[]'); ?>" type="text" name="ftax_amount[]" class="form-control text-right taxamountcheck tax_amountpt<?php echo $i; ?>" placeholder="" data-checkid="<?php echo $i; ?>" value="<?php echo $slabs_value['tax_amount']; ?>" onblur="monthamontcalculation(<?php echo $i; ?>)" style="width: 130px;"></td>
                                         <?php foreach($months as $keys=>$value2){ ?>
                                         <td >
-                                            <input aria-label="Input field"  type="text" name="fmonthvalue[<?php echo $keys; ?>][]" class="form-control  text-right monthamount<?php echo $i; ?>" onblur="monthamontcalculation(<?php echo $i; ?>)" value="<?php echo $slabs_value['months'][$keys]; ?>" style="width: 110px;">
+                                            <input aria-label="<?php echo __('Input field'); ?>"  type="text" name="fmonthvalue[<?php echo $keys; ?>][]" class="form-control  text-right monthamount<?php echo $i; ?>" onblur="monthamontcalculation(<?php echo $i; ?>)" value="<?php echo $slabs_value['months'][$keys]; ?>" style="width: 110px;">
                                         </td>
                                     <?php } ?>
                                         </tr>
@@ -358,7 +358,7 @@ function viewexemption(){
                             <div class="row">
                                     <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
 
-                                        <button class="btn btn-success"  onclick="addfemalerows()" id="addRows_female" type="button">+ Add More</button>
+                                        <button class="btn btn-success"  onclick="addfemalerows()" id="addRows_female" type="button"><?php echo __('+ Add More'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -373,7 +373,7 @@ function viewexemption(){
                     <input type="hidden" name="submit_pt" value="submit">
                      <?php } ?>
 
-                    <button  class="btn btn-primary font-weight-bold">Save</button>
+                    <button  class="btn btn-primary font-weight-bold"><?php echo __('Save'); ?></button>
                 </div>
             </div>
         </div>

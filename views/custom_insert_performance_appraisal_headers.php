@@ -46,8 +46,8 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
 
                 rowCount2 = rowCount-2;
                 console.log(rowCount);
-                $("#dinamictable_"+id).find('th').eq(rowCount2).after('<th scope="col" class="head_text_'+id+rowCount+'">Column</th>');
-                $("#dinamictable_"+id).find('td').eq(rowCount2).after('<td><div class="" id="chengetypetextselect_'+id+rowCount+'"><input aria-label="Input field" type="text" class="form-control" id="" value=""></div></td>');
+                $("#dinamictable_"+id).find('th').eq(rowCount2).after('<th scope="col" class="head_text_'+id+rowCount+'"><?php echo __('Column'); ?></th>');
+                $("#dinamictable_"+id).find('td').eq(rowCount2).after('<td><div class="" id="chengetypetextselect_'+id+rowCount+'"><input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" id="" value=""></div></td>');
             }
         });
     }
@@ -113,10 +113,10 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
         var type = $("#type_"+id).val();
         var textoption = "";
         if(type == 'S'){
-            textoption ='<select aria-label="Select option" class="form-select js-example-basic-single"><option>Yes</option><option>No</option><option>maybe</option></selecte>';
+            textoption ='<select aria-label="<?php echo __('Select option'); ?>" class="form-select js-example-basic-single"><option><?php echo __('Yes'); ?></option><option><?php echo __('No'); ?></option><option><?php echo __('maybe'); ?></option></selecte>';
 
         }else{
-            textoption ='<input aria-label="Input field" type="text" class="form-control" id="" value="">';
+            textoption ='<input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" id="" value="">';
         }
         $("#chengetypetextselect_"+id).html(textoption)
         $(".js-example-basic-single").select2();
@@ -146,10 +146,10 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
 
     function deletepahrow(id){
         Swal.fire({
-          title: 'Do you want to Delete the Field?',
+          title: <?php echo json_encode(__('Do you want to Delete the Field?')); ?>,
           showDenyButton: true,
           showCancelButton: false,
-          confirmButtonText: 'Yes',
+          confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
           denyButtonText: `No`,
         }).then((result) => {
           if (result.isConfirmed) {
@@ -167,16 +167,16 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
  if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
 <?php } ?>
                 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
                     <div class="card-header">
-                        <h5>Performance Appraisal Headers</h5>
+                        <h5><?php echo __('Performance Appraisal Headers'); ?></h5>
                         <div class="card-header-right">
                             <?php if($_GET['option'] != "COM_VIEW_PERFORMANCE_APPRAISAL_SETTINGS"){ ?>
                      <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                                  <i class="icofont icofont-reply"></i>  Back
+                                  <i class="icofont icofont-reply"></i>  <?php echo __('Back'); ?>
                      </a>
                     <?php } ?>
                         </div>
@@ -188,19 +188,19 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group mb-2"  >
-                                                <span class="form-label">Appraisal Name</span>
+                                                <span class="form-label"><?php echo __('Appraisal Name'); ?></span>
                                                 <input type="hidden" class="form-control" name="appraisal_id"  value="<?php echo $performance_appraisal_setup_id ?>">
-                                                <input aria-label="Input field" type="text"  class="form-control"  value="<?php echo $performance_setup['name']; ?>" readonly>
+                                                <input aria-label="<?php echo __('Input field'); ?>" type="text"  class="form-control"  value="<?php echo $performance_setup['name']; ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group mb-2"  >
-                                                <span class="form-label">Assessment Year</span>
-                                                <input aria-label="Assessment Year" type="text" class="form-control"  name="assessment_year" value="<?php echo $assessment_year ?>" readonly>
+                                                <span class="form-label"><?php echo __('Assessment Year'); ?></span>
+                                                <input aria-label="<?php echo __('Assessment Year'); ?>" type="text" class="form-control"  name="assessment_year" value="<?php echo $assessment_year ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="col-lg-12"><span class="text-danger f-14 error_messgae_apriid_year"></span></div>
-                                        <button type="button" class="btn btn-sm font-weight-bolder btn-light-primary btn-primary col-lg-6 mt-2 mb-2" onclick="addMoreHeader()"><i class="fa fa-plus"></i>Add More Header</button>
+                                        <button type="button" class="btn btn-sm font-weight-bolder btn-light-primary btn-primary col-lg-6 mt-2 mb-2" onclick="addMoreHeader()"><i class="fa fa-plus"></i><?php echo __('Add More Header'); ?></button>
                                     </div>
                                     <div class="appendheader custom-scroll" style=" height: 600px;">
                                     </div>
@@ -232,7 +232,7 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                             <div class="accordion-desc">
                                 <p class="dynamic_page_Y_<?php echo $paheaders['id']; ?>" <?php if($paheaders['dynamic_page']=='0'){
 }else{ echo "style='display:none'";
-} ?>>Page URL</p>
+} ?>><?php echo __('Page URL'); ?></p>
                                 <div class="table-responsive dynamic_page_N_<?php echo $paheaders['id']; ?>" <?php if($paheaders['dynamic_page']=='1'){
 }else{ echo "style='display:none'";
 } ?>>
@@ -248,7 +248,7 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
 
                                                         <th scope="col" class="addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders['sub_header_addmore']=='0'){
 }else{ echo "style='display:none'";
-} ?>>Action</th>
+} ?>><?php echo __('Action'); ?></th>
 
                                                 </tr>
                                             </thead>
@@ -268,9 +268,9 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                                                             <td class="<?php echo $idd; ?>">
                                                                 <div  id="chengetypetextselect_<?php echo $paheaders['id'].$fieldcnt; ?>">
                                                                     <?PHP if($sub_headerres["type"] =="S"){ ?>
-                                                                        <select aria-label="Select option" class="form-select js-example-basic-single"><option>Yes</option><option>No</option><option>maybe</option></selecte>
+                                                                        <select aria-label="<?php echo __('Select option'); ?>" class="form-select js-example-basic-single"><option><?php echo __('Yes'); ?></option><option><?php echo __('No'); ?></option><option><?php echo __('maybe'); ?></option></selecte>
                                                                     <?php }else{ ?>
-                                                                        <input aria-label="Input field" type="text" class="form-control" id="" value="">
+                                                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" id="" value="">
                                                                     <?php } ?>
                                                                 </div>
                                                             </td>
@@ -281,7 +281,7 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
 }else{ echo "style='display:none'";
 } ?>>
                                                                 <button type="button" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger btn-primary" >
-                                                                    <i class="fa fa-trash"></i>Delete
+                                                                    <i class="fa fa-trash"></i><?php echo __('Delete'); ?>
                                                                 </button>
                                                             </td>
 
@@ -294,7 +294,7 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                                                 <button type="button" class="btn btn-sm font-weight-bolder btn-light-primary btn-primary addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders['sub_header_addmore']=='0'){
 }else{ echo "style='display:none'";
 } ?>>
-                                                    <i class="fa fa-plus"></i>Add
+                                                    <i class="fa fa-plus"></i><?php echo __('Add'); ?>
                                                 </button>
 
                                         </div>

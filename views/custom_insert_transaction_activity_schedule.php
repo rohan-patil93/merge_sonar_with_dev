@@ -50,7 +50,7 @@
     <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?php echo __('Back'); ?>
             </a>
     </div>
 </div>
@@ -63,14 +63,14 @@
                           <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
                              <div class="row">
                                 <div class="col-xl-9">
-                                   <span class="form-label">Task Name </span>
-                                   <input aria-label="Task Name" type="text" class="form-control" name="task_name" value="<?php echo $data['task_name']; ?>" />
+                                   <span class="form-label"><?php echo __('Task Name'); ?> </span>
+                                   <input aria-label="<?php echo __('Task Name'); ?>" type="text" class="form-control" name="task_name" value="<?php echo $data['task_name']; ?>" />
                                 </div>
                              </div>
                              <div class="row">
                                 <div class="col-xl-9 mt-5">
-                                   <span class="form-label">Description</span>
-                                   <textarea aria-label="Description" style="overflow:auto" class="form-control form-control-lg" name="description" > <?php echo $data['description']; ?> </textarea>
+                                   <span class="form-label"><?php echo __('Description'); ?></span>
+                                   <textarea aria-label="<?php echo __('Description'); ?>" style="overflow:auto" class="form-control form-control-lg" name="description" > <?php echo $data['description']; ?> </textarea>
                                 </div>
                              </div>
                              <?php $files = json_decode($data['files'],1);
@@ -79,7 +79,7 @@
                                     ?>
                              <div class="row">
                                 <div class="col-xl-6 mt-5">
-                                   <span class="form-label"> <b> Download File(s)</b></span>
+                                   <span class="form-label"> <b> <?php echo __('Download File(s)'); ?></b></span>
                                    <div id="divshowfiles">
                                       <?php  foreach ($files as $key_file=>$file) {
                                          $link ='uploads/all/'.$documents[$key_file]['documnet_path'];
@@ -93,7 +93,7 @@
                                 </div>
                                 <?php }  ?>
                              </div>
-                             <button  class="btn btn-primary mr-2" ><i class="la la-check"></i>Send Mail</button>
+                             <button  class="btn btn-primary mr-2" ><i class="la la-check"></i><?php echo __('Send Mail'); ?></button>
                           </div>
 
                     </div>
@@ -101,7 +101,7 @@
 
                <div class="col-lg-6">
                 <div class="row  py-10 px-8 py-lg-12 px-lg-10">
-                   <h6 class="text-left mb-3 "> Check List</h6>
+                   <h6 class="text-left mb-3 "> <?php echo __('Check List'); ?></h6>
                   <?php
                     $checklist = $trdata['check_list'];
                     $checklist = json_decode($checklist,1);
@@ -109,7 +109,7 @@
             <input type="hidden"  name="check_list_name[<?php echo $key; ?>]" value="<?php echo $list['name']; ?>">
             <div class="checkbox-fade fade-in-primary mb-2" name="individual_approvalcheck">
                           <label class="checkbox checkbox-success">
-                            <input aria-label="Checkbox" type="checkbox" <?php if($list['check_value']=='1'){ echo "checked ";
+                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php if($list['check_value']=='1'){ echo __('checked ');
 } ?> class="itemRow checkbox1" name="check_list[<?php echo $key; ?>]" value="">
                             <span class="cr">
                               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -120,23 +120,23 @@
                    <?php } ?>
                     </div>
                      <div class="form-group col-lg-6 px-10">
-         <span class="form-label">Task Complete</span></br>
+         <span class="form-label"><?php echo __('Task Complete'); ?></span></br>
 
 
 <div class="form-radio">
 
   <div class="radio radio-inline">
     <label class="form-label">
-      <input aria-label="Radio option" type="radio" <?php if($trdata['action_flag']==0){ ?> checked <?php
+      <input aria-label="<?php echo __('Radio option'); ?>" type="radio" <?php if($trdata['action_flag']==0){ ?> checked <?php
 } ?> name="action_flag" value="0">
-      <i class="helper"></i>YES
+      <i class="helper"></i><?php echo __('YES'); ?>
     </label>
   </div>
   <div class="radio radio-inline">
     <label class="form-label">
-    <input aria-label="Radio option" type="radio" <?php if($trdata['action_flag']==1){ ?> checked <?php
+    <input aria-label="<?php echo __('Radio option'); ?>" type="radio" <?php if($trdata['action_flag']==1){ ?> checked <?php
 } ?> name="action_flag" value="1">
-      <i class="helper"></i>NO
+      <i class="helper"></i><?php echo __('NO'); ?>
     </label>
   </div>
 
@@ -154,7 +154,7 @@
                   <div class="col-lg-3">
                       <input type="hidden" name="hid" value=<?php echo $rid; ?> />
                       <input type="hidden" name="submit" value="Update" />
-                      <button  class="btn btn-primary mr-2" ><i class="la la-check"></i>Upadate</button>
+                      <button  class="btn btn-primary mr-2" ><i class="la la-check"></i><?php echo __('Upadate'); ?></button>
                 </div>
 <?php } ?>
                 </div>

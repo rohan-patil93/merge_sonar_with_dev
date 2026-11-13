@@ -25,67 +25,67 @@ $row = $data['rowdata'];
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">Add In Courier  </h5>
-    <button type="button" class="btn-close btn_white"  data-bs-dismiss="modal"  aria-label="Close"></button>
+    <h5 class="modal-title"><?php echo __('Add In Courier'); ?>  </h5>
+    <button type="button" class="btn-close btn_white"  data-bs-dismiss="modal"  aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body">
     <form class="kt-form " id="submitformadditionalservice" >
         <div class="row col-lg-12" <?php if($row['created_by'] != $_SESSION['userid'] && $row['current_status']<11 && $_POST['id'] !="" ){ ?>  style="pointer-events: none; opacity: 0.7;" <?php
 } ?> >
             <div class="form-group col-lg-6">
-                <span>From (Sender)</span>
-                <input aria-label="From Detail" type="text" name="from_detail" id="from_detail" class="form-control" value="<?php echo $row['from_detail']; ?>">
+                <span><?php echo __('From (Sender)'); ?></span>
+                <input aria-label="<?php echo __('From Detail'); ?>" type="text" name="from_detail" id="from_detail" class="form-control" value="<?php echo $row['from_detail']; ?>">
             </div>
             <div class="form-group col-lg-6">
-                <span>To (Receiver)</span>
-                <input aria-label="To Detail" type="text" name="to_detail" id="to_detail" class="form-control" value="<?php echo $row['to_detail']; ?>">
+                <span><?php echo __('To (Receiver)'); ?></span>
+                <input aria-label="<?php echo __('To Detail'); ?>" type="text" name="to_detail" id="to_detail" class="form-control" value="<?php echo $row['to_detail']; ?>">
             </div>
             <div class="form-group col-lg-6">
-                <span>Courier Company</span>
-                <input aria-label="Courier Company" type="text" name="courier_company" id="courier_company" class="form-control" value="<?php echo $row['courier_company']; ?>">
+                <span><?php echo __('Courier Company'); ?></span>
+                <input aria-label="<?php echo __('Courier Company'); ?>" type="text" name="courier_company" id="courier_company" class="form-control" value="<?php echo $row['courier_company']; ?>">
             </div>
             <div class="form-group col-lg-3">
-                <span>Date</span>
-                <input aria-label="Courier Date" type="text" name="courier_date" class="form-control datepicker" value="<?php echo fromDate($row['courier_date']); ?>">
+                <span><?php echo __('Date'); ?></span>
+                <input aria-label="<?php echo __('Courier Date'); ?>" type="text" name="courier_date" class="form-control datepicker" value="<?php echo fromDate($row['courier_date']); ?>">
             </div>
             <div class="form-group col-lg-3">
-                <span>Time</span>
-                <input aria-label="Courier Time" type="time" name="courier_time" step="1" class="form-control " value="<?php echo fromtime($row['courier_time']); ?>">
+                <span><?php echo __('Time'); ?></span>
+                <input aria-label="<?php echo __('Courier Time'); ?>" type="time" name="courier_time" step="1" class="form-control " value="<?php echo fromtime($row['courier_time']); ?>">
             </div>
             <div class="form-group col-lg-6">
-                <span>Courier Reference Number</span>
-                <input aria-label="Courier Ref No" type="text" name="courier_ref_no" id="courier_ref_no" class="form-control" value="<?php echo $row['courier_ref_no']; ?>">
+                <span><?php echo __('Courier Reference Number'); ?></span>
+                <input aria-label="<?php echo __('Courier Ref No'); ?>" type="text" name="courier_ref_no" id="courier_ref_no" class="form-control" value="<?php echo $row['courier_ref_no']; ?>">
             </div>
             <div class="form-group col-lg-6">
-                <span>Quantity</span>
-                <input aria-label="Courier Qty" type="text" id="courier_qty" name="courier_qty" class="form-control" value="<?php echo $row['courier_qty']; ?>">
+                <span><?php echo __('Quantity'); ?></span>
+                <input aria-label="<?php echo __('Courier Qty'); ?>" type="text" id="courier_qty" name="courier_qty" class="form-control" value="<?php echo $row['courier_qty']; ?>">
             </div>
             <div class="form-group col-lg-6">
-                <span>Description / Contents</span>
-                <textarea aria-label="Description" name="description" id="description" class="form-control"> <?php echo $row['description']; ?></textarea>
+                <span><?php echo __('Description / Contents'); ?></span>
+                <textarea aria-label="<?php echo __('Description'); ?>" name="description" id="description" class="form-control"> <?php echo $row['description']; ?></textarea>
             </div>
             <div class="form-group col-lg-6">
-                <span>Remarks</span>
-                <textarea aria-label="Remarks" name="remarks" id="remarks" class="form-control"> <?php echo $row['remarks']; ?></textarea>
+                <span><?php echo __('Remarks'); ?></span>
+                <textarea aria-label="<?php echo __('Remarks'); ?>" name="remarks" id="remarks" class="form-control"> <?php echo $row['remarks']; ?></textarea>
             </div>
             <div class="form-group w-full col-lg-6">
-                <span class="d-block">Employee </span>
-                <select aria-label="Requested By"  name="requested_by" id="requested_by" class="form-select js-example-basic-single">
-                    <option value="">Select Any One</option>
+                <span class="d-block"><?php echo __('Employee'); ?> </span>
+                <select aria-label="<?php echo __('Requested By'); ?>"  name="requested_by" id="requested_by" class="form-select js-example-basic-single">
+                    <option value=""><?php echo __('Select Any One'); ?></option>
                     <?php foreach($emps as $emp){ ?>
-                        <option <?php if($row['requested_by']== $emp['id']){ echo "selected";
+                        <option <?php if($row['requested_by']== $emp['id']){ echo __('selected');
 } ?> value="<?php echo $emp['id']; ?>"><?php echo $emp['emp_code'].' - '.$emp['display_name']; ?></option>
                     <?php } ?>
 
                 </select>
             </div>
             <div class="form-group col-lg-6">
-                <span>Invoice No</span>
-                <input aria-label="Invoice No" type="text" id="invoice_no" name="invoice_no" class="form-control" value="<?php echo $row['invoice_no']; ?>">
+                <span><?php echo __('Invoice No'); ?></span>
+                <input aria-label="<?php echo __('Invoice No'); ?>" type="text" id="invoice_no" name="invoice_no" class="form-control" value="<?php echo $row['invoice_no']; ?>">
             </div>
             <div class="form-group col-lg-6">
-                <span>Mobile</span>
-                <input aria-label="Courier Mobile" type="text" name="courier_mobile" id="courier_mobile" class="form-control" value="<?php echo $row['courier_mobile']; ?>">
+                <span><?php echo __('Mobile'); ?></span>
+                <input aria-label="<?php echo __('Courier Mobile'); ?>" type="text" name="courier_mobile" id="courier_mobile" class="form-control" value="<?php echo $row['courier_mobile']; ?>">
             </div>
 
         </div>
@@ -94,20 +94,20 @@ $row = $data['rowdata'];
         <?php if($_POST['id'] !=""){ ?>
 
         <div class="form-group w-full col-lg-6">
-                <span class="d-block">Delivey Type </span>
-                <select aria-label="Deliver Type"  name="deliver_type" id="deliver_type" <?php //if( $row['deliver_type']!=""){ echo "disabled"; } ?> class="form-select js-example-basic-single">
-                    <option value="">Select Any One</option>
+                <span class="d-block"><?php echo __('Delivey Type'); ?> </span>
+                <select aria-label="<?php echo __('Deliver Type'); ?>"  name="deliver_type" id="deliver_type" <?php //if( $row['deliver_type']!=""){ echo __('disabled'); } ?> class="form-select js-example-basic-single">
+                    <option value=""><?php echo __('Select Any One'); ?></option>
                     <?php foreach($data['deliver_type'] as $deliver_type){ ?>
-                        <option <?php if($row['deliver_type']== $deliver_type['genc_detail_code']){ echo "selected";
+                        <option <?php if($row['deliver_type']== $deliver_type['genc_detail_code']){ echo __('selected');
 } ?> value="<?php echo $deliver_type['genc_detail_code']; ?>"><?php echo $deliver_type['genc_detail_name']; ?></option>
                     <?php } ?>
                 </select>
         </div>
         <div class="form-group col-lg-6">
-            <span>Status </span>
+            <span><?php echo __('Status'); ?> </span>
             <div class="radio radio-outline  mt-1">
             <?php foreach ($data['status'] as $selectkey => $selectvalue) {   ?>
-                <label class="radio radio-inline"> <input aria-label="Radio option" type="radio"  <?php if($selectkey == $row['current_status']){ ?> checked <?php
+                <label class="radio radio-inline"> <input aria-label="<?php echo __('Radio option'); ?>" type="radio"  <?php if($selectkey == $row['current_status']){ ?> checked <?php
 } ?> name="current_status" value='<?php echo $selectkey; ?>'>    <span></span><?php echo $selectvalue; ?> </label>
                 <?php $sch++;
 } ?>
@@ -119,8 +119,8 @@ $row = $data['rowdata'];
             <input type="hidden" name="location_id" id="location_id" value="<?php echo $_SESSION['location_id']; ?>">
             <input type="hidden" name="courier_type" id="courier_type" value="2">
             <input type="hidden" name="id" id="id" value="<?php echo $row['id']; ?>">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary waves-effect waves-light " onclick="submitincourierfrom()">Save</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+            <button type="button" class="btn btn-primary waves-effect waves-light " onclick="submitincourierfrom()"><?php echo __('Save'); ?></button>
         </div>
     </form>
 </div>

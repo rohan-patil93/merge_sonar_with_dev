@@ -203,7 +203,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 
 
 // swal({              
-// 	title: "Record has been saved successfully ",              
+// 	title: <?= json_encode(__("Record has been saved successfully")) ?>,              
 // 	text: "Do you want to close ? ",              
 // 	type: "success",           
 // 	buttonsStyling: false,
@@ -219,7 +219,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 // }); 
 
 	swal({
-	        title: "Record has been saved successfully ",
+	        title: <?= json_encode(__("Record has been saved successfully")) ?>,
 			type: "success",
 			showCancelButton: false,
 			closeOnConfirm: true,
@@ -302,7 +302,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 		htmlRows += '</div>';
 		
 		htmlRows += '<div class="col-lg-3">';								
-		htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)">Delete</button>';						
+		htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)">' + <?= json_encode(__('Delete')) ?> + '</button>';						
 		htmlRows += '</div>';
 		htmlRows += '</div>';
 		$('#append_statick').append(htmlRows);
@@ -322,7 +322,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 		htmlRows += '<td><select class="form-control form-select js-example-basic-single" id="comparator_'+count+'" name= "comparator[]" aria-label="Comparator"><?php foreach ($comparator_array as $dd) {  ?><option  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php } ?> </select></td>';   		
 		htmlRows += '<td><input type="text" id="whrvalue_'+count+'" name="whrvalue[]"  class="form-control amount" aria-label="Whrvalue"></td>';	
 		htmlRows += '<td><select class="form-control form-select js-example-basic-single "  id="operand_'+count+'"  name= "operand[]" id="" aria-label="Operand">	<option value="AND"> AND </option><option  value = "OR"> OR </option>	</select></td>';	
-		htmlRows += '<td><input type="hidden" id="delete_value_'+count+'" value="0"><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">Delete</button></td>';   
+		htmlRows += '<td><input type="hidden" id="delete_value_'+count+'" value="0"><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">' + <?= json_encode(__('Delete')) ?> + '</button></td>';   
 		htmlRows += '</tr>';
 		$('#invoiceItem').append(htmlRows); 
 		$(".js-example-basic-single").select2();
@@ -395,7 +395,7 @@ elem.forEach(function(html) {
 
 
 			<div class="card-header">
-				<h5>Field Datasource <small>&nbsp;&nbsp; <b>Table: </b>&nbsp; <?php echo $table; ?> <b> &nbsp;&nbsp; Field: </b>&nbsp; <?php echo $field; ?> </small></h5>
+				<h5><?= __("Field Datasource") ?> <small>&nbsp;&nbsp; <b><?= __("Table:") ?> </b>&nbsp; <?php echo $table; ?> <b> &nbsp;&nbsp; <?= __("Field:") ?> </b>&nbsp; <?php echo $field; ?> </small></h5>
 
 
 
@@ -418,7 +418,7 @@ elem.forEach(function(html) {
 							<div class="col-xl-12 order-2 order-xl-1">
 								<div class="row align-items-center">
 									<div class="col-lg-4">
-										<label for="value_field" class="d-block">Ratting</label>
+										<label for="value_field" class="d-block"><?= __("Ratting") ?></label>
 										<input type="text" name="value_field" class="form-control" id="value_field" value="<?php echo $view['value_field']; ?>" aria-label="Value Field">
 									</div>
 								</div>
@@ -435,7 +435,7 @@ elem.forEach(function(html) {
 									<div class="radio radio-inline">
 										<label class="form-label">
 											<input type="radio" id='type_custom_sql' value="custom_sql" class="cursor-pointer" name="type" <?php if($attribute_type != 'static' ){ ?> checked="checked" <?php } ?> onchange="difftype(this.value)" style="display:none" aria-label="Type">
-											<i class="helper"></i>Static values	</label>
+											<i class="helper"></i><?= __("Static values") ?>	</label>
 										</div>
 									</div>
 								</div>
@@ -444,7 +444,7 @@ elem.forEach(function(html) {
 										<div class="radio radio-inline">
 											<label class="form-label">
 												<input type="radio" id="type_static"  value="static"  name="type"  <?php if($attribute_type == 'static' ){ ?> checked="checked" <?php } ?> onchange="difftype(this.value)" style="display:none" aria-label="Type">
-												<i class="helper"></i>Static values	</label>
+												<i class="helper"></i><?= __("Static values") ?>	</label>
 											</div>
 										</div>
 								</div>
@@ -453,19 +453,19 @@ elem.forEach(function(html) {
 							<div id="radio_switch"  <?php if($attribute_type == 'static') { ?> style='display: none;' <?php } ?> >
 								<div class="row align-items-center" style="margin-top: 10px;">
 									<div class="col-lg-3 wi-full">
-										<label for="table_name" class="d-block">Table</label>
+										<label for="table_name" class="d-block"><?= __("Table") ?></label>
 										<select class="form-control js-example-basic-single" id="table_name" name= "table_name" onchange="Getfields(this.value)" aria-label="Table Name">
-											<option value="">Select Table Name</option>
+											<option value=""><?= __("Select Table Name") ?></option>
 											<?php foreach ($showtables1 as $key => $data) {  ?>
 												<option   value = <?php echo $data ?> <?php if($table_name_field == $data){ echo "selected";  } ?>   > <?php echo ucwords(str_replace('_',' ',$data)); ?> </option>
 											<?php	} ?>	
 										</select>
 									</div>
 									<div class="col-lg-2 w-full">
-										<label for="field_name" class="d-block">Value Field</label>
+										<label for="field_name" class="d-block"><?= __("Value Field") ?></label>
 										<div id='field_id'>
 											<select class="form-control js-example-basic-single" id='field_name' name="field_name" aria-label="Field Name">
-												<option value="-1">Select Filed</option>	
+												<option value="-1"><?= __("Select Filed") ?></option>	
 												<?php foreach ($view['list'] as  $list) { ?> 
 													<option value="<?php echo $list; ?>" <?php if($view['value_field'] == $list){ echo "selected";  } ?> ><?php echo $list; ?></option>
 												<?php } ?>
@@ -473,10 +473,10 @@ elem.forEach(function(html) {
 										</div>
 									</div>
 									<div class="col-lg-2 w-full">
-										<label for="value" class="d-block">Lable Field</label>
+										<label for="value" class="d-block"><?= __("Lable Field") ?></label>
 										<div id='label_id'>
 											<select class="form-control js-example-basic-single" id="value" name="value" aria-label="Value">
-												<option value="-1">Select Filed</option>
+												<option value="-1"><?= __("Select Filed") ?></option>
 												<?php foreach ($view['list'] as  $list) { ?> 
 													<option value="<?php echo $list; ?>" <?php if($view['display_field'] == $list){ echo "selected";  } ?> ><?php echo $list; ?></option>
 												<?php } ?>
@@ -485,11 +485,11 @@ elem.forEach(function(html) {
 										</div>
 									</div>
 									<div class="col-lg-2 w-full" id='order_check_order'>
-										<label for="order_by" class="d-block">Order By Field</label>
+										<label for="order_by" class="d-block"><?= __("Order By Field") ?></label>
 										<div >
 											<input type="hidden" name="drop" id="drop" value="<?php echo $duplicate; ?>">
 											<select class="form-control form-select js-example-basic-single" id="order_by" name="order_by" aria-label="Order By">
-												<option value="-1">Select Filed</option>
+												<option value="-1"><?= __("Select Filed") ?></option>
 												<?php foreach ($view['list'] as  $list) { ?> 
 													<option value="<?php echo $list; ?>" <?php if($view_details['order_by'] == $list){ echo "selected";  } ?> ><?php echo $list; ?></option>
 												<?php } ?>
@@ -498,7 +498,7 @@ elem.forEach(function(html) {
 										</div>
 									</div>
 									<div class="col-lg-2 w-full" id='order_check_soft'>
-										<label for="sort" class="d-block">Sort</label>
+										<label for="sort" class="d-block"><?= __("Sort") ?></label>
 										<div>
 											<select class="form-control js-example-basic-single" id="sort" name="sort" aria-label="Sort">
 												<option  value="ASC">ASC</option>
@@ -509,14 +509,14 @@ elem.forEach(function(html) {
 								</div>
 								<div class="row align-items-center mt-4" >
 									<div class="col-lg-2">
-										<label for="refer_action" class="d-block">Reference for </label>
+										<label for="refer_action" class="d-block"><?= __("Reference for") ?> </label>
 										<input type="checkbox" class="js-switch-s" name="refer_action" id="refer_action" onchange="swictchrefer1()" value="0" <?php if($view_details['refer_action'] == '0'){ echo "checked";  } ?> aria-label="Refer Action">
 									</div>
 									<div class="col-lg-3 w-full">
 									<?php $fieldlists = getListAttributes($_POST['table']); ?>
 										<div class="referfieldname col-lg-12" style="display: <?php if($view_details['refer_action'] == '1' || $view_details['refer_action'] == ''){ echo 'none'; } ?>">
 										<select class="form-control js-example-basic-single" id="refer_field" name= "refer_field" aria-label="Refer Field">
-											<option value="-1">Select Filed</option>
+											<option value="-1"><?= __("Select Filed") ?></option>
 											<?php foreach ($fieldlists as  $fieldlist) { ?> 
 												<option value="<?php echo $fieldlist['Field']; ?>" <?php if($view_details['refer_field'] == $fieldlist['Field']){ echo "selected";  } ?>><?php echo $fieldlist['Field']; ?></option>
 											<?php } ?>	
@@ -524,13 +524,13 @@ elem.forEach(function(html) {
 									</div>
 									</div>
 									<div class="col-lg-2">
-										<label for="refer_by_action" class="d-block">Referenced By</label>
+										<label for="refer_by_action" class="d-block"><?= __("Referenced By") ?></label>
 										<input type="checkbox" class="js-switch-s" name="refer_by_action" id="refer_by_action" onchange="swictchrefer_by1()" value="0" <?php if($view_details['refer_by_action'] == '0'){ echo "checked";  } ?> aria-label="Refer By Action">
 									</div>
 									<div class="col-lg-3 w-full">
 										<div class="referbyfieldname" style="display: <?php if($view_details['refer_by_action'] == '1' || $view_details['refer_by_action'] == ''){ echo 'none'; } ?>">
 										<select class="form-control js-example-basic-single" id="refer_by_field" name= "refer_by_field" aria-label="Refer By Field">
-											<option value="-1">Select Filed</option>
+											<option value="-1"><?= __("Select Filed") ?></option>
 											<?php foreach ($view['list'] as  $list) { ?> 
 												<option value="<?php echo $list; ?>"  <?php if($view_details['refer_by_field'] == $list){ echo "selected";  } ?>><?php echo $list; ?></option>
 											<?php } ?>	
@@ -552,11 +552,11 @@ elem.forEach(function(html) {
 									<div class="col-lg-7">
 										<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem">	
 											<tr>
-												<th scope="col" class="" width="15%">Field</th>
-												<th scope="col" class="thheader" width="5%">Operator</th>
-												<th scope="col" class="thheader" width="15%">Value</th>
-												<th scope="col" class="thheader" width="5%">Condition</th>
-												<th scope="col" class="thheader" width="5%">Action</th>
+												<th scope="col" class="" width="15%"><?= __("Field") ?></th>
+												<th scope="col" class="thheader" width="5%"><?= __("Operator") ?></th>
+												<th scope="col" class="thheader" width="15%"><?= __("Value") ?></th>
+												<th scope="col" class="thheader" width="5%"><?= __("Condition") ?></th>
+												<th scope="col" class="thheader" width="5%"><?= __("Action") ?></th>
 											</tr>
 											<?php if(count((array)$tr)>0){
 												$count = 1;
@@ -588,14 +588,14 @@ elem.forEach(function(html) {
 															</td>
 															<td>
 																<input type="hidden" value="0" id="delete_value_<?php echo $count; ?>" >
-																<button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(this.id)">Delete</button>
+																<button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(this.id)"><?= __("Delete") ?></button>
 															</td>
 														</tr>
 														<?php $count++;  } } ?>		
 													</table>
 												</div>
 												<div class="col-lg-5">
-													<label>Query</label>
+													<label><?= __("Query") ?></label>
 													<div class="kt-input-icon">
 														<textarea class="form-control"  type="text" id="dis_custom_sql" name="dis_custom_sql" style="height: 80px;" value="" aria-label="Dis Custom Sql"> <?php echo urldecode($view['content']); ?></textarea>
 													</div>
@@ -605,9 +605,9 @@ elem.forEach(function(html) {
 
 											<div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
 												<!-- <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>&nbsp;&nbsp; -->
-												<button class="btn btn-success col-lg-2" id="addRows" type="button" onclick="addRows123()">+ Add More</button>&nbsp;&nbsp;
-												<button type="button" class="btn btn-primary col-lg-2" onclick="createselectquery()">Bulid Query</button>&nbsp;&nbsp;
-												<button type="button" class="btn btn-danger col-lg-2" onclick="createselectquery()">Excute Query</button>
+												<button class="btn btn-success col-lg-2" id="addRows" type="button" onclick="addRows123()"><?= __("+ Add More") ?></button>&nbsp;&nbsp;
+												<button type="button" class="btn btn-primary col-lg-2" onclick="createselectquery()"><?= __("Bulid Query") ?></button>&nbsp;&nbsp;
+												<button type="button" class="btn btn-danger col-lg-2" onclick="createselectquery()"><?= __("Excute Query") ?></button>
 											</div>
 
 										</div>
@@ -616,10 +616,10 @@ elem.forEach(function(html) {
 											<div id='append_statick'>
 												<div class="row align-items-center" style="margin-top: 10px;">
 													<div class="col-lg-3">
-														<label><b>Field</b></label>
+														<label><b><?= __("Field") ?></b></label>
 													</div>
 													<div class="col-lg-3">
-														<label><b>Value</b></label>
+														<label><b><?= __("Value") ?></b></label>
 													</div>
 													<div class="col-lg-3">
 														<label><b></b></label>
@@ -637,7 +637,7 @@ elem.forEach(function(html) {
 															</div>
 															<div class="col-lg-3">
 																<input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >
-																<button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)">Delete</button>
+																<button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)"><?= __("Delete") ?></button>
 															</div>
 														</div>
 														<?php $i++; } } else{ ?> 
@@ -650,13 +650,13 @@ elem.forEach(function(html) {
 																</div>
 																<div class="col-lg-3">
 																	<input type="hidden" value="0" id="static_delete_value_1" >
-																	<button class="btn btn-warning" id="1" type="button" onclick="deleteRows(this.id)">Delete</button>
+																	<button class="btn btn-warning" id="1" type="button" onclick="deleteRows(this.id)"><?= __("Delete") ?></button>
 																</div>
 															</div>
 														<?php } ?>
 													</div>
 													<div class="row align-items-center" >
-														<button class="btn btn-success waves-effect waves-light mt-3 m-l-10 col-lg-2" id="addstatickRows" type="button" onclick="addstatickRows123()">+ Add More</button>&nbsp;&nbsp;
+														<button class="btn btn-success waves-effect waves-light mt-3 m-l-10 col-lg-2" id="addstatickRows" type="button" onclick="addstatickRows123()"><?= __("+ Add More") ?></button>&nbsp;&nbsp;
 													</div>
 												</div>
 												<!----------- defalut start ----------->
@@ -672,8 +672,8 @@ elem.forEach(function(html) {
 								<input type="hidden" name="table" id='table' value="<?php echo $table; ?>">
 								<input type="hidden" name="field" id='field' value="<?php echo $field; ?>">
 								<input type="hidden" name="page" value="dis_submit">
-								<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitrom()" >Submit</button>
+								<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __("Close") ?></button>
+								<button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitrom()" ><?= __("Submit") ?></button>
 							</div>
 							<!-- </div> -->
 						</form>

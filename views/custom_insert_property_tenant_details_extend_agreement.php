@@ -38,37 +38,37 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
                 }
             });
         }else{
-          $("#extend_agreement_month_error").text('Please Enter Required Fields');
+          $("#extend_agreement_month_error").text(<?php echo json_encode(__('Please Enter Required Fields')); ?>);
         }
     }
 </script>
 <div class="modal-header  ">
-  <h5 class="modal-title"> Extend Agreement</h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeInsertEmployees()"></button>
+  <h5 class="modal-title"> <?php echo __('Extend Agreement'); ?></h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>" onclick="closeInsertEmployees()"></button>
 </div>
 <div class="modal-body p-l-50 p-r-50 p-t-50">
     <div class="row mb-4">
       <div class="col-3 text-center">
           <div class="s-cont d-inline-block">
-              <p class="m-b-0 f-12">Commencement Date</p>
+              <p class="m-b-0 f-12"><?php echo __('Commencement Date'); ?></p>
               <h5 class="f-w-700 m-b-0"><?php echo fromDate($property_tenant_details['rent_commencement_date']); ?></h5>
           </div>
       </div>
       <div class="col-3 b-l-default text-center">
           <div class="s-cont d-inline-block">
-              <p class="m-b-0 f-12">Expiry Date</p>
+              <p class="m-b-0 f-12"><?php echo __('Expiry Date'); ?></p>
               <h5 class="f-w-700 m-b-0"><?php echo fromDate($property_tenant_details['lease_period_end_date']); ?></h5>
           </div>
       </div>
       <div class="col-3 b-l-default text-center">
           <div class="s-cont d-inline-block">
-              <p class="m-b-0  f-12">Rent Escalation After</p>
+              <p class="m-b-0  f-12"><?php echo __('Rent Escalation After'); ?></p>
               <h5 class="f-w-700 m-b-0"><?php echo $property_tenant_details['rent_escalation_after_month']; ?> - (<?php echo $property_tenant_details['rent_escalation_percentage']; ?>%)</h5>
           </div>
       </div>
        <div class="col-3 b-l-default text-center">
           <div class="s-cont d-inline-block">
-              <p class="m-b-0 f-12">Tenant Name</p>
+              <p class="m-b-0 f-12"><?php echo __('Tenant Name'); ?></p>
               <h5 class="f-w-700 m-b-0"><?php echo $property_tenant_details['company_name']; ?></h5>
           </div>
       </div>
@@ -107,7 +107,7 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
               <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                 <thead>
                   <tr>
-                    <th>Bill</th>
+                    <th><?php echo __('Bill'); ?></th>
                     <?php foreach($property_tenant_billings as $ptb){ ?>
                     <th class="text-right"><?php echo fromDate($ptb['month_start_date']); ?></th>
                     <?php } ?>
@@ -132,7 +132,7 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
                   <?php } ?>
                     <tr>    
                       <th class="p-2">
-                        Total
+                        <?php echo __('Total'); ?>
                       </th>
                       <?php foreach($datearray as $datekey=>$ptb){ ?>
                         <td class="p-2 text-right"><?php echo customeummarmonyformateifine($totalary[$datekey]!=""?$totalary[$datekey]:0); ?></td>
@@ -143,15 +143,15 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
             </div>
           </div>
           <div class="col-xl-4 form-group" >
-                <label class="form-label">Extend Month Year <span class="text-danger">*</span></label>
+                <label class="form-label"><?php echo __('Extend Month Year'); ?> <span class="text-danger">*</span></label>
                 <span class="d-block error-message text-danger" id="extend_agreement_month_error"></span>
                 <input class="form-control" type="month" name="extend_agreement_month" id="extend_agreement_month" min="<?php echo date("Y-m", strtotime('+1 months', strtotime($property_tenant_details['lease_period_end_date']))); ?>" value="<?php echo date("Y-m", strtotime('+1 months', strtotime($property_tenant_details['lease_period_end_date']))); ?>"/>  
                 <div>
                     <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                       <thead>
                         <tr>
-                          <th>Extend Date</th>
-                          <th>Date Time</th>
+                          <th><?php echo __('Extend Date'); ?></th>
+                          <th><?php echo __('Date Time'); ?></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -172,6 +172,6 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light" id="insertemployeedetails_btn" onclick="submitExtendAgreement()">Submit</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light" id="insertemployeedetails_btn" onclick="submitExtendAgreement()"><?php echo __('Submit'); ?></button>
 </div>

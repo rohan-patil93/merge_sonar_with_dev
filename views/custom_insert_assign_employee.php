@@ -226,7 +226,7 @@ $empcos = json_decode($empres,1);
             <button class="btn btn-primary btn-brand--icon" type="button" id="kt_search" onclick="assignemployeelist(<?php echo $_POST['rid'] ?>)">
                 <span>
 
-                    <span>Search</span>
+                    <span><?= __('Search') ?></span>
                 </span>
             </button>
 
@@ -241,13 +241,13 @@ $empcos = json_decode($empres,1);
                 <tr>
                     <th scope="col">&nbsp;</th>
                     <th scope="col">#</th>
-                    <th scope="col">Name </th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Cost Center</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Designation</th>
-                    <th scope="col">Vendor</th>
+                    <th scope="col"><?= __('Name') ?> </th>
+                    <th scope="col"><?= __('Email') ?></th>
+                    <th scope="col"><?= __('Cost Center') ?></th>
+                    <th scope="col"><?= __('Location') ?></th>
+                    <th scope="col"><?= __('Department') ?></th>
+                    <th scope="col"><?= __('Designation') ?></th>
+                    <th scope="col"><?= __('Vendor') ?></th>
 
                 </tr>
             </thead>

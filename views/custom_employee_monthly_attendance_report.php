@@ -25,16 +25,16 @@ $employees = $result['table'] ?? array();
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Employee Monthly Report</h5>
+            <h5><?= __('Employee Monthly Report') ?></h5>
         </div>
         <div class="card-body p-4">
             <form method="post" >
             <div class="row">
                 <!-- Employee -->
                 <div class="form-group col-md-4">
-                    <label for="employee_id">Employee <span class="text-danger">*</span></label>
-                    <select class="form-select js-example-basic-single" name="employee_id" id="employee_id" aria-label="Employee">
-                        <option value="0">Select Employee</option>
+                    <label for="employee_id"><?= __('Employee') ?> <span class="text-danger">*</span></label>
+                    <select class="form-select js-example-basic-single" name="employee_id" id="employee_id" aria-label="<?= __('Employee') ?>">
+                        <option value="0"><?= __('Select Employee') ?></option>
                         <?php if (!empty($employees) && is_array($employees)) {
                             foreach ($employees as $row) {
                                 $empId = is_array($row) ? ($row['id'] ?? '') : ($row->id ?? '');
@@ -52,15 +52,15 @@ $employees = $result['table'] ?? array();
 
                 <!-- Month -->
                 <div class="form-group col-md-3">
-                    <label for="report_month">Month <span class="text-danger">*</span></label>
-                    <input type="month" name="month" class="form-control" id="report_month" value="<?php echo htmlspecialchars($month, ENT_QUOTES); ?>" aria-label="Month">
+                    <label for="report_month"><?= __('Month') ?> <span class="text-danger">*</span></label>
+                    <input type="month" name="month" class="form-control" id="report_month" value="<?php echo htmlspecialchars($month, ENT_QUOTES); ?>" aria-label="<?= __('Month') ?>">
                 </div>
 
                 <!-- Search -->
                 <div class="form-group col-md-2">
-                    <label for="searchBtn" aria-label="Search">&nbsp;</label>
+                    <label for="searchBtn" aria-label="<?= __('Search') ?>">&nbsp;</label>
                     <button type="submit" class="btn btn-primary form-control" name="search" id="searchBtn" value="search">
-                        Search
+                        <?= __('Search') ?>
                     </button>
                 </div>
 
@@ -91,13 +91,13 @@ function reloadAttendanceTable() {
 
     // Employee validation
     if (employee_id == 0) {
-        tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', 'Please select employee', '');
+        tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', <?= json_encode(__('Please select employee')) ?>, '');
         valid = false;
     }
 
     // Month validation
     if (!month) {
-        tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', 'Please select month', '');
+        tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', <?= json_encode(__('Please select month')) ?>, '');
         valid = false;
     }
 
@@ -105,7 +105,7 @@ function reloadAttendanceTable() {
 
     var loader = `
         <div class="text-center">
-            <img src="assets/images/spiner/spiner3.gif" alt="Loading..." style="width:300px;">
+            <img src="assets/images/spiner/spiner3.gif" alt="<?= __('Loading...') ?>" style="width:300px;">
         </div>
     `;
     $('#TableContent').html(loader);
@@ -122,7 +122,7 @@ function reloadAttendanceTable() {
             $('#TableContent').html(data);
         },
         error: function () {
-            $('#TableContent').html('<div class="text-danger text-center">Something went wrong</div>');
+            $('#TableContent').html('<div class="text-danger text-center"><?= __('Something went wrong') ?></div>');
         }
     });
 }

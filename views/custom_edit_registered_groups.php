@@ -55,16 +55,16 @@ $company_subscription_plan_licenses = $subscriptusers['company_subscription_plan
  function addMoreField(){
     var htmlRows = '';
     var cnt = $(".fieldnamecnt").length+1;
-    htmlRows += '<tr id="deleterow'+cnt+'"><td><input class="form-control fieldnamecnt" type="text" name="fieldname[]" aria-label="Fieldname"></td><td><input class="form-control" type="text" name="fieldvalue[]" aria-label="Fieldvalue"></td><td><i class="ti-trash" onclick="deleteRow('+cnt+')"></i> </td></tr>';  
+    htmlRows += '<tr id="deleterow'+cnt+'"><td><input class="form-control fieldnamecnt" type="text" name="fieldname[]" aria-label="<?= __('Field Name') ?>"></td><td><input class="form-control" type="text" name="fieldvalue[]" aria-label="<?= __('Field Value') ?>"></td><td><i class="ti-trash" onclick="deleteRow('+cnt+')"></i> </td></tr>';  
     $('#appendfield').append(htmlRows);
 }
 function deleteRow(row){
     Swal.fire({
-      title: 'Do You Want To Delete The Field?',
+      title: <?= json_encode(__('Do You Want To Delete The Field?')) ?>,
       showDenyButton: true,
       showCancelButton: false,
-      confirmButtonText: 'Yes',
-      denyButtonText: `No`,
+      confirmButtonText: <?= json_encode(__('Yes')) ?>,
+      denyButtonText: <?= json_encode(__('No')) ?>,
   }).then((result) => {
       if (result.isConfirmed) {
        $('#deleterow'+row).remove();
@@ -75,11 +75,11 @@ function deleteRow(row){
 }
 function doftDeleteRow(id){
     Swal.fire({
-      title: 'Do You Want To Delete The Product?',
+      title: <?= json_encode(__('Do You Want To Delete The Product?')) ?>,
       showDenyButton: true,
       showCancelButton: false,
-      confirmButtonText: 'Yes',
-      denyButtonText: `No`,
+      confirmButtonText: <?= json_encode(__('Yes')) ?>,
+      denyButtonText: <?= json_encode(__('No')) ?>,
   }).then((result) => {
       if (result.isConfirmed) {
         jQuery.ajax({
@@ -127,11 +127,11 @@ function chekTotalAmount(id=""){
 
 function AdditionalSubscription(company_subscr_id){
     Swal.fire({
-      title: 'Additional Subscription Same Price',
+      title: <?= json_encode(__('Additional Subscription Same Price')) ?>,
       showDenyButton: true,
       showCancelButton: false,
-      confirmButtonText: 'Yes',
-      denyButtonText: `No`,
+      confirmButtonText: <?= json_encode(__('Yes')) ?>,
+      denyButtonText: <?= json_encode(__('No')) ?>,
   }).then((result) => {
       if (result.isConfirmed){  
         var agreed_price= $("#agreed_price_"+company_subscr_id).val(); 
@@ -191,11 +191,11 @@ function refrashpage(){
 	<div class="container-fluid">
 		<div class="card card-custom card-sticky">
 			<div class="card-header">
-				<h5>Subscription Plans</h5>
+				<h5><?= __('Subscription Plans') ?></h5>
 				<div class="card-header-right">
 					<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
 						<i class="icofont icofont-reply"></i>
-						Back
+						<?= __('Back') ?>
 					</a>
 				</div>
 			</div>
@@ -207,7 +207,7 @@ function refrashpage(){
                             <div class="col-lg-8">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5>Customer</h5>
+                                        <h5><?= __('Customer') ?></h5>
                                     </div>
                                     <div class="card-body">
                                         <input type="hidden" id="subscription_group_id"  name="subscription_group_id" value="<?php echo $rid; ?>">
@@ -215,7 +215,7 @@ function refrashpage(){
                                             <?php if($applicationuser['user_photo']) {?>
                                                 <img src="uploads/all/<?php echo $applicationuser['user_photo']; ?>"  class="img-radius img-50 align-top m-r-15" onerror="this.src='uploads/all/no-image.jpg';">
                                             <?php } else { ?>
-                                                <span  alt="user image" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($applicationuser['display_name']); ?></span>
+                                                <span  alt="<?= __('user image') ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($applicationuser['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
                                                 <h6><?php echo $applicationuser['display_name']; ?></h6>
@@ -223,9 +223,9 @@ function refrashpage(){
                                             </div>
                                         </div>
                                         <div class="alert alert-primary background-primary alert-dismissible mt-4">
-                                            <h4 class="f-w-600">This is a very important privacy notice!</h4>
-                                            <p class="mb-0">Writing headlines for blog posts is much science and probably cool audience.
-                                                <a href="#">Learn More</a>
+                                            <h4 class="f-w-600"><?= __('This is a very important privacy notice!') ?></h4>
+                                            <p class="mb-0"><?= __('Writing headlines for blog posts is much science and probably cool audience.') ?>
+                                                <a href="#"><?= __('Learn More') ?></a>
                                             </p>
                                         </div>
                                     </div>
@@ -241,9 +241,9 @@ function refrashpage(){
 
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5>Products</h5>
+                                        <h5><?= __('Products') ?></h5>
                                         <div class="card-header-right">
-                                            <button type="button" class="btn btn-primary waves-effect" onclick="addSubscriptionPlans()">Add Product</button>
+                                            <button type="button" class="btn btn-primary waves-effect" onclick="addSubscriptionPlans()"><?= __('Add Product') ?></button>
 
                                         </div>
                                     </div>
@@ -257,7 +257,7 @@ function refrashpage(){
 
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5>Invoices</h5>
+                                        <h5><?= __('Invoices') ?></h5>
                                     </div>
                                     <div class="card-body">
                                         <?php if(count((array)$company_subscription_plan_licenses) !='0'){ ?>
@@ -265,11 +265,11 @@ function refrashpage(){
                                                 <thead>
                                                     <tr>
                                                         <th scope="col"><span class="d-block">#</span></th>
-                                                        <th scope="col"><span class="d-block">Request Date</span></th>
-                                                        <th scope="col"><span class="d-block">User</span></th>
-                                                        <th scope="col"><span class="d-block">Amount</span></th>
-                                                        <th scope="col"><span class="d-block">Payment</span></th>
-                                                        <th scope="col"><span class="d-block">Status</span></th>
+                                                        <th scope="col"><span class="d-block"><?= __('Request Date') ?></span></th>
+                                                        <th scope="col"><span class="d-block"><?= __('User') ?></span></th>
+                                                        <th scope="col"><span class="d-block"><?= __('Amount') ?></span></th>
+                                                        <th scope="col"><span class="d-block"><?= __('Payment') ?></span></th>
+                                                        <th scope="col"><span class="d-block"><?= __('Status') ?></span></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -292,7 +292,7 @@ function refrashpage(){
                                             <?php }else{ ?>
 
                                                 <div class="card-px text-center py-20 m-t-30">
-                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> No Invoice </p>   
+                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> <?= __('No Invoice') ?> </p>   
                                                     <div class="text-center px-4">
                                                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                   </div>   
@@ -307,9 +307,9 @@ function refrashpage(){
 
                                   <div class="card">
                                     <div class="card-header">
-                                        <h5>Advanced Options</h5>
-                                        <h6 class="mt-5">Custom fields 
-                                            <i class="ti-info ms-1 fs-7 color-default text-white border-radius p-1" data-bs-toggle="tooltip" data-placement="bottom" title="Add custom field to the billing invoice"></i>
+                                        <h5><?= __('Advanced Options') ?></h5>
+                                        <h6 class="mt-5"><?= __('Custom fields') ?> 
+                                            <i class="ti-info ms-1 fs-7 color-default text-white border-radius p-1" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('Add custom field to the billing invoice') ?>"></i>
                                         </h6>
                                     </div>
                                     <div class="card-body">
@@ -317,9 +317,9 @@ function refrashpage(){
                                             <table class="table table-hover m-b-0" id="appendfield">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Field Name</th>
-                                                        <th scope="col">Field Value</th>
-                                                        <th scope="col">Action</th>
+                                                        <th scope="col"><?= __('Field Name') ?></th>
+                                                        <th scope="col"><?= __('Field Value') ?></th>
+                                                        <th scope="col"><?= __('Action') ?></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -328,10 +328,10 @@ function refrashpage(){
                                                      ?> 
                                                      <tr id="deleterow1">
                                                         <td>
-                                                            <input class="form-control fieldnamecnt" type="text" name="fieldname[]" value="<?php echo $kk; ?>" aria-label="Fieldname">
+                                                            <input class="form-control fieldnamecnt" type="text" name="fieldname[]" value="<?php echo $kk; ?>" aria-label="<?= __('Field Name') ?>">
                                                         </td>
                                                         <td>
-                                                            <input class="form-control" type="text" name="fieldvalue[]" value="<?php echo $custoval; ?>" aria-label="Fieldvalue">
+                                                            <input class="form-control" type="text" name="fieldvalue[]" value="<?php echo $custoval; ?>" aria-label="<?= __('Field Value') ?>">
                                                         </td>
                                                         <td>
                                                             <i class="ti-trash text-danger" onclick="deleteRow('1')"></i>
@@ -341,14 +341,14 @@ function refrashpage(){
                                                 <?php } ?>
                                             </tbody>
                                         </table>
-                                        <button type="button" class="btn btn-primary waves-effect mt-3" onclick="addMoreField()">Add Field</button>
+                                        <button type="button" class="btn btn-primary waves-effect mt-3" onclick="addMoreField()"><?= __('Add Field') ?></button>
                                     </div>
                                 </div>
                                 <div class="card-header">
-                                    <h6 class="mt-2">Invoice footer 
-                                        <i class="ti-info ms-1 fs-7 color-default text-white border-radius p-1" data-bs-toggle="tooltip" data-placement="bottom" title="Add custom field to the billing invoice"></i>
+                                    <h6 class="mt-2"><?= __('Invoice footer') ?> 
+                                        <i class="ti-info ms-1 fs-7 color-default text-white border-radius p-1" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('Add custom field to the billing invoice') ?>"></i>
                                     </h6>
-                                    <textarea class="form-control" name="invoice_footer" style="height:80px" aria-label="Invoice Footer"><?php echo $applicationuser['invoice_footer']; ?></textarea>
+                                    <textarea class="form-control" name="invoice_footer" style="height:80px" aria-label="<?= __('Invoice Footer') ?>"><?php echo $applicationuser['invoice_footer']; ?></textarea>
                                     <div class="alert alert-primary background-primary alert-dismissible mt-4">
                                         <div class="row">
                                             <div class="col-lg-4">
@@ -358,14 +358,14 @@ function refrashpage(){
                                                         <span class="cr mt-0">
                                                           <i class="cr-icon icofont icofont-ui-check txt-warning"></i>
                                                       </span>
-                                                      <p class="mb-0"> Usage Trash Holder <i class="ti-info ms-1 fs-7 bg-white text-primary border-radius p-1" data-bs-toggle="tooltip" data-placement="bottom" title="Add custom field to the billing invoice"></i>
+                                                      <p class="mb-0"> <?= __('Usage Trash Holder') ?> <i class="ti-info ms-1 fs-7 bg-white text-primary border-radius p-1" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('Add custom field to the billing invoice') ?>"></i>
                                                       </p>
                                                   </label>
                                               </div> 
                                           </div>
                                           <div class="col-lg-5" id="usagetresholddays" <?php echo $applicationuser['usage_trash_holder_type']=='N'?"style='display:none'":"";?>>
                                             <div class="row align-items-center">
-                                                <label class="form-label col-lg-3 f-w-700 f-14">Days</label>
+                                                <label class="form-label col-lg-3 f-w-700 f-14"><?= __('Days') ?></label>
                                                 <div class="col-lg-7">
                                                     <input type="number" name="usage_trash_holder_day"  class="form-control" value="<?php echo $applicationuser['usage_trash_holder_day']; ?>" aria-label="Usage Trash Holder Day">
                                                 </div>
@@ -381,13 +381,13 @@ function refrashpage(){
                                             <span class="cr mt-0">
                                               <i class="cr-icon icofont icofont-ui-check txt-warning"></i>
                                           </span>
-                                          <p> Pro-Rata billing<i class="ti-info ms-1 fs-7 bg-white text-primary border-radius p-1" data-bs-toggle="tooltip" data-placement="bottom" title="Add custom field to the billing invoice"></i>
+                                          <p> <?= __('Pro-Rata billing') ?><i class="ti-info ms-1 fs-7 bg-white text-primary border-radius p-1" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('Add custom field to the billing invoice') ?>"></i>
                                           </p>
                                       </label>
                                   </div>
                                   <div class="border-checkbox-section">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <label class="form-label border-checkbox-label" for="checkbox2">Allow pro-rated billing when treshold usage is paid before end of billing cycle.</label>
+                                        <label class="form-label border-checkbox-label" for="checkbox2"><?= __('Allow pro-rated billing when treshold usage is paid before end of billing cycle.') ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -397,31 +397,31 @@ function refrashpage(){
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Summary</h5>
+                            <h5><?= __('Summary') ?></h5>
                         </div>
                         <div class="card-body">
-                            <h6 class="mt-5 f-w-600">Customer Details</h6>
+                            <h6 class="mt-5 f-w-600"><?= __('Customer Details') ?></h6>
                             <div class="d-block mt-3">
                                 <a class="f-w-600" href=""><?php echo $applicationuser['display_name']; ?></a>
-                                <div class="badge label-success ms-2">Active</div>
+                                <div class="badge label-success ms-2"><?= __('Active') ?></div>
                             </div>
                             <div class="d-block border-bottom pb-4">
                                 <a class="f-w-600" href=""><?php echo $applicationuser['user_email']; ?></a>
                             </div>
                             <div class="d-block border-bottom pb-4 mt-3">
-                                <div class="badge bg-light text-primary ms-2">Basic Bundle</div>
+                                <div class="badge bg-light text-primary ms-2"><?= __('Basic Bundle') ?></div>
                                 <span class="d-inline-block mr-2 f-w-600" id="totalpricesubscription"><?php echo "Rs.".$totalactualprice; ?></span>
                             </div>
                             <div class="d-block mt-3">
-                                <h6 class="mt-5 f-w-600">Payment Details</h6>
+                                <h6 class="mt-5 f-w-600"><?= __('Payment Details') ?></h6>
                                 <div class="d-block mt-3">
-                                    <span class="d-inline-block mr-2 f-w-600">Master Card</span>
+                                    <span class="d-inline-block mr-2 f-w-600"><?= __('Master Card') ?></span>
                                     <img src="../files/assets/images/mastercard.svg" alt="" class="h-25px img-50">
                                 </div>
                                 <div class="d-block mt-2">
-                                    <span class="d-inline-block mr-2 f-w-600">Expires Dec 2025</span>
+                                    <span class="d-inline-block mr-2 f-w-600"><?= __('Expires Dec 2025') ?></span>
                                 </div>
-                                <button type="submit" class="btn btn-primary waves-effect mt-4"  name="submit">Create Subscription</button>
+                                <button type="submit" class="btn btn-primary waves-effect mt-4"  name="submit"><?= __('Create Subscription') ?></button>
                             </div>
                         </div>
                     </div>
@@ -454,23 +454,23 @@ function refrashpage(){
   <div class="modal-dialog modal-xl" role="document" style="max-width: 98% !important;" >
     <div class="modal-content" id="" style="border-radius: 20px;" style="border:none;">
       <div class="modal-header">
-        <h5 class="modal-title">Payment Details</h5>
+        <h5 class="modal-title"><?= __('Payment Details') ?></h5>
         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>   
         <form class="form" id="insertpaymentsubscrifrm">  
             <div class="card-body">
                 <div class="row" >
                     <div class="col-lg-3 form-group text-center">
-                        <span class="col-form-label d-block f-w-700">Users</span>
+                        <span class="col-form-label d-block f-w-700"><?= __('Users') ?></span>
                         <span id="popup_users"></span>
                     </div>
                     <div class="col-lg-3 form-group text-center"> 
-                            <span class="col-form-label d-block f-w-700">Price</span>
+                            <span class="col-form-label d-block f-w-700"><?= __('Price') ?></span>
                             <span id="popup_price"></span>
                     </div>
                     <div class="form-group col-lg-6">
-                        <label for="popup_paymentdate" class="col-4 col-form-label f-w-700">Payment Date</label>
-                        <input class="form-control datepicker" type="text" name="payment_date"  id="popup_paymentdate" aria-label="Payment Date">
+                        <label for="popup_paymentdate" class="col-4 col-form-label f-w-700"><?= __('Payment Date') ?></label>
+                        <input class="form-control datepicker" type="text" name="payment_date"  id="popup_paymentdate" aria-label="<?= __('Payment Date') ?>">
                     </div>
                 </div>
             </div>

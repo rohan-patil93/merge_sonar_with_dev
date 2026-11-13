@@ -20,7 +20,7 @@ $sub_header_name = json_decode($paheaders['sub_header_name'],1);
         ?>
         <td>
             <div class="">
-                <input aria-label="Input field" type="text" class="form-control" name="<?php echo $fieldname; ?>"  <?php echo $sub_headerres[$loginuser_type] == "N"?"readonly":""; ?> >
+                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" name="<?php echo $fieldname; ?>"  <?php echo $sub_headerres[$loginuser_type] == "N"?"readonly":""; ?> >
             </div>
         </td>
     <?php $fieldcnt++; } ?>

@@ -58,7 +58,7 @@ foreach ($roledata as $roles) {
 <div class="d-flex flex-column-fluid">
     <div class="container-fluid">
     	<div class="alert alert-warning alert-dismissible">
-		            <strong><?php echo "This function is used to provide access"; ?></strong> 
+		            <strong><?= __("This function is used to provide access") ?></strong> 
 		            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		        </div>
 
@@ -66,11 +66,11 @@ foreach ($roledata as $roles) {
 <div class="col-lg-12">
 	<form class="kt-form j-pro" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
 	<div class="col-lg-6 mt-5">
-		<label for="kt_select2_1">Role </label>
+		<label for="kt_select2_1"><?= __("Role") ?> </label>
 		<select class="form-select js-example-basic-single" id="kt_select2_1" name="role" onchange="GetSelectedTextValue(this.value)">
 			
 		<?php foreach ($show as  $selectvalue) {  ?> 
-				<option <?php if($selectvalue['id'] == $role_id){ ?> selected <?php } ?> value="<?php echo $selectvalue['id']; ?>"><?php echo $selectvalue['name']; ?></option>
+				<option <?php if($selectvalue['id'] == $role_id){ ?> selected <?php } ?> value="<?php echo $selectvalue['id']; ?>"><?= htmlspecialchars(__($selectvalue['name'] ?? '')) ?></option>
 			</optgroup>
 		<?php  } ?>
 		</select>
@@ -81,12 +81,12 @@ foreach ($roledata as $roles) {
 				foreach ($navelistdata as  $navdata) { ?>
 				<li class="nav-item">
 					<a class="nav-link <?php if ($i==1){ ?> active <?php } ?> " data-bs-toggle="tab" href="#kt_tabs_1_<?php echo $navdata['genc_detail_code']; ?>">
-						<!-- <i class="la la-exclamation-triangle"></i> --> <?php echo $navdata['genc_detail_name']; ?>
+						<!-- <i class="la la-exclamation-triangle"></i> --> <?= htmlspecialchars(__($navdata['genc_detail_name'] ?? '')) ?>
 					</a>
 				</li>
 			<?php $i++;  }	?>
 			<li class="nav-item"> 
-				<a class="nav-link" data-toggle="tab" onclick="redirectpage('COM_INSERT_ROLE_PERMISSIONS')" href=""> All </a>
+				<a class="nav-link" data-toggle="tab" onclick="redirectpage('COM_INSERT_ROLE_PERMISSIONS')" href=""> <?= __("All") ?> </a>
 			</li>
 
 		</ul>
@@ -106,7 +106,7 @@ foreach ($roledata as $roles) {
 							<div class="card-header">
 								<div class="kt-portlet__head-label">
 									<h3 class="kt-portlet__head-title mt-5">
-										<?php echo $menu['Label'];  //print_r($menu); ?>
+										<?= htmlspecialchars(__($menu['Label'] ?? '')) ?>
 									</h3>
 								</div>
 								
@@ -116,19 +116,19 @@ foreach ($roledata as $roles) {
 								<div class="card-body">
 									<div class="form-group row">
 										<div class="col-lg-3">
-											<span class="d-inline-block fw-bold" style="margin-bottom:5px">Table Name</span>
+											<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Table Name") ?></span>
 										</div>
 										<div class="col-lg-2">
-											<span class="d-inline-block fw-bold" style="margin-bottom:5px">  View</span>
+											<span class="d-inline-block fw-bold" style="margin-bottom:5px">  <?= __("View") ?></span>
 										</div>
 										<div class="col-lg-2">
-											<span class="d-inline-block fw-bold" style="margin-bottom:5px">   Insert</span>
+											<span class="d-inline-block fw-bold" style="margin-bottom:5px">   <?= __("Insert") ?></span>
 										</div>
 										<div class="col-lg-2">
-											<span class="d-inline-block fw-bold" style="margin-bottom:5px"> Update </span>
+											<span class="d-inline-block fw-bold" style="margin-bottom:5px"> <?= __("Update") ?> </span>
 										</div>
 										<div class="col-lg-2">
-											<span class="d-inline-block fw-bold" style="margin-bottom:5px">   Delete</span>
+											<span class="d-inline-block fw-bold" style="margin-bottom:5px">   <?= __("Delete") ?></span>
 										</div>
 									
 
@@ -136,7 +136,7 @@ foreach ($roledata as $roles) {
 													<?php if($table_name != ''){ ?>
 													<input type="hidden" class="form-control"  name="table[]" value="<?php echo $table_name;?>" >
 												<?php } ?>
-													<input type="text" class="form-control" readonly name="" value="<?php echo $menu['Label'];?>" aria-label="Table Name">
+													<input type="text" class="form-control" readonly name="" value="<?= htmlspecialchars(__($menu['Label'] ?? '')) ?>" aria-label="Table Name">
 												</div>
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">
@@ -180,7 +180,7 @@ foreach ($roledata as $roles) {
 										<?php $j=1; foreach ($menu['child'] as $key=>$child) { ?>
 										<li class="nav-item">
 											<a class="nav-link <?php if ($j==1){ ?> active <?php } ?> " data-bs-toggle="tab" href="#kt_tabs_2_<?php echo $key; ?>">
-												<?php echo $child['Label']; ?></a>
+												<?= htmlspecialchars(__($child['Label'] ?? '')) ?></a>
 										</li>
 										<?php $j++; } ?>
 									</ul>
@@ -190,19 +190,19 @@ foreach ($roledata as $roles) {
 										<div class="tab-pane <?php if ($j==1){ ?> active <?php } ?> " id="kt_tabs_2_<?php echo $key; ?>" role="tabpanel">
 											<div class="form-group row">
 												<div class="col-lg-3">
-													<span class="d-inline-block fw-bold" style="margin-bottom:5px">Table Name</span>
+													<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Table Name") ?></span>
 												</div>
 												<div class="col-lg-2">
-													<span class="d-inline-block fw-bold" style="margin-bottom:5px">  View</span>
+													<span class="d-inline-block fw-bold" style="margin-bottom:5px">  <?= __("View") ?></span>
 												</div>
 												<div class="col-lg-2">
-													<span class="d-inline-block fw-bold" style="margin-bottom:5px">   Insert</span>
+													<span class="d-inline-block fw-bold" style="margin-bottom:5px">   <?= __("Insert") ?></span>
 												</div>
 												<div class="col-lg-2">
-													<span class="d-inline-block fw-bold" style="margin-bottom:5px"> Update </span>
+													<span class="d-inline-block fw-bold" style="margin-bottom:5px"> <?= __("Update") ?> </span>
 												</div>
 												<div class="col-lg-2">
-													<span class="d-inline-block fw-bold" style="margin-bottom:5px">   Delete</span>
+													<span class="d-inline-block fw-bold" style="margin-bottom:5px">   <?= __("Delete") ?></span>
 												</div>
 												<?php 
 												if(count((array)$child['child']) < 1){  $child['child'] = $arrayName = array($child);  }
@@ -212,7 +212,7 @@ foreach ($roledata as $roles) {
 													<?php if($table_name != ''){ ?>
 													<input type="hidden" class="form-control"  name="table[]" value="<?php echo $table_name;?>" >
 												<?php } ?>
-													<input type="text" class="form-control" readonly name="" value="<?php echo $value['Label'];?>" aria-label="Table Name">
+													<input type="text" class="form-control" readonly name="" value="<?= htmlspecialchars(__($value['Label'] ?? '')) ?>" aria-label="Table Name">
 												</div>
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">
@@ -274,17 +274,17 @@ foreach ($roledata as $roles) {
 				<?php if(isset($_GET['Rid']) && $_GET['Rid'] !='' && $_GET['copy'] != '1'){ ?>
 						<input type="hidden" name="hid" value="<?php echo $role_id; ?>" />
 						<input type="hidden" name="submit" value="Update" />
-						<button id="kt_llogin_signup_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" ><i class="la la-check"></i>Save</button>
-						<button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+						<button id="kt_llogin_signup_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" ><i class="la la-check"></i><?= __("Save") ?></button>
+						<button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?= __("Cancel") ?></button>
 				<?php } else{ ?>
 						<input type="hidden" name="submit" value="Add" />
-						<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-						<button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
-						<button type="reset" class="btn btn-light-primary font-weight-bolder mr-2 ><i class="la la-close"></i>Cancel</button>
+						<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?= __("Save & exit") ?></button>
+						<button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?= __("Save & continue") ?></button>
+						<button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i><?= __("Cancel") ?></button>
 				<?php } ?>	
 			</div>
 			<div class="col-lg-6 kt-align-right">
-				<button type="reset" disabled="disabled" class="btn btn-danger float-right mt-5"><i class="la la-trash"></i>Delete</button>
+				<button type="reset" disabled="disabled" class="btn btn-danger float-right mt-5"><i class="la la-trash"></i><?= __("Delete") ?></button>
 			</div> 
 		</div>
 	</div>

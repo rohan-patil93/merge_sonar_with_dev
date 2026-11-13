@@ -35,24 +35,24 @@ foreach ((array)$unit_of_measurements as $uom) {
     <div class="card mt-5">
         <input type="hidden" name="form_updatetion_type" value="<?php echo ($_POST['gettype'] == "SELECTMANUFACTURINGBOM" || $rid == "") ? "insert" : "update"; ?>">
         <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Required Components</h5>
+            <h5 class="mb-0"><?php echo __('Required Components'); ?></h5>
         </div>
         <div class="card-body">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col" class="p-1" style="width: 18%;">Product Name</th>
-                        <th scope="col" class="p-1" style="width: 8%;">UOM</th>
-                        <th scope="col" class="p-1 text-right" style="width: 10%;">BOM Qty</th>
-                        <th scope="col" class="p-1 text-right" style="width: 10%;">Qty</th>
-                        <th scope="col" class="p-1 text-right" style="width: 10%;">Scrap %</th>
-                        <th scope="col" class="p-1" style="width: 18%;">Manufacturing</th>
+                        <th scope="col" class="p-1" style="width: 18%;"><?php echo __('Product Name'); ?></th>
+                        <th scope="col" class="p-1" style="width: 8%;"><?php echo __('UOM'); ?></th>
+                        <th scope="col" class="p-1 text-right" style="width: 10%;"><?php echo __('BOM Qty'); ?></th>
+                        <th scope="col" class="p-1 text-right" style="width: 10%;"><?php echo __('Qty'); ?></th>
+                        <th scope="col" class="p-1 text-right" style="width: 10%;"><?php echo __('Scrap %'); ?></th>
+                        <th scope="col" class="p-1" style="width: 18%;"><?php echo __('Manufacturing'); ?></th>
                         <?php if ($rid != "") { ?>
-                          <th scope="col" class="p-1 text-right" style="width: 10%;">Request</th>
-                          <th scope="col" class="p-1 text-right" style="width: 10%;">Received</th>
-                          <th scope="col" class="p-1 text-right" style="width: 10%;">Pending</th>
+                          <th scope="col" class="p-1 text-right" style="width: 10%;"><?php echo __('Request'); ?></th>
+                          <th scope="col" class="p-1 text-right" style="width: 10%;"><?php echo __('Received'); ?></th>
+                          <th scope="col" class="p-1 text-right" style="width: 10%;"><?php echo __('Pending'); ?></th>
                         <?php } ?>
-                        <th scope="col" class="p-1" style="width: 20%;">Description</th>
+                        <th scope="col" class="p-1" style="width: 20%;"><?php echo __('Description'); ?></th>
                     </tr>
                 </thead>
                 <tbody id="invoiceItem">
@@ -107,30 +107,30 @@ foreach ((array)$unit_of_measurements as $uom) {
 
                             <td class="p-1 manufacturing-method-cell">
                                 <?php if ($isWipComponent) { ?>
-                                    <select aria-label="Manufacturing Method[]" class="form-control js-manufacturing-method" name="manufacturing_method[]" id="manufacturing_method_<?php echo $seq; ?>" data-seq="<?php echo $seq; ?>">
-                                        <option value="INHOUSE" <?php echo !$isSubcontract ? "selected" : ""; ?>>In-house</option>
-                                        <option value="SUBCONTRACT" <?php echo $isSubcontract ? "selected" : ""; ?>>Subcontract</option>
+                                    <select aria-label="<?php echo __('Manufacturing Method[]'); ?>" class="form-control js-manufacturing-method" name="manufacturing_method[]" id="manufacturing_method_<?php echo $seq; ?>" data-seq="<?php echo $seq; ?>">
+                                        <option value="INHOUSE" <?php echo !$isSubcontract ? "selected" : ""; ?>><?php echo __('In-house'); ?></option>
+                                        <option value="SUBCONTRACT" <?php echo $isSubcontract ? "selected" : ""; ?>><?php echo __('Subcontract'); ?></option>
                                     </select>
                                     <div class="manufacturing-subcontract-fields <?php echo $isSubcontract ? "" : "d-none"; ?>" id="subcontract_fields_<?php echo $seq; ?>">
-                                        <select aria-label="Party []" class="js-example-basic-single subcontract-select" name="party_id[]" id="party_id_<?php echo $seq; ?>" data-subcontract-required="1">
-                                            <option value="">Sub Contractor</option>
+                                        <select aria-label="<?php echo __('Party []'); ?>" class="js-example-basic-single subcontract-select" name="party_id[]" id="party_id_<?php echo $seq; ?>" data-subcontract-required="1">
+                                            <option value=""><?php echo __('Sub Contractor'); ?></option>
                                             <?php foreach ((array)$vendors as $vendor) { ?>
                                                 <option value="<?php echo $vendor['id']; ?>" <?php echo $mbomi['party_id'] == $vendor['id'] ? "selected" : ""; ?>><?php echo $vendor['display_name'] != "" ? $vendor['display_name'] : $vendor['company']; ?></option>
                                             <?php } ?>
                                         </select>
-                                        <select aria-label="Warehouse []" class="js-example-basic-single subcontract-select mt-1" name="warehouse_id[]" id="warehouse_id_<?php echo $seq; ?>" data-subcontract-required="1">
-                                            <option value="">Sub Contractor Warehouse</option>
+                                        <select aria-label="<?php echo __('Warehouse []'); ?>" class="js-example-basic-single subcontract-select mt-1" name="warehouse_id[]" id="warehouse_id_<?php echo $seq; ?>" data-subcontract-required="1">
+                                            <option value=""><?php echo __('Sub Contractor Warehouse'); ?></option>
                                             <?php foreach ((array)$warehouses as $warehouse) { ?>
                                                 <option value="<?php echo $warehouse['id']; ?>" <?php echo $mbomi['warehouse_id'] == $warehouse['id'] ? "selected" : ""; ?>><?php echo $warehouse['warehouse_name']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
-                                    <div class="manufacturing-inhouse-note <?php echo $isSubcontract ? "d-none" : ""; ?>" id="inhouse_note_<?php echo $seq; ?>">Child work order will be created after approval.</div>
+                                    <div class="manufacturing-inhouse-note <?php echo $isSubcontract ? "d-none" : ""; ?>" id="inhouse_note_<?php echo $seq; ?>"><?php echo __('Child work order will be created after approval.'); ?></div>
                                 <?php } else { ?>
                                     <input type="hidden" name="manufacturing_method[]" value="INHOUSE">
                                     <input type="hidden" id="party_id_<?php echo $seq; ?>" name="party_id[]" value="<?php echo $mbomi['party_id']; ?>">
                                     <input type="hidden" id="warehouse_id_<?php echo $seq; ?>" name="warehouse_id[]" value="<?php echo $mbomi['warehouse_id']; ?>">
-                                    <span class="text-muted">Not applicable</span>
+                                    <span class="text-muted"><?php echo __('Not applicable'); ?></span>
                                 <?php } ?>
                             </td>
 
@@ -156,7 +156,7 @@ foreach ((array)$unit_of_measurements as $uom) {
 
                             <!-- Description (only editable field) -->
                             <td class="p-1">
-                                <textarea aria-label="Text area" id="description_<?php echo $seq; ?>" name="description[]" class="form-control" autocomplete="off"><?php echo $mbomi['description']; ?></textarea>
+                                <textarea aria-label="<?php echo __('Text area'); ?>" id="description_<?php echo $seq; ?>" name="description[]" class="form-control" autocomplete="off"><?php echo $mbomi['description']; ?></textarea>
                             </td>
                         </tr>
                     <?php $seq++;
@@ -171,16 +171,16 @@ foreach ((array)$unit_of_measurements as $uom) {
 <div class="col-lg-12">
     <div class="card mt-5">
         <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">By-Products</h5>
+            <h5 class="mb-0"><?php echo __('By-Products'); ?></h5>
         </div>
         <div class="card-body">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col" class="p-1" style="width: 35%;">Product Name</th>
-                        <th scope="col" class="p-1" style="width: 15%;">UOM</th>
-                        <th scope="col" class="p-1 text-right" style="width: 15%;">Qty</th>
-                        <th scope="col" class="p-1" style="width: 35%;">Description</th>
+                        <th scope="col" class="p-1" style="width: 35%;"><?php echo __('Product Name'); ?></th>
+                        <th scope="col" class="p-1" style="width: 15%;"><?php echo __('UOM'); ?></th>
+                        <th scope="col" class="p-1 text-right" style="width: 15%;"><?php echo __('Qty'); ?></th>
+                        <th scope="col" class="p-1" style="width: 35%;"><?php echo __('Description'); ?></th>
                     </tr>
                 </thead>
                 <tbody id="byitem_invoiceitems">
@@ -209,7 +209,7 @@ foreach ((array)$unit_of_measurements as $uom) {
                                 <input type="hidden" id="byitem_quantity_<?php echo $seqs; ?>" name="byitem_quantity[]" value="<?php echo $rid != "" ? $byitm['byitem_quantity'] : ($workorderitemqty > 0 ? ($workorderitemqty * $byitm['byitem_quantity']) : $byitm['byitem_quantity']); ?>" data-original-qty="<?php echo $byitm['byitem_quantity']; ?>">
                             </td>
                             <td class="p-1">
-                                <textarea aria-label="Text area" id="byitem_description_<?php echo $seqs; ?>" name="byitem_description[]" class="form-control" autocomplete="off"><?php echo $byitm['byitem_description']; ?></textarea>
+                                <textarea aria-label="<?php echo __('Text area'); ?>" id="byitem_description_<?php echo $seqs; ?>" name="byitem_description[]" class="form-control" autocomplete="off"><?php echo $byitm['byitem_description']; ?></textarea>
                             </td>
                         </tr>
                     <?php $seqs++;
@@ -224,19 +224,19 @@ foreach ((array)$unit_of_measurements as $uom) {
 <div class="col-lg-12">
     <div class="card mt-5">
         <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Required Operations</h5>
+            <h5 class="mb-0"><?php echo __('Required Operations'); ?></h5>
         </div>
         <div class="card-body">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col" class="p-1" style="width: 15%;">Operation <span class="requried"></span></th>
-                        <th scope="col" class="p-1" style="width: 15%;">Machine <span class="requried"></span></th>
-                        <th scope="col" class="thheader p-1" style="width: 10%;">Time (minutes) <span class="requried">*</span></th>
-                        <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Manpower <span class="requried">*</span></th>
-                        <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Cost per Hours <span class="requried">*</span></th>
-                        <th scope="col" class="thheader p-1 text-right" style="width: 15%;"> Total <span class="requried">*</span></th>
-                        <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Note <span class="requried">*</span></th>
+                        <th scope="col" class="p-1" style="width: 15%;"><?php echo __('Operation'); ?> <span class="requried"></span></th>
+                        <th scope="col" class="p-1" style="width: 15%;"><?php echo __('Machine'); ?> <span class="requried"></span></th>
+                        <th scope="col" class="thheader p-1" style="width: 10%;"><?php echo __('Time (minutes)'); ?> <span class="requried">*</span></th>
+                        <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Manpower'); ?> <span class="requried">*</span></th>
+                        <th scope="col" class="thheader p-1 text-right" style="width: 15%;"><?php echo __('Cost per Hours'); ?> <span class="requried">*</span></th>
+                        <th scope="col" class="thheader p-1 text-right" style="width: 15%;"> <?php echo __('Total'); ?> <span class="requried">*</span></th>
+                        <th scope="col" class="thheader p-1 text-right" style="width: 15%;"><?php echo __('Note'); ?> <span class="requried">*</span></th>
                         <th scope="col" class="thheader p-1 text-right" style="width: 5%;"></th>
                     </tr>
                 </thead>
@@ -271,8 +271,8 @@ foreach ((array)$unit_of_measurements as $uom) {
                             </td>
 
                             <td class="p-1 w-full">
-                                <select aria-label="Manufacturing Operation Machine []" class="js-example-basic-single js-operation-machine-select" name="manufacturing_operation_machine_id[]" id="manufacturing_operation_machine_id_<?php echo $seqq; ?>" data-seq="<?php echo $seqq; ?>" data-type="MACHINE">
-                                    <option value="">Select Any one</option>
+                                <select aria-label="<?php echo __('Manufacturing Operation Machine []'); ?>" class="js-example-basic-single js-operation-machine-select" name="manufacturing_operation_machine_id[]" id="manufacturing_operation_machine_id_<?php echo $seqq; ?>" data-seq="<?php echo $seqq; ?>" data-type="MACHINE">
+                                    <option value=""><?php echo __('Select Any one'); ?></option>
                                     <?php foreach ((array)$manufacturing_operations as $item) { ?>
                                         <option value="<?php echo $item['id']; ?>" <?php echo $mbomi['manufacturing_operation_machine_id'] == $item['id'] ? "selected" : ""; ?>><?php echo $item['operation_name']; ?></option>
                                     <?php } ?>
@@ -292,7 +292,7 @@ foreach ((array)$unit_of_measurements as $uom) {
                                 <span id="operation_total_display_<?php echo $seqq; ?>"><?php echo $mbomi['operation_total'] ?? 0; ?></span>
                             </td>
                             <td class="p-1">
-                                <textarea aria-label="Operation Note[]" class="form-control" name="operation_note[]" id="operation_note_<?php echo $seqq; ?>" autocomplete="off"><?php echo $mbomi['operation_note']; ?></textarea>
+                                <textarea aria-label="<?php echo __('Operation Note[]'); ?>" class="form-control" name="operation_note[]" id="operation_note_<?php echo $seqq; ?>" autocomplete="off"><?php echo $mbomi['operation_note']; ?></textarea>
                             </td>
                         </tr>
                     <?php $seqq++;

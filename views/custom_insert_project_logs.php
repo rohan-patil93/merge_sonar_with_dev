@@ -57,13 +57,13 @@ function replayMessageRemoved(){
                                       <div class="row m-b-20 send-chat">
                                          <div class="col">
                                             <div class="msg">
-                                               <i class="fa fa-reply float-left cursor-pointer" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Replay" onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                               <i class="fa fa-reply float-left cursor-pointer" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?php echo __('Replay'); ?>" onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                                <span class="float-right"></span>
                                                <p class="m-b-0"><?php echo $messgae." ".$datares['description']; ?></p>
                                                <?php
                                                 echo $replay_msg;
                                                if(count((array)$tasklist['logs']['attachment'][$ky])!='0'){ ?>
-                                                  <span class="form-label col-form-label d-block"><i class="ti-clip"></i> Attchment : </span>
+                                                  <span class="form-label col-form-label d-block"><i class="ti-clip"></i> <?php echo __('Attchment :'); ?> </span>
                                                   <?php  $im=1; foreach($tasklist['logs']['attachment'][$ky] as $attchmentt){ ?>
                                                      <a href="uploads/attachments/<?php echo $attchmentt['actual_file_name']; ?>" download><?php echo $im.") ".$attchmentt['file_name']; ?></a></br>
                                                      <?php $im++; ?>
@@ -74,9 +74,9 @@ function replayMessageRemoved(){
                                              </div>
                                              <div class="col-auto p-l-0" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $empdeails['display_name']; ?>">
                                                 <?php if($empdeails['user_photo']!=""){ ?>
-                                                   <img src="uploads/all/<?php echo $empdeails['user_photo']; ?>"   class="img-radius img-40" alt="User Profile">
+                                                   <img src="uploads/all/<?php echo $empdeails['user_photo']; ?>"   class="img-radius img-40" alt="<?php echo __('User Profile'); ?>">
                                                <?php } else { ?>
-                                                   <span  alt="user" class="img-radius img-40 p-10" ><?php echo initials($empdeails['display_name']); ?></span>
+                                                   <span  alt="<?php echo __('user'); ?>" class="img-radius img-40 p-10" ><?php echo initials($empdeails['display_name']); ?></span>
                                                <?php } ?>
                                            </div>
                                        </div>
@@ -85,18 +85,18 @@ function replayMessageRemoved(){
                                       <div class="row m-b-20 received-chat">
                                          <div class="col-auto p-r-0" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $empdeails['display_name']; ?>">
                                             <?php if($empdeails['user_photo']!=""){ ?>
-                                               <img src="uploads/all/<?php echo $empdeails['user_photo']; ?>"   class="img-radius img-40" alt="User Profile">
+                                               <img src="uploads/all/<?php echo $empdeails['user_photo']; ?>"   class="img-radius img-40" alt="<?php echo __('User Profile'); ?>">
                                            <?php } else { ?>
-                                               <span  alt="user" class="img-radius img-40 p-10" ><?php echo initials($empdeails['display_name']); ?></span>
+                                               <span  alt="<?php echo __('user'); ?>" class="img-radius img-40 p-10" ><?php echo initials($empdeails['display_name']); ?></span>
                                            <?php } ?>
                                        </div>
                                        <div class="col">
                                           <div class="msg">
-                                             <i class="fa fa-reply float-right cursor-pointer" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Replay" onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                             <i class="fa fa-reply float-right cursor-pointer" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?php echo __('Replay'); ?>" onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                              <p class="m-b-0"><?php echo $messgae." ".$datares['description']; ?></p>
                                              <?php echo $replay_msg;
                                              if(count((array)$tasklist['logs']['attachment'][$ky])!='0'){ ?>
-                                                <span class="form-label col-form-label d-block"><i class="ti-clip"></i> Attchment : </span>
+                                                <span class="form-label col-form-label d-block"><i class="ti-clip"></i> <?php echo __('Attchment :'); ?> </span>
                                                 <?php  $im=1; foreach($tasklist['logs']['attachment'][$ky] as $attchmentt){ ?>
                                                    <a href="uploads/attachments/<?php echo $attchmentt['actual_file_name']; ?>" download><?php echo $im.") ".$attchmentt['file_name']; ?></a></br>
                                                    <?php $im++; ?>
@@ -113,7 +113,7 @@ function replayMessageRemoved(){
                                </div>
                            <?php }else{ ?>
                             <div class="card-px text-center py-20 mt-2">
-                                <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Query </p>
+                                <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?php echo __('No Query'); ?> </p>
                                 <div class="text-center px-4">
                                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                               </div>
@@ -131,19 +131,19 @@ function replayMessageRemoved(){
                  <div class="input-group input-group-button cursor-pointer" <?php echo $notshowmessgaeshow; ?>>
                      <button type="button" class="input-group-text addon-style p-0" >
                         <div class="image-input image-input-empty image-input-outline mt-2" id="kt_image_5"  >
-                           <label class="btn-hover-text-primary mt-1" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File" aria-label="Upload File">
+                           <label class="btn-hover-text-primary mt-1" data-action="change" data-toggle="tooltip" title="" data-original-title="<?php echo __('Uploade File'); ?>" aria-label="<?php echo __('Upload File'); ?>">
                               <i class="ti-clip f-30 mr-5 mt-2" ></i>
-                              <input aria-label="Files[]" type="file" name="files[]" multiple/>
+                              <input aria-label="<?php echo __('Files[]'); ?>" type="file" name="files[]" multiple/>
                           </label>
                       </div>
                   </button>
-                  <textarea aria-label="Eg. Descriptions" class="form-control  width1" name="description" value="" placeholder="Eg. Descriptions" required ></textarea>
+                  <textarea aria-label="<?php echo __('Eg. Descriptions'); ?>" class="form-control  width1" name="description" value="" placeholder="<?php echo __('Eg. Descriptions'); ?>" required ></textarea>
                   <button class="input-group-text addon-style cursor-pointer" name="submitlog" ><span class=""><i class="ti-share"></i></span></button>
               </div>
               <div class="form-group">
-                  <span class="form-label">Field Group</span>
-                  <select aria-label="Application Query" class="form-select js-example-basic-single" name="application_query_id">
-                    <option value="0">Select Any One</option>
+                  <span class="form-label"><?php echo __('Field Group'); ?></span>
+                  <select aria-label="<?php echo __('Application Query'); ?>" class="form-select js-example-basic-single" name="application_query_id">
+                    <option value="0"><?php echo __('Select Any One'); ?></option>
                 <?php foreach($application_query as $applicationquery){ ?>
                     <option   value="<?php echo $applicationquery['id']; ?>"><?php echo $applicationquery['field_group'];  ?></option>
                 <?php } ?>

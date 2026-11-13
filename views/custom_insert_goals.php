@@ -68,13 +68,13 @@ $employees = $result['employees'];
 <div class="card">
     <div class="card-header">
         <form method="post">
-            <h5>Employee Goals</h5>
+            <h5><?php echo __('Employee Goals'); ?></h5>
             <div class="card-header-right table-card-header">
                     <input type="hidden" name="rid" value="<?php echo $rid; ?>" />
                     <?php if($employee_goals['share'] =='1'){ ?>
-                    <button type="submit" name="start_goal" class="btn btn-primary mb-2 desktop-view"> Share Goal</button>
+                    <button type="submit" name="start_goal" class="btn btn-primary mb-2 desktop-view"> <?php echo __('Share Goal'); ?></button>
                     <?php } ?>
-                <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</button>
+                <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?php echo __('Back'); ?></button>
             </div>
         </form>
     </div>
@@ -83,20 +83,20 @@ $employees = $result['employees'];
         <form method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="form-group col-lg-4">
-                    <span class="form-label">Goal Name<span class="text-danger">*</span></span>
-                    <input aria-label="Goal Name" type="text" name="goal_name" class="form-control" value="<?php echo $employee_goals['goal_name']; ?>" required>
+                    <span class="form-label"><?php echo __('Goal Name'); ?><span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Goal Name'); ?>" type="text" name="goal_name" class="form-control" value="<?php echo $employee_goals['goal_name']; ?>" required>
                 </div>
                 <div class="form-group col-lg-4">
-                    <span class="form-label">Descriptions<span class="text-danger">*</span></span>
-                    <textarea aria-label="Descriptions" type="text" name="descriptions" class="form-control"><?php echo $employee_goals['descriptions']; ?></textarea>
+                    <span class="form-label"><?php echo __('Descriptions'); ?><span class="text-danger">*</span></span>
+                    <textarea aria-label="<?php echo __('Descriptions'); ?>" type="text" name="descriptions" class="form-control"><?php echo $employee_goals['descriptions']; ?></textarea>
                 </div>
                 <div class="form-group col-lg-2">
-                    <span class="form-label">Goal Start Date</span>
-                    <input aria-label="Input field" type="text" class="form-control startdatepicker_1 rangedatepicker"  value="<?php echo  fromDate($employee_goals['goal_start_date']); ?>" data-id="1"  name="goal_start_date" onblur="assessmentchange()" />
+                    <span class="form-label"><?php echo __('Goal Start Date'); ?></span>
+                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control startdatepicker_1 rangedatepicker"  value="<?php echo  fromDate($employee_goals['goal_start_date']); ?>" data-id="1"  name="goal_start_date" onblur="assessmentchange()" />
                 </div>
                 <div class="form-group col-lg-2">
-                    <span class="form-label">Goal End Date </span>
-                    <input aria-label="Goal End Date" type="text" class="form-control enddatepicker_1" name="goal_end_date" value="<?php echo fromDate($employee_goals['goal_end_date']); ?>"   />
+                    <span class="form-label"><?php echo __('Goal End Date'); ?> </span>
+                    <input aria-label="<?php echo __('Goal End Date'); ?>" type="text" class="form-control enddatepicker_1" name="goal_end_date" value="<?php echo fromDate($employee_goals['goal_end_date']); ?>"   />
                 </div>
                 <div class="form-group col-lg-8">
                     <?php
@@ -105,9 +105,9 @@ $employees = $result['employees'];
                     }else{
                         $emailid = array($_SESSION['emp_id']);
                     } ?>
-                    <span class="form-label">Employees<span class="text-danger">*</span></span>
-                    <select aria-label="Employee Ids[]" class="form-control js-example-basic-multiple" name="employee_ids[]" multiple>
-                        <option value="0">Select Any One</option>
+                    <span class="form-label"><?php echo __('Employees'); ?><span class="text-danger">*</span></span>
+                    <select aria-label="<?php echo __('Employee Ids[]'); ?>" class="form-control js-example-basic-multiple" name="employee_ids[]" multiple>
+                        <option value="0"><?php echo __('Select Any One'); ?></option>
                         <?php foreach ($employees as  $empid=>$empname){  ?>
                             <option <?php if(in_array($empid, (array)$emailid)){ ?> selected <?php
 } ?> value="<?php echo $empid; ?>"

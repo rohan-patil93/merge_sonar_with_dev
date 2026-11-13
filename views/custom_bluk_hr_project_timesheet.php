@@ -217,7 +217,7 @@
 										<div class="btn-group" id="status_dropdown" style="display:none;">
 		                                     <button class="btn btn-primary dropdown-toggle" style="color: <?php echo "#".($stausresult['10']['color'] ?? 'ffffff'); ?>;    background:  <?php echo "#".strval($stausresult['10']['background_color'] ?? '007bff'); ?>; border-color: <?php echo "#".strval($stausresult['10']['background_color'] ?? '007bff'); ?>;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $stausresult['10']['name'] ?? 'Approved'; ?> </button>
 		                                    <div class="dropdown-menu" id="dropdownlist_<?php echo $fid; ?>">
-		                            			<button type="button" class="dropdown-item" onclick="statuspopup('199','2')" name="status" id="status" value="199">Approved</button>
+		                            			<button type="button" class="dropdown-item" onclick="statuspopup('199','2')" name="status" id="status" value="199"><?= __("Approved") ?></button>
 		                                    </div>
 		                                </div>
 									</div>
@@ -300,7 +300,7 @@
 								<div class="btn-group" id="status_dropdown_commented" style="display:none;">
                                      <button class="btn btn-primary dropdown-toggle" style="color: <?php echo "#".($stausresult['10']['color'] ?? 'ffffff'); ?>;    background:  <?php echo "#".strval($stausresult['10']['background_color'] ?? '007bff'); ?>; border-color: <?php echo "#".strval($stausresult['10']['background_color'] ?? '007bff'); ?>;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $stausresult['10']['name'] ?? 'Approved'; ?> </button>
                                     <div class="dropdown-menu" id="dropdownlist_commented_<?php echo $fid; ?>">
-                            			<button type="button" class="dropdown-item" onclick="statuspopup('199','2')" name="status" id="status_commented" value="199">Approved</button>
+                            			<button type="button" class="dropdown-item" onclick="statuspopup('199','2')" name="status" id="status_commented" value="199"><?= __("Approved") ?></button>
                                     </div>
                                 </div>
 							</div>
@@ -475,17 +475,17 @@
 					<div class="card-header border-0 pt-5"> <h3
 					class="card-title align-items-start flex-column">
 					<span class="card-label font-weight-bolder
-					text-dark">Billing Info Details</span> <span
+					text-dark"><?= __("Billing Info Details") ?></span> <span
 					class="text-muted mt-3 font-weight-bold
-					font-size-sm">Billable : <?php echo $billables_count; ?> Members, Nonbillable : <?php echo $employee_count-$billables_count; ?> Members</span> </h3>
+					font-size-sm"><?= __("Billable :") ?> <?php echo $billables_count; ?> <?= __("Members, Nonbillable :") ?> <?php echo $employee_count-$billables_count; ?> <?= __("Members") ?></span> </h3>
 					<div class="card-toolbar">
 					 <ul class="nav nav-pills nav-pills-sm nav-dark-75"> 
 					<li class="nav-item"> <a class="nav-link py-2 px-4"
-					data-toggle="tab" href="#kt_tab_pane_11_2">Approved <span class="label label-lg font-size-sm label-white ml-2"><?php echo $apv_count; ?></span></a>
+					data-toggle="tab" href="#kt_tab_pane_11_2"><?= __("Approved") ?> <span class="label label-lg font-size-sm label-white ml-2"><?php echo $apv_count; ?></span></a>
 					</li> 
 					<li class="nav-item"> <a class="nav-link py-2
 					px-4 active" data-toggle="tab"
-					href="#kt_tab_pane_11_3">Approvals Pending <span class="label label-lg font-size-sm label-white ml-2"><?php echo $sba_count; ?></span></a> </li> </ul> </div> </div>
+					href="#kt_tab_pane_11_3"><?= __("Approvals Pending") ?> <span class="label label-lg font-size-sm label-white ml-2"><?php echo $sba_count; ?></span></a> </li> </ul> </div> </div>
 					<!--end::Header-->
 					<!--begin::Body-->
 					<div class="card-body pt-2 pb-0 mt-n3">
@@ -498,15 +498,15 @@
 										<thead>
 											<tr>
 												<th scope="col" class="p-0 w-40px"> </th>
-												<th scope="col" class="p-0 min-w-200px">Employee Details</th>
-												<th scope="col" class="p-0 min-w-100px text-right">Billable Amount</th>
-												<th scope="col" class="p-0 min-w-125px text-right">Billable Hours</th>
-												<th scope="col" class="p-0 min-w-110px text-center">Status</th>
+												<th scope="col" class="p-0 min-w-200px"><?= __("Employee Details") ?></th>
+												<th scope="col" class="p-0 min-w-100px text-right"><?= __("Billable Amount") ?></th>
+												<th scope="col" class="p-0 min-w-125px text-right"><?= __("Billable Hours") ?></th>
+												<th scope="col" class="p-0 min-w-110px text-center"><?= __("Status") ?></th>
 												<th scope="col" class="py-0 min-w-50px text-center">
 													<div class="checkbox-inline">
-														<label for="select_all_approved" class="checkbox checkbox-success" aria-label="Select all approved timesheets">
-														<input type="checkbox" checked id="select_all_approved" disabled class="" aria-label="Select all approved timesheets">
-														<span></span><span class="sr-only">Select all approved timesheets</span></label>
+														<label for="select_all_approved" class="checkbox checkbox-success" aria-label="<?= __("Select all approved timesheets") ?>">
+														<input type="checkbox" checked id="select_all_approved" disabled class="" aria-label="<?= __("Select all approved timesheets") ?>">
+														<span></span><span class="sr-only"><?= __("Select all approved timesheets") ?></span></label>
 													</div>
 												</th>
 											</tr>
@@ -584,15 +584,15 @@
 										<thead>
 											<tr>
 												<th scope="col" class="p-0 w-40px"> </th>
-												<th scope="col" class="p-0 min-w-200px">Employee Details</th>
-												<th scope="col" class="p-0 min-w-100px text-right">Billable Amount</th>
-												<th scope="col" class="p-0 min-w-125px text-right">Billable Hours</th>
-												<th scope="col" class="p-0 min-w-110px text-center">Status</th>
+												<th scope="col" class="p-0 min-w-200px"><?= __("Employee Details") ?></th>
+												<th scope="col" class="p-0 min-w-100px text-right"><?= __("Billable Amount") ?></th>
+												<th scope="col" class="p-0 min-w-125px text-right"><?= __("Billable Hours") ?></th>
+												<th scope="col" class="p-0 min-w-110px text-center"><?= __("Status") ?></th>
 												<th scope="col" class="py-0 min-w-50px text-center">
 													<div class="checkbox-inline">
-														<label for="select_all" class="checkbox checkbox-success" aria-label="Select all pending approvals">
-														<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()" aria-label="Select all pending approvals">
-														<span></span><span class="sr-only">Select all pending approvals</span></label>
+														<label for="select_all" class="checkbox checkbox-success" aria-label="<?= __("Select all pending approvals") ?>">
+														<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()" aria-label="<?= __("Select all pending approvals") ?>">
+														<span></span><span class="sr-only"><?= __("Select all pending approvals") ?></span></label>
 														<input type="hidden" name="" id="val_select_all" value="0">
 													</div>
 												</th>
@@ -721,7 +721,7 @@
 										</div>
 									</div> -->
 									<div>
-										<a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Last Month Approved Budget</a>
+										<a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder"><?= __("Last Month Approved Budget") ?></a>
 										<div class="font-size-sm text-muted font-weight-bold mt-1"><?php echo date('M-Y',strtotime($lmonth['period'])); ?></div>
 									</div>
 								</div>
@@ -793,7 +793,7 @@
 				<div class="card card-custom card-stretch gutter-b">
 					
 					<div class="card-header border-0">
-						<h3 class="card-title font-weight-bolder text-dark">Trends</h3>
+						<h3 class="card-title font-weight-bolder text-dark"><?= __("Trends") ?></h3>
 						<div class="card-toolbar">
 							<div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
 								<a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

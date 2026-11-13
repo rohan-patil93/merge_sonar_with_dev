@@ -8,7 +8,7 @@ $project_id = $_POST['project_id'] ?? '';
 $doc_type = $_POST['doc_type'] ?? 'PO';
 
 if (!$project_id || !$tracking_id || $doc_type !== 'PO') {
-    echo '<div class="alert alert-danger">Invalid upload request</div>';
+    echo '<div class="alert alert-danger">' . __('Invalid upload request') . '</div>';
     exit;
 }
 
@@ -31,13 +31,13 @@ $sample_headers = array(
 
 <div class="card csr-po-upload-card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5>PO Excel Upload</h5>
+        <h5><?= __('PO Excel Upload') ?></h5>
         <div class="d-flex gap-2 csr-po-upload-actions">
             <button type="button" class="btn btn-sm btn-primary" id="downloadPoSampleBtn">
-                <i class="fa fa-download"></i> Sample Format Download
+                <i class="fa fa-download"></i> <?= __('Sample Format Download') ?>
             </button>
             <button type="button" class="btn btn-sm btn-success" id="triggerPoUploadBtn">
-                <i class="fa fa-upload"></i> Upload Excel/CSV
+                <i class="fa fa-upload"></i> <?= __('Upload Excel/CSV') ?>
             </button>
         </div>
     </div>
@@ -54,22 +54,22 @@ $sample_headers = array(
         </div>
 
         <div class="alert alert-info mb-3" id="poUploadInfo">
-            Upload a PO file in <strong>.xlsx</strong>, <strong>.xls</strong>, or <strong>.csv</strong> format.
-            The preview will highlight required empty fields in red before submit.
+            <?= __('Upload a PO file in') ?> <strong>.xlsx</strong>, <strong>.xls</strong>, <?= __('or') ?> <strong>.csv</strong> <?= __('format.') ?>
+            <?= __('The preview will highlight required empty fields in red before submit.') ?>
         </div>
 
         <div class="d-none mb-3" id="poUploadSummary"></div>
         <div class="d-none mb-3" id="poUploadErrors"></div>
         <div id="poUploadPreviewState">
             <div class="csr-po-upload-empty text-center">
-                <p class="mb-2">No file uploaded yet.</p>
-                <small class="text-muted">Download the sample format, fill the rows, then upload to preview the data.</small>
+                <p class="mb-2"><?= __('No file uploaded yet.') ?></p>
+                <small class="text-muted"><?= __('Download the sample format, fill the rows, then upload to preview the data.') ?></small>
             </div>
         </div>
 
         <div class="pt-3 text-left">
             <button type="button" class="btn btn-primary" id="submitPoUploadBtn">
-                Submit
+                <?= __('Submit') ?>
             </button>
         </div>
     </div>

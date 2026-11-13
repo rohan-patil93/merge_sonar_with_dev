@@ -90,7 +90,7 @@ include_once '../comm.php';
   <div class="card">
   <table id="new-cons" class="table table-bordered table-xs">
     <thead>
-      <tr><th scope="col">#</th><th scope="col">Job Posting</th><th scope="col">HR ShortListed</th><th scope="col">HM ShortListed</th></tr>
+      <tr><th scope="col">#</th><th scope="col"><?= __('Job Posting') ?></th><th scope="col">HR ShortListed</th><th scope="col">HM ShortListed</th></tr>
     </thead>
     <tbody>
       <?php $activejobpost = "N"; $mk=1; $jobpostingids= array(); if(count((array)$result3) !=0){  foreach($result3 as $resulttable){
@@ -129,7 +129,7 @@ include_once '../comm.php';
                 <span class="form-label">Job Posting <span class="requried">*</span></span>
                 <span class="d-block error-message text-danger"></span>
                 <select aria-label="Job Posting" class="form-control js-example-basic-single requried_field" name="job_posting_id" >
-                    <option value="">Select Any One</option>
+                    <option value=""><?= __('Select Any One') ?></option>
               <?php foreach($job_postingslist as $res){ if(!in_array($res['id'], (array)$job_postings)){ ?>
                 <option value="<?php echo $res['id']; ?>" <?php echo $_POST['job_posting_id'] == $res['id']?"selected":"";?>><?php echo $res['job_name']."- ".$res['job_number']; ?></option>
               <?php } ?>
@@ -163,8 +163,8 @@ include_once '../comm.php';
 </div>
 <div class="modal-footer">
 
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
     <button type="button" class="btn btn-primary waves-effect waves-light" <?php if($activejobpost == "Y"){ ?> onclick="showAlreadyRecordActive()" <?php
 }else{ ?> onclick="submitassigndetails()" <?php
-} ?>>Submit</button>
+} ?>><?= __('Submit') ?></button>
 </div>

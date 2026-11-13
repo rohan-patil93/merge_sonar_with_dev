@@ -24,16 +24,16 @@ $assessment_years = $result['assessment_years'] ?? array();
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Employee Release Documnet Report</h5>
+            <h5><?= __('Employee Release Documnet Report') ?></h5>
         </div>
         <div class="card-body p-4">
             <form method="post" >
             <div class="row">
                 <!-- Employee -->
                 <div class="form-group col-md-4">
-                    <label for="employee_id">Employee <span class="text-danger">*</span></label>
-                    <select class="form-select js-example-basic-single" name="employee_id" id="employee_id" aria-label="Employee">
-                        <option value="0">Select Employee</option>
+                    <label for="employee_id"><?= __('Employee') ?> <span class="text-danger">*</span></label>
+                    <select class="form-select js-example-basic-single" name="employee_id" id="employee_id" aria-label="<?= __('Employee') ?>">
+                        <option value="0"><?= __('Select Employee') ?></option>
                         <?php if (!empty($employees) && is_array($employees)) {
                             foreach ($employees as $row) {
                                 $empId = is_array($row) ? ($row['id'] ?? '') : ($row->id ?? '');
@@ -51,9 +51,9 @@ $assessment_years = $result['assessment_years'] ?? array();
 
                 <!-- Month -->
                 <div class="form-group col-md-3">
-                    <label for="assessment_year">Assessment Year <span class="text-danger">*</span></label>
-                    <select class="form-select js-example-basic-single" name="assessment_year" id="assessment_year" aria-label="Assessment Year">
-                        <option value="0">Select Assessment Year</option>
+                    <label for="assessment_year"><?= __('Assessment Year') ?> <span class="text-danger">*</span></label>
+                    <select class="form-select js-example-basic-single" name="assessment_year" id="assessment_year" aria-label="<?= __('Assessment Year') ?>">
+                        <option value="0"><?= __('Select Assessment Year') ?></option>
                         <?php if (!empty($assessment_years) && is_array($assessment_years)) {
                             foreach ($assessment_years as $assessmentyear) {
                                 $ayVal = is_array($assessmentyear) ? ($assessmentyear['assessment_year'] ?? '') : (string)$assessmentyear;
@@ -69,9 +69,9 @@ $assessment_years = $result['assessment_years'] ?? array();
 
                 <!-- Search -->
                 <div class="form-group col-md-2">
-                    <label for="searchBtn" aria-label="Search">&nbsp;</label>
+                    <label for="searchBtn" aria-label="<?= __('Search') ?>">&nbsp;</label>
                     <button type="submit" class="btn btn-primary form-control" name="search" id="searchBtn" value="search">
-                        Search
+                        <?= __('Search') ?>
                     </button>
                 </div>
 
@@ -102,13 +102,13 @@ function reloadAttendanceTable() {
 
     // Employee validation
     if (employee_id == 0) {
-        tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', 'Please select employee', '');
+        tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', <?= json_encode(__('Please select employee')) ?>, '');
         valid = false;
     }
 
     // Month validation
     if (!assessment_year) {
-        tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', 'Please select Assessment Year', '');
+        tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', <?= json_encode(__('Please select Assessment Year')) ?>, '');
         valid = false;
     }
 
@@ -116,7 +116,7 @@ function reloadAttendanceTable() {
 
     var loader = `
         <div class="text-center">
-            <img src="assets/images/spiner/spiner3.gif" alt="Loading..." style="width:300px;">
+            <img src="assets/images/spiner/spiner3.gif" alt="<?= __('Loading...') ?>" style="width:300px;">
         </div>
     `;
     $('#TableContent').html(loader);
@@ -133,7 +133,7 @@ function reloadAttendanceTable() {
             $('#TableContent').html(data);
         },
         error: function () {
-            $('#TableContent').html('<div class="text-danger text-center">Something went wrong</div>');
+            $('#TableContent').html('<div class="text-danger text-center"><?= __('Something went wrong') ?></div>');
         }
     });
 }

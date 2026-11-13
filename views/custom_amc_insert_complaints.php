@@ -114,14 +114,14 @@ $contracts = $result['contracts'] ?? array();
 <div class="page-body">
 	<div class="card">
 		<div class="card-header">
-			<h5>AMC Complaint <?php echo $return['transaction_no'] != '' ? '('.$return['transaction_no'].')' : ''; ?></h5>
+			<h5><?= __("AMC Complaint") ?> <?php echo $return['transaction_no'] != '' ? '('.$return['transaction_no'].')' : ''; ?></h5>
 			<div class="card-header-right">
 				<!-- <a href="index.php?option=COM_LIST_AMC_COMPLAINTS" class="btn btn-success mb-2 desktop-view">
 					<i class="icofont icofont-plus icon-white "></i>
 				AMC Complaints List</a> -->
 				<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
 					<i class="icofont icofont-reply"></i>
-					Back
+					<?= __("Back") ?>
 				</a>
 			</div>
 		</div>
@@ -131,50 +131,50 @@ $contracts = $result['contracts'] ?? array();
 					<input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['userid']; ?>">
 					<div class="row">
 						<div class="form-group col-lg-3 w-full">
-							<label>Complaint priority <span style="color:red;">*</span></label>
+							<label><?= __("Complaint priority") ?> <span style="color:red;">*</span></label>
 							<select class="form-select js-example-basic-single" id="complaint_priority" name="complaint_priority" aria-label="Complaint Priority">
-								<option value="0"> Select Any one </option>
-								<option value="L" <?php echo $return['complaint_priority']=="L"? 'selected': '' ?>> Low</option>
-								<option value="M" <?php echo $return['complaint_priority']=="M"? 'selected': '' ?>> Medium </option>
-								<option value="H" <?php echo $return['complaint_priority']=="H"? 'selected': '' ?>> High </option>
+								<option value="0"> <?= __("Select Any one") ?> </option>
+								<option value="L" <?php echo $return['complaint_priority']=="L"? 'selected': '' ?>> <?= __("Low") ?></option>
+								<option value="M" <?php echo $return['complaint_priority']=="M"? 'selected': '' ?>> <?= __("Medium") ?> </option>
+								<option value="H" <?php echo $return['complaint_priority']=="H"? 'selected': '' ?>> <?= __("High") ?> </option>
 
 							</select>
 							<div style="display: none;color: red;" id="complaint_priority_err"></div>
 						</div>
 						<div class="col-lg-3 col-xs-6 form-group">
-							<label>Date<span style="color:red;">*</span></label>
+							<label><?= __("Date") ?><span style="color:red;">*</span></label>
 							<input class="form-control" type="date" name="transaction_date" id="transaction_date"   value="<?php echo isset($return['transaction_date']) && $return['transaction_date'] != '' ? date('Y-m-d', strtotime($return['transaction_date'])) :  date('Y-m-d'); ?>"/ aria-label="Transaction Date">
 							<div style="display: none;color: red;" id="transaction_date_err"></div>
 						</div>
 						<div class="form-group col-lg-3 col-xs-6 ">
-							<label>Complaint Name<span style="color:red;">*</span></label>
-							<input class="form-control" placeholder="Enter Complaint Name" type="text" name="complaint_name" id="complaint_name" value="<?php echo $return['complaint_name'] ?? ''; ?>" aria-label="Enter Complaint Name">
+							<label><?= __("Complaint Name") ?><span style="color:red;">*</span></label>
+							<input class="form-control" placeholder="<?= __("Enter Complaint Name") ?>" type="text" name="complaint_name" id="complaint_name" value="<?php echo $return['complaint_name'] ?? ''; ?>" aria-label="Enter Complaint Name">
 							<div style="display: none;color: red;" id="complaint_name_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>Complaint Type<span style="color:red;">*</span></label>
+							<label><?= __("Complaint Type") ?><span style="color:red;">*</span></label>
 							<select class="form-select js-example-basic-single" id="complaint_type" name="complaint_type" onchange="handleComplaintType()" aria-label="Complaint Type">
-								<option value="0"> Select Any one </option>
-								<option value="Item" <?php echo $return['complaint_type']=="Item"? 'selected': '' ?> >Item</option>
-								<option value="Asset" <?php echo $return['complaint_type']=="Asset"? 'selected': '' ?> >Asset</option>
+								<option value="0"> <?= __("Select Any one") ?> </option>
+								<option value="Item" <?php echo $return['complaint_type']=="Item"? 'selected': '' ?> ><?= __("Item") ?></option>
+								<option value="Asset" <?php echo $return['complaint_type']=="Asset"? 'selected': '' ?> ><?= __("Asset") ?></option>
 							</select>
 							<div style="display: none;color: red;" id="complaint_type_err"></div>
 						</div>
 
 						<div class="col-md-3 w-full">
-							<label class="form-label">Location <span class="text-danger">*</span></label>
+							<label class="form-label"><?= __("Location") ?> <span class="text-danger">*</span></label>
 							<select class="form-select js-example-basic-single" id="location_id" name="location_id" onchange="onLocationChange(this.value)" aria-label="Location Id">
-								<option value="">Select Location</option>
+								<option value=""><?= __("Select Location") ?></option>
 								<?php foreach ($locations as $loc): ?>
-								<option value="<?= $loc['id'] ?>" <?= ($return && $return['location_id']==$loc['id'])?'selected':''; ?>><?= htmlspecialchars($loc['short_name']) ?></option>
+								<option value="<?= $loc['id'] ?>" <?= ($return && $return['location_id']==$loc['id'])?'selected':''; ?>><?= htmlspecialchars(__($loc['short_name'] ?? '')) ?></option>
 								<?php endforeach; ?>
 							</select>
 							<div style="display: none;color: red;" id="location_id_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>Building<span style="color:red;">*</span></label>
+							<label><?= __("Building") ?><span style="color:red;">*</span></label>
 							<select class="form-select js-example-basic-single" id="building_id" name="building_id" aria-label="Building Id">
-								<option value="0"> Select Any one </option>
+								<option value="0"> <?= __("Select Any one") ?> </option>
 
 								<?php /* foreach ($buildings as $row): ?>
 									<option value="<?php echo $row['id']; ?>" <?php echo $return['building_id']==$row['id']? 'selected': '' ?>  >
@@ -185,38 +185,38 @@ $contracts = $result['contracts'] ?? array();
 							<div style="display: none;color: red;" id="building_id_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>Building Floor<span style="color:red;">*</span></label>
+							<label><?= __("Building Floor") ?><span style="color:red;">*</span></label>
 							<select class="form-select js-example-basic-single" id="building_floor_id" name="building_floor_id" aria-label="Building Floor Id">
-								<option value="0"> Select Any one </option>
+								<option value="0"> <?= __("Select Any one") ?> </option>
 							</select>
 							<div style="display: none;color: red;" id="building_floor_id_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>Building Floor Space<span style="color:red;">*</span></label>
+							<label><?= __("Building Floor Space") ?><span style="color:red;">*</span></label>
 							<select class="form-select js-example-basic-single" id="building_floor_space_id" name="building_floor_space_id" aria-label="Building Floor Space Id">
-								<option value="0"> Select Any one </option>
+								<option value="0"> <?= __("Select Any one") ?> </option>
 							</select>
 							<div style="display: none;color: red;" id="building_floor_space_id_err"></div>
 						</div>
 												<div class="form-group col-lg-3 w-full">
-							<label>Asset<span style="color:red;">*</span></label>
+							<label><?= __("Asset") ?><span style="color:red;">*</span></label>
 							<select class="form-select js-example-basic-single" id="asset_id" name="asset_id" aria-label="Asset Id">
-								<option value="0"> Select Any one </option>
+								<option value="0"> <?= __("Select Any one") ?> </option>
 								<?php foreach ($assets as $row): ?>
 									<option value="<?php echo $row['id']; ?>"  <?php echo $return['asset_id']==$row['id']? 'selected': '' ?> >
-										<?php echo ($row['asset_code'].'-'.$row['asset_description']); ?>
+										<?php echo htmlspecialchars($row['asset_code'] . '-' . __($row['asset_description'] ?? '')); ?>
 									</option>
 								<?php endforeach; ?>
 							</select>
 							<div style="display: none;color: red;" id="asset_id_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>Item <span style="color:red;">*</span></label>
+							<label><?= __("Item") ?> <span style="color:red;">*</span></label>
 							<select class="form-select js-example-basic-single" id="item_id" name="item_id" aria-label="Item Id">
-								<option value="0"> Select Any one </option>
+								<option value="0"> <?= __("Select Any one") ?> </option>
 								<?php foreach ($items as $row): ?>
 									<option value="<?php echo $row['id']; ?>" <?php echo $return['item_id']==$row['id']? 'selected': '' ?>  >
-										<?php echo $row['item_name']; ?>
+										<?= htmlspecialchars(__($row['item_name'] ?? '')) ?>
 									</option>
 								<?php endforeach; ?>
 
@@ -224,29 +224,29 @@ $contracts = $result['contracts'] ?? array();
 							<div style="display: none;color: red;" id="item_id_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>AMC Contract</label>
+							<label><?= __("AMC Contract") ?></label>
 							<input type="hidden" name="contract_id" id="contract_id" value="<?php echo (int) ($return['contract_id'] ?? 0); ?>">
-							<input type="text" class="form-control" id="contract_display" readonly value="<?php echo htmlspecialchars($return['contract_name'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Auto from asset + location" aria-label="Auto from asset + location">
+							<input type="text" class="form-control" id="contract_display" readonly value="<?php echo htmlspecialchars($return['contract_name'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= __("Auto from asset + location") ?>" aria-label="Auto from asset + location">
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>ServiceNow Ref</label>
-							<input type="text" class="form-control" name="servicenow_ref" id="servicenow_ref" value="<?php echo htmlspecialchars($return['servicenow_ref'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Optional" aria-label="Optional">
+							<label><?= __("ServiceNow Ref") ?></label>
+							<input type="text" class="form-control" name="servicenow_ref" id="servicenow_ref" value="<?php echo htmlspecialchars($return['servicenow_ref'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= __("Optional") ?>" aria-label="Optional">
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>Linked Schedule Visit</label>
+							<label><?= __("Linked Schedule Visit") ?></label>
 							<select class="form-select js-example-basic-single" id="schedule_id" name="schedule_id" aria-label="Schedule Id">
-								<option value="">None — Adhoc</option>
+								<option value=""><?= __("None — Adhoc") ?></option>
 							</select>
 						</div>
 						<input type="hidden" name="source_type" id="source_type" value="<?php echo htmlspecialchars($return['source_type'] ?? 'adhoc', ENT_QUOTES, 'UTF-8'); ?>">
 
 						<div class="col-lg-3 col-xs-6 form-group">
-							<label>Remarks</label>
-							<textarea class="form-control" placeholder="Enter Remarks" type="text" name="remarks" id="remarks" aria-label="Enter Remarks"><?php echo $return['remarks'] ?? ''; ?></textarea>
+							<label><?= __("Remarks") ?></label>
+							<textarea class="form-control" placeholder="<?= __("Enter Remarks") ?>" type="text" name="remarks" id="remarks" aria-label="Enter Remarks"><?php echo $return['remarks'] ?? ''; ?></textarea>
 						</div>
 
 						<div class="col-lg-3 col-xs-6 form-group">
-							<label>Complaint Image </label>
+							<label><?= __("Complaint Image") ?> </label>
 							<input class="form-control mb-1" type="file" name="complaint_images[]" id="complaint_images" multiple / aria-label="Complaint Images">
 							<?php 
 							if(!empty($rid)){
@@ -269,13 +269,13 @@ $contracts = $result['contracts'] ?? array();
 						<?php if ($view != '1'):
 							if ($rid != "" && $copy != '1') {  ?>
 								<button name='submit' value='update' class="btn waves-effect waves-light btn-primary mt-2">
-									Update
+									<?= __("Update") ?>
 								</button>
 								<input name="rid" type="hidden" value="<?php echo $rid; ?>">
 
 							<?php } else {  ?>
 								<button name='submit' value='insert' class="btn waves-effect waves-light btn-primary mt-2">
-									Save
+									<?= __("Save") ?>
 								</button>
 							<?php }
 						endif; ?>
@@ -323,8 +323,8 @@ $contracts = $result['contracts'] ?? array();
 			if (buildingId && buildingId !== "0") {
 				loadBuildingFloors(buildingId);
 			} else {
-				$("#building_floor_id").empty().append('<option value="0"> Select Any one </option>');
-				$("#building_floor_space_id").empty().append('<option value="0"> Select Any one </option>');
+				$("#building_floor_id").empty().append('<option value="0"> <?= __("Select Any one") ?> </option>');
+				$("#building_floor_space_id").empty().append('<option value="0"> <?= __("Select Any one") ?> </option>');
 			}
 		});
 
@@ -334,13 +334,13 @@ $contracts = $result['contracts'] ?? array();
 			if (floorId && floorId !== "0") {
 				loadFloorSpaces(floorId);
 			} else {
-				$("#building_floor_space_id").empty().append('<option value="0"> Select Any one </option>');
+				$("#building_floor_space_id").empty().append('<option value="0"> <?= __("Select Any one") ?> </option>');
 			}
 		});
 	});
 		function onLocationChange(locId, preselectedBuildingId = 0) {
 	        const buildingSel = $('#building_id');
-	        buildingSel.empty().append ('<option value="">Select Building</option>');
+	        buildingSel.empty().append('<option value="">' + <?= json_encode(__('Select Building')) ?> + '</option>');
 
 	        if (!locId) return;
 	        $.ajax({
@@ -370,8 +370,8 @@ $contracts = $result['contracts'] ?? array();
 	                }
 	            } 
 	        }); 
-	        document.getElementById('building_floor_id').innerHTML = '<option value="">Select Floor</option>';
-	        document.getElementById('building_floor_space_id').innerHTML = '<option value="">Select Space</option>'; 
+	        document.getElementById('building_floor_id').innerHTML = '<option value="">' + <?= json_encode(__('Select Floor')) ?> + '</option>';
+	        document.getElementById('building_floor_space_id').innerHTML = '<option value="">' + <?= json_encode(__('Select Space')) ?> + '</option>'; 
 
 
 	    }
@@ -389,7 +389,7 @@ $contracts = $result['contracts'] ?? array();
 				success: function (response) {
 					response = JSON.parse(response);
 					const buildingFloorSelect = $("#building_floor_id");
-					buildingFloorSelect.empty().append('<option value="0"> Select Any one </option>');
+					buildingFloorSelect.empty().append('<option value="0"> <?= __("Select Any one") ?> </option>');
 					const tableData = Object.values(response.table);
 					if (tableData && tableData.length > 0) {
 						tableData.forEach(function (floor) {
@@ -421,7 +421,7 @@ $contracts = $result['contracts'] ?? array();
 				success: function (response) {
 					response = JSON.parse(response);
 					const floorSpaceSelect = $("#building_floor_space_id");
-					floorSpaceSelect.empty().append('<option value="0"> Select Any one </option>');
+					floorSpaceSelect.empty().append('<option value="0"> <?= __("Select Any one") ?> </option>');
 					const tableData = Object.values(response.table);
 					if (tableData && tableData.length > 0) {
 						tableData.forEach(function (space) {
@@ -461,19 +461,19 @@ $contracts = $result['contracts'] ?? array();
 		const transactionDate = $("#transaction_date").val();
 
 		if (!complaintType || complaintType === "0") {
-			$("#complaint_type_err").text("Please select a complaint type").show();
+			$("#complaint_type_err").text(<?= json_encode(__("Please select a complaint type")) ?>).show();
 			isValid = false;
 		}
 		if (!complaintName) {
-			$("#complaint_name_err").text("Please enter the complaint name").show();
+			$("#complaint_name_err").text(<?= json_encode(__("Please enter the complaint name")) ?>).show();
 			isValid = false;
 		}
 		if (!complaintPriority || complaintPriority === "0") {
-			$("#complaint_priority_err").text("Please select a complaint priority").show();
+			$("#complaint_priority_err").text(<?= json_encode(__("Please select a complaint priority")) ?>).show();
 			isValid = false;
 		}
 		if (!transactionDate) {
-			$("#transaction_date_err").text("Please select a transaction date").show();
+			$("#transaction_date_err").text(<?= json_encode(__("Please select a transaction date")) ?>).show();
 			isValid = false;
 		}
 
@@ -481,14 +481,14 @@ $contracts = $result['contracts'] ?? array();
 		if (complaintType === "Item") {
 			const itemId = $("#item_id").val();
 			if (!itemId || itemId === "0") {
-				$("#item_id_err").text("Please select an item").show();
+				$("#item_id_err").text(<?= json_encode(__("Please select an item")) ?>).show();
 				isValid = false;
 			}
 			
 		} else if (complaintType === "Asset") {
 			const assetId = $("#asset_id").val();
 			if (!assetId || assetId === "0") {
-				$("#asset_id_err").text("Please select an asset").show();
+				$("#asset_id_err").text(<?= json_encode(__("Please select an asset")) ?>).show();
 				isValid = false;
 			}
 
@@ -499,19 +499,19 @@ $contracts = $result['contracts'] ?? array();
         const buildingFloorSpaceId = $("#building_floor_space_id").val();
 
         if (!locationId || locationId === "0") {
-            $("#location_id_err").text("Please select a Location").show();
+            $("#location_id_err").text(<?= json_encode(__("Please select a Location")) ?>).show();
             isValid = false;
         }
         if (!buildingId || buildingId === "0") {
-            $("#building_id_err").text("Please select a Building").show();
+            $("#building_id_err").text(<?= json_encode(__("Please select a Building")) ?>).show();
             isValid = false;
         }
         if (!buildingFloorId || buildingFloorId === "0") {
-            $("#building_floor_id_err").text("Please select a Building Floor").show();
+            $("#building_floor_id_err").text(<?= json_encode(__("Please select a Building Floor")) ?>).show();
             isValid = false;
         }
         if (!buildingFloorSpaceId || buildingFloorSpaceId === "0") {
-            $("#building_floor_space_id_err").text("Please select a Building Floor Space").show();
+            $("#building_floor_space_id_err").text(<?= json_encode(__("Please select a Building Floor Space")) ?>).show();
             isValid = false;
         }
 			
@@ -526,7 +526,7 @@ $contracts = $result['contracts'] ?? array();
 		if (!locId || !assetId || assetId == '0') {
 			$('#contract_id').val('');
 			$('#contract_display').val('');
-			$('#schedule_id').empty().append('<option value="">None — Adhoc</option>');
+			$('#schedule_id').empty().append('<option value=""><?= __("None — Adhoc") ?></option>');
 			return;
 		}
 		$.ajax({
@@ -542,7 +542,7 @@ $contracts = $result['contracts'] ?? array();
 				} else {
 					$('#contract_id').val('');
 					$('#contract_display').val('');
-					$('#schedule_id').empty().append('<option value="">None — Adhoc</option>');
+					$('#schedule_id').empty().append('<option value=""><?= __("None — Adhoc") ?></option>');
 				}
 			}
 		});
@@ -557,7 +557,7 @@ $contracts = $result['contracts'] ?? array();
 				var r = typeof resp === 'string' ? JSON.parse(resp) : resp;
 				var $sel = $('#schedule_id');
 				var pre = <?php echo json_encode($return['schedule_id'] ?? ''); ?>;
-				$sel.empty().append('<option value="">None — Adhoc</option>');
+				$sel.empty().append('<option value=""><?= __("None — Adhoc") ?></option>');
 				if (r.schedules && r.schedules.length) {
 					r.schedules.forEach(function (s) {
 						var label = (s.planned_display || s.id) + ' (' + (s.status_label || '') + ')';

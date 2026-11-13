@@ -41,18 +41,18 @@ $module_setup = $result['module_setup'];
   <div class="card-body"> 
   	<div class="row mb-3">
   		<div class="col-lg-4">
-  			<label class="form-label">Module</label>
+  			<label class="form-label"><?= __('Module') ?></label>
   			<select class="form-select js-example-basic-single" id="module_id" onchange="changeModule(this.value)" >
   				<option value="0">Select Any One Module</option>
 				<?php foreach($module_setup as $module_setups){ ?>
-					<option value="<?php echo $module_setups['module_id']; ?>" ><?php echo $module_setups['display_name']; ?></option>
+					<option value="<?php echo $module_setups['module_id']; ?>" ><?php echo htmlspecialchars(__($module_setups['display_name'] ?? '')); ?></option>
 				<?php  } ?>
 			</select>
   		</div>
   		<div class="col-lg-4"></div>
   		<div class="col-lg-4">
   			<!-- <div class="input-group input-group-button mb-0" >
-		        <input type="text" id="dynamicfilterhideshow" data-id='applicationrolesid' data-type="div" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
+		        <input type="text" id="dynamicfilterhideshow" data-id='applicationrolesid' data-type="div" class="form-control form-control-sm width1"  placeholder="<?= __('Search') ?>" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
 		        <span class="input-group-text addon-style">
 		            <label class=""><span class="ti-search text-white mt-2"></span></label>
 		        </span>
@@ -82,7 +82,7 @@ $module_setup = $result['module_setup'];
           <div class="card card-custom  card-stretch">
             <div class="card-header">
               <div class="card-title">
-                <h4 class="text-gray-600"><?php echo ucwords($resultlist['display_name']); ?></h4>
+                <h4 class="text-gray-600"><?php echo htmlspecialchars(__(ucwords($resultlist['display_name'] ?? ''))); ?></h4>
               </div>
               <hr>
             </div>
@@ -105,7 +105,7 @@ $module_setup = $result['module_setup'];
                 </li>
               <?php  } ?>
             </ul>
-              <button type="submit" name="submit" class="btn btn-primary w-100" style="background-color: #f5f8fa; color: #7e8299;" data-toggle="modal" onclick="addrolemodal('<?php echo $resultlist['id']; ?>')"><b><i class="fa fa-edit"></i> Edit Role</b></button>
+              <button type="submit" name="submit" class="btn btn-primary w-100" style="background-color: #f5f8fa; color: #7e8299;" data-toggle="modal" onclick="addrolemodal('<?php echo $resultlist['id']; ?>')"><b><i class="fa fa-edit"></i> <?= __('Edit Role') ?></b></button>
               <a href="index.php?option=COM_VIEW_APPLICATION_ROLE&Rid=<?php echo deocdeId("id:".$resultlist['id']); ?>&name=<?php echo $resultlist['display_name']; ?>" class="btn btn-success  mt-2 w-100" target="_blank"><i class="icofont icofont-plus icon-white "></i> Assign User</a>
             
         </div>

@@ -150,15 +150,15 @@ function addmoreformula(){
     maxformulid++;
     var positions = maxformulid+200;
     var html = '';
-    html += '<div class="card formulareportdiv removeformula_'+maxformulid+'" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><div class="card-header p-2 custom_displayinline row" id="headingOnes'+maxformulid+'" ><div class="card-title collapsed f-14 mt-2 col-lg-10 f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOnes'+maxformulid+'">Formula Name</div>    <div class="col-lg-1" onclick="removeformuladiv(\''+maxformulid+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">X</div></div>';
+    html += '<div class="card formulareportdiv removeformula_'+maxformulid+'" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><div class="card-header p-2 custom_displayinline row" id="headingOnes'+maxformulid+'" ><div class="card-title collapsed f-14 mt-2 col-lg-10 f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOnes'+maxformulid+'"><?php echo __('Formula Name'); ?></div>    <div class="col-lg-1" onclick="removeformuladiv(\''+maxformulid+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo __('X'); ?></div></div>';
 
     html += '<div id="collapseOnes'+maxformulid+'" class="collapse" data-parent="#accordionExample5"><div class="card-body"><div class=""><div class="tab-content mt-2" id="myTabContent4"><div class="tab-pane fade show active btn-sm" id="content-1" role="tabpanel" aria-labelledby="content_1">';
 
-    html += '<div class="form-group row  mt-2"><span class="f-14">Heading<span class="tex-danger f-10">* Requerd Space used "_" </span></span><div class=""><input aria-label="Custom Report Heding[]"  class="form-control" type="text"   name="custom_report_heding[]" value=""  onkeyup="nospaces(this)" required> </div> </div>';
+    html += '<div class="form-group row  mt-2"><span class="f-14">Heading<span class="tex-danger f-10">* Requerd Space used "_" </span></span><div class=""><input aria-label="<?php echo __('Custom Report Heding[]'); ?>"  class="form-control" type="text"   name="custom_report_heding[]" value=""  onkeyup="nospaces(this)" required> </div> </div>';
 
-    html += '<div class="form-group row  mt-2"><span class="f-14">Report Formula</span><div class=""><textarea aria-label="Custom Report Formula[]" class="form-control"   name="custom_report_formula[]" rows="3" required></textarea></div></div>';
+    html += '<div class="form-group row  mt-2"><span class="f-14"><?php echo __('Report Formula'); ?></span><div class=""><textarea aria-label="<?php echo __('Custom Report Formula[]'); ?>" class="form-control"   name="custom_report_formula[]" rows="3" required></textarea></div></div>';
 
-    html += '<div class=" row mt-2"><span class="f-14">Priority</span><div class=""><input aria-label="Custom Report Priority[]" class="form-control " type="text" name="custom_report_Priority[]" value="'+positions+'" required></div></div>';
+    html += '<div class=" row mt-2"><span class="f-14"><?php echo __('Priority'); ?></span><div class=""><input aria-label="<?php echo __('Custom Report Priority[]'); ?>" class="form-control " type="text" name="custom_report_Priority[]" value="'+positions+'" required></div></div>';
 
     html += '</div></div></div></div></div></div>';
 
@@ -175,10 +175,10 @@ document.execCommand('insertHTML',true,'text to be copied');
 function removeformuladiv(id){
 
     Swal({
-      title: 'Do You Want To Remove Report formula?',
+      title: <?php echo json_encode(__('Do You Want To Remove Report formula?')); ?>,
       showDenyButton: true,
       showCancelButton: false,
-      confirmButtonText: 'Remove',
+      confirmButtonText: <?php echo json_encode(__('Remove')); ?>,
       denyButtonText: `Don't Remove`,
   }).then((result) => {
       if (result.isConfirmed) {
@@ -217,12 +217,12 @@ function Getinserttype(table,field,type){
 
 <div class="card">
     <div class="card-header">
-        <h5>Custome Table</h5>
+        <h5><?php echo __('Custome Table'); ?></h5>
         <div class="card-header-right">
-            <a href="index.php?option=COM_VIEW_MY_REPORT&Rid=<?php echo $_GET['Rid']; ?>" class="btn btn-info waves-effect waves-light" target="_blank"><i class="fa fa-eye"></i> View Report</a>
+            <a href="index.php?option=COM_VIEW_MY_REPORT&Rid=<?php echo $_GET['Rid']; ?>" class="btn btn-info waves-effect waves-light" target="_blank"><i class="fa fa-eye"></i> <?php echo __('View Report'); ?></a>
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -233,11 +233,11 @@ function Getinserttype(table,field,type){
             <input type="hidden" name="applicationtablelist" id="applicationtablelist" value='<?php echo $role['application_table_name']; ?>'>
             <div class="row">
                 <div class="col-lg-3" >
-                    <span class="form-label">Report Type</span>
+                    <span class="form-label"><?php echo __('Report Type'); ?></span>
                     <div class="col-lg-8 col-md-8 col-sm-12 w-full" >
-                        <select aria-label="Report Type" class="form-control form-select js-example-basic-single" style="width:100%" name="report_type" >
-                            <option value="MYR">My Reports</option>
-                            <option value="SR">Stantdard Reports</option>
+                        <select aria-label="<?php echo __('Report Type'); ?>" class="form-control form-select js-example-basic-single" style="width:100%" name="report_type" >
+                            <option value="MYR"><?php echo __('My Reports'); ?></option>
+                            <option value="SR"><?php echo __('Stantdard Reports'); ?></option>
                         </select>
                     </div>
                 </div>
@@ -245,32 +245,32 @@ function Getinserttype(table,field,type){
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-3 w-full">
-                            <span class="form-label">Module</span>
-                            <select aria-label="Module Setup" class="form-select js-example-basic-single" id="module_setup_id" name="module_setup_id">
+                            <span class="form-label"><?php echo __('Module'); ?></span>
+                            <select aria-label="<?php echo __('Module Setup'); ?>" class="form-select js-example-basic-single" id="module_setup_id" name="module_setup_id">
                                 <?php foreach($mopdulesetup as $modulesetup){ ?>
                                     <option value="<?php echo $modulesetup['module_id']; ?>" <?php echo $jsondecode3['module_setup_id'] == $modulesetup['module_id']?"selected":""; ?>><?php echo $modulesetup['module_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-9">
-                            <span class="form-label">Display Report Type</span>
+                            <span class="form-label"><?php echo __('Display Report Type'); ?></span>
                             <div class="form-radio">
                                 <div class="radio radio-outline radio-inline">
                                     <label class="form-label">
-                                        <input aria-label="Show Table Type" type="radio" name="show_table_type" onclick="checktabletype()" value="tabel" <?php echo $columnslist['show_table_type']=="tabel" || $columnslist['show_table_type']==""?"checked":""; ?> onkeydown="">
-                                        <i class="helper"></i>Tabular
+                                        <input aria-label="<?php echo __('Show Table Type'); ?>" type="radio" name="show_table_type" onclick="checktabletype()" value="tabel" <?php echo $columnslist['show_table_type']=="tabel" || $columnslist['show_table_type']==""?"checked":""; ?> onkeydown="">
+                                        <i class="helper"></i><?php echo __('Tabular'); ?>
                                     </label>
                                 </div>
                                 <div class="radio radio-outline radio-inline">
                                   <label class="form-label">
-                                    <input aria-label="Show Table Type" type="radio" name="show_table_type" onclick="checktabletype()" value="mtarix" <?php echo $columnslist['show_table_type']=="mtarix"?"checked":""; ?> onkeydown="">
-                                    <i class="helper"></i>Matrix
+                                    <input aria-label="<?php echo __('Show Table Type'); ?>" type="radio" name="show_table_type" onclick="checktabletype()" value="mtarix" <?php echo $columnslist['show_table_type']=="mtarix"?"checked":""; ?> onkeydown="">
+                                    <i class="helper"></i><?php echo __('Matrix'); ?>
                                 </label>
                             </div>
                             <div class="radio radio-outline radio-inline">
                                 <label class="form-label">
-                                    <input aria-label="Show Table Type" type="radio" name="show_table_type" onclick="checktabletype()" value="master" <?php echo $columnslist['show_table_type']=="master"?"checked":""; ?> onkeydown="">
-                                    <i class="helper"></i>Master/Detail
+                                    <input aria-label="<?php echo __('Show Table Type'); ?>" type="radio" name="show_table_type" onclick="checktabletype()" value="master" <?php echo $columnslist['show_table_type']=="master"?"checked":""; ?> onkeydown="">
+                                    <i class="helper"></i><?php echo __('Master/Detail'); ?>
                                 </label>
                             </div>
                         </div>
@@ -278,10 +278,10 @@ function Getinserttype(table,field,type){
 } ?>>
 
                             <div class="form-group col-lg-4">
-                                <span class="form-label d-block">Master Table <span class="f-10 text-danger">*Select Parent Field</span></span>
+                                <span class="form-label d-block"><?php echo __('Master Table'); ?> <span class="f-10 text-danger"><?php echo __('*Select Parent Field'); ?></span></span>
 
-                                <select aria-label="Master List"  class="form-select js-example-basic-single" name="master_list" style="width:100%">
-                                   <option value=""  >Select Any One</option>
+                                <select aria-label="<?php echo __('Master List'); ?>"  class="form-select js-example-basic-single" name="master_list" style="width:100%">
+                                   <option value=""  ><?php echo __('Select Any One'); ?></option>
                                    <?php foreach($getfieldslist['reportattributesfields'] as $optkey2=>$v2){ ?>
                                     <option value="<?php echo $optkey2; ?>"  <?php echo $columnslist['master_list']==$optkey2?"selected":""; ?>><?php echo $optkey2; ?></option>
                                 <?php } ?>
@@ -291,27 +291,27 @@ function Getinserttype(table,field,type){
                     <div class="row" id="showtypetable" <?php if($columnslist['show_table_type'] !="mtarix"){ ?>style="display:none" <?php
 } ?>>
                         <div class="col-lg-4">
-                            <span >Row <span class="f-10 text-danger d-block">*select Unique value repeated records</span></span>
-                            <select aria-label="Rowslist"  class="form-select js-example-basic-single" name="rowslist" style="width:100%">
-                               <option value=""  >Select Any One</option>
+                            <span ><?php echo __('Row'); ?> <span class="f-10 text-danger d-block"><?php echo __('*select Unique value repeated records'); ?></span></span>
+                            <select aria-label="<?php echo __('Rowslist'); ?>"  class="form-select js-example-basic-single" name="rowslist" style="width:100%">
+                               <option value=""  ><?php echo __('Select Any One'); ?></option>
                                <?php foreach($getfieldslist['reportattributesfields'] as $optkey2=>$v2){ ?>
                                 <option value="<?php echo $optkey2; ?>"  <?php echo $columnslist['rowslist']==$optkey2?"selected":""; ?>><?php echo $optkey2; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="col-lg-4">
-                        <span >Colunms <span class="f-10 text-danger d-block">*Select Header Colunms</span></span>
-                        <select aria-label="Columnslist"  class="form-select js-example-basic-single" name="columnslist" style="width:100%">
-                            <option value=""  >Select Any One</option>
+                        <span ><?php echo __('Colunms'); ?> <span class="f-10 text-danger d-block"><?php echo __('*Select Header Colunms'); ?></span></span>
+                        <select aria-label="<?php echo __('Columnslist'); ?>"  class="form-select js-example-basic-single" name="columnslist" style="width:100%">
+                            <option value=""  ><?php echo __('Select Any One'); ?></option>
                             <?php foreach($getfieldslist['reportattributesfields'] as $optkey3=>$v3){ ?>
                                 <option value="<?php echo $optkey3; ?>" <?php echo $columnslist['columnslist']==$optkey3?"selected":""; ?>  ><?php echo $optkey3; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="col-lg-4">
-                        <span >Colunms values <span class="f-10 text-danger d-block">*Select Header Colunms Value</span></span>
-                        <select aria-label="Columnvalueslist"  class="form-select js-example-basic-single" name="columnvalueslist" style="width:100%">
-                            <option value=""  >Select Any One</option>
+                        <span ><?php echo __('Colunms values'); ?> <span class="f-10 text-danger d-block"><?php echo __('*Select Header Colunms Value'); ?></span></span>
+                        <select aria-label="<?php echo __('Columnvalueslist'); ?>"  class="form-select js-example-basic-single" name="columnvalueslist" style="width:100%">
+                            <option value=""  ><?php echo __('Select Any One'); ?></option>
                             <?php foreach($getfieldslist['reportattributesfields'] as $optkey4=>$v4){ ?>
                                 <option value="<?php echo $optkey4; ?>" <?php echo $columnslist['columnvalueslist']==$optkey4?"selected":""; ?> ><?php echo $optkey4; ?></option>
                             <?php } ?>
@@ -329,7 +329,7 @@ function Getinserttype(table,field,type){
         " id="accordionExample3">
         <div class="card">
             <div class="card-header p-2" id="headingOne88">
-                <div class="card-title collapsed f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOne88">Heading </div>
+                <div class="card-title collapsed f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOne88"><?php echo __('Heading'); ?> </div>
             </div>
             <div id="collapseOne88" class="collapse" data-parent="#accordionExample88">
                 <div class="card-body p-0">
@@ -338,12 +338,12 @@ function Getinserttype(table,field,type){
                             <div class="card-header p-2 custom_displayinline row" id="headingOne5_heading">
                                 <input type="hidden" name="heddingposition" id="heddingposition" value="<?php echo $header['heddingposition'];?>">
                                 <div class="card-title f-w-600  mt-0 m-l-10 col-lg-6" data-bs-toggle="collapse" data-bs-target="#collapseOne5" aria-expanded="true">
-                                    Heading
+                                    <?php echo __('Heading'); ?>
                                     <span class="form-label badge bg-info header_order_position  mr-5" ><?php echo isset($header['orderhedding'])?$header['orderhedding']:"1";?></span>
                                 </div>
                                 <div class="col-lg-6 custom_displayinline" style="display: contents;">
-                                    <input aria-label="Checkbox" type="checkbox"  <?php echo ($header['heddingdislay']=='1')?"":"checked"; ?> name="heddingdislay[<?php echo $q; ?>]"  class="heddingdislay js-primary-sm " data-id="<?php echo $q; ?>" ><span></span>
-                                    <div class="btn-group ml-2" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title=".btn-xlg">
+                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  <?php echo ($header['heddingdislay']=='1')?"":"checked"; ?> name="heddingdislay[<?php echo $q; ?>]"  class="heddingdislay js-primary-sm " data-id="<?php echo $q; ?>" ><span></span>
+                                    <div class="btn-group ml-2" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo __('.btn-xlg'); ?>">
                                         <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_hedding <?php echo ($header['heddingposition']=='text-left')?' active':''; ?>" value="text-left"><i class="fa fa-align-left text-primary"></i></button>
                                         <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_hedding  <?php echo ($header['heddingposition']=='text-center')?' active':''; ?>" value="text-center"><i class="fa fa-align-center"></i></button>
                                         <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_hedding <?php echo ($header['heddingposition']=='text-right')?' active':''; ?>" value="text-right"><i class="fa fa-align-right"></i></button>
@@ -355,14 +355,14 @@ function Getinserttype(table,field,type){
                                     <div class="tab-content " id="myTabContent4_2">
                                         <div class="tab-pane fade show active btn-sm" id="content-1_2" role="tabpanel" aria-labelledby="content_1">
                                             <div class="form-group row mt-2">
-                                                <span class="col-4  f-14">Page Title</span>
+                                                <span class="col-4  f-14"><?php echo __('Page Title'); ?></span>
                                                 <div class="col-8">
-                                                    <input aria-label="Formname" class="form-control formname" name="formname" type="text" value="<?php echo ucwords(str_replace("_"," ",$role['page_title'])); ?>" id="" required="">
+                                                    <input aria-label="<?php echo __('Formname'); ?>" class="form-control formname" name="formname" type="text" value="<?php echo ucwords(str_replace("_"," ",$role['page_title'])); ?>" id="" required="">
                                                 </div>
                                             </div>
 
                                             <div class="row mt-2" style="display:none">
-                                                <span class="col-5  f-14">Order Position</span>
+                                                <span class="col-5  f-14"><?php echo __('Order Position'); ?></span>
                                                 <div class="col-7">
                                                     <input type="hidden" value="<?php echo isset($header['orderhedding'])?$header['orderhedding']:"1";?>" name="orderhedding"  class="header_order_position form-control">
                                                 </div>
@@ -376,15 +376,15 @@ function Getinserttype(table,field,type){
                         <div class="card">
                             <div class="card-header p-2 row" id="headingOne5_logo">
                                 <div class="card-title f-w-600 collapsed custom_displayinline mt-0 m-l-10 col-lg-6" data-bs-toggle="collapse" data-bs-target="#collapseOne66666666">
-                                    Logo
+                                    <?php echo __('Logo'); ?>
                                     <span class="form-label badge bg-info header_order_logo mr-5 " ><?php  echo isset($header['orderlogo'])?$header['orderlogo']:"3";?></span>
                                 </div>
                                 <div class="col-lg-6 custom_displayinline" style="display: contents;">
                                   <input type="hidden" name="logoposition" id="logoposition" value="<?php  echo isset($header['logoposition'])?$header['logoposition']:"text-right";?>">
 
-                                  <input aria-label="Checkbox" type="checkbox"  <?php echo ($header['logodislay']=='1')?"":"checked"; ?> name="logodislay[<?php echo $q; ?>]"  class="logodislay js-primary-sm" data-id="<?php echo $q; ?>" >
+                                  <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  <?php echo ($header['logodislay']=='1')?"":"checked"; ?> name="logodislay[<?php echo $q; ?>]"  class="logodislay js-primary-sm" data-id="<?php echo $q; ?>" >
 
-                                  <div class="btn-group ml-2" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title=".btn-xlg">
+                                  <div class="btn-group ml-2" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo __('.btn-xlg'); ?>">
                                     <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_logo <?php echo ($header['logoposition']=='text-left')?' active':''; ?>" value="text-left"><i class="fa fa-align-left text-primary"></i></button>
                                     <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_logo <?php echo ($header['logoposition']=='text-center')?' active':''; ?>" value="text-center"><i class="fa fa-align-center text-primary"></i></button>
                                     <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_logo <?php echo ($header['logoposition']=='text-right')?' active':''; ?>" value="text-right"><i class="fa fa-align-right text-primary"></i></button>
@@ -397,7 +397,7 @@ function Getinserttype(table,field,type){
                                     <div class="tab-content " id="myTabContent41">
                                         <div class="tab-pane fade show active btn-sm" id="content-1_3" role="tabpanel" aria-labelledby="content_1">
                                             <div class="row mt-2" style="display:none">
-                                                <span class="col-5  f-14">Order Position</span>
+                                                <span class="col-5  f-14"><?php echo __('Order Position'); ?></span>
                                                 <div class="col-7">
                                                     <input type="hidden" value="<?php  echo isset($header['orderlogo'])?$header['orderlogo']:"3";?>"  name="orderlogo" class="header_order_logo form-control">
                                                 </div>
@@ -412,13 +412,13 @@ function Getinserttype(table,field,type){
                         <div class="card-header p-2 row" id="headingOne7">
                             <input type="hidden" name="addressposition" id="addressposition" value="<?php  echo isset($header['addressposition'])?$header['addressposition']:"";?>">
                             <div class="card-title f-w-600 collapsed custom_displayinline mt-0 m-l-10 col-lg-6" data-bs-toggle="collapse" data-bs-target="#collapseOne77">
-                                Report Details
+                                <?php echo __('Report Details'); ?>
                                 <span class="form-label badge bg-info header_order_address  mr-5" ><?php  echo isset($header['addresorder'])?$header['addresorder']:"6";?></span>
                             </div>
                             <div class="col-lg-6 custom_displayinline" style="display: contents;">
-                                <input aria-label="Checkbox" type="checkbox"  <?php echo ($header['addressdislay']=='1')?"":"checked"; ?> name="addressdislay[<?php echo $q; ?>]"  class="addressdislay js-primary-sm" data-id="<?php echo $q; ?>" >
+                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  <?php echo ($header['addressdislay']=='1')?"":"checked"; ?> name="addressdislay[<?php echo $q; ?>]"  class="addressdislay js-primary-sm" data-id="<?php echo $q; ?>" >
 
-                                <div class="btn-group ml-2" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title=".btn-xlg">
+                                <div class="btn-group ml-2" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo __('.btn-xlg'); ?>">
                                     <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_address <?php echo ($header['addressposition']=='text-left')?' active':''; ?>" value="text-left"><i class="fa fa-align-left text-primary"></i></button>
                                     <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_address <?php echo ($header['addressposition']=='text-center')?' active':''; ?>" value="text-center"><i class="fa fa-align-center text-primary"></i></button>
                                     <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_address <?php echo ($header['addressposition']=='text-right')?' active':''; ?>" value="text-right"><i class="fa fa-align-right text-primary"></i></button>
@@ -431,7 +431,7 @@ function Getinserttype(table,field,type){
                                     <div class="tab-content " id="myTabContent4_3">
                                         <div class="tab-pane fade show active btn-sm" id="content-1_4" role="tabpanel" aria-labelledby="content_1">
                                             <div class="row mt-2" style="display:none">
-                                                <span class="col-5  f-14">Order Position</span>
+                                                <span class="col-5  f-14"><?php echo __('Order Position'); ?></span>
                                                 <div class="col-7">
                                                     <input type="hidden" value="<?php  echo isset($header['addresorder'])?$header['addresorder']:"6";?>" name="addresorder" class="header_order_address form-control">
                                                 </div>
@@ -449,7 +449,7 @@ function Getinserttype(table,field,type){
     <!---------------------   Fields part =------------------------->
     <div class="card mt-5">
         <div class="card-header p-2" id="headingOne5_fields">
-            <div class="card-title f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOne5">Fields</div>
+            <div class="card-title f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOne5"><?php echo __('Fields'); ?></div>
         </div>
         <div id="collapseOne5_2" class="collapse show" data-parent="#accordionExample5">
             <div class="card-body p-0">
@@ -460,7 +460,7 @@ function Getinserttype(table,field,type){
                         <input type="hidden"  name="tablenames[]" value="<?php echo $value['tablenames']; ?>">
                         <input type="hidden"  name="displayfeildname[]"  value="<?php echo $value['displayfeildname']; ?>">
                         <div class="card cursor-pointer">
-                            <i class="ti-files cursor-pointer position-absolute f-10" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Copy To Used" style="z-index: 99999" onclick="fieldCopy('fields_<?php echo $value['Field']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                            <i class="ti-files cursor-pointer position-absolute f-10" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Copy To Used'); ?>" style="z-index: 99999" onclick="fieldCopy('fields_<?php echo $value['Field']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                             <div class="card-header p-2 custom_displayinline row" id="headingOnes<?php echo $i; ?>">
                                 <div class="card-title collapsed f-14 mt-2 col-lg-6" data-bs-toggle="collapse" data-bs-target="#collapseOnes<?php echo $i; ?>">
                                     <?php echo ucwords(str_replace("_"," ",$value['displayfeildname'])); ?>
@@ -468,12 +468,12 @@ function Getinserttype(table,field,type){
                                 </div>
                                 <div class="col-lg-6 custom_displayinline" style="display: contents;">
                                    <input type="hidden" name="heddingpositiontable[]" id="heddingpositiontable<?php echo $i; ?>" value="<?php echo $value['heddingpositiontable']; ?>">
-                                   <input aria-label="Checkbox" type="checkbox" name="display[<?php echo $i; ?>]"  class="display js-primary-sm" data-id="<?php echo $i; ?>"  <?php echo  $value['display']=='0'?"checked":""; ?> >
+                                   <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" name="display[<?php echo $i; ?>]"  class="display js-primary-sm" data-id="<?php echo $i; ?>"  <?php echo  $value['display']=='0'?"checked":""; ?> >
 
-                                   <div class="btn-group ml-2" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title=".btn-xlg">
-                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light  positiontable  <?php echo ($value['heddingpositiontable']=='')?' active':''; ?>" data-id="<?php echo $i; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Left Align"><i class="fa fa-align-left text-primary"></i></button>
-                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light positiontable <?php echo ($value['heddingpositiontable']=='text-center')?' active':''; ?>" data-id="<?php echo $i; ?>" value="text-center" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Center Aligh"><i class="fa fa-align-center text-primary"></i></button>
-                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light positiontable <?php echo ($value['heddingpositiontable']=='text-right')?' active':''; ?>" data-id="<?php echo $i; ?>" value="text-right" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Right Align"><i class="fa fa-align-right text-primary"></i></button>
+                                   <div class="btn-group ml-2" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo __('.btn-xlg'); ?>">
+                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light  positiontable  <?php echo ($value['heddingpositiontable']=='')?' active':''; ?>" data-id="<?php echo $i; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Left Align'); ?>"><i class="fa fa-align-left text-primary"></i></button>
+                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light positiontable <?php echo ($value['heddingpositiontable']=='text-center')?' active':''; ?>" data-id="<?php echo $i; ?>" value="text-center" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Center Aligh'); ?>"><i class="fa fa-align-center text-primary"></i></button>
+                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light positiontable <?php echo ($value['heddingpositiontable']=='text-right')?' active':''; ?>" data-id="<?php echo $i; ?>" value="text-right" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Right Align'); ?>"><i class="fa fa-align-right text-primary"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -483,28 +483,28 @@ function Getinserttype(table,field,type){
                                     <div class="tab-content mt-2" id="myTabContent4_4">
                                         <div class="tab-pane fade show active btn-sm" id="content-1_5" role="tabpanel" aria-labelledby="content_1">
                                             <div class="form-group row  mt-2">
-                                                <span class="col-5  f-14">Label</span>
+                                                <span class="col-5  f-14"><?php echo __('Label'); ?></span>
                                                 <div class="col-7">
-                                                    <input aria-label="Label[]" class="form-control txtlablel" type="text" name="label[]" data-id="<?php echo $i; ?>" value="<?php echo ucwords(str_replace("_"," ",$value['label'])); ?>">
+                                                    <input aria-label="<?php echo __('Label[]'); ?>" class="form-control txtlablel" type="text" name="label[]" data-id="<?php echo $i; ?>" value="<?php echo ucwords(str_replace("_"," ",$value['label'])); ?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row mt-2">
-                                                <span class="col-5  f-14">Filter</span>
+                                                <span class="col-5  f-14"><?php echo __('Filter'); ?></span>
                                                 <div class="col-7">
                                                     <span class="switch switch-icon">
                                                         <label>
-                                                            <input aria-label="Checkbox" type="checkbox"  name="switch[<?php echo $i; ?>]"  class="switch js-primary-sm filterdisplaywitch" data-id="<?php echo $key; ?>"  <?php echo $value['switch']=='0'?"checked":""; ?> > <span></span>
+                                                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  name="switch[<?php echo $i; ?>]"  class="switch js-primary-sm filterdisplaywitch" data-id="<?php echo $key; ?>"  <?php echo $value['switch']=='0'?"checked":""; ?> > <span></span>
                                                         </label>
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row mt-2">
-                                                <span class="col-5  f-14">Filter Type</span>
+                                                <span class="col-5  f-14"><?php echo __('Filter Type'); ?></span>
                                                 <div class="col-7">
-                                                 $filed_array = array('text' => 'Simple Text', 'touchspin' => 'Touch Spin', 'date_pick' => 'Date','month' => 'Month','year'=>'Year','month_year'=>'Month','time_pick'=>'Time' ,'color_pick' => 'Color', 'email'=> 'Email','phone'=> 'Phone','number'=> 'Quantity','currency'=> 'Currency', 'password'=> 'Password', 'textarea' => 'Text Area', 'checkbox' => 'Check Box', 'switch' => 'Switch', 'radio' => 'Radio', 'select'=> 'List','auto_select'=>'Auto Select' ,'multi_select'=> 'Multi Select','rating'=>'Rating','image' => 'Photo','file_upload' => 'Documents Upload','editor' => 'Editor','slider'=>'Slider','number_type'=> 'Number','read_only'=> 'Read Only Text','disable_select'=> 'Disable List','hidden'=> 'Hidden', 'serial_no'=>'Serial Number');
+                                                 $filed_array = array('text' => __('Simple Text'), 'touchspin' => __('Touch Spin'), 'date_pick' => __('Date'),'month' => __('Month'),'year'=>__('Year'),'month_year'=>__('Month'),'time_pick'=>__('Time') ,'color_pick' => __('Color'), 'email'=> __('Email'),'phone'=> __('Phone'),'number'=> __('Quantity'),'currency'=> __('Currency'), 'password'=> __('Password'), 'textarea' => __('Text Area'), 'checkbox' => __('Check Box'), 'switch' => __('Switch'), 'radio' => __('Radio'), 'select'=> __('List'),'auto_select'=>__('Auto Select') ,'multi_select'=> __('Multi Select'),'rating'=>__('Rating'),'image' => __('Photo'),'file_upload' => __('Documents Upload'),'editor' => __('Editor'),'slider'=>__('Slider'),'number_type'=> __('Number'),'read_only'=> __('Read Only Text'),'disable_select'=> __('Disable List'),'hidden'=> __('Hidden'), 'serial_no'=>__('Serial Number'));
 
                                                  ?>
-                                                 <select aria-label="Select option" class="form-control  form-select js-example-basic-single" id="<?php echo $value['Field']; ?>"  name="filtertype[]" onchange="Getinserttype('<?php echo $value['tablenames']; ?>','<?php echo $value['displayfeildname']; ?>',this.value)">
+                                                 <select aria-label="<?php echo __('Select option'); ?>" class="form-control  form-select js-example-basic-single" id="<?php echo $value['Field']; ?>"  name="filtertype[]" onchange="Getinserttype('<?php echo $value['tablenames']; ?>','<?php echo $value['displayfeildname']; ?>',this.value)">
                                                     <?php foreach ($filed_array as $typekey => $typevalue) { ?>
                                                         <option value = "<?php echo $typekey; ?>" <?php echo  $value['filtertype']==$typekey?"selected":""; ?> ><?php echo $typevalue; ?></option>
                                                     <?php } ?>
@@ -512,17 +512,17 @@ function Getinserttype(table,field,type){
                                             </div>
                                         </div>
                                         <div class=" row mt-2">
-                                            <span class="col-5 f-14">Priority</span>
+                                            <span class="col-5 f-14"><?php echo __('Priority'); ?></span>
                                             <div class="col-7">
-                                                <input aria-label="Priority[]" class="form-control Priority" type="text" name="Priority[]" value="<?php echo $value['priority']; ?>">
+                                                <input aria-label="<?php echo __('Priority[]'); ?>" class="form-control Priority" type="text" name="Priority[]" value="<?php echo $value['priority']; ?>">
                                             </div>
                                         </div>
                                         <div class=" row mt-2">
-                                            <span class="col-5 f-14">Group Opertors</span>
+                                            <span class="col-5 f-14"><?php echo __('Group Opertors'); ?></span>
                                             <div class="col-7">
 
-                                             <select aria-label="Grooupbyoperators[]"  class="kt-dual-listbox form-select js-example-basic-single" name="grooupbyoperators[]"  onchange="buildQuery()"  style="width:100%">
-                                                <option value="0">Select Any One</option>
+                                             <select aria-label="<?php echo __('Grooupbyoperators[]'); ?>"  class="kt-dual-listbox form-select js-example-basic-single" name="grooupbyoperators[]"  onchange="buildQuery()"  style="width:100%">
+                                                <option value="0"><?php echo __('Select Any One'); ?></option>
                                                 <?php foreach($groupbyopert as $groupbyoperts){ ?>
                                                     <option value="<?php echo $groupbyoperts; ?>" <?php echo ($groupbyoperts == $value['grooupbyoperators'])?"selected":""; ?> ><?php echo $groupbyoperts; ?> </option>
                                                 <?php } ?>
@@ -546,7 +546,7 @@ function Getinserttype(table,field,type){
 
 <div class="card">
     <div class="card-header p-2" id="headingOne9900">
-        <div class="card-title collapsed f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOne9900">Report Formula</div>
+        <div class="card-title collapsed f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOne9900"><?php echo __('Report Formula'); ?></div>
     </div>
     <div id="collapseOne9900" class="collapse" data-parent="#accordionExample9900">
         <div class="card-body p-0" id="formulapppend">
@@ -558,7 +558,7 @@ function Getinserttype(table,field,type){
                          <?php echo ucwords(str_replace("_"," ", $report_formul['custom_report_heding'])); ?></div>
 
                          <div class="col-lg-1" onclick="removeformuladiv('<?php echo $mkc; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                             X
+                             <?php echo __('X'); ?>
                          </div>
                      </div>
                      <div id="collapseOnes<?php echo $mkc; ?>" class="collapse" data-parent="#accordionExample5">
@@ -567,19 +567,19 @@ function Getinserttype(table,field,type){
                             <div class="tab-content mt-2" id="myTabContent4_5">
                                <div class="tab-pane fade show active btn-sm" id="content-1_6" role="tabpanel" aria-labelledby="content_1">
                                   <div class="form-group row mt-2">
-                                     <span class="f-14">Heading<span class="tex-danger f-10">* Requerd Space used "_" </span></span>
+                                     <span class="f-14"><?php echo __('Heading'); ?><span class="tex-danger f-10"><?php echo __('* Requerd Space used "_"'); ?> </span></span>
                                      <div class="">
-                                        <input aria-label="Custom Report Heding[]"  class="form-control" type="text"   name="custom_report_heding[]" value="<?php echo $report_formul['custom_report_heding']; ?>"  onkeyup="nospaces(this)"> </div> </div>
+                                        <input aria-label="<?php echo __('Custom Report Heding[]'); ?>"  class="form-control" type="text"   name="custom_report_heding[]" value="<?php echo $report_formul['custom_report_heding']; ?>"  onkeyup="nospaces(this)"> </div> </div>
                                         <div class="form-group row  mt-2">
-                                         <span class="f-14">Report Formula</span>
+                                         <span class="f-14"><?php echo __('Report Formula'); ?></span>
                                          <div class="">
-                                            <textarea aria-label="Custom Report Formula[]" class="form-control"   name="custom_report_formula[]" rows="3"><?php echo $report_formul['custom_report_formula'];  ?></textarea>
+                                            <textarea aria-label="<?php echo __('Custom Report Formula[]'); ?>" class="form-control"   name="custom_report_formula[]" rows="3"><?php echo $report_formul['custom_report_formula'];  ?></textarea>
                                         </div>
                                     </div>
                                     <div class=" row mt-2">
-                                     <span class="f-14">Priority</span>
+                                     <span class="f-14"><?php echo __('Priority'); ?></span>
                                      <div class="">
-                                        <input aria-label="Custom Report Priority[]" class="form-control " type="text" name="custom_report_Priority[]" value="<?php echo $report_formul['custom_report_Priority']; ?>">
+                                        <input aria-label="<?php echo __('Custom Report Priority[]'); ?>" class="form-control " type="text" name="custom_report_Priority[]" value="<?php echo $report_formul['custom_report_Priority']; ?>">
                                     </div>
                                 </div>
                             </div>
@@ -591,30 +591,30 @@ function Getinserttype(table,field,type){
         <?php $mkc++;
 } ?>
     </div>
-    <button type="button" class="btn btn-primary m-l-10 mb-1"  onclick="addmoreformula()"><i class="fa fa-plus"></i> Add More Report Formula</button>
+    <button type="button" class="btn btn-primary m-l-10 mb-1"  onclick="addmoreformula()"><i class="fa fa-plus"></i> <?php echo __('Add More Report Formula'); ?></button>
 
 </div>
 </div>
 
 <div class="card">
     <div class="card-header p-2" id="headingOne99">
-        <div class="card-title collapsed f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOne99">Footer</div>
+        <div class="card-title collapsed f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOne99"><?php echo __('Footer'); ?></div>
     </div>
     <div id="collapseOne99" class="collapse" data-parent="#accordionExample99">
         <div class="card-body">
             <div class="accordion accordion-toggle-arrow elementor-design" id="accordionExample99">
                 <div class="row mt-2">
-                    <span  class="col-5 ">Display</span>
+                    <span  class="col-5 "><?php echo __('Display'); ?></span>
                     <div class="col-7 d-flex">
                         <span class="switch switch-icon"><label>
-                            <input aria-label="Checkbox" type="checkbox" class="inworddisplay js-switch" <?php echo $footer['footerdisplay']==1?"":"checked"; ?> name="footerdisplay" ><span></span>
+                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" class="inworddisplay js-switch" <?php echo $footer['footerdisplay']==1?"":"checked"; ?> name="footerdisplay" ><span></span>
                         </label></span>
                     </div>
                 </div>
                 <div class="form-group row  mt-2">
-                    <span class="col-5 ">Footer Description</span>
+                    <span class="col-5 "><?php echo __('Footer Description'); ?></span>
                     <div class="col-7">
-                        <textarea aria-label="Footerdescriptioon" class="form-control footerdescriptioon" id="exampleTextarea"  name="footerdescriptioon" rows="3"><?php echo $footer['footerdescriptioon']==""?"Footer Description":$footer['footerdescriptioon']; ?></textarea>
+                        <textarea aria-label="<?php echo __('Footerdescriptioon'); ?>" class="form-control footerdescriptioon" id="exampleTextarea"  name="footerdescriptioon" rows="3"><?php echo $footer['footerdescriptioon']==""?"Footer Description":$footer['footerdescriptioon']; ?></textarea>
                     </div>
                 </div>
             </div>
@@ -640,7 +640,7 @@ function Getinserttype(table,field,type){
                             }elseif($value['filtertype']=="date_pick"){
                                 echo "<input aria-label='Select date' type='date' class='form-control' placeholder='".ucwords(str_replace("_"," ",$value['label']))."'>";
                             }elseif($value['filtertype']=="select"){
-                                echo '<select aria-label="Select option" class="form-select js-example-basic-single " ><option>Select Any Option</option></select>';
+                                echo '<select aria-label="'.htmlspecialchars(__('Select option'), ENT_QUOTES).'" class="form-select js-example-basic-single " ><option>'.__('Select Any Option').'</option></select>';
                             }else{ echo "<input aria-label='Input field' type='text' class='form-control' placeholder='".$value['label']."'>";
 }
                             ?>
@@ -682,7 +682,7 @@ function Getinserttype(table,field,type){
                         $display =  $headers['logodislay']==1?"display:none":"";
                         return '<div draggable="true" class="col-lg-4 box" data-id="'.$seq.'" >
                         <div class="align-items-md-end px-0 '.$co.'" id="logo_div_id" data-order="header_order_logo" style="'.$display.'">
-                        <img src="uploads/all/'.$_SESSION['config']['display_logo'].'" class="img-fluid  img-120" alt="Logo" />
+                        <img src="uploads/all/'.$_SESSION['config']['display_logo'].'" class="img-fluid  img-120" alt="'.htmlspecialchars(__('Logo'), ENT_QUOTES).'" />
                         </div>
                         </div>';
                     }else{
@@ -714,7 +714,7 @@ function Getinserttype(table,field,type){
                                     <tbody>
                                         <tr class="font-weight-boldest">
                                             <?php $k=0; foreach ($attribute as $key => $value) {  ?>
-                                                <td class="pl-0 pt-7 filedsrow<?php echo $k; ?> <?php echo $value['heddingpositiontable']; ?>" id="thvalue<?php echo $k; ?>" style="display:<?php echo $value['display']=='0'?"":"none"; ?>" >xxxx&#160;</td>
+                                                <td class="pl-0 pt-7 filedsrow<?php echo $k; ?> <?php echo $value['heddingpositiontable']; ?>" id="thvalue<?php echo $k; ?>" style="display:<?php echo $value['display']=='0'?"":"none"; ?>" ><?php echo __('xxxx&#160;'); ?></td>
                                                 <?php $k++;
 } ?>
                                             </tr>
@@ -738,7 +738,7 @@ function Getinserttype(table,field,type){
         <div class="row justify-content-right py-8 px-8 py-md-10 px-md-0  displaye mt-5 ">
             <div class="col-md-9">
                 <div class="d-flex justify-content-between">
-                    <button type="submit" name="save" value="save" class="btn btn-primary m-l-50" ><i class="la la-check">  </i> Save </button>
+                    <button type="submit" name="save" value="save" class="btn btn-primary m-l-50" ><i class="la la-check">  </i> <?php echo __('Save'); ?> </button>
                 </div>
             </div>
         </div>

@@ -33,16 +33,16 @@ foreach($peerfeedbackres['performance_setup_questions'] as $return){
                 if($error_message !=''){ ?>
                     <div class="alert alert-danger background-danger alert-dismissible">
                         <strong><?php echo $error_message; ?></strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
                     </div>
                 <?php } ?>
                 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
                     <div class="card-header">
-                        <h5>Next Peer Feedback</h5>
+                        <h5><?php echo __('Next Peer Feedback'); ?></h5>
                         <div class="card-header-right">
                             <?php if($_GET['option'] != "COM_VIEW_PERFORMANCE_APPRAISAL_SETTINGS"){ ?>
                      <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                                  <i class="icofont icofont-reply"></i>  Back
+                                  <i class="icofont icofont-reply"></i>  <?php echo __('Back'); ?>
                      </a>
                     <?php } ?>
                         </div>
@@ -54,29 +54,29 @@ foreach($peerfeedbackres['performance_setup_questions'] as $return){
 
                                 <div class="form-group col-lg-8">
                                     <div class=" mb-2"  >
-                                        <span class="orm-label">Aassessment Year</span>
+                                        <span class="orm-label"><?php echo __('Aassessment Year'); ?></span>
                                         <input type="hidden" name="appraisal_id" value="<?php echo $appraisal_id ?>">
-                                        <input aria-label="Assessment Year" type="text" class="form-control" name="assessment_year" value="<?php echo $assessment_year ?>" readonly>
+                                        <input aria-label="<?php echo __('Assessment Year'); ?>" type="text" class="form-control" name="assessment_year" value="<?php echo $assessment_year ?>" readonly>
 
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-8" >
-                                    <span>When should we prompt managers to request peer feedback?</span>
+                                    <span><?php echo __('When should we prompt managers to request peer feedback?'); ?></span>
                                     <?php $date_pic3 = fromDate($performance_setup11['peer_feedback_date']); ?>
-                                    <input aria-label="Input field" type="text" class="form-control datepicker"  value="<?php echo  $date_pic3; ?>"  name="peer_feedback_date" onblur="perrfeedbackchange()" id="kt_datepicker_32" />
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control datepicker"  value="<?php echo  $date_pic3; ?>"  name="peer_feedback_date" onblur="perrfeedbackchange()" id="kt_datepicker_32" />
 
                                 </div>
                                 <div class="form-group col-lg-8 w-full" >
-                                    <span>How often do you want managers to get peer feedback on their direct reports?</span>
-                                    <select aria-label="Peer Feedback Month" class="form-control form-select js-example-basic-single" onclick="perrfeedbackchange()" onkeyup="perrfeedbackchange()" name="peer_feedback_month" id="peer_feedback_month">
-                                        <option <?php if($performance_setup11['peer_feedback_month']==3){ echo "selected";
-}  ?> value="3" >Every 3 Months</option>
-                                        <option <?php if($performance_setup11['peer_feedback_month']==4){ echo "selected";
-}  ?> value="4" >Every 4 Months</option>
-                                        <option <?php if($performance_setup11['peer_feedback_month']==6){ echo "selected";
-}  ?> value="6" >Every 6 Months</option>
-                                        <option <?php if($performance_setup11['peer_feedback_month']==12){ echo "selected";
-}  ?> value="12" >Every Year</option>
+                                    <span><?php echo __('How often do you want managers to get peer feedback on their direct reports?'); ?></span>
+                                    <select aria-label="<?php echo __('Peer Feedback Month'); ?>" class="form-control form-select js-example-basic-single" onclick="perrfeedbackchange()" onkeyup="perrfeedbackchange()" name="peer_feedback_month" id="peer_feedback_month">
+                                        <option <?php if($performance_setup11['peer_feedback_month']==3){ echo __('selected');
+}  ?> value="3" ><?php echo __('Every 3 Months'); ?></option>
+                                        <option <?php if($performance_setup11['peer_feedback_month']==4){ echo __('selected');
+}  ?> value="4" ><?php echo __('Every 4 Months'); ?></option>
+                                        <option <?php if($performance_setup11['peer_feedback_month']==6){ echo __('selected');
+}  ?> value="6" ><?php echo __('Every 6 Months'); ?></option>
+                                        <option <?php if($performance_setup11['peer_feedback_month']==12){ echo __('selected');
+}  ?> value="12" ><?php echo __('Every Year'); ?></option>
                                     </select>
                                 </div>
 
@@ -105,7 +105,7 @@ foreach($peerfeedbackres['performance_setup_questions'] as $return){
 
                             <input type="hidden" name="assign_type" value="3" />
                             <input type="hidden" name="display_questions" value="0" />
-                            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="savepeerfeedback1" value="exit"><i class="la la-check"></i>Submit Peer Feedback</button>
+                            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="savepeerfeedback1" value="exit"><i class="la la-check"></i><?php echo __('Submit Peer Feedback'); ?></button>
 
                         </form>
                     </div>

@@ -73,7 +73,7 @@ include_once '../comm.php';
 <li class="m-l-15">
     <div class="d-inline-block">
         <label for=""><?php echo ucwords($uomlist['description']); ?></label>
-        <input aria-label="Popupqty[]" type="text" name="popupqty[]"  class="form-control text-right popuomqty" value="<?php echo $uom_detail['qty'];?>"  onblur="uomenterqty()">
+        <input aria-label="<?php echo __('Popupqty[]'); ?>" type="text" name="popupqty[]"  class="form-control text-right popuomqty" value="<?php echo $uom_detail['qty'];?>"  onblur="uomenterqty()">
         <input type="hidden" class="popuomratio" id="conversion_ratio" name="conversion_ratio[]" value="<?php echo $uomlist['conversion_ratio']; ?>">
         <input type="hidden"   name="popuouomid[]" value="<?php echo $uomlist['id']; ?>">
        </div>
@@ -86,7 +86,7 @@ include_once '../comm.php';
         <li class="m-l-15">
             <div class="d-inline-block">
                  <span><?php echo ucwords($_POST['uom_name']); ?></span>
-                <input aria-label="Popupqty[]" type="text" name="popupqty[]"  onblur="uomenterqty()" class="form-control text-right popuomqty" value="<?php echo $key_detail['billable_hrs'];?>">
+                <input aria-label="<?php echo __('Popupqty[]'); ?>" type="text" name="popupqty[]"  onblur="uomenterqty()" class="form-control text-right popuomqty" value="<?php echo $key_detail['billable_hrs'];?>">
                 <input type="hidden" id="conversion_ratio_2" class="popuomratio" name="conversion_ratio[]" value="1">
                 <input type="hidden"   name="popuouomid[]" value="<?php echo $_POST['uom_id']; ?>">
             </div>
@@ -96,14 +96,14 @@ include_once '../comm.php';
         </li>
 
         <li>
-            <span >TOTAL</span>
+            <span ><?php echo __('TOTAL'); ?></span>
             <p id="poptotalamt"><?php echo $_POST['count_qty']!=""?$_POST['count_qty']:'0';?></p>
             <input type="hidden"   name="poptotalqty" id="poptotalatytext" value="<?php echo $_POST['count_qty']; ?>">
         </li>
        </ul>
        </form>
         <div class="col-lg-12 text-right mt-2">
-            <button class="btn waves-effect waves-light hor-grd btn-grd-primary" type="button" onclick="submituomqty()">Save</button>
-            <button class="btn waves-effect waves-light hor-grd btn-grd-danger " type="button" onclick="uompopup('','','','','<?php echo $_POST['rowid']; ?>')">Cancel</button>
+            <button class="btn waves-effect waves-light hor-grd btn-grd-primary" type="button" onclick="submituomqty()"><?php echo __('Save'); ?></button>
+            <button class="btn waves-effect waves-light hor-grd btn-grd-danger " type="button" onclick="uompopup('','','','','<?php echo $_POST['rowid']; ?>')"><?php echo __('Cancel'); ?></button>
         </div>
     </div>

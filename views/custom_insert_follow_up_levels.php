@@ -69,10 +69,10 @@ $follow_up_levels_all = $result['follow_up_levels_all'];
     <div class="col-lg-7">
         <div class="card">
             <div class="card-header">
-                <h5>Follow Up Levels</h5>
+                <h5><?php echo __('Follow Up Levels'); ?></h5>
                 <div class="card-header-right table-card-header">
-                    <a href="index.php?option=COM_INSERT_FOLLOW_UP_LEVELS" class="btn btn-success mb-2 desktop-view"><i class="icofont icofont-plus icon-white "></i>Follow Up Levels</a>
-                    <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</button>
+                    <a href="index.php?option=COM_INSERT_FOLLOW_UP_LEVELS" class="btn btn-success mb-2 desktop-view"><i class="icofont icofont-plus icon-white "></i><?php echo __('Follow Up Levels'); ?></a>
+                    <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?php echo __('Back'); ?></button>
                 </div>
             </div>
             <div class="card-body">
@@ -81,12 +81,12 @@ $follow_up_levels_all = $result['follow_up_levels_all'];
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col" class="text-right">Days</th>
-                                <th scope="col">SMS</th>
-                                <th scope="col">Call</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Attach Invoice</th>
+                                <th scope="col"><?php echo __('Name'); ?></th>
+                                <th scope="col" class="text-right"><?php echo __('Days'); ?></th>
+                                <th scope="col"><?php echo __('SMS'); ?></th>
+                                <th scope="col"><?php echo __('Call'); ?></th>
+                                <th scope="col"><?php echo __('Email'); ?></th>
+                                <th scope="col"><?php echo __('Attach Invoice'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,7 +111,7 @@ $follow_up_levels_all = $result['follow_up_levels_all'];
     <div class="col-lg-5">
         <div class="card">
             <div class="card-header">
-                <h5>Follow Up Levels</h5>
+                <h5><?php echo __('Follow Up Levels'); ?></h5>
                 <div class="card-header-right table-card-header">
 
                 </div>
@@ -121,38 +121,38 @@ $follow_up_levels_all = $result['follow_up_levels_all'];
                     <div class="row">
                         <input type="hidden" name="depreciation_method"  id="depreciation_method" value="SL">
                         <div class="form-group col-lg-8 col-md-8 col-sm-8 col-12">
-                            <span class="form-label">Follow Up Level Name</span>
-                            <input aria-label="Follow Up Level Name" class="form-control"  type="text"  id="follow_up_level_name" name="follow_up_level_name"  value="<?php echo $follow_up_levels['follow_up_level_name']; ?>" required>
+                            <span class="form-label"><?php echo __('Follow Up Level Name'); ?></span>
+                            <input aria-label="<?php echo __('Follow Up Level Name'); ?>" class="form-control"  type="text"  id="follow_up_level_name" name="follow_up_level_name"  value="<?php echo $follow_up_levels['follow_up_level_name']; ?>" required>
                         </div>
                         <div class="form-group col-lg-4 col-md-4 col-sm-4 col-12">
-                            <span class="form-label">Days</span>
-                            <input aria-label="Days" class="form-control text-right"  type="number"  id="follow_up_level_name_2" name="days"  value="<?php echo $follow_up_levels['days']; ?>" required>
+                            <span class="form-label"><?php echo __('Days'); ?></span>
+                            <input aria-label="<?php echo __('Days'); ?>" class="form-control text-right"  type="number"  id="follow_up_level_name_2" name="days"  value="<?php echo $follow_up_levels['days']; ?>" required>
                         </div>
 
                         <div class="form-group col-lg-4 col-md-4 col-sm-4 col-4">
-                            <span class="form-label d-block" >Send SMS</span>
-                            <input aria-label="Send Sms" class="js-primary-sm" type="checkbox" name="send_sms" <?php echo $follow_up_levels['send_sms'] =='0'?"checked":""; ?> value="0">
+                            <span class="form-label d-block" ><?php echo __('Send SMS'); ?></span>
+                            <input aria-label="<?php echo __('Send Sms'); ?>" class="js-primary-sm" type="checkbox" name="send_sms" <?php echo $follow_up_levels['send_sms'] =='0'?"checked":""; ?> value="0">
                         </div>
                         <div class="form-group col-lg-4 col-md-4 col-sm-4 col-4">
-                            <span class="form-label d-block" >Call</span>
-                            <input aria-label="Follow Up Call" class="js-primary-sm" type="checkbox" name="follow_up_call" <?php echo $follow_up_levels['follow_up_call'] =='0'?"checked":""; ?> value="0">
+                            <span class="form-label d-block" ><?php echo __('Call'); ?></span>
+                            <input aria-label="<?php echo __('Follow Up Call'); ?>" class="js-primary-sm" type="checkbox" name="follow_up_call" <?php echo $follow_up_levels['follow_up_call'] =='0'?"checked":""; ?> value="0">
                         </div>
                         <div class="form-group col-lg-4 col-md-4 col-sm-4 col-4">
-                            <span class="form-label d-block">Send Email</span>
-                            <input aria-label="Send Email" class="js-primary-sm" type="checkbox" name="send_email" id="send_email" <?php echo $follow_up_levels['send_email'] =='0'?"checked":""; ?> value="0" onchange="getSendEmail()">
+                            <span class="form-label d-block"><?php echo __('Send Email'); ?></span>
+                            <input aria-label="<?php echo __('Send Email'); ?>" class="js-primary-sm" type="checkbox" name="send_email" id="send_email" <?php echo $follow_up_levels['send_email'] =='0'?"checked":""; ?> value="0" onchange="getSendEmail()">
                         </div>
                         <div class="form-group col-lg-8 col-md-12 col-sm-12 col-12 w-full email_content"  <?php echo $follow_up_levels['send_email'] =='0'?"":"style='display:none'"; ?> >
-                            <span class="form-label d-block">Email Template</span>
-                            <select aria-label="Email Content" name="email_content_id" class="form-control form-select js-example-basic-single">
-                                <option value="">Select Any One </option>
+                            <span class="form-label d-block"><?php echo __('Email Template'); ?></span>
+                            <select aria-label="<?php echo __('Email Content'); ?>" name="email_content_id" class="form-control form-select js-example-basic-single">
+                                <option value=""><?php echo __('Select Any One'); ?> </option>
                                 <?php foreach($email_content as $ecid=>$ecname) {  ?>
                                     <option value="<?php echo $ecid; ?>" <?php echo $follow_up_levels['email_content_id'] ==$ecid?"selected":""; ?>><?php echo $ecname;?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="form-group col-lg-4 email_content" <?php echo $follow_up_levels['send_email'] =='0'?"":"style='display:none'"; ?>>
-                            <span class="form-label d-block">Attach Invoice</span>
-                            <input aria-label="Attach Invoice" class="js-primary-sm" type="checkbox" name="attach_invoice" <?php echo $follow_up_levels['attach_invoice'] =='0'?"checked":""; ?> value="0">
+                            <span class="form-label d-block"><?php echo __('Attach Invoice'); ?></span>
+                            <input aria-label="<?php echo __('Attach Invoice'); ?>" class="js-primary-sm" type="checkbox" name="attach_invoice" <?php echo $follow_up_levels['attach_invoice'] =='0'?"checked":""; ?> value="0">
                         </div>
                     </div>
                     <div class="mb-4">

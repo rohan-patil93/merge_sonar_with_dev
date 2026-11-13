@@ -41,7 +41,7 @@ $array = array('id', 'Current_Status', 'Status_Date', 'From_Date', 'To_Date', 'C
                                                     <div class="kt-wizard-v3__nav-item" data-ktwizard-type="step" data-ktwizard-state="current">
                                                         <div class="kt-wizard-v3__nav-body">
                                                             <div class="kt-wizard-v3__nav-label">
-                                                                <span>1</span> Create Table
+                                                                <span>1</span> <?= __('Create Table') ?>
                                                             </div>
                                                             <div class="kt-wizard-v3__nav-bar"></div>
                                                         </div>
@@ -49,7 +49,7 @@ $array = array('id', 'Current_Status', 'Status_Date', 'From_Date', 'To_Date', 'C
                                                     <div class="kt-wizard-v3__nav-item" data-ktwizard-type="step">
                                                         <div class="kt-wizard-v3__nav-body">
                                                             <div class="kt-wizard-v3__nav-label">
-                                                                <span>2</span> Set Display List
+                                                                <span>2</span> <?= __('Set Display List') ?>
                                                             </div>
                                                             <div class="kt-wizard-v3__nav-bar"></div>
                                                         </div>
@@ -57,7 +57,7 @@ $array = array('id', 'Current_Status', 'Status_Date', 'From_Date', 'To_Date', 'C
                                                     <div class="kt-wizard-v3__nav-item" data-ktwizard-type="step">
                                                         <div class="kt-wizard-v3__nav-body">
                                                             <div class="kt-wizard-v3__nav-label">
-                                                                <span>3</span> Set Insert/Update
+                                                                <span>3</span> <?= __('Set Insert/Update') ?>
                                                             </div>
                                                             <div class="kt-wizard-v3__nav-bar"></div>
                                                         </div>
@@ -65,7 +65,7 @@ $array = array('id', 'Current_Status', 'Status_Date', 'From_Date', 'To_Date', 'C
                                                     <div class="kt-wizard-v3__nav-item" data-ktwizard-type="step">
                                                         <div class="kt-wizard-v3__nav-body">
                                                             <div class="kt-wizard-v3__nav-label">
-                                                                <span>4</span> Set Roles
+                                                                <span>4</span> <?= __('Set Roles') ?>
                                                             </div>
                                                             <div class="kt-wizard-v3__nav-bar"></div>
                                                         </div>
@@ -73,7 +73,7 @@ $array = array('id', 'Current_Status', 'Status_Date', 'From_Date', 'To_Date', 'C
                                                     <div class="kt-wizard-v3__nav-item" data-ktwizard-type="step">
                                                         <div class="kt-wizard-v3__nav-body">
                                                             <div class="kt-wizard-v3__nav-label">
-                                                                <span>5</span> Application Pages
+                                                                <span>5</span> <?= __('Application Pages') ?>
                                                             </div>
                                                             <div class="kt-wizard-v3__nav-bar"></div>
                                                         </div>
@@ -81,7 +81,7 @@ $array = array('id', 'Current_Status', 'Status_Date', 'From_Date', 'To_Date', 'C
                                                     <div class="kt-wizard-v3__nav-item" data-ktwizard-type="step">
                                                         <div class="kt-wizard-v3__nav-body">
                                                             <div class="kt-wizard-v3__nav-label">
-                                                                <span>6</span> Set Menu
+                                                                <span>6</span> <?= __('Set Menu') ?>
                                                             </div>
                                                             <div class="kt-wizard-v3__nav-bar"></div>
                                                         </div>
@@ -138,15 +138,9 @@ $array = array('id', 'Current_Status', 'Status_Date', 'From_Date', 'To_Date', 'C
 
 
                                                 <div class="kt-form__actions">
-                                                    <button class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-prev">
-                                                        Previous
-                                                    </button>
-                                                    <button class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-submit">
-                                                        Submit
-                                                    </button>
-                                                    <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-next">
-                                                        Next Step
-                                                    </button>
+                                                    <button class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-prev"><?= __('Previous') ?></button>
+                                                    <button class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-submit"><?= __('Submit') ?></button>
+                                                    <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-next"><?= __('Next Step') ?></button>
                                                 </div>
 
 

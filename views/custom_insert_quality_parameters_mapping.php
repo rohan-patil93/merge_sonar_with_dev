@@ -167,15 +167,15 @@ if($role['item_id']=="" && $_GET['ITEMID']!=""){
     <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
     <?php } ?>
     <div class="card-header">
-        <h5>Quality Parameters Mapping</h5>
+        <h5><?php echo __('Quality Parameters Mapping'); ?></h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -184,25 +184,25 @@ if($role['item_id']=="" && $_GET['ITEMID']!=""){
             <form class="" method="post" action="" >
                 <div class="row p-4">
                     <div class="form-group col-lg-6">
-                        <span>Item</span>
+                        <span><?php echo __('Item'); ?></span>
                         <div class="w-full">
-                            <select aria-label="Item" class="form-select js-example-basic-single" name="item_id" id="item_id" onchange="changedataoflist()" >
-                                <option value="0">Select Any</option>
+                            <select aria-label="<?php echo __('Item'); ?>" class="form-select js-example-basic-single" name="item_id" id="item_id" onchange="changedataoflist()" >
+                                <option value="0"><?php echo __('Select Any'); ?></option>
 
                                 <?php foreach($detail['items'] as $item){ ?>
-                                    <option <?php if($role['item_id']==$item['id']){ echo "selected";
+                                    <option <?php if($role['item_id']==$item['id']){ echo __('selected');
 } ?> value="<?php echo $item['id']; ?>"><?php echo $item['item_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                     </div>
                     <div class=" form-group col-lg-6">
-                        <span>Display Type</span>
+                        <span><?php echo __('Display Type'); ?></span>
                         <div class="w-full">
-                            <select aria-label="Quality Type" class="form-select js-example-basic-single" id="quality_type" onchange="changedataoflist()" name="quality_type" >
-                                <option value="0">Select Any</option>
+                            <select aria-label="<?php echo __('Quality Type'); ?>" class="form-select js-example-basic-single" id="quality_type" onchange="changedataoflist()" name="quality_type" >
+                                <option value="0"><?php echo __('Select Any'); ?></option>
                                 <?php foreach($dispay as $diskey=>$dis){ ?>
-                                    <option <?php if($role['quality_type']==$diskey){ echo "selected";
+                                    <option <?php if($role['quality_type']==$diskey){ echo __('selected');
 } ?> value="<?php echo $diskey; ?>"><?php echo $dis; ?></option>
                                 <?php } ?>
                             </select>
@@ -210,7 +210,7 @@ if($role['item_id']=="" && $_GET['ITEMID']!=""){
                     </div>
                     <?php if(($_GET['ITEMID']!="" && $_GET['QUALITY'])|| $_GET['Rid']!=""){ ?>
                     <div class="col-lg-12 row">
-                        <div class="col-lg-7"> Quality Parameters</div>
+                        <div class="col-lg-7"> <?php echo __('Quality Parameters'); ?></div>
                         <div class="col-lg-5"></div>
                     </div>
                     <?php foreach ($detail['groups'] as $group){
@@ -220,7 +220,7 @@ if($role['item_id']=="" && $_GET['ITEMID']!=""){
                                 <div class="col-lg-7 mt-3">
                                     <div class="checkbox-fade fade-in-primary">
                                         <label class="form-label line-height24">
-                                            <input aria-label="Checkbox" type="checkbox" <?php if(in_array($group['id'],$role_cat)){ echo "checked";
+                                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php if(in_array($group['id'],$role_cat)){ echo __('checked');
 } ?>  name="cat[<?php echo $group['id']; ?>]" id="cat_<?php echo $group['id']; ?>" onclick="jobcate(<?php echo $group['id']; ?>)" onkeydown="" />
                                             <span class="cr float-left">
                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -238,7 +238,7 @@ if($role['item_id']=="" && $_GET['ITEMID']!=""){
                                         <div class="col-lg-7" >
                                             <div class="checkbox-fade fade-in-primary mt-2 p-l-20">
                                                 <label class="form-label text-auto-hight line-height24">
-                                                    <input aria-label="Checkbox" type="checkbox" <?php if(in_array($par['id'],$role_des)){ echo "checked";
+                                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php if(in_array($par['id'],$role_des)){ echo __('checked');
 } ?>  name="desc[<?php echo $par['id']; ?>]" id="par_<?php echo $par['id']; ?>" />
 
                                                     <span class="cr float-left">
@@ -258,7 +258,7 @@ if($par['display_type']==1 || $par['display_type']==2){
     <?php $mn=1;  foreach($selectdata as $selectkey => $selectvalue){
         $id = "check_".$par['id']."_".$mn;
     ?>
-    <input aria-label="Radio option"  type="radio" <?php if($check==$selectkey){ echo "checked";
+    <input aria-label="<?php echo __('Radio option'); ?>"  type="radio" <?php if($check==$selectkey){ echo __('checked');
 } ?> name="descpass[<?php echo $par['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' />
     <label for="<?php echo $id; ?>"><?php echo $selectvalue; ?></label>
     <?php  $mn++;
@@ -274,7 +274,7 @@ if($par['display_type']==1 || $par['display_type']==2){
         $id = "check_".$par['id']."_".$mn;
 
     ?>
-    <input aria-label="Radio option"  type="radio" <?php if($check==$i){ echo "checked";
+    <input aria-label="<?php echo __('Radio option'); ?>"  type="radio" <?php if($check==$i){ echo __('checked');
 } ?> name="descpass[<?php echo $par['id']; ?>]" value='<?php echo $i; ?>' id='<?php echo $id; ?>'  />
     <label for="<?php echo $id; ?>"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo $selectdata[$i-1]; ?>" ><?php echo $i; ?></label>
     <?php  $mn++;
@@ -290,14 +290,14 @@ if($par['display_type']==1 || $par['display_type']==2){
         $id = "check_".$par['id']."_".$mn;
 
     ?>
-    <input aria-label="Radio option"  type="radio" <?php if($check ==$selectkey){ echo "checked";
+    <input aria-label="<?php echo __('Radio option'); ?>"  type="radio" <?php if($check ==$selectkey){ echo __('checked');
 } ?> name="descpass[<?php echo $par['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' />
     <label for="<?php echo $id; ?>"><?php echo $selectvalue; ?></label>
     <?php  $mn++;
 } ?>
 
 </div>
-<div class="f-12 text-muted"> With in range ?</div>
+<div class="f-12 text-muted"> <?php echo __('With in range ?'); ?></div>
 <?php  } ?>
                                         </div>
 
@@ -308,7 +308,7 @@ if($par['display_type']==1 || $par['display_type']==2){
                                                     $id = "mand_".$par['id']."_".$mn;
                                                     echo $mcheck = $jsdata['parameters'][$par['id']]['mand']!=""? $jsdata['parameters'][$par['id']]['mand'] :1;
                                                     ?>
-                                                    <input aria-label="Radio option"  type="radio" <?php if($mcheck==$selectkey){ echo "checked";
+                                                    <input aria-label="<?php echo __('Radio option'); ?>"  type="radio" <?php if($mcheck==$selectkey){ echo __('checked');
 } ?> name="mand[<?php echo $par['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' />
                                                     <label for="<?php echo $id; ?>"><?php echo $selectvalue; ?></label>
                                                 <?php $mn++;
@@ -330,18 +330,18 @@ if($par['display_type']==1 || $par['display_type']==2){
                                     <input type="hidden" name="hid" value=<?php echo $rid; ?> />
                                     <input type="hidden" name="submit" value="Update" />
                                     <button id="kt_llogin_signup_submit" <?php if($status_res == '1'){ ?> disabled="disabled" <?php
-} ?> class="btn btn-primary mr-2" ><i class="la la-check"></i>Upadate</button>
+} ?> class="btn btn-primary mr-2" ><i class="la la-check"></i><?php echo __('Upadate'); ?></button>
 
                                 <?php } else{ ?>
                                     <div class="col-lg-9">
                                         <input type="hidden" name="submit" value="Add" />
-                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value_exit" value="exit"><i class="la la-check"></i>Save & exit</button>
+                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value_exit" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
 
-                                        <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i>Cancel</button>
+                                        <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                                     <?php } ?>
                                 </div>
                                 <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-right">
-                                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?php echo __('Delete'); ?></button>
                                 </div>
                             </div>
                         </div>

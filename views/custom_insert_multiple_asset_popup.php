@@ -89,8 +89,8 @@ table#example-1 tr td select.form-control{-webkit-appearance: auto;
     appearance: auto;}
 </style>
 <div class="modal-header">
-  <h4 class="modal-title">Asset Updates</h4>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <h4 class="modal-title"><?php echo __('Asset Updates'); ?></h4>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body">
   <div class="j-content">
@@ -101,17 +101,17 @@ table#example-1 tr td select.form-control{-webkit-appearance: auto;
             <thead>
               <tr>
                <th scope="col">#</th>
-               <th scope="col" style="display: none">Asset Code</th>
-               <th scope="col" style="display: none">Asset Name</th>
-               <th scope="col">Asset Code</th>
-               <th scope="col">Asset Name</th>
-               <th scope="col">Category</th>
-               <th scope="col">Location</th>
-               <th scope="col">Status</th>
-               <th scope="col">Brand</th>
-               <th scope="col">Model</th>
-               <th scope="col">Serial Number</th>
-               <th scope="col">Condition</th>
+               <th scope="col" style="display: none"><?php echo __('Asset Code'); ?></th>
+               <th scope="col" style="display: none"><?php echo __('Asset Name'); ?></th>
+               <th scope="col"><?php echo __('Asset Code'); ?></th>
+               <th scope="col"><?php echo __('Asset Name'); ?></th>
+               <th scope="col"><?php echo __('Category'); ?></th>
+               <th scope="col"><?php echo __('Location'); ?></th>
+               <th scope="col"><?php echo __('Status'); ?></th>
+               <th scope="col"><?php echo __('Brand'); ?></th>
+               <th scope="col"><?php echo __('Model'); ?></th>
+               <th scope="col"><?php echo __('Serial Number'); ?></th>
+               <th scope="col"><?php echo __('Condition'); ?></th>
 
              </tr>
            </thead>
@@ -121,37 +121,37 @@ table#example-1 tr td select.form-control{-webkit-appearance: auto;
               <tr>
                 <td scope="row"><?php echo $mm; ?></td>
                 <td class="tabledit-view-mode  w-b-w-s" style="pointer-events: none; display: none"><span class="tabledit-span"><?php echo $list_asset['asset_code']; ?></span>
-                  <input aria-label="Gdfgff[]" class="tabledit-input form-control input-sm" type="text" name="gdfgff[]" value="<?php echo $list_asset['asset_code']; ?>" style="display:none;">
+                  <input aria-label="<?php echo __('Gdfgff[]'); ?>" class="tabledit-input form-control input-sm" type="text" name="gdfgff[]" value="<?php echo $list_asset['asset_code']; ?>" style="display:none;">
                 </td>
                 <td class="tabledit-view-mode  w-b-w-s" style="pointer-events: none; display: none"><span class="tabledit-span"><?php echo $list_asset['asset_description']; ?></span>
-                  <input aria-label="Sgfsdfsdfsdf[]" class="tabledit-input form-control input-sm" type="text" name="sgfsdfsdfsdf[]" value="" style="display:none;">
+                  <input aria-label="<?php echo __('Sgfsdfsdfsdf[]'); ?>" class="tabledit-input form-control input-sm" type="text" name="sgfsdfsdfsdf[]" value="" style="display:none;">
                 </td>
 
                 <td class="tabledit-view-mode  w-b-w-s" style="pointer-events: none;"><span class="tabledit-span"><?php echo $list_asset['asset_code']; ?></span>
-                  <input aria-label="Asset Code[]" class="tabledit-input form-control input-sm" type="text" name="asset_code[]" value="<?php echo $list_asset['asset_code']; ?>" style="display:none;">
+                  <input aria-label="<?php echo __('Asset Code[]'); ?>" class="tabledit-input form-control input-sm" type="text" name="asset_code[]" value="<?php echo $list_asset['asset_code']; ?>" style="display:none;">
                 </td>
                 <td class="tabledit-view-mode  w-b-w-s"><span class="tabledit-span"><?php echo $list_asset['asset_description']; ?></span>
-                  <input aria-label="Asset Description[]" class="tabledit-input form-control input-sm" type="text" name="asset_description[]" value="<?php echo $list_asset['asset_description']; ?>" style="display:none;">
+                  <input aria-label="<?php echo __('Asset Description[]'); ?>" class="tabledit-input form-control input-sm" type="text" name="asset_description[]" value="<?php echo $list_asset['asset_description']; ?>" style="display:none;">
                 </td>
                 <td class="tabledit-view-mode  w-b-w-s"><span class="tabledit-span"><?php echo $asset_category_lists[$list_asset['category_id']]; ?></span>
-                  <select aria-label="Category []" class="tabledit-input form-control input-sm" name="category_id[]"  style="display:none;">
-                    <option value="">Select Any One</option>
+                  <select aria-label="<?php echo __('Category []'); ?>" class="tabledit-input form-control input-sm" name="category_id[]"  style="display:none;">
+                    <option value=""><?php echo __('Select Any One'); ?></option>
                     <?php foreach ($assetcategory as $assetcategor) { ?>
                       <option value="<?php echo $assetcategor['id']; ?>" <?php echo $assetcategor['id'] == $list_asset['category_id']?"selected":""; ?> ><?php echo ucwords($assetcategor['category_description']); ?></option>
                     <?php } ?>
                   </select>
                 </td>
                 <td class="tabledit-view-mode"><span class="tabledit-span"><?php echo $locations_lists[$list_asset['asset_location']]; ?></span>
-                  <select aria-label="Asset Location[]" class="tabledit-input form-control input-sm" name="asset_location[]"  style="display:none;">
-                   <option value="">Select Any One</option>
+                  <select aria-label="<?php echo __('Asset Location[]'); ?>" class="tabledit-input form-control input-sm" name="asset_location[]"  style="display:none;">
+                   <option value=""><?php echo __('Select Any One'); ?></option>
                    <?php foreach ($locations as $location) { ?>
                     <option location value="<?php echo $location['id']; ?>" <?php echo $location['id'] == $list_asset['asset_location']?"selected":""; ?>><?php echo ucwords($location['location_name']); ?></option>
                   <?php } ?>
                 </select>
               </td>
               <td class="tabledit-view-mode"><span class="tabledit-span"><?php echo $ass_status[$list_asset['asset_status']]; ?></span>
-                <select aria-label="Asset Status[]" class="tabledit-input form-control input-sm" name="asset_status[]"  style="display:none;">
-                  <option value="">Select Any One</option>
+                <select aria-label="<?php echo __('Asset Status[]'); ?>" class="tabledit-input form-control input-sm" name="asset_status[]"  style="display:none;">
+                  <option value=""><?php echo __('Select Any One'); ?></option>
                   <?php foreach ($ass_status as $ass_statuskey=>$ass_statuss){ ?>
                     <option  value="<?php echo $ass_statuskey; ?>" <?php echo $ass_statuskey == $list_asset['status']?"selected":""; ?>><?php echo ucwords($ass_statuss); ?></option>
                   <?php }  ?>
@@ -159,18 +159,18 @@ table#example-1 tr td select.form-control{-webkit-appearance: auto;
               </select>
             </td>
             <td class="tabledit-view-mode"><span class="tabledit-span"><?php echo $list_asset['brand']; ?></span>
-              <input aria-label="Brand[]" class="tabledit-input form-control input-sm" type="text" name="brand[]" value="<?php echo $list_asset['brand']; ?>" style="display:none;">
+              <input aria-label="<?php echo __('Brand[]'); ?>" class="tabledit-input form-control input-sm" type="text" name="brand[]" value="<?php echo $list_asset['brand']; ?>" style="display:none;">
             </td>
             <td class="tabledit-view-mode"><span class="tabledit-span"><?php echo $list_asset['model']; ?></span>
-              <input aria-label="Model[]" class="tabledit-input form-control input-sm" type="text" name="model[]" value="<?php echo $list_asset['model']; ?>" style="display:none;">
+              <input aria-label="<?php echo __('Model[]'); ?>" class="tabledit-input form-control input-sm" type="text" name="model[]" value="<?php echo $list_asset['model']; ?>" style="display:none;">
             </td>
             <td class="tabledit-view-mode"><span class="tabledit-span"><?php echo $list_asset['serial_no']; ?></span>
-             <input aria-label="Serial No[]" class="tabledit-input form-control input-sm" type="text" name="serial_no[]" value="<?php echo $list_asset['serial_no']; ?>" style="display:none;">
+             <input aria-label="<?php echo __('Serial No[]'); ?>" class="tabledit-input form-control input-sm" type="text" name="serial_no[]" value="<?php echo $list_asset['serial_no']; ?>" style="display:none;">
 
            </td>
            <td class="tabledit-view-mode"><span class="tabledit-span"><?php echo $ass_condition[$list_asset['conditions']]; ?></span>
-            <select aria-label="Conditions[]" class="tabledit-input form-control input-sm" name="conditions[]"  style="display:none;">
-             <option value="">Select Any One</option>
+            <select aria-label="<?php echo __('Conditions[]'); ?>" class="tabledit-input form-control input-sm" name="conditions[]"  style="display:none;">
+             <option value=""><?php echo __('Select Any One'); ?></option>
              <?php foreach ($ass_condition as $ass_conditiokey=>$ass_conditio) { ?>
               <option  value="<?php echo $ass_conditiokey; ?>" <?php echo $ass_conditiokey == $list_asset['conditions']?"selected":""; ?>><?php echo ucwords($ass_conditio); ?></option>
             <?php } ?>
@@ -192,8 +192,8 @@ table#example-1 tr td select.form-control{-webkit-appearance: auto;
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-  <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()">Update</button>
+  <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+  <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()"><?php echo __('Update'); ?></button>
 </div>
     <script type="text/javascript" src="assets/pages/edit-table/jquery.tabledit.js"></script>
     <script type="text/javascript" src="assets/pages/edit-table/editable.js"></script>

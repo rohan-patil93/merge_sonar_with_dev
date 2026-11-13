@@ -60,14 +60,14 @@ $assets = $result['assets'];
             <div class="page-body">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Complaints</h5>
+                        <h5><?= __('Complaints') ?></h5>
                         <div class="card-header-right">
                             <a href="index.php?option=COM_LIST_COMPLAINTS" class="btn btn-success mb-2 desktop-view">
 
-                            Complaints List</a>
+                            <?= __('Complaints List') ?></a>
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back') ?>
                             </a>
                         </div>
                     </div>
@@ -79,41 +79,41 @@ $assets = $result['assets'];
 
 
                                     <div class="form-group col-lg-6">
-                                        <span>Complaint priority <span style="color:red;">*</span></span>
+                                        <span><?= __('Complaint priority') ?> <span style="color:red;">*</span></span>
                                         <select aria-label="Complaint Priority" class="form-select js-example-basic-single" id="complaint_priority" name="complaint_priority">
-                                            <option value="0"> Select Any one </option>
-                                            <option value="L" <?php echo $return['complaint_priority']=="L"? 'selected': '' ?>> Low</option>
-                                            <option value="M" <?php echo $return['complaint_priority']=="M"? 'selected': '' ?>> Medium </option>
-                                            <option value="H" <?php echo $return['complaint_priority']=="H"? 'selected': '' ?>> High </option>
+                                            <option value="0"><?= __('Select Any one') ?></option>
+                                            <option value="L" <?php echo $return['complaint_priority']=="L"? 'selected': '' ?>> <?= __('Low') ?></option>
+                                            <option value="M" <?php echo $return['complaint_priority']=="M"? 'selected': '' ?>> <?= __('Medium') ?> </option>
+                                            <option value="H" <?php echo $return['complaint_priority']=="H"? 'selected': '' ?>> <?= __('High') ?> </option>
 
                                         </select>
                                         <div style="display: none;color: red;" id="complaint_priority_err"></div>
                                     </div>
                                     <div class="col-lg-6 col-xs-12 form-group">
-                                        <span>Date<span style="color:red;">*</span></span>
+                                        <span><?= __('Date') ?><span style="color:red;">*</span></span>
                                         <input aria-label="Transaction Date" class="form-control" type="date" name="transaction_date" id="transaction_date"  value="<?php echo isset($return['transaction_date']) && $return['transaction_date'] != '' ? date('Y-m-d', strtotime($return['transaction_date'])) :  date('Y-m-d'); ?>"/>
                                         <div style="display: none;color: red;" id="transaction_date_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6 col-xs-12 form-group">
-                                        <span>Complaint Name<span style="color:red;">*</span></span>
+                                        <span><?= __('Complaint Name') ?><span style="color:red;">*</span></span>
                                         <input aria-label="Complaint Name" class="form-control" type="text" name="complaint_name" id="complaint_name" value="<?php echo $return['complaint_name'] ?? ''; ?>">
                                         <div style="display: none;color: red;" id="complaint_name_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>Complaint Type<span style="color:red;">*</span></span>
+                                        <span><?= __('Complaint Type') ?><span style="color:red;">*</span></span>
                                         <select aria-label="Complaint Type" class="form-select js-example-basic-single" id="complaint_type" name="complaint_type" onchange="handleComplaintType()">
-                                            <option value="0"> Select Any one </option>
-                                            <option value="Item" <?php echo $return['complaint_type']=="Item"? 'selected': '' ?> >Item</option>
-                                            <option value="Asset" <?php echo $return['complaint_type']=="Asset"? 'selected': '' ?> >Asset</option>
-                                            <option value="Building" <?php echo $return['complaint_type']=="Building"? 'selected': '' ?> >Building</option>
+                                            <option value="0"><?= __('Select Any one') ?></option>
+                                            <option value="Item" <?php echo $return['complaint_type']=="Item"? 'selected': '' ?> ><?= __('Item') ?></option>
+                                            <option value="Asset" <?php echo $return['complaint_type']=="Asset"? 'selected': '' ?> ><?= __('Asset') ?></option>
+                                            <option value="Building" <?php echo $return['complaint_type']=="Building"? 'selected': '' ?> ><?= __('Building') ?></option>
 
                                         </select>
                                         <div style="display: none;color: red;" id="complaint_type_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>Asset<span style="color:red;">*</span></span>
+                                        <span><?= __('Asset') ?><span style="color:red;">*</span></span>
                                         <select aria-label="Asset" class="form-select js-example-basic-single" id="asset_id" name="asset_id">
-                                            <option value="0"> Select Any one </option>
+                                            <option value="0"><?= __('Select Any one') ?></option>
                                             <?php foreach ($assets as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>"  <?php echo $return['asset_id']==$row['id']? 'selected': '' ?> >
                                                     <?php echo $row['asset_code'].'-'.$row['asset_description']; ?>
@@ -123,9 +123,9 @@ $assets = $result['assets'];
                                         <div style="display: none;color: red;" id="asset_id_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>Item <span style="color:red;">*</span></span>
+                                        <span><?= __('Item') ?> <span style="color:red;">*</span></span>
                                         <select aria-label="Item" class="form-select js-example-basic-single" id="item_id" name="item_id">
-                                            <option value="0"> Select Any one </option>
+                                            <option value="0"><?= __('Select Any one') ?></option>
                                             <?php foreach ($items as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>" <?php echo $return['item_id']==$row['id']? 'selected': '' ?>  >
                                                     <?php echo $row['item_name']; ?>
@@ -136,9 +136,9 @@ $assets = $result['assets'];
                                         <div style="display: none;color: red;" id="item_id_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>Building<span style="color:red;">*</span></span>
+                                        <span><?= __('Building') ?><span style="color:red;">*</span></span>
                                         <select aria-label="Building" class="form-select js-example-basic-single" id="building_id" name="building_id">
-                                            <option value="0"> Select Any one </option>
+                                            <option value="0"><?= __('Select Any one') ?></option>
                                             <?php foreach ($buildings as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>" <?php echo $return['building_id']==$row['id']? 'selected': '' ?>  >
                                                     <?php echo $row['building_name']; ?>
@@ -148,22 +148,22 @@ $assets = $result['assets'];
                                         <div style="display: none;color: red;" id="building_id_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>Building Floor<span style="color:red;">*</span></span>
+                                        <span><?= __('Building Floor') ?><span style="color:red;">*</span></span>
                                         <select aria-label="Building Floor" class="form-select js-example-basic-single" id="building_floor_id" name="building_floor_id">
-                                            <option value="0"> Select Any one </option>
+                                            <option value="0"><?= __('Select Any one') ?></option>
                                         </select>
                                         <div style="display: none;color: red;" id="building_floor_id_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>Building Floor Space<span style="color:red;">*</span></span>
+                                        <span><?= __('Building Floor Space') ?><span style="color:red;">*</span></span>
                                         <select aria-label="Building Floor Space" class="form-select js-example-basic-single" id="building_floor_space_id" name="building_floor_space_id">
-                                            <option value="0"> Select Any one </option>
+                                            <option value="0"><?= __('Select Any one') ?></option>
                                         </select>
                                         <div style="display: none;color: red;" id="building_floor_space_id_err"></div>
                                     </div>
 
                                     <div class="col-lg-6 col-xs-12 form-group">
-                                        <span>Complaint Image</span>
+                                        <span><?= __('Complaint Image') ?></span>
                                         <input aria-label="Complaint Image" class="form-control mb-1" type="file" name="complaint_image" id="complaint_image" value="<?php echo $return['complaint_image'] ?? ''; ?>" />
                                         <?php
                                         if(!empty($rid)){
@@ -184,7 +184,7 @@ $assets = $result['assets'];
 
                                     </div>
                                     <div class="col-lg-6 col-xs-12 form-group">
-                                        <span>Remarks</span>
+                                        <span><?= __('Remarks') ?></span>
                                         <input aria-label="Remarks" class="form-control" type="text" name="remarks" id="remarks" value="<?php echo $return['remarks'] ?? ''; ?>" />
 
                                     </div>
@@ -193,13 +193,13 @@ $assets = $result['assets'];
                                     <?php if ($view != '1'):
                                         if ($rid != "" && $copy != '1') {  ?>
                                             <button name='submit' value='update' class="btn waves-effect waves-light btn-primary mt-2">
-                                                Update
+                                                <?= __('Update') ?>
                                             </button>
                                             <input name="rid" type="hidden" value="<?php echo $rid; ?>">
 
                                         <?php } else {  ?>
                                             <button name='submit' value='insert' class="btn waves-effect waves-light btn-primary mt-2">
-                                                Save
+                                                <?= __('Save') ?>
                                             </button>
                                         <?php }
                                     endif; ?>
@@ -241,7 +241,7 @@ $assets = $result['assets'];
                 success: function (response) {
                     response = JSON.parse(response);
                     const buildingFloorSelect = $("#building_floor_id");
-                    buildingFloorSelect.empty().append('<option value="0"> Select Any one </option>');
+                    buildingFloorSelect.empty().append('<option value="0"><?= __('Select Any one') ?></option>');
                     const tableData = Object.values(response.table);
                     if (tableData && tableData.length > 0) {
                         tableData.forEach(function (floor) {
@@ -273,7 +273,7 @@ $assets = $result['assets'];
                 success: function (response) {
                     response = JSON.parse(response);
                     const floorSpaceSelect = $("#building_floor_space_id");
-                    floorSpaceSelect.empty().append('<option value="0"> Select Any one </option>');
+                    floorSpaceSelect.empty().append('<option value="0"><?= __('Select Any one') ?></option>');
                     const tableData = Object.values(response.table);
                     if (tableData && tableData.length > 0) {
                         tableData.forEach(function (space) {
@@ -299,8 +299,8 @@ $assets = $result['assets'];
             if (buildingId && buildingId !== "0") {
                 loadBuildingFloors(buildingId);
             } else {
-                $("#building_floor_id").empty().append('<option value="0"> Select Any one </option>');
-                $("#building_floor_space_id").empty().append('<option value="0"> Select Any one </option>');
+                $("#building_floor_id").empty().append('<option value="0"><?= __('Select Any one') ?></option>');
+                $("#building_floor_space_id").empty().append('<option value="0"><?= __('Select Any one') ?></option>');
             }
         });
 
@@ -310,7 +310,7 @@ $assets = $result['assets'];
             if (floorId && floorId !== "0") {
                 loadFloorSpaces(floorId);
             } else {
-                $("#building_floor_space_id").empty().append('<option value="0"> Select Any one </option>');
+                $("#building_floor_space_id").empty().append('<option value="0"><?= __('Select Any one') ?></option>');
             }
         });
     });

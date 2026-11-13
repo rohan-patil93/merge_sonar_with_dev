@@ -25,7 +25,7 @@ if(isset($_POST['submit_value']) && isset($_FILES['csv_file']) && $_FILES['csv_f
         $_SESSION['insert_msg'] = "9092";
            header("location:index.php?option=COM_INSERT_SWAP_IN_OUT&TYPE=".$_POST['import_type']."&yearmonth=".$_POST['month_year']."&Rid=".$Rrid); exit;
     }else{
-        $error_messages =  "Please upload CSV file format";
+        $error_messages =  __('Please upload CSV file format');
     }
 }else{
     if($_SESSION['insert_msg'] !=""){
@@ -107,16 +107,16 @@ $employee_terminations = $responss['employee_terminations'];
         <?php if($error_messages !="" ){?>
              <div class="alert alert-danger alert-dismissible">
                 <strong><?php echo $error_messages; ?> </strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
         <?php } ?>
         <div class="card card-custom card-sticky " id="kt_page_sticky_card">
             <div class="card-header table-card-header">
-                <h5><?php echo "Import";  ?></h5>
+                <h5><?php echo __('Import');  ?></h5>
                 <div class="card-header-right table-card-header ">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?php echo __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -126,25 +126,25 @@ $employee_terminations = $responss['employee_terminations'];
             <div class="card-body ">
                 <div class="row mb-2">
                     <div class="col-lg-5 text-start">
-                        <a href="index.php?option=COM_INSERT_SWAP_IN_OUT&TYPE=<?php echo $_GET['TYPE']; ?>&yearmonth=<?php echo $_GET['yearmonth']; ?>" type="submit" class="btn btn-primary waves-effect waves-light  submitattendancess"   data-container="body" data-toggle="tooltip" data-placement="bottom" title=""><i class="ti-cloud-up"></i> Re-Import</a>
+                        <a href="index.php?option=COM_INSERT_SWAP_IN_OUT&TYPE=<?php echo $_GET['TYPE']; ?>&yearmonth=<?php echo $_GET['yearmonth']; ?>" type="submit" class="btn btn-primary waves-effect waves-light  submitattendancess"   data-container="body" data-toggle="tooltip" data-placement="bottom" title=""><i class="ti-cloud-up"></i> <?php echo __('Re-Import'); ?></a>
                     </div>
                     <div class="text-right col-lg-3">
                         <div class="d-inline-block m-l-10">
                             <button type="button" class="btn waves-effect waves-light btn-danger p-2"></button>
-                            <span>Applied Leaves are More Than Available Leaves</span>
+                            <span><?php echo __('Applied Leaves are More Than Available Leaves'); ?></span>
                         </div>
                         <div class="d-inline-block m-l-10">
                             <button type="button" class="btn waves-effect waves-light btn-danger p-2"></button>
-                            <span>Off Days Are More Than Available Sundays In the Month</span>
+                            <span><?php echo __('Off Days Are More Than Available Sundays In the Month'); ?></span>
                         </div>
                         <div class="d-inline-block m-l-10">
                             <button type="button" class="btn waves-effect waves-light btn-warning p-2"></button>
-                            <span>Off Days Are More Than Available Sundays In the Month</span>
+                            <span><?php echo __('Off Days Are More Than Available Sundays In the Month'); ?></span>
                         </div>
                     </div>
                     <div class="col-lg-4">
                          <div class="input-group input-group-button mb-0">
-                            <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                            <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="<?php echo __('Search'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Search'); ?>" aria-label="<?php echo __('Search'); ?>">
                             <span class="input-group-text addon-style">
                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                             </span>
@@ -156,15 +156,15 @@ $employee_terminations = $responss['employee_terminations'];
                         <thead>
                             <tr>
                                 <th scope="col" rowspan="2">#</th>
-                                <th scope="col" rowspan="2" class="align-middle">Employee</th>
-                                <th scope="col" class="text-right align-middle" rowspan="2">Off Days</th>
-                                <th scope="col" class="text-right align-middle" rowspan="2">Half Day Present</th>
-                                <th scope="col" class="text-right align-middle" rowspan="2">Half Day Absent</th>
-                                <th scope="col" class="text-center" colspan="<?php echo count((array)$leave_categories); ?>">Available Leaves/Leaves</th>
-                                <th scope="col" class="text-right align-middle" rowspan="2">Absents</th>
-                                <th scope="col" class="text-right align-middle" rowspan="2">Pressents</th>
-                                <th scope="col" rowspan="2" class="align-middle">Error</th>
-                                <th scope="col" class="text-right align-middle" rowspan="2">Total Day</th>
+                                <th scope="col" rowspan="2" class="align-middle"><?php echo __('Employee'); ?></th>
+                                <th scope="col" class="text-right align-middle" rowspan="2"><?php echo __('Off Days'); ?></th>
+                                <th scope="col" class="text-right align-middle" rowspan="2"><?php echo __('Half Day Present'); ?></th>
+                                <th scope="col" class="text-right align-middle" rowspan="2"><?php echo __('Half Day Absent'); ?></th>
+                                <th scope="col" class="text-center" colspan="<?php echo count((array)$leave_categories); ?>"><?php echo __('Available Leaves/Leaves'); ?></th>
+                                <th scope="col" class="text-right align-middle" rowspan="2"><?php echo __('Absents'); ?></th>
+                                <th scope="col" class="text-right align-middle" rowspan="2"><?php echo __('Pressents'); ?></th>
+                                <th scope="col" rowspan="2" class="align-middle"><?php echo __('Error'); ?></th>
+                                <th scope="col" class="text-right align-middle" rowspan="2"><?php echo __('Total Day'); ?></th>
                             </tr>
                             <tr>
                                 <?php foreach($leave_categories as $lckey=>$lcategory){ ?>
@@ -179,7 +179,7 @@ $employee_terminations = $responss['employee_terminations'];
                                 $error = $errorl = "";
                                 if($isiod['offday_cnt'] >$isiod['sunday_cnt']){
                                     $noerror = 1;
-                                    $error .='<span class="form-label label label-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Maximum Off day Is '.$isiod['sunday_cnt'].'">O</span>';
+                                    $error .='<span class="form-label label label-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.htmlspecialchars(__('Maximum Off day Is'), ENT_QUOTES).' '.$isiod['sunday_cnt'].'">O</span>';
                                 }
 
                                 ///}
@@ -189,9 +189,9 @@ $employee_terminations = $responss['employee_terminations'];
                                 <td class="text-right p-2">
                                     <div class="align-middle float-left ml-2">
                                         <?php if($empdata['image']!=""){?>
-                                            <img src="uploads/all/<?php echo $empdata['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="Attachment Preview">
+                                            <img src="uploads/all/<?php echo $empdata['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="<?php echo __('Attachment Preview'); ?>">
                                           <?php }else{ ?>
-                                            <span  alt="user" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($empdata['display_name']); ?></span>
+                                            <span  alt="<?php echo __('user'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($empdata['display_name']); ?></span>
                                           <?php } ?>
                                           <div class="d-inline-block">
                                             <p class="f-10 mb-0 d-block text-start"><?php echo $empdata['emp_code']." - ".$empdata['display_name']; ?></p>
@@ -199,9 +199,9 @@ $employee_terminations = $responss['employee_terminations'];
                                           </div>
                                     </div>
                                     <?php if($employee_terminations[$empdata['id']] ==""){ ?>
-                                        <button class="btn btn-primary float-end btn-sm" onclick="TerminationEmployee('<?php echo $empdata['id']; ?>','<?php echo $empdata['display_name']; ?>','<?php echo $empdata['emp_code']; ?>','<?php echo $empdata['email_id']; ?>','<?php echo $empdata['joining_date']; ?>')">Termination</button>
+                                        <button class="btn btn-primary float-end btn-sm" onclick="TerminationEmployee('<?php echo $empdata['id']; ?>','<?php echo $empdata['display_name']; ?>','<?php echo $empdata['emp_code']; ?>','<?php echo $empdata['email_id']; ?>','<?php echo $empdata['joining_date']; ?>')"><?php echo __('Termination'); ?></button>
                                     <?php }else{  ?>
-                                        <span class="form-label label label-md label-danger float-end">Termination Date - <?php echo fromDate($employee_terminations[$empdata['id']]); ?></span>
+                                        <span class="form-label label label-md label-danger float-end"><?php echo __('Termination Date -'); ?> <?php echo fromDate($employee_terminations[$empdata['id']]); ?></span>
                                     <?php } ?>
                                 </td>
                                 <td class="text-right p-2"><?php echo $isiod['offday_cnt']; ?></td>
@@ -223,7 +223,7 @@ $employee_terminations = $responss['employee_terminations'];
                                         $applicatleave = $applicatleave!=""?$applicatleave:0;
                                         if($applicatleave <$leavecnt){
                                             $noerror = 1;
-                                            $errorl ='<span class="form-label label label-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.$lcategory['name'].'">'.$lcategory['key_short_code'].'</span>';
+                                            $errorl ='<span class="form-label label label-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.htmlspecialchars(__($lcategory['name']), ENT_QUOTES).'">'.$lcategory['key_short_code'].'</span>';
                                         }
 
                                         ?>
@@ -252,7 +252,7 @@ $employee_terminations = $responss['employee_terminations'];
                         <input type="hidden" class="form-control" name="import_type"  value="<?php echo $_GET['TYPE']; ?>">
                         <input type="hidden" class="form-control" name="month_year"  value="<?php echo $_GET['yearmonth']; ?>">
                         <input type="hidden" class="form-control" name="rid"  value="<?php echo $rid; ?>">
-                        <button class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 <?php echo $noerror == '1'?"disabled":""; ?>" name="submit_import" value="exit"><i class="la la-check"></i> Submit</button>
+                        <button class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 <?php echo $noerror == '1'?"disabled":""; ?>" name="submit_import" value="exit"><i class="la la-check"></i> <?php echo __('Submit'); ?></button>
                         <?php if($noerror == '1'){ ?>
                             <p class="text-danger"><?php echo $_SESSION['error_message']['9090']; ?></p>
                         <?php } ?>
@@ -266,20 +266,20 @@ $employee_terminations = $responss['employee_terminations'];
                 <div class="card-body card-infisuite">
                     <div class="row">
                         <div class="form-group col-lg-4">
-                            <span class="form-label">Import</span>
-                            <input aria-label="Csv File" type="file" class="form-control" name="csv_file" id="csv_file" required="">
+                            <span class="form-label"><?php echo __('Import'); ?></span>
+                            <input aria-label="<?php echo __('Csv File'); ?>" type="file" class="form-control" name="csv_file" id="csv_file" required="">
                         </div>
                         <div class="form-group col-lg-2">
-                            <span class="form-label">Start Date</span>
-                            <input aria-label="Start Date" type="text" class="form-control datepicker" name="start_date" value="<?php echo fromDate($startmonthdate); ?>" required="">
+                            <span class="form-label"><?php echo __('Start Date'); ?></span>
+                            <input aria-label="<?php echo __('Start Date'); ?>" type="text" class="form-control datepicker" name="start_date" value="<?php echo fromDate($startmonthdate); ?>" required="">
                         </div>
                         <div class="form-group col-lg-2">
-                            <span class="form-label">End Date</span>
-                            <input aria-label="End Date" type="text" class="form-control datepicker" name="end_date" required="" value="<?php echo fromDate($endmonthdate); ?>">
+                            <span class="form-label"><?php echo __('End Date'); ?></span>
+                            <input aria-label="<?php echo __('End Date'); ?>" type="text" class="form-control datepicker" name="end_date" required="" value="<?php echo fromDate($endmonthdate); ?>">
                         </div>
                         <div class="form-group col-lg-4">
-                            <span class="form-label">Comment</span>
-                            <textarea aria-label="Comment" type="text" class="form-control" name="comment"></textarea>
+                            <span class="form-label"><?php echo __('Comment'); ?></span>
+                            <textarea aria-label="<?php echo __('Comment'); ?>" type="text" class="form-control" name="comment"></textarea>
                         </div>
                     </div>
                 </div>
@@ -289,7 +289,7 @@ $employee_terminations = $responss['employee_terminations'];
                             <input type="hidden" name="submit" value="Add">
                             <input type="hidden" class="form-control" name="import_type"  value="<?php echo $_GET['TYPE']; ?>">
                             <input type="hidden" class="form-control" name="month_year"  value="<?php echo $_GET['yearmonth']; ?>">
-                            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10" name="submit_value" value="exit"><i class="la la-check"></i>Import</button>
+                            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10" name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Import'); ?></button>
                         </div>
                     </div>
                 </div>

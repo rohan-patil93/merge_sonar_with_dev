@@ -89,12 +89,12 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
         <div class="card card-custom card-sticky" id="kt_page_sticky_card">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">&nbsp;<?php echo "Custome Invoice";  ?> </h3>
+                    <h3 class="card-label">&nbsp;<?php echo __('Custome Invoice');  ?> </h3>
                 </div>
                 <div class="card-toolbar">
                     <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                         <i class="ki ki-long-arrow-back icon-xs"></i>
-                        Back
+                        <?php echo __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -116,16 +116,16 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                     <div class="d-flex flex-column-fluid">
                                                         <div class="container">
                                                             <div class="form-group row" >
-                                                                <span class="col-form-label text-right col-lg-3 col-sm-12">Tables</span>
+                                                                <span class="col-form-label text-right col-lg-3 col-sm-12"><?php echo __('Tables'); ?></span>
                                                                 <div class="col-lg-9 col-md-9 col-sm-12" >
                                                                     <?php if($row['application_table_name']!=""){ ?>
 
-                                                                        <select aria-label="Optiontablename" class="form-control select2-hidden-accessible table_names_select" name="optiontablename" id="kt_select2_1" >
+                                                                        <select aria-label="<?php echo __('Optiontablename'); ?>" class="form-control select2-hidden-accessible table_names_select" name="optiontablename" id="kt_select2_1" >
                                                                             <option value="<?php echo $row['application_table_name']; ?>" ><?php echo $row['application_table_name']; ?></option>
                                                                         </select>
                                                                     <?php }else{ ?>
-                                                                        <select aria-label="Optiontablename" class="form-control select2-hidden-accessible table_names_select" name="optiontablename" id="kt_select2_1_2" readonly>
-                                                                            <option value="" data-select2-id="0">Select table name</option>
+                                                                        <select aria-label="<?php echo __('Optiontablename'); ?>" class="form-control select2-hidden-accessible table_names_select" name="optiontablename" id="kt_select2_1_2" readonly>
+                                                                            <option value="" data-select2-id="0"><?php echo __('Select table name'); ?></option>
                                                                             <?php  $tablesList = getListTables(); foreach($tablesList as $result){ ?>
                                                                                 <option value="<?php echo $result['Tables_in_letsasso_infistaq_1']; ?>" <?php echo $row['application_table_name']==$result['Tables_in_letsasso_infistaq_1']?"selected":""; ?> ><?php echo $result['Tables_in_letsasso_infistaq_1']; ?></option>
                                                                             <?php } ?>
@@ -143,7 +143,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
 
                                                         <div class="card">
                                                             <div class="card-header" id="headingOne3">
-                                                                <div class="card-title" data-toggle="collapse" data-target="#collapseOne3">Header</div>
+                                                                <div class="card-title" data-toggle="collapse" data-target="#collapseOne3"><?php echo __('Header'); ?></div>
                                                             </div>
                                                             <div id="collapseOne3" class="collapse show" data-parent="#accordionExample3">
                                                                 <div class="card-body">
@@ -151,7 +151,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                                         <div class="card">
                                                                             <div class="card-header" id="headingOne5">
                                                                                 <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseOne5">
-                                                                                    Heading
+                                                                                    <?php echo __('Heading'); ?>
                                                                                 </div>
                                                                             </div>
                                                                             <div id="collapseOne5" class="collapse" data-parent="#accordionExample5">
@@ -160,17 +160,17 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                                                         <div class="tab-content mt-5" id="myTabContent4">
                                                                                             <div class="tab-pane fade show active btn-sm" id="content-1" role="tabpanel" aria-labelledby="content_1">
                                                                                                 <div class="row mt-2">
-                                                                                                    <span  class="col-5 col-form-label">Display</span>
+                                                                                                    <span  class="col-5 col-form-label"><?php echo __('Display'); ?></span>
                                                                                                     <div class="col-7">
                                                                                                         <span class="switch switch-icon">
                                                                                                             <label>
-                                                                                                                <input aria-label="Checkbox" type="checkbox"  <?php echo ($header['heddingdislay']=='1')?"":"checked"; ?> name="heddingdislay[<?php echo $q; ?>]"  class="heddingdislay" data-id="<?php echo $q; ?>" ><span></span>
+                                                                                                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  <?php echo ($header['heddingdislay']=='1')?"":"checked"; ?> name="heddingdislay[<?php echo $q; ?>]"  class="heddingdislay" data-id="<?php echo $q; ?>" ><span></span>
                                                                                                             </label>
                                                                                                         </span>
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class=" row mt-2">
-                                                                                                    <span  class="col-5 col-form-label">Position</span>
+                                                                                                    <span  class="col-5 col-form-label"><?php echo __('Position'); ?></span>
                                                                                                     <input type="hidden" name="heddingposition" id="heddingposition" value="<?php echo $header['heddingposition'];?>">
                                                                                                     <div class="col-7">
                                                                                                         <button  value="text-left" type="button" class="btn header_position_hedding btn-outline-secondary <?php echo activeClass("text-left",$header['heddingposition']); ?>">
@@ -185,9 +185,9 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="row mt-2">
-                                                                                                    <span  class="col-5 col-form-label">Order Position</span>
+                                                                                                    <span  class="col-5 col-form-label"><?php echo __('Order Position'); ?></span>
                                                                                                     <div class="col-7">
-                                                                                                        <input aria-label="Input field" type="text" value="<?php echo isset($header['orderhedding'])?$header['orderhedding']:"1";?>" name="orderhedding"  class="header_order_position form-control">
+                                                                                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" value="<?php echo isset($header['orderhedding'])?$header['orderhedding']:"1";?>" name="orderhedding"  class="header_order_position form-control">
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -199,7 +199,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                                         <div class="card">
                                                                             <div class="card-header" id="headingOne5_2">
                                                                                 <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseOne6">
-                                                                                    Logo
+                                                                                    <?php echo __('Logo'); ?>
                                                                                 </div>
                                                                             </div>
                                                                             <div id="collapseOne6" class="collapse" data-parent="#accordionExample5">
@@ -208,17 +208,17 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                                                         <div class="tab-content mt-5" id="myTabContent4_2">
                                                                                             <div class="tab-pane fade show active btn-sm" id="content-1_2" role="tabpanel" aria-labelledby="content_1">
                                                                                                 <div class="row mt-2">
-                                                                                                    <span  class="col-5 col-form-label">Display</span>
+                                                                                                    <span  class="col-5 col-form-label"><?php echo __('Display'); ?></span>
                                                                                                     <div class="col-7">
                                                                                                         <span class="switch switch-icon">
                                                                                                             <label>
-                                                                                                                <input aria-label="Checkbox" type="checkbox"  <?php echo ($header['logodislay']=='1')?"":"checked"; ?> name="logodislay[<?php echo $q; ?>]"  class="logodislay" data-id="<?php echo $q; ?>" ><span></span>
+                                                                                                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  <?php echo ($header['logodislay']=='1')?"":"checked"; ?> name="logodislay[<?php echo $q; ?>]"  class="logodislay" data-id="<?php echo $q; ?>" ><span></span>
                                                                                                             </label>
                                                                                                         </span>
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class=" row mt-2">
-                                                                                                    <span  class="col-5 col-form-label">Position</span>
+                                                                                                    <span  class="col-5 col-form-label"><?php echo __('Position'); ?></span>
                                                                                                     <input type="hidden" name="logoposition" id="logoposition" value="<?php  echo isset($header['logoposition'])?$header['orderlogo']:"text-right";?>">
                                                                                                     <div class="col-7">
                                                                                                         <button  value="text-left" type="button" class="btn header_position_logo btn-outline-secondary <?php echo activeClass("text-left",$header['logoposition']); ?>">
@@ -233,9 +233,9 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="row mt-2">
-                                                                                                    <span  class="col-5 col-form-label">Order Position</span>
+                                                                                                    <span  class="col-5 col-form-label"><?php echo __('Order Position'); ?></span>
                                                                                                     <div class="col-7">
-                                                                                                        <input aria-label="Input field" type="text" value="<?php  echo isset($header['orderlogo'])?$header['orderlogo']:"3";?>"  name="orderlogo" class="header_order_logo form-control">
+                                                                                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" value="<?php  echo isset($header['orderlogo'])?$header['orderlogo']:"3";?>"  name="orderlogo" class="header_order_logo form-control">
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -247,7 +247,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                                         <div class="card">
                                                                             <div class="card-header" id="headingOne7">
                                                                                 <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseOne7">
-                                                                                    Address
+                                                                                    <?php echo __('Address'); ?>
                                                                                 </div>
                                                                             </div>
                                                                             <div id="collapseOne7" class="collapse" data-parent="#accordionExample5">
@@ -256,18 +256,18 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                                                         <div class="tab-content mt-5" id="myTabContent4_3">
                                                                                             <div class="tab-pane fade show active btn-sm" id="content-1_3" role="tabpanel" aria-labelledby="content_1">
                                                                                                 <div class="row mt-2">
-                                                                                                    <span  class="col-5 col-form-label">Display</span>
+                                                                                                    <span  class="col-5 col-form-label"><?php echo __('Display'); ?></span>
                                                                                                     <div class="col-7">
                                                                                                         <span class="switch switch-icon">
                                                                                                             <label>
-                                                                                                                <input aria-label="Checkbox" type="checkbox"  <?php echo ($header['addressdislay']=='1')?"":"checked"; ?> name="addressdislay[<?php echo $q; ?>]"  class="addressdislay" data-id="<?php echo $q; ?>" ><span></span>
+                                                                                                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  <?php echo ($header['addressdislay']=='1')?"":"checked"; ?> name="addressdislay[<?php echo $q; ?>]"  class="addressdislay" data-id="<?php echo $q; ?>" ><span></span>
                                                                                                             </label>
                                                                                                         </span>
                                                                                                     </div>
                                                                                                 </div>
 
                                                                                                 <div class=" row mt-2">
-                                                                                                    <span  class="col-5 col-form-label">Position</span>
+                                                                                                    <span  class="col-5 col-form-label"><?php echo __('Position'); ?></span>
                                                                                                     <input type="hidden" name="addressposition" id="addressposition" value="<?php  echo isset($header['addressposition'])?$header['addressposition']:"";?>">
 
                                                                                                     <div class="col-7">
@@ -283,9 +283,9 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="row mt-2">
-                                                                                                    <span  class="col-5 col-form-label">Order Position</span>
+                                                                                                    <span  class="col-5 col-form-label"><?php echo __('Order Position'); ?></span>
                                                                                                     <div class="col-7">
-                                                                                                        <input aria-label="Input field" type="text" value="<?php  echo isset($header['addresorder'])?$header['addresorder']:"6";?>" name="addresorder" class="header_order_address form-control">
+                                                                                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" value="<?php  echo isset($header['addresorder'])?$header['addresorder']:"6";?>" name="addresorder" class="header_order_address form-control">
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -304,7 +304,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                         <!--------------------- start body part =------------------------->
                                                         <div class="card">
                                                             <div class="card-header" id="headingOne4">
-                                                                <div class="card-title" data-toggle="collapse" data-target="#collapseOne4">Body</div>
+                                                                <div class="card-title" data-toggle="collapse" data-target="#collapseOne4"><?php echo __('Body'); ?></div>
                                                             </div>
                                                             <div id="collapseOne4" class="collapse" data-parent="#accordionExample3">
                                                                 <div class="card-body">
@@ -316,7 +316,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                                                 <div class="card">
                                                                                     <div class="card-header" id="headingOnee<?php echo $q; ?>">
                                                                                         <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseOnee<?php echo $q; ?>">
-                                                                                            Text Fields
+                                                                                            <?php echo __('Text Fields'); ?>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div id="collapseOnee<?php echo $q; ?>" class="collapse" data-parent="#accordionExample5">
@@ -325,15 +325,15 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                                                                 <div class="tab-content mt-5" id="myTabContent<?php echo $q; ?>">
                                                                                                     <div class="tab-pane fade show active btn-sm" id="content-1_4" role="tabpanel" aria-labelledby="content_1">
                                                                                                         <div class="row mt-2">
-                                                                                                            <span  class="col-5 col-form-label">Label</span>
+                                                                                                            <span  class="col-5 col-form-label"><?php echo __('Label'); ?></span>
                                                                                                             <div class="col-7">
-                                                                                                                <input aria-label="Input field" class="form-control textfiledslabel"  data-id="<?php echo $q; ?>" name="label[]" name="textfiledslabel[]" type="text" value="<?php echo $content1['label']; ?>" >
+                                                                                                                <input aria-label="<?php echo __('Input field'); ?>" class="form-control textfiledslabel"  data-id="<?php echo $q; ?>" name="label[]" name="textfiledslabel[]" type="text" value="<?php echo $content1['label']; ?>" >
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="row mt-2">
-                                                                                                            <span  class="col-5 col-form-label">Field</span>
+                                                                                                            <span  class="col-5 col-form-label"><?php echo __('Field'); ?></span>
                                                                                                             <div class="col-7">
-                                                                                                                <select aria-label="Textfileds[]" class="form-control" name="textfileds[]">
+                                                                                                                <select aria-label="<?php echo __('Textfileds[]'); ?>" class="form-control" name="textfileds[]">
                                                                                                                     <?php
                                                                                                                     $tableattributes= getListAttributes($row['application_table_name']);
                                                                                                                     foreach($tableattributes as $result){ ?>
@@ -344,19 +344,19 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="row mt-2">
-                                                                                                            <span  class="col-5 col-form-label">Column Width</span>
+                                                                                                            <span  class="col-5 col-form-label"><?php echo __('Column Width'); ?></span>
                                                                                                             <div class="col-7">
-                                                                                                                <select aria-label="Select option" class="form-control textfiledswidth textfiledswidth<?php echo $q; ?>" data-id="<?php echo $q; ?>" name="textfiledswidth[]">
+                                                                                                                <select aria-label="<?php echo __('Select option'); ?>" class="form-control textfiledswidth textfiledswidth<?php echo $q; ?>" data-id="<?php echo $q; ?>" name="textfiledswidth[]">
                                                                                                                     <?php echo optiontype($content1['textfiledswidth'],$widtharray); ?>
                                                                                                                 </select>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="row mt-2">
-                                                                                                            <span  class="col-5 col-form-label">Single Line</span>
+                                                                                                            <span  class="col-5 col-form-label"><?php echo __('Single Line'); ?></span>
                                                                                                             <div class="col-7">
                                                                                                                 <span class="switch switch-icon">
                                                                                                                     <label>
-                                                                                                                        <input aria-label="Checkbox" type="checkbox" <?php echo ($content1['textfiledinline']=='0')?"checked":""; ?> name="textfiledinline[<?php echo $q; ?>]"  class="textfiledinline" data-id="<?php echo $q; ?>" ><span></span>
+                                                                                                                        <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php echo ($content1['textfiledinline']=='0')?"checked":""; ?> name="textfiledinline[<?php echo $q; ?>]"  class="textfiledinline" data-id="<?php echo $q; ?>" ><span></span>
                                                                                                                     </label>
                                                                                                                 </span>
                                                                                                             </div>
@@ -367,7 +367,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
 } ?>
 
                                                                                                 </div>
-                                                                                                <button type="button" class="btn btn-primary font-weight-bold add_new_textfields"">Add New</button>
+                                                                                                <button type="button" class="btn btn-primary font-weight-bold add_new_textfields""><?php echo __('Add New'); ?></button>
                                                                                                 <input type="hidden" id="maxcolumns" value="<?php echo $q; ?>">
                                                                                             </div>
                                                                                         </div>
@@ -379,7 +379,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
 
                                                                                 <div class="card">
                                                                                     <div class="card-header" id="headingOnetable">
-                                                                                        <div class="card-title" data-toggle="collapse" data-target="#collapseOnetable">Table</div>
+                                                                                        <div class="card-title" data-toggle="collapse" data-target="#collapseOnetable"><?php echo __('Table'); ?></div>
                                                                                     </div>
                                                                                     <div id="collapseOnetable" class="collapse" data-parent="#accordionExample3">
                                                                                         <div class="card-body">
@@ -402,15 +402,15 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                             <div class="tab-content mt-5" id="myTabContent71">
                                 <div class="tab-pane fade show active btn-sm" id="content-1_5" role="tabpanel" aria-labelledby="content_1">
                                     <div class="row mt-2">
-                                        <span  class="col-5 col-form-label">Display</span>
+                                        <span  class="col-5 col-form-label"><?php echo __('Display'); ?></span>
                                         <div class="col-7 d-flex">
                                             <span class="switch switch-icon"><label>
-                                                <input aria-label="Checkbox" type="checkbox" class="tablefiledsstatus" name="tablefileddisplay[<?php echo $c; ?>]"  data-value="tablefileds<?php echo $c; ?>"  <?php echo $content2[$key]['tablefileddisplay']=='1'?"":"checked"; ?>   ><span></span>
+                                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" class="tablefiledsstatus" name="tablefileddisplay[<?php echo $c; ?>]"  data-value="tablefileds<?php echo $c; ?>"  <?php echo $content2[$key]['tablefileddisplay']=='1'?"":"checked"; ?>   ><span></span>
                                             </label></span>
                                         </div>
                                     </div>
                                     <div class=" row mt-2">
-                                        <span  class="col-5 col-form-label">Positon</span>
+                                        <span  class="col-5 col-form-label"><?php echo __('Positon'); ?></span>
                                         <input type="hidden" name="tablevalueposition[]"  id="tablevalueposition<?php echo $c; ?>" value="<?php echo $content2[$key]['tablevalueposition']; ?>">
                                         <div class="col-7">
                                             <button  value="text-left" type="button" class="btn btn-outline-secondary tablevalueposition <?php echo activeClass("text-left",$content2[$key]['tablevalueposition']); ?>" data-id="<?php echo $c; ?>">
@@ -425,15 +425,15 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                         </div>
                                     </div>
                                     <div class=" row mt-2">
-                                        <span  class="col-5 col-form-label">Width</span>
+                                        <span  class="col-5 col-form-label"><?php echo __('Width'); ?></span>
                                         <div class="col-7">
                                             <input aria-label="10" type="text" placeholder="10" class="form-control tablefieldwidth" name="tablefieldwidth[]"  data-id="<?php echo $c; ?>" value="<?php echo $content2[$key]['tablefieldwidth']!=""?$content2[$key]['tablefieldwidth']:""; ?>" >
                                         </div>
                                     </div>
                                     <div class=" row mt-2">
-                                        <span  class="col-5 col-form-label">Priority</span>
+                                        <span  class="col-5 col-form-label"><?php echo __('Priority'); ?></span>
                                         <div class="col-7">
-                                            <input aria-label="Tablefieldsorder[]" type="text" class="form-control" name="tablefieldsorder[]"  value="<?php echo (isset($content2[$key]['tablefieldsorder']) && $content2[$key]['tablefieldsorder']=="")?$content2[$key]['tablefieldsorder']:$c; ?>" >
+                                            <input aria-label="<?php echo __('Tablefieldsorder[]'); ?>" type="text" class="form-control" name="tablefieldsorder[]"  value="<?php echo (isset($content2[$key]['tablefieldsorder']) && $content2[$key]['tablefieldsorder']=="")?$content2[$key]['tablefieldsorder']:$c; ?>" >
                                         </div>
                                     </div>
 
@@ -452,7 +452,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
 
             <div class="card tableb_displaycss">
                 <div class="card-header" id="headingOne444">
-                    <div class="card-title" data-toggle="collapse" data-target="#collapseOne444">Footer</div>
+                    <div class="card-title" data-toggle="collapse" data-target="#collapseOne444"><?php echo __('Footer'); ?></div>
                 </div>
                 <div id="collapseOne444" class="collapse" data-parent="#accordionExample3">
                     <div class="card-body">
@@ -460,7 +460,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                             <div class="card">
                                 <div class="card-header" id="headingOne444_2">
                                     <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseOnesubtotal">
-                                        Sub Total
+                                        <?php echo __('Sub Total'); ?>
                                     </div>
                                 </div>
                                 <div id="collapseOnesubtotal" class="collapse" data-parent="#accordionExample5">
@@ -469,16 +469,16 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                             <div class="tab-content mt-5" id="myTabContent4_4">
                                                 <div class="tab-pane fade show active btn-sm" id="content-1_6" role="tabpanel" aria-labelledby="content_1">
                                                     <div class="row mt-2">
-                                                        <span  class="col-5 col-form-label">Label</span>
+                                                        <span  class="col-5 col-form-label"><?php echo __('Label'); ?></span>
                                                         <div class="col-7">
-                                                            <input aria-label="Subtotaltext" class="form-control subtotaltext" name="subtotaltext" type="text" value="<?php echo isset($footer['subtotaltext'])?$footer['subtotaltext']:"SUBTOTAL"; ?>" >
+                                                            <input aria-label="<?php echo __('Subtotaltext'); ?>" class="form-control subtotaltext" name="subtotaltext" type="text" value="<?php echo isset($footer['subtotaltext'])?$footer['subtotaltext']:"SUBTOTAL"; ?>" >
                                                         </div>
                                                     </div>
                                                     <div class="row mt-2">
-                                                        <span  class="col-5 col-form-label">Display</span>
+                                                        <span  class="col-5 col-form-label"><?php echo __('Display'); ?></span>
                                                         <div class="col-7 d-flex">
                                                             <span class="switch switch-icon"><label>
-                                                                <input aria-label="Subtotaltextcheck" type="checkbox" class="subtotaltextcheck"  name="subtotaltextcheck" <?php echo $footer['subtotaltextcheck']==1?"":"checked"; ?>  ><span></span>
+                                                                <input aria-label="<?php echo __('Subtotaltextcheck'); ?>" type="checkbox" class="subtotaltextcheck"  name="subtotaltextcheck" <?php echo $footer['subtotaltextcheck']==1?"":"checked"; ?>  ><span></span>
                                                             </label></span>
                                                         </div>
                                                     </div>
@@ -491,7 +491,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                             <div class="card">
                                 <div class="card-header" id="headingOne444_3">
                                     <div class="card-title collapsed" data-toggle="collapse" data-target="#Discountacord">
-                                        Discount
+                                        <?php echo __('Discount'); ?>
                                     </div>
                                 </div>
                                 <div id="Discountacord" class="collapse" data-parent="#accordionExample5">
@@ -500,16 +500,16 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                             <div class="tab-content mt-5" id="myTabContent4_5">
                                                 <div class="tab-pane fade show active btn-sm" id="content-1_7" role="tabpanel" aria-labelledby="content_1">
                                                     <div class="row mt-2">
-                                                        <span  class="col-5 col-form-label">Label</span>
+                                                        <span  class="col-5 col-form-label"><?php echo __('Label'); ?></span>
                                                         <div class="col-7">
-                                                            <input aria-label="Discounttext" class="form-control discounttext" name="discounttext" type="text" value="<?php echo isset($footer['discounttext'])?$footer['discounttext']:"DISCOUNT"; ?>" >
+                                                            <input aria-label="<?php echo __('Discounttext'); ?>" class="form-control discounttext" name="discounttext" type="text" value="<?php echo isset($footer['discounttext'])?$footer['discounttext']:"DISCOUNT"; ?>" >
                                                         </div>
                                                     </div>
                                                     <div class="row mt-2">
-                                                        <span  class="col-5 col-form-label">Display</span>
+                                                        <span  class="col-5 col-form-label"><?php echo __('Display'); ?></span>
                                                         <div class="col-7 d-flex">
                                                             <span class="switch switch-icon"><label>
-                                                                <input aria-label="Discounttextcheck" type="checkbox" class="discounttextcheck" name="discounttextcheck" <?php echo $footer['discounttextcheck']==1?"":"checked"; ?>  ><span></span>
+                                                                <input aria-label="<?php echo __('Discounttextcheck'); ?>" type="checkbox" class="discounttextcheck" name="discounttextcheck" <?php echo $footer['discounttextcheck']==1?"":"checked"; ?>  ><span></span>
                                                             </label></span>
                                                         </div>
                                                     </div>
@@ -522,7 +522,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                             <div class="card">
                                 <div class="card-header" id="headingOne444_4">
                                     <div class="card-title collapsed" data-toggle="collapse" data-target="#GSTaccording">
-                                        Tax
+                                        <?php echo __('Tax'); ?>
                                     </div>
                                 </div>
                                 <div id="GSTaccording" class="collapse" data-parent="#accordionExample5">
@@ -532,16 +532,16 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                 <div class="tab-pane fade show active btn-sm" id="content-1_8" role="tabpanel" aria-labelledby="content_1">
 
                                                     <div class="row mt-2">
-                                                        <span  class="col-5 col-form-label">Label</span>
+                                                        <span  class="col-5 col-form-label"><?php echo __('Label'); ?></span>
                                                         <div class="col-7">
-                                                            <input aria-label="Taxtext" class="form-control taxtext"  type="text" name="taxtext" value="<?php echo isset($footer['taxtext'])?$footer['taxtext']:"TAX"; ?>" >
+                                                            <input aria-label="<?php echo __('Taxtext'); ?>" class="form-control taxtext"  type="text" name="taxtext" value="<?php echo isset($footer['taxtext'])?$footer['taxtext']:"TAX"; ?>" >
                                                         </div>
                                                     </div>
                                                     <div class="row mt-2">
-                                                        <span  class="col-5 col-form-label">Display</span>
+                                                        <span  class="col-5 col-form-label"><?php echo __('Display'); ?></span>
                                                         <div class="col-7 d-flex">
                                                             <span class="switch switch-icon"><label>
-                                                                <input aria-label="Taxtextcheck" type="checkbox" class="taxtextcheck" name="taxtextcheck" <?php echo $footer['taxtextcheck']==1?"":"checked"; ?>  ><span></span>
+                                                                <input aria-label="<?php echo __('Taxtextcheck'); ?>" type="checkbox" class="taxtextcheck" name="taxtextcheck" <?php echo $footer['taxtextcheck']==1?"":"checked"; ?>  ><span></span>
                                                             </label></span>
                                                         </div>
                                                     </div>
@@ -555,7 +555,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                             <div class="card">
                                 <div class="card-header" id="headingOne444_5">
                                     <div class="card-title collapsed" data-toggle="collapse" data-target="#shipingaccording">
-                                        Shiping
+                                        <?php echo __('Shiping'); ?>
                                     </div>
                                 </div>
                                 <div id="shipingaccording" class="collapse" data-parent="#accordionExample5">
@@ -564,16 +564,16 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                             <div class="tab-content mt-5" id="myTabContent4_7">
                                                 <div class="tab-pane fade show active btn-sm" id="content-1_9" role="tabpanel" aria-labelledby="content_1">
                                                     <div class="row mt-2">
-                                                        <span  class="col-5 col-form-label">Label</span>
+                                                        <span  class="col-5 col-form-label"><?php echo __('Label'); ?></span>
                                                         <div class="col-7">
-                                                            <input aria-label="Shipingtext" class="form-control shipingtext"  type="text" name="shipingtext" value="<?php echo isset($footer['shipingtext'])?$footer['shipingtext']:"SHIPPING/HANDLING"; ?>" >
+                                                            <input aria-label="<?php echo __('Shipingtext'); ?>" class="form-control shipingtext"  type="text" name="shipingtext" value="<?php echo isset($footer['shipingtext'])?$footer['shipingtext']:"SHIPPING/HANDLING"; ?>" >
                                                         </div>
                                                     </div>
                                                     <div class="row mt-2">
-                                                        <span  class="col-5 col-form-label">Display</span>
+                                                        <span  class="col-5 col-form-label"><?php echo __('Display'); ?></span>
                                                         <div class="col-7 d-flex">
                                                             <span class="switch switch-icon"><label>
-                                                                <input aria-label="Shipingtextcheck" type="checkbox" class="shipingtextcheck"  name="shipingtextcheck"
+                                                                <input aria-label="<?php echo __('Shipingtextcheck'); ?>" type="checkbox" class="shipingtextcheck"  name="shipingtextcheck"
                                                                 <?php echo $footer['shipingtextcheck']==1?"":"checked"; ?>  ><span></span>
                                                             </label></span>
                                                         </div>
@@ -587,7 +587,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                             <div class="card">
                                 <div class="card-header" id="headingOne444_6">
                                     <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseOnetotalamount">
-                                        Total Amount
+                                        <?php echo __('Total Amount'); ?>
                                     </div>
                                 </div>
                                 <div id="collapseOnetotalamount" class="collapse" data-parent="#accordionExample5">
@@ -596,9 +596,9 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                             <div class="tab-content mt-5" id="myTabContent4_8">
                                                 <div class="tab-pane fade show active btn-sm" id="content-1_10" role="tabpanel" aria-labelledby="content_1">
                                                     <div class="row mt-2">
-                                                        <span  class="col-5 col-form-label">Label</span>
+                                                        <span  class="col-5 col-form-label"><?php echo __('Label'); ?></span>
                                                         <div class="col-7">
-                                                            <input aria-label="Tablec" class="form-control tablec"  type="text" name="tablec" value="<?php echo isset($footer['tablec'])?$footer['tablec']:"TOTAL AMOUNT"; ?>" >
+                                                            <input aria-label="<?php echo __('Tablec'); ?>" class="form-control tablec"  type="text" name="tablec" value="<?php echo isset($footer['tablec'])?$footer['tablec']:"TOTAL AMOUNT"; ?>" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -613,7 +613,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
             </div>
             <div class="card">
                 <div class="card-header" id="headingOnebutton">
-                    <div class="card-title" data-toggle="collapse" data-target="#collapseOnebutton">Buttons</div>
+                    <div class="card-title" data-toggle="collapse" data-target="#collapseOnebutton"><?php echo __('Buttons'); ?></div>
                 </div>
                 <div id="collapseOnebutton" class="collapse" data-parent="#accordionExample3">
                     <div class="card-body">
@@ -621,7 +621,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                             <div class="card">
                                 <div class="card-header" id="headingOnebutton_2">
                                     <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseprint">
-                                        Print
+                                        <?php echo __('Print'); ?>
                                     </div>
                                 </div>
                                 <div id="collapseprint" class="collapse" data-parent="#accordionExample5">
@@ -630,10 +630,10 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                             <div class="tab-content mt-5" id="myTabContent4_9">
                                                 <div class="tab-pane fade show active btn-sm" id="content-1_11" role="tabpanel" aria-labelledby="content_1">
                                                     <div class="row mt-2">
-                                                        <span  class="col-5 col-form-label">Display</span>
+                                                        <span  class="col-5 col-form-label"><?php echo __('Display'); ?></span>
                                                         <div class="col-7 d-flex">
                                                             <span class="switch switch-icon"><label>
-                                                                <input aria-label="Printbuttonsdisplay" type="checkbox" class="printbuttonsdisplay" name="printbuttonsdisplay"  <?php echo $button['printbuttonsdisplay']==1?"":"checked"; ?>><span></span>
+                                                                <input aria-label="<?php echo __('Printbuttonsdisplay'); ?>" type="checkbox" class="printbuttonsdisplay" name="printbuttonsdisplay"  <?php echo $button['printbuttonsdisplay']==1?"":"checked"; ?>><span></span>
                                                             </label></span>
                                                         </div>
                                                     </div>
@@ -646,7 +646,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                             <div class="card">
                                 <div class="card-header" id="headingOnebutton_3">
                                     <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseOneprint">
-                                        Download
+                                        <?php echo __('Download'); ?>
                                     </div>
                                 </div>
                                 <div id="collapseOneprint" class="collapse" data-parent="#accordionExample5">
@@ -655,10 +655,10 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                             <div class="tab-content mt-5" id="myTabContent4_10">
                                                 <div class="tab-pane fade show active btn-sm" id="content-1_12" role="tabpanel" aria-labelledby="content_1">
                                                     <div class="row mt-2">
-                                                        <span  class="col-5 col-form-label">Display</span>
+                                                        <span  class="col-5 col-form-label"><?php echo __('Display'); ?></span>
                                                         <div class="col-7 d-flex">
                                                             <span class="switch switch-icon"><label>
-                                                                <input aria-label="Checkbox" type="checkbox" class="downloadbuttonsdisplay" <?php echo $button['downloadbuttonsdisplay']==1?"":"checked"; ?> name="downloadbuttonsdisplay"><span></span>
+                                                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" class="downloadbuttonsdisplay" <?php echo $button['downloadbuttonsdisplay']==1?"":"checked"; ?> name="downloadbuttonsdisplay"><span></span>
                                                             </label></span>
                                                         </div>
                                                     </div>
@@ -675,21 +675,21 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
 
             <div class="card">
                 <div class="card-header" id="headingOneinword">
-                    <div class="card-title" data-toggle="collapse" data-target="#collapseOneinword">In Word</div>
+                    <div class="card-title" data-toggle="collapse" data-target="#collapseOneinword"><?php echo __('In Word'); ?></div>
                 </div>
                 <div id="collapseOneinword" class="collapse" data-parent="#accordionExample3">
                     <div class="card-body">
                         <div class="accordion accordion-toggle-arrow elementor-design" id="accordionExample5_6">
                             <div class="row mt-2">
-                                <span  class="col-5 col-form-label">Display</span>
+                                <span  class="col-5 col-form-label"><?php echo __('Display'); ?></span>
                                 <div class="col-7 d-flex">
                                     <span class="switch switch-icon"><label>
-                                        <input aria-label="Checkbox" type="checkbox" class="inworddisplay" <?php echo $button['inworddisplay']==1?"":"checked"; ?> name="inworddisplay"><span></span>
+                                        <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" class="inworddisplay" <?php echo $button['inworddisplay']==1?"":"checked"; ?> name="inworddisplay"><span></span>
                                     </label></span>
                                 </div>
                             </div>
                             <div class=" row mt-2">
-                                <span  class="col-5 col-form-label">Positon</span>
+                                <span  class="col-5 col-form-label"><?php echo __('Positon'); ?></span>
                                 <input type="hidden" name="inwordposition" id="inwordposition" value="<?php echo $button['inwordposition']; ?>">
                                 <div class="col-7">
                                     <button  value="text-left" type="button" class="btn btn-outline-secondary inwordposition" >
@@ -712,7 +712,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
         <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0 <?php echo $row['application_table_name']==""?"ck-target":""; ?>  displaye">
             <div class="col-md-9">
                 <div class="d-flex justify-content-between">
-                    <button type="submit" name="save" value="save" class="btn btn-primary btn-sm font-weight-bold" > Save </button>
+                    <button type="submit" name="save" value="save" class="btn btn-primary btn-sm font-weight-bold" > <?php echo __('Save'); ?> </button>
                 </div>
             </div>
         </div>
@@ -760,7 +760,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                         $display =  $headers['logodislay']==1?"display:none":"";
                                         return '<div draggable="true" class="col-lg-4 box" data-id="'.$seq.'" >
                                         <div class="align-items-md-end px-0 '.$co.'" id="logo_div_id" data-order="header_order_logo" style="'.$display.'">
-                                        <img src="assets/media/logos/logo-dark.png"   alt="Logo" />
+                                        <img src="assets/media/logos/logo-dark.png"   alt="'.htmlspecialchars(__('Logo'), ENT_QUOTES).'" />
                                         </div>
                                         </div>';
                                     }else{
@@ -783,7 +783,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                     <?php $k=0; $contentS = json_decode($row['content1'],1); foreach($contentS as $resu){ ?>
                                         <div class="d-flex <?PHP echo $resu['textfiledinline']==1?"flex-column":"mb-3"; ?>   col-lg-<?php echo $resu['textfiledswidth']; ?>" id="textfiledid<?php echo $k; ?>">
                                             <span class="<?PHP echo $resu['textfiledinline']==1?"mb-2":"mr-15"; ?> font-weight-bolder" id="textfiledlabel<?php echo $k; ?>"><?php echo $resu['label']; ?>:</span>
-                                            <span  class="<?PHP echo $resu['textfiledinline']==1?"":"text-right "; ?>" id="textfiledvalue<?php echo $k; ?>">eg. details function</span>
+                                            <span  class="<?PHP echo $resu['textfiledinline']==1?"":"text-right "; ?>" id="textfiledvalue<?php echo $k; ?>"><?php echo __('eg. details function'); ?></span>
                                         </div>
                                         <?php $k++;
 } ?>
@@ -866,7 +866,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                         <div class="col-lg-12">
                                                             <div class=" mb-3 mt-2 <?php echo $button['inwordposition']!=""?$button['inwordposition']:""; ?>" id="positonwordamount" >
                                                                 <div>
-                                                                    <span class="text-right font-weight-bold font-weight-boldest text-danger mb-1">One hundred thirty Only</span>
+                                                                    <span class="text-right font-weight-bold font-weight-boldest text-danger mb-1"><?php echo __('One hundred thirty Only'); ?></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -874,9 +874,9 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                                     <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
                                                         <div class="col-md-9">
                                                             <div class="d-flex justify-content-between">
-                                                                <button type="button" class="btn btn-light-primary font-weight-bold download_btn" style="<?php echo (isset($button['downloadbuttonsdisplay']) &&  $button['downloadbuttonsdisplay']==1)?"display:none":""; ?>" onclick="window.print();"> <i class="icon-2x  flaticon-multimedia-4"></i>Download Invoice</button>
+                                                                <button type="button" class="btn btn-light-primary font-weight-bold download_btn" style="<?php echo (isset($button['downloadbuttonsdisplay']) &&  $button['downloadbuttonsdisplay']==1)?"display:none":""; ?>" onclick="window.print();"> <i class="icon-2x  flaticon-multimedia-4"></i><?php echo __('Download Invoice'); ?></button>
                                                                 <button type="button" class="btn btn-primary font-weight-bold print_btn"
-                                                                style="<?php echo (isset($button['printbuttonsdisplay']) && $button['printbuttonsdisplay']==1)?"display:none":""; ?>" onclick="window.print();"  ><i class="icon-2x flaticon-technology"></i> Print </button>
+                                                                style="<?php echo (isset($button['printbuttonsdisplay']) && $button['printbuttonsdisplay']==1)?"display:none":""; ?>" onclick="window.print();"  ><i class="icon-2x flaticon-technology"></i> <?php echo __('Print'); ?> </button>
                                                             </div>
                                                         </div>
                                                     </div>

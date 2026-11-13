@@ -258,13 +258,13 @@ function getDeliveryType(){
                                                 <div class="radio radio-inline">
                                   <label class="form-label">
                                     <input aria-label="Delivery Type" type="radio" name="delivery_type" value="S" style="display:none;" <?php echo ($asset_requests['delivery_type']=="S" || $asset_requests['delivery_type']=="")?"checked":"";?> onclick="getDeliveryType()" onkeydown="">
-                                    <i class="helper"></i>Self Pickup
+                                    <i class="helper"></i><?= __('Self Pickup') ?>
                                   </label>
                             </div>
                             <div class="radio radio-inline">
                                   <label class="form-label">
                                     <input aria-label="Delivery Type" type="radio" name="delivery_type" value="D" style="display:none" <?php echo $asset_requests['delivery_type']=="D"?"checked":"";?> onclick="getDeliveryType()" onkeydown="">
-                                    <i class="helper"></i>Deliver Through Logistics Partner
+                                    <i class="helper"></i><?= __('Deliver Through Logistics Partner') ?>
                                   </label>
                             </div>
                             </div>
@@ -289,7 +289,7 @@ function getDeliveryType(){
                     <div class="tab-pane card-body p-0" id="oldassetsrequesttransfer" role="tabpanel">
                         <div class="card card-custom card-sticky" id="kt_page_sticky_card_2">
                             <div class="card-header mb-3">
-                                <h5>Transfer Request</h5>
+                                <h5><?= __('Transfer Request') ?></h5>
                             </div>
                             <div class="card-body">
                                 <?php if(count((array)$asset_request_transfers) !="0"){
@@ -301,22 +301,22 @@ function getDeliveryType(){
                                             <div class="card-body">
                                                 <table>
                                                     <tr>
-                                                        <th scope="col">Asset</th><td>&nbsp:&nbsp</td><td><?php echo $all_assets[$art['asset_id']]; ?></td>
+                                                        <th scope="col"><?= __('Asset') ?></th><td>&nbsp:&nbsp</td><td><?php echo $all_assets[$art['asset_id']]; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th scope="col" style="width: 30%;">Transfer Date</th><td>&nbsp:&nbsp</td><td style="width: 70%;"><?php echo $art['asset_transfer_date']; ?></td>
+                                                        <th scope="col" style="width: 30%;"><?= __('Transfer Date') ?></th><td>&nbsp:&nbsp</td><td style="width: 70%;"><?php echo $art['asset_transfer_date']; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th scope="col">Start Date</th><td>&nbsp:&nbsp</td><td><?php echo $art['start_date']; ?></td>
+                                                        <th scope="col"><?= __('Start Date') ?></th><td>&nbsp:&nbsp</td><td><?php echo $art['start_date']; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th scope="col">End Date</th><td>&nbsp:&nbsp</td><td><?php echo $art['end_date']; ?></td>
+                                                        <th scope="col"><?= __('End Date') ?></th><td>&nbsp:&nbsp</td><td><?php echo $art['end_date']; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th scope="col">Accept/Reject Date</th><td>&nbsp:&nbsp</td><td><?php echo $art['asset_accept_or_reject_date']; ?></td>
+                                                        <th scope="col"><?= __('Accept/Reject Date') ?></th><td>&nbsp:&nbsp</td><td><?php echo $art['asset_accept_or_reject_date']; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th scope="col">Status</th><td>&nbsp:&nbsp</td>
+                                                        <th scope="col"><?= __('Status') ?></th><td>&nbsp:&nbsp</td>
                                                         <td>
                                                             <span class="form-label label label-md" style="color:<?php echo $statuse[$art['current_status']]['color']; ?>; background-color:<?php echo $statuse[$art['current_status']]['background_color']; ?>;"><?php echo $statuse[$art['current_status']]['name']; ?></span>
                                                         </td>
@@ -343,7 +343,7 @@ function getDeliveryType(){
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
 </div>
 <script type="text/javascript">
     $(".js-example-basic-single").select2();

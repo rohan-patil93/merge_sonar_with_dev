@@ -22,7 +22,7 @@ $user = $_SESSION['user'];
 $company = $_SESSION['company'];
 ?>
 <div class="modal-header">
-    <h5 class="modal-title"><?= $ticketId ? "Edit Ticket" : "Add Ticket"; ?></h5>
+    <h5 class="modal-title"><?= $ticketId ? __("Edit Ticket") : __("Add Ticket"); ?></h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 </div>
 <div class="modal-body">
@@ -36,38 +36,38 @@ $company = $_SESSION['company'];
         <input type="hidden" name="company_data" value='<?= htmlspecialchars(json_encode($company, JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_HEX_TAG)); ?>'>
         <div class="row">
             <div class="col-lg-6 mb-2">
-                <span class="form-label">Ticket No.</span>
-                <input aria-label="Ticket" type="text" class="form-control" name="ticket_id"
+                <span class="form-label"><?php echo __('Ticket No.'); ?></span>
+                <input aria-label="<?php echo __('Ticket'); ?>" type="text" class="form-control" name="ticket_id"
                     value="<?= htmlspecialchars($ticketData['ticket_id'] ??""); ?>"
                     readonly>
             </div>
             <div class="col-lg-6 mb-2">
-                <span class="form-label">Subject</span>
-                <input aria-label="Task Name" type="text" class="form-control" name="task_name"
+                <span class="form-label"><?php echo __('Subject'); ?></span>
+                <input aria-label="<?php echo __('Task Name'); ?>" type="text" class="form-control" name="task_name"
                     value="<?= htmlspecialchars($ticketData['task_name'] ?? ''); ?>" required>
             </div>
             <div class="col-lg-6 mb-2 w-full">
-                <span class="form-label d-block">Priority</span>
-                <select aria-label="Priority" class="form-select js-example-basic-single" name="priority">
-                    <option value="1" <?= ($ticketData['priority'] ?? '') == '1' ? "selected" : ""; ?>>Low</option>
-                    <option value="2" <?= ($ticketData['priority'] ?? '') == '2' ? "selected" : ""; ?>>Medium</option>
-                    <option value="3" <?= ($ticketData['priority'] ?? '') == '3' ? "selected" : ""; ?>>High</option>
+                <span class="form-label d-block"><?php echo __('Priority'); ?></span>
+                <select aria-label="<?php echo __('Priority'); ?>" class="form-select js-example-basic-single" name="priority">
+                    <option value="1" <?= ($ticketData['priority'] ?? '') == '1' ? "selected" : ""; ?>><?php echo __('Low'); ?></option>
+                    <option value="2" <?= ($ticketData['priority'] ?? '') == '2' ? "selected" : ""; ?>><?php echo __('Medium'); ?></option>
+                    <option value="3" <?= ($ticketData['priority'] ?? '') == '3' ? "selected" : ""; ?>><?php echo __('High'); ?></option>
                 </select>
             </div>
             <div class="col-lg-6 mb-2">
-                <span class="form-label">Attachment</span>
-                <input aria-label="Attachment" type="file" class="form-control" name="attachment">
+                <span class="form-label"><?php echo __('Attachment'); ?></span>
+                <input aria-label="<?php echo __('Attachment'); ?>" type="file" class="form-control" name="attachment">
             </div>
             <div class="col-lg-12 mb-2">
-                <span class="form-label">Description</span>
-                <textarea aria-label="Description" class="form-control" name="description" rows="3"><?= htmlspecialchars($ticketData['description'] ?? ''); ?></textarea>
+                <span class="form-label"><?php echo __('Description'); ?></span>
+                <textarea aria-label="<?php echo __('Description'); ?>" class="form-control" name="description" rows="3"><?= htmlspecialchars($ticketData['description'] ?? ''); ?></textarea>
             </div>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary" onclick="submitInsertTicket()">Save</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+    <button type="button" class="btn btn-primary" onclick="submitInsertTicket()"><?php echo __('Save'); ?></button>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" integrity="sha384-nLoOnA/BDh8A/jxqtckg4DumuCGOBYUnNJLZdQz/zfYNp3wcjGSoWTAzgko06G/2" crossorigin="anonymous"></script>
 <script>
@@ -108,7 +108,7 @@ $company = $_SESSION['company'];
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
-                            text: 'Ticket saved successfully!'
+                            text: <?php echo json_encode(__('Ticket saved successfully!')); ?>
                         }).then(() => location.reload());
                     } else {
                         Swal.fire({
@@ -122,7 +122,7 @@ $company = $_SESSION['company'];
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Invalid API response'
+                        text: <?php echo json_encode(__('Invalid API response')); ?>
                     });
                 }
             },
@@ -131,7 +131,7 @@ $company = $_SESSION['company'];
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Failed to reach API'
+                    text: <?php echo json_encode(__('Failed to reach API')); ?>
                 });
             }
         });

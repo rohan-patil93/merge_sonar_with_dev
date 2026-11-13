@@ -100,7 +100,7 @@ foreach($project_teams as $prteam){
             <i class="ti-close icon-x"></i>
         </a>
         <div class="right-icon-control">
-            <h4 class="text-dark f-20 f-w-600 text-left">Add Project</h4>
+            <h4 class="text-dark f-20 f-w-600 text-left"><?= __('Add Project') ?></h4>
         </div>
     </div>
     <div class="main-friend-list card-body form-design custom-scroll" style="height: 600px">
@@ -110,18 +110,18 @@ foreach($project_teams as $prteam){
                 <input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>">
                  <input type="hidden" name="transaction_table" id="transaction_table" value="<?php echo $transaction_table; ?>">
                 <div class="bg-white p-3 b-radius-10">
-                    <h5 class="f-18 f-w-600 bg-gray p-2">Project Information</h5>
+                    <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Project Information') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label">Project Name<span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="Project Name" class="form-control requried_field" type="text" name="project_name" placeholder="Project Name" value="<?php echo $transaction['project_name']; ?>">
+                            <input aria-label="Project Name" class="form-control requried_field" type="text" name="project_name" placeholder="<?= __('Project Name') ?>" value="<?php echo $transaction['project_name']; ?>">
                         </div>
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label">Originator <span class="requried">*</span></span>
                              <span class="d-block error-message text-danger"></span>
                             <select aria-label="Originator" class="form-control js-example-basic-single requried_field" name="originator">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($application_users as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['originator'] == $uval['id'] || ($transaction['originator'] == "" && $_SESSION['userid']== $uval['id']))?"selected":"";?>><?php echo $uval['display_name']; ?></option>
                                 <?php } ?>
@@ -131,43 +131,43 @@ foreach($project_teams as $prteam){
                             <span class="form-label">Customer <span class="requried text-danger">*</span></span>
                             <span class="d-block error-message text-danger"></span>
                             <select aria-label="Customer" class="form-control js-example-basic-single requried_field" name="customer_id">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($customers as $cust){ ?>
                                     <option value="<?php echo $cust['id']; ?>" <?php echo $cust['id'] == $transaction['customer_id']?"selected":""; ?>><?php echo $cust['company']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <span class="form-label">Project Total Budget </span>
-                            <input aria-label="Total Budget" class="form-control" type="number" name="project_cost" placeholder="Total Budget" value="<?php echo $transaction['project_cost']; ?>">
+                            <span class="form-label"><?= __('Project Total Budget') ?></span>
+                            <input aria-label="Total Budget" class="form-control" type="number" name="project_cost" placeholder="<?= __('Total Budget') ?>" value="<?php echo $transaction['project_cost']; ?>">
                         </div>
                         <div class="col-lg-6 form-group">
                             <span class="form-label">Start Sate <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="Start Date" class="form-control startdatepicker requried_field" type="text" name="planned_start" placeholder="Start Date" value="<?php echo fromDate($transaction['planned_start']); ?>">
+                            <input aria-label="Start Date" class="form-control startdatepicker requried_field" type="text" name="planned_start" placeholder="<?= __('Start Date') ?>" value="<?php echo fromDate($transaction['planned_start']); ?>">
                         </div>
                         <div class="col-lg-6 form-group">
                             <span class="form-label">End Date <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="End Date" class="form-control requried_field enddatepicker" type="text" name="planned_finish" placeholder="End Date" value="<?php echo fromDate($transaction['planned_finish']); ?>">
+                            <input aria-label="End Date" class="form-control requried_field enddatepicker" type="text" name="planned_finish" placeholder="<?= __('End Date') ?>" value="<?php echo fromDate($transaction['planned_finish']); ?>">
                         </div>
 
                          <div class="col-lg-12 form-group w-full">
                             <span class="form-label">Team Member <span class="requried">*</span></span>
                              <span class="d-block error-message text-danger"></span>
                             <select aria-label="Project Team User []" class="form-control js-example-basic-single requried_field" name="project_team_user_id[]" multiple="">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($application_users as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo in_array($uval['id'], (array)$project_teams_userid)?"selected":""; ?>><?php echo $uval['display_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6">
-                            <span class="form-label">Image</span>
+                            <span class="form-label"><?= __('Image') ?></span>
                             <div class="col-lg-9 col-xl-6 ">
                                 <div class="profile-pic">
                                     <label class="-label" for="display_image">
-                                        <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                                        <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
                                     </label>
                                     <input type="file" name="image" id="display_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
                                     <img src="<?php echo "uploads/all/".$transaction['project_logo'] ; ?>" id="outputdisplay_image" width="200" alt="Logo" />
@@ -176,15 +176,15 @@ foreach($project_teams as $prteam){
                             </div>
                         </div>
                         <div class="col-lg-12 form-group">
-                            <span class="form-label">Description</span>
+                            <span class="form-label"><?= __('Description') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Description" name="description" placeholder="Description" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['description']; ?></textarea>
+                                <textarea aria-label="Description" name="description" placeholder="<?= __('Description') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['description']; ?></textarea>
                             </div>
                         </div>
                    </div>
                     <div class="mt-2">
-                        <button type="button" class="btn btn-primary waves-effect waves-light sbt_loading_en_dis" onclick="submitLeadForm()">Submit</button>
-                        <button type="reset" class="btn btn-default waves-effect " data-bs-dismiss="modal">Reset</button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light sbt_loading_en_dis" onclick="submitLeadForm()"><?= __('Submit') ?></button>
+                        <button type="reset" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Reset') ?></button>
                     </div>
                 </div>
                 </form>

@@ -11,25 +11,25 @@ $selectdatas = array('1'=>'Single Row ', '2'=>'Multiple Rows (Import file)');
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h5>Employee Tax Deposit Respect</h5>
+                <h5><?= __('Employee Tax Deposit Respect') ?></h5>
                 <div class="card-header-right table-card-header">
                 </div>
             </div>
             <div class="card-body">    784291680
                 <div class="row col-lg-12">
                     <div class="form-group col-lg-6">
-                        <span class="form-label">Document Type </span>
+                        <span class="form-label"><?= __('Document Type') ?></span>
                         <select aria-label="Type" name="type" id="type" class="form-control form-select js-example-basic-single">
-                            <option value="0">Select Any One </option>
+                            <option value="0"><?= __('Select Any One') ?></option>
                             <?php foreach($data['document_lists'] as $document_lists) {  ?>
                                 <option value="<?php echo $document_lists['id']; ?>" <?php echo $document_lists['id'] ==$row['type']?"selected":""; ?>><?php echo $document_lists['document_name'];?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="form-group col-lg-6">
-                        <span class="form-label">Assessment Year </span>
+                        <span class="form-label"><?= __('Assessment Year') ?></span>
                         <select aria-label="Assessment Year" name="assessment_year" id="assessment_year" class="form-control form-select js-example-basic-single">
-                            <option value="0">Select Any One </option>
+                            <option value="0"><?= __('Select Any One') ?></option>
                             <?php $sty = date('Y')-4;
                                 for($i=1; $i<6; $i++) {
                                     $vew = $sty."-".($sty+1);
@@ -40,7 +40,7 @@ $selectdatas = array('1'=>'Single Row ', '2'=>'Multiple Rows (Import file)');
                         </select>
                     </div>
                     <div class="form-group col-lg-6">
-                        <span class="form-label">Upload Type </span>
+                        <span class="form-label"><?= __('Upload Type') ?></span>
                         <div class="radio radio-outline  mt-1">
                             <?php foreach ($selectdata as $selectkey => $selectvalue) {   ?>
                                 <label class="radio radio-inline"> <input aria-label="Radio option" type="radio"  <?php if($selectkey == $role[$key]){ ?>checked <?php
@@ -50,7 +50,7 @@ $selectdatas = array('1'=>'Single Row ', '2'=>'Multiple Rows (Import file)');
                         </div>
                     </div>
                     <div class="form-group col-lg-6">
-                        <span class="form-label">Insert Type </span>
+                        <span class="form-label"><?= __('Insert Type') ?></span>
                         <div class="radio radio-outline  mt-1">
                             <?php foreach ($selectdatas as $selectkey => $selectvalue) {   ?>
                                 <label class="radio radio-inline"> <input aria-label="Radio option" type="radio"  <?php if($selectkey == $role[$key]){ ?>checked <?php
@@ -61,9 +61,9 @@ $selectdatas = array('1'=>'Single Row ', '2'=>'Multiple Rows (Import file)');
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Employee</span>
+                            <span class="form-label"><?= __('Employee') ?></span>
                             <select aria-label="Emp" name="emp_id" id="emp_id" class="form-control form-select js-example-basic-single">
-                            <option value="0">Select Any One </option>
+                            <option value="0"><?= __('Select Any One') ?></option>
                             <?php foreach($data['employees'] as $employee) {  ?>
                                 <option value="<?php echo $employee['id']; ?>" <?php echo $employee['id'] ==$row['emp_id']?"selected":""; ?>><?php echo $employee['display_name'];?></option>
                             <?php } ?>
@@ -100,11 +100,11 @@ $selectdatas = array('1'=>'Single Row ', '2'=>'Multiple Rows (Import file)');
                         <div class="form-group col-lg-6">
                             <span>Oltas</span>
                             <select aria-label="Oltas" class="form-select js-example-basic-single" id="oltas" name="oltas" >
-                                <option value="0"> Select Any One Oltas</option>
-                                <option value="U">Unmatched</option>
-                                <option value="p">Provisional</option>
-                                <option value="F">Final</option>
-                                <option value="O">Overbooked</option>
+                                <option value="0"><?= __('Select Any One Oltas') ?></option>
+                                <option value="U"><?= __('Unmatched') ?></option>
+                                <option value="p"><?= __('Provisional') ?></option>
+                                <option value="F"><?= __('Final') ?></option>
+                                <option value="O"><?= __('Overbooked') ?></option>
                             </select>
                             <div style="display: none;color: red;" id="oltas_err"> Please Select Oltas </div>
                         </div>

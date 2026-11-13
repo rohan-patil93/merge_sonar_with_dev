@@ -148,18 +148,18 @@ function expensesDetailsPopUp(emp_id,exp_id="",sub_id=""){
       <div class="card-custom card-sticky" id="kt_page_sticky_card">
 
         <div class="card-header">
-          <h5>My Pay</h5>
-          <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+          <h5><?php echo __('My Pay'); ?></h5>
+          <span><?php echo __('lorem ipsum dolor sit amet, consectetur adipisicing elit'); ?></span>
           <div class="card-header-right cutm-header-mob">
 
 
-                  <a href="index.php?option=COM_VIEW_BILLSTACK_EMPLOYEE_DASHBOARD" class="btn  btn btn-primary waves-effect waves-light text-uppercase mb-2" >Reimbursement</a>
+                  <a href="index.php?option=COM_VIEW_BILLSTACK_EMPLOYEE_DASHBOARD" class="btn  btn btn-primary waves-effect waves-light text-uppercase mb-2" ><?php echo __('Reimbursement'); ?></a>
 
-                  <a href="index.php?option=COM_INSERT_SALARY&SEid=<?php echo deocdeId($nid); ?>" target="_blank" class="btn btn-primary waves-effect waves-light text-uppercase mb-2">Salary Structure</a>
-                  <a href="index.php?option=COM_INSERT_IT_PLANS" target="_blank" class="btn btn-primary waves-effect waves-light text-uppercase mb-2">Tax Planning</a>
+                  <a href="index.php?option=COM_INSERT_SALARY&SEid=<?php echo deocdeId($nid); ?>" target="_blank" class="btn btn-primary waves-effect waves-light text-uppercase mb-2"><?php echo __('Salary Structure'); ?></a>
+                  <a href="index.php?option=COM_INSERT_IT_PLANS" target="_blank" class="btn btn-primary waves-effect waves-light text-uppercase mb-2"><?php echo __('Tax Planning'); ?></a>
 
                   <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                    <i class="icofont icofont-reply"></i> Back</a>
+                    <i class="icofont icofont-reply"></i> <?php echo __('Back'); ?></a>
           </div>
         </div>
 
@@ -175,7 +175,7 @@ function expensesDetailsPopUp(emp_id,exp_id="",sub_id=""){
                   <i class="flaticon-piggy-bank icon-2x text-white font-weight-bold "></i>
                 </span>
                 <div class="d-flex flex-column text-white">
-                  <span class="font-weight-bolder font-size-sm">Total Earnings</span>
+                  <span class="font-weight-bolder font-size-sm"><?php echo __('Total Earnings'); ?></span>
                   <span class=" font-size-h5">
                     <span class="text-white font-weight-bold"></span><?php echo number_format($total_earnings_in_current_year,2); ?> </span>
                 </div>
@@ -191,7 +191,7 @@ function expensesDetailsPopUp(emp_id,exp_id="",sub_id=""){
                   <i class="flaticon-confetti icon-2x text-white font-weight-bold"></i>
                 </span>
                 <div class="d-flex flex-column text-white">
-                  <span class="font-weight-bolder font-size-sm">Total Deductions</span>
+                  <span class="font-weight-bolder font-size-sm"><?php echo __('Total Deductions'); ?></span>
                   <span class=" font-size-h5">
                     <span class="text-white font-weight-bold"></span><?php echo number_format($total_deductions_in_current_year,2); ?> </span>
                 </div>
@@ -207,7 +207,7 @@ function expensesDetailsPopUp(emp_id,exp_id="",sub_id=""){
                   <i class="flaticon-pie-chart icon-2x text-white font-weight-bold"></i>
                 </span>
                 <div class="d-flex flex-column text-white">
-                  <span class="font-weight-bolder font-size-sm">Perks</span>
+                  <span class="font-weight-bolder font-size-sm"><?php echo __('Perks'); ?></span>
                   <span class=" font-size-h5">
                     <span class="text-white font-weight-bold"></span><?php echo number_format($total_perks_in_current_year,2); ?> </span>
                 </div>
@@ -222,7 +222,7 @@ function expensesDetailsPopUp(emp_id,exp_id="",sub_id=""){
                   <i class="flaticon-piggy-bank icon-2x text-white font-weight-bold"></i>
                 </span>
                 <div class="d-flex flex-column text-white">
-                  <span class="font-weight-bolder font-size-sm">Total Annual Tax</span>
+                  <span class="font-weight-bolder font-size-sm"><?php echo __('Total Annual Tax'); ?></span>
                   <span class=" font-size-h5">
                     <span class="text-white font-weight-bold"></span><?php echo number_format($cal_intax,2); ?> </span>
                 </div>
@@ -238,7 +238,7 @@ function expensesDetailsPopUp(emp_id,exp_id="",sub_id=""){
                   <i class="flaticon-confetti icon-2x text-white font-weight-bold"></i>
                 </span>
                 <div class="d-flex flex-column text-white">
-                  <span class="font-weight-bolder font-size-sm">Tax Paid</span>
+                  <span class="font-weight-bolder font-size-sm"><?php echo __('Tax Paid'); ?></span>
                   <span class=" font-size-h5">
                   <span class="text-white font-weight-bold"></span><?php echo number_format($total_tax_paid_in_current_year,2); ?> </span>
                 </div>
@@ -254,7 +254,7 @@ function expensesDetailsPopUp(emp_id,exp_id="",sub_id=""){
                   <i class="flaticon-pie-chart icon-2x text-white font-weight-bold"></i>
                 </span>
                 <div class="d-flex flex-column text-white">
-                  <span class="font-weight-bolder font-size-sm">Tax Due</span>
+                  <span class="font-weight-bolder font-size-sm"><?php echo __('Tax Due'); ?></span>
                   <span class=" font-size-h5">
                   <span class="text-white font-weight-bold"></span><?php echo number_format($total_tax_due_in_current_year,2); ?> </span>
                 </div>
@@ -348,7 +348,7 @@ function expensesDetailsPopUp(emp_id,exp_id="",sub_id=""){
                          <!--end::Label-->
 
                          <div class="mt-9">
-                          <a href="index.php?option=COM_LIST_PAYSLIP_TEMPLATE3&employe_id=<?php echo $employee_id; ?>&month=<?php echo $payslip_array[$row]['0']; ?>&year=<?php echo $payslip_array[$row]['4']; ?>" target="_blank" class="btn btn-primary waves-effect waves-light mt-2 text-uppercase">view payslip</a>
+                          <a href="index.php?option=COM_LIST_PAYSLIP_TEMPLATE3&employe_id=<?php echo $employee_id; ?>&month=<?php echo $payslip_array[$row]['0']; ?>&year=<?php echo $payslip_array[$row]['4']; ?>" target="_blank" class="btn btn-primary waves-effect waves-light mt-2 text-uppercase"><?php echo __('view payslip'); ?></a>
                         </div>
 
                       </div>

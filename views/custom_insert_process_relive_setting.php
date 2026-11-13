@@ -169,7 +169,7 @@ function getnamelist(){
         <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
         <div class="alert-text"><?php echo $content; ?></div>
         <div class="alert-close">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="<?php echo __('Close'); ?>">
                 <span aria-hidden="true"><i class="ki ki-close"></i></span>
             </button>
         </div>
@@ -180,7 +180,7 @@ if($_GET['error'] !=''){ ?>
         <div class="alert-icon"><i class="flaticon-warning"></i></div>
         <div class="alert-text">  <?php echo $_SESSION['error_message'][$_GET['error']]; ?> </div>
         <div class="alert-close">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="close" data-dismiss="alert" aria-label="<?php echo __('Close'); ?>">
                     <span aria-hidden="true"><i class="la la-close"></i></span>
                 </button>
             </div>
@@ -195,7 +195,7 @@ if($_GET['error'] !=''){ ?>
           <div class="card-toolbar">
             <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
               <i class="ki ki-long-arrow-back icon-xs"></i>
-              Back
+              <?php echo __('Back'); ?>
             </a>
           </div>
         </div>
@@ -216,22 +216,22 @@ if($_GET['error'] !=''){ ?>
   <input type="hidden" name="filtertbl_rowid" id="filtertbl_rowid" value="">
 
   <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-      <h4 class="mb-10 font-weight-bold text-dark">Tasks</h4>
+      <h4 class="mb-10 font-weight-bold text-dark"><?php echo __('Tasks'); ?></h4>
 
       <div class="row">
           <div class="col-xl-9">
 
-              <span>Task Name *</span>
-              <input aria-label="Task Name" type="text" class="form-control" name="task_name" value="<?php echo $task_name; ?>" />
+              <span><?php echo __('Task Name *'); ?></span>
+              <input aria-label="<?php echo __('Task Name'); ?>" type="text" class="form-control" name="task_name" value="<?php echo $task_name; ?>" />
           </div>
           <div class="col-xl-12 mt-5">
-              <span>Assign To</span>
+              <span><?php echo __('Assign To'); ?></span>
               <div class="radio-inline ">
                   <?php
                   foreach ($buddy_list as $emptypes) {
                       ?>
                       <label class="radio radio-solid">
-                          <input aria-label="Assigned To" type="radio" name="assigned_to"  onclick="showemplist(this.value);" value="<?php echo $emptypes['genc_detail_code'];?>" <?php if($assigned_to == $emptypes['genc_detail_code']) {?> checked="checked" <?php
+                          <input aria-label="<?php echo __('Assigned To'); ?>" type="radio" name="assigned_to"  onclick="showemplist(this.value);" value="<?php echo $emptypes['genc_detail_code'];?>" <?php if($assigned_to == $emptypes['genc_detail_code']) {?> checked="checked" <?php
 } ?> onkeydown="" />
                           <span></span>
                           <?php echo $emptypes['genc_detail_name'];?>
@@ -242,8 +242,8 @@ if($_GET['error'] !=''){ ?>
 </div>
           <div style="display: none"  id="emplistshow" class="col-xl-6 mt-5">
 
-              <select aria-label="Category" name="category" class="form-control">
-                  <option value="">Select Any One </option>
+              <select aria-label="<?php echo __('Category'); ?>" name="category" class="form-control">
+                  <option value=""><?php echo __('Select Any One'); ?> </option>
                   <?php
                   foreach ($emp_list as $emp) {
                       ?>
@@ -256,35 +256,35 @@ if($_GET['error'] !=''){ ?>
           <div class="col-xl-12 mt-6">
 
 
-              <span>Due Date</span>
+              <span><?php echo __('Due Date'); ?></span>
               <div class="radio-inline mt-3">
                   <label class="radio">
-                      <input aria-label="Due Date" type="radio" name="due_date" <?php if($no_action =='1') {?> checked="checked" <?php
+                      <input aria-label="<?php echo __('Due Date'); ?>" type="radio" name="due_date" <?php if($no_action =='1') {?> checked="checked" <?php
 } ?>  value="no_action"/>
                       <span></span>
-                      None
+                      <?php echo __('None'); ?>
                   </label>
               </div>
                   <div class="radio-inline mt-3">
                   <label class="radio radio-solid">
-                      <input aria-label="Due Date" type="radio" name="due_date" <?php if($on_the_day=='1') {?> checked="checked" <?php
+                      <input aria-label="<?php echo __('Due Date'); ?>" type="radio" name="due_date" <?php if($on_the_day=='1') {?> checked="checked" <?php
 } ?> value="on_the_day"/>
                       <span></span>
-                      On Hire Date
+                      <?php echo __('On Hire Date'); ?>
                   </label>
 </div>
 <div class="radio-inline mt-3">
                   <label class="radio radio-solid">
-                      <input aria-label="Due Date" type="radio" name="due_date" <?php if($action_no !='0' || !empty($action_no)) {?> checked="checked" <?php
+                      <input aria-label="<?php echo __('Due Date'); ?>" type="radio" name="due_date" <?php if($action_no !='0' || !empty($action_no)) {?> checked="checked" <?php
 } ?> value="frequency"/>
                       <span></span>
 
                   </label>
 
-                  <input aria-label="Action No" type="text" class="form-control mr-2" style="width:50px;"  name="action_no" value="<?php echo $action_no;?>" />
+                  <input aria-label="<?php echo __('Action No'); ?>" type="text" class="form-control mr-2" style="width:50px;"  name="action_no" value="<?php echo $action_no;?>" />
 
-                  <select aria-label="Action Frequency" name="action_frequency"  style="width:150px;"class="form-control">
-                      <option value="">Select</option>
+                  <select aria-label="<?php echo __('Action Frequency'); ?>" name="action_frequency"  style="width:150px;"class="form-control">
+                      <option value=""><?php echo __('Select'); ?></option>
                       <?php
                       foreach ($due_list as $due) {
                           ?>
@@ -293,9 +293,9 @@ if($_GET['error'] !=''){ ?>
                       <?php } ?>
                   </select>
                   &nbsp;
-                  <select aria-label="Before Or After" name="before_or_after" style="width:150px;" class="form-control">
+                  <select aria-label="<?php echo __('Before Or After'); ?>" name="before_or_after" style="width:150px;" class="form-control">
 
-                      <option value="">Select</option>
+                      <option value=""><?php echo __('Select'); ?></option>
                       <?php
 
                       foreach ($period_list as $due) {
@@ -304,7 +304,7 @@ if($_GET['error'] !=''){ ?>
 } ?> ><?php echo $due['genc_detail_name'];?></option>
                       <?php } ?>
                   </select> &nbsp;
-                  <span class="mt-3 ml-2"> Reliving  </span>
+                  <span class="mt-3 ml-2"> <?php echo __('Reliving'); ?>  </span>
 
 </div>
               </div>
@@ -314,9 +314,9 @@ if($_GET['error'] !=''){ ?>
           <div class="row">
                                         <div class="col-xl-9 mt-5">
 
-              <span>Category</span>
-              <select aria-label="Process" name="process_id" class="form-control">
-                  <option value="">Select Any One </option>
+              <span><?php echo __('Category'); ?></span>
+              <select aria-label="<?php echo __('Process'); ?>" name="process_id" class="form-control">
+                  <option value=""><?php echo __('Select Any One'); ?> </option>
                   <?php
                   foreach ($task_list as $task) {
                       ?>
@@ -328,14 +328,14 @@ if($_GET['error'] !=''){ ?>
       </div>
                                     <div class="row">
           <div class="col-xl-9 mt-5">
-              <span>Description</span>
-              <textarea aria-label="Description" style="overflow:auto" class="form-control form-control-lg" name="description" > <?php echo $description; ?> </textarea>
+              <span><?php echo __('Description'); ?></span>
+              <textarea aria-label="<?php echo __('Description'); ?>" style="overflow:auto" class="form-control form-control-lg" name="description" > <?php echo $description; ?> </textarea>
           </div>
 </div>
               <div class="row">
           <div class="col-xl-6 mt-5">
-              <span>Attach File(s)</span>
-              <button type="button" onclick="showpopup('addfiles');">Add</button>
+              <span><?php echo __('Attach File(s)'); ?></span>
+              <button type="button" onclick="showpopup('addfiles');"><?php echo __('Add'); ?></button>
 
               <div id="divshowfiles"></div>
 </div>
@@ -343,14 +343,14 @@ if($_GET['error'] !=''){ ?>
                                         </div>
                                         <div class="row">
                                         <div class="col-xl-6 mt-5">
-                                            <span>This is required for...</span>
+                                            <span><?php echo __('This is required for...'); ?></span>
                                         </div>
                                         <div id="tsk_fortable"></div>
 
                                         <div class="col-xl-12">
                                             <i class="flaticon2-group text-success"></i>
 
-                                            <button type="button" onclick="showpopup('newtask');">Edit </button>
+                                            <button type="button" onclick="showpopup('newtask');"><?php echo __('Edit'); ?> </button>
                                         </div>
                                     </div>
 

@@ -94,7 +94,7 @@ $debit_notes = $result['debit_notes'];
     <div class="row">
          <table class="table table-hover m-b-0" style="font-size:13px;">
              <thead>
-                 <tr><th scope="col">#</th><th scope="col">Number</th><th scope="col">Date</th><th scope="col" class="text-right">Amount</th></tr>
+                 <tr><th scope="col">#</th><th scope="col"><?= __('Number') ?></th><th scope="col"><?= __('Date') ?></th><th scope="col" class="text-right"><?= __('Amount') ?></th></tr>
              </thead>
             <tbody>
                 <?php $mk=1;foreach($debit_notes as $debitnotes){ ?>
@@ -114,7 +114,7 @@ $debit_notes = $result['debit_notes'];
         <div class="form-group col-lg-6">
             <span class="col-lg-4">Account</span>
             <select aria-label="Account Code"  class="form-select js-example-basic-single" name="account_code" id="popup_account_code" >
-                <option value="">Select Any One</option>
+                <option value=""><?= __('Select Any One') ?></option>
                 <?php foreach ($chart_of_accounts as $coc) { ?>
                     <option  value="<?php echo $coc['account_code']; ?>"><?php echo $coc['account_name']."(".$coc['account_code'].")"; ?></option>
                 <?php } ?>
@@ -123,7 +123,7 @@ $debit_notes = $result['debit_notes'];
         </div>
 
         <div class="col-lg-6 form-group">
-            <span class="form-label">Amount</span>
+            <span class="form-label"><?= __('Amount') ?></span>
             <input aria-label="Amount" type="text" class="form-control text-right" name="amount"  id="popup_amount" value="">
             <span class="text-danger" id="popup_amount_error"></span>
         </div>
@@ -136,6 +136,6 @@ $debit_notes = $result['debit_notes'];
 </div>
 <div class="modal-footer" >
      <input type="hidden" class="form-control text-right" name="amount"  id="popup_transaction_table" value="rental_invoices">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-success waves-effect waves-light" onclick="submitDebitNote('<?php echo $_POST['rental_inv_id']; ?>')"> Generate Debit Note</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
+    <button type="button" class="btn btn-success waves-effect waves-light" onclick="submitDebitNote('<?php echo $_POST['rental_inv_id']; ?>')"><?= __('Generate Debit Note') ?></button>
 </div>

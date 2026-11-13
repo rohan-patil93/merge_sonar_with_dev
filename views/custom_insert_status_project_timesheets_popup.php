@@ -18,8 +18,8 @@ $nm = ViewStatusValue($_POST['status']);
             success: function(response) {
                 console.log(response);
                 swal.fire({
-                            title: "Comments Updated ",
-                            text: "Do you want to close ? ",
+                            title: <?php echo json_encode(__('Comments Updated')); ?>,
+                            text: <?php echo json_encode(__('Do you want to close ?')); ?>,
                             type: "success",
                             buttonsStyling: false,
                             confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
@@ -42,10 +42,10 @@ $nm = ViewStatusValue($_POST['status']);
     <div class="modal-header">
                         <h5 class="modal-title">
 
-                            <small>&nbsp;&nbsp; <b class="f-w-600">Transaction Type: </b>&nbsp; <?php echo viewtitle($_POST['table']); ?> &nbsp;&nbsp;
-                             <b class="f-w-600">Status: </b>&nbsp; <?php echo $nm['name']  ?> </small>
+                            <small>&nbsp;&nbsp; <b class="f-w-600"><?php echo __('Transaction Type:'); ?> </b>&nbsp; <?php echo viewtitle($_POST['table']); ?> &nbsp;&nbsp;
+                             <b class="f-w-600"><?php echo __('Status:'); ?> </b>&nbsp; <?php echo $nm['name']  ?> </small>
                         </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
                     </div>
                     <div class="modal-body" >
 
@@ -53,8 +53,8 @@ $nm = ViewStatusValue($_POST['status']);
                 <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                             <div class="form-group row">
                                 <div class="col-lg-12">
-                                    <span>Comment</span>
-                                    <textarea aria-label="Comment" class="form-control" name="comment" id="comment"></textarea>
+                                    <span><?php echo __('Comment'); ?></span>
+                                    <textarea aria-label="<?php echo __('Comment'); ?>" class="form-control" name="comment" id="comment"></textarea>
                                 </div>
                             </div>
                     </div>
@@ -66,8 +66,8 @@ $nm = ViewStatusValue($_POST['status']);
                 <input type="hidden" name="table" id='table' value="<?php echo $_POST['table']; ?>">
                 <input type="hidden" name="rid" id='rid' value="<?php echo $_POST['rid']; ?>">
                 <input type="hidden" name="extra" id='extra' value="<?php echo $_POST['extra']; ?>">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Submit</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Cancel'); ?></button>
+                <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?php echo __('Submit'); ?></button>
             </div>
 
     </form>

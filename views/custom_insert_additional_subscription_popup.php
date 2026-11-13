@@ -31,8 +31,8 @@ if($company_subscription_plans['standard_user_limit'] !=0 AND $company_subscript
 		if(thislicenstotal % additional_license_lot_limit_popup){
 			Swal.fire({
 			  icon: 'error',
-			  title: 'Oops...',
-			  text: 'Something went wrong!'
+			  title: '<?php echo __('Oops...'); ?>',
+			  text: '<?php echo __('Something went wrong!'); ?>'
 			})
 			$("#additional_license_lot_price").val('');
 			$("#total_license_lot_price").val('');
@@ -88,45 +88,45 @@ function popDiscount(){
 
 </script>
 <div class="modal-header">
-	<h5 class="modal-title">Subscription Plans</h5>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<h5 class="modal-title"><?php echo __('Subscription Plans'); ?></h5>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <form id="submitformadditionalservice">
 
 <div class="modal-body">
 			<div class="row mb-2">
 				<div class="col-lg-3 form-group text-center">
-					<label class="form-label f-w-700">Plan Name</label>
-					<p><?php echo $subscription_plans['plan_name'];?></p>
+					<label class="form-label f-w-700"><?php echo __('Plan Name'); ?></label>
+					<p><?php echo htmlspecialchars(__($subscription_plans['plan_name'] ?? ''));?></p>
 				</div>
 				<div class="col-lg-2 form-group text-center">
-					<label class="form-label f-w-700">Plan Price</label>
+					<label class="form-label f-w-700"><?php echo __('Plan Price'); ?></label>
 					<p><?php echo $standard_price;?></p>
 				</div>
 				<div class="col-lg-4 form-group text-center">
-					<label class="form-label f-w-700">Additional Lic. Lot limit</label>
+					<label class="form-label f-w-700"><?php echo __('Additional Lic. Lot limit'); ?></label>
 					<p><?php echo $additional_license_lot;?></p>
 				</div>
 				<div class="col-lg-3 form-group text-center">
-					<label class="form-label f-w-700">Additi Lot Price</label>
+					<label class="form-label f-w-700"><?php echo __('Additi Lot Price'); ?></label>
 					<p><?php echo $additional_license_lot_price; ?></p>
 				</div>
 				<div class="col-lg-3 form-group">
-					<label class="form-label ">Additi License Users</label>
-				 	<input class="form-control text-right" type="text" name="additional_license_lot_popup" id="additional_license_lot_popup" value="" onblur="additionalLicenseValidation()" aria-label="Additional License Lot Popup"> 
+					<label class="form-label "><?php echo __('Additi License Users'); ?></label>
+				 	<input class="form-control text-right" type="text" name="additional_license_lot_popup" id="additional_license_lot_popup" value="" onblur="additionalLicenseValidation()" aria-label="<?php echo __('Additional License Lot Popup'); ?>"> 
 				</div>
 				<div class="col-lg-3 form-group">
-					<label class="form-label">Additi License Price</label>
-				 	<input class="form-control text-right" type="text" name="additional_license_lot_price" id="additional_license_lot_price" value="0" readonly="" aria-label="Additional License Lot Price"> 
+					<label class="form-label"><?php echo __('Additi License Price'); ?></label>
+				 	<input class="form-control text-right" type="text" name="additional_license_lot_price" id="additional_license_lot_price" value="0" readonly="" aria-label="<?php echo __('Additional License Lot Price'); ?>"> 
 				</div>
 				<div class="col-lg-3 form-group">
-					<label class="form-label">Discount</label>
-				 	<input class="form-control text-right" type="text" name="additional_license_lot_discount" id="additional_license_lot_discount" value="0" onblur="popDiscount()" aria-label="Additional License Lot Discount"> 
+					<label class="form-label"><?php echo __('Discount'); ?></label>
+				 	<input class="form-control text-right" type="text" name="additional_license_lot_discount" id="additional_license_lot_discount" value="0" onblur="popDiscount()" aria-label="<?php echo __('Additional License Lot Discount'); ?>"> 
 				</div>
 				<div class="col-lg-3 form-group">
-					<label class="form-label">Total Price</label>
+					<label class="form-label"><?php echo __('Total Price'); ?></label>
 
-				 	<input class="form-control text-right" type="text" name="total_license_lot_price" id="total_license_lot_price" value="0" readonly="" aria-label="Total License Lot Price"> 
+				 	<input class="form-control text-right" type="text" name="total_license_lot_price" id="total_license_lot_price" value="0" readonly="" aria-label="<?php echo __('Total License Lot Price'); ?>"> 
 				</div>
 			</div>
 
@@ -141,7 +141,7 @@ function popDiscount(){
 	<input type="hidden" name="additional_license_lot_limit_popup" id="additional_license_lot_limit_popup" value="<?php echo $additional_license_lot; ?>" >
 	<input type="hidden" name="additional_license_lot_price_popup" id="additional_license_lot_price_popup" value="<?php echo $additional_license_lot_price; ?>" >
 	<input type="hidden" name="standard_user_limit_popup" id="standard_user_limit_popup" value="<?php echo $company_subscription_plans['standard_user_limit'];?>" >
-	<button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
-	<button type="button" class="btn btn-primary mr-2" onclick="submitFormSubscribdditionserv()" >Submit</button>
+	<button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+	<button type="button" class="btn btn-primary mr-2" onclick="submitFormSubscribdditionserv()" ><?php echo __('Submit'); ?></button>
 </div>
 	</form> 

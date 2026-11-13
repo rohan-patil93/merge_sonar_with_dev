@@ -212,14 +212,14 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5><?php echo $isEdit ? 'Edit Document Management' : 'Add Document Management'; ?></h5>
+            <h5><?php echo $isEdit ? __('Edit Document Management') : __('Add Document Management'); ?></h5>
             <div class="card-header-right">
                 <a href="index.php?option=<?php echo dmText($listOption); ?>" class="btn waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-list"></i> List
+                    <i class="icofont icofont-list"></i> <?= __('List') ?>
                 </a>
 
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-reply"></i> Back
+                    <i class="icofont icofont-reply"></i> <?= __('Back') ?>
                 </a>
             </div>
         </div>
@@ -263,9 +263,9 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
 
                 <div class="row">
                     <div class="col-md-4 form-group">
-                        <label>Document Type <span class="text-danger">*</span></label>
+                        <label><?= __('Document Type') ?> <span class="text-danger">*</span></label>
                         <select name="document_type_id" class="form-control js-example-basic-single" required aria-label="Document Type Id">
-                            <option value="">Select Document Type</option>
+                            <option value=""><?= __('Select Document Type') ?></option>
                             <?php if (count((array)$documentTypes) > 0) {
                                 foreach ($documentTypes as $typeRow) {
                                     $typeRow = is_array($typeRow) ? $typeRow : (array)$typeRow;
@@ -280,7 +280,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
                         </select>
                     </div>
                     <div class="col-md-4 form-group">
-                        <label>Document Name <span class="text-danger">*</span></label>
+                        <label><?= __('Document Name') ?> <span class="text-danger">*</span></label>
                         <input type="text" name="document_name" class="form-control" value="<?php echo dmText($selectedDocumentName); ?>" required aria-label="Document Name">
                     </div>
                 </div>
@@ -297,7 +297,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
                                     <div class="row document-file-row mb-2">
                                         <div class="col-md-4 form-group">
                                             <input type="hidden" name="file_id[]" value="<?php echo dmText($fileRow['id'] ?? ''); ?>">
-                                            <input type="text" name="file_name[]" class="form-control" placeholder="File Name" value="<?php echo dmText($fileRow['file_name'] ?? ''); ?>" required aria-label="File Name">
+                                            <input type="text" name="file_name[]" class="form-control" placeholder="<?= __('File Name') ?>" value="<?php echo dmText($fileRow['file_name'] ?? ''); ?>" required aria-label="File Name">
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <input type="file" name="document_file[]" class="form-control" <?php echo $hasStoredFile ? '' : 'required'; ?> aria-label="Document File">
@@ -313,20 +313,20 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
                                             <?php } ?>
                                         </div>
                                         <div class="col-md-2 form-group">
-                                            <button type="button" class="btn btn-danger btn-remove-file-row">Remove</button>
+                                            <button type="button" class="btn btn-danger btn-remove-file-row"><?= __('Remove') ?></button>
                                         </div>
                                     </div>
                             <?php }
                             } ?>
                         </div>
-                        <button type="button" class="btn btn-primary" id="addDocumentFileRow">+ Add More</button>
+                        <button type="button" class="btn btn-primary" id="addDocumentFileRow"><?= __('+ Add More') ?></button>
                     </div>
                 </div>
 
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="submit" name="submit" value="<?php echo $isEdit ? 'update' : 'insert'; ?>" class="btn btn-success">
-                            Save
+                            <?= __('Save') ?>
                         </button>
                         <a href="index.php?option=<?php echo dmText($listOption); ?>" class="btn btn-secondary">Cancel</a>
                     </div>
@@ -457,7 +457,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
             + '<div class="row document-file-row mb-2">'
             + '<div class="col-md-4 form-group">'
             + '<input type="hidden" name="file_id[]" value="">'
-            + '<input type="text" name="file_name[]" class="form-control" placeholder="File Name" required aria-label="File Name">'
+            + '<input type="text" name="file_name[]" class="form-control" placeholder="<?= __('File Name') ?>" required aria-label="File Name">'
             + '</div>'
             + '<div class="col-md-4 form-group">'
             + '<input type="file" name="document_file[]" class="form-control" required aria-label="Document File">'
@@ -465,7 +465,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
             + '<input type="hidden" name="actual_file_name[]" value="">'
             + '</div>'
             + '<div class="col-md-2 form-group">'
-            + '<button type="button" class="btn btn-danger btn-remove-file-row">Remove</button>'
+            + '<button type="button" class="btn btn-danger btn-remove-file-row"><?= __('Remove') ?></button>'
             + '</div>'
             + '</div>';
         $('#documentFileRows').append(rowHtml);

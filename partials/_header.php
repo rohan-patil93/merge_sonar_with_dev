@@ -373,17 +373,17 @@
                         if($clock_data['clock_out'] !='' || count((array)$clock_data) == 0){
 
                             ?>
-                            <button type="button" onclick="checkinattendence('You have clocked in')"  class="btn btn-primary font-weight-bold btn-pill btn-round" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in  &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;<?php echo $check_out_display; ?> </div> </div> "> <i class="ti-alarm-clock"></i> Check-in &nbsp; </button>
+                            <button type="button" onclick="checkinattendence('You have clocked in')"  class="btn btn-primary font-weight-bold btn-pill btn-round" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in  &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;<?php echo $check_out_display; ?> </div> </div> "> <i class="ti-alarm-clock"></i> <?php echo __('Check-in'); ?> &nbsp; </button>
                         <?php }else{?> 
-                            <button type="button" onclick="checkinattendence('You have clocked out')" class="btn btn-success font-weight-bold btn-pill btn-round" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in  &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;00:00:00  </div> </div> "> <i class="ti-alarm-clock"></i> Check-Out &nbsp; </button>
+                            <button type="button" onclick="checkinattendence('You have clocked out')" class="btn btn-success font-weight-bold btn-pill btn-round" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in  &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;00:00:00  </div> </div> "> <i class="ti-alarm-clock"></i> <?php echo __('Check-Out'); ?> &nbsp; </button>
                         <?php } ?> 
                     </div>
                     <?php } ?>
                 </li>
 
             <?php  foreach($_SESSION['application_menu_TNR'] as $tnrmenuid=>$tnrmenu) { ?>
-                <li class="header-notification m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo $tnrmenu['Label'];?>">
-                    <div class="dropdown-primary" role="button" tabindex="0" aria-label="<?php echo htmlspecialchars($tnrmenu['Label']); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=<?php echo $tnrmenu['Page_Name'];?>';">
+                <li class="header-notification m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __($tnrmenu['Label']); ?>">
+                    <div class="dropdown-primary" role="button" tabindex="0" aria-label="<?php echo htmlspecialchars(__($tnrmenu['Label'])); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=<?php echo $tnrmenu['Page_Name'];?>';">
                         <div class="" data-bs-toggle="dropdown" >
                             <i class="<?php echo $tnrmenu['Menu_Icon'];?>"></i>
                         </div>
@@ -481,7 +481,7 @@
             </div>
         </li> 
         <?php **/?>
-         <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Announcements">
+         <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Announcements'); ?>">
             <div class="dropdown-primary" role="button" tabindex="0" aria-label="Announcements" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_VIEW_ANNOUNCEMENTS';">
                 <div class="" data-bs-toggle="dropdown" >
                     <i class="ti-announcement"></i>
@@ -490,7 +490,7 @@
         </li> 
 
 
-    <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Notifications" onclick="getNotificationList()">
+    <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Notifications'); ?>" onclick="getNotificationList()">
         <div class="dropdown-primary dropdown">
             <div class="displayChatbox dropdown-toggle" data-bs-toggle="dropdown">
                 <i class="ti-bell"></i>
@@ -499,17 +499,17 @@
         </div>
     </li>
 
-     <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Support" >
+     <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Support'); ?>" >
         <div class="dropdown-primary dropdown">
             <span class="" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="ti-headphone-alt"></i></span>
             <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                 <?php if($_SESSION['admin_type'] !='1'){ ?>
-                    <a class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('NT')">New Ticket</a>
+                    <a class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('NT')"><?php echo __('New Ticket'); ?></a>
                
-                <a class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('LT')">My Tickets</a>
+                <a class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('LT')"><?php echo __('My Tickets'); ?></a>
                 <?php  } ?>
                 <?php if($_SESSION['admin_type'] =='1'){ ?>
-                <a class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('PT')">Tickets Submited To Me</a>
+                <a class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('PT')"><?php echo __('Tickets Submitted To Me'); ?></a>
                 <?php } ?>
             </div>
         </div>
@@ -553,7 +553,7 @@
                       <?php } ?>
 
                       <span><?php 
-                      echo ucwords($dis_name); ?>
+                      echo ucwords(__($dis_name)); ?>
 
                   </span>
                   <i class="ti-angle-down"></i>
@@ -585,7 +585,7 @@
                         }
                         ?>
                     <a href="<?php echo $profileurl; ?>">
-                        <i class="ti-user"></i> Profile
+                        <i class="ti-user"></i> <?php echo __('Profile'); ?>
 
                     </a>
                 </li>
@@ -596,21 +596,21 @@
                 </li> -->
                 <li>
                     <a href="index.php?option=COM_LIST_INBOX">
-                        <i class="ti-email"></i> My Messages
+                        <i class="ti-email"></i> <?php echo __('My Messages'); ?>
 
                     </a>
                 </li> 
                 <?php if(in_array(SUPERADMIN_ROLE,(array)$_SESSION['role_ids']) || in_array(ADMIN_ROLE,(array)$_SESSION['role_ids'])){ ?>
                     <li>
                         <a href="index.php?option=COM_INSERT_CONFIG&Rid=YVdRNk1RPT0=">
-                            <i class="ti-settings"></i> Config
+                            <i class="ti-settings"></i> <?php echo __('Config'); ?>
 
                         </a>
                     </li> 
                 <?php } ?>
                 <li onclick="location.href='index.php?option=com_logout';">
                     <a href="#!" class="text-danger">
-                        <i class="ti-power-off"></i> Logout
+                        <i class="ti-power-off"></i> <?php echo __('Logout'); ?>
                     </a>
                 </li>
             </ul>
@@ -636,7 +636,7 @@
                     ?>
 
                     <div class="<?php echo (in_array(ADMIN_ROLES,(array)$_SESSION['role_ids']) OR $showswitch == '0')?"col-lg-6 col-md-6 col-sm-6 col-6 text-left":"col-lg-12 text-center"; ?>" >
-                        <h4 class="mb-0 text-white p-3">Modules</h4>
+                        <h4 class="mb-0 text-white p-3"><?php echo __('Modules'); ?></h4>
                     </div>
                     <?php 
                     if(in_array(ADMIN_ROLES,(array)$_SESSION['role_ids']) OR $showswitch == '0'){
@@ -655,7 +655,7 @@
                         </div> <?php **/ ?>
                         <select id="working_role_short_code" onchange="chnageModuleWithRole()" aria-label="Working role">
                             <?php foreach($_SESSION['modulewithroledetails'][$_SESSION['work_module_setup_id']] as $mwithrole){ ?>
-                            <option value="<?php echo $mwithrole['role_short_code']; ?>" <?php echo $mwithrole['role_short_code'] == $_SESSION['working_role_short_code']?"selected":""; ?>><?php echo $mwithrole['display_name']; ?></option>
+                            <option value="<?php echo $mwithrole['role_short_code']; ?>" <?php echo $mwithrole['role_short_code'] == $_SESSION['working_role_short_code']?"selected":""; ?>><?php echo __($mwithrole['display_name']); ?></option>
                         <?php } ?>
                         </select>
                     </div>
@@ -701,7 +701,7 @@
                         if(!isset($_SESSION['application_user_module_roles'][$module_list['module_id']]) AND !in_array(ADMIN_ROLES,(array)$_SESSION['role_ids'])){
                             $style = "background-color: #cccc;'";
                             $href = "#";
-                            $modultitle ='data-bs-toggle="tooltip" data-placement="bottom" title="This Module Is Not Activated"';
+                            $modultitle ='data-bs-toggle="tooltip" data-placement="bottom" title="'.__('This Module Is Not Activated').'"';
                            // $pointrernone = "style='pointer-events: none'"; 
                             $modulfunction = "";
                         }
@@ -713,7 +713,7 @@
                         <div class="col-lg-3 p-1 border" style="<?php echo $style;?> " <?php echo $modultitle; ?>  role="button" tabindex="0" <?php echo $modulfunction == "" ? 'aria-disabled="true"' : ''; ?> onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="<?php echo $modulfunction;?>">
                             <?php echo $icon; ?>
                             <img src="uploads/all/<?php echo $module_list['module_logo']; ?>" class="img-40" alt="" > 
-                            <h5 class=" f-12"><?php echo $module_list['module_name']; ?></h5>
+                            <h5 class=" f-12"><?php echo __($module_list['module_name']); ?></h5>
                         </div>
                     <?php } } ?>
 
@@ -754,10 +754,10 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                     <span class="svg-icon menu-icon f-12">
                         <?php echo $listnav['Menu_Icon']; ?>
                     </span>
-            <?php echo ucwords($listnav['Label']); ?>
+            <?php echo ucwords(__($listnav['Label'])); ?>
                 <?php }else{ ?>                                 
                     <i class="<?php echo $listnav['Menu_Icon']; ?> btn waves-effect waves-light btn-success btn-icon f-12"></i> 
-                    <span style="font-size:14px;"> <?php echo ucwords($listnav['Label']); ?> </span>
+                    <span style="font-size:14px;"> <?php echo ucwords(__($listnav['Label'])); ?> </span>
                 <?php } ?>
             </a>
             <?php
@@ -796,11 +796,11 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
     <?php foreach ($chieldlist as  $list) { ?>    
             <div class="col-megamenu">
                 <ul class="list-unstyled">
-                    <h6 class="title"><?php echo ucwords($list['Label']); ?></h6>
+                    <h6 class="title"><?php echo ucwords(__($list['Label'])); ?></h6>
                     <ul class="list-unstyled">
                         <?php foreach ($list['child'] as  $listside) {?>
                             <li style="padding: 0px !important;"><a href="index.php?option=<?php echo $listside['Page_Name']; ?>">
-                              <?php echo ucwords($listside['Label']); ?>
+                              <?php echo ucwords(__($listside['Label'])); ?>
                           </a></li>
                         <?php } ?>
                     </ul>
@@ -815,7 +815,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                                 <ul class="list-unstyled">
                                     <?php foreach ($listnav['child'] as  $list) {?>
                                         <li style="padding: 0px !important;"><a href="index.php?option=<?php echo $list['Page_Name']; ?>">
-                                          <?php echo ucwords($list['Label']); ?>
+                                          <?php echo ucwords(__($list['Label'])); ?>
                                       </a></li>
                                   <?php } ?>
                               </ul>
@@ -835,10 +835,10 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                     <span class="svg-icon menu-icon f-12">
                         <?php echo $listnav['Menu_Icon']; ?>
                     </span>
-            <?php echo ucwords($listnav['Label']); ?>
+            <?php echo ucwords(__($listnav['Label'])); ?>
                 <?php }else{ ?>                                 
                     <i class="<?php echo $listnav['Menu_Icon']; ?> btn waves-effect waves-light btn-success btn-icon f-12"></i> 
-                    <span style="font-size:14px;letter-spacing: 1px;"> <?php echo ucwords($listnav['Label']); ?> </span>
+                    <span style="font-size:14px;letter-spacing: 1px;"> <?php echo ucwords(__($listnav['Label'])); ?> </span>
                 <?php } ?>
             </a>
             <?php $menucheck=0;  $menuwidth=350;
@@ -856,11 +856,11 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                     <div class="col-lg-6">
                         <div class="col-megamenu">
                             <ul class="list-unstyled">
-                            <h6 class="title"><?php echo $list['Label']; ?></h6>
+                            <h6 class="title"><?php echo __($list['Label']); ?></h6>
                             <ul class="list-unstyled">
                                 <?php foreach ($list['child'] as  $listside) {?>
                                     <li style="padding: 0px !important;"><a href="index.php?option=<?php echo $listside['Page_Name']; ?>">
-                                      <?php echo ucwords($listside['Label']); ?>
+                                      <?php echo ucwords(__($listside['Label'])); ?>
                                   </a></li>
                                 <?php } ?>
                             </ul>

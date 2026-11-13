@@ -269,7 +269,7 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
             <i class="ti-close icon-x"></i>
         </a>
         <div class="right-icon-control">
-            <h4 class="text-dark f-20 f-w-600 text-left">Add Company</h4>
+            <h4 class="text-dark f-20 f-w-600 text-left"><?= __('Add Company') ?></h4>
         </div>
     </div>
     <div class="main-friend-list card-body form-design custom-scroll" style="height: 600px">
@@ -280,18 +280,18 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                  <input type="hidden" name="transaction_table" id="transaction_table" value="<?php echo $transaction_table; ?>">
                  <input type="hidden" name="crm_customer_id" id="crm_customer_id" value="<?php echo $transaction['customer_id']; ?>">
                 <div class="bg-white p-3 b-radius-10">
-                    <h5 class="f-18 f-w-600 bg-gray p-2">Company Information</h5>
+                    <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Company Information') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label">Company Name<span class="requried">*</span></span>
                             <span class="d-block error-message text-danger companynameavilableornotmsg"></span>
-                            <input aria-label="Company Name" class="form-control requried_field" type="text" name="company_name" placeholder="Company Name" value="<?php echo $transaction['company_name']; ?>" onblur='checkCompanyNameAvilableOrNotInCustomer(this.value)'>
+                            <input aria-label="Company Name" class="form-control requried_field" type="text" name="company_name" placeholder="<?= __('Company Name') ?>" value="<?php echo $transaction['company_name']; ?>" onblur='checkCompanyNameAvilableOrNotInCustomer(this.value)'>
                         </div>
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label">Originator <span class="requried">*</span></span>
                              <span class="d-block error-message text-danger"></span>
                             <select aria-label="Originator" class="form-control js-example-basic-single requried_field" name="originator">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($application_users as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['originator'] == $uval['id'] || ($transaction['originator'] == "" && $_SESSION['userid']== $uval['id']))?"selected":"";?>><?php echo $uval['display_name']; ?></option>
                                 <?php } ?>
@@ -299,28 +299,28 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                         </div>
                         <?php  ?>
                         <div class="col-lg-6  form-group">
-                            <span class="form-label">Website URL</span>
-                            <input aria-label="Website URL" class="form-control" type="text" name="website_url" placeholder="Website URL" value="<?php echo $transaction['website_url']; ?>">
+                            <span class="form-label"><?= __('Website URL') ?></span>
+                            <input aria-label="Website URL" class="form-control" type="text" name="website_url" placeholder="<?= __('Website URL') ?>" value="<?php echo $transaction['website_url']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
-                            <span class="form-label">Pan No.</span>
-                            <input aria-label="Pan No." class="form-control" type="tel" name="pan_no" placeholder="Pan No." value="<?php echo $transaction['pan_no']; ?>">
+                            <span class="form-label"><?= __('Pan No.') ?></span>
+                            <input aria-label="Pan No." class="form-control" type="tel" name="pan_no" placeholder="<?= __('Pan No.') ?>" value="<?php echo $transaction['pan_no']; ?>">
                         </div>
 
                         <div class="col-lg-6  form-group">
-                            <span class="form-label">GST No.</span>
-                            <input aria-label="GST Number" class="form-control" type="text" name="gstin" placeholder="GST Number" value="<?php echo $transaction['gstin']; ?>">
+                            <span class="form-label"><?= __('GST No.') ?></span>
+                            <input aria-label="GST Number" class="form-control" type="text" name="gstin" placeholder="<?= __('GST Number') ?>" value="<?php echo $transaction['gstin']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
-                            <span class="form-label">Fax Number</span>
-                            <input aria-label="Fax Number" class="form-control" type="text" name="fax" placeholder="Fax Number" value="<?php echo $transaction['fax']; ?>">
+                            <span class="form-label"><?= __('Fax Number') ?></span>
+                            <input aria-label="Fax Number" class="form-control" type="text" name="fax" placeholder="<?= __('Fax Number') ?>" value="<?php echo $transaction['fax']; ?>">
                         </div>
                         <div class="col-lg-6">
-                            <span class="form-label">Image</span>
+                            <span class="form-label"><?= __('Image') ?></span>
                             <div class="col-lg-9 col-xl-6 ">
                                 <div class="profile-pic">
                                     <label class="-label" for="display_image">
-                                        <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                                        <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
                                     </label>
                                     <input type="file" name="image" id="display_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
                                     <img src="<?php echo "uploads/all/".$transaction['image'] ; ?>" id="outputdisplay_image" width="200" alt="Attachment Preview" />
@@ -329,55 +329,55 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                             </div>
                         </div>
                    </div>
-                    <h5 class="f-18 f-w-600 bg-gray p-2">Address Information</h5>
+                    <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Address Information') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-12 form-group">
-                            <span class="form-label">Address</span>
+                            <span class="form-label"><?= __('Address') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Address" name="address" placeholder="Address" class="border form-control" rows="3" name="address" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['address']; ?></textarea>
+                                <textarea aria-label="Address" name="address" placeholder="<?= __('Address') ?>" class="border form-control" rows="3" name="address" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['address']; ?></textarea>
                             </div>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Country</span>
+                            <span class="form-label"><?= __('Country') ?></span>
                             <select aria-label="Country" class="form-control js-example-basic-single" name="country_id" onchange="selectedcategory(this.value,'state_id','states','country_id')">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($countries as $cval){ ?>
                                     <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['country_id'] == $cval['id']?"selected":"";?>><?php echo $cval['country_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">State</span>
+                            <span class="form-label"><?= __('State') ?></span>
                             <select aria-label="State" class="form-control js-example-basic-single" name="state_id" id="state_id" onchange="selectedcategory(this.value,'city_id','cities','state_id')">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($states as $cval){ ?>
                                     <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['state_id'] == $cval['id']?"selected":"";?>><?php echo $cval['state_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">City</span>
+                            <span class="form-label"><?= __('City') ?></span>
                             <select aria-label="City" class="form-control js-example-basic-single" name="city_id" id="city_id">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($cities as $cval){ ?>
                                     <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['city_id'] == $cval['id']?"selected":"";?>><?php echo $cval['city_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <span class="form-label">Post Code</span>
-                            <input aria-label="Postal Code" class="form-control" type="text" name="post_code" placeholder="Postal Code" value="<?php echo $transaction['post_code']; ?>">
+                            <span class="form-label"><?= __('Post Code') ?></span>
+                            <input aria-label="Postal Code" class="form-control" type="text" name="post_code" placeholder="<?= __('Postal Code') ?>" value="<?php echo $transaction['post_code']; ?>">
                         </div>
                          <div class="col-lg-12 form-group">
-                            <span class="form-label">Description</span>
+                            <span class="form-label"><?= __('Description') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Description" name="remark" placeholder="Description" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
+                                <textarea aria-label="Description" name="remark" placeholder="<?= __('Description') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="mt-2">
-                        <button type="button" class="btn btn-primary waves-effect waves-light sbt_loading_en_dis crm_contact_sbt_btn" onclick="submitLeadForm()">Submit</button>
-                        <button type="reset" class="btn btn-default waves-effect " data-bs-dismiss="modal">Reset</button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light sbt_loading_en_dis crm_contact_sbt_btn" onclick="submitLeadForm()"><?= __('Submit') ?></button>
+                        <button type="reset" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Reset') ?></button>
                     </div>
                 </div>
                 </form>
@@ -390,26 +390,26 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                             <?php if(count((array)$company_with_contacts) !=0){ ?>
                             <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                                 <thead>
-                                    <tr><th scope="col">Name</th>
-                                        <th scope="col">Number</th>
-                                        <th scope="col">Originator</th>
-                                       <th scope="col" class="text-center">Default Contact</th>
+                                    <tr><th scope="col"><?= __('Name') ?></th>
+                                        <th scope="col"><?= __('Number') ?></th>
+                                        <th scope="col"><?= __('Originator') ?></th>
+                                       <th scope="col" class="text-center"><?= __('Default Contact') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($company_with_contacts as $crmleads){ ?>
                                     <tr>
                                         <td>
-                                            <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('CONTACT','<?php echo $crmleads['id']; ?>')"><?php echo $crmleads['display_name']; ?></button>
+                                            <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('CONTACT','<?php echo $crmleads['id']; ?>')"><?php echo htmlspecialchars(__($crmleads['display_name'] ?? '')); ?></button>
                                         </td>
                                         <td><?php echo $crmleads['phone']; ?></td>
                                         <td><?php echo $_SESSION['users'][$crmleads['originator']]; ?></td>
                                         <td class="text-center">
                                             <?php if($crmleads['id'] == $transaction['default_crm_contact_id']){
-                                                echo '<span class="form-label label label-md label-warning">Active</span>';
+                                                echo '<span class="form-label label label-md label-warning">' . __('Active') . '</span>';
                                             }else{ ?>
 
-                                                <button type="button" class="btn btn-primary waves-effect waves-light" onclick="setDefaultContactWithCompany('<?php echo $crmleads['id']; ?>')">Set Default Contact</button>
+                                                <button type="button" class="btn btn-primary waves-effect waves-light" onclick="setDefaultContactWithCompany('<?php echo $crmleads['id']; ?>')"><?= __('Set Default Contact') ?></button>
 
                                             <?php } ?>
                                         </td>
@@ -430,7 +430,7 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                                 <div class="col-lg-7">
 
                                     <select aria-label="Add More Contact" class="form-control js-example-basic-single " id="add_more_contact">
-                                        <option value="">Select Any One</option>
+                                        <option value=""><?= __('Select Any One') ?></option>
                                        <?php foreach($without_company_contacts as $uval){ ?>
                                             <option value="<?php echo $uval['id']; ?>"><?php echo $uval['display_name']; ?></option>
                                         <?php } ?>
@@ -438,7 +438,7 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                                 </div>
                                 <div class="col-lg-5">
                                     <span class="text-danger" id="error_message_companyid"></span>
-                                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="addContactWithCompany()">Add Contact With Company</button>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="addContactWithCompany()"><?= __('Add Contact With Company') ?></button>
                                 </div>
                             </div>
                         <?php } ?>
@@ -449,11 +449,11 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                         <?php if(count((array)$company_with_deals) !=0){ ?>
                             <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_2">
                                 <thead>
-                                    <tr><th scope="col">Deal Name</th>
-                                        <th scope="col">Originator</th>
-                                        <th scope="col">Company</th>
-                                        <th scope="col">Due Date</th>
-                                        <th scope="col">Expected Close Date</th>
+                                    <tr><th scope="col"><?= __('Deal Name') ?></th>
+                                        <th scope="col"><?= __('Originator') ?></th>
+                                        <th scope="col"><?= __('Company') ?></th>
+                                        <th scope="col"><?= __('Due Date') ?></th>
+                                        <th scope="col"><?= __('Expected Close Date') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -461,7 +461,7 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                                         ?>
                                     <tr>
                                         <td>
-                                            <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('DEALS','<?php echo $campaignsres['id']; ?>')"><?php echo $campaignsres['deal_name']; ?></button>
+                                            <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('DEALS','<?php echo $campaignsres['id']; ?>')"><?php echo htmlspecialchars(__($campaignsres['deal_name'] ?? '')); ?></button>
                                         </td>
                                         <td ><?php echo $_SESSION['users'][$campaignsres['originator']]; ?></td>
                                          <td ><?php echo $campaignsres['crm_company_id']; ?></td>

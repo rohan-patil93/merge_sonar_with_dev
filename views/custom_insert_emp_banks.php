@@ -89,7 +89,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
     <?php echo $workflowsteps['current_status_ribbon'];?>
     <div class="card-header">
         <?php if($_POST['ajaxbank'] !="Y"){ ?>
-            <h5>Bank Details</h5>
+            <h5><?= __('Bank Details') ?></h5>
         <?php } ?>
         <div class="card-header-right table-card-header m-r-50" >
             <?php echo $workflowsteps['workflow_btn'];?>
@@ -103,10 +103,10 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
             <input type="hidden" name="emp_bank_rid" value="<?php echo $emp_banks['id']; ?>">
             <div class="row">
                 <div class="col-xl-6 mt-2" >
-                    <span class="form-label">Bank</span>
+                    <span class="form-label"><?= __('Bank') ?></span>
                     <div class="">
                         <select aria-label="Bank" class ="form-control form-control-lg form-select js-example-basic-single"  name="bank_id" >
-                            <option value="">Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach ($banks as $bnk) {  ?>
                                <option <?php if($emp_banks['bank_id'] == $bnk['id']){ ?>selected <?php
 } ?> value="<?php echo $bnk['id']; ?>" >
@@ -117,16 +117,16 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                     </div>
                 </div>
                 <div class="col-lg-6 mt-2" >
-                    <span  class="form-label">IFSC Code</span>
-                    <input aria-label="Ifsc Code" type="text" class="form-control"  name="ifsc_code" value="<?php echo $emp_banks['ifsc_code']; ?>" placeholder="Enter IFSC Code"/>
+                    <span  class="form-label"><?= __('IFSC Code') ?></span>
+                    <input aria-label="Ifsc Code" type="text" class="form-control"  name="ifsc_code" value="<?php echo $emp_banks['ifsc_code']; ?>" placeholder="<?= __('Enter IFSC Code') ?>"/>
                 </div>
                 <div class="col-lg-6 mt-2" >
-                    <span  class="form-label">Account No</span>
-                    <input aria-label="Bank Account No" type="text" class="form-control"  name="bank_account_no" value="<?php echo $emp_banks['bank_account_no']; ?>" placeholder="Enter Account No"/>
+                    <span  class="form-label"><?= __('Account No') ?></span>
+                    <input aria-label="Bank Account No" type="text" class="form-control"  name="bank_account_no" value="<?php echo $emp_banks['bank_account_no']; ?>" placeholder="<?= __('Enter Account No') ?>"/>
                 </div>
                 <div class="col-lg-6 mt-2" >
-                    <span  class="form-label">Note</span>
-                    <textarea aria-label="Enter Note" type="text" class="form-control"  name="request_note" placeholder="Enter Note"/><?php echo $emp_banks['request_note']; ?></textarea>
+                    <span  class="form-label"><?= __('Note') ?></span>
+                    <textarea aria-label="Enter Note" type="text" class="form-control"  name="request_note" placeholder="<?= __('Enter Note') ?>"/><?php echo $emp_banks['request_note']; ?></textarea>
                 </div>
             </div>
         </form>

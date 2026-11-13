@@ -162,12 +162,12 @@ function validateForm() {
  function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
      swal({
          title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-         text: "Please note the status of the document will change to "+new_status_name,
+         text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
          type: "info",
          showCancelButton: true,
          confirmButtonClass: "btn-danger",
-         confirmButtonText: "Yes",
-         cancelButtonText: "No",
+         confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+         cancelButtonText: <?php echo json_encode(__('No')); ?>,
          closeOnConfirm: false
      },
      function(){
@@ -194,12 +194,12 @@ function validateForm() {
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...')); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -223,13 +223,13 @@ function validateForm() {
         echo $workflowsteps['current_status_ribbon'];
     }?>
                     <div class="card-header table-card-header">
-                        <h5>Work From Home / On-Duty Request  </h5>
+                        <h5><?php echo __('Work From Home / On-Duty Request'); ?>  </h5>
                         <div class="card-header-right">
 
                             <?php echo $workflowsteps['workflow_btn'];?>
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?php echo __('Back'); ?>
                     </a>
                 </div>
 
@@ -248,7 +248,7 @@ function validateForm() {
                     <?php if($error_message !=''){ ?>
                     <div class="alert alert-danger background-danger alert-dismissible">
                         <strong><?php echo $error_message; ?></strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
                     </div>
                     <?php } ?>
                     <input type="hidden" name="old_leave_days" id="old_leave_days" value="<?php echo $employee_leaves['leave_days'] !=""?$employee_leaves['leave_days']:'0'; ?>">
@@ -269,55 +269,55 @@ function validateForm() {
                                 $selected_type = '0';
                             }
                             ?>
-                                <span class="form-label">Request Type</span>
+                                <span class="form-label"><?php echo __('Request Type'); ?></span>
                                 <div class="form-radio ">
                                     <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input aria-label="Request Type" type="radio" name="request_type" value="0"
-                                                <?php if($selected_type == '0') { echo 'checked';
+                                            <input aria-label="<?php echo __('Request Type'); ?>" type="radio" name="request_type" value="0"
+                                                <?php if($selected_type == '0') { echo __('checked');
 } ?>>
-                                            <i class="helper"></i>Work From Home
+                                            <i class="helper"></i><?php echo __('Work From Home'); ?>
                                         </label>
                                     </div>
 
                                     <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input aria-label="Request Type" type="radio" name="request_type" value="1"
-                                                <?php if($selected_type == '1') { echo 'checked';
+                                            <input aria-label="<?php echo __('Request Type'); ?>" type="radio" name="request_type" value="1"
+                                                <?php if($selected_type == '1') { echo __('checked');
 } ?>>
-                                            <i class="helper"></i>On-Duty
+                                            <i class="helper"></i><?php echo __('On-Duty'); ?>
                                         </label>
                                     </div>
                                 </div>
 
                             </div>
                             <div class="col-lg-6 ">
-                                <span class="form-label">Start Date(s)</span>
+                                <span class="form-label"><?php echo __('Start Date(s)'); ?></span>
                                 <div class=" form-group">
-                                    <input aria-label="Input field" type="text" onchange="tocheckdays()" class="form-control startdatepicker"  value="<?php echo  $_POST['effective_from_date']!=""?$_POST['effective_from_date']:dateFormate($employee_leaves['effective_from_date']); ?>"  name="effective_from_date"  id="effective_from_date" />
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" onchange="tocheckdays()" class="form-control startdatepicker"  value="<?php echo  $_POST['effective_from_date']!=""?$_POST['effective_from_date']:dateFormate($employee_leaves['effective_from_date']); ?>"  name="effective_from_date"  id="effective_from_date" />
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <span class="form-label">End Date(s)</span>
+                                <span class="form-label"><?php echo __('End Date(s)'); ?></span>
                                 <div class=" form-group">
                                     <div class=" date ">
-                                        <input aria-label="Input field" type="text" onchange="tocheckdays()" class="form-control enddatepicker"  value="<?php echo  $_POST['effective_to_date']!=""?$_POST['effective_to_date']:dateFormate($employee_leaves['effective_to_date']); ?>"  name="effective_to_date"  id="effective_to_date" />
+                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" onchange="tocheckdays()" class="form-control enddatepicker"  value="<?php echo  $_POST['effective_to_date']!=""?$_POST['effective_to_date']:dateFormate($employee_leaves['effective_to_date']); ?>"  name="effective_to_date"  id="effective_to_date" />
                                     </div>
                                 </div>
                             </div>
 
 
                             <div class=" col-lg-6 ">
-                                <span class="form-label">Number Of  Days</span>
+                                <span class="form-label"><?php echo __('Number Of  Days'); ?></span>
                                 <?php  $cleave_days = $_POST['days']!=""?$_POST['days']:$employee_leaves['leave_days'];
                                 $cleave_days = $cleave_days !="" ? $cleave_days : 1;
                                 ?>
-                                <input aria-label="Number Days" type="text" class="form-control" name="number_days" value="<?php echo $_POST['number_days']!=""?$_POST['number_days']:$employee_leaves['number_days']; ?>" id="number_days" readonly="">
+                                <input aria-label="<?php echo __('Number Days'); ?>" type="text" class="form-control" name="number_days" value="<?php echo $_POST['number_days']!=""?$_POST['number_days']:$employee_leaves['number_days']; ?>" id="number_days" readonly="">
                             </div>
 
                             <div class=" col-lg-6 form-group">
-                                <span class="form-label">Special Request</span>
-                                <textarea aria-label="Special Request" type="text" class="form-control" name="special_request" rows="5"><?php echo $_POST['special_request']!=""?$_POST['special_request']:$employee_leaves['special_request'];?></textarea>
+                                <span class="form-label"><?php echo __('Special Request'); ?></span>
+                                <textarea aria-label="<?php echo __('Special Request'); ?>" type="text" class="form-control" name="special_request" rows="5"><?php echo $_POST['special_request']!=""?$_POST['special_request']:$employee_leaves['special_request'];?></textarea>
                             </div>
                             <div class="card-footer">
                                 <div class="row">
@@ -325,8 +325,8 @@ function validateForm() {
                                         <input type="hidden" name="emp_id" value="<?php echo $_SESSION['emp_id']; ?>" />
                                         <input type="hidden" name="submit" value="Add" />
                                         <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" <?php if($employee_leaves['current_status'] == ST_ACTIVE || $employee_leaves['current_status'] ==ST_SEND_BACK || $employee_leaves['current_status'] ==""){
-}else{ echo "disabled";
-} ?>  name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
+}else{ echo __('disabled');
+} ?>  name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -338,7 +338,7 @@ function validateForm() {
                     <div class="card card-custom">
 
                         <div class="card-header">
-                            <h5>My Work From Home Requests</h5>
+                            <h5><?php echo __('My Work From Home Requests'); ?></h5>
 
                         </div>
                         <div class="card-body">

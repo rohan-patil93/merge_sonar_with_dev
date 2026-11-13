@@ -53,14 +53,14 @@ $equipments = $result['equipments'];
 <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
 <?php } ?>
 <div class="card">
     <div class="card-header">
-        <h5>Equipment Incidents</h5>
+        <h5><?php echo __('Equipment Incidents'); ?></h5>
         <div class="card-header-right">
-            <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</button>
+            <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?php echo __('Back'); ?></button>
         </div>
     </div>
     <div class="card-body m-l-50  m-r-50">
@@ -69,11 +69,11 @@ $equipments = $result['equipments'];
                 <div class="col-lg-1">
                 </div>
                 <div class="col-lg-2">
-                    <span class="form-label">Scan QR Code</span>
+                    <span class="form-label"><?php echo __('Scan QR Code'); ?></span>
                     <div class="col-lg-9 col-xl-6">
                         <div class="profile-pic">
                             <label class="-label" for="qr_image">
-                                <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                                <span> <i class="fa fa-camera"></i> &nbsp; <?php echo __('Change Image'); ?></span>
                             </label>
                             <input type="file" name="qr_image" id="qr_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
                             <img src="<?php echo "uploads/all/".$buildings['qr_image'] ; ?>" id="outputdisplay_logo" width="200" alt="Logo" />
@@ -82,31 +82,31 @@ $equipments = $result['equipments'];
                     </div>
                 </div>
                 <div class="form-group col-lg-1">
-                    <span  class="form-label">OR </span>
+                    <span  class="form-label"><?php echo __('OR'); ?> </span>
                 </div>
                 <div class="form-group col-lg-8">
                     <div class="row">
                         <div class="col-lg-6">
-                            <span class="form-label d-block">Equipment</span>
-                            <select aria-label="Equipment" class="js-example-basic-single" name="equipment_id">
-                                <option value="">Select Any One</option>
+                            <span class="form-label d-block"><?php echo __('Equipment'); ?></span>
+                            <select aria-label="<?php echo __('Equipment'); ?>" class="js-example-basic-single" name="equipment_id">
+                                <option value=""><?php echo __('Select Any One'); ?></option>
                                 <?php foreach($equipments as $stytpe){ ?>
-                                <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['equipment_id']?"selected":""; ?>><?php echo $stytpe['equipment_name']; ?></option>
+                                <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['equipment_id']?"selected":""; ?>><?php echo __($stytpe['equipment_name']); ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6">
-                            <span class="form-label d-block">Note</span>
-                            <textarea aria-label="Note" class="form-control" name="note" ></textarea>
+                            <span class="form-label d-block"><?php echo __('Note'); ?></span>
+                            <textarea aria-label="<?php echo __('Note'); ?>" class="form-control" name="note" ></textarea>
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Equipment Image 1</span>
+                            <span class="form-label"><?php echo __('Equipment Image 1'); ?></span>
                             <div class="col-lg-9 col-xl-6">
                                 <div class="profile-pic">
                                     <label class="-label" for="equipment_image_1">
-                                        <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                                        <span> <i class="fa fa-camera"></i> &nbsp; <?php echo __('Change Image'); ?></span>
                                     </label>
                                     <input type="file" name="image_1" id="equipment_image_1" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
                                     <img src="<?php echo "uploads/all/".$buildings['image_1'] ; ?>" id="outputequipment_image_1" width="200" alt="Attachment Preview" />
@@ -115,11 +115,11 @@ $equipments = $result['equipments'];
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Equipment Image 2</span>
+                            <span class="form-label"><?php echo __('Equipment Image 2'); ?></span>
                             <div class="col-lg-9 col-xl-6">
                                 <div class="profile-pic">
                                     <label class="-label" for="equipment_image_2">
-                                        <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                                        <span> <i class="fa fa-camera"></i> &nbsp; <?php echo __('Change Image'); ?></span>
                                     </label>
                                     <input type="file" name="image_2" id="equipment_image_2" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
                                     <img src="<?php echo "uploads/all/".$buildings['image_2'] ; ?>" id="outputequipment_image_2" width="200" alt="Attachment Preview" />
@@ -132,7 +132,7 @@ $equipments = $result['equipments'];
             </div>
             <div class="card-footer pt-0 mt-3">
                 <input type="hidden" name="rid" value="<?php echo $rid; ?>">
-                <button type="button" class="btn btn-primary" name="submit_equipment" onclick="submitBuildingFloorPlans()"> <?php echo $rid !=""?"Update":"Submit";?></button>
+                <button type="button" class="btn btn-primary" name="submit_equipment" onclick="submitBuildingFloorPlans()"> <?php echo $rid !=""?__('Update'):__('Submit');?></button>
             </div>
         </form>
     </div>

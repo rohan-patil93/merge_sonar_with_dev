@@ -54,7 +54,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     <i class="ti-settings"></i>
                 </div>
                 <div class="step-icon bg-secondary"></div>
-                <div class="font-size-lg mt-1">Step 2</div>
+                <div class="font-size-lg mt-1"><?= __('Step 2') ?></div>
 
             </div>
             <div class="col-lg-4">
@@ -62,7 +62,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     <i class="ti-settings"></i>
                 </div>
 
-                <div class="font-size-lg mt-1">Step 3</div>
+                <div class="font-size-lg mt-1"><?= __('Step 3') ?></div>
 
             </div>
 
@@ -72,11 +72,10 @@ $_SESSION['apply_js']['multiselest'] = 1;
             <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
             <div class="card card-custom card-sticky" id="kt_page_sticky_card">
                 <div class="card-header table-card-header">
-                      <h5><?php echo "Data Mapping";  ?></h5>
+                      <h5><?= __('Data Mapping') ?></h5>
                       <div class="card-header-right table-card-header ">
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                                  <i class="icofont icofont-reply"></i>
-                                  Back
+                                  <i class="icofont icofont-reply"></i> <?= __('Back') ?>
                             </a>
                         </div>
                 </div>
@@ -93,7 +92,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                             </label>
                                 <div class="col-4">
                                     <select aria-label="Ect[]" class="form-select js-example-basic-single" name="select[]">
-                                        <option value="0">Select Any one</option>
+                                        <option value="0"><?= __('Select Any One') ?></option>
                                         <?php foreach ($selectdata as  $select) {
                                             if($select != 'id'){
                                         ?>
@@ -117,13 +116,13 @@ $_SESSION['apply_js']['multiselest'] = 1;
             <div class="row">
                 <div class="col-lg-6">
                     <input type="hidden" name="submit_map" value="Add">
-                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="exit"><i class="la la-check"></i>Save &amp; exit</button>
-                    <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="continue"><i class="la la-check-circle"></i>Save &amp; continue</button>
-                    <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2"><i class="la la-close"></i>Cancel</button>
+                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="exit"><i class="la la-check"></i><?= __('Save & exit') ?></button>
+                    <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="continue"><i class="la la-check-circle"></i><?= __('Save & continue') ?></button>
+                    <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2"><i class="la la-close"></i><?= __('Cancel') ?></button>
                 </div>
                 <div class="col-lg-3">        </div>
                 <div class="col-lg-3 text-right">
-                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?= __('Delete') ?></button>
                 </div>
             </div>
         </div>

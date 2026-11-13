@@ -23,8 +23,8 @@ $projects = $response['projects'] ?? array();
 ?>
 
 <div class="modal-header">
-    <h5 class="modal-title"><?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?> Projects</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?php echo htmlspecialchars(__($title), ENT_QUOTES, 'UTF-8'); ?> <?= __('Projects') ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8') ?>"></button>
 </div>
 <div class="modal-body">
     <div class="card table-card mb-0">
@@ -33,10 +33,10 @@ $projects = $response['projects'] ?? array();
                 <table class="table table-hover m-b-0">
                     <thead>
                         <tr>
-                            <th scope="col">Sr. No</th>
-                            <th scope="col">Creator</th>
-                            <th scope="col">Project Name</th>
-                            <th scope="col" class="text-end"> <?php echo $type == 'spent'?'Spent':'Cost' ?> </th>
+                            <th scope="col"><?= __('Sr. No') ?></th>
+                            <th scope="col"><?= __('Creator') ?></th>
+                            <th scope="col"><?= __('Project Name') ?></th>
+                            <th scope="col" class="text-end"> <?php echo $type == 'spent' ? __('Spent') : __('Cost'); ?> </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,7 +49,7 @@ $projects = $response['projects'] ?? array();
                                         <?php if (($_SESSION['user_image'][$project['created_by']] ?? '') != '') { ?>
                                             <img src="uploads/all/<?php echo $_SESSION['user_image'][$project['created_by']]; ?>" class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                                         <?php } else { ?>
-                                            <span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$project['created_by']] ?? ''); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8') ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$project['created_by']] ?? ''); ?></span>
                                         <?php } ?>
                                         <label class="mt-2 ml-2"><?php echo $_SESSION['users'][$project['created_by']] ?? ''; ?></label>
                                     </td>
@@ -70,7 +70,7 @@ $projects = $response['projects'] ?? array();
                             <tr>
                                 <td colspan="4">
                                     <div class="text-center">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records') ?></p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                         </div>

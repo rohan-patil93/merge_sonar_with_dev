@@ -10,7 +10,7 @@ if($_POST['action']=="pagelist"){
 ?>
       <div class="form-group row">
         <div class="form-group col-lg-4">
-       <h4 class="modal-title col-md-7" id="myModalLabel2" ><b>Page Permissions</b></h4>
+       <h4 class="modal-title col-md-7" id="myModalLabel2" ><b><?= __('Page Permissions') ?></b></h4>
      </div>
     <?php if(!empty($resutlvalue)){ ?> 
      <div class="form-group col-lg-6">
@@ -19,7 +19,7 @@ if($_POST['action']=="pagelist"){
         <input type="checkbox" id="checkpermisionalls" />
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-        </span> Select Permissions
+        </span> <?= __('Select Permissions') ?>
       </label>
     </div>
   </div><?php } ?>
@@ -39,7 +39,7 @@ foreach($resutlvalue as $resultlist){
  $valuegs = $valueg[0];
     ?>
       <div class="form-group row">
-        <label class="col-md-2  control-label" style="margin-top:10px"><?php echo ucwords($resultlist['name']); ?></label>
+        <label class="col-md-2  control-label" style="margin-top:10px"><?php echo htmlspecialchars(ucwords(__($resultlist['name'] ?? ''))); ?></label>
         <input type="hidden" name="processname[<?php echo $i; ?>]" value="<?php echo $resultlist['application_page_name']; ?>">
         <input type="hidden" name="processpageid[<?php echo $i; ?>]" value="<?php echo $resultlist['id']; ?>">
           <input type="hidden" name="processtablename[<?php echo $i; ?>]" value="<?php echo checkTableName($resultlist['application_page_name']); ?>">
@@ -50,7 +50,7 @@ foreach($resutlvalue as $resultlist){
              <span class="cr">
               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
             </span>
-            <span>View</span>
+            <span><?= __('View') ?></span>
           </label>
         </div>  
         <div class="checkbox-fade fade-in-primary">
@@ -59,7 +59,7 @@ foreach($resutlvalue as $resultlist){
             <span class="cr">
               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
             </span>
-            <span>Insert</span>
+            <span><?= __('Insert') ?></span>
           </label>
         </div>  
         <div class="checkbox-fade fade-in-primary">
@@ -68,7 +68,7 @@ foreach($resutlvalue as $resultlist){
             <span class="cr">
               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
             </span>
-            <span>Update</span>
+            <span><?= __('Update') ?></span>
           </label>
         </div>  
         <div class="checkbox-fade fade-in-primary">
@@ -77,7 +77,7 @@ foreach($resutlvalue as $resultlist){
            <span class="cr">
             <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
           </span>
-          <span>Delete</span>
+          <span><?= __('Delete') ?></span>
         </label>
       </div>  
       <div class="checkbox-fade fade-in-primary">
@@ -86,7 +86,7 @@ foreach($resutlvalue as $resultlist){
          <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
-        <span>Print</span>
+        <span><?= __('Print') ?></span>
       </label>
     </div>  
     <div class="checkbox-fade fade-in-primary">
@@ -96,7 +96,7 @@ foreach($resutlvalue as $resultlist){
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
-        <span>Import</span>
+        <span><?= __('Import') ?></span>
       </label>
     </div>
   <!--   <div class="checkbox-fade fade-in-primary">
@@ -114,7 +114,7 @@ foreach($resutlvalue as $resultlist){
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
-      <span>Download</span>
+      <span><?= __('Download') ?></span>
     </label>
   </div>
   <div class="checkbox-fade fade-in-primary">
@@ -123,7 +123,7 @@ foreach($resutlvalue as $resultlist){
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
-      <span>Approval</span>
+      <span><?= __('Approval') ?></span>
     </label>
   </div>
   <div class="checkbox-fade fade-in-primary">
@@ -132,7 +132,7 @@ foreach($resutlvalue as $resultlist){
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
-      <span>Analytic</span>
+      <span><?= __('Analytic') ?></span>
     </label>
   </div>  
 </div>
@@ -219,24 +219,24 @@ foreach($resutlvalue as $resultlist){
    <input type="hidden" name="role_id" value="<?php echo $_POST['role_id']; ?>">
    <div class="row">
    <div class="form-group col-lg-3 col-md-12 col-sm-12 col-12">
-    <label class="font-weight-bolder">Role Name</label>
+    <label class="font-weight-bolder"><?= __('Role Name') ?></label>
     <input type="text" class="form-control text-capitalize" id="role_name" name="role_name" value="<?php echo $aruserdetails['name']; ?>">
   </div>
   <div class="form-group col-lg-3 col-md-12 col-sm-12 col-12">
-    <label class="font-weight-bolder">Short Code</label>
+    <label class="font-weight-bolder"><?= __('Short Code') ?></label>
    <input type="text" class="form-control text-uppercase" id="role_short_code" name="role_short_code" value="<?php echo $aruserdetails['role_short_code']; ?>" data-rowid="1" onkeyup="checkMailidAvailableOrNot(this.value)">
-    <span class="text-danger f-12" id="iduser_email" style="display:none">Already Used This Short Code</span>
+    <span class="text-danger f-12" id="iduser_email" style="display:none"><?= __('Already Used This Short Code') ?></span>
   </div>
   <div class="form-group col-lg-3 col-md-12 col-sm-12 col-12">
-    <label class="font-weight-bolder">Module</label>
+    <label class="font-weight-bolder"><?= __('Module') ?></label>
     <input type="hidden" name="application_module" id="application_module" value="<?php echo $modulelist['module_id']; ?>">
-    <input type="text" class="form-control" value="<?php echo $modulelist['display_name']; ?>" readonly>
+    <input type="text" class="form-control" value="<?php echo htmlspecialchars(__($modulelist['display_name'] ?? '')); ?>" readonly>
 
     
  
   </div>
   <div class="form-group col-lg-3 col-md-12 col-sm-12 col-12">
-      <label class="font-weight-bolder">Menu Location</label></br>
+      <label class="font-weight-bolder"><?= __('Menu Location') ?></label></br>
     <?php foreach($menulocation as $menulocations){  ?>
           <div class="checkbox-fade fade-in-primary mt-2">
             <label class="form-label">
@@ -244,7 +244,7 @@ foreach($resutlvalue as $resultlist){
              <span class="cr">
               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
             </span>
-            <span><?php echo $menulocations['genc_detail_name'];?></span>
+            <span><?php echo htmlspecialchars(__($menulocations['genc_detail_name'] ?? ''));?></span>
           </label>
         </div>
         <?php } ?> 
@@ -252,10 +252,10 @@ foreach($resutlvalue as $resultlist){
   </div>
 </div>
   <div class="form-group row">
-   <h4 class="modal-title" id="myModalLabel2"><b>Role Permissions</b></h4>
+   <h4 class="modal-title" id="myModalLabel2"><b><?= __('Role Permissions') ?></b></h4>
  </div>
  <div class="form-group row">
-   <label class="col-lg-3 col-md-6 col-sm-6 col-12 control-label font-weight-bolder"  onclick ="checkall()">Administrator Access  </label>
+   <label class="col-lg-3 col-md-6 col-sm-6 col-12 control-label font-weight-bolder"  onclick ="checkall()"><?= __('Administrator Access') ?></label>
 
    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
     <div class="checkbox-fade fade-in-primary">
@@ -263,7 +263,7 @@ foreach($resutlvalue as $resultlist){
         <input type="checkbox" class="select_all" id="checkbox" />
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-        </span> Select All
+        </span> <?= __('Select All') ?>
       </label>
     </div></div>
   </div> 
@@ -277,7 +277,7 @@ foreach($resutlvalue as $resultlist){
       <label class="form-label">
         <input type="checkbox" class="checkboxsss" <?php echo in_array($resultlist['id'], (array)$processseleclis)?"checked":""; ?>  id="checkbox<?php echo $i; ?>" name="permision[<?php echo $i; ?>]"  value="<?php echo $resultlist['id']; ?>"> <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-          </span> <?php echo ucwords($resultlist['process_name']); ?>
+          </span> <?php echo htmlspecialchars(ucwords(__($resultlist['process_name'] ?? ''))); ?>
         </label>
       </div>
     </div>
@@ -286,7 +286,7 @@ foreach($resutlvalue as $resultlist){
     <div class="pageswooow">
   <div class="form-group row">
         <div class="form-group col-lg-4">
-       <h4 class="modal-title col-md-7" id="myModalLabel2" ><b>Page Permissions</b></h4>
+       <h4 class="modal-title col-md-7" id="myModalLabel2" ><b><?= __('Page Permissions') ?></b></h4>
      </div>
     <?php if(!empty($resutlvalue22)){ ?> 
      <div class="form-group col-lg-6">
@@ -295,7 +295,7 @@ foreach($resutlvalue as $resultlist){
         <input type="checkbox" id="checkpermisionalls" />
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-        </span> All Permissions
+        </span> <?= __('All Permissions') ?>
       </label>
     </div>
   </div>
@@ -308,7 +308,7 @@ foreach($resutlvalue22 as $resultlist){
  $valuegs = $valueg[0];
     ?>
       <div class="form-group row">
-        <label class="col-md-2  control-label" style="margin-top:10px"><?php echo ucwords($resultlist['name']); ?></label>
+        <label class="col-md-2  control-label" style="margin-top:10px"><?php echo htmlspecialchars(ucwords(__($resultlist['name'] ?? ''))); ?></label>
         <input type="hidden" name="processname[<?php echo $i; ?>]" value="<?php echo $resultlist['application_page_name']; ?>">
          <input type="hidden" name="processtablename[<?php echo $i; ?>]" value="<?php echo checkTableName($resultlist['application_page_name']); ?>">
 
@@ -322,7 +322,7 @@ foreach($resutlvalue22 as $resultlist){
              <span class="cr">
               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
             </span>
-            <span>View</span>
+            <span><?= __('View') ?></span>
           </label>
         </div>  
         <div class="checkbox-fade fade-in-primary mt-2">
@@ -331,7 +331,7 @@ foreach($resutlvalue22 as $resultlist){
             <span class="cr">
               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
             </span>
-            <span>Insert</span>
+            <span><?= __('Insert') ?></span>
           </label>
         </div>  
         <div class="checkbox-fade fade-in-primary mt-2">
@@ -340,7 +340,7 @@ foreach($resutlvalue22 as $resultlist){
             <span class="cr">
               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
             </span>
-            <span>Update</span>
+            <span><?= __('Update') ?></span>
           </label>
         </div>  
         <div class="checkbox-fade fade-in-primary mt-2">
@@ -349,7 +349,7 @@ foreach($resutlvalue22 as $resultlist){
            <span class="cr">
             <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
           </span>
-          <span>Delete</span>
+          <span><?= __('Delete') ?></span>
         </label>
       </div>  
       <div class="checkbox-fade fade-in-primary mt-2">
@@ -358,7 +358,7 @@ foreach($resutlvalue22 as $resultlist){
          <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
-        <span>Print</span>
+        <span><?= __('Print') ?></span>
       </label>
     </div>  
     <div class="checkbox-fade fade-in-primary mt-2">
@@ -368,7 +368,7 @@ foreach($resutlvalue22 as $resultlist){
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
-        <span>Import</span>
+        <span><?= __('Import') ?></span>
       </label>
     </div>
 <!--     <div class="checkbox-fade fade-in-primary mt-2">
@@ -386,7 +386,7 @@ foreach($resutlvalue22 as $resultlist){
      <span class="cr">
       <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
     </span>
-    <span>Download</span>
+    <span><?= __('Download') ?></span>
   </label>
 </div> 
 <div class="checkbox-fade fade-in-primary">
@@ -395,7 +395,7 @@ foreach($resutlvalue22 as $resultlist){
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
-      <span>Approval</span>
+      <span><?= __('Approval') ?></span>
     </label>
   </div>
   <div class="checkbox-fade fade-in-primary">
@@ -404,7 +404,7 @@ foreach($resutlvalue22 as $resultlist){
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
-      <span>Analytic</span>
+      <span><?= __('Analytic') ?></span>
     </label>
   </div>   
 </div>
@@ -413,8 +413,8 @@ foreach($resutlvalue22 as $resultlist){
 
 </div>  
     <div class="modal-footer">
-     <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>
-     <button type="button" class="btn btn-primary font-weight-bold" onclick="addRole()">Save changes</button>
+     <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Cancel') ?></button>
+     <button type="button" class="btn btn-primary font-weight-bold" onclick="addRole()"><?= __('Save changes') ?></button>
    </div>
  </form>
  <?php }  ?>  

@@ -291,7 +291,7 @@ if($table_name =="sales_invoices" && $table1['ref_type'] != "" || ($table_name =
                      document.getElementById('party_ship_adderss').value=party_ship_adderss;
 
                      var placeofsupply = "";
-                        placeofsupply += "<option value=''>Select Any One</option>";
+                        placeofsupply += "<option value=''><?php echo __('Select Any One'); ?></option>";
 
                         $.each(customer_vendor_gst_billing_details, function(i, row) {
                                 console.log(row);
@@ -311,9 +311,9 @@ if($table_name =="sales_invoices" && $table1['ref_type'] != "" || ($table_name =
                             }
                                 htmltemp +="<table style='width: 100%;'>";
                                 htmltemp +="<tr>";
-                                htmltemp +="<th scope='col'>Credit Limit</th>";
-                                htmltemp +="<th scope='col'>Total Invoice</th>";
-                                htmltemp +="<th scope='col'>Avl Limit</th>";
+                                htmltemp +="<th scope='col'><?php echo __('Credit Limit'); ?></th>";
+                                htmltemp +="<th scope='col'><?php echo __('Total Invoice'); ?></th>";
+                                htmltemp +="<th scope='col'><?php echo __('Avl Limit'); ?></th>";
                                 htmltemp +="</tr>";
                                 htmltemp +="<tr>";
                                 htmltemp +="<td>"+obj.credit_limit+"</td>";
@@ -377,9 +377,9 @@ if($table_name =="sales_invoices" && $table1['ref_type'] != "" || ($table_name =
                                     }
                                     $.each(res.result, function (index, itemData) {
                                         console.log (itemData);
-                                        var grn_items_inv_qty = '<th scope="col" class="text-start p-0">Invoice Qty</th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_po_<?php echo $i; ?>">'+itemData['invoice_item_quantity']+'</td>';
+                                        var grn_items_inv_qty = '<th scope="col" class="text-start p-0"><?php echo __('Invoice Qty'); ?></th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_po_<?php echo $i; ?>">'+itemData['invoice_item_quantity']+'</td>';
                                         $("#grn_items_inv_qty_"+itemData['item_id']).html(grn_items_inv_qty);
-                                          var grn_items_qty = '<th scope="col" class="text-start p-0">GRN Qty</th><td class="p-0">:</td><td class="p-0" style="text-align: right;" >'+itemData['item_quantity']+'</td>';
+                                          var grn_items_qty = '<th scope="col" class="text-start p-0"><?php echo __('GRN Qty'); ?></th><td class="p-0">:</td><td class="p-0" style="text-align: right;" >'+itemData['item_quantity']+'</td>';
                                         $("#grn_items_qty_"+itemData['item_id']).html(grn_items_qty);
                                         $("#item_history_grn_inv_qty_text_"+itemData['item_id']).val(itemData['invoice_item_quantity']);
                                         $("#item_history_grn_qty_text_"+itemData['item_id']).val(itemData['item_quantity']);
@@ -409,9 +409,9 @@ if($table_name =="sales_invoices" && $table1['ref_type'] != "" || ($table_name =
                                     }
                                     $.each(res.result, function (index, itemData) {
                                         console.log (itemData);
-                                        var grn_items_inv_qty = '<th scope="col" class="text-start p-0">Invoice Qty</th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_po_<?php echo $i; ?>">'+itemData['invoice_item_quantity']+'</td>';
+                                        var grn_items_inv_qty = '<th scope="col" class="text-start p-0"><?php echo __('Invoice Qty'); ?></th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_po_<?php echo $i; ?>">'+itemData['invoice_item_quantity']+'</td>';
                                         $("#grn_items_inv_qty_"+itemData['item_id']).html(grn_items_inv_qty);
-                                          var grn_items_qty = '<th scope="col" class="text-start p-0">GRN Qty</th><td class="p-0">:</td><td class="p-0" style="text-align: right;" >'+itemData['item_quantity']+'</td>';
+                                          var grn_items_qty = '<th scope="col" class="text-start p-0"><?php echo __('GRN Qty'); ?></th><td class="p-0">:</td><td class="p-0" style="text-align: right;" >'+itemData['item_quantity']+'</td>';
                                         $("#grn_items_qty_"+itemData['item_id']).html(grn_items_qty);
                                         $("#item_history_grn_inv_qty_text_"+itemData['item_id']).val(itemData['invoice_item_quantity']);
                                         $("#item_history_grn_qty_text_"+itemData['item_id']).val(itemData['item_quantity']);
@@ -575,7 +575,7 @@ if($table_name =="sales_invoices" && $table1['ref_type'] != "" || ($table_name =
                    text: "<?php echo $_SESSION['error_message']['9064']; ?> - limit Is "+limitamt,
                    type: "warning",
                    buttonsStyling: false,
-                   confirmButtonText: "OK",
+                   confirmButtonText: <?php echo json_encode(__('OK')); ?>,
                    confirmButtonClass: "btn btn-danger",
                }, function () {
 
@@ -680,14 +680,14 @@ if($fullvalue['type'] == 'serial_no'){
                                             }
 
                                             ?>
-                                            <input aria-label="Input field"  class="form-control"  type='text' <?php echo $read_only; ?> autocomplete="off" value='<?php  echo  $role[$key]; ?>' id="<?php  echo  $key; ?>" name="<?php echo $key?>" />
+                                            <input aria-label="<?php echo __('Input field'); ?>"  class="form-control"  type='text' <?php echo $read_only; ?> autocomplete="off" value='<?php  echo  $role[$key]; ?>' id="<?php  echo  $key; ?>" name="<?php echo $key?>" />
                                         <?php }elseif($fullvalue['type']=='auto_select' && $key != 'place_of_supply'){
                  $selectdata =$field_result[$key];
 
                  $select_table = $fieldtables[$key]; ?>
                   <div class="w-full">
-                     <select aria-label="Select option"   class="form-select js-data-example-ajax-Comman-form col-lg-4" <?php echo $read_only; ?>  data-tablename="<?php echo $table_name; ?>"  data-fieldsname="<?php echo $key; ?>" data-value="" data-pagename="comman_form" name="<?php echo $key?>" id="<?php echo $key?>" onchange="selectchange(<?php echo "'".$key."'"; ?>,this.value,<?php echo "'".$select_table."'"; ?>)">
-                         <option value=""> Select Any one</option>
+                     <select aria-label="<?php echo __('Select option'); ?>"   class="form-select js-data-example-ajax-Comman-form col-lg-4" <?php echo $read_only; ?>  data-tablename="<?php echo $table_name; ?>"  data-fieldsname="<?php echo $key; ?>" data-value="" data-pagename="comman_form" name="<?php echo $key?>" id="<?php echo $key?>" onchange="selectchange(<?php echo "'".$key."'"; ?>,this.value,<?php echo "'".$select_table."'"; ?>)">
+                         <option value=""> <?php echo __('Select Any one'); ?></option>
                          <?php foreach ($selectdata as $selectkey => $selectvalue) {  if($selectkey == $role[$key] ){ ?>
                              <option  selected value="<?php echo $selectkey; ?>"><?php echo $selectvalue; ?></option>
                          <?php } ?>
@@ -724,9 +724,9 @@ if($fullvalue['type'] == 'serial_no'){
 
                  <div class="w-full refkey_<?php echo $key?> <?php echo $selectdisabled; ?>">
 
-                     <select aria-label="Select option" class="form-select js-example-basic-single" <?php if($fullvalue['type']=='disable_select'){ echo "disabled";
+                     <select aria-label="<?php echo __('Select option'); ?>" class="form-select js-example-basic-single" <?php if($fullvalue['type']=='disable_select'){ echo __('disabled');
 } ?>  onchange="selectchange(<?php echo "'".$key."'"; ?>,this.value,<?php echo "'".$select_table."'"; ?>)"   name="<?php echo $key; ?>" id="<?php echo $key; ?>" >
-                         <option value=""> Select Any one </option>
+                         <option value=""> <?php echo __('Select Any one'); ?> </option>
                          <?php foreach ($selectdata as $selectkey => $selectvalue) {
                              $disabled = "";
                              if(count((array)$doc_access_setups_user) !=0){
@@ -767,7 +767,7 @@ if($fullvalue['type'] == 'serial_no'){
                          <?php  } ?>
                      </select>
                      <?php if($key == 'party_id'){ ?>
-                         <span class="cursor-pointer text-primary" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Click To Open Party Details" onclick="getPartyDetails('<?php echo $select_table; ?>')" <?php echo ($role[$key]!="" && $role[$key]!="0")?"":"style='display:none'"; ?> id="party_details" style="pointer-events: auto;font-weight: bold;opacity: 1;" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti ti-timer icon-dark"></i> Party Details</span>
+                         <span class="cursor-pointer text-primary" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Click To Open Party Details'); ?>" onclick="getPartyDetails('<?php echo $select_table; ?>')" <?php echo ($role[$key]!="" && $role[$key]!="0")?"":"style='display:none'"; ?> id="party_details" style="pointer-events: auto;font-weight: bold;opacity: 1;" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti ti-timer icon-dark"></i> <?php echo __('Party Details'); ?></span>
                          <div id="creditlimit_details"></div>
 
                      <?php } ?>
@@ -800,14 +800,14 @@ if($fullvalue['type'] == 'serial_no'){
 }
                                  }
                                  ?>
-                                 <label class="radio"> <input aria-label="Radio option" type="radio"  name="<?php echo $key; ?>" value='<?php echo $selectkey; ?>' <?php echo $disabled; ?> <?php echo $checkedbn; ?>>    <span></span><?php echo $selectvalue; ?></label>
+                                 <label class="radio"> <input aria-label="<?php echo __('Radio option'); ?>" type="radio"  name="<?php echo $key; ?>" value='<?php echo $selectkey; ?>' <?php echo $disabled; ?> <?php echo $checkedbn; ?>>    <span></span><?php echo $selectvalue; ?></label>
                              <?php } ?>
                          </div>
                      </div>
                  <?php }elseif($fullvalue['type']=='textarea') {    ?>
-                     <textarea aria-label="Text area" type="text" class="form-control" id="<?php echo $key; ?>" name="<?php echo $key; ?>" ><?php echo $role[$key];?></textarea>
+                     <textarea aria-label="<?php echo __('Text area'); ?>" type="text" class="form-control" id="<?php echo $key; ?>" name="<?php echo $key; ?>" ><?php echo $role[$key];?></textarea>
                  <?php }elseif($fullvalue['type']=='touchspin') { ?>
-                     <input aria-label="Kt Touchspin 1" id="kt_touchspin_1" type="text" class="form-control" value="1" id="<?php echo $key; ?>" name="<?php echo $key; ?>" placeholder="Select <?php echo $value; ?>">
+                     <input aria-label="<?php echo __('Kt Touchspin 1'); ?>" id="kt_touchspin_1" type="text" class="form-control" value="1" id="<?php echo $key; ?>" name="<?php echo $key; ?>" placeholder="Select <?php echo $value; ?>">
                  <?php }elseif($fullvalue['type']=='switch') {
                 $selectdata =$field_result[$key];
                 $k=1;
@@ -823,7 +823,7 @@ if($fullvalue['type'] == 'serial_no'){
                     <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--warning">
                         <label>
                             <input type="hidden"   name="<?php echo $key; ?>"  value= "<?php echo $one; ?>">
-                            <input aria-label="Checkbox" type="checkbox"  value="<?php echo $sen; ?>"  name="<?php echo $key; ?>" <?php if($selectkey == $role[$key] ){ ?> checked <?php
+                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  value="<?php echo $sen; ?>"  name="<?php echo $key; ?>" <?php if($selectkey == $role[$key] ){ ?> checked <?php
 } ?> >
                             <span></span>
                         </label>
@@ -839,7 +839,7 @@ if($fullvalue['type'] == 'serial_no'){
                     <div class="checkbox-fade fade-in-primary" style="display: inherit;margin: 0px;">
                         <?php foreach ($selectdata as $selectkey => $selectvalue) {  ?>
                             <label class="kt-checkbox m-r-5">
-                                <input aria-label="Checkbox" type="checkbox"  name="<?php echo $key."[]"; ?>" value= "<?php echo $selectkey; ?>" <?php if(in_array($selectkey, (array)$mulcheck)){ ?> checked <?php
+                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  name="<?php echo $key."[]"; ?>" value= "<?php echo $selectkey; ?>" <?php if(in_array($selectkey, (array)$mulcheck)){ ?> checked <?php
 } ?>> <?php echo $selectvalue; ?>
                                 <span class="cr">
                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -855,8 +855,8 @@ if($fullvalue['type'] == 'serial_no'){
                         $mulcheck = json_decode($role[$key],1);
                     } ?>
                        <div class="w-full">
-                        <select aria-label="Select option" class="form-control kt-select2" id="kt_select2_3<?php echo $mutiselet; ?>" name="<?php echo $key."[]"?>" multiple="multiple">
-                            <option value=""> Select Any one <?php echo $value; ?></option>
+                        <select aria-label="<?php echo __('Select option'); ?>" class="form-control kt-select2" id="kt_select2_3<?php echo $mutiselet; ?>" name="<?php echo $key."[]"?>" multiple="multiple">
+                            <option value=""> <?php echo __('Select Any one'); ?> <?php echo $value; ?></option>
                             <?php foreach ($selectdata as $selectkey => $selectvalue) {  ?>
                                 <option <?php if(in_array($selectkey, $mulcheck)){ ?> selected <?php
 } ?> value="<?php echo $selectkey; ?>"><?php echo $selectvalue; ?></option>
@@ -875,28 +875,28 @@ if($key=="due_date"){ $date_pic  = fromDate($date_pic);
                             $onckfunction = "";
                             if($key=="transaction_date"){ $onckfunction = "onchangedate()";
 }                ?>
-                            <input aria-label="Input field" class="form-control datepicker" type="text" value="<?php echo  $date_pic; ?>" dateformat="d M y" id="<?php echo $key; ?>"  name="<?php echo $key; ?>" onchange="<?php echo $onckfunction;?>" >
+                            <input aria-label="<?php echo __('Input field'); ?>" class="form-control datepicker" type="text" value="<?php echo  $date_pic; ?>" dateformat="d M y" id="<?php echo $key; ?>"  name="<?php echo $key; ?>" onchange="<?php echo $onckfunction;?>" >
 
 
                 </div>
                 <?php $dateid++;
 } elseif($fullvalue['type']=='email'){ ?>
-                    <input aria-label="Kt Inputmask 9" class="form-control" id="kt_inputmask_9" id="<?php  echo  $key; ?>" type="text" name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" />
+                    <input aria-label="<?php echo __('Kt Inputmask 9'); ?>" class="form-control" id="kt_inputmask_9" id="<?php  echo  $key; ?>" type="text" name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" />
                 <?php } elseif($fullvalue['type']=='phone'){ ?>
-                    <input aria-label="Kt Inputmask 3" class="form-control" id="kt_inputmask_3" type="text"  id="<?php  echo  $key; ?>" name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" />
+                    <input aria-label="<?php echo __('Kt Inputmask 3'); ?>" class="form-control" id="kt_inputmask_3" type="text"  id="<?php  echo  $key; ?>" name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" />
                 <?php } elseif($fullvalue['type']=='currency'){  ?>
-                    <input aria-label="Kt Inputmask 7" class="form-control" id="kt_inputmask_7" type="text"   name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" />
+                    <input aria-label="<?php echo __('Kt Inputmask 7'); ?>" class="form-control" id="kt_inputmask_7" type="text"   name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" />
                 <?php } elseif($fullvalue['type']=='number' || $fullvalue['type']=='number_type'){ ?>
-                    <input aria-label="Kt Inputmask 6" class="form-control" id="kt_inputmask_6" type="text"   name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" />
+                    <input aria-label="<?php echo __('Kt Inputmask 6'); ?>" class="form-control" id="kt_inputmask_6" type="text"   name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" />
                 <?php } elseif($fullvalue['type']=='password'){ ?>
                     <div class="kt-input-icon">
-                        <input aria-label="Password" class="form-control"  type="Password" id="<?php echo $key; ?>" name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" >
+                        <input aria-label="<?php echo __('Password'); ?>" class="form-control"  type="Password" id="<?php echo $key; ?>" name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" >
                         <span class="kt-input-icon__icon kt-input-icon__icon--right" ><span><i toggle="#password-field" id= "<?php echo $key; ?>" onclick="eywview(this.id)" class="la la-eye" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i></span></span>
                     </div>
                 <?php } elseif($fullvalue['type']=='color_pick'){  ?>
                     <div class="input-group">
                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-paint-brush" aria-hidden="true"></i></span></div>
-                        <input aria-label="Input field" class="form-control jscolor" type="text" id="<?php echo $key; ?>" name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" >
+                        <input aria-label="<?php echo __('Input field'); ?>" class="form-control jscolor" type="text" id="<?php echo $key; ?>" name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" >
                     </div>
                 <?php }  ?>
                 <span class="messages"></span>

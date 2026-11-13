@@ -525,7 +525,7 @@ function duedate(){
         var htmlRows = '';
         htmlRows += '<tr>';
         htmlRows += '<td><label class="kt-checkbox"> <input aria-label="Checkbox"  class="itemRow" type="checkbox">  <span> </span> </label> </td>';
-        htmlRows += '<td id="other_'+count+'"><select aria-label="Product Code[]" class="form-control"  name= "productCode[]" id="productCode__2"+count+'" onchange="itemChange(this.value,'+count+')" > <option value="0"> Select Any Category </option><?php foreach ($itemres as  $item) {  ?>      <option  value = <?php echo $item[id]; ?>><?php echo $item[account_code]; ?> </option> <?php
+        htmlRows += '<td id="other_'+count+'"><select aria-label="Product Code[]" class="form-control"  name= "productCode[]" id="productCode__2"+count+'" onchange="itemChange(this.value,'+count+')" > <option value="0"> <?= __('Select Any Category') ?> </option><?php foreach ($itemres as  $item) {  ?>      <option  value = <?php echo $item['id']; ?>><?php echo $item['account_code']; ?> </option> <?php
 } ?><option  value = "-1"> Other</option> </select> <input type="hidden" name="item_name[]" id="item_name__2"+count+'" class="form-control"> </td>';
         htmlRows += '<td><textarea aria-label="Product Name[]" name="productName[]" id="productName_'+count+'" class="form-control"></textarea></td> ';
         htmlRows += '<td> <input type="hidden" name="quantity[]" id="quantity__2"+count+'"    class="form-control amount" value="1"> <input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount" autocomplete="off"><div style="display: none;color: red;" id="price_err_'+count+'"> Enter Rate</div></td>';
@@ -1034,7 +1034,7 @@ function calculateTotal(){
     <?php } ?>
         <a href="javascript:history.go(-1)" class="btn btn-clean kt-margin-r-10">
             <i class="la la-arrow-left"></i>
-            <span class="kt-hidden-mobile">Back</span>
+            <span class="kt-hidden-mobile"><?= __('Back') ?></span>
         </a>
         <input type="hidden" name="status_values" id="status_values" value="<?php echo $table1['current_status']; ?>">
         <input type="hidden" name="status_old_value" id="status_old_value" value="<?php echo $table1['current_status']; ?>">
@@ -1142,7 +1142,7 @@ function calculateTotal(){
 <div class="form-group col-lg-4">
     <span>Billing Address</span>
     <div class="kt-input-icon kt-input-icon--right">
-        <textarea aria-label="Enter your address" type="text" name="customer_address" id="customer_address" class="form-control" placeholder="Enter your address"><?php echo $table1['customer_address'] ?></textarea>
+        <textarea aria-label="Enter your address" type="text" name="customer_address" id="customer_address" class="form-control" placeholder="<?= __('Enter your address') ?>"><?php echo $table1['customer_address'] ?></textarea>
 
     </div>
 </div>
@@ -1150,7 +1150,7 @@ function calculateTotal(){
 <div class="form-group col-lg-4">
     <span>Shipping Address</span>
     <div class="kt-input-icon kt-input-icon--right">
-        <textarea aria-label="Enter your address" type="text" class="form-control" id="customer_ship_adderss" name='customer_ship_adderss' placeholder="Enter your address"><?php echo $table1['customer_address'] ?></textarea>
+        <textarea aria-label="Enter your address" type="text" class="form-control" id="customer_ship_adderss" name='customer_ship_adderss' placeholder="<?= __('Enter your address') ?>"><?php echo $table1['customer_address'] ?></textarea>
 
     </div>
 </div>
@@ -1282,12 +1282,12 @@ function calculateTotal(){
             </label>
     </th>
 
-    <th scope="col" class="" style="width: 16%;">Category <span class="requried"></span></th>
-    <th scope="col" class="" style="width: 20%;">Description</th>
+    <th scope="col" class="" style="width: 16%;"><?= __('Category') ?> <span class="requried"></span></th>
+    <th scope="col" class="" style="width: 20%;"><?= __('Description') ?></th>
 
 
-    <th scope="col" class="thheader" style="width: 8%;">Amount <span class="requried">*</span></th>
-    <th scope="col" class="thheader" style="width: 8%;">Tax <span class="requried">*</span></th>
+    <th scope="col" class="thheader" style="width: 8%;"><?= __('Amount') ?> <span class="requried">*</span></th>
+    <th scope="col" class="thheader" style="width: 8%;"><?= __('Tax') ?> <span class="requried">*</span></th>
 
 
 </tr>
@@ -1355,8 +1355,8 @@ function calculateTotal(){
 
     <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-            <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>
-            <button class="btn btn-success" id="addRows" type="button">+ Add More</button>
+            <button class="btn btn-danger delete" id="removeRows" type="button">- <?= __('Delete') ?></button>
+            <button class="btn btn-success" id="addRows" type="button">+ <?= __('Add More') ?></button>
         </div>
     </div>
     <div style="float: left;width: 50%; padding: 15px;">
@@ -1376,7 +1376,7 @@ function calculateTotal(){
                 <textarea aria-label="Comments" style="height: 120px;" name="comments" class="form-control" id="comments" ><?php echo $comments; ?></textarea>
             </div>
             <div class="btn-group" style="margin-top: 10px;float: right;">
-                     <button id="kt_llogin_signup_submit"  class="btn btn-brand" >Submit</button>
+                     <button id="kt_llogin_signup_submit"  class="btn btn-brand" ><?= __('Submit') ?></button>
             </div>
         <?php }  ?>
 
@@ -1429,9 +1429,9 @@ function calculateTotal(){
     <div style="float: left;width: 50%">
     <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
         <tr>
-            <th scope="col" class="amount"><span>Sub Total</span></th>
-            <td><span><input aria-label="Input field"  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal" placeholder="Subtotal" >
-            <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal" placeholder="Subtotal" ></span></td>
+            <th scope="col" class="amount"><span><?= __('Sub Total') ?></span></th>
+            <td><span><input aria-label="Input field"  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal" placeholder="<?= __('Subtotal') ?>" >
+            <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal" placeholder="<?= __('Subtotal') ?>" ></span></td>
         </tr>
          <tr>
             <th scope="col" class="amount">
@@ -1441,9 +1441,9 @@ function calculateTotal(){
                     </div>
                     <div style="float: left;width: 33%;padding: 3px;">
                         <select aria-label="Discount Type" class="form-control" id="disType" name="discount_type" onchange="calculateTotal()">
-                            <option value="P">Percentage</option>
+                            <option value="P"><?= __('Percentage') ?></option>
                             <option <?php if($table1['discount_type'] == 'A'){ ?> selected <?php
-} ?> value="A">Amount</option>
+} ?> value="A"><?= __('Amount') ?></option>
                         </select>
                     </div>
                     <div style="float: left;width: 33%;padding:3px;" >
@@ -1453,8 +1453,8 @@ function calculateTotal(){
                 </div>
             </th>
             <td><span >
-                <input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['discount_amount']); ?>"  readonly type="text" class="form-control amount" name="dis_discount_amount" id="dis_discount"  placeholder="Discount Amount">
-                 <input aria-label="Input field" value="<?php echo $table1['discount_amount']; ?>"  readonly type="hidden" class="form-control amount" name="discount_amount" id="discount" placeholder="Discount Amount">
+                <input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['discount_amount']); ?>"  readonly type="text" class="form-control amount" name="dis_discount_amount" id="dis_discount"  placeholder="<?= __('Discount Amount') ?>">
+                 <input aria-label="Input field" value="<?php echo $table1['discount_amount']; ?>"  readonly type="hidden" class="form-control amount" name="discount_amount" id="discount" placeholder="<?= __('Discount Amount') ?>">
             </span></td>
         </tr>
         <tr>
@@ -1476,7 +1476,7 @@ function calculateTotal(){
             </th>
             <td><span >
                 <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="0">
-                <input aria-label="Input field"  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="shipping Amount">
+                <input aria-label="Input field"  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="<?= __('shipping Amount') ?>">
             </span></td>
         </tr>
 
@@ -1489,16 +1489,16 @@ function calculateTotal(){
                         <?php if($table1['tax_state'] == 'S'){ ?>
                         <tr>
                             <td style="width: 67%;text-align:right;">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">            </td>
+                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">            </td>
                         </tr>
                         <tr>
                             <td style="width: 67%;text-align:right;">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">            </td>
+                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">            </td>
                         </tr>
                     <?php } else{?>
                         <tr>
                             <td style="width: 67%;text-align:right;">  IGST @ <?php echo customeummarmonyformate($ktax['percentage']); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">            </td>
+                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">            </td>
                         </tr>
                     <?php }?>
                         <?php } ?>
@@ -1508,19 +1508,19 @@ function calculateTotal(){
             </td>
         <tr>
         <tr>
-            <th scope="col" class="amount" ><span>Grand Total</span></th>
+            <th scope="col" class="amount" ><span><?= __('Grand Total') ?></span></th>
              <input  type="hidden" class="form-control amount" placeholder="value" name="gdam" id="gdam">
               <input  type="hidden" class="form-control amount" placeholder="value" name="div_amount_total" id="div_amount_total">
-             <input aria-label="Input field"  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="Tax Amount">
-            <td><input aria-label="Input field"  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="Grand Total"><input aria-label="Input field"  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="Grand Total"></td>
+             <input aria-label="Input field"  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="<?= __('Tax Amount') ?>">
+            <td><input aria-label="Input field"  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="<?= __('Grand Total') ?>"><input aria-label="Input field"  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="<?= __('Grand Total') ?>"></td>
         </tr>
         <tr style="display: none;">
-            <th scope="col" class="amount" ><span >Amount Paid</span></th>
-            <td><input aria-label="Amount Paid" value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="Amount Paid"></td>
+            <th scope="col" class="amount" ><span><?= __('Amount Paid') ?></span></th>
+            <td><input aria-label="Amount Paid" value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="<?= __('Amount Paid') ?>"></td>
         </tr>
         <tr style="display: none;">
             <td  ><span >Amount Due</span></td>
-            <td><input aria-label="Amount Due" value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="Amount Due"></td>
+            <td><input aria-label="Amount Due" value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="<?= __('Amount Due') ?>"></td>
         </tr>
         <?php if($table1['currency_id'] != $_SESSION['config']['default_currency_id'] && $table1['currency_id'] != ''){ $css = "";
 }else{ $css = 'style="display: none;"';
@@ -1530,10 +1530,10 @@ function calculateTotal(){
                 <table  id='exchange' <?php echo $css; ?> class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
                     <tr>
 
-                        <th scope="col" class="amount">Sub total</th>
-                        <th scope="col" class="amount">Tax</th>
-                        <th scope="col" class="amount">Discount</th>
-                        <th scope="col" class="amount">Grand Total </th>
+                        <th scope="col" class="amount"><?= __('Sub total') ?></th>
+                        <th scope="col" class="amount"><?= __('Tax') ?></th>
+                        <th scope="col" class="amount"><?= __('Discount') ?></th>
+                        <th scope="col" class="amount"><?= __('Grand Total') ?> </th>
                     </tr>
                     <tr>
 
@@ -1570,13 +1570,13 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
                         <input type="hidden" id="hid"name="hid" value="<?php echo $rid; ?>" />
                         <input type="hidden" name="hid_itemds" value="<?php echo $item_ids; ?>" />
                         <input type="hidden" name="submit" value="Update" />
-                        <button id="kt_llogin_signup_submit_2" <?php echo $disable; ?> class="btn btn-brand" ><i class="la la-check"></i>Upadate</button>
-                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                        <button id="kt_llogin_signup_submit_2" <?php echo $disable; ?> class="btn btn-brand" ><i class="la la-check"></i><?= __('Update') ?></button>
+                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?= __('Cancel') ?></button>
                 <?php } else{ ?>
                         <input type="hidden" name="submit" value="Add" />
-                        <button id="kt_login_signin_submit" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-                        <button id="kt_login_signin_submit_continue" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
-                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                        <button id="kt_login_signin_submit" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i><?= __('Save & exit') ?></button>
+                        <button id="kt_login_signin_submit_continue" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?= __('Save & continue') ?></button>
+                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?= __('Cancel') ?></button>
                 <?php } ?>
             </div>
             <div class="col-lg-6">
@@ -1620,7 +1620,7 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
             <?php } ?>
             </div>
             <div class="col-lg-2 kt-align-right">
-                <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?= __('Delete') ?></button>
             </div>
         </div>
     </div>

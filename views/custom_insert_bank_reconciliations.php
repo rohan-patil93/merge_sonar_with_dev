@@ -107,7 +107,7 @@ $bank_accounts = $result['bank_accounts'];
             <div class="row mt-4">
                 <div class="col-md-12 text-left">
                     <button type="submit" name="submit_bank_reconciliations" class="btn btn-primary" <?php echo $disable; ?>>
-                        <i class="la la-check"></i> Submit
+                        <i class="la la-check"></i> <?= __('Submit') ?>
                     </button>
                 </div>
             </div>

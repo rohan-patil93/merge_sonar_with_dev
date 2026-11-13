@@ -70,7 +70,7 @@ if ($userData['user_photo'] != '') {
 <?php } ?>
 <div class="card">
   <div class="card-header">
-    <h5 class>Invoice</h5>
+    <h5 class><?= __('Invoice') ?></h5>
     <div class="card-header-right">
       <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
         <i class="icofont icofont-reply"></i> Back
@@ -81,9 +81,9 @@ if ($userData['user_photo'] != '') {
     <div class="container mt-4">
       <div class="row ml-20 mr-20">
         <div class="col-lg-3 p-3 bg-light border">
-          <h5 class="text-center mb-4">Customization Options</h5>
+          <h5 class="text-center mb-4"><?= __('Customization Options') ?></h5>
           <div class="mb-3">
-            <h6>Template Options</h6>
+            <h6><?= __('Template Options') ?></h6>
             <div class="btn-group d-flex flex-wrap">
               <button class="btn btn-outline-dark btn-sm mb-2" data-target="template_name_container">
                 <i class="bi bi-aspect-ratio"></i> Template Name
@@ -93,15 +93,15 @@ if ($userData['user_photo'] != '') {
 
             <div id="template_name_container" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="template_name" class="form-label">Template Name</label>
+                <label for="template_name" class="form-label"><?= __('Template Name') ?></label>
                 <div class="form-group">
-                  <input class="form-control mb-1" type="text" id="template_name" placeholder="Enter template name" aria-label="Enter template name">
+                  <input class="form-control mb-1" type="text" id="template_name" placeholder="<?= __('Enter template name') ?>" aria-label="Enter template name">
                 </div>
               </div>
             </div>
           </div>
           <div class="mb-3">
-            <h6>Border Options </h6>
+            <h6><?= __('Border Options') ?></h6>
             <div class="btn-group d-flex flex-wrap">
               <a class="btn btn-outline-primary btn-sm mb-2" data-target="borderOptions">
                 <i class="bi bi-border"></i> Border
@@ -115,32 +115,32 @@ if ($userData['user_photo'] != '') {
             </div>
             <div id="borderOptions" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="borderStyle" class="form-label">Border Style</label>
+                <label for="borderStyle" class="form-label"><?= __('Border Style') ?></label>
                 <select class="form-select" id="borderStyle" name="borderStyle" aria-label="Borderstyle">
-                  <option value="solid">Solid</option>
-                  <option value="dashed">Dashed</option>
-                  <option value="dotted">Dotted</option>
-                  <option value="none">None</option>
+                  <option value="solid"><?= __('Solid') ?></option>
+                  <option value="dashed"><?= __('Dashed') ?></option>
+                  <option value="dotted"><?= __('Dotted') ?></option>
+                  <option value="none"><?= __('None') ?></option>
                 </select>
               </div>
             </div>
             <div id="colorOptions" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="borderColor" class="form-label">Border Color</label>
+                <label for="borderColor" class="form-label"><?= __('Border Color') ?></label>
                 <input type="color" class="form-control form-control-color" style="max-width:100%;" id="borderColor"
-                  title="Choose border color" value="" name="borderColor" aria-label="Choose border color">
+                  title="<?= __('Choose border color') ?>" value="" name="borderColor" aria-label="Choose border color">
               </div>
             </div>
             <div id="widthOptions" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="borderWidth" class="form-label">Border Width</label>
+                <label for="borderWidth" class="form-label"><?= __('Border Width') ?></label>
                 <input type="number" class="form-control" id="borderWidth" min="1" max="10"
-                  placeholder="Enter width (in px)" value="" name="borderWidth" aria-label="Enter width (in px)">
+                  placeholder="<?= __('Enter width (in px)') ?>" value="" name="borderWidth" aria-label="Enter width (in px)">
               </div>
             </div>
           </div>
           <div class="mb-3">
-            <h6>Basic Options</h6>
+            <h6><?= __('Basic Options') ?></h6>
             <div class="btn-group d-flex flex-wrap">
 
               <a class="btn btn-outline-danger btn-sm mb-2" data-target="textStyleOptions">
@@ -163,16 +163,16 @@ if ($userData['user_photo'] != '') {
 
             <div id="textStyleOptions" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="fontFamily" class="form-label">Font Family</label>
+                <label for="fontFamily" class="form-label"><?= __('Font Family') ?></label>
                 <select class="form-select" id="fontFamily" name="fontFamily" aria-label="Fontfamily">
-                  <option value="Arial">Arial</option>
-                  <option value="Times New Roman">Times New Roman</option>
-                  <option value="Courier New">Courier New</option>
-                  <option value="Verdana">Verdana</option>
-                  <option value="Georgia">Georgia</option>
-                  <option value="Trebuchet MS">Trebuchet MS</option>
-                  <option value="Tahoma">Tahoma</option>
-                  <option value="Roboto">Roboto</option>
+                  <option value="Arial"><?= __('Arial') ?></option>
+                  <option value="Times New Roman"><?= __('Times New Roman') ?></option>
+                  <option value="Courier New"><?= __('Courier New') ?></option>
+                  <option value="Verdana"><?= __('Verdana') ?></option>
+                  <option value="Georgia"><?= __('Georgia') ?></option>
+                  <option value="Trebuchet MS"><?= __('Trebuchet MS') ?></option>
+                  <option value="Tahoma"><?= __('Tahoma') ?></option>
+                  <option value="Roboto"><?= __('Roboto') ?></option>
                 </select>
               </div>
             </div>
@@ -180,32 +180,32 @@ if ($userData['user_photo'] != '') {
 
             <div id="marginOptions" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="marginInput" class="form-label">Margin (in px)</label>
+                <label for="marginInput" class="form-label"><?= __('Margin (in px)') ?></label>
                 <input type="number" class="form-control" id="marginInput" value="" name="marginInput" min="0"
-                  placeholder="Enter margin" aria-label="Enter margin">
+                  placeholder="<?= __('Enter margin') ?>" aria-label="Enter margin">
               </div>
             </div>
 
 
             <div id="paddingOptions" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="paddingInput" class="form-label">Padding (in px)</label>
+                <label for="paddingInput" class="form-label"><?= __('Padding (in px)') ?></label>
                 <input type="number" class="form-control" id="paddingInput" value="" name="paddingInput" min="0"
-                  placeholder="Enter padding" aria-label="Enter padding">
+                  placeholder="<?= __('Enter padding') ?>" aria-label="Enter padding">
               </div>
             </div>
 
 
             <div id="heightOptions" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="heightInput" class="form-label">Height (in px)</label>
+                <label for="heightInput" class="form-label"><?= __('Height (in px)') ?></label>
                 <input type="number" class="form-control" id="heightInput" value="" name="heightInput" min="100"
-                  placeholder="Enter height" aria-label="Enter height">
+                  placeholder="<?= __('Enter height') ?>" aria-label="Enter height">
               </div>
             </div>
           </div>
           <div class="mb-3">
-            <h6>Logo Options</h6>
+            <h6><?= __('Logo Options') ?></h6>
             <div class="btn-group d-flex flex-wrap">
               <a class="btn btn-outline-danger btn-sm mb-2" data-target="logoVisibility">
                 <i class="bi bi-eye"></i> Visibility
@@ -223,374 +223,374 @@ if ($userData['user_photo'] != '') {
 
             <div id="logoVisibility" class="dynamic-options">
               <div class="card card-body mt-2">
-                <span class="form-label mb-2">Toggle Logo</span>
+                <span class="form-label mb-2"><?= __('Toggle Logo') ?></span>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showLogo" checked aria-label="Input">
-                  <label class="form-check-label" for="showLogo">Show Logo</label>
+                  <label class="form-check-label" for="showLogo"><?= __('Show Logo') ?></label>
                 </div>
               </div>
             </div>
 
             <div id="logoPosition" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="logoPositionSelect" class="form-label">Logo Position</label>
+                <label for="logoPositionSelect" class="form-label"><?= __('Logo Position') ?></label>
                 <select class="form-select" id="logoPositionSelect" aria-label="Select">
-                  <option value="left">Left</option>
-                  <option value="center">Center</option>
-                  <option value="right">Right</option>
+                  <option value="left"><?= __('Left') ?></option>
+                  <option value="center"><?= __('Center') ?></option>
+                  <option value="right"><?= __('Right') ?></option>
                 </select>
               </div>
             </div>
 
             <div id="logoSize" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="logoSizeSelect" class="form-label">Logo Size</label>
+                <label for="logoSizeSelect" class="form-label"><?= __('Logo Size') ?></label>
                 <select class="form-select" id="logoSizeSelect" aria-label="Select">
-                  <option value="small">Small</option>
-                  <option value="medium">Medium</option>
-                  <option value="large">Large</option>
-                  <option value="custom">Custom</option>
+                  <option value="small"><?= __('Small') ?></option>
+                  <option value="medium"><?= __('Medium') ?></option>
+                  <option value="large"><?= __('Large') ?></option>
+                  <option value="custom"><?= __('Custom') ?></option>
                 </select>
                 <div id="customLogoSizeInputContainer" class="mt-2" style="display: none;">
-                  <label for="customLogoSizeInput" class="form-label">Custom Logo Size (px)</label>
-                  <input type="number" id="customLogoSizeInput" class="form-control" placeholder="Enter size in px" / aria-label="Enter size in px">
+                  <label for="customLogoSizeInput" class="form-label"><?= __('Custom Logo Size (px)') ?></label>
+                  <input type="number" id="customLogoSizeInput" class="form-control" placeholder="<?= __('Enter size in px') ?>" / aria-label="Enter size in px">
                 </div>
               </div>
             </div>
 
             <div id="topheaderoptions" class="dynamic-options">
               <div class="card card-body mt-2">
-                <span class="form-label mb-2">Toggle Top Header Options</span>
+                <span class="form-label mb-2"><?= __('Toggle Top Header Options') ?></span>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showinvoiceno" checked aria-label="Input">
-                  <label class="form-check-label" for="showinvoiceno">Show Invoice No.</label>
+                  <label class="form-check-label" for="showinvoiceno"><?= __('Show Invoice No.') ?></label>
                   <select aria-label="Invoiceno Select" class="form-select" id="invoicenoSelect" style="display: none;">
-                    <option value="id">ID</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="cost_center_id">Cost Center Id</option>
-                    <option value="transaction_number" selected>Transaction Number</option>
-                    <option value="transaction_date">Transaction Date</option>
-                    <option value="transaction_location_id">Transaction Location Id</option>
-                    <option value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                    <option value="originator_currency_id">Originator Currency Id</option>
-                    <option value="currency_id">Currency Id</option>
-                    <option value="currency_rate">Currency Rate</option>
-                    <option value="originator">Originator</option>
-                    <option value="party_id">Party Id</option>
-                    <option value="party_name">Party Name</option>
-                    <option value="party_email">Party Email</option>
-                    <option value="party_tax_number">Party Tax Number</option>
-                    <option value="party_phone">Party Phone</option>
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss">Party Ship Adderss</option>
-                    <option value="originator_state_id">Originator State Id</option>
-                    <option value="supplier_state_id">Supplier State Id</option>
-                    <option value="place_of_supply">Place Of Supply</option>
-                    <option value="payment_terms">Payment Terms</option>
-                    <option value="notes">Notes</option>
-                    <option value="printing_notes">Printing Notes</option>
-                    <option value="parent_id">Parent Id</option>
-                    <option value="amount">Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="type">Type</option>
-                    <option value="tax_type">Tax Type</option>
-                    <option value="discount_type">Discount Type</option>
-                    <option value="discount_value">Discount Value</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="shipping_tax">Shipping Tax</option>
-                    <option value="shipping_amount">Shipping Amount</option>
-                    <option value="shipping_tax_amount">Shipping Tax Amount</option>
-                    <option value="tax_state">Tax State</option>
-                    <option value="opex_cpex">Opex Cpex</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="due_date">Due Date</option>
-                    <option value="ref_type">Ref Type</option>
-                    <option value="parent_ref_id">Rarent Ref Id</option>
-                    <option value="ref_id">Ref Id</option>
-                    <option value="ref_no">Ref No</option>
-                    <option value="ref_date">Ref Date</option>
-                    <option value="ref_bill_type">Ref Bill Type</option>
-                    <option value="old_ref_no">Old Ref No</option>
-                    <option value="old_ref_date">Old Ref Date</option>
-                    <option value="party_additional_details">Party Additional Details</option>
-                    <option value="follow_up_level_ids">Follow Up Level Ids</option>
-                    <option value="pending_amount">Pending Amount</option>
-                    <option value="cancel_invoice">Cancel Invoice</option>
-                    <option value="cancel_invoice_date">Cancel Invoice Date</option>
-                    <option value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                    <option value="additional_charges">Additional Charges</option>
-                    <option value="pdf_name">Pdf Name</option>
-                    <option value="owner_additional_details">Owner Additional Details</option>
-                    <option value="serial_transaction_number">Serial Transaction Number</option>
+                    <option value="id"><?= __('ID') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="cost_center_id"><?= __('Cost Center Id') ?></option>
+                    <option value="transaction_number" selected><?= __('Transaction Number') ?></option>
+                    <option value="transaction_date"><?= __('Transaction Date') ?></option>
+                    <option value="transaction_location_id"><?= __('Transaction Location Id') ?></option>
+                    <option value="transaction_warehouse_id"><?= __('Transaction Warehouse Id') ?></option>
+                    <option value="originator_currency_id"><?= __('Originator Currency Id') ?></option>
+                    <option value="currency_id"><?= __('Currency Id') ?></option>
+                    <option value="currency_rate"><?= __('Currency Rate') ?></option>
+                    <option value="originator"><?= __('Originator') ?></option>
+                    <option value="party_id"><?= __('Party Id') ?></option>
+                    <option value="party_name"><?= __('Party Name') ?></option>
+                    <option value="party_email"><?= __('Party Email') ?></option>
+                    <option value="party_tax_number"><?= __('Party Tax Number') ?></option>
+                    <option value="party_phone"><?= __('Party Phone') ?></option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Ship Adderss') ?></option>
+                    <option value="originator_state_id"><?= __('Originator State Id') ?></option>
+                    <option value="supplier_state_id"><?= __('Supplier State Id') ?></option>
+                    <option value="place_of_supply"><?= __('Place Of Supply') ?></option>
+                    <option value="payment_terms"><?= __('Payment Terms') ?></option>
+                    <option value="notes"><?= __('Notes') ?></option>
+                    <option value="printing_notes"><?= __('Printing Notes') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
+                    <option value="amount"><?= __('Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="type"><?= __('Type') ?></option>
+                    <option value="tax_type"><?= __('Tax Type') ?></option>
+                    <option value="discount_type"><?= __('Discount Type') ?></option>
+                    <option value="discount_value"><?= __('Discount Value') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="shipping_tax"><?= __('Shipping Tax') ?></option>
+                    <option value="shipping_amount"><?= __('Shipping Amount') ?></option>
+                    <option value="shipping_tax_amount"><?= __('Shipping Tax Amount') ?></option>
+                    <option value="tax_state"><?= __('Tax State') ?></option>
+                    <option value="opex_cpex"><?= __('Opex Cpex') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="due_date"><?= __('Due Date') ?></option>
+                    <option value="ref_type"><?= __('Ref Type') ?></option>
+                    <option value="parent_ref_id"><?= __('Rarent Ref Id') ?></option>
+                    <option value="ref_id"><?= __('Ref Id') ?></option>
+                    <option value="ref_no"><?= __('Ref No') ?></option>
+                    <option value="ref_date"><?= __('Ref Date') ?></option>
+                    <option value="ref_bill_type"><?= __('Ref Bill Type') ?></option>
+                    <option value="old_ref_no"><?= __('Old Ref No') ?></option>
+                    <option value="old_ref_date"><?= __('Old Ref Date') ?></option>
+                    <option value="party_additional_details"><?= __('Party Additional Details') ?></option>
+                    <option value="follow_up_level_ids"><?= __('Follow Up Level Ids') ?></option>
+                    <option value="pending_amount"><?= __('Pending Amount') ?></option>
+                    <option value="cancel_invoice"><?= __('Cancel Invoice') ?></option>
+                    <option value="cancel_invoice_date"><?= __('Cancel Invoice Date') ?></option>
+                    <option value="cancel_invoice_reason"><?= __('Cancel Invoice Reason') ?></option>
+                    <option value="additional_charges"><?= __('Additional Charges') ?></option>
+                    <option value="pdf_name"><?= __('Pdf Name') ?></option>
+                    <option value="owner_additional_details"><?= __('Owner Additional Details') ?></option>
+                    <option value="serial_transaction_number"><?= __('Serial Transaction Number') ?></option>
                   </select>
                 </div>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showdate" checked aria-label="Input">
-                  <label class="form-check-label" for="showdate">Show Date</label>
+                  <label class="form-check-label" for="showdate"><?= __('Show Date') ?></label>
                   <select aria-label="Invoicedate Select" class="form-select" id="invoicedateSelect" style="display: none;">
-                    <option value="id">ID</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="cost_center_id">Cost Center Id</option>
-                    <option value="transaction_number">Transaction Number</option>
-                    <option value="transaction_date" selected>Transaction Date</option>
-                    <option value="transaction_location_id">Transaction Location Id</option>
-                    <option value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                    <option value="originator_currency_id">Originator Currency Id</option>
-                    <option value="currency_id">Currency Id</option>
-                    <option value="currency_rate">Currency Rate</option>
-                    <option value="originator">Originator</option>
-                    <option value="party_id">Party Id</option>
-                    <option value="party_name">Party Name</option>
-                    <option value="party_email">Party Email</option>
-                    <option value="party_tax_number">Party Tax Number</option>
-                    <option value="party_phone">Party Phone</option>
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss">Party Ship Adderss</option>
-                    <option value="originator_state_id">Originator State Id</option>
-                    <option value="supplier_state_id">Supplier State Id</option>
-                    <option value="place_of_supply">Place Of Supply</option>
-                    <option value="payment_terms">Payment Terms</option>
-                    <option value="notes">Notes</option>
-                    <option value="printing_notes">Printing Notes</option>
-                    <option value="parent_id">Parent Id</option>
-                    <option value="amount">Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="type">Type</option>
-                    <option value="tax_type">Tax Type</option>
-                    <option value="discount_type">Discount Type</option>
-                    <option value="discount_value">Discount Value</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="shipping_tax">Shipping Tax</option>
-                    <option value="shipping_amount">Shipping Amount</option>
-                    <option value="shipping_tax_amount">Shipping Tax Amount</option>
-                    <option value="tax_state">Tax State</option>
-                    <option value="opex_cpex">Opex Cpex</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="due_date">Due Date</option>
-                    <option value="ref_type">Ref Type</option>
-                    <option value="parent_ref_id">Rarent Ref Id</option>
-                    <option value="ref_id">Ref Id</option>
-                    <option value="ref_no">Ref No</option>
-                    <option value="ref_date">Ref Date</option>
-                    <option value="ref_bill_type">Ref Bill Type</option>
-                    <option value="old_ref_no">Old Ref No</option>
-                    <option value="old_ref_date">Old Ref Date</option>
-                    <option value="party_additional_details">Party Additional Details</option>
-                    <option value="follow_up_level_ids">Follow Up Level Ids</option>
-                    <option value="pending_amount">Pending Amount</option>
-                    <option value="cancel_invoice">Cancel Invoice</option>
-                    <option value="cancel_invoice_date">Cancel Invoice Date</option>
-                    <option value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                    <option value="additional_charges">Additional Charges</option>
-                    <option value="pdf_name">Pdf Name</option>
-                    <option value="owner_additional_details">Owner Additional Details</option>
-                    <option value="serial_transaction_number">Serial Transaction Number</option>
+                    <option value="id"><?= __('ID') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="cost_center_id"><?= __('Cost Center Id') ?></option>
+                    <option value="transaction_number"><?= __('Transaction Number') ?></option>
+                    <option value="transaction_date" selected><?= __('Transaction Date') ?></option>
+                    <option value="transaction_location_id"><?= __('Transaction Location Id') ?></option>
+                    <option value="transaction_warehouse_id"><?= __('Transaction Warehouse Id') ?></option>
+                    <option value="originator_currency_id"><?= __('Originator Currency Id') ?></option>
+                    <option value="currency_id"><?= __('Currency Id') ?></option>
+                    <option value="currency_rate"><?= __('Currency Rate') ?></option>
+                    <option value="originator"><?= __('Originator') ?></option>
+                    <option value="party_id"><?= __('Party Id') ?></option>
+                    <option value="party_name"><?= __('Party Name') ?></option>
+                    <option value="party_email"><?= __('Party Email') ?></option>
+                    <option value="party_tax_number"><?= __('Party Tax Number') ?></option>
+                    <option value="party_phone"><?= __('Party Phone') ?></option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Ship Adderss') ?></option>
+                    <option value="originator_state_id"><?= __('Originator State Id') ?></option>
+                    <option value="supplier_state_id"><?= __('Supplier State Id') ?></option>
+                    <option value="place_of_supply"><?= __('Place Of Supply') ?></option>
+                    <option value="payment_terms"><?= __('Payment Terms') ?></option>
+                    <option value="notes"><?= __('Notes') ?></option>
+                    <option value="printing_notes"><?= __('Printing Notes') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
+                    <option value="amount"><?= __('Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="type"><?= __('Type') ?></option>
+                    <option value="tax_type"><?= __('Tax Type') ?></option>
+                    <option value="discount_type"><?= __('Discount Type') ?></option>
+                    <option value="discount_value"><?= __('Discount Value') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="shipping_tax"><?= __('Shipping Tax') ?></option>
+                    <option value="shipping_amount"><?= __('Shipping Amount') ?></option>
+                    <option value="shipping_tax_amount"><?= __('Shipping Tax Amount') ?></option>
+                    <option value="tax_state"><?= __('Tax State') ?></option>
+                    <option value="opex_cpex"><?= __('Opex Cpex') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="due_date"><?= __('Due Date') ?></option>
+                    <option value="ref_type"><?= __('Ref Type') ?></option>
+                    <option value="parent_ref_id"><?= __('Rarent Ref Id') ?></option>
+                    <option value="ref_id"><?= __('Ref Id') ?></option>
+                    <option value="ref_no"><?= __('Ref No') ?></option>
+                    <option value="ref_date"><?= __('Ref Date') ?></option>
+                    <option value="ref_bill_type"><?= __('Ref Bill Type') ?></option>
+                    <option value="old_ref_no"><?= __('Old Ref No') ?></option>
+                    <option value="old_ref_date"><?= __('Old Ref Date') ?></option>
+                    <option value="party_additional_details"><?= __('Party Additional Details') ?></option>
+                    <option value="follow_up_level_ids"><?= __('Follow Up Level Ids') ?></option>
+                    <option value="pending_amount"><?= __('Pending Amount') ?></option>
+                    <option value="cancel_invoice"><?= __('Cancel Invoice') ?></option>
+                    <option value="cancel_invoice_date"><?= __('Cancel Invoice Date') ?></option>
+                    <option value="cancel_invoice_reason"><?= __('Cancel Invoice Reason') ?></option>
+                    <option value="additional_charges"><?= __('Additional Charges') ?></option>
+                    <option value="pdf_name"><?= __('Pdf Name') ?></option>
+                    <option value="owner_additional_details"><?= __('Owner Additional Details') ?></option>
+                    <option value="serial_transaction_number"><?= __('Serial Transaction Number') ?></option>
                   </select>
                 </div>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showduedate" checked aria-label="Input">
-                  <label class="form-check-label" for="showduedate">Show Due Date</label>
+                  <label class="form-check-label" for="showduedate"><?= __('Show Due Date') ?></label>
                   <select aria-label="Invoiceduedate Select" class="form-select" id="invoiceduedateSelect" style="display: none;">
-                    <option value="id">ID</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="cost_center_id">Cost Center Id</option>
-                    <option value="transaction_number">Transaction Number</option>
-                    <option value="transaction_date">Transaction Date</option>
-                    <option value="transaction_location_id">Transaction Location Id</option>
-                    <option value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                    <option value="originator_currency_id">Originator Currency Id</option>
-                    <option value="currency_id">Currency Id</option>
-                    <option value="currency_rate">Currency Rate</option>
-                    <option value="originator">Originator</option>
-                    <option value="party_id">Party Id</option>
-                    <option value="party_name">Party Name</option>
-                    <option value="party_email">Party Email</option>
-                    <option value="party_tax_number">Party Tax Number</option>
-                    <option value="party_phone">Party Phone</option>
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss">Party Ship Adderss</option>
-                    <option value="originator_state_id">Originator State Id</option>
-                    <option value="supplier_state_id">Supplier State Id</option>
-                    <option value="place_of_supply">Place Of Supply</option>
-                    <option value="payment_terms">Payment Terms</option>
-                    <option value="notes">Notes</option>
-                    <option value="printing_notes">Printing Notes</option>
-                    <option value="parent_id">Parent Id</option>
-                    <option value="amount">Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="type">Type</option>
-                    <option value="tax_type">Tax Type</option>
-                    <option value="discount_type">Discount Type</option>
-                    <option value="discount_value">Discount Value</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="shipping_tax">Shipping Tax</option>
-                    <option value="shipping_amount">Shipping Amount</option>
-                    <option value="shipping_tax_amount">Shipping Tax Amount</option>
-                    <option value="tax_state">Tax State</option>
-                    <option value="opex_cpex">Opex Cpex</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="due_date" selected>Due Date</option>
-                    <option value="ref_type">Ref Type</option>
-                    <option value="parent_ref_id">Rarent Ref Id</option>
-                    <option value="ref_id">Ref Id</option>
-                    <option value="ref_no">Ref No</option>
-                    <option value="ref_date">Ref Date</option>
-                    <option value="ref_bill_type">Ref Bill Type</option>
-                    <option value="old_ref_no">Old Ref No</option>
-                    <option value="old_ref_date">Old Ref Date</option>
-                    <option value="party_additional_details">Party Additional Details</option>
-                    <option value="follow_up_level_ids">Follow Up Level Ids</option>
-                    <option value="pending_amount">Pending Amount</option>
-                    <option value="cancel_invoice">Cancel Invoice</option>
-                    <option value="cancel_invoice_date">Cancel Invoice Date</option>
-                    <option value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                    <option value="additional_charges">Additional Charges</option>
-                    <option value="pdf_name">Pdf Name</option>
-                    <option value="owner_additional_details">Owner Additional Details</option>
-                    <option value="serial_transaction_number">Serial Transaction Number</option>
+                    <option value="id"><?= __('ID') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="cost_center_id"><?= __('Cost Center Id') ?></option>
+                    <option value="transaction_number"><?= __('Transaction Number') ?></option>
+                    <option value="transaction_date"><?= __('Transaction Date') ?></option>
+                    <option value="transaction_location_id"><?= __('Transaction Location Id') ?></option>
+                    <option value="transaction_warehouse_id"><?= __('Transaction Warehouse Id') ?></option>
+                    <option value="originator_currency_id"><?= __('Originator Currency Id') ?></option>
+                    <option value="currency_id"><?= __('Currency Id') ?></option>
+                    <option value="currency_rate"><?= __('Currency Rate') ?></option>
+                    <option value="originator"><?= __('Originator') ?></option>
+                    <option value="party_id"><?= __('Party Id') ?></option>
+                    <option value="party_name"><?= __('Party Name') ?></option>
+                    <option value="party_email"><?= __('Party Email') ?></option>
+                    <option value="party_tax_number"><?= __('Party Tax Number') ?></option>
+                    <option value="party_phone"><?= __('Party Phone') ?></option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Ship Adderss') ?></option>
+                    <option value="originator_state_id"><?= __('Originator State Id') ?></option>
+                    <option value="supplier_state_id"><?= __('Supplier State Id') ?></option>
+                    <option value="place_of_supply"><?= __('Place Of Supply') ?></option>
+                    <option value="payment_terms"><?= __('Payment Terms') ?></option>
+                    <option value="notes"><?= __('Notes') ?></option>
+                    <option value="printing_notes"><?= __('Printing Notes') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
+                    <option value="amount"><?= __('Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="type"><?= __('Type') ?></option>
+                    <option value="tax_type"><?= __('Tax Type') ?></option>
+                    <option value="discount_type"><?= __('Discount Type') ?></option>
+                    <option value="discount_value"><?= __('Discount Value') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="shipping_tax"><?= __('Shipping Tax') ?></option>
+                    <option value="shipping_amount"><?= __('Shipping Amount') ?></option>
+                    <option value="shipping_tax_amount"><?= __('Shipping Tax Amount') ?></option>
+                    <option value="tax_state"><?= __('Tax State') ?></option>
+                    <option value="opex_cpex"><?= __('Opex Cpex') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="due_date" selected><?= __('Due Date') ?></option>
+                    <option value="ref_type"><?= __('Ref Type') ?></option>
+                    <option value="parent_ref_id"><?= __('Rarent Ref Id') ?></option>
+                    <option value="ref_id"><?= __('Ref Id') ?></option>
+                    <option value="ref_no"><?= __('Ref No') ?></option>
+                    <option value="ref_date"><?= __('Ref Date') ?></option>
+                    <option value="ref_bill_type"><?= __('Ref Bill Type') ?></option>
+                    <option value="old_ref_no"><?= __('Old Ref No') ?></option>
+                    <option value="old_ref_date"><?= __('Old Ref Date') ?></option>
+                    <option value="party_additional_details"><?= __('Party Additional Details') ?></option>
+                    <option value="follow_up_level_ids"><?= __('Follow Up Level Ids') ?></option>
+                    <option value="pending_amount"><?= __('Pending Amount') ?></option>
+                    <option value="cancel_invoice"><?= __('Cancel Invoice') ?></option>
+                    <option value="cancel_invoice_date"><?= __('Cancel Invoice Date') ?></option>
+                    <option value="cancel_invoice_reason"><?= __('Cancel Invoice Reason') ?></option>
+                    <option value="additional_charges"><?= __('Additional Charges') ?></option>
+                    <option value="pdf_name"><?= __('Pdf Name') ?></option>
+                    <option value="owner_additional_details"><?= __('Owner Additional Details') ?></option>
+                    <option value="serial_transaction_number"><?= __('Serial Transaction Number') ?></option>
                   </select>
                 </div>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showpo_num" checked aria-label="Input">
-                  <label class="form-check-label" for="showpo_num">Show P.O. Number</label>
+                  <label class="form-check-label" for="showpo_num"><?= __('Show P.O. Number') ?></label>
                   <select aria-label="Invoiceponum Select" class="form-select" id="invoiceponumSelect" style="display: none;">
-                    <option value="id">ID</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="cost_center_id">Cost Center Id</option>
-                    <option value="transaction_number">Transaction Number</option>
-                    <option value="transaction_date">Transaction Date</option>
-                    <option value="transaction_location_id">Transaction Location Id</option>
-                    <option value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                    <option value="originator_currency_id">Originator Currency Id</option>
-                    <option value="currency_id">Currency Id</option>
-                    <option value="currency_rate">Currency Rate</option>
-                    <option value="originator">Originator</option>
-                    <option value="party_id">Party Id</option>
-                    <option value="party_name">Party Name</option>
-                    <option value="party_email">Party Email</option>
-                    <option value="party_tax_number">Party Tax Number</option>
-                    <option value="party_phone">Party Phone</option>
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss">Party Ship Adderss</option>
-                    <option value="originator_state_id">Originator State Id</option>
-                    <option value="supplier_state_id">Supplier State Id</option>
-                    <option value="place_of_supply">Place Of Supply</option>
-                    <option value="payment_terms">Payment Terms</option>
-                    <option value="notes">Notes</option>
-                    <option value="printing_notes">Printing Notes</option>
-                    <option value="parent_id">Parent Id</option>
-                    <option value="amount">Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="type">Type</option>
-                    <option value="tax_type">Tax Type</option>
-                    <option value="discount_type">Discount Type</option>
-                    <option value="discount_value">Discount Value</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="shipping_tax">Shipping Tax</option>
-                    <option value="shipping_amount">Shipping Amount</option>
-                    <option value="shipping_tax_amount">Shipping Tax Amount</option>
-                    <option value="tax_state">Tax State</option>
-                    <option value="opex_cpex">Opex Cpex</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="due_date">Due Date</option>
-                    <option value="ref_type">Ref Type</option>
-                    <option value="parent_ref_id">Rarent Ref Id</option>
-                    <option value="ref_id">Ref Id</option>
-                    <option value="ref_no" selected>Ref No</option>
-                    <option value="ref_date">Ref Date</option>
-                    <option value="ref_bill_type">Ref Bill Type</option>
-                    <option value="old_ref_no">Old Ref No</option>
-                    <option value="old_ref_date">Old Ref Date</option>
-                    <option value="party_additional_details">Party Additional Details</option>
-                    <option value="follow_up_level_ids">Follow Up Level Ids</option>
-                    <option value="pending_amount">Pending Amount</option>
-                    <option value="cancel_invoice">Cancel Invoice</option>
-                    <option value="cancel_invoice_date">Cancel Invoice Date</option>
-                    <option value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                    <option value="additional_charges">Additional Charges</option>
-                    <option value="pdf_name">Pdf Name</option>
-                    <option value="owner_additional_details">Owner Additional Details</option>
-                    <option value="serial_transaction_number">Serial Transaction Number</option>
+                    <option value="id"><?= __('ID') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="cost_center_id"><?= __('Cost Center Id') ?></option>
+                    <option value="transaction_number"><?= __('Transaction Number') ?></option>
+                    <option value="transaction_date"><?= __('Transaction Date') ?></option>
+                    <option value="transaction_location_id"><?= __('Transaction Location Id') ?></option>
+                    <option value="transaction_warehouse_id"><?= __('Transaction Warehouse Id') ?></option>
+                    <option value="originator_currency_id"><?= __('Originator Currency Id') ?></option>
+                    <option value="currency_id"><?= __('Currency Id') ?></option>
+                    <option value="currency_rate"><?= __('Currency Rate') ?></option>
+                    <option value="originator"><?= __('Originator') ?></option>
+                    <option value="party_id"><?= __('Party Id') ?></option>
+                    <option value="party_name"><?= __('Party Name') ?></option>
+                    <option value="party_email"><?= __('Party Email') ?></option>
+                    <option value="party_tax_number"><?= __('Party Tax Number') ?></option>
+                    <option value="party_phone"><?= __('Party Phone') ?></option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Ship Adderss') ?></option>
+                    <option value="originator_state_id"><?= __('Originator State Id') ?></option>
+                    <option value="supplier_state_id"><?= __('Supplier State Id') ?></option>
+                    <option value="place_of_supply"><?= __('Place Of Supply') ?></option>
+                    <option value="payment_terms"><?= __('Payment Terms') ?></option>
+                    <option value="notes"><?= __('Notes') ?></option>
+                    <option value="printing_notes"><?= __('Printing Notes') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
+                    <option value="amount"><?= __('Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="type"><?= __('Type') ?></option>
+                    <option value="tax_type"><?= __('Tax Type') ?></option>
+                    <option value="discount_type"><?= __('Discount Type') ?></option>
+                    <option value="discount_value"><?= __('Discount Value') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="shipping_tax"><?= __('Shipping Tax') ?></option>
+                    <option value="shipping_amount"><?= __('Shipping Amount') ?></option>
+                    <option value="shipping_tax_amount"><?= __('Shipping Tax Amount') ?></option>
+                    <option value="tax_state"><?= __('Tax State') ?></option>
+                    <option value="opex_cpex"><?= __('Opex Cpex') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="due_date"><?= __('Due Date') ?></option>
+                    <option value="ref_type"><?= __('Ref Type') ?></option>
+                    <option value="parent_ref_id"><?= __('Rarent Ref Id') ?></option>
+                    <option value="ref_id"><?= __('Ref Id') ?></option>
+                    <option value="ref_no" selected><?= __('Ref No') ?></option>
+                    <option value="ref_date"><?= __('Ref Date') ?></option>
+                    <option value="ref_bill_type"><?= __('Ref Bill Type') ?></option>
+                    <option value="old_ref_no"><?= __('Old Ref No') ?></option>
+                    <option value="old_ref_date"><?= __('Old Ref Date') ?></option>
+                    <option value="party_additional_details"><?= __('Party Additional Details') ?></option>
+                    <option value="follow_up_level_ids"><?= __('Follow Up Level Ids') ?></option>
+                    <option value="pending_amount"><?= __('Pending Amount') ?></option>
+                    <option value="cancel_invoice"><?= __('Cancel Invoice') ?></option>
+                    <option value="cancel_invoice_date"><?= __('Cancel Invoice Date') ?></option>
+                    <option value="cancel_invoice_reason"><?= __('Cancel Invoice Reason') ?></option>
+                    <option value="additional_charges"><?= __('Additional Charges') ?></option>
+                    <option value="pdf_name"><?= __('Pdf Name') ?></option>
+                    <option value="owner_additional_details"><?= __('Owner Additional Details') ?></option>
+                    <option value="serial_transaction_number"><?= __('Serial Transaction Number') ?></option>
                   </select>
                 </div>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showpo_date" checked aria-label="Input">
-                  <label class="form-check-label" for="showpo_date">Show P.O Date</label>
+                  <label class="form-check-label" for="showpo_date"><?= __('Show P.O Date') ?></label>
                   <select aria-label="Invoicepodate Select" class="form-select" id="invoicepodateSelect" style="display: none;">
-                    <option value="id">ID</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="cost_center_id">Cost Center Id</option>
-                    <option value="transaction_number">Transaction Number</option>
-                    <option value="transaction_date">Transaction Date</option>
-                    <option value="transaction_location_id">Transaction Location Id</option>
-                    <option value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                    <option value="originator_currency_id">Originator Currency Id</option>
-                    <option value="currency_id">Currency Id</option>
-                    <option value="currency_rate">Currency Rate</option>
-                    <option value="originator">Originator</option>
-                    <option value="party_id">Party Id</option>
-                    <option value="party_name">Party Name</option>
-                    <option value="party_email">Party Email</option>
-                    <option value="party_tax_number">Party Tax Number</option>
-                    <option value="party_phone">Party Phone</option>
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss">Party Ship Adderss</option>
-                    <option value="originator_state_id">Originator State Id</option>
-                    <option value="supplier_state_id">Supplier State Id</option>
-                    <option value="place_of_supply">Place Of Supply</option>
-                    <option value="payment_terms">Payment Terms</option>
-                    <option value="notes">Notes</option>
-                    <option value="printing_notes">Printing Notes</option>
-                    <option value="parent_id">Parent Id</option>
-                    <option value="amount">Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="type">Type</option>
-                    <option value="tax_type">Tax Type</option>
-                    <option value="discount_type">Discount Type</option>
-                    <option value="discount_value">Discount Value</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="shipping_tax">Shipping Tax</option>
-                    <option value="shipping_amount">Shipping Amount</option>
-                    <option value="shipping_tax_amount">Shipping Tax Amount</option>
-                    <option value="tax_state">Tax State</option>
-                    <option value="opex_cpex">Opex Cpex</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="due_date">Due Date</option>
-                    <option value="ref_type">Ref Type</option>
-                    <option value="parent_ref_id">Rarent Ref Id</option>
-                    <option value="ref_id">Ref Id</option>
-                    <option value="ref_no">Ref No</option>
-                    <option value="ref_date" selected>Ref Date</option>
-                    <option value="ref_bill_type">Ref Bill Type</option>
-                    <option value="old_ref_no">Old Ref No</option>
-                    <option value="old_ref_date">Old Ref Date</option>
-                    <option value="party_additional_details">Party Additional Details</option>
-                    <option value="follow_up_level_ids">Follow Up Level Ids</option>
-                    <option value="pending_amount">Pending Amount</option>
-                    <option value="cancel_invoice">Cancel Invoice</option>
-                    <option value="cancel_invoice_date">Cancel Invoice Date</option>
-                    <option value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                    <option value="additional_charges">Additional Charges</option>
-                    <option value="pdf_name">Pdf Name</option>
-                    <option value="owner_additional_details">Owner Additional Details</option>
-                    <option value="serial_transaction_number">Serial Transaction Number</option>
+                    <option value="id"><?= __('ID') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="cost_center_id"><?= __('Cost Center Id') ?></option>
+                    <option value="transaction_number"><?= __('Transaction Number') ?></option>
+                    <option value="transaction_date"><?= __('Transaction Date') ?></option>
+                    <option value="transaction_location_id"><?= __('Transaction Location Id') ?></option>
+                    <option value="transaction_warehouse_id"><?= __('Transaction Warehouse Id') ?></option>
+                    <option value="originator_currency_id"><?= __('Originator Currency Id') ?></option>
+                    <option value="currency_id"><?= __('Currency Id') ?></option>
+                    <option value="currency_rate"><?= __('Currency Rate') ?></option>
+                    <option value="originator"><?= __('Originator') ?></option>
+                    <option value="party_id"><?= __('Party Id') ?></option>
+                    <option value="party_name"><?= __('Party Name') ?></option>
+                    <option value="party_email"><?= __('Party Email') ?></option>
+                    <option value="party_tax_number"><?= __('Party Tax Number') ?></option>
+                    <option value="party_phone"><?= __('Party Phone') ?></option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Ship Adderss') ?></option>
+                    <option value="originator_state_id"><?= __('Originator State Id') ?></option>
+                    <option value="supplier_state_id"><?= __('Supplier State Id') ?></option>
+                    <option value="place_of_supply"><?= __('Place Of Supply') ?></option>
+                    <option value="payment_terms"><?= __('Payment Terms') ?></option>
+                    <option value="notes"><?= __('Notes') ?></option>
+                    <option value="printing_notes"><?= __('Printing Notes') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
+                    <option value="amount"><?= __('Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="type"><?= __('Type') ?></option>
+                    <option value="tax_type"><?= __('Tax Type') ?></option>
+                    <option value="discount_type"><?= __('Discount Type') ?></option>
+                    <option value="discount_value"><?= __('Discount Value') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="shipping_tax"><?= __('Shipping Tax') ?></option>
+                    <option value="shipping_amount"><?= __('Shipping Amount') ?></option>
+                    <option value="shipping_tax_amount"><?= __('Shipping Tax Amount') ?></option>
+                    <option value="tax_state"><?= __('Tax State') ?></option>
+                    <option value="opex_cpex"><?= __('Opex Cpex') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="due_date"><?= __('Due Date') ?></option>
+                    <option value="ref_type"><?= __('Ref Type') ?></option>
+                    <option value="parent_ref_id"><?= __('Rarent Ref Id') ?></option>
+                    <option value="ref_id"><?= __('Ref Id') ?></option>
+                    <option value="ref_no"><?= __('Ref No') ?></option>
+                    <option value="ref_date" selected><?= __('Ref Date') ?></option>
+                    <option value="ref_bill_type"><?= __('Ref Bill Type') ?></option>
+                    <option value="old_ref_no"><?= __('Old Ref No') ?></option>
+                    <option value="old_ref_date"><?= __('Old Ref Date') ?></option>
+                    <option value="party_additional_details"><?= __('Party Additional Details') ?></option>
+                    <option value="follow_up_level_ids"><?= __('Follow Up Level Ids') ?></option>
+                    <option value="pending_amount"><?= __('Pending Amount') ?></option>
+                    <option value="cancel_invoice"><?= __('Cancel Invoice') ?></option>
+                    <option value="cancel_invoice_date"><?= __('Cancel Invoice Date') ?></option>
+                    <option value="cancel_invoice_reason"><?= __('Cancel Invoice Reason') ?></option>
+                    <option value="additional_charges"><?= __('Additional Charges') ?></option>
+                    <option value="pdf_name"><?= __('Pdf Name') ?></option>
+                    <option value="owner_additional_details"><?= __('Owner Additional Details') ?></option>
+                    <option value="serial_transaction_number"><?= __('Serial Transaction Number') ?></option>
                   </select>
                 </div>
               </div>
             </div>
           </div>
           <div class="mb-3">
-            <h6>Header Options</h6>
+            <h6><?= __('Header Options') ?></h6>
             <div class="btn-group d-flex flex-wrap">
               <a class="btn btn-outline-danger btn-sm mb-2" data-target="addressVisibility">
                 <i class="bi bi-eye"></i> Visibility
@@ -609,10 +609,10 @@ if ($userData['user_photo'] != '') {
 
             <div id="addressVisibility" class="dynamic-options">
               <div class="card card-body mt-2">
-                <span class="form-label mb-2">Toggle Header</span>
+                <span class="form-label mb-2"><?= __('Toggle Header') ?></span>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showAddress" checked aria-label="Input">
-                  <label class="form-check-label" for="showAddress">Show Header</label>
+                  <label class="form-check-label" for="showAddress"><?= __('Show Header') ?></label>
                 </div>
               </div>
             </div>
@@ -620,38 +620,38 @@ if ($userData['user_photo'] != '') {
 
             <div id="addresssecVisibility" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="addressvisibilitySelect" class="form-label">Header Address Visibility</label>
+                <label for="addressvisibilitySelect" class="form-label"><?= __('Header Address Visibility') ?></label>
 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showFirstAddress" checked aria-label="Input">
-                  <label class="form-check-label" for="showFirstAddress">Show Bill From Address</label>
+                  <label class="form-check-label" for="showFirstAddress"><?= __('Show Bill From Address') ?></label>
                   <input aria-label="Inputheading1" class="form-control mb-1" type="text" id="inputheading1" value="Invoiced To">
                   <select aria-label="Address1Select" class="form-select" id="address1Select" style="display: none;">
-                    <option value="party_address" selected>Party Address</option>
-                    <option value="party_ship_adderss">Party Shipping Address</option>
-                    <option value="company_address">Company Address</option>
+                    <option value="party_address" selected><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Shipping Address') ?></option>
+                    <option value="company_address"><?= __('Company Address') ?></option>
                   </select>
                 </div>
 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showSecondAddress" checked aria-label="Input">
-                  <label class="form-check-label" for="showSecondAddress">Show Bill TO Address</label>
+                  <label class="form-check-label" for="showSecondAddress"><?= __('Show Bill TO Address') ?></label>
                   <input aria-label="Inputheading2" class="form-control mb-1" type="text" id="inputheading2" value="Bill To">
                   <select aria-label="Address2Select" class="form-select" id="address2Select" style="display: none;">
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss" selected>Party Shipping Address</option>
-                    <option value="company_address">Company Address</option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss" selected><?= __('Party Shipping Address') ?></option>
+                    <option value="company_address"><?= __('Company Address') ?></option>
                   </select>
                 </div>
 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showThirdAddress" checked aria-label="Input">
-                  <label class="form-check-label" for="showThirdAddress">Show Company Address</label>
+                  <label class="form-check-label" for="showThirdAddress"><?= __('Show Company Address') ?></label>
                   <input aria-label="Inputheading3" class="form-control mb-1" type="text" id="inputheading3" value="Company">
                   <select aria-label="Address3Select" class="form-select" id="address3Select" style="display: none;">
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss">Party Shipping Address</option>
-                    <option value="company_address" selected>Company Address</option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Shipping Address') ?></option>
+                    <option value="company_address" selected><?= __('Company Address') ?></option>
                   </select>
                 </div>
               </div>
@@ -661,27 +661,27 @@ if ($userData['user_photo'] != '') {
             <div id="addressPosition" class="dynamic-options">
               <div class="card card-body mt-2">
                 <div class="form-group">
-                  <label for="address1position" class="form-label">Address 1</label>
+                  <label for="address1position" class="form-label"><?= __('Address 1') ?></label>
                   <select class="form-select" id="address1position" aria-label="Select">
-                    <option value="left" selected>Left</option>
-                    <option value="center">Center</option>
-                    <option value="right">Right</option>
+                    <option value="left" selected><?= __('Left') ?></option>
+                    <option value="center"><?= __('Center') ?></option>
+                    <option value="right"><?= __('Right') ?></option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="address2position" class="form-label">Address 2</label>
+                  <label for="address2position" class="form-label"><?= __('Address 2') ?></label>
                   <select class="form-select" id="address2position" aria-label="Select">
-                    <option value="left">Left</option>
-                    <option value="center" selected>Center</option>
-                    <option value="right">Right</option>
+                    <option value="left"><?= __('Left') ?></option>
+                    <option value="center" selected><?= __('Center') ?></option>
+                    <option value="right"><?= __('Right') ?></option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="address3position" class="form-label">Address 3</label>
+                  <label for="address3position" class="form-label"><?= __('Address 3') ?></label>
                   <select class="form-select" id="address3position" aria-label="Select">
-                    <option value="left">Left</option>
-                    <option value="center">Center</option>
-                    <option value="right" selected>Right</option>
+                    <option value="left"><?= __('Left') ?></option>
+                    <option value="center"><?= __('Center') ?></option>
+                    <option value="right" selected><?= __('Right') ?></option>
                   </select>
                 </div>
               </div>
@@ -690,17 +690,17 @@ if ($userData['user_photo'] != '') {
 
             <div id="addressSize" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="addressSizeSelect" class="form-label">Text Size</label>
+                <label for="addressSizeSelect" class="form-label"><?= __('Text Size') ?></label>
                 <select class="form-select" id="addressSizeSelect" aria-label="Select">
-                  <option value="small">Small</option>
-                  <option value="medium" selected>Medium</option>
-                  <option value="large">Large</option>
+                  <option value="small"><?= __('Small') ?></option>
+                  <option value="medium" selected><?= __('Medium') ?></option>
+                  <option value="large"><?= __('Large') ?></option>
                 </select>
               </div>
             </div>
           </div>
           <div class="mb-3">
-            <h6>Table Options</h6>
+            <h6><?= __('Table Options') ?></h6>
             <div class="btn-group d-flex flex-wrap">
               <button class="btn btn-outline-dark btn-sm mb-2" data-target="tableVisibility">
                 <i class="bi bi-eye"></i> Visibility
@@ -719,10 +719,10 @@ if ($userData['user_photo'] != '') {
 
             <div id="tableVisibility" class="dynamic-options">
               <div class="card card-body mt-2">
-                <span class="form-label mb-2">Toggle Table</span>
+                <span class="form-label mb-2"><?= __('Toggle Table') ?></span>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showTable" readonly disabled checked aria-label="Input">
-                  <label class="form-check-label" for="showTable">Show Table</label>
+                  <label class="form-check-label" for="showTable"><?= __('Show Table') ?></label>
                 </div>
               </div>
             </div>
@@ -730,68 +730,68 @@ if ($userData['user_photo'] != '') {
 
             <div id="tableAppearance" class="dynamic-options">
               <div class="card card-body mt-2">
-                <h6>Customize Table Appearance</h6>
+                <h6><?= __('Customize Table Appearance') ?></h6>
 
                 <!-- Table Header Background -->
                 <div class="mb-1">
-                  <span class="form-label">Table Header Background</span>
+                  <span class="form-label"><?= __('Table Header Background') ?></span>
                   <input aria-label="Table Headerbg Color" type="color" class="form-control form-control-color" style="max-width:100%;"
                     id="tableHeaderbgColor" value="#f8f9fa">
                 </div>
 
                 <!-- Table Header color -->
                 <div class="mb-1">
-                  <span class="form-label">Table Header Text Color</span>
+                  <span class="form-label"><?= __('Table Header Text Color') ?></span>
                   <input aria-label="Table Header Color" type="color" class="form-control form-control-color" style="max-width:100%;"
                     id="tableHeaderColor" value="#ffffff">
                 </div>
 
                 <!-- Table Body Background -->
                 <div class="mb-1">
-                  <span class="form-label">Table Body Background</span>
+                  <span class="form-label"><?= __('Table Body Background') ?></span>
                   <input aria-label="Table Bodybg Color" type="color" class="form-control form-control-color" style="max-width:100%;"
                     id="tableBodybgColor" value="#ffffff">
                 </div>
 
                 <!-- Table body color -->
                 <div class="mb-1">
-                  <span class="form-label">Table body Text Color</span>
+                  <span class="form-label"><?= __('Table body Text Color') ?></span>
                   <input aria-label="Table Body Color" type="color" class="form-control form-control-color" style="max-width:100%;"
                     id="tableBodyColor" value="#ffffff">
                 </div>
 
                 <!-- Table Footer Background -->
                 <div class="mb-1">
-                  <span class="form-label">Table Footer Background</span>
+                  <span class="form-label"><?= __('Table Footer Background') ?></span>
                   <input aria-label="Table Footerbg Color" type="color" class="form-control form-control-color" style="max-width:100%;"
                     id="tableFooterbgColor" value="#f8f9fa">
                 </div>
 
                 <!-- Table Header color -->
                 <div class="mb-1">
-                  <span class="form-label">Table Footer Text Color</span>
+                  <span class="form-label"><?= __('Table Footer Text Color') ?></span>
                   <input aria-label="Table Footer Color" type="color" class="form-control form-control-color" style="max-width:100%;"
                     id="tableFooterColor" value="#ffffff">
                 </div>
 
                 <!-- Row Height -->
                 <div class="mb-1">
-                  <span class="form-label">Table Row Height</span>
-                  <input aria-label="Enter Row Height (px)" type="number" class="form-control" id="rowHeight" min="20" placeholder="Enter Row Height (px)">
+                  <span class="form-label"><?= __('Table Row Height') ?></span>
+                  <input aria-label="Enter Row Height (px)" type="number" class="form-control" id="rowHeight" min="20" placeholder="<?= __('Enter Row Height (px)') ?>">
                 </div>
 
                 <!-- Heading Height -->
                 <div class="mb-1">
-                  <span class="form-label">Table Heading Height</span>
+                  <span class="form-label"><?= __('Table Heading Height') ?></span>
                   <input aria-label="Enter Heading Height (px)" type="number" class="form-control" id="headingHeight" min="20"
-                    placeholder="Enter Heading Height (px)">
+                    placeholder="<?= __('Enter Heading Height (px)') ?>">
                 </div>
 
                 <!-- Font Size -->
                 <div class="mb-1">
-                  <span class="form-label">Table Font Size</span>
+                  <span class="form-label"><?= __('Table Font Size') ?></span>
                   <input aria-label="Enter Font Size (px)" type="number" class="form-control" id="fontSize" min="8" max="36"
-                    placeholder="Enter Font Size (px)">
+                    placeholder="<?= __('Enter Font Size (px)') ?>">
                 </div>
               </div>
             </div>
@@ -799,335 +799,335 @@ if ($userData['user_photo'] != '') {
 
             <div id="colsVisibility" class="dynamic-options">
               <div class="card card-body mt-2">
-                <span class="form-label mb-2">Toggle Columns</span>
+                <span class="form-label mb-2"><?= __('Toggle Columns') ?></span>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showtaxsumcol" checked aria-label="Input">
-                  <label class="form-check-label" for="showtaxsumcol">Show Tax Summary</label>
+                  <label class="form-check-label" for="showtaxsumcol"><?= __('Show Tax Summary') ?></label>
                 </div>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showimagecol" checked aria-label="Input">
-                  <label class="form-check-label" for="showimagecol">Show Image Columns</label>
+                  <label class="form-check-label" for="showimagecol"><?= __('Show Image Columns') ?></label>
                   <input aria-label="Enter Feild Name" type="text" id="imagecolumnInput" class="form-control" style="display: none;"
-                    placeholder="Enter Feild Name" />
+                    placeholder="<?= __('Enter Feild Name') ?>" />
                   <select aria-label="Itemimage Select" class="form-select mt-1" id="itemimageSelect" style="display: none;">
-                    <option value="id">id</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="transaction_id">Transaction Id</option>
-                    <option value="item_table_name">Item Table Name</option>
-                    <option value="item_id">Item Id</option>
-                    <option value="account_code">Account Code</option>
-                    <option value="item_name">Item Name</option>
-                    <option value="item_image" selected>Item Image</option>
-                    <option value="description">Description</option>
-                    <option value="purchase_uom">UOM</option>
-                    <option value="item_quantity">Quantity</option>
-                    <option value="item_price">Item Price</option>
-                    <option value="item_amount">Item Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="reason_id">Reason Id</option>
-                    <option value="item_wa_cost">Item Wa Cost</option>
-                    <option value="item_st_cost">Item St Cost</option>
-                    <option value="doc_ref_type">Doc Ref Type</option>
-                    <option value="doc_ref_id">Doc Ref Id</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="req_date">Req Date</option>
-                    <option value="approved_quantity">Approved Quantity</option>
-                    <option value="transaction_type">Transaction Type</option>
-                    <option value="transaction_qty">Transaction Qty</option>
-                    <option value="pending_qty">Pending Qty</option>
-                    <option value="parent_id">Parent Id</option>
+                    <option value="id"><?= __('id') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="transaction_id"><?= __('Transaction Id') ?></option>
+                    <option value="item_table_name"><?= __('Item Table Name') ?></option>
+                    <option value="item_id"><?= __('Item Id') ?></option>
+                    <option value="account_code"><?= __('Account Code') ?></option>
+                    <option value="item_name"><?= __('Item Name') ?></option>
+                    <option value="item_image" selected><?= __('Item Image') ?></option>
+                    <option value="description"><?= __('Description') ?></option>
+                    <option value="purchase_uom"><?= __('UOM') ?></option>
+                    <option value="item_quantity"><?= __('Quantity') ?></option>
+                    <option value="item_price"><?= __('Item Price') ?></option>
+                    <option value="item_amount"><?= __('Item Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="reason_id"><?= __('Reason Id') ?></option>
+                    <option value="item_wa_cost"><?= __('Item Wa Cost') ?></option>
+                    <option value="item_st_cost"><?= __('Item St Cost') ?></option>
+                    <option value="doc_ref_type"><?= __('Doc Ref Type') ?></option>
+                    <option value="doc_ref_id"><?= __('Doc Ref Id') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="req_date"><?= __('Req Date') ?></option>
+                    <option value="approved_quantity"><?= __('Approved Quantity') ?></option>
+                    <option value="transaction_type"><?= __('Transaction Type') ?></option>
+                    <option value="transaction_qty"><?= __('Transaction Qty') ?></option>
+                    <option value="pending_qty"><?= __('Pending Qty') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
                   </select>
                 </div>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showitemcol" checked aria-label="Input">
-                  <label class="form-check-label" for="showitemcol">Show Item Name Columns</label>
+                  <label class="form-check-label" for="showitemcol"><?= __('Show Item Name Columns') ?></label>
                   <input aria-label="Enter Feild Name" type="text" id="itemcolumnInput" class="form-control" style="display: none;"
-                    placeholder="Enter Feild Name" />
+                    placeholder="<?= __('Enter Feild Name') ?>" />
                   <select aria-label="Itemname Select" class="form-select mt-1" id="itemnameSelect" style="display: none;">
-                    <option value="id">id</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="transaction_id">Transaction Id</option>
-                    <option value="item_table_name">Item Table Name</option>
-                    <option value="item_id">Item Id</option>
-                    <option value="account_code">Account Code</option>
-                    <option value="item_name" selected>Item Name</option>
-                    <option value="description">Description</option>
-                    <option value="purchase_uom">UOM</option>
-                    <option value="item_quantity">Quantity</option>
-                    <option value="item_price">Item Price</option>
-                    <option value="item_amount">Item Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="reason_id">Reason Id</option>
-                    <option value="item_wa_cost">Item Wa Cost</option>
-                    <option value="item_st_cost">Item St Cost</option>
-                    <option value="doc_ref_type">Doc Ref Type</option>
-                    <option value="doc_ref_id">Doc Ref Id</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="req_date">Req Date</option>
-                    <option value="approved_quantity">Approved Quantity</option>
-                    <option value="transaction_type">Transaction Type</option>
-                    <option value="transaction_qty">Transaction Qty</option>
-                    <option value="pending_qty">Pending Qty</option>
-                    <option value="parent_id">Parent Id</option>
+                    <option value="id"><?= __('id') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="transaction_id"><?= __('Transaction Id') ?></option>
+                    <option value="item_table_name"><?= __('Item Table Name') ?></option>
+                    <option value="item_id"><?= __('Item Id') ?></option>
+                    <option value="account_code"><?= __('Account Code') ?></option>
+                    <option value="item_name" selected><?= __('Item Name') ?></option>
+                    <option value="description"><?= __('Description') ?></option>
+                    <option value="purchase_uom"><?= __('UOM') ?></option>
+                    <option value="item_quantity"><?= __('Quantity') ?></option>
+                    <option value="item_price"><?= __('Item Price') ?></option>
+                    <option value="item_amount"><?= __('Item Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="reason_id"><?= __('Reason Id') ?></option>
+                    <option value="item_wa_cost"><?= __('Item Wa Cost') ?></option>
+                    <option value="item_st_cost"><?= __('Item St Cost') ?></option>
+                    <option value="doc_ref_type"><?= __('Doc Ref Type') ?></option>
+                    <option value="doc_ref_id"><?= __('Doc Ref Id') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="req_date"><?= __('Req Date') ?></option>
+                    <option value="approved_quantity"><?= __('Approved Quantity') ?></option>
+                    <option value="transaction_type"><?= __('Transaction Type') ?></option>
+                    <option value="transaction_qty"><?= __('Transaction Qty') ?></option>
+                    <option value="pending_qty"><?= __('Pending Qty') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
                   </select>
                 </div>
                 <div class="form-check form-switch">
                   <input aria-label="Showdescol" class="form-check-input" type="checkbox" id="showdescol" checked>
-                  <label class="form-check-label" for="showitemcol">Show Item Description</label>
+                  <label class="form-check-label" for="showitemcol"><?= __('Show Item Description') ?></label>
                   <input aria-label="Enter Feild Name" type="text" id="descolumnInput" class="form-control" style="display: none;"
-                    placeholder="Enter Feild Name" />
+                    placeholder="<?= __('Enter Feild Name') ?>" />
                   <select aria-label="Itemdescription Select" class="form-select mt-1" id="itemdescriptionSelect" style="display: none;">
-                    <option value="id">id</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="transaction_id">Transaction Id</option>
-                    <option value="item_table_name">Item Table Name</option>
-                    <option value="item_id">Item Id</option>
-                    <option value="account_code">Account Code</option>
-                    <option value="item_name">Item Name</option>
-                    <option value="description" selected>Description</option>
-                    <option value="purchase_uom">UOM</option>
-                    <option value="item_quantity">Quantity</option>
-                    <option value="item_price">Item Price</option>
-                    <option value="item_amount">Item Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="reason_id">Reason Id</option>
-                    <option value="item_wa_cost">Item Wa Cost</option>
-                    <option value="item_st_cost">Item St Cost</option>
-                    <option value="doc_ref_type">Doc Ref Type</option>
-                    <option value="doc_ref_id">Doc Ref Id</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="req_date">Req Date</option>
-                    <option value="approved_quantity">Approved Quantity</option>
-                    <option value="transaction_type">Transaction Type</option>
-                    <option value="transaction_qty">Transaction Qty</option>
-                    <option value="pending_qty">Pending Qty</option>
-                    <option value="parent_id">Parent Id</option>
+                    <option value="id"><?= __('id') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="transaction_id"><?= __('Transaction Id') ?></option>
+                    <option value="item_table_name"><?= __('Item Table Name') ?></option>
+                    <option value="item_id"><?= __('Item Id') ?></option>
+                    <option value="account_code"><?= __('Account Code') ?></option>
+                    <option value="item_name"><?= __('Item Name') ?></option>
+                    <option value="description" selected><?= __('Description') ?></option>
+                    <option value="purchase_uom"><?= __('UOM') ?></option>
+                    <option value="item_quantity"><?= __('Quantity') ?></option>
+                    <option value="item_price"><?= __('Item Price') ?></option>
+                    <option value="item_amount"><?= __('Item Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="reason_id"><?= __('Reason Id') ?></option>
+                    <option value="item_wa_cost"><?= __('Item Wa Cost') ?></option>
+                    <option value="item_st_cost"><?= __('Item St Cost') ?></option>
+                    <option value="doc_ref_type"><?= __('Doc Ref Type') ?></option>
+                    <option value="doc_ref_id"><?= __('Doc Ref Id') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="req_date"><?= __('Req Date') ?></option>
+                    <option value="approved_quantity"><?= __('Approved Quantity') ?></option>
+                    <option value="transaction_type"><?= __('Transaction Type') ?></option>
+                    <option value="transaction_qty"><?= __('Transaction Qty') ?></option>
+                    <option value="pending_qty"><?= __('Pending Qty') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
                   </select>
                 </div>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showhsnsaccol" checked aria-label="Input">
-                  <label class="form-check-label" for="showhsnsaccol">Show HSN/SAC Columns</label>
+                  <label class="form-check-label" for="showhsnsaccol"><?= __('Show HSN/SAC Columns') ?></label>
                   <input aria-label="Enter Feild Name" type="text" id="hsnsaccolumnInput" class="form-control" style="display: none;"
-                    placeholder="Enter Feild Name" />
+                    placeholder="<?= __('Enter Feild Name') ?>" />
                   <select aria-label="Itemhsnsac Select" class="form-select mt-1" id="itemhsnsacSelect" style="display: none;">
-                    <option value="hsn_and_sac_code_id" selected>HSN/SAC ID</option>
-                    <option value="id">id</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="transaction_id">Transaction Id</option>
-                    <option value="item_table_name">Item Table Name</option>
-                    <option value="item_id">Item Id</option>
-                    <option value="account_code">Account Code</option>
-                    <option value="item_name">Item Name</option>
-                    <option value="description">Description</option>
-                    <option value="purchase_uom">UOM</option>
-                    <option value="item_quantity">Quantity</option>
-                    <option value="item_price">Item Price</option>
-                    <option value="item_amount">Item Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="reason_id">Reason Id</option>
-                    <option value="item_wa_cost">Item Wa Cost</option>
-                    <option value="item_st_cost">Item St Cost</option>
-                    <option value="doc_ref_type">Doc Ref Type</option>
-                    <option value="doc_ref_id">Doc Ref Id</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="req_date">Req Date</option>
-                    <option value="approved_quantity">Approved Quantity</option>
-                    <option value="transaction_type">Transaction Type</option>
-                    <option value="transaction_qty">Transaction Qty</option>
-                    <option value="pending_qty">Pending Qty</option>
-                    <option value="parent_id">Parent Id</option>
+                    <option value="hsn_and_sac_code_id" selected><?= __('HSN/SAC ID') ?></option>
+                    <option value="id"><?= __('id') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="transaction_id"><?= __('Transaction Id') ?></option>
+                    <option value="item_table_name"><?= __('Item Table Name') ?></option>
+                    <option value="item_id"><?= __('Item Id') ?></option>
+                    <option value="account_code"><?= __('Account Code') ?></option>
+                    <option value="item_name"><?= __('Item Name') ?></option>
+                    <option value="description"><?= __('Description') ?></option>
+                    <option value="purchase_uom"><?= __('UOM') ?></option>
+                    <option value="item_quantity"><?= __('Quantity') ?></option>
+                    <option value="item_price"><?= __('Item Price') ?></option>
+                    <option value="item_amount"><?= __('Item Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="reason_id"><?= __('Reason Id') ?></option>
+                    <option value="item_wa_cost"><?= __('Item Wa Cost') ?></option>
+                    <option value="item_st_cost"><?= __('Item St Cost') ?></option>
+                    <option value="doc_ref_type"><?= __('Doc Ref Type') ?></option>
+                    <option value="doc_ref_id"><?= __('Doc Ref Id') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="req_date"><?= __('Req Date') ?></option>
+                    <option value="approved_quantity"><?= __('Approved Quantity') ?></option>
+                    <option value="transaction_type"><?= __('Transaction Type') ?></option>
+                    <option value="transaction_qty"><?= __('Transaction Qty') ?></option>
+                    <option value="pending_qty"><?= __('Pending Qty') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
                   </select>
                 </div>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showuomcol" checked aria-label="Input">
-                  <label class="form-check-label" for="showuomcol">Show UOM Columns</label>
+                  <label class="form-check-label" for="showuomcol"><?= __('Show UOM Columns') ?></label>
                   <input aria-label="Enter Feild Name" type="text" id="uomcolumnInput" class="form-control" style="display: none;"
-                    placeholder="Enter Feild Name" />
+                    placeholder="<?= __('Enter Feild Name') ?>" />
                   <select aria-label="Itemuom Select" class="form-select mt-1" id="itemuomSelect" style="display: none;">
-                    <option value="id">id</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="transaction_id">Transaction Id</option>
-                    <option value="item_table_name">Item Table Name</option>
-                    <option value="item_id">Item Id</option>
-                    <option value="account_code">Account Code</option>
-                    <option value="item_name">Item Name</option>
-                    <option value="description">Description</option>
-                    <option value="purchase_uom" selected>UOM</option>
-                    <option value="item_quantity">Quantity</option>
-                    <option value="item_price">Item Price</option>
-                    <option value="item_amount">Item Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="reason_id">Reason Id</option>
-                    <option value="item_wa_cost">Item Wa Cost</option>
-                    <option value="item_st_cost">Item St Cost</option>
-                    <option value="doc_ref_type">Doc Ref Type</option>
-                    <option value="doc_ref_id">Doc Ref Id</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="req_date">Req Date</option>
-                    <option value="approved_quantity">Approved Quantity</option>
-                    <option value="transaction_type">Transaction Type</option>
-                    <option value="transaction_qty">Transaction Qty</option>
-                    <option value="pending_qty">Pending Qty</option>
-                    <option value="parent_id">Parent Id</option>
+                    <option value="id"><?= __('id') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="transaction_id"><?= __('Transaction Id') ?></option>
+                    <option value="item_table_name"><?= __('Item Table Name') ?></option>
+                    <option value="item_id"><?= __('Item Id') ?></option>
+                    <option value="account_code"><?= __('Account Code') ?></option>
+                    <option value="item_name"><?= __('Item Name') ?></option>
+                    <option value="description"><?= __('Description') ?></option>
+                    <option value="purchase_uom" selected><?= __('UOM') ?></option>
+                    <option value="item_quantity"><?= __('Quantity') ?></option>
+                    <option value="item_price"><?= __('Item Price') ?></option>
+                    <option value="item_amount"><?= __('Item Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="reason_id"><?= __('Reason Id') ?></option>
+                    <option value="item_wa_cost"><?= __('Item Wa Cost') ?></option>
+                    <option value="item_st_cost"><?= __('Item St Cost') ?></option>
+                    <option value="doc_ref_type"><?= __('Doc Ref Type') ?></option>
+                    <option value="doc_ref_id"><?= __('Doc Ref Id') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="req_date"><?= __('Req Date') ?></option>
+                    <option value="approved_quantity"><?= __('Approved Quantity') ?></option>
+                    <option value="transaction_type"><?= __('Transaction Type') ?></option>
+                    <option value="transaction_qty"><?= __('Transaction Qty') ?></option>
+                    <option value="pending_qty"><?= __('Pending Qty') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
                   </select>
                 </div>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showtaxcol" checked aria-label="Input">
-                  <label class="form-check-label" for="showtaxcol">Show TAX Columns</label>
+                  <label class="form-check-label" for="showtaxcol"><?= __('Show TAX Columns') ?></label>
                   <input aria-label="Enter Feild Name" type="text" id="taxcolumnInput" class="form-control" style="display: none;"
-                    placeholder="Enter Feild Name" />
+                    placeholder="<?= __('Enter Feild Name') ?>" />
                   <select aria-label="Itemtax Select" class="form-select mt-1" id="itemtaxSelect" style="display: none;">
-                    <option value="id">id</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="transaction_id">Transaction Id</option>
-                    <option value="item_table_name">Item Table Name</option>
-                    <option value="item_id">Item Id</option>
-                    <option value="account_code">Account Code</option>
-                    <option value="item_name">Item Name</option>
-                    <option value="description">Description</option>
-                    <option value="purchase_uom">UOM</option>
-                    <option value="item_quantity">Quantity</option>
-                    <option value="item_price">Item Price</option>
-                    <option value="item_amount">Item Amount</option>
-                    <option value="tax_amount" selected>Tax Amount</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="reason_id">Reason Id</option>
-                    <option value="item_wa_cost">Item Wa Cost</option>
-                    <option value="item_st_cost">Item St Cost</option>
-                    <option value="doc_ref_type">Doc Ref Type</option>
-                    <option value="doc_ref_id">Doc Ref Id</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="req_date">Req Date</option>
-                    <option value="approved_quantity">Approved Quantity</option>
-                    <option value="transaction_type">Transaction Type</option>
-                    <option value="transaction_qty">Transaction Qty</option>
-                    <option value="pending_qty">Pending Qty</option>
-                    <option value="parent_id">Parent Id</option>
+                    <option value="id"><?= __('id') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="transaction_id"><?= __('Transaction Id') ?></option>
+                    <option value="item_table_name"><?= __('Item Table Name') ?></option>
+                    <option value="item_id"><?= __('Item Id') ?></option>
+                    <option value="account_code"><?= __('Account Code') ?></option>
+                    <option value="item_name"><?= __('Item Name') ?></option>
+                    <option value="description"><?= __('Description') ?></option>
+                    <option value="purchase_uom"><?= __('UOM') ?></option>
+                    <option value="item_quantity"><?= __('Quantity') ?></option>
+                    <option value="item_price"><?= __('Item Price') ?></option>
+                    <option value="item_amount"><?= __('Item Amount') ?></option>
+                    <option value="tax_amount" selected><?= __('Tax Amount') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="reason_id"><?= __('Reason Id') ?></option>
+                    <option value="item_wa_cost"><?= __('Item Wa Cost') ?></option>
+                    <option value="item_st_cost"><?= __('Item St Cost') ?></option>
+                    <option value="doc_ref_type"><?= __('Doc Ref Type') ?></option>
+                    <option value="doc_ref_id"><?= __('Doc Ref Id') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="req_date"><?= __('Req Date') ?></option>
+                    <option value="approved_quantity"><?= __('Approved Quantity') ?></option>
+                    <option value="transaction_type"><?= __('Transaction Type') ?></option>
+                    <option value="transaction_qty"><?= __('Transaction Qty') ?></option>
+                    <option value="pending_qty"><?= __('Pending Qty') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
                   </select>
                 </div>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showratecol" checked aria-label="Input">
-                  <label class="form-check-label" for="showratecol">Show Rate Columns</label>
+                  <label class="form-check-label" for="showratecol"><?= __('Show Rate Columns') ?></label>
                   <input aria-label="Enter Feild Name" type="text" id="ratecolumnInput" class="form-control" style="display: none;"
-                    placeholder="Enter Feild Name" />
+                    placeholder="<?= __('Enter Feild Name') ?>" />
                   <select aria-label="Itemrate Select" class="form-select mt-1" id="itemrateSelect" style="display: none;">
-                    <option value="id">id</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="transaction_id">Transaction Id</option>
-                    <option value="item_table_name">Item Table Name</option>
-                    <option value="item_id">Item Id</option>
-                    <option value="account_code">Account Code</option>
-                    <option value="item_name">Item Name</option>
-                    <option value="description">Description</option>
-                    <option value="purchase_uom">UOM</option>
-                    <option value="item_quantity">Quantity</option>
-                    <option value="item_price" selected>Item Price</option>
-                    <option value="item_amount">Item Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="reason_id">Reason Id</option>
-                    <option value="item_wa_cost">Item Wa Cost</option>
-                    <option value="item_st_cost">Item St Cost</option>
-                    <option value="doc_ref_type">Doc Ref Type</option>
-                    <option value="doc_ref_id">Doc Ref Id</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="req_date">Req Date</option>
-                    <option value="approved_quantity">Approved Quantity</option>
-                    <option value="transaction_type">Transaction Type</option>
-                    <option value="transaction_qty">Transaction Qty</option>
-                    <option value="pending_qty">Pending Qty</option>
-                    <option value="parent_id">Parent Id</option>
+                    <option value="id"><?= __('id') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="transaction_id"><?= __('Transaction Id') ?></option>
+                    <option value="item_table_name"><?= __('Item Table Name') ?></option>
+                    <option value="item_id"><?= __('Item Id') ?></option>
+                    <option value="account_code"><?= __('Account Code') ?></option>
+                    <option value="item_name"><?= __('Item Name') ?></option>
+                    <option value="description"><?= __('Description') ?></option>
+                    <option value="purchase_uom"><?= __('UOM') ?></option>
+                    <option value="item_quantity"><?= __('Quantity') ?></option>
+                    <option value="item_price" selected><?= __('Item Price') ?></option>
+                    <option value="item_amount"><?= __('Item Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="reason_id"><?= __('Reason Id') ?></option>
+                    <option value="item_wa_cost"><?= __('Item Wa Cost') ?></option>
+                    <option value="item_st_cost"><?= __('Item St Cost') ?></option>
+                    <option value="doc_ref_type"><?= __('Doc Ref Type') ?></option>
+                    <option value="doc_ref_id"><?= __('Doc Ref Id') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="req_date"><?= __('Req Date') ?></option>
+                    <option value="approved_quantity"><?= __('Approved Quantity') ?></option>
+                    <option value="transaction_type"><?= __('Transaction Type') ?></option>
+                    <option value="transaction_qty"><?= __('Transaction Qty') ?></option>
+                    <option value="pending_qty"><?= __('Pending Qty') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
                   </select>
                 </div>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showqtycol" checked aria-label="Input">
-                  <label class="form-check-label" for="showqtycol">Show QTY Columns</label>
+                  <label class="form-check-label" for="showqtycol"><?= __('Show QTY Columns') ?></label>
                   <input aria-label="Enter Feild Name" type="text" id="qtycolumnInput" class="form-control" style="display: none;"
-                    placeholder="Enter Feild Name" />
+                    placeholder="<?= __('Enter Feild Name') ?>" />
                   <select aria-label="Itemqty Select" class="form-select mt-1" id="itemqtySelect" style="display: none;">
-                    <option value="id">id</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="transaction_id">Transaction Id</option>
-                    <option value="item_table_name">Item Table Name</option>
-                    <option value="item_id">Item Id</option>
-                    <option value="account_code">Account Code</option>
-                    <option value="item_name">Item Name</option>
-                    <option value="description">Description</option>
-                    <option value="purchase_uom">UOM</option>
-                    <option value="item_quantity" selected>Quantity</option>
-                    <option value="item_price">Item Price</option>
-                    <option value="item_amount">Item Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="reason_id">Reason Id</option>
-                    <option value="item_wa_cost">Item Wa Cost</option>
-                    <option value="item_st_cost">Item St Cost</option>
-                    <option value="doc_ref_type">Doc Ref Type</option>
-                    <option value="doc_ref_id">Doc Ref Id</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="req_date">Req Date</option>
-                    <option value="approved_quantity">Approved Quantity</option>
-                    <option value="transaction_type">Transaction Type</option>
-                    <option value="transaction_qty">Transaction Qty</option>
-                    <option value="pending_qty">Pending Qty</option>
-                    <option value="parent_id">Parent Id</option>
+                    <option value="id"><?= __('id') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="transaction_id"><?= __('Transaction Id') ?></option>
+                    <option value="item_table_name"><?= __('Item Table Name') ?></option>
+                    <option value="item_id"><?= __('Item Id') ?></option>
+                    <option value="account_code"><?= __('Account Code') ?></option>
+                    <option value="item_name"><?= __('Item Name') ?></option>
+                    <option value="description"><?= __('Description') ?></option>
+                    <option value="purchase_uom"><?= __('UOM') ?></option>
+                    <option value="item_quantity" selected><?= __('Quantity') ?></option>
+                    <option value="item_price"><?= __('Item Price') ?></option>
+                    <option value="item_amount"><?= __('Item Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="reason_id"><?= __('Reason Id') ?></option>
+                    <option value="item_wa_cost"><?= __('Item Wa Cost') ?></option>
+                    <option value="item_st_cost"><?= __('Item St Cost') ?></option>
+                    <option value="doc_ref_type"><?= __('Doc Ref Type') ?></option>
+                    <option value="doc_ref_id"><?= __('Doc Ref Id') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="req_date"><?= __('Req Date') ?></option>
+                    <option value="approved_quantity"><?= __('Approved Quantity') ?></option>
+                    <option value="transaction_type"><?= __('Transaction Type') ?></option>
+                    <option value="transaction_qty"><?= __('Transaction Qty') ?></option>
+                    <option value="pending_qty"><?= __('Pending Qty') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
                   </select>
                 </div>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showamountcol" checked aria-label="Input">
-                  <label class="form-check-label" for="showamountcol">Show Amount Columns</label>
+                  <label class="form-check-label" for="showamountcol"><?= __('Show Amount Columns') ?></label>
                   <input aria-label="Enter Feild Name" type="text" id="amountcolumnInput" class="form-control" style="display: none;"
-                    placeholder="Enter Feild Name" />
+                    placeholder="<?= __('Enter Feild Name') ?>" />
                   <select aria-label="Itemamount Select" class="form-select mt-1" id="itemamountSelect" style="display: none;">
-                    <option value="id">id</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="transaction_id">Transaction Id</option>
-                    <option value="item_table_name">Item Table Name</option>
-                    <option value="item_id">Item Id</option>
-                    <option value="account_code">Account Code</option>
-                    <option value="item_name">Item Name</option>
-                    <option value="description">Description</option>
-                    <option value="purchase_uom">UOM</option>
-                    <option value="item_quantity">Quantity</option>
-                    <option value="item_price">Item Price</option>
-                    <option value="item_amount">Item Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount" selected>Total Amount</option>
-                    <option value="reason_id">Reason Id</option>
-                    <option value="item_wa_cost">Item Wa Cost</option>
-                    <option value="item_st_cost">Item St Cost</option>
-                    <option value="doc_ref_type">Doc Ref Type</option>
-                    <option value="doc_ref_id">Doc Ref Id</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="req_date">Req Date</option>
-                    <option value="approved_quantity">Approved Quantity</option>
-                    <option value="transaction_type">Transaction Type</option>
-                    <option value="transaction_qty">Transaction Qty</option>
-                    <option value="pending_qty">Pending Qty</option>
-                    <option value="parent_id">Parent Id</option>
+                    <option value="id"><?= __('id') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="transaction_id"><?= __('Transaction Id') ?></option>
+                    <option value="item_table_name"><?= __('Item Table Name') ?></option>
+                    <option value="item_id"><?= __('Item Id') ?></option>
+                    <option value="account_code"><?= __('Account Code') ?></option>
+                    <option value="item_name"><?= __('Item Name') ?></option>
+                    <option value="description"><?= __('Description') ?></option>
+                    <option value="purchase_uom"><?= __('UOM') ?></option>
+                    <option value="item_quantity"><?= __('Quantity') ?></option>
+                    <option value="item_price"><?= __('Item Price') ?></option>
+                    <option value="item_amount"><?= __('Item Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount" selected><?= __('Total Amount') ?></option>
+                    <option value="reason_id"><?= __('Reason Id') ?></option>
+                    <option value="item_wa_cost"><?= __('Item Wa Cost') ?></option>
+                    <option value="item_st_cost"><?= __('Item St Cost') ?></option>
+                    <option value="doc_ref_type"><?= __('Doc Ref Type') ?></option>
+                    <option value="doc_ref_id"><?= __('Doc Ref Id') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="req_date"><?= __('Req Date') ?></option>
+                    <option value="approved_quantity"><?= __('Approved Quantity') ?></option>
+                    <option value="transaction_type"><?= __('Transaction Type') ?></option>
+                    <option value="transaction_qty"><?= __('Transaction Qty') ?></option>
+                    <option value="pending_qty"><?= __('Pending Qty') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
                   </select>
                 </div>
               </div>
@@ -1136,14 +1136,14 @@ if ($userData['user_photo'] != '') {
 
             <div id="itemsshow" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="itemsInput" class="form-label">Items In Each Page Show</label>
+                <label for="itemsInput" class="form-label"><?= __('Items In Each Page Show') ?></label>
                 <input type="number" class="form-control" id="itemsInput" min="100"
-                  placeholder="Enter No. Of Items In Each Page Show" aria-label="Enter No. Of Items In Each Page Show">
+                  placeholder="<?= __('Enter No. Of Items In Each Page Show') ?>" aria-label="Enter No. Of Items In Each Page Show">
               </div>
             </div>
           </div>
           <div class="mb-3">
-            <h6>Footer Options</h6>
+            <h6><?= __('Footer Options') ?></h6>
             <div class="btn-group d-flex flex-wrap">
               <button class="btn btn-outline-danger btn-sm mb-2" data-target="page_footerVisibility">
                 <i class="bi bi-eye"></i> Visibility
@@ -1159,10 +1159,10 @@ if ($userData['user_photo'] != '') {
 
             <div id="page_footerVisibility" class="dynamic-options">
               <div class="card card-body mt-2">
-                <span class="form-label mb-2">Toggle Page Footer</span>
+                <span class="form-label mb-2"><?= __('Toggle Page Footer') ?></span>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showpagefooter" checked aria-label="Input">
-                  <label class="form-check-label" for="showpagefooter">Show Page Footer</label>
+                  <label class="form-check-label" for="showpagefooter"><?= __('Show Page Footer') ?></label>
                 </div>
               </div>
             </div>
@@ -1170,422 +1170,422 @@ if ($userData['user_photo'] != '') {
 
             <div id="page_footer_optionsVisibility" class="dynamic-options">
               <div class="card card-body mt-2">
-                <label for="page_footer_optionsVisibility" class="form-label">Footer Options Visibility</label>
+                <label for="page_footer_optionsVisibility" class="form-label"><?= __('Footer Options Visibility') ?></label>
 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showtotalinalpha" checked aria-label="Input">
-                  <label class="form-check-label" for="showtotalinalpha">Show Total In Alphabet</label>
+                  <label class="form-check-label" for="showtotalinalpha"><?= __('Show Total In Alphabet') ?></label>
                 </div>
 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showsignature" checked aria-label="Input">
-                  <label class="form-check-label" for="showsignature">Show Signature</label>
+                  <label class="form-check-label" for="showsignature"><?= __('Show Signature') ?></label>
                 </div>
 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showqr" checked aria-label="Input">
-                  <label class="form-check-label" for="showqr">Show QR</label>
+                  <label class="form-check-label" for="showqr"><?= __('Show QR') ?></label>
                 </div>
 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showtotalbeforetax" checked aria-label="Input">
-                  <label class="form-check-label" for="showtotalbeforetax">Show Total Before Tax</label>
+                  <label class="form-check-label" for="showtotalbeforetax"><?= __('Show Total Before Tax') ?></label>
                   <input aria-label="Heading1" class="form-control mb-1" type="text" id="heading1" value="Total Before Tax">
                   <select aria-label="Value1" class="form-select" id="value1" style="display: none;">
-                    <option value="id">ID</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="cost_center_id">Cost Center Id</option>
-                    <option value="transaction_number" selected>Transaction Number</option>
-                    <option value="transaction_date">Transaction Date</option>
-                    <option value="transaction_location_id">Transaction Location Id</option>
-                    <option value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                    <option value="originator_currency_id">Originator Currency Id</option>
-                    <option value="currency_id">Currency Id</option>
-                    <option value="currency_rate">Currency Rate</option>
-                    <option value="originator">Originator</option>
-                    <option value="party_id">Party Id</option>
-                    <option value="party_name">Party Name</option>
-                    <option value="party_email">Party Email</option>
-                    <option value="party_tax_number">Party Tax Number</option>
-                    <option value="party_phone">Party Phone</option>
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss">Party Ship Adderss</option>
-                    <option value="originator_state_id">Originator State Id</option>
-                    <option value="supplier_state_id">Supplier State Id</option>
-                    <option value="place_of_supply">Place Of Supply</option>
-                    <option value="payment_terms">Payment Terms</option>
-                    <option value="notes">Notes</option>
-                    <option value="printing_notes">Printing Notes</option>
-                    <option value="parent_id">Parent Id</option>
-                    <option value="amount" selected>Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="type">Type</option>
-                    <option value="tax_type">Tax Type</option>
-                    <option value="discount_type">Discount Type</option>
-                    <option value="discount_value">Discount Value</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="shipping_tax">Shipping Tax</option>
-                    <option value="shipping_amount">Shipping Amount</option>
-                    <option value="shipping_tax_amount">Shipping Tax Amount</option>
-                    <option value="tax_state">Tax State</option>
-                    <option value="opex_cpex">Opex Cpex</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="due_date">Due Date</option>
-                    <option value="ref_type">Ref Type</option>
-                    <option value="parent_ref_id">Rarent Ref Id</option>
-                    <option value="ref_id">Ref Id</option>
-                    <option value="ref_no">Ref No</option>
-                    <option value="ref_date">Ref Date</option>
-                    <option value="ref_bill_type">Ref Bill Type</option>
-                    <option value="old_ref_no">Old Ref No</option>
-                    <option value="old_ref_date">Old Ref Date</option>
-                    <option value="party_additional_details">Party Additional Details</option>
-                    <option value="follow_up_level_ids">Follow Up Level Ids</option>
-                    <option value="pending_amount">Pending Amount</option>
-                    <option value="cancel_invoice">Cancel Invoice</option>
-                    <option value="cancel_invoice_date">Cancel Invoice Date</option>
-                    <option value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                    <option value="additional_charges">Additional Charges</option>
-                    <option value="pdf_name">Pdf Name</option>
-                    <option value="owner_additional_details">Owner Additional Details</option>
-                    <option value="serial_transaction_number">Serial Transaction Number</option>
+                    <option value="id"><?= __('ID') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="cost_center_id"><?= __('Cost Center Id') ?></option>
+                    <option value="transaction_number" selected><?= __('Transaction Number') ?></option>
+                    <option value="transaction_date"><?= __('Transaction Date') ?></option>
+                    <option value="transaction_location_id"><?= __('Transaction Location Id') ?></option>
+                    <option value="transaction_warehouse_id"><?= __('Transaction Warehouse Id') ?></option>
+                    <option value="originator_currency_id"><?= __('Originator Currency Id') ?></option>
+                    <option value="currency_id"><?= __('Currency Id') ?></option>
+                    <option value="currency_rate"><?= __('Currency Rate') ?></option>
+                    <option value="originator"><?= __('Originator') ?></option>
+                    <option value="party_id"><?= __('Party Id') ?></option>
+                    <option value="party_name"><?= __('Party Name') ?></option>
+                    <option value="party_email"><?= __('Party Email') ?></option>
+                    <option value="party_tax_number"><?= __('Party Tax Number') ?></option>
+                    <option value="party_phone"><?= __('Party Phone') ?></option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Ship Adderss') ?></option>
+                    <option value="originator_state_id"><?= __('Originator State Id') ?></option>
+                    <option value="supplier_state_id"><?= __('Supplier State Id') ?></option>
+                    <option value="place_of_supply"><?= __('Place Of Supply') ?></option>
+                    <option value="payment_terms"><?= __('Payment Terms') ?></option>
+                    <option value="notes"><?= __('Notes') ?></option>
+                    <option value="printing_notes"><?= __('Printing Notes') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
+                    <option value="amount" selected><?= __('Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="type"><?= __('Type') ?></option>
+                    <option value="tax_type"><?= __('Tax Type') ?></option>
+                    <option value="discount_type"><?= __('Discount Type') ?></option>
+                    <option value="discount_value"><?= __('Discount Value') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="shipping_tax"><?= __('Shipping Tax') ?></option>
+                    <option value="shipping_amount"><?= __('Shipping Amount') ?></option>
+                    <option value="shipping_tax_amount"><?= __('Shipping Tax Amount') ?></option>
+                    <option value="tax_state"><?= __('Tax State') ?></option>
+                    <option value="opex_cpex"><?= __('Opex Cpex') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="due_date"><?= __('Due Date') ?></option>
+                    <option value="ref_type"><?= __('Ref Type') ?></option>
+                    <option value="parent_ref_id"><?= __('Rarent Ref Id') ?></option>
+                    <option value="ref_id"><?= __('Ref Id') ?></option>
+                    <option value="ref_no"><?= __('Ref No') ?></option>
+                    <option value="ref_date"><?= __('Ref Date') ?></option>
+                    <option value="ref_bill_type"><?= __('Ref Bill Type') ?></option>
+                    <option value="old_ref_no"><?= __('Old Ref No') ?></option>
+                    <option value="old_ref_date"><?= __('Old Ref Date') ?></option>
+                    <option value="party_additional_details"><?= __('Party Additional Details') ?></option>
+                    <option value="follow_up_level_ids"><?= __('Follow Up Level Ids') ?></option>
+                    <option value="pending_amount"><?= __('Pending Amount') ?></option>
+                    <option value="cancel_invoice"><?= __('Cancel Invoice') ?></option>
+                    <option value="cancel_invoice_date"><?= __('Cancel Invoice Date') ?></option>
+                    <option value="cancel_invoice_reason"><?= __('Cancel Invoice Reason') ?></option>
+                    <option value="additional_charges"><?= __('Additional Charges') ?></option>
+                    <option value="pdf_name"><?= __('Pdf Name') ?></option>
+                    <option value="owner_additional_details"><?= __('Owner Additional Details') ?></option>
+                    <option value="serial_transaction_number"><?= __('Serial Transaction Number') ?></option>
                   </select>
                 </div>
 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showdiscount" checked aria-label="Input">
-                  <label class="form-check-label" for="showdiscount">Show Discount</label>
+                  <label class="form-check-label" for="showdiscount"><?= __('Show Discount') ?></label>
                   <input aria-label="Heading2" class="form-control mb-1" type="text" id="heading2" value="Discount">
                   <select aria-label="Value2" class="form-select" id="value2" style="display: none;">
-                    <option value="id">ID</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="cost_center_id">Cost Center Id</option>
-                    <option value="transaction_number" selected>Transaction Number</option>
-                    <option value="transaction_date">Transaction Date</option>
-                    <option value="transaction_location_id">Transaction Location Id</option>
-                    <option value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                    <option value="originator_currency_id">Originator Currency Id</option>
-                    <option value="currency_id">Currency Id</option>
-                    <option value="currency_rate">Currency Rate</option>
-                    <option value="originator">Originator</option>
-                    <option value="party_id">Party Id</option>
-                    <option value="party_name">Party Name</option>
-                    <option value="party_email">Party Email</option>
-                    <option value="party_tax_number">Party Tax Number</option>
-                    <option value="party_phone">Party Phone</option>
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss">Party Ship Adderss</option>
-                    <option value="originator_state_id">Originator State Id</option>
-                    <option value="supplier_state_id">Supplier State Id</option>
-                    <option value="place_of_supply">Place Of Supply</option>
-                    <option value="payment_terms">Payment Terms</option>
-                    <option value="notes">Notes</option>
-                    <option value="printing_notes">Printing Notes</option>
-                    <option value="parent_id">Parent Id</option>
-                    <option value="amount">Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="type">Type</option>
-                    <option value="tax_type">Tax Type</option>
-                    <option value="discount_type">Discount Type</option>
-                    <option value="discount_value">Discount Value</option>
-                    <option value="discount_amount" selected>Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="shipping_tax">Shipping Tax</option>
-                    <option value="shipping_amount">Shipping Amount</option>
-                    <option value="shipping_tax_amount">Shipping Tax Amount</option>
-                    <option value="tax_state">Tax State</option>
-                    <option value="opex_cpex">Opex Cpex</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="due_date">Due Date</option>
-                    <option value="ref_type">Ref Type</option>
-                    <option value="parent_ref_id">Rarent Ref Id</option>
-                    <option value="ref_id">Ref Id</option>
-                    <option value="ref_no">Ref No</option>
-                    <option value="ref_date">Ref Date</option>
-                    <option value="ref_bill_type">Ref Bill Type</option>
-                    <option value="old_ref_no">Old Ref No</option>
-                    <option value="old_ref_date">Old Ref Date</option>
-                    <option value="party_additional_details">Party Additional Details</option>
-                    <option value="follow_up_level_ids">Follow Up Level Ids</option>
-                    <option value="pending_amount">Pending Amount</option>
-                    <option value="cancel_invoice">Cancel Invoice</option>
-                    <option value="cancel_invoice_date">Cancel Invoice Date</option>
-                    <option value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                    <option value="additional_charges">Additional Charges</option>
-                    <option value="pdf_name">Pdf Name</option>
-                    <option value="owner_additional_details">Owner Additional Details</option>
-                    <option value="serial_transaction_number">Serial Transaction Number</option>
+                    <option value="id"><?= __('ID') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="cost_center_id"><?= __('Cost Center Id') ?></option>
+                    <option value="transaction_number" selected><?= __('Transaction Number') ?></option>
+                    <option value="transaction_date"><?= __('Transaction Date') ?></option>
+                    <option value="transaction_location_id"><?= __('Transaction Location Id') ?></option>
+                    <option value="transaction_warehouse_id"><?= __('Transaction Warehouse Id') ?></option>
+                    <option value="originator_currency_id"><?= __('Originator Currency Id') ?></option>
+                    <option value="currency_id"><?= __('Currency Id') ?></option>
+                    <option value="currency_rate"><?= __('Currency Rate') ?></option>
+                    <option value="originator"><?= __('Originator') ?></option>
+                    <option value="party_id"><?= __('Party Id') ?></option>
+                    <option value="party_name"><?= __('Party Name') ?></option>
+                    <option value="party_email"><?= __('Party Email') ?></option>
+                    <option value="party_tax_number"><?= __('Party Tax Number') ?></option>
+                    <option value="party_phone"><?= __('Party Phone') ?></option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Ship Adderss') ?></option>
+                    <option value="originator_state_id"><?= __('Originator State Id') ?></option>
+                    <option value="supplier_state_id"><?= __('Supplier State Id') ?></option>
+                    <option value="place_of_supply"><?= __('Place Of Supply') ?></option>
+                    <option value="payment_terms"><?= __('Payment Terms') ?></option>
+                    <option value="notes"><?= __('Notes') ?></option>
+                    <option value="printing_notes"><?= __('Printing Notes') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
+                    <option value="amount"><?= __('Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="type"><?= __('Type') ?></option>
+                    <option value="tax_type"><?= __('Tax Type') ?></option>
+                    <option value="discount_type"><?= __('Discount Type') ?></option>
+                    <option value="discount_value"><?= __('Discount Value') ?></option>
+                    <option value="discount_amount" selected><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="shipping_tax"><?= __('Shipping Tax') ?></option>
+                    <option value="shipping_amount"><?= __('Shipping Amount') ?></option>
+                    <option value="shipping_tax_amount"><?= __('Shipping Tax Amount') ?></option>
+                    <option value="tax_state"><?= __('Tax State') ?></option>
+                    <option value="opex_cpex"><?= __('Opex Cpex') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="due_date"><?= __('Due Date') ?></option>
+                    <option value="ref_type"><?= __('Ref Type') ?></option>
+                    <option value="parent_ref_id"><?= __('Rarent Ref Id') ?></option>
+                    <option value="ref_id"><?= __('Ref Id') ?></option>
+                    <option value="ref_no"><?= __('Ref No') ?></option>
+                    <option value="ref_date"><?= __('Ref Date') ?></option>
+                    <option value="ref_bill_type"><?= __('Ref Bill Type') ?></option>
+                    <option value="old_ref_no"><?= __('Old Ref No') ?></option>
+                    <option value="old_ref_date"><?= __('Old Ref Date') ?></option>
+                    <option value="party_additional_details"><?= __('Party Additional Details') ?></option>
+                    <option value="follow_up_level_ids"><?= __('Follow Up Level Ids') ?></option>
+                    <option value="pending_amount"><?= __('Pending Amount') ?></option>
+                    <option value="cancel_invoice"><?= __('Cancel Invoice') ?></option>
+                    <option value="cancel_invoice_date"><?= __('Cancel Invoice Date') ?></option>
+                    <option value="cancel_invoice_reason"><?= __('Cancel Invoice Reason') ?></option>
+                    <option value="additional_charges"><?= __('Additional Charges') ?></option>
+                    <option value="pdf_name"><?= __('Pdf Name') ?></option>
+                    <option value="owner_additional_details"><?= __('Owner Additional Details') ?></option>
+                    <option value="serial_transaction_number"><?= __('Serial Transaction Number') ?></option>
                   </select>
                 </div>
 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showtotaltaxamount" checked aria-label="Input">
-                  <label class="form-check-label" for="showtotaltaxamount">Show Total Tax Amount</label>
+                  <label class="form-check-label" for="showtotaltaxamount"><?= __('Show Total Tax Amount') ?></label>
                   <input aria-label="Heading3" class="form-control mb-1" type="text" id="heading3" value="Total Tax Amount">
                   <select aria-label="Value3" class="form-select" id="value3" style="display: none;">
-                    <option value="id">ID</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="cost_center_id">Cost Center Id</option>
-                    <option value="transaction_number" selected>Transaction Number</option>
-                    <option value="transaction_date">Transaction Date</option>
-                    <option value="transaction_location_id">Transaction Location Id</option>
-                    <option value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                    <option value="originator_currency_id">Originator Currency Id</option>
-                    <option value="currency_id">Currency Id</option>
-                    <option value="currency_rate">Currency Rate</option>
-                    <option value="originator">Originator</option>
-                    <option value="party_id">Party Id</option>
-                    <option value="party_name">Party Name</option>
-                    <option value="party_email">Party Email</option>
-                    <option value="party_tax_number">Party Tax Number</option>
-                    <option value="party_phone">Party Phone</option>
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss">Party Ship Adderss</option>
-                    <option value="originator_state_id">Originator State Id</option>
-                    <option value="supplier_state_id">Supplier State Id</option>
-                    <option value="place_of_supply">Place Of Supply</option>
-                    <option value="payment_terms">Payment Terms</option>
-                    <option value="notes">Notes</option>
-                    <option value="printing_notes">Printing Notes</option>
-                    <option value="parent_id">Parent Id</option>
-                    <option value="amount">Amount</option>
-                    <option value="tax_amount" selected>Tax Amount</option>
-                    <option value="type">Type</option>
-                    <option value="tax_type">Tax Type</option>
-                    <option value="discount_type">Discount Type</option>
-                    <option value="discount_value">Discount Value</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="shipping_tax">Shipping Tax</option>
-                    <option value="shipping_amount">Shipping Amount</option>
-                    <option value="shipping_tax_amount">Shipping Tax Amount</option>
-                    <option value="tax_state">Tax State</option>
-                    <option value="opex_cpex">Opex Cpex</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="due_date">Due Date</option>
-                    <option value="ref_type">Ref Type</option>
-                    <option value="parent_ref_id">Rarent Ref Id</option>
-                    <option value="ref_id">Ref Id</option>
-                    <option value="ref_no">Ref No</option>
-                    <option value="ref_date">Ref Date</option>
-                    <option value="ref_bill_type">Ref Bill Type</option>
-                    <option value="old_ref_no">Old Ref No</option>
-                    <option value="old_ref_date">Old Ref Date</option>
-                    <option value="party_additional_details">Party Additional Details</option>
-                    <option value="follow_up_level_ids">Follow Up Level Ids</option>
-                    <option value="pending_amount">Pending Amount</option>
-                    <option value="cancel_invoice">Cancel Invoice</option>
-                    <option value="cancel_invoice_date">Cancel Invoice Date</option>
-                    <option value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                    <option value="additional_charges">Additional Charges</option>
-                    <option value="pdf_name">Pdf Name</option>
-                    <option value="owner_additional_details">Owner Additional Details</option>
-                    <option value="serial_transaction_number">Serial Transaction Number</option>
+                    <option value="id"><?= __('ID') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="cost_center_id"><?= __('Cost Center Id') ?></option>
+                    <option value="transaction_number" selected><?= __('Transaction Number') ?></option>
+                    <option value="transaction_date"><?= __('Transaction Date') ?></option>
+                    <option value="transaction_location_id"><?= __('Transaction Location Id') ?></option>
+                    <option value="transaction_warehouse_id"><?= __('Transaction Warehouse Id') ?></option>
+                    <option value="originator_currency_id"><?= __('Originator Currency Id') ?></option>
+                    <option value="currency_id"><?= __('Currency Id') ?></option>
+                    <option value="currency_rate"><?= __('Currency Rate') ?></option>
+                    <option value="originator"><?= __('Originator') ?></option>
+                    <option value="party_id"><?= __('Party Id') ?></option>
+                    <option value="party_name"><?= __('Party Name') ?></option>
+                    <option value="party_email"><?= __('Party Email') ?></option>
+                    <option value="party_tax_number"><?= __('Party Tax Number') ?></option>
+                    <option value="party_phone"><?= __('Party Phone') ?></option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Ship Adderss') ?></option>
+                    <option value="originator_state_id"><?= __('Originator State Id') ?></option>
+                    <option value="supplier_state_id"><?= __('Supplier State Id') ?></option>
+                    <option value="place_of_supply"><?= __('Place Of Supply') ?></option>
+                    <option value="payment_terms"><?= __('Payment Terms') ?></option>
+                    <option value="notes"><?= __('Notes') ?></option>
+                    <option value="printing_notes"><?= __('Printing Notes') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
+                    <option value="amount"><?= __('Amount') ?></option>
+                    <option value="tax_amount" selected><?= __('Tax Amount') ?></option>
+                    <option value="type"><?= __('Type') ?></option>
+                    <option value="tax_type"><?= __('Tax Type') ?></option>
+                    <option value="discount_type"><?= __('Discount Type') ?></option>
+                    <option value="discount_value"><?= __('Discount Value') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="shipping_tax"><?= __('Shipping Tax') ?></option>
+                    <option value="shipping_amount"><?= __('Shipping Amount') ?></option>
+                    <option value="shipping_tax_amount"><?= __('Shipping Tax Amount') ?></option>
+                    <option value="tax_state"><?= __('Tax State') ?></option>
+                    <option value="opex_cpex"><?= __('Opex Cpex') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="due_date"><?= __('Due Date') ?></option>
+                    <option value="ref_type"><?= __('Ref Type') ?></option>
+                    <option value="parent_ref_id"><?= __('Rarent Ref Id') ?></option>
+                    <option value="ref_id"><?= __('Ref Id') ?></option>
+                    <option value="ref_no"><?= __('Ref No') ?></option>
+                    <option value="ref_date"><?= __('Ref Date') ?></option>
+                    <option value="ref_bill_type"><?= __('Ref Bill Type') ?></option>
+                    <option value="old_ref_no"><?= __('Old Ref No') ?></option>
+                    <option value="old_ref_date"><?= __('Old Ref Date') ?></option>
+                    <option value="party_additional_details"><?= __('Party Additional Details') ?></option>
+                    <option value="follow_up_level_ids"><?= __('Follow Up Level Ids') ?></option>
+                    <option value="pending_amount"><?= __('Pending Amount') ?></option>
+                    <option value="cancel_invoice"><?= __('Cancel Invoice') ?></option>
+                    <option value="cancel_invoice_date"><?= __('Cancel Invoice Date') ?></option>
+                    <option value="cancel_invoice_reason"><?= __('Cancel Invoice Reason') ?></option>
+                    <option value="additional_charges"><?= __('Additional Charges') ?></option>
+                    <option value="pdf_name"><?= __('Pdf Name') ?></option>
+                    <option value="owner_additional_details"><?= __('Owner Additional Details') ?></option>
+                    <option value="serial_transaction_number"><?= __('Serial Transaction Number') ?></option>
                   </select>
                 </div>
 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showroundedoff" checked aria-label="Input">
-                  <label class="form-check-label" for="showroundedoff">Show Rounded Off</label>
+                  <label class="form-check-label" for="showroundedoff"><?= __('Show Rounded Off') ?></label>
                   <input aria-label="Heading4" class="form-control mb-1" type="text" id="heading4" value="Rounded Off">
                   <select aria-label="Value4" class="form-select" id="value4" style="display: none;">
-                    <option value="id">ID</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="cost_center_id">Cost Center Id</option>
-                    <option value="transaction_number" selected>Transaction Number</option>
-                    <option value="transaction_date">Transaction Date</option>
-                    <option value="transaction_location_id">Transaction Location Id</option>
-                    <option value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                    <option value="originator_currency_id">Originator Currency Id</option>
-                    <option value="currency_id">Currency Id</option>
-                    <option value="currency_rate">Currency Rate</option>
-                    <option value="originator">Originator</option>
-                    <option value="party_id">Party Id</option>
-                    <option value="party_name">Party Name</option>
-                    <option value="party_email">Party Email</option>
-                    <option value="party_tax_number">Party Tax Number</option>
-                    <option value="party_phone">Party Phone</option>
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss">Party Ship Adderss</option>
-                    <option value="originator_state_id">Originator State Id</option>
-                    <option value="supplier_state_id">Supplier State Id</option>
-                    <option value="place_of_supply">Place Of Supply</option>
-                    <option value="payment_terms">Payment Terms</option>
-                    <option value="notes">Notes</option>
-                    <option value="printing_notes">Printing Notes</option>
-                    <option value="parent_id">Parent Id</option>
-                    <option value="amount">Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="type">Type</option>
-                    <option value="tax_type">Tax Type</option>
-                    <option value="discount_type">Discount Type</option>
-                    <option value="discount_value">Discount Value</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="shipping_tax">Shipping Tax</option>
-                    <option value="shipping_amount">Shipping Amount</option>
-                    <option value="shipping_tax_amount">Shipping Tax Amount</option>
-                    <option value="tax_state">Tax State</option>
-                    <option value="opex_cpex">Opex Cpex</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="due_date">Due Date</option>
-                    <option value="ref_type">Ref Type</option>
-                    <option value="parent_ref_id">Rarent Ref Id</option>
-                    <option value="ref_id">Ref Id</option>
-                    <option value="ref_no">Ref No</option>
-                    <option value="ref_date">Ref Date</option>
-                    <option value="ref_bill_type">Ref Bill Type</option>
-                    <option value="old_ref_no">Old Ref No</option>
-                    <option value="old_ref_date">Old Ref Date</option>
-                    <option value="party_additional_details">Party Additional Details</option>
-                    <option value="follow_up_level_ids">Follow Up Level Ids</option>
-                    <option value="pending_amount">Pending Amount</option>
-                    <option value="cancel_invoice">Cancel Invoice</option>
-                    <option value="cancel_invoice_date">Cancel Invoice Date</option>
-                    <option value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                    <option value="additional_charges">Additional Charges</option>
-                    <option value="pdf_name">Pdf Name</option>
-                    <option value="owner_additional_details">Owner Additional Details</option>
-                    <option value="serial_transaction_number">Serial Transaction Number</option>
+                    <option value="id"><?= __('ID') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="cost_center_id"><?= __('Cost Center Id') ?></option>
+                    <option value="transaction_number" selected><?= __('Transaction Number') ?></option>
+                    <option value="transaction_date"><?= __('Transaction Date') ?></option>
+                    <option value="transaction_location_id"><?= __('Transaction Location Id') ?></option>
+                    <option value="transaction_warehouse_id"><?= __('Transaction Warehouse Id') ?></option>
+                    <option value="originator_currency_id"><?= __('Originator Currency Id') ?></option>
+                    <option value="currency_id"><?= __('Currency Id') ?></option>
+                    <option value="currency_rate"><?= __('Currency Rate') ?></option>
+                    <option value="originator"><?= __('Originator') ?></option>
+                    <option value="party_id"><?= __('Party Id') ?></option>
+                    <option value="party_name"><?= __('Party Name') ?></option>
+                    <option value="party_email"><?= __('Party Email') ?></option>
+                    <option value="party_tax_number"><?= __('Party Tax Number') ?></option>
+                    <option value="party_phone"><?= __('Party Phone') ?></option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Ship Adderss') ?></option>
+                    <option value="originator_state_id"><?= __('Originator State Id') ?></option>
+                    <option value="supplier_state_id"><?= __('Supplier State Id') ?></option>
+                    <option value="place_of_supply"><?= __('Place Of Supply') ?></option>
+                    <option value="payment_terms"><?= __('Payment Terms') ?></option>
+                    <option value="notes"><?= __('Notes') ?></option>
+                    <option value="printing_notes"><?= __('Printing Notes') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
+                    <option value="amount"><?= __('Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="type"><?= __('Type') ?></option>
+                    <option value="tax_type"><?= __('Tax Type') ?></option>
+                    <option value="discount_type"><?= __('Discount Type') ?></option>
+                    <option value="discount_value"><?= __('Discount Value') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="shipping_tax"><?= __('Shipping Tax') ?></option>
+                    <option value="shipping_amount"><?= __('Shipping Amount') ?></option>
+                    <option value="shipping_tax_amount"><?= __('Shipping Tax Amount') ?></option>
+                    <option value="tax_state"><?= __('Tax State') ?></option>
+                    <option value="opex_cpex"><?= __('Opex Cpex') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="due_date"><?= __('Due Date') ?></option>
+                    <option value="ref_type"><?= __('Ref Type') ?></option>
+                    <option value="parent_ref_id"><?= __('Rarent Ref Id') ?></option>
+                    <option value="ref_id"><?= __('Ref Id') ?></option>
+                    <option value="ref_no"><?= __('Ref No') ?></option>
+                    <option value="ref_date"><?= __('Ref Date') ?></option>
+                    <option value="ref_bill_type"><?= __('Ref Bill Type') ?></option>
+                    <option value="old_ref_no"><?= __('Old Ref No') ?></option>
+                    <option value="old_ref_date"><?= __('Old Ref Date') ?></option>
+                    <option value="party_additional_details"><?= __('Party Additional Details') ?></option>
+                    <option value="follow_up_level_ids"><?= __('Follow Up Level Ids') ?></option>
+                    <option value="pending_amount"><?= __('Pending Amount') ?></option>
+                    <option value="cancel_invoice"><?= __('Cancel Invoice') ?></option>
+                    <option value="cancel_invoice_date"><?= __('Cancel Invoice Date') ?></option>
+                    <option value="cancel_invoice_reason"><?= __('Cancel Invoice Reason') ?></option>
+                    <option value="additional_charges"><?= __('Additional Charges') ?></option>
+                    <option value="pdf_name"><?= __('Pdf Name') ?></option>
+                    <option value="owner_additional_details"><?= __('Owner Additional Details') ?></option>
+                    <option value="serial_transaction_number"><?= __('Serial Transaction Number') ?></option>
                   </select>
                 </div>
 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showtotalamount" checked aria-label="Input">
-                  <label class="form-check-label" for="showtotalamount">Show Total Amount</label>
+                  <label class="form-check-label" for="showtotalamount"><?= __('Show Total Amount') ?></label>
                   <input aria-label="Heading5" class="form-control mb-1" type="text" id="heading5" value="Total Amount">
                   <select aria-label="Value5" class="form-select" id="value5" style="display: none;">
-                    <option value="id">ID</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="cost_center_id">Cost Center Id</option>
-                    <option value="transaction_number" selected>Transaction Number</option>
-                    <option value="transaction_date">Transaction Date</option>
-                    <option value="transaction_location_id">Transaction Location Id</option>
-                    <option value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                    <option value="originator_currency_id">Originator Currency Id</option>
-                    <option value="currency_id">Currency Id</option>
-                    <option value="currency_rate">Currency Rate</option>
-                    <option value="originator">Originator</option>
-                    <option value="party_id">Party Id</option>
-                    <option value="party_name">Party Name</option>
-                    <option value="party_email">Party Email</option>
-                    <option value="party_tax_number">Party Tax Number</option>
-                    <option value="party_phone">Party Phone</option>
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss">Party Ship Adderss</option>
-                    <option value="originator_state_id">Originator State Id</option>
-                    <option value="supplier_state_id">Supplier State Id</option>
-                    <option value="place_of_supply">Place Of Supply</option>
-                    <option value="payment_terms">Payment Terms</option>
-                    <option value="notes">Notes</option>
-                    <option value="printing_notes">Printing Notes</option>
-                    <option value="parent_id">Parent Id</option>
-                    <option value="amount">Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="type">Type</option>
-                    <option value="tax_type">Tax Type</option>
-                    <option value="discount_type">Discount Type</option>
-                    <option value="discount_value">Discount Value</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount" selected>Total Amount</option>
-                    <option value="shipping_tax">Shipping Tax</option>
-                    <option value="shipping_amount">Shipping Amount</option>
-                    <option value="shipping_tax_amount">Shipping Tax Amount</option>
-                    <option value="tax_state">Tax State</option>
-                    <option value="opex_cpex">Opex Cpex</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="due_date">Due Date</option>
-                    <option value="ref_type">Ref Type</option>
-                    <option value="parent_ref_id">Rarent Ref Id</option>
-                    <option value="ref_id">Ref Id</option>
-                    <option value="ref_no">Ref No</option>
-                    <option value="ref_date">Ref Date</option>
-                    <option value="ref_bill_type">Ref Bill Type</option>
-                    <option value="old_ref_no">Old Ref No</option>
-                    <option value="old_ref_date">Old Ref Date</option>
-                    <option value="party_additional_details">Party Additional Details</option>
-                    <option value="follow_up_level_ids">Follow Up Level Ids</option>
-                    <option value="pending_amount">Pending Amount</option>
-                    <option value="cancel_invoice">Cancel Invoice</option>
-                    <option value="cancel_invoice_date">Cancel Invoice Date</option>
-                    <option value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                    <option value="additional_charges">Additional Charges</option>
-                    <option value="pdf_name">Pdf Name</option>
-                    <option value="owner_additional_details">Owner Additional Details</option>
-                    <option value="serial_transaction_number">Serial Transaction Number</option>
+                    <option value="id"><?= __('ID') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="cost_center_id"><?= __('Cost Center Id') ?></option>
+                    <option value="transaction_number" selected><?= __('Transaction Number') ?></option>
+                    <option value="transaction_date"><?= __('Transaction Date') ?></option>
+                    <option value="transaction_location_id"><?= __('Transaction Location Id') ?></option>
+                    <option value="transaction_warehouse_id"><?= __('Transaction Warehouse Id') ?></option>
+                    <option value="originator_currency_id"><?= __('Originator Currency Id') ?></option>
+                    <option value="currency_id"><?= __('Currency Id') ?></option>
+                    <option value="currency_rate"><?= __('Currency Rate') ?></option>
+                    <option value="originator"><?= __('Originator') ?></option>
+                    <option value="party_id"><?= __('Party Id') ?></option>
+                    <option value="party_name"><?= __('Party Name') ?></option>
+                    <option value="party_email"><?= __('Party Email') ?></option>
+                    <option value="party_tax_number"><?= __('Party Tax Number') ?></option>
+                    <option value="party_phone"><?= __('Party Phone') ?></option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Ship Adderss') ?></option>
+                    <option value="originator_state_id"><?= __('Originator State Id') ?></option>
+                    <option value="supplier_state_id"><?= __('Supplier State Id') ?></option>
+                    <option value="place_of_supply"><?= __('Place Of Supply') ?></option>
+                    <option value="payment_terms"><?= __('Payment Terms') ?></option>
+                    <option value="notes"><?= __('Notes') ?></option>
+                    <option value="printing_notes"><?= __('Printing Notes') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
+                    <option value="amount"><?= __('Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="type"><?= __('Type') ?></option>
+                    <option value="tax_type"><?= __('Tax Type') ?></option>
+                    <option value="discount_type"><?= __('Discount Type') ?></option>
+                    <option value="discount_value"><?= __('Discount Value') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount" selected><?= __('Total Amount') ?></option>
+                    <option value="shipping_tax"><?= __('Shipping Tax') ?></option>
+                    <option value="shipping_amount"><?= __('Shipping Amount') ?></option>
+                    <option value="shipping_tax_amount"><?= __('Shipping Tax Amount') ?></option>
+                    <option value="tax_state"><?= __('Tax State') ?></option>
+                    <option value="opex_cpex"><?= __('Opex Cpex') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="due_date"><?= __('Due Date') ?></option>
+                    <option value="ref_type"><?= __('Ref Type') ?></option>
+                    <option value="parent_ref_id"><?= __('Rarent Ref Id') ?></option>
+                    <option value="ref_id"><?= __('Ref Id') ?></option>
+                    <option value="ref_no"><?= __('Ref No') ?></option>
+                    <option value="ref_date"><?= __('Ref Date') ?></option>
+                    <option value="ref_bill_type"><?= __('Ref Bill Type') ?></option>
+                    <option value="old_ref_no"><?= __('Old Ref No') ?></option>
+                    <option value="old_ref_date"><?= __('Old Ref Date') ?></option>
+                    <option value="party_additional_details"><?= __('Party Additional Details') ?></option>
+                    <option value="follow_up_level_ids"><?= __('Follow Up Level Ids') ?></option>
+                    <option value="pending_amount"><?= __('Pending Amount') ?></option>
+                    <option value="cancel_invoice"><?= __('Cancel Invoice') ?></option>
+                    <option value="cancel_invoice_date"><?= __('Cancel Invoice Date') ?></option>
+                    <option value="cancel_invoice_reason"><?= __('Cancel Invoice Reason') ?></option>
+                    <option value="additional_charges"><?= __('Additional Charges') ?></option>
+                    <option value="pdf_name"><?= __('Pdf Name') ?></option>
+                    <option value="owner_additional_details"><?= __('Owner Additional Details') ?></option>
+                    <option value="serial_transaction_number"><?= __('Serial Transaction Number') ?></option>
                   </select>
                 </div>
 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="showtotaldue" checked aria-label="Input">
-                  <label class="form-check-label" for="showtotaldue">Show Total Due</label>
+                  <label class="form-check-label" for="showtotaldue"><?= __('Show Total Due') ?></label>
                   <input aria-label="Heading6" class="form-control mb-1" type="text" id="heading6" value="Total Due">
                   <select aria-label="Value6" class="form-select" id="value6" style="display: none;">
-                    <option value="id">ID</option>
-                    <option value="company_id">Company Id</option>
-                    <option value="cost_center_id">Cost Center Id</option>
-                    <option value="transaction_number" selected>Transaction Number</option>
-                    <option value="transaction_date">Transaction Date</option>
-                    <option value="transaction_location_id">Transaction Location Id</option>
-                    <option value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                    <option value="originator_currency_id">Originator Currency Id</option>
-                    <option value="currency_id">Currency Id</option>
-                    <option value="currency_rate">Currency Rate</option>
-                    <option value="originator">Originator</option>
-                    <option value="party_id">Party Id</option>
-                    <option value="party_name">Party Name</option>
-                    <option value="party_email">Party Email</option>
-                    <option value="party_tax_number">Party Tax Number</option>
-                    <option value="party_phone">Party Phone</option>
-                    <option value="party_address">Party Address</option>
-                    <option value="party_ship_adderss">Party Ship Adderss</option>
-                    <option value="originator_state_id">Originator State Id</option>
-                    <option value="supplier_state_id">Supplier State Id</option>
-                    <option value="place_of_supply">Place Of Supply</option>
-                    <option value="payment_terms">Payment Terms</option>
-                    <option value="notes">Notes</option>
-                    <option value="printing_notes">Printing Notes</option>
-                    <option value="parent_id">Parent Id</option>
-                    <option value="amount">Amount</option>
-                    <option value="tax_amount">Tax Amount</option>
-                    <option value="type">Type</option>
-                    <option value="tax_type">Tax Type</option>
-                    <option value="discount_type">Discount Type</option>
-                    <option value="discount_value">Discount Value</option>
-                    <option value="discount_amount">Discount Amount</option>
-                    <option value="total_amount">Total Amount</option>
-                    <option value="shipping_tax">Shipping Tax</option>
-                    <option value="shipping_amount">Shipping Amount</option>
-                    <option value="shipping_tax_amount">Shipping Tax Amount</option>
-                    <option value="tax_state">Tax State</option>
-                    <option value="opex_cpex">Opex Cpex</option>
-                    <option value="doc_ref_no">Doc Ref No</option>
-                    <option value="doc_ref_date">Doc Ref Date</option>
-                    <option value="due_date">Due Date</option>
-                    <option value="ref_type">Ref Type</option>
-                    <option value="parent_ref_id">Rarent Ref Id</option>
-                    <option value="ref_id">Ref Id</option>
-                    <option value="ref_no">Ref No</option>
-                    <option value="ref_date">Ref Date</option>
-                    <option value="ref_bill_type">Ref Bill Type</option>
-                    <option value="old_ref_no">Old Ref No</option>
-                    <option value="old_ref_date">Old Ref Date</option>
-                    <option value="party_additional_details">Party Additional Details</option>
-                    <option value="follow_up_level_ids">Follow Up Level Ids</option>
-                    <option value="pending_amount">Pending Amount</option>
-                    <option value="cancel_invoice">Cancel Invoice</option>
-                    <option value="cancel_invoice_date">Cancel Invoice Date</option>
-                    <option value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                    <option value="additional_charges">Additional Charges</option>
-                    <option value="pdf_name">Pdf Name</option>
-                    <option value="owner_additional_details">Owner Additional Details</option>
-                    <option value="serial_transaction_number">Serial Transaction Number</option>
+                    <option value="id"><?= __('ID') ?></option>
+                    <option value="company_id"><?= __('Company Id') ?></option>
+                    <option value="cost_center_id"><?= __('Cost Center Id') ?></option>
+                    <option value="transaction_number" selected><?= __('Transaction Number') ?></option>
+                    <option value="transaction_date"><?= __('Transaction Date') ?></option>
+                    <option value="transaction_location_id"><?= __('Transaction Location Id') ?></option>
+                    <option value="transaction_warehouse_id"><?= __('Transaction Warehouse Id') ?></option>
+                    <option value="originator_currency_id"><?= __('Originator Currency Id') ?></option>
+                    <option value="currency_id"><?= __('Currency Id') ?></option>
+                    <option value="currency_rate"><?= __('Currency Rate') ?></option>
+                    <option value="originator"><?= __('Originator') ?></option>
+                    <option value="party_id"><?= __('Party Id') ?></option>
+                    <option value="party_name"><?= __('Party Name') ?></option>
+                    <option value="party_email"><?= __('Party Email') ?></option>
+                    <option value="party_tax_number"><?= __('Party Tax Number') ?></option>
+                    <option value="party_phone"><?= __('Party Phone') ?></option>
+                    <option value="party_address"><?= __('Party Address') ?></option>
+                    <option value="party_ship_adderss"><?= __('Party Ship Adderss') ?></option>
+                    <option value="originator_state_id"><?= __('Originator State Id') ?></option>
+                    <option value="supplier_state_id"><?= __('Supplier State Id') ?></option>
+                    <option value="place_of_supply"><?= __('Place Of Supply') ?></option>
+                    <option value="payment_terms"><?= __('Payment Terms') ?></option>
+                    <option value="notes"><?= __('Notes') ?></option>
+                    <option value="printing_notes"><?= __('Printing Notes') ?></option>
+                    <option value="parent_id"><?= __('Parent Id') ?></option>
+                    <option value="amount"><?= __('Amount') ?></option>
+                    <option value="tax_amount"><?= __('Tax Amount') ?></option>
+                    <option value="type"><?= __('Type') ?></option>
+                    <option value="tax_type"><?= __('Tax Type') ?></option>
+                    <option value="discount_type"><?= __('Discount Type') ?></option>
+                    <option value="discount_value"><?= __('Discount Value') ?></option>
+                    <option value="discount_amount"><?= __('Discount Amount') ?></option>
+                    <option value="total_amount"><?= __('Total Amount') ?></option>
+                    <option value="shipping_tax"><?= __('Shipping Tax') ?></option>
+                    <option value="shipping_amount"><?= __('Shipping Amount') ?></option>
+                    <option value="shipping_tax_amount"><?= __('Shipping Tax Amount') ?></option>
+                    <option value="tax_state"><?= __('Tax State') ?></option>
+                    <option value="opex_cpex"><?= __('Opex Cpex') ?></option>
+                    <option value="doc_ref_no"><?= __('Doc Ref No') ?></option>
+                    <option value="doc_ref_date"><?= __('Doc Ref Date') ?></option>
+                    <option value="due_date"><?= __('Due Date') ?></option>
+                    <option value="ref_type"><?= __('Ref Type') ?></option>
+                    <option value="parent_ref_id"><?= __('Rarent Ref Id') ?></option>
+                    <option value="ref_id"><?= __('Ref Id') ?></option>
+                    <option value="ref_no"><?= __('Ref No') ?></option>
+                    <option value="ref_date"><?= __('Ref Date') ?></option>
+                    <option value="ref_bill_type"><?= __('Ref Bill Type') ?></option>
+                    <option value="old_ref_no"><?= __('Old Ref No') ?></option>
+                    <option value="old_ref_date"><?= __('Old Ref Date') ?></option>
+                    <option value="party_additional_details"><?= __('Party Additional Details') ?></option>
+                    <option value="follow_up_level_ids"><?= __('Follow Up Level Ids') ?></option>
+                    <option value="pending_amount"><?= __('Pending Amount') ?></option>
+                    <option value="cancel_invoice"><?= __('Cancel Invoice') ?></option>
+                    <option value="cancel_invoice_date"><?= __('Cancel Invoice Date') ?></option>
+                    <option value="cancel_invoice_reason"><?= __('Cancel Invoice Reason') ?></option>
+                    <option value="additional_charges"><?= __('Additional Charges') ?></option>
+                    <option value="pdf_name"><?= __('Pdf Name') ?></option>
+                    <option value="owner_additional_details"><?= __('Owner Additional Details') ?></option>
+                    <option value="serial_transaction_number"><?= __('Serial Transaction Number') ?></option>
                   </select>
                 </div>
               </div>
@@ -1595,17 +1595,17 @@ if ($userData['user_photo'] != '') {
             <div id="page_footer_positions" class="dynamic-options">
               <div class="card card-body mt-2">
                 <div class="form-group">
-                  <label for="signatureqr1position" class="form-label">Signature & QR</label>
+                  <label for="signatureqr1position" class="form-label"><?= __('Signature & QR') ?></label>
                   <select aria-label="Signatureqr1position" class="form-select" id="signatureqr1position">
-                    <option value="left" selected>Left</option>
-                    <option value="right">Right</option>
+                    <option value="left" selected><?= __('Left') ?></option>
+                    <option value="right"><?= __('Right') ?></option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="invoicesummary2position" class="form-label">Invoice Summary</label>
+                  <label for="invoicesummary2position" class="form-label"><?= __('Invoice Summary') ?></label>
                   <select aria-label="Invoicesummary2position" class="form-select" id="invoicesummary2position">
-                    <option value="left">Left</option>
-                    <option value="right">Right</option>
+                    <option value="left"><?= __('Left') ?></option>
+                    <option value="right"><?= __('Right') ?></option>
                   </select>
                 </div>
               </div>
@@ -1662,16 +1662,16 @@ if ($userData['user_photo'] != '') {
                   <table class="table bordered mb-10">
                     <thead>
                       <tr class="">
-                        <th scope="col" class="bordered col-1"><strong>S.No.</strong></th>
-                        <th scope="col" class="bordered img col-2"><strong>Image</strong></th>
-                        <th scope="col" class="bordered item col-2"><strong>Item Name</strong></th>
-                        <th scope="col" class="bordered des col-2"><strong>Description</strong></th>
-                        <th scope="col" class="bordered hsnsac col-2 text-end"><strong>HSN/SAC</strong></th>
-                        <th scope="col" class="bordered uom col-2"><strong>UOM</strong></th>
-                        <th scope="col" class="bordered tax col-2 text-end"><strong>Tax</strong></th>
-                        <th scope="col" class="bordered rate col-2 text-end"><strong>Rate</strong></th>
-                        <th scope="col" class="bordered qty col-1 text-end"><strong>QTY</strong></th>
-                        <th scope="col" class="bordered amount col-2 text-end"><strong>Amount</strong></th>
+                        <th scope="col" class="bordered col-1"><strong><?= __('S.No.') ?></strong></th>
+                        <th scope="col" class="bordered img col-2"><strong><?= __('Image') ?></strong></th>
+                        <th scope="col" class="bordered item col-2"><strong><?= __('Item Name') ?></strong></th>
+                        <th scope="col" class="bordered des col-2"><strong><?= __('Description') ?></strong></th>
+                        <th scope="col" class="bordered hsnsac col-2 text-end"><strong><?= __('HSN/SAC') ?></strong></th>
+                        <th scope="col" class="bordered uom col-2"><strong><?= __('UOM') ?></strong></th>
+                        <th scope="col" class="bordered tax col-2 text-end"><strong><?= __('Tax') ?></strong></th>
+                        <th scope="col" class="bordered rate col-2 text-end"><strong><?= __('Rate') ?></strong></th>
+                        <th scope="col" class="bordered qty col-1 text-end"><strong><?= __('QTY') ?></strong></th>
+                        <th scope="col" class="bordered amount col-2 text-end"><strong><?= __('Amount') ?></strong></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1795,8 +1795,7 @@ if ($userData['user_photo'] != '') {
             </div>
 
             <div class="mb-2">
-              <button name="submitinvoice" type="submit" class="btn btn-primary mt-3 w-100" disabled>Save
-                Changes</button>
+              <button name="submitinvoice" type="submit" class="btn btn-primary mt-3 w-100" disabled><?= __('Save Changes') ?></button>
             </div>
           </form>
         </div>

@@ -134,8 +134,8 @@ $performance_appraisal_questions = $result['performance_appraisal_questions'];
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+        cancelButtonText: <?php echo json_encode(__('No')); ?>,
         closeOnConfirm: true,
         closeOnCancel: true
     },
@@ -165,8 +165,8 @@ $performance_appraisal_questions = $result['performance_appraisal_questions'];
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+        cancelButtonText: <?php echo json_encode(__('No')); ?>,
         closeOnConfirm: true,
         closeOnCancel: true
     },
@@ -191,7 +191,7 @@ $performance_appraisal_questions = $result['performance_appraisal_questions'];
     });
 }
 function getPreviewAppraisal(appraisal_id){
-    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?php echo htmlspecialchars(__('Preview'), ENT_QUOTES); ?>"></div>';
     $("#preview_appraisal").html(loader);
     jQuery.ajax({
         url: "views/custom_view_performance_appraisal_setups.php",
@@ -207,41 +207,41 @@ function getPreviewAppraisal(appraisal_id){
 <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
 <?php } ?>
 <div class="row">
     <div class="col-lg-2">
         <div class="card">
             <div class="card-header">
-                <h5>Menu</h5>
+                <h5><?php echo __('Menu'); ?></h5>
                 <div class="card-header-right">
                     <?php if($performance_appraisal_setup_id !="" && $pas['publish']=='N'){ ?>
-                        <button type="button"   class="btn btn-primary" onclick="publichappraisal('<?php echo $performance_appraisal_setup_id; ?>')">Publish</button>
+                        <button type="button"   class="btn btn-primary" onclick="publichappraisal('<?php echo $performance_appraisal_setup_id; ?>')"><?php echo __('Publish'); ?></button>
                     <?php } ?>
                 </div>
             </div>
             <div class="card-body">
                 <ul class="nav nav-tabs md-tabs d-block">
                     <li class="nav-item">
-                        <a class="nav-link text-left <?php echo ($_POST['parent_tab'] == "performance_appraisal_setups" || $_POST['parent_tab'] =="")?"active":""; ?>" data-bs-toggle="tab" href="#performance_appraisal_setups" role="tab" aria-selected="false">Performance Appraisal</a>
+                        <a class="nav-link text-left <?php echo ($_POST['parent_tab'] == "performance_appraisal_setups" || $_POST['parent_tab'] =="")?"active":""; ?>" data-bs-toggle="tab" href="#performance_appraisal_setups" role="tab" aria-selected="false"><?php echo __('Performance Appraisal'); ?></a>
                         <div class="slide"></div>
                     </li>
                     <?php if($performance_appraisal_setup_id !=""){ ?>
                     <li class="nav-item mt-2" id="kratab" style="<?php echo ($pas['appraisal_setup_type']=="KRA")?"":"display:none";?>">
-                        <a class="nav-link <?php echo $_POST['parent_tab'] == "kra"?"active":""; ?>" data-bs-toggle="tab" href="#kra" role="tab" aria-selected="false">KRA</a>
+                        <a class="nav-link <?php echo $_POST['parent_tab'] == "kra"?"active":""; ?>" data-bs-toggle="tab" href="#kra" role="tab" aria-selected="false"><?php echo __('KRA'); ?></a>
                         <div class="slide"></div>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link <?php echo $_POST['parent_tab'] == "otherquestion"?"active":""; ?>" data-bs-toggle="tab" href="#otherquestion" role="tab" aria-selected="false">Appraisal Questions</a>
+                        <a class="nav-link <?php echo $_POST['parent_tab'] == "otherquestion"?"active":""; ?>" data-bs-toggle="tab" href="#otherquestion" role="tab" aria-selected="false"><?php echo __('Appraisal Questions'); ?></a>
                         <div class="slide"></div>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link <?php echo $_POST['parent_tab'] == "otheractivity"?"active":""; ?>" data-bs-toggle="tab" href="#otheractivity" role="tab" aria-selected="false">Other Activity</a>
+                        <a class="nav-link <?php echo $_POST['parent_tab'] == "otheractivity"?"active":""; ?>" data-bs-toggle="tab" href="#otheractivity" role="tab" aria-selected="false"><?php echo __('Other Activity'); ?></a>
                         <div class="slide"></div>
                     </li>
                     <li class="nav-item mt-2">
-                        <button type="button" class="nav-link" data-bs-toggle="tab" preview_appraisal" role="tab" aria-selected="false" onclick="getPreviewAppraisal('<?php echo $performance_appraisal_setup_id; ?>')">Preview Appraisal</button>
+                        <button type="button" class="nav-link" data-bs-toggle="tab" preview_appraisal" role="tab" aria-selected="false" onclick="getPreviewAppraisal('<?php echo $performance_appraisal_setup_id; ?>')"><?php echo __('Preview Appraisal'); ?></button>
                         <div class="slide"></div>
                     </li>
                 <?php } ?>
@@ -250,14 +250,14 @@ function getPreviewAppraisal(appraisal_id){
         </div>
     </div>
     <div class="text-center" style="display: none;  margin-left: auto;  margin-right: auto;  width: 40%; " id="loader-show_2">
-        <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+        <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?php echo __('Preview'); ?>">
     </div>
     <div class="col-lg-10" id="loader-hide">
         <div class="tab-content">
             <div class="tab-pane <?php echo ($_POST['parent_tab'] == "performance_appraisal_setups" || $_POST['parent_tab'] =="")?"active":""; ?>" id="performance_appraisal_setups" role="tabpanel">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Performance Appraisal Setups</h5>
+                        <h5><?php echo __('Performance Appraisal Setups'); ?></h5>
                         <div class="card-header-right"></div>
                     </div>
                     <div class="card-body"  <?php echo $pas['publish']=='Y'?'style="pointer-events: none; opacity: 0.7;"':''; ?>>
@@ -265,82 +265,82 @@ function getPreviewAppraisal(appraisal_id){
                         <form method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="form-group col-lg-3">
-                                    <span class="form-label">Name<span class="text-danger">*</span></span>
-                                    <input aria-label="Performance Appraisal Name" type="text" name="performance_appraisal_name" class="form-control" value="<?php echo $pas['performance_appraisal_name']; ?>" required>
+                                    <span class="form-label"><?php echo __('Name'); ?><span class="text-danger">*</span></span>
+                                    <input aria-label="<?php echo __('Performance Appraisal Name'); ?>" type="text" name="performance_appraisal_name" class="form-control" value="<?php echo $pas['performance_appraisal_name']; ?>" required>
                                 </div>
                                 <div class="form-group col-lg-3 w-full">
-                                    <span class="form-label">Aassessment Year:</span>
-                                    <select aria-label="Assessment Year" class="form-control form-select js-example-basic-single" name="assessment_year" >
-                                        <option value="">Select Any One</option>
+                                    <span class="form-label"><?php echo __('Aassessment Year:'); ?></span>
+                                    <select aria-label="<?php echo __('Assessment Year'); ?>" class="form-control form-select js-example-basic-single" name="assessment_year" >
+                                        <option value=""><?php echo __('Select Any One'); ?></option>
                                         <?php for ($i=2020; $i<2090;$i++) {
                                             $k= $i+1; $view_assemnt_year =$i."-".$k; ?>
-                                            <option <?php if($pas['assessment_year'] == $view_assemnt_year){ echo "selected";
+                                            <option <?php if($pas['assessment_year'] == $view_assemnt_year){ echo __('selected');
 } ?> value="<?php echo $view_assemnt_year; ?>"  ><?php echo $i." - ".$k ?></option>
                                         <?php  } ?>
                                     </select>
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="form-label">Assessment Start Date</span>
-                                    <input aria-label="Input field" type="text" class="form-control startdatepicker_1 rangedatepicker"  value="<?php echo  fromDate($pas['assessment_start_date']); ?>" data-id="1"  name="assessment_start_date" onblur="assessmentchange()" />
+                                    <span class="form-label"><?php echo __('Assessment Start Date'); ?></span>
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control startdatepicker_1 rangedatepicker"  value="<?php echo  fromDate($pas['assessment_start_date']); ?>" data-id="1"  name="assessment_start_date" onblur="assessmentchange()" />
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="form-label">Assessments End Date </span>
-                                    <input aria-label="Assessment End Date" type="text" class="form-control enddatepicker_1" name="assessment_end_date" value="<?php echo  fromDate($pas['assessment_end_date']); ?>"   />
+                                    <span class="form-label"><?php echo __('Assessments End Date'); ?> </span>
+                                    <input aria-label="<?php echo __('Assessment End Date'); ?>" type="text" class="form-control enddatepicker_1" name="assessment_end_date" value="<?php echo  fromDate($pas['assessment_end_date']); ?>"   />
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="form-label">Self Assessment Start Date</span>
-                                    <input aria-label="Input field" type="text" class="form-control startdatepicker_2 rangedatepicker"  value="<?php echo  fromDate($pas['self_assessment_start_date']); ?>" data-id="2" name="self_assessment_start_date"  />
+                                    <span class="form-label"><?php echo __('Self Assessment Start Date'); ?></span>
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control startdatepicker_2 rangedatepicker"  value="<?php echo  fromDate($pas['self_assessment_start_date']); ?>" data-id="2" name="self_assessment_start_date"  />
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="form-label">Self Assessment End Date</span>
-                                    <input aria-label="Input field" type="text" class="form-control enddatepicker_2"  value="<?php echo  fromDate($pas['self_assessment_end_date']); ?>"  name="self_assessment_end_date" />
+                                    <span class="form-label"><?php echo __('Self Assessment End Date'); ?></span>
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control enddatepicker_2"  value="<?php echo  fromDate($pas['self_assessment_end_date']); ?>"  name="self_assessment_end_date" />
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="form-label">Manager Assessement Start Date </span>
-                                    <input aria-label="Input field" type="text" class="form-control startdatepicker_3 rangedatepicker"  value="<?php echo fromDate($pas['manager_assessment_start_date']); ?>" data-id="3" name="manager_assessment_start_date" />
+                                    <span class="form-label"><?php echo __('Manager Assessement Start Date'); ?> </span>
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control startdatepicker_3 rangedatepicker"  value="<?php echo fromDate($pas['manager_assessment_start_date']); ?>" data-id="3" name="manager_assessment_start_date" />
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="form-label">Manager Assessment End Date </span>
-                                    <input aria-label="Manager Assessment End Date" type="text" class="form-control enddatepicker_3" name="manager_assessment_end_date" value="<?php echo  fromDate($pas['manager_assessment_end_date']);  ?>"   />
+                                    <span class="form-label"><?php echo __('Manager Assessment End Date'); ?> </span>
+                                    <input aria-label="<?php echo __('Manager Assessment End Date'); ?>" type="text" class="form-control enddatepicker_3" name="manager_assessment_end_date" value="<?php echo  fromDate($pas['manager_assessment_end_date']);  ?>"   />
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="form-label">Reviewing Assessment Start Date</span>
-                                    <input aria-label="Input field" type="text" class="form-control startdatepicker_4 rangedatepicker"  value="<?php echo fromDate($pas['reviewing_start_date']); ?>" data-id="4" name="reviewing_start_date" />
+                                    <span class="form-label"><?php echo __('Reviewing Assessment Start Date'); ?></span>
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control startdatepicker_4 rangedatepicker"  value="<?php echo fromDate($pas['reviewing_start_date']); ?>" data-id="4" name="reviewing_start_date" />
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="form-label"> Reviewing Assessment End Date</span>
-                                    <input aria-label="Input field" type="text" class="form-control enddatepicker_4" value="<?php echo  fromDate($pas['reviewing_end_date']); ?>"  name="reviewing_end_date" />
+                                    <span class="form-label"> <?php echo __('Reviewing Assessment End Date'); ?></span>
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control enddatepicker_4" value="<?php echo  fromDate($pas['reviewing_end_date']); ?>"  name="reviewing_end_date" />
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="form-label">URL</span>
-                                    <textarea aria-label="Url" name="url" class="form-control"><?php echo $pas['url']; ?></textarea>
+                                    <span class="form-label"><?php echo __('URL'); ?></span>
+                                    <textarea aria-label="<?php echo __('Url'); ?>" name="url" class="form-control"><?php echo $pas['url']; ?></textarea>
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="form-label">File Upload</span>
+                                    <span class="form-label"><?php echo __('File Upload'); ?></span>
                                     <div></div>
                                     <div class="custom-file">
-                                        <input aria-label="Newfilename" type="file" class="custom-file-input" id="customFile" name="newfilename" value="<?php echo $pas['file_name']; ?>">
+                                        <input aria-label="<?php echo __('Newfilename'); ?>" type="file" class="custom-file-input" id="customFile" name="newfilename" value="<?php echo $pas['file_name']; ?>">
 
                                         <input type="hidden"  name="oldfilename" value="<?php echo $pas['file_name']; ?>">
                                         <a  class="mt-2 text-primary" href="uploads/all/<?php echo $pas['file_name']; ?>" download><?php echo $pas['file_name']; ?></a>
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-3 w-full" >
-                                    <span class="form-label">How often do assessments happen?</span>
-                                    <select aria-label="Action Frequency" class="form-select js-example-basic-single" name="action_frequency">
-                                         <option value="">Select Any one</option>
-                                        <option <?php if($pas['action_frequency']==3){ echo "selected";
-}  ?> value="3" >Every 3 Months</option>
-                                        <option <?php if($pas['action_frequency']==4){ echo "selected";
-}  ?> value="4" >Every 4 Months</option>
-                                        <option <?php if($pas['action_frequency']==6){ echo "selected";
-}  ?> value="6" >Every 6 Months</option>
-                                        <option <?php if($pas['action_frequency']==12){ echo "selected";
-}  ?> value="12" >Every Year</option>
+                                    <span class="form-label"><?php echo __('How often do assessments happen?'); ?></span>
+                                    <select aria-label="<?php echo __('Action Frequency'); ?>" class="form-select js-example-basic-single" name="action_frequency">
+                                         <option value=""><?php echo __('Select Any one'); ?></option>
+                                        <option <?php if($pas['action_frequency']==3){ echo __('selected');
+}  ?> value="3" ><?php echo __('Every 3 Months'); ?></option>
+                                        <option <?php if($pas['action_frequency']==4){ echo __('selected');
+}  ?> value="4" ><?php echo __('Every 4 Months'); ?></option>
+                                        <option <?php if($pas['action_frequency']==6){ echo __('selected');
+}  ?> value="6" ><?php echo __('Every 6 Months'); ?></option>
+                                        <option <?php if($pas['action_frequency']==12){ echo __('selected');
+}  ?> value="12" ><?php echo __('Every Year'); ?></option>
                                     </select>
                                 </div>
                                 <div class="col-lg-6">
-                                    <span class="form-label">Appraisal Type<span class="text-danger">*</span></span>
+                                    <span class="form-label"><?php echo __('Appraisal Type'); ?><span class="text-danger">*</span></span>
                                     <div class="row">
                                         <input type="hidden" name="appraisal_setup_type" id="appraisal_setup_type" value="<?php echo $pas['appraisal_setup_type'] !=""?$pas['appraisal_setup_type']:"C"; ?>">
 
@@ -348,7 +348,7 @@ function getPreviewAppraisal(appraisal_id){
                                             <div class="card text-center <?php echo ($pas['appraisal_setup_type']=="C" || $pas['appraisal_setup_type'] =="")?"bg-success text-white":"";?> removeselected" id="appraisal_setup_type_C">
                                                 <div class="card-body">
                                                     <span class="d-block f-22"><i class="ti-comment"></i></span>
-                                                    <span>Classic Appraisal</span>
+                                                    <span><?php echo __('Classic Appraisal'); ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -356,28 +356,28 @@ function getPreviewAppraisal(appraisal_id){
                                             <div class="card text-center <?php echo $pas['appraisal_setup_type']=="KRA"?"bg-success text-white":"";?> removeselected" id="appraisal_setup_type_KRA">
                                                 <div class="card-body">
                                                     <span class="d-block f-22"><i class="ti-layout-accordion-list"></i></span>
-                                                    <span>KRA/KPI Appraisal</span>
+                                                    <span><?php echo __('KRA/KPI Appraisal'); ?></span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-3 w-full">
-                                    <span class="form-label">Bell Curves</span>
-                                    <select aria-label="Appraisal Bell Curve" class="form-control form-select js-example-basic-single" name="appraisal_bell_curve_id" >
-                                        <option value="">Select Any One</option>
+                                    <span class="form-label"><?php echo __('Bell Curves'); ?></span>
+                                    <select aria-label="<?php echo __('Appraisal Bell Curve'); ?>" class="form-control form-select js-example-basic-single" name="appraisal_bell_curve_id" >
+                                        <option value=""><?php echo __('Select Any One'); ?></option>
                                         <?php foreach($appraisal_bell_curves as $abc){ ?>
-                                            <option value="<?php echo $abc['id']; ?>" <?php if($abc['id'] == $pas['appraisal_bell_curve_id']){ echo "selected";
+                                            <option value="<?php echo $abc['id']; ?>" <?php if($abc['id'] == $pas['appraisal_bell_curve_id']){ echo __('selected');
 } ?>><?php echo $abc['bell_curve_name']; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="font-weight-bolder">Asign to <span class="text-danger">*</span></span>
+                                    <span class="font-weight-bolder"><?php echo __('Asign to'); ?> <span class="text-danger">*</span></span>
                                     <div id="tsk_fortable"></div>
                                     <div class="col-xl-12">
                                         <i class="flaticon2-group text-success"></i>
-                                        <button type="button" onclick="showpopupappraisal();">Edit </button>
+                                        <button type="button" onclick="showpopupappraisal();"><?php echo __('Edit'); ?> </button>
                                     </div>
                                     <div id="filternames"> </div>
 
@@ -386,7 +386,7 @@ function getPreviewAppraisal(appraisal_id){
                             <input type="hidden" name="filtertbl_rowid" id="filtertbl_rowid" value="<?php echo $filtertbl_rowid;?>" >
                             <input type="hidden" name="submit" value="addpeople" />
                             <input type="hidden" name="rid" value="<?php echo $performance_appraisal_setup_id; ?>" />
-                            <button type="submit" class="btn btn-primary waves-effect waves-light mt-5" name="submitperformance_appraisal_setups"><i class="fa fa-check m-r-10"></i> <?php echo $performance_appraisal_setup_id ==""?"Submit":"Update"; ?></button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light mt-5" name="submitperformance_appraisal_setups"><i class="fa fa-check m-r-10"></i> <?php echo $performance_appraisal_setup_id ==""?__('Submit'):__('Update'); ?></button>
 
                         </form>
                     </div>
@@ -397,19 +397,19 @@ function getPreviewAppraisal(appraisal_id){
 
                 <div class="card">
                     <div class="card-header">
-                        <h5>KRA</h5>
+                        <h5><?php echo __('KRA'); ?></h5>
                         <div class="card-header-right"></div>
                     </div>
                     <div class="card-body">
                         <ul class="nav md-tabs infisuite_tab ml-2 mb-2">
                             <li class="nav-item <?php echo ($_POST['child_tab'] == "kra" || $_POST['child_tab'] =="")?"active":""; ?>">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#setkra" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">KRA</a>
+                                <a class="nav-link active" data-bs-toggle="tab" href="#setkra" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('KRA'); ?></a>
                             </li>
                             <li class="nav-item <?php echo $_POST['child_tab'] == "setkratagging"?"active":""; ?>">
-                                <a class="nav-link" data-bs-toggle="tab" href="#setkratagging" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">KRA Tagging</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#setkratagging" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('KRA Tagging'); ?></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#setgoal" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Allocate KRA Target</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#setgoal" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('Allocate KRA Target'); ?></a>
                             </li>
                         </ul>
                         <div class="tab-content"  <?php echo $pas['publish']=='Y'?'style="pointer-events: none; opacity: 0.7;"':''; ?>>

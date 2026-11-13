@@ -114,10 +114,10 @@ var max = 500;
         max++;
         var html = `<div class="row rows`+max+` mt-2"> 
                 <div class="col-lg-10">
-                    <input class="form-control" type="text" name="screening_question[`+max+`]" value="`+val+`" placeholder="Eg. Tell me about yourself">
+                    <input class="form-control" type="text" name="screening_question[`+max+`]" value="`+val+`" placeholder="<?= __('Eg. Tell me about yourself') ?>">
                 </div>
                 <div class="col-lg-2">
-                    <i title="Delete Question" onclick="deleteQuestion(`+max+`)" class="fa fa-trash text-danger cursor-pointer"></i> 
+                    <i title="<?= __('Delete Question') ?>" onclick="deleteQuestion(`+max+`)" class="fa fa-trash text-danger cursor-pointer"></i> 
                 </div>
             </div>`;
         $("#videoquestiontextfileds").append(html);
@@ -146,10 +146,10 @@ var max = 500;
 <div class="card-body">
     <div class="row mt-3">
       	<div class="col-lg-6">
-            <!-- <button type="button" class="btn btn-primary float-right mb-1" id="ai_generate_job_description" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click here to Start Screening" onclick="approvedstartScreening('6a673fcd490735e1850a9d7f')"><i class="ti-light-bulb"></i> Scre. Start</button> -->
+            <!-- <button type="button" class="btn btn-primary float-right mb-1" id="ai_generate_job_description" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click here to Start Screening') ?>" onclick="approvedstartScreening('6a673fcd490735e1850a9d7f')"><i class="ti-light-bulb"></i> Scre. Start</button> -->
         	<div class="card">
           		<div class="card-header">
-            		<h5>Screening Questions</h5>
+            		<h5><?= __('Screening Questions') ?></h5>
             		<div class="card-header-right table-card-header">
             		 	
             		</div> 	
@@ -157,10 +157,10 @@ var max = 500;
           		<div class="card-block">
                     <table class="table table-bordered table-md">
                         <tr>
-                            <th scope="col">Job Postings</th>
-                            <th scope="col">Screening</th>
-                            <th scope="col">AI Shortlisted</th>
-                            <th scope="col">Status</th>
+                            <th scope="col"><?= __('Job Postings') ?></th>
+                            <th scope="col"><?= __('Screening') ?></th>
+                            <th scope="col"><?= __('AI Shortlisted') ?></th>
+                            <th scope="col"><?= __('Status') ?></th>
                         </tr>
                     <?php foreach($job_posting_candidates as $jpc){ ?>
                         <tr>
@@ -178,10 +178,10 @@ var max = 500;
                                     if($jpc['is_active'] == "0"){
                                         if($jpc['screening_status'] == "N"){ 
                                             ?>
-                                            <span class="form-label label label-primary text-white cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click Here to Create Manual Questions"  onclick="createManualQuestions('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"> <i class="ti-plus"></i> Ques. </span>
+                                            <span class="form-label label label-primary text-white cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click Here to Create Manual Questions') ?>"  onclick="createManualQuestions('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"> <i class="ti-plus"></i> Ques. </span>
                                         
 
-                                            <span class="form-label label label-primary text-white cursor-pointer" id="ai_generate_job_description" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click Here to Create AI Questions"  onclick="startScreening('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"><i class="ti-light-bulb"></i>AI Question Gen.</span>
+                                            <span class="form-label label label-primary text-white cursor-pointer" id="ai_generate_job_description" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click Here to Create AI Questions') ?>"  onclick="startScreening('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"><i class="ti-light-bulb"></i>AI Question Gen.</span>
                                             <?php
                                         }else{
                                              echo "Active";
@@ -202,7 +202,7 @@ var max = 500;
       	<div class="col-lg-6">
         	<div class="card">
           		<div class="card-header">
-            		<h5>Screening Questions/Answers</h5>
+            		<h5><?= __('Screening Questions/Answers') ?></h5>
           		</div>
           		<div class="card-block" id="screeningresponse">
             		  <div class="row " style=" height: 400px;">

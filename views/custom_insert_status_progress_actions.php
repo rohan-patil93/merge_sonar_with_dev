@@ -119,9 +119,9 @@ if($status_table != ""){
         type: "POST",
         success:function(data){
             console.log(data);
-            $("#sec").html("<select aria-label='Status Progress' class='form-control kt-select2 js-example-basic-single' onchange='checkreload(this.value)' name='status_progress'><option>Select Any One</option>"+data+"</select>");
+            $("#sec").html("<select aria-label='Status Progress' class='form-control kt-select2 js-example-basic-single' onchange='checkreload(this.value)' name='status_progress'><option><?php echo __('Select Any One'); ?></option>"+data+"</select>");
 
-            $("#multiplechecks").html("<select aria-label='Status Progress' class='form-control kt-select2 js-example-basic-multiple'  onchange='checkreload(this.value)' name='status_progress' multiple><option>Select Any One</option></select>");
+            $("#multiplechecks").html("<select aria-label='Status Progress' class='form-control kt-select2 js-example-basic-multiple'  onchange='checkreload(this.value)' name='status_progress' multiple><option><?php echo __('Select Any One'); ?></option></select>");
             $(".js-example-basic-single").select2();
             $(".js-example-basic-multiple").select2();
 
@@ -153,14 +153,14 @@ if($status_table != ""){
 
      <div class="alert alert-warning alert-dismissible">
       <strong><?php echo $content; ?></strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
   </div>
     <?php } ?>
         <div class="card card-custom card-sticky" id="kt_page_sticky_card">
             <div class="card-header">
     <h5><?php echo $title;  ?></h5>
     <div class="card-header-right">
-             <button type="button" onclick="history.go(-1)" class="btn btn-primary waves-effect waves-ligh"><i class="ti-arrow-left text-white"></i> Back</button>
+             <button type="button" onclick="history.go(-1)" class="btn btn-primary waves-effect waves-ligh"><i class="ti-arrow-left text-white"></i> <?php echo __('Back'); ?></button>
     </div>
 </div>
 <div class="card card-custom mt-2">
@@ -169,10 +169,10 @@ if($status_table != ""){
                     <div class="form-group row">
 
                         <div class="form-group col-lg-4">
-                            <span class="form-label">Transaction Type&nbsp;<span class="requried">*</span></span>
+                            <span class="form-label"><?php echo __('Transaction Type&nbsp;'); ?><span class="requried">*</span></span>
                             <div id="frist">
-                                <select aria-label="Chh" class="form-control form-select js-example-basic-single" onchange="itemChange(this.value)"  id="kt_select2_4"  name="chh">
-                                    <option value=""> Select Any One </option>
+                                <select aria-label="<?php echo __('Chh'); ?>" class="form-control form-select js-example-basic-single" onchange="itemChange(this.value)"  id="kt_select2_4"  name="chh">
+                                    <option value=""> <?php echo __('Select Any One'); ?> </option>
                                 <?php foreach ($status_progress as  $selectvalue) {  ?>
                                         <option <?php if($status_table !="" && $status_table == $selectvalue['table_name'] ){ ?> selected <?php
 } ?> value="<?php echo $selectvalue['table_name']; ?>"><?php echo viewTitle($selectvalue['table_name']); ?></option>
@@ -181,10 +181,10 @@ if($status_table != ""){
                             </div>
                         </div>
                         <div class="form-group col-lg-4">
-                            <span class="form-label">Status Progress&nbsp;<span class="requried">*</span></span>
+                            <span class="form-label"><?php echo __('Status Progress&nbsp;'); ?><span class="requried">*</span></span>
                             <div id="sec">
-                                <select aria-label="Status Progress" class="form-control form-select js-example-basic-single" id="kt_select2_3" onchange="checkreload(this.value)" name="status_progress">
-                                    <option value=""> Select Any one </option>
+                                <select aria-label="<?php echo __('Status Progress'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_3" onchange="checkreload(this.value)" name="status_progress">
+                                    <option value=""> <?php echo __('Select Any one'); ?> </option>
                                     <?php foreach ($cudata as  $cdata) {  ?>
                                             <option <?php if($progress== $cdata['id'] ){ ?> selected <?php
 } ?> value="<?php echo $cdata['id']; ?>"><?php echo $cdata['name']; ?></option>
@@ -194,8 +194,8 @@ if($status_table != ""){
                         </div>
                         <?php if(!isset($sprdata['id'])){ ?>
                         <div class="form-group col-lg-4 w-full">
-                          <span class="form-label">Module</span>
-                          <select aria-label="Module Setup []" class="form-select js-example-basic-multiple" id="module_setup_id" name="module_setup_id[]" multiple>
+                          <span class="form-label"><?php echo __('Module'); ?></span>
+                          <select aria-label="<?php echo __('Module Setup []'); ?>" class="form-select js-example-basic-multiple" id="module_setup_id" name="module_setup_id[]" multiple>
                             <?php foreach($mopdulesetup as $modulesetup){ ?>
                               <option value="<?php echo $modulesetup['module_id']; ?>" <?php echo $sprdata['module_setup_id'] == $modulesetup['module_id']?"selected":""; ?>><?php echo $modulesetup['module_name']; ?></option>
                             <?php } ?>
@@ -203,8 +203,8 @@ if($status_table != ""){
                         </div>
                         <?php }else{ ?>
                           <div class="form-group col-lg-4 w-full">
-                          <span class="form-label">Module</span>
-                          <select aria-label="Module Setup" class="form-select js-example-basic-single" id="module_setup_id_2" name="module_setup_id" onchange="checkreloadmodule(this.value)">
+                          <span class="form-label"><?php echo __('Module'); ?></span>
+                          <select aria-label="<?php echo __('Module Setup'); ?>" class="form-select js-example-basic-single" id="module_setup_id_2" name="module_setup_id" onchange="checkreloadmodule(this.value)">
                             <?php foreach($mopdulesetup as $modulesetup){ ?>
                               <option value="<?php echo $modulesetup['module_id']; ?>" <?php echo $sprdata['module_setup_id'] == $modulesetup['module_id']?"selected":""; ?>><?php echo $modulesetup['module_name']; ?></option>
                             <?php } ?>
@@ -212,10 +212,10 @@ if($status_table != ""){
                         </div>
             <?php } ?>
             <div class="form-group col-lg-6">
-                            <span class="form-label">Target Status&nbsp;<span class="requried">*</span></span>
+                            <span class="form-label"><?php echo __('Target Status&nbsp;'); ?><span class="requried">*</span></span>
                             <div id="multiplechecks">
-                                <select aria-label="Target[]" class="form-control form-select js-example-basic-single" id="kt_select2_31" name="target[]" multiple="multiple">
-                                    <option value=""> Select Any one </option>
+                                <select aria-label="<?php echo __('Target[]'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_31" name="target[]" multiple="multiple">
+                                    <option value=""> <?php echo __('Select Any one'); ?> </option>
                                     <?php foreach ($cudata as  $cdata) {  ?>
                                             <option <?php if(in_array($cdata['id'], $mulcheck)){ ?> selected <?php
 } ?> value="<?php echo $cdata['id']; ?>"><?php echo $cdata['name']; ?></option>
@@ -224,9 +224,9 @@ if($status_table != ""){
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Email Group&nbsp;<span class="requried">*</span></span>
-                            <select aria-label="Email Groups" class="form-control form-select js-example-basic-single" id="kt_select2_1" name="email_groups" >
-                                <option value=""> Select Any one </option>
+                            <span class="form-label"><?php echo __('Email Group&nbsp;'); ?><span class="requried">*</span></span>
+                            <select aria-label="<?php echo __('Email Groups'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_1" name="email_groups" >
+                                <option value=""> <?php echo __('Select Any one'); ?> </option>
                                 <?php foreach ($emailgroups as  $emailgroup) {  ?>
                                         <option  <?php if($sprdata['email_groups']== $emailgroup['id']){ ?> selected <?php
 } ?> value="<?php echo $emailgroup['id']; ?>"><?php echo $emailgroup['name']; ?></option>
@@ -234,9 +234,9 @@ if($status_table != ""){
                             </select>
                         </div>
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Work Flow Field&nbsp;<span class="requried">*</span></span>
-                            <select aria-label="Work Flow Field" class="form-control form-select js-example-basic-single" id="kt_select2_34" name="work_flow_field" >
-                                <option value=""> Select Any one </option>
+                            <span class="form-label"><?php echo __('Work Flow Field&nbsp;'); ?><span class="requried">*</span></span>
+                            <select aria-label="<?php echo __('Work Flow Field'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_34" name="work_flow_field" >
+                                <option value=""> <?php echo __('Select Any one'); ?> </option>
                                 <?php foreach ($tablefield as  $field) {  ?>
                                         <option  <?php if($sprdata['work_flow_field']== $field ){ ?> selected <?php
 } ?> value="<?php echo $field; ?>"><?php echo $field; ?></option>
@@ -244,7 +244,7 @@ if($status_table != ""){
                             </select>
                         </div>
                         <div class="form-group col-lg-6">
-                            <span classs="form-label">Send Notifications&nbsp;<span class="requried">*</span></span>
+                            <span classs="form-label"><?php echo __('Send Notifications&nbsp;'); ?><span class="requried">*</span></span>
                         </div>
                         <input type="hidden" name="company_id" id="company_id" value="<?php echo $_SESSION['company_id']; ?>">
 <?php include_once 'submit.php'; ?>

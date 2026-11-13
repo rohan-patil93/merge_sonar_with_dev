@@ -43,14 +43,14 @@
     <div class="container-fluid">
         <div class="card card-custom">
                 <div class="card-header table-card-header">
-                    <h5>IT Savings (Declaration)*</h5>
+                    <h5><?php echo __('IT Savings (Declaration)*'); ?></h5>
                 <div class="card-header-right table-card-header ">
-                <select aria-label="Select option" class="form-select" tabindex="" onchange="rechangeassement(this.value)">
+                <select aria-label="<?php echo __('Select option'); ?>" class="form-select" tabindex="" onchange="rechangeassement(this.value)">
                     <?php
                         for($i=1; $i<4; $i++){
                             $dc = $dm-1;
                             $cc = $dc."-".$dm; ?>
-                        <option  <?php if($cc==$assessment_year){ echo "selected";
+                        <option  <?php if($cc==$assessment_year){ echo __('selected');
 } ?> value="<?php echo $cc; ?>"><?php echo $cc; ?></option>
                     <?php $dm=$dm-$i;
                     } ?>
@@ -67,8 +67,8 @@
                             <div class="card-header">
                                 <div class="card-title">
                                     <h5 class="card-label">
-                                        Plan <?php echo $alpha[$k]; ?>
-                                        <small>Updated on <?php echo date('d M Y',strtotime($itd['updated_date'])); ?></small>
+                                        <?php echo __('Plan'); ?> <?php echo $alpha[$k]; ?>
+                                        <small><?php echo __('Updated on'); ?> <?php echo date('d M Y',strtotime($itd['updated_date'])); ?></small>
                                     </h5>
                                 </div>
                                 <div class="card-header-right table-card-header">
@@ -86,15 +86,15 @@
                             <div class="mt-1">
                                 <div class="col-lg-12 row text-center m-0">
                                     <div class="col-lg-4 border bg-light p-2" >
-                                        <h6>Potential</h6>
+                                        <h6><?php echo __('Potential'); ?></h6>
                                         <span><?php echo customeummarmonyformate($itd['potential_amount']); ?></span>
                                     </div>
                                     <div class="col-lg-4 border bg-light" style="padding-bottom: 10px; padding-top: 10px;">
-                                        <h6>Actual</h6>
+                                        <h6><?php echo __('Actual'); ?></h6>
                                         <span><?php echo customeummarmonyformate($itd['declaration_tax']); ?></span>
                                     </div>
                                     <div class="col-lg-4 border bg-light" style="padding-bottom: 10px; padding-top: 10px;">
-                                        <h6>GAP</h6>
+                                        <h6><?php echo __('GAP'); ?></h6>
                                         <span><?php echo customeummarmonyformate($itd['gap_tax']); ?></span>
                                     </div>
                                 </div>
@@ -102,8 +102,8 @@
                             <div>
                             <div class="d-flex align-items-center justify-content-between p-4 flex-lg-wrap flex-xl-nowrap">
                                     <div class="d-flex flex-column mr-5">
-                                        <span class="text-dark text-hover-primary mb-2">Total Income &nbsp;: &nbsp; &nbsp;&nbsp; &nbsp; <?php echo  customeummarmonyformate($itd['taxable_income']); ?></span>
-                                        <span class="text-dark text-hover-primary mb-2 ">Annual Income &nbsp;: &nbsp; &nbsp;  <?php echo customeummarmonyformate($itd['annual_tax']); ?></span>
+                                        <span class="text-dark text-hover-primary mb-2"><?php echo __('Total Income &nbsp;: &nbsp; &nbsp;&nbsp; &nbsp;'); ?> <?php echo  customeummarmonyformate($itd['taxable_income']); ?></span>
+                                        <span class="text-dark text-hover-primary mb-2 "><?php echo __('Annual Income &nbsp;: &nbsp; &nbsp;'); ?>  <?php echo customeummarmonyformate($itd['annual_tax']); ?></span>
                                     </div>
                                     <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
                                         <div>
@@ -117,7 +117,7 @@
                                         </div>
                                         <div>
                                         <?php if($itd['current_status']==0){ ?>
-                                        <button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value" value="continue" onclick="statuspopup(10,<?php echo $itd['id']; ?>)">Send Approval</button>
+                                        <button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value" value="continue" onclick="statuspopup(10,<?php echo $itd['id']; ?>)"><?php echo __('Send Approval'); ?></button>
                                         <?php }else{ ?>
                                            <span> <?php echo $stausresult[$itd['current_status']]['name']; ?> </span>
                                         <?php } ?>
@@ -132,7 +132,7 @@
                     <div class="col-lg-4">
                         <div class="card card-custom bg-primary" style="padding: 70px 0;">
                             <div class="card-body text-center ">
-                                <a class="h3 text-white" href="index.php?option=COM_INSERT_IT_DECLARATION&assessment_year=<?php echo $assessment_year; ?>&version_no=<?php echo count((array)$itds); ?>"><i class="fas fa-plus"></i> Create New Plan</a>
+                                <a class="h3 text-white" href="index.php?option=COM_INSERT_IT_DECLARATION&assessment_year=<?php echo $assessment_year; ?>&version_no=<?php echo count((array)$itds); ?>"><i class="fas fa-plus"></i> <?php echo __('Create New Plan'); ?></a>
                             </div>
                         </div>
                     </div>

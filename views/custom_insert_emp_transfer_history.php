@@ -212,7 +212,7 @@ foreach ($defalut_fields as $dfield) {
 
 
                         <div class="card-header">
-                            <h5>Employees Bulk Transfer</h5>
+                            <h5><?= __('Employees Bulk Transfer') ?></h5>
                             <div class="row mt-4">
                                 <div class="col-lg-2 text-right"><span>Month</span></div>
                                 <div class="col-lg-2">
@@ -233,7 +233,7 @@ foreach ($defalut_fields as $dfield) {
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="hidden" id="filterby" name="filterby">
-                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-t-5"  name="applyform" value="apply">Apply</button>
+                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-t-5"  name="applyform" value="apply"><?= __('Apply') ?></button>
                                 </div>
                             </div>
                         </div>
@@ -274,7 +274,7 @@ foreach ($defalut_fields as $dfield) {
                     <input type="hidden" id="bulkmove_empids">
                     <input type="hidden" id="bulkchange_categoryid">
                     <input type="hidden" id="bulkmove_toid">
-                    <button id="previewbtn"  style="display: none" class="btn btn-primary btn-shadow-hover font-weight-bold m-t-30" onclick="bulkconfirmpopup()">Preview</button>
+                    <button id="previewbtn"  style="display: none" class="btn btn-primary btn-shadow-hover font-weight-bold m-t-30" onclick="bulkconfirmpopup()"><?= __('Preview') ?></button>
 
                 </div>
 
@@ -289,7 +289,7 @@ foreach ($defalut_fields as $dfield) {
                     <thead>
                         <tr>
                             <th scope="col" style="width: 5%;">&nbsp;&nbsp;&nbsp;&nbsp;<i class="flaticon-list-3"> </i> </th>
-                            <th scope="col" style="width: 15%;">NAME </th>
+                            <th scope="col" style="width: 15%;"><?= __('NAME') ?></th>
 
                             <?php foreach ($employees_fieldlist as $empkey => $empfield) {
                                 if(in_array($empkey, (array)$defalut_fields))  {

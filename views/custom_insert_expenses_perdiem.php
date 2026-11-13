@@ -18,12 +18,12 @@
     htmlRows += '<tr class="">';
     htmlRows += '<td> <input type="hidden" name="perdiem_rowid[]" value="" >'+count+'</td>';
 
-    htmlRows += '<td class="w-full"><select aria-label="Perdiem Name[]" class="form-select js-example-basic-single" name="perdiem_name[]">';
+    htmlRows += '<td class="w-full"><select aria-label="<?php echo __('Perdiem Name[]'); ?>" class="form-select js-example-basic-single" name="perdiem_name[]">';
     <?php foreach($countries as $countr){ ?>
         htmlRows += '<option value="<?php echo $countr['id']; ?>"><?php echo preg_replace("/[\r\n'\"]/", '', $countr['country_name']); ?></option>';
     <?php } ?>
     htmlRows += '</select></td>';
-    htmlRows += '<td><input aria-label="Perdiem Amount[]" type="text" name="perdiem_amount[]"  class="form-control text-right decimalnumberallowe" autocomplete="off" required></td>';
+    htmlRows += '<td><input aria-label="<?php echo __('Perdiem Amount[]'); ?>" type="text" name="perdiem_amount[]"  class="form-control text-right decimalnumberallowe" autocomplete="off" required></td>';
 
        htmlRows += '</tr>';
        $('#perdiemtable').append(htmlRows);
@@ -36,7 +36,7 @@
       $(".perdiemname").each(function(index) {
         if ($.inArray($(this).val(), tempary) != -1)
         {
-          alert("already exist this mileage");
+          alert(<?php echo json_encode(__('already exist this mileage')); ?>);
           $(this).val("");
         }
         tempary.push($(this).val());
@@ -53,8 +53,8 @@
             <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer" id="perdiemtable">
               <tr>
                 <th scope="col" class="" style="width: 2%;">#</th>
-                <th scope="col" class="" style="width: 25%;">Name</th>
-                <th scope="col" class="thheader" style="width: 20%;">Rate Per Diem</th>
+                <th scope="col" class="" style="width: 25%;"><?php echo __('Name'); ?></th>
+                <th scope="col" class="thheader" style="width: 20%;"><?php echo __('Rate Per Diem'); ?></th>
               </tr>
               <?php $k=0;
               if(count((array)$expense_perdiemlist) == 0){
@@ -67,7 +67,7 @@
                <input type="hidden" name="perdiem_rowid[]" class="form-control itemRow_perdiem" value="<?php echo $inst['id']; ?>" <?php echo $readonly; ?>>
              </td>
              <td class="w-full">
-              <select aria-label="Perdiem Name[]" class="form-select js-example-basic-single" name="perdiem_name[]">
+              <select aria-label="<?php echo __('Perdiem Name[]'); ?>" class="form-select js-example-basic-single" name="perdiem_name[]">
                     <?php foreach($countries as $countr){ ?>
                     <option value="<?php echo $countr['id']; ?>" <?php echo $inst['name']==$countr['id']?"selected":""; ?>><?php echo $countr['country_name']; ?></option>
                     <?php } ?>
@@ -75,7 +75,7 @@
 
             </td>
             <td>
-                <input aria-label="Perdiem Amount[]" type="text" name="perdiem_amount[]" class="form-control text-right decimalnumberallowe" value="<?php echo $inst['amount']; ?>" autocomplete="off" <?php echo $readonly; ?> required>
+                <input aria-label="<?php echo __('Perdiem Amount[]'); ?>" type="text" name="perdiem_amount[]" class="form-control text-right decimalnumberallowe" value="<?php echo $inst['amount']; ?>" autocomplete="off" <?php echo $readonly; ?> required>
             </td>
           </tr>
         <?php }  ?>
@@ -83,11 +83,11 @@
     </div>
     <div class="row mb-5">
       <div class="col-xs-12 col-sm-3 col-md-3 col-lg-6">
-        <button class="btn btn-success "  onclick="addperdiemrows()" id="addRows" type="button">+ Add More</button>
+        <button class="btn btn-success "  onclick="addperdiemrows()" id="addRows" type="button"><?php echo __('+ Add More'); ?></button>
       </div>
     </div>
     <input type="hidden" name="rid" value="<?php echo $rid; ?>" />
-    <button id="kt_login_signin_submit" class="btn btn-primary m-l-10 mt-10 col-lg-2"   name="submit_continue" value="saveexpperdiem"><i class="la la-check"></i> Save Per Diem</button>
+    <button id="kt_login_signin_submit" class="btn btn-primary m-l-10 mt-10 col-lg-2"   name="submit_continue" value="saveexpperdiem"><i class="la la-check"></i> <?php echo __('Save Per Diem'); ?></button>
   </div>
 </div>
 </form>

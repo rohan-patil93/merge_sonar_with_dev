@@ -34,11 +34,11 @@ foreach($pasetting_res['check_performance_appraisal_settings'] as $cpas){
 </script>
 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
     <div class="card-header">
-        <h5>Performance Appraisal Settings</h5>
+        <h5><?php echo __('Performance Appraisal Settings'); ?></h5>
         <div class="card-header-right">
             <?php if($_GET['option'] != "COM_VIEW_PERFORMANCE_APPRAISAL_SETTINGS"){ ?>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                    <i class="icofont icofont-reply"></i>  Back
+                    <i class="icofont icofont-reply"></i>  <?php echo __('Back'); ?>
                 </a>
             <?php } ?>
         </div>

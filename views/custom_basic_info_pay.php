@@ -48,7 +48,7 @@
  <div class="card card-custom gutter-b">
   <div class="" id="kt_page_sticky_card">
     <div class="card-header">
-      <h5>My Pay <?php //echo $employee_id; ?></h5>
+      <h5><?= __("My Pay") ?> <?php //echo $employee_id; ?></h5>
     </div>
     <div class="card-body">
       <div class="row">
@@ -58,7 +58,7 @@
               <div class="card p-2">
                 <div class="card-header p-2 f-w-600" id="headingOne3">
                   <div class="card-title" data-bs-toggle="collapse" data-bs-target="#collapseOne3">
-                    Pay Years
+                    <?= __("Pay Years") ?>
                   </div>
                 </div>
                 <?php foreach((array)$total_monthly_earnings as $keyyear=>$yeardata ){ ?>
@@ -73,7 +73,7 @@
                       <div class="example-preview">
                         <div class="form-group row">
                           <?php foreach((array)$yeardata as $monthkey=>$monthdata){   ?>
-                          <div style="cursor: pointer;" onclick="showpayslip(<?php echo $employee_id.",".$keyyear.",".$monthkey; ?>)" class="col-12 col-form-label "><?php echo date("F", strtotime($keyyear."-".$monthkey."-01")); ?></div>
+                          <div style="cursor: pointer;" onclick="showpayslip(<?php echo $employee_id.",".$keyyear.",".$monthkey; ?>)" class="col-12 col-form-label "><?= __(date("F", strtotime($keyyear."-".$monthkey."-01"))) ?></div>
                           <?php } ?>
                         </div>
                       </div>

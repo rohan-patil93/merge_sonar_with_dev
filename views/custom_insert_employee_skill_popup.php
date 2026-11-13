@@ -77,8 +77,8 @@ foreach($setemp_skills as $setskil){
     }
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Add Employee Skils</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Add Employee Skils') ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 </div>
 
 <div class="modal-body">
@@ -86,13 +86,13 @@ foreach($setemp_skills as $setskil){
 }?>
     <div class="row col-lg-12">
         <div class="form-group col-lg-6">
-            <span class="form-label">Skills <span class="text-danger">*</span></span>
+            <span class="form-label"><?= __('Skills') ?> <span class="text-danger">*</span></span>
             <span class="d-block error-message text-danger"></span>
-             <select aria-label="Skill" class="form-select js-example-basic-single requried_field" name="skill_id" id="skill_id" onchange="selectSkills(this.value)">
-                <option value="">Select Any One</option>
+             <select aria-label="<?php echo __('Skill'); ?>" class="form-select js-example-basic-single requried_field" name="skill_id" id="skill_id" onchange="selectSkills(this.value)">
+                <option value=""><?= __('Select Any One') ?></option>
                 <?php if(count((array)$emp_skills)>0){ foreach ($emp_skills as $skill) { ?>
                     <option <?php if(in_array($skill['id'],$esk)){ ?> disabled="disabled" <?php
-} ?> <?php echo $emp_skills_data['skill_id'] == $skill['id']?"selected":""; ?> value="<?php echo $skill['id']; ?>"><?php echo $skill['skill']; ?></option>
+} ?> <?php echo $emp_skills_data['skill_id'] == $skill['id']?"selected":""; ?> value="<?php echo $skill['id']; ?>"><?php echo __($skill['skill'] ?? ''); ?></option>
                 <?php } ?>
                 <?php } ?>
             </select>
@@ -100,14 +100,14 @@ foreach($setemp_skills as $setskil){
             <input type="hidden" name="company_id" value="<?php echo $_SESSION['company_id']; ?>" id="company_id">
         </div>
         <div class="form-group col-lg-6 <?php echo $event_disabled; ?> removeevent">
-            <span class="form-label">Years Of Exp <span class="text-danger">*</span></span>
+            <span class="form-label"><?= __('Years Of Exp') ?> <span class="text-danger">*</span></span>
             <span class="d-block error-message text-danger"></span>
-            <input aria-label="Years Of Exp" type="text" class="form-control text-right requried_field" id="years_of_exp"  name="years_of_exp" value="<?php echo $emp_skills_data['years_of_exp']; ?>">
+            <input aria-label="<?php echo __('Years Of Exp'); ?>" type="text" class="form-control text-right requried_field" id="years_of_exp"  name="years_of_exp" value="<?php echo $emp_skills_data['years_of_exp']; ?>">
         </div>
         <div class="form-group col-lg-6 <?php echo $event_disabled; ?> removeevent">
-            <span class="form-label">Rating<span class="text-danger">*</span></span>
+            <span class="form-label"><?= __('Rating') ?><span class="text-danger">*</span></span>
             <span class="d-block error-message text-danger"></span>
-            <select aria-label="Rating"  id="rating"  name="rating" class="form-select js-example-basic-single requried_field">
+            <select aria-label="<?php echo __('Rating'); ?>"  id="rating"  name="rating" class="form-select js-example-basic-single requried_field">
                 <option value="1" <?php echo $emp_skills_data['rating'] == 1?"selected":""; ?>>1</option>
                 <option value="2" <?php echo $emp_skills_data['rating'] == 2?"selected":""; ?>>2</option>
                 <option value="3" <?php echo $emp_skills_data['rating'] == 3?"selected":""; ?>>3</option>
@@ -121,14 +121,14 @@ foreach($setemp_skills as $setskil){
             </select>
         </div>
         <div class="form-group col-lg-6 <?php echo $event_disabled; ?> removeevent">
-            <span>Comments</span>
-            <textarea aria-label="Comments" class="form-control" id="comments"  name="comments"><?php echo $emp_skills_data['comments']; ?> </textarea>
+            <span><?= __('Comments') ?></span>
+            <textarea aria-label="<?php echo __('Comments'); ?>" class="form-control" id="comments"  name="comments"><?php echo $emp_skills_data['comments']; ?> </textarea>
         </div>
     </div>
 </div>
 <div class="modal-footer">
 
-    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 removeevent <?php echo $event_disabled; ?>" onclick="confirmsubmit();" name="submitform" value="exit"><i class="la la-check"></i>Save</button>
+    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 removeevent <?php echo $event_disabled; ?>" onclick="confirmsubmit();" name="submitform" value="exit"><i class="la la-check"></i><?= __('Save') ?></button>
 </div>
 <script type="text/javascript" src="assets/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
 <script type="text/javascript" src="assets/bower_components/multiselect/js/jquery.multi-select.js"></script>

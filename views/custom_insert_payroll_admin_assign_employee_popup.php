@@ -67,8 +67,8 @@ foreach($empesgindata as $empesginda){
 
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">Assign Pay Areas</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?php echo __('Assign Pay Areas'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 
 </div>
 
@@ -80,9 +80,9 @@ foreach($empesgindata as $empesginda){
             <tr>
                 <th scope="col">&nbsp;</th>
                 <th scope="col">#</th>
-                <th scope="col">Pay Area</th>
-                <th scope="col">Salary Run Day </th>
-                <th scope="col">Salary Pay Day</th>
+                <th scope="col"><?php echo __('Pay Area'); ?></th>
+                <th scope="col"><?php echo __('Salary Run Day'); ?> </th>
+                <th scope="col"><?php echo __('Salary Pay Day'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -99,7 +99,7 @@ foreach($empesgindata as $empesginda){
                             <td>
                                 <div class="checkbox-zoom zoom-primary mt-1">
                                             <label class="checkbox checkbox-outline checkbox-primary">
-                                                <input aria-label="Checkbox" type="checkbox" onclick="toinsertandpdateesignemployeeonlyone(<?php echo $row['id']; ?>,'<?php echo $row['id']; ?>')"  class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_sign)){ echo "checked";
+                                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" onclick="toinsertandpdateesignemployeeonlyone(<?php echo $row['id']; ?>,'<?php echo $row['id']; ?>')"  class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_sign)){ echo __('checked');
 }?> id="checkbox_<?php echo $row['id']; ?>_c1" type="checkbox" value="<?php echo $row['id']; ?>" onkeydown="" />    <span class="cr" <?php echo $disable; ?>>
                                                   <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                 </span>
@@ -123,7 +123,7 @@ foreach($empesgindata as $empesginda){
                                         <td>
                                             <div class="checkbox-zoom zoom-primary mt-1">
                                             <label class="checkbox checkbox-outline checkbox-primary">
-                                                <input aria-label="Checkbox" type="checkbox" onclick="toinsertandpdateesignemployeeonlyone(<?php echo $row['id']; ?>,'<?php echo $row['id']; ?>','<?php echo $row['display_name']; ?>')"  class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_sign)){ echo "checked";
+                                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" onclick="toinsertandpdateesignemployeeonlyone(<?php echo $row['id']; ?>,'<?php echo $row['id']; ?>','<?php echo $row['display_name']; ?>')"  class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_sign)){ echo __('checked');
 }?> id="checkbox_<?php echo $row['id']; ?>_c2" type="checkbox" value="<?php echo $row['id']; ?>" <?php echo $disable; ?> onkeydown="" />    <span class="cr">
                                                   <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                 </span>
@@ -147,7 +147,7 @@ foreach($empesgindata as $empesginda){
                                                 <td>
                                                     <div class="checkbox-zoom zoom-primary mt-1">
                                             <label class="checkbox checkbox-outline checkbox-primary">
-                                                <input aria-label="Checkbox" type="checkbox" onclick="toinsertandpdateesignemployeeonlyone(<?php echo $row['id']; ?>,'<?php echo $row['id']; ?>','<?php echo $row['display_name']; ?>')"  class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_sign)){ echo "checked";
+                                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" onclick="toinsertandpdateesignemployeeonlyone(<?php echo $row['id']; ?>,'<?php echo $row['id']; ?>','<?php echo $row['display_name']; ?>')"  class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_sign)){ echo __('checked');
 }?> id="checkbox_<?php echo $row['id']; ?>_all" type="checkbox" value="<?php echo $row['id']; ?>"  <?php echo $disable; ?> onkeydown="" />    <span class="cr">
                                                   <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                 </span>
@@ -183,5 +183,5 @@ foreach($empesgindata as $empesginda){
                                 </div>
 
 <div class="modal-footer" >
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
 </div>

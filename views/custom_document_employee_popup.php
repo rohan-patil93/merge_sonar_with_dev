@@ -58,8 +58,8 @@ if(isset($_REQUEST['month'])){
 		type: "warning",
 		showCancelButton: true,
 		confirmButtonClass: "btn-danger",
-		confirmButtonText: "Yes",
-		cancelButtonText: "No",
+		confirmButtonText: <?= json_encode(__('Yes')) ?>,
+		cancelButtonText: <?= json_encode(__('No')) ?>,
 		closeOnConfirm: true,
 		closeOnCancel: true
 	},
@@ -87,8 +87,8 @@ if(isset($_REQUEST['month'])){
   }
 </script>
 <div class="modal-header">
-	<h5 class="modal-title">Assign / Unassign Emloyees</h5>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<h5 class="modal-title"><?= __('Assign / Unassign Emloyees') ?></h5>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 </div>
 <div class="modal-body">
 	<?php  //print_r($_SESSION['document'][$_POST['assement_year']][$_POST['list_id']]); ?>
@@ -96,8 +96,8 @@ if(isset($_REQUEST['month'])){
 		<thead >
 			<tr>
 				<th scope="col" width="2%">#</th>
-				<th scope="col" width="15%">Name </th>
-				<th scope="col" width="10%">Email</th>
+				<th scope="col" width="15%"><?= __('Name') ?> </th>
+				<th scope="col" width="10%"><?= __('Email') ?></th>
 				<th scope="col" width="10%"></th>
 				<th scope="col" width="2%"></th>
 			</tr>
@@ -111,7 +111,7 @@ if(isset($_REQUEST['month'])){
 							<?php if($row['image']!="") {?>
 								<img src="uploads/all/<?php echo $row['image']; ?>"   class="img-radius img-50 align-top m-r-15" onerror="this.src='uploads/all/no-image.jpg';">
 							<?php } else { ?>
-								<span  alt="user image" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($row['display_name']); ?></span>
+								<span  alt="<?= __('user image') ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($row['display_name']); ?></span>
 							<?php } ?>
 							<div class="d-inline-block width73">
 								<a href="#!" class="text-capitalize"><h6>   <?php echo $row['display_name']; ?></h6></a>
@@ -123,9 +123,9 @@ if(isset($_REQUEST['month'])){
 					<td class="p-2">
 						<p>
 							<?php if(isset($aemp[$row['id']])){ ?> 
-								<span class="f-14 f-w-600 text-danger">Un-Assign</span>
+								<span class="f-14 f-w-600 text-danger"><?= __('Un-Assign') ?></span>
 							<?php }else{ ?>
-								<span class="f-14 f-w-600  text-success">Assign</span>
+								<span class="f-14 f-w-600  text-success"><?= __('Assign') ?></span>
 							<?php }  ?>
 						</p>
 					</td>
@@ -145,8 +145,8 @@ if(isset($_REQUEST['month'])){
 		<input type="hidden" name="type" id="type" value="<?php echo $_REQUEST['type']; ?>">
 		<input type="hidden" name="month_type" id="month_type" value="<?php echo $month_type ?>">
 
-		<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitform()">Release</button>
+		<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
+		<button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitform()"><?= __('Release') ?></button>
 	</div>
 	<script type="text/javascript">
 		$(".js-example-basic-single").select2();

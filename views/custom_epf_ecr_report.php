@@ -48,7 +48,7 @@ $ecr_list = json_decode($configesponse,1);
 						<input class="form-control" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input" />
 					</div>
 					<div class="col-3">
-					<button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light">Submit</button>
+					<button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light"><?php echo __('Submit'); ?></button>
 				</div>
 				</div>
 				
@@ -96,14 +96,14 @@ $ecr_list = json_decode($configesponse,1);
 									<th scope="col">Employee ID</th>
 									<th scope="col">Uan</th>
 									<th scope="col">Member Name</th>
-									<th scope="col">Gross Wages</th>
-									<th scope="col">EPF Wages</th>
-									<th scope="col">EPS Wages</th>
-									<th scope="col">EDLI Wages</th>
+									<th scope="col"><?php echo __('Gross Wages'); ?></th>
+									<th scope="col"><?php echo __('EPF Wages'); ?></th>
+									<th scope="col"><?php echo __('EPS Wages'); ?></th>
+									<th scope="col"><?php echo __('EDLI Wages'); ?></th>
 									<th scope="col" style="text-align:right">EPF Contribution Remitted</th>
 									<th scope="col" style="text-align:right">EPS Contribution Remitted</th>
 									<th scope="col" style="text-align:right">EPF & EPS Diff Remitted</th>
-									<th scope="col">NCP Days</th>
+									<th scope="col"><?php echo __('NCP Days'); ?></th>
 									<th scope="col">Refund Of Advances</th>
 								</tr>
 							</thead>

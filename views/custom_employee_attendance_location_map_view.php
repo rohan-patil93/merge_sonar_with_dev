@@ -8,7 +8,7 @@ $attendance_date = $_GET['attendance_date'] ?? ($_POST['attendance_date'] ?? '')
 $employee_name_param = $_GET['emp_name'] ?? '';
 
 if (!$employee_id || !$attendance_date) {
-    echo '<div class="alert alert-danger">Invalid request</div>';
+    echo '<div class="alert alert-danger">' . __('Invalid request') . '</div>';
     exit;
 }
 
@@ -47,35 +47,35 @@ $page_data = json_encode(
 <div class="page-body" id="attendanceLocationMapPage" data-attendance='<?= $page_data ?>'>
     <div class="card">
         <div class="card-header">
-            <h5>Attendance Location Map</h5>
+            <h5><?= __('Attendance Location Map') ?></h5>
         </div>
         <div class="card-body">
             <div class="attendance-location-header">
                 <div class="attendance-location-employee">
-                    <div class="title">Employee</div>
+                    <div class="title"><?= __('Employee') ?></div>
                     <div class="value"><?= htmlspecialchars($employee_name, ENT_QUOTES) ?></div>
                 </div>
                 <div class="attendance-location-employee">
-                    <div class="title">Emp Code</div>
+                    <div class="title"><?= __('Emp Code') ?></div>
                     <div class="value"><?= htmlspecialchars($employee_code, ENT_QUOTES) ?></div>
                 </div>
                 <div class="attendance-location-employee">
-                    <div class="title">Date</div>
+                    <div class="title"><?= __('Date') ?></div>
                     <div class="value"><?= htmlspecialchars(date('d-m-Y', strtotime($attendance_date)), ENT_QUOTES) ?></div>
                 </div>
             </div>
 
             <div class="attendance-summary">
                 <div class="summary-card">
-                    <div class="summary-label">Check-ins</div>
+                    <div class="summary-label"><?= __('Check-ins') ?></div>
                     <div class="summary-value"><?= $total_checkins ?></div>
                 </div>
                 <div class="summary-card">
-                    <div class="summary-label">Check-outs</div>
+                    <div class="summary-label"><?= __('Check-outs') ?></div>
                     <div class="summary-value"><?= $total_checkouts ?></div>
                 </div>
                 <div class="summary-card">
-                    <div class="summary-label">Total Duration</div>
+                    <div class="summary-label"><?= __('Total Duration') ?></div>
                     <div class="summary-value"><?= htmlspecialchars($total_duration, ENT_QUOTES) ?></div>
                 </div>
             </div>
@@ -83,12 +83,12 @@ $page_data = json_encode(
             <div class="attendance-map-container">
                 <div id="attendanceLocationMap" class="attendance-location-map"></div>
                 <div class="attendance-map-legend">
-                    <div class="legend-title">Legend</div>
-                    <div class="legend-item"><span class="legend-dot legend-dot-in"></span>Clock In</div>
-                    <div class="legend-item"><span class="legend-dot legend-dot-out"></span>Clock Out</div>
+                    <div class="legend-title"><?= __('Legend') ?></div>
+                    <div class="legend-item"><span class="legend-dot legend-dot-in"></span><?= __('Clock In') ?></div>
+                    <div class="legend-item"><span class="legend-dot legend-dot-out"></span><?= __('Clock Out') ?></div>
                 </div>
                 <div id="attendanceLocationEmpty" class="attendance-location-empty">
-                    No location data available for this date.
+                    <?= __('No location data available for this date.') ?>
                 </div>
             </div>
 
@@ -98,16 +98,16 @@ $page_data = json_encode(
                         <thead>
                             <tr>
                                 <th scope="col" width="5%">#</th>
-                                <th scope="col">Clock In</th>
-                                <th scope="col">Clock In Location</th>
-                                <th scope="col">Clock Out</th>
-                                <th scope="col">Clock Out Location</th>
+                                <th scope="col"><?= __('Clock In') ?></th>
+                                <th scope="col"><?= __('Clock In Location') ?></th>
+                                <th scope="col"><?= __('Clock Out') ?></th>
+                                <th scope="col"><?= __('Clock Out Location') ?></th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php if (empty($details)) : ?>
                             <tr>
-                                <td colspan="5" class="text-center text-muted">No attendance details found</td>
+                                <td colspan="5" class="text-center text-muted"><?= __('No attendance details found') ?></td>
                             </tr>
                         <?php else : ?>
                             <?php $i = 1; ?>

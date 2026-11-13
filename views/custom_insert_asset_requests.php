@@ -78,7 +78,7 @@ $reporting_manager = $details['reporting_manager'];
                     <span>Asset Category <span class="requried">*</span></span>
                     <span class="d-block error-message text-danger"></span>
                     <select aria-label="Category" class="form-select js-example-basic-single requried_field" name="category_id" id="category_id" onchange="selectAssetCategory()">
-                            <option value="">Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
                     <?php foreach ($assetcategory as $ac){ ?>
                         <option  value="<?php echo $ac['id']; ?>" <?php echo $request['category_id']==$ac['id']?"selected":"";?>><?php echo ucwords($ac['category_description']); ?></option>
                     <?php } ?>
@@ -98,7 +98,7 @@ $reporting_manager = $details['reporting_manager'];
                                     <span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                     </span>
-                                    <span><?php echo $asset_attributes['name']; ?></span>
+                                    <span><?php echo htmlspecialchars(__($asset_attributes['name'] ?? '')); ?></span>
                                   </label>
                             </div>
                     <?php } ?>
@@ -119,13 +119,13 @@ $reporting_manager = $details['reporting_manager'];
                         <div class="radio radio-inline">
                               <label class="form-label">
                                 <input aria-label="Delivery Type" type="radio" name="delivery_type" value="S" style="display:none;" <?php echo ($request['delivery_type']=="S" || $request['delivery_type']=="")?"checked":"";?> onclick="getDeliveryType()" onkeydown="">
-                                <i class="helper"></i>Self Pickup
+                                <i class="helper"></i><?= __('Self Pickup') ?>
                               </label>
                         </div>
                         <div class="radio radio-inline">
                               <label class="form-label">
                                 <input aria-label="Delivery Type" type="radio" name="delivery_type" value="D" style="display:none" <?php echo $request['delivery_type']=="D"?"checked":"";?> onclick="getDeliveryType()" onkeydown="">
-                                <i class="helper"></i>Deliver Through Logistics Partner
+                                <i class="helper"></i><?= __('Deliver Through Logistics Partner') ?>
                               </label>
                         </div>
                     </div>
@@ -149,7 +149,7 @@ $reporting_manager = $details['reporting_manager'];
                     <span>Location <span class="text-danger">*</span></span>
                     <span class="d-block error-message text-danger"></span>
                     <select aria-label="Location"  class="form-select js-example-basic-single requried_field" name="location_id">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($locations as $location) { ?>
                             <option location value="<?php echo $location['id']; ?>"  <?php echo $request['location_id']==$location['id']?"selected":"";?>><?php echo ucwords($location['location_name']); ?></option>
                         <?php } ?>
@@ -162,9 +162,9 @@ $reporting_manager = $details['reporting_manager'];
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
     <?php if($reporting_manager['reports_to'] !=""){ ?>
-        <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetailsRequest()">Submit</button>
+        <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetailsRequest()"><?= __('Submit') ?></button>
     <?php }else{ ?>
         <span class="text-danger f-12"><?php echo $_SESSION['error_message']['9001']; ?></span>
     <?php } ?>

@@ -165,10 +165,10 @@ function showmarriagedate(value) {
    htmlRows += '<tr>';
    htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="Checkbox" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
 
-   htmlRows += '<td><input aria-label="Enter Depandent Name" type="text" name="dependent_name[]" placeholder="Enter Depandent Name "  class="form-control " autocomplete="off">  </td>';
-   htmlRows += '<td><select aria-label="Dependent Relationship Type[]" class="form-control form-select js-example-basic-single" name="dependent_relationship_type[]" > <option value="0"> Select Any One</option> <?php foreach ($relatypedata as  $reladata) {   ?> <option   value="<?php echo $reladata['id']; ?>"> <?php echo $reladata['relation_name']; ?></option> <?php
+   htmlRows += '<td><input aria-label="Enter Depandent Name" type="text" name="dependent_name[]" placeholder="<?= __('Enter Depandent Name') ?>"  class="form-control " autocomplete="off">  </td>';
+   htmlRows += '<td><select aria-label="Dependent Relationship Type[]" class="form-control form-select js-example-basic-single" name="dependent_relationship_type[]" > <option value="0"><?= __('Select Any One') ?></option> <?php foreach ($relatypedata as  $reladata) {   ?> <option   value="<?php echo $reladata['id']; ?>"> <?php echo $reladata['relation_name']; ?></option> <?php
 } ?></select>  </td>';
-   htmlRows += '<td><input aria-label="Date Of Birth" type="text" name="dependent_date_of_birth[]"  class="form-control datepicker"   autocomplete="off" placeholder="Date Of Birth">  </td>';
+   htmlRows += '<td><input aria-label="Date Of Birth" type="text" name="dependent_date_of_birth[]"  class="form-control datepicker"   autocomplete="off" placeholder="<?= __('Date Of Birth') ?>">  </td>';
    htmlRows += '</tr>';
    $('#deptable').append(htmlRows);
    $(".js-example-basic-single").select2();
@@ -191,11 +191,11 @@ function showmarriagedate(value) {
    htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="Checkbox" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
 
 
-   htmlRows += '<td><input aria-label="Enter Contact Name" type="text" name="contact_name[]"  class="form-control " placeholder="Enter Contact Name"  autocomplete="off"> </td>';
-   htmlRows += '<td><select aria-label="Contact Relationship[]" class="form-control form-select js-example-basic-single" name="contact_relationship[]" > <option value="0"> Select Any One</option> <?php foreach ($relatypedata as  $reladata) {   ?> <option   value="<?php echo $reladata['id']; ?>"> <?php echo $reladata['relation_name']; ?></option> <?php
+   htmlRows += '<td><input aria-label="Enter Contact Name" type="text" name="contact_name[]"  class="form-control " placeholder="<?= __('Enter Contact Name') ?>"  autocomplete="off"> </td>';
+   htmlRows += '<td><select aria-label="Contact Relationship[]" class="form-control form-select js-example-basic-single" name="contact_relationship[]" > <option value="0"><?= __('Select Any One') ?></option> <?php foreach ($relatypedata as  $reladata) {   ?> <option   value="<?php echo $reladata['id']; ?>"> <?php echo $reladata['relation_name']; ?></option> <?php
 } ?></select>    </td>';
-   htmlRows += '<td><input aria-label="Enter Home Number" type="text" name="contact_home_no[]" placeholder="Enter Home Number"  class="form-control "  autocomplete="off">  </td>';
-   htmlRows += '<td><input aria-label="Enter Mobile Number" type="text" name="contact_mobile_no[]"  class="form-control "  placeholder="Enter Mobile Number"  autocomplete="off">  </td>';
+   htmlRows += '<td><input aria-label="Enter Home Number" type="text" name="contact_home_no[]" placeholder="<?= __('Enter Home Number') ?>"  class="form-control "  autocomplete="off">  </td>';
+   htmlRows += '<td><input aria-label="Enter Mobile Number" type="text" name="contact_mobile_no[]"  class="form-control "  placeholder="<?= __('Enter Mobile Number') ?>"  autocomplete="off">  </td>';
 
    htmlRows += '</tr>';
    $('#emergetable').append(htmlRows);
@@ -218,9 +218,9 @@ function showmarriagedate(value) {
    htmlRows += '<tr>';
    htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="Checkbox" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
 
-   htmlRows += '<td><input aria-label="Enter Company Name" type="text" name="company_name[]"  placeholder="Enter Company Name" class="form-control " autocomplete="off">  </td>';
-   htmlRows += '<td><input aria-label="Enter Job Description" type="text" name="job_descrption[]"  placeholder="Enter Job Description" class="form-control " autocomplete="off">  </td>';
-   htmlRows += '<td><input aria-label="From Date" type="text" name="work_from[]"  placeholder="From Date" class="form-control datepicker"   autocomplete="off"> <input aria-label="To Date" type="text" name="work_to[]"  placeholder="To Date" class="form-control datepicker mt-2" autocomplete="off">  </td>';
+   htmlRows += '<td><input aria-label="Enter Company Name" type="text" name="company_name[]"  placeholder="<?= __('Enter Company Name') ?>" class="form-control " autocomplete="off">  </td>';
+   htmlRows += '<td><input aria-label="Enter Job Description" type="text" name="job_descrption[]"  placeholder="<?= __('Enter Job Description') ?>" class="form-control " autocomplete="off">  </td>';
+   htmlRows += '<td><input aria-label="From Date" type="text" name="work_from[]"  placeholder="<?= __('From Date') ?>" class="form-control datepicker"   autocomplete="off"> <input aria-label="To Date" type="text" name="work_to[]"  placeholder="<?= __('To Date') ?>" class="form-control datepicker mt-2" autocomplete="off">  </td>';
    htmlRows += '</tr>';
    $('#extable').append(htmlRows);
    $(".js-example-basic-single").select2();
@@ -242,10 +242,10 @@ function showmarriagedate(value) {
    htmlRows += '<tr>';
    htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="Checkbox" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
 
-   htmlRows += '<td><input aria-label="Enter Instistute name" type="text" name="institute_name[]"  placeholder="Enter Instistute name" class="form-control " autocomplete="off">  </td>';
-   htmlRows += '<td><select aria-label="Education Type[]" class="form-control form-select js-example-basic-single" name="education_type[]" > <option value="0"> Select Any One</option> <?php foreach ($edutypedata as  $edutype) {   ?> <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo $edutype['genc_detail_name']; ?></option> <?php
+   htmlRows += '<td><input aria-label="Enter Instistute name" type="text" name="institute_name[]"  placeholder="<?= __('Enter Instistute name') ?>" class="form-control " autocomplete="off">  </td>';
+   htmlRows += '<td><select aria-label="Education Type[]" class="form-control form-select js-example-basic-single" name="education_type[]" > <option value="0"><?= __('Select Any One') ?></option> <?php foreach ($edutypedata as  $edutype) {   ?> <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo $edutype['genc_detail_name']; ?></option> <?php
 } ?></select> </td>';
-   htmlRows += '<td><input aria-label="Start Date" type="text" name="start_date[]" placeholder="Start Date"  class="form-control datepicker"  autocomplete="off"> <input aria-label="End Date" type="text" name="end_date[]"  class="form-control datepicker mt-2"   autocomplete="off" placeholder="End Date">  </td>';
+   htmlRows += '<td><input aria-label="Start Date" type="text" name="start_date[]" placeholder="<?= __('Start Date') ?>"  class="form-control datepicker"  autocomplete="off"> <input aria-label="End Date" type="text" name="end_date[]"  class="form-control datepicker mt-2"   autocomplete="off" placeholder="<?= __('End Date') ?>">  </td>';
    htmlRows += '<td><input aria-label="Enter Score" type="text" name="score[]"  class="form-control " placeholder ="Enter Score" autocomplete="off">  </td>';
    htmlRows += '</tr>';
    $('#edutable').append(htmlRows);
@@ -346,7 +346,7 @@ position: absolute;
 
      <div class="card">
       <div class="card-header  ">
-       <h5>Employee</h5>
+       <h5><?= __('Employee') ?></h5>
 
                 <div class="checkbox-fade fade-in-primary float-right" >
                  <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
@@ -379,7 +379,7 @@ position: absolute;
                           <input type="hidden" name="roll_short_code" value="<?php echo EMPLOYEE_ONBOARDING; ?>">
                         <?php } ?>
 
-                      <h3> Basic Info  </h3>
+                      <h3><?= __('Basic Info') ?></h3>
                       <fieldset>
                        <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
 
@@ -389,7 +389,7 @@ position: absolute;
                               <span class="col-form-label">Employee Code <span class="text-danger">*</span></span>
                             <div class=" input-icon-right">
                              <?php if($_SESSION['emp_code_genrate']==0){ ?>
-                             <input aria-label="Enter Employee Code"  class="form-control form-control-lg required" type="text" placeholder="Enter Employee Code" name="emp_code" value="<?php echo $empdata['emp_code']; ?>" />
+                             <input aria-label="Enter Employee Code"  class="form-control form-control-lg required" type="text" placeholder="<?= __('Enter Employee Code') ?>" name="emp_code" value="<?php echo $empdata['emp_code']; ?>" />
                             <?php }else{ ?>
                                <input aria-label="Emp Code"  class="form-control form-control-lg required" type="text" readonly name="emp_code" value="<?php echo $empdata['emp_code']; ?>" />
                                <input type="hidden" name="emp_code_genrate" value="<?php echo $_SESSION['emp_code_genrate']; ?>">
@@ -400,9 +400,9 @@ position: absolute;
                        </div>
                        <div class="col-xl-6"  >
                          <div class="mt-2"  >
-                          <span class="col-form-label">Display Name</span>
+                          <span class="col-form-label"><?= __('Display Name') ?></span>
                           <div class=" input-icon-right">
-                           <input aria-label="Enter User Name" class="form-control form-control-lg   text-capitalize"   type="text" name="display_name" placeholder="Enter User Name " value="<?php echo $empdata['display_name']; ?>" />
+                           <input aria-label="Enter User Name" class="form-control form-control-lg   text-capitalize"   type="text" name="display_name" placeholder="<?= __('Enter User Name') ?>" value="<?php echo $empdata['display_name']; ?>" />
                          </div>
                        </div>
                      </div>
@@ -411,15 +411,15 @@ position: absolute;
                        <div class="mt-2" >
                         <span class="col-form-label">First Name <span class="text-danger">*</span></span>
                         <div class=" input-icon-right">
-                         <input aria-label="Input field" class="form-control required  form-control-lg text-capitalize <?php echo $emtyy; ?>" type="text" placeholder="Enter First Name" name="first_name" value="<?php echo $empdata['first_name']; ?>"/>
+                         <input aria-label="Input field" class="form-control required  form-control-lg text-capitalize <?php echo $emtyy; ?>" type="text" placeholder="<?= __('Enter First Name') ?>" name="first_name" value="<?php echo $empdata['first_name']; ?>"/>
                        </div>
                      </div>
                    </div>
                    <div class="col-xl-4" >
                      <div class="mt-2"  >
-                      <span class="col-form-label">Middle Name </span>
+                      <span class="col-form-label"><?= __('Middle Name') ?></span>
                       <div class="input-group input-icon-right">
-                       <input aria-label="Enter Middle Name" class="form-control   form-control-lg  text-capitalize" type="text" placeholder="Enter Middle Name" name="middle_name" value="<?php echo $empdata['middle_name']; ?>"/>
+                       <input aria-label="Enter Middle Name" class="form-control   form-control-lg  text-capitalize" type="text" placeholder="<?= __('Enter Middle Name') ?>" name="middle_name" value="<?php echo $empdata['middle_name']; ?>"/>
                      </div>
                    </div>
                  </div>
@@ -427,7 +427,7 @@ position: absolute;
                    <div class="mt-2" >
                     <span class="col-form-label">Last Name <span class="text-danger">*</span></span>
                       <div class="input-icon-right">
-                       <input aria-label="Enter last Name" class="form-control form-control-lg required  text-capitalize" type="text" placeholder="Enter last Name" name="last_name" value="<?php echo $empdata['last_name']; ?>"/>
+                       <input aria-label="Enter last Name" class="form-control form-control-lg required  text-capitalize" type="text" placeholder="<?= __('Enter last Name') ?>" name="last_name" value="<?php echo $empdata['last_name']; ?>"/>
                      </div>
                    </div>
                  </div>
@@ -436,33 +436,33 @@ position: absolute;
                    <div class="mt-2" >
                     <span class="col-form-label">Email <span class="text-danger">*</span></span>
                     <div class=" input-icon-right">
-                     <input aria-label="Input field"  class="form-control form-control-lg  required  <?php echo $text_color_email; ?>" type="text" placeholder="Enter Your Email Address" name="email_id" value="<?php echo $empdata['email_id']; ?>" />
+                     <input aria-label="Input field"  class="form-control form-control-lg  required  <?php echo $text_color_email; ?>" type="text" placeholder="<?= __('Enter Your Email Address') ?>" name="email_id" value="<?php echo $empdata['email_id']; ?>" />
                    </div>
                  </div>
                </div>
 
                <div class="col-xl-6"  >
                  <div class="mt-2"  >
-                  <span class="col-form-label">Contact</span>
+                  <span class="col-form-label"><?= __('Contact') ?></span>
                   <div class="input-group input-icon-right">
-                   <input aria-label="Enter Contact Number" class="form-control form-control-lg  " type="number" placeholder="Enter Contact Number" name="phone" value="<?php echo $empdata['phone']; ?>"/>
+                   <input aria-label="Enter Contact Number" class="form-control form-control-lg  " type="number" placeholder="<?= __('Enter Contact Number') ?>" name="phone" value="<?php echo $empdata['phone']; ?>"/>
                  </div>
                </div>
              </div>
 
              <div class="col-xl-6" >
                <div class="mt-2" >
-                <span class="col-form-label">Address</span>
-                  <textarea aria-label="Text area"  style="overflow:auto" class=" form-control form-control-lg <?php echo $text_color_adr; ?>" rows="5" cols="100" placeholder="Enter Your Address" name="address"><?php echo $empdata['address']; ?></textarea>
+                <span class="col-form-label"><?= __('Address') ?></span>
+                  <textarea aria-label="Text area"  style="overflow:auto" class=" form-control form-control-lg <?php echo $text_color_adr; ?>" rows="5" cols="100" placeholder="<?= __('Enter Your Address') ?>" name="address"><?php echo $empdata['address']; ?></textarea>
                 </div>
 
               </div>
               <div class="col-xl-6" >
                <div class="mt-2"  >
-                <span class="col-form-label">Post Code </span>
+                <span class="col-form-label"><?= __('Post Code') ?></span>
                 <div class="input-group">
 
-                 <input aria-label="Input field" type="text" class="form-control form-control-lg  <?php echo $text_color_pc; ?> " placeholder="Enter Your Post-Code" name="post_code" value="<?php echo $empdata['post_code']; ?>"/>
+                 <input aria-label="Input field" type="text" class="form-control form-control-lg  <?php echo $text_color_pc; ?> " placeholder="<?= __('Enter Your Post-Code') ?>" name="post_code" value="<?php echo $empdata['post_code']; ?>"/>
                </div>
              </div>
            </div>
@@ -471,7 +471,7 @@ position: absolute;
        </div>
      </fieldset>
 
-     <h3> Work  </h3>
+     <h3><?= __('Work') ?></h3>
      <fieldset>
 
       <div class="pb-5" data-wizard-type="step-content">
@@ -493,7 +493,7 @@ position: absolute;
        <div  class="mt-2"  >
         <span class="col-form-label">Department <span class="text-danger">*</span></span>
           <select aria-label="Department" class ="form-control form-control-lg form-select js-example-basic-single required"   name="department_id">
-            <option value="">Select Any One</option>
+            <option value=""><?= __('Select Any One') ?></option>
             <?php foreach ($dept_details as $departments) {
               ?>
               <option  <?php if($departments['id'] == $empdata['department_id']){ echo "selected";
@@ -511,7 +511,7 @@ position: absolute;
        <div  class="mt-2" >
         <span class="col-form-label">Repoting to <span class="text-danger">*</span></span>
         <select aria-label="Reporting Manager"  class ="form-control form-control-lg  form-select js-example-basic-single required" name="reporting_manager_id">
-          <option value="">Select Any One</option>
+          <option value=""><?= __('Select Any One') ?></option>
 
           <?php foreach ($application_users_details as $application_users) {
 
@@ -531,7 +531,7 @@ position: absolute;
    Designation <span class="text-danger">*</span>
  </span>
  <select aria-label="Designation" class ="form-select js-example-basic-single required" name="designation_id">
-  <option value="">Select Any One</option>
+  <option value=""><?= __('Select Any One') ?></option>
   <?php foreach ($designations_details as $desigs) {
    ?>
    <option value="<?php echo $desigs['id']; ?>" >
@@ -544,9 +544,9 @@ position: absolute;
 
 <div class="col-lg-6" >
  <div  class="mt-2"  >
-  <span class="col-form-label">Vertical </span>
+  <span class="col-form-label"><?= __('Vertical') ?></span>
   <select aria-label="Vertical" class ="form-control form-control-lg form-select js-example-basic-single" name="vertical_id">
-    <option value="">Select Any One</option>
+    <option value=""><?= __('Select Any One') ?></option>
     <?php foreach ($verticals_details as $verticals) {
      ?>
      <option value="<?php echo $verticals['id']; ?>" >
@@ -559,19 +559,18 @@ position: absolute;
 
 <div class="col-lg-6" >
  <div  class="mt-2" >
-  <span class="col-form-label">
-    Hiring Source </span>
+  <span class="col-form-label"><?= __('Hiring Source') ?></span>
   <div class="input-group input-icon-right">
-   <input aria-label="Enter Hiring Source"  class="form-control form-control-lg text-capitalize " type="text" placeholder="Enter Hiring Source" name="hiring_source" value="<?php echo $empdata['emp_code']; ?>"/>
+   <input aria-label="Enter Hiring Source"  class="form-control form-control-lg text-capitalize " type="text" placeholder="<?= __('Enter Hiring Source') ?>" name="hiring_source" value="<?php echo $empdata['emp_code']; ?>"/>
  </div>
 </div>
 </div>
 
 <div class="col-lg-6" >
  <div  class="mt-2"  >
-  <span class="col-form-label">Role</span> </br>
+  <span class="col-form-label"><?= __('Role') ?></span> </br>
   <select aria-label="Role" class ="form-control form-control-lg form-select js-example-basic-single" name="role_id">
-    <option value="">Select Any One</option>
+    <option value=""><?= __('Select Any One') ?></option>
     <?php foreach ($employment_roles_details as $employment_roles) {
 
      ?>
@@ -593,9 +592,9 @@ $diff =  strtotime(date("Y-m-d")) - strtotime($date_pic) ;
 ?>
 <div class="col-lg-6" >
  <div class="mt-2" >
-  <span class="col-form-label">Experience in Current Organization</span>
+  <span class="col-form-label"><?= __('Experience in Current Organization') ?></span>
    <div class="input-group input-group-button  ">
-     <input aria-label="Enter Experience in Current Organization" type="text" class="form-control form-control-lg width1 "  placeholder="Enter Experience in Current Organization" name="experience_current_organization" value=""/>
+     <input aria-label="Enter Experience in Current Organization" type="text" class="form-control form-control-lg width1 "  placeholder="<?= __('Enter Experience in Current Organization') ?>" name="experience_current_organization" value=""/>
      <span class="input-group-text addon-style"><span class="">Years</span></span>
    </div>
 
@@ -604,9 +603,9 @@ $diff =  strtotime(date("Y-m-d")) - strtotime($date_pic) ;
 
 <div class="col-lg-6"  >
  <div  class="mt-2"  >
-  <span class="col-form-label">Total Experience Year  </span>
+  <span class="col-form-label"><?= __('Total Experience Year') ?></span>
   <div class="input-group input-group-button ">
-   <input aria-label="Enter Total Experience" type="text" class="form-control  width1 form-control-lg "  placeholder="Enter Total Experience"  name="total_experiance" value="<?php echo $empdata['emp_code']; ?>"/>
+   <input aria-label="Enter Total Experience" type="text" class="form-control  width1 form-control-lg "  placeholder="<?= __('Enter Total Experience') ?>"  name="total_experiance" value="<?php echo $empdata['emp_code']; ?>"/>
    <span class="input-group-text addon-style"><span class="">Years</span></span>
 
  </div>
@@ -617,7 +616,7 @@ $diff =  strtotime(date("Y-m-d")) - strtotime($date_pic) ;
  <div  class="mt-2"  >
   <span class="col-form-label">Relevant Experience Year  </span>
     <div class="input-group input-group-button  ">
-     <input aria-label="Enter Total Experience" type="text" class="form-control form-control-lg width1  "  placeholder="Enter Total Experience"  name="relevant_experience" value=""/>
+     <input aria-label="Enter Total Experience" type="text" class="form-control form-control-lg width1  "  placeholder="<?= __('Enter Total Experience') ?>"  name="relevant_experience" value=""/>
      <span class="input-group-text addon-style"><span class="">Years</span></span>
    </div>
  </div>
@@ -627,7 +626,7 @@ $diff =  strtotime(date("Y-m-d")) - strtotime($date_pic) ;
  <div  class="mt-2" >
   <span class="col-form-label">Notice Period </span>
   <div class="input-group input-group-button ">
-   <input aria-label="Enter Notice Period" type="text" class="form-control form-control-sm width1  "  placeholder="Enter Notice Period" name="notice_period" value="" />
+   <input aria-label="Enter Notice Period" type="text" class="form-control form-control-sm width1  "  placeholder="<?= __('Enter Notice Period') ?>" name="notice_period" value="" />
    <span class="input-group-text addon-style"><span class="">Months</span></span>
  </div>
 </div>
@@ -637,7 +636,7 @@ $diff =  strtotime(date("Y-m-d")) - strtotime($date_pic) ;
  <div  class="mt-2" >
   <span class="col-form-label">Band </span>
   <select aria-label="Band" class ="form-control form-control-lg form-select js-example-basic-single" name="band_id" onchange="getBandid(this.value)">
-    <option value="">Select Any One</option>
+    <option value=""><?= __('Select Any One') ?></option>
     <?php foreach ($employment_bands_details as $employment_bands) {
 
      ?>
@@ -652,7 +651,7 @@ $diff =  strtotime(date("Y-m-d")) - strtotime($date_pic) ;
  <div  class="mt-2"  >
   <label class="col-form-label">Level
     <select aria-label="Level"  class ="form-control form-control-lg  form-select js-example-basic-single" name="level_id" id="employeement_level">
-      <option value="">Select Any One</option>
+      <option value=""><?= __('Select Any One') ?></option>
   </select>
 </div>
 </div>
@@ -660,7 +659,7 @@ $diff =  strtotime(date("Y-m-d")) - strtotime($date_pic) ;
  <div  class="mt-2" >
   <span class="col-form-label">Work Location <span class="text-danger">*</span></span>
 <select aria-label="Location"  class ="form-control form-control-lg form-select js-example-basic-single required"  name="location_id">
-  <option value="">Select Any One</option>
+  <option value=""><?= __('Select Any One') ?></option>
   <?php foreach ($locations_details as $locations) { ?>
 
      <option value="<?php echo $locations['id']; ?>" >
@@ -727,7 +726,7 @@ foreach ($emptypes_details as $emptypes) {
 
              </span>
              <div class="input-group input-icon-right">
-               <input aria-label="Input field"  type="text" class="form-control form-control-lg  <?php echo $text_color_ofph; ?>" name="office_phone" placeholder="Enter Office Phone" value=""/>
+               <input aria-label="Input field"  type="text" class="form-control form-control-lg  <?php echo $text_color_ofph; ?>" name="office_phone" placeholder="<?= __('Enter Office Phone') ?>" value=""/>
 
              </div>
            </div>
@@ -738,7 +737,7 @@ foreach ($emptypes_details as $emptypes) {
              Extension
            </span>
            <div class="input-group input-icon-right">
-             <input aria-label="Input field"  type="text" class="form-control form-control-lg  <?php echo $text_color_ext; ?>" name="office_ext" placeholder="Enter Extension" value=""/>
+             <input aria-label="Input field"  type="text" class="form-control form-control-lg  <?php echo $text_color_ext; ?>" name="office_ext" placeholder="<?= __('Enter Extension') ?>" value=""/>
 
            </div>
          </div>
@@ -748,7 +747,7 @@ foreach ($emptypes_details as $emptypes) {
          <div class="mt-2" >
           <span class="col-form-label">Fax </span>
           <div class="input-group input-icon-right">
-           <input aria-label="Input field"  class="form-control form-control-lg  <?php echo $text_color_fx; ?>" type="text" placeholder="Enter Fax Number" name="fax" value=""/>
+           <input aria-label="Input field"  class="form-control form-control-lg  <?php echo $text_color_fx; ?>" type="text" placeholder="<?= __('Enter Fax Number') ?>" name="fax" value=""/>
          </div>
        </div>
      </div>
@@ -757,7 +756,7 @@ foreach ($emptypes_details as $emptypes) {
 
  </div>
 </fieldset>
-<h3> Personal </h3>
+<h3><?= __('Personal') ?></h3>
 <fieldset>
 
   <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
@@ -789,7 +788,7 @@ foreach ($emptypes_details as $emptypes) {
                                    <div class="mt-2" style="display: <?php echo $display_div_bir; ?>" >
                                     <span class="col-form-label">Age In Years</span>
                                     <div class="input-group input-icon-right">
-                                     <input aria-label="Age" readonly type="text" id="ageinyear" class="form-control form-control-lg " name="age" placeholder="Age" value="0"/>
+                                     <input aria-label="Age" readonly type="text" id="ageinyear" class="form-control form-control-lg " name="age" placeholder="<?= __('Age') ?>" value="0"/>
                                    </div>
                                  </div>
                                </div>
@@ -839,7 +838,7 @@ foreach ($emptypes_details as $emptypes) {
                            <div class="mt-2" style="display: <?php echo $display_div_bg; ?>" >
                             <span class="col-form-label">Blood Group</span></br>
                           <select aria-label="Blood Group"  class ="form-select js-example-basic-single" name="blood_group">
-                            <option value="">Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach ($blood_groups_details as $blood_groups) {
 
                              ?>
@@ -886,7 +885,7 @@ foreach ($emptypes_details as $emptypes) {
                  <div class="mt-2" style="display: <?php echo $display_div_ms; ?>" >
                   <span  class="col-form-label">Marrige Date</span>
                    <?php $date_pic1 = fromDate($data['wedding_date']); ?>
-                   <input aria-label="Input field" type="text"  class="form-control form-control-lg datepicker <?php echo $text_color_ms; ?>" placeholder="Enter Marrige Date" name="wedding_date" value=""/>
+                   <input aria-label="Input field" type="text"  class="form-control form-control-lg datepicker <?php echo $text_color_ms; ?>" placeholder="<?= __('Enter Marrige Date') ?>" name="wedding_date" value=""/>
 
                   </div>
                 </div>
@@ -897,7 +896,7 @@ foreach ($emptypes_details as $emptypes) {
                   <span class="col-form-label">Facebook
                      </span>
                    <div class="input-group input-group-button">
-                     <input aria-label="Input field"  type="text" class="form-control form-control-lg width1 <?php echo $text_color_eco; ?>"  placeholder="Facebook URL" name="soc_facebook" value=""/>
+                     <input aria-label="Input field"  type="text" class="form-control form-control-lg width1 <?php echo $text_color_eco; ?>"  placeholder="<?= __('Facebook URL') ?>" name="soc_facebook" value=""/>
 
                    </div>
                  </div>
@@ -908,7 +907,7 @@ foreach ($emptypes_details as $emptypes) {
                   <span class="col-form-label">Twitter
                     </span>
                    <div class="input-group input-group-button">
-                     <input aria-label="Input field"  type="text" class="form-control form-control-lg width1 <?php echo $text_color_eco; ?>"  placeholder="Twitter URL" name="soc_twitter" value=""/>
+                     <input aria-label="Input field"  type="text" class="form-control form-control-lg width1 <?php echo $text_color_eco; ?>"  placeholder="<?= __('Twitter URL') ?>" name="soc_twitter" value=""/>
 
                    </div>
                  </div>
@@ -919,7 +918,7 @@ foreach ($emptypes_details as $emptypes) {
                   <span class="col-form-label">linkedin
                    </span>
                    <div class="input-group input-group-button">
-                     <input aria-label="Input field" <?php echo $read_only_ln; ?> type="text" class="form-control form-control-lg width1 <?php echo $text_color_eco; ?>"  placeholder="LinkedIn URL" name="soc_linkedin" value=""/>
+                     <input aria-label="Input field" <?php echo $read_only_ln; ?> type="text" class="form-control form-control-lg width1 <?php echo $text_color_eco; ?>"  placeholder="<?= __('LinkedIn URL') ?>" name="soc_linkedin" value=""/>
 
                    </div>
                  </div>
@@ -930,7 +929,7 @@ foreach ($emptypes_details as $emptypes) {
            </div>
          </fieldset>
          <?php if(EMPLOYEE_INSERT_FORM_BANK_DETAIL_INSERT == "Y"){ ?>
-         <h3> Bank Details </h3>
+         <h3><?= __('Bank Details') ?></h3>
          <fieldset>
           <div class="pb-5" data-wizard-type="step-content">
             <div class="row">
@@ -938,7 +937,7 @@ foreach ($emptypes_details as $emptypes) {
                    <span class="col-form-label">Bank</span>
                     <div class=" wfull">
                       <select aria-label="Bank" class ="form-control form-control-lg form-select js-example-basic-single"  name="bank_id">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($banks as $bnk) {  ?>
                            <option value="<?php echo $bnk['id']; ?>" >
                             <?php echo $bnk['bank_name']; ?>
@@ -967,7 +966,7 @@ foreach ($emptypes_details as $emptypes) {
         </div>
         </fieldset>
       <?php } ?>
-         <h3> Employment History </h3>
+         <h3><?= __('Employment History') ?></h3>
          <fieldset>
           <div class="pb-5" data-wizard-type="step-content">
             <div class="form-group row">
@@ -975,9 +974,9 @@ foreach ($emptypes_details as $emptypes) {
                 <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer text-center " id="extable">
                   <tr>
                     <th scope="col" style="width: 2%;"></th>
-                    <th scope="col" class="" style="width: 28%;">Company Name</th>
-                    <th scope="col" class="thheader" style="width: 28%;">Job Description </th>
-                    <th scope="col" class="" style="width: 20%;"> From / To</th>
+                    <th scope="col" class="" style="width: 28%;"><?= __('Company Name') ?></th>
+                    <th scope="col" class="thheader" style="width: 28%;"><?= __('Job Description') ?></th>
+                    <th scope="col" class="" style="width: 20%;"><?= __('From / To') ?></th>
 
                   </tr>
                   <?php if(count((array)$exp_details)=='0'){ $exp_details[] = array('company_name'=>"");
@@ -997,16 +996,16 @@ foreach ($emptypes_details as $emptypes) {
                       </td>
                       <td>
                         <input type="hidden" name="expe_rowid[]" class="form-control " value="">
-                        <input aria-label="Enter Company Name" type="text" name="company_name[]" class="form-control text-capitalize" placeholder="Enter Company Name"  autocomplete="off" value="">
+                        <input aria-label="Enter Company Name" type="text" name="company_name[]" class="form-control text-capitalize" placeholder="<?= __('Enter Company Name') ?>"  autocomplete="off" value="">
                       </td>
 
                         <td>
-                          <input aria-label="Enter Job Description" type="text" name="job_descrption[]" class="form-control " value="" autocomplete="off" placeholder="Enter Job Description">
+                          <input aria-label="Enter Job Description" type="text" name="job_descrption[]" class="form-control " value="" autocomplete="off" placeholder="<?= __('Enter Job Description') ?>">
                         </td>
 
                         <td>
-                          <input aria-label="Enter From Date" type="text" name="work_from[]" class="form-control datepicker"  placeholder="Enter From Date" value="" autocomplete="off">
-                          <input aria-label="Enter To Date" type="text" name="work_to[]" class="form-control datepicker mt-2" placeholder="Enter To Date" value="" autocomplete="off">
+                          <input aria-label="Enter From Date" type="text" name="work_from[]" class="form-control datepicker"  placeholder="<?= __('Enter From Date') ?>" value="" autocomplete="off">
+                          <input aria-label="Enter To Date" type="text" name="work_to[]" class="form-control datepicker mt-2" placeholder="<?= __('Enter To Date') ?>" value="" autocomplete="off">
                         </td>
 
 
@@ -1016,15 +1015,15 @@ foreach ($emptypes_details as $emptypes) {
                   </table>
                   <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <button class="btn btn-danger" id="removeRows_exp" onclick="removeexprows()"  type="button">- Delete</button> &nbsp;
-                      <button class="btn btn-success"  onclick="addexpreencerows()" id="addRows_exp" type="button">+ Add More</button>
+                      <button class="btn btn-danger" id="removeRows_exp" onclick="removeexprows()"  type="button"><?= __('- Delete') ?></button> &nbsp;
+                      <button class="btn btn-success"  onclick="addexpreencerows()" id="addRows_exp" type="button"><?= __('+ Add More') ?></button>
                     </div>
                   </div>
                 </div>
               </div>
 
             </fieldset>
-            <h3> Educational Details  </h3>
+            <h3><?= __('Educational Details') ?></h3>
             <fieldset>
              <div class="pb-5" data-wizard-type="step-content" >
 
@@ -1033,11 +1032,11 @@ foreach ($emptypes_details as $emptypes) {
                   <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer text-center " id="edutable">
                     <tr>
                       <th scope="col" style="width: 2%;"></th>
-                      <th scope="col" class="" style="width: 25%;">Institute Name</th>
-                      <th scope="col" class="thheader" style="width: 20%;">Type</th>
-                      <th scope="col" class="thheader" style="width: 20%;"> Start Date</th>
+                      <th scope="col" class="" style="width: 25%;"><?= __('Institute Name') ?></th>
+                      <th scope="col" class="thheader" style="width: 20%;"><?= __('Type') ?></th>
+                      <th scope="col" class="thheader" style="width: 20%;"><?= __('Start Date') ?></th>
 
-                      <th scope="col" class="thheader" style="width: 15%;">Score </th>
+                      <th scope="col" class="thheader" style="width: 15%;"><?= __('Score') ?></th>
                     </tr>
                     <?php if(count((array)$edu_details)=='0'){ $edu_details[] = array('institute_name'=>"");
 }
@@ -1057,10 +1056,10 @@ if(count((array)$edu_details)>0){
                       </td>
                       <td>
                         <input type="hidden" name="institute_rowid[]" class="form-control " value="">
-                        <input aria-label="Enter Institute Name" type="text" name="institute_name[]" class="form-control text-capitalize" value="" autocomplete="off" placeholder="Enter Institute Name">  </td>
+                        <input aria-label="Enter Institute Name" type="text" name="institute_name[]" class="form-control text-capitalize" value="" autocomplete="off" placeholder="<?= __('Enter Institute Name') ?>">  </td>
                         <td>
                           <select aria-label="Education Type[]" class="form-control form-select js-example-basic-single" name="education_type[]" >
-                            <option value=""> Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach ($edutypedata as  $edutype) {   ?>
                               <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo $edutype['genc_detail_name']; ?></option>
                             <?php   } ?>
@@ -1068,19 +1067,19 @@ if(count((array)$edu_details)>0){
                           </select>
                         </td>
                         <td>
-                          <input aria-label="Enter Start Date" type="text" name="start_date[]" class="form-control datepicker"  value=""  autocomplete="off" placeholder="Enter Start Date">
-                          <input aria-label="Enter End Date" type="text" name="end_date[]" class="form-control datepicker mt-2"  placeholder="Enter End Date"  value="" autocomplete="off">
+                          <input aria-label="Enter Start Date" type="text" name="start_date[]" class="form-control datepicker"  value=""  autocomplete="off" placeholder="<?= __('Enter Start Date') ?>">
+                          <input aria-label="Enter End Date" type="text" name="end_date[]" class="form-control datepicker mt-2"  placeholder="<?= __('Enter End Date') ?>"  value="" autocomplete="off">
                         </td>
 
-                        <td><input aria-label="Enter  Score" type="text" name="score[]" class="form-control" placeholder="Enter  Score"  value=""  autocomplete="off">  </td>
+                        <td><input aria-label="Enter  Score" type="text" name="score[]" class="form-control" placeholder="<?= __('Enter  Score') ?>"  value=""  autocomplete="off">  </td>
                       </tr>
                     <?php } ?>
                     <?php } ?>
                   </table>
                   <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <button class="btn btn-danger" id="removeRows_edu" onclick="removeedurows()"  type="button">- Delete</button> &nbsp;
-                      <button class="btn btn-success" onclick="addedurows()" id="addRows_edu" type="button">+ Add More</button>
+                      <button class="btn btn-danger" id="removeRows_edu" onclick="removeedurows()"  type="button"><?= __('- Delete') ?></button> &nbsp;
+                      <button class="btn btn-success" onclick="addedurows()" id="addRows_edu" type="button"><?= __('+ Add More') ?></button>
                     </div>
                   </div>
                 </div>
@@ -1088,7 +1087,7 @@ if(count((array)$edu_details)>0){
             </div>
 
           </fieldset>
-          <h3> Dependents  </h3>
+          <h3><?= __('Dependents') ?></h3>
           <fieldset>
            <div class="pb-5" data-wizard-type="step-content" >
 
@@ -1097,9 +1096,9 @@ if(count((array)$edu_details)>0){
                 <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer text-center" id="deptable">
                   <tr>
                     <th scope="col" style="width: 2%;"></th>
-                    <th scope="col" class="" style="width: 25%;"> Name</th>
-                    <th scope="col" class="thheader" style="width: 20%;">Relationship Type</th>
-                    <th scope="col" class="thheader" style="width: 20%;">DOB</th>
+                    <th scope="col" class="" style="width: 25%;"><?= __('Name') ?></th>
+                    <th scope="col" class="thheader" style="width: 20%;"><?= __('Relationship Type') ?></th>
+                    <th scope="col" class="thheader" style="width: 20%;"><?= __('DOB') ?></th>
                   </tr>
                   <?php if(count((array)$dep_details)=='0'){ $dep_details[] = array('institute_name'=>"");
 }
@@ -1115,24 +1114,24 @@ if(count((array)$dep_details)>0){
                       </div>
                     </td>
                     <input type="hidden" name="dependent_rowid[]" class="form-control " value="">
-                    <td><input aria-label="Enter Name" type="text" name="dependent_name[]" class="form-control text-capitalize" value="" autocomplete="off" placeholder="Enter Name">  </td>
+                    <td><input aria-label="Enter Name" type="text" name="dependent_name[]" class="form-control text-capitalize" value="" autocomplete="off" placeholder="<?= __('Enter Name') ?>">  </td>
                     <td>
                       <select aria-label="Dependent Relationship Type[]" class="form-control form-select js-example-basic-single" name="dependent_relationship_type[]" >
-                        <option value=""> Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($relatypedata as  $reladata) {   ?>
                           <option    value="<?php echo $reladata['id']; ?>"> <?php echo $reladata['relation_name']; ?></option>
                         <?php   } ?>
                       </select>
                     </td>
-                    <td><input aria-label="Date Of Birth" type="text" name="dependent_date_of_birth[]" class="form-control datepicker"  value="" placeholder="Date Of Birth" autocomplete="off">  </td>
+                    <td><input aria-label="Date Of Birth" type="text" name="dependent_date_of_birth[]" class="form-control datepicker"  value="" placeholder="<?= __('Date Of Birth') ?>" autocomplete="off">  </td>
                   </tr>
                 <?php } ?>
                 <?php } ?>
               </table>
               <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                  <button class="btn btn-danger " id="removeRows_dep" onclick="removedeprows()"  type="button">- Delete</button> &nbsp;
-                  <button class="btn btn-success"  onclick="adddeprows()" id="addRows_dep" type="button">+ Add More</button>
+                  <button class="btn btn-danger " id="removeRows_dep" onclick="removedeprows()"  type="button"><?= __('- Delete') ?></button> &nbsp;
+                  <button class="btn btn-success"  onclick="adddeprows()" id="addRows_dep" type="button"><?= __('+ Add More') ?></button>
                 </div>
               </div>
             </div>
@@ -1140,7 +1139,7 @@ if(count((array)$dep_details)>0){
         </div>
 
       </fieldset>
-      <h3> Emergency </h3>
+      <h3><?= __('Emergency') ?></h3>
       <fieldset>
         <div class="pb-5" data-wizard-type="step-content">
 
@@ -1152,10 +1151,10 @@ if(count((array)$dep_details)>0){
                 <tr>
                   <th scope="col" style="width: 2%;"></th>
 
-                  <th scope="col" class="thheader" style="width: 25%;">Name</th>
-                  <th scope="col" class="" style="width: 25%;">Relationship</th>
-                  <th scope="col" class="thheader" style="width: 25%;">Home No</th>
-                  <th scope="col" class="thheader" style="width: 25%;">Mobile No</th>
+                  <th scope="col" class="thheader" style="width: 25%;"><?= __('Name') ?></th>
+                  <th scope="col" class="" style="width: 25%;"><?= __('Relationship') ?></th>
+                  <th scope="col" class="thheader" style="width: 25%;"><?= __('Home No') ?></th>
+                  <th scope="col" class="thheader" style="width: 25%;"><?= __('Mobile No') ?></th>
 
                 </tr>
                 <?php  if(count((array)$emerge_details)=='0'){ $emerge_details[] = array('contact_name'=>"");
@@ -1177,18 +1176,18 @@ if(count((array)$emerge_details)>0){
                     <input type="hidden" name="contact_rowid[]" class="form-control " value="">
 
                    <td>
-                    <input aria-label="Enter Contact Name" type="text" name="contact_name[]" class="form-control text-capitalize" value="" autocomplete="off" placeholder="Enter Contact Name">
+                    <input aria-label="Enter Contact Name" type="text" name="contact_name[]" class="form-control text-capitalize" value="" autocomplete="off" placeholder="<?= __('Enter Contact Name') ?>">
                   </td>
                   <td>
                     <select aria-label="Contact Relationship[]" class="form-control form-select js-example-basic-single" name="contact_relationship[]" >
-                      <option value=""> Select Any One</option>
+                      <option value=""><?= __('Select Any One') ?></option>
                       <?php foreach ($relatypedata as  $reladata) {   ?>
                         <option  value="<?php echo $reladata['id']; ?>"> <?php echo $reladata['relation_name']; ?></option>
                       <?php   } ?>
                     </select>
                   </td>
-                  <td><input aria-label="Enter Home Number" type="number" name="contact_home_no[]" class="form-control " value="" placeholder="Enter Home Number" autocomplete="off">  </td>
-                  <td><input aria-label="Enter Mobile Number" type="number" name="contact_mobile_no[]" class="form-control " value="" autocomplete="off" placeholder="Enter Mobile Number">  </td>
+                  <td><input aria-label="Enter Home Number" type="number" name="contact_home_no[]" class="form-control " value="" placeholder="<?= __('Enter Home Number') ?>" autocomplete="off">  </td>
+                  <td><input aria-label="Enter Mobile Number" type="number" name="contact_mobile_no[]" class="form-control " value="" autocomplete="off" placeholder="<?= __('Enter Mobile Number') ?>">  </td>
 
                 </tr>
               <?php } ?>
@@ -1196,8 +1195,8 @@ if(count((array)$emerge_details)>0){
             </table>
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <button class="btn btn-danger" id="removeRows_eme" onclick="removeemerows()"  type="button">- Delete</button> &nbsp;
-                <button class="btn btn-success "  onclick="addemrgerows()" id="addRows_eme" type="button">+ Add More</button>
+                <button class="btn btn-danger" id="removeRows_eme" onclick="removeemerows()"  type="button"><?= __('- Delete') ?></button> &nbsp;
+                <button class="btn btn-success "  onclick="addemrgerows()" id="addRows_eme" type="button"><?= __('+ Add More') ?></button>
               </div>
             </div>
           </div>
@@ -1205,10 +1204,10 @@ if(count((array)$emerge_details)>0){
       </div>
 
     </fieldset>
-<h3> Proof Details</h3>
+<h3><?= __('Proof Details') ?></h3>
         <fieldset>
             <div class="pb-5" data-wizard-type="step-content">
-            <h4 class="mb-5 font-weight-bold text-dark">Proof Details</h4>
+            <h4 class="mb-5 font-weight-bold text-dark"><?= __('Proof Details') ?></h4>
                 <div class="row">
                     <div >
                      <div class="card-body">
@@ -1217,10 +1216,10 @@ if(count((array)$emerge_details)>0){
                            <thead class="thead-light">
                               <tr>
                                  <th class="text-center" scope="col">#</th>
-                                 <th class="text-center" scope="col">Type</th>
-                                  <th class="text-center"  scope="col">Number</th>
-                                 <th class="text-center" scope="col">Issue Date</th>
-                                 <th  class="text-center" scope="col">Expiry Date</th>
+                                 <th class="text-center" scope="col"><?= __('Type') ?></th>
+                                  <th class="text-center"  scope="col"><?= __('Number') ?></th>
+                                 <th class="text-center" scope="col"><?= __('Issue Date') ?></th>
+                                 <th  class="text-center" scope="col"><?= __('Expiry Date') ?></th>
                               </tr>
                            </thead>
                            <tbody>
@@ -1323,7 +1322,7 @@ if(count((array)$emerge_details)>0){
             </div>
         </fieldset>
 
-    <h3> Employee Buddy</h3>
+    <h3><?= __('Employee Buddy') ?></h3>
         <fieldset>
             <div class="pb-5" data-wizard-type="step-content">
                 <div class="row">
@@ -1331,7 +1330,7 @@ if(count((array)$emerge_details)>0){
                        <div class="mt-2">
                     <span class="col-form-label">Admin Buddy </span></br>
                     <select aria-label="Admin Buddy"  class ="form-select js-example-basic-single " name="admin_buddy">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($admin_buddy_list as $admin_buddy_res) { ?>
                          <option value="<?php echo $admin_buddy_res['emp_id']; ?>" >
                           <?php echo $admin_buddy_res['display_name']; ?>
@@ -1344,7 +1343,7 @@ if(count((array)$emerge_details)>0){
                        <div class="mt-2">
                     <span class="col-form-label">HR Buddy <span class="text-danger">*</span></span></br>
                     <select aria-label="Hr Buddy"  class ="form-select js-example-basic-single required" name="hr_buddy">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($hr_buddy_list as $hr_buddy_res) { ?>
                          <option value="<?php echo $hr_buddy_res['emp_id']; ?>" >
                           <?php echo $hr_buddy_res['display_name']; ?>
@@ -1357,7 +1356,7 @@ if(count((array)$emerge_details)>0){
                        <div class="mt-2">
                     <span class="col-form-label">Finance Buddy <span class="text-danger">*</span></span></br>
                     <select aria-label="Finance Buddy"  class ="form-select js-example-basic-single required" name="finance_buddy">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($finance_buddy_list as $finance_buddy_res) { ?>
                          <option value="<?php echo $finance_buddy_res['emp_id']; ?>" >
                           <?php echo $finance_buddy_res['display_name']; ?>
@@ -1370,7 +1369,7 @@ if(count((array)$emerge_details)>0){
                        <div class="mt-2">
                     <span class="col-form-label">Project Buddy </span></br>
                     <select aria-label="Project Buddy"  class ="form-select js-example-basic-single" name="project_buddy">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($project_buddy_list as $project_buddy_res) { ?>
                          <option value="<?php echo $project_buddy_res['emp_id']; ?>" >
                           <?php echo $project_buddy_res['display_name']; ?>
@@ -1383,7 +1382,7 @@ if(count((array)$emerge_details)>0){
                        <div class="mt-2">
                     <span class="col-form-label">Location Buddy</span></br>
                     <select aria-label="Loc Buddy"  class ="form-select js-example-basic-single " name="loc_buddy">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($location_buddy_list as $location_buddy_res) { ?>
                          <option value="<?php echo $location_buddy_res['emp_id']; ?>" >
                           <?php echo $location_buddy_res['display_name']; ?>

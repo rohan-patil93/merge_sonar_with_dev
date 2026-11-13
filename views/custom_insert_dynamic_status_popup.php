@@ -36,8 +36,8 @@ foreach($statuslists as $statuslist){
                 <input type="hidden" name="next_status" value="<?php echo $_POST['next_status']; ?>">
                 <input type="hidden" name="table_name" id="updatedstatusetransactiontable" value="<?php echo $_POST['table_name']; ?>">
                 <input type="hidden" name="transaction_id" id="updatedstatusetransactionid" value="<?php echo $_POST['transaction_id']; ?>">
-                <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary mr-2 submitDynamiPopUpForm" id="statuspopupbtn">Submit</button>
+                <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Cancel') ?></button>
+                <button type="button" class="btn btn-primary mr-2 submitDynamiPopUpForm" id="statuspopupbtn"><?= __('Submit') ?></button>
             </div>
           </div>
       </form>

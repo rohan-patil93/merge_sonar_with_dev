@@ -21,7 +21,7 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'upload_csv' && isset($_FILE
             $nrid = "id:".$response['parent']['LASTID'];
              header("location:index.php?option=COM_LIST_SALES_INVOICE_DYNAMIC&Rid=".deocdeId($nrid));
         }else {
-            $error_message = "File upload error.";
+            $error_message = __('File upload error.');
         }
     }
 
@@ -41,16 +41,16 @@ $excel_data = $return['excel_data'];
 <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
 <?php } ?>
 <div class="card">
     <div class="card-header table-card-header">
-        <h5>Upload Invoices</h5>
+        <h5><?php echo __('Upload Invoices'); ?></h5>
         <div class="card-header-right table-card-header ">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -58,47 +58,47 @@ $excel_data = $return['excel_data'];
         <div class="card-body">
             <div class="form-group row">
                 <div class="form-group col-lg-4">
-                    <span class="form-label">Upload Date </span>
+                    <span class="form-label"><?php echo __('Upload Date'); ?> </span>
                     <div>
-                        <input aria-label="Import Date" class="form-control datepicker" type="text" id="import_date" name="import_date" value="<?php echo fromDate(); ?>"  readonly
+                        <input aria-label="<?php echo __('Import Date'); ?>" class="form-control datepicker" type="text" id="import_date" name="import_date" value="<?php echo fromDate(); ?>"  readonly
                             required>
                     </div>
                 </div>
                 <div class="form-group col-lg-4">
                     <input type="hidden" class="rangedatepicker" data-id="1">
-                    <span class="form-label">Invoice From Date</span>
+                    <span class="form-label"><?php echo __('Invoice From Date'); ?></span>
                     <div>
-                        <input aria-label="Invoice From Date" class="form-control startdatepicker_1"  type="text" id="date_of_grant" name="invoice_from_date"
+                        <input aria-label="<?php echo __('Invoice From Date'); ?>" class="form-control startdatepicker_1"  type="text" id="date_of_grant" name="invoice_from_date"
                             value="<?php echo fromDate(); ?>"  required>
                     </div>
                 </div>
                 <div class="form-group col-lg-4">
-                    <span class="form-label">Invoice To Date</span>
+                    <span class="form-label"><?php echo __('Invoice To Date'); ?></span>
                     <div>
-                        <input aria-label="Invoice To Date" class="form-control enddatepicker_1" type="text" id="date_of_end" name="invoice_to_date"
+                        <input aria-label="<?php echo __('Invoice To Date'); ?>" class="form-control enddatepicker_1" type="text" id="date_of_end" name="invoice_to_date"
                             alue="<?php echo fromDate(); ?>"  required>
                     </div>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Upload Name</span>
+                    <span class="form-label"><?php echo __('Upload Name'); ?></span>
                     <div>
-                        <input aria-label="Enter Upload Name" class="form-control" type="text" id="import_name" name="import_name" value="" placeholder="Enter Upload Name" required>
+                        <input aria-label="<?php echo __('Enter Upload Name'); ?>" class="form-control" type="text" id="import_name" name="import_name" value="" placeholder="<?php echo __('Enter Upload Name'); ?>" required>
                     </div>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Import</span>
+                    <span class="form-label"><?php echo __('Import'); ?></span>
                     <div>
-                        <input aria-label="Csv File" class="form-control" type="file" id="csv_file" name="csv_file" value="" accept=".csv" required>
+                        <input aria-label="<?php echo __('Csv File'); ?>" class="form-control" type="file" id="csv_file" name="csv_file" value="" accept=".csv" required>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-footer">
             <div class="row">
-                <span><a class="text-primary" href="uploads/sale_invoice_csv_sample.csv" download>Download Sample Excel</a></span>
+                <span><a class="text-primary" href="uploads/sale_invoice_csv_sample.csv" download><?php echo __('Download Sample Excel'); ?></a></span>
                 <div class="col-lg-6">
                     <input type="hidden" name="submit" value="upload_csv">
-                    <button type="submit" class="btn btn-primary" name="submit_value" value="exit"><i class="la la-check"></i>Submit</button>
+                    <button type="submit" class="btn btn-primary" name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Submit'); ?></button>
                 </div>
             </div>
         </div>
@@ -106,9 +106,9 @@ $excel_data = $return['excel_data'];
 </div>
 <div class="card">
     <div class="card-header table-card-header">
-        <h5>Upload Invoices</h5>
+        <h5><?php echo __('Upload Invoices'); ?></h5>
         <div class="card-header-right table-card-header ">
-            <a href="index.php?option=COM_LIST_SALES_INVOICE_DYNAMIC_EXCEL_LIST" class=" text-primary">View all</a>
+            <a href="index.php?option=COM_LIST_SALES_INVOICE_DYNAMIC_EXCEL_LIST" class=" text-primary"><?php echo __('View all'); ?></a>
         </div>
     </div>
 
@@ -117,11 +117,11 @@ $excel_data = $return['excel_data'];
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Sr.No</th>
-                    <th scope="col">File Name</th>
-                    <th scope="col">Upload Name</th>
-                    <th scope="col">Upload Date</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"><?php echo __('Sr.No'); ?></th>
+                    <th scope="col"><?php echo __('File Name'); ?></th>
+                    <th scope="col"><?php echo __('Upload Name'); ?></th>
+                    <th scope="col"><?php echo __('Upload Date'); ?></th>
+                    <th scope="col"><?php echo __('Action'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -137,7 +137,7 @@ $excel_data = $return['excel_data'];
                             <td class="p-2"><?php echo  fromDate($row['created_date']); ?></td>
                             <td class="p-2">
                         <a class="btn btn-primary"
-                            href="index.php?option=COM_LIST_SALES_INVOICE_DYNAMIC&Rid=<?php echo deocdeId('id:' . $row['id']); ?>">View
+                            href="index.php?option=COM_LIST_SALES_INVOICE_DYNAMIC&Rid=<?php echo deocdeId('id:' . $row['id']); ?>"><?php echo __('View'); ?>
 
                         </a>
 
@@ -148,7 +148,7 @@ $excel_data = $return['excel_data'];
                     <tr>
                         <td colspan="5">
                             <div class="card-px text-center py-20 m-t-30">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Data Available'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>

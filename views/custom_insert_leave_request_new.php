@@ -116,11 +116,11 @@ $otheremp = json_decode($otheremp,1);
                 <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
                     <div class="card card-custom " id="kt_page_sticky_card">
                         <div class="card-header">
-                            <h5>Leave Request</h5>
+                            <h5><?php echo __('Leave Request'); ?></h5>
                             <div class="card-header-right">
                                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                     <i class="icofont icofont-reply"></i>
-                                    Back
+                                    <?php echo __('Back'); ?>
                                 </a>
                             </div>
                         </div>
@@ -128,10 +128,10 @@ $otheremp = json_decode($otheremp,1);
 
 
                             <div class="form-group col-lg-6 p-2" style="float: left;">                            <div class="form-group col-lg-6">
-                                    <span class="form-label">Leave Category</span>
+                                    <span class="form-label"><?php echo __('Leave Category'); ?></span>
                                     <div>
-                                    <select aria-label="Leave Type" class="col-lg-12 form-control form-select js-example-basic-single leave_type_id" id="kt_select2_41" name="leave_type_id" data-val="<?php echo $role['half_day']; ?>" onchange="selectLeaveType(this.value)">
-                                        <option value=""> Select Any one</option>
+                                    <select aria-label="<?php echo __('Leave Type'); ?>" class="col-lg-12 form-control form-select js-example-basic-single leave_type_id" id="kt_select2_41" name="leave_type_id" data-val="<?php echo $role['half_day']; ?>" onchange="selectLeaveType(this.value)">
+                                        <option value=""> <?php echo __('Select Any one'); ?></option>
                                         <?php foreach ($cate as $cat) {  ?>
                                             <option <?php if($cat['id'] == $role['leave_type'] ){ ?> selected <?php
 } ?> value="<?php echo $cat['id']; ?>"><?php echo $cat['name']; ?></option>
@@ -140,35 +140,35 @@ $otheremp = json_decode($otheremp,1);
                                     </div>
                                 </div>
                                 <div class=" col-lg-12">
-                                    <span class="form-label">Start Date(s)</span>
+                                    <span class="form-label"><?php echo __('Start Date(s)'); ?></span>
                                     <div class="w-100">
 
                                         <div class="row">
                                             <div class=" col-lg-6">
-                                                <input aria-label="Select date" type="date" onblur="tocheckdays()" class="form-control"  value="<?php echo  $date_pic; ?>"  name="leave_from"  id="kt_datepicker_31" />
+                                                <input aria-label="<?php echo __('Select date'); ?>" type="date" onblur="tocheckdays()" class="form-control"  value="<?php echo  $date_pic; ?>"  name="leave_from"  id="kt_datepicker_31" />
                                             </div>
                                             <div class="col-lg-6">
-                                                <select aria-label="Start Half Day" class="form-control form-select js-example-basic-single halfdayselect" id="start_half_day"  name="start_half_day">
-                                                    <option value="0"> Full Day</option>
-                                                    <option value="1"> Start Half</option>
-                                                    <option value="2"> End Half</option>
+                                                <select aria-label="<?php echo __('Start Half Day'); ?>" class="form-control form-select js-example-basic-single halfdayselect" id="start_half_day"  name="start_half_day">
+                                                    <option value="0"> <?php echo __('Full Day'); ?></option>
+                                                    <option value="1"> <?php echo __('Start Half'); ?></option>
+                                                    <option value="2"> <?php echo __('End Half'); ?></option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <span class="form-label mb-1 mt-3">End Date(s)</span>
+                                        <span class="form-label mb-1 mt-3"><?php echo __('End Date(s)'); ?></span>
                                         <div class="row">
 
                                             <div class="col-lg-6">
                                                 <div class="input-group date ">
-                                                    <input aria-label="Select date" type="date" onblur="tocheckdays()" class="form-control"  value="<?php echo  $date_pic; ?>"  name="leave_to"  id="kt_datepicker_32" />
+                                                    <input aria-label="<?php echo __('Select date'); ?>" type="date" onblur="tocheckdays()" class="form-control"  value="<?php echo  $date_pic; ?>"  name="leave_to"  id="kt_datepicker_32" />
 
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <select aria-label="End Half Day" class="form-control form-select js-example-basic-single halfdayselect" id="end_half_day" name="end_half_day">
-                                                    <option value="0"> Full Day</option>
-                                                    <option value="1"> Start Half</option>
-                                                    <option value="2"> End Half</option>
+                                                <select aria-label="<?php echo __('End Half Day'); ?>" class="form-control form-select js-example-basic-single halfdayselect" id="end_half_day" name="end_half_day">
+                                                    <option value="0"> <?php echo __('Full Day'); ?></option>
+                                                    <option value="1"> <?php echo __('Start Half'); ?></option>
+                                                    <option value="2"> <?php echo __('End Half'); ?></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -177,8 +177,8 @@ $otheremp = json_decode($otheremp,1);
                                 <div class="row ">
 
                                     <div class="form-group col-lg-6 ">
-                                        <span class="form-label">Leave Days</span>
-                                        <input aria-label="Days" type="text" class="form-control" name="days" value="" id="leave_days" readonly="">
+                                        <span class="form-label"><?php echo __('Leave Days'); ?></span>
+                                        <input aria-label="<?php echo __('Days'); ?>" type="text" class="form-control" name="days" value="" id="leave_days" readonly="">
                                     </div>
                                     <div class="col-lg-6 hilidayorweekend mt-4">
 
@@ -187,14 +187,14 @@ $otheremp = json_decode($otheremp,1);
                                 <div class="row">
                                 </div>
                                 <div class="form-group col-lg-12">
-                                    <span class="form-label">Special Request</span>
-                                    <textarea aria-label="Special Request" type="text" class="form-control" name="special_request" ><?php echo $role['details'];?></textarea>
+                                    <span class="form-label"><?php echo __('Special Request'); ?></span>
+                                    <textarea aria-label="<?php echo __('Special Request'); ?>" type="text" class="form-control" name="special_request" ><?php echo $role['details'];?></textarea>
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <input type="hidden" name="submit" value="Add" />
-                                            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
+                                            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -204,7 +204,7 @@ $otheremp = json_decode($otheremp,1);
                                 <div class="col-lg-4" style="float: left;">
                                     <div class="card card-custom card-stretch gutter-b">
                                         <div class="card-header border-0">
-                                            <h3 class="card-title font-weight-bolder text-dark">Who else wil be out</h3>
+                                            <h3 class="card-title font-weight-bolder text-dark"><?php echo __('Who else wil be out'); ?></h3>
                                         </div>
                                         <?php foreach ($otheremp as $othemp) {
                                             if($othemp['employee_id'] !=$empl['employee_id']){
@@ -213,7 +213,7 @@ $otheremp = json_decode($otheremp,1);
                                                     <div class="d-flex align-items-center">
                                                         <?php if($empdata[$othemp['employee_id']]['image'] !=''){ ?>
                                                             <div class="symbol symbol-60 symbol-sm flex-shrink-0 ">
-                                                                <img class="img-80" src="uploads/all/<?php echo $empdata[$othemp['employee_id']]['image']; ?>" alt="Details">
+                                                                <img class="img-80" src="uploads/all/<?php echo $empdata[$othemp['employee_id']]['image']; ?>" alt="<?php echo __('Details'); ?>">
                                                             </div>
                                                         <?php }else{ ?>
                                                             <div class="mr-3 img-radius p-15">
@@ -222,7 +222,7 @@ $otheremp = json_decode($otheremp,1);
                                                         <?php } ?>
                                                         <div class="ml-4">
                                                             <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?php echo $empdata[$othemp['employee_id']]['display_name']; ?></div>
-                                                            <a href="#" class="text-muted font-weight-bold text-hover-primary"><?php echo date('dS M Y',strtotime($othemp['leave_from'])) ; ?> TO <?php echo date('dS M Y',strtotime($othemp['leave_to'])) ; ?> </a>
+                                                            <a href="#" class="text-muted font-weight-bold text-hover-primary"><?php echo date('dS M Y',strtotime($othemp['leave_from'])) ; ?> <?php echo __('TO'); ?> <?php echo date('dS M Y',strtotime($othemp['leave_to'])) ; ?> </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -235,7 +235,7 @@ $otheremp = json_decode($otheremp,1);
                                     <div class="card card-custom">
                                         <div class="card-header">
                                             <div class="card-title">
-                                                <h3 class="card-label">My Leaves</h3>
+                                                <h3 class="card-label"><?php echo __('My Leaves'); ?></h3>
                                             </div>
                                         </div>
                                         <div class="card-body">

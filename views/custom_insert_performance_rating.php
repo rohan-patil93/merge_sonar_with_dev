@@ -178,17 +178,17 @@ foreach ($defalut_fields as $dfield) {
                         <div class="card-header">
                             <div class="card-title col-lg-12">
                                 <div class="col-lg-3">
-                                <h3 class="card-label">Employees Final Rating</h3>
+                                <h3 class="card-label"><?php echo __('Employees Final Rating'); ?></h3>
                                 </div>
                                 <div class="col-lg-3">
-                                    <input aria-label="Month Year Cal" class="form-control" type="month" name="month_year_cal" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
+                                    <input aria-label="<?php echo __('Month Year Cal'); ?>" class="form-control" type="month" name="month_year_cal" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
                                 </div>
                                 <div class="col-lg-3">
-                                    <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i>Filter</button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?php echo __('Filter'); ?></button>
                                 </div>
 
                                 <div class="col-lg-2">
-                                    <select aria-label="Displayattributes[]" class="form-control selectpicker" name="displayattributes[]" multiple="multiple">
+                                    <select aria-label="<?php echo __('Displayattributes[]'); ?>" class="form-control selectpicker" name="displayattributes[]" multiple="multiple">
                                         <?php foreach ($employees_fieldlist as $fkey => $fieldvalue) { ?>
                                             <option value="<?php echo $fkey; ?>" <?php echo in_array($fkey, $defalut_fields) ? 'selected' : ''; ?>  > <?php echo $fieldvalue['lable']; ?> </option>
                                         <?php }    ?>
@@ -197,7 +197,7 @@ foreach ($defalut_fields as $dfield) {
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="hidden" id="filterby" name="filterby">
-                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
+                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply"><?php echo __('Apply'); ?></button>
                                 </div>
                                 <div id="filternames"> </div>
                             </div>
@@ -219,7 +219,7 @@ foreach ($defalut_fields as $dfield) {
                         <tr>
                             <th scope="col" style="width: 5%;">&nbsp;&nbsp;&nbsp;&nbsp;#</th>
 
-                            <th scope="col" style="width: 25%;">NAME </th>
+                            <th scope="col" style="width: 25%;"><?php echo __('NAME'); ?> </th>
 
                             <?php foreach ($employees_fieldlist as $empkey => $empfield) {
                             if(in_array($empkey, $defalut_fields))  {
@@ -228,9 +228,9 @@ foreach ($defalut_fields as $dfield) {
                                     <?php echo $empfield['lable']; ?> </th>
                                 <?php } ?>
                                 <?php } ?>
-                            <th scope="col" style="width: 10%;"> Manager Rating </th>
-                            <th scope="col" style="width: 10%;"> Final Rating </th>
-                            <th scope="col" style="width: 15%;"> Remarks </th>
+                            <th scope="col" style="width: 10%;"> <?php echo __('Manager Rating'); ?> </th>
+                            <th scope="col" style="width: 10%;"> <?php echo __('Final Rating'); ?> </th>
+                            <th scope="col" style="width: 15%;"> <?php echo __('Remarks'); ?> </th>
 
                             </tr>
 
@@ -254,7 +254,7 @@ foreach ($defalut_fields as $dfield) {
                                             width: 50px;
                                             height: auto;
                                             border-radius: 50%;
-                                            " alt="Attachment Preview">
+                                            " alt="<?php echo __('Attachment Preview'); ?>">
                                         <?php } else { ?>
                                             <div class="symbol symbol-40 symbol-circle symbol-primary" data-toggle="tooltip" title="" data-original-title="<?php echo $empvalue['display_name']; ?>">
                                                 <span class="symbol-label font-size-h5 font-weight-boldest"><?php echo initials($empvalue['display_name']); ?></span>
@@ -281,9 +281,9 @@ foreach ($defalut_fields as $dfield) {
                                     <?php } ?>
                                     <?php } ?>
 
-                                    <td> <input type="hidden" name="rowid[]" value="<?php echo $rating[$empvalue['id']]['id']; ?>">  <input aria-label="NOT RATED" type="text" readonly placeholder="NOT RATED" class="form-control" name="manager_rating[]" value="<?php echo $rating[$empvalue['id']]['manager_rating']=="0"?"":$rating[$empvalue['id']]['manager_rating']; ?>" > </td>
-                                    <td> <input aria-label="NOT RATED" class="form-control" type="text" name="final_rating[]"  placeholder="NOT RATED" value="<?php echo $rating[$empvalue['id']]['final_rating']=="0"?"":$rating[$empvalue['id']]['final_rating']; ?>" > </td>
-                                    <td> <textarea aria-label="Remarks[]" class="form-control" name="remarks[]"><?php echo $rating[$empvalue['id']]['remarks']; ?></textarea>  </td>
+                                    <td> <input type="hidden" name="rowid[]" value="<?php echo $rating[$empvalue['id']]['id']; ?>">  <input aria-label="<?php echo __('NOT RATED'); ?>" type="text" readonly placeholder="<?php echo __('NOT RATED'); ?>" class="form-control" name="manager_rating[]" value="<?php echo $rating[$empvalue['id']]['manager_rating']=="0"?"":$rating[$empvalue['id']]['manager_rating']; ?>" > </td>
+                                    <td> <input aria-label="<?php echo __('NOT RATED'); ?>" class="form-control" type="text" name="final_rating[]"  placeholder="<?php echo __('NOT RATED'); ?>" value="<?php echo $rating[$empvalue['id']]['final_rating']=="0"?"":$rating[$empvalue['id']]['final_rating']; ?>" > </td>
+                                    <td> <textarea aria-label="<?php echo __('Remarks[]'); ?>" class="form-control" name="remarks[]"><?php echo $rating[$empvalue['id']]['remarks']; ?></textarea>  </td>
 
                                 </tr>
 
@@ -295,7 +295,7 @@ foreach ($defalut_fields as $dfield) {
                     <div class="card-footer">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold ml-5" name="submit_rating">Submit</button>
+                                        <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold ml-5" name="submit_rating"><?php echo __('Submit'); ?></button>
                                     </div>
                                 </div>
                             </div>

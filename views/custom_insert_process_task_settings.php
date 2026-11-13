@@ -68,7 +68,7 @@ $task_for = $display_data['task_for'];
     <?php if($_GET['error'] !=''){ ?>
      <div class="alert alert-danger alert-dismissible">
       <strong> <?php echo $_SESSION['error_message'][$_GET['error']]; ?> </strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
     </div>
   <?php } ?>
   <div class="card card-custom <?php echo $card_sticky; ?> j-pro" id="kt_page_sticky_card ">
@@ -77,7 +77,7 @@ $task_for = $display_data['task_for'];
       <div class="card-header-right">
         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
           <i class="icofont icofont-reply"></i>
-          Back
+          <?php echo __('Back'); ?>
         </a>
       </div>
     </div>
@@ -96,15 +96,15 @@ $task_for = $display_data['task_for'];
 
                     <div class="row">
                       <div class="col-lg-5 mb-1 ">
-                        <span class="form-label">Task Name *</span>
+                        <span class="form-label"><?php echo __('Task Name *'); ?></span>
                         <span class="d-block error-message text-danger"></span>
-                        <input aria-label="Task Name" type="text" class="form-control requried_field" name="task_name" value="<?php echo $task_name; ?>" />
+                        <input aria-label="<?php echo __('Task Name'); ?>" type="text" class="form-control requried_field" name="task_name" value="<?php echo $task_name; ?>" />
                       </div>
                       <?php  if($row_id ==""){ ?>
                         <div class="form-group col-lg-4 w-full">
-                          <span class="form-label">Module</span>
+                          <span class="form-label"><?php echo __('Module'); ?></span>
                           <span class="d-block error-message text-danger"></span>
-                          <select aria-label="Module Setup []" class="form-select js-example-basic-multiple requried_field" id="module_setup_id" name="module_setup_id[]" multiple>
+                          <select aria-label="<?php echo __('Module Setup []'); ?>" class="form-select js-example-basic-multiple requried_field" id="module_setup_id" name="module_setup_id[]" multiple>
                             <?php foreach($mopdulesetup as $modulesetup){ ?>
                               <option value="<?php echo $modulesetup['module_id']; ?>" <?php echo ($main_data['module_setup_id'] == $modulesetup['module_id'] || ($_SESSION['work_module_setup_id'] == $modulesetup['module_id'] && $main_data['module_setup_id'] ==""))?"selected":""; ?>><?php echo $modulesetup['display_name']; ?></option>
                             <?php } ?>
@@ -112,10 +112,10 @@ $task_for = $display_data['task_for'];
                         </div>
                       <?php }else{ ?>
                         <div class="form-group col-lg-4 w-full">
-                          <span class="form-label">Module</span>
+                          <span class="form-label"><?php echo __('Module'); ?></span>
                           <span class="d-block error-message text-danger"></span>
-                          <select aria-label="Module Setup" class="form-select js-example-basic-single requried_field" id="module_setup_id_2" name="module_setup_id">
-                            <option value="">Select Any One</option>
+                          <select aria-label="<?php echo __('Module Setup'); ?>" class="form-select js-example-basic-single requried_field" id="module_setup_id_2" name="module_setup_id">
+                            <option value=""><?php echo __('Select Any One'); ?></option>
                             <?php foreach($mopdulesetup as $modulesetup){ ?>
                               <option value="<?php echo $modulesetup['module_id']; ?>" <?php echo $main_data['module_setup_id'] == $modulesetup['module_id']?"selected":""; ?>><?php echo $modulesetup['display_name']; ?></option>
                             <?php } ?>
@@ -127,7 +127,7 @@ $task_for = $display_data['task_for'];
 
 
                                             <div class="col-lg-9 mt-2 mb-1">
-                        <span class="form-label"> Assign To</span>
+                        <span class="form-label"> <?php echo __('Assign To'); ?></span>
                         <div class="form-radio">
                           <?php
                           foreach ((array)$buddy_list as $emptypes) {
@@ -144,16 +144,16 @@ $task_for = $display_data['task_for'];
                       </div>
                       <?php if(($main_data['assigned_to'] ?? '') !='OB'){ $csd = "d-none"; }else{ $csd = ""; }?>
                       <div id="emplistshow" class="col-xl-4 w-full <?php echo $csd; ?>">
-                        <span class="form-label">Employee</span>
-                        <select aria-label="Employee" name="other_id" class="form-control form-select js-example-basic-single" id="fdrf">
-                          <option value="">Select Any One </option>
+                        <span class="form-label"><?php echo __('Employee'); ?></span>
+                        <select aria-label="<?php echo __('Employee'); ?>" name="other_id" class="form-control form-select js-example-basic-single" id="fdrf">
+                          <option value=""><?php echo __('Select Any One'); ?> </option>
                           <?php foreach ((array)$emp_list as $emp) { ?>
                             <option value="<?php echo $emp['id'] ?? '';?>" <?php if(($main_data['user_id'] ?? '') == ($emp['id'] ?? '')){ ?>selected <?php } ?> ><?php echo $emp['display_name'] ?? '';?></option>
                           <?php } ?>
                         </select>
                       </div>
                       <div class="col-lg-9 mt-2 mb-1">
-                        <span class="form-label"> Approval Type</span>
+                        <span class="form-label"> <?php echo __('Approval Type'); ?></span>
                         <div class="form-radio">
                           <?php
                           foreach ((array)$buddy_list as $emptypes) {
@@ -170,9 +170,9 @@ $task_for = $display_data['task_for'];
                       </div>
                       <?php if(($main_data['approval_type'] ?? '') !='OB'){ $csd = "d-none"; }else{ $csd = ""; }?>
                       <div id="emplistshowapprovaltype" class="col-xl-4 w-full mb-2 <?php echo $csd; ?>">
-                        <span class="form-label">Employee</span>
-                        <select aria-label="Approval Employee" name="approval_other_id" class="form-control form-select js-example-basic-single">
-                          <option value="">Select Any One </option>
+                        <span class="form-label"><?php echo __('Employee'); ?></span>
+                        <select aria-label="<?php echo __('Approval Employee'); ?>" name="approval_other_id" class="form-control form-select js-example-basic-single">
+                          <option value=""><?php echo __('Select Any One'); ?> </option>
                           <?php foreach ((array)$emp_list as $emp) { ?>
                             <option value="<?php echo $emp['id'] ?? '';?>" <?php if(($main_data['approval_other_id'] ?? '') == ($emp['id'] ?? '')){ ?>selected <?php } ?> ><?php echo $emp['display_name'] ?? '';?></option>
                           <?php } ?>
@@ -181,9 +181,9 @@ $task_for = $display_data['task_for'];
 <div class="col-lg-9">
                         <div class="row ">
                           <div class="col-lg-6">
-                            <span class="form-label">Email Template</span>
-                            <select aria-label="Email Content" name="email_content_id" class="form-select js-example-basic-single" id="email_template">
-                              <option value="">Select Any One </option>
+                            <span class="form-label"><?php echo __('Email Template'); ?></span>
+                            <select aria-label="<?php echo __('Email Content'); ?>" name="email_content_id" class="form-select js-example-basic-single" id="email_template">
+                              <option value=""><?php echo __('Select Any One'); ?> </option>
                               <?php foreach ($emaildata as $email) {  ?>
                                 <option value="<?php echo $email['id'];?>" <?php if($main_data['email_content_id'] == $email['id']){ ?>selected <?php
 } ?> ><?php echo $email['template_name'];?></option>
@@ -194,9 +194,9 @@ $task_for = $display_data['task_for'];
                             <input type="hidden" name="process_type" id="process_type" value="<?php echo $_GET['process_type']; ?>">
                           <?php }else{ ?>
                             <div class="col-lg-6">
-                              <span class="form-label">Process Type</span>
-                              <select aria-label="Process Type" name="process_type" class="form-control form-select js-example-basic-single" id="process_type_2" onchange="processtylelabel(this.value)">
-                                <option value="">Select Any One </option>
+                              <span class="form-label"><?php echo __('Process Type'); ?></span>
+                              <select aria-label="<?php echo __('Process Type'); ?>" name="process_type" class="form-control form-select js-example-basic-single" id="process_type_2" onchange="processtylelabel(this.value)">
+                                <option value=""><?php echo __('Select Any One'); ?> </option>
                                 <?php foreach ($processtypedata as $processtype) {  ?>
                                   <option value="<?php echo $processtype['genc_detail_code'];?>" <?php if($main_data['process_type'] == $processtype['genc_detail_code']){ ?>selected <?php
 } ?> ><?php echo $processtype['genc_detail_name'];?></option>
@@ -208,7 +208,7 @@ $task_for = $display_data['task_for'];
                       </div>
 
                       <div class="col-lg-9 mt-3 mt-1">
-                        <span>Trigger Date</span></br>
+                        <span><?php echo __('Trigger Date'); ?></span></br>
                         <div class="form-radio">
                           <?php $mk =1; foreach($trigger_date_type as $tdt){ ?>
                             <?php
@@ -219,7 +219,7 @@ $task_for = $display_data['task_for'];
                             ?>
                             <div class="radio radio-inline">
                               <label class="form-label">
-                                <input aria-label="Trigger Date" type="radio" name="trigger_date" value="<?php echo $tdt['genc_detail_code'];?>" <?php echo $checked; ?>/>
+                                <input aria-label="<?php echo __('Trigger Date'); ?>" type="radio" name="trigger_date" value="<?php echo $tdt['genc_detail_code'];?>" <?php echo $checked; ?>/>
                                 <i class="helper"></i><?php echo $tdt['genc_detail_name'];?>
                               </label>
                             </div>
@@ -231,9 +231,9 @@ $task_for = $display_data['task_for'];
                           <div class="mb-3 row">
 
                             <div class="col-lg-4 col-md-3 col-sm-3 col-12 m-b-10 w-full">
-                              <span class="form-label">Start</span>
-                              <select aria-label="Before Or After" name="before_or_after" style="width:150px;" class="form-control form-select js-example-basic-single">
-                                <option value="">Select</option>
+                              <span class="form-label"><?php echo __('Start'); ?></span>
+                              <select aria-label="<?php echo __('Before Or After'); ?>" name="before_or_after" style="width:150px;" class="form-control form-select js-example-basic-single">
+                                <option value=""><?php echo __('Select'); ?></option>
                                 <?php foreach ($period_list as $due) {  ?>
                                   <option value="<?php echo $due['genc_detail_code'];?>" <?php if($main_data['before_or_after'] == $due['genc_detail_code']){ ?>selected <?php
 } ?> ><?php echo $due['genc_detail_name'];?></option>
@@ -241,12 +241,12 @@ $task_for = $display_data['task_for'];
                               </select>
                             </div>
                             <div class="col-lg-1">
-                              <span class="form-label">Day</span>
-                              <input aria-label="Action No" type="number" class="form-control " name="action_no" value="<?php echo $main_data['action_no'] !=""?$main_data['action_no']:'0';?>" />
+                              <span class="form-label"><?php echo __('Day'); ?></span>
+                              <input aria-label="<?php echo __('Action No'); ?>" type="number" class="form-control " name="action_no" value="<?php echo $main_data['action_no'] !=""?$main_data['action_no']:'0';?>" />
                             </div>
                             <div class="col-lg-4 w-full">
-                              <span class="form-label">Frequency</span>
-                              <select aria-label="Action Frequency" name="action_frequency"  style="width:150px;" class="form-control form-select js-example-basic-single">
+                              <span class="form-label"><?php echo __('Frequency'); ?></span>
+                              <select aria-label="<?php echo __('Action Frequency'); ?>" name="action_frequency"  style="width:150px;" class="form-control form-select js-example-basic-single">
                                 <?php foreach ($due_list as $due) {    ?>
                                   <option value="<?php echo $due['genc_detail_code'];?>" <?php if($main_data['action_frequency'] == $due['genc_detail_code']){ ?>selected <?php
 } ?> ><?php echo $due['genc_detail_name'];?></option>
@@ -255,8 +255,8 @@ $task_for = $display_data['task_for'];
                             </div>
 
                             <div class="col-lg-3">
-                              <span class="form-label">Planned Day</span>
-                              <input aria-label="Planned Day" type="number" class="form-control col-lg-2" name="planned_day" value="<?php echo $main_data['planned_day'] !=""?$main_data['planned_day']:0;?>">
+                              <span class="form-label"><?php echo __('Planned Day'); ?></span>
+                              <input aria-label="<?php echo __('Planned Day'); ?>" type="number" class="form-control col-lg-2" name="planned_day" value="<?php echo $main_data['planned_day'] !=""?$main_data['planned_day']:0;?>">
                             </div>
 
                           </div>
@@ -264,10 +264,10 @@ $task_for = $display_data['task_for'];
                       </div>
                       <div class="col-lg-9">
                         <div class="row mt-2 mb-1">
-                          <span class="form-label col-lg-3">Category</span>
+                          <span class="form-label col-lg-3"><?php echo __('Category'); ?></span>
                           <div class="col-lg-9">
-                            <select aria-label="Process" name="process_id" class="form-control form-select js-example-basic-single">
-                              <option value="">Select Any One </option>
+                            <select aria-label="<?php echo __('Process'); ?>" name="process_id" class="form-control form-select js-example-basic-single">
+                              <option value=""><?php echo __('Select Any One'); ?> </option>
                               <?php
                               foreach ($task_list as $task) {
                                 ?>
@@ -280,29 +280,29 @@ $task_for = $display_data['task_for'];
                       </div>
                       <div class="row">
                         <div class="col-lg-9 mt-2 mb-1">
-                          <span class="form-label">Description</span>
-                          <textarea aria-label="Description" style="overflow:auto" class="form-control form-control-lg" name="description" > <?php echo $main_data['description']; ?> </textarea>
+                          <span class="form-label"><?php echo __('Description'); ?></span>
+                          <textarea aria-label="<?php echo __('Description'); ?>" style="overflow:auto" class="form-control form-control-lg" name="description" > <?php echo $main_data['description']; ?> </textarea>
                         </div>
                       </div>
 
                       <div class="col-lg-9  mt-2 mb-1">
                         <div class="row mb-2">
                           <div class="col-lg-12">
-                            <span class="form-label d-block">Link Page (if User Wants To Open Any Custome page Or URL Select This Option)</span>
-                            <input aria-label="Link Page" type="checkbox" class="js-switch" value="0" id="link_page" name="link_page" onchange="checkPageRedirect()" <?php echo $main_data['link_page'] =='0'?"checked":""; ?>>
+                            <span class="form-label d-block"><?php echo __('Link Page (if User Wants To Open Any Custome page Or URL Select This Option)'); ?></span>
+                            <input aria-label="<?php echo __('Link Page'); ?>" type="checkbox" class="js-switch" value="0" id="link_page" name="link_page" onchange="checkPageRedirect()" <?php echo $main_data['link_page'] =='0'?"checked":""; ?>>
                           </div>
                         </div>
 
                         <div class="row hideurl <?php echo $main_data['link_page'] =='0'?"":"d-none"; ?>" >
                           <div class="col-lg-4">
-                            <span class="form-label d-block">Internal Link</span>
-                            <input aria-label="Internal Link" type="checkbox" class="js-switch" value="0" id="internal_link" name="internal_link" onchange="checkPageInternalLink()" <?php echo $main_data['link_page'] =='0'?"checked":""; ?>>
+                            <span class="form-label d-block"><?php echo __('Internal Link'); ?></span>
+                            <input aria-label="<?php echo __('Internal Link'); ?>" type="checkbox" class="js-switch" value="0" id="internal_link" name="internal_link" onchange="checkPageInternalLink()" <?php echo $main_data['link_page'] =='0'?"checked":""; ?>>
                           </div>
 
                           <div class="col-lg-4 w-full internallinkclass">
-                            <span class="form-label d-block">Internal Page</span>
-                            <select aria-label="Select option" class="form-control form-select js-example-basic-single" onchange="pageChange(this.value)">
-                              <option value="">Select Any One </option>
+                            <span class="form-label d-block"><?php echo __('Internal Page'); ?></span>
+                            <select aria-label="<?php echo __('Select option'); ?>" class="form-control form-select js-example-basic-single" onchange="pageChange(this.value)">
+                              <option value=""><?php echo __('Select Any One'); ?> </option>
                               <?php
                               foreach ($application_pages as $applicationpages) {
                                 ?>
@@ -313,40 +313,40 @@ $task_for = $display_data['task_for'];
                           </div>
 
                       <div class="col-lg-12 mt-2 mb-1">
-                        <span class="form-label d-block">Page URL</span>
-                        <textarea aria-label="Page Url"  class="form-control form-control-lg" id="page_url" name="page_url" > <?php echo $main_data['page_url']; ?> </textarea>
+                        <span class="form-label d-block"><?php echo __('Page URL'); ?></span>
+                        <textarea aria-label="<?php echo __('Page Url'); ?>"  class="form-control form-control-lg" id="page_url" name="page_url" > <?php echo $main_data['page_url']; ?> </textarea>
                       </div>
                     </div>
                   </div>
 
               <div class="row hidenoturl <?php echo $main_data['link_page'] !='0'?"":"d-none"; ?>" >
                 <div class="col-lg-6 mt-3">
-                 <span class="form-label">This is required for...</span>
+                 <span class="form-label"><?php echo __('This is required for...'); ?></span>
                </div>
                <div id="tsk_fortable"></div>
                <div class="col-lg-12">
                 <i class="flaticon2-group text-success"></i>
-                <a href="#" class="text-primary showpopup">Edit </a>
+                <a href="#" class="text-primary showpopup"><?php echo __('Edit'); ?> </a>
               </div>
             </div>
             <div class="col-lg-12 mt-3 hidenoturl <?php echo $main_data['link_page'] !='0'?"":"d-none"; ?>" >
               <div id="append_statick" class="">
                 <div class="row" style="margin-top: 10px;">
                   <div class="col-lg-4">
-                    <span class="form-label">Check List</span>
+                    <span class="form-label"><?php echo __('Check List'); ?></span>
                   </div>
                   <div class="col-lg-1">
-                    <span class="form-label text-center">Mandatory</span>
+                    <span class="form-label text-center"><?php echo __('Mandatory'); ?></span>
                   </div>
                   <div class="col-lg-1">
-                    <span class="form-label text-center">Attachment</span>
+                    <span class="form-label text-center"><?php echo __('Attachment'); ?></span>
                   </div>
                   <div class="col-lg-1 text-center">
-                    <span class="form-label">Form</span>
+                    <span class="form-label"><?php echo __('Form'); ?></span>
                   </div>
 
                         <div class="col-lg-1">
-                          <span>Action</span>
+                          <span><?php echo __('Action'); ?></span>
                         </div>
                       </div>
                       <?php $checklist_data = json_decode($main_data['check_list'],1);
@@ -358,13 +358,13 @@ $task_for = $display_data['task_for'];
                         ?>
                         <div class="row sfitemRow mt-1" id="static_div_<?php echo $m; ?>">
                           <div class="col-lg-4">
-                            <input aria-label="Input field" type="text" class="form-control"  id="static_value_<?php echo $m; ?>"  name="checklist[]" value="<?php echo $checkvalue['name']; ?>">
+                            <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"  id="static_value_<?php echo $m; ?>"  name="checklist[]" value="<?php echo $checkvalue['name']; ?>">
                           </div>
 
                           <div class="col-lg-1 text-center">
                             <div class="checkbox-fade fade-in-primary">
                              <label class="form-label mt-2">
-                              <input aria-label="Checkbox" type="checkbox" value="Y" name="mandatory_checklist[<?php echo $m; ?>]" <?php echo $checkvalue['mandatory_checklist'] == "Y"?"checked":""; ?>>
+                              <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="Y" name="mandatory_checklist[<?php echo $m; ?>]" <?php echo $checkvalue['mandatory_checklist'] == "Y"?"checked":""; ?>>
                               <span class="cr">
                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                               </span>
@@ -375,7 +375,7 @@ $task_for = $display_data['task_for'];
                           <input type="hidden" name="checkboxid[]" value="<?php echo $m; ?>">
                           <div class="checkbox-fade fade-in-primary">
                            <label class="form-label mt-2">
-                            <input aria-label="Checkbox" type="checkbox" value="Y" name="attachment_requerd[<?php echo $m; ?>]" <?php echo $checkvalue['attachment_requerd'] == "Y"?"checked":""; ?>>
+                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="Y" name="attachment_requerd[<?php echo $m; ?>]" <?php echo $checkvalue['attachment_requerd'] == "Y"?"checked":""; ?>>
                             <span class="cr">
                               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                             </span>
@@ -386,16 +386,16 @@ $task_for = $display_data['task_for'];
                         <div class="row">
                           <div class="col-lg-6">
                             <div class="image-input image-input-empty image-input-outline" id="kt_image_5" >
-                              <label class="btn-hover-text-primary text-dark" data-action="remove" data-bs-toggle="tooltip" title="Upload File" style="left: -9px;top: 0px;">
+                              <label class="btn-hover-text-primary text-dark" data-action="remove" data-bs-toggle="tooltip" title="<?php echo __('Upload File'); ?>" style="left: -9px;top: 0px;">
                                 <span> <i class="fa fa-upload"></i></span>
-                                <input aria-label="Dyanamic File" type="file" name="dyanamic_file" accept=".pdf" class="updateresume"  />
+                                <input aria-label="<?php echo __('Dyanamic File'); ?>" type="file" name="dyanamic_file" accept=".pdf" class="updateresume"  />
                                 <input type="hidden" name="hidden_file[]" value="<?php echo $checkvalue['downloadfile']; ?>">
                               </label>
                             </div>
                           </div>
                           <div class="col-lg-6">
                             <?php if($checkvalue['downloadfile'] !=""){ ?>
-                              <a href="uploads/all/<?php echo $checkvalue['downloadfile']; ?>" download data-action="remove" data-bs-toggle="tooltip" title="Download File"><i class="fa fa-download"></i></a>
+                              <a href="uploads/all/<?php echo $checkvalue['downloadfile']; ?>" download data-action="remove" data-bs-toggle="tooltip" title="<?php echo __('Download File'); ?>"><i class="fa fa-download"></i></a>
                             <?php } ?>
                           </div>
                         </div>
@@ -412,12 +412,12 @@ $task_for = $display_data['task_for'];
 } ?>
      </div>
      <div class="" style="margin-top: 10px;">
-       <button class="btn btn-success waves-effect waves-light col-lg-3 fw-bold addstatickRows123" id="addstatickRows" type="button" >+ Add Check List</button>                  </div>
+       <button class="btn btn-success waves-effect waves-light col-lg-3 fw-bold addstatickRows123" id="addstatickRows" type="button" ><?php echo __('+ Add Check List'); ?></button>                  </div>
      </div>
    </div>
 
    <div class="p-4">
-    <button type="button" name="submit" class="btn btn-primary waves-effect waves-light text-uppercase submittasksettings mt-15 ml-3" id="submittasksettings_btn"/> submit</button>
+    <button type="button" name="submit" class="btn btn-primary waves-effect waves-light text-uppercase submittasksettings mt-15 ml-3" id="submittasksettings_btn"/> <?php echo __('submit'); ?></button>
   </div>
 </div>
 </form>

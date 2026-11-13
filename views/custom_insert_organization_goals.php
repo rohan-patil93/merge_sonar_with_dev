@@ -73,11 +73,11 @@ $table_name = "kpi_tasks"; // pop resun used dynamic popup
             <div class="col-lg-12">
                 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
                     <div class="card-header">
-                        <h5>Organization Goals</h5>
+                        <h5><?php echo __('Organization Goals'); ?></h5>
                         <div class="card-header-right">
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?php echo __('Back'); ?>
                             </a>
                         </div>
                     </div>
@@ -88,16 +88,16 @@ $table_name = "kpi_tasks"; // pop resun used dynamic popup
                             <form method="post" id="formsubmitid">
                                 <div class="row">
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label">Goal Name <span class="text-danger">*</span></span>
-                                        <input aria-label="Goal Name" type="text"  class="form-control" name="goal_name" />
+                                        <span class="form-label"><?php echo __('Goal Name'); ?> <span class="text-danger">*</span></span>
+                                        <input aria-label="<?php echo __('Goal Name'); ?>" type="text"  class="form-control" name="goal_name" />
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label">Start Date <span class="text-danger">*</span></span>
-                                        <input aria-label="Start Date" type="text"  class="form-control startdatepicker"  name="start_date" />
+                                        <span class="form-label"><?php echo __('Start Date'); ?> <span class="text-danger">*</span></span>
+                                        <input aria-label="<?php echo __('Start Date'); ?>" type="text"  class="form-control startdatepicker"  name="start_date" />
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label">End Date <span class="text-danger">*</span></span>
-                                        <input aria-label="End Date" type="text"  class="form-control enddatepicker" name="end_date" />
+                                        <span class="form-label"><?php echo __('End Date'); ?> <span class="text-danger">*</span></span>
+                                        <input aria-label="<?php echo __('End Date'); ?>" type="text"  class="form-control enddatepicker" name="end_date" />
                                     </div>
 
                                 </div>
@@ -116,7 +116,7 @@ $table_name = "kpi_tasks"; // pop resun used dynamic popup
 } ?>
                                                 <input type="hidden" name="submit_value"  value="">
 
-                                                <button type="submit" onclick="submitForm()" class="btn btn-primary mr-2"   ><i class="la la-check"></i>Submit</button>
+                                                <button type="submit" onclick="submitForm()" class="btn btn-primary mr-2"   ><i class="la la-check"></i><?php echo __('Submit'); ?></button>
 
 
                                             </div>

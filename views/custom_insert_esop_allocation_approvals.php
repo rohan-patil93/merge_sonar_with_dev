@@ -37,12 +37,12 @@ foreach($esop_vesting_schedule as $evs){
     function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
         swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: "Please note the status of the document will change to "+new_status_name,
+            text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
             type: "info",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+            cancelButtonText: <?php echo json_encode(__('No')); ?>,
             closeOnConfirm: false
         },
         function(){
@@ -69,12 +69,12 @@ foreach($esop_vesting_schedule as $evs){
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...')); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -92,12 +92,12 @@ foreach($esop_vesting_schedule as $evs){
         }
         swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: 'Are You Sure Update The Status To '+msg,
+            text: <?php echo json_encode(__('Are You Sure Update The Status To')); ?>+msg,
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+            cancelButtonText: <?php echo json_encode(__('No')); ?>,
             closeOnConfirm: true,
             closeOnCancel: true
         },
@@ -125,7 +125,7 @@ foreach($esop_vesting_schedule as $evs){
                 echo $workflowsteps['current_status_ribbon'];
 } ?>
             <div class="card-header">
-                <h5>ESOP Allocation</h5>
+                <h5><?php echo __('ESOP Allocation'); ?></h5>
                 <div class="card-header-right table-card-header m-r-50">
                     <?php echo $workflowsteps['workflow_btn']; ?>
                 </div>
@@ -138,34 +138,34 @@ foreach($esop_vesting_schedule as $evs){
     <div class="col-lg-5">
         <div class="card">
             <div class="card-header">
-                <h5>Employee Detail</h5>
+                <h5><?php echo __('Employee Detail'); ?></h5>
             </div>
             <div class="card-body">
                 <div class="row" id="insertfrmopen">
                     <div class="form-group col-lg-4">
-                        <span class="form-label d-block f-w-600">Employee Code</span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Employee Code'); ?></span>
                         <span><?php echo $esop_allocations['emp_code']; ?></span>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label d-block f-w-600">Employee Name <span class="text-danger">*</span></span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Employee Name'); ?> <span class="text-danger">*</span></span>
                         <span><?php echo $esop_allocations['emp_name']; ?></span>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label d-block f-w-600">Date of Joning</span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Date of Joning'); ?></span>
                         <span><?php echo $esop_allocations['date_of_joining'] !=""?fromDate($esop_allocations['date_of_joining']):"-"; ?></span>
                     </div>
                     <div class="form-group col-lg-4 mt-2">
-                        <span class="form-label d-block f-w-600">Designation </span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Designation'); ?> </span>
                         <span><?php echo $esop_allocations['designation']; ?></span>
 
                     </div>
                     <div class="form-group col-lg-4 mt-2">
-                        <span class="form-label d-block f-w-600">Annual CTC <span class="text-danger">*</span></span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Annual CTC'); ?> <span class="text-danger">*</span></span>
                         <span><?php echo $esop_allocations['annual_ctc']; ?></span>
 
                     </div>
                     <div class="form-group col-lg-4 mt-2">
-                        <span class="form-label d-block f-w-600">Tenure (Year)</span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Tenure (Year)'); ?></span>
                         <span><?php echo $esop_allocations['tenure']; ?></span>
 
                     </div>
@@ -174,40 +174,40 @@ foreach($esop_vesting_schedule as $evs){
         </div>
         <div class="card">
             <div class="card-header">
-                <h5>ESOP Details</h5>
+                <h5><?php echo __('ESOP Details'); ?></h5>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <span class="form-label d-block f-w-600">Grant Price</span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Grant Price'); ?></span>
                         <span><?php echo customeummarmonyformateifine($esop_allocations['grant_price']); ?></span>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label d-block f-w-600">Options Granted</span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Options Granted'); ?></span>
                         <span><?php echo $esop_allocations['option_granted']; ?></span>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label d-block f-w-600">Discount per Option</span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Discount per Option'); ?></span>
                         <span><?php echo customeummarmonyformateifine($esop_allocations['discount_per_option']); ?></span>
                     </div>
                     <div class="form-group col-lg-4 mt-2">
-                        <span class="form-label d-block f-w-600">Total Discount</span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Total Discount'); ?></span>
                         <span><?php echo customeummarmonyformateifine($esop_allocations['total_discount']); ?></span>
                     </div>
                     <div class="form-group col-lg-4 mt-2">
-                        <span class="form-label d-block f-w-600">Price Per Option </span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Price Per Option'); ?> </span>
                         <span><?php echo customeummarmonyformateifine($esop_allocations['expected_option_benefit']); ?></span>
                     </div>
                     <div class="form-group col-lg-4 mt-2">
-                        <span class="form-label d-block f-w-600">Total Expected Benefit</span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Total Expected Benefit'); ?></span>
                         <span><?php echo customeummarmonyformateifine($esop_allocations['total_expected_benefit']); ?></span>
                     </div>
                     <div class="form-group col-lg-4 mt-2">
-                        <span class="form-label d-block f-w-600">Benefit, CTC</span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Benefit, CTC'); ?></span>
                         <span><?php echo $esop_allocations['benefit_ctc']; ?></span>
                     </div>
                     <div class="form-group col-lg-4 mt-2">
-                        <span class="form-label d-block f-w-600">Notes</span>
+                        <span class="form-label d-block f-w-600"><?php echo __('Notes'); ?></span>
                         <span><?php echo $esop_allocations['note']; ?></span>
                     </div>
                 </div>
@@ -219,7 +219,7 @@ foreach($esop_vesting_schedule as $evs){
 
         <div class="card">
                 <div class="card-header">
-                    <h5>Bucket</h5>
+                    <h5><?php echo __('Bucket'); ?></h5>
 
                 </div>
                 <div class="card-body">
@@ -231,7 +231,7 @@ foreach($esop_vesting_schedule as $evs){
                                     <div class="card-body">
                                         <div class="row align-items-center">
                                             <div class="col">
-                                                <h7 class="m-b-5 text-white">Next Vesting Date</h7>
+                                                <h7 class="m-b-5 text-white"><?php echo __('Next Vesting Date'); ?></h7>
                                                 <h3 class="m-b-0 f-w-700 text-white f-18"><?php echo $nextvestingdate !=""?date("M d-Y",strtotime($nextvestingdate)):"-"; ?></h3>
                                             </div>
                                             <div class="col-auto">
@@ -246,7 +246,7 @@ foreach($esop_vesting_schedule as $evs){
                                     <div class="card-body">
                                         <div class="row align-items-center">
                                             <div class="col">
-                                                <h7 class="m-b-5 text-white">Total Share</h7>
+                                                <h7 class="m-b-5 text-white"><?php echo __('Total Share'); ?></h7>
                                                 <h3 class="m-b-0 f-w-700 text-white f-18"><?php echo customNanAndEmptyValidation($esop_vesting_schedule_cnt['total_share']); ?></h3>
                                             </div>
                                             <div class="col-auto">
@@ -261,7 +261,7 @@ foreach($esop_vesting_schedule as $evs){
                                     <div class="card-body">
                                         <div class="row align-items-center">
                                             <div class="col">
-                                                <h7 class="m-b-5 text-white">Allocated Share</h7>
+                                                <h7 class="m-b-5 text-white"><?php echo __('Allocated Share'); ?></h7>
                                                 <h3 class="m-b-0 f-w-700 text-white f-18"><?php echo customNanAndEmptyValidation($esop_vesting_schedule_cnt['allocated_share']); ?></h3>
                                             </div>
                                             <div class="col-auto">
@@ -274,27 +274,27 @@ foreach($esop_vesting_schedule as $evs){
                         </div>
                             <div class="row text-center mt-3">
                                 <div class="col-lg-4">
-                                    <span class="form-label f-w-700 d-block">ESOP Plan</span>
+                                    <span class="form-label f-w-700 d-block"><?php echo __('ESOP Plan'); ?></span>
                                     <span><?php echo $esop_allocations['plan_name']; ?></span>
                                 </div>
                                 <div class="col-lg-4">
-                                    <span class="form-label f-w-700 d-block">Grant Date</span>
+                                    <span class="form-label f-w-700 d-block"><?php echo __('Grant Date'); ?></span>
                                     <span><?php echo fromDate($esop_allocations['date_of_grant']); ?></span>
                                 </div>
                                 <div class="col-lg-4">
-                                    <span class="form-label f-w-700 d-block">Bucket Name</span>
+                                    <span class="form-label f-w-700 d-block"><?php echo __('Bucket Name'); ?></span>
                                     <span><?php echo $esop_allocations['bucket_name']; ?></span>
                                 </div>
                                 <div class="col-lg-4 mt-2">
-                                    <span class="form-label f-w-700 d-block">Discount(%)</span>
+                                    <span class="form-label f-w-700 d-block"><?php echo __('Discount(%)'); ?></span>
                                     <span><?php echo $esop_allocations['discount']; ?></span>
                                 </div>
                                 <div class="col-lg-4 mt-2">
-                                    <span class="form-label f-w-700 d-block">BS Value</span>
+                                    <span class="form-label f-w-700 d-block"><?php echo __('BS Value'); ?></span>
                                     <span><?php echo $esop_allocations['bs_option_value']; ?></span>
                                 </div>
                                 <div class="col-lg-4 mt-2">
-                                    <span class="form-label f-w-700 d-block">Total Shares</span>
+                                    <span class="form-label f-w-700 d-block"><?php echo __('Total Shares'); ?></span>
                                     <span><?php echo $esop_allocations['options_granted']; ?></span>
                                 </div>
                             </div>
@@ -303,28 +303,28 @@ foreach($esop_vesting_schedule as $evs){
                                     <div class="s-caption  text-primary"><i class="fas fa-database  f-20"></i></div>
                                     <div class="s-cont d-inline-block mt-2">
                                         <h6 class="f-w-700 m-b-2"><?php echo customNanAndEmptyValidation($esop_vesting_schedule_cnt['un_allocated_share']); ?></h6>
-                                        <p class="m-b-0 f-12">Un-Allocate Shares</p>
+                                        <p class="m-b-0 f-12"><?php echo __('Un-Allocate Shares'); ?></p>
                                     </div>
                                 </div>
                                 <div class="col-3 b-l-default  text-center">
                                     <div class="s-caption  text-primary"><i class="fas fa-money-bill-alt text-c-red f-20"></i></div>
                                     <div class="s-cont d-inline-block mt-2">
                                         <h6 class="f-w-700 m-b-2"><?php echo customeummarmonyformateifine($esop_vesting_schedule_cnt['total_ammount']); ?></h6>
-                                        <p class="m-b-0 f-12">Total Due Amount</p>
+                                        <p class="m-b-0 f-12"><?php echo __('Total Due Amount'); ?></p>
                                     </div>
                                 </div>
                                 <div class="col-3 b-l-default  text-center">
                                     <div class="s-caption  text-primary"><i class="fas fa-money-bill-alt text-c-red f-20"></i></div>
                                     <div class="s-cont d-inline-block mt-2">
                                         <h6 class="f-w-700 m-b-2"><?php echo customeummarmonyformateifine($esop_vesting_schedule_cnt['allocated_ammount']); ?></h6>
-                                        <p class="m-b-0 f-12">Total Pay Amount</p>
+                                        <p class="m-b-0 f-12"><?php echo __('Total Pay Amount'); ?></p>
                                     </div>
                                 </div>
                                 <div class="col-3 b-l-default  text-center">
                                     <div class="s-caption  text-primary"><i class="fas fa-money-bill-alt text-c-red f-20"></i></div>
                                     <div class="s-cont d-inline-block mt-2">
                                         <h6 class="f-w-700 m-b-2"><?php echo customeummarmonyformateifine($esop_vesting_schedule_cnt['un_allocated_ammount']); ?></h6>
-                                        <p class="m-b-0 f-12">Total Schedule Amount</p>
+                                        <p class="m-b-0 f-12"><?php echo __('Total Schedule Amount'); ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -337,14 +337,14 @@ foreach($esop_vesting_schedule as $evs){
                             <thead>
                                 <tr>
 
-                                    <th scope="col">Allocation Date</th>
+                                    <th scope="col"><?php echo __('Allocation Date'); ?></th>
                                     <th scope="col" class="text-right">(%)</th>
-                                    <th scope="col">Till Date</th>
-                                    <th scope="col" class="text-right">Share</th>
-                                    <th scope="col" class="text-right">Amount</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col"><?php echo __('Till Date'); ?></th>
+                                    <th scope="col" class="text-right"><?php echo __('Share'); ?></th>
+                                    <th scope="col" class="text-right"><?php echo __('Amount'); ?></th>
+                                    <th scope="col"><?php echo __('Status'); ?></th>
                                     <?php if(in_array(ESOP_ADMIN_ROLE,(array)$_SESSION['role_ids'])){ ?>
-                                    <th scope="col" class="text-center">Action</th>
+                                    <th scope="col" class="text-center"><?php echo __('Action'); ?></th>
                                 <?php } ?>
                                 </tr>
                             </thead>
@@ -380,10 +380,10 @@ foreach($esop_vesting_schedule as $evs){
                                             <?php
                                     if($vestingschedule['current_status'] == 0 && $currentdate >= $allocation_date && $currentdate <= $vestingschedule['till_date']){ ?>
                                     <div class="btn-group" >
-                                        <button type="button" class="btn btn-success btn-sm waves-effect waves-light"  onclick="updateDynamicCurrentStataus('<?php echo ST_APPROVED; ?>','<?php echo $vestingschedule['id']; ?>')"> <i class="ti-thumb-up"></i> Allocate</button>
-                                        <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="updateDynamicCurrentStataus('<?php echo ST_REJECTED; ?>','<?php echo $vestingschedule['id']; ?>')"><i class="ti-thumb-down"></i> Reject</button>
+                                        <button type="button" class="btn btn-success btn-sm waves-effect waves-light"  onclick="updateDynamicCurrentStataus('<?php echo ST_APPROVED; ?>','<?php echo $vestingschedule['id']; ?>')"> <i class="ti-thumb-up"></i> <?php echo __('Allocate'); ?></button>
+                                        <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="updateDynamicCurrentStataus('<?php echo ST_REJECTED; ?>','<?php echo $vestingschedule['id']; ?>')"><i class="ti-thumb-down"></i> <?php echo __('Reject'); ?></button>
                                     </div>
-                                        <?php }else{ echo "No Action";
+                                        <?php }else{ echo __('No Action');
 } ?>
                                     </td>
                                     <?php } ?>

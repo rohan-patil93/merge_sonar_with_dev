@@ -87,7 +87,7 @@ function updateTaskStatus(task_id,status){
   <div class="col-lg-8">
 <div class="card">
   <div class="card-header  ">
-    <h5>Tasks  <?php if($rejetcedcnt != 0){ ?>&nbsp;<span class="form-label label label-md label-danger float-right"><?php echo "Reject : ".$rejetcedcnt; ?></span><?php
+    <h5><?php echo __('Tasks'); ?>  <?php if($rejetcedcnt != 0){ ?>&nbsp;<span class="form-label label label-md label-danger float-right"><?php echo "Reject : ".$rejetcedcnt; ?></span><?php
 } ?></h5>
   </div>
   <div class="accordion-desc">
@@ -97,7 +97,7 @@ function updateTaskStatus(task_id,status){
         foreach($transactionactivityschedule as $key1=>$transactionactivityschedule){ ?>
           <a class="accordion-msg b-none waves-effect waves-light f-w-700"><?php echo $taskscategories[$key1];?>
           <span class="float-end"><?php echo $totaltask[$key1]
-          ;?> of <?php echo $complitedtask[$key1] !=""?$complitedtask[$key1]:"0";?> Completed</span>
+          ;?> <?php echo __('of'); ?> <?php echo $complitedtask[$key1] !=""?$complitedtask[$key1]:"0";?> <?php echo __('Completed'); ?></span>
         </a>
         <div class="accordion-desc">
           <table class="table table-hover">
@@ -121,16 +121,16 @@ function updateTaskStatus(task_id,status){
                     <div class="custom-popup-open custom-popup-slide-updatechecklist-<?php echo $tas['id']; ?> text-start" style="display: none;left: 18px;top: 55px; ">
                       <div class="card">
                         <div class="card-header">
-                          <h5>Task</h5>
+                          <h5><?php echo __('Task'); ?></h5>
                           <div class="card-header-right">
-                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeSmallPopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeSmallPopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                           </div>
                         </div>
                         <div class="card-body">
                           <table style="width: 100%;">
                             <thead>
                               <tr class="d-none">
-                                <th scope="col">Task Checklist</th>
+                                <th scope="col"><?php echo __('Task Checklist'); ?></th>
                               </tr>
                             </thead>
                             <tbody>
@@ -149,7 +149,7 @@ function updateTaskStatus(task_id,status){
                                   <div class="to-do-list">
                                     <div class="checkbox-fade fade-in-primary" role="group" onchange="getTaskCheckList('<?php echo $tas['id']; ?>','<?php echo $keyval; ?>','<?php echo $employee_id; ?>')">
                                       <label class="form-label check-task <?php echo $classcheck; ?> campliancecros_<?php echo $tas['id']."_".$keyval; ?>">
-                                        <input aria-label="Checkbox" type="checkbox" value="" <?php echo $checkboxcl; ?>  class="checkcheckboxcopliance_<?php echo $tas['id']."_".$keyval; ?>" >
+                                        <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="" <?php echo $checkboxcl; ?>  class="checkcheckboxcopliance_<?php echo $tas['id']."_".$keyval; ?>" >
                                         <span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -163,13 +163,13 @@ function updateTaskStatus(task_id,status){
                                   <span class="float_end">
                                     <?php
                                     if(trim($list['downloadfile']) !="" && strlen($list['downloadfile']) !='0'){ ?>
-                                      <a href="<?php echo "uploads/all/".$list['downloadfile']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Demo Form Download" download><i class="ti-cloud-down"></i></a>
+                                      <a href="<?php echo "uploads/all/".$list['downloadfile']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Demo Form Download'); ?>" download><i class="ti-cloud-down"></i></a>
                                       <?php
                                     }
                                     if(trim($list['attachment_name']) !="" && strlen($list['attachment_name']) !='0'){
                                      $path = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/candidates/".$employee_id."/Documents/";
                                      ?>
-                                     <a href="<?php echo $path.$list['attachment_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Uploaded Form Download" download><i class="ti-cloud-down m-l-20"></i></a>
+                                     <a href="<?php echo $path.$list['attachment_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Uploaded Form Download'); ?>" download><i class="ti-cloud-down m-l-20"></i></a>
                                    <?php }
 if($tas['link_page'] == '0'){ ?>
                                      <a href="<?php echo $tas['page_url'];  ?>" target="_blank" onclick="UpdateTransactionActivitySchedule1('<?php echo $tas['id']; ?>')" class="text-primary"><div class="mb-0 f-14" ><i class="ti-new-window"></i></div></a>
@@ -194,7 +194,7 @@ if($tas['link_page'] == '0'){ ?>
    <?php } ?>
    <?php } else { ?>
      <div class="card-px text-center py-20 mt-2">
-      <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Task </p>
+      <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?php echo __('No Task'); ?> </p>
       <div class="text-center px-4">
         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
       </div>
@@ -208,10 +208,10 @@ if($tas['link_page'] == '0'){ ?>
   <div class="col-lg-4">
     <div class="card">
             <div class="card-header  ">
-                <h5>Review Pending  &nbsp;<span class="form-label label label-md label-warning float-right"><?php echo count((array)$transactionactivityschedulecompletedstatus);?> </span></h5>
+                <h5><?php echo __('Review Pending  &nbsp;'); ?><span class="form-label label label-md label-warning float-right"><?php echo count((array)$transactionactivityschedulecompletedstatus);?> </span></h5>
                 <div class="card-header-right table-card-header ">
                     <div class="input-group input-group-button mb-0">
-                        <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                        <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="<?php echo __('Search'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Search'); ?>" aria-label="<?php echo __('Search'); ?>">
                         <span class="input-group-text addon-style">
                             <span class=""><span class="ti-search text-white mt-2"></span></span>
                         </span>
@@ -244,23 +244,23 @@ if($tas['link_page'] == '0'){ ?>
                    <?php
                       $stausresultv = $stausresult[$tas['current_status']];
                    ?>
-                   <button class="btn waves-effect waves-light btn-success btn-icon" onclick="updateTaskStatus('<?php echo $tas['id']; ?>','<?php echo ST_APPROVED; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Approve"><i class="ti-thumb-up f-18"></i></button>
-                   <button class="btn waves-effect waves-light btn-danger btn-icon"><button type="button" class="btn p-0 border-0 bg-transparent ti-thumb-down f-18" onclick="updateTaskStatus('<?php echo $tas['id']; ?>','<?php echo ST_REJECTED; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Reject" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></button>
+                   <button class="btn waves-effect waves-light btn-success btn-icon" onclick="updateTaskStatus('<?php echo $tas['id']; ?>','<?php echo ST_APPROVED; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Approve'); ?>"><i class="ti-thumb-up f-18"></i></button>
+                   <button class="btn waves-effect waves-light btn-danger btn-icon"><button type="button" class="btn p-0 border-0 bg-transparent ti-thumb-down f-18" onclick="updateTaskStatus('<?php echo $tas['id']; ?>','<?php echo ST_REJECTED; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Reject'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></button>
 
                    <?php if($tas['check_list'] !=""){ ?>
                     <div class="custom-popup-open custom-popup-slide-updatechecklist-qq<?php echo $tas['id']; ?> text-start" style="display: none;left: 18px;top: 55px; ">
                       <div class="card">
                         <div class="card-header">
-                          <h5>Task</h5>
+                          <h5><?php echo __('Task'); ?></h5>
                           <div class="card-header-right">
-                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeSmallPopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeSmallPopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                           </div>
                         </div>
                         <div class="card-body">
                           <table style="width: 100%;">
                             <thead>
                               <tr class="d-none">
-                                <th scope="col">Task Checklist</th>
+                                <th scope="col"><?php echo __('Task Checklist'); ?></th>
                               </tr>
                             </thead>
                             <tbody>
@@ -279,7 +279,7 @@ if($tas['link_page'] == '0'){ ?>
                                   <div class="to-do-list">
                                     <div class="checkbox-fade fade-in-primary" role="group" onchange="getTaskCheckList('<?php echo $tas['id']; ?>','<?php echo $keyval; ?>','<?php echo $employee_id; ?>')">
                                       <label class="form-label check-task <?php echo $classcheck; ?> campliancecros_<?php echo $tas['id']."_".$keyval; ?>">
-                                        <input aria-label="Checkbox" type="checkbox" value="" <?php echo $checkboxcl; ?>  class="checkcheckboxcopliance_<?php echo $tas['id']."_".$keyval; ?>" >
+                                        <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="" <?php echo $checkboxcl; ?>  class="checkcheckboxcopliance_<?php echo $tas['id']."_".$keyval; ?>" >
                                         <span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -293,13 +293,13 @@ if($tas['link_page'] == '0'){ ?>
                                   <span class="float_end">
                                     <?php
                                     if(trim($list['downloadfile']) !="" && strlen($list['downloadfile']) !='0'){ ?>
-                                      <a href="<?php echo "uploads/all/".$list['downloadfile']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Demo Form Download" download><i class="ti-cloud-down"></i></a>
+                                      <a href="<?php echo "uploads/all/".$list['downloadfile']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Demo Form Download'); ?>" download><i class="ti-cloud-down"></i></a>
                                       <?php
                                     }
                                     if(trim($list['attachment_name']) !="" && strlen($list['attachment_name']) !='0'){
                                      $path = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/candidates/".$employee_id."/Documents/";
                                      ?>
-                                     <a href="<?php echo $path.$list['attachment_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Uploaded Form Download" download><i class="ti-cloud-down m-l-20"></i></a>
+                                     <a href="<?php echo $path.$list['attachment_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Uploaded Form Download'); ?>" download><i class="ti-cloud-down m-l-20"></i></a>
                                    <?php }
 if($tas['link_page'] == '0'){ ?>
                                      <a href="<?php echo $tas['page_url'];  ?>" target="_blank" onclick="UpdateTransactionActivitySchedule1('<?php echo $tas['id']; ?>')" class="text-primary"><div class="mb-0 f-14" ><i class="ti-new-window"></i></div></a>
@@ -323,7 +323,7 @@ if($tas['link_page'] == '0'){ ?>
       <?php } ?>
       <?php } else { ?>
      <div class="card-px text-center py-20 mt-2">
-      <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Task </p>
+      <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?php echo __('No Task'); ?> </p>
       <div class="text-center px-4">
         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
       </div>

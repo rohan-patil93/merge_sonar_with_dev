@@ -56,8 +56,8 @@ $listtype  = array('MA'=>'Machine' , 'MT'=>'Material');
 
 </script>
 <div class="modal-header">
-    <h5 class="modal-title"> Add <?php echo $listtype[$type]; ?> </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"> <?php echo __('Add'); ?> <?php echo $listtype[$type]; ?> </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body">
     <form class="kt-form " id="submitformadditionalservicemm" >
@@ -66,17 +66,17 @@ $listtype  = array('MA'=>'Machine' , 'MT'=>'Material');
             <input type="hidden" name="project_id" id="project_id" value="<?php echo $task['project_id']; ?>">
             <input type="hidden" name="type" id="type" value="<?php echo $type; ?>">
             <div class="form-group col-lg-6">
-                <span class=""><?php echo $listtype[$type]; ?> Name</span>
-                <input aria-label="Name" class="form-control" type="text" id="name" name="name" value="<?php echo $row['name']; ?>">
+                <span class=""><?php echo $listtype[$type]; ?> <?php echo __('Name'); ?></span>
+                <input aria-label="<?php echo __('Name'); ?>" class="form-control" type="text" id="name" name="name" value="<?php echo $row['name']; ?>">
             </div>
             <?php if($type == 'MA'){ ?>
 
                 <div class="form-group col-lg-6"   id="machine">
-                    <span class="">Machines</span>
-                    <select aria-label="Machine" class="form-control js-example-basic-single"  name="machine_id" id="machine_id" onchange="costdisplay(this)">
-                        <option value="0"> Select Machine Type</option>
+                    <span class=""><?php echo __('Machines'); ?></span>
+                    <select aria-label="<?php echo __('Machine'); ?>" class="form-control js-example-basic-single"  name="machine_id" id="machine_id" onchange="costdisplay(this)">
+                        <option value="0"> <?php echo __('Select Machine Type'); ?></option>
                         <?php foreach($machines as $machine){ ?>
-                            <option myTag="<?php echo $machine['cost']; ?>"  <?php if($row['machine_id'] == $machine['id']){ echo "selected";
+                            <option myTag="<?php echo $machine['cost']; ?>"  <?php if($row['machine_id'] == $machine['id']){ echo __('selected');
 } ?> value="<?php echo $machine['id']; ?>"> <?php echo $machine['machine_name']; ?> </option>
                         <?php } ?>
                     </select>
@@ -85,28 +85,28 @@ $listtype  = array('MA'=>'Machine' , 'MT'=>'Material');
             <?php } ?>
             <?php if($type == 'MT'){ ?>
                 <div class="form-group col-lg-6">
-                    <span class="">Material</span>
-                    <select aria-label="Item" class="form-control js-example-basic-single"  name="item_id" id="machine_id_2"  onchange="costdisplay(this)">
-                        <option value="0"> Select Machine Type</option>
+                    <span class=""><?php echo __('Material'); ?></span>
+                    <select aria-label="<?php echo __('Item'); ?>" class="form-control js-example-basic-single"  name="item_id" id="machine_id_2"  onchange="costdisplay(this)">
+                        <option value="0"> <?php echo __('Select Machine Type'); ?></option>
                         <?php foreach($items as $item){ ?>
-                            <option myTag="<?php echo $item['cost']; ?>" <?php if($row['item_id'] == $item['id']){ echo "selected";
+                            <option myTag="<?php echo $item['cost']; ?>" <?php if($row['item_id'] == $item['id']){ echo __('selected');
 } ?> value="<?php echo $item['id']; ?>"> <?php echo $item['item_name']; ?> </option>
                         <?php } ?>
                     </select>
                 </div>
             <?php } ?>
             <div class="form-group col-lg-6">
-                <span class="">Description</span>
-                <textarea aria-label="Description" class="form-control" name="description" id="description"><?php echo $row['description']; ?></textarea>
+                <span class=""><?php echo __('Description'); ?></span>
+                <textarea aria-label="<?php echo __('Description'); ?>" class="form-control" name="description" id="description"><?php echo $row['description']; ?></textarea>
             </div>
             <div class="row">
                 <div class=" form-group col-lg-6">
-                    <span class="">Cost (Per Day)</span>
-                    <input aria-label="Budget Cost" class="form-control text-right" type="text" id="budget_cost" name="budget_cost" value="<?php echo $row['budget_cost']; ?>">
+                    <span class=""><?php echo __('Cost (Per Day)'); ?></span>
+                    <input aria-label="<?php echo __('Budget Cost'); ?>" class="form-control text-right" type="text" id="budget_cost" name="budget_cost" value="<?php echo $row['budget_cost']; ?>">
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="">Bill Rate (Per Day)</span>
-                    <input aria-label="Bill Rate" class="form-control text-right" type="text" id="bill_rate" name="bill_rate" value="<?php echo $row['bill_rate']; ?>">
+                    <span class=""><?php echo __('Bill Rate (Per Day)'); ?></span>
+                    <input aria-label="<?php echo __('Bill Rate'); ?>" class="form-control text-right" type="text" id="bill_rate" name="bill_rate" value="<?php echo $row['bill_rate']; ?>">
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@ $listtype  = array('MA'=>'Machine' , 'MT'=>'Material');
             <input type="hidden" name="is_active" id='is_active' value="0">
             <input type="hidden" name="id" id='id' value="<?php echo $_POST['id'] ?>">
 
-            <button type="button" class="btn btn-primary mr-2" onclick="submitsubfrom()" >Submit</button>
+            <button type="button" class="btn btn-primary mr-2" onclick="submitsubfrom()" ><?php echo __('Submit'); ?></button>
         </div>
     </form>
 </div>

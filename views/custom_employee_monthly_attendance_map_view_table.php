@@ -7,7 +7,7 @@ $employee_id = $_POST['employee_id'] ?? 0;
 $month       = $_POST['month'] ?? '';
 
 if (!$employee_id || !$month) {
-	echo '<div class="alert alert-danger">Invalid request</div>';
+	echo '<div class="alert alert-danger">' . __('Invalid request') . '</div>';
 	exit;
 }
 // Call API
@@ -64,7 +64,7 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
 <div class="col-12">
 	<div class="card">
 		<div class="card-header">
-			<h5>Employee Attendance Report (<?= date('F Y', strtotime($month . '-01')); ?>)</h5>
+			<h5><?= __('Employee Attendance Report') ?> (<?= date('F Y', strtotime($month . '-01')); ?>)</h5>
 		</div>
 
 		<div class="card-body">
@@ -73,13 +73,13 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th scope="col" width="5%">S.No</th>
-							<th scope="col">Attendance Date</th>
-							<th scope="col">Clock In</th>
-							<th scope="col">Clock Out</th>
+							<th scope="col" width="5%"><?= __('S.No') ?></th>
+							<th scope="col"><?= __('Attendance Date') ?></th>
+							<th scope="col"><?= __('Clock In') ?></th>
+							<th scope="col"><?= __('Clock Out') ?></th>
                             <!-- <th scope="col">Over Time</th>
                             <th scope="col">Absenteeism</th> -->
-							<th scope="col">Status</th>
+							<th scope="col"><?= __('Status') ?></th>
                             <th scope="col"></th>
 						</tr>
 					</thead>
@@ -123,7 +123,7 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
                                 }
                             }elseif(isset($attendance_map[$date]['leave_type_id']) &&  $attendance_map[$date]['leave_type_id'] !=""){
                                 $status  = 'L';
-                                $show = 'Leave';
+                                $show = __('Leave');
 
                             }else{
                                 $status  = 'A';
@@ -135,7 +135,7 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
                         // 2️⃣ Weekend
                         elseif (!in_array($day, $weak_off_arr)) {
                             $status = 'WO';
-                            $show = 'Week Off';
+                            $show = __('Week Off');
 
                         }
 
@@ -151,7 +151,7 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
                             foreach ($leave_ranges as $leave) {
                                 if ($date >= $leave['leave_from'] && $date <= $leave['leave_to']) {
                                     $status = 'L';
-                                    $show = 'Leave ('.$leave['leave_type_name'].')';
+                                    $show = __('Leave') . ' (' . __($leave['leave_type_name']) . ')';
 
                                     break;
                                 }
@@ -209,8 +209,8 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Attendance Location Map</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title"><?= __('Attendance Location Map') ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
             </div>
             <div class="modal-body" id="attendanceLocationModalBody"></div>
         </div>

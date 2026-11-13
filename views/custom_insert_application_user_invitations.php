@@ -42,14 +42,14 @@ if(isset($_POST['submit'])){
                   <form class="kt-form j-pro" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
     					<div class="form-group row ml-20 mr-20">
     						<div class="form-group col-lg-6">
-    							<label for="user_name">User Name&nbsp;<span class="requried">*</span></label>
+    							<label for="user_name"><?= __('User Name') ?>&nbsp;<span class="requried">*</span></label>
     								<input class="form-control"  type="text"  id="user_name" name="user_name"  value="" aria-label="User Name">
     								
     							<div style="display: none;color: red;" id="user_name_err"> Please enter User Name </div> 
     						</div>
 
     						<div class="form-group col-lg-6">
-    							<label for="first_name">First Name&nbsp;<span class="requried">*</span></label>
+    							<label for="first_name"><?= __('First Name') ?>&nbsp;<span class="requried">*</span></label>
     							
     								<input class="form-control"  type="text"  id="first_name" name="first_name"  value="" aria-label="First Name">
     								
@@ -57,7 +57,7 @@ if(isset($_POST['submit'])){
     						</div>
 
     						<div class="form-group col-lg-6">
-    							<label for="last_name">Last Name</label>
+    							<label for="last_name"><?= __('Last Name') ?></label>
     							
     								<input class="form-control"  type="text"  id="last_name" name="last_name"  value="" aria-label="Last Name">
     								
@@ -65,7 +65,7 @@ if(isset($_POST['submit'])){
     						</div>
 
     						<div class="form-group col-lg-6">
-    							<label for="user_email">Email</label>
+    							<label for="user_email"><?= __('Email') ?></label>
     							
     								<input class="form-control"  type="text"  id="user_email" name="user_email"  value="" aria-label="User Email">
     								
@@ -73,7 +73,7 @@ if(isset($_POST['submit'])){
     						</div>
 
     						<div class="form-group col-lg-6">
-    							<label for="user_mobile">Mobile</label>
+    							<label for="user_mobile"><?= __('Mobile') ?></label>
     							
     								<input class="form-control"  type="text"  id="user_mobile" name="user_mobile"  value="" aria-label="User Mobile">
     								
@@ -85,12 +85,12 @@ if(isset($_POST['submit'])){
     						<div class="row">
     							<div class="col-lg-9">
     								<input type="hidden" name="submit" value="Add" />
-    								<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check" aria-hidden="true"></i>Save & exit</button>
-    								<button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle" aria-hidden="true"></i>Save & continue</button>
-    								<button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close" aria-hidden="true"></i>Cancel</button>
+    								<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check" aria-hidden="true"></i><?= __('Save & exit') ?></button>
+    								<button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle" aria-hidden="true"></i><?= __('Save & continue') ?></button>
+    								<button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close" aria-hidden="true"></i><?= __('Cancel') ?></button>
     							</div>
     							<div class="col-lg-3 text-right">
-    								<button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash" aria-hidden="true"></i>Delete</button>
+    								<button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash" aria-hidden="true"></i><?= __('Delete') ?></button>
     							</div> 
     						</div>
     					</div>

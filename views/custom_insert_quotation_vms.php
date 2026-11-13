@@ -449,7 +449,7 @@ function currencychange(val,old_val){
            exchangerate();
        }else{
         swal.fire({
-            title: "6010 : Please Define Exchange Rate",
+            title: <?php echo json_encode(__('6010 : Please Define Exchange Rate')); ?>,
             type: "warning",
             buttonsStyling: false,
             confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
@@ -481,8 +481,8 @@ function toredriacte(id,url_option,table){
         console.log("last x:"+x+"y:"+y);
         if(y == 1 || x == 1 ){
         swal.fire({
-            title: "Please Enter/Select Item and Quantity ",
-            //text: "6030 : Quantity cannot be more than "+quantity_old,
+            title: <?php echo json_encode(__('Please Enter/Select Item and Quantity')); ?>,
+            //text: <?php echo json_encode(__('6030 : Quantity cannot be more than')); ?>+quantity_old,
             type: "warning",
             buttonsStyling: false,
             confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
@@ -690,7 +690,7 @@ function invoicePrefixchange(val){
     });
     $(document).on('click', '.deleteInvoice', function(){
         var id = $(this).attr("id");
-        if(confirm("Are you sure you want to remove this?")){
+        if(confirm(<?php echo json_encode(__('Are you sure you want to remove this?')); ?>)){
             $.ajax({
                 url:"action.php",
                 method:"POST",
@@ -888,12 +888,12 @@ function displaytaxes(){
 
         if(old_state != change_state){
             str+= "<tr><td style='width: 67%;text-align:right;'> IGST @ "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
-            str+= "<td>  <input aria-label="Tax Amount"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"''> </td></tr>";
+            str+= "<td>  <input aria-label="<?php echo __('Tax Amount'); ?>"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"''> </td></tr>";
         }else{
             str+= "<tr><td style='width: 67%;text-align:right;'> CGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
-            str+= "<td>  <input aria-label="Tax Amount"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
+            str+= "<td>  <input aria-label="<?php echo __('Tax Amount'); ?>"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
             str+= "<tr><td style='width: 67%;text-align:right;'> SGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
-            str+= "<td>  <input aria-label="Tax Amount"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
+            str+= "<td>  <input aria-label="<?php echo __('Tax Amount'); ?>"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
         }
 
         totaltax+=parseFloat(arr2[k]['tax_amount']);
@@ -977,8 +977,8 @@ function quantityCheckold(fid){
    var quantity_old = $('#quantity_old_'+id).val();
     if (parseFloat(quantity_old) < parseFloat(quantity)){
         swal.fire({
-            title: "Quantity alert ",
-            text: "6030 : Quantity cannot be more than "+quantity_old,
+            title: <?php echo json_encode(__('Quantity alert')); ?>,
+            text: <?php echo json_encode(__('6030 : Quantity cannot be more than')); ?>+quantity_old,
             type: "warning",
             buttonsStyling: false,
             confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
@@ -1009,8 +1009,8 @@ function quantityCheck(fid){
                 console.log(quantity);
                 if (parseFloat(data) < quantity){
                     swal.fire({
-                        title: "Quantity on hand "+parseFloat(data),
-                        text: "6020 : Do you want to change the quantity to "+parseFloat(data)+" ?",
+                        title: <?php echo json_encode(__('Quantity on hand')); ?>+parseFloat(data),
+                        text: <?php echo json_encode(__('6020 : Do you want to change the quantity to')); ?>+parseFloat(data)+" ?",
                         type: "warning",
                         buttonsStyling: false,
                         confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, change!",
@@ -1114,7 +1114,7 @@ function onchnageuommpc(id){
         <?php if($_GET['error'] !=''){ ?>
             <div class="alert alert-warning alert-dismissible">
                 <strong><?php echo $_GET['error']." : ".$_SESSION['error_message'][$_GET['error']]; ?> </strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
         <?php } ?>
         <div class="row">
@@ -1123,10 +1123,10 @@ function onchnageuommpc(id){
                     <div class="kt-portlet">
                         <div class="card">
                             <div class="card-header table-card-header">
-                              <h5><?php echo $title;  ?></h5><button type="button" class="btn p-0 border-0 bg-transparent ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Go Toure" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                              <h5><?php echo $title;  ?></h5><button type="button" class="btn p-0 border-0 bg-transparent ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Go Toure'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                               <div class="card-header-right table-card-header ">
                                  <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                                   <i class="icofont icofont-reply"></i> Back</a>
+                                   <i class="icofont icofont-reply"></i> <?php echo __('Back'); ?></a>
                                     <a target="_blank" href="index.php?option=COM_QO_PRINT&rid=<?php echo $rid; ?>&table=<?php echo $table_name; ?>&title=<?php echo urlencode($title); ?>" class="btn btn-clean kt-margin-r-10">
                                         <i class="flaticon2-print"></i>
 
@@ -1173,7 +1173,7 @@ function onchnageuommpc(id){
     <?php echo  $dis_status=todisplaystatuslist(array('table'=>$table_name,'grand_total'=>'0','current_status'=> $table1['current_status'])); ?>
     <?php $tran_no =  $table1['qo_number']; include_once "custom_insert_quotation_topup.php"; ?>
     <div class="kt-portlet__head">
-        <div class="kt-portlet__head-label p-4"><h3 class="kt-portlet__head-title"> Items/Services </h3></div>
+        <div class="kt-portlet__head-label p-4"><h3 class="kt-portlet__head-title"> <?php echo __('Items/Services'); ?> </h3></div>
         </div>
         <div class="kt-portlet__body1" >
             <div class="p-3" >
@@ -1184,62 +1184,62 @@ function onchnageuommpc(id){
             ?>
             <div class="row">
                 <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                    <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>
-                    <button class="btn btn-success" id="addRows" type="button">+ Add More</button>
+                    <button class="btn btn-danger delete" id="removeRows" type="button"><?php echo __('- Delete'); ?></button>
+                    <button class="btn btn-success" id="addRows" type="button"><?php echo __('+ Add More'); ?></button>
                 </div>
             </div>
             <div style="float: left;width: 50%; padding: 15px;">
              <div>
                 <div style="float: left;width: 48%;padding: 1%;">
-                    <span class="">Internal Note(s) </span>
-                    <textarea aria-label="Notes" style="height: 120px;" name="notes" class="form-control" ><?php echo $table1['notes']; ?></textarea>
+                    <span class=""><?php echo __('Internal Note(s)'); ?> </span>
+                    <textarea aria-label="<?php echo __('Notes'); ?>" style="height: 120px;" name="notes" class="form-control" ><?php echo $table1['notes']; ?></textarea>
                 </div>
                 <div style="float: left;width: 48%;padding: 1%;">
-                    <span class="">Printing Note(s) </span>
-                    <textarea aria-label="Printing Notes" style="height: 120px;" name="printing_notes" class="form-control" ><?php echo $table1['printing_notes']; ?></textarea>
+                    <span class=""><?php echo __('Printing Note(s)'); ?> </span>
+                    <textarea aria-label="<?php echo __('Printing Notes'); ?>" style="height: 120px;" name="printing_notes" class="form-control" ><?php echo $table1['printing_notes']; ?></textarea>
                 </div>
             </div>
             <?php if($small_sub == 0  ){ ?>
                 <div style="margin-top: 10px;clear:both;">
-                    <span class="">Comment(s)</span>
-                    <textarea aria-label="Comments" style="height: 120px;" name="comments" class="form-control" id="comments" ><?php echo $comments; ?></textarea>
+                    <span class=""><?php echo __('Comment(s)'); ?></span>
+                    <textarea aria-label="<?php echo __('Comments'); ?>" style="height: 120px;" name="comments" class="form-control" id="comments" ><?php echo $comments; ?></textarea>
                 </div>
                 <div class="btn-group" style="margin-top: 10px;float: right;">
-                   <button id="kt_llogin_signup_submit"  class="btn btn-brand" >Submit1</button>
+                   <button id="kt_llogin_signup_submit"  class="btn btn-brand" ><?php echo __('Submit1'); ?></button>
                </div>
            <?php }  ?>
        </div>
        <div style="float: left;width: 50%">
     <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
-        <input  type="hidden" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal" placeholder="Subtotal" >
-            <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal" placeholder="Subtotal" >
+        <input  type="hidden" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal" placeholder="<?php echo __('Subtotal'); ?>" >
+            <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal" placeholder="<?php echo __('Subtotal'); ?>" >
         <tr  style="display:none;">
-            <th scope="col" class="amount"><span>Sub Total</span></th>
-            <td><span><input aria-label="Input field"  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal_2" placeholder="Subtotal" >
-            <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal_2" placeholder="Subtotal" ></span></td>
+            <th scope="col" class="amount"><span><?php echo __('Sub Total'); ?></span></th>
+            <td><span><input aria-label="<?php echo __('Input field'); ?>"  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal_2" placeholder="<?php echo __('Subtotal'); ?>" >
+            <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal_2" placeholder="<?php echo __('Subtotal'); ?>" ></span></td>
         </tr>
          <tr style="display:none;">
             <th scope="col" class="amount" >
                 <div>
                     <div style="float: left;width: 33%;padding: 10px;">
-                        <span >Discount </span>
+                        <span ><?php echo __('Discount'); ?> </span>
                     </div>
                     <div style="float: left;width: 33%;padding: 3px;">
-                        <select aria-label="Discount Type" class="form-control" id="disType" name="discount_type" onchange="calculateTotal()">
-                            <option value="P">Percentage</option>
+                        <select aria-label="<?php echo __('Discount Type'); ?>" class="form-control" id="disType" name="discount_type" onchange="calculateTotal()">
+                            <option value="P"><?php echo __('Percentage'); ?></option>
                             <option <?php if($table1['discount_type'] == 'A'){ ?> selected <?php
-} ?> value="A">Amount</option>
+} ?> value="A"><?php echo __('Amount'); ?></option>
                         </select>
                     </div>
                     <div style="float: left;width: 33%;padding:3px;" >
-                        <input aria-label="Input field" value="<?php echo number_format($table1['discount_value'],2); ?>" type="text" class="form-control amount" placeholder="value" name="discount_value" id="disValue" >
+                        <input aria-label="<?php echo __('Input field'); ?>" value="<?php echo number_format($table1['discount_value'],2); ?>" type="text" class="form-control amount" placeholder="<?php echo __('value'); ?>" name="discount_value" id="disValue" >
 
                     </div>
                 </div>
             </th>
             <td><span >
-                <input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['discount_amount']); ?>"  readonly type="text" class="form-control amount" name="dis_discount_amount" id="dis_discount"  placeholder="Discount Amount">
-                 <input aria-label="Input field" value="<?php echo $table1['discount_amount']; ?>"  readonly type="hidden" class="form-control amount" name="discount_amount" id="discount" placeholder="Discount Amount">
+                <input aria-label="<?php echo __('Input field'); ?>" value="<?php echo customeummarmonyformate($table1['discount_amount']); ?>"  readonly type="text" class="form-control amount" name="dis_discount_amount" id="dis_discount"  placeholder="<?php echo __('Discount Amount'); ?>">
+                 <input aria-label="<?php echo __('Input field'); ?>" value="<?php echo $table1['discount_amount']; ?>"  readonly type="hidden" class="form-control amount" name="discount_amount" id="discount" placeholder="<?php echo __('Discount Amount'); ?>">
             </span></td>
         </tr>
         <?php if($table_name == 'bills'){ ?>
@@ -1247,11 +1247,11 @@ function onchnageuommpc(id){
             <th scope="col" class="amount">
                 <div>
                     <div style="float: left;width: 50%;padding: 10px;">
-                        <span >Shipping</span>
+                        <span ><?php echo __('Shipping'); ?></span>
                     </div>
                     <div style="float: left;width: 50%;padding: 3px;">
-                        <select aria-label="Shipping Tax" class="form-control"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" >
-                            <option value="0"> Select Any Tax Rate </option>
+                        <select aria-label="<?php echo __('Shipping Tax'); ?>" class="form-control"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" >
+                            <option value="0"> <?php echo __('Select Any Tax Rate'); ?> </option>
                             <?php foreach ($taxres as $key => $tax) {  ?>
                             <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php
 } ?> value = <?php echo $key ?>   > <?php echo $tax; ?> </option>
@@ -1263,7 +1263,7 @@ function onchnageuommpc(id){
             <input type="hidden" name="" id="tds_tax" value="0">
             <td><span >
                 <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="0">
-                <input aria-label="Input field"  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="shipping Amount">
+                <input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="<?php echo __('shipping Amount'); ?>">
             </span></td>
         </tr>
 
@@ -1276,17 +1276,17 @@ function onchnageuommpc(id){
                         foreach ($distax as $ktax) { ?>
                         <?php if($table1['tax_state'] == 'S'){ ?>
                         <tr>
-                            <td style="width: 67%;text-align:right;">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">            </td>
+                            <td style="width: 67%;text-align:right;">  <?php echo __('CGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']/2); ?><?php echo __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
+                            <td>  <input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?php echo __('Tax Amount'); ?>">            </td>
                         </tr>
                         <tr>
-                            <td style="width: 67%;text-align:right;">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">            </td>
+                            <td style="width: 67%;text-align:right;">  <?php echo __('CGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']/2); ?><?php echo __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
+                            <td>  <input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?php echo __('Tax Amount'); ?>">            </td>
                         </tr>
                     <?php } else{?>
                         <tr>
-                            <td style="width: 67%;text-align:right;">  IGST @ <?php echo customeummarmonyformate($ktax['percentage']); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">            </td>
+                            <td style="width: 67%;text-align:right;">  <?php echo __('IGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']); ?><?php echo __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
+                            <td>  <input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?php echo __('Tax Amount'); ?>">            </td>
                         </tr>
                     <?php }?>
                         <?php } ?>
@@ -1301,11 +1301,11 @@ function onchnageuommpc(id){
             <th scope="col" class="amount">
                 <div>
                     <div style="float: left;width: 50%;padding: 10px;">
-                        <span >TDS</span>
+                        <span ><?php echo __('TDS'); ?></span>
                     </div>
                     <div style="float: left;width: 50%;padding: 3px;">
-                        <select aria-label="Shipping Tax" class="form-control"  name="shipping_tax" id="tds_tax_2" onchange="calculateTotal()" >
-                            <option value="0"> Select Any Tax Rate </option>
+                        <select aria-label="<?php echo __('Shipping Tax'); ?>" class="form-control"  name="shipping_tax" id="tds_tax_2" onchange="calculateTotal()" >
+                            <option value="0"> <?php echo __('Select Any Tax Rate'); ?> </option>
                             <?php foreach ($tdstaxres as $key => $tax) {  ?>
                             <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php
 } ?> value = <?php echo $key; ?>   > <?php echo $tax; ?> </option>
@@ -1316,25 +1316,25 @@ function onchnageuommpc(id){
             </th>
             <td><span >
                 <input type="hidden" name="shipping_tax_amount" id="tds_tax_amount" value="0">
-                <input  value=""   type="hidden" class="form-control amount" id="shipping_amount_2" onblur="calculateTotal()" placeholder="TDS Amount">
-                <input aria-label="Input field"  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="TDS Amount">
+                <input  value=""   type="hidden" class="form-control amount" id="shipping_amount_2" onblur="calculateTotal()" placeholder="<?php echo __('TDS Amount'); ?>">
+                <input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="<?php echo __('TDS Amount'); ?>">
             </span></td>
         </tr>
     <?php } ?>
         <tr>
-            <th scope="col" class="amount" ><span>Grand Total</span></th>
-             <input  type="hidden" class="form-control amount" placeholder="value" name="gdam" id="gdam">
-              <input  type="hidden" class="form-control amount" placeholder="value" name="div_amount_total" id="div_amount_total">
-             <input aria-label="Input field"  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="Tax Amount">
-            <td><input aria-label="Input field"  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="Grand Total"><input aria-label="Input field"  value="<?php echo $table1['grand_total']!=""? $table1['grand_total'] : 0.00; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="Grand Total"></td>
+            <th scope="col" class="amount" ><span><?php echo __('Grand Total'); ?></span></th>
+             <input  type="hidden" class="form-control amount" placeholder="<?php echo __('value'); ?>" name="gdam" id="gdam">
+              <input  type="hidden" class="form-control amount" placeholder="<?php echo __('value'); ?>" name="div_amount_total" id="div_amount_total">
+             <input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="<?php echo __('Tax Amount'); ?>">
+            <td><input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="<?php echo __('Grand Total'); ?>"><input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo $table1['grand_total']!=""? $table1['grand_total'] : 0.00; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="<?php echo __('Grand Total'); ?>"></td>
         </tr>
         <tr style="display: none;">
-            <th scope="col" class="amount" ><span >Amount Paid</span></th>
-            <td><input aria-label="Amount Paid" value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="Amount Paid"></td>
+            <th scope="col" class="amount" ><span ><?php echo __('Amount Paid'); ?></span></th>
+            <td><input aria-label="<?php echo __('Amount Paid'); ?>" value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="<?php echo __('Amount Paid'); ?>"></td>
         </tr>
         <tr style="display: none;">
-            <td  ><span >Amount Due</span></td>
-            <td><input aria-label="Amount Due" value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="Amount Due"></td>
+            <td  ><span ><?php echo __('Amount Due'); ?></span></td>
+            <td><input aria-label="<?php echo __('Amount Due'); ?>" value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="<?php echo __('Amount Due'); ?>"></td>
         </tr>
         <?php if($table1['currency_id'] != $_SESSION['config']['default_currency_id'] && $table1['currency_id'] != ''){ $css = "";
 }else{ $css = 'style="display: none;"';
@@ -1368,26 +1368,26 @@ $disable = ''; if(!in_array($table1['current_status'], $check_array)){ $disable 
                         <input type="hidden" id="hid"name="hid" value="<?php echo $rid; ?>" />
                         <input type="hidden" name="hid_itemds" value="<?php echo $item_ids; ?>" />
                         <input type="hidden" name="submit1" value="Update" />
-                        <button id="kt_llogin_signup_submit_2" <?php echo $disable; ?> class="btn btn-primary mr-2" ><i class="la la-check"></i>Upadate</button>
-                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                        <button id="kt_llogin_signup_submit_2" <?php echo $disable; ?> class="btn btn-primary mr-2" ><i class="la la-check"></i><?php echo __('Upadate'); ?></button>
+                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                 <?php } else{ ?>
                         <input type="hidden" name="submit1" value="Add" />
-                        <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-                        <button id="kt_login_signin_submit_continue" class="btn btn-primary mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
-                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                        <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
+                        <button id="kt_login_signin_submit_continue" class="btn btn-primary mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?php echo __('Save & continue'); ?></button>
+                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                 <?php } ?>
             </div>
             <div class="col-lg-6">
              <?php if($rid!="" && $table_name =='esgin_budget_approvals' && $chr==2){ ?>
     <div class="col-lg-6">
-        <span class="h6">Assign Employee List:</span>
-        &nbsp;&nbsp;<button class="btn btn-primary btn-sm" type="button" onclick="assignemployeelist(<?php echo $rid; ?>)" >Assign List Emloyee</button>
+        <span class="h6"><?php echo __('Assign Employee List:'); ?></span>
+        &nbsp;&nbsp;<button class="btn btn-primary btn-sm" type="button" onclick="assignemployeelist(<?php echo $rid; ?>)" ><?php echo __('Assign List Emloyee'); ?></button>
 
     </div>
     <?php } ?>
             </div>
             <div class="col-lg-2 text-right">
-                <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?php echo __('Delete'); ?></button>
             </div>
         </div>
     </div>

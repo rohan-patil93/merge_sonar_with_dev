@@ -74,7 +74,7 @@ foreach ($gc_details as $row) {
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5><?php echo $isEdit ? 'Edit AMC Registration' : 'AMC Registration'; ?></h5>
+            <h5><?php echo $isEdit ? __('Edit AMC Registration') : __('AMC Registration'); ?></h5>
             <div class="card-header-right">
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                     <i class="icofont icofont-reply"></i> Back
@@ -90,8 +90,8 @@ foreach ($gc_details as $row) {
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label">AMC Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="amc_name" id="amc_name" placeholder="Enter AMC Name" value="<?php echo $isEdit?$editData['amc_name']:''; ?>" required aria-label="Enter AMC Name">
+                            <label class="form-label"><?= __('AMC Name') ?> <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="amc_name" id="amc_name" placeholder="<?= __('Enter AMC Name') ?>" value="<?php echo $isEdit?$editData['amc_name']:''; ?>" required aria-label="Enter AMC Name">
                         </div>
                     </div>
                     <?php
@@ -108,19 +108,15 @@ foreach ($gc_details as $row) {
                     <!-- Type Selection -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label">Type <span class="text-danger">*</span></label><br>
+                            <label class="form-label"><?= __('Type') ?> <span class="text-danger">*</span></label><br>
 
-                            <label class="mr-3">
-                                <input type="radio" name="party_type" value="customer"
+                            <label class="mr-3"><input type="radio" name="party_type" value="customer"
                                     <?php echo $selectedType == 'customer' ? 'checked' : ''; ?> aria-label="Party Type">
-                                Customer
-                            </label>
+                                <?= __('Customer') ?></label>
 
-                            <label>
-                                <input type="radio" name="party_type" value="vendor"
+                            <label><input type="radio" name="party_type" value="vendor"
                                     <?php echo $selectedType == 'vendor' ? 'checked' : ''; ?> aria-label="Party Type">
-                                Vendor
-                            </label>
+                                <?= __('Vendor') ?></label>
                         </div>
                     </div>
                     
@@ -129,9 +125,9 @@ foreach ($gc_details as $row) {
                     <!-- Product -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label">Product <span class="text-danger">*</span></label>
+                            <label class="form-label"><?= __('Product') ?> <span class="text-danger">*</span></label>
                             <select name="product_id" class="form-control js-example-basic-single" required aria-label="Product Id">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach ($products as $p){ ?>
                                     <option value="<?php echo $p['id']; ?>" <?php echo $isEdit && $editData['product_id']==$p['id']?'selected':''; ?>>
                                         <?php echo htmlspecialchars($p['item_name']); ?>
@@ -145,12 +141,12 @@ foreach ($gc_details as $row) {
                     <div class="col-md-3 party-box" id="customer_box"
                         style="<?php echo $selectedType == 'customer' ? '' : 'display:none;'; ?>">
                         <div class="form-group w-full">
-                            <label class="form-label">Customer <span class="text-danger">*</span></label>
+                            <label class="form-label"><?= __('Customer') ?> <span class="text-danger">*</span></label>
                             <select name="customer_id" id="customer_id"
                                 class="form-control js-example-basic-single"
                                 <?php echo $selectedType == 'customer' ? 'required' : ''; ?> aria-label="Customer Id">
 
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
 
                                 <?php foreach ($customers as $c) { ?>
                                     <option value="<?php echo $c['id']; ?>"
@@ -166,12 +162,12 @@ foreach ($gc_details as $row) {
                 <div class="col-md-3 party-box" id="vendor_box"
                     style="<?php echo $selectedType == 'vendor' ? '' : 'display:none;'; ?>">
                     <div class="form-group w-full">
-                        <label class="form-label">Vendor <span class="text-danger">*</span></label>
+                        <label class="form-label"><?= __('Vendor') ?> <span class="text-danger">*</span></label>
                         <select name="vendor_id" id="vendor_id"
                             class="form-control js-example-basic-single"
                             <?php echo $selectedType == 'vendor' ? 'required' : ''; ?> aria-label="Vendor Id">
 
-                            <option value="">Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
 
                             <?php foreach ($ven_details as $c) { ?>
                                 <option value="<?php echo $c['id']; ?>"
@@ -186,14 +182,14 @@ foreach ($gc_details as $row) {
                     <!-- Activation & Deactivation Dates -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label">Activation Date <span class="text-danger">*</span></label>
+                            <label class="form-label"><?= __('Activation Date') ?> <span class="text-danger">*</span></label>
                             <input type="date" name="activation_date" id="activationDate" class="form-control"
                                 value="<?php echo $isEdit?$editData['activation_date']:''; ?>" onchange="setDeactivationDate()" required aria-label="Activation Date">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label">Deactivation Date</label>
+                            <label class="form-label"><?= __('Deactivation Date') ?></label>
                             <input type="date" name="deactivation_date" id="deactivationDate" class="form-control"
                                 value="<?php echo $isEdit?$editData['deactivation_date']:''; ?>" readonly aria-label="Deactivation Date">
                         </div>
@@ -202,9 +198,9 @@ foreach ($gc_details as $row) {
                     <!-- Payment Type -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label">Payment / Service Type <span class="text-danger">*</span></label>
+                            <label class="form-label">Payment / Service <?= __('Type') ?> <span class="text-danger">*</span></label>
                             <select name="payment_type" class="form-control js-example-basic-single" id="serviceType" onchange="toggleServiceCharge()" required aria-label="Payment Type">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach ($payment_types as $pt){ ?>
                                     <option value="<?php echo $pt['genc_detail_code']; ?>" <?php echo $isEdit && $editData['payment_type']==$pt['genc_detail_code']?'selected':''; ?>>
                                         <?php echo $pt['genc_detail_name']; ?>
@@ -217,7 +213,7 @@ foreach ($gc_details as $row) {
                     <!-- Service Charge -->
                     <div class="col-md-3" id="serviceChargeContainer" style="<?php echo ($isEdit && $editData['payment_type']=='2')?'':'display:none;'; ?>">
                         <div class="form-group">
-                            <label class="form-label">Service Charge <span class="text-danger">*</span></label>
+                            <label class="form-label"><?= __('Service Charge') ?> <span class="text-danger">*</span></label>
                             <input type="number" name="service_charge" id="serviceCharge" class="form-control"
                                    value="<?php echo $isEdit?$editData['service_charge']:''; ?>"
                                    <?php echo ($isEdit && $editData['payment_type']=='2')?'required':''; ?> aria-label="Service Charge">
@@ -226,9 +222,9 @@ foreach ($gc_details as $row) {
                     <!-- Account Group -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label">Service  Name<span class="text-danger">*</span></label>
+                            <label class="form-label"><?= __('Service  Name') ?> <span class="text-danger">*</span></label>
                             <select name="account_group_id" class="form-control js-example-basic-single" id="selectGroup" onchange="updateGroups(this)" required aria-label="Account Group Id">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach ($ag_details as $k=>$v){ ?>
                                     <option value="<?php echo $k; ?>" <?php echo $isEdit && $editData['account_group_id']==$k?'selected':''; ?>>
                                         <?php echo $v; ?>
@@ -241,9 +237,9 @@ foreach ($gc_details as $row) {
                     <!-- Technician -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label">Service Company <span class="text-danger">*</span></label>
+                            <label class="form-label"><?= __('Service Company') ?> <span class="text-danger">*</span></label>
                             <select name="technician_id" class="form-control js-example-basic-single" id="selectTech" required aria-label="Technician Id">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php if ($isEdit && !empty($editData['technician_id'])){ ?>
                                     <option value="<?php echo $editData['technician_id']; ?>" selected><?php echo $editData['technician_name']; ?></option>
                                 <?php }; ?>
@@ -253,9 +249,9 @@ foreach ($gc_details as $row) {
                     <!-- Service On -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label">Service On <span class="text-danger">*</span></label>
+                            <label class="form-label"><?= __('Service On') ?> <span class="text-danger">*</span></label>
                             <select name="service_on" id="serviceOn" class="form-control js-example-basic-single" onchange="resetDynamicFields()" required aria-label="Service On">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach ($services as $s){ ?>
                                     <option value="<?php echo $s['genc_detail_code']; ?>" <?php echo $isEdit && $editData['service_on']==$s['genc_detail_code']?'selected':''; ?>>
                                         <?php echo $s['genc_detail_name']; ?>
@@ -269,9 +265,9 @@ foreach ($gc_details as $row) {
                     <!-- No of Services -->
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">No of Services <span class="text-danger">*</span></label>
+                            <label class="form-label"><?= __('No of Services') ?> <span class="text-danger">*</span></label>
                             <select name="no_of_services" id="noOfService" class="form-control js-example-basic-single" onchange="generateServiceFields()" required aria-label="No Of Services">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php for ($i=1;$i<=10;$i++){ ?>
                                     <option value="<?php echo $i; ?>" <?php echo $isEdit && $editData['no_of_services']==$i?'selected':''; ?>>
                                         <?php echo $i; ?>
@@ -285,10 +281,10 @@ foreach ($gc_details as $row) {
                     <div class="col-md-4">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="form-label">Building Name<span class="text-danger">*</span></label>
+                                <label class="form-label"><?= __('Building Name') ?> <span class="text-danger">*</span></label>
                                 <select name="building_id" class="form-control js-example-basic-single" 
                                         id="selectBuilding" onchange="updateFloors(this)" required aria-label="Building Id">
-                                    <option value="">Select Any One</option>
+                                    <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach ($buildings as $row){ ?>
                                         <option value="<?php echo $row['id']; ?>" 
                                             <?php echo $isEdit && $editData['building_id']==$row['id']?'selected':''; ?>>
@@ -302,10 +298,10 @@ foreach ($gc_details as $row) {
                         <!-- Floor Dropdown -->
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="form-label">Floor <span class="text-danger">*</span></label>
+                                <label class="form-label"><?= __('Floor') ?> <span class="text-danger">*</span></label>
                                 <select name="building_floor_id" class="form-control js-example-basic-single"
                                         id="selectFloor" onchange="updateFloorSpaces(this)" disabled required aria-label="Building Floor Id">
-                                    <option value="">Select Any One</option>
+                                    <option value=""><?= __('Select Any One') ?></option>
                                 </select>
                             </div>
                         </div>
@@ -313,10 +309,10 @@ foreach ($gc_details as $row) {
                         <!-- Floor Spaces Dropdown -->
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="form-label">Floor Space <span class="text-danger">*</span></label>
+                                <label class="form-label"><?= __('Floor Space') ?> <span class="text-danger">*</span></label>
                                 <select name="building_floor_space_id" class="form-control js-example-basic-single"
                                         id="selectFloorSpace" disabled required aria-label="Building Floor Space Id">
-                                    <option value="">Select Any One</option>
+                                    <option value=""><?= __('Select Any One') ?></option>
                                 </select>
                             </div>
                         </div>
@@ -327,7 +323,7 @@ foreach ($gc_details as $row) {
                 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="checklistToggle" class="form-label d-block">Is there Checklist?</label>
+                            <label for="checklistToggle" class="form-label d-block"><?= __('Is there Checklist?') ?></label>
                             <div class="form-switch form-check form-check-inline">
                                 <input class="form-check-input" name="check_list" type="checkbox" id="checklistToggle"
                                     <?php echo (!empty($checklist_items))?'checked':''; ?> onchange="toggleChecklistSection()" aria-label="Check List">
@@ -350,7 +346,7 @@ foreach ($gc_details as $row) {
                                 <?php } } ?>
                             </div>
                             <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="addChecklistField()">
-                                <i class="icofont icofont-plus"></i> Add More
+                                <i class="icofont icofont-plus"></i> <?= __('Add More') ?>
                             </button>
                         </div>
                     </div>
@@ -359,7 +355,7 @@ foreach ($gc_details as $row) {
 
                 <div class="text-start mt-4">
                     <button type="submit" name="submit" class="btn btn-primary px-5" value="<?php echo $isEdit ? 'UPDATE' : 'SAVE'; ?>">
-                        <i class="icofont icofont-save"></i> <?php echo $isEdit ? 'Update' : 'Save'; ?>
+                        <i class="icofont icofont-save"></i> <?php echo $isEdit ? __('Update') : __('Save'); ?>
                     </button>
                 </div>
             </form>
@@ -398,8 +394,8 @@ $(document).ready(function () {
 function updateFloors(sel){
     const floorSel = $('#selectFloor');
     const spaceSel = $('#selectFloorSpace');
-    floorSel.empty().append('<option value="">Select Any One</option>').prop('disabled', true);
-    spaceSel.empty().append('<option value="">Select Any One</option>').prop('disabled', true);
+    floorSel.empty().append('<option value=""><?= __('Select Any One') ?></option>').prop('disabled', true);
+    spaceSel.empty().append('<option value=""><?= __('Select Any One') ?></option>').prop('disabled', true);
 
     if(!sel.value) return;
 
@@ -426,7 +422,7 @@ function updateFloors(sel){
 
 function updateFloorSpaces(sel, fromEdit = false){
     const spaceSel = $('#selectFloorSpace');
-    spaceSel.empty().append('<option value="">Select Any One</option>').prop('disabled', true);
+    spaceSel.empty().append('<option value=""><?= __('Select Any One') ?></option>').prop('disabled', true);
 
     if(!sel.value) return;
 
@@ -457,7 +453,7 @@ function updateGroups(sel){
         type: "POST",
         data: {page:'getselectedlist', id:sel.value, field:sel.name, table_name:'amc_account_details'},
         success: function(d){
-            const techSel = $('#selectTech').empty().append('<option value="">Select Any One</option>');
+            const techSel = $('#selectTech').empty().append('<option value=""><?= __('Select Any One') ?></option>');
             if (d) {
                 JSON.parse(d).forEach(function(r){
                     techSel.append('<option value="'+r.id+'">'+r.account_name+'</option>');
@@ -529,7 +525,7 @@ function generateServiceFields(){
         }
 
         container.append(`<div class="col-md-12"><div class="form-group">
-            <label class="form-label">Service ${i} <span class="text-danger">*</span></label>${html}</div></div>`);
+            <label class="form-label"><?= __('Service ${i}') ?> <span class="text-danger">*</span></label>${html}</div></div>`);
     }
     $(".js-example-basic-single").select2();
 }

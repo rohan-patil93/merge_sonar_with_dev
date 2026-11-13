@@ -141,7 +141,7 @@ function addnewoptionrows(qid) {
   var op = document.getElementById('option_row').value;
   var op = parseInt(op)+1;
      var optionlistid = "optionlist"+qid+op;
-     $("#options"+qid).append('<div id='+"'"+optionlistid+"'"+'> <div class="form-group row" id="'+"'"+op+"'"+'"><div class="col-lg-1"></div><div class="col-lg-8"><div class="input-group input-icon-right"> <input type="text" class="form-control display-inline"  name="survey_question_option'+qid+'[]" placeholder="Option" aria-label="Option"> <div class="input-group-append"><span class="input-group-text bg-primary"><span><i class="fa fa-trash close text-white" onclick="delnewoptionrows('+"'"+op+"'"+','+"'"+qid+"'"+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove Option"></i></span></span></div></div></div></div></div>');
+     $("#options"+qid).append('<div id='+"'"+optionlistid+"'"+'> <div class="form-group row" id="'+"'"+op+"'"+'"><div class="col-lg-1"></div><div class="col-lg-8"><div class="input-group input-icon-right"> <input type="text" class="form-control display-inline"  name="survey_question_option'+qid+'[]" placeholder="<?php echo __('Option'); ?>" aria-label="<?php echo __('Option'); ?>"> <div class="input-group-append"><span class="input-group-text bg-primary"><span><i class="fa fa-trash close text-white" onclick="delnewoptionrows('+"'"+op+"'"+','+"'"+qid+"'"+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove Option'); ?>"></i></span></span></div></div></div></div></div>');
      document.getElementById('option_row').value = op ;
    }
 
@@ -200,12 +200,12 @@ function addnewoptionrows(qid) {
  function submitDynamicWorkflow(table_name, transaction_id, current_status, next_status, old_status_name, new_status_name) {
   swal({
    title: "<?php echo ucwords((string)($_SESSION['config']['name'] ?? '')); ?>",
-   text: "Please note the status of the survey will change to " + new_status_name,
+   text: <?php echo json_encode(__('Please note the status of the survey will change to')); ?> + new_status_name,
    type: "info",
    showCancelButton: true,
    confirmButtonClass: "btn-danger",
-   confirmButtonText: "Yes",
-   cancelButtonText: "No",
+   confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+   cancelButtonText: <?php echo json_encode(__('No')); ?>,
    closeOnConfirm: false
   },
   function () {
@@ -230,12 +230,12 @@ function addnewoptionrows(qid) {
       });
      } else {
       swal({
-       title: "Oops...",
+       title: <?php echo json_encode(__('Oops...')); ?>,
        text: res.transaction_update.message,
        type: "error",
        showCancelButton: true,
        showConfirmButton: false,
-       cancelButtonText: "Ok",
+       cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
        confirmButtonClass: "btn-danger",
        closeOnCancel: false
       });
@@ -321,10 +321,10 @@ function addnewoptionrows(qid) {
    return {valid:false, message:displayTag+' description is required.'};
   }
   if(!startDateEl || startDateEl.value.trim() == ''){
-   return {valid:false, message:'Start date is required.'};
+   return {valid:false, message:<?php echo json_encode(__('Start date is required.')); ?>};
   }
   if(!endDateEl || endDateEl.value.trim() == ''){
-   return {valid:false, message:'End date is required.'};
+   return {valid:false, message:<?php echo json_encode(__('End date is required.')); ?>};
   }
   console.log('startDateEl', startDateEl.value);
   console.log('endDateEl', endDateEl.value);
@@ -335,24 +335,24 @@ function addnewoptionrows(qid) {
   console.log('startDate', startDate);
   console.log('endDate', endDate);
   if(startDate == null || endDate == null){
-   return {valid:false, message:'Please enter valid start and end dates (DD/MM/YYYY).'};
+   return {valid:false, message:<?php echo json_encode(__('Please enter valid start and end dates (DD/MM/YYYY).')); ?>};
   }
   if(endDate < startDate){
-   return {valid:false, message:'End date must be on or after start date.'};
+   return {valid:false, message:<?php echo json_encode(__('End date must be on or after start date.')); ?>};
   }
   if(!assignToEl || assignToEl.value.trim() == '' || assignToEl.value.trim() == '0'){
-   return {valid:false, message:'Assign to is required. Please use Edit to select employees.'};
+   return {valid:false, message:<?php echo json_encode(__('Assign to is required. Please use Edit to select employees.')); ?>};
   }
   var valueIds = document.querySelectorAll('#survey_setup_form input[name="value_id[]"]');
   if(valueIds.length == 0){
-   return {valid:false, message:'At least one question is required.'};
+   return {valid:false, message:<?php echo json_encode(__('At least one question is required.')); ?>};
   }
   for(var v = 0; v < valueIds.length; v++){
    var qIndex = valueIds[v].value;
    var questionEl = document.querySelector('#survey_setup_form textarea[name="survey_question'+qIndex+'"]');
    var qtypeEl = document.querySelector('#survey_setup_form input[name="options_display_type'+qIndex+'"]');
    if(!questionEl || questionEl.value.trim() == ''){
-    return {valid:false, message:'Question text is required for all questions.'};
+    return {valid:false, message:<?php echo json_encode(__('Question text is required for all questions.')); ?>};
    }
    var qtype = qtypeEl ? qtypeEl.value : '';
    if(qtype == '1' || qtype == '3'){
@@ -364,14 +364,14 @@ function addnewoptionrows(qid) {
      }
     }
     if(nonemptyCount < 2){
-     return {valid:false, message:'Each multiple choice/ranking question must have at least 2 options.'};
+     return {valid:false, message:<?php echo json_encode(__('Each multiple choice/ranking question must have at least 2 options.')); ?>};
     }
    }
    if(qtype == '2'){
     var ratingEl = document.querySelector('#survey_setup_form input[name="survey_question_option'+qIndex+'[]"]');
     var scaleVal = ratingEl ? parseInt(ratingEl.value, 10) : 0;
     if(isNaN(scaleVal) || scaleVal <= 0){
-     return {valid:false, message:'Rating scale must be greater than 0 for all rating questions.'};
+     return {valid:false, message:<?php echo json_encode(__('Rating scale must be greater than 0 for all rating questions.')); ?>};
     }
    }
   }
@@ -387,16 +387,16 @@ function addnewoptionrows(qid) {
    var result = validateSurveySetupForm();
    if(!result.valid){
     e.preventDefault();
-    swal('Validation Error', result.message, 'error');
+    swal(<?php echo json_encode(__('Validation Error')); ?>, result.message, 'error');
    }
   });
  });
  </script>
 <div class="card">          
   <div class="card-header table-card-header">
-    <h5><?php echo $display_tag; ?> Setup</h5>
+    <h5><?php echo $display_tag; ?> <?php echo __('Setup'); ?></h5>
     <div class="card-header-right table-card-header ">
-      <a href="javascript:history.go(-1)" class="btn waves-effect waves-light "><i class="icofont icofont-reply"></i>Back</a>
+      <a href="javascript:history.go(-1)" class="btn waves-effect waves-light "><i class="icofont icofont-reply"></i><?php echo __('Back'); ?></a>
     </div>
   </div>
   <div class="card-custom">
@@ -420,11 +420,11 @@ function addnewoptionrows(qid) {
             <div class="card card-custom gutter-b">
               <div class="card-body">
                 <div class="form-group">
-                  <label for="survey_name" class="form-label"><?php echo $display_tag; ?> Name <span class="text-danger">*</span></label>
-                  <input type="text" id="survey_name" name="survey_name" value="<?php echo $survey_details['survey_name'];?>" class="form-control" placeholder="Enter Title" required aria-label="<?php echo $display_tag; ?> Name">
+                  <label for="survey_name" class="form-label"><?php echo $display_tag; ?> <?php echo __('Name'); ?> <span class="text-danger">*</span></label>
+                  <input type="text" id="survey_name" name="survey_name" value="<?php echo $survey_details['survey_name'];?>" class="form-control" placeholder="<?php echo __('Enter Title'); ?>" required aria-label="<?php echo $display_tag; ?> Name">
                 </div>
                 <div class="form-group">
-                  <label for="survey_type" class="form-label"><?php echo $display_tag; ?> Type <span class="text-danger">*</span></label>
+                  <label for="survey_type" class="form-label"><?php echo $display_tag; ?> <?php echo __('Type'); ?> <span class="text-danger">*</span></label>
                   <div class="col-9 col-form-label">
                     <div class="radio-inline">
                       <?php foreach ($survey_types as $k => $value) { ?>
@@ -436,28 +436,28 @@ function addnewoptionrows(qid) {
                     </div>
                   </div>
                   <div class="form-group mt-3">
-                    <label for="survey_description" class="form-label"><?php echo $display_tag; ?> Description <span class="text-danger">*</span></label>
-                    <textarea class="form-control" id="survey_description" name="description" placeholder="Enter Title" required aria-label="<?php echo $display_tag; ?> Description"><?php echo $survey_details['description'];?></textarea>
+                    <label for="survey_description" class="form-label"><?php echo $display_tag; ?> <?php echo __('Description'); ?> <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="survey_description" name="description" placeholder="<?php echo __('Enter Title'); ?>" required aria-label="<?php echo $display_tag; ?> Description"><?php echo $survey_details['description'];?></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="survey_start_date" class="form-label"><?php echo $display_tag; ?> Date Range <span class="text-danger">*</span></label>
+                    <label for="survey_start_date" class="form-label"><?php echo $display_tag; ?> <?php echo __('Date Range'); ?> <span class="text-danger">*</span></label>
                     <div class='row' id='kt_daterangepicker_survey'>
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <input type='text' class="form-control datepicker" id="survey_start_date" name="survey_start_date" value="<?php echo $survey_details['survey_start_date']; ?>" required aria-label="Survey Start Date">
+                          <input type='text' class="form-control datepicker" id="survey_start_date" name="survey_start_date" value="<?php echo $survey_details['survey_start_date']; ?>" required aria-label="<?php echo __('Survey Start Date'); ?>">
                         </div>
                       </div>
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <input type='text' class="form-control datepicker" id="survey_end_date" name="survey_end_date" value="<?php echo $survey_details['survey_end_date']; ?>" required aria-label="Survey End Date">
+                          <input type='text' class="form-control datepicker" id="survey_end_date" name="survey_end_date" value="<?php echo $survey_details['survey_end_date']; ?>" required aria-label="<?php echo __('Survey End Date'); ?>">
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="kt_select2_48" class="form-label"><?php echo $display_tag; ?> Initiator</label>
+                    <label for="kt_select2_48" class="form-label"><?php echo $display_tag; ?> <?php echo __('Initiator'); ?></label>
                     <select class="form-select js-example-basic-single" id="kt_select2_48" name="survey_initiator" aria-label="<?php echo $display_tag; ?> Initiator">
-                      <option> Select any one</option>
+                      <option> <?php echo __('Select any one'); ?></option>
                         <?php $survey_init =  $survey_details['survey_initiator']!="" ? $survey_details['survey_initiator'] :$_SESSION['emp_id'];
                         foreach ($employee_list as $value) { ?>
                         <option value="<?php echo $value['id'];?>" <?php if($value['id'] == $survey_init){ ?>selected <?php } ?> ><?php echo $value['display_name']; ?>
@@ -466,8 +466,8 @@ function addnewoptionrows(qid) {
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="btn_assign_to" class="form-label w-100">Asign to <span class="text-danger">*</span>
-                      <button type="button" class="btn btn-link p-0 float-end f-w-600 border-0 text-decoration-none" id="btn_assign_to" onclick="showpopup();">Edit</button>
+                    <label for="btn_assign_to" class="form-label w-100"><?php echo __('Asign to'); ?> <span class="text-danger">*</span>
+                      <button type="button" class="btn btn-link p-0 float-end f-w-600 border-0 text-decoration-none" id="btn_assign_to" onclick="showpopup();"><?php echo __('Edit'); ?></button>
                     </label>
                     <div id="tsk_fortable"></div>
                     <div class="col-xl-12">
@@ -477,8 +477,8 @@ function addnewoptionrows(qid) {
                   </div> 
                   <div class="form-group">
                     <?php //print_r($who_can_see_id); ?>
-                    <label for="kt_select2_43" class="form-label">Who can see the results</label> 
-                    <select class="form-select js-example-basic-multiple" id="kt_select2_43" name="who_can_see_the_results[]" multiple="multiple" aria-label="Who Can See The Results">
+                    <label for="kt_select2_43" class="form-label"><?php echo __('Who can see the results'); ?></label> 
+                    <select class="form-select js-example-basic-multiple" id="kt_select2_43" name="who_can_see_the_results[]" multiple="multiple" aria-label="<?php echo __('Who Can See The Results'); ?>">
                       <?php foreach ($employee_list as $value) { 
                       $key=$value['id']; ?>
                       <option <?php if(count((array)$who_can_see_id) != 0 && in_array($key,$who_can_see_id)){ ?> selected <?php } ?> value="<?php echo $key;?>"><?php echo $value['display_name']; ?></option>
@@ -494,7 +494,7 @@ function addnewoptionrows(qid) {
                   <div class="col-lg-6 text-right">
                     <!-- Example single danger button-->
                     <div class="btn-group">
-                      <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Questions</button>
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo __('Add Questions'); ?></button>
                       <div class="dropdown-menu">
                         <?php  foreach ($qustion_types as $key => $value) {
                         //$question_types[$value['genc_detail_code']]  = $value['genc_detail_code']; ?>
@@ -535,21 +535,21 @@ function addnewoptionrows(qid) {
 
                 <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">'.$title.'</h5>
-                <i aria-hidden="true" class="fa fa-trash close text-white"  data-dismiss="modal" aria-label="Close" onclick="deletequestion('."'".$question_id."'".')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove Question"></i>
+                <i aria-hidden="true" class="fa fa-trash close text-white"  data-dismiss="modal" aria-label="'.htmlspecialchars(__('Close'), ENT_QUOTES).'" onclick="deletequestion('."'".$question_id."'".')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.htmlspecialchars(__('Remove Question'), ENT_QUOTES).'"></i>
                 </div>
                 <div class="card-body mt-3">
                 <div class="form-group text-left">
-                <label for="survey_question'.$qkey.'">Question Text: <span class="text-danger"></span></label>
-                <textarea id="survey_question'.$qkey.'" name="survey_question'.$qkey.'" class="form-control border" placeholder="" aria-label="Question Text"> '.$value['question'].' </textarea>
+                <label for="survey_question'.$qkey.'">'.__('Question Text:').' <span class="text-danger"></span></label>
+                <textarea id="survey_question'.$qkey.'" name="survey_question'.$qkey.'" class="form-control border" placeholder="" aria-label="'.htmlspecialchars(__('Question Text'), ENT_QUOTES).'"> '.$value['question'].' </textarea>
                 </div>
                 <div class="form-group text-left">
                 <div class="checkbox-inline">';
                 if($value['type']==1 || $value['type']==3)   { 
                   $display_question .='
                   <label for="allow_multiple_selections'.$qkey.'" class="checkbox checkbox-primary">
-                    <input class="border" type="checkbox" name="allow_multiple_selections'.$qkey.'" id="allow_multiple_selections'.$qkey.'" '.$allow_multiple_selections_status.' aria-label="Allow multiple selections">
+                    <input class="border" type="checkbox" name="allow_multiple_selections'.$qkey.'" id="allow_multiple_selections'.$qkey.'" '.$allow_multiple_selections_status.' aria-label="'.htmlspecialchars(__('Allow multiple selections'), ENT_QUOTES).'">
                     <span></span>
-                    Allow multiple selections
+                    '.__('Allow multiple selections').'
                   </label>';
                 }
                 else{
@@ -557,9 +557,9 @@ function addnewoptionrows(qid) {
                 }
                 $display_question .='
                 <label for="require_response'.$qkey.'" class="checkbox checkbox-primary">
-                  <input class="border" type="checkbox" name="require_response'.$qkey.'" id="require_response'.$qkey.'" '.$require_response_status.' aria-label="Require a Response">
+                  <input class="border" type="checkbox" name="require_response'.$qkey.'" id="require_response'.$qkey.'" '.$require_response_status.' aria-label="'.htmlspecialchars(__('Require a Response'), ENT_QUOTES).'">
                   <span></span>
-                  Require a Response
+                  '.__('Require a Response').'
                 </label>
                 </div>
                 </div>' ;
@@ -571,9 +571,9 @@ function addnewoptionrows(qid) {
                   <div class="col-lg-1"></div>
                   <div class="col-lg-8">
                   <div class="input-group input-group-button"> 
-                  <input type="text" class="form-control display-inline width1" name="survey_question_option'.$qkey.'[]"  placeholder="Option" value="'.$opvalue.'" aria-label="Option">
+                  <input type="text" class="form-control display-inline width1" name="survey_question_option'.$qkey.'[]"  placeholder="'.htmlspecialchars(__('Option'), ENT_QUOTES).'" value="'.$opvalue.'" aria-label="'.htmlspecialchars(__('Option'), ENT_QUOTES).'">
                   <span class="input-group-text addon-style">
-                  <span class="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove Option"><i class="fa fa-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$qkey."'".')"></i></span>
+                  <span class="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.htmlspecialchars(__('Remove Option'), ENT_QUOTES).'"><i class="fa fa-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$qkey."'".')"></i></span>
                   </span>
                   </div>
                   </div>
@@ -585,13 +585,13 @@ function addnewoptionrows(qid) {
                 $display_question .= '</div>';
                 $display_question .= '<div class="form-group">
                 <input type="hidden" value="'.$opkey.'" id="option_row"/>
-                <button class="btn btn-success" onclick="addnewoptionrows('."'".$qkey."'".')" id="addNewRows" type="button">+ Add More Options</button>
+                <button class="btn btn-success" onclick="addnewoptionrows('."'".$qkey."'".')" id="addNewRows" type="button">'.__('+ Add More Options').'</button>
                 </div>';
               }  
               if($value['type']==2)   { 
                 $display_question .= ' <div class="form-group text-left mt-10">
-                <label for="survey_question_scale_'.$qkey.'">Scale from 1 to: <span class="text-danger">*</span></label>
-                <input type="number" id="survey_question_scale_'.$qkey.'" name="survey_question_option'.$qkey.'[]" class="form-control border" placeholder="'.$options[0].'" value="'.$options[0].'" aria-label="Scale Option"> 
+                <label for="survey_question_scale_'.$qkey.'">'.__('Scale from 1 to:').' <span class="text-danger">*</span></label>
+                <input type="number" id="survey_question_scale_'.$qkey.'" name="survey_question_option'.$qkey.'[]" class="form-control border" placeholder="'.$options[0].'" value="'.$options[0].'" aria-label="'.htmlspecialchars(__('Scale Option'), ENT_QUOTES).'"> 
                 </div>';
               }  
               if($value['type']==4)   { 

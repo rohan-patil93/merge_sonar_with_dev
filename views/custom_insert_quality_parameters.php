@@ -83,15 +83,15 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
             <?php if($error_message !=''){ ?>
             <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
             <?php } ?>
             <div class="card-header">
-                <h5>Quality Parameters</h5>
+                <h5><?php echo __('Quality Parameters'); ?></h5>
                 <div class="card-header-right">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?php echo __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -100,33 +100,33 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
                     <form class="" method="post" action="" >
                         <div class="row p-4">
                             <div class="form-group col-lg-6">
-                                <span>Group Name</span>
+                                <span><?php echo __('Group Name'); ?></span>
                                 <div class="w-full">
-                                    <select aria-label="Quality Parameter Group" class="form-select js-example-basic-single" name="quality_parameter_group_id" >
-                                        <option>Select Any</option>
+                                    <select aria-label="<?php echo __('Quality Parameter Group'); ?>" class="form-select js-example-basic-single" name="quality_parameter_group_id" >
+                                        <option><?php echo __('Select Any'); ?></option>
 
                                         <?php foreach($groupdetails as $group){ ?>
-                                            <option <?php if($role['quality_parameter_group_id']==$group['id']){ echo "selected";
+                                            <option <?php if($role['quality_parameter_group_id']==$group['id']){ echo __('selected');
 } ?> value="<?php echo $group['id']; ?>"><?php echo $group['group_name']; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                             </div>
                             <div class=" form-group col-lg-6">
-                                <span>Display Type</span>
+                                <span><?php echo __('Display Type'); ?></span>
                                 <div class="w-full">
-                                    <select aria-label="Display Type" class="form-select js-example-basic-single" onchange="dschangepart(this.value)" name="display_type" >
-                                        <option>Select Any</option>
+                                    <select aria-label="<?php echo __('Display Type'); ?>" class="form-select js-example-basic-single" onchange="dschangepart(this.value)" name="display_type" >
+                                        <option><?php echo __('Select Any'); ?></option>
                                         <?php foreach($dispay as $diskey=>$dis){ ?>
-                                            <option <?php if($role['display_type']==$diskey){ echo "selected";
+                                            <option <?php if($role['display_type']==$diskey){ echo __('selected');
 } ?> value="<?php echo $diskey; ?>"><?php echo $dis; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span>Name</span>
-                                <textarea aria-label="Name" class="form-control" name="name"><?php echo $role['name'] ?></textarea>
+                                <span><?php echo __('Name'); ?></span>
+                                <textarea aria-label="<?php echo __('Name'); ?>" class="form-control" name="name"><?php echo $role['name'] ?></textarea>
                             </div>
 
 
@@ -142,20 +142,20 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
                                  ?>
                                 <div class="col-lg-12 row f-w-600">
                                     <div class="col-lg-5">
-                                        Key
+                                        <?php echo __('Key'); ?>
                                     </div>
                                     <div class="col-lg-6">
-                                        Value
+                                        <?php echo __('Value'); ?>
                                     </div>
 
                                 </div>
                                 <?php foreach($jdataon as $jkey=>$jsd){ ?>
                                 <div class="col-lg-12 row mt-2" id="jsn_1">
                                     <div class="col-lg-5">
-                                        <input aria-label="Field[]" type="text" name="field[]" class="form-control" value="<?php echo $jkey; ?>">
+                                        <input aria-label="<?php echo __('Field[]'); ?>" type="text" name="field[]" class="form-control" value="<?php echo $jkey; ?>">
                                     </div>
                                     <div class="col-lg-6">
-                                        <input aria-label="Fieldvalue[]" type="text" name="fieldvalue[]" class="form-control" value="<?php echo $jsd; ?>">
+                                        <input aria-label="<?php echo __('Fieldvalue[]'); ?>" type="text" name="fieldvalue[]" class="form-control" value="<?php echo $jsd; ?>">
                                     </div>
 
                                 </div>
@@ -174,19 +174,19 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
                                  ?>
                                 <div class="col-lg-12 row f-w-600">
                                     <div class="col-lg-5">
-                                        Key
+                                        <?php echo __('Key'); ?>
                                     </div>
                                     <div class="col-lg-6">
-                                        Value
+                                        <?php echo __('Value'); ?>
                                     </div>
                                 </div>
                                 <?php foreach($jdatato as $jkey=>$jsd){ ?>
                                 <div class="col-lg-12 row mt-2" id="jsn_1_2">
                                     <div class="col-lg-5">
-                                        <input aria-label="Field[]" type="text" name="field[]" class="form-control" value="<?php echo $jkey; ?>">
+                                        <input aria-label="<?php echo __('Field[]'); ?>" type="text" name="field[]" class="form-control" value="<?php echo $jkey; ?>">
                                     </div>
                                     <div class="col-lg-6">
-                                        <input aria-label="Fieldvalue[]" type="text" name="fieldvalue[]" class="form-control" value="<?php echo $jsd; ?>">
+                                        <input aria-label="<?php echo __('Fieldvalue[]'); ?>" type="text" name="fieldvalue[]" class="form-control" value="<?php echo $jsd; ?>">
                                     </div>
                                 </div>
                                 <?php } ?>
@@ -204,19 +204,19 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
                                  ?>
                                 <div class="col-lg-12 row f-w-600">
                                     <div class="col-lg-5">
-                                        Key
+                                        <?php echo __('Key'); ?>
                                     </div>
                                     <div class="col-lg-6">
-                                        Value
+                                        <?php echo __('Value'); ?>
                                     </div>
                                 </div>
                                 <?php foreach($jdatathr as $jkey=>$jsd){ ?>
                                 <div class="col-lg-12 row mt-2" id="jsn_1_3">
                                     <div class="col-lg-5">
-                                        <input aria-label="Field[]" type="text" name="field[]" class="form-control" value="<?php echo $jkey; ?>">
+                                        <input aria-label="<?php echo __('Field[]'); ?>" type="text" name="field[]" class="form-control" value="<?php echo $jkey; ?>">
                                     </div>
                                     <div class="col-lg-6">
-                                        <input aria-label="Fieldvalue[]" type="text" name="fieldvalue[]" class="form-control" value="<?php echo $jsd; ?>">
+                                        <input aria-label="<?php echo __('Fieldvalue[]'); ?>" type="text" name="fieldvalue[]" class="form-control" value="<?php echo $jsd; ?>">
                                     </div>
                                 </div>
                                 <?php } ?>
@@ -228,8 +228,8 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
                                 if($role['display_type']==4){
                                 $jdatafov = $role['quality_parameters'];
                                 } ?>
-                                <span>Ratting out of</span>
-                                <input aria-label="Input field" type="text" class="form-control" value="<?php echo $jdatafov; ?>" name="quality_parameters">
+                                <span><?php echo __('Ratting out of'); ?></span>
+                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo $jdatafov; ?>" name="quality_parameters">
                             </div>
 
                             <div class="col-lg-6 row" id="type_5" <?php if($role['display_type']!=5){ ?> style="display:none;" <?php
@@ -239,12 +239,12 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
                                 $jdatafiv = json_decode($role['quality_parameters'],1);
                                 } ?>
                                 <div class="form-group col-lg-6" >
-                                    <span>Min Range </span>
-                                    <input aria-label="Input field" type="text" class="form-control" value="<?php echo $jdatafiv['min'] ?>" name="min">
+                                    <span><?php echo __('Min Range'); ?> </span>
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo $jdatafiv['min'] ?>" name="min">
                                 </div>
                                 <div class="form-group col-lg-6" >
-                                    <span>Max Range </span>
-                                    <input aria-label="Input field" type="text" class="form-control" value="<?php echo $jdatafiv['max'] ?>" name="max">
+                                    <span><?php echo __('Max Range'); ?> </span>
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo $jdatafiv['max'] ?>" name="max">
                                 </div>
                             </div>
 
@@ -256,18 +256,18 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
                                         <input type="hidden" name="hid" value=<?php echo $rid; ?> />
                                         <input type="hidden" name="submit" value="Update" />
                                         <button id="kt_llogin_signup_submit" <?php if($status_res == '1'){ ?> disabled="disabled" <?php
-} ?> class="btn btn-primary mr-2" ><i class="la la-check"></i>Upadate</button>
+} ?> class="btn btn-primary mr-2" ><i class="la la-check"></i><?php echo __('Upadate'); ?></button>
 
                                     <?php } else{ ?>
                                         <div class="col-lg-9">
                                             <input type="hidden" name="submit" value="Add" />
-                                            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value_exit" value="exit"><i class="la la-check"></i>Save & exit</button>
+                                            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value_exit" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
 
-                                            <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i>Cancel</button>
+                                            <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                                         <?php } ?>
                                     </div>
                                     <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-right">
-                                        <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                                        <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?php echo __('Delete'); ?></button>
                                     </div>
                                 </div>
                             </div>

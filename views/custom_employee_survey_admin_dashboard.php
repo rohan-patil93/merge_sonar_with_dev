@@ -1,6 +1,6 @@
 <?php
 // echo '<pre>'; print_r($_SESSION);
-$category = array('1' => 'Survey', '2' => 'Poll');
+$category = array('1' => __('Survey'), '2' => __('Poll'));
 if($_GET['CAT'] == ""){
 	$_GET['CAT'] = 1;
 }
@@ -38,7 +38,7 @@ if($completionPercent < 0){
 	$completionPercent = 0;
 }
 
-$myTitle = $_GET['CAT'] == '2' ? 'My Poll' : 'My Survey';
+$myTitle = $_GET['CAT'] == '2' ? __('My Poll') : __('My Survey');
 ?>
 <link rel="stylesheet" type="text/css" href="assets/css/custom_employee_survey_admin_dashboard.css">
 
@@ -72,11 +72,11 @@ $myTitle = $_GET['CAT'] == '2' ? 'My Poll' : 'My Survey';
 												</div>
 											</div>
 											<div class="col close">
-												<h6 class="m-b-5 text-dark f-w-600">Assigned</h6>
+												<h6 class="m-b-5 text-dark f-w-600"><?= __('Assigned') ?></h6>
 												<h3 class="m-b-0 f-w-700 f-34 mt-2"><?php echo $assignedCount; ?></h3>
 											</div>
 										</div>
-										<h6 class="pt-3 border-top mt-3 f-w-600 f-14"><?php echo $display_tag; ?> assigned to you</h6>
+										<h6 class="pt-3 border-top mt-3 f-w-600 f-14"><?php echo $display_tag; ?> <?= __('assigned to you') ?></h6>
 									</div>
 								</div>
 							</div>
@@ -96,11 +96,11 @@ $myTitle = $_GET['CAT'] == '2' ? 'My Poll' : 'My Survey';
 												</div>
 											</div>
 											<div class="col close">
-												<h6 class="m-b-5 text-dark f-w-600">In-Progress</h6>
+												<h6 class="m-b-5 text-dark f-w-600"><?= __('In-Progress') ?></h6>
 												<h3 class="m-b-0 f-w-700 f-34 mt-2"><?php echo $inProgressCount; ?></h3>
 											</div>
 										</div>
-										<h6 class="pt-3 border-top mt-3 f-w-600 f-14"><?php echo $display_tag; ?> in progress</h6>
+										<h6 class="pt-3 border-top mt-3 f-w-600 f-14"><?php echo $display_tag; ?> <?= __('in progress') ?></h6>
 									</div>
 								</div>
 							</div>
@@ -120,11 +120,11 @@ $myTitle = $_GET['CAT'] == '2' ? 'My Poll' : 'My Survey';
 												</div>
 											</div>
 											<div class="col close">
-												<h6 class="m-b-5 text-dark f-w-600">Completed</h6>
+												<h6 class="m-b-5 text-dark f-w-600"><?= __('Completed') ?></h6>
 												<h3 class="m-b-0 f-w-700 f-34 mt-2"><?php echo $completedCount; ?></h3>
 											</div>
 										</div>
-										<h6 class="pt-3 border-top mt-3 f-w-600 f-14"><?php echo $display_tag; ?>s completed</h6>
+										<h6 class="pt-3 border-top mt-3 f-w-600 f-14"><?php echo $display_tag; ?><?= __('s completed') ?></h6>
 									</div>
 								</div>
 							</div>
@@ -144,11 +144,11 @@ $myTitle = $_GET['CAT'] == '2' ? 'My Poll' : 'My Survey';
 												</div>
 											</div>
 											<div class="col close">
-												<h6 class="m-b-5 text-dark f-w-600">Pending</h6>
+												<h6 class="m-b-5 text-dark f-w-600"><?= __('Pending') ?></h6>
 												<h3 class="m-b-0 f-w-700 f-34 mt-2"><?php echo $pendingCount; ?></h3>
 											</div>
 										</div>
-										<h6 class="pt-3 border-top mt-3 f-w-600 f-14"><?php echo $display_tag; ?> pending action</h6>
+										<h6 class="pt-3 border-top mt-3 f-w-600 f-14"><?php echo $display_tag; ?> <?= __('pending action') ?></h6>
 									</div>
 								</div>
 							</div>
@@ -158,7 +158,7 @@ $myTitle = $_GET['CAT'] == '2' ? 'My Poll' : 'My Survey';
 							<div class="card-header">
 								<h5> <?php echo $display_tag; ?>s</h5>
 								<div class="card-header-right">
-									<a href="<?php echo $list_url; ?>" class="text-primary f-w-600">View All</a>
+									<a href="<?php echo $list_url; ?>" class="text-primary f-w-600"><?= __('View All') ?></a>
 								</div>
 							</div>
 							<div class="card-block custom-scroll" style="max-height: 500px;">
@@ -174,7 +174,7 @@ $myTitle = $_GET['CAT'] == '2' ? 'My Poll' : 'My Survey';
 					<div class="col-lg-3">
 						<div class="card">
 							<div class="card-header">
-								<h5>Completion Rate</h5>
+								<h5><?= __('Completion Rate') ?></h5>
 							</div>
 							<div class="card-block">
 								<div class="completion-card">
@@ -185,12 +185,12 @@ $myTitle = $_GET['CAT'] == '2' ? 'My Poll' : 'My Survey';
 											</div>
 										</div>
 										<div class="text-content">
-											<h3 class="title"><?php echo htmlspecialchars($completionTitle); ?></h3>
-											<p class="description"><?php echo htmlspecialchars($completionText); ?></p>
+											<h3 class="title"><?php echo htmlspecialchars(__($completionTitle)); ?></h3>
+											<p class="description"><?php echo htmlspecialchars(__($completionText)); ?></p>
 										</div>
 									</div>
 									<a href="<?php echo $list_url; ?>" class="details-link">
-										View Completion Details <span class="chevron">&rsaquo;</span>
+										<?= __('View Completion Details') ?> <span class="chevron">&rsaquo;</span>
 									</a>
 								</div>
 							</div>
@@ -198,9 +198,9 @@ $myTitle = $_GET['CAT'] == '2' ? 'My Poll' : 'My Survey';
 
 						<div class="card">
 							<div class="card-header">
-								<h5>Upcoming Deadlines</h5>
+								<h5><?= __('Upcoming Deadlines') ?></h5>
 								<div class="card-header-right">
-									<a href="<?php echo $list_url; ?>" class="f-w-600 float-end text-primary">View All</a>
+									<a href="<?php echo $list_url; ?>" class="f-w-600 float-end text-primary"><?= __('View All') ?></a>
 								</div>
 							</div>
 							<div class="card-block">
@@ -220,17 +220,17 @@ $myTitle = $_GET['CAT'] == '2' ? 'My Poll' : 'My Survey';
 								</div>
 								<?php }
 								} else { ?>
-								<p class="emp-survey-empty m-0">No upcoming deadlines.</p>
+								<p class="emp-survey-empty m-0"><?= __('No upcoming deadlines.') ?></p>
 								<?php } ?>
 							</div>
 							<div class="card-footer border-top">
-								<a href="<?php echo $list_url; ?>" class="f-w-600 text-primary text-center d-block">See All Deadlines</a>
+								<a href="<?php echo $list_url; ?>" class="f-w-600 text-primary text-center d-block"><?= __('See All Deadlines') ?></a>
 							</div>
 						</div>
 
 						<div class="card latest-update-card">
 							<div class="card-header">
-								<h5>Recent Activity</h5>
+								<h5><?= __('Recent Activity') ?></h5>
 							</div>
 							<div class="card-block">
 								<div class="scroll-widget mt-4">
@@ -246,19 +246,19 @@ $myTitle = $_GET['CAT'] == '2' ? 'My Poll' : 'My Survey';
 												<i class="<?php echo htmlspecialchars($activityRow['icon_class']); ?> update-icon"></i>
 											</div>
 											<div class="col p-l-5">
-												<h6 class="m-b-5"><?php echo htmlspecialchars($activityRow['title']); ?></h6>
-												<p class="text-muted m-b-0"><?php echo htmlspecialchars($activityRow['subtitle']); ?></p>
+												<h6 class="m-b-5"><?php echo htmlspecialchars(__($activityRow['title'])); ?></h6>
+												<p class="text-muted m-b-0"><?php echo htmlspecialchars(__($activityRow['subtitle'])); ?></p>
 											</div>
 										</div>
 										<?php }
 										} else { ?>
-										<p class="emp-survey-empty m-0">No recent activity.</p>
+										<p class="emp-survey-empty m-0"><?= __('No recent activity.') ?></p>
 										<?php } ?>
 									</div>
 								</div>
 							</div>
 							<div class="card-footer border-top">
-								<a href="<?php echo $list_url; ?>" class="f-w-600 text-primary text-center d-block">View All Activity</a>
+								<a href="<?php echo $list_url; ?>" class="f-w-600 text-primary text-center d-block"><?= __('View All Activity') ?></a>
 							</div>
 						</div>
 					</div>

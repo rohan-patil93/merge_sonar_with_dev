@@ -63,15 +63,15 @@ $_SESSION['download_data'] = [];
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>CSR PO VS ACTUALS SUMMARY</h5>
+            <h5><?= __('CSR PO VS ACTUALS SUMMARY') ?></h5>
             <?php if (count((array)$list) > 0) { ?>
                 <div class="card-header-right">
                     <div class="dropdown-primary dropdown open">
                         <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-csr-po-actuals"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More') ?></button>
                         <div class="dropdown-menu p-0" aria-labelledby="dropdown-csr-po-actuals" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                             <a class="dropdown-item waves-light waves-effect"
-                                href="custom_view_download.php?page=CSRPovsActualsSummary&format=csv" target="_blank">CSV</a>
+                                href="custom_view_download.php?page=CSRPovsActualsSummary&format=csv" target="_blank"><?= __('CSV') ?></a>
                         </div>
                     </div>
                 </div>
@@ -85,29 +85,29 @@ $_SESSION['download_data'] = [];
                             <tr>
                                 <th scope="col" class="csr-sticky-col csr-sticky-project bg-primary"></th>
                                 <th scope="col" class="csr-sticky-col csr-sticky-nature bg-primary"></th>
-                                <th scope="col" class="csr-sticky-col csr-sticky-partner text-center bg-primary">PO Details</th>
+                                <th scope="col" class="csr-sticky-col csr-sticky-partner text-center bg-primary"><?= __('PO Details') ?></th>
                                 <?php foreach ($normalizedFyList as $fyRow) { ?>
                                     <th scope="col" colspan="3" class="bg-primary text-white text-center">
                                         FY <?= $fyRow['text']; ?>
                                     </th>
                                 <?php } ?>
-                                <th scope="col" colspan="5" class="bg-primary text-white text-center">Total Spent & Unspent Amt. (incl GST)</th>
+                                <th scope="col" colspan="5" class="bg-primary text-white text-center"><?= __('Total Spent & Unspent Amt. (incl GST)') ?></th>
                             </tr>
                             <tr>
-                                <th scope="col" rowspan="1" class="csr-sticky-col csr-sticky-project bg-dark text-white text-center">Name of the CSR Project</th>
-                                <th scope="col" rowspan="1" class="csr-sticky-col csr-sticky-nature bg-dark text-white text-center">Nature of Work Done</th>
-                                <th scope="col" rowspan="1" class="csr-sticky-col csr-sticky-partner bg-dark text-white text-center">Business Partner Name</th>
+                                <th scope="col" rowspan="1" class="csr-sticky-col csr-sticky-project bg-dark text-white text-center"><?= __('Name of the CSR Project') ?></th>
+                                <th scope="col" rowspan="1" class="csr-sticky-col csr-sticky-nature bg-dark text-white text-center"><?= __('Nature of Work Done') ?></th>
+                                <th scope="col" rowspan="1" class="csr-sticky-col csr-sticky-partner bg-dark text-white text-center"><?= __('Business Partner Name') ?></th>
 
                                 <?php foreach ($normalizedFyList as $fy) { ?>
-                                    <th scope="col" class="bg-dark text-white text-center">PO No</th>
-                                    <th scope="col" class="bg-dark text-white text-center">PO Issued<br>(Incl. GST)</th>
-                                    <th scope="col" class="bg-dark text-white text-center">Amt. Spent<br>(Incl. GST)</th>
+                                    <th scope="col" class="bg-dark text-white text-center"><?= __('PO No') ?></th>
+                                    <th scope="col" class="bg-dark text-white text-center"><?= __('PO Issued') ?><br>(<?= __('Incl. GST') ?>)</th>
+                                    <th scope="col" class="bg-dark text-white text-center"><?= __('Amt. Spent') ?><br>(<?= __('Incl. GST') ?>)</th>
                                 <?php } ?>
-                                <th scope="col" class="bg-dark text-white text-center">Total PO Issued</th>
-                                <th scope="col" class="bg-dark text-white text-center">Total Spent Amt.</th>
-                                <th scope="col" class="bg-dark text-white text-center">Spent %</th>
-                                <th scope="col" class="bg-dark text-white text-center">Total Unspent Amt.</th>
-                                <th scope="col" class="bg-dark text-white text-center">Unspent %</th>
+                                <th scope="col" class="bg-dark text-white text-center"><?= __('Total PO Issued') ?></th>
+                                <th scope="col" class="bg-dark text-white text-center"><?= __('Total Spent Amt.') ?></th>
+                                <th scope="col" class="bg-dark text-white text-center"><?= __('Spent %') ?></th>
+                                <th scope="col" class="bg-dark text-white text-center"><?= __('Total Unspent Amt.') ?></th>
+                                <th scope="col" class="bg-dark text-white text-center"><?= __('Unspent %') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -207,7 +207,7 @@ $_SESSION['download_data'] = [];
                             $_SESSION['csv_header']['date_time'] = date('d-m-Y H:i:s');
                             ?>
                             <tr class="fw-bold bg-light">
-                                <td colspan="3" class="text-end">Grand Total</td>
+                                <td colspan="3" class="text-end"><?= __('Grand Total') ?></td>
                                 <?php foreach ($normalizedFyList as $fy) {
                                     $fyKey = $fy['key'];
                                 ?>
@@ -228,7 +228,7 @@ $_SESSION['download_data'] = [];
                 </div>
             <?php } else { ?>
                 <div class="text-center py-4">
-                    <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> No Data Available</p>
+                    <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> <?= __('No Data Available') ?></p>
                     <div class="text-center px-4">
                         <img class="mw-100 mh-300px max-h-300" src="assets/images/work.png" alt="" >
                     </div>

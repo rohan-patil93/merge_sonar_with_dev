@@ -23,7 +23,7 @@ if($_GET['type'] == 'SAL'){
                     <i class="ti-settings"></i>
                 </div>
                 <div class="step-icon  bg-primary"></div>
-                <div class="font-size-lg mt-1 ">Step 1</div>
+                <div class="font-size-lg mt-1 "><?= __('Step 1') ?></div>
 
             </div>
             <div class="col-lg-4">
@@ -31,7 +31,7 @@ if($_GET['type'] == 'SAL'){
                     <i class="ti-settings"></i>
                 </div>
                 <div class="step-icon bg-primary"></div>
-                <div class="font-size-lg mt-1">Step 2</div>
+                <div class="font-size-lg mt-1"><?= __('Step 2') ?></div>
 
             </div>
             <div class="col-lg-4">
@@ -39,7 +39,7 @@ if($_GET['type'] == 'SAL'){
                     <i class="ti-settings"></i>
                 </div>
 
-                <div class="font-size-lg mt-1">Step 3</div>
+                <div class="font-size-lg mt-1"><?= __('Step 3') ?></div>
 
             </div>
 
@@ -50,20 +50,19 @@ if($_GET['type'] == 'SAL'){
                 <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
                 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
                     <div class="card-header table-card-header">
-                      <h5><?php echo "Data Implode";  ?></h5>
+                      <h5><?= __('Data Implode') ?></h5>
                       <div class="card-header-right table-card-header ">
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                                  <i class="icofont icofont-reply"></i>
-                                  Back
+                                  <i class="icofont icofont-reply"></i> <?= __('Back') ?>
                             </a>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
                             <div class="form-group col-lg-6">
-                                <span>To Insert Data to Tables</span>
+                                <span><?= __('To Insert Data to Tables') ?></span>
                             <div>
-                            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="exit"><i class="la la-check"></i>Import</button>
+                            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="exit"><i class="la la-check"></i><?= __('Import') ?></button>
                         </div>
                             <input type="hidden" name="submit" value="Add">
                     </div>
@@ -84,31 +83,31 @@ if($_GET['type'] == 'SAL'){
                     <div class="col-lg-7">
                         <div class="row col-lg-12">
                             <div class="col-lg-6">
-                                File Name :
+                                <?= __('File Name') ?> :
                             </div>
                             <div class="p-2 col-lg-6">
                                 <?php echo  $_GET['file_name']; ?>
                             </div>
                             <div class=" p-2 col-lg-6">
-                                Table Name :
+                                <?= __('Table Name') ?> :
                             </div>
                             <div class="p-2 col-lg-6">
                                 <?php echo  $_GET['table']; ?>
                             </div>
                             <div class="p-2 col-lg-6">
-                                Total  Recards :
+                                <?= __('Total Records') ?> :
                             </div>
                             <div class="p-2 col-lg-6">
                                 <?php echo  $data['cc']; ?>
                             </div>
                             <div class="p-2 col-lg-6">
-                                Uploaded  Recards :
+                                <?= __('Uploaded Records') ?> :
                             </div>
                             <div class="p-2 col-lg-6">
                                 <?php echo  $data['rc']; ?>
                             </div>
                             <div class="p-2 col-lg-6">
-                                Filed  Recards :
+                                <?= __('Failed Records') ?> :
                             </div>
                             <div class="p-2 col-lg-6">
                                 <?php echo  $data['cc']-$data['rc']; ?>
@@ -117,8 +116,8 @@ if($_GET['type'] == 'SAL'){
                     </div>
                     <?php if($_GET['table']=='employees' && !isset($_GET['type'])) {?>
                     <div class="p-2 col-lg-3">
-                        Do you want Import the salary
-                        <a href="index.php?option=COM_INSERT_DYNAMIC_DATA_IMPORT&file_name=<?php echo $_GET['file_name'] ?>&table=<?php echo $_GET['table']; ?>&type=SAL"> <button class="button btn btn-primary"> Import Salary </button></a>
+                        <?= __('Do you want Import the salary') ?>
+                        <a href="index.php?option=COM_INSERT_DYNAMIC_DATA_IMPORT&file_name=<?php echo $_GET['file_name'] ?>&table=<?php echo $_GET['table']; ?>&type=SAL"> <button class="button btn btn-primary"> <?= __('Import Salary') ?> </button></a>
                     </div>
                     <?php } ?>
                 </div>

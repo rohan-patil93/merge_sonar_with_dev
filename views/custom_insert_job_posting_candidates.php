@@ -103,15 +103,15 @@ $userlist = json_decode($userlist,1);
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><label class="kt-checkbox"> <input aria-label="Checkbox"  class="itemRow" type="checkbox">  <span> </span> </label> </td>';
-        htmlRows += '<td><input aria-label="Name[]" type="text" class="form-control" name="name[]" value=""></td> ';
-        htmlRows += '<td><input aria-label="Email[]" type="text" class="form-control" name="email[]" value=""> </td>';
-        htmlRows += '<td><input aria-label="Phone[]" type="text" class="form-control" name="phone[]" value=""></td>';
-        htmlRows += '<td><select aria-label="Process[]" class="form-control" name="process[]" ><option value="0">Select Any One</option>    <?php foreach ($spdata as  $sp) { ?><option  value="<?php echo $sp[id]; ?>"><?php echo $sp[select_name]; ?></option><?php
+        htmlRows += '<td><label class="kt-checkbox"> <input aria-label="<?php echo __('Checkbox'); ?>"  class="itemRow" type="checkbox">  <span> </span> </label> </td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Name[]'); ?>" type="text" class="form-control" name="name[]" value=""></td> ';
+        htmlRows += '<td><input aria-label="<?php echo __('Email[]'); ?>" type="text" class="form-control" name="email[]" value=""> </td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Phone[]'); ?>" type="text" class="form-control" name="phone[]" value=""></td>';
+        htmlRows += '<td><select aria-label="<?php echo __('Process[]'); ?>" class="form-control" name="process[]" ><option value="0"><?php echo __('Select Any One'); ?></option>    <?php foreach ($spdata as  $sp) { ?><option  value="<?php echo $sp[id]; ?>"><?php echo $sp[select_name]; ?></option><?php
 } ?></select></td>';
-        htmlRows += '<td><textarea aria-label="Remarks[]" class="form-control" name="remarks[]" ></textarea> </td>';
-        htmlRows += '<td><select aria-label="Status[]" class="form-control" name="status[]"><option value="0">Select Any One</option><option value="0">Active</option></select></td>';
-        htmlRows += '<td><button type="button" herf="#" class="btn btn-primary mr-2" disabled data-container="body" data-toggle="popover" data-placement="top" data-content="Create Candidate Details"> Infrom </button></td>';
+        htmlRows += '<td><textarea aria-label="<?php echo __('Remarks[]'); ?>" class="form-control" name="remarks[]" ></textarea> </td>';
+        htmlRows += '<td><select aria-label="<?php echo __('Status[]'); ?>" class="form-control" name="status[]"><option value="0"><?php echo __('Select Any One'); ?></option><option value="0"><?php echo __('Active'); ?></option></select></td>';
+        htmlRows += '<td><button type="button" herf="#" class="btn btn-primary mr-2" disabled data-container="body" data-toggle="popover" data-placement="top" data-content="Create Candidate Details"> <?php echo __('Infrom'); ?> </button></td>';
         htmlRows += '</tr>';
         $('#invoiceItem').append(htmlRows);
     }
@@ -134,7 +134,7 @@ $userlist = json_decode($userlist,1);
                             }
                         }
                         swal.fire({
-                        //title: "You want to go goal page",
+                        //title: <?php echo json_encode(__('You want to go goal page')); ?>,
                         text: mms,
                         type: "success",
                         buttonsStyling: false,
@@ -162,10 +162,10 @@ $userlist = json_decode($userlist,1);
                 <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
                     <div class="card card-custom" id="kt_page_sticky_card">
                         <div class="card-header">
-                            <h5>Job Posting Applicants</h5>
+                            <h5><?php echo __('Job Posting Applicants'); ?></h5>
                             <div class="card-header-right">
 
-                                <button type="button" class="btn btn-primary waves-effect waves-ligh"> <i class="ti-arrow-left text-white"></i> Back</button>
+                                <button type="button" class="btn btn-primary waves-effect waves-ligh"> <i class="ti-arrow-left text-white"></i> <?php echo __('Back'); ?></button>
                             </div>
                         </div>
                         <div class="card-body">
@@ -186,7 +186,7 @@ $userlist = json_decode($userlist,1);
 
                                         <div class="card-block text-center">
                                             <div data-label="40%" class="radial-bar radial-bar-40 radial-bar-lg radial-bar-danger">
-                                                <img src="uploads/all/<?php echo $uimg; ?>" alt="User">
+                                                <img src="uploads/all/<?php echo $uimg; ?>" alt="<?php echo __('User'); ?>">
                                             </div>
                                             <div class="row">
                                                 <div class="col-6">
@@ -201,7 +201,7 @@ $userlist = json_decode($userlist,1);
                                                     </div>
                                                 </div>
                                                 <div class="col-6 b-l-default">
-                                                    <a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATE&Rid=<?php echo  deocdeId($nridw); ?>" class="btn btn-info waves-effect waves-light  f-12">view</a>
+                                                    <a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATE&Rid=<?php echo  deocdeId($nridw); ?>" class="btn btn-info waves-effect waves-light  f-12"><?php echo __('view'); ?></a>
                                                 </div>
                                             </div>
                                         </div>

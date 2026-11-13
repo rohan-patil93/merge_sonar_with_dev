@@ -62,9 +62,9 @@ $title = viewTitle($_GET['option']);
     <?php if($content !=''){ ?>
         <div class="alert alert-custom alert-white shadow-lg fade show mb-5" role="alert">
         <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-        <div class="alert-text"><?php echo "Help Text"; ?></div>
+        <div class="alert-text"><?php echo __('Help Text'); ?></div>
         <div class="alert-close">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="<?php echo __('Close'); ?>">
                 <span aria-hidden="true"><i class="ki ki-close"></i></span>
             </button>
         </div>
@@ -84,8 +84,8 @@ $title = viewTitle($_GET['option']);
 
                                </div>
                               <div style="float: left;">
-                               <select aria-label="Display List" class="form-control" id="kt_select2_11" name= "display_list" onchange="GetSelectedTextValue(this.value)">
-                                           <option> Select Role</option>
+                               <select aria-label="<?php echo __('Display List'); ?>" class="form-control" id="kt_select2_11" name= "display_list" onchange="GetSelectedTextValue(this.value)">
+                                           <option> <?php echo __('Select Role'); ?></option>
                                            <?php  foreach ($show as $key => $data) { ?>
                                                <option  <?php if($role_id == $data['id']){ ?> selected  <?php
 } ?> value = <?php echo $data['id'];  ?>   > <?php echo ucwords($data['name']); ?> </option>
@@ -97,24 +97,24 @@ $title = viewTitle($_GET['option']);
                 <div class="card-toolbar">
                     <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                             <i class="ki ki-long-arrow-back icon-xs"></i>
-                            Back
+                            <?php echo __('Back'); ?>
                         </a>
-                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save </button> &nbsp;
-                    <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i>Cancel</button>
+                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save'); ?> </button> &nbsp;
+                    <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                 </div>
             </div>
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-lg-4">
-                        <span>Table Name</span>
+                        <span><?php echo __('Table Name'); ?></span>
                     </div>
                     <div class="col-lg-2">
                         <div>
-                            <span>  View</span>
+                            <span>  <?php echo __('View'); ?></span>
                             <div>
                                 <span class="switch switch-outline switch-icon switch-primary">
                                     <label>
-                                        <input aria-label="Viewchk" type="checkbox" id='viewchk'   onclick='viewcheckalldata(this.id)' onkeydown="">
+                                        <input aria-label="<?php echo __('Viewchk'); ?>" type="checkbox" id='viewchk'   onclick='viewcheckalldata(this.id)' onkeydown="">
                                         <span></span>
                                     </label>
                                 </span>
@@ -122,33 +122,33 @@ $title = viewTitle($_GET['option']);
                         </div>
                     </div>
                     <div class="col-lg-2">
-                            <span class=""> Insert</span>
+                            <span class=""> <?php echo __('Insert'); ?></span>
                             <div>
                                 <span class="switch switch-outline switch-icon switch-primary">
                                     <label>
-                                        <input aria-label="Insertchk" type="checkbox" id='insertchk'   onclick='viewcheckalldata(this.id)' onkeydown="">
+                                        <input aria-label="<?php echo __('Insertchk'); ?>" type="checkbox" id='insertchk'   onclick='viewcheckalldata(this.id)' onkeydown="">
                                         <span></span>
                                     </label>
                                 </span>
                             </div>
                     </div>
                     <div class="col-lg-2">
-                        <span class=""> Update </span>
+                        <span class=""> <?php echo __('Update'); ?> </span>
                         <div>
                                 <span class="switch switch-outline switch-icon switch-primary">
                                     <label>
-                                        <input aria-label="Updatechk" type="checkbox" id='updatechk'   onclick='viewcheckalldata(this.id)' onkeydown="">
+                                        <input aria-label="<?php echo __('Updatechk'); ?>" type="checkbox" id='updatechk'   onclick='viewcheckalldata(this.id)' onkeydown="">
                                         <span></span>
                                     </label>
                                 </span>
                         </div>
                     </div>
                     <div class="col-lg-2">
-                        <span class="">   Delete</span>
+                        <span class="">   <?php echo __('Delete'); ?></span>
                         <div>
                                 <span class="switch switch-outline switch-icon switch-primary">
                                     <label>
-                                        <input aria-label="Deletechk" type="checkbox" id='deletechk'   onclick='viewcheckalldata(this.id)' onkeydown="">
+                                        <input aria-label="<?php echo __('Deletechk'); ?>" type="checkbox" id='deletechk'   onclick='viewcheckalldata(this.id)' onkeydown="">
                                         <span></span>
                                     </label>
                                 </span>
@@ -158,14 +158,14 @@ $title = viewTitle($_GET['option']);
                 <?php foreach ($roles as $key => $value) {  ?>
                         <div class="form-group row">
                             <div class="col-lg-4">
-                                <input aria-label="Db[]" type="text" class="form-control" readonly name="db[]" value=<?php echo $key;?> >
+                                <input aria-label="<?php echo __('Db[]'); ?>" type="text" class="form-control" readonly name="db[]" value=<?php echo $key;?> >
                             </div>
 
                             <div class="col-lg-2">
                                 <div class="col-3">
                                     <span class="switch switch-outline switch-icon switch-primary">
                                         <label>
-                                            <input aria-label="View[]" type="checkbox"  name="view[]" class='viewchk'  <?php if($value['permission_view'] == 1){ ?> checked <?php
+                                            <input aria-label="<?php echo __('View[]'); ?>" type="checkbox"  name="view[]" class='viewchk'  <?php if($value['permission_view'] == 1){ ?> checked <?php
 } ?>  >
                                             <span></span>
                                         </label>
@@ -176,7 +176,7 @@ $title = viewTitle($_GET['option']);
                                 <div class="col-3">
                                     <span class="switch switch-outline switch-icon switch-primary">
                                         <label>
-                                            <input aria-label="Insert[]" type="checkbox"  name="insert[]"  class="insertchk" <?php if($value['permission_insert'] == 1){ ?> checked <?php
+                                            <input aria-label="<?php echo __('Insert[]'); ?>" type="checkbox"  name="insert[]"  class="insertchk" <?php if($value['permission_insert'] == 1){ ?> checked <?php
 } ?> >
                                             <span></span>
                                         </label>
@@ -187,7 +187,7 @@ $title = viewTitle($_GET['option']);
                                 <div class="col-3">
                                     <span class="switch switch-outline switch-icon switch-primary">
                                         <label>
-                                            <input aria-label="Update[]" type="checkbox"  name="Update[]" class="updatechk"  <?php if($value['permission_update'] == 1){ ?> checked <?php
+                                            <input aria-label="<?php echo __('Update[]'); ?>" type="checkbox"  name="Update[]" class="updatechk"  <?php if($value['permission_update'] == 1){ ?> checked <?php
 } ?>>
                                             <span></span>
                                         </label>
@@ -198,7 +198,7 @@ $title = viewTitle($_GET['option']);
                                 <div class="col-3">
                                     <span class="switch switch-outline switch-icon switch-primary">
                                         <label>
-                                            <input aria-label="Delete[]" type="checkbox" class="deletechk" name="delete[]"  <?php if($value['permission_delete'] == 1){ ?> checked <?php
+                                            <input aria-label="<?php echo __('Delete[]'); ?>" type="checkbox" class="deletechk" name="delete[]"  <?php if($value['permission_delete'] == 1){ ?> checked <?php
 } ?> >
                                             <span></span>
                                         </label>
@@ -214,17 +214,17 @@ $title = viewTitle($_GET['option']);
                                     <?php if(isset($_GET['Rid']) && $_GET['Rid'] !='' && $_GET['copy'] != '1'){ ?>
                                             <input type="hidden" name="hid" value=<?php echo $rid; ?> />
                                             <input type="hidden" name="submit" value="Update" />
-                                            <button id="kt_llogin_signup_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" ><i class="la la-check"></i>Upadate</button>
-                                            <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                                            <button id="kt_llogin_signup_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" ><i class="la la-check"></i><?php echo __('Upadate'); ?></button>
+                                            <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                                     <?php } else{ ?>
                                             <input type="hidden" name="submit" value="Add" />
-                                            <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-                                            <button id="kt_login_signin_submit_3" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
-                                            <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i>Cancel</button>
+                                            <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
+                                            <button id="kt_login_signin_submit_3" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?php echo __('Save & continue'); ?></button>
+                                            <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                                     <?php } ?>
                                 </div>
                                 <div class="col-lg-6 text-right">
-                                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?php echo __('Delete'); ?></button>
                                 </div>
                             </div>
                         </div>

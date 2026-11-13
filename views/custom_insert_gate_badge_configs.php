@@ -29,11 +29,11 @@ if (isset($_POST['submit']) && in_array($_POST['submit'], ['insert', 'update'], 
     $is_active = (int)($_POST['is_active'] ?? 0);
 
     if ($gate_id <= 0) {
-        $error = 'Please select a Gate';
+        $error = __('Please select a Gate');
     } elseif (empty($visit_code)) {
-        $error = 'Please enter a Prefix Code';
+        $error = __('Please enter a Prefix Code');
     } elseif ($range_start < 0 || $range_end <= $range_start) {
-        $error = 'Range end must be greater than range start';
+        $error = __('Range end must be greater than range start');
     } else {
         $selected_gate_loc = 0;
         foreach ($gates as $g) {
@@ -73,7 +73,7 @@ if (isset($_POST['submit']) && in_array($_POST['submit'], ['insert', 'update'], 
             header("location:index.php?option=custom_list_gate_badge_configs");
             exit;
         } else {
-            $error = 'Failed to save the badge configuration.';
+            $error = __('Failed to save the badge configuration.');
         }
     }
 }
@@ -88,7 +88,7 @@ if ($editMode) {
     $config = $config_list[0] ?? null;
 
     if (!$config) {
-        $error = 'Configuration not found or deleted.';
+        $error = __('Configuration not found or deleted.');
     }
 }
 ?>
@@ -99,7 +99,7 @@ if ($editMode) {
 <div class="form-container">
     <div class="form-header">
         <h4><?= $editMode ? 'Edit Gate Badge Config' : 'Add Gate Badge Config' ?></h4>
-        <p>Set numbering ranges, padding, and labels for badge generations at specific gates.</p>
+        <p><?php echo __('Set numbering ranges, padding, and labels for badge generations at specific gates.'); ?></p>
     </div>
 
     <?php if (!empty($error)): ?>
@@ -110,9 +110,9 @@ if ($editMode) {
 
     <form id="configForm" method="post">
         <div class="form-group">
-            <label for="gate_id">Select Gate <span class="text-danger">*</span></label>
+            <label for="gate_id"><?php echo __('Select Gate'); ?> <span class="text-danger">*</span></label>
             <select id="gate_id" name="gate_id" class="form-control-custom" required>
-                <option value="">-- Choose Gate --</option>
+                <option value=""><?php echo __('-- Choose Gate --'); ?></option>
                 <?php foreach ($gates as $g): ?>
                     <option value="<?= (int)$g['id'] ?>" <?= (isset($config['gate_id']) && (int)$config['gate_id'] === (int)$g['id']) ? 'selected' : '' ?>>
                         <?= htmlspecialchars($g['name']) ?>
@@ -123,31 +123,31 @@ if ($editMode) {
 
         <div class="row-flex">
             <div class="form-group">
-                <label for="visit_code">Prefix Code <span class="text-danger">*</span></label>
+                <label for="visit_code"><?php echo __('Prefix Code'); ?> <span class="text-danger">*</span></label>
                 <input type="text"
                        id="visit_code"
                        name="visit_code"
                        class="form-control-custom"
-                       placeholder="e.g. VISIT, CARGO, CONTR"
+                       placeholder="<?php echo __('e.g. VISIT, CARGO, CONTR'); ?>"
                        value="<?= htmlspecialchars($config['visit_code'] ?? 'VISIT') ?>"
                        required>
             </div>
 
             <div class="form-group">
-                <label for="padding">Zero Padding</label>
+                <label for="padding"><?php echo __('Zero Padding'); ?></label>
                 <select id="padding" name="padding" class="form-control-custom">
-                    <option value="1" <?= (isset($config['padding']) && (int)$config['padding'] === 1) ? 'selected' : '' ?>>1 digit (no padding)</option>
-                    <option value="2" <?= (isset($config['padding']) && (int)$config['padding'] === 2) ? 'selected' : '' ?>>2 digits (e.g. 01)</option>
-                    <option value="3" <?= (!isset($config['padding']) || (int)$config['padding'] === 3) ? 'selected' : '' ?>>3 digits (e.g. 001)</option>
-                    <option value="4" <?= (isset($config['padding']) && (int)$config['padding'] === 4) ? 'selected' : '' ?>>4 digits (e.g. 0001)</option>
-                    <option value="5" <?= (isset($config['padding']) && (int)$config['padding'] === 5) ? 'selected' : '' ?>>5 digits (e.g. 00001)</option>
+                    <option value="1" <?= (isset($config['padding']) && (int)$config['padding'] === 1) ? 'selected' : '' ?>><?php echo __('1 digit (no padding)'); ?></option>
+                    <option value="2" <?= (isset($config['padding']) && (int)$config['padding'] === 2) ? 'selected' : '' ?>><?php echo __('2 digits (e.g. 01)'); ?></option>
+                    <option value="3" <?= (!isset($config['padding']) || (int)$config['padding'] === 3) ? 'selected' : '' ?>><?php echo __('3 digits (e.g. 001)'); ?></option>
+                    <option value="4" <?= (isset($config['padding']) && (int)$config['padding'] === 4) ? 'selected' : '' ?>><?php echo __('4 digits (e.g. 0001)'); ?></option>
+                    <option value="5" <?= (isset($config['padding']) && (int)$config['padding'] === 5) ? 'selected' : '' ?>><?php echo __('5 digits (e.g. 00001)'); ?></option>
                 </select>
             </div>
         </div>
 
         <div class="row-flex">
             <div class="form-group">
-                <label for="range_start">Range Start <span class="text-danger">*</span></label>
+                <label for="range_start"><?php echo __('Range Start'); ?> <span class="text-danger">*</span></label>
                 <input type="number"
                        id="range_start"
                        name="range_start"
@@ -158,7 +158,7 @@ if ($editMode) {
             </div>
 
             <div class="form-group">
-                <label for="range_end">Range End <span class="text-danger">*</span></label>
+                <label for="range_end"><?php echo __('Range End'); ?> <span class="text-danger">*</span></label>
                 <input type="number"
                        id="range_end"
                        name="range_end"
@@ -170,16 +170,16 @@ if ($editMode) {
         </div>
 
         <div class="form-group">
-            <label for="is_active">Status</label>
+            <label for="is_active"><?php echo __('Status'); ?></label>
             <select id="is_active" name="is_active" class="form-control-custom">
-                <option value="0" <?= (isset($config['is_active']) && (int)$config['is_active'] === 0) ? 'selected' : '' ?>>Active</option>
-                <option value="1" <?= (isset($config['is_active']) && (int)$config['is_active'] === 1) ? 'selected' : '' ?>>Inactive</option>
+                <option value="0" <?= (isset($config['is_active']) && (int)$config['is_active'] === 0) ? 'selected' : '' ?>><?php echo __('Active'); ?></option>
+                <option value="1" <?= (isset($config['is_active']) && (int)$config['is_active'] === 1) ? 'selected' : '' ?>><?php echo __('Inactive'); ?></option>
             </select>
         </div>
 
         <div class="btn-submit-container">
             <a href="index.php?option=custom_list_gate_badge_configs" class="btn-custom btn-custom-secondary">
-                Cancel
+                <?php echo __('Cancel'); ?>
             </a>
             <button type="submit" name="submit" value="<?= $editMode ? 'update' : 'insert' ?>" class="btn-custom btn-custom-primary">
                 <i class="fa fa-save"></i> <?= $editMode ? 'Save Changes' : 'Save Config' ?>

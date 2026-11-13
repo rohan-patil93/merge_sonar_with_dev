@@ -16,14 +16,14 @@
               success: function(response) {
                   console.log(response);
                 swal.fire({
-                    title: "Comments Updated ",
-                    text: "Do you want to close ? ",
+                    title: <?= json_encode(__('Comments Updated')) ?>,
+                    text: <?= json_encode(__('Do you want to close?')) ?>,
                     type: "success",
                     buttonsStyling: false,
-                    confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+                    confirmButtonText: "<i class='la la-hand-o-up'></i>" + <?= json_encode(__('Yes, close!')) ?>,
                     confirmButtonClass: "btn btn-success",
                     showCancelButton: true,
-                    cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                    cancelButtonText: "<i class='la la-hand-o-right'></i> " + <?= json_encode(__('No, continue')) ?>,
                     cancelButtonClass: "btn btn-default"
                 }).then(function(result) {
                     if (result.value) {
@@ -38,7 +38,7 @@
   </script>
 
   <div class="modal-header">
-      <h5 class="modal-title"><?php echo $_POST['title']; ?> </h5>
+      <h5 class="modal-title"><?php echo htmlspecialchars(__($_POST['title'] ?? '')); ?> </h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i aria-hidden="true" class="ki ki-close"></i>
       </button>
@@ -49,7 +49,7 @@
           <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
               <div class="form-group row">
                   <div class="col-lg-12">
-                      <span><?php echo $_POST['field_title']; ?> </span>
+                      <span><?php echo htmlspecialchars(__($_POST['field_title'] ?? '')); ?> </span>
                       <textarea aria-label="Filed" class="form-control" name="filed" id="filed"></textarea>
                   </div>
 
@@ -63,8 +63,8 @@
           <input type="hidden" name="table" id='table' value="<?php echo $_POST['table']; ?>">
           <input type="hidden" name="rid" id='rid' value="<?php echo $_POST['rid']; ?>">
 
-          <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Submit</button>
+          <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?= __('Close') ?></button>
+          <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?= __('Submit') ?></button>
       </div>
 
   </form>

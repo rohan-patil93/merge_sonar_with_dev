@@ -42,8 +42,8 @@ foreach($chart_of_accounts as $finanacerepogrp){
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Yes",
-                    cancelButtonText: "No",
+                    confirmButtonText: "<?= __('Yes') ?>",
+                    cancelButtonText: "<?= __('No') ?>",
                     closeOnConfirm: true,
                     closeOnCancel: true
                 },
@@ -69,15 +69,15 @@ foreach($chart_of_accounts as $finanacerepogrp){
                        tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',result.message,'');
                     }else{
                         if(result.LASTID == '0'){
-                             //alert('Record Updated Successfully');
+                             //alert('<?= __('Record Updated Successfully') ?>');
                             GetViewReport();
                              editFinanaceGrp(0);
-                           tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Record Updated Successfully','');
+                           tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?= __('Record Updated Successfully') ?>','');
                         }else{
-                             //alert('Record Inserted Successfully');
+                             //alert('<?= __('Record Inserted Successfully') ?>');
                              GetViewReport();
                          editFinanaceGrp(0);
-                          tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Record Inserted Successfully','');
+                          tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?= __('Record Inserted Successfully') ?>','');
                         }   
                         
                     }
@@ -203,9 +203,9 @@ function updatebalanceamount(){
 
 function clickChartOfAccountLockAndUnlock(ca_status, ca_id){
     if(ca_status == 'Y'){
-        var msg = "Are you sure you want to lock this account? Once locked, you will not be able to update the account balance or make any changes related to this account.";
+        var msg = "<?= __('Are you sure you want to lock this account? Once locked, you will not be able to update the account balance or make any changes related to this account.') ?>";
     }else{
-        var msg = "Are you sure you want to Unlock this account?";
+        var msg = "<?= __('Are you sure you want to Unlock this account?') ?>";
     }
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
@@ -213,8 +213,8 @@ function clickChartOfAccountLockAndUnlock(ca_status, ca_id){
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: "<?= __('Yes') ?>",
+        cancelButtonText: "<?= __('No') ?>",
         closeOnConfirm: true,
         closeOnCancel: true
     },
@@ -226,7 +226,7 @@ function clickChartOfAccountLockAndUnlock(ca_status, ca_id){
                 data: 'page=chartofaccountlockandunlock&ca_status='+ca_status+'&ca_id='+ca_id,
                 success: function(response){
                     console.log(response);
-                    tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Record Updated Successfully','');
+                    tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?= __('Record Updated Successfully') ?>','');
                     //location.reload();
                     GetViewReport();
                     editFinanaceGrp(ca_id);
@@ -243,13 +243,13 @@ function clickChartOfAccountLockAndUnlock(ca_status, ca_id){
         <div class="col-lg-12">
             <div class="card p-2" id="scrollpage">
                <div class="card-header">
-                    <h5>Chart Of Accounts</h5>
+                    <h5><?= __('Chart Of Accounts') ?></h5>
                     <div class="card-header-right table-card-header ">
                         <button type="button" onclick="editFinanaceGrp(0)" class="btn btn-primary mb-2 desktop-view">
                          <i class="icofont icofont-plus text-white"></i>
-                          Chart Of Accounts
+                          <?= __('Chart Of Accounts') ?>
                         </a>
-                        <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>
+                        <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back') ?></a>
                     </div>
                 </div>
 

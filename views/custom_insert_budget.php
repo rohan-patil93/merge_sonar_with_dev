@@ -429,13 +429,13 @@ if(isset($_POST['submit1'])){
                                 <span>Interval <?php //echo $view_type; ?></span>
                                 <select aria-label="Inveral" class="form-select js-example-basic-single" name="inveral" onchange="inveral123(this.value)" id="inveral">
                                     <option <?php if($view_type == 'M' ){ echo "selected";
-} ?> value="month">Monthly</option>
+} ?> value="month"><?= __('Monthly') ?></option>
                                     <option <?php if($view_type == 'Q' ){ echo "selected";
-} ?> value="quater">Quaterly</option>
+} ?> value="quater"><?= __('Quaterly') ?></option>
                                     <option <?php if($view_type == 'H' ){ echo "selected";
-} ?> value="half">Half Yearly</option>
+} ?> value="half"><?= __('Half Yearly') ?></option>
                                     <option  <?php if($view_type == 'Y' ){ echo "selected";
-} ?> value="yearly">Yearly</option>
+} ?> value="yearly"><?= __('Yearly') ?></option>
                                 </select>
                             </div>
 
@@ -476,20 +476,20 @@ if(isset($_POST['submit1'])){
                             <h3>Budget Monthly</h3>
                             <table>
                                 <tr style="background-color: #22b9ff; height: 40px;">
-                                    <th scope="col">Account</th>
-                                    <th scope="col">APRIL</th>
-                                    <th scope="col">MAY</th>
-                                    <th scope="col">JUN</th>
-                                    <th scope="col">JUL</th>
-                                    <th scope="col">AUG</th>
-                                    <th scope="col">SEP</th>
-                                    <th scope="col">OCT</th>
-                                    <th scope="col">NOV</th>
-                                    <th scope="col">DEC</th>
-                                    <th scope="col">JAN</th>
-                                    <th scope="col">FEB</th>
-                                    <th scope="col">MAR</th>
-                                    <th scope="col">Total</th>
+                                    <th scope="col"><?= __('Account') ?></th>
+                                    <th scope="col"><?= __('APRIL') ?></th>
+                                    <th scope="col"><?= __('MAY') ?></th>
+                                    <th scope="col"><?= __('JUN') ?></th>
+                                    <th scope="col"><?= __('JUL') ?></th>
+                                    <th scope="col"><?= __('AUG') ?></th>
+                                    <th scope="col"><?= __('SEP') ?></th>
+                                    <th scope="col"><?= __('OCT') ?></th>
+                                    <th scope="col"><?= __('NOV') ?></th>
+                                    <th scope="col"><?= __('DEC') ?></th>
+                                    <th scope="col"><?= __('JAN') ?></th>
+                                    <th scope="col"><?= __('FEB') ?></th>
+                                    <th scope="col"><?= __('MAR') ?></th>
+                                    <th scope="col"><?= __('Total') ?></th>
                                 </tr>
                                 <?php $k=1; $z=1;
                                 foreach ($budget_data as $budget_details) { ?>
@@ -640,12 +640,12 @@ if(isset($_POST['submit1'])){
                             <h3>Budget Quaterly</h3>
                             <table>
                                 <tr style="background-color: #22b9ff; height: 40px;" >
-                                    <th scope="col">Account</th>
-                                    <th scope="col">Quater 1</th>
-                                    <th scope="col">Quater 2</th>
-                                    <th scope="col">Quater 3</th>
-                                    <th scope="col">Quater 4</th>
-                                    <th scope="col">Total</th>
+                                    <th scope="col"><?= __('Account') ?></th>
+                                    <th scope="col"><?= __('Quater 1') ?></th>
+                                    <th scope="col"><?= __('Quater 2') ?></th>
+                                    <th scope="col"><?= __('Quater 3') ?></th>
+                                    <th scope="col"><?= __('Quater 4') ?></th>
+                                    <th scope="col"><?= __('Total') ?></th>
                                 </tr>
                                 <?php $k=1;$z =1; foreach ($budget_data as $budget_details) { ?>
                                     <tr style="background-color: #bbb4b4; height: 40px;">
@@ -758,10 +758,10 @@ if(isset($_POST['submit1'])){
                             <h3>Budget Half Yearly</h3>
                             <table>
                                 <tr style="background-color: #22b9ff; height: 40px;" >
-                                    <th scope="col">Account</th>
-                                    <th scope="col">Half Yearly 1</th>
-                                    <th scope="col">Half Yearly 2</th>
-                                    <th scope="col">Total</th>
+                                    <th scope="col"><?= __('Account') ?></th>
+                                    <th scope="col"><?= __('Half Yearly 1') ?></th>
+                                    <th scope="col"><?= __('Half Yearly 2') ?></th>
+                                    <th scope="col"><?= __('Total') ?></th>
                                 </tr>
                                 <?php $k=1; $z=1; foreach ($budget_data as $budget_details) { ?>
                                     <tr style="background-color: #bbb4b4; height: 40px;">
@@ -864,8 +864,8 @@ if(isset($_POST['submit1'])){
                             <h3>Budget  Yearly</h3>
                             <table>
                                 <tr style="background-color: #22b9ff; height: 40px;" >
-                                    <th scope="col">Account</th>
-                                    <th scope="col"> Yearly </th>
+                                    <th scope="col"><?= __('Account') ?></th>
+                                    <th scope="col"><?= __('Yearly') ?></th>
                                 </tr>
                                 <?php $k=1; $z =1;
                                 foreach ($budget_data as $budget_details) { ?>
@@ -951,13 +951,13 @@ if(isset($_POST['submit1'])){
                                         <input type="hidden" id="hid"name="hid" value="<?php echo $rid; ?>" />
                                         <input type="hidden" name="hid_itemds" value="<?php echo $item_ids; ?>" />
                                         <input type="hidden" name="submit1" value="Update" />
-                                        <button id="kt_llogin_signup_submit" <?php echo $disable; ?> class="btn btn-primary mr-2" ><i class="la la-check"></i>Upadate</button>
-                                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                                        <button id="kt_llogin_signup_submit" <?php echo $disable; ?> class="btn btn-primary mr-2" ><i class="la la-check"></i><?= __('Update') ?></button>
+                                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?= __('Cancel') ?></button>
                                     <?php } else{ ?>
                                         <input type="hidden" name="submit1" value="Add" />
-                                        <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-                                        <button id="kt_login_signin_submit_continue" class="btn btn-primary mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
-                                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                                        <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?= __('Save & exit') ?></button>
+                                        <button id="kt_login_signin_submit_continue" class="btn btn-primary mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?= __('Save & continue') ?></button>
+                                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?= __('Cancel') ?></button>
                                     <?php } ?>
                                 </div>
                                 <div class="col-lg-6">
@@ -1001,7 +1001,7 @@ if(isset($_POST['submit1'])){
                                     <?php } ?>
                                 </div>
                                 <div class="col-lg-2 kt-align-right">
-                                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?= __('Delete') ?></button>
                                 </div>
                             </div>
                         </div>

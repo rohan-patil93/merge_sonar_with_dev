@@ -22,19 +22,19 @@ $contractName = htmlspecialchars($schedule['contract_name'] ?? '', ENT_QUOTES, '
 ?>
 <div class="modal-header bg-primary text-white">
     <div>
-        <h5 class="modal-title mb-1">Confirm Visit</h5>
+        <h5 class="modal-title mb-1"><?= __('Confirm Visit') ?></h5>
         <?php if ($contractName != '') { ?>
             <small class="text-white-50"><?php echo $contractName; ?></small>
         <?php } ?>
     </div>
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 </div>
 <?php if (!$canConfirm) { ?>
 <div class="modal-body">
-    <div class="alert alert-warning mb-0">This visit cannot be confirmed. It may not be finished by the technician yet, or you are not authorized.</div>
+    <div class="alert alert-warning mb-0"><?= __('This visit cannot be confirmed. It may not be finished by the technician yet, or you are not authorized.') ?></div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= __('Close') ?></button>
 </div>
 <?php } else { ?>
 <form id="contractAmcFmConfirmForm" enctype="multipart/form-data">
@@ -42,36 +42,36 @@ $contractName = htmlspecialchars($schedule['contract_name'] ?? '', ENT_QUOTES, '
         <input type="hidden" name="schedule_id" value="<?php echo $schedule_id; ?>">
         <div class="row g-3 mb-3">
             <div class="col-md-6">
-                <div class="f-12 text-muted mb-1">Vendor</div>
+                <div class="f-12 text-muted mb-1"><?= __('Vendor') ?></div>
                 <div class="fw-semibold"><?php echo $vendorName; ?></div>
             </div>
             <div class="col-md-6">
-                <div class="f-12 text-muted mb-1">Asset</div>
+                <div class="f-12 text-muted mb-1"><?= __('Asset') ?></div>
                 <div class="fw-semibold"><?php echo $assetLabel; ?></div>
             </div>
             <div class="col-md-6">
-                <div class="f-12 text-muted mb-1">Planned</div>
+                <div class="f-12 text-muted mb-1"><?= __('Planned') ?></div>
                 <div><?php echo $plannedDisplay; ?></div>
             </div>
             <div class="col-md-6">
-                <div class="f-12 text-muted mb-1">Technician Completed</div>
+                <div class="f-12 text-muted mb-1"><?= __('Technician Completed') ?></div>
                 <div><?php echo $techCompleted; ?></div>
             </div>
         </div>
         <div class="mb-3">
-            <label for="fm_confirmation_remarks" class="form-label">Remarks <span class="text-danger">*</span></label>
-            <textarea class="form-control" name="fm_confirmation_remarks" id="fm_confirmation_remarks" rows="3" placeholder="Enter confirmation remarks" aria-label="Remarks" required></textarea>
+            <label for="fm_confirmation_remarks" class="form-label"><?= __('Remarks') ?> <span class="text-danger">*</span></label>
+            <textarea class="form-control" name="fm_confirmation_remarks" id="fm_confirmation_remarks" rows="3" placeholder="<?= __('Enter confirmation remarks') ?>" aria-label="<?= __('Remarks') ?>" required></textarea>
         </div>
         <div class="mb-0">
-            <label for="fm_confirmation_file" class="form-label">Job Done Document <span class="text-danger">*</span></label>
-            <input type="file" class="form-control" name="fm_confirmation_file" id="fm_confirmation_file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.xls,.xlsx" aria-label="Job Done Document" required>
-            <small class="text-muted f-12">PDF, Word, Excel, or image files</small>
+            <label for="fm_confirmation_file" class="form-label"><?= __('Job Done Document') ?> <span class="text-danger">*</span></label>
+            <input type="file" class="form-control" name="fm_confirmation_file" id="fm_confirmation_file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.xls,.xlsx" aria-label="<?= __('Job Done Document') ?>" required>
+            <small class="text-muted f-12"><?= __('PDF, Word, Excel, or image files') ?></small>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary contract-amc-fm-confirm-close-btn" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-secondary contract-amc-fm-confirm-close-btn" data-bs-dismiss="modal"><?= __('Cancel') ?></button>
         <button type="button" class="btn btn-primary" id="submitContractAmcFmConfirmBtn">
-            <i class="ti-check me-1" aria-hidden="true"></i> Submit Confirmation
+            <i class="ti-check me-1" aria-hidden="true"></i> <?= __('Submit Confirmation') ?>
         </button>
     </div>
 </form>
@@ -82,11 +82,11 @@ $contractName = htmlspecialchars($schedule['contract_name'] ?? '', ENT_QUOTES, '
         var remarks = $.trim($form.find('[name="fm_confirmation_remarks"]').val());
         var fileInput = $form.find('[name="fm_confirmation_file"]')[0];
         if (remarks == '') {
-            tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', 'Remarks are required', '');
+            tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', <?= json_encode(__('Remarks are required')) ?>, '');
             return;
         }
         if (!fileInput || !fileInput.files || fileInput.files.length == 0) {
-            tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', 'Job done document is required', '');
+            tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', <?= json_encode(__('Job done document is required')) ?>, '');
             return;
         }
         var formData = new FormData($form[0]);
@@ -100,11 +100,11 @@ $contractName = htmlspecialchars($schedule['contract_name'] ?? '', ENT_QUOTES, '
             success: function(resp) {
                 var r = typeof resp === 'string' ? JSON.parse(resp) : resp;
                 if (r.status == 'success') {
-                    tostarnotify('top', 'right', 'fa fa-thumbs-up', 'form-label label label-success', 'animated flipInX', 'animated flipOutX', r.message || 'Confirmed', '');
+                    tostarnotify('top', 'right', 'fa fa-thumbs-up', 'form-label label label-success', 'animated flipInX', 'animated flipOutX', r.message || <?= json_encode(__('Confirmed')) ?>, '');
                     $("#kt_modal_contract_amc_fm_confirm").modal('hide');
                     setTimeout(function() { window.location.reload(); }, 800);
                 } else {
-                    tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', r.message || 'Confirmation failed', '');
+                    tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', r.message || <?= json_encode(__('Confirmation failed')) ?>, '');
                 }
             }
         });

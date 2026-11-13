@@ -136,7 +136,7 @@ $countriesres   = json_decode($countriesres,1);
 		</div>	
 	<?php } ?>
 	<div class="card-header table-card-header">
-		<h5>Application User</h5>
+		<h5><?= __('Application User') ?></h5>
 		<?php if($tab !="Y"){ ?>
 		<div class="card-header-right table-card-header ">
 			<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
@@ -152,24 +152,24 @@ $countriesres   = json_decode($countriesres,1);
 					<div class="col-lg-10">
 						<div class="row">
 							<div class="form-group col-lg-4">
-								<label for="first_name" class="">First Name&nbsp;<span class="requried">*</span></label>
+								<label for="first_name" class=""><?= __('First Name') ?>&nbsp;<span class="requried">*</span></label>
 								<input class="form-control" type="text" id="first_name" name="first_name" value="<?php echo $application_users['first_name']; ?>" required>
 							</div>
 							<div class="form-group col-lg-4">
-								<label for="last_name" class="">Last Name</label>
+								<label for="last_name" class=""><?= __('Last Name') ?></label>
 								<input class="form-control" type="text" id="last_name" name="last_name" value="<?php echo $application_users['last_name']; ?>">
 							</div>
 							<div class="form-group col-lg-4">
-								<label for="display_name" class="">Display Name</label>
+								<label for="display_name" class=""><?= __('Display Name') ?></label>
 								<input class="form-control" type="text" id="display_name" name="display_name" value="<?php echo $application_users['display_name']; ?>" required>
 							</div>
 							<div class="form-group col-lg-4">
-								<label for="user_email" class="">User Email</label>
+								<label for="user_email" class=""><?= __('User Email') ?></label>
 								<input class="form-control" type="text" id="user_email" name="user_email" value="<?php echo $application_users['user_email']; ?>"  <?php echo $rid!=""?"readonly":""; ?> required>
 								<div style="display: none;color: red;" id="user_email_err"> Please enter User Email </div> 
 							</div>
 							<div class="form-group col-lg-4">
-								<label for="user_mobile" class="">User Mobile</label>
+								<label for="user_mobile" class=""><?= __('User Mobile') ?></label>
 								<input class="form-control" type="text" id="user_mobile" name="user_mobile" value="<?php echo $application_users['user_mobile']; ?>">
 								<div style="display: none;color: red;" id="user_mobile_err"> Please enter User Mobile </div> 
 							</div>
@@ -180,7 +180,7 @@ $countriesres   = json_decode($countriesres,1);
 							/**$role_idd = json_decode($application_users['role_id']);
 							?>
 							<div class="form-group col-lg-4" style="<?php echo $disablerole; ?>">
-								<label for="fld_role_id__">User Role</label>
+								<label for="fld_role_id__"><?= __('User Role') ?></label>
 								<select id="fld_role_id__" class="form-select js-example-basic-multiple" multiple="multiple" name="role_id[]">
 									<?php foreach($application_roles as $application_roled){ ?>
 										<option value="<?php echo $application_roled['role_short_code']; ?>" <?php echo in_array($application_roled['role_short_code'],(array)$role_idd)?"selected":""; ?>><?php echo $application_roled['name']; ?></option>
@@ -197,7 +197,7 @@ $countriesres   = json_decode($countriesres,1);
 							</div>
 							<?php **/ ?>
 							<div class="form-group col-lg-4">
-								<label for="fld_country_id">Country </label>
+								<label for="fld_country_id"><?= __('Country') ?></label>
 								<select id="fld_country_id" class="form-select js-example-basic-single"  name="country_id">
 									<option value="" > Select Any One Country</option>
 									<?php foreach($countriesres as $countries){ ?>
@@ -206,7 +206,7 @@ $countriesres   = json_decode($countriesres,1);
 								</select>
 							</div>
 							<div class="form-group col-lg-4">
-								<label for="fld_location_id">Location </label>
+								<label for="fld_location_id"><?= __('Location') ?></label>
 								<select id="fld_location_id" class="form-select js-example-basic-single"  name="location_id">
 									<option value="" > Select Any one Location</option>
 									<?php foreach($locations as $location){ ?>
@@ -221,13 +221,13 @@ $countriesres   = json_decode($countriesres,1);
  ?>
 
  				<div class="form-group col-lg-4">
-					<label for="config_name" class="form-label">Config Name</label>
+					<label for="config_name" class="form-label"><?= __('Config Name') ?></label>
 					<input class="form-control" type="text" id="config_name" name="config_name" value="<?php echo $_SESSION['company'][$application_users['company_id']]; ?>">
 				</div>
 
 
 			<div class="form-group col-lg-4">
-				<label for="fld_date_format" class="form-label">Date Format </label>
+				<label for="fld_date_format" class="form-label"><?= __('Date Format') ?></label>
 				<select id="fld_date_format" class="form-select js-example-basic-single"  name="date_format">
 			    <option value="">Select Any One </option>
 			    <?php foreach($dateformatlist as $valuedates) { ?>
@@ -240,7 +240,7 @@ $countriesres   = json_decode($countriesres,1);
 				<div class="col-lg-9 col-xl-6">
 							<div class="profile-pic">
 								<label class="-label" for="image1">
-									<span><i class="fa fa-camera"></i> &nbsp; Change Image</span>
+									<span><i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
 								</label>
 								<input type="file" name="image1" id="image1" accept=".png, .jpg, .jpeg"  onchange="loadFile(event,this.id)">
 								
@@ -274,7 +274,7 @@ $countriesres   = json_decode($countriesres,1);
 						<div class="col-lg-9 col-xl-6">
 							<div class="profile-pic">
 								<label class="-label" for="image">
-									<span><i class="fa fa-camera"></i> &nbsp; Change Image</span>
+									<span><i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
 								</label>
 								<input type="file" name="image" id="image" accept=".png, .jpg, .jpeg"  onchange="loadFile(event,this.id)">
 								<input type="hidden" name="hidimage1" value="<?php echo $application_users['user_photo']; ?>">
@@ -298,13 +298,13 @@ $countriesres   = json_decode($countriesres,1);
 					<input type="hidden" name="Rid" value="<?php echo $rid; ?>">
 					<input type="hidden" name="tab" value="<?php echo $tab; ?>">
 					
-					<button type="submit" name="submit" class="btn btn-info btn-round waves-effect waves-lighttext-uppercase  mt-15 ml-3">Update</button>
+					<button type="submit" name="submit" class="btn btn-info btn-round waves-effect waves-lighttext-uppercase  mt-15 ml-3"><?= __('Update') ?></button>
 				</div>
 				<?php// } ?>
 		</form>
 		 <?php /**if($application_users['user_activated'] == 'Y' AND  $_SESSION['user_activated'] == 'N'){ ?>
                     <form method="post">
-                        <button class="btn btn-info btn-round waves-effect waves-light" name="skip_compliance" type="submit"> Skip/Go Dashborad</button>   
+                        <button class="btn btn-info btn-round waves-effect waves-light" name="skip_compliance" type="submit"> <?= __('Skip/Go Dashborad') ?></button>   
                     </form>
                 <?php } **/?>
                 	</div>

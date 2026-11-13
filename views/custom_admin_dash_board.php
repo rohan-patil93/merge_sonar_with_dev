@@ -158,11 +158,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 	<div class="card card-custom gutter-b">
 		<div class="card-header">
 			<div class="card-title">
-				<h3 class="card-label">Vertical Wise  Billing</h3>
+				<h3 class="card-label"><?= __("Vertical Wise Billing") ?></h3>
 			</div>
 			<div class="card-toolbar">
 				<a target="_blank" href="index.php?option=COM_VIEW_VERTICAL" class="btn btn-success font-weight-bolder mr-1">
-					Full Report
+					<?= __("Full Report") ?>
 				</a>
 			</div>
 		</div>
@@ -183,11 +183,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 	<div class="card card-custom gutter-b">
 		<div class="card-header">
 			<div class="card-title">
-				<h3 class="card-label">CostCenter Wise Usage </h3>
+				<h3 class="card-label"><?= __("CostCenter Wise Usage") ?></h3>
 			</div>
 			<div class="card-toolbar">
 				<a target="_blank" href="index.php?option=COM_VIEW_COSCENTER_WISE_USAGE_REPORT" class="btn btn-success font-weight-bolder mr-1">
-					Full Report
+					<?= __("Full Report") ?>
 				</a>
 			</div>
 		</div>
@@ -207,11 +207,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
     <div class="card card-custom gutter-b">
 		<div class="card-header">
 			<div class="card-title">
-				<h3 class="card-label">Vendor Wise Usage </h3>
+				<h3 class="card-label"><?= __("Vendor Wise Usage") ?></h3>
 			</div>
 			<div class="card-toolbar">
 				<a target="_blank" href="index.php?option=COM_VIEW_VENDOR_WISE_USAGE" class="btn btn-success font-weight-bolder mr-1">
-					Full Report
+					<?= __("Full Report") ?>
 				</a>
 			</div>
 		</div>
@@ -233,7 +233,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 	<div class="card card-custom gutter-b">
 		<div class="card-header">
 			<div class="card-title">
-				<h3 class="card-label">CostCenter Wise Employee Count </h3>
+				<h3 class="card-label"><?= __("CostCenter Wise Employee Count") ?></h3>
 			</div>
 			
 		</div>
@@ -254,7 +254,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
     <div class="card card-custom gutter-b">
 		<div class="card-header">
 			<div class="card-title">
-				<h3 class="card-label">Vendor Wise Employee Count </h3>
+				<h3 class="card-label"><?= __("Vendor Wise Employee Count") ?></h3>
 			</div>
 			
 		</div>
@@ -274,7 +274,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 		<div class="card-header h-auto">
 			<!--begin::Title-->
 			<div class="card-title py-5">
-				<h3 class="card-label">Overall Headcount</h3>
+				<h3 class="card-label"><?= __("Overall Headcount") ?></h3>
 			</div>
 			<!--end::Title-->
 		</div>
@@ -293,18 +293,18 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 			
 			<div class="card-header border-0 pt-5">
 				<h3 class="card-title align-items-start flex-column">
-					<span class="card-label font-weight-bolder text-dark">Vendor Agreements</span>
+					<span class="card-label font-weight-bolder text-dark"><?= __("Vendor Agreements") ?></span>
 				</h3>
 				<div class="card-toolbar">
 					<ul class="nav nav-pills nav-pills-sm nav-dark-75">
 						<li class="nav-item">
-							<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_11_1">Quarter</a>
+							<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_11_1"><?= __("Quarter") ?></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_11_2">Month</a>
+							<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_11_2"><?= __("Month") ?></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_11_3">Week</a>
+							<a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_11_3"><?= __("Week") ?></a>
 						</li>
 					</ul>
 				</div>
@@ -318,10 +318,10 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 								<thead>
 									<tr>
 										<th scope="col" class="p-0 w-40px"></th>
-										<th scope="col" class="p-0 min-w-200px"> Vendor Name</th>
-										<th scope="col" class="p-0 min-w-100px text-center"> Agreement Name</th>
-										<th scope="col" class="p-0 min-w-125px text-center"> Sign Date</th>
-										<th scope="col" class="p-0 min-w-110px text-center">Expiry Date	</th>
+										<th scope="col" class="p-0 min-w-200px"> <?= __("Vendor Name") ?></th>
+										<th scope="col" class="p-0 min-w-100px text-center"> <?= __("Agreement Name") ?></th>
+										<th scope="col" class="p-0 min-w-125px text-center"> <?= __("Sign Date") ?></th>
+										<th scope="col" class="p-0 min-w-110px text-center"><?= __("Expiry Date") ?>	</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -364,10 +364,10 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 								<thead>
 									<tr>
 										<th scope="col" class="p-0 w-40px"></th>
-										<th scope="col" class="p-0 min-w-200px"> Vendor Name</th>
-										<th scope="col" class="p-0 min-w-100px text-center"> Agreement Name</th>
-										<th scope="col" class="p-0 min-w-125px text-center"> Sign Date</th>
-										<th scope="col" class="p-0 min-w-110px text-center">Expiry Date	</th>
+										<th scope="col" class="p-0 min-w-200px"> <?= __("Vendor Name") ?></th>
+										<th scope="col" class="p-0 min-w-100px text-center"> <?= __("Agreement Name") ?></th>
+										<th scope="col" class="p-0 min-w-125px text-center"> <?= __("Sign Date") ?></th>
+										<th scope="col" class="p-0 min-w-110px text-center"><?= __("Expiry Date") ?>	</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -410,10 +410,10 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 								<thead>
 									<tr>
 										<th scope="col" class="p-0 w-40px"></th>
-										<th scope="col" class="p-0 min-w-200px"> Vendor Name</th>
-										<th scope="col" class="p-0 min-w-100px text-center"> Agreement Name</th>
-										<th scope="col" class="p-0 min-w-125px text-center"> Sign Date</th>
-										<th scope="col" class="p-0 min-w-110px text-center">Expiry Date	</th>
+										<th scope="col" class="p-0 min-w-200px"> <?= __("Vendor Name") ?></th>
+										<th scope="col" class="p-0 min-w-100px text-center"> <?= __("Agreement Name") ?></th>
+										<th scope="col" class="p-0 min-w-125px text-center"> <?= __("Sign Date") ?></th>
+										<th scope="col" class="p-0 min-w-110px text-center"><?= __("Expiry Date") ?>	</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -466,10 +466,10 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 				<div class="card-toolbar">
 					<ul class="nav nav-pills nav-pills-sm nav-dark-75">
 						<li class="nav-item">
-							<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_11_1">Month</a>
+							<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_11_1"><?= __("Month") ?></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_11_2">Week</a>
+							<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_11_2"><?= __("Week") ?></a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_11_3">Day</a>
@@ -488,7 +488,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 								<thead>
 									<tr>
 										<th scope="col" class="p-0 w-40px"></th>
-										<th scope="col" class="p-0 min-w-200px"> Vendor Name</th>
+										<th scope="col" class="p-0 min-w-200px"> <?= __("Vendor Name") ?></th>
 										<th scope="col" class="p-0 min-w-100px text-center"> All Jobs</th>
 										<th scope="col" class="p-0 min-w-125px text-center"> Apply Candidates</th>
 										<th scope="col" class="p-0 min-w-110px text-center">Approved Candidates</th>
@@ -547,7 +547,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 							<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_111_1">Month QQ</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_111_2">Week</a>
+							<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_111_2"><?= __("Week") ?></a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_111_3">Day</a>

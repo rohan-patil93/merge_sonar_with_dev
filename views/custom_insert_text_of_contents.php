@@ -101,7 +101,7 @@ foreach($create_documents_fields as $result){
     }
     function editFinanaceGrp(id="",pargrp=""){
         var toc_id = $("#toc_id").val();
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?php echo htmlspecialchars(__('Preview'), ENT_QUOTES); ?>"></div>';
         $("#insertform").html(loader);
         console.log(id);
         console.log(pargrp);
@@ -122,7 +122,7 @@ foreach($create_documents_fields as $result){
     function GetViewReport(){
         var toc_id = $("#toc_id").val();
         console.log('working -- 25');
-        var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?php echo htmlspecialchars(__('Preview'), ENT_QUOTES); ?>"></div>';
         $("#viewtable").html(loader);
         $.ajax({
             url: "views/custom_insert_toc_headers_table.php",
@@ -156,11 +156,11 @@ foreach($create_documents_fields as $result){
 
     <div class="card">
        <div class="card-header">
-              <h5>Text Of Content</h5>
+              <h5><?php echo __('Text Of Content'); ?></h5>
               <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?php echo __('Back'); ?>
             </a>
     </div>
         </div>
@@ -168,12 +168,12 @@ foreach($create_documents_fields as $result){
         <div class="card-body">
             <div class="row">
             <div class="form-group col-lg-4">
-                <span class="form-label">Report Name <span class="text-danger">*</span></span>
-                <input aria-label="Toc Name" type="text"  class="form-control text-capitalize"  name="toc_name" value="<?php echo $text_of_contents['toc_name']; ?>" />
+                <span class="form-label"><?php echo __('Report Name'); ?> <span class="text-danger">*</span></span>
+                <input aria-label="<?php echo __('Toc Name'); ?>" type="text"  class="form-control text-capitalize"  name="toc_name" value="<?php echo $text_of_contents['toc_name']; ?>" />
             </div>
             <div class="form-group col-lg-4">
-                <span class="form-label">Description<span class="text-danger">*</span></span>
-                <textarea aria-label="Description" type="text"  class="form-control text-capitalize"  name="description"  ><?php echo $text_of_contents['description']; ?></textarea>
+                <span class="form-label"><?php echo __('Description'); ?><span class="text-danger">*</span></span>
+                <textarea aria-label="<?php echo __('Description'); ?>" type="text"  class="form-control text-capitalize"  name="description"  ><?php echo $text_of_contents['description']; ?></textarea>
             </div>
             <div class="form-group col-lg-2">
                 <input type="hidden" name="toc_id" id="toc_id" value="<?php echo $toc_id; ?>">
@@ -197,7 +197,7 @@ foreach($create_documents_fields as $result){
             <div class="col-lg-3" >
                 <div class="card" style="position: sticky;top: 10px;">
                     <div class="card-header">
-                        <h5>Field</h5>
+                        <h5><?php echo __('Field'); ?></h5>
                         <div class="card-header-right"></div>
                     </div>
                     <div class="card-body custom-scroll" style="height: 500px;">

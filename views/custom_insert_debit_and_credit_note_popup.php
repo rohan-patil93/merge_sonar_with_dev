@@ -128,13 +128,13 @@ function AddMorecdnote(){
     mxid = mxid+1;
     html +='<div class="row" id="rowid_'+mxid+'">';
 
-    html +='<input type="hidden" name="old_id[]" value=""><div class="form-group col-lg-4"><select aria-label="Account Code[]"  class="form-select js-example-basic-single" name="account_code[]" required><option value="">Select Any One</option><?php foreach ($chart_of_accounts as $coc) { ?><option  value="<?php echo $coc['account_code']; ?>" ><?php echo $coc['account_name']."(".$coc['account_code'].")"; ?></option><?php
+    html +='<input type="hidden" name="old_id[]" value=""><div class="form-group col-lg-4"><select aria-label="Account Code[]"  class="form-select js-example-basic-single" name="account_code[]" required><option value=""><?= __('Select Any One') ?></option><?php foreach ($chart_of_accounts as $coc) { ?><option  value="<?php echo $coc['account_code']; ?>" ><?php echo $coc['account_name']."(".$coc['account_code'].")"; ?></option><?php
 } ?></select></div>';
 
     html +='<div class="col-lg-3 form-group"><input aria-label="Item Price[]" type="text" class="form-control text-right item_price" name="item_price[]"  value="<?php echo $dcn['item_price']; ?>" onblur="calculateTotal()" required></div>';
 
     html +='<div class="form-group col-lg-4"><textarea aria-label="Description[]" type="text" class="form-control" name="description[]" ><?php echo $dcn['description']; ?></textarea></div>';
-    html +='<div class="form-group col-lg-1 text-center"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRow('+mxid+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div>';
+    html +='<div class="form-group col-lg-1 text-center"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRow('+mxid+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Remove') ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div>';
 
     html +='</div>';
 
@@ -247,7 +247,7 @@ if($_SESSION['config']['debit_credit_note_creation_days'] !="" AND $_SESSION['co
         <h5><?php echo ucwords(str_replace("_"," ",($_GET['note_type']))); ?></h5>
         <div class="card-header-right table-card-header">
             <?php echo $workflowsteps['workflow_btn']; ?>
-              <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</button>
+              <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i> <?= __('Back') ?></button>
         </div>
       </div>
     <div class="card-body p-r-50 p-l-50">
@@ -259,39 +259,39 @@ if($_SESSION['config']['debit_credit_note_creation_days'] !="" AND $_SESSION['co
 
             <div class="col-lg-6">
                 <div class="row">
-                    <span class="col-lg-6">Number <span class="float-end">:</span></span>
+                    <span class="col-lg-6"><?= __('Number') ?> <span class="float-end">:</span></span>
                     <span class="col-lg-6 text-left"><?php echo $note_type_res['transaction_number'];?></span>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="row">
-                    <span class="col-lg-6">Reference Type <span class="float-end">:</span></span>
+                    <span class="col-lg-6"><?= __('Reference Type') ?> <span class="float-end">:</span></span>
                     <span class="col-lg-6 text-left"><?php echo ucwords(str_replace("_"," ",($_GET['ref_type']))); ?></span>
                 </div>
             </div>
             <div class="col-lg-6  mt-2">
                 <div class="row">
-                    <span class="col-lg-6">Date <span class="float-end">:</span></span>
+                    <span class="col-lg-6"><?= __('Date') ?> <span class="float-end">:</span></span>
                     <span class="col-lg-6 text-left"><?php echo fromDate($transactions['transaction_date']);?></span>
                 </div>
             </div>
 
             <div class="col-lg-6 mt-2">
                 <div class="row">
-                    <span class="col-lg-6">Reference Invoice<span class="float-end">:</span></span>
+                    <span class="col-lg-6"><?= __('Reference Invoice') ?> <span class="float-end">:</span></span>
                     <span class="col-lg-6 text-left"><?php echo $transactions['transaction_number'];?></span>
                 </div>
             </div>
 
             <div class="col-lg-6 mt-2">
                 <div class="row">
-                    <span class="col-lg-6">Originator <span class="float-end">:</span></span>
+                    <span class="col-lg-6"><?= __('Originator') ?> <span class="float-end">:</span></span>
                     <span class="col-lg-6 text-left"><?php echo $_SESSION['users'][$transactions['originator']];?></span>
                 </div>
             </div>
             <div class="col-lg-6 mt-2">
                 <div class="row">
-                    <span class="col-lg-6">Party Name <span class="float-end">:</span></span>
+                    <span class="col-lg-6"><?= __('Party Name') ?> <span class="float-end">:</span></span>
                     <span class="col-lg-6 text-left"><?php echo $transactions['party_name'];?></span>
                 </div>
             </div>
@@ -302,14 +302,14 @@ if($_SESSION['config']['debit_credit_note_creation_days'] !="" AND $_SESSION['co
             <div class="col-lg-6">
                 <div class="card" >
                     <div class="card-header">
-                        <h5>Debit Note</h5>
+                        <h5><?= __('Debit Note') ?></h5>
                         <div class="card-header-right">
                         </div>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover m-b-0" style="font-size:13px;">
                              <thead>
-                                 <tr><th scope="col">#</th><th scope="col">Number</th><th scope="col">Account</th><th scope="col" class="text-right">Amount</th></tr>
+                                 <tr><th scope="col">#</th><th scope="col"><?= __('Number') ?></th><th scope="col"><?= __('Account') ?></th><th scope="col" class="text-right"><?= __('Amount') ?></th></tr>
                              </thead>
                             <tbody>
                                 <?php $mk=1;foreach($debit_notes as $debitnotes){ ?>
@@ -331,14 +331,14 @@ if(count((array)$credit_notes) != 0){ ?>
             <div class="col-lg-6">
                 <div class="card" >
                     <div class="card-header">
-                        <h5>Debit Note</h5>
+                        <h5><?= __('Debit Note') ?></h5>
                         <div class="card-header-right">
                         </div>
                     </div>
                     <div class="card-body">
                          <table class="table table-hover m-b-0" style="font-size:13px;">
                              <thead>
-                                 <tr><th scope="col">#</th><th scope="col">Number</th><th scope="col">Account</th><th scope="col" class="text-right">Amount</th></tr>
+                                 <tr><th scope="col">#</th><th scope="col"><?= __('Number') ?></th><th scope="col"><?= __('Account') ?></th><th scope="col" class="text-right"><?= __('Amount') ?></th></tr>
                              </thead>
                             <tbody>
                                 <?php $mk=1;foreach($credit_notes as $creditnotes){ ?>
@@ -371,7 +371,7 @@ if(count((array)$credit_notes) != 0){ ?>
             <div class="form-group col-lg-4">
                 <span class="form-label">Reference Type</span>
                 <select aria-label="Ref Type"  class="form-select js-example-basic-single" name="ref_type" id="ref_type" onchange="getRefranceTableList('ref_type')">
-                    <option value="">Select Any One</option>
+                    <option value=""><?= __('Select Any One') ?></option>
                     <?php foreach ($referencetypes as $reftype) { ?>
                         <option  value="<?php echo $reftype; ?>" <?php echo $_GET['ref_type'] == $reftype?"selected":""; ?>><?php echo ucwords(str_replace("_"," ",($reftype))); ?></option>
                     <?php } ?>
@@ -381,7 +381,7 @@ if(count((array)$credit_notes) != 0){ ?>
             <div class="form-group col-lg-4">
                 <span class="form-label">Reference invoice</span>
                 <select aria-label="Ref"  class="form-select js-example-basic-single" name="ref_id" id="ref_id" onchange="getRefranceTableList('ref_id')">
-                    <option value="">Select Any One</option>
+                    <option value=""><?= __('Select Any One') ?></option>
                     <?php foreach ($all_transactions as $coc) { ?>
                         <option  value="<?php echo $coc['id']; ?>"  <?php echo $_GET['ref_id'] == $coc['id']?"selected":""; ?>><?php echo $coc['transaction_number']; ?></option>
                     <?php } ?>
@@ -422,7 +422,7 @@ if(count((array)$credit_notes) != 0){ ?>
                     <input type="hidden" name="old_id[]" value="<?php echo $dcn['id']; ?>">
                     <div class="form-group col-lg-4">
                         <select aria-label="Account Code[]"  class="form-select js-example-basic-single" name="account_code[]" required>
-                            <option value="">Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach ($chart_of_accounts as $coc) { ?>
                                 <option  value="<?php echo $coc['account_code']; ?>" <?php echo $dcn['account_code'] == $coc['account_code']?"selected":""; ?>><?php echo $coc['account_name']."(".$coc['account_code'].")"; ?></option>
                             <?php } ?>
@@ -435,7 +435,7 @@ if(count((array)$credit_notes) != 0){ ?>
                         <textarea aria-label="Description[]" type="text" class="form-control" name="description[]" ><?php echo $dcn['description']; ?></textarea>
                     </div>
                      <div class="form-group col-lg-1 text-center">
-                        <i class="ti-trash"  onclick="deletRow('<?php echo $mk; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                        <i class="ti-trash"  onclick="deletRow('<?php echo $mk; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Remove') ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                       </div>
                 </div>
                 <?php $mk++;
@@ -443,7 +443,7 @@ if(count((array)$credit_notes) != 0){ ?>
             </div>
         <div class="row mt-3">
             <div class="col-lg-4">
-                <button class="btn btn-success" type="button" onclick="AddMorecdnote()">+ Add More</button>
+                <button class="btn btn-success" type="button" onclick="AddMorecdnote()"><?= __('+ Add More') ?></button>
             </div>
             <div class="col-lg-3 text-right f-w-700">Total</div>
             <div class="col-lg-4 text-right f-w-700" id="totalamounttext"><?php echo $totalamt; ?></div>
@@ -457,12 +457,12 @@ if(count((array)$credit_notes) != 0){ ?>
               <input type="hidden" class="form-control text-right" name="note_type" value="<?php echo $_GET['note_type']; ?>">
             <?php if(isset($_GET['Rid']) && $_GET['Rid'] !=''){ ?>
                     <input type="hidden" id="rid"name="rid" value="<?php echo $rid; ?>" />
-                    <button class="btn btn-primary mr-2 mb-2 submit_btn <?php echo $disbledbtn; ?>"  type="submit" name="submit" value="submit" ><i class="la la-check"></i>Update</button>
+                    <button class="btn btn-primary mr-2 mb-2 submit_btn <?php echo $disbledbtn; ?>"  type="submit" name="submit" value="submit" ><i class="la la-check"></i><?= __('Update') ?></button>
 
             <?php }else{ ?>
                      <button class="btn btn-primary mr-2 mb-2" type="submit" name="submit" value="submit" >
-                        <i class="la la-check-circle"></i>Submit</button>
-                    <button type="reset" class="btn btn-secondary mb-2" ><i class="la la-close"></i>Cancel</button>
+                        <i class="la la-check-circle"></i><?= __('Submit') ?></button>
+                    <button type="reset" class="btn btn-secondary mb-2" ><i class="la la-close"></i><?= __('Cancel') ?></button>
             <?php } ?>
         </div>
     <?php } ?>

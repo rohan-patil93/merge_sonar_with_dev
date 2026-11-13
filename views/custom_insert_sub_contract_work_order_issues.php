@@ -40,13 +40,13 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
 <?php if($error_message != '') { ?>
     <div class="alert alert-danger alert-dismissible">
         <strong><?php echo $error_message; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
     </div>
 <?php } ?>
 
 <div class="card">
     <div class="card-header table-card-header">
-        <h5>Issue Raw Materials to Vendor</h5>
+        <h5><?php echo __('Issue Raw Materials to Vendor'); ?></h5>
     </div>
     <div class="card-body">
 
@@ -54,9 +54,9 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
             <div class="row">
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <span class="form-label">Subcontract Work Order <span class="text-danger">*</span></span>
-                        <select aria-label="Subcontract Work Order" name="subcontract_work_order_id" class="form-control form-select js-example-basic-single" required>
-                            <option value="">Select Any One</option>
+                        <span class="form-label"><?php echo __('Subcontract Work Order'); ?> <span class="text-danger">*</span></span>
+                        <select aria-label="<?php echo __('Subcontract Work Order'); ?>" name="subcontract_work_order_id" class="form-control form-select js-example-basic-single" required>
+                            <option value=""><?php echo __('Select Any One'); ?></option>
                             <?php if(count((array)$dropdown_list) > 0) { ?>
                                 <?php foreach($dropdown_list as $wo) { ?>
                                     <option value="<?php echo $wo['id']; ?>"
@@ -65,7 +65,7 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
                                     </option>
                                 <?php } ?>
                             <?php } else { ?>
-                                <option value="" disabled>No approved work orders available</option>
+                                <option value="" disabled><?php echo __('No approved work orders available'); ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -75,7 +75,7 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
                         <span class="form-label">&nbsp; &nbsp;</span>
 
                         <button type="submit" name="search_issue_materials" class="btn btn-primary border-radius-2 pb-2">
-                            <i class="fa fa-search"></i> Search
+                            <i class="fa fa-search"></i> <?php echo __('Search'); ?>
                         </button>
                     </div>
                 </div>
@@ -87,7 +87,7 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
         <div class="parent-record-section mt-5">
             <div class="row mb-3">
                 <div class="col-12">
-                    <h6 class="card-title border-bottom pb-2"><i class="icofont icofont-file-document"></i> Work Order Details</h6>
+                    <h6 class="card-title border-bottom pb-2"><i class="icofont icofont-file-document"></i> <?php echo __('Work Order Details'); ?></h6>
                 </div>
             </div>
 
@@ -96,55 +96,55 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <span class="form-label"><strong>Product Name</strong></span>
+                                <span class="form-label"><strong><?php echo __('Product Name'); ?></strong></span>
                                 <p class="mb-0"><?php echo $parent_record['product_name'] ?? ''; ?></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <span class="form-label"><strong>Transaction Number</strong></span>
+                                <span class="form-label"><strong><?php echo __('Transaction Number'); ?></strong></span>
                                 <p class="mb-0"><?php echo $parent_record['transaction_number'] ?? ''; ?></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <span class="form-label"><strong>Transaction Date</strong></span>
+                                <span class="form-label"><strong><?php echo __('Transaction Date'); ?></strong></span>
                                 <p class="mb-0"><?php echo ($parent_record['transaction_date'] ?? '') ? date('d-m-Y', strtotime($parent_record['transaction_date'])) : ''; ?></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <span class="form-label"><strong>Vendor</strong></span>
+                                <span class="form-label"><strong><?php echo __('Vendor'); ?></strong></span>
                                 <p class="mb-0"><?php echo $parent_record['party_name'] ?? ''; ?></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <span class="form-label"><strong>Request Warehouse</strong></span>
+                                <span class="form-label"><strong><?php echo __('Request Warehouse'); ?></strong></span>
                                 <p class="mb-0"><?php echo $parent_record['request_warehouse_name'] ?? ''; ?></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <span class="form-label"><strong>Party Warehouse</strong></span>
+                                <span class="form-label"><strong><?php echo __('Party Warehouse'); ?></strong></span>
                                 <p class="mb-0"><?php echo $parent_record['party_warehouse_name'] ?? ''; ?></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <span class="form-label"><strong>Item Price</strong></span>
+                                <span class="form-label"><strong><?php echo __('Item Price'); ?></strong></span>
                                 <p class="mb-0"><?php echo number_format($parent_record['work_order_item_price'] ?? 0, 2); ?></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <span class="form-label"><strong>Total Quantity</strong></span>
+                                <span class="form-label"><strong><?php echo __('Total Quantity'); ?></strong></span>
                                 <p class="mb-0"><?php echo $parent_record['work_order_item_qty'] ?? '0'; ?></p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <span class="form-label"><strong>Total Amount</strong></span>
+                                <span class="form-label"><strong><?php echo __('Total Amount'); ?></strong></span>
                                 <p class="mb-0"><?php echo number_format($parent_record['work_order_total_amount'] ?? 0, 2); ?></p>
                             </div>
                         </div>
@@ -154,7 +154,7 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
                     <?php if(isset($issues_history) && count((array)$issues_history) > 0) { ?>
                     <div class="issue-history-panel">
                         <h6 class="issue-history-title border-bottom pb-2 mb-2">
-                            <i class="icofont icofont-history"></i> Issue History
+                            <i class="icofont icofont-history"></i> <?php echo __('Issue History'); ?>
                             <span class="badge badge-primary ml-2"><?php echo count($issues_history); ?></span>
                         </h6>
                         <?php foreach($issues_history as $hist_idx => $hist) {
@@ -178,10 +178,10 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
                                         <span class="badge <?php echo $hist_status_class; ?> issue-history-status"><?php echo $hist_status_label; ?></span>
                                     </div>
                                     <div class="issue-history-meta">
-                                        <span><strong>Date:</strong> <?php echo ($hist['transaction_date'] ?? '') ? date('d-m-Y', strtotime($hist['transaction_date'])) : ''; ?></span>
-                                        <span><strong>Vendor:</strong> <?php echo $hist['party_name'] ?? ''; ?></span>
-                                        <span><strong>Qty:</strong> <?php echo $hist['work_order_item_qty'] ?? '0'; ?></span>
-                                        <span><strong>Amount:</strong> <?php echo number_format($hist['work_order_total_amount'] ?? 0, 2); ?></span>
+                                        <span><strong><?php echo __('Date:'); ?></strong> <?php echo ($hist['transaction_date'] ?? '') ? date('d-m-Y', strtotime($hist['transaction_date'])) : ''; ?></span>
+                                        <span><strong><?php echo __('Vendor:'); ?></strong> <?php echo $hist['party_name'] ?? ''; ?></span>
+                                        <span><strong><?php echo __('Qty:'); ?></strong> <?php echo $hist['work_order_item_qty'] ?? '0'; ?></span>
+                                        <span><strong><?php echo __('Amount:'); ?></strong> <?php echo number_format($hist['work_order_total_amount'] ?? 0, 2); ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -192,12 +192,12 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
                                     <table class="table table-bordered table-sm issue-history-items-table mb-0">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Item</th>
-                                                <th scope="col">SKU</th>
-                                                <th scope="col">UOM</th>
-                                                <th scope="col" class="text-right">Req Qty</th>
-                                                <th scope="col" class="text-right">Issued Qty</th>
-                                                <th scope="col" class="text-right">Amount</th>
+                                                <th scope="col"><?php echo __('Item'); ?></th>
+                                                <th scope="col"><?php echo __('SKU'); ?></th>
+                                                <th scope="col"><?php echo __('UOM'); ?></th>
+                                                <th scope="col" class="text-right"><?php echo __('Req Qty'); ?></th>
+                                                <th scope="col" class="text-right"><?php echo __('Issued Qty'); ?></th>
+                                                <th scope="col" class="text-right"><?php echo __('Amount'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -215,7 +215,7 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
                                     </table>
                                 </div>
                                 <?php } else { ?>
-                                <p class="text-muted small mb-0">No issue items found for this record.</p>
+                                <p class="text-muted small mb-0"><?php echo __('No issue items found for this record.'); ?></p>
                                 <?php } ?>
                             </div>
                         </div>
@@ -224,9 +224,9 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
                     <?php } elseif(isset($issues_history)) { ?>
                     <div class="issue-history-panel">
                         <h6 class="issue-history-title border-bottom pb-2 mb-2">
-                            <i class="icofont icofont-history"></i> Issue History
+                            <i class="icofont icofont-history"></i> <?php echo __('Issue History'); ?>
                         </h6>
-                        <p class="text-muted small">No previous issues found for this work order.</p>
+                        <p class="text-muted small"><?php echo __('No previous issues found for this work order.'); ?></p>
                     </div>
                     <?php } ?>
                 </div>
@@ -239,7 +239,7 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
         <div class="child-items-section mt-5">
             <div class="row mb-3">
                 <div class="col-12">
-                    <h6 class="card-title border-bottom pb-2"><i class="icofont icofont-list"></i> Raw Materials to Issue</h6>
+                    <h6 class="card-title border-bottom pb-2"><i class="icofont icofont-list"></i> <?php echo __('Raw Materials to Issue'); ?></h6>
                 </div>
             </div>
 
@@ -250,15 +250,15 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
                 <table class="table table-hover table-bordered">
                     <thead class="table-light">
                         <tr>
-                            <th scope="col" style="width: 20%;">Product Name</th>
-                            <th scope="col" style="width: 10%;">SKU</th>
-                            <th scope="col" style="width: 10%;">UOM</th>
-                            <th scope="col" style="width: 10%;">Item Qty</th>
-                            <th scope="col" style="width: 10%;">Item Price</th>
-                            <th scope="col" style="width: 10%;">Total Amount</th>
-                            <th scope="col" style="width: 10%;">Pending Qty</th>
-                            <th scope="col" style="width: 10%;">Issue Qty</th>
-                            <th scope="col" style="width: 10%;">Status</th>
+                            <th scope="col" style="width: 20%;"><?php echo __('Product Name'); ?></th>
+                            <th scope="col" style="width: 10%;"><?php echo __('SKU'); ?></th>
+                            <th scope="col" style="width: 10%;"><?php echo __('UOM'); ?></th>
+                            <th scope="col" style="width: 10%;"><?php echo __('Item Qty'); ?></th>
+                            <th scope="col" style="width: 10%;"><?php echo __('Item Price'); ?></th>
+                            <th scope="col" style="width: 10%;"><?php echo __('Total Amount'); ?></th>
+                            <th scope="col" style="width: 10%;"><?php echo __('Pending Qty'); ?></th>
+                            <th scope="col" style="width: 10%;"><?php echo __('Issue Qty'); ?></th>
+                            <th scope="col" style="width: 10%;"><?php echo __('Status'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -274,7 +274,7 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
                             <td>
                                 <input type="hidden" name="id[]" class="issue-child-id" value="<?php echo $item['id'] ?? ''; ?>">
                                 <input type="hidden" name="item_id[]" class="issue-item-id" value="<?php echo $item['item_id'] ?? ''; ?>">
-                                <input aria-label="Issues Qty[]" type="number" step="0.01" min="0" name="issues_qty[]" class="form-control issue-qty-input text-right" value="" data-pending-qty="<?php echo (float)($item['pending_qty'] ?? 0); ?>" max="<?php echo (float)($item['pending_qty'] ?? 0); ?>" <?php echo ((float)($item['pending_qty'] ?? 0) == 0) ? 'disabled' : ''; ?>>
+                                <input aria-label="<?php echo __('Issues Qty[]'); ?>" type="number" step="0.01" min="0" name="issues_qty[]" class="form-control issue-qty-input text-right" value="" data-pending-qty="<?php echo (float)($item['pending_qty'] ?? 0); ?>" max="<?php echo (float)($item['pending_qty'] ?? 0); ?>" <?php echo ((float)($item['pending_qty'] ?? 0) == 0) ? 'disabled' : ''; ?>>
                             </td>
                             <td>
                                 <?php
@@ -295,7 +295,7 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
                 </table>
             </div>
             <div class="mt-3 text-start">
-                <button type="submit" id="submitIssueItemsBtn" class="btn btn-primary border-radius-2"><i class="ti-check"></i> Submit</button>
+                <button type="submit" id="submitIssueItemsBtn" class="btn btn-primary border-radius-2"><i class="ti-check"></i> <?php echo __('Submit'); ?></button>
             </div>
             </form>
         </div>

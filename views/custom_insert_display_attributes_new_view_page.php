@@ -21,7 +21,7 @@ if($_POST['ajaxpage'] =="Y"){
 if($pagetype == "F"){ ?>
 <div class="card">
     <div class="card-header">
-        <h5>Insert Page Details</h5>
+        <h5><?= __('Insert Page Details') ?></h5>
     </div>
     <div class="card-body">
         <div class="card-body">
@@ -39,7 +39,7 @@ if($pagetype == "F"){ ?>
 <?php }elseif($pagetype == "V"){  ?>
 <div class="card">
     <div class="card-header">
-        <h5>View Page Details</h5>
+        <h5><?= __('View Page Details') ?></h5>
     </div>
     <div class="card-body">
         <div class="card-body">
@@ -59,37 +59,37 @@ if($pagetype == "F"){ ?>
 <?php }elseif($pagetype == "G"){ ?>
 <div class="card col-lg-6">
     <div class="card-header">
-        <h5>Insert Page Details</h5>
+        <h5><?= __('Insert Page Details') ?></h5>
     </div>
     <div class="card-body" >
       <table class="table table-hover m-b-0" style="font-size:13px;">
         <tbody>
               <tr>
-                <th scope="col" class="p-2">Transaction No.</th>
+                <th scope="col" class="p-2"><?= __('Transaction No.') ?></th>
                 <td class="text-right p-2 "> <a href="index?option=COM_INSERT_RENTAL_INVOICES&amp;Rid=YVdRNk1RPT0=" class="text-primary"><i class="fa fa-edit"></i>  RI00187</a></td>
               </tr>
               <tr>
-                <th scope="col" class="p-2">Transaction Date</th>
+                <th scope="col" class="p-2"><?= __('Transaction Date') ?></th>
                 <td class="text-right p-2">10-11-2023</td>
               </tr>
               <tr>
-                <th scope="col" class="p-2">Part Name</th>
+                <th scope="col" class="p-2"><?= __('Part Name') ?></th>
                 <td class="text-right p-2">Batakrishna Pattanayak</td>
               </tr>
               <tr>
-                <th scope="col" class="p-2">Amount</th>
+                <th scope="col" class="p-2"><?= __('Amount') ?></th>
                 <td class="text-right p-2">37,568.00</td>
               </tr>
               <tr>
-                <th scope="col" class="p-2">Tax</th>
+                <th scope="col" class="p-2"><?= __('Tax') ?></th>
                 <td class="text-right p-2">4,968.00</td>
               </tr>
               <tr>
-                <th scope="col" class="p-2">Discount</th>
+                <th scope="col" class="p-2"><?= __('Discount') ?></th>
                 <td class="text-right p-2">0.00</td>
               </tr>
               <tr>
-                <th scope="col" class="p-2">Total</th>
+                <th scope="col" class="p-2"><?= __('Total') ?></th>
                 <td class="text-right p-2">42,536.00</td>
             </tr>
           </tbody>
@@ -100,7 +100,7 @@ if($pagetype == "F"){ ?>
  <?php }else{ ?>
 <div class="card">
     <div class="card-header">
-        <h5>Table</h5>
+        <h5><?= __('Table') ?></h5>
     </div>
     <div class="card-body">
          <div class="table-responsive">

@@ -64,7 +64,7 @@ $forecast_type = array(array('id'=>'1','nameval'=>'Sales'),array('id'=>'1','name
         var htmlvar = ``;
         htmlvar += `<table class="table table-hover mt-5">`;
         htmlvar += `<tr>`;
-        htmlvar += `<th scope="col">Month</th><th scope="col">Qty</th>`;
+        htmlvar += `<th scope="col"><?php echo __('Month'); ?></th><th scope="col"><?php echo __('Qty'); ?></th>`;
         htmlvar += `</tr>`;
         var start_date = $("#start_date").val();
         let start_date_ary = start_date.split("-")
@@ -81,7 +81,7 @@ $forecast_type = array(array('id'=>'1','nameval'=>'Sales'),array('id'=>'1','name
             htmlvar += `<span class="form-label d-block">`+getyear+` - `+getmonth+`</span>`;
             htmlvar += `</td>`;
             htmlvar += `<td class="p-2">`;
-            htmlvar += `<input aria-label="Input field" type="text" class="form-control" id="" name="" value="0" required>`;
+            htmlvar += `<input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" id="" name="" value="0" required>`;
             htmlvar += `</td>`;
             htmlvar += `</tr>`;
 
@@ -96,16 +96,16 @@ $forecast_type = array(array('id'=>'1','nameval'=>'Sales'),array('id'=>'1','name
  <?php if($error_message !=''){ ?>
     <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
 <?php } ?>
 <div class="card">
     <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Forecastings</h5>
+        <h5 class="mb-0"><?php echo __('Forecastings'); ?></h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light m-r-50">
                 <i class="icofont icofont-reply mr-1"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -114,30 +114,30 @@ $forecast_type = array(array('id'=>'1','nameval'=>'Sales'),array('id'=>'1','name
             <input type="hidden" name="rid" value="<?php echo $rid; ?>">
             <div class="row" >
                 <div class="col-md-3 w-full">
-                    <label for="forecast_type_id" class="form-label d-block">Forecast Type <span class="text-danger">*</span></label>
-                    <select aria-label="Bom Item" class="js-example-basic-single item-selection" name="bom_item_id" id="forecast_type_id" onchange="selectProductName()" required>
-                        <option value="">Select Any one</option>
+                    <label for="forecast_type_id" class="form-label d-block"><?php echo __('Forecast Type'); ?> <span class="text-danger">*</span></label>
+                    <select aria-label="<?php echo __('Bom Item'); ?>" class="js-example-basic-single item-selection" name="bom_item_id" id="forecast_type_id" onchange="selectProductName()" required>
+                        <option value=""><?php echo __('Select Any one'); ?></option>
                         <?php foreach ($forecast_type as $item){ ?>
                             <option value="<?php echo $item['id']; ?>" <?php echo $manufacturing_boms['bom_item_id'] == $item['id']?"selected":""; ?>><?php echo $item['nameval']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="col-md-3 w-full">
-                    <label for="bom_item_id" class="form-label d-block">Product <span class="text-danger">*</span></label>
-                    <select aria-label="Bom Item" class="js-example-basic-single item-selection" name="bom_item_id" id="bom_item_id" onchange="selectProductName()" required>
-                        <option value="">Select Any one</option>
+                    <label for="bom_item_id" class="form-label d-block"><?php echo __('Product'); ?> <span class="text-danger">*</span></label>
+                    <select aria-label="<?php echo __('Bom Item'); ?>" class="js-example-basic-single item-selection" name="bom_item_id" id="bom_item_id" onchange="selectProductName()" required>
+                        <option value=""><?php echo __('Select Any one'); ?></option>
                         <?php foreach ($items as $item){ ?>
                             <option value="<?php echo $item['id']; ?>" <?php echo $manufacturing_boms['bom_item_id'] == $item['id']?"selected":""; ?>><?php echo $item['item_name']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <span class="form-label">Start date <span class="text-danger">*</span></span>
-                    <input aria-label="Start Date" type="month" class="form-control" id="start_date" name="start_date" value="" onchange="monthlyForcastings()" required>
+                    <span class="form-label"><?php echo __('Start date'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Start Date'); ?>" type="month" class="form-control" id="start_date" name="start_date" value="" onchange="monthlyForcastings()" required>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <span class="form-label">From date <span class="text-danger">*</span></span>
-                    <input aria-label="End Date" type="month" class="form-control" id="end_date" name="end_date"  value="" onchange="monthlyForcastings()" required>
+                    <span class="form-label"><?php echo __('From date'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('End Date'); ?>" type="month" class="form-control" id="end_date" name="end_date"  value="" onchange="monthlyForcastings()" required>
                 </div>
             </div>
             <div class="row" >

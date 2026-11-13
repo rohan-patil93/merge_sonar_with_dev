@@ -29,7 +29,7 @@ foreach($row as $rowdata){
             success: function(response) {
                 console.log(response);
                 swal.fire({
-                    title: "Folder is create successfully",
+                    title: <?php echo json_encode(__('Folder is create successfully')); ?>,
                     type: "success",
                     buttonsStyling: false,
                     confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
@@ -50,15 +50,15 @@ foreach($row as $rowdata){
 </script>
 <div class="modal-header">
     <span id="backid">  </span> &nbsp;
-    <h5 class="modal-title" id="title"> Save to floder </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title" id="title"> <?php echo __('Save to floder'); ?> </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
     </div>
     <div class="modal-body" >
         <form class="kt-form kt-form--label-right" action="" method="post">
             <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                 <div class="form-group row">
                     <div class="col-lg-12">
-                        <textarea aria-label="Name new floder" class="form-control" name="floder_name" id="floder_name" placeholder="Name new floder"></textarea>
+                        <textarea aria-label="<?php echo __('Name new floder'); ?>" class="form-control" name="floder_name" id="floder_name" placeholder="<?php echo __('Name new floder'); ?>"></textarea>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@ foreach($row as $rowdata){
                 <input type="hidden" name="report_id" id='report_id' value="<?php echo $_POST['report_id']; ?>">
                 <input type="hidden" name="parent_id" id='parent_id' value="<?php echo $_POST['parent_id']; ?>">
 
-                <button type="button" class="btn btn-primary mr-2" onclick="submitflderrom()" >ADD to new floder</button>
+                <button type="button" class="btn btn-primary mr-2" onclick="submitflderrom()" ><?php echo __('ADD to new floder'); ?></button>
             </div>
         </form>
     </div>

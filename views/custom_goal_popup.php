@@ -10,13 +10,13 @@ include_once('../comm.php');
          count++;
         var htmlRows = '';
         htmlRows += '<tr class="itemRow123">'; 
-        htmlRows += '<td><input type="text" name="name[]" class="form-control" value="" id="name_'+count+'" aria-label="Name"></td> ';
-        htmlRows += '<td><textarea class="form-control" name="descrption[]" id="descrption_'+count+'" aria-label="Descrption"></textarea></td>';   
+        htmlRows += '<td><input type="text" name="name[]" class="form-control" value="" id="name_'+count+'" aria-label="<?php echo __('Name'); ?>"></td> ';
+        htmlRows += '<td><textarea class="form-control" name="descrption[]" id="descrption_'+count+'" aria-label="<?php echo __('Description'); ?>"></textarea></td>';   
 
-        htmlRows += '<td><input type="text" name="short_code[]" class="form-control" value="" id="short_code_'+count+'" aria-label="Short Code"></td>';    
-        htmlRows += '<td><input type="text" name="frequency[]" class="form-control" value="" id="frequency_'+count+'" aria-label="Frequency"></td>';
-        htmlRows += '<td><select class="form-control" name="mandatory[]" id="mandatory_'+count+'" aria-label="Mandatory"><option value="0"> NO</option><option value="1"> Yes</option></select></td>';
-        htmlRows += '<td><input type="hidden" value="0" id="delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">Delete</button></td>'; 
+        htmlRows += '<td><input type="text" name="short_code[]" class="form-control" value="" id="short_code_'+count+'" aria-label="<?php echo __('Short Code'); ?>"></td>';    
+        htmlRows += '<td><input type="text" name="frequency[]" class="form-control" value="" id="frequency_'+count+'" aria-label="<?php echo __('Frequency'); ?>"></td>';
+        htmlRows += '<td><select class="form-control" name="mandatory[]" id="mandatory_'+count+'" aria-label="<?php echo __('Mandatory'); ?>"><option value="0"> <?php echo __('NO'); ?></option><option value="1"> <?php echo __('Yes'); ?></option></select></td>';
+        htmlRows += '<td><input type="hidden" value="0" id="delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)"><?php echo __('Delete'); ?></button></td>'; 
         
         htmlRows += '</tr>';
         $('#invoiceItem123').append(htmlRows);
@@ -57,14 +57,14 @@ include_once('../comm.php');
 	        	console.log(response);
 	            //$('.success').html(response);
 	            swal.fire({              
-							title: "Record has been saved successfully ",              
-							text: "Do you want to close ? ",              
+							title: "<?php echo __('Record has been saved successfully'); ?> ",              
+							text: "<?php echo __('Do you want to close ?'); ?> ",              
 							type: "success",           
 							buttonsStyling: false,
-							confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",    
+							confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('Yes, close!'); ?>",    
 							confirmButtonClass: "btn btn-danger",
 							showCancelButton: true,     
-							cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",      
+							cancelButtonText: "<i class='la la-hand-o-right'></i> <?php echo __('No, continue'); ?>",      
 							cancelButtonClass: "btn btn-default"        
 						}).then(function(result) {
 							if (result.value) {
@@ -79,10 +79,10 @@ include_once('../comm.php');
 
 <div class="modal-header">
 						<h5 class="modal-title">
-							Goals		
-							<small>&nbsp;&nbsp; <b>Table: </b>&nbsp; <?php echo $table; ?> <b> &nbsp;&nbsp; Field: </b>&nbsp; <?php echo $field; ?> </small>
+							<?php echo __('Goals'); ?>		
+							<small>&nbsp;&nbsp; <b><?php echo __('Table'); ?>: </b>&nbsp; <?php echo $table; ?> <b> &nbsp;&nbsp; <?php echo __('Field'); ?>: </b>&nbsp; <?php echo $field; ?> </small>
 						</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
@@ -91,11 +91,11 @@ include_once('../comm.php');
 								<div class="col-lg-12">
 									<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem123">	
 											<tr>
-												<th scope="col" class="" width="25%">Indicator Name</th>
-												<th scope="col" class="thheader" width="30%">Weightage</th>
-												<th scope="col" class="thheader" width="15%">model</th>
-												<th scope="col" class="thheader" width="15%">Frequency</th>
-												<th scope="col" class="thheader" width="15%">traget</th>
+												<th scope="col" class="" width="25%"><?php echo __('Indicator Name'); ?></th>
+												<th scope="col" class="thheader" width="30%"><?php echo __('Weightage'); ?></th>
+												<th scope="col" class="thheader" width="15%"><?php echo __('model'); ?></th>
+												<th scope="col" class="thheader" width="15%"><?php echo __('Frequency'); ?></th>
+												<th scope="col" class="thheader" width="15%"><?php echo __('traget'); ?></th>
 												<th scope="col" class="thheader" width="5%"></th>
 											</tr>
 											<?php /*if(count((array)$tr)>0){
@@ -105,33 +105,33 @@ include_once('../comm.php');
 
 												<tr class="itemRow123" id="qur_div_<?php echo $count; ?>"  >
 													<td>
-														<input type="text" name="name[]" class="form-control" value="" id="name_1" aria-label="Name">
+														<input type="text" name="name[]" class="form-control" value="" id="name_1" aria-label="<?php echo __('Name'); ?>">
 													</td>
 													<td>
-														<textarea class="form-control" name="descrption[]" id="descrption_1" aria-label="Descrption"></textarea>
+														<textarea class="form-control" name="descrption[]" id="descrption_1" aria-label="<?php echo __('Description'); ?>"></textarea>
 													</td>
 													<td>
-														<input type="text" name="short_code[]" class="form-control" value="" id="short_code_1" aria-label="Short Code">
+														<input type="text" name="short_code[]" class="form-control" value="" id="short_code_1" aria-label="<?php echo __('Short Code'); ?>">
 													</td>
 													<td>
-														<input type="text" name="frequency[]" class="form-control" value="" id="frequency_1" aria-label="Frequency">
+														<input type="text" name="frequency[]" class="form-control" value="" id="frequency_1" aria-label="<?php echo __('Frequency'); ?>">
 													</td>
 													<td>
-														<select class="form-control" name="mandatory[]" id="mandatory_1" aria-label="Mandatory">
-															<option value="0"> NO</option>
-															<option value="1"> Yes</option>
+														<select class="form-control" name="mandatory[]" id="mandatory_1" aria-label="<?php echo __('Mandatory'); ?>">
+															<option value="0"> <?php echo __('NO'); ?></option>
+															<option value="1"> <?php echo __('Yes'); ?></option>
 														</select>
 													</td>
 													<td>
 														<input type="hidden" value="0" id="delete_value_<?php echo $count; ?>" >
-														<button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(this.id)">Delete</button>
+														<button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(this.id)"><?php echo __('Delete'); ?></button>
 													</td>
 												</tr>
 											<?php/* $count++;  } }*/ ?>		
 									</table>
 									<div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
 								<!-- <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>&nbsp;&nbsp; -->
-								<button class="btn btn-success" id="addRows" type="button" onclick="addmoreRows()">+ Add More</button>&nbsp;&nbsp;
+								<button class="btn btn-success" id="addRows" type="button" onclick="addmoreRows()">+ <?php echo __('Add More'); ?></button>&nbsp;&nbsp;
 						
 							</div>
 								</div>
@@ -142,8 +142,8 @@ include_once('../comm.php');
 				<?php print_r($_POST); ?>
 				<input type="hidden" name="kpi_id" id="kpi_id" value="<?php echo $_POST['id']; ?>">
 				<input type="hidden" name="page" value="dis_submit">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary" onclick="submitrom()" >Submit</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo __('Close'); ?></button>
+				<button type="button" class="btn btn-primary" onclick="submitrom()" ><?php echo __('Submit'); ?></button>
 			</div>
 <!-- </div> -->
 	</form>

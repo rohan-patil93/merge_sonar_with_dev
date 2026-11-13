@@ -34,7 +34,7 @@ if($_POST['rrid'] !=""){
 }
 ?>
 <div class="card-header mb-3">
-    <h5>Histories</h5>
+    <h5><?= __('Histories') ?></h5>
 </div>
 <div class="card-block">
     <div class="scroll-widget">
@@ -45,7 +45,7 @@ if($_POST['rrid'] !=""){
                 </div>
                 <div class="col p-l-5">
                     <a href="#!"><h6><?php echo $transaction['created_date']; ?></h6></a>
-                    <p class="text-muted m-b-0">Create Lead</p>
+                    <p class="text-muted m-b-0"><?= __('Create Lead') ?></p>
                 </div>
             </div>
             <?php foreach($crm_lead_details as $crmld){

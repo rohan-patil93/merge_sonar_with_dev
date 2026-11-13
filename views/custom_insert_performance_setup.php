@@ -161,16 +161,16 @@ if($_GET['Rid']!=""){
         <div class="card card-custom card-sticky" id="kt_page_sticky_card">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">&nbsp;<?php echo "Performance";  ?> </h3>
+                    <h3 class="card-label">&nbsp;<?php echo __('Performance');  ?> </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="card-toolbar">
                         <a href="javascript:history.go(-1)" class="btn btn-primary font-weight-bolder mr-2">
-                            Genrate Future Performance
+                            <?php echo __('Genrate Future Performance'); ?>
                         </a>
                         <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                             <i class="ki ki-long-arrow-back icon-xs"></i>
-                            Back
+                            <?php echo __('Back'); ?>
                         </a>
                     </div>
                 </div>
@@ -186,7 +186,7 @@ if($_GET['Rid']!=""){
                                     <span class="nav-icon">
                                         <i class="flaticon2-layers-1"></i>
                                     </span>
-                                    <span class="nav-text">People</span>
+                                    <span class="nav-text"><?php echo __('People'); ?></span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -194,7 +194,7 @@ if($_GET['Rid']!=""){
                                     <span class="nav-icon">
                                         <i class="flaticon2-layers-1"></i>
                                     </span>
-                                    <span class="nav-text">Assessment Questions For Employee</span>
+                                    <span class="nav-text"><?php echo __('Assessment Questions For Employee'); ?></span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -202,7 +202,7 @@ if($_GET['Rid']!=""){
                                     <span class="nav-icon">
                                         <i class="flaticon2-layers-1"></i>
                                     </span>
-                                    <span class="nav-text">Assessment Questions For Manager</span>
+                                    <span class="nav-text"><?php echo __('Assessment Questions For Manager'); ?></span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -210,7 +210,7 @@ if($_GET['Rid']!=""){
                                     <span class="nav-icon">
                                         <i class="flaticon2-layers-1"></i>
                                     </span>
-                                    <span class="nav-text">Assessment Questions For Manager To</span>
+                                    <span class="nav-text"><?php echo __('Assessment Questions For Manager To'); ?></span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -218,7 +218,7 @@ if($_GET['Rid']!=""){
                                     <span class="nav-icon">
                                         <i class="flaticon2-layers-1"></i>
                                     </span>
-                                    <span class="nav-text">Peer Feedback </span>
+                                    <span class="nav-text"><?php echo __('Peer Feedback'); ?> </span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -226,7 +226,7 @@ if($_GET['Rid']!=""){
                                     <span class="nav-icon">
                                         <i class="flaticon2-layers-1"></i>
                                     </span>
-                                    <span class="nav-text">Goals</span>
+                                    <span class="nav-text"><?php echo __('Goals'); ?></span>
                                 </a>
                             </li>
 
@@ -242,16 +242,16 @@ if($_GET['Rid']!=""){
 
                                     <div class="row ">
                                         <div class="form-group col-lg-4">
-                                            <span class="form-labe">Name<span class="text-danger">*</span></span>
-                                            <input aria-label="Name" type="text" name="name" class="form-control" value="<?php echo $role['name']; ?>">
+                                            <span class="form-labe"><?php echo __('Name'); ?><span class="text-danger">*</span></span>
+                                            <input aria-label="<?php echo __('Name'); ?>" type="text" name="name" class="form-control" value="<?php echo $role['name']; ?>">
                                         </div>
                                         <div class="form-group col-lg-8">
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <span class="form-labe">Start Assessment </span>
+                                            <span class="form-labe"><?php echo __('Start Assessment'); ?> </span>
                                             <div class="input-group date">
                                                 <?php $date_pic = fromDate($role['assessment_start_date']); ?>
-                                                <input aria-label="Input field" type="text" class="form-control"  value="<?php echo  $date_pic; ?>"  name="assessment_begin" onblur="assessmentchange()" id="kt_datepicker_31" />
+                                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"  value="<?php echo  $date_pic; ?>"  name="assessment_begin" onblur="assessmentchange()" id="kt_datepicker_31" />
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">
                                                         <i class="la la-calendar"></i>
@@ -260,12 +260,12 @@ if($_GET['Rid']!=""){
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <span class="form-labe">End Assessments </span>
+                                            <span class="form-labe"><?php echo __('End Assessments'); ?> </span>
                                             <div class="input-group date">
                                                 <?php
 
                                                 $date_pic2 = fromDate(date('Y-m-d',strtotime($date_pic."+1 month"))); ?>
-                                                <input aria-label="Assessment Due" type="text" class="form-control" name="assessment_due" value="<?php echo  $date_pic2; ?>"  name="assessment_due" readonly  />
+                                                <input aria-label="<?php echo __('Assessment Due'); ?>" type="text" class="form-control" name="assessment_due" value="<?php echo  $date_pic2; ?>"  name="assessment_due" readonly  />
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">
                                                         <i class="la la-calendar"></i>
@@ -277,10 +277,10 @@ if($_GET['Rid']!=""){
                                         </div>
 
                                         <div class="form-group col-lg-4">
-                                            <span class="form-labe">Self Assessment Start</span>
+                                            <span class="form-labe"><?php echo __('Self Assessment Start'); ?></span>
                                             <div class="input-group date">
                                                 <?php $date_pic = fromDate($role['employee_start']); ?>
-                                                <input aria-label="Input field" type="text" class="form-control"  value="<?php echo  $date_pic; ?>"  name="employee_begin" id="kt_datepicker_4_1" />
+                                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"  value="<?php echo  $date_pic; ?>"  name="employee_begin" id="kt_datepicker_4_1" />
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">
                                                         <i class="la la-calendar"></i>
@@ -289,10 +289,10 @@ if($_GET['Rid']!=""){
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <span class="form-labe">Self Assessment End</span>
+                                            <span class="form-labe"><?php echo __('Self Assessment End'); ?></span>
                                             <div class="input-group date">
                                                 <?php $date_pic = fromDate($role['employee_end']); ?>
-                                                <input aria-label="Input field" type="text" class="form-control"  value="<?php echo  $date_pic2; ?>"  name="employee_end" id="kt_datepicker_4_2"  />
+                                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"  value="<?php echo  $date_pic2; ?>"  name="employee_end" id="kt_datepicker_4_2"  />
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">
                                                         <i class="la la-calendar"></i>
@@ -305,10 +305,10 @@ if($_GET['Rid']!=""){
                                         </div>
 
                                         <div class="form-group col-lg-4">
-                                            <span class="form-labe">Manager's Assessement Start </span>
+                                            <span class="form-labe"><?php echo __('Manager\'s Assessement Start'); ?> </span>
                                             <div class="input-group date">
                                                 <?php $date_pic = fromDate($role['manager_start']); ?>
-                                                <input aria-label="Input field" type="text" class="form-control"  value="<?php echo  $date_pic; ?>"  name="manager_begin" id="kt_datepicker_4_3" />
+                                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"  value="<?php echo  $date_pic; ?>"  name="manager_begin" id="kt_datepicker_4_3" />
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">
                                                         <i class="la la-calendar"></i>
@@ -317,10 +317,10 @@ if($_GET['Rid']!=""){
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <span class="form-label">Manager's Assessment End </span>
+                                            <span class="form-label"><?php echo __('Manager\'s Assessment End'); ?> </span>
                                             <div class="input-group date">
                                                 <?php $date_pic = fromDate($role['manager_end']); ?>
-                                                <input aria-label="Manager End" type="text" class="form-control" name="manager_end" value="<?php echo  $date_pic2; ?>"  id="kt_datepicker_4_4"   />
+                                                <input aria-label="<?php echo __('Manager End'); ?>" type="text" class="form-control" name="manager_end" value="<?php echo  $date_pic2; ?>"  id="kt_datepicker_4_4"   />
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">
                                                         <i class="la la-calendar"></i>
@@ -333,10 +333,10 @@ if($_GET['Rid']!=""){
                                         </div>
 
                                         <div class="form-group col-lg-4">
-                                            <span class="form-label">Reviewing Manager's Assessment Start</span>
+                                            <span class="form-label"><?php echo __('Reviewing Manager\'s Assessment Start'); ?></span>
                                             <div class="input-group date">
                                                 <?php $date_pic = fromDate($role['reporting_manager_start']); ?>
-                                                <input aria-label="Input field" type="text" class="form-control"  value="<?php echo  $date_pic; ?>"  name="managerto_begin"  id="kt_datepicker_4_5" />
+                                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"  value="<?php echo  $date_pic; ?>"  name="managerto_begin"  id="kt_datepicker_4_5" />
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">
                                                         <i class="la la-calendar"></i>
@@ -345,10 +345,10 @@ if($_GET['Rid']!=""){
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <span class="form-label"> Reviewing Manager's Assessment End</span>
+                                            <span class="form-label"> <?php echo __('Reviewing Manager\'s Assessment End'); ?></span>
                                             <div class="input-group date">
                                                 <?php $date_pic = fromDate($role['reporting_manager_end']); ?>
-                                                <input aria-label="Input field" type="text" class="form-control" value="<?php echo  $date_pic2; ?>"  name="managerto_end"  id="kt_datepicker_4_6" />
+                                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo  $date_pic2; ?>"  name="managerto_end"  id="kt_datepicker_4_6" />
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">
                                                         <i class="la la-calendar"></i>
@@ -360,32 +360,32 @@ if($_GET['Rid']!=""){
                                         <div class="form-group col-lg-4">
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <span class="form-label">URL</span>
-                                            <textarea aria-label="Url" name="url" class="form-control" > <?php echo $role['url']; ?></textarea>
+                                            <span class="form-label"><?php echo __('URL'); ?></span>
+                                            <textarea aria-label="<?php echo __('Url'); ?>" name="url" class="form-control" > <?php echo $role['url']; ?></textarea>
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <span class="form-label">File Upload</span>
+                                            <span class="form-label"><?php echo __('File Upload'); ?></span>
                                             <div>
-                                                <input aria-label="File Name" type="file" class="custom-file-input" id="customFile" name="file_name" value="">
+                                                <input aria-label="<?php echo __('File Name'); ?>" type="file" class="custom-file-input" id="customFile" name="file_name" value="">
                                                 <input type="hidden" name="hid_image" value="<?php echo $role['file_name']; ?>">
 
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-12" >
-                                            <span>How often do assessments happen?</span>
-                                            <select aria-label="Assessment Month" class="form-control  col-lg-3" onchange="assessmentchange()" name="assessment_month" id="assessment_month">
-                                                <option <?php if($role['assessment_month']==3){ echo "selected";
-}  ?> value="3" >Every 3 Months</option>
-                                                <option <?php if($role['assessment_month']==4){ echo "selected";
-}  ?> value="4" >Every 4 Months</option>
-                                                <option <?php if($role['assessment_month']==6){ echo "selected";
-}  ?> value="6" >Every 6 Months</option>
-                                                <option <?php if($role['assessment_month']==12){ echo "selected";
-}  ?> value="12" >Every Year</option>
+                                            <span><?php echo __('How often do assessments happen?'); ?></span>
+                                            <select aria-label="<?php echo __('Assessment Month'); ?>" class="form-control  col-lg-3" onchange="assessmentchange()" name="assessment_month" id="assessment_month">
+                                                <option <?php if($role['assessment_month']==3){ echo __('selected');
+}  ?> value="3" ><?php echo __('Every 3 Months'); ?></option>
+                                                <option <?php if($role['assessment_month']==4){ echo __('selected');
+}  ?> value="4" ><?php echo __('Every 4 Months'); ?></option>
+                                                <option <?php if($role['assessment_month']==6){ echo __('selected');
+}  ?> value="6" ><?php echo __('Every 6 Months'); ?></option>
+                                                <option <?php if($role['assessment_month']==12){ echo __('selected');
+}  ?> value="12" ><?php echo __('Every Year'); ?></option>
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-12" >
-                                            <span>Future Assessment Dates</span>
+                                            <span><?php echo __('Future Assessment Dates'); ?></span>
                                             <div id="datedisplay">
                                                 <?php if($role['assessment_start_date']!=""){
                                                      $sdate = date('Y-m-d', strtotime($role['assessment_start_date']));
@@ -398,11 +398,11 @@ if($_GET['Rid']!=""){
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <span class="font-weight-bolder">Asign to <span class="text-danger">*</span></span>
+                                            <span class="font-weight-bolder"><?php echo __('Asign to'); ?> <span class="text-danger">*</span></span>
                                             <div id="tsk_fortable"></div>
                                             <div class="col-xl-12">
                                                 <i class="flaticon2-group text-success"></i>
-                                                <button type="button" onclick="showpopup();">Edit </button>
+                                                <button type="button" onclick="showpopup();"><?php echo __('Edit'); ?> </button>
                                             </div>
                                             <div id="filternames"> <?php echo $assigned_to_employees_names; ?> </div>
 
@@ -414,7 +414,7 @@ if($_GET['Rid']!=""){
                                 </div>
                                 <input type="hidden" name="submit" value="addpeople" />
                                 <input type="hidden" name="rid" value="<?php echo $rid; ?>" />
-                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save </button>
+                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save'); ?> </button>
                                 </form>
                             </div>
                         </div>
@@ -432,12 +432,12 @@ if($_GET['Rid']!=""){
                                 <div class="card-body">
                                     <form class="kt-form" id="kt_form_2" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
                                     <div class="row ">
-                                        <h6>Next Peer Feedback Round</h6>
+                                        <h6><?php echo __('Next Peer Feedback Round'); ?></h6>
                                         <div class="form-group col-lg-12" >
-                                            <span>When should we prompt managers to request peer feedback?</span>
+                                            <span><?php echo __('When should we prompt managers to request peer feedback?'); ?></span>
                                             <div class="input-group date  col-lg-3">
                                                 <?php $date_pic3 = fromDate($role['peer_feedback_date']); ?>
-                                                <input aria-label="Input field" type="text" class="form-control"  value="<?php echo  $date_pic3; ?>"  name="peer_feedback_date" onblur="perrfeedbackchange()" id="kt_datepicker_32" />
+                                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"  value="<?php echo  $date_pic3; ?>"  name="peer_feedback_date" onblur="perrfeedbackchange()" id="kt_datepicker_32" />
 
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">
@@ -447,16 +447,16 @@ if($_GET['Rid']!=""){
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-12" >
-                                            <span>How often do you want managers to get peer feedback on their direct reports?</span>
-                                            <select aria-label="Peer Feedback Month" class="form-control  col-lg-3" onclick="perrfeedbackchange()" onkeyup="perrfeedbackchange()" name="peer_feedback_month" id="peer_feedback_month">
-                                                <option <?php if($role['peer_feedback_month']==3){ echo "selected";
-}  ?> value="3" >Every 3 Months</option>
-                                                <option <?php if($role['peer_feedback_month']==4){ echo "selected";
-}  ?> value="4" >Every 4 Months</option>
-                                                <option <?php if($role['peer_feedback_month']==6){ echo "selected";
-}  ?> value="6" >Every 6 Months</option>
-                                                <option <?php if($role['peer_feedback_month']==12){ echo "selected";
-}  ?> value="12" >Every Year</option>
+                                            <span><?php echo __('How often do you want managers to get peer feedback on their direct reports?'); ?></span>
+                                            <select aria-label="<?php echo __('Peer Feedback Month'); ?>" class="form-control  col-lg-3" onclick="perrfeedbackchange()" onkeyup="perrfeedbackchange()" name="peer_feedback_month" id="peer_feedback_month">
+                                                <option <?php if($role['peer_feedback_month']==3){ echo __('selected');
+}  ?> value="3" ><?php echo __('Every 3 Months'); ?></option>
+                                                <option <?php if($role['peer_feedback_month']==4){ echo __('selected');
+}  ?> value="4" ><?php echo __('Every 4 Months'); ?></option>
+                                                <option <?php if($role['peer_feedback_month']==6){ echo __('selected');
+}  ?> value="6" ><?php echo __('Every 6 Months'); ?></option>
+                                                <option <?php if($role['peer_feedback_month']==12){ echo __('selected');
+}  ?> value="12" ><?php echo __('Every Year'); ?></option>
                                             </select>
                                         </div>
 
@@ -478,7 +478,7 @@ if($_GET['Rid']!=""){
                                     <input type="hidden" name="rid" value="<?php echo $rid; ?>" />
                                     <input type="hidden" name="assign_type" value="3" />
                                     <input type="hidden" name="display_questions" value="0" />
-                                <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save </button>
+                                <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save'); ?> </button>
                                   </form>
                                 </div>
                             </div>
@@ -491,23 +491,23 @@ if($_GET['Rid']!=""){
                                         <div class="form-group">
                                             <div class="checkbox-list">
                                                 <label class="checkbox">
-                                                    <input aria-label="Checkbox" type="checkbox"  <?php if($goal['kra']==1){ echo "checked";
+                                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  <?php if($goal['kra']==1){ echo __('checked');
 } ?>  name="kra"/>
                                                     <span class="float-left"></span>
-                                                    Key Result Areas
+                                                    <?php echo __('Key Result Areas'); ?>
                                                 </label>
                                                 <label class="checkbox">
-                                                    <input aria-label="Checkbox" type="checkbox" <?php if($goal['kpi']==1){ echo "checked";
+                                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php if($goal['kpi']==1){ echo __('checked');
 } ?>  name="kpi"/>
                                                     <span class="float-left"></span>
-                                                    Key Performance Indicator
+                                                    <?php echo __('Key Performance Indicator'); ?>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                     <input type="hidden" name="submit" value="savegoal" />
                                     <input type="hidden" name="rid" value="<?php echo $rid; ?>" />
-                                <button id="kt_login_signin_submit_3" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save </button>
+                                <button id="kt_login_signin_submit_3" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save'); ?> </button>
                                   </form>
                                 </div>
                             </div>

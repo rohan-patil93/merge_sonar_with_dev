@@ -22,7 +22,7 @@ if (isset($_POST['submit']) && in_array($_POST['submit'], ['insert', 'update'], 
     $is_active = (int)($_POST['is_active'] ?? 0);
 
     if (empty($gate_name)) {
-        $error = 'Please enter Gate Name';
+        $error = __('Please enter Gate Name');
     } else {
         $post_data = [
             'name' => $gate_name,
@@ -50,7 +50,7 @@ if (isset($_POST['submit']) && in_array($_POST['submit'], ['insert', 'update'], 
             header("location:index.php?option=custom_list_building_gates");
             exit;
         } else {
-            $error = 'Failed to save the gate configuration.';
+            $error = __('Failed to save the gate configuration.');
         }
     }
 }
@@ -65,7 +65,7 @@ if ($editMode) {
     $gate = $gate_list[0] ?? null;
 
     if (!$gate) {
-        $error = 'Gate not found or deleted.';
+        $error = __('Gate not found or deleted.');
     }
 }
 
@@ -79,8 +79,8 @@ $locations = json_decode($loc_res, true) ?: [];
 
 <div class="form-container">
     <div class="form-header">
-        <h4><?= $editMode ? 'Edit Building Gate' : 'Add New Building Gate' ?></h4>
-        <p>Configure gate name, physical location mapping, and status.</p>
+        <h4><?= $editMode ? __('Edit Building Gate') : __('Add New Building Gate') ?></h4>
+        <p><?= __('Configure gate name, physical location mapping, and status.') ?></p>
     </div>
 
     <?php if (!empty($error)): ?>
@@ -91,20 +91,20 @@ $locations = json_decode($loc_res, true) ?: [];
 
     <form id="gateForm" method="post">
         <div class="form-group">
-            <label for="name">Gate Name <span class="text-danger">*</span></label>
+            <label for="name"><?= __('Gate Name') ?> <span class="text-danger">*</span></label>
             <input type="text"
                    id="name"
                    name="name"
                    class="form-control-custom"
-                   placeholder="e.g. Main Gate, South Cargo Gate"
+                   placeholder="<?= __('e.g. Main Gate, South Cargo Gate') ?>"
                    value="<?= htmlspecialchars($gate['name'] ?? '') ?>"
                    required>
         </div>
 
         <div class="form-group">
-            <label for="location_id">Mapped Location</label>
+            <label for="location_id"><?= __('Mapped Location') ?></label>
             <select id="location_id" name="location_id" class="form-control-custom">
-                <option value="0">All Locations</option>
+                <option value="0"><?= __('All Locations') ?></option>
                 <?php foreach ($locations as $loc): ?>
                     <option value="<?= (int)$loc['id'] ?>" <?= (isset($gate['location_id']) && (int)$gate['location_id'] === (int)$loc['id']) ? 'selected' : '' ?>>
                         <?= htmlspecialchars($loc['short_name']) ?> (<?= htmlspecialchars($loc['location_name']) ?>)
@@ -114,19 +114,19 @@ $locations = json_decode($loc_res, true) ?: [];
         </div>
 
         <div class="form-group">
-            <label for="is_active">Status</label>
+            <label for="is_active"><?= __('Status') ?></label>
             <select id="is_active" name="is_active" class="form-control-custom">
-                <option value="0" <?= (isset($gate['is_active']) && (int)$gate['is_active'] === 0) ? 'selected' : '' ?>>Active</option>
-                <option value="1" <?= (isset($gate['is_active']) && (int)$gate['is_active'] === 1) ? 'selected' : '' ?>>Inactive</option>
+                <option value="0" <?= (isset($gate['is_active']) && (int)$gate['is_active'] === 0) ? 'selected' : '' ?>><?= __('Active') ?></option>
+                <option value="1" <?= (isset($gate['is_active']) && (int)$gate['is_active'] === 1) ? 'selected' : '' ?>><?= __('Inactive') ?></option>
             </select>
         </div>
 
         <div class="btn-submit-container">
             <a href="index.php?option=custom_list_building_gates" class="btn-custom btn-custom-secondary">
-                Cancel
+                <?= __('Cancel') ?>
             </a>
             <button type="submit" name="submit" value="<?= $editMode ? 'update' : 'insert' ?>" class="btn-custom btn-custom-primary">
-                <i class="fa fa-save"></i> <?= $editMode ? 'Save Changes' : 'Add Gate' ?>
+                <i class="fa fa-save"></i> <?= $editMode ? __('Save Changes') : __('Add Gate') ?>
             </button>
         </div>
     </form>

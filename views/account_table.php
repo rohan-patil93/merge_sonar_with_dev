@@ -11,14 +11,14 @@ $cusresponse_dump = json_decode($cusresponse_dump, 1);
 $l = 0;
 foreach ($cusresponse as $custt) {
     $name_li[$l]['id'] = $custt['id'];
-    $name_li[$l]['display_name'] = $custt['display_name'] . "<span >&nbsp;&nbsp;&nbsp;&nbsp;[Vendor]</span>";
+    $name_li[$l]['display_name'] = $custt['display_name'] . "<span >&nbsp;&nbsp;&nbsp;&nbsp;[" . __('Vendor') . "]</span>";
     $name_li[$l]['type'] = 'V';
 
     $l++;
 }
 foreach ($cusresponse_dump as $custt) {
     $name_li[$l]['id'] = $custt['id'];
-    $name_li[$l]['display_name'] = $custt['display_name'] . "<span>&nbsp;&nbsp;&nbsp;&nbsp;[User]</span>";
+    $name_li[$l]['display_name'] = $custt['display_name'] . "<span>&nbsp;&nbsp;&nbsp;&nbsp;[" . __('User') . "]</span>";
     $name_li[$l]['type'] = 'C';
     $l++;
 }
@@ -139,7 +139,7 @@ foreach ($cusresponse_dump as $custt) {
         console.log(JSON.stringify(arr2));
         for (var k = 0; k < arr2.length; k++) {
 
-            str += "<tr><td style='text-align:right;'> IGST @ " + arr2[k]['id'] + "% </td>";
+            str += "<tr><td style='text-align:right;'> <?= __('IGST') ?> @ " + arr2[k]['id'] + "% </td>";
             str += "<td class='mob_amount' width='18%'>  <input  type='text' class='form-control amount'   readonly value='" + parseFloat(arr2[k]['d_tax_amount']).toFixed(2) + "''> </td><td class='mob_amount' width='18%'>  <input  type='text' class='form-control amount' readonly  value='" + parseFloat(arr2[k]['c_tax_amount']).toFixed(2) + "''> </td></tr>";
 
         }
@@ -174,15 +174,15 @@ foreach ($cusresponse_dump as $custt) {
             htmlRows += '<tr>';
             htmlRows += '<td><div class="checkbox-fade fade-in-primary "><label class="form-label"> <input type="checkbox" class="itemRow" data-rowid="' + count + '"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span></label></div> </td>';
 
-            htmlRows += '<td id="other_' + count + '"><select class="form-select js-data-example-ajax-multiselectss' + count + ' col-lg-4 selectitemorservice"   onchange="itemChange(this.value,' + count + ')" name= "accountcode[]"  data-tablename="chart_of_accounts"  data-fieldsname="account_name" > <option value="0"> Select Any Account </option></select> <input type="hidden" name="account_name[]" id="account_name_' + count + '" class="form-control"><input type="hidden" name="account_code[]" id="account_code_' + count + '" class="form-control">        <input type="hidden" name="account_type[]" id="account_type_' + count + '" class="form-control"></td>';
+            htmlRows += '<td id="other_' + count + '"><select class="form-select js-data-example-ajax-multiselectss' + count + ' col-lg-4 selectitemorservice"   onchange="itemChange(this.value,' + count + ')" name= "accountcode[]"  data-tablename="chart_of_accounts"  data-fieldsname="account_name" > <option value="0"> <?= __('Select Any Account') ?> </option></select> <input type="hidden" name="account_name[]" id="account_name_' + count + '" class="form-control"><input type="hidden" name="account_code[]" id="account_code_' + count + '" class="form-control">        <input type="hidden" name="account_type[]" id="account_type_' + count + '" class="form-control"></td>';
 
 
             htmlRows += '<td> <textarea  name="description[]"  class="form-control" autocomplete="off"></textarea></textarea></td> ';
-            htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "name[]"  >option value="0"> Select Any Name  </option> <?php foreach ($name_li as $nam) { ?><option  value ="<?php echo $nam['id'] . "#" . $nam['type']; ?>" > <?php echo $nam['display_name']; ?> </option> <?php } ?>  </select></td> ';
+            htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "name[]"  >option value="0"> <?= __('Select Any Name') ?>  </option> <?php foreach ($name_li as $nam) { ?><option  value ="<?php echo $nam['id'] . "#" . $nam['type']; ?>" > <?php echo $nam['display_name']; ?> </option> <?php } ?>  </select></td> ';
             <?php /** ?> 
    htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "taxes[]" onchange="calucateaccountsum()" id="taxes_'+count+'"><option value="0"> Select Any Tax Rate </option>   <?php foreach ($taxres as $key => $tax) {  ?> <option  value = "<?php echo $key ?>"   > <?php echo $tax; ?> </option> <?php } ?> </select><input type="hidden" name="taxes_amount[]" value="0" id="taxes_amount_'+count+'">   <input type="hidden" name="taxes_type[]" value="i" id="taxes_type_'+count+'"></td>';  
   <?php **/ ?>
-            htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "location[]"> <option value="0"> Select Any location  </option> <?php foreach ($locations_data as $locationn) { ?><option value ="<?php echo $locationn['id']; ?>" ><?php echo $locationn['location_name']; ?></option><?php } ?></select></td>';
+            htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "location[]"> <option value="0"> <?= __('Select Any location') ?>  </option> <?php foreach ($locations_data as $locationn) { ?><option value ="<?php echo $locationn['id']; ?>" ><?php echo htmlspecialchars(__($locationn['location_name'] ?? '')); ?></option><?php } ?></select></td>';
             htmlRows += '<td><input type="text" name="debit[]" onblur="checkdebitandcredit(' + count + ',  ' + debit + ')" id="debit_' + count + '" class="form-control price amount" value="' + debit_send + '" autocomplete="off"></td>';
             htmlRows += '<td><input type="text" name="credit[]" onblur="checkdebitandcredit(' + count + ', ' + cerdit + ')" id="credit_' + count + '" class="form-control price amount" value="' + credit_send + '" autocomplete="off"></td>';
             htmlRows += '</tr>';
@@ -259,14 +259,14 @@ foreach ($cusresponse_dump as $custt) {
                     </label>
                 </div>
             </th>
-            <th scope="col" class="" width="15%">Account <span class="requried"></span></th>
-            <th scope="col" class="" width="15%">Description</th>
-            <th scope="col" class="thheader text-start" width="15%">Name <!-- <span class="requried">*</span> --></th>
+            <th scope="col" class="" width="15%"><?= __('Account') ?> <span class="requried"></span></th>
+            <th scope="col" class="" width="15%"><?= __('Description') ?></th>
+            <th scope="col" class="thheader text-start" width="15%"><?= __('Name') ?> <!-- <span class="requried">*</span> --></th>
             <!-- <th scope="col" class="thheader" width="10%">Tax  <span class="requried">*</span> </th> -->
-            <th scope="col" class="thheader text-start" width="15%">Location <!-- <span class="requried">*</span> -->
+            <th scope="col" class="thheader text-start" width="15%"><?= __('Location') ?> <!-- <span class="requried">*</span> -->
             </th>
-            <th scope="col" class="thheader text-start" width="15%">Debits<!--  <span class="requried">*</span> --></th>
-            <th scope="col" class="thheader text-start" width="15%">Credits<!--  <span class="requried">*</span> -->
+            <th scope="col" class="thheader text-start" width="15%"><?= __('Debits') ?><!--  <span class="requried">*</span> --></th>
+            <th scope="col" class="thheader text-start" width="15%"><?= __('Credits') ?><!--  <span class="requried">*</span> -->
             </th>
         </tr>
         <?php if (count((array) $table2) > 0) {
@@ -289,17 +289,17 @@ foreach ($cusresponse_dump as $custt) {
                             <select class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4"
                                 data-tablename="chart_of_accounts" data-fieldsname="account_name" name="productCode[]"
                                 onchange="itemChange(this.value,<?php echo $i; ?>)" id="productCode_<?php echo $i; ?>">
-                                <option value="0"> Select Any Account </option>
+                                <option value="0"> <?= __('Select Any Account') ?> </option>
                                 <?php $like_item_check = 0;
                                 foreach ($itemres as $item) {
                                     if ($tab2['item_id'] == $item['id']) {
                                         $like_item_check = 1;
                                     }
                                     if ($tab2['item_id'] == $item['id']) { ?>
-                                        <option selected value='<?php echo $item['id']; ?>'> <?php echo $item['account_name']; ?>
+                                        <option selected value='<?php echo $item['id']; ?>'> <?php echo htmlspecialchars(__($item['account_name'] ?? '')); ?>
                                         <?php }
                                 } ?>
-                                <option value="-1">Other</option>
+                                <option value="-1"><?= __('Other') ?></option>
                             </select>
                             <input type="hidden" name="account_name[]" id="account_name_<?php echo $i; ?>" class="form-control"
                                 value="<?php echo $tab2['item_name']; ?>">
@@ -321,14 +321,14 @@ foreach ($cusresponse_dump as $custt) {
                     </td>
                     <td class="mob_name">
                         <select class="form-control form-select js-example-basic-single" name="name[]">
-                            <option value="0">Select Any Name</option>
+                            <option value="0"><?= __('Select Any Name') ?></option>
                             <?php foreach ($name_li as $nam) { ?>
                                 <option <?php if ($tab2['name_id'] . "#" . $tab2['name_type'] == $nam['id'] . "#" . $nam['type']) { ?>selected
                                     <?php } ?> value="<?php echo $nam['id'] . "#" . $nam['type']; ?>">
                                     <?php echo $nam['display_name']; ?> </option>
                             <?php } ?>
                         </select>
-                        <div style="display: none;color: red;" id="<?php echo 'uom_err_' . $i; ?>"> Enter UOM</div>
+                        <div style="display: none;color: red;" id="<?php echo 'uom_err_' . $i; ?>"> <?= __('Enter UOM') ?></div>
                     </td>
                     <?php /** ?>
                 <td>
@@ -345,13 +345,13 @@ foreach ($cusresponse_dump as $custt) {
                <?php **/ ?>
                     <td class="mob_location">
                         <select class="form-control form-select js-example-basic-single" name="location[]">
-                            <option value="0"> Select Any location </option>
+                            <option value="0"> <?= __('Select Any location') ?> </option>
                             <?php foreach ($locations_data as $locationn) { ?>
                                 <option <?php if ($tab2['location'] == $locationn['id']) { ?>selected <?php } ?>
-                                    value="<?php echo $locationn['id']; ?>"> <?php echo $locationn['location_name']; ?> </option>
+                                    value="<?php echo $locationn['id']; ?>"> <?php echo htmlspecialchars(__($locationn['location_name'] ?? '')); ?> </option>
                             <?php } ?>
                         </select>
-                        <div style="display: none;color: red;" id="<?php echo 'tax_err_' . $i; ?>"> Enter Tax</div>
+                        <div style="display: none;color: red;" id="<?php echo 'tax_err_' . $i; ?>"> <?= __('Enter Tax') ?></div>
                     </td>
                     <td class="mob_amount">
                         <input type="text" name="debit[]" onblur="checkdebitandcredit(<?php echo $i; ?>, 'debit')"

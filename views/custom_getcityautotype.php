@@ -73,7 +73,7 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
       }
       //$arraybdbd[] = array('id'=>'-1','full_name'=>'Other');
       if($_GET['ref_id'] !='' AND  $_GET['amendment'] =='N'){
-        $arraybdbd[] = array('id'=>'-0','full_name'=>'Amendment');
+        $arraybdbd[] = array('id'=>'-0','full_name'=>__('Amendment'));
       }
       $arrara = array('total_count'=>1,'incomplete_results'=>true,'items'=>$arraybdbd); 
       echo json_encode($arrara);

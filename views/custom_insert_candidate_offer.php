@@ -63,44 +63,44 @@ function gradechange(val){
                 <form class="kt-form" id="submitcandidatesoffer" method="post" action="" name="" enctype="multipart/form-data">
                     <div class="card " id="kt_page_sticky_card">
                         <div class="card-header">
-    <h5><?php echo "Generate LoI";  ?></h5>
+    <h5><?= __('Generate LoI') ?></h5>
     <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back') ?>
             </a>
         </div>
 </div>
                         <div class="card-body">
                             <div class="form-group row">
                                 <div class="col-lg-3 form-group">
-                                    <span class="form-label d-block">Job Grad</span>
+                                    <span class="form-label d-block"><?= __('Job Grade') ?></span>
                                      <span class="d-block error-message text-danger"></span>
                                     <select aria-label="Job Grade" class="form-select js-example-basic-single requried_field" name="job_grade" id="job_grade" onchange="gradechange(this.value)">
-                                        <option value=""> Select Any One</option>
+                                        <option value=""><?= __('Select Any One') ?></option>
                                         <?php foreach ($grade as  $gra) { ?>
                                         <option  <?php if($data['job_grade'] == $gra['id'] ){  ?> selected <?php
-} ?> value="<?php echo $gra['id']; ?>"><?php echo $gra['job_grade_name']; ?></option>
+} ?> value="<?php echo $gra['id']; ?>"><?php echo htmlspecialchars(__($gra['job_grade_name'] ?? '')); ?></option>
                                         <?php  } ?>
                                     </select>
-                                    <div style="display: none;color: red;" id="expected_ctc_err"> Please enter Expected Ctc </div>
+                                    <div style="display: none;color: red;" id="expected_ctc_err"> <?= __('Please enter Expected Ctc') ?> </div>
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="form-label">Pay template </span>
+                                    <span class="form-label"><?= __('Pay template') ?> </span>
                                      <span class="d-block error-message text-danger"></span>
                                     <select aria-label="Pay Template" class="form-select js-example-basic-single requried_field" name="pay_template" id="grade">
-                                        <option value=""> Select Any One</option>
+                                        <option value=""><?= __('Select Any One') ?></option>
 
                                         <?php foreach ($tempdata as  $temp) { ?>
                                             <option  <?php if($data['pay_template'] == $temp['id'] ){  ?> selected <?php
-} ?> value="<?php echo $temp['id']; ?>"><?php echo $temp['name']; ?></option>
+} ?> value="<?php echo $temp['id']; ?>"><?php echo htmlspecialchars(__($temp['name'] ?? '')); ?></option>
                                         <?php  } ?>
                                     </select>
-                                    <div style="display: none;color: red;" id="expected_ctc_err_2"> Please enter Pay template </div>
+                                    <div style="display: none;color: red;" id="expected_ctc_err_2"> <?= __('Please enter Pay template') ?> </div>
                                 </div>
                                 <div class="form-group col-lg-2" >
 
-                                    <span class="form-label">Expected CTC <span class="text-danger">*</span></span>
+                                    <span class="form-label"><?= __('Expected CTC') ?> <span class="text-danger">*</span></span>
                                      <span class="d-block error-message text-danger"></span>
                                      <input aria-label="Input field" type="text" class="form-control text-right requried_field"  value="<?php echo $data['expected_ctc']; ?>"  name="expected_ctc" id="expected_ctc"  />
                                 </div>
@@ -110,13 +110,13 @@ function gradechange(val){
                                 $offer_validity = fromDate($role['offer_validity']);
                                 ?>
                                 <div class="form-group col-lg-2">
-                                    <span class="form-label">Joining Date<span class="text-danger">*</span></span>
+                                    <span class="form-label"><?= __('Joining Date') ?><span class="text-danger">*</span></span>
                                     <span class="d-block error-message text-danger"></span>
                                        <input aria-label="Input field" type="text" class="form-control datepicker requried_field"  value="<?php echo $reporting_date; ?>"  name="reporting_date"  id="kt_datepicker_4_1" />
 
                                 </div>
                                 <div class="form-group col-lg-2" >
-                                      <span class="form-label">LoI validity<span class="text-danger">*</span></span>
+                                      <span class="form-label"><?= __('LoI validity') ?><span class="text-danger">*</span></span>
                                       <span class="d-block error-message text-danger"></span>
                                       <input aria-label="Input field" type="text" class="form-control datepicker requried_field"  value="<?php echo $offer_validity; ?>"  name="offer_validity"  id="kt_datepicker_4_2" />
                                 </div>
@@ -125,9 +125,9 @@ function gradechange(val){
                             <div class="col-lg-4">
                                 <input type="hidden" name="candidate_id" value="<?php echo $data['id'];  ?>" />
                                 <input type="hidden" name="insertcandidateoffer" value="submit" />
-                                <?php if($data['hm_id'] =="" || $data['rm_id'] ==""){ $disablebt = "disabled"; echo "<span class='text-danger d-block'>Hiring Manager Or Recruitment Manager Please Defind First?</span>";
+                                <?php if($data['hm_id'] =="" || $data['rm_id'] ==""){ $disablebt = "disabled"; echo "<span class='text-danger d-block'><?= __('Hiring Manager Or Recruitment Manager Please Defind First?') ?></span>";
 } ?>
-                                 <button id="" class="btn btn-primary mr-2 <?php echo $disabled; ?>"  onclick="formSubmitValidation('submitcandidatesoffer','exit')" type="button"  name="submitto"><i class="la la-check"></i>Save</button>
+                                 <button id="" class="btn btn-primary mr-2 <?php echo $disabled; ?>"  onclick="formSubmitValidation('submitcandidatesoffer','exit')" type="button"  name="submitto"><i class="la la-check"></i><?= __('Save') ?></button>
                             </div>
                         </div>
                         </div>

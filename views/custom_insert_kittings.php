@@ -120,13 +120,13 @@ function findUomName($id, $uoms) {
 <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
 <?php } ?>
 <?php if($component['suspense_total'] !='0' && $rid!=""){ ?>
 <div class="alert alert-danger alert-dismissible">
     <strong><?php echo $_SESSION['error_message']['9179']; ?></strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <?php } ?>
 <?php
@@ -138,12 +138,12 @@ if($kitting['current_status'] !=""){
 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
     <?php echo $workflowsteps['current_status_ribbon']; ?>
     <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Kitting Process</h5>
+        <h5 class="mb-0"><?php echo __('Kitting Process'); ?></h5>
         <div class="card-header-right">
         <?php echo $workflowsteps['workflow_btn']; ?>
             <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light m-r-50">
                 <i class="icofont icofont-reply mr-1"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -167,14 +167,14 @@ if($kitting['current_status'] !=""){
             <input type="hidden" name="rid" value="<?=$rid?>">
             <div class="form-group row" >
                 <div class="col-md-6 mb-3">
-                    <label for="kitting_name" class="form-label">Kitting Process Name <span class="text-danger">*</span></label>
-                    <input aria-label="Kitting Name" type="text" class="form-control" id="process_name" name="kitting_name"
+                    <label for="kitting_name" class="form-label"><?php echo __('Kitting Process Name'); ?> <span class="text-danger">*</span></label>
+                    <input aria-label="<?php echo __('Kitting Name'); ?>" type="text" class="form-control" id="process_name" name="kitting_name"
                            value="<?= $hasExistingData ? $kitting['kitting_name'] : '' ?>" required>
                 </div>
                 <div class="col-md-6 mb-3 w-full">
-                    <label for="final_item_name" class="form-label d-block">Final Product Name <span class="text-danger">*</span></label>
+                    <label for="final_item_name" class="form-label d-block"><?php echo __('Final Product Name'); ?> <span class="text-danger">*</span></label>
                     <select class="js-example-basic-single" id="final_item_name" name="parent_item_id" onchange="updateItemOptions()" required>
-                        <option value="">Select Any one</option>
+                        <option value=""><?php echo __('Select Any one'); ?></option>
                         <?php foreach ($items as $item){
                             if($item['sold_in_groups'] == 0){ ?>
                             <option value="<?= $item['id'] ?>" <?= ($hasExistingData && $kitting['parent_item_id'] == $item['id']) ? 'selected' : '' ?>>
@@ -185,20 +185,20 @@ if($kitting['current_status'] !=""){
                     </select>
                 </div>
                 <div class="col-md-2 mb-3">
-                    <label for="quantity" class="form-label">Final Product Quantity <span class="text-danger">*</span></label>
+                    <label for="quantity" class="form-label"><?php echo __('Final Product Quantity'); ?> <span class="text-danger">*</span></label>
                     <input type="number" class="form-control" id="quantity" name="parent_quantity" min="1"
                            value="<?= $hasExistingData ? $kitting['parent_quantity'] : '1' ?>"  onblur="updateCalculation()" required>
                 </div>
                 <div class="col-md-2 mb-3">
-                    <label for="parent_item_day_rate" class="form-label">Day Rate <span class="text-danger">*</span></label>
+                    <label for="parent_item_day_rate" class="form-label"><?php echo __('Day Rate'); ?> <span class="text-danger">*</span></label>
                     <input type="number" class="form-control" id="parent_item_day_rate" name="parent_item_day_rate" min="0" step="any" value="<?= $hasExistingData ? $kitting['parent_item_day_rate'] : '0' ?>" onblur="updateCalculation()" readonly>
                 </div>
                 <div class="col-md-2 mb-3">
-                    <label for="parent_item_total" class="form-label">Total <span class="text-danger">*</span></label>
+                    <label for="parent_item_total" class="form-label"><?php echo __('Total'); ?> <span class="text-danger">*</span></label>
                     <input type="number" class="form-control" id="parent_item_total" name="parent_item_total" min="0" step="any" value="<?= $hasExistingData ? $kitting['parent_item_total'] : '0' ?>" readonly readonly>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="date" class="form-label">Kitting Date <span
+                    <label for="date" class="form-label"><?php echo __('Kitting Date'); ?> <span
                             class="text-danger">*</span></label>
                     <input type="text" class="form-control datepicker" id="date" name="transaction_date"
                            value="<?php echo fromDate($kitting['transaction_date']); ?>" required>
@@ -210,18 +210,18 @@ if($kitting['current_status'] !=""){
             <!-- Components Section -->
             <div class="components-section " <?php if($kitting['parent_item_id'] ==""){ ?>style="display: none;" <?php
 } ?>>
-                <h6 class="mb-3">Components to Kit</h6>
+                <h6 class="mb-3"><?php echo __('Components to Kit'); ?></h6>
 
                 <div class="table-responsive">
                     <table class="table table-bordered" id="components-table">
                         <thead class="bg-light">
                             <tr>
-                                <th scope="col" style="width: 50%;">Component Item Name</th>
-                                <th scope="col" style="width: 10%;">Component UOM</th>
-                                <th scope="col" style="width: 10%;">Component Quantity</th>
-                                <th scope="col" style="width: 10%;">Day Rate</th>
-                                <th scope="col" style="width: 10%;">Total</th>
-                                <th scope="col" style="width: 10%;">Action</th>
+                                <th scope="col" style="width: 50%;"><?php echo __('Component Item Name'); ?></th>
+                                <th scope="col" style="width: 10%;"><?php echo __('Component UOM'); ?></th>
+                                <th scope="col" style="width: 10%;"><?php echo __('Component Quantity'); ?></th>
+                                <th scope="col" style="width: 10%;"><?php echo __('Day Rate'); ?></th>
+                                <th scope="col" style="width: 10%;"><?php echo __('Total'); ?></th>
+                                <th scope="col" style="width: 10%;"><?php echo __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -230,8 +230,8 @@ if($kitting['current_status'] !=""){
                             <tr class="item-row">
                                 <input type="hidden" class="form-control" name="component_items_ids[]" value="<?= $component['id'] ?>" >
                                 <td class="w-full">
-                                    <select aria-label="Component Items[]" class="js-example-basic-single component-item" name="component_items[]" required onchange="setUomForRow(this.closest('tr')); updateItemOptions()">
-                                        <option value="">Select Any one</option>
+                                    <select aria-label="<?php echo __('Component Items[]'); ?>" class="js-example-basic-single component-item" name="component_items[]" required onchange="setUomForRow(this.closest('tr')); updateItemOptions()">
+                                        <option value=""><?php echo __('Select Any one'); ?></option>
                                         <?php foreach ($items as $item){
                                             if($item['sold_individually'] == '0'){
                                                 ?>
@@ -243,8 +243,8 @@ if($kitting['current_status'] !=""){
                                     </select>
                                 </td>
                                 <td class="w-full">
-                                    <select aria-label="Component Uoms[]" class="js-example-basic-single component-uom" name="component_uoms[]" required>
-                                        <option value="">Select Any one</option>
+                                    <select aria-label="<?php echo __('Component Uoms[]'); ?>" class="js-example-basic-single component-uom" name="component_uoms[]" required>
+                                        <option value=""><?php echo __('Select Any one'); ?></option>
                                         <?php foreach ($uom as $value): ?>
                                             <option value="<?= $value['id'] ?>" <?= ($component['uom_id'] == $value['id']) ? 'selected' : '' ?>>
                                                 <?= $value['uom_short_code'] ?>
@@ -253,13 +253,13 @@ if($kitting['current_status'] !=""){
                                     </select>
                                 </td>
                                 <td>
-                                    <input aria-label="Component Quantities[]" type="number" class="form-control component-quantity" name="component_quantities[]" min="0" step="any" value="<?= $component['quantity'] ?>" onblur="updateCalculation()" required>
+                                    <input aria-label="<?php echo __('Component Quantities[]'); ?>" type="number" class="form-control component-quantity" name="component_quantities[]" min="0" step="any" value="<?= $component['quantity'] ?>" onblur="updateCalculation()" required>
                                 </td>
                                 <td>
-                                    <input aria-label="Component Day Rate[]" type="number" class="form-control component-day-rate" name="component_day_rate[]" min="0" step="any" value="<?= $component['component_day_rate'] ?>" onblur="updateCalculation()" required>
+                                    <input aria-label="<?php echo __('Component Day Rate[]'); ?>" type="number" class="form-control component-day-rate" name="component_day_rate[]" min="0" step="any" value="<?= $component['component_day_rate'] ?>" onblur="updateCalculation()" required>
                                 </td>
                                 <td>
-                                    <input aria-label="Component Total[]" type="number" class="form-control component-total" name="component_total[]" min="0" step="any" value="<?= $component['component_total'] ?>" readonly required>
+                                    <input aria-label="<?php echo __('Component Total[]'); ?>" type="number" class="form-control component-total" name="component_total[]" min="0" step="any" value="<?= $component['component_total'] ?>" readonly required>
                                 </td>
                                 <td class="text-center">
                                     <i class="fa fa-trash text-danger delete-row"></i>
@@ -269,8 +269,8 @@ if($kitting['current_status'] !=""){
                         <?php else: ?>
                             <tr class="item-row">
                                 <td class="w-full">
-                                    <select aria-label="Component Items[]" class="js-example-basic-single component-item" name="component_items[]" required onchange="setUomForRow(this.closest('tr')); updateItemOptions()">
-                                        <option value="">Select Any one</option>
+                                    <select aria-label="<?php echo __('Component Items[]'); ?>" class="js-example-basic-single component-item" name="component_items[]" required onchange="setUomForRow(this.closest('tr')); updateItemOptions()">
+                                        <option value=""><?php echo __('Select Any one'); ?></option>
                                         <?php foreach ($items as $item){
                                         if($item['sold_individually'] == '0'){
                                          ?>
@@ -280,8 +280,8 @@ if($kitting['current_status'] !=""){
                                     </select>
                                 </td>
                                 <td class="w-full">
-                                    <select aria-label="Component Uoms[]" class="js-example-basic-single component-uom" name="component_uoms[]" required>
-                                        <option value="">Select Any one</option>
+                                    <select aria-label="<?php echo __('Component Uoms[]'); ?>" class="js-example-basic-single component-uom" name="component_uoms[]" required>
+                                        <option value=""><?php echo __('Select Any one'); ?></option>
                                         <?php foreach ($uom as $value): ?>
                                             <option value="<?= $value['id'] ?>">
                                                 <?= $value['uom_short_code'] ?>
@@ -290,13 +290,13 @@ if($kitting['current_status'] !=""){
                                     </select>
                                 </td>
                                 <td>
-                                    <input aria-label="Component Quantities[]" type="number" class="form-control component-quantity" name="component_quantities[]" min="0" step="any" value="1" onblur="updateCalculation()" required>
+                                    <input aria-label="<?php echo __('Component Quantities[]'); ?>" type="number" class="form-control component-quantity" name="component_quantities[]" min="0" step="any" value="1" onblur="updateCalculation()" required>
                                 </td>
                                 <td>
-                                    <input aria-label="Component Day Rate[]" type="number" class="form-control component-day-rate" name="component_day_rate[]" min="0" step="any" value="<?= $component['component_day_rate'] ?>" onblur="updateCalculation()" required>
+                                    <input aria-label="<?php echo __('Component Day Rate[]'); ?>" type="number" class="form-control component-day-rate" name="component_day_rate[]" min="0" step="any" value="<?= $component['component_day_rate'] ?>" onblur="updateCalculation()" required>
                                 </td>
                                 <td>
-                                    <input aria-label="Component Total[]" type="number" class="form-control component-total" name="component_total[]" min="0" step="any" value="<?= $component['component_total'] ?>" readonly required>
+                                    <input aria-label="<?php echo __('Component Total[]'); ?>" type="number" class="form-control component-total" name="component_total[]" min="0" step="any" value="<?= $component['component_total'] ?>" readonly required>
                                 </td>
                                 <td class="text-center">
                                     <i class="fa fa-trash text-danger delete-row"></i>
@@ -310,25 +310,25 @@ if($kitting['current_status'] !=""){
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <button type="button" id="add-row-btn" class="btn btn-sm btn-primary">
-                            <i class="fa fa-plus mr-1"></i> Add Component
+                            <i class="fa fa-plus mr-1"></i> <?php echo __('Add Component'); ?>
                         </button>
                         <div id="error-message" class="text-danger mt-2" style="display: none;">
-                            Please fill all fields in the existing row before adding a new one.
+                            <?php echo __('Please fill all fields in the existing row before adding a new one.'); ?>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-lg-4">
-                                <label for="date" class="form-label">Parent Total </label>
-                                <input aria-label="Parent Total" type="number" class="form-control" id="parent_total" name="parent_total" min="0" value="<?= $component['parent_total'] ?>" readonly required>
+                                <label for="date" class="form-label"><?php echo __('Parent Total'); ?> </label>
+                                <input aria-label="<?php echo __('Parent Total'); ?>" type="number" class="form-control" id="parent_total" name="parent_total" min="0" value="<?= $component['parent_total'] ?>" readonly required>
                             </div>
                             <div class="col-lg-4">
-                                <label for="date" class="form-label">Child Total </label>
-                                <input aria-label="Child Total" type="number" class="form-control" id="child_total" name="child_total" min="0" value="<?= $component['child_total'] ?>" readonly required>
+                                <label for="date" class="form-label"><?php echo __('Child Total'); ?> </label>
+                                <input aria-label="<?php echo __('Child Total'); ?>" type="number" class="form-control" id="child_total" name="child_total" min="0" value="<?= $component['child_total'] ?>" readonly required>
                             </div>
                             <div class="col-lg-4">
-                                <label for="date" class="form-label">Suspense Amount </label>
-                                <input aria-label="Suspense Total" type="number" class="form-control" id="suspense_total" name="suspense_total" min="0" value="<?= $component['suspense_total']; ?>" readonly required>
+                                <label for="date" class="form-label"><?php echo __('Suspense Amount'); ?> </label>
+                                <input aria-label="<?php echo __('Suspense Total'); ?>" type="number" class="form-control" id="suspense_total" name="suspense_total" min="0" value="<?= $component['suspense_total']; ?>" readonly required>
                             </div>
                         </div>
                     </div>
@@ -338,7 +338,7 @@ if($kitting['current_status'] !=""){
             <div class="row mt-4">
                 <div class="col-md-12 text-left">
                     <button type="submit" class="btn btn-primary" <?php echo $disable; ?>>
-                        <i class="la la-check"></i> Submit
+                        <i class="la la-check"></i> <?php echo __('Submit'); ?>
                     </button>
 
                 </div>
@@ -488,21 +488,21 @@ window.addEventListener("load", function() {
         newRow.className = 'item-row w-full';
 
         const itemCell = document.createElement('td');
-        let itemOptionsHtml = '<option value="">Select Any one</option>';
+        let itemOptionsHtml = '<option value=""><?php echo __('Select Any one'); ?></option>';
 
         itemsData.forEach(function(item) {
             itemOptionsHtml += `<option value="${item.id}">`+item.sku+` - `+item.item_name+`</option>`;
         });
 
         itemCell.innerHTML = `
-            <select aria-label="Component Items[]" class="js-example-basic-single component-item" name="component_items[]" required onchange="setUomForRow(this.closest('tr')); updateItemOptions()">
+            <select aria-label="<?php echo __('Component Items[]'); ?>" class="js-example-basic-single component-item" name="component_items[]" required onchange="setUomForRow(this.closest('tr')); updateItemOptions()">
                 ${itemOptionsHtml}
             </select>
         `;
 
         // Create the UOM cell with dropdown options
         const uomCell = document.createElement('td');
-        let uomOptionsHtml = '<option value="">Select Any one</option>';
+        let uomOptionsHtml = '<option value=""><?php echo __('Select Any one'); ?></option>';
 
         const uomOptions = Array.from(document.querySelector('.component-uom').options);
         uomOptions.forEach(function(option) {
@@ -512,22 +512,22 @@ window.addEventListener("load", function() {
         });
 
         uomCell.innerHTML = `
-            <select aria-label="Component Uoms[]" class="js-example-basic-single component-uom" name="component_uoms[]" required>
+            <select aria-label="<?php echo __('Component Uoms[]'); ?>" class="js-example-basic-single component-uom" name="component_uoms[]" required>
                 ${uomOptionsHtml}
             </select>
         `;
 
         // Create the quantity cell
         const quantityCell = document.createElement('td');
-        quantityCell.innerHTML = `<input aria-label="Component Quantities[]" type="number" class="form-control component-quantity" name="component_quantities[]" min="1" value="1" onblur="updateCalculation()" required>`;
+        quantityCell.innerHTML = `<input aria-label="<?php echo __('Component Quantities[]'); ?>" type="number" class="form-control component-quantity" name="component_quantities[]" min="1" value="1" onblur="updateCalculation()" required>`;
 
         const dayrateCell = document.createElement('td');
         dayrateCell.innerHTML = `<td>
-            <input aria-label="Component Day Rate[]" type="number" class="form-control component-day-rate" name="component_day_rate[]" min="0" step="any" value="0" onblur="updateCalculation()" required>
+            <input aria-label="<?php echo __('Component Day Rate[]'); ?>" type="number" class="form-control component-day-rate" name="component_day_rate[]" min="0" step="any" value="0" onblur="updateCalculation()" required>
         </td>`;
         const totalcompCell = document.createElement('td');
         totalcompCell.innerHTML = `<td>
-            <input aria-label="Component Total[]" type="number" class="form-control component-total" name="component_total[]" min="0" step="any" value="0" readonly required>
+            <input aria-label="<?php echo __('Component Total[]'); ?>" type="number" class="form-control component-total" name="component_total[]" min="0" step="any" value="0" readonly required>
         </td>`;
 
         // Create the action cell
@@ -595,7 +595,7 @@ function updateCalculation(){
 }
 
 function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,next_status){
-    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?php echo htmlspecialchars(__('Preview'), ENT_QUOTES); ?>"></div>';
     $("#popup1").html(loader);
     $('#kt_modal_KTDatatable_remote').modal("show");
     jQuery.ajax({
@@ -612,12 +612,12 @@ function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,nex
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
 swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: "Please note the status of the document will change to "+new_status_name,
+        text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
         type: "info",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+        cancelButtonText: <?php echo json_encode(__('No')); ?>,
         closeOnConfirm: false
     },
     function(){
@@ -643,12 +643,12 @@ swal({
                     });
                 }else{
                     swal({
-                        title: "Oops...",
+                        title: <?php echo json_encode(__('Oops...')); ?>,
                         text: res.transaction_update.message,
                         type: "error",
                         showCancelButton: true,
                         showConfirmButton: false,
-                        cancelButtonText: "Ok",
+                        cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                         confirmButtonClass: "btn-danger",
                         closeOnCancel: false
                     });

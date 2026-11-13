@@ -57,7 +57,7 @@ if($_GET['error'] !=''){ ?>
         <div class="alert-icon"><i class="flaticon-warning"></i></div>
         <div class="alert-text">    <?php echo $_SESSION['error_message'][$_GET['error']]; ?>    </div>
         <div class="alert-close">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="<?php echo __('Close'); ?>">
                 <span aria-hidden="true"><i class="la la-close"></i></span>
             </button>
         </div>
@@ -73,31 +73,31 @@ if($_GET['error'] !=''){ ?>
                         <span class="kt-portlet__head-icon">
                                     <i class="kt-font-brand <?php echo $icon; ?>"></i>
                                 </span>
-                        <h3 class="kt-portlet__head-title">Product File Upload </h3>
+                        <h3 class="kt-portlet__head-title"><?php echo __('Product File Upload'); ?> </h3>
                     </div>
                     <div class="kt-portlet__head-toolbar">
                         <a href="javascript:history.go(-1)" class="btn btn-clean kt-margin-r-10">
                             <i class="la la-arrow-left"></i>
-                            <span class="kt-hidden-mobile">Back</span>
+                            <span class="kt-hidden-mobile"><?php echo __('Back'); ?></span>
                         </a>
                     </div>
                 </div>
                 <div class="kt-portlet__body">
                     <div class="form-group row">
                         <div class="form-group col-lg-6">
-                            <span>Vender&nbsp;</span>
-                            <select aria-label="Select option" class="form-control kt-select2" id="kt_select2_4<?php echo $select; ?>" name="<?php echo $key?>">
+                            <span><?php echo __('Vender&nbsp;'); ?></span>
+                            <select aria-label="<?php echo __('Select option'); ?>" class="form-control kt-select2" id="kt_select2_4<?php echo $select; ?>" name="<?php echo $key?>">
                                         <?php foreach($datavendor as $selectvendor){ ?>
                             <option  <?php if($ress['vendor_id'] == $selectvendor['id'] ){ ?> selected <?php
 } ?> value="<?php echo $selectvendor['id']; ?>"><?php echo $selectvendor['display_name']; ?></option>
                         <?php } ?>
                             </select>
-                        <div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> Please Select <?php echo $value; ?> </div>
+                        <div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?php echo __('Please Select'); ?> <?php echo $value; ?> </div>
                     </div>
                     <div class="form-group col-lg-6">
-                            <span>File Upload &nbsp;</span>
-                            <input aria-label="File" type="file" name="file" class="form-control">
-                        <div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> Please Select <?php echo $value; ?> </div>
+                            <span><?php echo __('File Upload &nbsp;'); ?></span>
+                            <input aria-label="<?php echo __('File'); ?>" type="file" name="file" class="form-control">
+                        <div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?php echo __('Please Select'); ?> <?php echo $value; ?> </div>
                     </div>
                 </div>
             </div>
@@ -106,9 +106,9 @@ if($_GET['error'] !=''){ ?>
                     <div class="row">
                         <div class="col-lg-6">
                             <input type="hidden" name="submit" value="Add" />
-                            <button id="kt_login_signin_submit" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-                            <button id="kt_login_signin_submit_continue" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
-                            <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                            <button id="kt_login_signin_submit" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
+                            <button id="kt_login_signin_submit_continue" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?php echo __('Save & continue'); ?></button>
+                            <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                         </div>
                     </div>
                 </div>

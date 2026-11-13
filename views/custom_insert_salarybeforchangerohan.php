@@ -164,7 +164,7 @@ echo "---------"; print_r($salarydata);echo "++++";print_r($salarytmpdata);*/
        var contt = cvall.split(",");
        var count = contt.length;
         //var count = $(".itemRow").length;
-        //alert("test");
+        //alert(<?php echo json_encode(__('test')); ?>);
         console.log("XXX="+count);
         var month =0;  var year =0;
         console.log("step1-- Count:"+count+"count="+contt);
@@ -273,7 +273,7 @@ echo "---------"; print_r($salarydata);echo "++++";print_r($salarytmpdata);*/
         }
     }
    /*function spicalallowances(id){
-        //alert("rav");
+        //alert(<?php echo json_encode(__('rav')); ?>);
         var basic = $("#total_month").val();
         var ctc = $("#ctc").val();
         sp_amount = ctc-basic;
@@ -292,7 +292,7 @@ echo "---------"; print_r($salarydata);echo "++++";print_r($salarytmpdata);*/
 
     }*/
    /* function monthlytoyearlycatnew(){
-        alert("hai");
+        alert(<?php echo json_encode(__('hai')); ?>);
         $("[id^='cat_type_']").each(function() {
             var i = $(this).attr('id');
             i = i.replace("cat_type_",'');
@@ -359,7 +359,7 @@ echo "---------"; print_r($salarydata);echo "++++";print_r($salarytmpdata);*/
         //calucations();
     }*/
     function dynamicinformationopup(option){
-       // //alert("information");
+       // //alert(<?php echo json_encode(__('information')); ?>);
        $('#popup1').html(decodeURI(option));
        // $('#kt_modal_KTDatatable_remote').modal({ show: true});
        $("#kt_modal_KTDatatable_remote").modal("show");
@@ -385,10 +385,10 @@ function addsaldata(val){
             calucationstocat();
         }else{
             $('#'+val+"check").val(0);
-            //alert('shankar');
+            //alert(<?php echo json_encode(__('shankar')); ?>);
             $('#'+val).remove();
             addandremove('REMOVE',val);
-            //alert('shankar');
+            //alert(<?php echo json_encode(__('shankar')); ?>);
             calucationstocat();
         }
        //calucationstocat();
@@ -502,7 +502,7 @@ if(catlink=='PTX'){
         //alert(data.calculation_type);
         console.log(data);
         if(data.calculation_type !="" ){
-           // //alert("ravi"+data.calculation_type);
+           // //alert(<?php echo json_encode(__('ravi')); ?>+data.calculation_type);
          //  //alert(data.calculation_type);
          if(data.calculation_type == 'P' &&  data.calculation_category != ''){
             var codedetail1 = data.calculation_category.toUpperCase(); 
@@ -569,7 +569,7 @@ if(catlink=='PTX'){
             
             
         }else{
-            // //alert('ravi');
+            // //alert(<?php echo json_encode(__('ravi')); ?>);
             console.log(data.calculation_number);
             month_amount = data.calculation_number;
             console.log(month_amount);
@@ -587,10 +587,10 @@ if(catlink=='PTX'){
        var htmlRows = '';
        var note = "'"+data.note+"'";
        htmlRows += '<tr id="'+id+'">'; 
-       htmlRows += '<td><div class="form-group col-lg-11" ><input type="text" class="form-control itemRow f-w-800" readonly value="'+data.name+' ('+data.code+')" name="name[]" aria-label="Salary Component"><input type="hidden" class="form-control " readonly value="'+data.id+'" id="id_'+count+'"  name="id[]"></div></td>';     
-       htmlRows += '<td><div class="form-group col-lg-11">  <div class="input-group input-group-button"> <input type="text" onblur="monthlytoyearlycat(this.value,'+count+')" '+reead+' class="form-control text-right width1" value="'+data.calculation_number+'" id="change_val_'+count+'" name="calucation[]" aria-label="Calculation Type" /> <button class="btn btn-primary w-100PX" type="button">'+codedetail+'</button> </td>';
-       htmlRows += '<td><div class="form-group col-lg-11"><input type="text" class="form-control text-right"  placeholder="0.00" name="monthly_amount[]" readonly id="m_amount_'+count+'"  value ="'+month_amount+'" aria-label="Amount Monthly"></div> <input type="hidden" name="cat_type[]" value="'+data.calculation_type+'" id="cat_type_'+count+'">  <input type="hidden" name="cat_calculation_category[]" value="'+data.calculation_category+'" id="cat_calculation_category_'+count+'"> <input type="hidden" name="cat_code[]" value="'+data.code+'" id="cat_code_'+count+'">     <input type="hidden" name="cat_cat[]" value="'+data.category_id+'" id="cat_cat_'+count+'"> <input type="hidden" name="cat_num[]" value="'+data.calculation_number+'" id="cat_num_'+count+'"></td>';            
-       htmlRows += '<td><div class="form-group col-lg-11"><div class="input-group"> <input type="hidden" name="'+data.code+'" value="'+month_amount+'" id="'+data.code+'"><input type="text" readonly id="y_amount_'+count+'" name="yearly_amount[]"  value ="'+gettotalamt+'" class="form-control text-right width1" placeholder="0.00" aria-label="Amount Annually"><a href="#" class="mt-6" onclick="dynamicinformationopup('+encodeURI(note)+')">&nbsp;<i class="fa fa-info-circle f-14"></i> </a></div> </div></td>'; 
+       htmlRows += '<td><div class="form-group col-lg-11" ><input type="text" class="form-control itemRow f-w-800" readonly value="'+data.name+' ('+data.code+')" name="name[]" aria-label="<?php echo __('Salary Component'); ?>"><input type="hidden" class="form-control " readonly value="'+data.id+'" id="id_'+count+'"  name="id[]"></div></td>';     
+       htmlRows += '<td><div class="form-group col-lg-11">  <div class="input-group input-group-button"> <input type="text" onblur="monthlytoyearlycat(this.value,'+count+')" '+reead+' class="form-control text-right width1" value="'+data.calculation_number+'" id="change_val_'+count+'" name="calucation[]" aria-label="<?php echo __('Calculation Type'); ?>" /> <button class="btn btn-primary w-100PX" type="button">'+codedetail+'</button> </td>';
+       htmlRows += '<td><div class="form-group col-lg-11"><input type="text" class="form-control text-right"  placeholder="0.00" name="monthly_amount[]" readonly id="m_amount_'+count+'"  value ="'+month_amount+'" aria-label="<?php echo __('Amount Monthly'); ?>"></div> <input type="hidden" name="cat_type[]" value="'+data.calculation_type+'" id="cat_type_'+count+'">  <input type="hidden" name="cat_calculation_category[]" value="'+data.calculation_category+'" id="cat_calculation_category_'+count+'"> <input type="hidden" name="cat_code[]" value="'+data.code+'" id="cat_code_'+count+'">     <input type="hidden" name="cat_cat[]" value="'+data.category_id+'" id="cat_cat_'+count+'"> <input type="hidden" name="cat_num[]" value="'+data.calculation_number+'" id="cat_num_'+count+'"></td>';            
+       htmlRows += '<td><div class="form-group col-lg-11"><div class="input-group"> <input type="hidden" name="'+data.code+'" value="'+month_amount+'" id="'+data.code+'"><input type="text" readonly id="y_amount_'+count+'" name="yearly_amount[]"  value ="'+gettotalamt+'" class="form-control text-right width1" placeholder="0.00" aria-label="<?php echo __('Amount Annually'); ?>"><a href="#" class="mt-6" onclick="dynamicinformationopup('+encodeURI(note)+')">&nbsp;<i class="fa fa-info-circle f-14"></i> </a></div> </div></td>'; 
        htmlRows += '</tr>';
        $("#invoiceItem"+data.category_id).css("display", "block");
        $('#invoiceItem'+data.category_id).append(htmlRows);
@@ -606,11 +606,11 @@ if(catlink=='PTX'){
         //$('#checkAll').prop('checked', false);
     }*/
     /*function calucations(){
-       // //alert("ravi");
+       // //alert(<?php echo json_encode(__('ravi')); ?>);
        var count = $(".itemRow").length;
         ////alert(count);
         var month =0;  var year =0;
-       // //alert("RAVI");
+       // //alert(<?php echo json_encode(__('RAVI')); ?>);
        $("[id^='cat_type_']").each(function() {
             var i = $(this).attr('id');
             i = i.replace("cat_type_",'');
@@ -642,8 +642,8 @@ if(catlink=='PTX'){
                             <div class="row col-lg-12 p-3">
                                 <div class="page-header card" style="margin: 0px; color: black;">
                                     <div class="d-inline">
-                                        <h5>Build Your Template</h5>
-                                        <span class="sub-title">Include active salary components</span>
+                                        <h5><?php echo __('Build Your Template'); ?></h5>
+                                        <span class="sub-title"><?php echo __('Include active salary components'); ?></span>
                                     </div>
                                 </div>
                                 <div class="card-block accordion-block color-accordion-block mt-2" style="padding: 2px;">
@@ -662,7 +662,7 @@ if(catlink=='PTX'){
                                                         <label class="form-label ">
                                                             <input type="hidden" name="addsaldata" id="<?php echo $addsaldata."_detail"; ?>" value='<?php echo json_encode($value); ?>' >
                                                             <input type="hidden" id="<?php echo $addsaldata."check"; ?>" value="<?php echo in_array($addsaldata, (array)$checkdata) ? 1 : 0 ; ?>">
-                                                            <input type="checkbox"   <?php if(in_array($addsaldata, (array)$checkdata)){ echo "checked "; } ?> <?php if(in_array($addsaldata, (array)$mandatroy)){ echo "disabled"; } ?>   name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)">
+                                                            <input type="checkbox"   <?php if(in_array($addsaldata, (array)$checkdata)){ echo __('checked '); } ?> <?php if(in_array($addsaldata, (array)$mandatroy)){ echo __('disabled'); } ?>   name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)">
                                                             <span class="cr">
                                                               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                           </span>
@@ -684,15 +684,15 @@ if(catlink=='PTX'){
                                 <div class="card card-custom gutter-b">
                                     <div class="page-header card p-3" style="margin: 0px; color: black;">
                                         <div class="d-inline">
-                                            <h5>Salary</h5>
-                                            <span>Define salary for employee</span>
+                                            <h5><?php echo __('Salary'); ?></h5>
+                                            <span><?php echo __('Define salary for employee'); ?></span>
                                             <div class="float-right">
                                                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                                                    <i class="icofont icofont-reply"></i> Back
+                                                    <i class="icofont icofont-reply"></i> <?php echo __('Back'); ?>
                                                 </a>
                                                 <?php if($_GET['Rid']!=""){ ?>
                                                     <a href="index.php?option=COM_VIEW_SALARY_PAYSLIP&Rid=<?php echo $_GET['Rid']; ?>" target="_blank" class="btn btn-primary">
-                                                       Payslip
+                                                       <?php echo __('Payslip'); ?>
                                                    </a>
                                                <?php } ?>
                                            </div>
@@ -702,26 +702,26 @@ if(catlink=='PTX'){
                                     <div class="form-group row">
                                         <?php if($_GET['SCid']==""){ ?>
                                             <div class="col-lg-4">
-                                                <label for="kt_select2_41">Employee </label>
+                                                <label for="kt_select2_41"><?php echo __('Employee'); ?> </label>
                                                 <select class="form-select js-example-basic-single" id="kt_select2_41" name='employee_id'>
-                                                    <option> Select Any One</option>
+                                                    <option> <?php echo __('Select Any One'); ?></option>
                                                     <?php foreach ($employees as $employe) { ?>
-                                                       <option <?php if( $sal_emp_id == $employe['id'] ){ echo "selected"; } ?> value="<?php echo $employe['id'] ?>"> <?php echo $employe['display_name'] ?></option>
+                                                       <option <?php if( $sal_emp_id == $employe['id'] ){ echo __('selected'); } ?> value="<?php echo $employe['id'] ?>"> <?php echo $employe['display_name'] ?></option>
                                                    <?php } ?>
                                                </select>
                                            </div>
                                        <?php  } ?>
                                        <div class="col-lg-4">
-                                        <label for="kt_autosize_2">Description</label>
+                                        <label for="kt_autosize_2"><?php echo __('Description'); ?></label>
                                         <textarea class="form-control" id="kt_autosize_2"><?php echo $salarydata['description']; ?></textarea>
                                     </div>
                                     <div class="col-lg-4">
-                                        <label for="fld_note">Notes</label>
-                                        <textarea class="form-control" id="fld_note" name="note" placeholder="Max 500 characters"><?php echo $salarydata['note']; ?></textarea>
+                                        <label for="fld_note"><?php echo __('Notes'); ?></label>
+                                        <textarea class="form-control" id="fld_note" name="note" placeholder="<?php echo __('Max 500 characters'); ?>"><?php echo $salarydata['note']; ?></textarea>
                                     </div>
 
                                     <div class="col-lg-4 ">
-                                        <label for="fld_affected_date">Effective Date <?php echo $salarydata['affected_date']; ?></label>
+                                        <label for="fld_affected_date"><?php echo __('Effective Date'); ?> <?php echo $salarydata['affected_date']; ?></label>
                                         <input id="fld_affected_date" class="form-control datepicker" type="text" name="affected_date" value="<?php echo fromDate($salarydata['affected_date']); ?>">
                                     </div>
                                 </div>
@@ -733,11 +733,11 @@ if(catlink=='PTX'){
                                         <thead>
                                             <tr class="text-uppercase">
                                                 <th scope="col" style="width: 30%" class="pl-7">
-                                                    <span class="f-14 d-inline-block fw-bold" style="margin-bottom:5px">Salary Component</span>
+                                                    <span class="f-14 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Salary Component'); ?></span>
                                                 </th>
-                                                <th scope="col" style="width: 20%"><span class="f-14 d-inline-block fw-bold" style="margin-bottom:5px">Calculation Type</span></th>
-                                                <th scope="col" style="width: 20%;text-align: center;"><span class="f-14 d-inline-block fw-bold" style="margin-bottom:5px">Amount Monthly</span></th>
-                                                <th scope="col" style="width: 20%"><span class="f-14 d-inline-block fw-bold" style="margin-bottom:5px">Amount Annually</span></th>
+                                                <th scope="col" style="width: 20%"><span class="f-14 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Calculation Type'); ?></span></th>
+                                                <th scope="col" style="width: 20%;text-align: center;"><span class="f-14 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Amount Monthly'); ?></span></th>
+                                                <th scope="col" style="width: 20%"><span class="f-14 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Amount Annually'); ?></span></th>
                                                 <!-- <th scope="col" style="width: 15%">Remarks</th> -->
                                             </tr>
                                         </thead>
@@ -779,7 +779,7 @@ if(catlink=='PTX'){
                                                  <tr  id="<?php echo $value['id']; ?>" > 
                                                     <td style="width: 30%">
                                                         <div class="form-group col-lg-11" >
-                                                            <input type="text" class="form-control itemRow f-w-800" readonly value="<?php echo $value['name']."(".$value['code'].")"; ?>" name="name[]" aria-label="Salary Component">
+                                                            <input type="text" class="form-control itemRow f-w-800" readonly value="<?php echo $value['name']."(".$value['code'].")"; ?>" name="name[]" aria-label="<?php echo __('Salary Component'); ?>">
                                                             <input type="hidden" class="form-control" readonly id="id_<?php echo $value['id'];?>" value="<?php echo $value['id']; ?>" name="id[]">
                                                         </div>
                                                     </td>   
@@ -790,7 +790,7 @@ if(catlink=='PTX'){
                                                             if($placevalue[$value['id']]['component_number']==""){ $component_number=$value['calculation_number'];
                                                         } ?>
                                                         <div class="input-group input-group-button"> 
-                                                            <input type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo$value['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="calucation[]" aria-describedby="basic-addon2" aria-label="Calculation Type" />  
+                                                            <input type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo$value['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="calucation[]" aria-describedby="basic-addon2" aria-label="<?php echo __('Calculation Type'); ?>" />  
                                                             <button class="btn btn-primary w-100PX" type="button"><?php echo $codedetail; ?> </button>
                                                         </div>
                                                     </div>
@@ -807,7 +807,7 @@ if(catlink=='PTX'){
                                                  }
                                                  ?>
                                                  <div class="form-group col-lg-11">
-                                                    <input type="text" class="form-control text-right" readonly placeholder="0.00" name="monthly_amount[]" value ="<?php echo $placevalue[$value['id']]['monthly_amount'];?>"  id="m_amount_<?php echo $value['id']; ?>" aria-label="Amount Monthly">
+                                                    <input type="text" class="form-control text-right" readonly placeholder="0.00" name="monthly_amount[]" value ="<?php echo $placevalue[$value['id']]['monthly_amount'];?>"  id="m_amount_<?php echo $value['id']; ?>" aria-label="<?php echo __('Amount Monthly'); ?>">
                                                     <input type="hidden" name="cat_type[]" value="<?php echo $cat_type; ?>" id="cat_type_<?php echo $value['id']; ?>"> 
                                                     <input type="hidden" name="cat_calculation_category[]" value="<?php echo $value['calculation_category'] ?>" id="cat_calculation_category_<?php echo $value['id']; ?>">
                                                     <input type="hidden" name="cat_code[]" value="<?php echo $value['code'] ?>" id="cat_code_<?php echo $value['id']; ?>">    
@@ -825,7 +825,7 @@ if(catlink=='PTX'){
                                                     <div class="input-group"> 
                                                         <input type="hidden" name="<?php echo $value['code']; ?>" value="<?php echo $ddcode; ?>" id="<?php echo $value['code']; ?>" >
 
-                                                        <input type="text" readonly id="y_amount_<?php echo $value['id'] ?>" name="yearly_amount[]"  value ="<?php echo   $placevalue[$value['id']]['yearly_amount']; ?>" class="form-control text-right width1"placeholder="0.00" aria-label="Amount Annually">
+                                                        <input type="text" readonly id="y_amount_<?php echo $value['id'] ?>" name="yearly_amount[]"  value ="<?php echo   $placevalue[$value['id']]['yearly_amount']; ?>" class="form-control text-right width1"placeholder="0.00" aria-label="<?php echo __('Amount Annually'); ?>">
 
                                                         <a href="#" class="mt-6" onclick="dynamicinformationopup(<?php echo "'".$note."'"; ?>)">&nbsp;<i class="fa fa-info-circle f-14"></i></a>
 
@@ -862,8 +862,8 @@ if(catlink=='PTX'){
                                     <input type="hidden"   name="rid" value="<?php  echo $rid; ?>">
                                 <?php } ?>
                                 <input type="hidden"   name="submit" value="submit">
-                                <button type="submit" <?php echo $disabled; ?> class="btn btn-primary mr-2">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                                <button type="submit" <?php echo $disabled; ?> class="btn btn-primary mr-2"><?php echo __('Submit'); ?></button>
+                                <button type="reset" class="btn btn-secondary"><?php echo __('Cancel'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -878,14 +878,14 @@ if(catlink=='PTX'){
         <div class="modal-content" >
 
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo __('Information'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
             <div class="modal-body"  id="popup1">
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary waves-effect waves-light " data-bs-dismiss="modal" aria-label="Close">Close</button>
+                <button type="button" class="btn btn-primary waves-effect waves-light " data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"><?php echo __('Close'); ?></button>
 
             </div>
         </div>
@@ -923,7 +923,7 @@ if(catlink=='PTX'){
     <div class="card card-custom " id="kt_page_sticky_card">
         <div class="card-header">
             <div class="card-title">
-                <h3 class="card-label">&nbsp;<?php echo " Salaray Template";  ?> </h3>
+                <h3 class="card-label">&nbsp;<?php echo __(' Salaray Template');  ?> </h3>
             </div>
         </div>
         <div class="card-body">
@@ -933,14 +933,14 @@ if(catlink=='PTX'){
                     <div  class="col-lg-12" style="page-break-before: always;">                             
                         <table width="80%" align="center" style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px;" >
                             <tr style="height: 50px;border: 1px solid #000;">
-                                <td style="border:1px solid #000;padding: 5px;" class="f-w-600" >Name </td>
+                                <td style="border:1px solid #000;padding: 5px;" class="f-w-600" ><?php echo __('Name'); ?> </td>
                                 <td  style="border:1px solid #000;padding: 5px;"colspan="2">&nbsp;<?php echo  $empdata[$salarydata['employee_id']]; ?></td>
                             </tr>
 
                             <tr style="border: 1px solid #000;">
-                                <th scope="col" style="text-align:left;border:1px solid #000;padding: 5px;" class="f-w-600">COMPENSATION DETAILS   </th>
-                                <th scope="col" style="text-align: center;border:1px solid #000;padding: 5px;text-align: right;" class="f-w-600">MONTHLY  </th>
-                                <th scope="col" style="text-align: center;border:1px solid #000;padding: 5px;text-align: right;" class="f-w-600">YEARLY</th>
+                                <th scope="col" style="text-align:left;border:1px solid #000;padding: 5px;" class="f-w-600"><?php echo __('COMPENSATION DETAILS'); ?>   </th>
+                                <th scope="col" style="text-align: center;border:1px solid #000;padding: 5px;text-align: right;" class="f-w-600"><?php echo __('MONTHLY'); ?>  </th>
+                                <th scope="col" style="text-align: center;border:1px solid #000;padding: 5px;text-align: right;" class="f-w-600"><?php echo __('YEARLY'); ?></th>
                             </tr>
                             <?php $nm=0; foreach ((array)$salarytmpdata as  $stvalue) { ?>
                                 <?php if($stvalue['component_cat_id'] !=$nm ){ $nm =$stvalue['component_cat_id'];  ?>

@@ -11,7 +11,7 @@ $employee_id = $_REQUEST['employee_id'] ?? 0;
 $month       = $_REQUEST['assessment_year'] ?? '';
 
 if (!$employee_id || !$month) {
-	echo '<div class="alert alert-danger">Invalid request</div>';
+	echo '<div class="alert alert-danger">' . __('Invalid request') . '</div>';
 	exit;
 }
 // Call API
@@ -35,12 +35,12 @@ $data = $response['data'] ?? array();
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th scope="col" width="5%">S.No</th>
-							<th scope="col">Employee</th>
-							<th scope="col">assessment_year</th>
-							<th scope="col">document_name</th>
-                            <th scope="col">Pan Number</th>
-                            <th scope="col">View</th>
+							<th scope="col" width="5%"><?= __('S.No') ?></th>
+							<th scope="col"><?= __('Employee') ?></th>
+							<th scope="col"><?= __('Assessment Year') ?></th>
+							<th scope="col"><?= __('Document Name') ?></th>
+                            <th scope="col"><?= __('PAN Number') ?></th>
+                            <th scope="col"><?= __('View') ?></th>
 						</tr>
 					</thead>
 					 <tbody>
@@ -54,7 +54,7 @@ $data = $response['data'] ?? array();
                             <td><?= $daa['document_name']; ?></td>
                             <td><?= $daa['pan_number']; ?></td>
                             <td>
-                                <a class="btn btn-info" href="/uploads/xqwave/documents/<?= $daa['file']; ?>"> View </a>
+                                <a class="btn btn-info" href="/uploads/xqwave/documents/<?= $daa['file']; ?>"><?= __('View') ?></a>
 
                             </td>
                         </tr>

@@ -61,20 +61,20 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
 <?php if ($error_message != '') { ?>
     <div class="alert alert-danger background-danger alert-dismissible">
         <strong><?php echo $error_message; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
     </div>
 <?php } ?>
 
 <div class="card receipt-card">
     <div class="card-header table-card-header">
-        <h5>Receive Finished Goods</h5>
+        <h5><?php echo __('Receive Finished Goods'); ?></h5>
         <div class="card-header-right table-card-header">
-            <button type="button" class="btn waves-effect waves-light receipt-history-btn" data-action="open-receipt-history" data-work-order-id="<?php echo $selected_work_order_id; ?>" <?php echo $selected_work_order_id == '' ? 'disabled' : ''; ?> title="Receipt History">
+            <button type="button" class="btn waves-effect waves-light receipt-history-btn" data-action="open-receipt-history" data-work-order-id="<?php echo $selected_work_order_id; ?>" <?php echo $selected_work_order_id == '' ? 'disabled' : ''; ?> title="<?php echo __('Receipt History'); ?>">
                 <i class="ti-time"></i>
             </button>
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -83,9 +83,9 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
             <div class="row">
                 <div class="col-lg-3">
                 <div class="form-group">
-                    <span class="form-label">Subcontract Work Order <span class="text-danger">*</span></span>
-                    <select aria-label="Subcontract Work Order" name="subcontract_work_order_id" id="subcontract_work_order_id" class="form-control form-select js-example-basic-single" required>
-                        <option value="">Select Any One</option>
+                    <span class="form-label"><?php echo __('Subcontract Work Order'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?php echo __('Subcontract Work Order'); ?>" name="subcontract_work_order_id" id="subcontract_work_order_id" class="form-control form-select js-example-basic-single" required>
+                        <option value=""><?php echo __('Select Any One'); ?></option>
                         <?php foreach ((array)$dropdown_list as $wo) { ?>
                             <option value="<?php echo $wo['id']; ?>" <?php echo $selected_work_order_id == $wo['id'] ? 'selected' : ''; ?>>
                                 <?php echo $wo['transaction_number']; ?>
@@ -98,7 +98,7 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
                     <div class="form-group">
                         <span class="form-label">&nbsp; &nbsp;</span>
                         <button type="submit" name="search_subcontractworkorderreceipt" class="btn btn-primary border-radius-2 pb-2 d-block">
-                            <i class="fa fa-search"></i> Search
+                            <i class="fa fa-search"></i> <?php echo __('Search'); ?>
                         </button>
                     </div>
                 </div>
@@ -124,12 +124,12 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
 
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <span class="form-label">Receipt Date <span class="text-danger">*</span></span>
-                        <input aria-label="Transaction Date" type="text" class="form-control datepicker" name="transaction_date" value="<?php echo $display_transaction_date; ?>" required>
+                        <span class="form-label"><?php echo __('Receipt Date'); ?> <span class="text-danger">*</span></span>
+                        <input aria-label="<?php echo __('Transaction Date'); ?>" type="text" class="form-control datepicker" name="transaction_date" value="<?php echo $display_transaction_date; ?>" required>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label">Selected Work Order</span>
-                        <input aria-label="Input field" type="text" class="form-control" value="<?php echo isset($work_order_details['transaction_number']) ? $work_order_details['transaction_number'] : ''; ?>" readonly>
+                        <span class="form-label"><?php echo __('Selected Work Order'); ?></span>
+                        <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo isset($work_order_details['transaction_number']) ? $work_order_details['transaction_number'] : ''; ?>" readonly>
                     </div>
                 </div>
 
@@ -137,19 +137,19 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
                     <div class="row">
                         <div class="col-lg-4 col-md-6">
                             <div class="detail-box">
-                                <span class="detail-label">Vendor</span>
+                                <span class="detail-label"><?php echo __('Vendor'); ?></span>
                                 <div class="detail-value" id="detail_party_name"><?php echo isset($work_order_details['party_name']) ? $work_order_details['party_name'] : ''; ?></div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="detail-box">
-                                <span class="detail-label">Vendor Warehouse</span>
+                                <span class="detail-label"><?php echo __('Vendor Warehouse'); ?></span>
                                 <div class="detail-value" id="detail_vendor_warehouse_name"><?php echo isset($work_order_details['vendor_warehouse_name']) ? $work_order_details['vendor_warehouse_name'] : ''; ?></div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="detail-box">
-                                <span class="detail-label">Requested Warehouse</span>
+                                <span class="detail-label"><?php echo __('Requested Warehouse'); ?></span>
                                 <div class="detail-value" id="detail_requested_warehouse_name"><?php echo isset($work_order_details['requested_warehouse_name']) ? $work_order_details['requested_warehouse_name'] : ''; ?></div>
                             </div>
                         </div>
@@ -159,25 +159,25 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
                             <div class="detail-box">
-                                <span class="detail-label">Product</span>
+                                <span class="detail-label"><?php echo __('Product'); ?></span>
                                 <div class="detail-value" id="detail_product_name"><?php echo isset($work_order_details['product_name']) ? $work_order_details['product_name'] : ''; ?></div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="detail-box">
-                                <span class="detail-label">Product SKU</span>
+                                <span class="detail-label"><?php echo __('Product SKU'); ?></span>
                                 <div class="detail-value" id="detail_product_sku"><?php echo isset($work_order_details['product_sku']) ? $work_order_details['product_sku'] : ''; ?></div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="detail-box">
-                                <span class="detail-label">Product Price</span>
+                                <span class="detail-label"><?php echo __('Product Price'); ?></span>
                                 <div class="detail-value" id="detail_work_order_item_price"><?php echo isset($work_order_details['work_order_item_price']) ? number_format($work_order_details['work_order_item_price'], 2) : '0.00'; ?></div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="detail-box">
-                                <span class="detail-label">Product Total Amount</span>
+                                <span class="detail-label"><?php echo __('Product Total Amount'); ?></span>
                                 <div class="detail-value" id="detail_item_total_amount"><?php echo isset($work_order_details['item_total_amount']) ? number_format((float)$work_order_details['item_total_amount'], 2) : '0.00'; ?></div>
                             </div>
                         </div>
@@ -186,51 +186,51 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
 
                     <div class="receipt-summary-grid">
                         <div class="summary-tile">
-                            <span class="tile-label">Issued Qty</span>
+                            <span class="tile-label"><?php echo __('Issued Qty'); ?></span>
                             <strong id="issued_qty_display"><?php echo isset($work_order_details['work_order_item_qty']) ? number_format($work_order_details['work_order_item_qty'], 2) : '0.00'; ?></strong>
                         </div>
                         <div class="summary-tile">
-                            <span class="tile-label">Total Received Qty</span>
+                            <span class="tile-label"><?php echo __('Total Received Qty'); ?></span>
                             <strong id="total_received_qty_display"><?php echo isset($work_order_details['total_received_qty']) ? number_format($work_order_details['total_received_qty'], 2) : '0.00'; ?></strong>
                         </div>
                         <div class="summary-tile">
-                            <span class="tile-label">Pending Receipt Qty</span>
+                            <span class="tile-label"><?php echo __('Pending Receipt Qty'); ?></span>
                             <strong id="pending_receipt_qty_display"><?php echo isset($work_order_details['pending_receipt_qty']) ? number_format($work_order_details['pending_receipt_qty'], 2) : '0.00'; ?></strong>
                         </div>
                         <div class="summary-tile summary-tile-warning">
-                            <span class="tile-label">Pending After This Receipt</span>
+                            <span class="tile-label"><?php echo __('Pending After This Receipt'); ?></span>
                             <strong id="balance_after_receipt_display"><?php echo isset($work_order_details['pending_receipt_qty']) ? number_format($work_order_details['pending_receipt_qty'], 2) : '0.00'; ?></strong>
                         </div>
                     </div>
 
                     <div class="row mt-3">
                         <div class="form-group col-lg-4">
-                            <span class="form-label">Received Qty <span class="text-danger">*</span></span>
-                            <input aria-label="Received Qty" type="number" step="0.01" min="0.01" class="form-control" name="received_qty" id="received_qty" value="<?php echo $display_received_qty; ?>" required>
-                            <small class="text-danger d-none" id="received_qty_error">Invalid received qty.</small>
+                            <span class="form-label"><?php echo __('Received Qty'); ?> <span class="text-danger">*</span></span>
+                            <input aria-label="<?php echo __('Received Qty'); ?>" type="number" step="0.01" min="0.01" class="form-control" name="received_qty" id="received_qty" value="<?php echo $display_received_qty; ?>" required>
+                            <small class="text-danger d-none" id="received_qty_error"><?php echo __('Invalid received qty.'); ?></small>
                         </div>
                         <div class="form-group col-lg-4">
-                            <span class="form-label">UOM</span>
-                            <input aria-label="Product Uom Display" type="text" class="form-control" id="product_uom_display" value="<?php echo isset($work_order_details['product_uom_name']) && $work_order_details['product_uom_name'] != '' ? $work_order_details['product_uom_name'] : (isset($work_order_details['product_uom']) ? $work_order_details['product_uom'] : ''); ?>" readonly>
+                            <span class="form-label"><?php echo __('UOM'); ?></span>
+                            <input aria-label="<?php echo __('Product Uom Display'); ?>" type="text" class="form-control" id="product_uom_display" value="<?php echo isset($work_order_details['product_uom_name']) && $work_order_details['product_uom_name'] != '' ? $work_order_details['product_uom_name'] : (isset($work_order_details['product_uom']) ? $work_order_details['product_uom'] : ''); ?>" readonly>
                         </div>
                     </div>
 
                     <div class="receipt-tax-panel" id="receiptTaxPanel">
                         <div class="tax-panel-header">
-                            <h6>Tax Preview</h6>
-                            <span id="receipt_tax_status">Enter received qty to calculate tax.</span>
+                            <h6><?php echo __('Tax Preview'); ?></h6>
+                            <span id="receipt_tax_status"><?php echo __('Enter received qty to calculate tax.'); ?></span>
                         </div>
                         <div class="receipt-tax-summary">
                             <div class="tax-summary-item">
-                                <span>Taxable Amount</span>
+                                <span><?php echo __('Taxable Amount'); ?></span>
                                 <strong id="receipt_amount_display"><?php echo number_format((float)$display_receipt_amount, 2); ?></strong>
                             </div>
                             <div class="tax-summary-item">
-                                <span>Tax Amount</span>
+                                <span><?php echo __('Tax Amount'); ?></span>
                                 <strong id="receipt_tax_amount_display"><?php echo number_format((float)$display_receipt_tax_amount, 2); ?></strong>
                             </div>
                             <div class="tax-summary-item">
-                                <span>Total Amount</span>
+                                <span><?php echo __('Total Amount'); ?></span>
                                 <strong id="receipt_total_amount_display"><?php echo number_format((float)$display_receipt_total_amount, 2); ?></strong>
                             </div>
                         </div>
@@ -238,14 +238,14 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
                             <table class="table table-bordered tax-breakdown-table mb-0">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Tax</th>
-                                        <th scope="col" class="text-end">Percentage</th>
-                                        <th scope="col" class="text-end">Amount</th>
+                                        <th scope="col"><?php echo __('Tax'); ?></th>
+                                        <th scope="col" class="text-end"><?php echo __('Percentage'); ?></th>
+                                        <th scope="col" class="text-end"><?php echo __('Amount'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody id="receipt_tax_breakdown_body">
                                     <tr>
-                                        <td colspan="3" class="text-center text-muted">No tax calculated.</td>
+                                        <td colspan="3" class="text-center text-muted"><?php echo __('No tax calculated.'); ?></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -254,8 +254,8 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
 
                     <div class="row">
                         <div class="form-group col-lg-12">
-                            <span class="form-label">Notes</span>
-                            <textarea aria-label="Notes" class="form-control" name="notes" rows="3"><?php echo $display_notes; ?></textarea>
+                            <span class="form-label"><?php echo __('Notes'); ?></span>
+                            <textarea aria-label="<?php echo __('Notes'); ?>" class="form-control" name="notes" rows="3"><?php echo $display_notes; ?></textarea>
                         </div>
                     </div>
 
@@ -264,7 +264,7 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
                 <div class="row mt-4">
                     <div class="col-lg-12 text-start">
                         <button type="submit" class="btn btn-primary" name="sbt_subcontractworkorderreceipt">
-                            <i class="ti-check"></i> Submit
+                            <i class="ti-check"></i> <?php echo __('Submit'); ?>
                         </button>
                     </div>
                 </div>
@@ -277,26 +277,26 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="subcontractReceiptHistoryModalLabel">Receipt History</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="subcontractReceiptHistoryModalLabel"><?php echo __('Receipt History'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
             <div class="modal-body">
-                <div id="receipt_history_status" class="alert alert-info mb-3">Select a subcontract work order to view history.</div>
+                <div id="receipt_history_status" class="alert alert-info mb-3"><?php echo __('Select a subcontract work order to view history.'); ?></div>
                 <div id="receipt_history_summary" class="receipt-history-summary d-none">
                     <div class="history-summary-item">
-                        <span>Work Order</span>
+                        <span><?php echo __('Work Order'); ?></span>
                         <strong id="history_work_order_no">-</strong>
                     </div>
                     <div class="history-summary-item">
-                        <span>Issued Qty</span>
+                        <span><?php echo __('Issued Qty'); ?></span>
                         <strong id="history_issued_qty">0.00</strong>
                     </div>
                     <div class="history-summary-item">
-                        <span>Total Received</span>
+                        <span><?php echo __('Total Received'); ?></span>
                         <strong id="history_total_received_qty">0.00</strong>
                     </div>
                     <div class="history-summary-item">
-                        <span>Pending</span>
+                        <span><?php echo __('Pending'); ?></span>
                         <strong id="history_pending_qty">0.00</strong>
                     </div>
                 </div>
@@ -304,27 +304,27 @@ $display_receipt_hsn_code = isset($_POST['receipt_hsn_code']) ? $_POST['receipt_
                     <table class="table table-bordered table-striped receipt-history-table mb-0">
                         <thead>
                             <tr>
-                                <th scope="col">Receipt No</th>
-                                <th scope="col">Date</th>
-                                <th scope="col" class="text-end">Received Qty</th>
-                                <th scope="col" class="text-end">Pending Qty</th>
-                                <th scope="col" class="text-end">Taxable Amount</th>
-                                <th scope="col" class="text-end">Tax Amount</th>
-                                <th scope="col" class="text-end">Total Amount</th>
-                                <th scope="col">Tax Split</th>
-                                <th scope="col">Notes</th>
+                                <th scope="col"><?php echo __('Receipt No'); ?></th>
+                                <th scope="col"><?php echo __('Date'); ?></th>
+                                <th scope="col" class="text-end"><?php echo __('Received Qty'); ?></th>
+                                <th scope="col" class="text-end"><?php echo __('Pending Qty'); ?></th>
+                                <th scope="col" class="text-end"><?php echo __('Taxable Amount'); ?></th>
+                                <th scope="col" class="text-end"><?php echo __('Tax Amount'); ?></th>
+                                <th scope="col" class="text-end"><?php echo __('Total Amount'); ?></th>
+                                <th scope="col"><?php echo __('Tax Split'); ?></th>
+                                <th scope="col"><?php echo __('Notes'); ?></th>
                             </tr>
                         </thead>
                         <tbody id="receipt_history_body">
                             <tr>
-                                <td colspan="9" class="text-center text-muted">No history loaded.</td>
+                                <td colspan="9" class="text-center text-muted"><?php echo __('No history loaded.'); ?></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
             </div>
         </div>
     </div>

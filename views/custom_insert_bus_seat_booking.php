@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-body p-4">
                     <div class="form-group m-b-15">
-                        <span class="m-b-5">Journey Date</span>
+                        <span class="m-b-5"><?= __('Journey Date') ?></span>
                         <div class="input-group">
                             <span class="input-group-text addon-style">
                                 <span class=""><i class="ti-time"></i></span>
@@ -13,65 +13,65 @@
                         </div>
                     </div>
                     <div class="form-group m-b-15">
-                        <span class="m-b-5">Pickup Point</span>
+                        <span class="m-b-5"><?= __('Pickup Point') ?></span>
                         <div class="input-group">
                             <span class="input-group-text addon-style">
                                 <span class=""><i class="ti-location-arrow"></i></span>
                             </span>
                             <select aria-label="Select option" class="form-control border fill">
-                                <option>Select Point</option>
-                                <option>Noida</option>
-                                <option>Delhi</option>
-                                <option>New Delhi</option>
-                                <option>Gurugram</option>
+                                <option><?= __('Select Point') ?></option>
+                                <option><?= __('Noida') ?></option>
+                                <option><?= __('Delhi') ?></option>
+                                <option><?= __('New Delhi') ?></option>
+                                <option><?= __('Gurugram') ?></option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group m-b-15">
-                        <span class="m-b-5">Dropping Point</span>
+                        <span class="m-b-5"><?= __('Dropping Point') ?></span>
                         <div class="input-group">
                             <span class="input-group-text addon-style">
                                 <span class=""><i class="ti-location-pin"></i></span>
                             </span>
                             <select aria-label="Select option" class="form-control border fill">
-                                <option>Select Point</option>
-                                <option>Noida</option>
-                                <option>Delhi</option>
-                                <option>New Delhi</option>
-                                <option>Gurugram</option>
+                                <option><?= __('Select Point') ?></option>
+                                <option><?= __('Noida') ?></option>
+                                <option><?= __('Delhi') ?></option>
+                                <option><?= __('New Delhi') ?></option>
+                                <option><?= __('Gurugram') ?></option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group m-b-15">
-                        <span class="col-lg-12 m-b-5">Select Gender</span>
+                        <span class="col-lg-12 m-b-5"><?= __('Select Gender') ?></span>
                         <div class="form-check form-check-inline">
                             <label class="form-label form-check-label">
-                              <input aria-label="Gender" class="form-check-input" type="radio" name="gender" id="male" value="option1"> Male
+                              <input aria-label="Gender" class="form-check-input" type="radio" name="gender" id="male" value="option1"> <?= __('Male') ?>
                           </label>
                       </div>
                       <div class="form-check form-check-inline">
                         <label class="form-label form-check-label">
-                          <input aria-label="Gender" class="form-check-input" type="radio" name="gender" id="female" value="option2"> Female
+                          <input aria-label="Gender" class="form-check-input" type="radio" name="gender" id="female" value="option2"> <?= __('Female') ?>
                       </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-label form-check-label">
-                      <input aria-label="Gender" class="form-check-input" type="radio" name="gender" id="other" value="option2"> Other
+                      <input aria-label="Gender" class="form-check-input" type="radio" name="gender" id="other" value="option2"> <?= __('Other') ?>
                   </label>
               </div>
               <span class="messages"></span>
           </div>
-          <button class="btn btn-primary">Continue</button>
+          <button class="btn btn-primary"><?= __('Continue') ?></button>
       </div>
   </div>
 </div>
 <div class="col-lg-8 col-md-12 col-sm-12 col-12">
     <div class="card">
         <div class="card-body p-4">
-            <h3>Click on Seat to select or deselect</h3>
-            <p>Off Days: <span class="form-label label label-success">Sunday</span></p>
+            <h3><?= __('Click on Seat to select or deselect') ?></h3>
+            <p><?= __('Off Days:') ?> <span class="form-label label label-success"><?= __('Sunday') ?></span></p>
             <div class="seat-wrapper border p-4">
-                <h4 class="f-w-600 f-24"><i class="ti-arrow-left f-18 m-r-10"></i>Door
+                <h4 class="f-w-600 f-24"><i class="ti-arrow-left f-18 m-r-10"></i><?= __('Door') ?>
                     <img src="../files/assets/images/staring.png" class="img-60 float-right" alt="">
                 </h4>
                 <div class="seat-left mt-5 p-4">

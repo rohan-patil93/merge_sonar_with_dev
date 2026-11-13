@@ -79,15 +79,15 @@ if($emp_list_names!="") {
 
 ?>
 <div class="modal-header ">
-  <h5 class="modal-title">  Filter Options   </h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <h5 class="modal-title">  <?php echo __('Filter Options'); ?>   </h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <form class="kt-form kt-form-label-right " action="" method="post">
   <div class="modal-body j-pro" >
     <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10 j-content">
       <div class="row">
         <div class="col-lg-6 w-full">
-          <span>Include</span>
+          <span><?php echo __('Include'); ?></span>
            <input type="hidden"  id="filter_row_id" value="<?php echo $filter_id; ?>">
           <input type="hidden" name="filterlist" id="filterlist" value="">
            <input type="hidden" name="filter_condition" id="filter_condition" value="">
@@ -96,7 +96,7 @@ if($emp_list_names!="") {
      <input type="hidden" name="filter" id="filter" value="">
 <input type="hidden" id="jsonselectcodition" value='<?php echo $_GET['fieldlist']; ?>'>
 
-          <select aria-label="Filterfor" onchange="showfilter(this.value);" id="filterfor" name="filterfor" class="form-control form-select js-example-basic-single">
+          <select aria-label="<?php echo __('Filterfor'); ?>" onchange="showfilter(this.value);" id="filterfor" name="filterfor" class="form-control form-select js-example-basic-single">
             <?php foreach ($filter_list as $filter) { ?>
               <option <?php if($selectedoption==$filter['genc_detail_code']) {?> selected <?php
 } ?> value="<?php echo $filter['genc_detail_code'];?>"><?php echo $filter['genc_detail_name'];?></option>
@@ -104,7 +104,7 @@ if($emp_list_names!="") {
           </select>
         </div>
         <div class="col-lg-6" id="empimages">
-              <span>Employees</span>
+              <span><?php echo __('Employees'); ?></span>
               <div class="symbol-group symbol-hover justify-content-center">
                 <?php foreach($eee_count as $empid){
                   $empdetail = $employees[$empid];
@@ -112,7 +112,7 @@ if($emp_list_names!="") {
                   <?php if($empdetail['image']) {?>
     <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-40 align-top mt-3" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $empdetail['display_name']; ?>" alt="<?php echo $empdetail['display_name']; ?>">
   <?php } else { ?>
-    <span  alt="user" class="img-radius img-40 align-top mt-3 custom_txt_round p-2 f-12 text-center" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $empdetail['display_name']; ?>"><?php echo initials($empdetail['display_name']); ?></span>
+    <span  alt="<?php echo __('user'); ?>" class="img-radius img-40 align-top mt-3 custom_txt_round p-2 f-12 text-center" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $empdetail['display_name']; ?>"><?php echo initials($empdetail['display_name']); ?></span>
   <?php } ?>
                 <?php } ?>
               </div>
@@ -121,10 +121,10 @@ if($emp_list_names!="") {
         <div class="col-lg-12">
           <div class="bg-white rounded row mt-5" style="display: none"  id="filtershow">
             <div class="col-lg-6  py-3">
-              <span>Filter employees by</span>
+              <span><?php echo __('Filter employees by'); ?></span>
               <div class="fr">
                 <i class="fas fa-user icon-nm pl-40"></i>
-                <span><span id="matches_count">  <?php echo $emp_count;?> </span> Matches</span>
+                <span><span id="matches_count">  <?php echo $emp_count;?> </span> <?php echo __('Matches'); ?></span>
               </div>
             </div>
             <div class="col-lg-6 card card-custom card-border">
@@ -140,9 +140,9 @@ if($emp_list_names!="") {
                       $check_show_filter_cond = $show_filter_condion[$targettable_field];
                       $check_show_filter_cond = explode(",",$check_show_filter_cond);
                   ?>
-                    <a class="accordion-msg waves-effect waves-dark"><?php echo $filter['filter_name']; ?> </br><small class="text-info">Please Select <?php echo $filter['filter_name']; ?></small></a>
+                    <a class="accordion-msg waves-effect waves-dark"><?php echo $filter['filter_name']; ?> </br><small class="text-info"><?php echo __('Please Select'); ?> <?php echo $filter['filter_name']; ?></small></a>
                     <div class="accordion-desc w-full">
-                      <select aria-label="Select option" onchange="selectemployee()" class="form-control mt-5 form-select js-example-basic-multiple" id="kt_select2_4<?php echo $index;?>" name="empstatus[]" multiple="multiple">
+                      <select aria-label="<?php echo __('Select option'); ?>" onchange="selectemployee()" class="form-control mt-5 form-select js-example-basic-multiple" id="kt_select2_4<?php echo $index;?>" name="empstatus[]" multiple="multiple">
                           <?php foreach ($table_details as $key => $value) { ?>
                               <option value="<?php echo $key;?>"
                                 <?php if(in_array($key, $check_show_filter_cond)) { ?> selected <?php
@@ -162,7 +162,7 @@ if($emp_list_names!="") {
   </div>
 </div>
 <div class="modal-footer mt-5" >
-  <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>    <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Select</button>
+  <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Cancel'); ?></button>    <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?php echo __('Select'); ?></button>
 </div>
 </form>
 <script type="text/javascript" src="assets/bower_components/select2/js/select2.full.min.js"></script>
@@ -245,7 +245,7 @@ if($emp_list_names!="") {
    }else{
     maxlimit = result.count;
    }
-   var imagelist = '  <span>Employees</span> <div class=""><div class="symbol-group symbol-hover justify-content-center">';
+   var imagelist = '  <span><?php echo __('Employees'); ?></span> <div class=""><div class="symbol-group symbol-hover justify-content-center">';
    for(var i = 0; i < maxlimit; i++) {
      imgpath = "uploads/all/"+result.details[i].image;
      if(result.details[i].image!=''){
@@ -255,7 +255,7 @@ if($emp_list_names!="") {
      }
    }
     if(more>0) {
-      imagelist += '<div class="symbol symbol-35 symbol-circle symbol-light-warning" data-toggle="tooltip" title="'+more+' More"><button type="button" class="btn p-0 border-0 bg-transparent text-reset cursor-pointer" onclick="moreemployees()"><span class="symbol-label font-weight-bold">'+more+'\+</span></button></div>';
+      imagelist += '<div class="symbol symbol-35 symbol-circle symbol-light-warning" data-toggle="tooltip" title="'+more+' <?php echo __('More'); ?>"><button type="button" class="btn p-0 border-0 bg-transparent text-reset cursor-pointer" onclick="moreemployees()"><span class="symbol-label font-weight-bold">'+more+'\+</span></button></div>';
     }
    imagelist +='</div></div>';
    document.getElementById("empimages").innerHTML = imagelist;

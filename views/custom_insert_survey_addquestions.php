@@ -10,7 +10,7 @@ include_once '../comm.php';
 	var i = 2;
  function addoptionrows() {
         i++;
-        $("#optionrow").append('<div class="form-group row" id="s1rowid'+i+'"><div class="col-lg-1"></div><div class="col-lg-8"><div class="input-group input-icon-right"><input aria-label="Question Option" type="text" class="form-control display-inline" name="survey_question_option[]" placeholder="Option"><div class="input-group-append"><span class="input-group-text bg-primary"><span><i role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" class="fa fa-trash text-white" onclick="deloptionrows(\'s1rowid'+i+'\')"></i></span></span></div></div></div></div>');
+        $("#optionrow").append('<div class="form-group row" id="s1rowid'+i+'"><div class="col-lg-1"></div><div class="col-lg-8"><div class="input-group input-icon-right"><input aria-label="<?php echo __('Question Option'); ?>" type="text" class="form-control display-inline" name="survey_question_option[]" placeholder="<?php echo __('Option'); ?>"><div class="input-group-append"><span class="input-group-text bg-primary"><span><i role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" class="fa fa-trash text-white" onclick="deloptionrows(\'s1rowid'+i+'\')"></i></span></span></div></div></div></div>');
     }
 	function deloptionrows(rowid) {
 		$('#'+rowid).remove();
@@ -22,7 +22,7 @@ include_once '../comm.php';
 
 		var survey_question = document.getElementById('survey_question').value;
 		if(survey_question.trim() == ''){
-			swal('Validation Error', 'Question text is required.', 'error');
+			swal(<?php echo json_encode(__('Validation Error')); ?>, 'Question text is required.', 'error');
 			return;
 		}
 		var require_response = document.getElementById('require_response').checked == true ? '0' : '1';
@@ -47,19 +47,19 @@ include_once '../comm.php';
 				}
 			}
 			if(nonemptyOptions < 2){
-				swal('Validation Error', 'Please enter at least 2 options.', 'error');
+				swal(<?php echo json_encode(__('Validation Error')); ?>, 'Please enter at least 2 options.', 'error');
 				return;
 			}
 		}
 		if(qtype == '2'){
 			var scaleVal = survey_question_option.length > 0 ? parseInt(survey_question_option[0], 10) : 0;
 			if(isNaN(scaleVal) || scaleVal <= 0){
-				swal('Validation Error', 'Rating scale must be greater than 0.', 'error');
+				swal(<?php echo json_encode(__('Validation Error')); ?>, 'Rating scale must be greater than 0.', 'error');
 				return;
 			}
 		}
 
-		var pass_data = "&title="+title+"&type="+qtype+"&question="+survey_question+"&require_response="+require_response+"&allow_multiple_selections="+allow_multiple_selections+"&option_data="+survey_question_option+"&question_id="+question_id+"&rid=";
+		var pass_data = "&title="<?php echo __('+title+'); ?>"&type="+qtype+"&question="+survey_question+"&require_response="+require_response+"&allow_multiple_selections="+allow_multiple_selections+"&option_data="+survey_question_option+"&question_id="+question_id+"&rid=";
 		console.log(pass_data);
 		$.ajax({
 			url: "ajax.php",
@@ -81,26 +81,26 @@ include_once '../comm.php';
 <div class="col-lg-12" id="<?php echo $question_id;?>">
 	<div class="modal-header">
 		<h5 class="modal-title" id="exampleModalLabel"><?php echo $_GET['question_title']; ?></h5>
-		 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 	</div>
 	<div class="card-body">
 		<div class="form-group text-left">
-			<label>Question Text: <span class="text-danger">*</span></label>
-			<textarea id="survey_question" name="survey_question" class="form-control" placeholder="" aria-label="Survey Question"> </textarea>
+			<label><?php echo __('Question Text:'); ?> <span class="text-danger">*</span></label>
+			<textarea id="survey_question" name="survey_question" class="form-control" placeholder="" aria-label="<?php echo __('Survey Question'); ?>"> </textarea>
 		</div>
 		<div class="form-group text-left">
 			<div class="checkbox-inline">
 				<?php if($_GET['type']==1 || $_GET['type']==3)	{ ?>
 					<label class="checkbox checkbox-primary">
-						<input type="checkbox" name="allow_multiple_selections" id="allow_multiple_selections" / aria-label="Allow Multiple Selections">
+						<input type="checkbox" name="allow_multiple_selections" id="allow_multiple_selections" / aria-label="<?php echo __('Allow Multiple Selections'); ?>">
 						<span></span>
-						Allow multiple selections
+						<?php echo __('Allow multiple selections'); ?>
 					</label>
 				<?php } ?>
 				<label class="checkbox checkbox-primary">
-					<input type="checkbox" value="require_response" id="require_response" aria-label="Input">
+					<input type="checkbox" value="require_response" id="require_response" aria-label="<?php echo __('Input'); ?>">
 					<span></span>
-					Require a Response
+					<?php echo __('Require a Response'); ?>
 				</label>
 			</div>
 		</div>
@@ -110,7 +110,7 @@ include_once '../comm.php';
 					<div class="col-lg-1"></div>
 					<div class="col-lg-8">
 					    <div class="input-group input-icon-right">
-						<input type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="Option" aria-label="Option">
+						<input type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="<?php echo __('Option'); ?>" aria-label="<?php echo __('Option'); ?>">
 									<span class="input-group-text addon-style">
     <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid1')"></i>	</span>
 </span></div>
@@ -120,7 +120,7 @@ include_once '../comm.php';
 					<div class="col-lg-1"></div>
 					<div class="col-lg-8">
 					    <div class="input-group input-icon-right">
-						<input type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="Option" aria-label="Option">
+						<input type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="<?php echo __('Option'); ?>" aria-label="<?php echo __('Option'); ?>">
 						<span class="input-group-text addon-style">
     <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid2')"></i>	</span>
 </span></div>
@@ -128,12 +128,12 @@ include_once '../comm.php';
 				</div>
 			</div>
 			<div class="form-group">
-				<button class="btn btn-success"  onclick="addoptionrows()" id="addRows" type="button">+ Add More Options</button>
+				<button class="btn btn-success"  onclick="addoptionrows()" id="addRows" type="button"><?php echo __('+ Add More Options'); ?></button>
 			</div>
 		<?php } ?>
 		<?php if($_GET['type']==2)	{ ?>
 			<div class="form-group text-left mt-10">
-				<label>Scale from 1 to: <span class="text-danger">*</span></label>
+				<label><?php echo __('Scale from 1 to:'); ?> <span class="text-danger">*</span></label>
 				<input type="number" name="survey_question_option[]"  class="form-control" placeholder="10" aria-label="10"> 
 			</div>
 		<?php } ?>	
@@ -142,8 +142,8 @@ include_once '../comm.php';
 		<?php } ?>	
 	</div>
 	<div class="modal-footer">
-	    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-primary mr-2" onclick="questionsubmit()" >Save</button>
+	    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+		<button type="button" class="btn btn-primary mr-2" onclick="questionsubmit()" ><?php echo __('Save'); ?></button>
 	<!--	<button class="btn btn-success"  onclick="questionsubmit()" type="button">Save</button>-->
 	</div>
 

@@ -71,21 +71,21 @@ function addMoreInvitation(){
 
     var htmlRows = '<div class="row mt-3" id="'+rowid+'">';
 
-    htmlRows += '<div class="col-lg-2"><input aria-label="First Name[]" type="text" class="form-control" name="first_name[]" required="" ><input type="hidden" name="user_type[]" value="2"></div>';
+    htmlRows += '<div class="col-lg-2"><input aria-label="<?php echo __('First Name[]'); ?>" type="text" class="form-control" name="first_name[]" required="" ><input type="hidden" name="user_type[]" value="2"></div>';
 
 
-    htmlRows += ' <div class="col-lg-2"><input aria-label="Last Name[]" type="text" class="form-control" name="last_name[]" required="" ></div>';
+    htmlRows += ' <div class="col-lg-2"><input aria-label="<?php echo __('Last Name[]'); ?>" type="text" class="form-control" name="last_name[]" required="" ></div>';
 
-     htmlRows += '<div class="col-lg-3"><input aria-label="User Email[]" type="text" class="form-control allemails" name="user_email[]" data-errorcls="'+errorvendorrowid+'" id="'+vendorrowid+'"  onblur="checkEmailidAllReadyAvilableOrNot()" required="" ><span class="text-danger f-12 allemailerrer" id="'+errorvendorrowid+'"  style="display:none">Email Id Already Register</span></div>';
+     htmlRows += '<div class="col-lg-3"><input aria-label="<?php echo __('User Email[]'); ?>" type="text" class="form-control allemails" name="user_email[]" data-errorcls="'+errorvendorrowid+'" id="'+vendorrowid+'"  onblur="checkEmailidAllReadyAvilableOrNot()" required="" ><span class="text-danger f-12 allemailerrer" id="'+errorvendorrowid+'"  style="display:none"><?php echo __('Email Id Already Register'); ?></span></div>';
 
 
-    htmlRows += '<div class="col-lg-2"><input aria-label="User Mobile[]" type="text" class="form-control" name="user_mobile[]" ></div>';
+    htmlRows += '<div class="col-lg-2"><input aria-label="<?php echo __('User Mobile[]'); ?>" type="text" class="form-control" name="user_mobile[]" ></div>';
 
-    htmlRows += '<div class="col-lg-2"><select aria-label="Role []"  class ="form-select js-example-basic-single" name="role_id[]" required="" > <?php foreach($module as $key=>$modulename){ ?> <optgroup label="<?php echo $modulename; ?> "><?php foreach($roles[$key] as $rolesr){  ?> <option value="<?php echo $rolesr['role_short_code']; ?>"><?php echo $rolesr['display_name']; ?></option> <?php
+    htmlRows += '<div class="col-lg-2"><select aria-label="<?php echo __('Role []'); ?>"  class ="form-select js-example-basic-single" name="role_id[]" required="" > <?php foreach($module as $key=>$modulename){ ?> <optgroup label="<?php echo $modulename; ?> "><?php foreach($roles[$key] as $rolesr){  ?> <option value="<?php echo $rolesr['role_short_code']; ?>"><?php echo $rolesr['display_name']; ?></option> <?php
 } ?> </optgroup> <?php
 }  ?></select></div>';
 
-     htmlRows += '<div class="col-lg-1 p-t-10"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeorganizationSetup(\''+rowid+ '\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div></div>';
+     htmlRows += '<div class="col-lg-1 p-t-10"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="removeorganizationSetup(\''+rowid+ '\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div></div>';
 
     htmlRows += '</tr>';
     $('#append_invitatiouser').append(htmlRows);
@@ -170,25 +170,25 @@ function removeOrganizationSetup(idd){
 
 <div class="card">
     <div class="card-header mb-3">
-        <h5>Invite Customers</h5>
+        <h5><?php echo __('Invite Customers'); ?></h5>
     </div>
     <form method="post">
         <div class="card-body m-l-50 m-r-50">
           <div class="row">
               <div class="col-lg-2">
-                <span class="form-label">First Name</span>
+                <span class="form-label"><?php echo __('First Name'); ?></span>
               </div>
               <div class="col-lg-2">
-                <span class="form-label">Last Name</span>
+                <span class="form-label"><?php echo __('Last Name'); ?></span>
               </div>
               <div class="col-lg-3">
-                <span class="form-label">Email Id</span>
+                <span class="form-label"><?php echo __('Email Id'); ?></span>
               </div>
               <div class="col-lg-2">
-                <span class="form-label">Phone</span>
+                <span class="form-label"><?php echo __('Phone'); ?></span>
               </div>
               <div class="col-lg-2">
-                <span class="form-label">Role</span>
+                <span class="form-label"><?php echo __('Role'); ?></span>
               </div>
             </div>
             <div id="append_invitatiouser">
@@ -203,21 +203,21 @@ function removeOrganizationSetup(idd){
             ?>
               <div class="row" id="<?php echo $rowid; ?>">
 
-                <div class="col-lg-2"><input aria-label="First Name[]" type="text" class="form-control" name="first_name[]" required="" ><input type="hidden" name="user_type[]" value="2"></div>
+                <div class="col-lg-2"><input aria-label="<?php echo __('First Name[]'); ?>" type="text" class="form-control" name="first_name[]" required="" ><input type="hidden" name="user_type[]" value="2"></div>
 
-                <div class="col-lg-2"><input aria-label="Last Name[]" type="text" class="form-control" name="last_name[]" required="" ></div>
+                <div class="col-lg-2"><input aria-label="<?php echo __('Last Name[]'); ?>" type="text" class="form-control" name="last_name[]" required="" ></div>
 
 
                  <div class="col-lg-3">
-                  <input aria-label="User Email[]" type="text" class="form-control allemails" name="user_email[]" data-errorcls="<?php echo $errorvendorrowid; ?>" id="<?php echo $vendorrowid; ?>" onblur="checkEmailidAllReadyAvilableOrNot()" required="" >
-                  <span class="text-danger f-12 allemailerrer" id="<?php echo $errorvendorrowid; ?>"  style="display:none">Email Id Already Register</span>
+                  <input aria-label="<?php echo __('User Email[]'); ?>" type="text" class="form-control allemails" name="user_email[]" data-errorcls="<?php echo $errorvendorrowid; ?>" id="<?php echo $vendorrowid; ?>" onblur="checkEmailidAllReadyAvilableOrNot()" required="" >
+                  <span class="text-danger f-12 allemailerrer" id="<?php echo $errorvendorrowid; ?>"  style="display:none"><?php echo __('Email Id Already Register'); ?></span>
                 </div>
 
                 <div class="col-lg-2">
-                  <input aria-label="User Mobile[]" type="text" class="form-control" name="user_mobile[]"  >
+                  <input aria-label="<?php echo __('User Mobile[]'); ?>" type="text" class="form-control" name="user_mobile[]"  >
                 </div>
                 <div class="col-lg-2">
-                   <select aria-label="Role []"  class ="form-select js-example-basic-single" name="role_id[]" required="" >
+                   <select aria-label="<?php echo __('Role []'); ?>"  class ="form-select js-example-basic-single" name="role_id[]" required="" >
                       <?php foreach($module as $key=>$modulename){ ?>
                         <optgroup label="<?php echo $modulename; ?> ">
                         <?php foreach($roles[$key] as $rolesr){  ?>
@@ -228,17 +228,17 @@ function removeOrganizationSetup(idd){
                     </select>
                 </div>
                 <div class="col-lg-1 p-t-10">
-                  <i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeorganizationSetup('<?php echo $rowid; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                  <i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="removeorganizationSetup('<?php echo $rowid; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                 </div>
               </div>
               <?php $im++;
 } ?>
             </div>
             <div class="">
-               <button class="btn btn-info btn-round waves-effect waves-light col-lg-3 fw-bold mt-4" id="addstatickRows" type="button" onclick="addMoreInvitation()">+ Add More Invite user</button>
+               <button class="btn btn-info btn-round waves-effect waves-light col-lg-3 fw-bold mt-4" id="addstatickRows" type="button" onclick="addMoreInvitation()"><?php echo __('+ Add More Invite user'); ?></button>
            </div>
             <div class="">
-            <button class="btn btn-info btn-round waves-effect waves-light col-lg-2 mt-5 disabled" id="submituserbtn" name="submit_invite" type="submit" >Invite Customer</button>
+            <button class="btn btn-info btn-round waves-effect waves-light col-lg-2 mt-5 disabled" id="submituserbtn" name="submit_invite" type="submit" ><?php echo __('Invite Customer'); ?></button>
         </div>
     </div>
 </form>

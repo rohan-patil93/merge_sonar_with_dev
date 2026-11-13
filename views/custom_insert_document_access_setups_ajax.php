@@ -21,16 +21,16 @@ $item_categories = $result['item_categories'];
 <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_1">
     <thead>
         <tr>
-            <th scope="col" style="width: 25%;">User Details</th>
-            <th scope="col" style="width: 20%;">User Can Create Requisition for Their</th>
-            <th scope="col" style="width: 20%;">User Can Create Requisition for CAPEX/OPEX</th>
-            <th scope="col" style="width: 20%;">User Can Create Requisition Item Category</th>
-            <th scope="col" class="text-right" style="width: 20%;">User Can Create Requisition upto</th>
+            <th scope="col" style="width: 25%;"><?= __('User Details') ?></th>
+            <th scope="col" style="width: 20%;"><?= __('User Can Create Requisition for Their') ?></th>
+            <th scope="col" style="width: 20%;"><?= __('User Can Create Requisition for CAPEX/OPEX') ?></th>
+            <th scope="col" style="width: 20%;"><?= __('User Can Create Requisition Item Category') ?></th>
+            <th scope="col" class="text-right" style="width: 20%;"><?= __('User Can Create Requisition upto') ?></th>
             <?php if($_POST['transaction_table'] == 'requisitions'){ ?>
-            <th scope="col" style="width: 25%;">On Behalf</th>
-            <th scope="col" style="width: 20%;">User Can Create Requisition only for following users</th>
+            <th scope="col" style="width: 25%;"><?= __('On Behalf') ?></th>
+            <th scope="col" style="width: 20%;"><?= __('User Can Create Requisition only for following users') ?></th>
             <?php } ?>
-            <th scope="col" style="width: 40%;">From Date</th>
+            <th scope="col" style="width: 40%;"><?= __('From Date') ?></th>
         </tr>
     </thead>
     <tbody>
@@ -54,22 +54,22 @@ $item_categories = $result['item_categories'];
             </td>
             <td class="p-2 w-full">
                 <select aria-label="Select option" class="js-example-basic-single" name="approved_type[<?php echo $appuser['id']; ?>]">
-                    <option value="" >For All</option>
-                    <option value="DIV" <?php echo $approvedusercriteria['approved_type'] == "DIV"?"selected":""; ?>>Divisions</option>
-                    <option value="D" <?php echo $approvedusercriteria['approved_type'] == "D"?"selected":""; ?>>Departments</option>
-                    <option value="cost_center_id" <?php echo $approvedusercriteria['approved_type'] == "cost_center_id"?"selected":""; ?>>Cost Centers</option>
+                    <option value="" ><?= __('For All') ?></option>
+                    <option value="DIV" <?php echo $approvedusercriteria['approved_type'] == "DIV"?"selected":""; ?>><?= __('Divisions') ?></option>
+                    <option value="D" <?php echo $approvedusercriteria['approved_type'] == "D"?"selected":""; ?>><?= __('Departments') ?></option>
+                    <option value="cost_center_id" <?php echo $approvedusercriteria['approved_type'] == "cost_center_id"?"selected":""; ?>><?= __('Cost Centers') ?></option>
 
                 </select>
             </td>
             <td class="p-2 w-full">
                 <select aria-label="Select option" class="js-example-basic-single" name="opex_cpex[<?php echo $appuser['id']; ?>]">
-                    <option value="" >Both</option>
+                    <option value="" ><?= __('Both') ?></option>
                     <?php foreach($capexopexres as $opex_cpex){
                         $selected= "";
                         if($approvedusercriteria['opex_cpex'] == $opex_cpex['genc_detail_code']){
                             $selected ="selected";
                         }
-                        echo '<option value="'.$opex_cpex['genc_detail_code'].'" '.$selected.'>'.strtoupper($opex_cpex['genc_detail_name']).'</option>';
+                        echo '<option value="'.$opex_cpex['genc_detail_code'].'" '.$selected.'>'.htmlspecialchars(__(strtoupper($opex_cpex['genc_detail_name']) ?? '')).'</option>';
                     } ?>
                 </select>
             </td>
@@ -82,23 +82,23 @@ $item_categories = $result['item_categories'];
                         if(in_array($item_categorie['id'],(array)$item_category)){
                             $selected ="selected";
                         }
-                        echo '<option value="'.$item_categorie['id'].'" '.$selected.'>'.$item_categorie['category_description'].'</option>';
+                        echo '<option value="'.$item_categorie['id'].'" '.$selected.'>'.htmlspecialchars(__($item_categorie['category_description'] ?? '')).'</option>';
                     } ?>
                 </select>
             </td>
             <td class="p-2">
-                <input aria-label="Input field" type="text" name="amount[<?php echo  $appuser['id']; ?>]" class="form-control text-right" placeholder="amount" value="<?php echo $approvedusercriteria['amount'];?>">
+                <input aria-label="Input field" type="text" name="amount[<?php echo  $appuser['id']; ?>]" class="form-control text-right" placeholder="<?= __('amount') ?>" value="<?php echo $approvedusercriteria['amount'];?>">
             </td>
         <?php if($_POST['transaction_table'] == 'requisitions'){ ?>
 
             <td class="p-2 w-full">
                 <select aria-label="Select option" class="js-example-basic-single" name="onbehalf[<?php echo  $appuser['id']; ?>]" onchange="onBeHalfType(this.value,'<?php echo  $appuser['id']; ?>')">
-                    <option  value="0">Select Any One</option>
-                    <option value="DIV" <?php echo $approvedusercriteria['onbehalf'] == "DIV"?"selected":""; ?>>Divisions</option>
-                    <option value="D" <?php echo $approvedusercriteria['onbehalf'] == "D"?"selected":""; ?>>Departments</option>
-                    <option value="cost_center_id" <?php echo $approvedusercriteria['onbehalf'] == "cost_center_id"?"selected":""; ?>>Cost Centers</option>
-                    <option value="L" <?php echo $approvedusercriteria['onbehalf'] == "L"?"selected":""; ?>>Locations</option>
-                    <option value="U" <?php echo $approvedusercriteria['onbehalf'] == "U"?"selected":""; ?>>For User</option>
+                    <option value="0"><?= __('Select Any One') ?></option>
+                    <option value="DIV" <?php echo $approvedusercriteria['onbehalf'] == "DIV"?"selected":""; ?>><?= __('Divisions') ?></option>
+                    <option value="D" <?php echo $approvedusercriteria['onbehalf'] == "D"?"selected":""; ?>><?= __('Departments') ?></option>
+                    <option value="cost_center_id" <?php echo $approvedusercriteria['onbehalf'] == "cost_center_id"?"selected":""; ?>><?= __('Cost Centers') ?></option>
+                    <option value="L" <?php echo $approvedusercriteria['onbehalf'] == "L"?"selected":""; ?>><?= __('Locations') ?></option>
+                    <option value="U" <?php echo $approvedusercriteria['onbehalf'] == "U"?"selected":""; ?>><?= __('For User') ?></option>
                 </select>
             </td>
             <td class="p-2 w-full">
@@ -111,7 +111,7 @@ $item_categories = $result['item_categories'];
                         if(in_array($appus0['id'],(array)$foruser)){
                             $selected ="selected";
                         }
-                        echo '<option value="'.$appus0['id'].'" '.$selected.'>'.$appus0['display_name'].'</option>';
+                        echo '<option value="'.$appus0['id'].'" '.$selected.'>'.htmlspecialchars(__($appus0['display_name'] ?? '')).'</option>';
                      } ?>
                     </select>
                 </div>

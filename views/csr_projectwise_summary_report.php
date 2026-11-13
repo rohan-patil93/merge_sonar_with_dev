@@ -52,16 +52,16 @@ $grand_total_unspent  = 0;
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>CSR PROJECTWISE SUMMARY</h5>
+            <h5><?= __('CSR PROJECTWISE SUMMARY') ?></h5>
             <div class="card-header-right">
                 <div class="dropdown-primary dropdown open">
                     <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More') ?></button>
                     <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                         <a class="dropdown-item waves-light waves-effect"
-                            href="custom_view_download.php?page=CSRProjectSummary&format=csv" target="_blank">CSV</a>
+                            href="custom_view_download.php?page=CSRProjectSummary&format=csv" target="_blank"><?= __('CSV') ?></a>
                         <a class="dropdown-item waves-light waves-effect"
-                            href="custom_view_download.php?page=CSRProjectSummary&format=excel" target="_blank">Excel</a>
+                            href="custom_view_download.php?page=CSRProjectSummary&format=excel" target="_blank"><?= __('Excel') ?></a>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@ $grand_total_unspent  = 0;
                 <input type="hidden" name="option" value="<?php echo htmlspecialchars($_GET['option'] ?? 'CSR_PROJECTWISE_SUMMARY_REPORT', ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="row mb-3">
                     <div class="col-md-3">
-                        <label><b>Financial Year</b></label>
+                        <label><b><?= __('Financial Year') ?></b></label>
                         <select name="year" id="csrProjectSummaryYearSelect" class="form-control js-example-basic-single">
                             <?php if (count((array)$financial_years) > 0) {
                                 foreach ($financial_years as $fyRow) {
@@ -81,7 +81,7 @@ $grand_total_unspent  = 0;
                                     $fyName = is_array($fyRow) ? ($fyRow['genc_detail_name'] ?? $fyCode) : ($fyRow->genc_detail_name ?? $fyCode);
                                     $selected = ($selectedYear == $fyCode) ? 'selected' : '';
                             ?>
-                                <option value="<?php echo htmlspecialchars($fyCode, ENT_QUOTES, 'UTF-8'); ?>" <?php echo $selected; ?>><?php echo htmlspecialchars($fyName, ENT_QUOTES, 'UTF-8'); ?></option>
+                                <option value="<?php echo htmlspecialchars($fyCode, ENT_QUOTES, 'UTF-8'); ?>" <?php echo $selected; ?>><?= htmlspecialchars(__($fyName), ENT_QUOTES, 'UTF-8') ?></option>
                             <?php }
                             } ?>
                         </select>
@@ -94,24 +94,24 @@ $grand_total_unspent  = 0;
                     <table class="table table-bordered table-sm align-middle ">
                         <thead>
                             <tr>
-                                <th scope="col" colspan="3" class="bg-primary text-white text-center">CSR Actual Spent Details</th>
+                                <th scope="col" colspan="3" class="bg-primary text-white text-center"><?= __('CSR Actual Spent Details') ?></th>
                                 <th scope="col" colspan="3">-</th>
-                                <th scope="col" colspan="5" class="bg-primary text-white text-center">Amount Summary</th>
+                                <th scope="col" colspan="5" class="bg-primary text-white text-center"><?= __('Amount Summary') ?></th>
                                 <th scope="col"></th>
                             </tr>
                             <tr class="bg-light">
-                                <th scope="col" class="text-center">Location</th>
-                                <th scope="col" class="text-center">Name of the CSR Project</th>
-                                <th scope="col" class="text-center">Nature of work done</th>
-                                <th scope="col" class="text-center">Type of work</th>
-                                <th scope="col" class="text-center">Type of Project</th>
-                                <th scope="col" class="text-center">Area</th>
-                                <th scope="col" class="text-center">PO Issued<br><span class="f-12">(Incl. GST)</span></th>
-                                <th scope="col" class="text-center">Amount Spent<br><span class="f-12">(Incl. GST)</span></th>
-                                <th scope="col" class="text-center">Unspent Amount</th>
-                                <th scope="col" class="text-center">Spent %</th>
-                                <th scope="col" class="text-center">Unspent %</th>
-                                <th scope="col" class="text-center">Status of Project</th>
+                                <th scope="col" class="text-center"><?= __('Location') ?></th>
+                                <th scope="col" class="text-center"><?= __('Name of the CSR Project') ?></th>
+                                <th scope="col" class="text-center"><?= __('Nature of work done') ?></th>
+                                <th scope="col" class="text-center"><?= __('Type of work') ?></th>
+                                <th scope="col" class="text-center"><?= __('Type of Project') ?></th>
+                                <th scope="col" class="text-center"><?= __('Area') ?></th>
+                                <th scope="col" class="text-center"><?= __('PO Issued') ?><br><span class="f-12">(<?= __('Incl. GST') ?>)</span></th>
+                                <th scope="col" class="text-center"><?= __('Amount Spent') ?><br><span class="f-12">(<?= __('Incl. GST') ?>)</span></th>
+                                <th scope="col" class="text-center"><?= __('Unspent Amount') ?></th>
+                                <th scope="col" class="text-center"><?= __('Spent %') ?></th>
+                                <th scope="col" class="text-center"><?= __('Unspent %') ?></th>
+                                <th scope="col" class="text-center"><?= __('Status of Project') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -134,7 +134,7 @@ $grand_total_unspent  = 0;
                                     <td class="text-end "><?php echo customeummarmonyformate($row['unspent_amount']) ?? '-'; ?></td>
                                     <td class="text-end "><?php echo $row['spent_percent'] ?? '-'; ?>%</td>
                                     <td class="text-end "><?php echo $row['unspent_percent'] ?? '-'; ?>%</td>
-                                    <td class="text-center "><?php echo $row['project_status'] ?? '-'; ?></td>
+                                    <td class="text-center "><?= htmlspecialchars(__($row['project_status'] ?? '-')) ?></td>
                                 </tr>
                             <?php
                                 $csvdata[] = [
@@ -156,7 +156,7 @@ $grand_total_unspent  = 0;
                             ?>
                             <!-- Grand Total Row -->
                             <tr class="fw-bold bg-light" >
-                                <td colspan="6" class="text-end">Grand Total</td>
+                                <td colspan="6" class="text-end"><?= __('Grand Total') ?></td>
                                 <td class="text-end"><?php echo customeummarmonyformate($grand_total_po); ?></td>
                                 <td class="text-end"><?php echo customeummarmonyformate($grand_total_spent); ?></td>
                                 <td class="text-end"><?php echo customeummarmonyformate($grand_total_unspent); ?></td>
@@ -167,7 +167,7 @@ $grand_total_unspent  = 0;
                 </div>
             <?php } else { ?>
                 <div class="text-center py-4">
-                    <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> No Data Available</p>
+                    <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> <?= __('No Data Available') ?></p>
                     <div class="text-center px-4">
                         <img class="mw-100 mh-300px max-h-300" alt="" src="assets/images/work.png" >
                     </div>

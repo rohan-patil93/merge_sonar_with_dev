@@ -168,12 +168,12 @@
    <div class="container-fluid ">
       <div class="card card-custom">
          <div class="card-body j-pro">
-        <div> <div class="float-right f-w-700"> Assessment Year : <?php echo $_GET['assessment_year']; ?>  </div> </div>
+        <div> <div class="float-right f-w-700"> <?php echo __('Assessment Year :'); ?> <?php echo $_GET['assessment_year']; ?>  </div> </div>
             <div class="form-group col-lg-5 p-4">
                <table class="table table-bordered">
                   <thead>
                      <tr class="table-active">
-                        <th scope="col" colspan="2">Taxable Income: <?php echo  $maindata['taxable_income']; ?> &nbsp; Annual Tax :  <?php echo  $maindata['annual_tax']; ?> </th>
+                        <th scope="col" colspan="2"><?php echo __('Taxable Income:'); ?> <?php echo  $maindata['taxable_income']; ?> <?php echo __('&nbsp; Annual Tax :'); ?>  <?php echo  $maindata['annual_tax']; ?> </th>
                         <th scope="col" class="text-right text-primary">
                           <?php for($i=0;$i<5;$i++){
                              if($i< $maindata['star_rate']){?>
@@ -187,9 +187,9 @@
                   </thead>
                   <tbody>
                      <tr>
-                        <th scope="col" >Potential</th>
-                        <th scope="col">Actual</th>
-                        <th scope="col">GAP</th>
+                        <th scope="col" ><?php echo __('Potential'); ?></th>
+                        <th scope="col"><?php echo __('Actual'); ?></th>
+                        <th scope="col"><?php echo __('GAP'); ?></th>
                      </tr>
                      <tr>
                         <td><?php echo $maindata['potential_amount']; ?></td>
@@ -204,7 +204,7 @@
                   <ul class="nav nav-tabs md-tabs custom-declaration" >
                      <?php $k=1; foreach ($mainarray as  $marray){ ?>
                      <li class="nav-item">
-                        <a class="nav-link <?php if($k==1){ echo "active";
+                        <a class="nav-link <?php if($k==1){ echo __('active');
 } ?>" data-bs-toggle="tab" href="#kt_tab_pane_<?php echo $k; ?>_4">
 
                         <span class="nav-text"><i class="fa fa-commenting"></i> &nbsp; &nbsp;<?php echo $marray;  ?></span>
@@ -253,19 +253,19 @@ foreach ($send as $sent) { //echo "<pre>";print_r($sent); //exit;
       </tr>
       <tr class="table-active">
          <th scope="col" class="" style="width: 2%;">#</th>
-         <th scope="col" class="" style="width: <?php echo $width_len; ?>%;">Particulars</th>
+         <th scope="col" class="" style="width: <?php echo $width_len; ?>%;"><?php echo __('Particulars'); ?></th>
          <?php if($sent['age_limit'] == 0 ){ ?>
-            <th scope="col" class="thheader" style="width: 15%;">Age </th>
+            <th scope="col" class="thheader" style="width: 15%;"><?php echo __('Age'); ?> </th>
          <?php } ?>
          <?php if($sent['individual_limit'] == 0 ){ ?>
-            <th scope="col" class="thheader" style="width: 10%;">Max Limit </th>
+            <th scope="col" class="thheader" style="width: 10%;"><?php echo __('Max Limit'); ?> </th>
          <?php } ?>
-         <th scope="col" class="thheader" style="width: 13%;">Amount </th>
+         <th scope="col" class="thheader" style="width: 13%;"><?php echo __('Amount'); ?> </th>
          <?php  if($viewmanager!="" || $viewfilemanger != ""){   ?>
-            <th scope="col" class="thheader" style="width: 13%;">Approved Amount </th>
+            <th scope="col" class="thheader" style="width: 13%;"><?php echo __('Approved Amount'); ?> </th>
          <?php } ?>
          <?php  if($viewfilemanger != ""){ ?>
-            <th scope="col" class="thheader" style="width: 5%;">File </th>
+            <th scope="col" class="thheader" style="width: 5%;"><?php echo __('File'); ?> </th>
          <?php } ?>
       </tr>
       <?php $k=1;foreach ($datails[$sent['id']] as $datail) { ?>
@@ -289,28 +289,28 @@ foreach ($send as $sent) { //echo "<pre>";print_r($sent); //exit;
                             <?php } ?>
                             <td class="thheader" style="width: 13%;">
                               <?php $it80amount = $emp80itdec[$datail['id']] !="" ?  $emp80itdec[$datail['id']] : '0.00'; ?>
-                              <input aria-label="Itd8amount[]" type="text" name="itd8amount[]"  <?php echo $aread; ?> class="form-control text-right" value="<?php echo $it80amount; ?>" id="itd8amount_<?php echo $it_row; ?>">
+                              <input aria-label="<?php echo __('Itd8amount[]'); ?>" type="text" name="itd8amount[]"  <?php echo $aread; ?> class="form-control text-right" value="<?php echo $it80amount; ?>" id="itd8amount_<?php echo $it_row; ?>">
                               <input type="hidden" name="itd8id[]" value="<?php echo $datail['id']; ?>" class="form-control" id="itd8id_<?php echo $it_row; ?>">
                                <input type="hidden" name="itd8catid[]" value="<?php echo $sent['id']; ?>" class="form-control" id="itd8catid_<?php echo $it_row; ?>">
                                 <input type="hidden" name="itdmaxlimit[]" value="<?php echo $datail['max_limit']; ?>" class="form-control" id="itdmaxlimit_<?php echo $it_row; ?>">
                             </td>
             <?php  if($viewmanager!="" || $viewfilemanger != ""){ ?>
             <td>
-                 <input aria-label="Itd8approveamount[]" type="text" name="itd8approveamount[]" <?php echo $paread; ?>  class="form-control text-right" value="<?php echo $it80amount; ?>" id="itd8approveamount_<?php echo $it_row; ?>">
+                 <input aria-label="<?php echo __('Itd8approveamount[]'); ?>" type="text" name="itd8approveamount[]" <?php echo $paread; ?>  class="form-control text-right" value="<?php echo $it80amount; ?>" id="itd8approveamount_<?php echo $it_row; ?>">
             </td>
             <?php } ?>
             <?php  if($viewfilemanger!="" ){ ?>
             <td>
                   <div class="image-input image-input-empty image-input-outline" id="kt_image_5" >
-             <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="Upload" style="left:-5px;top:-15px;">
+             <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="<?php echo __('Upload'); ?>" style="left:-5px;top:-15px;">
               <i class="fa fa-cloud-upload"></i>
-              <input aria-label="File[]" type="file" name="file[]" />
+              <input aria-label="<?php echo __('File[]'); ?>" type="file" name="file[]" />
               <input type="hidden" name="hidden_file[]" value="<?php echo $expe['compay_file']; ?>"/>
             </label>
-            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="<?php echo __('Cancel avatar'); ?>">
               <i class="ki ki-bold-close icon-xs text-muted"></i>
             </span>
-            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="<?php echo __('Remove avatar'); ?>">
               <i class="ki ki-bold-close icon-xs text-muted"></i>
             </span>
           </div>
@@ -335,7 +335,7 @@ foreach ($send as $sent) { //echo "<pre>";print_r($sent); //exit;
 
                      <div class="form-group  col-lg-12">
 
-                    <button type="submit" name="Add80cDeclaration" class="btn btn-primary waves-effect waves-light float-right" value="Submit"/>Submit</button>
+                    <button type="submit" name="Add80cDeclaration" class="btn btn-primary waves-effect waves-light float-right" value="Submit"/><?php echo __('Submit'); ?></button>
                                </div>
                              </form>
 
@@ -349,13 +349,13 @@ foreach ($send as $sent) { //echo "<pre>";print_r($sent); //exit;
                      <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer " id="invoiceItem_2">
 
                         <tr class="table-primary text-white">
-                           <td colspan="3"><b>Income From Perevious Employer</b></td>
+                           <td colspan="3"><b><?php echo __('Income From Perevious Employer'); ?></b></td>
 
                         </tr>
                         <tr class="table-active">
                            <th scope="col" class="" style="width: 2%;">#</th>
-                           <th scope="col" class="" style="width: 85%;">Particulars</th>
-                           <th scope="col" class="thheader" style="width: 13%;">Amount </th>
+                           <th scope="col" class="" style="width: 85%;"><?php echo __('Particulars'); ?></th>
+                           <th scope="col" class="thheader" style="width: 13%;"><?php echo __('Amount'); ?> </th>
                         </tr>
                         <form method="post" action="#">
                         <?php  $i=1;
@@ -365,7 +365,7 @@ foreach ($send as $sent) { //echo "<pre>";print_r($sent); //exit;
                            <th scope="col" class="" style="width: 2%;"><?php echo $i; ?></th>
                            <th scope="col" class="" style="width: 85%;"><?php echo $pevios_arr; ?></th>
                            <th scope="col" class="thheader" style="width: 13%;">
-                            <input aria-label="Input field" type="text" name="<?php echo $pevios; ?>" value = "<?php echo $empprvedata[$pevios]; ?>"  class="form-control  text-right" >
+                            <input aria-label="<?php echo __('Input field'); ?>" type="text" name="<?php echo $pevios; ?>" value = "<?php echo $empprvedata[$pevios]; ?>"  class="form-control  text-right" >
                            </th>
                         </tr>
 
@@ -381,7 +381,7 @@ fileUplodingUi($file_array);
                      <div class="form-group  col-lg-12">
                                         <input type="hidden" value="<?php echo $empprvedata['id']; ?>" name="pervious_id">
                                         <input type="hidden" value="<?php echo $assessment_year; ?>" name="assessment_year">
-                                       <button type="submit" name="emppereviousdetails" class="btn btn-primary waves-effect waves-light float-right" value="Submit"/>Submit</button>
+                                       <button type="submit" name="emppereviousdetails" class="btn btn-primary waves-effect waves-light float-right" value="Submit"/><?php echo __('Submit'); ?></button>
                                        </div>
                   </div>
                 </form>
@@ -393,44 +393,44 @@ fileUplodingUi($file_array);
                            <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer " id="invoiceItem_4">
 
                         <tr class="table-primary text-white">
-                           <td colspan="4"><b> Other Incomes</b></td>
+                           <td colspan="4"><b> <?php echo __('Other Incomes'); ?></b></td>
 
                         </tr>
                         <tr class="table-active">
                            <th scope="col" class="" style="width: 2%;">#</th>
-                           <th scope="col" class="" style="width: 70%;">Particulars</th>
+                           <th scope="col" class="" style="width: 70%;"><?php echo __('Particulars'); ?></th>
 
-                           <th scope="col" class="" style="width: 15%;">Amount </th>
+                           <th scope="col" class="" style="width: 15%;"><?php echo __('Amount'); ?> </th>
                         </tr>
                         <tr>
                            <th scope="col" class="" style="width: 2%;">1</th>
 
-                           <th scope="col" style="width: 70%;"><input aria-label="Othername[]" type="text" name="othername[]"  value="<?php echo $emp_it_declaration_other_income['0']['particular'] ?>" class="form-control" id="particular_oi_0"> </th>
-                           <th scope="col" style="width: 15%;"><input aria-label="Amount[]" type="text" name="amount[]" value="<?php echo $emp_it_declaration_other_income['0']['amount'] ?>" class="form-control text-right" id="amount_oi_0"> </th>
+                           <th scope="col" style="width: 70%;"><input aria-label="<?php echo __('Othername[]'); ?>" type="text" name="othername[]"  value="<?php echo $emp_it_declaration_other_income['0']['particular'] ?>" class="form-control" id="particular_oi_0"> </th>
+                           <th scope="col" style="width: 15%;"><input aria-label="<?php echo __('Amount[]'); ?>" type="text" name="amount[]" value="<?php echo $emp_it_declaration_other_income['0']['amount'] ?>" class="form-control text-right" id="amount_oi_0"> </th>
                         </tr>
                          <tr>
                            <th scope="col" class="" style="width: 2%;">2</th>
 
-                           <th scope="col" style="width: 70%;"><input aria-label="Othername[]" type="text" name="othername[]" value="<?php echo $emp_it_declaration_other_income['1']['particular'] ?>"   class="form-control" id="particular_oi_1"> </th>
-                           <th scope="col" style="width: 15%;"><input aria-label="Amount[]" type="text" name="amount[]" value="<?php echo $emp_it_declaration_other_income['1']['amount'] ?>" class="form-control text-right" id="amount_oi_1"> </th>
+                           <th scope="col" style="width: 70%;"><input aria-label="<?php echo __('Othername[]'); ?>" type="text" name="othername[]" value="<?php echo $emp_it_declaration_other_income['1']['particular'] ?>"   class="form-control" id="particular_oi_1"> </th>
+                           <th scope="col" style="width: 15%;"><input aria-label="<?php echo __('Amount[]'); ?>" type="text" name="amount[]" value="<?php echo $emp_it_declaration_other_income['1']['amount'] ?>" class="form-control text-right" id="amount_oi_1"> </th>
                         </tr>
                          <tr>
                            <th scope="col" class="" style="width: 2%;">3</th>
 
-                           <th scope="col" style="width: 70%;"><input aria-label="Othername[]" type="text" name="othername[]" value="<?php echo $emp_it_declaration_other_income['2']['particular'] ?>"  class="form-control" id="particular_oi_2"> </th>
-                           <th scope="col" style="width: 15%;"><input aria-label="Amount[]" type="text" name="amount[]" value="<?php echo $emp_it_declaration_other_income['2']['amount'] ?>" class="form-control text-right" id="amount_oi_2"> </th>
+                           <th scope="col" style="width: 70%;"><input aria-label="<?php echo __('Othername[]'); ?>" type="text" name="othername[]" value="<?php echo $emp_it_declaration_other_income['2']['particular'] ?>"  class="form-control" id="particular_oi_2"> </th>
+                           <th scope="col" style="width: 15%;"><input aria-label="<?php echo __('Amount[]'); ?>" type="text" name="amount[]" value="<?php echo $emp_it_declaration_other_income['2']['amount'] ?>" class="form-control text-right" id="amount_oi_2"> </th>
                         </tr>
                         <tr>
                            <th scope="col" class="" style="width: 2%;">4</th>
 
-                           <th scope="col" style="width: 70%;"><input aria-label="Othername[]" type="text" name="othername[]" value="<?php echo $emp_it_declaration_other_income['3']['particular'] ?>"  class="form-control" id="particular_oi_3"> </th>
-                           <th scope="col" style="width: 15%;"><input aria-label="Amount[]" type="text" name="amount[]" value="<?php echo $emp_it_declaration_other_income['3']['amount'] ?>" class="form-control text-right" id="amount_oi_3"> </th>
+                           <th scope="col" style="width: 70%;"><input aria-label="<?php echo __('Othername[]'); ?>" type="text" name="othername[]" value="<?php echo $emp_it_declaration_other_income['3']['particular'] ?>"  class="form-control" id="particular_oi_3"> </th>
+                           <th scope="col" style="width: 15%;"><input aria-label="<?php echo __('Amount[]'); ?>" type="text" name="amount[]" value="<?php echo $emp_it_declaration_other_income['3']['amount'] ?>" class="form-control text-right" id="amount_oi_3"> </th>
                         </tr>
                         <tr>
                            <th scope="col" class="" style="width: 2%;">5</th>
 
-                           <th scope="col" style="width: 70%;"><input aria-label="Othername[]" type="text" name="othername[]" value="<?php echo $emp_it_declaration_other_income['4']['particular'] ?>" class="form-control" id="particular_oi_4"> </th>
-                           <th scope="col" style="width: 15%;"><input aria-label="Amount[]" type="text" name="amount[]" value="<?php echo $emp_it_declaration_other_income['4']['amount'] ?>" class="form-control text-right" id="amount_oi_4"> </th>
+                           <th scope="col" style="width: 70%;"><input aria-label="<?php echo __('Othername[]'); ?>" type="text" name="othername[]" value="<?php echo $emp_it_declaration_other_income['4']['particular'] ?>" class="form-control" id="particular_oi_4"> </th>
+                           <th scope="col" style="width: 15%;"><input aria-label="<?php echo __('Amount[]'); ?>" type="text" name="amount[]" value="<?php echo $emp_it_declaration_other_income['4']['amount'] ?>" class="form-control text-right" id="amount_oi_4"> </th>
                         </tr>
 
 
@@ -441,7 +441,7 @@ fileUplodingUi($file_array);
                     <input type="hidden" name="company_id" value="<?php echo $_SESSION['company_id']; ?>">
                      <div class="form-group  col-lg-12">
 
-                               <button type="submit" name="AddotherDeclaration" class="btn btn-primary waves-effect waves-light float-right" value="Submit"/>Submit</button>
+                               <button type="submit" name="AddotherDeclaration" class="btn btn-primary waves-effect waves-light float-right" value="Submit"/><?php echo __('Submit'); ?></button>
                                </div>
                              </form>
 

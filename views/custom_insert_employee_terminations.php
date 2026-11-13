@@ -197,8 +197,8 @@ function startWorkflow(rid,transaction_table){
         title: '<?php echo $_SESSION['error_message']['1011'];?>',
         showDenyButton: true,
         showCancelButton: false,
-        confirmButtonText: 'Yes',
-        denyButtonText: `No`,
+        confirmButtonText: '<?= __('Yes') ?>',
+        denyButtonText: `<?= __('No') ?>`,
     }).then((result) => {
         if (result.isConfirmed) {
             jQuery.ajax({
@@ -212,7 +212,7 @@ function startWorkflow(rid,transaction_table){
                     if(data1.error == "404"){
                         Swal.fire({
                             icon: 'error',
-                            title: 'Oops...',
+                            title: '<?= __('Oops...') ?>',
                             text: '<?php echo $_SESSION['error_message']['1012'];?>'
                         })
                     }else{
@@ -246,15 +246,15 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
      $(".reasonforleaving").text("");
      $(".submiteddateerrer").text("");
      if(separation_mode ==""){
-         $(".Separationmode").text("Please Select Separation Mode");
+         $(".Separationmode").text("<?= __('Please Select Separation Mode') ?>");
          return false;
      }
      if(reason_for_leaving ==""){
-         $(".reasonforleaving").text("Please Select Reason For Leaving");
+         $(".reasonforleaving").text("<?= __('Please Select Reason For Leaving') ?>");
          return false;
      }
      if(submiteddate ==""){
-         $(".submiteddateerrer").text("Please Select Submited Date");
+         $(".submiteddateerrer").text("<?= __('Please Select Submited Date') ?>");
          return false;
      }
      $("#"+id).submit();
@@ -276,12 +276,12 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
  function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
      swal({
          title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-         text: "Please note the status of the document will change to "+new_status_name,
+         text: "<?= __('Please note the status of the document will change to') ?> "+new_status_name,
          type: "info",
          showCancelButton: true,
          confirmButtonClass: "btn-danger",
-         confirmButtonText: "Yes",
-         cancelButtonText: "No",
+         confirmButtonText: "<?= __('Yes') ?>",
+         cancelButtonText: "<?= __('No') ?>",
          closeOnConfirm: false
      },
      function(){
@@ -308,12 +308,12 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: "<?= __('Oops...') ?>",
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: "<?= __('Ok') ?>",
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -327,7 +327,7 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
 <?php if($error_message !=''){ ?>
     <div class="alert alert-danger background-danger alert-dismissible">
         <strong><?php echo $error_message; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= __('Close') ?>"></button>
     </div>
 <?php } ?>
 <div class="card">
@@ -337,12 +337,12 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
         echo $workflowsteps['current_status_ribbon'];
     }?>
     <div class="card-header table-card-header">
-        <h5>Separation <?php  if($rowid!=""){ ?> <span class="form-label label label-primary"> <i class="fa fa-user"></i> <?php echo ucwords($empres['display_name']); ?></span> <?php
+        <h5><?= __('Separation') ?> <?php  if($rowid!=""){ ?> <span class="form-label label label-primary"> <i class="fa fa-user"></i> <?php echo ucwords($empres['display_name']); ?></span> <?php
 } ?></h5>
         <div class="card-header-right table-card-header ">
             <?php echo $workflowsteps['workflow_btn'];?>
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                <i class="icofont icofont-reply"></i> Back</a></div>
+                <i class="icofont icofont-reply"></i> <?= __('Back') ?></a></div>
             </div>
             <?php
             if($emp_termination_data['current_status'] !=""){
@@ -359,12 +359,12 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                         <div class="col-lg-7 col-md-12 col-sm-12 col-12" <?php echo $disbalediv; ?>>
                             <form class="kt-form" id="employee_submited" method="post" action="index.php?option=COM_INSERT_EMPLOYEE_TERMINATIONS" >
                                 <div class="form-group row">
-                                    <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label">Separation Mode<span class="text-danger">*</span></span>
+                                    <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label"><?= __('Separation Mode') ?><span class="text-danger">*</span></span>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                                        <select aria-label="Select option" class="form-select js-example-basic-single" <?php echo $emp_display_select; ?> id="kt_select2_41"  name="termination_type" >
-                                            <option value="">Select Any One</option>
+                                        <select aria-label="<?php echo __('Select option'); ?>" class="form-select js-example-basic-single" <?php echo $emp_display_select; ?> id="kt_select2_41"  name="termination_type" >
+                                            <option value=""><?= __('Select Any One') ?></option>
                                             <?php foreach($separation_mode as $modekey=>$modevalue) { if($modekey!=""){ ?>
-                                                <option value="<?php echo $modekey;?>" <?php echo $emp_termination_data['termination_type']==$modekey ? 'selected':'';?> ><?php echo $modevalue; ?></option>
+                                                <option value="<?php echo $modekey;?>" <?php echo $emp_termination_data['termination_type']==$modekey ? 'selected':'';?> ><?php echo __($modevalue ?? ''); ?></option>
                                             <?php } ?>
                                             <?php } ?>
                                         </select>
@@ -372,90 +372,90 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label">Submit On</span>
+                                    <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label"><?= __('Submit On') ?></span>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class=" date">
-                                            <input aria-label="Input field" type="text" class="form-control datepicker"  onchange="getleavingdate()" <?php echo $emp_display; ?> name="effective_date" id="kt_datepicker_4_1" value="<?php echo fromDate($emp_termination_data['effective_date']);?>" />
+                                            <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control datepicker"  onchange="getleavingdate()" <?php echo $emp_display; ?> name="effective_date" id="kt_datepicker_4_1" value="<?php echo fromDate($emp_termination_data['effective_date']);?>" />
                                             <span class="text-danger submiteddateerrer"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label">Please select if notice period is required</span>
+                                    <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label"><?= __('Please select if notice period is required') ?></span>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-12 col-form-label">
                                         <div class="checkbox-zoom zoom-primary mt-1">
                                             <label class="checkbox checkbox-outline checkbox-primary">
-                                                <input aria-label="Checkbox" type="checkbox" <?php echo $emp_display_select; ?> id="notice_period_required" name="notice_period_required" onclick="getleavingdate()" <?php echo $emp_termination_data['notice_period_required']=='1'?'checked':'';?> onkeydown="" />    <span class="cr">
+                                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php echo $emp_display_select; ?> id="notice_period_required" name="notice_period_required" onclick="getleavingdate()" <?php echo $emp_termination_data['notice_period_required']=='1'?'checked':'';?> onkeydown="" />    <span class="cr">
                                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                 </span>
                                                 <span></span>
-                                                Notice Required
+                                                <?= __('Notice Required') ?>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label">Reason For Leaving<span class="text-danger">*</span></span>
+                                    <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label"><?= __('Reason For Leaving') ?><span class="text-danger">*</span></span>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                                        <select aria-label="Select option" class="form-select js-example-basic-single " <?php echo $emp_display_select; ?> id="kt_select2_42"  name="termination_reason" >
-                                            <option value="">Select Any One</option>
+                                        <select aria-label="<?php echo __('Select option'); ?>" class="form-select js-example-basic-single " <?php echo $emp_display_select; ?> id="kt_select2_42"  name="termination_reason" >
+                                            <option value=""><?= __('Select Any One') ?></option>
                                             <?php foreach($separation_mode as $modekey=>$modevalue) { ?>
-                                                <option value="<?php echo $modekey;?>" <?php echo $emp_termination_data['termination_reason']==$modekey ? 'selected':'';?> ><?php echo $modevalue; ?></option>
+                                                <option value="<?php echo $modekey;?>" <?php echo $emp_termination_data['termination_reason']==$modekey ? 'selected':'';?> ><?php echo __($modevalue ?? ''); ?></option>
                                             <?php } ?>
                                         </select>
                                         <span class="text-danger reasonforleaving"></span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label">Notice Period</span>
+                                    <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label"><?= __('Notice Period') ?></span>
                                     <?php $terminations['notice_period'] = $terminations['notice_period']!=""? $terminations['notice_period']:NO_OF_NOTICE_DAYS; ?>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="input-group input-group-button ">
-                                            <input aria-label="Input field" type="text" <?php echo $emp_display; ?> class="form-control form-control-sm width1" id="noticeperiod" onchange="getleavingdate()" aria-describedby="basic-addon2" name="noticeperiod_days" value="<?php echo $terminations['notice_period'];?>"  readonly>
+                                            <input aria-label="<?php echo __('Input field'); ?>" type="text" <?php echo $emp_display; ?> class="form-control form-control-sm width1" id="noticeperiod" onchange="getleavingdate()" aria-describedby="basic-addon2" name="noticeperiod_days" value="<?php echo $terminations['notice_period'];?>"  readonly>
                                             <span class="input-group-text addon-style">
-                                                <span class="">Days</span>
+                                                <span class=""><?= __('Days') ?></span>
                                             </span>
                                         </div>
                                     </div>                            </div>
                                     <div class="form-group row">
-                                        <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label">ShortFall in Notice Period</span>
+                                        <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label"><?= __('ShortFall in Notice Period') ?></span>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                             <div class="input-group input-group-button ">
-                                                <input aria-label="Input field"  type="text" <?php echo $emp_display; ?> class="form-control form-control-sm width1" id="shortfall"  onchange="getleavingdate()" aria-describedby="basic-addon2" name="shortfalldays_in_noticeperiod" value="<?php echo $rowid!=''? $emp_termination_data["shortfalldays_in_noticeperiod"] : '0';?>" >
+                                                <input aria-label="<?php echo __('Input field'); ?>"  type="text" <?php echo $emp_display; ?> class="form-control form-control-sm width1" id="shortfall"  onchange="getleavingdate()" aria-describedby="basic-addon2" name="shortfalldays_in_noticeperiod" value="<?php echo $rowid!=''? $emp_termination_data["shortfalldays_in_noticeperiod"] : '0';?>" >
                                                 <span class="input-group-text addon-style">
-                                                    <span class="">Days</span>
+                                                    <span class=""><?= __('Days') ?></span>
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label">Tentative Leaving Date</span>
+                                        <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label"><?= __('Tentative Leaving Date') ?></span>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                             <div class="date">
-                                                <input aria-label="Empleavingdate" type="text"  id="empleavingdate" readonly class="form-control datepicker" value="<?php echo fromDate($emp_termination_data['employee_leaving_date']); ?>"  name="employee_leaving_date" />
+                                                <input aria-label="<?php echo __('Empleavingdate'); ?>" type="text"  id="empleavingdate" readonly class="form-control datepicker" value="<?php echo fromDate($emp_termination_data['employee_leaving_date']); ?>"  name="employee_leaving_date" />
 
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label">Please select if exclude from final settlement</span>
+                                        <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label"><?= __('Please select if exclude from final settlement') ?></span>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-12 col-form-label">
                                             <div class="checkbox-zoom zoom-primary mt-1">
                                                 <label class="checkbox checkbox-outline checkbox-primary">
-                                                    <input aria-label="Checkbox" type="checkbox" <?php echo $emp_display_select; ?>  name="exclude_final_settlement" <?php echo $emp_termination_data['exclude_final_settlement']=='1'?'checked':'';?>/>
+                                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php echo $emp_display_select; ?>  name="exclude_final_settlement" <?php echo $emp_termination_data['exclude_final_settlement']=='1'?'checked':'';?>/>
                                                     <span class="cr">
                                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                     </span>
                                                     <span></span>
-                                                    Exclude from Final Settlement
+                                                    <?= __('Exclude from Final Settlement') ?>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label">Remarks</span>
+                                        <span class="col-g-4 col-md-6 col-sm-6 col-12 col-form-label"><?= __('Remarks') ?></span>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <textarea aria-label="Text area" type="text" <?php echo $emp_display; ?> class="form-control" name="remarks_by_employee" ><?php echo $emp_termination_data['remarks_by_employee'];?></textarea>
+                                            <textarea aria-label="<?php echo __('Text area'); ?>" type="text" <?php echo $emp_display; ?> class="form-control" name="remarks_by_employee" ><?php echo $emp_termination_data['remarks_by_employee'];?></textarea>
                                         </div>
                                     </div>
                                     <?php $disable = "";
@@ -471,7 +471,7 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                                 <span class="text-danger f-12"><?php echo $_SESSION['error_message']['9001']; ?></span></br>
                                             <?php } ?>
                                             <input type="hidden" name="submitform" value="exit">
-                                            <button type="button" onclick="formsubmit('employee_submited')" id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  <?php echo $disable; ?>  name="submitform" value="exit" ><i class="la la-check"></i>Save</button>
+                                            <button type="button" onclick="formsubmit('employee_submited')" id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  <?php echo $disable; ?>  name="submitform" value="exit" ><i class="la la-check"></i><?= __('Save') ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -489,44 +489,44 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                 <form class="kt-form" id="kt_form" method="post" action="" >
                                     <div class="card">
                                         <div class="card-header table-card-header">
-                                            <h5>Manager Review </h5>
+                                            <h5><?= __('Manager Review') ?></h5>
                                         </div>
                                         <div class="card-body" <?php echo $disbalediv; ?>>
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                    <span class="form-label">Manager Review Date</span>
-                                                    <input aria-label="Input field" type="text" class="form-control datepicker" <?php echo $manager_display; ?>  value="<?php echo fromDate($emp_termination_data['manager_review_date']);?>" name="manager_review_date" />
+                                                    <span class="form-label"><?= __('Manager Review Date') ?></span>
+                                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control datepicker" <?php echo $manager_display; ?>  value="<?php echo fromDate($emp_termination_data['manager_review_date']);?>" name="manager_review_date" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <span class="form-label">Leaving Date</span>
-                                                    <input aria-label="Input field" type="text" class="form-control datepicker"  value="<?php echo fromDate($emp_termination_data['releive_date']); ?>"  name="releive_date" />
+                                                    <span class="form-label"><?= __('Leaving Date') ?></span>
+                                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control datepicker"  value="<?php echo fromDate($emp_termination_data['releive_date']); ?>"  name="releive_date" />
                                                 </div>
                                                 <div class="form-group row">
-                                                    <span class="col-12 form-label">Notes</span>
+                                                    <span class="col-12 form-label"><?= __('Notes') ?></span>
                                                     <div class="col-12">
-                                                        <textarea aria-label="Text area" type="text" class="form-control" <?php echo $manager_display; ?> name="remark_by_manager" ><?php echo $emp_termination_data['remark_by_manager'];?></textarea>
+                                                        <textarea aria-label="<?php echo __('Text area'); ?>" type="text" class="form-control" <?php echo $manager_display; ?> name="remark_by_manager" ><?php echo $emp_termination_data['remark_by_manager'];?></textarea>
                                                     </div>
                                                 </div>
                                                 <?php if(count((array)$empassets)>0){ ?>
                                                     <div class="form-group row">
-                                                        <span class="col-4 col-form-label font-weight-bolder h6">Assets</span>
+                                                        <span class="col-4 col-form-label font-weight-bolder h6"><?= __('Assets') ?></span>
                                                         <div class="col-7">
                                                         </div>
                                                     </div>
                                                     <div class="">
                                                         <table class="table table-separate table-head-custom table-checkable" id="kt_datatable1">
                                                             <tr>
-                                                                <th scope="col">SL No.</th>
-                                                                <th scope="col">Assets </th>
-                                                                <th scope="col">Status</th>
+                                                                <th scope="col"><?= __('SL No.') ?></th>
+                                                                <th scope="col"><?= __('Assets') ?></th>
+                                                                <th scope="col"><?= __('Status') ?></th>
                                                             </tr>
                                                         <?php
                                                         $assetstatus = array('0'=>'Allocated','1'=>'Accepted','2'=>'Rejected','3'=>'Return');
                                                         $k=1; foreach($empassets as $empasset){ ?>
                                                             <tr>
                                                                 <td><?php echo $k; ?></td>
-                                                                <td><?php echo $empasset['asset_description']; ?> </td>
-                                                                <td><?php echo $assetstatus[$empasset['current_status']]; ?></td>
+                                                                <td><?php echo __($empasset['asset_description'] ?? ''); ?> </td>
+                                                                <td><?php echo __($assetstatus[$empasset['current_status']] ?? ''); ?></td>
                                                             </tr>
                                                             <?php $k++;
 } ?>
@@ -535,7 +535,7 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                                     <?php } ?>
                                                     <?php if(count((array)$pstdata)>0){ ?>
                                                         <div class="form-group row">
-                                                        <span class="col-4 col-form-label font-weight-bolder h6">Process Tasks</span>
+                                                        <span class="col-4 col-form-label font-weight-bolder h6"><?= __('Process Tasks') ?></span>
                                                         <div class="col-7">
                                                         </div>
                                                     </div>
@@ -543,9 +543,9 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                                             <?php foreach($pstdata as $pst){ ?>
                                                                 <div class="checkbox-inline col-lg-10">
                                                                     <label class="checkbox checkbox-outline checkbox-primary">
-                                                                        <input aria-label="Checkbox" type="checkbox" disabled name=""  value="<?php echo $term;?>" />
+                                                                        <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" disabled name=""  value="<?php echo $term;?>" />
                                                                         <span></span>
-                                                                        <?php echo $pst['task_name']; ?>
+                                                                        <?php echo __($pst['task_name'] ?? ''); ?>
                                                                     </label>
                                                                 </div>
                                                             <?php } ?>
@@ -556,7 +556,7 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"
-                                                            <?php echo  $manager_display_select; ?>  name="submitmanagerform" value="exit"  <?php echo $emp_termination_data['current_status'] !=ST_APPROVED1?"disabled":""; ?> ><i class="la la-check"></i>Save</button>
+                                                            <?php echo  $manager_display_select; ?>  name="submitmanagerform" value="exit"  <?php echo $emp_termination_data['current_status'] !=ST_APPROVED1?"disabled":""; ?> ><i class="la la-check"></i><?= __('Save') ?></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -568,26 +568,26 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                 <?php if($_SESSION['userid']!=$hr_user_id) { ?>
 
                                         <div class="card-header table-card-header">
-                                            <h5>Exit Interview </h5>
+                                            <h5><?= __('Exit Interview') ?></h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
-                                                <span class="col-lg-4 col-form-label">Exit Interview </span>
+                                                <span class="col-lg-4 col-form-label"><?= __('Exit Interview') ?></span>
                                                 <div class="col-lg-7">
-                                                    <button class="btn btn-warning btn-shadow-hover font-weight-bold mr-2" type="button" onclick="interquestion(<?php echo $emp_termination_data['emp_id']; ?>)">Questions</button>
+                                                    <button class="btn btn-warning btn-shadow-hover font-weight-bold mr-2" type="button" onclick="interquestion(<?php echo $emp_termination_data['emp_id']; ?>)"><?= __('Questions') ?></button>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                            <span class="col-4 col-form-label">Remarks</span>
+                                            <span class="col-4 col-form-label"><?= __('Remarks') ?></span>
                                             <div class="col-7">
-                                                <textarea aria-label="Remarks By Admin" type="text" class="form-control" name="remarks_by_admin" ><?php echo $emp_termination_data['remarks_by_admin'];?></textarea>
+                                                <textarea aria-label="<?php echo __('Remarks By Admin'); ?>" type="text" class="form-control" name="remarks_by_admin" ><?php echo $emp_termination_data['remarks_by_admin'];?></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <span class="col-4 col-form-label">Settle on</span>
+                                            <span class="col-4 col-form-label"><?= __('Settle on') ?></span>
                                             <div class="col-7">
                                                 <div class=" date">
-                                                    <input aria-label="Input field" type="text" class="form-control datepicker"  value="<?php echo dateFormate($emp_termination_data['settle_on']);?>"  name="settle_on" />
+                                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control datepicker"  value="<?php echo dateFormate($emp_termination_data['settle_on']);?>"  name="settle_on" />
                                                 </div>
                                             </div>
                                         </div>
@@ -599,11 +599,11 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
 
                                                     <div class="checkbox-fade fade-in-primary">
                                                         <label class="form-label">
-                                                            <input aria-label="Relieve Type[]" type="checkbox" name="relieve_type[]" <?php echo in_array($term,(array)json_decode($emp_termination_data['relieve_type'],1)) ? 'checked':'';?> value="<?php echo $term;?>" />
+                                                            <input aria-label="<?php echo __('Relieve Type[]'); ?>" type="checkbox" name="relieve_type[]" <?php echo in_array($term,(array)json_decode($emp_termination_data['relieve_type'],1)) ? 'checked':'';?> value="<?php echo $term;?>" />
                                                             <span class="cr">
                                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                             </span>
-                                                            <span> <?php echo $termvalue; ?></span>
+                                                            <span> <?php echo __($termvalue ?? ''); ?></span>
                                                         </label>
                                                     </div>
                                                 <?php } ?>
@@ -613,7 +613,7 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                             <div class="row">
                                                 <input type="hidden" name="emp_id" value="<?php echo $emp_termination_data['emp_id']; ?>">
                                                 <div class="col-lg-12">
-                                                    <button id="kt_login_signin_submit_3" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="exitform" value="exit" <?php echo $emp_termination_data['settle_on']!=""?"disabled":""; ?> ><i class="la la-check"></i>Save</button>
+                                                    <button id="kt_login_signin_submit_3" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="exitform" value="exit" <?php echo $emp_termination_data['settle_on']!=""?"disabled":""; ?> ><i class="la la-check"></i><?= __('Save') ?></button>
                                                 </div>
                                             </div>
                                         </div>

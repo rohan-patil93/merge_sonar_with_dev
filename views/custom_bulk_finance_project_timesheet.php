@@ -423,7 +423,7 @@ $erp = json_decode($erp_data,1);
 			<div class="col-lg-12">
 				<div class="card">					
 					<div class="card-header table-card-header">
-						<h5><?php echo "Bulk Time Sheet Approval";  ?></h5> <i class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Take A Tour"></i> 
+						<h5><?= __("Bulk Time Sheet Approval") ?></h5> <i class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Take A Tour"></i> 
 						<div class="card-header-right table-card-header ">
 
 							<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
@@ -483,7 +483,7 @@ $erp = json_decode($erp_data,1);
 													<i class="fa fa-rupee text-c-blue f-30"></i>
 												</div>
 												<div class="col p-l-0">
-													<h6 class="m-b-5 f-14">Current Vs Previous</h6>
+													<h6 class="m-b-5 f-14"><?= __("Current Vs Previous") ?></h6>
 												<!--	<h6 class="m-b-0 text-c-blue"><?php echo customeummarmonyformate($ttcount/100000); ?> L Vs <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L</h6> -->
 												<h6 class="m-b-0 text-c-blue"><a onclick="cvppopup('Current',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'apv_list')" >
 				<?php echo customeummarmonyformate($ttcount/100000); ?> L
@@ -633,9 +633,9 @@ $erp = json_decode($erp_data,1);
 
 								<div class="col-lg-4">
 									<div class="d-flex align-items-center">
-										<label class="mr-3 mb-0 d-none d-md-block">Manger:&nbsp;</label>
+										<label class="mr-3 mb-0 d-none d-md-block"><?= __("Manger:") ?>&nbsp;</label>
 										<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_status"  name="reports_to">
-											<option value="0">All</option>
+											<option value="0"><?= __("All") ?></option>
 
 											<?php foreach($reportto_list as $rkey=>$rlist){  if($rlist!=""){  ?>
 												<option <?php echo ($post_reports==$rkey) ? 'selected' :""; ?> value="<?php echo $rkey; ?>"
@@ -649,9 +649,9 @@ $erp = json_decode($erp_data,1);
 								</div>
 								<div class="col-lg-4">
 									<div class="d-flex align-items-center">
-										<label class="mr-3 mb-0 d-none d-md-block">Vendor:&nbsp;</label>
+										<label class="mr-3 mb-0 d-none d-md-block"><?= __("Vendor:") ?>&nbsp;</label>
 										<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_type" name="vendor">
-											<option value="0">All</option>
+											<option value="0"><?= __("All") ?></option>
 											<?php foreach($vendor_list as $vkey=>$vlist){ ?>
 												<option  <?php echo ($post_vendor==$vkey) ? 'selected' :""; ?> value="<?php echo $vkey; ?>"><?php echo $vlist; ?></option>
 											<?php } ?>
@@ -659,7 +659,7 @@ $erp = json_decode($erp_data,1);
 									</div>
 								</div>
 								<div class="col-lg-2  p-t-10">
-									<button class="btn btn-primary px-6 font-weight-bold" name="search" value="search">Search</button>
+									<button class="btn btn-primary px-6 font-weight-bold" name="search" value="search"><?= __("Search") ?></button>
 								</div>
 							</form>
 						</div>
@@ -711,15 +711,15 @@ $erp = json_decode($erp_data,1);
 										<thead>
 											<tr>
 												<th scope="col" class="p-0 w-40px"> </th>
-												<th scope="col" class="p-0 min-w-200px">Employee Details</th>
-												<th scope="col" class="p-0 min-w-200px">Hiring Manger</th>
-												<th scope="col" class="p-0 min-w-200px">Vendor</th>
-												<th scope="col" class=" p-0 min-w-200px"><?php echo headerlables(array('name'=>'Rate Card Value')); ?></th>
-												<th scope="col" class=" p-0 min-w-200px"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
+												<th scope="col" class="p-0 min-w-200px"><?= __("Employee Details") ?></th>
+												<th scope="col" class="p-0 min-w-200px"><?= __("Hiring Manger") ?></th>
+												<th scope="col" class="p-0 min-w-200px"><?= __("Vendor") ?></th>
+												<th scope="col" class=" p-0 min-w-200px"><?php echo headerlables(array('name'=>__('Rate Card Value'))); ?></th>
+												<th scope="col" class=" p-0 min-w-200px"><?php echo headerlables(array('name'=>__('PO Value'))); ?></th>
 												<!-- <th scope="col" class="p-0 min-w-100px text-right">Billable Amount</th> -->
-												<th scope="col" class="p-0 min-w-125px text-center">Billable Hours</th>
+												<th scope="col" class="p-0 min-w-125px text-center"><?= __("Billable Hours") ?></th>
 											<!-- 	<th scope="col" class="p-0 min-w-125px text-right">Nonbillable Hours</th> -->
-												<th scope="col" class="p-0 min-w-110px text-center">Status</th>
+												<th scope="col" class="p-0 min-w-110px text-center"><?= __("Status") ?></th>
 												
 												<th scope="col" class=" min-w-50px text-center">
 													<div class="checkbox-fade fade-in-primary" name="approval_all_check_box">
@@ -908,14 +908,14 @@ $llablecolor = lableandleave($k);
 										<thead>
 											<tr>
 												<th scope="col" class="p-0 w-40px"> </th>
-												<th scope="col" class="p-0 min-w-200px">Employee Details</th>
-												<th scope="col" class="p-0 min-w-200px">Hiring Manger</th>
-												<th scope="col" class="p-0 min-w-200px">Vendor</th>
-													<th scope="col" class=" p-0 min-w-200px"><?php echo headerlables(array('name'=>'Rate Card Value')); ?></th>
-												<th scope="col" class=" p-0 min-w-200px"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
-												<th scope="col" class="p-0 min-w-125px text-center">Billable Hours</th>
+												<th scope="col" class="p-0 min-w-200px"><?= __("Employee Details") ?></th>
+												<th scope="col" class="p-0 min-w-200px"><?= __("Hiring Manger") ?></th>
+												<th scope="col" class="p-0 min-w-200px"><?= __("Vendor") ?></th>
+													<th scope="col" class=" p-0 min-w-200px"><?php echo headerlables(array('name'=>__('Rate Card Value'))); ?></th>
+												<th scope="col" class=" p-0 min-w-200px"><?php echo headerlables(array('name'=>__('PO Value'))); ?></th>
+												<th scope="col" class="p-0 min-w-125px text-center"><?= __("Billable Hours") ?></th>
 											<!-- 	<th scope="col" class="p-0 min-w-125px text-right">Nonbillable Hours</th> -->
-												<th scope="col" class="p-0 min-w-110px text-center">Status</th>
+												<th scope="col" class="p-0 min-w-110px text-center"><?= __("Status") ?></th>
 												
 												<th scope="col" class=" min-w-50px text-center">
 														<div class="checkbox-fade fade-in-primary" name="approval_pending_all_check_box">
@@ -1215,7 +1215,7 @@ $llablecolor = lableandleave($k);
 					<!-- <div class="col-lg-12 col-md-12">
 						<div class="card o-hidden">
 							<div class="card-header">
-								<h5>Last 6 Months Utilization</h5>
+								<h5><?= __("Last 6 Months Utilization") ?></h5>
 								<span><?php echo customeummarmonyformate($ltotal); ?></span>
 							</div>
 							<div class="card-block">

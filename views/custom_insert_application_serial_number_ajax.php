@@ -135,8 +135,8 @@ function addMoreAdditionalSettings(){
 					htmlview +=`<div class="col-lg-3 " >
 					<input type="hidden" class="form-control columns_sequince"  value="`+seqrow+`" >
 						<select class ="form-control form-control-lg form-select js-example-basic-single " name="additional_settings[display_type][]" id="display_type_`+seqrow+`" onchange="selectDisplayType('`+seqrow+`')"> 
-							<option value="STATIC" <?php echo $asettings['display_type'] =="STATIC"?"selected":""; ?>>Static</option>
-							<option value="DYNAMIC" <?php echo $asettings['display_type'] =="DYNAMIC"?"selected":""; ?>>Dynamic</option>
+							<option value="STATIC" <?php echo $asettings['display_type'] =="STATIC"?"selected":""; ?>><?= __('Static') ?></option>
+							<option value="DYNAMIC" <?php echo $asettings['display_type'] =="DYNAMIC"?"selected":""; ?>><?= __('Dynamic') ?></option>
 				        </select>
 				    </div>`;
 				    
@@ -149,10 +149,10 @@ function addMoreAdditionalSettings(){
 					htmlview +=`<div class="form-group col-lg-3 w-full" id="dynamic_value_div_`+seqrow+`" style="display: none;" >
 					<span class="text-danger empty_error" id="error_dynamic_value_`+seqrow+`"></span>
 						<select class ="form-control form-control-lg form-select js-example-basic-single" id="dynamic_value_`+seqrow+`" name="additional_settings[dynamic_value][]" onchange="serialNumberPreview()"> 
-							<option value="PARTY_NAME" >Party</option>
-							<option value="TRANSACTION_TYPE" >Document Type</option>
-							<option value="TRANSACTION_LOCATION" >Location</option>
-							<option value="TRANSACTION_COST_CENTER">Cost Center</option>
+							<option value="PARTY_NAME" ><?= __('Party') ?></option>
+							<option value="TRANSACTION_TYPE" ><?= __('Document Type') ?></option>
+							<option value="TRANSACTION_LOCATION" ><?= __('Location') ?></option>
+							<option value="TRANSACTION_COST_CENTER"><?= __('Cost Center') ?></option>
 						</select>
 					</div>`;
 					htmlview +=`<div class="form-group col-lg-3 ">
@@ -184,8 +184,8 @@ function addMoreAdditionalSettings(){
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th scope="col">Finance Year</th>
-						<th scope="col">Format</th>
+						<th scope="col"><?= __('Finance Year') ?></th>
+						<th scope="col"><?= __('Format') ?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -206,7 +206,7 @@ function addMoreAdditionalSettings(){
 <div class="col-lg-12">
 	<div class="card">
 		<div class="card-header">
-	        <h5><?php echo ucwords(str_replace("_"," ",($process_name))); ?></h5>
+	        <h5><?= __(ucwords(str_replace("_"," ",($process_name)))) ?></h5>
 	        <div class="card-header-right"></div>
 	    </div>
 		<div class="card-body">
@@ -220,12 +220,12 @@ function addMoreAdditionalSettings(){
 					</div>
 
 					<div class="form-group col-lg-3">
-						<label for="doc_no_length" class="form-label d-block">Number Length</label>
+						<label for="doc_no_length" class="form-label d-block"><?= __('Number Length') ?></label>
 						<span class="text-danger empty_error" id="error_doc_no_length"></span>
 						<input type="number" class="form-control" name="doc_no_length" id="doc_no_length" value="<?php echo $asnres['doc_no_length']!=""?$asnres['doc_no_length']:3; ?>" onblur="serialNumberPreview()">
 					</div>
 					<div class="form-group col-lg-3">
-						<label for="separator_symbols" class="form-label d-block">separator symbols</label>
+						<label for="separator_symbols" class="form-label d-block"><?= __('separator symbols') ?></label>
 						<select class ="form-control form-control-lg form-select js-example-basic-single" id="separator_symbols" name="separator_symbols"  onchange="serialNumberPreview()"> 
 							<option value="-" <?php echo $asnres['separator_symbols'] =="-"?"selected":""; ?>>-</option>
 							<option value="/" <?php echo $asnres['separator_symbols'] =="/"?"selected":""; ?>>/</option>
@@ -234,7 +234,7 @@ function addMoreAdditionalSettings(){
 					</div>
 
 					<div class="form-group col-lg-3">
-						<label for="serial_number" class="form-label d-block">Start Serial Number</label>
+						<label for="serial_number" class="form-label d-block"><?= __('Start Serial Number') ?></label>
 
 						<input type="text" class="form-control  mt-2" name="serial_number" id="serial_number"  value="<?php echo $asnres['serial_number']!=""?$asnres['serial_number']:1; ?>" onblur="serialNumberPreview()" readonly>
 
@@ -250,7 +250,7 @@ function addMoreAdditionalSettings(){
 
 					</div>
 					<div class="form-group col-lg-3">
-						<label for="financial_year_check" class="form-label d-block">Financial Year</label>
+						<label for="financial_year_check" class="form-label d-block"><?= __('Financial Year') ?></label>
 						<input type="checkbox" class="js-switch-finanaceyear" value="Y" name="financial_year_check" id="financial_year_check"  onchange="financeYearonChange()" <?php echo ($asnres['financial_year_check'] =="" || $asnres['financial_year_check'] =="Y")?"checked":""; ?> readonly>
 
 						<div class="form-group mt-2 financial_year_check_css <?php echo $asnres['financial_year_check'] =="N"?"event_disabled":""; ?>">
@@ -268,18 +268,18 @@ function addMoreAdditionalSettings(){
 				</div>
 				<div class="row">
 					<div class="form-group col-lg-3">
-						<label for="reset_type" class="form-label d-block">Reset Serial Number Type</label>
+						<label for="reset_type" class="form-label d-block"><?= __('Reset Serial Number Type') ?></label>
 						<select id="reset_type" class ="form-control form-control-lg form-select js-example-basic-single" name="reset_type"  > 
-							<option value="MT" <?php echo $asnres['reset_type'] =="MT"?"selected":""; ?>>Monthly Reset</option>
-							<option value="YR" <?php echo $asnres['reset_type'] =="YR"?"selected":""; ?>>Yearly Reset</option>
-							<option value="LT" <?php echo $asnres['reset_type'] =="LT"?"selected":""; ?>>Life Time Same Serial Number</option>
+							<option value="MT" <?php echo $asnres['reset_type'] =="MT"?"selected":""; ?>><?= __('Monthly Reset') ?></option>
+							<option value="YR" <?php echo $asnres['reset_type'] =="YR"?"selected":""; ?>><?= __('Yearly Reset') ?></option>
+							<option value="LT" <?php echo $asnres['reset_type'] =="LT"?"selected":""; ?>><?= __('Life Time Same Serial Number') ?></option>
 						</select>
 					</div>
 				</div>
 					
 				<div class="card">
 					<div class="card-header">
-				        <h5>Additional Settings</h5>
+				        <h5><?= __('Additional Settings') ?></h5>
 				        <div class="card-header-right"></div>
 				    </div>	
 				    <div class="card-body">
@@ -310,8 +310,8 @@ function addMoreAdditionalSettings(){
 								<div class="col-lg-3 " >
 									<input type="hidden" class="form-control columns_sequince"  value="<?php echo $seq; ?>" >
 									<select class ="form-control form-control-lg form-select js-example-basic-single " name="additional_settings[display_type][]" id="display_type_<?php echo $seq; ?>" onchange="selectDisplayType('<?php echo $seq; ?>')"> 
-										<option value="STATIC" <?php echo $asettings['display_type'] =="STATIC"?"selected":""; ?>>Static</option>
-										<option value="DYNAMIC" <?php echo $asettings['display_type'] =="DYNAMIC"?"selected":""; ?>>Dynamic</option>
+										<option value="STATIC" <?php echo $asettings['display_type'] =="STATIC"?"selected":""; ?>><?= __('Static') ?></option>
+										<option value="DYNAMIC" <?php echo $asettings['display_type'] =="DYNAMIC"?"selected":""; ?>><?= __('Dynamic') ?></option>
 							        </select>
 							    </div>
 							    
@@ -323,10 +323,10 @@ function addMoreAdditionalSettings(){
 								<div class="form-group col-lg-3 w-full" id="dynamic_value_div_<?php echo $seq; ?>" <?php if($asettings['display_type']=="STATIC" OR $asettings['display_type']==""){ ?>style="display: none;" <?php } ?>>
 									<span class="text-danger empty_error" id="error_dynamic_value_<?php echo $seq; ?>"></span>
 									<select class ="form-control form-control-lg form-select js-example-basic-single" id="dynamic_value_<?php echo $seq; ?>" name="additional_settings[dynamic_value][]" onchange="serialNumberPreview()"> 
-										<option value="PARTY_NAME" <?php echo $asettings['dynamic_value'] =="PARTY_NAME"?"selected":""; ?>>Party</option>
-										<option value="TRANSACTION_TYPE" <?php echo $asettings['dynamic_value'] =="TRANSACTION_TYPE"?"selected":""; ?>>Document Type</option>
-										<option value="TRANSACTION_LOCATION" <?php echo $asettings['dynamic_value'] =="TRANSACTION_LOCATION"?"selected":""; ?>>Location</option>
-										<option value="TRANSACTION_COST_CENTER" <?php echo $asettings['dynamic_value'] =="TRANSACTION_COST_CENTER"?"selected":""; ?>>Cost Center</option>
+										<option value="PARTY_NAME" <?php echo $asettings['dynamic_value'] =="PARTY_NAME"?"selected":""; ?>><?= __('Party') ?></option>
+										<option value="TRANSACTION_TYPE" <?php echo $asettings['dynamic_value'] =="TRANSACTION_TYPE"?"selected":""; ?>><?= __('Document Type') ?></option>
+										<option value="TRANSACTION_LOCATION" <?php echo $asettings['dynamic_value'] =="TRANSACTION_LOCATION"?"selected":""; ?>><?= __('Location') ?></option>
+										<option value="TRANSACTION_COST_CENTER" <?php echo $asettings['dynamic_value'] =="TRANSACTION_COST_CENTER"?"selected":""; ?>><?= __('Cost Center') ?></option>
 									</select>
 								</div>
 								<div class="form-group col-lg-3 ">
@@ -350,7 +350,7 @@ function addMoreAdditionalSettings(){
 				</div>
 						<div class="row">
 							<div class="col-lg-3 ">
-								<button class="btn btn-info" type="button" onclick="addMoreAdditionalSettings()"><i class="icofont icofont-plus icon-white "></i> Add More</button>
+								<button class="btn btn-info" type="button" onclick="addMoreAdditionalSettings()"><i class="icofont icofont-plus icon-white "></i> <?= __('Add More') ?></button>
 							</div>
 						</div>
 					</div>
@@ -361,15 +361,15 @@ function addMoreAdditionalSettings(){
 
 					<?php /** ?> 
 					<div class="form-group col-lg-3">
-						<label class="form-label d-block">Post Fix</label>
+						<label class="form-label d-block"><?= __('Post Fix') ?></label>
 						<div class="row">
 							<div class="col-lg-4">
 								<input type="checkbox" class="js-switch-finanaceyear" value="Y" name="post_fix_check" id="post_fix_check" onchange="postFixonChange()" <?php echo ($asnres['post_fix_check'] =="Y" || $asnres['post_fix_check'] =="")?"checked":""; ?>>
 							</div>
 							<div class="col-lg-8 post_fix_check_css <?php echo $asnres['post_fix_check'] =="N"?"event_disabled":""; ?>" >
 								<select class ="form-control form-control-lg form-select js-example-basic-single " name="post_fix_type" id="post_fix_type" onchange="postFixTypeChange()"> 
-									<option value="STATIC" <?php echo $asnres['post_fix_type'] =="STATIC"?"selected":""; ?>>Static</option>
-									<option value="DYNAMIC" <?php echo $asnres['post_fix_type'] =="DYNAMIC"?"selected":""; ?>>Dynamic</option>
+									<option value="STATIC" <?php echo $asnres['post_fix_type'] =="STATIC"?"selected":""; ?>><?= __('Static') ?></option>
+									<option value="DYNAMIC" <?php echo $asnres['post_fix_type'] =="DYNAMIC"?"selected":""; ?>><?= __('Dynamic') ?></option>
 						        </select>
 						    </div>
 						</div> 
@@ -379,10 +379,10 @@ function addMoreAdditionalSettings(){
 					</div>
 					<div class="form-group col-lg-3 w-full pre_fix_check_css <?php echo $asnres['pre_fix_check'] =="N"?"event_disabled":""; ?>" id="pre_fix_type_dynamic" <?php if($asnres['pre_fix_type'] =="" || $asnres['pre_fix_type']=="STATIC"){ ?>style="display: none;" <?php } ?>>
 						<select class ="form-control form-control-lg form-select js-example-basic-single" id="pre_fix_field" name="pre_fix_field" > 
-							<option value="party" <?php echo $asnres['pre_fix_field'] =="party"?"selected":""; ?>>Party</option>
-							<option value="type" <?php echo $asnres['pre_fix_field'] =="type"?"selected":""; ?>>Document Type</option>
-							<option value="location" <?php echo $asnres['pre_fix_field'] =="location"?"selected":""; ?>>Location</option>
-							<option value="cost_center" <?php echo $asnres['pre_fix_field'] =="cost_center_id"?"selected":""; ?>>Cost Center</option>
+							<option value="party" <?php echo $asnres['pre_fix_field'] =="party"?"selected":""; ?>><?= __('Party') ?></option>
+							<option value="type" <?php echo $asnres['pre_fix_field'] =="type"?"selected":""; ?>><?= __('Document Type') ?></option>
+							<option value="location" <?php echo $asnres['pre_fix_field'] =="location"?"selected":""; ?>><?= __('Location') ?></option>
+							<option value="cost_center" <?php echo $asnres['pre_fix_field'] =="cost_center_id"?"selected":""; ?>><?= __('Cost Center') ?></option>
 						</select>
 					</div>
 					
@@ -393,10 +393,10 @@ function addMoreAdditionalSettings(){
 					<div class="form-group col-lg-3 w-full post_fix_check_css <?php echo $asnres['post_fix_check'] =="N"?"event_disabled":""; ?>" id="post_fix_type_dynamic" <?php if($asnres['post_fix_type'] =="" || $asnres['post_fix_type']=="STATIC"){ ?>style="display: none;" <?php } ?>>
 						
 						<select class ="form-control form-control-lg form-select js-example-basic-single" id="post_fix_field" name="post_fix_field" > 
-							<option value="party" <?php echo $asnres['post_fix_field'] =="party"?"selected":""; ?>>Party</option>
-							<option value="type" <?php echo $asnres['post_fix_field'] =="type"?"selected":""; ?>>Document Type</option>
-							<option value="location" <?php echo $asnres['post_fix_field'] =="location"?"selected":""; ?>>Location</option>
-							<option value="cost_center" <?php echo $asnres['post_fix_field'] =="cost_center_id"?"selected":""; ?>>Cost Center</option>
+							<option value="party" <?php echo $asnres['post_fix_field'] =="party"?"selected":""; ?>><?= __('Party') ?></option>
+							<option value="type" <?php echo $asnres['post_fix_field'] =="type"?"selected":""; ?>><?= __('Document Type') ?></option>
+							<option value="location" <?php echo $asnres['post_fix_field'] =="location"?"selected":""; ?>><?= __('Location') ?></option>
+							<option value="cost_center" <?php echo $asnres['post_fix_field'] =="cost_center_id"?"selected":""; ?>><?= __('Cost Center') ?></option>
 						</select>
 
 					</div>
@@ -433,7 +433,7 @@ function addMoreAdditionalSettings(){
 		<div class="card-footer">
 		    <div class="row">
 		        <div class="col-lg-12">
-		            <button class="btn btn-primary" onclick="formSubmitBTN()"><?php echo $rid ==""?"Submit":"Update"; ?></button>
+		            <button class="btn btn-primary" onclick="formSubmitBTN()"><?php echo $rid ==""?__("Submit"):__("Update"); ?></button>
 		        </div> 
 		    </div>
 		</div>

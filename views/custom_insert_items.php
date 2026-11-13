@@ -116,17 +116,17 @@ foreach($categroylist as $catlist){
 <?php if ($error_message != '') { ?>
     <div class="alert alert-danger background-danger alert-dismissible">
         <strong><?php echo $error_message; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
     </div>
 <?php } ?>
 
 <div class="card">
     <div class="card-header table-card-header">
-        <h5> Items</h5>
+        <h5> <?php echo __('Items'); ?></h5>
         <div class="card-header-right table-card-header ">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -140,56 +140,56 @@ foreach($categroylist as $catlist){
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header table-card-header">
-                            <h5>Items</h5>
+                            <h5><?php echo __('Items'); ?></h5>
                             <div class="card-header-right table-card-header ">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-lg-6">
-                                    <span class="">Item Name&nbsp;<span class="text-danger">*</span></span>
+                                    <span class=""><?php echo __('Item Name&nbsp;'); ?><span class="text-danger">*</span></span>
                                     <span class="d-block error-message text-danger"></span>
-                                    <input aria-label="Item Name" class="form-control requried_field" type="text" id="item_name"
+                                    <input aria-label="<?php echo __('Item Name'); ?>" class="form-control requried_field" type="text" id="item_name"
                                         name="item_name"
                                         value="<?php echo $items['item_name'] != "" ? $items['item_name'] : $_GET['ITMNAME']; ?>">
                                 </div>
                                 <div class="form-group col-lg-3">
-                                    <span class="">SKU</span>
-                                    <input aria-label="Sku" class="form-control" type="text" id="sku" name="sku"
+                                    <span class=""><?php echo __('SKU'); ?></span>
+                                    <input aria-label="<?php echo __('Sku'); ?>" class="form-control" type="text" id="sku" name="sku"
                                         value="<?php echo isset($items['sku']) ? $items['sku'] : ''; ?>" <?php echo !empty($sku) ? 'readonly' : ''; ?>>
                                 </div>
 
                                 <?php if ($lists['ref_sku']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-3">
-                                        <span class="">Ref SKU</span>
-                                        <input aria-label="Ref Sku" class="form-control" type="text" id="ref_sku" name="ref_sku"
+                                        <span class=""><?php echo __('Ref SKU'); ?></span>
+                                        <input aria-label="<?php echo __('Ref Sku'); ?>" class="form-control" type="text" id="ref_sku" name="ref_sku"
                                             value="<?php echo $items['ref_sku'] ?>">
                                     </div>
                                 <?php }
                                 if ($lists['item_description']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span class="form-label">Item Description</span>
-                                        <textarea aria-label="Item Description" class="form-control" rows="5" cols="5" id="item_description"
+                                        <span class="form-label"><?php echo __('Item Description'); ?></span>
+                                        <textarea aria-label="<?php echo __('Item Description'); ?>" class="form-control" rows="5" cols="5" id="item_description"
                                             name="item_description"><?php echo $items['item_description'] ?></textarea>
                                     </div>
                                 <?php }
                                 if ($lists['specifications']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span class="">Specifications</span>
-                                        <input aria-label="Specifications" class="form-control" type="text" id="specifications" name="specifications"
+                                        <span class=""><?php echo __('Specifications'); ?></span>
+                                        <input aria-label="<?php echo __('Specifications'); ?>" class="form-control" type="text" id="specifications" name="specifications"
                                             value="<?php echo $items['specifications']; ?>">
                                     </div>
                                 <?php }
                                 if ($lists['category_id']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label">Category <span class="text-danger">*</span></span>
+                                        <span class="form-label"><?php echo __('Category'); ?> <span class="text-danger">*</span></span>
                                         <span class="d-block error-message text-danger"></span>
-                                        <select aria-label="Category" class="form-select border js-example-basic-single requried_field"
+                                        <select aria-label="<?php echo __('Category'); ?>" class="form-select border js-example-basic-single requried_field"
                                             id="category_id" name="category_id" onchange="setCategoryAccounts(this.value)">
-                                            <option value="">Select Any one</option>
+                                            <option value=""><?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($parentcategries as $category) { ?>
                                                 <option value="<?php echo $category['id']; ?>" <?php if ($items['category_id'] == $category['id'])
-                                                       { echo 'selected';
+                                                       { echo __('selected');
 } ?>>
                                                     <?php echo $category['category_description'] ?>
                                                 </option>
@@ -198,12 +198,12 @@ foreach($categroylist as $catlist){
                                     </div>
                                 <?php } ?>
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label">Child Category</span>
-                                        <select aria-label="Child Category" class="form-select border js-example-basic-single" id="child_category_id" name="child_category_id" onchange="setChildCategoryAccounts(this.value)">
-                                            <option value="">Select Any One</option>
+                                        <span class="form-label"><?php echo __('Child Category'); ?></span>
+                                        <select aria-label="<?php echo __('Child Category'); ?>" class="form-select border js-example-basic-single" id="child_category_id" name="child_category_id" onchange="setChildCategoryAccounts(this.value)">
+                                            <option value=""><?php echo __('Select Any One'); ?></option>
                                             <?php  foreach($childcategories[$items['category_id']] as $category) {  ?>
                                                 <option value="<?php echo $category['id']; ?>" <?php if ($items['child_category_id'] == $category['id'])
-                                                       { echo 'selected';
+                                                       { echo __('selected');
 } ?>>
                                                     <?php echo $category['category_description'] ?>
                                                 </option>
@@ -211,12 +211,12 @@ foreach($categroylist as $catlist){
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label">Sub-Child Category</span>
-                                        <select aria-label="Sub Child Category" class="form-select border js-example-basic-single" id="sub_child_category_id" name="sub_child_category_id">
-                                            <option value="">Select Any One</option>
+                                        <span class="form-label"><?php echo __('Sub-Child Category'); ?></span>
+                                        <select aria-label="<?php echo __('Sub Child Category'); ?>" class="form-select border js-example-basic-single" id="sub_child_category_id" name="sub_child_category_id">
+                                            <option value=""><?php echo __('Select Any One'); ?></option>
                                             <?php  foreach($childcategories[$items['child_category_id']] as $category) {  ?>
                                                 <option value="<?php echo $category['id']; ?>" <?php if ($items['sub_child_category_id'] == $category['id'])
-                                                       { echo 'selected';
+                                                       { echo __('selected');
 } ?>>
                                                     <?php echo $category['category_description'] ?>
                                                 </option>
@@ -225,13 +225,13 @@ foreach($categroylist as $catlist){
                                     </div>
                                 <?php if ($lists['item_type']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label">Item Type </span>
-                                        <select aria-label="Item Type" class="form-select border js-example-basic-single" id="item_type"
+                                        <span class="form-label"><?php echo __('Item Type'); ?> </span>
+                                        <select aria-label="<?php echo __('Item Type'); ?>" class="form-select border js-example-basic-single" id="item_type"
                                             name="item_type">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['item_types'] as $item_type) { ?>
                                                 <option value="<?php echo $item_type['id']; ?>" <?php if ($items['item_type'] == $item_type['id']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>>
                                                     <?php echo $item_type['item_type_name'] ?>
                                                 </option>
@@ -242,13 +242,13 @@ foreach($categroylist as $catlist){
                                 if ($lists['default_costing_type']['insert_display_list'] == 1) { ?>
 
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label">Costing Type</span>
-                                        <select aria-label="Default Costing Type" class="form-select border js-example-basic-single" id="default_costing_type"
+                                        <span class="form-label"><?php echo __('Costing Type'); ?></span>
+                                        <select aria-label="<?php echo __('Default Costing Type'); ?>" class="form-select border js-example-basic-single" id="default_costing_type"
                                             name="default_costing_type">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['costing_type'] as $ctype) { ?>
                                                 <option value="<?php echo $ctype['genc_detail_code']; ?>" <?php if ($items['default_costing_type'] == $ctype['genc_detail_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $ctype['genc_detail_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -257,38 +257,38 @@ foreach($categroylist as $catlist){
                                 if ($lists['sold_individually']['insert_display_list'] == 1) { ?>
 
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label d-block">Sold Individually</span>
-                                        <input aria-label="Checkbox" type="checkbox" class="js-switch" <?php echo $items['sold_individually'] == "0" ? "checked" : ""; ?> name="sold_individually" value="0" />
+                                        <span class="form-label d-block"><?php echo __('Sold Individually'); ?></span>
+                                        <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" class="js-switch" <?php echo $items['sold_individually'] == "0" ? "checked" : ""; ?> name="sold_individually" value="0" />
                                     </div>
                                 <?php }
                                 if ($lists['sold_in_groups']['insert_display_list'] == 1) { ?>
 
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label d-block">Sold In Groups
+                                        <span class="form-label d-block"><?php echo __('Sold In Groups'); ?>
                                         </span>
-                                        <input aria-label="Sold In Groups" type="checkbox" class="js-switch" name="sold_in_groups" value="0" <?php echo $items['sold_in_groups'] == "0" ? "checked" : ""; ?> />
+                                        <input aria-label="<?php echo __('Sold In Groups'); ?>" type="checkbox" class="js-switch" name="sold_in_groups" value="0" <?php echo $items['sold_in_groups'] == "0" ? "checked" : ""; ?> />
                                     </div>
                                 <?php }
                                 if ($lists['quality_check']['insert_display_list'] == 1) { ?>
 
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label d-block">Quality Check
+                                        <span class="form-label d-block"><?php echo __('Quality Check'); ?>
                                         </span>
-                                        <input aria-label="Quality Check" type="checkbox" class="js-switch" name="quality_check" value="0" <?php echo $items['quality_check'] == "0" ? "checked" : ""; ?> />
+                                        <input aria-label="<?php echo __('Quality Check'); ?>" type="checkbox" class="js-switch" name="quality_check" value="0" <?php echo $items['quality_check'] == "0" ? "checked" : ""; ?> />
                                     </div>
                                 <?php }
                                 if ($lists['item_image']['insert_display_list'] == 1) { ?>
 
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label d-block">Item Image</span>
+                                        <span class="form-label d-block"><?php echo __('Item Image'); ?></span>
                                         <div class="profile-pic">
                                             <label class="-label" for="item_image">
-                                                <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                                                <span> <i class="fa fa-camera"></i> <?php echo __('&nbsp; Change Image'); ?></span>
                                             </label>
                                             <input type="file" name="item_image" id="item_image" accept=".png, .jpg, .jpeg"
                                                 onchange="loadFile(event,this.id)" />
                                             <img src="<?php echo "uploads/all/" . $items['item_image']; ?>"
-                                                id="outputitem_image" width="200"  alt="Attachment Preview" />
+                                                id="outputitem_image" width="200"  alt="<?php echo __('Attachment Preview'); ?>" />
                                             <input type="hidden" name="hid_item_image"
                                                 value="<?php echo $items['item_image']; ?>">
                                         </div>
@@ -298,15 +298,15 @@ foreach($categroylist as $catlist){
                                 if ($lists['item_image2']['insert_display_list'] == 1) { ?>
 
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label d-block">Item Image2</span>
+                                        <span class="form-label d-block"><?php echo __('Item Image2'); ?></span>
                                         <div class="profile-pic">
                                             <label class="-label" for="item_image2">
-                                                <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                                                <span> <i class="fa fa-camera"></i> <?php echo __('&nbsp; Change Image'); ?></span>
                                             </label>
                                             <input type="file" name="item_image2" id="item_image2"
                                                 accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)" />
                                             <img src="<?php echo "uploads/all/" . $items['item_image2']; ?>"
-                                                id="outputitem_image2" width="200"  alt="Attachment Preview" />
+                                                id="outputitem_image2" width="200"  alt="<?php echo __('Attachment Preview'); ?>" />
                                             <input type="hidden" name="hid_item_image2"
                                                 value="<?php echo $items['item_image2']; ?>">
                                         </div>
@@ -316,15 +316,15 @@ foreach($categroylist as $catlist){
                                 if ($lists['item_image3']['insert_display_list'] == 1) { ?>
 
                                     <div class="form-group col-lg-4">
-                                        <span class="form-label d-block">Item Image3</span>
+                                        <span class="form-label d-block"><?php echo __('Item Image3'); ?></span>
                                         <div class="profile-pic">
                                             <label class="-label" for="item_image3">
-                                                <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                                                <span> <i class="fa fa-camera"></i> <?php echo __('&nbsp; Change Image'); ?></span>
                                             </label>
                                             <input type="file" name="item_image3" id="item_image3"
                                                 accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)" />
                                             <img src="<?php echo "uploads/all/" . $items['item_image3']; ?>"
-                                                id="outputitem_image3" width="200"  alt="Attachment Preview" />
+                                                id="outputitem_image3" width="200"  alt="<?php echo __('Attachment Preview'); ?>" />
                                             <input type="hidden" name="hid_item_image3"
                                                 value="<?php echo $items['item_image3']; ?>">
                                         </div>
@@ -336,7 +336,7 @@ foreach($categroylist as $catlist){
                     </div>
                     <div class="card mt-2">
                         <div class="card-header table-card-header">
-                            <h5>Price</h5>
+                            <h5><?php echo __('Price'); ?></h5>
                             <div class="card-header-right table-card-header ">
                             </div>
                         </div>
@@ -344,13 +344,13 @@ foreach($categroylist as $catlist){
                             <div class="row">
                                 <?php if ($lists['purchase_uom']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span class="form-label">Purchase UoM</span>
-                                        <select aria-label="Purchase Uom" class="form-select border js-example-basic-single" id="purchase_uom"
+                                        <span class="form-label"><?php echo __('Purchase UoM'); ?></span>
+                                        <select aria-label="<?php echo __('Purchase Uom'); ?>" class="form-select border js-example-basic-single" id="purchase_uom"
                                             name="purchase_uom">
-                                            <option value="0">Select Any one Purchase UoM</option>
+                                            <option value="0"><?php echo __('Select Any one Purchase UoM'); ?></option>
                                             <?php foreach ($result['uom'] as $uom) { ?>
                                                 <option value="<?php echo $uom['id']; ?>" <?php if ($items['purchase_uom'] == $uom['id']) {
-                                                       echo "selected=selected";
+                                                       echo __('selected=selected');
                                                    } ?>>
                                                     <?php echo $uom['uom_name'] ?>
                                                 </option>
@@ -360,21 +360,21 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['purchase_price']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span>Purchase Price</span>
-                                        <input aria-label="Purchase Price" type="text" class="form-control autonumber text-right" data-a-sign="₹"
+                                        <span><?php echo __('Purchase Price'); ?></span>
+                                        <input aria-label="<?php echo __('Purchase Price'); ?>" type="text" class="form-control autonumber text-right" data-a-sign="₹"
                                             name="purchase_price" id="purchase_price"
                                             value="<?php echo $items['purchase_price']; ?>">
                                     </div>
                                 <?php }
                                 if ($lists['sale_uom']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span class="form-label">Sale UoM</span>
-                                        <select aria-label="Sale Uom" class="form-select border js-example-basic-single" id="sale_uom"
+                                        <span class="form-label"><?php echo __('Sale UoM'); ?></span>
+                                        <select aria-label="<?php echo __('Sale Uom'); ?>" class="form-select border js-example-basic-single" id="sale_uom"
                                             name="sale_uom">
-                                            <option value="0">Select Any one Sale UoM</option>
+                                            <option value="0"><?php echo __('Select Any one Sale UoM'); ?></option>
                                             <?php foreach ($result['uom'] as $uom) { ?>
                                                 <option value="<?php echo $uom['id']; ?>" <?php if ($items['sale_uom'] == $uom['id']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>>
                                                     <?php echo $uom['uom_name'] ?>
                                                 </option>
@@ -384,30 +384,30 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['sale_price']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span>Sale Price</span>
-                                        <input aria-label="Sale Price" type="text" class="form-control autonumber text-right fill" data-a-sign="₹"
+                                        <span><?php echo __('Sale Price'); ?></span>
+                                        <input aria-label="<?php echo __('Sale Price'); ?>" type="text" class="form-control autonumber text-right fill" data-a-sign="₹"
                                             name="sale_price" id="sale_price" value="<?php echo $items['sale_price'] ?>">
                                     </div>
                                 <?php }
                                 if ($lists['minimum_sale_price']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span>Minimum Sale Price</span>
-                                        <input aria-label="Minimum Sale Price" type="text" readonly class="form-control text-right"
+                                        <span><?php echo __('Minimum Sale Price'); ?></span>
+                                        <input aria-label="<?php echo __('Minimum Sale Price'); ?>" type="text" readonly class="form-control text-right"
                                             name="minimum_sale_price" id="minimum_sale_price"
                                             value="<?php echo $items['minimum_sale_price'] ?>">
                                     </div>
                                 <?php }
                                 if ($lists['minimum_discount']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span>Maximum Discount(%)</span>
-                                        <input aria-label="Minimum Discount" type="text" class="form-control text-right" name="minimum_discount"
+                                        <span><?php echo __('Maximum Discount(%)'); ?></span>
+                                        <input aria-label="<?php echo __('Minimum Discount'); ?>" type="text" class="form-control text-right" name="minimum_discount"
                                             id="minimum_discount" value="<?php echo $items['minimum_discount'] ?>">
                                     </div>
                                 <?php }
                                 if ($lists['minimum_margin']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span>Minimum Margin(%)</span>
-                                        <input aria-label="Minimum Margin" type="number" class="form-control text-right" name="minimum_margin"
+                                        <span><?php echo __('Minimum Margin(%)'); ?></span>
+                                        <input aria-label="<?php echo __('Minimum Margin'); ?>" type="number" class="form-control text-right" name="minimum_margin"
                                             id="minimum_margin" max="100" value="<?php echo $items['minimum_margin'] ?>">
                                     </div>
                                 <?php } ?>
@@ -416,7 +416,7 @@ foreach($categroylist as $catlist){
                     </div>
                     <div class="card">
                         <div class="card-header table-card-header">
-                            <h5>Inventory</h5>
+                            <h5><?php echo __('Inventory'); ?></h5>
                             <div class="card-header-right table-card-header ">
                             </div>
                         </div>
@@ -427,19 +427,19 @@ foreach($categroylist as $catlist){
                                         values="<?php echo ($items['opening_quantity'] == "" || $items['opening_quantity'] == "0") ? "N" : "Y"; ?>">
                                     <div
                                         class="form-group col-lg-6 <?php echo ($items['opening_quantity'] == "" || $items['opening_quantity'] == "0") ? "" : "custom_readonly"; ?>">
-                                        <span class="form-label">Opening Quantity</span>
-                                        <input aria-label="Opening Quantity" class="form-control text-right" type="text" id="opening_quantity"
+                                        <span class="form-label"><?php echo __('Opening Quantity'); ?></span>
+                                        <input aria-label="<?php echo __('Opening Quantity'); ?>" class="form-control text-right" type="text" id="opening_quantity"
                                             name="opening_quantity" value="<?php echo $items['opening_quantity']; ?>">
                                     </div>
                                     <div
                                         class="form-group col-lg-6 <?php echo ($items['opening_quantity'] == "" || $items['opening_quantity'] == "0") ? "" : "custom_readonly"; ?>">
-                                        <span class="form-label">Warehouses</span>
-                                        <select aria-label="Warehouse" class="form-select js-example-basic-single" id="warehouse_id"
+                                        <span class="form-label"><?php echo __('Warehouses'); ?></span>
+                                        <select aria-label="<?php echo __('Warehouse'); ?>" class="form-select js-example-basic-single" id="warehouse_id"
                                             name="warehouse_id">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($warehouses as $waro) { ?>
                                                 <option value="<?php echo $waro['id']; ?>" <?php if ($items['warehouse_id'] == $waro['id']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>>
                                                     <?php echo $waro['warehouse_name'] . "(" . $location[$waro['location_id']] . ")"; ?>
                                                 </option>
@@ -448,95 +448,95 @@ foreach($categroylist as $catlist){
                                     </div>
                                     <div
                                         class="form-group col-lg-6 <?php echo ($items['opening_quantity'] == "" || $items['opening_quantity'] == "0") ? "" : "custom_readonly"; ?>">
-                                        <span class="form-label">Opening Quantity Date</span>
-                                        <input aria-label="Opening Quantity Date" class="form-control datepicker" type="text" id="opening_quantity_date"
+                                        <span class="form-label"><?php echo __('Opening Quantity Date'); ?></span>
+                                        <input aria-label="<?php echo __('Opening Quantity Date'); ?>" class="form-control datepicker" type="text" id="opening_quantity_date"
                                             name="opening_quantity_date"
                                             value="<?php echo fromDate($items['opening_quantity_date']); ?>">
                                     </div>
                                 <?php }
                                 if ($lists['quantity_check']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span class="form-label">Quantity Check</span>
+                                        <span class="form-label"><?php echo __('Quantity Check'); ?></span>
                                         <div class="radio radio-outline  mt-1">
                                             <label class="radio radio-inline">
-                                                <input aria-label="Radio option" type="radio" <?php echo $items['quantity_check'] == "1" ? "checked" : ""; ?> name="quantity_check" value="1"> <span></span>Yes
+                                                <input aria-label="<?php echo __('Radio option'); ?>" type="radio" <?php echo $items['quantity_check'] == "1" ? "checked" : ""; ?> name="quantity_check" value="1"> <span></span><?php echo __('Yes'); ?>
                                             </label>
 
                                             <label class="radio radio-inline">
-                                                <input aria-label="Quantity Check" type="radio" name="quantity_check" value="2" <?php echo $items['quantity_check'] == "2" ? "checked" : ""; ?>> <span></span>No
+                                                <input aria-label="<?php echo __('Quantity Check'); ?>" type="radio" name="quantity_check" value="2" <?php echo $items['quantity_check'] == "2" ? "checked" : ""; ?>> <span></span><?php echo __('No'); ?>
                                             </label>
 
                                             <label class="radio radio-inline">
-                                                <input aria-label="Quantity Check" type="radio" name="quantity_check" value="3" <?php echo $items['quantity_check'] == "3" ? "checked" : ""; ?>> <span></span>Not
-                                                Applicable
+                                                <input aria-label="<?php echo __('Quantity Check'); ?>" type="radio" name="quantity_check" value="3" <?php echo $items['quantity_check'] == "3" ? "checked" : ""; ?>> <span></span><?php echo __('Not
+                                                Applicable'); ?>
                                             </label>
                                         </div>
                                     </div>
                                 <?php }
                                 if ($lists['minimum_level']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span>Minimum Level</span>
+                                        <span><?php echo __('Minimum Level'); ?></span>
                                         <div>
-                                            <input aria-label="Minimum Level" class="form-control text-right" type="text" id="minimum_level"
+                                            <input aria-label="<?php echo __('Minimum Level'); ?>" class="form-control text-right" type="text" id="minimum_level"
                                                 name="minimum_level" value="<?php echo $items['minimum_level'] ?>">
                                         </div>
                                     </div>
                                 <?php }
                                 if ($lists['danger_level']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span>Danger Level</span>
+                                        <span><?php echo __('Danger Level'); ?></span>
                                         <div>
-                                            <input aria-label="Danger Level" class="form-control text-right" type="text" id="danger_level"
+                                            <input aria-label="<?php echo __('Danger Level'); ?>" class="form-control text-right" type="text" id="danger_level"
                                                 name="danger_level" value="<?php echo $items['danger_level'] ?>">
                                         </div>
                                     </div>
                                 <?php }
                                 if ($lists['maximum_capacity']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span>Maximum Capacity</span>
+                                        <span><?php echo __('Maximum Capacity'); ?></span>
                                         <div>
-                                            <input aria-label="Maximum Capacity" class="form-control text-right fill" type="text" id="maximum_capacity"
+                                            <input aria-label="<?php echo __('Maximum Capacity'); ?>" class="form-control text-right fill" type="text" id="maximum_capacity"
                                                 name="maximum_capacity" value="<?php echo $items['maximum_capacity'] ?>">
                                         </div>
                                     </div>
                                 <?php }
                                 if ($lists['reorder_qty']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span>Reorder Qty</span>
+                                        <span><?php echo __('Reorder Qty'); ?></span>
                                         <div>
-                                            <input aria-label="Reorder Qty" class="form-control text-right fill" type="text" id="reorder_qty"
+                                            <input aria-label="<?php echo __('Reorder Qty'); ?>" class="form-control text-right fill" type="text" id="reorder_qty"
                                                 name="reorder_qty" value="<?php echo $items['reorder_qty'] ?>">
                                         </div>
                                     </div>
                                 <?php }
                                 if ($lists['tracking_type']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span class="form-label">Tracking Type</span>
+                                        <span class="form-label"><?php echo __('Tracking Type'); ?></span>
                                         <div class="radio radio-outline  mt-1">
                                             <label class="radio radio-inline">
-                                                <input aria-label="Tracking Type" type="radio" checked="" name="tracking_type" value="0" <?php echo $items['tracking_type'] == "0" ? "checked" : ""; ?>> <span></span>None
+                                                <input aria-label="<?php echo __('Tracking Type'); ?>" type="radio" checked="" name="tracking_type" value="0" <?php echo $items['tracking_type'] == "0" ? "checked" : ""; ?>> <span></span><?php echo __('None'); ?>
                                             </label>
 
                                             <label class="radio radio-inline">
-                                                <input aria-label="Tracking Type" type="radio" name="tracking_type" value="1" <?php echo $items['tracking_type'] == "1" ? "checked" : ""; ?>> <span></span>Serial
+                                                <input aria-label="<?php echo __('Tracking Type'); ?>" type="radio" name="tracking_type" value="1" <?php echo $items['tracking_type'] == "1" ? "checked" : ""; ?>> <span></span><?php echo __('Serial'); ?>
                                             </label>
 
                                             <label class="radio radio-inline">
-                                                <input aria-label="Tracking Type" type="radio" name="tracking_type" value="2" <?php echo $items['tracking_type'] == "2" ? "checked" : ""; ?>> <span></span>Lot
+                                                <input aria-label="<?php echo __('Tracking Type'); ?>" type="radio" name="tracking_type" value="2" <?php echo $items['tracking_type'] == "2" ? "checked" : ""; ?>> <span></span><?php echo __('Lot'); ?>
                                             </label>
                                         </div>
                                     </div>
                                 <?php }
                                 if ($lists['negative_stock']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span class="form-label d-block">Negative Stock </span>
-                                        <input aria-label="Negative Stock" type="checkbox" class="js-switch" name="negative_stock" value="0" <?php echo $items['negative_stock'] == "0" ? "checked" : ""; ?> />
+                                        <span class="form-label d-block"><?php echo __('Negative Stock'); ?> </span>
+                                        <input aria-label="<?php echo __('Negative Stock'); ?>" type="checkbox" class="js-switch" name="negative_stock" value="0" <?php echo $items['negative_stock'] == "0" ? "checked" : ""; ?> />
                                     </div>
                                 <?php }
                                 if ($lists['allow_back_order']['insert_display_list'] == 1) { ?>
                                     <div class="form-group col-lg-6">
-                                        <span class="form-label d-block">Allow Back Order </span>
-                                        <input aria-label="Allow Back Order" type="checkbox" class="js-switch" name="allow_back_order" value="0" <?php echo $items['allow_back_order'] == "0" ? "checked" : ""; ?> />
+                                        <span class="form-label d-block"><?php echo __('Allow Back Order'); ?> </span>
+                                        <input aria-label="<?php echo __('Allow Back Order'); ?>" type="checkbox" class="js-switch" name="allow_back_order" value="0" <?php echo $items['allow_back_order'] == "0" ? "checked" : ""; ?> />
                                     </div>
                                 <?php } ?>
                             </div>
@@ -548,7 +548,7 @@ foreach($categroylist as $catlist){
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header table-card-header">
-                            <h5>Account</h5>
+                            <h5><?php echo __('Account'); ?></h5>
                             <div class="card-header-right table-card-header ">
                             </div>
                         </div>
@@ -556,14 +556,14 @@ foreach($categroylist as $catlist){
                             <div class="row">
                                 <?php if ($lists['inventory_asset_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Inventory Asset Account</span>
-                                        <select aria-label="Inventory Asset Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Inventory Asset Account'); ?></span>
+                                        <select aria-label="<?php echo __('Inventory Asset Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="inventory_asset_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['inventory_asset_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -571,15 +571,15 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['inventory_adjustment_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Inventory Adjustment Account </span>
+                                        <span class="form-label"><?php echo __('Inventory Adjustment Account'); ?> </span>
 
-                                        <select aria-label="Inventory Adjustment Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <select aria-label="<?php echo __('Inventory Adjustment Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="inventory_adjustment_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['inventory_adjustment_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -587,14 +587,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['inventory_cost_variance_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Inventory Cost Variance Account </span>
-                                        <select aria-label="Inventory Cost Variance Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Inventory Cost Variance Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Inventory Cost Variance Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="inventory_cost_variance_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['inventory_cost_variance_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -602,14 +602,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['cogs_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Cogs Account</span>
-                                        <select aria-label="Cogs Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Cogs Account'); ?></span>
+                                        <select aria-label="<?php echo __('Cogs Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="cogs_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['cogs_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>>
                                                     <?php echo $acc['account_name'] ?>
                                                 </option>
@@ -619,15 +619,15 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['purchase_expense_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Purchase Expense Account </span>
+                                        <span class="form-label"><?php echo __('Purchase Expense Account'); ?> </span>
 
-                                        <select aria-label="Purchase Expense Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <select aria-label="<?php echo __('Purchase Expense Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="purchase_expense_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['purchase_expense_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -636,14 +636,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['sales_revenue_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Sales Revenue Account</span>
-                                        <select aria-label="Sales Revenue Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Sales Revenue Account'); ?></span>
+                                        <select aria-label="<?php echo __('Sales Revenue Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="sales_revenue_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['sales_revenue_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -652,14 +652,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['sales_discount_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Sales Discount Account </span>
-                                        <select aria-label="Sales Discount Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Sales Discount Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Sales Discount Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="sales_discount_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['sales_discount_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -668,14 +668,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['sales_return_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Sales Return Account </span>
-                                        <select aria-label="Sales Return Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Sales Return Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Sales Return Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="sales_return_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['sales_return_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -683,14 +683,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['purchase_price_variance_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Purchase Price Variance Account </span>
-                                        <select aria-label="Purchase Price Variance Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Purchase Price Variance Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Purchase Price Variance Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="purchase_price_variance_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['purchase_price_variance_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -699,14 +699,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['freight_expense_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Freight Expense Account </span>
-                                        <select aria-label="Freight Expense Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Freight Expense Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Freight Expense Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="freight_expense_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['freight_expense_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -714,14 +714,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['packaging_expense_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Packaging Expense Account </span>
-                                        <select aria-label="Packaging Expense Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Packaging Expense Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Packaging Expense Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="packaging_expense_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['packaging_expense_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -729,14 +729,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['sales_tax_payable_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Sales Tax Payable Account </span>
-                                        <select aria-label="Sales Tax Payable Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Sales Tax Payable Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Sales Tax Payable Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="sales_tax_payable_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['sales_tax_payable_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -744,14 +744,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['purchase_tax_payable_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Purchase Tax Payable Account </span>
-                                        <select aria-label="Purchase Tax Payable Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Purchase Tax Payable Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Purchase Tax Payable Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="purchase_tax_payable_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['purchase_tax_payable_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -759,14 +759,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['promotions_and_discounts_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Promotions And Discounts Account </span>
-                                        <select aria-label="Promotions And Discounts Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Promotions And Discounts Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Promotions And Discounts Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="promotions_and_discounts_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['promotions_and_discounts_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -774,14 +774,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['sales_allowances_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Sales Allowances Account </span>
-                                        <select aria-label="Sales Allowances Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Sales Allowances Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Sales Allowances Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="sales_allowances_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['sales_allowances_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -789,14 +789,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['deferred_revenue_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Deferred Revenue Account </span>
-                                        <select aria-label="Deferred Revenue Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Deferred Revenue Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Deferred Revenue Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="deferred_revenue_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['deferred_revenue_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -805,14 +805,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['ap_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Ap Account </span>
-                                        <select aria-label="Ap Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Ap Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Ap Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="ap_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['ap_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>>
                                                     <?php echo $acc['account_name'] ?>
                                                 </option>
@@ -823,14 +823,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['ar_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Ar Account </span>
-                                        <select aria-label="Ar Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Ar Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Ar Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="ar_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['ar_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>>
                                                     <?php echo $acc['account_name'] ?>
                                                 </option>
@@ -840,14 +840,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['accrued_expenses_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Accrued Expenses Account </span>
-                                        <select aria-label="Accrued Expenses Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Accrued Expenses Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Accrued Expenses Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="accrued_expenses_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['accrued_expenses_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -855,14 +855,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['prepaid_expenses_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Prepaid Expenses Account </span>
-                                        <select aria-label="Prepaid Expenses Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Prepaid Expenses Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Prepaid Expenses Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="prepaid_expenses_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['prepaid_expenses_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -870,14 +870,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['wip_asset_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Wip Asset Account </span>
-                                        <select aria-label="Wip Asset Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Wip Asset Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Wip Asset Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="wip_asset_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['wip_asset_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>>
                                                     <?php echo $acc['account_name'] ?>
                                                 </option>
@@ -887,14 +887,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['goods_received_not_invoiced_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Goods Received Not Invoiced Account </span>
-                                        <select aria-label="Goods Received Not Invoiced Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Goods Received Not Invoiced Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Goods Received Not Invoiced Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="goods_received_not_invoiced_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['goods_received_not_invoiced_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -903,14 +903,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['invoiced_not_received_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Invoiced Not Received Account </span>
-                                        <select aria-label="Invoiced Not Received Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Invoiced Not Received Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Invoiced Not Received Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="invoiced_not_received_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['invoiced_not_received_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -918,14 +918,14 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['invoiced_not_received_account']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Goods Sold Not Invoiced Account </span>
-                                        <select aria-label="Goods Sold Not Invoiced Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
+                                        <span class="form-label"><?php echo __('Goods Sold Not Invoiced Account'); ?> </span>
+                                        <select aria-label="<?php echo __('Goods Sold Not Invoiced Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"
                                             data-tablename="chart_of_accounts" data-fieldsname="account_name" data-value=""
                                             data-pagename="chart_of_accounts" name="goods_sold_not_invoiced_account">
-                                            <option value=""> Select Any one</option>
+                                            <option value=""> <?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($result['account'] as $acc) { ?>
                                                 <option value="<?php echo $acc['account_code']; ?>" <?php if ($items['goods_sold_not_invoiced_account'] == $acc['account_code']) {
-                                                       echo "selected";
+                                                       echo __('selected');
                                                    } ?>><?php echo $acc['account_name'] ?></option>
                                             <?php } ?>
                                         </select>
@@ -935,11 +935,11 @@ foreach($categroylist as $catlist){
                                 <?php }
                                 if ($lists['base_uom']['insert_display_list'] == 1) { ?>
                                     <div class="col-lg-6 form-group">
-                                        <span class="form-label">Base Uom </span>
-                                        <select aria-label="Base Uom" class="form-select js-example-basic-single  col-lg-4" name="base_uom">
+                                        <span class="form-label"><?php echo __('Base Uom'); ?> </span>
+                                        <select aria-label="<?php echo __('Base Uom'); ?>" class="form-select js-example-basic-single  col-lg-4" name="base_uom">
                                             <?php foreach ($result['uom'] as $uom) { ?>
                                                 <option value="<?php echo $uom['id']; ?>" <?php if ($items['base_uom'] == $uom['id']) {
-                                                       echo "selected=selected";
+                                                       echo __('selected=selected');
                                                    } ?>>
                                                     <?php echo $uom['uom_name'] ?>
                                                 </option>
@@ -953,7 +953,7 @@ foreach($categroylist as $catlist){
 
                     <div class="card">
                         <div class="card-header table-card-header">
-                            <h5>Tax</h5>
+                            <h5><?php echo __('Tax'); ?></h5>
                             <div class="card-header-right table-card-header ">
                             </div>
                         </div>
@@ -961,16 +961,16 @@ foreach($categroylist as $catlist){
 
                             <div class="row">
                                 <div class="form-group col-lg-6 <?php echo $_SESSION['config']['gst_number']==""? 'event-disabled' : ''; ?>">
-                                    <span class="form-label">HSN/SAC Code</span>
-                                    <select aria-label="Hsn And Sac Code" name="hsn_and_sac_code_id"
+                                    <span class="form-label"><?php echo __('HSN/SAC Code'); ?></span>
+                                    <select aria-label="<?php echo __('Hsn And Sac Code'); ?>" name="hsn_and_sac_code_id"
                                         class="form-control js-data-example-ajax-hsncodes"
                                         data-tablename="hsn_and_sac_codes" data-fieldsname="code"
                                         data-fieldsname1="code" data-fieldsname2="code_description"
                                         data-fieldsname3="gst" data-category="id" >
-                                        <option value="">Select Any One </option>
+                                        <option value=""><?php echo __('Select Any One'); ?> </option>
                                         <?php foreach ($result['hsnsac'] as $hsn) { ?>
                                             <option value="<?php echo $hsn['id']; ?>" <?php if ($items['hsn_and_sac_code_id'] == $hsn['id'])
-                                                   { echo "selected";
+                                                   { echo __('selected');
 } ?>>
                                                 <?php echo $hsn['code']; ?>
                                             </option>
@@ -979,12 +979,12 @@ foreach($categroylist as $catlist){
                                 </div>
 
                                 <div class="form-group col-lg-6">
-                                    <span class="form-label">HS Code</span>
-                                    <select aria-label="Hs Code" class="form-select js-example-basic-single" id="hs_code" name="hs_code">
-                                        <option value=""> Select Any one</option>
+                                    <span class="form-label"><?php echo __('HS Code'); ?></span>
+                                    <select aria-label="<?php echo __('Hs Code'); ?>" class="form-select js-example-basic-single" id="hs_code" name="hs_code">
+                                        <option value=""> <?php echo __('Select Any one'); ?></option>
                                         <?php foreach ($result['hscode'] as $hscode) { ?>
                                             <option value="<?php echo $hscode['id']; ?>" <?php if ($items['hs_code'] == $hscode['id']) {
-                                                   echo "selected";
+                                                   echo __('selected');
                                                } ?>>
                                                 <?php echo $hscode['code_description'] ?>
                                             </option>
@@ -999,17 +999,17 @@ foreach($categroylist as $catlist){
                     </div>
                     <div class="card">
                         <div class="card-header table-card-header">
-                            <h5>Specification Documents</h5>
+                            <h5><?php echo __('Specification Documents'); ?></h5>
                             <div class="card-header-right table-card-header ">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="row mb-2">
                                 <div class="col-lg-8">
-                                    <span class="form-label">File Name</span>
+                                    <span class="form-label"><?php echo __('File Name'); ?></span>
                                 </div>
                                 <div class="col-lg-2">
-                                    <span class="form-label">Download/Upload</span>
+                                    <span class="form-label"><?php echo __('Download/Upload'); ?></span>
                                 </div>
                                 <div class="col-lg-2"></div>
                             </div>
@@ -1021,7 +1021,7 @@ foreach($categroylist as $catlist){
                                 <div class="row mb-2" id="remove_attache_<?php echo $attchmentseq; ?>">
 
                                     <div class="col-lg-8">
-                                        <input aria-label="Old Attachment Name[]" type="text" name="old_attachment_name[]" class="form-control"
+                                        <input aria-label="<?php echo __('Old Attachment Name[]'); ?>" type="text" name="old_attachment_name[]" class="form-control"
                                             value="<?php echo $attachment['attachment_name']; ?>" readonly>
                                     </div>
                                     <div class="col-lg-2 text-center">
@@ -1031,7 +1031,7 @@ foreach($categroylist as $catlist){
                                     <div class="col-lg-2">
 
                                         <i class="ti-trash float-end text-danger" data-bs-toggle="tooltip"
-                                            data-placement="bottom" title="" data-bs-original-title="Remove"
+                                            data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>"
                                             onclick="deletRowjoinOwner('remove_attache_<?php echo $attchmentseq; ?>>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
                                         <input type="hidden" name="old_attachment[]" class="form-control"
@@ -1045,29 +1045,29 @@ foreach($categroylist as $catlist){
                             <div id="addmoreattachements_id">
                                 <div class="row mb-2" id="remove_attache_new">
                                     <div class="form-group col-lg-8">
-                                        <input aria-label="Attachment Name[]" type="text" class="form-control" name="attachment_name[]" value="">
+                                        <input aria-label="<?php echo __('Attachment Name[]'); ?>" type="text" class="form-control" name="attachment_name[]" value="">
                                     </div>
                                     <div class="form-group col-lg-2 text-center">
 
                                         <div class="image-input image-input-empty image-input-outline" id="kt_image_5">
                                             <label class="btn-hover-text-primary text-dark" data-action="remove"
                                                 data-bs-toggle="tooltip" title="" style="left: -9px;top: 0px;"
-                                                data-bs-original-title="Upload File">
+                                                data-bs-original-title="<?php echo __('Upload File'); ?>">
                                                 <span> <i class="fa fa-upload"></i></span>
-                                                <input aria-label="Attachment[]" type="file" name="attachment[]" accept=".pdf, image/*">
+                                                <input aria-label="<?php echo __('Attachment[]'); ?>" type="file" name="attachment[]" accept=".pdf, image/*">
                                             </label>
                                         </div>
 
                                     </div>
                                     <div class="form-group col-lg-2">
-                                        <button type="button" class="btn p-0 border-0 bg-transparent ti-trash float-end text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="deletRowjoinOwner('remove_attache_new')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                        <button type="button" class="btn p-0 border-0 bg-transparent ti-trash float-end text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRowjoinOwner('remove_attache_new')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                     </div>
                                 </div>
                             </div>
                             <div class="">
                                 <button type="button" class="btn btn-success waves-effect waves-light float-left"
                                     onclick="addMoreAttachment()"><i
-                                        class="icofont icofont-plus icon-white  m-r-10"></i>Add More</button>
+                                        class="icofont icofont-plus icon-white  m-r-10"></i><?php echo __('Add More'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -1076,20 +1076,20 @@ foreach($categroylist as $catlist){
                     <div class="form-group col-lg-6">
                         <div class="card">
                             <div class="card-header table-card-header">
-                                <h5>Vendor Items</h5>
+                                <h5><?php echo __('Vendor Items'); ?></h5>
                                 <div class="card-header-right table-card-header ">
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <span class="form-label">Vendors</span>
+                                        <span class="form-label"><?php echo __('Vendors'); ?></span>
                                     </div>
                                     <div class="col-lg-3">
-                                        <span class="form-label">Part No</span>
+                                        <span class="form-label"><?php echo __('Part No'); ?></span>
                                     </div>
                                     <div class="col-lg-3">
-                                        <span class="form-label">Part Name</span>
+                                        <span class="form-label"><?php echo __('Part Name'); ?></span>
                                     </div>
                                     <div class="col-lg-1"></div>
                                 </div>
@@ -1106,11 +1106,11 @@ foreach($categroylist as $catlist){
                                             <input type="hidden" name="vendor_items[vendor_item_id][]"
                                                 value="<?php echo $vi['id']; ?>">
                                             <div class="col-lg-5">
-                                                <select aria-label="Vendor Items[vendor ][]" class="form-select js-example-basic-single"
+                                                <select aria-label="<?php echo __('Vendor Items[vendor ][]'); ?>" class="form-select js-example-basic-single"
                                                     name="vendor_items[vendor_id][]">
                                                     <?php foreach ($vendors as $ven) { ?>
                                                         <option value="<?php echo $ven['id']; ?>" <?php if ($ven['id'] == $vi['vendor_id']) {
-                                                               echo "selected";
+                                                               echo __('selected');
                                                            } ?>>
                                                             <?php echo $ven['display_name'] . "(" . $ven['company'] . ")" ?>
                                                         </option>
@@ -1118,12 +1118,12 @@ foreach($categroylist as $catlist){
                                                 </select>
                                             </div>
                                             <div class="col-lg-3">
-                                                <input aria-label="Vendor Items[vendor Part No][]" class="form-control text-right" type="text"
+                                                <input aria-label="<?php echo __('Vendor Items[vendor Part No][]'); ?>" class="form-control text-right" type="text"
                                                     name="vendor_items[vendor_part_no][]"
                                                     value="<?php echo $vi['vendor_part_no']; ?>">
                                             </div>
                                             <div class="col-lg-3">
-                                                <input aria-label="Vendor Items[vendor Part Name][]" class="form-control text-right" type="text"
+                                                <input aria-label="<?php echo __('Vendor Items[vendor Part Name][]'); ?>" class="form-control text-right" type="text"
                                                     name="vendor_items[vendor_part_name][]"
                                                     value="<?php echo $vi['vendor_part_name']; ?>">
                                             </div>
@@ -1137,8 +1137,8 @@ foreach($categroylist as $catlist){
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-xs-12">
-                                        <button class="btn btn-success" type="button" onclick="addMoreVendorItems()">+
-                                            Add More</button>
+                                        <button class="btn btn-success" type="button" onclick="addMoreVendorItems()"><?php echo __('+
+                                            Add More'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -1148,20 +1148,20 @@ foreach($categroylist as $catlist){
                     <div class="form-group col-lg-6">
                         <div class="card">
                             <div class="card-header table-card-header">
-                                <h5>Customers Items</h5>
+                                <h5><?php echo __('Customers Items'); ?></h5>
                                 <div class="card-header-right table-card-header ">
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <span class="form-label">Customers</span>
+                                        <span class="form-label"><?php echo __('Customers'); ?></span>
                                     </div>
                                     <div class="col-lg-3">
-                                        <span class="form-label">Part No</span>
+                                        <span class="form-label"><?php echo __('Part No'); ?></span>
                                     </div>
                                     <div class="col-lg-3">
-                                        <span class="form-label">Part Name</span>
+                                        <span class="form-label"><?php echo __('Part Name'); ?></span>
                                     </div>
                                     <div class="col-lg-1"></div>
                                 </div>
@@ -1178,11 +1178,11 @@ foreach($categroylist as $catlist){
                                             <input type="hidden" name="customer_items[customer_item_id][]"
                                                 value="<?php echo $vi['id']; ?>">
                                             <div class="col-lg-5">
-                                                <select aria-label="Customer Items[customer ][]" class="form-select js-example-basic-single"
+                                                <select aria-label="<?php echo __('Customer Items[customer ][]'); ?>" class="form-select js-example-basic-single"
                                                     name="customer_items[customer_id][]">
                                                     <?php foreach ($customers as $ven) { ?>
                                                         <option value="<?php echo $ven['id']; ?>" <?php if ($ven['id'] == $vi['customer_id']) {
-                                                               echo "selected";
+                                                               echo __('selected');
                                                            } ?>>
                                                             <?php echo $ven['display_name'] . "(" . $ven['company'] . ")" ?>
                                                         </option>
@@ -1190,12 +1190,12 @@ foreach($categroylist as $catlist){
                                                 </select>
                                             </div>
                                             <div class="col-lg-3">
-                                                <input aria-label="Customer Items[customer Part No][]" class="form-control text-right" type="text"
+                                                <input aria-label="<?php echo __('Customer Items[customer Part No][]'); ?>" class="form-control text-right" type="text"
                                                     name="customer_items[customer_part_no][]"
                                                     value="<?php echo $vi['customer_part_no']; ?>">
                                             </div>
                                             <div class="col-lg-3">
-                                                <input aria-label="Customer Items[customer Part Name][]" class="form-control text-right" type="text"
+                                                <input aria-label="<?php echo __('Customer Items[customer Part Name][]'); ?>" class="form-control text-right" type="text"
                                                     name="customer_items[customer_part_name][]"
                                                     value="<?php echo $vi['customer_part_name']; ?>">
                                             </div>
@@ -1209,8 +1209,8 @@ foreach($categroylist as $catlist){
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-xs-12">
-                                        <button class="btn btn-success" type="button" onclick="addMoreCustomerItems()">+
-                                            Add More</button>
+                                        <button class="btn btn-success" type="button" onclick="addMoreCustomerItems()"><?php echo __('+
+                                            Add More'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -1225,7 +1225,7 @@ foreach($categroylist as $catlist){
                     <input type="hidden" id="skuvalidation" value="<?php echo $sku; ?>">
                     <input type="hidden" name="submititem" value="">
                     <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submititemform()"><i
-                            class="fa fa-check m-r-10"></i> <?php echo $rid == "" ? "Submit" : "Update"; ?></button>
+                            class="fa fa-check m-r-10"></i> <?php echo $rid == "" ? __('Submit') : __('Update'); ?></button>
                 </div>
         </form>
     </div>
@@ -1237,15 +1237,15 @@ foreach($categroylist as $catlist){
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header bg-warning">
-                <h5 class="modal-title" id="validationModalLabel">Missing Required Fields</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="validationModalLabel"><?php echo __('Missing Required Fields'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
             <div class="modal-body text-center">
                 <p class="fw-bold text-danger" id="validationMessage"></p>
             </div>
             <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="proceedAnywayBtn">Proceed Anyway</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+                <button type="button" class="btn btn-primary" id="proceedAnywayBtn"><?php echo __('Proceed Anyway'); ?></button>
             </div>
         </div>
     </div>
@@ -1254,21 +1254,21 @@ foreach($categroylist as $catlist){
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" id="skuChangeModalLabel">SKU Change Warning</h5>
+                <h5 class="modal-title" id="skuChangeModalLabel"><?php echo __('SKU Change Warning'); ?></h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
+                    aria-label="<?php echo __('Close'); ?>"></button>
             </div>
             <div class="modal-body text-center">
                 <p class="fw-bold text-danger" id="skuChangeMessage"></p>
                 <p class="text-muted">
-                    Because SKU codes are linked in multiple places, you cannot directly update these fields.<br>
-                    You can either correct your selection or create a <strong>duplicate item</strong> with the new
-                    values.
+                    <?php echo __('Because SKU codes are linked in multiple places, you cannot directly update these fields.'); ?><br>
+                    <?php echo __('You can either correct your selection or create a'); ?> <strong><?php echo __('duplicate item'); ?></strong> <?php echo __('with the new
+                    values.'); ?>
                 </p>
             </div>
             <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go Back</button>
-                <button type="button" class="btn btn-primary" id="duplicateItemBtn">Make Duplicate</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo __('Go Back'); ?></button>
+                <button type="button" class="btn btn-primary" id="duplicateItemBtn"><?php echo __('Make Duplicate'); ?></button>
             </div>
         </div>
     </div>
@@ -1285,10 +1285,10 @@ foreach($categroylist as $catlist){
         var deletrowid = "vendoritemrow_" + maxid;
         var html = '';
         html = '<div class="row mt-2" id="' + deletrowid + '"><input type="hidden" name="vendor_items[vendor_item_id][]" value="">';
-        html += '<div class="col-lg-5"><select aria-label="Vendor Items[vendor ][]" class="form-select js-example-basic-single" name="vendor_items[vendor_id][]"><?php foreach ($vendors as $ven) { ?><option value="<?php echo $ven['id']; ?>" ><?php echo trim(preg_replace('/\s+/', ' ', $ven['display_name'] . "(" . $ven['company'] . ")")); ?></option><?php
+        html += '<div class="col-lg-5"><select aria-label="<?php echo __('Vendor Items[vendor ][]'); ?>" class="form-select js-example-basic-single" name="vendor_items[vendor_id][]"><?php foreach ($vendors as $ven) { ?><option value="<?php echo $ven['id']; ?>" ><?php echo trim(preg_replace('/\s+/', ' ', $ven['display_name'] . "(" . $ven['company'] . ")")); ?></option><?php
 } ?></select></div>';
-        html += '<div class="col-lg-3"><input aria-label="Vendor Items[vendor Part No][]" class="form-control text-right" type="text" name="vendor_items[vendor_part_no][]" value=""></div>';
-        html += '<div class="col-lg-3"><input aria-label="Vendor Items[vendor Part Name][]" class="form-control text-right" type="text" name="vendor_items[vendor_part_name][]" value=""></div>';
+        html += '<div class="col-lg-3"><input aria-label="<?php echo __('Vendor Items[vendor Part No][]'); ?>" class="form-control text-right" type="text" name="vendor_items[vendor_part_no][]" value=""></div>';
+        html += '<div class="col-lg-3"><input aria-label="<?php echo __('Vendor Items[vendor Part Name][]'); ?>" class="form-control text-right" type="text" name="vendor_items[vendor_part_name][]" value=""></div>';
         html += '<div class="col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger" onclick="removeItem(\'' + deletrowid + '\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div>';
         html += '</div>';
         $("#addmorevendoritem").append(html);
@@ -1405,8 +1405,8 @@ foreach($categroylist as $catlist){
         var deleteid = "deleteattachementsid_" + maxrowsattachemets + "";
         var html = '';
         html += '<div class="row" id="' + deleteid + '">';
-        html += '<div class="form-group col-lg-8"><input aria-label="Attachment Name[]" type="text" class="form-control" name="attachment_name[]" value=""></div>';
-        html += '<div class="form-group col-lg-2 text-center"><div class="image-input image-input-empty image-input-outline" id="kt_image_5_2"><label class="btn-hover-text-primary text-dark" data-action="remove" data-bs-toggle="tooltip" title="" style="left: -9px;top: 0px;" data-bs-original-title="Upload File"><span> <i class="fa fa-upload"></i></span><input aria-label="Attachment[]" type="file" name="attachment[]" accept=".pdf, image/*"></label></div></div>';
+        html += '<div class="form-group col-lg-8"><input aria-label="<?php echo __('Attachment Name[]'); ?>" type="text" class="form-control" name="attachment_name[]" value=""></div>';
+        html += '<div class="form-group col-lg-2 text-center"><div class="image-input image-input-empty image-input-outline" id="kt_image_5_2"><label class="btn-hover-text-primary text-dark" data-action="remove" data-bs-toggle="tooltip" title="" style="left: -9px;top: 0px;" data-bs-original-title="<?php echo __('Upload File'); ?>"><span> <i class="fa fa-upload"></i></span><input aria-label="<?php echo __('Attachment[]'); ?>" type="file" name="attachment[]" accept=".pdf, image/*"></label></div></div>';
         html += '<div class="form-group col-lg-2"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash float-end text-danger" onclick="deletRowjoinOwner(\'' + deleteid + '\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div>';
         html += '</div>';
         $("#addmoreattachements_id").append(html);
@@ -1537,7 +1537,7 @@ function setCategoryAccounts(categoryId) {
 
 
             var child_category_id = document.getElementById("child_category_id");
-            child_category_id.innerHTML = '<option value="">Select Any One</option>';
+            child_category_id.innerHTML = '<option value=""><?php echo __('Select Any One'); ?></option>';
             if (data && Array.isArray(data.child_categroy) && data.child_categroy.length > 0) {
               data.child_categroy.forEach(function(item) {
                 var option = document.createElement("option");
@@ -1546,7 +1546,7 @@ function setCategoryAccounts(categoryId) {
                 child_category_id.appendChild(option);
               });
             } else {
-              child_category_id.innerHTML = '<option value="">Select Any One</option>';
+              child_category_id.innerHTML = '<option value=""><?php echo __('Select Any One'); ?></option>';
             }
                $(".js-example-basic-single").select2();
 
@@ -1576,7 +1576,7 @@ function setChildCategoryAccounts(categoryId){
                 return;
             }
             var sub_child_category_id = document.getElementById("sub_child_category_id");
-            sub_child_category_id.innerHTML = '<option value="">Select Any One</option>';
+            sub_child_category_id.innerHTML = '<option value=""><?php echo __('Select Any One'); ?></option>';
             if (data && Array.isArray(data.child_categroy) && data.child_categroy.length > 0) {
                 data.child_categroy.forEach(function(item) {
                     var option = document.createElement("option");
@@ -1585,7 +1585,7 @@ function setChildCategoryAccounts(categoryId){
                     sub_child_category_id.appendChild(option);
                 });
             } else {
-                sub_child_category_id.innerHTML = '<option value="">Select Any One</option>';
+                sub_child_category_id.innerHTML = '<option value=""><?php echo __('Select Any One'); ?></option>';
             }
             $(".js-example-basic-single").select2();
         }
@@ -1606,17 +1606,17 @@ function addMoreCustomerItems() {
                 <input type="hidden" name="customer_items[customer_item_id][]"
                     value="">`;
 
-             html += `<div class="col-lg-5"><select aria-label="Customer Items[customer ][]" class="form-select js-example-basic-single" name="customer_items[customer_id][]"><?php foreach ($customers as $ven) { ?><option value="<?php echo $ven['id']; ?>" ><?php echo trim(preg_replace('/\s+/', ' ', $ven['display_name'] . "(" . $ven['company'] . ")")); ?></option><?php
+             html += `<div class="col-lg-5"><select aria-label="<?php echo __('Customer Items[customer ][]'); ?>" class="form-select js-example-basic-single" name="customer_items[customer_id][]"><?php foreach ($customers as $ven) { ?><option value="<?php echo $ven['id']; ?>" ><?php echo trim(preg_replace('/\s+/', ' ', $ven['display_name'] . "(" . $ven['company'] . ")")); ?></option><?php
 } ?></select></div>`;
 
 
                 html += `<div class="col-lg-3">
-                    <input aria-label="Customer Items[customer Part No][]" class="form-control text-right" type="text"
+                    <input aria-label="<?php echo __('Customer Items[customer Part No][]'); ?>" class="form-control text-right" type="text"
                         name="customer_items[customer_part_no][]"
                         value="">
                 </div>
                 <div class="col-lg-3">
-                    <input aria-label="Customer Items[customer Part Name][]" class="form-control text-right" type="text"
+                    <input aria-label="<?php echo __('Customer Items[customer Part Name][]'); ?>" class="form-control text-right" type="text"
                         name="customer_items[customer_part_name][]"
                         value="">
                 </div>

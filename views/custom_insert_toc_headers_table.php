@@ -22,10 +22,10 @@ if(isset($_POST['tableshow']) && $_POST['tableshow'] != ""){
 ?>
 <div class="card " style="position: sticky;top: 10px; ">
     <div class="card-header">
-        <h5>View</h5>
+        <h5><?php echo __('View'); ?></h5>
         <div class="card-header-right">
-           <button target="_blank" class="btn btn-info font-weight-bold m-r-5" onclick="editFinanaceGrp('<?php echo $hearedfooter['header']['id']; ?>')"><i class="fa fa-edit cursor-pointer text-white"></i> Header </button>
-            <button target="_blank" class="btn btn-info font-weight-bold " onclick="editFinanaceGrp('<?php echo $hearedfooter['footer']['id']; ?>')"><i class="fa fa-edit cursor-pointer text-white"></i> Footer </button>
+           <button target="_blank" class="btn btn-info font-weight-bold m-r-5" onclick="editFinanaceGrp('<?php echo $hearedfooter['header']['id']; ?>')"><i class="fa fa-edit cursor-pointer text-white"></i> <?php echo __('Header'); ?> </button>
+            <button target="_blank" class="btn btn-info font-weight-bold " onclick="editFinanaceGrp('<?php echo $hearedfooter['footer']['id']; ?>')"><i class="fa fa-edit cursor-pointer text-white"></i> <?php echo __('Footer'); ?> </button>
         </div>
     </div>
     <div class="card-body custom-scroll" style="height: 500px;">
@@ -33,7 +33,7 @@ if(isset($_POST['tableshow']) && $_POST['tableshow'] != ""){
             <thead>
                 <tr>
 
-                    <th scope="col" style="width: 90%;">Header Name</th>
+                    <th scope="col" style="width: 90%;"><?php echo __('Header Name'); ?></th>
                     <th scope="col" style="width: 10%;"><button type="button" class="btn p-0 border-0 bg-transparent fa fa-plus-square text-primary mr-10 f-24" onclick="editFinanaceGrp('0')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></th>
                 </tr>
             </thead>

@@ -71,7 +71,7 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
  <?php if($error_message !=''){ ?>
     <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
     <?php } ?>
 <form method="post" class="<?php echo $formdisable; ?>" action="" name="kittingForm">
@@ -83,7 +83,7 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
         }
             ?>
         <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">BOM</h5>
+            <h5 class="mb-0"><?php echo __('BOM'); ?></h5>
             <div class="card-header-right">
                 <?php
                     echo $workflowsteps['workflow_btn'];
@@ -101,7 +101,7 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                 ?>
                 <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light m-r-50">
                     <i class="icofont icofont-reply mr-1"></i>
-                    Back
+                    <?php echo __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -109,9 +109,9 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
             <input type="hidden" name="rid" value="<?php echo $rid; ?>">
             <div class="row" >
                 <div class="col-md-3 w-full">
-                    <label for="bom_item_id" class="form-label d-block">Product <span class="text-danger">*</span></label>
-                    <select aria-label="Bom Item" class="js-example-basic-single item-selection js-bom-item-root" name="bom_item_id" id="bom_item_id" data-type="ROOT" required>
-                        <option value="">Select Any one</option>
+                    <label for="bom_item_id" class="form-label d-block"><?php echo __('Product'); ?> <span class="text-danger">*</span></label>
+                    <select aria-label="<?php echo __('Bom Item'); ?>" class="js-example-basic-single item-selection js-bom-item-root" name="bom_item_id" id="bom_item_id" data-type="ROOT" required>
+                        <option value=""><?php echo __('Select Any one'); ?></option>
                         <?php foreach ($items as $item){  if($item['stocking_type'] == "F" || $item['stocking_type'] == "W"){ ?>
                             <option value="<?php echo $item['id']; ?>" <?php echo $manufacturing_boms['bom_item_id'] == $item['id']?"selected":""; ?>><?php echo $item['item_name']." (".$itemworktype[$item['stocking_type']].")"; ?></option>
                         <?php } ?>
@@ -119,31 +119,31 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                     </select>
                 </div>
                 <div class="col-md-3 w-full">
-                    <label for="bom_uom" class="form-label d-block">UOM <span class="text-danger">*</span></label>
-                    <select aria-label="Bom Uom" class="js-example-basic-single"  name="bom_uom"  id="bom_uom" required>
-                        <option value="">Select Any one</option>
+                    <label for="bom_uom" class="form-label d-block"><?php echo __('UOM'); ?> <span class="text-danger">*</span></label>
+                    <select aria-label="<?php echo __('Bom Uom'); ?>" class="js-example-basic-single"  name="bom_uom"  id="bom_uom" required>
+                        <option value=""><?php echo __('Select Any one'); ?></option>
                         <?php foreach ($unit_of_measurements as $uom){  ?>
                             <option value="<?php echo $uom['id']; ?>" <?php echo $manufacturing_boms['bom_uom'] == $uom['id']?"selected":""; ?>><?php echo $uom['uom_name']; ?></option>
                         <?php }  ?>
                     </select>
                 </div>
                 <div class="col-md-2 mb-3">
-                    <label for="bom_quantity" class="form-label">Quantity <span class="text-danger">*</span></label>
+                    <label for="bom_quantity" class="form-label"><?php echo __('Quantity'); ?> <span class="text-danger">*</span></label>
                     <input type="number" class="form-control js-update-calculation" id="bom_quantity" name="bom_quantity" min="1"
                            value="<?php echo $manufacturing_boms['bom_quantity']; ?>" required>
                 </div>
                 <div class="col-md-2">
-                    <label for="transaction_date" class="form-label"> Date <span
+                    <label for="transaction_date" class="form-label"> <?php echo __('Date'); ?> <span
                             class="text-danger">*</span></label>
-                    <input aria-label="Transaction Date" type="text" class="form-control datepicker" id="transaction_date" name="transaction_date" value="<?php echo fromDate($manufacturing_boms['transaction_date']); ?>" required>
+                    <input aria-label="<?php echo __('Transaction Date'); ?>" type="text" class="form-control datepicker" id="transaction_date" name="transaction_date" value="<?php echo fromDate($manufacturing_boms['transaction_date']); ?>" required>
                 </div>
                 <div class="col-md-1 text-right">
-                    <span class="form-label d-block">Version </span>
+                    <span class="form-label d-block"><?php echo __('Version'); ?> </span>
                     <span>0.1</span>
 
                 </div>
                 <div class="col-md-1 text-right">
-                    <span class="form-label d-block">Total </span>
+                    <span class="form-label d-block"><?php echo __('Total'); ?> </span>
                     <span id="bom_amount_span"><?php echo customeummarmonyformateifine($manufacturing_boms['bom_amount']); ?></span>
                     <input type="hidden" class="form-control" id="bom_amount" name="bom_amount" value="<?php echo $manufacturing_boms['bom_amount']; ?>" required>
                 </div>
@@ -154,13 +154,13 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
     <div class="mt-5">
         <ul class="nav md-tabs infisuite_tab mt-2 ml-2">
             <li class="nav-item">
-                <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#bom-product" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">BOM</a>
+                <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#bom-product" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('BOM'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#by-products" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">By-Product</a>
+                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#by-products" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('By-Product'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#bom-operations" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Operation</a>
+                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#bom-operations" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('Operation'); ?></a>
             </li>
         </ul>
     </div>
@@ -168,18 +168,18 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
             <div class="tab-pane card-body active p-0" id="bom-product" role="tabpanel">
                 <div class="card">
                     <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">BOM</h5>
+                        <h5 class="mb-0"><?php echo __('BOM'); ?></h5>
                         <div class="card-header-right"></div>
                     </div>
                     <div class="card-body ">
                         <table class="table table-hover " >
                             <thead>
                                 <tr>
-                                    <th scope="col" class="p-1" style="width: 30%;">Product Name <span class="requried"></span></th>
-                                    <th scope="col" class="thheader p-1" style="width: 10%;">UOM <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Qty <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Scrap %</th>
-                                    <th scope="col" class="thheader p-1 " style="width: 25%;">Default Vendor</th>
+                                    <th scope="col" class="p-1" style="width: 30%;"><?php echo __('Product Name'); ?> <span class="requried"></span></th>
+                                    <th scope="col" class="thheader p-1" style="width: 10%;"><?php echo __('UOM'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;"><?php echo __('Qty'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;"><?php echo __('Scrap %'); ?></th>
+                                    <th scope="col" class="thheader p-1 " style="width: 25%;"><?php echo __('Default Vendor'); ?></th>
 
                                     <th scope="col" class="thheader p-1 text-right" style="width: 5%;"></th>
                                 </tr>
@@ -195,17 +195,17 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                     <input type="hidden" class="manufacturing_bom_items_seq_no" name="manufacturing_bom_items_seq_no[]" value="<?php echo $seq; ?>">
                                     <input type="hidden" name="manufacturing_bom_items_id[]" value="<?php echo $mbomi['id']; ?>">
                                     <td class="p-1 w-full-30" >
-                                        <select aria-label="Select option" class="js-example-basic-single item-selection js-bom-item-select" id="item_id_<?php echo $seq; ?>" name="item_id[]" data-seq="<?php echo $seq; ?>" data-type="BOMITEM" required>
-                                            <option value="">Select Any one</option>
+                                        <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single item-selection js-bom-item-select" id="item_id_<?php echo $seq; ?>" name="item_id[]" data-seq="<?php echo $seq; ?>" data-type="BOMITEM" required>
+                                            <option value=""><?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($items as $item){ ?>
                                                 <option value="<?php echo $item['id']; ?>" <?php echo $mbomi['item_id'] == $item['id']?"selected":""; ?>><?php echo $item['item_name']." (".$itemworktype[$item['stocking_type']].")"; ?></option>
                                             <?php } ?>
                                         </select>
-                                        <textarea aria-label="Text area"  id="description_<?php echo $seq; ?>" name="description[]" class="form-control mt-2" autocomplete="off"><?php echo $mbomi['description']; ?></textarea>
+                                        <textarea aria-label="<?php echo __('Text area'); ?>"  id="description_<?php echo $seq; ?>" name="description[]" class="form-control mt-2" autocomplete="off"><?php echo $mbomi['description']; ?></textarea>
                                     </td>
                                     <td class="p-1 w-ful w-full-10" id="custom-popup">
-                                        <select aria-label="Select option" class="js-example-basic-single" id="uom_<?php echo $seq; ?>" name="uom[]" required>
-                                            <option value="">Select Any one</option>
+                                        <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single" id="uom_<?php echo $seq; ?>" name="uom[]" required>
+                                            <option value=""><?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($unit_of_measurements as $uom){  ?>
                                                 <option value="<?php echo $uom['id']; ?>"  <?php echo $mbomi['uom'] == $uom['id']?"selected":""; ?>><?php echo $uom['uom_name']; ?></option>
                                             <?php }  ?>
@@ -214,21 +214,21 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                         <div class="custom-popup-open popup-width-850 alternate-items-popup text-start" data-seq="<?php echo $seq; ?>">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h5>Alternate Items</h5>
+                                                    <h5><?php echo __('Alternate Items'); ?></h5>
                                                     <div class="card-header-right">
-                                                        <i class="ti-close js-close-popup" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed"></i>
+                                                        <i class="ti-close js-close-popup" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
                                                     <table class="table table-hover " >
                                                         <thead>
                                                             <tr>
-                                                                <th scope="col" class="p-1" style="width: 25%;">Product Name <span class="requried"></span></th>
-                                                                <th scope="col" class="thheader p-1" style="width: 15%;">UOM <span class="requried">*</span></th>
-                                                                <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Qty <span class="requried">*</span></th>
-                                                                <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Rate <span class="requried">*</span></th>
-                                                                <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Amount <span class="requried">*</span></th>
-                                                                <th scope="col" class="p-1" style="width: 25%;">Description </th>
+                                                                <th scope="col" class="p-1" style="width: 25%;"><?php echo __('Product Name'); ?> <span class="requried"></span></th>
+                                                                <th scope="col" class="thheader p-1" style="width: 15%;"><?php echo __('UOM'); ?> <span class="requried">*</span></th>
+                                                                <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Qty'); ?> <span class="requried">*</span></th>
+                                                                <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Rate'); ?> <span class="requried">*</span></th>
+                                                                <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Amount'); ?> <span class="requried">*</span></th>
+                                                                <th scope="col" class="p-1" style="width: 25%;"><?php echo __('Description'); ?> </th>
                                                                 <th scope="col" class="thheader p-1 text-right" style="width: 5%;"></th>
                                                             </tr>
                                                         </thead>
@@ -245,8 +245,8 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                                             <tr id="alternate_remove_row_<?php echo $seqs; ?>">
                                                                 <td class="p-1 w-full" >
                                                                     <input type="hidden" class="alternate_manufacturing_bom_items_seq_no" name="alternate_manufacturing_bom_items_seq_no[]" value="<?php echo $seqs; ?>">
-                                                                    <select aria-label="Select option" class="js-example-basic-single item-selection js-alternate-item-select" id="alternate_item_id_<?php echo $seqs; ?>" name="alternate_item_id[<?php echo $seq; ?>][]" data-seq="<?php echo $seqs; ?>" data-type="ALTERNATE_BOMITEM" >
-                                                                        <option value="">Select Any one</option>
+                                                                    <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single item-selection js-alternate-item-select" id="alternate_item_id_<?php echo $seqs; ?>" name="alternate_item_id[<?php echo $seq; ?>][]" data-seq="<?php echo $seqs; ?>" data-type="ALTERNATE_BOMITEM" >
+                                                                        <option value=""><?php echo __('Select Any one'); ?></option>
                                                                         <?php if($mbomi['item_id'] !=""){ foreach ($alternate_items[$mbomi['item_id']] as $item){ ?>
                                                                             <option value="<?php echo $item['id']; ?>" <?php echo $altermbomi['alternate_item_id'] == $item['id']?"selected":""; ?>><?php echo $item['item_name']." (".$itemworktype[$item['stocking_type']].")"; ?></option>
                                                                         <?php } ?>
@@ -254,15 +254,15 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                                                     </select>
                                                                 </td>
                                                                 <td class="p-1 w-full ">
-                                                                    <select aria-label="Select option" class="js-example-basic-single" id="alternate_uom_<?php echo $seqs; ?>" name="alternate_uom[<?php echo $seq; ?>][]" >
-                                                                        <option value="">Select Any one</option>
+                                                                    <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single" id="alternate_uom_<?php echo $seqs; ?>" name="alternate_uom[<?php echo $seq; ?>][]" >
+                                                                        <option value=""><?php echo __('Select Any one'); ?></option>
                                                                         <?php foreach ($unit_of_measurements as $uom){  ?>
                                                                             <option value="<?php echo $uom['id']; ?>"  <?php echo $altermbomi['alternate_uom'] == $uom['id']?"selected":""; ?>><?php echo $uom['uom_name']; ?></option>
                                                                         <?php }  ?>
                                                                     </select>
                                                                 </td>
                                                                 <td class="p-1">
-                                                                    <input aria-label="Enter number" type="number" class="form-control text-right js-manufacturing-calc" id="alternate_quantity_<?php echo $seqs; ?>" name="alternate_quantity[<?php echo $seq; ?>][]" min="1" value="<?php echo $altermbomi['alternate_quantity']; ?>" >
+                                                                    <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right js-manufacturing-calc" id="alternate_quantity_<?php echo $seqs; ?>" name="alternate_quantity[<?php echo $seq; ?>][]" min="1" value="<?php echo $altermbomi['alternate_quantity']; ?>" >
 
                                                                     <input type="hidden" class="form-control text-right js-manufacturing-calc" id="alternate_rate_<?php echo $seqs; ?>" name="alternate_rate[<?php echo $seq; ?>][]" min="1" value="<?php echo $altermbomi['alternate_rate']!=""?$altermbomi['alternate_rate']:0; ?>" readonly>
 
@@ -279,10 +279,10 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                                                     </p>
                                                                 </td>
                                                                 <td class="p-1">
-                                                                    <textarea aria-label="Text area"  id="alternate_description_<?php echo $seqs; ?>" name="alternate_description[<?php echo $seq; ?>][]" class="form-control" autocomplete="off"><?php echo $altermbomi['alternate_description']; ?></textarea>
+                                                                    <textarea aria-label="<?php echo __('Text area'); ?>"  id="alternate_description_<?php echo $seqs; ?>" name="alternate_description[<?php echo $seq; ?>][]" class="form-control" autocomplete="off"><?php echo $altermbomi['alternate_description']; ?></textarea>
                                                                 </td>
                                                                 <td class="p-1" >
-                                                                    <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove" data-target="alternate_remove_row_<?php echo $seqs; ?>"></i>
+                                                                    <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Remove'); ?>" data-target="alternate_remove_row_<?php echo $seqs; ?>"></i>
                                                                 </td>
                                                             </tr>
                                                             <?php $seqs++;
@@ -291,16 +291,16 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                                     </table>
                                                     <div class="row mt-2">
                                                         <div class="col-xs-12">
-                                                            <button class="btn btn-success js-add-alternate-items" data-seq="<?php echo $seq; ?>" type="button">+ Add More Alternate</button>
+                                                            <button class="btn btn-success js-add-alternate-items" data-seq="<?php echo $seq; ?>" type="button"><?php echo __('+ Add More Alternate'); ?></button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="mt-2" data-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Operation Process" >
-                                            <select aria-label="Bom Manufacturing Operation []" class="js-example-basic-single" name="bom_manufacturing_operation_id[]" id="bom_manufacturing_operation_id_<?php echo $seq; ?>" >
-                                                <option value="">Select Any one</option>
+                                        <div class="mt-2" data-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Operation Process'); ?>" >
+                                            <select aria-label="<?php echo __('Bom Manufacturing Operation []'); ?>" class="js-example-basic-single" name="bom_manufacturing_operation_id[]" id="bom_manufacturing_operation_id_<?php echo $seq; ?>" >
+                                                <option value=""><?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($manufacturing_operations as $item){ ?>
                                                 <option value="<?php echo $item['id']; ?>" <?php echo $mbomi['bom_manufacturing_operation_id'] == $item['id']?"selected":""; ?>><?php echo $item['operation_name']; ?></option>
                                             <?php } ?>
@@ -308,9 +308,9 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                         </div>
                                     </td>
                                     <td class="p-1">
-                                        <input aria-label="Enter number" type="number" class="form-control text-right js-manufacturing-calc" id="quantity_<?php echo $seq; ?>" name="quantity[]" min="1" value="<?php echo $mbomi['quantity']; ?>" >
+                                        <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right js-manufacturing-calc" id="quantity_<?php echo $seq; ?>" name="quantity[]" min="1" value="<?php echo $mbomi['quantity']; ?>" >
                                         <p class="mt-2  f-12">
-                                            Rate - <span class="d-block" id="rate_text_<?php echo $seq; ?>"><?php echo $mbomi['rate']!=""?$mbomi['rate']:0; ?></span>
+                                            <?php echo __('Rate -'); ?> <span class="d-block" id="rate_text_<?php echo $seq; ?>"><?php echo $mbomi['rate']!=""?$mbomi['rate']:0; ?></span>
                                         </p>
                                         <input type="hidden" class="form-control text-right js-manufacturing-calc" id="rate_<?php echo $seq; ?>" name="rate[]" min="1" value="<?php echo $mbomi['rate']!=""?$mbomi['rate']:0; ?>" readonly>
 
@@ -318,21 +318,21 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                     </td>
 
                                     <td class="p-1">
-                                        <input aria-label="Enter number" type="number" class="form-control text-right" id="scrap_<?php echo $seq; ?>" name="scrap[]" min="0" value="<?php echo $mbomi['scrap']; ?>" >
+                                        <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right" id="scrap_<?php echo $seq; ?>" name="scrap[]" min="0" value="<?php echo $mbomi['scrap']; ?>" >
                                         <p class="mt-2 d-block f-12">
-                                            Amount - <span class="d-block" id="amount_text_<?php echo $seq; ?>"><?php echo $mbomi['amount']!=""?$mbomi['amount']:0; ?></span>
+                                            <?php echo __('Amount -'); ?> <span class="d-block" id="amount_text_<?php echo $seq; ?>"><?php echo $mbomi['amount']!=""?$mbomi['amount']:0; ?></span>
                                         </p>
                                     </td>
                                     <td class="p-1 w-full w-full-30">
-                                        <select aria-label="Select option" class="js-example-basic-single" id="party_id_<?php echo $seq; ?>" name="party_id[]" >
-                                            <option value="">Select Any one</option>
+                                        <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single" id="party_id_<?php echo $seq; ?>" name="party_id[]" >
+                                            <option value=""><?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($vendors as $item){ ?>
                                                 <option value="<?php echo $item['id']; ?>" <?php echo $mbomi['party_id'] == $item['id']?"selected":""; ?>><?php echo $item['display_name']; ?></option>
                                             <?php } ?>
                                         </select>
                                         <div class="mt-2">
-                                            <select aria-label="Select option" class="js-example-basic-single"  id="warehouse_id_<?php echo $seq; ?>" name="warehouse_id[]" >
-                                            <option value="">Select Any one</option>
+                                            <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single"  id="warehouse_id_<?php echo $seq; ?>" name="warehouse_id[]" >
+                                            <option value=""><?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($warehouses as $item){ ?>
                                                 <option value="<?php echo $item['id']; ?>" <?php echo $mbomi['warehouse_id'] == $item['id']?"selected":""; ?>><?php echo $item['warehouse_name']; ?></option>
                                             <?php } ?>
@@ -340,8 +340,8 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                         </div>
                                     </td>
                                     <td class="p-1" >
-                                        <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove" data-target="remove_row_<?php echo $seq; ?>"></i>
-                                        <i class="ti-exchange-vertical mt-2 d-block cursor-pointer js-open-alternate-items" data-bs-toggle="tooltip" title="" data-bs-original-title="+ Alternate Items" data-seq="<?php echo $seq; ?>"></i>
+                                        <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Remove'); ?>" data-target="remove_row_<?php echo $seq; ?>"></i>
+                                        <i class="ti-exchange-vertical mt-2 d-block cursor-pointer js-open-alternate-items" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('+ Alternate Items'); ?>" data-seq="<?php echo $seq; ?>"></i>
 
                                     </td>
                                 </tr>
@@ -351,7 +351,7 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                         </table>
                          <div class="row mt-2">
                             <div class="col-xs-12">
-                                <button class="btn btn-success js-add-bom-item" type="button">+ Add More Product</button>
+                                <button class="btn btn-success js-add-bom-item" type="button"><?php echo __('+ Add More Product'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -360,7 +360,7 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
             <div class="tab-pane card-body p-0" id="by-products" role="tabpanel">
                 <div class="card">
                     <div class="card-header">
-                        <h5>By-Product</h5>
+                        <h5><?php echo __('By-Product'); ?></h5>
                         <div class="card-header-right">
 
                         </div>
@@ -369,10 +369,10 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                         <table class="table table-hover " >
                             <thead>
                                 <tr>
-                                    <th scope="col" class="p-1" style="width: 45%;">Product Name <span class="requried"></span></th>
-                                    <th scope="col" class="thheader p-1" style="width: 15%;">UOM <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Qty <span class="requried">*</span></th>
-                                    <th scope="col" class="p-1" style="width: 25%;">Description </th>
+                                    <th scope="col" class="p-1" style="width: 45%;"><?php echo __('Product Name'); ?> <span class="requried"></span></th>
+                                    <th scope="col" class="thheader p-1" style="width: 15%;"><?php echo __('UOM'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Qty'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="p-1" style="width: 25%;"><?php echo __('Description'); ?> </th>
                                     <th scope="col" class="thheader p-1 text-right" style="width: 5%;"></th>
                                 </tr>
                             </thead>
@@ -389,29 +389,29 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                     <input type="hidden" name="manufacturing_bom_byitem_item_id[]" value="<?php echo $byitm['id']; ?>">
 
                                     <td class="p-1 w-full" >
-                                        <select aria-label="Select option" class="js-example-basic-single item-selection js-byitem-select" id="byitem_item_id_<?php echo $seqs; ?>" name="byitem_item_id[]" data-seq="<?php echo $seqs; ?>" data-type="BYITEM" >
-                                            <option value="">Select Any one</option>
+                                        <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single item-selection js-byitem-select" id="byitem_item_id_<?php echo $seqs; ?>" name="byitem_item_id[]" data-seq="<?php echo $seqs; ?>" data-type="BYITEM" >
+                                            <option value=""><?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($items as $item){ ?>
                                                 <option value="<?php echo $item['id']; ?>" <?php echo $byitm['byitem_item_id'] == $item['id']?"selected":""; ?>><?php echo $item['item_name']." (".$itemworktype[$item['stocking_type']].")"; ?></option>
                                             <?php } ?>
                                         </select>
                                     </td>
                                     <td class="p-1 w-full ">
-                                        <select aria-label="Select option" class="js-example-basic-single" id="byitem_uom_<?php echo $seqs; ?>" name="byitem_uom[]" >
-                                            <option value="">Select Any one</option>
+                                        <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single" id="byitem_uom_<?php echo $seqs; ?>" name="byitem_uom[]" >
+                                            <option value=""><?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($unit_of_measurements as $uom){  ?>
                                                 <option value="<?php echo $uom['id']; ?>"  <?php echo $byitm['byitem_uom'] == $uom['id']?"selected":""; ?>><?php echo $uom['uom_name']; ?></option>
                                             <?php }  ?>
                                         </select>
                                     </td>
                                     <td class="p-1">
-                                        <input aria-label="Enter number" type="number" class="form-control text-right" id="byitem_quantity_<?php echo $seqs; ?>" name="byitem_quantity[]" min="1" value="<?php echo $byitm['byitem_quantity']; ?>" >
+                                        <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right" id="byitem_quantity_<?php echo $seqs; ?>" name="byitem_quantity[]" min="1" value="<?php echo $byitm['byitem_quantity']; ?>" >
                                     </td>
                                     <td class="p-1">
-                                        <textarea aria-label="Text area"  id="byitem_description_<?php echo $seqs; ?>" name="byitem_description[]" class="form-control" autocomplete="off"><?php echo $byitm['byitem_description']; ?></textarea>
+                                        <textarea aria-label="<?php echo __('Text area'); ?>"  id="byitem_description_<?php echo $seqs; ?>" name="byitem_description[]" class="form-control" autocomplete="off"><?php echo $byitm['byitem_description']; ?></textarea>
                                     </td>
                                     <td class="p-1" >
-                                        <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove" data-target="byitem_remove_row_<?php echo $seqs; ?>"></i>
+                                        <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Remove'); ?>" data-target="byitem_remove_row_<?php echo $seqs; ?>"></i>
                                     </td>
                                 </tr>
                                 <?php $seqs++;
@@ -420,7 +420,7 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                         </table>
                         <div class="row mt-2">
                             <div class="col-xs-12">
-                                <button class="btn btn-success js-add-byitem" type="button">+ Add More By-Product</button>
+                                <button class="btn btn-success js-add-byitem" type="button"><?php echo __('+ Add More By-Product'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -429,20 +429,20 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
             <div class="tab-pane card-body p-0" id="bom-operations" role="tabpanel">
                 <div class="card">
                     <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Operations</h5>
+                        <h5 class="mb-0"><?php echo __('Operations'); ?></h5>
                         <div class="card-header-right"></div>
                     </div>
                     <div class="card-body ">
                         <table class="table table-hover" >
                             <thead>
                                 <tr>
-                                    <th scope="col" class="p-1" style="width: 15%;">Operation <span class="requried"></span></th>
-                                    <th scope="col" class="p-1" style="width: 15%;">Machine <span class="requried"></span></th>
-                                    <th scope="col" class="thheader p-1" style="width: 10%;">Time (minutes) <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Manpower <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Cost per Hours <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;"> Total <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Note <span class="requried">*</span></th>
+                                    <th scope="col" class="p-1" style="width: 15%;"><?php echo __('Operation'); ?> <span class="requried"></span></th>
+                                    <th scope="col" class="p-1" style="width: 15%;"><?php echo __('Machine'); ?> <span class="requried"></span></th>
+                                    <th scope="col" class="thheader p-1" style="width: 10%;"><?php echo __('Time (minutes)'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Manpower'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;"><?php echo __('Cost per Hours'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;"> <?php echo __('Total'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;"><?php echo __('Note'); ?> <span class="requried">*</span></th>
 
                                     <th scope="col" class="thheader p-1 text-right" style="width: 5%;"></th>
                                 </tr>
@@ -458,16 +458,16 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                     <input type="hidden" name="manufacturing_bom_operation_id[]" value="<?php echo $mbomi['id']; ?>">
                                     <input type="hidden" class="manufacturing_bom_operation_seq_no" name="manufacturing_bom_operation_seq_no[]" value="<?php echo $seqq; ?>">
                                     <td class="p-1 w-full">
-                                        <select aria-label="Manufacturing Operation []" class="js-example-basic-single js-operation-select" name="manufacturing_operation_id[]" id="manufacturing_operation_id_<?php echo $seqq; ?>" data-seq="<?php echo $seqq; ?>" data-type="OPERATIONS" required>
-                                            <option value="">Select Any one</option>
+                                        <select aria-label="<?php echo __('Manufacturing Operation []'); ?>" class="js-example-basic-single js-operation-select" name="manufacturing_operation_id[]" id="manufacturing_operation_id_<?php echo $seqq; ?>" data-seq="<?php echo $seqq; ?>" data-type="OPERATIONS" required>
+                                            <option value=""><?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($manufacturing_operations_parent as $item){ ?>
                                                 <option value="<?php echo $item['id']; ?>" <?php echo $mbomi['manufacturing_operation_id'] == $item['id']?"selected":""; ?>><?php echo $item['operation_name']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </td>
                                     <td class="p-1 w-full" id="custom-popup_2">
-                                        <select aria-label="Manufacturing Operation Machine []" class="js-example-basic-single js-operation-machine-select" name="manufacturing_operation_machine_id[]" id="manufacturing_operation_machine_id_<?php echo $seqq; ?>" data-seq="<?php echo $seqq; ?>" data-type="MACHINE">
-                                            <option value="">Select Any one</option>
+                                        <select aria-label="<?php echo __('Manufacturing Operation Machine []'); ?>" class="js-example-basic-single js-operation-machine-select" name="manufacturing_operation_machine_id[]" id="manufacturing_operation_machine_id_<?php echo $seqq; ?>" data-seq="<?php echo $seqq; ?>" data-type="MACHINE">
+                                            <option value=""><?php echo __('Select Any one'); ?></option>
                                             <?php foreach ($manufacturing_operations_child[$mbomi['manufacturing_operation_id']] as $item){ ?>
                                                 <option value="<?php echo $item['id']; ?>" <?php echo $mbomi['manufacturing_operation_machine_id'] == $item['id']?"selected":""; ?>><?php echo $item['operation_name']; ?></option>
                                             <?php } ?>
@@ -476,21 +476,21 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                         <div class="custom-popup-open popup-width-1000 alternate-machine-popup text-start" data-seq="<?php echo $seqq; ?>">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h5>Alternate Machine</h5>
+                                                    <h5><?php echo __('Alternate Machine'); ?></h5>
                                                     <div class="card-header-right">
-                                                        <i class="ti-close js-close-popup" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed"></i>
+                                                        <i class="ti-close js-close-popup" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
                                                     <table class="table table-hover " >
                                                         <thead>
                                                             <tr>
-                                                                <th scope="col" class="p-1" style="width: 20%;">Machine <span class="requried"></span></th>
-                                                                <th scope="col" class="thheader p-1" style="width: 10%;">Time (minutes) <span class="requried">*</span></th>
-                                                                <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Manpower <span class="requried">*</span></th>
-                                                                <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Cost per Hours <span class="requried">*</span></th>
-                                                                <th scope="col" class="thheader p-1 text-right" style="width: 15%;"> Total <span class="requried">*</span></th>
-                                                                <th scope="col" class="thheader p-1 text-right" style="width: 25%;">Note <span class="requried">*</span></th>
+                                                                <th scope="col" class="p-1" style="width: 20%;"><?php echo __('Machine'); ?> <span class="requried"></span></th>
+                                                                <th scope="col" class="thheader p-1" style="width: 10%;"><?php echo __('Time (minutes)'); ?> <span class="requried">*</span></th>
+                                                                <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Manpower'); ?> <span class="requried">*</span></th>
+                                                                <th scope="col" class="thheader p-1 text-right" style="width: 15%;"><?php echo __('Cost per Hours'); ?> <span class="requried">*</span></th>
+                                                                <th scope="col" class="thheader p-1 text-right" style="width: 15%;"> <?php echo __('Total'); ?> <span class="requried">*</span></th>
+                                                                <th scope="col" class="thheader p-1 text-right" style="width: 25%;"><?php echo __('Note'); ?> <span class="requried">*</span></th>
 
                                                                 <th scope="col" class="thheader p-1 text-right" style="width: 5%;"></th>
                                                             </tr>
@@ -508,30 +508,30 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                                             <tr id="alternate_remove_machine_row_<?php echo $seqs; ?>">
                                                                 <td class="p-1 w-full">
                                                                     <input type="hidden" class="alternate_manufacturing_bom_operation_seq_no" name="alternate_manufacturing_bom_operation_seq_no[]" value="<?php echo $seqs; ?>">
-                                                                    <select aria-label="Select option" class="js-example-basic-single js-alternate-machine-select" name="alternate_manufacturing_operation_machine_id[<?php echo $seqq; ?>][]" id="alternate_manufacturing_operation_machine_id_<?php echo $seqs; ?>" data-seq="<?php echo $seqs; ?>" data-type="ALTERNATE_MACHINE">
-                                                                        <option value="">Select Any one</option>
+                                                                    <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single js-alternate-machine-select" name="alternate_manufacturing_operation_machine_id[<?php echo $seqq; ?>][]" id="alternate_manufacturing_operation_machine_id_<?php echo $seqs; ?>" data-seq="<?php echo $seqs; ?>" data-type="ALTERNATE_MACHINE">
+                                                                        <option value=""><?php echo __('Select Any one'); ?></option>
                                                                         <?php foreach ($manufacturing_operations_child[$mbomi['manufacturing_operation_id']] as $item){ ?>
                                                                             <option value="<?php echo $item['id']; ?>" <?php echo $altermbomi['alternate_manufacturing_operation_machine_id'] == $item['id']?"selected":""; ?>><?php echo $item['operation_name']; ?></option>
                                                                         <?php } ?>
                                                                     </select>
                                                                 </td>
                                                                 <td class="p-1" >
-                                                                    <input aria-label="Enter number" type="number" class="form-control text-right js-manufacturing-calc" name="alternate_operation_time[<?php echo $seqq; ?>][]" id="alternate_operation_time_<?php echo $seqs; ?>" min="1" value="<?php echo $altermbomi['alternate_operation_time']; ?>">
+                                                                    <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right js-manufacturing-calc" name="alternate_operation_time[<?php echo $seqq; ?>][]" id="alternate_operation_time_<?php echo $seqs; ?>" min="1" value="<?php echo $altermbomi['alternate_operation_time']; ?>">
                                                                 </td>
                                                                 <td class="p-1">
-                                                                    <input aria-label="Enter number" type="number" class="form-control text-right js-manufacturing-calc" name="alternate_operation_manpower[<?php echo $seqq; ?>][]" id="alternate_operation_manpower_<?php echo $seqs; ?>" min="1" value="<?php echo $altermbomi['alternate_operation_manpower']; ?>">
+                                                                    <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right js-manufacturing-calc" name="alternate_operation_manpower[<?php echo $seqq; ?>][]" id="alternate_operation_manpower_<?php echo $seqs; ?>" min="1" value="<?php echo $altermbomi['alternate_operation_manpower']; ?>">
                                                                 </td>
                                                                 <td class="p-1">
-                                                                    <input aria-label="Enter number" type="number" class="form-control text-right js-manufacturing-calc" name="alternate_operation_cost_per_hours[<?php echo $seqq; ?>][]" id="alternate_operation_cost_per_hours_<?php echo $seqs; ?>" value="<?php echo $altermbomi['alternate_operation_cost_per_hours']; ?>">
+                                                                    <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right js-manufacturing-calc" name="alternate_operation_cost_per_hours[<?php echo $seqq; ?>][]" id="alternate_operation_cost_per_hours_<?php echo $seqs; ?>" value="<?php echo $altermbomi['alternate_operation_cost_per_hours']; ?>">
                                                                 </td>
                                                                 <td class="p-1">
-                                                                    <input aria-label="Enter number" type="number" class="form-control text-right" name="alternate_operation_total[<?php echo $seqq; ?>][]" id="alternate_operation_total_<?php echo $seqs; ?>" value="<?php echo $altermbomi['alternate_operation_total']; ?>" readonly>
+                                                                    <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right" name="alternate_operation_total[<?php echo $seqq; ?>][]" id="alternate_operation_total_<?php echo $seqs; ?>" value="<?php echo $altermbomi['alternate_operation_total']; ?>" readonly>
                                                                 </td>
                                                                 <td class="p-1">
-                                                                    <textarea aria-label="Text area"   class="form-control" name="alternate_operation_note[<?php echo $seqq; ?>][]" id="alternate_operation_note_<?php echo $seqs; ?>" autocomplete="off"><?php echo $tab2['description']; ?><?php echo $altermbomi['alternate_operation_note']; ?></textarea>
+                                                                    <textarea aria-label="<?php echo __('Text area'); ?>"   class="form-control" name="alternate_operation_note[<?php echo $seqq; ?>][]" id="alternate_operation_note_<?php echo $seqs; ?>" autocomplete="off"><?php echo $tab2['description']; ?><?php echo $altermbomi['alternate_operation_note']; ?></textarea>
                                                                 </td>
                                                                 <td class="p-1" >
-                                                                    <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove" data-target="alternate_remove_machine_row_<?php echo $seqs; ?>"></i>
+                                                                    <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Remove'); ?>" data-target="alternate_remove_machine_row_<?php echo $seqs; ?>"></i>
                                                                 </td>
                                                             </tr>
                                                             <?php $seqs++;
@@ -540,7 +540,7 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                                                     </table>
                                                     <div class="row mt-2">
                                                         <div class="col-xs-12">
-                                                            <button class="btn btn-success js-add-alternate-operations" data-seq="<?php echo $seqq; ?>" type="button">+ Add More Machine</button>
+                                                            <button class="btn btn-success js-add-alternate-operations" data-seq="<?php echo $seqq; ?>" type="button"><?php echo __('+ Add More Machine'); ?></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -549,23 +549,23 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
 
                                     </td>
                                     <td class="p-1" >
-                                        <input aria-label="Operation Time[]" type="number" class="form-control text-right js-manufacturing-calc" name="operation_time[]" id="operation_time_<?php echo $seqq; ?>" min="1" value="<?php echo $mbomi['operation_time']; ?>">
+                                        <input aria-label="<?php echo __('Operation Time[]'); ?>" type="number" class="form-control text-right js-manufacturing-calc" name="operation_time[]" id="operation_time_<?php echo $seqq; ?>" min="1" value="<?php echo $mbomi['operation_time']; ?>">
                                     </td>
                                     <td class="p-1">
-                                        <input aria-label="Operation Manpower[]" type="number" class="form-control text-right js-manufacturing-calc" name="operation_manpower[]" id="operation_manpower_<?php echo $seqq; ?>" min="1" value="<?php echo $mbomi['operation_manpower']; ?>">
+                                        <input aria-label="<?php echo __('Operation Manpower[]'); ?>" type="number" class="form-control text-right js-manufacturing-calc" name="operation_manpower[]" id="operation_manpower_<?php echo $seqq; ?>" min="1" value="<?php echo $mbomi['operation_manpower']; ?>">
                                     </td>
                                     <td class="p-1">
-                                        <input aria-label="Operation Cost Per Hours[]" type="number" class="form-control text-right js-manufacturing-calc" name="operation_cost_per_hours[]" id="operation_cost_per_hours_<?php echo $seqq; ?>" value="<?php echo $mbomi['operation_cost_per_hours']; ?>">
+                                        <input aria-label="<?php echo __('Operation Cost Per Hours[]'); ?>" type="number" class="form-control text-right js-manufacturing-calc" name="operation_cost_per_hours[]" id="operation_cost_per_hours_<?php echo $seqq; ?>" value="<?php echo $mbomi['operation_cost_per_hours']; ?>">
                                     </td>
                                     <td class="p-1">
-                                        <input aria-label="Operation Total[]" type="number" class="form-control text-right" name="operation_total[]" id="operation_total_<?php echo $seqq; ?>" value="<?php echo $mbomi['operation_total']; ?>" readonly>
+                                        <input aria-label="<?php echo __('Operation Total[]'); ?>" type="number" class="form-control text-right" name="operation_total[]" id="operation_total_<?php echo $seqq; ?>" value="<?php echo $mbomi['operation_total']; ?>" readonly>
                                     </td>
                                     <td class="p-1">
-                                        <textarea aria-label="Operation Note[]"   class="form-control" name="operation_note[]" id="operation_note_<?php echo $seqq; ?>" autocomplete="off"><?php echo $tab2['description']; ?><?php echo $mbomi['operation_note']; ?></textarea>
+                                        <textarea aria-label="<?php echo __('Operation Note[]'); ?>"   class="form-control" name="operation_note[]" id="operation_note_<?php echo $seqq; ?>" autocomplete="off"><?php echo $tab2['description']; ?><?php echo $mbomi['operation_note']; ?></textarea>
                                     </td>
                                     <th scope="col" class="p-1">
                                         <i class="ti-trash text-danger cursor-pointer js-remove-row" data-target="remove_rows_<?php echo $seqq; ?>"></i>
-                                        <i class="ti-exchange-vertical cursor-pointer mt-2 d-block js-open-alternate-machine" data-bs-toggle="tooltip" title="" data-bs-original-title="+ Alternate Machine" data-seq="<?php echo $seqq; ?>"></i>
+                                        <i class="ti-exchange-vertical cursor-pointer mt-2 d-block js-open-alternate-machine" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('+ Alternate Machine'); ?>" data-seq="<?php echo $seqq; ?>"></i>
                                     </th>
                                 </tr>
                             <?php $seqq++;
@@ -574,7 +574,7 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                         </table>
                         <div class="row mt-2">
                             <div class="col-xs-12">
-                                <button class="btn btn-success js-add-bom-operations" type="button">+ Add More Operations</button>
+                                <button class="btn btn-success js-add-bom-operations" type="button"><?php echo __('+ Add More Operations'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -584,7 +584,7 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
         <div class="row mt-4">
             <div class="col-md-12 text-left">
                 <button type="submit" class="btn btn-primary" name="btn_BOM" <?php echo $disable; ?>>
-                    <i class="la la-check"></i> Submit
+                    <i class="la la-check"></i> <?php echo __('Submit'); ?>
                 </button>
 
             </div>
@@ -597,17 +597,17 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
         <input type="hidden" class="manufacturing_bom_items_seq_no" name="manufacturing_bom_items_seq_no[]" value="__SEQ__">
         <input type="hidden" name="manufacturing_bom_items_id[]" value="">
         <td class="p-1 w-full-30">
-            <select aria-label="Item []" class="js-example-basic-single item-selection js-bom-item-select" id="item_id___SEQ__" name="item_id[]" data-seq="__SEQ__" data-type="BOMITEM" required>
-                <option value="">Select Any one</option>
+            <select aria-label="<?php echo __('Item []'); ?>" class="js-example-basic-single item-selection js-bom-item-select" id="item_id___SEQ__" name="item_id[]" data-seq="__SEQ__" data-type="BOMITEM" required>
+                <option value=""><?php echo __('Select Any one'); ?></option>
                 <?php foreach ($items as $item){ ?>
                     <option value="<?php echo $item['id']; ?>"><?php echo $item['item_name']." (".$itemworktype[$item['stocking_type']].")"; ?></option>
                 <?php } ?>
             </select>
-            <textarea aria-label="Description[]" id="description___SEQ__" name="description[]" class="form-control mt-2"><?php echo $tab2['description']; ?></textarea>
+            <textarea aria-label="<?php echo __('Description[]'); ?>" id="description___SEQ__" name="description[]" class="form-control mt-2"><?php echo $tab2['description']; ?></textarea>
         </td>
         <td class="p-1 w-ful w-full-10" id="custom-popup_3">
-            <select aria-label="Uom[]" class="js-example-basic-single" id="uom___SEQ__" name="uom[]" required>
-                <option value="">Select Any one</option>
+            <select aria-label="<?php echo __('Uom[]'); ?>" class="js-example-basic-single" id="uom___SEQ__" name="uom[]" required>
+                <option value=""><?php echo __('Select Any one'); ?></option>
                 <?php foreach ($unit_of_measurements as $uom){  ?>
                     <option value="<?php echo $uom['id']; ?>"><?php echo $uom['uom_name']; ?></option>
                 <?php }  ?>
@@ -616,21 +616,21 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
             <div class="custom-popup-open popup-width-850 alternate-items-popup text-start" data-seq="__SEQ__">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Alternate Items</h5>
+                        <h5><?php echo __('Alternate Items'); ?></h5>
                         <div class="card-header-right">
-                            <i class="ti-close js-close-popup" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed"></i>
+                            <i class="ti-close js-close-popup" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
                         </div>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="p-1" style="width: 25%;">Product Name <span class="requried"></span></th>
-                                    <th scope="col" class="thheader p-1" style="width: 15%;">UOM <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Qty <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Rate <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Amount <span class="requried">*</span></th>
-                                    <th scope="col" class="p-1" style="width: 25%;">Description </th>
+                                    <th scope="col" class="p-1" style="width: 25%;"><?php echo __('Product Name'); ?> <span class="requried"></span></th>
+                                    <th scope="col" class="thheader p-1" style="width: 15%;"><?php echo __('UOM'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Qty'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Rate'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Amount'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="p-1" style="width: 25%;"><?php echo __('Description'); ?> </th>
                                     <th scope="col" class="thheader p-1 text-right" style="width: 5%;"></th>
                                 </tr>
                             </thead>
@@ -638,16 +638,16 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                         </table>
                         <div class="row mt-2">
                             <div class="col-xs-12">
-                                <button class="btn btn-success js-add-alternate-items" data-seq="__SEQ__" type="button">+ Add More Alternate</button>
+                                <button class="btn btn-success js-add-alternate-items" data-seq="__SEQ__" type="button"><?php echo __('+ Add More Alternate'); ?></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-2" data-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Operation Process">
-                <select aria-label="Bom Manufacturing Operation []" class="js-example-basic-single" name="bom_manufacturing_operation_id[]" id="bom_manufacturing_operation_id___SEQ__">
-                    <option value="">Select Any one</option>
+            <div class="mt-2" data-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Operation Process'); ?>">
+                <select aria-label="<?php echo __('Bom Manufacturing Operation []'); ?>" class="js-example-basic-single" name="bom_manufacturing_operation_id[]" id="bom_manufacturing_operation_id___SEQ__">
+                    <option value=""><?php echo __('Select Any one'); ?></option>
                     <?php foreach ($manufacturing_operations as $item){ ?>
                         <option value="<?php echo $item['id']; ?>"><?php echo $item['operation_name']; ?></option>
                     <?php } ?>
@@ -655,25 +655,25 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
             </div>
         </td>
         <td class="p-1">
-            <input aria-label="Quantity[]" type="number" class="form-control text-right js-manufacturing-calc" id="quantity___SEQ__" name="quantity[]" min="1" value="" required>
-            <p class="mt-2 f-12">Rate - <span class="d-block" id="rate_text___SEQ__">0</span></p>
+            <input aria-label="<?php echo __('Quantity[]'); ?>" type="number" class="form-control text-right js-manufacturing-calc" id="quantity___SEQ__" name="quantity[]" min="1" value="" required>
+            <p class="mt-2 f-12"><?php echo __('Rate -'); ?> <span class="d-block" id="rate_text___SEQ__">0</span></p>
             <input type="hidden" class="form-control text-right js-manufacturing-calc" id="rate___SEQ__" name="rate[]" min="1" value="1" readonly>
             <input type="hidden" class="form-control text-right js-manufacturing-calc" id="amount___SEQ__" name="amount[]" value="0" readonly>
         </td>
         <td class="p-1">
-            <input aria-label="Scrap[]" type="number" class="form-control text-right" id="scrap___SEQ__" name="scrap[]" min="0" value="">
-            <p class="mt-2 d-block f-12">Amount - <span class="d-block" id="amount_text___SEQ__">0</span></p>
+            <input aria-label="<?php echo __('Scrap[]'); ?>" type="number" class="form-control text-right" id="scrap___SEQ__" name="scrap[]" min="0" value="">
+            <p class="mt-2 d-block f-12"><?php echo __('Amount -'); ?> <span class="d-block" id="amount_text___SEQ__">0</span></p>
         </td>
         <td class="p-1 w-full w-full-30">
-            <select aria-label="Party []" class="js-example-basic-single" id="party_id___SEQ__" name="party_id[]">
-                <option value="">Select Any one</option>
+            <select aria-label="<?php echo __('Party []'); ?>" class="js-example-basic-single" id="party_id___SEQ__" name="party_id[]">
+                <option value=""><?php echo __('Select Any one'); ?></option>
                 <?php foreach ($vendors as $item){ ?>
                     <option value="<?php echo $item['id']; ?>"><?php echo $item['display_name']; ?></option>
                 <?php } ?>
             </select>
             <div class="mt-2">
-                <select aria-label="Warehouse []" class="js-example-basic-single" id="warehouse_id___SEQ__" name="warehouse_id[]">
-                    <option value="">Select Any one</option>
+                <select aria-label="<?php echo __('Warehouse []'); ?>" class="js-example-basic-single" id="warehouse_id___SEQ__" name="warehouse_id[]">
+                    <option value=""><?php echo __('Select Any one'); ?></option>
                     <?php foreach ($warehouses as $item){ ?>
                         <option value="<?php echo $item['id']; ?>"><?php echo $item['warehouse_name']; ?></option>
                     <?php } ?>
@@ -681,8 +681,8 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
             </div>
         </td>
         <td class="p-1">
-            <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove" data-target="remove_row___SEQ__"></i>
-            <i class="ti-exchange-vertical mt-2 d-block cursor-pointer js-open-alternate-items" data-bs-toggle="tooltip" title="" data-bs-original-title="+ Alternate Items" data-seq="__SEQ__"></i>
+            <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Remove'); ?>" data-target="remove_row___SEQ__"></i>
+            <i class="ti-exchange-vertical mt-2 d-block cursor-pointer js-open-alternate-items" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('+ Alternate Items'); ?>" data-seq="__SEQ__"></i>
         </td>
     </tr>
 </template>
@@ -691,29 +691,29 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
     <tr id="byitem_remove_row___SEQ__">
         <input type="hidden" name="manufacturing_bom_byitem_item_id[]" value="">
         <td class="p-1 w-full">
-            <select aria-label="Byitem Item []" class="js-example-basic-single item-selection js-byitem-select" id="byitem_item_id___SEQ__" name="byitem_item_id[]" data-seq="__SEQ__" data-type="BYITEM">
-                <option value="">Select Any one</option>
+            <select aria-label="<?php echo __('Byitem Item []'); ?>" class="js-example-basic-single item-selection js-byitem-select" id="byitem_item_id___SEQ__" name="byitem_item_id[]" data-seq="__SEQ__" data-type="BYITEM">
+                <option value=""><?php echo __('Select Any one'); ?></option>
                 <?php foreach ($items as $item){ ?>
                     <option value="<?php echo $item['id']; ?>"><?php echo $item['item_name']." (".$itemworktype[$item['stocking_type']].")"; ?></option>
                 <?php } ?>
             </select>
         </td>
         <td class="p-1 w-full">
-            <select aria-label="Byitem Uom[]" class="js-example-basic-single" id="byitem_uom___SEQ__" name="byitem_uom[]">
-                <option value="">Select Any one</option>
+            <select aria-label="<?php echo __('Byitem Uom[]'); ?>" class="js-example-basic-single" id="byitem_uom___SEQ__" name="byitem_uom[]">
+                <option value=""><?php echo __('Select Any one'); ?></option>
                 <?php foreach ($unit_of_measurements as $uom){  ?>
                     <option value="<?php echo $uom['id']; ?>"><?php echo $uom['uom_name']; ?></option>
                 <?php }  ?>
             </select>
         </td>
         <td class="p-1">
-            <input aria-label="Byitem Quantity[]" type="number" class="form-control text-right" id="byitem_quantity___SEQ__" name="byitem_quantity[]" min="1" value="1">
+            <input aria-label="<?php echo __('Byitem Quantity[]'); ?>" type="number" class="form-control text-right" id="byitem_quantity___SEQ__" name="byitem_quantity[]" min="1" value="1">
         </td>
         <td class="p-1">
-            <textarea aria-label="Byitem Description[]" id="byitem_description___SEQ__" name="byitem_description[]" class="form-control"></textarea>
+            <textarea aria-label="<?php echo __('Byitem Description[]'); ?>" id="byitem_description___SEQ__" name="byitem_description[]" class="form-control"></textarea>
         </td>
         <td class="p-1">
-            <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove" data-target="byitem_remove_row___SEQ__"></i>
+            <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Remove'); ?>" data-target="byitem_remove_row___SEQ__"></i>
         </td>
     </tr>
 </template>
@@ -723,36 +723,36 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
         <input type="hidden" name="manufacturing_bom_operation_id[]" value="">
         <input type="hidden" class="manufacturing_bom_operation_seq_no" name="manufacturing_bom_operation_seq_no[]" value="__SEQ__">
         <td class="p-1 w-full">
-            <select aria-label="Manufacturing Operation []" class="js-example-basic-single js-operation-select" name="manufacturing_operation_id[]" id="manufacturing_operation_id___SEQ__" data-seq="__SEQ__" data-type="OPERATIONS" required>
-                <option value="">Select Any one</option>
+            <select aria-label="<?php echo __('Manufacturing Operation []'); ?>" class="js-example-basic-single js-operation-select" name="manufacturing_operation_id[]" id="manufacturing_operation_id___SEQ__" data-seq="__SEQ__" data-type="OPERATIONS" required>
+                <option value=""><?php echo __('Select Any one'); ?></option>
                 <?php foreach ($manufacturing_operations_parent as $item){ ?>
                     <option value="<?php echo $item['id']; ?>"><?php echo $item['operation_name']; ?></option>
                 <?php } ?>
             </select>
         </td>
         <td class="p-1 w-full" id="custom-popup_4">
-            <select aria-label="Manufacturing Operation Machine []" class="js-example-basic-single js-operation-machine-select" name="manufacturing_operation_machine_id[]" id="manufacturing_operation_machine_id___SEQ__" data-seq="__SEQ__" data-type="MACHINE">
-                <option value="">Select Any one</option>
+            <select aria-label="<?php echo __('Manufacturing Operation Machine []'); ?>" class="js-example-basic-single js-operation-machine-select" name="manufacturing_operation_machine_id[]" id="manufacturing_operation_machine_id___SEQ__" data-seq="__SEQ__" data-type="MACHINE">
+                <option value=""><?php echo __('Select Any one'); ?></option>
             </select>
 
             <div class="custom-popup-open popup-width-1000 alternate-machine-popup text-start" data-seq="__SEQ__">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Alternate Machine</h5>
+                        <h5><?php echo __('Alternate Machine'); ?></h5>
                         <div class="card-header-right">
-                            <i class="ti-close js-close-popup" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed"></i>
+                            <i class="ti-close js-close-popup" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
                         </div>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="p-1" style="width: 20%;">Machine <span class="requried"></span></th>
-                                    <th scope="col" class="thheader p-1" style="width: 10%;">Time (minutes) <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Manpower <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Cost per Hours <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;"> Total <span class="requried">*</span></th>
-                                    <th scope="col" class="thheader p-1 text-right" style="width: 25%;">Note <span class="requried">*</span></th>
+                                    <th scope="col" class="p-1" style="width: 20%;"><?php echo __('Machine'); ?> <span class="requried"></span></th>
+                                    <th scope="col" class="thheader p-1" style="width: 10%;"><?php echo __('Time (minutes)'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Manpower'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;"><?php echo __('Cost per Hours'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;"> <?php echo __('Total'); ?> <span class="requried">*</span></th>
+                                    <th scope="col" class="thheader p-1 text-right" style="width: 25%;"><?php echo __('Note'); ?> <span class="requried">*</span></th>
                                     <th scope="col" class="thheader p-1 text-right" style="width: 5%;"></th>
                                 </tr>
                             </thead>
@@ -760,7 +760,7 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                         </table>
                         <div class="row mt-2">
                             <div class="col-xs-12">
-                                <button class="btn btn-success js-add-alternate-operations" data-seq="__SEQ__" type="button">+ Add More Machine</button>
+                                <button class="btn btn-success js-add-alternate-operations" data-seq="__SEQ__" type="button"><?php echo __('+ Add More Machine'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -768,23 +768,23 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
             </div>
         </td>
         <td class="p-1">
-            <input aria-label="Operation Time[]" type="number" class="form-control text-right js-manufacturing-calc" name="operation_time[]" id="operation_time___SEQ__" min="1" value="1" required>
+            <input aria-label="<?php echo __('Operation Time[]'); ?>" type="number" class="form-control text-right js-manufacturing-calc" name="operation_time[]" id="operation_time___SEQ__" min="1" value="1" required>
         </td>
         <td class="p-1">
-            <input aria-label="Operation Manpower[]" type="number" class="form-control text-right js-manufacturing-calc" name="operation_manpower[]" id="operation_manpower___SEQ__" min="1" value="1" required>
+            <input aria-label="<?php echo __('Operation Manpower[]'); ?>" type="number" class="form-control text-right js-manufacturing-calc" name="operation_manpower[]" id="operation_manpower___SEQ__" min="1" value="1" required>
         </td>
         <td class="p-1">
-            <input aria-label="Operation Cost Per Hours[]" type="number" class="form-control text-right js-manufacturing-calc" name="operation_cost_per_hours[]" id="operation_cost_per_hours___SEQ__" value="1" required>
+            <input aria-label="<?php echo __('Operation Cost Per Hours[]'); ?>" type="number" class="form-control text-right js-manufacturing-calc" name="operation_cost_per_hours[]" id="operation_cost_per_hours___SEQ__" value="1" required>
         </td>
         <td class="p-1">
-            <input aria-label="Operation Total[]" type="number" class="form-control text-right" name="operation_total[]" id="operation_total___SEQ__" value="0" readonly>
+            <input aria-label="<?php echo __('Operation Total[]'); ?>" type="number" class="form-control text-right" name="operation_total[]" id="operation_total___SEQ__" value="0" readonly>
         </td>
         <td class="p-1">
-            <textarea aria-label="Operation Note[]" class="form-control" name="operation_note[]" id="operation_note___SEQ__"><?php echo $tab2['description']; ?></textarea>
+            <textarea aria-label="<?php echo __('Operation Note[]'); ?>" class="form-control" name="operation_note[]" id="operation_note___SEQ__"><?php echo $tab2['description']; ?></textarea>
         </td>
         <th scope="col" class="p-1">
             <i class="ti-trash text-danger cursor-pointer js-remove-row" data-target="remove_rows___SEQ__"></i>
-            <i class="ti-exchange-vertical cursor-pointer mt-2 d-block js-open-alternate-machine" data-bs-toggle="tooltip" title="" data-bs-original-title="+ Alternate Machine" data-seq="__SEQ__"></i>
+            <i class="ti-exchange-vertical cursor-pointer mt-2 d-block js-open-alternate-machine" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('+ Alternate Machine'); ?>" data-seq="__SEQ__"></i>
         </th>
     </tr>
 </template>
@@ -793,20 +793,20 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
     <tr id="alternate_remove_row___SEQ__">
         <td class="p-1 w-full">
             <input type="hidden" class="alternate_manufacturing_bom_items_seq_no" name="alternate_manufacturing_bom_items_seq_no[]" value="__SEQ__">
-            <select aria-label="Alternate Item [  PARENT  ][]" class="js-example-basic-single item-selection js-alternate-item-select" id="alternate_item_id___SEQ__" name="alternate_item_id[__PARENT__][]" data-seq="__SEQ__" data-type="ALTERNATE_BOMITEM">
-                __OPTIONS__
+            <select aria-label="<?php echo __('Alternate Item [  PARENT  ][]'); ?>" class="js-example-basic-single item-selection js-alternate-item-select" id="alternate_item_id___SEQ__" name="alternate_item_id[__PARENT__][]" data-seq="__SEQ__" data-type="ALTERNATE_BOMITEM">
+                <?php echo __('__OPTIONS__'); ?>
             </select>
         </td>
         <td class="p-1 w-full">
-            <select aria-label="Alternate Uom[  PARENT  ][]" class="js-example-basic-single" id="alternate_uom___SEQ__" name="alternate_uom[__PARENT__][]">
-                <option value="">Select Any one</option>
+            <select aria-label="<?php echo __('Alternate Uom[  PARENT  ][]'); ?>" class="js-example-basic-single" id="alternate_uom___SEQ__" name="alternate_uom[__PARENT__][]">
+                <option value=""><?php echo __('Select Any one'); ?></option>
                 <?php foreach ($unit_of_measurements as $uom){  ?>
                     <option value="<?php echo $uom['id']; ?>"><?php echo $uom['uom_name']; ?></option>
                 <?php }  ?>
             </select>
         </td>
         <td class="p-1">
-            <input aria-label="Alternate Quantity[  PARENT  ][]" type="number" class="form-control text-right js-manufacturing-calc" id="alternate_quantity___SEQ__" name="alternate_quantity[__PARENT__][]" min="1" value="1">
+            <input aria-label="<?php echo __('Alternate Quantity[  PARENT  ][]'); ?>" type="number" class="form-control text-right js-manufacturing-calc" id="alternate_quantity___SEQ__" name="alternate_quantity[__PARENT__][]" min="1" value="1">
             <input type="hidden" class="form-control text-right js-manufacturing-calc" id="alternate_rate___SEQ__" name="alternate_rate[__PARENT__][]" min="1" value="0" readonly>
             <input type="hidden" class="form-control text-right js-manufacturing-calc" id="alternate_amount___SEQ__" name="alternate_amount[__PARENT__][]" value="0" readonly>
         </td>
@@ -817,10 +817,10 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
             <p class="mt-2 d-block text-right f-12"><span class="d-block" id="alternate_amount_text___SEQ__">0</span></p>
         </td>
         <td class="p-1">
-            <textarea aria-label="Alternate Description[  PARENT  ][]" id="alternate_description___SEQ__" name="alternate_description[__PARENT__][]" class="form-control"></textarea>
+            <textarea aria-label="<?php echo __('Alternate Description[  PARENT  ][]'); ?>" id="alternate_description___SEQ__" name="alternate_description[__PARENT__][]" class="form-control"></textarea>
         </td>
         <td class="p-1">
-            <i class="ti-trash cursor-pointer text-danger js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove" data-target="alternate_remove_row___SEQ__"></i>
+            <i class="ti-trash cursor-pointer text-danger js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Remove'); ?>" data-target="alternate_remove_row___SEQ__"></i>
         </td>
     </tr>
 </template>
@@ -829,27 +829,27 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
     <tr id="alternate_remove_machine_row___SEQ__">
         <td class="p-1 w-full">
             <input type="hidden" class="alternate_manufacturing_bom_operation_seq_no" name="alternate_manufacturing_bom_operation_seq_no[]" value="__SEQ__">
-            <select aria-label="Alternate Manufacturing Operation Machine [  PARENT  ][]" class="js-example-basic-single js-alternate-machine-select" name="alternate_manufacturing_operation_machine_id[__PARENT__][]" id="alternate_manufacturing_operation_machine_id___SEQ__" data-seq="__SEQ__" data-type="ALTERNATE_MACHINE">
-                __OPTIONS__
+            <select aria-label="<?php echo __('Alternate Manufacturing Operation Machine [  PARENT  ][]'); ?>" class="js-example-basic-single js-alternate-machine-select" name="alternate_manufacturing_operation_machine_id[__PARENT__][]" id="alternate_manufacturing_operation_machine_id___SEQ__" data-seq="__SEQ__" data-type="ALTERNATE_MACHINE">
+                <?php echo __('__OPTIONS__'); ?>
             </select>
         </td>
         <td class="p-1">
-            <input aria-label="Alternate Operation Time[  PARENT  ][]" type="number" class="form-control text-right js-manufacturing-calc" name="alternate_operation_time[__PARENT__][]" id="alternate_operation_time___SEQ__" min="1" value="1">
+            <input aria-label="<?php echo __('Alternate Operation Time[  PARENT  ][]'); ?>" type="number" class="form-control text-right js-manufacturing-calc" name="alternate_operation_time[__PARENT__][]" id="alternate_operation_time___SEQ__" min="1" value="1">
         </td>
         <td class="p-1">
-            <input aria-label="Alternate Operation Manpower[  PARENT  ][]" type="number" class="form-control text-right js-manufacturing-calc" name="alternate_operation_manpower[__PARENT__][]" id="alternate_operation_manpower___SEQ__" min="1" value="1">
+            <input aria-label="<?php echo __('Alternate Operation Manpower[  PARENT  ][]'); ?>" type="number" class="form-control text-right js-manufacturing-calc" name="alternate_operation_manpower[__PARENT__][]" id="alternate_operation_manpower___SEQ__" min="1" value="1">
         </td>
         <td class="p-1">
-            <input aria-label="Alternate Operation Cost Per Hours[  PARENT  ][]" type="number" class="form-control text-right js-manufacturing-calc" name="alternate_operation_cost_per_hours[__PARENT__][]" id="alternate_operation_cost_per_hours___SEQ__" value="">
+            <input aria-label="<?php echo __('Alternate Operation Cost Per Hours[  PARENT  ][]'); ?>" type="number" class="form-control text-right js-manufacturing-calc" name="alternate_operation_cost_per_hours[__PARENT__][]" id="alternate_operation_cost_per_hours___SEQ__" value="">
         </td>
         <td class="p-1">
-            <input aria-label="Alternate Operation Total[  PARENT  ][]" type="number" class="form-control text-right" name="alternate_operation_total[__PARENT__][]" id="alternate_operation_total___SEQ__" value="0" readonly>
+            <input aria-label="<?php echo __('Alternate Operation Total[  PARENT  ][]'); ?>" type="number" class="form-control text-right" name="alternate_operation_total[__PARENT__][]" id="alternate_operation_total___SEQ__" value="0" readonly>
         </td>
         <td class="p-1">
-            <textarea aria-label="Alternate Operation Note[  PARENT  ][]" class="form-control" name="alternate_operation_note[__PARENT__][]" id="alternate_operation_note___SEQ__"></textarea>
+            <textarea aria-label="<?php echo __('Alternate Operation Note[  PARENT  ][]'); ?>" class="form-control" name="alternate_operation_note[__PARENT__][]" id="alternate_operation_note___SEQ__"></textarea>
         </td>
         <td class="p-1">
-            <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove" data-target="alternate_remove_machine_row___SEQ__"></i>
+            <i class="ti-trash text-danger cursor-pointer js-remove-row" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Remove'); ?>" data-target="alternate_remove_machine_row___SEQ__"></i>
         </td>
     </tr>
 </template>

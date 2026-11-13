@@ -207,7 +207,7 @@ foreach($crm_lead_details as $crmhist){
             <i class="ti-close icon-x"></i>
         </a>
         <div class="right-icon-control">
-            <h4 class="text-dark f-20 f-w-600 text-left">Add Contact</h4>
+            <h4 class="text-dark f-20 f-w-600 text-left"><?= __('Add Contact') ?></h4>
         </div>
     </div>
     <div class="main-friend-list card-body form-design custom-scroll" style="height: 600px">
@@ -217,7 +217,7 @@ foreach($crm_lead_details as $crmhist){
                 <input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>">
                  <input type="hidden" name="transaction_table" id="transaction_table" value="<?php echo $transaction_table; ?>">
                 <div class="bg-white p-3 b-radius-10">
-                    <h5 class="f-18 f-w-600 bg-gray p-2">Additional Information</h5>
+                    <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Additional Information') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label">Contact Source <span class="requried">*</span></span>
@@ -232,16 +232,16 @@ foreach($crm_lead_details as $crmhist){
                             <span class="form-label">Originator <span class="requried">*</span></span>
                              <span class="d-block error-message text-danger"></span>
                             <select aria-label="Originator" class="form-control js-example-basic-single requried_field" name="originator">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($application_users as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['originator'] == $uval['id'] || ($transaction['originator'] == "" && $_SESSION['userid']== $uval['id']))?"selected":"";?>><?php echo $uval['display_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6  form-group">
-                            <span class="form-label">Company </span>
+                            <span class="form-label"><?= __('Company') ?></span>
                             <select aria-label="Crm Company" class="form-control js-example-basic-single" name="crm_company_id">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($crm_companies as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['crm_company_id'] == $uval['id'])?"selected":"";?>><?php echo $uval['company_name']; ?></option>
                                 <?php } ?>
@@ -250,54 +250,54 @@ foreach($crm_lead_details as $crmhist){
                         <div class="col-lg-6  form-group">
                             <span class="form-label">Phone No. <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="Phone" class="form-control requried_field" type="tel" name="phone" placeholder="Phone" value="<?php echo $transaction['phone']; ?>">
+                            <input aria-label="Phone" class="form-control requried_field" type="tel" name="phone" placeholder="<?= __('Phone') ?>" value="<?php echo $transaction['phone']; ?>">
                         </div>
                         <div class="col-lg-4 form-group">
                             <span class="form-label">First Name <span class="requried">*</span></span>
                              <span class="d-block error-message text-danger"></span>
-                            <input aria-label="First Name" class="form-control requried_field" type="text" name="first_name" placeholder="First Name" value="<?php echo $transaction['first_name']; ?>">
+                            <input aria-label="First Name" class="form-control requried_field" type="text" name="first_name" placeholder="<?= __('First Name') ?>" value="<?php echo $transaction['first_name']; ?>">
                         </div>
                         <div class="col-lg-4 form-group">
-                            <span class="form-label">Middle Name</span>
-                            <input aria-label="Middle Name" class="form-control" type="text" name="middle_name" placeholder="Middle Name" value="<?php echo $transaction['middle_name']; ?>">
+                            <span class="form-label"><?= __('Middle Name') ?></span>
+                            <input aria-label="Middle Name" class="form-control" type="text" name="middle_name" placeholder="<?= __('Middle Name') ?>" value="<?php echo $transaction['middle_name']; ?>">
                         </div>
                         <div class="col-lg-4 form-group">
                             <span class="form-label">last Name <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="Last Name" class="form-control requried_field" type="text" name="last_name" placeholder="Last Name" value="<?php echo $transaction['last_name']; ?>">
+                            <input aria-label="Last Name" class="form-control requried_field" type="text" name="last_name" placeholder="<?= __('Last Name') ?>" value="<?php echo $transaction['last_name']; ?>">
                         </div>
                         <div class="col-lg-6 form-group">
-                            <span class="form-label">Email </span>
-                            <input aria-label="Email" class="form-control" type="email" name="email_id" placeholder="Email" value="<?php echo $transaction['email_id']; ?>">
+                            <span class="form-label"><?= __('Email') ?></span>
+                            <input aria-label="Email" class="form-control" type="email" name="email_id" placeholder="<?= __('Email') ?>" value="<?php echo $transaction['email_id']; ?>">
                         </div>
 
                         <div class="col-lg-6  form-group">
-                            <span class="form-label">Office No.</span>
-                            <input aria-label="Phone" class="form-control" type="tel" name="office_phone" placeholder="Phone" value="<?php echo $transaction['office_phone']; ?>">
+                            <span class="form-label"><?= __('Office No.') ?></span>
+                            <input aria-label="Phone" class="form-control" type="tel" name="office_phone" placeholder="<?= __('Phone') ?>" value="<?php echo $transaction['office_phone']; ?>">
                         </div>
                         <div class="col-lg-6 form-group">
-                            <span class="form-label">Fax</span>
-                            <input aria-label="Fax" class="form-control" type="text" name="fax" placeholder="Fax" value="<?php echo $transaction['fax']; ?>">
+                            <span class="form-label"><?= __('Fax') ?></span>
+                            <input aria-label="Fax" class="form-control" type="text" name="fax" placeholder="<?= __('Fax') ?>" value="<?php echo $transaction['fax']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
-                            <span class="form-label">Website</span>
-                            <input aria-label="Website" class="form-control" type="text" name="website" placeholder="Website" value="<?php echo $transaction['website']; ?>">
+                            <span class="form-label"><?= __('Website') ?></span>
+                            <input aria-label="Website" class="form-control" type="text" name="website" placeholder="<?= __('Website') ?>" value="<?php echo $transaction['website']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
-                            <span class="form-label">Campaign</span>
+                            <span class="form-label"><?= __('Campaign') ?></span>
                             <select aria-label="Crm Campaign" class="form-control js-example-basic-single" name="crm_campaign_id">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($crm_campaigns as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['crm_campaign_id'] == $uval['id'])?"selected":"";?>><?php echo $uval['campaign_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6">
-                            <span class="form-label">Image</span>
+                            <span class="form-label"><?= __('Image') ?></span>
                             <div class="col-lg-9 col-xl-6 ">
                                 <div class="profile-pic">
                                     <label class="-label" for="display_image">
-                                        <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                                        <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
                                     </label>
                                     <input type="file" name="image" id="display_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
                                     <img src="<?php echo "uploads/all/".$transaction['image'] ; ?>" id="outputdisplay_image" width="200" alt="Attachment Preview" />
@@ -306,65 +306,65 @@ foreach($crm_lead_details as $crmhist){
                             </div>
                         </div>
                     </div>
-                    <h5 class="f-18 f-w-600 bg-gray p-2">Address Information</h5>
+                    <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Address Information') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-12 form-group">
-                            <span class="form-label">Mailing Address</span>
+                            <span class="form-label"><?= __('Mailing Address') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Address"  placeholder="Address" class="border form-control" rows="3" name="address" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['address']; ?></textarea>
+                                <textarea aria-label="Address"  placeholder="<?= __('Address') ?>" class="border form-control" rows="3" name="address" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['address']; ?></textarea>
                             </div>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Country</span>
+                            <span class="form-label"><?= __('Country') ?></span>
                             <select aria-label="Country" class="form-control js-example-basic-single" name="country_id" onchange="selectedcategory(this.value,'state_id','states','country_id')">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($countries as $cval){ ?>
                                     <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['country_id'] == $cval['id']?"selected":"";?>><?php echo $cval['country_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">State</span>
+                            <span class="form-label"><?= __('State') ?></span>
                             <select aria-label="State" class="form-control js-example-basic-single" name="state_id" id="state_id" onchange="selectedcategory(this.value,'city_id','cities','state_id')">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($states as $cval){ ?>
                                     <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['state_id'] == $cval['id']?"selected":"";?>><?php echo $cval['state_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">City</span>
+                            <span class="form-label"><?= __('City') ?></span>
                             <select aria-label="City" class="form-control js-example-basic-single" name="city_id" id="city_id">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($cities as $cval){ ?>
                                     <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['city_id'] == $cval['id']?"selected":"";?>><?php echo $cval['city_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <span class="form-label">Post Code</span>
-                            <input aria-label="Postal Code" class="form-control" type="text" name="post_code" placeholder="Postal Code" value="<?php echo $transaction['post_code']; ?>">
+                            <span class="form-label"><?= __('Post Code') ?></span>
+                            <input aria-label="Postal Code" class="form-control" type="text" name="post_code" placeholder="<?= __('Postal Code') ?>" value="<?php echo $transaction['post_code']; ?>">
                         </div>
                     </div>
-                    <h5 class="f-18 f-w-600 bg-gray p-2">Description Information</h5>
+                    <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Description Information') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-12 form-group">
-                            <span class="form-label">Description</span>
+                            <span class="form-label"><?= __('Description') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Description" name="remark" placeholder="Description" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
+                                <textarea aria-label="Description" name="remark" placeholder="<?= __('Description') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
                             </div>
                         </div>
                     </div>
-                    <h5 class="f-18 f-w-600 bg-gray p-2">Feasibility</h5>
+                    <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Feasibility') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-6 form-group">
-                            <span class="form-label d-block">Feasibility</span>
+                            <span class="form-label d-block"><?= __('Feasibility') ?></span>
                             <input aria-label="Feasibility Check" type="checkbox" class="js-success-sm feasiblity_check" name="feasibility_check" value="Y" <?php echo $transaction['feasibility_check'] =="Y"?"checked":""; ?> onchange="feasibiltyCheckBox()">
                         </div>
                     </div>
                     <div class="mt-2">
-                        <button type="button" class="btn btn-primary waves-effect waves-light sbt_loading_en_dis" onclick="submitLeadForm()">Submit</button>
-                        <button type="reset" class="btn btn-default waves-effect " data-bs-dismiss="modal">Reset</button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light sbt_loading_en_dis" onclick="submitLeadForm()"><?= __('Submit') ?></button>
+                        <button type="reset" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Reset') ?></button>
                     </div>
                 </div>
                 </form>

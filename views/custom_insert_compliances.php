@@ -147,7 +147,7 @@ function addstatickRows123(){
     htmlRows += '</div>';
 
     htmlRows += '<div class="col-lg-3">';
-    htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)">Delete</button>';
+    htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)"><?= __('Delete') ?></button>';
     htmlRows += '</div>';
     htmlRows += '</div>';
     $('#append_statick').append(htmlRows);
@@ -257,11 +257,11 @@ function selectReviewOnCheck(){
   <div class="container-fluid " >
       <div class="card card-custom  j-pro" id="kt_page_sticky_card ">
   <div class="card-header mb-3">
-    <h5>Compliance</h5>
+    <h5><?= __('Compliance') ?></h5>
     <div class="card-header-right">
          <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back') ?>
             </a>
     </div>
 </div>
@@ -280,13 +280,13 @@ function selectReviewOnCheck(){
 
                     <div class="row">
                       <div class="col-lg-6 mb-1 ">
-                        <span class="form-label">Compliances Name *</span>
+                        <span class="form-label"><?= __('Compliances Name') ?> *</span>
                         <input aria-label="Task Name" type="text" class="form-control" name="task_name" value="<?php echo $compliancedetail['task_name']; ?>" />
                       </div>
                       <div class="col-lg-3 mb-1 ">
-                        <span class="form-label">Module Groupe</span>
+                        <span class="form-label"><?= __('Module Groupe') ?></span>
                         <select aria-label="Module Group" name="module_group_id" class="form-control form-select js-example-basic-single" onchange="selectGroupModul(this.value)">
-                          <option value="">Select Any One </option>
+                          <option value=""><?= __('Select Any One') ?></option>
                           <?php foreach($_SESSION['module_setup_groups'] as $module_setup_groups ) { ?>
                             <option value="<?php echo $module_setup_groups['id'];?>" <?php if($module_setup_groups['id'] == $compliancedetail['module_group_id']){ ?>selected <?php
 } ?> ><?php echo $module_setup_groups['name'];?></option>
@@ -294,9 +294,9 @@ function selectReviewOnCheck(){
                         </select>
                       </div>
                       <div class="col-lg-3 mb-1 ">
-                        <span class="form-label">Module</span>
+                        <span class="form-label"><?= __('Module') ?></span>
                         <select aria-label="Module" name="module_id" class="form-control form-select js-example-basic-single" id="module_id">
-                          <option value="">Select Any One </option>
+                          <option value=""><?= __('Select Any One') ?></option>
                           <?php foreach ($module_setupres as $module_setu) { ?>
                             <option value="<?php echo $module_setu['id'];?>" <?php if($module_setu['id'] == $compliancedetail['module_id']){ ?>selected <?php
 } ?> ><?php echo $module_setu['module_name'];?></option>
@@ -306,10 +306,10 @@ function selectReviewOnCheck(){
                 </div>
              <div class="row">
                   <div class="col-lg-6">
-                    <span class="form-label col-lg-3">Category</span>
+                    <span class="form-label col-lg-3"><?= __('Category') ?></span>
                     <div class="col-lg-9">
                       <select aria-label="Process" name="process_id" class="form-control form-select js-example-basic-single" id="select_category" onchange="selectCategroy()">
-                        <option value="">Select Any One </option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php
                         foreach ($task_list as $task){
                           ?>
@@ -320,10 +320,10 @@ function selectReviewOnCheck(){
                     </div>
                   </div>
                   <div class="col-lg-6">
-                    <span class="form-label col-lg-3">Sub Category</span>
+                    <span class="form-label col-lg-3"><?= __('Sub Category') ?></span>
                     <div class="col-lg-9">
                       <select aria-label="Sub Cat" name="sub_cat_id" class="form-control form-select js-example-basic-single" id="select_sub_category">
-                        <option value="">Select Any One </option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php
                         foreach ($sub_category as $task){
                           ?>
@@ -336,10 +336,10 @@ function selectReviewOnCheck(){
                 </div>
                 <div class="row mt-2">
                   <div class="col-lg-6">
-                    <span class="form-label col-lg-3">Act</span>
+                    <span class="form-label col-lg-3"><?= __('Act') ?></span>
                     <div class="col-lg-9">
                       <select aria-label="Act" name="act_id" class="form-control form-select js-example-basic-single" id="select_act" onchange="selectAct()">
-                        <option value="">Select Any One </option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php
                         foreach ($act_categories as $act_cate){
                           ?>
@@ -350,10 +350,10 @@ function selectReviewOnCheck(){
                     </div>
                   </div>
                   <div class="col-lg-6">
-                    <span class="form-label col-lg-3">Sub Act</span>
+                    <span class="form-label col-lg-3"><?= __('Sub Act') ?></span>
                     <div class="col-lg-9">
                       <select aria-label="Sub Act" name="sub_act_id" class="form-control form-select js-example-basic-single" id="select_sub_act">
-                        <option value="">Select Any One </option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php
                         foreach ($sub_act_categories as $task){
                           ?>
@@ -377,10 +377,10 @@ function selectReviewOnCheck(){
                     </div>
                   </div>
                   <div class="col-lg-6" id="reviewshow" style="<?php echo $compliancedetail['review']=="Y"?'':'display:none'; ?>">
-                    <span class="form-label">Review Process</span>
+                    <span class="form-label"><?= __('Review Process') ?></span>
                     <div class="col-lg-9">
                       <select aria-label="Review Process" name="review_process" class="form-control form-select js-example-basic-single">
-                        <option value="">Select Any One </option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php
                          foreach ($buddy_list as $emptypes) {
                           ?>
@@ -404,10 +404,10 @@ function selectReviewOnCheck(){
                     </div>
                   </div>
                   <div class="col-lg-6" id="escalationreviewshow" style="<?php echo $compliancedetail['escalation']=="Y"?'':'display:none'; ?>">
-                    <span class="form-label">Escalation Process</span>
+                    <span class="form-label"><?= __('Escalation Process') ?></span>
                     <div class="col-lg-9">
                       <select aria-label="Escalation Process" name="escalation_process" class="form-control form-select js-example-basic-single">
-                        <option value="">Select Any One </option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php
                          foreach ($buddy_list as $empthyp) {
                           ?>
@@ -420,18 +420,18 @@ function selectReviewOnCheck(){
                 </div>
                 <div class="row mt-2">
                     <div class="col-lg-3">
-                        <span class="form-label">Critical Compliance</span></br>
+                        <span class="form-label"><?= __('Critical Compliance') ?></span></br>
                         <input aria-label="Critical Compliance" type="checkbox" class="js-switch" name="critical_compliance" value="Y" <?php echo $compliancedetail['critical_compliance'] == "Y"?"checked":""; ?>/>
                     </div>
                     <div class="col-lg-5">
-                    <span class="form-label">Description</span>
+                    <span class="form-label"><?= __('Description') ?></span>
                     <textarea aria-label="Description" style="overflow:auto" class="form-control form-control-lg" name="description" > <?php echo $compliancedetail['description']; ?> </textarea>
                   </div>
                 <div class="col-lg-4">
-                    <span class="form-label">Email Template</span>
+                    <span class="form-label"><?= __('Email Template') ?></span>
                     <div class="">
                       <select aria-label="Email Content" name="email_content_id" class="form-select js-example-basic-single" id="email_template">
-                        <option value="">Select Any One </option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($emaildata as $email) {  ?>
                           <option value="<?php echo $email['id'];?>" <?php if($compliancedetail['email_content_id'] == $email['id']){ ?>selected <?php
 } ?> ><?php echo $email['email_header'];?></option>
@@ -442,9 +442,9 @@ function selectReviewOnCheck(){
                 </div>
 
                       <div class="row mt-2">
-                        <span class="form-label">Set recurrence</span>
+                        <span class="form-label"><?= __('Set recurrence') ?></span>
                         <div class="col-lg-3 row">
-                          <span class="form-label col-lg-6 f-w-600">Repeat Every</span>
+                          <span class="form-label col-lg-6 f-w-600"><?= __('Repeat Every') ?></span>
                           <div class="col-lg-6"><input aria-label="Action No" type="text" class="form-control col-lg-2" name="action_no" value="1" readonly/></div>
                         </div>
                       <div class="col-lg-3">
@@ -457,13 +457,13 @@ function selectReviewOnCheck(){
                     </div>
                     <div class="col-lg-6" id="monthlyschedule" style="<?php echo $compliancedetail['action_frequency']=="MN"?'':'display:none'; ?>">
                         <div class="row">
-                          <span class="form-label col-lg-2 f-w-600">On Day</span>
+                          <span class="form-label col-lg-2 f-w-600"><?= __('On Day') ?></span>
                           <div class="col-lg-4"><input aria-label="On The Day" type="number" class="form-control col-lg-4" name="on_the_day" value="<?php echo $compliancedetail['on_the_day']; ?>" ></div>
                         </div>
                     </div>
                     <div class="col-lg-6" id="yearlyschedule" style="<?php echo $compliancedetail['action_frequency']=="YR"?'':'display:none'; ?>">
                         <div class="row">
-                            <span class="form-label col-lg-3 f-w-600">On Month</span>
+                            <span class="form-label col-lg-3 f-w-600"><?= __('On Month') ?></span>
                             <div class="col-lg-4">
                                 <select aria-label="On The Month" name="on_the_month"  style="width:150px;" class="form-control form-select js-example-basic-single">
                                   <?php foreach ($montharray as $mont=>$montname) {    ?>
@@ -479,7 +479,7 @@ function selectReviewOnCheck(){
                     </div>
                     <div class="col-lg-6" id="weeklyschedule" style="<?php echo $compliancedetail['action_frequency']=="WK"?'':'display:none'; ?>">
                         <div class="row">
-                            <span class="form-label col-lg-3 f-w-600">On Week Day</span>
+                            <span class="form-label col-lg-3 f-w-600"><?= __('On Week Day') ?></span>
                             <div class="col-lg-4">
                                 <select aria-label="On The Week" name="on_the_week"  style="width:150px;" class="form-control form-select js-example-basic-single">
                                   <?php foreach ($weekdays as $weekkey=>$weekvalue) {    ?>
@@ -497,12 +497,12 @@ function selectReviewOnCheck(){
 
                 <div class="row">
                     <div class="col-xl-6 mt-3">
-                       <span class="form-label">Criteria...</span>
+                       <span class="form-label"><?= __('Criteria...') ?></span>
                     </div>
                     <div id="tsk_fortable"></div>
                     <div class="col-xl-12">
                           <i class="flaticon2-group text-success"></i>
-                          <button type="button" class="text-primary" onclick="showpopup('newtask');">Edit </button>
+                          <button type="button" class="text-primary" onclick="showpopup('newtask');"><?= __('Edit') ?> </button>
                     </div>
                 </div>
 
@@ -511,7 +511,7 @@ function selectReviewOnCheck(){
                   <div id="append_statick" class="">
                     <div class="row" style="margin-top: 10px;">
                       <div class="col-lg-9">
-                        <span class="form-label">Check List</span>
+                        <span class="form-label"><?= __('Check List') ?></span>
                       </div>
                       <div class="col-lg-3">
                         <span><b></b></span>
@@ -528,7 +528,7 @@ function selectReviewOnCheck(){
                       </div>
                       <div class="col-lg-3 m-t-10">
                         <input type="hidden" value="0" id="static_delete_value_<?php echo $m; ?>" >
-                        <button class="btn btn-warning" id="<?php echo $m; ?>" type="button" onclick="deleteRows(this.id)">Delete</button>
+                        <button class="btn btn-warning" id="<?php echo $m; ?>" type="button" onclick="deleteRows(this.id)"><?= __('Delete') ?></button>
                       </div>
                     </div>
 
@@ -536,14 +536,14 @@ function selectReviewOnCheck(){
 } ?>
                  </div>
                   <div class="" style="margin-top: 10px;">
-                     <button class="btn btn-success waves-effect waves-light col-lg-3 fw-bold" id="addstatickRows" type="button" onclick="addstatickRows123()">+ Add Check List</button>                  </div>
+                     <button class="btn btn-success waves-effect waves-light col-lg-3 fw-bold" id="addstatickRows" type="button" onclick="addstatickRows123()">+ <?= __('Add Check List') ?></button>                  </div>
                 </div>
               </div>
 
             <div class="p-4">
                 <input type="hidden" name="process_type" id="process_type" value="C">
 
-              <button type="submit" name="submit" class="btn btn-primary waves-effect waves-light text-uppercase  mt-15 ml-3"/> submit</button>
+              <button type="submit" name="submit" class="btn btn-primary waves-effect waves-light text-uppercase  mt-15 ml-3"/><?= __('submit') ?></button>
             </div>
         </form>
               </div>

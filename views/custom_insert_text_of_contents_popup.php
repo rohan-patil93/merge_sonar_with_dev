@@ -21,8 +21,8 @@ foreach($toc_headers as $tocheaders){
 ?>
 <div class="modal-content">
 <div class="modal-header">
-    <h5 class="f-24">Preview </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="f-24"><?php echo __('Preview'); ?> </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body">
     <?php $i = 'A'; foreach($tocheadersparentchield[0] as $level1){  $decodetext =  urldecode(json_decode($level1['header_contain'],1)); ?>
@@ -58,6 +58,6 @@ foreach($toc_headers as $tocheaders){
 } ?>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
 </div>
 </div>

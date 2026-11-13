@@ -33,9 +33,9 @@ if(isset($_POST['save'])){
         $res = json_decode($response,1);
         if($res['leavestatus']['leaveaplye']=='1'){
             if($res['leavestatus']['error_code'] == 18200){
-                $msgg = "Leave days need to be 182 days";
+                $msgg = __('Leave days need to be 182 days');
             }elseif($res['leavestatus']['error_code'] == 30000){
-                $msgg = "Leave days need to be 3 days";
+                $msgg = __('Leave days need to be 3 days');
             }else{
                 $msgg = str_replace("{[value]}",$res['leavestatus']['error_msg'],$_SESSION['error_message'][$res['leavestatus']['error_code']]);
             }
@@ -50,8 +50,8 @@ if(isset($_POST['save'])){
                             type: "warning",
                             showCancelButton: false,
                             confirmButtonClass: "btn-danger",
-                            confirmButtonText: "Yes",
-                            cancelButtonText: "No",
+                            confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+                            cancelButtonText: <?php echo json_encode(__('No')); ?>,
                             closeOnConfirm: true,
                             closeOnCancel: true
                         },
@@ -186,7 +186,7 @@ if($timeprint == '1' && $maxtimeshow >= '1'){
                     if(datas.allready_leave !=null){
                         swal({
                             icon: 'error',
-                            title: 'Oops...',
+                            title: <?php echo json_encode(__('Oops...')); ?>,
                             text: '<?php echo $_SESSION['error_message']['8011']; ?>'
                         })
                         $("#kt_login_signin_submit").css("pointer-events","none");
@@ -196,7 +196,7 @@ if($timeprint == '1' && $maxtimeshow >= '1'){
                     if(datas.availabe_leaves < datas.final_appllay_leave_count){
                         swal({
                             icon: 'error',
-                            title: 'Oops...',
+                            title: <?php echo json_encode(__('Oops...')); ?>,
                             text: '<?php echo $_SESSION['error_message']['8008']; ?>'
                         })
                         $("#kt_login_signin_submit").css("pointer-events","none");
@@ -274,12 +274,12 @@ function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,nex
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: "Please note the status of the document will change to "+new_status_name,
+        text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
         type: "info",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+        cancelButtonText: <?php echo json_encode(__('No')); ?>,
         closeOnConfirm: false
     },
     function(){
@@ -306,12 +306,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...')); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -341,13 +341,13 @@ function submitEmployeeLeave(){
                 ?>
                 <div class="card card-custom " id="kt_page_sticky_card">
                     <div class="card-header table-card-header ">
-                        <h5>Leave Request <?php if($rowid!=""){ ?> <span class="form-label label label-primary"> <i class="fa fa-user"></i> <?php echo ucwords($$empdata[$leave_details['employee_id']]['display_name']); ?></span> <?php
+                        <h5><?php echo __('Leave Request'); ?> <?php if($rowid!=""){ ?> <span class="form-label label label-primary"> <i class="fa fa-user"></i> <?php echo ucwords($$empdata[$leave_details['employee_id']]['display_name']); ?></span> <?php
 } ?> </h5>
                         <div class="card-header-right">
                             <?php  echo $workflowsteps['workflow_btn']; ?>
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?php echo __('Back'); ?>
                             </a>
                         </div>
                     </div>
@@ -359,7 +359,7 @@ function submitEmployeeLeave(){
                         if($error_message !=''){ ?>
                             <div class="alert alert-danger background-danger alert-dismissible">
                                 <strong><?php echo $error_message; ?></strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
                             </div>
                         <?php } ?>
                         <input type="hidden" name="old_leave_days" id="old_leave_days" value="<?php echo $employee_leaves['leave_days'] !=""?$employee_leaves['leave_days']:'0'; ?>">
@@ -386,11 +386,11 @@ function submitEmployeeLeave(){
                                                             <div class="row mt-3">
                                                                 <div class="col-6 text-center">
                                                                     <h5 class="f-w-700 m-b-0"><?php echo $leave_details['consumed_leaves']; ?></h5>
-                                                                    <p class="m-b-0">Consumed</p>
+                                                                    <p class="m-b-0"><?php echo __('Consumed'); ?></p>
                                                                 </div>
                                                                 <div class="col-6 b-l-default text-center">
                                                                     <h5 class="f-w-700 m-b-0"><?php echo $leave_details['applicable_leaves']-$leave_details['consumed_leaves']; ?></h5>
-                                                                    <p class="m-b-0">Available</p>
+                                                                    <p class="m-b-0"><?php echo __('Available'); ?></p>
                                                                 </div>
                                                             </div>
 
@@ -410,11 +410,11 @@ function submitEmployeeLeave(){
                                     <div class="row">
                                         <div class="col-lg-6" <?php echo $disbalediv; ?>>
                                             <div class="form-group">
-                                                <span class="form-label">Leave Category <span class="requried">*</span></span>
+                                                <span class="form-label"><?php echo __('Leave Category'); ?> <span class="requried">*</span></span>
                                                 <span class="d-block error-message text-danger"></span>
                                                 <?php $selectvaue = $_POST['leave_type_id']!=""?$_POST['leave_type_id']:$employee_leaves['leave_type_id']; ?>
-                                                <select aria-label="Leave Type" class="col-lg-12 form-control form-select js-example-basic-single leave_type_id requried_field" id="kt_select2_41" name="leave_type_id" data-val="<?php echo $role['half_day']; ?>" onchange="selectLeaveType(this.value)">
-                                                    <option value=""> Select Any one</option>
+                                                <select aria-label="<?php echo __('Leave Type'); ?>" class="col-lg-12 form-control form-select js-example-basic-single leave_type_id requried_field" id="kt_select2_41" name="leave_type_id" data-val="<?php echo $role['half_day']; ?>" onchange="selectLeaveType(this.value)">
+                                                    <option value=""> <?php echo __('Select Any one'); ?></option>
                                                     <?php  foreach($leavecriterialistres['available_category'] as $key=>$values){ ?>
                                                         <option value="<?php echo $key;?>" <?php if($key == $selectvaue){ ?> selected <?php
 } ?>><?php echo $values;?></option>
@@ -424,7 +424,7 @@ function submitEmployeeLeave(){
                                             <div class="leaveformshoehide" <?php if($selectvaue ==""){ ?>style="pointer-events: none; opacity: 0.3;" <?php
 } ?>>
                                                 <div class="row">
-                                                    <span class="form-label">Start Date(s) <span class="requried">*</span></span>
+                                                    <span class="form-label"><?php echo __('Start Date(s)'); ?> <span class="requried">*</span></span>
                                                     <?php $leave_from = "";
                                                             if($_POST['leave_from']!=""){
                                                                  $leave_from = $_POST['leave_from'];
@@ -434,20 +434,20 @@ function submitEmployeeLeave(){
                                                             ?>
                                                     <div class="col-lg-6">
                                                         <span class="d-block error-message text-danger"></span>
-                                                        <input aria-label="Input field" type="text" onchange="tocheckdays()" class="form-control startdatepicker requried_field"  value="<?php echo  $leave_from; ?>"  name="leave_from"  id="kt_datepicker_31" />
+                                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" onchange="tocheckdays()" class="form-control startdatepicker requried_field"  value="<?php echo  $leave_from; ?>"  name="leave_from"  id="kt_datepicker_31" />
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <?php $starthlfdy = $_POST['start_half_day']!=""?$_POST['start_half_day']:$employee_leaves['start_half_day']; ?>
 
-                                                        <select aria-label="Start Half Day" class="form-control form-select js-example-basic-single halfdayselect"   name="start_half_day" id="start_half_day" onchange="tocheckdays()">
-                                                            <option value="0" <?php echo $starthlfdy == "0"?"selected":""; ?> > Full Day</option>
-                                                            <option value="1" <?php echo $starthlfdy == "1"?"selected":""; ?>> Start Half</option>
-                                                            <option value="2" <?php echo $starthlfdy == "2"?"selected":""; ?>> End Half</option>
+                                                        <select aria-label="<?php echo __('Start Half Day'); ?>" class="form-control form-select js-example-basic-single halfdayselect"   name="start_half_day" id="start_half_day" onchange="tocheckdays()">
+                                                            <option value="0" <?php echo $starthlfdy == "0"?"selected":""; ?> > <?php echo __('Full Day'); ?></option>
+                                                            <option value="1" <?php echo $starthlfdy == "1"?"selected":""; ?>> <?php echo __('Start Half'); ?></option>
+                                                            <option value="2" <?php echo $starthlfdy == "2"?"selected":""; ?>> <?php echo __('End Half'); ?></option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <span class="form-label mb-1 mt-3">End Date(s) <span class="requried">*</span></span>
+                                                    <span class="form-label mb-1 mt-3"><?php echo __('End Date(s)'); ?> <span class="requried">*</span></span>
 
                                                     <div class="col-lg-6">
                                                         <span class="d-block error-message text-danger"></span>
@@ -459,36 +459,36 @@ function submitEmployeeLeave(){
                                                                 $leave_to = dateFormate($employee_leaves['leave_to']);
                                                             }
                                                             ?>
-                                                            <input aria-label="Input field" type="text" onchange="tocheckdays()" class="form-control enddatepicker requried_field"  value="<?php echo  $leave_to; ?>"  name="leave_to"  id="kt_datepicker_32" />
+                                                            <input aria-label="<?php echo __('Input field'); ?>" type="text" onchange="tocheckdays()" class="form-control enddatepicker requried_field"  value="<?php echo  $leave_to; ?>"  name="leave_to"  id="kt_datepicker_32" />
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <?php $endhlfdy = $_POST['end_half_day']!=""?$_POST['end_half_day']:$employee_leaves['end_half_day']; ?>
 
-                                                        <select aria-label="End Half Day" class="form-control form-select js-example-basic-single halfdayselect"  name="end_half_day" id="end_half_day" onchange="tocheckdays()">
-                                                            <option value="0" <?php echo $endhlfdy == "0"?"selected":""; ?>> Full Day</option>
-                                                            <option value="1" <?php echo $endhlfdy == "1"?"selected":""; ?>> Start Half</option>
-                                                            <option value="2" <?php echo $endhlfdy == "2"?"selected":""; ?>> End Half</option>
+                                                        <select aria-label="<?php echo __('End Half Day'); ?>" class="form-control form-select js-example-basic-single halfdayselect"  name="end_half_day" id="end_half_day" onchange="tocheckdays()">
+                                                            <option value="0" <?php echo $endhlfdy == "0"?"selected":""; ?>> <?php echo __('Full Day'); ?></option>
+                                                            <option value="1" <?php echo $endhlfdy == "1"?"selected":""; ?>> <?php echo __('Start Half'); ?></option>
+                                                            <option value="2" <?php echo $endhlfdy == "2"?"selected":""; ?>> <?php echo __('End Half'); ?></option>
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="row">
                                                     <div class="col-lg-6 ">
-                                                        <span class="form-label">Leave Days <span class="requried">*</span></span>
+                                                        <span class="form-label"><?php echo __('Leave Days'); ?> <span class="requried">*</span></span>
                                                         <span class="d-block error-message text-danger"></span>
                                                         <?php  $cleave_days = $_POST['days']!=""?$_POST['days']:$employee_leaves['leave_days'];
                                                         $cleave_days = $cleave_days !="" ? $cleave_days : 1;
                                                         ?>
-                                                        <input aria-label="Days" type="text" class="form-control requried_field" name="days" value="<?php echo $cleave_days; ?>" id="leave_days" readonly="">
+                                                        <input aria-label="<?php echo __('Days'); ?>" type="text" class="form-control requried_field" name="days" value="<?php echo $cleave_days; ?>" id="leave_days" readonly="">
                                                     </div>
                                                     <div class="col-lg-6 hilidayorweekend mt-4">
 
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
-                                                    <span class="form-label">Special Request</span>
-                                                    <textarea aria-label="Special Request" type="text" class="form-control" name="special_request" rows="5"><?php echo $_POST['special_request']!=""?$_POST['special_request']:$employee_leaves['special_request'];?></textarea>
+                                                    <span class="form-label"><?php echo __('Special Request'); ?></span>
+                                                    <textarea aria-label="<?php echo __('Special Request'); ?>" type="text" class="form-control" name="special_request" rows="5"><?php echo $_POST['special_request']!=""?$_POST['special_request']:$employee_leaves['special_request'];?></textarea>
                                                 </div>
                                                 <div class="card-footer">
                                                     <div class="row">
@@ -497,8 +497,8 @@ function submitEmployeeLeave(){
 
                                                             ?>
                                                             <button  type="button" id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" <?php if($employee_leaves['employee_id'] == $_SESSION['emp_id'] && ($employee_leaves['current_status'] == ST_ACTIVE || $employee_leaves['current_status'] ==ST_SEND_BACK) || $employee_leaves['current_status'] ==""){
-}else{ echo "disabled";
-} ?>  name="submit_value" value="exit" onclick="submitEmployeeLeave()"><i class="la la-check"></i>Save & exit</button>
+}else{ echo __('disabled');
+} ?>  name="submit_value" value="exit" onclick="submitEmployeeLeave()"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -509,7 +509,7 @@ function submitEmployeeLeave(){
                                             <div class="card card-custom">
 
                                                 <div class="card-header">
-                                                    <h5>My Leaves</h5>
+                                                    <h5><?php echo __('My Leaves'); ?></h5>
 
                                                 </div>
                                                 <div class="card-body">
@@ -526,7 +526,7 @@ function submitEmployeeLeave(){
                             <div class="col-xl-4 col-md-4">
                                 <div class="card table-card">
                                     <div class="card-header">
-                                        <h5>Pending (Submit For Approval)</h5>
+                                        <h5><?php echo __('Pending (Submit For Approval)'); ?></h5>
                                     </div>
                                     <div class="card-block custom-scroll" style="height: 300px;">
                                         <div class="table-responsive">
@@ -535,8 +535,8 @@ function submitEmployeeLeave(){
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Days</th>
+                                                            <th scope="col"><?php echo __('Date'); ?></th>
+                                                            <th scope="col"><?php echo __('Days'); ?></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -544,7 +544,7 @@ function submitEmployeeLeave(){
                                                             <tr >
                                                                 <td class="p-2"><?php echo $mk; ?></td>
                                                                 <td class="p-2"><a href="index.php?option=COM_INSERT_LEAVE_REQUEST&Rid=<?php  echo deocdeId("id:".$leavel1['id']); ?>"><span class="form-label label label-success p-2 cursor-pointer"><i class="ti-pencil-alt"></i> <?php echo $leavel1['leave_from']." To ".$leavel1['leave_to']." (". $all_leave_categories[$leavel1['leave_type_id']]['name'].")"; ?></span></td>
-                                                                    <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],2); ?> Day</span></td>
+                                                                    <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],2); ?> <?php echo __('Day'); ?></span></td>
                                                                 </tr>
                                                                 <?php $mk++;
 } ?>
@@ -552,7 +552,7 @@ function submitEmployeeLeave(){
                                                         </table>
                                                     <?php    }else{ ?>
                                                         <div class="card-px text-center py-20 m-t-30">
-                                                            <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> No Leaves </p>
+                                                            <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> <?php echo __('No Leaves'); ?> </p>
                                                             <div class="text-center px-4">
                                                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                             </div>
@@ -566,7 +566,7 @@ function submitEmployeeLeave(){
                                     <div class="col-xl-4 col-md-4">
                                         <div class="card table-card">
                                             <div class="card-header">
-                                                <h5>In-Process</h5>
+                                                <h5><?php echo __('In-Process'); ?></h5>
                                             </div>
                                             <div class="card-block custom-scroll" style="height: 300px;">
                                                 <div class="table-responsive">
@@ -576,8 +576,8 @@ function submitEmployeeLeave(){
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">#</th>
-                                                                    <th scope="col">Date</th>
-                                                                    <th scope="col">Days</th>
+                                                                    <th scope="col"><?php echo __('Date'); ?></th>
+                                                                    <th scope="col"><?php echo __('Days'); ?></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -587,7 +587,7 @@ function submitEmployeeLeave(){
                                                                         <td class="p-2"><a href="index.php?option=COM_INSERT_LEAVE_REQUEST&Rid=<?php  echo deocdeId("id:".$leavel1['id']); ?>" class="cursor_pointer"><span class="form-label label label-success p-2"><i class="ti-pencil-alt"></i>
 
                                                                             <?php echo $leavel1['leave_from']." To ".$leavel1['leave_to']." (". $all_leave_categories[$leavel1['leave_type_id']]['name'].")"; ?></span></td>
-                                                                            <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],2); ?> Day</span></td>
+                                                                            <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],2); ?> <?php echo __('Day'); ?></span></td>
                                                                         </tr>
                                                                         <?php $mk++;
 } ?>
@@ -595,7 +595,7 @@ function submitEmployeeLeave(){
                                                                 </table>
                                                             <?php    }else{ ?>
                                                                 <div class="card-px text-center py-20 m-t-30">
-                                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> No Leaves </p>
+                                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> <?php echo __('No Leaves'); ?> </p>
                                                                     <div class="text-center px-4">
                                                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                                     </div>
@@ -609,7 +609,7 @@ function submitEmployeeLeave(){
                                             <div class="col-xl-4 col-md-4">
                                                 <div class="card table-card">
                                                     <div class="card-header">
-                                                        <h5>Approved Leaves</h5>
+                                                        <h5><?php echo __('Approved Leaves'); ?></h5>
                                                     </div>
                                                     <div class="card-block custom-scroll" style="height: 300px;">
 
@@ -619,8 +619,8 @@ function submitEmployeeLeave(){
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">#</th>
-                                                                            <th scope="col">Date</th>
-                                                                            <th scope="col">Days</th>
+                                                                            <th scope="col"><?php echo __('Date'); ?></th>
+                                                                            <th scope="col"><?php echo __('Days'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -628,7 +628,7 @@ function submitEmployeeLeave(){
                                                                             <tr >
                                                                                 <td class="p-2"><?php echo $mk; ?></td>
                                                                                 <td class="p-2"><a href="index.php?option=COM_INSERT_LEAVE_REQUEST&Rid=<?php  echo deocdeId("id:".$leavel1['id']); ?>" class="cursor_pointer"><span class="form-label label label-success p-2"><i class="ti-pencil-alt"></i> <?php echo $leavel1['leave_from']." To ".$leavel1['leave_to']." (". $all_leave_categories[$leavel1['leave_type_id']]['name'].")"; ?></span></td>
-                                                                                    <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],2); ?> Day</span></td>
+                                                                                    <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],2); ?> <?php echo __('Day'); ?></span></td>
                                                                                 </tr>
                                                                                 <?php $mk++;
 } ?>
@@ -636,7 +636,7 @@ function submitEmployeeLeave(){
                                                                         </table>
                                                                     <?php    }else{ ?>
                                                                         <div class="card-px text-center py-20 m-t-30">
-                                                                            <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> No Leaves </p>
+                                                                            <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> <?php echo __('No Leaves'); ?> </p>
                                                                             <div class="text-center px-4">
                                                                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                                             </div>

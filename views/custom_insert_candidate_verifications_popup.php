@@ -46,7 +46,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                 try {
                     if(res && res.response_code =="200"){
                         var pangstlist = "";
-                        pangstlist +='<h4>PAN Details</h4>';
+                        pangstlist +='<h4><?= __('PAN Details') ?></h4>';
                         pangstlist +='<table class="table table-hover">';
                         pangstlist +='<tbody>';
 
@@ -58,23 +58,23 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                             $('#'+btn_id).addClass('btn-success');
                             $('#'+btn_id).removeAttr("onclick");
 
-                            pangstlist +='<tr><th scope="col" class="p-2">Name</th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['display_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.name+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2">Pan Number</th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['pan_number']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.number+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2">First Name</th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['first_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.firstName+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2">Middle Name</th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['middle_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.middleName+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2">Last Name</th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['last_name']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.lastName+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2">Gender</th><td class="w-b-w-s p-2">-</td><td class="p-2 w-b-w-s  text-danger">'+res.gender+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2">Date Of Birth</th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['date_of_birth']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.dateOfBirth+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2">EmailId</th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['email_id']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.emailId+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2">Address</th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['address']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.address.fullAddress+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2">Address</th><td class="p-2">-</td><td class="p-2 w-b-w-s text-danger">'+res.address.addressLineOne+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2">Country</th><td class="p-2">-</td><td class="p-2 w-b-w-s  text-danger">'+res.address.country+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['display_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.name+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Pan Number') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['pan_number']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.number+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('First Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['first_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.firstName+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Middle Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['middle_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.middleName+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Last Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['last_name']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.lastName+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Gender') ?></th><td class="w-b-w-s p-2">-</td><td class="p-2 w-b-w-s  text-danger">'+res.gender+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Date Of Birth') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['date_of_birth']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.dateOfBirth+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('EmailId') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['email_id']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.emailId+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Address') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['address']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.address.fullAddress+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Address') ?></th><td class="p-2">-</td><td class="p-2 w-b-w-s text-danger">'+res.address.addressLineOne+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Country') ?></th><td class="p-2">-</td><td class="p-2 w-b-w-s  text-danger">'+res.address.country+'</td></tr>';
 
                             pangstlist +='</tbody>';
                             pangstlist +='</table>';
                             $("#pan_response_popup").html(pangstlist);
                             var vergst = "PAN";
-                            var verfybuttn = '<button class="btn btn-primary mb-3" type="button" onclick="verificationPANSuccess(\''+vergst+'\','+res.api_hit_id+');" >Click To Confirm PAN Detail</button>';
+                            var verfybuttn = '<button class="btn btn-primary mb-3" type="button" onclick="verificationPANSuccess(\''+vergst+'\','+res.api_hit_id+');" ><?= __('Click To Confirm PAN Detail') ?></button>';
                             $("#pan_verification_btn").html(verfybuttn);
 
                         }else{
@@ -199,7 +199,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">Verifications</h5>
+    <h5 class="modal-title"><?= __('Verifications') ?></h5>
     <button type="button" class="btn-close btn_white"  data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body m-l-20 m-r-20">
@@ -209,13 +209,13 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
         <div class="col-lg-3">
             <ul class="nav nav-tabs md-tabs d-block bg-gray">
                 <li class="nav-item text-start p-2">
-                    <a class="nav-link p-3 border <?php echo ($verification_type =="" || $verification_type == "PAN")?"active":""; ?>" data-bs-toggle="tab" href="#panverification_tab"  role="tab" aria-selected="false"><?php echo $vendor_verifications['PAN']['status'] == "Y"?'<i class="ti-check-box f-30 align-middle" id="panverification_tabs"></i>':'<i class="ti-alert text-danger f-30 align-middle" id="panverification_tabs_2"></i>'; ?><span class="ml-2 d-inline-block align-middle">PAN Number</span></a>
+                    <a class="nav-link p-3 border <?php echo ($verification_type =="" || $verification_type == "PAN")?"active":""; ?>" data-bs-toggle="tab" href="#panverification_tab"  role="tab" aria-selected="false"><?php echo $vendor_verifications['PAN']['status'] == "Y"?'<i class="ti-check-box f-30 align-middle" id="panverification_tabs"></i>':'<i class="ti-alert text-danger f-30 align-middle" id="panverification_tabs_2"></i>'; ?><span class="ml-2 d-inline-block align-middle"><?= __('PAN Number') ?></span></a>
                 </li>
                 <li class="nav-item text-start p-2">
-                    <a class="nav-link p-3 border <?php echo ($verification_type == "AADHAAR")?"active":""; ?>" data-bs-toggle="tab" href="#adhaarverification" role="tab"><?php echo $vendor_verifications['AADHAAR']['status'] == "Y"?'<i class="ti-check-box f-30 align-middle" id="adhaarverification_tabs"></i>':'<i class="ti-alert text-danger f-30 align-middle" id="adhaarverification_tabs_2"></i>'; ?> <span class="ml-2 d-inline-block align-middle">Aadhaar Number</span></a>
+                    <a class="nav-link p-3 border <?php echo ($verification_type == "AADHAAR")?"active":""; ?>" data-bs-toggle="tab" href="#adhaarverification" role="tab"><?php echo $vendor_verifications['AADHAAR']['status'] == "Y"?'<i class="ti-check-box f-30 align-middle" id="adhaarverification_tabs"></i>':'<i class="ti-alert text-danger f-30 align-middle" id="adhaarverification_tabs_2"></i>'; ?> <span class="ml-2 d-inline-block align-middle"><?= __('Aadhaar Number') ?></span></a>
                 </li>
                 <li class="nav-item text-start p-2">
-                    <a class="nav-link p-3 border " data-bs-toggle="tab" href="#documents_tab" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-file f-30  align-middle" ></i><span class="ml-2 d-inline-block align-middle"> Documents</span></a>
+                    <a class="nav-link p-3 border " data-bs-toggle="tab" href="#documents_tab" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-file f-30  align-middle" ></i><span class="ml-2 d-inline-block align-middle"> <?= __('Documents') ?></span></a>
                 </li>
             </ul>
         </div>
@@ -226,15 +226,15 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                     $onclickfun = $label = $class = $spanmsg = $disbled_btn = "";
                     if($vendor_verifications['PAN']['status'] == "Y"){
                         $onclickfun = "";
-                        $label = '<i class="ti-check-box"></i> Verified Successfully';
+                        $label = '<i class="ti-check-box"></i> ' . __('Verified Successfully');
                         $class = "btn-success";
                         $spanmsg = $_SESSION['error_message']['9136'];
                         $disbled_btn = "disabled";
                     }else{
                         $onclickfun = "panVerification('btn_pan_no_popup','Check PAN','panverification_tabs')";
-                        $label = "Check PAN";
+                        $label = __("Check PAN");
                         $class = "btn-danger";
-                        $spanmsg = "PAN verification is pending";
+                        $spanmsg = __("PAN verification is pending");
                     }
                     if($candidates['pan_number'] ==""){
                         $disbled_btn = "disabled";
@@ -243,8 +243,8 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
 
                     <div class="row">
                         <div class="col-lg-12">
-                            <span class="form-label">PAN Number</span>
-                            <?php echo $candidates['pan_number'] ==""?"<span class='text-danger d-block f-12'>Please Update PAN Number</span>":""; ?>
+                            <span class="form-label"><?= __('PAN Number') ?></span>
+                            <?php echo $candidates['pan_number'] ==""?"<span class='text-danger d-block f-12'><?= __('Please Update PAN Number') ?></span>":""; ?>
                             <div class="input-group input-group-button mb-0">
                                 <input aria-label="Pan No Popup" type="text" class="form-control width1" id="pan_no_popup" value="<?php  echo $candidates['pan_number']; ?>" autocomplete="off" readonly>
                                 <button class="btn <?php echo $class; ?>" type="button" id="btn_pan_no_popup" onclick="<?php echo $onclickfun; ?>" <?php echo $disbled_btn; ?>><?php echo $label; ?></button>
@@ -256,15 +256,15 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                     <div id="pan_verification_btn" class="mt-3"></div>
 
                     <?php if(count((array)$api_hit['1']) != 0){ ?>
-                    <h3 class="mt-4 bg-gray">Details</h3>
+                    <h3 class="mt-4 bg-gray"><?= __('Details') ?></h3>
                     <table class="table table-hover mt-3">
                         <thead>
                             <tr>
-                                <th scope="col" class="">Company Name</th>
-                                <th scope="col" class="">PAN Number</th>
-                                <th scope="col" class="">Validated Company Name</th>
-                                <th scope="col" class="">Date Time</th>
-                                <th scope="col" class="">Status</th>
+                                <th scope="col" class=""><?= __('Company Name') ?></th>
+                                <th scope="col" class=""><?= __('PAN Number') ?></th>
+                                <th scope="col" class=""><?= __('Validated Company Name') ?></th>
+                                <th scope="col" class=""><?= __('Date Time') ?></th>
+                                <th scope="col" class=""><?= __('Status') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -301,23 +301,23 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                     $onclickfun = $label = $class = $spanmsg = $disbled_btn = "";
                     if($vendor_verifications['AADHAAR']['status'] == "Y"){
                         $onclickfun = "";
-                        $label = '<i class="ti-check-box"></i> Verified Successfully';
+                        $label = '<i class="ti-check-box"></i> ' . __('Verified Successfully');
                         $class = "btn-success";
                         $spanmsg = $_SESSION['error_message']['9139'];
                         $disbled_btn = "disabled";
                     }else{
                         $onclickfun = "adhaarVerification('btn_adhaar_no_popup','Click To Verify Aadhaar','adhaarverification_tabs')";
-                        $label = "Click To Verify Aadhar";
+                        $label = __("Click To Verify Aadhar");
                         $class = "btn-danger";
-                        $spanmsg = "Aadhaar verification is pending";
+                        $spanmsg = __("Aadhaar verification is pending");
                     }
                     if($candidates['adhar_no'] ==""){
                         $disbled_btn = "disabled";
                     }
                     ?>
                     <div class="row">
-                        <span class="form-label d-block">Aadhaar Number</span>
-                        <?php echo $candidates['adhar_no'] ==""?"<span class='text-danger d-block f-12'>Please Update Aadhaar Number</span>":""; ?>
+                        <span class="form-label d-block"><?= __('Aadhaar Number') ?></span>
+                        <?php echo $candidates['adhar_no'] ==""?"<span class='text-danger d-block f-12'><?= __('Please Update Aadhaar Number') ?></span>":""; ?>
                         <div class="input-group input-group-button mb-0">
                                <input aria-label="Adhaar No Popup" type="text" class="form-control width1" id="adhaar_no_popup" value="<?php  echo $candidates['adhar_no']; ?>" autocomplete="off" readonly>
                             <button class="btn <?php echo $class; ?>" type="button" id="btn_adhaar_no_popup" onclick="<?php echo $onclickfun; ?>" <?php echo $disbled_btn; ?>><?php echo $label; ?></button>
@@ -338,7 +338,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                                     $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'tiff'];
                     ?>
 
-                        <div class="col-xl-4 col-md-6" onclick="dynamicFilePriviews('<?php echo $path; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Attachments Preview" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                        <div class="col-xl-4 col-md-6" onclick="dynamicFilePriviews('<?php echo $path; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Attachments Preview') ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                             <div class="card social-card">
                                 <div class="card-body text-center p-0">
                                     <h2 class="text-facebook m-b-5">
@@ -349,7 +349,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                                         <?php } ?>
 
                                     </h2>
-                                    <a  class="f-12 text-primary custom-limit-text mt-3 cursor-pointer" style="--linehide: 1;"><?php echo $clist['name']; ?></a>
+                                    <a  class="f-12 text-primary custom-limit-text mt-3 cursor-pointer" style="--linehide: 1;"><?php echo htmlspecialchars(__($clist['name'] ?? '')); ?></a>
                                 </div>
                             </div>
                         </div>
@@ -359,7 +359,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                     </div>
                     <?php if($docavl == 0){?>
                         <div class="card-px text-center ">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Documents</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Documents') ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
@@ -373,7 +373,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
 </div>
 
 <script type="text/javascript" src="assets/pages/accordion/accordion.js"></script>

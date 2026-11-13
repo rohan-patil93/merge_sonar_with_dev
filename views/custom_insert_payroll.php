@@ -74,7 +74,7 @@
                         <div class="card-header table-card-header ">
                             <h5 class="">
                                 <b>
-                                    <?php echo date("F", mktime(0, 0, 0, $_GET['PAY_MONTH'], 10))." ".$_GET["PAY_YEAR"]; ?>  Payroll
+                                    <?php echo date("F", mktime(0, 0, 0, $_GET['PAY_MONTH'], 10))." ".$_GET["PAY_YEAR"]; ?>  <?php echo __('Payroll'); ?>
                                 </b>
                             <?php
                             $date2 = date("Y-m-d", strtotime('+1 months', strtotime($date1)));
@@ -94,86 +94,86 @@
                 <?php if($data['status']==3){ ?>
                     <div class="row ">
                         <div class="col-md-4">
-                            <div class="font-size-lg text-muted font-weight-bold mt-1"><b>Net Payout</b></div>
-                            <h4 class="" style="    color: black;">Rs. <?php echo customeummarmonyformate($payroll_data['gross_pay']-$payroll_data['deductions']); ?></h4>
+                            <div class="font-size-lg text-muted font-weight-bold mt-1"><b><?php echo __('Net Payout'); ?></b></div>
+                            <h4 class="" style="    color: black;"><?php echo __('Rs.'); ?> <?php echo customeummarmonyformate($payroll_data['gross_pay']-$payroll_data['deductions']); ?></h4>
                         </div>
 
                     </div>
                     <div class="row mt-5">
                         <div class="col-md-4">
                             <hr>
-                            <span class="font-weight-bold">Gross Pay</span>
+                            <span class="font-weight-bold"><?php echo __('Gross Pay'); ?></span>
                             <span class="font-weight-bold float-right"><?php echo customeummarmonyformate($payroll_data['gross_pay']);?></span>
                             <hr>
-                            <span class="font-weight-bold">Deductions</span>
+                            <span class="font-weight-bold"><?php echo __('Deductions'); ?></span>
                             <span class="font-weight-bold float-right">-<?php echo customeummarmonyformate($payroll_data['deductions']);?></span>
                             <hr>
-                            <span class="font-weight-bold">Work Days</span>
+                            <span class="font-weight-bold"><?php echo __('Work Days'); ?></span>
                             <span class="font-weight-bold float-right"><?php echo $payroll_data['work_days'];  ?></span>
                 <hr>
-                            <span class="font-weight-bold">Salary Statements</span>
-                            <span class="font-weight-bold float-right"><a href="csv_bank_payment_download.php?pay_year=<?php echo $_GET['PAY_YEAR']."&pay_month=".$_GET['PAY_MONTH']; ?>" target="_blank" class="btn btn-success">Download</a></span>
+                            <span class="font-weight-bold"><?php echo __('Salary Statements'); ?></span>
+                            <span class="font-weight-bold float-right"><a href="csv_bank_payment_download.php?pay_year=<?php echo $_GET['PAY_YEAR']."&pay_month=".$_GET['PAY_MONTH']; ?>" target="_blank" class="btn btn-success"><?php echo __('Download'); ?></a></span>
                         </div>
                         <div class="col-md-4">
                             <hr>
-                            <span class="font-weight-bold">Addition</span>
+                            <span class="font-weight-bold"><?php echo __('Addition'); ?></span>
                             <span class="font-weight-bold float-right"><?php echo $payroll_data['addition'];  ?></span>
                             <hr>
-                            <span class="font-weight-bold">Separation</span>
+                            <span class="font-weight-bold"><?php echo __('Separation'); ?></span>
                             <span class="font-weight-bold float-right"><?php echo $payroll_data['separation'];  ?></span>
                             <hr>
-                            <span class="font-weight-bold">Exclusion</span>
+                            <span class="font-weight-bold"><?php echo __('Exclusion'); ?></span>
                             <span class="font-weight-bold float-right"><?php echo $payroll_data['exclusion'];  ?></span>
                             <hr>
-                            <span class="font-weight-bold">Settlements</span>
+                            <span class="font-weight-bold"><?php echo __('Settlements'); ?></span>
                             <span class="font-weight-bold float-right"><?php echo $payroll_data['settlements'];  ?></span>
                         </div>
                         <div class="col-md-4">
                             <hr>
-                            <span class="font-weight-bold">Payroll input:</span>
+                            <span class="font-weight-bold"><?php echo __('Payroll input:'); ?></span>
                             <div class="btn-group btn-group-toggle float-right pay-lock" data-toggle="buttons" style="margin-top: -10px;">
                                 <label class="btn btn-success active">
-                                    <input aria-label="Options" type="radio" name="options" id="option1" checked="checked"/> Unlock
+                                    <input aria-label="<?php echo __('Options'); ?>" type="radio" name="options" id="option1" checked="checked"/> <?php echo __('Unlock'); ?>
                                 </label>
                                 <label class="btn btn-success">
-                                    <input aria-label="Options" type="radio" name="options" id="option2"/> Lock
+                                    <input aria-label="<?php echo __('Options'); ?>" type="radio" name="options" id="option2"/> <?php echo __('Lock'); ?>
                                 </label>
                             </div>
                             <hr>
-                            <span class="font-weight-bold">Employee View Realese:</span>
+                            <span class="font-weight-bold"><?php echo __('Employee View Realese:'); ?></span>
                             <div class="btn-group btn-group-toggle float-right pay-lock" data-toggle="buttons" style="margin-top: -10px;">
                                 <label class="btn btn-success active">
-                                    <input aria-label="Options" type="radio" name="options" id="option1_2"/> Release
+                                    <input aria-label="<?php echo __('Options'); ?>" type="radio" name="options" id="option1_2"/> <?php echo __('Release'); ?>
                                 </label>
                                 <label class="btn btn-success">
-                                    <input aria-label="Options" type="radio" name="options" id="option2_2" checked="checked"/> Hold
+                                    <input aria-label="<?php echo __('Options'); ?>" type="radio" name="options" id="option2_2" checked="checked"/> <?php echo __('Hold'); ?>
                                 </label>
                             </div>
                             <hr>
-                            <span class="font-weight-bold">IT Settlements employee view:</span>
+                            <span class="font-weight-bold"><?php echo __('IT Settlements employee view:'); ?></span>
                             <div class="btn-group btn-group-toggle float-right pay-lock" data-toggle="buttons" style="margin-top: -10px;">
                                 <label class="btn btn-success active">
-                                    <input aria-label="Options" type="radio" name="options" id="option1_3"/> Release
+                                    <input aria-label="<?php echo __('Options'); ?>" type="radio" name="options" id="option1_3"/> <?php echo __('Release'); ?>
                                 </label>
                                 <label class="btn btn-success">
-                                    <input aria-label="Options" type="radio" name="options" id="option2_3" checked="checked"/> Hold
+                                    <input aria-label="<?php echo __('Options'); ?>" type="radio" name="options" id="option2_3" checked="checked"/> <?php echo __('Hold'); ?>
                                 </label>
                             </div>
                             <hr>
-                            <span class="font-weight-bold">Payroll:</span>
+                            <span class="font-weight-bold"><?php echo __('Payroll:'); ?></span>
                             <div class="btn-group btn-group-toggle float-right pay-lock" data-toggle="buttons" style="margin-top: -10px;">
                                 <label class="btn btn-success active">
-                                    <input aria-label="Options" type="radio" name="options" id="option1_4" checked="checked"/> Unlock
+                                    <input aria-label="<?php echo __('Options'); ?>" type="radio" name="options" id="option1_4" checked="checked"/> <?php echo __('Unlock'); ?>
                                 </label>
                                 <label class="btn btn-success">
-                                    <input aria-label="Options" type="radio" name="options" id="option2_4"/> Lock
+                                    <input aria-label="<?php echo __('Options'); ?>" type="radio" name="options" id="option2_4"/> <?php echo __('Lock'); ?>
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="row mt-5">
                         <div class="col-md-4">
-                            <p class="text-dark-75 font-weight-bolder font-size-h5 m-0">Exceptions</p>
+                            <p class="text-dark-75 font-weight-bolder font-size-h5 m-0"><?php echo __('Exceptions'); ?></p>
                             <?php foreach ($payroll_ex as $exclusion) {
                                 if($exclusion['category_id'] == 5){ ?>
                                     <div class="d-flex align-items-center mb-4 mt-5">
@@ -186,7 +186,7 @@
                                 <?php } ?>
                             </div>
                             <div class="col-md-4">
-                                <p class="text-dark-75 font-weight-bolder font-size-h5 m-0">Hold Salary Payout</p>
+                                <p class="text-dark-75 font-weight-bolder font-size-h5 m-0"><?php echo __('Hold Salary Payout'); ?></p>
                                 <?php foreach ($payroll_ex as $exclusion) {
                                     if($exclusion['category_id'] == 2){ ?>
                                         <div class="d-flex align-items-center mb-4 mt-5">
@@ -200,7 +200,7 @@
 
                                 </div>
                                 <div class="col-lg-4">
-                                    <p class="text-dark-75 font-weight-bolder font-size-h5 m-0">To Do</p>
+                                    <p class="text-dark-75 font-weight-bolder font-size-h5 m-0"><?php echo __('To Do'); ?></p>
                                     <form class="form">
                                         <div class="form-group  col-form-label">
                                             <div class="checkbox-inline">
@@ -208,7 +208,7 @@
                                                     <div class="col-lg-12 mt-2">
                                                         <div class="checkbox-fade fade-in-primary">
                                                             <label class="form-label">
-                                                                <input aria-label="Checkboxes1" readonly type="checkbox" checked name="Checkboxes1" disabled="">
+                                                                <input aria-label="<?php echo __('Checkboxes1'); ?>" readonly type="checkbox" checked name="Checkboxes1" disabled="">
                                                                 <span class="cr">
                                                                   <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                               </span><span><?php echo $steps['name']; ?></span>
@@ -227,13 +227,13 @@
             <?php }elseif($data['status']==2){ ?>
              <div class="col-lg-12 text-center" >
                <a target="_blank"  href="index.php?option=COM_INSERT_PAYROLL&payroll=process&PAY_YEAR=<?php echo $_GET['PAY_YEAR']; ?>&PAY_MONTH=<?php echo $_GET['PAY_MONTH']; ?>"  class="btn btn-primary btn-shadow-hover font-weight-bold mr-2">
-                <?php echo "Payroll Process";  ?></a>
+                <?php echo __('Payroll Process');  ?></a>
             </div>
         <?php } else{?>
           <div class="col-lg-5 mr-auto ml-auto" style="margin-left: 30%;">
             <div class="card card-custom"  style="padding: 80px;">
                 <div class="card-body text-center bg-primary">
-                    <a class="text-white font-size-h6" href="index.php?option=COM_INSERT_PAYROLL_STEPS&PAY_YEAR=<?php echo $_GET['PAY_YEAR']; ?>&PAY_MONTH=<?php echo $_GET['PAY_MONTH']; ?>"><i class="fas fa-plus"></i> Genrate Payroll For <?php echo date("F", mktime(0, 0, 0, $_GET['PAY_MONTH'], 10))." ".$_GET["PAY_YEAR"]; ?></a>
+                    <a class="text-white font-size-h6" href="index.php?option=COM_INSERT_PAYROLL_STEPS&PAY_YEAR=<?php echo $_GET['PAY_YEAR']; ?>&PAY_MONTH=<?php echo $_GET['PAY_MONTH']; ?>"><i class="fas fa-plus"></i> <?php echo __('Genrate Payroll For'); ?> <?php echo date("F", mktime(0, 0, 0, $_GET['PAY_MONTH'], 10))." ".$_GET["PAY_YEAR"]; ?></a>
                 </div>
             </div>
         </div>

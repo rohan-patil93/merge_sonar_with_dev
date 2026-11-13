@@ -7,18 +7,18 @@ $assetName = htmlspecialchars($asset['asset_name'] ?? '—', ENT_QUOTES, 'UTF-8'
 <table class="table table-bordered table-sm f-12 mb-0">
     <thead class="table-light">
         <tr>
-            <th scope="col">Asset Code</th>
-            <th scope="col">Asset Name</th>
-            <th scope="col">Planned Date</th>
-            <th scope="col">Actual Start</th>
-            <th scope="col">Actual End</th>
-            <th scope="col">Status</th>
+            <th scope="col"><?= __('Asset Code') ?></th>
+            <th scope="col"><?= __('Asset Name') ?></th>
+            <th scope="col"><?= __('Planned Date') ?></th>
+            <th scope="col"><?= __('Actual Start') ?></th>
+            <th scope="col"><?= __('Actual End') ?></th>
+            <th scope="col"><?= __('Status') ?></th>
         </tr>
     </thead>
     <tbody>
         <?php if (count((array)$schedules) == 0): ?>
             <tr class="amc-history-empty">
-                <td colspan="6" class="text-center text-muted">No planned visits — submit the contract to generate the schedule.</td>
+                <td colspan="6" class="text-center text-muted"><?= __('No planned visits — submit the contract to generate the schedule.') ?></td>
             </tr>
         <?php else: ?>
             <?php if (count((array)$schedules) > 0) {
@@ -40,7 +40,7 @@ $assetName = htmlspecialchars($asset['asset_name'] ?? '—', ENT_QUOTES, 'UTF-8'
                 <td><?= htmlspecialchars($row['planned_display'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
                 <td><?= htmlspecialchars($row['actual_start_display'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
                 <td><?= htmlspecialchars($row['actual_end_display'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
-                <td><span class="badge <?= $statusClass ?>"><?= $statusLabel ?></span></td>
+                <td><span class="badge <?= $statusClass ?>"><?= __($statusLabel) ?></span></td>
             </tr>
             <?php }
             } ?>

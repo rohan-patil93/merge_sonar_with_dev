@@ -149,8 +149,8 @@ if(isset($_POST['submittenantbills'])){
 										type: "warning",
 										showCancelButton: true,
 										confirmButtonClass: "btn-danger",
-										confirmButtonText: "Yes",
-										cancelButtonText: "No",
+										confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+										cancelButtonText: <?php echo json_encode(__('No')); ?>,
 										closeOnConfirm: true,
 										closeOnCancel: true
 									},
@@ -201,19 +201,19 @@ if(isset($_POST['submittenantbills'])){
 <div class="card">
 	<div class="card-header  row">
         <div class="col-lg-10">
-            <h5>Property Rent Invoices</h5>
+            <h5><?php echo __('Property Rent Invoices'); ?></h5>
         </div>
     </div>
     <div class="card-body">
 		<ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3" role="tablist">
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#invoicetobegenerated" role="tab" aria-selected="true">  Invoice to Be Generated <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$invoicetobegenerated);?></label></a>
+				<a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#invoicetobegenerated" role="tab" aria-selected="true">  <?php echo __('Invoice to Be Generated'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$invoicetobegenerated);?></label></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#invoicetobeemailed" role="tab" aria-selected="true"> Invoice to be Emailed <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$invoicetobeemailed);?></label></a>
+				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#invoicetobeemailed" role="tab" aria-selected="true"> <?php echo __('Invoice to be Emailed'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$invoicetobeemailed);?></label></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#invoicesharedwithtenant" role="tab" aria-selected="true"> Invoice Shared With Tenant <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$invoicesharedwithtenant);?></label></a>
+				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#invoicesharedwithtenant" role="tab" aria-selected="true"> <?php echo __('Invoice Shared With Tenant'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$invoicesharedwithtenant);?></label></a>
 			</li>
 		</ul>
 		<div class="tab-content tabs " >
@@ -223,13 +223,13 @@ if(isset($_POST['submittenantbills'])){
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Tenant Name</th>
-								<th>Property Name</th>
-								<th class="text-right">Monthly Rent</th>
-								<th class="text-right">Utility Amount</th>
-								<th class="text-right">Total Amount</th>
-								<th>Rent Due Date</th>
-								<th class="text-center">Rent</th>
+								<th><?php echo __('Tenant Name'); ?></th>
+								<th><?php echo __('Property Name'); ?></th>
+								<th class="text-right"><?php echo __('Monthly Rent'); ?></th>
+								<th class="text-right"><?php echo __('Utility Amount'); ?></th>
+								<th class="text-right"><?php echo __('Total Amount'); ?></th>
+								<th><?php echo __('Rent Due Date'); ?></th>
+								<th class="text-center"><?php echo __('Rent'); ?></th>
 								<!-- <th class="text-center">Action</th> -->
 							</tr>
 						</thead>
@@ -250,9 +250,9 @@ if(isset($_POST['submittenantbills'])){
 									<div class="custom-popup-open open_popup_tenant_billing_<?php echo $ptb['id']; ?> text-start" style="display: none; width: 650px; right: 0px;">
 										<div class="card">
 											<div class="card-header">
-												<h5>Property Tenant Billing</h5>
+												<h5><?php echo __('Property Tenant Billing'); ?></h5>
 												<div class="card-header-right">
-													<i class="ti-close" onclick="closePopUp('<?php echo $ptb['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed"></i>
+													<i class="ti-close" onclick="closePopUp('<?php echo $ptb['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
 												</div>
 											</div>
 											<form method="post" id="form_id_<?php echo $ptb['id']; ?>">
@@ -261,9 +261,9 @@ if(isset($_POST['submittenantbills'])){
 														<thead>
 															<tr>
 																<th width="5%">#</th>
-																<th width="37%">Utility</th>
-																<th width="18%" class="text-right">Amount</th>
-																<th width="30%">Remark</th>
+																<th width="37%"><?php echo __('Utility'); ?></th>
+																<th width="18%" class="text-right"><?php echo __('Amount'); ?></th>
+																<th width="30%"><?php echo __('Remark'); ?></th>
 															</tr>
 														</thead>
 														<tbody>
@@ -287,16 +287,16 @@ if(isset($_POST['submittenantbills'])){
 														</table>
 													</div>
 													<div class="card-footer pt-0 m-b-35">
-														<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="submitTenantBill('<?php echo $ptb['id']; ?>','S')"> Save</button>
-														<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="submitTenantBill('<?php echo $ptb['id']; ?>','SG')"> Generate Invoice</button>
-														<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="submitTenantBill('<?php echo $ptb['id']; ?>','SGS')"> Generate Invoice & Send Tenant</button>
+														<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="submitTenantBill('<?php echo $ptb['id']; ?>','S')"> <?php echo __('Save'); ?></button>
+														<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="submitTenantBill('<?php echo $ptb['id']; ?>','SG')"> <?php echo __('Generate Invoice'); ?></button>
+														<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="submitTenantBill('<?php echo $ptb['id']; ?>','SGS')"> <?php echo __('Generate Invoice & Send Tenant'); ?></button>
 													</div>
 												</form>
 											</div>
 										</div>
 										
 										</td>
-										<td class="p-2 text-center"><i class="fa fa-cog  f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Utility Bill" onclick="opentTenantUtilityPopUp('<?php echo $ptb['id']; ?>')" ></i>
+										<td class="p-2 text-center"><i class="fa fa-cog  f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>" onclick="opentTenantUtilityPopUp('<?php echo $ptb['id']; ?>')" ></i>
 										</td>
 									</tr>
 									<?php  $m++; } ?> 
@@ -304,7 +304,7 @@ if(isset($_POST['submittenantbills'])){
 							</table>
 						<?php }else{?>
 							<div class="card-px text-center py-20 m-t-30">
-								<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Invoice</p>   
+								<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>   
 								<div class="text-center px-4">
 									<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 								</div>   
@@ -318,16 +318,16 @@ if(isset($_POST['submittenantbills'])){
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>Tenant Name</th>
-										<th>Property Name</th>
-										<th class="text-right">Monthly Rent</th>
-										<th class="text-right">Utility Amount</th>
-										<th class="text-right">Total Amount</th>
-										<th>Rent Due Date</th>
-										<th>Invoice Date</th>
-										<th>Invoice Number</th>
-										<th>Invoice Generated Date</th>
-										<th  class="text-center">Action</th>
+										<th><?php echo __('Tenant Name'); ?></th>
+										<th><?php echo __('Property Name'); ?></th>
+										<th class="text-right"><?php echo __('Monthly Rent'); ?></th>
+										<th class="text-right"><?php echo __('Utility Amount'); ?></th>
+										<th class="text-right"><?php echo __('Total Amount'); ?></th>
+										<th><?php echo __('Rent Due Date'); ?></th>
+										<th><?php echo __('Invoice Date'); ?></th>
+										<th><?php echo __('Invoice Number'); ?></th>
+										<th><?php echo __('Invoice Generated Date'); ?></th>
+										<th  class="text-center"><?php echo __('Action'); ?></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -355,10 +355,10 @@ if(isset($_POST['submittenantbills'])){
 											<td id="custom-popup" class="p-2"><?php echo fromDate($ptb['generated_invoice_datetime']); ?></td>
 											<td class="p-2 text-center">
 												<a href="index.php?option=COM_VIEW_RENTAL_INVOICES&rid=<?php echo $ptb['rental_invoice_id']; ?>&table=rental_invoices&title=Rental Invoices" target="_blank">
-													<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary"> View </button>
+													<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary"> <?php echo __('View'); ?> </button>
 												</a>
 
-												<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="renatalInvoiceSend('<?php echo $ptb['id']; ?>')"> Send</button>
+												<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="renatalInvoiceSend('<?php echo $ptb['id']; ?>')"> <?php echo __('Send'); ?></button>
 											</td>
 										</tr>
 										<?php  $m++; } ?> 
@@ -366,7 +366,7 @@ if(isset($_POST['submittenantbills'])){
 								</table>
 							<?php }else{ ?>
 								<div class="card-px text-center py-20 m-t-30">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Invoice</p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 									</div>   
@@ -379,16 +379,16 @@ if(isset($_POST['submittenantbills'])){
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>Tenant Name</th>
-											<th>Property Name</th>
-											<th class="text-right">Monthly Rent</th>
-											<th class="text-right">Utility Amount</th>
-											<th class="text-right">Total Amount</th>
-											<th>Rent Due Date</th>
-											<th>Invoice Date</th>
-											<th>Invoice Number</th>
-											<th>Invoice Shared Date</th>
-											<th  class="text-center">Action</th>
+											<th><?php echo __('Tenant Name'); ?></th>
+											<th><?php echo __('Property Name'); ?></th>
+											<th class="text-right"><?php echo __('Monthly Rent'); ?></th>
+											<th class="text-right"><?php echo __('Utility Amount'); ?></th>
+											<th class="text-right"><?php echo __('Total Amount'); ?></th>
+											<th><?php echo __('Rent Due Date'); ?></th>
+											<th><?php echo __('Invoice Date'); ?></th>
+											<th><?php echo __('Invoice Number'); ?></th>
+											<th><?php echo __('Invoice Shared Date'); ?></th>
+											<th  class="text-center"><?php echo __('Action'); ?></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -415,10 +415,10 @@ if(isset($_POST['submittenantbills'])){
 											<td id="custom-popup" class="p-2"><?php echo fromDate($ptb['shared_datetime']); ?></td>
 											<td class="p-2 text-center">
 												<a href="index.php?option=COM_VIEW_RENTAL_INVOICES&rid=<?php echo $ptb['rental_invoice_id']; ?>&table=rental_invoices&title=Rental Invoices" target="_blank">
-													<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary"> View </button>
+													<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary"> <?php echo __('View'); ?> </button>
 												</a>
 
-												<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="renatalInvoiceSend('<?php echo $ptb['id']; ?>')">Re-Send</button>
+												<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="renatalInvoiceSend('<?php echo $ptb['id']; ?>')"><?php echo __('Re-Send'); ?></button>
 											</td>
 
 										</tr>
@@ -427,7 +427,7 @@ if(isset($_POST['submittenantbills'])){
 								</table>
 							<?php }else{ ?>
 								<div class="card-px text-center py-20 m-t-30">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Invoice</p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 									</div>   
@@ -462,19 +462,19 @@ if(isset($_POST['submittenantbills'])){
 <div class="card">
 	<div class="card-header  row">
         <div class="col-lg-10">
-            <h5>Property Utility Invoices</h5>
+            <h5><?php echo __('Property Utility Invoices'); ?></h5>
         </div>
     </div>
     <div class="card-body">
 		<ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3" role="tablist">
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#utility_invoicetobegenerated" role="tab" aria-selected="true">  Invoice to Be Generated <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$utility_invoicetobegenerated);?></label></a>
+				<a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#utility_invoicetobegenerated" role="tab" aria-selected="true">  <?php echo __('Invoice to Be Generated'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$utility_invoicetobegenerated);?></label></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#utility_invoicetobeemailed" role="tab" aria-selected="true"> Invoice to be Emailed <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$utility_invoicetobeemailed);?></label></a>
+				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#utility_invoicetobeemailed" role="tab" aria-selected="true"> <?php echo __('Invoice to be Emailed'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$utility_invoicetobeemailed);?></label></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#utility_invoicesharedwithtenant" role="tab" aria-selected="true"> Invoice Shared With Tenant <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$utility_invoicesharedwithtenant);?></label></a>
+				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#utility_invoicesharedwithtenant" role="tab" aria-selected="true"> <?php echo __('Invoice Shared With Tenant'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$utility_invoicesharedwithtenant);?></label></a>
 			</li>
 		</ul>
 		<div class="tab-content tabs " >
@@ -484,11 +484,11 @@ if(isset($_POST['submittenantbills'])){
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Tenant Name</th>
-								<th>Property Name</th>
-								<th class="text-right">Utility Amount</th>
-								<th>Rent Due Date</th>
-								<th class="text-center">Utility</th>
+								<th><?php echo __('Tenant Name'); ?></th>
+								<th><?php echo __('Property Name'); ?></th>
+								<th class="text-right"><?php echo __('Utility Amount'); ?></th>
+								<th><?php echo __('Rent Due Date'); ?></th>
+								<th class="text-center"><?php echo __('Utility'); ?></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -507,9 +507,9 @@ if(isset($_POST['submittenantbills'])){
 										<div class="custom-popup-open open_popup_tenant_billing_utility_<?php echo $ptb['id']; ?> text-start" style="display: none; width: 650px; right: 0px;">
 											<div class="card">
 												<div class="card-header">
-													<h5>Utility Tenant Billing</h5>
+													<h5><?php echo __('Utility Tenant Billing'); ?></h5>
 													<div class="card-header-right">
-														<i class="ti-close" onclick="closePopUp('<?php echo $ptb['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed"></i>
+														<i class="ti-close" onclick="closePopUp('<?php echo $ptb['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
 													</div>
 												</div>
 												<form method="post" id="form_id_utility_<?php echo $ptb['id']; ?>">
@@ -518,9 +518,9 @@ if(isset($_POST['submittenantbills'])){
 															<thead>
 																<tr>
 																	<th width="5%">#</th>
-																	<th width="37%">Utility</th>
-																	<th width="18%" class="text-right">Amount</th>
-																	<th width="30%">Remark</th>
+																	<th width="37%"><?php echo __('Utility'); ?></th>
+																	<th width="18%" class="text-right"><?php echo __('Amount'); ?></th>
+																	<th width="30%"><?php echo __('Remark'); ?></th>
 																</tr>
 															</thead>
 															<tbody>
@@ -544,15 +544,15 @@ if(isset($_POST['submittenantbills'])){
 															</table>
 														</div>
 														<div class="card-footer pt-0 m-b-35">
-															<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="submitTenantBill('<?php echo $ptb['id']; ?>','S','utility_','U')"> Save</button>
-															<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="submitTenantBill('<?php echo $ptb['id']; ?>','SG','utility_','U')"> Generate Invoice</button>
-															<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="submitTenantBill('<?php echo $ptb['id']; ?>','SGS','utility_','U')"> Generate Invoice & Send Tenant</button>
+															<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="submitTenantBill('<?php echo $ptb['id']; ?>','S','utility_','U')"> <?php echo __('Save'); ?></button>
+															<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="submitTenantBill('<?php echo $ptb['id']; ?>','SG','utility_','U')"> <?php echo __('Generate Invoice'); ?></button>
+															<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="submitTenantBill('<?php echo $ptb['id']; ?>','SGS','utility_','U')"> <?php echo __('Generate Invoice & Send Tenant'); ?></button>
 														</div>
 													</form>
 												</div>
 												</div>
 										</td>
-										<td class="p-2 text-center"><i class="fa fa-cog  f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Utility Bill" onclick="opentTenantUtilityonlyPopUp('<?php echo $ptb['id']; ?>')" ></i>
+										<td class="p-2 text-center"><i class="fa fa-cog  f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>" onclick="opentTenantUtilityonlyPopUp('<?php echo $ptb['id']; ?>')" ></i>
 										</td>
 									</tr>
 									<?php  $m++; } ?> 
@@ -560,7 +560,7 @@ if(isset($_POST['submittenantbills'])){
 							</table>
 						<?php }else{?>
 							<div class="card-px text-center py-20 m-t-30">
-								<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Invoice</p>   
+								<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>   
 								<div class="text-center px-4">
 									<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 								</div>   
@@ -574,14 +574,14 @@ if(isset($_POST['submittenantbills'])){
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>Tenant Name</th>
-										<th>Property Name</th>
-										<th class="text-right">Utility Amount</th>
-										<th>Rent Due Date</th>
-										<th>Invoice Date</th>
-										<th>Invoice Number</th>
-										<th>Invoice Generated Date</th>
-										<th  class="text-center">Action</th>
+										<th><?php echo __('Tenant Name'); ?></th>
+										<th><?php echo __('Property Name'); ?></th>
+										<th class="text-right"><?php echo __('Utility Amount'); ?></th>
+										<th><?php echo __('Rent Due Date'); ?></th>
+										<th><?php echo __('Invoice Date'); ?></th>
+										<th><?php echo __('Invoice Number'); ?></th>
+										<th><?php echo __('Invoice Generated Date'); ?></th>
+										<th  class="text-center"><?php echo __('Action'); ?></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -599,10 +599,10 @@ if(isset($_POST['submittenantbills'])){
 											<td id="custom-popup" class="p-2"><?php echo fromDate($ptb['utility_generated_invoice_datetime']); ?></td>
 											<td class="p-2 text-center">
 												<a href="index.php?option=COM_VIEW_RENTAL_INVOICES&rid=<?php echo $ptb['utility_rental_invoice_id']; ?>&table=utility_rental_invoices&title=Utility Invoices" target="_blank">
-													<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary"> View </button>
+													<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary"> <?php echo __('View'); ?> </button>
 												</a>
 
-												<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="renatalInvoiceSend('<?php echo $ptb['id']; ?>','U')"> Send</button>
+												<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="renatalInvoiceSend('<?php echo $ptb['id']; ?>','U')"> <?php echo __('Send'); ?></button>
 											</td>
 										</tr>
 										<?php  $m++; } ?> 
@@ -610,7 +610,7 @@ if(isset($_POST['submittenantbills'])){
 								</table>
 							<?php }else{ ?>
 								<div class="card-px text-center py-20 m-t-30">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Invoice</p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 									</div>   
@@ -623,14 +623,14 @@ if(isset($_POST['submittenantbills'])){
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>Tenant Name</th>
-											<th>Property Name</th>
-											<th class="text-right">Utility Amount</th>
-											<th>Rent Due Date</th>
-											<th>Invoice Date</th>
-											<th>Invoice Number</th>
-											<th>Invoice Shared Date</th>
-											<th  class="text-center">Action</th>
+											<th><?php echo __('Tenant Name'); ?></th>
+											<th><?php echo __('Property Name'); ?></th>
+											<th class="text-right"><?php echo __('Utility Amount'); ?></th>
+											<th><?php echo __('Rent Due Date'); ?></th>
+											<th><?php echo __('Invoice Date'); ?></th>
+											<th><?php echo __('Invoice Number'); ?></th>
+											<th><?php echo __('Invoice Shared Date'); ?></th>
+											<th  class="text-center"><?php echo __('Action'); ?></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -649,10 +649,10 @@ if(isset($_POST['submittenantbills'])){
 											<td id="custom-popup" class="p-2"><?php echo fromDate($ptb['utility_shared_datetime']); ?></td>
 											<td class="p-2 text-center">
 												<a href="index.php?option=COM_VIEW_RENTAL_INVOICES&rid=<?php echo $ptb['utility_rental_invoice_id']; ?>&table=utility_rental_invoices&title=Utility Invoices" target="_blank">
-													<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary"> View </button>
+													<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary"> <?php echo __('View'); ?> </button>
 												</a>
 
-												<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="renatalInvoiceSend('<?php echo $ptb['id']; ?>','U')">Re-Send</button>
+												<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="renatalInvoiceSend('<?php echo $ptb['id']; ?>','U')"><?php echo __('Re-Send'); ?></button>
 											</td>
 
 										</tr>
@@ -661,7 +661,7 @@ if(isset($_POST['submittenantbills'])){
 								</table>
 							<?php }else{ ?>
 								<div class="card-px text-center py-20 m-t-30">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Invoice</p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 									</div>   

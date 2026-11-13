@@ -55,7 +55,7 @@ $stausresult = ViewStatusData();
                     <div class="card-toolbar">
                         <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                             <i class="ki ki-long-arrow-back icon-xs"></i>
-                            Back
+                            <?php echo __('Back'); ?>
                         </a>
                     </div>
                 </div>
@@ -84,7 +84,7 @@ $stausresult = ViewStatusData();
                                                 }
 }?>
                                             <?php } ?>
-                                            <th scope="col">Action</th>
+                                            <th scope="col"><?php echo __('Action'); ?></th>
                                         </tr>
 
                                     </thead>
@@ -177,14 +177,14 @@ $stausresult = ViewStatusData();
                                                     ?>
 
                                                     <div style="float: left;">
-                                                        <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="Edit Datails" ><i  class="flaticon2-edit"></i></a>
+                                                        <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="<?php echo __('Edit Datails'); ?>" ><i  class="flaticon2-edit"></i></a>
                                                     </div>
                                                     <div style="float: left;">
-                                                        <a href="<?php echo $link_copy; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Copy Datails">
+                                                        <a href="<?php echo $link_copy; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?php echo __('Copy Datails'); ?>">
                                                             <i class="flaticon2-file"></i></a>
                                                         </div>
                                                         <div style="float: left;">
-                                                            <a href="<?php echo $view; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="view Datails">
+                                                            <a href="<?php echo $view; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?php echo __('view Datails'); ?>">
                                                                 <i class="flaticon-eye"></i></a>
                                                             </div>
                                                         </td>

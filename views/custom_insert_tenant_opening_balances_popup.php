@@ -40,7 +40,7 @@ function submitTenantOpeningbalance(){
 	          type: "info",
 	          showCancelButton: true,
 	          confirmButtonClass: "btn-danger",
-	          confirmButtonText: "Submit",
+	          confirmButtonText: <?php echo json_encode(__('Submit')); ?>,
 	          cancelButtonText: "Don't Submit",
 	          closeOnConfirm: true,
 	          closeOnCancel: true
@@ -97,7 +97,7 @@ function addMoreOpeningBalance(){
 	//html +='<th class="p-1"><input type="text" name="utility[]" class="form-control text-right" value=""></th>';
 	html +='<th class="p-1"><input type="number" name="total['+maxrows+']" id="total_rent_'+maxrows+'" class="form-control text-right" value="" readonly=""></th>';
 	html +='<th class="p-1"><textarea type="text" name="comment['+maxrows+']" class="form-control" id="comment"></textarea></th>';
-	html +='<th class="p-1 text-center"><i class="ti-trash text-danger mr-5" onclick="deletRow(\''+rowid+'\')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Removed"></i></th></tr>';
+	html +='<th class="p-1 text-center"><i class="ti-trash text-danger mr-5" onclick="deletRow(\''+rowid+'\')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Removed'); ?>"></i></th></tr>';
 	$("#tenantopenbalancetable").append(html);
 	$( ".datepicker" ).datepicker({
 		showOn: "both",
@@ -125,8 +125,8 @@ function calculateRent(rowid){
 
 </script>
 <div class="modal-header">
-	<h4 class="modal-title">Tenant Opening Balances</h4>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<h4 class="modal-title"><?php echo __('Tenant Opening Balances'); ?></h4>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body m-l-50 m-r-50">
 	<div class="row">
@@ -140,7 +140,7 @@ function calculateRent(rowid){
 					<table class="table m-0">
 						<tbody>
 							<tr>
-								<th class="p-1">Transaction Date</th>
+								<th class="p-1"><?php echo __('Transaction Date'); ?></th>
 								<td class="p-1 text-right"><?php echo fromDate($renti['transaction_date']); ?></td>
 							</tr>	
 							<?php foreach($rentalinvoiceitems[$renti['id']] as $rntitem){ ?>
@@ -150,7 +150,7 @@ function calculateRent(rowid){
 								</tr>	
 							<?php }  ?>
 							<tr>
-								<th class="p-1">Total</th>
+								<th class="p-1"><?php echo __('Total'); ?></th>
 								<th class="p-1 text-right"><?php echo customeummarmonyformateifine($renti['total_amount']); ?></th>
 							</tr>											
 						</tbody>
@@ -164,11 +164,11 @@ function calculateRent(rowid){
 		<table class="table table-hover m-b-0" style="font-size:13px;" id="tenantopenbalancetable">
 			<thead>
 				<tr>
-					<th class="text-center p-1" colspan="<?php echo count((array)$pownerareids); ?>">Propert Rent+Utility</th>
-					<th class="align-middle p-1 text-center" rowspan="2">Transaction Date <span class="text-danger">*</span></th>
-					<th class="align-middle p-1 text-center" rowspan="2">Total <span class="text-danger">*</span></th>
-					<th class="align-middle p-1 text-center" rowspan="2">Comment</th>
-					<th class="align-middle p-1 text-center" rowspan="2">Remove</th>
+					<th class="text-center p-1" colspan="<?php echo count((array)$pownerareids); ?>"><?php echo __('Propert Rent+Utility'); ?></th>
+					<th class="align-middle p-1 text-center" rowspan="2"><?php echo __('Transaction Date'); ?> <span class="text-danger">*</span></th>
+					<th class="align-middle p-1 text-center" rowspan="2"><?php echo __('Total'); ?> <span class="text-danger">*</span></th>
+					<th class="align-middle p-1 text-center" rowspan="2"><?php echo __('Comment'); ?></th>
+					<th class="align-middle p-1 text-center" rowspan="2"><?php echo __('Remove'); ?></th>
 				</tr>
 				<tr>
 					<?php foreach($pownerareids as $prid){ ?>
@@ -195,19 +195,19 @@ function calculateRent(rowid){
 						<textarea type="text" name="comment[1]" class="form-control " id="comment"></textarea>
 					</th>
 					<th class="p-1 text-center">
-						<i class="ti-trash text-danger mr-5" onclick="deletRow('removerow_1')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Removed"></i>
+						<i class="ti-trash text-danger mr-5" onclick="deletRow('removerow_1')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Removed'); ?>"></i>
 					</th>
 				</tr>
 			</tbody>
 		</table>
 		<input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>">  
-		<button class="btn btn-success m-t-20" id="addRows" type="button" onclick="addMoreOpeningBalance()"><i class="fa fa-plus m-r-5"></i>Add More</button>
+		<button class="btn btn-success m-t-20" id="addRows" type="button" onclick="addMoreOpeningBalance()"><i class="fa fa-plus m-r-5"></i><?php echo __('Add More'); ?></button>
 		
 	</form>
 
 </div>
 <div class="modal-footer" >
-	<span class="text-danger f-w-700" id="popupshowerror" style="display: none">Please fill out all required fields</span>
-	<button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitTenantOpeningbalance()"> Save</button>
-	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+	<span class="text-danger f-w-700" id="popupshowerror" style="display: none"><?php echo __('Please fill out all required fields'); ?></span>
+	<button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitTenantOpeningbalance()"> <?php echo __('Save'); ?></button>
+	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
 </div>

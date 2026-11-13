@@ -30,7 +30,7 @@ if(count((array)$ppeermm)==0){
     function submitrom(){
          var  str = '';
          var arr = [];
-         alert("hai");
+         alert(<?php echo json_encode(__('hai')); ?>);
 
              var count = $(".sfitemRow").length;
              str = 'rowid='+$('#rowid').val()+'&count='+count;
@@ -48,8 +48,8 @@ if(count((array)$ppeermm)==0){
             success: function(response) {
                 console.log(response);
                 swal.fire({
-                            title: "Record has been saved successfully ",
-                            text: "Do you want to close ? ",
+                            title: <?php echo json_encode(__('Record has been saved successfully')); ?>,
+                            text: <?php echo json_encode(__('Do you want to close ?')); ?>,
                             type: "success",
                             buttonsStyling: false,
                             confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
@@ -71,13 +71,13 @@ if(count((array)$ppeermm)==0){
         count++;
         var htmlRows = '';
         htmlRows += '<div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10"><div class="row align-items-center sfitemRow" id="static_div_'+count+'" style="margin-top: 10px;">'
-        htmlRows += '<div class="col-lg-3"><select aria-label="Country" class="form-control form-select js-example-basic-single" name="" id="country__2"+count+'"><option value=""> Select Any One</option><?php foreach($countries as $country){ ?><option value="<?php echo $country[id]; ?>"> <?php echo $country[short_name]; ?></option><?php
+        htmlRows += '<div class="col-lg-3"><select aria-label="<?php echo __('Country'); ?>" class="form-control form-select js-example-basic-single" name="" id="country__2"+count+'"><option value=""> <?php echo __('Select Any One'); ?></option><?php foreach($countries as $country){ ?><option value="<?php echo $country[id]; ?>"> <?php echo $country[short_name]; ?></option><?php
 } ?></select></div>';
-        htmlRows += '<div class="col-lg-3"><select aria-label="Currenc" class="form-control form-select js-example-basic-single" name="" id="currenc_'+count+'"><option value=""> Select Any One</option><?php foreach($currency as $currenc){ ?><option value="<?php echo $currenc[id]; ?>"> <?php echo $currenc[currency_name]." - ".$currenc[currency_short_code]; ?></option><?php
+        htmlRows += '<div class="col-lg-3"><select aria-label="<?php echo __('Currenc'); ?>" class="form-control form-select js-example-basic-single" name="" id="currenc_'+count+'"><option value=""> <?php echo __('Select Any One'); ?></option><?php foreach($currency as $currenc){ ?><option value="<?php echo $currenc[id]; ?>"> <?php echo $currenc[currency_name]." - ".$currenc[currency_short_code]; ?></option><?php
 } ?></select></div>';
-        htmlRows += '<div class="col-lg-2"><input aria-label="Type" type="text" class="form-control"  id="pre_diem_'+count+'"  value=""  name="type"> </div>';
-        htmlRows += '<div class="col-lg-2"><input aria-label="Type" type="text"class="form-control"  id="travel_'+count+'"  value=""  name="type"></div>';
-        htmlRows += '<div class="col-lg-2"><input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)">Delete</button></div>';
+        htmlRows += '<div class="col-lg-2"><input aria-label="<?php echo __('Type'); ?>" type="text" class="form-control"  id="pre_diem_'+count+'"  value=""  name="type"> </div>';
+        htmlRows += '<div class="col-lg-2"><input aria-label="<?php echo __('Type'); ?>" type="text"class="form-control"  id="travel_'+count+'"  value=""  name="type"></div>';
+        htmlRows += '<div class="col-lg-2"><input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)"><?php echo __('Delete'); ?></button></div>';
         console.log("ravi"+htmlRows);
         $('#append_statick').append(htmlRows);
     }
@@ -88,9 +88,9 @@ if(count((array)$ppeermm)==0){
 </script>
 <div class="modal-header card-header">
 
-    <h5>Per-Diem (Food, Stay, Local C    ommute)</h5>
+    <h5><?php echo __('Per-Diem (Food, Stay, Local C    ommute)'); ?></h5>
 
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 
 </div>
 
@@ -101,16 +101,16 @@ if(count((array)$ppeermm)==0){
                 <div id='append_statick'>
                     <div class="row align-items-center" style="margin-top: 10px;">
                         <div class="col-lg-3">
-                            <span><b>Country</b></span>
+                            <span><b><?php echo __('Country'); ?></b></span>
                         </div>
                         <div class="col-lg-3">
-                            <span><b>Currency</b></span>
+                            <span><b><?php echo __('Currency'); ?></b></span>
                         </div>
                         <div class="col-lg-2">
-                            <span><b>Per-Diem</b></span>
+                            <span><b><?php echo __('Per-Diem'); ?></b></span>
                         </div>
                         <div class="col-lg-2">
-                            <span><b>Travel Expenses</b></span>
+                            <span><b><?php echo __('Travel Expenses'); ?></b></span>
                         </div>
                         <div class="col-lg-2">
                             <span><b></b></span>
@@ -120,32 +120,32 @@ if(count((array)$ppeermm)==0){
                     <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                         <div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
                             <div class="col-lg-3">
-                                <select aria-label="Select option" class="form-control form-select js-example-basic-single" name="" id="country_<?php echo $i; ?>">
-                                    <option value=""> Select Any One</option>
+                                <select aria-label="<?php echo __('Select option'); ?>" class="form-control form-select js-example-basic-single" name="" id="country_<?php echo $i; ?>">
+                                    <option value=""> <?php echo __('Select Any One'); ?></option>
                                     <?php foreach($countries as $country){ ?>
-                                        <option <?php if($country['id'] == $ppee['country_id'] ){ echo "selected";
+                                        <option <?php if($country['id'] == $ppee['country_id'] ){ echo __('selected');
 } ?> value="<?php echo $country['id']; ?>"> <?php echo $country['country_name']."-".$country['short_name']; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
                             <div class="col-lg-3">
-                                <select aria-label="Select option" class="form-control form-select js-example-basic-single" name="" id="currenc_<?php echo $i; ?>">
-                                    <option value=""> Select Any One</option>
+                                <select aria-label="<?php echo __('Select option'); ?>" class="form-control form-select js-example-basic-single" name="" id="currenc_<?php echo $i; ?>">
+                                    <option value=""> <?php echo __('Select Any One'); ?></option>
                                     <?php foreach($currency as $currenc){ ?>
-                                        <option <?php if($currenc['id'] == $ppee['currency_id'] ){ echo "selected";
+                                        <option <?php if($currenc['id'] == $ppee['currency_id'] ){ echo __('selected');
 } ?>  value="<?php echo $currenc['id']; ?>"> <?php echo $currenc['currency_name']." - ".$currenc['currency_short_code']; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
                             <div class="col-lg-2">
-                                <input aria-label="Input field" type="text" class="form-control"  id="pre_diem_<?php echo $i; ?>"  value="<?php echo $ppee['per_diem'];?>"  name="type">
+                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"  id="pre_diem_<?php echo $i; ?>"  value="<?php echo $ppee['per_diem'];?>"  name="type">
                             </div>
                             <div class="col-lg-2">
-                                <input aria-label="Input field" type="text"class="form-control"  id="travel_<?php echo $i; ?>"  value="<?php echo $ppee['travel_expenses'];?>"   name="type">
+                                <input aria-label="<?php echo __('Input field'); ?>" type="text"class="form-control"  id="travel_<?php echo $i; ?>"  value="<?php echo $ppee['travel_expenses'];?>"   name="type">
                             </div>
                             <div class="col-lg-2">
                                 <input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >
-                                <button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)">Delete</button>
+                                <button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)"><?php echo __('Delete'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -153,7 +153,7 @@ if(count((array)$ppeermm)==0){
 } ?>
                 </div>
                 <div class="row align-items-center m-l-5 mt-4  col-lg-2" >
-                    <button class="btn btn-success" id="addstatickRows" type="button" onclick="addstatickRowsadataq()">+ Add More</button>&nbsp;&nbsp;
+                    <button class="btn btn-success" id="addstatickRows" type="button" onclick="addstatickRowsadataq()"><?php echo __('+ Add More'); ?></button>&nbsp;&nbsp;
                 </div>
         </div>
     </div>
@@ -166,8 +166,8 @@ if(count((array)$ppeermm)==0){
         <input type="hidden" name="user_id" id='user_id' value="<?php echo $_SESSION['userid']; ?>">
         <input type="hidden" name="qty" id='qty' value="<?php echo $qty; ?>">
         <input type="hidden" name="type" id='type' value="<?php echo $item_daata['tracking_type']; ?>">
-        <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Submit</button>
+        <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+        <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?php echo __('Submit'); ?></button>
     </div>
 
 </form>

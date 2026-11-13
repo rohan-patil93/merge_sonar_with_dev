@@ -8,7 +8,7 @@ $datas = json_decode($emailgroupdata,1);
 <div class="d-flex flex-column-fluid">
     <div class="container-fluid">
         <div class="alert alert-warning alert-dismissible">
-            <strong><?php echo "This function is used for maintaining <strong>Display Attributes</strong>. * represents mandatory fields."; ?></strong> 
+            <strong><?= __("This function is used for maintaining") ?> <strong><?= __("Display Attributes") ?></strong>. <?= __("* represents mandatory fields.") ?></strong> 
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <div class="row">
@@ -17,7 +17,7 @@ $datas = json_decode($emailgroupdata,1);
                     <div class="card-header">
                         <h3 class="card-title"> <?php echo viewTitle($_GET['option']); ?> </h3>
                         <div class="card-header-right table-card-header ">
-                            <a href="javascript:history.go(-1)" class="btn waves-effect waves-light btn-inverse btn-outline-inverse"><i class="icofont icofont-reply"></i> Back </a>
+                            <a href="javascript:history.go(-1)" class="btn waves-effect waves-light btn-inverse btn-outline-inverse"><i class="icofont icofont-reply"></i> <?= __("Back") ?> </a>
                         </div>
 
         <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
@@ -128,19 +128,19 @@ $datas = json_decode($emailgroupdata,1);
                               <li class="kt-nav__item">
                                  <a target="_blank" href="index.php?option=<?php echo $page['list_page_name']; ?>" class="kt-nav__link">
                                     <i class="kt-nav__link-icon flaticon-list-2"></i>
-                                    <span class="kt-nav__link-text">List</span>
+                                    <span class="kt-nav__link-text"><?= __("List") ?></span>
                                 </a>
                             </li>
                             <li class="kt-nav__item">
                              <a target="_blank" href="index.php?option=<?php echo $page['insert_page_name']; ?>" class="kt-nav__link">
                                 <i class="kt-nav__link-icon flaticon-add-circular-button"></i>
-                                <span class="kt-nav__link-text">Insert</span>
+                                <span class="kt-nav__link-text"><?= __("Insert") ?></span>
                             </a>
                         </li>		
                         <li class="kt-nav__item">
                          <a target="_blank" href="index.php?option=COM_INSERT_DISPLAY_ATTRIBUTES&table=<?php echo $data['application_table_name']; ?>"  class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon2-settings"></i>
-                            <span class="kt-nav__link-text">Settings</span>
+                            <span class="kt-nav__link-text"><?= __("Settings") ?></span>
                         </a>
                     </li>
                 </ul>
@@ -163,10 +163,10 @@ $datas = json_decode($emailgroupdata,1);
               <?php echo  ucwords(strtolower(str_replace("_", " ", $data['application_table_name']))); ?>
           </a>
           <span class="kt-widget__desc">
-              <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['list_page_type']]; ?>;color:#fff;"  data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="List <?php echo $display[$page['list_page_type']]; ?>"> L </a>
-              <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['insert_page_type']]; ?>;color:#fff;" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="Insert <?php echo $display[$page['insert_page_type']]; ?>"><?php echo "I"; ?> </a>
-              <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['edit_page_type']]; ?>;color:#fff;" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="Edit <?php echo $display[$page['edit_page_type']]; ?>"><?php echo "E"; ?>	</a>
-              <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['view_page_type']]; ?>;color:#fff;" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="View <?php echo $display[$page['view_page_type']]; ?>">V	</a>
+              <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['list_page_type']]; ?>;color:#fff;"  data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="<?= __("List") ?> <?php echo $display[$page['list_page_type']]; ?>"> L </a>
+              <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['insert_page_type']]; ?>;color:#fff;" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="<?= __("Insert") ?> <?php echo $display[$page['insert_page_type']]; ?>"><?php echo "I"; ?> </a>
+              <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['edit_page_type']]; ?>;color:#fff;" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="<?= __("Edit") ?> <?php echo $display[$page['edit_page_type']]; ?>"><?php echo "E"; ?>	</a>
+              <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['view_page_type']]; ?>;color:#fff;" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="<?= __("View") ?> <?php echo $display[$page['view_page_type']]; ?>">V	</a>
           </span>
       </div>
   </div>
@@ -183,7 +183,7 @@ $datas = json_decode($emailgroupdata,1);
 
            <div class="kt-widget__details" style="margin-right: 2.7rem;">
                <span class="kt-widget__subtitle font-weight-bold mr-4">
-                  <?php echo $value['status_name']; ?>
+                  <?= htmlspecialchars(__($value['status_name'] ?? '')) ?>
               </span>
               <div class="kt-widget__label">
                   <span class="btn btn-primary btn-sm font-weight-bold btn-upper btn-text"><?php echo $count_value  ; ?></span>
@@ -200,7 +200,7 @@ $datas = json_decode($emailgroupdata,1);
     <div class="kt-widget__section float-left">
        <div class="kt-widget__blog">
           <i class="ti-list"></i>
-          <a href="#" class="kt-widget__value kt-font-brand"><?php echo $total; ?> Recards</a>
+          <a href="#" class="kt-widget__value kt-font-brand"><?php echo $total; ?> <?= __("Recards") ?></a>
       </div>
     									<!-- <div class="kt-widget__blog">
     										<i class="flaticon2-talk"></i>
@@ -209,7 +209,7 @@ $datas = json_decode($emailgroupdata,1);
     								</div>
     								
     								<div class="kt-widget__section float-right ml-5">
-    									<a href="index.php?option=<?php echo $page['list_page_name']; ?>"><button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold">Details</button></a>
+    									<a href="index.php?option=<?php echo $page['list_page_name']; ?>"><button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold"><?= __("Details") ?></button></a>
     								</div>
     							</div>
     						</div>

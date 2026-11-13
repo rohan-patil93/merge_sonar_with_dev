@@ -53,7 +53,7 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="example-email-input" class="col-2 col-form-label">Email</label>
+                                <label for="example-email-input" class="col-2 col-form-label"><?= __('Email') ?></label>
                                 <div class="col-10">
                                  <input aria-label="Email" class="form-control" type="email"  value="" name="email" id="email"/>
                                  <div id="email_err" class="text-danger" style="display: none;"> Please Enter Email</div>
@@ -61,7 +61,7 @@
 
                             </div>
                             <div class="form-group row">
-                                <label for="example-email-input" class="col-2 col-form-label">Phone</label>
+                                <label for="example-email-input" class="col-2 col-form-label"><?= __('Phone') ?></label>
                                 <div class="col-10">
                                  <input aria-label="Phone" class="form-control" name="phone" value="<?php echo $data['phone'];  ?>" />
                                 </div>

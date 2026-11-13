@@ -371,7 +371,7 @@ function removefile(val){
              exchangerate();
             }else{
                 swal.fire({
-                            title: "6010 : Please Define Exchange Rate",
+                            title: <?php echo json_encode(__('6010 : Please Define Exchange Rate')); ?>,
                             type: "warning",
                             buttonsStyling: false,
                             confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
@@ -585,7 +585,7 @@ function removefile(val){
     });
     $(document).on('click', '.deleteInvoice', function(){
         var id = $(this).attr("id");
-        if(confirm("Are you sure you want to remove this?")){
+        if(confirm(<?php echo json_encode(__('Are you sure you want to remove this?')); ?>)){
             $.ajax({
                 url:"action.php",
                 method:"POST",
@@ -836,12 +836,12 @@ function calculateTotal(){
 
             if(old_state != change_state){
                 str+= "<tr><td style='width: 67%;text-align:right;'> IGST @ "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
-                str+= "<td>  <input aria-label="Tax Amount"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"''> </td></tr>";
+                str+= "<td>  <input aria-label="<?php echo __('Tax Amount'); ?>"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"''> </td></tr>";
             }else{
                 str+= "<tr><td style='width: 67%;text-align:right;'> CGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
-                str+= "<td>  <input aria-label="Tax Amount"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
+                str+= "<td>  <input aria-label="<?php echo __('Tax Amount'); ?>"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
                  str+= "<tr><td style='width: 67%;text-align:right;'> SGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
-                str+= "<td>  <input aria-label="Tax Amount"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
+                str+= "<td>  <input aria-label="<?php echo __('Tax Amount'); ?>"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
             }
 
         totaltax+=parseFloat(arr2[k]['tax_amount']);
@@ -925,8 +925,8 @@ function calculateTotal(){
     var quantity_old = $('#quantity_old_'+id).val();
     if (parseFloat(quantity_old) < parseFloat(quantity)){
         swal.fire({
-            title: "Quantity alert ",
-            text: "6030 : Quantity cannot be more than "+quantity_old,
+            title: <?php echo json_encode(__('Quantity alert')); ?>,
+            text: <?php echo json_encode(__('6030 : Quantity cannot be more than')); ?>+quantity_old,
             type: "warning",
             buttonsStyling: false,
             confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
@@ -957,8 +957,8 @@ function calculateTotal(){
                     console.log(quantity);
                     if (parseFloat(data) < quantity){
                         swal.fire({
-                            title: "Quantity on hand "+parseFloat(data),
-                            text: "6020 : Do you want to change the quantity to "+parseFloat(data)+" ?",
+                            title: <?php echo json_encode(__('Quantity on hand')); ?>+parseFloat(data),
+                            text: <?php echo json_encode(__('6020 : Do you want to change the quantity to')); ?>+parseFloat(data)+" ?",
                             type: "warning",
                             buttonsStyling: false,
                             confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, change!",
@@ -1049,7 +1049,7 @@ function calculateTotal(){
         <div class="alert-icon"><i class="flaticon-warning"></i></div>
         <div class="alert-text">    <?php echo $_GET['error']." : ".$_SESSION['error_message'][$_GET['error']]; ?>   </div>
         <div class="alert-close">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="<?php echo __('Close'); ?>">
                 <span aria-hidden="true"><i class="la la-close"></i></span>
             </button>
         </div>
@@ -1132,7 +1132,7 @@ function calculateTotal(){
     <?php } ?>
         <a href="javascript:history.go(-1)" class="btn btn-clean kt-margin-r-10">
             <i class="la la-arrow-left"></i>
-            <span class="kt-hidden-mobile">Back</span>
+            <span class="kt-hidden-mobile"><?php echo __('Back'); ?></span>
         </a>
         <input type="hidden" name="status_values" id="status_values" value="<?php echo $table1['current_status']; ?>">
         <input type="hidden" name="status_old_value" id="status_old_value" value="<?php echo $table1['current_status']; ?>">
@@ -1148,11 +1148,11 @@ function calculateTotal(){
  ?>
 
 <div>
-    <span class="col-form-label col-lg-2 col-sm-12">Transaction Date:</span>
+    <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Transaction Date:'); ?></span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <div class="input-group date">
             <?php $from = fromDate($table1['qo_date']); ?>
-            <input aria-label="Input field"  class="form-control" onblur="duedate()" type='text' autocomplete="off" value='<?php  echo $from; ?>' name="invoiced_at" id="kt_datepicker_4_3"  />
+            <input aria-label="<?php echo __('Input field'); ?>"  class="form-control" onblur="duedate()" type='text' autocomplete="off" value='<?php  echo $from; ?>' name="invoiced_at" id="kt_datepicker_4_3"  />
             <div class="input-group-append">
                 <span class="input-group-text"> <i class="la la-calendar"></i></span>
              </div>
@@ -1161,10 +1161,10 @@ function calculateTotal(){
 </div>
 
  <?php if(in_array($table_name, (array)$originator_tables)){  ?>
-   <span class="col-form-label col-lg-2 col-sm-12">Originator:</span>
+   <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Originator:'); ?></span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select aria-label="Party" class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValueEmployee(this.value)" >
-            <option value="0"> Select Any EMployee </option>
+        <select aria-label="<?php echo __('Party'); ?>" class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValueEmployee(this.value)" >
+            <option value="0"> <?php echo __('Select Any EMployee'); ?> </option>
             <?php foreach ($cusresponse as $key => $cus) {  ?>
             <option  <?php if($table1['party_id'] == $cus['id']){ ?> selected  <?php
 } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['first_name']," ".$cus['middle_name']."".$cus['last_name']; ?>
@@ -1173,10 +1173,10 @@ function calculateTotal(){
         </select>
     </div>
 <?php } elseif(in_array($table_name, (array)$stock_table)){ ?>
-    <span class="col-form-label col-lg-2 col-sm-12">Location:</span>
+    <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Location:'); ?></span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select aria-label="Transfer Location" class="form-control" id="transfer_location_id" name= "transfer_location_id" >
-            <option value="0"> Select Any Location </option>
+        <select aria-label="<?php echo __('Transfer Location'); ?>" class="form-control" id="transfer_location_id" name= "transfer_location_id" >
+            <option value="0"> <?php echo __('Select Any Location'); ?> </option>
             <?php foreach ($locations_data as $locatdata) {  ?>
             <option  <?php if($table1['transfer_location_id'] == $locatdata['id']){ ?> selected  <?php
 } ?> value = <?php echo $locatdata['id'] ?>   >      <?php echo $locatdata['location_description']; ?>
@@ -1186,10 +1186,10 @@ function calculateTotal(){
     </div>
 
 <?php }else{ ?>
-    <span class="col-form-label col-lg-2 col-sm-12">Vendor:</span>
+    <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Vendor:'); ?></span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select aria-label="Party" class="form-control" id="party_id_2" name= "party_id" onchange="GetSelectedTextValue(this.value)" >
-            <option value="0"> Select Any Vendor </option>
+        <select aria-label="<?php echo __('Party'); ?>" class="form-control" id="party_id_2" name= "party_id" onchange="GetSelectedTextValue(this.value)" >
+            <option value="0"> <?php echo __('Select Any Vendor'); ?> </option>
             <?php foreach ($cusresponse as $key => $cus) {  ?>
             <option  <?php if($table1['party_id'] == $cus['id']){ ?> selected  <?php
 } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['display_name']; ?>
@@ -1198,18 +1198,18 @@ function calculateTotal(){
         </select>
     </div>
 <?php } ?>
-    <span class="col-lg-2 col-form-label">Transaction Number:</span>
+    <span class="col-lg-2 col-form-label"><?php echo __('Transaction Number:'); ?></span>
     <div class="col-lg-3">
         <input class="form-control" type='hidden' id="ord_no" value='<?php echo $invoicenumber; ?>' name="invoice_serial_number"/>
-        <input aria-label="Input field"  class="form-control" readonly type='text' value='<?php echo $tran_no; ?>'   name="invoice_number" id="invoice_number" />
+        <input aria-label="<?php echo __('Input field'); ?>"  class="form-control" readonly type='text' value='<?php echo $tran_no; ?>'   name="invoice_number" id="invoice_number" />
 
     </div>
 </div>
 <div class="form-group row">
-    <span class="col-form-label col-lg-2 col-sm-12">Cost Center:</span>
+    <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Cost Center:'); ?></span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select aria-label="Cost Center" class="form-control" id="cost_center" name="cost_center">
-            <option value="0"> Select any  </option>
+        <select aria-label="<?php echo __('Cost Center'); ?>" class="form-control" id="cost_center" name="cost_center">
+            <option value="0"> <?php echo __('Select any'); ?>  </option>
             <?php foreach ($costs as  $k1 =>$pos) {  ?>
                 <optgroup label="<?php echo $k1; ?>">
 
@@ -1221,11 +1221,11 @@ function calculateTotal(){
         <?php } ?>
         </select>
     </div>
-    <span class="col-form-label col-lg-2 col-sm-12">Transaction Date:</span>
+    <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Transaction Date:'); ?></span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <div class="input-group date">
             <?php $from = fromDate($table1['qo_date']); ?>
-            <input aria-label="Input field"  class="form-control" onblur="duedate()" type='text' autocomplete="off" value='<?php  echo $from; ?>' name="invoiced_at" id="kt_datepicker_4_3_2"  />
+            <input aria-label="<?php echo __('Input field'); ?>"  class="form-control" onblur="duedate()" type='text' autocomplete="off" value='<?php  echo $from; ?>' name="invoiced_at" id="kt_datepicker_4_3_2"  />
             <div class="input-group-append">
                 <span class="input-group-text"> <i class="la la-calendar"></i></span>
              </div>
@@ -1233,9 +1233,9 @@ function calculateTotal(){
     </div>
 </div>
 <div class="form-group row" <?php echo $petty_cash_style; ?>>
-    <span class="col-form-label col-lg-2 col-sm-12">Department:</span>
+    <span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Department:'); ?></span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select aria-label="Param" class="form-control kt-select2" id="kt_select2_3" name="param">
+        <select aria-label="<?php echo __('Param'); ?>" class="form-control kt-select2" id="kt_select2_3" name="param">
            <?php foreach ($departmentslist as  $department) { ?>
 
             <option value="<?php echo $department['id']; ?>"><?php echo $department['department_name']; ?></option>
@@ -1243,10 +1243,10 @@ function calculateTotal(){
         </select>
     </div>
      <?php $table1['place_of_supply'] = $table1['place_of_supply'] !='' ? $table1['place_of_supply'] : $location_state; ?>
-    <span class="col-lg-2 col-form-label">Place Of Supply:</span>
+    <span class="col-lg-2 col-form-label"><?php echo __('Place Of Supply:'); ?></span>
     <div class="col-lg-3">
-        <select aria-label="Place Of Supply" class="form-control" name="place_of_supply" id="party_place_of_supply" onchange="displaytaxes()">
-            <option value="0"> Select Any Place </option>
+        <select aria-label="<?php echo __('Place Of Supply'); ?>" class="form-control" name="place_of_supply" id="party_place_of_supply" onchange="displaytaxes()">
+            <option value="0"> <?php echo __('Select Any Place'); ?> </option>
             <?php foreach ($posresponse as $key => $pos) {  ?>
                 <option   <?php if($table1['place_of_supply'] == $pos['id']){ ?>selected <?php
 } ?>  value ="<?php echo $pos['id']; ?>" > <?php echo $pos['state_name']; ?> </option>
@@ -1260,9 +1260,9 @@ function calculateTotal(){
 <?php if($table_name != 'petty_cash'){
         if($table_name != 'bills'){
     ?>
-<span class="col-form-label col-lg-2 col-sm-12">Category:</span>
+<span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Category:'); ?></span>
 <div class=" col-lg-3 col-md-9 col-sm-12">
-    <select aria-label="Type" class="form-control" id="kt_select2_4" name= "type"  >
+    <select aria-label="<?php echo __('Type'); ?>" class="form-control" id="kt_select2_4" name= "type"  >
                <?php foreach ($itemtypelist as $itemtype) {  ?>
                      <option   <?php if($table1['type'] == $itemtype['genc_detail_code']){ ?>selected <?php
 } ?>  value ="<?php echo $itemtype['genc_detail_code']; ?>" > <?php echo $itemtype['genc_detail_name']; ?> </option>
@@ -1271,9 +1271,9 @@ function calculateTotal(){
 </div>
 <?php } ?>
 <?php } else { ?>
-<span class="col-form-label col-lg-2 col-sm-12">Branch:</span>
+<span class="col-form-label col-lg-2 col-sm-12"><?php echo __('Branch:'); ?></span>
 <div class=" col-lg-3 col-md-9 col-sm-12">
-    <select aria-label="Type" class="form-control" id="kt_select2_4_2" name= "type"  >
+    <select aria-label="<?php echo __('Type'); ?>" class="form-control" id="kt_select2_4_2" name= "type"  >
                <?php foreach ($boxlist as $itemtype) {  ?>
                      <option   <?php if($table1['id'] == $itemtype['id']){ ?>selected <?php
 } ?>  value ="<?php echo $itemtype['id']; ?>" > <?php echo $itemtype['pc_box_code']; ?> </option>
@@ -1281,13 +1281,13 @@ function calculateTotal(){
      </select>
 </div>
 <?php } ?>
-<span class="col-lg-2 col-form-label" <?php echo $petty_cash_style; ?>>Type:</span>
+<span class="col-lg-2 col-form-label" <?php echo $petty_cash_style; ?>><?php echo __('Type:'); ?></span>
 <div class="col-lg-3" <?php echo $petty_cash_style; ?>>
     <div class="kt-radio-inline">
-        <label class="kt-radio"> <input aria-label="Radio option" type="radio"  <?php if($table1['opex_cpex']== 0){ ?>checked <?php
-} ?> name="opex_cpex" value='0'>Opex    <span></span></label>
-        <label class="kt-radio"> <input aria-label="Radio option" type="radio"  <?php if($table1['opex_cpex'] == 1){ ?>checked <?php
-} ?> name="opex_cpex" value='1'>Cpex    <span></span></label>
+        <label class="kt-radio"> <input aria-label="<?php echo __('Radio option'); ?>" type="radio"  <?php if($table1['opex_cpex']== 0){ ?>checked <?php
+} ?> name="opex_cpex" value='0'><?php echo __('Opex'); ?>    <span></span></label>
+        <label class="kt-radio"> <input aria-label="<?php echo __('Radio option'); ?>" type="radio"  <?php if($table1['opex_cpex'] == 1){ ?>checked <?php
+} ?> name="opex_cpex" value='1'><?php echo __('Cpex'); ?>    <span></span></label>
     </div>
 </div>
 </div>
@@ -1298,44 +1298,44 @@ function calculateTotal(){
             <div class="card">
                 <div class="card-header" id="headingTwo6">
                     <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo6" aria-expanded="false" aria-controls="collapseTwo6">
-                         Contact Detail
+                         <?php echo __('Contact Detail'); ?>
                     </div>
                 </div>
                 <div id="collapseTwo6" class="collapse" aria-labelledby="headingTwo6" data-parent="#accordionExample6_inv">
                     <div class="card-body">
                             <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12">Name</span>
+                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Name'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                  <input aria-label="Party Name" readonly class="form-control"  type='text' id="party_name" name="party_name"    value="<?php echo $table1['party_name']; ?>" />
+                                  <input aria-label="<?php echo __('Party Name'); ?>" readonly class="form-control"  type='text' id="party_name" name="party_name"    value="<?php echo $table1['party_name']; ?>" />
                                 </div>
                             </div>
                             <div class="">
                                 <div class="form-group row">
-                                    <span class="col-form-label col-lg-4 col-sm-12">Billing Address</span>
+                                    <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Billing Address'); ?></span>
                                     <div class="col-lg-8 col-md-8 col-sm-12">
-                                       <textarea aria-label="Enter your address" type="text" name="party_address" id="party_address" class="form-control" placeholder="Enter your address"><?php echo $table1['party_address'] ?></textarea>
+                                       <textarea aria-label="<?php echo __('Enter your address'); ?>" type="text" name="party_address" id="party_address" class="form-control" placeholder="<?php echo __('Enter your address'); ?>"><?php echo $table1['party_address'] ?></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="">
                                 <div class="form-group row">
-                                    <span class="col-form-label col-lg-4 col-sm-12">Shipping Address</span>
+                                    <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Shipping Address'); ?></span>
                                     <div class="col-lg-8 col-md-8 col-sm-12">
-                                       <textarea aria-label="Enter your address" type="text" class="form-control" id="party_ship_adderss" name='party_ship_adderss' placeholder="Enter your address"><?php echo $table1['party_address'] ?></textarea>
+                                       <textarea aria-label="<?php echo __('Enter your address'); ?>" type="text" class="form-control" id="party_ship_adderss" name='party_ship_adderss' placeholder="<?php echo __('Enter your address'); ?>"><?php echo $table1['party_address'] ?></textarea>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12">Email Address</span>
+                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Email Address'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <input aria-label="Party Email" type='text' class="form-control" id="party_email" readonly name="party_email"  value="<?php echo $table1['party_email']; ?>"/>
+                                    <input aria-label="<?php echo __('Party Email'); ?>" type='text' class="form-control" id="party_email" readonly name="party_email"  value="<?php echo $table1['party_email']; ?>"/>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12">Phone Number</span>
+                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Phone Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <input aria-label="Party Phone" type='text' id="party_phone" name="party_phone" class="form-control" readonly value="<?php echo $table1['party_phone']; ?>" />
+                                    <input aria-label="<?php echo __('Party Phone'); ?>" type='text' id="party_phone" name="party_phone" class="form-control" readonly value="<?php echo $table1['party_phone']; ?>" />
                                     <input type='hidden'  name="company_id" id="company_id" class="form-control" readonly value="<?php echo $_SESSION['company_id']; ?>" />
                                 </div>
                             </div>
@@ -1351,23 +1351,23 @@ function calculateTotal(){
             <div class="card">
                 <div class="card-header" id="headingTax">
                     <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTax" aria-expanded="false" aria-controls="collapseTax">
-                    Tax/Other Details
+                    <?php echo __('Tax/Other Details'); ?>
                     </div>
                     <input type="hidden" name="location_id" value="<?php echo $table1['location_id']; ?>">
                 </div>
                 <div id="collapseTax" class="collapse" aria-labelledby="headingTax" data-parent="#collapseTax">
                     <div class="card-body">
                             <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12">Tax Number</span>
+                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Tax Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <input aria-label="Party Tax Number" type='text' id="party_tax_number" name="party_tax_number" class="form-control" readonly value="<?php echo $table1['party_tax_number']; ?>" />
+                                    <input aria-label="<?php echo __('Party Tax Number'); ?>" type='text' id="party_tax_number" name="party_tax_number" class="form-control" readonly value="<?php echo $table1['party_tax_number']; ?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12">Payment Terms</span>
+                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Payment Terms'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                     <select aria-label="Payment Terms" class="form-control"  onchange="duedate()"  name="payment_terms" id="party_payment_terms">
-                                            <option value="0"> Select Any Term </option>
+                                     <select aria-label="<?php echo __('Payment Terms'); ?>" class="form-control"  onchange="duedate()"  name="payment_terms" id="party_payment_terms">
+                                            <option value="0"> <?php echo __('Select Any Term'); ?> </option>
                                         <?php foreach ($posresponsept as $key => $pos) {  ?>
                                             <option   <?php if($table1['payment_terms'] == $pos['genc_detail_code']){ ?>selected <?php
 } ?>  value ="<?php echo $pos['genc_detail_code']; ?>" > <?php echo $pos['genc_detail_name']; ?> </option>
@@ -1379,11 +1379,11 @@ function calculateTotal(){
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12">Currency</span>
+                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Currency'); ?></span>
                                 <?php  $table1['currency_id'] =  $table1['currency_id'] !="" ? $table1['currency_id'] : $_SESSION['config']['default_currency_id'];?>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <select aria-label="Select option" class="form-control" onchange="currencychange(this.value,<?php echo  $_SESSION['config']['default_currency_id'];  ?>)"  name="currency_id" id="currency_id">
-                                        <option value="0"> Select Any Currency </option>
+                                    <select aria-label="<?php echo __('Select option'); ?>" class="form-control" onchange="currencychange(this.value,<?php echo  $_SESSION['config']['default_currency_id'];  ?>)"  name="currency_id" id="currency_id">
+                                        <option value="0"> <?php echo __('Select Any Currency'); ?> </option>
                                         <?php
                                         foreach ($cr_data as  $crpos) {  ?>
                                             <option  <?php if($table1['currency_id'] == $crpos['id']){ ?> selected  <?php
@@ -1394,25 +1394,25 @@ function calculateTotal(){
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12">Ex Rate</span>
+                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Ex Rate'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                   <input aria-label="Currency Rate" type='text' class="form-control" id="currency_rate" onchange="exchangerate()"  name="currency_rate"  value="<?php echo customeummarmonyformate($table1['currency_rate']); ?>"/>
+                                   <input aria-label="<?php echo __('Currency Rate'); ?>" type='text' class="form-control" id="currency_rate" onchange="exchangerate()"  name="currency_rate"  value="<?php echo customeummarmonyformate($table1['currency_rate']); ?>"/>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12">Due Date:</span>
+                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Due Date:'); ?></span>
                                   <?php $duee = $table1['due_date'] !='' ?  fromDate($table1['due_date']) :  ''; ?>
                                    <div class="col-lg-8 col-md-8 col-sm-12">
-                                <input aria-label="Due Date" type='text' class="form-control" id="due_date"   name="due_date"  value=" <?php  echo $duee; ?>" readonly />
+                                <input aria-label="<?php echo __('Due Date'); ?>" type='text' class="form-control" id="due_date"   name="due_date"  value=" <?php  echo $duee; ?>" readonly />
                             </div>
                             </div>
                             <?php if(!in_array($table_name, (array)$originator_table_withbill)){
                                   $req_list = toGetPendingRequisitionQty($rtable_name);?>
                             <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12">Refernce Number</span>
+                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                     <select aria-label="Ref" class="form-control"  name="ref_id" id="ref_id" onchange="toredriacte(this.value,<?php echo  "'".$option."'"; ?>,<?php echo  "'".$rtable_name."'"; ?>)">
-                                        <option value="0"> Select Any Refernce </option>
+                                     <select aria-label="<?php echo __('Ref'); ?>" class="form-control"  name="ref_id" id="ref_id" onchange="toredriacte(this.value,<?php echo  "'".$option."'"; ?>,<?php echo  "'".$rtable_name."'"; ?>)">
+                                        <option value="0"> <?php echo __('Select Any Refernce'); ?> </option>
                                         <?php foreach ($req_list as  $req) {  ?>
                                             <option  <?php if($table1['ref_id'] == $req['id']){ ?> selected  <?php
 } ?>   value ="<?php echo $req['id']; ?>" > <?php echo $req['transaction_number']; ?> </option>
@@ -1424,28 +1424,28 @@ function calculateTotal(){
 
                             </div>
                             <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12">Refernce Date</span>
+                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Date'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <div class="kt-input-icon kt-input-icon--right" >
-                                        <input aria-label="Ref Date" type='text' class="form-control" readonly id="ref_date"  name="ref_date"  value="<?php echo $table1['ref_date']; ?>"/>
+                                        <input aria-label="<?php echo __('Ref Date'); ?>" type='text' class="form-control" readonly id="ref_date"  name="ref_date"  value="<?php echo $table1['ref_date']; ?>"/>
                                         <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="la la-calendar"></i></span></span>
                                     </div>
                                 </div>
                             </div>
                             <?php } if($table_name == 'bills'){?>
                              <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12">Refernce Number</span>
+                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
 
-                                    <input aria-label="Doc Ref No" type='text' class="form-control"  name="doc_ref_no"  value="<?php echo $table1['doc_ref_no']; ?>"/>
+                                    <input aria-label="<?php echo __('Doc Ref No'); ?>" type='text' class="form-control"  name="doc_ref_no"  value="<?php echo $table1['doc_ref_no']; ?>"/>
                                 </div>
 
                             </div>
                             <div class="form-group row">
-                                <span class="col-form-label col-lg-4 col-sm-12">Refernce Date</span>
+                                <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Date'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <div class="kt-input-icon kt-input-icon--right" >
-                                        <input aria-label="Doc Ref Date" type='text' class="form-control"  id="kt_datepicker_32"  name="doc_ref_date"  value="<?php echo $table1['doc_ref_date']; ?>"/>
+                                        <input aria-label="<?php echo __('Doc Ref Date'); ?>" type='text' class="form-control"  id="kt_datepicker_32"  name="doc_ref_date"  value="<?php echo $table1['doc_ref_date']; ?>"/>
                                         <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="la la-calendar"></i></span></span>
                                     </div>
                                 </div>
@@ -1464,16 +1464,16 @@ function calculateTotal(){
 <!--begin::Page second part -->
 
 <div class="kt-portlet__head">
-        <div class="kt-portlet__head-label"><h3 class="kt-portlet__head-title"> Items/Services </h3></div>
+        <div class="kt-portlet__head-label"><h3 class="kt-portlet__head-title"> <?php echo __('Items/Services'); ?> </h3></div>
     <div class="kt-portlet__head-label" style="float: right;">
          <div class="form-group col-lg-12">
-            <select aria-label="Tax Type" class="form-control" id="taxtype" name= "tax_type" onchange="calculateTotal()" >
+            <select aria-label="<?php echo __('Tax Type'); ?>" class="form-control" id="taxtype" name= "tax_type" onchange="calculateTotal()" >
                     <option  <?php if($table1['taxtype'] == 'E'){ ?>selected <?php
-} ?> value="E"> Exclusive </option>
+} ?> value="E"> <?php echo __('Exclusive'); ?> </option>
                     <option  <?php if($table1['taxtype'] == 'I'){ ?>selected <?php
-} ?> value="I"> Inclusive </option>
+} ?> value="I"> <?php echo __('Inclusive'); ?> </option>
                     <option  <?php if($table1['taxtype'] == 'O'){ ?>selected <?php
-} ?> value="O"> Out Of scope </option>
+} ?> value="O"> <?php echo __('Out Of scope'); ?> </option>
             </select>
         </div>
      </div>
@@ -1492,28 +1492,28 @@ function calculateTotal(){
 
     <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-            <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>
-            <button class="btn btn-success" id="addRows" type="button">+ Add More</button>
+            <button class="btn btn-danger delete" id="removeRows" type="button"><?php echo __('- Delete'); ?></button>
+            <button class="btn btn-success" id="addRows" type="button"><?php echo __('+ Add More'); ?></button>
         </div>
     </div>
     <div style="float: left;width: 50%; padding: 15px;">
        <div>
             <div style="float: left;width: 48%;padding: 1%;">
-                <span class="">Internal Note(s) </span>
-                <textarea aria-label="Notes" style="height: 120px;" name="notes" class="form-control" ><?php echo $table1['notes']; ?></textarea>
+                <span class=""><?php echo __('Internal Note(s)'); ?> </span>
+                <textarea aria-label="<?php echo __('Notes'); ?>" style="height: 120px;" name="notes" class="form-control" ><?php echo $table1['notes']; ?></textarea>
             </div>
             <div style="float: left;width: 48%;padding: 1%;">
-                <span class="">Printing Note(s) </span>
-                <textarea aria-label="Printing Notes" style="height: 120px;" name="printing_notes" class="form-control" ><?php echo $table1['printing_notes']; ?></textarea>
+                <span class=""><?php echo __('Printing Note(s)'); ?> </span>
+                <textarea aria-label="<?php echo __('Printing Notes'); ?>" style="height: 120px;" name="printing_notes" class="form-control" ><?php echo $table1['printing_notes']; ?></textarea>
             </div>
         </div>
           <?php if($small_sub == 0  ){ ?>
             <div style="margin-top: 10px;clear:both;">
-                <span class="">Comment(s)</span>
-                <textarea aria-label="Comments" style="height: 120px;" name="comments" class="form-control" id="comments" ><?php echo $comments; ?></textarea>
+                <span class=""><?php echo __('Comment(s)'); ?></span>
+                <textarea aria-label="<?php echo __('Comments'); ?>" style="height: 120px;" name="comments" class="form-control" id="comments" ><?php echo $comments; ?></textarea>
             </div>
             <div class="btn-group" style="margin-top: 10px;float: right;">
-                     <button id="kt_llogin_signup_submit"  class="btn btn-brand" >Submit1</button>
+                     <button id="kt_llogin_signup_submit"  class="btn btn-brand" ><?php echo __('Submit1'); ?></button>
             </div>
         <?php }  ?>
 
@@ -1524,7 +1524,7 @@ function calculateTotal(){
         <div class="card">
             <div class="card-header" id="headingTwo21">
                 <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo21" aria-expanded="false" aria-controls="collapseTwo21">
-                    Comments
+                    <?php echo __('Comments'); ?>
                 </div>
             </div>
             <div id="collapseTwo21" class="collapse" aria-labelledby="headingTwo21" data-parent="#accordionExample2">
@@ -1548,7 +1548,7 @@ function calculateTotal(){
 }else{ echo $list_date = $lists['response_date'];
 }?>
                                     <b> <?php echo date("M d, Y g:i A", strtotime($list_date)); ?></b>
-                                    <?php echo " ".$_SESSION['users'][$lists['user_id']]." with Status "; ?><span style="color: <?php echo "#".$stausresult[$lists['response_type']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$lists['response_type']]['background_color']); ?>;" class="kt-badge  kt-badge--inline kt-badge--pill"><?php if($lists['response_type'] == 0){ echo "Yet to respond";
+                                    <?php echo " ".$_SESSION['users'][$lists['user_id']]." with Status "; ?><span style="color: <?php echo "#".$stausresult[$lists['response_type']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$lists['response_type']]['background_color']); ?>;" class="kt-badge  kt-badge--inline kt-badge--pill"><?php if($lists['response_type'] == 0){ echo __('Yet to respond');
 }else{ echo $stausresult[$lists['response_type']]['name'];
 }?></span>
                                    <?php echo "</br>".$lists['comments']; ?>
@@ -1569,32 +1569,32 @@ function calculateTotal(){
     <div style="float: left;width: 50%">
     <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
         <tr>
-            <th scope="col" class="amount"><span>Sub Total</span></th>
-            <td><span><input aria-label="Input field"  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal" placeholder="Subtotal" >
-            <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal" placeholder="Subtotal" ></span></td>
+            <th scope="col" class="amount"><span><?php echo __('Sub Total'); ?></span></th>
+            <td><span><input aria-label="<?php echo __('Input field'); ?>"  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal" placeholder="<?php echo __('Subtotal'); ?>" >
+            <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal" placeholder="<?php echo __('Subtotal'); ?>" ></span></td>
         </tr>
          <tr>
             <th scope="col" class="amount">
                 <div>
                     <div style="float: left;width: 33%;padding: 10px;">
-                        <span >Discount </span>
+                        <span ><?php echo __('Discount'); ?> </span>
                     </div>
                     <div style="float: left;width: 33%;padding: 3px;">
-                        <select aria-label="Discount Type" class="form-control" id="disType" name="discount_type" onchange="calculateTotal()">
-                            <option value="P">Percentage</option>
+                        <select aria-label="<?php echo __('Discount Type'); ?>" class="form-control" id="disType" name="discount_type" onchange="calculateTotal()">
+                            <option value="P"><?php echo __('Percentage'); ?></option>
                             <option <?php if($table1['discount_type'] == 'A'){ ?> selected <?php
-} ?> value="A">Amount</option>
+} ?> value="A"><?php echo __('Amount'); ?></option>
                         </select>
                     </div>
                     <div style="float: left;width: 33%;padding:3px;" >
-                        <input aria-label="Input field" value="<?php echo number_format($table1['discount_value'],2); ?>" type="text" class="form-control amount" placeholder="value" name="discount_value" id="disValue" >
+                        <input aria-label="<?php echo __('Input field'); ?>" value="<?php echo number_format($table1['discount_value'],2); ?>" type="text" class="form-control amount" placeholder="<?php echo __('value'); ?>" name="discount_value" id="disValue" >
 
                     </div>
                 </div>
             </th>
             <td><span >
-                <input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['discount_amount']); ?>"  readonly type="text" class="form-control amount" name="dis_discount_amount" id="dis_discount"  placeholder="Discount Amount">
-                 <input aria-label="Input field" value="<?php echo $table1['discount_amount']; ?>"  readonly type="hidden" class="form-control amount" name="discount_amount" id="discount" placeholder="Discount Amount">
+                <input aria-label="<?php echo __('Input field'); ?>" value="<?php echo customeummarmonyformate($table1['discount_amount']); ?>"  readonly type="text" class="form-control amount" name="dis_discount_amount" id="dis_discount"  placeholder="<?php echo __('Discount Amount'); ?>">
+                 <input aria-label="<?php echo __('Input field'); ?>" value="<?php echo $table1['discount_amount']; ?>"  readonly type="hidden" class="form-control amount" name="discount_amount" id="discount" placeholder="<?php echo __('Discount Amount'); ?>">
             </span></td>
         </tr>
         <?php if($table_name != 'bills'){ ?>
@@ -1602,11 +1602,11 @@ function calculateTotal(){
             <th scope="col" class="amount">
                 <div>
                     <div style="float: left;width: 50%;padding: 10px;">
-                        <span >Shipping</span>
+                        <span ><?php echo __('Shipping'); ?></span>
                     </div>
                     <div style="float: left;width: 50%;padding: 3px;">
-                        <select aria-label="Shipping Tax" class="form-control"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" >
-                            <option value="0"> Select Any Tax Rate </option>
+                        <select aria-label="<?php echo __('Shipping Tax'); ?>" class="form-control"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" >
+                            <option value="0"> <?php echo __('Select Any Tax Rate'); ?> </option>
                             <?php foreach ($taxres as $key => $tax) {  ?>
                             <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php
 } ?> value = <?php echo $key ?>   > <?php echo $tax; ?> </option>
@@ -1618,7 +1618,7 @@ function calculateTotal(){
             <input type="hidden" name="" id="tds_tax" value="0">
             <td><span >
                 <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="0">
-                <input aria-label="Input field"  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="shipping Amount">
+                <input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="<?php echo __('shipping Amount'); ?>">
             </span></td>
         </tr>
     <?php } ?>
@@ -1631,17 +1631,17 @@ function calculateTotal(){
                         foreach ($distax as $ktax) { ?>
                         <?php if($table1['tax_state'] == 'S'){ ?>
                         <tr>
-                            <td style="width: 67%;text-align:right;">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">            </td>
+                            <td style="width: 67%;text-align:right;">  <?php echo __('CGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']/2); ?><?php echo __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
+                            <td>  <input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?php echo __('Tax Amount'); ?>">            </td>
                         </tr>
                         <tr>
-                            <td style="width: 67%;text-align:right;">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">            </td>
+                            <td style="width: 67%;text-align:right;">  <?php echo __('CGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']/2); ?><?php echo __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
+                            <td>  <input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?php echo __('Tax Amount'); ?>">            </td>
                         </tr>
                     <?php } else{?>
                         <tr>
-                            <td style="width: 67%;text-align:right;">  IGST @ <?php echo customeummarmonyformate($ktax['percentage']); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">            </td>
+                            <td style="width: 67%;text-align:right;">  <?php echo __('IGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']); ?><?php echo __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
+                            <td>  <input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?php echo __('Tax Amount'); ?>">            </td>
                         </tr>
                     <?php }?>
                         <?php } ?>
@@ -1655,11 +1655,11 @@ function calculateTotal(){
             <th scope="col" class="amount">
                 <div>
                     <div style="float: left;width: 50%;padding: 10px;">
-                        <span >TDS</span>
+                        <span ><?php echo __('TDS'); ?></span>
                     </div>
                     <div style="float: left;width: 50%;padding: 3px;">
-                        <select aria-label="Shipping Tax" class="form-control"  name="shipping_tax" id="tds_tax_2" onchange="calculateTotal()" >
-                            <option value="0"> Select Any Tax Rate </option>
+                        <select aria-label="<?php echo __('Shipping Tax'); ?>" class="form-control"  name="shipping_tax" id="tds_tax_2" onchange="calculateTotal()" >
+                            <option value="0"> <?php echo __('Select Any Tax Rate'); ?> </option>
                             <?php foreach ($tdstaxres as $key => $tax) {  ?>
                             <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php
 } ?> value = <?php echo $key; ?>   > <?php echo $tax; ?> </option>
@@ -1670,25 +1670,25 @@ function calculateTotal(){
             </th>
             <td><span >
                 <input type="hidden" name="shipping_tax_amount" id="tds_tax_amount" value="0">
-                <input  value=""   type="hidden" class="form-control amount" id="shipping_amount_2" onblur="calculateTotal()" placeholder="TDS Amount">
-                <input aria-label="Input field"  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="TDS Amount">
+                <input  value=""   type="hidden" class="form-control amount" id="shipping_amount_2" onblur="calculateTotal()" placeholder="<?php echo __('TDS Amount'); ?>">
+                <input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="<?php echo __('TDS Amount'); ?>">
             </span></td>
         </tr>
     <?php } ?>
         <tr>
-            <th scope="col" class="amount" ><span>Grand Total</span></th>
-             <input  type="hidden" class="form-control amount" placeholder="value" name="gdam" id="gdam">
-              <input  type="hidden" class="form-control amount" placeholder="value" name="div_amount_total" id="div_amount_total">
-             <input aria-label="Input field"  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="Tax Amount">
-            <td><input aria-label="Input field"  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="Grand Total"><input aria-label="Input field"  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="Grand Total"></td>
+            <th scope="col" class="amount" ><span><?php echo __('Grand Total'); ?></span></th>
+             <input  type="hidden" class="form-control amount" placeholder="<?php echo __('value'); ?>" name="gdam" id="gdam">
+              <input  type="hidden" class="form-control amount" placeholder="<?php echo __('value'); ?>" name="div_amount_total" id="div_amount_total">
+             <input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="<?php echo __('Tax Amount'); ?>">
+            <td><input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="<?php echo __('Grand Total'); ?>"><input aria-label="<?php echo __('Input field'); ?>"  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="<?php echo __('Grand Total'); ?>"></td>
         </tr>
         <tr style="display: none;">
-            <th scope="col" class="amount" ><span >Amount Paid</span></th>
-            <td><input aria-label="Amount Paid" value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="Amount Paid"></td>
+            <th scope="col" class="amount" ><span ><?php echo __('Amount Paid'); ?></span></th>
+            <td><input aria-label="<?php echo __('Amount Paid'); ?>" value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="<?php echo __('Amount Paid'); ?>"></td>
         </tr>
         <tr style="display: none;">
-            <td  ><span >Amount Due</span></td>
-            <td><input aria-label="Amount Due" value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="Amount Due"></td>
+            <td  ><span ><?php echo __('Amount Due'); ?></span></td>
+            <td><input aria-label="<?php echo __('Amount Due'); ?>" value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="<?php echo __('Amount Due'); ?>"></td>
         </tr>
         <?php if($table1['currency_id'] != $_SESSION['config']['default_currency_id'] && $table1['currency_id'] != ''){ $css = "";
 }else{ $css = 'style="display: none;"';
@@ -1698,17 +1698,17 @@ function calculateTotal(){
                 <table  id='exchange' <?php echo $css; ?> class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
                     <tr>
 
-                        <th scope="col" class="amount">Sub total</th>
-                        <th scope="col" class="amount">Tax</th>
-                        <th scope="col" class="amount">Discount</th>
-                        <th scope="col" class="amount">Grand Total </th>
+                        <th scope="col" class="amount"><?php echo __('Sub total'); ?></th>
+                        <th scope="col" class="amount"><?php echo __('Tax'); ?></th>
+                        <th scope="col" class="amount"><?php echo __('Discount'); ?></th>
+                        <th scope="col" class="amount"><?php echo __('Grand Total'); ?> </th>
                     </tr>
                     <tr>
 
-                        <td><input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['sub_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_sub_total" ></td>
-                        <td><input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['tax_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_tax" ></td>
-                        <td><input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['discount_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_discount" ></td>
-                        <td> <input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['grand_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_grand_total"> </td>
+                        <td><input aria-label="<?php echo __('Input field'); ?>" value="<?php echo customeummarmonyformate($table1['sub_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_sub_total" ></td>
+                        <td><input aria-label="<?php echo __('Input field'); ?>" value="<?php echo customeummarmonyformate($table1['tax_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_tax" ></td>
+                        <td><input aria-label="<?php echo __('Input field'); ?>" value="<?php echo customeummarmonyformate($table1['discount_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_discount" ></td>
+                        <td> <input aria-label="<?php echo __('Input field'); ?>" value="<?php echo customeummarmonyformate($table1['grand_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_grand_total"> </td>
                     </tr>
                 </table>
             </td>
@@ -1721,7 +1721,7 @@ function calculateTotal(){
 
 <?php if($rid !=''){ ?>
 <div class="form-group row">
-    <span class="col-form-label col-lg-3 col-sm-12">File Uoload</span>
+    <span class="col-form-label col-lg-3 col-sm-12"><?php echo __('File Uoload'); ?></span>
     <div class="col-lg-4 col-md-9 col-sm-12">
         <div class="dropzone dropzone-default dropzone-brand" id="kt_dropzone_2" >
 
@@ -1733,7 +1733,7 @@ function calculateTotal(){
     <div class="dz-details">
         <div class="dz-size">
             <span data-dz-size="">
-                <strong><?php echo $file_value['file_size_mb']; ?></strong> MB
+                <strong><?php echo $file_value['file_size_mb']; ?></strong> <?php echo __('MB'); ?>
             </span>
         </div>
         <div class="dz-filename">
@@ -1747,17 +1747,17 @@ function calculateTotal(){
     <div class="dz-success-mark">
         <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http:
     </div>
-    <button type="button" class="dz-remove" data-dz-remove="" onclick="removefile(<?php echo $file_value['id']; ?>)">Remove</button>
-    <a class="dz-remove" target="_blank" href="uploads/121/files/<?php echo $file_value['file_name']; ?>" >Download</a>
+    <button type="button" class="dz-remove" data-dz-remove="" onclick="removefile(<?php echo $file_value['id']; ?>)"><?php echo __('Remove'); ?></button>
+    <a class="dz-remove" target="_blank" href="uploads/121/files/<?php echo $file_value['file_name']; ?>" ><?php echo __('Download'); ?></a>
 </div>
 <?php $n++;
 }
 }else{ ?>
 
             <div class="dropzone-msg dz-message needsclick">
-                <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                <h3 class="dropzone-msg-title"><?php echo __('Drop files here or click to upload.'); ?></h3>
 
-                <span class="dropzone-msg-desc">Upload up to 10 files</span>
+                <span class="dropzone-msg-desc"><?php echo __('Upload up to 10 files'); ?></span>
             </div>
             <?php } ?>
         </div>
@@ -1782,13 +1782,13 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
                         <input type="hidden" id="hid"name="hid" value="<?php echo $rid; ?>" />
                         <input type="hidden" name="hid_itemds" value="<?php echo $item_ids; ?>" />
                         <input type="hidden" name="submit1" value="Update" />
-                        <button id="kt_llogin_signup_submit_2" <?php echo $disable; ?> class="btn btn-brand" ><i class="la la-check"></i>Upadate</button>
-                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                        <button id="kt_llogin_signup_submit_2" <?php echo $disable; ?> class="btn btn-brand" ><i class="la la-check"></i><?php echo __('Upadate'); ?></button>
+                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                 <?php } else{ ?>
                         <input type="hidden" name="submit1" value="Add" />
-                        <button id="kt_login_signin_submit" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-                        <button id="kt_login_signin_submit_continue" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
-                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                        <button id="kt_login_signin_submit" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
+                        <button id="kt_login_signin_submit_continue" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?php echo __('Save & continue'); ?></button>
+                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                 <?php } ?>
             </div>
             <div class="col-lg-6">
@@ -1798,7 +1798,7 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
                     <div class="card">
                         <div class="card-header" id="headingTwo2">
                             <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
-                                Transaction Timeline
+                                <?php echo __('Transaction Timeline'); ?>
                             </div>
                         </div>
                         <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordionExample2">
@@ -1832,7 +1832,7 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
             <?php } ?>
             </div>
             <div class="col-lg-2 kt-align-right">
-                <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?php echo __('Delete'); ?></button>
             </div>
         </div>
     </div>

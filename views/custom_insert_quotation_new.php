@@ -168,7 +168,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $jv_items = $rpres['jv_items'];
     $customer_vendor_gst_billing_details = $rpres['customer_vendor_gst_billing_details'];
    // print_r($rpres['customer_vendor_gst_billing_details']);
-    //echo "customer_vendor_gst_billing_details";
+    //echo __('customer_vendor_gst_billing_details');
     $itemidwithhsn = $rpres['itemidwithhsn'];
     $chart_of_accounts = $rpres['chart_of_accounts'];
     $reftable_items = $rpres['ref_table_details']['items'];
@@ -244,7 +244,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $table1['follow_up_level_ids'] = $rpdata['follow_up_level_ids'];
         $table1['advance_payment'] = $rpdata['advance_payment'];
     }
-    if($rtable_name != 'requisitions'){ //echo "done11";
+    if($rtable_name != 'requisitions'){ //echo __('done11');
         $table1['party_id'] = $rpdata['party_id'];
         $table1['party_name'] = $rpdata['party_name'];
         $table1['party_email'] = $rpdata['party_email'];
@@ -300,7 +300,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $table1['compliance_specification_documents'] = $rpdata['compliance_specification_documents'];
     $table1['security_deposit'] = $rpdata['security_deposit'];
     $table1['advance_payment'] = $rpdata['advance_payment'];
-    if(isset($rpdata['additional_attributes']) && $rpdata['additional_attributes']){ //echo "ravi";
+    if(isset($rpdata['additional_attributes']) && $rpdata['additional_attributes']){ //echo __('ravi');
         $extara = json_decode($rpdata['additional_attributes'],1);
         foreach ((array)$extara as $extr_key => $extar) {
             $table1[$extr_key] = $extar;
@@ -513,18 +513,18 @@ if($table1['currency_id']!="" AND $table1['currency_id']!="0"){
 //////////////////////currency_id//////////////////////////////////
 //////////////////////state//////////////////////////////////
 if($table1['originator_state_id']!="" AND $table1['originator_state_id']!="0"){
-    //echo "wroking --- 1";
+    //echo __('wroking --- 1');
 }elseif($_SESSION['user']['default_state_id'] !="" AND $_SESSION['user']['default_state_id']!="0"){
     $table1['originator_state_id'] = $_SESSION['user']['default_state_id'];
     
     if($table1['supplier_state_id']=="" OR $table1['supplier_state_id']=="0"){
         $table1['supplier_state_id'] = $_SESSION['user']['default_state_id'];
     }
-   // echo "wroking --- 2";
+   // echo __('wroking --- 2');
 }else{
     $table1['originator_state_id'] = $_SESSION['user_company']['state'];
     $table1['supplier_state_id'] = $_SESSION['user_company']['state'];
-   // echo "wroking --- 3";
+   // echo __('wroking --- 3');
 }
 $table1['currency_rate'] = ($table1['currency_rate'] != "" AND $table1['currency_rate'] !="0")?$table1['currency_rate']:1;  
 //////////////////////state//////////////////////////////////
@@ -628,7 +628,7 @@ if ($qoriginatorCurrencyId != '' && $qoriginatorCurrencyId != '0' && $qcurrencyI
 
 var salestablelist = ['enquiries','estimates','sales_orders','delivery_orders','sales_returns','sales_invoices'];    
 function duedate(){
-    //alert("hai");
+    //alert(<?php echo json_encode(__('hai')); ?>);
     var payment_terms = $('#party_payment_terms').val();
     var tt = $('#kt_datepicker_4_3').val();
     //alert(tt+"###"+payment_terms);
@@ -669,10 +669,10 @@ function currencychange(val,old_val){
              exchangerate();
             }else{
                 swal({              
-                    title: "6010 : Please Define Exchange Rate",                            
+                    title: <?php echo json_encode(__('6010 : Please Define Exchange Rate')); ?>,                            
                     type: "warning",           
                     buttonsStyling: false,
-                    confirmButtonText: "OK",    
+                    confirmButtonText: <?php echo json_encode(__('OK')); ?>,    
                     confirmButtonClass: "btn btn-danger"
                 })
             }  
@@ -684,7 +684,7 @@ function toredriacte(id,url_option,table){
     window.location.href = 'index.php?option='+url_option+'&Rid='+id+'&table='+table;
 }
 function validateForm(){
-    alert('Check');
+    alert(<?php echo json_encode(__('Check')); ?>);
 }
 function validateFormold(){
     var res = 'N';
@@ -693,7 +693,7 @@ function validateFormold(){
     var table_id = document.forms["myForm"]['hid'].value;
     var tranid = document.forms["myForm"]['invoice_number'].value;
     if(x == 20 ||  x == 30 || 100 < x < 110 || x == 199 ){
-        //alert("hai");
+        //alert(<?php echo json_encode(__('hai')); ?>);
         var comments = document.forms["myForm"]['comments'].value;
         
         if(comments == ''){
@@ -701,7 +701,7 @@ function validateFormold(){
             return false;
         }
         //var table = document.getElementById('table_name');
-        //alert("hai");
+        //alert(<?php echo json_encode(__('hai')); ?>);
        /* jQuery.ajax({
             url: "views/custom_quotation_pop.php",
             data:'table='+table_name+'&field='+x+'&rid='+table_id+'&tranid='+tranid,
@@ -719,7 +719,7 @@ function validateFormold(){
             var cost_center = document.forms["myForm"]['cost_center'].value;
             if(cost_center == 0){
                  res = 'Y';
-                 //alert('cost center');
+                 //alert(<?php echo json_encode(__('cost center')); ?>);
                 document.getElementById('cost_center_err').style.display = "block";
             }else{
                  document.getElementById('cost_center_err').style.display = "none";
@@ -796,7 +796,7 @@ function validateFormold(){
             }
         }
         if (res == 'Y'){
-            //alert('pass');
+            //alert(<?php echo json_encode(__('pass')); ?>);
             return false;
         }
     }*/ 
@@ -805,7 +805,7 @@ function GetSelectedTextValueEmployee(key) {
     //alert(key);
 
     if(key == '0'){
-       // alert('good');
+       // alert(<?php echo json_encode(__('good')); ?>);
         document.getElementById('party_name').value="";
         document.getElementById('party_email').value="";
         document.getElementById('party_phone').value="";
@@ -842,7 +842,7 @@ function GetSelectedTextValueEmployee(key) {
 function GetSelectedTextValue(key) {
     //alert(key);
     if(key == '0'){
-       // alert('good');
+       // alert(<?php echo json_encode(__('good')); ?>);
         document.getElementById('party_name').value="";
         document.getElementById('party_email').value="";
         document.getElementById('party_phone').value="";
@@ -977,11 +977,11 @@ $(document).on('change', "[id^=tax_]", function(){
     calculateTotal();
 });*/ 
 $(document).on('blur', "#disValue", function(){
-        //alert('hai');
+        //alert(<?php echo json_encode(__('hai')); ?>);
         calculateTotal();
 });
 // $(document).on('change', "#disType", function(){
-//         //alert('hai');
+//         //alert(<?php echo json_encode(__('hai')); ?>);
 //         calculateTotal();
 // });
 $(document).on('blur', "#amountPaid", function(){
@@ -989,7 +989,7 @@ $(document).on('blur', "#amountPaid", function(){
 }); 
 $(document).on('click', '.deleteInvoice', function(){
     var id = $(this).attr("id");
-    if(confirm("Are you sure you want to remove this?")){
+    if(confirm(<?php echo json_encode(__('Are you sure you want to remove this?')); ?>)){
         $.ajax({
             url:"action.php",
             method:"POST",
@@ -1562,7 +1562,7 @@ function calculateTotal(){
     }
     totaltax  = parseFloat(totaltax).toFixed(2);
     
-    str +='<tr><td class="p-2">Total Tax</td><td class="text-end p-2"><span id="dis_taxRateid">'+totaltax+'</span> </td></tr>';
+    str +='<tr><td class="p-2"><?php echo __('Total Tax'); ?></td><td class="text-end p-2"><span id="dis_taxRateid">'+totaltax+'</span> </td></tr>';
     $('#taxAmount').val(totaltax);
     $("#display_tax").html(str);
     $("#display_taxshow").show();
@@ -1619,7 +1619,7 @@ function changeexchange(){
             type: "error",
             showCancelButton: true,
             showConfirmButton: false,
-            cancelButtonText: "Ok",
+            cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
             confirmButtonClass: "btn-danger",
             closeOnCancel: false
         });
@@ -1691,11 +1691,11 @@ function changeexchange(){
     var quantity_old = $('#quantity_old_'+id).val();
     if (parseFloat(quantity_old) < parseFloat(quantity)){
         // swal({              
-        //     title: "Quantity alert ",              
-        //     text: "6030 : Quantity cannot be more than "+quantity_old,              
+        //     title: <?php echo json_encode(__('Quantity alert')); ?>,              
+        //     text: <?php echo json_encode(__('6030 : Quantity cannot be more than')); ?>+quantity_old,              
         //     type: "warning",           
         //     buttonsStyling: false,
-        //     confirmButtonText: "OK",    
+        //     confirmButtonText: <?php echo json_encode(__('OK')); ?>,    
         //     confirmButtonClass: "btn btn-danger", 
         //     }, function () {
         //         $('#quantity_'+id).val(quantity_old);
@@ -1729,11 +1729,11 @@ function checkqtyvalidation(fid){
             var decoderes = JSON.parse(data);
             if(parseInt(decoderes.pending_qty) < parseInt(quantity)){
                 swal({              
-                    title: "Quantity alert ",              
-                    text: "6030 : Quantity cannot be more than "+decoderes.pending_qty,
+                    title: <?php echo json_encode(__('Quantity alert')); ?>,              
+                    text: <?php echo json_encode(__('6030 : Quantity cannot be more than')); ?>+decoderes.pending_qty,
                     type: "warning",           
                     buttonsStyling: false,
-                    confirmButtonText: "OK",    
+                    confirmButtonText: <?php echo json_encode(__('OK')); ?>,    
                     confirmButtonClass: "btn btn-danger", 
                     }, function () {
                         $('#quantity_'+id).val(decoderes.pending_qty);
@@ -1760,14 +1760,14 @@ function quantityCheck(fid){
                 //console.log(quantity);
                 if (parseFloat(data) < quantity){
                     swal({              
-                        title: "Quantity on hand "+parseFloat(data),              
-                        text: "6020 : Do you want to change the quantity to "+parseFloat(data)+" ?",              
+                        title: <?php echo json_encode(__('Quantity on hand')); ?>+parseFloat(data),              
+                        text: <?php echo json_encode(__('6020 : Do you want to change the quantity to')); ?>+parseFloat(data)+" ?",              
                         type: "warning",           
                         buttonsStyling: false,
-                        confirmButtonText: "Yes, change!",    
+                        confirmButtonText: <?php echo json_encode(__('Yes, change!')); ?>,    
                         confirmButtonClass: "btn btn-danger",
                         showCancelButton: true,     
-                        cancelButtonText: " No, proceed",      
+                        cancelButtonText: <?php echo json_encode(__('No, proceed')); ?>,      
                         cancelButtonClass: "btn btn-default"        
                     }).then(function(result) {
                         if (result.value) {
@@ -1810,7 +1810,7 @@ function changestatus(val,val2){
             error:function (){}
         });
     }else if(val2 == 1){
-        //alert("hai");
+        //alert(<?php echo json_encode(__('hai')); ?>);
         jQuery.ajax({
             url: "views/custom_quotation_pop.php",
             data:'table='+table_name+'&field='+x+'&rid='+table_id+'&tranid='+tranid,
@@ -1841,7 +1841,7 @@ function changestatus(val,val2){
         submit(); 
     }
       
-     //alert("man");
+     //alert(<?php echo json_encode(__('man')); ?>);
     // document.getElementById("form_id").submit();
         //submit('22');
      //validateForm();
@@ -1871,12 +1871,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
     if(validate == 0){
         swal({
                 title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-                text: "Please note the status of the document will change to "+new_status_name,
+                text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
                 type: "info",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes",
-                cancelButtonText: "No",
+                confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+                cancelButtonText: <?php echo json_encode(__('No')); ?>,
                 closeOnConfirm: false
             },
             function(){
@@ -1905,12 +1905,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                             });
                         }else{
                             swal({
-                                title: "Oops...",
+                                title: <?php echo json_encode(__('Oops...')); ?>,
                                 text: res.transaction_update.message,
                                 type: "error",
                                 showCancelButton: true,
                                 showConfirmButton: false,
-                                cancelButtonText: "Ok",
+                                cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                                 confirmButtonClass: "btn-danger",
                                 closeOnCancel: false
                             });
@@ -1928,7 +1928,7 @@ function checkMandatoryArray(){
         var fieldmsg = "";
         var countitemrow = $('.itemRow').length;
         if(countitemrow == 0){
-            swal("Please add at least one Product or Service before Submit." , "error");    
+            swal(<?php echo json_encode(__('Please add at least one Product or Service before Submit.')); ?> , "error");    
             return 1;
         }
         if(mandatory_array !="" && mandatory_array !='null'){
@@ -2009,7 +2009,7 @@ function addAdditionalCharges(){
 
                 var rowid = "row_additional_charges_"+achargemxid;
 
-                var html = '<tr id="'+rowid+'"><td class="amount text-start p-2" width="40%" style="width:40%"> <i class="ti-trash text-danger" onclick="removeAdditionalCharges(\''+rowid+'\',\''+additional_charges.id+'\')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove"></i> '+additional_charges.charge_name+'</td><td class="p-2 text-right" width="60%" style="width:40%">'+additional_charge_amount+' ('+additional_charges.gst+'%)<input type="hidden" class="class_shipping_tax" data-id="'+achargemxid+'" name="shipping_tax_ac[]" id="shipping_tax_'+achargemxid+'" value="'+additional_charges.gst+'"><input type="hidden" name="shipping_amount_ac[]" id="shipping_amount_'+achargemxid+'" value="'+additional_charge_amount+'"><input type="hidden" name="shipping_tax_amount_ac[]" id="shipping_tax_amount_'+achargemxid+'" value=""><input type="hidden" name="charge_name_ac[]" value="'+additional_charges.charge_name+'"><input type="hidden" name="charge_id_ac[]" value="'+additional_charges.id+'"></td></tr>';
+                var html = '<tr id="'+rowid+'"><td class="amount text-start p-2" width="40%" style="width:40%"> <i class="ti-trash text-danger" onclick="removeAdditionalCharges(\''+rowid+'\',\''+additional_charges.id+'\')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Remove'); ?>"></i> '+additional_charges.charge_name+'</td><td class="p-2 text-right" width="60%" style="width:40%">'+additional_charge_amount+' ('+additional_charges.gst+'%)<input type="hidden" class="class_shipping_tax" data-id="'+achargemxid+'" name="shipping_tax_ac[]" id="shipping_tax_'+achargemxid+'" value="'+additional_charges.gst+'"><input type="hidden" name="shipping_amount_ac[]" id="shipping_amount_'+achargemxid+'" value="'+additional_charge_amount+'"><input type="hidden" name="shipping_tax_amount_ac[]" id="shipping_tax_amount_'+achargemxid+'" value=""><input type="hidden" name="charge_name_ac[]" value="'+additional_charges.charge_name+'"><input type="hidden" name="charge_id_ac[]" value="'+additional_charges.id+'"></td></tr>';
                 //console.log("additional_charge_amount "+additional_charge_amount+" - "+html);
                 $('#rowadditionalcharges').before(html);
                 $(".custom-popup-additionalcharges-open").hide();
@@ -2020,8 +2020,8 @@ function addAdditionalCharges(){
     }
    
     //$('#rowadditionalcharges tr').after('<tr>...</tr><tr>...</tr>');
-   // $('#rowadditionalcharges').prepend('<td>My new table cell</td>');
-    //$('<tr><td>My new table cell</td></tr>').appendTo('#rowadditionalcharges');    
+   // $('#rowadditionalcharges').prepend('<td><?php echo __('My new table cell'); ?></td>');
+    //$('<tr><td><?php echo __('My new table cell'); ?></td></tr>').appendTo('#rowadditionalcharges');    
 }
 
 function removeAdditionalCharges(rowid,charge_id){
@@ -2190,12 +2190,12 @@ function requestDocumentsCreation(transaction_table,transaction_id,clone_table,p
 
         swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: 'Are you sure you want to create a requisition?',
+            text: <?php echo json_encode(__('Are you sure you want to create a requisition?')); ?>,
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+            cancelButtonText: <?php echo json_encode(__('No')); ?>,
             closeOnConfirm: true,
             closeOnCancel: true
         },
@@ -2251,7 +2251,7 @@ function showAttchmentInAvailableItemTables(){
                 $.each(attachments, function(index, item) {
                     htmlv +='<input type="hidden" name="compliance_specification_documents['+item.attachment+'][item_name]" value="'+item_name+'"><input type="hidden" name="compliance_specification_documents['+item.attachment+'][attachment_name]" value="'+item.attachment_name+'"><input type="hidden" name="compliance_specification_documents['+item.attachment+'][attachment]" value="'+item.attachment+'">';
                     htmlv +='<div class="checkbox-fade fade-in-primary" >';
-                    htmlv +='<label class="form-label"><input type="checkbox" name="compliance_specification_documents['+item.attachment+'][show_print]" class="" title="Compliance Specification Documents[&#039;+item.attachment+&#039;][show Print]" aria-label="Compliance Specification Documents[&amp;#039;+item.attachment+&amp;#039;][show Print]"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>'+item.attachment_name+'</label>';
+                    htmlv +='<label class="form-label"><input type="checkbox" name="compliance_specification_documents['+item.attachment+'][show_print]" class="" title="<?php echo __('Compliance Specification Documents[&#039;+item.attachment+&#039;][show Print]'); ?>" aria-label="<?php echo __('Compliance Specification Documents[&amp;#039;+item.attachment+&amp;#039;][show Print]'); ?>"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>'+item.attachment_name+'</label>';
                     htmlv +='</div>';
                     //console.log("Attachment Name: " + item.attachment_name);
                     //console.log("File Path: " + item.attachment);
@@ -2366,16 +2366,16 @@ function discountRestrictions(){
     calculateTotal();
 }
 function clickToConvertproformaInvoicetoSalesInvoices(transaction_table, transaction_no){
-    $("#clickToConvertproformaInvoicetoSalesInvoicesid").text("Please Wait........");
+    $("#clickToConvertproformaInvoicetoSalesInvoicesid").text(<?php echo json_encode(__('Please Wait........')); ?>);
     $("#clickToConvertproformaInvoicetoSalesInvoicesid").addClass("disabled");
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: 'Are you sure you want to convert the Proforma Invoice into a Sales Invoice?',
+        text: <?php echo json_encode(__('Are you sure you want to convert the Proforma Invoice into a Sales Invoice?')); ?>,
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+        cancelButtonText: <?php echo json_encode(__('No')); ?>,
         closeOnConfirm: true,
         closeOnCancel: true
     },
@@ -2418,10 +2418,10 @@ if($checktimeprint > 0){
                 <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfdocuments" role="tab" aria-selected="true"><?php echo $title; ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#samerefdocuments" role="tab" aria-selected="true" onclick="getSameRefDocuments()">Same Ref Documents</a>
+                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#samerefdocuments" role="tab" aria-selected="true" onclick="getSameRefDocuments()"><?php echo __('Same Ref Documents'); ?></a>
             </li>
              <li class="nav-item">
-                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#searchitem" role="tab" aria-selected="true" onclick="getItemSearch()">Search Item</a>
+                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#searchitem" role="tab" aria-selected="true" onclick="getItemSearch()"><?php echo __('Search Item'); ?></a>
             </li>
         </ul>
     </div>
@@ -2430,7 +2430,7 @@ if($checktimeprint > 0){
         $notrequirdtoshow = array('requisitions', 'enquiries', 'sales_invoices');
 
         if(!in_array($table_name, $notrequirdtoshow) AND  ($table1['multi_reference'] == "Y" OR $table1['multi_reference'] == "") AND ($table1['current_status'] == ST_DRAFT OR $table1['current_status'] == ST_ACTIVE OR $table1['current_status'] =="") AND $table1['ref_id'] ==""){ ?>
-        <button type="button" class="btn btn-primary" onclick="createMultiReferenceDocumnets()"><i class="fa fa-object-group"></i> &nbsp;Multi Reference Documents</button>
+        <button type="button" class="btn btn-primary" onclick="createMultiReferenceDocumnets()"><i class="fa fa-object-group"></i> <?php echo __('&nbsp;Multi Reference Documents'); ?></button>
         <?php } ?>
     </div>
 </div>
@@ -2443,7 +2443,7 @@ if($checktimeprint > 0){
     <div class="tab-pane card-body active p-0" id="selfdocuments" role="tabpanel"> 
     <?php 
         if($table1['cancel_invoice'] =="Y"){ ?>
-        <div id="dynamiccanceldiv"><span>Cancel Invoice</span></div>
+        <div id="dynamiccanceldiv"><span><?php echo __('Cancel Invoice'); ?></span></div>
     <?php } ?>
     <div class="flex-column-fluid">
         <div class="container-fluid">
@@ -2452,19 +2452,19 @@ if($checktimeprint > 0){
          ?>
             <div class="alert alert-info alert-dismissible">
                 <strong><?php echo $_SESSION['error_message']['9177']." <b>".$stringdublicateitemname."<b>   Please confirm"; ?> </strong> 
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
         <?php } ?>
 
         <?php if($_GET['error'] !=''){ ?>
             <div class="alert alert-warning alert-dismissible">
                 <strong><?php echo $_GET['error']." : ".$_SESSION['error_message'][$_GET['error']]; ?> </strong> 
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
     <?php } ?>
     
     <?php if(count((array)$items_chart_of_account_not_provide) !="0" AND isset($_SESSION['module_setp'][4])){ 
-            $errmsg = "Please Provide Chart of Account - ";
+            $errmsg = __('Please Provide Chart of Account - ');
             foreach($items_chart_of_account_not_provide as $npac){
                 $errmsg .= "</br>".$npac['sku']." - ";
                 foreach($npac['account_missings'] as $npacname){
@@ -2473,13 +2473,13 @@ if($checktimeprint > 0){
             }  ?> 
          <div class="alert alert-danger alert-dismissible">
                 <strong><?php echo $errmsg; ?> </strong> 
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
     <?php } ?>
 
     <?php $chartofacounterrer = 0;
         if(count((array)$chart_of_account_lock) !="0" AND isset($_SESSION['module_setp'][4])){  $chartofacounterrer = 1;
-            $errmsg = "This account is locked. Please check the following account - ";
+            $errmsg = __('This account is locked. Please check the following account - ');
             foreach($chart_of_account_lock as $npac){
                 $errmsg .= "</br>".$npac['sku']." - ";
                 foreach($npac['account_lock'] as $npacname){
@@ -2488,7 +2488,7 @@ if($checktimeprint > 0){
             }  ?> 
          <div class="alert alert-danger alert-dismissible">
                 <strong><?php echo $errmsg; ?> </strong> 
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
     <?php } ?>
 
@@ -2498,7 +2498,7 @@ if($checktimeprint > 0){
     <?php //if($_GET['error_messages'] !="" AND ($table1['current_status'] == ST_DRAFT OR $table1['current_status'] == ST_ACTIVE OR $copy == 0)){  $disable = "disabled"; ?>
          <div class="alert alert-danger alert-dismissible">
                 <strong><?php echo $_GET['error_messages']; ?> </strong> 
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
     <?php } ?>
     <?php 
@@ -2512,7 +2512,7 @@ if($checktimeprint > 0){
     ?>
         <div class="alert alert-danger alert-dismissible">
             <strong><?php echo $iterr; ?> </strong> 
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
     <?php } } ?>
     <div class="">
@@ -2527,7 +2527,7 @@ if($checktimeprint > 0){
                         <div class="card-header table-card-header">
                             <h5><?php echo $title;  ?></h5>
                             <div class="card-header-right table-card-header m-r-50">
-                                 <button type="button" onclick="history.go(-1)" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i> Back</button>
+                                 <button type="button" onclick="history.go(-1)" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i> <?php echo __('Back'); ?></button>
                  <?php 
                 if($rid != "" && $copy == 1){  ?>
                    
@@ -2564,22 +2564,22 @@ if($checktimeprint > 0){
 
                     if($dynamic_mapping_tables[$table_name]['cancellation_application_table_name'] !="" AND ($table1['cancel_invoice'] =="N" || $table1['cancel_invoice'] =="") && $table1['originator'] ==$_SESSION['userid']){ ?>
                             <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="cancelInvoices('<?php echo $table_name; ?>','<?php echo $rid; ?>')">
-                                <i class="text-white fa fa-times-circle"></i> &nbsp;Cancel <?php echo $title; ?>
+                                <i class="text-white fa fa-times-circle"></i> <?php echo __('&nbsp;Cancel'); ?> <?php echo $title; ?>
                             </button>
                     <?php } ?>  
                     <?php if($table_name == "enquiries" OR $table_name == "estimates" OR $table_name == "sales_orders" AND $table1['current_status'] == ST_APPROVED){ ?>    
                         <div class="dropdown-primary dropdown open">
-                            <button class="btn btn-primary dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Request</button>
+                            <button class="btn btn-primary dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><?php echo __('Request'); ?></button>
                             <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                <a class="dropdown-item waves-light waves-effect" href="#" onclick="requestDocumentsCreation('<?php echo $table_name; ?>','<?php echo $rid; ?>','requisitions')">Requisitions</a>
-                                <a class="dropdown-item waves-light waves-effect" href="#" onclick="requestDocumentsCreation('<?php echo $table_name; ?>','<?php echo $rid; ?>','quotations')">Quotations</a>
-                                <a class="dropdown-item waves-light waves-effect" href="#" onclick="requestDocumentsCreation('<?php echo $table_name; ?>','<?php echo $rid; ?>','purchase_orders')">Purchase Order</a>
+                                <a class="dropdown-item waves-light waves-effect" href="#" onclick="requestDocumentsCreation('<?php echo $table_name; ?>','<?php echo $rid; ?>','requisitions')"><?php echo __('Requisitions'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect" href="#" onclick="requestDocumentsCreation('<?php echo $table_name; ?>','<?php echo $rid; ?>','quotations')"><?php echo __('Quotations'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect" href="#" onclick="requestDocumentsCreation('<?php echo $table_name; ?>','<?php echo $rid; ?>','purchase_orders')"><?php echo __('Purchase Order'); ?></a>
                             </div>
                         </div>
                     <?php } ?>
                     <?php if($table_name == "proforma_sales_invoices" AND $table1['current_status'] == ST_APPROVED AND $rpres['data']['sales_invoice_id'] ==""){ ?> 
                             <button type="button" class="btn btn-primary btn-sm waves-effect waves-light" id="clickToConvertproformaInvoicetoSalesInvoicesid" onclick="clickToConvertproformaInvoicetoSalesInvoices('<?php echo $table_name; ?>','<?php echo $rid; ?>')">
-                                <i class="text-white ti-layers"></i> Convert to Sales Invoice
+                                <i class="text-white ti-layers"></i> <?php echo __('Convert to Sales Invoice'); ?>
                             </button>
                     <?php } ?>
                 <?php }  ?>
@@ -2600,8 +2600,8 @@ if($checktimeprint > 0){
                     <?php 
                     $invoicetables = array('sales_invoices','purchase_invoices','supplier_bills'); 
                     if(in_array($table_name, $invoicetables) AND $table1['current_status'] == ST_APPROVED AND $rid != "" AND $copy == 1){  ?>
-                        <a href="index.php?option=COM_INSERT_DEBIT_NOTES&ref_type=<?php echo $table_name; ?>&ref_id=<?php echo $rid; ?>"  class=" cursor-pointer  btn btn-success" > <i class="icofont icofont-plus icon-white"></i> Debit Note - <?php echo $debit_notes_cnt['cnt']; ?></a>
-                        <a href="index.php?option=COM_INSERT_CREDIT_NOTES&ref_type=<?php echo $table_name; ?>&ref_id=<?php echo $rid; ?>" class="cursor-pointer  btn btn-danger" ><i class="icofont icofont-plus icon-white"></i> Credit Note - <?php echo $credit_notes_cnt['cnt']; ?></a>
+                        <a href="index.php?option=COM_INSERT_DEBIT_NOTES&ref_type=<?php echo $table_name; ?>&ref_id=<?php echo $rid; ?>"  class=" cursor-pointer  btn btn-success" > <i class="icofont icofont-plus icon-white"></i> <?php echo __('Debit Note -'); ?> <?php echo $debit_notes_cnt['cnt']; ?></a>
+                        <a href="index.php?option=COM_INSERT_CREDIT_NOTES&ref_type=<?php echo $table_name; ?>&ref_id=<?php echo $rid; ?>" class="cursor-pointer  btn btn-danger" ><i class="icofont icofont-plus icon-white"></i> <?php echo __('Credit Note -'); ?> <?php echo $credit_notes_cnt['cnt']; ?></a>
                     <?php } ?> 
                 </div>
             </div>
@@ -2646,20 +2646,20 @@ if($checktimeprint > 0){
                     ?>
                     <div class="kt-portlet__head ">
                         <div class="card-header table-card-header p-1">
-                            <h5 class="">Products / Services</h5>
+                            <h5 class=""><?php echo __('Products / Services'); ?></h5>
                             <div class="card-header-right table-card-header select_custom">
                                 <div class="row">
                                 <div class="w-full  col-lg-6">
-                                    <select class="form-control form-select js-example-basic-single" id="discount_mode" name= "discount_mode" onchange="changeDiscountMode()" title="Discount Mode" aria-label="Discount Mode">
-                                            <option  <?php if($table1['discount_mode'] =="" OR $table1['discount_mode'] == 'DO'){ ?>selected <?php } ?> value="DO"> Discount Overall </option>
-                                            <option  <?php if($table1['discount_mode'] == 'DI'){ ?>selected <?php } ?> value="DI"> Discount Inline </option>
+                                    <select class="form-control form-select js-example-basic-single" id="discount_mode" name= "discount_mode" onchange="changeDiscountMode()" title="<?php echo __('Discount Mode'); ?>" aria-label="<?php echo __('Discount Mode'); ?>">
+                                            <option  <?php if($table1['discount_mode'] =="" OR $table1['discount_mode'] == 'DO'){ ?>selected <?php } ?> value="DO"> <?php echo __('Discount Overall'); ?> </option>
+                                            <option  <?php if($table1['discount_mode'] == 'DI'){ ?>selected <?php } ?> value="DI"> <?php echo __('Discount Inline'); ?> </option>
                                     </select>
                                 </div>
                                 <div class="w-full col-lg-6">
-                                    <select class="form-control form-select js-example-basic-single " id="taxtype" name= "tax_type" onchange="calculateTotal()" title="Tax Type" aria-label="Tax Type">
-                                            <option  <?php if($table1['taxtype'] == 'E'){ ?>selected <?php } ?> value="E"> Exclusive </option>
-                                            <option  <?php if($table1['taxtype'] == 'I'){ ?>selected <?php } ?> value="I"> Inclusive </option>
-                                            <option  <?php if($table1['taxtype'] == 'O'){ ?>selected <?php } ?> value="O"> Out Of scope </option>
+                                    <select class="form-control form-select js-example-basic-single " id="taxtype" name= "tax_type" onchange="calculateTotal()" title="<?php echo __('Tax Type'); ?>" aria-label="<?php echo __('Tax Type'); ?>">
+                                            <option  <?php if($table1['taxtype'] == 'E'){ ?>selected <?php } ?> value="E"> <?php echo __('Exclusive'); ?> </option>
+                                            <option  <?php if($table1['taxtype'] == 'I'){ ?>selected <?php } ?> value="I"> <?php echo __('Inclusive'); ?> </option>
+                                            <option  <?php if($table1['taxtype'] == 'O'){ ?>selected <?php } ?> value="O"> <?php echo __('Out Of scope'); ?> </option>
                                     </select>
                                 </div>
                             </div>
@@ -2700,7 +2700,7 @@ if($checktimeprint > 0){
 
                                 <div class="alert alert-warning alert-dismissible">
                                     <strong><?php echo $_SESSION['error_message']['9135']; ?> </strong> 
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
                                 </div>
                                 <?php
                                 
@@ -2709,7 +2709,7 @@ if($checktimeprint > 0){
                             <div class="row mt-2">
                                 <?php //print_r($table1); ?>
                                 <div class="col-xs-12">
-                                    <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>
+                                    <button class="btn btn-danger delete" id="removeRows" type="button"><?php echo __('- Delete'); ?></button>
                                     <?php  
                                         if(!in_array($table_name,array('grn_returns','sales_returns'))){ 
                                     ?>
@@ -2717,14 +2717,14 @@ if($checktimeprint > 0){
                                     <?php if($table1['multi_reference'] == "Y"){ ?>
                                     onclick="createMultiReferenceDocumnets()"
                                 <?php }else{ ?>id="addRows"<?php } ?>
-                                     type="button">+ Add More</button>
+                                     type="button"><?php echo __('+ Add More'); ?></button>
                                     <?php } ?>
                                 </div>
                             </div>
                             
                            <div>
                                 <div style="float: left;width: 30%;padding: 1%;">
-                                    <span class="form-label d-block">Attachment</span>
+                                    <span class="form-label d-block"><?php echo __('Attachment'); ?></span>
                                     <div id="attchmentshowlist" class="custom-scroll" style="max-height: 120px; min-height:120px;">
                                         <?php
                                         $compliance_specification_documents = json_decode($table1['compliance_specification_documents'],1);
@@ -2745,25 +2745,25 @@ if($checktimeprint > 0){
                                         <input type="hidden" name="compliance_specification_documents[<?php echo $atchmntval['attachment']; ?>][attachment_name]" value="<?php echo $atchmntval['attachment_name']; ?>">
                                         <input type="hidden" name="compliance_specification_documents[<?php echo $atchmntval['attachment']; ?>][attachment]" value="<?php echo $atchmntval['attachment']; ?>">
                                         <div class="checkbox-fade fade-in-primary" >
-                                            <label class="form-label"><input type="checkbox" name="compliance_specification_documents[<?php echo $atchmntval['attachment']; ?>][show_print]" class="" <?php echo $atchmntval['show_print']=='on'?"checked":""; ?> title="Input" aria-label="Input"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><?php echo $atchmntval['attachment_name']; ?></label>
+                                            <label class="form-label"><input type="checkbox" name="compliance_specification_documents[<?php echo $atchmntval['attachment']; ?>][show_print]" class="" <?php echo $atchmntval['show_print']=='on'?"checked":""; ?> title="<?php echo __('Input'); ?>" aria-label="<?php echo __('Input'); ?>"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><?php echo $atchmntval['attachment_name']; ?></label>
                                             </div>
                                             <?php } ?>
                                         
                                     </div>    
 
                                     <?php  } }else{ ?> 
-                                        <span><i class="ti-alert text-warning"></i> No Attachment</span>
+                                        <span><i class="ti-alert text-warning"></i> <?php echo __('No Attachment'); ?></span>
                                     <?php } ?>
                                     
                                 </div>
                             </div>
                                 <div style="float: left;width: 35%;padding: 1%;">
-                                    <label class="">Internal Note(s) </label>
-                                    <textarea style="height: 120px;" name="notes" class="form-control mob-custom-width" title="Notes" aria-label="Notes"><?php echo $table1['notes']; ?></textarea>
+                                    <label class=""><?php echo __('Internal Note(s)'); ?> </label>
+                                    <textarea style="height: 120px;" name="notes" class="form-control mob-custom-width" title="<?php echo __('Notes'); ?>" aria-label="<?php echo __('Notes'); ?>"><?php echo $table1['notes']; ?></textarea>
                                 </div>
                                 <div style="float: left;width: 35%;padding: 1%;">
-                                    <label class="">Printing Note(s) </label>
-                                    <textarea style="height: 120px;" name="printing_notes" id="printing_notes" class="form-control mob-custom-width" title="Printing Notes" aria-label="Printing Notes"><?php echo $table1['printing_notes']; ?></textarea>
+                                    <label class=""><?php echo __('Printing Note(s)'); ?> </label>
+                                    <textarea style="height: 120px;" name="printing_notes" id="printing_notes" class="form-control mob-custom-width" title="<?php echo __('Printing Notes'); ?>" aria-label="<?php echo __('Printing Notes'); ?>"><?php echo $table1['printing_notes']; ?></textarea>
                                 </div>
                             </div>
                             <div class="table-responsive" style="padding: 1%;">
@@ -2772,14 +2772,14 @@ if($checktimeprint > 0){
                                     <div class="mt-3">
                                     <table   class=" table table-bordered">
                                         <tr class="bg-primary" >
-                                            <th scope="col" colspan="6" class="p-2 text-center">Follow Ups</th>
+                                            <th scope="col" colspan="6" class="p-2 text-center"><?php echo __('Follow Ups'); ?></th>
                                         </tr>
                                         <tr> 
                                             <th scope="col" class="p-2"><span>#</span></th>
-                                            <th scope="col" class="p-2"><span>Task Name</span></th>
-                                            <th scope="col" class="p-2"><span>Task Date</span></th>
-                                            <th scope="col" class="p-2 text-center">Status</th>
-                                            <th scope="col" class="p-2 text-center">Action</th>
+                                            <th scope="col" class="p-2"><span><?php echo __('Task Name'); ?></span></th>
+                                            <th scope="col" class="p-2"><span><?php echo __('Task Date'); ?></span></th>
+                                            <th scope="col" class="p-2 text-center"><?php echo __('Status'); ?></th>
+                                            <th scope="col" class="p-2 text-center"><?php echo __('Action'); ?></th>
                                         </tr>
                                         <?php $i=1; foreach((array)$project_task_details as $atl){
                                             ?>
@@ -2793,7 +2793,7 @@ if($checktimeprint > 0){
                                                 </label>
                                             </td>
                                             <td class="p-2 text-center">
-                                                <span class="label label-md label-primary" style="cursor: pointer;" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Details" onclick="getApplicationTaskLogsPopUp('<?php echo $atl['id']; ?>')"><i class="ti-eye"></i></span>
+                                                <span class="label label-md label-primary" style="cursor: pointer;" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('View Details'); ?>" onclick="getApplicationTaskLogsPopUp('<?php echo $atl['id']; ?>')"><i class="ti-eye"></i></span>
                                                 
                                             </td>
                                         </tr>
@@ -2804,11 +2804,11 @@ if($checktimeprint > 0){
                              </div>
                             <?php if($small_sub == 0  ){ ?>
                             <div style="margin-top: 10px;clear:both;">
-                                <label class="">Comment(s)</label>
-                                <textarea style="height: 120px;" name="comments" class="form-control" id="comments" title="Comments" aria-label="Comments"><?php echo $comments; ?></textarea>
+                                <label class=""><?php echo __('Comment(s)'); ?></label>
+                                <textarea style="height: 120px;" name="comments" class="form-control" id="comments" title="<?php echo __('Comments'); ?>" aria-label="<?php echo __('Comments'); ?>"><?php echo $comments; ?></textarea>
                             </div>
                             <div class="btn-group" style="margin-top: 10px;float: right;">
-                                <button id="kt_llogin_signup_submit"  class="btn btn-brand" >Submit1</button>
+                                <button id="kt_llogin_signup_submit"  class="btn btn-brand" ><?php echo __('Submit1'); ?></button>
                             </div>
                             <?php }  ?>           
                         </div>
@@ -2816,49 +2816,49 @@ if($checktimeprint > 0){
                         <div class="<?php echo $ammountsummarydiv; ?> p-r-0" <?php echo $ammountsummarycss; ?>>
                             <ul class="nav md-tabs infisuite_tab mb-2 mt-3">
                                 <li class="nav-item">
-                                    <a class="nav-link f-w-600 f-12 active originatercurrencycalc_tab" data-bs-toggle="tab" href="#originatercurrencycalc" role="tab" aria-selected="true">Amount</a>
+                                    <a class="nav-link f-w-600 f-12 active originatercurrencycalc_tab" data-bs-toggle="tab" href="#originatercurrencycalc" role="tab" aria-selected="true"><?php echo __('Amount'); ?></a>
                                 </li>
-                                <li class="nav-item exchange" <?php echo $currency_conversion_style; ?>><a class="nav-link f-w-600 f-12 suppliercurrencycalc_tab" data-bs-toggle="tab" href="#suppliercurrencycalc" role="tab" aria-selected="true">Currency Conversion</a></li>
+                                <li class="nav-item exchange" <?php echo $currency_conversion_style; ?>><a class="nav-link f-w-600 f-12 suppliercurrencycalc_tab" data-bs-toggle="tab" href="#suppliercurrencycalc" role="tab" aria-selected="true"><?php echo __('Currency Conversion'); ?></a></li>
                             </ul>
 
                         <div class="tab-content tabs">
                             <div class="tab-pane card-body active p-0 originatercurrencycalc_tab" id="originatercurrencycalc" role="tabpanel"> 
                         <div style="position: sticky;top: 20px;">
                         <table class=" table table-bordered custom_dynamic_transaction_table" >
-                            <tr class="bg-primary" ><th scope="col" colspan="2" class="p-2 text-center">Order Summary</th></tr>
+                            <tr class="bg-primary" ><th scope="col" colspan="2" class="p-2 text-center"><?php echo __('Order Summary'); ?></th></tr>
                             <tr>
-                                <th scope="col" class="amount text-start p-2" width="40%" style="width:40%"><span>Sub Total</span></th>
+                                <th scope="col" class="amount text-start p-2" width="40%" style="width:40%"><span><?php echo __('Sub Total'); ?></span></th>
                                 <th scope="col" class="p-2 text-right" width="60%" style="width:40%">
                                     <span id="dis_subTotalid">
                                         <?php echo customeummarmonyformateifine($table1['sub_total']); ?>
                                     </span>
-                                    <input  type="hidden" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal" placeholder="Subtotal" >
-                                    <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal" placeholder="Subtotal" >
+                                    <input  type="hidden" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal" placeholder="<?php echo __('Subtotal'); ?>" >
+                                    <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal" placeholder="<?php echo __('Subtotal'); ?>" >
                                 </th>
                             </tr>
                             <tr>
-                                <th scope="col" class="amount text-start p-2 <?php if($table1['discount_mode'] == 'DI'){ echo "event_disabled"; } ?>" id="overall_discount_div">
+                                <th scope="col" class="amount text-start p-2 <?php if($table1['discount_mode'] == 'DI'){ echo __('event_disabled'); } ?>" id="overall_discount_div">
                                     <div class="form-radio">
-                                    <span>Discount </span>
+                                    <span><?php echo __('Discount'); ?> </span>
                                     <div class="radio radio-inline m-0">
                                         <label class="d-inline-block m-l-5">
-                                            <input type="radio"  name="discount_type" class="calculateTotal_discount" id="disType" onclick="calculateTotal()" value="A" <?php echo $table1['discount_type'] == 'A'?"checked":""; ?> title="Discount Type" aria-label="Discount Type">
+                                            <input type="radio"  name="discount_type" class="calculateTotal_discount" id="disType" onclick="calculateTotal()" value="A" <?php echo $table1['discount_type'] == 'A'?"checked":""; ?> title="<?php echo __('Discount Type'); ?>" aria-label="<?php echo __('Discount Type'); ?>">
                                             <i class="helper"></i><?php echo $_SESSION['config']['currency_symbol']; ?>
                                         </label>
                                         <label class="m-l-10 d-inline-block">
-                                            <input type="radio" name="discount_type" class="calculateTotal_discount" id="disType" onclick="calculateTotal()" value="P" <?php echo ($table1['discount_type'] == 'P' OR $table1['discount_type'] =="")?"checked":""; ?> title="Discount Type" aria-label="Discount Type">
+                                            <input type="radio" name="discount_type" class="calculateTotal_discount" id="disType" onclick="calculateTotal()" value="P" <?php echo ($table1['discount_type'] == 'P' OR $table1['discount_type'] =="")?"checked":""; ?> title="<?php echo __('Discount Type'); ?>" aria-label="<?php echo __('Discount Type'); ?>">
                                             <i class="helper"></i> %
                                         </label>
                                     </div>
                                 </div>
-                                    <input value="<?php echo $table1['discount_value']; ?>" type="text" class="form-control amount mt-2 text-right decimalnumberallowe" onblur="discountRestrictions()"  placeholder="Enter value" name="discount_value" id="disValue" title="Enter value" aria-label="Enter value"> 
+                                    <input value="<?php echo $table1['discount_value']; ?>" type="text" class="form-control amount mt-2 text-right decimalnumberallowe" onblur="discountRestrictions()"  placeholder="<?php echo __('Enter value'); ?>" name="discount_value" id="disValue" title="<?php echo __('Enter value'); ?>" aria-label="<?php echo __('Enter value'); ?>"> 
                                 </th> 
                                 <td class="p-2 align-middle text-right">
                                     <span id="dis_discountid">
                                         <?php echo customeummarmonyformateifine($table1['discount_amount']); ?>
                                     </span>
-                                    <input value="<?php echo customeummarmonyformate($table1['discount_amount']); ?>"  readonly type="hidden" class="form-control amount" name="dis_discount_amount" id="dis_discount"  placeholder="Discount Amount">
-                                    <input value="<?php echo $table1['discount_amount']; ?>"  readonly type="hidden" class="form-control amount" name="discount_amount" id="discount" placeholder="Discount Amount">
+                                    <input value="<?php echo customeummarmonyformate($table1['discount_amount']); ?>"  readonly type="hidden" class="form-control amount" name="dis_discount_amount" id="dis_discount"  placeholder="<?php echo __('Discount Amount'); ?>">
+                                    <input value="<?php echo $table1['discount_amount']; ?>"  readonly type="hidden" class="form-control amount" name="discount_amount" id="discount" placeholder="<?php echo __('Discount Amount'); ?>">
                                 </td>
                             </tr> 
                             <?php if($table_name != 'bills'){  ?>
@@ -2868,7 +2868,7 @@ if($checktimeprint > 0){
                                     ?>
                                     <tr id="<?php echo $rowid; ?>">
                                         <td class="amount text-start p-2" width="40%" style="width:40%">
-                                             <i class="ti-trash text-danger" onclick="removeAdditionalCharges('<?php echo $rowid; ?>','<?php echo $addchrg['charge_id'];?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove"></i>
+                                             <i class="ti-trash text-danger" onclick="removeAdditionalCharges('<?php echo $rowid; ?>','<?php echo $addchrg['charge_id'];?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Remove'); ?>"></i>
                                              <?php echo $addchrg['charge_name'];?></td>
                                         <td class="p-2 text-right" width="60%" style="width:40%"><?php echo $addchrg['shipping_amount']." (".$addchrg['shipping_tax']."%)";?>
                                             
@@ -2883,24 +2883,24 @@ if($checktimeprint > 0){
 
                             <tr id="rowadditionalcharges">
                                  <input type="hidden" name="" id="tds_tax" value="0">
-                                 <input  value="<?php echo $table1['shipping_amount']; ?>"   type="hidden" class="form-control amount" name="shipping_amount" id="shipping_amount"  placeholder="shipping Amount">
+                                 <input  value="<?php echo $table1['shipping_amount']; ?>"   type="hidden" class="form-control amount" name="shipping_amount" id="shipping_amount"  placeholder="<?php echo __('shipping Amount'); ?>">
                                  <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="<?php echo $table1['shipping_tax_amount']; ?>">
                                 <th class="amount text-start p-2" colspan="2" id="custom-popup">
-                                    <span class="label label-md label-primary" style="cursor: pointer;" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Add More Additional Charges" onclick="OpenAdditionalCharges()"><i class="ti-plus"></i> Additional Charges</span>
+                                    <span class="label label-md label-primary" style="cursor: pointer;" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Add More Additional Charges'); ?>" onclick="OpenAdditionalCharges()"><i class="ti-plus"></i> <?php echo __('Additional Charges'); ?></span>
 
                                    <div class="custom-popup-open custom-popup-additionalcharges-open text-start" style="display: none; right: 0; top: auto;">
                                         <div class="card">
                                             <div class="card-header">
-                                              <h5>Additional Charges</h5>
+                                              <h5><?php echo __('Additional Charges'); ?></h5>
                                               <div class="card-header-right">
-                                                <i class="ti-close" onclick="closeAdditionalCharges()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed"></i>
+                                                <i class="ti-close" onclick="closeAdditionalCharges()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
                                               </div>
                                             </div>
                                             <div class="card-body" > 
                                                 <div class="row">
                                                     <div class="form-group col-lg-8">
-                                                        <label class="form-label">Charge Name</label>
-                                                        <select class="form-select js-example-basic-single"  name="additional_charge_id" id="additional_charge_id" title="Additional Charge Id" aria-label="Additional Charge Id">
+                                                        <label class="form-label"><?php echo __('Charge Name'); ?></label>
+                                                        <select class="form-select js-example-basic-single"  name="additional_charge_id" id="additional_charge_id" title="<?php echo __('Additional Charge Id'); ?>" aria-label="<?php echo __('Additional Charge Id'); ?>">
                                                             <?php foreach ((array)$additional_charges_list as $acharges) {  ?>
                                                             <option <?php echo (in_array($acharges['id'], (array)$alreadyselectac))?"disabled":""; ?> value = <?php echo $acharges['id'];  ?>   > <?php echo $acharges['charge_name']; ?> </option>
                                                             <?php } ?>
@@ -2908,13 +2908,13 @@ if($checktimeprint > 0){
                                                         <span class="text-danger" id="error_msg"></span>
                                                     </div>
                                                     <div class="form-group col-lg-4">
-                                                        <label class="form-label">Amount</label>
-                                                        <input  value="0" type="text" class="form-control amount decimalnumberallowe" id="additional_charge_amount" title="Input" aria-label="Input">
+                                                        <label class="form-label"><?php echo __('Amount'); ?></label>
+                                                        <input  value="0" type="text" class="form-control amount decimalnumberallowe" id="additional_charge_amount" title="<?php echo __('Input'); ?>" aria-label="<?php echo __('Input'); ?>">
                                                     </div>
                                                 </div>     
                                             </div>
                                             <div class="card-footer pt-0">
-                                                <button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="addAdditionalCharges()"> Add</button>
+                                                <button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="addAdditionalCharges()"> <?php echo __('Add'); ?></button>
                                             </div>
                                         </div>
                                     </div>
@@ -2924,28 +2924,28 @@ if($checktimeprint > 0){
                             <tr>
                                 <th scope="col" class="amount text-start p-2">
                                     <div class="">  
-                                        <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" title="Shipping Tax" aria-label="Shipping Tax">
-                                            <option value="0">Additional Charges</option>
+                                        <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" title="<?php echo __('Shipping Tax'); ?>" aria-label="<?php echo __('Shipping Tax'); ?>">
+                                            <option value="0"><?php echo __('Additional Charges'); ?></option>
                                             <?php foreach ($additional_charges as $acharges) {  ?>
                                             <option  <?php if($acharges['id'] == $key){ ?> selected  <?php } ?> value = <?php echo $key ?>   > <?php echo $acharges['charge_name']; ?> </option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                     <input type="hidden" name="" id="tds_tax" value="0">
-                                    <span class="badge bg-danger" style="cursor: pointer;" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Add More Additional Charges"><i class="ti-plus"></i></span>
+                                    <span class="badge bg-danger" style="cursor: pointer;" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Add More Additional Charges'); ?>"><i class="ti-plus"></i></span>
                                 </th>
                                 <td class="p-2 align-middle">
                                     <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="<?php echo $table1['shipping_tax_amount']; ?>">
-                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount"  placeholder="shipping Amount" title="shipping Amount" aria-label="shipping Amount">
+                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount"  placeholder="<?php echo __('shipping Amount'); ?>" title="<?php echo __('shipping Amount'); ?>" aria-label="<?php echo __('shipping Amount'); ?>">
                                 </td>
                             </tr>
                             
                             <tr>
                                 <th scope="col" class="amount text-start p-2">
-                                    <span >Shipping</span>
+                                    <span ><?php echo __('Shipping'); ?></span>
                                     <div class="">  
-                                        <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" title="Shipping Tax" aria-label="Shipping Tax">
-                                            <option value="0">Tax</option>
+                                        <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" title="<?php echo __('Shipping Tax'); ?>" aria-label="<?php echo __('Shipping Tax'); ?>">
+                                            <option value="0"><?php echo __('Tax'); ?></option>
                                             <?php foreach ($taxres as $key => $tax) {  ?>
                                             <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php } ?> value = <?php echo $key ?>   > <?php echo $tax; ?> </option>
                                             <?php } ?>
@@ -2955,7 +2955,7 @@ if($checktimeprint > 0){
                                 </th>
                                 <td class="p-2 align-middle">
                                     <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="<?php echo $table1['shipping_tax_amount']; ?>">
-                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="shipping Amount" title="shipping Amount" aria-label="shipping Amount">
+                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="<?php echo __('shipping Amount'); ?>" title="<?php echo __('shipping Amount'); ?>" aria-label="<?php echo __('shipping Amount'); ?>">
                                 </td>
                             </tr> 
                             <?php **/ ?>
@@ -2971,34 +2971,34 @@ if($checktimeprint > 0){
                                     <?php //if($table1['tax_state'] == 'S'){ 
                                         if($table1['originator_state_id'] == $table1['supplier_state_id']){ ?>
                                     <tr>
-                                        <td class="p-2">  <?php echo $split_1_name; ?>  @ <?php echo $ktax['percentage']*$split_1; ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?>                
+                                        <td class="p-2">  <?php echo $split_1_name; ?>  @ <?php echo $ktax['percentage']*$split_1; ?><?php echo __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?>                
                                         </td>
                                         <td class="text-end p-2"> 
                                             <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']*$split_1); ?></span> 
-                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']*$split_1); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">
+                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']*$split_1); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?php echo __('Tax Amount'); ?>">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="p-2">  <?php echo $split_2_name; ?> @ <?php echo $ktax['percentage']*$split_2; ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?>               
+                                        <td class="p-2">  <?php echo $split_2_name; ?> @ <?php echo $ktax['percentage']*$split_2; ?><?php echo __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?>               
                                         </td>
                                         <td class="text-end p-2"> 
                                             <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']*$split_2); ?></span> 
-                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']*$split_2); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">           
+                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']*$split_2); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?php echo __('Tax Amount'); ?>">           
                                         </td>
                                     </tr>
                                 <?php } else{  ?> 
                                     <tr>
-                                        <td class="p-2">  <?php echo $split_1_name; ?> @ <?php echo $ktax['percentage']; ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?>         
+                                        <td class="p-2">  <?php echo $split_1_name; ?> @ <?php echo $ktax['percentage']; ?><?php echo __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?>         
                                         </td>
                                         <td class="text-end p-2">  
                                             <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']); ?></span>
-                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">            
+                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?php echo __('Tax Amount'); ?>">            
                                         </td>
                                     </tr>
                                 <?php }?>
                             <?php } }  ?>
                                         <tr>
-                                            <td class="p-2">Total Tax</td>
+                                            <td class="p-2"><?php echo __('Total Tax'); ?></td>
                                             <td class="text-end p-2"><span id="dis_taxRateid"><?php echo customeummarmonyformateifine($tattax); ?></span> </td>
                                         </tr>
                                     </tbody>
@@ -3010,11 +3010,11 @@ if($checktimeprint > 0){
                                 <th scope="col" class="amount p-2">
                                     <div> 
                                         <div style="float: left;width: 50%;padding: 10px;">
-                                            <span >TDS</span>
+                                            <span ><?php echo __('TDS'); ?></span>
                                         </div>
                                         <div style="float: left;width: 50%;padding: 3px;">  
-                                            <select class="form-control"  name="shipping_tax" id="tds_tax" onchange="calculateTotal()" title="Shipping Tax" aria-label="Shipping Tax">
-                                                <option value="0"> Select Any Tax Rate </option>
+                                            <select class="form-control"  name="shipping_tax" id="tds_tax" onchange="calculateTotal()" title="<?php echo __('Shipping Tax'); ?>" aria-label="<?php echo __('Shipping Tax'); ?>">
+                                                <option value="0"> <?php echo __('Select Any Tax Rate'); ?> </option>
                                                 <?php foreach ((array)$tdstaxres as $key => $tax) {  ?>
                                                 <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php } ?> value = <?php echo $key; ?>   > <?php echo $tax; ?> </option>
                                                 <?php } ?>
@@ -3024,8 +3024,8 @@ if($checktimeprint > 0){
                                 </th>
                                 <td>
                                     <input type="hidden" name="shipping_tax_amount" id="tds_tax_amount" value="0">
-                                    <input  value=""   type="hidden" class="form-control amount" id="shipping_amount" onblur="calculateTotal()" placeholder="TDS Amount">
-                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="TDS Amount" title="TDS Amount" aria-label="TDS Amount">
+                                    <input  value=""   type="hidden" class="form-control amount" id="shipping_amount" onblur="calculateTotal()" placeholder="<?php echo __('TDS Amount'); ?>">
+                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="<?php echo __('TDS Amount'); ?>" title="<?php echo __('TDS Amount'); ?>" aria-label="<?php echo __('TDS Amount'); ?>">
                                 </td>
                             </tr>
                         <?php } ?>
@@ -3037,25 +3037,25 @@ if($checktimeprint > 0){
                                     
                             ?>
                             <tr >
-                                <th class="p-2  text-left" id="custom-popup">Advance Payments 
+                                <th class="p-2  text-left" id="custom-popup"><?php echo __('Advance Payments'); ?> 
                                      <div class="custom-popup-open popup_advance_payment text-start" style="top:35px; width: 310px; position: absolute; right :150px">
                                         <div class="card latest-update-card" id="experience_details_div">
                                             <div class="card-header">
-                                                <h5>Adjust Advance Payment</h5>
+                                                <h5><?php echo __('Adjust Advance Payment'); ?></h5>
                                                 <div class="card-header-right">
-                                                  <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeAdjustAdvancePayment()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                                  <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeAdjustAdvancePayment()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                                 </div>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-lg-6 form-group">
-                                                        <label class="form-label">Available Advance payments</label>
+                                                        <label class="form-label"><?php echo __('Available Advance payments'); ?></label>
                                                         <span class="d-block" id="pendingadvancepayments"> </span>
                                                         <input type="hidden"  id="pendingadvancepaymentstext" value="">
                                                     </div>
                                                     <div class="col-lg-6 form-group">
-                                                        <label class="form-label">Adjust Payment</label>
-                                                        <input type="number" class="form-control" placeholder="" id="enteradjustadvancepayment"  value="" onblur="enterAdjustAdvancePayment(this.value)" title="Input" aria-label="Input">
+                                                        <label class="form-label"><?php echo __('Adjust Payment'); ?></label>
+                                                        <input type="number" class="form-control" placeholder="" id="enteradjustadvancepayment"  value="" onblur="enterAdjustAdvancePayment(this.value)" title="<?php echo __('Input'); ?>" aria-label="<?php echo __('Input'); ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -3069,7 +3069,7 @@ if($checktimeprint > 0){
                                      if($table_name == "sales_invoices" OR $table_name == "purchase_invoices"){
                                         //AND $table1['advance_payment']!="" AND $table1['advance_payment']!="0"
                                     ?>
-                                     <i class="ti-pencil" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Adjust Advance Payment" onclick="openAdvancePaymentsPopup()"></i>
+                                     <i class="ti-pencil" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Adjust Advance Payment'); ?>" onclick="openAdvancePaymentsPopup()"></i>
                                      <input type="hidden" name="advance_payment" id="advance_payment_textbox" value="<?php echo $table1['advance_payment']!=""?$table1['advance_payment']:0; ?>">
                                     <input type="hidden" name="old_advance_payment" id="advance_payment_textbox" value="<?php echo $table1['advance_payment']!=""?$table1['advance_payment']:0; ?>">
                                     <?php } ?>
@@ -3081,7 +3081,7 @@ if($checktimeprint > 0){
                         <?php } //} ?>
                         <?php if($table_name == "sales_invoices"){ ?>
                             <tr >
-                                <th scope="col" class="p-2  text-left">TCS</th>
+                                <th scope="col" class="p-2  text-left"><?php echo __('TCS'); ?></th>
                                 <td class="p-2 text-right f-w-600" ><?php echo $table1['total_tds_amount'] !=""?$table1['total_tds_amount']:0; ?></td>
                             </tr>
 
@@ -3089,7 +3089,7 @@ if($checktimeprint > 0){
                         <?php } ?>
                         <?php if($table1['security_deposit'] !="" AND $table1['security_deposit'] !="0"){ ?>
                             <tr >
-                                <th scope="col" class="p-2  text-left">Security Deposit</th>
+                                <th scope="col" class="p-2  text-left"><?php echo __('Security Deposit'); ?></th>
                                 <td class="p-2 text-right f-w-600" ><?php echo $table1['security_deposit'] !=""?$table1['security_deposit']:0; ?></td>
                             </tr>
 
@@ -3097,27 +3097,27 @@ if($checktimeprint > 0){
                         <?php } ?>
                             <tr>
                                 <th scope="col" class="amount p-2 text-start " >
-                                    <span>Grand Total</span>
-                                    <input  type="hidden" class="form-control amount" placeholder="value" name="gdam" id="gdam">
-                                    <input  type="hidden" class="form-control amount" placeholder="value" name="div_amount_total" id="div_amount_total">
-                                    <input  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="Tax Amount">
+                                    <span><?php echo __('Grand Total'); ?></span>
+                                    <input  type="hidden" class="form-control amount" placeholder="<?php echo __('value'); ?>" name="gdam" id="gdam">
+                                    <input  type="hidden" class="form-control amount" placeholder="<?php echo __('value'); ?>" name="div_amount_total" id="div_amount_total">
+                                    <input  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="<?php echo __('Tax Amount'); ?>">
                                 </th>
                                 <th scope="col" class="p-2 text-right">
                                     <span id="grndtotalid"><?php echo customeummarmonyformateifine($table1['grand_total']+$table1['total_tds_amount']); ?> </span>
-                                    <input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="hidden" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="Grand Total"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="Grand Total">
+                                    <input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="hidden" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="<?php echo __('Grand Total'); ?>"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="<?php echo __('Grand Total'); ?>">
                                 </th>
                             </tr>
                             <tr>
-                                <th scope="col" class="amount p-2 text-start "><span >Rounding Off</span></th>
+                                <th scope="col" class="amount p-2 text-start "><span ><?php echo __('Rounding Off'); ?></span></th>
                                 <td class="p-2 text-right"><span id="rounding_off"><?php echo $table1['rounding_off']!=""?customeummarmonyformateifine($table1['rounding_off']):0; ?> </span></td>
                             </tr>
                             <tr style="display: none;">
-                                <th scope="col" class="amount" ><span >Amount Paid</span></th>
-                                <td><input value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="Amount Paid" title="Amount Paid" aria-label="Amount Paid"></td>
+                                <th scope="col" class="amount" ><span ><?php echo __('Amount Paid'); ?></span></th>
+                                <td><input value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="<?php echo __('Amount Paid'); ?>" title="<?php echo __('Amount Paid'); ?>" aria-label="<?php echo __('Amount Paid'); ?>"></td>
                             </tr>
                             <tr style="display: none;">
-                                <td  ><span >Amount Due</span></td>
-                                <td><input value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="Amount Due" title="Amount Due" aria-label="Amount Due"></td>
+                                <td  ><span ><?php echo __('Amount Due'); ?></span></td>
+                                <td><input value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="<?php echo __('Amount Due'); ?>" title="<?php echo __('Amount Due'); ?>" aria-label="<?php echo __('Amount Due'); ?>"></td>
                             </tr>
                             
                             <tr class="p-0" id="display_paymentstermsshow">
@@ -3131,7 +3131,7 @@ if($checktimeprint > 0){
                                         <td class="p-2"><?php echo fromDate($pth['due_date']); ?></td>
                                         <td class="p-2 text-right"><?php echo customeummarmonyformate($pth['amount']); ?> 
                                         <?php if($pth['extra_date'] !="" AND $pth['extra_amt'] !=""){?>
-                                        <span class='d-block f-10 f-w-600'>Before Date <?php echo fromDate($pth['extra_date'])." (".customeummarmonyformate($pth['extra_amt']).")"; ?></span> <?php } ?></td>
+                                        <span class='d-block f-10 f-w-600'><?php echo __('Before Date'); ?> <?php echo fromDate($pth['extra_date'])." (".customeummarmonyformate($pth['extra_amt']).")"; ?></span> <?php } ?></td>
                                     </tr>
                                         <?php echo '<input type="hidden" name="payment_term_history['.$mjk.'][due_date]" value="'.$pth['due_date'].'">
                                             <input type="hidden" name="payment_term_history['.$mjk.'][amount]" value="'.$pth['amount'].'">
@@ -3151,28 +3151,28 @@ if($checktimeprint > 0){
      ?>
                         <table   class=" table table-bordered exchange" <?php echo $currency_conversion_style; ?>>
                                     <tr class="bg-primary" >
-                                        <th scope="col" colspan="2" class="p-2 text-center">Order Summary</th>
+                                        <th scope="col" colspan="2" class="p-2 text-center"><?php echo __('Order Summary'); ?></th>
                                     </tr>
                                     <tr>
-                                        <th scope="col" class="p-2 text-left"><span >Sub total</span ></th>
+                                        <th scope="col" class="p-2 text-left"><span ><?php echo __('Sub total'); ?></span ></th>
                                         <td class="p-2 text-right f-w-600">
                                              <span id="ex_sub_total"><?php echo customeummarmonyformate($table1['sub_total']*$table1['currency_rate']); ?></span> 
                                         </td>
                                      </tr> 
                                      <tr> 
-                                        <th scope="col" class=" p-2 text-left"><span>Tax</span></th>
+                                        <th scope="col" class=" p-2 text-left"><span><?php echo __('Tax'); ?></span></th>
                                         <td class="p-2 text-right">
                                              <span id="ex_tax"><?php echo customeummarmonyformate($table1['tax_amount']*$table1['currency_rate']); ?></span> 
                                         </td>
                                     </tr>
                                     <tr>    
-                                        <th scope="col" class="p-2  text-left">Discount</th>
+                                        <th scope="col" class="p-2  text-left"><?php echo __('Discount'); ?></th>
                                         <td class="p-2 text-right ">
                                              <span id="ex_discount"><?php echo customeummarmonyformate($table1['discount_amount']*$table1['currency_rate']); ?></span> 
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="col" class="p-2  text-left">Grand Total </th>
+                                        <th scope="col" class="p-2  text-left"><?php echo __('Grand Total'); ?> </th>
                                         <td class="p-2 text-right f-w-600">
                                              <span id="ex_grand_total"><?php echo customeummarmonyformate(($table1['grand_total']+$table1['total_tds_amount'])*$table1['currency_rate']); ?></span> 
                                         </td>
@@ -3233,15 +3233,15 @@ if($rid !='' && isset($file_data['file_upload']) && $file_data['file_upload']==0
                                     <input type="hidden" name="hid_itemds" value="<?php echo $item_ids; ?>" />
                                     <input type="hidden" name="submit1" value="Update" />
                                     <!-- <button  id="btndisableck1" <?php echo $disable; ?> class="btn btn-primary mr-2"  ><i class="la la-check"></i>Update</button> -->
-                                    <button <?php echo $disable; ?> class="btn btn-primary mr-2"  ><i class="la la-check"></i>Update</button>
-                                    <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                                    <button <?php echo $disable; ?> class="btn btn-primary mr-2"  ><i class="la la-check"></i><?php echo __('Update'); ?></button>
+                                    <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                             <?php } else{ ?>
                                 <input type="hidden" id="hid"name="hid" value="0" />
                                     <input type="hidden" name="submit1" value="Add" />
                                     <input type="hidden" name="submit_value" id="submit_value_btn" value="exit" />
-                                    <button type="button" class="btn btn-primary mr-2 mt-2"  onclick="submitTransactions('exit')" <?php echo $disable; ?>><i class="la la-check" ></i>Save & exit</button>
+                                    <button type="button" class="btn btn-primary mr-2 mt-2"  onclick="submitTransactions('exit')" <?php echo $disable; ?>><i class="la la-check" ></i><?php echo __('Save & exit'); ?></button>
                                     
-                                    <button type="button" class="btn btn-primary mr-2 mt-2" onclick="submitTransactions('continue')" <?php echo $disable; ?>><i class="la la-check-circle" ></i>Save & continue</button>
+                                    <button type="button" class="btn btn-primary mr-2 mt-2" onclick="submitTransactions('continue')" <?php echo $disable; ?>><i class="la la-check-circle" ></i><?php echo __('Save & continue'); ?></button>
                                     
 
                                     <!-- <button class="btn btn-primary mr-2 mt-2"   name="submit_value" value="exit" <?php echo $disable; ?>><i class="la la-check" ></i>Save & exit</button>
@@ -3250,7 +3250,7 @@ if($rid !='' && isset($file_data['file_upload']) && $file_data['file_upload']==0
 
                                     <!-- <button id="btndisableck12" class="btn btn-primary mr-2 mt-2"   name="submit_value" value="exit" <?php echo $disable; ?>><i class="la la-check" ></i>Save & exit</button>
                                     <button  class="btn btn-primary mr-2 mt-2" id="btndisableck1"  name="submit_value" value="continue" <?php echo $disable; ?>><i class="la la-check-circle" ></i>Save & continue</button> -->
-                                    <button type="reset" class="btn btn-secondary mt-2" onclick="location.href='index.php?option=<?php echo $list; ?>';"><i class="la la-close"></i>Cancel</button>
+                                    <button type="reset" class="btn btn-secondary mt-2" onclick="location.href='index.php?option=<?php echo $list; ?>';"><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                             <?php } ?>  
                         </div>
                         

@@ -130,7 +130,7 @@ if(isset($_POST['create'])){
       var op = parseInt(op)+1;
      var optionlistid = "optionlist"+qid+op;
      alert(optionlistid)
-     $("#options"+qid).append('<div id='+"'"+optionlistid+"'"+'> <div class="form-group row" id="'+"'"+op+"'"+'"><div class="col-lg-1"></div><div class="col-lg-8"><div class="input-group input-group-button "> <input aria-label="Option" type="text" name="survey_question_option'+qid+'[]"  placeholder="Option" class="form-control text-right width1"> <button class="btn btn-danger" type="button" onclick="delnewoptionrows('+"'"+op+"'"+','+"'"+qid+"'"+')"><i class="ti-trash"></i></button> </div></div></div>');
+     $("#options"+qid).append('<div id='+"'"+optionlistid+"'"+'> <div class="form-group row" id="'+"'"+op+"'"+'"><div class="col-lg-1"></div><div class="col-lg-8"><div class="input-group input-group-button "> <input aria-label="<?php echo __('Option'); ?>" type="text" name="survey_question_option'+qid+'[]"  placeholder="<?php echo __('Option'); ?>" class="form-control text-right width1"> <button class="btn btn-danger" type="button" onclick="delnewoptionrows('+"'"+op+"'"+','+"'"+qid+"'"+')"><i class="ti-trash"></i></button> </div></div></div>');
      document.getElementById('option_row').value = op ;
   }
 
@@ -192,16 +192,16 @@ function getnamelist(emplist){
 <div class="card card-custom card-sticky " id="kt_page_sticky_card">
     <div class="alert alert-warning alert-dismissible">
       <strong><?php echo "This function is used for maintaining <strong>Display Attributes</strong>. * represents mandatory fields."; ?></strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
   </div>
 
  <div class="card-header">
-    <h5>Job Candidate Feed Back</h5>
+    <h5><?php echo __('Job Candidate Feed Back'); ?></h5>
 
     <div class="card-header-right">
              <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?php echo __('Back'); ?>
             </a>
     </div>
 </div>
@@ -217,9 +217,9 @@ function getnamelist(emplist){
             <div class="card card-custom gutter-b">
                <div class="card-body">
                   <div class="form-group">
-                     <label for="kt_select2_48" class="form-label font-weight-bolder">Job Titles</label>
-                     <select aria-label="Job Title" class="form-control form-select js-example-basic-single" id="kt_select2_48" name="job_title_id">
-                        <option> Select any one</option>
+                     <label for="kt_select2_48" class="form-label font-weight-bolder"><?php echo __('Job Titles'); ?></label>
+                     <select aria-label="<?php echo __('Job Title'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_48" name="job_title_id">
+                        <option> <?php echo __('Select any one'); ?></option>
                         <?php foreach ($job_titles_list as $value) { ?>
                            <option value="<?php echo $value['id'];?>" <?php if($value['id'] == $survey_details['job_title_id']){ ?>selected <?php
 } ?> ><?php echo $value['job_title']; ?></option>
@@ -228,25 +228,25 @@ function getnamelist(emplist){
                   </div>
 
                   <div class="">
-                     <span class="font-weight-bolder form-label">Name <span class="text-danger">*</span></span>
-                     <input aria-label="Survey Name" type="text" name="survey_name" value="<?php echo $survey_details['name'];?>" class="form-control" placeholder="Enter Title">
+                     <span class="font-weight-bolder form-label"><?php echo __('Name'); ?> <span class="text-danger">*</span></span>
+                     <input aria-label="<?php echo __('Survey Name'); ?>" type="text" name="survey_name" value="<?php echo $survey_details['name'];?>" class="form-control" placeholder="<?php echo __('Enter Title'); ?>">
 
                   </div>
                   <div class="col-form-label">
                      <div class="mt-3">
-                        <span class="font-weight-bolder form-label">Description <span class="text-danger">*</span></span>
-                        <textarea aria-label="Enter Title" class="form-control" name="description" placeholder="Enter Title"> <?php echo $survey_details['description'];?> </textarea>
+                        <span class="font-weight-bolder form-label"><?php echo __('Description'); ?> <span class="text-danger">*</span></span>
+                        <textarea aria-label="<?php echo __('Enter Title'); ?>" class="form-control" name="description" placeholder="<?php echo __('Enter Title'); ?>"> <?php echo $survey_details['description'];?> </textarea>
                      </div>
                   </div>
                   <div class="card-footer d-flex row">
                      <div class="col-lg-3">
-                        <button type="submit" name="create" class="btn btn-primary font-weight-bold float-left"><?php echo $_GET['Rid']!='' ? 'Update' : 'Save'; ?></button>
+                        <button type="submit" name="create" class="btn btn-primary font-weight-bold float-left"><?php echo $_GET['Rid']!='' ? __('Update') : __('Save'); ?></button>
                      </div>
 
                      <div class="col-lg-8 text-right">
 
                         <div class="btn-group">
-                           <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Questions</button>
+                           <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo __('Add Questions'); ?></button>
                            <div class="dropdown-menu">
                               <?php foreach ($qustion_types as $key => $value) { ?>
                               <button type="button" onclick="dynamiceditpopup('<?php echo $value['genc_detail_code']; ?>','<?php echo $value['genc_detail_name']; ?>')" class="dropdown-item">  <?php echo $value['genc_detail_name']; ?></button>
@@ -286,22 +286,22 @@ function getnamelist(emplist){
 
             <div class="modal-header" >
             <h5 class="modal-title" id="exampleModalLabel">'.$title.'</h5>
-             <button type="button" class="close text-white border-0 bg-transparent p-0" data-dismiss="modal" aria-label="Close" onclick="deletequestion('."'".$question_id."'".')"><i class="ti-trash"></i></button>
+             <button type="button" class="close text-white border-0 bg-transparent p-0" data-dismiss="modal" aria-label="'.__('Close').'" onclick="deletequestion('."'".$question_id."'".')"><i class="ti-trash"></i></button>
 
             </div>
             <div class="card-body mt-3">
             <div class="form-group text-left">
-            <span>Question Text: <span class="text-danger"></span></span>
-            <textarea aria-label="Survey Question" id="survey_question'.$qkey.'" name="survey_question'.$qkey.'" class="form-control" placeholder=""> '.$value['question'].' </textarea>
+            <span>'.__('Question Text:').' <span class="text-danger"></span></span>
+            <textarea aria-label="'.__('Survey Question').'" id="survey_question'.$qkey.'" name="survey_question'.$qkey.'" class="form-control" placeholder=""> '.$value['question'].' </textarea>
             </div>
             <div class="form-group text-left">
             <div class="checkbox-inline">';
             if($value['type']==1 || $value['type']==3)   {
                $display_question .='
                <label class="checkbox checkbox-primary">
-               <input aria-label="Allow Multiple Selections" type="checkbox" name="allow_multiple_selections'.$qkey.'" id="allow_multiple_selections'.$qkey.'" '.$allow_multiple_selections_status.'/>
+               <input aria-label="'.__('Allow Multiple Selections').'" type="checkbox" name="allow_multiple_selections'.$qkey.'" id="allow_multiple_selections'.$qkey.'" '.$allow_multiple_selections_status.'/>
                <span></span>
-               Allow multiple selections
+               '.__('Allow multiple selections').'
                </label>';
             }
             else{
@@ -309,9 +309,9 @@ function getnamelist(emplist){
             }
             $display_question .='
             <label class="checkbox checkbox-primary">
-            <input aria-label="Require Response" type="checkbox" name="require_response'.$qkey.'" id="require_response'.$qkey.'" '.$require_response_status.'>
+            <input aria-label="'.__('Require Response').'" type="checkbox" name="require_response'.$qkey.'" id="require_response'.$qkey.'" '.$require_response_status.'>
             <span></span>
-            Require a Response
+            '.__('Require a Response').'
             </label>
             </div>
             </div>' ;
@@ -323,7 +323,7 @@ function getnamelist(emplist){
                   <div class="col-lg-1"></div>
                   <div class="col-lg-8">
                           <div class="input-group input-group-button">
-        <input aria-label="Option" type="text" class="form-control display-inline width1" name="survey_question_option'.$qkey.'[]"  placeholder="Option" value="'.$opvalue.'">
+        <input aria-label="'.__('Option').'" type="text" class="form-control display-inline width1" name="survey_question_option'.$qkey.'[]"  placeholder="'.__('Option').'" value="'.$opvalue.'">
         <span class="input-group-text addon-style">
             <span class=""><button type="button" class="border-0 bg-transparent p-0 text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$qkey."'".')"><i class="ti-trash close"></i></button> </span>
         </span>
@@ -340,13 +340,13 @@ function getnamelist(emplist){
                $display_question .= '</div>';
                $display_question .= '<div class="form-group">
                <input type="hidden" value="'.$opkey.'" id="option_row"/>
-               <button class="btn btn-success"  onclick="addnewoptionrows('."'".$qkey."'".')" id="addNewRows" type="button">+ Add More Options</button>
+               <button class="btn btn-success"  onclick="addnewoptionrows('."'".$qkey."'".')" id="addNewRows" type="button">'.__('+ Add More Options').'</button>
                </div>';
             }
             if($value['type']==2)   {
                $display_question .= '  <div class="form-group text-left mt-10">
-               <span>Scale from 1 to: <span class="text-danger">*</span></span>
-               <input aria-label="Survey Question Option" type="number" name="survey_question_option'.$qkey.'[]"  class="form-control" placeholder="'.$options[0].'" value="'.$options[0].'" >
+               <span>'.__('Scale from 1 to:').' <span class="text-danger">*</span></span>
+               <input aria-label="'.__('Survey Question Option').'" type="number" name="survey_question_option'.$qkey.'[]"  class="form-control" placeholder="'.$options[0].'" value="'.$options[0].'" >
                </div>';
             }
             if($value['type']==4)   {

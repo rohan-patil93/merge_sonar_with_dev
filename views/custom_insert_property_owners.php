@@ -144,7 +144,7 @@ foreach($property_types as $pt){
     html += '<div class="form-group col-lg-3 p-1"><select name="uom['+rowid+'][]"  class="form-control form-select js-example-basic-single" required><?php foreach($rentaluom as $uomkey=>$uomname){?><option value="<?php echo $uomkey; ?>" ><?php echo $uomname;?></option><?php } ?></select></div>';
 
     html += '<div class="form-group col-lg-2 p-1"><input type="text" class="form-control" name="per_sq_ft_rate['+rowid+'][]" value="0"></div>';
-    html += '<div class="form-group col-lg-1 p-1"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="deletRow('+maxrows+','+rowid+')"></i> </div>';
+    html += '<div class="form-group col-lg-1 p-1"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRow('+maxrows+','+rowid+')"></i> </div>';
     html += '</div>';
     $("#addmorediv_"+rowid).append(html);
     $(".js-example-basic-single").select2();
@@ -155,25 +155,25 @@ foreach($property_types as $pt){
   	maxrowid = maxrowid+1;
   	maxrows = maxrows+1;
   	var html = ''; 
-  	html += '<a class="accordion-msg waves-effect waves-dark card_id_'+maxrowid+'"><div class="row"><div class="col-lg-11"><span class="text-capitalize">New Card</span></div><div class="col-lg-1"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove"  onclick="deletCard('+maxrowid+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Delete Details"></i></div></div></a><div class="accordion-desc p-0">';
+  	html += '<a class="accordion-msg waves-effect waves-dark card_id_'+maxrowid+'"><div class="row"><div class="col-lg-11"><span class="text-capitalize"><?php echo __('New Card'); ?></span></div><div class="col-lg-1"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>"  onclick="deletCard('+maxrowid+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Delete Details'); ?>"></i></div></div></a><div class="accordion-desc p-0">';
   	html += '<div class="card card_id_'+maxrowid+'" ><input type="hidden" name="property_owner_detail_id['+maxrowid+']" value=""><div class="card-body"><div class="row">';
 	html += '<div class="col-lg-5"><div class="row"><div class="form-group col-lg-12 mb-0"><label class="form-label">Property Type<span class="text-danger">*</span></label><div class="row"><input type="hidden" name="property_type['+maxrowid+']" id="property_type_'+maxrowid+'" value=""><?php foreach($propertyparenttypes as $ppt){?><div class="col-lg-6" onclick="getPropertParentType(<?php echo $ppt['id']; ?>,'+maxrowid+')"><div class="card text-center removeselected_'+maxrowid+'" id="propertyparenttype_'+maxrowid+'_<?php echo $ppt['id']; ?>"><div class="card-body"><span class="d-block f-22"><?php echo $ppt['icon'];?></span><span><?php echo $ppt['property_type_name']; ?></span></div></div></div><?php } ?></div></div>';
-	html += '<div class="form-group col-lg-12"><label class="form-label">Sub Property Type<span class="text-danger">*</span></label><select name="property_sub_type['+maxrowid+']" id="property_sub_type_'+maxrowid+'" class="form-control form-select js-example-basic-single" required><option value="">Select Any One </option><?php foreach($propertychildtypes[$pod['property_type']] as $pct){?><option value="<?php echo $pct['id']; ?>"><?php echo $pct['property_type_name'];?></option><?php } ?></select></div>';
+	html += '<div class="form-group col-lg-12"><label class="form-label">Sub Property Type<span class="text-danger">*</span></label><select name="property_sub_type['+maxrowid+']" id="property_sub_type_'+maxrowid+'" class="form-control form-select js-example-basic-single" required><option value=""><?php echo __('Select Any One'); ?> </option><?php foreach($propertychildtypes[$pod['property_type']] as $pct){?><option value="<?php echo $pct['id']; ?>"><?php echo $pct['property_type_name'];?></option><?php } ?></select></div>';
 	html += '<div class="form-group col-lg-12"><label class="form-label">Property Name<span class="text-danger">*</span></label><input type="text" class="form-control text-capitalize" name="property_name['+maxrowid+']" value="" required></div>';
 	html += '<div class="form-group col-lg-12"><label class="form-label">Address<span class="text-danger">*</span></label><textarea class="form-control text-capitalize" name="property_address['+maxrowid+']" ></textarea></div>';
 
-	html += '<div class="form-group col-lg-6"><label class="form-label">Longitude </label><input type="text" class="form-control" name="longitude['+maxrowid+']" value=""></div>';
-	html += '<div class="form-group col-lg-6"><label class="form-label">Latitude</label><input type="text" class="form-control" name="latitude['+maxrowid+']" value=""></div>';
+	html += '<div class="form-group col-lg-6"><label class="form-label"><?php echo __('Longitude'); ?> </label><input type="text" class="form-control" name="longitude['+maxrowid+']" value=""></div>';
+	html += '<div class="form-group col-lg-6"><label class="form-label"><?php echo __('Latitude'); ?></label><input type="text" class="form-control" name="latitude['+maxrowid+']" value=""></div>';
 
 	html += '</div>';
 
 	html += '<div class="form-group col-lg-12">';
-	html += '<div class="row"><div class="col-lg-6"><label class="form-label">File Name</label></div><div class="col-lg-6"><label class="form-label">Upload File</label></div></div>';
+	html += '<div class="row"><div class="col-lg-6"><label class="form-label"><?php echo __('File Name'); ?></label></div><div class="col-lg-6"><label class="form-label"><?php echo __('Upload File'); ?></label></div></div>';
 	html += '<div id="addmoreattachements_id_'+maxrowid+'"><div class="row"><div class="form-group col-lg-6"><input type="text" class="form-control" name="attachment_name['+maxrowid+'][]" value=""></div><div class="form-group col-lg-6"><input type="file" class="form-control" name="attachment['+maxrowid+'][]" value=""></div></div></div>';
 	html += '<div class=""> <button type="button" class="btn btn-success waves-effect waves-light" onclick="addMoreAttachment(\''+maxrowid+'\')"><i class="icofont icofont-plus icon-white  m-r-10"></i>Add More Attachment</button></div>';
     html += '</div>';
 
-	html += '<div class="row"><div class="form-group col-lg-8"><label>Join Owners</label></div><div class="form-group col-lg-3"><label>Percentage(%)<span class="text-danger">*</span></label> </div></div>';
+	html += '<div class="row"><div class="form-group col-lg-8"><label><?php echo __('Join Owners'); ?></label></div><div class="form-group col-lg-3"><label>Percentage(%)<span class="text-danger">*</span></label> </div></div>';
     
     html += '<div id="addmoredivowner_'+maxrowid+'">'; 
 
@@ -191,7 +191,7 @@ foreach($property_types as $pt){
 	html += '<div class="col-lg-7"><div class="row"><div class="form-group col-lg-4"> <label>Property Rental Name<span class="text-danger">*</span></label></div><div class="form-group col-lg-2"><label>Area Sq. Ft <span class="text-danger">*</span></label> </div><div class="form-group col-lg-3"><label>UOM <span class="text-danger">*</span></label> </div><div class="form-group col-lg-2"><label>rate Per Sq. Ft <span class="text-danger">*</span></label> </div></div>';
 	html += '<div id="addmorediv_'+maxrowid+'">'; 
 	html += '<div class="row" id="deleterowid_'+maxrows+'"><input type="hidden" name="property_owner_detail_area_id['+maxrowid+'][]" value=""><div class="form-group col-lg-4 p-1"><input type="text" class="form-control" name="property_area_name['+maxrowid+'][]" value="" required></div>';
-    html += '<div class="form-group col-lg-2 p-1"><input type="text" class="form-control " name="property_area['+maxrowid+'][]" value="0" required></div><div class="form-group col-lg-3 p-1"><select name="uom['+maxrowid+'][]"  class="form-control form-select js-example-basic-single" required><?php foreach($rentaluom as $uomkey=>$uomname){?><option value="<?php echo $uomkey; ?>" ><?php echo $uomname;?></option><?php } ?></select></div><div class="form-group col-lg-2 p-1"><input type="text" class="form-control " name="per_sq_ft_rate['+maxrowid+'][]" value="0" required></div><div class="form-group col-lg-1 p-1"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="deletRow('+maxrows+','+maxrowid+')"></i> </div></div></div>';
+    html += '<div class="form-group col-lg-2 p-1"><input type="text" class="form-control " name="property_area['+maxrowid+'][]" value="0" required></div><div class="form-group col-lg-3 p-1"><select name="uom['+maxrowid+'][]"  class="form-control form-select js-example-basic-single" required><?php foreach($rentaluom as $uomkey=>$uomname){?><option value="<?php echo $uomkey; ?>" ><?php echo $uomname;?></option><?php } ?></select></div><div class="form-group col-lg-2 p-1"><input type="text" class="form-control " name="per_sq_ft_rate['+maxrowid+'][]" value="0" required></div><div class="form-group col-lg-1 p-1"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRow('+maxrows+','+maxrowid+')"></i> </div></div></div>';
     
     html += '<div class=""><button type="button" class="btn btn-success waves-effect waves-light float-left" onclick="addMore('+maxrowid+')"><i class="icofont icofont-plus icon-white  m-r-10"></i>Add More</button> </div></div></div></div></div></div>';
 
@@ -207,7 +207,7 @@ foreach($property_types as $pt){
     html += '<div class="row" id="'+deleteid+'">';
     html += '<div class="form-group col-lg-8"><input type="text" class="form-control" name="joint_owner_names['+rowid+'][]" value=""></div>';
     html += '<div class="form-group col-lg-3"><input type="text" class="form-control  text-right" name="owner_percentage['+rowid+'][]" value=""></div>';
-    html += '<div class="form-group col-lg-1"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="deletRowjoinOwner(\''+deleteid+'\')"></i> </div>';
+    html += '<div class="form-group col-lg-1"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRowjoinOwner(\''+deleteid+'\')"></i> </div>';
     html += '</div>';
     $("#addmoredivowner_"+rowid).append(html);
     $('[data-bs-toggle="tooltip"]').tooltip();
@@ -237,22 +237,22 @@ function addMoreAttachment(rowid){
 	<div class="col-lg-2">
 		<div class="card">
 			<div class="card-header">
-				<h5>Owners</h5>
+				<h5><?php echo __('Owners'); ?></h5>
 				<div class="card-header-right table-card-header">
 					<?php if($rid !=""){ ?>
-					<a href="index?option=COM_INSERT_PROPERTY_OWNERS" class="btn btn-success waves-effect waves-light float-left"><i class="icofont icofont-plus icon-white  m-r-10"></i> Owner</a> 
+					<a href="index?option=COM_INSERT_PROPERTY_OWNERS" class="btn btn-success waves-effect waves-light float-left"><i class="icofont icofont-plus icon-white  m-r-10"></i> <?php echo __('Owner'); ?></a> 
 					<?php } ?>             
 				</div>
 			</div>
 			<div class="card-block custom-scroll" style=" height: 570px;">
 				<table class="table table-hover">
-					<thead><tr><th>Owner Details</th></tr></thead>
+					<thead><tr><th><?php echo __('Owner Details'); ?></th></tr></thead>
 					<tbody>
 				<?php foreach($property_owners_list as $pol){ 
 					$ownerid = deocdeId("id:".$pol['id']);
 					?>
 					<tr class="<?php echo $pol['id'] == $rid?"bg-info":""; ?>">
-						<th class="p-2 w-b-w-s"><a href="index?option=COM_INSERT_PROPERTY_OWNERS&Rid=<?php echo $ownerid; ?>" class="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Please Click To Open Owner Details"><?php echo $pol['owner_name']; ?> </a> <span class="form-label label label-primary float-end d-inline-block"><?php echo $pol['total_property_cnt']; ?></span></th>
+						<th class="p-2 w-b-w-s"><a href="index?option=COM_INSERT_PROPERTY_OWNERS&Rid=<?php echo $ownerid; ?>" class="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Please Click To Open Owner Details'); ?>"><?php echo $pol['owner_name']; ?> </a> <label class="form-label label label-primary float-end"><?php echo $pol['total_property_cnt']; ?></label></th>
 					</tr>
 				<?php } ?>
 				</tbody>	
@@ -263,59 +263,59 @@ function addMoreAttachment(rowid){
 	<div class="col-lg-2">
 		<div class="card">
 			<div class="card-header">
-				<h5>Owner Details</h5>
+				<h5><?php echo __('Owner Details'); ?></h5>
 				<div class="card-header-right table-card-header">              
 				</div>
 			</div>
 			<div class="card-body">	
 				<div class="form-group">
-					<label for="fld_owner_name" class="form-label">Owner Name <span class="text-danger">*</span></label>
-					<input id="fld_owner_name" type="text" class="form-control text-capitalize" name="owner_name" value="<?php echo $property_owners['owner_name']; ?>" required>
+					<label class="form-label"><?php echo __('Owner Name'); ?> <span class="text-danger">*</span></label>
+					<input type="text" class="form-control text-capitalize" name="owner_name" value="<?php echo $property_owners['owner_name']; ?>" required>
 				</div>
         <div class="form-group">
-          <label for="fld_owner_company_name" class="form-label">Company Name <span class="text-danger">*</span></label>
-          <input id="fld_owner_company_name" type="text" class="form-control text-capitalize" name="owner_company_name" value="<?php echo $property_owners['owner_company_name']; ?>" required>
+          <label class="form-label"><?php echo __('Company Name'); ?> <span class="text-danger">*</span></label>
+          <input type="text" class="form-control text-capitalize" name="owner_company_name" value="<?php echo $property_owners['owner_company_name']; ?>" required>
         </div>
 				<div class="form-group">
-					<label for="fld_address" class="form-label">Address</label>
-					<textarea id="fld_address" type="text" class="form-control" name="address" required><?php echo $property_owners['address']; ?></textarea>
+					<label class="form-label"><?php echo __('Address'); ?></label>
+					<textarea type="text" class="form-control" name="address" required><?php echo $property_owners['address']; ?></textarea>
 				</div>
         <div class="form-group">
-          <label for="fld_contact_no" class="form-label">Contact Number</label>
-          <input id="fld_contact_no" type="text" class="form-control" name="contact_no" value="<?php echo $property_owners['contact_no']; ?>" >
+          <label class="form-label"><?php echo __('Contact Number'); ?></label>
+          <input type="text" class="form-control" name="contact_no" value="<?php echo $property_owners['contact_no']; ?>" >
         </div>
         <div class="form-group">
-          <label for="fld_email_id" class="form-label">Email Id</label>
-          <input id="fld_email_id" type="text" class="form-control" name="email_id" value="<?php echo $property_owners['email_id']; ?>" >
+          <label class="form-label"><?php echo __('Email Id'); ?></label>
+          <input type="text" class="form-control" name="email_id" value="<?php echo $property_owners['email_id']; ?>" >
         </div>
 				<div class="form-group">
-					<label for="fld_gst_no" class="form-label">GST No</label>
-					<input id="fld_gst_no" type="text" class="form-control" name="gst_no" value="<?php echo $property_owners['gst_no']; ?>" >
+					<label class="form-label"><?php echo __('GST No'); ?></label>
+					<input type="text" class="form-control" name="gst_no" value="<?php echo $property_owners['gst_no']; ?>" >
 				</div>
         <div class="form-group">
-          <label for="fld_pan_no" class="form-label">PAN No</label>
-          <input id="fld_pan_no" type="text" class="form-control" name="pan_no" value="<?php echo $property_owners['pan_no']; ?>" >
+          <label class="form-label"><?php echo __('PAN No'); ?></label>
+          <input type="text" class="form-control" name="pan_no" value="<?php echo $property_owners['pan_no']; ?>" >
         </div>
 				<div class="form-group">
-					<label for="fld_bank_id" class="form-label">Bank Name</label>
-					<select id="fld_bank_id" name="bank_id" class="form-control form-select js-example-basic-single">
-						<option value="">Select Any One </option>
+					<label class="form-label"><?php echo __('Bank Name'); ?></label>
+					<select name="bank_id" class="form-control form-select js-example-basic-single">
+						<option value=""><?php echo __('Select Any One'); ?> </option>
 						<?php foreach($banks as $bnk) {  ?>
 							<option value="<?php echo $bnk['id']; ?>" <?php echo $property_owners['bank_id'] ==$bnk['id']?"selected":""; ?>><?php echo $bnk['bank_name'];?></option>
 						<?php } ?>
 					</select>
 				</div>
         <div class="form-group">
-          <label for="fld_ifsc_code" class="form-label">IFSC Code</label>
-          <input id="fld_ifsc_code" type="text" class="form-control" name="ifsc_code" value="<?php echo $property_owners['ifsc_code']; ?>">
+          <label class="form-label"><?php echo __('IFSC Code'); ?></label>
+          <input type="text" class="form-control" name="ifsc_code" value="<?php echo $property_owners['ifsc_code']; ?>">
         </div>
 				<div class="form-group">
-					<label for="fld_bank_account_no" class="form-label">Bank Account No</label>
-					<input id="fld_bank_account_no" type="text" class="form-control" name="bank_account_no" value="<?php echo $property_owners['bank_account_no']; ?>">
+					<label class="form-label"><?php echo __('Bank Account No'); ?></label>
+					<input type="text" class="form-control" name="bank_account_no" value="<?php echo $property_owners['bank_account_no']; ?>">
 				</div>
         <div class="form-group">
-          <label for="fld_account_type" class="form-label">Account Type</label>
-          <select id="fld_account_type" name="account_type" class="form-control form-select js-example-basic-single">
+          <label class="form-label"><?php echo __('Account Type'); ?></label>
+          <select name="account_type" class="form-control form-select js-example-basic-single">
             <?php foreach($account_types as $bnktkey=>$bnkval) {  ?>
               <option value="<?php echo $bnktkey; ?>" <?php echo $property_owners['account_type'] ==$bnktkey?"selected":""; ?>><?php echo $bnkval;?></option>
             <?php } ?>
@@ -332,7 +332,7 @@ function addMoreAttachment(rowid){
 		<?php if($rid !=""){ ?>
 		<div class="card">
 			<div class="card-header">
-				<h5>Owner Propert Detail</h5>
+				<h5><?php echo __('Owner Propert Detail'); ?></h5>
 				<div class="card-header-right table-card-header">
 					<!-- <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>   -->   
 				</div>
@@ -350,7 +350,7 @@ function addMoreAttachment(rowid){
 						<a class="accordion-msg waves-effect waves-dark card_id_<?php echo $i; ?>" >
 							<div class="row">
 								<div class="col-lg-11"><span class="text-capitalize"><?php echo $pod['property_name']; ?></span></div>
-								<div class="col-lg-1"><i class="ti-trash text-danger" role="button" tabindex="0" aria-label="Delete property" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="deletCard('<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Delete Details"></i></div>
+								<div class="col-lg-1"><i class="ti-trash text-danger"  onclick="deletCard('<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Delete Details'); ?>"></i></div>
 							</div>
 						</a>
                         <div class="accordion-desc p-0 card_id_<?php echo $i; ?>">
@@ -363,7 +363,7 @@ function addMoreAttachment(rowid){
 											<div class="col-lg-5">
 												<div class="row">
 													<div class="form-group col-lg-12 mb-0">
-														<span class="form-label d-inline-block fw-bold" style="margin-bottom:5px">Property Type<span class="text-danger">*</span></span>
+														<label class="form-label"><?php echo __('Property Type'); ?><span class="text-danger">*</span></label>
 														<div class="row">
 															<input type="hidden" name="property_type[<?php echo $i; ?>]" id="property_type_<?php echo $i; ?>" value="<?php echo $pod['property_type']; ?>">
 															<?php foreach($propertyparenttypes as $ppt){?>
@@ -379,46 +379,46 @@ function addMoreAttachment(rowid){
 														</div>
 													</div>
 													<div class="form-group col-lg-12">
-														<label for="property_sub_type_<?php echo $i; ?>" class="form-label">Sub Property Type<span class="text-danger">*</span></label>
+														<label class="form-label"><?php echo __('Sub Property Type'); ?><span class="text-danger">*</span></label>
 														<select name="property_sub_type[<?php echo $i; ?>]" id="property_sub_type_<?php echo $i; ?>" class="form-control form-select js-example-basic-single" required>
-															<option value="">Select Any One </option>
+															<option value=""><?php echo __('Select Any One'); ?> </option>
 															<?php foreach($propertychildtypes[$pod['property_type']] as $pct){?>
 																<option value="<?php echo $pct['id']; ?>" <?php echo $pod['property_sub_type'] ==$pct['id']?"selected":""; ?>><?php echo $pct['property_type_name'];?></option>
 															<?php } ?>
 														</select>
 													</div>
 													<div class="form-group col-lg-12">
-														<label for="property_name_<?php echo $i; ?>" class="form-label">Property Name<span class="text-danger">*</span></label>
-														<input id="property_name_<?php echo $i; ?>" type="text" class="form-control text-capitalize" name="property_name[<?php echo $i; ?>]" value="<?php echo $pod['property_name']; ?>" required>
+														<label class="form-label"><?php echo __('Property Name'); ?><span class="text-danger">*</span></label>
+														<input type="text" class="form-control text-capitalize" name="property_name[<?php echo $i; ?>]" value="<?php echo $pod['property_name']; ?>" required>
 													</div>
 													<div class="form-group col-lg-12">
-														<label for="property_address_<?php echo $i; ?>" class="form-label">Address<span class="text-danger">*</span></label>
-														<textarea id="property_address_<?php echo $i; ?>" class="form-control" name="property_address[<?php echo $i; ?>]" ><?php echo $pod['property_address']; ?></textarea>
+														<label class="form-label"><?php echo __('Address'); ?><span class="text-danger">*</span></label>
+														<textarea class="form-control" name="property_address[<?php echo $i; ?>]" ><?php echo $pod['property_address']; ?></textarea>
 													</div>
 													<div class="form-group col-lg-6">
-														<label for="longitude_<?php echo $i; ?>" class="form-label">Longitude </label>
-														<input id="longitude_<?php echo $i; ?>" type="text" class="form-control" name="longitude[<?php echo $i; ?>]" value="<?php echo $pod['longitude']; ?>">
+														<label class="form-label"><?php echo __('Longitude'); ?> </label>
+														<input type="text" class="form-control" name="longitude[<?php echo $i; ?>]" value="<?php echo $pod['longitude']; ?>">
 													</div>
 													<div class="form-group col-lg-6">
-														<label for="latitude_<?php echo $i; ?>" class="form-label">Latitude</label>
-														<input id="latitude_<?php echo $i; ?>" type="text" class="form-control" name="latitude[<?php echo $i; ?>]" value="<?php echo $pod['latitude']; ?>">
+														<label class="form-label"><?php echo __('Latitude'); ?></label>
+														<input type="text" class="form-control" name="latitude[<?php echo $i; ?>]" value="<?php echo $pod['latitude']; ?>">
 													</div>
 													<div class="form-group col-lg-12">
 													<?php
 														$attachments = json_decode($pod['attachment'],1); 
 														foreach($attachments as $attachment){ ?>
 															<div class="label-main d-block" id="remove_attache_<?php echo $attchmentseq; ?>">
-                                	<a href="uploads/all/<?php echo $attachment['attachment']; ?>" target="_blank"><span class="form-label label label-success cursor-pointer d-inline-block" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download"><i class="ti-cloud-down"></i> &nbsp; <?php echo $attachment['attachment_name'] !=""?$attachment['attachment_name']:$attachment['attachment']; ?></span></a> <i class="ti-trash float-end text-danger" role="button" tabindex="0" aria-label="Remove file" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeFile('remove_attache_<?php echo $attchmentseq; ?>')"></i>
+                                	<a href="uploads/all/<?php echo $attachment['attachment']; ?>" target="_blank"><label class="form-label label label-success cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Download'); ?>"><i class="ti-cloud-down"></i> &nbsp; <?php echo $attachment['attachment_name'] !=""?$attachment['attachment_name']:$attachment['attachment']; ?></label></a> <i class="ti-trash float-end text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="removeFile('remove_attache_<?php echo $attchmentseq; ?>')"></i>
                                 	 <input type="hidden" name="old_attachment[<?php echo $i; ?>][]" class="form-control" value="<?php echo $attachment['attachment']; ?>"> 
                                 	 <input type="hidden" name="old_attachment_name[<?php echo $i; ?>][]" class="form-control" value="<?php echo $attachment['attachment_name']; ?>"> 
                               </div>
 													<?php $attchmentseq++; }  ?>
 														<div class="row">
 															<div class="col-lg-6">
-																<span class="form-label d-inline-block fw-bold" style="margin-bottom:5px">File Name</span>
+																<label class="form-label"><?php echo __('File Name'); ?></label>
 															</div>
 															<div class="col-lg-6">
-																<span class="form-label d-inline-block fw-bold" style="margin-bottom:5px">Upload File</span>
+																<label class="form-label"><?php echo __('Upload File'); ?></label>
 															</div>
 														</div>
 														<div id="addmoreattachements_id_<?php echo $i; ?>">
@@ -432,16 +432,16 @@ function addMoreAttachment(rowid){
 															</div>
 														</div>
 														<div class="">
-												            <button type="button" class="btn btn-success waves-effect waves-light float-left" onclick="addMoreAttachment('<?php echo $i; ?>')"><i class="icofont icofont-plus icon-white  m-r-10"></i>Add More Attachment</button>
+												            <button type="button" class="btn btn-success waves-effect waves-light float-left" onclick="addMoreAttachment('<?php echo $i; ?>')"><i class="icofont icofont-plus icon-white  m-r-10"></i><?php echo __('Add More Attachment'); ?></button>
 												        </div>
 													</div>
 												</div>
 												<div class="row">
 							                <div class="form-group col-lg-8">
-							                    <span class=" d-inline-block fw-bold" style="margin-bottom:5px">Join Owners</span>
+							                    <label><?php echo __('Join Owners'); ?></label>
 							                </div>
 							                <div class="form-group col-lg-3">
-							                    <span class=" d-inline-block fw-bold" style="margin-bottom:5px">Percentage(%)<span class="text-danger">*</span></span>
+							                    <label><?php echo __('Percentage(%)'); ?><span class="text-danger">*</span></label>
 							                </div>
 							            </div>
 							            <div id="addmoredivowner_<?php echo $i; ?>"> 
@@ -456,36 +456,36 @@ function addMoreAttachment(rowid){
 							               	?>
 								            <div class="row" id="<?php echo $deleteid; ?>">
 								                <div class="form-group col-lg-8">
-								                    <input aria-label="Joint owner name" type="text" class="form-control" name="joint_owner_names[<?php echo $i; ?>][]" value="<?php echo $pjo['joint_owner_names']; ?>"<?php if($mck == 1){ echo "readonly"; } ?> >
+								                    <input type="text" class="form-control" name="joint_owner_names[<?php echo $i; ?>][]" value="<?php echo $pjo['joint_owner_names']; ?>"<?php if($mck == 1){ echo __('readonly'); } ?> >
 								                </div>
 								                <div class="form-group col-lg-3">
 								                   <input aria-label="Owner percentage" type="text" class="form-control text-right" name="owner_percentage[<?php echo $i; ?>][]" value="<?php echo $pjo['owner_percentage']; ?>">
 								                </div>
 								                <div class="form-group col-lg-1">
 								                	<?php if($mck != 1){ ?>
-								                	 <i class="ti-trash text-danger" role="button" tabindex="0" aria-label="Remove joint owner" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="deletRowjoinOwner('<?php echo $deleteid; ?>')"></i>
+								                	 <i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRowjoinOwner('<?php echo $deleteid; ?>')"></i>
 								                	<?php } ?>
 								                </div>
 								            </div>
 								        <?php $mck++; } ?>
 								        </div>
 							            <div class="">
-								            <button type="button" class="btn btn-success waves-effect waves-light float-left" onclick="addMoreOwners('<?php echo $i; ?>')"><i class="icofont icofont-plus icon-white  m-r-10"></i>Add More Owner</button>
+								            <button type="button" class="btn btn-success waves-effect waves-light float-left" onclick="addMoreOwners('<?php echo $i; ?>')"><i class="icofont icofont-plus icon-white  m-r-10"></i><?php echo __('Add More Owner'); ?></button>
 								        </div>
 											</div>
 											<div class="col-lg-7">
 												<div class="row">
 									                <div class="form-group col-lg-4">
-									                    <span class=" d-inline-block fw-bold" style="margin-bottom:5px">Property Rental Name<span class="text-danger">*</span></span>
+									                    <label><?php echo __('Property Rental Name'); ?><span class="text-danger">*</span></label>
 									                </div>
 									                <div class="form-group col-lg-2">
-									                    <span class=" d-inline-block fw-bold" style="margin-bottom:5px">Area<span class="text-danger">*</span></span>
+									                    <label><?php echo __('Area'); ?><span class="text-danger">*</span></label>
 									                </div>
 									                <div class="form-group col-lg-3">
-									                    <span class=" d-inline-block fw-bold" style="margin-bottom:5px">UOM<span class="text-danger">*</span></span>
+									                    <label><?php echo __('UOM'); ?><span class="text-danger">*</span></label>
 									                </div>
 									                <div class="form-group col-lg-2">
-									                    <span class=" d-inline-block fw-bold" style="margin-bottom:5px">Rate<span class="text-danger">*</span></span>
+									                    <label><?php echo __('Rate'); ?><span class="text-danger">*</span></label>
 									                </div>
 									                <div class="form-group col-lg-1">
 									                </div>
@@ -519,14 +519,14 @@ function addMoreAttachment(rowid){
 							                    </div>
 							                    <div class="form-group col-lg-1 p-1">
                                     <?php if($vd['property_tenant_detail_id'] ==""){ ?>
-							                       <i class="ti-trash text-danger" role="button" tabindex="0" aria-label="Remove rental area" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="deletRow('<?php echo $mk; ?>','<?php echo $i; ?>')"></i> 
+							                       <i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRow('<?php echo $mk; ?>','<?php echo $i; ?>')"></i> 
                                    <?php }else{ echo "<i class='ti ti-alert text-danger' data-bs-toggle='tooltip' data-placement='bottom' title='' data-bs-original-title='Already Area Available In Rent'></i>"; } ?>
 							                    </div>
 							                </div>
 									            <?php  $mk++; } ?>
 									        	</div>
 									            <div class="">
-										            <button type="button" class="btn btn-success waves-effect waves-light float-left" onclick="addMore('<?php echo $i; ?>')"><i class="icofont icofont-plus icon-white  m-r-10"></i>Add More Property Area</button>
+										            <button type="button" class="btn btn-success waves-effect waves-light float-left" onclick="addMore('<?php echo $i; ?>')"><i class="icofont icofont-plus icon-white  m-r-10"></i><?php echo __('Add More Property Area'); ?></button>
 										        </div>
 											</div>
 										</div>
@@ -541,14 +541,14 @@ function addMoreAttachment(rowid){
 				<div class="card-footer pt-0 mt-4">
            <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-r-20" name="submitesopplanse"> <?php echo $rid !=""?"Update":"Submit";?></button>
 
-		            <button type="button" class="btn btn-success waves-effect waves-light float-left" onclick="addMoreCard()"><i class="icofont icofont-plus icon-white  m-r-10"></i>Add More Property</button>
+		            <button type="button" class="btn btn-success waves-effect waves-light float-left" onclick="addMoreCard()"><i class="icofont icofont-plus icon-white  m-r-10"></i><?php echo __('Add More Property'); ?></button>
 		        </div>
 			</div>
 		</div>	
 	<?php }else{ ?>
 		<div class="card">
 			<div class="card-px text-center py-20 m-t-30">
-	            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Owner Details</p>   
+	            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Owner Details'); ?></p>   
 	            <div class="text-center px-4">
 	                <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 	            </div>   

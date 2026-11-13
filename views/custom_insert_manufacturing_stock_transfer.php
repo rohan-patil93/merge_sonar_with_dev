@@ -66,10 +66,10 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
 <div class="page-body">
   <div class="card shadow-sm border-0">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <h5 class="mb-0">Manufacturing Stock Transfer</h5>
+      <h5 class="mb-0"><?php echo __('Manufacturing Stock Transfer'); ?></h5>
       <?php if ($stock_request_id != '') { ?>
         <div class="card-header-right">
-          <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#stockTransferHistoryModal" title="Stock Transfer History" aria-label="Stock Transfer History">
+          <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#stockTransferHistoryModal" title="<?php echo __('Stock Transfer History'); ?>" aria-label="<?php echo __('Stock Transfer History'); ?>">
             <i class="ti-time"></i>
           </button>
         </div>
@@ -80,14 +80,14 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
       <?php if (!empty($_SESSION['error'])): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <?php echo htmlspecialchars($_SESSION['error']); ?>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
         <?php unset($_SESSION['error']); ?>
       <?php endif; ?>
       <?php if (!empty($_SESSION['stock_transfer_warning'])): ?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
           <?php echo htmlspecialchars($_SESSION['stock_transfer_warning']); ?>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
         <?php unset($_SESSION['stock_transfer_warning']); ?>
       <?php endif; ?>
@@ -97,9 +97,9 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
 
 
         <div class="col-md-4 mb-3 w-full">
-          <span class="fw-semibold">Stock Request</span>
-          <select aria-label="Stock Request" name="stock_request_id" class="js-example-basic-single js-stock-request-select" data-auto-submit="1">
-            <option value="">Select Stock Request</option>
+          <span class="fw-semibold"><?php echo __('Stock Request'); ?></span>
+          <select aria-label="<?php echo __('Stock Request'); ?>" name="stock_request_id" class="js-example-basic-single js-stock-request-select" data-auto-submit="1">
+            <option value=""><?php echo __('Select Stock Request'); ?></option>
             <?php
             if (count((array)$stockRequests) > 0) {
               foreach ($stockRequests as $row) {
@@ -129,29 +129,29 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
           <div class="accordion-item mb-3 shadow-sm border-0">
             <h2 class="accordion-header" id="headingRequestDetails">
               <button class="accordion-button collapsed fw-bold text-primary bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRequestDetails" aria-expanded="false" aria-controls="collapseRequestDetails">
-                <i class="ti ti-file me-2"></i> Stock Request Details (<?php echo htmlspecialchars($stockRequestDetails['transaction_number'] ?? ''); ?>)
+                <i class="ti ti-file me-2"></i> <?php echo __('Stock Request Details ('); ?><?php echo htmlspecialchars($stockRequestDetails['transaction_number'] ?? ''); ?>)
               </button>
             </h2>
             <div id="collapseRequestDetails" class="accordion-collapse collapse" aria-labelledby="headingRequestDetails">
               <div class="accordion-body">
                 <div class="row mb-3">
                   <div class="col-md-4">
-                    <span class="text-muted fw-semibold d-block">Transaction No</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Transaction No'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars($stockRequestDetails['transaction_number'] ?? ''); ?></span>
                   </div>
                   <div class="col-md-4">
-                    <span class="text-muted fw-semibold d-block">Transaction Date</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Transaction Date'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars(fromDate($stockRequestDetails['transaction_date'] ?? '')); ?></span>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <div class="col-md-4">
-                    <span class="text-muted fw-semibold d-block">Total Amount</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Total Amount'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars($totalAmount); ?></span>
                   </div>
                   <div class="col-md-8">
-                    <span class="text-muted fw-semibold d-block">Notes</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Notes'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars($stockRequestDetails['notes'] ?? ''); ?></span>
                   </div>
                 </div>
@@ -163,7 +163,7 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
           <div class="accordion-item shadow-sm border-0">
             <h2 class="accordion-header" id="headingRequestItems">
               <button class="accordion-button collapsed fw-bold text-primary bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRequestItems" aria-expanded="false" aria-controls="collapseRequestItems">
-                <i class="ti ti-package  me-2"></i> Stock Request Items (<?php echo count($stockRequestItems); ?>)
+                <i class="ti ti-package  me-2"></i> <?php echo __('Stock Request Items ('); ?><?php echo count($stockRequestItems); ?>)
               </button>
             </h2>
             <div id="collapseRequestItems" class="accordion-collapse collapse" aria-labelledby="headingRequestItems">
@@ -173,15 +173,15 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
                     <thead class="table-light text-center">
                       <tr>
                         <th scope="col" class="col-width-50">#</th>
-                        <th scope="col" class="text-start">Item Name</th>
-                        <th scope="col">SKU</th>
-                        <th scope="col">UOM</th>
-                        <th scope="col">Request Qty</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Amount</th>
+                        <th scope="col" class="text-start"><?php echo __('Item Name'); ?></th>
+                        <th scope="col"><?php echo __('SKU'); ?></th>
+                        <th scope="col"><?php echo __('UOM'); ?></th>
+                        <th scope="col"><?php echo __('Request Qty'); ?></th>
+                        <th scope="col"><?php echo __('Price'); ?></th>
+                        <th scope="col"><?php echo __('Amount'); ?></th>
 
-                        <th scope="col">Pending Qty</th>
-                        <th scope="col">Stock Transfer Qty</th>
+                        <th scope="col"><?php echo __('Pending Qty'); ?></th>
+                        <th scope="col"><?php echo __('Stock Transfer Qty'); ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -200,14 +200,14 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
                             <td><?php echo htmlspecialchars($item['pending_qty'] ?? 0); ?></td>
                             <td>
                               <input type="hidden" name="items[<?php echo $i; ?>][item_id]" value="<?php echo htmlspecialchars($item['id']); ?>">
-                              <input aria-label="Enter number" type="number" name="items[<?php echo $i; ?>][stock_transfer_qty]" step="any" min="0" class="form-control text-end stock-transfer-qty-input" placeholder="0" data-item-qty="<?php echo htmlspecialchars($item['pending_qty'] ?? 0); ?>">
+                              <input aria-label="<?php echo __('Enter number'); ?>" type="number" name="items[<?php echo $i; ?>][stock_transfer_qty]" step="any" min="0" class="form-control text-end stock-transfer-qty-input" placeholder="0" data-item-qty="<?php echo htmlspecialchars($item['pending_qty'] ?? 0); ?>">
                             </td>
                           </tr>
                         <?php $i++;
                         }
                       } else { ?>
                         <tr>
-                          <td colspan="8" class="text-center text-muted py-3">No items found.</td>
+                          <td colspan="8" class="text-center text-muted py-3"><?php echo __('No items found.'); ?></td>
                         </tr>
                       <?php } ?>
                     </tbody>
@@ -220,7 +220,7 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
           <div class="text-start mt-4">
             <input type="hidden" name="action" value="save">
             <button type="submit"  value="save" class="btn btn-primary px-4">
-              <i class="ti ti-save me-2"></i>Submit
+              <i class="ti ti-save me-2"></i><?php echo __('Submit'); ?>
             </button>
           </div>
         </form>
@@ -230,9 +230,9 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="stockTransferHistoryModalLabel">
-                  Stock Transfer History<?php echo $stockRequestDetails['transaction_number'] != '' ? ' - Request: ' . htmlspecialchars($stockRequestDetails['transaction_number']) : ''; ?>
+                  <?php echo __('Stock Transfer History'); ?><?php echo $stockRequestDetails['transaction_number'] != '' ? ' - Request: ' . htmlspecialchars($stockRequestDetails['transaction_number']) : ''; ?>
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
               </div>
               <div class="modal-body p-2">
                 <?php if (!empty($stockTransferHistory)) { ?>
@@ -241,12 +241,12 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
                       <thead class="table-light text-center">
                         <tr>
                           <th scope="col" class="col-width-50">#</th>
-                          <th scope="col" class="text-start">Transfer No</th>
-                          <th scope="col">Date</th>
-                          <th scope="col">Stock Request</th>
-                          <th scope="col">Items</th>
-                          <th scope="col">Total Transfer Qty</th>
-                          <th scope="col">Total Amount</th>
+                          <th scope="col" class="text-start"><?php echo __('Transfer No'); ?></th>
+                          <th scope="col"><?php echo __('Date'); ?></th>
+                          <th scope="col"><?php echo __('Stock Request'); ?></th>
+                          <th scope="col"><?php echo __('Items'); ?></th>
+                          <th scope="col"><?php echo __('Total Transfer Qty'); ?></th>
+                          <th scope="col"><?php echo __('Total Amount'); ?></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -275,13 +275,13 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
                                 <table class="table table-sm table-bordered align-middle mb-0">
                                   <thead class="text-center">
                                     <tr>
-                                      <th scope="col" class="text-start">Item Name</th>
-                                      <th scope="col">SKU</th>
-                                      <th scope="col">UOM</th>
-                                      <th scope="col">Transfer Qty</th>
+                                      <th scope="col" class="text-start"><?php echo __('Item Name'); ?></th>
+                                      <th scope="col"><?php echo __('SKU'); ?></th>
+                                      <th scope="col"><?php echo __('UOM'); ?></th>
+                                      <th scope="col"><?php echo __('Transfer Qty'); ?></th>
 
-                                      <th scope="col">Price</th>
-                                      <th scope="col">Amount</th>
+                                      <th scope="col"><?php echo __('Price'); ?></th>
+                                      <th scope="col"><?php echo __('Amount'); ?></th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -299,7 +299,7 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
                                       <?php }
                                     } else { ?>
                                       <tr>
-                                        <td colspan="6" class="text-center text-muted py-2">No transfer items found.</td>
+                                        <td colspan="6" class="text-center text-muted py-2"><?php echo __('No transfer items found.'); ?></td>
                                       </tr>
                                     <?php } ?>
                                   </tbody>
@@ -315,7 +315,7 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
                 <?php } else { ?>
                   <div class="alert alert-info text-center m-3" role="alert">
                     <i class="fa fa-info-circle me-2"></i>
-                    <span>No stock transfer history found for this stock request.</span>
+                    <span><?php echo __('No stock transfer history found for this stock request.'); ?></span>
                   </div>
                 <?php } ?>
               </div>
@@ -325,7 +325,7 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
       <?php } else { ?>
         <div class="alert alert-info text-center py-4" role="alert">
           <i class="fa fa-info-circle me-2"></i>
-          <span>Select a Stock Request to begin the stock transfer process.</span>
+          <span><?php echo __('Select a Stock Request to begin the stock transfer process.'); ?></span>
         </div>
       <?php } ?>
     </div>

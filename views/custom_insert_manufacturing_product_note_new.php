@@ -94,7 +94,7 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
 <div class="page-body">
   <div class="card shadow-sm border-0">
     <div class="card-header">
-      <h5 class="mb-0">Manufacturing Product Note</h5>
+      <h5 class="mb-0"><?php echo __('Manufacturing Product Note'); ?></h5>
     </div>
 
     <div class="card-body p-4">
@@ -103,9 +103,9 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
         <input type="hidden" name="option" value="COM_INSERT_MANUFACTURING_PRODUCT_NOTE_NEW">
 
         <div class="col-md-6 mb-3 w-full">
-          <span class="fw-semibold">Work Order</span>
-          <select aria-label="Work Order" name="work_order_id" class="js-example-basic-single js-work-order-select" data-auto-submit="1" required>
-            <option value="">Select Work Order</option>
+          <span class="fw-semibold"><?php echo __('Work Order'); ?></span>
+          <select aria-label="<?php echo __('Work Order'); ?>" name="work_order_id" class="js-example-basic-single js-work-order-select" data-auto-submit="1" required>
+            <option value=""><?php echo __('Select Work Order'); ?></option>
             <?php
             if (count((array)$workorders) > 0) {
               foreach ($workorders as $row) {
@@ -130,37 +130,37 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
           <div class="accordion-item mb-3 shadow-sm border-0">
             <h2 class="accordion-header" id="headingDetails">
               <button class="accordion-button collapsed  fw-bold text-primary bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetails" aria-expanded="false" aria-controls="collapseDetails">
-                <i class="bi bi-gear-wide-connected me-2"></i> Work Order Details (<?php echo htmlspecialchars($data['work_order']['transaction_no']); ?>)
+                <i class="bi bi-gear-wide-connected me-2"></i> <?php echo __('Work Order Details ('); ?><?php echo htmlspecialchars($data['work_order']['transaction_no']); ?>)
               </button>
             </h2>
             <div id="collapseDetails" class="accordion-collapse collapse " aria-labelledby="headingDetails">
               <div class="accordion-body">
                 <div class="row mb-3">
                   <div class="col-md-4">
-                    <span class="text-muted fw-semibold d-block">Transaction No</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Transaction No'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars($data['work_order']['transaction_no']); ?></span>
                   </div>
                   <div class="col-md-4">
-                    <span class="text-muted fw-semibold d-block">Item Name</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Item Name'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars($data['work_order']['item_name']); ?></span>
                   </div>
                   <div class="col-md-4">
-                    <span class="text-muted fw-semibold d-block">Planned Quantity</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Planned Quantity'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars(($data['work_order']['work_order_item_qty'])); ?></span>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <div class="col-md-4">
-                    <span class="text-muted fw-semibold d-block">Completed Quantity</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Completed Quantity'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars(($data['work_order']['completed_qty'])); ?></span>
                   </div>
                   <div class="col-md-4">
-                    <span class="text-muted fw-semibold d-block">Planned Start Date</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Planned Start Date'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars(fromDate($data['work_order']['planned_start_date'])); ?></span>
                   </div>
                   <div class="col-md-4">
-                    <span class="text-muted fw-semibold d-block">Planned End Date</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Planned End Date'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars(fromDate($data['work_order']['planned_end_date'])); ?></span>
                   </div>
                 </div>
@@ -173,7 +173,7 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
           <div class="accordion-item shadow-sm border-0">
             <h2 class="accordion-header" id="headingItems">
               <button class="accordion-button collapsed fw-bold text-primary bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseItems" aria-expanded="false" aria-controls="collapseItems">
-                <i class="bi bi-box-seam me-2"></i> Work Order Items (<?php echo count($data['work_order_items']); ?>)
+                <i class="bi bi-box-seam me-2"></i> <?php echo __('Work Order Items ('); ?><?php echo count($data['work_order_items']); ?>)
               </button>
             </h2>
             <div id="collapseItems" class="accordion-collapse collapse" aria-labelledby="headingItems">
@@ -183,11 +183,11 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
                     <thead class="table-light text-center">
                       <tr>
                         <th scope="col" class="col-width-50">#</th>
-                        <th scope="col" class='text-start'>Item Name</th>
-                        <th scope="col">UOM</th>
-                        <th scope="col">Work Order Qty</th>
-                        <th scope="col">Stock Request Qty</th>
-                        <th scope="col">Stok Issued Qty</th>
+                        <th scope="col" class='text-start'><?php echo __('Item Name'); ?></th>
+                        <th scope="col"><?php echo __('UOM'); ?></th>
+                        <th scope="col"><?php echo __('Work Order Qty'); ?></th>
+                        <th scope="col"><?php echo __('Stock Request Qty'); ?></th>
+                        <th scope="col"><?php echo __('Stok Issued Qty'); ?></th>
 
                       </tr>
                     </thead>
@@ -207,7 +207,7 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
                         }
                       } else { ?>
                         <tr>
-                          <td colspan="6" class="text-center text-muted py-3">No items found.</td>
+                          <td colspan="6" class="text-center text-muted py-3"><?php echo __('No items found.'); ?></td>
                         </tr>
                       <?php } ?>
                     </tbody>
@@ -223,7 +223,7 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
               <button class="accordion-button collapsed fw-bold text-primary bg-light" type="button"
                 data-bs-toggle="collapse" data-bs-target="#collapseOperations"
                 aria-expanded="false" aria-controls="collapseOperations">
-                <i class="bi bi-hammer me-2"></i> Work Order Operations (<?php echo count($data['work_order_operations'] ?? []); ?>)
+                <i class="bi bi-hammer me-2"></i> <?php echo __('Work Order Operations ('); ?><?php echo count($data['work_order_operations'] ?? []); ?>)
               </button>
             </h2>
 
@@ -234,10 +234,10 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
                     <thead class="table-light text-center">
                       <tr>
                         <th scope="col" class="col-width-50">#</th>
-                        <th scope="col" class="text-start">Operation Name</th>
-                        <th scope="col">Time (mins)</th>
-                        <th scope="col">Manpower</th>
-                        <th scope="col" class="text-start">Notes</th>
+                        <th scope="col" class="text-start"><?php echo __('Operation Name'); ?></th>
+                        <th scope="col"><?php echo __('Time (mins)'); ?></th>
+                        <th scope="col"><?php echo __('Manpower'); ?></th>
+                        <th scope="col" class="text-start"><?php echo __('Notes'); ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -258,7 +258,7 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
                         }
                       } else { ?>
                         <tr>
-                          <td colspan="5" class="text-center text-muted py-3">No operations found.</td>
+                          <td colspan="5" class="text-center text-muted py-3"><?php echo __('No operations found.'); ?></td>
                         </tr>
                       <?php } ?>
                     </tbody>
@@ -274,7 +274,7 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
       <div class="card border-0 shadow-sm mt-4">
         <div class="card-header bg-light d-flex justify-content-between align-items-center">
           <h6 class="fw-bold text-primary mb-0">
-            <i class="bi bi-clipboard2-check me-2"></i> Manufacturing Product Note
+            <i class="bi bi-clipboard2-check me-2"></i> <?php echo __('Manufacturing Product Note'); ?>
           </h6>
 
 
@@ -319,8 +319,8 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
             <div class="alert alert-info small mb-4 d-flex align-items-center" role="alert">
               <i class="bi bi-info-circle me-2 fs-5 text-primary"></i>
               <span>
-                Click <strong>Start</strong> to begin logging production progress.
-                Logs can only be entered or modified while the work order is <strong>in progress</strong>.
+                <?php echo __('Click'); ?> <strong><?php echo __('Start'); ?></strong> <?php echo __('to begin logging production progress.
+                Logs can only be entered or modified while the work order is'); ?> <strong><?php echo __('in progress'); ?></strong>.
               </span>
             </div>
           <?php } ?>
@@ -334,10 +334,10 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
                     <thead class="table-light text-center">
                       <tr>
                         <th scope="col" class="col-width-50">#</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Remarks</th>
-                        <th scope="col" class="col-width-50">Action</th>
+                        <th scope="col"><?php echo __('Date'); ?></th>
+                        <th scope="col"><?php echo __('Quantity'); ?></th>
+                        <th scope="col"><?php echo __('Remarks'); ?></th>
+                        <th scope="col" class="col-width-50"><?php echo __('Action'); ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -350,16 +350,16 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
                             <td><?php echo $i; ?></td>
                             <td>
                               <input type="hidden" name="logs[<?php echo $i; ?>][id]" value="<?php echo htmlspecialchars($log['id']); ?>">
-                              <input aria-label="Select date" type="date" name="logs[<?php echo $i; ?>][log_date]" class="form-control"
+                              <input aria-label="<?php echo __('Select date'); ?>" type="date" name="logs[<?php echo $i; ?>][log_date]" class="form-control"
                                 value="<?php echo htmlspecialchars($log['log_date']); ?>" required>
                             </td>
                             <td>
-                              <input aria-label="Enter number" type="number" name="logs[<?php echo $i; ?>][log_qty]"
+                              <input aria-label="<?php echo __('Enter number'); ?>" type="number" name="logs[<?php echo $i; ?>][log_qty]"
                                 class="form-control text-end" step="any" min="0"
                                 value="<?php echo htmlspecialchars($log['log_qty']); ?>" required>
                             </td>
                             <td>
-                              <textarea aria-label="Text area" name="logs[<?php echo $i; ?>][remarks]" class="form-control" placeholder="Enter remarks..."><?php echo htmlspecialchars($log['remarks']); ?></textarea>
+                              <textarea aria-label="<?php echo __('Text area'); ?>" name="logs[<?php echo $i; ?>][remarks]" class="form-control" placeholder="<?php echo __('Enter remarks...'); ?>"><?php echo htmlspecialchars($log['remarks']); ?></textarea>
                             </td>
                             <td class="text-center">
                               <button type="button" class="btn btn-outline-danger btn-sm remove-row">
@@ -374,13 +374,13 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
                         <tr class="text-center">
                           <td>1</td>
                           <td>
-                            <input aria-label="Logs[1][log Date]" type="date" name="logs[1][log_date]" class="form-control" required>
+                            <input aria-label="<?php echo __('Logs[1][log Date]'); ?>" type="date" name="logs[1][log_date]" class="form-control" required>
                           </td>
                           <td>
-                            <input aria-label="Logs[1][log Qty]" type="number" name="logs[1][log_qty]" class="form-control text-end" step="any" min="0" required>
+                            <input aria-label="<?php echo __('Logs[1][log Qty]'); ?>" type="number" name="logs[1][log_qty]" class="form-control text-end" step="any" min="0" required>
                           </td>
                           <td>
-                            <textarea aria-label="Enter remarks..." name="logs[1][remarks]" class="form-control" placeholder="Enter remarks..."></textarea>
+                            <textarea aria-label="<?php echo __('Enter remarks...'); ?>" name="logs[1][remarks]" class="form-control" placeholder="<?php echo __('Enter remarks...'); ?>"></textarea>
                           </td>
                           <td class="text-center">
                             <button type="button" class="btn btn-outline-danger btn-sm remove-row">
@@ -397,15 +397,15 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
                 <?php
                 $isEditable = ($status != '' && $status == 0);
                 $disabled = $isEditable ? '' : 'disabled';
-                $tooltip = $isEditable ? '' : 'data-bs-toggle="tooltip" title="Logs editable only when work order is started"';
+                $tooltip = $isEditable ? '' : 'data-bs-toggle="tooltip" title="' . htmlspecialchars(__('Logs editable only when work order is started'), ENT_QUOTES) . '"';
                 ?>
 
                 <div class="d-flex justify-content-between mt-3">
                   <input type="hidden" name="save" value="save_logs">
                   <button type="submit" class="btn btn-primary px-4" <?php echo $disabled . ' ' . $tooltip; ?>>
-                    <i class="ti ti-save me-1"></i>Submit
+                    <i class="ti ti-save me-1"></i><?php echo __('Submit'); ?>
                   </button>
-                  <button type="button" id="addRow" class="btn btn-outline-primary btn-sm" <?php echo $disabled . ' ' . $tooltip; ?>><i class="ti ti-plus-circle me-1"></i> Add More
+                  <button type="button" id="addRow" class="btn btn-outline-primary btn-sm" <?php echo $disabled . ' ' . $tooltip; ?>><i class="ti ti-plus-circle me-1"></i> <?php echo __('Add More'); ?>
                   </button>
 
                 </div>

@@ -63,14 +63,14 @@ function updateApplicationTickets(rid,status){
 	<table class="table table-striped table-bordered nowrap" style="font-size:13px;" id="basic-btn-non">
 		<thead>
 			<tr>
-				<th scope="col">User</th>
-				<th scope="col">Ticket No.</th>
-				<th scope="col">Issue</th>
-				<th scope="col">Request</th>
-				<th scope="col">File</th>
+				<th scope="col"><?= __('User') ?></th>
+				<th scope="col"><?= __('Ticket No.') ?></th>
+				<th scope="col"><?= __('Issue') ?></th>
+				<th scope="col"><?= __('Request') ?></th>
+				<th scope="col"><?= __('File') ?></th>
 				<!-- <th scope="col">Response</th> -->
 				<!-- <th scope="col">Completion</th> -->
-				<th scope="col">Status</th>
+				<th scope="col"><?= __('Status') ?></th>
 				<!-- <th scope="col"></th> -->
 			</tr>
 		</thead>
@@ -118,7 +118,7 @@ function updateApplicationTickets(rid,status){
 <?php } ?>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" >Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" ><?= __('Close') ?></button>
 </div>
 <?php }elseif($_POST['page_type'] == "LT"){ ?>
 <div class="modal-header  ">
@@ -130,13 +130,13 @@ function updateApplicationTickets(rid,status){
 	<table class="table table-striped table-bordered nowrap" style="font-size:13px;" id="basic-btn-non">
 		<thead>
 			<tr>
-				<th scope="col">Ticket No.</th>
-				<th scope="col">Issue</th>
-				<th scope="col">Request</th>
-				<th scope="col">File</th>
+				<th scope="col"><?= __('Ticket No.') ?></th>
+				<th scope="col"><?= __('Issue') ?></th>
+				<th scope="col"><?= __('Request') ?></th>
+				<th scope="col"><?= __('File') ?></th>
 				<!-- <th scope="col">Response</th> -->
 				<!-- <th scope="col">Completion</th> -->
-				<th scope="col">Status</th>
+				<th scope="col"><?= __('Status') ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -170,7 +170,7 @@ function updateApplicationTickets(rid,status){
 <?php } ?>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" >Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" ><?= __('Close') ?></button>
 </div>
 <?php }else{ ?>
 <div class="modal-header  ">
@@ -181,34 +181,34 @@ function updateApplicationTickets(rid,status){
 	<form id="applicationtickets_form">
 		<div class="row">
 			<div class="col-lg-12">
-				<label class="form-label col-form-label">Issue Name <span class="requried">*</span></label>
+				<label class="form-label col-form-label"><?= __('Issue Name') ?> <span class="requried">*</span></label>
 				<span class="d-block error-message text-danger"></span>
 				<input type="text" class="form-control requried_field" name="issue_name" aria-label="Issue Name">
 			</div>
 			<div class="col-lg-12">
-				<label class="form-label col-form-label">Issue Description <span class="requried">*</span></label>
+				<label class="form-label col-form-label"><?= __('Issue Description') ?> <span class="requried">*</span></label>
 				<span class="d-block error-message text-danger"></span>
 				<textarea class="form-control requried_field" name="issue_description" aria-label="Issue Description"></textarea>
 			</div>
 			<div class="col-lg-6 w-full">
-				<label class="form-label col-form-label">Priority <span class="requried">*</span></label>
+				<label class="form-label col-form-label"><?= __('Priority') ?> <span class="requried">*</span></label>
 				<span class="d-block error-message text-danger"></span>
 				<select class="form-control form-select js-example-basic-single requried_field" name="priority" aria-label="Priority">
 					<?php foreach($priority as $priok=>$priov){ ?>
-	                    <option value="<?php echo $priok; ?>" ><?php echo $priov; ?></option>
+	                    <option value="<?php echo $priok; ?>" ><?php echo htmlspecialchars(__($priov)); ?></option>
 	                <?php } ?>
 	            </select>
 			</div>
 			<div class="col-lg-6">
-		        <label for="popattickettachment" class="form-label col-form-label d-block">Attache File</label>
+		        <label for="popattickettachment" class="form-label col-form-label d-block"><?= __('Attache File') ?></label>
 		        <input type="file" class="form-control" id="popattickettachment" aria-label="Input">
 		    </div>
 		</div>
 	</form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" >Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light" id="insertemployeedetails_btn" onclick="insertApplicationTickets()">Submit</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" ><?= __('Close') ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light" id="insertemployeedetails_btn" onclick="insertApplicationTickets()"><?= __('Submit') ?></button>
 </div>
 <?php } ?>
 <?php if($_POST['page_type'] == "PT" OR $_POST['page_type'] == "LT"){ ?>

@@ -27,7 +27,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Dashborads</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center"><?php echo __('Dashborads'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -47,7 +47,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Self Service</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?php echo __('Self Service'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -67,7 +67,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Payroll</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?php echo __('Payroll'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -89,7 +89,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Recruitment</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?php echo __('Recruitment'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -109,7 +109,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Leave Management </span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?php echo __('Leave Management'); ?> </span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -129,7 +129,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Performance Management</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?php echo __('Performance Management'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -153,7 +153,7 @@
             <div class="card card-custom gutter-b draggable" role="region" style="">
                 <div class="card-header">
                     <div class="card-title">
-                        <h3 class="card-label">Announcements</h3>
+                        <h3 class="card-label"><?php echo __('Announcements'); ?></h3>
                     </div>
                     <div class="card-toolbar">
                         <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary draggable-handle">
@@ -165,10 +165,10 @@
                     <div class="card card-custom card-stretch gutter-b">
                         <div class="card-body d-flex p-0">
                             <div class="flex-grow-1 bg-danger p-8 card-rounded flex-grow-1 bgi-no-repeat" style="background-position: calc(100% + 0.5rem) bottom; background-size: auto 70%; background-image: url(../../demo7/dist/assets/media/svg/humans/custom-3.svg)">
-                                <h4 class="text-inverse-danger mt-2 font-weight-bolder">User Confidence</h4>
-                                <p class="text-inverse-danger my-6">Boost marketing &amp; sales
-                                <br>through product confidence.</p>
-                                <button type="button" class="btn btn-warning font-weight-bold py-2 px-6">Learn</button>
+                                <h4 class="text-inverse-danger mt-2 font-weight-bolder"><?php echo __('User Confidence'); ?></h4>
+                                <p class="text-inverse-danger my-6"><?php echo __('Boost marketing &amp; sales'); ?>
+                                <br><?php echo __('through product confidence.'); ?></p>
+                                <button type="button" class="btn btn-warning font-weight-bold py-2 px-6"><?php echo __('Learn'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -191,8 +191,8 @@
                                                     <!--end::Symbol-->
                                                     <!--begin::Info-->
                                                     <div class="d-flex flex-column flex-grow-1">
-                                                        <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Ruby Liam</a>
-                                                        <span class="text-muted font-weight-bold">Yestarday at 5:06 PM</span>
+                                                        <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"><?php echo __('Ruby Liam'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Yestarday at 5:06 PM'); ?></span>
                                                     </div>
                                                     <div class="card-toolbar">
                                                         <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary draggable-handle" data-placement="left">
@@ -207,7 +207,7 @@
                                                     <div class="bgi-no-repeat bgi-size-cover rounded min-h-265px" style="background-image: url(assets/media/stock-900x600/3.jpg)"></div>
                                                     <!--end::Image-->
                                                     <!--begin::Text-->
-                                                    <p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2">Outlines keep you honest. They stop you from indulging in poorly thought-out metaphors about driving and keep you focused on the overall structure of your post</p>
+                                                    <p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2"><?php echo __('Outlines keep you honest. They stop you from indulging in poorly thought-out metaphors about driving and keep you focused on the overall structure of your post'); ?></p>
                                                     <!--end::Text-->
                                                     <!--begin::Action-->
                                                     <div class="d-flex align-items-center">
@@ -243,7 +243,7 @@
                                                 <!--end::Separator-->
                                                 <!--begin::Editor-->
                                                 <form class="position-relative">
-                                                    <textarea aria-label="Reply..." id="kt_forms_widget_4_input" class="form-control border-0 p-0 pr-10 resize-none" rows="1" placeholder="Reply..."></textarea>
+                                                    <textarea aria-label="<?php echo __('Reply...'); ?>" id="kt_forms_widget_4_input" class="form-control border-0 p-0 pr-10 resize-none" rows="1" placeholder="<?php echo __('Reply...'); ?>"></textarea>
                                                     <div class="position-absolute top-0 right-0 mt-n1 mr-n2">
                                                         <span class="btn btn-icon btn-sm btn-hover-icon-primary">
                                                             <i class="flaticon2-clip-symbol icon-ms"></i>
@@ -262,7 +262,7 @@
                             <div class="card card-custom gutter-b draggable" role="region" style="">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <h3 class="card-label">Attendance Summary</h3>
+                                        <h3 class="card-label"><?php echo __('Attendance Summary'); ?></h3>
                                     </div>
                                     <div class="card-toolbar">
                                         <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary draggable-handle">
@@ -277,13 +277,13 @@
                                              <div class="row">
                                                 <div class="col-md-6 col-6 text-center">
                                                    <div class="stats-box mb-4">
-                                                      <p>Total Employees</p>
+                                                      <p><?php echo __('Total Employees'); ?></p>
                                                       <h3>385</h3>
                                                    </div>
                                                 </div>
                                                 <div class="col-md-6 col-6 text-center">
                                                    <div class="stats-box mb-4">
-                                                      <p>Present</p>
+                                                      <p><?php echo __('Present'); ?></p>
                                                       <h3>19</h3>
                                                    </div>
                                                 </div>
@@ -297,15 +297,15 @@
                                              <div class="progress-bar bg-info" role="progressbar" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">10%</div>
                                           </div>
                                           <div>
-                                             <p><i class="far fa-dot-circle text-purple mr-2"></i>Users have checked in<span class="float-right">166</span></p>
-                                             <p><i class="far fa-dot-circle text-warning mr-2"></i>Users are currently inside office <span class="float-right">115</span></p>
-                                             <p><i class="far fa-dot-circle text-success mr-2"></i>Users are yet to check in <span class="float-right">31</span></p>
-                                             <p><i class="far fa-dot-circle text-danger mr-2"></i>Users are on paid leave <span class="float-right">47</span></p>
-                                             <p class=""><i class="far fa-dot-circle text-info mr-2"></i>Users are on weekend today <span class="float-right">5</span></p>
-                                             <p class=""><i class="far fa-dot-circle text-purple mr-2"></i>Users are on unpaid leave <span class="float-right">5</span></p>
-                                             <p class=""><i class="far fa-dot-circle text-warning mr-2"></i>Users are on Holiday today <span class="float-right">5</span></p>
-                                             <p class=""><i class="far fa-dot-circle text-success mr-2"></i>Users are on onduty today <span class="float-right">5</span></p>
-                                             <p class="mb-0"><i class="far fa-dot-circle text-info mr-2"></i>Users are on work from home today <span class="float-right">5</span></p>
+                                             <p><i class="far fa-dot-circle text-purple mr-2"></i><?php echo __('Users have checked in'); ?><span class="float-right">166</span></p>
+                                             <p><i class="far fa-dot-circle text-warning mr-2"></i><?php echo __('Users are currently inside office'); ?> <span class="float-right">115</span></p>
+                                             <p><i class="far fa-dot-circle text-success mr-2"></i><?php echo __('Users are yet to check in'); ?> <span class="float-right">31</span></p>
+                                             <p><i class="far fa-dot-circle text-danger mr-2"></i><?php echo __('Users are on paid leave'); ?> <span class="float-right">47</span></p>
+                                             <p class=""><i class="far fa-dot-circle text-info mr-2"></i><?php echo __('Users are on weekend today'); ?> <span class="float-right">5</span></p>
+                                             <p class=""><i class="far fa-dot-circle text-purple mr-2"></i><?php echo __('Users are on unpaid leave'); ?> <span class="float-right">5</span></p>
+                                             <p class=""><i class="far fa-dot-circle text-warning mr-2"></i><?php echo __('Users are on Holiday today'); ?> <span class="float-right">5</span></p>
+                                             <p class=""><i class="far fa-dot-circle text-success mr-2"></i><?php echo __('Users are on onduty today'); ?> <span class="float-right">5</span></p>
+                                             <p class="mb-0"><i class="far fa-dot-circle text-info mr-2"></i><?php echo __('Users are on work from home today'); ?> <span class="float-right">5</span></p>
                                           </div>
                                        </div>
                                     </div>
@@ -326,11 +326,11 @@
     </div>
 </div>
 </div>
-     <div class="tab-pane fade" id="tab_forms_widget_2" role="tabpanel" aria-labelledby="tab_forms_widget_2">Tab tab_forms_widget_2 2</div>
-     <div class="tab-pane fade" id="tab_forms_widget_3" role="tabpanel" aria-labelledby="tab_forms_widget_3">Tab tab_forms_widget_3 2</div>
-     <div class="tab-pane fade" id="tab_forms_widget_4" role="tabpanel" aria-labelledby="tab_forms_widget_4">Tab tab_forms_widget_4 2</div>
-     <div class="tab-pane fade" id="tab_forms_widget_5" role="tabpanel" aria-labelledby="tab_forms_widget_5">Tab tab_forms_widget_5 2</div>
-     <div class="tab-pane fade" id="tab_forms_widget_6" role="tabpanel" aria-labelledby="tab_forms_widget_6">Tab forms_widget_tab_6 2</div>
+     <div class="tab-pane fade" id="tab_forms_widget_2" role="tabpanel" aria-labelledby="tab_forms_widget_2"><?php echo __('Tab tab_forms_widget_2 2'); ?></div>
+     <div class="tab-pane fade" id="tab_forms_widget_3" role="tabpanel" aria-labelledby="tab_forms_widget_3"><?php echo __('Tab tab_forms_widget_3 2'); ?></div>
+     <div class="tab-pane fade" id="tab_forms_widget_4" role="tabpanel" aria-labelledby="tab_forms_widget_4"><?php echo __('Tab tab_forms_widget_4 2'); ?></div>
+     <div class="tab-pane fade" id="tab_forms_widget_5" role="tabpanel" aria-labelledby="tab_forms_widget_5"><?php echo __('Tab tab_forms_widget_5 2'); ?></div>
+     <div class="tab-pane fade" id="tab_forms_widget_6" role="tabpanel" aria-labelledby="tab_forms_widget_6"><?php echo __('Tab forms_widget_tab_6 2'); ?></div>
 </div>
 
                             </div>

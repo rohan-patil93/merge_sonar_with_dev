@@ -566,8 +566,8 @@ return month_amount;
        var htmlRows = '';
        var note = "'"+data.note+"'";
        htmlRows += '<tr id="'+id+'">';
-       htmlRows += '<td><div class="form-group col-lg-11" ><input aria-label="Name[]" type="text" class="form-control itemRow f-w-800" readonly value="'+data.name+' ('+data.code+')" name="name[]"><input type="hidden" class="form-control " readonly value="'+data.id+'" id="id_'+count+'"  name="id[]"></div></td>';
-       htmlRows += '<td><div class="form-group col-lg-11">  <div class="input-group input-group-button"> <input aria-label="Calucation[]" type="text" onblur="monthlytoyearlycat(this.value,'+count+')" '+reead+' class="form-control text-right width1" value="'+data.calculation_number+'" id="change_val_'+count+'" name="calucation[]" /> <button class="btn btn-primary w-100PX" type="button">'+codedetail+'</button> </td>';
+       htmlRows += '<td><div class="form-group col-lg-11" ><input aria-label="<?php echo __('Name[]'); ?>" type="text" class="form-control itemRow f-w-800" readonly value="'+data.name+' ('+data.code+')" name="name[]"><input type="hidden" class="form-control " readonly value="'+data.id+'" id="id_'+count+'"  name="id[]"></div></td>';
+       htmlRows += '<td><div class="form-group col-lg-11">  <div class="input-group input-group-button"> <input aria-label="<?php echo __('Calucation[]'); ?>" type="text" onblur="monthlytoyearlycat(this.value,'+count+')" '+reead+' class="form-control text-right width1" value="'+data.calculation_number+'" id="change_val_'+count+'" name="calucation[]" /> <button class="btn btn-primary w-100PX" type="button">'+codedetail+'</button> </td>';
        htmlRows += '<td><div class="form-group col-lg-11"><input aria-label="0.00" type="text" class="form-control text-right"  placeholder="0.00" name="monthly_amount[]" readonly id="m_amount_'+count+'"  value ="'+month_amount+'"  ></div> <input type="hidden" name="cat_type[]" value="'+data.calculation_type+'" id="cat_type_'+count+'">  <input type="hidden" name="cat_calculation_category[]" value="'+data.calculation_category+'" id="cat_calculation_category_'+count+'"> <input type="hidden" name="cat_code[]" value="'+data.code+'" id="cat_code_'+count+'">     <input type="hidden" name="cat_cat[]" value="'+data.category_id+'" id="cat_cat_'+count+'"> <input type="hidden" name="cat_num[]" value="'+data.calculation_number+'" id="cat_num_'+count+'"></td>';
        htmlRows += '<td><div class="form-group col-lg-11"><div class="input-group"> <input type="hidden" name="'+data.code+'" value="'+month_amount+'" id="'+data.code+'"><input aria-label="0.00" type="text" readonly id="y_amount_'+count+'" name="yearly_amount[]"  value ="'+gettotalamt+'" class="form-control text-right width1" placeholder="0.00"><button type="button" class="mt-6" onclick="dynamicinformationopup('+encodeURI(note)+')">&nbsp;<i class="fa fa-info-circle f-14"></i> </button></div> </div></td>';
        htmlRows += '</tr>';
@@ -658,8 +658,8 @@ return month_amount;
                             <div class="row col-lg-12 p-3">
                                 <div class="page-header card" style="margin: 0px; color: black;">
                                     <div class="d-inline">
-                                        <h5>Build Your Template</h5>
-                                        <span class="sub-title">Include active salary components</span>
+                                        <h5><?php echo __('Build Your Template'); ?></h5>
+                                        <span class="sub-title"><?php echo __('Include active salary components'); ?></span>
                                     </div>
                                 </div>
                                 <div class="card-block accordion-block color-accordion-block mt-2" style="padding: 2px;">
@@ -678,9 +678,9 @@ return month_amount;
                                                         <label class="form-label ">
                                                             <input type="hidden" name="addsaldata" id="<?php echo $addsaldata."_detail"; ?>" value='<?php echo json_encode($value); ?>' >
                                                             <input type="hidden" id="<?php echo $addsaldata."check"; ?>" value="<?php echo in_array($addsaldata, (array)$checkdata) ? 1 : 0 ; ?>">
-                                                            <input aria-label="Checkbox" type="checkbox"   <?php if(in_array($addsaldata, (array)$checkdata)){ echo "checked ";
+                                                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"   <?php if(in_array($addsaldata, (array)$checkdata)){ echo __('checked ');
 } ?>
- <?php if(in_array($addsaldata, (array)$mandatroy)){ echo "disabled";
+ <?php if(in_array($addsaldata, (array)$mandatroy)){ echo __('disabled');
 } ?>   name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)" onkeydown="">
                                                             <span class="cr">
                                                               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -704,17 +704,17 @@ return month_amount;
                                 <div class="card card-custom gutter-b">
                                     <div class="page-header card p-3" style="margin: 0px; color: black;">
                                         <div class="d-inline">
-                                            <h5>Salary</h5>
-                                            <span>Define salary for employee</span>
+                                            <h5><?php echo __('Salary'); ?></h5>
+                                            <span><?php echo __('Define salary for employee'); ?></span>
                                             <div class="float-right">
                                                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                                                    <i class="icofont icofont-reply"></i> Back
+                                                    <i class="icofont icofont-reply"></i> <?php echo __('Back'); ?>
                                                 </a>
                                                 <?php if($_GET['Rid']!=""){
                                                     $nid = $nid = "id:".$salarydata['employee_id'];
                                                 ?>
                                                     <a href="index.php?option=COM_VIEW_SALARY_STRUCTURE&SEid=<?php echo deocdeId($nid); ?>" target="_blank" class="btn btn-primary">
-                                                       View CTC
+                                                       <?php echo __('View CTC'); ?>
                                                    </a>
                                                <?php } ?>
                                            </div>
@@ -724,11 +724,11 @@ return month_amount;
                                     <div class="form-group row">
                                         <?php if($_GET['SCid']=="" && $cand_detaail['id'] ==""){ ?>
                                             <div class="form-group col-lg-4">
-                                                <span class="form-label">Employee </span>
-                                                <select aria-label="Employee" class="form-select js-example-basic-single" id="kt_select2_41" name='employee_id'>
-                                                    <option> Select Any One</option>
+                                                <span class="form-label"><?php echo __('Employee'); ?> </span>
+                                                <select aria-label="<?php echo __('Employee'); ?>" class="form-select js-example-basic-single" id="kt_select2_41" name='employee_id'>
+                                                    <option> <?php echo __('Select Any One'); ?></option>
                                                     <?php foreach ($employees as $employe) { ?>
-                                                       <option <?php if( $sal_emp_id == $employe['id'] ){ echo "selected";
+                                                       <option <?php if( $sal_emp_id == $employe['id'] ){ echo __('selected');
 } ?> value="<?php echo $employe['id'] ?>"> <?php echo $employe['emp_code']." - ".$employe['display_name'] ?></option>
                                                    <?php } ?>
                                                </select>
@@ -740,43 +740,43 @@ return month_amount;
                                         $stylecss = 'style="display:none"';
                                         ?>
                                         <div class="form-group col-lg-4">
-                                            <span class="form-label d-block">Name</span>
+                                            <span class="form-label d-block"><?php echo __('Name'); ?></span>
                                             <span><?php echo $cand_detaail['display_name'];?></span>
                                             <input type="hidden" name="candidate_id" value="<?php echo $cand_detaail['id']; ?>">
                                         </div>
                                         <div class="form-group  col-lg-4">
-                                            <span class="form-label">Joining Date<span class="text-danger">*</span></span>
+                                            <span class="form-label"><?php echo __('Joining Date'); ?><span class="text-danger">*</span></span>
                                             <span class="d-block error-message text-danger"></span>
-                                               <input aria-label="Input field" type="text" class="form-control datepicker"  value="<?php echo $reporting_date; ?>"  name="reporting_date"  id="kt_datepicker_4_1" />
+                                               <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control datepicker"  value="<?php echo $reporting_date; ?>"  name="reporting_date"  id="kt_datepicker_4_1" />
                                         </div>
                                         <div class="form-group  col-lg-4" >
-                                            <span class="form-label">LoI validity<span class="text-danger">*</span></span>
+                                            <span class="form-label"><?php echo __('LoI validity'); ?><span class="text-danger">*</span></span>
                                             <span class="d-block error-message text-danger"></span>
-                                            <input aria-label="Input field" type="text" class="form-control datepicker"  value="<?php echo $offer_validity; ?>"  name="offer_validity"  id="kt_datepicker_4_2" />
+                                            <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control datepicker"  value="<?php echo $offer_validity; ?>"  name="offer_validity"  id="kt_datepicker_4_2" />
                                         </div>
 
                                     <div class="form-group  col-lg-4">
-                                        <span class="form-label">Description</span>
-                                        <textarea aria-label="Kt Autosize 2" class="form-control" id="kt_autosize_2" ><?php echo $salarydata['description']; ?></textarea>
+                                        <span class="form-label"><?php echo __('Description'); ?></span>
+                                        <textarea aria-label="<?php echo __('Kt Autosize 2'); ?>" class="form-control" id="kt_autosize_2" ><?php echo $salarydata['description']; ?></textarea>
                                     </div>
                                     <div class="form-group  col-lg-4">
-                                        <span class="form-label">Notes</span>
-                                        <textarea aria-label="Max 500 characters" class="form-control" id="kt_autosize_2_2" name="note" placeholder="Max 500 characters" ><?php echo $salarydata['note']; ?></textarea>
+                                        <span class="form-label"><?php echo __('Notes'); ?></span>
+                                        <textarea aria-label="<?php echo __('Max 500 characters'); ?>" class="form-control" id="kt_autosize_2_2" name="note" placeholder="<?php echo __('Max 500 characters'); ?>" ><?php echo $salarydata['note']; ?></textarea>
                                     </div>
 
                                     <div class="form-group  col-lg-4 " <?php echo $stylecss; ?>>
-                                        <span class="form-label">Effective Date </span>
-                                        <input aria-label="Affected Date" class="form-control datepicker" type="text" name="affected_date" value="<?php echo fromDate($salarydata['affected_date']); ?>">
+                                        <span class="form-label"><?php echo __('Effective Date'); ?> </span>
+                                        <input aria-label="<?php echo __('Affected Date'); ?>" class="form-control datepicker" type="text" name="affected_date" value="<?php echo fromDate($salarydata['affected_date']); ?>">
                                     </div>
 
                                     <div class="form-group  col-lg-4">
                                         <span class="form-label">
-                                           Joining Bonus Applicable
+                                           <?php echo __('Joining Bonus Applicable'); ?>
                                          </span>
                                         <div>
                                              <button type="button" onclick="changejoiningboun()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" class="btn p-0 border-0 bg-transparent">
                                             <?php $is_joining_bouns = $salarydata['joining_bonus_applicable']!=""?$salarydata['joining_bonus_applicable']: 1; ?>
-                                            <input aria-label="Checkbox" type="checkbox"  class="js-switch" value="<?php echo $sen; ?>"  name="is_joining_bonus" <?php if($is_joining_bouns== 0 ){ ?> checked <?php
+                                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  class="js-switch" value="<?php echo $sen; ?>"  name="is_joining_bonus" <?php if($is_joining_bouns== 0 ){ ?> checked <?php
 } ?>  />
                                              <input type="hidden"   value="<?php echo $is_joining_bouns; ?>"  name="joining_bonus_applicable" id="is_joining_bouns_val"  />
                                              </button>
@@ -786,10 +786,10 @@ return month_amount;
                                     <div class="form-group  col-lg-4" id="joining_bouns_text" <?php if($is_joining_bouns ==1){ ?> style="display:none; "; <?php
 } ?>>
                                         <span class="form-label">
-                                           Please Enter Joining Bonus
+                                           <?php echo __('Please Enter Joining Bonus'); ?>
                                          </span>
                                         <div>
-                                            <input aria-label="Joining Bonus Amount" class="form-control text-right" id="joining_bouns" type="text" name="joining_bonus_amount" value="<?php echo $salarydata['joining_bonus_amount']!=""? $salarydata['joining_bonus_amount']: '0.00'; ?>">
+                                            <input aria-label="<?php echo __('Joining Bonus Amount'); ?>" class="form-control text-right" id="joining_bouns" type="text" name="joining_bonus_amount" value="<?php echo $salarydata['joining_bonus_amount']!=""? $salarydata['joining_bonus_amount']: '0.00'; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group  col-lg-4" id="empty_text" <?php if($is_joining_bouns ==0){ ?> style="display:none; "; <?php
@@ -798,21 +798,21 @@ return month_amount;
 
                                     <div class="form-group  col-lg-4 ">
                                         <span class="form-label">
-                                           Please Enter Annual CTC
+                                           <?php echo __('Please Enter Annual CTC'); ?>
                                          </span>
                                         <div>
-                                            <input aria-label="Ctc Val" class="form-control text-right" id="ctc_yearly" type="text" name="ctc_val" value="<?php echo $salarydata['ctc_yearly']!=""? $salarydata['ctc_yearly']: '0.00'; ?>" onblur="changeyearctcwork(this.value)" >
+                                            <input aria-label="<?php echo __('Ctc Val'); ?>" class="form-control text-right" id="ctc_yearly" type="text" name="ctc_val" value="<?php echo $salarydata['ctc_yearly']!=""? $salarydata['ctc_yearly']: '0.00'; ?>" onblur="changeyearctcwork(this.value)" >
                                         </div>
                                     </div>
 
                                     <div class="form-group  col-lg-2 ">
                                         <span class="form-label">
-                                           Variable Pay With CTC
+                                           <?php echo __('Variable Pay With CTC'); ?>
                                          </span>
                                         <div>
                                              <button type="button" onclick="changeyearctcwork('S')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" class="btn p-0 border-0 bg-transparent">
                                             <?php $vp_with_ctc = $salarydata['vp_with_ctc']!=""?$salarydata['vp_with_ctc']: 0; ?>
-                                            <input aria-label="Checkbox" type="checkbox"  class="js-switch" value="<?php echo $sen; ?>"  name="vp_with_ctc" <?php if($vp_with_ctc== 0 ){ ?> checked <?php
+                                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  class="js-switch" value="<?php echo $sen; ?>"  name="vp_with_ctc" <?php if($vp_with_ctc== 0 ){ ?> checked <?php
 } ?>  />
                                              <input type="hidden"   value="<?php echo $vp_with_ctc; ?>"  name="vp_with_ctc_val" id="vp_with_ctc_val"  />
                                              </button>
@@ -824,18 +824,18 @@ return month_amount;
                                     ?>
                                     <div class="form-group  col-lg-3">
                                         <span class="form-label">
-                                           Variable Pay
+                                           <?php echo __('Variable Pay'); ?>
                                          </span>
                                         <div>
-                                             <input aria-label="Variable Yearly" class="form-control text-right mt-2" id="variable_yearly" readonly type="text" name="variable_yearly" value="<?php echo round($variable_yearly); ?>" >
+                                             <input aria-label="<?php echo __('Variable Yearly'); ?>" class="form-control text-right mt-2" id="variable_yearly" readonly type="text" name="variable_yearly" value="<?php echo round($variable_yearly); ?>" >
                                         </div>
                                     </div>
                                     <div class="form-group  col-lg-3 ">
                                         <span class="form-label">
-                                           Fixed CTC
+                                           <?php echo __('Fixed CTC'); ?>
                                          </span>
                                         <div>
-                                             <input aria-label="Fixed Ctc Yearly" class="form-control text-right mt-2" id="fixed_ctc_yearly" readonly type="text" name="fixed_ctc_yearly" value="<?php echo round($fixed_ctc_yearly); ?>" >
+                                             <input aria-label="<?php echo __('Fixed Ctc Yearly'); ?>" class="form-control text-right mt-2" id="fixed_ctc_yearly" readonly type="text" name="fixed_ctc_yearly" value="<?php echo round($fixed_ctc_yearly); ?>" >
                                         </div>
                                     </div>
                                 </div>
@@ -847,11 +847,11 @@ return month_amount;
                                         <thead>
                                             <tr class="text-uppercase">
                                                 <th scope="col" style="width: 30%" class="pl-7">
-                                                    <span class="f-14">Salary Component</span>
+                                                    <span class="f-14"><?php echo __('Salary Component'); ?></span>
                                                 </th>
-                                                <th scope="col" style="width: 20%"><span class="f-14">Calculation Type</span></th>
-                                                <th scope="col" style="width: 20%;text-align: center;"><span class="f-14">Amount Monthly</span></th>
-                                                <th scope="col" style="width: 20%"><span class="f-14">Amount Annually</span></th>
+                                                <th scope="col" style="width: 20%"><span class="f-14"><?php echo __('Calculation Type'); ?></span></th>
+                                                <th scope="col" style="width: 20%;text-align: center;"><span class="f-14"><?php echo __('Amount Monthly'); ?></span></th>
+                                                <th scope="col" style="width: 20%"><span class="f-14"><?php echo __('Amount Annually'); ?></span></th>
 
                                             </tr>
                                         </thead>
@@ -898,7 +898,7 @@ return month_amount;
                                                  <tr  id="<?php echo $value['id']; ?>" >
                                                     <td style="width: 30%">
                                                         <div class="form-group col-lg-11" >
-                                                            <input aria-label="Input field" type="text" class="form-control itemRow f-w-800" readonly value="<?php echo $value['name']; ?>" name="name[]">
+                                                            <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control itemRow f-w-800" readonly value="<?php echo $value['name']; ?>" name="name[]">
                                                             <input type="hidden" class="form-control" readonly id="id_<?php echo $value['id'];?>" value="<?php echo $value['id']; ?>" name="id[]">
                                                         </div>
                                                     </td>
@@ -915,7 +915,7 @@ return month_amount;
                                                                 }
 
                                                             ?>
-                                                            <input aria-label="Input field" type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo $value['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="calucation[]" id="<?php echo 'ernam_'.$value['id']; ?>" aria-describedby="basic-addon2"/>
+                                                            <input aria-label="<?php echo __('Input field'); ?>" type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo $value['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="calucation[]" id="<?php echo 'ernam_'.$value['id']; ?>" aria-describedby="basic-addon2"/>
                                                             <button style="cursor: none;" class="btn btn-primary w-100PX" type="button"><?php echo $codedetail; ?> </button>
                                                         </div>
                                                     </div>
@@ -949,7 +949,7 @@ return month_amount;
                                                     <div class="input-group">
                                                         <input type="hidden" name="<?php echo $value['code']; ?>" value="<?php echo $ddcode; ?>" id="<?php echo $value['code']; ?>" >
 
-                                                        <input aria-label="Input field" type="text" readonly id="y_amount_<?php echo $value['id'] ?>" name="yearly_amount[]"  value ="<?php echo   round($placevalue[$value['id']]['yearly_amount']); ?>" class="form-control text-right width1"placeholder="0.00">
+                                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" readonly id="y_amount_<?php echo $value['id'] ?>" name="yearly_amount[]"  value ="<?php echo   round($placevalue[$value['id']]['yearly_amount']); ?>" class="form-control text-right width1"placeholder="0.00">
 
                                                         <button type="button" class="mt-6" onclick="dynamicinformationopup(<?php echo "'".$note."'"; ?>)">&nbsp;<i class="fa fa-info-circle f-14"></i></button>
 
@@ -989,8 +989,8 @@ return month_amount;
                                     <input type="hidden"   name="rid" value="<?php  echo $rid; ?>">
                                 <?php } ?>
                                 <input type="hidden"   name="submit" value="submit">
-                                <button type="submit" <?php echo $disabled; ?> class="btn btn-primary mr-2">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                                <button type="submit" <?php echo $disabled; ?> class="btn btn-primary mr-2"><?php echo __('Submit'); ?></button>
+                                <button type="reset" class="btn btn-secondary"><?php echo __('Cancel'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -1005,14 +1005,14 @@ return month_amount;
         <div class="modal-content" >
 
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo __('Information'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
             <div class="modal-body"  id="popup1">
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary waves-effect waves-light " data-bs-dismiss="modal" aria-label="Close">Close</button>
+                <button type="button" class="btn btn-primary waves-effect waves-light " data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"><?php echo __('Close'); ?></button>
 
             </div>
         </div>
@@ -1031,10 +1031,10 @@ return month_amount;
     ?>
      <div class="card card-custom " id="kt_page_sticky_card">
         <div class="card-header">
-    <h5> Salary Structure </h5>
+    <h5> <?php echo __('Salary Structure'); ?> </h5>
     <div class="card-header-right">
         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                                                    <i class="icofont icofont-reply"></i> Back
+                                                    <i class="icofont icofont-reply"></i> <?php echo __('Back'); ?>
                                                 </a>
     </div>
   </div>
@@ -1044,7 +1044,7 @@ return month_amount;
                     <div class="col-lg-12">
                         <div style="width:80%;text-align: center;" class="f-w-800">
                             <div class=" width:10%; float-left m-r-10">
-                                Effective Date :
+                                <?php echo __('Effective Date :'); ?>
                             </div>
                             <div class="width:70% float-left">
                                 <?php echo  date ( "dS M , Y", strtotime($salarydata['salary']['affected_date'])); ?>
@@ -1054,17 +1054,17 @@ return month_amount;
                     <div  class="col-lg-12" style="page-break-before: always;">
                         <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;" role="presentation">
                             <tr style="height: 50px;border: 1px solid #000;">
-                                <td style="border:1px solid #000;padding: 5px; font-weight: bold;font-size: 16px;" class="f-w-600" >Name </td>
+                                <td style="border:1px solid #000;padding: 5px; font-weight: bold;font-size: 16px;" class="f-w-600" ><?php echo __('Name'); ?> </td>
                                 <td  style="border:1px solid #000;padding: 5px; font-weight: bold;font-size: 16px;"colspan="2">&nbsp;<?php echo   $emp_data['display_name']." (".$emp_data['emp_code'].")"; ?></td>
                             </tr>
                             <tr style="height: 50px;border: 1px solid #000;">
-                                <td style="border:1px solid #000;padding: 5px; font-weight: bold;font-size: 16px;" class="f-w-600" >Effective Date </td>
+                                <td style="border:1px solid #000;padding: 5px; font-weight: bold;font-size: 16px;" class="f-w-600" ><?php echo __('Effective Date'); ?> </td>
                                 <td  style="border:1px solid #000;padding: 5px; font-weight: bold;font-size: 16px;"colspan="2">&nbsp;<?php echo  date ( "dS M , Y", strtotime($salarydata['salary']['affected_date'])); ?></td>
                             </tr>
                             <tr style="border: 1px solid #000; font-weight: bold;font-size: 16px;background-color: #F4C294;">
-                                <td style="border:1px solid #000;padding: 5px;text-align: center;" class="f-w-800">Particulars</td>
-                                <td style="text-align: right;border:1px solid #000;padding: 5px;" class="f-w-800">Per Month  </td>
-                                <td style="text-align: right;border:1px solid #000;padding: 5px;" class="f-w-800">Per Year</td>
+                                <td style="border:1px solid #000;padding: 5px;text-align: center;" class="f-w-800"><?php echo __('Particulars'); ?></td>
+                                <td style="text-align: right;border:1px solid #000;padding: 5px;" class="f-w-800"><?php echo __('Per Month'); ?>  </td>
+                                <td style="text-align: right;border:1px solid #000;padding: 5px;" class="f-w-800"><?php echo __('Per Year'); ?></td>
                             </tr>
                             <?php
                                 $frist_arry = array('BASIC', 'HRA', 'SPA', 'LTA', 'BONUS');
@@ -1093,7 +1093,7 @@ return month_amount;
 
                             <tr style="border: 1px solid #000;font-weight: bold;font-size: 16px;background-color: #F4C294;">
                                 <td style="border:1px solid #000;padding: 5px;font-weight: bold;font-size: 16px;" class="f-w-600">
-                                    <?php echo "Total (A)"; ?>
+                                    <?php echo __('Total (A)'); ?>
                                 </td>
                                 <td style="text-align: right;border:1px solid #000;padding: 5px;" class="f-w-600">
                                      <?php echo customeNumberFormate(round($fsumm)); ?>
@@ -1114,7 +1114,7 @@ return month_amount;
 
                             <tr style="border: 1px solid #000;">
                                 <td style="border:1px solid #000;padding: 5px;font-weight: bold;font-size: 16px;" class="f-w-600">
-                                    <?php echo "Variable Component (B)";
+                                    <?php echo __('Variable Component (B)');
                                     $ssumy=$salarydata['salary']['variable_yearly'];
                                     $ssumm= $salarydata['salary']['variable_yearly']/12;
                                 ?>
@@ -1131,7 +1131,7 @@ return month_amount;
                             </tr>
                             <tr style="border: 1px solid #000;font-weight: bold;font-size: 16px;background-color: #F4C294;">
                                 <td style="border:1px solid #000;padding: 5px;font-weight: bold;font-size: 16px;text-align: center;" class="f-w-600">
-                                    <?php echo "Other employment benefits"; ?>
+                                    <?php echo __('Other employment benefits'); ?>
                                 </td>
                                 <td style="text-align: right;border:1px solid #000;padding: 5px;" class="f-w-600">
 
@@ -1164,7 +1164,7 @@ return month_amount;
 
                             <tr style="border: 1px solid #000;font-weight: bold;font-size: 16px;background-color: #F4C294;">
                                 <td style="border:1px solid #000;padding: 5px;font-weight: bold;font-size: 16px;" class="f-w-600">
-                                    <?php echo "Total (C)"; ?>
+                                    <?php echo __('Total (C)'); ?>
                                 </td>
                                 <td style="text-align: right;border:1px solid #000;padding: 5px;" class="f-w-600">
                                      <?php echo customeNumberFormate(round($tsumm)); ?>
@@ -1180,7 +1180,7 @@ return month_amount;
                             </tr>
                              <tr style="border: 1px solid #000;font-weight: bold;font-size: 16px;background-color: #F4C294;">
                                 <td style="border:1px solid #000;padding: 5px;" class="f-w-800">
-                                    <?php echo "CTC  (D= A+B+C)"; ?>
+                                    <?php echo __('CTC  (D= A+B+C)'); ?>
                                 </td>
                                 <?php
                                     $ctc = $fsumy+$ssumy+$tsumy;

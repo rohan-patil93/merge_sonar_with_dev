@@ -25,21 +25,21 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
 
 <div class="slide" data-slide="3" <?php echo ($feasibility_requirement_res['current_status'] == ST_APPROVED) ? 'style="pointer-events:none; opacity:0.7"' : '';  ?>>
     <div class="row mt-4">
-        <h4>Bill of Materials (BOM)</h4>
+        <h4><?php echo __('Bill of Materials (BOM)'); ?></h4>
         <div class="table-responsive">
             <form id="bomForm">
                 <table class="table " id="bomTable">
                     <thead>
                         <tr>
-                            <th scope="col" style="width: 30%;">Item Name/UOM<span class='text-danger'>*</span></th>
+                            <th scope="col" style="width: 30%;"><?php echo __('Item Name/UOM'); ?><span class='text-danger'>*</span></th>
 
-                            <th scope="col" style="width: 10%;">Qty/Price <span class='text-danger'>*</span></th>
+                            <th scope="col" style="width: 10%;"><?php echo __('Qty/Price'); ?> <span class='text-danger'>*</span></th>
 
-                            <th scope="col" style="width: 10%;">Amount</th>
-                            <th scope="col" style="width: 20%;">Planned/Actual Required</th>
-                            <th scope="col" style="width: 20%;">Planned/Actual Returned</th>
+                            <th scope="col" style="width: 10%;"><?php echo __('Amount'); ?></th>
+                            <th scope="col" style="width: 20%;"><?php echo __('Planned/Actual Required'); ?></th>
+                            <th scope="col" style="width: 20%;"><?php echo __('Planned/Actual Returned'); ?></th>
 
-                            <th scope="col" style="width: 10%;">Action</th>
+                            <th scope="col" style="width: 10%;"><?php echo __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody id="bomTableBody">
@@ -52,19 +52,19 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
                                 <tr>
                                     <td class="w-full" style="width: 30%;">
 
-                                        <select aria-label="Item Name[]" name="item_name[]" class="form-select js-example-basic-single form-control item-select" required onchange="onBOMItemChange(this)">
-                                            <option value="">Select Item</option>
+                                        <select aria-label="<?php echo __('Item Name[]'); ?>" name="item_name[]" class="form-select js-example-basic-single form-control item-select" required onchange="onBOMItemChange(this)">
+                                            <option value=""><?php echo __('Select Item'); ?></option>
                                             <?php foreach ($items_res as $id => $item) { ?>
                                                 <option value="<?php echo $id; ?>" <?php echo ($row['item_id'] == $id) ? 'selected' : ''; ?> data-uom="<?php echo $item['purchase_uom']; ?>"><?php echo htmlspecialchars($item['item_name']); ?></option>
                                             <?php } ?>
-                                            <option value="others">Others</option>
+                                            <option value="others"><?php echo __('Others'); ?></option>
                                         </select>
                                         <input type="hidden" name="bom_row_id[]" value="<?php echo $row['id']; ?>" />
 
-                                        <input aria-label="Enter Item Name" type="text" name="new_item_name[]" class="form-control new-item-name mt-3" style="display: none;" placeholder="Enter Item Name">
-                                        <div class="mt-2 w-full" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="UOM">
-                                            <select aria-label="Unit[]" style="width:5.5rem;" name="unit[]" class="form-select js-example-basic-single form-control unit-select" required>
-                                                <option value="">Select UOM</option>
+                                        <input aria-label="<?php echo __('Enter Item Name'); ?>" type="text" name="new_item_name[]" class="form-control new-item-name mt-3" style="display: none;" placeholder="<?php echo __('Enter Item Name'); ?>">
+                                        <div class="mt-2 w-full" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('UOM'); ?>">
+                                            <select aria-label="<?php echo __('Unit[]'); ?>" style="width:5.5rem;" name="unit[]" class="form-select js-example-basic-single form-control unit-select" required>
+                                                <option value=""><?php echo __('Select UOM'); ?></option>
                                                 <?php foreach ($uom_res as $id => $item) { ?>
                                                     <option value="<?php echo $id; ?>" <?php echo ($row['unit'] == $id) ? 'selected' : ''; ?>><?php echo htmlspecialchars($item['uom_short_code']); ?></option>
                                                 <?php } ?>
@@ -74,20 +74,20 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
                                     </td>
 
                                     <td style="width: 10%;">
-                                        <input aria-label="Quantity[]" min='0' type="number" class="form-control text-right" name="quantity[]" value="<?= htmlspecialchars($row['item_quantity']) ?>" required oninput="calculateRowTotal(this)" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Qty">
+                                        <input aria-label="<?php echo __('Quantity[]'); ?>" min='0' type="number" class="form-control text-right" name="quantity[]" value="<?= htmlspecialchars($row['item_quantity']) ?>" required oninput="calculateRowTotal(this)" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Qty'); ?>">
 
-                                        <input aria-label="Cost[]" min='0' style="width:5.5rem;" type="number" class="form-control text-right mt-2" name="cost[]" value="<?= htmlspecialchars($row['item_price']) ?>" oninput="calculateRowTotal(this)" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Price">
+                                        <input aria-label="<?php echo __('Cost[]'); ?>" min='0' style="width:5.5rem;" type="number" class="form-control text-right mt-2" name="cost[]" value="<?= htmlspecialchars($row['item_price']) ?>" oninput="calculateRowTotal(this)" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Price'); ?>">
                                     </td>
                                     <td style="width: 10%;">
-                                        <input aria-label="Total Cost[]" style="width:5.5rem;" type="number" name="total_cost[]" class="form-control total-cost text-right" value="<?php echo htmlspecialchars($row['total_amount']); ?>" readonly>
+                                        <input aria-label="<?php echo __('Total Cost[]'); ?>" style="width:5.5rem;" type="number" name="total_cost[]" class="form-control total-cost text-right" value="<?php echo htmlspecialchars($row['total_amount']); ?>" readonly>
                                     </td>
                                     <td style="width: 20%;">
-                                        <input aria-label="Planned Request By[]" type="text" class="form-control datepicker" name="planned_request_by[]" value="<?= $row['planned_request_by'] ? fromDate($row['planned_request_by']) : '';  ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Planned Request Date">
-                                        <input aria-label="Actual Request By[]" type="text" class="form-control datepicker mt-2" name="actual_request_by[]" value="<?= $row['actual_request_by'] ? fromDate($row['actual_request_by']) : ''; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Actual Request Date">
+                                        <input aria-label="<?php echo __('Planned Request By[]'); ?>" type="text" class="form-control datepicker" name="planned_request_by[]" value="<?= $row['planned_request_by'] ? fromDate($row['planned_request_by']) : '';  ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Planned Request Date'); ?>">
+                                        <input aria-label="<?php echo __('Actual Request By[]'); ?>" type="text" class="form-control datepicker mt-2" name="actual_request_by[]" value="<?= $row['actual_request_by'] ? fromDate($row['actual_request_by']) : ''; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Actual Request Date'); ?>">
                                     </td>
                                     <td style="width: 20%;">
-                                        <input aria-label="Planned Return By[]" type="text" class="form-control datepicker" name="planned_return_by[]" value="<?= $row['planned_return_by'] ? fromDate($row['planned_return_by']) : ''; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Planned return Date">
-                                        <input aria-label="Actual Return By[]" type="text" class="form-control datepicker mt-2" name="actual_return_by[]" value="<?= $row['actual_return_by'] ? fromDate($row['actual_return_by']) : ''; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Actual return Date">
+                                        <input aria-label="<?php echo __('Planned Return By[]'); ?>" type="text" class="form-control datepicker" name="planned_return_by[]" value="<?= $row['planned_return_by'] ? fromDate($row['planned_return_by']) : ''; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Planned return Date'); ?>">
+                                        <input aria-label="<?php echo __('Actual Return By[]'); ?>" type="text" class="form-control datepicker mt-2" name="actual_return_by[]" value="<?= $row['actual_return_by'] ? fromDate($row['actual_return_by']) : ''; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Actual return Date'); ?>">
                                     </td>
                                     <td style="width: 10%;">
                                         <button type="button" class="btn btn-danger btn-sm remove-row" onclick="removeBomRowBtn(this)"><i class="fa fa-trash"></i></button>
@@ -100,19 +100,19 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
                                 <td class="w-full" style="width: 30%;">
 
 
-                                    <select aria-label="Item Name[]" name="item_name[]" class="form-select js-example-basic-single form-control item-select" required onchange="onBOMItemChange(this)">
-                                        <option value="">Select Item</option>
+                                    <select aria-label="<?php echo __('Item Name[]'); ?>" name="item_name[]" class="form-select js-example-basic-single form-control item-select" required onchange="onBOMItemChange(this)">
+                                        <option value=""><?php echo __('Select Item'); ?></option>
                                         <?php foreach ($items_res as $id => $item) { ?>
                                             <option value="<?php echo $id; ?>" data-uom="<?php echo $item['purchase_uom']; ?>"><?php echo htmlspecialchars($item['item_name']); ?></option>
                                         <?php } ?>
-                                        <option value="others">Others</option>
+                                        <option value="others"><?php echo __('Others'); ?></option>
                                     </select>
                                     <input type="hidden" name="bom_row_id[]" value="" />
 
-                                    <input aria-label="Enter Item Name" type="text" name="new_item_name[]" class="form-control new-item-name mt-3" style="display: none;" placeholder="Enter Item Name">
-                                    <div class="mt-2 w-full" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="UOM">
-                                        <select aria-label="Unit[]" style="width:5.5rem;" name="unit[]" class="form-select js-example-basic-single form-control unit-select" required>
-                                            <option value="">Select UOM</option>
+                                    <input aria-label="<?php echo __('Enter Item Name'); ?>" type="text" name="new_item_name[]" class="form-control new-item-name mt-3" style="display: none;" placeholder="<?php echo __('Enter Item Name'); ?>">
+                                    <div class="mt-2 w-full" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('UOM'); ?>">
+                                        <select aria-label="<?php echo __('Unit[]'); ?>" style="width:5.5rem;" name="unit[]" class="form-select js-example-basic-single form-control unit-select" required>
+                                            <option value=""><?php echo __('Select UOM'); ?></option>
                                             <?php foreach ($uom_res as $id => $item) { ?>
                                                 <option value="<?php echo $id; ?>"><?php echo htmlspecialchars($item['uom_short_code']); ?></option>
                                             <?php } ?>
@@ -121,22 +121,22 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
                                 </td>
 
                                 <td style="width: 10%;">
-                                    <input aria-label="Quantity[]" id="quantity_0" min='0' type="number" class="form-control text-right" name="quantity[]" required oninput="calculateRowTotal(this)" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Qty" />
-                                    <input aria-label="Cost[]" id="cost_0" min='0' style="width:5.5rem;" type="number" class="form-control text-right mt-2" name="cost[]" oninput="calculateRowTotal(this)" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Price" />
+                                    <input aria-label="<?php echo __('Quantity[]'); ?>" id="quantity_0" min='0' type="number" class="form-control text-right" name="quantity[]" required oninput="calculateRowTotal(this)" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Qty'); ?>" />
+                                    <input aria-label="<?php echo __('Cost[]'); ?>" id="cost_0" min='0' style="width:5.5rem;" type="number" class="form-control text-right mt-2" name="cost[]" oninput="calculateRowTotal(this)" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Price'); ?>" />
                                 </td>
                                 <td style="width: 10%;">
-                                    <input aria-label="Total Cost[]" style="width:5.5rem;" type="number" name="total_cost[]" class="form-control total-cost text-right" readonly>
+                                    <input aria-label="<?php echo __('Total Cost[]'); ?>" style="width:5.5rem;" type="number" name="total_cost[]" class="form-control total-cost text-right" readonly>
                                 </td>
 
                                 <td style="width: 20%;">
-                                    <input aria-label="Planned Request By[]" id="planned_request_by" type="text" class="form-control datepicker" name="planned_request_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Planned Request Date">
-                                    <input aria-label="Actual Request By[]" id="actual_request_by" type="text" class="form-control datepicker" name="actual_request_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Actual Request Date">
+                                    <input aria-label="<?php echo __('Planned Request By[]'); ?>" id="planned_request_by" type="text" class="form-control datepicker" name="planned_request_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Planned Request Date'); ?>">
+                                    <input aria-label="<?php echo __('Actual Request By[]'); ?>" id="actual_request_by" type="text" class="form-control datepicker" name="actual_request_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Actual Request Date'); ?>">
 
                                 </td>
                                 <td style="width: 20%;">
-                                    <input aria-label="Planned Return By[]" id="planned_return_by" type="text" class="form-control datepicker mt-2" name="planned_return_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Planned return Date">
+                                    <input aria-label="<?php echo __('Planned Return By[]'); ?>" id="planned_return_by" type="text" class="form-control datepicker mt-2" name="planned_return_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Planned return Date'); ?>">
 
-                                    <input aria-label="Actual Return By[]" id="actual_return_by" type="text" class="form-control datepicker mt-2" name="actual_return_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Actual return Date">
+                                    <input aria-label="<?php echo __('Actual Return By[]'); ?>" id="actual_return_by" type="text" class="form-control datepicker mt-2" name="actual_return_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Actual return Date'); ?>">
                                 </td>
                                 <td style="width: 10%;">
                                     <button type="button" class="btn btn-danger btn-sm remove-row" onclick="removeBomRowBtn(this)"><i class="fa fa-trash"></i></button>
@@ -148,11 +148,11 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
 
                         <tr>
                             <th scope="col">
-                                <button class="btn btn-primary" type="button" onclick="addBomRowBtn(this)"><i class="fa fa-plus"></i> Add More</button>
+                                <button class="btn btn-primary" type="button" onclick="addBomRowBtn(this)"><i class="fa fa-plus"></i> <?php echo __('Add More'); ?></button>
                             </th>
-                            <th scope="col" colspan="1" class="text-end"><b>Total Amount</b></th>
+                            <th scope="col" colspan="1" class="text-end"><b><?php echo __('Total Amount'); ?></b></th>
                             <td class="text-right">
-                                <input aria-label="Final Total Cost" type="number" id="finalTotalCost_2" class="form-control text-right" value="<?php echo $final_total_cost; ?>" readonly />
+                                <input aria-label="<?php echo __('Final Total Cost'); ?>" type="number" id="finalTotalCost_2" class="form-control text-right" value="<?php echo $final_total_cost; ?>" readonly />
                             </td>
                             <td colspan="5"></td>
                         </tr>
@@ -161,13 +161,13 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
                 <input type="hidden" name="feasibility_id" value="<?= htmlspecialchars($feasibility_id); ?>">
                 <div style="pointer-events: auto; opacity: 1;" class="row">
                     <div class="col-lg-6 mt-3">
-                        <button class="btn btn-secondary prev-btn" type="button" onclick="previous('custom_insert_lead_feasibility_evaluations',  <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)">Previous</button>
+                        <button class="btn btn-secondary prev-btn" type="button" onclick="previous('custom_insert_lead_feasibility_evaluations',  <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)"><?php echo __('Previous'); ?></button>
                     </div>
                     <div class="col-lg-6 text-end mt-3">
                         <?php if ($feasibility_requirement_res['current_status'] == ST_APPROVED) { ?>
-                            <button class="btn btn-primary next-btn" type="button" id="saveNextBtn" onclick="withOutSaving('custom_insert_lead_feasibility_checklists', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)">Save & Next</button>
+                            <button class="btn btn-primary next-btn" type="button" id="saveNextBtn" onclick="withOutSaving('custom_insert_lead_feasibility_checklists', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)"><?php echo __('Save & Next'); ?></button>
                         <?php } else { ?>
-                            <button class="btn btn-primary next-btn" type="button" onclick="saveAndNextBOM('custom_insert_lead_feasibility_checklists', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)">Save & Next</button>
+                            <button class="btn btn-primary next-btn" type="button" onclick="saveAndNextBOM('custom_insert_lead_feasibility_checklists', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)"><?php echo __('Save & Next'); ?></button>
                         <?php } ?>
                     </div>
                 </div>
@@ -230,7 +230,7 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
                 return;
             }
         }
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?php echo htmlspecialchars(__('Preview'), ENT_QUOTES); ?>"></div>';
         $("#feasibilitySlides").html(loader);
         formData.append('page', 'insertFeasibilityBomAndChecklist');
         formData.append('table_name', 'lead_feasibility_boms');
@@ -303,7 +303,7 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
             text: errorMessage,
             type: "error",
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "OK"
+            confirmButtonText: <?php echo json_encode(__('OK')); ?>
         });
 
         console.error("AJAX Error:", {
@@ -318,32 +318,32 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
         // Add BOM Row
         const tbody = document.getElementById('bomTableBody');
         const newRow = document.createElement('tr');
-        let item_options = '<option value="">Select Item</option>';
+        let item_options = '<option value=""><?php echo __('Select Item'); ?></option>';
         for (const id in items_res) {
             item_options += `<option value="${id}" data-uom="${items_res[id].purchase_uom}">${items_res[id].item_name}</option>`;
         }
-        item_options += '<option value="others">Others</option>';
-        let options = '<option value="">Select UOM</option>';
+        item_options += '<option value="others"><?php echo __('Others'); ?></option>';
+        let options = '<option value=""><?php echo __('Select UOM'); ?></option>';
         for (const id in uom_res) {
             options += `<option value="${id}">${uom_res[id].uom_short_code}</option>`;
         }
         newRow.innerHTML = `
             <td class="w-full" style="width: 30%;">
-            <select aria-label="Item Name[]" name="item_name[]" class="form-select js-example-basic-single form-control  item-select" onchange="onBOMItemChange(this)">
+            <select aria-label="<?php echo __('Item Name[]'); ?>" name="item_name[]" class="form-select js-example-basic-single form-control  item-select" onchange="onBOMItemChange(this)">
                 ${item_options}
             </select>
             <input type="hidden" name="bom_row_id[]"  value="" />
-            <input aria-label="Enter Item Name" type="text" name="new_item_name[]" class="form-control new-item-name mt-3" style="display: none;" placeholder="Enter Item Name">
-            <div class="mt-2 w-full" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="UOM">
-            <select aria-label="Unit[]" style="width:5.5rem;" name="unit[]" class="form-select js-example-basic-single form-control unit-select" >
+            <input aria-label="<?php echo __('Enter Item Name'); ?>" type="text" name="new_item_name[]" class="form-control new-item-name mt-3" style="display: none;" placeholder="<?php echo __('Enter Item Name'); ?>">
+            <div class="mt-2 w-full" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('UOM'); ?>">
+            <select aria-label="<?php echo __('Unit[]'); ?>" style="width:5.5rem;" name="unit[]" class="form-select js-example-basic-single form-control unit-select" >
                 ${options}
             </select>
             </div>
             </td>
-            <td style="width: 10%;"><input aria-label="Quantity[]" min='0' type="number" class="form-control text-right" name="quantity[]" required oninput="calculateRowTotal(this)" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Qty"/><input aria-label="Cost[]" min='0' style="width:5.5rem;" type="number" class="form-control text-right mt-2" name="cost[]" oninput="calculateRowTotal(this)" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Price"/></td>
-            <td style="width: 10%;"><input aria-label="Total Cost[]" style="width:5.5rem;" type="number" name="total_cost[]" class="form-control total-cost text-right"   readonly></td>
-            <td style="width: 20%;"><input aria-label="Planned Request By[]" id="planned_request_by_dyn" type="text" class="form-control datepicker" name="planned_request_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Planned Request Date"><input aria-label="Actual Request By[]" id="actual_request_by_dyn" type="text" class="form-control datepicker mt-2" name="actual_request_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Actual Request Date"></td>
-            <td style="width: 20%;"><input aria-label="Planned Return By[]" id="planned_return_by_dyn" type="text" class="form-control datepicker" name="planned_return_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Planned return Date"><input aria-label="Actual Return By[]" id="actual_return_by_dyn" type="text" class="form-control datepicker mt-2" name="actual_return_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Actual return Date"></td>
+            <td style="width: 10%;"><input aria-label="<?php echo __('Quantity[]'); ?>" min='0' type="number" class="form-control text-right" name="quantity[]" required oninput="calculateRowTotal(this)" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Qty'); ?>"/><input aria-label="<?php echo __('Cost[]'); ?>" min='0' style="width:5.5rem;" type="number" class="form-control text-right mt-2" name="cost[]" oninput="calculateRowTotal(this)" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Price'); ?>"/></td>
+            <td style="width: 10%;"><input aria-label="<?php echo __('Total Cost[]'); ?>" style="width:5.5rem;" type="number" name="total_cost[]" class="form-control total-cost text-right"   readonly></td>
+            <td style="width: 20%;"><input aria-label="<?php echo __('Planned Request By[]'); ?>" id="planned_request_by_dyn" type="text" class="form-control datepicker" name="planned_request_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Planned Request Date'); ?>"><input aria-label="<?php echo __('Actual Request By[]'); ?>" id="actual_request_by_dyn" type="text" class="form-control datepicker mt-2" name="actual_request_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Actual Request Date'); ?>"></td>
+            <td style="width: 20%;"><input aria-label="<?php echo __('Planned Return By[]'); ?>" id="planned_return_by_dyn" type="text" class="form-control datepicker" name="planned_return_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Planned return Date'); ?>"><input aria-label="<?php echo __('Actual Return By[]'); ?>" id="actual_return_by_dyn" type="text" class="form-control datepicker mt-2" name="actual_return_by[]" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Actual return Date'); ?>"></td>
             <td style="width: 10%;"><button type="button" class="btn btn-danger btn-sm remove-row" onclick="removeBomRowBtn(this)"><i class="fa fa-trash"></i></button></td>
         `;
         tbody.appendChild(newRow);
@@ -408,7 +408,7 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
     }
 
     function withOutSaving(page, feasibility_id, lead_id) {
-        var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?php echo htmlspecialchars(__('Preview'), ENT_QUOTES); ?>"></div>';
         $("#feasibilitySlides").html(loader);
 
         $.ajax({
@@ -430,7 +430,7 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
                 reinitSelect2(); // Reinitialize select2 after loading new content
             },
             error: function(xhr, status, error) {
-                alert('Error loading next page: ' + error);
+                alert(<?php echo json_encode(__('Error loading next page:')); ?> + error);
             }
         });
     }

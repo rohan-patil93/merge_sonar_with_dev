@@ -97,12 +97,12 @@ $itemres = json_decode($itemres,1);
         var htmlRows = '';
         htmlRows += '<tr>';
         htmlRows += '<td><label class="kt-checkbox"> <input aria-label="Checkbox"  class="itemRow" type="checkbox">  <span> </span> </label> </td>';
-        htmlRows += '<td><select aria-label="Product Code[]" class="form-control"  name= "productCode[]" id="productCode_'+count+'" > <option value="0"> Select Any Prodcut </option><?php foreach ($itemres as  $item) {  ?>      <option  value = <?php echo $item[id]; ?>><?php echo $item[name]; ?> </option> <?php
-} ?><option  value = "+add"> <b> + ADD </b></option> </select> </td>';
+        htmlRows += '<td><select aria-label="Product Code[]" class="form-control"  name= "productCode[]" id="productCode_'+count+'" > <option value="0"><?= __('Select Any Prodcut') ?></option><?php foreach ($itemres as  $item) {  ?>      <option  value = <?php echo $item[id]; ?>><?php echo $item[name]; ?> </option> <?php
+} ?><option  value = "+add"> <b><?= __('+ ADD') ?></b></option> </select> </td>';
         htmlRows += '<td><textarea aria-label="Product Name[]" name="productName[]" id="productName_'+count+'" class="form-control"></textarea></td>';
         htmlRows += '<td><input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_'+count+'" class="form-control quantity amount"  autocomplete="off"></td>';
         htmlRows += '<td><input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount" autocomplete="off"></td>';
-        htmlRows += '<td><select aria-label="Tax[]" class="form-control"  name= "tax[]" id="tax_'+count+'"> <option> Select Any Tax Rate </option><?php foreach ($taxres as $key => $tax) {  ?>      <option <?php if($_SESSION[configdata][default_tax_rate] == $tax[id]){ ?> selected  <?php
+        htmlRows += '<td><select aria-label="Tax[]" class="form-control"  name= "tax[]" id="tax_'+count+'"> <option><?= __('Select Any Tax Rate') ?></option><?php foreach ($taxres as $key => $tax) {  ?>      <option <?php if($_SESSION[configdata][default_tax_rate] == $tax[id]){ ?> selected  <?php
 } ?> value = <?php echo $tax[rate] ?>><?php echo $tax[name]; ?> </option> <?php
 } ?>  </select> <input type="hidden" name="ptax_amount[]" id="ptax_amount_'+count+'"> </td>';
         htmlRows += '<td><input aria-label="Amount[]" type="text" name="amount[]" id="amount__2"+count+'" class="form-control price amount" autocomplete="off"></td>';
@@ -285,9 +285,7 @@ function calculateTotal(){
 
                                              </a>
                                             <div class="btn-group">
-                                                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Genrate
-                                                </button>
+                                                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Genrate') ?></button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="#">New Version</a>
                                                     <a class="dropdown-item" href="#">Sale order</a>
@@ -308,7 +306,7 @@ function calculateTotal(){
                                                     <div class="col-lg-4">
                                                         <span class="">Customer:</span>
                                                         <select aria-label="Party" class="form-control" id="kt_select2_11" name= "party_id" onchange="GetSelectedTextValue(this.value)" >
-                                                                <option> Select Any Customer </option>
+                                                                <option><?= __('Select Any Customer') ?></option>
                                                                 <?php foreach ($cusresponse as $key => $cus) {  ?>
                                                                 <option  <?php if($cus_id == $cus['id']){ ?> selected  <?php
 } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['display_name']; ?>
@@ -348,14 +346,14 @@ function calculateTotal(){
                                                     <div class="col-lg-4">
                                                         <span>Billed Address:</span>
                                                         <div class="kt-input-icon kt-input-icon--right">
-                                                            <textarea aria-label="Enter your address" type="text" name="party_address" id="party_address" class="form-control" placeholder="Enter your address"></textarea>
+                                                            <textarea aria-label="Enter your address" type="text" name="party_address" id="party_address" class="form-control" placeholder="<?= __('Enter your address') ?>"></textarea>
 
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <span>Ship To Address:</span>
                                                         <div class="kt-input-icon kt-input-icon--right">
-                                                            <textarea aria-label="Enter your address" type="text" class="form-control" id="party_ship_adderss" name='party_ship_adderss' placeholder="Enter your address"></textarea>
+                                                            <textarea aria-label="Enter your address" type="text" class="form-control" id="party_ship_adderss" name='party_ship_adderss' placeholder="<?= __('Enter your address') ?>"></textarea>
 
                                                         </div>
                                                     </div>
@@ -366,7 +364,7 @@ function calculateTotal(){
                                                             <span class="">Payment Terms:</span>
                                                             <div class="kt-input-icon kt-input-icon--right">
                                                                 <select aria-label="Payment Terms" class="form-control" id="kt_select2_11_2" name="payment_terms" id="party_payment_terms">
-                                                                <option value="0"> Select Any Place </option>
+                                                                <option value="0"><?= __('Select Any Place') ?></option>
                                                                 <?php foreach ($posresponse as $key => $pos) {  ?>
                                                                     <option   value ="<?php echo $pos['id']; ?>" > <?php echo $pos['id']; ?> </option>
                                                                 <?php } ?>
@@ -379,7 +377,7 @@ function calculateTotal(){
                                                             <span>Tax Rate:</span>
                                                             <div class="input-group">
                                                                 <select aria-label="Tax" class="form-control" id="kt_select2_11_3" name= "tax"  >
-                                                                <option> Select Any Tax Rate </option>
+                                                                <option><?= __('Select Any Tax Rate') ?></option>
                                                                 <?php foreach ($taxres as $key => $tax) {  ?>
                                                                 <option  value ="<?php echo $tax['name']; ?>"> <?php echo $tax['name']; ?> </option>
                                                                 <?php } ?>
@@ -392,7 +390,7 @@ function calculateTotal(){
                                                             <span class="">Place Of Supply</span>
                                                             <div class="kt-input-icon kt-input-icon--right" >
                                                                 <select aria-label="Place Of Supply" class="form-control" id="kt_select2_11_4" name="place_of_supply">
-                                                                <option value="0"> Select Any Place </option>
+                                                                <option value="0"><?= __('Select Any Place') ?></option>
                                                                 <?php foreach ($posresponse as $key => $pos) {  ?>
                                                                     <option   value ="<?php echo $pos['description']; ?>"> <?php echo $pos['description']; ?> </option>
                                                                 <?php } ?>
@@ -405,7 +403,7 @@ function calculateTotal(){
                                                             <span class="">Estimate Prefix:</span>
                                                             <div class="kt-input-icon kt-input-icon--right">
                                                                 <input type="hidden" id='invoicePre' value="<?php echo $_SESSION['configdata']['invoice_perfix']; ?>">
-                                                                <input aria-label="Custom text" class="form-control" type='text' onBlur="changeinvoicenumber(this.value)" placeholder="Custom text" value='<?php echo $inoicePrefix; ?>' name="invoice_pre" <?php if($inoicePrefix!=''){ ?>  disabled="disabled" <?php
+                                                                <input aria-label="Custom text" class="form-control" type='text' onBlur="changeinvoicenumber(this.value)" placeholder="<?= __('Custom text') ?>" value='<?php echo $inoicePrefix; ?>' name="invoice_pre" <?php if($inoicePrefix!=''){ ?>  disabled="disabled" <?php
 } ?>  />
                                                             </div>
                                                         </div>
@@ -470,12 +468,12 @@ function calculateTotal(){
                                                 </label>
                                             </th>
 
-                                            <th scope="col" class="thheader" style="width: 12%;">Product/Service</th>
-                                            <th scope="col" class="thheader" style="width: 24%;">Description</th>
-                                            <th scope="col" class="thheader" style="width: 10%;">Quantity</th>
-                                            <th scope="col" class="thheader" style="width: 10%;">Rate</th>
-                                            <th scope="col" class="thheader" style="width: 10%;">Tax</th>
-                                            <th scope="col" class="thheader" style="width: 10%;">Amount</th>
+                                            <th scope="col" class="thheader" style="width: 12%;"><?= __('Product/Service') ?></th>
+                                            <th scope="col" class="thheader" style="width: 24%;"><?= __('Description') ?></th>
+                                            <th scope="col" class="thheader" style="width: 10%;"><?= __('Quantity') ?></th>
+                                            <th scope="col" class="thheader" style="width: 10%;"><?= __('Rate') ?></th>
+                                            <th scope="col" class="thheader" style="width: 10%;"><?= __('Tax') ?></th>
+                                            <th scope="col" class="thheader" style="width: 10%;"><?= __('Amount') ?></th>
 
                                         </tr>
                                         <tr>
@@ -483,7 +481,7 @@ function calculateTotal(){
 
                                             <td>
                                                 <select aria-label="Product Code[]" class="form-control"  name= "productCode[]" id="productCode_1">
-                                                    <option value="0"> Select Any Prodcut  </option>
+                                                    <option value="0"><?= __('Select Any Prodcut') ?></option>
                                                     <?php foreach ($itemres as $item) {  ?>
                                                     <option  value = <?php echo $item['id'] ?>   > <?php echo $item['name']; ?> </option>
                                                     <?php } ?>
@@ -501,7 +499,7 @@ function calculateTotal(){
 
                                             <td>
                                                 <select aria-label="Tax[]" class="form-control"  name= "tax[]" id="tax_1"  >
-                                                    <option value="0"> Select Any Tax Rate </option>
+                                                    <option value="0"><?= __('Select Any Tax Rate') ?></option>
                                                     <?php foreach ($taxres as $key => $tax) {  ?>
                                                     <option  <?php if($_SESSION['configdata']['default_tax_rate'] == $tax['id']){ ?> selected  <?php
 } ?> value = <?php echo $tax['rate'] ?>   > <?php echo $tax['name']; ?> </option>
@@ -517,27 +515,27 @@ function calculateTotal(){
                             </div>
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                                            <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>
-                                            <button class="btn btn-success" id="addRows" type="button">+ Add More</button>
+                                            <button class="btn btn-danger delete" id="removeRows" type="button"><?= __('- Delete') ?></button>
+                                            <button class="btn btn-success" id="addRows" type="button"><?= __('+ Add More') ?></button>
                                         </div>
                                     </div>
                                     <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer balance">
                                         <tr>
-                                            <th scope="col" class="amount"><span>Sub Total</span></th>
-                                            <td><span><input aria-label="Subtotal" value="" type="text" class="form-control amount" name="subTotal" id="subTotal" placeholder="Subtotal"></span></td>
+                                            <th scope="col" class="amount"><span><?= __('Sub Total') ?></span></th>
+                                            <td><span><input aria-label="Subtotal" value="" type="text" class="form-control amount" name="subTotal" id="subTotal" placeholder="<?= __('Subtotal') ?>"></span></td>
                                         </tr>
 
                                         <tr>
-                                            <th scope="col" class="amount"><span >Tax Amount </span></th>
+                                            <th scope="col" class="amount"><span><?= __('Tax Amount') ?></span></th>
                                             <td><span >
-                                                <input aria-label="Tax Amount" value="" type="text" class="form-control amount" name="taxRate" id="taxAmount" placeholder="Tax Amount">
-                                                <input  type="hidden" class="form-control amount" placeholder="value" name="gdam" id="gdam">
+                                                <input aria-label="Tax Amount" value="" type="text" class="form-control amount" name="taxRate" id="taxAmount" placeholder="<?= __('Tax Amount') ?>">
+                                                <input  type="hidden" class="form-control amount" placeholder="<?= __('Value') ?>" name="gdam" id="gdam">
                                             </span></td>
                                         </tr>
 
                                         <tr>
-                                            <th scope="col" class="amount" ><span>Grand Total</span></th>
-                                            <td><input aria-label="Grand Total" value="" type="text" class="form-control amount" name="grandtotaol" id="grandtotal" placeholder="Grand Total"></td>
+                                            <th scope="col" class="amount" ><span><?= __('Grand Total') ?></span></th>
+                                            <td><input aria-label="Grand Total" value="" type="text" class="form-control amount" name="grandtotaol" id="grandtotal" placeholder="<?= __('Grand Total') ?>"></td>
                                         </tr>
 
 

@@ -100,11 +100,10 @@ $create_access_users = json_decode($document_access_setups['create_access_users'
 </script>
 <div class="card">
     <div class="card-header table-card-header">
-        <h5>Document Access Setups</h5>
+        <h5><?= __('Document Access Setups') ?></h5>
         <div class="card-header-right table-card-header ">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                <i class="icofont icofont-reply"></i>
-                Back
+                <i class="icofont icofont-reply"></i> <?= __('Back') ?>
             </a>
         </div>
     </div>
@@ -112,10 +111,10 @@ $create_access_users = json_decode($document_access_setups['create_access_users'
         <form  method="post">
             <input type="hidden" name="rid"  id="rid" value="<?php echo $Rid; ?>">
          <div class="row bg-gray">
-                 <p class="f-16 f-w-600">Who Can Create
+                 <p class="f-16 f-w-600"><?= __('Who Can Create') ?>
                      <span>
                          <select aria-label="Transaction Table" class="js-example-basic-single" name="transaction_table" id="transaction_table">
-                            <option value="">Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($table_list as $res){?>
                                 <option value="<?php echo $res; ?>" <?php echo $document_access_setups['transaction_table'] == $res?"selected":""; ?>><?php echo ucwords(str_replace("_"," ",($res))); ?></option>
                             <?php } ?>
@@ -123,9 +122,9 @@ $create_access_users = json_decode($document_access_setups['create_access_users'
                      </span> ?
                      <span>
                          <select aria-label="User Access Type" class="js-example-basic-single" onchange="whoCreateType(this.value)" name="user_access_type">
-                             <option value="0" >Select Any One</option>
-                             <option value="A" <?php echo $document_access_setups['user_access_type'] == "A"?"selected":""; ?>>All Users</option>
-                             <option value="S" <?php echo $document_access_setups['user_access_type'] == "S"?"selected":""; ?>>Specific Users</option>
+                             <option value="0"><?= __('Select Any One') ?></option>
+                             <option value="A" <?php echo $document_access_setups['user_access_type'] == "A"?"selected":""; ?>><?= __('All Users') ?></option>
+                             <option value="S" <?php echo $document_access_setups['user_access_type'] == "S"?"selected":""; ?>><?= __('Specific Users') ?></option>
                          </select>
                      </span>
                   </p>
@@ -149,7 +148,7 @@ $create_access_users = json_decode($document_access_setups['create_access_users'
                         <div class="col-lg-6" ></div>
                         <div class="col-lg-2" >
                             <div class="input-group input-group-button mb-0" >
-                                <input aria-label="Search" type="text" id="dynamicfilterhideshow" data-id='userselectfilter' class="form-control form-control-sm width1"  placeholder="Search" data-type="div" data-bs-toggle="tooltip" data-placement="bottom" title="Search">
+                                <input aria-label="Search" type="text" id="dynamicfilterhideshow" data-id='userselectfilter' class="form-control form-control-sm width1"  placeholder="<?= __('Search') ?>" data-type="div" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('Search') ?>">
                                 <span class="input-group-text addon-style">
                                     <span class=""><i class="ti-search"></i></span>
                                 </span>

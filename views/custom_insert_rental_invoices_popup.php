@@ -22,7 +22,7 @@ function getTenantDetails(type,valu){
 			success:function(date){
 				if(type == 'getcustid'){
 					$("#property_tenant_detail_id").html(date);
-					$("#property_tenant_billings_id").html('<option value="">Select Any One</option>');
+					$("#property_tenant_billings_id").html('<option value=""><?php echo __('Select Any One'); ?></option>');
 					$("#ajaxbillingtable").html('');
 					$("#showfooter").css("pointer-events","none");
 					$("#showfooter").css("opacity","0.7");
@@ -80,7 +80,7 @@ function submitTenantBillss(property_tenant_billing_id,type,extrform="",billtype
 	});
 
 	if(emtycheck == 0 || type == 'S'){
-		$(".loading_popup_btn").text("Please Wait........");
+		$(".loading_popup_btn").text(<?php echo json_encode(__('Please Wait........')); ?>);
 		$(".loading_popup_btn").addClass("disabled");
 		var formdata = $("#form_id_"+extrform+property_tenant_billing_id).serialize();
 		jQuery.ajax({
@@ -110,8 +110,8 @@ function submitTenantBillss(property_tenant_billing_id,type,extrform="",billtype
 								type: "warning",
 								showCancelButton: true,
 								confirmButtonClass: "btn-danger",
-								confirmButtonText: "Yes",
-								cancelButtonText: "No",
+								confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+								cancelButtonText: <?php echo json_encode(__('No')); ?>,
 								closeOnConfirm: true,
 								closeOnCancel: true
 							},
@@ -202,42 +202,42 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 	<h4 class="modal-title">
 		<?php  
 			if($_POST['bill_type'] =="U"){
-				echo "Utility Invoice";
+				echo __('Utility Invoice');
 			}elseif($_POST['bill_type'] =="AMC"){
-				echo "Utility AMC Invoice";
+				echo __('Utility AMC Invoice');
 			}else{
-				echo "Rental Invoice";
+				echo __('Rental Invoice');
 			}
 		?>
 			
 	</h4>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body m-l-50 m-r-50">
 
 	<div class="row">
 		<div class="form-group col-lg-4">
-			<label class="col-lg-4">Tenant</label>
+			<label class="col-lg-4"><?php echo __('Tenant'); ?></label>
 			<select  class="form-select js-example-basic-single" name="cust_id" id="cust_id" onchange="getTenantDetails('getcustid',this.value)">
-				<option value="">Select Any One</option>
+				<option value=""><?php echo __('Select Any One'); ?></option>
 				<?php foreach ($customers as $cust) { ?>					
 					<option  value="<?php echo $cust['id']; ?>" <?php echo ($_SESSION['userid']!=$cust['created_by'] AND $_SESSION['admin_type'] != 1)?"disabled":""; ?>><?php echo ucwords($cust['display_name']); ?></option>
 				<?php } ?>
 			</select> 
 		</div>
 		<div class="form-group col-lg-4">
-			<label class="col-lg-4">Property</label>
+			<label class="col-lg-4"><?php echo __('Property'); ?></label>
 			<select  class="form-select js-example-basic-single " name="property_tenant_detail_id" id="property_tenant_detail_id" onchange="getTenantDetails('getproperty_tenant_detail_id',this.value)">
-				<option value="">Select Any One</option>
+				<option value=""><?php echo __('Select Any One'); ?></option>
 				<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>					
 					<option  value="<?php echo $ass_statukey; ?>"><?php echo ucwords($ass_statu); ?></option>
 				<?php } ?>
 			</select> 
 		</div>
 		<div class="form-group col-lg-4">
-			<label class="col-lg-4">Bills</label>
+			<label class="col-lg-4"><?php echo __('Bills'); ?></label>
 			<select  class="form-select js-example-basic-single " name="property_tenant_billings_id" id="property_tenant_billings_id" onchange="getTenantDetails('getproperty_tenant_billings_id',this.value)">
-				<option value="">Select Any One</option>
+				<option value=""><?php echo __('Select Any One'); ?></option>
 				<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>					
 					<option  value="<?php echo $ass_statukey; ?>"><?php echo ucwords($ass_statu); ?></option>
 				<?php } ?>
@@ -248,8 +248,8 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 	</div>
 </div>
 <div class="modal-footer" id="showfooter" style="pointer-events: none; opacity: 0.7;">
-	<button type="button" class="btn btn-primary waves-effect waves-light loading_popup_btn" onclick="generateTenantBill('S')"> Save</button>
-	<button type="button" class="btn btn-success waves-effect waves-light m-l-5 loading_popup_btn" onclick="generateTenantBill('SG')"> Generate Invoice</button>
-	<button type="button" class="btn btn-warning waves-effect waves-light m-l-5 loading_popup_btn" onclick="generateTenantBill('SGS')"> Generate Invoice & Send Email</button>
-	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+	<button type="button" class="btn btn-primary waves-effect waves-light loading_popup_btn" onclick="generateTenantBill('S')"> <?php echo __('Save'); ?></button>
+	<button type="button" class="btn btn-success waves-effect waves-light m-l-5 loading_popup_btn" onclick="generateTenantBill('SG')"> <?php echo __('Generate Invoice'); ?></button>
+	<button type="button" class="btn btn-warning waves-effect waves-light m-l-5 loading_popup_btn" onclick="generateTenantBill('SGS')"> <?php echo __('Generate Invoice & Send Email'); ?></button>
+	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
 </div>

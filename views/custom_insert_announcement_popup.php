@@ -67,9 +67,9 @@
 	<div class="modal-header">
 		<h5 class="modal-title text-center">
 
-			<?php echo $announce_details['announcement_heading']; ?> 
+			<?php echo htmlspecialchars(__($announce_details['announcement_heading'] ?? '')); ?> 
 		</h5>
-	     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
    
    </div>
 	<div class="modal-body" data-scroll="true" data-height="100" style="height: 300px;"> 
@@ -218,7 +218,7 @@
 			<!--end: Search Form -->
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary mr-2"  data-bs-dismiss="modal" >Close</button>
+				<button type="button" class="btn btn-primary mr-2"  data-bs-dismiss="modal" ><?= __('Close') ?></button>
 			</div>
 			<!-- </div> -->
 		</form>

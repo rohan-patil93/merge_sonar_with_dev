@@ -181,10 +181,10 @@ function holdpayroll_exclusions1(emp_id,cat){
   <div class="container-fluid">
     <div class="card card-custom ">
       <div class="card-header table-card-header mb-2">
-        <h5> PayRoll Process</h5>
+        <h5> <?php echo __('PayRoll Process'); ?></h5>
         <div class="card-header-right table-card-header ">
           <a   href="index.php?option=COM_INSERT_PAYAREA_PAYROLL&PAY_YEAR=<?php echo $_GET['PAY_YEAR']; ?>&PAY_MONTH=<?php echo $_GET['PAY_MONTH']; ?>&PPJ=<?php echo $_GET['PPJ']; ?>&REG=R"  class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 genratepayrolbtn" <?php if(count((array)$pay_area_ids)!= count((array)$payrollaray)){?>style="display: none" <?php
-} ?>> <?php echo "Generate Payroll";  ?>
+} ?>> <?php echo __('Generate Payroll');  ?>
           </a>
         </div>
       </div>

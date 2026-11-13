@@ -122,16 +122,16 @@ if($_GET['Rid']!=""){
         if($error_message !=''){ ?>
             <div class="alert alert-danger background-danger alert-dismissible">
                 <strong><?php echo $error_message; ?></strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
         <?php } ?>
         <div class="card card-custom">
             <div class="card-header table-card-header">
-                <h5 class="card-label">&nbsp;<?php echo "Performance";  ?> </h5>
+                <h5 class="card-label">&nbsp;<?php echo __('Performance');  ?> </h5>
                 <div class="card-header-right table-card-header ">
                     <?php if($_GET['option'] != "COM_VIEW_PERFORMANCE_APPRAISAL_SETTINGS"){ ?>
                         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                            <i class="icofont icofont-reply"></i>  Back
+                            <i class="icofont icofont-reply"></i>  <?php echo __('Back'); ?>
                         </a>
                     <?php } ?>
 
@@ -143,16 +143,16 @@ if($_GET['Rid']!=""){
                     <div class="card-body">
                         <div class="row ">
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Name<span class="text-danger">*</span></span>
-                                <input aria-label="Name" type="text" name="name" class="form-control" value="<?php echo $role['name']; ?>">
+                                <span class="form-label"><?php echo __('Name'); ?><span class="text-danger">*</span></span>
+                                <input aria-label="<?php echo __('Name'); ?>" type="text" name="name" class="form-control" value="<?php echo $role['name']; ?>">
                             </div>
                             <div class="form-group col-lg-4 w-full">
-                                <span class="form-label">Aassessment Year:</span></br>
-                                <select aria-label="Assessment Year" class="form-control form-select js-example-basic-single" name="assessment_year"  required="">
-                                    <option value="">Select Any One</option>
+                                <span class="form-label"><?php echo __('Aassessment Year:'); ?></span></br>
+                                <select aria-label="<?php echo __('Assessment Year'); ?>" class="form-control form-select js-example-basic-single" name="assessment_year"  required="">
+                                    <option value=""><?php echo __('Select Any One'); ?></option>
                                     <?php for ($i=2020; $i<2040;$i++) {
                                         $k= $i+1; $view_assemnt_year =$i."-".$k; ?>
-                                        <option <?php if($role['assessment_year'] == $view_assemnt_year){ echo "selected";
+                                        <option <?php if($role['assessment_year'] == $view_assemnt_year){ echo __('selected');
 } ?> value="<?php echo $view_assemnt_year; ?>"  ><?php echo $i." - ".$k ?></option>
                                     <?php  } ?>
                                 </select>
@@ -160,91 +160,91 @@ if($_GET['Rid']!=""){
                             <div class="form-group col-lg-4">
                             </div>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Assessment Start Date</span>
+                                <span class="form-label"><?php echo __('Assessment Start Date'); ?></span>
                                 <?php $date_pic = fromDate($role['assessment_start_date']); ?>
-                                <input aria-label="Input field" type="text" class="form-control startdatepicker_1 rangedatepicker"  value="<?php echo  $date_pic; ?>" data-id="1"  name="assessment_begin" onblur="assessmentchange()" id="kt_datepicker_31" />
+                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control startdatepicker_1 rangedatepicker"  value="<?php echo  $date_pic; ?>" data-id="1"  name="assessment_begin" onblur="assessmentchange()" id="kt_datepicker_31" />
                             </div>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Assessments End Date </span>
+                                <span class="form-label"><?php echo __('Assessments End Date'); ?> </span>
                                 <?php
                                 $date_pic2 = fromDate($role['assessment_end_date']);
                                 ?>
-                                <input aria-label="Assessment Due" type="text" class="form-control enddatepicker_1" name="assessment_due" value="<?php echo  $date_pic2; ?>" name="assessment_due"  />
+                                <input aria-label="<?php echo __('Assessment Due'); ?>" type="text" class="form-control enddatepicker_1" name="assessment_due" value="<?php echo  $date_pic2; ?>" name="assessment_due"  />
                             </div>
                             <div class="form-group col-lg-4">
                             </div>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Self Assessment Start Date</span>
+                                <span class="form-label"><?php echo __('Self Assessment Start Date'); ?></span>
                                 <?php $date_pic = fromDate($role['employee_start']); ?>
-                                <input aria-label="Input field" type="text" class="form-control startdatepicker_2 rangedatepicker"  value="<?php echo  $date_pic; ?>" data-id="2" name="employee_begin" id="kt_datepicker_4_1" />
+                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control startdatepicker_2 rangedatepicker"  value="<?php echo  $date_pic; ?>" data-id="2" name="employee_begin" id="kt_datepicker_4_1" />
                             </div>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Self Assessment End Date</span>
+                                <span class="form-label"><?php echo __('Self Assessment End Date'); ?></span>
 
                                 <?php $date_pic2 = fromDate($role['employee_end']); ?>
-                                <input aria-label="Input field" type="text" class="form-control enddatepicker_2"  value="<?php echo  $date_pic2; ?>"  name="employee_end" id="kt_datepicker_4_2"  />
+                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control enddatepicker_2"  value="<?php echo  $date_pic2; ?>"  name="employee_end" id="kt_datepicker_4_2"  />
                             </div>
                             <div class="form-group col-lg-4">
                             </div>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Manager's Assessement Start Date </span>
+                                <span class="form-label"><?php echo __('Manager\'s Assessement Start Date'); ?> </span>
 
                                 <?php $date_pic = fromDate($role['manager_start']); ?>
-                                <input aria-label="Input field" type="text" class="form-control startdatepicker_3 rangedatepicker"  value="<?php echo  $date_pic; ?>" data-id="3" name="manager_begin" id="kt_datepicker_4_3" />
+                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control startdatepicker_3 rangedatepicker"  value="<?php echo  $date_pic; ?>" data-id="3" name="manager_begin" id="kt_datepicker_4_3" />
                             </div>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Manager's Assessment End Date </span>
+                                <span class="form-label"><?php echo __('Manager\'s Assessment End Date'); ?> </span>
 
                                 <?php $date_pic2 = fromDate($role['manager_end']); ?>
-                                <input aria-label="Manager End" type="text" class="form-control enddatepicker_3" name="manager_end" value="<?php echo  $date_pic2; ?>"  id="kt_datepicker_4_4"   />
+                                <input aria-label="<?php echo __('Manager End'); ?>" type="text" class="form-control enddatepicker_3" name="manager_end" value="<?php echo  $date_pic2; ?>"  id="kt_datepicker_4_4"   />
                             </div>
                             <div class="form-group col-lg-4">
                             </div>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Reviewing Manager's Assessment Start Date</span>
+                                <span class="form-label"><?php echo __('Reviewing Manager\'s Assessment Start Date'); ?></span>
                                 <?php $date_pic = fromDate($role['reporting_manager_start']); ?>
-                                <input aria-label="Input field" type="text" class="form-control startdatepicker_4 rangedatepicker"  value="<?php echo  $date_pic; ?>" data-id="4" name="managerto_begin"  id="kt_datepicker_4_5" />
+                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control startdatepicker_4 rangedatepicker"  value="<?php echo  $date_pic; ?>" data-id="4" name="managerto_begin"  id="kt_datepicker_4_5" />
                             </div>
                             <div class="form-group col-lg-4">
-                                <span class="form-label"> Reviewing Manager's Assessment End Date</span>
+                                <span class="form-label"> <?php echo __('Reviewing Manager\'s Assessment End Date'); ?></span>
                                 <?php $date_pic2 = fromDate($role['reporting_manager_end']); ?>
-                                <input aria-label="Input field" type="text" class="form-control enddatepicker_4" value="<?php echo  $date_pic2; ?>"  name="managerto_end" id="kt_datepicker_4_6" />
+                                <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control enddatepicker_4" value="<?php echo  $date_pic2; ?>"  name="managerto_end" id="kt_datepicker_4_6" />
                             </div>
                             <div class="form-group col-lg-4">
                             </div>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">URL</span>
-                                <textarea aria-label="Url" name="url" class="form-control"><?php echo $role['url']; ?></textarea>
+                                <span class="form-label"><?php echo __('URL'); ?></span>
+                                <textarea aria-label="<?php echo __('Url'); ?>" name="url" class="form-control"><?php echo $role['url']; ?></textarea>
                             </div>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">File Upload</span>
+                                <span class="form-label"><?php echo __('File Upload'); ?></span>
                                 <div></div>
                                 <div class="custom-file">
-                                    <input aria-label="Newfilename" type="file" class="custom-file-input" id="customFile" name="newfilename" value="<?php echo $role['file_name']; ?>">
+                                    <input aria-label="<?php echo __('Newfilename'); ?>" type="file" class="custom-file-input" id="customFile" name="newfilename" value="<?php echo $role['file_name']; ?>">
 
                                     <input type="hidden"  name="oldfilename" value="<?php echo $role['file_name']; ?>">
                                     <a  class="mt-2 text-primary" href="uploads/all/<?php echo $role['file_name']; ?>" download><?php echo $role['file_name']; ?></a>
                                 </div>
                             </div>
                             <div class="form-group col-lg-8 w-full" >
-                                <span class="form-label">How often do assessments happen?</span>
-                                <select aria-label="Assessment Month" class="form-select js-example-basic-single" onchange="assessmentchange()" name="assessment_month" id="assessment_month">
-                                    <option <?php if($role['assessment_month']==3){ echo "selected";
-}  ?> value="3" >Every 3 Months</option>
-                                    <option <?php if($role['assessment_month']==4){ echo "selected";
-}  ?> value="4" >Every 4 Months</option>
-                                    <option <?php if($role['assessment_month']==6){ echo "selected";
-}  ?> value="6" >Every 6 Months</option>
-                                    <option <?php if($role['assessment_month']==12){ echo "selected";
-}  ?> value="12" >Every Year</option>
+                                <span class="form-label"><?php echo __('How often do assessments happen?'); ?></span>
+                                <select aria-label="<?php echo __('Assessment Month'); ?>" class="form-select js-example-basic-single" onchange="assessmentchange()" name="assessment_month" id="assessment_month">
+                                    <option <?php if($role['assessment_month']==3){ echo __('selected');
+}  ?> value="3" ><?php echo __('Every 3 Months'); ?></option>
+                                    <option <?php if($role['assessment_month']==4){ echo __('selected');
+}  ?> value="4" ><?php echo __('Every 4 Months'); ?></option>
+                                    <option <?php if($role['assessment_month']==6){ echo __('selected');
+}  ?> value="6" ><?php echo __('Every 6 Months'); ?></option>
+                                    <option <?php if($role['assessment_month']==12){ echo __('selected');
+}  ?> value="12" ><?php echo __('Every Year'); ?></option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-12">
-                                        <span class="font-weight-bolder">Asign to <span class="text-danger">*</span></span>
+                                        <span class="font-weight-bolder"><?php echo __('Asign to'); ?> <span class="text-danger">*</span></span>
                                         <div id="tsk_fortable"></div>
                                         <div class="col-xl-12">
                                             <i class="flaticon2-group text-success"></i>
-                                            <button type="button" onclick="showpopupappraisal();">Edit </button>
+                                            <button type="button" onclick="showpopupappraisal();"><?php echo __('Edit'); ?> </button>
                                         </div>
                                         <div id="filternames"> </div>
 
@@ -253,7 +253,7 @@ if($_GET['Rid']!=""){
                                 </div>
                                 <input type="hidden" name="submit" value="addpeople" />
                                 <input type="hidden" name="rid" value="<?php echo $rid; ?>" />
-                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save </button>
+                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save'); ?> </button>
                             </form>
                         </div>
                     </div>

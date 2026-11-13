@@ -155,12 +155,12 @@ function addrecepitamount(fid){
         dynamicCalculations(id);
     }
    //          swal({
-   //              text: 'Allocated amount is more than received amount',
+   //              text: <?php echo json_encode(__('Allocated amount is more than received amount')); ?>,
    //              type: "warning",
    //              showCancelButton: false,
    //              confirmButtonClass: "btn-danger",
-   //              confirmButtonText: "Yes",
-   //              cancelButtonText: "No",
+   //              confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+   //              cancelButtonText: <?php echo json_encode(__('No')); ?>,
    //              closeOnConfirm: true,
    //              closeOnCancel: true
 
@@ -212,12 +212,12 @@ function addrecepitamount(fid){
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: "Please note the status of the document will change to "+new_status_name,
+            text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
             type: "info",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+            cancelButtonText: <?php echo json_encode(__('No')); ?>,
             closeOnConfirm: false
         },
         function(){
@@ -244,12 +244,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...')); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -350,12 +350,12 @@ function closePaymentDuePopup(){
 function cancelPayments(){
   swal({
     title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-    text: 'Are you sure you want to cancel the payment? This action will cancel the payment and reverse all related transactions',
+    text: <?php echo json_encode(__('Are you sure you want to cancel the payment? This action will cancel the payment and reverse all related transactions')); ?>,
     type: "warning",
     showCancelButton: true,
     confirmButtonClass: "btn-danger",
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
+    confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+    cancelButtonText: <?php echo json_encode(__('No')); ?>,
     closeOnConfirm: true,
     closeOnCancel: true
   },
@@ -377,14 +377,14 @@ function cancelPayments(){
 }
 </script>
  <?php if($payments['cancel_payment'] =="Y"){ ?>
-<div id="dynamiccanceldiv"><span>Cancel Payment</span></div>
+<div id="dynamiccanceldiv"><span><?php echo __('Cancel Payment'); ?></span></div>
 <?php } ?>
 <?php if($content !=''){ ?>
     <div class="alert alert-custom alert-white shadow-lg fade show mb-5" role="alert">
         <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
         <div class="alert-text"><?php echo $content; ?></div>
         <div class="alert-close">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="<?php echo __('Close'); ?>">
                 <span aria-hidden="true"><i class="ki ki-close"></i></span>
             </button>
         </div>
@@ -393,7 +393,7 @@ function cancelPayments(){
   <?php if($error_message !=''){ ?>
     <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
 <?php } ?>
 <input type="hidden" name="mandatory_array" value='<?php echo json_encode($mandatorykeywithlabel); ?>' id="mandatory_array">
@@ -403,7 +403,7 @@ function cancelPayments(){
     echo $workflowsteps['current_status_ribbon'];?>
 <div class="card">
     <div class="card-header">
-          <h5>Payments</h5>
+          <h5><?php echo __('Payments'); ?></h5>
           <div class="card-header-right table-card-header m-r-50">
 <?php
 $startworkflowbtn = 'N';
@@ -419,7 +419,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
 
     if($payments['current_status'] == ST_APPROVED && $payments['originator'] == $_SESSION['userid'] && $payments['cancel_payment'] =="N"){ ?>
         <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="cancelPayments()">
-            <i class="text-white fa fa-times-circle"></i> &nbsp;Cancel Payments
+            <i class="text-white fa fa-times-circle"></i> <?php echo __('&nbsp;Cancel Payments'); ?>
         </button>
    <?php } ?>
 </div></div>
@@ -436,7 +436,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
             <div class="card card-custom">
                 <div class="card-header">
                   <h5 class="card-title">
-                     Payments
+                     <?php echo __('Payments'); ?>
                  </h5>
              </div>
              <div class="card-body">
@@ -444,8 +444,8 @@ foreach($invdata as  $transationtable=>$resultdata) {
                     <div class="col-lg-12">
                         <div class="form-group row">
                             <div class="col-lg-6 form-group form-validation-class">
-                                <span class="form-label">Payment Date &nbsp;<span class="text-danger">*</span></span>
-                                <input aria-label="Payment Date" type="text" class="form-control datepicker" name="payment_date"  id="payment_date" value="<?php echo fromDate($postdata['payment_date']); ?>">
+                                <span class="form-label"><?php echo __('Payment Date &nbsp;'); ?><span class="text-danger">*</span></span>
+                                <input aria-label="<?php echo __('Payment Date'); ?>" type="text" class="form-control datepicker" name="payment_date"  id="payment_date" value="<?php echo fromDate($postdata['payment_date']); ?>">
                                 <span class="messages"></span>
                             </div>
                             <div class="col-lg-6 form-validation-class" >
@@ -463,17 +463,17 @@ foreach($invdata as  $transationtable=>$resultdata) {
                                  }
                                  ?>
                                 <div class="form-group">
-                                    <span class="form-label">Transaction Type &nbsp;<span class="text-danger">*</span></span>
+                                    <span class="form-label"><?php echo __('Transaction Type &nbsp;'); ?><span class="text-danger">*</span></span>
                                     <div class="form-radio">
                                         <div class="radio radio-inline" <?php echo $vendisable; ?>>
                                           <label class="form-label">
-                                            <input aria-label="Transaction Type" type="radio" name="transaction_type" id="transaction_type" value="vendors" <?php echo ($postdata['transaction_type']=='vendors' || $postdata['transaction_type'] =='')?"checked":""; ?> onchange="transactionType(this.value)">
-                                            <i class="helper"></i>Vendor</label>
+                                            <input aria-label="<?php echo __('Transaction Type'); ?>" type="radio" name="transaction_type" id="transaction_type" value="vendors" <?php echo ($postdata['transaction_type']=='vendors' || $postdata['transaction_type'] =='')?"checked":""; ?> onchange="transactionType(this.value)">
+                                            <i class="helper"></i><?php echo __('Vendor'); ?></label>
                                         </div>
                                         <div class="radio radio-inline" <?php echo $empdisable; ?>>
                                           <label class="form-label">
-                                            <input aria-label="Transaction Type" type="radio" name="transaction_type" id="transaction_type_3" value="employees" <?php echo $postdata['transaction_type']=='employees'?"checked":""; ?> onchange="transactionType(this.value)">
-                                            <i class="helper"></i>Employees</label>
+                                            <input aria-label="<?php echo __('Transaction Type'); ?>" type="radio" name="transaction_type" id="transaction_type_3" value="employees" <?php echo $postdata['transaction_type']=='employees'?"checked":""; ?> onchange="transactionType(this.value)">
+                                            <i class="helper"></i><?php echo __('Employees'); ?></label>
                                         </div>
 
                                     </div>
@@ -481,8 +481,8 @@ foreach($invdata as  $transationtable=>$resultdata) {
                                 </div>
                             </div>
                             <div class="form-group col-lg-12  w-full" id='transaction_vendors' style="<?php echo $postdata['transaction_type']=='customers' || $postdata['transaction_type']=='employees'?"display: none":""; ?>">
-                                <span class="form-label">Vendor &nbsp;<span class="text-danger">*</span></span>
-                                <select aria-label="Vendor []" class="form-control js-example-basic-multiple " id="vendor_id" name="vendor_id[]" onchange="anyChange()" multiple>
+                                <span class="form-label"><?php echo __('Vendor &nbsp;'); ?><span class="text-danger">*</span></span>
+                                <select aria-label="<?php echo __('Vendor []'); ?>" class="form-control js-example-basic-multiple " id="vendor_id" name="vendor_id[]" onchange="anyChange()" multiple>
 
                                     <?php foreach ($vendorlist as $cus) {  ?>
                                         <option  <?php if(in_array($cus['id'], (array)$postdata['vendor_id'])){ ?> selected  <?php
@@ -493,8 +493,8 @@ foreach($invdata as  $transationtable=>$resultdata) {
                                 <span class="messages"></span>
                             </div>
                             <div class="form-group col-lg-12 w-full" id='transaction_employess' style="<?php echo $postdata['transaction_type']!='employees'?"display: none":""; ?>">
-                                <span class="form-label">Employees &nbsp;<span class="text-danger">*</span></span>
-                                <select aria-label="Employee []" class="form-control form-select js-example-basic-multiple" id="employee_id" name="employee_id[]" onchange="anyChange()" multiple>
+                                <span class="form-label"><?php echo __('Employees &nbsp;'); ?><span class="text-danger">*</span></span>
+                                <select aria-label="<?php echo __('Employee []'); ?>" class="form-control form-select js-example-basic-multiple" id="employee_id" name="employee_id[]" onchange="anyChange()" multiple>
 
                                     <?php foreach ($employees as $cus){  ?>
                                         <option  <?php if(in_array($cus['id'], (array)$postdata['employee_id'])){ ?> selected  <?php
@@ -507,18 +507,18 @@ foreach($invdata as  $transationtable=>$resultdata) {
 
                         <div class="col-lg-6 form-validation-class">
                             <div class="form-group">
-                                <span class="form-label">Payment Type &nbsp;<span class="text-danger">*</span></span>
+                                <span class="form-label"><?php echo __('Payment Type &nbsp;'); ?><span class="text-danger">*</span></span>
                                 <div class="form-radio">
                                     <div class="radio radio-inline">
                                       <label class="form-label">
-                                        <input aria-label="Payment Type" type="radio" name="payment_type" id="payment_type" value="cash" <?php echo ($postdata['payment_type']=='cash' || $postdata['payment_type'] =='')?"checked":""; ?> onchange="paymentType(this.value)">
-                                        <i class="helper"></i>Cash
+                                        <input aria-label="<?php echo __('Payment Type'); ?>" type="radio" name="payment_type" id="payment_type" value="cash" <?php echo ($postdata['payment_type']=='cash' || $postdata['payment_type'] =='')?"checked":""; ?> onchange="paymentType(this.value)">
+                                        <i class="helper"></i><?php echo __('Cash'); ?>
                                     </label>
                                 </div>
                                 <div class="radio radio-inline">
                                   <label class="form-label">
-                                    <input aria-label="Payment Type" type="radio" name="payment_type" id="payment_type_2" value="bank" <?php echo $postdata['payment_type']=='bank'?"checked":""; ?> onchange="paymentType(this.value)">
-                                    <i class="helper"></i>Bank
+                                    <input aria-label="<?php echo __('Payment Type'); ?>" type="radio" name="payment_type" id="payment_type_2" value="bank" <?php echo $postdata['payment_type']=='bank'?"checked":""; ?> onchange="paymentType(this.value)">
+                                    <i class="helper"></i><?php echo __('Bank'); ?>
                                 </label>
                             </div>
                         </div>
@@ -527,13 +527,13 @@ foreach($invdata as  $transationtable=>$resultdata) {
                 </div>
 
                 <div class="col-lg-6 form-group form-validation-class">
-                    <span class="form-label">Amount &nbsp;<span class="text-danger">*</span></span>
-                    <input aria-label="Amount" class="form-control text-right" type="text" name="amount"  id="amount" value="<?php echo $postdata['amount']; ?>"  onblur="anyChange()" required>
+                    <span class="form-label"><?php echo __('Amount &nbsp;'); ?><span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Amount'); ?>" class="form-control text-right" type="text" name="amount"  id="amount" value="<?php echo $postdata['amount']; ?>"  onblur="anyChange()" required>
                      <span class="messages"></span>
                 </div>
                 <div class="form-group col-lg-12 w-full" id="bankaccount" style="<?php echo $postdata['payment_type']=='bank'?"":"display: none"; ?>">
-                        <select aria-label="Bank Account" class="form-control form-select js-example-basic-single" id="bank_account_id" name="bank_account_id" <?php echo $postdata['payment_type']=='bank'?"required":""; ?>>
-                            <option value=""> Select Any Bank </option>
+                        <select aria-label="<?php echo __('Bank Account'); ?>" class="form-control form-select js-example-basic-single" id="bank_account_id" name="bank_account_id" <?php echo $postdata['payment_type']=='bank'?"required":""; ?>>
+                            <option value=""> <?php echo __('Select Any Bank'); ?> </option>
                             <?php foreach ($bank_accounts as $cus) { ?>
                                 <option  <?php if($postdata['bank_account_id'] == $cus['id']){ ?> selected  <?php
 } ?> value = <?php echo $cus['id']; ?>   > <?php echo $cus['bank_account_name']." (".$cus['account_code'].")"; ?>
@@ -544,18 +544,18 @@ foreach($invdata as  $transationtable=>$resultdata) {
 
                 <div class="col-lg-6 form-validation-class">
                             <div class="form-group">
-                                <span class="form-label">Payment Process &nbsp;<span class="text-danger">*</span></span>
+                                <span class="form-label"><?php echo __('Payment Process &nbsp;'); ?><span class="text-danger">*</span></span>
                                 <div class="form-radio">
                                     <div class="radio radio-inline">
                                       <label class="form-label">
-                                        <input aria-label="Payment Process" type="radio" name="payment_process" id="payment_process" value="NP" <?php echo ($postdata['payment_process']=='NP' || $postdata['payment_process'] =='')?"checked":""; ?> onchange="anyChange()">
-                                        <i class="helper"></i>Invoice Payments
+                                        <input aria-label="<?php echo __('Payment Process'); ?>" type="radio" name="payment_process" id="payment_process" value="NP" <?php echo ($postdata['payment_process']=='NP' || $postdata['payment_process'] =='')?"checked":""; ?> onchange="anyChange()">
+                                        <i class="helper"></i><?php echo __('Invoice Payments'); ?>
                                     </label>
                                 </div>
                                 <div class="radio radio-inline">
                                   <label class="form-label">
-                                    <input aria-label="Payment Process" type="radio" name="payment_process" id="payment_process_2" value="AP" <?php echo $postdata['payment_process']=='AP'?"checked":""; ?> onchange="anyChange()">
-                                    <i class="helper"></i>Advance Payments
+                                    <input aria-label="<?php echo __('Payment Process'); ?>" type="radio" name="payment_process" id="payment_process_2" value="AP" <?php echo $postdata['payment_process']=='AP'?"checked":""; ?> onchange="anyChange()">
+                                    <i class="helper"></i><?php echo __('Advance Payments'); ?>
                                   </label>
                                 </div>
                         </div>
@@ -564,18 +564,18 @@ foreach($invdata as  $transationtable=>$resultdata) {
                 </div>
 
                 <div class="col-lg-6 form-group form-validation-class">
-                    <span class="form-label">Due Date &nbsp;<span class="text-danger">*</span></span>
-                    <input aria-label="Due Date" class="form-control datepicker" type="text" name="due_date"  id="due_date"   value="<?php echo fromDate($postdata['due_date']); ?>" onblur=" anyChange()" required>
+                    <span class="form-label"><?php echo __('Due Date &nbsp;'); ?><span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Due Date'); ?>" class="form-control datepicker" type="text" name="due_date"  id="due_date"   value="<?php echo fromDate($postdata['due_date']); ?>" onblur=" anyChange()" required>
                      <span class="messages"></span>
                 </div>
                 <div class="col-lg-6 form-group">
-                    <span class="form-label">Reference #</span>
-                    <input aria-label="Reference number" type="text" class="form-control" placeholder="Reference number" name="ref_no" value="<?php echo $postdata['ref_no']; ?>">
+                    <span class="form-label"><?php echo __('Reference #'); ?></span>
+                    <input aria-label="<?php echo __('Reference number'); ?>" type="text" class="form-control" placeholder="<?php echo __('Reference number'); ?>" name="ref_no" value="<?php echo $postdata['ref_no']; ?>">
                 </div>
 
                 <div class="col-lg-12 form-group">
-                    <span class="form-label">Remarks</span>
-                    <textarea aria-label="Remarks" class="form-control" name="remarks"><?php echo $postdata['remarks']; ?></textarea>
+                    <span class="form-label"><?php echo __('Remarks'); ?></span>
+                    <textarea aria-label="<?php echo __('Remarks'); ?>" class="form-control" name="remarks"><?php echo $postdata['remarks']; ?></textarea>
                 </div>
             </div>
         </div>
@@ -585,7 +585,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
     <div class="row">
         <div class="col-lg-12 text-right">
 
-            <button id="kt_login_signin_submit_continue" class="btn btn-primary mr-2"   name="submit_value" value="gettransaction"><i class="la la-check"></i>Show Invoices</button>
+            <button id="kt_login_signin_submit_continue" class="btn btn-primary mr-2"   name="submit_value" value="gettransaction"><i class="la la-check"></i><?php echo __('Show Invoices'); ?></button>
         </div>
     </div>
 </div>
@@ -597,7 +597,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
         <div class="card card-custom">
             <div class="card-header">
               <h5 class="card-title">
-                Invoices
+                <?php echo __('Invoices'); ?>
             </h5>
         </div>
           <?php if(count((array)$invdata) != '0'){ ?>
@@ -607,13 +607,13 @@ foreach($invdata as  $transationtable=>$resultdata) {
                   <tr>
                       <th scope="col" class="" style="width: 2%;">
                     </th>
-                    <th scope="col" class="" style="width: 8%;">Transaction #</th>
-                    <th scope="col" class="thheader" style="width: 10%;">Due Date</th>
-                    <th scope="col" class="thheader text-right" style="width: 15%;">Amount</th>
-                    <th scope="col" class="thheader text-right" style="width: 15%;">Due</th>
-                    <th scope="col" class="thheader text-right" style="width: 20%;">Payment</th>
-                    <th scope="col" class="thheader text-right" style="width: 20%;">TDS</th>
-                    <th scope="col" class="thheader text-right" style="width: 10%;">Total</th>
+                    <th scope="col" class="" style="width: 8%;"><?php echo __('Transaction #'); ?></th>
+                    <th scope="col" class="thheader" style="width: 10%;"><?php echo __('Due Date'); ?></th>
+                    <th scope="col" class="thheader text-right" style="width: 15%;"><?php echo __('Amount'); ?></th>
+                    <th scope="col" class="thheader text-right" style="width: 15%;"><?php echo __('Due'); ?></th>
+                    <th scope="col" class="thheader text-right" style="width: 20%;"><?php echo __('Payment'); ?></th>
+                    <th scope="col" class="thheader text-right" style="width: 20%;"><?php echo __('TDS'); ?></th>
+                    <th scope="col" class="thheader text-right" style="width: 10%;"><?php echo __('Total'); ?></th>
                 </tr>
 
                   <?php $i=1;
@@ -667,7 +667,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
                           <td class="p-2">
                               <div class="checkbox-fade fade-in-primary m-0">
                                   <label class="form-label m-0">
-                                      <input aria-label="Checkbox" type="checkbox" class="itemRow" value="1" id="check_<?php echo $i; ?>" type="checkbox" name="check[<?php echo $i; ?>]" onchange="addrecepitamount(this.id)" <?php echo $checkboxcheked;  ?>>
+                                      <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" class="itemRow" value="1" id="check_<?php echo $i; ?>" type="checkbox" name="check[<?php echo $i; ?>]" onchange="addrecepitamount(this.id)" <?php echo $checkboxcheked;  ?>>
                                       <span class="cr m-0">
                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                     </span>
@@ -685,9 +685,9 @@ foreach($invdata as  $transationtable=>$resultdata) {
                            <div class="close_popup_payment_due custom-popup-open popup_payment_due_tran_<?php echo $i; ?> text-start" style="top:-40px; width: 670px; position: absolute; left :180px">
                               <div class="card latest-update-card" id="experience_details_div">
                                 <div class="card-header">
-                                    <h5>Payment Transaction</h5>
+                                    <h5><?php echo __('Payment Transaction'); ?></h5>
                                     <div class="card-header-right">
-                                      <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePaymentDuePopup()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                      <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePaymentDuePopup()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -695,12 +695,12 @@ foreach($invdata as  $transationtable=>$resultdata) {
                                     <thead>
                                       <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Tran No.</th>
-                                         <th scope="col">payment_date</th>
-                                         <th scope="col">Payment</th>
-                                         <th scope="col">TDS Amount</th>
-                                         <th scope="col">Total</th>
-                                         <th scope="col">Status</th>
+                                        <th scope="col"><?php echo __('Tran No.'); ?></th>
+                                         <th scope="col"><?php echo __('payment_date'); ?></th>
+                                         <th scope="col"><?php echo __('Payment'); ?></th>
+                                         <th scope="col"><?php echo __('TDS Amount'); ?></th>
+                                         <th scope="col"><?php echo __('Total'); ?></th>
+                                         <th scope="col"><?php echo __('Status'); ?></th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -731,9 +731,9 @@ foreach($invdata as  $transationtable=>$resultdata) {
                           <div class="close_popup_payment_due custom-popup-open popup_payment_due_<?php echo $i; ?> text-start" style="top:auto; left:auto; width: 300px; position: absolute; ">
                               <div class="card latest-update-card" id="experience_details_div_2">
                                 <div class="card-header">
-                                    <h5>Payment Terms</h5>
+                                    <h5><?php echo __('Payment Terms'); ?></h5>
                                     <div class="card-header-right">
-                                      <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePaymentDuePopup()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                      <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePaymentDuePopup()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                     </div>
                                 </div>
                                     <div class="card-block">
@@ -750,7 +750,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
                                                     <?php echo customeummarmonyformateifine($pterms['due_amount']);
                                                   if($pterms['advance_offer_date'] !="" && $pterms['advance_offer_amount'] !=""){ ?>
                                             <span class='d-block f-10 f-w-600'>
-                                              Before Date <?php echo fromDate($pterms['advance_offer_date'])." (".customeummarmonyformateifine($pterms['advance_offer_amount']).")"; ?>
+                                              <?php echo __('Before Date'); ?> <?php echo fromDate($pterms['advance_offer_date'])." (".customeummarmonyformateifine($pterms['advance_offer_amount']).")"; ?>
                                             </span>
                                       <?php } ?>
                                             </p>
@@ -773,10 +773,10 @@ foreach($invdata as  $transationtable=>$resultdata) {
 
                       </td>
                       <td class="p-2">
-                          <input aria-label="Input field" class="form-control text-right" type="text" name="paid_amonut[<?php echo $i; ?>]" value="<?php echo $payamt; ?>" onblur="validCalucateamount('<?php echo $i; ?>',this.id,'PAYMENT')" id="receipt_<?php echo $i; ?>" <?php echo $readonly; ?>>
+                          <input aria-label="<?php echo __('Input field'); ?>" class="form-control text-right" type="text" name="paid_amonut[<?php echo $i; ?>]" value="<?php echo $payamt; ?>" onblur="validCalucateamount('<?php echo $i; ?>',this.id,'PAYMENT')" id="receipt_<?php echo $i; ?>" <?php echo $readonly; ?>>
                       </td>
                       <td class="p-2">
-                          <input aria-label="Input field" class="form-control text-right" type="text" name="tds_paid_amonut[<?php echo $i; ?>]" value="<?php echo $tdsamt; ?>" onblur="validCalucateamount('<?php echo $i; ?>',this.id,'TDS')" id="tds_receipt_<?php echo $i; ?>" readonly>
+                          <input aria-label="<?php echo __('Input field'); ?>" class="form-control text-right" type="text" name="tds_paid_amonut[<?php echo $i; ?>]" value="<?php echo $tdsamt; ?>" onblur="validCalucateamount('<?php echo $i; ?>',this.id,'TDS')" id="tds_receipt_<?php echo $i; ?>" readonly>
                       </td>
                       <td class="p-2 text-right">
                           <span id="total_amount_<?php echo $i; ?>"><?php echo customeummarmonyformateifine($dueamt); ?></span>
@@ -788,19 +788,19 @@ foreach($invdata as  $transationtable=>$resultdata) {
                   <?php } ?>
               <tr>
                   <td colspan="4" style="text-align: right; vertical-align: middle;">
-                      Unallocated Amount
+                      <?php echo __('Unallocated Amount'); ?>
                   </td>
                   <td>
                       <input type="hidden" name="unallocated_amount" readonly class="form-control text-right" id="unallocated" value="<?php echo $amount; ?>">
-                      <input aria-label="Unallocated Text" type="text" readonly class="form-control text-right" id="unallocated_text" value="<?php echo customeummarmonyformateifine($amount); ?>">
+                      <input aria-label="<?php echo __('Unallocated Text'); ?>" type="text" readonly class="form-control text-right" id="unallocated_text" value="<?php echo customeummarmonyformateifine($amount); ?>">
                   </td>
                   <td  style="text-align: right; vertical-align: middle;">
-                      Allocated Amount
+                      <?php echo __('Allocated Amount'); ?>
                   </td>
                   <td colspan="2">
                       <?php $allocated_amount = $payments['allocated_amount']!=""?$payments['allocated_amount']:0;?>
                       <input type="hidden" name="allocated_amount" readonly class="form-control text-right" id="allocated_amount" value="<?php echo $allocated_amount; ?>">
-                      <input aria-label="Allocated Amount Text" type="text"  readonly class="form-control text-right" id="allocated_amount_text" value="<?php echo customeummarmonyformateifine($allocated_amount); ?>" required>
+                      <input aria-label="<?php echo __('Allocated Amount Text'); ?>" type="text"  readonly class="form-control text-right" id="allocated_amount_text" value="<?php echo customeummarmonyformateifine($allocated_amount); ?>" required>
                   </td>
               </tr>
           </table>
@@ -808,7 +808,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
         <div class="card-footer">
             <div class="row">
                 <div class="col-lg-12 text-right">
-                    <button id="allocatebtn11" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="allocatetransaction"><i class="la la-check"></i> <?php echo $rid!=""?"Update":"Submit"; ?></button>
+                    <button id="allocatebtn11" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="allocatetransaction"><i class="la la-check"></i> <?php echo $rid!=""?__('Update'):__('Submit'); ?></button>
 
                     <input type="hidden" id="allocatebtn">
                 </div>
@@ -816,7 +816,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
         </div>
         <?php }else{ ?>
               <div class="card-px text-center py-20 m-t-30">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Invoices</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoices'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
@@ -827,7 +827,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
     <div class="card card-custom">
             <div class="card-header">
               <h5 class="card-title">
-                Bill Allocations
+                <?php echo __('Bill Allocations'); ?>
             </h5>
         </div>
         <div class="card-body">
@@ -837,7 +837,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
                       <div class="card-body">
                           <div class="text-center">
                               <h4 class="m-b-0 d-inline-block text-c-primary"><?php echo customeummarmonyformateifine($postdata['amount']); ?></h4>
-                              <p class="m-b-0 m-t-15">Amount</p>
+                              <p class="m-b-0 m-t-15"><?php echo __('Amount'); ?></p>
                           </div>
                       </div>
                   </div>
@@ -847,7 +847,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
                       <div class="card-body">
                           <div class="text-center">
                               <h4 class="m-b-0 d-inline-block text-c-success"><?php echo customeummarmonyformateifine($postdata['allocated_amount']); ?></h4>
-                              <p class="m-b-0 m-t-15">Allocated Amount</p>
+                              <p class="m-b-0 m-t-15"><?php echo __('Allocated Amount'); ?></p>
                           </div>
                       </div>
                   </div>
@@ -857,7 +857,7 @@ foreach($invdata as  $transationtable=>$resultdata) {
                       <div class="card-body">
                           <div class="text-center">
                               <h4 class="m-b-0 d-inline-block text-c-red"><?php echo customeummarmonyformateifine($postdata['unallocated_amount']); ?></h4>
-                              <p class="m-b-0 m-t-15">Un-Allocated Amount</p>
+                              <p class="m-b-0 m-t-15"><?php echo __('Un-Allocated Amount'); ?></p>
                           </div>
                       </div>
                   </div>
@@ -866,13 +866,13 @@ foreach($invdata as  $transationtable=>$resultdata) {
           </div>
             <table class="table table-hover m-b-0" id="invoiceItem_2">
                 <tr>
-                  <th scope="col" class="" style="width: 10%;">Transaction #</th>
-                  <th scope="col" class="thheader" style="width: 10%;">Date</th>
+                  <th scope="col" class="" style="width: 10%;"><?php echo __('Transaction #'); ?></th>
+                  <th scope="col" class="thheader" style="width: 10%;"><?php echo __('Date'); ?></th>
 
-                  <th scope="col" class="thheader text-right" style="width: 20%;">Due Amount</th>
-                  <th scope="col" class="thheader text-right" style="width: 20%;">Paid Amount</th>
-                   <th scope="col" class="thheader text-right" style="width: 20%;">TDS Amount</th>
-                   <th scope="col" class="thheader text-right" style="width: 20%;">Total</th>
+                  <th scope="col" class="thheader text-right" style="width: 20%;"><?php echo __('Due Amount'); ?></th>
+                  <th scope="col" class="thheader text-right" style="width: 20%;"><?php echo __('Paid Amount'); ?></th>
+                   <th scope="col" class="thheader text-right" style="width: 20%;"><?php echo __('TDS Amount'); ?></th>
+                   <th scope="col" class="thheader text-right" style="width: 20%;"><?php echo __('Total'); ?></th>
               </tr>
               <?php foreach($payment_allocations as $paalocation){ ?>
                 <tr>

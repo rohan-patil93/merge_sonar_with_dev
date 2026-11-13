@@ -77,7 +77,7 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 						<input class="form-control" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input" />
 					</div>
 					<div class="col-3">
-					<button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light">Submit</button>
+					<button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light"><?php echo __('Submit'); ?></button>
 				</div>
 				</div>
 				
@@ -128,7 +128,7 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 									<th scope="col">Employee ID</th>
 									<th scope="col">Insurance Person Name</th>
 									<th scope="col">Paid Days</th>
-									<th scope="col">Total Monthly Wages</th>
+									<th scope="col"><?php echo __('Total Monthly Wages'); ?></th>
 									<th scope="col">Reason Code For Zero Working Days</th>
 									<th scope="col">Last Working Days</th>
 								</tr>

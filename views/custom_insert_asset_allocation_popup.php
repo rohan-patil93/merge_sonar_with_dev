@@ -117,13 +117,13 @@ function submitdetails(){
 	<table  class="table table-striped table-bordered nowrap"> 
 		<thead>
 			<tr>
-				<th scope="col">Asset Code</th>
-				<th scope="col">Asset Name</th>
-				<th scope="col">Brand</th>
-				<th scope="col">Model</th>
-				<th scope="col">Serial Number</th>
-				<!-- <th scope="col">Location </th>
-				<th scope="col">Satus</th>
+				<th scope="col"><?= __('Asset Code') ?></th>
+				<th scope="col"><?= __('Asset Name') ?></th>
+				<th scope="col"><?= __('Brand') ?></th>
+				<th scope="col"><?= __('Model') ?></th>
+				<th scope="col"><?= __('Serial Number') ?></th>
+				<!-- <th scope="col"><?= __('Location') ?></th>
+				<th scope="col"><?= __('Status') ?></th>
 				<th scope="col">Condition</th>  -->
 			</tr>
 		</thead>
@@ -141,7 +141,7 @@ function submitdetails(){
 						<td><?php echo $list_asset['serial_no']; ?></td>
 						<!-- <td class="w-full">
 							<select  class="form-select js-example-basic-single " name="asset_location[]" aria-label="Asset Location">
-								<option value="">Select Any One</option>
+								<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($locations as $location) { ?>					
 									<option location value="<?php echo $location['id']; ?>" <?php echo $location['id'] == $list_asset['asset_location']?"selected":""; ?>><?php echo ucwords($location['location_name']); ?></option>
 								<?php } ?>
@@ -149,7 +149,7 @@ function submitdetails(){
 						</td>
 						<td class="w-full"><?php //echo $ass_status[$list_asset['asset_status']]; ?>
 							<select  class="form-select js-example-basic-single" name="asset_status[]" aria-label="Asset Status">
-								<option value="">Select Any One</option>
+								<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($ass_status as $ass_statuskey=>$ass_statuss){ ?>					
 									<option  value="<?php echo $ass_statuskey; ?>" <?php echo $ass_statuskey == $list_asset['asset_status']?"selected":""; ?>><?php echo ucwords($ass_statuss); ?></option>
 								<?php }  ?>
@@ -157,7 +157,7 @@ function submitdetails(){
 						</td>
 						<td class="w-full">
 							<select  class="form-select js-example-basic-single " name="conditions[]" aria-label="Conditions">
-								<option value="">Select Any One</option>
+								<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($ass_condition as $ass_conditiokey=>$ass_conditio) { ?>					
 									<option  value="<?php echo $ass_conditiokey; ?>" <?php echo $ass_conditiokey == $list_asset['conditions']?"selected":""; ?>><?php echo ucwords($ass_conditio); ?></option>
 								<?php } ?>
@@ -174,23 +174,23 @@ function submitdetails(){
 	<div class="card p-2 mt-2">	
 		<div class="row">
 			<div class="col-lg-6">
-				<label class="f-w-700">Allocation Type <span class="requried text-danger">*</span></label>
+				<label class="f-w-700"><?= __('Allocation Type') ?> <span class="requried text-danger">*</span></label>
 				<div class="form-radio">
 				    <div class="radio radio-inline">
 				      <label class="form-label" for="allocation_type_e">
 				        <input type="radio" id="allocation_type_e"  name="allocation_type" value="E" onclick="selectAllocationType()" style="display: none;" checked aria-label="Allocation Type">
-				        <i class="helper"></i>User</label>
+				        <i class="helper"></i><?= __('User') ?></label>
 				    </div>
 				    <div class="radio radio-inline">
 				      <label class="form-label" for="allocation_type_cc">
 				        <input type="radio" id="allocation_type_cc" name="allocation_type"  value="CC" onclick="selectAllocationType()"  style="display: none;" aria-label="Allocation Type">
-				        <i class="helper"></i>Cost Cneters
+				        <i class="helper"></i><?= __('Cost Centers') ?>
 				      </label>
 				    </div>
 				    <div class="radio radio-inline">
 				      <label class="form-label" for="allocation_type_d">
 				        <input type="radio" id="allocation_type_d" name="allocation_type"  value="D" onclick="selectAllocationType()" style="display: none;" aria-label="Allocation Type">
-				        <i class="helper"></i>Departments
+				        <i class="helper"></i><?= __('Departments') ?>
 				      </label>
 				    </div>
 				</div>
@@ -198,62 +198,62 @@ function submitdetails(){
 		</div>
 		<div class="row">
 			<div class="form-group col-lg-4 select_caost_center w-full" style="display:none">
-				<label>Cost Center <span class="requried">*</span></label>
+				<label><?= __('Cost Center') ?> <span class="requried">*</span></label>
 				<select class="form-select js-example-basic-single " name="coast_center_id" aria-label="Coast Center Id">
-						<option value="">Select Any One</option>
+						<option value=""><?= __('Select Any One') ?></option>
 				<?php foreach ($costcenters as $costcenter){ ?>					
 					<option  value="<?php echo $costcenter['id']; ?>" ><?php echo ucwords($costcenter['cost_center_name']); ?></option>
 				<?php } ?>
 				</select> 
 			</div>
 			<div class="form-group col-lg-4 select_dept w-full" style="display:none">
-				<label>Department <span class="requried">*</span></label>
+				<label><?= __('Department') ?> <span class="requried">*</span></label>
 				<select class="form-select js-example-basic-single " name="departent_id" aria-label="Departent Id">
-						<option value="">Select Any One</option>
+						<option value=""><?= __('Select Any One') ?></option>
 				<?php foreach ($departments as $departments){ ?>					
 					<option  value="<?php echo $departments['id']; ?>"><?php echo ucwords($departments['department_name']); ?></option>
 				<?php } ?>
 				</select> 
 			</div>
 			<div class="form-group col-lg-4 w-full" >
-				<label>User <span class="requried">*</span></label>
+				<label><?= __('User') ?> <span class="requried">*</span></label>
 				<span class="d-block error-message text-danger"></span>
 				<select class="form-select js-example-basic-single requried_field" name="select_user_id" aria-label="Select User Id">
-						<option value="">Select Any One</option>
+						<option value=""><?= __('Select Any One') ?></option>
 				<?php foreach ($application_users as $ausr){ ?>					
 					<option  value="<?php echo $ausr['id']; ?>" ><?php echo ucwords($ausr['display_name']); ?></option>
 				<?php } ?>
 				</select> 
 			</div>
 			<div class="form-group col-lg-4">
-				<label>Start date <span class="requried text-danger">*</span></label>
+				<label><?= __('Start date') ?> <span class="requried text-danger">*</span></label>
 				<span class="d-block error-message text-danger"></span>
 				<input type="text" class="form-control datepicker requried_field" id="start_date"  name="start_date" value="<?php echo fromDate(); ?>" aria-label="Start Date">
 			</div>
 			<div class="form-group col-lg-4">
-				<label>End date <span class="requried text-danger">*</span></label>
+				<label><?= __('End date') ?> <span class="requried text-danger">*</span></label>
 				<span class="d-block error-message text-danger"></span>
 				<input type="text" class="form-control datepicker requried_field" id="end_date" name="end_date" aria-label="End Date">
 			</div>
 			<div class=" col-lg-5" >
-				<label>How Do You Want The Asset To be Delivered?<span class="requried">*</span></label>
+				<label><?= __('How Do You Want The Asset To be Delivered?') ?><span class="requried">*</span></label>
 				<div class="form-radio">
 				<div class="radio radio-inline">
                       <label class="form-label">
                         <input type="radio" name="asset_deliver" value="S" style="display:none;" <?php echo ($request['asset_deliver']=="S" || $request['asset_deliver']=="")?"checked":"";?> aria-label="Asset Deliver">
-                        <i class="helper"></i>Self Pickup
+                        <i class="helper"></i><?= __('Self Pickup') ?>
                       </label>
                     </div>
                     <div class="radio radio-inline">
                       <label class="form-label">
                         <input type="radio" name="asset_deliver" value="D" style="display:none" <?php echo $request['asset_deliver']=="D"?"checked":"";?> aria-label="Asset Deliver">
-                        <i class="helper"></i>Deliver Through Logistics Partner
+                        <i class="helper"></i><?= __('Deliver Through Logistics Partner') ?>
                       </label>
                     </div>
                  </div>   
 			</div>
 			<div class="form-group col-lg-7">
-				<label>Remarks </label>
+				<label><?= __('Remarks') ?> </label>
 				<textarea type="text" class="form-control" id="remarks" rows="4" cols="50" name="remarks" aria-label="Remarks"></textarea>
 			</div> 
 		</div>
@@ -264,8 +264,8 @@ function submitdetails(){
 </div>
 
 <div class="modal-footer">
-	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-	<button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()">Submit</button>
+	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
+	<button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()"><?= __('Submit') ?></button>
 </div>
 
 <!-- <script src="assets/pages/data-table/extensions/responsive/js/responsive-custom.js"></script> -->

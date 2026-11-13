@@ -26,7 +26,7 @@ if($_GET['Rid'] !=""){
     }
     function getPettyCashBoxTab(type){
         var petty_cash_box_id = $("#petty_cash_box_id").val();
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?php echo htmlspecialchars(__('Preview'), ENT_QUOTES); ?>"></div>';
         $("#ajaxcallpage").html(loader);
         if(type == "add"){
             jQuery.ajax({
@@ -85,19 +85,19 @@ if($_GET['Rid'] !=""){
                 <a class="nav-link position-relative p-3 <?php echo $im == 1?"active":""; ?>" data-bs-toggle="tab" href="#courier" role="tab" onclick="getPettyCashBox('<?php echo $pcbo['pc_box_id']; ?>')" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                    <i class="ti-package f-30 text-info p-l-25"></i>
                     <div class="row mt-1 text-dark">
-                        <p class="f-w-700 m-b-0 col-lg-5 f-12">Description</p>
+                        <p class="f-w-700 m-b-0 col-lg-5 f-12"><?php echo __('Description'); ?></p>
                         <p class="m-b-0 f-12 col-lg-7"><?php echo $pcbo['pc_box_description']; ?></p>
                     </div>
                     <div class="row mt-1 text-dark">
-                        <p class="f-w-700 m-b-0 col-lg-5 f-12">Limit</p>
+                        <p class="f-w-700 m-b-0 col-lg-5 f-12"><?php echo __('Limit'); ?></p>
                         <p class="m-b-0 f-12 col-lg-7"><?php echo customeummarmonyformateifine($pcbo['pc_limit']); ?></p>
                     </div>
                     <div class="row mt-1 text-dark">
-                        <p class="f-w-700 m-b-0 col-lg-5 f-12">TopUp Frequency</p>
+                        <p class="f-w-700 m-b-0 col-lg-5 f-12"><?php echo __('TopUp Frequency'); ?></p>
                         <p class="m-b-0 f-12 col-lg-7"><?php echo $topup_frequency[$pcbo['topup_frequency']]; ?></p>
                     </div>
                     <div class="row mt-1 text-dark">
-                        <p class="f-w-700 m-b-0 col-lg-5 f-12">TopUp Amount</p>
+                        <p class="f-w-700 m-b-0 col-lg-5 f-12"><?php echo __('TopUp Amount'); ?></p>
                         <p class="m-b-0 f-12 col-lg-7"><?php echo customeummarmonyformateifine($pcbo['topup_amount']); ?></p>
                     </div>
                 </a>
@@ -111,10 +111,10 @@ if($_GET['Rid'] !=""){
 <div class="card mt-3">
     <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3 float-right">
         <li class="nav-item">
-            <button type="button" class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" list" role="tab" aria-selected="true" onclick="getPettyCashBoxTab('list')"> List </button>
+            <button type="button" class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" list" role="tab" aria-selected="true" onclick="getPettyCashBoxTab('list')"> <?php echo __('List'); ?> </button>
         </li>
         <li class="nav-item">
-            <button type="button" class="nav-link f-w-600 f-12" data-bs-toggle="tab" createxpence" role="tab" aria-selected="true" onclick="getPettyCashBoxTab('add')"> Add Expenses </button>
+            <button type="button" class="nav-link f-w-600 f-12" data-bs-toggle="tab" createxpence" role="tab" aria-selected="true" onclick="getPettyCashBoxTab('add')"> <?php echo __('Add Expenses'); ?> </button>
         </li>
     </ul>
     <div class="card-body" id="ajaxcallpage">

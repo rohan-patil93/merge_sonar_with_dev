@@ -55,7 +55,7 @@ $reqDateTime = !empty($task['request_completion_date']) ? explode(" ", $task['re
 ?>
 <div class="modal-header">
     <h5 class="modal-title">
-        Update Status - <?= htmlspecialchars($currentStatusName); ?>
+        <?php echo __('Update Status -'); ?> <?= htmlspecialchars($currentStatusName); ?>
     </h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 </div>
@@ -70,15 +70,15 @@ $reqDateTime = !empty($task['request_completion_date']) ? explode(" ", $task['re
         <input type="hidden" id="sla_resolution_time" name="sla_resolution_time" value="<?= htmlspecialchars($task['sla_resolution_time'] ?? ''); ?>">
         <div class="row mb-3">
             <div class="col-md-4">
-                <span class="form-label">Ticket No.</span>
+                <span class="form-label"><?php echo __('Ticket No.'); ?></span>
                 <p><?= htmlspecialchars($task['ticket_id']); ?></p>
             </div>
             <div class="col-md-4">
-                <span class="form-label">Subject</span>
+                <span class="form-label"><?php echo __('Subject'); ?></span>
                 <p><?= htmlspecialchars($task['task_name']); ?></p>
             </div>
             <div class="col-md-4">
-                <span class="form-label">Priority</span>
+                <span class="form-label"><?php echo __('Priority'); ?></span>
                 <span class="badge bg-primary">
                     <?= htmlspecialchars($priority_categories[$task['priority']]['name'] ?? ''); ?>
                 </span>
@@ -88,8 +88,8 @@ $reqDateTime = !empty($task['request_completion_date']) ? explode(" ", $task['re
             <?php if ($nextStatus == "ST_APPROVAL_PENDING" || $nextStatus == "ST_INPROGRESS"): ?>
                 <div class="col-md-6"
                     style="pointer-events: <?= $nextStatus == "ST_APPROVAL_PENDING" ? "auto" : "none" ?>; opacity: <?= $nextStatus == "ST_APPROVAL_PENDING" ? "1" : "0.7" ?>;">
-                    <span class="form-label">Severity <span class="text-danger">*</span></span>
-                    <select aria-label="Severity" class="form-select" name="severity_id" id="severity_idselect"
+                    <span class="form-label"><?php echo __('Severity'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?php echo __('Severity'); ?>" class="form-select" name="severity_id" id="severity_idselect"
                         onchange="getSeverityType(this.value,'<?= $task['project_id']; ?>')">
                         <?php foreach ($severity_categories as $sev): ?>
                             <option value="<?= $sev['id']; ?>" <?= $task['severity_id'] == $sev['id'] ? "selected" : ""; ?>>
@@ -100,67 +100,67 @@ $reqDateTime = !empty($task['request_completion_date']) ? explode(" ", $task['re
                 </div>
                 <div class="col-md-3"
                     style="pointer-events: <?= $nextStatus == "ST_APPROVAL_PENDING" ? "auto" : "none" ?>; opacity: <?= $nextStatus == "ST_APPROVAL_PENDING" ? "1" : "0.7" ?>;">
-                    <span class="form-label">Requested Date</span>
-                    <input aria-label="Request Completion Date" type="text" class="form-control datepicker" id="request_completion_date"
+                    <span class="form-label"><?php echo __('Requested Date'); ?></span>
+                    <input aria-label="<?php echo __('Request Completion Date'); ?>" type="text" class="form-control datepicker" id="request_completion_date"
                         name="request_completion_date" value="<?= htmlspecialchars($reqDateTime[0]); ?>">
                 </div>
                 <div class="col-md-3"
                     style="pointer-events: <?= $nextStatus == "ST_APPROVAL_PENDING" ? "auto" : "none" ?>; opacity: <?= $nextStatus == "ST_APPROVAL_PENDING" ? "1" : "0.7" ?>;">
-                    <span class="form-label">Requested Time</span>
-                    <input aria-label="Request Completion Time" type="time" class="form-control" id="request_completion_time" name="request_completion_time"
+                    <span class="form-label"><?php echo __('Requested Time'); ?></span>
+                    <input aria-label="<?php echo __('Request Completion Time'); ?>" type="time" class="form-control" id="request_completion_time" name="request_completion_time"
                         value="<?= htmlspecialchars($reqDateTime[1]); ?>">
                 </div>
             <?php endif; ?>
             <?php if ($nextStatus == "ST_INPROGRESS" || $nextStatus == "ST_COMPLETE"): ?>
                 <div class="col-md-6">
-                    <span class="form-label">Planned Completion Date</span>
-                    <input aria-label="Planed Completion Date" type="text" class="form-control datepicker" name="planed_completion_date" value="">
+                    <span class="form-label"><?php echo __('Planned Completion Date'); ?></span>
+                    <input aria-label="<?php echo __('Planed Completion Date'); ?>" type="text" class="form-control datepicker" name="planed_completion_date" value="">
                 </div>
                 <div class="col-md-6">
-                    <span class="form-label">Planned Completion Time</span>
-                    <input aria-label="Planed Completion Time" type="time" class="form-control" name="planed_completion_time" value="">
+                    <span class="form-label"><?php echo __('Planned Completion Time'); ?></span>
+                    <input aria-label="<?php echo __('Planed Completion Time'); ?>" type="time" class="form-control" name="planed_completion_time" value="">
                 </div>
             <?php endif; ?>
             <?php if ($nextStatus == "ST_COMPLETE"): ?>
                 <div class="col-md-6">
-                    <span class="form-label">Resolution Type</span>
-                    <select aria-label="Resolution Type" class="form-select" name="resolution_type">
-                        <option value="">Select</option>
+                    <span class="form-label"><?php echo __('Resolution Type'); ?></span>
+                    <select aria-label="<?php echo __('Resolution Type'); ?>" class="form-select" name="resolution_type">
+                        <option value=""><?php echo __('Select'); ?></option>
                         <?php foreach ($resolution_types as $rt): ?>
                             <option value="<?= $rt['id']; ?>"><?= htmlspecialchars($rt['name']); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <span class="form-label">Fixing Type</span>
-                    <select aria-label="Fixing Type" class="form-select" name="fixing_type">
-                        <option value="">Select</option>
+                    <span class="form-label"><?php echo __('Fixing Type'); ?></span>
+                    <select aria-label="<?php echo __('Fixing Type'); ?>" class="form-select" name="fixing_type">
+                        <option value=""><?php echo __('Select'); ?></option>
                         <?php foreach ($fixing_types as $ft): ?>
                             <option value="<?= $ft['id']; ?>"><?= htmlspecialchars($ft['name']); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="col-12">
-                    <span class="form-label">Step Taken</span>
-                    <textarea aria-label="Step Taken" class="form-control" name="step_taken" rows="2"></textarea>
+                    <span class="form-label"><?php echo __('Step Taken'); ?></span>
+                    <textarea aria-label="<?php echo __('Step Taken'); ?>" class="form-control" name="step_taken" rows="2"></textarea>
                 </div>
                 <div class="col-12">
-                    <span class="form-label">Resolution Description</span>
-                    <textarea aria-label="Resolution Description" class="form-control" name="resolution_description" rows="2"></textarea>
+                    <span class="form-label"><?php echo __('Resolution Description'); ?></span>
+                    <textarea aria-label="<?php echo __('Resolution Description'); ?>" class="form-control" name="resolution_description" rows="2"></textarea>
                 </div>
             <?php endif; ?>
             <div class="col-12">
-                <span class="form-label">Comment</span>
-                <textarea aria-label="Comment" class="form-control" name="comment" rows="3"></textarea>
+                <span class="form-label"><?php echo __('Comment'); ?></span>
+                <textarea aria-label="<?php echo __('Comment'); ?>" class="form-control" name="comment" rows="3"></textarea>
             </div>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
     <button type="button" class="btn btn-primary"
         onclick="dynamicStatusUpdatePopUp('<?= urlencode($_POST['post_array']); ?>','','','','<?= $nextStatus; ?>')">
-        Submit
+        <?php echo __('Submit'); ?>
     </button>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" integrity="sha384-nLoOnA/BDh8A/jxqtckg4DumuCGOBYUnNJLZdQz/zfYNp3wcjGSoWTAzgko06G/2" crossorigin="anonymous"></script>
@@ -204,7 +204,7 @@ $reqDateTime = !empty($task['request_completion_date']) ? explode(" ", $task['re
                         $("#sla_resolution_time").val(result.sla_response['sla_resolution_time']);
                         console.log("📌 SLA fields updated successfully.");
                     } else {
-                        Swal.fire({ icon: 'error', title: 'Oops', text: result.sla_response['error'] || 'Unknown error' });
+                        Swal.fire({ icon: 'error', title: <?php echo json_encode(__('Oops')); ?>, text: result.sla_response['error'] || 'Unknown error' });
                         $("#request_completion_date, #request_completion_time, #sla_actual_response_date, #sla_resolution_date, #sla_responce_time, #sla_resolution_time").val('');
                     }
                 } catch (e) {
@@ -212,7 +212,7 @@ $reqDateTime = !empty($task['request_completion_date']) ? explode(" ", $task['re
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Invalid API response'
+                        text: <?php echo json_encode(__('Invalid API response')); ?>
                     });
                     $("#request_completion_date, #request_completion_time, #sla_actual_response_date, #sla_resolution_date, #sla_responce_time, #sla_resolution_time").val('');
                 }
@@ -221,8 +221,8 @@ $reqDateTime = !empty($task['request_completion_date']) ? explode(" ", $task['re
                 console.error("❌ Ajax error:", status, error);
                 Swal.fire({
                     icon: 'error',
-                    title: 'Request Failed',
-                    text: 'Could not reach getseverity API'
+                    title: <?php echo json_encode(__('Request Failed')); ?>,
+                    text: <?php echo json_encode(__('Could not reach getseverity API')); ?>
                 });
             }
         });
@@ -269,14 +269,14 @@ $reqDateTime = !empty($task['request_completion_date']) ? explode(" ", $task['re
                     if (isSuccess) {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Updated',
-                            text: 'Status updated successfully!'
+                            title: <?php echo json_encode(__('Updated')); ?>,
+                            text: <?php echo json_encode(__('Status updated successfully!')); ?>
                         }).then(() => location.reload());
                     } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'API returned error!'
+                            text: <?php echo json_encode(__('API returned error!')); ?>
                         });
                     }
                 } catch (e) {
@@ -284,7 +284,7 @@ $reqDateTime = !empty($task['request_completion_date']) ? explode(" ", $task['re
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Invalid API response'
+                        text: <?php echo json_encode(__('Invalid API response')); ?>
                     });
                 }
             }

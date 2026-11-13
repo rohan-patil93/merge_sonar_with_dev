@@ -71,7 +71,7 @@
 ?>
 <script type="text/javascript">
     function adduser(){
-        alert("Man");
+        alert(<?php echo json_encode(__('Man')); ?>);
         console.log("Ravi check");
         var count = $(".userrow").length;
         count++;
@@ -104,11 +104,11 @@
         count++;
         var htmlRows = '';
         htmlRows +='<tr class="datatable-row taskrow" id="taskrow_'+count+'">';
-         htmlRows += '<td  class="p-3" style="width: 20%;"> <span><input aria-label="Task Name"  class="form-control mt-3 mb-3" type="text" value="" id="project-name" name="task_name[]" placeholder="Task Name"></span>  </td>';
-         htmlRows += '<td class="p-3" style="width: 20%;"> <textarea aria-label="Task Description[]" name="task_description[]" class="form-control"></textarea> </td>';
-         htmlRows += '  <td class="p-3"  style="width: 20%;"><div class="input-group col-md-7 mt-3 mb-3 pl-0"><div class="input-group-prepend">   <button type="button" class="btn btn-secondary">USD</button>   </div><input type="text" class="form-control" aria-label="Text input with dropdown button"  name="task_rate_hour[]" ></div></td>';
-         htmlRows += '<td class="p-3" style="width: 20%;"> <input type="text" class="form-control"  name="task_budget_hour[]" placeholder="HH:MM" aria-label="Text input with dropdown button">  </td>';
-           htmlRows += '<td class="p-3" style="width: 10%;"> <div class="checkbox-list "> <label class="checkbox checkbox-outline checkbox-outline-2x checkbox-primary"><input aria-label="Bill Type[]" type="checkbox" name="bill_type[]"> <span class="float-left"></span>Billable </label> </div> </td>';
+         htmlRows += '<td  class="p-3" style="width: 20%;"> <span><input aria-label="<?php echo __('Task Name'); ?>"  class="form-control mt-3 mb-3" type="text" value="" id="project-name" name="task_name[]" placeholder="<?php echo __('Task Name'); ?>"></span>  </td>';
+         htmlRows += '<td class="p-3" style="width: 20%;"> <textarea aria-label="<?php echo __('Task Description[]'); ?>" name="task_description[]" class="form-control"></textarea> </td>';
+         htmlRows += '  <td class="p-3"  style="width: 20%;"><div class="input-group col-md-7 mt-3 mb-3 pl-0"><div class="input-group-prepend">   <button type="button" class="btn btn-secondary"><?php echo __('USD'); ?></button>   </div><input type="text" class="form-control" aria-label="<?php echo __('Text input with dropdown button'); ?>"  name="task_rate_hour[]" ></div></td>';
+         htmlRows += '<td class="p-3" style="width: 20%;"> <input type="text" class="form-control"  name="task_budget_hour[]" placeholder="<?php echo __('HH:MM'); ?>" aria-label="<?php echo __('Text input with dropdown button'); ?>">  </td>';
+           htmlRows += '<td class="p-3" style="width: 10%;"> <div class="checkbox-list "> <label class="checkbox checkbox-outline checkbox-outline-2x checkbox-primary"><input aria-label="<?php echo __('Bill Type[]'); ?>" type="checkbox" name="bill_type[]"> <span class="float-left"></span>Billable </label> </div> </td>';
         htmlRows += '<td class="p-3"  style="width: 10%;"> <div onclick="removetask('+count+')" style="cursor: pointer;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> <i class="flaticon2-rubbish-bin-delete-button"></i></div></td>';
          htmlRows += ' </tr>';
         $('#table_task').append(htmlRows);
@@ -124,7 +124,7 @@
             <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
             <div class="alert-text"><?php echo $content; ?></div>
             <div class="alert-close">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="close" data-dismiss="alert" aria-label="<?php echo __('Close'); ?>">
                     <span aria-hidden="true"><i class="ki ki-close"></i></span>
                 </button>
             </div>
@@ -132,12 +132,12 @@
         <?php } ?>
         <div class="card card-custom card-sticky" id="kt_page_sticky_card">
             <div class="card-header">
-                <div class="card-title"><h3 class="card-label">&nbsp;<?php echo "Project";  ?> </h3>  </div>
+                <div class="card-title"><h3 class="card-label">&nbsp;<?php echo __('Project');  ?> </h3>  </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="card-toolbar">
                         <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                             <i class="ki ki-long-arrow-back icon-xs"></i>
-                            Back
+                            <?php echo __('Back'); ?>
                         </a>
                     </div>
                 </div>
@@ -150,71 +150,71 @@
                     <div class="col-md-6">
                         <div class="card-body">
                             <div class="form-group row">
-                                <span class="col-3 col-form-label">Project Name</span>
+                                <span class="col-3 col-form-label"><?php echo __('Project Name'); ?></span>
                                 <div class="col-9">
-                                    <input aria-label="Name" class="form-control" type="text"  id="project-name_2" name="name" value="<?php echo $pdata['name']; ?>">
+                                    <input aria-label="<?php echo __('Name'); ?>" class="form-control" type="text"  id="project-name_2" name="name" value="<?php echo $pdata['name']; ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <span class="col-3 col-form-label">Description</span>
+                                <span class="col-3 col-form-label"><?php echo __('Description'); ?></span>
                                 <div class="col-9">
-                                    <textarea aria-label="Descrption" class="form-control" name="descrption"  id="description" rows="3"><?php echo $pdata['description']; ?></textarea>
+                                    <textarea aria-label="<?php echo __('Descrption'); ?>" class="form-control" name="descrption"  id="description" rows="3"><?php echo $pdata['description']; ?></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <span class="col-3 col-form-label">Customer Name</span>
+                                <span class="col-3 col-form-label"><?php echo __('Customer Name'); ?></span>
                                 <div class="col-9">
-                                    <select aria-label="Customer" class="form-control" id="" name="customer_id">
-                                        <option value="0"> Select Any One</option>
+                                    <select aria-label="<?php echo __('Customer'); ?>" class="form-control" id="" name="customer_id">
+                                        <option value="0"> <?php echo __('Select Any One'); ?></option>
                                          <?php foreach($customers as $customer){ ?>
-                                            <option  <?php if($customer['id'] == $pdata['customer_id']) { echo "selected";
+                                            <option  <?php if($customer['id'] == $pdata['customer_id']) { echo __('selected');
 } ?> value="<?php echo $customer['id']; ?>"><?php echo $customer['name']; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <span class="col-3 col-form-label">Billing Method</span>
+                                <span class="col-3 col-form-label"><?php echo __('Billing Method'); ?></span>
                                 <div class="col-9">
-                                   <select aria-label="Billing Method" class="form-control" id="" name="billing_method_id">
-                                        <option value="0"> Select Any One</option>
+                                   <select aria-label="<?php echo __('Billing Method'); ?>" class="form-control" id="" name="billing_method_id">
+                                        <option value="0"> <?php echo __('Select Any One'); ?></option>
                                         <?php foreach($project_budget_type as $type){ ?>
-                                            <option <?php if($type['id'] == $pdata['billing_method_id']) { echo "selected";
+                                            <option <?php if($type['id'] == $pdata['billing_method_id']) { echo __('selected');
 } ?> value="<?php echo $type['id']; ?>"><?php echo $type['name']; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <span class="col-3 col-form-label">Total Project Cost</span>
+                                <span class="col-3 col-form-label"><?php echo __('Total Project Cost'); ?></span>
                                 <div class="col-5">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <button type="button" class="btn btn-secondary">USD</button>
+                                            <button type="button" class="btn btn-secondary"><?php echo __('USD'); ?></button>
                                         </div>
-                                        <input aria-label="Project Cost" type="text" class="form-control" name="project_cost" value="<?php echo $pdata['project_cost']; ?>">
+                                        <input aria-label="<?php echo __('Project Cost'); ?>" type="text" class="form-control" name="project_cost" value="<?php echo $pdata['project_cost']; ?>">
                                     </div>
                                     <div class="checkbox-list mt-6">
                                <label class="checkbox checkbox-outline checkbox-outline-2x checkbox-primary">
-                                  <input aria-label="Add Budget Project" type="checkbox" name="add_budget_project"  <?php if( $pdata['add_budget_project'] == '1') { echo "checked";
+                                  <input aria-label="<?php echo __('Add Budget Project'); ?>" type="checkbox" name="add_budget_project"  <?php if( $pdata['add_budget_project'] == '1') { echo __('checked');
 } ?> >
                                   <span class="float-left"></span>
-                                  Add Budget for this project
+                                  <?php echo __('Add Budget for this project'); ?>
                                </label>
                             </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <span class="col-3 col-form-label">Budget Type</span>
+                                <span class="col-3 col-form-label"><?php echo __('Budget Type'); ?></span>
                                 <div class="col-9">
-                                    <select aria-label="Budget Type" class="form-control" id="" name="budget_type">
-                                        <option value="0"> Select Any One</option>
+                                    <select aria-label="<?php echo __('Budget Type'); ?>" class="form-control" id="" name="budget_type">
+                                        <option value="0"> <?php echo __('Select Any One'); ?></option>
                                         <?php foreach($project_billing_method as $method){ ?>
-                                            <option <?php if($method['id'] == $pdata['budget_type']) { echo "selected";
+                                            <option <?php if($method['id'] == $pdata['budget_type']) { echo __('selected');
 } ?> value="<?php echo $method['id']; ?>"><?php echo $method['name']; ?></option>
                                         <?php } ?>
                                     </select>
-                                    <span class="form-text text-muted">If you select this option, you can track your budget for the task.</span>
+                                    <span class="form-text text-muted"><?php echo __('If you select this option, you can track your budget for the task.'); ?></span>
                                 </div>
                             </div>
                         </div>
@@ -222,37 +222,37 @@
                     <div class="container">
                         <div class="card card-custom gutter-b">
                             <div class="card-body">
-                                <h2 class="text-dark font-weight-bold mt-2 mb-2 mr-5">User</h2>
+                                <h2 class="text-dark font-weight-bold mt-2 mb-2 mr-5"><?php echo __('User'); ?></h2>
                                 <div class=" col-lg-10 datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded mt-10" id="kt_datatable">
                                     <table class="datatable-table p-3" id="table_user">
                                         <thead class="datatable-head">
                                             <tr class="datatable-row">
-                                                <th scope="col"  class="p-3 text-left" style="width: 15%;"><span>User</span></th>
-                                                <th scope="col" class="p-3 text-left" style="width: 15%;"><span>Email</span></th>
-                                                <th scope="col" class="p-3 text-left" style="width: 10%;"><span>Rate Per Hours</span></th>
+                                                <th scope="col"  class="p-3 text-left" style="width: 15%;"><span><?php echo __('User'); ?></span></th>
+                                                <th scope="col" class="p-3 text-left" style="width: 15%;"><span><?php echo __('Email'); ?></span></th>
+                                                <th scope="col" class="p-3 text-left" style="width: 10%;"><span><?php echo __('Rate Per Hours'); ?></span></th>
                                                 <th scope="col" class="p-3 text-left" style="width: 2%;"></th>
                                             </tr>
                                         </thead>
                                         <?php foreach($pddata['project_users'] as $puser){ ?>
                                             <tr class="datatable-row userrow" id="userrow_1">
                                                 <td class="p-3" style="width: 10%;">
-                                                    <select aria-label="User[]" class="form-control kt-select2" id="kt_select2_41_2" name="user[]" onchange="useremail(this.value,1)">
-                                                        <option value=""> Select Any One </option>
+                                                    <select aria-label="<?php echo __('User[]'); ?>" class="form-control kt-select2" id="kt_select2_41_2" name="user[]" onchange="useremail(this.value,1)">
+                                                        <option value=""> <?php echo __('Select Any One'); ?> </option>
                                                         <?php foreach($app_users as $appuser){ ?>
-                                                            <option <?php if($puser['user_id'] == $appuser['id']) { echo "selected";
+                                                            <option <?php if($puser['user_id'] == $appuser['id']) { echo __('selected');
 } ?> value="<?php echo $appuser['id']; ?>"><?php echo $appuser['display_name']; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </td>
                                                 <td  class="p-3" style="width: 15%;">
-                                                    <input aria-label="User Email[]" type="text" class="form-control" readonly name="user_email[]" id="email_1" value="<?php echo $puser['email']; ?>">
+                                                    <input aria-label="<?php echo __('User Email[]'); ?>" type="text" class="form-control" readonly name="user_email[]" id="email_1" value="<?php echo $puser['email']; ?>">
                                                 </td>
                                                 <td class="p-3" style="width: 15%;">
                                                     <div class="input-group  mt-3 mb-3 pl-0">
                                                         <div class="input-group-prepend">
-                                                            <button type="button" class="btn btn-secondary">USD</button>
+                                                            <button type="button" class="btn btn-secondary"><?php echo __('USD'); ?></button>
                                                         </div>
-                                                        <input aria-label="User Rate Hour[]" type="text" name="user_rate_hour[]" class="form-control" value="<?php echo $puser['rate_hours']; ?>">
+                                                        <input aria-label="<?php echo __('User Rate Hour[]'); ?>" type="text" name="user_rate_hour[]" class="form-control" value="<?php echo $puser['rate_hours']; ?>">
                                                     </div>
                                                 </td>
                                                 <td class="p-3" style="width: 2%;">
@@ -262,17 +262,17 @@
                                             <input type="hidden" name="puser_id[]" value="<?php echo $puser['id']; ?>">
                                         <?php } ?>
                                     </table>
-                                    <div class="btn btn-primary mt-10" onclick="adduser()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">+ Add User</div>
+                                    <div class="btn btn-primary mt-10" onclick="adduser()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo __('+ Add User'); ?></div>
                                 </div>
-                                <h2 class="text-dark font-weight-bold mt-10 mb-2 mr-5">Task <span class="float-right float-right font-weight-normal font-size-lg text-muted">Import task from existing projects</span></h2>
+                                <h2 class="text-dark font-weight-bold mt-10 mb-2 mr-5"><?php echo __('Task'); ?> <span class="float-right float-right font-weight-normal font-size-lg text-muted"><?php echo __('Import task from existing projects'); ?></span></h2>
                                 <div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded mt-10" id="kt_datatable_2">
                                     <table class="datatable-table" id="table_task">
                                         <thead class="datatable-head">
                                             <tr class="datatable-row">
-                                                <th scope="col" class="p-3"style="width: 20%;"><span>Task Name</span></th>
-                                                <th scope="col" class="p-3" style="width: 20%"><span>Description</span></th>
-                                                <th scope="col" class="p-3" style="width: 20%"><span>Rate Per Hours</span></th>
-                                                <th scope="col" class="p-3" style="width: 20%"><span>Budget Hours(HH:MM)</span></th>
+                                                <th scope="col" class="p-3"style="width: 20%;"><span><?php echo __('Task Name'); ?></span></th>
+                                                <th scope="col" class="p-3" style="width: 20%"><span><?php echo __('Description'); ?></span></th>
+                                                <th scope="col" class="p-3" style="width: 20%"><span><?php echo __('Rate Per Hours'); ?></span></th>
+                                                <th scope="col" class="p-3" style="width: 20%"><span><?php echo __('Budget Hours(HH:MM)'); ?></span></th>
                                                 <th scope="col" class="p-3" style="width: 10%"></th>
                                                 <th scope="col" class="p-3" style="width: 10%"></th>
                                             </tr>
@@ -280,30 +280,30 @@
                                         <?php foreach($pddata['project_tasks'] as $ptask){ ?>
                                             <tr class="datatable-row taskrow" id="taskrow_1">
                                                 <td  class="p-3" style="width: 20%;">
-                                                    <span><input aria-label="Input field"  class="form-control mt-3 mb-3" type="text" value="<?php echo $ptask['task_name']; ?>" id="project-name_3" name="task_name[]" placeholder="Task Name"></span>
+                                                    <span><input aria-label="<?php echo __('Input field'); ?>"  class="form-control mt-3 mb-3" type="text" value="<?php echo $ptask['task_name']; ?>" id="project-name_3" name="task_name[]" placeholder="<?php echo __('Task Name'); ?>"></span>
                                                 </td>
                                                 <td class="p-3" style="width: 20%;">
-                                                    <textarea aria-label="Task Description[]" name="task_description[]" class="form-control"><?php echo $ptask['description']; ?></textarea>
+                                                    <textarea aria-label="<?php echo __('Task Description[]'); ?>" name="task_description[]" class="form-control"><?php echo $ptask['description']; ?></textarea>
 
                                                 </td>
                                                 <td class="p-3"  style="width: 20%;">
                                                     <div class="input-group col-md-7 mt-3 mb-3 pl-0">
                                                         <div class="input-group-prepend">
-                                                            <button type="button" class="btn btn-secondary">USD</button>
+                                                            <button type="button" class="btn btn-secondary"><?php echo __('USD'); ?></button>
                                                         </div>
-                                                        <input aria-label="Input field" type="text" class="form-control"  value="<?php echo $ptask['rate_hours']; ?>" name="task_rate_hour[]" >
+                                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"  value="<?php echo $ptask['rate_hours']; ?>" name="task_rate_hour[]" >
                                                     </div>
                                                 </td>
                                                 <td class="p-3" style="width: 20%;">
-                                                    <input aria-label="Task Budget Hour[]" type="text" class="form-control"  name="task_budget_hour[]" value="<?php echo $ptask['budget_hours']; ?>" placeholder="HH:MM" >
+                                                    <input aria-label="<?php echo __('Task Budget Hour[]'); ?>" type="text" class="form-control"  name="task_budget_hour[]" value="<?php echo $ptask['budget_hours']; ?>" placeholder="<?php echo __('HH:MM'); ?>" >
                                                 </td>
                                                 <td class="p-3" style="width: 10%;">
                                                     <div class="checkbox-list ">
                                                         <label class="checkbox checkbox-outline checkbox-outline-2x checkbox-primary">
-                                                            <input aria-label="Bill Type[]" type="checkbox"  name="bill_type[]" <?php if( $ptask['bill_type'] == '1') { echo "checked";
+                                                            <input aria-label="<?php echo __('Bill Type[]'); ?>" type="checkbox"  name="bill_type[]" <?php if( $ptask['bill_type'] == '1') { echo __('checked');
 } ?>>
                                                             <span class="float-left"></span>
-                                                            Billable
+                                                            <?php echo __('Billable'); ?>
                                                         </label>
                                                     </div>
                                                 </td>
@@ -314,18 +314,18 @@
                                             <input type="hidden" name="ptask_id[]" value="<?php echo $ptask['id']; ?>">
                                          <?php } ?>
                                     </table>
-                                    <div class="btn btn-primary mt-10" onclick="addtask()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">+ Add Task</div>
+                                    <div class="btn btn-primary mt-10" onclick="addtask()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo __('+ Add Task'); ?></div>
 
                                     <div class="mt-10">
                                         <?php if($_GET['Rid']!=""){ ?>
                                         <input type="hidden" name="rid" value="<?php echo $rid; ?>">
                                          <input type="hidden" name="submit" value="Update">
-                                            <button class="btn btn-primary">Update</button>
+                                            <button class="btn btn-primary"><?php echo __('Update'); ?></button>
                                         <?php }else{ ?>
                                            <input type="hidden" name="submit" value="Add">
-                                        <button class="btn btn-primary">Save</button>
+                                        <button class="btn btn-primary"><?php echo __('Save'); ?></button>
                                         <?php } ?>
-                                        <button class="btn btn-secondary">Cancel</button>
+                                        <button class="btn btn-secondary"><?php echo __('Cancel'); ?></button>
                                     </div>
                                 </div>
                             </div>

@@ -74,7 +74,7 @@ echo "<pre>"; print_r($result);echo "</pre>";
 	    
 	    html += '<div class="col-lg-3"><textarea type="text" class="form-control" name="extra_message[]" id="extra_message_'+maxsar+'" aria-label="Extra Message"></textarea> </div>';
 
-	    html += '<div class="col-lg-1"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeRow(\''+id+ '\')"></i></div>';
+	    html += '<div class="col-lg-1"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeRow(\''+id+ '')"></i></div>';
 	    html += '</div>';
 
 		$("#newaddmoreapplicationemptytransactions").append(html);
@@ -99,14 +99,14 @@ echo "<pre>"; print_r($result);echo "</pre>";
     <div class="card-header">
         <h5> Empty Transactions </h5>
         <div class="card-header-right table-card-header">
-          <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>                  
+          <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back') ?></a>                  
         </div>
     </div>
     <div class="card-body">
     	<form method="post">
     	<div class="row">
 	    	<div class="form-group col-lg-5">
-		        <label class="form-label">Module Setup </label>
+		        <label class="form-label"><?= __('Module Setup') ?> </label>
 		        <select name="module_setup_id" class="form-control form-select js-example-basic-single" aria-label="Module Setup Id">
 		            <option value="">Select Any One </option>
 		            <?php foreach($module_setup as $mods) {  ?>
@@ -115,10 +115,10 @@ echo "<pre>"; print_r($result);echo "</pre>";
 		        </select>  
 	        </div>
 	        <div class="form-group col-lg-2 text-center ">
-	        	<label class="form-label  mt-4"> OR </label>
+	        	<label class="form-label  mt-4"> <?= __('OR') ?> </label>
 	        </div>
 	        <div class="form-group col-lg-5">
-	          	<label class="form-label"> Option <span class="text-danger">*</span></label>
+	          	<label class="form-label"> <?= __('Option') ?> <span class="text-danger">*</span></label>
 	          	<select name="page_option" class="form-control form-select js-example-basic-single" aria-label="Page Option">
 		            <option value="">Select Any One </option>
 		            <?php foreach($application_pages as $optionkey=>$val) {  ?>
@@ -129,16 +129,16 @@ echo "<pre>"; print_r($result);echo "</pre>";
 	    </div>
 	    <div class="row">
 	    	<div class="col-lg-3">
-	    		<label class="form-label"> Transaction Table <span class="text-danger">*</span></label>
+	    		<label class="form-label"> <?= __('Transaction Table') ?> <span class="text-danger">*</span></label>
 	    	</div>
 	    	<div class="col-lg-2">
-	    		<label class="form-label"> Option Type <span class="text-danger">*</span></label>
+	    		<label class="form-label"> <?= __('Option Type') ?> <span class="text-danger">*</span></label>
 	    	</div>
 	    	<div class="col-lg-3">
-	    		<label class="form-label"> Application Message <span class="text-danger">*</span></label>
+	    		<label class="form-label"> <?= __('Application Message') ?> <span class="text-danger">*</span></label>
 	    	</div>
 	    	<div class="col-lg-3">
-	    		<label class="form-label"> Extra Message <span class="text-danger">*</span></label>
+	    		<label class="form-label"> <?= __('Extra Message') ?> <span class="text-danger">*</span></label>
 	    	</div>
 	    </div>
 	    <div id="newaddmoreapplicationemptytransactions">
@@ -184,11 +184,11 @@ echo "<pre>"; print_r($result);echo "</pre>";
 			<?php $im++; } ?>
 		</div>
 	    <div class="mt-3 mb-5">
-			<button type="button"  class="btn btn-success" onclick="addMoreApplicationEmptyTransactions()"><i class="ti-plus"></i>  Add More Transaction</button>
+			<button type="button"  class="btn btn-success" onclick="addMoreApplicationEmptyTransactions()"><i class="ti-plus"></i>  <?= __('Add More Transaction') ?></button>
 		</div>
 		<div>
 			<input type="hidden" name="rid" value="<?php echo $rid; ?>">  
-			<button type="submit" class="btn btn-primary waves-effect waves-light" name="submitemptytransactions"><i class="fa fa-check m-r-10"></i> <?php echo $rid ==""?"Submit":"Update"; ?></button> 
+			<button type="submit" class="btn btn-primary waves-effect waves-light" name="submitemptytransactions"><i class="fa fa-check m-r-10"></i> <?php echo $rid ==""?__("Submit"):__("Update"); ?></button> 
 		</div>
 	</form>
     </div>

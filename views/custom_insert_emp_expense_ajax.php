@@ -16,7 +16,7 @@ $cities = $result['cities'];
 $vehicle_types = $result['vehicle_types'];
 if($_POST['expaince_list'] !="" && $_POST['expaince_list'] =="Y"){  ?>
 
-            <option value="">Select Any One</option>
+            <option value=""><?= __('Select Any One') ?></option>
            <?php  if(count((array)$local_trips) !=0){ ?>
             <optgroup label="Journey">
                 <?php foreach($local_trips as $trplocal){   $selectedtrpplan = "";
@@ -57,19 +57,19 @@ if($_POST['expaince_list'] !="" && $_POST['expaince_list'] =="Y"){  ?>
     <h4>Trips</h4>
     <table class="table table-hover table-sm">
         <tr>
-            <th scope="col" class="p-2">Trip Name</th>
+            <th scope="col" class="p-2"><?= __('Trip Name') ?></th>
             <td class="w-b-w-s p-2"><?php echo $trips_select['trip_name']; ?></td>
         </tr>
         <tr>
-            <th scope="col" class="p-2">Trans Number</th>
+            <th scope="col" class="p-2"><?= __('Trans Number') ?></th>
             <td class="p-2"><?php echo $trips_select['transaction_no']; ?></td>
         </tr>
         <tr>
-            <th scope="col" class="p-2">Trans Date</th>
+            <th scope="col" class="p-2"><?= __('Trans Date') ?></th>
             <td class="p-2"><?php echo fromDate($trips_select['transaction_date']); ?></td>
         </tr>
         <tr>
-            <th scope="col" class="p-2">Budget</th>
+            <th scope="col" class="p-2"><?= __('Budget') ?></th>
             <td class="p-2"><?php echo $trips_select['budget_amount']; ?></td>
         </tr>
     </table>
@@ -80,8 +80,8 @@ if($_POST['expaince_list'] !="" && $_POST['expaince_list'] =="Y"){  ?>
     <table class="table table-hover table-sm">
         <thead>
             <tr>
-                <th scope="col" class="p-2">From</th>
-                <th scope="col" class="p-2">To</th>
+                <th scope="col" class="p-2"><?= __('From') ?></th>
+                <th scope="col" class="p-2"><?= __('To') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -106,9 +106,9 @@ if($_POST['expaince_list'] !="" && $_POST['expaince_list'] =="Y"){  ?>
     <table class="table table-hover table-sm">
         <thead>
             <tr>
-                <th scope="col" class="p-2">Location</th>
-                <th scope="col" class="p-2">In</th>
-                <th scope="col" class="p-2">Out</th>
+                <th scope="col" class="p-2"><?= __('Location') ?></th>
+                <th scope="col" class="p-2"><?= __('In') ?></th>
+                <th scope="col" class="p-2"><?= __('Out') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -134,9 +134,9 @@ if($_POST['expaince_list'] !="" && $_POST['expaince_list'] =="Y"){  ?>
     <table class="table table-hover table-sm">
         <thead>
             <tr>
-                <th scope="col" class="p-2">From</th>
-                <th scope="col" class="p-2">To</th>
-                <th scope="col" class="p-2">Vehicle</th>
+                <th scope="col" class="p-2"><?= __('From') ?></th>
+                <th scope="col" class="p-2"><?= __('To') ?></th>
+                <th scope="col" class="p-2"><?= __('Vehicle') ?></th>
             </tr>
         </thead>
         <tbody>

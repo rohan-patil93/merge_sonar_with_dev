@@ -62,7 +62,7 @@ $job  = $data['job'];
 </script>
 <div class="modal-header">
 	<h5 class="modal-title"> Assign Employee</h5>
-		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closebutnfunction()"></button>
+		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>" onclick="closebutnfunction()"></button>
 	</div>
 	<div class="modal-body" > 
 		<form class="kt-form kt-form--label-right" action="" method="post" id="insertstatsuform">
@@ -124,7 +124,7 @@ $job  = $data['job'];
 			</div>
 			<div class="modal-footer">
 				 <input type="hidden" name="emp_id" value="<?php echo $_POST['emp_id']; ?>">
-				<button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal" onclick="closebutnfunction()">Close</button>
+				<button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal" onclick="closebutnfunction()"><?php echo __('Close'); ?></button>
 				<button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Submit</button>
 			</div>
 		</form>

@@ -167,12 +167,12 @@ $type = $_GET['TYPE']!=""?$_GET['TYPE']:"1";
     <div class="container-fluid ">
         <div class="card card-custom card-sticky" id="kt_page_sticky_card">
             <div class="card-header">
-                <h5>Expenses</h5>
+                <h5><?php echo __('Expenses'); ?></h5>
 
                 <div class="card-header-right">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?php echo __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -181,12 +181,12 @@ $type = $_GET['TYPE']!=""?$_GET['TYPE']:"1";
                         <div class="d-flex mt-2 h-55px">
                             <ul class="nav md-tabs nav-bold nav-tabs-line nav-line-tabs-3x border-transparent fs-5 fw-bolder flex-nowrap responsive-tab My_Informarion_Tab infisuite_tab">
                                 <li class="nav-item">
-                                    <a class="nav-link <?php if($type==1){ echo "active";
+                                    <a class="nav-link <?php if($type==1){ echo __('active');
 } ?>" id="profile-tab-1" data-bs-toggle="tab" href="#people-1" aria-controls="HOME">
                                         <span class="nav-icon">
                                             <i class="flaticon2-layers-1"></i>
                                         </span>
-                                        <span class="nav-text">Accommodation & Ticketing</span>
+                                        <span class="nav-text"><?php echo __('Accommodation & Ticketing'); ?></span>
                                     </a>
                                 </li>
                             </ul>
@@ -195,7 +195,7 @@ $type = $_GET['TYPE']!=""?$_GET['TYPE']:"1";
 
                     <div class="">
                         <div class="tab-content mb-5 " id="myTabContent1">
-                            <div class="tab-pane fade <?php if($type==1){ echo "show active";
+                            <div class="tab-pane fade <?php if($type==1){ echo __('show active');
 } ?>" id="people-1" role="tabpanel" aria-labelledby="home-tab-1">
                                     <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
                                         <div class="card-body">
@@ -203,69 +203,69 @@ $type = $_GET['TYPE']!=""?$_GET['TYPE']:"1";
                                             <div class="row">
 
                                                 <div class="form-group col-lg-6">
-                                                    <span class="font-weight-bolder">Category Name<span class="text-danger">*</span></span>
-                                                    <input aria-label="Category Name" type="text" name="category_name" class="form-control" value="<?php echo $expense_row['category_name']; ?>">
+                                                    <span class="font-weight-bolder"><?php echo __('Category Name'); ?><span class="text-danger">*</span></span>
+                                                    <input aria-label="<?php echo __('Category Name'); ?>" type="text" name="category_name" class="form-control" value="<?php echo $expense_row['category_name']; ?>">
                                                 </div>
 
                                                 <div class="form-group col-lg-6">
-                                                    <span class="font-weight-bolder">Parent Category<span class="text-danger">*</span></span>
+                                                    <span class="font-weight-bolder"><?php echo __('Parent Category'); ?><span class="text-danger">*</span></span>
 
-                                                    <select aria-label="Parent Category" class="form-control form-select js-example-basic-single"  name="parent_category_id" id="parent_category_id_2">
-                                                        <option value="0"> Select Any One </option>
+                                                    <select aria-label="<?php echo __('Parent Category'); ?>" class="form-control form-select js-example-basic-single"  name="parent_category_id" id="parent_category_id_2">
+                                                        <option value="0"> <?php echo __('Select Any One'); ?> </option>
                                                         <?php foreach($expense_catlist as $ekey => $expense) { ?>
-                                                            <option <?php if($expense_row['parent_category_id']==$ekey){ echo "selected";
+                                                            <option <?php if($expense_row['parent_category_id']==$ekey){ echo __('selected');
 }  ?> value="<?php echo $ekey;?>" ><?php echo $expense; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-lg-6">
-                                                    <span class="font-weight-bolder">Policy Document</span>
+                                                    <span class="font-weight-bolder"><?php echo __('Policy Document'); ?></span>
                                                     <div></div>
                                                     <div class="custom-file">
-                                                        <input aria-label="Custom File" type="file" class="form-control" id="customFile" value="<?php echo $expense_row['policy_document']; ?>" name="policy_document">
+                                                        <input aria-label="<?php echo __('Custom File'); ?>" type="file" class="form-control" id="customFile" value="<?php echo $expense_row['policy_document']; ?>" name="policy_document">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group col-lg-6">
-                                                    <span class="font-weight-bolder">Description</span>
-                                                    <textarea aria-label="Description" name="description" class="form-control" > <?php echo $expense_row['description']; ?></textarea>
+                                                    <span class="font-weight-bolder"><?php echo __('Description'); ?></span>
+                                                    <textarea aria-label="<?php echo __('Description'); ?>" name="description" class="form-control" > <?php echo $expense_row['description']; ?></textarea>
                                                 </div>
 
                                                 <div class="form-group col-lg-6">
-                                                    <span class="font-weight-bolder">Expense Amount Limit<span class="text-danger">*</span></span>
-                                                    <input aria-label="Max Expense Limit" type="number" name="max_expense_limit" class="form-control text-right" value="<?php echo $expense_row['max_expense_limit']; ?>">
+                                                    <span class="font-weight-bolder"><?php echo __('Expense Amount Limit'); ?><span class="text-danger">*</span></span>
+                                                    <input aria-label="<?php echo __('Max Expense Limit'); ?>" type="number" name="max_expense_limit" class="form-control text-right" value="<?php echo $expense_row['max_expense_limit']; ?>">
                                                 </div>
 
                                                 <div class="form-group col-lg-6">
-                                                    <span class="font-weight-bolder">Receipt Required Limit<span class="text-danger">*</span></span>
-                                                    <input aria-label="Receipt Required Limit" type="number" name="receipt_required_limit" class="form-control text-right" value="<?php echo $expense_row['receipt_required_limit']; ?>">
+                                                    <span class="font-weight-bolder"><?php echo __('Receipt Required Limit'); ?><span class="text-danger">*</span></span>
+                                                    <input aria-label="<?php echo __('Receipt Required Limit'); ?>" type="number" name="receipt_required_limit" class="form-control text-right" value="<?php echo $expense_row['receipt_required_limit']; ?>">
                                                 </div>
                                                 <div class="form-group col-lg-6">
-                                                    <span class="font-weight-bolder">Account Code<span class="text-danger">*</span></span>
-                                                    <input aria-label="Account Code" type="text" name="account_code" class="form-control" value="<?php echo $expense_row['account_code']; ?>">
+                                                    <span class="font-weight-bolder"><?php echo __('Account Code'); ?><span class="text-danger">*</span></span>
+                                                    <input aria-label="<?php echo __('Account Code'); ?>" type="text" name="account_code" class="form-control" value="<?php echo $expense_row['account_code']; ?>">
                                                 </div>
 
                                                 <div class="form-group col-lg-6">
-                                                    <span>Image Url</span>
+                                                    <span><?php echo __('Image Url'); ?></span>
                                                     <div></div>
                                                     <div class="profile-pic">
                                                         <?php $logo = $expense_row['image_url']==''?  $File_Uploads_Path.'no-image.jpg':$File_Uploads_Path.$expense_row['image_url']; ?>
                                                         <label class="-label" for="logo_image">
 
-                                                            <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                                                            <span> <i class="fa fa-camera"></i> <?php echo __('&nbsp; Change Image'); ?></span>
                                                         </label>
                                                         <input  type="file" name="image_url" id="logo_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
                                                         <input type="hidden" name="logo_remove" >
 
-                                                        <img src="<?php echo $logo;?>" id="outputlogo_image" width="200"   alt="Logo" />
+                                                        <img src="<?php echo $logo;?>" id="outputlogo_image" width="200"   alt="<?php echo __('Logo'); ?>" />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <input type="hidden" name="rid" value="<?php echo $rid; ?>" />
-                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_save" value="exit"><i class="la la-check"></i>Save & Exit</button>
+                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_save" value="exit"><i class="la la-check"></i><?php echo __('Save & Exit'); ?></button>
 
-                                        <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_continue" value="exit"><i class="la la-check"></i>Save & Continue</button>
+                                        <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_continue" value="exit"><i class="la la-check"></i><?php echo __('Save & Continue'); ?></button>
                                     </form>
                             </div>
 

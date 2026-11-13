@@ -56,16 +56,16 @@ if ($_GET['Rid']) {
             <!-- Page body start -->
             <div class="page-body">
                 <div class="alert alert-light alert-dismissible">
-                    <strong>This function is used for maintaining <strong>Companies</strong>. * represents mandatory fields.</strong>
+                    <strong><?= __('This function is used for maintaining') ?> <strong><?= __('Companies') ?></strong>. <?= __('* represents mandatory fields.') ?></strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h5>Companies</h5>
+                        <h5><?= __('Companies') ?></h5>
                         <div class="card-header-right">
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back') ?>
                             </a>
                         </div>
                     </div>
@@ -74,14 +74,14 @@ if ($_GET['Rid']) {
                             <form id="locationForm" method="post">
                                 <div class="row">
                                     <div class="form-group col-lg-6">
-                                        <span class="">Name <span style="color:red;">*</span></span>
+                                        <span class=""><?= __('Name') ?> <span style="color:red;">*</span></span>
                                         <input aria-label="Name" class="form-control" type="text" id="company_name" name="name" value="<?php echo $return['name']; ?>">
                                         <div style="display: none;color: red;" id="company_name_err"> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>Company Number <span style="color:red;">*</span></span>
+                                        <span><?= __('Company Number') ?> <span style="color:red;">*</span></span>
                                         <select aria-label="Companynumber" class="form-select js-example-basic-single  col-lg-4" name="companynumber" id="companynumber">
-                                            <option value="" label="0">Select Any one</option>
+                                            <option value="" label="0"><?= __('Select Any One') ?></option>
                                             <option value="1" <?php echo $return['companynumber'] == '1' ? 'selected' : ''; ?>>1</option>
                                             <option value="2" <?php echo $return['companynumber'] == '2' ? 'selected' : ''; ?>>2</option>
                                             <option value="3" <?php echo $return['companynumber'] == '3' ? 'selected' : ''; ?>>3</option>
@@ -92,38 +92,38 @@ if ($_GET['Rid']) {
                                         <div style="display: none;color: red;" id="companynumber_err"> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>Base Country <span style="color:red;">*</span></span>
+                                        <span><?= __('Base Country') ?> <span style="color:red;">*</span></span>
                                         <select aria-label="Base Country" class="form-select js-example-basic-single  col-lg-4" name="base_country" id="base_country">
-                                            <option value="0" <?php echo $return['base_country'] == '0' ? 'selected' : ''; ?>> Select Any one </option>
+                                            <option value="0" <?php echo $return['base_country'] == '0' ? 'selected' : ''; ?>> <?= __('Select Any One') ?> </option>
                                         </select>
                                         <div style="display: none;color: red;" id="base_country_err"> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>GST State</span>
+                                        <span><?= __('GST State') ?></span>
                                         <select aria-label="Gst State" class="form-select js-example-basic-single" id="gst_state" name="gst_state">
-                                            <option value="0" <?php echo $return['gst_state'] == '0' ? 'selected' : ''; ?>> Select Any one </option>
+                                            <option value="0" <?php echo $return['gst_state'] == '0' ? 'selected' : ''; ?>> <?= __('Select Any One') ?> </option>
                                         </select>
                                         <div style="display: none;color: red;" id="gst_state_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span class="">Incharge Name <span style="color:red;">*</span></span>
+                                        <span class=""><?= __('Incharge Name') ?> <span style="color:red;">*</span></span>
                                         <input aria-label="Incharge Name" class="form-control" type="text" id="incharge_name" name="incharge_name" value="<?php echo $return['incharge_name']; ?>">
                                         <div style="display: none;color: red;" id="incharge_name_err"> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span class="">Telephone <span style="color:red;">*</span></span>
+                                        <span class=""><?= __('Telephone') ?> <span style="color:red;">*</span></span>
                                         <input aria-label="Telephone" class="form-control" type="text" id="telephone" name="telephone" value="<?php echo $return['telephone']; ?>">
                                         <div style="display: none;color: red;" id="telephone_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span class="">Email <span style="color:red;">*</span></span>
+                                        <span class=""><?= __('Email') ?> <span style="color:red;">*</span></span>
                                         <input aria-label="Email" class="form-control" type="text" id="email" name="email" value="<?php echo $return['email']; ?>">
                                         <div style="display: none;color: red;" id="email_err"> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>Parent Company</span>
+                                        <span><?= __('Parent Company') ?></span>
                                         <select aria-label="Parent" class="form-select js-example-basic-single" id="parent_id" name="parent_id">
-                                            <option value="0" <?php echo $return['parent_id'] == '0' ? 'selected' : ''; ?>> Select Any one</option>
+                                            <option value="0" <?php echo $return['parent_id'] == '0' ? 'selected' : ''; ?>> <?= __('Select Any one') ?></option>
                                             <option value="1" <?php echo $return['parent_id'] == '1' ? 'selected' : ''; ?>>tickday</option>
                                             </optgroup>
                                         </select>
@@ -133,175 +133,175 @@ if ($_GET['Rid']) {
                                     <div class="col-lg-12">
                                         <div class="row">
                                             <div class="form-group col-lg-3">
-                                                <button type="button" class="btn btn-primary" id="getLocationBtn">Get Location</button>
+                                                <button type="button" class="btn btn-primary" id="getLocationBtn"><?= __('Get Location') ?></button>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span class="">Latitude <span style="color:red;">*</span></span>
+                                        <span class=""><?= __('Latitude') ?> <span style="color:red;">*</span></span>
                                         <input aria-label="Location Latitude" class="form-control" type="text" id="location_latitude" name="location_latitude" value="<?php echo $return['location_latitude']; ?>" readonly>
                                         <div style="display: none;color: red;" id="location_latitude_err"> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span class="">Longitude <span style="color:red;">*</span></span>
+                                        <span class=""><?= __('Longitude') ?> <span style="color:red;">*</span></span>
                                         <input aria-label="Location Longitude" class="form-control" type="text" id="location_longitude" name="location_longitude" value="<?php echo $return['location_longitude']; ?>" readonly>
                                         <div style="display: none;color: red;" id="location_longitude_err"> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span class="">Fax</span>
+                                        <span class=""><?= __('Fax') ?></span>
                                         <input aria-label="Fax" class="form-control" type="text" id="fax" name="fax" value="<?php echo $return['fax']; ?>">
                                         <div style="display: none;color: red;" id="fax_err"> Please enter Fax </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>Hr Connect</span>
+                                        <span><?= __('Hr Connect') ?></span>
                                         <select aria-label="Hr Connect" class="form-select js-example-basic-single" id="hr_connect" name="hr_connect">
-                                            <option value="0" <?php echo $return['hr_connect'] == '0' ? 'selected' : ''; ?>> Select Any one </option>
+                                            <option value="0" <?php echo $return['hr_connect'] == '0' ? 'selected' : ''; ?>> <?= __('Select Any One') ?> </option>
                                         </select>
                                         <div style="display: none;color: red;" id="hr_connect_err"> Please Select Hr Connect </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>Finance Connect</span>
+                                        <span><?= __('Finance Connect') ?></span>
                                         <select aria-label="Finance Connect" class="form-select js-example-basic-single" id="finance_connect" name="finance_connect">
-                                            <option value="0" <?php echo $return['finance_connect'] == '0' ? 'selected' : ''; ?>> Select Any one </option>
+                                            <option value="0" <?php echo $return['finance_connect'] == '0' ? 'selected' : ''; ?>> <?= __('Select Any One') ?> </option>
                                         </select>
                                         <div style="display: none;color: red;" id="finance_connect_err"> Please Select Finance Connect </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span>Admin Connect</span>
+                                        <span><?= __('Admin Connect') ?></span>
                                         <select aria-label="Admin Connect" class="form-select js-example-basic-single" id="admin_connect" name="admin_connect">
-                                            <option value="0" <?php echo $return['admin_connect'] == '0' ? 'selected' : ''; ?>> Select Any one </option>
+                                            <option value="0" <?php echo $return['admin_connect'] == '0' ? 'selected' : ''; ?>> <?= __('Select Any One') ?> </option>
                                         </select>
                                         <div style="display: none;color: red;" id="admin_connect_err"> Please Select Admin Connect </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span>Default Currency</span>
+                                        <span><?= __('Default Currency') ?></span>
                                         <select aria-label="Currency" class="form-select js-example-basic-single" id="currency_id" name="currency_id">
-                                            <option value="0" <?php echo $return['currency_id'] == '0' ? 'selected' : ''; ?>> Select Any one </option>
+                                            <option value="0" <?php echo $return['currency_id'] == '0' ? 'selected' : ''; ?>> <?= __('Select Any One') ?> </option>
                                         </select>
                                         <div style="display: none;color: red;" id="currency_id_err"> Please Select Default Currency </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span class="">Bank Account</span>
+                                        <span class=""><?= __('Bank Account') ?></span>
                                         <input aria-label="Bank Account" class="form-control" type="text" id="bank_account" name="bank_account" value="<?php echo $return['bank_account']; ?>">
                                         <div style="display: none;color: red;" id="bank_account_err"> Please enter Bank Account </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span class="">Payable Account</span>
+                                        <span class=""><?= __('Payable Account') ?></span>
                                         <input aria-label="Payable Account" class="form-control" type="text" id="payable_account" name="payable_account" value="<?php echo $return['payable_account']; ?>">
                                         <div style="display: none;color: red;" id="payable_account_err"> Please enter Payable Account </div>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span class="">Receiable Account</span>
+                                        <span class=""><?= __('Receiable Account') ?></span>
                                         <input aria-label="Receiable Account" class="form-control" type="text" id="receiable_account" name="receiable_account" value="<?php echo $return['receiable_account']; ?>">
                                         <div style="display: none;color: red;" id="receiable_account_err"> Please enter Receiable Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Income Account</span>
+                                        <span class=""><?= __('Income Account') ?></span>
                                         <input aria-label="Income Account" class="form-control" type="text" id="income_account" name="income_account" value="<?php echo $return['income_account']; ?>">
                                         <div style="display: none;color: red;" id="income_account_err"> Please enter Income Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Cogs Account</span>
+                                        <span class=""><?= __('Cogs Account') ?></span>
                                         <input aria-label="Cogs Account" class="form-control" type="text" id="cogs_account" name="cogs_account" value="<?php echo $return['cogs_account']; ?>">
                                         <div style="display: none;color: red;" id="cogs_account_err"> Please enter Cogs Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Round Off Account</span>
+                                        <span class=""><?= __('Round Off Account') ?></span>
                                         <input aria-label="Round Off Account" class="form-control" type="text" id="round_off_account" name="round_off_account" value="<?php echo $return['round_off_account']; ?>">
                                         <div style="display: none;color: red;" id="round_off_account_err"> Please enter Round Off Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Employee Adv Account</span>
+                                        <span class=""><?= __('Employee Adv Account') ?></span>
                                         <input aria-label="Employee Adv Account" class="form-control" type="text" id="employee_adv_account" name="employee_adv_account" value="<?php echo $return['employee_adv_account']; ?>">
                                         <div style="display: none;color: red;" id="employee_adv_account_err"> Please enter Employee Adv Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Deferred Revenu Account</span>
+                                        <span class=""><?= __('Deferred Revenu Account') ?></span>
                                         <input aria-label="Deferred Revenu Account" class="form-control" type="text" id="deferred_revenu_account" name="deferred_revenu_account" value="<?php echo $return['deferred_revenu_account']; ?>">
                                         <div style="display: none;color: red;" id="deferred_revenu_account_err"> Please enter Deferred Revenu Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Deferred Expenses Account</span>
+                                        <span class=""><?= __('Deferred Expenses Account') ?></span>
                                         <input aria-label="Deferred Expenses Account" class="form-control" type="text" id="deferred_expenses_account" name="deferred_expenses_account" value="<?php echo $return['deferred_expenses_account']; ?>">
                                         <div style="display: none;color: red;" id="deferred_expenses_account_err"> Please enter Deferred Expenses Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Write Off Account</span>
+                                        <span class=""><?= __('Write Off Account') ?></span>
                                         <input aria-label="Write Off Account" class="form-control" type="text" id="write_off_account" name="write_off_account" value="<?php echo $return['write_off_account']; ?>">
                                         <div style="display: none;color: red;" id="write_off_account_err"> Please enter Write Off Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Disc Allowed Account</span>
+                                        <span class=""><?= __('Disc Allowed Account') ?></span>
                                         <input aria-label="Disc Allowed Account" class="form-control" type="text" id="disc_allowed_account" name="disc_allowed_account" value="<?php echo $return['disc_allowed_account']; ?>">
                                         <div style="display: none;color: red;" id="disc_allowed_account_err"> Please enter Disc Allowed Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Disc Received Account</span>
+                                        <span class=""><?= __('Disc Received Account') ?></span>
                                         <input aria-label="Disc Received Account" class="form-control" type="text" id="disc_received_account" name="disc_received_account" value="<?php echo $return['disc_received_account']; ?>">
                                         <div style="display: none;color: red;" id="disc_received_account_err"> Please enter Disc Received Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Sale Exchange Diff Account</span>
+                                        <span class=""><?= __('Sale Exchange Diff Account') ?></span>
                                         <input aria-label="Sale Exchange Diff Account" class="form-control" type="text" id="sale_exchange_diff_account" name="sale_exchange_diff_account" value="<?php echo $return['sale_exchange_diff_account']; ?>">
                                         <div style="display: none;color: red;" id="sale_exchange_diff_account_err"> Please enter Sale Exchange Diff Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Purchase Exchange Diff Account</span>
+                                        <span class=""><?= __('Purchase Exchange Diff Account') ?></span>
                                         <input aria-label="Purchase Exchange Diff Account" class="form-control" type="text" id="purchase_exchange_diff_account" name="purchase_exchange_diff_account" value="<?php echo $return['purchase_exchange_diff_account']; ?>">
                                         <div style="display: none;color: red;" id="purchase_exchange_diff_account_err"> Please enter Purchase Exchange Diff Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Stock In Hand Account</span>
+                                        <span class=""><?= __('Stock In Hand Account') ?></span>
                                         <input aria-label="Stock In Hand Account" class="form-control" type="text" id="stock_in_hand_account" name="stock_in_hand_account" value="<?php echo $return['stock_in_hand_account']; ?>">
                                         <div style="display: none;color: red;" id="stock_in_hand_account_err"> Please enter Stock In Hand Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Stock Adj Account</span>
+                                        <span class=""><?= __('Stock Adj Account') ?></span>
                                         <input aria-label="Stock Adj Account" class="form-control" type="text" id="stock_adj_account" name="stock_adj_account" value="<?php echo $return['stock_adj_account']; ?>">
                                         <div style="display: none;color: red;" id="stock_adj_account_err"> Please enter Stock Adj Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Stock Unbilled Account</span>
+                                        <span class=""><?= __('Stock Unbilled Account') ?></span>
                                         <input aria-label="Stock Unbilled Account" class="form-control" type="text" id="stock_unbilled_account" name="stock_unbilled_account" value="<?php echo $return['stock_unbilled_account']; ?>">
                                         <div style="display: none;color: red;" id="stock_unbilled_account_err"> Please enter Stock Unbilled Account </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Cost Center</span>
+                                        <span class=""><?= __('Cost Center') ?></span>
                                         <input aria-label="Cost Center" class="form-control" type="text" id="cost_center" name="cost_center" value="<?php echo $return['cost_center']; ?>">
                                         <div style="display: none;color: red;" id="cost_center_err"> Please enter Cost Center </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Inventory Valuation</span>
+                                        <span class=""><?= __('Inventory Valuation') ?></span>
                                         <input aria-label="Inventory Valuation" class="form-control" type="text" id="inventory_valuation" name="inventory_valuation" value="<?php echo $return['inventory_valuation']; ?>">
                                         <div style="display: none;color: red;" id="inventory_valuation_err"> Please enter Inventory Valuation </div>
                                     </div>
 
                                     <div class="col-lg-6 col-xs-12 form-group m-b-10">
-                                        <span>From Date</span>
+                                        <span><?= __('From Date') ?></span>
                                         <input aria-label="From Date" class="form-control" type="date" name="from_date"
                                             value="<?php echo isset($return['from_date']) && $return['from_date'] != '' ? date('Y-m-d', strtotime($return['from_date'])) : date('Y-m-d'); ?>" readonly />
                                     </div>
 
                                     <div class="col-lg-6 col-xs-12 form-group">
-                                        <span>To Date</span>
+                                        <span><?= __('To Date') ?></span>
                                         <input aria-label="To Date" class="form-control" type="date" name="to_date" value="<?php echo isset($return['to_date']) && $return['to_date'] != '' ? date('Y-m-d', strtotime($return['to_date'])) :  date('Y-m-d', strtotime('+5 years')); ?>" />
                                     </div>
 
@@ -310,12 +310,12 @@ if ($_GET['Rid']) {
                                     <div class="text-center">
                                         <?php if ($rid != "") {  ?>
                                             <button name='submit' value='update' class="btn waves-effect waves-light btn-primary">
-                                                <i class="fa fa-file-text-o"></i> Update
+                                                <i class="fa fa-file-text-o"></i> <?= __('Update') ?>
                                             </button>
                                             <input name="rid" type="hidden" value="<?php echo $return['id']; ?>">
                                         <?php } else {  ?>
                                             <button name='submit' value='insert' class="btn waves-effect waves-light btn-primary">
-                                                <i class="fa fa-file-text-o"></i> Save
+                                                <i class="fa fa-file-text-o"></i> <?= __('Save') ?>
                                             </button>
                                         <?php } ?>
                                     </div>
@@ -335,7 +335,7 @@ if ($_GET['Rid']) {
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="mapModalLabel">Select Location</h5>
+                <h5 class="modal-title" id="mapModalLabel"><?= __('Select Location') ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

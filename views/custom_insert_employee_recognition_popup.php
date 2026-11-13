@@ -43,8 +43,8 @@ $comments = $_GET['comments'];
 </script>
 
 <div class="modal-header">
-    <h4 class="modal-title">Confirm Recognition    </h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Confirm Recognition') ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 </div>
 
 <div class="modal-body" data-scroll="true" data-height="300" >
@@ -75,19 +75,19 @@ $comments = $_GET['comments'];
                             <div class="card-header card-header-right ribbon ribbon-top ribbon-ver">
                                 <div class="ribbon-target custom" style="top: -2px; left:0px;">
                                 <?php if($emplist[$first_emp]['image']!="") { ?>
-                                    <img src="uploads/all/<?php echo $emplist[$first_emp]['image']; ?>"  class="img-radius img-50 align-top m-r-15" style="z-index: 9;" alt="Attachment Preview">
+                                    <img src="uploads/all/<?php echo $emplist[$first_emp]['image']; ?>"  class="img-radius img-50 align-top m-r-15" style="z-index: 9;" alt="<?= __('Attachment Preview') ?>">
                                 <?php } else { ?>
                                     <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"  style="width: 51px; left: 4px; top: 4px; background-color: white;color: black;z-index: 9;"><?php echo initials($emplist[$first_emp]['display_name']); ?></span>
                                 <?php } ?>
                             </div>
                             <h4 class="card-title">
-                                <?php echo $badges[$badgeid]['badge_name']; ?> &nbsp;  <img class="ml-3" src="uploads/all/<?php echo $badges[$badgeid]['image']; ?>" style="
+                                <?php echo __($badges[$badgeid]['badge_name'] ?? ''); ?> &nbsp;  <img class="ml-3" src="uploads/all/<?php echo $badges[$badgeid]['image']; ?>" style="
                                 width: 60px;
                                 height: auto;
                                 border-radius: 50%;
                                 z-index: 9;
                                 margin: -2px 0 0 -9px;
-                                " alt="Attachment Preview">
+                                " alt="<?= __('Attachment Preview') ?>">
                             </h4>
                         </div>
                         <div class="custom-text">
@@ -115,7 +115,7 @@ $comments = $_GET['comments'];
                                 </div>
 
                                 <?php if($emplist[$_SESSION['userid']]['image']!="") { ?>
-                                    <img src="uploads/all/<?php echo $emplist[$_SESSION['emp_id']]['image']; ?>"  class="img-radius img-50 align-top m-r-15" style="z-index: 9;" alt="Attachment Preview">
+                                    <img src="uploads/all/<?php echo $emplist[$_SESSION['emp_id']]['image']; ?>"  class="img-radius img-50 align-top m-r-15" style="z-index: 9;" alt="<?= __('Attachment Preview') ?>">
                                 <?php } else { ?>
                                     <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"  style="z-index: 9; left: 10px; top: 7px; z-index: 9;"><?php echo initials($emplist[$_SESSION['emp_id']]['display_name']); ?></span>
                                 <?php } ?>
@@ -141,8 +141,8 @@ $comments = $_GET['comments'];
 <input type="hidden" id="badge_id" value="<?php echo $_GET['badgeid'];?>">
 <input type="hidden" id="rowid" value="<?php echo $_GET['rowid'];?>">
 <div class="modal-footer">
-    <button type="button" class="btn btn-danger waves-effect " data-bs-dismiss="modal">Cancel</button>
-    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" onclick="confirmrecognition();" name="submitform" value="exit"><i class="la la-check"></i>Confirm</button>
+    <button type="button" class="btn btn-danger waves-effect " data-bs-dismiss="modal"><?= __('Cancel') ?></button>
+    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" onclick="confirmrecognition();" name="submitform" value="exit"><i class="la la-check"></i><?= __('Confirm') ?></button>
 </div>
 
 </div>

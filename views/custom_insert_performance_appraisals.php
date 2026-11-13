@@ -115,12 +115,12 @@ if($performance_setup['publish']=='Y'){
     function appraiserDeleteRow(row_id){
         swal({
     title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-    text: 'Do you want to Remove the Row?',
+    text: <?php echo json_encode(__('Do you want to Remove the Row?')); ?>,
     type: "warning",
     showCancelButton: true,
     confirmButtonClass: "btn-danger",
-    confirmButtonText: "Yes",
-    cancelButtonText: "No",
+    confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+    cancelButtonText: <?php echo json_encode(__('No')); ?>,
     closeOnConfirm: true,
     closeOnCancel: true
 },
@@ -259,7 +259,7 @@ function(isConfirm) {
   title: '<?php echo $_SESSION['error_message']['1011'];?>',
   showDenyButton: true,
   showCancelButton: false,
-  confirmButtonText: 'Yes',
+  confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
   denyButtonText: `No`,
 }).then((result) => {
   if (result.isConfirmed) {
@@ -274,7 +274,7 @@ function(isConfirm) {
             if(data1.error == "404"){
                 Swal.fire({
                   icon: 'error',
-                  title: 'Oops...',
+                  title: <?php echo json_encode(__('Oops...')); ?>,
                   text: "<?php echo $_SESSION['error_message'][1012];?>"
                 })
             }else{
@@ -317,12 +317,12 @@ function(isConfirm) {
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: "Please note the status of the document will change to "+new_status_name,
+            text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
             type: "info",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+            cancelButtonText: <?php echo json_encode(__('No')); ?>,
             closeOnConfirm: false
         },
         function(){
@@ -349,12 +349,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...')); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -370,7 +370,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
              <div class="card-body">
                  <div class="alert alert-danger background-info alert-dismissible">
                     <strong><?php echo "HR connect is not configured.  <strong>Workflow need to be started!</strong>"; ?></strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>">
                     </button>
                 </div>
             </div>
@@ -384,7 +384,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 } ?>
 
     <div class="card-header">
-        <h5>Performance Appraisal</h5>
+        <h5><?php echo __('Performance Appraisal'); ?></h5>
         <div class="card-header-right table-card-header m-r-50">
 
 <?php
@@ -394,7 +394,7 @@ if($pepah_res['current_status']!=ST_DRAFT){
             ?>
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -410,10 +410,10 @@ if($pepah_res['current_status']!=ST_DRAFT){
                     <div class="form-group"  >
                         <input type="hidden" class="form-control" name="hr_connect"  value="<?php echo $buddy_details['hr_connect']; ?>">
                         <input type="hidden" class="form-control" name="report_to"   value="<?php echo $buddy_details['report_to']; ?>">
-                        <span class="orm-label">Appraisal Name</span>
+                        <span class="orm-label"><?php echo __('Appraisal Name'); ?></span>
                         <input type="hidden" class="form-control" name="appraisal_id"  id="appraisal_id" value="<?php echo $appraisal_id ?>">
                         <input type="hidden" class="form-control" name="epa_header_id"  id="epa_header_id" value="<?php echo $epa_header_id ?>">
-                        <input aria-label="Input field" type="text"  class="form-control"  value="<?php echo $performance_setup['name']; ?>" readonly>
+                        <input aria-label="<?php echo __('Input field'); ?>" type="text"  class="form-control"  value="<?php echo $performance_setup['name']; ?>" readonly>
 
                         <input type="hidden" class="form-control" value="<?php echo $employee_id; ?>" id="apraisar_employee_id" name="employee_id" readonly="">
                         <input type="hidden" class="form-control" value="<?php echo $loginuser_type; ?>" id="loginuser_type" readonly="">
@@ -421,8 +421,8 @@ if($pepah_res['current_status']!=ST_DRAFT){
                 </div>
                 <div class="col-lg-2">
                     <div class="form-group"  >
-                        <span class="orm-label">Aassessment Year</span>
-                        <input aria-label="Assessment Year" type="text" class="form-control"  name="assessment_year" id="apraisar_assessment_year_id" value="<?php echo $assessment_year ?>" readonly>
+                        <span class="orm-label"><?php echo __('Aassessment Year'); ?></span>
+                        <input aria-label="<?php echo __('Assessment Year'); ?>" type="text" class="form-control"  name="assessment_year" id="apraisar_assessment_year_id" value="<?php echo $assessment_year ?>" readonly>
 
                     </div>
                 </div>
@@ -435,19 +435,19 @@ if($pepah_res['current_status']!=ST_DRAFT){
                 <div class="accordion-block color-accordion-block">
                     <div class="color-accordion" id="color-accordion">
 
-                    <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Professional Excellence</a>
+                    <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?php echo __('Professional Excellence'); ?></a>
                     <div class="accordion-desc">
                         <?php include_once "custom_insert_performance_appraisal_basic_Informations.php"; ?>
                     </div>
                     <?php if(in_array(KRA_KPI_HEADERID,(array)$pasharray)){ ?>
                     <?php if(count((array)$kra_list['1']) !=0){?>
-                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Professional Excellence</a>
+                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?php echo __('Professional Excellence'); ?></a>
                         <div class="accordion-desc">
                             <?php include_once "custom_insert_performance_appraisal_kra_and_kpi_first.php"; ?>
                         </div>
                     <?php } ?>
                     <?php if(count((array)$kra_list['1']) !=0){?>
-                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Personal Excellence</a>
+                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?php echo __('Personal Excellence'); ?></a>
                         <div class="accordion-desc">
                             <?php include_once "custom_insert_performance_appraisal_kra_and_kpi_second.php"; ?>
                         </div>
@@ -477,7 +477,7 @@ if($pepah_res['current_status']!=ST_DRAFT){
                                                         <th scope="col"><?php echo $sub_headerres['field_name']; ?></th>
                                                     <?php } //}
                                                     if($paheaders['sub_header_addmore'] == '0'){ ?>
-                                                        <th scope="col">Action</th>
+                                                        <th scope="col"><?php echo __('Action'); ?></th>
                                                     <?php }  ?>
                                                 </tr>
                                             </thead>
@@ -493,13 +493,13 @@ if($pepah_res['current_status']!=ST_DRAFT){
                                                             <td>
                                                                 <div class="">
                                                                     <?php if($sub_headerres['type']=="S" && $sub_headerres[$loginuser_type] == "Y"){ ?>
-                                                                        <select aria-label="Select option" class="form-control form-select js-example-basic-single" name="<?php echo $fieldname; ?>">
-                                                                            <option value="Yes" <?php echo $fieldvalue=="Yes"?"selected":"";?>>Yes</option>
-                                                                            <option value="No" <?php echo $fieldvalue=="No"?"selected":"";?>>No</option>
-                                                                            <option value="Dont_know" <?php echo $fieldvalue=="Dont_know"?"selected":"";?>>i don't know</option>
+                                                                        <select aria-label="<?php echo __('Select option'); ?>" class="form-control form-select js-example-basic-single" name="<?php echo $fieldname; ?>">
+                                                                            <option value="Yes" <?php echo $fieldvalue=="Yes"?"selected":"";?>><?php echo __('Yes'); ?></option>
+                                                                            <option value="No" <?php echo $fieldvalue=="No"?"selected":"";?>><?php echo __('No'); ?></option>
+                                                                            <option value="Dont_know" <?php echo $fieldvalue=="Dont_know"?"selected":"";?>><?php echo __('i don\'t know'); ?></option>
                                                                         </select>
                                                                     <?php }else{ ?>
-                                                                        <input aria-label="Input field" type="text" class="form-control" name="<?php echo $fieldname; ?>" value="<?php echo $fieldvalue; ?>" <?php echo $sub_headerres[$loginuser_type] == "N"?"readonly":""; ?>>
+                                                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" name="<?php echo $fieldname; ?>" value="<?php echo $fieldvalue; ?>" <?php echo $sub_headerres[$loginuser_type] == "N"?"readonly":""; ?>>
                                                                     <?php } ?>
 
                                                                 </div>
@@ -509,7 +509,7 @@ if($pepah_res['current_status']!=ST_DRAFT){
                                                             <?php if($paheaders['sub_header_addmore'] == '0'){ //delete button visible 0 or 1 is not ?>
                                                                 <td>
                                                                     <button type="button" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger btn-primary" onclick="appraiserDeleteRow(<?php echo $paheaders['id'].$hedcnt[$paheadersrow]; ?>)">
-                                                                        <i class="fa fa-trash"></i>Delete
+                                                                        <i class="fa fa-trash"></i><?php echo __('Delete'); ?>
                                                                     </button>
                                                                 </td>
                                                             <?php } ?>
@@ -521,7 +521,7 @@ if($pepah_res['current_status']!=ST_DRAFT){
                                                 <?php if($paheaders['sub_header_addmore'] == '0'){ //delete button visible 0 or 1 is not ?>
                                                     <input type="hidden" id="cntrows_<?php echo $paheaders['id']; ?>" value="<?php echo $hedcnt[$paheadersrow];?>">
                                                     <button type="button" class="btn btn-sm font-weight-bolder btn-light-primary btn-primary" onclick="addMoreRow('<?php echo $paheaders['id']; ?>')">
-                                                        <i class="fa fa-plus"></i>Add
+                                                        <i class="fa fa-plus"></i><?php echo __('Add'); ?>
                                                     </button>
                                                 <?php } ?>
                                             </div>
@@ -530,15 +530,15 @@ if($pepah_res['current_status']!=ST_DRAFT){
                                 <?php } ?>
                                 <?php } ?>
 
-                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Employee Use Only</a>
+                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?php echo __('Employee Use Only'); ?></a>
                         <div class="accordion-desc">
                             <div class="table-responsive" <?php echo $loginuser_type!='EMP'?'style="pointer-events: none; opacity: 0.6;"':''; ?>>
                                 <table class="table table-bordered" id="dinamictable_<?php echo $paheaders['id']; ?>">
                                     <thead>
                                         <tr>
-                                            <th scope="col" style="width: 60%;">Question</th>
-                                            <th scope="col" style="width: 15%;">Response</th>
-                                            <th scope="col" style="width: 25%;">Note</th>
+                                            <th scope="col" style="width: 60%;"><?php echo __('Question'); ?></th>
+                                            <th scope="col" style="width: 15%;"><?php echo __('Response'); ?></th>
+                                            <th scope="col" style="width: 25%;"><?php echo __('Note'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -560,9 +560,9 @@ if($pepah_res['current_status']!=ST_DRAFT){
                                                         <?php if($emp_que['options_display_type']== $typeofquestion[1] ) {
                                                             $response_Responsewered_option = json_decode($employee_responses[$emp_que['id']]['response_option'],1)[1];
                                                             ?>
-                                                            <select aria-label="Select option" name="response_option[0][<?php echo $emp_que['id']; ?>]" class="form-control form-select js-example-basic-single " >
+                                                            <select aria-label="<?php echo __('Select option'); ?>" name="response_option[0][<?php echo $emp_que['id']; ?>]" class="form-control form-select js-example-basic-single " >
                                                                 <?php foreach($optionlist as $opkey=>$opts) { $optiondata = $opts; ?>
-                                                                <option value="<?php echo $optiondata; ?>" <?php if($opts==$answer['response_option']){ echo "selected";
+                                                                <option value="<?php echo $optiondata; ?>" <?php if($opts==$answer['response_option']){ echo __('selected');
 } ?> ><?php echo $opts;?></option>
                                                             <?php } ?>
                                                         </select>
@@ -570,13 +570,13 @@ if($pepah_res['current_status']!=ST_DRAFT){
                                                     <?php } elseif($emp_que['options_display_type']== $typeofquestion[2] ) {
                                                         $response_Responsewered_option = json_decode($employee_responses[$emp_que['id']]['response_option'],1)[0];
                                                         ?>
-                                                        <textarea aria-label="Text area" name="response_option[0][<?php echo $emp_que['id']; ?>]" class="form-control col-md-12"> <?php echo $answer['response_option']; ?></textarea>
+                                                        <textarea aria-label="<?php echo __('Text area'); ?>" name="response_option[0][<?php echo $emp_que['id']; ?>]" class="form-control col-md-12"> <?php echo $answer['response_option']; ?></textarea>
                                                     <?php } ?>
                                                 </div>
                                             </td>
                                             <td>
                                                 <?php if($emp_que['display_remark'] == "Y"){ ?>
-                                                <textarea aria-label="Text area" name="response_text[0][<?php echo $emp_que['id']; ?>]" class="form-control col-md-12"><?php echo $answer['response_remark']; ?></textarea>
+                                                <textarea aria-label="<?php echo __('Text area'); ?>" name="response_text[0][<?php echo $emp_que['id']; ?>]" class="form-control col-md-12"><?php echo $answer['response_remark']; ?></textarea>
                                                 <?php } ?>
                                             </td>
                                         </tr>
@@ -585,16 +585,16 @@ if($pepah_res['current_status']!=ST_DRAFT){
                                 </tbody></table>
                             </div>
                         </div>
-                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">RO Use Only</a>
+                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?php echo __('RO Use Only'); ?></a>
                         <div class="accordion-desc">
                             <div class="table-responsive"  <?php echo $loginuser_type!='RO'?'style="pointer-events: none; opacity: 0.6;"':''; ?>>
                                 <table class="table table-bordered" id="dinamictable_<?php echo $paheaders['id']; ?>">
                                     <tbody>
                                         <thead>
                                         <tr>
-                                            <th scope="col" style="width: 60%;">Question</th>
-                                            <th scope="col" style="width: 15%;">Response</th>
-                                            <th scope="col" style="width: 25%;">Note</th>
+                                            <th scope="col" style="width: 60%;"><?php echo __('Question'); ?></th>
+                                            <th scope="col" style="width: 15%;"><?php echo __('Response'); ?></th>
+                                            <th scope="col" style="width: 25%;"><?php echo __('Note'); ?></th>
                                         </tr>
                                     </thead>
 
@@ -616,21 +616,21 @@ if($pepah_res['current_status']!=ST_DRAFT){
                                                         ?>
                                                     </td>
                                                     <td>
-                                                        <select aria-label="Select option" class="form-control form-select js-example-basic-single" name="response_option[1][<?php echo $mgr_que['id']; ?>]" >
+                                                        <select aria-label="<?php echo __('Select option'); ?>" class="form-control form-select js-example-basic-single" name="response_option[1][<?php echo $mgr_que['id']; ?>]" >
                                                             <?php foreach($optionlist as $opkey=>$opts) { $optiondata = $opts; ?>
-                                                            <option value="<?php echo $optiondata; ?>" <?php if($opts==$answer['response_option']){ echo "selected";
+                                                            <option value="<?php echo $optiondata; ?>" <?php if($opts==$answer['response_option']){ echo __('selected');
 } ?> ><?php echo $opts;?></option>
                                                         <?php } ?>
                                                     </select>
                                                 <?php } elseif($mgr_que['options_display_type']== $typeofquestion[2] ) {
                                                     $response_Responsewered_option = json_decode($manager_responses[$mgrs_que['id']]['response_option'],1)[0];
                                                     ?>
-                                                    <textarea aria-label="Text area" name="response_option[1][<?php echo $mgr_que['id']; ?>]" class="form-control col-md-12"> <?php echo $answer['response_option']; ?>  </textarea>
+                                                    <textarea aria-label="<?php echo __('Text area'); ?>" name="response_option[1][<?php echo $mgr_que['id']; ?>]" class="form-control col-md-12"> <?php echo $answer['response_option']; ?>  </textarea>
                                                 <?php } ?>
                                             </td>
                                             <td>
                                                 <?php if($emp_que['display_remark'] == "Y"){ ?>
-                                                <textarea aria-label="Text area" name="response_text[1][<?php echo $mgr_que['id']; ?>]" class="form-control col-md-12"><?php echo $answer['response_remark']; ?></textarea>
+                                                <textarea aria-label="<?php echo __('Text area'); ?>" name="response_text[1][<?php echo $mgr_que['id']; ?>]" class="form-control col-md-12"><?php echo $answer['response_remark']; ?></textarea>
                                                 <?php } ?>
                                             </td>
                                         </tr>
@@ -639,15 +639,15 @@ if($pepah_res['current_status']!=ST_DRAFT){
 
                             </div>
 
-                            <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">HOD Use Only</a>
+                            <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?php echo __('HOD Use Only'); ?></a>
                             <div class="accordion-desc">
                                 <div class="table-responsive"  <?php echo $loginuser_type!='HOD'?'style="pointer-events: none; opacity: 0.6;"':''; ?>>
                                     <table class="table table-bordered" id="dinamictable_<?php echo $paheaders['id']; ?>">
                                         <thead>
                                         <tr>
-                                            <th scope="col" style="width: 60%;">Question</th>
-                                            <th scope="col" style="width: 15%;">Response</th>
-                                            <th scope="col" style="width: 25%;">Note</th>
+                                            <th scope="col" style="width: 60%;"><?php echo __('Question'); ?></th>
+                                            <th scope="col" style="width: 15%;"><?php echo __('Response'); ?></th>
+                                            <th scope="col" style="width: 25%;"><?php echo __('Note'); ?></th>
 
                                         </tr>
                                     </thead>
@@ -670,22 +670,22 @@ if($pepah_res['current_status']!=ST_DRAFT){
                                                         <?php if($emp_que['options_display_type']== $typeofquestion[1] ) {
                                                             $response_Responsewered_option = json_decode($reviewer_responses[$emp_que['id']]['response_option'],1)[1];
                                                             ?>
-                                                            <select aria-label="Select option" name="response_option[2][<?php echo $emp_que['id']; ?>]" class="form-control form-select js-example-basic-single" id="response_option_2_<?php echo $emp_que['id']; ?>">
+                                                            <select aria-label="<?php echo __('Select option'); ?>" name="response_option[2][<?php echo $emp_que['id']; ?>]" class="form-control form-select js-example-basic-single" id="response_option_2_<?php echo $emp_que['id']; ?>">
                                                                 <?php foreach($optionlist as $opkey=>$opts) { $optiondata = $opts; ?>
-                                                                <option value="<?php echo $optiondata; ?>" <?php if($opts==$answer['response_option']){ echo "selected";
+                                                                <option value="<?php echo $optiondata; ?>" <?php if($opts==$answer['response_option']){ echo __('selected');
 } ?> ><?php echo $opts;?></option>
                                                             <?php } ?>
                                                         </select>
                                                     <?php } elseif($emp_que['options_display_type']== $typeofquestion[2] ) {
                                                         $response_Responsewered_option = json_decode($reviewer_responses[$emp_que['id']]['response_option'],1)[0];
                                                         ?>
-                                                        <textarea aria-label="Text area"  name="response_option[2][<?php echo $emp_que['id']; ?>]" class="form-control col-md-12"> <?php echo $answer['response_option']; ?></textarea>
+                                                        <textarea aria-label="<?php echo __('Text area'); ?>"  name="response_option[2][<?php echo $emp_que['id']; ?>]" class="form-control col-md-12"> <?php echo $answer['response_option']; ?></textarea>
                                                     <?php } ?>
                                                 </div>
                                             </td>
                                             <td>
                                                 <?php if($emp_que['text_box_show'] == "Y"){ ?>
-                                                <textarea aria-label="Text area"  name="response_text[2][<?php echo $emp_que['id']; ?>]" class="form-control col-md-12"><?php echo $answer['response_remark']; ?></textarea>
+                                                <textarea aria-label="<?php echo __('Text area'); ?>"  name="response_text[2][<?php echo $emp_que['id']; ?>]" class="form-control col-md-12"><?php echo $answer['response_remark']; ?></textarea>
                                                 <?php } ?>
                                             </td>
                                         </tr>
@@ -697,7 +697,7 @@ if($pepah_res['current_status']!=ST_DRAFT){
 
                             </div>
                         </div>
-                        <button type="submit" name="performanace_appraiser_sbt" class="btn btn-primary" <?php echo $disablebtn; ?>>Submit</button>
+                        <button type="submit" name="performanace_appraiser_sbt" class="btn btn-primary" <?php echo $disablebtn; ?>><?php echo __('Submit'); ?></button>
                     </div>
                 </form>
                             <div class="row">

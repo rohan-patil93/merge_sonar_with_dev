@@ -69,9 +69,9 @@ if (!empty($_SESSION['sku_msg'])) {
 ?>
 <div class="card ">
     <div class="card-header">
-                    <h5>SKU Code Generator</h5>
+                    <h5><?= __('SKU Code Generator') ?></h5>
                     <div class="card-header-right table-card-header ">
-                        <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>
+                        <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back') ?></a>
                     </div>
                 </div>
     <div class="card-body p-4">
@@ -81,26 +81,26 @@ if (!empty($_SESSION['sku_msg'])) {
                 <div class="col-lg-6">
                     <div class="row g-4">
                         <div class="col-lg-6 mb-3">
-                            <label for="sku_generator_name" class="form-label">SKU Generator Name <span class="text-danger">*</span></label>
+                            <label for="sku_generator_name" class="form-label"><?= __('SKU Generator Name') ?> <span class="text-danger">*</span></label>
                             <input type="text" name="sku_generator_name" id="sku_generator_name"
                                 class="form-control form-control-lg shadow-sm" 
                                 value="<?= htmlspecialchars($sku['sku_generator_name'] ?? '') ?>" 
-                                placeholder="Enter name" required aria-label="SKU Generator Name">
+                                placeholder="<?= __('Enter name') ?>" required aria-label="SKU Generator Name">
                         </div>
                         <div class=" col-lg-6 mb-3">
-                            <label for="serial_number" class="form-label">Serial Number <span class="text-danger">*</span></label>
+                            <label for="serial_number" class="form-label"><?= __('Serial Number') ?> <span class="text-danger">*</span></label>
                             <input type="number" name="serial_number" id="serial_number"
                                 class="form-control form-control-lg shadow-sm"
                                 value="<?= htmlspecialchars($sku['serial_number'] ?? '') ?>" required aria-label="Serial Number">
                         </div>
                         <div class="col-lg-6 mb-3">
-                            <label for="serial_number_length" class="form-label">Serial Number Length <span class="text-danger">*</span></label>
+                            <label for="serial_number_length" class="form-label"><?= __('Serial Number Length') ?> <span class="text-danger">*</span></label>
                             <input type="number" name="serial_number_length" id="serial_number_length"
                                 class="form-control form-control-lg shadow-sm" 
                                 value="<?= htmlspecialchars($sku['serial_number_length'] ?? '') ?>" min="1" required aria-label="Serial Number Length">
                         </div>
                         <div class="col-lg-6 mb-3">
-                            <label for="separation_symbol" class="form-label">Separation Symbol <span class="text-danger">*</span></label>
+                            <label for="separation_symbol" class="form-label"><?= __('Separation Symbol') ?> <span class="text-danger">*</span></label>
                             <input type="text" name="separation_symbol" id="separation_symbol"
                                 class="form-control form-control-lg shadow-sm" maxlength="1"
                                 value="<?= htmlspecialchars($sku['separation_symbol'] ?? '') ?>" required aria-label="Separation Symbol">
@@ -124,7 +124,7 @@ if (!empty($_SESSION['sku_msg'])) {
                 </div>
             </div>
             <div class="mt-5">
-                <h6 class="fw-bold text-dark mb-3"><i class="bi bi-sliders me-2"></i> Configure Components</h6>
+                <h6 class="fw-bold text-dark mb-3"><i class="bi bi-sliders me-2"></i> <?= __('Configure Components') ?></h6>
                 <div class="row g-4">
                     <?php
                     $components = [
@@ -141,17 +141,17 @@ if (!empty($_SESSION['sku_msg'])) {
                             <div class="card h-100 shadow-sm border-0">
                                 <div class="card-body text-center">
                                     <div class="form-group col-lg-12">
-                                        <label for="<?= $key ?>"><?= $label ?></label>
+                                        <label for="<?= $key ?>"><?= htmlspecialchars(__($label)) ?></label>
                                         <div class="switch-field">
                                             <input class="js-switch component-toggle" type="checkbox" id="<?= $key ?>"
                                                 data-key="<?= $key ?>" <?= ($enabled ? 'checked' : '') ?> aria-label="<?= $label ?>">
                                         </div>
                                     </div>
-                                    <label for="<?= $key ?>_seq" class="form-label small">Sequence</label>
+                                    <label for="<?= $key ?>_seq" class="form-label small"><?= __('Sequence') ?></label>
                                     <select class="form-select sequence-select js-example-basic-single" 
                                             id="<?= $key ?>_seq" data-key="<?= $key ?>" 
                                             onchange="handleSequenceChange(this)" aria-label="<?= $label ?> Sequence">
-                                        <option value="">Select</option>
+                                        <option value=""><?= __('Select') ?></option>
                                         <?php for($i=1; $i<=4; $i++): ?>
                                             <option value="<?= $i ?>" <?= ($sequence == $i ? 'selected' : '') ?>>
                                                 <?= $i ?>
@@ -167,7 +167,7 @@ if (!empty($_SESSION['sku_msg'])) {
             <div class="mt-4">
                 <input type="hidden" id="sku_generator_detail" name="sku_generator_detail" value="">
                 <button type="submit" id="kt_login_signin_submit float-left" class="btn btn-primary">
-                    <i class="bi bi-check-circle me-1"></i> Generate SKU
+                    <i class="bi bi-check-circle me-1"></i> <?= __('Generate SKU') ?>
                 </button>
             </div>
         </form>

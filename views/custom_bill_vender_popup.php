@@ -10,7 +10,7 @@ $datas = json_decode($apires,1);
 ?>
 
 <div class="modal-header">
-	<h4 class="modal-title">Vendor Bills</h4>
+	<h4 class="modal-title"><?= __("Vendor Bills") ?></h4>
 	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body j-pro">
@@ -21,13 +21,13 @@ $datas = json_decode($apires,1);
 					<table  class="table table-striped table-bordered nowrap"> 
 						<thead>
 							<tr>
-								<th scope="col">Sl No</th>
-								<th scope="col">Vendor</th>
-								<th scope="col">Invoice Number</th>
-								<th scope="col">Invoice Date</th>
-								<th scope="col">Due Date</th>
-								<th scope="col">Amount</th>
-								<th scope="col">Due Amount</th>
+								<th scope="col"><?= __("Sl No") ?></th>
+								<th scope="col"><?= __("Vendor") ?></th>
+								<th scope="col"><?= __("Invoice Number") ?></th>
+								<th scope="col"><?= __("Invoice Date") ?></th>
+								<th scope="col"><?= __("Due Date") ?></th>
+								<th scope="col"><?= __("Amount") ?></th>
+								<th scope="col"><?= __("Due Amount") ?></th>
 							</tr>
 						</thead>
 						<tbody>

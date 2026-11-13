@@ -14,7 +14,7 @@ include_once '../comm.php';
             data: 'page=updatejobpostcandidate&'+str,
             success: function(response) {
                 console.log(response);
-                   swal('Comments Successfully Updated','','success');
+                   swal(<?php echo json_encode(__('Comments Successfully Updated')); ?>,'','success');
                    $('#kt_modal_KTDatatable_remote').modal('hide');
             }
         });
@@ -23,8 +23,8 @@ include_once '../comm.php';
 </script>
 
 <div class="modal-header">
-    <h5 class="modal-title">Change <?php echo viewtitle($_POST['type']); ?></small>    </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?php echo __('Change'); ?> <?php echo viewtitle($_POST['type']); ?></small>    </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body">
     <form class="kt-form kt-form--label-right" action="" method="post">
@@ -33,8 +33,8 @@ include_once '../comm.php';
                 if($_POST['type']=="ratting"){ ?>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <span>Ratting</span>
-                            <input aria-label="Ratting" type="text" class="form-control" id="ratting" name="ratting"  value="<?php echo $_POST['type_id'];?>">
+                            <span><?php echo __('Ratting'); ?></span>
+                            <input aria-label="<?php echo __('Ratting'); ?>" type="text" class="form-control" id="ratting" name="ratting"  value="<?php echo $_POST['type_id'];?>">
                         </div>
                     </div>
                     <?php }else{ ?>
@@ -42,8 +42,8 @@ include_once '../comm.php';
                     <?php } ?>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <span>Comment</span>
-                            <textarea aria-label="Comment" class="form-control" name="comment" id="comment"></textarea>
+                            <span><?php echo __('Comment'); ?></span>
+                            <textarea aria-label="<?php echo __('Comment'); ?>" class="form-control" name="comment" id="comment"></textarea>
                         </div>
                     </div>
             <?php }else{
@@ -73,12 +73,12 @@ include_once '../comm.php';
                                     <span class="text-muted font-weight-bold"><?php echo notificationdatesdiff($candi['created_date']); ?>         </span>
                                 </div>
                             </div>
-                            <p class="text-dark-50 m-0 pt-2 font-weight-normal"><span class="text-dark m-0 pt-2 font-weight-bold">Comments: &nbsp;&nbsp;</span><?php echo $candi['comments']; ?></p>
+                            <p class="text-dark-50 m-0 pt-2 font-weight-normal"><span class="text-dark m-0 pt-2 font-weight-bold"><?php echo __('Comments: &nbsp;&nbsp;'); ?></span><?php echo $candi['comments']; ?></p>
                         </div>
                         <?php } ?>
                         <?php } else { ?>
                             <div class="card-px text-center py-20 m-t-30">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No History</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?php echo __('No History'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -94,9 +94,9 @@ include_once '../comm.php';
             <input type="hidden" name="job_can_id" id='job_can_id' value="<?php echo $_POST['job_can_id']; ?>">
             <input type="hidden" name="type_id"  id='type_id'  value="<?php echo $_POST['type_id']; ?>">
             <input type="hidden" name="type"   id='type' value="<?php echo $_POST['type']; ?>">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Cancel'); ?></button>
             <?php if($_POST['type']!="comments"){ ?>
-            <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Submit</button>
+            <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?php echo __('Submit'); ?></button>
         <?php } ?>
         </div>
     </form>

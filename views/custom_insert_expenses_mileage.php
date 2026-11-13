@@ -23,13 +23,13 @@
 
         htmlRows += '<td> <input type="hidden" name="exp_rowid[]" value="" >'+count+'</td>';
 
-         htmlRows += '<td class="w-full"><select aria-label="Name[]" class="form-select js-example-basic-single mileagename" name="name[]">';
+         htmlRows += '<td class="w-full"><select aria-label="<?php echo __('Name[]'); ?>" class="form-select js-example-basic-single mileagename" name="name[]">';
                 <?php foreach($vehicleTypes as $vtype){ ?>
                 htmlRows += '<option value="<?php echo $vtype['genc_detail_code']; ?>"><?php echo $vtype['genc_detail_name']; ?></option>';
                 <?php } ?>
         htmlRows += '</select></td>';
 
-        htmlRows += '<td><input aria-label="Amount[]" type="text" name="amount[]"  class="form-control text-right" autocomplete="off" required></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Amount[]'); ?>" type="text" name="amount[]"  class="form-control text-right" autocomplete="off" required></td>';
 
        htmlRows += '</tr>';
        $('#edutable').append(htmlRows);
@@ -49,7 +49,7 @@ function cehckalredayavailablename(valu){
     $(".mileagename").each(function(index) {
         if ($.inArray($(this).val(), tempary) != -1)
         {
-          alert("already exist this mileage");
+          alert(<?php echo json_encode(__('already exist this mileage')); ?>);
         }
         tempary.push($(this).val());
 
@@ -61,16 +61,16 @@ function cehckalredayavailablename(valu){
     <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
         <div class="card-body row">
         <div class="form-group col-lg-4">
-            <span class="font-weight-bolder form-label">Default Unit<span class="text-danger">*</span></span></br>
+            <span class="font-weight-bolder form-label"><?php echo __('Default Unit'); ?><span class="text-danger">*</span></span></br>
             <div class="form-radio">
                 <div class="radio-inline">
                   <label class="form-label">
-                     <input aria-label="Default Unit" type="radio" name="default_unit" value="0"  checked style="opacity: 1;" required />
-                     <i class="helper"></i> KM</label>
+                     <input aria-label="<?php echo __('Default Unit'); ?>" type="radio" name="default_unit" value="0"  checked style="opacity: 1;" required />
+                     <i class="helper"></i> <?php echo __('KM'); ?></label>
                  </div>
                  <div class="radio-inline">
                   <label class="form-label">
-                   <input aria-label="Default Unit" type="radio" name="default_unit" value="1" <?php echo $expense_milelist['0']['default_unit']=='1' ? "checked":"";?>  style="opacity:1;" required /> <i class="helper"></i> Mile</label>
+                   <input aria-label="<?php echo __('Default Unit'); ?>" type="radio" name="default_unit" value="1" <?php echo $expense_milelist['0']['default_unit']=='1' ? "checked":"";?>  style="opacity:1;" required /> <i class="helper"></i> <?php echo __('Mile'); ?></label>
                </div>
            </div>
        </div>
@@ -80,8 +80,8 @@ function cehckalredayavailablename(valu){
                     <tr>
                         <th scope="col" class="" style="width: 2%;">#</th>
 
-                        <th scope="col" class="" style="width: 50%;">Vihicle Type</th>
-                        <th scope="col" class="thheader" style="width: 40%;">Rate (Per KM Or Mile)</th>
+                        <th scope="col" class="" style="width: 50%;"><?php echo __('Vihicle Type'); ?></th>
+                        <th scope="col" class="thheader" style="width: 40%;"><?php echo __('Rate (Per KM Or Mile)'); ?></th>
                     </tr>
                     <?php  $k=0;
                     if(count((array)$expense_milelist) == 0){
@@ -97,7 +97,7 @@ function cehckalredayavailablename(valu){
                          </td>
 
                         <td class="w-full event_disabled">
-                            <select aria-label="Name[]" class="form-select js-example-basic-single mileagename" name="name[]">
+                            <select aria-label="<?php echo __('Name[]'); ?>" class="form-select js-example-basic-single mileagename" name="name[]">
                                 <?php foreach($vehicleTypes as $vtype){ ?>
                                 <option value="<?php echo $vtype['genc_detail_code']; ?>" <?php echo $inst['name']==$vtype['genc_detail_code']?"selected":""; ?>><?php echo $vtype['genc_detail_name']; ?></option>
                                 <?php } ?>
@@ -106,7 +106,7 @@ function cehckalredayavailablename(valu){
                       </td>
 
                       <td>
-                        <input aria-label="Amount[]" type="text" name="amount[]" class="form-control text-right decimalnumberallowe" value="<?php echo $inst['amount']; ?>" autocomplete="off">
+                        <input aria-label="<?php echo __('Amount[]'); ?>" type="text" name="amount[]" class="form-control text-right decimalnumberallowe" value="<?php echo $inst['amount']; ?>" autocomplete="off">
                     </td>
 
                 </tr>
@@ -121,7 +121,7 @@ function cehckalredayavailablename(valu){
     </div>
 </div>
 
-    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold m-l-10 mt-10 col-md-2"   name="submit_continue" value="saveexpmileage"><i class="la la-check"></i>Save Mileages</button>
+    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold m-l-10 mt-10 col-md-2"   name="submit_continue" value="saveexpmileage"><i class="la la-check"></i><?php echo __('Save Mileages'); ?></button>
     </div>
 </div>
 </form>

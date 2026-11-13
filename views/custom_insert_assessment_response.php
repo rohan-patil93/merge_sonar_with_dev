@@ -209,11 +209,11 @@ function submitassessment(){
 
   Swal.fire({
     title: "",
-    text: "Time is Expired And Please Submit",
+    text: <?= json_encode(__('Time is Expired And Please Submit')) ?>,
     buttonsStyling: false,
-    confirmButtonText: "<i class='la la-thumbs-up'></i>OK",
+    confirmButtonText: "<i class='la la-thumbs-up'></i><?= __('OK') ?>",
     showCancelButton: false,
-    cancelButtonText: "<i class='la la-thumbs-down'></i> No I will do it later",
+    cancelButtonText: "<i class='la la-thumbs-down'></i> <?= __('No I will do it later') ?>",
     customClass: {
      confirmButton: "btn btn-success",
      cancelButton: "btn btn-default"
@@ -250,12 +250,12 @@ function submitassessment(){
 		
 	  
 	 <div class="card-header mb-3">
-						<h5> <?php echo $assessment_details['assessment_name']; ?></h5>
+						<h5> <?php echo htmlspecialchars(__($assessment_details['assessment_name'] ?? '')); ?></h5>
 						<div class="card-header-right">
 							<div class="countdown float-right">
-            <span class="fas fa-stopwatch"><b>Timing Remaining </b></span> 
+            <span class="fas fa-stopwatch"><b><?= __('Timing Remaining') ?> </b></span> 
             <div id="duration"> </div>
-            <div id="timerdisplay" class="font-weight-bold font-size-h3 text-danger"> Not Yet Start</div>
+            <div id="timerdisplay" class="font-weight-bold font-size-h3 text-danger"> <?= __('Not Yet Start') ?></div>
           </div> 
 			</div>
 		</div>
@@ -292,7 +292,7 @@ function submitassessment(){
               <input type="hidden" name="questionid<?php echo $questionid;?>" value="<?php echo $questionid;?>">
 
               <span><?php echo $question_type = $questiontypes[$display_questions[$questionid]['options_display_type']]; ?></span>
-              <h4><?php echo $display_questions[$questionid]['assessment_question']; ?> <?php if($display_questions[$questionid]['require_response']=="1") echo "*"; ?></h4>
+              <h4><?php echo htmlspecialchars(__($display_questions[$questionid]['assessment_question'] ?? '')); ?> <?php if($display_questions[$questionid]['require_response']=="1") echo "*"; ?></h4>
               <?php 
               if($display_questions[$questionid]['options_display_type']=='MCQ' || $display_questions[$questionid]['options_display_type']=='MCA' ){ 
                 $optionlist= json_decode($display_questions[$questionid]['assessment_question_option'],1);
@@ -306,7 +306,7 @@ function submitassessment(){
                   ?>
                   <b> <div class="<?php echo $option_cat;?>-group required">
                     <input type="<?php echo $option_cat;?>" class="response_option<?php echo $questionid;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"   <?php if($display_questions[$questionid]['require_response']=="1") echo "required"; ?> <?php echo in_array($option, (array)$answer)==1 ?  'Checked': '';?> >
-                    <label for="q1"><?php echo $option; ?> </label> </div>
+                    <label for="q1"><?php echo htmlspecialchars(__($option ?? '')); ?> </label> </div>
                   </b>
                 <?php }
               }else if($display_questions[$questionid]['options_display_type']== 'FT'){
@@ -318,21 +318,21 @@ function submitassessment(){
 			?>
               <div class="card-footer mt-5">
                 <?php if ($total_q!=$questionid){ ?> 
-                  <a href="#" id="save" <?php echo $dispnext; ?> onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left">Next <i class="fas fa-chevron-right"> </i></a>
+                  <a href="#" id="save" <?php echo $dispnext; ?> onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left"><?= __('Next') ?> <i class="fas fa-chevron-right"> </i></a>
                   <?php if($questionid==1) { ?>
-                    <a href="#" id="start" style="display: block"  onclick="startTimer('<?php echo $allocated_time; ?>','timerdisplay')" class="btn btn-success font-weight-bold float-left">Start Now <i class="fas fa-chevron-right"> </i></a>
+                    <a href="#" id="start" style="display: block"  onclick="startTimer('<?php echo $allocated_time; ?>','timerdisplay')" class="btn btn-success font-weight-bold float-left"><?= __('Start Now') ?> <i class="fas fa-chevron-right"> </i></a>
                   <?php } ?>
                 <?php } else {?>
-                  <a href="#" id="previous_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-left"><i class="fas fa-chevron-left"> </i>Previous </a>
+                  <a href="#" id="previous_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-left"><i class="fas fa-chevron-left"> </i><?= __('Previous') ?> </a>
                 <?php } ?>
 
                 <!-- <a href="#" id="clear" onclick="callclear('<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-light-success font-weight-bold float-left">Clear Response</a> -->
                 <?php if ($questionid!=1 && $total_q!=$questionid){ ?> 
-                  <a href="#" id="previous_nav_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i>Previous </a>
+                  <a href="#" id="previous_nav_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i><?= __('Previous') ?> </a>
                 <?php } ?>
 
                 <div id="expiry_submit_<?php echo $questionid;?>" class="expiry_submit" style="display:<?php echo ($total_q == $questionid) ? 'block' : 'none'; ?>">
-                  <input class="float-right btn btn-success font-weight-bold" type="submit" name="submit" value="Submit <?php echo $display_tag;?>">
+                  <input class="float-right btn btn-success font-weight-bold" type="submit" name="submit" value="<?= __('Submit') ?> <?php echo htmlspecialchars(__($display_tag ?? '')); ?>">
                 </div>
               </div>
             </div>  
@@ -347,11 +347,11 @@ function submitassessment(){
             </ul>
             <div class="row">
               <ul> <li><a href="#"><div id="anscount">0</div></a></li> </ul>
-              <h5> &nbsp;Answered </h5>
+              <h5> &nbsp;<?= __('Answered') ?> </h5>
             </div>
             <div class="row">
               <ul> <li><a href="#"><div id="unanscount"><?php echo $total_q;?></div></a></li> </ul>
-              <h5> &nbsp;Unanswered </h5>
+              <h5> &nbsp;<?= __('Unanswered') ?> </h5>
             </div>   
             
           </div>    

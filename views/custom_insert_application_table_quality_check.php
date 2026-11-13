@@ -1383,7 +1383,7 @@ function viewApprovalAllUsers(id){
                           <h5><?php echo $title;  ?></h5>
                           <div class="card-header-right table-card-header m-r-50">
                  
-                    <a href="javascript:history.go(-1)" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i> Back</a>
+                    <a href="javascript:history.go(-1)" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i> <?= __('Back') ?></a>
                     <a target="_blank" href="index.php?option=COM_QO_PRINT&rid=<?php echo $rid; ?>&table=<?php echo $table_name; ?>&title=<?php echo urlencode($title); ?>" class="btn btn-clean kt-margin-r-10">
                                 <i class="ti-printer"></i>
                     </a>   
@@ -1444,28 +1444,28 @@ function viewApprovalAllUsers(id){
                             ?>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>
-                                    <button class="btn btn-success" id="addRows" type="button">+ Add More</button>
+                                    <button class="btn btn-danger delete" id="removeRows" type="button">- <?= __('Delete') ?></button>
+                                    <button class="btn btn-success" id="addRows" type="button">+ <?= __('Add More') ?></button>
                                 </div>
                             </div>
                             
                            <div>
                                 <div style="float: left;width: 48%;padding: 1%;">
-                                    <label for="notes" class="">Internal Note(s) </label>
+                                    <label for="notes" class=""><?= __('Internal Note(s)') ?> </label>
                                     <textarea style="height: 120px;" name="notes" id="notes" class="form-control" aria-label="Notes"><?php echo $table1['notes']; ?></textarea>
                                 </div>
                                 <div style="float: left;width: 48%;padding: 1%;">
-                                    <label for="printing_notes" class="">Printing Note(s) </label>
+                                    <label for="printing_notes" class=""><?= __('Printing Note(s)') ?> </label>
                                     <textarea style="height: 120px;" name="printing_notes" id="printing_notes" class="form-control" aria-label="Printing Notes"><?php echo $table1['printing_notes']; ?></textarea>
                                 </div>
                             </div>
                             <?php if($small_sub == 0  ){ ?>
                             <div style="margin-top: 10px;clear:both;">
-                                <label for="comments" class="">Comment(s)</label>
+                                <label for="comments" class=""><?= __('Comment(s)') ?></label>
                                 <textarea style="height: 120px;" name="comments" class="form-control" id="comments" aria-label="Comments"><?php echo $comments; ?></textarea>
                             </div>
                             <div class="btn-group" style="margin-top: 10px;float: right;">
-                                     <button id="kt_llogin_signup_submit"  class="btn btn-brand" >Submit1</button>
+                                     <button id="kt_llogin_signup_submit"  class="btn btn-brand" ><?= __('Submit1') ?></button>
                             </div>
                             <?php }  ?>           
                             
@@ -1473,15 +1473,15 @@ function viewApprovalAllUsers(id){
                         <div class="col-lg-3 p-r-0">
                         <div style="position: sticky;top: 20px;">
                         <table class=" table table-bordered custom_dynamic_transaction_table" >
-                            <tr class="bg-primary" ><th scope="col" colspan="2" class="p-2 text-center">Order Summary</th></tr>
+                            <tr class="bg-primary" ><th scope="col" colspan="2" class="p-2 text-center"><?= __('Order Summary') ?></th></tr>
                             <tr>
-                                <th scope="col" class="amount text-start p-2" width="40%" style="width:40%"><span>Sub Total</span></th>
+                                <th scope="col" class="amount text-start p-2" width="40%" style="width:40%"><span><?= __('Sub Total') ?></span></th>
                                 <th scope="col" class="p-2 text-right" width="60%" style="width:40%">
                                     <span id="dis_subTotalid">
                                         <?php echo customeummarmonyformateifine($table1['sub_total']); ?>
                                     </span>
-                                    <input  type="hidden" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal" placeholder="Subtotal" >
-                                    <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal" placeholder="Subtotal" >
+                                    <input  type="hidden" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal" placeholder="<?= __('Subtotal') ?>" >
+                                    <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal" placeholder="<?= __('Subtotal') ?>" >
                                 </th>
                             </tr>
                             <tr>
@@ -1503,18 +1503,18 @@ function viewApprovalAllUsers(id){
 
                                     <!-- <div  class="w-full">  
                                         <select class="form-select js-example-basic-single" id="disType" name="discount_type" onchange="calculateTotal()" aria-label="Discount Type">
-                                            <option value="P">Percentage</option>
-                                            <option <?php if($table1['discount_type'] == 'A'){ ?> selected <?php } ?> value="A">Amount</option>
+                                            <option value="P"><?= __('Percentage') ?></option>
+                                            <option <?php if($table1['discount_type'] == 'A'){ ?> selected <?php } ?> value="A"><?= __('Amount') ?></option>
                                         </select>
                                     </div> -->
-                                    <input value="<?php echo $table1['discount_value']; ?>" type="text" class="form-control amount mt-2 text-right" placeholder="Enter value" name="discount_value" id="disValue" aria-label="Enter value"> 
+                                    <input value="<?php echo $table1['discount_value']; ?>" type="text" class="form-control amount mt-2 text-right" placeholder="<?= __('Enter value') ?>" name="discount_value" id="disValue" aria-label="Enter value"> 
                                 </th>
                                 <td class="p-2 align-middle text-right">
                                     <span id="dis_discountid">
                                         <?php echo customeummarmonyformateifine($table1['discount_amount']); ?>
                                     </span>
-                                    <input value="<?php echo customeummarmonyformate($table1['discount_amount']); ?>"  readonly type="hidden" class="form-control amount" name="dis_discount_amount" id="dis_discount"  placeholder="Discount Amount">
-                                    <input value="<?php echo $table1['discount_amount']; ?>"  readonly type="hidden" class="form-control amount" name="discount_amount" id="discount" placeholder="Discount Amount">
+                                    <input value="<?php echo customeummarmonyformate($table1['discount_amount']); ?>"  readonly type="hidden" class="form-control amount" name="dis_discount_amount" id="dis_discount"  placeholder="<?= __('Discount Amount') ?>">
+                                    <input value="<?php echo $table1['discount_amount']; ?>"  readonly type="hidden" class="form-control amount" name="discount_amount" id="discount" placeholder="<?= __('Discount Amount') ?>">
                                 </td>
                             </tr>
                             <?php if($table_name != 'bills'){ ?>
@@ -1523,7 +1523,7 @@ function viewApprovalAllUsers(id){
                                     <span >Shipping</span>
                                     <div class="">  
                                         <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" aria-label="Shipping Tax">
-                                            <option value="0">Tax</option>
+                                            <option value="0"><?= __('Tax') ?></option>
                                             <?php foreach ($taxres as $key => $tax) {  ?>
                                             <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php } ?> value = <?php echo $key ?>   > <?php echo $tax; ?> </option>
                                             <?php } ?>
@@ -1533,7 +1533,7 @@ function viewApprovalAllUsers(id){
                                 </th>
                                 <td class="p-2 align-middle">
                                     <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="<?php echo $table1['shipping_tax_amount']; ?>">
-                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="shipping Amount" aria-label="shipping Amount">
+                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="<?= __('shipping Amount') ?>" aria-label="shipping Amount">
                                 </td>
                             </tr>
                         <?php } ?>
@@ -1551,7 +1551,7 @@ function viewApprovalAllUsers(id){
                                         </td>
                                         <td class="text-end p-2"> 
                                             <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']/2); ?></span> 
-                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">
+                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -1559,7 +1559,7 @@ function viewApprovalAllUsers(id){
                                         </td>
                                         <td class="text-end p-2"> 
                                             <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']/2); ?></span> 
-                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">           
+                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">           
                                         </td>
                                     </tr>
                                 <?php } else{  ?> 
@@ -1568,7 +1568,7 @@ function viewApprovalAllUsers(id){
                                         </td>
                                         <td class="text-end p-2">  
                                             <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']); ?></span>
-                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount">            
+                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">            
                                         </td>
                                     </tr>
                                 <?php }?>
@@ -1600,8 +1600,8 @@ function viewApprovalAllUsers(id){
                                 </th>
                                 <td>
                                     <input type="hidden" name="shipping_tax_amount" id="tds_tax_amount" value="0">
-                                    <input  value=""   type="hidden" class="form-control amount" id="shipping_amount" onblur="calculateTotal()" placeholder="TDS Amount">
-                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="TDS Amount" aria-label="TDS Amount">
+                                    <input  value=""   type="hidden" class="form-control amount" id="shipping_amount" onblur="calculateTotal()" placeholder="<?= __('TDS Amount') ?>">
+                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="<?= __('TDS Amount') ?>" aria-label="TDS Amount">
                                 </td>
                             </tr>
                         <?php } ?>
@@ -1610,20 +1610,20 @@ function viewApprovalAllUsers(id){
                                     <span>Grand Total</span>
                                     <input  type="hidden" class="form-control amount" placeholder="value" name="gdam" id="gdam">
                                     <input  type="hidden" class="form-control amount" placeholder="value" name="div_amount_total" id="div_amount_total">
-                                    <input  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="Tax Amount">
+                                    <input  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="<?= __('Tax Amount') ?>">
                                 </th>
                                 <th scope="col" class="p-2 text-right">
                                     <span id="grndtotalid"><?php echo customeummarmonyformateifine($table1['grand_total']); ?> </span>
-                                    <input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="hidden" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="Grand Total"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="Grand Total">
+                                    <input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="hidden" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="<?= __('Grand Total') ?>"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="<?= __('Grand Total') ?>">
                                 </th>
                             </tr>
                             <tr style="display: none;">
-                                <th scope="col" class="amount" ><span >Amount Paid</span></th>
-                                <td><input value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="Amount Paid" aria-label="Amount Paid"></td>
+                                <th scope="col" class="amount" ><span ><?= __('Amount Paid') ?></span></th>
+                                <td><input value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="<?= __('Amount Paid') ?>" aria-label="Amount Paid"></td>
                             </tr>
                             <tr style="display: none;">
-                                <td  ><span >Amount Due</span></td>
-                                <td><input value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="Amount Due" aria-label="Amount Due"></td>
+                                <td  ><span ><?= __('Amount Due') ?></span></td>
+                                <td><input value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="<?= __('Amount Due') ?>" aria-label="Amount Due"></td>
                             </tr>
                             <?php if($table1['currency_id'] != $_SESSION['config']['default_currency_id'] && $table1['currency_id'] != '0'){ $css = ""; }else{ $css = 'style="display: none;"'; }?>
                             <tr <?php echo $css; ?>>
@@ -1631,10 +1631,10 @@ function viewApprovalAllUsers(id){
                                     <table  id='exchange'  class=" table table-bordered " style="float: right;">
                                         <tr>
                                             <!-- <th scope="col" class="amount">Exchange Rate</th> -->  
-                                            <th scope="col" class="amount">Sub total</th>
-                                            <th scope="col" class="amount">Tax</th>
-                                            <th scope="col" class="amount">Discount</th>
-                                            <th scope="col" class="amount">Grand Total </th>
+                                            <th scope="col" class="amount"><?= __('Sub total') ?></th>
+                                            <th scope="col" class="amount"><?= __('Tax') ?></th>
+                                            <th scope="col" class="amount"><?= __('Discount') ?></th>
+                                            <th scope="col" class="amount"><?= __('Grand Total') ?></th>
                                         </tr>
                                         <tr>
                                             <!-- <td><input value="<?php echo $table1['currency_rate']; ?>" type="text" readonly  class="form-control amount" name="" id="ex_rate" aria-label="Input"></td> -->

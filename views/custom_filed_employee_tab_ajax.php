@@ -27,7 +27,7 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
 <link rel="stylesheet" href="assets/css/custom_filed_employee_tab_ajax.css">
 <script src="assets/js/custom_filed_employee_tab_ajax.js"></script>
 <div class="card-header">
-    <h5>Visit</h5>
+    <h5><?php echo __('Visit'); ?></h5>
     <div class="card-header-right">
         <div class="input-group input-group-button"> 
             <input type="month" name="from_date" id="att_month_year" class="form-control form-control-sm width1" value="<?php echo $year_month; ?>">  
@@ -38,17 +38,17 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
     <div >
         <ul class="nav md-tabs infisuite_tab mt-2 m-l-15">
             <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="tab" href="#planned" role="tab">Planned
+                <a class="nav-link active" data-bs-toggle="tab" href="#planned" role="tab"><?php echo __('Planned'); ?>
                     <span class="label label-xs label-success m-l-10"><?php echo count((array)$field_tabs['user_all_daily_plan']); ?></span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#visited" role="tab">Visited
+                <a class="nav-link" data-bs-toggle="tab" href="#visited" role="tab"><?php echo __('Visited'); ?>
                     <span class="label label-xs label-success m-l-10"><?php echo count((array)$list_vist); ?></span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#extra" role="tab">Extra
+                <a class="nav-link" data-bs-toggle="tab" href="#extra" role="tab"><?php echo __('Extra'); ?>
                     <span class="label label-xs label-success m-l-10"><?php echo count((array)$list_extra); ?></span>
                 </a>
             </li>
@@ -61,10 +61,10 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
             <table class="table table-hover m-b-0">
                 <thead>
                     <tr>
-                        <th scope="col">Company </th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Status</th>
+                        <th scope="col"><?php echo __('Company'); ?> </th>
+                        <th scope="col"><?php echo __('Start Date'); ?></th>
+                        <th scope="col"><?php echo __('Time'); ?></th>
+                        <th scope="col"><?php echo __('Status'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,14 +72,14 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                         if(count((array)$field_tabs['user_all_daily_plan'])>0){
                         foreach ((array)$field_tabs['user_all_daily_plan'] as $key => $value) { ?>
                         <tr>
-                            <td><?php echo $value['map_title']; ?></td>
+                            <td><?php echo htmlspecialchars(__($value['map_title'] ?? '')); ?></td>
                             <td><?php echo  fromDate($value['map_date']); ?></td>
                             <td><?php echo  $value['map_time']; ?></td>
                             <td>
                                 <?php if(isset($vist_ids[$value['id']])  ){ ?>
-                                <span class="label label-success">Visited</span>
+                                <span class="label label-success"><?php echo __('Visited'); ?></span>
                                  <?php }else{ ?> 
-                                    <span class="label label-warning">Pending</span>
+                                    <span class="label label-warning"><?php echo __('Pending'); ?></span>
                                  <?php } ?>
                             </td>
                         </tr>
@@ -88,7 +88,7 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                         <tr>
                             <td colspan="4">
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30">No Data</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><?php echo __('No Data'); ?></p>   
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png">
                                     </div>   
@@ -105,10 +105,10 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
             <table class="table table-hover m-b-0">
                 <thead>
                     <tr>
-                        <th scope="col">Company </th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">End Date</th>
-                        <th scope="col">Status</th>
+                        <th scope="col"><?php echo __('Company'); ?> </th>
+                        <th scope="col"><?php echo __('Start Date'); ?></th>
+                        <th scope="col"><?php echo __('End Date'); ?></th>
+                        <th scope="col"><?php echo __('Status'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -116,17 +116,17 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                         if(count((array)$list_vist)>0){
                         foreach ((array)$list_vist as $key => $value) { ?>
                         <tr>
-                            <td><?php echo $value['map_title']; ?></td>
+                            <td><?php echo htmlspecialchars(__($value['map_title'] ?? '')); ?></td>
                             <td><?php echo  fromDate($value['map_date']); ?></td>
                             <td><?php echo  $value['map_time']; ?></td>
-                            <td><span class="label label-success">Visited</span></td>
+                            <td><span class="label label-success"><?php echo __('Visited'); ?></span></td>
                         </tr>
                     <?php }
                     }else{ ?> 
                         <tr>
                             <td colspan="4">
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30">No Data</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><?php echo __('No Data'); ?></p>   
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                     </div>   
@@ -143,10 +143,10 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
             <table class="table table-hover m-b-0">
                 <thead>
                     <tr>
-                        <th scope="col">Company </th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">End Date</th>
-                        <th scope="col">Status</th>
+                        <th scope="col"><?php echo __('Company'); ?> </th>
+                        <th scope="col"><?php echo __('Start Date'); ?></th>
+                        <th scope="col"><?php echo __('End Date'); ?></th>
+                        <th scope="col"><?php echo __('Status'); ?></th>
                     </tr>
                 </thead>
                <tbody>
@@ -154,17 +154,17 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                         if(count((array)$list_extra)>0){
                         foreach ((array)$list_extra as $key => $value) { ?>
                         <tr>
-                            <td><?php echo $value['map_title']; ?></td>
+                            <td><?php echo htmlspecialchars(__($value['map_title'] ?? '')); ?></td>
                             <td><?php echo  fromDate($value['map_date']); ?></td>
                             <td><?php echo  $value['map_time']; ?></td>
-                            <td><span class="label label-success">Visited</span></td>
+                            <td><span class="label label-success"><?php echo __('Visited'); ?></span></td>
                         </tr>
                     <?php }
                     }else{ ?> 
                         <tr>
                             <td colspan="4">
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30">No Data</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><?php echo __('No Data'); ?></p>   
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png">
                                     </div>   

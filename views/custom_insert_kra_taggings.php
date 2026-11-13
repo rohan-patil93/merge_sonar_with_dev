@@ -77,7 +77,7 @@ function getnamelist(emplist){
     <div class="col-lg-4">
         <div class="card table-card">
             <div class="card-header">
-                <h5>Location</h5>
+                <h5><?php echo __('Location'); ?></h5>
             </div>
             <div class="card-body">
                 <?php foreach($loc_id as $locid){
@@ -89,7 +89,7 @@ function getnamelist(emplist){
     <div class="col-lg-4">
         <div class="card table-card">
             <div class="card-header">
-                <h5>Department</h5>
+                <h5><?php echo __('Department'); ?></h5>
             </div>
             <div class="card-body">
                 <?php foreach($dep_id as $depid){
@@ -101,7 +101,7 @@ function getnamelist(emplist){
     <div class="col-lg-4">
         <div class="card table-card">
             <div class="card-header">
-                <h5>Designation</h5>
+                <h5><?php echo __('Designation'); ?></h5>
             </div>
             <div class="card-body">
                 <?php foreach($des_id as $desid){
@@ -112,11 +112,11 @@ function getnamelist(emplist){
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-12 row  mb-3"><div class="col-lg-6"></div><div class="col-lg-6 text-right"><button type="button"  onclick="setLocationDesignationDep()"  class="btn btn-primary" ><i class="icofont icofont-reply"></i>  Go To Set Criteria</button> </div></div>
+    <div class="col-lg-12 row  mb-3"><div class="col-lg-6"></div><div class="col-lg-6 text-right"><button type="button"  onclick="setLocationDesignationDep()"  class="btn btn-primary" ><i class="icofont icofont-reply"></i>  <?php echo __('Go To Set Criteria'); ?></button> </div></div>
     <div class="col-xl-3 col-md-3">
         <div class="card table-card">
             <div class="card-header">
-                <h5>Select KRA</h5>
+                <h5><?php echo __('Select KRA'); ?></h5>
             </div>
             <div class="card-block p-b-0">
                 <div class="table-responsive">
@@ -127,7 +127,7 @@ function getnamelist(emplist){
                                     <th scope="col" class="p-2">
                                         <div class="checkbox-fade fade-in-primary m-l-20">
                                             <label class="form-label">
-                                                <input aria-label="Checkbox" class="form-control itemRow kraselected" type="checkbox" value="<?php echo $kralist['id']; ?>" name="kra_ids[]"  onchange="selectKPA()" <?php echo in_array($kralist['id'], (array)$krakpiid)?"checked":""; ?>>
+                                                <input aria-label="<?php echo __('Checkbox'); ?>" class="form-control itemRow kraselected" type="checkbox" value="<?php echo $kralist['id']; ?>" name="kra_ids[]"  onchange="selectKPA()" <?php echo in_array($kralist['id'], (array)$krakpiid)?"checked":""; ?>>
                                                 <span class="cr">
                                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                 </span>
@@ -184,9 +184,9 @@ function getnamelist(emplist){
         <input type="hidden" name="child_tab" value="setkratagging">
 
     <?php if($_POST['inserttype']=="OLD"){ ?>
-        <button type="button"  class="btn btn-primary mr-2"  onclick="updateKraKpiSubmited()" ><i class="la la-check"></i>Update</button>
+        <button type="button"  class="btn btn-primary mr-2"  onclick="updateKraKpiSubmited()" ><i class="la la-check"></i><?php echo __('Update'); ?></button>
     <?php }else{ ?>
-        <button type="submit"  class="btn btn-primary mr-2"   ><i class="la la-check"></i>Submit</button>
+        <button type="submit"  class="btn btn-primary mr-2"   ><i class="la la-check"></i><?php echo __('Submit'); ?></button>
     <?php } ?>
     </div>
 </div>

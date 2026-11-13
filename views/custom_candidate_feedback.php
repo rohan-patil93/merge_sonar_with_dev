@@ -47,7 +47,7 @@ foreach ($qustion_types as $qtype) {
     </script>
     <div class="modal-header">
       <h5 class="modal-title">
-        <?php echo "Candidate Feed Back"; ?> 
+        <?= __("Candidate Feed Back") ?> 
       </h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
@@ -63,7 +63,7 @@ foreach ($qustion_types as $qtype) {
           //print_r($display_questions);
           ?>
           <div class="row col-lg-12 font-weight-bolder h6 mb-2"> 
-            <?php echo $datail['name']; ?>              
+            <?= htmlspecialchars(__($datail['name'] ?? '')) ?>              
             </div>
           <?php foreach ($display_questions as $questionid=>$val) { 
             $value_id++;
@@ -76,7 +76,7 @@ foreach ($qustion_types as $qtype) {
                 <input type="hidden" name="questionid<?php echo $questionid;?>" value="<?php echo $questionid;?>">
                 <input type="hidden" name="job_feedback_setup_id<?php echo $questionid;?>" value="<?php echo $display_questions[$questionid]['job_feedback_setup_id'];?>">
                 <!-- <span class="mt-5"><?php echo $question_type = $questiontypes[$display_questions[$questionid]['options_display_type']]; ?></span> -->
-                <h6><?php echo $value_id.". ".$display_questions[$questionid]['survey_question']; ?> <?php if($display_questions[$questionid]['require_response']=="1") echo "*"; ?></h6>
+                <h6><?php echo $value_id . ". " . htmlspecialchars(__($display_questions[$questionid]['survey_question'] ?? '')); ?> <?php if($display_questions[$questionid]['require_response']=="1") echo "*"; ?></h6>
                 <?php 
                 $optionlist= json_decode($display_questions[$questionid]['survey_question_option'],1);
                 $option=$optionlist['0'];
@@ -91,14 +91,14 @@ foreach ($qustion_types as $qtype) {
                     ?>
                     <b> <div class="<?php echo $option_cat;?>-group required float-left ml-2">
                       <input type="<?php echo $option_cat;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"  <?php echo ($option==$selectedoption )==1 ?  'Checked': '';?> >
-                      <label for="q1"><?php echo $option; ?> </label> </div>
+                      <label for="q1"><?= htmlspecialchars(__($option ?? '')) ?> </label> </div>
                     </b>
                   <?php }
                 }else if($display_questions[$questionid]['options_display_type']==2){ 
                   
                   ?>
                         
-                 <label class="">Scale from 1 to: <?php echo $option;?></label>
+                 <label class=""><?= __("Scale from 1 to:") ?> <?php echo $option;?></label>
                   <input type="number"  class="form-control col-md-5" name="response_option<?php echo $questionid;?>"   id="response_option_scale_<?php echo $questionid;?>" value=<?php echo $selectedoption;?> > 
                   <?php             
                 }else if($display_questions[$questionid]['options_display_type']==4){
@@ -119,6 +119,6 @@ foreach ($qustion_types as $qtype) {
      </form>
    </div>
    <div class="modal-footer">
-    <button type="button" name="submit" onclick="formsubmit()" class="btn btn-primary btn-bold btn-upper btn-font-sm" data-dismiss="modal">Submit</button>
-   <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" name="submit" onclick="formsubmit()" class="btn btn-primary btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?= __("Submit") ?></button>
+   <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __("Close") ?></button>
   </div>

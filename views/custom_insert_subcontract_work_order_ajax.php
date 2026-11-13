@@ -42,20 +42,20 @@ else {
     <div class="card mt-5">
         <input type="hidden" name="form_updatetion_type" value="<?php echo ($_POST['gettype'] == "SELECTMANUFACTURINGBOM" || $rid=="")?"insert":"update"; ?>">
         <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Required Components</h5>
+            <h5 class="mb-0"><?php echo __('Required Components'); ?></h5>
         </div>
         <div class="card-body">
             <table class="table table-hover" >
                 <thead>
                     <tr>
-                        <th scope="col" class="p-1" style="width: 20%;">Product Name <span class="requried"></span></th>
-                        <th scope="col" class="thheader p-1" style="width: 8%;">UOM <span class="requried">*</span></th>
-                        <th scope="col" class="thheader p-1 text-right" style="width: 8%;">Qty <span class="requried">*</span></th>
-                        <th scope="col" class="thheader p-1 text-right" style="width: 8%;">BOM Qty </th>
-                        <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Price <span class="requried">*</span></th>
-                        <th scope="col" class="thheader p-1 text-right" style="width: 10%;">Total Amount</th>
-                        <th scope="col" class="thheader p-1" style="width: 25%;">Comment</th>
-                        <th scope="col" class="thheader p-1 " style="width: 8%;">Action</th>
+                        <th scope="col" class="p-1" style="width: 20%;"><?php echo __('Product Name'); ?> <span class="requried"></span></th>
+                        <th scope="col" class="thheader p-1" style="width: 8%;"><?php echo __('UOM'); ?> <span class="requried">*</span></th>
+                        <th scope="col" class="thheader p-1 text-right" style="width: 8%;"><?php echo __('Qty'); ?> <span class="requried">*</span></th>
+                        <th scope="col" class="thheader p-1 text-right" style="width: 8%;"><?php echo __('BOM Qty'); ?> </th>
+                        <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Price'); ?> <span class="requried">*</span></th>
+                        <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?php echo __('Total Amount'); ?></th>
+                        <th scope="col" class="thheader p-1" style="width: 25%;"><?php echo __('Comment'); ?></th>
+                        <th scope="col" class="thheader p-1 " style="width: 8%;"><?php echo __('Action'); ?></th>
                     </tr>
                 </thead>
                 <tbody id="invoiceItem">
@@ -69,8 +69,8 @@ else {
                         <input type="hidden" class="manufacturing_bom_items_seq_no" value="<?php echo $seq; ?>">
                         <input type="hidden" name="subcontract_work_order_item_id[]" value="<?php echo $swoi['id']; ?>">
                         <th scope="col" class="p-1 w-full">
-                            <select aria-label="Select option" class="js-example-basic-single item-selection" id="item_id_<?php echo $seq; ?>" name="item_id[]" onchange="selectProductName('<?php echo $seq; ?>')" required>
-                                <option value="">Select Any one</option>
+                            <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single item-selection" id="item_id_<?php echo $seq; ?>" name="item_id[]" onchange="selectProductName('<?php echo $seq; ?>')" required>
+                                <option value=""><?php echo __('Select Any one'); ?></option>
                                 <?php foreach ($items as $item){
                                     $item_uom = isset($item['purchase_uom']) ? $item['purchase_uom'] : '';
                                     $item_price = isset($item['purchase_price']) ? $item['purchase_price'] : 0;
@@ -80,29 +80,29 @@ else {
                             </select>
                         </th>
                         <th scope="col" class="p-1 w-full">
-                            <select aria-label="Select option" class="js-example-basic-single" id="uom_<?php echo $seq; ?>" name="uom[]" required>
-                                <option value="">Select Any one</option>
+                            <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single" id="uom_<?php echo $seq; ?>" name="uom[]" required>
+                                <option value=""><?php echo __('Select Any one'); ?></option>
                                 <?php foreach ($unit_of_measurements as $uom){  ?>
                                     <option value="<?php echo $uom['id']; ?>"  <?php echo $swoi['purchase_uom'] == $uom['id']?"selected":""; ?>><?php echo $uom['uom_name']; ?></option>
                                 <?php }  ?>
                             </select>
                         </th>
                         <th scope="col" class="p-1">
-                            <input aria-label="Enter number" type="number" class="form-control text-right" id="request_qty_<?php echo $seq; ?>" name="request_qty[]" min="1" value="<?php echo $swoi['item_quantity'] ? $swoi['item_quantity'] : 1; ?>" onchange="calculateItemTotal('<?php echo $seq; ?>')" oninput="calculateItemTotal('<?php echo $seq; ?>')" required>
+                            <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right" id="request_qty_<?php echo $seq; ?>" name="request_qty[]" min="1" value="<?php echo $swoi['item_quantity'] ? $swoi['item_quantity'] : 1; ?>" onchange="calculateItemTotal('<?php echo $seq; ?>')" oninput="calculateItemTotal('<?php echo $seq; ?>')" required>
                         </th>
                         <th scope="col" class="p-1 text-right">
                             <span><?php echo $swoi['bom_qty'] ? $swoi['bom_qty'] : ''; ?></span>
                             <input type="hidden" class="form-control text-right" id="bom_qty_<?php echo $seq; ?>" name="bom_qty[]" value="<?php echo $swoi['bom_qty'] ? $swoi['bom_qty'] : ''; ?>" readonly>
                         </th>
                         <th scope="col" class="p-1">
-                            <input aria-label="Enter number" type="number" class="form-control text-right" id="item_price_<?php echo $seq; ?>" name="item_price[]" min="0" step="0.01"
+                            <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right" id="item_price_<?php echo $seq; ?>" name="item_price[]" min="0" step="0.01"
                             value="<?php echo $swoi['item_price'] ?? $swoi['purchase_price'] ?? 0; ?>" onchange="calculateItemTotal('<?php echo $seq; ?>')" oninput="calculateItemTotal('<?php echo $seq; ?>')"  required>
                         </th>
                         <th scope="col" class="p-1">
-                            <input aria-label="Enter number" type="number" class="form-control text-right" id="item_total_amount_<?php echo $seq; ?>" name="item_total_amount[]" min="0" step="0.01" value="<?php echo $swoi['item_amount'] ??  0; ?>" readonly>
+                            <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right" id="item_total_amount_<?php echo $seq; ?>" name="item_total_amount[]" min="0" step="0.01" value="<?php echo $swoi['item_amount'] ??  0; ?>" readonly>
                         </th>
                         <th scope="col">
-                            <textarea aria-label="Text area"  id="description_<?php echo $seq; ?>" name="description[]" class="form-control" autocomplete="off"><?php echo $swoi['description']; ?></textarea>
+                            <textarea aria-label="<?php echo __('Text area'); ?>"  id="description_<?php echo $seq; ?>" name="description[]" class="form-control" autocomplete="off"><?php echo $swoi['description']; ?></textarea>
                         </th>
                         <th scope="col" class="p-1">
                             <i class="ti-trash cursor-pointer" onclick="removerows('remove_row_<?php echo $seq; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
@@ -115,7 +115,7 @@ else {
             </table>
              <div class="row mt-2">
                 <div class="col-xs-12">
-                    <button class="btn btn-success" onclick="addMoreBomChild()" type="button" <?php echo $rid!="" || isset($_POST['manufacturing_bom_id']) && $_POST['manufacturing_bom_id'] !="" ?"disabled":""; ?> >+ Add More</button>
+                    <button class="btn btn-success" onclick="addMoreBomChild()" type="button" <?php echo $rid!="" || isset($_POST['manufacturing_bom_id']) && $_POST['manufacturing_bom_id'] !="" ?"disabled":""; ?> ><?php echo __('+ Add More'); ?></button>
                 </div>
             </div>
         </div>

@@ -10,11 +10,11 @@
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
-                    <h5>Feasibility</h5>
+                    <h5><?php echo __('Feasibility'); ?></h5>
                 </div>
                 <div class="card-body">
-                    <span class="form-label m-r-5">Feasibility</span>
-                    <input aria-label="Checkbox" type="checkbox" class="js-single" />
+                    <span class="form-label m-r-5"><?php echo __('Feasibility'); ?></span>
+                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" class="js-single" />
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                     <div class="mt-3" id="feasibilityWrapper" style="display: none;">
                         <ul class="nav md-tabs infisuite_tab mt-2 ml-2" id="tabList">
                             <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#feasibility_type" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Feasibility Type</a>
+                                <a class="nav-link active" data-bs-toggle="tab" href="#feasibility_type" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('Feasibility Type'); ?></a>
                             </li>
                         </ul>
                         <div class="tab-content tabs card-block" id="feasibilityTab">
@@ -85,7 +85,7 @@
                 reinitSelect2(); // Reinitialize select2 after loading new content
             },
             error: function(xhr, status, error) {
-                alert('Error: ' + error);
+                alert(<?php echo json_encode(__('Error:')); ?> + error);
             }
         });
     }

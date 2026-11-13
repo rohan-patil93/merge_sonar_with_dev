@@ -23,7 +23,7 @@ $locations = $result['locations'];
 
         htmlrows += '<div class="form-group col-lg-1"><img src="uploads/all/no-image.jpg" class="img-40" id="imagepreview__2"+maxrows+'" alt="Attachment Preview" />  </div>';
 
-        htmlrows += '<div class="form-group col-lg-1 text-center"><button type="button" class="btn p-0 border-0 bg-transparent fa fa-trash text-danger cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeBuildingFloorPlans(\''+rowid+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div>';
+        htmlrows += '<div class="form-group col-lg-1 text-center"><button type="button" class="btn p-0 border-0 bg-transparent fa fa-trash text-danger cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Remove') ?>" onclick="removeBuildingFloorPlans(\''+rowid+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div>';
         $("#newrowadd").append(htmlrows);
     }
      function submitBuildingFloorPlans(){
@@ -76,8 +76,8 @@ $locations = $result['locations'];
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes",
-                cancelButtonText: "No",
+                confirmButtonText: "<?= __('Yes') ?>",
+                cancelButtonText: "<?= __('No') ?>",
                 closeOnConfirm: true,
                 closeOnCancel: true
             },
@@ -109,7 +109,7 @@ $locations = $result['locations'];
     }
 </script>
 <div class="modal-header  ">
-    <h5 class="modal-title"> Building Floors</h5>
+    <h5 class="modal-title"> <?= __('Building Floors') ?></h5>
     <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="Close" onclick="closeInsertBuilding('B')"></button>
 </div>
 <div class="modal-body p-l-50 p-r-50 p-t-50">
@@ -118,44 +118,44 @@ $locations = $result['locations'];
         <div class="col-lg-10">
             <div class="row">
                 <div class="form-group col-lg-6">
-                    <span  class="form-label">Building Name <span class="text-danger">*</span></span>
+                    <span  class="form-label"><?= __('Building Name') ?> <span class="text-danger">*</span></span>
                     <span class="d-block error-message text-danger"></span>
                     <input aria-label="Building Name" class="form-control requried_field" type="text" id="building_name" name="building_name" value="<?php echo $buildings['building_name']; ?>">
                 </div>
                 <div class="form-group col-lg-6">
-                    <span  class="form-label">Custodian <span class="text-danger">*</span></span>
+                    <span  class="form-label"><?= __('Custodian') ?> <span class="text-danger">*</span></span>
                     <span class="d-block error-message text-danger"></span>
                     <select aria-label="Originator[]" class="js-example-basic-multiple requried_field" name="originator[]" multiple>
                         <?php
                         $originator = json_decode($buildings['originator'],1);
                         foreach($building_admin_application_users as $baau){ ?>
-                        <option value="<?php echo $baau['id']; ?>" <?php echo in_array($baau['id'], (array)$originator)?"selected":""; ?>><?php echo $baau['display_name']; ?></option>
+                        <option value="<?php echo $baau['id']; ?>" <?php echo in_array($baau['id'], (array)$originator)?"selected":""; ?>><?php echo htmlspecialchars(__($baau['display_name'] ?? '')); ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span  class="form-label">Location <span class="text-danger">*</span></span>
+                    <span  class="form-label"><?= __('Location') ?> <span class="text-danger">*</span></span>
                     <span class="d-block error-message text-danger"></span>
                     <select aria-label="Location" class="js-example-basic-single requried_field" name="location_id">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach($locations as $loc){ ?>
-                        <option value="<?php echo $loc['id']; ?>" <?php echo $loc['id']==$buildings['location_id']?"selected":""; ?>><?php echo $loc['location_name']; ?></option>
+                        <option value="<?php echo $loc['id']; ?>" <?php echo $loc['id']==$buildings['location_id']?"selected":""; ?>><?php echo htmlspecialchars(__($loc['location_name'] ?? '')); ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span  class="form-label">Address <span class="text-danger">*</span></span>
+                    <span  class="form-label"><?= __('Address') ?> <span class="text-danger">*</span></span>
                     <span class="d-block error-message text-danger"></span>
                     <textarea aria-label="Building Address" class="form-control requried_field" id="building_address" name="building_address" ><?php echo $buildings['building_address']; ?></textarea>
                 </div>
             </div>
         </div>
         <div class="col-lg-2">
-            <span class="form-label">Featured Image</span>
+            <span class="form-label"><?= __('Featured Image') ?></span>
             <div class="col-lg-9 col-xl-6">
                 <div class="profile-pic">
                     <label class="-label" for="building_image">
-                        <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                        <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
                     </label>
                     <input type="file" name="building_image" id="building_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
                     <img src="<?php echo "uploads/all/".$buildings['building_image'] ; ?>" id="outputbuilding_image" width="200" alt="Attachment Preview" />
@@ -166,13 +166,13 @@ $locations = $result['locations'];
     </div>
     <div class="row">
         <div class="form-group col-lg-6">
-            <span  class="form-label">Floor Name</span>
+            <span  class="form-label"><?= __('Floor Name') ?></span>
         </div>
         <div class="form-group col-lg-5">
-            <span  class="form-label">Floor Image</span>
+            <span  class="form-label"><?= __('Floor Image') ?></span>
         </div>
         <div class="form-group col-lg-1">
-             <span  class="form-label">Action</span>
+             <span  class="form-label"><?= __('Action') ?></span>
         </div>
     </div>
     <div id="newrowadd">
@@ -191,25 +191,25 @@ $locations = $result['locations'];
             <div class="form-group col-lg-1">
                 <?php if($bf['floor_image'] !=""){ ?>
                 <a href="uploads/building_floors/<?php echo $bf['floor_image']; ?>" class="text-primary" download>
-                    <img src="uploads/building_floors/<?php echo $bf['floor_image']; ?>" class="img-40" id="imagepreview_<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download Floor plan"  alt="Download Floor plan" /></a>
+                    <img src="uploads/building_floors/<?php echo $bf['floor_image']; ?>" class="img-40" id="imagepreview_<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Download Floor plan') ?>" alt="<?= __('Download Floor plan') ?>" /></a>
                 <?php }else{  ?>
                 <img class="img-40" src="" id="imagepreview_<?php echo $mk; ?>" alt="Attachment Preview" />
                 <?php } ?>
             </div>
             <div class="form-group col-lg-1 text-center">
-                <i class="fa fa-trash text-danger cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeBuildingFloorPlans('floor_row_id_<?php echo $mk; ?>','<?php echo $bf['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                <i class="fa fa-trash text-danger cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Remove') ?>" onclick="removeBuildingFloorPlans('floor_row_id_<?php echo $mk; ?>','<?php echo $bf['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
             </div>
         </div>
         <?php $mk++;
 } ?>
     </div>
-    <button class="btn btn-success m-t-20" id="addRows" type="button" onclick="addMoreFloorPlans()"><i class="fa fa-plus m-r-5"></i>Add More</button>
+    <button class="btn btn-success m-t-20" id="addRows" type="button" onclick="addMoreFloorPlans()"><i class="fa fa-plus m-r-5"></i><?= __('Add More') ?></button>
      <input type="hidden" name="rid" value="<?php echo $rid; ?>">
      </form>
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" onclick="getBuildingDynamicPage('B')">Close</button>
-    <button type="button" name="submit" onclick="submitBuildingFloorPlans()" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" name="submitesopplanse"> <?php echo $rid !=""?"Update":"Submit";?></button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" onclick="getBuildingDynamicPage('B')"><?= __('Close') ?></button>
+    <button type="button" name="submit" onclick="submitBuildingFloorPlans()" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" name="submitesopplanse"> <?php echo $rid !=""?__('Update'):__('Submit');?></button>
 </div>
 

@@ -207,7 +207,7 @@ function submitsurvey(){
 
   Swal.fire({
     title: "",
-    text: "Time is Expired And Please Submit",
+    text: <?php echo json_encode(__('Time is Expired And Please Submit')); ?>,
     buttonsStyling: false,
     confirmButtonText: "<i class='la la-thumbs-up'></i>OK",
     showCancelButton: false,
@@ -253,7 +253,7 @@ function submitsurvey(){
 							
 					  <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
 								<i class="icofont icofont-reply"></i>
-								Back
+								<?php echo __('Back'); ?>
 							</a>
 						</div>
 					</div>
@@ -311,7 +311,7 @@ function submitsurvey(){
                   }
                   ?>
                   <b> <div class="<?php echo $option_cat;?>-group required">
-                    <input type="<?php echo $option_cat;?>" class="response_option<?php echo $questionid;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"   <?php if($display_questions[$questionid]['require_response']=="0") echo "required"; ?> <?php echo in_array($option,(array)$selectedoption )==1 ?  'Checked': '';?> >
+                    <input type="<?php echo $option_cat;?>" class="response_option<?php echo $questionid;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"   <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> <?php echo in_array($option,(array)$selectedoption )==1 ?  'Checked': '';?> >
                     <label for="q1"><?php echo $option; ?> </label> </div>
                   </b>
                 <?php }
@@ -319,15 +319,15 @@ function submitsurvey(){
                 $selectedoption =json_decode($markedanswer[$display_questions[$questionid]['queid']],1)[0];
                 ?>
 
-                <label class="mt-10">Scale from 1 to: <?php echo $option;?></label>
-                <input type="number" <?php if($display_questions[$questionid]['require_response']=="0") echo "required"; ?> id="response_option_scale_<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]" class="form-control col-md-5" value="<?php echo $markedanswer;?>" placeholder="<?php echo $selectedoption;?>"> 
+                <label class="mt-10"><?php echo __('Scale from 1 to:'); ?> <?php echo $option;?></label>
+                <input type="number" <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> id="response_option_scale_<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]" class="form-control col-md-5" value="<?php echo $markedanswer;?>" placeholder="<?php echo $selectedoption;?>"> 
                 <?php             
               }
               else if($display_questions[$questionid]['options_display_type']==4){
                 $selectedoption =json_decode($markedanswer[$display_questions[$questionid]['queid']],1)[0];
 
                 ?>
-                <textarea id="response_option<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]"  <?php if($display_questions[$questionid]['require_response']=="0") echo "required"; ?> class="form-control mt-10 col-md-10" placeholder=""><?php echo $selectedoption;?></textarea> 
+                <textarea id="response_option<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]"  <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> class="form-control mt-10 col-md-10" placeholder=""><?php echo $selectedoption;?></textarea> 
                 <?php             
               }
 
@@ -335,17 +335,17 @@ function submitsurvey(){
               <div class="card-footer mt-5">
 
                 <?php if ($total_q!=$questionid){ ?> 
-                  <a href="#" id="save" <?php echo $dispnext; ?> onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left">Next <i class="fas fa-chevron-right"> </i></a>
+                  <a href="#" id="save" <?php echo $dispnext; ?> onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left"><?php echo __('Next'); ?> <i class="fas fa-chevron-right"> </i></a>
                   <?php if($questionid==1) { ?>
-                    <a href="#" id="start" style="display: block"   onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left">Next <i class="fas fa-chevron-right"> </i></a>
+                    <a href="#" id="start" style="display: block"   onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left"><?php echo __('Next'); ?> <i class="fas fa-chevron-right"> </i></a>
                   <?php } ?>
                 <?php } else {?>
-                  <a href="#" id="previous_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-left"><i class="fas fa-chevron-left"> </i>Previous </a>
+                  <a href="#" id="previous_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-left"><i class="fas fa-chevron-left"> </i><?php echo __('Previous'); ?> </a>
                 <?php } ?>
 
                 <!-- <a href="#" id="clear" onclick="callclear('<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-light-success font-weight-bold float-left">Clear Response</a> -->
                 <?php if ($questionid!=1 && $total_q!=$questionid){ ?> 
-                  <a href="#" id="previous_nav_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i>Previous </a>
+                  <a href="#" id="previous_nav_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i><?php echo __('Previous'); ?> </a>
                 <?php } ?>
                 
 
@@ -366,11 +366,11 @@ function submitsurvey(){
               <?php  } ?>
             </ul>
             <div class="row">
-              <ul> <li><a href="#"><h5> <span id="anscount">0 </span>  &nbsp;Answered </h5></a></li> </ul>
+              <ul> <li><a href="#"><h5> <span id="anscount">0 </span>  <?php echo __('&nbsp;Answered'); ?> </h5></a></li> </ul>
               
             </div>
             <div class="row">
-              <ul> <li><a href="#"><h5> <span id="unanscount"><?php echo $total_q;?></span> &nbsp;Unanswered </h5></a></li> </ul>
+              <ul> <li><a href="#"><h5> <span id="unanscount"><?php echo $total_q;?></span> <?php echo __('&nbsp;Unanswered'); ?> </h5></a></li> </ul>
               
             </div> 
             <div class="row mt-2">

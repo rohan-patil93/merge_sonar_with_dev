@@ -82,9 +82,9 @@ if($current_status != ''){
 <!-- Display table similar to the recent CSRs table... -->
 <div class="modal-header">
     <h5 class="modal-title">
-        <?php echo $title; ?> CSRs
+        <?php echo htmlspecialchars(__($title), ENT_QUOTES, 'UTF-8'); ?> <?= __('CSRs') ?>
     </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8') ?>"></button>
 </div>
 <div class="modal-body">
 
@@ -95,12 +95,12 @@ if($current_status != ''){
                 <table class="table table-hover m-b-0">
                     <thead>
                         <tr>
-                            <th scope="col">Sr. No</th>
-                            <th scope="col">Creator</th>
-                            <th scope="col">Project Name</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">End Date</th>
-                            <th scope="col" class='text-center'>Cost</th>
+                            <th scope="col"><?= __('Sr. No') ?></th>
+                            <th scope="col"><?= __('Creator') ?></th>
+                            <th scope="col"><?= __('Project Name') ?></th>
+                            <th scope="col"><?= __('Start Date') ?></th>
+                            <th scope="col"><?= __('End Date') ?></th>
+                            <th scope="col" class='text-center'><?= __('Cost') ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -114,7 +114,7 @@ if($current_status != ''){
                                         <?php if ($_SESSION['user_image'][$value['created_by']] != "") { ?>
                                             <img src="uploads/all/<?php echo $_SESSION['user_image'][$value['created_by']]; ?>" class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                                         <?php } else { ?>
-                                            <span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$value['created_by']]); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8') ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$value['created_by']]); ?></span>
                                         <?php } ?>
                                         <label class='mt-2 ml-2'> <?php echo $_SESSION['users'][$value['created_by']]; ?> </label>
                                     </td>
@@ -138,7 +138,7 @@ if($current_status != ''){
                             <tr>
                                 <td colspan="6">
                                     <div class="text-center ">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records') ?></p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                         </div>

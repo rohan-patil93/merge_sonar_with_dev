@@ -27,9 +27,9 @@ $jsondecode = json_decode($jsondecode,1);
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-header table-card-header mb-3">
-					<h5> User Lists </h5>
+					<h5> <?= __("User Lists") ?> </h5>
 					<div class="card-header-right table-card-header mb-2">
-				<label class="form-label  col-form-label m-r-20">User List</label>		
+				<label class="form-label  col-form-label m-r-20"><?= __("User List") ?></label>		
 
 <select class="form-select js-example-basic-single " id="hid_userid" onchange="usertree(this.value)">
 	<?php foreach($jsondecode as $dt){ ?>
@@ -39,7 +39,7 @@ $jsondecode = json_decode($jsondecode,1);
 </select>
 						<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
 							<i class="icofont icofont-reply"></i>
-							Back
+							<?= __("Back") ?>
 						</a>
 					</div>
 				</div>

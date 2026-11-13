@@ -59,10 +59,10 @@ if($item_daata['tracking_type'] == 2){
 			$("#cck_"+id).prop("checked", false);
 			//document.getElementById("#cck_"+id).checked = false;
 			swal({              
-                    title: "Quantity cannot be more than check list",                            
+                    title: "<?php echo __('Quantity cannot be more than check list'); ?>",                            
                     type: "warning",           
                     buttonsStyling: false,
-                    confirmButtonText: "OK",    
+                    confirmButtonText: "<?php echo __('OK'); ?>",    
                     confirmButtonClass: "btn btn-danger"
                 })
 		}
@@ -81,7 +81,7 @@ if($item_daata['tracking_type'] == 2){
 		        success: function(response) {
 		        	console.log(response);
 		        	$('#sl_'+id).val(val);
-		        	tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Updated Successfully','');
+		        	tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo __('Updated Successfully'); ?>','');
 		        }
 		    });
 	    }
@@ -93,14 +93,14 @@ if($item_daata['tracking_type'] == 2){
 		var htmlRows = '';		
 		htmlRows += '<div class="row align-items-center sfitemRow" id="static_div_'+count+'" style="margin-top: 10px;">';
 		htmlRows += '<div class="col-lg-3">';
-		htmlRows += '<input type="text" class="form-control" id="static_value_'+count+'" value="" name="type" aria-label="Lot Number '+count+'">';
+		htmlRows += '<input type="text" class="form-control" id="static_value_'+count+'" value="" name="type" aria-label="<?php echo __('Lot Number'); ?> '+count+'">';
 		htmlRows += '</div>';
 		htmlRows += '<div class="col-lg-3">';
-		htmlRows += '<input type="text" class="form-control" id="qty_val_'+count+'" value="" name="type" aria-label="Qty '+count+'">';
+		htmlRows += '<input type="text" class="form-control" id="qty_val_'+count+'" value="" name="type" aria-label="<?php echo __('Qty'); ?> '+count+'">';
 		htmlRows += '</div>';
 		
 		htmlRows += '<div class="col-lg-3">';								
-		htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)" aria-label="Delete row '+count+'">Delete</button>';						
+		htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)" aria-label="<?php echo __('Delete row'); ?> '+count+'"><?php echo __('Delete'); ?></button>';						
 		htmlRows += '</div>';
 		htmlRows += '</div>';
 		$('#append_statick').append(htmlRows);
@@ -133,7 +133,7 @@ if($item_daata['tracking_type'] == 2){
 				var value = $('#serial_no_'+k).val();
 				if( value == ""){
 					check = 'F';
-					message = "Please fill the serial number ";
+					message = "<?php echo __('Please fill the serial number'); ?> ";
 					break;
 				}
 				data += '&serial_'+k+'='+value;
@@ -149,7 +149,7 @@ if($item_daata['tracking_type'] == 2){
 				value = $('#qty_val_'+k).val();
 				if( value == "" && lot ==""){
 					check = 'F';
-					message = "Please fill the Lot number ";
+					message = "<?php echo __('Please fill the Lot number'); ?> ";
 					break;
 				}
 				data += '&lot_'+k+'='+lot+'&lotvalue_'+k+'='+value;
@@ -158,7 +158,7 @@ if($item_daata['tracking_type'] == 2){
 			//alert("qty="+qty+"count="+count);
 			if(count != qty){
 				check = 'F';
-				 message = "Please check qty is qual to lot qty and requried lot name";
+				 message = "<?php echo __('Please check qty is qual to lot qty and requried lot name'); ?>";
 			}
 			data_count = loopcount;
 		}
@@ -177,13 +177,13 @@ if($item_daata['tracking_type'] == 2){
 		        	console.log(response);
 		        	$('#kt_modal_KTDatatable_remote').modal('hide');
 		            Swal.fire({              
-						title: "Comments Updated ",              
+						title: "<?php echo __('Comments Updated'); ?> ",              
 						type: "success",           
 						buttonsStyling: false,
-						confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",    
+						confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('Yes, close!'); ?>",    
 						confirmButtonClass: "btn btn-danger",
 						showCancelButton: true,     
-						cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",      
+						cancelButtonText: "<i class='la la-hand-o-right'></i> <?php echo __('No, continue'); ?>",      
 						cancelButtonClass: "btn btn-default"        
 					}).then(function(result) {
 						if (result.value) {
@@ -208,10 +208,10 @@ if($item_daata['tracking_type'] == 2){
 <!-- <div> -->
 	<div class="modal-header">
 						<h5 class="modal-title">
-							Serial No
-							<small>&nbsp;&nbsp; <b>Transaction Type 122: </b>&nbsp; <?php echo viewtitle($table); ?>  </small>
+							<?php echo __('Serial No'); ?>
+							<small>&nbsp;&nbsp; <b><?php echo __('Transaction Type 122'); ?>: </b>&nbsp; <?php echo htmlspecialchars(__(viewtitle($table) ?? '')); ?>  </small>
 						</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
 							<!-- <span aria-hidden="true">&times;</span> -->
 						</button>
 					</div>
@@ -224,18 +224,18 @@ if($item_daata['tracking_type'] == 2){
 					<?php $i=1; foreach($res_data as $ser){ ?>
 						<div class="form-group row col-lg-12">
 							<div class="col-1" >
-								 <label class="kt-checkbox" for="cck_<?php echo $ser['id']; ?>" aria-label="Select Serial Number <?php echo $i; ?>">
-								 	<span class="sr-only visually-hidden">Select Serial Number <?php echo $i; ?></span>
-								 	<input class="mt-3" id="cck_<?php echo $ser['id']; ?>" type="checkbox" <?php if($ser['check_return']==1){ echo "checked"; } ?>  onclick="updategrnretunsbyid(<?php echo $ser['id'].",'item_serial_nos'"; ?>)" onkeydown="if(event.key==='Enter'){this.click();}" aria-label="Select Serial Number <?php echo $i; ?>"> <span></span> 
+								 <label class="kt-checkbox" for="cck_<?php echo $ser['id']; ?>" aria-label="<?php echo __('Select Serial Number'); ?> <?php echo $i; ?>">
+								 	<span class="sr-only visually-hidden"><?php echo __('Select Serial Number'); ?> <?php echo $i; ?></span>
+								 	<input class="mt-3" id="cck_<?php echo $ser['id']; ?>" type="checkbox" <?php if($ser['check_return']==1){ echo "checked"; } ?>  onclick="updategrnretunsbyid(<?php echo $ser['id'].",'item_serial_nos'"; ?>)" onkeydown="if(event.key==='Enter'){this.click();}" aria-label="<?php echo __('Select Serial Number'); ?> <?php echo $i; ?>"> <span></span> 
 								 	<input type="hidden" name="" id="sl_<?php echo $ser['id']; ?>" value="<?php echo $ser['check_return']; ?>">
 								 </label>
 							</div>
 							<div class="col-3">
-								<label for="serial_no_<?php echo $i; ?>" class="col-form-label">Serial Number <?php echo $i; ?></label>
+								<label for="serial_no_<?php echo $i; ?>" class="col-form-label"><?php echo __('Serial Number'); ?> <?php echo $i; ?></label>
 							</div>
 							
 							<div class="col-6">
-								<input type="text" class="form-control" readonly id="serial_no_<?php echo $i; ?>" name="serial_no" value="<?php echo $ser['serial_no']; ?>" aria-label="Serial Number <?php echo $i; ?>">
+								<input type="text" class="form-control" readonly id="serial_no_<?php echo $i; ?>" name="serial_no" value="<?php echo $ser['serial_no']; ?>" aria-label="<?php echo __('Serial Number'); ?> <?php echo $i; ?>">
 							</div>
 			
 						</div>
@@ -245,10 +245,10 @@ if($item_daata['tracking_type'] == 2){
 				<div id='append_statick'>
 				<div class="row align-items-center" style="margin-top: 10px;">
 					<div class="col-lg-3">
-						<span class="fw-bold">Lot Number</span>
+						<span class="fw-bold"><?php echo __('Lot Number'); ?></span>
 					</div>
 					<div class="col-lg-3">
-						<span class="fw-bold">Qty</span>
+						<span class="fw-bold"><?php echo __('Qty'); ?></span>
 					</div>
 					<div class="col-lg-3">
 						<span></span>
@@ -258,21 +258,21 @@ if($item_daata['tracking_type'] == 2){
 					<?php for($i=1; $i<count((array)$serialnos)+1; $i++){ ?>
 					<div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
 						<div class="col-lg-3">
-							<input type="text" class="form-control" id="static_value_<?php echo $i; ?>" value="<?php echo $serialnos[$i-1]['lot']; ?>" name="type" aria-label="Lot Number <?php echo $i; ?>"> 
+							<input type="text" class="form-control" id="static_value_<?php echo $i; ?>" value="<?php echo $serialnos[$i-1]['lot']; ?>" name="type" aria-label="<?php echo __('Lot Number'); ?> <?php echo $i; ?>"> 
 						</div>
 						<div class="col-lg-3">
-							<input type="text" class="form-control" id="qty_val_<?php echo $i; ?>" value="<?php echo $serialnos[$i-1]['lot_value']; ?>" name="type" aria-label="Qty <?php echo $i; ?>"> 
+							<input type="text" class="form-control" id="qty_val_<?php echo $i; ?>" value="<?php echo $serialnos[$i-1]['lot_value']; ?>" name="type" aria-label="<?php echo __('Qty'); ?> <?php echo $i; ?>"> 
 						</div>
 						<div class="col-lg-3">
 							<input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >
-							<button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)" aria-label="Delete row <?php echo $i; ?>">Delete</button>
+							<button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)" aria-label="<?php echo __('Delete row'); ?> <?php echo $i; ?>"><?php echo __('Delete'); ?></button>
 						</div>
 					</div>
 					<?php } ?>
 				</div>
 				</div>
 				<div class="m-l-5 m-t-5" style="margin-top: 10px;">
-					<button class="btn btn-success" id="addstatickRows" type="button" onclick="addstatickRows123()">+ Add More</button>&nbsp;&nbsp;
+					<button class="btn btn-success" id="addstatickRows" type="button" onclick="addstatickRows123()">+ <?php echo __('Add More'); ?></button>&nbsp;&nbsp;
 				</div>
 
 				<?php } ?>

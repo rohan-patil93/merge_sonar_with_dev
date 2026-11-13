@@ -72,13 +72,13 @@ $('#checkid'+maxid).show();
 
 
  <div class="card-header table-card-header mb-2">
-              <h5> PayRoll Process</h5>
+              <h5> <?php echo __('PayRoll Process'); ?></h5>
             <div class="card-header-right table-card-header ">
 
 
 <a   href="index.php?option=COM_INSERT_PAYROLL&PAY_YEAR=<?php echo $_GET['PAY_YEAR']; ?>&PAY_MONTH=<?php echo $_GET['PAY_MONTH']; ?>"  class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 genratepayrolbtn" <?php if(count((array)$array)!= count((array)$payrollaray)){?>style="display: none" <?php
 } ?>>
-              <?php echo "Genrate Payroll";  ?>
+              <?php echo __('Genrate Payroll');  ?>
       </a>
 
         </div>

@@ -153,30 +153,30 @@ if ($rid != "" && $view == '1') {
                             <strong>
                                 <?php
                                 if ($error == '9999') {
-                                    echo "Insert successful.";
+                                    echo __('Insert successful.');
                                 } elseif ($error == '9998') {
-                                    echo "Update successful.";
+                                    echo __('Update successful.');
                                 }
                                 ?>
                             </strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
                         </div>
                     <?php } else { ?>
                         <div class="alert alert-info alert-dismissible fwdp-alert">
-                            <strong>This function is used for maintaining <strong>Field Work</strong>. * represents mandatory fields.</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <strong><?php echo __('This function is used for maintaining'); ?> <strong><?php echo __('Field Work'); ?></strong><?php echo __('. * represents mandatory fields.'); ?></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
                         </div>
                     <?php } ?>
 
                     <div class="fwdp-header">
                         <div>
-                            <h1 class="fwdp-title">Field Work Daily Plans</h1>
-                            <p class="fwdp-subtitle">Plan and manage field visit locations</p>
+                            <h1 class="fwdp-title"><?php echo __('Field Work Daily Plans'); ?></h1>
+                            <p class="fwdp-subtitle"><?php echo __('Plan and manage field visit locations'); ?></p>
                         </div>
                         <div class="fwdp-header-actions">
-                            <a href="index.php?option=COM_LIST_FIELD_WORK_DAILY_PLANS_NEW" class="fwdp-btn fwdp-btn-primary desktop-view">User Work Daily Plans List</a>
+                            <a href="index.php?option=COM_LIST_FIELD_WORK_DAILY_PLANS_NEW" class="fwdp-btn fwdp-btn-primary desktop-view"><?php echo __('User Work Daily Plans List'); ?></a>
                             <a href="javascript:history.go(-1)" class="fwdp-btn desktop-view">
-                                <i class="icofont icofont-reply"></i> Back
+                                <i class="icofont icofont-reply"></i> <?php echo __('Back'); ?>
                             </a>
                         </div>
                     </div>
@@ -185,9 +185,9 @@ if ($rid != "" && $view == '1') {
                         <form id="fieldWorkDailyPlansForm" method="post">
                             <div class="row g-3">
                                 <div class="col-md-4 form-group">
-                                    <label class="fwdp-label">User <span class="text-danger">*</span></label>
-                                    <select class="form-select js-example-basic-single" id="user_id" name="user_id" aria-label="User Id">
-                                        <option value="0">Select Any one</option>
+                                    <label class="fwdp-label"><?php echo __('User'); ?> <span class="text-danger">*</span></label>
+                                    <select class="form-select js-example-basic-single" id="user_id" name="user_id" aria-label="<?php echo __('User Id'); ?>">
+                                        <option value="0"><?php echo __('Select Any one'); ?></option>
                                         <?php if (count((array)$application_users) > 0) {
                                             foreach ($application_users as $row) { ?>
                                                 <option value="<?php echo $row['id']; ?>" data-work-type="<?php echo $row['user_field_work_type']; ?>" <?php echo $rid == $row['id'] ? 'selected' : ''; ?>>
@@ -200,8 +200,8 @@ if ($rid != "" && $view == '1') {
                                 </div>
 
                                 <div id="toDateDiv" class="col-md-4 form-group d-none">
-                                    <label class="fwdp-label">Date <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="date" name="plan_date" id="plan_date" value="<?php echo isset($date) && $date != '' ? date('Y-m-d', strtotime($date)) : ''; ?>" <?php echo $planDateReadonly; ?> min="<?php echo date('Y-m-d'); ?>" / aria-label="Plan Date">
+                                    <label class="fwdp-label"><?php echo __('Date'); ?> <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="date" name="plan_date" id="plan_date" value="<?php echo isset($date) && $date != '' ? date('Y-m-d', strtotime($date)) : ''; ?>" <?php echo $planDateReadonly; ?> min="<?php echo date('Y-m-d'); ?>" / aria-label="<?php echo __('Plan Date'); ?>">
                                     <div class="d-none text-danger" id="plan_date_err"></div>
                                 </div>
                             </div>
@@ -210,116 +210,116 @@ if ($rid != "" && $view == '1') {
 
                             <div id="workType1" class="fwdp-work-type d-none">
                                 <div class="fwdp-section-header">
-                                    <h3 class="fwdp-section-title">Visit Locations</h3>
+                                    <h3 class="fwdp-section-title"><?php echo __('Visit Locations'); ?></h3>
                                     <?php if ($view != '1') { ?>
-                                        <button type="button" class="fwdp-btn fwdp-btn-primary" id="addMoreBtn">+ Add Location</button>
+                                        <button type="button" class="fwdp-btn fwdp-btn-primary" id="addMoreBtn"><?php echo __('+ Add Location'); ?></button>
                                     <?php } ?>
                                 </div>
                                 <div id="locationCardsContainer">
                                     <div class="fwdp-location-card">
                                         <div class="fwdp-location-card-head">
                                             <span class="fwdp-location-num">1</span>
-                                            <button type="button" class="fwdp-remove-row" title="Remove location"><i class="fas fa-trash-alt"></i></button>
+                                            <button type="button" class="fwdp-remove-row" title="<?php echo __('Remove location'); ?>"><i class="fas fa-trash-alt"></i></button>
                                         </div>
                                         <div class="row g-3">
                                             <div class="col-md-3">
-                                                <label class="fwdp-label">Contact Person</label>
-                                                <input class="form-control" type="text" name="contact_person[]" aria-label="Contact Person">
+                                                <label class="fwdp-label"><?php echo __('Contact Person'); ?></label>
+                                                <input class="form-control" type="text" name="contact_person[]" aria-label="<?php echo __('Contact Person'); ?>">
                                             </div>
                                             <div class="col-md-3">
-                                                <label class="fwdp-label">Phone No.</label>
-                                                <input class="form-control" type="text" name="mobile[]" aria-label="Mobile">
+                                                <label class="fwdp-label"><?php echo __('Phone No.'); ?></label>
+                                                <input class="form-control" type="text" name="mobile[]" aria-label="<?php echo __('Mobile'); ?>">
                                             </div>
                                             <div class="col-md-3">
-                                                <label class="fwdp-label">Location Name</label>
-                                                <input class="form-control" type="text" name="plan_location[]" aria-label="Plan Location">
+                                                <label class="fwdp-label"><?php echo __('Location Name'); ?></label>
+                                                <input class="form-control" type="text" name="plan_location[]" aria-label="<?php echo __('Plan Location'); ?>">
                                             </div>
                                             <div class="col-md-3">
-                                                <label class="fwdp-label">Planned Time</label>
-                                                <input class="form-control" type="time" name="plan_time[]" aria-label="Plan Time">
+                                                <label class="fwdp-label"><?php echo __('Planned Time'); ?></label>
+                                                <input class="form-control" type="time" name="plan_time[]" aria-label="<?php echo __('Plan Time'); ?>">
                                             </div>
                                             <div class="col-12">
-                                                <label class="fwdp-label">Address</label>
-                                                <textarea class="form-control fwdp-address-field" name="plan_address[]" rows="2" readonly aria-label="Plan Address"></textarea>
+                                                <label class="fwdp-label"><?php echo __('Address'); ?></label>
+                                                <textarea class="form-control fwdp-address-field" name="plan_address[]" rows="2" readonly aria-label="<?php echo __('Plan Address'); ?>"></textarea>
                                             </div>
                                             <div class="col-md-6 d-none">
-                                                <input class="form-control lat" type="text" name="plan_latitude[]" readonly aria-label="Plan Latitude">
+                                                <input class="form-control lat" type="text" name="plan_latitude[]" readonly aria-label="<?php echo __('Plan Latitude'); ?>">
                                             </div>
                                             <div class="col-md-6 d-none">
-                                                <input class="form-control lng" type="text" name="plan_longitude[]" readonly aria-label="Plan Longitude">
+                                                <input class="form-control lng" type="text" name="plan_longitude[]" readonly aria-label="<?php echo __('Plan Longitude'); ?>">
                                             </div>
                                         </div>
                                         <div class="fwdp-location-footer">
                                             <div class="fwdp-coords-preview">
-                                                <span class="fwdp-coord-label">Lat / Lng</span>
+                                                <span class="fwdp-coord-label"><?php echo __('Lat / Lng'); ?></span>
                                                 <span class="fwdp-coord-value">--</span>
                                             </div>
                                             <button type="button" class="fwdp-btn fwdp-btn-map addMapBtn">
-                                                <i class="fas fa-map-marker-alt"></i> Pick on Map
+                                                <i class="fas fa-map-marker-alt"></i> <?php echo __('Pick on Map'); ?>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="fwdp-map-actions">
-                                    <button type="button" class="fwdp-btn fwdp-btn-outline" id="updateMapBtn">View All on Map</button>
+                                    <button type="button" class="fwdp-btn fwdp-btn-outline" id="updateMapBtn"><?php echo __('View All on Map'); ?></button>
                                 </div>
                             </div>
 
                             <div id="workType2" class="fwdp-work-type d-none">
                                 <div class="fwdp-section-header">
-                                    <h3 class="fwdp-section-title">Security Work Details</h3>
+                                    <h3 class="fwdp-section-title"><?php echo __('Security Work Details'); ?></h3>
                                 </div>
                                 <div class="fwdp-security-card">
                                     <div class="row g-3">
                                         <div class="col-lg-6 form-group">
-                                            <label class="fwdp-label">From Date <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="date" name="work_from_date" id="work_from_date" value="" min="<?php echo date('Y-m-d'); ?>" aria-label="Work From Date">
+                                            <label class="fwdp-label"><?php echo __('From Date'); ?> <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="date" name="work_from_date" id="work_from_date" value="" min="<?php echo date('Y-m-d'); ?>" aria-label="<?php echo __('Work From Date'); ?>">
                                             <div class="d-none text-danger" id="work_from_date_err"></div>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <label class="fwdp-label">To Date <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="date" name="work_to_date" id="work_to_date" aria-label="Work To Date">
+                                            <label class="fwdp-label"><?php echo __('To Date'); ?> <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="date" name="work_to_date" id="work_to_date" aria-label="<?php echo __('Work To Date'); ?>">
                                             <div class="d-none text-danger" id="work_to_date_err"></div>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <label class="fwdp-label">Time <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="time" name="work_time" id="work_time" aria-label="Work Time">
+                                            <label class="fwdp-label"><?php echo __('Time'); ?> <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="time" name="work_time" id="work_time" aria-label="<?php echo __('Work Time'); ?>">
                                             <div class="d-none text-danger" id="work_time_err"></div>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <label class="fwdp-label">Work Radius</label>
-                                            <input class="form-control" type="number" name="work_radius" id="work_radius" aria-label="Work Radius">
+                                            <label class="fwdp-label"><?php echo __('Work Radius'); ?></label>
+                                            <input class="form-control" type="number" name="work_radius" id="work_radius" aria-label="<?php echo __('Work Radius'); ?>">
                                             <div class="d-none text-danger" id="work_radius_err"></div>
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label">Contact Person</label>
-                                            <input class="form-control" type="text" name="contact_person" id="contact_person" aria-label="Contact Person">
+                                            <label class="fwdp-label"><?php echo __('Contact Person'); ?></label>
+                                            <input class="form-control" type="text" name="contact_person" id="contact_person" aria-label="<?php echo __('Contact Person'); ?>">
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label">Phone No.</label>
-                                            <input class="form-control" type="text" name="mobile" id="mobile" aria-label="Mobile">
+                                            <label class="fwdp-label"><?php echo __('Phone No.'); ?></label>
+                                            <input class="form-control" type="text" name="mobile" id="mobile" aria-label="<?php echo __('Mobile'); ?>">
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label">Location Name</label>
-                                            <input class="form-control" type="text" name="location_name" id="location_name" aria-label="Location Name">
+                                            <label class="fwdp-label"><?php echo __('Location Name'); ?></label>
+                                            <input class="form-control" type="text" name="location_name" id="location_name" aria-label="<?php echo __('Location Name'); ?>">
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label">Latitude <span class="text-danger">*</span></label>
-                                            <input class="form-control lat" type="text" name="work_latitude" id="work_latitude" readonly aria-label="Work Latitude">
+                                            <label class="fwdp-label"><?php echo __('Latitude'); ?> <span class="text-danger">*</span></label>
+                                            <input class="form-control lat" type="text" name="work_latitude" id="work_latitude" readonly aria-label="<?php echo __('Work Latitude'); ?>">
                                             <div class="d-none text-danger" id="work_latitude_err"></div>
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label">Longitude <span class="text-danger">*</span></label>
-                                            <input class="form-control lng" type="text" name="work_longitude" id="work_longitude" readonly aria-label="Work Longitude">
+                                            <label class="fwdp-label"><?php echo __('Longitude'); ?> <span class="text-danger">*</span></label>
+                                            <input class="form-control lng" type="text" name="work_longitude" id="work_longitude" readonly aria-label="<?php echo __('Work Longitude'); ?>">
                                             <div class="d-none text-danger" id="work_longitude_err"></div>
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label">Address</label>
-                                            <textarea class="form-control fwdp-address-field" name="work_address" id="work_address" rows="2" readonly aria-label="Work Address"></textarea>
+                                            <label class="fwdp-label"><?php echo __('Address'); ?></label>
+                                            <textarea class="form-control fwdp-address-field" name="work_address" id="work_address" rows="2" readonly aria-label="<?php echo __('Work Address'); ?>"></textarea>
                                         </div>
                                         <div class="col-12">
                                             <button type="button" class="fwdp-btn fwdp-btn-map addMapBtn">
-                                                <i class="fas fa-map-marker-alt"></i> Pick on Map
+                                                <i class="fas fa-map-marker-alt"></i> <?php echo __('Pick on Map'); ?>
                                             </button>
                                         </div>
                                     </div>
@@ -329,11 +329,11 @@ if ($rid != "" && $view == '1') {
                             <div id="saveButton" class="fwdp-save-bar d-none">
                                 <?php if ($view != '1') {
                                     if ($rid != "" && $copy != '1') { ?>
-                                        <button name="submit" value="update" class="fwdp-btn fwdp-btn-primary">Update</button>
+                                        <button name="submit" value="update" class="fwdp-btn fwdp-btn-primary"><?php echo __('Update'); ?></button>
                                         <input name="rid" type="hidden" value="<?php echo $rid; ?>">
                                         <input name="date" type="hidden" value="<?php echo $date; ?>">
                                     <?php } else { ?>
-                                        <button name="submit" value="insert" class="fwdp-btn fwdp-btn-primary">Save</button>
+                                        <button name="submit" value="insert" class="fwdp-btn fwdp-btn-primary"><?php echo __('Save'); ?></button>
                                     <?php }
                                 } ?>
                             </div>
@@ -349,33 +349,33 @@ if ($rid != "" && $view == '1') {
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content fwdp-map-modal">
             <div class="modal-header">
-                <h5 class="modal-title" id="mapModalLabel">Select Location on Map</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="mapModalLabel"><?php echo __('Select Location on Map'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
             <div class="modal-body p-0">
                 <div class="fwdp-map-search-wrap" id="fwdpMapSearchWrap">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="fwdpMapSearch" class="form-control" placeholder="Search for a place..." autocomplete="off" aria-label="Search for a place...">
+                    <input type="text" id="fwdpMapSearch" class="form-control" placeholder="<?php echo __('Search for a place...'); ?>" autocomplete="off" aria-label="<?php echo __('Search for a place...'); ?>">
                 </div>
                 <div class="fwdp-map-body">
                     <div id="fwdpMap" class="fwdp-map-canvas"></div>
-                    <div id="fwdpMapEmpty" class="fwdp-map-empty" style="display:none;">Map key not configured.</div>
+                    <div id="fwdpMapEmpty" class="fwdp-map-empty" style="display:none;"><?php echo __('Map key not configured.'); ?></div>
                     <div id="fwdpMapDistance" class="fwdp-map-distance" style="display:none;"></div>
                 </div>
                 <div class="fwdp-map-selected" id="fwdpMapSelectedWrap">
-                    <label class="fwdp-label">Route Summary</label>
-                    <p id="fwdpSelectedAddress">Click on the map or search to select a location.</p>
+                    <label class="fwdp-label"><?php echo __('Route Summary'); ?></label>
+                    <p id="fwdpSelectedAddress"><?php echo __('Click on the map or search to select a location.'); ?></p>
                     <div id="fwdpRouteSummary" class="fwdp-route-summary" style="display:none;"></div>
                     <div id="fwdpNavActions" class="fwdp-nav-actions" style="display:none;">
                         <a id="fwdpOpenGoogleNav" href="#" target="_blank" rel="noopener noreferrer" class="fwdp-btn fwdp-btn-primary">
-                            <i class="fas fa-directions"></i> Open in Google Maps
+                            <i class="fas fa-directions"></i> <?php echo __('Open in Google Maps'); ?>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="modal-footer" id="fwdpMapModalFooter">
-                <button type="button" class="fwdp-btn" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="fwdp-btn fwdp-btn-confirm" id="fwdpConfirmLocation">Confirm Location</button>
+                <button type="button" class="fwdp-btn" data-bs-dismiss="modal"><?php echo __('Cancel'); ?></button>
+                <button type="button" class="fwdp-btn fwdp-btn-confirm" id="fwdpConfirmLocation"><?php echo __('Confirm Location'); ?></button>
             </div>
         </div>
     </div>

@@ -28,16 +28,16 @@ $return = json_decode($che, true);
 <div class="slide" data-slide="5">
     <div class="row mt-4">
         <div class="col-lg-12">
-            <h4 class="mb-3">Upload Supporting Documents</h4>
+            <h4 class="mb-3"><?php echo __('Upload Supporting Documents'); ?></h4>
             <form id="fileUploadForm" enctype="multipart/form-data" <?php echo  isset($_GET['current_status']) && $_GET['current_status'] == ST_APPROVED ? 'style="pointer-events:none; opacity:0.7"' : ''; ?>>
                 <div class="mb-3">
-                    <input aria-label="File[]" type="file" class="form-control" name="file[]" multiple required>
+                    <input aria-label="<?php echo __('File[]'); ?>" type="file" class="form-control" name="file[]" multiple required>
                     <input type="hidden" name="feasibility_id" id="feasibility_id" value="<?php echo htmlspecialchars($feasibility_id); ?>" >
                 </div>
 
                 <?php if (!empty($return)) { ?>
                     <div class="mb-4">
-                        <span class="form-label fw-bold">Uploaded Files:</span>
+                        <span class="form-label fw-bold"><?php echo __('Uploaded Files:'); ?></span>
                         <div class="form-group col-xl-12 col-md-12 mt-2" style="pointer-events: auto;">
                             <div class="row">
                                 <?php if (count((array)$return) > 0) {
@@ -56,10 +56,10 @@ $return = json_decode($che, true);
 
                 <div style="pointer-events: auto; opacity: 1;" class="row">
                     <div class="col-lg-6">
-                        <button type="button" class="btn btn-secondary" onclick="previous('custom_insert_lead_feasibility_checklists', <?= $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)">Previous</button>
+                        <button type="button" class="btn btn-secondary" onclick="previous('custom_insert_lead_feasibility_checklists', <?= $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)"><?php echo __('Previous'); ?></button>
                     </div>
                     <div class="col-lg-6 text-end">
-                        <button type="button" class="btn btn-primary" onclick="uploadFiles(<?php echo htmlspecialchars($feasibility_id); ?>)">Save</button>
+                        <button type="button" class="btn btn-primary" onclick="uploadFiles(<?php echo htmlspecialchars($feasibility_id); ?>)"><?php echo __('Save'); ?></button>
                     </div>
                 </div>
             </form>
@@ -158,7 +158,7 @@ function uploadFiles(feasibility_id) {
             text: errorMessage,
             type: "error",
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "OK"
+            confirmButtonText: <?php echo json_encode(__('OK')); ?>
         });
 
         console.error("AJAX Error:", {

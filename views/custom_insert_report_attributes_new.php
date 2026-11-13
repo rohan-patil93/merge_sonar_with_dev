@@ -69,7 +69,7 @@ $showtables = json_decode($showtablesdata,1);
 ?>
 <script type="text/javascript">
     function droplist(val,type){
-        alert("hai");
+        alert(<?php echo json_encode(__('hai')); ?>);
         var data = $('#droplist').val();
         data = JSON.parse(data);
         if(type == 'add'){
@@ -86,7 +86,7 @@ $showtables = json_decode($showtablesdata,1);
             }
             i++;
         });
-        $("#view_table").html("<select aria-label='Table' class='form-control form-select js-example-basic-single' id ='table' name='table' onchange='fieldchange(this.value)'><option value=''>Select any table </option>"+option+"</select>");
+        $("#view_table").html("<select aria-label='Table' class='form-control form-select js-example-basic-single' id ='table' name='table' onchange='fieldchange(this.value)'><option value=''><?php echo __('Select any table'); ?> </option>"+option+"</select>");
         $(".js-example-basic-single").select2();
         $(".js-example-disabled-results").select2();
 
@@ -347,7 +347,7 @@ function whereClouseSet(){
             success:function(data){
                 console.log(data);
                 var data  = JSON.parse(data);
-                var rows = '<tr class="wharerow'+whmax+' allremove"><td><button type="button" class="btn p-0 border-0 bg-transparent fa fa-trash" onclick="deletewhererow('+whmax+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></td><td class="w-full"><select aria-label="Wherefield[]"  class="kt-dual-listbox form-select js-example-basic-single wherefield"  onchange="buildQuery()" name="wherefield[]">'+data.option+'</select></td><td class="w-full"><select aria-label="Whereoperators[]"  class="kt-dual-listbox form-select js-example-basic-single whereoperators" name="whereoperators[]"  onchange="buildQuery()" ><option value="="> = </option><option value="!=">!=</option><option value=">"> > </option><option value="<"> < </option><option value=">="> >= </option><option value="<="> <= </option></select></td><td><div class="textorfeild'+whmax+' w-full"><select aria-label="Wherevaluemoption[]"  class="kt-dual-listbox form-select js-example-basic-single wherevaluem" name="wherevaluemoption[]"  onchange="valueselect(this.value,'+whmax+')" >'+data.option+'<option value="{[emp_id]}">Login Employee ID</option><option value="{[user_id]}">Login User ID</option><option value="text">Text</option></select></div></td><td class="w-full"><select aria-label="Whereconditions[]"  class="kt-dual-listbox form-select js-example-basic-single whereconditions"  onchange="buildQuery()"  name="whereconditions[]"><option value="AND">AND  </option><option value="OR">OR</option></select></td></tr>';
+                var rows = '<tr class="wharerow'+whmax+' allremove"><td><button type="button" class="btn p-0 border-0 bg-transparent fa fa-trash" onclick="deletewhererow('+whmax+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></td><td class="w-full"><select aria-label="<?php echo __('Wherefield[]'); ?>"  class="kt-dual-listbox form-select js-example-basic-single wherefield"  onchange="buildQuery()" name="wherefield[]">'+data.option+'</select></td><td class="w-full"><select aria-label="<?php echo __('Whereoperators[]'); ?>"  class="kt-dual-listbox form-select js-example-basic-single whereoperators" name="whereoperators[]"  onchange="buildQuery()" ><option value="="> = </option><option value="!=">!=</option><option value=">"> > </option><option value="<"> < </option><option value=">="> >= </option><option value="<="> <= </option></select></td><td><div class="textorfeild'+whmax+' w-full"><select aria-label="<?php echo __('Wherevaluemoption[]'); ?>"  class="kt-dual-listbox form-select js-example-basic-single wherevaluem" name="wherevaluemoption[]"  onchange="valueselect(this.value,'+whmax+')" >'+data.option+'<option value="{[emp_id]}"><?php echo __('Login Employee ID'); ?></option><option value="{[user_id]}"><?php echo __('Login User ID'); ?></option><option value="text"><?php echo __('Text'); ?></option></select></div></td><td class="w-full"><select aria-label="<?php echo __('Whereconditions[]'); ?>"  class="kt-dual-listbox form-select js-example-basic-single whereconditions"  onchange="buildQuery()"  name="whereconditions[]"><option value="AND"><?php echo __('AND'); ?>  </option><option value="OR"><?php echo __('OR'); ?></option></select></td></tr>';
                 $(".wherecondition").append(rows);
         $(".js-example-basic-single").select2();
         $(".js-example-disabled-results").select2();
@@ -360,7 +360,7 @@ function whereClouseSet(){
 function valueselect(val,id){
     if(val == 'text'){
         $(".textorfeild"+id).empty();
-        $(".textorfeild"+id).append('<input aria-label="eg.0,name,date" class="wherevaluem form-control" type="text" name="wherevaluemoption[]"  onblur="buildQuery()" placeholder="eg.0,name,date">');
+        $(".textorfeild"+id).append('<input aria-label="<?php echo __('eg.0,name,date'); ?>" class="wherevaluem form-control" type="text" name="wherevaluemoption[]"  onblur="buildQuery()" placeholder="<?php echo __('eg.0,name,date'); ?>">');
     }
     buildQuery();
 }
@@ -377,10 +377,10 @@ function selecttableenable(){
 
     if($(".selecttableenable").is(":checked")){
         Swal.fire({
-            title: 'Any table add or remove all data is reset.',
+            title: <?php echo json_encode(__('Any table add or remove all data is reset.')); ?>,
             showDenyButton: true,
             showCancelButton: true,
-            confirmButtonText: 'OK',
+            confirmButtonText: <?php echo json_encode(__('OK')); ?>,
             denyButtonText: `NO`,
         }).then((result) => {
             if (result.isConfirmed) {
@@ -428,12 +428,12 @@ function sessionModal(){
         <div class="col-lg-12 col-xl-12">
             <ul class="nav md-tabs infisuite_tab mt-3 m-l-15">
                 <li class="nav-item">
-                    <a class="nav-link <?php echo (!isset($_GET['Rid']))?"active":""; ?>" data-bs-toggle="tab" href="#home3" role="tab"> <i class="fa fa-database"></i> Build Query</a>
+                    <a class="nav-link <?php echo (!isset($_GET['Rid']))?"active":""; ?>" data-bs-toggle="tab" href="#home3" role="tab"> <i class="fa fa-database"></i> <?php echo __('Build Query'); ?></a>
                     <div class="slide"></div>
                 </li>
                 <?php if(isset($_GET['Rid'])){ ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo (isset($_GET['Rid']))?"active":""; ?>" data-bs-toggle="tab" href="#profile3" onclick="GetMyReportPage()" role="tab"> <i class="fa fa-file"></i> Build Reports</a>
+                        <a class="nav-link <?php echo (isset($_GET['Rid']))?"active":""; ?>" data-bs-toggle="tab" href="#profile3" onclick="GetMyReportPage()" role="tab"> <i class="fa fa-file"></i> <?php echo __('Build Reports'); ?></a>
                         <div class="slide"></div>
                     </li>
                 <?php } ?>
@@ -442,11 +442,11 @@ function sessionModal(){
                 <div class="tab-pane <?php echo (!isset($_GET['Rid']))?"active":""; ?>" id="home3" role="tabpanel">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Build Query</h5>
+                            <h5><?php echo __('Build Query'); ?></h5>
                             <div class="card-header-right">
                                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                     <i class="icofont icofont-reply"></i>
-                                    Back
+                                    <?php echo __('Back'); ?>
                                 </a>
                             </div>
                         </div>
@@ -457,27 +457,27 @@ function sessionModal(){
                                 <input type="hidden" name="Rid" id="Rid" class="form-control" value="<?php echo $rid; ?>">
                                 <div class="row">
                                     <div class="form-group col-lg-6">
-                                        <span class="form-label">Report Name</span>
+                                        <span class="form-label"><?php echo __('Report Name'); ?></span>
                                         <div class="kt-input-icon">
-                                            <input aria-label="Report Name" type="text" name="report_name" value="<?php echo $data['report_name']; ?>" class="form-control" required>
+                                            <input aria-label="<?php echo __('Report Name'); ?>" type="text" name="report_name" value="<?php echo $data['report_name']; ?>" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-6" style="display:none">
-                                        <span class="form-label">Report  Display Id</span>
+                                        <span class="form-label"><?php echo __('Report  Display Id'); ?></span>
                                         <div class="kt-input-icon">
-                                            <input aria-label="Report Display" type="text" name="report_display_id" value="1" class="form-control">
+                                            <input aria-label="<?php echo __('Report Display'); ?>" type="text" name="report_display_id" value="1" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-6 w-full">
-                                        <span class="form-label">Select Tables  </span>
-                                        <select aria-label="Select Tables" id="kt_dual_listbox_1" class="kt-dual-listbox form-select js-example-basic-multiple selecttablename" multiple data-available-title="Selet Tables" data-selected-title="Joined Tables" name="selectedtables[]" onchange="selectTablename()" <?php if(isset($_GET['Rid'])){ ?> readonly <?php
+                                        <span class="form-label"><?php echo __('Select Tables'); ?>  </span>
+                                        <select aria-label="<?php echo __('Select Tables'); ?>" id="kt_dual_listbox_1" class="kt-dual-listbox form-select js-example-basic-multiple selecttablename" multiple data-available-title="<?php echo __('Selet Tables'); ?>" data-selected-title="<?php echo __('Joined Tables'); ?>" name="selectedtables[]" onchange="selectTablename()" <?php if(isset($_GET['Rid'])){ ?> readonly <?php
 } ?>>
                                             <?php foreach ($showtables as $table) {        ?>
                                                 <option <?php if(in_array($table, (array)$cont['selectedtables'])){?> selected <?php
 } ?> value="<?php echo $table; ?>"><?php echo ucwords(str_replace('_', ' ', $table)); ?></option>
                                             <?php } ?>
                                         </select>
-                                        <span class="text-danger">Note : Any table add or remove all data is reset.</span>
+                                        <span class="text-danger"><?php echo __('Note : Any table add or remove all data is reset.'); ?></span>
                                     </div>
                                     <div class="row tablefiledsset mb-2">
                                         <?php
@@ -488,7 +488,7 @@ function sessionModal(){
 
                                             <div class="col-lg-3 tablenameclass<?php echo $key; ?> w-full">
                                                 <span class="form-label"><?php echo ucwords(str_replace('_', ' ', $key)); ?></span>
-                                                <select aria-label="Select option" class="form-select js-example-basic-multiple tablefiledsselect" onchange="buildQuery()" data-table="<?php echo $key; ?>" name="tablefiledsselect[<?php echo $key; ?>][]"   multiple>
+                                                <select aria-label="<?php echo __('Select option'); ?>" class="form-select js-example-basic-multiple tablefiledsselect" onchange="buildQuery()" data-table="<?php echo $key; ?>" name="tablefiledsselect[<?php echo $key; ?>][]"   multiple>
                                                     <?php foreach($resultfiled as $tabl){  ?>
                                                         <option value="<?php echo $key.".".$tabl['Field']; ?>"   <?php if(in_array($key.".".$tabl['Field'], (array)$tabledata)){?> selected <?php
 } ?> ><?php echo ucwords(str_replace('_', ' ', $tabl['Field'])); ?></option>
@@ -498,68 +498,68 @@ function sessionModal(){
                                         <?php } ?>
                                     </div>
                                     <div class="row mt-2 m-l-5">
-                                        <span class="f-w-600">Condition</span>
+                                        <span class="f-w-600"><?php echo __('Condition'); ?></span>
                                         <table class="table table-hover " style="border-radius: 10px;" id="invoiceItem">
                                             <thead>
                                                 <tr>
                                                     <th scope="col" class=""></th>
-                                                    <th scope="col" class="" >Field </th>
-                                                    <th scope="col">Operator</th>
-                                                    <th scope="col" class="" >Value</th>
-                                                    <th scope="col" class="" >Condition</th>
+                                                    <th scope="col" class="" ><?php echo __('Field'); ?> </th>
+                                                    <th scope="col"><?php echo __('Operator'); ?></th>
+                                                    <th scope="col" class="" ><?php echo __('Value'); ?></th>
+                                                    <th scope="col" class="" ><?php echo __('Condition'); ?></th>
                                                 </tr> </thead>
                                                 <tbody class="wherecondition">
                                                     <?php $whmax = 0; foreach($cont['wherefield'] as $key=>$keys){ ?>
                                                         <tr class="wharerow<?php echo $whmax; ?> allremove">
                                                             <td><i class="fa fa-trash" onclick="deletewhererow('<?php echo $whmax; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i></td>
 
-                                                            <td class="w-full"><select aria-label="Wherefield[]"  class="kt-dual-listbox form-select js-example-basic-single wherefield"  onchange="buildQuery()" name="wherefield[]">
+                                                            <td class="w-full"><select aria-label="<?php echo __('Wherefield[]'); ?>"  class="kt-dual-listbox form-select js-example-basic-single wherefield"  onchange="buildQuery()" name="wherefield[]">
                                                                 <?php foreach($allfiledsarray as $opt){ ?>
                                                                     <option value="<?php echo $opt; ?>" <?php if($opt == $cont['wherefield'][$key]){ ?> selected <?php
 } ?> ><?php echo $opt; ?></option>
                                                                 <?php } ?>
                                                             </select></td>
 
-                                                            <td class="w-full"><select aria-label="Whereoperators[]"  class="kt-dual-listbox form-select js-example-basic-single whereoperators" name="whereoperators[]"  onchange="buildQuery()" ><option value="=" <?php echo ("=" == $cont['whereoperators'][$key])?"selected":""; ?> > = </option><option value="!=" <?php echo ("!=" == $cont['whereoperators'][$key])?"selected":""; ?>>!=</option><option value=">"> <?php echo (">" == $cont['whereoperators'][$key])?"selected":""; ?>> </option><option value="<" <?php echo ("<" == $cont['whereoperators'][$key])?"selected":""; ?>> < </option><option value=">="> <?php echo (">=" == $cont['whereoperators'][$key])?"selected":""; ?>>= </option><option value="<=" <?php echo ("<=" == $cont['whereoperators'][$key])?"selected":""; ?>> <= </option></select></td>
+                                                            <td class="w-full"><select aria-label="<?php echo __('Whereoperators[]'); ?>"  class="kt-dual-listbox form-select js-example-basic-single whereoperators" name="whereoperators[]"  onchange="buildQuery()" ><option value="=" <?php echo ("=" == $cont['whereoperators'][$key])?"selected":""; ?> > = </option><option value="!=" <?php echo ("!=" == $cont['whereoperators'][$key])?"selected":""; ?>>!=</option><option value=">"> <?php echo (">" == $cont['whereoperators'][$key])?"selected":""; ?>> </option><option value="<" <?php echo ("<" == $cont['whereoperators'][$key])?"selected":""; ?>> < </option><option value=">="> <?php echo (">=" == $cont['whereoperators'][$key])?"selected":""; ?>>= </option><option value="<=" <?php echo ("<=" == $cont['whereoperators'][$key])?"selected":""; ?>> <= </option></select></td>
                                                             <td><div class="textorfeild<?php echo $whmax; ?>">
                                                                 <?php
                                                                 if(in_array($cont['wherevaluemoption'][$key],(array)$allfiledsarray)){
                                                                     ?>
 
-                                                                    <select aria-label="Wherevaluemoption[]"  class="kt-dual-listbox form-select js-example-basic-single wherevaluem" name="wherevaluemoption[]"  onchange="valueselect(this.value,'<?php echo $whmax; ?>')" ><?php foreach($allfiledsarray as $opt){ ?>
+                                                                    <select aria-label="<?php echo __('Wherevaluemoption[]'); ?>"  class="kt-dual-listbox form-select js-example-basic-single wherevaluem" name="wherevaluemoption[]"  onchange="valueselect(this.value,'<?php echo $whmax; ?>')" ><?php foreach($allfiledsarray as $opt){ ?>
                                                                         <option value="<?php echo $opt; ?>" <?php if($opt == $cont['wherevaluemoption'][$key]){ ?> selected <?php
 } ?> ><?php echo $opt; ?></option>
                                                                     <?php } ?>
                                                                     <option <?php if( $cont['wherevaluemoption'][$key] == "[{emp_id}]"){ ?> selected <?php
-} ?> value="[{emp_id}]">Login Employee ID</option>
+} ?> value="[{emp_id}]"><?php echo __('Login Employee ID'); ?></option>
                                                                     <option <?php if( $cont['wherevaluemoption'][$key] == "[{user_id}]"){ ?> selected <?php
-} ?> value="[{user_id}]">Login User ID</option>
-                                                                    <option value="text">Text</option>
+} ?> value="[{user_id}]"><?php echo __('Login User ID'); ?></option>
+                                                                    <option value="text"><?php echo __('Text'); ?></option>
                                                                 </select>
                                                             <?php }else{ ?>
-                                                                <input aria-label="Wherevaluemoption[]" class="wherevaluem form-control" type="text" name="wherevaluemoption[]"  value="<?php echo $cont['wherevaluemoption'][$key]; ?>" onblur="buildQuery()">
+                                                                <input aria-label="<?php echo __('Wherevaluemoption[]'); ?>" class="wherevaluem form-control" type="text" name="wherevaluemoption[]"  value="<?php echo $cont['wherevaluemoption'][$key]; ?>" onblur="buildQuery()">
                                                             <?php } ?>
 
                                                         </div>
                                                     </td>
                                                     <td class="w-full">
-                                                        <select aria-label="Whereconditions[]"  class="kt-dual-listbox form-select js-example-basic-single whereconditions"  onchange="buildQuery()"  name="whereconditions[]"><option value="AND" <?php echo ("AND" == $cont['whereconditions'][$key])?"selected":""; ?>>AND  </option><option value="OR" <?php echo ("OR" == $cont['whereconditions'][$key])?"selected":""; ?>>OR</option></select></td>
+                                                        <select aria-label="<?php echo __('Whereconditions[]'); ?>"  class="kt-dual-listbox form-select js-example-basic-single whereconditions"  onchange="buildQuery()"  name="whereconditions[]"><option value="AND" <?php echo ("AND" == $cont['whereconditions'][$key])?"selected":""; ?>><?php echo __('AND'); ?>  </option><option value="OR" <?php echo ("OR" == $cont['whereconditions'][$key])?"selected":""; ?>><?php echo __('OR'); ?></option></select></td>
                                                     </tr>
                                                     <?php $whmax++;
 } ?>
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="row m-l-5"><button type="button" class="btn btn-info waves-effect waves-light col-lg-3" onclick="whereClouseSet()">Add More Where</button></div>
+                                        <div class="row m-l-5"><button type="button" class="btn btn-info waves-effect waves-light col-lg-3" onclick="whereClouseSet()"><?php echo __('Add More Where'); ?></button></div>
                                         <div class="row mt-4">
                                             <div class="form-group kt-input-icon col-lg-6">
                                                 <div class="form-group kt-input-icon">
-                                                    <span class="form-label">Do You Want Group By ? </span>
-                                                    <input aria-label="Groupbycheck" type="checkbox" name="groupbycheck" class="js-switch ml-2 doyouwantconditiongroupby" <?php echo $cont['groupbycheck']=='0'?"checked":""; ?> onchange="doyouwantconditiongroupby()" >
+                                                    <span class="form-label"><?php echo __('Do You Want Group By ?'); ?> </span>
+                                                    <input aria-label="<?php echo __('Groupbycheck'); ?>" type="checkbox" name="groupbycheck" class="js-switch ml-2 doyouwantconditiongroupby" <?php echo $cont['groupbycheck']=='0'?"checked":""; ?> onchange="doyouwantconditiongroupby()" >
                                                 </div>
                                                 <div class="doyouwantconditiongroupbydiv w-full"  style="display: <?php echo $cont['groupbycheck']=='0'?"":"none"; ?>">
-                                                    <span class="form-label">Group By</span>
-                                                    <select aria-label="Groupby[]"  class="form-select js-example-basic-multiple groupby" name="groupby[]" multiple  onchange="buildQuery()">
+                                                    <span class="form-label"><?php echo __('Group By'); ?></span>
+                                                    <select aria-label="<?php echo __('Groupby[]'); ?>"  class="form-select js-example-basic-multiple groupby" name="groupby[]" multiple  onchange="buildQuery()">
                                                         <?php foreach($allfiledsarray as $opt){ ?>
                                                             <option value="<?php echo $opt; ?>" <?php if(in_array($opt, (array)$cont['groupby'])){ ?> selected <?php
 } ?> ><?php echo $opt; ?></option>
@@ -569,12 +569,12 @@ function sessionModal(){
                                             </div>
                                             <div class="form-group kt-input-icon col-lg-4">
                                                 <div class="form-group kt-input-icon">
-                                                    <span class="form-label">Do You Want Order By ? </span>
-                                                    <input aria-label="Checkbox" type="checkbox" class="js-switch ml-2 doyouwantconditionorderby"  <?php echo $cont['orderbycheck']=='0'?"checked":""; ?> name="orderbycheck" onchange="doyouwantconditionorderby()" >
+                                                    <span class="form-label"><?php echo __('Do You Want Order By ?'); ?> </span>
+                                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" class="js-switch ml-2 doyouwantconditionorderby"  <?php echo $cont['orderbycheck']=='0'?"checked":""; ?> name="orderbycheck" onchange="doyouwantconditionorderby()" >
                                                 </div>
                                                 <div class="doyouwantconditionorderbydiv w-full" style="display: <?php echo $cont['orderbycheck']=='0'?"":"none"; ?>">
-                                                    <span class="form-label">Order By</span>
-                                                    <select aria-label="Orderby[]"  class="form-select js-example-basic-multiple orderby"  name="orderby[]" multiple onchange="buildQuery()">
+                                                    <span class="form-label"><?php echo __('Order By'); ?></span>
+                                                    <select aria-label="<?php echo __('Orderby[]'); ?>"  class="form-select js-example-basic-multiple orderby"  name="orderby[]" multiple onchange="buildQuery()">
                                                         <?php foreach($allfiledsarray as $opt){ ?>
                                                             <option value="<?php echo $opt; ?>" <?php if(in_array($opt, (array)$cont['orderby'])){ ?> selected <?php
 } ?> ><?php echo $opt; ?></option>
@@ -583,17 +583,17 @@ function sessionModal(){
                                                 </div>
                                             </div>
                                             <div class="form-group kt-input-icon col-lg-2 doyouwantconditionorderbydiv mt-5 w-full" style="display: <?php echo $cont['orderbycheck']=='0'?"":"none"; ?>">
-                                                <span class="form-label">Order type</span>
-                                                <select aria-label="Ordertype" class="kt-dual-listbox form-select js-example-basic-single ordertype" name="ordertype"  onchange="buildQuery()">
-                                                    <option value="ASC" <?php echo ("ASC" == $cont['ordertype'])?"selected":""; ?>>ASC</option>
-                                                    <option value="DESC" <?php echo ("DESC" == $cont['ordertype'])?"selected":""; ?>>DESC</option>
+                                                <span class="form-label"><?php echo __('Order type'); ?></span>
+                                                <select aria-label="<?php echo __('Ordertype'); ?>" class="kt-dual-listbox form-select js-example-basic-single ordertype" name="ordertype"  onchange="buildQuery()">
+                                                    <option value="ASC" <?php echo ("ASC" == $cont['ordertype'])?"selected":""; ?>><?php echo __('ASC'); ?></option>
+                                                    <option value="DESC" <?php echo ("DESC" == $cont['ordertype'])?"selected":""; ?>><?php echo __('DESC'); ?></option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class=" row">
                                             <div class="form-group col-lg-6">
-                                                <span class="form-label d-block">Placeholder <small class="text-danger">* please don't use space</small></span>
-                                                <input aria-label="Placeholderslist" class="tags_add_multiple" type="text" id="idAddPlaceholders" name="placeholderslist" value="<?php echo $cont['placeholderslist']; ?>" onchange="addPlaceholders11()" data-role="tagsinput" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)">
+                                                <span class="form-label d-block"><?php echo __('Placeholder'); ?> <small class="text-danger"><?php echo __('* please don\'t use space'); ?></small></span>
+                                                <input aria-label="<?php echo __('Placeholderslist'); ?>" class="tags_add_multiple" type="text" id="idAddPlaceholders" name="placeholderslist" value="<?php echo $cont['placeholderslist']; ?>" onchange="addPlaceholders11()" data-role="tagsinput" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)">
                                             </div>
                                         </div>
                                         <input type="hidden" name="placeholderjson" id="placeholderjson">
@@ -602,23 +602,23 @@ function sessionModal(){
                                                 $placename = explode("@", $placholdekey);
                                                 ?>
                                                 <div class="row" id="placeholderrow<?php echo $placename[1]; ?>">
-                                                    <div class="col-lg-4"><span class="form-label">Mapping placeholder <i class="ti-files cursor-pointer" onclick="copyToClipboard('<?php echo $placename[1]; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Copy To Use Placeholder" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i></span>
-                                                        <input aria-label="Input field" input type="text" id="text_<?php echo $placename[1]; ?>"  readonly class="form-control" value="<?php echo $placholdekey; ?>" >
+                                                    <div class="col-lg-4"><span class="form-label"><?php echo __('Mapping placeholder'); ?> <i class="ti-files cursor-pointer" onclick="copyToClipboard('<?php echo $placename[1]; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Copy To Use Placeholder'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i></span>
+                                                        <input aria-label="<?php echo __('Input field'); ?>" input type="text" id="text_<?php echo $placename[1]; ?>"  readonly class="form-control" value="<?php echo $placholdekey; ?>" >
                                                     </div>
                                                     <div class="col-lg-8">
-                                                        <span class="form-label">Sql Formula/Sub Sql</span>
-                                                        <textarea aria-label="Text area" type="text" class="form-control" rows="4" cols="50"   name="formulaplaceholder[@<?php echo $placename[1]; ?>]" ><?php echo $placeholderres; ?></textarea>
+                                                        <span class="form-label"><?php echo __('Sql Formula/Sub Sql'); ?></span>
+                                                        <textarea aria-label="<?php echo __('Text area'); ?>" type="text" class="form-control" rows="4" cols="50"   name="formulaplaceholder[@<?php echo $placename[1]; ?>]" ><?php echo $placeholderres; ?></textarea>
                                                     </div>
                                                 </div>
                                             <?php } ?>
                                         </div>
                                         <div class="form-group kt-input-icon">
-                                            <span>Query</span>
-                                            <textarea aria-label="Content" type="text" class="form-control" id="bulid_query" rows="4" cols="50" name="content" value="" ><?php echo urldecode($data['content']);?></textarea>
+                                            <span><?php echo __('Query'); ?></span>
+                                            <textarea aria-label="<?php echo __('Content'); ?>" type="text" class="form-control" id="bulid_query" rows="4" cols="50" name="content" value="" ><?php echo urldecode($data['content']);?></textarea>
                                         </div>
                                     </div>
                                     <div class="mt-5">
-                                        <button class="btn btn-primary" name="submit" value="submit">Submit</button>
+                                        <button class="btn btn-primary" name="submit" value="submit"><?php echo __('Submit'); ?></button>
                                     </div>
                                 </div>
                             </form>
@@ -636,43 +636,43 @@ function sessionModal(){
         <div class="modal-dialog modal-lg " >
             <div class="modal-content"  >
                 <div class="modal-header">
-                    <h4 class="modal-title">Session Fields</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title"><?php echo __('Session Fields'); ?></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
                 </div>
                 <div class="modal-body">
 
                     <table class="table table-hover m-b-0">
                         <thead>
-                            <tr><th scope="col">Used Field</th><th scope="col">Field</th><th scope="col">Value</th></tr>
+                            <tr><th scope="col"><?php echo __('Used Field'); ?></th><th scope="col"><?php echo __('Field'); ?></th><th scope="col"><?php echo __('Value'); ?></th></tr>
                         </thead>
                         <tbody>
                             <tr>
 
-                                <td>#userid</td>
-                                <td>User Id</td>
+                                <td><?php echo __('#userid'); ?></td>
+                                <td><?php echo __('User Id'); ?></td>
                                 <td><?php echo $_SESSION['userid']; ?></td>
                             </tr>
                             <tr>
-                                <td>#email</td>
-                                <td>Email Id</td>
+                                <td><?php echo __('#email'); ?></td>
+                                <td><?php echo __('Email Id'); ?></td>
                                 <td><?php echo $_SESSION['email']; ?></td>
                             </tr>
                             <tr>
-                                <td>#emp_id</td>
-                                <td>Employee Id</td>
+                                <td><?php echo __('#emp_id'); ?></td>
+                                <td><?php echo __('Employee Id'); ?></td>
                                 <td><?php echo $_SESSION['emp_id']; ?></td>
                             </tr>
                             <tr>
-                                <td>#current_date</td>
-                                <td>Current date</td>
+                                <td><?php echo __('#current_date'); ?></td>
+                                <td><?php echo __('Current date'); ?></td>
                                 <td><?php echo date("Y-m-d"); ?></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()">Submit</button>
+                    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()"><?php echo __('Submit'); ?></button>
                 </div>
             </div>
         </div>
@@ -694,7 +694,7 @@ function sessionModal(){
                     var element = document.getElementById("placeholderrow"+value);
                     console.log(element);
                     if (element == null){
-                        returnhtml += '<div class="row" id="placeholderrow'+value+'"><div class="col-lg-4"><span class="form-label">Mapping placeholder <button type="button" class="btn p-0 border-0 bg-transparent ti-files cursor-pointer" onclick="copyToClipboard(\''+value+'\')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Copy To Use Placeholder" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></span><input aria-label="Text" type="text"  readonly class="form-control" value="@'+value+'"  id="text_'+value+'"></div><div class="col-lg-8"><span class="form-label">Sql Formula/Sub Sql</span><textarea aria-label="Formulaplaceholder[@" type="text" class="form-control" rows="4" cols="50"   name="formulaplaceholder[@'+value+']"></textarea></div></div>';
+                        returnhtml += '<div class="row" id="placeholderrow'+value+'"><div class="col-lg-4"><span class="form-label">Mapping placeholder <button type="button" class="btn p-0 border-0 bg-transparent ti-files cursor-pointer" onclick="copyToClipboard(\''+value+'\')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Copy To Use Placeholder'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></span><input aria-label="<?php echo __('Text'); ?>" type="text"  readonly class="form-control" value="@'+value+'"  id="text_'+value+'"></div><div class="col-lg-8"><span class="form-label"><?php echo __('Sql Formula/Sub Sql'); ?></span><textarea aria-label="<?php echo __('Formulaplaceholder[@'); ?>" type="text" class="form-control" rows="4" cols="50"   name="formulaplaceholder[@'+value+']"></textarea></div></div>';
                     }else{
                         console.log("ok");
                     }

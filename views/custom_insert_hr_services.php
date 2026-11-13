@@ -123,7 +123,7 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
          title: '<?php echo $_SESSION['error_message']['1011'];?>',
          showDenyButton: true,
          showCancelButton: false,
-         confirmButtonText: 'Yes',
+         confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
          denyButtonText: `No`,
      }).then((result) => {
          if (result.isConfirmed){
@@ -138,7 +138,7 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                      if(data1.error == "404"){
                          Swal.fire({
                              icon: 'error',
-                             title: 'Oops...',
+                             title: <?php echo json_encode(__('Oops...')); ?>,
                              text: "<?php echo $_SESSION['error_message'][1012];?>"
                          })
                      }else{
@@ -162,13 +162,13 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
 } ?>
                     <div class="card-header ">
                         <div class="card-title">
-                            <h5 class="card-label">&nbsp;HR Service Requests  </h5>
+                            <h5 class="card-label"><?php echo __('&nbsp;HR Service Requests'); ?>  </h5>
                         </div>
                         <div class="card-header-right table-card-header m-r-50 ">
 
 
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                                <i class="icofont icofont-reply"></i>  Back </a>
+                                <i class="icofont icofont-reply"></i>  <?php echo __('Back'); ?> </a>
                                 <?php echo $workflowsteps['workflow_btn']; ?>
                             </div>
                         </div>
@@ -178,7 +178,7 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                             if($error_message !=''){ ?>
                                 <div class="alert alert-danger background-danger alert-dismissible">
                                     <strong><?php echo $error_message; ?></strong>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
                                 </div>
                             <?php } ?>
 
@@ -194,16 +194,16 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
 
 
                                             <div class="form-group">
-                                                <span class="form-label">Document List</span>
+                                                <span class="form-label"><?php echo __('Document List'); ?></span>
                                                 <div class="" <?php echo $raeonlyfield; ?>>
-                                                    <select aria-label="Document" class="form-control form-select js-example-basic-single" id="kt_select2_41"  name="document_id" onchange="displayother(this.value)" required>
-                                                        <option  value=""> Select Any One</option>
+                                                    <select aria-label="<?php echo __('Document'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_41"  name="document_id" onchange="displayother(this.value)" required>
+                                                        <option  value=""> <?php echo __('Select Any One'); ?></option>
                                                         <?php foreach ($documents as $document) { ?>
-                                                            <option <?php if($role['document_id'] ==  $document['id'] ){ echo "selected";
+                                                            <option <?php if($role['document_id'] ==  $document['id'] ){ echo __('selected');
 } ?>  value="<?php echo $document['id']; ?>"><?php echo $document['document_name']; ?></option>
                                                         <?php } ?>
-                                                        <option <?php if($role['document_id'] ==  -1 ){ echo "selected";
-} ?> value="-1"> Others - Please enter the details below</option>
+                                                        <option <?php if($role['document_id'] ==  -1 ){ echo __('selected');
+} ?> value="-1"> <?php echo __('Others - Please enter the details below'); ?></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -211,26 +211,26 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
 } ?>>
                                                 <span class="form-label">&nbsp;&nbsp;&nbsp;</span>
                                                 <div class="">
-                                                    <input aria-label="Please specify the document name" type="text" class="form-control" placeholder="Please specify the document name" name="other" value="<?php echo $role['other_document']; ?>" <?php echo $raeonlyfield; ?>/>
+                                                    <input aria-label="<?php echo __('Please specify the document name'); ?>" type="text" class="form-control" placeholder="<?php echo __('Please specify the document name'); ?>" name="other" value="<?php echo $role['other_document']; ?>" <?php echo $raeonlyfield; ?>/>
                                                 </div>
                                             </div>
                                             <div class="form-group ">
-                                                <span class="form-label">Required for (Please give the reason)</span>
+                                                <span class="form-label"><?php echo __('Required for (Please give the reason)'); ?></span>
                                                 <div class="">
-                                                    <input aria-label="Name" type="text" class="form-control" name="name"  value="<?php echo $role['name']; ?>" <?php echo $raeonlyfield; ?> required/>
+                                                    <input aria-label="<?php echo __('Name'); ?>" type="text" class="form-control" name="name"  value="<?php echo $role['name']; ?>" <?php echo $raeonlyfield; ?> required/>
                                                 </div>
                                             </div>
                                             <div class="form-group ">
-                                                <span class="form-label">Required Date</span>
+                                                <span class="form-label"><?php echo __('Required Date'); ?></span>
                                                 <div class="">
-                                                    <input aria-label="Required By Date" type="text" class="form-control datepicker" name="required_by_date"  value="<?php echo fromDate($role['required_by_date']); ?>" <?php echo $raeonlyfield; ?> required/>
+                                                    <input aria-label="<?php echo __('Required By Date'); ?>" type="text" class="form-control datepicker" name="required_by_date"  value="<?php echo fromDate($role['required_by_date']); ?>" <?php echo $raeonlyfield; ?> required/>
                                                 </div>
                                             </div>
                                             <div class="form-group ">
-                                                <span class="form-label">Upload Templates Specific Format</span>
+                                                <span class="form-label"><?php echo __('Upload Templates Specific Format'); ?></span>
                                                 <div class="">
                                                     <div class="custom-file mb-2">
-                                                        <input aria-label="File" type="file" class="custom-file-input" id="customFile_emp" name="file" <?php echo $raeonlyfield; ?>/>
+                                                        <input aria-label="<?php echo __('File'); ?>" type="file" class="custom-file-input" id="customFile_emp" name="file" <?php echo $raeonlyfield; ?>/>
                                                         <input type="hidden" name="hidden_file" value="<?php echo $role['emp_upload'];?>" />
 
                                                     </div>
@@ -241,9 +241,9 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                             </div>
 
                                             <div class="form-group ">
-                                                <span class="form-label">Comments</span>
+                                                <span class="form-label"><?php echo __('Comments'); ?></span>
                                                 <div class="">
-                                                    <textarea aria-label="Comments" type="text" class="form-control" name="comments" <?php echo $raeonlyfield; ?>><?php echo $role['comments'];?></textarea>
+                                                    <textarea aria-label="<?php echo __('Comments'); ?>" type="text" class="form-control" name="comments" <?php echo $raeonlyfield; ?>><?php echo $role['comments'];?></textarea>
                                                 </div>
                                             </div>
 
@@ -251,10 +251,10 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                             if($rid!="" && $_SESSION['userid']==$role['hr_user_id']){?>
                                                 <input type="hidden" name="response_date" value="<?php echo nowDate(); ?>">
                                                 <div class="form-group ">
-                                                    <span class="form-label">HR Upload</span>
+                                                    <span class="form-label"><?php echo __('HR Upload'); ?></span>
                                                     <div class="">
                                                         <div class="custom-file mb-2">
-                                                            <input aria-label="File2" type="file" class="custom-file-input" id="customFile_hr" name="file2" />
+                                                            <input aria-label="<?php echo __('File2'); ?>" type="file" class="custom-file-input" id="customFile_hr" name="file2" />
                                                             <input type="hidden" name="hr_hidden_file" value="<?php echo $role['hr_upload'];?>" />
                                                         </div>
                                                         <?php if($role['hr_upload'] !=""){ ?>
@@ -288,10 +288,10 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                                         ?>
                                                         <input type="hidden" name="hid" value=<?php echo $rid; ?> />
                                                         <input type="hidden" name="submit" value="update" />
-                                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit" <?php echo $disablebtn;?> <?php echo $role['current_status']==ST_APPROVED?"disabled":""; ?>><i class="la la-check" ></i>Update</button>
+                                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit" <?php echo $disablebtn;?> <?php echo $role['current_status']==ST_APPROVED?"disabled":""; ?>><i class="la la-check" ></i><?php echo __('Update'); ?></button>
                                                     <?php }else{ ?>
                                                         <input type="hidden" name="submit" value="Add" />
-                                                        <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit" <?php echo $disablebtn;?>><i class="la la-check"></i>Save & exit</button>
+                                                        <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit" <?php echo $disablebtn;?>><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
 
                                                     <?php } ?>
                                                 </div>
@@ -305,7 +305,7 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                             <a class="accordion-msg b-none waves-effect waves-light">
                                                 <div class="row">
                                                     <div class="col-lg-6">
-                                                        Yet To Submit Service Requests
+                                                        <?php echo __('Yet To Submit Service Requests'); ?>
                                                     </div>
                                                     <div class="col-lg-6 text-right">
                                                         <span class="form-label label label-md  label-primary w-100">
@@ -321,10 +321,10 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col" class="p-2" style="width: 10%;">#</th>
-                                                                    <th scope="col" class="p-2" style="width: 25%;">Doc Name</th>
-                                                                    <th scope="col" class="p-2" style="width: 25%;">Note</th>
-                                                                    <th scope="col" class="p-2" style="width: 30%;">Comments</th>
-                                                                    <th scope="col" class="p-2 text-center" style="width: 10%;">Action</th>
+                                                                    <th scope="col" class="p-2" style="width: 25%;"><?php echo __('Doc Name'); ?></th>
+                                                                    <th scope="col" class="p-2" style="width: 25%;"><?php echo __('Note'); ?></th>
+                                                                    <th scope="col" class="p-2" style="width: 30%;"><?php echo __('Comments'); ?></th>
+                                                                    <th scope="col" class="p-2 text-center" style="width: 10%;"><?php echo __('Action'); ?></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody classs="custom-scroll" style="height: 250px; display: table-caption;">
@@ -342,7 +342,7 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                                             </table>
                                                         <?php    }else{ ?>
                                                             <div class="card-px text-center py-20 m-t-30">
-                                                                <p class="text-warning f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> No Service Requests </p>
+                                                                <p class="text-warning f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> <?php echo __('No Service Requests'); ?> </p>
                                                                 <div class="text-center px-4">
                                                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                                                 </div>
@@ -354,7 +354,7 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                                 <a class="accordion-msg b-none waves-effect waves-light">
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            In-Process Service Requests
+                                                            <?php echo __('In-Process Service Requests'); ?>
                                                         </div>
                                                         <div class="col-lg-6 text-right">
                                                             <span class="form-label label label-md  label-primary w-100">
@@ -370,9 +370,9 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                                                 <thead>
                                                                     <tr>
                                                                         <th scope="col" class="p-2" style="width: 10%;">#</th>
-                                                                        <th scope="col" class="p-2" style="width: 30%;">Doc Name</th>
-                                                                        <th scope="col" class="p-2" style="width: 30%;">Note</th>
-                                                                        <th scope="col" class="p-2" style="width: 30%;">Comments</th>
+                                                                        <th scope="col" class="p-2" style="width: 30%;"><?php echo __('Doc Name'); ?></th>
+                                                                        <th scope="col" class="p-2" style="width: 30%;"><?php echo __('Note'); ?></th>
+                                                                        <th scope="col" class="p-2" style="width: 30%;"><?php echo __('Comments'); ?></th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody classs="custom-scroll" style="height: 250px; display: table-caption;">
@@ -389,7 +389,7 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                                                 </table>
                                                             <?php    }else{ ?>
                                                                 <div class="card-px text-center py-20 m-t-30">
-                                                                    <p class="text-warning f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> No Service Requests </p>
+                                                                    <p class="text-warning f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> <?php echo __('No Service Requests'); ?> </p>
                                                                     <div class="text-center px-4">
                                                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 250px!important;" />
                                                                     </div>
@@ -401,7 +401,7 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                                     <a class="accordion-msg b-none waves-effect waves-light">
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                Approved Service Requests
+                                                                <?php echo __('Approved Service Requests'); ?>
                                                             </div>
                                                             <div class="col-lg-6 text-right">
                                                                 <span class="form-label label label-md  label-primary w-100">
@@ -417,10 +417,10 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col" class="p-2" style="width: 10%;">#</th>
-                                                                            <th scope="col" class="p-2" style="width: 25%;">Doc Name</th>
-                                                                            <th scope="col" class="p-2" style="width: 25%;">Note</th>
-                                                                            <th scope="col" class="p-2" style="width: 30%;">Comments</th>
-                                                                            <th scope="col" class="p-2 text-center" style="width: 10%;">Action</th>
+                                                                            <th scope="col" class="p-2" style="width: 25%;"><?php echo __('Doc Name'); ?></th>
+                                                                            <th scope="col" class="p-2" style="width: 25%;"><?php echo __('Note'); ?></th>
+                                                                            <th scope="col" class="p-2" style="width: 30%;"><?php echo __('Comments'); ?></th>
+                                                                            <th scope="col" class="p-2 text-center" style="width: 10%;"><?php echo __('Action'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody classs="custom-scroll" style="height: 250px; display: table-caption;">
@@ -438,7 +438,7 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                                                     </table>
                                                                 <?php    }else{ ?>
                                                                     <div class="card-px text-center py-20 m-t-30">
-                                                                        <p class="text-warning f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> No Service Requests </p>
+                                                                        <p class="text-warning f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> <?php echo __('No Service Requests'); ?> </p>
                                                                         <div class="text-center px-4">
                                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                                                         </div>
@@ -450,7 +450,7 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                                         <a class="accordion-msg b-none waves-effect waves-light">
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                Rejected OR Send Back Service Requests
+                                                                <?php echo __('Rejected OR Send Back Service Requests'); ?>
                                                             </div>
                                                             <div class="col-lg-6 text-right">
                                                                 <span class="form-label label label-md  label-primary w-100">
@@ -466,10 +466,10 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col" class="p-2" style="width: 10%;">#</th>
-                                                                            <th scope="col" class="p-2" style="width: 25%;">Doc Name</th>
-                                                                            <th scope="col" class="p-2" style="width: 25%;">Note</th>
-                                                                            <th scope="col" class="p-2" style="width: 30%;">Comments</th>
-                                                                            <th scope="col" class="p-2 text-center" style="width: 10%;">Action</th>
+                                                                            <th scope="col" class="p-2" style="width: 25%;"><?php echo __('Doc Name'); ?></th>
+                                                                            <th scope="col" class="p-2" style="width: 25%;"><?php echo __('Note'); ?></th>
+                                                                            <th scope="col" class="p-2" style="width: 30%;"><?php echo __('Comments'); ?></th>
+                                                                            <th scope="col" class="p-2 text-center" style="width: 10%;"><?php echo __('Action'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody classs="custom-scroll" style="height: 250px; display: table-caption;">
@@ -487,7 +487,7 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=''){
                                                                     </table>
                                                                 <?php    }else{ ?>
                                                                     <div class="card-px text-center py-20 m-t-30">
-                                                                        <p class="text-warning f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> No Service Requests </p>
+                                                                        <p class="text-warning f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> <?php echo __('No Service Requests'); ?> </p>
                                                                         <div class="text-center px-4">
                                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                                                         </div>

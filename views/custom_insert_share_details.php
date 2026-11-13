@@ -16,8 +16,8 @@ $nm = ViewStatusValue($_POST['status']);
               success: function(response) {
                   console.log(response);
                 swal.fire({
-                    title: "Comments Updated ",
-                    text: "Do you want to close ? ",
+                    title: <?php echo json_encode(__('Comments Updated')); ?>,
+                    text: <?php echo json_encode(__('Do you want to close ?')); ?>,
                     type: "success",
                     buttonsStyling: false,
                     confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
@@ -47,9 +47,9 @@ $nm = ViewStatusValue($_POST['status']);
   </script>
 
 <div class="modal-header">
-      <h5 class="modal-title">Share Details </h5>
-    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-        <i aria-hidden="true" class="ki ki-close"></i>X
+      <h5 class="modal-title"><?php echo __('Share Details'); ?> </h5>
+    <button type="button" class="close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
+        <i aria-hidden="true" class="ki ki-close"></i><?php echo __('X'); ?>
     </button>
 </div>
       <div class="modal-body" >
@@ -57,17 +57,17 @@ $nm = ViewStatusValue($_POST['status']);
               <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                   <div class="form-group row">
                       <div class="col-lg-6">
-                          <span>User </span>
-                          <select aria-label="Shar Is" class="form-control js-example-basic-single" id="kt_select2_4" name="shar_is" >
-                                <option value="0">Select Any One</option>
+                          <span><?php echo __('User'); ?> </span>
+                          <select aria-label="<?php echo __('Shar Is'); ?>" class="form-control js-example-basic-single" id="kt_select2_4" name="shar_is" >
+                                <option value="0"><?php echo __('Select Any One'); ?></option>
                                 <?php foreach ($_SESSION['users'] as $key => $value) { ?>
                                     <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
                                 <?php } ?>
                           </select>
                       </div>
                       <div class="col-lg-6">
-                          <span>Comment</span>
-                          <textarea aria-label="Comment" class="form-control" name="comment" id="comment"></textarea>
+                          <span><?php echo __('Comment'); ?></span>
+                          <textarea aria-label="<?php echo __('Comment'); ?>" class="form-control" name="comment" id="comment"></textarea>
                       </div>
 
                   </div>
@@ -76,8 +76,8 @@ $nm = ViewStatusValue($_POST['status']);
           <div class="modal-footer">
               <input type="hidden" name="share_table_id" id='share_table_id' value="<?php echo $_POST['share_table_id']; ?>">
               <input type="hidden" name="share_table" id='share_table' value="<?php echo $_POST['share_table']; ?>">
-              <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Submit</button>
+              <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+              <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?php echo __('Submit'); ?></button>
           </div>
       </form>
   </div>

@@ -21,7 +21,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 <link rel="stylesheet" href="assets/css/custom_insert_csr_proposal_details.css">
 <div class="card mt-4">
     <div class="card-header general_instructions_3 d-none">
-        <h5>CSR</h5>
+        <h5><?= __('CSR') ?></h5>
     </div>
     <div class="card-body">
 
@@ -32,7 +32,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
         ?>
         <div class="general_instructions">
             <div class="card-header mb-3">
-                <h5>General Instructions</h5>
+                <h5><?= __('General Instructions') ?></h5>
             </div>
             <div class="card-body">
                 <?php
@@ -52,7 +52,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
             </div>
             <div class="row">
                 <div class="col-lg-12 text-end">
-                    <button class="btn btn-primary waves-effect waves-light  m-r-30 mt-3 general_step_1">Next</button>
+                    <button class="btn btn-primary waves-effect waves-light  m-r-30 mt-3 general_step_1"><?= __('Next') ?></button>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                     <div class="col-lg-6 w-full">
                         <select aria-label='Financial Year' name="financial_year" id="financial_year" class="form-control form-select js-example-basic-single" required>
-                            <option value=""> Financial Year</option>
+                            <option value=""><?= __('Financial Year') ?></option>
 
                             <?php foreach($financial_years as $row){
                                 $selected = (isset($return['financial_year']) && $return['financial_year'] == $row['genc_detail_code']) ? 'selected' : '';
@@ -94,7 +94,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     <div class="col-lg-6 w-full">
 
                         <select aria-label='Institue Name' class="form-control js-example-basic-single requried_field" name="institue_name" id="institue_name">
-                            <option value="">Entity Name</option>
+                            <option value=""><?= __('Entity Name') ?></option>
                             <?php if(count((array)$entity_names)>0){
                                 foreach ($entity_names as $row) {
                                     $selected=$row['entity_code']==$return['institue_name']?'selected':''
@@ -112,7 +112,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                     <div class="col-lg-6 w-full">
                         <select aria-label='Type Of Work' class="form-control js-example-basic-single requried_field" name="type_of_work" id="type_of_work" >
-                            <option value="">Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($csr_type_of_works as $row){ ?>
                                 <option value="<?php echo $row['id']; ?>" <?php echo $return['type_of_work'] == $row['id'] ? "selected":"";?>><?php echo $row['type_of_work']; ?></option>
                             <?php } ?>
@@ -125,7 +125,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                     <div class="col-lg-6 w-full">
                         <select aria-label='Type Of Project' class="form-control js-example-basic-single requried_field" name="type_of_project" id="type_of_project" >
-                            <option value="">Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($csr_type_of_projects as $row){ ?>
                                 <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $return['type_of_project'] == $row['genc_detail_code'] ? "selected":"";?>><?php echo $row['genc_detail_name']; ?></option>
                             <?php } ?>
@@ -138,7 +138,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                     <div class="col-lg-6 w-full">
                         <select aria-label='Working Area' class="form-control js-example-basic-single requried_field" name="working_area" id="working_area" >
-                            <option value="">Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($csr_areas as $row){ ?>
                                 <option value="<?php echo $row['id']; ?>" <?php echo $return['working_area'] == $row['id'] ? "selected":"";?>><?php echo $row['csr_area']; ?></option>
                             <?php } ?>
@@ -151,7 +151,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                     <div class="col-lg-6 w-full">
                         <select aria-label='Csr Location' class="form-control js-example-basic-single requried_field" name="csr_location" id="csr_location" >
-                            <option value="">Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($locations as $row){ ?>
                                 <option value="<?php echo $row['id']; ?>" <?php echo $return['csr_location'] == $row['id'] ? "selected":"";?>><?php echo $row['location_name']; ?></option>
                             <?php } ?>
@@ -165,7 +165,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <textarea aria-label='Proposal for...' name="subject" id="subject" class="form-control height-80" placeholder="Proposal for...">
+                            <textarea aria-label='Proposal for...' name="subject" id="subject" class="form-control height-80" placeholder="<?= __('Proposal for...') ?>">
                                 <?php echo htmlspecialchars($return['subject']) ?? ''; ?>
                             </textarea>
                             <span class="f-12">(Subject for CSR).</span>
@@ -173,7 +173,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600">1.0 About the Organisation</h3>
+                    <h3 class="f-18 f-w-600"><?= __('1.0 About the Organisation') ?></h3>
                     <div class="form-group col-lg-6">
 
                         <textarea aria-label='About Organisation' name="about_organisation" id="about_organisation" class="form-control height-80" placeholder="">
@@ -182,7 +182,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600">2.0 Background</h3>
+                    <h3 class="f-18 f-w-600"><?= __('2.0 Background') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='Background' name="background" id="background" class="form-control height-80" placeholder="">
                             <?php echo htmlspecialchars($return['background']) ?? ''; ?></textarea>
@@ -190,7 +190,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600">2.1 Thematic Area</h3>
+                    <h3 class="f-18 f-w-600"><?= __('2.1 Thematic Area') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='Thematic Area' name="thematic_area" id="thematic_area" class="form-control height-80" placeholder="">
                             <?php echo htmlspecialchars($return['thematic_area']) ?? ''; ?></textarea>
@@ -199,16 +199,16 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     <div class="col-lg-10">
                         <table class="table table-bordered">
                             <tr>
-                                <th scope="col">Thrust Area</th>
-                                <th scope="col">Schedule VII item</th>
+                                <th scope="col"><?= __('Thrust Area') ?></th>
+                                <th scope="col"><?= __('Schedule VII item') ?></th>
                             </tr>
                             <tr>
                                 <td>Education</td>
                                 <td>
                                     <div class="border-checkbox-section">
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                <input name="education" id="education" class="border-checkbox csr-checkbox" type="checkbox" value="0" <?php echo isset($return['education'])?'checked':''; ?> title="Education" aria-label="Education">
-                                            <label class="form-label border-checkbox-label" for="education">(ii) promotion of education including special education</label>
+                                <input name="education" id="education" class="border-checkbox csr-checkbox" type="checkbox" value="0" <?php echo isset($return['education'])?'checked':''; ?> title="<?= __('Education') ?>" aria-label="Education">
+                                            <label class="form-label border-checkbox-label" for="education"><?= __('(ii) promotion of education including special education') ?></label>
                                         </div>
                                     </div>
                                 </td>
@@ -218,8 +218,8 @@ $_SESSION['apply_js']['multiselest'] = 1;
                                 <td>
                                     <div class="border-checkbox-section">
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                            <input name="env_sustian" class="border-checkbox csr-checkbox" type="checkbox" id="env_sustian" value="0" <?php echo isset($return['env_sustian'])?'checked':''; ?> title="Env Sustian" aria-label="Env Sustian">
-                                            <label class="form-label border-checkbox-label" for="env_sustian">(iv) Ensuring environmental sustainability</label>
+                                            <input name="env_sustian" class="border-checkbox csr-checkbox" type="checkbox" id="env_sustian" value="0" <?php echo isset($return['env_sustian'])?'checked':''; ?> title="<?= __('Env Sustian') ?>" aria-label="Env Sustian">
+                                            <label class="form-label border-checkbox-label" for="env_sustian"><?= __('(iv) Ensuring environmental sustainability') ?></label>
                                         </div>
                                     </div>
                                 </td>
@@ -229,8 +229,8 @@ $_SESSION['apply_js']['multiselest'] = 1;
                                 <td>
                                     <div class="border-checkbox-section">
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                            <input name="health" class="border-checkbox csr-checkbox" type="checkbox" id="health" value="0" <?php echo isset($return['health'])?'checked':''; ?> title="Health" aria-label="Health">
-                                            <label class="form-label border-checkbox-label" for="health">(i) promoting healthcare including preventive healthcare and sanitation</label>
+                                            <input name="health" class="border-checkbox csr-checkbox" type="checkbox" id="health" value="0" <?php echo isset($return['health'])?'checked':''; ?> title="<?= __('Health') ?>" aria-label="Health">
+                                            <label class="form-label border-checkbox-label" for="health"><?= __('(i) promoting healthcare including preventive healthcare and sanitation') ?></label>
                                         </div>
                                     </div>
                                 </td>
@@ -240,8 +240,8 @@ $_SESSION['apply_js']['multiselest'] = 1;
                                 <td>
                                     <div class="border-checkbox-section">
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                            <input name="skill_development" class="border-checkbox csr-checkbox" type="checkbox" id="skill_development" value="0" <?php echo isset($return['skill_development'])?'checked':''; ?> title="Skill Development" aria-label="Skill Development">
-                                            <label class="form-label border-checkbox-label" for="skill_development">(ii) employment enhancing vocational skills and livelihood enhancement projects</label>
+                                            <input name="skill_development" class="border-checkbox csr-checkbox" type="checkbox" id="skill_development" value="0" <?php echo isset($return['skill_development'])?'checked':''; ?> title="<?= __('Skill Development') ?>" aria-label="Skill Development">
+                                            <label class="form-label border-checkbox-label" for="skill_development"><?= __('(ii) employment enhancing vocational skills and livelihood enhancement projects') ?></label>
                                         </div>
                                     </div>
                                 </td>
@@ -251,8 +251,8 @@ $_SESSION['apply_js']['multiselest'] = 1;
                                 <td>
                                     <div class="border-checkbox-section">
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                            <input name="comu_development" class="border-checkbox csr-checkbox" type="checkbox" id="comu_development" value="0" <?php echo isset($return['comu_development'])?'checked':''; ?> title="Comu Development" aria-label="Comu Development">
-                                            <label class="form-label border-checkbox-label" for="comu_development">(x) Rural development projects/ Multiple categories</label>
+                                            <input name="comu_development" class="border-checkbox csr-checkbox" type="checkbox" id="comu_development" value="0" <?php echo isset($return['comu_development'])?'checked':''; ?> title="<?= __('Comu Development') ?>" aria-label="Comu Development">
+                                            <label class="form-label border-checkbox-label" for="comu_development"><?= __('(x) Rural development projects/ Multiple categories') ?></label>
                                         </div>
                                     </div>
                                 </td>
@@ -268,8 +268,8 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-22 f-w-600">Please specify the SDG/s in addition to the above.</h3>
-                    <h3 class="f-18 f-w-600 mt-3">3.0 Proposal</h3>
+                    <h3 class="f-22 f-w-600"><?= __('Please specify the SDG/s in addition to the above.') ?></h3>
+                    <h3 class="f-18 f-w-600 mt-3"><?= __('3.0 Proposal') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='SDGproposal' name="SDGproposal" id="SDGproposal" class="form-control height-80" placeholder="">
                             <?php echo $return['SDGproposal'] ??''; ?></textarea>
@@ -277,7 +277,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600 mt-3">3.1 Methodology</h3>
+                    <h3 class="f-18 f-w-600 mt-3"><?= __('3.1 Methodology') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='Methodology' name="methodology" id="methodology" class="form-control height-80" placeholder="">
                             <?php echo $return['methodology'] ??''; ?></textarea>
@@ -285,7 +285,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600 mt-3">3.2 Target Group</h3>
+                    <h3 class="f-18 f-w-600 mt-3"><?= __('3.2 Target Group') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='Target Group' name="target_group" id="target_group" class="form-control height-80" placeholder="">
                             <?php echo $return['target_group'] ??''; ?></textarea>
@@ -293,7 +293,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600 mt-3">3.3 Team for the project</h3>
+                    <h3 class="f-18 f-w-600 mt-3"><?= __('3.3 Team for the project') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='Team Project' name="team_project" id="team_project" class="form-control height-80" placeholder="">
                             <?php echo $return['team_project'] ??''; ?></textarea>
@@ -301,7 +301,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600 mt-3">3.4 Monitoring Mechanism</h3>
+                    <h3 class="f-18 f-w-600 mt-3"><?= __('3.4 Monitoring Mechanism') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='Monitoring Mechanism' name="monitoring_mechanism" id="monitoring_mechanism" class="form-control height-80" placeholder="">
                             <?php echo $return['monitoring_mechanism'] ??''; ?></textarea>
@@ -309,7 +309,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600 mt-3">4.1 Outcomes/Result expected</h3>
+                    <h3 class="f-18 f-w-600 mt-3"><?= __('4.1 Outcomes/Result expected') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='Outcomes Expected' name="outcomes_expected" id="outcomes_expected" class="form-control height-80" placeholder="">
                             <?php echo $return['outcomes_expected'] ??''; ?></textarea>
@@ -317,7 +317,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600 mt-3">4.2 Execution Plan</h3>
+                    <h3 class="f-18 f-w-600 mt-3"><?= __('4.2 Execution Plan') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='Execution Plan' name="execution_plan" id="execution_plan" class="form-control height-80" placeholder="">
                             <?php echo $return['execution_plan'] ??''; ?></textarea>
@@ -325,7 +325,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600 mt-3">4.3 Impact Assessment</h3>
+                    <h3 class="f-18 f-w-600 mt-3"><?= __('4.3 Impact Assessment') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='Impact Assessment' name="impact_assessment" id="impact_assessment" class="form-control height-80" placeholder="">
                             <?php echo $return['impact_assessment'] ??''; ?></textarea>
@@ -333,7 +333,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600 mt-3">5.1 Financial Implications</h3>
+                    <h3 class="f-18 f-w-600 mt-3"><?= __('5.1 Financial Implications') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='Financial Implications' class="form-control height-80" id="financial_implications" name="financial_implications" placeholder="">
                             <?php echo $return['financial_implications'] ??''; ?></textarea>
@@ -350,15 +350,15 @@ $_SESSION['apply_js']['multiselest'] = 1;
                         <table class="table table-bordered" id="financial_table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Sr. No</th>
-                                    <th scope="col" class="text-center">Details</th>
-                                    <th scope="col" class="text-center">Per unit Cost<br />(A)</th>
-                                    <th scope="col" class="text-center">Total Number of Units<br />(B)</th>
-                                    <th scope="col" class="text-center">Total Budget for 1 month/year<br />(C=A*B)</th>
-                                    <th scope="col" class="text-center">No. of months/years</th>
-                                    <th scope="col" class="text-center">Budget For Months/Years<br />(D=C*No. of months/years)</th>
-                                    <th scope="col" class="text-center">Remarks<br />(Justification of cost element)</th>
-                                    <th scope="col" class="text-center">Actions</th>
+                                    <th scope="col"><?= __('Sr. No') ?></th>
+                                    <th scope="col" class="text-center"><?= __('Details') ?></th>
+                                    <th scope="col" class="text-center"><?= __('Per unit Cost') ?><br />(A)</th>
+                                    <th scope="col" class="text-center"><?= __('Total Number of Units') ?><br />(B)</th>
+                                    <th scope="col" class="text-center"><?= __('Total Budget for 1 month/year') ?><br />(C=A*B)</th>
+                                    <th scope="col" class="text-center"><?= __('No. of months/years') ?></th>
+                                    <th scope="col" class="text-center"><?= __('Budget For Months/Years') ?><br />(D=C*No. of months/years)</th>
+                                    <th scope="col" class="text-center"><?= __('Remarks') ?><br />(<?= __('Justification of cost element') ?>)</th>
+                                    <th scope="col" class="text-center"><?= __('Actions') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -398,7 +398,7 @@ if (!empty($groupsData)) {
             // Subtotal Row
             echo '<tr data-group="group_' . htmlspecialchars($groupId) . '" class="subtotal-row bg-light-row" >';
             echo '<td></td>';
-            echo '<th scope="col" class="text-center">Sub Total (' . htmlspecialchars($groupId) . ')</th>';
+            echo '<th scope="col" class="text-center">' . __('Sub Total') . ' (' . htmlspecialchars($groupId) . ')</th>';
             echo '<td></td><td></td>';
             echo '<td><input aria-label="Groups" type="text" class="form-control budget-subtotal text_align_right" id="budget_sub_total_' . htmlspecialchars($groupId) . '" name="groups[' . htmlspecialchars($groupId) . '][subtotal][' . htmlspecialchars($groupId) . ']" value="' . htmlspecialchars($subtotal[$groupId]) . '" readonly></td>';
             echo '<td></td>';
@@ -414,12 +414,12 @@ if (!empty($groupsData)) {
                             <tfoot>
                                 <tr>
                                     <td colspan="8">
-                                        <button class="btn btn-primary waves-effect waves-light" type="button" id="add_row" >Add more</button>
+                                        <button class="btn btn-primary waves-effect waves-light" type="button" id="add_row" ><?= __('Add more') ?></button>
                                     </td>
                                 </tr>
                                 <tr class="bg-light-row" >
                                     <td></td>
-                                    <th scope="col" class="text-center"><strong>Grand Total</strong></th>
+                                    <th scope="col" class="text-center"><strong><?= __('Grand Total') ?></strong></th>
                                     <td></td>
                                     <td></td>
                                     <td><input aria-label='Budget Grand Total' type="text" class="form-control text_align_right" id="budget_grand_total" name="budget_grand_total" value="<?php echo $return['budget_grand_total'] ??''; ?>" readonly></td>
@@ -435,7 +435,7 @@ if (!empty($groupsData)) {
                 </div>
 
                         <div class="mt-3">
-                            <h3 class="f-18 f-w-600 mt-3">5.2 Tentative payment schedule</h3>
+                            <h3 class="f-18 f-w-600 mt-3"><?= __('5.2 Tentative payment schedule') ?></h3>
                             <div class="form-group col-lg-6">
                                 <textarea aria-label='Payment Schedule' class="form-control height-80" id="payment_schedule" name="payment_schedule" placeholder="">
                                     <?php echo $return['payment_schedule'] ??''; ?></textarea>
@@ -445,12 +445,12 @@ if (!empty($groupsData)) {
                                 <table class="table table-bordered" id="paymentScheduleTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Sr.No</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">% of Total Project Budget</th>
-                                            <th scope="col">Amount in Rs</th>
-                                            <th scope="col">Deliverables to be achieved</th>
-                                            <th scope="col">Actions</th>
+                                            <th scope="col"><?= __('Sr.No') ?></th>
+                                            <th scope="col"><?= __('Description') ?></th>
+                                            <th scope="col"><?= __('% of Total Project Budget') ?></th>
+                                            <th scope="col"><?= __('Amount in Rs') ?></th>
+                                            <th scope="col"><?= __('Deliverables to be achieved') ?></th>
+                                            <th scope="col"><?= __('Actions') ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -483,15 +483,15 @@ if (!empty($percent)) {
                                     <tfoot>
                                         <tr>
                                             <td colspan="5">
-                                                <button class="btn btn-primary waves-effect waves-light" type="button" id="add_payment_schedule_row">Add more</button>
+                                                <button class="btn btn-primary waves-effect waves-light" type="button" id="add_payment_schedule_row"><?= __('Add more') ?></button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th scope="col"></th>
-                                            <th scope="col">Grand Total</th>
+                                            <th scope="col"><?= __('Grand Total') ?></th>
                                             <th scope="col"></th>
                                             <th scope="col"><input aria-label='Payment Grand Total' type="text" class="form-control text_align_right" id="payment_grand_total" name="payment_grand_total" value="<?php echo $return['payment_grand_total'] ??''; ?>" readonly></th>
-                                            <th scope="col" colspan="2"><input aria-label='In Words Only...' type="text" class="form-control" id="payment_grand_total_in_words" name="payment_grand_total_in_words" placeholder="In Words Only..." value="<?php echo $return['payment_grand_total_in_words'] ??''; ?>"></th>
+                                            <th scope="col" colspan="2"><input aria-label='In Words Only...' type="text" class="form-control" id="payment_grand_total_in_words" name="payment_grand_total_in_words" placeholder="<?= __('In Words Only...') ?>" value="<?php echo $return['payment_grand_total_in_words'] ??''; ?>"></th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -499,7 +499,7 @@ if (!empty($percent)) {
                         </div>
 
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600 mt-3">6.0 Sustainability Plan</h3>
+                    <h3 class="f-18 f-w-600 mt-3"><?= __('6.0 Sustainability Plan') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='Sustainability Plan' class="form-control height-80" id="sustainability_plan" name="sustainability_plan" placeholder="">
                             <?php echo $return['sustainability_plan'] ??''; ?></textarea>
@@ -507,25 +507,25 @@ if (!empty($percent)) {
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h3 class="f-18 f-w-600 mt-3">7.0 Conclusion</h3>
+                    <h3 class="f-18 f-w-600 mt-3"><?= __('7.0 Conclusion') ?></h3>
                     <div class="form-group col-lg-6">
                         <textarea aria-label='Conclusion' class="form-control height-80" id="conclusion" name="conclusion" placeholder=""><?php echo $return['conclusion'] ??''; ?></textarea>
                     </div>
                 </div>
                 <div class="mt-3 enclosures">
-                    <h3 class="f-18 f-w-600 mt-3">8.0 Enclosures</h3>
+                    <h3 class="f-18 f-w-600 mt-3"><?= __('8.0 Enclosures') ?></h3>
                     <div class="general_instructions">
                         <ul>
                             <li>
                                 <span class="f-w-600">Form A :- CHECKLIST FOR SUBMISSION OF DOCUMENTS</span>
                                 <div class="border-checkbox-section mt-2">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                            <input class="border-checkbox csr-form-radio" type="radio" id="form_a_yes" name="form_a" value="1"  <?php echo $return['form_a']=='1'?'checked':''  ?> / title="Form A" aria-label="Form A">
-                                        <label class="form-label border-checkbox-label" for="form_a_yes">Yes</label>
+                            <input class="border-checkbox csr-form-radio" type="radio" id="form_a_yes" name="form_a" value="1"  <?php echo $return['form_a']=='1'?'checked':''  ?> / title="<?= __('Form A') ?>" aria-label="Form A">
+                                        <label class="form-label border-checkbox-label" for="form_a_yes"><?= __('Yes') ?></label>
                                     </div>
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox  csr-form-radio" type="radio" id="form_a_no" name="form_a" value="0"  <?php echo isset($return['form_a'])&&($return['form_a']=='0' || $return['form_a'] == '') ?'checked':''  ?> / title="Form A" aria-label="Form A">
-                                        <label class="form-label border-checkbox-label" for="form_a_no">No</label>
+                                        <input class="border-checkbox  csr-form-radio" type="radio" id="form_a_no" name="form_a" value="0"  <?php echo isset($return['form_a'])&&($return['form_a']=='0' || $return['form_a'] == '') ?'checked':''  ?> / title="<?= __('Form A') ?>" aria-label="Form A">
+                                        <label class="form-label border-checkbox-label" for="form_a_no"><?= __('No') ?></label>
                                     </div>
 
                                     <?php if (!empty($return['form_a_file'])): ?>
@@ -544,12 +544,12 @@ if (!empty($percent)) {
                                 <span class="f-w-600">Form B :- CHECKLIST FOR INFRASTRUCTURE PROJECTS</span>
                                 <div class="border-checkbox-section mt-2">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_b_yes" name="form_b" value="1"  <?php echo $return['form_b']?'checked':''  ?> / title="Form B" aria-label="Form B">
-                                        <label class="form-label border-checkbox-label" for="form_b_yes">Yes</label>
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_b_yes" name="form_b" value="1"  <?php echo $return['form_b']?'checked':''  ?> / title="<?= __('Form B') ?>" aria-label="Form B">
+                                        <label class="form-label border-checkbox-label" for="form_b_yes"><?= __('Yes') ?></label>
                                     </div>
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_b_no" name="form_b" value="0"  <?php echo isset($return['form_b'])&&($return['form_b']=='0' || $return['form_b'] == '') ?'checked':''  ?>  / title="Form B" aria-label="Form B">
-                                        <label class="form-label border-checkbox-label" for="form_b_no">No</label>
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_b_no" name="form_b" value="0"  <?php echo isset($return['form_b'])&&($return['form_b']=='0' || $return['form_b'] == '') ?'checked':''  ?>  / title="<?= __('Form B') ?>" aria-label="Form B">
+                                        <label class="form-label border-checkbox-label" for="form_b_no"><?= __('No') ?></label>
                                     </div>
                                     <?php if (!empty($return['form_b_file'])): ?>
                                     <a target="_blank" href="uploads/csr/<?php echo htmlspecialchars($return['form_b_file']); ?>"  class="mb-2" download><i class="ti-cloud-down f-18 f-w-600"></i></a>
@@ -566,12 +566,12 @@ if (!empty($percent)) {
                                 <span class="f-w-600">Form C :- CHECKLIST FOR SUBMISSION OF PROPOSAL</span>
                                 <div class="border-checkbox-section mt-2">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_c_yes" name="form_c" value="1"  <?php echo $return['form_c']?'checked':''  ?> / title="Form C" aria-label="Form C">
-                                        <label class="form-label border-checkbox-label" for="form_c_yes">Yes</label>
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_c_yes" name="form_c" value="1"  <?php echo $return['form_c']?'checked':''  ?> / title="<?= __('Form C') ?>" aria-label="Form C">
+                                        <label class="form-label border-checkbox-label" for="form_c_yes"><?= __('Yes') ?></label>
                                     </div>
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_c_no" name="form_c" value="0"  <?php echo isset($return['form_c'])&&($return['form_c']=='0' || $return['form_c'] == '') ?'checked':''  ?> / title="Form C" aria-label="Form C">
-                                        <label class="form-label border-checkbox-label" for="form_c_no">No</label>
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_c_no" name="form_c" value="0"  <?php echo isset($return['form_c'])&&($return['form_c']=='0' || $return['form_c'] == '') ?'checked':''  ?> / title="<?= __('Form C') ?>" aria-label="Form C">
+                                        <label class="form-label border-checkbox-label" for="form_c_no"><?= __('No') ?></label>
                                     </div>
                                 <?php if (!empty($return['form_c_file'])): ?>
                                     <a target="_blank" href="uploads/csr/<?php echo htmlspecialchars($return['form_c_file']); ?>"  class="mb-2" download><i class="ti-cloud-down f-18 f-w-600"></i></a>
@@ -587,12 +587,12 @@ if (!empty($percent)) {
                                 <span class="f-w-600">Form D :- SUMMARY SHEET FOR THE PROPOSAL</span>
                                 <div class="border-checkbox-section mt-2">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_d_yes" name="form_d" value="1" <?php echo $return['form_d']?'checked':''  ?> / title="Form D" aria-label="Form D">
-                                        <label class="form-label border-checkbox-label" for="form_d_yes">Yes</label>
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_d_yes" name="form_d" value="1" <?php echo $return['form_d']?'checked':''  ?> / title="<?= __('Form D') ?>" aria-label="Form D">
+                                        <label class="form-label border-checkbox-label" for="form_d_yes"><?= __('Yes') ?></label>
                                     </div>
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_d_no" name="form_d" value="0"  <?php echo isset($return['form_d'])&&($return['form_d']=='0' || $return['form_d'] == '') ?'checked':''  ?> / title="Form D" aria-label="Form D">
-                                        <label class="form-label border-checkbox-label" for="form_d_no">No</label>
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_d_no" name="form_d" value="0"  <?php echo isset($return['form_d'])&&($return['form_d']=='0' || $return['form_d'] == '') ?'checked':''  ?> / title="<?= __('Form D') ?>" aria-label="Form D">
+                                        <label class="form-label border-checkbox-label" for="form_d_no"><?= __('No') ?></label>
                                     </div>
                                 <?php if (!empty($return['form_d_file'])): ?>
                                     <a target="_blank" href="uploads/csr/<?php echo htmlspecialchars($return['form_d_file']); ?>"  class="mb-2" download><i class="ti-cloud-down f-18 f-w-600"></i></a>
@@ -608,12 +608,12 @@ if (!empty($percent)) {
                                 <span class="f-w-600">Form E :- TRACK RECORD OF PROJECTS</span>
                                 <div class="border-checkbox-section mt-2">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_e_yes" name="form_e" value="1"  <?php echo $return['form_e']?'checked':''  ?> / title="Form E" aria-label="Form E">
-                                        <label class="form-label border-checkbox-label" for="form_e_yes">Yes</label>
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_e_yes" name="form_e" value="1"  <?php echo $return['form_e']?'checked':''  ?> / title="<?= __('Form E') ?>" aria-label="Form E">
+                                        <label class="form-label border-checkbox-label" for="form_e_yes"><?= __('Yes') ?></label>
                                     </div>
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_e_no" name="form_e" value="0"   <?php echo isset($return['form_e'])&&($return['form_e']=='0' || $return['form_e'] == '') ?'checked':''  ?>/ title="Form E" aria-label="Form E">
-                                        <label class="form-label border-checkbox-label" for="form_e_no">No</label>
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_e_no" name="form_e" value="0"   <?php echo isset($return['form_e'])&&($return['form_e']=='0' || $return['form_e'] == '') ?'checked':''  ?>/ title="<?= __('Form E') ?>" aria-label="Form E">
+                                        <label class="form-label border-checkbox-label" for="form_e_no"><?= __('No') ?></label>
                                     </div>
                                 <?php if (!empty($return['form_e_file'])): ?>
                                     <a target="_blank" href="uploads/csr/<?php echo htmlspecialchars($return['form_e_file']); ?>"  class="mb-2" download><i class="ti-cloud-down f-18 f-w-600"></i></a>
@@ -635,16 +635,16 @@ if (!empty($percent)) {
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th scope="col" class="text-start" colspan="4">Form A</th>
+                                    <th scope="col" class="text-start" colspan="4"><?= __('Form A') ?></th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" class="text-center" colspan="4">CHECKLIST FOR SUBMISSION OF DOCUMENTS</th>
+                                    <th scope="col" class="text-center" colspan="4"><?= __('CHECKLIST FOR SUBMISSION OF DOCUMENTS') ?></th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" style="width: 5%;">Sr. No</th>
-                                    <th scope="col" style="width: 50%;">Description of documents</th>
-                                    <th scope="col" class="text-center" style="width: 25%;">Attached (Yes / No)</th>
-                                    <th scope="col" class="text-center" style="width: 20%;">Remark</th>
+                                    <th scope="col" style="width: 5%;"><?= __('Sr. No') ?></th>
+                                    <th scope="col" style="width: 50%;"><?= __('Description of documents') ?></th>
+                                    <th scope="col" class="text-center" style="width: 25%;"><?= __('Attached (Yes / No)') ?></th>
+                                    <th scope="col" class="text-center" style="width: 20%;"><?= __('Remark') ?></th>
                                 </tr>
                                 <tr>
                                     <td>1*</td>
@@ -1032,12 +1032,12 @@ if (!empty($percent)) {
 
                                 <thead>
                                     <tr>
-                                        <th scope="col">Sr. No</th>
-                                        <th scope="col" class="text-center">Sources of Funds</th>
+                                        <th scope="col"><?= __('Sr. No') ?></th>
+                                        <th scope="col" class="text-center"><?= __('Sources of Funds') ?></th>
                                         <?php foreach ($years as $year): ?>
                                             <th scope="col" class="text-center">FY (<?= $year ?> in Rs.)</th>
                                         <?php endforeach; ?>
-                                        <th scope="col" class="text-center">Action</th>
+                                        <th scope="col" class="text-center"><?= __('Action') ?></th>
                                     </tr>
                                 </thead>
 
@@ -1084,14 +1084,14 @@ if (!empty($percent)) {
                                 <tfoot>
                                     <tr>
                                         <td></td>
-                                        <th scope="col" class="text-end">Total</th>
+                                        <th scope="col" class="text-end"><?= __('Total') ?></th>
                                         <td><input aria-label='Total Fy1' type="text" class="form-control text_align_right" id="total_fy1" name="total_fy1" value="<?php echo $return['total_fy1'] ?? '' ; ?>" readonly></td>
                                         <td><input aria-label='Total Fy2' type="text" class="form-control text_align_right" id="total_fy2" name="total_fy2" value="<?php echo $return['total_fy2'] ?? '' ; ?>" readonly></td>
                                         <td><input aria-label='Total Fy3' type="text" class="form-control text_align_right" id="total_fy3" name="total_fy3" value="<?php echo $return['total_fy3'] ?? '' ; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <td colspan="5" class="text-start">
-                                            <button type="button" class="btn btn-primary" id="add_row_income" >Add More</button>
+                                            <button type="button" class="btn btn-primary" id="add_row_income" ><?= __('Add More') ?></button>
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -1102,7 +1102,7 @@ if (!empty($percent)) {
                     <div class="mt-3 enclosures">
                         <h3 class="f-16 f-w-600 mt-3">2. Provide details of income, expenditure, assets and liabilities during the last 3 Financial Years for which audited accounts are being submitted along with the application. </h3>
 
-                        <h3 class="f-16 f-w-600 mt-4">Total Income:</h3>
+                        <h3 class="f-16 f-w-600 mt-4"><?= __('Total Income:') ?></h3>
                         <div class="table-responsive">
                             <table class="table table-bordered mb-1" id="total_income_table">
                                 <thead>
@@ -1112,7 +1112,7 @@ if (!empty($percent)) {
                                         <?php endforeach; ?>
                                         <th scope="col" class="text-center">Major Reasons for variation <?= ($currentYear-1).'-'.($currentYear-2) ?></th>
                                         <th scope="col" class="text-center">Major Reasons for variation <?= ($currentYear-2).'-'.($currentYear-3) ?></th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('Action') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1155,11 +1155,9 @@ if (!empty($percent)) {
                         <button class="btn btn-primary waves-effect waves-light add-row-btn"
         type="button"
         data-table-id="total_income_table_3"
-        data-section="income">
-    Add more
-</button>
+        data-section="income"><?= __('Add more') ?></button>
 
-                        <h3 class="f-16 f-w-600 mt-4">Total Expenditure:</h3>
+                        <h3 class="f-16 f-w-600 mt-4"><?= __('Total Expenditure:') ?></h3>
                         <div class="table-responsive">
                             <table class="table table-bordered mb-1" id="expenditure_table">
                                 <thead>
@@ -1169,7 +1167,7 @@ if (!empty($percent)) {
                                         <?php endforeach; ?>
                                         <th scope="col" class="text-center">Major Reasons for variation <?= ($currentYear-1).'-'.($currentYear-2) ?></th>
                                         <th scope="col" class="text-center">Major Reasons for variation <?= ($currentYear-2).'-'.($currentYear-3) ?></th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('Action') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1212,11 +1210,9 @@ if (!empty($percent)) {
                         <button class="btn btn-primary waves-effect waves-light add-row-btn"
         type="button"
         data-table-id="expenditure_table_3"
-        data-section="expenditure">
-    Add more
-</button>
+        data-section="expenditure"><?= __('Add more') ?></button>
 
-                        <h3 class="f-16 f-w-600 mt-4">Total Assets:</h3>
+                        <h3 class="f-16 f-w-600 mt-4"><?= __('Total Assets:') ?></h3>
                         <div class="table-responsive">
                             <table class="table table-bordered mb-1" id="assets_table">
                                 <thead>
@@ -1226,7 +1222,7 @@ if (!empty($percent)) {
                                         <?php endforeach; ?>
                                         <th scope="col" class="text-center">Major Reasons for variation <?= ($currentYear-1).'-'.($currentYear-2) ?></th>
                                         <th scope="col" class="text-center">Major Reasons for variation <?= ($currentYear-2).'-'.($currentYear-3) ?></th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('Action') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1270,11 +1266,9 @@ if (!empty($percent)) {
                         <button class="btn btn-primary waves-effect waves-light add-row-btn"
         type="button"
         data-table-id="assets_table_3"
-        data-section="assets">
-    Add more
-</button>
+        data-section="assets"><?= __('Add more') ?></button>
 
-                        <h3 class="f-16 f-w-600 mt-4">Total Liabilities:</h3>
+                        <h3 class="f-16 f-w-600 mt-4"><?= __('Total Liabilities:') ?></h3>
                         <div class="table-responsive">
                             <table class="table table-bordered mb-1" id="liabilities_table">
                                 <thead>
@@ -1284,7 +1278,7 @@ if (!empty($percent)) {
                                         <?php endforeach; ?>
                                         <th scope="col" class="text-center">Major Reasons for variation <?= ($currentYear-1).'-'.($currentYear-2) ?></th>
                                         <th scope="col" class="text-center">Major Reasons for variation <?= ($currentYear-2).'-'.($currentYear-3) ?></th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('Action') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1328,9 +1322,7 @@ if (!empty($percent)) {
                         <button class="btn btn-primary waves-effect waves-light add-row-btn"
         type="button"
         data-table-id="liabilities_table_3"
-        data-section="liabilities">
-    Add more
-</button>
+        data-section="liabilities"><?= __('Add more') ?></button>
 
                     </div>
                 </div>
@@ -1339,20 +1331,20 @@ if (!empty($percent)) {
                         <div class="table-responsive form_B">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th scope="col" class="text-start" colspan="4">Form B</th>
+                                    <th scope="col" class="text-start" colspan="4"><?= __('Form B') ?></th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" class="text-center" colspan="4">CHECKLIST FOR INFRASTRUCTURE PROJECTS</th>
+                                    <th scope="col" class="text-center" colspan="4"><?= __('CHECKLIST FOR INFRASTRUCTURE PROJECTS') ?></th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" class="w-5">Sr. No</th>
-                                    <th scope="col" class="w-50">Documents</th>
-                                    <th scope="col" class="w-25 ">Attached (Yes / No)</th>
-                                    <th scope="col" class="w-25 ">Remark</th>
+                                    <th scope="col" class="w-5"><?= __('Sr. No') ?></th>
+                                    <th scope="col" class="w-50"><?= __('Documents') ?></th>
+                                    <th scope="col" class="w-25 "><?= __('Attached (Yes / No)') ?></th>
+                                    <th scope="col" class="w-25 "><?= __('Remark') ?></th>
                                 </tr>
                                 <tr>
                                     <th scope="col">A</th>
-                                    <th scope="col">LAND RELATED</th>
+                                    <th scope="col"><?= __('LAND RELATED') ?></th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
@@ -1414,7 +1406,7 @@ if (!empty($percent)) {
                                 </tr>
                                 <tr>
                                     <th scope="col">B</th>
-                                    <th scope="col">ESTIMATES & APPROVALS</th>
+                                    <th scope="col"><?= __('ESTIMATES & APPROVALS') ?></th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
@@ -1542,7 +1534,7 @@ if (!empty($percent)) {
                                 </tr>
                                 <tr>
                                     <th scope="col">C</th>
-                                    <th scope="col">EXECUTION WORKS</th>
+                                    <th scope="col"><?= __('EXECUTION WORKS') ?></th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
@@ -1588,15 +1580,15 @@ if (!empty($percent)) {
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th scope="col" class="text-start" colspan="3">Form C</th>
+                                    <th scope="col" class="text-start" colspan="3"><?= __('Form C') ?></th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" class="text-center" colspan="3">CHECKLIST FOR SUBMISSION OF PROPOSAL</th>
+                                    <th scope="col" class="text-center" colspan="3"><?= __('CHECKLIST FOR SUBMISSION OF PROPOSAL') ?></th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" style="width: 5%;">Sr. No</th>
-                                    <th scope="col" class="text-center" style="width: 65%;">Points</th>
-                                    <th scope="col" class="text-center" style="width: 30%;">Details</th>
+                                    <th scope="col" style="width: 5%;"><?= __('Sr. No') ?></th>
+                                    <th scope="col" class="text-center" style="width: 65%;"><?= __('Points') ?></th>
+                                    <th scope="col" class="text-center" style="width: 30%;"><?= __('Details') ?></th>
                                 </tr>
                                 <tr>
                                     <td>1</td>
@@ -1705,11 +1697,11 @@ if (!empty($percent)) {
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th scope="col" class="text-start" colspan="3" style="width: 100%;">Form D</th>
+                                    <th scope="col" class="text-start" colspan="3" style="width: 100%;"><?= __('Form D') ?></th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" colspan="1" style="width: 5%;">Sr. No</th>
-                                    <th scope="col" class="text-center" colspan="2" style="width: 95%;">Summary Sheet for the Proposal</th>
+                                    <th scope="col" colspan="1" style="width: 5%;"><?= __('Sr. No') ?></th>
+                                    <th scope="col" class="text-center" colspan="2" style="width: 95%;"><?= __('Summary Sheet for the Proposal') ?></th>
                                 </tr>
                                 <tr>
                                     <td >1</td>
@@ -1720,7 +1712,7 @@ if (!empty($percent)) {
                                     <td>2</td>
                                     <td>Project Description</td>
                                     <td>
-                                        <textarea aria-label='(Write a brief description of project)' class="form-control" id="formd_project_description" name="formd_project_description" placeholder="(Write a brief description of project)"><?php echo $return['formd_project_description']??'';  ?></textarea>
+                                        <textarea aria-label='(Write a brief description of project)' class="form-control" id="formd_project_description" name="formd_project_description" placeholder="<?= __('(Write a brief description of project)') ?>"><?php echo $return['formd_project_description']??'';  ?></textarea>
                                     </td>
                                 </tr>
                                 <tr><td>3</td>
@@ -1755,7 +1747,7 @@ if (!empty($percent)) {
 
                                     <td>Experience of the Organisation</td>
                                     <td>
-                                        <textarea aria-label='(Mention no. of years of experience &amp; short brief about other projects executed)' class="form-control" id="organisation_experience" name="organisation_experience" placeholder="(Mention no. of years of experience & short brief about other projects executed)"><?php echo $return['organisation_experience']??'';  ?></textarea>
+                                        <textarea aria-label='(Mention no. of years of experience &amp; short brief about other projects executed)' class="form-control" id="organisation_experience" name="organisation_experience" placeholder="<?= __('(Mention no. of years of experience & short brief about other projects executed)') ?>"><?php echo $return['organisation_experience']??'';  ?></textarea>
                                     </td>
                                 </tr>
                                 <tr><td>8</td>
@@ -1843,13 +1835,13 @@ if (!empty($percent)) {
                                 <tr><td>19</td>
                                     <td>Requirement of any approval from local bodies/government/municipality or any statutory body</td>
                                     <td>
-                                        <input aria-label='Yes or No, If yes, give details in short' class="form-control" type="text" id="approval_requirement" name="approval_requirement" placeholder="Yes or No, If yes, give details in short" value="<?php echo $return['approval_requirement']??'';  ?>" />
+                                        <input aria-label='Yes or No, If yes, give details in short' class="form-control" type="text" id="approval_requirement" name="approval_requirement" placeholder="<?= __('Yes or No, If yes, give details in short') ?>" value="<?php echo $return['approval_requirement']??'';  ?>" />
                                     </td>
                                 </tr>
                                 <tr><td>20</td>
                                     <td>Whether similar projects executed earlier?</td>
                                     <td>
-                                        <input aria-label='Yes or No, If yes, give details in short' class="form-control" type="text" id="similar_projects" name="similar_projects" placeholder="Yes or No, If yes, give details in short"  value="<?php echo $return['similar_projects']??'';  ?>"/>
+                                        <input aria-label='Yes or No, If yes, give details in short' class="form-control" type="text" id="similar_projects" name="similar_projects" placeholder="<?= __('Yes or No, If yes, give details in short') ?>"  value="<?php echo $return['similar_projects']??'';  ?>"/>
                                     </td>
                                 </tr>
                                 <tr><td>21</td>
@@ -1892,24 +1884,24 @@ if (!empty($percent)) {
                             <table class="table table-bordered" id="form_e_table">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="text-start" colspan="8">Form E</th>
+                                        <th scope="col" class="text-start" colspan="8"><?= __('Form E') ?></th>
                                     </tr>
                                     <tr>
                                         <th scope="col" class="text-start" colspan="8">
-                                            <h3 class="f-18 f-w-600 mt-4 text-center text-underline">Track Record of Projects</h3>
+                                            <h3 class="f-18 f-w-600 mt-4 text-center text-underline"><?= __('Track Record of Projects') ?></h3>
                                             <p class="text-center f-14">(Kindly mention projects undertaken in the last 3 years.<br />If an organisation is existing for 3 years, track record from inception till date is required)</p>
                                         </th>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Sr. No.</th>
-                                        <th scope="col">Project Description</th>
-                                        <th scope="col">Focus Area</th>
-                                        <th scope="col">Location</th>
-                                        <th scope="col">Period (To - From)</th>
-                                        <th scope="col">Value in INR Lakhs</th>
-                                        <th scope="col">Number of Beneficiaries</th>
-                                        <th scope="col">Partner Name (Funding Agency)</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('Sr. No.') ?></th>
+                                        <th scope="col"><?= __('Project Description') ?></th>
+                                        <th scope="col"><?= __('Focus Area') ?></th>
+                                        <th scope="col"><?= __('Location') ?></th>
+                                        <th scope="col"><?= __('Period (To - From)') ?></th>
+                                        <th scope="col"><?= __('Value in INR Lakhs') ?></th>
+                                        <th scope="col"><?= __('Number of Beneficiaries') ?></th>
+                                        <th scope="col"><?= __('Partner Name (Funding Agency)') ?></th>
+                                        <th scope="col"><?= __('Action') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1938,7 +1930,7 @@ if (!empty($percent)) {
         <?php endif; ?>
                                 </tbody>
                             </table>
-                            <button type="button" class="btn btn-primary mt-3" id="add_form_e_row">Add More</button>
+                            <button type="button" class="btn btn-primary mt-3" id="add_form_e_row"><?= __('Add More') ?></button>
                         </div>
                     </div>
                 </div>
@@ -1946,7 +1938,7 @@ if (!empty($percent)) {
                 <div id="form_f" >
                 <div class="mt-3 enclosures">
 
-                    <h3 class="f-18 f-w-600 mt-4 text-center text-underline mb-4">Declaration</h3>
+                    <h3 class="f-18 f-w-600 mt-4 text-center text-underline mb-4"><?= __('Declaration') ?></h3>
                     <p class="f-14">I / We hereby declare and certify that all the information given in the application form and in the documents submitted are true and correct to the best of my knowledge.</p>
                     <p class="f-14">I / We acknowledge that in case of misrepresentation of information or furnishing of false information, my application is liable to be rejected and /or approved project is be liable to be terminated by BPCL at any stage.</p>
                     <p class="f-14">I / We further declare and certify that our organisation / company / group of companies has / have not been blacklisted or been put on the holiday list by any of the Public Sector Undertakings in India or Statutory authority or Government.</p>
@@ -1955,7 +1947,7 @@ if (!empty($percent)) {
                             <span class="f-14 f-w-600">Signature</span>
                         </div>
                         <div class="col-lg-3">
-                            <input aria-label='Signature...' type="text" class="form-control" id="signature" name="signature" placeholder="Signature..." value="<?php echo $return['signature']??'';  ?>">
+                            <input aria-label='Signature...' type="text" class="form-control" id="signature" name="signature" placeholder="<?= __('Signature...') ?>" value="<?php echo $return['signature']??'';  ?>">
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -1963,7 +1955,7 @@ if (!empty($percent)) {
                             <span class="f-14 f-w-600">Name</span>
                         </div>
                         <div class="col-lg-3">
-                            <input aria-label='Name...' type="text" class="form-control" id="name" name="name" placeholder="Name..." value="<?php echo $return['name']??'';  ?>">
+                            <input aria-label='Name...' type="text" class="form-control" id="name" name="name" placeholder="<?= __('Name...') ?>" value="<?php echo $return['name']??'';  ?>">
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -1971,7 +1963,7 @@ if (!empty($percent)) {
                             <span class="f-14 f-w-600">Designation</span>
                         </div>
                         <div class="col-lg-3">
-                            <input aria-label='Designation...' type="text" class="form-control" id="designation" name="designation" placeholder="Designation..." value="<?php echo $return['designation']??'';  ?>">
+                            <input aria-label='Designation...' type="text" class="form-control" id="designation" name="designation" placeholder="<?= __('Designation...') ?>" value="<?php echo $return['designation']??'';  ?>">
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -1979,7 +1971,7 @@ if (!empty($percent)) {
                             <span class="f-14 f-w-600">Seal of the Organisation</span>
                         </div>
                         <div class="col-lg-3">
-                            <input aria-label='Seal of the Organisation...' type="file" class="form-control" id="organisation_seal" name="organisation_seal" placeholder="Seal of the Organisation...">
+                            <input aria-label='Seal of the Organisation...' type="file" class="form-control" id="organisation_seal" name="organisation_seal" placeholder="<?= __('Seal of the Organisation...') ?>">
                             <input type="hidden" name="organisation_seal_old"  value="<?php echo $return['organisation_seal']; ?>" />
                         </div>
                         <div class="col-lg-1">
@@ -1992,10 +1984,10 @@ if (!empty($percent)) {
 
                 <div class="row">
                     <div class="col-lg-6 mt-5">
-                        <button type="button" class="btn btn-primary waves-effect waves-light m-r-30 mt-3 previous_open">Previous</button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light m-r-30 mt-3 previous_open"><?= __('Previous') ?></button>
                     </div>
                     <div class="col-lg-6 mt-5">
-                        <button class="btn btn-primary mt-3 float-end" type="submit">Save</button>
+                        <button class="btn btn-primary mt-3 float-end" type="submit"><?= __('Save') ?></button>
                     </div>
                 </div>
             </div>

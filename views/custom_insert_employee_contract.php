@@ -84,7 +84,7 @@ $job_titles = json_decode($configesponse,1);
 
 
          <div class="card-header">
-    <h5>Contract</h5>
+    <h5><?= __('Contract') ?></h5>
 
     <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
@@ -101,20 +101,20 @@ $job_titles = json_decode($configesponse,1);
             <div class="col-lg-12">
                <div class="form-group row mt-3">
 
-                   <span class="col-lg-2 col-form-label text-lg-right">Job Title:</span>
+                   <span class="col-lg-2 col-form-label text-lg-right"><?= __('Job Title:') ?></span>
                   <div class="col-lg-3">
                      <select aria-label="Job Title" class="form-control form-select js-example-basic-single" name="job_title">
-                        <option> Select Any One</option>
+                        <option><?= __('Select Any One') ?></option>
                         <?php foreach($job_titles as $job_title){ ?>
                            <option <?php if($role['job_title'] == $job_title['id']){ ?> selected <?php
 } ?> value="<?php echo $job_title['id'] ?>"><?php echo $job_title['job_title'] ?></option>
                         <?php } ?>
                      </select>
                   </div>
-                  <span class="col-lg-2 col-form-label text-lg-right">Contract Type:</span>
+                  <span class="col-lg-2 col-form-label text-lg-right"><?= __('Contract Type:') ?></span>
                   <div class="col-lg-3">
                      <select aria-label="Contract Type" class="form-control form-select js-example-basic-single" name="contract_type">
-                        <option> Select Any One</option>
+                        <option><?= __('Select Any One') ?></option>
                         <?php foreach($contract_types as $contract_type){ ?>
                            <option <?php if($role['contract_type'] == $contract_type['id']){ ?> selected <?php
 } ?> value="<?php echo $contract_type['id'] ?>"><?php echo $contract_type['name'] ?></option>
@@ -151,14 +151,14 @@ $job_titles = json_decode($configesponse,1);
                         <div class="col-lg-6">
                            <h3> Salary and Advantages</h3>
                            <div class="form-group row mt-3">
-                              <span class="form-label text-lg-left">Wage:</span>
+                              <span class="form-label text-lg-left"><?= __('Wage:') ?></span>
                               <div class="">
                                <input aria-label="Wage" type="text" class="form-control" placeholder="" name="wage" value="<?php echo $role['wage']; ?>" />
                               </div>
                            </div>
                            <div class="form-group row">
                               <div class="col-lg-12">
-                               <span class="form-label">Advantages:</span>
+                               <span class="form-label"><?= __('Advantages:') ?></span>
                                     <textarea aria-label="Advantages" class="form-control" rows="7" name="advantages"><?php echo $role['advantages']; ?></textarea>
                               </div>
                            </div>
@@ -166,7 +166,7 @@ $job_titles = json_decode($configesponse,1);
                         <div class="col-lg-6">
                            <h3> Duration</h3>
                            <div class="form-group row mt-3">
-                              <span class="form-label">Trial Period Duration:</span>
+                              <span class="form-label"><?= __('Trial Period Duration:') ?></span>
                               <div class="col-lg-5">
                                  <?php $date_pic = fromDate($role['trial_period_duration_from']); ?>
                                  <input aria-label="Trial Period Duration From" type="date" class="form-control" name="trial_period_duration_from" value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>"  id="kt_datepicker_31" />
@@ -181,7 +181,7 @@ $job_titles = json_decode($configesponse,1);
                               </div>
                            </div>
                            <div class="form-group row mt-3">
-                              <span class="form-label">Duration:</span>
+                              <span class="form-label"><?= __('Duration:') ?></span>
                               <div class="col-lg-5">
 
                                     <?php $date_pic = fromDate($role['duration_from']); ?>
@@ -198,10 +198,10 @@ $job_titles = json_decode($configesponse,1);
                               </div>
                            </div>
                            <div class="form-group row mt-3">
-                              <span class="col-lg-4 col-form-label text-lg-left">Working Schedules:</span>
+                              <span class="col-lg-4 col-form-label text-lg-left"><?= __('Working Schedules:') ?></span>
                               <div class="col-lg-8">
                                  <select aria-label="Working Schedule" class="form-control form-select js-example-basic-single" name="working_schedule">
-                                    <option> Select Any One</option>
+                                    <option><?= __('Select Any One') ?></option>
                                     <?php foreach($working_schedules as $working_schedule){ ?>
                                        <option <?php if($role['working_schedule'] == $working_schedule['id']){ ?> selected <?php
 } ?> value="<?php echo $working_schedule['id'] ?>"><?php echo $working_schedule['name'] ?></option>
@@ -215,17 +215,17 @@ $job_titles = json_decode($configesponse,1);
                   <div class="tab-pane fade" id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
                      <div class="col-lg-12">
                         <div class="form-group row mt-3">
-                           <span class="col-lg-2 col-form-label text-lg-right">Visa No:</span>
+                           <span class="col-lg-2 col-form-label text-lg-right"><?= __('Visa No:') ?></span>
                            <div class="col-lg-3">
                             <input aria-label="Visa No" type="text" class="form-control" name="visa_no" placeholder="" value="<?php echo $role['visa_no']; ?>" />
                            </div>
-                           <span class="col-lg-2 col-form-label text-lg-right">Work Permit No:</span>
+                           <span class="col-lg-2 col-form-label text-lg-right"><?= __('Work Permit No:') ?></span>
                            <div class="col-lg-3">
                             <input aria-label="Work Permit No" type="text" class="form-control" name="work_permit_no" value="<?php echo $role['work_permit_no']; ?>" />
                            </div>
                         </div>
                         <div class="form-group row mt-3">
-                           <span class="col-lg-2 col-form-label text-lg-right">Visa Expire :</span>
+                           <span class="col-lg-2 col-form-label text-lg-right"><?= __('Visa Expire :') ?></span>
                            <div class="col-lg-3">
                                  <div class="input-group date">
                                     <?php $date_pic = fromDate($role['visa_expire']); ?>

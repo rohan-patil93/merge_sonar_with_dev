@@ -22,7 +22,7 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label class="form-label" for="feasibility_type_id">Feasibility Type</label>
+                    <label class="form-label" for="feasibility_type_id"><?php echo __('Feasibility Type'); ?></label>
                     <select class="form-select js-example-basic-single form-control" id="feasibility_type_id"
                         onchange="loadFeasibilityFields()">
                         <?php foreach ($feasibility_types_res as $id => $name) { ?>
@@ -38,28 +38,28 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
 
         <form id="feasibilityForm">
             <div class="col-lg-12 m-t-10 m-b-10 ">
-                <h5 style="font-weight: bold;">Feasibility Requirement</h5>
+                <h5 style="font-weight: bold;"><?php echo __('Feasibility Requirement'); ?></h5>
             </div>
             <div id="dynamic_fields" class="row"></div>
 
 
             <div class="row mt-4">
                 <div class="col-lg-12 m-t-10 m-b-10 ">
-                    <h5 style="font-weight: bold;">Evaluation</h5>
+                    <h5 style="font-weight: bold;"><?php echo __('Evaluation'); ?></h5>
                 </div>
 
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <span class="form-label">Evaluation Date <span class='text-danger'>*</span></span>
-                        <input aria-label="Evaluation Date" type="date" class="form-control" name="evaluation_date"
+                        <span class="form-label"><?php echo __('Evaluation Date'); ?> <span class='text-danger'>*</span></span>
+                        <input aria-label="<?php echo __('Evaluation Date'); ?>" type="date" class="form-control" name="evaluation_date"
                             value="<?php echo isset($data['evaluation_date']) ? htmlspecialchars($data['evaluation_date']) : ''; ?>">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <span class="form-label">Evaluation By <span class='text-danger'>*</span></span>
-                        <select aria-label="Evaluated By" class="form-select js-example-basic-single form-control" name="evaluated_by">
-                            <option value="">Select Evaluator</option>
+                        <span class="form-label"><?php echo __('Evaluation By'); ?> <span class='text-danger'>*</span></span>
+                        <select aria-label="<?php echo __('Evaluated By'); ?>" class="form-select js-example-basic-single form-control" name="evaluated_by">
+                            <option value=""><?php echo __('Select Evaluator'); ?></option>
                             <?php foreach ($users_res as $id => $name) { ?>
                                 <option value="<?php echo $id; ?>" <?php
                                                                     if (isset($data['evaluated_by'])) {
@@ -76,64 +76,64 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <span class="form-label">Start Date <span class='text-danger'>*</span></span>
-                        <input aria-label="Start Date" type="date" class="form-control" name="start_date"
+                        <span class="form-label"><?php echo __('Start Date'); ?> <span class='text-danger'>*</span></span>
+                        <input aria-label="<?php echo __('Start Date'); ?>" type="date" class="form-control" name="start_date"
                             value="<?php echo isset($data['start_date']) ? htmlspecialchars($data['start_date']) : ''; ?>">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <span class="form-label">End Date <span class='text-danger'>*</span></span>
-                        <input aria-label="End Date" type="date" class="form-control" name="end_date"
+                        <span class="form-label"><?php echo __('End Date'); ?> <span class='text-danger'>*</span></span>
+                        <input aria-label="<?php echo __('End Date'); ?>" type="date" class="form-control" name="end_date"
                             value="<?php echo isset($data['end_date']) ? htmlspecialchars($data['end_date']) : ''; ?>"
                             onchange="validateEndDate()">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <span class="form-label">Estimated Budget <span class='text-danger'>*</span></span>
-                        <input aria-label="Estimated Budget" type="number" class="form-control text-right" name="estimated_budget"
+                        <span class="form-label"><?php echo __('Estimated Budget'); ?> <span class='text-danger'>*</span></span>
+                        <input aria-label="<?php echo __('Estimated Budget'); ?>" type="number" class="form-control text-right" name="estimated_budget"
                             value="<?php echo isset($data['estimated_budget']) ? htmlspecialchars($data['estimated_budget']) : ''; ?>">
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-12 m-t-10 m-b-10 ">
-                <h5 style="font-weight: bold;">Bill of Materials (BOM)</h5>
+                <h5 style="font-weight: bold;"><?php echo __('Bill of Materials (BOM)'); ?></h5>
             </div>
             <table class="table " id="bomTable">
                 <thead>
                     <tr>
-                        <th scope="col">Item Name <span class='text-danger'>*</span></th>
-                        <th scope="col">Unit Of Measurement</th>
-                        <th scope="col">Quantity <span class='text-danger'>*</span></th>
-                        <th scope="col">Cost</th>
-                        <th scope="col">Planned Required By</th>
-                        <th scope="col">Planned Returned By</th>
-                        <th scope="col">Actual Required By</th>
-                        <th scope="col">Actual Returned By</th>
-                        <th scope="col">Action</th>
+                        <th scope="col"><?php echo __('Item Name'); ?> <span class='text-danger'>*</span></th>
+                        <th scope="col"><?php echo __('Unit Of Measurement'); ?></th>
+                        <th scope="col"><?php echo __('Quantity'); ?> <span class='text-danger'>*</span></th>
+                        <th scope="col"><?php echo __('Cost'); ?></th>
+                        <th scope="col"><?php echo __('Planned Required By'); ?></th>
+                        <th scope="col"><?php echo __('Planned Returned By'); ?></th>
+                        <th scope="col"><?php echo __('Actual Required By'); ?></th>
+                        <th scope="col"><?php echo __('Actual Returned By'); ?></th>
+                        <th scope="col"><?php echo __('Action'); ?></th>
                     </tr>
                 </thead>
                 <tbody id="bomTableBody">
                     <?php if (count((array) $feasibility_bom_res) > 0) {
                         foreach ($feasibility_bom_res as $row) { ?>
                             <tr>
-                                <td><input aria-label="Item Name[]" type="text" class="form-control" name="item_name[]"
+                                <td><input aria-label="<?php echo __('Item Name[]'); ?>" type="text" class="form-control" name="item_name[]"
                                         value="<?= htmlspecialchars($row['item_name']) ?>"></td>
-                                <td><input aria-label="Unit[]" type="text" class="form-control" name="unit[]"
+                                <td><input aria-label="<?php echo __('Unit[]'); ?>" type="text" class="form-control" name="unit[]"
                                         value="<?= htmlspecialchars($row['unit']) ?>"></td>
-                                <td><input aria-label="Quantity[]" type="number" class="form-control text-right" name="quantity[]"
+                                <td><input aria-label="<?php echo __('Quantity[]'); ?>" type="number" class="form-control text-right" name="quantity[]"
                                         value="<?= htmlspecialchars($row['quantity']) ?>"></td>
-                                <td><input aria-label="Cost[]" style="width:5.5rem;" type="number" class="form-control text-right" name="cost[]"
+                                <td><input aria-label="<?php echo __('Cost[]'); ?>" style="width:5.5rem;" type="number" class="form-control text-right" name="cost[]"
                                         value="<?= htmlspecialchars($row['estimated_cost']) ?>"></td>
-                                <td><input aria-label="Planned Request By[]" type="date" class="form-control" name="planned_request_by[]"
+                                <td><input aria-label="<?php echo __('Planned Request By[]'); ?>" type="date" class="form-control" name="planned_request_by[]"
                                         value="<?= htmlspecialchars($row['planned_request_by']) ?>"></td>
-                                <td><input aria-label="Planned Return By[]" type="date" class="form-control" name="planned_return_by[]"
+                                <td><input aria-label="<?php echo __('Planned Return By[]'); ?>" type="date" class="form-control" name="planned_return_by[]"
                                         value="<?= htmlspecialchars($row['planned_return_by']) ?>"></td>
-                                <td><input aria-label="Actual Request By[]" type="date" class="form-control" name="actual_request_by[]"
+                                <td><input aria-label="<?php echo __('Actual Request By[]'); ?>" type="date" class="form-control" name="actual_request_by[]"
                                         value="<?= htmlspecialchars($row['actual_request_by']) ?>"></td>
-                                <td><input aria-label="Actual Return By[]" type="date" class="form-control" name="actual_return_by[]"
+                                <td><input aria-label="<?php echo __('Actual Return By[]'); ?>" type="date" class="form-control" name="actual_return_by[]"
                                         value="<?= htmlspecialchars($row['actual_return_by']) ?>"></td>
                                 <td><button type="button" class="btn btn-danger btn-sm remove-row"><i
                                             class="fa fa-trash"></i></button></td>
@@ -141,15 +141,15 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
                         <?php }
                     } else { ?>
                         <tr>
-                            <td><input aria-label="Item Name[]" type="text" class="form-control" name="item_name[]" /></td>
-                            <td><input aria-label="Unit[]" type="text" class="form-control" name="unit[]" /></td>
-                            <td><input aria-label="Quantity[]" type="number" class="form-control text-right" name="quantity[]" /></td>
-                            <td><input aria-label="Cost[]" style="width:5.5rem;" type="number" class="form-control text-right" name="cost[]" />
+                            <td><input aria-label="<?php echo __('Item Name[]'); ?>" type="text" class="form-control" name="item_name[]" /></td>
+                            <td><input aria-label="<?php echo __('Unit[]'); ?>" type="text" class="form-control" name="unit[]" /></td>
+                            <td><input aria-label="<?php echo __('Quantity[]'); ?>" type="number" class="form-control text-right" name="quantity[]" /></td>
+                            <td><input aria-label="<?php echo __('Cost[]'); ?>" style="width:5.5rem;" type="number" class="form-control text-right" name="cost[]" />
                             </td>
-                            <td><input aria-label="Planned Request By[]" type="date" class="form-control" name="planned_request_by[]"></td>
-                            <td><input aria-label="Planned Return By[]" type="date" class="form-control" name="planned_return_by[]"></td>
-                            <td><input aria-label="Actual Request By[]" type="date" class="form-control" name="actual_request_by[]"></td>
-                            <td><input aria-label="Actual Return By[]" type="date" class="form-control" name="actual_return_by[]"></td>
+                            <td><input aria-label="<?php echo __('Planned Request By[]'); ?>" type="date" class="form-control" name="planned_request_by[]"></td>
+                            <td><input aria-label="<?php echo __('Planned Return By[]'); ?>" type="date" class="form-control" name="planned_return_by[]"></td>
+                            <td><input aria-label="<?php echo __('Actual Request By[]'); ?>" type="date" class="form-control" name="actual_request_by[]"></td>
+                            <td><input aria-label="<?php echo __('Actual Return By[]'); ?>" type="date" class="form-control" name="actual_return_by[]"></td>
                             <td><button type="button" class="btn btn-danger btn-sm remove-row"><i
                                         class="fa fa-trash"></i></button></td>
                         </tr>
@@ -160,41 +160,41 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
                     <tr>
                         <td colspan="5">
                             <button class="btn btn-primary" type="button" id="addBomRowBtn"><i class="fa fa-plus"></i>
-                                Add More</button>
+                                <?php echo __('Add More'); ?></button>
                         </td>
                     </tr>
                 </tfoot>
             </table>
             <div class="row mt-4">
                 <div class="col-lg-12 m-t-10 m-b-10">
-                    <h5 style="font-weight: bold;">Feasibility Checklist</h5>
+                    <h5 style="font-weight: bold;"><?php echo __('Feasibility Checklist'); ?></h5>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="checklistTable">
                         <thead>
                             <tr>
-                                <th scope="col">Checklist Item <span class='text-danger'>*</span></th>
-                                <th scope="col">Type <span class='text-danger'>*</span></th>
-                                <th scope="col">Is Done?</th>
-                                <th scope="col">Comment</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"><?php echo __('Checklist Item'); ?> <span class='text-danger'>*</span></th>
+                                <th scope="col"><?php echo __('Type'); ?> <span class='text-danger'>*</span></th>
+                                <th scope="col"><?php echo __('Is Done?'); ?></th>
+                                <th scope="col"><?php echo __('Comment'); ?></th>
+                                <th scope="col"><?php echo __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody id="checklistTableBody">
                             <tr>
-                                <td><input aria-label="Checklist Item Name[]" type="text" class="form-control" name="checklist_item_name[]"></td>
+                                <td><input aria-label="<?php echo __('Checklist Item Name[]'); ?>" type="text" class="form-control" name="checklist_item_name[]"></td>
                                 <td>
-                                    <select aria-label="Checklist Type[]" class="form-select js-example-basic-single " name="checklist_type[]">
-                                        <option value="">Select Type</option>
-                                        <option value="technical">Technical</option>
-                                        <option value="legal">Legal</option>
-                                        <option value="safety">Safety</option>
-                                        <option value="operational">Operational</option>
-                                        <option value="others">Others</option>
+                                    <select aria-label="<?php echo __('Checklist Type[]'); ?>" class="form-select js-example-basic-single " name="checklist_type[]">
+                                        <option value=""><?php echo __('Select Type'); ?></option>
+                                        <option value="technical"><?php echo __('Technical'); ?></option>
+                                        <option value="legal"><?php echo __('Legal'); ?></option>
+                                        <option value="safety"><?php echo __('Safety'); ?></option>
+                                        <option value="operational"><?php echo __('Operational'); ?></option>
+                                        <option value="others"><?php echo __('Others'); ?></option>
                                     </select>
                                 </td>
-                                <td><input aria-label="Checklist Is Done[]" type="checkbox" class="js-single" name="checklist_is_done[]" value="1"></td>
-                                <td><input aria-label="Checklist Comment[]" type="text" class="form-control" name="checklist_comment[]"></td>
+                                <td><input aria-label="<?php echo __('Checklist Is Done[]'); ?>" type="checkbox" class="js-single" name="checklist_is_done[]" value="1"></td>
+                                <td><input aria-label="<?php echo __('Checklist Comment[]'); ?>" type="text" class="form-control" name="checklist_comment[]"></td>
                                 <td><button type="button" class="btn btn-danger btn-sm remove-row"><i
                                             class="fa fa-trash"></i></button></td>
                             </tr>
@@ -204,7 +204,7 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
                             <tr>
                                 <td colspan="5">
                                     <button type="button" class="btn btn-primary" id="addChecklistRowBtn"><i
-                                            class="fa fa-plus"></i> Add More</button>
+                                            class="fa fa-plus"></i> <?php echo __('Add More'); ?></button>
                                 </td>
                             </tr>
                         </tfoot>
@@ -213,9 +213,9 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
             </div>
             <div class="row mt-4">
                 <div class="col-lg-12">
-                    <h4 class="mb-3">Upload Supporting Documents</h4>
+                    <h4 class="mb-3"><?php echo __('Upload Supporting Documents'); ?></h4>
                     <div class="mb-3">
-                        <input aria-label="File[]" type="file" class="form-control" name="file[]" multiple>
+                        <input aria-label="<?php echo __('File[]'); ?>" type="file" class="form-control" name="file[]" multiple>
                         <input type="hidden" name="feasibility_id" id="feasibility_id"
                             value="<?php echo htmlspecialchars($feasibility_id); ?>">
                     </div>
@@ -232,15 +232,15 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="optionsModalLabel">Edit Options</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="optionsModalLabel"><?php echo __('Edit Options'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
             <div class="modal-body" id="optionsModalBody">
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="addOptionBtn">Add New Option</button>
-                <button type="button" class="btn btn-primary" id="updateOptionsBtn">Update</button>
+                <button type="button" class="btn btn-secondary" id="addOptionBtn"><?php echo __('Add New Option'); ?></button>
+                <button type="button" class="btn btn-primary" id="updateOptionsBtn"><?php echo __('Update'); ?></button>
             </div>
         </div>
     </div>
@@ -254,14 +254,14 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
             const tbody = document.getElementById('bomTableBody');
             const newRow = document.createElement('tr');
             newRow.innerHTML = `
-            <td><input aria-label="Item Name[]" type="text" class="form-control" name="item_name[]"  /></td>
-            <td><input aria-label="Unit[]" type="text" class="form-control" name="unit[]" /></td>
-            <td><input aria-label="Quantity[]" type="number" class="form-control text-right" name="quantity[]"  /></td>
-            <td><input aria-label="Cost[]" style="width:5.5rem;" type="number" class="form-control text-right" name="cost[]" /></td>
-            <td><input aria-label="Planned Request By[]" type="date" class="form-control" name="planned_request_by[]" ></td>
-            <td><input aria-label="Planned Return By[]" type="date" class="form-control" name="planned_return_by[]" ></td>
-            <td><input aria-label="Actual Request By[]" type="date" class="form-control" name="actual_request_by[]" ></td>
-            <td><input aria-label="Actual Return By[]" type="date" class="form-control" name="actual_return_by[]" ></td>
+            <td><input aria-label="<?php echo __('Item Name[]'); ?>" type="text" class="form-control" name="item_name[]"  /></td>
+            <td><input aria-label="<?php echo __('Unit[]'); ?>" type="text" class="form-control" name="unit[]" /></td>
+            <td><input aria-label="<?php echo __('Quantity[]'); ?>" type="number" class="form-control text-right" name="quantity[]"  /></td>
+            <td><input aria-label="<?php echo __('Cost[]'); ?>" style="width:5.5rem;" type="number" class="form-control text-right" name="cost[]" /></td>
+            <td><input aria-label="<?php echo __('Planned Request By[]'); ?>" type="date" class="form-control" name="planned_request_by[]" ></td>
+            <td><input aria-label="<?php echo __('Planned Return By[]'); ?>" type="date" class="form-control" name="planned_return_by[]" ></td>
+            <td><input aria-label="<?php echo __('Actual Request By[]'); ?>" type="date" class="form-control" name="actual_request_by[]" ></td>
+            <td><input aria-label="<?php echo __('Actual Return By[]'); ?>" type="date" class="form-control" name="actual_return_by[]" ></td>
             <td><button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-trash"></i></button></td>
         `;
             tbody.appendChild(newRow);
@@ -277,19 +277,19 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
             const tbody = document.getElementById('checklistTableBody');
             const newRow = document.createElement('tr');
             newRow.innerHTML = `
-            <td><input aria-label="Checklist Item Name[]" type="text" class="form-control" name="checklist_item_name[]" ></td>
+            <td><input aria-label="<?php echo __('Checklist Item Name[]'); ?>" type="text" class="form-control" name="checklist_item_name[]" ></td>
             <td>
-                <select aria-label="Checklist Type[]" class="form-select js-example-basic-single" name="checklist_type[]" >
-                    <option value="">Select Type</option>
-                    <option value="technical">Technical</option>
-                    <option value="legal">Legal</option>
-                    <option value="safety">Safety</option>
-                    <option value="operational">Operational</option>
-                    <option value="others">Others</option>
+                <select aria-label="<?php echo __('Checklist Type[]'); ?>" class="form-select js-example-basic-single" name="checklist_type[]" >
+                    <option value=""><?php echo __('Select Type'); ?></option>
+                    <option value="technical"><?php echo __('Technical'); ?></option>
+                    <option value="legal"><?php echo __('Legal'); ?></option>
+                    <option value="safety"><?php echo __('Safety'); ?></option>
+                    <option value="operational"><?php echo __('Operational'); ?></option>
+                    <option value="others"><?php echo __('Others'); ?></option>
                 </select>
             </td>
-            <td><input aria-label="Checklist Is Done[]" type="checkbox" class="js-single" name="checklist_is_done[]" value="1"></td>
-            <td><input aria-label="Checklist Comment[]" type="text" class="form-control" name="checklist_comment[]"></td>
+            <td><input aria-label="<?php echo __('Checklist Is Done[]'); ?>" type="checkbox" class="js-single" name="checklist_is_done[]" value="1"></td>
+            <td><input aria-label="<?php echo __('Checklist Comment[]'); ?>" type="text" class="form-control" name="checklist_comment[]"></td>
             <td><button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-trash"></i></button></td>
         `;
             tbody.appendChild(newRow);
@@ -322,39 +322,39 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
         const newRow = `
         <tr>
             <td style="width: 20%;">
-                <input aria-label="Field Label[]" type='text' class='form-control' name='field_label[]' oninput='renderDynamicPreview()'>
+                <input aria-label="<?php echo __('Field Label[]'); ?>" type='text' class='form-control' name='field_label[]' oninput='renderDynamicPreview()'>
                 <input type='hidden' name='code[]' value='${code}'>
                 <input type='hidden' name='is_active[]' value='0'>
             </td>
             <td style="width: 20%;">
-                <select aria-label="Field Type[]" class='form-select field-type-select' name='field_type[]' onchange='handleFieldTypeChange(this); renderDynamicPreview()'>
-                    <option value='text'>Text</option>
-                    <option value='number'>Number</option>
-                    <option value='date'>Date</option>
-                    <option value='select'>Select</option>
-                    <option value='radio'>Radio</option>
+                <select aria-label="<?php echo __('Field Type[]'); ?>" class='form-select field-type-select' name='field_type[]' onchange='handleFieldTypeChange(this); renderDynamicPreview()'>
+                    <option value='text'><?php echo __('Text'); ?></option>
+                    <option value='number'><?php echo __('Number'); ?></option>
+                    <option value='date'><?php echo __('Date'); ?></option>
+                    <option value='select'><?php echo __('Select'); ?></option>
+                    <option value='radio'><?php echo __('Radio'); ?></option>
                 </select>
             </td>
             <td style="width: 20%;">
-                <input aria-label="Field Value[]" type='text' class='form-control field-value-input' name='field_value[]' oninput='renderDynamicPreview()'>
-                <button type='button' class='btn btn-sm btn-success mt-3 add-options-btn' style='display:none; z-index:2;' onclick='openOptionsModal(this)'>Edit Options</button>
+                <input aria-label="<?php echo __('Field Value[]'); ?>" type='text' class='form-control field-value-input' name='field_value[]' oninput='renderDynamicPreview()'>
+                <button type='button' class='btn btn-sm btn-success mt-3 add-options-btn' style='display:none; z-index:2;' onclick='openOptionsModal(this)'><?php echo __('Edit Options'); ?></button>
             </td>
-            <td style="width: 20%;"><select aria-label="Field Length[]" class='form-select js-example-basic-single' name='field_length[]' onchange='renderDynamicPreview()'>
-                <option value='col-md-1'>col-md-1</option>
-                <option value='col-md-2'>col-md-2</option>
-                <option value='col-md-3'>col-md-3</option>
-                <option value='col-md-4'>col-md-4</option>
-                <option value='col-md-5'>col-md-5</option>
-                <option value='col-md-6' selected>col-md-6</option>
-                <option value='col-md-7'>col-md-7</option>
-                <option value='col-md-8'>col-md-8</option>
-                <option value='col-md-9'>col-md-9</option>
-                <option value='col-md-10'>col-md-10</option>
-                <option value='col-md-11'>col-md-11</option>
-                <option value='col-md-12'>col-md-12</option>
+            <td style="width: 20%;"><select aria-label="<?php echo __('Field Length[]'); ?>" class='form-select js-example-basic-single' name='field_length[]' onchange='renderDynamicPreview()'>
+                <option value='col-md-1'><?php echo __('col-md-1'); ?></option>
+                <option value='col-md-2'><?php echo __('col-md-2'); ?></option>
+                <option value='col-md-3'><?php echo __('col-md-3'); ?></option>
+                <option value='col-md-4'><?php echo __('col-md-4'); ?></option>
+                <option value='col-md-5'><?php echo __('col-md-5'); ?></option>
+                <option value='col-md-6' selected><?php echo __('col-md-6'); ?></option>
+                <option value='col-md-7'><?php echo __('col-md-7'); ?></option>
+                <option value='col-md-8'><?php echo __('col-md-8'); ?></option>
+                <option value='col-md-9'><?php echo __('col-md-9'); ?></option>
+                <option value='col-md-10'><?php echo __('col-md-10'); ?></option>
+                <option value='col-md-11'><?php echo __('col-md-11'); ?></option>
+                <option value='col-md-12'><?php echo __('col-md-12'); ?></option>
             </select></td>
             <td style="width: 10%;">
-                <button type='button' class='btn btn-warning btn-sm toggle-mandatory-btn' onclick='toggleMandatory(this)' data-mandatory='0'>Mandatory</button>
+                <button type='button' class='btn btn-warning btn-sm toggle-mandatory-btn' onclick='toggleMandatory(this)' data-mandatory='0'><?php echo __('Mandatory'); ?></button>
                 <input type='hidden' name='mandatory[]' value='0'>
             </td>
             <td style="width: 10%;"><button type='button' class="btn btn-danger btn-sm" onclick='removeFieldRow(this)'><i class="fa fa-trash"></i></button></td>
@@ -398,7 +398,7 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
         $('#optionsModalBody').empty();
         options.forEach(opt => {
             $('#optionsModalBody').append(`<div class='input-group mb-2 option-row'>
-                <input aria-label="Input field" type='text' class='form-control option-input' value='${opt}'>
+                <input aria-label="<?php echo __('Input field'); ?>" type='text' class='form-control option-input' value='${opt}'>
                 <button type='button' class='btn btn-danger btn-sm remove-option-btn'><i class='fa fa-trash'></i></button>
             </div>`);
         });
@@ -407,7 +407,7 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
 
     $(document).on('click', '#addOptionBtn', function() {
         $('#optionsModalBody').append(`<div class='input-group mb-2 option-row'>
-            <input aria-label="Input field" type='text' class='form-control option-input' value=''>
+            <input aria-label="<?php echo __('Input field'); ?>" type='text' class='form-control option-input' value=''>
             <button type='button' class='btn btn-danger btn-sm remove-option-btn'><i class='fa fa-trash'></i></button>
         </div>`);
     });
@@ -430,7 +430,7 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
         });
         if (hasEmpty) {
             if ($('#optionsModalBody .option-error').length === 0) {
-                $('#optionsModalBody').prepend('<div class="option-error text-danger mb-2">All options are required.</div>');
+                $('#optionsModalBody').prepend('<div class="option-error text-danger mb-2"><?php echo __('All options are required.'); ?></div>');
             }
             return;
         } else {
@@ -469,7 +469,7 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
             html += `<span class='form-label'>${label}${star}</span>`;
 
             if (['text', 'number', 'date'].includes(type)) {
-                html += `<input aria-label="${code}" type='${type}' name='${code}' class='form-control ${type === 'number' ? 'text-right' : ''}' ${requiredAttr}>`;
+                html += `<input aria-label="<?php echo __('${code}'); ?>" type='${type}' name='${code}' class='form-control ${type === 'number' ? 'text-right' : ''}' ${requiredAttr}>`;
             } else if (type === 'select') {
                 let opts = [];
                 try {
@@ -477,7 +477,7 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
                 } catch (e) {
                     opts = [];
                 }
-                html += `<select aria-label="${code}" name='${code}' class='form-select js-example-basic-single' ${requiredAttr}>`;
+                html += `<select aria-label="<?php echo __('${code}'); ?>" name='${code}' class='form-select js-example-basic-single' ${requiredAttr}>`;
                 opts.forEach(v => {
                     html += `<option value='${v}'>${v}</option>`;
                 });
@@ -512,12 +512,12 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
         var current = $btn.data('mandatory');
         if (current == 0) {
             $btn.data('mandatory', 1);
-            $btn.text('Unmandatory');
+            $btn.text(<?php echo json_encode(__('Unmandatory')); ?>);
             $input.val('1');
             $btn.removeClass('btn-warning').addClass('btn-success');
         } else {
             $btn.data('mandatory', 0);
-            $btn.text('Mandatory');
+            $btn.text(<?php echo json_encode(__('Mandatory')); ?>);
             $input.val('0');
             $btn.removeClass('btn-success').addClass('btn-warning');
         }
@@ -590,10 +590,10 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
                 const appName = "<?php echo ucwords($_SESSION['config']['name']); ?>";
                 swal({
                     title: appName,
-                    text: "An error occurred while Saving data.\n\nStatus: " + status + "\nError: " + error,
+                    text: <?php echo json_encode(__('An error occurred while Saving data.\\n\\nStatus:')); ?> + status + "\nError: " + error,
                     type: "error",
                     confirmButtonClass: "btn-danger",
-                    confirmButtonText: "OK"
+                    confirmButtonText: <?php echo json_encode(__('OK')); ?>
                 });
             }
         });
@@ -610,7 +610,7 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
             console.warn("Invalid JSON in requirement_json");
         }
         if (!typeId) {
-            $('#dynamic_fields').html('<div class="text-danger">Please select a feasibility type.</div>');
+            $('#dynamic_fields').html('<div class="text-danger"><?php echo __('Please select a feasibility type.'); ?></div>');
             return;
         }
         $.ajax({
@@ -643,7 +643,7 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
             },
             error: function(xhr, status, error) {
                 console.error("Error loading fields:", error);
-                $('#dynamic_fields').html('<div class="text-danger">Failed to load fields.</div>');
+                $('#dynamic_fields').html('<div class="text-danger"><?php echo __('Failed to load fields.'); ?></div>');
             }
         });
     }

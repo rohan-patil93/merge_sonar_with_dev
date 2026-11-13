@@ -51,20 +51,20 @@ if ($proposal_id > 0) {
     if (($response['status'] ?? '') == 'success') {
         $proposal = $response['proposal'] ?? array();
     } else {
-        $errorMessage = $response['message'] ?? 'Unable to load project details';
+        $errorMessage = $response['message'] ?? __('Unable to load project details');
     }
 } else {
-    $errorMessage = 'Invalid project details';
+    $errorMessage = __('Invalid project details');
 }
 
-$projectTitle = is_array($proposal) ? ($proposal['subject'] ?? 'Project Details') : ($proposal->subject ?? 'Project Details');
+$projectTitle = is_array($proposal) ? ($proposal['subject'] ?? __('Project Details')) : ($proposal->subject ?? __('Project Details'));
 $projectStartDate = is_array($proposal) ? ($proposal['project_start_date'] ?? '') : ($proposal->project_start_date ?? '');
 $projectEndDate = is_array($proposal) ? ($proposal['project_end_date'] ?? '') : ($proposal->project_end_date ?? '');
 ?>
 
 <div class="modal-header">
-    <h5 class="modal-title"><?php echo csrProposalDatesText($projectTitle); ?> — Project Dates</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?php echo csrProposalDatesText($projectTitle); ?> — <?= __('Project Dates') ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 </div>
 <div class="modal-body">
     <?php if ($errorMessage != '') { ?>
@@ -77,7 +77,7 @@ $projectEndDate = is_array($proposal) ? ($proposal['project_end_date'] ?? '') : 
 
             <div class="row mb-3">
                 <div class="col-lg-3">
-                    <label class="f-w-600" for="project_start_date">Start Date</label>
+                    <label class="f-w-600" for="project_start_date"><?= __('Start Date') ?></label>
                 </div>
                 <div class="col-lg-9">
                     <input type="date" class="form-control" id="project_start_date" name="project_start_date" value="<?php echo csrProposalDatesText($projectStartDate); ?>">
@@ -85,15 +85,15 @@ $projectEndDate = is_array($proposal) ? ($proposal['project_end_date'] ?? '') : 
             </div>
             <div class="row mb-3">
                 <div class="col-lg-3">
-                    <label class="f-w-600" for="project_end_date">End Date</label>
+                    <label class="f-w-600" for="project_end_date"><?= __('End Date') ?></label>
                 </div>
                 <div class="col-lg-9">
                     <input type="date" class="form-control" id="project_end_date" name="project_end_date" value="<?php echo csrProposalDatesText($projectEndDate); ?>">
                 </div>
             </div>
             <div class="text-end mt-3">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= __('Cancel') ?></button>
+                <button type="submit" class="btn btn-primary"><?= __('Save') ?></button>
             </div>
         </form>
     <?php } ?>

@@ -96,7 +96,7 @@ $joblevel_list = $results['job_grade'];
 </style>
 <script>
     function aIGenerateJobDescription() {
-        $("#ai_generate_job_description").text("Please Wait........");
+        $("#ai_generate_job_description").text(<?php echo json_encode(__('Please Wait........')); ?>);
         $("#ai_generate_job_description").addClass("disabled");
         var post = {};
         $('#jobpostongform').serializeArray().forEach(function(item) {
@@ -135,11 +135,11 @@ $joblevel_list = $results['job_grade'];
                 $("#textediters").html(datas.description.replace(/\n/g, '<br>'));
                 $("#noteguidelines").html(datas.description.replace(/\n/g, '<br>'));
 
-                $("#ai_generate_job_description").text("AI Generate");
+                $("#ai_generate_job_description").text(<?php echo json_encode(__('AI Generate')); ?>);
                 $("#ai_generate_job_description").removeClass("disabled");
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                $("#ai_generate_job_description").text("AI Generate");
+                $("#ai_generate_job_description").text(<?php echo json_encode(__('AI Generate')); ?>);
                 $("#ai_generate_job_description").removeClass("disabled");
                 alert(xhr.status);
                 alert(thrownError);
@@ -177,26 +177,26 @@ $joblevel_list = $results['job_grade'];
         var html = `<div class="row rows`+max+` mt-2"> 
                 <input type="hidden" name="screening_question_seq[`+max+`]" name="`+max+`">
                 <div class="col-lg-5">
-                    <input class="form-control" type="text" name="screening_question[`+max+`]" value="`+val+`" placeholder="Eg. Tell me about yourself" aria-label="Eg. Tell me about yourself">
+                    <input class="form-control" type="text" name="screening_question[`+max+`]" value="`+val+`" placeholder="<?php echo __('Eg. Tell me about yourself'); ?>" aria-label="<?php echo __('Eg. Tell me about yourself'); ?>">
                 </div>
                 <div class="col-lg-1">
                     <div class="switch-field">
-                        <input class="js-switch-`+max+`" name="screening_mandatory_question[`+max+`]" type="checkbox" value="Y" aria-label="Mandatory question">
+                        <input class="js-switch-`+max+`" name="screening_mandatory_question[`+max+`]" type="checkbox" value="Y" aria-label="<?php echo __('Mandatory question'); ?>">
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <input class="form-control" type="text" name="screening_question_answer[`+max+`]" value="" placeholder="Eg. Yes,No" aria-label="Eg. Yes,No">
+                    <input class="form-control" type="text" name="screening_question_answer[`+max+`]" value="" placeholder="<?php echo __('Eg. Yes,No'); ?>" aria-label="<?php echo __('Eg. Yes,No'); ?>">
                 </div>
                 <div class="col-lg-2">
-                    <i title="Delete Question" onclick="deleteQuestion(`+max+`)" class="fa fa-trash text-danger cursor-pointer"></i> 
+                    <i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(`+max+`)" class="fa fa-trash text-danger cursor-pointer"></i> 
                 </div>
             </div>`;
         // var html = `<div class="row rows`+max+` mt-2"><input type="hidden" name="question_seq[]" name="`+max+`"> 
         //         <div class="col-lg-10">
-        //             <input class="form-control" type="text" name="question[`+max+`]" value="`+val+`" placeholder="Eg. Tell me about yourself" aria-label="Eg. Tell me about yourself">
+        //             <input class="form-control" type="text" name="question[`+max+`]" value="`+val+`" placeholder="<?php echo __('Eg. Tell me about yourself'); ?>" aria-label="<?php echo __('Eg. Tell me about yourself'); ?>">
         //         </div>
         //         <div class="col-lg-2">
-        //             <i title="Delete Question" onclick="deleteQuestion(`+max+`)" class="fa fa-trash text-danger cursor-pointer"></i> 
+        //             <i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(`+max+`)" class="fa fa-trash text-danger cursor-pointer"></i> 
         //         </div>
         //     </div>`;
         $("#videoquestiontextfileds").append(html);
@@ -253,7 +253,7 @@ $joblevel_list = $results['job_grade'];
           <?php if($error_message !=''){ ?>
               <div class="alert alert-danger background-danger alert-dismissible">
                 <strong><?php echo $error_message; ?></strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
             </div>	
         <?php } ?>
         <div class="row post">
@@ -267,18 +267,18 @@ $joblevel_list = $results['job_grade'];
                 <input type="hidden" name="id" value="<?php echo $rid; ?>">
 
                 <div class="card-header ">
-                 <h5>Job Posting</h5>      
+                 <h5><?php echo __('Job Posting'); ?></h5>      
              </div>
              <div class="card-body">
                  <div class="">
                    <div class="col-12 ">
                     <div class="row mt-2">
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10" data-step="1" data-intro="Hello world">
-                         <label for="job_title" class="form-label">Job Title<span class="requried text-danger">*</span></label>
+                         <label for="job_title" class="form-label"><?php echo __('Job Title'); ?><span class="requried text-danger">*</span></label>
                          <div>
                           <span class="d-block error-message text-danger"></span>
                           <select class="form-select js-example-basic-single col-sm-12 selectjobtitle requried_field" onchange="selectJobTitle()"  name="job_title" id="job_title" required>
-                             <option value="-1">Select Job Title</option>
+                             <option value="-1"><?php echo __('Select Job Title'); ?></option>
                              <?php foreach($title_list as  $title_listrow){ ?>
                                  <option value="<?php echo $title_listrow['id']; ?>"  <?php echo $jobpostlist['job_code']==$title_listrow['id']?"selected":""; ?> ><?php echo $title_listrow['job_title']; ?></option>
                              <?php } ?>
@@ -286,7 +286,7 @@ $joblevel_list = $results['job_grade'];
                      </div>
                  </div>
                  <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10" data-step="2" data-intro="Job number">
-                  <label for="job_number" class="form-label mt-1">Job Number</label>
+                  <label for="job_number" class="form-label mt-1"><?php echo __('Job Number'); ?></label>
                   <div class="">
                    <span class="d-block error-message text-danger"></span>
                    <input class="form-control" type="text" value="<?php echo $jobpostlist['job_number']!=""?$jobpostlist['job_number']:$jobnumber; ?>"  name="job_number" id="job_number" readonly="readonly">
@@ -295,17 +295,17 @@ $joblevel_list = $results['job_grade'];
        </div>
        <div class="row mt-2">
           <div class="col-lg-12 m-b-10" data-step="3" data-intro="Post Name">
-             <label for="job_name" class="form-label mt-1">Name <span class="requried text-danger">*</span></label>
+             <label for="job_name" class="form-label mt-1"><?php echo __('Name'); ?> <span class="requried text-danger">*</span></label>
              <div class="">
               <span class="d-block error-message text-danger"></span>
               <input class="form-control requried_field" type="text" name="job_name" value="<?php echo $jobpostlist['job_name']; ?>" id="job_name" required>
           </div>
       </div>
       <div class="col-lg-12 m-b-10" data-step="4" data-intro="Location">
-         <label for="kt_select2_1" class="form-label mt-1">Location</label>
+         <label for="kt_select2_1" class="form-label mt-1"><?php echo __('Location'); ?></label>
          <div>
             <select class="form-select js-example-basic-single" id="kt_select2_1" name="location" id="location" onchange="selectoptions('locations','location_name',this.value,'location')">
-             <option value="-1">Select location</option>
+             <option value="-1"><?php echo __('Select location'); ?></option>
              <?php foreach($location_list as $location_listrow){ ?>
                 <option value="<?php echo $location_listrow['id']; ?>"  <?php echo $jobpostlist['location_id']==$location_listrow['id']?"selected":""; ?>><?php echo $location_listrow['location_name']; ?></option>
             <?php } ?>
@@ -316,12 +316,12 @@ $joblevel_list = $results['job_grade'];
 </div>
 <div class="row mt-2">
   <div class="col-lg-6 m-b-10" data-step="5" data-intro="Request By">
-      <label for="requested_by" class="form-label mt-1">Requested By   <?php $request = isset($jobpostlist['requested_by'])?$jobpostlist['requested_by']:$_SESSION['userid']; ?>
+      <label for="requested_by" class="form-label mt-1"><?php echo __('Requested By'); ?>   <?php $request = isset($jobpostlist['requested_by'])?$jobpostlist['requested_by']:$_SESSION['userid']; ?>
   </label>
   <div >
       <span class="d-block error-message text-danger"></span>
       <select   class=" form-select js-example-basic-single requried_field" id="requested_by" name="requested_by">
-         <option value="-1">Select Requested</option>
+         <option value="-1"><?php echo __('Select Requested'); ?></option>
 
          <?php
          foreach($hiringmanager as $user_listrow){ ?>
@@ -333,7 +333,7 @@ $joblevel_list = $results['job_grade'];
 </div>
 <div class="col-lg-6 m-b-10" data-step="6" data-intro="Requested Date">
 
-  <label for="requested_date" class=" form-label mt-1">Requested Date</label>
+  <label for="requested_date" class=" form-label mt-1"><?php echo __('Requested Date'); ?></label>
   <div class="">
     <span class="d-block error-message text-danger"></span>
     <input class="form-control datepicker requried_field" type="text" value="<?php echo $jobpostlist['requested_date']!=""?fromDate($jobpostlist['requested_date']):fromDate(date('Y-m-d')); ?>" name="requested_date"  id="requested_date" />
@@ -342,11 +342,11 @@ $joblevel_list = $results['job_grade'];
 </div>
 <div class="row mt-2">
   <div class="col-lg-6 m-b-10" data-step="7" data-intro="Recruitment Manager">
-      <label for="recruitment_by" class="form-label mt-1">Recruitment Manager <?php //print_r($user_list); ?></label>
+      <label for="recruitment_by" class="form-label mt-1"><?php echo __('Recruitment Manager'); ?> <?php //print_r($user_list); ?></label>
       <div >
         <span class="d-block error-message text-danger"></span>
         <select class=" form-select js-example-basic-single requried_field" id="recruitment_by" name="recruitment_by">
-           <option value="-1">Select Recruitment</option>
+           <option value="-1"><?php echo __('Select Recruitment'); ?></option>
            <?php foreach($recuitmanager as $user_listrow){  ?>
             <option value="<?php echo $user_listrow['id']; ?>"  <?php echo $jobpostlist['recruitment_manager']==$user_listrow['id']?"selected":""; ?> ><?php echo $user_listrow['display_name']; ?></option>
         <?php } ?>
@@ -355,7 +355,7 @@ $joblevel_list = $results['job_grade'];
 </div>
 </div>
 <div class="col-lg-6 m-b-10" data-step="8" data-intro="Recruitment Date">
-  <label for="recruitment_date" class=" form-label mt-1">Required By Date</label>
+  <label for="recruitment_date" class=" form-label mt-1"><?php echo __('Required By Date'); ?></label>
   <div class="">
     <span class="d-block error-message text-danger"></span>
     <input class="form-control datepicker requried_field" type="text" value="<?php echo $jobpostlist['required_date']!=""?fromDate($jobpostlist['required_date']):fromDate(date('Y-m-d')); ?>" name="recruitment_date"  id="recruitment_date"/>
@@ -365,7 +365,7 @@ $joblevel_list = $results['job_grade'];
 
 <div class="row mt-2">
   <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10">
-    <label for="min_experience" class="form-label">Minimum Experience Year(s) <span class="requried text-danger">*</span></label>
+    <label for="min_experience" class="form-label"><?php echo __('Minimum Experience Year(s)'); ?> <span class="requried text-danger">*</span></label>
     <span class=" d-block error-message text-danger"></span>
     <select class="form-select js-example-basic-single requried_field" id="min_experience" name="min_experience" id="min_experience">
       <?php for($m=0;$m<=10;$m++){ ?>
@@ -374,10 +374,10 @@ $joblevel_list = $results['job_grade'];
   </select>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10">
-  <label for="max_experience" class="form-label">Maximum Experience Year(s) <span class="requried text-danger">*</span></label>
+  <label for="max_experience" class="form-label"><?php echo __('Maximum Experience Year(s)'); ?> <span class="requried text-danger">*</span></label>
   <span class="d-block error-message text-danger"></span>
   <select class="form-select js-example-basic-single requried_field" id="max_experience" name="max_experience" required>
-      <option value="-1">Select Max Exp</option>
+      <option value="-1"><?php echo __('Select Max Exp'); ?></option>
       <?php for($m=1;$m<=10;$m++){ ?>
           <option value="<?php echo $m; ?>" <?php echo number_format($jobpostlist['max_exp'])==$m?"selected":""; ?>><?php echo $m; echo $m=="1"?" Year":" Years"; ?></option>
       <?php } ?>
@@ -387,35 +387,35 @@ $joblevel_list = $results['job_grade'];
 </div>
 </div> 
 <div class="row mt-2">
-  <label for="video_url" class="col-lg-8 col-md-8 col-sm-12 col-12 form-label mt-1">Showcase Your Brand</label>
-  <span class="col-lg-8 col-md-8 col-sm-12 col-12 mb-4">Add a video to tell your brand's story and show candidates what it is like to work at your company</span>
+  <label for="video_url" class="col-lg-8 col-md-8 col-sm-12 col-12 form-label mt-1"><?php echo __('Showcase Your Brand'); ?></label>
+  <span class="col-lg-8 col-md-8 col-sm-12 col-12 mb-4"><?php echo __('Add a video to tell your brand\'s story and show candidates what it is like to work at your company'); ?></span>
   <div class="col-lg-8 col-md-8 col-sm-12 col-12">
 
-     <input class="form-control" type="text" name="video_url"   id="video_url" value="<?php echo $jobpostlist['video_url']; ?>" placeholder="Eg. https://www.youtube.com/">
+     <input class="form-control" type="text" name="video_url"   id="video_url" value="<?php echo $jobpostlist['video_url']; ?>" placeholder="<?php echo __('Eg. https://www.youtube.com/'); ?>">
      <div id="videoextrafileds" >
      </div>
 
  </div>
 </div>
 
-<h3 class="text-dark font-weight-bold mt-5 mt-3 mr-5">Targeting</h3>
+<h3 class="text-dark font-weight-bold mt-5 mt-3 mr-5"><?php echo __('Targeting'); ?></h3>
 <hr>
 <div class="row">
   <div class="col-12">
      <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
 
-           <span class="form-label mt-1 d-block">Job Posting Type</span>
+           <span class="form-label mt-1 d-block"><?php echo __('Job Posting Type'); ?></span>
            <div class="form-radio d-inline-block align-middle">
             <div class="radio radio-inline">
               <label class="form-label">
-                <input type="radio" <?php echo $jobpostlist['posting_type']=='1'?"checked":"";?> name="posting_type" value="1" onclick="cehckPostigType()"><i class="helper"></i>Internal
+                <input type="radio" <?php echo $jobpostlist['posting_type']=='1'?"checked":"";?> name="posting_type" value="1" onclick="cehckPostigType()"><i class="helper"></i><?php echo __('Internal'); ?>
             </label>
         </div>
         <div class="radio radio-inline">
           <label class="form-label">
            <input type="radio" name="posting_type" <?php echo $jobpostlist['posting_type']=='2'?"checked":"";?> value="2" onclick="cehckPostigType()">
-           <i class="helper"></i>External
+           <i class="helper"></i><?php echo __('External'); ?>
        </label>
    </div>
 </div>
@@ -423,9 +423,9 @@ $joblevel_list = $results['job_grade'];
 </div>
 
 <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10 w-full" id="departmentshow" <?php echo $jobpostlist['posting_type']=='1'?"":"style='display:none'";?>>
-   <label class="form-label mt-1"> Department</label>
-   <select class="form-select js-example-basic-single form-control" id="" onchange="selectoptions('departments','department_name',this.value,'department_name')" name="department_name" aria-label="Department Name">
-      <option value="-1">Select Any One</option>
+   <label class="form-label mt-1"> <?php echo __('Department'); ?></label>
+   <select class="form-select js-example-basic-single form-control" id="" onchange="selectoptions('departments','department_name',this.value,'department_name')" name="department_name" aria-label="<?php echo __('Department Name'); ?>">
+      <option value="-1"><?php echo __('Select Any One'); ?></option>
       <?php foreach($department_list as $department_listrow){ ?>
           <option value="<?php echo $department_listrow['id']; ?>"  <?php echo $jobpostlist['department_id']==$department_listrow['id']?"selected":""; ?>><?php echo $department_listrow['department_name']; ?></option>
       <?php } ?>
@@ -433,9 +433,9 @@ $joblevel_list = $results['job_grade'];
   </select>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10 w-full" id="customershow" <?php echo $jobpostlist['posting_type']=='2'?"":"style='display:none'";?>>
-   <label class="form-label mt-1"> Customer</label>
-   <select class="form-select js-example-basic-single form-control" id=""  name="customer_id" aria-label="Customer Id">
-      <option value="-1">Select Any One</option>
+   <label class="form-label mt-1"> <?php echo __('Customer'); ?></label>
+   <select class="form-select js-example-basic-single form-control" id=""  name="customer_id" aria-label="<?php echo __('Customer Id'); ?>">
+      <option value="-1"><?php echo __('Select Any One'); ?></option>
       <?php foreach($customers as $customer){ ?>
           <option value="<?php echo $customer['id']; ?>"  <?php echo $jobpostlist['customer_id']==$customer['id']?"selected":""; ?>><?php echo $customer['display_name']; ?></option>
       <?php } ?>
@@ -449,9 +449,9 @@ $joblevel_list = $results['job_grade'];
   <div class="col-12">
      <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12 col-12 m-b-10">
-           <label class="form-label mt-1">Job Level</label>
-           <select class="form-select js-example-basic-single form-control" id="" name="job_level" aria-label="Job Level">
-              <option value="-1">Select job Level</option>
+           <label class="form-label mt-1"><?php echo __('Job Level'); ?></label>
+           <select class="form-select js-example-basic-single form-control" id="" name="job_level" aria-label="<?php echo __('Job Level'); ?>">
+              <option value="-1"><?php echo __('Select job Level'); ?></option>
               <?php foreach($joblevel_list as $joblevel_list){ ?>
 
                   <option value="<?php echo $joblevel_list['id']; ?>" <?php echo $jobpostlist['job_level_id']==$joblevel_list['id']?"selected":""; ?>><?php echo $joblevel_list['job_grade_name']; ?></option>   
@@ -460,10 +460,10 @@ $joblevel_list = $results['job_grade'];
           </select>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-12 col-12 m-b-10">
-       <label for="job_selection_process" class="form-label mt-1">Job Selection Process <span class="requried text-danger">*</span></label>
+       <label for="job_selection_process" class="form-label mt-1"><?php echo __('Job Selection Process'); ?> <span class="requried text-danger">*</span></label>
        <span class="d-block error-message text-danger"></span>
        <select class="form-select js-example-basic-single form-control requried_field" id="job_selection_process" name="job_selection_process" required> 
-          <option value="">Select Job Selection process</option>
+          <option value=""><?php echo __('Select Job Selection process'); ?></option>
           <?php foreach($jobselection_process_list as $jobselection_process_listroe){ ?>
               <option value="<?php echo $jobselection_process_listroe['id']; ?>" <?php echo $jobpostlist['job_selection_process']==$jobselection_process_listroe['id']?"selected":""; ?>><?php echo $jobselection_process_listroe['process_name']; ?></option>
 
@@ -471,9 +471,9 @@ $joblevel_list = $results['job_grade'];
       </select>
   </div>
   <div class="col-lg-4 col-md-4 col-sm-12 col-12 m-b-10">
-    <label for="number_of_employee" class="form-label mt-1">Number Of Openings</label>
+    <label for="number_of_employee" class="form-label mt-1"><?php echo __('Number Of Openings'); ?></label>
     <div class="">
-       <input class="form-control" type="text" value="<?php echo $jobpostlist['no_of_resources']; ?>" name="number_of_employee" id="number_of_employee" placeholder="Eg: 4" />
+       <input class="form-control" type="text" value="<?php echo $jobpostlist['no_of_resources']; ?>" name="number_of_employee" id="number_of_employee" placeholder="<?php echo __('Eg: 4'); ?>" />
    </div>
 </div>  
 
@@ -483,11 +483,11 @@ $joblevel_list = $results['job_grade'];
 </div>
 <div class="row m-b-10">
   <div class="col-12">
-      <label class="form-label mt-1">Annual Salary(<?php echo $_SESSION['config']['currency_symbol']; ?>)</label>
+      <label class="form-label mt-1"><?php echo __('Annual Salary('); ?><?php echo $_SESSION['config']['currency_symbol']; ?>)</label>
       <div class="row">
        <div class="col-lg-4 m-b-10">
-        <label for="fld_min_salary" class="form-label">Min Salary</label>
-        <input id="fld_min_salary" class="form-control autonumber" type="text" value="<?php echo $jobpostlist['min_salary']; ?>" name="min_salary" data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>" placeholder="eg. 4,000,000"  />
+        <label for="fld_min_salary" class="form-label"><?php echo __('Min Salary'); ?></label>
+        <input id="fld_min_salary" class="form-control autonumber" type="text" value="<?php echo $jobpostlist['min_salary']; ?>" name="min_salary" data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>" placeholder="<?php echo __('eg. 4,000,000'); ?>"  />
     </div>
                                       <!--  <div class="col-6">
                                         <label>Min Salary</label>
@@ -499,12 +499,12 @@ $joblevel_list = $results['job_grade'];
                                        </select>
                                     </div> -->
                                     <div class="col-lg-4 m-b-10">
-                                        <label for="fld_max_salary" class="form-label">Max Salary</label>
-                                        <input id="fld_max_salary" type="text" class="form-control autonumber"  value="<?php echo $jobpostlist['max_salary']; ?>" onblur="maxamountemplye(this.value)" name="max_salary" placeholder="eg. 4,000,000" data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>">
+                                        <label for="fld_max_salary" class="form-label"><?php echo __('Max Salary'); ?></label>
+                                        <input id="fld_max_salary" type="text" class="form-control autonumber"  value="<?php echo $jobpostlist['max_salary']; ?>" onblur="maxamountemplye(this.value)" name="max_salary" placeholder="<?php echo __('eg. 4,000,000'); ?>" data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>">
 
                                     </div>
                                     <div class="col-lg-4 m-b-10">
-                                        <label for="annual_salary" class="form-label">Total Salary</label>
+                                        <label for="annual_salary" class="form-label"><?php echo __('Total Salary'); ?></label>
                                         <!--           <input class="form-control inr_amount" type="text" value="<?php echo $jobpostlist['total_resource_cost']; ?>"  name="annual_salary"  id="annual_salary"> -->
 
                                         <input type="text" class="form-control autonumber inr_amount"  value="<?php echo $jobpostlist['total_resource_cost']; ?>"  name="annual_salary"  id="annual_salary" data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>">
@@ -517,36 +517,36 @@ $joblevel_list = $results['job_grade'];
                             <div class="col-lg-8">  
                                <div class="row">
                                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10">
-                                        <label class="form-label mt-1"> Esgin Budget</label>
-                                        <select class="form-select js-example-basic-single" id="" name="esgin_budget" aria-label="Esgin Budget">
-                                           <option value="">Select Esgin Budget</option>
+                                        <label class="form-label mt-1"> <?php echo __('Esgin Budget'); ?></label>
+                                        <select class="form-select js-example-basic-single" id="" name="esgin_budget" aria-label="<?php echo __('Esgin Budget'); ?>">
+                                           <option value=""><?php echo __('Select Esgin Budget'); ?></option>
                                            <?php foreach($esginbudget_list as $esginbudget_list){ ?>
                                             <option value="<?php echo $esginbudget_list['id']; ?>"  <?php echo $jobpostlist['esgin_budget_approval_id']==$esginbudget_list['id']?"selected":""; ?>><?php echo $esginbudget_list['transaction_number']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                        <label class="form-label mt-1">Employment Type</label>
+                                        <label class="form-label mt-1"><?php echo __('Employment Type'); ?></label>
                                         <div class="form-radio d-inline-block align-middle">
                                             <div class="radio radio-inline">
                                                   <label class="form-label">
-                                                    <input  type="radio" <?php echo $jobpostlist['employment_type']=='2'?"checked":"";?> name="employment_type" value="2"><i class="helper"></i>Contract
+                                                    <input  type="radio" <?php echo $jobpostlist['employment_type']=='2'?"checked":"";?> name="employment_type" value="2"><i class="helper"></i><?php echo __('Contract'); ?>
                                                 </label>
                                             </div>
                                             <div class="radio radio-inline">
                                                     <label class="form-label">
                                                     <input type="radio" name="employment_type" <?php echo $jobpostlist['employment_type']=='1'?"checked":"";?> value="1">
-                                                    <i class="helper"></i>Regular
+                                                    <i class="helper"></i><?php echo __('Regular'); ?>
                                                     </label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-b-10">
-                                        <label class="form-label mt-1"> Candidate Mandatory Field Value </label>
+                                        <label class="form-label mt-1"> <?php echo __('Candidate Mandatory Field Value'); ?> </label>
                                         <?php  
                                         $candidate_mandatory_field = json_decode($jobpostlist['candidate_mandatory_field'],1);
                                         ?>
-                                        <select class="form-select js-example-basic-multiple" id="" name="candidate_mandatory_field[]" multiple aria-label="Candidate Mandatory Field">
+                                        <select class="form-select js-example-basic-multiple" id="" name="candidate_mandatory_field[]" multiple aria-label="<?php echo __('Candidate Mandatory Field'); ?>">
                                            <?php foreach($mandetorycandidatevalue as $fkey=>$fval){ ?>
                                             <option value="<?php echo $fkey; ?>"  <?php echo in_array($fkey, (array)$candidate_mandatory_field)?"selected" : ""; ?>><?php echo $fval; ?></option>
                                             <?php } ?>
@@ -563,53 +563,53 @@ $joblevel_list = $results['job_grade'];
                   <span class="cr">
                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                 </span>
-                <span style="display: table;">Don't show this to candidates</span>
+                <span style="display: table;"><?php echo __('Don\'t show this to candidates'); ?></span>
             </label>
         </div>
     </div>
     <div class="row">
 
       <div class="col-12">
-         <h3 class="text-dark font-weight-bold mt-5 mt-3 mr-5">Education Type</h3>
+         <h3 class="text-dark font-weight-bold mt-5 mt-3 mr-5"><?php echo __('Education Type'); ?></h3>
          <input type="hidden" name="employee_mode" id="employee_mode" value="<?php echo $jobpostlist['employment_mode']; ?>">
          <ul class="post-job">
             <li onclick="coursetypefun(1)">
                <a class="btn <?php echo $jobpostlist['employment_mode']=="1"?"btn-info text-white":"btn-outline-info"; ?> coursetypeemty" id="coursetype1"  data-id="1" >
                   <i class="fa fa-graduation-cap mb-4"></i>
-                  <h6>Full Time</h6>
+                  <h6><?php echo __('Full Time'); ?></h6>
               </a>
           </li>
           <li onclick="coursetypefun(2)">
            <a class="btn <?php echo $jobpostlist['employment_mode']=="2"?"btn-info text-white":"btn-outline-info"; ?> coursetypeemty" id="coursetype2" data-id="2" >
               <i class="fa fa-graduation-cap mb-4"></i>
-              <h6>Part Time</h6>
+              <h6><?php echo __('Part Time'); ?></h6>
           </a>
       </li>
       <li onclick="coursetypefun(3)">
        <a class="btn <?php echo $jobpostlist['employment_mode']=="3"?"btn-info text-white":"btn-outline-info"; ?> coursetypeemty" id="coursetype3" data-id="3" >
           <i class="fa fa-graduation-cap mb-4"></i>
-          <h6>Distance Learning Program</h6>
+          <h6><?php echo __('Distance Learning Program'); ?></h6>
       </a>
   </li>
   <li onclick="coursetypefun(4)">
    <a class="btn <?php echo $jobpostlist['employment_mode']=="4"?"btn-info text-white":"btn-outline-info"; ?> coursetypeemty"  id="coursetype4" data-id="4"  >
       <i class="fa fa-graduation-cap mb-4"></i>
-      <h6>Executive Program</h6>
+      <h6><?php echo __('Executive Program'); ?></h6>
   </a>
 </li>
 <li onclick="coursetypefun(5)">
    <a class="btn <?php echo $jobpostlist['employment_mode']=="5"?"btn-info text-white":"btn-outline-info"; ?> coursetypeemty" id="coursetype5" data-id="5">
       <i class="fa fa-graduation-cap mb-4"></i>
-      <h6>Certification</h6>
+      <h6><?php echo __('Certification'); ?></h6>
   </a>
 </li>
 </ul>
 </div>
 
 <div class="row mt-2">
-    <label for="job_responsibility" class="col-4 form-label mt-1">Job Responsibility</label> 
+    <label for="job_responsibility" class="col-4 form-label mt-1"><?php echo __('Job Responsibility'); ?></label> 
     <div class="col-8 mt-1">
-       <button type="button" class="btn btn-primary float-right mb-1" type="button" id="ai_generate_job_description" onclick="aIGenerateJobDescription()" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click here to generate AI - Responsibilities, Screening Questions, Job Description & Tags" ><i class="ti-light-bulb"></i> AI Generate</button>
+       <button type="button" class="btn btn-primary float-right mb-1" type="button" id="ai_generate_job_description" onclick="aIGenerateJobDescription()" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Click here to generate AI - Responsibilities, Screening Questions, Job Description & Tags'); ?>" ><i class="ti-light-bulb"></i> <?php echo __('AI Generate'); ?></button>
    </div>
    <div class="col-12">
     <textarea class="form-control" placeholder="" name="job_responsibility" id = "job_responsibility" style="height: 80px;"><?php echo $jobpostlist['job_responsibility'];?></textarea>
@@ -617,21 +617,21 @@ $joblevel_list = $results['job_grade'];
 </div> 
 
 
-<h3 class="text-dark font-weight-bold mt-5 mt-3 mr-5">Applications</h3>
+<h3 class="text-dark font-weight-bold mt-5 mt-3 mr-5"><?php echo __('Applications'); ?></h3>
 <hr>
 
-<h4 class="mt-2">Screening Questions</h4>
-<h6 class="font-weight-normal mb-4">You can ask some questions before the candidates apply to your job!</h6>
+<h4 class="mt-2"><?php echo __('Screening Questions'); ?></h4>
+<h6 class="font-weight-normal mb-4"><?php echo __('You can ask some questions before the candidates apply to your job!'); ?></h6>
 <div class="col-lg-12"> 
     <div class="row rows<?php echo $ij; ?> mt-2"> 
         <div class="col-lg-5">
-            <label class="form-label">Questions</label> 
+            <label class="form-label"><?php echo __('Questions'); ?></label> 
         </div>
         <div class="col-lg-1">
-            <label class="form-label">Mandatory</label> 
+            <label class="form-label"><?php echo __('Mandatory'); ?></label> 
         </div>
         <div class="col-lg-4">
-            <label class="form-label">Accepted Answer</label> 
+            <label class="form-label"><?php echo __('Accepted Answer'); ?></label> 
         </div>
         <div class="col-lg-2">
 
@@ -646,18 +646,18 @@ $joblevel_list = $results['job_grade'];
              <div class="row rows<?php echo $ij; ?> mt-2"> 
                 <input type="hidden" name="screening_question_seq[<?php echo $ij; ?>]" name="<?php echo $ij; ?>">
                 <div class="col-lg-5">
-                    <input class="form-control" type="text" name="screening_question[<?php echo $ij; ?>]" value="<?php echo $question['question']; ?>" placeholder="Eg. Tell me about yourself" aria-label="Eg. Tell me about yourself">
+                    <input class="form-control" type="text" name="screening_question[<?php echo $ij; ?>]" value="<?php echo $question['question']; ?>" placeholder="<?php echo __('Eg. Tell me about yourself'); ?>" aria-label="<?php echo __('Eg. Tell me about yourself'); ?>">
                 </div>
                 <div class="col-lg-1">
                     <div class="switch-field">
-                        <input class="js-switch" name="screening_mandatory_question[<?php echo $ij; ?>]" type="checkbox" value="Y" <?php echo $question['mandatory_question'] == "Y"?"checked":""; ?> aria-label="Mandatory question">
+                        <input class="js-switch" name="screening_mandatory_question[<?php echo $ij; ?>]" type="checkbox" value="Y" <?php echo $question['mandatory_question'] == "Y"?"checked":""; ?> aria-label="<?php echo __('Mandatory question'); ?>">
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <input class="form-control" type="text" name="screening_question_answer[<?php echo $ij; ?>]" value="<?php echo $question['question_answer']; ?>" placeholder="Eg. Yes,No" aria-label="Eg. Yes,No">
+                    <input class="form-control" type="text" name="screening_question_answer[<?php echo $ij; ?>]" value="<?php echo $question['question_answer']; ?>" placeholder="<?php echo __('Eg. Yes,No'); ?>" aria-label="<?php echo __('Eg. Yes,No'); ?>">
                 </div>
                 <div class="col-lg-2">
-                    <i title="Delete Question" onclick="deleteQuestion(<?php echo $ij; ?>)" class="fa fa-trash text-danger cursor-pointer"></i> 
+                    <i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(<?php echo $ij; ?>)" class="fa fa-trash text-danger cursor-pointer"></i> 
                 </div>
             </div>     
         <?php 
@@ -666,7 +666,7 @@ $joblevel_list = $results['job_grade'];
 </div>
 <div class="col-lg-3">
 <button type="button" onclick="addQuestionsTextFileds()" class="btn btn-outline-success mt-2">
-   <i class="fas fa-plus"></i> Add Question
+   <i class="fas fa-plus"></i> <?php echo __('Add Question'); ?>
 </button>
 </div>
  <?php /** ?> 
@@ -677,7 +677,7 @@ $joblevel_list = $results['job_grade'];
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
       </span>
-      <span style="display: table;">My company is a government contractor or I'd like to capture applicant gender, ethnicity, disability, or veteran status.</span>
+      <span style="display: table;"><?php echo __('My company is a government contractor or I\'d like to capture applicant gender, ethnicity, disability, or veteran status.'); ?></span>
   </label>
 </div>
 
@@ -686,16 +686,16 @@ $joblevel_list = $results['job_grade'];
 <div class="col-lg-8"> 
   
     <div class="row rows aa_eeo" <?php echo $jobpostlist['aa_eeo'] == '0'?'':'style="display: none"';?>> 
-      <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Do you have any disability or accessibility requirements?" aria-label="Question1">
+      <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Do you have any disability or accessibility requirements?" aria-label="<?php echo __('Question1'); ?>">
   </div> 
   <div class="row rows aa_eeo" <?php echo $jobpostlist['aa_eeo'] == '0'?'':'style="display: none"';?>> 
-      <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Gender" aria-label="Question1">
+      <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Gender" aria-label="<?php echo __('Question1'); ?>">
   </div> 
   <div class="row rows aa_eeo" <?php echo $jobpostlist['aa_eeo'] == '0'?'':'style="display: none"';?>> 
-      <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Ethnicity" aria-label="Question1"> 
+      <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Ethnicity" aria-label="<?php echo __('Question1'); ?>"> 
   </div> 
   <div class="row rows aa_eeo" <?php echo $jobpostlist['aa_eeo'] == '0'?'':'style="display: none"';?>> 
-      <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Veteran Status" aria-label="Question1">
+      <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Veteran Status" aria-label="<?php echo __('Question1'); ?>">
   </div> 
   <?php $ij=4; 
     if(isset($jobpostlist['question'])){ 
@@ -703,13 +703,13 @@ $joblevel_list = $results['job_grade'];
         foreach($question as $question){ ?>
              <div class="row rows<?php echo $ij; ?>"> 
 
-              <input class="form-control mt-2 col-lg-10" type="text" name="question[]" value="<?php echo $question; ?>" placeholder="Eg. Tell me about yourself" aria-label="Eg. Tell me about yourself">
-              <i title="Delete Question" onclick="deleteQuestion(<?php echo $ij; ?>)" class="text-dark-50 flaticon-delete col-lg-2 mt-4"></i> 
+              <input class="form-control mt-2 col-lg-10" type="text" name="question[]" value="<?php echo $question; ?>" placeholder="<?php echo __('Eg. Tell me about yourself'); ?>" aria-label="<?php echo __('Eg. Tell me about yourself'); ?>">
+              <i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(<?php echo $ij; ?>)" class="text-dark-50 flaticon-delete col-lg-2 mt-4"></i> 
           </div>     
           <?php $ij++; }
         }else{ ?> 
           <div class="row rows7"> 
-              <input class="form-control mt-2 col-lg-10" type="text" name="question[]" value="" placeholder="Eg. Tell me about yourself" aria-label="Eg. Tell me about yourself"><i title="Delete Question" onclick="deleteQuestion(4)" class="text-dark-50 fa fa-trash col-lg-2 mt-4"></i> 
+              <input class="form-control mt-2 col-lg-10" type="text" name="question[]" value="" placeholder="<?php echo __('Eg. Tell me about yourself'); ?>" aria-label="<?php echo __('Eg. Tell me about yourself'); ?>"><i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(4)" class="text-dark-50 fa fa-trash col-lg-2 mt-4"></i> 
           </div> 
 <?php } ?>
 
@@ -717,17 +717,17 @@ $joblevel_list = $results['job_grade'];
 </div> -->
 
 <button type="button" onclick="addQuestionsTextFileds()" class="btn btn-outline-success mt-2">
-   <i class="fas fa-plus"></i> Add Question
+   <i class="fas fa-plus"></i> <?php echo __('Add Question'); ?>
 </button>
 </div>
  <?php **/ ?> 
 <div class="col-12">
-   <h3 class="text-dark font-weight-bold mt-5 mt-3 mr-5">Job Tags</h3>
+   <h3 class="text-dark font-weight-bold mt-5 mt-3 mr-5"><?php echo __('Job Tags'); ?></h3>
    <hr>
 </div>
 <div class="col-12">
     <div class="">
-     <select class="form-select js-example-tags" id="kt_select2_11" multiple="multiple" name="job_tag[]" aria-label="Job Tag">
+     <select class="form-select js-example-tags" id="kt_select2_11" multiple="multiple" name="job_tag[]" aria-label="<?php echo __('Job Tag'); ?>">
       <?php foreach($tagslist as $tagslists){  ?>
 
         <option  selected><?php echo $tagslists['tages']; ?></option>
@@ -739,7 +739,7 @@ $joblevel_list = $results['job_grade'];
 
 <div class="col-12">
  <div class="py-2 px-4 boost">
-    <h5><i class="fa fa-graduation-cap mb-4 mr-3"></i>Job Description</h5>
+    <h5><i class="fa fa-graduation-cap mb-4 mr-3"></i><?php echo __('Job Description'); ?></h5>
 
     <hr>
     <div class="col-12 mt-3">
@@ -748,7 +748,7 @@ $joblevel_list = $results['job_grade'];
          <!--   <textarea class="summernote" name="summa" id="kt_summernote_1" aria-label="Summa"><?php echo base64_decode($jobpostlist['job_desc']); ?></textarea> -->
          <!--     <textarea class="summernote" name="description" aria-label="Description"></div> -->
 
-           <textarea class="form-control textediters" name="summa" id="<?php echo $key; ?>" aria-label="Summa"><?php echo base64_decode($jobpostlist['job_desc']); ?></textarea>
+           <textarea class="form-control textediters" name="summa" id="<?php echo $key; ?>" aria-label="<?php echo __('Summa'); ?>"><?php echo base64_decode($jobpostlist['job_desc']); ?></textarea>
 
 
        </div>
@@ -767,8 +767,8 @@ $joblevel_list = $results['job_grade'];
                             $disabledbtn = "disabled";
                         }
                         ?>
-                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 <?php echo $disabledbtn; ?>"   type="button" onclick="formSubmitValidation('jobpostongform','exit')"><i class="la la-check"></i>Save & exit</button>
-                        <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 <?php echo $disabledbtn; ?>" type="button" onclick="formSubmitValidation('jobpostongform','continue')" ><i class="la la-check-circle"></i>Save & continue</button>
+                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 <?php echo $disabledbtn; ?>"   type="button" onclick="formSubmitValidation('jobpostongform','exit')"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
+                        <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 <?php echo $disabledbtn; ?>" type="button" onclick="formSubmitValidation('jobpostongform','continue')" ><i class="la la-check-circle"></i><?php echo __('Save & continue'); ?></button>
 
 
                     </div>
@@ -784,7 +784,7 @@ $joblevel_list = $results['job_grade'];
 
 <div class="col-lg-4 col-md-12 col-sm-12 col-12">
     <div class="few">
-       <h5>Few Guidelines</h5>
+       <h5><?php echo __('Few Guidelines'); ?></h5>
        <div id="noteguidelines"><?php echo base64_decode($jobpostlist['job_desc']);   ?></div>
    </div>
 </div>
@@ -842,7 +842,7 @@ $text = array("Job Title"=>"Job title list please select any one","Job Number"=>
 <div id="kt_quick_cart" class="offcanvas offcanvas-right p-10">
  <!--begin::Header-->
  <div class="offcanvas-header d-flex align-items-center justify-content-between pb-7" style="" kt-hidden-height="46">
-    <h4 class="font-weight-bold m-0">Help Text</h4>
+    <h4 class="font-weight-bold m-0"><?php echo __('Help Text'); ?></h4>
     <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_cart_close">
        <i class="ki ki-close icon-xs text-muted"></i>
    </a>
@@ -877,8 +877,8 @@ $text = array("Job Title"=>"Job title list please select any one","Job Number"=>
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Enter Option</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo __('Enter Option'); ?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
             </div>

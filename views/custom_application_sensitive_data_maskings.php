@@ -29,12 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_save_policy'])
     $apiResponse = file_post_contents($postUrl, $postPayload, 'update');
     $saveResult = json_decode($apiResponse, true);
     if (!empty($saveResult) && (!empty($saveResult['success']) || (isset($saveResult['status']) && $saveResult['status'] === 'success'))) {
-        $successMessage = 'Sensitive data restriction policy successfully saved and applied via API!';
+        $successMessage = __('Sensitive data restriction policy successfully saved and applied via API!');
         if (isset($_SESSION['sensitive_data_policy'][$targetCompanyId])) {
             unset($_SESSION['sensitive_data_policy'][$targetCompanyId]);
         }
     } else {
-        $errorMessage = $saveResult['message'] ?? 'Failed to save sensitive data restriction policy via API.';
+        $errorMessage = $saveResult['message'] ?? __('Failed to save sensitive data restriction policy via API.');
     }
 }
 
@@ -43,7 +43,7 @@ if (isset($_GET['refresh_cache']) && $_GET['refresh_cache'] == 1) {
     if (isset($_SESSION['sensitive_data_policy'][$companyId])) {
         unset($_SESSION['sensitive_data_policy'][$companyId]);
     }
-    $successMessage = 'Session policy cache refreshed successfully from API.';
+    $successMessage = __('Session policy cache refreshed successfully from API.');
 }
 
 // 4. Retrieve Active Policy & Metadata strictly via api.php (GET)
@@ -218,14 +218,14 @@ if ($isPolicyActive) {
         <div id="alertContainer">
             <?php if (!empty($successMessage)): ?>
                 <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
-                    <i class="feather icon-check-circle me-2"></i> <strong>Success:</strong> <?php echo htmlspecialchars($successMessage); ?>
+                    <i class="feather icon-check-circle me-2"></i> <strong><?= __("Success:") ?></strong> <?php echo htmlspecialchars($successMessage); ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
 
             <?php if (!empty($errorMessage)): ?>
                 <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
-                    <i class="feather icon-alert-triangle me-2"></i> <strong>Error:</strong> <?php echo htmlspecialchars($errorMessage); ?>
+                    <i class="feather icon-alert-triangle me-2"></i> <strong><?= __("Error:") ?></strong> <?php echo htmlspecialchars($errorMessage); ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
@@ -233,8 +233,8 @@ if ($isPolicyActive) {
 
         <?php if (!$isAdmin): ?>
             <div class="alert alert-warning border-warning shadow-sm" role="alert">
-                <h5 class="alert-heading fw-bold"><i class="feather icon-lock me-2"></i> Read-Only View</h5>
-                <p class="mb-0">You do not have administrator permissions to modify Sensitive Data Restriction policies. The settings below are displayed in read-only mode.</p>
+                <h5 class="alert-heading fw-bold"><i class="feather icon-lock me-2"></i> <?= __("Read-Only View") ?></h5>
+                <p class="mb-0"><?= __("You do not have administrator permissions to modify Sensitive Data Restriction policies. The settings below are displayed in read-only mode.") ?></p>
             </div>
         <?php endif; ?>
 
@@ -247,35 +247,35 @@ if ($isPolicyActive) {
                 <!-- Master Policy Configuration Card -->
                 <div class="card">
                     <div class="card-header">
-                        <h5>Contracts</h5>
+                        <h5><?= __("Contracts") ?></h5>
                          <div class="card-header-right table-card-header">
-                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 me-5 desktop-view"> <i class="icofont icofont-reply"></i>Back</a>
+                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 me-5 desktop-view"> <i class="icofont icofont-reply"></i><?= __("Back") ?></a>
                         </div>
                         <div class="card-body mt-2">
                             <div class="row g-3">
                                 <div class="col-md-4">
-                                    <label for="fld_policy_name" class="form-label fw-bold">Policy Name *</label>
-                                    <input id="fld_policy_name" type="text" class="form-control" name="policy_name" 
+                                    <label class="form-label fw-bold"><?= __("Policy Name *") ?></label>
+                                    <input type="text" class="form-control" name="policy_name" 
                                            value="<?php echo htmlspecialchars($currentPolicy['policy_name'] ?: 'Corporate Sensitive Data Policy'); ?>" 
                                            required <?php echo !$isAdmin ? 'disabled' : ''; ?>>
                                     <input type="hidden" class="form-control" name="is_active" value="0">
                                     
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="from_date" class="form-label fw-bold">From Date</label>
+                                    <label class="form-label fw-bold"><?= __("From Date") ?></label>
                                     <input type="date" class="form-control" name="from_date" id="from_date" 
                                            value="<?php echo htmlspecialchars($currentPolicy['from_date'] ?? date('Y-01-01')); ?>" 
                                            <?php echo !$isAdmin ? 'disabled' : ''; ?>>
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="to_date" class="form-label fw-bold">To Date</label>
+                                    <label class="form-label fw-bold"><?= __("To Date") ?></label>
                                     <input type="date" class="form-control" name="to_date" id="to_date" 
                                            value="<?php echo htmlspecialchars($currentPolicy['to_date'] ?? date('Y-12-31', strtotime('+4 years'))); ?>" 
                                            <?php echo !$isAdmin ? 'disabled' : ''; ?>>
                                 </div>
                                 <div class="col-md-4 mt-2">
-                                    <label for="fld_description" class="form-label fw-bold">Policy Description / Business Notes</label>
-                                    <textarea id="fld_description" class="form-control" name="description" rows="2" placeholder="Explain the data protection compliance objectives..." <?php echo !$isAdmin ? 'disabled' : ''; ?>><?php echo htmlspecialchars($currentPolicy['description'] ?? 'Automated masking policy for sensitive personal and financial identifiers.'); ?></textarea>
+                                    <label class="form-label fw-bold"><?= __("Policy Description / Business Notes") ?></label>
+                                    <textarea class="form-control" name="description" rows="2" placeholder="<?= __("Explain the data protection compliance objectives...") ?>" <?php echo !$isAdmin ? 'disabled' : ''; ?>><?php echo htmlspecialchars($currentPolicy['description'] ?? 'Automated masking policy for sensitive personal and financial identifiers.'); ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -287,11 +287,11 @@ if ($isPolicyActive) {
                     <div class="card shadow-sm" style="border-radius: 8px;">
                         <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
                             <h5 class="card-title mb-0 fw-bold text-dark">
-                                <i class="feather icon-sliders text-primary me-2"></i> Configurable Dynamic Masking Settings
+                                <i class="feather icon-sliders text-primary me-2"></i> <?= __("Configurable Dynamic Masking Settings") ?>
                             </h5>
                             <?php if ($isAdmin): ?>
                                 <button type="button" class="btn btn-sm btn-outline-primary" id="btnAddCustomType">
-                                    <i class="feather icon-plus me-1"></i> Add Custom Field
+                                    <i class="feather icon-plus me-1"></i> <?= __("Add Custom Field") ?>
                                 </button>
                             <?php endif; ?>
                         </div>
@@ -300,14 +300,14 @@ if ($isPolicyActive) {
                                 <table class="table table-hover align-middle mb-0" id="tableSensitiveRules">
                                     <thead class="table-light">
                                         <tr>
-                                            <th style="width: 18%;">Sensitive Data Type</th>
-                                            <th style="width: 12%; text-align: center;">Masking</th>
-                                            <th style="width: 10%;">Show Start</th>
-                                            <th style="width: 10%;">Show End</th>
-                                            <th style="width: 9%;">Mask Char</th>
-                                            <th style="width: 13%;">Preserve Domain / Sep</th>
-                                            <th style="width: 14%;">Sample Original</th>
-                                            <th style="width: 14%;">Restricted Display (Live Preview)</th>
+                                            <th style="width: 18%;"><?= __("Sensitive Data Type") ?></th>
+                                            <th style="width: 12%; text-align: center;"><?= __("Masking") ?></th>
+                                            <th style="width: 10%;"><?= __("Show Start") ?></th>
+                                            <th style="width: 10%;"><?= __("Show End") ?></th>
+                                            <th style="width: 9%;"><?= __("Mask Char") ?></th>
+                                            <th style="width: 13%;"><?= __("Preserve Domain / Sep") ?></th>
+                                            <th style="width: 14%;"><?= __("Sample Original") ?></th>
+                                            <th style="width: 14%;"><?= __("Restricted Display (Live Preview)") ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -340,7 +340,7 @@ if ($isPolicyActive) {
                                         ?>
                                         <tr data-type-row="<?php echo htmlspecialchars($typeKey); ?>">
                                             <td>
-                                                <div class="fw-bold text-dark"><?php echo htmlspecialchars($meta['name']); ?></div>
+                                                <div class="fw-bold text-dark"><?= htmlspecialchars(__($meta['name'] ?? '')) ?></div>
                                                 <small class="text-muted font-monospace"><?php echo htmlspecialchars($typeKey); ?></small>
                                             </td>
                                             <td class="text-center">
@@ -353,7 +353,7 @@ if ($isPolicyActive) {
                                                            onchange="updateRowPreview('<?php echo $typeKey; ?>')">
                                                     <label class="form-check-label small ms-1" for="switch_<?php echo $typeKey; ?>">
                                                         <span class="status-label-<?php echo $typeKey; ?> badge <?php echo $isRestricted ? 'bg-danger' : 'bg-secondary'; ?>">
-                                                            <?php echo $isRestricted ? 'Restricted' : 'Visible'; ?>
+                                                            <?= $isRestricted ? __("Restricted") : __("Visible"); ?>
                                                         </span>
                                                     </label>
                                                 </div>
@@ -380,10 +380,10 @@ if ($isPolicyActive) {
                                                         id="mask_char_<?php echo $typeKey; ?>"
                                                         <?php echo !$isAdmin ? 'disabled' : ''; ?>
                                                         onchange="updateRowPreview('<?php echo $typeKey; ?>')">
-                                                    <option value="*" <?php echo $maskChar === '*' ? 'selected' : ''; ?>>* (Star)</option>
-                                                    <option value="X" <?php echo $maskChar === 'X' ? 'selected' : ''; ?>>X (Upper X)</option>
-                                                    <option value="x" <?php echo $maskChar === 'x' ? 'selected' : ''; ?>>x (Lower x)</option>
-                                                    <option value="#" <?php echo $maskChar === '#' ? 'selected' : ''; ?>># (Hash)</option>
+                                                    <option value="*" <?php echo $maskChar === '*' ? 'selected' : ''; ?>> <?= __("* (Star)") ?></option>
+                                                    <option value="X" <?php echo $maskChar === 'X' ? 'selected' : ''; ?>> <?= __("X (Upper X)") ?></option>
+                                                    <option value="x" <?php echo $maskChar === 'x' ? 'selected' : ''; ?>> <?= __("x (Lower x)") ?></option>
+                                                    <option value="#" <?php echo $maskChar === '#' ? 'selected' : ''; ?>> <?= __("# (Hash)") ?></option>
                                                 </select>
                                             </td>
                                             <td>
@@ -393,8 +393,8 @@ if ($isPolicyActive) {
                                                             id="preserve_domain_<?php echo $typeKey; ?>"
                                                             <?php echo !$isAdmin ? 'disabled' : ''; ?>
                                                             onchange="updateRowPreview('<?php echo $typeKey; ?>')">
-                                                        <option value="1" <?php echo $preserveDomain ? 'selected' : ''; ?>>Yes (Keep @domain)</option>
-                                                        <option value="0" <?php echo !$preserveDomain ? 'selected' : ''; ?>>No (Mask domain)</option>
+                                                        <option value="1" <?php echo $preserveDomain ? 'selected' : ''; ?>> <?= __("Yes (Keep @domain)") ?></option>
+                                                        <option value="0" <?php echo !$preserveDomain ? 'selected' : ''; ?>> <?= __("No (Mask domain)") ?></option>
                                                     </select>
                                                 <?php else: ?>
                                                     <select class="form-select form-select-sm rule-preserve-domain js-example-basic-single"
@@ -402,8 +402,8 @@ if ($isPolicyActive) {
                                                             id="preserve_domain_<?php echo $typeKey; ?>"
                                                             <?php echo !$isAdmin ? 'disabled' : ''; ?>
                                                             onchange="updateRowPreview('<?php echo $typeKey; ?>')">
-                                                        <option value="1" <?php echo $preserveSeparators ? 'selected' : ''; ?>>Yes (Keep spaces)</option>
-                                                        <option value="0" <?php echo !$preserveSeparators ? 'selected' : ''; ?>>No (Compact)</option>
+                                                        <option value="1" <?php echo $preserveSeparators ? 'selected' : ''; ?>> <?= __("Yes (Keep spaces)") ?></option>
+                                                        <option value="0" <?php echo !$preserveSeparators ? 'selected' : ''; ?>> <?= __("No (Compact)") ?></option>
                                                     </select>
                                                 <?php endif; ?>
                                             </td>
@@ -438,7 +438,7 @@ if ($isPolicyActive) {
                                                     ?>
                                                     <tr data-type-row="<?php echo htmlspecialchars($cKey); ?>" class="table-warning bg-opacity-25">
                                                         <td>
-                                                            <div class="fw-bold text-dark"><?php echo htmlspecialchars(ucwords(str_replace('_', ' ', $cKey))); ?> <span class="badge bg-info">Custom</span></div>
+                                                            <div class="fw-bold text-dark"><?php echo htmlspecialchars(ucwords(str_replace('_', ' ', $cKey))); ?> <span class="badge bg-info"><?= __("Custom") ?></span></div>
                                                             <input type="hidden" name="custom_type_key[]" value="<?php echo htmlspecialchars($cKey); ?>">
                                                             <small class="text-muted font-monospace"><?php echo htmlspecialchars($cKey); ?></small>
                                                         </td>
@@ -452,7 +452,7 @@ if ($isPolicyActive) {
                                                                        onchange="updateRowPreview('<?php echo $cKey; ?>')">
                                                                 <label class="form-check-label small ms-1" for="switch_<?php echo $cKey; ?>">
                                                                     <span class="status-label-<?php echo $cKey; ?> badge <?php echo $cRestricted ? 'bg-danger' : 'bg-secondary'; ?>">
-                                                                        <?php echo $cRestricted ? 'Restricted' : 'Visible'; ?>
+                                                                        <?= $cRestricted ? __("Restricted") : __("Visible"); ?>
                                                                     </span>
                                                                 </label>
                                                             </div>
@@ -477,7 +477,7 @@ if ($isPolicyActive) {
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <span class="text-muted small">Standard</span>
+                                                            <span class="text-muted small"><?= __("Standard") ?></span>
                                                         </td>
                                                         <td>
                                                             <span class="badge bg-light text-secondary border font-monospace rule-sample-orig"><?php echo htmlspecialchars($cSample); ?></span>
@@ -507,7 +507,7 @@ if ($isPolicyActive) {
                                 <div>
                                    
                                     <button type="submit" class="btn btn-primary px-4 fw-bold" id="btnSavePolicy">
-                                        <i class="feather icon-save me-1"></i> Save & Apply Policy
+                                        <i class="feather icon-save me-1"></i> <?= __("Save & Apply Policy") ?>
                                     </button>
                                 </div>
                             </div>
@@ -562,33 +562,33 @@ if ($isPolicyActive) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold"><i class="feather icon-plus-circle text-primary me-2"></i> Add Custom Sensitive Field</h5>
+                <h5 class="modal-title fw-bold"><i class="feather icon-plus-circle text-primary me-2"></i> <?= __("Add Custom Sensitive Field") ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label for="custom_field_label" class="form-label fw-bold">Field Name / Label <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="custom_field_label" placeholder="e.g. Salary, SSN, Driving License">
+                    <label class="form-label fw-bold"><?= __("Field Name / Label") ?> <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="custom_field_label" placeholder="<?= __("e.g. Salary, SSN, Driving License") ?>">
                 </div>
                 <div class="mb-3">
-                    <label for="custom_field_key" class="form-label fw-bold">Field Key Identifier <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control font-monospace" id="custom_field_key" placeholder="e.g. salary, ssn, driving_license">
-                    <small class="text-muted">Unique lowercase identifier used in code calls</small>
+                    <label class="form-label fw-bold"><?= __("Field Key Identifier") ?> <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control font-monospace" id="custom_field_key" placeholder="<?= __("e.g. salary, ssn, driving_license") ?>">
+                    <small class="text-muted"><?= __("Unique lowercase identifier used in code calls") ?></small>
                 </div>
                 <div class="row g-2">
                     <div class="col-6 mb-3">
-                        <label for="custom_field_show_first" class="form-label fw-bold">Show Start Chars</label>
+                        <label class="form-label fw-bold"><?= __("Show Start Chars") ?></label>
                         <input type="number" min="0" max="10" class="form-control font-monospace" id="custom_field_show_first" value="2">
                     </div>
                     <div class="col-6 mb-3">
-                        <label for="custom_field_show_last" class="form-label fw-bold">Show End Chars</label>
+                        <label class="form-label fw-bold"><?= __("Show End Chars") ?></label>
                         <input type="number" min="0" max="10" class="form-control font-monospace" id="custom_field_show_last" value="2">
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="btnConfirmAddCustomType">Add Field</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= __("Cancel") ?></button>
+                <button type="button" class="btn btn-primary" id="btnConfirmAddCustomType"><?= __("Add Field") ?></button>
             </div>
         </div>
     </div>
@@ -806,7 +806,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var sLast  = parseInt(document.getElementById('custom_field_show_last').value, 10) || 2;
 
             if (!key) {
-                alert('Please provide a field key identifier.');
+                alert(<?= json_encode(__('Please provide a field key identifier.')) ?>);
                 return;
             }
 
@@ -816,7 +816,7 @@ document.addEventListener('DOMContentLoaded', function() {
             newRow.className = 'table-warning bg-opacity-25';
             newRow.innerHTML = `
                 <td>
-                    <div class="fw-bold text-dark">\${label || key} <span class="badge bg-info">Custom</span></div>
+                    <div class="fw-bold text-dark">\${label || key} <span class="badge bg-info"><?= __("Custom") ?></span></div>
                     <input type="hidden" name="custom_type_key[]" value="\${key}">
                     <small class="text-muted font-monospace">\${key}</small>
                 </td>
@@ -849,7 +849,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </select>
                 </td>
                 <td>
-                    <span class="text-muted small">Standard</span>
+                    <span class="text-muted small"><?= __("Standard") ?></span>
                 </td>
                 <td>
                     <span class="badge bg-light text-secondary border font-monospace rule-sample-orig">CONFIDENTIAL-1234</span>

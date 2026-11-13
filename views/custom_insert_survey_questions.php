@@ -7,14 +7,14 @@ print_r($_POST);
     var i = 2;
     function addoptionrows() {
         i++;
-        $("#optionrow").append('<div class="form-group row" id="rowid'+i+'"><div class="col-lg-1"></div><div class="col-lg-11"><input aria-label="Option" type="text" class="form-control" name="survey_question_option1[]" placeholder="Option" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><button type="button" class="flaticon-delete btn-primary" onclick="deloptionrows(\'rowid'+i+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div></div>');
+        $("#optionrow").append('<div class="form-group row" id="rowid'+i+'"><div class="col-lg-1"></div><div class="col-lg-11"><input aria-label="<?php echo __('Option'); ?>" type="text" class="form-control" name="survey_question_option1[]" placeholder="<?php echo __('Option'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><button type="button" class="flaticon-delete btn-primary" onclick="deloptionrows(\'rowid'+i+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div></div>');
     }
     function deloptionrows(rowid) {
         $('#'+rowid).remove();
     }
     function addoptionrows_rank() {
         i++;
-        $("#optionrow_rank").append('<div class="form-group row" id="rankrow'+i+'"><div class="col-lg-1"></div><div class="col-lg-11"><input aria-label="Option" type="text" class="form-control" name="survey_question_option3[]" placeholder="Option" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><button type="button" class="flaticon-delete btn-primary" onclick="deloptionrows(\'rankrow'+i+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div></div>');
+        $("#optionrow_rank").append('<div class="form-group row" id="rankrow'+i+'"><div class="col-lg-1"></div><div class="col-lg-11"><input aria-label="<?php echo __('Option'); ?>" type="text" class="form-control" name="survey_question_option3[]" placeholder="<?php echo __('Option'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><button type="button" class="flaticon-delete btn-primary" onclick="deloptionrows(\'rankrow'+i+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div></div>');
     }
     function deloptionrows_rank(rowid) {
         $('#'+rowid).remove();
@@ -47,14 +47,14 @@ print_r($_POST);
             for (var i = 0; i < survey_question_option_array.length; i++) {
              survey_question_option_value = survey_question_option_array[i];
 
-        display_div+='<label class="radio"><input aria-label="Survey Question Option1[]" type="radio" name="survey_question_option1[]"/><span></span>'+survey_question_option_value.value+'</label>';
+        display_div+='<label class="radio"><input aria-label="<?php echo __('Survey Question Option1[]'); ?>" type="radio" name="survey_question_option1[]"/><span></span>'+survey_question_option_value.value+'</label>';
             }
         }else {
             display_div+='<div class="checkbox-list">';
             for (var i = 0; i < survey_question_option_array.length; i++) {
              survey_question_option_value = survey_question_option_array[i];
 
-        display_div+='<label class="checkbox"><input aria-label="Survey Question Option1[]" type="checkbox" name="survey_question_option1[]"/><span></span>'+survey_question_option_value.value+'</label>';
+        display_div+='<label class="checkbox"><input aria-label="<?php echo __('Survey Question Option1[]'); ?>" type="checkbox" name="survey_question_option1[]"/><span></span>'+survey_question_option_value.value+'</label>';
             }
         }
         display_div +='</div></div> </div>';
@@ -176,33 +176,33 @@ foreach ($starray as $key => $survey_data) { ?>
 if($survey_data['options_display_type']=="1") {
     ?>
     <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel_mc"> Multiple Choice Question</h5>
+                <h5 class="modal-title" id="exampleModalLabel_mc"> <?php echo __('Multiple Choice Question'); ?></h5>
                 <input type="hidden" name="options_display_type<?php echo $rowid_question; ?>" value="1" >
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
             </div>
             <div class="custom-icon">
 
                 <div class="form-group text-left">
-                    <span>Question Text: <span class="text-danger">*</span></span>
-                    <textarea aria-label="Survey Question1" id="survey_question1" name="survey_question<?php echo $rowid_question; ?>" class="form-control" placeholder=""><?php echo $survey_data['survey_question'];?> </textarea>
+                    <span><?php echo __('Question Text:'); ?> <span class="text-danger">*</span></span>
+                    <textarea aria-label="<?php echo __('Survey Question1'); ?>" id="survey_question1" name="survey_question<?php echo $rowid_question; ?>" class="form-control" placeholder=""><?php echo $survey_data['survey_question'];?> </textarea>
                 </div>
                 <div class="form-group text-left">
                     <div class="checkbox-inline">
                         <label class="checkbox checkbox-success">
-                            <input aria-label="Checkbox" type="checkbox" name="allow_multiple_selections<?php echo $rowid_question; ?>" <?php if($survey_data['allow_multiple_selections'] == 1) {?> checked="checked" value="1" <?php
+                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" name="allow_multiple_selections<?php echo $rowid_question; ?>" <?php if($survey_data['allow_multiple_selections'] == 1) {?> checked="checked" value="1" <?php
 } else { ?> value="0" <?php
 }?>  />
                             <span></span>
-                            Allow multiple selections
+                            <?php echo __('Allow multiple selections'); ?>
                         </label>
                         <label class="checkbox checkbox-success">
-                            <input aria-label="Checkbox" type="checkbox" value="1" <?php if($survey_data['require_response'] == 1) {?> checked="checked" <?php
+                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="1" <?php if($survey_data['require_response'] == 1) {?> checked="checked" <?php
 } ?>  name="require_response<?php echo $rowid_question; ?>">
                             <span></span>
-                            Require a Response
+                            <?php echo __('Require a Response'); ?>
                         </label>
                     </div>
                 </div>
@@ -215,7 +215,7 @@ if($survey_data['options_display_type']=="1") {
                     <div class="form-group row" id="rowid1">
                         <div class="col-lg-1"></div>
                         <div class="col-lg-11">
-                            <input aria-label="Input field" type="text" class="form-control" value="<?php echo $options;?>" name="survey_question_option<?php echo $rowid_question; ?>[]" placeholder="Option">
+                            <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo $options;?>" name="survey_question_option<?php echo $rowid_question; ?>[]" placeholder="<?php echo __('Option'); ?>">
                             <i class="flaticon-delete btn-primary" onclick="deloptionrows('<?php echo $rowid;?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                         </div>
                     </div>
@@ -224,7 +224,7 @@ if($survey_data['options_display_type']=="1") {
                 <?php }
                 ?>
                 <div class="form-group">
-                    <button class="btn btn-success"  onclick="addoptionrows()" id="addRows_mc" type="button">+ Add More</button>
+                    <button class="btn btn-success"  onclick="addoptionrows()" id="addRows_mc" type="button"><?php echo __('+ Add More'); ?></button>
                 </div>
             </div>
 
@@ -236,33 +236,33 @@ if($survey_data['options_display_type']=="1") {
 if($survey_data['options_display_type']=="2") {
     ?>
     <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel_rating"> Rating Question</h5>
+                <h5 class="modal-title" id="exampleModalLabel_rating"> <?php echo __('Rating Question'); ?></h5>
                 <input type="hidden" name="options_display_type<?php echo $rowid_question; ?>"value="2" >
 
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
             </div>
 
             <div class="modal-body custom-icon">
                 <div class="form-group text-left">
-                    <span>Question Text: <span class="text-danger">*</span></span>
-                    <textarea aria-label="Survey Question2" id="survey_question2" name="survey_question<?php echo $rowid_question; ?>" class="form-control" placeholder=""> <?php echo $survey_data['survey_question'];?> </textarea>
+                    <span><?php echo __('Question Text:'); ?> <span class="text-danger">*</span></span>
+                    <textarea aria-label="<?php echo __('Survey Question2'); ?>" id="survey_question2" name="survey_question<?php echo $rowid_question; ?>" class="form-control" placeholder=""> <?php echo $survey_data['survey_question'];?> </textarea>
                 </div>
                 <div class="checkbox-inline">
                     <label class="checkbox checkbox-success">
-                        <input aria-label="Checkbox" type="checkbox" value="1" name="require_response<?php echo $rowid_question; ?>" <?php if($survey_data['require_response'] == 1) {?> checked="checked" <?php
+                        <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="1" name="require_response<?php echo $rowid_question; ?>" <?php if($survey_data['require_response'] == 1) {?> checked="checked" <?php
 } ?>>
                         <span></span>
-                        Require a Response
+                        <?php echo __('Require a Response'); ?>
                     </label>
                 </div>
                 <?php foreach ($survey_data['survey_question_option'] as $key=>$options) {
                     $rowid = "rowid".$survey_data['key'].$key;
                     ?>
                 <div class="form-group text-left mt-10">
-                    <span>Scale from 1 to: <span class="text-danger">*</span></span>
-                    <input aria-label="Enter number" type="number" value="<?php echo $options?>" name="survey_question_option<?php echo $rowid_question; ?>[]" class="form-control" placeholder="10">
+                    <span><?php echo __('Scale from 1 to:'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Enter number'); ?>" type="number" value="<?php echo $options?>" name="survey_question_option<?php echo $rowid_question; ?>[]" class="form-control" placeholder="10">
                 </div>
                 <?php
             }?>
@@ -277,32 +277,32 @@ if($survey_data['options_display_type']=="3") {
 
 
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel_ranking"> Ranking Question</h5>
+                <h5 class="modal-title" id="exampleModalLabel_ranking"> <?php echo __('Ranking Question'); ?></h5>
                 <input type="hidden" name="options_display_type<?php echo $rowid_question; ?>"value="3" >
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
             </div>
             <div class="modal-body custom-icon">
                 <div class="form-group text-left">
-                    <span>Question Text: <span class="text-danger">*</span></span>
-                    <textarea aria-label="Survey Question3" id="survey_question3" name="survey_question<?php echo $rowid_question; ?>" class="form-control" placeholder=""><?php echo $survey_data['survey_question'];?> </textarea>
+                    <span><?php echo __('Question Text:'); ?> <span class="text-danger">*</span></span>
+                    <textarea aria-label="<?php echo __('Survey Question3'); ?>" id="survey_question3" name="survey_question<?php echo $rowid_question; ?>" class="form-control" placeholder=""><?php echo $survey_data['survey_question'];?> </textarea>
                 </div>
                 <div class="form-group text-left">
                     <div class="checkbox-inline">
                         <label class="checkbox checkbox-success">
-                            <input aria-label="Checkbox" type="checkbox" name="allow_multiple_selections<?php echo $rowid_question; ?>" <?php if($survey_data['allow_multiple_selections'] == 1) {?> checked="checked" value="1" <?php
+                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" name="allow_multiple_selections<?php echo $rowid_question; ?>" <?php if($survey_data['allow_multiple_selections'] == 1) {?> checked="checked" value="1" <?php
 } else { ?> value="0" <?php
 } ?>>
                             <span></span>
-                            Allow multiple selections
+                            <?php echo __('Allow multiple selections'); ?>
                         </label>
                         <label class="checkbox checkbox-success">
-                            <input aria-label="Checkbox" type="checkbox" value="1" name="require_response<?php echo $rowid_question; ?>" <?php if($survey_data['require_response'] == 1) {?> checked="checked" <?php
+                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="1" name="require_response<?php echo $rowid_question; ?>" <?php if($survey_data['require_response'] == 1) {?> checked="checked" <?php
 } ?>>
                             <span></span>
-                            Require a Response
+                            <?php echo __('Require a Response'); ?>
                         </label>
                     </div>
                 </div>
@@ -314,7 +314,7 @@ if($survey_data['options_display_type']=="3") {
                     <div class="form-group row" id="<?php echo $rowid;?>">
                         <div class="col-lg-1"></div>
                         <div class="col-lg-11">
-                            <input aria-label="Input field" type="text" class="form-control" value="<?php echo $options;?>" name="survey_question_option<?php echo $rowid_question; ?>[]" placeholder="Option">
+                            <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo $options;?>" name="survey_question_option<?php echo $rowid_question; ?>[]" placeholder="<?php echo __('Option'); ?>">
                             <i class="flaticon-delete btn-primary" onclick="deloptionrows('<?php echo $rowid;?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                         </div>
                     </div>
@@ -323,7 +323,7 @@ if($survey_data['options_display_type']=="3") {
                 <?php }
                 ?>
                 <div class="form-group">
-                    <button class="btn btn-success"  onclick="addoptionrows_rank()" id="addRows_rank" type="button">+ Add More</button>
+                    <button class="btn btn-success"  onclick="addoptionrows_rank()" id="addRows_rank" type="button"><?php echo __('+ Add More'); ?></button>
                 </div>
             </div>
 
@@ -332,25 +332,25 @@ if($survey_data['options_display_type']=="3") {
 
 if($survey_data['options_display_type']=="4") {?>
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel_freetext"> Free Text Question</h5>
+                <h5 class="modal-title" id="exampleModalLabel_freetext"> <?php echo __('Free Text Question'); ?></h5>
                 <input type="hidden" name="options_display_type<?php echo $rowid_question; ?>"value="4" >
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group text-left">
-                    <span>Question Text: <span class="text-danger">*</span></span>
-                    <textarea aria-label="Survey Question4" id="survey_question4" name="survey_question<?php echo $rowid_question; ?>" class="form-control" placeholder=""> <?php echo $survey_data['survey_question'];?> </textarea>
+                    <span><?php echo __('Question Text:'); ?> <span class="text-danger">*</span></span>
+                    <textarea aria-label="<?php echo __('Survey Question4'); ?>" id="survey_question4" name="survey_question<?php echo $rowid_question; ?>" class="form-control" placeholder=""> <?php echo $survey_data['survey_question'];?> </textarea>
                 </div>
                 <div class="form-group text-left">
                     <div class="checkbox-inline">
                         <label class="checkbox checkbox-success">
-                            <input aria-label="Checkbox" type="checkbox" value="1" name="require_response<?php echo $rowid_question; ?>" <?php if($survey_data['require_response'] == 1) {?> checked="checked" <?php
+                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="1" name="require_response<?php echo $rowid_question; ?>" <?php if($survey_data['require_response'] == 1) {?> checked="checked" <?php
 } ?>>
                             <span></span>
-                            Require a response
+                            <?php echo __('Require a response'); ?>
                         </label>
                     </div>
                 </div>

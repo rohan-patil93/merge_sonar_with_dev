@@ -158,20 +158,20 @@ function statuspopup(status,id){
 
 
                      <div class="card-header table-card-header">
-                      <h5> Employee Recognition</h5>
+                      <h5> <?= __('Employee Recognition') ?></h5>
                     <div class="card-header-right table-card-header ">
                          <?php
                                 $table_name = 'employee_recognitions';
                                 if($rowid!="") { $nmm= ViewStatusValue($emp_recognition_data['current_status'],$table_name);  ?>
                                 <div class="btn-group">
-                                    <button onclick="displaystausdrop(<?php echo $rowid; ?>,<?php echo "'".$table_name."'"; ?>,<?php echo $emp_recognition_data['current_status']; ?>)" class="btn btn-primary dropdown-toggle" style="color: <?php echo "#". $nmm['color']; ?>;    background:  <?php echo "#".strval($nmm['background_color'] ); ?>; border-color: <?php echo "#".strval($nmm['background_color']); ?>;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $nmm['name']; ?> </button>
+                                    <button onclick="displaystausdrop(<?php echo $rowid; ?>,<?php echo "'".$table_name."'"; ?>,<?php echo $emp_recognition_data['current_status']; ?>)" class="btn btn-primary dropdown-toggle" style="color: <?php echo "#". $nmm['color']; ?>;    background:  <?php echo "#".strval($nmm['background_color'] ); ?>; border-color: <?php echo "#".strval($nmm['background_color']); ?>;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo __($nmm['name'] ?? ''); ?> </button>
                                     <div class="dropdown-menu" id="dropdownlist_2">
                                     </div>
                                 </div>
                                 <?php } ?> &nbsp;
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                               <i class="icofont icofont-reply"></i>
-                              Back
+                              <?= __('Back') ?>
                         </a>
                       </div>
 
@@ -182,9 +182,9 @@ function statuspopup(status,id){
                             <input type="hidden" name="company_announcement_id" id="company_announcement_id" value="<?php echo $emp_recognition_data['company_announcement_id']=='0' ? '0' : $emp_recognition_data['company_announcement_id'];?>">
 
                             <div class="form-group row w-full">
-                                <span class="">Whom do you want to recognize ? </span>
+                                <span class=""><?= __('Whom do you want to recognize ?') ?> </span>
                                 <div class="">
-                                    <select aria-label="Recognition To[]" class="form-control js-example-basic-multiple" id="kt_select2_43" name="recognition_to[]"  multiple="multiple">
+                                    <select aria-label="<?php echo __('Recognition To[]'); ?>" class="form-control js-example-basic-multiple" id="kt_select2_43" name="recognition_to[]"  multiple="multiple">
                                         <?php foreach($emplist as $modekey=>$modevalue) {
                                                 if(($modevalue['date_of_leaving']!="" && strtotime($modevalue['date_of_leaving'])  > strtotime(date('Y-m-d')))|| $modevalue['date_of_leaving']=="" ){
                                             ?>
@@ -196,10 +196,10 @@ function statuspopup(status,id){
                             </div>
 
                             <div class="form-group row">
-                                <span class="">Appreciate Message</span>
+                                <span class=""><?= __('Appreciate Message') ?></span>
                                 <div class="">
                                     <input type="hidden" name="badge_id" value="<?php echo $emp_recognition_data['badge_id'];?>">
-                                    <textarea aria-label="Comments" type="text" class="form-control" id="comments" name="comments" rows='6'><?php echo $emp_recognition_data['comments'];?></textarea>
+                                    <textarea aria-label="<?php echo __('Comments'); ?>" type="text" class="form-control" id="comments" name="comments" rows='6'><?php echo $emp_recognition_data['comments'];?></textarea>
                                 </div>
                             </div>
                             <input type="hidden" id="display_in_announcement_2" value="">
@@ -211,8 +211,8 @@ function statuspopup(status,id){
                                 foreach ($badges as $key => $value) {
                                         ?>
                                         <label class="symbol symbol-circle symbol-60 mb-5">
-                                            <input aria-label="Badges" type="radio" name="badges" id="badge_id" onchange="selectbadge(this.value)" value="<?php echo $value['id'];?>" <?php echo $emp_recognition_data['badge_id']==$value['id']?'checked':'';?> >
-                                            <img src="uploads/all/<?php echo $value['image'];?>" class="img-radius img-50 align-top " alt="Attachment Preview">
+                                            <input aria-label="<?php echo __('Badges'); ?>" type="radio" name="badges" id="badge_id" onchange="selectbadge(this.value)" value="<?php echo $value['id'];?>" <?php echo $emp_recognition_data['badge_id']==$value['id']?'checked':'';?> >
+                                            <img src="uploads/all/<?php echo $value['image'];?>" class="img-radius img-50 align-top " alt="<?= __('Attachment Preview') ?>">
                                         </label>
 
                                         <?php
@@ -223,7 +223,7 @@ function statuspopup(status,id){
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <button type="button" id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" onclick="recognitionpopup()" value="exit"><i class="la la-check"></i>Preview Recognition</button>
+                                        <button type="button" id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" onclick="recognitionpopup()" value="exit"><i class="la la-check"></i><?= __('Preview Recognition') ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -236,11 +236,11 @@ function statuspopup(status,id){
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-3">
-                                <input aria-label="Month Year Cal" class="form-control r-date" type="month" name="month_year_cal" onchange="selectmonth(this.value);" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
+                                <input aria-label="<?php echo __('Month Year Cal'); ?>" class="form-control r-date" type="month" name="month_year_cal" onchange="selectmonth(this.value);" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-12 col-12 mb-4">
                                 <ul class="nav md-tabs infisuite_tab">
-                                    <li class="nav-item" data-bs-toggle="tooltip" data-placement="top" title="Received">
+                                    <li class="nav-item" data-bs-toggle="tooltip" data-placement="top" title="<?= __('Received') ?>">
                                         <a class="nav-link active" id="tab0" data-bs-toggle="tab" href="#tablink0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                             <span class="nav-text mt-0"> <i class="fa fa-certificate"></i> <!-- Received -->
                                             <span class="label label-md label-white ml-2 bg-primary mt-0 d-inline-block"><?php echo $totalreceived;  ?></span>
@@ -248,14 +248,14 @@ function statuspopup(status,id){
                                         </a>
                                          <div class="slide"></div>
                                     </li>
-                                    <li class="nav-item" data-bs-toggle="tooltip" data-placement="top" title="Recognized">
+                                    <li class="nav-item" data-bs-toggle="tooltip" data-placement="top" title="<?= __('Recognized') ?>">
                                         <a class="nav-link" id="tab1" data-bs-toggle="tab" href="#tablink1" aria-controls="taba1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                 <span class="nav-text mt-0"><i class="fa fa-thumbs-up"></i> <!-- Recognized -->
                                                 <span class="label label-md label-white ml-2 bg-primary mt-0 d-inline-block"><?php echo $totalsent;  ?></span></span>
                                         </a>
                                         <div class="slide"></div>
                                     </li>
-                                    <li class="nav-item" data-bs-toggle="tooltip" data-placement="bottom" title="All Recognitions" >
+                                    <li class="nav-item" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('All Recognitions') ?>" >
                                         <a class="nav-link " id="tab2" data-bs-toggle="tab" href="#tablink2" aria-controls="taba2" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                             <span class="nav-text mt-0"><i class="fa fa-users"></i> <!-- Recognized -->
                                                 <span class="label label-md label-white ml-2 bg-primary mt-0 d-inline-block"><?php echo $totalemp;  ?></span></span>
@@ -280,13 +280,13 @@ function statuspopup(status,id){
                                                 <tr>
                                                     <th scope="col" style="width: 5%;">#</th>
                                                     <?php if($tabindex == '0' || $tabindex == '2'){ ?>
-                                                    <th scope="col" style="width: 25%;">Recognized By</th>
+                                                    <th scope="col" style="width: 25%;"><?= __('Recognized By') ?></th>
                                                 <?php }
                                                 if($tabindex == '1' || $tabindex == '2'){ ?>
-                                                    <th scope="col" style="width: 25%;">Recognized</th>
+                                                    <th scope="col" style="width: 25%;"><?= __('Recognized') ?></th>
                                                 <?php } ?>
-                                                    <th scope="col" style="width: 25%;">Badges </th>
-                                                    <th scope="col" style="width: 20%;">Month </th>
+                                                    <th scope="col" style="width: 25%;"><?= __('Badges') ?></th>
+                                                    <th scope="col" style="width: 20%;"><?= __('Month') ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -301,13 +301,13 @@ function statuspopup(status,id){
                                                     $badgesdetail = $badges[$detailvalue['badge_id']];
 
                                                     ?>
-                                                    <tr onclick="showrecognitioncard('<?php echo $detailvalue['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Veiw Bandage" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                                                    <tr onclick="showrecognitioncard('<?php echo $detailvalue['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click To Veiw Bandage') ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                         <td class="p-2  pt-3"> <?php echo $serialno; ?> </td>
                                                         <?php if($tabindex == '0' || $tabindex == '2'){ ?>
                                                         <td class="p-2">
                                                             <div class="align-middle">
                                                             <?php if($userdetail['image'] !=""){?>
-                                                                <img src="uploads/all/<?php echo $userdetail['image']; ?>"  class="img-radius img-40 align-top m-r-5" style="display: inline-block;" alt="User Profile">
+                                                                <img src="uploads/all/<?php echo $userdetail['image']; ?>"  class="img-radius img-40 align-top m-r-5" style="display: inline-block;" alt="<?= __('User Profile') ?>">
                                                             <?php } else { ?>
                                                                 <span  alt="user" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center" style="display: inline-block;"><?php echo initials($userdetail['display_name']); ?></span>
                                                             <?php } ?>
@@ -321,7 +321,7 @@ function statuspopup(status,id){
                                                         <td class="p-2">
                                                             <div class="align-middle">
                                                             <?php if($empdetail['image'] !=""){?>
-                                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-40 align-top m-r-5" style="display: inline-block;" alt="Attachment Preview">
+                                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-40 align-top m-r-5" style="display: inline-block;" alt="<?= __('Attachment Preview') ?>">
                                                             <?php } else { ?>
                                                                 <span  alt="user" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center" style="display: inline-block;"><?php echo initials($empdetail['display_name']); ?></span>
                                                             <?php } ?>
@@ -333,9 +333,9 @@ function statuspopup(status,id){
                                                         <?php } ?>
                                                         <td class="p-2">
                                                             <div class="align-middle" >
-                                                                <img src="uploads/all/<?php echo $badgesdetail['image']; ?>"  class="img-radius img-40 align-top m-r-5" style="display: inline-block;" alt="Attachment Preview">
+                                                                <img src="uploads/all/<?php echo $badgesdetail['image']; ?>"  class="img-radius img-40 align-top m-r-5" style="display: inline-block;" alt="<?= __('Attachment Preview') ?>">
                                                                 <div class="d-inline-block width73 text-primary" >
-                                                                    <p class="text-muted m-b-0 mt-2"><?php echo $badgesdetail['badge_name']; ?></p>
+                                                                    <p class="text-muted m-b-0 mt-2"><?php echo __($badgesdetail['badge_name'] ?? ''); ?></p>
                                                                 </div>
                                                             </div>
 
@@ -348,7 +348,7 @@ function statuspopup(status,id){
                                         <?php }else{ ?>
                                         <div class="accordion-desc custom-scroll p-0 ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active" style="height: 400px;" id="ui-id-2" aria-labelledby="ui-id-1" role="tabpanel" aria-hidden="false">
                                        <div class="card-px text-center ">
-                                          <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Badge</p>
+                                          <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Badge') ?></p>
                                           <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                           </div>

@@ -62,7 +62,7 @@ foreach($notes as $note){
      function addChildNotes(parent_id,name){
         $('#kt_modal_KTDatatable_remote').animate({ scrollTop: 0 }, 'slow');
         $("#parentsubmit").hide();
-        $("#parentnotename").text("Parent Note: "+name);
+        $("#parentnotename").text(<?php echo json_encode(__('Parent Note:')); ?>+name);
         $("#parent_id").val(parent_id);
         $("#note_id").val('');
         $("#note_number").val('');
@@ -91,33 +91,33 @@ foreach($notes as $note){
  </script>
  <div class="modal-content" id="divtop">
     <div class="modal-header">
-        <h4 class="modal-title">Notes</h4>
+        <h4 class="modal-title"><?php echo __('Notes'); ?></h4>
 
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
     </div>
     <div class="modal-body">
         <div class="text-left mb-2">
-            <button type="button" class="btn-primary" onclick="addNewNotes()" data-bs-toggle="tooltip" data-placement="bottom" title="Add Parent Note">Add Parent</button>
+            <button type="button" class="btn-primary" onclick="addNewNotes()" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Add Parent Note'); ?>"><?php echo __('Add Parent'); ?></button>
         </div>
         <form id="parentsubmit" style="display:none">
             <div class="row">
                 <p id="parentnotename"></p>
                 <div class="form-group col-lg-2">
-                    <span class="form-label">Note No.<span class="text-danger">*</span></span>
-                    <input aria-label="Note Number" type="text"  class="form-control text-capitalize"  name="note_number" id="note_number" value="" />
+                    <span class="form-label"><?php echo __('Note No.'); ?><span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Note Number'); ?>" type="text"  class="form-control text-capitalize"  name="note_number" id="note_number" value="" />
                 </div>
                 <div class="form-group col-lg-4">
-                    <span class="form-label">Lable<span class="text-danger">*</span></span>
-                    <input aria-label="Note Name" type="text"  class="form-control text-capitalize"  name="note_name" id="note_name" value="" />
+                    <span class="form-label"><?php echo __('Lable'); ?><span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Note Name'); ?>" type="text"  class="form-control text-capitalize"  name="note_name" id="note_name" value="" />
                 </div>
                 <div class="form-group col-lg-4">
-                    <span class="form-label">Description<span class="text-danger">*</span></span>
-                    <textarea aria-label="Description" type="text"  class="form-control text-capitalize"  name="description" id="description" ></textarea>
+                    <span class="form-label"><?php echo __('Description'); ?><span class="text-danger">*</span></span>
+                    <textarea aria-label="<?php echo __('Description'); ?>" type="text"  class="form-control text-capitalize"  name="description" id="description" ></textarea>
                 </div>
                 <div class="form-group col-lg-2">
                     <input type="hidden" name="parent_id" id="parent_id" value="0">
                     <input type="hidden" name="note_id" id="note_id" value="<?php echo $note_id; ?>">
-                    <button  type="button" class="btn btn-primary btn-shadow-hover font-weight-bold m-t-30" onclick="parentFormSubmitNote()">Submit </button>
+                    <button  type="button" class="btn btn-primary btn-shadow-hover font-weight-bold m-t-30" onclick="parentFormSubmitNote()"><?php echo __('Submit'); ?> </button>
                 </div>
             </div>
         </form>
@@ -125,9 +125,9 @@ foreach($notes as $note){
        <?php foreach($noteslist[0] as $noteslists){ ?>
         <h4 class="f-16 f-w-600 mt-3"><?php echo $noteslists['note_number'].".".$noteslists['note_name'];?>
             <span class="float-right">
-                <i class="ti-pencil-alt m-r-10" data-value="<?php echo $noteslists['description']; ?>" onclick="editeNotes('<?php echo $noteslists['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Edit Note" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
-                <i class="fa fa-plus-square m-r-10" onclick="addChildNotes('<?php echo $noteslists['id']; ?>','<?php echo $noteslists['note_name']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Add Child" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
-                <i class="ti-share" onclick="usedNoteNumber('<?php echo $noteslists['note_number']; ?>','<?php echo $fingrpid; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Used Note" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                <i class="ti-pencil-alt m-r-10" data-value="<?php echo $noteslists['description']; ?>" onclick="editeNotes('<?php echo $noteslists['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Edit Note'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                <i class="fa fa-plus-square m-r-10" onclick="addChildNotes('<?php echo $noteslists['id']; ?>','<?php echo $noteslists['note_name']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Add Child'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                <i class="ti-share" onclick="usedNoteNumber('<?php echo $noteslists['note_number']; ?>','<?php echo $fingrpid; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Used Note'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
             <span>
         </h4>
         <p class="pt-2"><?php echo $noteslists['description'];?></p>
@@ -136,8 +136,8 @@ foreach($notes as $note){
         <?php foreach($noteslist[$noteslists['id']] as $noteslists){ ?>
                 <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><?php echo $noteslists['note_number'].".".$noteslists['note_name'];?>
                     <span class="float-right">
-                    <i class="ti-pencil-alt m-r-10" onclick="editeNotes('<?php echo $noteslists['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Edit Note" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
-                     <i class="ti-share" onclick="usedNoteNumber('<?php echo $noteslists['note_number']; ?>','<?php echo $fingrpid; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Used Note" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                    <i class="ti-pencil-alt m-r-10" onclick="editeNotes('<?php echo $noteslists['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Edit Note'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                     <i class="ti-share" onclick="usedNoteNumber('<?php echo $noteslists['note_number']; ?>','<?php echo $fingrpid; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Used Note'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
                 <span>
                 </a>
                 <div class="accordion-desc pt-2">
@@ -151,9 +151,9 @@ foreach($notes as $note){
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Cancel'); ?></button>
 
-        <button type="button" class="btn btn-primary waves-effect waves-light " onclick="submitform()">Save</button>
+        <button type="button" class="btn btn-primary waves-effect waves-light " onclick="submitform()"><?php echo __('Save'); ?></button>
     </div>
 </div>
 

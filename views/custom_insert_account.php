@@ -442,10 +442,10 @@ function removefile(val){
              exchangerate();
             }else{
                 swal.fire({              
-                            title: "6010 : Please Define Exchange Rate",                            
+                            title: "6010 : <?php echo __('Please Define Exchange Rate'); ?>",                            
                             type: "warning",           
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>OK",    
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('OK'); ?>",    
                             confirmButtonClass: "btn btn-danger"
                         })
             }  
@@ -998,11 +998,11 @@ function calculateTotal(){
     if (parseFloat(quantity_old) < parseFloat(quantity)){
         //alert('data');
         swal.fire({              
-            title: "Quantity alert ",              
-            text: "6030 : Quantity cannot be more than "+quantity_old,              
+            title: "<?php echo __('Quantity alert'); ?> ",              
+            text: "6030 : <?php echo __('Quantity cannot be more than'); ?> "+quantity_old,              
             type: "warning",           
             buttonsStyling: false,
-            confirmButtonText: "<i class='la la-hand-o-up'></i>OK",    
+            confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('OK'); ?>",    
             confirmButtonClass: "btn btn-danger",   
         }).then(function(result) {
             
@@ -1031,14 +1031,15 @@ function calculateTotal(){
                     console.log(quantity);
                     if (parseFloat(data) < quantity){
                         swal.fire({              
-                            title: "Quantity on hand "+parseFloat(data),              
-                            text: "6020 : Do you want to change the quantity to "+parseFloat(data)+" ?",              
+                            title: "<?php echo __('Quantity on hand'); ?> "+parseFloat(data),              
+                            text: "6020 : <?php echo __('Do you want to change the quantity to'); ?> "+parseFloat(data)+" ?",
+              
                             type: "warning",           
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, change!",    
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('Yes, change!'); ?>",    
                             confirmButtonClass: "btn btn-danger",
                             showCancelButton: true,     
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, proceed",      
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> <?php echo __('No, proceed'); ?>",      
                             cancelButtonClass: "btn btn-default"        
                         }).then(function(result) {
                             if (result.value) {
@@ -1133,7 +1134,7 @@ function calculateTotal(){
         <div class="alert-icon"><i class="flaticon-warning"></i></div>
         <div class="alert-text">    <?php echo $_GET['error']." : ".$_SESSION['error_message'][$_GET['error']]; ?>   </div>
         <div class="alert-close">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="<?php echo __('Close'); ?>">
                 <span aria-hidden="true"><i class="la la-close"></i></span>
             </button>
         </div>
@@ -1232,7 +1233,7 @@ function calculateTotal(){
     <?php } ?>
         <a href="javascript:history.go(-1)" class="btn btn-clean kt-margin-r-10">
             <i class="la la-arrow-left"></i>
-            <span class="kt-hidden-mobile">Back</span>
+            <span class="kt-hidden-mobile"><?php echo __('Back'); ?></span>
         </a>
         <input type="hidden" name="status_values" id="status_values" value="<?php echo $table1['current_status']; ?>">
         <input type="hidden" name="status_old_value" id="status_old_value" value="<?php echo $table1['current_status']; ?>">
@@ -1249,10 +1250,10 @@ function calculateTotal(){
 //}
  ?>
  <?php if(in_array($table_name, (array)$originator_tables)){  ?>
-   <label class="col-form-label col-lg-2 col-sm-12">Originator:</label>
+   <label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Originator'); ?>:</label>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <select class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValueEmployee(this.value)" aria-label="Party Id">
-            <option value="0"> Select Any EMployee </option>
+            <option value="0"> <?php echo __('Select Any EMployee'); ?> </option>
             <?php foreach ($cusresponse as $key => $cus) {  ?>
             <option  <?php if($table1['party_id'] == $cus['id']){ ?> selected  <?php } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['first_name']," ".$cus['middle_name']."".$cus['last_name']; ?> 
             </option>
@@ -1260,10 +1261,10 @@ function calculateTotal(){
         </select>
     </div>
 <?php } elseif(in_array($table_name, (array)$stock_table)){ ?> 
-    <label class="col-form-label col-lg-2 col-sm-12">Location:</label>
+    <label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Location'); ?>:</label>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <select class="form-control" id="transfer_location_id" name= "transfer_location_id" aria-label="Transfer Location Id">
-            <option value="0"> Select Any Location </option>
+            <option value="0"> <?php echo __('Select Any Location'); ?> </option>
             <?php foreach ($locations_data as $locatdata) {  ?>
             <option  <?php if($table1['transfer_location_id'] == $locatdata['id']){ ?> selected  <?php } ?> value = <?php echo $locatdata['id'] ?>   >      <?php echo $locatdata['location_description']; ?> 
             </option>
@@ -1272,10 +1273,10 @@ function calculateTotal(){
     </div>    
 
 <?php }else{ ?> 
-    <label class="col-form-label col-lg-2 col-sm-12">Vendor:</label>
+    <label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Vendor'); ?>:</label>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <select class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValue(this.value)" aria-label="Party Id">
-            <option value="0"> Select Any Vendor </option>
+            <option value="0"> <?php echo __('Select Any Vendor'); ?> </option>
             <?php foreach ($cusresponse as $key => $cus) {  ?>
             <option  <?php if($table1['party_id'] == $cus['id']){ ?> selected  <?php } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['display_name']; ?> 
             </option>
@@ -1283,18 +1284,18 @@ function calculateTotal(){
         </select>
     </div>
 <?php } ?>
-    <label class="col-lg-2 col-form-label">Transaction Number:</label>
+    <label class="col-lg-2 col-form-label"><?php echo __('Transaction Number'); ?>:</label>
     <div class="col-lg-3">
         <input class="form-control" type='hidden' id="ord_no" value='<?php echo $invoicenumber; ?>' name="invoice_serial_number"/>
-        <input  class="form-control" readonly type='text' value='<?php echo $tran_no; ?>'   name="invoice_number" id="invoice_number" / aria-label="Invoice Number">
+        <input  class="form-control" readonly type='text' value='<?php echo $tran_no; ?>'   name="invoice_number" id="invoice_number" / aria-label="<?php echo __('Invoice Number'); ?>">
 
     </div>
 </div>
 <div class="form-group row">
-    <label class="col-form-label col-lg-2 col-sm-12">Cost Center:</label>
+    <label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Cost Center'); ?>:</label>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <select class="form-control" id="cost_center" name="cost_center" aria-label="Cost Center">
-            <option value="0"> Select any  </option>
+            <option value="0"> <?php echo __('Select any'); ?>  </option>
             <?php foreach ($costs as  $k1 =>$pos) {  ?>
                 <optgroup label="<?php echo $k1; ?>">
                 
@@ -1305,11 +1306,11 @@ function calculateTotal(){
         <?php } ?>
         </select>
     </div>
-    <label class="col-form-label col-lg-2 col-sm-12">Transaction Date:</label>
+    <label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Transaction Date'); ?>:</label>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <div class="input-group date">
             <?php $from = fromDate($table1['qo_date']); ?>
-            <input  class="form-control" onblur="duedate()" type='text' autocomplete="off" value='<?php  echo $from; ?>' name="invoiced_at" id="kt_datepicker_4_3"  / aria-label="Invoiced At">
+            <input  class="form-control" onblur="duedate()" type='text' autocomplete="off" value='<?php  echo $from; ?>' name="invoiced_at" id="kt_datepicker_4_3"  / aria-label="<?php echo __('Invoiced At'); ?>">
             <div class="input-group-append">
                 <span class="input-group-text"> <i class="la la-calendar"></i></span>
              </div>
@@ -1317,20 +1318,20 @@ function calculateTotal(){
     </div>
 </div>
 <div class="form-group row" <?php echo $petty_cash_style; ?>>
-    <label class="col-form-label col-lg-2 col-sm-12">Department:</label>
+    <label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Department'); ?>:</label>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <select class="form-control kt-select2" id="kt_select2_3" name="param" aria-label="Param">
            <?php foreach ($departmentslist as  $department) { ?>
 
-            <option value="<?php echo $department['id']; ?>"><?php echo $department['department_name']; ?></option>
+            <option value="<?php echo $department['id']; ?>"><?php echo htmlspecialchars(__($department['department_name'] ?? '')); ?></option>
             <?php } ?>
         </select>
     </div>
      <?php $table1['place_of_supply'] = $table1['place_of_supply'] !='' ? $table1['place_of_supply'] : $location_state; ?>
-    <label class="col-lg-2 col-form-label">Place Of Supply:</label>
+    <label class="col-lg-2 col-form-label"><?php echo __('Place Of Supply'); ?>:</label>
     <div class="col-lg-3">
         <select class="form-control" name="place_of_supply" id="party_place_of_supply" onchange="displaytaxes()" aria-label="Place Of Supply">
-            <option value="0"> Select Any Place </option>
+            <option value="0"> <?php echo __('Select Any Place'); ?> </option>
             <?php foreach ($posresponse as $key => $pos) {  ?>
                 <option   <?php if($table1['place_of_supply'] == $pos['id']){ ?>selected <?php } ?>  value ="<?php echo $pos['id']; ?>" > <?php echo $pos['state_name']; ?> </option>
             <?php } ?>
@@ -1343,7 +1344,7 @@ function calculateTotal(){
 <?php if($table_name != 'petty_cash'){ 
         if($table_name != 'bills'){
     ?>
-<label class="col-form-label col-lg-2 col-sm-12">Category:</label>
+<label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Category'); ?>:</label>
 <div class=" col-lg-3 col-md-9 col-sm-12">
     <select class="form-control" id="kt_select2_4" name= "type" aria-label="Type">
                <?php foreach ($itemtypelist as $itemtype) {  ?>
@@ -1352,7 +1353,7 @@ function calculateTotal(){
      </select>
 </div>
 <?php } } else{ ?>
-<label class="col-form-label col-lg-2 col-sm-12">Branch:</label>
+<label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Branch'); ?>:</label>
 <div class=" col-lg-3 col-md-9 col-sm-12">
     <select class="form-control" id="kt_select2_4" name= "type" aria-label="Type">
                <?php foreach ($boxlist as $itemtype) {  ?>
@@ -1361,11 +1362,11 @@ function calculateTotal(){
      </select>
 </div>
 <?php } ?>
-<label class="col-lg-2 col-form-label" <?php echo $petty_cash_style; ?>>Type:</label>
+<label class="col-lg-2 col-form-label" <?php echo $petty_cash_style; ?>><?php echo __('Type'); ?>:</label>
 <div class="col-lg-3" <?php echo $petty_cash_style; ?>>
     <div class="kt-radio-inline">
-        <label class="kt-radio"> <input type="radio"  <?php if($table1['opex_cpex']== 0){ ?>checked <?php } ?> name="opex_cpex" value='0' aria-label="Opex Cpex">Opex    <span></span></label>
-        <label class="kt-radio"> <input type="radio"  <?php if($table1['opex_cpex'] == 1){ ?>checked <?php } ?> name="opex_cpex" value='1' aria-label="Opex Cpex">Cpex    <span></span></label>
+        <label class="kt-radio"> <input type="radio"  <?php if($table1['opex_cpex']== 0){ ?>checked <?php } ?> name="opex_cpex" value='0' aria-label="<?php echo __('Opex'); ?>"><?php echo __('Opex'); ?>    <span></span></label>
+        <label class="kt-radio"> <input type="radio"  <?php if($table1['opex_cpex'] == 1){ ?>checked <?php } ?> name="opex_cpex" value='1' aria-label="<?php echo __('Cpex'); ?>"><?php echo __('Cpex'); ?>    <span></span></label>
     </div>
 </div>
 </div>
@@ -1376,42 +1377,42 @@ function calculateTotal(){
             <div class="card">
                 <div class="card-header" id="headingTwo6">
                     <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo6" aria-expanded="false" aria-controls="collapseTwo6">
-                        <!-- <i class="flaticon2-notification"></i> --> Contact Detail
+                        <!-- <i class="flaticon2-notification"></i> --> <?php echo __('Contact Detail'); ?>
                     </div>
                 </div>
                 <div id="collapseTwo6" class="collapse" aria-labelledby="headingTwo6" data-parent="#accordionExample6">
                     <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Name</label>
+                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Name'); ?></label>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                   <input readonly class="form-control"  type='text' id="party_name" name="party_name"    value="<?php echo $table1['party_name']; ?>" / aria-label="Party Name">
                                 </div>
                             </div>
                             <div class="">
                                 <div class="form-group row">
-                                    <label class="col-form-label col-lg-4 col-sm-12">Billing Address</label>
+                                    <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Billing Address'); ?></label>
                                     <div class="col-lg-8 col-md-8 col-sm-12">
-                                       <textarea type="text" name="party_address" id="party_address" class="form-control" placeholder="Enter your address" aria-label="Enter your address"><?php echo $table1['party_address'] ?></textarea>
+                                       <textarea type="text" name="party_address" id="party_address" class="form-control" placeholder="<?php echo __('Enter your address'); ?>" aria-label="<?php echo __('Enter your address'); ?>"><?php echo $table1['party_address'] ?></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="">
                                 <div class="form-group row">
-                                    <label class="col-form-label col-lg-4 col-sm-12">Shipping Address</label>
+                                    <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Shipping Address'); ?></label>
                                     <div class="col-lg-8 col-md-8 col-sm-12">
-                                       <textarea type="text" class="form-control" id="party_ship_adderss" name='party_ship_adderss' placeholder="Enter your address" aria-label="Enter your address"><?php echo $table1['party_address'] ?></textarea>
+                                       <textarea type="text" class="form-control" id="party_ship_adderss" name='party_ship_adderss' placeholder="<?php echo __('Enter your address'); ?>" aria-label="<?php echo __('Enter your address'); ?>"><?php echo $table1['party_address'] ?></textarea>
                                     </div>
                                 </div>
                             </div>
                                 
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Email Address</label>
+                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Email Address'); ?></label>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <input type='text' class="form-control" id="party_email" readonly name="party_email"  value="<?php echo $table1['party_email']; ?>"/ aria-label="Party Email">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Phone Number</label>
+                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Phone Number'); ?></label>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <input type='text' id="party_phone" name="party_phone" class="form-control" readonly value="<?php echo $table1['party_phone']; ?>" / aria-label="Party Phone">
                                     <input type='hidden'  name="company_id" id="company_id" class="form-control" readonly value="<?php echo $_SESSION['company_id']; ?>" />
@@ -1429,23 +1430,23 @@ function calculateTotal(){
             <div class="card">
                 <div class="card-header" id="headingTax">
                     <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTax" aria-expanded="false" aria-controls="collapseTax">
-                    Tax/Other Details
+                    <?php echo __('Tax/Other Details'); ?>
                     </div>
                     <input type="hidden" name="location_id" value="<?php echo $table1['location_id']; ?>">
                 </div>
                 <div id="collapseTax" class="collapse" aria-labelledby="headingTax" data-parent="#accordionTax">
                     <div class="card-body">                                 
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Tax Number</label>
+                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Tax Number'); ?></label>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <input type='text' id="party_tax_number" name="party_tax_number" class="form-control" readonly value="<?php echo $table1['party_tax_number']; ?>" / aria-label="Party Tax Number">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Payment Terms</label>
+                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Payment Terms'); ?></label>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                      <select class="form-control"  onchange="duedate()"  name="payment_terms" id="party_payment_terms" aria-label="Payment Terms">
-                                            <option value="0"> Select Any Term </option>
+                                            <option value="0"> <?php echo __('Select Any Term'); ?> </option>
                                         <?php foreach ($posresponsept as $key => $pos) {  ?>
                                             <option   <?php if($table1['payment_terms'] == $pos['genc_detail_code']){ ?>selected <?php } ?>  value ="<?php echo $pos['genc_detail_code']; ?>" > <?php echo $pos['genc_detail_name']; ?> </option>
                                         <?php } ?>
@@ -1456,11 +1457,11 @@ function calculateTotal(){
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Currency</label>
+                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Currency'); ?></label>
                                 <?php  $table1['currency_id'] =  $table1['currency_id'] !="" ? $table1['currency_id'] : $_SESSION['config']['default_currency_id'];?>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <select class="form-control" onchange="currencychange(this.value,<?php echo  $_SESSION['config']['default_currency_id'];  ?>)"  name="currency_id" id="currency_id" aria-label="Currency Id">
-                                        <option value="0"> Select Any Currency </option>
+                                        <option value="0"> <?php echo __('Select Any Currency'); ?> </option>
                                         <?php
                                         foreach ($cr_data as  $crpos) {  ?>
                                             <option  <?php if($table1['currency_id'] == $crpos['id']){ ?> selected  <?php } ?>   value ="<?php echo $crpos['id']; ?>" > <?php echo base64_decode($crpos['currency_list']); ?> </option>
@@ -1470,13 +1471,13 @@ function calculateTotal(){
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Ex Rate</label>
+                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Ex Rate'); ?></label>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                    <input type='text' class="form-control" id="currency_rate" onchange="exchangerate()"  name="currency_rate"  value="<?php echo customeummarmonyformate($table1['currency_rate']); ?>"/ aria-label="Currency Rate">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Due Date:</label>
+                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Due Date'); ?>:</label>
                                   <?php $duee = $table1['due_date'] !='' ?  fromDate($table1['due_date']) :  ''; ?>
                                    <div class="col-lg-8 col-md-8 col-sm-12">
                                 <input type='text' class="form-control" id="due_date"   name="due_date"  value=" <?php  echo $duee; ?>" readonly / aria-label="Due Date">
@@ -1485,10 +1486,10 @@ function calculateTotal(){
                             <?php if(!in_array($table_name, (array)$originator_table_withbill)){ 
                                   $req_list = toGetPendingRequisitionQty($rtable_name);?>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Refernce Number</label>
+                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Number'); ?></label>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                      <select class="form-control"  name="ref_id" id="ref_id" onchange="toredriacte(this.value,<?php echo  "'".$option."'"; ?>,<?php echo  "'".$rtable_name."'"; ?>)" aria-label="Ref Id">
-                                        <option value="0"> Select Any Refernce </option>
+                                        <option value="0"> <?php echo __('Select Any Refernce'); ?> </option>
                                         <?php foreach ($req_list as  $req) {  ?>
                                             <option  <?php if($table1['ref_id'] == $req['id']){ ?> selected  <?php } ?>   value ="<?php echo $req['id']; ?>" > <?php echo $req['transaction_number']; ?> </option>
                                         <?php } ?>
@@ -1499,7 +1500,7 @@ function calculateTotal(){
 
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Refernce Date</label>
+                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Date'); ?></label>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <div class="kt-input-icon kt-input-icon--right" >
                                         <input type='text' class="form-control" readonly id="ref_date"  name="ref_date"  value="<?php echo $table1['ref_date']; ?>"/ aria-label="Ref Date">
@@ -1509,7 +1510,7 @@ function calculateTotal(){
                             </div>
                             <?php } if($table_name == 'bills'){?>       
                              <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Refernce Number</label>
+                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Number'); ?></label>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     
                                     <input type='text' class="form-control"  name="doc_ref_no"  value="<?php echo $table1['doc_ref_no']; ?>"/ aria-label="Doc Ref No">
@@ -1517,7 +1518,7 @@ function calculateTotal(){
 
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Refernce Date</label>
+                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Date'); ?></label>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <div class="kt-input-icon kt-input-icon--right" >
                                         <input type='text' class="form-control"  id="kt_datepicker_32"  name="doc_ref_date"  value="<?php echo $table1['doc_ref_date']; ?>"/ aria-label="Doc Ref Date">
@@ -1539,13 +1540,13 @@ function calculateTotal(){
 <!--begin::Page second part -->
 
 <div class="kt-portlet__head">
-        <div class="kt-portlet__head-label"><h3 class="kt-portlet__head-title"> Items/Services </h3></div>
+        <div class="kt-portlet__head-label"><h3 class="kt-portlet__head-title"> <?php echo __('Items/Services'); ?> </h3></div>
     <div class="kt-portlet__head-label" style="float: right;">
          <div class="form-group col-lg-12">
             <select class="form-control" id="taxtype" name= "tax_type" onchange="calculateTotal()" aria-label="Tax Type">
-                    <option  <?php if($table1['taxtype'] == 'E'){ ?>selected <?php } ?> value="E"> Exclusive </option>
-                    <option  <?php if($table1['taxtype'] == 'I'){ ?>selected <?php } ?> value="I"> Inclusive </option>
-                    <option  <?php if($table1['taxtype'] == 'O'){ ?>selected <?php } ?> value="O"> Out Of scope </option>
+                    <option  <?php if($table1['taxtype'] == 'E'){ ?>selected <?php } ?> value="E"> <?php echo __('Exclusive'); ?> </option>
+                    <option  <?php if($table1['taxtype'] == 'I'){ ?>selected <?php } ?> value="I"> <?php echo __('Inclusive'); ?> </option>
+                    <option  <?php if($table1['taxtype'] == 'O'){ ?>selected <?php } ?> value="O"> <?php echo __('Out Of scope'); ?> </option>
             </select>
         </div>
      </div>
@@ -1564,24 +1565,24 @@ function calculateTotal(){
 <!--begin::Page third part -->
     <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-            <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>
-            <button class="btn btn-success" id="addRows" type="button">+ Add More</button>
+            <button class="btn btn-danger delete" id="removeRows" type="button">- <?php echo __('Delete'); ?></button>
+            <button class="btn btn-success" id="addRows" type="button">+ <?php echo __('Add More'); ?></button>
         </div>
     </div>
     <div style="float: left;width: 50%; padding: 15px;">
        <div>
             <div style="float: left;width: 48%;padding: 1%;">
-                <label class="">Internal Note(s) </label>
+                <label class=""><?php echo __('Internal Note(s)'); ?> </label>
                 <textarea style="height: 120px;" name="notes" class="form-control" aria-label="Notes"><?php echo $table1['notes']; ?></textarea>
             </div>
             <div style="float: left;width: 48%;padding: 1%;">
-                <label class="">Printing Note(s) </label>
+                <label class=""><?php echo __('Printing Note(s)'); ?> </label>
                 <textarea style="height: 120px;" name="printing_notes" class="form-control" aria-label="Printing Notes"><?php echo $table1['printing_notes']; ?></textarea>
             </div>
         </div>
           <?php if($small_sub == 0  ){ ?>
             <div style="margin-top: 10px;clear:both;">
-                <label class="">Comment(s)</label>
+                <label class=""><?php echo __('Comment(s)'); ?></label>
                 <textarea style="height: 120px;" name="comments" class="form-control" id="comments" aria-label="Comments"><?php echo $comments; ?></textarea>
             </div>
             <div class="btn-group" style="margin-top: 10px;float: right;">
@@ -1640,7 +1641,7 @@ function calculateTotal(){
     <div style="float: left;width: 50%">
     <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
         <tr>
-            <th scope="col" class="amount"><span>Sub Total</span></th>
+            <th scope="col" class="amount"><span><?php echo __('Sub Total'); ?></span></th>
             <td  width="18%">
                 <span>
                     <input  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subtotal_debit" id="dis_subtotal_debit" aria-label="Dis Subtotal Debit">
@@ -1649,7 +1650,7 @@ function calculateTotal(){
             </td>
             <td  width="18%">
                 <span>
-                    <input  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subtotal_credit" id="dis_subtotal_credit" placeholder="Subtotal" aria-label="Subtotal">
+                    <input  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subtotal_credit" id="dis_subtotal_credit" placeholder="<?php echo __('Subtotal'); ?>" aria-label="<?php echo __('Subtotal'); ?>">
                   <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subtotal_credit" id="subtotal_credit" >
                 </span>
               </td>
@@ -1687,12 +1688,12 @@ function calculateTotal(){
             </td>
         </tr>
         <tr>
-            <th scope="col" class="amount" ><span>Grand Total</span></th>
+            <th scope="col" class="amount" ><span><?php echo __('Grand Total'); ?></span></th>
              <input  type="hidden" class="form-control amount" name="credit_tax" value="0" id="credit_tax">
              <input  type="hidden" class="form-control amount" name="debit_tax" value="0" id="debit_tax">
              <input  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="Tax Amount">
-            <td><input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal_debit" id="dis_grandtotal_debit" readonly placeholder="Grand Total" aria-label="Grand Total"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal_debit" id="grandtotal_debit" readonly placeholder="Grand Total"></td>
-            <td><input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal_credit" id="dis_grandtotal_credit" readonly placeholder="Grand Total" aria-label="Grand Total"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal_credit" id="grandtotal_credit" readonly placeholder="Grand Total"></td>
+            <td><input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal_debit" id="dis_grandtotal_debit" readonly placeholder="<?php echo __('Grand Total'); ?>" aria-label="<?php echo __('Grand Total'); ?>"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal_debit" id="grandtotal_debit" readonly placeholder="<?php echo __('Grand Total'); ?>"></td>
+            <td><input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal_credit" id="dis_grandtotal_credit" readonly placeholder="<?php echo __('Grand Total'); ?>" aria-label="<?php echo __('Grand Total'); ?>"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal_credit" id="grandtotal_credit" readonly placeholder="<?php echo __('Grand Total'); ?>"></td>
         </tr>
         
         </tr>
@@ -1707,7 +1708,7 @@ function calculateTotal(){
 </div> -->
 <?php if($rid !=''){ ?>
 <div class="form-group row">
-    <label class="col-form-label col-lg-3 col-sm-12">File Uoload</label>
+    <label class="col-form-label col-lg-3 col-sm-12"><?php echo __('File Upload'); ?></label>
     <div class="col-lg-4 col-md-9 col-sm-12">
         <div class="dropzone dropzone-default dropzone-brand" id="kt_dropzone_2" >
 
@@ -1733,15 +1734,15 @@ function calculateTotal(){
     <div class="dz-success-mark">    
         <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title>Check</title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>      </g>    </svg>  </div>  <div class="dz-error-mark">    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title>Error</title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">          <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>        </g>      </g>    </svg> 
     </div>
-    <a class="dz-remove" href="javascript:undefined;" data-dz-remove="" onclick="removefile(<?php echo $file_value['id']; ?>)">Remove</a>
-    <a class="dz-remove" target="_blank" href="uploads/121/files/<?php echo $file_value['file_name']; ?>" >Download</a>
+    <a class="dz-remove" href="javascript:undefined;" data-dz-remove="" onclick="removefile(<?php echo $file_value['id']; ?>)"><?php echo __('Remove'); ?></a>
+    <a class="dz-remove" target="_blank" href="uploads/121/files/<?php echo $file_value['file_name']; ?>" ><?php echo __('Download'); ?></a>
 </div>
 <?php $n++; } }else{ ?>
 
             <div class="dropzone-msg dz-message needsclick">
-                <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                <h3 class="dropzone-msg-title"><?php echo __('Drop files here or click to upload.'); ?></h3>
                
-                <span class="dropzone-msg-desc">Upload up to 10 files</span>
+                <span class="dropzone-msg-desc"><?php echo __('Upload up to 10 files'); ?></span>
             </div>
             <?php } ?>
         </div>
@@ -1765,13 +1766,13 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
                         <input type="hidden" id="hid"name="hid" value="<?php echo $rid; ?>" />
                         <input type="hidden" name="hid_itemds" value="<?php echo $item_ids; ?>" />
                         <input type="hidden" name="submit1" value="Update" />
-                        <button id="kt_llogin_signup_submit" <?php echo $disable; ?> class="btn btn-brand" ><i class="la la-check"></i>Upadate</button>
-                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                        <button id="kt_llogin_signup_submit" <?php echo $disable; ?> class="btn btn-brand" ><i class="la la-check"></i><?php echo __('Update'); ?></button>
+                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                 <?php } else{ ?>
                         <input type="hidden" name="submit1" value="Add" />
-                        <button id="kt_login_signin_submit" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-                        <button id="kt_login_signin_submit_continue" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
-                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                        <button id="kt_login_signin_submit" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
+                        <button id="kt_login_signin_submit_continue" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?php echo __('Save & continue'); ?></button>
+                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                 <?php } ?>  
             </div>
             <div class="col-lg-6">   
@@ -1781,7 +1782,7 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
                     <div class="card">
                         <div class="card-header" id="headingTwo2">
                             <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
-                                Transaction Timeline
+                                <?php echo __('Transaction Timeline'); ?>
                             </div>
                         </div>
                         <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordionExample2">
@@ -1815,7 +1816,7 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
             <?php } ?>
             </div>
             <div class="col-lg-2 kt-align-right">
-                <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?php echo __('Delete'); ?></button>
             </div> 
         </div>
     </div>

@@ -10,15 +10,15 @@ $employees = $result['table'] ?? array();
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Employee Monthly Report</h5>
+            <h5><?= __('Employee Monthly Report') ?></h5>
         </div>
         <div class="card-body p-4">
             <div class="row">
                 <!-- Employee -->
                 <div class="form-group col-md-4">
-                    <label>Employee <span style="color:red;">*</span></label>
+                    <label><?= __('Employee') ?> <span style="color:red;">*</span></label>
                     <select class="form-select js-example-basic-single" id="employee_id">
-                        <option value="0">Select Employee</option>
+                        <option value="0"><?= __('Select Employee') ?></option>
                         <?php foreach ($employees as $row): ?>
                             <option value="<?= $row['id']; ?>">
                                 <?= $row['display_name'].' ('. $row['emp_code'].')'; ?>
@@ -29,7 +29,7 @@ $employees = $result['table'] ?? array();
 
                 <!-- Month -->
                 <div class="form-group col-md-3">
-                    <label>Month <span style="color:red;">*</span></label>
+                    <label><?= __('Month') ?> <span style="color:red;">*</span></label>
                     <input type="month" class="form-control" id="report_month">
                 </div>
 
@@ -37,7 +37,7 @@ $employees = $result['table'] ?? array();
                 <div class="form-group col-md-2">
                     <label>&nbsp;</label>
                     <button type="button" class="btn btn-primary form-control" id="searchBtn">
-                        Search
+                        <?= __('Search') ?>
                     </button>
                 </div>
 
@@ -62,13 +62,13 @@ $(document).ready(function () {
 
         // Employee validation
         if (employee_id == 0) {
-        	tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger','animated flipInX', 'animated flipOutX', 'Please select employee', '');
+        	tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger','animated flipInX', 'animated flipOutX', <?= json_encode(__('Please select employee')) ?>, '');
             valid = false;
         }
 
         // Month validation
         if (!month) {
-        	tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger','animated flipInX', 'animated flipOutX', 'Please select month', '');
+        	tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger','animated flipInX', 'animated flipOutX', <?= json_encode(__('Please select month')) ?>, '');
             valid = false;
         }
 
@@ -92,7 +92,7 @@ $(document).ready(function () {
                 $('#TableContent').html(data);
             },
             error: function () {
-                $('#TableContent').html('<div class="text-danger text-center">Something went wrong</div>');
+                $('#TableContent').html('<div class="text-danger text-center"><?= __('Something went wrong') ?></div>');
             }
         });
 

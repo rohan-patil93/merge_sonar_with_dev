@@ -85,7 +85,7 @@ if ($userData['user_photo'] != '') {
     <h5 class>Custom Invoice with preview</h5>
     <div class="card-header-right">
       <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-        <i class="icofont icofont-reply"></i> Back
+        <i class="icofont icofont-reply"></i> <?= __('Back') ?>
       </a>
     </div>
   </div>
@@ -93,35 +93,35 @@ if ($userData['user_photo'] != '') {
     <div class="container mt-4">
       <div class="row ml-20 mr-20">
         <div class="col-lg-3 p-3 bg-light border custom-scroll" style="height:650px;">
-          <h5 class="text-center mb-4">Customization Options</h5>
+          <h5 class="text-center mb-4"><?= __('Customization Options') ?></h5>
           <div class="">
             <div class="mb-3">
               <!-- Template Name Input -->
               <div>
                 <div class="card card-body mt-2">
-                  <label for="template_name" class="form-label">Template Name</label>
+                  <label for="template_name" class="form-label"><?= __('Template Name') ?></label>
                   <div class="form-group">
                     <input class="form-control mb-1" type="text" id="template_name" value="<?= $invoice_options ?>"
-                      placeholder="Enter template name" title="Enter template name" aria-label="Enter template name">
+                      placeholder="<?= __('Enter template name') ?>" title="Enter template name" aria-label="Enter template name">
                     <input class="form-control mb-1" type="hidden" id="rid" value="<?= $rid ?>">
                   </div>
                 </div>
               </div>
             </div>
             <div class="mb-3">
-              <h6>Top Header Options</h6>
+              <h6><?= __('Top Header Options') ?></h6>
               <div class="btn-group d-flex flex-wrap">
                 <a class="btn btn-outline-danger btn-sm mb-2" data-target="logoVisibility">
-                  <i class="bi bi-eye"></i>Logo Visibility
+                  <i class="bi bi-eye"></i><?= __('Logo Visibility') ?>
                 </a>
                 <a class="btn btn-outline-success btn-sm mb-2" data-target="topheaderoptions">
-                  <i class="bi bi-pencil"></i> Header Details Visibility
+                  <i class="bi bi-pencil"></i> <?= __('Header Details Visibility') ?>
                 </a>
                 <a class="btn btn-outline-warning btn-sm mb-2" data-target="logoPosition">
-                  <i class="bi bi-layout-sidebar"></i> Position
+                  <i class="bi bi-layout-sidebar"></i> <?= __('Position') ?>
                 </a>
                 <a class="btn btn-outline-primary btn-sm mb-2" data-target="logoSize">
-                  <i class="bi bi-arrows-fullscreen"></i> Logo Size
+                  <i class="bi bi-arrows-fullscreen"></i> <?= __('Logo Size') ?>
                 </a>
               </div>
 
@@ -132,10 +132,10 @@ if ($userData['user_photo'] != '') {
               <!-- Toggle Logo -->
               <div id="logoVisibility" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label class="form-label mb-2">Toggle Logo</label>
+                  <label class="form-label mb-2"><?= __('Toggle Logo') ?></label>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showLogo" name="showLogo" <?php echo $logoOptions['showLogo'] ? 'checked' : ''; ?> title="Showlogo" aria-label="Showlogo">
-                    <label class="form-check-label" for="showLogo">Show Logo</label>
+                    <label class="form-check-label" for="showLogo"><?= __('Show Logo') ?></label>
                   </div>
                 </div>
               </div>
@@ -143,17 +143,11 @@ if ($userData['user_photo'] != '') {
               <!-- Logo Position -->
               <div id="logoPosition" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label for="logoPositionSelect" class="form-label">Top Header Position</label>
+                  <label for="logoPositionSelect" class="form-label"><?= __('Top Header Position') ?></label>
                   <select class="form-select" id="logoPositionSelect" name="logoPosition" title="Logoposition" aria-label="Logoposition">
-                    <option value="left" <?php echo (empty($logoOptions['logoPosition']) || $logoOptions['logoPosition'] === 'left') ? 'selected' : ''; ?>>
-                      Left(Logo) to Right(Details)
-                    </option>
-                    <option value="center" <?php echo $logoOptions['logoPosition'] === 'center' ? 'selected' : ''; ?>>
-                      Center
-                    </option>
-                    <option value="right" <?php echo $logoOptions['logoPosition'] === 'right' ? 'selected' : ''; ?>>
-                      Right(Details) to Left(Logo)
-                    </option>
+                    <option value="left" <?php echo (empty($logoOptions['logoPosition']) || $logoOptions['logoPosition'] === 'left') ? 'selected' : ''; ?>> <?= __('Left(Logo) to Right(Details)') ?> </option>
+                    <option value="center" <?php echo $logoOptions['logoPosition'] === 'center' ? 'selected' : ''; ?>> <?= __('Center') ?> </option>
+                    <option value="right" <?php echo $logoOptions['logoPosition'] === 'right' ? 'selected' : ''; ?>> <?= __('Right(Details) to Left(Logo)') ?> </option>
                   </select>
                 </div>
               </div>
@@ -162,21 +156,16 @@ if ($userData['user_photo'] != '') {
               <!-- Logo Size -->
               <div id="logoSize" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label for="logoSizeSelect" class="form-label">Logo Size</label>
+                  <label for="logoSizeSelect" class="form-label"><?= __('Logo Size') ?></label>
                   <select class="form-select" id="logoSizeSelect" name="logoSize" title="Logosize" aria-label="Logosize">
-                    <option value="small" <?php echo (empty($logoOptions['logoSize']) || $logoOptions['logoSize'] === 'small') ? 'selected' : ''; ?>>Small
-                    </option>
-                    <option value="medium" <?php echo $logoOptions['logoSize'] === 'medium' ? 'selected' : ''; ?>>Medium
-                    </option>
-                    <option value="large" <?php echo $logoOptions['logoSize'] === 'large' ? 'selected' : ''; ?>>Large
-                    </option>
-                    <option value="custom" <?php echo !empty($logoOptions['customLogoSize']) ? 'selected' : ''; ?>>
-                      Custom
-                    </option>
+                    <option value="small" <?php echo (empty($logoOptions['logoSize']) || $logoOptions['logoSize'] === 'small') ? 'selected' : ''; ?>> <?= __('Small') ?> </option>
+                    <option value="medium" <?php echo $logoOptions['logoSize'] === 'medium' ? 'selected' : ''; ?>> <?= __('Medium') ?> </option>
+                    <option value="large" <?php echo $logoOptions['logoSize'] === 'large' ? 'selected' : ''; ?>> <?= __('Large') ?> </option>
+                    <option value="custom" <?php echo !empty($logoOptions['customLogoSize']) ? 'selected' : ''; ?>> <?= __('Custom') ?> </option>
                   </select>
                   <div id="customLogoSizeInputContainer" class="mt-2"
                     style="<?php echo !empty($logoOptions['customLogoSize']) ? '' : 'display: none;'; ?>">
-                    <label for="customLogoSizeInput" class="form-label">Custom Logo Size (px)</label>
+                    <label for="customLogoSizeInput" class="form-label"><?= __('Custom Logo Size (px)') ?></label>
                     <input type="number" id="customLogoSizeInput" class="form-control" name="customLogoSize"
                       value="<?php echo htmlspecialchars($logoOptions['customLogoSize']); ?>"
                       placeholder="Enter size in px" / title="Enter size in px" aria-label="Enter size in px">
@@ -187,218 +176,203 @@ if ($userData['user_photo'] != '') {
 
               <div id="topheaderoptions" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label class="form-label mb-2">Toggle Top Header Options</label>
+                  <label class="form-label mb-2"><?= __('Toggle Top Header Options') ?></label>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showinvoiceno" name="showInvoiceNo" <?php echo $logoOptions['showInvoiceNo'] ? 'checked' : ''; ?> title="Showinvoiceno" aria-label="Showinvoiceno">
-                    <label class="form-check-label" for="showinvoiceno">Show Invoice No.</label>
+                    <label class="form-check-label" for="showinvoiceno"><?= __('Show Invoice No.') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="invoicenoheading"
                       value="<?php echo !empty($logoOptions['invoiceNoHeading']) ? $logoOptions['invoiceNoHeading'] : 'Invoice No.'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="invoicenoSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $logoOptions['invoiceNoValue'] === 'id' ? 'selected' : ''; ?> value="id">ID
-                      </option>
+                      <option <?php echo $logoOptions['invoiceNoValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'cost_center_id' ? 'selected' : ''; ?>
-                        value="cost_center_id">Cost Center Id</option>
+                        value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
                       <option <?php echo (empty($logoOptions['invoiceNoValue']) || $logoOptions['invoiceNoValue'] === 'transaction_number') ? 'selected' : ''; ?>
-                        value="transaction_number">Transaction Number</option>
+                        value="transaction_number"> <?= __('Transaction Number') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'transaction_date' ? 'selected' : ''; ?>
-                        value="transaction_date">Transaction Date</option>
-                      <option <?php echo $logoOptions['invoiceNoValue'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id">Transaction Location Id</option>
-                      <option <?php echo $logoOptions['invoiceNoValue'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id">Transaction Warehouse Id</option>
+                        value="transaction_date"> <?= __('Transaction Date') ?> </option>
+                      <option <?php echo $logoOptions['invoiceNoValue'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id"> <?= __('Transaction Location Id') ?> </option>
+                      <option <?php echo $logoOptions['invoiceNoValue'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id"> <?= __('Transaction Warehouse Id') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'originator_currency_id' ? 'selected' : ''; ?>
-                        value="originator_currency_id">Originator Currency Id</option>
+                        value="originator_currency_id"> <?= __('Originator Currency Id') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'currency_id' ? 'selected' : ''; ?>
-                        value="currency_id">Currency Id</option>
+                        value="currency_id"> <?= __('Currency Id') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'currency_rate' ? 'selected' : ''; ?>
-                        value="currency_rate">Currency Rate</option>
+                        value="currency_rate"> <?= __('Currency Rate') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
+                        value="originator"> <?= __('Originator') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'party_id' ? 'selected' : ''; ?>
-                        value="party_id">Party Id</option>
+                        value="party_id"> <?= __('Party Id') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'party_tax_number' ? 'selected' : ''; ?>
-                        value="party_tax_number">Party Tax Number</option>
+                        value="party_tax_number"> <?= __('Party Tax Number') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'party_address' ? 'selected' : ''; ?>
-                        value="party_address">Party Address</option>
+                        value="party_address"> <?= __('Party Address') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'party_ship_adderss' ? 'selected' : ''; ?>
-                        value="party_ship_adderss">Party Ship Adderss</option>
+                        value="party_ship_adderss"> <?= __('Party Ship Adderss') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'originator_state_id' ? 'selected' : ''; ?>
-                        value="originator_state_id">Originator State Id</option>
+                        value="originator_state_id"> <?= __('Originator State Id') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'supplier_state_id' ? 'selected' : ''; ?>
-                        value="supplier_state_id">Supplier State Id</option>
+                        value="supplier_state_id"> <?= __('Supplier State Id') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'place_of_supply' ? 'selected' : ''; ?>
-                        value="place_of_supply">Place Of Supply</option>
+                        value="place_of_supply"> <?= __('Place Of Supply') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'payment_terms' ? 'selected' : ''; ?>
-                        value="payment_terms">Payment Terms</option>
-                      <option <?php echo $logoOptions['invoiceNoValue'] === 'notes' ? 'selected' : ''; ?> value="notes">
-                        Notes</option>
+                        value="payment_terms"> <?= __('Payment Terms') ?> </option>
+                      <option <?php echo $logoOptions['invoiceNoValue'] === 'notes' ? 'selected' : ''; ?> value="notes"> <?= __('Notes') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'printing_notes' ? 'selected' : ''; ?>
-                        value="printing_notes">Printing Notes</option>
+                        value="printing_notes"> <?= __('Printing Notes') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
-                      <option <?php echo $logoOptions['invoiceNoValue'] === 'amount' ? 'selected' : ''; ?> value="amount">
-                        Amount</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
+                      <option <?php echo $logoOptions['invoiceNoValue'] === 'amount' ? 'selected' : ''; ?> value="amount"> <?= __('Amount') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
-                      <option <?php echo $logoOptions['invoiceNoValue'] === 'type' ? 'selected' : ''; ?> value="type">Type
-                      </option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
+                      <option <?php echo $logoOptions['invoiceNoValue'] === 'type' ? 'selected' : ''; ?> value="type"> <?= __('Type') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'tax_type' ? 'selected' : ''; ?>
-                        value="tax_type">Tax Type</option>
+                        value="tax_type"> <?= __('Tax Type') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'discount_type' ? 'selected' : ''; ?>
-                        value="discount_type">Discount Type</option>
+                        value="discount_type"> <?= __('Discount Type') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'discount_value' ? 'selected' : ''; ?>
-                        value="discount_value">Discount Value</option>
+                        value="discount_value"> <?= __('Discount Value') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'shipping_tax' ? 'selected' : ''; ?>
-                        value="shipping_tax">Shipping Tax</option>
+                        value="shipping_tax"> <?= __('Shipping Tax') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'shipping_amount' ? 'selected' : ''; ?>
-                        value="shipping_amount">Shipping Amount</option>
+                        value="shipping_amount"> <?= __('Shipping Amount') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'shipping_tax_amount' ? 'selected' : ''; ?>
-                        value="shipping_tax_amount">Shipping Tax Amount</option>
+                        value="shipping_tax_amount"> <?= __('Shipping Tax Amount') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'tax_state' ? 'selected' : ''; ?>
-                        value="tax_state">Tax State</option>
+                        value="tax_state"> <?= __('Tax State') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'opex_cpex' ? 'selected' : ''; ?>
-                        value="opex_cpex">Opex Cpex</option>
+                        value="opex_cpex"> <?= __('Opex Cpex') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'due_date' ? 'selected' : ''; ?>
-                        value="due_date">Due Date</option>
+                        value="due_date"> <?= __('Due Date') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'ref_type' ? 'selected' : ''; ?>
-                        value="ref_type">Ref Type</option>
+                        value="ref_type"> <?= __('Ref Type') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'parent_ref_id' ? 'selected' : ''; ?>
-                        value="parent_ref_id">Rarent Ref Id</option>
-                      <option <?php echo $logoOptions['invoiceNoValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id">
-                        Ref Id</option>
-                      <option <?php echo $logoOptions['invoiceNoValue'] === 'ref_no' ? 'selected' : ''; ?> value="ref_no">
-                        Ref No</option>
+                        value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
+                      <option <?php echo $logoOptions['invoiceNoValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id"> <?= __('Ref Id') ?> </option>
+                      <option <?php echo $logoOptions['invoiceNoValue'] === 'ref_no' ? 'selected' : ''; ?> value="ref_no"> <?= __('Ref No') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'ref_date' ? 'selected' : ''; ?>
-                        value="ref_date">Ref Date</option>
+                        value="ref_date"> <?= __('Ref Date') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'ref_bill_type' ? 'selected' : ''; ?>
-                        value="ref_bill_type">Ref Bill Type</option>
+                        value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'old_ref_no' ? 'selected' : ''; ?>
-                        value="old_ref_no">Old Ref No</option>
+                        value="old_ref_no"> <?= __('Old Ref No') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'old_ref_date' ? 'selected' : ''; ?>
-                        value="old_ref_date">Old Ref Date</option>
-                      <option <?php echo $logoOptions['invoiceNoValue'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details">Party Additional Details</option>
+                        value="old_ref_date"> <?= __('Old Ref Date') ?> </option>
+                      <option <?php echo $logoOptions['invoiceNoValue'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details"> <?= __('Party Additional Details') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'follow_up_level_ids' ? 'selected' : ''; ?>
-                        value="follow_up_level_ids">Follow Up Level Ids</option>
+                        value="follow_up_level_ids"> <?= __('Follow Up Level Ids') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'pending_amount' ? 'selected' : ''; ?>
-                        value="pending_amount">Pending Amount</option>
+                        value="pending_amount"> <?= __('Pending Amount') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'cancel_invoice' ? 'selected' : ''; ?>
-                        value="cancel_invoice">Cancel Invoice</option>
+                        value="cancel_invoice"> <?= __('Cancel Invoice') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'cancel_invoice_date' ? 'selected' : ''; ?>
-                        value="cancel_invoice_date">Cancel Invoice Date</option>
+                        value="cancel_invoice_date"> <?= __('Cancel Invoice Date') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'cancel_invoice_reason' ? 'selected' : ''; ?>
-                        value="cancel_invoice_reason">Cancel Invoice Reason</option>
+                        value="cancel_invoice_reason"> <?= __('Cancel Invoice Reason') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'additional_charges' ? 'selected' : ''; ?>
-                        value="additional_charges">Additional Charges</option>
+                        value="additional_charges"> <?= __('Additional Charges') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'pdf_name' ? 'selected' : ''; ?>
-                        value="pdf_name">Pdf Name</option>
-                      <option <?php echo $logoOptions['invoiceNoValue'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details">Owner Additional Details</option>
-                      <option <?php echo $logoOptions['invoiceNoValue'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number">Serial Transaction Number</option>
+                        value="pdf_name"> <?= __('Pdf Name') ?> </option>
+                      <option <?php echo $logoOptions['invoiceNoValue'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
+                      <option <?php echo $logoOptions['invoiceNoValue'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number"> <?= __('Serial Transaction Number') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showdate" <?php echo $logoOptions['showDate'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showdate">Show Date</label>
+                    <label class="form-check-label" for="showdate"><?= __('Show Date') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="dateheading"
                       value="<?php echo !empty($logoOptions['dateHeading']) ? $logoOptions['dateHeading'] : 'Date'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="invoicedateSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $logoOptions['dateValue'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
+                      <option <?php echo $logoOptions['dateValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'cost_center_id' ? 'selected' : ''; ?>
-                        value="cost_center_id">Cost Center Id</option>
+                        value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'transaction_number' ? 'selected' : ''; ?>
-                        value="transaction_number">Transaction Number</option>
-                      <option <?php echo (empty($logoOptions['dateValue']) || $logoOptions['dateValue'] === 'transaction_date') ? 'selected' : ''; ?> value="transaction_date">
-                        Transaction Date</option>
+                        value="transaction_number"> <?= __('Transaction Number') ?> </option>
+                      <option <?php echo (empty($logoOptions['dateValue']) || $logoOptions['dateValue'] === 'transaction_date') ? 'selected' : ''; ?> value="transaction_date"> <?= __('Transaction Date') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'transaction_location_id' ? 'selected' : ''; ?>
-                        value="transaction_location_id">Transaction Location Id</option>
+                        value="transaction_location_id"> <?= __('Transaction Location Id') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'transaction_warehouse_id' ? 'selected' : ''; ?>
-                        value="transaction_warehouse_id">Transaction Warehouse Id</option>
+                        value="transaction_warehouse_id"> <?= __('Transaction Warehouse Id') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'originator_currency_id' ? 'selected' : ''; ?>
-                        value="originator_currency_id">Originator Currency Id</option>
+                        value="originator_currency_id"> <?= __('Originator Currency Id') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'currency_id' ? 'selected' : ''; ?>
-                        value="currency_id">Currency Id</option>
+                        value="currency_id"> <?= __('Currency Id') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'currency_rate' ? 'selected' : ''; ?>
-                        value="currency_rate">Currency Rate</option>
+                        value="currency_rate"> <?= __('Currency Rate') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
-                      <option <?php echo $logoOptions['dateValue'] === 'party_id' ? 'selected' : ''; ?> value="party_id">
-                        Party Id</option>
+                        value="originator"> <?= __('Originator') ?> </option>
+                      <option <?php echo $logoOptions['dateValue'] === 'party_id' ? 'selected' : ''; ?> value="party_id"> <?= __('Party Id') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'party_tax_number' ? 'selected' : ''; ?>
-                        value="party_tax_number">Party Tax Number</option>
+                        value="party_tax_number"> <?= __('Party Tax Number') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'party_address' ? 'selected' : ''; ?>
-                        value="party_address">Party Address</option>
+                        value="party_address"> <?= __('Party Address') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'party_ship_adderss' ? 'selected' : ''; ?>
-                        value="party_ship_adderss">Party Ship Adderss</option>
+                        value="party_ship_adderss"> <?= __('Party Ship Adderss') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'originator_state_id' ? 'selected' : ''; ?>
-                        value="originator_state_id">Originator State Id</option>
+                        value="originator_state_id"> <?= __('Originator State Id') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'supplier_state_id' ? 'selected' : ''; ?>
-                        value="supplier_state_id">Supplier State Id</option>
+                        value="supplier_state_id"> <?= __('Supplier State Id') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'place_of_supply' ? 'selected' : ''; ?>
-                        value="place_of_supply">Place Of Supply</option>
+                        value="place_of_supply"> <?= __('Place Of Supply') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'payment_terms' ? 'selected' : ''; ?>
-                        value="payment_terms">Payment Terms</option>
-                      <option <?php echo $logoOptions['dateValue'] === 'notes' ? 'selected' : ''; ?> value="notes">Notes
-                      </option>
+                        value="payment_terms"> <?= __('Payment Terms') ?> </option>
+                      <option <?php echo $logoOptions['dateValue'] === 'notes' ? 'selected' : ''; ?> value="notes"> <?= __('Notes') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'printing_notes' ? 'selected' : ''; ?>
-                        value="printing_notes">Printing Notes</option>
+                        value="printing_notes"> <?= __('Printing Notes') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">
-                        Parent Id</option>
-                      <option <?php echo $logoOptions['dateValue'] === 'amount' ? 'selected' : ''; ?> value="amount">
-                        Amount
-                      </option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
+                      <option <?php echo $logoOptions['dateValue'] === 'amount' ? 'selected' : ''; ?> value="amount"> <?= __('Amount') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
-                      <option <?php echo $logoOptions['dateValue'] === 'type' ? 'selected' : ''; ?> value="type">Type
-                      </option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
+                      <option <?php echo $logoOptions['dateValue'] === 'type' ? 'selected' : ''; ?> value="type"> <?= __('Type') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'tax_type' ? 'selected' : ''; ?> value="tax_type">
                         Tax
                         Type</option>
                       <option <?php echo $logoOptions['dateValue'] === 'discount_type' ? 'selected' : ''; ?>
-                        value="discount_type">Discount Type</option>
+                        value="discount_type"> <?= __('Discount Type') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'discount_value' ? 'selected' : ''; ?>
-                        value="discount_value">Discount Value</option>
+                        value="discount_value"> <?= __('Discount Value') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'shipping_tax' ? 'selected' : ''; ?>
-                        value="shipping_tax">Shipping Tax</option>
+                        value="shipping_tax"> <?= __('Shipping Tax') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'shipping_amount' ? 'selected' : ''; ?>
-                        value="shipping_amount">Shipping Amount</option>
+                        value="shipping_amount"> <?= __('Shipping Amount') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'shipping_tax_amount' ? 'selected' : ''; ?>
-                        value="shipping_tax_amount">Shipping Tax Amount</option>
+                        value="shipping_tax_amount"> <?= __('Shipping Tax Amount') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'tax_state' ? 'selected' : ''; ?>
-                        value="tax_state">
-                        Tax State</option>
+                        value="tax_state"> <?= __('Tax State') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'opex_cpex' ? 'selected' : ''; ?>
-                        value="opex_cpex">
-                        Opex Cpex</option>
+                        value="opex_cpex"> <?= __('Opex Cpex') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'due_date' ? 'selected' : ''; ?> value="due_date">
                         Due
                         Date</option>
@@ -406,7 +380,7 @@ if ($userData['user_photo'] != '') {
                         Ref
                         Type</option>
                       <option <?php echo $logoOptions['dateValue'] === 'parent_ref_id' ? 'selected' : ''; ?>
-                        value="parent_ref_id">Rarent Ref Id</option>
+                        value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id">Ref
                         Id
                       </option>
@@ -417,130 +391,121 @@ if ($userData['user_photo'] != '') {
                         Ref
                         Date</option>
                       <option <?php echo $logoOptions['dateValue'] === 'ref_bill_type' ? 'selected' : ''; ?>
-                        value="ref_bill_type">Ref Bill Type</option>
+                        value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'old_ref_no' ? 'selected' : ''; ?>
-                        value="old_ref_no">Old Ref No</option>
+                        value="old_ref_no"> <?= __('Old Ref No') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'old_ref_date' ? 'selected' : ''; ?>
-                        value="old_ref_date">Old Ref Date</option>
+                        value="old_ref_date"> <?= __('Old Ref Date') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'party_additional_details' ? 'selected' : ''; ?>
-                        value="party_additional_details">Party Additional Details</option>
+                        value="party_additional_details"> <?= __('Party Additional Details') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'follow_up_level_ids' ? 'selected' : ''; ?>
-                        value="follow_up_level_ids">Follow Up Level Ids</option>
+                        value="follow_up_level_ids"> <?= __('Follow Up Level Ids') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'pending_amount' ? 'selected' : ''; ?>
-                        value="pending_amount">Pending Amount</option>
+                        value="pending_amount"> <?= __('Pending Amount') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'cancel_invoice' ? 'selected' : ''; ?>
-                        value="cancel_invoice">Cancel Invoice</option>
+                        value="cancel_invoice"> <?= __('Cancel Invoice') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'cancel_invoice_date' ? 'selected' : ''; ?>
-                        value="cancel_invoice_date">Cancel Invoice Date</option>
+                        value="cancel_invoice_date"> <?= __('Cancel Invoice Date') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'cancel_invoice_reason' ? 'selected' : ''; ?>
-                        value="cancel_invoice_reason">Cancel Invoice Reason</option>
+                        value="cancel_invoice_reason"> <?= __('Cancel Invoice Reason') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'additional_charges' ? 'selected' : ''; ?>
-                        value="additional_charges">Additional Charges</option>
+                        value="additional_charges"> <?= __('Additional Charges') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'pdf_name' ? 'selected' : ''; ?> value="pdf_name">
                         Pdf
                         Name</option>
                       <option <?php echo $logoOptions['dateValue'] === 'owner_additional_details' ? 'selected' : ''; ?>
-                        value="owner_additional_details">Owner Additional Details</option>
+                        value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'serial_transaction_number' ? 'selected' : ''; ?>
-                        value="serial_transaction_number">Serial Transaction Number</option>
+                        value="serial_transaction_number"> <?= __('Serial Transaction Number') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showduedate" <?php echo $logoOptions['showDueDate'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showduedate">Show Due Date</label>
+                    <label class="form-check-label" for="showduedate"><?= __('Show Due Date') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="duedateheading"
                       value="<?php echo !empty($logoOptions['dueDateHeading']) ? $logoOptions['dueDateHeading'] : 'Due Date'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="invoiceduedateSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $logoOptions['dueDateValue'] === 'id' ? 'selected' : ''; ?> value="id">ID
-                      </option>
+                      <option <?php echo $logoOptions['dueDateValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'cost_center_id' ? 'selected' : ''; ?>
-                        value="cost_center_id">Cost Center Id</option>
+                        value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'transaction_number' ? 'selected' : ''; ?>
-                        value="transaction_number">Transaction Number</option>
+                        value="transaction_number"> <?= __('Transaction Number') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'transaction_date' ? 'selected' : ''; ?>
-                        value="transaction_date">Transaction Date</option>
+                        value="transaction_date"> <?= __('Transaction Date') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'transaction_location_id' ? 'selected' : ''; ?>
-                        value="transaction_location_id">Transaction Location Id</option>
+                        value="transaction_location_id"> <?= __('Transaction Location Id') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'transaction_warehouse_id' ? 'selected' : ''; ?>
-                        value="transaction_warehouse_id">Transaction Warehouse Id</option>
+                        value="transaction_warehouse_id"> <?= __('Transaction Warehouse Id') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'originator_currency_id' ? 'selected' : ''; ?>
-                        value="originator_currency_id">Originator Currency Id</option>
+                        value="originator_currency_id"> <?= __('Originator Currency Id') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'currency_id' ? 'selected' : ''; ?>
-                        value="currency_id">Currency Id</option>
+                        value="currency_id"> <?= __('Currency Id') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'currency_rate' ? 'selected' : ''; ?>
-                        value="currency_rate">Currency Rate</option>
+                        value="currency_rate"> <?= __('Currency Rate') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
+                        value="originator"> <?= __('Originator') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'party_id' ? 'selected' : ''; ?>
-                        value="party_id">
-                        Party Id</option>
+                        value="party_id"> <?= __('Party Id') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'party_tax_number' ? 'selected' : ''; ?>
-                        value="party_tax_number">Party Tax Number</option>
+                        value="party_tax_number"> <?= __('Party Tax Number') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'party_address' ? 'selected' : ''; ?>
-                        value="party_address">Party Address</option>
+                        value="party_address"> <?= __('Party Address') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'party_ship_adderss' ? 'selected' : ''; ?>
-                        value="party_ship_adderss">Party Ship Adderss</option>
+                        value="party_ship_adderss"> <?= __('Party Ship Adderss') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'originator_state_id' ? 'selected' : ''; ?>
-                        value="originator_state_id">Originator State Id</option>
+                        value="originator_state_id"> <?= __('Originator State Id') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'supplier_state_id' ? 'selected' : ''; ?>
-                        value="supplier_state_id">Supplier State Id</option>
+                        value="supplier_state_id"> <?= __('Supplier State Id') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'place_of_supply' ? 'selected' : ''; ?>
-                        value="place_of_supply">Place Of Supply</option>
+                        value="place_of_supply"> <?= __('Place Of Supply') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'payment_terms' ? 'selected' : ''; ?>
-                        value="payment_terms">Payment Terms</option>
-                      <option <?php echo $logoOptions['dueDateValue'] === 'notes' ? 'selected' : ''; ?> value="notes">
-                        Notes
-                      </option>
+                        value="payment_terms"> <?= __('Payment Terms') ?> </option>
+                      <option <?php echo $logoOptions['dueDateValue'] === 'notes' ? 'selected' : ''; ?> value="notes"> <?= __('Notes') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'printing_notes' ? 'selected' : ''; ?>
-                        value="printing_notes">Printing Notes</option>
+                        value="printing_notes"> <?= __('Printing Notes') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
-                      <option <?php echo $logoOptions['dueDateValue'] === 'amount' ? 'selected' : ''; ?> value="amount">
-                        Amount</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
+                      <option <?php echo $logoOptions['dueDateValue'] === 'amount' ? 'selected' : ''; ?> value="amount"> <?= __('Amount') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
-                      <option <?php echo $logoOptions['dueDateValue'] === 'type' ? 'selected' : ''; ?> value="type">Type
-                      </option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
+                      <option <?php echo $logoOptions['dueDateValue'] === 'type' ? 'selected' : ''; ?> value="type"> <?= __('Type') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'tax_type' ? 'selected' : ''; ?>
-                        value="tax_type">
-                        Tax Type</option>
+                        value="tax_type"> <?= __('Tax Type') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'discount_type' ? 'selected' : ''; ?>
-                        value="discount_type">Discount Type</option>
+                        value="discount_type"> <?= __('Discount Type') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'discount_value' ? 'selected' : ''; ?>
-                        value="discount_value">Discount Value</option>
+                        value="discount_value"> <?= __('Discount Value') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'shipping_tax' ? 'selected' : ''; ?>
-                        value="shipping_tax">Shipping Tax</option>
+                        value="shipping_tax"> <?= __('Shipping Tax') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'shipping_amount' ? 'selected' : ''; ?>
-                        value="shipping_amount">Shipping Amount</option>
+                        value="shipping_amount"> <?= __('Shipping Amount') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'shipping_tax_amount' ? 'selected' : ''; ?>
-                        value="shipping_tax_amount">Shipping Tax Amount</option>
+                        value="shipping_tax_amount"> <?= __('Shipping Tax Amount') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'tax_state' ? 'selected' : ''; ?>
-                        value="tax_state">Tax State</option>
+                        value="tax_state"> <?= __('Tax State') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'opex_cpex' ? 'selected' : ''; ?>
-                        value="opex_cpex">Opex Cpex</option>
+                        value="opex_cpex"> <?= __('Opex Cpex') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
-                      <option <?php echo (empty($logoOptions['dueDateValue']) || $logoOptions['dueDateValue'] === 'due_date') ? 'selected' : ''; ?> value="due_date">Due Date
-                      </option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
+                      <option <?php echo (empty($logoOptions['dueDateValue']) || $logoOptions['dueDateValue'] === 'due_date') ? 'selected' : ''; ?> value="due_date"> <?= __('Due Date') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'ref_type' ? 'selected' : ''; ?>
-                        value="ref_type">
-                        Ref Type</option>
+                        value="ref_type"> <?= __('Ref Type') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'parent_ref_id' ? 'selected' : ''; ?>
-                        value="parent_ref_id">Rarent Ref Id</option>
+                        value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id">
                         Ref
                         Id</option>
@@ -548,353 +513,329 @@ if ($userData['user_photo'] != '') {
                         Ref
                         No</option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'ref_date' ? 'selected' : ''; ?>
-                        value="ref_date">
-                        Ref Date</option>
+                        value="ref_date"> <?= __('Ref Date') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'ref_bill_type' ? 'selected' : ''; ?>
-                        value="ref_bill_type">Ref Bill Type</option>
+                        value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'old_ref_no' ? 'selected' : ''; ?>
-                        value="old_ref_no">Old Ref No</option>
+                        value="old_ref_no"> <?= __('Old Ref No') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'old_ref_date' ? 'selected' : ''; ?>
-                        value="old_ref_date">Old Ref Date</option>
+                        value="old_ref_date"> <?= __('Old Ref Date') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'party_additional_details' ? 'selected' : ''; ?>
-                        value="party_additional_details">Party Additional Details</option>
+                        value="party_additional_details"> <?= __('Party Additional Details') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'follow_up_level_ids' ? 'selected' : ''; ?>
-                        value="follow_up_level_ids">Follow Up Level Ids</option>
+                        value="follow_up_level_ids"> <?= __('Follow Up Level Ids') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'pending_amount' ? 'selected' : ''; ?>
-                        value="pending_amount">Pending Amount</option>
+                        value="pending_amount"> <?= __('Pending Amount') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'cancel_invoice' ? 'selected' : ''; ?>
-                        value="cancel_invoice">Cancel Invoice</option>
+                        value="cancel_invoice"> <?= __('Cancel Invoice') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'cancel_invoice_date' ? 'selected' : ''; ?>
-                        value="cancel_invoice_date">Cancel Invoice Date</option>
+                        value="cancel_invoice_date"> <?= __('Cancel Invoice Date') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'cancel_invoice_reason' ? 'selected' : ''; ?>
-                        value="cancel_invoice_reason">Cancel Invoice Reason</option>
+                        value="cancel_invoice_reason"> <?= __('Cancel Invoice Reason') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'additional_charges' ? 'selected' : ''; ?>
-                        value="additional_charges">Additional Charges</option>
+                        value="additional_charges"> <?= __('Additional Charges') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'pdf_name' ? 'selected' : ''; ?>
-                        value="pdf_name">
-                        Pdf Name</option>
+                        value="pdf_name"> <?= __('Pdf Name') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'owner_additional_details' ? 'selected' : ''; ?>
-                        value="owner_additional_details">Owner Additional Details</option>
-                      <option <?php echo $logoOptions['dueDateValue'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number">Serial Transaction Number</option>
+                        value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
+                      <option <?php echo $logoOptions['dueDateValue'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number"> <?= __('Serial Transaction Number') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showpo_num" <?php echo $logoOptions['showPoNum'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showpo_num">Show P.O. Number</label>
+                    <label class="form-check-label" for="showpo_num"><?= __('Show P.O. Number') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="po_numheading"
                       value="<?php echo !empty($logoOptions['poNumHeading']) ? $logoOptions['poNumHeading'] : 'P.O. Number'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="invoiceponumSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $logoOptions['poNumValue'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
+                      <option <?php echo $logoOptions['poNumValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'cost_center_id' ? 'selected' : ''; ?>
-                        value="cost_center_id">Cost Center Id</option>
+                        value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'transaction_number' ? 'selected' : ''; ?>
-                        value="transaction_number">Transaction Number</option>
+                        value="transaction_number"> <?= __('Transaction Number') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'transaction_date' ? 'selected' : ''; ?>
-                        value="transaction_date">Transaction Date</option>
+                        value="transaction_date"> <?= __('Transaction Date') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'transaction_location_id' ? 'selected' : ''; ?>
-                        value="transaction_location_id">Transaction Location Id</option>
+                        value="transaction_location_id"> <?= __('Transaction Location Id') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'transaction_warehouse_id' ? 'selected' : ''; ?>
-                        value="transaction_warehouse_id">Transaction Warehouse Id</option>
+                        value="transaction_warehouse_id"> <?= __('Transaction Warehouse Id') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'originator_currency_id' ? 'selected' : ''; ?>
-                        value="originator_currency_id">Originator Currency Id</option>
+                        value="originator_currency_id"> <?= __('Originator Currency Id') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'currency_id' ? 'selected' : ''; ?>
-                        value="currency_id">Currency Id</option>
+                        value="currency_id"> <?= __('Currency Id') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'currency_rate' ? 'selected' : ''; ?>
-                        value="currency_rate">Currency Rate</option>
+                        value="currency_rate"> <?= __('Currency Rate') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
-                      <option <?php echo $logoOptions['poNumValue'] === 'party_id' ? 'selected' : ''; ?> value="party_id">
-                        Party Id</option>
+                        value="originator"> <?= __('Originator') ?> </option>
+                      <option <?php echo $logoOptions['poNumValue'] === 'party_id' ? 'selected' : ''; ?> value="party_id"> <?= __('Party Id') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'party_tax_number' ? 'selected' : ''; ?>
-                        value="party_tax_number">Party Tax Number</option>
+                        value="party_tax_number"> <?= __('Party Tax Number') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'party_address' ? 'selected' : ''; ?>
-                        value="party_address">Party Address</option>
+                        value="party_address"> <?= __('Party Address') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'party_ship_adderss' ? 'selected' : ''; ?>
-                        value="party_ship_adderss">Party Ship Adderss</option>
+                        value="party_ship_adderss"> <?= __('Party Ship Adderss') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'originator_state_id' ? 'selected' : ''; ?>
-                        value="originator_state_id">Originator State Id</option>
+                        value="originator_state_id"> <?= __('Originator State Id') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'supplier_state_id' ? 'selected' : ''; ?>
-                        value="supplier_state_id">Supplier State Id</option>
+                        value="supplier_state_id"> <?= __('Supplier State Id') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'place_of_supply' ? 'selected' : ''; ?>
-                        value="place_of_supply">Place Of Supply</option>
+                        value="place_of_supply"> <?= __('Place Of Supply') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'payment_terms' ? 'selected' : ''; ?>
-                        value="payment_terms">Payment Terms</option>
-                      <option <?php echo $logoOptions['poNumValue'] === 'notes' ? 'selected' : ''; ?> value="notes">Notes
-                      </option>
+                        value="payment_terms"> <?= __('Payment Terms') ?> </option>
+                      <option <?php echo $logoOptions['poNumValue'] === 'notes' ? 'selected' : ''; ?> value="notes"> <?= __('Notes') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'printing_notes' ? 'selected' : ''; ?>
-                        value="printing_notes">Printing Notes</option>
+                        value="printing_notes"> <?= __('Printing Notes') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">
-                        Parent Id</option>
-                      <option <?php echo $logoOptions['poNumValue'] === 'amount' ? 'selected' : ''; ?> value="amount">
-                        Amount
-                      </option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
+                      <option <?php echo $logoOptions['poNumValue'] === 'amount' ? 'selected' : ''; ?> value="amount"> <?= __('Amount') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
-                      <option <?php echo $logoOptions['poNumValue'] === 'type' ? 'selected' : ''; ?> value="type">Type
-                      </option>
-                      <option <?php echo $logoOptions['poNumValue'] === 'tax_type' ? 'selected' : ''; ?> value="tax_type">
-                        Tax Type</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
+                      <option <?php echo $logoOptions['poNumValue'] === 'type' ? 'selected' : ''; ?> value="type"> <?= __('Type') ?> </option>
+                      <option <?php echo $logoOptions['poNumValue'] === 'tax_type' ? 'selected' : ''; ?> value="tax_type"> <?= __('Tax Type') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'discount_type' ? 'selected' : ''; ?>
-                        value="discount_type">Discount Type</option>
+                        value="discount_type"> <?= __('Discount Type') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'discount_value' ? 'selected' : ''; ?>
-                        value="discount_value">Discount Value</option>
+                        value="discount_value"> <?= __('Discount Value') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'shipping_tax' ? 'selected' : ''; ?>
-                        value="shipping_tax">Shipping Tax</option>
+                        value="shipping_tax"> <?= __('Shipping Tax') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'shipping_amount' ? 'selected' : ''; ?>
-                        value="shipping_amount">Shipping Amount</option>
+                        value="shipping_amount"> <?= __('Shipping Amount') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'shipping_tax_amount' ? 'selected' : ''; ?>
-                        value="shipping_tax_amount">Shipping Tax Amount</option>
+                        value="shipping_tax_amount"> <?= __('Shipping Tax Amount') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'tax_state' ? 'selected' : ''; ?>
-                        value="tax_state">
-                        Tax State</option>
+                        value="tax_state"> <?= __('Tax State') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'opex_cpex' ? 'selected' : ''; ?>
-                        value="opex_cpex">
-                        Opex Cpex</option>
+                        value="opex_cpex"> <?= __('Opex Cpex') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
-                      <option <?php echo $logoOptions['poNumValue'] === 'due_date' ? 'selected' : ''; ?> value="due_date">
-                        Due Date</option>
-                      <option <?php echo $logoOptions['poNumValue'] === 'ref_type' ? 'selected' : ''; ?> value="ref_type">
-                        Ref Type</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
+                      <option <?php echo $logoOptions['poNumValue'] === 'due_date' ? 'selected' : ''; ?> value="due_date"> <?= __('Due Date') ?> </option>
+                      <option <?php echo $logoOptions['poNumValue'] === 'ref_type' ? 'selected' : ''; ?> value="ref_type"> <?= __('Ref Type') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'parent_ref_id' ? 'selected' : ''; ?>
-                        value="parent_ref_id">Rarent Ref Id</option>
+                        value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id">Ref
                         Id
                       </option>
-                      <option <?php echo (empty($logoOptions['poNumValue']) || $logoOptions['poNumValue'] === 'ref_no') ? 'selected' : ''; ?> value="ref_no">Ref No</option>
-                      <option <?php echo $logoOptions['poNumValue'] === 'ref_date' ? 'selected' : ''; ?> value="ref_date">
-                        Ref Date</option>
+                      <option <?php echo (empty($logoOptions['poNumValue']) || $logoOptions['poNumValue'] === 'ref_no') ? 'selected' : ''; ?> value="ref_no"> <?= __('Ref No') ?> </option>
+                      <option <?php echo $logoOptions['poNumValue'] === 'ref_date' ? 'selected' : ''; ?> value="ref_date"> <?= __('Ref Date') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'ref_bill_type' ? 'selected' : ''; ?>
-                        value="ref_bill_type">Ref Bill Type</option>
+                        value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'old_ref_no' ? 'selected' : ''; ?>
-                        value="old_ref_no">Old Ref No</option>
+                        value="old_ref_no"> <?= __('Old Ref No') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'old_ref_date' ? 'selected' : ''; ?>
-                        value="old_ref_date">Old Ref Date</option>
+                        value="old_ref_date"> <?= __('Old Ref Date') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'party_additional_details' ? 'selected' : ''; ?>
-                        value="party_additional_details">Party Additional Details</option>
+                        value="party_additional_details"> <?= __('Party Additional Details') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'follow_up_level_ids' ? 'selected' : ''; ?>
-                        value="follow_up_level_ids">Follow Up Level Ids</option>
+                        value="follow_up_level_ids"> <?= __('Follow Up Level Ids') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'pending_amount' ? 'selected' : ''; ?>
-                        value="pending_amount">Pending Amount</option>
+                        value="pending_amount"> <?= __('Pending Amount') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'cancel_invoice' ? 'selected' : ''; ?>
-                        value="cancel_invoice">Cancel Invoice</option>
+                        value="cancel_invoice"> <?= __('Cancel Invoice') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'cancel_invoice_date' ? 'selected' : ''; ?>
-                        value="cancel_invoice_date">Cancel Invoice Date</option>
+                        value="cancel_invoice_date"> <?= __('Cancel Invoice Date') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'cancel_invoice_reason' ? 'selected' : ''; ?>
-                        value="cancel_invoice_reason">Cancel Invoice Reason</option>
+                        value="cancel_invoice_reason"> <?= __('Cancel Invoice Reason') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'additional_charges' ? 'selected' : ''; ?>
-                        value="additional_charges">Additional Charges</option>
-                      <option <?php echo $logoOptions['poNumValue'] === 'pdf_name' ? 'selected' : ''; ?> value="pdf_name">
-                        Pdf Name</option>
+                        value="additional_charges"> <?= __('Additional Charges') ?> </option>
+                      <option <?php echo $logoOptions['poNumValue'] === 'pdf_name' ? 'selected' : ''; ?> value="pdf_name"> <?= __('Pdf Name') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'owner_additional_details' ? 'selected' : ''; ?>
-                        value="owner_additional_details">Owner Additional Details</option>
+                        value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'serial_transaction_number' ? 'selected' : ''; ?>
-                        value="serial_transaction_number">Serial Transaction Number</option>
+                        value="serial_transaction_number"> <?= __('Serial Transaction Number') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showpo_date" <?php echo $logoOptions['showPoDate'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showpo_date">Show P.O Date</label>
+                    <label class="form-check-label" for="showpo_date"><?= __('Show P.O Date') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="po_dateheading"
                       value="<?php echo !empty($logoOptions['poDateHeading']) ? $logoOptions['poDateHeading'] : 'P.O Date'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="invoicepodateSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $logoOptions['poDateValue'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
+                      <option <?php echo $logoOptions['poDateValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'cost_center_id' ? 'selected' : ''; ?>
-                        value="cost_center_id">Cost Center Id</option>
+                        value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'transaction_number' ? 'selected' : ''; ?>
-                        value="transaction_number">Transaction Number</option>
+                        value="transaction_number"> <?= __('Transaction Number') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'transaction_date' ? 'selected' : ''; ?>
-                        value="transaction_date">Transaction Date</option>
+                        value="transaction_date"> <?= __('Transaction Date') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'transaction_location_id' ? 'selected' : ''; ?>
-                        value="transaction_location_id">Transaction Location Id</option>
+                        value="transaction_location_id"> <?= __('Transaction Location Id') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'transaction_warehouse_id' ? 'selected' : ''; ?>
-                        value="transaction_warehouse_id">Transaction Warehouse Id</option>
+                        value="transaction_warehouse_id"> <?= __('Transaction Warehouse Id') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'originator_currency_id' ? 'selected' : ''; ?>
-                        value="originator_currency_id">Originator Currency Id</option>
+                        value="originator_currency_id"> <?= __('Originator Currency Id') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'currency_id' ? 'selected' : ''; ?>
-                        value="currency_id">Currency Id</option>
+                        value="currency_id"> <?= __('Currency Id') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'currency_rate' ? 'selected' : ''; ?>
-                        value="currency_rate">Currency Rate</option>
+                        value="currency_rate"> <?= __('Currency Rate') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
+                        value="originator"> <?= __('Originator') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'party_id' ? 'selected' : ''; ?>
-                        value="party_id">
-                        Party Id</option>
+                        value="party_id"> <?= __('Party Id') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'party_tax_number' ? 'selected' : ''; ?>
-                        value="party_tax_number">Party Tax Number</option>
+                        value="party_tax_number"> <?= __('Party Tax Number') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'party_address' ? 'selected' : ''; ?>
-                        value="party_address">Party Address</option>
+                        value="party_address"> <?= __('Party Address') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'party_ship_adderss' ? 'selected' : ''; ?>
-                        value="party_ship_adderss">Party Ship Adderss</option>
+                        value="party_ship_adderss"> <?= __('Party Ship Adderss') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'originator_state_id' ? 'selected' : ''; ?>
-                        value="originator_state_id">Originator State Id</option>
+                        value="originator_state_id"> <?= __('Originator State Id') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'supplier_state_id' ? 'selected' : ''; ?>
-                        value="supplier_state_id">Supplier State Id</option>
+                        value="supplier_state_id"> <?= __('Supplier State Id') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'place_of_supply' ? 'selected' : ''; ?>
-                        value="place_of_supply">Place Of Supply</option>
+                        value="place_of_supply"> <?= __('Place Of Supply') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'payment_terms' ? 'selected' : ''; ?>
-                        value="payment_terms">Payment Terms</option>
-                      <option <?php echo $logoOptions['poDateValue'] === 'notes' ? 'selected' : ''; ?> value="notes">Notes
-                      </option>
+                        value="payment_terms"> <?= __('Payment Terms') ?> </option>
+                      <option <?php echo $logoOptions['poDateValue'] === 'notes' ? 'selected' : ''; ?> value="notes"> <?= __('Notes') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'printing_notes' ? 'selected' : ''; ?>
-                        value="printing_notes">Printing Notes</option>
+                        value="printing_notes"> <?= __('Printing Notes') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
-                      <option <?php echo $logoOptions['poDateValue'] === 'amount' ? 'selected' : ''; ?> value="amount">
-                        Amount</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
+                      <option <?php echo $logoOptions['poDateValue'] === 'amount' ? 'selected' : ''; ?> value="amount"> <?= __('Amount') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
-                      <option <?php echo $logoOptions['poDateValue'] === 'type' ? 'selected' : ''; ?> value="type">Type
-                      </option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
+                      <option <?php echo $logoOptions['poDateValue'] === 'type' ? 'selected' : ''; ?> value="type"> <?= __('Type') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'tax_type' ? 'selected' : ''; ?>
-                        value="tax_type">
-                        Tax Type</option>
+                        value="tax_type"> <?= __('Tax Type') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'discount_type' ? 'selected' : ''; ?>
-                        value="discount_type">Discount Type</option>
+                        value="discount_type"> <?= __('Discount Type') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'discount_value' ? 'selected' : ''; ?>
-                        value="discount_value">Discount Value</option>
+                        value="discount_value"> <?= __('Discount Value') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'shipping_tax' ? 'selected' : ''; ?>
-                        value="shipping_tax">Shipping Tax</option>
+                        value="shipping_tax"> <?= __('Shipping Tax') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'shipping_amount' ? 'selected' : ''; ?>
-                        value="shipping_amount">Shipping Amount</option>
+                        value="shipping_amount"> <?= __('Shipping Amount') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'shipping_tax_amount' ? 'selected' : ''; ?>
-                        value="shipping_tax_amount">Shipping Tax Amount</option>
+                        value="shipping_tax_amount"> <?= __('Shipping Tax Amount') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'tax_state' ? 'selected' : ''; ?>
-                        value="tax_state">Tax State</option>
+                        value="tax_state"> <?= __('Tax State') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'opex_cpex' ? 'selected' : ''; ?>
-                        value="opex_cpex">Opex Cpex</option>
+                        value="opex_cpex"> <?= __('Opex Cpex') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'due_date' ? 'selected' : ''; ?>
-                        value="due_date">
-                        Due Date</option>
+                        value="due_date"> <?= __('Due Date') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'ref_type' ? 'selected' : ''; ?>
-                        value="ref_type">
-                        Ref Type</option>
+                        value="ref_type"> <?= __('Ref Type') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'parent_ref_id' ? 'selected' : ''; ?>
-                        value="parent_ref_id">Rarent Ref Id</option>
+                        value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id">Ref
                         Id</option>
                       <option <?php echo $logoOptions['poDateValue'] === 'ref_no' ? 'selected' : ''; ?> value="ref_no">Ref
                         No</option>
-                      <option <?php echo (empty($logoOptions['poDateValue']) || $logoOptions['poDateValue'] === 'ref_date') ? 'selected' : ''; ?> value="ref_date">Ref Date
-                      </option>
+                      <option <?php echo (empty($logoOptions['poDateValue']) || $logoOptions['poDateValue'] === 'ref_date') ? 'selected' : ''; ?> value="ref_date"> <?= __('Ref Date') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'ref_bill_type' ? 'selected' : ''; ?>
-                        value="ref_bill_type">Ref Bill Type</option>
+                        value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'old_ref_no' ? 'selected' : ''; ?>
-                        value="old_ref_no">Old Ref No</option>
+                        value="old_ref_no"> <?= __('Old Ref No') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'old_ref_date' ? 'selected' : ''; ?>
-                        value="old_ref_date">Old Ref Date</option>
+                        value="old_ref_date"> <?= __('Old Ref Date') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'party_additional_details' ? 'selected' : ''; ?>
-                        value="party_additional_details">Party Additional Details</option>
+                        value="party_additional_details"> <?= __('Party Additional Details') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'follow_up_level_ids' ? 'selected' : ''; ?>
-                        value="follow_up_level_ids">Follow Up Level Ids</option>
+                        value="follow_up_level_ids"> <?= __('Follow Up Level Ids') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'pending_amount' ? 'selected' : ''; ?>
-                        value="pending_amount">Pending Amount</option>
+                        value="pending_amount"> <?= __('Pending Amount') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'cancel_invoice' ? 'selected' : ''; ?>
-                        value="cancel_invoice">Cancel Invoice</option>
+                        value="cancel_invoice"> <?= __('Cancel Invoice') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'cancel_invoice_date' ? 'selected' : ''; ?>
-                        value="cancel_invoice_date">Cancel Invoice Date</option>
+                        value="cancel_invoice_date"> <?= __('Cancel Invoice Date') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'cancel_invoice_reason' ? 'selected' : ''; ?>
-                        value="cancel_invoice_reason">Cancel Invoice Reason</option>
+                        value="cancel_invoice_reason"> <?= __('Cancel Invoice Reason') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'additional_charges' ? 'selected' : ''; ?>
-                        value="additional_charges">Additional Charges</option>
+                        value="additional_charges"> <?= __('Additional Charges') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'pdf_name' ? 'selected' : ''; ?>
-                        value="pdf_name">
-                        Pdf Name</option>
+                        value="pdf_name"> <?= __('Pdf Name') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'owner_additional_details' ? 'selected' : ''; ?>
-                        value="owner_additional_details">Owner Additional Details</option>
+                        value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'serial_transaction_number' ? 'selected' : ''; ?>
-                        value="serial_transaction_number">Serial Transaction Number</option>
+                        value="serial_transaction_number"> <?= __('Serial Transaction Number') ?> </option>
                     </select>
                   </div>
                   <!-- om new -->
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showname" <?php echo $logoOptions['showName'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showname">Show Name</label>
+                    <label class="form-check-label" for="showname"><?= __('Show Name') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="nameheading"
                       value="<?php echo !empty($logoOptions['nameHeading']) ? $logoOptions['nameHeading'] : 'Name'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="invoicenameSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $logoOptions['nameValue'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
+                      <option <?php echo $logoOptions['nameValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['nameValue'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo (empty($logoOptions['nameValue']) || $logoOptions['nameValue'] === 'party_name') ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $logoOptions['nameValue'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
                       <option <?php echo $logoOptions['nameValue'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
                       <option <?php echo $logoOptions['nameValue'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
+                        value="originator"> <?= __('Originator') ?> </option>
                     </select>
                   </div>
                   <!-- om new -->
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showemail" <?php echo $logoOptions['showEmail'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showemail">Show Email</label>
+                    <label class="form-check-label" for="showemail"><?= __('Show Email') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="emailheading"
                       value="<?php echo !empty($logoOptions['emailHeading']) ? $logoOptions['emailHeading'] : 'Email'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="invoiceemailSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $logoOptions['emailValue'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
+                      <option <?php echo $logoOptions['emailValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['emailValue'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo (empty($logoOptions['emailValue']) || $logoOptions['emailValue'] === 'party_email') ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
                       <option <?php echo $logoOptions['emailValue'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $logoOptions['emailValue'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
                       <option <?php echo $logoOptions['emailValue'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
+                        value="originator"> <?= __('Originator') ?> </option>
                     </select>
                   </div>
                   <!-- om new -->
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showphone" <?php echo $logoOptions['showPhone'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showphone">Show Phone</label>
+                    <label class="form-check-label" for="showphone"><?= __('Show Phone') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="phoneheading"
                       value="<?php echo !empty($logoOptions['phoneHeading']) ? $logoOptions['phoneHeading'] : 'Phone'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="invoicephoneSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $logoOptions['phoneValue'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
+                      <option <?php echo $logoOptions['phoneValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['phoneValue'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo (empty($logoOptions['phoneValue']) || $logoOptions['phoneValue'] === 'party_phone') ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
                       <option <?php echo $logoOptions['phoneValue'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $logoOptions['phoneValue'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
                       <option <?php echo $logoOptions['phoneValue'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
+                        value="originator"> <?= __('Originator') ?> </option>
                     </select>
                   </div>
 
@@ -904,16 +845,16 @@ if ($userData['user_photo'] != '') {
               </div>
             </div>
             <div class="mb-3">
-              <h6>Header Options</h6>
+              <h6><?= __('Header Options') ?></h6>
               <div class="btn-group d-flex flex-wrap">
                 <a class="btn btn-outline-danger btn-sm mb-2" data-target="addressVisibility">
-                  <i class="bi bi-eye"></i> Visibility
+                  <i class="bi bi-eye"></i> <?= __('Visibility') ?>
                 </a>
                 <a class="btn btn-outline-dark btn-sm mb-2" data-target="addresssecVisibility">
-                  <i class="bi bi-aspect-ratio"></i> Address Visibility
+                  <i class="bi bi-aspect-ratio"></i> <?= __('Address Visibility') ?>
                 </a>
                 <!-- <a class="btn btn-outline-success btn-sm mb-2" data-target="addressSize">
-                  <i class="bi bi-pencil"></i> Text Size
+                  <i class="bi bi-pencil"></i> <?= __('Text Size') ?>
                 </a> -->
               </div>
               <?php
@@ -922,10 +863,10 @@ if ($userData['user_photo'] != '') {
               <!-- Visibility Options -->
               <div id="addressVisibility" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label class="form-label mb-2">Toggle Header</label>
+                  <label class="form-label mb-2"><?= __('Toggle Header') ?></label>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showAddress" <?php echo $headerOptions['showAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showAddress">Show Header</label>
+                    <label class="form-check-label" for="showAddress"><?= __('Show Header') ?></label>
                   </div>
                 </div>
               </div>
@@ -938,26 +879,24 @@ if ($userData['user_photo'] != '') {
                   <!-- Address 1 -->
                   <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" id="showFirstAddress" <?php echo $headerOptions['showFirstAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showFirstAddress">Show Billing Address</label>
+                    <label class="form-check-label" for="showFirstAddress"><?= __('Show Billing Address') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="inputheading1"
                       value="<?php echo !empty($headerOptions['firstAddressHeading']) ? $headerOptions['firstAddressHeading'] : 'Billing Address'; ?>" title="Input" aria-label="Input">
 
                     <select class="form-select mb-2" id="address1Select" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo (empty($headerOptions['firstAddressValue']) || $headerOptions['firstAddressValue'] === 'party_address') ? 'selected' : ''; ?>
-                        value="party_address">Party Address</option>
-                      <option <?php echo $headerOptions['firstAddressValue'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss">Party Shipping Address</option>
+                        value="party_address"> <?= __('Party Address') ?> </option>
+                      <option <?php echo $headerOptions['firstAddressValue'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss"> <?= __('Party Shipping Address') ?> </option>
                       <option <?php echo $headerOptions['firstAddressValue'] === 'company_address' ? 'selected' : ''; ?>
-                        value="company_address">Company Address</option>
+                        value="company_address"> <?= __('Company Address') ?> </option>
                     </select>
 
                     <select class="form-select" id="address1position" title="Select" aria-label="Select">
-                      <option <?php echo (empty($headerOptions['firstAddressPosition']) || $headerOptions['firstAddressPosition'] === 'left') ? 'selected' : ''; ?> value="left">
-                        Position 1
-                      </option>
+                      <option <?php echo (empty($headerOptions['firstAddressPosition']) || $headerOptions['firstAddressPosition'] === 'left') ? 'selected' : ''; ?> value="left"> <?= __('Position 1') ?> </option>
                       <option <?php echo $headerOptions['firstAddressPosition'] === 'center' ? 'selected' : ''; ?>
-                        value="center">Position 2</option>
+                        value="center"> <?= __('Position 2') ?> </option>
                       <option <?php echo $headerOptions['firstAddressPosition'] === 'right' ? 'selected' : ''; ?>
-                        value="right">Position 3</option>
+                        value="right"> <?= __('Position 3') ?> </option>
                     </select>
 
                     <!-- om address part  -->
@@ -965,19 +904,19 @@ if ($userData['user_photo'] != '') {
                       <h6 class="text-muted">Address Field Visibility</h6>
                       <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox" id="showFirstAddressField" <?php echo ($headerOptions['showFirstAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="Input" aria-label="Input">
-                        <label class="form-check-label" for="showFirstAddressField">Show Address Field</label>
+                        <label class="form-check-label" for="showFirstAddressField"><?= __('Show Address Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox" id="showFirstPincodeField" <?php echo ($headerOptions['showFirstPincodeField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                        <label class="form-check-label" for="showFirstPincodeField">Show Phone Field</label>
+                        <label class="form-check-label" for="showFirstPincodeField"><?= __('Show Phone Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox" id="showFirstGstField" <?php echo ($headerOptions['showFirstGstField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                        <label class="form-check-label" for="showFirstGstField">Show GST Field</label>
+                        <label class="form-check-label" for="showFirstGstField"><?= __('Show GST Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox" id="showFirstPanField" <?php echo ($headerOptions['showFirstPanField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                        <label class="form-check-label" for="showFirstPanField">Show PAN Field</label>
+                        <label class="form-check-label" for="showFirstPanField"><?= __('Show PAN Field') ?></label>
                       </div>
                     </div>
                   </div>
@@ -985,26 +924,25 @@ if ($userData['user_photo'] != '') {
                   <!-- Address 2 -->
                   <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" id="showSecondAddress" <?php echo $headerOptions['showSecondAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showSecondAddress">Show Shipping Address</label>
+                    <label class="form-check-label" for="showSecondAddress"><?= __('Show Shipping Address') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="inputheading2"
                       value="<?php echo !empty($headerOptions['secondAddressHeading']) ? $headerOptions['secondAddressHeading'] : 'Shipping Address'; ?>" title="Input" aria-label="Input">
 
                     <select class="form-select mb-2" id="address2Select" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $headerOptions['secondAddressValue'] === 'party_address' ? 'selected' : ''; ?>
-                        value="party_address">Party Address</option>
+                        value="party_address"> <?= __('Party Address') ?> </option>
                       <option <?php echo (empty($headerOptions['secondAddressValue']) || $headerOptions['secondAddressValue'] === 'party_ship_adderss') ? 'selected' : ''; ?>
-                        value="party_ship_adderss">Party Shipping Address</option>
+                        value="party_ship_adderss"> <?= __('Party Shipping Address') ?> </option>
                       <option <?php echo $headerOptions['secondAddressValue'] === 'company_address' ? 'selected' : ''; ?>
-                        value="company_address">Company Address</option>
+                        value="company_address"> <?= __('Company Address') ?> </option>
                     </select>
 
                     <select class="form-select" id="address2position" title="Select" aria-label="Select">
                       <option <?php echo $headerOptions['secondAddressPosition'] === 'left' ? 'selected' : ''; ?>
-                        value="left">Position 1</option>
-                      <option <?php echo (empty($headerOptions['secondAddressPosition']) || $headerOptions['secondAddressPosition'] === 'center') ? 'selected' : ''; ?> value="center">Position 2
-                      </option>
+                        value="left"> <?= __('Position 1') ?> </option>
+                      <option <?php echo (empty($headerOptions['secondAddressPosition']) || $headerOptions['secondAddressPosition'] === 'center') ? 'selected' : ''; ?> value="center"> <?= __('Position 2') ?> </option>
                       <option <?php echo $headerOptions['secondAddressPosition'] === 'right' ? 'selected' : ''; ?>
-                        value="right">Position 3</option>
+                        value="right"> <?= __('Position 3') ?> </option>
                     </select>
 
                     <!-- om address part  -->
@@ -1012,19 +950,19 @@ if ($userData['user_photo'] != '') {
                       <h6 class="text-muted">Address Field Visibility</h6>
                       <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox" id="showSecondAddressField" <?php echo ($headerOptions['showSecondAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="Input" aria-label="Input">
-                        <label class="form-check-label" for="showSecondAddressField">Show Address Field</label>
+                        <label class="form-check-label" for="showSecondAddressField"><?= __('Show Address Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox" id="showSecondPincodeField" <?php echo ($headerOptions['showSecondPincodeField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                        <label class="form-check-label" for="showSecondPincodeField">Show Phone Number</label>
+                        <label class="form-check-label" for="showSecondPincodeField"><?= __('Show Phone Number') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox" id="showSecondGstField" <?php echo ($headerOptions['showSecondGstField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                        <label class="form-check-label" for="showSecondGstField">Show GST Field</label>
+                        <label class="form-check-label" for="showSecondGstField"><?= __('Show GST Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox" id="showSecondPanField" <?php echo ($headerOptions['showSecondPanField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                        <label class="form-check-label" for="showSecondPanField">Show PAN Field</label>
+                        <label class="form-check-label" for="showSecondPanField"><?= __('Show PAN Field') ?></label>
                       </div>
                     </div>
                   </div>
@@ -1032,25 +970,24 @@ if ($userData['user_photo'] != '') {
                   <!-- Address 3 -->
                   <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" id="showThirdAddress" <?php echo $headerOptions['showThirdAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showThirdAddress">Show Company Address</label>
+                    <label class="form-check-label" for="showThirdAddress"><?= __('Show Company Address') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="inputheading3"
                       value="<?php echo !empty($headerOptions['thirdAddressHeading']) ? $headerOptions['thirdAddressHeading'] : 'Company'; ?>" title="Input" aria-label="Input">
 
                     <select class="form-select mb-2" id="address3Select" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $headerOptions['thirdAddressValue'] === 'party_address' ? 'selected' : ''; ?>
-                        value="party_address">Party Address</option>
-                      <option <?php echo $headerOptions['thirdAddressValue'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss">Party Shipping Address</option>
+                        value="party_address"> <?= __('Party Address') ?> </option>
+                      <option <?php echo $headerOptions['thirdAddressValue'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss"> <?= __('Party Shipping Address') ?> </option>
                       <option <?php echo (empty($headerOptions['thirdAddressValue']) || $headerOptions['thirdAddressValue'] === 'company_address') ? 'selected' : ''; ?>
-                        value="company_address">Company Address</option>
+                        value="company_address"> <?= __('Company Address') ?> </option>
                     </select>
 
                     <select class="form-select" id="address3position" title="Select" aria-label="Select">
                       <option <?php echo $headerOptions['thirdAddressPosition'] === 'left' ? 'selected' : ''; ?>
-                        value="left">Position 1</option>
+                        value="left"> <?= __('Position 1') ?> </option>
                       <option <?php echo $headerOptions['thirdAddressPosition'] === 'center' ? 'selected' : ''; ?>
-                        value="center">Position 2</option>
-                      <option <?php echo (empty($headerOptions['thirdAddressPosition']) || $headerOptions['thirdAddressPosition'] === 'right') ? 'selected' : ''; ?> value="right">Position 3
-                      </option>
+                        value="center"> <?= __('Position 2') ?> </option>
+                      <option <?php echo (empty($headerOptions['thirdAddressPosition']) || $headerOptions['thirdAddressPosition'] === 'right') ? 'selected' : ''; ?> value="right"> <?= __('Position 3') ?> </option>
                     </select>
 
                     <!-- om address part  -->
@@ -1058,19 +995,19 @@ if ($userData['user_photo'] != '') {
                       <h6 class="text-muted">Address Field Visibility</h6>
                       <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox" id="showThirdAddressField" <?php echo ($headerOptions['showThirdAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="Input" aria-label="Input">
-                        <label class="form-check-label" for="showThirdAddressField">Show Address Field</label>
+                        <label class="form-check-label" for="showThirdAddressField"><?= __('Show Address Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox" id="showThirdPincodeField" <?php echo ($headerOptions['showThirdPincodeField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                        <label class="form-check-label" for="showThirdPincodeField">Show Phone Number</label>
+                        <label class="form-check-label" for="showThirdPincodeField"><?= __('Show Phone Number') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox" id="showThirdGstField" <?php echo ($headerOptions['showThirdGstField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                        <label class="form-check-label" for="showThirdGstField">Show GST Field</label>
+                        <label class="form-check-label" for="showThirdGstField"><?= __('Show GST Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox" id="showThirdPanField" <?php echo ($headerOptions['showThirdPanField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                        <label class="form-check-label" for="showThirdPanField">Show PAN Field</label>
+                        <label class="form-check-label" for="showThirdPanField"><?= __('Show PAN Field') ?></label>
                       </div>
                     </div>
                   </div>
@@ -1081,19 +1018,17 @@ if ($userData['user_photo'] != '') {
               <!-- Size Options -->
               <div id="addressSize" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label for="addressSizeSelect" class="form-label">Text Size</label>
+                  <label for="addressSizeSelect" class="form-label"><?= __('Text Size') ?></label>
                   <select class="form-select" id="addressSizeSelect" title="Select" aria-label="Select">
-                    <option value="small" <?php echo $headerOptions['addressTextSize'] === 'small' ? 'selected' : ''; ?>>
-                      Small</option>
-                    <option value="medium" <?php echo (empty($headerOptions['addressTextSize']) || $headerOptions['addressTextSize'] === 'medium') ? 'selected' : ''; ?>>Medium</option>
-                    <option value="large" <?php echo $headerOptions['addressTextSize'] === 'large' ? 'selected' : ''; ?>>
-                      Large</option>
+                    <option value="small" <?php echo $headerOptions['addressTextSize'] === 'small' ? 'selected' : ''; ?>> <?= __('Small') ?> </option>
+                    <option value="medium" <?php echo (empty($headerOptions['addressTextSize']) || $headerOptions['addressTextSize'] === 'medium') ? 'selected' : ''; ?>> <?= __('Medium') ?> </option>
+                    <option value="large" <?php echo $headerOptions['addressTextSize'] === 'large' ? 'selected' : ''; ?>> <?= __('Large') ?> </option>
                   </select>
                 </div>
               </div>
             </div>
             <div class="mb-3">
-              <h6>Table Options</h6>
+              <h6><?= __('Table Options') ?></h6>
               <div class="btn-group d-flex flex-wrap">
                 <button class="btn btn-outline-dark btn-sm mb-2" data-target="tableVisibility">
                   <i class="bi bi-eye"></i> Visibility
@@ -1114,10 +1049,10 @@ if ($userData['user_photo'] != '') {
               <!-- Visibility Options -->
               <div id="tableVisibility" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label class="form-label mb-2">Toggle Table</label>
+                  <label class="form-label mb-2"><?= __('Toggle Table') ?></label>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showTable" readonly disabled checked title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showTable">Show Table</label>
+                    <label class="form-check-label" for="showTable"><?= __('Show Table') ?></label>
                   </div>
                 </div>
               </div>
@@ -1125,60 +1060,60 @@ if ($userData['user_photo'] != '') {
               <!-- Table Appearance Options -->
               <div id="tableAppearance" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <h6>Customize Table Appearance</h6>
+                  <h6><?= __('Customize Table Appearance') ?></h6>
 
                   <!-- Table Header Background -->
                   <div class="mb-1">
-                    <label class="form-label">Table Header Background</label>
+                    <label class="form-label"><?= __('Table Header Background') ?></label>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
                       id="tableHeaderbgColor" value="<?php echo $tableOptions['headerBgColor'] ?? '#f0f0f0'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table Header color -->
                   <div class="mb-1">
-                    <label class="form-label">Table Header Text Color</label>
+                    <label class="form-label"><?= __('Table Header Text Color') ?></label>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
                       id="tableHeaderColor" value="<?php echo $tableOptions['headerTextColor'] ?? '#000'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table Body Background -->
                   <div class="mb-1">
-                    <label class="form-label">Table Body Background</label>
+                    <label class="form-label"><?= __('Table Body Background') ?></label>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
                       id="tableBodybgColor" value="<?php echo $tableOptions['bodyBgColor'] ?? '#ffffff'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table body color -->
                   <div class="mb-1">
-                    <label class="form-label">Table body Text Color</label>
+                    <label class="form-label"><?= __('Table body Text Color') ?></label>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
                       id="tableBodyColor" value="<?php echo $bodyTextColor['bodyBgColor'] ?? '#000'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table Footer Background -->
                   <div class="mb-1">
-                    <label class="form-label">Table Footer Background</label>
+                    <label class="form-label"><?= __('Table Footer Background') ?></label>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
                       id="tableFooterbgColor" value="<?php echo $bodyTextColor['footerBgColor'] ?? '#f8f9fa'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table Header color -->
                   <div class="mb-1">
-                    <label class="form-label">Table Footer Text Color</label>
+                    <label class="form-label"><?= __('Table Footer Text Color') ?></label>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
                       id="tableFooterColor" value="<?php echo $bodyTextColor['footerTextColor'] ?? '#000000'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Row Height -->
                   <div class="mb-1">
-                    <label class="form-label">Table Row Height</label>
+                    <label class="form-label"><?= __('Table Row Height') ?></label>
                     <input type="number" class="form-control" id="rowHeight" min="20"
                       placeholder="Enter Row Height (px)" value="<?php echo $bodyTextColor['rowHeight'] ?? '40'; ?>" title="Enter Row Height (px)" aria-label="Enter Row Height (px)">
                   </div>
 
                   <!-- Heading Height -->
                   <div class="mb-1">
-                    <label class="form-label">Table Heading Height</label>
+                    <label class="form-label"><?= __('Table Heading Height') ?></label>
                     <input type="number" class="form-control" id="headingHeight" min="20"
                       placeholder="Enter Heading Height (px)"
                       value="<?php echo $bodyTextColor['headingHeight'] ?? '40'; ?>" title="Enter Heading Height (px)" aria-label="Enter Heading Height (px)">
@@ -1186,7 +1121,7 @@ if ($userData['user_photo'] != '') {
 
                   <!-- Font Size -->
                   <div class="mb-1">
-                    <label class="form-label">Table Font Size</label>
+                    <label class="form-label"><?= __('Table Font Size') ?></label>
                     <input type="number" class="form-control" id="fontSize" min="8" max="36"
                       placeholder="Enter Font Size (px)" value="<?php echo $bodyTextColor['fontSize'] ?? '16'; ?>" title="Enter Font Size (px)" aria-label="Enter Font Size (px)">
                   </div>
@@ -1196,717 +1131,675 @@ if ($userData['user_photo'] != '') {
               <!-- Cols Visibility Options -->
               <div id="colsVisibility" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label class="form-label mb-2">Toggle Columns</label>
+                  <label class="form-label mb-2"><?= __('Toggle Columns') ?></label>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showimagecol" <?php echo $tableOptions['showColumns']['img'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showimagecol">Show Image</label>
+                    <label class="form-check-label" for="showimagecol"><?= __('Show Image') ?></label>
                     <input type="text" id="imagecolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
                       value="<?php echo !empty($tableOptions['heading_img']) ? $tableOptions['heading_img'] : 'Img'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
                     <select class="form-select mt-1" id="itemimageSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $tableOptions['value_img'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
+                      <option <?php echo $tableOptions['value_img'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'transaction_id' ? 'selected' : ''; ?>
-                        value="transaction_id">Transaction Id</option>
+                        value="transaction_id"> <?= __('Transaction Id') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'item_table_name' ? 'selected' : ''; ?>
-                        value="item_table_name">Item Table Name</option>
+                        value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
                         Item
                         Id</option>
                       <option <?php echo $tableOptions['value_img'] === 'account_code' ? 'selected' : ''; ?>
-                        value="account_code">Account Code</option>
+                        value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'item_name' ? 'selected' : ''; ?>
-                        value="item_name">
-                        Item Name</option>
-                      <option <?php echo (empty($tableOptions['value_img']) || $tableOptions['value_img'] === 'item_image') ? 'selected' : ''; ?> value="item_image">Item Image
-                      </option>
+                        value="item_name"> <?= __('Item Name') ?> </option>
+                      <option <?php echo (empty($tableOptions['value_img']) || $tableOptions['value_img'] === 'item_image') ? 'selected' : ''; ?> value="item_image"> <?= __('Item Image') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'description' ? 'selected' : ''; ?>
-                        value="description">Description</option>
+                        value="description"> <?= __('Description') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'purchase_uom' ? 'selected' : ''; ?>
-                        value="purchase_uom">UOM</option>
+                        value="purchase_uom"> <?= __('UOM') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'item_quantity' ? 'selected' : ''; ?>
-                        value="item_quantity">Quantity</option>
+                        value="item_quantity"> <?= __('Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'item_price' ? 'selected' : ''; ?>
-                        value="item_price">Item Price</option>
+                        value="item_price"> <?= __('Item Price') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'item_amount' ? 'selected' : ''; ?>
-                        value="item_amount">Item Amount</option>
+                        value="item_amount"> <?= __('Item Amount') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'reason_id' ? 'selected' : ''; ?>
-                        value="reason_id">
-                        Reason Id</option>
+                        value="reason_id"> <?= __('Reason Id') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'item_wa_cost' ? 'selected' : ''; ?>
-                        value="item_wa_cost">Item Wa Cost</option>
+                        value="item_wa_cost"> <?= __('Item Wa Cost') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'item_st_cost' ? 'selected' : ''; ?>
-                        value="item_st_cost">Item St Cost</option>
+                        value="item_st_cost"> <?= __('Item St Cost') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'doc_ref_type' ? 'selected' : ''; ?>
-                        value="doc_ref_type">Doc Ref Type</option>
+                        value="doc_ref_type"> <?= __('Doc Ref Type') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'doc_ref_id' ? 'selected' : ''; ?>
-                        value="doc_ref_id">Doc Ref Id</option>
+                        value="doc_ref_id"> <?= __('Doc Ref Id') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
-                      <option <?php echo $tableOptions['value_img'] === 'req_date' ? 'selected' : ''; ?> value="req_date">
-                        Req Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
+                      <option <?php echo $tableOptions['value_img'] === 'req_date' ? 'selected' : ''; ?> value="req_date"> <?= __('Req Date') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'approved_quantity' ? 'selected' : ''; ?>
-                        value="approved_quantity">Approved Quantity</option>
+                        value="approved_quantity"> <?= __('Approved Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'transaction_type' ? 'selected' : ''; ?>
-                        value="transaction_type">Transaction Type</option>
+                        value="transaction_type"> <?= __('Transaction Type') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'transaction_qty' ? 'selected' : ''; ?>
-                        value="transaction_qty">Transaction Qty</option>
+                        value="transaction_qty"> <?= __('Transaction Qty') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'pending_qty' ? 'selected' : ''; ?>
-                        value="pending_qty">Pending Qty</option>
+                        value="pending_qty"> <?= __('Pending Qty') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">
-                        Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showitemcol" <?php echo $tableOptions['showColumns']['item'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showitemcol">Show Item Name</label>
+                    <label class="form-check-label" for="showitemcol"><?= __('Show Item Name') ?></label>
                     <input type="text" id="itemcolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
                       value="<?php echo !empty($tableOptions['heading_item']) ? $tableOptions['heading_item'] : 'Item'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
                     <select class="form-select mt-1" id="itemnameSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $tableOptions['value_item'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
+                      <option <?php echo $tableOptions['value_item'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'transaction_id' ? 'selected' : ''; ?>
-                        value="transaction_id">Transaction Id</option>
+                        value="transaction_id"> <?= __('Transaction Id') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'item_table_name' ? 'selected' : ''; ?>
-                        value="item_table_name">Item Table Name</option>
-                      <option <?php echo $tableOptions['value_item'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
-                        Item Id</option>
+                        value="item_table_name"> <?= __('Item Table Name') ?> </option>
+                      <option <?php echo $tableOptions['value_item'] === 'item_id' ? 'selected' : ''; ?> value="item_id"> <?= __('Item Id') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'account_code' ? 'selected' : ''; ?>
-                        value="account_code">Account Code</option>
-                      <option <?php echo (empty($tableOptions['value_item']) || $tableOptions['value_item'] === 'item_name') ? 'selected' : ''; ?> value="item_name">Item Name
-                      </option>
+                        value="account_code"> <?= __('Account Code') ?> </option>
+                      <option <?php echo (empty($tableOptions['value_item']) || $tableOptions['value_item'] === 'item_name') ? 'selected' : ''; ?> value="item_name"> <?= __('Item Name') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'item_image' ? 'selected' : ''; ?>
-                        value="item_image">Item Image</option>
+                        value="item_image"> <?= __('Item Image') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'description' ? 'selected' : ''; ?>
-                        value="description">Description</option>
+                        value="description"> <?= __('Description') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'purchase_uom' ? 'selected' : ''; ?>
-                        value="purchase_uom">UOM</option>
+                        value="purchase_uom"> <?= __('UOM') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'item_quantity' ? 'selected' : ''; ?>
-                        value="item_quantity">Quantity</option>
+                        value="item_quantity"> <?= __('Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'item_price' ? 'selected' : ''; ?>
-                        value="item_price">Item Price</option>
+                        value="item_price"> <?= __('Item Price') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'item_amount' ? 'selected' : ''; ?>
-                        value="item_amount">Item Amount</option>
+                        value="item_amount"> <?= __('Item Amount') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'reason_id' ? 'selected' : ''; ?>
-                        value="reason_id">Reason Id</option>
+                        value="reason_id"> <?= __('Reason Id') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'item_wa_cost' ? 'selected' : ''; ?>
-                        value="item_wa_cost">Item Wa Cost</option>
+                        value="item_wa_cost"> <?= __('Item Wa Cost') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'item_st_cost' ? 'selected' : ''; ?>
-                        value="item_st_cost">Item St Cost</option>
+                        value="item_st_cost"> <?= __('Item St Cost') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'doc_ref_type' ? 'selected' : ''; ?>
-                        value="doc_ref_type">Doc Ref Type</option>
+                        value="doc_ref_type"> <?= __('Doc Ref Type') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'doc_ref_id' ? 'selected' : ''; ?>
-                        value="doc_ref_id">Doc Ref Id</option>
+                        value="doc_ref_id"> <?= __('Doc Ref Id') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'req_date' ? 'selected' : ''; ?>
-                        value="req_date">
-                        Req Date</option>
+                        value="req_date"> <?= __('Req Date') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'approved_quantity' ? 'selected' : ''; ?>
-                        value="approved_quantity">Approved Quantity</option>
+                        value="approved_quantity"> <?= __('Approved Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'transaction_type' ? 'selected' : ''; ?>
-                        value="transaction_type">Transaction Type</option>
+                        value="transaction_type"> <?= __('Transaction Type') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'transaction_qty' ? 'selected' : ''; ?>
-                        value="transaction_qty">Transaction Qty</option>
+                        value="transaction_qty"> <?= __('Transaction Qty') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'pending_qty' ? 'selected' : ''; ?>
-                        value="pending_qty">Pending Qty</option>
+                        value="pending_qty"> <?= __('Pending Qty') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showdescol" <?php echo $tableOptions['showColumns']['des'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showitemcol">Show Item Description</label>
+                    <label class="form-check-label" for="showitemcol"><?= __('Show Item Description') ?></label>
                     <input type="text" id="descolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
                       value="<?php echo !empty($tableOptions['heading_des']) ? $tableOptions['heading_des'] : 'Description'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
                     <select class="form-select mt-1" id="itemdescriptionSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $tableOptions['value_des'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
+                      <option <?php echo $tableOptions['value_des'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'transaction_id' ? 'selected' : ''; ?>
-                        value="transaction_id">Transaction Id</option>
+                        value="transaction_id"> <?= __('Transaction Id') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'item_table_name' ? 'selected' : ''; ?>
-                        value="item_table_name">Item Table Name</option>
+                        value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
                         Item
                         Id</option>
                       <option <?php echo $tableOptions['value_des'] === 'account_code' ? 'selected' : ''; ?>
-                        value="account_code">Account Code</option>
+                        value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'item_name' ? 'selected' : ''; ?>
-                        value="item_name">
-                        Item Name</option>
+                        value="item_name"> <?= __('Item Name') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'item_image' ? 'selected' : ''; ?>
-                        value="item_image">Item Image</option>
-                      <option <?php echo (empty($tableOptions['value_des']) || $tableOptions['value_des'] === 'description') ? 'selected' : ''; ?> value="description">
-                        Description</option>
+                        value="item_image"> <?= __('Item Image') ?> </option>
+                      <option <?php echo (empty($tableOptions['value_des']) || $tableOptions['value_des'] === 'description') ? 'selected' : ''; ?> value="description"> <?= __('Description') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'purchase_uom' ? 'selected' : ''; ?>
-                        value="purchase_uom">UOM</option>
+                        value="purchase_uom"> <?= __('UOM') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'item_quantity' ? 'selected' : ''; ?>
-                        value="item_quantity">Quantity</option>
+                        value="item_quantity"> <?= __('Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'item_price' ? 'selected' : ''; ?>
-                        value="item_price">Item Price</option>
+                        value="item_price"> <?= __('Item Price') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'item_amount' ? 'selected' : ''; ?>
-                        value="item_amount">Item Amount</option>
+                        value="item_amount"> <?= __('Item Amount') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'reason_id' ? 'selected' : ''; ?>
-                        value="reason_id">
-                        Reason Id</option>
+                        value="reason_id"> <?= __('Reason Id') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'item_wa_cost' ? 'selected' : ''; ?>
-                        value="item_wa_cost">Item Wa Cost</option>
+                        value="item_wa_cost"> <?= __('Item Wa Cost') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'item_st_cost' ? 'selected' : ''; ?>
-                        value="item_st_cost">Item St Cost</option>
+                        value="item_st_cost"> <?= __('Item St Cost') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'doc_ref_type' ? 'selected' : ''; ?>
-                        value="doc_ref_type">Doc Ref Type</option>
+                        value="doc_ref_type"> <?= __('Doc Ref Type') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'doc_ref_id' ? 'selected' : ''; ?>
-                        value="doc_ref_id">Doc Ref Id</option>
+                        value="doc_ref_id"> <?= __('Doc Ref Id') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
-                      <option <?php echo $tableOptions['value_des'] === 'req_date' ? 'selected' : ''; ?> value="req_date">
-                        Req Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
+                      <option <?php echo $tableOptions['value_des'] === 'req_date' ? 'selected' : ''; ?> value="req_date"> <?= __('Req Date') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'approved_quantity' ? 'selected' : ''; ?>
-                        value="approved_quantity">Approved Quantity</option>
+                        value="approved_quantity"> <?= __('Approved Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'transaction_type' ? 'selected' : ''; ?>
-                        value="transaction_type">Transaction Type</option>
+                        value="transaction_type"> <?= __('Transaction Type') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'transaction_qty' ? 'selected' : ''; ?>
-                        value="transaction_qty">Transaction Qty</option>
+                        value="transaction_qty"> <?= __('Transaction Qty') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'pending_qty' ? 'selected' : ''; ?>
-                        value="pending_qty">Pending Qty</option>
+                        value="pending_qty"> <?= __('Pending Qty') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">
-                        Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showuomcol" <?php echo $tableOptions['showColumns']['uom'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showuomcol">Show UOM</label>
+                    <label class="form-check-label" for="showuomcol"><?= __('Show UOM') ?></label>
                     <input type="text" id="uomcolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
                       value="<?php echo !empty($tableOptions['heading_uom']) ? $tableOptions['heading_uom'] : 'UOM'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
                     <select class="form-select mt-1" id="itemuomSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $tableOptions['value_uom'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
+                      <option <?php echo $tableOptions['value_uom'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'transaction_id' ? 'selected' : ''; ?>
-                        value="transaction_id">Transaction Id</option>
+                        value="transaction_id"> <?= __('Transaction Id') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'hsn_and_sac_code_id' ? 'selected' : ''; ?>
-                        value="hsn_and_sac_code_id" selected>HSN/SAC ID</option>
+                        value="hsn_and_sac_code_id" selected> <?= __('HSN/SAC ID') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'item_table_name' ? 'selected' : ''; ?>
-                        value="item_table_name">Item Table Name</option>
+                        value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
                         Item
                         Id</option>
                       <option <?php echo $tableOptions['value_uom'] === 'account_code' ? 'selected' : ''; ?>
-                        value="account_code">Account Code</option>
+                        value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'item_name' ? 'selected' : ''; ?>
-                        value="item_name">
-                        Item Name</option>
+                        value="item_name"> <?= __('Item Name') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'item_image' ? 'selected' : ''; ?>
-                        value="item_image">Item Image</option>
+                        value="item_image"> <?= __('Item Image') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'description' ? 'selected' : ''; ?>
-                        value="description">Description</option>
-                      <option <?php echo (empty($tableOptions['value_uom']) || $tableOptions['value_uom'] === 'purchase_uom') ? 'selected' : ''; ?> value="purchase_uom">UOM
-                      </option>
+                        value="description"> <?= __('Description') ?> </option>
+                      <option <?php echo (empty($tableOptions['value_uom']) || $tableOptions['value_uom'] === 'purchase_uom') ? 'selected' : ''; ?> value="purchase_uom"> <?= __('UOM') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'item_quantity' ? 'selected' : ''; ?>
-                        value="item_quantity">Quantity</option>
+                        value="item_quantity"> <?= __('Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'item_price' ? 'selected' : ''; ?>
-                        value="item_price">Item Price</option>
+                        value="item_price"> <?= __('Item Price') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'item_amount' ? 'selected' : ''; ?>
-                        value="item_amount">Item Amount</option>
+                        value="item_amount"> <?= __('Item Amount') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'reason_id' ? 'selected' : ''; ?>
-                        value="reason_id">
-                        Reason Id</option>
+                        value="reason_id"> <?= __('Reason Id') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'item_wa_cost' ? 'selected' : ''; ?>
-                        value="item_wa_cost">Item Wa Cost</option>
+                        value="item_wa_cost"> <?= __('Item Wa Cost') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'item_st_cost' ? 'selected' : ''; ?>
-                        value="item_st_cost">Item St Cost</option>
+                        value="item_st_cost"> <?= __('Item St Cost') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'doc_ref_type' ? 'selected' : ''; ?>
-                        value="doc_ref_type">Doc Ref Type</option>
+                        value="doc_ref_type"> <?= __('Doc Ref Type') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'doc_ref_id' ? 'selected' : ''; ?>
-                        value="doc_ref_id">Doc Ref Id</option>
+                        value="doc_ref_id"> <?= __('Doc Ref Id') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
-                      <option <?php echo $tableOptions['value_uom'] === 'req_date' ? 'selected' : ''; ?> value="req_date">
-                        Req Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
+                      <option <?php echo $tableOptions['value_uom'] === 'req_date' ? 'selected' : ''; ?> value="req_date"> <?= __('Req Date') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'approved_quantity' ? 'selected' : ''; ?>
-                        value="approved_quantity">Approved Quantity</option>
+                        value="approved_quantity"> <?= __('Approved Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'transaction_type' ? 'selected' : ''; ?>
-                        value="transaction_type">Transaction Type</option>
+                        value="transaction_type"> <?= __('Transaction Type') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'transaction_qty' ? 'selected' : ''; ?>
-                        value="transaction_qty">Transaction Qty</option>
+                        value="transaction_qty"> <?= __('Transaction Qty') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'pending_qty' ? 'selected' : ''; ?>
-                        value="pending_qty">Pending Qty</option>
+                        value="pending_qty"> <?= __('Pending Qty') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">
-                        Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showhsnsaccol" <?php echo $tableOptions['showColumns']['hsnsac'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showhsnsaccol">Show HSN/SAC</label>
+                    <label class="form-check-label" for="showhsnsaccol"><?= __('Show HSN/SAC') ?></label>
                     <input type="text" id="hsnsaccolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
                       value="<?php echo !empty($tableOptions['heading_hsnsac']) ? $tableOptions['heading_hsnsac'] : 'Hsn/Sac'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
                     <select class="form-select mt-1" id="itemhsnsacSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $tableOptions['value_hsnsac'] === 'id' ? 'selected' : ''; ?> value="id">id
-                      </option>
+                      <option <?php echo $tableOptions['value_hsnsac'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'transaction_id' ? 'selected' : ''; ?>
-                        value="transaction_id">Transaction Id</option>
+                        value="transaction_id"> <?= __('Transaction Id') ?> </option>
                       <option <?php echo (empty($tableOptions['value_hsnsac']) || $tableOptions['value_hsnsac'] === 'hsn_and_sac_code_id') ? 'selected' : ''; ?>
-                        value="hsn_and_sac_code_id" selected>HSN/SAC ID</option>
+                        value="hsn_and_sac_code_id" selected> <?= __('HSN/SAC ID') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'item_table_name' ? 'selected' : ''; ?>
-                        value="item_table_name">Item Table Name</option>
+                        value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'item_id' ? 'selected' : ''; ?>
-                        value="item_id">
-                        Item Id</option>
+                        value="item_id"> <?= __('Item Id') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'account_code' ? 'selected' : ''; ?>
-                        value="account_code">Account Code</option>
+                        value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'item_name' ? 'selected' : ''; ?>
-                        value="item_name">Item Name</option>
+                        value="item_name"> <?= __('Item Name') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'item_image' ? 'selected' : ''; ?>
-                        value="item_image">Item Image</option>
+                        value="item_image"> <?= __('Item Image') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'description' ? 'selected' : ''; ?>
-                        value="description">Description</option>
+                        value="description"> <?= __('Description') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'purchase_uom' ? 'selected' : ''; ?>
-                        value="purchase_uom">UOM</option>
+                        value="purchase_uom"> <?= __('UOM') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'item_quantity' ? 'selected' : ''; ?>
-                        value="item_quantity">Quantity</option>
+                        value="item_quantity"> <?= __('Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'item_price' ? 'selected' : ''; ?>
-                        value="item_price">Item Price</option>
+                        value="item_price"> <?= __('Item Price') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'item_amount' ? 'selected' : ''; ?>
-                        value="item_amount">Item Amount</option>
+                        value="item_amount"> <?= __('Item Amount') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'reason_id' ? 'selected' : ''; ?>
-                        value="reason_id">Reason Id</option>
+                        value="reason_id"> <?= __('Reason Id') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'item_wa_cost' ? 'selected' : ''; ?>
-                        value="item_wa_cost">Item Wa Cost</option>
+                        value="item_wa_cost"> <?= __('Item Wa Cost') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'item_st_cost' ? 'selected' : ''; ?>
-                        value="item_st_cost">Item St Cost</option>
+                        value="item_st_cost"> <?= __('Item St Cost') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'doc_ref_type' ? 'selected' : ''; ?>
-                        value="doc_ref_type">Doc Ref Type</option>
+                        value="doc_ref_type"> <?= __('Doc Ref Type') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'doc_ref_id' ? 'selected' : ''; ?>
-                        value="doc_ref_id">Doc Ref Id</option>
+                        value="doc_ref_id"> <?= __('Doc Ref Id') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'req_date' ? 'selected' : ''; ?>
-                        value="req_date">Req Date</option>
+                        value="req_date"> <?= __('Req Date') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'approved_quantity' ? 'selected' : ''; ?>
-                        value="approved_quantity">Approved Quantity</option>
+                        value="approved_quantity"> <?= __('Approved Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'transaction_type' ? 'selected' : ''; ?>
-                        value="transaction_type">Transaction Type</option>
+                        value="transaction_type"> <?= __('Transaction Type') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'transaction_qty' ? 'selected' : ''; ?>
-                        value="transaction_qty">Transaction Qty</option>
+                        value="transaction_qty"> <?= __('Transaction Qty') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'pending_qty' ? 'selected' : ''; ?>
-                        value="pending_qty">Pending Qty</option>
+                        value="pending_qty"> <?= __('Pending Qty') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showqtycol" <?php echo $tableOptions['showColumns']['qty'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showqtycol">Show QTY</label>
+                    <label class="form-check-label" for="showqtycol"><?= __('Show QTY') ?></label>
                     <input type="text" id="qtycolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
                       value="<?php echo !empty($tableOptions['heading_qty']) ? $tableOptions['heading_qty'] : 'QTY'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
                     <select class="form-select mt-1" id="itemqtySelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $tableOptions['value_qty'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
+                      <option <?php echo $tableOptions['value_qty'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'transaction_id' ? 'selected' : ''; ?>
-                        value="transaction_id">Transaction Id</option>
+                        value="transaction_id"> <?= __('Transaction Id') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'hsn_and_sac_code_id' ? 'selected' : ''; ?>
-                        value="hsn_and_sac_code_id" selected>HSN/SAC ID</option>
+                        value="hsn_and_sac_code_id" selected> <?= __('HSN/SAC ID') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_table_name' ? 'selected' : ''; ?>
-                        value="item_table_name">Item Table Name</option>
+                        value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
                         Item
                         Id</option>
                       <option <?php echo $tableOptions['value_qty'] === 'account_code' ? 'selected' : ''; ?>
-                        value="account_code">Account Code</option>
+                        value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_name' ? 'selected' : ''; ?>
-                        value="item_name">
-                        Item Name</option>
+                        value="item_name"> <?= __('Item Name') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_image' ? 'selected' : ''; ?>
-                        value="item_image">Item Image</option>
+                        value="item_image"> <?= __('Item Image') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'description' ? 'selected' : ''; ?>
-                        value="description">Description</option>
+                        value="description"> <?= __('Description') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'purchase_uom' ? 'selected' : ''; ?>
-                        value="purchase_uom">UOM</option>
-                      <option <?php echo (empty($tableOptions['value_qty']) || $tableOptions['value_qty'] === 'item_quantity') ? 'selected' : ''; ?> value="item_quantity">
-                        Quantity
-                      </option>
+                        value="purchase_uom"> <?= __('UOM') ?> </option>
+                      <option <?php echo (empty($tableOptions['value_qty']) || $tableOptions['value_qty'] === 'item_quantity') ? 'selected' : ''; ?> value="item_quantity"> <?= __('Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_price' ? 'selected' : ''; ?>
-                        value="item_price">Item Price</option>
+                        value="item_price"> <?= __('Item Price') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_amount' ? 'selected' : ''; ?>
-                        value="item_amount">Item Amount</option>
+                        value="item_amount"> <?= __('Item Amount') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'reason_id' ? 'selected' : ''; ?>
-                        value="reason_id">
-                        Reason Id</option>
+                        value="reason_id"> <?= __('Reason Id') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_wa_cost' ? 'selected' : ''; ?>
-                        value="item_wa_cost">Item Wa Cost</option>
+                        value="item_wa_cost"> <?= __('Item Wa Cost') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_st_cost' ? 'selected' : ''; ?>
-                        value="item_st_cost">Item St Cost</option>
+                        value="item_st_cost"> <?= __('Item St Cost') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'doc_ref_type' ? 'selected' : ''; ?>
-                        value="doc_ref_type">Doc Ref Type</option>
+                        value="doc_ref_type"> <?= __('Doc Ref Type') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'doc_ref_id' ? 'selected' : ''; ?>
-                        value="doc_ref_id">Doc Ref Id</option>
+                        value="doc_ref_id"> <?= __('Doc Ref Id') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
-                      <option <?php echo $tableOptions['value_qty'] === 'req_date' ? 'selected' : ''; ?> value="req_date">
-                        Req Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
+                      <option <?php echo $tableOptions['value_qty'] === 'req_date' ? 'selected' : ''; ?> value="req_date"> <?= __('Req Date') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'approved_quantity' ? 'selected' : ''; ?>
-                        value="approved_quantity">Approved Quantity</option>
+                        value="approved_quantity"> <?= __('Approved Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'transaction_type' ? 'selected' : ''; ?>
-                        value="transaction_type">Transaction Type</option>
+                        value="transaction_type"> <?= __('Transaction Type') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'transaction_qty' ? 'selected' : ''; ?>
-                        value="transaction_qty">Transaction Qty</option>
+                        value="transaction_qty"> <?= __('Transaction Qty') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'pending_qty' ? 'selected' : ''; ?>
-                        value="pending_qty">Pending Qty</option>
+                        value="pending_qty"> <?= __('Pending Qty') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">
-                        Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showratecol" <?php echo $tableOptions['showColumns']['rate'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showratecol">Show Rate</label>
+                    <label class="form-check-label" for="showratecol"><?= __('Show Rate') ?></label>
                     <input type="text" id="ratecolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
                       value="<?php echo !empty($tableOptions['heading_rate']) ? $tableOptions['heading_rate'] : 'Rate'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
                     <select class="form-select mt-1" id="itemrateSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $tableOptions['value_rate'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
+                      <option <?php echo $tableOptions['value_rate'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'transaction_id' ? 'selected' : ''; ?>
-                        value="transaction_id">Transaction Id</option>
+                        value="transaction_id"> <?= __('Transaction Id') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'hsn_and_sac_code_id' ? 'selected' : ''; ?>
-                        value="hsn_and_sac_code_id" selected>HSN/SAC ID</option>
+                        value="hsn_and_sac_code_id" selected> <?= __('HSN/SAC ID') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'item_table_name' ? 'selected' : ''; ?>
-                        value="item_table_name">Item Table Name</option>
-                      <option <?php echo $tableOptions['value_rate'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
-                        Item Id</option>
+                        value="item_table_name"> <?= __('Item Table Name') ?> </option>
+                      <option <?php echo $tableOptions['value_rate'] === 'item_id' ? 'selected' : ''; ?> value="item_id"> <?= __('Item Id') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'account_code' ? 'selected' : ''; ?>
-                        value="account_code">Account Code</option>
+                        value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'item_name' ? 'selected' : ''; ?>
-                        value="item_name">Item Name</option>
+                        value="item_name"> <?= __('Item Name') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'item_image' ? 'selected' : ''; ?>
-                        value="item_image">Item Image</option>
+                        value="item_image"> <?= __('Item Image') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'description' ? 'selected' : ''; ?>
-                        value="description">Description</option>
+                        value="description"> <?= __('Description') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'purchase_uom' ? 'selected' : ''; ?>
-                        value="purchase_uom">UOM</option>
+                        value="purchase_uom"> <?= __('UOM') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'item_quantity' ? 'selected' : ''; ?>
-                        value="item_quantity">Quantity</option>
-                      <option <?php echo (empty($tableOptions['value_rate']) || $tableOptions['value_rate'] === 'item_price') ? 'selected' : ''; ?> value="item_price">Item Price
-                      </option>
+                        value="item_quantity"> <?= __('Quantity') ?> </option>
+                      <option <?php echo (empty($tableOptions['value_rate']) || $tableOptions['value_rate'] === 'item_price') ? 'selected' : ''; ?> value="item_price"> <?= __('Item Price') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'item_amount' ? 'selected' : ''; ?>
-                        value="item_amount">Item Amount</option>
+                        value="item_amount"> <?= __('Item Amount') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'reason_id' ? 'selected' : ''; ?>
-                        value="reason_id">Reason Id</option>
+                        value="reason_id"> <?= __('Reason Id') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'item_wa_cost' ? 'selected' : ''; ?>
-                        value="item_wa_cost">Item Wa Cost</option>
+                        value="item_wa_cost"> <?= __('Item Wa Cost') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'item_st_cost' ? 'selected' : ''; ?>
-                        value="item_st_cost">Item St Cost</option>
+                        value="item_st_cost"> <?= __('Item St Cost') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'doc_ref_type' ? 'selected' : ''; ?>
-                        value="doc_ref_type">Doc Ref Type</option>
+                        value="doc_ref_type"> <?= __('Doc Ref Type') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'doc_ref_id' ? 'selected' : ''; ?>
-                        value="doc_ref_id">Doc Ref Id</option>
+                        value="doc_ref_id"> <?= __('Doc Ref Id') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'req_date' ? 'selected' : ''; ?>
-                        value="req_date">
-                        Req Date</option>
+                        value="req_date"> <?= __('Req Date') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'approved_quantity' ? 'selected' : ''; ?>
-                        value="approved_quantity">Approved Quantity</option>
+                        value="approved_quantity"> <?= __('Approved Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'transaction_type' ? 'selected' : ''; ?>
-                        value="transaction_type">Transaction Type</option>
+                        value="transaction_type"> <?= __('Transaction Type') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'transaction_qty' ? 'selected' : ''; ?>
-                        value="transaction_qty">Transaction Qty</option>
+                        value="transaction_qty"> <?= __('Transaction Qty') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'pending_qty' ? 'selected' : ''; ?>
-                        value="pending_qty">Pending Qty</option>
+                        value="pending_qty"> <?= __('Pending Qty') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showtaxcol" <?php echo $tableOptions['showColumns']['tax'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showtaxcol">Show TAX</label>
+                    <label class="form-check-label" for="showtaxcol"><?= __('Show TAX') ?></label>
                     <input type="text" id="taxcolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
                       value="<?php echo !empty($tableOptions['heading_tax']) ? $tableOptions['heading_tax'] : 'Tax'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
                     <select class="form-select mt-1" id="itemtaxSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $tableOptions['value_tax'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
+                      <option <?php echo $tableOptions['value_tax'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'transaction_id' ? 'selected' : ''; ?>
-                        value="transaction_id">Transaction Id</option>
+                        value="transaction_id"> <?= __('Transaction Id') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'hsn_and_sac_code_id' ? 'selected' : ''; ?>
-                        value="hsn_and_sac_code_id" selected>HSN/SAC ID</option>
+                        value="hsn_and_sac_code_id" selected> <?= __('HSN/SAC ID') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'item_table_name' ? 'selected' : ''; ?>
-                        value="item_table_name">Item Table Name</option>
+                        value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
                         Item
                         Id</option>
                       <option <?php echo $tableOptions['value_tax'] === 'account_code' ? 'selected' : ''; ?>
-                        value="account_code">Account Code</option>
+                        value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'item_name' ? 'selected' : ''; ?>
-                        value="item_name">
-                        Item Name</option>
+                        value="item_name"> <?= __('Item Name') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'item_image' ? 'selected' : ''; ?>
-                        value="item_image">Item Image</option>
+                        value="item_image"> <?= __('Item Image') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'description' ? 'selected' : ''; ?>
-                        value="description">Description</option>
+                        value="description"> <?= __('Description') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'purchase_uom' ? 'selected' : ''; ?>
-                        value="purchase_uom">UOM</option>
+                        value="purchase_uom"> <?= __('UOM') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'item_quantity' ? 'selected' : ''; ?>
-                        value="item_quantity">Quantity</option>
+                        value="item_quantity"> <?= __('Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'item_price' ? 'selected' : ''; ?>
-                        value="item_price">Item Price</option>
+                        value="item_price"> <?= __('Item Price') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'item_amount' ? 'selected' : ''; ?>
-                        value="item_amount">Item Amount</option>
-                      <option <?php echo (empty($tableOptions['value_tax']) || $tableOptions['value_tax'] === 'tax_amount') ? 'selected' : ''; ?> value="tax_amount">Tax Amount
-                      </option>
+                        value="item_amount"> <?= __('Item Amount') ?> </option>
+                      <option <?php echo (empty($tableOptions['value_tax']) || $tableOptions['value_tax'] === 'tax_amount') ? 'selected' : ''; ?> value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'reason_id' ? 'selected' : ''; ?>
-                        value="reason_id">
-                        Reason Id</option>
+                        value="reason_id"> <?= __('Reason Id') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'item_wa_cost' ? 'selected' : ''; ?>
-                        value="item_wa_cost">Item Wa Cost</option>
+                        value="item_wa_cost"> <?= __('Item Wa Cost') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'item_st_cost' ? 'selected' : ''; ?>
-                        value="item_st_cost">Item St Cost</option>
+                        value="item_st_cost"> <?= __('Item St Cost') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'doc_ref_type' ? 'selected' : ''; ?>
-                        value="doc_ref_type">Doc Ref Type</option>
+                        value="doc_ref_type"> <?= __('Doc Ref Type') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'doc_ref_id' ? 'selected' : ''; ?>
-                        value="doc_ref_id">Doc Ref Id</option>
+                        value="doc_ref_id"> <?= __('Doc Ref Id') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
-                      <option <?php echo $tableOptions['value_tax'] === 'req_date' ? 'selected' : ''; ?> value="req_date">
-                        Req Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
+                      <option <?php echo $tableOptions['value_tax'] === 'req_date' ? 'selected' : ''; ?> value="req_date"> <?= __('Req Date') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'approved_quantity' ? 'selected' : ''; ?>
-                        value="approved_quantity">Approved Quantity</option>
+                        value="approved_quantity"> <?= __('Approved Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'transaction_type' ? 'selected' : ''; ?>
-                        value="transaction_type">Transaction Type</option>
+                        value="transaction_type"> <?= __('Transaction Type') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'transaction_qty' ? 'selected' : ''; ?>
-                        value="transaction_qty">Transaction Qty</option>
+                        value="transaction_qty"> <?= __('Transaction Qty') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'pending_qty' ? 'selected' : ''; ?>
-                        value="pending_qty">Pending Qty</option>
+                        value="pending_qty"> <?= __('Pending Qty') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">
-                        Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showdiscountcol" <?php echo $tableOptions['showColumns']['discount'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showdiscountcol">Show Discount</label>
+                    <label class="form-check-label" for="showdiscountcol"><?= __('Show Discount') ?></label>
                     <input type="text" id="discountcolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
                       value="<?php echo !empty($tableOptions['heading_discount']) ? $tableOptions['heading_discount'] : 'Discount'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
                     <select class="form-select mt-1" id="itemdiscountSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $tableOptions['value_qty'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
+                      <option <?php echo $tableOptions['value_qty'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'transaction_id' ? 'selected' : ''; ?>
-                        value="transaction_id">Transaction Id</option>
+                        value="transaction_id"> <?= __('Transaction Id') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'hsn_and_sac_code_id' ? 'selected' : ''; ?>
-                        value="hsn_and_sac_code_id">HSN/SAC ID</option>
+                        value="hsn_and_sac_code_id"> <?= __('HSN/SAC ID') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_table_name' ? 'selected' : ''; ?>
-                        value="item_table_name">Item Table Name</option>
+                        value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
                         Item
                         Id</option>
                       <option <?php echo $tableOptions['value_qty'] === 'account_code' ? 'selected' : ''; ?>
-                        value="account_code">Account Code</option>
+                        value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_name' ? 'selected' : ''; ?>
-                        value="item_name">
-                        Item Name</option>
+                        value="item_name"> <?= __('Item Name') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_image' ? 'selected' : ''; ?>
-                        value="item_image">Item Image</option>
+                        value="item_image"> <?= __('Item Image') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'description' ? 'selected' : ''; ?>
-                        value="description">Description</option>
+                        value="description"> <?= __('Description') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'purchase_uom' ? 'selected' : ''; ?>
-                        value="purchase_uom">UOM</option>
-                      <option <?php echo $tableOptions['value_qty'] === 'item_quantity' ? 'selected' : ''; ?> value="item_quantity">
-                        Quantity
-                      </option>
+                        value="purchase_uom"> <?= __('UOM') ?> </option>
+                      <option <?php echo $tableOptions['value_qty'] === 'item_quantity' ? 'selected' : ''; ?> value="item_quantity"> <?= __('Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_price' ? 'selected' : ''; ?>
-                        value="item_price">Item Price</option>
+                        value="item_price"> <?= __('Item Price') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_amount' ? 'selected' : ''; ?>
-                        value="item_amount">Item Amount</option>
+                        value="item_amount"> <?= __('Item Amount') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo (empty($tableOptions['value_qty']) || $tableOptions['value_qty'] === 'item_quantity') ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'reason_id' ? 'selected' : ''; ?>
-                        value="reason_id">
-                        Reason Id</option>
+                        value="reason_id"> <?= __('Reason Id') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_wa_cost' ? 'selected' : ''; ?>
-                        value="item_wa_cost">Item Wa Cost</option>
+                        value="item_wa_cost"> <?= __('Item Wa Cost') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_st_cost' ? 'selected' : ''; ?>
-                        value="item_st_cost">Item St Cost</option>
+                        value="item_st_cost"> <?= __('Item St Cost') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'doc_ref_type' ? 'selected' : ''; ?>
-                        value="doc_ref_type">Doc Ref Type</option>
+                        value="doc_ref_type"> <?= __('Doc Ref Type') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'doc_ref_id' ? 'selected' : ''; ?>
-                        value="doc_ref_id">Doc Ref Id</option>
+                        value="doc_ref_id"> <?= __('Doc Ref Id') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
-                      <option <?php echo $tableOptions['value_qty'] === 'req_date' ? 'selected' : ''; ?> value="req_date">
-                        Req Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
+                      <option <?php echo $tableOptions['value_qty'] === 'req_date' ? 'selected' : ''; ?> value="req_date"> <?= __('Req Date') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'approved_quantity' ? 'selected' : ''; ?>
-                        value="approved_quantity">Approved Quantity</option>
+                        value="approved_quantity"> <?= __('Approved Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'transaction_type' ? 'selected' : ''; ?>
-                        value="transaction_type">Transaction Type</option>
+                        value="transaction_type"> <?= __('Transaction Type') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'transaction_qty' ? 'selected' : ''; ?>
-                        value="transaction_qty">Transaction Qty</option>
+                        value="transaction_qty"> <?= __('Transaction Qty') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'pending_qty' ? 'selected' : ''; ?>
-                        value="pending_qty">Pending Qty</option>
+                        value="pending_qty"> <?= __('Pending Qty') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">
-                        Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showamountcol" <?php echo $tableOptions['showColumns']['amount'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showamountcol">Show Amount</label>
+                    <label class="form-check-label" for="showamountcol"><?= __('Show Amount') ?></label>
                     <input type="text" id="amountcolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
                       value="<?php echo !empty($tableOptions['heading_amount']) ? $tableOptions['heading_amount'] : 'Amount'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
                     <select class="form-select mt-1" id="itemamountSelect" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $tableOptions['value_amount'] === 'id' ? 'selected' : ''; ?> value="id">id
-                      </option>
+                      <option <?php echo $tableOptions['value_amount'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'transaction_id' ? 'selected' : ''; ?>
-                        value="transaction_id">Transaction Id</option>
+                        value="transaction_id"> <?= __('Transaction Id') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'hsn_and_sac_code_id' ? 'selected' : ''; ?>
-                        value="hsn_and_sac_code_id" selected>HSN/SAC ID</option>
+                        value="hsn_and_sac_code_id" selected> <?= __('HSN/SAC ID') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'item_table_name' ? 'selected' : ''; ?>
-                        value="item_table_name">Item Table Name</option>
+                        value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'item_id' ? 'selected' : ''; ?>
-                        value="item_id">
-                        Item Id</option>
+                        value="item_id"> <?= __('Item Id') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'account_code' ? 'selected' : ''; ?>
-                        value="account_code">Account Code</option>
+                        value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'item_name' ? 'selected' : ''; ?>
-                        value="item_name">Item Name</option>
+                        value="item_name"> <?= __('Item Name') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'item_image' ? 'selected' : ''; ?>
-                        value="item_image">Item Image</option>
+                        value="item_image"> <?= __('Item Image') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'description' ? 'selected' : ''; ?>
-                        value="description">Description</option>
+                        value="description"> <?= __('Description') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'purchase_uom' ? 'selected' : ''; ?>
-                        value="purchase_uom">UOM</option>
+                        value="purchase_uom"> <?= __('UOM') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'item_quantity' ? 'selected' : ''; ?>
-                        value="item_quantity">Quantity</option>
+                        value="item_quantity"> <?= __('Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'item_price' ? 'selected' : ''; ?>
-                        value="item_price">Item Price</option>
+                        value="item_price"> <?= __('Item Price') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'item_amount' ? 'selected' : ''; ?>
-                        value="item_amount">Item Amount</option>
+                        value="item_amount"> <?= __('Item Amount') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo (empty($tableOptions['value_amount']) || $tableOptions['value_amount'] === 'total_amount') ? 'selected' : ''; ?> value="total_amount">Total
                         Amount</option>
                       <option <?php echo $tableOptions['value_amount'] === 'reason_id' ? 'selected' : ''; ?>
-                        value="reason_id">Reason Id</option>
+                        value="reason_id"> <?= __('Reason Id') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'item_wa_cost' ? 'selected' : ''; ?>
-                        value="item_wa_cost">Item Wa Cost</option>
+                        value="item_wa_cost"> <?= __('Item Wa Cost') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'item_st_cost' ? 'selected' : ''; ?>
-                        value="item_st_cost">Item St Cost</option>
+                        value="item_st_cost"> <?= __('Item St Cost') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'doc_ref_type' ? 'selected' : ''; ?>
-                        value="doc_ref_type">Doc Ref Type</option>
+                        value="doc_ref_type"> <?= __('Doc Ref Type') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'doc_ref_id' ? 'selected' : ''; ?>
-                        value="doc_ref_id">Doc Ref Id</option>
+                        value="doc_ref_id"> <?= __('Doc Ref Id') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'req_date' ? 'selected' : ''; ?>
-                        value="req_date">Req Date</option>
+                        value="req_date"> <?= __('Req Date') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'approved_quantity' ? 'selected' : ''; ?>
-                        value="approved_quantity">Approved Quantity</option>
+                        value="approved_quantity"> <?= __('Approved Quantity') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'transaction_type' ? 'selected' : ''; ?>
-                        value="transaction_type">Transaction Type</option>
+                        value="transaction_type"> <?= __('Transaction Type') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'transaction_qty' ? 'selected' : ''; ?>
-                        value="transaction_qty">Transaction Qty</option>
+                        value="transaction_qty"> <?= __('Transaction Qty') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'pending_qty' ? 'selected' : ''; ?>
-                        value="pending_qty">Pending Qty</option>
+                        value="pending_qty"> <?= __('Pending Qty') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                     </select>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showtaxsumcol" <?php echo $tableOptions['showColumns']['taxsum'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showtaxsumcol">Show Tax Summary</label>
+                    <label class="form-check-label" for="showtaxsumcol"><?= __('Show Tax Summary') ?></label>
                   </div>
                 </div>
               </div>
@@ -1914,7 +1807,7 @@ if ($userData['user_photo'] != '') {
               <!-- Height Options -->
               <div id="itemsshow" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label for="itemsInput" class="form-label">Items In Each Page Show</label>
+                  <label for="itemsInput" class="form-label"><?= __('Items In Each Page Show') ?></label>
                   <input type="number" class="form-control" id="itemsInput"
                     value="<?php echo $tableOptions['itemstable'] ?? '0'; ?>"
                     placeholder="Enter No. Of Items In Each Page Show" title="Enter No. Of Items In Each Page Show" aria-label="Enter No. Of Items In Each Page Show">
@@ -1922,7 +1815,7 @@ if ($userData['user_photo'] != '') {
               </div>
             </div>
             <div class="mb-3">
-              <h6>Footer Options</h6>
+              <h6><?= __('Footer Options') ?></h6>
               <div class="btn-group d-flex flex-wrap">
                 <button class="btn btn-outline-danger btn-sm mb-2" data-target="page_footerVisibility">
                   <i class="bi bi-eye"></i> Visibility
@@ -1939,751 +1832,741 @@ if ($userData['user_photo'] != '') {
               ?>
               <div id="page_footerVisibility" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label class="form-label mb-2">Toggle Page Footer</label>
+                  <label class="form-label mb-2"><?= __('Toggle Page Footer') ?></label>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showpagefooter" <?php echo $footerOptions['showFooter'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showpagefooter">Show Page Footer</label>
+                    <label class="form-check-label" for="showpagefooter"><?= __('Show Page Footer') ?></label>
                   </div>
                 </div>
               </div>
 
               <div id="page_footer_optionsVisibility" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label for="page_footer_optionsVisibility" class="form-label">Footer Options Visibility</label>
+                  <label for="page_footer_optionsVisibility" class="form-label"><?= __('Footer Options Visibility') ?></label>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showtotalinalpha" <?php echo $footerOptions['showTotalAlpha'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showtotalinalpha">Show Total In Alphabet</label>
+                    <label class="form-check-label" for="showtotalinalpha"><?= __('Show Total In Alphabet') ?></label>
                   </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showsignature" <?php echo $footerOptions['showSignature'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showsignature">Show Signature</label>
+                    <label class="form-check-label" for="showsignature"><?= __('Show Signature') ?></label>
                   </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showqr" <?php echo $footerOptions['showQr'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showqr">Show QR</label>
+                    <label class="form-check-label" for="showqr"><?= __('Show QR') ?></label>
                   </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showbankdetails" <?php echo isset($footerOptions['showBankDetails']) && $footerOptions['showBankDetails'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showbankdetails">Show Bank Details</label>
+                    <label class="form-check-label" for="showbankdetails"><?= __('Show Bank Details') ?></label>
                   </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showadditionaldetails" <?php echo isset($footerOptions['showAdditionalDetails']) && $footerOptions['showAdditionalDetails'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showadditionaldetails">Show Additional Details</label>
+                    <label class="form-check-label" for="showadditionaldetails"><?= __('Show Additional Details') ?></label>
                   </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showtotalbeforetax" <?php echo $footerOptions['totalbeforetax']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showtotalbeforetax">Show Sub Total</label>
+                    <label class="form-check-label" for="showtotalbeforetax"><?= __('Show Sub Total') ?></label>
                     <input class="form-control mb-1" type="text" id="heading1"
                       value="<?php echo !empty($footerOptions['totalbeforetax']['heading']) ? $footerOptions['totalbeforetax']['heading'] : 'Sub Total'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="value1" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'id' ? 'selected' : ''; ?>
-                        value="id">ID </option>
+                        value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'cost_center_id' ? 'selected' : ''; ?> value="cost_center_id">Cost Center Id</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number">Transaction Number</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'transaction_date' ? 'selected' : ''; ?> value="transaction_date">Transaction Date</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id">Transaction Location Id</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id">Originator Currency Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'cost_center_id' ? 'selected' : ''; ?> value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number"> <?= __('Transaction Number') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'transaction_date' ? 'selected' : ''; ?> value="transaction_date"> <?= __('Transaction Date') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id"> <?= __('Transaction Location Id') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id"> <?= __('Transaction Warehouse Id') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id"> <?= __('Originator Currency Id') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'currency_id' ? 'selected' : ''; ?>
-                        value="currency_id">Currency Id</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'currency_rate' ? 'selected' : ''; ?> value="currency_rate">Currency Rate</option>
+                        value="currency_id"> <?= __('Currency Id') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'currency_rate' ? 'selected' : ''; ?> value="currency_rate"> <?= __('Currency Rate') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
+                        value="originator"> <?= __('Originator') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'party_id' ? 'selected' : ''; ?>
-                        value="party_id">Party Id</option>
+                        value="party_id"> <?= __('Party Id') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'party_tax_number' ? 'selected' : ''; ?> value="party_tax_number">Party Tax Number</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'party_tax_number' ? 'selected' : ''; ?> value="party_tax_number"> <?= __('Party Tax Number') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'party_address' ? 'selected' : ''; ?> value="party_address">Party Address</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss">Party Ship Adderss</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id">Originator State Id</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'supplier_state_id' ? 'selected' : ''; ?> value="supplier_state_id">Supplier State Id</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'place_of_supply' ? 'selected' : ''; ?> value="place_of_supply">Place Of Supply</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'payment_terms' ? 'selected' : ''; ?> value="payment_terms">Payment Terms</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'party_address' ? 'selected' : ''; ?> value="party_address"> <?= __('Party Address') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss"> <?= __('Party Ship Adderss') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id"> <?= __('Originator State Id') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'supplier_state_id' ? 'selected' : ''; ?> value="supplier_state_id"> <?= __('Supplier State Id') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'place_of_supply' ? 'selected' : ''; ?> value="place_of_supply"> <?= __('Place Of Supply') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'payment_terms' ? 'selected' : ''; ?> value="payment_terms"> <?= __('Payment Terms') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'notes' ? 'selected' : ''; ?>
-                        value="notes"> Notes</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'printing_notes' ? 'selected' : ''; ?> value="printing_notes">Printing Notes</option>
+                        value="notes"> <?= __('Notes') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'printing_notes' ? 'selected' : ''; ?> value="printing_notes"> <?= __('Printing Notes') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
-                      <option <?php echo (empty($footerOptions['totalbeforetax']['value']) || $footerOptions['totalbeforetax']['value'] === 'amount') ? 'selected' : ''; ?> value="amount">
-                        Amount
-                      </option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
+                      <option <?php echo (empty($footerOptions['totalbeforetax']['value']) || $footerOptions['totalbeforetax']['value'] === 'amount') ? 'selected' : ''; ?> value="amount"> <?= __('Amount') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'type' ? 'selected' : ''; ?>
-                        value="type">Type </option>
+                        value="type"> <?= __('Type') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'tax_type' ? 'selected' : ''; ?>
-                        value="tax_type">Tax Type</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'discount_type' ? 'selected' : ''; ?> value="discount_type">Discount Type</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'discount_value' ? 'selected' : ''; ?> value="discount_value">Discount Value</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'discount_amount' ? 'selected' : ''; ?> value="discount_amount">Discount Amount</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'total_amount' ? 'selected' : ''; ?> value="total_amount">Total Amount</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'shipping_tax' ? 'selected' : ''; ?> value="shipping_tax">Shipping Tax</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'shipping_amount' ? 'selected' : ''; ?> value="shipping_amount">Shipping Amount</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount">Shipping Tax Amount</option>
+                        value="tax_type"> <?= __('Tax Type') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'discount_type' ? 'selected' : ''; ?> value="discount_type"> <?= __('Discount Type') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'discount_value' ? 'selected' : ''; ?> value="discount_value"> <?= __('Discount Value') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'discount_amount' ? 'selected' : ''; ?> value="discount_amount"> <?= __('Discount Amount') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'total_amount' ? 'selected' : ''; ?> value="total_amount"> <?= __('Total Amount') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'shipping_tax' ? 'selected' : ''; ?> value="shipping_tax"> <?= __('Shipping Tax') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'shipping_amount' ? 'selected' : ''; ?> value="shipping_amount"> <?= __('Shipping Amount') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount"> <?= __('Shipping Tax Amount') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'tax_state' ? 'selected' : ''; ?>
-                        value="tax_state">Tax State</option>
+                        value="tax_state"> <?= __('Tax State') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'opex_cpex' ? 'selected' : ''; ?>
-                        value="opex_cpex">Opex Cpex</option>
+                        value="opex_cpex"> <?= __('Opex Cpex') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'doc_ref_date' ? 'selected' : ''; ?> value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'doc_ref_date' ? 'selected' : ''; ?> value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'due_date' ? 'selected' : ''; ?>
-                        value="due_date">Due Date</option>
+                        value="due_date"> <?= __('Due Date') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'ref_type' ? 'selected' : ''; ?>
-                        value="ref_type">Ref Type</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'parent_ref_id' ? 'selected' : ''; ?> value="parent_ref_id">Rarent Ref Id</option>
+                        value="ref_type"> <?= __('Ref Type') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'parent_ref_id' ? 'selected' : ''; ?> value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'ref_id' ? 'selected' : ''; ?>
-                        value="ref_id"> Ref Id</option>
+                        value="ref_id"> <?= __('Ref Id') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'ref_no' ? 'selected' : ''; ?>
-                        value="ref_no"> Ref No</option>
+                        value="ref_no"> <?= __('Ref No') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'ref_date' ? 'selected' : ''; ?>
-                        value="ref_date">Ref Date</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'ref_bill_type' ? 'selected' : ''; ?> value="ref_bill_type">Ref Bill Type</option>
+                        value="ref_date"> <?= __('Ref Date') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'ref_bill_type' ? 'selected' : ''; ?> value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'old_ref_no' ? 'selected' : ''; ?>
-                        value="old_ref_no">Old Ref No</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'old_ref_date' ? 'selected' : ''; ?> value="old_ref_date">Old Ref Date</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details">Party Additional Details</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids">Follow Up Level Ids</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'pending_amount' ? 'selected' : ''; ?> value="pending_amount">Pending Amount</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'cancel_invoice' ? 'selected' : ''; ?> alue="cancel_invoice">Cancel Invoice</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date">Cancel Invoice Date</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges">Additional Charges</option>
+                        value="old_ref_no"> <?= __('Old Ref No') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'old_ref_date' ? 'selected' : ''; ?> value="old_ref_date"> <?= __('Old Ref Date') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details"> <?= __('Party Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids"> <?= __('Follow Up Level Ids') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'pending_amount' ? 'selected' : ''; ?> value="pending_amount"> <?= __('Pending Amount') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'cancel_invoice' ? 'selected' : ''; ?> alue="cancel_invoice"> <?= __('Cancel Invoice') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date"> <?= __('Cancel Invoice Date') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason"> <?= __('Cancel Invoice Reason') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges"> <?= __('Additional Charges') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'pdf_name' ? 'selected' : ''; ?>
-                        value="pdf_name">Pdf Name</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details">Owner Additional Details</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number">Serial Transaction Number</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'rounding_off' ? 'selected' : ''; ?> value="rounding_off">Rounded Off</option>
+                        value="pdf_name"> <?= __('Pdf Name') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number"> <?= __('Serial Transaction Number') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'rounding_off' ? 'selected' : ''; ?> value="rounding_off"> <?= __('Rounded Off') ?> </option>
                     </select>
                   </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showdiscount" <?php echo (isset($footerOptions['showFields']['discount']['visible']) && $footerOptions['showFields']['discount']['visible']) || (isset($footerOptions['discount']['visible']) && $footerOptions['discount']['visible']) ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showdiscount">Show Discount</label>
+                    <label class="form-check-label" for="showdiscount"><?= __('Show Discount') ?></label>
                     <input class="form-control mb-1" type="text" id="heading2"
                       value="<?php echo !empty($footerOptions['showFields']['discount']['heading']) ? $footerOptions['showFields']['discount']['heading'] : (!empty($footerOptions['discount']['heading']) ? $footerOptions['discount']['heading'] : 'Discount'); ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="value2" style="display: none;" title="Select" aria-label="Select">
                       <?php $discountValue = isset($footerOptions['showFields']['discount']['value']) ? $footerOptions['showFields']['discount']['value'] : (isset($footerOptions['discount']['value']) ? $footerOptions['discount']['value'] : ''); ?>
-                      <option <?php echo $discountValue === 'id' ? 'selected' : ''; ?> value="id">ID
-                      </option>
+                      <option <?php echo $discountValue === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $discountValue === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'cost_center_id' ? 'selected' : ''; ?>
-                        value="cost_center_id">Cost Center Id</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number">Transaction Number</option>
+                        value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number"> <?= __('Transaction Number') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'transaction_date' ? 'selected' : ''; ?>
-                        value="transaction_date">Transaction Date</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id">Transaction Location Id</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id">Originator Currency Id</option>
+                        value="transaction_date"> <?= __('Transaction Date') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id"> <?= __('Transaction Location Id') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id"> <?= __('Transaction Warehouse Id') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id"> <?= __('Originator Currency Id') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'currency_id' ? 'selected' : ''; ?>
-                        value="currency_id">Currency Id</option>
+                        value="currency_id"> <?= __('Currency Id') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'currency_rate' ? 'selected' : ''; ?>
-                        value="currency_rate">Currency Rate</option>
+                        value="currency_rate"> <?= __('Currency Rate') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
+                        value="originator"> <?= __('Originator') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'party_id' ? 'selected' : ''; ?>
-                        value="party_id">Party Id</option>
+                        value="party_id"> <?= __('Party Id') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'party_tax_number' ? 'selected' : ''; ?>
-                        value="party_tax_number">Party Tax Number</option>
+                        value="party_tax_number"> <?= __('Party Tax Number') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'party_address' ? 'selected' : ''; ?>
-                        value="party_address">Party Address</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss">Party Ship Adderss</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id">Originator State Id</option>
+                        value="party_address"> <?= __('Party Address') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss"> <?= __('Party Ship Adderss') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id"> <?= __('Originator State Id') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'supplier_state_id' ? 'selected' : ''; ?>
-                        value="supplier_state_id">Supplier State Id</option>
+                        value="supplier_state_id"> <?= __('Supplier State Id') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'place_of_supply' ? 'selected' : ''; ?>
-                        value="place_of_supply">Place Of Supply</option>
+                        value="place_of_supply"> <?= __('Place Of Supply') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'payment_terms' ? 'selected' : ''; ?>
-                        value="payment_terms">Payment Terms</option>
+                        value="payment_terms"> <?= __('Payment Terms') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'notes' ? 'selected' : ''; ?>
-                        value="notes"> Notes</option>
+                        value="notes"> <?= __('Notes') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'printing_notes' ? 'selected' : ''; ?>
-                        value="printing_notes">Printing Notes</option>
+                        value="printing_notes"> <?= __('Printing Notes') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'amount' ? 'selected' : ''; ?>
-                        value="amount"> Amount</option>
+                        value="amount"> <?= __('Amount') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'type' ? 'selected' : ''; ?>
-                        value="type">
-                        Type </option>
+                        value="type"> <?= __('Type') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'tax_type' ? 'selected' : ''; ?>
-                        value="tax_type">Tax Type</option>
+                        value="tax_type"> <?= __('Tax Type') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'discount_type' ? 'selected' : ''; ?>
-                        value="discount_type">Discount Type</option>
+                        value="discount_type"> <?= __('Discount Type') ?> </option>
                       <option <?php echo $discountValue === 'discount_value' ? 'selected' : ''; ?>
-                        value="discount_value">Discount Value</option>
+                        value="discount_value"> <?= __('Discount Value') ?> </option>
                       <option <?php echo (empty($discountValue) || $discountValue === 'discount_amount') ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'shipping_tax' ? 'selected' : ''; ?>
-                        value="shipping_tax">Shipping Tax</option>
+                        value="shipping_tax"> <?= __('Shipping Tax') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'shipping_amount' ? 'selected' : ''; ?>
-                        value="shipping_amount">Shipping Amount</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount">Shipping Tax Amount</option>
+                        value="shipping_amount"> <?= __('Shipping Amount') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount"> <?= __('Shipping Tax Amount') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'tax_state' ? 'selected' : ''; ?>
-                        value="tax_state">Tax State</option>
+                        value="tax_state"> <?= __('Tax State') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'opex_cpex' ? 'selected' : ''; ?>
-                        value="opex_cpex">Opex Cpex</option>
+                        value="opex_cpex"> <?= __('Opex Cpex') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'due_date' ? 'selected' : ''; ?>
-                        value="due_date">Due Date</option>
+                        value="due_date"> <?= __('Due Date') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'ref_type' ? 'selected' : ''; ?>
-                        value="ref_type">Ref Type</option>
+                        value="ref_type"> <?= __('Ref Type') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'parent_ref_id' ? 'selected' : ''; ?>
-                        value="parent_ref_id">Rarent Ref Id</option>
+                        value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'ref_id' ? 'selected' : ''; ?>
-                        value="ref_id"> Ref Id</option>
+                        value="ref_id"> <?= __('Ref Id') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'ref_no' ? 'selected' : ''; ?>
-                        value="ref_no"> Ref No</option>
+                        value="ref_no"> <?= __('Ref No') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'ref_date' ? 'selected' : ''; ?>
-                        value="ref_date">Ref Date</option>
+                        value="ref_date"> <?= __('Ref Date') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'ref_bill_type' ? 'selected' : ''; ?>
-                        value="ref_bill_type">Ref Bill Type</option>
+                        value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'old_ref_no' ? 'selected' : ''; ?>
-                        value="old_ref_no">Old Ref No</option>
+                        value="old_ref_no"> <?= __('Old Ref No') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'old_ref_date' ? 'selected' : ''; ?>
-                        value="old_ref_date">Old Ref Date</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details">Party Additional Details</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids">Follow Up Level Ids</option>
+                        value="old_ref_date"> <?= __('Old Ref Date') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details"> <?= __('Party Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids"> <?= __('Follow Up Level Ids') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'pending_amount' ? 'selected' : ''; ?>
-                        value="pending_amount">Pending Amount</option>
+                        value="pending_amount"> <?= __('Pending Amount') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'cancel_invoice' ? 'selected' : ''; ?>
-                        alue="cancel_invoice">Cancel Invoice</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date">Cancel Invoice Date</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges">Additional Charges</option>
+                        alue="cancel_invoice"> <?= __('Cancel Invoice') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date"> <?= __('Cancel Invoice Date') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason"> <?= __('Cancel Invoice Reason') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges"> <?= __('Additional Charges') ?> </option>
                       <option <?php echo $footerOptions['discount']['value'] === 'pdf_name' ? 'selected' : ''; ?>
-                        value="pdf_name">Pdf Name</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details">Owner Additional Details</option>
-                      <option <?php echo $footerOptions['discount']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number">Serial Transaction Number</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'rounding_off' ? 'selected' : ''; ?> value="rounding_off">Rounded Off</option>
+                        value="pdf_name"> <?= __('Pdf Name') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['discount']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number"> <?= __('Serial Transaction Number') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'rounding_off' ? 'selected' : ''; ?> value="rounding_off"> <?= __('Rounded Off') ?> </option>
 
                     </select>
                   </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showtotaltaxamount" <?php echo $footerOptions['totaltaxamount']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showtotaltaxamount">Show Total Tax Amount</label>
+                    <label class="form-check-label" for="showtotaltaxamount"><?= __('Show Total Tax Amount') ?></label>
                     <input class="form-control mb-1" type="text" id="heading3"
                       value="<?php echo !empty($footerOptions['totaltaxamount']['heading3']) ? $footerOptions['totalbeforetax']['heading'] : 'Total Tax Amount'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="value3" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'id' ? 'selected' : ''; ?>
-                        value="id">ID </option>
+                        value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'cost_center_id' ? 'selected' : ''; ?> value="cost_center_id">Cost Center Id</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number">Transaction Number</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'transaction_date' ? 'selected' : ''; ?> value="transaction_date">Transaction Date</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id">Transaction Location Id</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id">Originator Currency Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'cost_center_id' ? 'selected' : ''; ?> value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number"> <?= __('Transaction Number') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'transaction_date' ? 'selected' : ''; ?> value="transaction_date"> <?= __('Transaction Date') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id"> <?= __('Transaction Location Id') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id"> <?= __('Transaction Warehouse Id') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id"> <?= __('Originator Currency Id') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'currency_id' ? 'selected' : ''; ?>
-                        value="currency_id">Currency Id</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'currency_rate' ? 'selected' : ''; ?> value="currency_rate">Currency Rate</option>
+                        value="currency_id"> <?= __('Currency Id') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'currency_rate' ? 'selected' : ''; ?> value="currency_rate"> <?= __('Currency Rate') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
+                        value="originator"> <?= __('Originator') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'party_id' ? 'selected' : ''; ?>
-                        value="party_id">Party Id</option>
+                        value="party_id"> <?= __('Party Id') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'party_tax_number' ? 'selected' : ''; ?> value="party_tax_number">Party Tax Number</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'party_tax_number' ? 'selected' : ''; ?> value="party_tax_number"> <?= __('Party Tax Number') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'party_address' ? 'selected' : ''; ?> value="party_address">Party Address</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss">Party Ship Adderss</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id">Originator State Id</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'supplier_state_id' ? 'selected' : ''; ?> value="supplier_state_id">Supplier State Id</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'place_of_supply' ? 'selected' : ''; ?> value="place_of_supply">Place Of Supply</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'payment_terms' ? 'selected' : ''; ?> value="payment_terms">Payment Terms</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'party_address' ? 'selected' : ''; ?> value="party_address"> <?= __('Party Address') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss"> <?= __('Party Ship Adderss') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id"> <?= __('Originator State Id') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'supplier_state_id' ? 'selected' : ''; ?> value="supplier_state_id"> <?= __('Supplier State Id') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'place_of_supply' ? 'selected' : ''; ?> value="place_of_supply"> <?= __('Place Of Supply') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'payment_terms' ? 'selected' : ''; ?> value="payment_terms"> <?= __('Payment Terms') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'notes' ? 'selected' : ''; ?>
-                        value="notes"> Notes</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'printing_notes' ? 'selected' : ''; ?> value="printing_notes">Printing Notes</option>
+                        value="notes"> <?= __('Notes') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'printing_notes' ? 'selected' : ''; ?> value="printing_notes"> <?= __('Printing Notes') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'amount' ? 'selected' : ''; ?>
-                        value="amount"> Amount</option>
+                        value="amount"> <?= __('Amount') ?> </option>
                       <option <?php echo (empty($footerOptions['totaltaxamount']['value']) || $footerOptions['totaltaxamount']['value'] === 'tax_amount') ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'type' ? 'selected' : ''; ?>
-                        value="type">Type </option>
+                        value="type"> <?= __('Type') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'tax_type' ? 'selected' : ''; ?>
-                        value="tax_type">Tax Type</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'discount_type' ? 'selected' : ''; ?> value="discount_type">Discount Type</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'discount_value' ? 'selected' : ''; ?> value="discount_value">Discount Value</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'discount_amount' ? 'selected' : ''; ?> value="discount_amount">Discount Amount</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'total_amount' ? 'selected' : ''; ?> value="total_amount">Total Amount</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'shipping_tax' ? 'selected' : ''; ?> value="shipping_tax">Shipping Tax</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'shipping_amount' ? 'selected' : ''; ?> value="shipping_amount">Shipping Amount</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount">Shipping Tax Amount</option>
+                        value="tax_type"> <?= __('Tax Type') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'discount_type' ? 'selected' : ''; ?> value="discount_type"> <?= __('Discount Type') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'discount_value' ? 'selected' : ''; ?> value="discount_value"> <?= __('Discount Value') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'discount_amount' ? 'selected' : ''; ?> value="discount_amount"> <?= __('Discount Amount') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'total_amount' ? 'selected' : ''; ?> value="total_amount"> <?= __('Total Amount') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'shipping_tax' ? 'selected' : ''; ?> value="shipping_tax"> <?= __('Shipping Tax') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'shipping_amount' ? 'selected' : ''; ?> value="shipping_amount"> <?= __('Shipping Amount') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount"> <?= __('Shipping Tax Amount') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'tax_state' ? 'selected' : ''; ?>
-                        value="tax_state">Tax State</option>
+                        value="tax_state"> <?= __('Tax State') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'opex_cpex' ? 'selected' : ''; ?>
-                        value="opex_cpex">Opex Cpex</option>
+                        value="opex_cpex"> <?= __('Opex Cpex') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'doc_ref_date' ? 'selected' : ''; ?> value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'doc_ref_date' ? 'selected' : ''; ?> value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'due_date' ? 'selected' : ''; ?>
-                        value="due_date">Due Date</option>
+                        value="due_date"> <?= __('Due Date') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'ref_type' ? 'selected' : ''; ?>
-                        value="ref_type">Ref Type</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'parent_ref_id' ? 'selected' : ''; ?> value="parent_ref_id">Rarent Ref Id</option>
+                        value="ref_type"> <?= __('Ref Type') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'parent_ref_id' ? 'selected' : ''; ?> value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'ref_id' ? 'selected' : ''; ?>
-                        value="ref_id"> Ref Id</option>
+                        value="ref_id"> <?= __('Ref Id') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'ref_no' ? 'selected' : ''; ?>
-                        value="ref_no"> Ref No</option>
+                        value="ref_no"> <?= __('Ref No') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'ref_date' ? 'selected' : ''; ?>
-                        value="ref_date">Ref Date</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'ref_bill_type' ? 'selected' : ''; ?> value="ref_bill_type">Ref Bill Type</option>
+                        value="ref_date"> <?= __('Ref Date') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'ref_bill_type' ? 'selected' : ''; ?> value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'old_ref_no' ? 'selected' : ''; ?>
-                        value="old_ref_no">Old Ref No</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'old_ref_date' ? 'selected' : ''; ?> value="old_ref_date">Old Ref Date</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details">Party Additional Details</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids">Follow Up Level Ids</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'pending_amount' ? 'selected' : ''; ?> value="pending_amount">Pending Amount</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'cancel_invoice' ? 'selected' : ''; ?> alue="cancel_invoice">Cancel Invoice</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date">Cancel Invoice Date</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges">Additional Charges</option>
+                        value="old_ref_no"> <?= __('Old Ref No') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'old_ref_date' ? 'selected' : ''; ?> value="old_ref_date"> <?= __('Old Ref Date') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details"> <?= __('Party Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids"> <?= __('Follow Up Level Ids') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'pending_amount' ? 'selected' : ''; ?> value="pending_amount"> <?= __('Pending Amount') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'cancel_invoice' ? 'selected' : ''; ?> alue="cancel_invoice"> <?= __('Cancel Invoice') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date"> <?= __('Cancel Invoice Date') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason"> <?= __('Cancel Invoice Reason') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges"> <?= __('Additional Charges') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'pdf_name' ? 'selected' : ''; ?>
-                        value="pdf_name">Pdf Name</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details">Owner Additional Details</option>
-                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number">Serial Transaction Number</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'rounding_off' ? 'selected' : ''; ?> value="rounding_off">Rounded Off</option>
+                        value="pdf_name"> <?= __('Pdf Name') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['totaltaxamount']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number"> <?= __('Serial Transaction Number') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'rounding_off' ? 'selected' : ''; ?> value="rounding_off"> <?= __('Rounded Off') ?> </option>
 
                     </select>
                   </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showroundedoff" <?php echo $footerOptions['roundedoff']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showroundedoff">Show Rounded Off</label>
+                    <label class="form-check-label" for="showroundedoff"><?= __('Show Rounded Off') ?></label>
                     <input class="form-control mb-1" type="text" id="heading4"
                       value="<?php echo !empty($footerOptions['roundedoff']['heading4']) ? $footerOptions['totalbeforetax']['heading'] : 'Rounded Off'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="value4" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'id' ? 'selected' : ''; ?> value="id">
-                        ID
-                      </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'cost_center_id' ? 'selected' : ''; ?>
-                        value="cost_center_id">Cost Center Id</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number">Transaction Number</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'transaction_date' ? 'selected' : ''; ?> value="transaction_date">Transaction Date</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id">Transaction Location Id</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id">Originator Currency Id</option>
+                        value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number"> <?= __('Transaction Number') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'transaction_date' ? 'selected' : ''; ?> value="transaction_date"> <?= __('Transaction Date') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id"> <?= __('Transaction Location Id') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id"> <?= __('Transaction Warehouse Id') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id"> <?= __('Originator Currency Id') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'currency_id' ? 'selected' : ''; ?>
-                        value="currency_id">Currency Id</option>
+                        value="currency_id"> <?= __('Currency Id') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'currency_rate' ? 'selected' : ''; ?>
-                        value="currency_rate">Currency Rate</option>
+                        value="currency_rate"> <?= __('Currency Rate') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
+                        value="originator"> <?= __('Originator') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'party_id' ? 'selected' : ''; ?>
-                        value="party_id">Party Id</option>
+                        value="party_id"> <?= __('Party Id') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'party_tax_number' ? 'selected' : ''; ?> value="party_tax_number">Party Tax Number</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'party_tax_number' ? 'selected' : ''; ?> value="party_tax_number"> <?= __('Party Tax Number') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'party_address' ? 'selected' : ''; ?>
-                        value="party_address">Party Address</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss">Party Ship Adderss</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id">Originator State Id</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'supplier_state_id' ? 'selected' : ''; ?> value="supplier_state_id">Supplier State Id</option>
+                        value="party_address"> <?= __('Party Address') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss"> <?= __('Party Ship Adderss') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id"> <?= __('Originator State Id') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'supplier_state_id' ? 'selected' : ''; ?> value="supplier_state_id"> <?= __('Supplier State Id') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'place_of_supply' ? 'selected' : ''; ?>
-                        value="place_of_supply">Place Of Supply</option>
+                        value="place_of_supply"> <?= __('Place Of Supply') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'payment_terms' ? 'selected' : ''; ?>
-                        value="payment_terms">Payment Terms</option>
+                        value="payment_terms"> <?= __('Payment Terms') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'notes' ? 'selected' : ''; ?>
-                        value="notes"> Notes</option>
+                        value="notes"> <?= __('Notes') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'printing_notes' ? 'selected' : ''; ?>
-                        value="printing_notes">Printing Notes</option>
+                        value="printing_notes"> <?= __('Printing Notes') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'amount' ? 'selected' : ''; ?>
-                        value="amount"> Amount</option>
+                        value="amount"> <?= __('Amount') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'type' ? 'selected' : ''; ?>
-                        value="type">Type </option>
+                        value="type"> <?= __('Type') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'tax_type' ? 'selected' : ''; ?>
-                        value="tax_type">Tax Type</option>
+                        value="tax_type"> <?= __('Tax Type') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'discount_type' ? 'selected' : ''; ?>
-                        value="discount_type">Discount Type</option>
+                        value="discount_type"> <?= __('Discount Type') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'discount_value' ? 'selected' : ''; ?>
-                        value="discount_value">Discount Value</option>
+                        value="discount_value"> <?= __('Discount Value') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'shipping_tax' ? 'selected' : ''; ?>
-                        value="shipping_tax">Shipping Tax</option>
+                        value="shipping_tax"> <?= __('Shipping Tax') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'shipping_amount' ? 'selected' : ''; ?>
-                        value="shipping_amount">Shipping Amount</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount">Shipping Tax Amount</option>
+                        value="shipping_amount"> <?= __('Shipping Amount') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount"> <?= __('Shipping Tax Amount') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'tax_state' ? 'selected' : ''; ?>
-                        value="tax_state">Tax State</option>
+                        value="tax_state"> <?= __('Tax State') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'opex_cpex' ? 'selected' : ''; ?>
-                        value="opex_cpex">Opex Cpex</option>
+                        value="opex_cpex"> <?= __('Opex Cpex') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'due_date' ? 'selected' : ''; ?>
-                        value="due_date">Due Date</option>
+                        value="due_date"> <?= __('Due Date') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'ref_type' ? 'selected' : ''; ?>
-                        value="ref_type">Ref Type</option>
+                        value="ref_type"> <?= __('Ref Type') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'parent_ref_id' ? 'selected' : ''; ?>
-                        value="parent_ref_id">Rarent Ref Id</option>
+                        value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'ref_id' ? 'selected' : ''; ?>
-                        value="ref_id"> Ref Id</option>
+                        value="ref_id"> <?= __('Ref Id') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'ref_no' ? 'selected' : ''; ?>
-                        value="ref_no"> Ref No</option>
+                        value="ref_no"> <?= __('Ref No') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'ref_date' ? 'selected' : ''; ?>
-                        value="ref_date">Ref Date</option>
+                        value="ref_date"> <?= __('Ref Date') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'ref_bill_type' ? 'selected' : ''; ?>
-                        value="ref_bill_type">Ref Bill Type</option>
+                        value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'old_ref_no' ? 'selected' : ''; ?>
-                        value="old_ref_no">Old Ref No</option>
+                        value="old_ref_no"> <?= __('Old Ref No') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'old_ref_date' ? 'selected' : ''; ?>
-                        value="old_ref_date">Old Ref Date</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details">Party Additional Details</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids">Follow Up Level Ids</option>
+                        value="old_ref_date"> <?= __('Old Ref Date') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details"> <?= __('Party Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids"> <?= __('Follow Up Level Ids') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'pending_amount' ? 'selected' : ''; ?>
-                        value="pending_amount">Pending Amount</option>
+                        value="pending_amount"> <?= __('Pending Amount') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'cancel_invoice' ? 'selected' : ''; ?>
-                        alue="cancel_invoice">Cancel Invoice</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date">Cancel Invoice Date</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges">Additional Charges</option>
+                        alue="cancel_invoice"> <?= __('Cancel Invoice') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date"> <?= __('Cancel Invoice Date') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason"> <?= __('Cancel Invoice Reason') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges"> <?= __('Additional Charges') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'pdf_name' ? 'selected' : ''; ?>
-                        value="pdf_name">Pdf Name</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details">Owner Additional Details</option>
-                      <option <?php echo $footerOptions['roundedoff']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number">Serial Transaction Number</option>
-                      <option <?php echo (empty($footerOptions['rounding_off']['value']) || $footerOptions['rounding_off']['value'] === 'rounding_off') ? 'selected' : ''; ?> value="rounding_off">Rounded Off</option>
+                        value="pdf_name"> <?= __('Pdf Name') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['roundedoff']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number"> <?= __('Serial Transaction Number') ?> </option>
+                      <option <?php echo (empty($footerOptions['rounding_off']['value']) || $footerOptions['rounding_off']['value'] === 'rounding_off') ? 'selected' : ''; ?> value="rounding_off"> <?= __('Rounded Off') ?> </option>
                     </select>
                   </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showtotalamount" <?php echo $footerOptions['totalamount']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showtotalamount">Show Total Amount</label>
+                    <label class="form-check-label" for="showtotalamount"><?= __('Show Total Amount') ?></label>
                     <input class="form-control mb-1" type="text" id="heading5"
                       value="<?php echo !empty($footerOptions['totalamount']['heading5']) ? $footerOptions['totalamount']['heading'] : 'Total Amount'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="value5" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'id' ? 'selected' : ''; ?> value="id">
-                        ID
-                      </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'cost_center_id' ? 'selected' : ''; ?>
-                        value="cost_center_id">Cost Center Id</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number">Transaction Number</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'transaction_date' ? 'selected' : ''; ?> value="transaction_date">Transaction Date</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id">Transaction Location Id</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id">Originator Currency Id</option>
+                        value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number"> <?= __('Transaction Number') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'transaction_date' ? 'selected' : ''; ?> value="transaction_date"> <?= __('Transaction Date') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id"> <?= __('Transaction Location Id') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id"> <?= __('Transaction Warehouse Id') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id"> <?= __('Originator Currency Id') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'currency_id' ? 'selected' : ''; ?>
-                        value="currency_id">Currency Id</option>
+                        value="currency_id"> <?= __('Currency Id') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'currency_rate' ? 'selected' : ''; ?>
-                        value="currency_rate">Currency Rate</option>
+                        value="currency_rate"> <?= __('Currency Rate') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
+                        value="originator"> <?= __('Originator') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'party_id' ? 'selected' : ''; ?>
-                        value="party_id">Party Id</option>
+                        value="party_id"> <?= __('Party Id') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'party_tax_number' ? 'selected' : ''; ?> value="party_tax_number">Party Tax Number</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'party_tax_number' ? 'selected' : ''; ?> value="party_tax_number"> <?= __('Party Tax Number') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'party_address' ? 'selected' : ''; ?>
-                        value="party_address">Party Address</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss">Party Ship Adderss</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id">Originator State Id</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'supplier_state_id' ? 'selected' : ''; ?> value="supplier_state_id">Supplier State Id</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'place_of_supply' ? 'selected' : ''; ?> value="place_of_supply">Place Of Supply</option>
+                        value="party_address"> <?= __('Party Address') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss"> <?= __('Party Ship Adderss') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id"> <?= __('Originator State Id') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'supplier_state_id' ? 'selected' : ''; ?> value="supplier_state_id"> <?= __('Supplier State Id') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'place_of_supply' ? 'selected' : ''; ?> value="place_of_supply"> <?= __('Place Of Supply') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'payment_terms' ? 'selected' : ''; ?>
-                        value="payment_terms">Payment Terms</option>
+                        value="payment_terms"> <?= __('Payment Terms') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'notes' ? 'selected' : ''; ?>
-                        value="notes"> Notes</option>
+                        value="notes"> <?= __('Notes') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'printing_notes' ? 'selected' : ''; ?>
-                        value="printing_notes">Printing Notes</option>
+                        value="printing_notes"> <?= __('Printing Notes') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'amount' ? 'selected' : ''; ?>
-                        value="amount"> Amount</option>
+                        value="amount"> <?= __('Amount') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'type' ? 'selected' : ''; ?>
-                        value="type">Type </option>
+                        value="type"> <?= __('Type') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'tax_type' ? 'selected' : ''; ?>
-                        value="tax_type">Tax Type</option>
+                        value="tax_type"> <?= __('Tax Type') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'discount_type' ? 'selected' : ''; ?>
-                        value="discount_type">Discount Type</option>
+                        value="discount_type"> <?= __('Discount Type') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'discount_value' ? 'selected' : ''; ?>
-                        value="discount_value">Discount Value</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'discount_amount' ? 'selected' : ''; ?> value="discount_amount">Discount Amount</option>
+                        value="discount_value"> <?= __('Discount Value') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'discount_amount' ? 'selected' : ''; ?> value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo (empty($footerOptions['totalamount']['value']) || $footerOptions['totalamount']['value'] === 'total_amount') ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'shipping_tax' ? 'selected' : ''; ?>
-                        value="shipping_tax">Shipping Tax</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'shipping_amount' ? 'selected' : ''; ?> value="shipping_amount">Shipping Amount</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount">Shipping Tax Amount</option>
+                        value="shipping_tax"> <?= __('Shipping Tax') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'shipping_amount' ? 'selected' : ''; ?> value="shipping_amount"> <?= __('Shipping Amount') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount"> <?= __('Shipping Tax Amount') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'tax_state' ? 'selected' : ''; ?>
-                        value="tax_state">Tax State</option>
+                        value="tax_state"> <?= __('Tax State') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'opex_cpex' ? 'selected' : ''; ?>
-                        value="opex_cpex">Opex Cpex</option>
+                        value="opex_cpex"> <?= __('Opex Cpex') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'due_date' ? 'selected' : ''; ?>
-                        value="due_date">Due Date</option>
+                        value="due_date"> <?= __('Due Date') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'ref_type' ? 'selected' : ''; ?>
-                        value="ref_type">Ref Type</option>
+                        value="ref_type"> <?= __('Ref Type') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'parent_ref_id' ? 'selected' : ''; ?>
-                        value="parent_ref_id">Rarent Ref Id</option>
+                        value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'ref_id' ? 'selected' : ''; ?>
-                        value="ref_id"> Ref Id</option>
+                        value="ref_id"> <?= __('Ref Id') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'ref_no' ? 'selected' : ''; ?>
-                        value="ref_no"> Ref No</option>
+                        value="ref_no"> <?= __('Ref No') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'ref_date' ? 'selected' : ''; ?>
-                        value="ref_date">Ref Date</option>
+                        value="ref_date"> <?= __('Ref Date') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'ref_bill_type' ? 'selected' : ''; ?>
-                        value="ref_bill_type">Ref Bill Type</option>
+                        value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'old_ref_no' ? 'selected' : ''; ?>
-                        value="old_ref_no">Old Ref No</option>
+                        value="old_ref_no"> <?= __('Old Ref No') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'old_ref_date' ? 'selected' : ''; ?>
-                        value="old_ref_date">Old Ref Date</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details">Party Additional Details</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids">Follow Up Level Ids</option>
+                        value="old_ref_date"> <?= __('Old Ref Date') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details"> <?= __('Party Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids"> <?= __('Follow Up Level Ids') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'pending_amount' ? 'selected' : ''; ?>
-                        value="pending_amount">Pending Amount</option>
+                        value="pending_amount"> <?= __('Pending Amount') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'cancel_invoice' ? 'selected' : ''; ?>
-                        alue="cancel_invoice">Cancel Invoice</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date">Cancel Invoice Date</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges">Additional Charges</option>
+                        alue="cancel_invoice"> <?= __('Cancel Invoice') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date"> <?= __('Cancel Invoice Date') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason"> <?= __('Cancel Invoice Reason') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges"> <?= __('Additional Charges') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'pdf_name' ? 'selected' : ''; ?>
-                        value="pdf_name">Pdf Name</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details">Owner Additional Details</option>
-                      <option <?php echo $footerOptions['totalamount']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number">Serial Transaction Number</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'rounding_off' ? 'selected' : ''; ?> value="rounding_off">Rounded Off</option>
+                        value="pdf_name"> <?= __('Pdf Name') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['totalamount']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number"> <?= __('Serial Transaction Number') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'rounding_off' ? 'selected' : ''; ?> value="rounding_off"> <?= __('Rounded Off') ?> </option>
 
                     </select>
                   </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showsecurityamount" <?php echo $footerOptions['securityamount']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showsecurityamount">Show Security Amount</label>
+                    <label class="form-check-label" for="showsecurityamount"><?= __('Show Security Amount') ?></label>
                     <input class="form-control mb-1" type="text" id="heading4_5"
                       value="<?php echo !empty($footerOptions['securityamount']['heading']) ? $footerOptions['securityamount']['heading'] : 'Security Amount'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="value4_5" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'company_id' ? 'selected' : ''; ?> value="company_id">Company Id</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'cost_center_id' ? 'selected' : ''; ?> value="cost_center_id">Cost Center Id</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number">Transaction Number</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'transaction_date' ? 'selected' : ''; ?> value="transaction_date">Transaction Date</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id">Transaction Location Id</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id">Originator Currency Id</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'currency_id' ? 'selected' : ''; ?> value="currency_id">Currency Id</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'currency_rate' ? 'selected' : ''; ?> value="currency_rate">Currency Rate</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'originator' ? 'selected' : ''; ?> value="originator">Originator</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_id' ? 'selected' : ''; ?> value="party_id">Party Id</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_name' ? 'selected' : ''; ?> value="party_name">Party Name</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_email' ? 'selected' : ''; ?> value="party_email">Party Email</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_tax_number' ? 'selected' : ''; ?> value="party_tax_number">Party Tax Number</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_phone' ? 'selected' : ''; ?> value="party_phone">Party Phone</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_address' ? 'selected' : ''; ?> value="party_address">Party Address</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss">Party Ship Adderss</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id">Originator State Id</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'supplier_state_id' ? 'selected' : ''; ?> value="supplier_state_id">Supplier State Id</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'place_of_supply' ? 'selected' : ''; ?> value="place_of_supply">Place Of Supply</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'payment_terms' ? 'selected' : ''; ?> value="payment_terms">Payment Terms</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'notes' ? 'selected' : ''; ?> value="notes">Notes</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'printing_notes' ? 'selected' : ''; ?> value="printing_notes">Printing Notes</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'parent_id' ? 'selected' : ''; ?> value="parent_id">Parent Id</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'amount' ? 'selected' : ''; ?> value="amount">Amount</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'tax_amount' ? 'selected' : ''; ?> value="tax_amount">Tax Amount</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'type' ? 'selected' : ''; ?> value="type">Type</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'tax_type' ? 'selected' : ''; ?> value="tax_type">Tax Type</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'discount_type' ? 'selected' : ''; ?> value="discount_type">Discount Type</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'discount_value' ? 'selected' : ''; ?> value="discount_value">Discount Value</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'discount_amount' ? 'selected' : ''; ?> value="discount_amount">Discount Amount</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'total_amount' ? 'selected' : ''; ?> value="total_amount">Total Amount</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'shipping_tax' ? 'selected' : ''; ?> value="shipping_tax">Shipping Tax</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'shipping_amount' ? 'selected' : ''; ?> value="shipping_amount">Shipping Amount</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount">Shipping Tax Amount</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'tax_state' ? 'selected' : ''; ?> value="tax_state">Tax State</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'opex_cpex' ? 'selected' : ''; ?> value="opex_cpex">Opex Cpex</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'doc_ref_no' ? 'selected' : ''; ?> value="doc_ref_no">Doc Ref No</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'doc_ref_date' ? 'selected' : ''; ?> value="doc_ref_date">Doc Ref Date</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'due_date' ? 'selected' : ''; ?> value="due_date">Due Date</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'ref_type' ? 'selected' : ''; ?> value="ref_type">Ref Type</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'parent_ref_id' ? 'selected' : ''; ?> value="parent_ref_id">Parent Ref Id</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id">Ref Id</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'ref_no' ? 'selected' : ''; ?> value="ref_no">Ref No</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'ref_date' ? 'selected' : ''; ?> value="ref_date">Ref Date</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'ref_bill_type' ? 'selected' : ''; ?> value="ref_bill_type">Ref Bill Type</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'old_ref_no' ? 'selected' : ''; ?> value="old_ref_no">Old Ref No</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'old_ref_date' ? 'selected' : ''; ?> value="old_ref_date">Old Ref Date</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details">Party Additional Details</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids">Follow Up Level Ids</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'pending_amount' ? 'selected' : ''; ?> value="pending_amount">Pending Amount</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'cancel_invoice' ? 'selected' : ''; ?> value="cancel_invoice">Cancel Invoice</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date">Cancel Invoice Date</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges">Additional Charges</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'pdf_name' ? 'selected' : ''; ?> value="pdf_name">Pdf Name</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details">Owner Additional Details</option>
-                      <option <?php echo $footerOptions['securityamount']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number">Serial Transaction Number</option>
-                      <option <?php echo (empty($footerOptions['securityamount']['value']) || $footerOptions['securityamount']['value'] === 'security_amount') ? 'selected' : ''; ?> value="security_amount">Security Amount</option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'company_id' ? 'selected' : ''; ?> value="company_id"> <?= __('Company Id') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'cost_center_id' ? 'selected' : ''; ?> value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number"> <?= __('Transaction Number') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'transaction_date' ? 'selected' : ''; ?> value="transaction_date"> <?= __('Transaction Date') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id"> <?= __('Transaction Location Id') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id"> <?= __('Transaction Warehouse Id') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id"> <?= __('Originator Currency Id') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'currency_id' ? 'selected' : ''; ?> value="currency_id"> <?= __('Currency Id') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'currency_rate' ? 'selected' : ''; ?> value="currency_rate"> <?= __('Currency Rate') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'originator' ? 'selected' : ''; ?> value="originator"> <?= __('Originator') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_id' ? 'selected' : ''; ?> value="party_id"> <?= __('Party Id') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_name' ? 'selected' : ''; ?> value="party_name"> <?= __('Party Name') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_email' ? 'selected' : ''; ?> value="party_email"> <?= __('Party Email') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_tax_number' ? 'selected' : ''; ?> value="party_tax_number"> <?= __('Party Tax Number') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_phone' ? 'selected' : ''; ?> value="party_phone"> <?= __('Party Phone') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_address' ? 'selected' : ''; ?> value="party_address"> <?= __('Party Address') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss"> <?= __('Party Ship Adderss') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id"> <?= __('Originator State Id') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'supplier_state_id' ? 'selected' : ''; ?> value="supplier_state_id"> <?= __('Supplier State Id') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'place_of_supply' ? 'selected' : ''; ?> value="place_of_supply"> <?= __('Place Of Supply') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'payment_terms' ? 'selected' : ''; ?> value="payment_terms"> <?= __('Payment Terms') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'notes' ? 'selected' : ''; ?> value="notes"> <?= __('Notes') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'printing_notes' ? 'selected' : ''; ?> value="printing_notes"> <?= __('Printing Notes') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'parent_id' ? 'selected' : ''; ?> value="parent_id"> <?= __('Parent Id') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'amount' ? 'selected' : ''; ?> value="amount"> <?= __('Amount') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'tax_amount' ? 'selected' : ''; ?> value="tax_amount"> <?= __('Tax Amount') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'type' ? 'selected' : ''; ?> value="type"> <?= __('Type') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'tax_type' ? 'selected' : ''; ?> value="tax_type"> <?= __('Tax Type') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'discount_type' ? 'selected' : ''; ?> value="discount_type"> <?= __('Discount Type') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'discount_value' ? 'selected' : ''; ?> value="discount_value"> <?= __('Discount Value') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'discount_amount' ? 'selected' : ''; ?> value="discount_amount"> <?= __('Discount Amount') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'total_amount' ? 'selected' : ''; ?> value="total_amount"> <?= __('Total Amount') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'shipping_tax' ? 'selected' : ''; ?> value="shipping_tax"> <?= __('Shipping Tax') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'shipping_amount' ? 'selected' : ''; ?> value="shipping_amount"> <?= __('Shipping Amount') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount"> <?= __('Shipping Tax Amount') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'tax_state' ? 'selected' : ''; ?> value="tax_state"> <?= __('Tax State') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'opex_cpex' ? 'selected' : ''; ?> value="opex_cpex"> <?= __('Opex Cpex') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'doc_ref_no' ? 'selected' : ''; ?> value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'doc_ref_date' ? 'selected' : ''; ?> value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'due_date' ? 'selected' : ''; ?> value="due_date"> <?= __('Due Date') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'ref_type' ? 'selected' : ''; ?> value="ref_type"> <?= __('Ref Type') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'parent_ref_id' ? 'selected' : ''; ?> value="parent_ref_id"> <?= __('Parent Ref Id') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id"> <?= __('Ref Id') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'ref_no' ? 'selected' : ''; ?> value="ref_no"> <?= __('Ref No') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'ref_date' ? 'selected' : ''; ?> value="ref_date"> <?= __('Ref Date') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'ref_bill_type' ? 'selected' : ''; ?> value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'old_ref_no' ? 'selected' : ''; ?> value="old_ref_no"> <?= __('Old Ref No') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'old_ref_date' ? 'selected' : ''; ?> value="old_ref_date"> <?= __('Old Ref Date') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details"> <?= __('Party Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids"> <?= __('Follow Up Level Ids') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'pending_amount' ? 'selected' : ''; ?> value="pending_amount"> <?= __('Pending Amount') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'cancel_invoice' ? 'selected' : ''; ?> value="cancel_invoice"> <?= __('Cancel Invoice') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date"> <?= __('Cancel Invoice Date') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason"> <?= __('Cancel Invoice Reason') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges"> <?= __('Additional Charges') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'pdf_name' ? 'selected' : ''; ?> value="pdf_name"> <?= __('Pdf Name') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['securityamount']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number"> <?= __('Serial Transaction Number') ?> </option>
+                      <option <?php echo (empty($footerOptions['securityamount']['value']) || $footerOptions['securityamount']['value'] === 'security_amount') ? 'selected' : ''; ?> value="security_amount"> <?= __('Security Amount') ?> </option>
                     </select>
                   </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showtotaldue" <?php echo $footerOptions['totaldue']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
-                    <label class="form-check-label" for="showtotaldue">Show Total Due</label>
+                    <label class="form-check-label" for="showtotaldue"><?= __('Show Total Due') ?></label>
                     <input class="form-control mb-1" type="text" id="heading6"
                       value="<?php echo !empty($footerOptions['totaldue']['heading6']) ? $footerOptions['totaldue']['heading'] : 'Total Due'; ?>" title="Input" aria-label="Input">
                     <select class="form-select" id="value6" style="display: none;" title="Select" aria-label="Select">
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'id' ? 'selected' : ''; ?> value="id">ID
-                      </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'company_id' ? 'selected' : ''; ?>
-                        value="company_id">Company Id</option>
+                        value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'cost_center_id' ? 'selected' : ''; ?>
-                        value="cost_center_id">Cost Center Id</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number">Transaction Number</option>
+                        value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'transaction_number' ? 'selected' : ''; ?> value="transaction_number"> <?= __('Transaction Number') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'transaction_date' ? 'selected' : ''; ?>
-                        value="transaction_date">Transaction Date</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id">Transaction Location Id</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id">Transaction Warehouse Id</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id">Originator Currency Id</option>
+                        value="transaction_date"> <?= __('Transaction Date') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'transaction_location_id' ? 'selected' : ''; ?> value="transaction_location_id"> <?= __('Transaction Location Id') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'transaction_warehouse_id' ? 'selected' : ''; ?> value="transaction_warehouse_id"> <?= __('Transaction Warehouse Id') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'originator_currency_id' ? 'selected' : ''; ?> value="originator_currency_id"> <?= __('Originator Currency Id') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'currency_id' ? 'selected' : ''; ?>
-                        value="currency_id">Currency Id</option>
+                        value="currency_id"> <?= __('Currency Id') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'currency_rate' ? 'selected' : ''; ?>
-                        value="currency_rate">Currency Rate</option>
+                        value="currency_rate"> <?= __('Currency Rate') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'originator' ? 'selected' : ''; ?>
-                        value="originator">Originator</option>
+                        value="originator"> <?= __('Originator') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'party_id' ? 'selected' : ''; ?>
-                        value="party_id">Party Id</option>
+                        value="party_id"> <?= __('Party Id') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'party_name' ? 'selected' : ''; ?>
-                        value="party_name">Party Name</option>
+                        value="party_name"> <?= __('Party Name') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'party_email' ? 'selected' : ''; ?>
-                        value="party_email">Party Email</option>
+                        value="party_email"> <?= __('Party Email') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'party_tax_number' ? 'selected' : ''; ?>
-                        value="party_tax_number">Party Tax Number</option>
+                        value="party_tax_number"> <?= __('Party Tax Number') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'party_phone' ? 'selected' : ''; ?>
-                        value="party_phone">Party Phone</option>
+                        value="party_phone"> <?= __('Party Phone') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'party_address' ? 'selected' : ''; ?>
-                        value="party_address">Party Address</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss">Party Ship Adderss</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id">Originator State Id</option>
+                        value="party_address"> <?= __('Party Address') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss"> <?= __('Party Ship Adderss') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'originator_state_id' ? 'selected' : ''; ?> value="originator_state_id"> <?= __('Originator State Id') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'supplier_state_id' ? 'selected' : ''; ?>
-                        value="supplier_state_id">Supplier State Id</option>
+                        value="supplier_state_id"> <?= __('Supplier State Id') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'place_of_supply' ? 'selected' : ''; ?>
-                        value="place_of_supply">Place Of Supply</option>
+                        value="place_of_supply"> <?= __('Place Of Supply') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'payment_terms' ? 'selected' : ''; ?>
-                        value="payment_terms">Payment Terms</option>
+                        value="payment_terms"> <?= __('Payment Terms') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'notes' ? 'selected' : ''; ?>
-                        value="notes"> Notes</option>
+                        value="notes"> <?= __('Notes') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'printing_notes' ? 'selected' : ''; ?>
-                        value="printing_notes">Printing Notes</option>
+                        value="printing_notes"> <?= __('Printing Notes') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'parent_id' ? 'selected' : ''; ?>
-                        value="parent_id">Parent Id</option>
+                        value="parent_id"> <?= __('Parent Id') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'amount' ? 'selected' : ''; ?>
-                        value="amount"> Amount</option>
+                        value="amount"> <?= __('Amount') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'tax_amount' ? 'selected' : ''; ?>
-                        value="tax_amount">Tax Amount</option>
+                        value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'type' ? 'selected' : ''; ?>
-                        value="type">
-                        Type </option>
+                        value="type"> <?= __('Type') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'tax_type' ? 'selected' : ''; ?>
-                        value="tax_type">Tax Type</option>
+                        value="tax_type"> <?= __('Tax Type') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'discount_type' ? 'selected' : ''; ?>
-                        value="discount_type">Discount Type</option>
+                        value="discount_type"> <?= __('Discount Type') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'discount_value' ? 'selected' : ''; ?>
-                        value="discount_value">Discount Value</option>
+                        value="discount_value"> <?= __('Discount Value') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'discount_amount' ? 'selected' : ''; ?>
-                        value="discount_amount">Discount Amount</option>
+                        value="discount_amount"> <?= __('Discount Amount') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'total_amount' ? 'selected' : ''; ?>
-                        value="total_amount">Total Amount</option>
+                        value="total_amount"> <?= __('Total Amount') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'shipping_tax' ? 'selected' : ''; ?>
-                        value="shipping_tax">Shipping Tax</option>
+                        value="shipping_tax"> <?= __('Shipping Tax') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'shipping_amount' ? 'selected' : ''; ?>
-                        value="shipping_amount">Shipping Amount</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount">Shipping Tax Amount</option>
+                        value="shipping_amount"> <?= __('Shipping Amount') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'shipping_tax_amount' ? 'selected' : ''; ?> value="shipping_tax_amount"> <?= __('Shipping Tax Amount') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'tax_state' ? 'selected' : ''; ?>
-                        value="tax_state">Tax State</option>
+                        value="tax_state"> <?= __('Tax State') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'opex_cpex' ? 'selected' : ''; ?>
-                        value="opex_cpex">Opex Cpex</option>
+                        value="opex_cpex"> <?= __('Opex Cpex') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'doc_ref_no' ? 'selected' : ''; ?>
-                        value="doc_ref_no">Doc Ref No</option>
+                        value="doc_ref_no"> <?= __('Doc Ref No') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'doc_ref_date' ? 'selected' : ''; ?>
-                        value="doc_ref_date">Doc Ref Date</option>
+                        value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'due_date' ? 'selected' : ''; ?>
-                        value="due_date">Due Date</option>
+                        value="due_date"> <?= __('Due Date') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'ref_type' ? 'selected' : ''; ?>
-                        value="ref_type">Ref Type</option>
+                        value="ref_type"> <?= __('Ref Type') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'parent_ref_id' ? 'selected' : ''; ?>
-                        value="parent_ref_id">Rarent Ref Id</option>
+                        value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'ref_id' ? 'selected' : ''; ?>
-                        value="ref_id"> Ref Id</option>
+                        value="ref_id"> <?= __('Ref Id') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'ref_no' ? 'selected' : ''; ?>
-                        value="ref_no"> Ref No</option>
+                        value="ref_no"> <?= __('Ref No') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'ref_date' ? 'selected' : ''; ?>
-                        value="ref_date">Ref Date</option>
+                        value="ref_date"> <?= __('Ref Date') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'ref_bill_type' ? 'selected' : ''; ?>
-                        value="ref_bill_type">Ref Bill Type</option>
+                        value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'old_ref_no' ? 'selected' : ''; ?>
-                        value="old_ref_no">Old Ref No</option>
+                        value="old_ref_no"> <?= __('Old Ref No') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'old_ref_date' ? 'selected' : ''; ?>
-                        value="old_ref_date">Old Ref Date</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details">Party Additional Details</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids">Follow Up Level Ids</option>
+                        value="old_ref_date"> <?= __('Old Ref Date') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'party_additional_details' ? 'selected' : ''; ?> value="party_additional_details"> <?= __('Party Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'follow_up_level_ids' ? 'selected' : ''; ?> value="follow_up_level_ids"> <?= __('Follow Up Level Ids') ?> </option>
                       <option <?php echo (empty($footerOptions['totaldue']['value']) || $footerOptions['totaldue']['value'] === 'pending_amount') ? 'selected' : ''; ?>
-                        value="pending_amount">Pending Amount</option>
+                        value="pending_amount"> <?= __('Pending Amount') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'cancel_invoice' ? 'selected' : ''; ?>
-                        alue="cancel_invoice">Cancel Invoice</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date">Cancel Invoice Date</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason">Cancel Invoice Reason</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges">Additional Charges</option>
+                        alue="cancel_invoice"> <?= __('Cancel Invoice') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'cancel_invoice_date' ? 'selected' : ''; ?> value="cancel_invoice_date"> <?= __('Cancel Invoice Date') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'cancel_invoice_reason' ? 'selected' : ''; ?> value="cancel_invoice_reason"> <?= __('Cancel Invoice Reason') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'additional_charges' ? 'selected' : ''; ?> value="additional_charges"> <?= __('Additional Charges') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'pdf_name' ? 'selected' : ''; ?>
-                        value="pdf_name">Pdf Name</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details">Owner Additional Details</option>
-                      <option <?php echo $footerOptions['totaldue']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number">Serial Transaction Number</option>
-                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'rounding_off' ? 'selected' : ''; ?> value="rounding_off">Rounded Off</option>
+                        value="pdf_name"> <?= __('Pdf Name') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'owner_additional_details' ? 'selected' : ''; ?> value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
+                      <option <?php echo $footerOptions['totaldue']['value'] === 'serial_transaction_number' ? 'selected' : ''; ?> value="serial_transaction_number"> <?= __('Serial Transaction Number') ?> </option>
+                      <option <?php echo $footerOptions['totalbeforetax']['value'] === 'rounding_off' ? 'selected' : ''; ?> value="rounding_off"> <?= __('Rounded Off') ?> </option>
                     </select>
                   </div>
                 </div>
@@ -2693,17 +2576,17 @@ if ($userData['user_photo'] != '') {
               <div id="page_footer_positions" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <div class="form-group">
-                    <label for="address1position" class="form-label">Signature & QR</label>
+                    <label for="address1position" class="form-label"><?= __('Signature & QR') ?></label>
                     <select class="form-select" id="signatureqr1position" title="Select" aria-label="Select">
-                      <option value="left" <?php echo (empty($footerOptions['positions']['signatureqr']) || $footerOptions['positions']['signatureqr'] === 'left') ? 'selected' : ''; ?>>Left</option>
-                      <option value="right" <?php echo $footerOptions['positions']['signatureqr'] === 'right' ? 'selected' : ''; ?>>Right</option>
+                      <option value="left" <?php echo (empty($footerOptions['positions']['signatureqr']) || $footerOptions['positions']['signatureqr'] === 'left') ? 'selected' : ''; ?>> <?= __('Left') ?> </option>
+                      <option value="right" <?php echo $footerOptions['positions']['signatureqr'] === 'right' ? 'selected' : ''; ?>> <?= __('Right') ?> </option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="address2position" class="form-label">Invoice Summary</label>
+                    <label for="address2position" class="form-label"><?= __('Invoice Summary') ?></label>
                     <select class="form-select" id="invoicesummary2position" title="Select" aria-label="Select">
-                      <option value="left" <?php echo $footerOptions['positions']['invoicesummary'] === 'left' ? 'selected' : ''; ?>>Left</option>
-                      <option value="right" <?php echo (empty($footerOptions['positions']['invoicesummary']) || $footerOptions['positions']['invoicesummary'] === 'right') ? 'selected' : ''; ?>>Right</option>
+                      <option value="left" <?php echo $footerOptions['positions']['invoicesummary'] === 'left' ? 'selected' : ''; ?>> <?= __('Left') ?> </option>
+                      <option value="right" <?php echo (empty($footerOptions['positions']['invoicesummary']) || $footerOptions['positions']['invoicesummary'] === 'right') ? 'selected' : ''; ?>> <?= __('Right') ?> </option>
                     </select>
                   </div>
                 </div>
@@ -2713,80 +2596,79 @@ if ($userData['user_photo'] != '') {
               <h6>Border Options </h6>
               <div class="btn-group d-flex flex-wrap">
                 <a class="btn btn-outline-primary btn-sm mb-2" data-target="borderOptions">
-                  <i class="bi bi-border"></i> Border
+                  <i class="bi bi-border"></i> <?= __('Border') ?>
                 </a>
                 <a class="btn btn-outline-secondary btn-sm mb-2" data-target="colorOptions">
-                  <i class="bi bi-palette"></i> Color
+                  <i class="bi bi-palette"></i> <?= __('Color') ?>
                 </a>
                 <a class="btn btn-outline-info btn-sm mb-2" data-target="widthOptions">
-                  <i class="bi bi-border-width"></i> Width
+                  <i class="bi bi-border-width"></i> <?= __('Width') ?>
                 </a>
               </div>
               <div id="borderOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label for="borderStyle" class="form-label">Border Style</label>
+                  <label for="borderStyle" class="form-label"><?= __('Border Style') ?></label>
                   <select class="form-select" id="borderStyle" name="borderStyle" title="Borderstyle" aria-label="Borderstyle">
-                    <option value="solid" <?php echo $borderstyle == 'solid' ? 'selected' : ''; ?>>Solid</option>
-                    <option value="dashed" <?php echo $borderstyle == 'dashed' ? 'selected' : ''; ?>>Dashed</option>
-                    <option value="dotted" <?php echo $borderstyle == 'dotted' ? 'selected' : ''; ?>>Dotted</option>
-                    <option value="none" <?php echo $borderstyle == 'none' ? 'selected' : ''; ?>>None</option>
+                    <option value="solid" <?php echo $borderstyle == 'solid' ? 'selected' : ''; ?>> <?= __('Solid') ?> </option>
+                    <option value="dashed" <?php echo $borderstyle == 'dashed' ? 'selected' : ''; ?>> <?= __('Dashed') ?> </option>
+                    <option value="dotted" <?php echo $borderstyle == 'dotted' ? 'selected' : ''; ?>> <?= __('Dotted') ?> </option>
+                    <option value="none" <?php echo $borderstyle == 'none' ? 'selected' : ''; ?>> <?= __('None') ?> </option>
                   </select>
                 </div>
               </div>
               <div id="colorOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label for="borderColor" class="form-label">Border Color</label>
+                  <label for="borderColor" class="form-label"><?= __('Border Color') ?></label>
                   <input type="color" class="form-control form-control-color" style="max-width:100%;" id="borderColor"
                     title="Choose border color" value="<?php echo $bordercolor !=""?$bordercolor:'#000'; ?>" name="borderColor" aria-label="Choose border color">
                 </div>
               </div>
               <div id="widthOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label for="borderWidth" class="form-label">Border Width</label>
+                  <label for="borderWidth" class="form-label"><?= __('Border Width') ?></label>
                   <input type="number" class="form-control" id="borderWidth" min="1" max="10"
                     placeholder="Enter width (in px)" value="<?php echo $borderwidth!=""?$borderwidth:1; ?>" name="borderWidth" title="Enter width (in px)" aria-label="Enter width (in px)">
                 </div>
               </div>
             </div>
             <div class="mb-3">
-              <h6>Basic Options</h6>
+              <h6><?= __('Basic Options') ?></h6>
               <div class="btn-group d-flex flex-wrap">
                 <!-- Text Options -->
                 <a class="btn btn-outline-danger btn-sm mb-2" data-target="textStyleOptions">
-                  <i class="bi bi-fonts"></i> Text Style
+                  <i class="bi bi-fonts"></i> <?= __('Text Style') ?>
                 </a>
                 <!-- Margin Options -->
                 <a class="btn btn-outline-primary btn-sm mb-2" data-target="marginOptions">
-                  <i class="bi bi-arrows-expand"></i> Margin
+                  <i class="bi bi-arrows-expand"></i> <?= __('Margin') ?>
                 </a>
                 <!-- Padding Options -->
                 <a class="btn btn-outline-secondary btn-sm mb-2" data-target="paddingOptions">
-                  <i class="bi bi-box"></i> Padding
+                  <i class="bi bi-box"></i> <?= __('Padding') ?>
                 </a>
                 <!-- Height Options -->
                 <!-- <a class="btn btn-outline-info btn-sm mb-2" data-target="heightOptions">
-                  <i class="bi bi-arrow-up-down"></i> Height
+                  <i class="bi bi-arrow-up-down"></i> <?= __('Height') ?>
                 </a> -->
               </div>
 
               <!-- Text Style Options -->
               <div id="textStyleOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label for="fontFamily" class="form-label">Font Family</label>
+                  <label for="fontFamily" class="form-label"><?= __('Font Family') ?></label>
                   <select class="form-select" id="fontFamily" name="fontFamily" title="Fontfamily" aria-label="Fontfamily">
-                    <option value="Arial" <?php echo $fontFamily == 'Arial' ? 'selected' : ''; ?>>Arial</option>
+                    <option value="Arial" <?php echo $fontFamily == 'Arial' ? 'selected' : ''; ?>> <?= __('Arial') ?> </option>
                     <option value="Times New Roman" <?php echo $fontFamily == 'Times New Roman' ? 'selected' : ''; ?>>
                       Times
                       New Roman</option>
-                    <option value="Courier New" <?php echo $fontFamily == 'Courier New' ? 'selected' : ''; ?>>Courier New
-                    </option>
-                    <option value="Verdana" <?php echo $fontFamily == 'Verdana' ? 'selected' : ''; ?>>Verdana</option>
-                    <option value="Georgia" <?php echo $fontFamily == 'Georgia' ? 'selected' : ''; ?>>Georgia</option>
+                    <option value="Courier New" <?php echo $fontFamily == 'Courier New' ? 'selected' : ''; ?>> <?= __('Courier New') ?> </option>
+                    <option value="Verdana" <?php echo $fontFamily == 'Verdana' ? 'selected' : ''; ?>> <?= __('Verdana') ?> </option>
+                    <option value="Georgia" <?php echo $fontFamily == 'Georgia' ? 'selected' : ''; ?>> <?= __('Georgia') ?> </option>
                     <option value="Trebuchet MS" <?php echo $fontFamily == 'Trebuchet MS' ? 'selected' : ''; ?>>Trebuchet
                       MS
                     </option>
-                    <option value="Tahoma" <?php echo $fontFamily == 'Tahoma' ? 'selected' : ''; ?>>Tahoma</option>
-                    <option value="Roboto" <?php echo $fontFamily == 'Roboto' ? 'selected' : ''; ?>>Roboto</option>
+                    <option value="Tahoma" <?php echo $fontFamily == 'Tahoma' ? 'selected' : ''; ?>> <?= __('Tahoma') ?> </option>
+                    <option value="Roboto" <?php echo $fontFamily == 'Roboto' ? 'selected' : ''; ?>> <?= __('Roboto') ?> </option>
                   </select>
                 </div>
               </div>
@@ -2794,7 +2676,7 @@ if ($userData['user_photo'] != '') {
               <!-- Margin Options -->
               <div id="marginOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label for="marginInput" class="form-label">Margin (in px)</label>
+                  <label for="marginInput" class="form-label"><?= __('Margin (in px)') ?></label>
                   <input type="number" class="form-control" id="marginInput" name="marginInput"
                     value="<?php echo $margin; ?>" min="0" placeholder="Enter margin" title="Enter margin" aria-label="Enter margin">
                 </div>
@@ -2803,7 +2685,7 @@ if ($userData['user_photo'] != '') {
               <!-- Padding Options -->
               <div id="paddingOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label for="paddingInput" class="form-label">Padding (in px)</label>
+                  <label for="paddingInput" class="form-label"><?= __('Padding (in px)') ?></label>
                   <input type="number" class="form-control" id="paddingInput" name="paddingInput"
                     value="<?php echo isset($padding) && $padding !== '' ? $padding : 10; ?>" min="10" placeholder="Enter padding" title="Enter padding" aria-label="Enter padding">
                 </div>
@@ -2812,7 +2694,7 @@ if ($userData['user_photo'] != '') {
               <!-- Height Options -->
               <div id="heightOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label for="heightInput" class="form-label">Height (in %)</label>
+                  <label for="heightInput" class="form-label"><?= __('Height (in %)') ?></label>
                   <input type="number" class="form-control" id="heightInput" name="heightInput"
                     value="<?php echo isset($height) && $height !== '' ? $height : 100; ?>" min="100" placeholder="Enter height (Minimum 100%)" title="Enter height (Minimum 100%)" aria-label="Enter height (Minimum 100%)">
                 </div>
@@ -3060,7 +2942,7 @@ if ($userData['user_photo'] != '') {
                     <!-- Additional Notes -->
                     <div class="additionalnotes"
                       style="<?php echo !isset($footerOptions['showAdditionalDetails']) || !$footerOptions['showAdditionalDetails'] ? 'display: none;' : ''; ?> margin-top: 10px;">
-                      <h6 style="text-decoration: underline;margin-bottom: 5px;">Additional Notes :</h6>
+                      <h6 style="text-decoration: underline;margin-bottom: 5px;"><?= __('Additional Notes') ?> :</h6>
                       <p style="padding:10px;background: #e1e1e1;">
                         <br><br><br>
                       </p>
@@ -3074,25 +2956,25 @@ if ($userData['user_photo'] != '') {
                         <div class="sec_col" style="width: 50%;">
                           <h6 class="totalbeforetax heading1"
                             style="font-weight: 600; text-align: left; white-space: nowrap; <?php echo empty($footerOptions['totalbeforetax']['value']) || (isset($footerOptions['totalbeforetax']['visible']) && !$footerOptions['totalbeforetax']['visible']) ? 'display: none;' : ''; ?>">
-                            Total Before Tax :</h6>
+                            <?= __('Total Before Tax') ?> :</h6>
                           <h6 class="fdiscount heading2"
                             style="font-weight: 600;text-align: left; white-space: nowrap; <?php echo (empty($footerOptions['discount']['value']) && empty($footerOptions['showFields']['discount']['value'])) || (isset($footerOptions['discount']['visible']) && !$footerOptions['discount']['visible']) || (isset($footerOptions['showFields']['discount']['visible']) && !$footerOptions['showFields']['discount']['visible']) ? 'display: none;' : ''; ?>">
-                            Discount :</h6>
+                            <?= __('Discount') ?> :</h6>
                           <h6 class="totaltaxamount heading3"
                             style="font-weight: 600;text-align: left; white-space: nowrap; <?php echo empty($footerOptions['totaltaxamount']['value']) || (isset($footerOptions['totaltaxamount']['visible']) && !$footerOptions['totaltaxamount']['visible']) ? 'display: none;' : ''; ?>">
-                            Total Tax Amount :</h6>
+                            <?= __('Total Tax Amount') ?> :</h6>
                           <h6 class="roundedoff heading4"
                             style="font-weight: 600;text-align: left; white-space: nowrap; <?php echo empty($footerOptions['roundedoff']['value']) || (isset($footerOptions['roundedoff']['visible']) && !$footerOptions['roundedoff']['visible']) ? 'display: none;' : ''; ?>">
-                            Rounded Off :</h6>
+                            <?= __('Rounded Off') ?> :</h6>
                           <h6 class="securityamount heading4_5"
                             style="font-weight: 600;text-align: left; white-space: nowrap; <?php echo empty($footerOptions['securityamount']['value']) || (isset($footerOptions['securityamount']['visible']) && !$footerOptions['securityamount']['visible']) ? 'display: none;' : ''; ?>">
-                            Security Amount :</h6>
+                            <?= __('Security Amount') ?> :</h6>
                           <h6 class="totalamount heading5"
                             style="font-weight: 600;text-align: left; white-space: nowrap; <?php echo empty($footerOptions['totalamount']['value']) || (isset($footerOptions['totalamount']['visible']) && !$footerOptions['totalamount']['visible']) ? 'display: none;' : ''; ?>">
-                            Total Amount :</h6>
+                            <?= __('Total Amount') ?> :</h6>
                           <h6 class="totaldue heading6"
                             style="font-weight: 600;text-align: left; white-space: nowrap; <?php echo empty($footerOptions['totaldue']['value']) || (isset($footerOptions['totaldue']['visible']) && !$footerOptions['totaldue']['visible']) ? 'display: none;' : ''; ?>">
-                            Total Due :</h6>
+                            <?= __('Total Due') ?> :</h6>
                         </div>
                         <div class="third_col" style="width: 50%;">
                           <h6 class="totalbeforetax value1"
@@ -3132,7 +3014,7 @@ if ($userData['user_photo'] != '') {
                         <img width="120px" src="https://pngimg.com/uploads/qr_code/small/qr_code_PNG33.png" alt="qr">
                       </div>
                       <div class="signature">
-                        <h6 style="text-decoration: underline;margin-bottom: 5px;">Autherized Signature :</h6>
+                        <h6 style="text-decoration: underline;margin-bottom: 5px;"><?= __('Autherized Signature') ?> :</h6>
                         <img width="180px"
                           src="https://onlinepngtools.com/images/examples-onlinepngtools/george-walker-bush-signature.png"
                           alt="signature">
@@ -3143,7 +3025,7 @@ if ($userData['user_photo'] != '') {
               </div>
             </div>
             <div class="mb-2">
-              <button name="submitinvoice" type="submit" class="btn btn-primary mt-3 w-100" >Save Changes</button>
+              <button name="submitinvoice" type="submit" class="btn btn-primary mt-3 w-100" ><?= __('Save Changes') ?></button>
             </div>
           </form>
         </div>

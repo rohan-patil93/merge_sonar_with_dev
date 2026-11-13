@@ -308,7 +308,7 @@ function loadDynamicPage(option,id="",tabid="",subtabid=""){
                             <div class="col-lg-5">
                                 <div class="image-input image-input-empty image-input-outline" id="kt_image_5" >
                                     <form method="post" id="profile_pic_file" enctype="multipart/form-data" class="position-relative">
-                                        <label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="Edit Profile Pic" style="left: 90px; bottom: 0px;position: absolute;">
+                                        <label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Edit Profile Pic') ?>" style="left: 90px; bottom: 0px;position: absolute;">
                                             <span><i class="ti-pencil-alt"></i></span>
                                             <input aria-label="Profile Pic File" type="file" name="profile_pic_file" accept=".png, .jpg, .jpeg"  onchange="updateProfilePic()" />
                                         </label>
@@ -337,7 +337,7 @@ function loadDynamicPage(option,id="",tabid="",subtabid=""){
                                             ?>
                                             <button type="button" class="btn waves-effect waves-light btn-<?php echo $clr_ver; ?> pt-1 pb-1 m-l-20" <?php if($onc_ver == 'Y'){ ?> onclick="verificationCandidateDetails()"<?php
 }else{ ?> style="cursor: auto;"; <?php
-} ?> ><i class="ti-<?php echo $icn_ver; ?> m-r-5"></i> <?php echo $nam_ver; ?>
+} ?> ><i class="ti-<?php echo $icn_ver; ?> m-r-5"></i> <?php echo htmlspecialchars(__($nam_ver ?? '')); ?>
                                         </button>
                                     </span>
                                 </form>
@@ -379,30 +379,30 @@ if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 text-right mt-3" id="custom-popup">
-                                    <a href="#!" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" class="btn waves-effect waves-light btn-primary mt-5 b-radius-10 " data-action="remove" data-bs-toggle="tooltip" title="Query" onclick="NewMessageAdded('custom-popup-slide-query-contact_details')">
+                                    <a href="#!" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" class="btn waves-effect waves-light btn-primary mt-5 b-radius-10 " data-action="remove" data-bs-toggle="tooltip" title="<?= __('Query') ?>" onclick="NewMessageAdded('custom-popup-slide-query-contact_details')">
                                         <i class="ti-comment-alt" ></i>
                                     </a>
                                     <div class="custom-popup-open custom-popup-slide-query-contact_details text-start" style="display: none;left: 0px;top: 90px;">
                                         <form method="post" enctype="multipart/form-data" >
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h5>Query</h5>
+                                                    <h5><?= __('Query') ?></h5>
                                                     <div class="card-header-right">
-                                                        <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closedPopupcompliance22()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                                        <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closedPopupcompliance22()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= __('Closed') ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="form-group">
-                                                        <span class="form-label">Field Group</span>
+                                                        <span class="form-label"><?= __('Field Group') ?></span>
                                                         <select aria-label="Application Query" class="form-select js-example-basic-single" name="application_query_id">
-                                                            <option value="0">Select Any One</option>
+                                                            <option value="0"><?= __('Select Any One') ?></option>
                                                             <?php foreach((array)$application_query as $applicationquery){ ?>
                                                                 <option   value="<?php echo $applicationquery['id']; ?>"><?php echo $applicationquery['field_group'];  ?></option>
                                                             <?php } ?>
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
-                                                        <span class="form-label">Query</span>
+                                                        <span class="form-label"><?= __('Query') ?></span>
                                                         <textarea aria-label="Description" type="text" class="form-control" name="description"></textarea>
                                                     </div>
                                                 </div>
@@ -410,7 +410,7 @@ if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
                                                     <input type="hidden" name="rid" value="<?php echo $candidate_id; ?>">
                                                     <input type="hidden" name="display_name" value="<?php echo $_SESSION['display_name']; ?>">
                                                     <input type="hidden" name="parent_id" value="0">
-                                                    <button class="input-group-text addon-style cursor-pointer" name="submitlog" ><i class="ti-share"></i>  &nbsp; Submit</button>
+                                                    <button class="input-group-text addon-style cursor-pointer" name="submitlog" ><i class="ti-share"></i>  &nbsp; <?= __('Submit') ?></button>
                                                 </div>
                                             </div>
                                         </form>
@@ -423,7 +423,7 @@ if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
                                     <button class="btn waves-effect waves-light btn-primary mt-5 b-radius-10 ">
                                         <div class="image-input image-input-empty image-input-outline" id="kt_image_5_2" >
                                             <form method="post" id="resume_upload_file" enctype="multipart/form-data" class="position-relative">
-                                                <label class="btn-hover-text-primary m-0 text-white" data-action="remove" data-bs-toggle="tooltip" title="Upload CV" style="left: -9px;top: 0px;">
+                                                <label class="btn-hover-text-primary m-0 text-white" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Upload CV') ?>" style="left: -9px;top: 0px;">
                                                     <span> <i class="ti-upload"></i></span>
                                                     <input aria-label="Resume Upload File" type="file" name="resume_upload_file" accept=".pdf"  onchange="updateresume()" />
                                                 </label>
@@ -441,49 +441,49 @@ if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
                                             <div class="s-caption  text-primary"><i class="ti-list f-20"></i></div>
                                             <div class="s-cont d-inline-block">
                                                 <h5 class="f-w-700 m-b-0"><?php echo $task_cnt['total_task_cnt'] !=""?$task_cnt['total_task_cnt']:0; ?></h5>
-                                                <p class="m-b-0 f-12">Total Task</p>
+                                                <p class="m-b-0 f-12"><?= __('Total Task') ?></p>
                                             </div>
                                         </div>
                                         <div class="col-2 b-l-default text-center">
                                             <div class="s-caption  text-danger"><i class="ti-time f-20"></i></div>
                                             <div class="s-cont d-inline-block">
                                                 <h5 class="f-w-700 m-b-0"><?php echo $task_cnt['yet_to_start_cnt'] !=""?$task_cnt['yet_to_start_cnt']:0; ?></h5>
-                                                <p class="m-b-0 f-12">Yet To Start</p>
+                                                <p class="m-b-0 f-12"><?= __('Yet To Start') ?></p>
                                             </div>
                                         </div>
                                         <div class="col-2 b-l-default text-center">
                                             <div class="s-caption  text-info"><i class="ti-timer f-20"></i></div>
                                             <div class="s-cont d-inline-block">
                                                 <h5 class="f-w-700 m-b-0"><?php echo $task_cnt['inprogress_cnt'] !=""?$task_cnt['inprogress_cnt']:0; ?></h5>
-                                                <p class="m-b-0  f-12">In Progress</p>
+                                                <p class="m-b-0  f-12"><?= __('In Progress') ?></p>
                                             </div>
                                         </div>
                                         <div class="col-2 b-l-default text-center">
                                             <div class="s-caption  text-info"><i class="ti-write f-20"></i></div>
                                             <div class="s-cont d-inline-block">
                                                 <h5 class="f-w-700 m-b-0"><?php echo $task_cnt['review_cnt'] !=""?$task_cnt['review_cnt']:0; ?></h5>
-                                                <p class="m-b-0 f-12">Review Pending</p>
+                                                <p class="m-b-0 f-12"><?= __('Review Pending') ?></p>
                                             </div>
                                         </div>
                                         <div class="col-2 b-l-default text-center">
                                             <div class="s-caption  text-success"><i class="ti-check-box f-20"></i></div>
                                             <div class="s-cont d-inline-block">
                                                 <h5 class="f-w-700 m-b-0"><?php echo $task_cnt['approve_cnt'] !=""?$task_cnt['approve_cnt']:0; ?></h5>
-                                                <p class="m-b-0 f-12">Approved</p>
+                                                <p class="m-b-0 f-12"><?= __('Approved') ?></p>
                                             </div>
                                         </div>
                                         <div class="col-2 b-l-default text-center">
                                             <div class="s-caption  text-danger"><i class="ti-pulse f-20"></i></div>
                                             <div class="s-cont d-inline-block">
                                                 <h5 class="f-w-700 m-b-0 text-danger"><?php echo 0; ?></h5>
-                                                <p class="m-b-0 f-12 text-danger">Delayed Task</p>
+                                                <p class="m-b-0 f-12 text-danger"><?= __('Delayed Task') ?></p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row m-t-10  m-b-10">
                                         <div class="font-weight-bold text-dark-50 mt-1 f-14">
-                                            <b class="f-w-600">Self tasks : </b><?php echo $task_cnt['self_task_cnt']; ?>&nbsp;&nbsp;&nbsp;
-                                            <b class="f-w-600">Review Task : </b><?php echo $task_cnt['riview_cnt']; ?>
+                                            <b class="f-w-600"><?= __('Self tasks') ?> : </b><?php echo $task_cnt['self_task_cnt']; ?>&nbsp;&nbsp;&nbsp;
+                                            <b class="f-w-600"><?= __('Review Task') ?> : </b><?php echo $task_cnt['riview_cnt']; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -499,43 +499,43 @@ if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
 
                                 <?php $option_name="COM_LIST_CANDIDATE_INFO"; ?>
                                 <li class="nav-item">
-                                    <button type="button" class="nav-link text-active-primary  removeativtab me-6 active" id="active_COM_LIST_CANDIDATE_INFO" onclick="loadDynamicPage('COM_LIST_CANDIDATE_INFO','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')">Candidate</button>
+                                    <button type="button" class="nav-link text-active-primary  removeativtab me-6 active" id="active_COM_LIST_CANDIDATE_INFO" onclick="loadDynamicPage('COM_LIST_CANDIDATE_INFO','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')"><?= __('Candidate') ?></button>
                                 </li>
                                 <li class="nav-item">
-                                    <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_INSERT_CANDIDATES_SCREENING_QUESTIONS" onclick="loadDynamicPage('COM_INSERT_CANDIDATES_SCREENING_QUESTIONS','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')">Screening Questions</button>
+                                    <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_INSERT_CANDIDATES_SCREENING_QUESTIONS" onclick="loadDynamicPage('COM_INSERT_CANDIDATES_SCREENING_QUESTIONS','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')"><?= __('Screening Questions') ?></button>
                                 </li>
                                 <li class="nav-item">
-                                    <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_VIEW_CANDIDATE_OVERVIEWS" onclick="loadDynamicPage('COM_VIEW_CANDIDATE_OVERVIEWS','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')">Overview</button>
+                                    <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_VIEW_CANDIDATE_OVERVIEWS" onclick="loadDynamicPage('COM_VIEW_CANDIDATE_OVERVIEWS','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')"><?= __('Overview') ?></button>
                                 </li>
                                 <li class="nav-item">
-                                    <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_INSERT_TRANSACTION_ACTIVITY_SCHEDULES" onclick="loadDynamicPage('COM_INSERT_TRANSACTION_ACTIVITY_SCHEDULES','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')">Task</button>
+                                    <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_INSERT_TRANSACTION_ACTIVITY_SCHEDULES" onclick="loadDynamicPage('COM_INSERT_TRANSACTION_ACTIVITY_SCHEDULES','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')"><?= __('Task') ?></button>
                                 </li>
                                 <?php if($_SESSION['user_type'] != 4 && count((array)$job_posting_candidates) !=0){  ?>
                                     <li class="nav-item">
-                                        <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_INSERT_CANDIDATE_OFFER" onclick="loadDynamicPage('COM_INSERT_CANDIDATE_OFFER','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')">Generate LoI</button>
+                                        <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_INSERT_CANDIDATE_OFFER" onclick="loadDynamicPage('COM_INSERT_CANDIDATE_OFFER','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')"><?= __('Generate LoI') ?></button>
                                     </li>
                                     <?php if($data['current_status']>=ST_LOIGENERATED){ ?>
                                         <li class="nav-item">
-                                            <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_LIST_CANDIDATE_OFFER" onclick="loadDynamicPage('COM_LIST_CANDIDATE_OFFER','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')">View LoI</button>
+                                            <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_LIST_CANDIDATE_OFFER" onclick="loadDynamicPage('COM_LIST_CANDIDATE_OFFER','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')"><?= __('View LoI') ?></button>
                                         </li>
                                         <li class="nav-item">
-                                            <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_LIST_JOIN_REQUIRED_DOCUMENTS" onclick="loadDynamicPage('COM_LIST_JOIN_REQUIRED_DOCUMENTS','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')">Generate Employee </button>
+                                            <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_LIST_JOIN_REQUIRED_DOCUMENTS" onclick="loadDynamicPage('COM_LIST_JOIN_REQUIRED_DOCUMENTS','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')"><?= __('Generate Employee') ?> </button>
                                         </li>
                                     <?php } ?>
                                     <?php } ?>
                                     <?php if($_SESSION['user_type'] == 4 && $data['current_status']>=ST_LOIGENERATED){  ?>
                                         <li class="nav-item">
-                                            <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_LIST_CANDIDATE_OFFER_2" onclick="loadDynamicPage('COM_LIST_CANDIDATE_OFFER','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')">View LoI</button>
+                                            <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_LIST_CANDIDATE_OFFER_2" onclick="loadDynamicPage('COM_LIST_CANDIDATE_OFFER','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')"><?= __('View LoI') ?></button>
                                         </li>
                                     <?php } ?>
 
                                     <?php if($data['file']!=""){ ?>
                                         <li class="nav-item">
-                                            <button type="button" class="nav-link removeativtab" data-bs-toggle="tab" role="tab" onclick="showCV('uploads/all/<?php echo $data['file']; ?>')">CV</button>
+                                            <button type="button" class="nav-link removeativtab" data-bs-toggle="tab" role="tab" onclick="showCV('uploads/all/<?php echo $data['file']; ?>')"><?= __('CV') ?></button>
                                         </li>
                                     <?php } ?>
                                     <li class="nav-item">
-                                        <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_LIST_CANDIDATE_QUERY" onclick="loadDynamicPage('COM_LIST_CANDIDATE_QUERY','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')">Query</button>
+                                        <button type="button" class="nav-link text-active-primary  removeativtab me-6 " id="active_COM_LIST_CANDIDATE_QUERY" onclick="loadDynamicPage('COM_LIST_CANDIDATE_QUERY','<?php echo $_GET['Rid'];?>','<?php echo $_GET['Rid'];?>','<?php echo $list['id']; ?>')"><?= __('Query') ?></button>
                                     </li>
 
                                 </ul>
@@ -556,7 +556,7 @@ if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
                     </div>
                 <?php  }else{  ?>
                     <div class="card-body pt-9 pb-0 text-center">
-                        <h2 class="text-info"><i class='fa fa-warning'></i> Candidate Not Found! Please Contact Admin</h2>
+                        <h2 class="text-info"><i class='fa fa-warning'></i> <?= __('Candidate Not Found! Please Contact Admin') ?></h2>
                     </div>
                 <?php } ?>
             </div>

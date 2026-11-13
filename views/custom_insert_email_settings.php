@@ -9,16 +9,16 @@
                                                     <div class="card-block">
                                                         <div class="row">
                                                             <div class="col-lg-9">
-                                                                <h3 class="">Email Settings</h3>
+                                                                <h3 class=""><?= __('Email Settings') ?></h3>
                                                                 <p>List of all support email addreses</p>
                                                             </div>
                                                             <div class="col-lg-3 text-right">
-                                                                <button class="btn btn-success waves-effect waves-light">NEW SUPPORT EMAIL</button>
+                                                                <button class="btn btn-success waves-effect waves-light"><?= __('NEW SUPPORT EMAIL') ?></button>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-9">
-                                                                <h3 class="">Global Support Emails</h3>
+                                                                <h3 class=""><?= __('Global Support Emails') ?></h3>
                                                             </div>
                                                             <div class="col-lg-3 text-right">
                                                                 <a class="text-primary" href="">Configure DKIM</a> |
@@ -39,7 +39,7 @@
                                                                 <div class="col-lg-4 mt-2">
                                                                     <div class="align-middle">
                                                                         <div class="d-inline-block align-top">
-                                                                            <a href="#!"><h6 class="mb-0">Forward to :</h6></a>
+                                                                            <a href="#!"><h6 class="mb-0"><?= __('Forward to :') ?></h6></a>
                                                                             <p>support@gmail.com</p>
                                                                         </div>
                                                                     </div>
@@ -47,7 +47,7 @@
                                                                 <div class="col-lg-2 mt-2">
                                                                     <div class="align-middle">
                                                                         <div class="d-inline-block align-top">
-                                                                            <a href="#!"><h6 class="mb-0">Group :</h6></a>
+                                                                            <a href="#!"><h6 class="mb-0"><?= __('Group :') ?></h6></a>
                                                                         </div>
                                                                     </div>
                                                                 </div>

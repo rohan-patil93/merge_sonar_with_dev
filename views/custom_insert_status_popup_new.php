@@ -23,7 +23,7 @@ function closebutnfunction(){
                 if(datas.next_user =="" || datas.next_user ==null || datas.next_user =="0"){
                     Swal.fire({
                       icon: 'error',
-                      title: 'Oops...',
+                      title: <?php echo json_encode(__('Oops...')); ?>,
                       text: '<?php echo $_SESSION['error_message']['9003']; ?>'
                     })
                     return false;
@@ -38,10 +38,10 @@ function closebutnfunction(){
 
     <div class="modal-header">
                         <h5 class="modal-title">
-                            <small> <b>Transaction Type: </b>&nbsp; <?php echo viewtitle($_POST['table']); ?> &nbsp;&nbsp;
-                             <b>Status: </b>&nbsp; <?php echo $statuse[$_POST['status']]['name'];  ?> </small>
+                            <small> <b><?php echo __('Transaction Type:'); ?> </b>&nbsp; <?php echo viewtitle($_POST['table']); ?> &nbsp;&nbsp;
+                             <b><?php echo __('Status:'); ?> </b>&nbsp; <?php echo $statuse[$_POST['status']]['name'];  ?> </small>
                         </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closebutnfunction()"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>" onclick="closebutnfunction()"></button>
                     </div>
                     <div class="modal-body" >
 
@@ -49,8 +49,8 @@ function closebutnfunction(){
                 <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                             <div class="form-group row">
                                 <div class="col-lg-12">
-                                    <span>Comment</span>
-                                    <textarea aria-label="Comment" class="form-control" name="comment" id="comment"></textarea>
+                                    <span><?php echo __('Comment'); ?></span>
+                                    <textarea aria-label="<?php echo __('Comment'); ?>" class="form-control" name="comment" id="comment"></textarea>
                                 </div>
                             </div>
                     </div>
@@ -64,8 +64,8 @@ function closebutnfunction(){
                 <input type="hidden" name="workflow_id"  value="<?php echo $_POST['workflow_id']; ?>">
                 <input type="hidden" name="type"  value="<?php echo $_POST['type']; ?>">
                 <input type="hidden" name="ids"  value="<?php echo $_POST['ids']; ?>">
-                <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal" onclick="closebutnfunction()">Close</button>
-                <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Submit</button>
+                <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal" onclick="closebutnfunction()"><?php echo __('Close'); ?></button>
+                <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?php echo __('Submit'); ?></button>
             </div>
 
     </form>

@@ -134,7 +134,7 @@ $bankdetails = array('bank_id','bank_link','bank_account_no');
 
 </style>
 <div class="modal-header">
-    <h4 class="modal-title">View Employee details</h4>
+    <h4 class="modal-title"><?= __('View Employee details') ?></h4>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 
@@ -142,7 +142,7 @@ $bankdetails = array('bank_id','bank_link','bank_account_no');
     <div class="row">
         <div class="col-lg-12 col-xl-12 ">
             <div class="card-header  ">
-                <h5>Basic Info </h5>
+                <h5><?= __('Basic Info') ?></h5>
             </div>
             <div class="">
                 <input type="hidden" name="data_name" id="data_name" value="<?php echo $_SESSION['DB_NAME']; ?>">
@@ -171,7 +171,7 @@ $bankdetails = array('bank_id','bank_link','bank_account_no');
         </div>
         <div class="col-lg-12 col-xl-12 mt-5">
             <div class="card-header  ">
-                <h5>Working Details </h5>
+                <h5><?= __('Working Details') ?></h5>
             </div>
             <table class="table m-0">
                 <tbody>
@@ -215,7 +215,7 @@ if($key == "billable"){ $employee_detail = $_POST['billable'] == '0'?"Billable":
         </div>
         <div class="col-lg-12 col-xl-12 mt-5">
             <div class="card-header  ">
-                <h5>Personal Details</h5>
+                <h5><?= __('Personal Details') ?></h5>
             </div>
             <table class="table m-0">
                 <tbody>
@@ -242,7 +242,7 @@ if($key == "age"){ $employee_detail = dateyearcalucates($employee_details['date_
         <?php if(EMPLOYEE_INSERT_FORM_BANK_DETAIL_INSERT == "Y"){ ?>
         <div class="col-lg-12 col-xl-12 mt-5">
             <div class="card-header  ">
-                <h5>Bank Details</h5>
+                <h5><?= __('Bank Details') ?></h5>
             </div>
             <table class="table m-0">
                 <tbody>
@@ -267,16 +267,16 @@ if($key == "bank_id"){ $employee_detail = $banks[$employee_detail]['bank_name'];
         <?php } ?>
             <div class="col-lg-6 col-xl-6 mt-4 p-2">
                 <div class="card-header  ">
-                    <h5>Experience Details</h5>
+                    <h5><?= __('Experience Details') ?></h5>
                 </div>
                 <div class="">
                     <table class="table m-0">
                         <thead>
                             <tr>
-                                <th scope="col">Company Name</th>
-                                <th scope="col">Job Descrption</th>
-                                <th scope="col">Work From</th>
-                                <th scope="col">Work To</th>
+                                <th scope="col"><?= __('Company Name') ?></th>
+                                <th scope="col"><?= __('Job Descrption') ?></th>
+                                <th scope="col"><?= __('Work From') ?></th>
+                                <th scope="col"><?= __('Work To') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -298,17 +298,17 @@ if($key == "bank_id"){ $employee_detail = $banks[$employee_detail]['bank_name'];
                 </div>
                 <div class="col-lg-6 col-xl-6 mt-4 p-2">
                     <div class="card-header  ">
-                    <h5>Qualification Details</h5>
+                    <h5><?= __('Qualification Details') ?></h5>
                 </div>
                 <div class="">
                     <table class="table m-0">
                         <thead>
                             <tr>
-                                <th scope="col">Institute Name</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">End Date</th>
-                                <th scope="col">Score</th>
+                                <th scope="col"><?= __('Institute Name') ?></th>
+                                <th scope="col"><?= __('Type') ?></th>
+                                <th scope="col"><?= __('Start Date') ?></th>
+                                <th scope="col"><?= __('End Date') ?></th>
+                                <th scope="col"><?= __('Score') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -333,15 +333,15 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
                 </div>
                 <div class="col-lg-6 col-xl-6 mt-4 p-2">
                     <div class="card-header  ">
-                    <h5>Dependents Details</h5>
+                    <h5><?= __('Dependents Details') ?></h5>
                 </div>
                 <div class="">
                     <table class="table m-0">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Relationship</th>
-                                <th scope="col">Date Of Birth</th>
+                                <th scope="col"><?= __('Name') ?></th>
+                                <th scope="col"><?= __('Relationship') ?></th>
+                                <th scope="col"><?= __('Date Of Birth') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -363,16 +363,16 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
                 </div>
                 <div class="col-lg-6 col-xl-6 mt-4 p-2">
                     <div class="card-header  ">
-                        <h5>Emergency Contact</h5>
+                        <h5><?= __('Emergency Contact') ?></h5>
                     </div>
                     <div class="">
                         <table class="table m-0">
                             <thead>
                                 <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Relationship</th>
-                                    <th scope="col">Home No</th>
-                                    <th scope="col">Mobile No</th>
+                                    <th scope="col"><?= __('Name') ?></th>
+                                    <th scope="col"><?= __('Relationship') ?></th>
+                                    <th scope="col"><?= __('Home No') ?></th>
+                                    <th scope="col"><?= __('Mobile No') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -398,6 +398,6 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()">Submit</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
+            <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()"><?= __('Submit') ?></button>
         </div>

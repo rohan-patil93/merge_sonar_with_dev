@@ -119,13 +119,13 @@ foreach($equipments_res as $etr){
                      $("#submit_error_"+cabinseq).text(result.error_message);
                  }else{
                     if(result.equipment_allocation_id == '0'){
-                        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>','');
+                        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo __($_SESSION['error_message']['3001']); ?>','');
                     }else{
                         $("#equipment_allocation_id_"+cabinseq).val(result.equipment_allocation_id);
-                        $("#equipment_allocation_btn_"+cabinseq).html('<button type="button" class="btn p-0 border-0 bg-transparent cursor-pointer m-l-20 text-danger" onclick="removeEquipmentAllocations(\''+result.equipment_allocation_id+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i> Remove</button>');
+                        $("#equipment_allocation_btn_"+cabinseq).html('<button type="button" class="btn p-0 border-0 bg-transparent cursor-pointer m-l-20 text-danger" onclick="removeEquipmentAllocations(\''+result.equipment_allocation_id+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i> <?php echo __('Remove'); ?></button>');
 
 
-                        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3000']; ?>','');
+                        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo __($_SESSION['error_message']['3000']); ?>','');
                     }
                     $("#save_btn_"+cabinseq).hide();
                     $("#edit_btn_"+cabinseq).show('slow');
@@ -157,25 +157,25 @@ foreach($equipments_res as $etr){
 
         var htmlrows = '<div class="row mt-2" id="deleteid_'+maxrows+'">';
 
-        htmlrows += '<div class="col-lg-1"><span id="error_left_'+maxrows+'" class="text-danger all_error" style="display:none">Required</span><input aria-label="Left" class="form-control" type="text" id="left_'+maxrows+'"  value="" readonly></div>';
-        htmlrows += '<div class="col-lg-1"> <span id="error_top_'+maxrows+'" class="text-danger all_error" style="display:none">Required</span><input aria-label="Top" class="form-control" type="text" id="top_'+maxrows+'"  value="" readonly></div>';
+        htmlrows += '<div class="col-lg-1"><span id="error_left_'+maxrows+'" class="text-danger all_error" style="display:none"><?php echo __('Required'); ?></span><input aria-label="<?php echo __('Left'); ?>" class="form-control" type="text" id="left_'+maxrows+'"  value="" readonly></div>';
+        htmlrows += '<div class="col-lg-1"> <span id="error_top_'+maxrows+'" class="text-danger all_error" style="display:none"><?php echo __('Required'); ?></span><input aria-label="<?php echo __('Top'); ?>" class="form-control" type="text" id="top_'+maxrows+'"  value="" readonly></div>';
 
-        htmlrows += '<div class="col-lg-2 w-full all_edit_field space_edit_field_'+maxrows+'"> <span id="error_equipment_category_id_'+maxrows+'" class="text-danger all_error" style="display:none">Required</span> <select aria-label="Equipment Category" class="js-example-basic-single" id="equipment_category_id_'+maxrows+'" onchange="getEquipmentCategorie('+maxrows+')"><option value="">Select Any One </option><?php foreach($equipment_categories as $eqcat){ ?><option value="<?php echo $eqcat['id']; ?>"><?php echo $eqcat['category_name']; ?></option> <?php
+        htmlrows += '<div class="col-lg-2 w-full all_edit_field space_edit_field_'+maxrows+'"> <span id="error_equipment_category_id_'+maxrows+'" class="text-danger all_error" style="display:none"><?php echo __('Required'); ?></span> <select aria-label="<?php echo __('Equipment Category'); ?>" class="js-example-basic-single" id="equipment_category_id_'+maxrows+'" onchange="getEquipmentCategorie('+maxrows+')"><option value=""><?php echo __('Select Any One'); ?> </option><?php foreach($equipment_categories as $eqcat){ ?><option value="<?php echo $eqcat['id']; ?>"><?php echo __($eqcat['category_name']); ?></option> <?php
 } ?></select></div>';
 
-        htmlrows += '<div class="col-lg-2 w-full all_edit_field space_edit_field_'+maxrows+'"> <span id="error_equipment_type_id_'+maxrows+'" class="text-danger all_error" style="display:none">Required</span><select aria-label="Equipment Type" class="js-example-basic-single" id="equipment_type_id_'+maxrows+'" onchange="getEquipmentType('+maxrows+')"> <option value="">Select Any One </option></select> </div>';
+        htmlrows += '<div class="col-lg-2 w-full all_edit_field space_edit_field_'+maxrows+'"> <span id="error_equipment_type_id_'+maxrows+'" class="text-danger all_error" style="display:none"><?php echo __('Required'); ?></span><select aria-label="<?php echo __('Equipment Type'); ?>" class="js-example-basic-single" id="equipment_type_id_'+maxrows+'" onchange="getEquipmentType('+maxrows+')"> <option value=""><?php echo __('Select Any One'); ?> </option></select> </div>';
 
-        htmlrows += '<div class="col-lg-2 w-full all_edit_field space_edit_field_'+maxrows+' <?php echo $event_disabled; ?>"><span id="error_equipment_id_'+maxrows+'" class="text-danger all_error" style="display:none">Required</span><select aria-label="Equipment" class="js-example-basic-single" id="equipment_id_'+maxrows+'" ><option value="">Select Any One </option></select></div>';
+        htmlrows += '<div class="col-lg-2 w-full all_edit_field space_edit_field_'+maxrows+' <?php echo $event_disabled; ?>"><span id="error_equipment_id_'+maxrows+'" class="text-danger all_error" style="display:none"><?php echo __('Required'); ?></span><select aria-label="<?php echo __('Equipment'); ?>" class="js-example-basic-single" id="equipment_id_'+maxrows+'" ><option value=""><?php echo __('Select Any One'); ?> </option></select></div>';
 
-        htmlrows += ' <div class="col-lg-2 w-full all_edit_field space_edit_field_'+maxrows+'"><div id="div_emp_id_'+maxrows+'" style="display: none";> <select aria-label="Emp" class="js-example-basic-single" id="emp_id_'+maxrows+'"> <option value="">Select Any One </option> <?php foreach($employees as $emp){ ?> <option value="<?php echo $emp['id']; ?>" <?php echo $ealloc['emp_id']==$emp['id']?"selected":""; ?>><?php echo str_replace("'","",$emp['display_name']); ?></option> <?php
+        htmlrows += ' <div class="col-lg-2 w-full all_edit_field space_edit_field_'+maxrows+'"><div id="div_emp_id_'+maxrows+'" style="display: none";> <select aria-label="<?php echo __('Emp'); ?>" class="js-example-basic-single" id="emp_id_'+maxrows+'"> <option value=""><?php echo __('Select Any One'); ?> </option> <?php foreach($employees as $emp){ ?> <option value="<?php echo $emp['id']; ?>" <?php echo $ealloc['emp_id']==$emp['id']?"selected":""; ?>><?php echo __(str_replace("'","",$emp['display_name'])); ?></option> <?php
 } ?></select></div></div>';
 
-        htmlrows += '<div class="col-lg-2"> <input type="hidden" id="equipment_allocation_id_'+maxrows+'" value=""> <button type="button" class="all_save_btn cursor-pointer" id="save_btn_'+maxrows+'" onclick="submitEquipmentAllocations('+maxrows+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Save" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-save "></i>  Save</button> <button type="button" class="all_edit_btn cursor-pointer" id="edit_btn_'+maxrows+'" onclick="editEquipmentAllocations('+maxrows+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Edit" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-edit "></i>  Edit</button> <span id="equipment_allocation_btn_'+maxrows+'" ></span>  <span class="text-danger sub_error d-block" id="submit_error_'+maxrows+'" ></span></div>';
+        htmlrows += '<div class="col-lg-2"> <input type="hidden" id="equipment_allocation_id_'+maxrows+'" value=""> <button type="button" class="all_save_btn cursor-pointer" id="save_btn_'+maxrows+'" onclick="submitEquipmentAllocations('+maxrows+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Save'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-save "></i>  <?php echo __('Save'); ?></button> <button type="button" class="all_edit_btn cursor-pointer" id="edit_btn_'+maxrows+'" onclick="editEquipmentAllocations('+maxrows+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Edit'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-edit "></i>  <?php echo __('Edit'); ?></button> <span id="equipment_allocation_btn_'+maxrows+'" ></span>  <span class="text-danger sub_error d-block" id="submit_error_'+maxrows+'" ></span></div>';
 
         $("#newrowadd").append(htmlrows);
         $(".js-example-basic-single").select2();
 
-        var htmlequipment = '<div id="position_'+maxrows+'" class="equipment-allocation-icon" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'+maxrows+' Seat" >'+maxrows+'</div>';
+        var htmlequipment = '<div id="position_'+maxrows+'" class="equipment-allocation-icon" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'+maxrows+' <?php echo __('Seat'); ?>" >'+maxrows+'</div>';
          $("#extra_equipments_icon").append(htmlequipment);
 
         editEquipmentAllocations(maxrows);
@@ -206,12 +206,12 @@ foreach($equipments_res as $etr){
         if(id !=""){
             swal({
                 title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-                text: '<?php echo $_SESSION['error_message']['9120']; ?>',
+                text: '<?php echo __($_SESSION['error_message']['9120']); ?>',
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes",
-                cancelButtonText: "No",
+                confirmButtonText: "<?php echo __('Yes'); ?>",
+                cancelButtonText: "<?php echo __('No'); ?>",
                 closeOnConfirm: true,
                 closeOnCancel: true
             },
@@ -222,7 +222,7 @@ foreach($equipments_res as $etr){
                         data:'page=softdeletedrecord&id='+id+'&table=equipment_allocations',
                         type: "POST",
                         success:function(response){
-                            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3002']; ?>','');
+                            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo __($_SESSION['error_message']['3002']); ?>','');
                             getBuildingDynamicPage(param_value);
                             insertEquipmentAllocation('<?php echo $building_floor_id; ?>','<?php echo $building_floor_space_id; ?>','<?php echo $_POST['eaid']; ?>','<?php echo $_POST['eq_id']; ?>','<?php echo $_POST['eq_cat_id']; ?>','<?php echo $_POST['eq_type_id']; ?>','<?php echo $_POST['emp_id']; ?>','<?php echo $_POST['transaction_type']; ?>');
                         }
@@ -246,8 +246,8 @@ foreach($equipments_res as $etr){
     }
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Equipment Allocations</h4>
-    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="Close" onclick="closeEquipmentAllocations()"></button>
+    <h4 class="modal-title"><?php echo __('Equipment Allocations'); ?></h4>
+    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>" onclick="closeEquipmentAllocations()"></button>
     <input type="hidden" id="transaction_type_popup" value="<?php echo $_POST['transaction_type']; ?>">
 </div>
 <div class="modal-body m-l-50 m-r-50">
@@ -257,7 +257,7 @@ foreach($equipments_res as $etr){
             <?php foreach($all_building_floor_spaces  as $abfs){ ?>
             <li class="nav-item cursor-pointer">
                 <button type="button" class="nav-link position-relative text-center p-2 border-0 bg-transparent <?php echo $abfs['id'] == $building_floor_spaces['id']?"active":""; ?>" onclick="getBuildingFloorSpacesPopUp('<?php echo $abfs['id']; ?>')">
-                    <span class="text-info f-14 f-w-700"><?php echo $abfs['cabin_name']; ?></span>
+                    <span class="text-info f-14 f-w-700"><?php echo __($abfs['cabin_name']); ?></span>
                 </button>
             </li>
             <?php } ?>
@@ -266,22 +266,22 @@ foreach($equipments_res as $etr){
     <?php } ?>
     <div class="row mt-4">
         <div class="col-lg-1">
-            <span class="form-label">Left (%)</span>
+            <span class="form-label"><?php echo __('Left (%)'); ?></span>
         </div>
         <div class="col-lg-1">
-            <span class="form-label">Top (%)</span>
+            <span class="form-label"><?php echo __('Top (%)'); ?></span>
         </div>
         <div class="col-lg-2">
-            <span class="form-label">Equipment Categories</span>
+            <span class="form-label"><?php echo __('Equipment Categories'); ?></span>
         </div>
         <div class="col-lg-2">
-            <span class="form-label">Equipment Type</span>
+            <span class="form-label"><?php echo __('Equipment Type'); ?></span>
         </div>
         <div class="col-lg-2">
-            <span class="form-label">Equipment</span>
+            <span class="form-label"><?php echo __('Equipment'); ?></span>
         </div>
         <div class="col-lg-2">
-            <span class="form-label">Employee</span>
+            <span class="form-label"><?php echo __('Employee'); ?></span>
         </div>
     </div>
     <div id="newrowadd">
@@ -325,43 +325,43 @@ foreach($equipments_res as $etr){
     ?>
         <div class="row mt-2">
             <div class="col-lg-1">
-                <span id="error_left_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none">Required</span>
-                <input aria-label="Input field" class="form-control" type="text" id="left_<?php echo $cabincnt; ?>"  value="<?php echo $ealloc['left_size']; ?>" readonly>
+                <span id="error_left_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none"><?php echo __('Required'); ?></span>
+                <input aria-label="<?php echo __('Input field'); ?>" class="form-control" type="text" id="left_<?php echo $cabincnt; ?>"  value="<?php echo $ealloc['left_size']; ?>" readonly>
             </div>
             <div class="col-lg-1">
-                <span id="error_top_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none">Required</span>
-                <input aria-label="Input field" class="form-control" type="text" id="top_<?php echo $cabincnt; ?>"  value="<?php echo $ealloc['top_size']; ?>" readonly>
+                <span id="error_top_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none"><?php echo __('Required'); ?></span>
+                <input aria-label="<?php echo __('Input field'); ?>" class="form-control" type="text" id="top_<?php echo $cabincnt; ?>"  value="<?php echo $ealloc['top_size']; ?>" readonly>
             </div>
             <div class="col-lg-2 w-full all_edit_field space_edit_field_<?php echo $cabincnt; ?> <?php echo $event_disabled; ?>">
-                 <span id="error_equipment_category_id_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none">Required</span>
-                <select aria-label="Select option" class="js-example-basic-single" id="equipment_category_id_<?php echo $cabincnt; ?>" onchange="getEquipmentCategorie('<?php echo $cabincnt; ?>')">
-                    <option value=''>Select Any One </option>
+                 <span id="error_equipment_category_id_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none"><?php echo __('Required'); ?></span>
+                <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single" id="equipment_category_id_<?php echo $cabincnt; ?>" onchange="getEquipmentCategorie('<?php echo $cabincnt; ?>')">
+                    <option value=''><?php echo __('Select Any One'); ?> </option>
                     <?php foreach($equipment_categories as $eqcat){ ?>
-                    <option value="<?php echo $eqcat['id']; ?>" <?php echo $ealloc['equipment_category_id']==$eqcat['id']?"selected":""; ?>><?php echo $eqcat['category_name']; ?></option>
+                    <option value="<?php echo $eqcat['id']; ?>" <?php echo $ealloc['equipment_category_id']==$eqcat['id']?"selected":""; ?>><?php echo __($eqcat['category_name']); ?></option>
                     <?php } ?>
                 </select>
             </div>
             <div class="col-lg-2 w-full all_edit_field space_edit_field_<?php echo $cabincnt; ?> <?php echo $event_disabled; ?>">
-                <span id="error_equipment_type_id_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none">Required</span>
-                <select aria-label="Select option" class="js-example-basic-single" id="equipment_type_id_<?php echo $cabincnt; ?>" onchange="getEquipmentType('<?php echo $cabincnt; ?>')">
-                    <option value=''>Select Any One </option>
+                <span id="error_equipment_type_id_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none"><?php echo __('Required'); ?></span>
+                <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single" id="equipment_type_id_<?php echo $cabincnt; ?>" onchange="getEquipmentType('<?php echo $cabincnt; ?>')">
+                    <option value=''><?php echo __('Select Any One'); ?> </option>
                     <?php foreach($equipment_types[$ealloc['equipment_category_id']] as $stytpe){
                         if($ealloc['equipment_type_id']==$stytpe['id']){
                             $empselect = $stytpe['seating_equipment'];
                         }
                      ?>
-                    <option value="<?php echo $stytpe['id']; ?>" <?php echo $ealloc['equipment_type_id']==$stytpe['id']?"selected":""; ?>><?php echo $stytpe['equipment_types_name']; ?></option>
+                    <option value="<?php echo $stytpe['id']; ?>" <?php echo $ealloc['equipment_type_id']==$stytpe['id']?"selected":""; ?>><?php echo __($stytpe['equipment_types_name']); ?></option>
                     <?php } ?>
                 </select>
             </div>
             <div class="col-lg-2 w-full all_edit_field space_edit_field_<?php echo $cabincnt; ?> <?php echo $event_disabled; ?>">
-                <span id="error_equipment_id_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none">Required</span>
-                <select aria-label="Select option" class="js-example-basic-single" id="equipment_id_<?php echo $cabincnt; ?>" >
-                    <option value=''>Select Any One </option>
+                <span id="error_equipment_id_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none"><?php echo __('Required'); ?></span>
+                <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single" id="equipment_id_<?php echo $cabincnt; ?>" >
+                    <option value=''><?php echo __('Select Any One'); ?> </option>
                     <?php foreach($equipments[$ealloc['equipment_type_id']] as $stytpe){
 
                         ?>
-                    <option value="<?php echo $stytpe['id']; ?>" <?php echo $ealloc['equipment_id']==$stytpe['id']?"selected":""; ?>><?php echo $stytpe['equipment_name']; ?></option>
+                    <option value="<?php echo $stytpe['id']; ?>" <?php echo $ealloc['equipment_id']==$stytpe['id']?"selected":""; ?>><?php echo __($stytpe['equipment_name']); ?></option>
                     <?php } ?>
                 </select>
             </div>
@@ -369,10 +369,10 @@ foreach($equipments_res as $etr){
 
                 <div id="div_emp_id_<?php echo $cabincnt; ?>" <?php if($empselect == 'N'){ ?> style="display: none"; <?php
 } ?>>
-                    <select aria-label="Select option" class="js-example-basic-single" id="emp_id_<?php echo $cabincnt; ?>">
-                        <option value=''>Select Any One </option>
+                    <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single" id="emp_id_<?php echo $cabincnt; ?>">
+                        <option value=''><?php echo __('Select Any One'); ?> </option>
                         <?php foreach($employees as $emp){ ?>
-                        <option value="<?php echo $emp['id']; ?>" <?php echo $ealloc['emp_id']==$emp['id']?"selected":""; ?>><?php echo $emp['display_name']; ?></option>
+                        <option value="<?php echo $emp['id']; ?>" <?php echo $ealloc['emp_id']==$emp['id']?"selected":""; ?>><?php echo __($emp['display_name']); ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -380,12 +380,12 @@ foreach($equipments_res as $etr){
             <div class="col-lg-2">
                 <input type="hidden" id="equipment_allocation_id_<?php echo $cabincnt; ?>" value="<?php echo $ealloc['id']; ?>">
 
-                 <span class="all_save_btn cursor-pointer" id="save_btn_<?php echo $cabincnt; ?>" onclick="submitEquipmentAllocations('<?php echo $cabincnt; ?>')" <?php echo $savebtncss; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Save" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-save "></i>  Save</span>
-                <span class=" all_edit_btn cursor-pointer" id="edit_btn_<?php echo $cabincnt; ?>" onclick="editEquipmentAllocations('<?php echo $cabincnt; ?>')" <?php echo $editbtncss; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Edit" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-edit "></i>  Edit</span>
+                 <span class="all_save_btn cursor-pointer" id="save_btn_<?php echo $cabincnt; ?>" onclick="submitEquipmentAllocations('<?php echo $cabincnt; ?>')" <?php echo $savebtncss; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Save'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-save "></i>  <?php echo __('Save'); ?></span>
+                <span class=" all_edit_btn cursor-pointer" id="edit_btn_<?php echo $cabincnt; ?>" onclick="editEquipmentAllocations('<?php echo $cabincnt; ?>')" <?php echo $editbtncss; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Edit'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-edit "></i>  <?php echo __('Edit'); ?></span>
 
                 <span id="equipment_allocation_btn_<?php echo $cabincnt; ?>" >
                     <?php if($ealloc['id']!=""){ ?>
-                        <span class="cursor-pointer text-danger"  onclick="removeEquipmentAllocations('<?php echo $ealloc['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-trash m-l-10"></i> Remove</span>
+                        <span class="cursor-pointer text-danger"  onclick="removeEquipmentAllocations('<?php echo $ealloc['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-trash m-l-10"></i> <?php echo __('Remove'); ?></span>
                     <?php } ?>
                 </span>
 
@@ -398,7 +398,7 @@ foreach($equipments_res as $etr){
     <input type="hidden" id="equipment_allocation_seq"  value="<?php echo $editableseq; ?>">
     <input type="hidden" id="max_seq_number"  value="<?php echo $cabincnt; ?>">
     <?php if($_POST['transaction_type']!="AS" && $_REQUEST['eaid'] =="" && $_REQUEST['eq_id'] =="" && $_REQUEST['emp_id'] ==""){ ?>
-        <button class="btn btn-success m-t-20" id="addRows" type="button" onclick="addMoreEquipmentAllocations()"><i class="fa fa-plus m-r-5"></i>Add More Equipment</button>
+        <button class="btn btn-success m-t-20" id="addRows" type="button" onclick="addMoreEquipmentAllocations()"><i class="fa fa-plus m-r-5"></i><?php echo __('Add More Equipment'); ?></button>
     <?php } ?>
 
 <div class="row mt-5">
@@ -408,7 +408,7 @@ foreach($equipments_res as $etr){
         $cabincnt = 0;
         foreach($equipment_allocations as $ealloc){  $cabincnt++;
             ?>
-            <div id="position_<?php echo $cabincnt; ?>" class="equipment-allocation-icon " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $cabincnt; ?> Seat" style="top: <?php echo $ealloc['top_size']; ?>%; left: <?php echo $ealloc['left_size']; ?>%;"><?php echo $cabincnt; ?></div>
+            <div id="position_<?php echo $cabincnt; ?>" class="equipment-allocation-icon " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $cabincnt; ?> <?php echo __('Seat'); ?>" style="top: <?php echo $ealloc['top_size']; ?>%; left: <?php echo $ealloc['left_size']; ?>%;"><?php echo $cabincnt; ?></div>
         <?php } ?>
         <?php
         $cabincnt = 0;

@@ -28,28 +28,28 @@ $projec_phases = $data['phases'];
 
 </script>
 <div class="modal-header">
-    <h5 class="modal-title"> Add General Code </h5>
-    <button type="button" class="btn-close " data-dismiss="alert "  data-dismiss="modal"  aria-label="Close"></button>
+    <h5 class="modal-title"> <?php echo __('Add General Code'); ?> </h5>
+    <button type="button" class="btn-close " data-dismiss="alert "  data-dismiss="modal"  aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body">
     <form class="kt-form " id="submitgeneralcodefromall" >
         <div class="row col-lg-12">
             <div class="form-group col-lg-6">
-                <span class=""> General Code</span>
-                <input aria-label="Genc Code" class="form-control" type="text" id="genc_code" name="genc_code" value="">
+                <span class=""> <?php echo __('General Code'); ?></span>
+                <input aria-label="<?php echo __('Genc Code'); ?>" class="form-control" type="text" id="genc_code" name="genc_code" value="">
             </div>
             <div class="form-group col-lg-6">
-                <span class=""> General Code Name</span>
-                <input aria-label="Genc Name" class="form-control" type="text" id="genc_name" name="genc_name" value="">
+                <span class=""> <?php echo __('General Code Name'); ?></span>
+                <input aria-label="<?php echo __('Genc Name'); ?>" class="form-control" type="text" id="genc_name" name="genc_name" value="">
             </div>
             <div class="form-group col-lg-6">
-                <span class="">Descrption</span>
-                <textarea aria-label="Description" class="form-control" name="description" id="description"></textarea>
+                <span class=""><?php echo __('Descrption'); ?></span>
+                <textarea aria-label="<?php echo __('Description'); ?>" class="form-control" name="description" id="description"></textarea>
             </div>
         </div>
         <div class="modal-footer">
 
-            <button type="button" class="btn btn-primary mr-2" onclick="submitgeneralcodefrom()" >Submit</button>
+            <button type="button" class="btn btn-primary mr-2" onclick="submitgeneralcodefrom()" ><?php echo __('Submit'); ?></button>
         </div>
     </form>
 </div>

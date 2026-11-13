@@ -221,7 +221,7 @@ function addMoreInvester(maxrows,new_invesert_id,new_invesert_name,new_invesert_
     antcss = 'style="display:block"';
     antinfocss = 'style="display:none"';
 }
-html +='<div class="form-group col-lg-1 p-t-15 text-center" '+antinfocss+'><i class="fa fa-info-circle f-22" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="ESOP Not Allowed Anti Dilution" ></i></div>';
+html +='<div class="form-group col-lg-1 p-t-15 text-center" '+antinfocss+'><i class="fa fa-info-circle f-22" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('ESOP Not Allowed Anti Dilution') ?>" ></i></div>';
 
 html += '<div class="form-group col-lg-1 p-t-15 text-center" '+antcss+'><input type="hidden" name="dilution_seq[]" value="'+new_invesert_id+'"><button type="button" onclick="dilutionCheck('+new_invesert_id+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" class="btn p-0 border-0 bg-transparent"><input aria-label="Dilution[" class="js-primary-sm-'+maxrows+'" type="checkbox" name="dilution['+new_invesert_id+']" value="0"  id="dilution_'+new_invesert_id+'"></button></div>';
 
@@ -418,7 +418,7 @@ function calculateDistributionQTY(){
         <div class="col-lg-3">
             <div class="card">
                 <div class="card-header">
-                    <h5>Company Valuation</h5>
+                    <h5><?= __('Company Valuation') ?></h5>
                     <div class="card-header-right table-card-header">
 
               </div>
@@ -479,19 +479,19 @@ function calculateDistributionQTY(){
             <span id="valuation_shareholding_error" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <span class="form-label">New Share To Be Issue To The New Investor Including Esop</span>
+            <span class="form-label"><?= __('New Share To Be Issue To The New Investor Including Esop') ?></span>
             <input aria-label="New Share Qty" type="number" class="form-control text-right" name="new_share_qty" id="new_share_qty" onblur="calculateShareQTY()" value="<?php echo $companyval['new_share_qty']; ?>" readonly>
         </div>
         <div class="form-group col-lg-6">
-            <span class="form-label">Total Share</span>
+            <span class="form-label"><?= __('Total Share') ?></span>
             <input aria-label="Total Share Qty" type="text" class="form-control text-right" name="total_share_qty" readonly="" id="total_share_qty" value="<?php echo $companyval['total_share_qty']; ?>">
         </div>
         <div class="form-group col-lg-6">
-            <span class="form-label">Per Share Value</span>
+            <span class="form-label"><?= __('Per Share Value') ?></span>
             <input aria-label="Per Share Value" type="text" class="form-control text-right autonumber" name="per_share_value" value="<?php echo $companyval['per_share_value']; ?>" id="per_share_value" data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>" readonly>
         </div>
         <div class="form-group">
-            <span class="form-label">Notes</span>
+            <span class="form-label"><?= __('Notes') ?></span>
             <textarea aria-label="Notes" class="form-control" name="notes"><?php echo $companyval['notes']; ?></textarea>
         </div>
     </div>
@@ -499,9 +499,9 @@ function calculateDistributionQTY(){
         <input type="hidden" name="rid" value="<?php echo $rid; ?>">
         <input type="hidden" name="submitcompanyvaluations">
         <?php if($rid ==""){ ?>
-         <button type="button" class="btn btn-primary waves-effect waves-light" name="submitcompanyvaluations" onclick="formSubmit()"><i class="fa fa-check m-r-10"></i>Submit</button>
+         <button type="button" class="btn btn-primary waves-effect waves-light" name="submitcompanyvaluations" onclick="formSubmit()"><i class="fa fa-check m-r-10"></i><?= __('Submit') ?></button>
      <?php }else{ ?>
-        <button type="button" class="btn btn-primary waves-effect waves-light" name="submitcompanyvaluations" onclick="formSubmit()"><i class="fa fa-check m-r-10"></i>Update</button>
+        <button type="button" class="btn btn-primary waves-effect waves-light" name="submitcompanyvaluations" onclick="formSubmit()"><i class="fa fa-check m-r-10"></i><?= __('Update') ?></button>
     <?php } ?>
 
 
@@ -513,7 +513,7 @@ function calculateDistributionQTY(){
 <div class="col-lg-9" >
     <div class="card">
         <div class="card-header">
-          <h5>CAP Table</h5>
+          <h5><?= __('CAP Table') ?></h5>
           <div class="card-header-right">
             <a href="index.php?option=COM_INSERT_COMPANY_CONTRIBUTION_USERS" class="btn btn-success mb-2 desktop-view m-r-10" ><i class="icofont icofont-plus icon-white "></i> Contributors </a>
         </div>
@@ -646,7 +646,7 @@ function calculateDistributionQTY(){
       </span>
   </div>
   <div class="form-group col-lg-1 p-t-15 text-center" <?php echo $antinfocss; ?>>
-     <i class="fa fa-info-circle f-22" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="ESOP Not Allowed Anti Dilution" ></i>
+     <i class="fa fa-info-circle f-22" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('ESOP Not Allowed Anti Dilution') ?>" ></i>
 
  </div>
 
@@ -712,17 +712,17 @@ function calculateDistributionQTY(){
                         <span class="text-danger" id="error_msg"></span>
                         <div class="col-lg-3 done_panel w-full" style="display: none">
                             <select aria-label="New Invesert" id="new_invesert_id" class="form-control form-select js-example-basic-single" >
-                              <option value="">Select Any One </option>
+                              <option value=""><?= __('Select Any One') ?></option>
                               <?php foreach($company_contribution_users as $ccu ) {  ?>
                                 <option value="<?php echo $ccu['id']."-".$ccu['display_name']."-".$contributionutype[$ccu['user_type']];?>" <?php echo (in_array($ccu['id'], $alreadyselectuser))?"disabled":""; ?>><?php echo $ccu['display_name'];?></option>
                             <?php } ?>
-                            <option value="E">Add ESOP</option>
+                            <option value="E"><?= __('Add ESOP') ?></option>
                         </select>
                     </div>
 
-                    <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-2 done_panel" onclick="creatInvestor()"style="display: none"><i class="fa fa-check m-r-10 " ></i>Add</button>
+                    <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-2 done_panel" onclick="creatInvestor()"style="display: none"><i class="fa fa-check m-r-10 " ></i><?= __('Add') ?></button>
 
-                    <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-2" id="addmore_btn" onclick="addMore()"><i class="fa fa-check m-r-10"></i>Add More</button>
+                    <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-2" id="addmore_btn" onclick="addMore()"><i class="fa fa-check m-r-10"></i><?= __('Add More') ?></button>
                 </div>
                 <span class="float-end">
                     <span class="text-danger">Un-Allocated (%) : </span>
@@ -739,7 +739,7 @@ function calculateDistributionQTY(){
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h5>Valuations</h5>
+                <h5><?= __('Valuations') ?></h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive custom-nowrap">
@@ -751,7 +751,7 @@ function calculateDistributionQTY(){
                             <?php } ?>
                         </tr>
                         <tr>
-                            <th scope="col">Valuation Name</th>
+                            <th scope="col"><?= __('Valuation Name') ?></th>
                             <?php foreach($companyvaluationyearly as $cval){
                                 foreach($cval as $valuse){ ?>
                                     <th scope="col" class="text-center"><?php echo $valuse['valuation_name']; ?></th>
@@ -759,7 +759,7 @@ function calculateDistributionQTY(){
                                 <?php } ?>
                             </tr>
                             <tr>
-                                <th scope="col">Valuation Date</th>
+                                <th scope="col"><?= __('Valuation Date') ?></th>
                                 <?php foreach($companyvaluationyearly as $cval){
                                     foreach($cval as $valuse){ ?>
                                         <th scope="col" class="text-center"><?php echo fromDate($valuse['valuation_date']); ?></th>
@@ -767,7 +767,7 @@ function calculateDistributionQTY(){
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Company Value</th>
+                                    <th scope="col"><?= __('Company Value') ?></th>
                                     <?php foreach($companyvaluationyearly as $cval){
                                         foreach($cval as $valuse){ ?>
                                             <th scope="col" class="text-right"><?php echo customeummarmonyformateifine($valuse['company_value']); ?></th>
@@ -775,7 +775,7 @@ function calculateDistributionQTY(){
                                         <?php } ?>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Number of Share at the time of Valuation</th>
+                                        <th scope="col"><?= __('Number of Share at the time of Valuation') ?></th>
                                         <?php foreach($companyvaluationyearly as $cval){
                                             foreach($cval as $valuse){ ?>
                                                 <th scope="col" class="text-right"><?php echo $valuse['old_share_qty']; ?></th>
@@ -783,7 +783,7 @@ function calculateDistributionQTY(){
                                             <?php } ?>
                                         </tr>
                                         <tr>
-                                            <th scope="col">Valuation for % of shareholding including Convertible Pref Shares if any</th>
+                                            <th scope="col"><?= __('Valuation for % of shareholding including Convertible Pref Shares if any') ?></th>
                                             <?php foreach($companyvaluationyearly as $cval){
                                                 foreach($cval as $valuse){ ?>
                                                     <th scope="col" class="text-right"><?php echo $valuse['valuation_shareholding']; ?></th>
@@ -791,7 +791,7 @@ function calculateDistributionQTY(){
                                                 <?php } ?>
                                             </tr>
                                             <tr>
-                                                <th scope="col">New total Number of share</th>
+                                                <th scope="col"><?= __('New total Number of share') ?></th>
                                                 <?php foreach($companyvaluationyearly as $cval){
                                                     foreach($cval as $valuse){ ?>
                                                         <th scope="col" class="text-right"><?php echo $valuse['new_share_qty']; ?></th>
@@ -799,7 +799,7 @@ function calculateDistributionQTY(){
                                                     <?php } ?>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="col">New share to be issue to the new investor including ESOP</th>
+                                                    <th scope="col"><?= __('New share to be issue to the new investor including ESOP') ?></th>
                                                     <?php foreach($companyvaluationyearly as $cval){
                                                         foreach($cval as $valuse){ ?>
                                                             <th scope="col" class="text-right"><?php echo $valuse['total_share_qty']; ?></th>
@@ -807,7 +807,7 @@ function calculateDistributionQTY(){
                                                         <?php } ?>
                                                     </tr>
                                                     <tr>
-                                                        <th scope="col">Per Share Value</th>
+                                                        <th scope="col"><?= __('Per Share Value') ?></th>
                                                         <?php foreach($companyvaluationyearly as $cval){
                                                             foreach($cval as $valuse){ ?>
                                                                 <th scope="col" class="text-right"><?php echo customeummarmonyformateifine($valuse['per_share_value']); ?></th>

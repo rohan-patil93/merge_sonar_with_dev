@@ -34,12 +34,12 @@ if (count((array)$rows) > 0) {
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Document Name</th>
-                <th scope="col">Document Type</th>
-                <th scope="col">Files</th>
-                <th scope="col">Status</th>
-                <th scope="col">Created Date</th>
-                <th scope="col">View</th>
+                <th scope="col"><?= __('Document Name') ?></th>
+                <th scope="col"><?= __('Document Type') ?></th>
+                <th scope="col"><?= __('Files') ?></th>
+                <th scope="col"><?= __('Status') ?></th>
+                <th scope="col"><?= __('Created Date') ?></th>
+                <th scope="col"><?= __('View') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -71,7 +71,7 @@ if (count((array)$rows) > 0) {
                     $statusColor = '#fff';
                 }
                 if ($statusName == '') {
-                    $statusName = 'Status ' . $curStatus;
+                    $statusName = __('Status') . ' ' . $curStatus;
                 }
             ?>
             <tr>
@@ -82,13 +82,13 @@ if (count((array)$rows) > 0) {
                 <td>
                     <label class="form-label label label-md"
                         style="background:<?php echo $statusBg; ?>; color:<?php echo $statusColor; ?>; border-color:<?php echo $statusBg; ?>;">
-                        <?php echo htmlspecialchars($statusName); ?>
+                        <?php echo htmlspecialchars(__($statusName)); ?>
                     </label>
                 </td>
                 <td><?php echo htmlspecialchars($createdDate); ?></td>
                 <td>
                     <a href="index.php?option=COM_INSERT_DOCUMENT_MANAGEMENT&Rid=<?php echo urlencode($rid); ?>"
-                       title="View" class="btn btn-info btn-sm">
+                       title="<?= __('View') ?>" class="btn btn-info btn-sm">
                         <i class="icofont icofont-eye-alt"></i>
                     </a>
                 </td>
@@ -102,7 +102,7 @@ if (count((array)$rows) > 0) {
 </div>
 <?php } else { ?>
 <div class="card-px text-center py-20 mt-2">
-    <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> No Documents Found</p>
+    <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> <?= __('No Documents Found') ?></p>
     <div class="text-center px-4">
         <img class="mw-100 " style="max-height: 400px;" alt="" src="assets/images/work.png">
     </div>

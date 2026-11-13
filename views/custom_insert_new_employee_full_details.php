@@ -1,11 +1,11 @@
 <?php
     $allviews = array(
-    'EMP'=>array('name'=>'Employee','page'=>'custom_insert_employe_details','icon'=>'ti-user','type'=>'N'),
-    'SAL'=> array('name'=>'Salary','page'=>'custom_insert_salary','icon'=>'ti-money','type'=>'N'),
-    'ATT'=> array('name'=>'Attendance','page'=>'custom_view_employe_attendance','icon'=>'ti-calendar','type'=>'N'),
-    'LEA'=> array('name'=>'Leave','page'=>'custom_view_employe_leave','icon'=>'ti-rocket','type'=>'N'),
-    'PAR'=>array('name'=>'Payroll','page'=>'custom_link_employe_payroll','icon'=>'ti-user','type'=>'N'),
-    'UMA'=> array('name'=>'User & Manager','page'=>'custom_link_employe_user','icon'=>'ti-link','type'=>'N')
+    'EMP'=>array('name'=>__('Employee'),'page'=>'custom_insert_employe_details','icon'=>'ti-user','type'=>'N'),
+    'SAL'=> array('name'=>__('Salary'),'page'=>'custom_insert_salary','icon'=>'ti-money','type'=>'N'),
+    'ATT'=> array('name'=>__('Attendance'),'page'=>'custom_view_employe_attendance','icon'=>'ti-calendar','type'=>'N'),
+    'LEA'=> array('name'=>__('Leave'),'page'=>'custom_view_employe_leave','icon'=>'ti-rocket','type'=>'N'),
+    'PAR'=>array('name'=>__('Payroll'),'page'=>'custom_link_employe_payroll','icon'=>'ti-user','type'=>'N'),
+    'UMA'=> array('name'=>__('User & Manager'),'page'=>'custom_link_employe_user','icon'=>'ti-link','type'=>'N')
 
     );
     $PR = $_GET['PR'] !="" ? $_GET['PR'] : 'EMP';

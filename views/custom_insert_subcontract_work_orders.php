@@ -40,7 +40,7 @@ $apires = callAPI($url);
 $result = json_decode($apires, 1);
 
 if(!$result){
-    $error_message = "Failed to load data. Please try again.";
+    $error_message = __('Failed to load data. Please try again.');
     $vendors = array();
     $warehouses = array('OWN' => array(), 'VEN' => array());
     $items = array();
@@ -62,7 +62,7 @@ if(!$result){
 <?php if ($error_message != '') { ?>
     <div class="alert alert-danger background-danger alert-dismissible">
         <strong><?php echo $error_message; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
     </div>
 <?php } ?>
 
@@ -88,7 +88,7 @@ if(!$result){
     }
         ?>
     <div class="card-header table-card-header">
-        <h5> Subcontract Work Order</h5>
+        <h5> <?php echo __('Subcontract Work Order'); ?></h5>
         <div class="card-header-right table-card-header ">
             <?php
                 echo $workflowsteps['workflow_btn'];
@@ -96,7 +96,7 @@ if(!$result){
 
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -104,44 +104,44 @@ if(!$result){
         <?php  echo $workflowsteps['breadcrumb']; ?>
          <div class="row">
             <div class="form-group col-lg-4">
-                <span class="form-label">Work Order No</span>
-                <input aria-label="Transaction Number" type="text" class="form-control" name="transaction_number" value="<?php echo !empty($subcontract_work_order['transaction_number']) ? $subcontract_work_order['transaction_number'] : ''; ?>" readonly>
+                <span class="form-label"><?php echo __('Work Order No'); ?></span>
+                <input aria-label="<?php echo __('Transaction Number'); ?>" type="text" class="form-control" name="transaction_number" value="<?php echo !empty($subcontract_work_order['transaction_number']) ? $subcontract_work_order['transaction_number'] : ''; ?>" readonly>
             </div>
             <div class="form-group col-lg-4">
-                <span class="form-label">Work Order Date<span class="text-danger">*</span></span>
-                <input aria-label="Transaction Date" type="text" class="form-control datepicker" name="transaction_date" value="<?php echo $subcontract_work_order['transaction_date'] != "" ? $subcontract_work_order['transaction_date'] : fromDate(); ?>" required>
+                <span class="form-label"><?php echo __('Work Order Date'); ?><span class="text-danger">*</span></span>
+                <input aria-label="<?php echo __('Transaction Date'); ?>" type="text" class="form-control datepicker" name="transaction_date" value="<?php echo $subcontract_work_order['transaction_date'] != "" ? $subcontract_work_order['transaction_date'] : fromDate(); ?>" required>
             </div>
             <div class="form-group col-lg-4">
-                <span class="form-label">Warehouse<span class="text-danger">*</span></span>
-                <select aria-label="Request Warehouse" name="request_warehouse_id" class="form-control form-select js-example-basic-single" required>
-                    <option value="">Select Any One </option>
+                <span class="form-label"><?php echo __('Warehouse'); ?><span class="text-danger">*</span></span>
+                <select aria-label="<?php echo __('Request Warehouse'); ?>" name="request_warehouse_id" class="form-control form-select js-example-basic-single" required>
+                    <option value=""><?php echo __('Select Any One'); ?> </option>
                     <?php foreach($warehouses['OWN'] as $wareh){  ?>
                          <option value="<?php echo $wareh['id']; ?>" <?php echo $subcontract_work_order['request_warehouse_id'] == $wareh['id']?"selected":""; ?>><?php echo $wareh['warehouse_name']; ?></option>
                     <?php } ?>
                 </select>
             </div>
             <div class="form-group col-lg-4">
-                <span class="form-label">Sub Contractor <span class="text-danger">*</span></span>
-                <select aria-label="Party" name="party_id" class="form-control form-select js-example-basic-single OnChangeSelectpaty" required>
-                    <option value="">Select Any One </option>
+                <span class="form-label"><?php echo __('Sub Contractor'); ?> <span class="text-danger">*</span></span>
+                <select aria-label="<?php echo __('Party'); ?>" name="party_id" class="form-control form-select js-example-basic-single OnChangeSelectpaty" required>
+                    <option value=""><?php echo __('Select Any One'); ?> </option>
                     <?php foreach($vendors as $ven){  ?>
                          <option value="<?php echo $ven['id']; ?>" <?php echo $subcontract_work_order['party_id'] == $ven['id']?"selected":""; ?>><?php echo $ven['company']; ?></option>
                     <?php } ?>
                 </select>
             </div>
             <div class="form-group col-lg-4">
-                <span class="form-label">Sub Contractor Warehouse<span class="text-danger">*</span></span>
-                <select aria-label="Party Warehouse" name="party_warehouse_id" id="party_warehouse_id" class="form-control form-select js-example-basic-single" required>
-                    <option value="">Select Any One </option>
+                <span class="form-label"><?php echo __('Sub Contractor Warehouse'); ?><span class="text-danger">*</span></span>
+                <select aria-label="<?php echo __('Party Warehouse'); ?>" name="party_warehouse_id" id="party_warehouse_id" class="form-control form-select js-example-basic-single" required>
+                    <option value=""><?php echo __('Select Any One'); ?> </option>
                     <?php foreach($warehouses['VEN'] as $wareh){  ?>
                          <option value="<?php echo $wareh['id']; ?>" <?php echo $subcontract_work_order['party_warehouse_id'] == $wareh['id']?"selected":""; ?>><?php echo $wareh['warehouse_name']; ?></option>
                     <?php } ?>
                 </select>
             </div>
             <div class="col-md-4 w-full">
-                <span  class="form-label d-block">Product <span class="text-danger">*</span></span>
-                <select aria-label="Product" class="js-example-basic-single selectWorkoOderItemID" name="product_id" id="product_id"   required>
-                    <option value="">Select Any one</option>
+                <span  class="form-label d-block"><?php echo __('Product'); ?> <span class="text-danger">*</span></span>
+                <select aria-label="<?php echo __('Product'); ?>" class="js-example-basic-single selectWorkoOderItemID" name="product_id" id="product_id"   required>
+                    <option value=""><?php echo __('Select Any one'); ?></option>
                     <?php
                         foreach ($items as $item){
                             if($item['stocking_type'] == "F" || $item['stocking_type'] == "W"){
@@ -153,25 +153,25 @@ if(!$result){
                 </select>
             </div>
             <div class="col-md-4 form-group ">
-                <span class="form-label">Quantity <span class="text-danger">*</span></span>
-                <input aria-label="Work Order Item Qty" type="number" class="form-control text-end" id="work_order_item_qty" name="work_order_item_qty" min="1"
+                <span class="form-label"><?php echo __('Quantity'); ?> <span class="text-danger">*</span></span>
+                <input aria-label="<?php echo __('Work Order Item Qty'); ?>" type="number" class="form-control text-end" id="work_order_item_qty" name="work_order_item_qty" min="1"
                        value="<?php echo $subcontract_work_order['work_order_item_qty'] != "" ? $subcontract_work_order['work_order_item_qty'] : 1; ?>"  required>
             </div>
             <div class="col-md-4 form-group">
-                <span class="form-label">Price <span class="text-danger">*</span></span>
-                <input aria-label="Work Order Item Price" type="number" class="form-control text-end" id="work_order_item_price" name="work_order_item_price" min="0" step="0.01"
+                <span class="form-label"><?php echo __('Price'); ?> <span class="text-danger">*</span></span>
+                <input aria-label="<?php echo __('Work Order Item Price'); ?>" type="number" class="form-control text-end" id="work_order_item_price" name="work_order_item_price" min="0" step="0.01"
                        value="<?php echo $subcontract_work_order['work_order_item_price'] != "" ? $subcontract_work_order['work_order_item_price'] : 0; ?>" required>
             </div>
             <div class="col-md-4 form-group">
-                <span class="form-label">Total Amount</span>
-                <input aria-label="Work Order Total Amount" type="number" class="form-control text-end" id="work_order_total_amount" name="work_order_total_amount" min="0" step="0.01"
+                <span class="form-label"><?php echo __('Total Amount'); ?></span>
+                <input aria-label="<?php echo __('Work Order Total Amount'); ?>" type="number" class="form-control text-end" id="work_order_total_amount" name="work_order_total_amount" min="0" step="0.01"
                        value="<?php echo $subcontract_work_order['work_order_total_amount'] != "" ? $subcontract_work_order['work_order_total_amount'] : 0; ?>" readonly>
             </div>
 
             <div class="col-md-4 form-group w-full">
-                <span class="form-label d-block"> BOM </span>
-                <select aria-label="Manufacturing Bom" class="js-example-basic-single item-selection selectmanufacturingBOM" name="manufacturing_bom_id" id="manufacturing_bom_id" >
-                    <option value="">Select Any one</option>
+                <span class="form-label d-block"> <?php echo __('BOM'); ?> </span>
+                <select aria-label="<?php echo __('Manufacturing Bom'); ?>" class="js-example-basic-single item-selection selectmanufacturingBOM" name="manufacturing_bom_id" id="manufacturing_bom_id" >
+                    <option value=""><?php echo __('Select Any one'); ?></option>
                 </select>
             </div>
 
@@ -185,7 +185,7 @@ if(!$result){
         <div class="row mt-4">
             <div class="col-md-12 text-left">
                 <button type="submit" class="btn btn-primary" name="sbt_subcontractworkorders" <?php echo $disable; ?>>
-                    <i class="la la-check"></i> Submit
+                    <i class="la la-check"></i> <?php echo __('Submit'); ?>
                 </button>
             </div>
         </div>
@@ -210,12 +210,12 @@ function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,nex
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: "Please note the status of the document will change to "+new_status_name,
+            text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
             type: "info",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+            cancelButtonText: <?php echo json_encode(__('No')); ?>,
             closeOnConfirm: false
         },
         function(){
@@ -242,12 +242,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...')); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });

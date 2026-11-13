@@ -58,27 +58,27 @@ var mk = 1000;
             maxrows = maxrows+1;
             mk= mk+1;
         var htmlrows = '<tr id="deleteid_'+maxrows+'">';
-        htmlrows += '<td class="p-0"><input aria-label="Bucket Name[]" type="text" class="form-control border-0 box-shadow-0" placeholder="" name="bucket_name[]" required></td>';
-        htmlrows += '<td class="p-0" style="text-align: right;"><input aria-label="Grant Price[]" type="text" class="form-control border-0 text-right box-shadow-0"  name="grant_price[]" id="grant_price_'+maxrows+'" value="'+share_price_at_grant_time+'" readonly required></td>';
-        htmlrows += ' <td class="p-0"><input aria-label="Discount[]" type="text" class="form-control border-0 text-right box-shadow-0"  name="discount[]" id="discount_'+maxrows+'" onblur="calculateBucketValue('+maxrows+')" required></td>';
-        htmlrows += '<td class="p-0" id="custom-popup"><input aria-label="Expected Option Benefit[]" type="text" class="form-control border-0 text-right box-shadow-0"  name="expected_option_benefit[]" id="expected_option_benefit_'+maxrows+'" readonly required>';
+        htmlrows += '<td class="p-0"><input aria-label="<?php echo __('Bucket Name[]'); ?>" type="text" class="form-control border-0 box-shadow-0" placeholder="" name="bucket_name[]" required></td>';
+        htmlrows += '<td class="p-0" style="text-align: right;"><input aria-label="<?php echo __('Grant Price[]'); ?>" type="text" class="form-control border-0 text-right box-shadow-0"  name="grant_price[]" id="grant_price_'+maxrows+'" value="'+share_price_at_grant_time+'" readonly required></td>';
+        htmlrows += ' <td class="p-0"><input aria-label="<?php echo __('Discount[]'); ?>" type="text" class="form-control border-0 text-right box-shadow-0"  name="discount[]" id="discount_'+maxrows+'" onblur="calculateBucketValue('+maxrows+')" required></td>';
+        htmlrows += '<td class="p-0" id="custom-popup"><input aria-label="<?php echo __('Expected Option Benefit[]'); ?>" type="text" class="form-control border-0 text-right box-shadow-0"  name="expected_option_benefit[]" id="expected_option_benefit_'+maxrows+'" readonly required>';
 
         htmlrows += '<div class="custom-popup-open open-popup-'+maxrows+' text-start" style="display: none; width: 500px;">';
         htmlrows += '<div class="card">';
-        htmlrows += '<div class="card-header"><h5>Vesting Schedule</h5><div class="card-header-right"><button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div></div>';
-        htmlrows += '<div class="card-body" id="addmorediv-'+maxrows+'"><div class="row"><div class="form-group col-lg-4"><span >Date</span></div><div class="form-group col-lg-3"><span >Percentage(%)</span></div><div class="form-group col-lg-4"><span >Till Date</span></div></div>';
+        htmlrows += '<div class="card-header"><h5><?php echo __('Vesting Schedule'); ?></h5><div class="card-header-right"><button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div></div>';
+        htmlrows += '<div class="card-body" id="addmorediv-'+maxrows+'"><div class="row"><div class="form-group col-lg-4"><span ><?php echo __('Date'); ?></span></div><div class="form-group col-lg-3"><span ><?php echo __('Percentage(%)'); ?></span></div><div class="form-group col-lg-4"><span ><?php echo __('Till Date'); ?></span></div></div>';
 
-        htmlrows += '<div class="row" id="deleteidvesting_'+mk+'"><div class="form-group col-lg-4"><input aria-label="Vesting Date[" type="text" class="form-control datepicker vesategdatpicker_'+maxrows+'" name="vesting_date['+maxrows+'][]" value="" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></div><div class="form-group col-lg-3"><input aria-label="Vesting Percentage[" type="number" class="form-control text-right vestingpercentage_'+maxrows+' vesategpercentage" name="vesting_percentage['+maxrows+'][]"  onblur="calculateVestingPercentage('+maxrows+')"></div><div class="form-group col-lg-4"><input aria-label="Till Date[" type="text" class="form-control datepicker vesategetilldate_'+maxrows+'" name="till_date['+maxrows+'][]" ></div><div class="form-group col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRowVestage('+mk+','+maxrows+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div>  </div></div>';
+        htmlrows += '<div class="row" id="deleteidvesting_'+mk+'"><div class="form-group col-lg-4"><input aria-label="<?php echo __('Vesting Date['); ?>" type="text" class="form-control datepicker vesategdatpicker_'+maxrows+'" name="vesting_date['+maxrows+'][]" value="" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></div><div class="form-group col-lg-3"><input aria-label="<?php echo __('Vesting Percentage['); ?>" type="number" class="form-control text-right vestingpercentage_'+maxrows+' vesategpercentage" name="vesting_percentage['+maxrows+'][]"  onblur="calculateVestingPercentage('+maxrows+')"></div><div class="form-group col-lg-4"><input aria-label="<?php echo __('Till Date['); ?>" type="text" class="form-control datepicker vesategetilldate_'+maxrows+'" name="till_date['+maxrows+'][]" ></div><div class="form-group col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRowVestage('+mk+','+maxrows+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div>  </div></div>';
 
 
-        htmlrows += '<div class="card-footer pt-0"><input type="hidden" name="vesting_schedule_seq[]" value="'+mk+'"><button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addMore('+mk+')"><i class="fa fa-check m-r-10"></i>Add More</button><button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="closePopUp()"> Done</button><span class="float-end m-t-20"> <span class="text-danger">Un-Schedule (%) : </span><span id="totaldistributionpending_'+maxrows+'">0</span><span class="text-warning m-l-20">Total (%) : </span><span id="totaldistributionqty_'+maxrows+'">0</span></span></div>';
+        htmlrows += '<div class="card-footer pt-0"><input type="hidden" name="vesting_schedule_seq[]" value="'+mk+'"><button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addMore('+mk+')"><i class="fa fa-check m-r-10"></i>Add More</button><button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="closePopUp()"> <?php echo __('Done'); ?></button><span class="float-end m-t-20"> <span class="text-danger"><?php echo __('Un-Schedule (%) :'); ?> </span><span id="totaldistributionpending_'+maxrows+'">0</span><span class="text-warning m-l-20"><?php echo __('Total (%) :'); ?> </span><span id="totaldistributionqty_'+maxrows+'">0</span></span></div>';
 
         htmlrows += '</div></div>';
         htmlrows += '</td>';
 
-        htmlrows += '<td class="p-0"><input aria-label="Options Granted[]" type="text" class="form-control border-0 text-right box-shadow-0 options_granted" name="options_granted[]" id="options_granted_'+maxrows+'" onblur="calculateBucketValue('+maxrows+')"></td>';
-        htmlrows += '<td class="p-0"><input aria-label="Total Discount[]" type="text" class="form-control border-0 text-right box-shadow-0"  name="total_discount[]" id="total_discount_'+maxrows+'" readonly></td>';
-        htmlrows +='<td class="p-0 text-center pt-2"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger mr-5" onclick="deletRow('+maxrows+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button><button type="button" class="btn p-0 border-0 bg-transparent ti-settings " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Vesting Schedule" onclick="openPopUp('+maxrows+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></td>';
+        htmlrows += '<td class="p-0"><input aria-label="<?php echo __('Options Granted[]'); ?>" type="text" class="form-control border-0 text-right box-shadow-0 options_granted" name="options_granted[]" id="options_granted_'+maxrows+'" onblur="calculateBucketValue('+maxrows+')"></td>';
+        htmlrows += '<td class="p-0"><input aria-label="<?php echo __('Total Discount[]'); ?>" type="text" class="form-control border-0 text-right box-shadow-0"  name="total_discount[]" id="total_discount_'+maxrows+'" readonly></td>';
+        htmlrows +='<td class="p-0 text-center pt-2"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger mr-5" onclick="deletRow('+maxrows+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button><button type="button" class="btn p-0 border-0 bg-transparent ti-settings " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Vesting Schedule'); ?>" onclick="openPopUp('+maxrows+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></td>';
         htmlrows += '</tr>';
         console.log(htmlrows);
         $("#bucketplans").append(htmlrows);
@@ -162,9 +162,9 @@ var maxrows = 1000;
     maxrows = maxrows+1;
     var html = '';
     html += '<div class="row" id="deleteidvesting__2"+maxrows+'">';
-    html += '<div class="form-group col-lg-4"><input aria-label="Vesting Date[" type="text" class="form-control datepicker vesategdatpicker_'+rowid+'" name="vesting_date['+rowid+'][]" ></div>';
-    html += '<div class="form-group col-lg-3"><input aria-label="Vesting Percentage[" type="number" class="form-control text-right vestingpercentage_'+rowid+'" name="vesting_percentage['+rowid+'][]" onblur="calculateVestingPercentage('+rowid+')"></div>';
-    html += '<div class="form-group col-lg-4"><input aria-label="Till Date[" type="text" class="form-control datepicker vesategetilldate_'+rowid+'" name="till_date['+rowid+'][]"></div>';
+    html += '<div class="form-group col-lg-4"><input aria-label="<?php echo __('Vesting Date['); ?>" type="text" class="form-control datepicker vesategdatpicker_'+rowid+'" name="vesting_date['+rowid+'][]" ></div>';
+    html += '<div class="form-group col-lg-3"><input aria-label="<?php echo __('Vesting Percentage['); ?>" type="number" class="form-control text-right vestingpercentage_'+rowid+'" name="vesting_percentage['+rowid+'][]" onblur="calculateVestingPercentage('+rowid+')"></div>';
+    html += '<div class="form-group col-lg-4"><input aria-label="<?php echo __('Till Date['); ?>" type="text" class="form-control datepicker vesategetilldate_'+rowid+'" name="till_date['+rowid+'][]"></div>';
 
     html += '<div class="form-group col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRowVestage('+maxrows+','+rowid+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div>';
     html += '</div>';
@@ -228,20 +228,20 @@ function calculateVestingPercentage(rowid){
     <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
 <?php } ?>
         <form method="post">
         <div class="card">
             <div class="card-header">
-                <h5>ESOP Plans</h5>
+                <h5><?php echo __('ESOP Plans'); ?></h5>
             </div>
             <div class="card-body" style="padding: 15px 12%;">
                 <div class="row">
                     <div class="form-group col-lg-4 w-full">
-                        <span class="form-label">Company Valuation</span>
-                            <select aria-label="Ect Company Valuation" class ="form-control js-example-basic-single" id="select_company_valuation" name="select_company_valuation" onchange="calculateSharePrice()" required>
-                                <option value="">Select Any One</option>
+                        <span class="form-label"><?php echo __('Company Valuation'); ?></span>
+                            <select aria-label="<?php echo __('Ect Company Valuation'); ?>" class ="form-control js-example-basic-single" id="select_company_valuation" name="select_company_valuation" onchange="calculateSharePrice()" required>
+                                <option value=""><?php echo __('Select Any One'); ?></option>
                                 <?php foreach($company_valuations as $cv){ ?>
                                 <option  value="<?php echo $cv['cv_id']."||".$cv['cvd_id']."||".$cv['company_value']."||".fromDate($cv['valuation_date'])."||".$cv['new_shares']."||".$cv['per_share_value']; ?>" <?php echo ($cv['cv_id']==$esop_plans['company_valuation_id'] && $cv['cvd_id']==$esop_plans['company_valuation_distribution_id'])?"selected":"";?>>
                                   <?php echo $cv['valuation_name']." (".fromDate($cv['valuation_date']).")"; ?>
@@ -252,33 +252,33 @@ function calculateVestingPercentage(rowid){
                            </select>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label">Plan Name</span>
-                        <input aria-label="Plan Name" type="text" class="form-control" name="plan_name" value="<?php echo $esop_plans['plan_name']; ?>" required>
+                        <span class="form-label"><?php echo __('Plan Name'); ?></span>
+                        <input aria-label="<?php echo __('Plan Name'); ?>" type="text" class="form-control" name="plan_name" value="<?php echo $esop_plans['plan_name']; ?>" required>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label">Date of Grant</span>
+                        <span class="form-label"><?php echo __('Date of Grant'); ?></span>
                         <div class="input-group custom-date">
                             <span class="input-group-text addon-style" id="basic-addon3">
                                 <span class=""><i class="fa fa-calendar"></i></span>
                             </span>
-                            <input aria-label="Date Of Grant" type="text" class="form-control datepicker" name="date_of_grant" id="date_of_grant" value="<?php echo $esop_plans['date_of_grant']; ?>" required>
+                            <input aria-label="<?php echo __('Date Of Grant'); ?>" type="text" class="form-control datepicker" name="date_of_grant" id="date_of_grant" value="<?php echo $esop_plans['date_of_grant']; ?>" required>
                         </div>
                     </div>
                     <div class="form-group col-lg-2">
-                        <span class="form-label">Plan Valuation</span>
-                        <input aria-label="Company Valuation" type="text" class="form-control text-right" name="company_valuation" id="company_valuation" value="<?php echo $esop_plans['company_valuation']; ?>" onblur="calculateSharePrice()" readonly required>
+                        <span class="form-label"><?php echo __('Plan Valuation'); ?></span>
+                        <input aria-label="<?php echo __('Company Valuation'); ?>" type="text" class="form-control text-right" name="company_valuation" id="company_valuation" value="<?php echo $esop_plans['company_valuation']; ?>" onblur="calculateSharePrice()" readonly required>
                     </div>
                     <div class="form-group col-lg-2">
-                        <span class="form-label">Number of Shares</span>
-                        <input aria-label="Share" type="text" class="form-control text-right" name="share" id="share" value="<?php echo $esop_plans['share']; ?>" onblur="calculateSharePrice()" readonly required>
+                        <span class="form-label"><?php echo __('Number of Shares'); ?></span>
+                        <input aria-label="<?php echo __('Share'); ?>" type="text" class="form-control text-right" name="share" id="share" value="<?php echo $esop_plans['share']; ?>" onblur="calculateSharePrice()" readonly required>
                     </div>
                     <div class="form-group col-lg-2">
-                        <span class="form-label">Shares Price (Grant)</span>
-                        <input aria-label="Share Price At Grant Time" type="text" class="form-control text-right" name="share_price_at_grant_time" id="share_price_at_grant_time" value="<?php echo $esop_plans['share_price_at_grant_time']; ?>" readonly required>
+                        <span class="form-label"><?php echo __('Shares Price (Grant)'); ?></span>
+                        <input aria-label="<?php echo __('Share Price At Grant Time'); ?>" type="text" class="form-control text-right" name="share_price_at_grant_time" id="share_price_at_grant_time" value="<?php echo $esop_plans['share_price_at_grant_time']; ?>" readonly required>
                     </div>
                     <div class="form-group col-lg-6">
-                        <span class="form-label">Notes</span>
-                        <textarea aria-label="Note" class="form-control" name="note"><?php echo $esop_plans['note']; ?></textarea>
+                        <span class="form-label"><?php echo __('Notes'); ?></span>
+                        <textarea aria-label="<?php echo __('Note'); ?>" class="form-control" name="note"><?php echo $esop_plans['note']; ?></textarea>
                     </div>
                 </div>
             </div>
@@ -286,21 +286,21 @@ function calculateVestingPercentage(rowid){
 
         <div class="card">
             <div class="card-header">
-                <h5>Grant Price, Discount & Value</h5>
+                <h5><?php echo __('Grant Price, Discount & Value'); ?></h5>
             </div>
             <div class="card-body" style="padding: 15px 11%;">
                 <div class="" style="">
                     <table class="table table-bordered table-hover" id="bucketplans">
                         <tr>
-                            <th scope="col">Bucket</th>
-                            <th scope="col" class="text-right ">Grant Price</th>
-                            <th scope="col" class="text-right ">Discount(%)</th>
-                            <th scope="col" class="text-right ">Option Price</th>
+                            <th scope="col"><?php echo __('Bucket'); ?></th>
+                            <th scope="col" class="text-right "><?php echo __('Grant Price'); ?></th>
+                            <th scope="col" class="text-right "><?php echo __('Discount(%)'); ?></th>
+                            <th scope="col" class="text-right "><?php echo __('Option Price'); ?></th>
 
 
-                            <th scope="col" class="text-right ">Options Granted</th>
-                            <th scope="col" class="text-right ">Total Discount</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" class="text-right "><?php echo __('Options Granted'); ?></th>
+                            <th scope="col" class="text-right "><?php echo __('Total Discount'); ?></th>
+                            <th scope="col"><?php echo __('Action'); ?></th>
                         </tr>
                         <?php $i=1;  $mk=0; if(count((array)$esop_plan_buckets) == 0){
                             $esop_plan_buckets[] = array('bucket_name'=>'');
@@ -313,35 +313,35 @@ function calculateVestingPercentage(rowid){
                         <tr id="deleteid_<?php echo $i; ?>">
                             <td class="p-0">
                                 <input type="hidden" name="irid[]" value="<?php echo $epb['id']; ?>">
-                                <input aria-label="Bucket 1" type="text" class="form-control border-0 box-shadow-0 " placeholder="Bucket 1" name="bucket_name[]" value="<?php echo $epb['bucket_name']; ?>" required>
+                                <input aria-label="<?php echo __('Bucket 1'); ?>" type="text" class="form-control border-0 box-shadow-0 " placeholder="<?php echo __('Bucket 1'); ?>" name="bucket_name[]" value="<?php echo $epb['bucket_name']; ?>" required>
                             </td>
                             <td class="p-0" style="text-align: right;">
-                                <input aria-label="Grant Price[]" type="text" class="form-control border-0 text-right box-shadow-0 grant_price"  name="grant_price[]" id="grant_price_<?php echo $i; ?>"  value="<?php echo $epb['grant_price']; ?>"  readonly required>
+                                <input aria-label="<?php echo __('Grant Price[]'); ?>" type="text" class="form-control border-0 text-right box-shadow-0 grant_price"  name="grant_price[]" id="grant_price_<?php echo $i; ?>"  value="<?php echo $epb['grant_price']; ?>"  readonly required>
                             </td>
                             <td class="p-0" >
-                                <input aria-label="Discount[]" type="text" class="form-control border-0 text-right box-shadow-0"  name="discount[]" id="discount_<?php echo $i; ?>" value="<?php echo $epb['discount']; ?>" onblur="calculateBucketValue('<?php echo $i; ?>')">
+                                <input aria-label="<?php echo __('Discount[]'); ?>" type="text" class="form-control border-0 text-right box-shadow-0"  name="discount[]" id="discount_<?php echo $i; ?>" value="<?php echo $epb['discount']; ?>" onblur="calculateBucketValue('<?php echo $i; ?>')">
                                 <input type="hidden" name="discount_per_option[]" id="discount_per_option_<?php echo $i; ?>" value="<?php echo $epb['discount_per_option']; ?>" required>
                             </td>
                             <td class="p-0" id="custom-popup_3">
-                                <input aria-label="Expected Option Benefit[]" type="text" class="form-control border-0 text-right box-shadow-0"  name="expected_option_benefit[]" id="expected_option_benefit_<?php echo $i; ?>" value="<?php echo $epb['expected_option_benefit']; ?>" readonly required>
+                                <input aria-label="<?php echo __('Expected Option Benefit[]'); ?>" type="text" class="form-control border-0 text-right box-shadow-0"  name="expected_option_benefit[]" id="expected_option_benefit_<?php echo $i; ?>" value="<?php echo $epb['expected_option_benefit']; ?>" readonly required>
                                 <div class="custom-popup-open open-popup-<?php echo $i; ?> text-start" style="display: none; width: 500px;">
     <div class="card">
         <div class="card-header">
-          <h5>Vesting Schedule</h5>
+          <h5><?php echo __('Vesting Schedule'); ?></h5>
           <div class="card-header-right">
-            <i class="ti-close" onclick="closePopUp('<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+            <i class="ti-close" onclick="closePopUp('<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
           </div>
         </div>
         <div class="card-body" id="addmorediv-<?php echo $i; ?>">
             <div class="row">
                 <div class="form-group col-lg-4">
-                    <span>Allocation Date <span class="text-danger">*</span></span>
+                    <span><?php echo __('Allocation Date'); ?> <span class="text-danger">*</span></span>
                 </div>
                 <div class="form-group col-lg-3">
-                    <span>Percentage(%) <span class="text-danger">*</span></span>
+                    <span><?php echo __('Percentage(%)'); ?> <span class="text-danger">*</span></span>
                 </div>
                 <div class="form-group col-lg-4">
-                    <span>Till Date <span class="text-danger">*</span></span>
+                    <span><?php echo __('Till Date'); ?> <span class="text-danger">*</span></span>
                 </div>
             </div>
             <?php
@@ -354,13 +354,13 @@ function calculateVestingPercentage(rowid){
             ?>
                 <div class="row" id="deleteidvesting_<?php echo $mk; ?>">
                     <div class="form-group col-lg-4">
-                       <input aria-label="Input field" type="text" class="form-control datepicker vesategdatpicker_<?php echo $i; ?>" name="vesting_date[<?php echo $i; ?>][]" value="<?php echo $vd['vesting_date']; ?>" >
+                       <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control datepicker vesategdatpicker_<?php echo $i; ?>" name="vesting_date[<?php echo $i; ?>][]" value="<?php echo $vd['vesting_date']; ?>" >
                     </div>
                     <div class="form-group col-lg-3">
-                        <input aria-label="Enter number" type="number" class="form-control text-right vestingpercentage_<?php echo $i; ?> " name="vesting_percentage[<?php echo $i; ?>][]" value="<?php echo $vd['vesting_percentage']; ?>" onblur="calculateVestingPercentage(<?php echo $i; ?>)">
+                        <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right vestingpercentage_<?php echo $i; ?> " name="vesting_percentage[<?php echo $i; ?>][]" value="<?php echo $vd['vesting_percentage']; ?>" onblur="calculateVestingPercentage(<?php echo $i; ?>)">
                     </div>
                     <div class="form-group col-lg-4">
-                       <input aria-label="Input field" type="text" class="form-control datepicker vesategetilldate_<?php echo $i; ?>" name="till_date[<?php echo $i; ?>][]" value="<?php echo $vd['till_date']; ?>" >
+                       <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control datepicker vesategetilldate_<?php echo $i; ?>" name="till_date[<?php echo $i; ?>][]" value="<?php echo $vd['till_date']; ?>" >
                     </div>
                     <div class="form-group col-lg-1"><i class="ti-trash"  onclick="deletRowVestage('<?php echo $mk; ?>','<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i> </div>
                 </div>
@@ -369,12 +369,12 @@ function calculateVestingPercentage(rowid){
         </div>
         <div class="card-footer pt-0">
             <input type="hidden" name="vesting_schedule_seq[]" value="<?php echo $i; ?>">
-            <button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addMore('<?php echo $i; ?>')"><i class="fa fa-check m-r-10"></i>Add More</button>
-            <button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="closePopUp('<?php echo $i; ?>')"> Done</button>
+            <button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addMore('<?php echo $i; ?>')"><i class="fa fa-check m-r-10"></i><?php echo __('Add More'); ?></button>
+            <button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="closePopUp('<?php echo $i; ?>')"> <?php echo __('Done'); ?></button>
             <span class="float-end m-t-20">
-                <span class="text-danger">Un-Schedule (%) : </span>
+                <span class="text-danger"><?php echo __('Un-Schedule (%) :'); ?> </span>
                 <span id="totaldistributionpending_<?php echo $i; ?>"><?php echo 100-$totaldis; ?></span>
-                <span class="text-warning m-l-20">Total (%) : </span>
+                <span class="text-warning m-l-20"><?php echo __('Total (%) :'); ?> </span>
                 <span id="totaldistributionqty_<?php echo $i; ?>"><?php echo $totaldis; ?></span>
             </span>
         </div>
@@ -383,25 +383,25 @@ function calculateVestingPercentage(rowid){
                             </td>
 
                             <td class="p-0" >
-                                <input aria-label="Options Granted[]" type="text" class="form-control border-0 text-right box-shadow-0 options_granted" name="options_granted[]" id="options_granted_<?php echo $i; ?>" onblur="calculateBucketValue('<?php echo $i; ?>')" value="<?php echo $epb['options_granted']; ?>">
+                                <input aria-label="<?php echo __('Options Granted[]'); ?>" type="text" class="form-control border-0 text-right box-shadow-0 options_granted" name="options_granted[]" id="options_granted_<?php echo $i; ?>" onblur="calculateBucketValue('<?php echo $i; ?>')" value="<?php echo $epb['options_granted']; ?>">
                             </td>
                             <td class="p-0">
-                                <input aria-label="Total Discount[]" type="text" class="form-control border-0 text-right box-shadow-0"  name="total_discount[]" id="total_discount_<?php echo $i; ?>" value="<?php echo $epb['total_discount']; ?>" readonly>
+                                <input aria-label="<?php echo __('Total Discount[]'); ?>" type="text" class="form-control border-0 text-right box-shadow-0"  name="total_discount[]" id="total_discount_<?php echo $i; ?>" value="<?php echo $epb['total_discount']; ?>" readonly>
                             </td>
                             <td class="p-0 text-center pt-2" >
-                                 <i class="ti-trash text-danger mr-5" onclick="deletRow('<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Removed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                                 <i class="ti-settings  f-20" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Vesting Schedule" onclick="openPopUp('<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                 <i class="ti-trash text-danger mr-5" onclick="deletRow('<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Removed'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                 <i class="ti-settings  f-20" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Vesting Schedule'); ?>" onclick="openPopUp('<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                             </td>
                         </tr>
                     <?php $i++;
 } ?>
                     </table>
                 </div>
-                <button class="btn btn-success m-t-20" id="addRows" type="button" onclick="addMoreBuket()"><i class="fa fa-plus m-r-5"></i>Add More</button>
+                <button class="btn btn-success m-t-20" id="addRows" type="button" onclick="addMoreBuket()"><i class="fa fa-plus m-r-5"></i><?php echo __('Add More'); ?></button>
                 <span class="float-end m-t-20 m-r-50">
-                    <span class="text-danger">Pendding Options Grant: </span>
+                    <span class="text-danger"><?php echo __('Pendding Options Grant:'); ?> </span>
                     <span id="totaloptions_grantedpending"><?php echo $esop_plans['share']-$totaloptions; ?></span>
-                    <span class="text-warning m-l-20">Total Options Granted  : </span>
+                    <span class="text-warning m-l-20"><?php echo __('Total Options Granted  :'); ?> </span>
                     <span id="totaloptions_granted"><?php echo $totaloptions; ?></span>
                 </span>
             </div>

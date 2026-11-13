@@ -36,13 +36,13 @@ $items = $data['items'] ?? [];
                         <input type="hidden" id="record_id" name="record_id" value="<?= htmlspecialchars($editRow['id'] ?? '') ?>">
 
                         <div class="step" id="step1">
-                            <h5 class="fw-bold text-secondary mb-3"><i class="ti-map me-2 text-primary"></i> Location & Building</h5>
+                            <h5 class="fw-bold text-secondary mb-3"><i class="ti-map me-2 text-primary"></i> <?= __('Location & Building') ?></h5>
                             <div class="row g-3">
                                 <div class="col-md-6 w-full">
                                     <span class="form-label">Location <span class="text-danger">*</span></span>
                                     <select aria-label="Location" class="form-select js-example-basic-single required" id="location" name="location"
                                         onchange="onLocationChange(this.value)">
-                                        <option value="">Select Location</option>
+                                        <option value=""><?= __('Select Location') ?></option>
                                         <?php foreach ($locations as $loc): ?>
                                             <option
                                                 value="<?= htmlspecialchars($loc['id'] ?? '') ?>"
@@ -57,31 +57,30 @@ $items = $data['items'] ?? [];
                                     <span class="form-label">Building <span class="text-danger">*</span></span>
                                     <select aria-label="Building" class="form-select js-example-basic-single required" id="building" name="building"
                                         onchange="onBuildingChange(this.value)">
-                                        <option value="">Select Building</option>
+                                        <option value=""><?= __('Select Building') ?></option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-6 w-full">
-                                    <span class="form-label">Floor </span>
+                                    <span class="form-label"><?= __('Floor') ?></span>
                                     <select aria-label="Floor" class="form-select js-example-basic-single " id="floor" name="floor"
                                         onchange="onFloorChange(this.value)">
-                                        <option value="">Select Floor</option>
+                                        <option value=""><?= __('Select Floor') ?></option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-6 w-full">
-                                    <span class="form-label">Space </span>
+                                    <span class="form-label"><?= __('Space') ?></span>
                                     <select aria-label="Space" class="form-select js-example-basic-single " id="space" name="space"
                                         onchange="updatePreview()">
-                                        <option value="">Select Space</option>
+                                        <option value=""><?= __('Select Space') ?></option>
                                     </select>
                                 </div>
                             </div>
                         </div>
 
                         <div class="step d-none" id="step2">
-                            <h5 class="fw-bold text-secondary mb-3"><i class="ti-package me-2 text-primary"></i> Select
-                                Type / Asset</h5>
+                            <h5 class="fw-bold text-secondary mb-3"><i class="ti-package me-2 text-primary"></i> <?= __('Select Type / Asset') ?></h5>
 
                             <div class="mb-3">
                                 <span class="form-label d-block">What do you want to generate?<span
@@ -90,12 +89,12 @@ $items = $data['items'] ?? [];
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input required" type="radio" name="asset_type"
                                             value="Assets" id="typeAssets" onchange="onTypeChange('Assets')"  <?= ($editRow && $editRow['code_type'] == 'Assets') ? 'checked' : '' ?>>
-                                        <label class="form-check-label" for="typeAssets">Assets</label>
+                                        <label class="form-check-label" for="typeAssets"><?= __('Assets') ?></label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input required" type="radio" name="asset_type"
                                             value="Item" id="typeItem" onchange="onTypeChange('Item')" <?= ($editRow && $editRow['code_type'] == 'Item') ? 'checked' : '' ?>>
-                                        <label class="form-check-label" for="typeItem">Items</label>
+                                        <label class="form-check-label" for="typeItem"><?= __('Items') ?></label>
                                     </div>
                                 </div>
                                 <div class="invalid-feedback">Please choose a type.</div>
@@ -107,7 +106,7 @@ $items = $data['items'] ?? [];
                                     <span class="form-label">Asset <span class="text-danger">*</span></span>
                                     <select aria-label="Asset Description" class="form-select js-example-basic-single" id="assetDesc" name="asset_description"
                                         onchange="onAssetChange(this.value)">
-                                        <option value="">Select Asset</option>
+                                        <option value=""><?= __('Select Asset') ?></option>
                                         <?php foreach ($assets as $a): ?>
                                             <option value="<?= htmlspecialchars($a['id'] ?? '') ?>"
                                                 data-location="<?= htmlspecialchars($a['asset_location']  ?? '') ?>"
@@ -120,7 +119,7 @@ $items = $data['items'] ?? [];
                                     <div class="invalid-feedback">Please choose an asset.</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <span class="form-label">Asset Code </span>
+                                    <span class="form-label"><?= __('Asset Code') ?></span>
                                     <input aria-label="Asset Code" type="text" class="form-control" id="assetCode" name="asset_code" readonly value="<?= $editRow ? htmlspecialchars($editRow['asset_code']) : '' ?>">
                                 </div>
                             </div>
@@ -131,7 +130,7 @@ $items = $data['items'] ?? [];
                                     <span class="form-label">Item <span class="text-danger">*</span></span>
                                     <select aria-label="Item Name" class="form-select js-example-basic-single" id="itemName" name="item_name"
                                         onchange="onItemChange(this.value)">
-                                        <option value="">Select Item</option>
+                                        <option value=""><?= __('Select Item') ?></option>
                                         <?php foreach ($items as $it): ?>
                                             <option value="<?= htmlspecialchars($it['id'] ?? '') ?>"
                                                 data-location="<?= htmlspecialchars($it['item_location'] ?? $it['location_id'] ?? '') ?>"
@@ -144,30 +143,29 @@ $items = $data['items'] ?? [];
                                     <div class="invalid-feedback">Please choose an item.</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <span class="form-label">SKU</span>
+                                    <span class="form-label"><?= __('SKU') ?></span>
                                     <input aria-label="Sku" type="text" class="form-control" id="sku" name="sku" readonly value="<?= $editRow ? htmlspecialchars($editRow['sku']) : '' ?>">
                                 </div>
                             </div>
 
                         </div>
 
-                        <!-- STEP 3: Additional Notes + Generate -->
+                        <!-- STEP 3: <?= __('Additional Notes') ?> + Generate -->
                         <div class="step d-none" id="step3">
                             <h5 class="fw-bold text-secondary mb-3"><i class="ti-notepad me-2 text-primary"></i>
-                                Additional Notes</h5>
+                                <?= __('Additional Notes') ?></h5>
                             <div class="mb-4">
                                 <textarea aria-label="Any additional details..." class="form-control" id="remarks" name="remarks" rows="5"
-                                    placeholder="Any additional details..."><?= $editRow ? htmlspecialchars($editRow['remarks']) : '' ?></textarea>
+                                    placeholder="<?= __('Any additional details...') ?>"><?= $editRow ? htmlspecialchars($editRow['remarks']) : '' ?></textarea>
                             </div>
                         </div>
 
                         <div class="d-flex justify-content-between pt-3">
                             <div class="d-flex w-100 gap-3">
                                 <button type="button" id="prevBtn"
-                                    class="btn btn-outline-secondary step-btn d-none">Back</button>
-                                <button type="button" id="nextBtn" class="btn btn-primary step-btn">Next</button>
-                                <button type="submit" id="saveBtn" class="btn btn-warning step-btn d-none">Save
-                                    Now</button>
+                                    class="btn btn-outline-secondary step-btn d-none"><?= __('Back') ?></button>
+                                <button type="button" id="nextBtn" class="btn btn-primary step-btn"><?= __('Next') ?></button>
+                                <button type="submit" id="saveBtn" class="btn btn-warning step-btn d-none"><?= __('Save Now') ?></button>
                             </div>
                         </div>
 
@@ -181,7 +179,7 @@ $items = $data['items'] ?? [];
             <div class="card shadow border-0 h-100">
                 <div class="card-header bg-primary text-white fw-bold" id="previewHeader">Live Details Preview</div>
                 <div class="card-body custom-scroll" id="previewCard">
-                    <p class="text-muted">Fill the form to see details in preview of every step...</p>
+                    <p class="text-muted"><?= __('Fill the form to see details in preview of every step...') ?></p>
                 </div>
                 <div class="card-footer bg-white border-0">
                     <!-- small QR holder (appended on Generate) -->
@@ -261,7 +259,7 @@ $items = $data['items'] ?? [];
 
     function onLocationChange(locId) {
         const buildingSel = $('#building');
-        buildingSel.empty().append ('<option value="">Select Building</option>');
+        buildingSel.empty().append ('<option value=""><?= __('Select Building') ?></option>');
 
         if (!locId) return;
         $.ajax({
@@ -297,8 +295,8 @@ $items = $data['items'] ?? [];
                 }
             }
         });
-        document.getElementById('floor').innerHTML = '<option value="">Select Floor</option>';
-        document.getElementById('space').innerHTML = '<option value="">Select Space</option>';
+        document.getElementById('floor').innerHTML = '<option value=""><?= __('Select Floor') ?></option>';
+        document.getElementById('space').innerHTML = '<option value=""><?= __('Select Space') ?></option>';
         selectedLocation = locId;
         rebuildAssetOptions(locId, "<?= htmlspecialchars($editRow['asset_id'] ?? '') ?>");
         updatePreview();
@@ -306,7 +304,7 @@ $items = $data['items'] ?? [];
 
     function onBuildingChange(bId) {
         const floorSel = $('#floor');
-        floorSel.empty().append ('<option value="">Select Floor</option>');
+        floorSel.empty().append ('<option value=""><?= __('Select Floor') ?></option>');
 
         if (!bId) return;
 
@@ -342,13 +340,13 @@ $items = $data['items'] ?? [];
                 }
             }
         });
-        document.getElementById('space').innerHTML = '<option value="">Select Space</option>';
+        document.getElementById('space').innerHTML = '<option value=""><?= __('Select Space') ?></option>';
         updatePreview();
     }
 
     function onFloorChange(fId) {
         const spaceSel = $('#space');
-        spaceSel.empty().append('<option value="">Select Any One</option>');
+        spaceSel.empty().append('<option value=""><?= __('Select Any One') ?></option>');
 
         if (!fId) return;
 
@@ -474,7 +472,7 @@ $items = $data['items'] ?? [];
 
         html += '</div>';
 
-        document.getElementById('previewCard').innerHTML = hasData ? html : '<p class="text-muted">Fill the form to see details in preview of every step...</p>';
+        document.getElementById('previewCard').innerHTML = hasData ? html : '<p class="text-muted"><?= __('Fill the form to see details in preview of every step...') ?></p>';
         document.getElementById('previewHeader').innerText = hasData ? 'Live Details Preview' : 'Preview';
     }
 
@@ -488,7 +486,7 @@ $items = $data['items'] ?? [];
         qrWrap.className = 'd-flex flex-column align-items-center';
         qrWrap.innerHTML = `
             <div id="smallQr" style="padding:8px;background:#fff;border-radius:12px;display:inline-block;"></div>
-            <button id="downloadSmallQr" class="btn btn-sm btn-success mt-2">Download QR</button>
+            <button id="downloadSmallQr" class="btn btn-sm btn-success mt-2"><?= __('Download QR') ?></button>
         `;
         holder.appendChild(qrWrap);
         const sizeDisplay = 120;
@@ -632,7 +630,7 @@ $items = $data['items'] ?? [];
 
     function rebuildAssetOptions(locId, preselectId = '') {
         const sel = $('#assetDesc');
-        sel.empty().append('<option value="">Select Asset</option>');
+        sel.empty().append('<option value=""><?= __('Select Asset') ?></option>');
         const rows = ALL_ASSETS.filter(a => String(a.asset_location || '') === String(locId));
         rows.forEach(a => {
             sel.append(

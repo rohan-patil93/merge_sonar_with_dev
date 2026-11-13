@@ -18,8 +18,8 @@ if($gettype =="QuestionsAnswers"){
     <table class="table table-bordered table-md">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Questions</th>
-            <th scope="col">Answers</th>
+            <th scope="col"><?= __('Questions') ?></th>
+            <th scope="col"><?= __('Answers') ?></th>
         </tr>
     <?php $seq=1; foreach($candidate_screening_questions_and_answers as $qa){ ?>
         <tr>
@@ -46,11 +46,11 @@ if($gettype =="QuestionsAnswers"){
         <?php  $seq=1; foreach($questions as $que){ ?>
             <div class="row rows<?php echo $ij; ?> mt-2"> 
                 <div class="col-lg-10">
-                    <input class="form-control" type="hidden" name="screening_key[]" value="<?php echo bin2hex(random_bytes(16)); ?>" placeholder="Eg. Tell me about yourself">
-                    <input class="form-control" type="text" name="screening_question[]" value="<?php echo $que['question']; ?>" placeholder="Eg. Tell me about yourself">
+                    <input class="form-control" type="hidden" name="screening_key[]" value="<?php echo bin2hex(random_bytes(16)); ?>" placeholder="<?= __('Eg. Tell me about yourself') ?>">
+                    <input class="form-control" type="text" name="screening_question[]" value="<?php echo $que['question']; ?>" placeholder="<?= __('Eg. Tell me about yourself') ?>">
                 </div>
                 <div class="col-lg-2">
-                    <i title="Delete Question" onclick="deleteQuestion(<?php echo $ij; ?>)" class="fa fa-trash text-danger cursor-pointer"></i> 
+                    <i title="<?= __('Delete Question') ?>" onclick="deleteQuestion(<?php echo $ij; ?>)" class="fa fa-trash text-danger cursor-pointer"></i> 
                 </div>
             </div>   
         <?php $seq++; } ?>
@@ -62,7 +62,7 @@ if($gettype =="QuestionsAnswers"){
         </button>
         <div class="col-lg-4"></div>
         <button type="button" onclick="AIStartSceening('<?php echo $candidate_id; ?>','<?php echo $job_posting_id; ?>')" class="btn btn-primary col-lg-4 btn-sm mt-2 float-right">
-           <i class="fas fa-plus"></i> Start Sceening
+           <i class="fas fa-plus"></i> <?= __('Start Screening') ?>
         </button>
     </div>
 

@@ -56,9 +56,9 @@ $selectdata = $data['table_filed'];
 	<div class="card-body">	
 		<div class="row">
 			<div class="col-lg-3">
-				<label class="form-label" for="transaction_table">Transaction</label>
+				<label class="form-label" for="transaction_table"><?= __('Transaction') ?></label>
 				<select class="form-select js-example-basic-single" name="transaction_table" id="transaction_table" onchange="gettTransactionIDRecords()" aria-label="Transaction">
-             		<option value="">Select Any One</option>
+             		<option value=""><?= __('Select Any One') ?></option>
                 	<?php foreach($all_api_masters as $dmt) {  ?>
                    <option value="<?php echo $dmt['id']; ?>"><?php echo $dmt['api_service_provider']." (".$dmt['api_name'].")";?></option>
                 	<?php } ?>
@@ -67,7 +67,7 @@ $selectdata = $data['table_filed'];
 			<div class="col-lg-2">
 				<span class="form-label d-block" aria-hidden="true">&nbsp;</span>
 				<button class="btn btn-primary form-control" onclick="filterSubmitForm()" type="submit" >
-					<i class="ti-search m-r-2" aria-hidden="true"></i>View
+					<i class="ti-search m-r-2" aria-hidden="true"></i><?= __('View') ?>
 				</button>
 			</div>
 		</div> 
@@ -80,11 +80,11 @@ $selectdata = $data['table_filed'];
 			$idx++;
 			?>
 			<div class="form-group row col-lg-12 mt-4">
-				<label class="col-4" for="api_field_<?php echo $idx; ?>" aria-label="API Field <?php echo htmlspecialchars($edidump); ?>">
-					<span class="visually-hidden">API Field <?php echo htmlspecialchars($edidump); ?></span>
-					<input class="form-control form-control-solid" type="text" id="api_field_<?php echo $idx; ?>" value="<?php echo htmlspecialchars($edidump); ?>" readonly aria-label="API Field <?php echo htmlspecialchars($edidump); ?>" />
+				<div class="col-4">
+					<label for="api_field_<?php echo $idx; ?>" class="visually-hidden"><?= __('API Field') ?> <?php echo htmlspecialchars($edidump); ?></label>
+					<input class="form-control form-control-solid" type="text" id="api_field_<?php echo $idx; ?>" value="<?php echo htmlspecialchars($edidump); ?>" readonly aria-label="<?= __('API Field') ?> <?php echo htmlspecialchars($edidump); ?>" />
 					<input class="form-control form-control-solid" type="hidden" name="filed[]" value="<?php echo htmlspecialchars($filed); ?>" />
-				</label>
+				</div>
 				<div class="col-4">
 					<select class="form-select js-example-basic-single" name="select[]" id="select_field_<?php echo $idx; ?>" aria-label="Mapping for <?php echo htmlspecialchars($edidump); ?>">
 						<option value="0">Select Any one</option>
@@ -92,7 +92,7 @@ $selectdata = $data['table_filed'];
 							$select = strtolower(str_replace("_"," ",$select_list['Field']));
 							if($select != 'id'){
 								?>
-								<option  <?php if(strtolower($edidump) ==strtolower($select)){ ?> selected <?php } ?> value="<?php echo $select;  ?>"><?php echo viewTitle($select);  ?></option>
+								<option  <?php if(strtolower($edidump) ==strtolower($select)){ ?> selected <?php } ?> value="<?php echo $select;  ?>"><?php echo htmlspecialchars(__(viewTitle($select)));  ?></option>
 
 							<?php } }  ?>
 						</select>
@@ -104,13 +104,13 @@ $selectdata = $data['table_filed'];
 			<div class="row">
 				<div class="col-lg-6">
 					<input type="hidden" name="submit_map" value="Add">
-					<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="exit"><i class="la la-check"></i>Save &amp; exit</button>
-					<button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="continue"><i class="la la-check-circle"></i>Save &amp; continue</button>
-					<button type="reset" class="btn btn-light-primary font-weight-bolder mr-2"><i class="la la-close"></i>Cancel</button>
+					<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="exit"><i class="la la-check"></i><?= __('Save & exit') ?></button>
+					<button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="continue"><i class="la la-check-circle"></i><?= __('Save & continue') ?></button>
+					<button type="reset" class="btn btn-light-primary font-weight-bolder mr-2"><i class="la la-close"></i><?= __('Cancel') ?></button>
 				</div>
 				<div class="col-lg-3">		</div>
 				<div class="col-lg-3 text-right">
-					<button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+					<button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?= __('Delete') ?></button>
 				</div> 
 			</div>
 		</div>

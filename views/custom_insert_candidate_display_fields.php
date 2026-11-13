@@ -54,11 +54,11 @@ $Rid = $candidate_display_fields['id'];
 <script type="text/javascript">
   function accessDashSetting(fieldgrpname,seq,type){
       if(type == "access"){
-          $("#dash-"+fieldgrpname+"-"+seq+"-label").html("<i class='ti-unlock'></i> Access");
+          $("#dash-"+fieldgrpname+"-"+seq+"-label").html("<i class='ti-unlock'></i> <?= __('Access') ?>");
           $("#dash-hidden-"+fieldgrpname+"-"+seq).val('Y');
 
       }else{
-          $("#dash-"+fieldgrpname+"-"+seq+"-label").html("<i class='ti-lock text-danger'></i> No Access");
+          $("#dash-"+fieldgrpname+"-"+seq+"-label").html("<i class='ti-lock text-danger'></i> <?= __('No Access') ?>");
           $("#dash-hidden-"+fieldgrpname+"-"+seq).val('N');
       }
       $(".dash-"+fieldgrpname+"-"+seq).hide();
@@ -73,36 +73,36 @@ $Rid = $candidate_display_fields['id'];
       $("#fieldgrpaccess-hidden-"+fieldgrpname).val(type);
       $(".fieldgrpaccess-hidden-"+fieldgrpname).val(type);
       if(type == "NA"){
-        $(".form-"+fieldgrpname+"-label").html("<i class='ti-lock text-danger'></i> No Access");
-        $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-lock text-danger'></i> No Access");
+        $(".form-"+fieldgrpname+"-label").html("<i class='ti-lock text-danger'></i> <?= __('No Access') ?>");
+        $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-lock text-danger'></i> <?= __('No Access') ?>");
 
         $("#field_noaccess-"+fieldgrpname).addClass("text-warning");
 
       }else if(type == "E"){
-        $(".form-"+fieldgrpname+"-label").html("<i class='ti-pencil'></i> Edit");
-        $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-pencil'></i> Edit");
+        $(".form-"+fieldgrpname+"-label").html("<i class='ti-pencil'></i> <?= __('Edit') ?>");
+        $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-pencil'></i> <?= __('Edit') ?>");
         $("#field_edit-"+fieldgrpname).addClass("text-warning");
       }else{
-        $(".form-"+fieldgrpname+"-label").html("<i class='ti-eye'></i> View Only");
-        $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-eye'></i> View Only");
+        $(".form-"+fieldgrpname+"-label").html("<i class='ti-eye'></i> <?= __('View Only') ?>");
+        $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-eye'></i> <?= __('View Only') ?>");
         $("#field_viewonly-"+fieldgrpname).addClass("text-warning");
       }
   }
   function accessFormfieldSetting(fieldname,fieldgrpname,seq,type,value){
       $(".emptyfield-"+fieldname+"-"+seq).removeClass("text-warning");
       $(".empty-"+fieldgrpname).removeClass("text-warning");
-      $(".form-"+fieldgrpname+"-label").html("Access Varies");
+      $(".form-"+fieldgrpname+"-label").html("<?= __('Access Varies') ?>");
       $("#fieldaccess-hidden-"+fieldname+"-"+seq).val(type);
 
        $("#fieldgrpaccess-hidden-"+fieldgrpname).val(0);
       if(type == "NA"){
-        $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-lock text-danger'></i> No Access");
+        $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-lock text-danger'></i> <?= __('No Access') ?>");
         $("#field_noaccess-"+fieldname+"-"+seq).addClass("text-warning");
       }else if(type == "E"){
-        $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-pencil'></i> Edit");
+        $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-pencil'></i> <?= __('Edit') ?>");
         $("#field_edit-"+fieldname+"-"+seq).addClass("text-warning");
       }else{
-        $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-eye'></i> View Only");
+        $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-eye'></i> <?= __('View Only') ?>");
         $("#field_viewonly-"+fieldname+"-"+seq).addClass("text-warning");
       }
 
@@ -121,16 +121,16 @@ $Rid = $candidate_display_fields['id'];
         </div>
 <?php } ?>
         <div class="card-header" id="custom-popup">
-        <h5> Access Rights </h5>
+        <h5> <?= __('Access Rights') ?> </h5>
     </div>
 
     <div class="card-body">
     <form method="post">
     <div class="row">
       <div class="form-group col-lg-4">
-        <span class="form-label">Role</span>
+        <span class="form-label"><?= __('Role') ?></span>
         <select aria-label="Role Short Code" class="form-control js-example-basic-single" name="role_short_code" onchange="selecteRole(this.value)" required>
-          <option value="">Select Any One</option>
+          <option value=""><?= __('Select Any One') ?></option>
           <?php
           $getroleid = $candidate_display_fields['role_short_code'] !=""?$candidate_display_fields['role_short_code']:$_GET['ROLE'];
           foreach($application_roles as $applicationroles){?>
@@ -170,7 +170,7 @@ $Rid = $candidate_display_fields['id'];
                                 <div class="card-header" id="custom-popup_2">
                         <div class="row">
                           <div class="col-lg-5">
-                                  <h5> <?php echo ucwords(str_replace("_"," ",$headingkey)); ?></h5>
+                                  <h5> <?php echo htmlspecialchars(__(ucwords(str_replace("_"," ",$headingkey)))); ?></h5>
                       </div>
                       <div class="col-lg-4">
                          <span class="form-<?php echo $headingkey."-label"; ?>"><?php echo $candfieldgrpaccesslabel;?></span>
@@ -178,11 +178,11 @@ $Rid = $candidate_display_fields['id'];
                       <div class="col-lg-3 text-right">
                           <input type="hidden" name="fieldgrpaccess[<?php echo $headingkey; ?>][access]" id="fieldgrpaccess-hidden-<?php echo $headingkey; ?>" value="<?php echo $candfieldgrpaccess; ?>">
 
-                          <i class="ti-lock empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'NA'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="No Access" onclick="accessFormSetting('<?php echo $headingkey; ?>','<?php echo $mj; ?>','NA')"  id="field_noaccess-<?php echo $headingkey; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                          <i class="ti-lock empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'NA'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('No Access') ?>" onclick="accessFormSetting('<?php echo $headingkey; ?>','<?php echo $mj; ?>','NA')"  id="field_noaccess-<?php echo $headingkey; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
 
-                          <i class="ti-pencil ml-2 empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'E'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Edit"  onclick="accessFormSetting('<?php echo $headingkey; ?>','<?php echo $mj; ?>','E')" id="field_edit-<?php echo $headingkey; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                          <i class="ti-pencil ml-2 empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'E'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Edit') ?>"  onclick="accessFormSetting('<?php echo $headingkey; ?>','<?php echo $mj; ?>','E')" id="field_edit-<?php echo $headingkey; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
 
-                          <i class="ti-eye ml-2 empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'V'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Only"  onclick="accessFormSetting('<?php echo $headingkey; ?>','<?php echo $mj; ?>','V')" id="field_viewonly-<?php echo $headingkey; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                          <i class="ti-eye ml-2 empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'V'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('View Only') ?>"  onclick="accessFormSetting('<?php echo $headingkey; ?>','<?php echo $mj; ?>','V')" id="field_viewonly-<?php echo $headingkey; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
 
                                 </div>
                     </div>
@@ -204,16 +204,16 @@ $Rid = $candidate_display_fields['id'];
                                           <th scope="col">
                                             <h6 class="mb-0 f-14"><?php echo ucwords(str_replace("_"," ",$profilereadines)); ?></h6>
                                           </th>
-                                  <th scope="col" class="allformfield-<?php echo $headingkey."-label"; ?>" id="formfield-<?php echo $profilereadines."-".$mm."-label"; ?>" ><?php echo $candfieldgrpaccesslabel; ?>
+                                  <th scope="col" class="allformfield-<?php echo $headingkey."-label"; ?>" id="formfield-<?php echo $profilereadines."-".$mm."-label"; ?>" ><?php echo htmlspecialchars(__($candfieldgrpaccesslabel ?? '')); ?>
                                   </th>
                                           <th scope="col" class="text-right">
                                   <input type="hidden" name="fieldgrpaccess[<?php echo $headingkey; ?>][field][<?php echo $profilereadines; ?>]" class="fieldgrpaccess-hidden-<?php echo $headingkey; ?>" id="fieldaccess-hidden-<?php echo $profilereadines."-".$mm; ?>" value="<?php echo $candfieldgrpaccess; ?>">
 
-                                  <i class="ti-lock allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "NA"?"text-warning":""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="No Access" onclick="accessFormfieldSetting('<?php echo $profilereadines; ?>','<?php echo $headingkey; ?>','<?php echo $mm; ?>','NA')"  id="field_noaccess-<?php echo $profilereadines."-".$mm; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                  <i class="ti-lock allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "NA"?"text-warning":""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('No Access') ?>" onclick="accessFormfieldSetting('<?php echo $profilereadines; ?>','<?php echo $headingkey; ?>','<?php echo $mm; ?>','NA')"  id="field_noaccess-<?php echo $profilereadines."-".$mm; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
 
-                                  <i class="ti-pencil ml-2 allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "E"?"text-warning":""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Edit"  onclick="accessFormfieldSetting('<?php echo $profilereadines; ?>','<?php echo $headingkey; ?>','<?php echo $mm; ?>','E')"  id="field_edit-<?php echo $profilereadines."-".$mm; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                  <i class="ti-pencil ml-2 allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "E"?"text-warning":""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Edit') ?>"  onclick="accessFormfieldSetting('<?php echo $profilereadines; ?>','<?php echo $headingkey; ?>','<?php echo $mm; ?>','E')"  id="field_edit-<?php echo $profilereadines."-".$mm; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
 
-                                  <i class="ti-eye ml-2 allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "V"?"text-warning":""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Only"  onclick="accessFormfieldSetting('<?php echo $profilereadines; ?>','<?php echo $headingkey; ?>','<?php echo $mm; ?>','V')" <?php echo $candfieldgrpaccess == "V"?"text-warning":""?> id="field_viewonly-<?php echo $profilereadines."-".$mm; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                  <i class="ti-eye ml-2 allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "V"?"text-warning":""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('View Only') ?>"  onclick="accessFormfieldSetting('<?php echo $profilereadines; ?>','<?php echo $headingkey; ?>','<?php echo $mm; ?>','V')" <?php echo $candfieldgrpaccess == "V"?"text-warning":""?> id="field_viewonly-<?php echo $profilereadines."-".$mm; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
 
                                           </th>
                                           </tr>
@@ -249,9 +249,9 @@ $dashboardaccess = $dashboard_field_list[$dashboardcoulnmname]['access']!= ""?$d
                        <div class="col-lg-1 text-right">
                       <input type="hidden" name="dashboard_field_list[<?php echo $dashboardcoulnmname;?>][access]" id="dash-hidden-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>"  value="<?php echo $dashboardaccess;?>">
 
-                               <i class="ti-lock dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="No Access" onclick="accessDashSetting('<?php echo $dashboardcoulnmname; ?>','<?php echo $mk; ?>','noaccess')" id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-access" style="<?php echo $dashboardaccess == "N"?"display:none":""?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                               <i class="ti-lock dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('No Access') ?>" onclick="accessDashSetting('<?php echo $dashboardcoulnmname; ?>','<?php echo $mk; ?>','noaccess')" id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-access" style="<?php echo $dashboardaccess == "N"?"display:none":""?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
 
-                              <i class="ti-unlock dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Access" onclick="accessDashSetting('<?php echo $dashboardcoulnmname; ?>','<?php echo $mk; ?>','access')" id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-noaccess" style="<?php echo $dashboardaccess == "Y"?"display:none":""?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                              <i class="ti-unlock dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Access') ?>" onclick="accessDashSetting('<?php echo $dashboardcoulnmname; ?>','<?php echo $mk; ?>','access')" id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-noaccess" style="<?php echo $dashboardaccess == "Y"?"display:none":""?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
                        </div>
                  </div>
               </div>
@@ -263,7 +263,7 @@ $dashboardaccess = $dashboard_field_list[$dashboardcoulnmname]['access']!= ""?$d
     </div>
     <div class="card-footer pt-0">
       <input type="hidden" name="Rid" value="<?php echo $Rid; ?>">
-        <button class="input-group-text addon-style cursor-pointer" name="submit_access_right" >Submit</button>
+        <button class="input-group-text addon-style cursor-pointer" name="submit_access_right" ><?= __('Submit') ?></button>
     </div>
   </form>
 </div>

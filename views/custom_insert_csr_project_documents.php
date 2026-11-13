@@ -81,7 +81,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'update_document') {
         header("location:index.php?option=COM_INSERT_CSR_PROJECT_DOCUMENTS&Rid=" . urlencode(csrProjectDocEncodeRid($selectedProposalId)) . "&updated=1");
         exit;
     } else {
-        $errorMessage = 'Please provide valid document details for update.';
+        $errorMessage = __('Please provide valid document details for update.');
     }
 }
 if (isset($_POST['submit']) && $_POST['submit'] == 'save_documents') {
@@ -96,7 +96,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'save_documents') {
     $failedMessages = array();
 
     if ($selectedProposalId <= 0) {
-        $errorMessage = 'Please select approved CSR project.';
+        $errorMessage = __('Please select approved CSR project.');
     } else {
         if (!is_dir('uploads/csr')) {
             mkdir('uploads/csr', 0777, true);
@@ -189,16 +189,16 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'save_documents') {
             $errorMessage = implode(' | ', array_slice($failedMessages, 0, 3));
         }
         if ($insertedCount == 0) {
-            $errorMessage = count((array)$failedMessages) > 0 ? implode(' | ', array_slice($failedMessages, 0, 3)) : 'No documents were uploaded.';
+            $errorMessage = count((array)$failedMessages) > 0 ? implode(' | ', array_slice($failedMessages, 0, 3)) : __('No documents were uploaded.');
         }
     }
 }
 
 if (isset($_GET['saved']) && $_GET['saved'] == '1') {
-    $saveMessage = 'Documents uploaded successfully.';
+    $saveMessage = __('Documents uploaded successfully.');
 }
 if (isset($_GET['updated']) && $_GET['updated'] == '1') {
-    $saveMessage = 'Document updated successfully.';
+    $saveMessage = __('Document updated successfully.');
 }
 
 $approvedProjects = array();
@@ -220,10 +220,10 @@ if ($selectedProposalId > 0) {
 <div class="page-body">
     <div class="card">
         <div class="card-header table-card-header">
-            <h5>CSR Project Documents</h5>
+            <h5><?= __('CSR Project Documents') ?></h5>
             <div class="card-header-right">
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-reply"></i> Back
+                    <i class="icofont icofont-reply"></i> <?= __('Back') ?>
                 </a>
             </div>
         </div>
@@ -239,9 +239,9 @@ if ($selectedProposalId > 0) {
                 <input type="hidden" name="option" value="COM_INSERT_CSR_PROJECT_DOCUMENTS">
                 <div class="row">
                     <div class="col-md-4 form-group">
-                        <label for="proposal_rid">Approved CSR Project</label>
+                        <label for="proposal_rid"><?= __('Approved CSR Project') ?></label>
                         <select name="Rid" id="proposal_rid" class="form-control js-example-basic-single select2" required>
-                            <option value="">Select Project</option>
+                            <option value=""><?= __('Select Project') ?></option>
                             <?php if (count((array)$approvedProjects) > 0) { ?>
                                 <?php foreach ($approvedProjects as $project) {
                                     $projectId = (int)($project['id'] ?? 0);
@@ -260,12 +260,12 @@ if ($selectedProposalId > 0) {
             <div class="table-responsive mb-4">
                 <table class="table table-bordered table-sm">
                     <tr>
-                        <th scope="col">Document Name</th>
-                        <th scope="col">Access Type</th>
-                        <th scope="col">File</th>
-                        <th scope="col">Replace File</th>
-                        <th scope="col">Download</th>
-                        <th scope="col">Action</th>
+                        <th scope="col"><?= __('Document Name') ?></th>
+                        <th scope="col"><?= __('Access Type') ?></th>
+                        <th scope="col"><?= __('File') ?></th>
+                        <th scope="col"><?= __('Replace File') ?></th>
+                        <th scope="col"><?= __('Download') ?></th>
+                        <th scope="col"><?= __('Action') ?></th>
                     </tr>
                     <?php if ($selectedProposalId > 0 && count((array)$existingDocuments) > 0) { ?>
                         <?php foreach ($existingDocuments as $docRow) { ?>
@@ -279,7 +279,7 @@ if ($selectedProposalId > 0) {
                                     <td class="w-full">
                                         <select aria-label="Access Type" class="form-control js-example-basic-single select2" name="access_type">
                                             <?php foreach($allowedAccess as $row){ ?>
-                                                <option value="<?php echo $row; ?>" <?php echo ($docRow['access_type'] ?? '') == $row ? 'selected' : ''; ?>><?php echo $row; ?></option>
+                                                <option value="<?php echo $row; ?>" <?php echo ($docRow['access_type'] ?? '') == $row ? 'selected' : ''; ?>><?php echo __($row); ?></option>
                                         <?php } ?>
                                         </select>
                                     </td>
@@ -293,14 +293,14 @@ if ($selectedProposalId > 0) {
                                         <?php } ?>
                                     </td>
                                     <td>
-                                        <button type="submit" name="submit" value="update_document" class="btn btn-primary btn-sm">Update</button>
+                                        <button type="submit" name="submit" value="update_document" class="btn btn-primary btn-sm"><?= __('Update') ?></button>
                                     </td>
                                 </form>
                             </tr>
                         <?php } ?>
                     <?php } else { ?>
                         <tr>
-                            <td colspan="6" class="text-center">No documents found</td>
+                            <td colspan="6" class="text-center"><?= __('No documents found') ?></td>
                         </tr>
                     <?php } ?>
                 </table>
@@ -311,17 +311,17 @@ if ($selectedProposalId > 0) {
                 <div class="table-responsive">
                     <table class="table table-bordered table-sm" id="csrDocumentUploadTable">
                         <tr>
-                            <th scope="col" style="width: 35%;">Document Name</th>
-                            <th scope="col" style="width: 20%;">Access Type</th>
-                            <th scope="col" style="width: 35%;">Upload File</th>
-                            <th scope="col" style="width: 10%;">Action</th>
+                            <th scope="col" style="width: 35%;"><?= __('Document Name') ?></th>
+                            <th scope="col" style="width: 20%;"><?= __('Access Type') ?></th>
+                            <th scope="col" style="width: 35%;"><?= __('Upload File') ?></th>
+                            <th scope="col" style="width: 10%;"><?= __('Action') ?></th>
                         </tr>
                         <tr class="doc-upload-row">
-                            <td><input aria-label="Enter document name" type="text" class="form-control" name="document_name[]" placeholder="Enter document name"></td>
+                            <td><input aria-label="Enter document name" type="text" class="form-control" name="document_name[]" placeholder="<?= __('Enter document name') ?>"></td>
                             <td>
                                 <select aria-label="Access Type[]" class="form-control js-example-basic-single" name="access_type[]">
                                     <?php foreach($allowedAccess as $row){ ?>
-                                                <option value="<?php echo $row; ?>" ><?php echo $row; ?></option>
+                                                <option value="<?php echo $row; ?>" ><?php echo __($row); ?></option>
                                         <?php } ?>
                                 </select>
                             </td>
@@ -333,10 +333,10 @@ if ($selectedProposalId > 0) {
                     </table>
                 </div>
                 <div class="mb-3">
-                    <button type="button" class="btn btn-primary btn-sm" id="addDocumentRowBtn">+ Add New File</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="addDocumentRowBtn"><?= __('+ Add New File') ?></button>
                 </div>
                 <div>
-                    <button type="submit" name="submit" value="save_documents" class="btn btn-primary" <?php echo $selectedProposalId > 0 ? '' : 'disabled'; ?>>Submit</button>
+                    <button type="submit" name="submit" value="save_documents" class="btn btn-primary" <?php echo $selectedProposalId > 0 ? '' : 'disabled'; ?>><?= __('Submit') ?></button>
                 </div>
             </form>
         </div>
@@ -350,11 +350,11 @@ if ($selectedProposalId > 0) {
         });
 
         $('#addDocumentRowBtn').on('click', function() {
-        var options = '<?php foreach ($allowedAccess as $row) { ?><option value="<?php echo $row; ?>"><?php echo $row; ?></option><?php
+        var options = '<?php foreach ($allowedAccess as $row) { ?><option value="<?php echo $row; ?>"><?php echo __($row); ?></option><?php
 } ?>';
         var rowHtml = '' +
             '<tr class="doc-upload-row">' +
-            '<td><input aria-label="Enter document name" type="text" class="form-control" name="document_name[]" placeholder="Enter document name"></td>' +
+            '<td><input aria-label="Enter document name" type="text" class="form-control" name="document_name[]" placeholder="<?= __('Enter document name') ?>"></td>' +
             '<td><select aria-label="Access Type[]" class="form-control js-example-basic-single" name="access_type[]">' + options + '</select></td>' +
             '<td><input aria-label="Document File[]" type="file" class="form-control" name="document_file[]"></td>' +
             '<td class="text-center"><button type="button" class="btn btn-danger btn-sm btn-remove-row">x</button></td>' +

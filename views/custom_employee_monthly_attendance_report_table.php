@@ -14,7 +14,7 @@ $employee_id = $_REQUEST['employee_id'] ?? 0;
 $month       = $_REQUEST['month'] ?? '';
 
 if (!$employee_id || !$month) {
-	echo '<div class="alert alert-danger">Invalid request</div>';
+	echo '<div class="alert alert-danger">' . __('Invalid request') . '</div>';
 	exit;
 }
 // Call API
@@ -123,7 +123,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
 <div class="col-12">
 	<div class="card">
 		<div class="card-header">
-			<h5>Employee Attendance Report (<?= date('F Y', strtotime($month . '-01')); ?>)</h5>
+			<h5><?= __('Employee Attendance Report') ?> (<?= date('F Y', strtotime($month . '-01')); ?>)</h5>
 			<?php if (!empty($shift_info)): ?>
 				<span class="text-muted m-l-5">
                     <i class="fa fa-clock-o"></i> 
@@ -131,23 +131,23 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                     (<?= $shift_info['clock_in'] ?? '00:00:00'; ?> - <?= $shift_info['clock_out'] ?? '00:00:00'; ?>)
                 </span>
 			<?php endif; ?>
-            <span class=" m-l-5">Designation : </span>
+            <span class=" m-l-5"><?= __('Designation') ?> : </span>
             <span class="text-muted m-l-5"><?php echo $employee_name['designation_name']!="" ? $employee_name['designation_name'] : "-";  ?></span>
-            <span class=" m-l-5">Department :</span>
+            <span class=" m-l-5"><?= __('Department') ?> :</span>
             <span class="text-muted m-l-5"><?php echo $employee_name['department_name']!="" ? $employee_name['department_name'] : "-";  ?></span>
-            <span class=" m-l-5">Location :</span>
+            <span class=" m-l-5"><?= __('Location') ?> :</span>
             <span class="text-muted m-l-5"><?php echo $employee_name['location_name']!="" ? $employee_name['location_name'] : "-";  ?></span>
 		</div>
         <div class="m-l-10">
-             <span class=" m-l-5"> Present Days :  </span>
+             <span class=" m-l-5"> <?= __('Present Days') ?> :  </span>
             <span class="text-muted m-l-5"> <?php echo  $atdata['P']; ?></span>
-             <span class=" m-l-5">Holidays : </span>
+             <span class=" m-l-5"><?= __('Holidays') ?> : </span>
             <span class="text-muted m-l-5"><?php echo  $cnt_holiday; ?></span>
-             <span class=" m-l-5">Sundays : </span>
+             <span class=" m-l-5"><?= __('Sundays') ?> : </span>
             <span class="text-muted m-l-5"><?php echo  $sundays; ?></span>
-             <span class=" m-l-5"> Absent Days : </span>
+             <span class=" m-l-5"> <?= __('Absent Days') ?> : </span>
             <span class="text-muted m-l-5"><?php echo  $atdata['A']; ?></span>
-              <span class=" m-l-5">Total Payable Days : </span>
+              <span class=" m-l-5"><?= __('Total Payable Days') ?> : </span>
             <span class="text-muted m-l-5"><?php echo  $emp_work_days; ?></span> 
         </div>
 
@@ -161,13 +161,13 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th scope="col" width="5%">S.No</th>
-							<th scope="col">Attendance Date</th>
-							<th scope="col">Clock In</th>
-							<th scope="col">Clock Out</th>
-                            <th scope="col">Over Time</th>
-                            <th scope="col">Absenteeism</th>
-							<th scope="col">Status</th>
+							<th scope="col" width="5%"><?= __('S.No') ?></th>
+							<th scope="col"><?= __('Attendance Date') ?></th>
+							<th scope="col"><?= __('Clock In') ?></th>
+							<th scope="col"><?= __('Clock Out') ?></th>
+                            <th scope="col"><?= __('Over Time') ?></th>
+                            <th scope="col"><?= __('Absenteeism') ?></th>
+							<th scope="col"><?= __('Status') ?></th>
                             <th scope="col"></th>
                              <th scope="col"></th>
 						</tr>
@@ -214,7 +214,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                                 }
                             }elseif(isset($attendance_map[$date]['leave_type_id']) &&  $attendance_map[$date]['leave_type_id'] !=""){
                                 $status  = 'L';
-                                $show = 'Leave';
+                                $show = __('Leave');
 
                             }else{
                                 $status  = 'A';
@@ -226,7 +226,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                         // 2️⃣ Weekend
                         elseif (!in_array($day, $weak_off_arr)) {
                             $status = 'WO';
-                            $show = 'Week Off';
+                            $show = __('Week Off');
 
                         }
 
@@ -242,7 +242,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                             foreach ($leave_ranges as $leave) {
                                 if ($date >= $leave['leave_from'] && $date <= $leave['leave_to']) {
                                     $status = 'L';
-                                    $show = 'Leave ('.$leave['leave_type_name'].')';
+                                    $show = __('Leave') . ' (' . __($leave['leave_type_name']) . ')';
 
                                     break;
                                 }
@@ -297,13 +297,13 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                                         data-emp-id="<?= $employee_id ?>"
                                         data-date="<?= $date ?>"
                                          onchange ="leavemonthapply(<?php echo $oncc;?>,this.value)">
-                                    <option value="">Select</option>
-                                    <option value="1" <?= ($current_key == '1') ? 'selected' : '' ?>>Present</option>
-                                    <option value="2" <?= ($current_key == '2') ? 'selected' : '' ?>>Absent</option>
-                                    <option value="3" <?= ($current_key == '3') ? 'selected' : '' ?>>Half Day</option>
-                                    <option value="4" <?= ($current_key == '4') ? 'selected' : '' ?>>Earned Leave</option>
-                                    <option value="6" <?= ($current_key == '6') ? 'selected' : '' ?>>Personal Leave</option>
-                                    <option value="9" <?= ($current_key == '9') ? 'selected' : '' ?>>Short Leave</option>
+                                    <option value=""><?= __('Select') ?></option>
+                                    <option value="1" <?= ($current_key == '1') ? 'selected' : '' ?>><?= __('Present') ?></option>
+                                    <option value="2" <?= ($current_key == '2') ? 'selected' : '' ?>><?= __('Absent') ?></option>
+                                    <option value="3" <?= ($current_key == '3') ? 'selected' : '' ?>><?= __('Half Day') ?></option>
+                                    <option value="4" <?= ($current_key == '4') ? 'selected' : '' ?>><?= __('Earned Leave') ?></option>
+                                    <option value="6" <?= ($current_key == '6') ? 'selected' : '' ?>><?= __('Personal Leave') ?></option>
+                                    <option value="9" <?= ($current_key == '9') ? 'selected' : '' ?>><?= __('Short Leave') ?></option>
                                 </select>
                             </td>
                             <td><?php if ($is_editable){ ?>
@@ -422,14 +422,14 @@ window.addEventListener("load", function() {
 function leavemonthapply(id, timesheet_date, main_clock_in, main_clock_out, leave_type_id) {
  
     Swal.fire({
-        title: 'Are you sure?',
-        text: "Are you sure to change this?",
+        title: <?= json_encode(__('Are you sure?')) ?>,
+        text: <?= json_encode(__('Are you sure to change this?')) ?>,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Change it!',
-        cancelButtonText: 'Cancel'
+        confirmButtonText: <?= json_encode(__('Yes, Change it!')) ?>,
+        cancelButtonText: <?= json_encode(__('Cancel')) ?>
     }).then((result) => {
  
         if (!result.isConfirmed) {
@@ -491,7 +491,7 @@ function leavemonthapply(id, timesheet_date, main_clock_in, main_clock_out, leav
             }*/
         },
         error: function() {
-            alert('Server error');
+            alert(<?= json_encode(__('Server error')) ?>);
 
         }
 

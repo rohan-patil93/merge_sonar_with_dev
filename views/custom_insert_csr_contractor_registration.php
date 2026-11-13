@@ -129,14 +129,11 @@ if (isset($_GET['Rid']) && $_GET['Rid'] != '') {
 <div class="page-body">
     <div class="card proj-progress-card">
         <div class="card-header">
-            <h5>Contractor Registration</h5>
+            <h5><?= __('Contractor Registration') ?></h5>
             <div class="card-header-right">
-                <a href="index.php?option=COM_LIST_CSR_CONTRACTORS" class="btn btn-success mb-2 desktop-view">
-                    Contractor List
-                </a>
+                <a href="index.php?option=COM_LIST_CSR_CONTRACTORS" class="btn btn-success mb-2 desktop-view"><?= __('Contractor List') ?></a>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-reply"></i>
-                    Back
+                    <i class="icofont icofont-reply"></i> <?= __('Back') ?>
                 </a>
             </div>
         </div>
@@ -146,37 +143,37 @@ if (isset($_GET['Rid']) && $_GET['Rid'] != '') {
             <form method="POST" action="" enctype="multipart/form-data" autocomplete="off" id="contractorForm">
                 <div class="row">
                     <div class="form-group mb-3 col-xl-6 col-md-6">
-                        <label for="contractor_name">Contractor Name <span class="text-danger">*</span></label>
+                        <label for="contractor_name"><?= __('Contractor Name') ?> <span class="text-danger">*</span></label>
                         <input type="text" id="contractor_name" name="contractor_name" class="form-control" required
                             value="<?php echo htmlspecialchars($data['contractor_name'] ?? ''); ?>"
                             onchange="this.value=this.value.trim();">
                     </div>
                     <div class="form-group mb-3 col-xl-6 col-md-6">
-                        <label for="email">Email <span class="text-danger">*</span></label>
+                        <label for="email"><?= __('Email') ?> <span class="text-danger">*</span></label>
                         <input type="email" id="email" name="email" class="form-control" required
                             value="<?php echo htmlspecialchars($data['email'] ?? ''); ?>"
                             onchange="this.value=this.value.trim();">
                     </div>
                     <div class="form-group mb-3 col-xl-6 col-md-6">
-                        <label for="phone">Phone <span class="text-danger">*</span></label>
+                        <label for="phone"><?= __('Phone') ?> <span class="text-danger">*</span></label>
                         <input type="number" id="phone" name="phone" class="form-control" required
                             value="<?php echo htmlspecialchars($data['phone'] ?? ''); ?>"
                             onchange="this.value=this.value.trim();">
                     </div>
                     <div class="form-group mb-3 col-xl-6 col-md-6">
-                        <label for="gst">GST</label>
+                        <label for="gst"><?= __('GST') ?></label>
                         <input type="text" id="gst" name="gst" class="form-control"
                             value="<?php echo htmlspecialchars($data['gst'] ?? ''); ?>"
                             onchange="this.value=this.value.trim();">
                     </div>
                     <div class="form-group mb-3 col-xl-6 col-md-6">
-                        <label for="tan">TAN</label>
+                        <label for="tan"><?= __('TAN') ?></label>
                         <input type="text" id="tan" name="tan" class="form-control"
                             value="<?php echo htmlspecialchars($data['tan'] ?? ''); ?>"
                             onchange="this.value=this.value.trim();">
                     </div>
                     <div class="form-group mb-3 col-xl-6 col-md-6">
-                        <label for="files">Files</label>
+                        <label for="files"><?= __('Files') ?></label>
                         <input type="file" id="files" name="files[]" class="form-control" multiple >
                     </div>
                     <?php
@@ -206,11 +203,11 @@ if (isset($_GET['Rid']) && $_GET['Rid'] != '') {
                         <div class="form-group col-md-4 align-self-end ">
                             <?php if (isset($rid) && $rid != '') { ?>
                                 <input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>">
-                                <button name="submit" value="update" type="submit" class="btn btn-primary">Update</button>
+                                <button name="submit" value="update" type="submit" class="btn btn-primary"><?= __('Update') ?></button>
                             <?php } else { ?>
-                                <button name="submit" value="insert" type="submit" class="btn btn-primary">Submit</button>
+                                <button name="submit" value="insert" type="submit" class="btn btn-primary"><?= __('Submit') ?></button>
                             <?php } ?>
-                            <button type="button" onclick="resetForm('contractorForm')" class="btn btn-danger waves-effect waves-light">Cancel</button>
+                            <button type="button" onclick="resetForm('contractorForm')" class="btn btn-danger waves-effect waves-light"><?= __('Cancel') ?></button>
 
                         </div>
                     <?php } ?>

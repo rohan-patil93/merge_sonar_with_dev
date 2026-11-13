@@ -136,11 +136,11 @@ $( "#cate_"+catid ).hide();
     <div class="container-fluid ">
         <div class="card card-custom card-sticky " id="kt_page_sticky_card">
             <div class="card-header">
-                <h5>Job Title</h5>
+                <h5><?php echo __('Job Title'); ?></h5>
                 <div class="card-header-right">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?php echo __('Back'); ?>
             </a>
                 </div>
             </div>
@@ -151,28 +151,28 @@ $( "#cate_"+catid ).hide();
                             <div class="form-group row">
                                 <div class="form-group col-lg-12">
                                     <div class="form-group col-lg-3 p-1 float-left">
-                                        <span class="form-label ">Job Title&nbsp;<span class="requried">*</span></span>
+                                        <span class="form-label "><?php echo __('Job Title&nbsp;'); ?><span class="requried">*</span></span>
                                         <div class="input-group input-icon-right">
-                                            <input aria-label="Job Title" class="form-control"  type="text"  id="job_title" name="job_title" id="job_title_2"  value="<?php echo $role['job_title']; ?>">
+                                            <input aria-label="<?php echo __('Job Title'); ?>" class="form-control"  type="text"  id="job_title" name="job_title" id="job_title_2"  value="<?php echo $role['job_title']; ?>">
 
                                         </div>
-                                        <div style="display: none;color: red;" id="job_title_err"> Please Enter Job Tittle Name </div>
+                                        <div style="display: none;color: red;" id="job_title_err"> <?php echo __('Please Enter Job Tittle Name'); ?> </div>
                                     </div>
                                     <div class="form-group col-lg-3 p-1 float-left">
-                                        <span class="form-label ">Job Category</span>
-                                        <select aria-label="Job Category" class="form-control form-select js-example-basic-single" id="kt_select2_41"  name="job_category_id">
-                                            <option value=""> Select Any one Job Category </option>
+                                        <span class="form-label "><?php echo __('Job Category'); ?></span>
+                                        <select aria-label="<?php echo __('Job Category'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_41"  name="job_category_id">
+                                            <option value=""> <?php echo __('Select Any one Job Category'); ?> </option>
                                             <?php foreach($categories as $categ){ ?>
-                                                <option  <?php if($role['job_category_id'] == $categ['id'] ){ echo "selected";
+                                                <option  <?php if($role['job_category_id'] == $categ['id'] ){ echo __('selected');
 } ?> value="<?php echo $categ['id'];  ?>"><?php echo $categ['category_name'];  ?></option>
                                             <?php } ?>
                                         </select>
-                                        <div style="display: none;color: red;" id="job_category_err"> Please Select Job Category </div>
+                                        <div style="display: none;color: red;" id="job_category_err"> <?php echo __('Please Select Job Category'); ?> </div>
                                     </div>
                                     <div class="form-group col-lg-6 p-1 float-left">
-                                        <span class="form-label ">Note</span>
+                                        <span class="form-label "><?php echo __('Note'); ?></span>
                                         <div class="kt-radio-inline">
-                                            <textarea aria-label="Note" type="text" class="form-control" id="note" name="note" ><?php echo $role['note']; ?></textarea>
+                                            <textarea aria-label="<?php echo __('Note'); ?>" type="text" class="form-control" id="note" name="note" ><?php echo $role['note']; ?></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -181,14 +181,14 @@ $( "#cate_"+catid ).hide();
                                 $role_des = $role_js['descr']['0'];
                                 ?>
                                 <div class="col-lg-6">
-                                    <h3 class="card-label">Description</h3>
+                                    <h3 class="card-label"><?php echo __('Description'); ?></h3>
                                     <div class="col-lg-12">
                                         <div class="checkbox-list">
                                             <?php foreach ($job_categories as $job_categorie) { ?>
                                                 <div class="mt-5">
                                                     <div class="checkbox-fade fade-in-primary">
                                                         <label class="form-label line-height24">
-                                                            <input aria-label="Checkbox" type="checkbox" <?php if(in_array($job_categorie['id'],(array)$role_cat)){ echo "checked";
+                                                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php if(in_array($job_categorie['id'],(array)$role_cat)){ echo __('checked');
 } ?>  name="cat[<?php echo $job_categorie['id']; ?>]" id="cat_<?php echo $job_categorie['id']; ?>" onclick="jobcate(<?php echo $job_categorie['id']; ?>)" onkeydown="" />
                                                             <span class="cr float-left">
                                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -202,7 +202,7 @@ $( "#cate_"+catid ).hide();
                                                     <?php foreach ($jobdescrptions[$job_categorie['id']] as $jobdescrption) { ?>
                                                         <div class="checkbox-fade fade-in-primary mt-2 p-l-20">
                                                             <label class="form-label text-auto-hight line-height24">
-                                                                <input aria-label="Checkbox" type="checkbox" <?php if(in_array($jobdescrption['id'],(array)$role_des)){ echo "checked";
+                                                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php if(in_array($jobdescrption['id'],(array)$role_des)){ echo __('checked');
 } ?>  name="desc[<?php echo $jobdescrption['id']; ?>]" id="jobdes_<?php echo $jobdescrption['id']; ?>" onclick="jobdesc(<?php echo $jobdescrption['id'];  ?>,'<?php echo $job_categorie['id']; ?>')" onkeydown="" />
 
                                                                 <span class="cr float-left">
@@ -220,10 +220,10 @@ $( "#cate_"+catid ).hide();
                                         <div class=" card-custom  " id="kt_page_stretched_card">
                                             <div class="card-header">
                                                 <div class="card-title">
-                                                    <h3 class="card-label">Description</h3>
+                                                    <h3 class="card-label"><?php echo __('Description'); ?></h3>
                                                 </div>
                                             </div>
-                                            <textarea aria-label="Description" class="textediters" name="description" rows="4" cols="250" id="description">
+                                            <textarea aria-label="<?php echo __('Description'); ?>" class="textediters" name="description" rows="4" cols="250" id="description">
                                                 <div class="p-10 checktxetarea">
 
                                                     <?php foreach ($job_categories as $job_categorie) { ?>
@@ -234,7 +234,7 @@ $( "#cate_"+catid ).hide();
                                                                 <b><?php echo $job_categorie['name'];  ?></b>
                                                             </div>
                                                             <?php foreach ($jobdescrptions[$job_categorie['id']] as $jobdescrption) { ?>
-                                                                <div class="ml-10 mt-5 mlmt30" id="id_<?php echo $jobdescrption['id']; ?>" <?php if(in_array($jobdescrption['id'],(array)$role_des)){ echo "checked";
+                                                                <div class="ml-10 mt-5 mlmt30" id="id_<?php echo $jobdescrption['id']; ?>" <?php if(in_array($jobdescrption['id'],(array)$role_des)){ echo __('checked');
 }else{ ?> style="display: none;" <?php
 } ?> style="margin-left:30px; margin-top: 5px;">
                                                                     <?php echo $jobdescrption['description'];  ?>
@@ -256,16 +256,16 @@ $( "#cate_"+catid ).hide();
                                     <?php if(isset($_GET['Rid']) && $_GET['Rid'] !='' && $_GET['copy'] != '1' ){ ?>
                                         <input type="hidden" name="submit" value="updatess" />
                                         <input type="hidden" name="rid" value="<?php echo $rid; ?>">
-                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_update" value="exit"><i class="la la-check"></i>Update</button>
+                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_update" value="exit"><i class="la la-check"></i><?php echo __('Update'); ?></button>
                                     <?php }else{ ?>
                                         <input type="hidden" name="submit" value="Adds" />
-                                        <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_values" value="exit"><i class="la la-check"></i>Save</button>
+                                        <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_values" value="exit"><i class="la la-check"></i><?php echo __('Save'); ?></button>
                                     <?php } ?>
 
-                                    <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i>Cancel</button>
+                                    <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                                 </div>
                                 <div class="col-lg-3 text-right">
-                                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?php echo __('Delete'); ?></button>
                                 </div>
                             </div>
                         </div>

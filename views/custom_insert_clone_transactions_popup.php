@@ -48,32 +48,32 @@ function submitCloneTransaction(){
 }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title"><?php echo viewtitle($transaction_table); ?> - <?php echo $transaction_table_detail['transaction_number']; ?> (<?php echo $transaction_table_detail['transaction_date']; ?>) Clone To  <?php echo viewtitle($clone_table); ?></h5>
+    <h5 class="modal-title"><?php echo viewtitle($transaction_table); ?> - <?php echo $transaction_table_detail['transaction_number']; ?> (<?php echo $transaction_table_detail['transaction_date']; ?>) <?= __('Clone To') ?>  <?php echo viewtitle($clone_table); ?></h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <form  method="post" id="clone_transaction_form">
     <div class="modal-body" >
         <div class="form-group row">
             <div class="col-lg-6 w-full" >
-                <span class="form-label">Vendors <span class="text-danger">*</span></span>
+                <span class="form-label"><?= __('Vendors') ?> <span class="text-danger">*</span></span>
                 <select aria-label="Party" class="form-control js-example-basic-single" name="party_id" id="party_id_popup" >
                     <?php foreach ($party_list as $plist) {  ?>
                         <option value = <?php echo $plist['id'] ?>><?php echo $plist['display_name']; ?></option>
                     <?php } ?>
                 </select>
-                <span id="party_id_popup_error" class="text-danger" style="display: none">Please Select Any One Vendor</span>
+                <span id="party_id_popup_error" class="text-danger" style="display: none"><?= __('Please Select Any One Vendor') ?></span>
             </div>
             <div class="col-lg-6 ">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Items</h5>
+                        <h5><?= __('Items') ?></h5>
                     </div>
                     <div class="card-body ">
                         <table style="width: 100%;">
                             <tr>
-                                <th scope="col">Item</th>
-                                <th scope="col" class="text-right">Qty</th>
-                                <th scope="col" class="text-right text-danger">Pending Qty</th>
+                                <th scope="col"><?= __('Item') ?></th>
+                                <th scope="col" class="text-right"><?= __('Qty') ?></th>
+                                <th scope="col" class="text-right text-danger"><?= __('Pending Qty') ?></th>
                             </tr>
                         <?php foreach($transaction_table_item_detail as $ttid){
                             if($ttid['pending_qty'] > 0){
@@ -97,8 +97,8 @@ function submitCloneTransaction(){
         <input type="hidden" name="transaction_id" id='transaction_id' value="<?php echo $transaction_id; ?>">
         <input type="hidden" name="clone_table" id='clone_table' value="<?php echo $clone_table; ?>">
         <input type="hidden" name="party_table" id='party_table' value="<?php echo $party_table; ?>">
-        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary waves-effect waves-light <?php echo $btndisabled; ?>" id="statuspopupbtn"  onclick="submitCloneTransaction()" <?php echo $btndisbale; ?>>Submit</button>
+        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
+        <button type="button" class="btn btn-primary waves-effect waves-light <?php echo $btndisabled; ?>" id="statuspopupbtn"  onclick="submitCloneTransaction()" <?php echo $btndisbale; ?>><?= __('Submit') ?></button>
     </div>
 </form>
 <!-- local datatable modal -->

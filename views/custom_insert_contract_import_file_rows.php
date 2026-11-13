@@ -76,7 +76,7 @@ if (!empty($_SESSION['upload_msg'])) {
 
 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
     <div class="card-header table-card-header">
-        <h5>Contracts Import</h5>
+        <h5><?= __('Contracts Import') ?></h5>
         <div class="card-header-right table-card-header ">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i> Back
@@ -87,15 +87,13 @@ if (!empty($_SESSION['upload_msg'])) {
         <form method="post" enctype="multipart/form-data">
             <div class="form-group row">
                 <div class="form-group col-lg-4">
-                    <span class="form-label">File Name </span>
+                    <span class="form-label"><?= __('File Name') ?></span>
                     <div>
-                        <input aria-label="Enter Upload File Name" class="form-control" type="text" id="file_name" name="file_name" value="" placeholder="Enter Upload File Name" required>
+                        <input aria-label="Enter Upload File Name" class="form-control" type="text" id="file_name" name="file_name" value="" placeholder="<?= __('Enter Upload File Name') ?>" required>
                     </div>
                 </div>
                 <div class="form-group col-lg-4">
-                    <span class="form-label">
-                        Select Type
-                    </span>
+                    <span class="form-label"><?= __('Select Type') ?></span>
                     <div class="form-radio">
                         <div class="radio radio-inline">
                           <label class="form-label">
@@ -112,14 +110,14 @@ if (!empty($_SESSION['upload_msg'])) {
                     </div>
                 </div>
                 <div class="form-group col-lg-4">
-                    <span class="form-label">CSV File: </span>
+                    <span class="form-label"><?= __('CSV File:') ?></span>
                     <div>
                         <input aria-label="Csv File" class="form-control" type="file" id="csv_file" name="csv_file" accept=".csv" required>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <button id="kt_login_signin_submit" type="submit" class="btn btn-primary col-lg-1" name="submit" value="upload_csv"><i class="la la-check"></i>Submit</button>
+                <button id="kt_login_signin_submit" type="submit" class="btn btn-primary col-lg-1" name="submit" value="upload_csv"><i class="la la-check"></i><?= __('Submit') ?></button>
             </div>
         </form>
     </div>

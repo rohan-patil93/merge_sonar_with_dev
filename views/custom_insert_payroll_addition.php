@@ -1,7 +1,7 @@
 <div class="card card-custom gutter-b">
     <div class="card-header border-0 ">
         <div class="card-header table-card-header">
-            <h5>New Joinees</h5>
+            <h5><?php echo __('New Joinees'); ?></h5>
         </div>
     </div>
     <div class="card-body py-0">
@@ -10,11 +10,11 @@
                 <thead>
                     <tr><th scope="col" class="pr-0" style="width: 10px"></th>
                         <th scope="col" class="pr-0" style="width: 80px"></th>
-                        <th scope="col" style="min-width: 150px">Name</th>
-                        <th scope="col" style="min-width: 50px">Bank Details</th>
-                        <th scope="col" style="min-width: 50px">Break Up Salary</th>
-                        <th scope="col" style="min-width: 50px">Pan Card</th>
-                        <th scope="col" style="min-width: 50px">Joining Bouns</th>
+                        <th scope="col" style="min-width: 150px"><?php echo __('Name'); ?></th>
+                        <th scope="col" style="min-width: 50px"><?php echo __('Bank Details'); ?></th>
+                        <th scope="col" style="min-width: 50px"><?php echo __('Break Up Salary'); ?></th>
+                        <th scope="col" style="min-width: 50px"><?php echo __('Pan Card'); ?></th>
+                        <th scope="col" style="min-width: 50px"><?php echo __('Joining Bouns'); ?></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -42,7 +42,7 @@
                         <td>
                             <div class="checkbox-inline">
                                 <label class="checkbox">
-                                    <input aria-label="Checkbox" type="checkbox" <?php if($dd['bank']==0){ ?> checked <?php
+                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php if($dd['bank']==0){ ?> checked <?php
 } ?>  disabled="disabled"name="" value="<?php echo $details['id']; ?>" />
                                     <span></span>
                                 </label>
@@ -51,7 +51,7 @@
                         <td>
                             <div class="checkbox-inline">
                                 <label class="checkbox">
-                                    <input aria-label="Checkbox" type="checkbox"   <?php if($dd['break_up']==1){ ?>  checked <?php
+                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"   <?php if($dd['break_up']==1){ ?>  checked <?php
 } ?> disabled="disabled" name="document[]" value="<?php echo $details['id']; ?>" />
                                     <span></span>
                                 </label>
@@ -60,7 +60,7 @@
                         <td>
                             <div class="checkbox-inline">
                                 <label class="checkbox">
-                                    <input aria-label="Checkbox" type="checkbox"   <?php if($dd['pan_number']!=''){ ?>  checked <?php
+                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"   <?php if($dd['pan_number']!=''){ ?>  checked <?php
 } ?> disabled="disabled" name="document[]" value="<?php echo $details['id']; ?>" />
                                     <span></span>
                                 </label>
@@ -69,7 +69,7 @@
                         <td>
                             <div class="checkbox-inline">
                                 <label class="checkbox">
-                                    <input aria-label="Checkbox" type="checkbox"   <?php if($dd['joining_bonus_applicable']==0){ ?>  checked <?php
+                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"   <?php if($dd['joining_bonus_applicable']==0){ ?>  checked <?php
 } ?> disabled="disabled" name="document[]" value="<?php echo $details['id']; ?>" />
                                     <span></span>
                                 </label>
@@ -77,14 +77,14 @@
                         </td>
 
                         <td>
-                            <button type="button" onclick="notifyuser(<?php echo $dd['user_id']; ?>)" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2">Notify</button>
+                            <button type="button" onclick="notifyuser(<?php echo $dd['user_id']; ?>)" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"><?php echo __('Notify'); ?></button>
                         </td>
                     </tr>
                 <?php $mnm++;
 }
 }else{ ?>
                     <tr>
-                         <td colspan="5" class="text-center"> <b>No Recards Fuond</b></td>
+                         <td colspan="5" class="text-center"> <b><?php echo __('No Recards Fuond'); ?></b></td>
                     </tr>
                 <?php } ?>
                 </tbody>

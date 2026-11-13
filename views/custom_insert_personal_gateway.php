@@ -106,12 +106,12 @@ $employees = $datas['employees'] ?? [];
  function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: "Please note the status of the document will change to "+new_status_name,
+        text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
         type: "info",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+        cancelButtonText: <?php echo json_encode(__('No')); ?>,
         closeOnConfirm: false
     },
     function(){
@@ -138,12 +138,12 @@ $employees = $datas['employees'] ?? [];
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...')); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -177,36 +177,36 @@ $employees = $datas['employees'] ?? [];
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="card bg-primary order-card">
                 <div class="card-body">
-                    <h6 class="text-white">Persons Inside</h6>
+                    <h6 class="text-white"><?php echo __('Persons Inside'); ?></h6>
                     <h2 class="text-right text-white"><i class="ti-user f-left"></i> <span id="stat-current-count"> 0</span></h2>
-                    <p class="m-b-0 text-white">Currently in premises</p>
+                    <p class="m-b-0 text-white"><?php echo __('Currently in premises'); ?></p>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="card bg-success order-card">
                 <div class="card-body">
-                    <h6 class="text-white">Today's Entries</h6>
+                    <h6 class="text-white"><?php echo __('Today\'s Entries'); ?></h6>
                     <h2 class="text-right text-white"><i class="ti-import f-left"></i> <span id="stat-today-entries"> 0</span></h2>
-                    <p class="m-b-0 text-white">Persons entered today</p>
+                    <p class="m-b-0 text-white"><?php echo __('Persons entered today'); ?></p>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="card bg-danger order-card">
                 <div class="card-body">
-                    <h6 class="text-white">Today's Exits</h6>
+                    <h6 class="text-white"><?php echo __('Today\'s Exits'); ?></h6>
                     <h2 class="text-right text-white"><i class="ti-export f-left"></i> <span id="stat-today-exits"> 0</span></h2>
-                    <p class="m-b-0 text-white">Persons exited today</p>
+                    <p class="m-b-0 text-white"><?php echo __('Persons exited today'); ?></p>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="card bg-warning order-card">
                 <div class="card-body">
-                    <h6 class="text-white">Avg. Duration</h6>
-                    <h2 class="text-right text-white"><i class="ti-time f-left"></i> <span id="stat-avg-duration"> 0h</span></h2>
-                    <p class="m-b-0 text-white">Average stay time</p>
+                    <h6 class="text-white"><?php echo __('Avg. Duration'); ?></h6>
+                    <h2 class="text-right text-white"><i class="ti-time f-left"></i> <span id="stat-avg-duration"> <?php echo __('0h'); ?></span></h2>
+                    <p class="m-b-0 text-white"><?php echo __('Average stay time'); ?></p>
                 </div>
             </div>
         </div>
@@ -223,11 +223,11 @@ $employees = $datas['employees'] ?? [];
                 }?>
 
                 <div class="card-header table-card-header">
-                    <h5><i class="ti-user"></i> <?php echo $editMode ? 'Edit Personal Gateway Entry' : 'Personal Gateway Entry'; ?></h5>
+                    <h5><i class="ti-user"></i> <?php echo $editMode ? __('Edit Personal Gateway Entry') : __('Personal Gateway Entry'); ?></h5>
                     <div class="card-header-right table-card-header">
                         <?php echo $workflowsteps['workflow_btn'];?>
                         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                            <i class="icofont icofont-reply"></i> Back
+                            <i class="icofont icofont-reply"></i> <?php echo __('Back'); ?>
                         </a>
                     </div>
                 </div>
@@ -247,24 +247,24 @@ $employees = $datas['employees'] ?? [];
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Movement Type <span class="text-danger">*</span></span>
+                                    <span class="form-label"><?php echo __('Movement Type'); ?> <span class="text-danger">*</span></span>
                                     <div class="d-flex gap-3">
                                         <div class="transport-gateway-radio radio-success mr-4">
                                             <input type="radio" name="method_type" id="method_entry_first" value="entry_first"
                                                 <?php echo ($editMode && ($editMode && $editData && ($editData['method_type'] ?? 'entry_first') == 'entry_first')) ? 'checked' : ''; ?>>
                                             <label for="method_entry_first" class="mr-3">
-                                                <i class="ti-import text-success"></i> Entry First (Person Coming In)
+                                                <i class="ti-import text-success"></i> <?php echo __('Entry First (Person Coming In)'); ?>
                                             </label>
                                         </div>
                                         <div class="transport-gateway-radio radio-danger">
                                             <input type="radio" name="method_type" id="method_exit_first" value="exit_first"
                                                 <?php echo (!$editMode || $editData && ($editData['method_type'] ?? 'exit_first') == 'exit_first') ? 'checked' : ''; ?>>
                                             <label for="method_exit_first">
-                                                <i class="ti-export text-danger"></i> Exit First (Person Going Out)
+                                                <i class="ti-export text-danger"></i> <?php echo __('Exit First (Person Going Out)'); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <small class="text-muted">Select "Exit First" when staff is going out for official work</small>
+                                    <small class="text-muted"><?php echo __('Select "Exit First" when staff is going out for official work'); ?></small>
                                 </div>
                             </div>
                         </div>
@@ -272,10 +272,10 @@ $employees = $datas['employees'] ?? [];
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Employee Name  <span class="text-danger">*</span></span>
+                                    <span class="form-label"><?php echo __('Employee Name'); ?>  <span class="text-danger">*</span></span>
                                     <div class="transport_select">
-                                        <select aria-label="Employee" class="form-select js-example-basic-single" name="employee_id" id="employeeSelect" required>
-                                            <option value="">Select Employee</option>
+                                        <select aria-label="<?php echo __('Employee'); ?>" class="form-select js-example-basic-single" name="employee_id" id="employeeSelect" required>
+                                            <option value=""><?php echo __('Select Employee'); ?></option>
                                             <?php
                                             $sessionEmployeeId = "";
                                             if ($work_admin_type == 2) {
@@ -300,10 +300,10 @@ $employees = $datas['employees'] ?? [];
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Contact Number</span>
+                                    <span class="form-label"><?php echo __('Contact Number'); ?></span>
                                     <div>
-                                        <input aria-label="Contact number" type="tel" class="form-control" name="employee_contact" id="employeeContact"
-                                            placeholder="Contact number" readonly
+                                        <input aria-label="<?php echo __('Contact number'); ?>" type="tel" class="form-control" name="employee_contact" id="employeeContact"
+                                            placeholder="<?php echo __('Contact number'); ?>" readonly
                                             value="<?php echo $editMode && $editData ? htmlspecialchars($editData['employee_contact'] ?? '') : ''; ?>">
                                     </div>
                                 </div>
@@ -313,20 +313,20 @@ $employees = $datas['employees'] ?? [];
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Email</span>
+                                    <span class="form-label"><?php echo __('Email'); ?></span>
                                     <div>
-                                        <input aria-label="Email address" type="email" class="form-control" name="employee_email" id="employeeEmail"
-                                            placeholder="Email address" readonly
+                                        <input aria-label="<?php echo __('Email address'); ?>" type="email" class="form-control" name="employee_email" id="employeeEmail"
+                                            placeholder="<?php echo __('Email address'); ?>" readonly
                                             value="<?php echo $editMode && $editData ? htmlspecialchars($editData['employee_email'] ?? '') : ''; ?>">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Purpose <span class="text-danger">*</span></span>
+                                    <span class="form-label"><?php echo __('Purpose'); ?> <span class="text-danger">*</span></span>
                                     <div class="transport_select">
-                                        <select aria-label="Visit Purpose" class="form-select js-example-basic-single" name="visit_purpose" id="visitPurpose" required>
-                                            <option value="">Select Purpose</option>
+                                        <select aria-label="<?php echo __('Visit Purpose'); ?>" class="form-select js-example-basic-single" name="visit_purpose" id="visitPurpose" required>
+                                            <option value=""><?php echo __('Select Purpose'); ?></option>
                                             <?php
                                             $selectedPurpose = $editMode && $editData ? ($editData['visit_purpose'] ?? '') : '';
                                             foreach ($visitPurposes as $key => $purpose): ?>
@@ -343,10 +343,10 @@ $employees = $datas['employees'] ?? [];
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Gateway Type <span class="text-danger">*</span></span>
+                                    <span class="form-label"><?php echo __('Gateway Type'); ?> <span class="text-danger">*</span></span>
                                     <div class="transport_select">
-                                        <select aria-label="Gateway Type" class="form-select js-example-basic-single" name="gateway_type" id="gateway_type" required>
-                                            <option value="">Select Gateway Type</option>
+                                        <select aria-label="<?php echo __('Gateway Type'); ?>" class="form-select js-example-basic-single" name="gateway_type" id="gateway_type" required>
+                                            <option value=""><?php echo __('Select Gateway Type'); ?></option>
                                             <?php
                                             $gateway_type = $editMode && $editData ? ($editData['gateway_type'] ?? '') : '';
                                             if (count((array)$gateway_types)>0){ ?>
@@ -363,18 +363,18 @@ $employees = $datas['employees'] ?? [];
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Requested By</span>
+                                    <span class="form-label"><?php echo __('Requested By'); ?></span>
                                     <?php $requested_by = $editMode && $editData ? (int)($editData['requested_by'] ?? 0) : 2; ?>
                                     <div class="d-flex gap-3">
                                         <div class="transport-gateway-radio radio-primary mr-4">
                                             <input type="radio" name="requested_by" id="requested_by_security" value="1"
                                                 <?php echo ($requested_by == 1) ? 'checked' : ''; ?>>
-                                            <label for="requested_by_security" class="mr-3">Security</label>
+                                            <label for="requested_by_security" class="mr-3"><?php echo __('Security'); ?></label>
                                         </div>
                                         <div class="transport-gateway-radio radio-primary">
                                             <input type="radio" name="requested_by" id="requested_by_showroom_hostess" value="2"
                                                 <?php echo ($requested_by != 1) ? 'checked' : ''; ?>>
-                                            <label for="requested_by_showroom_hostess">Showroom Hostess</label>
+                                            <label for="requested_by_showroom_hostess"><?php echo __('Showroom Hostess'); ?></label>
                                         </div>
                                     </div>
                                 </div>
@@ -384,10 +384,10 @@ $employees = $datas['employees'] ?? [];
                         <div class="row <?php echo ($editMode && $editData && ($editData['visit_purpose'] ?? '') == 'other') ? '' : 'd-none-initial'; ?>" id="otherPurposeRow">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Specify Purpose <span class="text-danger">*</span></span>
+                                    <span class="form-label"><?php echo __('Specify Purpose'); ?> <span class="text-danger">*</span></span>
                                     <div>
-                                        <input aria-label="Please specify purpose" type="text" class="form-control" name="other_visit_purpose" id="otherPurpose"
-                                            placeholder="Please specify purpose"
+                                        <input aria-label="<?php echo __('Please specify purpose'); ?>" type="text" class="form-control" name="other_visit_purpose" id="otherPurpose"
+                                            placeholder="<?php echo __('Please specify purpose'); ?>"
                                             value="<?php echo $editMode && $editData ? htmlspecialchars($editData['other_visit_purpose'] ?? '') : ''; ?>">
                                     </div>
                                 </div>
@@ -398,10 +398,10 @@ $employees = $datas['employees'] ?? [];
 
                             <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Location <span class="text-danger">*</span></span>
+                                    <span class="form-label"><?php echo __('Location'); ?> <span class="text-danger">*</span></span>
                                     <div class="transport_select">
-                                        <select aria-label="Location" class="form-select js-example-basic-single" name="location" id="locationSelect" required>
-                                            <option value="">Select Location</option>
+                                        <select aria-label="<?php echo __('Location'); ?>" class="form-select js-example-basic-single" name="location" id="locationSelect" required>
+                                            <option value=""><?php echo __('Select Location'); ?></option>
                                             <?php
                                             $selectedLocation = $editMode && $editData ? ($editData['location'] ?? '') : '';
                                             if (!empty($locations) && is_array($locations)): ?>
@@ -414,28 +414,28 @@ $employees = $datas['employees'] ?? [];
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
-                                            <option value="99999" <?php echo ($selectedLocation === '99999') ? 'selected' : ''; ?>>Others</option>
+                                            <option value="99999" <?php echo ($selectedLocation === '99999') ? 'selected' : ''; ?>><?php echo __('Others'); ?></option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-12 <?php echo ($selectedLocation === '99999') ? '' : 'd-none-initial'; ?>" id="otherLocationCol">
                                 <div class="form-group">
-                                    <span class="form-label">Other Location <span class="text-danger">*</span></span>
+                                    <span class="form-label"><?php echo __('Other Location'); ?> <span class="text-danger">*</span></span>
                                     <div>
-                                        <input aria-label="Enter other location" type="text" class="form-control" name="other_location" id="otherLocation"
-                                            placeholder="Enter other location"
+                                        <input aria-label="<?php echo __('Enter other location'); ?>" type="text" class="form-control" name="other_location" id="otherLocation"
+                                            placeholder="<?php echo __('Enter other location'); ?>"
                                             value="<?php echo $editMode && $editData ? htmlspecialchars($editData['other_location'] ?? '') : ''; ?>">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Authorized By</span>
+                                    <span class="form-label"><?php echo __('Authorized By'); ?></span>
                                     <?php $selected_authorized_by = $editMode && $editData ? ($editData['authorized_by'] ?? '') : ($_SESSION['userid'] ?? ''); ?>
                                     <div class="transport_select">
-                                        <select aria-label="Authorized By" class="form-select js-example-basic-single" name="authorized_by" id="authorized_by" data-selected-value="<?php echo htmlspecialchars((string)$selected_authorized_by, ENT_QUOTES, 'UTF-8'); ?>">
-                                            <option value="">No data found</option>
+                                        <select aria-label="<?php echo __('Authorized By'); ?>" class="form-select js-example-basic-single" name="authorized_by" id="authorized_by" data-selected-value="<?php echo htmlspecialchars((string)$selected_authorized_by, ENT_QUOTES, 'UTF-8'); ?>">
+                                            <option value=""><?php echo __('No data found'); ?></option>
                                         </select>
                                     </div>
                                 </div>
@@ -445,18 +445,18 @@ $employees = $datas['employees'] ?? [];
                         <div class="row" id="dateTimeRow">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Date</span>
+                                    <span class="form-label"><?php echo __('Date'); ?></span>
                                     <div>
-                                        <input aria-label="Entry Date" type="date" class="form-control" name="entry_date" id="entryDate"
+                                        <input aria-label="<?php echo __('Entry Date'); ?>" type="date" class="form-control" name="entry_date" id="entryDate"
                                             value="<?php echo $editMode && $editData && !empty($editData['entry_date']) ? $editData['entry_date'] : date('Y-m-d'); ?>">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Time</span>
+                                    <span class="form-label"><?php echo __('Time'); ?></span>
                                     <div>
-                                        <input aria-label="In Time" type="time" class="form-control" name="in_time" id="inTime"
+                                        <input aria-label="<?php echo __('In Time'); ?>" type="time" class="form-control" name="in_time" id="inTime"
                                             value="<?php echo $editMode && $editData && !empty($editData['entry_time']) && $editData['entry_time'] != '00:00:00' ? substr($editData['entry_time'], 0, 5) : date('H:i'); ?>">
                                     </div>
                                 </div>
@@ -466,9 +466,9 @@ $employees = $datas['employees'] ?? [];
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Additional Notes</span>
+                                    <span class="form-label"><?php echo __('Additional Notes'); ?></span>
                                     <div>
-                                        <textarea aria-label="Any additional information..." class="form-control" name="notes" rows="3" placeholder="Any additional information..."><?php echo $editMode && $editData ? htmlspecialchars($editData['notes'] ?? '') : ''; ?></textarea>
+                                        <textarea aria-label="<?php echo __('Any additional information...'); ?>" class="form-control" name="notes" rows="3" placeholder="<?php echo __('Any additional information...'); ?>"><?php echo $editMode && $editData ? htmlspecialchars($editData['notes'] ?? '') : ''; ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -477,10 +477,10 @@ $employees = $datas['employees'] ?? [];
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                             <button type="submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 btn_mobile" id="submitBtn">
-                                <i class="la la-check"></i> <span id="submitBtnText"><?php echo $editMode ? 'Update Entry' : 'Record Entry'; ?></span>
+                                <i class="la la-check"></i> <span id="submitBtnText"><?php echo $editMode ? __('Update Entry') : __('Record Entry'); ?></span>
                             </button>
                             <button type="reset" class="btn btn-secondary btn-shadow-hover font-weight-bold mr-2 m-b-10 btn_mobile">
-                                <i class="la la-refresh"></i> Clear Form
+                                <i class="la la-refresh"></i> <?php echo __('Clear Form'); ?>
                             </button>
                         </div>
                     </form>
@@ -492,27 +492,27 @@ $employees = $datas['employees'] ?? [];
         <div class="col-lg-4 col-md-12 col-sm-12 col-12">
             <div class="card table-card">
                 <div class="card-header table-card-header">
-                    <h5><i class="ti-list"></i> Active Per Premises</h5>
+                    <h5><i class="ti-list"></i> <?php echo __('Active Per Premises'); ?></h5>
                     <div class="card-header-right">
-                        <span class="badge badge-primary text-white" id="persons-count-badge">0 persons</span>
+                        <span class="badge badge-primary text-white" id="persons-count-badge"><?php echo __('0 persons'); ?></span>
                     </div>
                 </div>
                 <div class="card-body custom-scroll" style="height: 715px; overflow-y: auto;">
                     <!-- Search Box -->
                     <div class="mb-4">
-                        <input aria-label="Search by name, vehicle, or purpose..." type="text" class="form-control form-control-sm" id="personSearchInput"
-                            placeholder="Search by name, vehicle, or purpose..."
+                        <input aria-label="<?php echo __('Search by name, vehicle, or purpose...'); ?>" type="text" class="form-control form-control-sm" id="personSearchInput"
+                            placeholder="<?php echo __('Search by name, vehicle, or purpose...'); ?>"
                             style="border-radius: 4px; padding: 6px 10px;">
                     </div>
                     <ul class="nav md-tabs infisuite_tab mb-2" id="currentPersonsTabs">
                         <li class="nav-item">
                             <a class="nav-link active" id="inside-persons-tab" data-tab="inside" data-toggle="tab" href="#insidePersons" role="tab" aria-controls="insidePersons" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                Pending <span class="badge badge-warning" id="inside-persons-count">0</span>
+                                <?php echo __('Pending'); ?> <span class="badge badge-warning" id="inside-persons-count">0</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="exited-persons-tab" data-tab="exited" data-toggle="tab" href="#exitedPersons" role="tab" aria-controls="exitedPersons" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                Approved <span class="badge badge-danger" id="exited-persons-count">0</span>
+                                <?php echo __('Approved'); ?> <span class="badge badge-danger" id="exited-persons-count">0</span>
                             </a>
                         </li>
                     </ul>
@@ -524,7 +524,7 @@ $employees = $datas['employees'] ?? [];
                                         <tr>
                                             <th scope="col" colspan="2" class="text-center p-4">
                                                 <i class="fa fa-spinner fa-spin text-muted loading-spinner-icon"></i>
-                                                <p class="text-muted mt-2">Loading...</p>
+                                                <p class="text-muted mt-2"><?php echo __('Loading...'); ?></p>
                                             </th>
                                         </tr>
                                     </tbody>
@@ -538,7 +538,7 @@ $employees = $datas['employees'] ?? [];
                                         <tr>
                                             <th scope="col" colspan="2" class="text-center p-4">
                                                 <i class="fa fa-spinner fa-spin text-muted loading-spinner-icon"></i>
-                                                <p class="text-muted mt-2">Loading...</p>
+                                                <p class="text-muted mt-2"><?php echo __('Loading...'); ?></p>
                                             </th>
                                         </tr>
                                     </tbody>
@@ -556,10 +556,10 @@ $employees = $datas['employees'] ?? [];
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card table-card">
                 <div class="card-header table-card-header">
-                    <h5><i class="ti-time"></i> Recent Activity</h5>
+                    <h5><i class="ti-time"></i> <?php echo __('Recent Activity'); ?></h5>
                     <div class="card-header-right">
                         <a href="index.php?option=COM_LIST_PERSONAL_GATEWAY" class="btn btn-sm btn-primary">
-                            <i class="ti-eye text-white"></i> View All Records
+                            <i class="ti-eye text-white"></i> <?php echo __('View All Records'); ?>
                         </a>
                     </div>
                 </div>
@@ -568,20 +568,20 @@ $employees = $datas['employees'] ?? [];
                         <table class="table table-hover" id="recentActivityTable">
                             <thead>
                                 <tr>
-                                    <th scope="col">Employee</th>
-                                    <th scope="col">Action</th>
-                                    <th scope="col">Purpose</th>
-                                    <th scope="col">Vehicle</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">In/Exit Time</th>
-                                    <th scope="col">Print</th>
+                                    <th scope="col"><?php echo __('Employee'); ?></th>
+                                    <th scope="col"><?php echo __('Action'); ?></th>
+                                    <th scope="col"><?php echo __('Purpose'); ?></th>
+                                    <th scope="col"><?php echo __('Vehicle'); ?></th>
+                                    <th scope="col"><?php echo __('Date'); ?></th>
+                                    <th scope="col"><?php echo __('In/Exit Time'); ?></th>
+                                    <th scope="col"><?php echo __('Print'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td colspan="7" class="text-center p-4">
                                         <i class="fa fa-spinner fa-spin text-muted loading-spinner-icon"></i>
-                                        <p class="text-muted mt-2">Loading recent activity...</p>
+                                        <p class="text-muted mt-2"><?php echo __('Loading recent activity...'); ?></p>
                                     </td>
                                 </tr>
                             </tbody>
@@ -598,8 +598,8 @@ $employees = $datas['employees'] ?? [];
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><i class="ti-export"></i> Record Exit</h4>
-                <button type="button" class="close" onclick="closeExitModal()" aria-label="Close">
+                <h4 class="modal-title"><i class="ti-export"></i> <?php echo __('Record Exit'); ?></h4>
+                <button type="button" class="close" onclick="closeExitModal()" aria-label="<?php echo __('Close'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -610,23 +610,23 @@ $employees = $datas['employees'] ?? [];
                     <input type="hidden" name="action_status" id="actionStatusInput" value="">
                     <div class="alert alert-info">
                         <i class="ti-info-alt"></i>
-                        Recording exit for: <strong id="exitEmployeeName"></strong>
+                        <?php echo __('Recording exit for:'); ?> <strong id="exitEmployeeName"></strong>
                     </div>
 
                     <div class="form-group row">
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Date</span>
-                            <input aria-label="Exit Date" type="date" class="form-control" name="exit_date" value="<?php echo date('Y-m-d'); ?>" readonly>
+                            <span class="form-label"><?php echo __('Date'); ?></span>
+                            <input aria-label="<?php echo __('Exit Date'); ?>" type="date" class="form-control" name="exit_date" value="<?php echo date('Y-m-d'); ?>" readonly>
                         </div>
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Time</span>
-                            <input aria-label="Exit Time" type="time" class="form-control" name="exit_time" value="<?php echo date('H:i'); ?>" readonly>
+                            <span class="form-label"><?php echo __('Time'); ?></span>
+                            <input aria-label="<?php echo __('Exit Time'); ?>" type="time" class="form-control" name="exit_time" value="<?php echo date('H:i'); ?>" readonly>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <span class="form-label">Notes (Optional)</span>
-                        <textarea aria-label="Any observations or notes..." class="form-control" name="exit_notes" rows="3" placeholder="Any observations or notes..."></textarea>
+                        <span class="form-label"><?php echo __('Notes (Optional)'); ?></span>
+                        <textarea aria-label="<?php echo __('Any observations or notes...'); ?>" class="form-control" name="exit_notes" rows="3" placeholder="<?php echo __('Any observations or notes...'); ?>"></textarea>
                     </div>
 
                     <div class="form-group row">
@@ -634,7 +634,7 @@ $employees = $datas['employees'] ?? [];
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="goodsChecked" name="goods_checked" value="1">
                                 <label class="custom-control-label" for="goodsChecked">
-                                    Goods Checked
+                                    <?php echo __('Goods Checked'); ?>
                                 </label>
                             </div>
                         </div>
@@ -642,24 +642,24 @@ $employees = $datas['employees'] ?? [];
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="securityCheck" name="security_check" value="1">
                                 <label class="custom-control-label" for="securityCheck">
-                                    Security Check
+                                    <?php echo __('Security Check'); ?>
                                 </label>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <span class="form-label">Authorized By</span>
-                        <input aria-label="Name of person authorizing" type="text" class="form-control" name="authorized_by" placeholder="Name of person authorizing"
+                        <span class="form-label"><?php echo __('Authorized By'); ?></span>
+                        <input aria-label="<?php echo __('Name of person authorizing'); ?>" type="text" class="form-control" name="authorized_by" placeholder="<?php echo __('Name of person authorizing'); ?>"
                             value="<?php echo isset($_SESSION['display_name']) ? htmlspecialchars($_SESSION['display_name']) : ''; ?>">
                     </div>
                     <input type="hidden" name="gateway_type" id="gateway_type_id">
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" onclick="closeExitModal()">Cancel</button>
+                    <button type="button" class="btn btn-default waves-effect" onclick="closeExitModal()"><?php echo __('Cancel'); ?></button>
                     <button type="submit" class="btn btn-danger waves-effect waves-light">
-                        <i class="ti-check"></i> Record Exit
+                        <i class="ti-check"></i> <?php echo __('Record Exit'); ?>
                     </button>
                 </div>
             </form>
@@ -671,15 +671,15 @@ $employees = $datas['employees'] ?? [];
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><i class="ti-printer"></i> Personal Gate Pass</h4>
+                <h4 class="modal-title"><i class="ti-printer"></i> <?php echo __('Personal Gate Pass'); ?></h4>
             </div>
             <div class="modal-body" id="printSlipContent">
                 <!-- Print content will be loaded here -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary close-print-modal-btn">Close</button>
+                <button type="button" class="btn btn-secondary close-print-modal-btn"><?php echo __('Close'); ?></button>
                 <button type="button" class="btn btn-primary print-slip-btn">
-                    <i class="ti-printer"></i> Print
+                    <i class="ti-printer"></i> <?php echo __('Print'); ?>
                 </button>
             </div>
         </div>

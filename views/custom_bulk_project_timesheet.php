@@ -465,7 +465,7 @@ $erp = json_decode($erp_data,1);
 			<div class="card">
 				
             	<div class="card-header table-card-header">
-              		<h5><?php echo "Bulk Time Sheet Approval";  ?></h5>
+              		<h5><?= __("Bulk Time Sheet Approval") ?></h5>
         		  	<div class="card-header-right table-card-header ">
 
             		 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
@@ -525,7 +525,7 @@ $erp = json_decode($erp_data,1);
                     <i class="fa fa-rupee text-c-blue f-30"></i>
                 </div>
                 <div class="col p-l-0">
-                    <h6 class="m-b-5 f-14">Current Vs Previous</h6>
+                    <h6 class="m-b-5 f-14"><?= __("Current Vs Previous") ?></h6>
                     <h6 class="m-b-0 text-c-blue"><a onclick="cvppopup('Current',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'apv_list')" >
 				<?php echo customeummarmonyformate($ttcount/100000); ?> L
 				</a> Vs <a onclick="cvppopup('Previous',<?php echo "'".customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000)." Lac'"; ?>,'last_pre_list')" > <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L </a></h6>
@@ -559,7 +559,7 @@ $erp = json_decode($erp_data,1);
                     <i class="fa fa-clock-o text-c-green f-30"></i>
                 </div>
                 <div class="col p-l-0">
-                    <h6 class="m-b-5 f-14 ">Budget Vs Actuals</h6>
+                    <h6 class="m-b-5 f-14 "><?= __("Budget Vs Actuals") ?></h6>
 			<h6 class="m-b-0 text-c-green">
 			<a onclick="cvppopup('Budget',<?php echo "'".$total_budget_hrs." Hrs'"; ?>,'bg_hr_list')" >
 				<?php echo $total_budget_hrs; ?> H </a>
@@ -676,15 +676,15 @@ if ($total_budget_hrs > 0) {
   					<!--begin::Header-->
   					<div class="card-header border-0">
   						<h5 class="card-title align-items-start flex-column float-left">
-  							Billing Info Detail - <?php if($gtnvk==2){ echo "All"; }elseif($gtnvk==1){ echo "Billable"; }elseif($gtnvk==0){ echo "Non-billable"; } ?>
+  							<?= __("Billing Info Detail -") ?> <?php if($gtnvk==2){ echo __("All"); }elseif($gtnvk==1){ echo __("Billable"); }elseif($gtnvk==0){ echo __("Non-billable"); } ?>
   							<span		class="text-muted mt-3 font-weight-bold
-  							font-size-sm">Billable : <?php echo 	$count_billable; ?> Members, Nonbillable : <?php echo $count_nonbillable; ?> Members</span> 
+  							font-size-sm"><?= __("Billable :") ?> <?php echo $count_billable; ?> <?= __("Members, Nonbillable :") ?> <?php echo $count_nonbillable; ?> <?= __("Members") ?></span> 
   						</h5>
   						<div class="radio-inline float-right infisuite_tab">
   							<?php $billist =""; if($_GET['PAY_YEAR']!=""){ $billist = "&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH']; } ?>
   							<span class="radio nav-item d-inline-block" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?php if($gtnvk==2){ echo 'active'; } ?>">
   								<?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?>
-								<?php echo "All"; ?></a> </span> 
+								<?= __("All") ?></a> </span> 
   							<span class="radio nav-item d-inline-block" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-success waves-effect waves-light <?php if($gtnvk==1){ echo 'active'; } ?>">
   								<?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?>
   								<?php echo "Billable"; ?></a> </span> 
@@ -699,9 +699,9 @@ if ($total_budget_hrs > 0) {
 
 									<div class="col-lg-3">
 										<div class="d-flex align-items-center">
-											<label for="kt_datatable_search_typew" class="mr-3 mb-0 d-none d-md-block">Reporting Manager:&nbsp;</label>
+											<label for="kt_datatable_search_typew" class="mr-3 mb-0 d-none d-md-block"><?= __("Reporting Manager:") ?>&nbsp;</label>
 											<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_typew" name="approval_manager">
-												<option value="0">All</option>
+												<option value="0"><?= __("All") ?></option>
 												<?php foreach((array)$approvemanager as $appkey=>$appm){ ?>
 													<option  <?php echo ($approval_manager==$appkey) ? 'selected' :""; ?> value="<?php echo $appkey; ?>"><?php echo $_SESSION['users'][$appm]; ?></option>
 												<?php } ?>
@@ -710,9 +710,9 @@ if ($total_budget_hrs > 0) {
 									</div>
 									<div class="col-lg-3">
 										<div class="d-flex align-items-center">
-											<label for="kt_datatable_search_type" class="mr-3 mb-0 d-none d-md-block">Vendor:&nbsp;</label>
+											<label for="kt_datatable_search_type" class="mr-3 mb-0 d-none d-md-block"><?= __("Vendor:") ?>&nbsp;</label>
 											<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_type" name="vendor">
-												<option value="0">All</option>
+												<option value="0"><?= __("All") ?></option>
 												<?php foreach((array)$allvendors as $vkey =>$vlist){
 													if(in_array($vkey,$approvevendor)){ ?>
 													<option  <?php echo ($post_vendor==$vkey) ? 'selected' :""; ?> value="<?php echo $vkey; ?>"><?php echo $vlist; ?></option>
@@ -722,13 +722,13 @@ if ($total_budget_hrs > 0) {
 									</div>
 									<div class="col-lg-3">
 										<div class="d-flex align-items-center">
-											<label for="fld_emp_name" class="mr-3 mb-0 d-none d-md-block">Name:&nbsp;</label>
+											<label for="fld_emp_name" class="mr-3 mb-0 d-none d-md-block"><?= __("Name:") ?>&nbsp;</label>
 											<input id="fld_emp_name" type="text" class="form-control " name="emp_name" value="<?php echo $emp_name=='0' ? '' : $emp_name; ?>">
 										</div>
 									</div>
 									
 									<div class="col-lg-2 ">
-										<button class="btn btn-primary px-6 font-weight-bold" name="search" value="search">Search</button>
+										<button class="btn btn-primary px-6 font-weight-bold" name="search" value="search"><?= __("Search") ?></button>
 									</div>
 								</form>
 							</div>
@@ -788,13 +788,13 @@ if ($total_budget_hrs > 0) {
 															<thead>
 																<tr>
 																	<th scope="col" class=" w-40px">1 </th>
-																	<th scope="col" class=" min-w-200px">Employee Details</th>
+																	<th scope="col" class=" min-w-200px"><?= __("Employee Details") ?></th>
 																	<th scope="col" class=" min-w-100px text-center">
-<?php echo headerlables(array('name'=>'Rate Card Value')); ?>
+<?php echo headerlables(array('name'=>__('Rate Card Value'))); ?>
 </th>
-																	<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
-																	<th scope="col" class=" min-w-125px text-center">Billable Hours</th>
-																	<th scope="col" class=" min-w-110px text-center">Status</th>
+																	<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>__('PO Value'))); ?></th>
+																	<th scope="col" class=" min-w-125px text-center"><?= __("Billable Hours") ?></th>
+																	<th scope="col" class=" min-w-110px text-center"><?= __("Status") ?></th>
 																	<th scope="col" class=" min-w-50px text-center">
 																		<div class="checkbox-fade fade-in-primary">
 																			<label class="checkbox checkbox-success">
@@ -971,11 +971,11 @@ if($sb['vrc_purchase_uom']=='PD'){
 											<thead>
 												<tr>
 													<th scope="col" class=" w-40px"> 2</th>
-													<th scope="col" class=" min-w-200px">Employee Details</th>
-													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'Rate Card Value')); ?></th>
-													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
-													<th scope="col" class=" min-w-125px text-center">Billable Hours</th>
-													<th scope="col" class=" min-w-110px text-center">Status</th>
+													<th scope="col" class=" min-w-200px"><?= __("Employee Details") ?></th>
+													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>__('Rate Card Value'))); ?></th>
+													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>__('PO Value'))); ?></th>
+													<th scope="col" class=" min-w-125px text-center"><?= __("Billable Hours") ?></th>
+													<th scope="col" class=" min-w-110px text-center"><?= __("Status") ?></th>
 													<th scope="col" class=" min-w-50px text-center">
 														<div class="checkbox-fade fade-in-primary">
 															<label class="checkbox checkbox-success">
@@ -1155,11 +1155,11 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 											<thead>
 												<tr>
 													<th scope="col" class=" w-40px"> 3</th>
-													<th scope="col" class=" min-w-200px">Employee Details</th>
-													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'Rate Card Value')); ?>	</th>
-													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
-													<th scope="col" class=" min-w-125px text-center">Billable Hours</th>
-													<th scope="col" class=" min-w-110px text-center">Status</th>
+													<th scope="col" class=" min-w-200px"><?= __("Employee Details") ?></th>
+													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>__('Rate Card Value'))); ?>	</th>
+													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>__('PO Value'))); ?></th>
+													<th scope="col" class=" min-w-125px text-center"><?= __("Billable Hours") ?></th>
+													<th scope="col" class=" min-w-110px text-center"><?= __("Status") ?></th>
 													<th scope="col" class=" min-w-50px text-center">
 
 													</th>
@@ -1260,7 +1260,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 													<span class="form-label label label-lg label-warning"><?php echo "Yet to Submit"; ?></span>
 												</td>
 												<td class=" pr-0">
-													<button class="btn btn-success font-size-sm float-right" onclick="notifyuser(<?php echo $sb['user_id']; ?>)">Notify</button>
+													<button class="btn btn-success font-size-sm float-right" onclick="notifyuser(<?php echo $sb['user_id']; ?>)"><?= __("Notify") ?></button>
 												</td>
 											</tr>
 											<?php $k= $k-1;

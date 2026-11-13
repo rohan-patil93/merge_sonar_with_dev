@@ -140,19 +140,19 @@ foreach($finance_report_groups as $finanacerepogrp){
 
      <div class="card">
         <div class="card-header">
-            <h5>Finance Reports</h5>
+            <h5><?php echo __('Finance Reports'); ?></h5>
             <div class="card-header-right"></div>
         </div>
         <form method="POST">
         <div class="card-body">
             <div class="row">
             <div class="form-group col-lg-4">
-                <span class="form-label">Report Name <span class="text-danger">*</span></span>
-                <input aria-label="Report Name" type="text"  class="form-control text-capitalize"  name="report_name" value="<?php echo $finance_reports['report_name']; ?>" />
+                <span class="form-label"><?php echo __('Report Name'); ?> <span class="text-danger">*</span></span>
+                <input aria-label="<?php echo __('Report Name'); ?>" type="text"  class="form-control text-capitalize"  name="report_name" value="<?php echo $finance_reports['report_name']; ?>" />
             </div>
             <div class="form-group col-lg-4">
-                <span class="form-label">Description<span class="text-danger">*</span></span>
-                <textarea aria-label="Description" type="text"  class="form-control text-capitalize"  name="description"  ><?php echo $finance_reports['description']; ?></textarea>
+                <span class="form-label"><?php echo __('Description'); ?><span class="text-danger">*</span></span>
+                <textarea aria-label="<?php echo __('Description'); ?>" type="text"  class="form-control text-capitalize"  name="description"  ><?php echo $finance_reports['description']; ?></textarea>
             </div>
             <div class="form-group col-lg-2">
                 <input type="hidden" name="fr_id" id="fr_id" value="<?php echo $fr_id; ?>">

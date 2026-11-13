@@ -82,15 +82,15 @@ function addnewfields(){
     $("#ent_field_name").val("");
     if(ent_field_name==""){
         $("#ent_field_name").val("");
-        $("#fileserrormess").text("Please Enter Field Name");
+        $("#fileserrormess").text(<?php echo json_encode(__('Please Enter Field Name')); ?>);
         return false;
     }
     if(slct_field_type == "number"){
-        var html = '<div class="form-group col-lg-6"><span>'+ent_field_name+'</span><input aria-label="Enter number" class="form-control text-right"  type="number"  ><input  type="hidden" class="fieldname"  name="item_specification_fields_label[]"  value="'+ent_field_name+'"><input  type="hidden" class="fieldname"  name="item_specification_fields_type[]"  value="number"></div>';
+        var html = '<div class="form-group col-lg-6"><span>'+ent_field_name+'</span><input aria-label="<?php echo __('Enter number'); ?>" class="form-control text-right"  type="number"  ><input  type="hidden" class="fieldname"  name="item_specification_fields_label[]"  value="'+ent_field_name+'"><input  type="hidden" class="fieldname"  name="item_specification_fields_type[]"  value="number"></div>';
     }else if(slct_field_type == "date"){
-        var html = '<div class="form-group col-lg-6"><span>'+ent_field_name+'</span><input aria-label="Input field" class="form-control datepicker"  type="text"   ><input  type="hidden" class="fieldname"  name="item_specification_fields_label[]"  value="'+ent_field_name+'"><input  type="hidden" class="fieldname"  name="item_specification_fields_type[]"  value="date"></div>';
+        var html = '<div class="form-group col-lg-6"><span>'+ent_field_name+'</span><input aria-label="<?php echo __('Input field'); ?>" class="form-control datepicker"  type="text"   ><input  type="hidden" class="fieldname"  name="item_specification_fields_label[]"  value="'+ent_field_name+'"><input  type="hidden" class="fieldname"  name="item_specification_fields_type[]"  value="date"></div>';
     }else{
-        var html = '<div class="form-group col-lg-6"><span>'+ent_field_name+'</span><input aria-label="Input field" class="form-control "  type="text"   ><input  type="hidden" class="fieldname"  name="item_specification_fields_label[]"  value="'+ent_field_name+'"><input  type="hidden" class="fieldname"  name="item_specification_fields_type[]"  value="text"></div>';
+        var html = '<div class="form-group col-lg-6"><span>'+ent_field_name+'</span><input aria-label="<?php echo __('Input field'); ?>" class="form-control "  type="text"   ><input  type="hidden" class="fieldname"  name="item_specification_fields_label[]"  value="'+ent_field_name+'"><input  type="hidden" class="fieldname"  name="item_specification_fields_type[]"  value="text"></div>';
     }
     $(".newfield").append(html);
     $( ".datepicker" ).datepicker({
@@ -105,11 +105,11 @@ function addnewfields(){
 
         <div class="card">
             <div class="card-header table-card-header">
-                <h5> Item Categories</h5>
+                <h5> <?php echo __('Item Categories'); ?></h5>
                 <div class="card-header-right table-card-header ">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?php echo __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -121,73 +121,73 @@ function addnewfields(){
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-header table-card-header">
-                                    <h5>Item Categories</h5>
+                                    <h5><?php echo __('Item Categories'); ?></h5>
                                     <div class="card-header-right table-card-header ">
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="form-group col-lg-6">
-                                            <span class="">Category Name &nbsp;<span class="text-danger">*</span></span>
+                                            <span class=""><?php echo __('Category Name &nbsp;'); ?><span class="text-danger">*</span></span>
                                             <span class="d-block error-message text-danger"></span>
-                                            <input aria-label="Category Description" class="form-control requried_field" type="text" id="category_description" name="category_description" value="<?php echo $item_categories['category_description'] ?>">
+                                            <input aria-label="<?php echo __('Category Description'); ?>" class="form-control requried_field" type="text" id="category_description" name="category_description" value="<?php echo $item_categories['category_description'] ?>">
                                         </div>
 
                                         <div class="form-group col-lg-6">
-                                            <span class="form-label">Costing Type <span class="text-danger">*</span></span>
+                                            <span class="form-label"><?php echo __('Costing Type'); ?> <span class="text-danger">*</span></span>
                                             <span class="d-block error-message text-danger"></span>
-                                            <select aria-label="Default Costing Type" class="form-select border js-example-basic-single requried_field" id="default_costing_type" name="default_costing_type">
+                                            <select aria-label="<?php echo __('Default Costing Type'); ?>" class="form-select border js-example-basic-single requried_field" id="default_costing_type" name="default_costing_type">
                                             <?php foreach ($result['costing_type'] as $ctype) { ?>
-                                                    <option value="<?php echo $ctype['genc_detail_code']; ?>" <?php if($item_categories['default_costing_type']==$ctype['genc_detail_code']){ echo "selected";
+                                                    <option value="<?php echo $ctype['genc_detail_code']; ?>" <?php if($item_categories['default_costing_type']==$ctype['genc_detail_code']){ echo __('selected');
 } ?>><?php echo $ctype['genc_detail_name'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
 
                                         <div class="form-group col-lg-6">
-                                            <span class="form-label">Industry </span>
-                                            <select aria-label="Industry" class="form-select border js-example-basic-single" id="industry_id" name="industry_id">
-                                                <option value=""> Select Any one</option>
+                                            <span class="form-label"><?php echo __('Industry'); ?> </span>
+                                            <select aria-label="<?php echo __('Industry'); ?>" class="form-select border js-example-basic-single" id="industry_id" name="industry_id">
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($industries as $indusrt) { ?>
-                                                    <option value="<?php echo $indusrt['id']; ?>" <?php if($item_categories['industry_id']==$indusrt['id']){ echo "selected";
+                                                    <option value="<?php echo $indusrt['id']; ?>" <?php if($item_categories['industry_id']==$indusrt['id']){ echo __('selected');
 } ?>><?php echo $indusrt['industries'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <span class="form-label">First Removal Strategy</span>
-                                            <select aria-label="First Removal Strategy" class="form-select border js-example-basic-single" id="first_removal_strategy" name="first_removal_strategy">
+                                            <span class="form-label"><?php echo __('First Removal Strategy'); ?></span>
+                                            <select aria-label="<?php echo __('First Removal Strategy'); ?>" class="form-select border js-example-basic-single" id="first_removal_strategy" name="first_removal_strategy">
                                                 <?php foreach ($first_removal_strategy as $key=>$val) {  ?>
-                                                    <option value="<?php echo $key; ?>" <?php  if($item_categories['first_removal_strategy']==$key){echo "selected";
+                                                    <option value="<?php echo $key; ?>" <?php  if($item_categories['first_removal_strategy']==$key){echo __('selected');
 } ?>><?php echo $val; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                          <div class="form-group col-lg-12">
-                                            <span class="form-label">Bill Matching Type</span>
+                                            <span class="form-label"><?php echo __('Bill Matching Type'); ?></span>
                                             <div class="radio radio-outline  mt-1">
                                                 <?php $mk = 1; foreach($bill_matching_type as $bmtype){ ?>
                                                 <label class="radio radio-inline">
-                                                    <input aria-label="Radio option" type="radio" <?php echo (($item_categories['bill_matching_type'] =="" && $mk == '1') || $bmtype['genc_detail_code'] == $item_categories['bill_matching_type'])?"checked":""; ?> name="bill_matching_type" value="<?php echo $bmtype['genc_detail_code']; ?>">  <span></span><?php echo $bmtype['genc_detail_name']; ?>
+                                                    <input aria-label="<?php echo __('Radio option'); ?>" type="radio" <?php echo (($item_categories['bill_matching_type'] =="" && $mk == '1') || $bmtype['genc_detail_code'] == $item_categories['bill_matching_type'])?"checked":""; ?> name="bill_matching_type" value="<?php echo $bmtype['genc_detail_code']; ?>">  <span></span><?php echo $bmtype['genc_detail_name']; ?>
                                                 </label>
                                                 <?php $mk++;
 } ?>
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <span class="form-label">Parent  Category</span>
-                                            <select aria-label="Parent Item Category" class="form-select border js-example-basic-single" id="parent_item_category_id" name="parent_item_category_id">
-                                                <option value=""> Select Any one</option>
+                                            <span class="form-label"><?php echo __('Parent  Category'); ?></span>
+                                            <select aria-label="<?php echo __('Parent Item Category'); ?>" class="form-select border js-example-basic-single" id="parent_item_category_id" name="parent_item_category_id">
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($item_categories_list as $catval) {  ?>
-                                                    <option value="<?php echo $catval['id']; ?>" <?php  if($item_categories['parent_item_category_id']==$catval['id']){ echo "selected";
+                                                    <option value="<?php echo $catval['id']; ?>" <?php  if($item_categories['parent_item_category_id']==$catval['id']){ echo __('selected');
 } ?>><?php echo $catval['category_description']." - ".$catval['category_short_name']; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <span class="">Short Name &nbsp;<span class="text-danger">*</span></span>
+                                            <span class=""><?php echo __('Short Name &nbsp;'); ?><span class="text-danger">*</span></span>
                                             <span class="d-block error-message text-danger"></span>
-                                            <input aria-label="Category Short Name" class="form-control requried_field" type="text" id="category_short_name" name="category_short_name" value="<?php echo $item_categories['category_short_name'] ?>">
+                                            <input aria-label="<?php echo __('Category Short Name'); ?>" class="form-control requried_field" type="text" id="category_short_name" name="category_short_name" value="<?php echo $item_categories['category_short_name'] ?>">
                                         </div>
 
 
@@ -196,31 +196,31 @@ function addnewfields(){
                             </div>
                             <div class="card mt-2">
                                 <div class="card-header table-card-header">
-                                    <h5>Price</h5>
+                                    <h5><?php echo __('Price'); ?></h5>
                                     <div class="card-header-right table-card-header ">
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="form-group col-lg-4">
-                                            <span class="form-label d-block">Price Variance
+                                            <span class="form-label d-block"><?php echo __('Price Variance'); ?>
                                             </span>
-                                            <input aria-label="Price Variance" type="checkbox" class="js-switch" name="price_variance" value="0" <?php echo $item_categories['price_variance'] =="0"?"checked":""; ?>/>
+                                            <input aria-label="<?php echo __('Price Variance'); ?>" type="checkbox" class="js-switch" name="price_variance" value="0" <?php echo $item_categories['price_variance'] =="0"?"checked":""; ?>/>
                                         </div>
 
                                         <div class="form-group col-lg-4">
-                                            <span class="form-label">Price Variance Type</span>
-                                            <select aria-label="Price Variance Type" class="form-select border js-example-basic-single" name="price_variance_type">
+                                            <span class="form-label"><?php echo __('Price Variance Type'); ?></span>
+                                            <select aria-label="<?php echo __('Price Variance Type'); ?>" class="form-select border js-example-basic-single" name="price_variance_type">
                                                 <?php foreach ($variance_type as $vt) {  ?>
-                                                    <option value="<?php echo $vt['genc_detail_code']; ?>" <?php  if($item_categories['price_variance_type']==$vt['genc_detail_code']){echo "selected";
+                                                    <option value="<?php echo $vt['genc_detail_code']; ?>" <?php  if($item_categories['price_variance_type']==$vt['genc_detail_code']){echo __('selected');
 } ?>><?php echo $vt['genc_detail_name'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
 
                                         <div class="form-group col-lg-4">
-                                            <span>Price Variance Amount</span>
-                                            <input aria-label="Price Variance Amount" type="text" class="form-control autonumber text-right fill" data-a-sign="₹" name="price_variance_amount" id="price_variance_amount" value="<?php echo $item_categories['price_variance_amount'] ?>">
+                                            <span><?php echo __('Price Variance Amount'); ?></span>
+                                            <input aria-label="<?php echo __('Price Variance Amount'); ?>" type="text" class="form-control autonumber text-right fill" data-a-sign="₹" name="price_variance_amount" id="price_variance_amount" value="<?php echo $item_categories['price_variance_amount'] ?>">
                                         </div>
 
 
@@ -229,47 +229,47 @@ function addnewfields(){
                             </div>
                             <div class="card">
                                 <div class="card-header table-card-header">
-                                    <h5>Inventory</h5>
+                                    <h5><?php echo __('Inventory'); ?></h5>
                                     <div class="card-header-right table-card-header ">
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="form-group col-lg-4">
-                                            <span class="form-label d-block">Qty Variance
+                                            <span class="form-label d-block"><?php echo __('Qty Variance'); ?>
                                             </span>
-                                            <input aria-label="Qty Variance" type="checkbox" class="js-switch" name="qty_variance" value="0" <?php echo $item_categories['qty_variance'] =="0"?"checked":""; ?>/>
+                                            <input aria-label="<?php echo __('Qty Variance'); ?>" type="checkbox" class="js-switch" name="qty_variance" value="0" <?php echo $item_categories['qty_variance'] =="0"?"checked":""; ?>/>
                                         </div>
                                          <div class="form-group col-lg-4">
-                                            <span class="form-label">Qty Variance</span>
-                                            <select aria-label="Qty Variance Type" class="form-select border js-example-basic-single" name="qty_variance_type">
+                                            <span class="form-label"><?php echo __('Qty Variance'); ?></span>
+                                            <select aria-label="<?php echo __('Qty Variance Type'); ?>" class="form-select border js-example-basic-single" name="qty_variance_type">
                                                 <?php foreach ($variance_type as $vt) {  ?>
-                                                    <option value="<?php echo $vt['genc_detail_code']; ?>" <?php  if($item_categories['qty_variance_type']==$vt['genc_detail_code']){echo "selected";
+                                                    <option value="<?php echo $vt['genc_detail_code']; ?>" <?php  if($item_categories['qty_variance_type']==$vt['genc_detail_code']){echo __('selected');
 } ?>><?php echo $vt['genc_detail_name'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <span class="form-label">Qty Variance Amount</span>
-                                            <input aria-label="Qty Variance Amount" class="form-control text-right" type="text" id="qty_variance_amount" name="qty_variance_amount" value="<?php echo $item_categories['qty_variance_amount'] ?>">
+                                            <span class="form-label"><?php echo __('Qty Variance Amount'); ?></span>
+                                            <input aria-label="<?php echo __('Qty Variance Amount'); ?>" class="form-control text-right" type="text" id="qty_variance_amount" name="qty_variance_amount" value="<?php echo $item_categories['qty_variance_amount'] ?>">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-header table-card-header">
-                                    <h5>Tax</h5>
+                                    <h5><?php echo __('Tax'); ?></h5>
                                     <div class="card-header-right table-card-header ">
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="form-group col-lg-6">
-                                            <span class="form-label">HSN/SAC Code</span>
-                                            <select aria-label="Hsn And Sac Code" name="hsn_and_sac_code_id" class="form-control js-data-example-ajax-hsncodes" data-tablename="hsn_and_sac_codes" data-fieldsname="code_description"  data-fieldsname1="code" data-fieldsname2="code_description" data-fieldsname3="gst" data-category="id">
-                                                <option value="">Select Any One </option>
+                                            <span class="form-label"><?php echo __('HSN/SAC Code'); ?></span>
+                                            <select aria-label="<?php echo __('Hsn And Sac Code'); ?>" name="hsn_and_sac_code_id" class="form-control js-data-example-ajax-hsncodes" data-tablename="hsn_and_sac_codes" data-fieldsname="code_description"  data-fieldsname1="code" data-fieldsname2="code_description" data-fieldsname3="gst" data-category="id">
+                                                <option value=""><?php echo __('Select Any One'); ?> </option>
                                                 <?php foreach ($result['hsnsac'] as $hsn) { ?>
-                                                    <option value="<?php echo $hsn['id']; ?>" <?php if($item_categories['hsn_and_sac_code_id']==$hsn['id']){ echo "selected";
+                                                    <option value="<?php echo $hsn['id']; ?>" <?php if($item_categories['hsn_and_sac_code_id']==$hsn['id']){ echo __('selected');
 } ?>><?php echo $hsn['code'] ?></option>
                                                 <?php } ?>
                                             </select>
@@ -277,21 +277,21 @@ function addnewfields(){
 
 
                                         <div class="form-group col-lg-6">
-                                            <span class="form-label">Tax Deducted Source (TDS)</span>
-                                            <select aria-label="Tax Deducted Source" class="form-select border js-example-basic-single" id="tax_deducted_source_id" name="tax_deducted_source_id">
-                                                    <option value="0">Select Any one</option>
+                                            <span class="form-label"><?php echo __('Tax Deducted Source (TDS)'); ?></span>
+                                            <select aria-label="<?php echo __('Tax Deducted Source'); ?>" class="form-select border js-example-basic-single" id="tax_deducted_source_id" name="tax_deducted_source_id">
+                                                    <option value="0"><?php echo __('Select Any one'); ?></option>
                                                     <?php foreach ($tax_deducted_sources as $tds) {  ?>
-                                                        <option value="<?php echo $tds['id']; ?>" <?php  if($item_categories['tax_deducted_source_id']==$tds['id']){echo "selected";
+                                                        <option value="<?php echo $tds['id']; ?>" <?php  if($item_categories['tax_deducted_source_id']==$tds['id']){echo __('selected');
 } ?>><?php echo $tds['tds_name']." - ".$tds['tds_description']." (".$tds['threshold'].")"; ?></option>
                                                     <?php } ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <span class="form-label">Tax Collected Source (TCS)</span>
-                                            <select aria-label="Tax Collected Source" class="form-select border js-example-basic-single" id="tax_collected_source_id" name="tax_collected_source_id">
-                                                    <option value="">Select Any one</option>
+                                            <span class="form-label"><?php echo __('Tax Collected Source (TCS)'); ?></span>
+                                            <select aria-label="<?php echo __('Tax Collected Source'); ?>" class="form-select border js-example-basic-single" id="tax_collected_source_id" name="tax_collected_source_id">
+                                                    <option value=""><?php echo __('Select Any one'); ?></option>
                                                     <?php foreach ($tax_collected_sources as $tcs) {  ?>
-                                                        <option value="<?php echo $tcs['id']; ?>" <?php  if($item_categories['tax_collected_source_id']==$tcs['id']){echo "selected";
+                                                        <option value="<?php echo $tcs['id']; ?>" <?php  if($item_categories['tax_collected_source_id']==$tcs['id']){echo __('selected');
 } ?>><?php echo $tcs['tcs_name']."(".$tcs['percentage']."%)" ?></option>
                                                     <?php } ?>
                                             </select>
@@ -303,7 +303,7 @@ function addnewfields(){
 
                             <div class="card">
                                 <div class="card-header table-card-header">
-                                    <h5>Item Specification Fields</h5>
+                                    <h5><?php echo __('Item Specification Fields'); ?></h5>
                                     <div class="card-header-right table-card-header ">
                                     </div>
                                 </div>
@@ -321,7 +321,7 @@ function addnewfields(){
                                          ?>
                                         <div class="form-group col-lg-6">
                                             <span><?php echo $custom_fields['item_specification_fields_label']; ?></span>
-                                            <input aria-label="Input field" class="form-control <?php echo $clss; ?>  fieldname"  type="<?php echo $types; ?>"   >
+                                            <input aria-label="<?php echo __('Input field'); ?>" class="form-control <?php echo $clss; ?>  fieldname"  type="<?php echo $types; ?>"   >
                                             <input  type="hidden" class="fieldname"  name="item_specification_fields_label[]"  value="<?php echo $custom_fields['item_specification_fields_label']; ?>">
                                             <input  type="hidden" class="fieldname"  name="item_specification_fields_type[]"  value="<?php echo $custom_fields['item_specification_fields_type']; ?>">
                                         </div>
@@ -329,20 +329,20 @@ function addnewfields(){
                                     </div>
                                     <div class="row align-items-center">
                                         <div class="col-lg-4 form-group">
-                                            <span>Enter Field Name</span>
-                                            <input aria-label="Ent Field Name" class="form-control "  type="text"  id="ent_field_name" >
+                                            <span><?php echo __('Enter Field Name'); ?></span>
+                                            <input aria-label="<?php echo __('Ent Field Name'); ?>" class="form-control "  type="text"  id="ent_field_name" >
                                             <span class="text-danger" id="fileserrormess"></span>
                                         </div>
                                         <div class="col-lg-4 form-group w-full">
-                                            <span>Type</span>
-                                            <select aria-label="Slct Field Type"  class="form-select js-example-basic-single " id="slct_field_type">
-                                                    <option value="text">Text</option>
-                                                    <option value="number">Number</option>
-                                                    <option value="date">Date</option>
+                                            <span><?php echo __('Type'); ?></span>
+                                            <select aria-label="<?php echo __('Slct Field Type'); ?>"  class="form-select js-example-basic-single " id="slct_field_type">
+                                                    <option value="text"><?php echo __('Text'); ?></option>
+                                                    <option value="number"><?php echo __('Number'); ?></option>
+                                                    <option value="date"><?php echo __('Date'); ?></option>
                                             </select>
                                         </div>
                                         <div class="col-lg-4">
-                                            <button type="button" class="btn btn-primary waves-effect waves-light p-2 m-t-10 b-radius-5" onclick="addnewfields()">Add Field</button>
+                                            <button type="button" class="btn btn-primary waves-effect waves-light p-2 m-t-10 b-radius-5" onclick="addnewfields()"><?php echo __('Add Field'); ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -352,87 +352,64 @@ function addnewfields(){
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-header table-card-header">
-                                    <h5>Account</h5>
+                                    <h5><?php echo __('Account'); ?></h5>
                                     <div class="card-header-right table-card-header ">
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Inventory Asset Account</span>
+                                            <span class="form-label"><?php echo __('Inventory Asset Account'); ?></span>
 
-                                            <select aria-label="Inventory Asset Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="inventory_asset_account" >
-                                                <option value=""> Select Any one</option>
+                                            <select aria-label="<?php echo __('Inventory Asset Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="inventory_asset_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['inventory_asset_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['inventory_asset_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
 
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Inventory Adjustment Account </span>
+                                            <span class="form-label"><?php echo __('Inventory Adjustment Account'); ?> </span>
 
-                                            <select aria-label="Inventory Adjustment Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="inventory_adjustment_account" >
-                                                <option value=""> Select Any one</option>
+                                            <select aria-label="<?php echo __('Inventory Adjustment Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="inventory_adjustment_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['inventory_adjustment_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['inventory_adjustment_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
 
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Inventory Cost Variance Account </span>
-                                            <select aria-label="Inventory Cost Variance Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="inventory_cost_variance_account" >
-                                                <option value=""> Select Any one</option>
+                                            <span class="form-label"><?php echo __('Inventory Cost Variance Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Inventory Cost Variance Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="inventory_cost_variance_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['inventory_cost_variance_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['inventory_cost_variance_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
 
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Cogs Account</span>
-                                            <select aria-label="Cogs Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="cogs_account" >
-                                                <option value=""> Select Any one</option>
+                                            <span class="form-label"><?php echo __('Cogs Account'); ?></span>
+                                            <select aria-label="<?php echo __('Cogs Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="cogs_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['cogs_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['cogs_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Purchase Expense Account </span>
+                                            <span class="form-label"><?php echo __('Purchase Expense Account'); ?> </span>
 
-                                            <select aria-label="Purchase Expense Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="purchase_expense_account" >
-                                                <option value=""> Select Any one</option>
+                                            <select aria-label="<?php echo __('Purchase Expense Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="purchase_expense_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['purchase_expense_account']==$acc['account_code']){ echo "selected";
-} ?>><?php echo $acc['account_name'] ?></option>
-                                                <?php } ?>
-                                            </select>
-
-                                        </div>
-
-                                        <div class="col-lg-6 form-group">
-                                            <span class="form-label">Sales Revenue Account</span>
-                                            <select aria-label="Sales Revenue Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="sales_revenue_account" >
-                                                <option value=""> Select Any one</option>
-                                                <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['sales_revenue_account']==$acc['account_code']){ echo "selected";
-} ?>><?php echo $acc['account_name'] ?></option>
-                                                <?php } ?>
-                                            </select>
-
-                                        </div>
-                                        <div class="col-lg-6 form-group">
-                                            <span class="form-label">Sales Discount Account </span>
-                                            <select aria-label="Sales Discount Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="sales_discount_account" >
-                                                <option value=""> Select Any one</option>
-                                                <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['sales_discount_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['purchase_expense_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
@@ -440,21 +417,22 @@ function addnewfields(){
                                         </div>
 
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Sales Return Account </span>
-                                            <select aria-label="Sales Return Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="sales_return_account" >
-                                                <option value=""> Select Any one</option>
+                                            <span class="form-label"><?php echo __('Sales Revenue Account'); ?></span>
+                                            <select aria-label="<?php echo __('Sales Revenue Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="sales_revenue_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['sales_return_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['sales_revenue_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
+
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Purchase Price Variance Account </span>
-                                            <select aria-label="Purchase Price Variance Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="purchase_price_variance_account" >
-                                                <option value=""> Select Any one</option>
+                                            <span class="form-label"><?php echo __('Sales Discount Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Sales Discount Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="sales_discount_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['purchase_price_variance_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['sales_discount_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
@@ -462,85 +440,21 @@ function addnewfields(){
                                         </div>
 
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Freight Expense Account </span>
-                                            <select aria-label="Freight Expense Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="freight_expense_account" >
-                                                <option value=""> Select Any one</option>
+                                            <span class="form-label"><?php echo __('Sales Return Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Sales Return Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="sales_return_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['freight_expense_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['sales_return_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Packaging Expense Account </span>
-                                            <select aria-label="Packaging Expense Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="packaging_expense_account" >
-                                                <option value=""> Select Any one</option>
+                                            <span class="form-label"><?php echo __('Purchase Price Variance Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Purchase Price Variance Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="purchase_price_variance_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['packaging_expense_account']==$acc['account_code']){ echo "selected";
-} ?>><?php echo $acc['account_name'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-lg-6 form-group">
-                                            <span class="form-label">Sales Tax Payable Account </span>
-                                            <select aria-label="Sales Tax Payable Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="sales_tax_payable_account" >
-                                                <option value=""> Select Any one</option>
-                                                <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['sales_tax_payable_account']==$acc['account_code']){ echo "selected";
-} ?>><?php echo $acc['account_name'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 form-group">
-                                            <span class="form-label">Purchase Tax Payable Account </span>
-                                            <select aria-label="Purchase Tax Payable Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="purchase_tax_payable_account" >
-                                                <option value=""> Select Any one</option>
-                                                <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['purchase_tax_payable_account']==$acc['account_code']){ echo "selected";
-} ?>><?php echo $acc['account_name'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-lg-6 form-group">
-                                            <span class="form-label">Promotions And Discounts Account </span>
-                                            <select aria-label="Promotions And Discounts Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="promotions_and_discounts_account" >
-                                                <option value=""> Select Any one</option>
-                                                <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['promotions_and_discounts_account']==$acc['account_code']){ echo "selected";
-} ?>><?php echo $acc['account_name'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 form-group">
-                                            <span class="form-label">Sales Allowances Account </span>
-                                            <select aria-label="Sales Allowances Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="sales_allowances_account" >
-                                                <option value=""> Select Any one</option>
-                                                <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['sales_allowances_account']==$acc['account_code']){ echo "selected";
-} ?>><?php echo $acc['account_name'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-lg-6 form-group">
-                                            <span class="form-label">Deferred Revenue Account </span>
-                                            <select aria-label="Deferred Revenue Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="deferred_revenue_account" >
-                                                <option value=""> Select Any one</option>
-                                                <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['deferred_revenue_account']==$acc['account_code']){ echo "selected";
-} ?>><?php echo $acc['account_name'] ?></option>
-                                                <?php } ?>
-                                            </select>
-
-                                        </div>
-                                        <div class="col-lg-6 form-group">
-                                            <span class="form-label">Ap Account </span>
-                                            <select aria-label="Ap Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="ap_account" >
-                                                <option value=""> Select Any one</option>
-                                                <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['ap_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['purchase_price_variance_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
@@ -548,64 +462,150 @@ function addnewfields(){
                                         </div>
 
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Ar Account </span>
-                                            <select aria-label="Ar Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="ar_account" >
-                                                <option value=""> Select Any one</option>
+                                            <span class="form-label"><?php echo __('Freight Expense Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Freight Expense Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="freight_expense_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['ar_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['freight_expense_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Accrued Expenses Account </span>
-                                            <select aria-label="Accrued Expenses Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="accrued_expenses_account" >
-                                                <option value=""> Select Any one</option>
+                                            <span class="form-label"><?php echo __('Packaging Expense Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Packaging Expense Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="packaging_expense_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['accrued_expenses_account']==$acc['account_code']){ echo "selected";
-} ?>><?php echo $acc['account_name'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-lg-6 form-group">
-                                            <span class="form-label">Prepaid Expenses Account </span>
-                                            <select aria-label="Prepaid Expenses Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="prepaid_expenses_account" >
-                                                <option value=""> Select Any one</option>
-                                                <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['prepaid_expenses_account']==$acc['account_code']){ echo "selected";
-} ?>><?php echo $acc['account_name'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 form-group">
-                                            <span class="form-label">Wip Asset Account </span>
-                                            <select aria-label="Wip Asset Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="wip_asset_account" >
-                                                <option value=""> Select Any one</option>
-                                                <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['wip_asset_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['packaging_expense_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
 
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Goods Received Not Invoiced Account </span>
-                                            <select aria-label="Goods Received Not Invoiced Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="goods_received_not_invoiced_account" >
-                                                <option value=""> Select Any one</option>
+                                            <span class="form-label"><?php echo __('Sales Tax Payable Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Sales Tax Payable Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="sales_tax_payable_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['goods_received_not_invoiced_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['sales_tax_payable_account']==$acc['account_code']){ echo __('selected');
+} ?>><?php echo $acc['account_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6 form-group">
+                                            <span class="form-label"><?php echo __('Purchase Tax Payable Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Purchase Tax Payable Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="purchase_tax_payable_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
+                                                <?php foreach ($result['account'] as $acc) { ?>
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['purchase_tax_payable_account']==$acc['account_code']){ echo __('selected');
+} ?>><?php echo $acc['account_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-6 form-group">
+                                            <span class="form-label"><?php echo __('Promotions And Discounts Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Promotions And Discounts Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="promotions_and_discounts_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
+                                                <?php foreach ($result['account'] as $acc) { ?>
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['promotions_and_discounts_account']==$acc['account_code']){ echo __('selected');
+} ?>><?php echo $acc['account_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6 form-group">
+                                            <span class="form-label"><?php echo __('Sales Allowances Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Sales Allowances Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="sales_allowances_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
+                                                <?php foreach ($result['account'] as $acc) { ?>
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['sales_allowances_account']==$acc['account_code']){ echo __('selected');
+} ?>><?php echo $acc['account_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-6 form-group">
+                                            <span class="form-label"><?php echo __('Deferred Revenue Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Deferred Revenue Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="deferred_revenue_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
+                                                <?php foreach ($result['account'] as $acc) { ?>
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['deferred_revenue_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
 
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <span class="form-label">Invoiced Not Received Account </span>
-                                            <select aria-label="Invoiced Not Received Account" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="invoiced_not_received_account" >
-                                                <option value=""> Select Any one</option>
+                                            <span class="form-label"><?php echo __('Ap Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Ap Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="ap_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
                                                 <?php foreach ($result['account'] as $acc) { ?>
-                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['invoiced_not_received_account']==$acc['account_code']){ echo "selected";
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['ap_account']==$acc['account_code']){ echo __('selected');
+} ?>><?php echo $acc['account_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="col-lg-6 form-group">
+                                            <span class="form-label"><?php echo __('Ar Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Ar Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="ar_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
+                                                <?php foreach ($result['account'] as $acc) { ?>
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['ar_account']==$acc['account_code']){ echo __('selected');
+} ?>><?php echo $acc['account_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6 form-group">
+                                            <span class="form-label"><?php echo __('Accrued Expenses Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Accrued Expenses Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="accrued_expenses_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
+                                                <?php foreach ($result['account'] as $acc) { ?>
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['accrued_expenses_account']==$acc['account_code']){ echo __('selected');
+} ?>><?php echo $acc['account_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-6 form-group">
+                                            <span class="form-label"><?php echo __('Prepaid Expenses Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Prepaid Expenses Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="prepaid_expenses_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
+                                                <?php foreach ($result['account'] as $acc) { ?>
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['prepaid_expenses_account']==$acc['account_code']){ echo __('selected');
+} ?>><?php echo $acc['account_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6 form-group">
+                                            <span class="form-label"><?php echo __('Wip Asset Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Wip Asset Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="wip_asset_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
+                                                <?php foreach ($result['account'] as $acc) { ?>
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['wip_asset_account']==$acc['account_code']){ echo __('selected');
+} ?>><?php echo $acc['account_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-6 form-group">
+                                            <span class="form-label"><?php echo __('Goods Received Not Invoiced Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Goods Received Not Invoiced Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="goods_received_not_invoiced_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
+                                                <?php foreach ($result['account'] as $acc) { ?>
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['goods_received_not_invoiced_account']==$acc['account_code']){ echo __('selected');
+} ?>><?php echo $acc['account_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+
+                                        </div>
+                                        <div class="col-lg-6 form-group">
+                                            <span class="form-label"><?php echo __('Invoiced Not Received Account'); ?> </span>
+                                            <select aria-label="<?php echo __('Invoiced Not Received Account'); ?>" class="form-select js-data-example-ajax-Comman-form  col-lg-4"   data-tablename="chart_of_accounts"  data-fieldsname="account_name" data-value="" data-pagename="chart_of_accounts" name="invoiced_not_received_account" >
+                                                <option value=""> <?php echo __('Select Any one'); ?></option>
+                                                <?php foreach ($result['account'] as $acc) { ?>
+                                                    <option value="<?php echo $acc['account_code']; ?>" <?php if($item_categories['invoiced_not_received_account']==$acc['account_code']){ echo __('selected');
 } ?>><?php echo $acc['account_name'] ?></option>
                                                 <?php } ?>
                                             </select>
@@ -620,7 +620,7 @@ function addnewfields(){
                     <div class="mt-3">
                         <input type="hidden" name="rid" value="<?php echo $rid; ?>">
                         <input type="hidden" name="submititemcategory" value="">
-                        <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submititemcategoryform()"><i class="fa fa-check m-r-10"></i> <?php echo $rid ==""?"Submit":"Update"; ?></button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submititemcategoryform()"><i class="fa fa-check m-r-10"></i> <?php echo $rid ==""?__('Submit'):__('Update'); ?></button>
                     </div>
                 </form>
             </div>

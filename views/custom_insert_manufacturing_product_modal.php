@@ -20,8 +20,8 @@ $(document).ready(function () {
 });</script>
 
 <div class="modal-header">
-    <h5 class="modal-title">Production <?php echo ucfirst(strtolower($production_type)); ?></h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?php echo __('Production'); ?> <?php echo ucfirst(strtolower($production_type)); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 
 <form id="productionModalForm" method="post" action="">
@@ -30,14 +30,14 @@ $(document).ready(function () {
         <div class="row mb-4">
             <div class="col-md-6">
                 <div class="form-group">
-                    <span class="form-label">Transaction No</span>
-                    <input aria-label="Input field" type="text" class="form-control" value="<?php echo htmlspecialchars($work_order['transaction_no']); ?>" readonly>
+                    <span class="form-label"><?php echo __('Transaction No'); ?></span>
+                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo htmlspecialchars($work_order['transaction_no']); ?>" readonly>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <span class="form-label">Transaction Date</span>
-                    <input aria-label="Input field" type="text" class="form-control" value="<?php echo date('d-m-Y', strtotime($work_order['transaction_date'])); ?>" readonly>
+                    <span class="form-label"><?php echo __('Transaction Date'); ?></span>
+                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo date('d-m-Y', strtotime($work_order['transaction_date'])); ?>" readonly>
                 </div>
             </div>
         </div>
@@ -45,21 +45,21 @@ $(document).ready(function () {
         <div class="row mb-4">
             <div class="col-md-4">
                 <div class="form-group">
-                    <span class="form-label">Planned Start Date</span>
-                    <input aria-label="Input field" type="text" class="form-control" value="<?php echo date('d-m-Y', strtotime($work_order['planned_start_date'])); ?>" readonly>
+                    <span class="form-label"><?php echo __('Planned Start Date'); ?></span>
+                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo date('d-m-Y', strtotime($work_order['planned_start_date'])); ?>" readonly>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <span class="form-label">Planned End Date</span>
-                    <input aria-label="Input field" type="text" class="form-control" value="<?php echo date('d-m-Y', strtotime($work_order['planned_end_date'])); ?>" readonly>
+                    <span class="form-label"><?php echo __('Planned End Date'); ?></span>
+                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo date('d-m-Y', strtotime($work_order['planned_end_date'])); ?>" readonly>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <span class="form-label">Ordered Qty</span>
+                    <span class="form-label"><?php echo __('Ordered Qty'); ?></span>
                     <div class="input-group">
-                        <input aria-label="Input field" type="text" class="form-control text-right" value="<?php echo htmlspecialchars($work_order['work_order_item_qty']); ?>" readonly>
+                        <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control text-right" value="<?php echo htmlspecialchars($work_order['work_order_item_qty']); ?>" readonly>
                         <span class="input-group-text manufacturing-uom-addon"><?php echo htmlspecialchars($product_uom != '' ? $product_uom : 'UOM'); ?></span>
                     </div>
                 </div>
@@ -69,18 +69,18 @@ $(document).ready(function () {
         <div class="row mb-4">
             <div class="col-md-4">
                 <div class="form-group">
-                    <span class="form-label">Previously Completed Qty</span>
+                    <span class="form-label"><?php echo __('Previously Completed Qty'); ?></span>
                     <div class="input-group">
-                        <input aria-label="Input field" type="text" class="form-control text-right" value="<?php echo htmlspecialchars($work_order['completed_qty']); ?>" readonly>
+                        <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control text-right" value="<?php echo htmlspecialchars($work_order['completed_qty']); ?>" readonly>
                         <span class="input-group-text manufacturing-uom-addon"><?php echo htmlspecialchars($product_uom != '' ? $product_uom : 'UOM'); ?></span>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <span class="form-label">Completed Qty (This Session) <span class="text-danger">*</span></span>
+                    <span class="form-label"><?php echo __('Completed Qty (This Session)'); ?> <span class="text-danger">*</span></span>
                     <div class="input-group">
-                        <input aria-label="Completed Qty" type="number" class="form-control text-right" id="session_completed_qty" name="completed_qty" min="0"
+                        <input aria-label="<?php echo __('Completed Qty'); ?>" type="number" class="form-control text-right" id="session_completed_qty" name="completed_qty" min="0"
                                value="0" required>
                         <span class="input-group-text manufacturing-uom-addon"><?php echo htmlspecialchars($product_uom != '' ? $product_uom : 'UOM'); ?></span>
                     </div>
@@ -88,7 +88,7 @@ $(document).ready(function () {
             </div>
             <?php if($production_type == 'HOLD'){?>
             <div class="col-md-4 form-group  w-full">
-                <label for="hold_reason" class="form-label d-block">Holding Reason</label>
+                <label for="hold_reason" class="form-label d-block"><?php echo __('Holding Reason'); ?></label>
                 <select class="js-example-basic-single form-control" name="hold_reason" id="hold_reason" >
                     <?php foreach ((array)$hold_reasons as $row){ ?>
                         <option value="<?php echo $row['genc_detail_code']; ?>"><?php echo $row['genc_detail_name']; ?></option>
@@ -103,30 +103,30 @@ $(document).ready(function () {
         <div class="row mb-4">
             <div class="col-md-4">
                 <div class="form-group">
-                    <span class="form-label">Finished Product</span>
-                    <input aria-label="Input field" type="text" class="form-control" value="<?php echo htmlspecialchars($work_order['product_name'] ?? ''); ?>" readonly>
+                    <span class="form-label"><?php echo __('Finished Product'); ?></span>
+                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo htmlspecialchars($work_order['product_name'] ?? ''); ?>" readonly>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <span class="form-label">Tracking Type</span>
-                    <input aria-label="Input field" type="text" class="form-control" value="<?php echo htmlspecialchars($tracking_labels[$tracking_type] ?? 'Regular'); ?>" readonly>
+                    <span class="form-label"><?php echo __('Tracking Type'); ?></span>
+                    <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo htmlspecialchars($tracking_labels[$tracking_type] ?? 'Regular'); ?>" readonly>
                 </div>
             </div>
             <div class="col-md-4">
                 <?php if ($product_quality_check == 1) { ?>
-                    <span class="form-label d-block">QC Check</span>
+                    <span class="form-label d-block"><?php echo __('QC Check'); ?></span>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input js-qc-required" type="radio" name="qc_required" id="qc_required_yes" value="1">
-                        <label class="form-check-label" for="qc_required_yes">Yes</label>
+                        <label class="form-check-label" for="qc_required_yes"><?php echo __('Yes'); ?></label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input js-qc-required" type="radio" name="qc_required" id="qc_required_no" value="0" checked>
-                        <label class="form-check-label" for="qc_required_no">No</label>
+                        <label class="form-check-label" for="qc_required_no"><?php echo __('No'); ?></label>
                     </div>
                 <?php } else { ?>
-                    <span class="form-label d-block">QC Check</span>
-                    <span class="badge bg-secondary p-2">No QC for this product</span>
+                    <span class="form-label d-block"><?php echo __('QC Check'); ?></span>
+                    <span class="badge bg-secondary p-2"><?php echo __('No QC for this product'); ?></span>
                     <input type="hidden" name="qc_required" value="0">
                 <?php } ?>
             </div>
@@ -134,7 +134,7 @@ $(document).ready(function () {
 
         <?php if ($product_quality_check == 1 && $tracking_type == 1) { ?>
             <div class="border rounded p-3 mb-4 d-none" id="serialTrackingSection">
-                <span class="form-label d-block mb-2 font-weight-bold">Serial Numbers</span>
+                <span class="form-label d-block mb-2 font-weight-bold"><?php echo __('Serial Numbers'); ?></span>
                 <div class="row" id="serialRows"></div>
             </div>
         <?php } ?>
@@ -142,37 +142,37 @@ $(document).ready(function () {
         <?php if ($product_quality_check == 1 && $tracking_type == 2) { ?>
             <div class="border rounded p-3 mb-4 d-none" id="lotTrackingSection">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <span class="form-label mb-0 font-weight-bold">Lot / Batch Details</span>
-                    <button type="button" class="btn btn-sm btn-outline-primary" id="addLotRowBtn">+ Add</button>
+                    <span class="form-label mb-0 font-weight-bold"><?php echo __('Lot / Batch Details'); ?></span>
+                    <button type="button" class="btn btn-sm btn-outline-primary" id="addLotRowBtn"><?php echo __('+ Add'); ?></button>
                 </div>
                 <div id="lotRows"></div>
-                <small class="text-muted">Total lot quantity must equal completed quantity.</small>
+                <small class="text-muted"><?php echo __('Total lot quantity must equal completed quantity.'); ?></small>
             </div>
         <?php } ?>
 
         <div class="row mb-4">
             <div class="col-md-12">
                 <div class="form-group">
-                    <span class="form-label">Remarks</span>
-                    <textarea aria-label="Add remarks..." class="form-control" name="remarks" rows="2" maxlength="255" placeholder="Add remarks..."></textarea>
+                    <span class="form-label"><?php echo __('Remarks'); ?></span>
+                    <textarea aria-label="<?php echo __('Add remarks...'); ?>" class="form-control" name="remarks" rows="2" maxlength="255" placeholder="<?php echo __('Add remarks...'); ?>"></textarea>
                 </div>
             </div>
         </div>
 
         <!-- Items Table Section -->
         <div class="table-responsive mt-4">
-            <span class="form-label d-block mb-3 font-weight-bold">Materials Details</span>
+            <span class="form-label d-block mb-3 font-weight-bold"><?php echo __('Materials Details'); ?></span>
             <table class="table table-sm table-hover">
                 <thead>
                     <tr>
-                        <th scope="col" class="th-sno">S.No</th>
-                        <th scope="col" class="th-item-name">Item Name</th>
-                        <th scope="col" class="th-sku">SKU</th>
-                        <th scope="col" class="th-uom">UOM</th>
-                        <th scope="col" class="th-requested-qty">Requested Qty</th>
-                        <th scope="col" class="th-current-consumed-qty">Current Consumed Qty</th>
-                        <th scope="col" class="th-available-qty">Available Qty</th>
-                        <th scope="col" class="th-session-consumed-qty">Consumed Qty (This Session) <span class="text-danger">*</span></th>
+                        <th scope="col" class="th-sno"><?php echo __('S.No'); ?></th>
+                        <th scope="col" class="th-item-name"><?php echo __('Item Name'); ?></th>
+                        <th scope="col" class="th-sku"><?php echo __('SKU'); ?></th>
+                        <th scope="col" class="th-uom"><?php echo __('UOM'); ?></th>
+                        <th scope="col" class="th-requested-qty"><?php echo __('Requested Qty'); ?></th>
+                        <th scope="col" class="th-current-consumed-qty"><?php echo __('Current Consumed Qty'); ?></th>
+                        <th scope="col" class="th-available-qty"><?php echo __('Available Qty'); ?></th>
+                        <th scope="col" class="th-session-consumed-qty"><?php echo __('Consumed Qty (This Session)'); ?> <span class="text-danger">*</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -198,7 +198,7 @@ $(document).ready(function () {
                             <input type="hidden" name="item_id[]" value="<?php echo htmlspecialchars($item['item_id']); ?>">
                             <input type="hidden" name="manufacturing_work_order_item_id[]" value="<?php echo htmlspecialchars($item['id']); ?>">
                             <div class="input-group input-group-sm">
-                                <input aria-label="Consumed Qty[]" type="number" class="form-control form-control-sm consumed-qty-input text-end"
+                                <input aria-label="<?php echo __('Consumed Qty[]'); ?>" type="number" class="form-control form-control-sm consumed-qty-input text-end"
                                        name="consumed_qty[]" min="0" value="0"
                                        data-max="<?php echo htmlspecialchars($available); ?>" data-uom="<?php echo htmlspecialchars($item_uom, ENT_QUOTES, 'UTF-8'); ?>" step="0.01" required>
                                 <span class="input-group-text manufacturing-uom-addon"><?php echo htmlspecialchars($item_uom != '' ? $item_uom : 'UOM'); ?></span>
@@ -210,7 +210,7 @@ $(document).ready(function () {
                     } else {
                     ?>
                     <tr>
-                        <td colspan="8" class="text-center text-muted">No items found</td>
+                        <td colspan="8" class="text-center text-muted"><?php echo __('No items found'); ?></td>
                     </tr>
                     <?php } ?>
                 </tbody>
@@ -227,10 +227,10 @@ $(document).ready(function () {
 
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            <i class="la la-close"></i> Cancel
+            <i class="la la-close"></i> <?php echo __('Cancel'); ?>
         </button>
         <button type="submit" class="btn btn-primary" id="submitProductionBtn">
-            <i class="la la-check"></i> Submit
+            <i class="la la-check"></i> <?php echo __('Submit'); ?>
         </button>
     </div>
 </form>

@@ -34,7 +34,7 @@ if(isset($_POST['submit_value']) && $_POST['submit_value'] == "upload"){
             $_SESSION['insert_msg'] = $_SESSION['error_message']['9092'];
                header("location:index.php?option=COM_INSERT_IMPORT_EXCEL_DATA&FIN=".$file_insert_name); exit;
            }else{
-               $error_messages =  "Please upload CSV file format";
+               $error_messages =  __('Please upload CSV file format');
            }
 }elseif($_GET['FIN'] !=""){
         $inouturl = API."?mode=getimportexceldata&FIN=".$_GET['FIN'];
@@ -50,14 +50,14 @@ if(isset($_POST['submit_value']) && $_POST['submit_value'] == "upload"){
     $responss = json_decode($inoutcall,1);
     $items = $responss['items'];
     $import_excel_data22 = $responss['import_excel_data'];
-    $error_messages =  "Please upload CSV file format";
+    $error_messages =  __('Please upload CSV file format');
 }
 
 ?>
 <?php if($error_messages !="" ){ ?>
      <div class="alert alert-danger alert-dismissible">
         <strong><?php echo $error_messages; ?> </strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
     </div>
 <?php } ?>
 <?php if($_SESSION['insert_msg'] !=""){
@@ -81,12 +81,12 @@ $_SESSION['insert_msg'] ="";
 
 <div class="card card-custom card-sticky " id="kt_page_sticky_card">
     <div class="card-header table-card-header">
-        <h5><?php echo "Confirm Data";  ?></h5>
+        <h5><?php echo __('Confirm Data');  ?></h5>
         <div class="card-header-right table-card-header ">
-            <button class="btn waves-effect waves-light btn-danger btn-icon"></button> New Values
+            <button class="btn waves-effect waves-light btn-danger btn-icon"></button> <?php echo __('New Values'); ?>
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -110,7 +110,7 @@ $_SESSION['insert_msg'] ="";
                                 if($itemfieldlist[$seqkey] == ""){
                                 }elseif($itemsdetail[$itemfieldlist[$seqkey]] == $importda){
                                 }else{
-                                    $error = "bg-danger";
+                                    $error = __('bg-danger');
 
                                 }
                                 ?>
@@ -126,8 +126,8 @@ $_SESSION['insert_msg'] ="";
         <div class="card-footer">
             <div class="row">
                 <div class="col-lg-6">
-                    <button type="submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10" name="submit_value" value="upload"><i class="la la-check"></i> Confirm</button>
-                    <button type="button" class="btn btn-danger btn-shadow-hover font-weight-bold mr-2 m-b-10" onclick="btnCancel()"><i class="la la-check"></i> Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10" name="submit_value" value="upload"><i class="la la-check"></i> <?php echo __('Confirm'); ?></button>
+                    <button type="button" class="btn btn-danger btn-shadow-hover font-weight-bold mr-2 m-b-10" onclick="btnCancel()"><i class="la la-check"></i> <?php echo __('Cancel'); ?></button>
                 </div>
             </div>
         </div>
@@ -137,11 +137,11 @@ $_SESSION['insert_msg'] ="";
 <?php }else{  ?>
 <div class="card card-custom card-sticky " id="kt_page_sticky_card_2">
     <div class="card-header table-card-header">
-        <h5><?php echo "Import";  ?></h5>
+        <h5><?php echo __('Import');  ?></h5>
         <div class="card-header-right table-card-header ">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -149,19 +149,19 @@ $_SESSION['insert_msg'] ="";
         <div class="card-body m-l-50 m-r-50">
             <div class="row">
                 <div class="form-group col-lg-4">
-                    <span class="form-label">System Start Date <span class="text-danger">*</span></span>
-                    <input aria-label="System Start Date" type="text" class="form-control" name="system_start_date" id="system_start_date" value="<?php echo $_SESSION['config']['system_start_date']; ?>" required="" readonly="">
+                    <span class="form-label"><?php echo __('System Start Date'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('System Start Date'); ?>" type="text" class="form-control" name="system_start_date" id="system_start_date" value="<?php echo $_SESSION['config']['system_start_date']; ?>" required="" readonly="">
                 </div>
                 <div class="form-group col-lg-4">
-                    <span class="form-label">Import <span class="text-danger">*</span></span>
-                    <input aria-label="Csv File" type="file" class="form-control" name="csv_file" id="csv_file" required="">
+                    <span class="form-label"><?php echo __('Import'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Csv File'); ?>" type="file" class="form-control" name="csv_file" id="csv_file" required="">
                 </div>
             </div>
         </div>
         <div class="card-footer">
             <div class="row">
                 <div class="col-lg-6">
-                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10" name="submit_value" value="add"><i class="la la-check"></i> Import</button>
+                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10" name="submit_value" value="add"><i class="la la-check"></i> <?php echo __('Import'); ?></button>
                 </div>
             </div>
         </div>
@@ -170,11 +170,11 @@ $_SESSION['insert_msg'] ="";
 
 <div class="card card-custom card-sticky " id="kt_page_sticky_card_3">
     <div class="card-header table-card-header">
-        <h5><?php echo "Import List";  ?></h5>
+        <h5><?php echo __('Import List');  ?></h5>
         <div class="card-header-right table-card-header ">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -184,9 +184,9 @@ $_SESSION['insert_msg'] ="";
             <table class="table table-hover m-b-0" style="font-size:13px;" >
                 <thead>
                     <th scope="col">#</th>
-                    <th scope="col">File Name</th>
-                    <th scope="col">System Start Date</th>
-                    <th scope="col">Upload Date</th>
+                    <th scope="col"><?php echo __('File Name'); ?></th>
+                    <th scope="col"><?php echo __('System Start Date'); ?></th>
+                    <th scope="col"><?php echo __('Upload Date'); ?></th>
                 </thead>
                 <tbody>
                     <?php $mk=1; foreach($import_excel_data22 as $ied){ ?>
@@ -202,7 +202,7 @@ $_SESSION['insert_msg'] ="";
             </table>
         <?php }else{ ?>
             <div class="card-px text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Import</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?php echo __('No Import'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

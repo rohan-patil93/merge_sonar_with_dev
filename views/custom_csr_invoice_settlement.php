@@ -27,14 +27,14 @@ $fyRows = $return['fyRows'] ?? array();
 
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5>Invoice Details</h5>
+        <h5><?= __('Invoice Details') ?></h5>
         <?php if(in_array($_SESSION['working_role_short_code'], array('CSR_ADMIN', 'ADMIN'))){ ?>
             <div class="csr-invoice-header-actions">
                 <button type="button" class="btn btn-sm btn-warning" id="invoiceExcelUploadBtn">
-                    <i class="fa fa-file-excel-o"></i> Excel Upload
+                    <i class="fa fa-file-excel-o"></i> <?= __('Excel Upload') ?>
                 </button>
             <button type="button" class="btn btn-sm btn-success" id="addInvRowBtn">
-                <i class="fa fa-plus"></i> Row
+                <i class="fa fa-plus"></i> <?= __('Row') ?>
             </button>
             </div>
         <?php } ?>
@@ -61,9 +61,9 @@ $fyRows = $return['fyRows'] ?? array();
                 <div class="row inv-row border-bottom mb-3 pb-2" data-row="<?php echo $index; ?>">
                     <input type="hidden" name="id[]" value="<?php echo $row['id']; ?>">
                     <div class="col-lg-2 form-group w-full">
-                        <label for="fld_csr_po_details_id_<?php echo $index; ?>">PO No</label>
+                        <label for="fld_csr_po_details_id_<?php echo $index; ?>"><?= __('PO No') ?></label>
                         <select id="fld_csr_po_details_id_<?php echo $index; ?>" class="form-control js-example-basic-single" name="csr_po_details_id[]">
-                            <option value="">Select Any One</option>
+                            <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach ((array)$csr_pos as $po) { ?>
                                 <option value="<?php echo htmlspecialchars($po['id']); ?>" <?php if ($row['csr_po_details_id'] == $po['id']) echo 'selected'; ?>>
                                     <?php echo htmlspecialchars($po['po_no']); ?>
@@ -72,9 +72,9 @@ $fyRows = $return['fyRows'] ?? array();
                         </select>
                     </div>
                     <div class="col-lg-2 form-group">
-                        <label for="fld_financial_year_<?php echo $index; ?>">Financial Year <span class="text-danger">*</span></label>
+                        <label for="fld_financial_year_<?php echo $index; ?>"><?= __('Financial Year') ?> <span class="text-danger">*</span></label>
                         <select id="fld_financial_year_<?php echo $index; ?>" name="financial_year[]" class="form-control form-select financial_year" required>
-                            <option value="">Select FY</option>
+                            <option value=""><?= __('Select FY') ?></option>
                             <?php
                                 $saved_fy = $row['financial_year'] ?? '';
                                 if(!empty((array)$fyRows)){
@@ -88,61 +88,61 @@ $fyRows = $return['fyRows'] ?? array();
                         </select>
                     </div>
                     <div class="col-lg-2 form-group">
-                        <label for="fld_inv_no_<?php echo $index; ?>">Invoice No <span class="text-danger">*</span></label>
+                        <label for="fld_inv_no_<?php echo $index; ?>"><?= __('Invoice No') ?> <span class="text-danger">*</span></label>
                         <input id="fld_inv_no_<?php echo $index; ?>" class="form-control inv_no" type="text" name="inv_no[]" value="<?php echo htmlspecialchars($row['inv_no']); ?>">
                     </div>
 
                     <div class="col-lg-2 form-group">
-                        <label for="fld_inv_date_<?php echo $index; ?>">Invoice Date <span class="text-danger">*</span></label>
+                        <label for="fld_inv_date_<?php echo $index; ?>"><?= __('Invoice Date') ?> <span class="text-danger">*</span></label>
                         <input id="fld_inv_date_<?php echo $index; ?>" class="form-control inv_date" type="date" name="inv_date[]" value="<?php echo htmlspecialchars($row['inv_date']); ?>">
                     </div>
 
                     <div class="col-lg-2 form-group">
-                        <label for="fld_taxable_value_<?php echo $index; ?>">Taxable Value <span class="text-danger">*</span></label>
+                        <label for="fld_taxable_value_<?php echo $index; ?>"><?= __('Taxable Value') ?> <span class="text-danger">*</span></label>
                         <input id="fld_taxable_value_<?php echo $index; ?>" class="form-control taxable_value" type="number" step="any" name="taxable_value[]" value="<?php echo htmlspecialchars($row['taxable_value']); ?>">
                     </div>
                      <div class="col-lg-2 form-group">
-                        <label for="fld_gst_percent_<?php echo $index; ?>">GST % <span class="text-danger">*</span></label>
+                        <label for="fld_gst_percent_<?php echo $index; ?>"><?= __('GST %') ?> <span class="text-danger">*</span></label>
                         <input id="fld_gst_percent_<?php echo $index; ?>" class="form-control gst_percent text-end" type="number" step="any" name="gst_percent[]" value="<?php echo htmlspecialchars($row['gst_percent']); ?>">
                     </div>
 
 
                     <div class="col-lg-2 form-group">
-                        <label for="fld_gst_amount_<?php echo $index; ?>">GST Amount <span class="text-danger">*</span></label>
+                        <label for="fld_gst_amount_<?php echo $index; ?>"><?= __('GST Amount') ?> <span class="text-danger">*</span></label>
                         <input id="fld_gst_amount_<?php echo $index; ?>" class="form-control gst_amount" type="number" min="0" step="any" name="gst_amount[]" value="<?php echo htmlspecialchars($row['gst_amount']); ?>">
                     </div>
 
                     <div class="col-lg-2 form-group">
-                        <label for="fld_total_spent_<?php echo $index; ?>">Total Spent <span class="text-danger">*</span></label>
+                        <label for="fld_total_spent_<?php echo $index; ?>"><?= __('Total Spent') ?> <span class="text-danger">*</span></label>
                         <input id="fld_total_spent_<?php echo $index; ?>" class="form-control total_spent" type="number" step="any" name="total_spent[]" value="<?php echo htmlspecialchars($row['total_spent']); ?>">
                     </div>
 
                     <div class="col-lg-2 form-group">
-                        <label for="fld_tds_deducted_<?php echo $index; ?>">TDS Deducted</label>
+                        <label for="fld_tds_deducted_<?php echo $index; ?>"><?= __('TDS Deducted') ?></label>
                         <input id="fld_tds_deducted_<?php echo $index; ?>" class="form-control tds_deducted" type="number" step="any" name="tds_deducted[]" value="<?php echo htmlspecialchars($row['tds_deducted']); ?>">
                     </div>
                     
                     <div class="col-lg-2 form-group">
-                        <label for="fld_net_payable_<?php echo $index; ?>">Net Payable <span class="text-danger">*</span></label>
+                        <label for="fld_net_payable_<?php echo $index; ?>"><?= __('Net Payable') ?> <span class="text-danger">*</span></label>
                         <input id="fld_net_payable_<?php echo $index; ?>" class="form-control net_payable" type="number" step="any" name="net_payable[]" value="<?php echo htmlspecialchars($row['net_payable']); ?>">
                     </div>
                     <div class="col-lg-2 form-group">
-                        <label for="fld_paid_date_<?php echo $index; ?>">Paid Date <span class="text-danger">*</span></label>
+                        <label for="fld_paid_date_<?php echo $index; ?>"><?= __('Paid Date') ?> <span class="text-danger">*</span></label>
                         <input id="fld_paid_date_<?php echo $index; ?>" class="form-control paid_date" type="date" name="paid_date[]" value="<?php echo htmlspecialchars($row['paid_date']); ?>">
                     </div>
 
                     <div class="col-lg-2 form-group">
-                        <label for="fld_paid_amount_<?php echo $index; ?>">Paid Amount <span class="text-danger">*</span></label>
+                        <label for="fld_paid_amount_<?php echo $index; ?>"><?= __('Paid Amount') ?> <span class="text-danger">*</span></label>
                         <input id="fld_paid_amount_<?php echo $index; ?>" class="form-control paid_amount" type="number" step="any" name="paid_amount[]" value="<?php echo htmlspecialchars($row['paid_amount']); ?>">
                     </div>
 
                     <div class="col-lg-2 form-group">
-                        <label for="fld_paid_bank_<?php echo $index; ?>">Paid Bank <span class="text-danger">*</span></label>
+                        <label for="fld_paid_bank_<?php echo $index; ?>"><?= __('Paid Bank') ?> <span class="text-danger">*</span></label>
                         <input id="fld_paid_bank_<?php echo $index; ?>" class="form-control paid_bank" type="text" name="paid_bank[]" value="<?php echo htmlspecialchars($row['paid_bank']); ?>">
                     </div>
                     <?php if(in_array($_SESSION['working_role_short_code'], array('CSR_ADMIN', 'ADMIN'))){ ?>
                     <div class="col-lg-1 d-flex align-items-center">
-                        <button type="button" class="btn btn-danger btn-sm removeInvRowBtn">
+                        <button type="button" class="btn btn-danger btn-sm removeInvRowBtn" aria-label="<?= __('Delete') ?>">
                             <i class="fa fa-trash"></i>
                         </button>
                     </div>
@@ -155,7 +155,7 @@ $fyRows = $return['fyRows'] ?? array();
             <div class="pt-3">
                 <?php if(in_array($_SESSION['working_role_short_code'], array('CSR_ADMIN', 'ADMIN'))){ ?>
                     <button type="submit" class="btn btn-primary waves-effect waves-light">
-                        Save
+                        <?= __('Save') ?>
                     </button>
                 <?php } ?>
             </div>

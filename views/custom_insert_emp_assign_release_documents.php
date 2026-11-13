@@ -167,11 +167,9 @@ $typedata = json_decode($configesponse,1);
   <div class="container-fluid">
     <div class="card">
       <div class="card-header">
-        <h5> Assign Employees</h5>
+        <h5><?= __('Assign Employees') ?></h5>
         <div class="card-header-right">
-          <button type="button" class="btn btn-primary" onclick="showfilter()">
-            Filter
-          </button>
+          <button type="button" class="btn btn-primary" onclick="showfilter()"><?= __('Filter') ?></button>
 
           <input type="hidden" name="filterval" id="filterval" value="0">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
@@ -185,7 +183,7 @@ $typedata = json_decode($configesponse,1);
           <div class="col-lg-3 form-group kt-margin-b-10-tablet-and-mobile">
               <span><?php echo "Cost Center"; ?>:</span>
               <select aria-label="Cost Center Pp" class=" form-select js-example-basic-single" id="cost_center_pp" name="cost_center_pp">
-                <option value=""> All  </option>
+                <option value=""><?= __('All') ?></option>
                 <?php foreach($empcos as $cos){ $emp_cos[$cos['id']]= $cos['cost_center_name']; ?>
                 <option   <?php if($ress['cost_center_pp'] == $cos['id'] ){ ?> selected <?php
 } ?> value="<?php echo $cos['id']; ?>"><?php echo $cos['cost_center_name']; ?></option>
@@ -195,7 +193,7 @@ $typedata = json_decode($configesponse,1);
           <div class="col-lg-3  form-group kt-margin-b-10-tablet-and-mobile">
             <span><?php echo "Vendors"; ?>:</span>
             <select aria-label="Vendor" class=" form-select js-example-basic-single" id="vendor" name="vendor">
-              <option value=""> All  </option>
+              <option value=""><?= __('All') ?></option>
               <?php foreach($empven as $ven){ $emp_ven[$ven['id']]= $ven['display_name']; ?>
               <option   <?php if($ress['vendor'] == $ven['id'] ){ ?> selected <?php
 } ?> value="<?php echo $ven['id']; ?>"><?php echo $ven['display_name']; ?></option>
@@ -205,7 +203,7 @@ $typedata = json_decode($configesponse,1);
           <div class="col-lg-3 form-group kt-margin-b-10-tablet-and-mobile">
             <span><?php echo "Department"; ?>:</span>
             <select aria-label="Department" class=" form-select js-example-basic-single" id="department" name="department">
-              <option value=""> All  </option>
+              <option value=""><?= __('All') ?></option>
               <?php foreach($empdep as $dep){ $emp_dep[$dep['id']]= $dep['department_name'];  ?>
               <option  <?php if($ress['department'] == $dep['id'] ){ ?> selected <?php
 } ?> value="<?php echo $dep['id']; ?>"><?php echo $dep['department_name']; ?></option>
@@ -215,7 +213,7 @@ $typedata = json_decode($configesponse,1);
           <div class="col-lg-3 form-group kt-margin-b-10-tablet-and-mobile">
             <span><?php echo "Designation"; ?>:</span>
             <select aria-label="Designation" class=" form-select js-example-basic-single" id="designation" name="designation">
-              <option value=""> All  </option>
+              <option value=""><?= __('All') ?></option>
               <?php foreach($empdes as $des){  $emp_des[$des['id']]= $des['designation_name'];  ?>
               <option  <?php if($ress['designation'] == $des['id'] ){ ?> selected <?php
 } ?> value="<?php echo $des['id']; ?>"><?php echo $des['designation_name']; ?></option>
@@ -225,7 +223,7 @@ $typedata = json_decode($configesponse,1);
           <div class="col-lg-3  form-group kt-margin-b-10-tablet-and-mobile mt-2">
             <span><?php echo "Location"; ?>:</span>
             <select aria-label="Location" class=" form-select js-example-basic-single" id="location" name="location">
-              <option value=""> All  </option>
+              <option value=""><?= __('All') ?></option>
               <?php foreach($emploc as $loc){ $emp_loc[$loc['id']]= $loc['location_name']; ?>
               <option   <?php if($ress['location'] == $loc['id'] ){ ?> selected <?php
 } ?> value="<?php echo $loc['id']; ?>"><?php echo $loc['location_name']; ?></option>
@@ -242,7 +240,7 @@ $typedata = json_decode($configesponse,1);
             <input type="hidden" name="submit" value="search" />
             <div>
               <button class="btn btn-primary btn-brand--icon" id="kt_search" >
-                <span><span>Search</span></span>
+                <span><span><?= __('Search') ?></span></span>
               </button>
             </div>
           </div>
@@ -253,7 +251,7 @@ $typedata = json_decode($configesponse,1);
           <div class="col-lg-1"> <span>Assement Year:&nbsp;</span> </div>
           <div class="col-lg-2">
             <select aria-label="Assement" class="js-example-basic-single" name="assement" id="assement" onchange="assementdetail()">
-              <option value="0">Select Year</option>
+              <option value="0"><?= __('Select Year') ?></option>
               <?php $asyear = date('Y'); $asyear = $asyear-3;
                   for($i=1;$i<6;$i++){
                       $vaass = $asyear."-".($asyear+1);
@@ -269,7 +267,7 @@ $typedata = json_decode($configesponse,1);
           <div class="col-lg-1"> <span>Type:&nbsp;</span> </div>
           <div class="col-lg-2">
             <select aria-label="Type" class="js-example-basic-single" name="type" id="type" onchange="assementdetail()">
-              <option value="0">Select Year</option>
+              <option value="0"><?= __('Select Year') ?></option>
               <?php foreach($typedata as $type){ ?>
                   <option <?php if($_REQUEST['list']==$type['id']){ echo "selected";
 } ?> value="<?php echo $type['id']; ?>"><?php echo $type['document_name']; ?></option>
@@ -282,7 +280,7 @@ $typedata = json_decode($configesponse,1);
           <div class="col-lg-2" id="month_drop"  <?php if(!isset($_GET['month'])){ ?> style="display:none" <?php
 } ?> >
             <select aria-label="Month" class="js-example-basic-single" name="month" id="month" onchange="assementdetail()">
-              <option value="0">Select Year</option>
+              <option value="0"><?= __('Select Year') ?></option>
               <?php for($k=4; $k<16; $k++){
                     $m = $k;
                     if($m>12){$m=$m-12;
@@ -296,7 +294,7 @@ $typedata = json_decode($configesponse,1);
           </div>
           <div class="col-lg-1"></div>
           <div class="col-lg-2 text-right">
-            <button type="button" onclick="submitpopup()" class="btn btn-success" style="display:none;" id="assign_employee" >Documents Release </button>
+            <button type="button" onclick="submitpopup()" class="btn btn-success" style="display:none;" id="assign_employee" ><?= __('Documents Release') ?></button>
           </div>
         </div>
         <div class="dt-responsive table-responsive">
@@ -307,11 +305,11 @@ $typedata = json_decode($configesponse,1);
 
                 </th>
                 <th scope="col" style="width: 2%;">#</th>
-                <th scope="col" style="width: 15%;">Name </th>
-                <th scope="col" style="width: 15%;">Cost Center</th>
-                <th scope="col" style="width: 10%;">Location</th>
-                <th scope="col" style="width: 10%;">Department</th>
-                <th scope="col" style="width: 10%;">Designation</th>
+                <th scope="col" style="width: 15%;"><?= __('Name') ?></th>
+                <th scope="col" style="width: 15%;"><?= __('Cost Center') ?></th>
+                <th scope="col" style="width: 10%;"><?= __('Location') ?></th>
+                <th scope="col" style="width: 10%;"><?= __('Department') ?></th>
+                <th scope="col" style="width: 10%;"><?= __('Designation') ?></th>
               </tr>
             </thead>
             <tbody >

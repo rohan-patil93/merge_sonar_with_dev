@@ -21,9 +21,9 @@ if(isset($_POST['pageshow']) && $_POST['pageshow'] =="Y"){
                         <thead>
                             <tr>
                                 <th scope="col" style="width: 5%;">#</th>
-                                <th scope="col" colspan="2" style="width: 90%;">Group Name</th>
+                                <th scope="col" colspan="2" style="width: 90%;"><?php echo __('Group Name'); ?></th>
                                 <th scope="col" class="text-right" style="width: 5%;">
-                                    <button class="btn bg-primary" href="#" onclick="editFinanaceGrp(0)"><i class="ti-plus"></i> FRG</button>
+                                    <button class="btn bg-primary" href="#" onclick="editFinanaceGrp(0)"><i class="ti-plus"></i> <?php echo __('FRG'); ?></button>
                                 </th>
 
                             </tr>

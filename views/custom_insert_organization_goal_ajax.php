@@ -19,12 +19,12 @@ foreach($kralist as $kralist){ ?>
                 <div class="row">
                     <table class="table table-hover" id="invoiceItem_<?php echo $kralist['id']; ?>">
                         <tr>
-                            <th scope="col" class="text-center" style="width: 20%;">Indicator Name </th>
-                            <th scope="col" class="text-center" style="width: 20%;">Model </th>
-                            <th scope="col" class="text-center" style="width: 15%;">UOM </th>
-                            <th scope="col" class="text-center" style="width: 10%;">Weightage </th>
-                            <th scope="col" class="text-center" style="width: 20%;">Frequency </th>
-                            <th scope="col" class="text-center" style="width: 20%;">Target </th>
+                            <th scope="col" class="text-center" style="width: 20%;"><?php echo __('Indicator Name'); ?> </th>
+                            <th scope="col" class="text-center" style="width: 20%;"><?php echo __('Model'); ?> </th>
+                            <th scope="col" class="text-center" style="width: 15%;"><?php echo __('UOM'); ?> </th>
+                            <th scope="col" class="text-center" style="width: 10%;"><?php echo __('Weightage'); ?> </th>
+                            <th scope="col" class="text-center" style="width: 20%;"><?php echo __('Frequency'); ?> </th>
+                            <th scope="col" class="text-center" style="width: 20%;"><?php echo __('Target'); ?> </th>
                         </tr>
                         <?php $i=1;  $total = 0;
                         if(count((array)$kpilist[$kralist['id']]) == '0'){
@@ -55,8 +55,8 @@ foreach($kralist as $kralist){ ?>
                                 </td>
                                 <td>
                                     <input type="hidden" name="goalsid[<?php echo $kralist['id']; ?>][<?php echo $res['id']; ?>]" value="<?php echo $resultkpi['ogid']; ?>">
-                                    <select aria-label="Select option" class="form-control form-select js-example-basic-single" name="assessment_frequency[<?php echo $kralist['id']; ?>][<?php echo $res['id']; ?>]"  required>
-                                        <option value="">Select Any One</option>
+                                    <select aria-label="<?php echo __('Select option'); ?>" class="form-control form-select js-example-basic-single" name="assessment_frequency[<?php echo $kralist['id']; ?>][<?php echo $res['id']; ?>]"  required>
+                                        <option value=""><?php echo __('Select Any One'); ?></option>
                                         <?php foreach ($frequencyllist as  $frequency) { ?>
                                             <option <?php if($res['assessment_frequency'] == $frequency['genc_detail_code']){ ?> selected <?php
 } ?> value="<?php echo $frequency['genc_detail_code']; ?>"><?php echo $frequency['genc_detail_name']; ?></option>
@@ -64,7 +64,7 @@ foreach($kralist as $kralist){ ?>
                                     </select>
                                 </td>
                                 <td>
-                                    <input aria-label="Input field" type="text" name="traget[<?php echo $kralist['id']; ?>][<?php echo $res['id']; ?>]"  onblur="weightagecheck(<?php echo $kralist['id']; ?>)"  class="form-control  traget_<?php echo $kralist['id']; ?>" value="<?php echo $res['traget']; ?>" required >
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" name="traget[<?php echo $kralist['id']; ?>][<?php echo $res['id']; ?>]"  onblur="weightagecheck(<?php echo $kralist['id']; ?>)"  class="form-control  traget_<?php echo $kralist['id']; ?>" value="<?php echo $res['traget']; ?>" required >
                                     <input type="hidden" name="kpi_hd_id[<?php echo $kralist['id']; ?>][]" value="<?php echo $res['id']; ?>">
                                 </td>
                             </tr>

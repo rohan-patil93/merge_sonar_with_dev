@@ -90,12 +90,12 @@ $_SESSION['apply_js']['calender'] = '1';
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
 	swal({
 		title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-		text: "Please note the status of the document will change to "+new_status_name,
+		text: <?= json_encode(__('Please note the status of the document will change to ')) ?> + new_status_name,
 		type: "info",
 		showCancelButton: true,
 		confirmButtonClass: "btn-danger",
-		confirmButtonText: "Yes",
-		cancelButtonText: "No",
+		confirmButtonText: <?= json_encode(__('Yes')) ?>,
+		cancelButtonText: <?= json_encode(__('No')) ?>,
 		closeOnConfirm: false
 	},
 	function(){
@@ -128,7 +128,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                     		type: "error",
                     		showCancelButton: true,
                     		showConfirmButton: false,
-                    		cancelButtonText: "Ok",
+                    		cancelButtonText: <?= json_encode(__('Ok')) ?>,
                     		confirmButtonClass: "btn-danger",
                     		closeOnCancel: false
                     	});
@@ -155,13 +155,13 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 				}
 				?>
 		            <div class="card-header table-card-header">
-		              <h5><?php echo "Leave Request Approval";  ?></h5>
+		              <h5><?= __('Leave Request Approval') ?></h5>
 		              <div class="card-header-right table-card-header ">
 							
 									<?php  echo $workflowsteps['workflow_btn']; ?>
 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
 					              <i class="icofont icofont-reply"></i>
-					              Back
+					              <?= __('Back') ?>
 					        </a>
 						</div></div>
 						<div class="row">
@@ -216,7 +216,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 								<div class="col-lg-5 p-3" style="float: left;">
 									<div class="card card-custom card-stretch gutter-b p-3">
 										<div class="card-header table-card-header">
-											<h5>Who Else Will Be Out</h5>
+											<h5><?= __('Who Else Will Be Out') ?></h5>
 										</div>
 										<?php foreach ($otheremp as $othemp) {
 												if($othemp['id'] !=$empl['id']){

@@ -87,27 +87,27 @@ function deleteitem(cardid){
 	<div class="container-fluid ">
 		<div class="card card-custom card-sticky " id="kt_page_sticky_card">
 			<div class="card-header">
-				<h5>Take A Tours</h5><i class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Go Toure"></i> 
+				<h5><?= __('Take A Tours') ?></h5><i class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Go Toure"></i> 
 				<div class="card-header-right">
 				       <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                     <i class="icofont icofont-reply"></i> Back</a>
+                     <i class="icofont icofont-reply"></i> <?= __('Back') ?></a>
 				</div>
 			</div>
 			<div class=" card-custom mt-2">
 				<div class="card-body">
 <form method="post" action="">
 <div class="row">
-	<label class="col-lg-2 f-w-700 ">Select table name</label>
+	<label class="col-lg-2 f-w-700 "><?= __('Select table name') ?></label>
 	<div class="col-lg-3">
 	  <select class="form-select js-example-basic-single" name="application_table_name" onchange="selecttablename(this.value)" aria-label="Application Table Name">
 			<option value = "0"> Select Any One</option>
 			<?php foreach ($showtables as $data) {  ?>
 				<option  <?php if($resarray[0]['application_table_name'] == $data['application_table_name']){ ?> selected  <?php } ?> value = <?php echo $data['application_table_name'] ?>   > <?php echo ucwords(str_replace('_',' ',$data['application_table_name'])); ?> </option>
 		<?php	} ?>
-				<option value = "-1"  <?php echo $_GET['table']=="-1"?"selected":""?>>Other Table</option>
+				<option value = "-1"  <?php echo $_GET['table']=="-1"?"selected":""?>><?= __('Other Table') ?></option>
 		</select>
 		<?php if($_GET['table']=="-1"){ ?>
-		<input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="Enter Table/Page Name" aria-label="Enter Table/Page Name"> <?php } ?>
+		<input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="<?= __('Enter Table/Page Name') ?>" aria-label="Enter Table/Page Name"> <?php } ?>
 
 	</div>
 	
@@ -121,13 +121,13 @@ function deleteitem(cardid){
 <table class="table table-hover table-custom-responsive"  id="toureaddmore"> 
     <thead>
 	  <tr>	
-		  <th scope="col" width="15%">Field Name</th>
-		  <th scope="col" width="15%">Menu Path</th>
-		  <th scope="col" width="15%">Ref Field Name</th>
-		  <th scope="col" width="30%">Help Text</th>
-		  <th scope="col" width="15%">Field  Type</th>
-		  <th scope="col" width="5%">Sequence</th>
-		  <th scope="col" width="5%">Display</th> 
+		  <th scope="col" width="15%"><?= __('Field Name') ?></th>
+		  <th scope="col" width="15%"><?= __('Menu Path') ?></th>
+		  <th scope="col" width="15%"><?= __('Ref Field Name') ?></th>
+		  <th scope="col" width="30%"><?= __('Help Text') ?></th>
+		  <th scope="col" width="15%"><?= __('Field Type') ?></th>
+		  <th scope="col" width="5%"><?= __('Sequence') ?></th>
+		  <th scope="col" width="5%"><?= __('Display') ?></th> 
 	  </tr>
 	 </thead>
 	 <tbody>
@@ -172,11 +172,11 @@ function deleteitem(cardid){
 
 <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-            <button class="btn btn-success" id="addRows" type="button" onclick="addmorerow()">+ Add More</button>
+            <button class="btn btn-success" id="addRows" type="button" onclick="addmorerow()">+ <?= __('Add More') ?></button>
         </div>
         <div class="col-lg-6"></div>
          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 text-right">
-            <button type="submit" class="btn btn-primary " name="submittour" type="button" >Submit</button>
+            <button type="submit" class="btn btn-primary " name="submittour" type="button" ><?= __('Submit') ?></button>
         </div>
     </div>
 <?php } ?>

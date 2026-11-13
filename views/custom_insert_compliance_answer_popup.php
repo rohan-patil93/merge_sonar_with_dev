@@ -21,7 +21,7 @@ function submitform(){
                   $('#kt_modal_dynamic_popup').modal("hide");
                 var jsonres = JSON.parse(response);
                 if(jsonres.status == "199"){
-                    $("#statusid_"+rid).html('<span class="form-label label label-success">Completed</span>');
+                    $("#statusid_"+rid).html('<span class="form-label label label-success"><?= __('Completed') ?></span>');
                 }
             }
         });
@@ -30,7 +30,7 @@ function submitform(){
     </script>
 <div class="modal-header">
     <h5 class="modal-title">
-        <?php echo $compliancetaskhistory['name']; ?>
+        <?php echo htmlspecialchars(__($compliancetaskhistory['name'] ?? '')); ?>
     </h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closebutnfunction()"></button>
 </div>
@@ -39,7 +39,7 @@ function submitform(){
         <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
             <div class="form-group row">
                 <div class="col-lg-12">
-                    <span><?php echo $check_list[$_POST['aryposition']]['name']; ?></span>
+                    <span><?php echo htmlspecialchars(__($check_list[$_POST['aryposition']]['name'] ?? '')); ?></span>
                     <textarea aria-label="Comment" class="form-control" name="comment" id="comment"></textarea>
                 </div>
             </div>
@@ -52,6 +52,6 @@ function submitform(){
 </div>
 <div class="modal-footer">
 
-    <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal" onclick="closebutnfunction()">Close</button>
-    <button type="button" class="btn btn-primary mr-2" onclick="submitform()" >Submit</button>
+    <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal" onclick="closebutnfunction()"><?= __('Close') ?></button>
+    <button type="button" class="btn btn-primary mr-2" onclick="submitform()" ><?= __('Submit') ?></button>
 </div>

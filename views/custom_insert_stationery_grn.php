@@ -24,10 +24,10 @@ $grn_items   = $result['grn_items'] ?? array();
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Stationery GRN</h5>
+            <h5><?php echo __('Stationery GRN'); ?></h5>
             <div class="card-header-right">
-                <a href="index.php?option=COM_LIST_STATIONERY_GRN" class="btn btn-success mb-2 desktop-view">Stationery GRN List</a>
-                <button type="button" onclick="history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i> Back</button>
+                <a href="index.php?option=COM_LIST_STATIONERY_GRN" class="btn btn-success mb-2 desktop-view"><?php echo __('Stationery GRN List'); ?></a>
+                <button type="button" onclick="history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i> <?php echo __('Back'); ?></button>
             </div>
         </div>
 
@@ -37,37 +37,37 @@ $grn_items   = $result['grn_items'] ?? array();
                     <input type="hidden" name="grn_id" value="<?php echo $grn_id; ?>">
                     <div class="row">
                         <div class="col-lg-6 col-xs-12 form-group">
-                            <span>Transaction No.</span>
-                            <input aria-label="Transaction No" name="transaction_no" id="transaction_no" class="form-control" type="text"
+                            <span><?php echo __('Transaction No.'); ?></span>
+                            <input aria-label="<?php echo __('Transaction No'); ?>" name="transaction_no" id="transaction_no" class="form-control" type="text"
                                 value="<?php echo $grn_master['transaction_no'] ?? ''; ?>" readonly />
                         </div>
                         <div class="col-lg-6 col-xs-12 form-group">
-                            <span>Transaction Date</span>
-                            <input aria-label="Transaction Date" name="transaction_date" id="transaction_date" class="form-control" type="date"
+                            <span><?php echo __('Transaction Date'); ?></span>
+                            <input aria-label="<?php echo __('Transaction Date'); ?>" name="transaction_date" id="transaction_date" class="form-control" type="date"
                                 value="<?php echo $grn_master['transaction_date'] ?? date('Y-m-d'); ?>" required />
                         </div>
                         <div class="col-lg-6 col-xs-12 form-group">
-                            <span>Supplier Name</span>
-                            <input aria-label="Supplier" class="form-control" type="text" name="supplier" id="supplier"
+                            <span><?php echo __('Supplier Name'); ?></span>
+                            <input aria-label="<?php echo __('Supplier'); ?>" class="form-control" type="text" name="supplier" id="supplier"
                                 value="<?php echo $grn_master['supplier'] ?? ''; ?>" required />
                         </div>
                         <div class="col-lg-6 col-xs-12 form-group">
-                            <span>Supplier Invoice No</span>
-                            <input aria-label="Supplier Invoice No" class="form-control" type="text" name="supplier_invoice_no" id="supplier_invoice_no"
+                            <span><?php echo __('Supplier Invoice No'); ?></span>
+                            <input aria-label="<?php echo __('Supplier Invoice No'); ?>" class="form-control" type="text" name="supplier_invoice_no" id="supplier_invoice_no"
                                 value="<?php echo $grn_master['supplier_invoice_no'] ?? ''; ?>" />
                         </div>
 
                     </div>
 
                     <hr>
-                    <h6>GRN Items</h6>
+                    <h6><?php echo __('GRN Items'); ?></h6>
                     <table class="table table-bordered" id="grnItemsTable">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Item</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col" style="width: 5%;">Action</th>
+                                <th scope="col"><?php echo __('Item'); ?></th>
+                                <th scope="col"><?php echo __('Quantity'); ?></th>
+                                <th scope="col"><?php echo __('Amount'); ?></th>
+                                <th scope="col" style="width: 5%;"><?php echo __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody id="grnItemsBody">
@@ -75,11 +75,11 @@ $grn_items   = $result['grn_items'] ?? array();
                                 <?php foreach ($grn_items as $index => $item) { ?>
 
                                     <tr data-row="<?php echo $index + 1; ?>">
-                                        <input aria-label="Grn Items []" name="grn_items_id[]" value="<?php echo $item['id'] ?? ''; ?>" type="hidden">
+                                        <input aria-label="<?php echo __('Grn Items []'); ?>" name="grn_items_id[]" value="<?php echo $item['id'] ?? ''; ?>" type="hidden">
 
                                         <td class="w-full">
-                                            <select aria-label="Item []" name="item_id[]" class="form-control js-example-basic-single" required>
-                                                <option value="">Select Item</option>
+                                            <select aria-label="<?php echo __('Item []'); ?>" name="item_id[]" class="form-control js-example-basic-single" required>
+                                                <option value=""><?php echo __('Select Item'); ?></option>
                                                 <?php foreach ($items as $it) { ?>
                                                     <option value="<?php echo $it['id']; ?>"
                                                         <?php echo ($it['id'] == $item['item_id']) ? 'selected' : ''; ?>>
@@ -88,8 +88,8 @@ $grn_items   = $result['grn_items'] ?? array();
                                                 <?php } ?>
                                             </select>
                                         </td>
-                                        <td><input aria-label="Qty[]" type="number" name="qty[]" class="form-control qty" value="<?php echo $item['qty']; ?>" min="1" required></td>
-                                        <td><input aria-label="Amount[]" type="number" name="amount[]" class="form-control amount" value="<?php echo $item['amount']; ?>" min="0" step="0.01" required></td>
+                                        <td><input aria-label="<?php echo __('Qty[]'); ?>" type="number" name="qty[]" class="form-control qty" value="<?php echo $item['qty']; ?>" min="1" required></td>
+                                        <td><input aria-label="<?php echo __('Amount[]'); ?>" type="number" name="amount[]" class="form-control amount" value="<?php echo $item['amount']; ?>" min="0" step="0.01" required></td>
                                         <td class="text-center">
                                             <button type="button" class="btn btn-danger btn-sm removeRowBtn"><i class="fa fa-trash"></i></button>
                                         </td>
@@ -100,15 +100,15 @@ $grn_items   = $result['grn_items'] ?? array();
                                     <td class="w-full">
                                         <input name="grn_items_id[]" value="" type="hidden">
 
-                                        <select aria-label="Item []" name="item_id[]" class="form-control js-example-basic-single" required>
-                                            <option value="">Select Item</option>
+                                        <select aria-label="<?php echo __('Item []'); ?>" name="item_id[]" class="form-control js-example-basic-single" required>
+                                            <option value=""><?php echo __('Select Item'); ?></option>
                                             <?php foreach ($items as $it) { ?>
                                                 <option value="<?php echo $it['id']; ?>"><?php echo $it['item_name']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </td>
-                                    <td><input aria-label="Qty[]" type="number" name="qty[]" class="form-control qty" min="1" required></td>
-                                    <td><input aria-label="Amount[]" type="number" name="amount[]" class="form-control amount" min="0" step="0.01" required></td>
+                                    <td><input aria-label="<?php echo __('Qty[]'); ?>" type="number" name="qty[]" class="form-control qty" min="1" required></td>
+                                    <td><input aria-label="<?php echo __('Amount[]'); ?>" type="number" name="amount[]" class="form-control amount" min="0" step="0.01" required></td>
                                     <td class="text-center">
                                         <button type="button" class="btn btn-danger btn-sm removeRowBtn"><i class="fa fa-trash"></i></button>
                                     </td>
@@ -117,9 +117,9 @@ $grn_items   = $result['grn_items'] ?? array();
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="2" class="text-end">Total Amount</td>
+                                <td colspan="2" class="text-end"><?php echo __('Total Amount'); ?></td>
                                 <td>
-                                    <input aria-label="Total Amount" class="form-control" type="number" name="total_amount" id="total_amount"
+                                    <input aria-label="<?php echo __('Total Amount'); ?>" class="form-control" type="number" name="total_amount" id="total_amount"
                                         value="<?php echo $grn_master['total_amount'] ?? ''; ?>" readonly />
                                 </td>
                                 <td></td>
@@ -127,12 +127,12 @@ $grn_items   = $result['grn_items'] ?? array();
                         </tfoot>
                     </table>
 
-                    <button type="button" id="addRow" class="btn btn-secondary mb-2"><i class="icofont icofont-plus"></i> Add More</button>
+                    <button type="button" id="addRow" class="btn btn-secondary mb-2"><i class="icofont icofont-plus"></i> <?php echo __('Add More'); ?></button>
 
                     <div class="border-top pt-3">
                         <input name="submit" value="insert" type="hidden">
-                        <input aria-label="Grn" name="grn_id" value="<?php echo $grn_master['id'] ?? ''; ?>" type="hidden">
-                        <button type="submit" class="btn waves-effect waves-light btn-primary mt-2">Save</button>
+                        <input aria-label="<?php echo __('Grn'); ?>" name="grn_id" value="<?php echo $grn_master['id'] ?? ''; ?>" type="hidden">
+                        <button type="submit" class="btn waves-effect waves-light btn-primary mt-2"><?php echo __('Save'); ?></button>
                     </div>
                 </form>
             </div>
@@ -148,15 +148,15 @@ $grn_items   = $result['grn_items'] ?? array();
         <tr data-row="${index}">
         <input name="grn_items_id[]" value="" type="hidden">
             <td class="w-full">
-                <select aria-label="Item []" name="item_id[]" class="form-control js-example-basic-single" required>
-                    <option value="">Select Item</option>
+                <select aria-label="<?php echo __('Item []'); ?>" name="item_id[]" class="form-control js-example-basic-single" required>
+                    <option value=""><?php echo __('Select Item'); ?></option>
                     <?php foreach ($items as $item) { ?>
                         <option value="<?php echo $item['id']; ?>"><?php echo $item['item_name']; ?></option>
                     <?php } ?>
                 </select>
             </td>
-            <td><input aria-label="Qty[]" type="number" name="qty[]" class="form-control qty" min="1" required></td>
-            <td><input aria-label="Amount[]" type="number" name="amount[]" class="form-control amount" min="0" step="0.01" required></td>
+            <td><input aria-label="<?php echo __('Qty[]'); ?>" type="number" name="qty[]" class="form-control qty" min="1" required></td>
+            <td><input aria-label="<?php echo __('Amount[]'); ?>" type="number" name="amount[]" class="form-control amount" min="0" step="0.01" required></td>
             <td class="text-center"><button type="button" class="btn btn-danger btn-sm removeRowBtn"><i class="fa fa-trash"></i></button></td>
         </tr>`;
     }

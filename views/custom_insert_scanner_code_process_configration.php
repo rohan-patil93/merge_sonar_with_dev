@@ -92,14 +92,14 @@ if (isset($_POST['submit_process'])) {
         <div class="col-lg-8">
             <div class="card shadow border-0">
                 <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0"><i class="ti-settings me-2 text-primary"></i>Scanner Code Process Configuration</h5>
+                    <h5 class="mb-0"><i class="ti-settings me-2 text-primary"></i><?php echo __('Scanner Code Process Configuration'); ?></h5>
                     <a href="javascript:history.go(-1)" class="btn btn-outline-primary btn-sm">
-                        <i class="icofont icofont-reply"></i> Back
+                        <i class="icofont icofont-reply"></i> <?php echo __('Back'); ?>
                     </a>
                 </div>
                 <div class="card-body p-4">
                     <div class="progress mb-4" style="height:25px;border-radius:50px;">
-                        <div class="progress-bar bg-primary text-white" id="formProgress" style="width:33.3%;border-radius:50px;">Step 1/3</div>
+                        <div class="progress-bar bg-primary text-white" id="formProgress" style="width:33.3%;border-radius:50px;"><?php echo __('Step 1/3'); ?></div>
                     </div>
 
                     <form id="processForm" method="POST">
@@ -110,20 +110,20 @@ if (isset($_POST['submit_process'])) {
                         <div class="step" id="step1">
                             <div class="row g-3">
                                 <div class="col-md-12">
-                                    <span class="form-label">Process Name</span>
-                                    <input aria-label="Process Name" type="text" class="form-control" name="process_name" value="<?php echo $process_id ? htmlspecialchars($process_details['process_name']) : ''; ?>" placeholder="Enter process name">
+                                    <span class="form-label"><?php echo __('Process Name'); ?></span>
+                                    <input aria-label="<?php echo __('Process Name'); ?>" type="text" class="form-control" name="process_name" value="<?php echo $process_id ? htmlspecialchars($process_details['process_name']) : ''; ?>" placeholder="<?php echo __('Enter process name'); ?>">
                                 </div>
                             </div>
                         </div>
 
 
                         <div class="step d-none" id="step2">
-                            <h5 class="fw-bold text-secondary mb-3"><i class="ti-database me-2 text-primary"></i>Table Selection</h5>
+                            <h5 class="fw-bold text-secondary mb-3"><i class="ti-database me-2 text-primary"></i><?php echo __('Table Selection'); ?></h5>
                             <div class="row g-3">
                                 <div class="col-md-6 w-full">
-                                    <span class="form-label">Application Table <span class="text-danger">*</span></span></br>
-                                    <select aria-label="Ected Table" class="form-select js-example-basic-single required" name="selected_table" id="tableSelect" onchange="onTableSelect(this.value)">
-                                        <option value="">Choose a table to configure...</option>
+                                    <span class="form-label"><?php echo __('Application Table'); ?> <span class="text-danger">*</span></span></br>
+                                    <select aria-label="<?php echo __('Ected Table'); ?>" class="form-select js-example-basic-single required" name="selected_table" id="tableSelect" onchange="onTableSelect(this.value)">
+                                        <option value=""><?php echo __('Choose a table to configure...'); ?></option>
                                         <?php foreach ($tables as $table_key => $table_name): ?>
                                             <option value="<?php echo $table_key; ?>"
                                                 <?php echo ($process_details && $process_details['process_table'] == $table_key) ? 'selected' : ''; ?>>
@@ -131,19 +131,19 @@ if (isset($_POST['submit_process'])) {
                                             </option>
                                         <?php endforeach; ?>
                                     </select></br>
-                                    <small class="text-muted">Choose a table to create the custom process.</small>
+                                    <small class="text-muted"><?php echo __('Choose a table to create the custom process.'); ?></small>
                                 </div>
                             </div>
                         </div>
 
                         <!-- STEP 3: Field Configuration -->
                         <div class="step d-none" id="step3">
-                            <h5 class="fw-bold text-secondary mb-3"><i class="ti-list me-2 text-primary"></i>Field Configuration</h5>
+                            <h5 class="fw-bold text-secondary mb-3"><i class="ti-list me-2 text-primary"></i><?php echo __('Field Configuration'); ?></h5>
 
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="text-muted">Field Mappings</span>
+                                <span class="text-muted"><?php echo __('Field Mappings'); ?></span>
                                 <button type="button" class="btn btn-success btn-sm" id="addFieldBtn">
-                                    <i class="fa fa-plus me-1"></i>Add Field
+                                    <i class="fa fa-plus me-1"></i><?php echo __('Add Field'); ?>
                                 </button>
                             </div>
 
@@ -154,10 +154,10 @@ if (isset($_POST['submit_process'])) {
 
                         <div class="d-flex justify-content-between pt-3">
                             <div class="d-flex w-100 gap-3">
-                                <button type="button" id="prevBtn" class="btn btn-outline-secondary step-btn d-none">Back</button>
-                                <button type="button" id="nextBtn" class="btn btn-primary step-btn">Next</button>
+                                <button type="button" id="prevBtn" class="btn btn-outline-secondary step-btn d-none"><?php echo __('Back'); ?></button>
+                                <button type="button" id="nextBtn" class="btn btn-primary step-btn"><?php echo __('Next'); ?></button>
                                 <button type="submit" name="submit_process" id="saveBtn" class="btn btn-success step-btn d-none">
-                                    <i class="fa fa-save me-1"></i>Save Process
+                                    <i class="fa fa-save me-1"></i><?php echo __('Save Process'); ?>
                                 </button>
                             </div>
                         </div>
@@ -170,9 +170,9 @@ if (isset($_POST['submit_process'])) {
         <!-- Preview Column -->
         <div class="col-lg-4">
             <div class="card shadow border-0 h-100">
-                <div class="card-header bg-primary text-white fw-bold" id="previewHeader">Configuration Preview</div>
+                <div class="card-header bg-primary text-white fw-bold" id="previewHeader"><?php echo __('Configuration Preview'); ?></div>
                 <div class="card-body" id="previewCard">
-                    <p class="text-muted">Fill the form to see configuration preview...</p>
+                    <p class="text-muted"><?php echo __('Fill the form to see configuration preview...'); ?></p>
                 </div>
             </div>
         </div>
@@ -218,7 +218,7 @@ function validateStep(step) {
     if (step === 3) {
         const fieldRows = document.querySelectorAll('.field-mapping-row');
         if (fieldRows.length === 0) {
-            alert('Please add at least one field mapping');
+            alert(<?php echo json_encode(__('Please add at least one field mapping')); ?>);
             return false;
         }
 
@@ -358,7 +358,7 @@ function fetchTableFieldsFallback(tableName) {
 
 function createBasicFieldStructure(tableName) {
     const container = document.getElementById('fieldMappingContainer');
-    container.innerHTML = '<div class="alert alert-warning">Unable to load table fields automatically. Please check if the table exists and has data.</div>';
+    container.innerHTML = '<div class="alert alert-warning"><?php echo __('Unable to load table fields automatically. Please check if the table exists and has data.'); ?></div>';
 }
 
 function fetchTableStructure(tableName, selectQuery = null) {
@@ -427,7 +427,7 @@ function loadTableFields(tableName) {
         }
     } else {
         const container = document.getElementById('fieldMappingContainer');
-        container.innerHTML = '<div class="alert alert-warning">No fields found for this table</div>';
+        container.innerHTML = '<div class="alert alert-warning"><?php echo __('No fields found for this table'); ?></div>';
     }
 }
 
@@ -436,7 +436,7 @@ function addFieldMappingRow(tableName, existingMapping = null) {
     const fields = tableFields[tableName];
 
     if (!fields || Object.keys(fields).length === 0) {
-        container.innerHTML = '<div class="alert alert-warning">No fields available for this table</div>';
+        container.innerHTML = '<div class="alert alert-warning"><?php echo __('No fields available for this table'); ?></div>';
         return;
     }
 
@@ -452,22 +452,22 @@ function addFieldMappingRow(tableName, existingMapping = null) {
     rowDiv.innerHTML = `
         <div class="row g-3 align-items-center">
             <div class="col-md-4 w-full">
-                <span class="form-label fw-bold">Original Field</span></br>
-                <select aria-label="Ected Fields[]" class="form-select js-example-basic-single" name="selected_fields[]" onchange="updatePreview()">
-                    <option value="">Select Field...</option>
+                <span class="form-label fw-bold"><?php echo __('Original Field'); ?></span></br>
+                <select aria-label="<?php echo __('Ected Fields[]'); ?>" class="form-select js-example-basic-single" name="selected_fields[]" onchange="updatePreview()">
+                    <option value=""><?php echo __('Select Field...'); ?></option>
                     ${Object.entries(fields).map(([key, label]) =>
                         `<option value="${key}" ${key === selectedField ? 'selected' : ''}>${label}</option>`
                     ).join('')}
                 </select>
             </div>
             <div class="col-md-4">
-                <span class="form-label fw-bold">Custom Label</span>
-                <input aria-label="Enter custom field name" type="text" class="form-control" name="custom_labels[]"
-                       value="${customLabel}" placeholder="Enter custom field name" onchange="updatePreview()">
+                <span class="form-label fw-bold"><?php echo __('Custom Label'); ?></span>
+                <input aria-label="<?php echo __('Enter custom field name'); ?>" type="text" class="form-control" name="custom_labels[]"
+                       value="${customLabel}" placeholder="<?php echo __('Enter custom field name'); ?>" onchange="updatePreview()">
             </div>
             <div class="col-md-3">
-                <span class="form-label fw-bold">Display Order</span>
-                <select aria-label="Field Orders[]" class="form-select" name="field_orders[]" onchange="updatePreview()">
+                <span class="form-label fw-bold"><?php echo __('Display Order'); ?></span>
+                <select aria-label="<?php echo __('Field Orders[]'); ?>" class="form-select" name="field_orders[]" onchange="updatePreview()">
                     ${Array.from({length: 20}, (_, i) => i + 1).map(num =>
                         `<option value="${num}" ${num == orderNumber ? 'selected' : ''}>${num}</option>`
                     ).join('')}
@@ -547,8 +547,8 @@ function updatePreview() {
         html += `</div></div>`;
     }
     html += '</div>';
-    document.getElementById('previewCard').innerHTML = hasData ? html : '<p class="text-muted">Fill the form to see configuration preview...</p>';
-    document.getElementById('previewHeader').innerText = hasData ? 'Configuration Preview' : 'Preview';
+    document.getElementById('previewCard').innerHTML = hasData ? html : '<p class="text-muted"><?php echo __('Fill the form to see configuration preview...'); ?></p>';
+    document.getElementById('previewHeader').innerText = hasData ? <?php echo json_encode(__('Configuration Preview')); ?> : <?php echo json_encode(__('Preview')); ?>;
 }
 
 document.getElementById('processForm').addEventListener('submit', function(e) {

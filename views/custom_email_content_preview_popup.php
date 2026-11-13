@@ -25,9 +25,9 @@ function replacestringwithpreview($data,$val){
 ?>
 <div class="modal-header">
 	<h5 class="modal-title">
-		Email Preview
+		<?= __('Email Preview') ?>
 	</h5>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 </div>
 <div class="modal-body" > 
 <div class="">	
@@ -78,7 +78,7 @@ function replacestringwithpreview($data,$val){
 		</tr>
 		<tr>
 		<td style="padding:10px 33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
-		Button not working? Try pasting this URL into your browser 
+		<?= __('Button not working? Try pasting this URL into your browser') ?> 
 
 		</td>
 		</tr>
@@ -211,7 +211,7 @@ function replacestringwithpreview($data,$val){
 				<table role="presentation">
 				<tr>
 				<td>
-				<button class=" buttonwrapper button"><a target="_blank" href="#">View Order</a></button>
+				<button class=" buttonwrapper button"><a target="_blank" href="#"><?= __('View Order') ?></a></button>
 				</td>
 				</tr>
 				</table>
@@ -299,6 +299,6 @@ function replacestringwithpreview($data,$val){
 <?php } ?>   
 </div>            
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>  
+		<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>  
 	</div>
 </div>

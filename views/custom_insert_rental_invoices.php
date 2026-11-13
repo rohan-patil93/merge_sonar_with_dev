@@ -93,12 +93,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
     if(validate == 0){
         swal({
                 title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-                text: "Please note the status of the document will change to "+new_status_name,
+                text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
                 type: "info",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes",
-                cancelButtonText: "No",
+                confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+                cancelButtonText: <?php echo json_encode(__('No')); ?>,
                 closeOnConfirm: false
             },
             function(){
@@ -126,12 +126,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                             });
                         }else{
                             swal({
-                                title: "Oops...",
+                                title: <?php echo json_encode(__('Oops...')); ?>,
                                 text: res.transaction_update.message,
                                 type: "error",
                                 showCancelButton: true,
                                 showConfirmButton: false,
-                                cancelButtonText: "Ok",
+                                cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                                 confirmButtonClass: "btn-danger",
                                 closeOnCancel: false
                             });
@@ -173,24 +173,24 @@ function cancelInvoices(transaction_table,transaction_id){
 <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>  
 <?php } ?>
 <div class="card">
    <?php if($invoiceData['cancel_invoice'] =="Y"){ ?>
-<div id="dynamiccanceldiv"><span>Cancel Invoice</span></div>
+<div id="dynamiccanceldiv"><span><?php echo __('Cancel Invoice'); ?></span></div>
 <?php } ?>
      <?php 
         $workflowsteps = getWorkflowStatus('rental_invoices',$invoiceData['id'],$invoiceData['current_status']);
             ?>
      <div class="card-header table-card-header">
-        <h5> Rental Invoice</h5>
+        <h5> <?php echo __('Rental Invoice'); ?></h5>
         <div class="card-header-right table-card-header ">
 
              <?php  
                 if($dynamic_mapping_tables['cancellation_application_table_name'] !="" AND $invoiceData['current_status'] == ST_APPROVED AND $invoiceData['cancel_invoice'] !="Y" && $invoiceData['originator'] ==$_SESSION['userid']){ ?>
                         <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="cancelInvoices('rental_invoices','<?php echo $rid; ?>')">
-                            <i class="text-white fa fa-times-circle"></i> &nbsp;Cancel Invoice
+                            <i class="text-white fa fa-times-circle"></i> <?php echo __('&nbsp;Cancel Invoice'); ?>
                         </button>
                 <?php  }  ?>
 
@@ -202,8 +202,8 @@ function cancelInvoices(transaction_table,transaction_id){
                 <?php 
                // $invoicetables = array('sales_invoices','purchase_invoices','supplier_bills','rental_invoices','utility_rental_invoices'); 
                 if($invoiceData['current_status'] == ST_APPROVED){  ?>
-                    <a href="index.php?option=COM_INSERT_DEBIT_NOTES&ref_type=rental_invoices&ref_id=<?php echo $rid; ?>"  class=" cursor-pointer  btn btn-success" > <i class="icofont icofont-plus icon-white"></i> Debit Note </a>
-                    <a href="index.php?option=COM_INSERT_CREDIT_NOTES&ref_type=rental_invoices&ref_id=<?php echo $rid; ?>" class="cursor-pointer  btn btn-danger" ><i class="icofont icofont-plus icon-white"></i> Credit Note </a>
+                    <a href="index.php?option=COM_INSERT_DEBIT_NOTES&ref_type=rental_invoices&ref_id=<?php echo $rid; ?>"  class=" cursor-pointer  btn btn-success" > <i class="icofont icofont-plus icon-white"></i> <?php echo __('Debit Note'); ?> </a>
+                    <a href="index.php?option=COM_INSERT_CREDIT_NOTES&ref_type=rental_invoices&ref_id=<?php echo $rid; ?>" class="cursor-pointer  btn btn-danger" ><i class="icofont icofont-plus icon-white"></i> <?php echo __('Credit Note'); ?> </a>
                 <?php } ?> 
 
 
@@ -212,13 +212,13 @@ function cancelInvoices(transaction_table,transaction_id){
              <?php 
              if($invoiceData['cancel_invoice'] =="N"){ ?>
                  <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="cancelInvoices('rental_invoices','<?php echo $rid; ?>')">
-                    <i class="text-white fa fa-times-circle"></i> &nbsp;Cancel Invoice
+                    <i class="text-white fa fa-times-circle"></i> <?php echo __('&nbsp;Cancel Invoice'); ?>
                 </button>
           <?php  }  ?>
 
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light m-r-50">
                 <i class="icofont icofont-reply"></i>
-                Back 
+                <?php echo __('Back'); ?> 
             </a>
         </div>
     </div>
@@ -227,21 +227,21 @@ function cancelInvoices(transaction_table,transaction_id){
         <form method="POST">
             <div class="row <?php echo $disable; ?>" >
                 <div class="col-lg-3 form-group">
-                    <label for="transaction_number" class="inline-block mb-1 f-w-600">Transaction
-                        Number</label>
+                    <label for="transaction_number" class="inline-block mb-1 f-w-600"><?php echo __('Transaction
+                        Number'); ?></label>
                     <input type="hidden" name="rid" value="<?= htmlspecialchars($invoiceData['id'] ?? '') ?>">
                     <input type="text" id="transaction_number" name="transaction_number"
-                        class="form-control" placeholder="Enter Transaction no."
+                        class="form-control" placeholder="<?php echo __('Enter Transaction no.'); ?>"
                         value="<?= htmlspecialchars($invoiceData['transaction_number'] ?? '') ?>" disabled
                         readonly>
                 </div>
                 <div class="col-lg-3 form-group">
-                    <label for="transaction_date" class="inline-block mb-1 f-w-600">Transaction Date</label>
-                    <input type="text" id="transaction_date" value="<?= htmlspecialchars(fromDate($invoiceData['transaction_date']) ?? '') ?>" name="transaction_date" class="form-control datepicker" placeholder="Transaction Date">
+                    <label for="transaction_date" class="inline-block mb-1 f-w-600"><?php echo __('Transaction Date'); ?></label>
+                    <input type="text" id="transaction_date" value="<?= htmlspecialchars(fromDate($invoiceData['transaction_date']) ?? '') ?>" name="transaction_date" class="form-control datepicker" placeholder="<?php echo __('Transaction Date'); ?>">
                 </div>
 
                 <div class="col-lg-3 form-group">
-                    <label for="payment_terms" class="inline-block mb-1 f-w-600">Payment Terms</label>
+                    <label for="payment_terms" class="inline-block mb-1 f-w-600"><?php echo __('Payment Terms'); ?></label>
                     <select name="payment_terms" id="payment_terms" disabled class="form-control js-example-basic-single">
                         <?php foreach ($paymentTermsData as $payment_term): ?>
                             <option value="<?= $payment_term['id'] ?>">
@@ -251,57 +251,57 @@ function cancelInvoices(transaction_table,transaction_id){
                     </select>
                 </div>
                 <div class="col-lg-3 form-group">
-                    <label for="due_date" class="inline-block mb-1 f-w-600">Due Date </label>
+                    <label for="due_date" class="inline-block mb-1 f-w-600"><?php echo __('Due Date'); ?> </label>
                     <input type="text" id="due_date" name="due_date" class="form-control datepicker"
-                        placeholder="Due Date"
+                        placeholder="<?php echo __('Due Date'); ?>"
                         value="<?= htmlspecialchars(fromDate($invoiceData['due_date']) ?? '') ?>">
                 </div>
                 <div class="col-lg-3 form-group">
-                    <label for="originator" class="inline-block mb-1 f-w-600">Originator</label>
+                    <label for="originator" class="inline-block mb-1 f-w-600"><?php echo __('Originator'); ?></label>
                     <input type="text" id="originator" name="originator" class="form-control"
-                        placeholder="originator" value="<?= $userData['user_name'] ?>" disabled readonly>
+                        placeholder="<?php echo __('originator'); ?>" value="<?= $userData['user_name'] ?>" disabled readonly>
                 </div>
                 <div class="col-lg-3 form-group">
-                    <label for="parent_ref_id" class="inline-block mb-1 f-w-600">Property</label>
+                    <label for="parent_ref_id" class="inline-block mb-1 f-w-600"><?php echo __('Property'); ?></label>
                     <select name="parent_ref_id" id="parent_ref_id" disabled class="form-control">
-                        <option value="1">Kingston Business Park</option>
+                        <option value="1"><?php echo __('Kingston Business Park'); ?></option>
                     </select>
                 </div>
                 <div class="col-lg-3 form-group">
-                    <label for="ref_no" class="inline-block mb-1 f-w-600">Refrence No.</label>
+                    <label for="ref_no" class="inline-block mb-1 f-w-600"><?php echo __('Refrence No.'); ?></label>
                     <input type="text" id="ref_no" name="ref_no" class="form-control"
-                        placeholder="Refrence Number"
+                        placeholder="<?php echo __('Refrence Number'); ?>"
                         value="<?= htmlspecialchars($invoiceData['ref_no'] ?? '') ?>">
                 </div>
                 <div class="col-lg-3 form-group">
-                    <label for="refrence_bill" class="inline-block mb-1 f-w-600">Refrence Bill</label>
-                    <input type="text" id="refrence_bill" name="ref_date" class="form-control datepicker"                        placeholder="Refrence Bill"  value="<?= htmlspecialchars(fromDate($invoiceData['ref_date']) ?? '') ?>">
+                    <label for="refrence_bill" class="inline-block mb-1 f-w-600"><?php echo __('Refrence Bill'); ?></label>
+                    <input type="text" id="refrence_bill" name="ref_date" class="form-control datepicker"                        placeholder="<?php echo __('Refrence Bill'); ?>"  value="<?= htmlspecialchars(fromDate($invoiceData['ref_date']) ?? '') ?>">
                 </div>
 
                 <div class="col-lg-3 form-group">
-                    <label for="party" class="inline-block mb-1 f-w-600">Party</label>
+                    <label for="party" class="inline-block mb-1 f-w-600"><?php echo __('Party'); ?></label>
                     <input type="text" id="party" name="party_name" class="form-control"
-                        placeholder="Party Name"
+                        placeholder="<?php echo __('Party Name'); ?>"
                         value="<?= htmlspecialchars($invoiceData['party_name'] ?? '') ?>" disabled readonly>
                 </div>
                 <div class="col-lg-3 form-group">
-                    <label for="party_email" class="inline-block mb-1 f-w-600">Party
-                        Email</label>
+                    <label for="party_email" class="inline-block mb-1 f-w-600"><?php echo __('Party
+                        Email'); ?></label>
                     <input type="text" id="party_email" name="party_email" class="form-control"
-                        placeholder="Enter Transaction no."
+                        placeholder="<?php echo __('Enter Transaction no.'); ?>"
                         value="<?= htmlspecialchars($invoiceData['party_email'] ?? '') ?>" disabled
                         readonly>
                 </div>
                 <div class="col-lg-3 form-group">
-                    <label for="party_phone" class="inline-block mb-1 f-w-600">Party Contact
-                        Number</label>
+                    <label for="party_phone" class="inline-block mb-1 f-w-600"><?php echo __('Party Contact
+                        Number'); ?></label>
                     <input type="text" id="party_phone"
                         value="<?= htmlspecialchars($invoiceData['party_phone'] ?? '') ?>"
-                        name="party_phone" class="form-control" placeholder="Transaction Date" disabled
+                        name="party_phone" class="form-control" placeholder="<?php echo __('Transaction Date'); ?>" disabled
                         readonly>
                 </div>
                 <div class="col-lg-3 form-group">
-                    <label for="party_address" class="inline-block mb-1 f-w-600">Party Address</label>
+                    <label for="party_address" class="inline-block mb-1 f-w-600"><?php echo __('Party Address'); ?></label>
                     <textarea name="party_address" disabled id="party_address"
                         class="form-control"><?= htmlspecialchars($invoiceData['party_address'] ?? '') ?> </textarea>
                 </div>
@@ -311,25 +311,25 @@ function cancelInvoices(transaction_table,transaction_id){
                     <thead>
                         <tr>
                             <th class="border px-3 py-2">
-                                Items / Services
+                                <?php echo __('Items / Services'); ?>
                             </th>
                             <th class="border px-3 py-2">
-                                HSN/Tax *
+                                <?php echo __('HSN/Tax *'); ?>
                             </th>
                             <th class="border px-3 py-2 text-end">
-                                Qty *
+                                <?php echo __('Qty *'); ?>
                             </th>
                             <th class="border px-3 py-2">
-                                UOM *
+                                <?php echo __('UOM *'); ?>
                             </th>
                             <th class="border px-3 py-2 text-end">
-                                Rate *
+                                <?php echo __('Rate *'); ?>
                             </th>
                             <th class="border px-3 py-2 text-end">
-                                Tax 
+                                <?php echo __('Tax'); ?> 
                             </th>
                             <th class="border px-3 py-2 text-end">
-                                Amount
+                                <?php echo __('Amount'); ?>
                             </th>
                         </tr>
                     </thead>
@@ -347,18 +347,18 @@ function cancelInvoices(transaction_table,transaction_id){
                                         <input type="hidden" id="supplier_state_id"
                                             value="<?= htmlspecialchars($rental_item['supplier_state_id']) ?>">
                                         <input type="text" id="itemName" class="form-control"
-                                            placeholder="Item Name" name="item_name[]"
+                                            placeholder="<?php echo __('Item Name'); ?>" name="item_name[]"
                                             value="<?= htmlspecialchars($rental_item['item_name']) ?>" readonly>
                                     </td>
                                     <td class="w-52 border">
                                         <input type="text" id="hsntax" name="hsntax[]"
                                             value="HSN - <?= htmlspecialchars($hsnSacCodesData['code'] ?? 'N/A') ?> / Tax - <?= htmlspecialchars($invoiceItemsTaxData['tax_value'] ?? 'N/A') ?>"
-                                            class="form-control" placeholder="Enter HSN TAX" readonly>
+                                            class="form-control" placeholder="<?php echo __('Enter HSN TAX'); ?>" readonly>
                                     </td>
                                     <td class="w-28 border text-end">
                                         <input type="number" id="item_qty" name="item_quantity[]"
                                             value="<?= htmlspecialchars($rental_item['item_quantity'] ?? 0) ?>"
-                                            class="form-control text-end" placeholder="Enter QTY">
+                                            class="form-control text-end" placeholder="<?php echo __('Enter QTY'); ?>">
                                     </td>
                                     <td class="w-28 border">
                                         <select name="purchase_uom[]"  class="form-control js-example-basic-single">
@@ -372,7 +372,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                     <td class="w-28 border text-end">
                                         <input type="text" id="item_rate" name="item_price[]"
                                             value="<?= $rental_item['item_price']; ?>"
-                                            class="form-control text-end" placeholder="Enter Rate">
+                                            class="form-control text-end" placeholder="<?php echo __('Enter Rate'); ?>">
                                     </td>
                                     <td class="w-28 border text-end">
                                         <input type="hidden" id="tax_percentage" name="tax_percentage[]" value="<?php echo $tax_row_detail['tax_value']; ?>">
@@ -382,7 +382,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                     <td class="w-40 border text-end">
                                         <input type="text" id="item_amount" name="item_amount[]"
                                             value="<?= $rental_item['item_amount'] ?>"
-                                            class="form-control text-end" placeholder="Enter Amount" readonly>
+                                            class="form-control text-end" placeholder="<?php echo __('Enter Amount'); ?>" readonly>
                                         
                                         <input type="hidden" id="total_amount" name="total_amount[]"
                                             value="<?= htmlspecialchars($rental_item['total_amount'] ?? '') ?>">
@@ -392,33 +392,33 @@ function cancelInvoices(transaction_table,transaction_id){
                                     <td class="border border-slate-200">
                                         <textarea id="itemdescription1" name="description[]" rows="1"
                                             style="height: 15vh;" class="form-control"
-                                            placeholder="Enter Description"><?= htmlspecialchars($rental_item['description'] ?? '') ?></textarea>
+                                            placeholder="<?php echo __('Enter Description'); ?>"><?= htmlspecialchars($rental_item['description'] ?? '') ?></textarea>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="6" class="text-center">No items found for this invoice.</td>
+                                <td colspan="6" class="text-center"><?php echo __('No items found for this invoice.'); ?></td>
                             </tr>
                         <?php endif; ?>
                         <?php foreach ($invoiceallItemsTaxData as $tax_item): ?>
                             <div>
                                 <input type="hidden" name="tax_ids[]"
                                     value="<?= htmlspecialchars($tax_item['id'] ?? 'N/A') ?>"
-                                    class="form-control" placeholder="Tax Value" readonly>
+                                    class="form-control" placeholder="<?php echo __('Tax Value'); ?>" readonly>
                             </div>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
                 <div class="col-lg-3 col-md-3">
                     <div class="py-2 text-center border bg-primary">
-                        Order Summary
+                        <?php echo __('Order Summary'); ?>
                     </div>
                     <table class="w-100">
                         <tbody class="item-list">
                             <tr>
                                 <th class="text-start py-2 border">
-                                    <span>Sub Total</span>
+                                    <span><?php echo __('Sub Total'); ?></span>
                                 </th>
                                 <th class="text-end py-2 border">
                                     <span class="sub_amount_display">
@@ -437,11 +437,11 @@ function cancelInvoices(transaction_table,transaction_id){
                                     <tr>
                                             <th class="text-start p-2 border">
                                                 <span>
-                                                    CGST @
+                                                    <?php echo __('CGST @'); ?>
                                                     <span
                                                         class="tax_value"><?= number_format(($invoiceItemsTaxData['tax_value']/2), 2) ?></span>
-                                                    %
-                                                    on <br>
+                                                    <?php echo __('%
+                                                    on'); ?> <br>
                                                     <span class="sub_amount_display">
                                                         ₹<?= number_format(($rental_item['item_amount']/2), 2) ?>
                                                     </span>
@@ -456,11 +456,11 @@ function cancelInvoices(transaction_table,transaction_id){
                                         <tr>
                                             <th class="text-start p-2 border">
                                                 <span>
-                                                    SGST @
+                                                    <?php echo __('SGST @'); ?>
                                                     <span
                                                         class="tax_value"><?= number_format(($invoiceItemsTaxData['tax_value']/2), 2) ?></span>
-                                                    %
-                                                    on <br>
+                                                    <?php echo __('%
+                                                    on'); ?> <br>
                                                     <span class="sub_amount_display">
                                                         ₹<?= number_format(($rental_item['item_amount']/2), 2) ?>
                                                     </span>
@@ -476,11 +476,11 @@ function cancelInvoices(transaction_table,transaction_id){
                                         <tr>
                                             <th class="text-start p-2 border">
                                                 <span>
-                                                    IGST @
+                                                    <?php echo __('IGST @'); ?>
                                                     <span
                                                         class="tax_value"><?= number_format($invoiceItemsTaxData['tax_value'] ?? 0, 2) ?></span>
-                                                    %
-                                                    on <br>
+                                                    <?php echo __('%
+                                                    on'); ?> <br>
                                                     <span class="sub_amount_display">
                                                         ₹<?= number_format($rental_item['item_amount'] ?? 0, 2) ?>
                                                     </span>
@@ -495,7 +495,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                     <?php } ?>
                                         <tr>
                                             <th class="text-start p-2 border">
-                                                <span>Total Tax</span>
+                                                <span><?php echo __('Total Tax'); ?></span>
                                             </th>
                                             <th class="p-2 text-end border">
                                                 <span class="tax_amount_display_total">
@@ -511,7 +511,7 @@ function cancelInvoices(transaction_table,transaction_id){
 
                             <tr>
                                 <th class="text-start p-2 border">
-                                    <span>Grand Total</span>
+                                    <span><?php echo __('Grand Total'); ?></span>
                                 </th>
                                 <th class="p-2 text-end border">
                                     <span class="total_amount_display">
@@ -523,7 +523,7 @@ function cancelInvoices(transaction_table,transaction_id){
                             </tr>
                             <tr>
                                 <th class="text-start p-2 border">
-                                    <span>Rounding Off</span>
+                                    <span><?php echo __('Rounding Off'); ?></span>
                                 </th>
                                 <th class="p-2 text-end border">
                                     <input type="hidden" class="rounding_off" name="rounding_off" value="<?php echo $invoiceData['rounding_off']!=""?$invoiceData['rounding_off']:0; ?>">
@@ -538,25 +538,25 @@ function cancelInvoices(transaction_table,transaction_id){
                 <div class="col-lg-12 m-t-40">
                     <div class="row">
                         <div class="col-lg-4 form-group">
-                            <label for="transaction_number" class="inline-block mb-1 f-w-600">Internal
-                                Note(s) </label>
+                            <label for="transaction_number" class="inline-block mb-1 f-w-600"><?php echo __('Internal
+                                Note(s)'); ?> </label>
                             <textarea id="notes" name="notes" rows="4" class="form-control border"
-                                placeholder="Enter Description"><?= htmlspecialchars($invoiceData['notes'] ?? '') ?></textarea>
+                                placeholder="<?php echo __('Enter Description'); ?>"><?= htmlspecialchars($invoiceData['notes'] ?? '') ?></textarea>
                         </div>
                         <div class="col-lg-4 form-group">
-                            <label for="transaction_number" class="inline-block mb-1 f-w-600">Printing
-                                Note(s) </label>
+                            <label for="transaction_number" class="inline-block mb-1 f-w-600"><?php echo __('Printing
+                                Note(s)'); ?> </label>
                             <textarea id="printing_notes" name="printing_notes" rows="4"
                                 class="form-control border"
-                                placeholder="Enter Description"><?= htmlspecialchars($invoiceData['printing_notes'] ?? '') ?></textarea>
+                                placeholder="<?php echo __('Enter Description'); ?>"><?= htmlspecialchars($invoiceData['printing_notes'] ?? '') ?></textarea>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="flex gap-2 mt-4 <?php echo $disable; ?>">
                 <?php if($invoiceData['id'] !=""){ ?>
-                <button type="submit" name="submitrentalinvoice" class="btn btn-primary">Update</button>
-                <?php }else{ echo "Record Not Fund"; } ?>
+                <button type="submit" name="submitrentalinvoice" class="btn btn-primary"><?php echo __('Update'); ?></button>
+                <?php }else{ echo __('Record Not Fund'); } ?>
             </div>
         </form>
     </div>

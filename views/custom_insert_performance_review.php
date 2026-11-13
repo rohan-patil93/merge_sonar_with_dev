@@ -229,19 +229,19 @@ function callInsertApi($insert_main,$insert_sub){
             <li class="nav-item">
                <a class="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                   <span class="nav-icon"><i class="fas fa-bullseye"></i></span>
-                  <span class="nav-text">Goals</span>
+                  <span class="nav-text"><?php echo __('Goals'); ?></span>
                </a>
             </li>
             <li class="nav-item">
                <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_2" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                   <span class="nav-icon"><i class="fas fa-users"></i></span>
-                  <span class="nav-text">Peer Feedback</span>
+                  <span class="nav-text"><?php echo __('Peer Feedback'); ?></span>
                </a>
             </li>
             <li class="nav-item">
                <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_3" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                   <span class="nav-icon"><i class="fas fa-award"></i></span>
-                  <span class="nav-text">Assessment</span>
+                  <span class="nav-text"><?php echo __('Assessment'); ?></span>
                </a>
             </li>
 
@@ -253,13 +253,13 @@ function callInsertApi($insert_main,$insert_sub){
                   <div class="col-3 float-right">
                      <div class="form-group row">
                         <div class="col-4 mt-2">
-                           <label for="exampleSelect1">Status
+                           <label for="exampleSelect1"><?php echo __('Status'); ?>
                               <span class="text-danger">*</span></label>
                            </div>
                            <div class="col-8">
                               <select class="form-control" id="exampleSelect1">
-                                 <option>In Progress</option>
-                                 <option>In Progress</option>
+                                 <option><?php echo __('In Progress'); ?></option>
+                                 <option><?php echo __('In Progress'); ?></option>
                               </select>
                            </div>
                         </div>
@@ -279,20 +279,20 @@ function callInsertApi($insert_main,$insert_sub){
                      </div>
                      <div class="col-md-9">
                         <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg">
-                           <h4>Strategic Goal: Technology Gaps</h4>
+                           <h4><?php echo __('Strategic Goal: Technology Gaps'); ?></h4>
                         </a>
-                        <h6 class="text-muted">Due August 04, 2021</h6>
-                        <h6 class="mt-4">Analyze Technology gaps in the company.</h6>
+                        <h6 class="text-muted"><?php echo __('Due August 04, 2021'); ?></h6>
+                        <h6 class="mt-4"><?php echo __('Analyze Technology gaps in the company.'); ?></h6>
                         <div class="progress mt-4">
                           <div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">10%</div>
                        </div>
                        <div class="custom-comment mt-5">
-                        <a href="#"><i class="fas fa-plus-circle"></i> Add Comment</a>
+                        <a href="#"><i class="fas fa-plus-circle"></i> <?php echo __('Add Comment'); ?></a>
                         <div class="form-group mt-4 mb-1 open-comment" style="">
-                           <label for="exampleTextarea">Add Comment
+                           <label for="exampleTextarea"><?php echo __('Add Comment'); ?>
                               <span class="text-danger">*</span></label>
                               <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-                              <button class="btn btn-primary mt-3">Submit</button>
+                              <button class="btn btn-primary mt-3"><?php echo __('Submit'); ?></button>
                            </div>
 
                         </div>
@@ -312,20 +312,20 @@ function callInsertApi($insert_main,$insert_sub){
                      </div>
                      <div class="col-md-9">
                         <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg">
-                           <h4>Strategic Goal: Technology Gaps</h4>
+                           <h4><?php echo __('Strategic Goal: Technology Gaps'); ?></h4>
                         </a>
-                        <h6 class="text-muted">Due August 04, 2021</h6>
-                        <h6 class="mt-4">Analyze Technology gaps in the company.</h6>
+                        <h6 class="text-muted"><?php echo __('Due August 04, 2021'); ?></h6>
+                        <h6 class="mt-4"><?php echo __('Analyze Technology gaps in the company.'); ?></h6>
                         <div class="progress mt-4">
                           <div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">10%</div>
                        </div>
                        <div class="custom-comment mt-5">
-                        <a href="#"><i class="fas fa-plus-circle"></i> Add Comment</a>
+                        <a href="#"><i class="fas fa-plus-circle"></i> <?php echo __('Add Comment'); ?></a>
                         <div class="form-group mt-4 mb-1 open-comment" style="display: none;">
-                           <label for="exampleTextarea_2">Add Comment
+                           <label for="exampleTextarea_2"><?php echo __('Add Comment'); ?>
                               <span class="text-danger">*</span></label>
                               <textarea class="form-control" id="exampleTextarea_2" rows="3"></textarea>
-                              <button class="btn btn-primary mt-3">Submit</button>
+                              <button class="btn btn-primary mt-3"><?php echo __('Submit'); ?></button>
                            </div>
 
                         </div>
@@ -351,10 +351,10 @@ function callInsertApi($insert_main,$insert_sub){
                                     <div class="card-body pt-2 bg-light pl-2 pr-2 mt-5">
                                        <div class="row mt-5 mb-5">
                                           <div class="col-6">
-                                             <h5>Waiting for Feedback from...</h5>
+                                             <h5><?php echo __('Waiting for Feedback from...'); ?></h5>
                                           </div>
                                           <div class="col-6">
-                                             <a class="float-right mr-5" href=""><i class="fas fa-times"></i> Cancel</a>
+                                             <a class="float-right mr-5" href=""><i class="fas fa-times"></i> <?php echo __('Cancel'); ?></a>
                                           </div>
                                        </div>
                                        <div class="d-flex align-items-center mb-10">
@@ -363,7 +363,7 @@ function callInsertApi($insert_main,$insert_sub){
                                              <div class="symbol-group symbol-hover">
                                                 <?php if($employees[$peer_emp_id]['image']!=""){ ?>
                                                    <div class="symbol symbol-45 symbol-circle" data-toggle="tooltip">
-                                                      <img src="<?php echo "uploads/all/".$employees[$peer_emp_id]['image']; ?>" alt="Details">
+                                                      <img src="<?php echo "uploads/all/".$employees[$peer_emp_id]['image']; ?>" alt="<?php echo __('Details'); ?>">
                                                    </div>
                                                 <?php }else{ ?>
                                                    <div class="symbol symbol-45 symbol-circle symbol-primary" data-toggle="tooltip" >
@@ -381,7 +381,7 @@ function callInsertApi($insert_main,$insert_sub){
 
                                           <!--end::Text-->
                                        </div>
-                                       <p>An email requesting  <?php echo $employees[$peer_emp_id]['display_name']; ?> complete peer feedback was sent <?php echo $start_date; ?> <br> <?php echo $employees[$peer_emp_id]['display_name']; ?> has until <?php echo $end_date;?> (<?php echo round($datediff / (60 * 60 * 24)); ?> days) to complete this.</p>
+                                       <p><?php echo __('An email requesting'); ?>  <?php echo $employees[$peer_emp_id]['display_name']; ?> <?php echo __('complete peer feedback was sent'); ?> <?php echo $start_date; ?> <br> <?php echo $employees[$peer_emp_id]['display_name']; ?> <?php echo __('has until'); ?> <?php echo $end_date;?> (<?php echo round($datediff / (60 * 60 * 24)); ?> <?php echo __('days) to complete this.'); ?></p>
                                     </div>
                                  <?php } else {  ?>
                                     <div class="row mt-10 custom-width">
@@ -391,7 +391,7 @@ function callInsertApi($insert_main,$insert_sub){
                                           <div class="symbol-group symbol-hover">
                                              <?php if($employees[$peer_emp_id]['image']!=""){ ?>
                                                 <div class="symbol symbol-45 symbol-circle" data-toggle="tooltip">
-                                                   <img src="<?php echo "uploads/all/".$employees[$peer_emp_id]['image']; ?>" alt="Details">
+                                                   <img src="<?php echo "uploads/all/".$employees[$peer_emp_id]['image']; ?>" alt="<?php echo __('Details'); ?>">
                                                 </div>
                                              <?php }else{ ?>
                                                 <div class="symbol symbol-45 symbol-circle symbol-primary" data-toggle="tooltip" >
@@ -426,13 +426,13 @@ function callInsertApi($insert_main,$insert_sub){
                                     <input type="hidden" name="peer_questions" value="<?php echo urlencode($peer_questions); ?>">
 
                                     <div class="form-group col-lg-6">
-                                       <label for="kt_select2_43" class="col-form-label font-weight-bolder">Select Peers to get feedback </label>
-                                       <select aria-label="Sendto Peerslist[]" class="form-control" id="kt_select2_43" name="sendto_peerslist[]" multiple="multiple">
+                                       <label for="kt_select2_43" class="col-form-label font-weight-bolder"><?php echo __('Select Peers to get feedback'); ?> </label>
+                                       <select aria-label="<?php echo __('Sendto Peerslist[]'); ?>" class="form-control" id="kt_select2_43" name="sendto_peerslist[]" multiple="multiple">
                                           <?php foreach ($employees as $value) { $key=$value['id']; ?>
                                           <option value="<?php echo $key;?>"><?php echo $value['display_name']; ?></option>
                                        <?php } ?>
                                     </select>
-                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 mt-10" name="sendtopeers">Submit</button>
+                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 mt-10" name="sendtopeers"><?php echo __('Submit'); ?></button>
                                  </div>
                               </form>
                            <?php  }?>
@@ -447,7 +447,7 @@ function callInsertApi($insert_main,$insert_sub){
                                        <div class="symbol-group symbol-hover">
                                           <?php if($employees[$emp_id]['image']!=""){ ?>
                                              <div class="symbol symbol-45 symbol-circle" data-toggle="tooltip" data-title="<?php echo $employees[$emp_id]['display_name']; ?>">
-                                                <img src="<?php echo "uploads/all/".$employees[$emp_id]['image']; ?>" alt="Details">
+                                                <img src="<?php echo "uploads/all/".$employees[$emp_id]['image']; ?>" alt="<?php echo __('Details'); ?>">
                                              </div>
                                           <?php }else{ ?>
                                              <div class="symbol symbol-45 symbol-circle symbol-primary" data-toggle="tooltip" data-title="<?php echo $employees[$emp_id]['display_name']; ?>" >
@@ -459,7 +459,7 @@ function callInsertApi($insert_main,$insert_sub){
                                     <!--end::Symbol-->
 
                                     <div class="d-flex flex-column font-weight-bold">
-                                       <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg">Self Assessment</a>
+                                       <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg"><?php echo __('Self Assessment'); ?></a>
                                     </div>
                                  </div>
 
@@ -511,23 +511,23 @@ function callInsertApi($insert_main,$insert_sub){
                                              <?php if($emp_que['options_display_type']== $typeofquestion[1] ) {
                                                $response_answered_option = json_decode($employee_responses[$emp_que['id']]['response_option'],1)[1];
                                                ?>
-                                               <select aria-label="Select option" name="response_option<?php echo $emp_que['id'];?>" class="form-control" id="select_emp_option_<?php echo $emp_que['id'];?>">
+                                               <select aria-label="<?php echo __('Select option'); ?>" name="response_option<?php echo $emp_que['id'];?>" class="form-control" id="select_emp_option_<?php echo $emp_que['id'];?>">
                                                   <?php foreach($optionlist as $opkey=>$opts) { $optiondata = $opkey."||".$opts; ?>
-                                                  <option value="<?php echo $optiondata; ?>" <?php if($opts==$response_answered_option){ echo "selected";
+                                                  <option value="<?php echo $optiondata; ?>" <?php if($opts==$response_answered_option){ echo __('selected');
 } ?> ><?php echo $opts;?></option>
                                                <?php } ?>
                                             </select>
                                          <?php } elseif($emp_que['options_display_type']== $typeofquestion[2] ) {
                                           $response_answered_option = json_decode($employee_responses[$emp_que['id']]['response_option'],1)[0];
                                           ?>
-                                          <textarea aria-label="Text area" name="response_option<?php echo $emp_que['id'];?>" class="form-control col-md-12"> <?php echo $response_answered_option; ?></textarea>
+                                          <textarea aria-label="<?php echo __('Text area'); ?>" name="response_option<?php echo $emp_que['id'];?>" class="form-control col-md-12"> <?php echo $response_answered_option; ?></textarea>
                                        <?php } ?>
                                     </div>
 
                                  <?php } ?>
 
-                                 <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="selfsubmit">Submit</button>
-                                 <button id="kt_login_signin_submit_3" class="btn btn-secondary btn-shadow-hover font-weight-bold mr-2" name="selfsave">Save & Finish Later</button>
+                                 <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="selfsubmit"><?php echo __('Submit'); ?></button>
+                                 <button id="kt_login_signin_submit_3" class="btn btn-secondary btn-shadow-hover font-weight-bold mr-2" name="selfsave"><?php echo __('Save & Finish Later'); ?></button>
                               </form>
                            <?php } ?>
                         </div>
@@ -540,7 +540,7 @@ function callInsertApi($insert_main,$insert_sub){
                               <div class="symbol-group symbol-hover">
                                  <?php if($employees[$reports_to]['image']!=""){ ?>
                                     <div class="symbol symbol-45 symbol-circle" data-toggle="tooltip" data-title="<?php echo $employees[$reports_to]['display_name']; ?>">
-                                       <img src="<?php echo "uploads/all/".$employees[$reports_to]['image']; ?>" alt="Details">
+                                       <img src="<?php echo "uploads/all/".$employees[$reports_to]['image']; ?>" alt="<?php echo __('Details'); ?>">
                                     </div>
                                  <?php }else{ ?>
                                     <div class="symbol symbol-45 symbol-circle symbol-primary" data-toggle="tooltip" data-title="<?php echo $employees[$reports_to]['display_name']; ?>">
@@ -551,7 +551,7 @@ function callInsertApi($insert_main,$insert_sub){
                            </div>
                            <!--end::Symbol-->
                            <div class="d-flex flex-column font-weight-bold">
-                              <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg">Manager Assessment</a>
+                              <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg"><?php echo __('Manager Assessment'); ?></a>
                            </div>
                         </div>
                         <!-- Manager Output Page --->
@@ -595,8 +595,8 @@ function callInsertApi($insert_main,$insert_sub){
                                  </div>
 
                                <div class="row mt-2 ml-2">
-                             <label class="col-3 font-weight-bold" for="">Overall Rating * </label>
-                             <input aria-label="NOT RATED" type="text" name="manager_rating" class="form-control mb-10 col-lg-4" placeholder="NOT RATED" readonly value="<?php echo $mgr_rating=="0"?"":$mgr_rating;?>">
+                             <label class="col-3 font-weight-bold" for=""><?php echo __('Overall Rating *'); ?> </label>
+                             <input aria-label="<?php echo __('NOT RATED'); ?>" type="text" name="manager_rating" class="form-control mb-10 col-lg-4" placeholder="<?php echo __('NOT RATED'); ?>" readonly value="<?php echo $mgr_rating=="0"?"":$mgr_rating;?>">
                           </div>
                           </div>
 
@@ -624,26 +624,26 @@ function callInsertApi($insert_main,$insert_sub){
                                          <?php if($mgr_que['options_display_type']== $typeofquestion[1] ) {
                                           $response_answered_option = json_decode($manager_responses[$mgrs_que['id']]['response_option'],1)[1];
                                           ?>
-                                          <select aria-label="Select option" class="form-control" name="response_option<?php echo $mgr_que['id'];?>" id="select_mgr_option_<?php echo $mgr_que['id'];?>">
+                                          <select aria-label="<?php echo __('Select option'); ?>" class="form-control" name="response_option<?php echo $mgr_que['id'];?>" id="select_mgr_option_<?php echo $mgr_que['id'];?>">
                                            <?php foreach($optionlist as $opkey=>$opts) { $optiondata = $opkey."||".$opts; ?>
-                                           <option value="<?php echo $optiondata; ?>" <?php if($opts==$response_answered_option){ echo "selected";
+                                           <option value="<?php echo $optiondata; ?>" <?php if($opts==$response_answered_option){ echo __('selected');
 } ?> ><?php echo $opts;?></option>
                                         <?php } ?>
                                      </select>
                                   <?php } elseif($mgr_que['options_display_type']== $typeofquestion[2] ) {
                                    $response_answered_option = json_decode($manager_responses[$mgrs_que['id']]['response_option'],1)[0];
                                    ?>
-                                   <textarea aria-label="Text area" name="response_option<?php echo $mgr_que['id'];?>" class="form-control col-md-12"> <?php echo $response_answered_option; ?>  </textarea>
+                                   <textarea aria-label="<?php echo __('Text area'); ?>" name="response_option<?php echo $mgr_que['id'];?>" class="form-control col-md-12"> <?php echo $response_answered_option; ?>  </textarea>
                                 <?php } ?>
 
                              </div>
                           <?php } ?>
                           <div class="row mt-2 ml-2">
-                             <label class="col-3 font-weight-bold" for="">Overall Rating * </label>
-                             <input aria-label="NOT RATED" type="text" name="manager_rating" class="form-control mb-10 col-lg-4" placeholder="NOT RATED" value="<?php echo $mgr_rating=="0"?"":$mgr_rating;?>">
+                             <label class="col-3 font-weight-bold" for=""><?php echo __('Overall Rating *'); ?> </label>
+                             <input aria-label="<?php echo __('NOT RATED'); ?>" type="text" name="manager_rating" class="form-control mb-10 col-lg-4" placeholder="<?php echo __('NOT RATED'); ?>" value="<?php echo $mgr_rating=="0"?"":$mgr_rating;?>">
                           </div>
-                          <button id="kt_login_signin_submit_4" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="managersubmit">Submit</button>
-                          <button id="kt_login_signin_submit_5" class="btn btn-secondary btn-shadow-hover font-weight-bold mr-2" name="managersave">Save & Finish Later</button>
+                          <button id="kt_login_signin_submit_4" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="managersubmit"><?php echo __('Submit'); ?></button>
+                          <button id="kt_login_signin_submit_5" class="btn btn-secondary btn-shadow-hover font-weight-bold mr-2" name="managersave"><?php echo __('Save & Finish Later'); ?></button>
                        </div>
                     </form>
                  <?php }
@@ -651,7 +651,7 @@ function callInsertApi($insert_main,$insert_sub){
                  else { ?>
                     <div class="custom-content text-center">
                        <h4 class="text-muted pl-5 pr-5"><i class="fas fa-lock"></i>
-                        Complete your assessment to unlock your manager's Assessment
+                        <?php echo __('Complete your assessment to unlock your manager\'s Assessment'); ?>
                      </h4>
                   </div>
                <?php } ?>
@@ -665,7 +665,7 @@ function callInsertApi($insert_main,$insert_sub){
                   <div class="symbol-group symbol-hover">
                      <?php if($employees[$review_manager]['image']!=""){ ?>
                         <div class="symbol symbol-45 symbol-circle" data-toggle="tooltip" data-title="<?php echo $employees[$review_manager]['display_name']; ?>">
-                           <img src="<?php echo "uploads/all/".$employees[$review_manager]['image']; ?>" alt="Details">
+                           <img src="<?php echo "uploads/all/".$employees[$review_manager]['image']; ?>" alt="<?php echo __('Details'); ?>">
                         </div>
                      <?php }else{ ?>
                         <div class="symbol symbol-45 symbol-circle symbol-primary" data-toggle="tooltip" data-title="<?php echo $employees[$review_manager]['display_name']; ?>">
@@ -676,7 +676,7 @@ function callInsertApi($insert_main,$insert_sub){
                </div>
                <!--end::Symbol-->
                <div class="d-flex flex-column font-weight-bold">
-                  <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg">Review Manager Assessment</a>
+                  <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg"><?php echo __('Review Manager Assessment'); ?></a>
                </div>
             </div>
             <div class="custom-content">
@@ -723,28 +723,28 @@ function callInsertApi($insert_main,$insert_sub){
                         <?php if($emp_que['options_display_type']== $typeofquestion[1] ) {
                           $response_answered_option = json_decode($reviewer_responses[$emp_que['id']]['response_option'],1)[1];
                           ?>
-                          <select aria-label="Select option" name="response_option<?php echo $emp_que['id'];?>" class="form-control" id="select_reviewer_option_<?php echo $emp_que['id'];?>">
+                          <select aria-label="<?php echo __('Select option'); ?>" name="response_option<?php echo $emp_que['id'];?>" class="form-control" id="select_reviewer_option_<?php echo $emp_que['id'];?>">
                              <?php foreach($optionlist as $opkey=>$opts) { $optiondata = $opkey."||".$opts; ?>
-                             <option value="<?php echo $optiondata; ?>" <?php if($opts==$response_answered_option){ echo "selected";
+                             <option value="<?php echo $optiondata; ?>" <?php if($opts==$response_answered_option){ echo __('selected');
 } ?> ><?php echo $opts;?></option>
                           <?php } ?>
                        </select>
                     <?php } elseif($emp_que['options_display_type']== $typeofquestion[2] ) {
                      $response_answered_option = json_decode($reviewer_responses[$emp_que['id']]['response_option'],1)[0];
                      ?>
-                     <textarea aria-label="Text area" name="response_option<?php echo $emp_que['id'];?>" class="form-control col-md-12"> <?php echo $response_answered_option; ?></textarea>
+                     <textarea aria-label="<?php echo __('Text area'); ?>" name="response_option<?php echo $emp_que['id'];?>" class="form-control col-md-12"> <?php echo $response_answered_option; ?></textarea>
                   <?php } ?>
                </div>
 
             <?php } ?>
 
-            <button id="kt_login_signin_submit_6" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="reviewersubmit">Submit</button>
-            <button id="kt_login_signin_submit_7" class="btn btn-secondary btn-shadow-hover font-weight-bold mr-2" name="reviewersave">Save & Finish Later</button>
+            <button id="kt_login_signin_submit_6" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="reviewersubmit"><?php echo __('Submit'); ?></button>
+            <button id="kt_login_signin_submit_7" class="btn btn-secondary btn-shadow-hover font-weight-bold mr-2" name="reviewersave"><?php echo __('Save & Finish Later'); ?></button>
          </form>
       <?php } else { ?>
          <div class="custom-content text-center">
            <h4 class="text-muted pl-5 pr-5"><i class="fas fa-lock"></i>
-             You can unlock once it is completed.
+             <?php echo __('You can unlock once it is completed.'); ?>
           </h4>
        </div>
     <?php } ?>

@@ -123,7 +123,7 @@ $stausresult = statusData(TBL_EDIMASTER);
 												</div>
 											</div>
 											<div class="form-group row">
-												<span class="col-3 col-form-label">EDI Type</span>
+												<span class="col-3 col-form-label"><?= __('EDI Type') ?></span>
 												<div class="col-9">
 													<div class="kt-radio-inline">
 														<label class="kt-radio">
@@ -147,7 +147,7 @@ $stausresult = statusData(TBL_EDIMASTER);
 												</div>
 											</div>
 											<div class="form-group  row">
-												<span class="col-xl-3 col-lg-3 col-form-label">Delimiter</span>
+												<span class="col-xl-3 col-lg-3 col-form-label"><?= __('Delimiter') ?></span>
 												<div class="col-lg-9 col-xl-6">
 													<div class="input-group">
 														<div class="input-group-prepend"><span class="input-group-text"><i class="la la-group" aria-hidden="true"></i></span></div>
@@ -156,7 +156,7 @@ $stausresult = statusData(TBL_EDIMASTER);
 												</div>
 											</div>
 											<div class="form-group  row">
-												<span class="col-xl-3 col-lg-3 col-form-label">String Separator</span>
+												<span class="col-xl-3 col-lg-3 col-form-label"><?= __('String Separator') ?></span>
 												<div class="col-lg-9 col-xl-6">
 													<div class="input-group">
 														<div class="input-group-prepend"><span class="input-group-text"><i class="la la-group" aria-hidden="true"></i></span></div>
@@ -167,7 +167,7 @@ $stausresult = statusData(TBL_EDIMASTER);
 											<?php $from = fromDate();
 												  $to= toDate(); ?>
 											<div class="form-group  row">
-												<span class="col-form-label col-lg-3 col-sm-12">From Date </span>
+												<span class="col-form-label col-lg-3 col-sm-12"><?= __('From Date') ?></span>
 												<div class="col-lg-9 col-xl-6">
 													<div class="input-group date">
 														<div class="input-group-append">
@@ -180,7 +180,7 @@ $stausresult = statusData(TBL_EDIMASTER);
 												</div>
 											</div>
 											<div class="form-group  row">
-												<span class="col-form-label col-lg-3 col-sm-12">To Date </span>
+												<span class="col-form-label col-lg-3 col-sm-12"><?= __('To Date') ?></span>
 												<div class="col-lg-9 col-xl-6">
 													<div class="input-group date">
 														<div class="input-group-append">
@@ -210,12 +210,12 @@ $stausresult = statusData(TBL_EDIMASTER);
 													<?php if(isset($_GET['Rid']) && $_GET['Rid'] !='' && $_GET['copy'] != '1'){ ?>
 													<input type="hidden" name="hid" value=<?php echo $rid; ?> />
 													<input type="hidden" name="submit" value="Update" />
-													<button id="kt_llogin_signup_submit" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">Upadate</button>
-													<button type="reset" class="btn btn-warning btn-elevate btn-pill btn-elevate-air">Cancel</button>
+													<button id="kt_llogin_signup_submit" class="btn btn-brand btn-elevate btn-pill btn-elevate-air"><?= __('Upadate') ?></button>
+													<button type="reset" class="btn btn-warning btn-elevate btn-pill btn-elevate-air"><?= __('Cancel') ?></button>
 												<?php } else{ ?>
 													<input type="hidden" name="submit" value="Add" />
-													<button id="kt_llogin_signup_submit_2" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">ADD</button>
-													<button type="reset" class="btn btn-warning btn-elevate btn-pill btn-elevate-air">Cancel</button>
+													<button id="kt_llogin_signup_submit_2" class="btn btn-brand btn-elevate btn-pill btn-elevate-air"><?= __('ADD') ?></button>
+													<button type="reset" class="btn btn-warning btn-elevate btn-pill btn-elevate-air"><?= __('Cancel') ?></button>
 												<?php } ?>
 												</div>
 											</div>

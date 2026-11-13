@@ -87,7 +87,7 @@ if (csrImpactSnapshotFinancialYearStart($selectedYear) > $currentFinancialYearSt
 
 $selectedProjectId = csrImpactSnapshotValue($valueData, 'project_id');
 $submitValue = $rid != '' ? 'update' : 'insert';
-$submitLabel = $rid != '' ? 'Update' : 'Submit';
+$submitLabel = $rid != '' ? __('Update') : __('Submit');
 $readonlyAttr = $isViewMode ? 'readonly' : '';
 $disabledAttr = $isViewMode ? 'disabled' : '';
 ?>
@@ -97,15 +97,13 @@ $disabledAttr = $isViewMode ? 'disabled' : '';
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>CSR Impact Snapshot</h5>
+            <h5><?= __('CSR Impact Snapshot') ?></h5>
             <div class="card-header-right">
                 <a href="index.php?option=COM_LIST_CSR_IMPACT_SNAPSHOT" class="btn waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-list"></i>
-                    List
+                    <i class="icofont icofont-list"></i> <?= __('List') ?>
                 </a>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-reply"></i>
-                    Back
+                    <i class="icofont icofont-reply"></i> <?= __('Back') ?>
                 </a>
             </div>
         </div>
@@ -114,9 +112,9 @@ $disabledAttr = $isViewMode ? 'disabled' : '';
                 <input type="hidden" name="rid" value="<?php echo csrImpactSnapshotText($rid); ?>">
                 <div class="row">
                     <div class="col-md-4 form-group">
-                        <label for="financial_year">Financial Year</label>
+                        <label for="financial_year"><?= __('Financial Year') ?></label>
                         <select name="financial_year" id="financial_year" class="form-control form-select js-example-basic-single select2" required <?php echo $disabledAttr; ?>>
-                            <option value="">Select Financial Year</option>
+                            <option value=""><?= __('Select Financial Year') ?></option>
                             <?php foreach ($financialYears as $fyRow) {
                                 $fyCode = csrImpactSnapshotValue($fyRow, 'genc_detail_code');
                                 $fyName = csrImpactSnapshotValue($fyRow, 'genc_detail_name');
@@ -125,15 +123,15 @@ $disabledAttr = $isViewMode ? 'disabled' : '';
                                 }
                             ?>
                                 <option value="<?php echo csrImpactSnapshotText($fyCode); ?>" <?php echo $selectedYear == $fyCode ? 'selected' : ''; ?>>
-                                    <?php echo csrImpactSnapshotText($fyName ?: $fyCode); ?>
+                                    <?php echo csrImpactSnapshotText(__($fyName ?: $fyCode)); ?>
                                 </option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="col-md-8 form-group">
-                        <label for="project_id">Project</label>
+                        <label for="project_id"><?= __('Project') ?></label>
                         <select name="project_id" id="project_id" class="form-control form-select js-example-basic-single select2" required <?php echo $disabledAttr; ?>>
-                            <option value="">Select Project</option>
+                            <option value=""><?= __('Select Project') ?></option>
                             <?php foreach (($projectsByYear[$selectedYear] ?? array()) as $projectRow) {
                                 $projectId = csrImpactSnapshotValue($projectRow, 'id');
                             ?>
@@ -142,29 +140,29 @@ $disabledAttr = $isViewMode ? 'disabled' : '';
                                 </option>
                             <?php } ?>
                         </select>
-                        <small class="form-text text-muted js-project-empty <?php echo count((array)($projectsByYear[$selectedYear] ?? array())) > 0 ? 'd-none' : ''; ?>">No approved projects found for selected financial year.</small>
+                        <small class="form-text text-muted js-project-empty <?php echo count((array)($projectsByYear[$selectedYear] ?? array())) > 0 ? 'd-none' : ''; ?>"><?= __('No approved projects found for selected financial year.') ?></small>
                     </div>
                 </div>
 
                 <div class="row mt-3">
                     <div class="col-md-4 form-group">
-                        <label for="student_supported">Student Supported</label>
+                        <label for="student_supported"><?= __('Student Supported') ?></label>
                         <input type="number" min="0" id="student_supported" name="student_supported" class="form-control text-end" required <?php echo $readonlyAttr; ?> value="<?php echo csrImpactSnapshotText(csrImpactSnapshotValue($valueData, 'student_supported') ?: 0); ?>">
                     </div>
                     <div class="col-md-4 form-group">
-                        <label for="villages_covered">Villages Covered</label>
+                        <label for="villages_covered"><?= __('Villages Covered') ?></label>
                         <input type="number" min="0" id="villages_covered" name="villages_covered" class="form-control text-end" required <?php echo $readonlyAttr; ?> value="<?php echo csrImpactSnapshotText(csrImpactSnapshotValue($valueData, 'villages_covered') ?: 0); ?>">
                     </div>
                     <div class="col-md-4 form-group">
-                        <label for="health_camps_conducted">Health Camps Conducted</label>
+                        <label for="health_camps_conducted"><?= __('Health Camps Conducted') ?></label>
                         <input type="number" min="0" id="health_camps_conducted" name="health_camps_conducted" class="form-control text-end" required <?php echo $readonlyAttr; ?> value="<?php echo csrImpactSnapshotText(csrImpactSnapshotValue($valueData, 'health_camps_conducted') ?: 0); ?>">
                     </div>
                     <div class="col-md-4 form-group">
-                        <label for="trees_planted">Trees Planted</label>
+                        <label for="trees_planted"><?= __('Trees Planted') ?></label>
                         <input type="number" min="0" id="trees_planted" name="trees_planted" class="form-control text-end" required <?php echo $readonlyAttr; ?> value="<?php echo csrImpactSnapshotText(csrImpactSnapshotValue($valueData, 'trees_planted') ?: 0); ?>">
                     </div>
                     <div class="col-md-4 form-group">
-                        <label for="women_benefited">Women Benefited</label>
+                        <label for="women_benefited"><?= __('Women Benefited') ?></label>
                         <input type="number" min="0" id="women_benefited" name="women_benefited" class="form-control text-end" required <?php echo $readonlyAttr; ?> value="<?php echo csrImpactSnapshotText(csrImpactSnapshotValue($valueData, 'women_benefited') ?: 0); ?>">
                     </div>
                 </div>

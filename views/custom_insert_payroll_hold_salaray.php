@@ -2,23 +2,23 @@
 <div class="card card-custom gutter-b">
  <div class="card-header border-0 ">
   <div class="card-header table-card-header">
-    <h5>  Employees Hold Salary</h5>
+    <h5>  <?php echo __('Employees Hold Salary'); ?></h5>
   </div>
 </div>
 
 <div class="card-body py-0">
   <div class="card-toolbar">
       <div style="float: left;" class="col-lg-3" >
-        <select aria-label="Emp" class="form-control form-select js-example-basic-single col-sm-12"
+        <select aria-label="<?php echo __('Emp'); ?>" class="form-control form-select js-example-basic-single col-sm-12"
         id="hold_emp" name="emp_id">
-          <option value=""> Select Any one </option>
+          <option value=""> <?php echo __('Select Any one'); ?> </option>
           <?php foreach ($employes as $employe) {  ?>
             <option  value="<?php echo $employe['id']; ?>"><?php echo $employe['display_name']; ?></option>
           <?php } ?>
         </select>
       </div> &nbsp;&nbsp;
       <div style="float: right; height: 43px;">
-        <button type="button" onclick="addinsertexcluded('hold','8')" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2">ADD </button>
+        <button type="button" onclick="addinsertexcluded('hold','8')" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"><?php echo __('ADD'); ?> </button>
       </div>
     </div>
 <div class="card-body py-0">
@@ -28,9 +28,9 @@
         <tr class="text-left">
           <th scope="col" class="pr-0" style="width: 10px"></th>
           <th scope="col" class="pr-0" style="width: 80px"></th>
-          <th scope="col" style="min-width: 150px">Name</th>
+          <th scope="col" style="min-width: 150px"><?php echo __('Name'); ?></th>
           <th scope="col" style="min-width: 50px"></th>
-          <th scope="col" class="pr-0 text-right" style="min-width: 50px">Action</th>
+          <th scope="col" class="pr-0 text-right" style="min-width: 50px"><?php echo __('Action'); ?></th>
         </tr>
       </thead>
       <tbody>
@@ -52,7 +52,7 @@
             <div class="f-12 text-muted"><?php echo $list_emp[$emda['emp_id']]['emp_code']; ?></div>
           </td>
           <td>
-            <button type="button" onclick="notifyuser(<?php echo $list_emp[$emda['emp_id']]['user_id']; ?>)" class="btn btn-success">Notify</button>
+            <button type="button" onclick="notifyuser(<?php echo $list_emp[$emda['emp_id']]['user_id']; ?>)" class="btn btn-success"><?php echo __('Notify'); ?></button>
           </td>
           <td class="pr-0 text-right">
             <button type="button" class="btn btn-icon btn-light btn-hover-primary btn-sm" onclick="deleteonerow(<?php echo $emda['id']; ?>,'hold_<?php echo $emda['id']; ?>')">
@@ -64,7 +64,7 @@
 }
 }else{ ?>
          <tr id="hold_no">
-           <td colspan="5" class="text-center"> <b>No Recards Fuond</b></td>
+           <td colspan="5" class="text-center"> <b><?php echo __('No Recards Fuond'); ?></b></td>
          </tr>
        <?php } ?>
      </tbody>

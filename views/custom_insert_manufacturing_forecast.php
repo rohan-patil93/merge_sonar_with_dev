@@ -74,24 +74,24 @@ if (!empty($_GET['saved'])) {
   <?php if($error_message !=''){ ?>
     <div class="alert alert-danger background-danger alert-dismissible">
       <strong><?php echo htmlspecialchars($error_message); ?></strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
     </div>
   <?php } ?>
   <div class="card shadow-sm border-0">
     <div class="card-header ">
-      <h5 class="mb-0"> Manufacturing Forecast</h5>
+      <h5 class="mb-0"> <?php echo __('Manufacturing Forecast'); ?></h5>
       <div class="card-header-right">
              <?php
                 echo $workflowsteps['workflow_btn'] ?? '';
             ?>
             <?php if($year != "" && $forecastStatus == ST_APPROVED){ ?>
               <a href="index.php?option=COM_INSERT_MANUFACTURING_FIRM_ORDERS&year=<?php echo htmlspecialchars($year); ?>" class="btn btn-primary waves-effect waves-light">
-                Create Firm Order
+                <?php echo __('Create Firm Order'); ?>
               </a>
             <?php } ?>
             <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light m-r-50">
                 <i class="icofont icofont-reply mr-1"></i>
-                Back
+                <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -101,9 +101,9 @@ if (!empty($_GET['saved'])) {
       <form method="get" action="index.php" class="row mb-4">
         <input type="hidden" name="option" value="COM_INSERT_MANUFACTURING_FORECAST">
         <div class="col-md-4 w-full">
-          <span class="fw-semibold">Select Year:</span>
-          <select aria-label="Year" name="year" class="js-example-basic-single js-forecast-year-select" data-auto-submit="1">
-            <option value="">Select Year</option>
+          <span class="fw-semibold"><?php echo __('Select Year:'); ?></span>
+          <select aria-label="<?php echo __('Year'); ?>" name="year" class="js-example-basic-single js-forecast-year-select" data-auto-submit="1">
+            <option value=""><?php echo __('Select Year'); ?></option>
             <?php
             $currentYear = date('Y')-2;
             for ($i = 0; $i <= 5; $i++) {
@@ -121,24 +121,24 @@ if (!empty($_GET['saved'])) {
         <?php echo $workflowsteps['breadcrumb'] ?? ''; ?>
         <div class="row mb-4">
           <div class="col-md-4 form-group">
-            <span class="form-label">Forecast No</span>
-            <input aria-label="Input field" type="text" class="form-control" value="<?php echo htmlspecialchars($forecastNo != '' ? $forecastNo : 'Auto Generated'); ?>" readonly>
+            <span class="form-label"><?php echo __('Forecast No'); ?></span>
+            <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo htmlspecialchars($forecastNo != '' ? $forecastNo : 'Auto Generated'); ?>" readonly>
           </div>
           <div class="col-md-4 form-group">
-            <span class="form-label">Forecast Date <span class="text-danger">*</span></span>
-            <input aria-label="Forecast Date" type="date" name="forecast_date" class="form-control" value="<?php echo htmlspecialchars($forecastDate); ?>" required <?php echo $disable; ?>>
+            <span class="form-label"><?php echo __('Forecast Date'); ?> <span class="text-danger">*</span></span>
+            <input aria-label="<?php echo __('Forecast Date'); ?>" type="date" name="forecast_date" class="form-control" value="<?php echo htmlspecialchars($forecastDate); ?>" required <?php echo $disable; ?>>
           </div>
         </div>
         <div class="forecast-table-wrapper">
           <table class="table table-bordered align-middle text-center forecast-table">
             <thead class="table-light ">
               <tr class="fw-semibold">
-                <th scope=\"col\" rowspan="2" class="forecast-header-item">Item</th>
-                <th scope=\"col\" colspan="4">Q1 (Jan-Mar)</th>
-                <th scope=\"col\" colspan="4">Q2 (Apr-Jun)</th>
-                <th scope=\"col\" colspan="4">Q3 (Jul-Sep)</th>
-                <th scope=\"col\" colspan="4">Q4 (Oct-Dec)</th>
-                <th scope=\"col\" rowspan="2">Total</th>
+                <th scope=\"col\" rowspan="2" class="forecast-header-item"><?php echo __('Item'); ?></th>
+                <th scope=\"col\" colspan="4"><?php echo __('Q1 (Jan-Mar)'); ?></th>
+                <th scope=\"col\" colspan="4"><?php echo __('Q2 (Apr-Jun)'); ?></th>
+                <th scope=\"col\" colspan="4"><?php echo __('Q3 (Jul-Sep)'); ?></th>
+                <th scope=\"col\" colspan="4"><?php echo __('Q4 (Oct-Dec)'); ?></th>
+                <th scope=\"col\" rowspan="2"><?php echo __('Total'); ?></th>
               </tr>
               <tr class="text-muted small">
                 <?php
@@ -201,7 +201,7 @@ if (!empty($_GET['saved'])) {
 
             <tfoot class="fw-bold bg-light">
               <tr>
-                <td>Total</td>
+                <td><?php echo __('Total'); ?></td>
                 <?php
                 for ($i=1; $i<=12; $i++) {
                     echo "<td>".round($grandTotals[$i],2)."</td>";
@@ -219,19 +219,19 @@ if (!empty($_GET['saved'])) {
 
         <div class="row mt-4">
           <div class="col-md-12">
-            <span class="form-label">Remarks</span>
-            <textarea aria-label="Enter forecast remarks or assumptions" name="remarks" id="forecast_remarks" class="form-control" rows="3" placeholder="Enter forecast remarks or assumptions"><?php echo htmlspecialchars($remarks); ?></textarea>
+            <span class="form-label"><?php echo __('Remarks'); ?></span>
+            <textarea aria-label="<?php echo __('Enter forecast remarks or assumptions'); ?>" name="remarks" id="forecast_remarks" class="form-control" rows="3" placeholder="<?php echo __('Enter forecast remarks or assumptions'); ?>"><?php echo htmlspecialchars($remarks); ?></textarea>
           </div>
         </div>
 
         <div class="mt-4 text-start manufacturing-submit-row">
           <button type="submit" name="submit" value="save" class="btn btn-primary px-4" <?php echo $disable; ?>>
-            Save           </button>
+            <?php echo __('Save'); ?>           </button>
           <span class="manufacturing-approval-warning">
             <i class="icofont icofont-warning-alt"></i>
             <span>
-              <strong>Review before approval.</strong>
-              Once this forecast is approved, forecast quantities cannot be changed. Please update all item quantities before submitting for approval.
+              <strong><?php echo __('Review before approval.'); ?></strong>
+              <?php echo __('Once this forecast is approved, forecast quantities cannot be changed. Please update all item quantities before submitting for approval.'); ?>
             </span>
           </span>
         </div>

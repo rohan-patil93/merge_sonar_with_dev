@@ -163,7 +163,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                 success:function(data){
                   console.log(data);
                   var otr = $.parseJSON(data);
-                  $('#imagePreview').append('<div class="col-lg-2" id="rem_'+otr.LASTID+'" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><a href="uploads/attachments/'+response1.actual_file_name+'" target="_blank"><i class="ti-file f-30 text-info"></i></a><div> '+response1.file_name+' </div><div class="text-danger cursor-pointer" onclick="removeattacchment('+otr.LASTID+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> Remove </div>');
+                  $('#imagePreview').append('<div class="col-lg-2" id="rem_'+otr.LASTID+'" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><a href="uploads/attachments/'+response1.actual_file_name+'" target="_blank"><i class="ti-file f-30 text-info"></i></a><div> '+response1.file_name+' </div><div class="text-danger cursor-pointer" onclick="removeattacchment('+otr.LASTID+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> <?php echo __('Remove'); ?> </div>');
                 },
                 error:function (){}
               });
@@ -244,9 +244,9 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
          $("#project_task_deliverables").show();
          data = JSON.parse(data);
          var str ="";
-         str= '<div class="col-lg-6 mt-2"><input aria-label="Input field" type="text" class="form-control" onblur="updatedeliverabledetail(this.value,'+data.LASTID+','+fielda+')" > </div>';
-         str+='<div class="col-lg-3 mt-2"><input aria-label="Input field" type="text" name="" class=" form-control datepicker" value="" onchange="updatedeliverabledetail(this.value,'+data.LASTID+','+fieldb+')" > </div>';
-         str+='<div class="col-lg-3 mt-2 w-full"><select aria-label="Select option" class="form-control js-example-basic-single " onchange="updatedeliverabledetail(this.value,'+data.LASTID+','+fieldc+')"> <option> Select Any One</option> <?php foreach((array)$project_teams as $team){ ?><option  value="<?php echo $team['id']; ?>"> <?php echo $team['display_name']; ?></option>  <?php
+         str= '<div class="col-lg-6 mt-2"><input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" onblur="updatedeliverabledetail(this.value,'+data.LASTID+','+fielda+')" > </div>';
+         str+='<div class="col-lg-3 mt-2"><input aria-label="<?php echo __('Input field'); ?>" type="text" name="" class=" form-control datepicker" value="" onchange="updatedeliverabledetail(this.value,'+data.LASTID+','+fieldb+')" > </div>';
+         str+='<div class="col-lg-3 mt-2 w-full"><select aria-label="<?php echo __('Select option'); ?>" class="form-control js-example-basic-single " onchange="updatedeliverabledetail(this.value,'+data.LASTID+','+fieldc+')"> <option> <?php echo __('Select Any One'); ?></option> <?php foreach((array)$project_teams as $team){ ?><option  value="<?php echo $team['id']; ?>"> <?php echo $team['display_name']; ?></option>  <?php
 } ?> </select> </div>';
           console.log(str);
          $('#append_deliverable').append(str);
@@ -388,13 +388,13 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
             data = JSON.parse(data);
             if(parent_id =="0"){
               var issefield ="'is_active'";
-            var str='<div class="mt-4" id="chlisttt_'+data.LASTID+'"><h4 class=""><i class="ti-check-box m-r-10"></i> '+val+' <button class="btn border waves-effect waves-light float-end" type="button" onclick="updatecheckitem(1,'+data.LASTID+','+issefield+')" >Delete</button></h4><div class="m-l-40"><div class="progress mt-4 mb-2"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div> </div><div id="addcheckitem_'+data.LASTID+'"> </div><button class="btn btn-primary waves-effect waves-light mt-3" onclick="addchecklists(0,'+data.LASTID+')">Add an Item</button></div></div>';
+            var str='<div class="mt-4" id="chlisttt_'+data.LASTID+'"><h4 class=""><i class="ti-check-box m-r-10"></i> '+val+' <button class="btn border waves-effect waves-light float-end" type="button" onclick="updatecheckitem(1,'+data.LASTID+','+issefield+')" ><?php echo __('Delete'); ?></button></h4><div class="m-l-40"><div class="progress mt-4 mb-2"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div> </div><div id="addcheckitem_'+data.LASTID+'"> </div><button class="btn btn-primary waves-effect waves-light mt-3" onclick="addchecklists(0,'+data.LASTID+')"><?php echo __('Add an Item'); ?></button></div></div>';
             console.log(str);
             $('#addcheckitem').append(str);
           }else{
             var infield ="'check_name'";
             var sefield ="'assign_id'";
-            var str = '<div class="mt-2"><div class="col-lg-12 row"><div class="col-lg-4"><input aria-label="Checkbox"  type="checkbox"><label for="check1" class="m-l-10" ><input aria-label="Input field" type="text" class="form-control" onblur="updatecheckitem(this.value,'+data.LASTID+','+infield+')"></label></div><div class="col-lg-4 w-full"><select aria-label="Select option" class="form-select js-example-basic-single" onchange="updatecheckitem(this.value,'+data.LASTID+','+sefield+')">  <option value="">Select Assigner</option> <?php foreach($project_teams as $team){ ?><option value="<?php echo $team['id']; ?>"> <?php echo $team['display_name']; ?></option><?php
+            var str = '<div class="mt-2"><div class="col-lg-12 row"><div class="col-lg-4"><input aria-label="<?php echo __('Checkbox'); ?>"  type="checkbox"><label for="check1" class="m-l-10" ><input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" onblur="updatecheckitem(this.value,'+data.LASTID+','+infield+')"></label></div><div class="col-lg-4 w-full"><select aria-label="<?php echo __('Select option'); ?>" class="form-select js-example-basic-single" onchange="updatecheckitem(this.value,'+data.LASTID+','+sefield+')">  <option value=""><?php echo __('Select Assigner'); ?></option> <?php foreach($project_teams as $team){ ?><option value="<?php echo $team['id']; ?>"> <?php echo $team['display_name']; ?></option><?php
 } ?> </select>  </div> </div></div>';
             console.log(str);
             $('#addcheckitem_'+parent_id).append(str);
@@ -558,8 +558,8 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
 
 </script>
 <div class="modal-header">
-  <h5 class="modal-title"> Task Details</h5>
-  <button type="button" class="btn-close btn_white" onclick="window.location.reload();"  aria-label="Close"></button>
+  <h5 class="modal-title"> <?php echo __('Task Details'); ?></h5>
+  <button type="button" class="btn-close btn_white" onclick="window.location.reload();"  aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body">
   <div class="modal-body task-popup">
@@ -568,12 +568,12 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
         <input type="hidden" id="task_id" name="" value="<?php echo $task_id; ?>">
         <input type="hidden" id="project_id" name="" value="<?php echo $task['project_id']; ?>">
         <i class="ti-credit-card m-r-20 f-20"></i>
-        <input aria-label="Input field" class="task_1" type="text" placeholder="<?php echo $task['task_name']; ?>" name="task_name" value="<?php echo $task['task_name']; ?>" onblur="updatedetail('task_name', <?php echo $task_id; ?> ,this.value)" >
+        <input aria-label="<?php echo __('Input field'); ?>" class="task_1" type="text" placeholder="<?php echo $task['task_name']; ?>" name="task_name" value="<?php echo $task['task_name']; ?>" onblur="updatedetail('task_name', <?php echo $task_id; ?> ,this.value)" >
       </div>
       <div class="col-lg-3">
         <button class="btn waves-effect waves-light border" onclick="watchtheallow()">
           <input type="hidden" name="allowwatch" id="allowwatch" value="<?php echo $task['allow_watch']; ?>">
-          <i class="ti-eye m-r-5"></i> Notify Comments <span id="wat" <?php if($task['allow_watch']!=0){ ?> style="display: none;" <?php
+          <i class="ti-eye m-r-5"></i> <?php echo __('Notify Comments'); ?> <span id="wat" <?php if($task['allow_watch']!=0){ ?> style="display: none;" <?php
 } ?> > <i class="ti-check-box m-l-5"></i></span>
         </button>
       </div>
@@ -609,7 +609,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
            <!----------------- Lables --------------------------->
           <?php if(count((array)$atchlabel)>0){ ?>
            <div class="mt-4">
-            <h6 class=""> <i class="ti-bookmark m-r-20"></i> Labels </h6>
+            <h6 class=""> <i class="ti-bookmark m-r-20"></i> <?php echo __('Labels'); ?> </h6>
             <div id="labelids">
               <?php foreach((array)$atchlabel as $ala){ ?>
                 <div class="llt-color" id="label_<?php echo $ala;  ?>" style="background-color: <?php echo $labels[$ala]['label_code']; ?>;"></div>
@@ -619,30 +619,30 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
         <?php } ?>
           <!----------------- DESCRPTION --------------------------->
           <div class="mt-4">
-            <h6 class=""><i class="ti-align-left m-r-20"></i> Description</h6>
+            <h6 class=""><i class="ti-align-left m-r-20"></i> <?php echo __('Description'); ?></h6>
             <div class="m-l-40 mt-3 bg-gray" id="hidedescription" onclick="viewdescrption()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
               <?php echo $task['description']!="" ? $task['description'] : "Add a more detailed description…"; ?>
             </div>
             <div class="m-l-40 mt-4" id="description" style="display:none;">
-              <textarea aria-label="Text area" class="w-100 mb-2 text-start toptextarea" onblur="updatedetail('description', <?php echo $task_id; ?> ,this.value)" placeholder=""><?php echo $task['description']; ?></textarea>
+              <textarea aria-label="<?php echo __('Text area'); ?>" class="w-100 mb-2 text-start toptextarea" onblur="updatedetail('description', <?php echo $task_id; ?> ,this.value)" placeholder=""><?php echo $task['description']; ?></textarea>
             </div>
           </div>
           <!----------------- COMMENTS --------------------------->
           <div class="mt-4">
-            <h6 class=""><i class="ti-check-box m-r-10"></i> Comments
-              <button class="btn border waves-effect waves-light float-end " onclick="closeopenpopup('showactiveites','open')">Show Details</button>
+            <h6 class=""><i class="ti-check-box m-r-10"></i> <?php echo __('Comments'); ?>
+              <button class="btn border waves-effect waves-light float-end " onclick="closeopenpopup('showactiveites','open')"><?php echo __('Show Details'); ?></button>
             </h6>
             <div class="m-l-40 mt-4">
               <div>
-                <textarea aria-label="Activty" class="w-100 mb-2 text-start toptextarea" name="activty" id="activty" placeholder=""></textarea>
+                <textarea aria-label="<?php echo __('Activty'); ?>" class="w-100 mb-2 text-start toptextarea" name="activty" id="activty" placeholder=""></textarea>
                 <input type="hidden" name="initial" id="initial" value="<?php echo initials($_SESSION['user']['display_name']);?>">
                 <input type="hidden" name="fullname" id="fullname" value="<?php echo $_SESSION['user']['display_name'];?>">
               </div>
               <div class="float-right">
-                <button class="btn btn-primary" onclick="submitactivty()"> Save</button>
+                <button class="btn btn-primary" onclick="submitactivty()"> <?php echo __('Save'); ?></button>
               </div>
               <div id="someacty" class="mt-3">
-                <h7> Comment History :</h7>
+                <h7> <?php echo __('Comment History :'); ?></h7>
                 <div id="someactydetail" style="word-wrap: break-word;">
                   <?php foreach((array)$data['activty'] as $act){
                     if($act['activity_type']=="activity"){ ?>
@@ -654,7 +654,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                         <span class="text-muted f-12 m-l-50"> <?php echo  notificationdatesdiff($act['created_date']);  ?></span>
                       </div>
                       <div class=" mt-2" id="textarea_comment_<?php echo $act['id']; ?>" style="display: none;">
-                        <textarea aria-label="Text area" class="form-control" onblur="updatedynamicfiledtable(this.value, <?php echo $act['id']; ?>, 'comments', 'project_task_activities')" ><?php echo $act['comments']; ?></textarea>
+                        <textarea aria-label="<?php echo __('Text area'); ?>" class="form-control" onblur="updatedynamicfiledtable(this.value, <?php echo $act['id']; ?>, 'comments', 'project_task_activities')" ><?php echo $act['comments']; ?></textarea>
                       </div>
                       <div style="clear:both;"></div>
                     <?php }
@@ -662,7 +662,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                 </div>
               </div>
               <div id="showactiveites" class="mt-2 showactiveites" style="display:none;word-wrap: break-word;">
-                <h7> Task Activities :</h7>
+                <h7> <?php echo __('Task Activities :'); ?></h7>
                 <?php foreach((array)$data['activty'] as $act){
                   if($act['activity_type']=="task_details"){
                     ?>
@@ -680,12 +680,12 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
         <!----------------- Sub Task --------------------------->
             <?php if(count((array)$data['sub_tasks'])>0){ ?>
               <div class="mt-4">
-                 <h6 class=""><i class="ti-harddrive m-r-20"></i> Sub Tasks </h6>
+                 <h6 class=""><i class="ti-harddrive m-r-20"></i> <?php echo __('Sub Tasks'); ?> </h6>
               <div class="row col-lg-12 mt-3">
                  <?php foreach((array)$data['sub_tasks'] as $subtask){ ?>
                     <div class="col-lg-1">
                        <?php if($project_teams[$subtask['assigen_id']]['image']!=""){ ?>
-                    <img class=" user-name p-0 m-0" src="/uploads/all/<?php echo $project_teams[$subtask['assigen_id']]['image']; ?>" alt="User Profile">
+                    <img class=" user-name p-0 m-0" src="/uploads/all/<?php echo $project_teams[$subtask['assigen_id']]['image']; ?>" alt="<?php echo __('User Profile'); ?>">
                   <?php }else{ ?>
                     <span class="user-name"><?php echo initials($project_teams[$subtask['assigen_id']]['display_name']); ?></span>
                   <?php } ?>
@@ -693,7 +693,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                     <div class="col-lg-6 cursor-pointer mt-2" onclick="taskdetailspopup(<?php echo $subtask['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo substr($subtask['task_name'],0,90)."..."; ?></div>
                     <div class="col-lg-2 " >
                         <?php if($subtask['planned_finish']!=""){ ?>
-                          <span class=" p-2  d-inline-block f-12 m-r-5 <?php if(strtotime($subtask['planned_finish'])< strtotime(date('Y-m-d'))){ echo "exdate";
+                          <span class=" p-2  d-inline-block f-12 m-r-5 <?php if(strtotime($subtask['planned_finish'])< strtotime(date('Y-m-d'))){ echo __('exdate');
 } ?> ">
                               <i class="ti-time f-10"></i> &nbsp; <?php echo date('d M Y', strtotime($subtask['planned_finish'])); ?>
                           </span>
@@ -711,16 +711,16 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
            <div class="mt-4 " id="project_task_deliverables"
             <?php if(count( (array)$data['append_deliverables'])<1){ ?> style="display: none;" <?php
 } ?>>
-                 <h6 class=""><i class="ti-file m-r-20"></i> Deliverables </h6>
+                 <h6 class=""><i class="ti-file m-r-20"></i> <?php echo __('Deliverables'); ?> </h6>
                  <div class="row col-lg-12 mt-3" id="append_deliverable">
             <?php if(count((array)$data['append_deliverables'])>0){ ?>
 
                  <?php foreach((array)$data['append_deliverables'] as $append_deliverable){
                   if($append_deliverable['deliverable']!=""){ ?>
 
-                   <div class="col-lg-6 mt-2"><input aria-label="Input field" type="text" class="form-control" value="<?php echo $append_deliverable['deliverable']; ?>" onblur="updatedeliverabledetail(this.value,<?php echo $append_deliverable['id']; ?>,'deliverable')">  </div>
-                   <div class="col-lg-3 mt-2"><input aria-label="Input field" type="text" name="" class=" form-control datepicker" value="" onchange="updatedeliverabledetail(this.value,<?php echo $append_deliverable['id']; ?>,'deliverable_date')" value="<?php echo displayDate($append_deliverable['deliverable_date']) ?>"> </div>
-                   <div class="col-lg-3 mt-2 w-full"><select aria-label="Select option" class="form-control js-example-basic-single " onchange="updatedeliverabledetail(this.value,<?php echo $append_deliverable['id']; ?>,'deliverable_owner')"> <option> Select Any One</option> <?php foreach((array)$project_teams as $team){ ?><option <?php if($append_deliverable['deliverable_owner'] ==$team['id']){ echo "selected";
+                   <div class="col-lg-6 mt-2"><input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" value="<?php echo $append_deliverable['deliverable']; ?>" onblur="updatedeliverabledetail(this.value,<?php echo $append_deliverable['id']; ?>,'deliverable')">  </div>
+                   <div class="col-lg-3 mt-2"><input aria-label="<?php echo __('Input field'); ?>" type="text" name="" class=" form-control datepicker" value="" onchange="updatedeliverabledetail(this.value,<?php echo $append_deliverable['id']; ?>,'deliverable_date')" value="<?php echo displayDate($append_deliverable['deliverable_date']) ?>"> </div>
+                   <div class="col-lg-3 mt-2 w-full"><select aria-label="<?php echo __('Select option'); ?>" class="form-control js-example-basic-single " onchange="updatedeliverabledetail(this.value,<?php echo $append_deliverable['id']; ?>,'deliverable_owner')"> <option> <?php echo __('Select Any One'); ?></option> <?php foreach((array)$project_teams as $team){ ?><option <?php if($append_deliverable['deliverable_owner'] ==$team['id']){ echo __('selected');
 } ?> value="<?php echo $team['id']; ?>"> <?php echo $team['display_name']; ?></option>  <?php
 } ?> </select> </div>
             <?php }
@@ -733,13 +733,13 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
           <!----------------- Attachments--------------------------->
           <?php if(count((array)$data['attachments'])>0){ ?>
            <div id="attachmentid"  class="mt-4">
-            <h6 class=""><i class="ti-clip m-r-20"></i> Attachments</h6>
+            <h6 class=""><i class="ti-clip m-r-20"></i> <?php echo __('Attachments'); ?></h6>
             <div id="imagePreview" class="col-lg-12 row mt-3">
              <?php foreach((array)$data['attachments'] as $attach){?>
               <div class="col-lg-2" id="rem_<?php echo $attach['id']; ?>">
                <a href="uploads/attachments/<?php echo $attach['actual_file_name']; ?>" target="_blank"><i class="ti-file f-30 text-info"></i></a>
                <div> <?php echo $attach['file_name']; ?> </div>
-               <div class="text-danger cursor-pointer" onclick="removeattacchment(<?php echo $attach['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> Remove </div>
+               <div class="text-danger cursor-pointer" onclick="removeattacchment(<?php echo $attach['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> <?php echo __('Remove'); ?> </div>
              </div>
            <?php } ?>
          </div>
@@ -749,11 +749,11 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
 
           <?php if(count((array)$data['checklist'])>0){ ?>
               <div id="addcheckitem" class="mt-4">
-                <h6 class=""><i class="ti-list m-r-20"></i> Check List</h6>
+                <h6 class=""><i class="ti-list m-r-20"></i> <?php echo __('Check List'); ?></h6>
               <?php foreach((array)$data['checklist'] as $mcheck){ ?>
             <div class="mt-3"  id="chlisttt_<?php  echo $mcheck['id']; ?>">
               <h4 class=""><i class="ti-check-box m-r-10"></i> <?php echo $mcheck['check_name']; ?>
-              <button class="btn border waves-effect waves-light float-end" type="button" onclick="updatecheckitem(1,<?php echo $mcheck['id'] ?>,'is_active')">Delete</button>
+              <button class="btn border waves-effect waves-light float-end" type="button" onclick="updatecheckitem(1,<?php echo $mcheck['id'] ?>,'is_active')"><?php echo __('Delete'); ?></button>
             </h4>
             <div class="m-l-40">
               <div class="progress mt-4 mb-2">
@@ -764,15 +764,15 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                   <div class="mt-2">
                     <div class="col-lg-12 row">
                       <div class="col-lg-4">
-                        <input aria-label="Checkbox"  type="checkbox" id=""> <label for="check1" class="m-l-5" >
-                          <input aria-label="Input field" type="text" class="form-control" onblur="updatecheckitem(this.value,<?php echo $subc['id'] ?>,'check_name')" value="<?php echo $subc['check_name'] ?>">
+                        <input aria-label="<?php echo __('Checkbox'); ?>"  type="checkbox" id=""> <label for="check1" class="m-l-5" >
+                          <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" onblur="updatecheckitem(this.value,<?php echo $subc['id'] ?>,'check_name')" value="<?php echo $subc['check_name'] ?>">
                         </label>
                       </div>
                       <div class="col-lg-4 w-full">
-                        <select aria-label="Select option" class="form-select js-example-basic-single" onchange="updatecheckitem(this.value,<?php echo $subc['id'] ?>,'assign_id')">
-                          <option value="">Select Assigner</option>
+                        <select aria-label="<?php echo __('Select option'); ?>" class="form-select js-example-basic-single" onchange="updatecheckitem(this.value,<?php echo $subc['id'] ?>,'assign_id')">
+                          <option value=""><?php echo __('Select Assigner'); ?></option>
                           <?php foreach((array)$project_teams as $team){ ?>
-                            <option <?php if($subc['assign_id'] ==$team['id']){ echo "selected";
+                            <option <?php if($subc['assign_id'] ==$team['id']){ echo __('selected');
 } ?> value="<?php echo $team['id']; ?>"> <?php echo $team['display_name']; ?></option>
                           <?php } ?>
                         </select>
@@ -781,7 +781,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                   </div>
                 <?php } ?>
               </div>
-              <button class="btn btn-primary waves-effect waves-light mt-3" onclick="addchecklists('',<?php echo $mcheck['id'] ?>)">Add an Item</button>
+              <button class="btn btn-primary waves-effect waves-light mt-3" onclick="addchecklists('',<?php echo $mcheck['id'] ?>)"><?php echo __('Add an Item'); ?></button>
             </div>
           </div>
         <?php } ?>
@@ -807,24 +807,24 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
           </div>
 
           <div class="p-3">
-            <h5 class="f-14 f-w-600">Add to card</h5>
+            <h5 class="f-14 f-w-600"><?php echo __('Add to card'); ?></h5>
           </div>
           <div class="card-body pt-0">
             <input type="hidden" name="" id="closeopenpopup" value="">
             <div class="position-relative mb-2">
-              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start member-btn" onclick="closeopenpopup('popup-member','open')"><i class="ti-user m-r-5"></i> Members
+              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start member-btn" onclick="closeopenpopup('popup-member','open')"><i class="ti-user m-r-5"></i> <?php echo __('Members'); ?>
               </button>
               <div class="popup-member design-sec">
-                <h5>Members</h5>
+                <h5><?php echo __('Members'); ?></h5>
                 <button type="" class="float-end member-close design-close" onclick="closeopenpopup('popup-member','close')"><i class="ti-close"></i></button>
                 <div class="form-group w-full">
-                  <span>Accountable (Reassign) </span>
+                  <span><?php echo __('Accountable (Reassign)'); ?> </span>
                   ?>
-                  <select aria-label="Select option" class="form-control js-example-basic-single" <?php if(in_array('TASKDA_USER',$_SESSION['role_ids']) && $data['projects']['assign_each_other'] == 1 ){ echo "disabled";
+                  <select aria-label="<?php echo __('Select option'); ?>" class="form-control js-example-basic-single" <?php if(in_array('TASKDA_USER',$_SESSION['role_ids']) && $data['projects']['assign_each_other'] == 1 ){ echo __('disabled');
 } ?> onchange="updatedetail('assigen_id',<?php echo $task_id;?>,this.value)"  name="assigen_id" id="assigne">
-                    <option value="0"> Select Assigner</option>
+                    <option value="0"> <?php echo __('Select Assigner'); ?></option>
                     <?php foreach($project_teams as $team){ ?>
-                      <option <?php if($team['id'] == $task['assigen_id'] ){ echo "selected";
+                      <option <?php if($team['id'] == $task['assigen_id'] ){ echo __('selected');
 } ?> value="<?php echo $team['id']; ?>"> <?php echo $team['display_name']; ?> </option>
                     <?php } ?>
                   </select>
@@ -834,10 +834,10 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                  ?>
                   <div class="form-group w-full">
                     <span> <?php echo $role['role_name']; ?> </span>
-                   <select aria-label="Work Members" class="form-control js-example-basic-multiple" multiple="multiple" name="work_members" id="<?php echo 'flow_'.$role['id']; ?>"  onchange="addupdaterolememberdetail(<?php echo "'flow_".$role['id']."'"; ?>,<?php echo $task_id;?>,this.value,<?php echo $role['id']; ?>)">
-                    <option value="0"> Select <?php echo $role['role_name']; ?></option>
+                   <select aria-label="<?php echo __('Work Members'); ?>" class="form-control js-example-basic-multiple" multiple="multiple" name="work_members" id="<?php echo 'flow_'.$role['id']; ?>"  onchange="addupdaterolememberdetail(<?php echo "'flow_".$role['id']."'"; ?>,<?php echo $task_id;?>,this.value,<?php echo $role['id']; ?>)">
+                    <option value="0"> <?php echo __('Select'); ?> <?php echo $role['role_name']; ?></option>
                     <?php foreach($project_teams as $team){ ?>
-                      <option <?php if(in_array($team['id'],(array)$ptrm[$role['id']])){ echo "selected";
+                      <option <?php if(in_array($team['id'],(array)$ptrm[$role['id']])){ echo __('selected');
 } ?> value="<?php echo $team['id']; ?>"> <?php echo $team['display_name']; ?> </option>
                     <?php } ?>
                   </select>
@@ -848,15 +848,15 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
             </div>
           </div>
           <div class="position-relative mb-2">
-              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start label-btn"  onclick="closeopenpopup('popup-label','open')"><i class="ti-tag m-r-5"></i> Labels
+              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start label-btn"  onclick="closeopenpopup('popup-label','open')"><i class="ti-tag m-r-5"></i> <?php echo __('Labels'); ?>
               </button>
               <div class="popup-label design-sec">
-                <h5>Labels</h5>
+                <h5><?php echo __('Labels'); ?></h5>
                 <button type="" class="float-end label-close design-close" onclick="closeopenpopup('popup-label','close')"><i class="ti-close"></i></button>
 
                 <?php if(count((array)$labels)>0){ foreach((array)$labels as $label){ ?>
                 <div class="form-group mt-2 mb-0">
-                  <input aria-label="Input field" onclick="checkuncheckcolor(this.value,'<?php echo $label['label_code']; ?>')" type="checkbox" name="checkcolor" <?php if(in_array($label['id'],(array)$atchlabel)){ echo "checked";
+                  <input aria-label="<?php echo __('Input field'); ?>" onclick="checkuncheckcolor(this.value,'<?php echo $label['label_code']; ?>')" type="checkbox" name="checkcolor" <?php if(in_array($label['id'],(array)$atchlabel)){ echo __('checked');
 }?> id="check<?php echo $label['id']; ?>" value="<?php echo $label['id']; ?>" onkeydown="">
                   <label for="check1"  style="background-color:<?php echo $label['label_code']; ?>" class="label-check w-75"><?php echo $label['label_name']; ?></label>
 
@@ -866,32 +866,32 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
               </div>
             </div>
             <div class="position-relative mb-2">
-              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start checklist-btn" onclick="closeopenpopup('popup-checklist','open')"><i class="ti-check-box m-r-5" ></i> Checklist
+              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start checklist-btn" onclick="closeopenpopup('popup-checklist','open')"><i class="ti-check-box m-r-5" ></i> <?php echo __('Checklist'); ?>
               </button>
               <div class="popup-checklist design-sec">
-                <h5>Checklist</h5>
+                <h5><?php echo __('Checklist'); ?></h5>
                 <button type="" class="float-end checklist-close design-close" onclick="closeopenpopup('popup-checklist','close')"><i class="ti-close"></i></button>
                 <div class="form-group mt-3">
-                  <span>Title</span>
-                  <input aria-label="Checklist" class="form-control" type="text" name="checkdata" id="checkdata" placeholder="Checklist">
+                  <span><?php echo __('Title'); ?></span>
+                  <input aria-label="<?php echo __('Checklist'); ?>" class="form-control" type="text" name="checkdata" id="checkdata" placeholder="<?php echo __('Checklist'); ?>">
                 </div>
-                <button class="btn btn-primary waves-effect waves-light" onclick="addchecklists(0,0)">Add</button>
+                <button class="btn btn-primary waves-effect waves-light" onclick="addchecklists(0,0)"><?php echo __('Add'); ?></button>
               </div>
             </div>
 
             <div class="position-relative mb-2">
-              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start date-btn" onclick="closeopenpopup('popup-date','open')"><i class="ti-alarm-clock m-r-5" ></i> Dates
+              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start date-btn" onclick="closeopenpopup('popup-date','open')"><i class="ti-alarm-clock m-r-5" ></i> <?php echo __('Dates'); ?>
               </button>
               <div class="popup-date design-sec">
-                <h5>Dates</h5>
+                <h5><?php echo __('Dates'); ?></h5>
                 <button type="" class="float-end date-close design-close" onclick="closeopenpopup('popup-date','close')"><i class="ti-close"></i></button>
                 <div class="form-group mt-3">
-                  <span>Start Date</span>
-                  <input aria-label="Input field" class="form-control datepicker" onchange="updatedetail('planned_start',<?php echo $task_id;?>,this.value)" value="<?php echo fromDate($task['planned_start']); ?>" id="planned_start" type="text">
+                  <span><?php echo __('Start Date'); ?></span>
+                  <input aria-label="<?php echo __('Input field'); ?>" class="form-control datepicker" onchange="updatedetail('planned_start',<?php echo $task_id;?>,this.value)" value="<?php echo fromDate($task['planned_start']); ?>" id="planned_start" type="text">
                 </div>
                 <div class="form-group mt-3">
-                  <span>Due Date</span>
-                  <input aria-label="Input field" class="form-control datepicker"onchange="updatedetail('planned_finish',<?php echo $task_id;?>,this.value)"  value="<?php echo fromDate($task['planned_finish']); ?>" id="planned_finish" type="text">
+                  <span><?php echo __('Due Date'); ?></span>
+                  <input aria-label="<?php echo __('Input field'); ?>" class="form-control datepicker"onchange="updatedetail('planned_finish',<?php echo $task_id;?>,this.value)"  value="<?php echo fromDate($task['planned_finish']); ?>" id="planned_finish" type="text">
                 </div>
 
               </div>
@@ -899,23 +899,23 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
 
 
             <div class="position-relative mb-2">
-              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start date-btn" onclick="closeopenpopup('popup-recurrence','open')">    <i class="fa fa-tasks m-r-5" ></i> Task Recurrence
+              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start date-btn" onclick="closeopenpopup('popup-recurrence','open')">    <i class="fa fa-tasks m-r-5" ></i> <?php echo __('Task Recurrence'); ?>
               </button>
               <div class="popup-recurrence design-sec" style="display: none;">
-                <h5>Recurrence</h5>
+                <h5><?php echo __('Recurrence'); ?></h5>
                 <button type="" class="float-end date-close design-close" onclick="closeopenpopup('popup-recurrence','close')"><i class="ti-close"></i></button>
                 <div class="form-group w-full mt-5">
 
                   <div class="row col-lg-12 mt-2 ">
 
                    <div class="col-lg-12 row">
-                    <span class="form-label col-lg-6 f-w-600 mt-2">Repeat Every</span>
-                    <div class="col-lg-6 form-group"><input aria-label="Action No" type="text" class="form-control col-lg-2" name="action_no" value="1" readonly/></div>
+                    <span class="form-label col-lg-6 f-w-600 mt-2"><?php echo __('Repeat Every'); ?></span>
+                    <div class="col-lg-6 form-group"><input aria-label="<?php echo __('Action No'); ?>" type="text" class="form-control col-lg-2" name="action_no" value="1" readonly/></div>
                   </div>
                   <div class="col-lg-12 row">
-                    <span class="form-label col-lg-6 f-w-600 mt-2">Type</span>
+                    <span class="form-label col-lg-6 f-w-600 mt-2"><?php echo __('Type'); ?></span>
                     <div class="col-lg-6 form-group">
-                   <select aria-label="Action Frequency" name="action_frequency" class="form-control form-select js-example-basic-single" id="selectscehduleaction" onchange="scehduleaction()">
+                   <select aria-label="<?php echo __('Action Frequency'); ?>" name="action_frequency" class="form-control form-select js-example-basic-single" id="selectscehduleaction" onchange="scehduleaction()">
                      <?php foreach ((array)$data['task_frequency'] as $due) {    ?>
                       <option value="<?php echo $due['genc_detail_code'];?>" <?php if($compliancedetail['action_frequency'] == $due['genc_detail_code']){ ?>selected <?php
 } ?> ><?php echo $due['genc_detail_name'];?></option>
@@ -926,15 +926,15 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                 </div>
                 <div class=" " id="monthlyschedule" style="<?php echo $compliancedetail['action_frequency']=="MN"?'':'display:none'; ?>">
                   <div class="col-lg-12 row">
-                    <span class="form-label col-lg-6 f-w-600 mt-2">On Day</span>
-                    <div class="col-lg-6 form-group"><input aria-label="On The Day" type="number" class="form-control col-lg-4" name="on_the_day" value="<?php echo $compliancedetail['on_the_day']; ?>" ></div>
+                    <span class="form-label col-lg-6 f-w-600 mt-2"><?php echo __('On Day'); ?></span>
+                    <div class="col-lg-6 form-group"><input aria-label="<?php echo __('On The Day'); ?>" type="number" class="form-control col-lg-4" name="on_the_day" value="<?php echo $compliancedetail['on_the_day']; ?>" ></div>
                   </div>
                 </div>
                 <div class="form-group" id="yearlyschedule" style="<?php echo $compliancedetail['action_frequency']=="YR"?'':'display:none'; ?>">
                   <div class="col-lg-12 row ">
-                   <span class="form-label col-lg-6 f-w-600 mt-2">On Month</span>
+                   <span class="form-label col-lg-6 f-w-600 mt-2"><?php echo __('On Month'); ?></span>
                    <div class="col-lg-6">
-                    <select aria-label="On The Month" name="on_the_month"  style="width:150px;" class="form-control form-select js-example-basic-single">
+                    <select aria-label="<?php echo __('On The Month'); ?>" name="on_the_month"  style="width:150px;" class="form-control form-select js-example-basic-single">
                       <?php foreach ($montharray as $mont=>$montname) {    ?>
                        <option value="<?php echo $mont;?>" <?php if($mont == $compliancedetail['on_the_month']){ ?>selected <?php
 } ?> ><?php echo $montname;?></option>
@@ -943,18 +943,18 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                  </div>
                </div>
                  <div class="col-lg-12 row mt-2">
-                  <span class="form-label col-lg-6 f-w-600 mt-2">On Day</span>
+                  <span class="form-label col-lg-6 f-w-600 mt-2"><?php echo __('On Day'); ?></span>
                   <div class="col-lg-6">
-                  <input aria-label="On The Day Year" type="text" class="form-control" name="on_the_day_year" value="<?php echo $compliancedetail['on_the_day_year'] !=""?$compliancedetail['on_the_day_year']:1; ?>"  placeholder="Ex : 1 to 31"/>
+                  <input aria-label="<?php echo __('On The Day Year'); ?>" type="text" class="form-control" name="on_the_day_year" value="<?php echo $compliancedetail['on_the_day_year'] !=""?$compliancedetail['on_the_day_year']:1; ?>"  placeholder="<?php echo __('Ex : 1 to 31'); ?>"/>
                 </div>
                 </div>
 
             </div>
             <div class="" id="weeklyschedule" style="<?php echo $compliancedetail['action_frequency']=="WK"?'':'display:none'; ?>">
               <div class="row col-lg-12 ">
-               <span class="form-label col-lg-6 f-w-600 mt-2">On Week Day</span>
+               <span class="form-label col-lg-6 f-w-600 mt-2"><?php echo __('On Week Day'); ?></span>
                <div class="col-lg-6 form-group">
-                <select aria-label="On The Week" name="on_the_week"  style="width:150px;" class="form-control form-select js-example-basic-single">
+                <select aria-label="<?php echo __('On The Week'); ?>" name="on_the_week"  style="width:150px;" class="form-control form-select js-example-basic-single">
                   <?php foreach ($weekdays as $weekkey=>$weekvalue) {    ?>
                    <option value="<?php echo $weekkey;?>" <?php if($weekkey == $compliancedetail['on_the_week']){ ?>selected <?php
 } ?> ><?php echo $weekvalue;?></option>
@@ -964,8 +964,8 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
            </div>
          </div>
          <div class="col-lg-12 row">
-          <span class="form-label col-lg-6 f-w-600 mt-2">Planned Day</span>
-          <div class="col-lg-6 form-group"><input aria-label="Planned Day" type="text" class="form-control col-lg-2" name="planned_day" value="<?php echo $compliancedetail['planned_day'] !=""?$compliancedetail['planned_day']:'0'; ?>"/></div>
+          <span class="form-label col-lg-6 f-w-600 mt-2"><?php echo __('Planned Day'); ?></span>
+          <div class="col-lg-6 form-group"><input aria-label="<?php echo __('Planned Day'); ?>" type="text" class="form-control col-lg-2" name="planned_day" value="<?php echo $compliancedetail['planned_day'] !=""?$compliancedetail['planned_day']:'0'; ?>"/></div>
         </div>
       </div>
 
@@ -974,42 +974,42 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
            </div>
 
             <div class="position-relative mb-2">
-              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start date-btn" onclick="closeopenpopup('popup-act','open')"><i class="ti-files m-r-5" ></i> Sub Tasks
+              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start date-btn" onclick="closeopenpopup('popup-act','open')"><i class="ti-files m-r-5" ></i> <?php echo __('Sub Tasks'); ?>
               </button>
               <div class="popup-act design-sec" style="display: none;">
-                <h5>Sub Tasks</h5>
+                <h5><?php echo __('Sub Tasks'); ?></h5>
                 <button type="" class="float-end date-close design-close" onclick="closeopenpopup('popup-act','close')"><i class="ti-close"></i></button>
                 <div class="form-group w-full mt-5">
-                  <button type="" class="btn btn-primary text-center" onclick="addactivity()"><i class="ti-plus"></i> Add Sub Tasks</button>
+                  <button type="" class="btn btn-primary text-center" onclick="addactivity()"><i class="ti-plus"></i> <?php echo __('Add Sub Tasks'); ?></button>
                 </div>
              </div>
            </div>
 
            <div class="position-relative mb-2">
-              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start date-btn" onclick="closeopenpopup('popup-deliverable','open')"><i class="ti-share-alt m-r-5" ></i> Deliverable
+              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start date-btn" onclick="closeopenpopup('popup-deliverable','open')"><i class="ti-share-alt m-r-5" ></i> <?php echo __('Deliverable'); ?>
               </button>
               <div class="popup-deliverable design-sec" style="display: none;">
-                <h5>Deliverable</h5>
+                <h5><?php echo __('Deliverable'); ?></h5>
                 <button type="" class="float-end date-close design-close" onclick="closeopenpopup('popup-deliverable','close')"><i class="ti-close"></i></button>
                 <div class="form-group w-full mt-5">
-                  <button type="" class="btn btn-primary text-center" onclick="adddeliverable()"><i class="ti-plus"></i> Add Deliverable</button>
+                  <button type="" class="btn btn-primary text-center" onclick="adddeliverable()"><i class="ti-plus"></i> <?php echo __('Add Deliverable'); ?></button>
                 </div>
              </div>
            </div>
 
             <div class="position-relative mb-2">
-              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start member-btn" onclick="closeopenpopup('popup-dependency','open')"><i class="ti-layers m-r-5"></i> Task Predecessor
+              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start member-btn" onclick="closeopenpopup('popup-dependency','open')"><i class="ti-layers m-r-5"></i> <?php echo __('Task Predecessor'); ?>
               </button>
               <div class="popup-dependency design-sec " style="display: none;">
-                <h5> Task Predecessor </h5>
+                <h5> <?php echo __('Task Predecessor'); ?> </h5>
                 <button type="" class="float-end member-close design-close" onclick="closeopenpopup('popup-dependency','close')"><i class="ti-close"></i></button>
 
                 <div class="form-group w-full">
-                 <span> Tasks </span>
-                 <select aria-label="Project Dependency" class="form-control js-example-basic-multiple" multiple="multiple" name="project_dependency" id="project_dependency"  onchange="updateprojectdependencydetail()">
-                  <option value="0"> Select Tasks</option>
+                 <span> <?php echo __('Tasks'); ?> </span>
+                 <select aria-label="<?php echo __('Project Dependency'); ?>" class="form-control js-example-basic-multiple" multiple="multiple" name="project_dependency" id="project_dependency"  onchange="updateprojectdependencydetail()">
+                  <option value="0"> <?php echo __('Select Tasks'); ?></option>
                   <?php foreach((array)$projec_tasks as $projec_task){ ?>
-                    <option <?php if(in_array($projec_task['id'],(array)$data['projec_task_dependencies'])){ echo "selected";
+                    <option <?php if(in_array($projec_task['id'],(array)$data['projec_task_dependencies'])){ echo __('selected');
 } ?> value="<?php echo $projec_task['id']; ?>"> <?php echo $projec_task['task_name']; ?> </option>
                   <?php } ?>
                 </select>
@@ -1018,87 +1018,87 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
           </div>
 
             <div class="position-relative mb-2">
-              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start member-btn" onclick="closeopenpopup('popup-phases','open')"><i class="ti-agenda m-r-5"></i> Project Phases
+              <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start member-btn" onclick="closeopenpopup('popup-phases','open')"><i class="ti-agenda m-r-5"></i> <?php echo __('Project Phases'); ?>
               </button>
               <div class="popup-phases design-sec " style="display: none;">
-                <h5>  Phases </h5>
+                <h5>  <?php echo __('Phases'); ?> </h5>
                 <button type="" class="float-end member-close design-close" onclick="closeopenpopup('popup-phases','close')"><i class="ti-close"></i></button>
 
                 <div class="form-group w-full">
-                 <span> Tasks </span>
-                 <select aria-label="Project Phases" class="form-control js-example-basic-single"  name="project_phases" id="project_phases"  onchange="updatedetail('project_phase_id',<?php echo $task_id;?>,this.value)" value="<?php echo fromDate($task['planned_start']); ?>">
-                  <option value="0"> Select Tasks</option>
+                 <span> <?php echo __('Tasks'); ?> </span>
+                 <select aria-label="<?php echo __('Project Phases'); ?>" class="form-control js-example-basic-single"  name="project_phases" id="project_phases"  onchange="updatedetail('project_phase_id',<?php echo $task_id;?>,this.value)" value="<?php echo fromDate($task['planned_start']); ?>">
+                  <option value="0"> <?php echo __('Select Tasks'); ?></option>
                   <?php foreach((array)$projec_phases as $projec_phase){ ?>
-                    <option <?php if($projec_phase['id']==$task['project_phase_id']){ echo "selected";
+                    <option <?php if($projec_phase['id']==$task['project_phase_id']){ echo __('selected');
 } ?> value="<?php echo $projec_phase['id']; ?>"> <?php echo $projec_phase['project_phase_name']; ?> </option>
                   <?php } ?>
                 </select>
               </div>
             </div>
 
-             <span class="f-12 f-w-600 mt-3">Actions</span>
-            <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start move-btn mb-2" onclick="closeopenpopup('popup-movecard','open')"><i class="ti-move m-r-5"></i> Move  </button>
+             <span class="f-12 f-w-600 mt-3"><?php echo __('Actions'); ?></span>
+            <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start move-btn mb-2" onclick="closeopenpopup('popup-movecard','open')"><i class="ti-move m-r-5"></i> <?php echo __('Move'); ?>  </button>
               <div class="popup-movecard design-sec" style="display: none;">
-                <h5>Move Card</h5>
+                <h5><?php echo __('Move Card'); ?></h5>
                 <button type="" class="float-end move-close design-close" onclick="closeopenpopup('popup-movecard','close')"><i class="ti-close"></i></button>
                 <div class="form-group mt-3 w-full">
-                  <span>Suggested</span>
+                  <span><?php echo __('Suggested'); ?></span>
                   <div>
                   <input type="hidden" name="oldstatus" id="oldval" value="<?php echo $task['current_status'];  ?>">
-                  <select aria-label="Movestatus" name="movestatus" id="movestatus" class="form-select js-example-basic-single">
+                  <select aria-label="<?php echo __('Movestatus'); ?>" name="movestatus" id="movestatus" class="form-select js-example-basic-single">
                     <?php foreach($data['status'] as $status){ ?>
-                      <option <?php if($status['status'] == $task['current_status']){ echo "selected";
+                      <option <?php if($status['status'] == $task['current_status']){ echo __('selected');
 } ?> value="<?php echo $status['status']; ?>"><?php echo $status['name']; ?></option>
                     <?php } ?>
                   </select>
-                  <button class="btn btn-primary mt-2" type="button" onclick="movecard()">Move</button>
+                  <button class="btn btn-primary mt-2" type="button" onclick="movecard()"><?php echo __('Move'); ?></button>
                 </div>
                 </div>
 
               </div>
-            <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start copy-btn mb-2" onclick="closeopenpopup('popup-copycard','open')"><i class="ti-files m-r-5"></i> Copy
+            <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start copy-btn mb-2" onclick="closeopenpopup('popup-copycard','open')"><i class="ti-files m-r-5"></i> <?php echo __('Copy'); ?>
             </button>
             <div class="popup-copycard design-sec" style="display: none;">
-                <h5>Copy Card</h5>
+                <h5><?php echo __('Copy Card'); ?></h5>
                 <button type="" class="float-end copy-close design-close" onclick="closeopenpopup('popup-copycard','close')"><i class="ti-close"></i></button>
                 <div class="form-group mt-3 w-full">
                   <form action="" method="post" id="copyfrom">
                     <input type="hidden" name="copycardid" value="<?php echo $task_id; ?>">
-                  <span>Title</span>
+                  <span><?php echo __('Title'); ?></span>
                   <div>
-                    <textarea aria-label="Newtaskname" class="form-control" name="newtaskname"></textarea>
+                    <textarea aria-label="<?php echo __('Newtaskname'); ?>" class="form-control" name="newtaskname"></textarea>
                   </div>
                   <div>
-                  <span class="mt-2">Keep...</span>
+                  <span class="mt-2"><?php echo __('Keep...'); ?></span>
                   </div>
                   <div class="form-group mt-2 mb-0">
-                  <input aria-label="Newchecklist" type="checkbox" name="newchecklist" >
-                  <label for="check1"  class="bg-white w-75">Check List</label>
+                  <input aria-label="<?php echo __('Newchecklist'); ?>" type="checkbox" name="newchecklist" >
+                  <label for="check1"  class="bg-white w-75"><?php echo __('Check List'); ?></label>
                 </div>
                 <div class="form-group mt-2 mb-0">
-                  <input aria-label="Newlabel" type="checkbox" name="newlabel">
-                  <label for="check1"  class="bg-white w-75">Labels </label>
+                  <input aria-label="<?php echo __('Newlabel'); ?>" type="checkbox" name="newlabel">
+                  <label for="check1"  class="bg-white w-75"><?php echo __('Labels'); ?> </label>
                 </div>
                 <div class="form-group mt-2 mb-0">
-                  <input aria-label="Newattachment" type="checkbox" name="newattachment">
-                  <label for="check1"  class="bg-white w-75">Attachments </label>
+                  <input aria-label="<?php echo __('Newattachment'); ?>" type="checkbox" name="newattachment">
+                  <label for="check1"  class="bg-white w-75"><?php echo __('Attachments'); ?> </label>
                 </div>
                 </div>
-                <button class="btn btn-primary waves-effect waves-light" onclick="copynewcard()">Create Card </button>
+                <button class="btn btn-primary waves-effect waves-light" onclick="copynewcard()"><?php echo __('Create Card'); ?> </button>
                 </form>
               </div>
 
-               <span class="f-12 f-w-600">Attachments</span>
-            <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start move-btn" onclick="closeopenpopup('popup-attachment','open')"><i class="ti-upload m-r-5"></i> Attachments  </button>
+               <span class="f-12 f-w-600"><?php echo __('Attachments'); ?></span>
+            <button class="btn waves-effect waves-light bg-white pt-2 pb-2 w-100 text-start move-btn" onclick="closeopenpopup('popup-attachment','open')"><i class="ti-upload m-r-5"></i> <?php echo __('Attachments'); ?>  </button>
               <div class="popup-attachment design-sec" style="display: none;">
-                <h5>Attachments </h5>
+                <h5><?php echo __('Attachments'); ?> </h5>
                 <button type="" class="float-end move-close design-close" onclick="closeopenpopup('popup-attachment','close')"><i class="ti-close"></i></button>
                 <div class="form-group mt-3 ">
 
                  <form id="imageUploadForm" enctype="multipart/form-data">
-                  <input aria-label="Image" type="file" id="imageInput" name="image" >
+                  <input aria-label="<?php echo __('Image'); ?>" type="file" id="imageInput" name="image" >
                   <input type="hidden" name="task_id" value="<?php echo $task_id; ?>">
-                  <input type="hidden" name="page" value="<?php echo "fileattachupload"; ?>">
+                  <input type="hidden" name="page" value="<?php echo __('fileattachupload'); ?>">
                   <input class="btn btn-primary mt-2 float-right" type="submit" value="Upload">
                 </form>
                 </div>

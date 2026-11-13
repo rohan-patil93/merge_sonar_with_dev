@@ -172,7 +172,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
         <div class="card card-custom card-sticky" id="kt_page_sticky_card">
 
             <div class="card-header">
-                <h5>Build Your Template</h5>
+                <h5><?= __('Build Your Template') ?></h5>
                 <div class="card-header-right">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
@@ -198,27 +198,27 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                     <div id="collapseOne3" class="collapse show" data-parent="#accordionExample3">
                                         <div class="card-body">
                                             <div class="form-group row">
-                                                <span  class="col-4 col-form-label form-label">Table</span>
+                                                <span  class="col-4 col-form-label form-label"><?= __('Table') ?></span>
                                                 <div class="col-8">
                                                     <?php
                                                     $list = getListTables();
                                                     ?>
 
                                                     <select aria-label="Select option" class="form-control tablname_new form-select js-example-basic-single">
-                                                        <option value="">Select Table Name</option>
+                                                        <option value=""><?= __('Select Table Name') ?></option>
                                                         <?php foreach($list as $result){?>
                                                             <option value="<?php echo $result['Tables_in_hrstaq_demo_2']; ?>" <?php echo $role['application_table_name']==$result['Tables_in_hrstaq_demo_2']?"selected":""; ?>><?php echo ucwords(str_replace("_"," ",($result['Tables_in_hrstaq_demo_2']))); ?></option>
                                                         <?php } ?>
                                                     <?php if(!isset($_GET['table'])){ ?>
-                                                        <option value="-1">Create New Table</option>
+                                                        <option value="-1"><?= __('Create New Table') ?></option>
                                                     <?php } ?>
                                                     </select>
-                                                    <input aria-label="Enter Table Name" class="form-control space tablname mt-3" placeholder="Enter Table Name" name="tablename" type="text" value="<?php echo $role['application_table_name'];?>"  style="display:none"/>
+                                                    <input aria-label="Enter Table Name" class="form-control space tablname mt-3" placeholder="<?= __('Enter Table Name') ?>" name="tablename" type="text" value="<?php echo $role['application_table_name'];?>"  style="display:none"/>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
-                                                <span  class="col-4 col-form-label">Page Title</span>
+                                                <span  class="col-4 col-form-label"><?= __('Page Title') ?></span>
                                                 <div class="col-8">
                                                     <input aria-label="Formname" class="form-control formname" name="formname" type="text" value="<?php echo $role['page_title']; ?>" id="" Required/>
                                                 </div>
@@ -256,7 +256,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                         <div class="tab-content mt-5" id="myTabContent4">
                                                                             <div class="tab-pane fade show active" id="content-<?php echo $m; ?>" role="tabpanel" aria-labelledby="content_1">
                                                                                 <div class="form-group row">
-                                                                                    <span class="col-6 col-form-label">Field Name</span>
+                                                                                    <span class="col-6 col-form-label"><?= __('Field Name') ?></span>
 
 
                                                                                     <div class="col-6">
@@ -265,26 +265,26 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group row">
-                                                                                    <span  class="col-6 col-form-label ">Field Type</span>
+                                                                                    <span  class="col-6 col-form-label "><?= __('Field Type') ?></span>
                                                                                     <div class="col-6">
                                                                                         <select aria-label="Select option" class=" elementor_fieldtype elementor_fieldtype<?php echo $m; ?> form-select js-example-basic-single" name="elementorfieldtype[]" data-elementory_id="inputbox<?php echo $m; ?>" data-id="<?php echo $m; ?>"  >
-                                                                                            <option value="varchar" data-select2-id="42" <?php echo $result['elementorfieldtype']=="varchar"? "selected":""; ?>>String</option>
-                                                                                            <option value="text" <?php echo $result['elementorfieldtype']=="text"? "selected":""; ?>>Description</option>
-                                                                                            <option value="int" <?php echo  $result['elementorfieldtype']=="int"? "selected":""; ?>>Number</option>
-                                                                                            <option value="decimal" <?php echo  $result['elementorfieldtype']=="double"? "selected":""; ?> >Decimal</option>
-                                                                                            <option value="date" <?php echo  $result['elementorfieldtype']=="date"? "selected":""; ?> >Date</option>
-                                                                                            <option value="datetime" <?php echo  $result['elementorfieldtype']=="datetime"? "selected":""; ?> >Date Time</option>
+                                                                                            <option value="varchar" data-select2-id="42" <?php echo $result['elementorfieldtype']=="varchar"? "selected":""; ?>><?= __('String') ?></option>
+                                                                                            <option value="text" <?php echo $result['elementorfieldtype']=="text"? "selected":""; ?>><?= __('Description') ?></option>
+                                                                                            <option value="int" <?php echo  $result['elementorfieldtype']=="int"? "selected":""; ?>><?= __('Number') ?></option>
+                                                                                            <option value="decimal" <?php echo  $result['elementorfieldtype']=="double"? "selected":""; ?> ><?= __('Decimal') ?></option>
+                                                                                            <option value="date" <?php echo  $result['elementorfieldtype']=="date"? "selected":""; ?> ><?= __('Date') ?></option>
+                                                                                            <option value="datetime" <?php echo  $result['elementorfieldtype']=="datetime"? "selected":""; ?> ><?= __('Date Time') ?></option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group row">
-                                                                                    <span class="col-6 col-form-label">Position</span>
+                                                                                    <span class="col-6 col-form-label"><?= __('Position') ?></span>
                                                                                     <div class="col-6">
                                                                                         <input aria-label="Display Postion[]" class="form-control" type="text" name="display_postion[]" value="<?php echo $result['display_postion']; ?>" />
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group row">
-                                                                                    <span class="col-6 col-form-label">Label & Input One Line</span>
+                                                                                    <span class="col-6 col-form-label"><?= __('Label & Input One Line') ?></span>
                                                                                     <div class="col-6">
                                                                                         <span class="switch switch-icon">
                                                                                             <label>
@@ -296,7 +296,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 </div>
 
 <div class="form-group row">
-    <span  class="col-6 col-form-label ">Type</span>
+    <span  class="col-6 col-form-label "><?= __('Type') ?></span>
     <div class="col-6">
         <select aria-label="Elementorytexttype[]" class="form-control elementor_text_box_type form-select js-example-basic-single" onchange="Getinserttype(this.id,this.value)" id="type" name="elementorytexttype[]" data-elementory_id="inputbox<?php echo $m; ?>" data-id="<?php echo $m; ?>"  data-iddd="<?php echo $role['application_table_name']."#".$key; ?>">
             <?php echo optiontype($result['type'],$filed_array); ?>
@@ -305,13 +305,13 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
 </div>
 
 <div class="form-group row">
-    <span  class="col-6 col-form-label">Label</span>
+    <span  class="col-6 col-form-label"><?= __('Label') ?></span>
     <div class="col-6">
         <input aria-label="Input field" class="form-control elementory_lable elementory_lable<?php echo $m; ?>" data-labletext="labletext<?php echo $m; ?>" data-elementory_id="inputlabel<?php echo $m; ?>" data-id="<?php echo $m; ?>"  type="text"  value="<?php echo str_replace("_"," ",$result['lable']);?>" name="elementorylabel[]" />
     </div>
 </div>
                                                                                 <div class="form-group row">
-                                                                                    <span class="col-6 col-form-label">Display</span>
+                                                                                    <span class="col-6 col-form-label"><?= __('Display') ?></span>
                                                                                     <div class="col-6">
                                                                                         <span class="switch switch-icon">
                                                                                             <label>
@@ -323,7 +323,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 </div>
 
                                                                                 <div class="form-group row">
-                                                                                    <span class="col-6 col-form-label">Insert Display List</span>
+                                                                                    <span class="col-6 col-form-label"><?= __('Insert Display List') ?></span>
                                                                                     <div class="col-6">
                                                                                         <span class="switch switch-icon">
                                                                                             <label>
@@ -338,9 +338,9 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                     <div class="col-6">
                                                                                         <select aria-label="Accordion[]" class="form-control form-select js-example-basic-single
                                                                                         " name="accordion[]" >
-                                                                                        <option value="N" <?php echo $result['accordion']=="N"? "selected":""; ?>>Normal</option>
-                                                                                        <option value="R" <?php echo $result['accordion']=="R"? "selected":""; ?>>Rigth</option>
-                                                                                        <option value="L" <?php echo $result['accordion']=="L"? "selected":""; ?>>Left</option>
+                                                                                        <option value="N" <?php echo $result['accordion']=="N"? "selected":""; ?>><?= __('Normal') ?></option>
+                                                                                        <option value="R" <?php echo $result['accordion']=="R"? "selected":""; ?>><?= __('Right') ?></option>
+                                                                                        <option value="L" <?php echo $result['accordion']=="L"? "selected":""; ?>><?= __('Left') ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -348,16 +348,16 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 <span  class="col-6 col-form-label">Wizard</span>
                                                                                 <div class="col-6">
                                                                                     <select aria-label="Insert View Wizard[]" class="form-control form-select js-example-basic-single" id="exampleSelect1" name="insert_view_wizard[]">
-                                                                                        <option value="1" <?php echo $result['insert_view_wizard']=="1"? "selected":""; ?>>1- Wizard </option>
-                                                                                        <option value="2" <?php echo $result['insert_view_wizard']=="2"? "selected":""; ?>>2- Wizard </option>
-                                                                                        <option value="3" <?php echo $result['insert_view_wizard']=="3"? "selected":""; ?>>3- Wizard </option>
-                                                                                        <option value="4" <?php echo $result['insert_view_wizard']=="4"? "selected":""; ?>>4- Wizard </option>
-                                                                                        <option value="5" <?php echo $result['insert_view_wizard']=="5"? "selected":""; ?>>5- Wizard </option>
-                                                                                        <option value="6" <?php echo $result['insert_view_wizard']=="6"? "selected":""; ?>>6- Wizard </option>
-                                                                                        <option value="7" <?php echo $result['insert_view_wizard']=="7"? "selected":""; ?>>7- Wizard </option>
-                                                                                        <option value="8" <?php echo $result['insert_view_wizard']=="8"? "selected":""; ?>>8- Wizard </option>
-                                                                                        <option value="9" <?php echo $result['insert_view_wizard']=="9"? "selected":""; ?>>9- Wizard </option>
-                                                                                        <option value="10" <?php echo $result['insert_view_wizard']=="10"? "selected":""; ?>>10- Wizard </option>
+                                                                                        <option value="1" <?php echo $result['insert_view_wizard']=="1"? "selected":""; ?>><?= __('1- Wizard') ?></option>
+                                                                                        <option value="2" <?php echo $result['insert_view_wizard']=="2"? "selected":""; ?>><?= __('2- Wizard') ?></option>
+                                                                                        <option value="3" <?php echo $result['insert_view_wizard']=="3"? "selected":""; ?>><?= __('3- Wizard') ?></option>
+                                                                                        <option value="4" <?php echo $result['insert_view_wizard']=="4"? "selected":""; ?>><?= __('4- Wizard') ?></option>
+                                                                                        <option value="5" <?php echo $result['insert_view_wizard']=="5"? "selected":""; ?>><?= __('5- Wizard') ?></option>
+                                                                                        <option value="6" <?php echo $result['insert_view_wizard']=="6"? "selected":""; ?>><?= __('6- Wizard') ?></option>
+                                                                                        <option value="7" <?php echo $result['insert_view_wizard']=="7"? "selected":""; ?>><?= __('7- Wizard') ?></option>
+                                                                                        <option value="8" <?php echo $result['insert_view_wizard']=="8"? "selected":""; ?>><?= __('8- Wizard') ?></option>
+                                                                                        <option value="9" <?php echo $result['insert_view_wizard']=="9"? "selected":""; ?>><?= __('9- Wizard') ?></option>
+                                                                                        <option value="10" <?php echo $result['insert_view_wizard']=="10"? "selected":""; ?>><?= __('10- Wizard') ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -392,7 +392,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 <span  class="col-5 col-form-label">Default Value</span>
                                                                                 <div class="col-7">
                                                                                     <div class="input-group">
-                                                                                        <input aria-label="Input field" type="text" class="form-control valuesdefoult" data-id="<?php echo $m; ?>" name="valuesdefoult[]" value="<?php echo $result['valuesdefoult']; ?>" placeholder="Search for...">
+                                                                                        <input aria-label="Input field" type="text" class="form-control valuesdefoult" data-id="<?php echo $m; ?>" name="valuesdefoult[]" value="<?php echo $result['valuesdefoult']; ?>" placeholder="<?= __('Search for...') ?>">
                                                                                         <div class="input-group-append">
                                                                                             <button class="btn btn-secondary "  type="button">
                                                                                                 <i class="flaticon-coins"></i></button>
@@ -449,7 +449,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                             </div>
 
                                                             <div class="form-group row">
-                                                                <span  class="col-5 col-form-label">Label</span>
+                                                                <span  class="col-5 col-form-label"><?= __('Label') ?></span>
                                                                 <div class="col-7">
                                                                     <input aria-label="Fileuplodinglabel" class="form-control fileuplodinglablel" type="text" name="fileuplodinglabel"  value="<?php echo $file_upload['fileuplodinglabel']!=""?$file_upload['fileuplodinglabel']:"File Upload"; ?>" />
                                                                 </div>
@@ -512,10 +512,10 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 <span  class="col-5 col-form-label">Function Type</span>
                                                                                 <div class="col-7">
                                                                                     <select aria-label="Select option" class="form-control function_type function_type<?php echo $k; ?> form-select js-example-basic-single" data-id="<?php echo $k; ?>" data-select2-id="" name="functiontype[]" tabindex="-1">
-                                                                                        <option value="save" <?php echo $row['functiontype']=="2"? "selected":""; ?> >save</option>
-                                                                                        <option value="saveandcontinue" <?php echo $row['functiontype']=="saveandcontinue"? "selected":""; ?>>Save & continue</option>
-                                                                                        <option value="update" <?php echo $row['functiontype']=="update"? "selected":""; ?> >Update</option>
-                                                                                        <option value="print" <?php echo $row['functiontype']=="print"? "selected":""; ?>>Print</option>
+                                                                                        <option value="save" <?php echo $row['functiontype']=="2"? "selected":""; ?> ><?= __('save') ?></option>
+                                                                                        <option value="saveandcontinue" <?php echo $row['functiontype']=="saveandcontinue"? "selected":""; ?>><?= __('Save & continue') ?></option>
+                                                                                        <option value="update" <?php echo $row['functiontype']=="update"? "selected":""; ?> ><?= __('Update') ?></option>
+                                                                                        <option value="print" <?php echo $row['functiontype']=="print"? "selected":""; ?>><?= __('Print') ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -523,11 +523,11 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 <span  class="col-5 col-form-label">Size</span>
                                                                                 <div class="col-7">
                                                                                     <select aria-label="Select option" class="form-control button_size button_sizes<?php echo $k; ?> form-select js-example-basic-single" id="" data-id="<?php echo $k; ?>" name="buttonsize[]" data-select2-id="" tabindex="-1">
-                                                                                        <option value="btn-xs" <?php echo $row['buttonsize']=="btn-xs"? "selected":""; ?>>Extra Small</option>
-                                                                                        <option value="btn-sm" <?php echo $row['buttonsize']=="btn-sm"? "selected":""; ?>>Small</option>
-                                                                                        <option value="" <?php echo $row['buttonsize']==""? "selected":""; ?>>Medium</option>
-                                                                                        <option value="btn-lg" <?php echo $row['buttonsize']=="btn-lg"? "selected":""; ?>>Large</option>
-                                                                                        <option value="btn-lg btn-block" <?php echo $row['buttonsize']=="btn-lg btn-block"? "selected":""; ?>>Extra Large</option>
+                                                                                        <option value="btn-xs" <?php echo $row['buttonsize']=="btn-xs"? "selected":""; ?>><?= __('Extra Small') ?></option>
+                                                                                        <option value="btn-sm" <?php echo $row['buttonsize']=="btn-sm"? "selected":""; ?>><?= __('Small') ?></option>
+                                                                                        <option value="" <?php echo $row['buttonsize']==""? "selected":""; ?>><?= __('Medium') ?></option>
+                                                                                        <option value="btn-lg" <?php echo $row['buttonsize']=="btn-lg"? "selected":""; ?>><?= __('Large') ?></option>
+                                                                                        <option value="btn-lg btn-block" <?php echo $row['buttonsize']=="btn-lg btn-block"? "selected":""; ?>><?= __('Extra Large') ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -535,7 +535,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 <span  class="col-5 col-form-label">Column Width</span>
                                                                                 <div class="col-7">
                                                                                     <select aria-label="Select option" class="form-control buttonwidth buttonwidth<?php echo $k; ?> form-select js-example-basic-single" id="" data-id="<?php echo $k; ?>" name="buttonwidth[]" data-select2-id="" tabindex="-1">
-                                                                                        <option value="12" <?php echo $row['buttonwidth']=="12"? "selected":""; ?>>Default</option>
+                                                                                        <option value="12" <?php echo $row['buttonwidth']=="12"? "selected":""; ?>><?= __('Default') ?></option>
                                                                                         <?php echo  optiontype($row['buttonwidth'],$widtharray); ?>
                                                                                     </select>
                                                                                 </div>
@@ -649,17 +649,17 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                             <div id="collapseFour3" class="collapse" data-parent="#accordionExample3">
                                                                 <div class="card-body">
                                                                     <div class="form-group row">
-                                                                        <span  class="col-5 col-form-label">Type</span>
+                                                                        <span  class="col-5 col-form-label"><?= __('Type') ?></span>
                                                                         <div class="col-7">
                                                                             <select aria-label="Param" class="form-control form-select js-example-basic-single" id="" name="param" data-select2-id="" >
-                                                                                <option value="" data-select2-id="">Number & Text</option>
-                                                                                <option value="" data-select2-id="">None</option>
-                                                                                <option value="" data-select2-id="">Text</option>
-                                                                                <option value="" data-select2-id="">Icon</option>
-                                                                                <option value="" data-select2-id="">Number</option>
-                                                                                <option value="" data-select2-id="">Progress Bar</option>
-                                                                                <option value="" data-select2-id="">Number & Text</option>
-                                                                                <option value="" data-select2-id="">Icon & Text</option>
+                                                                                <option value="" data-select2-id=""><?= __('Number & Text') ?></option>
+                                                                                <option value="" data-select2-id=""><?= __('None') ?></option>
+                                                                                <option value="" data-select2-id=""><?= __('Text') ?></option>
+                                                                                <option value="" data-select2-id=""><?= __('Icon') ?></option>
+                                                                                <option value="" data-select2-id=""><?= __('Number') ?></option>
+                                                                                <option value="" data-select2-id=""><?= __('Progress Bar') ?></option>
+                                                                                <option value="" data-select2-id=""><?= __('Number & Text') ?></option>
+                                                                                <option value="" data-select2-id=""><?= __('Icon & Text') ?></option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -667,10 +667,10 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                         <span  class="col-5 col-form-label">Shape</span>
                                                                         <div class="col-7">
                                                                             <select aria-label="Param" class="form-control form-select js-example-basic-single"  id="" name="param" data-select2-id="" tabindex="-1">
-                                                                                <option value="" data-select2-id="">Circle</option>
-                                                                                <option value="" data-select2-id="">Square</option>
-                                                                                <option value="" data-select2-id="">Rounded</option>
-                                                                                <option value="" data-select2-id="">None</option>
+                                                                                <option value="" data-select2-id=""><?= __('Circle') ?></option>
+                                                                                <option value="" data-select2-id=""><?= __('Square') ?></option>
+                                                                                <option value="" data-select2-id=""><?= __('Rounded') ?></option>
+                                                                                <option value="" data-select2-id=""><?= __('None') ?></option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -745,7 +745,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                                                                             <div class="dropzone dropzone-default dropzone-primary digits" id="kt_dropzone_2">
                                                                                                 <div class="dropzone-msg dz-message needsclick">
-                                                                                                    <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                                                                                    <h3 class="dropzone-msg-title"><?= __('Drop files here or click to upload.') ?></h3>
                                                                                                     <span class="dropzone-msg-desc">Upload up to 10 files</span>
                                                                                                 </div>
                                                                                             </div>

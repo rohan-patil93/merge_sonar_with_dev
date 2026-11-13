@@ -41,7 +41,7 @@ $typeofquestion= array('1'=>'MCQ','2'=>'FT');
    <div class="card-body alert alert-white" >
       <div class="col-6">
                                     <div class="d-flex flex-column font-weight-bold">
-                                       <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg">Peers Assessment</a>
+                                       <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg"><?php echo __('Peers Assessment'); ?></a>
                                     </div>
 
                                  <?php  if($employee_submitted==1) {
@@ -88,23 +88,23 @@ $typeofquestion= array('1'=>'MCQ','2'=>'FT');
                                           <?php if($emp_que['options_display_type']== $typeofquestion[1] ) {
                                            $response_answered_option = json_decode($employee_responses[$emp_que['id']]['response_option'],1)[1];
                                            ?>
-                                           <select aria-label="Select option" name="response_option<?php echo $emp_que['id'];?>" class="form-control" id="response_option_<?php echo $emp_que['id'];?>">
+                                           <select aria-label="<?php echo __('Select option'); ?>" name="response_option<?php echo $emp_que['id'];?>" class="form-control" id="response_option_<?php echo $emp_que['id'];?>">
                                               <?php foreach($optionlist as $opkey=>$opts) { $optiondata = $opkey."||".$opts; ?>
-                                              <option value="<?php echo $optiondata; ?>" <?php if($opts==$response_answered_option){ echo "selected";
+                                              <option value="<?php echo $optiondata; ?>" <?php if($opts==$response_answered_option){ echo __('selected');
 } ?> ><?php echo $opts;?></option>
                                            <?php } ?>
                                         </select>
                                      <?php } elseif($emp_que['options_display_type']== $typeofquestion[2] ) {
                                        $response_answered_option = json_decode($employee_responses[$emp_que['id']]['response_option'],1)[0];
                                        ?>
-                                       <textarea aria-label="Text area" name="response_option<?php echo $emp_que['id'];?>" class="form-control col-md-12"> <?php echo $response_answered_option; ?></textarea>
+                                       <textarea aria-label="<?php echo __('Text area'); ?>" name="response_option<?php echo $emp_que['id'];?>" class="form-control col-md-12"> <?php echo $response_answered_option; ?></textarea>
                                     <?php } ?>
                                  </div>
 
                               <?php } ?>
 
-                              <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="selfsubmit">Submit</button>
-                              <button id="kt_login_signin_submit_continue" class="btn btn-secondary btn-shadow-hover font-weight-bold mr-2" name="selfsave">Save & Finish Later</button>
+                              <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="selfsubmit"><?php echo __('Submit'); ?></button>
+                              <button id="kt_login_signin_submit_continue" class="btn btn-secondary btn-shadow-hover font-weight-bold mr-2" name="selfsave"><?php echo __('Save & Finish Later'); ?></button>
                            </form>
                         <?php } ?>
    </div>

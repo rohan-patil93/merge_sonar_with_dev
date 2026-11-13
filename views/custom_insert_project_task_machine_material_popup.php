@@ -49,8 +49,8 @@ $listtype  = array('MA'=>'Machine' , 'MT'=>'Material');
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title"> Add <?php echo $listtype[$type]; ?> </h5>
-    <button type="button" class="btn-close "  aria-label="Close" onclick="taskdetailspopup(<?php echo $task['id']; ?>)"></button>
+    <h5 class="modal-title"> <?php echo __('Add'); ?> <?php echo $listtype[$type]; ?> </h5>
+    <button type="button" class="btn-close "  aria-label="<?php echo __('Close'); ?>" onclick="taskdetailspopup(<?php echo $task['id']; ?>)"></button>
 </div>
 <div class="modal-body">
     <form class="kt-form " id="submitformadditionalservicemm" >
@@ -62,28 +62,28 @@ $listtype  = array('MA'=>'Machine' , 'MT'=>'Material');
 
             <div class="form-group col-lg-6" id="machine">
                 <span class=""><?php echo $listtype[$type]; ?></span>
-                <select aria-label="Project Machine Material" class="form-control js-example-basic-single"  name="project_machine_material_id" id="project_machine_material_id">
-                    <option value="0"> Select Any One <?php echo $listtype[$type]; ?>e</option>
+                <select aria-label="<?php echo __('Project Machine Material'); ?>" class="form-control js-example-basic-single"  name="project_machine_material_id" id="project_machine_material_id">
+                    <option value="0"> <?php echo __('Select Any One'); ?> <?php echo $listtype[$type]; ?><?php echo __('e'); ?></option>
                     <?php foreach($project_machine_material as $machine){
                           if($machine['type']==$type){ ?>
-                        <option <?php if($row['project_machine_material_id'] == $machine['id']){ echo "selected";
+                        <option <?php if($row['project_machine_material_id'] == $machine['id']){ echo __('selected');
 } ?> value="<?php echo $machine['id']; ?>"> <?php echo $machine['name']; ?> </option>
                     <?php }
                         } ?>
                 </select>
             </div>
             <div class="form-group col-lg-6">
-                <span class="">Description</span>
-                <textarea aria-label="Description" class="form-control" name="description" id="description"><?php echo $row['description']; ?></textarea>
+                <span class=""><?php echo __('Description'); ?></span>
+                <textarea aria-label="<?php echo __('Description'); ?>" class="form-control" name="description" id="description"><?php echo $row['description']; ?></textarea>
             </div>
 
             <div class=" form-group col-lg-6">
-                <span class="">Start Date</span>
-                <input aria-label="Start Date" class="form-control datepicker" type="text" id="start_date" name="start_date" value="<?php echo $row['start_date']; ?>">
+                <span class=""><?php echo __('Start Date'); ?></span>
+                <input aria-label="<?php echo __('Start Date'); ?>" class="form-control datepicker" type="text" id="start_date" name="start_date" value="<?php echo $row['start_date']; ?>">
             </div>
             <div class="form-group col-lg-6">
-                <span class="">End Date</span>
-                <input aria-label="End Date" class="form-control datepicker" type="text" id="end_date" name="end_date" value="<?php echo $row['end_date']; ?>">
+                <span class=""><?php echo __('End Date'); ?></span>
+                <input aria-label="<?php echo __('End Date'); ?>" class="form-control datepicker" type="text" id="end_date" name="end_date" value="<?php echo $row['end_date']; ?>">
             </div>
 
         </div>
@@ -94,7 +94,7 @@ $listtype  = array('MA'=>'Machine' , 'MT'=>'Material');
             <input type="hidden" name="is_active" id='is_active' value="0">
             <input type="hidden" name="id" id='id' value="<?php echo $_POST['id'] ?>">
 
-            <button type="button" class="btn btn-primary mr-2" onclick="submitsubfrom()" >Save</button>
+            <button type="button" class="btn btn-primary mr-2" onclick="submitsubfrom()" ><?php echo __('Save'); ?></button>
         </div>
     </form>
 </div>

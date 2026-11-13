@@ -24,7 +24,7 @@ $serviceMode = resolveContractAmcServiceMode(array('service_mode' => $res['servi
 
 $isInhouse = ($serviceMode == 'inhouse');
 
-$assigneeLabel = $isInhouse ? 'Employee' : 'Technician';
+$assigneeLabel = $isInhouse ? __('Employee') : __('Technician');
 
 $checklist_items = $res['checklist_items'] ?? array();
 
@@ -42,7 +42,7 @@ $currentStatus = (int) ($schedule['visit_status'] ?? $schedule['current_status']
 
 $isViewOnly = !$canExecute;
 
-$statusLabel = htmlspecialchars($schedule['status_label'] ?? 'Pending', ENT_QUOTES, 'UTF-8');
+$statusLabel = htmlspecialchars(__($schedule['status_label'] ?? 'Pending'), ENT_QUOTES, 'UTF-8');
 
 $statusClass = htmlspecialchars($schedule['status_class'] ?? 'bg-primary', ENT_QUOTES, 'UTF-8');
 
@@ -406,7 +406,7 @@ if ($checklistTotal > 0) {
 
             <i class="ti-<?php echo $isViewOnly ? 'eye' : 'settings'; ?> me-1"></i>
 
-            <?php echo $isViewOnly ? 'View Visit' : 'Manage Visit'; ?>
+            <?php echo $isViewOnly ? __('View Visit') : __('Manage Visit'); ?>
 
         </h5>
 
@@ -418,7 +418,7 @@ if ($checklistTotal > 0) {
 
     </div>
 
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 
 </div>
 
@@ -432,7 +432,7 @@ if ($checklistTotal > 0) {
 
             <i class="ti-na"></i>
 
-            <div>This contract has been cancelled. Service visits cannot be started or updated. This visit is view-only.</div>
+            <div><?= __('This contract has been cancelled. Service visits cannot be started or updated. This visit is view-only.') ?></div>
 
         </div>
 
@@ -442,7 +442,7 @@ if ($checklistTotal > 0) {
 
             <i class="ti-info-alt"></i>
 
-            <div>Contract must be approved before service visits can be started or updated. This visit is view-only.</div>
+            <div><?= __('Contract must be approved before service visits can be started or updated. This visit is view-only.') ?></div>
 
         </div>
 
@@ -460,7 +460,7 @@ if ($checklistTotal > 0) {
 
                 <div class="contract-amc-info-card">
 
-                    <span class="contract-amc-info-label">Planned</span>
+                    <span class="contract-amc-info-label"><?= __('Planned') ?></span>
 
                     <span class="contract-amc-info-value"><?php echo $plannedDisplay; ?></span>
 
@@ -472,7 +472,7 @@ if ($checklistTotal > 0) {
 
                 <div class="contract-amc-info-card">
 
-                    <span class="contract-amc-info-label">Status</span>
+                    <span class="contract-amc-info-label"><?= __('Status') ?></span>
 
                     <span class="contract-amc-info-value">
 
@@ -488,7 +488,7 @@ if ($checklistTotal > 0) {
 
                 <div class="contract-amc-info-card">
 
-                    <span class="contract-amc-info-label">Actual Start</span>
+                    <span class="contract-amc-info-label"><?= __('Actual Start') ?></span>
 
                     <span class="contract-amc-info-value"><?php echo $actualStartDisplay; ?></span>
 
@@ -500,7 +500,7 @@ if ($checklistTotal > 0) {
 
                 <div class="contract-amc-info-card">
 
-                    <span class="contract-amc-info-label">Actual End</span>
+                    <span class="contract-amc-info-label"><?= __('Actual End') ?></span>
 
                     <span class="contract-amc-info-value"><?php echo $actualEndDisplay; ?></span>
 
@@ -520,9 +520,9 @@ if ($checklistTotal > 0) {
 
             <?php if ($isInhouse) { ?>
 
-            <select name="employee_id" class="form-control js-example-basic-single contract-amc-assignee-select" data-schedule-id="<?php echo $schedule_id; ?>" data-assignee-type="employee" aria-label="Employee Id">
+            <select name="employee_id" class="form-control js-example-basic-single contract-amc-assignee-select" data-schedule-id="<?php echo $schedule_id; ?>" data-assignee-type="employee" aria-label="<?= __('Employee Id') ?>">
 
-                <option value="">Select employee</option>
+                <option value=""><?= __('Select employee') ?></option>
 
                 <?php if (count((array)$employees) > 0) {
 
@@ -538,7 +538,7 @@ if ($checklistTotal > 0) {
 
             <?php if (!$employeeIsOverride && $assetDefaultEmployeeId > 0 && $effectiveEmployeeId == $assetDefaultEmployeeId) { ?>
 
-            <small class="text-muted d-block mt-1">Default for this asset</small>
+            <small class="text-muted d-block mt-1"><?= __('Default for this asset') ?></small>
 
             <?php } ?>
 
@@ -548,7 +548,7 @@ if ($checklistTotal > 0) {
 
                 <button type="button" class="btn btn-outline-secondary btn-sm contract-amc-reset-assignee-btn" data-schedule-id="<?php echo $schedule_id; ?>">
 
-                    <i class="ti-reload me-1"></i> Reset to asset default
+                    <i class="ti-reload me-1"></i> <?= __('Reset to asset default') ?>
 
                 </button>
 
@@ -558,9 +558,9 @@ if ($checklistTotal > 0) {
 
             <?php } else { ?>
 
-            <select name="technician_id" class="form-control js-example-basic-single contract-amc-assignee-select" data-schedule-id="<?php echo $schedule_id; ?>" data-assignee-type="technician" aria-label="Technician Id">
+            <select name="technician_id" class="form-control js-example-basic-single contract-amc-assignee-select" data-schedule-id="<?php echo $schedule_id; ?>" data-assignee-type="technician" aria-label="<?= __('Technician Id') ?>">
 
-                <option value="">Select technician</option>
+                <option value=""><?= __('Select technician') ?></option>
 
                 <?php if (count((array)$technicians) > 0) {
 
@@ -576,7 +576,7 @@ if ($checklistTotal > 0) {
 
             <?php if (!$technicianIsOverride && $assetDefaultTechnicianId > 0 && $effectiveTechnicianId == $assetDefaultTechnicianId) { ?>
 
-            <small class="text-muted d-block mt-1">Default for this asset</small>
+            <small class="text-muted d-block mt-1"><?= __('Default for this asset') ?></small>
 
             <?php } ?>
 
@@ -586,7 +586,7 @@ if ($checklistTotal > 0) {
 
                 <button type="button" class="btn btn-outline-secondary btn-sm contract-amc-reset-tech-btn" data-schedule-id="<?php echo $schedule_id; ?>">
 
-                    <i class="ti-reload me-1"></i> Reset to asset default
+                    <i class="ti-reload me-1"></i> <?= __('Reset to asset default') ?>
 
                 </button>
 
@@ -602,21 +602,21 @@ if ($checklistTotal > 0) {
 
                 <?php if ($isInhouse) { ?>
 
-                <?php echo ($effectiveEmployeeName != '' && $effectiveEmployeeName != '—') ? $effectiveEmployeeName : 'Unassigned'; ?>
+                <?php echo ($effectiveEmployeeName != '' && $effectiveEmployeeName != '—') ? $effectiveEmployeeName : __('Unassigned'); ?>
 
                 <?php if ($employeeIsOverride) { ?>
 
-                <span class="badge bg-warning text-dark ms-1">override</span>
+                <span class="badge bg-warning text-dark ms-1"><?= __('override') ?></span>
 
                 <?php } ?>
 
                 <?php } else { ?>
 
-                <?php echo ($effectiveTechnicianName != '' && $effectiveTechnicianName != '—') ? $effectiveTechnicianName : 'Unassigned'; ?>
+                <?php echo ($effectiveTechnicianName != '' && $effectiveTechnicianName != '—') ? $effectiveTechnicianName : __('Unassigned'); ?>
 
                 <?php if ($technicianIsOverride) { ?>
 
-                <span class="badge bg-warning text-dark ms-1">override</span>
+                <span class="badge bg-warning text-dark ms-1"><?= __('override') ?></span>
 
                 <?php } ?>
 
@@ -636,13 +636,13 @@ if ($checklistTotal > 0) {
 
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
 
-                <h6 class="contract-amc-section-title mb-0">Checklist</h6>
+                <h6 class="contract-amc-section-title mb-0"><?= __('Checklist') ?></h6>
 
                 <span class="contract-amc-checklist-progress">
 
-                    <?php echo $checklistDoneCount; ?> / <?php echo $checklistTotal; ?> completed
+                    <?php echo $checklistDoneCount; ?> / <?php echo $checklistTotal; ?> <?= __('completed') ?>
 
-                    <?php if ($canExecute) { ?><span class="text-danger ms-1">(required before finish)</span><?php } ?>
+                    <?php if ($canExecute) { ?><span class="text-danger ms-1"><?= __('(required before finish)') ?></span><?php } ?>
 
                 </span>
 
@@ -656,11 +656,11 @@ if ($checklistTotal > 0) {
 
                         <tr>
 
-                            <th scope="col" style="width:45%;">Item</th>
+                            <th scope="col" style="width:45%;"><?= __('Item') ?></th>
 
-                            <th scope="col" style="width:18%;">Done</th>
+                            <th scope="col" style="width:18%;"><?= __('Done') ?></th>
 
-                            <th scope="col" style="width:37%;">Remarks</th>
+                            <th scope="col" style="width:37%;"><?= __('Remarks') ?></th>
 
                         </tr>
 
@@ -688,7 +688,7 @@ if ($checklistTotal > 0) {
 
                             <td>
 
-                                <span class="contract-amc-checklist-item-name"><?php echo htmlspecialchars($checkName, ENT_QUOTES, 'UTF-8'); ?></span>
+                                <span class="contract-amc-checklist-item-name"><?php echo htmlspecialchars(__($checkName), ENT_QUOTES, 'UTF-8'); ?></span>
 
                                 <input type="hidden" name="checklist_items[<?php echo $ci; ?>]" value="<?php echo htmlspecialchars($checkName, ENT_QUOTES, 'UTF-8'); ?>">
 
@@ -710,9 +710,10 @@ if ($checklistTotal > 0) {
 
                                 <div class="form-check mb-0">
 
-                                    <input type="checkbox" class="form-check-input" name="checklist_status[<?php echo htmlspecialchars($checkKey, ENT_QUOTES, 'UTF-8'); ?>]" value="1" id="contract_amc_chk_<?php echo $ci; ?>" <?php echo $isDone ? 'checked' : ''; ?> aria-label="Input">
+                                    <input type="checkbox" class="form-check-input" name="checklist_status[<?php echo htmlspecialchars($checkKey, ENT_QUOTES, 'UTF-8'); ?>]" value="1" id="contract_amc_chk_<?php echo $ci; ?>" <?php echo $isDone ? 'checked' : ''; ?> aria-label="<?= __('Input') ?>">
 
-                                    <label class="form-check-label f-12" for="contract_amc_chk_<?php echo $ci; ?>">Done</label>
+
+                                    <label class="form-check-label f-12" for="contract_amc_chk_<?php echo $ci; ?>"><?= __('Done') ?></label>
 
                                 </div>
 
@@ -722,7 +723,7 @@ if ($checklistTotal > 0) {
 
                                     <i class="ti-<?php echo $isDone ? 'check' : 'minus'; ?>"></i>
 
-                                    <?php echo $isDone ? 'Done' : 'Pending'; ?>
+                                    <?php echo $isDone ? __('Done') : __('Pending'); ?>
 
                                 </span>
 
@@ -734,13 +735,13 @@ if ($checklistTotal > 0) {
 
                                 <?php if ($canExecute) { ?>
 
-                                <input type="text" class="form-control form-control-sm" name="checklist_remarks[<?php echo $ci; ?>]" value="<?php echo htmlspecialchars($savedRemarks, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Add remarks" aria-label="Add remarks">
+                                <input type="text" class="form-control form-control-sm" name="checklist_remarks[<?php echo $ci; ?>]" value="<?php echo htmlspecialchars($savedRemarks, ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= __('Add remarks') ?>" aria-label="<?= __('Add remarks') ?>">
 
                                 <?php } else { ?>
 
                                 <span class="contract-amc-checklist-remarks<?php echo ($savedRemarks == '') ? ' empty' : ''; ?>">
 
-                                    <?php echo ($savedRemarks != '') ? htmlspecialchars($savedRemarks, ENT_QUOTES, 'UTF-8') : 'No remarks'; ?>
+                                    <?php echo ($savedRemarks != '') ? htmlspecialchars($savedRemarks, ENT_QUOTES, 'UTF-8') : __('No remarks'); ?>
 
                                 </span>
 
@@ -768,7 +769,7 @@ if ($checklistTotal > 0) {
 
     <div class="modal-footer contract-amc-visit-modal-footer">
 
-        <button type="button" class="btn btn-light border contract-amc-visit-close-btn" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-light border contract-amc-visit-close-btn" data-bs-dismiss="modal"><?= __('Close') ?></button>
 
         <?php if ($canExecute) { ?>
 
@@ -776,7 +777,7 @@ if ($checklistTotal > 0) {
 
             <button type="button" class="btn btn-warning contract-amc-action-btn" data-action="start">
 
-                <i class="ti-control-play me-1"></i> Start Job
+                <i class="ti-control-play me-1"></i> <?= __('Start Job') ?>
 
             </button>
 
@@ -786,7 +787,7 @@ if ($checklistTotal > 0) {
 
             <button type="button" class="btn btn-success contract-amc-action-btn" data-action="finish">
 
-                <i class="ti-check me-1"></i> Finish Job
+                <i class="ti-check me-1"></i> <?= __('Finish Job') ?>
 
             </button>
 
@@ -794,7 +795,7 @@ if ($checklistTotal > 0) {
 
             <button type="button" class="btn btn-primary contract-amc-save-checklist-btn">
 
-                <i class="ti-save me-1"></i> Save Checklist
+                <i class="ti-save me-1"></i> <?= __('Save Checklist') ?>
 
             </button>
 
@@ -836,7 +837,7 @@ window.initContractAmcScheduleModalHandlers = function() {
 
                 if (r.status == 'success') {
 
-                    tostarnotify('top', 'right', 'fa fa-thumbs-up', 'form-label label label-success', 'animated flipInX', 'animated flipOutX', r.message || 'Saved', '');
+                    tostarnotify('top', 'right', 'fa fa-thumbs-up', 'form-label label label-success', 'animated flipInX', 'animated flipOutX', r.message || <?= json_encode(__('Saved')) ?>, '');
 
                     $("#kt_modal_contract_amc_schedule").modal('hide');
 
@@ -844,7 +845,7 @@ window.initContractAmcScheduleModalHandlers = function() {
 
                 } else {
 
-                    tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', r.message || 'Failed', '');
+                    tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', r.message || <?= json_encode(__('Failed')) ?>, '');
 
                 }
 
@@ -902,7 +903,7 @@ window.initContractAmcScheduleModalHandlers = function() {
 
                 if (r.status != 'success') {
 
-                    tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', r.message || 'Assign failed', '');
+                    tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', r.message || <?= json_encode(__('Assign failed')) ?>, '');
 
                 }
 
@@ -938,7 +939,7 @@ window.initContractAmcScheduleModalHandlers = function() {
 
                 if (r.status == 'success') {
 
-                    tostarnotify('top', 'right', 'fa fa-thumbs-up', 'form-label label label-success', 'animated flipInX', 'animated flipOutX', r.message || 'Reset', '');
+                    tostarnotify('top', 'right', 'fa fa-thumbs-up', 'form-label label label-success', 'animated flipInX', 'animated flipOutX', r.message || <?= json_encode(__('Reset')) ?>, '');
 
                     $("#kt_modal_contract_amc_schedule").modal('hide');
 
@@ -946,7 +947,7 @@ window.initContractAmcScheduleModalHandlers = function() {
 
                 } else {
 
-                    tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', r.message || 'Reset failed', '');
+                    tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', r.message || <?= json_encode(__('Reset failed')) ?>, '');
 
                 }
 

@@ -45,47 +45,47 @@ $projec_phases = $data['phases'];
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title"> Add Sub Task </h5>
-    <button type="button" class="btn-close "  aria-label="Close"></button>
+    <h5 class="modal-title"> <?php echo __('Add Sub Task'); ?> </h5>
+    <button type="button" class="btn-close "  aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body">
     <form class="kt-form " id="submitformadditionalservice" >
         <div class="row col-lg-12">
             <div class="form-group col-lg-6">
-                <span class="">Task Name</span>
-                <input aria-label="Task Name" class="form-control" type="text" id="task_name    " name="task_name    " value="">
+                <span class=""><?php echo __('Task Name'); ?></span>
+                <input aria-label="<?php echo __('Task Name'); ?>" class="form-control" type="text" id="task_name    " name="task_name    " value="">
             </div>
             <div class="form-group col-lg-6">
-                <span class="">Descrption</span>
-                <textarea aria-label="Description" class="form-control" name="description" id="description"></textarea>
+                <span class=""><?php echo __('Descrption'); ?></span>
+                <textarea aria-label="<?php echo __('Description'); ?>" class="form-control" name="description" id="description"></textarea>
             </div>
             <div class="form-group col-lg-6">
-                <span class="">Task Owner</span>
-                <select aria-label="Assigen" class="form-control js-example-basic-single"  name="assigen_id" id="assigne">
-                    <option value="0"> Select Assigner</option>
+                <span class=""><?php echo __('Task Owner'); ?></span>
+                <select aria-label="<?php echo __('Assigen'); ?>" class="form-control js-example-basic-single"  name="assigen_id" id="assigne">
+                    <option value="0"> <?php echo __('Select Assigner'); ?></option>
                     <?php foreach($project_teams as $team){ ?>
                         <option value="<?php echo $team['id']; ?>"> <?php echo $team['display_name']; ?> </option>
                     <?php } ?>
                 </select>
             </div>
             <div class="form-group col-lg-6">
-                <span class="">Project Phase</span>
-                <select aria-label="Project Phase" class="form-control js-example-basic-single"  name="project_phase_id" id="project_phase_id">
-                    <option value="0"> Select Project Phase</option>
+                <span class=""><?php echo __('Project Phase'); ?></span>
+                <select aria-label="<?php echo __('Project Phase'); ?>" class="form-control js-example-basic-single"  name="project_phase_id" id="project_phase_id">
+                    <option value="0"> <?php echo __('Select Project Phase'); ?></option>
                     <?php foreach($projec_phases as $phase){ ?>
-                        <option <?php if($phase['id']==$task['project_phase_id']){ echo "selected";
+                        <option <?php if($phase['id']==$task['project_phase_id']){ echo __('selected');
 } ?> value="<?php echo $phase['id']; ?>"> <?php echo $phase['project_phase_name']; ?> </option>
                     <?php } ?>
                 </select>
             </div>
 
             <div class="form-group col-lg-6">
-                <span class="">Start Date</span>
-                <input aria-label="Planned Start" type="text" name="planned_start" value="<?php echo fromDate($task['planned_start']); ?>" class="form-control datepicker">
+                <span class=""><?php echo __('Start Date'); ?></span>
+                <input aria-label="<?php echo __('Planned Start'); ?>" type="text" name="planned_start" value="<?php echo fromDate($task['planned_start']); ?>" class="form-control datepicker">
             </div>
             <div class="form-group col-lg-6">
-                <span class="">Due Date</span>
-                <input aria-label="Planned Finish" type="text" name="planned_finish" value="<?php echo fromDate($task['planned_start']); ?>" class="form-control datepicker">
+                <span class=""><?php echo __('Due Date'); ?></span>
+                <input aria-label="<?php echo __('Planned Finish'); ?>" type="text" name="planned_finish" value="<?php echo fromDate($task['planned_start']); ?>" class="form-control datepicker">
             </div>
         </div>
         <div class="modal-footer">
@@ -97,7 +97,7 @@ $projec_phases = $data['phases'];
             <input type="hidden" name="current_status" id='current_status' value="0">
 
 
-            <button type="button" class="btn btn-primary mr-2" onclick="submitsubfrom()" >Submit</button>
+            <button type="button" class="btn btn-primary mr-2" onclick="submitsubfrom()" ><?php echo __('Submit'); ?></button>
         </div>
     </form>
 </div>

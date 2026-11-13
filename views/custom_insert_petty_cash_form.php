@@ -37,8 +37,8 @@ if($petty_cash['current_status']!=""){
         var html = "";
         html +='<div class="row mt-2" id="pettycashcartitem_'+id+'">';
         html +='<div class="col-lg-7"><h4 class="f-14 mb-0 f-w-600 m-l-10">'+name+'</h4><span class="f-12 m-l-10">'+descr+'</span> </div>';
-        html +=' <div class="col-lg-4"><input aria-label="Item Amt[" type="number" class="form-control cartamttextbox text-right" name="item_amt['+id+']" value="0" onblur="sumCartTotal()"> <input type="hidden" class="form-control" name="item_id['+id+']" value="'+id+'"><input type="hidden" class="form-control" name="item_name['+id+']" value="'+name+'"><input type="hidden" class="form-control" name="item_description['+id+']" value="'+descr+'"></div>';
-        html +=' <div class="col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove Cart" onclick="remvePettyCashItem('+id+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div>';
+        html +=' <div class="col-lg-4"><input aria-label="<?php echo __('Item Amt['); ?>" type="number" class="form-control cartamttextbox text-right" name="item_amt['+id+']" value="0" onblur="sumCartTotal()"> <input type="hidden" class="form-control" name="item_id['+id+']" value="'+id+'"><input type="hidden" class="form-control" name="item_name['+id+']" value="'+name+'"><input type="hidden" class="form-control" name="item_description['+id+']" value="'+descr+'"></div>';
+        html +=' <div class="col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Remove Cart'); ?>" onclick="remvePettyCashItem('+id+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div>';
         html +='</div>';
         $("#billcartrows").append(html);
         tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['9081']; ?>','');
@@ -102,12 +102,12 @@ if($petty_cash['current_status']!=""){
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: "Please note the status of the document will change to "+new_status_name,
+        text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
         type: "info",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+        cancelButtonText: <?php echo json_encode(__('No')); ?>,
         closeOnConfirm: false
     },
     function(){
@@ -134,12 +134,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                     });
                 }else{
                     swal({
-                        title: "Oops...",
+                        title: <?php echo json_encode(__('Oops...')); ?>,
                         text: res.transaction_update.message,
                         type: "error",
                         showCancelButton: true,
                         showConfirmButton: false,
-                        cancelButtonText: "Ok",
+                        cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                         confirmButtonClass: "btn-danger",
                         closeOnCancel: false
                     });
@@ -160,10 +160,10 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 }
             ?>
             <div class="card-header">
-                <h5>Items</h5>
+                <h5><?php echo __('Items'); ?></h5>
                 <div class="card-header-right table-card-header  m-r-50">
                      <div class="input-group input-group-button mb-0">
-                        <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="div" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                        <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="div" class="form-control form-control-sm width1" placeholder="<?php echo __('Search'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Search'); ?>" aria-label="<?php echo __('Search'); ?>">
                         <span class="input-group-text addon-style">
                             <span class=""><span class="ti-search text-white mt-2"></span></span>
                         </span>
@@ -187,7 +187,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                     <h3 class="f-16 f-w-600 m-l-10 m-b-15"><?php echo $pci['description']; ?></h3>
                                 </div>
                                 <div class="col-lg-3 pt-2">
-                                    <i class="ti-share text-primary cursor-pointer" id="pettycashitemaddcartbtn_<?php echo $pci['id']; ?>" data-bs-toggle="tooltip" data-bs-original-title="Add Bill"  onclick="addItemCart(<?php echo $pci['id']; ?>,'<?php echo $pci['item_name']; ?>','<?php echo $pci['description']; ?>')" <?php echo isset($pcitemid[$pci['id']])?"style='display: none'":""; ?> tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-share text-primary cursor-pointer" id="pettycashitemaddcartbtn_<?php echo $pci['id']; ?>" data-bs-toggle="tooltip" data-bs-original-title="<?php echo __('Add Bill'); ?>"  onclick="addItemCart(<?php echo $pci['id']; ?>,'<?php echo $pci['item_name']; ?>','<?php echo $pci['description']; ?>')" <?php echo isset($pcitemid[$pci['id']])?"style='display: none'":""; ?> tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                     <i class="ti-check" id="checkpettycashitemaddcartbtn_<?php echo $pci['id']; ?>" <?php echo isset($pcitemid[$pci['id']])?"":"style='display: none'"; ?>></i>
                                 </div>
                             </div>
@@ -198,7 +198,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 }
 }else{ ?>
                     <div class="card-px text-center py-20 m-t-30">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Items</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Items'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>
@@ -211,7 +211,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
     <div class="col-lg-4">
         <div class="card" style="position: sticky; top: 0;">
                 <div class="card-header">
-                    <h5>Bill</h5>
+                    <h5><?php echo __('Bill'); ?></h5>
                     <div class="card-header-right table-card-header">
                         <?php
                         if($available_balance >= $petty_cash['amount']){
@@ -236,21 +236,21 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                         <h4 class="f-14 mb-0 f-w-600 m-l-10"><?php echo $pcitem['item_name']; ?></h4><span class="f-12 m-l-10"><?php echo $pcitem['description']; ?></span>
                                     </div>
                                     <div class="col-lg-4">
-                                        <input aria-label="Enter number" type="number" class="form-control cartamttextbox text-right" name="item_amt[<?php echo $pcitem['item_id']; ?>]" value="<?php echo $pcitem['total_amount']; ?>" onblur="sumCartTotal()">
+                                        <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control cartamttextbox text-right" name="item_amt[<?php echo $pcitem['item_id']; ?>]" value="<?php echo $pcitem['total_amount']; ?>" onblur="sumCartTotal()">
                                         <input type="hidden" class="form-control" name="item_id[<?php echo $pcitem['item_id']; ?>]" value="<?php echo $pcitem['item_id']; ?>">
                                         <input type="hidden" class="form-control" name="item_name[<?php echo $pcitem['item_id']; ?>]" value="<?php echo $pcitem['item_name']; ?>">
                                         <input type="hidden" class="form-control" name="item_description[<?php echo $pcitem['item_id']; ?>]" value="<?php echo $pcitem['description']; ?>">
                                          <input type="hidden" class="form-control" name="pc_item_id[<?php echo $pcitem['item_id']; ?>]" value="<?php echo $pcitem['id']; ?>">
                                     </div>
                                     <div class="col-lg-1">
-                                        <i class="ti-trash text-danger cursor-pointer" data-bs-toggle="tooltip"  data-placement="bottom" data-bs-original-title="Remove Cart" onclick="remvePettyCashItem(<?php echo $pcitem['item_id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="ti-trash text-danger cursor-pointer" data-bs-toggle="tooltip"  data-placement="bottom" data-bs-original-title="<?php echo __('Remove Cart'); ?>" onclick="remvePettyCashItem(<?php echo $pcitem['item_id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                     </div>
                                 </div>
 
                             <?php } ?>
                             <?php } else { ?>
                             <div class="card-px text-center py-20 m-t-30" id="empty_cart">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> Please Select Items</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('Please Select Items'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -259,27 +259,27 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         </div>
                         <div class="row align-items-center mt-3" >
                             <div class="col-lg-7">
-                                <h4 class="f-14 mb-0 f-w-600 m-l-10">Total Amount</h4>
+                                <h4 class="f-14 mb-0 f-w-600 m-l-10"><?php echo __('Total Amount'); ?></h4>
                             </div>
                             <div class="col-lg-5">
-                                 <input aria-label="Total Amount" type="number" class="form-control text-right" id="sumcarttotal" name="total_amount" value="<?php echo $petty_cash['amount'];  ?>" readonly >
+                                 <input aria-label="<?php echo __('Total Amount'); ?>" type="number" class="form-control text-right" id="sumcarttotal" name="total_amount" value="<?php echo $petty_cash['amount'];  ?>" readonly >
                             </div>
-                            <span class="text-danger text-right">Available Balance : <?php echo customeummarmonyformate($available_balance); ?></span>
+                            <span class="text-danger text-right"><?php echo __('Available Balance :'); ?> <?php echo customeummarmonyformate($available_balance); ?></span>
                         </div>
                         <div class="row align-items-center mt-3" >
                             <div class="col-lg-7">
-                                <h4 class="f-14 mb-0 f-w-600 m-l-10">Transaction Date</h4>
+                                <h4 class="f-14 mb-0 f-w-600 m-l-10"><?php echo __('Transaction Date'); ?></h4>
                             </div>
                             <div class="col-lg-5">
-                                 <input aria-label="Transaction Date" type="text" class="form-control datepicker" name="transaction_date" value="<?php echo fromDate($petty_cash['transaction_date']);  ?>">
+                                 <input aria-label="<?php echo __('Transaction Date'); ?>" type="text" class="form-control datepicker" name="transaction_date" value="<?php echo fromDate($petty_cash['transaction_date']);  ?>">
                             </div>
                         </div>
                         <div class="row align-items-center mt-3" >
                             <div class="col-lg-7">
-                                <h4 class="f-14 mb-0 f-w-600 m-l-10">Description</h4>
+                                <h4 class="f-14 mb-0 f-w-600 m-l-10"><?php echo __('Description'); ?></h4>
                             </div>
                             <div class="col-lg-5">
-                                 <textarea aria-label="Notes" type="text" class="form-control datepicker" name="notes" ><?php echo $petty_cash['notes'];  ?></textarea>
+                                 <textarea aria-label="<?php echo __('Notes'); ?>" type="text" class="form-control datepicker" name="notes" ><?php echo $petty_cash['notes'];  ?></textarea>
                             </div>
                         </div>
                         <div class=" card-body row">

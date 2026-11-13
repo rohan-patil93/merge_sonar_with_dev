@@ -253,7 +253,7 @@ if(isset($_POST['submit1'])){
                             <?php } ?>
                         </select>
                     </div>
-                    <button type="button" class="btn btn-primary mr-2" onclick="searchvalues()"> Search </button>
+                    <button type="button" class="btn btn-primary mr-2" onclick="searchvalues()"><?= __('Search') ?></button>
 
 
 
@@ -261,20 +261,20 @@ if(isset($_POST['submit1'])){
                         <h3>Contract Monthly</h3>
                         <table>
                             <tr style="background-color: #22b9ff;">
-                                <th scope="col">Job Title</th>
-                                <th scope="col">JAN</th>
-                                <th scope="col">FEB</th>
-                                <th scope="col">MAR</th>
-                                <th scope="col">APRIL</th>
-                                <th scope="col">MAY</th>
-                                <th scope="col">JUN</th>
-                                <th scope="col">JUL</th>
-                                <th scope="col">AUG</th>
-                                <th scope="col">SEP</th>
-                                <th scope="col">OCT</th>
-                                <th scope="col">NOV</th>
-                                <th scope="col">DEC</th>
-                                <th scope="col">Total</th>
+                                <th scope="col"><?= __('Job Title') ?></th>
+                                <th scope="col"><?= __('JAN') ?></th>
+                                <th scope="col"><?= __('FEB') ?></th>
+                                <th scope="col"><?= __('MAR') ?></th>
+                                <th scope="col"><?= __('APRIL') ?></th>
+                                <th scope="col"><?= __('MAY') ?></th>
+                                <th scope="col"><?= __('JUN') ?></th>
+                                <th scope="col"><?= __('JUL') ?></th>
+                                <th scope="col"><?= __('AUG') ?></th>
+                                <th scope="col"><?= __('SEP') ?></th>
+                                <th scope="col"><?= __('OCT') ?></th>
+                                <th scope="col"><?= __('NOV') ?></th>
+                                <th scope="col"><?= __('DEC') ?></th>
+                                <th scope="col"><?= __('Total') ?></th>
                             </tr>
                             <?php $k=1; $z=1; $gp= array(); foreach ($budget_data as $budget_details) { ?>
                                 <tr style="background-color: #eee; height: 40px;">
@@ -394,13 +394,13 @@ if(isset($_POST['submit1'])){
                         <input type="hidden" id="hid"name="hid" value="<?php echo $rid; ?>" />
                         <input type="hidden" name="hid_itemds" value="<?php echo $item_ids; ?>" />
                         <input type="hidden" name="submit1" value="Update" />
-                        <button id="kt_llogin_signup_submit" <?php echo $disable; ?> class="btn btn-primary mr-2" ><i class="la la-check"></i>Upadate</button>
-                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                        <button id="kt_llogin_signup_submit" <?php echo $disable; ?> class="btn btn-primary mr-2" ><i class="la la-check"></i><?= __('Update') ?></button>
+                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?= __('Cancel') ?></button>
                 <?php } else{ ?>
                         <input type="hidden" name="submit1" value="Add" />
-                        <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-                        <button id="kt_login_signin_submit_continue" class="btn btn-primary mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
-                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                        <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?= __('Save & exit') ?></button>
+                        <button id="kt_login_signin_submit_continue" class="btn btn-primary mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?= __('Save & continue') ?></button>
+                        <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?= __('Cancel') ?></button>
                 <?php } ?>
             </div>
             <div class="col-lg-6">
@@ -444,7 +444,7 @@ if(isset($_POST['submit1'])){
             <?php } ?>
             </div>
             <div class="col-lg-2 kt-align-right">
-                <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?= __('Delete') ?></button>
             </div>
         </div>
     </div>

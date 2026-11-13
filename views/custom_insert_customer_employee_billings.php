@@ -31,45 +31,44 @@ if ($_GET['Rid']) {
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Customer Employee Billing</h5>
+            <h5><?= __('Customer Employee Billing') ?></h5>
             <div class="card-header-right">
                 <a href="index.php?option=COM_LIST_EMP_EMPLOYMENT_TYPE_HISTORIES&Rid=<?php echo  deocdeId('month:' . $_GET['month']) ?>" class="btn waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-reply"></i>
-                    Back
+                    <i class="icofont icofont-reply"></i> <?= __('Back') ?>
                 </a>
             </div>
         </div>
         <div class="card-block">
             <form method="POST" action="">
                 <div class="form-group row">
-                    <span class="col-sm-2 col-form-label">Customer Name</span>
+                    <span class="col-sm-2 col-form-label"><?= __('Customer Name') ?></span>
                     <div class="col-sm-4">
                         <input aria-label="Customer Name" type="text" class="form-control" name="customer_name" value="<?= htmlspecialchars($customerData['display_name']) ?>" readonly>
                         <input type="hidden" name="customer_id" value="<?= $rid ?>">
                     </div>
-                    <span class="col-sm-2 col-form-label">Billing Month</span>
+                    <span class="col-sm-2 col-form-label"><?= __('Billing Month') ?></span>
                     <div class="col-sm-4">
                         <input aria-label="Billing Month" type="month" class="form-control" name="billing_month" value="<?= $_GET['month'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <span class="col-sm-2 col-form-label">Total Working Days</span>
+                    <span class="col-sm-2 col-form-label"><?= __('Total Working Days') ?></span>
                     <div class="col-sm-4">
                         <input aria-label="Total Working Days" type="number" name="total_working_days" class="form-control" value="<?php echo $billingData['total_working_days'] ?? ''; ?>" required>
                     </div>
                 </div>
 
-                <h5 class="mt-4">Employees </h5>
+                <h5 class="mt-4"><?= __('Employees') ?></h5>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Employee Name</th>
-                                <th scope="col">LOP Days</th>
-                                <th scope="col">Customer Billing Amount</th>
-                                <th scope="col">Actual Billing Amount</th>
-                                <th scope="col">Employee Client Pay</th>
+                                <th scope="col"><?= __('Employee Name') ?></th>
+                                <th scope="col"><?= __('LOP Days') ?></th>
+                                <th scope="col"><?= __('Customer Billing Amount') ?></th>
+                                <th scope="col"><?= __('Actual Billing Amount') ?></th>
+                                <th scope="col"><?= __('Employee Client Pay') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,12 +111,10 @@ if ($_GET['Rid']) {
 
                 <div class="form-group mt-3">
                     <?php if ($billingData['id'] != "") {  ?>
-                        <button name='submit' value='update' class="btn waves-effect waves-light btn-primary">
-                            Update
-                        </button>
+                        <button name='submit' value='update' class="btn waves-effect waves-light btn-primary"><?= __('Update') ?></button>
                         <input name="billing_id" type="hidden" value="<?php echo $billingData['id']; ?>">
                     <?php } else {  ?>
-                        <button type="submit" name='submit' value='insert' class="btn waves-effect waves-light btn-primary">Save</button>
+                        <button type="submit" name='submit' value='insert' class="btn waves-effect waves-light btn-primary"><?= __('Save') ?></button>
                     <?php } ?>
 
 

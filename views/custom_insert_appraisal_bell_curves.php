@@ -87,7 +87,7 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
 		<form method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="form-group col-lg-4">
-                    <label class="form-label" for="bell_curve_name">Bell Curve Name<span class="text-danger">*</span></label>
+                    <label class="form-label" for="bell_curve_name"><?= __('Bell Curve Name') ?><span class="text-danger">*</span></label>
                     <input type="text" name="bell_curve_name" id="bell_curve_name" class="form-control" value="<?php echo $appraisal_bell_curves['bell_curve_name']; ?>" required aria-label="Bell Curve Name">
                 </div>
                 <div class="form-group col-lg-8">
@@ -130,7 +130,7 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
                  </div>
             </div>
             <input type="hidden" name="rid" value="<?php echo $rid; ?>">
-            <button type="submit" class="btn btn-primary waves-effect waves-light mt-5" id="bell_curve_btn" name="submitbellcurves" <?php echo $sum ==100?"":"disabled";?>><i class="fa fa-check m-r-10" aria-hidden="true"></i> <?php echo $rid ==""?"Submit":"Update"; ?></button>   
+            <button type="submit" class="btn btn-primary waves-effect waves-light mt-5" id="bell_curve_btn" name="submitbellcurves" <?php echo $sum ==100?"":"disabled";?>><i class="fa fa-check m-r-10" aria-hidden="true"></i> <?php echo $rid ==""?__("Submit"):__("Update"); ?></button>   
         </form>
 	</div>
 

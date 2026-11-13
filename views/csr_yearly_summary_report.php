@@ -36,7 +36,7 @@ function fyLabel($year) {
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5>CSR YEARLY SUMMARY REPORT</h5>
+      <h5><?= __('CSR YEARLY SUMMARY REPORT') ?></h5>
     </div>
 
     <div class="card-body">
@@ -47,14 +47,14 @@ function fyLabel($year) {
       <form method="POST" id="yearForm">
         <div class="row mb-3">
           <div class="col-md-3">
-            <label><b>Financial Year</b></label>
+            <label><b><?= __('Financial Year') ?></b></label>
             <select name="year"
         class="form-control js-example-basic-single"
         id="csrYearSelect">
               <?php foreach($financial_years as $row){ 
                 $selected = (isset($selectedYear) && $selectedYear == $row['genc_detail_code']) ? 'selected' : '';
                 ?>
-                <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $selected; ?>> <?php echo $row['genc_detail_name']; ?></option>
+                <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $selected; ?>> <?= htmlspecialchars(__($row['genc_detail_name'] ?? '')) ?></option>
 
               <?php  } ?>
             </select>
@@ -69,8 +69,8 @@ function fyLabel($year) {
         <table class="table table-bordered table-sm f-14 align-middle">
 
           <tr>
-            <th scope="col">Particulars</th>
-            <th scope="col" class="text-center">Amount</th>
+            <th scope="col"><?= __('Particulars') ?></th>
+            <th scope="col" class="text-center"><?= __('Amount') ?></th>
           </tr>
 
           <?php if (!empty($summary)) {
@@ -83,35 +83,35 @@ function fyLabel($year) {
           <!-- Block Header -->
           <tr>
             <th scope="col" colspan="2" class="bg-light text-center">
-              CSR Summary for FY <?= htmlspecialchars($label) ?>
+              <?= __('CSR Summary for FY') ?> <?= htmlspecialchars($label) ?>
             </th>
           </tr>
 
           <!-- Gross Required -->
           <tr>
-            <th scope="col">a) Gross amount required to be spent by the Company as per the Companies Act, 2013 during FY <?= $label ?></th>
+            <th scope="col">a) <?= __('Gross amount required to be spent by the Company as per the Companies Act, 2013 during FY') ?> <?= $label ?></th>
             <th scope="col" class="text-end"><?= number_format($fy['gross_required'], 2) ?></th>
           </tr>
 
           <tr>
-            <td>i) Construction/acquisition of any asset</td>
+            <td>i) <?= __('Construction/acquisition of any asset') ?></td>
             <td></td>
           </tr>
 
           <tr>
-            <td>ii) On purposes other than (i)</td>
+            <td>ii) <?= __('On purposes other than (i)') ?></td>
             <td></td>
           </tr>
 
           <!-- Total Spent -->
           <tr>
-            <th scope="col" class="text-danger">(b) Total Spent</th>
+            <th scope="col" class="text-danger">(b) <?= __('Total Spent') ?></th>
             <th scope="col" class="text-danger text-end"><?= number_format($fy['total_spent'], 2) ?></th>
           </tr>
 
           <!-- Unspent Current Year -->
           <tr>
-            <th scope="col">Balance amount unspent for FY <?= $label ?></th>
+            <th scope="col"><?= __('Balance amount unspent for FY') ?> <?= $label ?></th>
             <td class="text-end"><?= number_format($fy['current_unspent'], 2) ?></td>
           </tr>
 
@@ -139,7 +139,7 @@ function fyLabel($year) {
 
           <?php } else { ?>
             <tr>
-              <td colspan="2" class="text-center text-danger">No data available for selected financial year.</td>
+              <td colspan="2" class="text-center text-danger"><?= __('No data available for selected financial year.') ?></td>
             </tr>
           <?php } ?>
 

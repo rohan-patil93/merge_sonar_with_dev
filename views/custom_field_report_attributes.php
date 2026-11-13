@@ -97,16 +97,16 @@ $res_data = json_decode($res_data, 1);
 						<h3 class="kt-portlet__head-title">
 							<div>
 								<div style="float: left;">
-									<label style="margin-top: 10px;"> <?php echo $title; ?><span class="requried">*</span> &nbsp;&nbsp; </label>
+									<label style="margin-top: 10px;"> <?php echo htmlspecialchars(__($title ?? '')); ?><span class="requried">*</span> &nbsp;&nbsp; </label>
 								<!-- <div class="col-lg-4" > </div> -->
 
 				 			  </div>
 				 			  <div style="float: left;">
 
-							   <select class="form-control" id="kt_select2_41" name= "display_list"  onchange="GetSelectedTextValue(this.value)" aria-label="Display List">
-							   	<option> Select Any One</option>
+							   <select class="form-control" id="kt_select2_41" name= "display_list"  onchange="GetSelectedTextValue(this.value)" aria-label="<?php echo __('Display List'); ?>">
+							   	<option> <?php echo __('Select Any One'); ?></option>
 							   			<?php foreach ($res_data as $key => $ress) {  ?>
-							   				<option  <?php if($ress['id'] == $report_id){ ?> selected  <?php } ?> value = <?php echo $ress['id']; ?>   > <?php echo ucwords(str_replace('_',' ',$ress['report_name'])); ?> </option>
+							   				<option  <?php if($ress['id'] == $report_id){ ?> selected  <?php } ?> value = <?php echo $ress['id']; ?>   > <?php echo htmlspecialchars(__(ucwords(str_replace('_',' ',$ress['report_name'] ?? '')))); ?> </option>
 							   		<?php	} ?>
 										
 										
@@ -121,22 +121,22 @@ $res_data = json_decode($res_data, 1);
 					<div class="kt-portlet__body">
 						<div class="form-group row">
 							<div class="col-lg-3">
-								<label>Filed </label>
+								<label><?php echo __('Field'); ?> </label>
 							</div>
 							<div class="col-lg-3">
-								<label class="">Lable </label>
+								<label class=""><?php echo __('Label'); ?> </label>
 							</div>
 							<div class="col-lg-1">
-								<label class="">   Display</label>
+								<label class="">   <?php echo __('Display'); ?></label>
 							</div>
 							<div class="col-lg-2">
-								<label class=""> Postion </label>
+								<label class=""> <?php echo __('Position'); ?> </label>
 							</div>
 							<div class="col-lg-1">
-								<label class=""> Filter </label>
+								<label class=""> <?php echo __('Filter'); ?> </label>
 							</div>
 							<div class="col-lg-2">
-								<label class=""> Filter Type </label>
+								<label class=""> <?php echo __('Filter Type'); ?> </label>
 							</div>
 						</div>
 						<input type="hidden" name="report_id" id='report_id'  value="<?php echo $report_id; ?>">
@@ -147,37 +147,37 @@ $res_data = json_decode($res_data, 1);
 							 ?>
 						<div class="form-group row">
 							<div class="col-lg-3">
-								<input type="text" class="form-control" name="field[]" value=<?php echo $key.".".$field;?> aria-label="Field">
+								<input type="text" class="form-control" name="field[]" value=<?php echo $key.".".$field;?> aria-label="<?php echo __('Field'); ?>">
 							</div>
 							<div class="col-lg-3">
 								<?php $lables =$attribute[$keyf]['lable'] !='' ? $attribute[$keyf]['lable'] : ucwords(str_replace('_', ' ', $field)); ?>
-								<input type="text" class="form-control"  name="lable[]" value="<?php echo $lables; ?>" aria-label="Lable">
+								<input type="text" class="form-control"  name="lable[]" value="<?php echo $lables; ?>" aria-label="<?php echo __('Label'); ?>">
 							</div>
 							<div class="col-lg-1">
 								<?php $att_display_list =$attribute[$keyf]['display_list'] !='' ? $attribute[$keyf]['display_list'] : 0 ; ?>
-									<select class="form-control" id="display_list_<?php echo $key."_".$field; ?>" name= "display_list[]" aria-label="Display List">
-											<option value = "2" >No</option>
-											<option value = "1" <?php if($att_display_list == '1') { ?> selected <?php } ?> >Yes</option>
+									<select class="form-control" id="display_list_<?php echo $key."_".$field; ?>" name= "display_list[]" aria-label="<?php echo __('Display List'); ?>">
+											<option value = "2" ><?php echo __('No'); ?></option>
+											<option value = "1" <?php if($att_display_list == '1') { ?> selected <?php } ?> ><?php echo __('Yes'); ?></option>
 									</select>
 							</div>
 							<div class="col-lg-2">
 								<?php $att_display_postion =$attribute[$keyf]['display_postion'] !='' ? $attribute[$keyf]['display_postion'] : $i ; ?>
-								<input type="text" class="form-control" name="display_postion[]" value=<?php echo $att_display_postion;?> aria-label="Display Postion">
+								<input type="text" class="form-control" name="display_postion[]" value=<?php echo $att_display_postion;?> aria-label="<?php echo __('Display Position'); ?>">
 							</div>
 							<div class="col-lg-1">
 								<?php $att_filter =$attribute[$keyf]['filter'] !='' ? $attribute[$keyf]['filter'] :0 ; ?>
-									<select class="form-control" id="filter_<?php echo $key."_".$field; ?>" name= "filter[]" aria-label="Filter">
-											<option value = "2" >No</option>
-											<option value = "1" <?php if($att_filter == '1') { ?> selected <?php } ?> >Yes</option>
+									<select class="form-control" id="filter_<?php echo $key."_".$field; ?>" name= "filter[]" aria-label="<?php echo __('Filter'); ?>">
+											<option value = "2" ><?php echo __('No'); ?></option>
+											<option value = "1" <?php if($att_filter == '1') { ?> selected <?php } ?> ><?php echo __('Yes'); ?></option>
 									</select>
 							</div>
 							<div class="col-lg-2">
-									<?php $filed_array = array('text' => 'Simple Text',  'date_pick' => 'Date', 'date_range' => 'Date Range', 'select'=> 'List');
+									<?php $filed_array = array('text' => __('Simple Text'),  'date_pick' => __('Date'), 'date_range' => __('Date Range'), 'select'=> __('List'));
 									 $att_filter_type =$attribute[$keyf]['filter_type'] !='' ? $attribute[$keyf]['filter_type'] : 'text'; ?>
-										<select class="form-control" id="<?php echo $key.".".$field;; ?>" onchange="Getinserttype(this.id,this.value)" name= "type[]" aria-label="Type">
+										<select class="form-control" id="<?php echo $key.".".$field;; ?>" onchange="Getinserttype(this.id,this.value)" name= "type[]" aria-label="<?php echo __('Type'); ?>">
 
 											<?php foreach ($filed_array as $typekey => $typevalue) {?>
-												<option value = "<?php echo $typekey; ?>" <?php if($att_filter_type == $typekey) { ?> selected <?php } ?>  ><?php echo $typevalue; ?></option>
+												<option value = "<?php echo $typekey; ?>" <?php if($att_filter_type == $typekey) { ?> selected <?php } ?>  ><?php echo htmlspecialchars(__($typevalue ?? '')); ?></option>
 											<?php } ?>
 										</select>
 							</div>
@@ -186,11 +186,11 @@ $res_data = json_decode($res_data, 1);
 					</div>
 
 					<div class="form-group  row">
-							<label class="col-xl-3 col-lg-3 col-form-label">Content<span class="requried"></span></label>
+							<label class="col-xl-3 col-lg-3 col-form-label"><?php echo __('Content'); ?><span class="requried"></span></label>
 							<div class="col-lg-9 col-xl-6">
 								<div class="input-group">
 									<div class="input-group-prepend"><span class="input-group-text"><i class="la la-user" aria-hidden="true"></i></span></div>
-									<input class="form-control" type="text"   name="content" value="<?php echo $role['help_text']; ?>" aria-label="Content">
+									<input class="form-control" type="text"   name="content" value="<?php echo $role['help_text']; ?>" aria-label="<?php echo __('Content'); ?>">
 								</div>
 							</div>
 					</div>
@@ -201,13 +201,13 @@ $res_data = json_decode($res_data, 1);
 											<input type="hidden" name="submit" value="Add" />
 											<input type="hidden" name="table_name" value="<?php echo $table; ?>" />
 									<input type="hidden" name="id" value="<?php echo $rid; ?>" />
-											<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-											<button id="kt_login_signin_submit_continue" class="btn btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
-											<button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i>Cancel</button>
+											<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
+											<button id="kt_login_signin_submit_continue" class="btn btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?php echo __('Save & continue'); ?></button>
+											<button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
 									
 								</div>
 								<div class="col-lg-6 kt-align-right">
-									<button type="reset" disabled="disabled" class="btn btn-danger float-right "><i class="la la-trash"></i>Delete</button>
+									<button type="reset" disabled="disabled" class="btn btn-danger float-right "><i class="la la-trash"></i><?php echo __('Delete'); ?></button>
 								</div> 
 							</div>
 						</div>

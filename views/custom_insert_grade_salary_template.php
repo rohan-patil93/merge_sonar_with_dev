@@ -112,8 +112,8 @@ function changesalarytype(val){
                             <div class="row salary-template col-lg-12 p-3">
                                 <div class="page-header card" style="margin: 0px; color: black;">
                                     <div class="d-inline">
-                                        <h5>Build Your Template</h5>
-                                        <span class="sub-title">Include active salary components</span>
+                                        <h5><?php echo __('Build Your Template'); ?></h5>
+                                        <span class="sub-title"><?php echo __('Include active salary components'); ?></span>
                                     </div>
                                 </div>
                                 <div class="card-block accordion-block color-accordion-block mt-2" style="padding: 2px;">
@@ -127,12 +127,12 @@ function changesalarytype(val){
                                                     ?>
                                                     <div class="f-12 mt-3">
                                                        <?php $addsaldata = $value['id'];
-                                                       echo $value['name']; ?>
+                                                       echo __($value['name']); ?>
                                                        <div class="checkbox-fade fade-in-primary float-right">
                                                         <label class="form-label ">
                                                             <input type="hidden" name="addsaldata" id="<?php echo $addsaldata."_detail"; ?>" value='<?php echo json_encode($value); ?>' >
                                                             <input type="hidden" id="<?php echo $addsaldata."check"; ?>" value="0">
-                                                            <input aria-label="Checkbox" type="checkbox"   <?php if(in_array($addsaldata, (array)$checkdata)){ echo "checked";
+                                                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"   <?php if(in_array($addsaldata, (array)$checkdata)){ echo __('checked');
 } ?> name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)" onkeydown="">
                                                             <span class="cr">
                                                               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -156,15 +156,15 @@ function changesalarytype(val){
                                 <div class="card card-custom gutter-b">
                                     <div class="page-header card p-3" style="margin: 0px; color: black;">
                                         <div class="d-inline">
-                                            <h5>Job Grad Salary</h5>
-                                            <span>Define salary for Grad</span>
+                                            <h5><?php echo __('Job Grad Salary'); ?></h5>
+                                            <span><?php echo __('Define salary for Grad'); ?></span>
                                             <div class="float-right">
                                                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                                                    <i class="icofont icofont-reply"></i> Back
+                                                    <i class="icofont icofont-reply"></i> <?php echo __('Back'); ?>
                                                 </a>
                                                 <?php if($_GET['Rid']!=""){ ?>
                                                     <a href="index.php?option=COM_VIEW_SALARY_PAYSLIP&Rid=<?php echo $_GET['Rid']; ?>" target="_blank" class="btn btn-primary">
-                                                       Payslip
+                                                       <?php echo __('Payslip'); ?>
                                                    </a>
                                                <?php } ?>
                                            </div>
@@ -173,21 +173,21 @@ function changesalarytype(val){
                                    <div class="card-body">
                                     <div class="form-group row">
                                         <div class="col-lg-4">
-                                            <span>Salary Type</span>
-                                            <select aria-label="Salary Type" class="form-select js-example-basic-single" onchange="changesalarytype(this.value)" name='salary_type'>
-                                                <option value="0"> Select Any One</option>
-                                                <option <?php if($salary_type=='M'){ echo "selected";
-} ?> value="M">Montly</option>
-                                                <option <?php if($salary_type=='D'){ echo "selected";
-} ?> value="D">Daily</option>
+                                            <span><?php echo __('Salary Type'); ?></span>
+                                            <select aria-label="<?php echo __('Salary Type'); ?>" class="form-select js-example-basic-single" onchange="changesalarytype(this.value)" name='salary_type'>
+                                                <option value="0"> <?php echo __('Select Any One'); ?></option>
+                                                <option <?php if($salary_type=='M'){ echo __('selected');
+} ?> value="M"><?php echo __('Montly'); ?></option>
+                                                <option <?php if($salary_type=='D'){ echo __('selected');
+} ?> value="D"><?php echo __('Daily'); ?></option>
                                            </select>
                                        </div>
                                        <div class="col-lg-4">
-                                            <span>Job Grade </span>
-                                            <select aria-label="Grade" class="form-select js-example-basic-single" name='grade_id'>
-                                                <option value="0"> Select Any One</option>
+                                            <span><?php echo __('Job Grade'); ?> </span>
+                                            <select aria-label="<?php echo __('Grade'); ?>" class="form-select js-example-basic-single" name='grade_id'>
+                                                <option value="0"> <?php echo __('Select Any One'); ?></option>
                                                 <?php foreach ($job_grade as $grade) { ?>
-                                                   <option <?php if($salarydata['grade_id']==$grade['id']){ echo "selected";
+                                                   <option <?php if($salarydata['grade_id']==$grade['id']){ echo __('selected');
 } ?> value="<?php echo $grade['id'] ?>"> <?php echo $grade['job_grade_name'] ?></option>
                                                <?php } ?>
 
@@ -195,16 +195,16 @@ function changesalarytype(val){
 
                                        </div>
                                        <div class="col-lg-4 ">
-                                            <span>Effective Date</span>
-                                            <input aria-label="Affected Date" class="form-control datepicker hasDatepicker fill" type="date" name="affected_date" value="">
+                                            <span><?php echo __('Effective Date'); ?></span>
+                                            <input aria-label="<?php echo __('Affected Date'); ?>" class="form-control datepicker hasDatepicker fill" type="date" name="affected_date" value="">
                                         </div>
                                        <div class="col-lg-4 ">
-                                            <span>Description</span>
-                                            <textarea aria-label="Kt Autosize 2" class="form-control" id="kt_autosize_2" ><?php echo $salarydata['description']; ?></textarea>
+                                            <span><?php echo __('Description'); ?></span>
+                                            <textarea aria-label="<?php echo __('Kt Autosize 2'); ?>" class="form-control" id="kt_autosize_2" ><?php echo $salarydata['description']; ?></textarea>
                                         </div>
                                     <div class="col-lg-4">
-                                        <span>Notes</span>
-                                        <textarea aria-label="Max 500 characters" class="form-control" id="kt_autosize_2_2" name="note" placeholder="Max 500 characters" ><?php echo $salarydata['note']; ?></textarea>
+                                        <span><?php echo __('Notes'); ?></span>
+                                        <textarea aria-label="<?php echo __('Max 500 characters'); ?>" class="form-control" id="kt_autosize_2_2" name="note" placeholder="<?php echo __('Max 500 characters'); ?>" ><?php echo $salarydata['note']; ?></textarea>
                                     </div>
 
 
@@ -226,8 +226,8 @@ function changesalarytype(val){
                                         <input type="hidden"   name="rid" value="<?php  echo $rid; ?>">
                                     <?php } ?>
                                     <input type="hidden"   name="submit" value="submit">
-                                    <button type="submit" <?php echo $disabled; ?> class="btn btn-primary mr-2">Submit</button>
-                                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                                    <button type="submit" <?php echo $disabled; ?> class="btn btn-primary mr-2"><?php echo __('Submit'); ?></button>
+                                    <button type="reset" class="btn btn-secondary"><?php echo __('Cancel'); ?></button>
                                 </div>
                             </div>
                         </div>
@@ -242,14 +242,14 @@ function changesalarytype(val){
         <div class="modal-content" >
 
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo __('Information'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
             <div class="modal-body"  id="popup1">
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary waves-effect waves-light " data-bs-dismiss="modal" aria-label="Close">Close</button>
+                <button type="button" class="btn btn-primary waves-effect waves-light " data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"><?php echo __('Close'); ?></button>
 
             </div>
         </div>
@@ -287,7 +287,7 @@ function changesalarytype(val){
     <div class="card card-custom " id="kt_page_sticky_card">
         <div class="card-header">
             <div class="card-title">
-                <h3 class="card-label">&nbsp;<?php echo " Salaray Template";  ?> </h3>
+                <h3 class="card-label">&nbsp;<?php echo __(' Salaray Template');  ?> </h3>
             </div>
         </div>
         <div class="card-body">
@@ -297,14 +297,14 @@ function changesalarytype(val){
                     <div  class="col-lg-12" style="page-break-before: always;">
                         <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;" role="presentation">
                             <tr style="height: 50px;border: 1px solid #000;">
-                                <td style="border:1px solid #000;padding: 5px;"><b>Name</b></td>
+                                <td style="border:1px solid #000;padding: 5px;"><b><?php echo __('Name'); ?></b></td>
                                 <td  style="border:1px solid #000;padding: 5px;"colspan="2">&nbsp;<?php echo  $empdata[$salarydata['employee_id']]; ?></td>
                             </tr>
 
                             <tr style="border: 1px solid #000;">
-                                <td style="border:1px solid #000;padding: 5px;"><b>COMPENSATION DETAILS</b>             </td>
-                                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b>MONTHLY</b>       </td>
-                                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b>YEARLY</b>    </td>
+                                <td style="border:1px solid #000;padding: 5px;"><b><?php echo __('COMPENSATION DETAILS'); ?></b>             </td>
+                                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b><?php echo __('MONTHLY'); ?></b>       </td>
+                                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b><?php echo __('YEARLY'); ?></b>    </td>
                             </tr>
                             <?php $nm=0; foreach ($salarytmpdata as  $stvalue) { ?>
                                 <?php if($stvalue['component_cat_id'] !=$nm ){ $nm =$stvalue['component_cat_id'];  ?>
@@ -315,18 +315,18 @@ function changesalarytype(val){
                                 </tr>
                             <?php } ?>
                             <tr style="border: 1px solid #000;" >
-                                <td style="border:1px solid #000;padding: 5px;" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $stvalue['component_name'];?></td>
+                                <td style="border:1px solid #000;padding: 5px;" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __($stvalue['component_name']);?></td>
                                 <td style="text-align: center;border:1px solid #000;padding: 5px;"> <?php echo customeummarmonyformate($stvalue['monthly_amount']);?></td>
                                 <td style="text-align: center;border:1px solid #000;padding: 5px;"><?php echo customeummarmonyformate($stvalue['yearly_amount']);?></td>
                             </tr>
                         <?php } ?>
                         <tr style="border: 1px solid #000;" >
-                            <td style="border:1px solid #000;padding: 5px;" ><?php echo "Total";?></td>
+                            <td style="border:1px solid #000;padding: 5px;" ><?php echo __('Total');?></td>
                             <td style="text-align: center;border:1px solid #000;padding: 5px;"> <?php echo customeummarmonyformate($salarydata['company_cost_monthly']);?></td>
                             <td style="text-align: center;border:1px solid #000;padding: 5px;"><?php echo customeummarmonyformate($salarydata['company_cost_yearly']);?></td>
                         </tr>
                         <tr style="border: 1px solid #000;" >
-                            <td colspan="3" style="border:1px solid #000;padding: 5px;">&nbsp;  Notes: </br>
+                            <td colspan="3" style="border:1px solid #000;padding: 5px;"><?php echo __('&nbsp;  Notes:'); ?> </br>
                                 <p style="padding: 0px 5%;"><?php echo  $salarydata['note']; ?></p>
                             </td>
 
@@ -334,18 +334,18 @@ function changesalarytype(val){
                     </table>
                 </div>
                 <div style="width: 50%; display: inline-block; margin: 30px 0 0 0;">
-                    <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;">With best wishes.<br />For <?php echo  $send_data['company_name']; ?></b>
+                    <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;"><?php echo __('With best wishes.'); ?><br /><?php echo __('For'); ?> <?php echo  $send_data['company_name']; ?></b>
                 </div>
                 <div style="width: 48%; display: inline-block; margin: 30px 0 0 0; text-align: right;">
-                    <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;">ANJANA AUDUKOORI<br />DIRECTOR HR</b>
+                    <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;"><?php echo __('ANJANA AUDUKOORI'); ?><br /><?php echo __('DIRECTOR HR'); ?></b>
                 </div>
                 <div style="width: 50%; display: inline-block; margin: 40px 0 0 0;">
                     <b style="font-size: 14px; color: #888; font-family: 'Noto Sans'; margin:0; display: block;">-----------------------------------------------</b>
-                    <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;">Candidate Signature</b>
+                    <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;"><?php echo __('Candidate Signature'); ?></b>
                 </div>
                 <div style="width: 48%; display: inline-block; margin: 40px 0 0 0; text-align: right;">
                     <b style="font-size: 14px; color: #888; font-family: 'Noto Sans'; margin:0; display: block;">-----------------------------------------------</b>
-                    <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;">Date</b>
+                    <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;"><?php echo __('Date'); ?></b>
                 </div>
 
             </div>

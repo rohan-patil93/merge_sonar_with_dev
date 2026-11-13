@@ -272,13 +272,13 @@ if($customers['image'] !=''){
 		htmlRows += '<tr class="">'; 
 
 		htmlRows += '<td>'+count+'</td>'; 
-		htmlRows += '<td><input type="text" name="ag_type[]"  class="form-control rowcount itemRow " autocomplete="off" title="Ag Type" aria-label="Ag Type">  </td>'; 
-		htmlRows += '<td><input type="text" name="ag_number[]"  class="form-control " autocomplete="off" title="Ag Number" aria-label="Ag Number"> </td>'; 
-		htmlRows += '<td><input type="text" name="ag_sin_date[]"  class="form-control datepicker" id="kt_datepicker_sin_'+count+'" autocomplete="off" title="Ag Sin Date" aria-label="Ag Sin Date">  </td>'; 
-		htmlRows += '<td><input type="text" name="ag_ex_date[]"  class="form-control datepicker"  id="kt_datepicker_ex_'+count+'" autocomplete="off" title="Ag Ex Date" aria-label="Ag Ex Date">  </td>'; 
+		htmlRows += '<td><input type="text" name="ag_type[]"  class="form-control rowcount itemRow " autocomplete="off" title="<?= __('Ag Type') ?>" aria-label="Ag Type">  </td>'; 
+		htmlRows += '<td><input type="text" name="ag_number[]"  class="form-control " autocomplete="off" title="<?= __('Ag Number') ?>" aria-label="Ag Number"> </td>'; 
+		htmlRows += '<td><input type="text" name="ag_sin_date[]"  class="form-control datepicker" id="kt_datepicker_sin_'+count+'" autocomplete="off" title="<?= __('Ag Sin Date') ?>" aria-label="Ag Sin Date">  </td>'; 
+		htmlRows += '<td><input type="text" name="ag_ex_date[]"  class="form-control datepicker"  id="kt_datepicker_ex_'+count+'" autocomplete="off" title="<?= __('Ag Ex Date') ?>" aria-label="Ag Ex Date">  </td>'; 
 
-       //htmlRows += '<td><input type="text" name="score[]"  class="form-control " autocomplete="off" title="Score" aria-label="Score">  </td>';   
-       htmlRows +='<td><div class="image-input image-input-empty image-input-outline" id="kt_image_5_'+count+'" ><span class="btn-hover-text-primary mt-2" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar" > <i class="ti-cloud-up f-20 text-primary f-30 f-w-800" data-toggle="tooltip" title="Upload"></i></div></td>'
+       //htmlRows += '<td><input type="text" name="score[]"  class="form-control " autocomplete="off" title="<?= __('Score') ?>" aria-label="Score">  </td>';   
+       htmlRows +='<td><div class="image-input image-input-empty image-input-outline" id="kt_image_5_'+count+'" ><span class="btn-hover-text-primary mt-2" data-action="change" data-toggle="tooltip" title="" data-original-title="<?= __('Change avatar') ?>" > <i class="ti-cloud-up f-20 text-primary f-30 f-w-800" data-toggle="tooltip" title="<?= __('Upload') ?>"></i></div></td>'
 
        htmlRows += '</tr>';
 	//datepickercall();
@@ -951,27 +951,27 @@ function toggleRowLock(button) {
 						<div class="row">   
 							<div class="col-lg-12 col-xl-6">
 								<div class="table-responsive">
-									<div class="card-header"><h5 class="text-primary">Basic Info</h5></div>
+									<div class="card-header"><h5 class="text-primary"><?= __('Basic Info') ?></h5></div>
 									<table class="table m-0">
 										<tbody>
 											<!-- <tr>
-												<th scope="row">Title</th>
+												<th scope="row"><?= __('Title') ?></th>
 												<td><?php echo emptytextdashShow($customers['title']); ?></td>
 											</tr> -->
 											<tr>
-												<th scope="row">Name</th>
+												<th scope="row"><?= __('Name') ?></th>
 												<td><?php echo $customers['first_name'].$customers['middle_name']." ".$customers['last_name']; ?></td>
 											</tr>
 											<tr>
-												<th scope="row">Contact</th>
+												<th scope="row"><?= __('Contact') ?></th>
 												<td><?php echo $customers['mobile']; ?></td>
 											</tr>
 											<tr>
-												<th scope="row">Email</th>
+												<th scope="row"><?= __('Email') ?></th>
 												<td><?php echo emptytextdashShow($customers['email']); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">Phone</th>
+												<th scope="row"><?= __('Phone') ?></th>
 												<td><?php echo emptytextdashShow($customers['phone']); ?></td>
 											</tr>
 
@@ -983,15 +983,15 @@ function toggleRowLock(button) {
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="table-responsive">
-											<div class="card-header"><h5 class="text-primary">Rental Properties</h5></div>
+											<div class="card-header"><h5 class="text-primary"><?= __('Rental Properties') ?></h5></div>
 											<?php if(count((array)$property_tenant_details)>0){  ?>
 												<table class="table table-hover m-b-0">
 													<thead>
 														<tr>
-															<th scope="col">Property Name</th>
-															<th scope="col" class="w-b-w-s">Address</th>
-															<th scope="col">Start Date</th>
-															<th scope="col">End Date</th>
+															<th scope="col"><?= __('Property Name') ?></th>
+															<th scope="col" class="w-b-w-s"><?= __('Address') ?></th>
+															<th scope="col"><?= __('Start Date') ?></th>
+															<th scope="col"><?= __('End Date') ?></th>
 														</tr>
 													</thead>
 													<tbody>
@@ -1023,15 +1023,15 @@ function toggleRowLock(button) {
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="table-responsive">
-											<div class="card-header"><h5 class="text-primary">Agreements</h5></div>
+											<div class="card-header"><h5 class="text-primary"><?= __('Agreements') ?></h5></div>
 											<?php if(count((array)$aggrements)>0){  ?>
 												<table class="table table-hover m-b-0">
 													<thead>
 														<tr>
-															<th scope="col">Type</th>
-															<th scope="col">Number</th>
-															<th scope="col">Sign Date</th>
-															<th scope="col">Expiry Date</th>
+															<th scope="col"><?= __('Type') ?></th>
+															<th scope="col"><?= __('Number') ?></th>
+															<th scope="col"><?= __('Sign Date') ?></th>
+															<th scope="col"><?= __('Expiry Date') ?></th>
 														</tr>
 													</thead>
 													<tbody>
@@ -1061,28 +1061,28 @@ function toggleRowLock(button) {
 							</div>
 							<div class="col-lg-12 col-xl-6">
 								<div class="table-responsive">
-									<div class="card-header"><h5 class="text-primary">Shipping Details</h5></div>
+									<div class="card-header"><h5 class="text-primary"><?= __('Shipping Details') ?></h5></div>
 									<table class="table m-0">
 										<tbody>
 											<tr>
-												<th scope="row">Shipping  Adderss</th>
+												<th scope="row"><?= __('Shipping  Adderss') ?></th>
 												<td class="address-basic"><?php if($customers['shipping_address']!=""){ echo trim($customers['shipping_address']).",".$customers['shipping_city']; } ?></td>
 											</tr>
 											<tr>
-												<th scope="row">Country</th>
+												<th scope="row"><?= __('Country') ?></th>
 												<td class="address-basic"><?php echo emptytextdashShow($countrylist[$customers['shipping_country']]); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">State</th>
+												<th scope="row"><?= __('State') ?></th>
 												<td class="address-basic"><?php echo emptytextdashShow($stateslist[$customers['shipping_state']]); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">City</th>
+												<th scope="row"><?= __('City') ?></th>
 												<td class="address-basic"><?php echo emptytextdashShow($citieslist[$customers['shipping_city']]); ?></td>
 											</tr>
 
 											<tr>
-												<th scope="row">Pincode</th>
+												<th scope="row"><?= __('Pincode') ?></th>
 												<td><?php echo emptytextdashShow($customers['shipping_post_code']); ?></td>
 											</tr>                                 
 										</tbody>
@@ -1091,27 +1091,27 @@ function toggleRowLock(button) {
 							</div>
 							<div class="col-lg-12 col-xl-6">
 								<div class="table-responsive">
-									<div class="card-header"><h5 class="text-primary">Tax Info</h5></div>
+									<div class="card-header"><h5 class="text-primary"><?= __('Tax Info') ?></h5></div>
 									<table class="table m-0">
 										<tbody>
 											<tr>
-												<th scope="row">GST Registration type</th>
+												<th scope="row"><?= __('GST Registration type') ?></th>
 												<td><?php echo emptytextdashShow($gstregistrationtype[$customers['gsttype']]); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">GSTIN</th>
+												<th scope="row"><?= __('GSTIN') ?></th>
 												<td><?php echo emptytextdashShow($customers['gstin']); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">Tax Reg.No.</th>
+												<th scope="row"><?= __('Tax Reg.No.') ?></th>
 												<td><?php echo emptytextdashShow($customers['customer_tax_reg_no']); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">CST Reg.No</th>
+												<th scope="row"><?= __('CST Reg.No') ?></th>
 												<td><?php echo emptytextdashShow($customers['cst_reg_no']); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">PAN</th>
+												<th scope="row"><?= __('PAN') ?></th>
 												<td><?php echo emptytextdashShow($customers['pan_no']); ?></td>
 											</tr>                                 
 										</tbody>
@@ -1120,35 +1120,35 @@ function toggleRowLock(button) {
 							</div>
 							<div class="col-lg-12 col-xl-6">
 								<div class="table-responsive">
-									<div class="card-header"><h5 class="text-primary">Billing Adderss</h5></div>
+									<div class="card-header"><h5 class="text-primary"><?= __('Billing Adderss') ?></h5></div>
 									<table class="table m-0">
 										<tbody>
 											<tr>
-												<th scope="row">Billing Adderss</th>
+												<th scope="row"><?= __('Billing Adderss') ?></th>
 												<td class="address-basic"><?php echo $customers['billing_address'].",".$customers['billing_city']; ?></td>
 											</tr>
 											<tr>
-												<th scope="row">Country</th>
+												<th scope="row"><?= __('Country') ?></th>
 												<td class="address-basic"><?php echo emptytextdashShow($countrylist[$customers['billing_country']]); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">State</th>
+												<th scope="row"><?= __('State') ?></th>
 												<td class="address-basic"><?php echo emptytextdashShow($stateslist[$customers['billing_state']]); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">City</th>
+												<th scope="row"><?= __('City') ?></th>
 												<td class="address-basic"><?php echo emptytextdashShow($citieslist[$customers['billing_city']]); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">Pincode</th>
+												<th scope="row"><?= __('Pincode') ?></th>
 												<td><?php echo emptytextdashShow($customers['billing_post_code']); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">Contact Person</th>
+												<th scope="row"><?= __('Contact Person') ?></th>
 												<td><?php echo emptytextdashShow($customers['contact_person']); ?></td> 
 											</tr>
 											<tr>
-												<th scope="row">Contact Person Mobile</th>
+												<th scope="row"><?= __('Contact Person Mobile') ?></th>
 												<td><?php echo emptytextdashShow($customers['mobile']); ?></td>
 											</tr>
 
@@ -1158,31 +1158,31 @@ function toggleRowLock(button) {
 							</div>
 							<div class="col-lg-12 col-xl-6">
 								<div class="table-responsive">
-									<div class="card-header"><h5 class="text-primary">Payment & Billing</h5></div>
+									<div class="card-header"><h5 class="text-primary"><?= __('Payment & Billing') ?></h5></div>
 									<table class="table m-0">
 										<tbody>
 											<tr>
-												<th scope="row">Preferred Payment Method</th>
+												<th scope="row"><?= __('Preferred Payment Method') ?></th>
 												<td><?php echo emptytextdashShow($customers['pref_payment_method']); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">Payment Trems</th>
+												<th scope="row"><?= __('Payment Trems') ?></th>
 												<td><?php echo emptytextdashShow($paymenttype[$customers['payment_terms']]); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">Preferred Delivery Method</th>
+												<th scope="row"><?= __('Preferred Delivery Method') ?></th>
 												<td><?php echo emptytextdashShow($customers['preferred_deliver_method']); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">Opening Blance</th>
+												<th scope="row"><?= __('Opening Blance') ?></th>
 												<td class="text-right"><?php echo emptytextdashShow(customeummarmonyformate($customers['opening_balance'])); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">The Customer Pays Me With</th>
+												<th scope="row"><?= __('The Customer Pays Me With') ?></th>
 												<td class="text-right"><?php echo emptytextdashShow(customeummarmonyformate($customers['pay_with_me'])); ?></td>
 											</tr>                                 
 											<tr>
-												<th scope="row">Credit Limit</th>
+												<th scope="row"><?= __('Credit Limit') ?></th>
 												<td class="text-right"><?php echo emptytextdashShow(customeummarmonyformate($customers['credit_limit'])); ?></td>
 											</tr>
 										</tbody>
@@ -1192,19 +1192,19 @@ function toggleRowLock(button) {
 							<?php /**?>
 							<div class="col-lg-12 col-xl-6">
 								<div class="table-responsive">
-									<div class="card-header"><h5 class="text-primary">Sale & Discount</h5></div>
+									<div class="card-header"><h5 class="text-primary"><?= __('Sale & Discount') ?></h5></div>
 									<table class="table m-0">
 										<tbody>
 											<tr>
-												<th scope="row">Default Discount Percentage</th>
+												<th scope="row"><?= __('Default Discount Percentage') ?></th>
 												<td><?php echo emptytextdashShow(customeummarmonyformate($customers['default_discount_perc'])); ?></td>
 											</tr>
 											<tr>
-												<th scope="row">Payment Discount Percentage</th>
+												<th scope="row"><?= __('Payment Discount Percentage') ?></th>
 												<td><?php echo emptytextdashShow(customeummarmonyformate($customers['payment_discount_perc'])); ?></td>
 											</tr>
 											<!-- <tr>
-												<th scope="row">Sales Type</th>
+												<th scope="row"><?= __('Sales Type') ?></th>
 												<td><?php echo emptytextdashShow($customers['sales_type']); ?></td>
 											</tr>  -->                             
 										</tbody>
@@ -1218,73 +1218,73 @@ function toggleRowLock(button) {
 						<div class="row">
 							<div class="form-group row">
 								<!-- <div class="col-lg-3 p-r-5" style="float: left;">
-									<span class="form-label">Title</span>
+									<span class="form-label"><?= __('Title') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="title" name="title" value="<?php echo $customers['title']; ?>" title="Title" aria-label="Title">	
+										<input class="form-control" type="text" id="title" name="title" value="<?php echo $customers['title']; ?>" title="<?= __('Title') ?>" aria-label="Title">	
 									</div>
 									<div style="display: none;color: red;" id="title_err"> Please enter title </div> 
 								</div> -->
 								<div class="form-group col-lg-3 p-r-5" style="float: left;">
 									<span class="form-label">First Name <span class="text-danger">*</span></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="first_name" name="first_name" value="<?php echo $customers['first_name']; ?>" required title="First Name" aria-label="First Name">
+										<input class="form-control" type="text" id="first_name" name="first_name" value="<?php echo $customers['first_name']; ?>" required title="<?= __('First Name') ?>" aria-label="First Name">
 									</div>
 									<div style="display: none;color: red;" id="first_name_err"> Please enter first_name </div> 
 								</div>
 								<div class="form-group col-lg-3 p-r-5" style="float: left;">
-									<span class="form-label">Middle Name</span>
+									<span class="form-label"><?= __('Middle Name') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="middle_name" name="middle_name" value="<?php echo $customers['middle_name']; ?>" title="Middle Name" aria-label="Middle Name">
+										<input class="form-control" type="text" id="middle_name" name="middle_name" value="<?php echo $customers['middle_name']; ?>" title="<?= __('Middle Name') ?>" aria-label="Middle Name">
 									</div>
 									<div style="display: none;color: red;" id="middle_name_err"> Please enter middle name </div> 
 								</div>
 								<div class="form-group col-lg-3 p-r-5" style="float: left;">
 									<span class="form-label">Last Name <span class="text-danger">*</span></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="last_name" name="last_name" value="<?php echo $customers['last_name']; ?>" required title="Last Name" aria-label="Last Name">
+										<input class="form-control" type="text" id="last_name" name="last_name" value="<?php echo $customers['last_name']; ?>" required title="<?= __('Last Name') ?>" aria-label="Last Name">
 									</div>
 									<div style="display: none;color: red;" id="last_name_err"> Please enter last name </div> 
 								</div>
 								<div class="form-group col-lg-3">
 									<span class="form-label">Email <span class="text-danger">*</span></span>
 									<div class="kt-input-icon">
-										<input class="form-control" id="email" name="email" type="email" onblur="checkalreadyavailableornotcustomerorvendordetails('EMAIL')" value="<?php echo $customers['email']; ?>" required title="Email" aria-label="Email">
+										<input class="form-control" id="email" name="email" type="email" onblur="checkalreadyavailableornotcustomerorvendordetails('EMAIL')" value="<?php echo $customers['email']; ?>" required title="<?= __('Email') ?>" aria-label="Email">
 									</div>
 									<span class="text-danger f-14" id="emailerror"  style="display:none"></span>
 									<div style="display: none;color: red;" id="email_err"> Please enter email </div> 
 								</div>
 								<div class="form-group col-lg-3">
-									<span class="form-label">Phone</span>
+									<span class="form-label"><?= __('Phone') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="number" id="phone" name="phone" value="<?php echo $customers['phone']; ?>" title="Phone" aria-label="Phone">	
+										<input class="form-control" type="number" id="phone" name="phone" value="<?php echo $customers['phone']; ?>" title="<?= __('Phone') ?>" aria-label="Phone">	
 									</div>
 									<div style="display: none;color: red;" id="phone_err"> Please enter phone </div>  
 								</div>
 								<div class="form-group col-lg-3 p-r-5" style="float: left;">
-									<span class="form-label">Suffix</span>
+									<span class="form-label"><?= __('Suffix') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="suffix" name="suffix" value="<?php echo $customers['suffix']; ?>" title="Suffix" aria-label="Suffix">
+										<input class="form-control" type="text" id="suffix" name="suffix" value="<?php echo $customers['suffix']; ?>" title="<?= __('Suffix') ?>" aria-label="Suffix">
 									</div>
 									<div style="display: none;color: red;" id="suffix_err"> Please enter suffix name </div> 
 								</div>
 								<div class="form-group col-lg-3 ">
 									<span class="form-label">Company <span class="text-danger">*</span></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="company" name="company" value="<?php echo $customers['company']!=""?$customers['company']:$_GET['COMPNAME']; ?>" required title="Company" aria-label="Company">	
+										<input class="form-control" type="text" id="company" name="company" value="<?php echo $customers['company']!=""?$customers['company']:$_GET['COMPNAME']; ?>" required title="<?= __('Company') ?>" aria-label="Company">	
 									</div>
 									<div style="display: none;color: red;" id="company_err"> Please enter company </div>  
 								</div>
 								<div class="form-group col-lg-3 ">
-									<span class="form-label">Display Name As</span>
+									<span class="form-label"><?= __('Display Name As') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="display_name" name="display_name" value="<?php echo $customers['display_name']; ?>" title="Display Name" aria-label="Display Name">	
+										<input class="form-control" type="text" id="display_name" name="display_name" value="<?php echo $customers['display_name']; ?>" title="<?= __('Display Name') ?>" aria-label="Display Name">	
 									</div>
 									<div style="display: none;color: red;" id="display_name_err"> Please enter display name </div>
 								</div>
 								<div class="form-group col-lg-3 w-full">
-									<span class="form-label">Parent group</span>
-									<select name="parent_customer" class="form-select js-example-basic-single" title="Parent Customer" aria-label="Parent Customer">
-										<option value="">Select Any One</option>
+									<span class="form-label"><?= __('Parent group') ?></span>
+									<select name="parent_customer" class="form-select js-example-basic-single" title="<?= __('Parent Customer') ?>" aria-label="Parent Customer">
+										<option value=""><?= __('Select Any One') ?></option>
 										<?php foreach($customers_list as $venlist) { ?>
 											<option <?php echo $customers['parent_customer']==$venlist['id'] ? 'selected':'' ?> value="<?php echo $venlist['id'];?>"><?php echo $venlist['company']; ?></option>
 										<?php } ?>
@@ -1293,47 +1293,47 @@ function toggleRowLock(button) {
 									<div style="display: none;color: red;" id="email_err1"> Please enter parent_customer </div> 
 								</div>
 								<!-- <div class="form-group col-lg-3">
-									<span class="form-label">Bill With Parent</span>
+									<span class="form-label"><?= __('Bill With Parent') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="number" id="bill_with_parent" name="bill_with_parent" value="<?php echo $customers['bill_with_parent']; ?>" title="Bill With Parent" aria-label="Bill With Parent">	
+										<input class="form-control" type="number" id="bill_with_parent" name="bill_with_parent" value="<?php echo $customers['bill_with_parent']; ?>" title="<?= __('Bill With Parent') ?>" aria-label="Bill With Parent">	
 									</div>
 									<div style="display: none;color: red;" id="bill_with_parent_err"> Please enter bill_with_parent </div>  
 								</div> -->
 								<!-- <div class="form-group col-lg-3">
-									<span class="form-label">Language</span>
+									<span class="form-label"><?= __('Language') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="language_id" name="language_id" value="<?php echo $customers['language_id']; ?>" title="Language Id" aria-label="Language Id">	
+										<input class="form-control" type="text" id="language_id" name="language_id" value="<?php echo $customers['language_id']; ?>" title="<?= __('Language Id') ?>" aria-label="Language Id">	
 									</div>
 									<div style="display: none;color: red;" id="language_id_err"> Please enter language </div>  
 								</div>
 								<div class="col-lg-3" style="float: left;">
-									<span class="form-label">Hold Reason</span>
+									<span class="form-label"><?= __('Hold Reason') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="hold_reason" name="hold_reason" value="<?php echo $customers['hold_reason']; ?>" title="Hold Reason" aria-label="Hold Reason">
+										<input class="form-control" type="text" id="hold_reason" name="hold_reason" value="<?php echo $customers['hold_reason']; ?>" title="<?= __('Hold Reason') ?>" aria-label="Hold Reason">
 									</div>
 								</div> -->
 								<div class="form-group col-lg-3 p-r-5" style="float: right;">
-										<span class="form-label">Website</span>
+										<span class="form-label"><?= __('Website') ?></span>
 										<div class="kt-input-icon">
-											<input class="form-control" type="text" id="website_url" name="website_url" value="<?php echo $customers['website_url']; ?>" title="Website Url" aria-label="Website Url">
+											<input class="form-control" type="text" id="website_url" name="website_url" value="<?php echo $customers['website_url']; ?>" title="<?= __('Website Url') ?>" aria-label="Website Url">
 										</div>
 										<div style="display: none;color: red;" id="website_url_err"> Please enter Website </div>  
 									</div>
 									<div class="form-group col-lg-3 p-r-5" style="float: right;">
-										<span class="form-label">Short Code</span>
+										<span class="form-label"><?= __('Short Code') ?></span>
 										<div class="kt-input-icon">
-											<input class="form-control" type="text" id="short_name" name="short_name" value="<?php echo $customers['short_name']; ?>" title="Short Name" aria-label="Short Name">
+											<input class="form-control" type="text" id="short_name" name="short_name" value="<?php echo $customers['short_name']; ?>" title="<?= __('Short Name') ?>" aria-label="Short Name">
 										</div>
 										<div style="display: none;color: red;" id="short_name_err"> Please enter Short Code </div>  
 									</div>
 								<div class="col-lg-3" style="float: left;">
-									<span class="form-label">Photo</span>
+									<span class="form-label"><?= __('Photo') ?></span>
 									<div class="col-lg-9 col-xl-6">
 										<div class="profile-pic">
 											<label class="-label" for="display_logo">
-												<span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+												<span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
 											</label>
-											<input type="file" name="image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/ title="Image" aria-label="Image">
+											<input type="file" name="image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/ title="<?= __('Image') ?>" aria-label="Image">
 											<img src="<?php echo $image; ?>" id="outputdisplay_logo" width="200"  onerror="this.onerror=null;this.src='uploads/all/no-image.jpg';"/>
 											<input type="hidden" name="hid_image" value="<?php echo $customers['image'] ;  ?>">
 										</div>
@@ -1356,42 +1356,42 @@ function toggleRowLock(button) {
 									<input class="form-control" type="hidden" name="customer_vendor_gst_billing_details_id[]" value="<?php echo $cvgst['id']; ?>" >
 									<div class="row">
 										<div class="col-lg-6 p-r-5 w-full" style="float: left;">
-											<span class="form-label d-block">GST  Registration type</span>
-											<select id="gsttype" name="gsttype[]" class="form-select js-example-basic-single" title="Gsttype" aria-label="Gsttype">
-												<option value="">Select Any One</option>
+											<span class="form-label d-block"><?= __('GST  Registration type') ?></span>
+											<select id="gsttype" name="gsttype[]" class="form-select js-example-basic-single" title="<?= __('Gsttype') ?>" aria-label="Gsttype">
+												<option value=""><?= __('Select Any One') ?></option>
 												<?php foreach($gstregistrationtype as $gstkey=>$gstregtype) { ?>
 													<option <?php echo $cvgst['gsttype']==$gstkey? 'selected':'' ?> value="<?php echo $gstkey;?>"><?php echo $gstregtype; ?></option>
 												<?php } ?>
 											</select>
 										</div>
 										<div class="form-group col-lg-6" style="float: left;">
-											<span class="form-label">GST No.</span>
+											<span class="form-label"><?= __('GST No.') ?></span>
 											<div class="kt-input-icon">
-												<input class="form-control" type="text" id="gstin" name="gstin[]" onblur="checkalreadyavailableornotcustomerorvendordetails('GSTIN', this)"  value="<?php echo $cvgst['gstin']; ?>" title="Gstin" aria-label="Gstin">
+												<input class="form-control" type="text" id="gstin" name="gstin[]" onblur="checkalreadyavailableornotcustomerorvendordetails('GSTIN', this)"  value="<?php echo $cvgst['gstin']; ?>" title="<?= __('Gstin') ?>" aria-label="Gstin">
 											<span class="text-danger f-14 gstinerror" style="display:none"></span>	
 											
 											</div>
 											<div style="display: none;color: red;" id="gstin_err"> Please enter GST IN </div> 
 										</div>
 										<div class="form-group col-lg-12">
-											<span class="form-label">Billing Adderss</span>
+											<span class="form-label"><?= __('Billing Adderss') ?></span>
 											<div class="kt-input-icon">
-												<textarea type="text" class="form-control" placeholder="Billing Adderss" name="billing_address[]" id="billing_address_<?php echo $mkseq; ?>" title="Billing Adderss" aria-label="Billing Adderss"><?php echo $cvgst['billing_address']; ?></textarea>
+												<textarea type="text" class="form-control" placeholder="<?= __('Billing Adderss') ?>" name="billing_address[]" id="billing_address_<?php echo $mkseq; ?>" title="<?= __('Billing Adderss') ?>" aria-label="Billing Adderss"><?php echo $cvgst['billing_address']; ?></textarea>
 											</div> 
 										</div>
 										<div class="form-group col-lg-3 w-full" >
-											<span class="form-label">Country</span>
-											<select id="billing_country_<?php echo $mkseq; ?>" class="form-select js-example-basic-single" name="billing_country[]"  onchange="selectedcategory(this.value,'billing_state_<?php echo $mkseq; ?>','states','country_id','selectedbillcountry')" title="Billing Country" aria-label="Billing Country">
-												<option value="">Select Any One</option>
+											<span class="form-label"><?= __('Country') ?></span>
+											<select id="billing_country_<?php echo $mkseq; ?>" class="form-select js-example-basic-single" name="billing_country[]"  onchange="selectedcategory(this.value,'billing_state_<?php echo $mkseq; ?>','states','country_id','selectedbillcountry')" title="<?= __('Billing Country') ?>" aria-label="Billing Country">
+												<option value=""><?= __('Select Any One') ?></option>
 												<?php foreach($countrieslist as $countryvalue) { ?>
 													<option <?php echo $cvgst['billing_country']==$countryvalue['id'] ? 'selected':'' ?> value="<?php echo $countryvalue['id']; ?>"><?php echo $countryvalue['country_name']; ?></option>
 												<?php } ?>
 											</select>
 										</div>
 										<div class="form-group col-lg-3  w-full" >
-											<span class="form-label">State</span>
-											<select id="billing_state_<?php echo $mkseq; ?>" name="billing_state[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'billing_city_<?php echo $mkseq; ?>','cities','state_id','selectedbillstate')" title="Billing State" aria-label="Billing State">
-												<option value="">Select Any One</option>
+											<span class="form-label"><?= __('State') ?></span>
+											<select id="billing_state_<?php echo $mkseq; ?>" name="billing_state[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'billing_city_<?php echo $mkseq; ?>','cities','state_id','selectedbillstate')" title="<?= __('Billing State') ?>" aria-label="Billing State">
+												<option value=""><?= __('Select Any One') ?></option>
 												<?php foreach($states as $states1) { ?>
 													<option <?php echo $cvgst['billing_state']==$states1['id'] ? 'selected':'' ?> value="<?php echo $states1['id'];?>"><?php echo $states1['state_name']; ?></option>
 												<?php } ?>
@@ -1399,34 +1399,34 @@ function toggleRowLock(button) {
 
 										</div>
 										<div class="form-group col-lg-3 p-r-5  w-full" >
-											<span class="form-label">City/Town</span>
-											<select id="billing_city_<?php echo $mkseq; ?>" name="billing_city[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'','city','','selectedbillcity')" title="Billing City" aria-label="Billing City">
-												<option value="">Select Any One</option>
+											<span class="form-label"><?= __('City/Town') ?></span>
+											<select id="billing_city_<?php echo $mkseq; ?>" name="billing_city[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'','city','','selectedbillcity')" title="<?= __('Billing City') ?>" aria-label="Billing City">
+												<option value=""><?= __('Select Any One') ?></option>
 												<?php foreach($cities as $cities1) { ?>
 													<option <?php echo $cvgst['billing_city']==$cities1['id'] ? 'selected':'' ?> value="<?php echo $cities1['id'];?>"><?php echo $cities1['city_name']; ?></option>
 												<?php } ?>
 											</select>
 										</div>
 										<div class="form-group col-lg-3 p-r-5" >
-											<span  class="form-label">Pincode</span>
-											<input class="form-control" placeholder="Pincode" type="number" id="billing_post_code_<?php echo $mkseq; ?>" name="billing_post_code[]" value="<?php echo $cvgst['billing_post_code']; ?>" title="Pincode" aria-label="Pincode">
+											<span  class="form-label"><?= __('Pincode') ?></span>
+											<input class="form-control" placeholder="<?= __('Pincode') ?>" type="number" id="billing_post_code_<?php echo $mkseq; ?>" name="billing_post_code[]" value="<?php echo $cvgst['billing_post_code']; ?>" title="<?= __('Pincode') ?>" aria-label="Pincode">
 
 										</div>
 										<div class="form-group col-lg-3 p-r-5" style="float: right;">
-											<span class="form-label">Contact Person</span>
-											<input class="form-control" placeholder="Contact Person" type="text" id="" name="contact_person[]" value="<?php echo $cvgst['contact_person']; ?>" title="Contact Person" aria-label="Contact Person">
+											<span class="form-label"><?= __('Contact Person') ?></span>
+											<input class="form-control" placeholder="<?= __('Contact Person') ?>" type="text" id="" name="contact_person[]" value="<?php echo $cvgst['contact_person']; ?>" title="<?= __('Contact Person') ?>" aria-label="Contact Person">
 
 										</div>
 										<div class="form-group col-lg-3 p-r-5" style="float: left;">
-											<span class="form-label">Mobile</span>
+											<span class="form-label"><?= __('Mobile') ?></span>
 											<div class="kt-input-icon">
-												<input class="form-control" type="number" id="mobile_<?php echo $gstkey; ?>" name="mobile[]" value="<?php echo $cvgst['mobile']; ?>" title="Mobile" aria-label="Mobile">	
+												<input class="form-control" type="number" id="mobile_<?php echo $gstkey; ?>" name="mobile[]" value="<?php echo $cvgst['mobile']; ?>" title="<?= __('Mobile') ?>" aria-label="Mobile">	
 											</div>
 										</div>
 										<div class="form-group col-lg-3 p-r-5" style="float: right;">
-											<span class="form-label">Fax</span>
+											<span class="form-label"><?= __('Fax') ?></span>
 											<div class="kt-input-icon">
-												<input class="form-control" type="number" id="fax_<?php echo $gstkey; ?>" name="fax[]" value="<?php echo $cvgst['fax']; ?>" title="Fax" aria-label="Fax">
+												<input class="form-control" type="number" id="fax_<?php echo $gstkey; ?>" name="fax[]" value="<?php echo $cvgst['fax']; ?>" title="<?= __('Fax') ?>" aria-label="Fax">
 											</div>
 										</div>
 									</div>
@@ -1438,43 +1438,43 @@ function toggleRowLock(button) {
 											<span class="form-label d-block"></span>
 											<div class="border-checkbox-section  ">
 		                                      	<div class="border-checkbox-group border-checkbox-group-primary m-t-30">
-		                                        	<input class="border-checkbox" type="checkbox" id="checkbox<?php echo $mkseq; ?>" onclick="cloneShipping(this,'<?php echo $mkseq; ?>')" title="Input" aria-label="Input">
-		                                        	<label class="form-label border-checkbox-label" for="checkbox<?php echo $mkseq; ?>">My shipping address is the same as my billing address</label>
+		                                        	<input class="border-checkbox" type="checkbox" id="checkbox<?php echo $mkseq; ?>" onclick="cloneShipping(this,'<?php echo $mkseq; ?>')" title="<?= __('Input') ?>" aria-label="Input">
+		                                        	<label class="form-label border-checkbox-label" for="checkbox<?php echo $mkseq; ?>"><?= __('My shipping address is the same as my billing address') ?></label>
 		                                      	</div>
 		                                    </div>
 										</div>
 										<div class="col-lg-3 text-right d-flex flex-column justify-content-between ">
-											<span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Cliek To Remove" class="cursor-pointer" onclick="removeGSTDiv(<?php echo $mkseq; ?>)">
+											<span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Cliek To Remove') ?>" class="cursor-pointer" onclick="removeGSTDiv(<?php echo $mkseq; ?>)">
 												<i class="ti-trash text-danger"></i> Remove
 											</span>
 											<div class="form-group ">
                                             <input type="radio" id="is_default"  name="is_default" value="<?php echo $mkseq-1; ?>" <?php 
-                                                echo ($cvgst['is_default'] == 'Y' || ($mkseq-1==0) ) ? 'checked' : '';?> title="Is Default" aria-label="Is Default"><span>Make Default</span></div>
+                                                echo ($cvgst['is_default'] == 'Y' || ($mkseq-1==0) ) ? 'checked' : '';?> title="<?= __('Is Default') ?>" aria-label="Is Default"><span>Make Default</span></div>
 										</div>
 										<!-- <div class="col-lg-3 text-right">
-											<span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Cliek To Remove" class="cursor-pointer" onclick="removeGSTDiv(<?php echo $mkseq; ?>)">
+											<span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Cliek To Remove') ?>" class="cursor-pointer" onclick="removeGSTDiv(<?php echo $mkseq; ?>)">
 												<i class="ti-trash text-danger"></i> Remove
 											</span>
 										</div> -->
 										<div class="form-group col-lg-12" >
-											<span class="form-label">Shipping Adderss</span>
+											<span class="form-label"><?= __('Shipping Adderss') ?></span>
 											<div class="kt-input-icon">
-												<textarea type="text" class="form-control" placeholder="Street" name="shipping_address[]" id="shipping_address_<?php echo $mkseq; ?>" title="Street" aria-label="Street"><?php echo $cvgst['shipping_address']; ?></textarea>
+												<textarea type="text" class="form-control" placeholder="<?= __('Street') ?>" name="shipping_address[]" id="shipping_address_<?php echo $mkseq; ?>" title="<?= __('Street') ?>" aria-label="Street"><?php echo $cvgst['shipping_address']; ?></textarea>
 											</div> 
 										</div>
 										<div class="form-group col-lg-3  w-full" >
-											<span class="form-label">Country</span>
-											<select id="shipping_country_<?php echo $mkseq; ?>" class="form-select js-example-basic-single"  name="shipping_country[]" onchange="selectedcategory(this.value,'shipping_state_<?php echo $mkseq; ?>','states','country_id','selectedshipcountry')" title="Shipping Country" aria-label="Shipping Country">
-												<option value="">Select Any One</option>
+											<span class="form-label"><?= __('Country') ?></span>
+											<select id="shipping_country_<?php echo $mkseq; ?>" class="form-select js-example-basic-single"  name="shipping_country[]" onchange="selectedcategory(this.value,'shipping_state_<?php echo $mkseq; ?>','states','country_id','selectedshipcountry')" title="<?= __('Shipping Country') ?>" aria-label="Shipping Country">
+												<option value=""><?= __('Select Any One') ?></option>
 												<?php foreach($countrieslist as $countryvalue) { ?>
 													<option <?php echo $cvgst['shipping_country']==$countryvalue['id'] ? 'selected':'' ?> value="<?php echo $countryvalue['id'];?>"><?php echo $countryvalue['country_name']; ?></option>
 												<?php } ?>
 											</select>
 										</div>
 										<div class="form-group col-lg-3 w-full">
-											<span class="form-label">State</span>
-											<select id="shipping_state_<?php echo $mkseq; ?>" name="shipping_state[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'shipping_city_<?php echo $mkseq; ?>','cities','state_id','selectedshipstate')" title="Shipping State" aria-label="Shipping State">
-												<option value="">Select Any One</option>
+											<span class="form-label"><?= __('State') ?></span>
+											<select id="shipping_state_<?php echo $mkseq; ?>" name="shipping_state[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'shipping_city_<?php echo $mkseq; ?>','cities','state_id','selectedshipstate')" title="<?= __('Shipping State') ?>" aria-label="Shipping State">
+												<option value=""><?= __('Select Any One') ?></option>
 												<?php foreach($states as $states1) { ?>
 													<option <?php echo $cvgst['shipping_state']==$states1['id'] ? 'selected':'' ?> value="<?php echo $states1['id'];?>"><?php echo $states1['state_name']; ?></option>
 												<?php } ?>
@@ -1482,17 +1482,17 @@ function toggleRowLock(button) {
 											</select>
 										</div>
 										<div class="form-group col-lg-3 p-r-5 w-full">
-											<span class="form-label">City/Town</span>
-											<select id="shipping_city_<?php echo $mkseq; ?>" name="shipping_city[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'','city','','selectedshipcity')" title="Shipping City" aria-label="Shipping City">
-												<option value="">Select Any One</option>
+											<span class="form-label"><?= __('City/Town') ?></span>
+											<select id="shipping_city_<?php echo $mkseq; ?>" name="shipping_city[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'','city','','selectedshipcity')" title="<?= __('Shipping City') ?>" aria-label="Shipping City">
+												<option value=""><?= __('Select Any One') ?></option>
 												<?php foreach($cities as $cities1) { ?>
 													<option <?php echo $cvgst['shipping_city']==$cities1['id'] ? 'selected':'' ?> value="<?php echo $cities1['id'];?>"><?php echo $cities1['city_name']; ?></option>
 												<?php } ?>
 											</select>
 										</div>
 										<div class="form-group col-lg-3" >
-											<span class="form-label">Pincode</span>
-											<input class="form-control" placeholder="Pincode" type="number" id="shipping_post_code_<?php echo $mkseq; ?>" name="shipping_post_code[]" value="<?php echo $cvgst['shipping_post_code']; ?>" title="Pincode" aria-label="Pincode">
+											<span class="form-label"><?= __('Pincode') ?></span>
+											<input class="form-control" placeholder="<?= __('Pincode') ?>" type="number" id="shipping_post_code_<?php echo $mkseq; ?>" name="shipping_post_code[]" value="<?php echo $cvgst['shipping_post_code']; ?>" title="<?= __('Pincode') ?>" aria-label="Pincode">
 										</div>									
 									</div>
 								</div>
@@ -1500,19 +1500,19 @@ function toggleRowLock(button) {
 						<?php $mkseq++; } ?>
 						</div>
 						<div class="">
-							<button class="btn btn-success  col-lg-3" onclick="addMoreGSTBillingDetails()" type="button">+ Add More GST & Billing Details</button>
+							<button class="btn btn-success  col-lg-3" onclick="addMoreGSTBillingDetails()" type="button"><?= __('+ Add More GST & Billing Details') ?></button>
 						</div>
 						<button  type="submit" name="submit" class="btn btn-primary m-t-20"> <?php if($customers['id'] !=""){ ?><i class="fa fa-check-square"></i> Update <?php }else{  ?><i class="icofont icofont-plus"></i> Submit<?php } ?> </button>
 					</div>
 					<div class="tab-pane" id="note" role="tabpanel">
 						<div class="row ">
 							<div class="col-lg-6 p-r-5" style="float: left;">
-								<span class="form-label">PO Notes</span>
-								<textarea type="text" name="customer_inv_notes"  class="form-control" style="height: 150px;" placeholder="Enter your Customer Statement Notes" title="Enter your Customer Statement Notes" aria-label="Enter your Customer Statement Notes"><?php echo $customers['customer_inv_notes']; ?></textarea>
+								<span class="form-label"><?= __('PO Notes') ?></span>
+								<textarea type="text" name="customer_inv_notes"  class="form-control" style="height: 150px;" placeholder="<?= __('Enter your Customer Statement Notes') ?>" title="<?= __('Enter your Customer Statement Notes') ?>" aria-label="Enter your Customer Statement Notes"><?php echo $customers['customer_inv_notes']; ?></textarea>
 							</div>
 							<div class="col-lg-6" style="float: left;">
-								<span class="form-label">Other Notes</span>
-								<textarea type="text" name="customer_stmnt_notes"   class="form-control" style="height: 150px;" placeholder="Enter your Customer Invoice Notes" title="Enter your Customer Invoice Notes" aria-label="Enter your Customer Invoice Notes"><?php echo $customers['customer_stmnt_notes']; ?></textarea>
+								<span class="form-label"><?= __('Other Notes') ?></span>
+								<textarea type="text" name="customer_stmnt_notes"   class="form-control" style="height: 150px;" placeholder="<?= __('Enter your Customer Invoice Notes') ?>" title="<?= __('Enter your Customer Invoice Notes') ?>" aria-label="Enter your Customer Invoice Notes"><?php echo $customers['customer_stmnt_notes']; ?></textarea>
 							</div>
 						</div>
 						<button  type="submit" name="submit" class="btn btn-primary m-t-20"> <?php if($customers['id'] !=""){ ?><i class="fa fa-check-square"></i> Update <?php }else{  ?><i class="icofont icofont-plus"></i> Submit<?php } ?> </button>
@@ -1522,21 +1522,21 @@ function toggleRowLock(button) {
 							<div class="col-lg-12" style="border-right: dotted 1px solid;">
 								<div class="from row">
 									<div class="col-lg-6" style="margin-bottom: 2rem;">
-										<span class="form-label">Tax Reg. No.</span>
+										<span class="form-label"><?= __('Tax Reg. No.') ?></span>
 										<div class="kt-input-icon">
-											<input class="form-control" type="text" id="customer_tax_reg_no" name="customer_tax_reg_no" value="<?php echo $customers['customer_tax_reg_no']; ?>" title="Customer Tax Reg No" aria-label="Customer Tax Reg No">
+											<input class="form-control" type="text" id="customer_tax_reg_no" name="customer_tax_reg_no" value="<?php echo $customers['customer_tax_reg_no']; ?>" title="<?= __('Customer Tax Reg No') ?>" aria-label="Customer Tax Reg No">
 										</div> 
 									</div>
 									<div class="col-lg-6" style="margin-bottom: 2rem;">
-										<span class="form-label">VAT/CST Reg. No.</span>
+										<span class="form-label"><?= __('VAT/CST Reg. No.') ?></span>
 										<div class="kt-input-icon">
-											<input class="form-control" type="text" id="cst_reg_no" name="cst_reg_no" value="<?php echo $customers['cst_reg_no']; ?>" title="Cst Reg No" aria-label="Cst Reg No">
+											<input class="form-control" type="text" id="cst_reg_no" name="cst_reg_no" value="<?php echo $customers['cst_reg_no']; ?>" title="<?= __('Cst Reg No') ?>" aria-label="Cst Reg No">
 										</div> 
 									</div>
 									<div class="col-lg-6" style="margin-bottom: 2rem;">
-										<span class="form-label">PAN No.</span>
+										<span class="form-label"><?= __('PAN No.') ?></span>
 										<div class="kt-input-icon">
-											<input class="form-control" type="text" id="pan_no" name="pan_no" onblur="checkalreadyavailableornotcustomerorvendordetails('PAN_NO')" value="<?php echo $customers['pan_no']; ?>" title="Pan No" aria-label="Pan No">
+											<input class="form-control" type="text" id="pan_no" name="pan_no" onblur="checkalreadyavailableornotcustomerorvendordetails('PAN_NO')" value="<?php echo $customers['pan_no']; ?>" title="<?= __('Pan No') ?>" aria-label="Pan No">
 										</div>
 										<span class="text-danger f-14" id="pannoerror"  style="display:none"></span>
 										<div style="display: none;color: red;" id="pan_no_err"> Please Enter PAN No. </div> 
@@ -1545,7 +1545,7 @@ function toggleRowLock(button) {
 										<span class="form-label">  </span>
 										<div class="kt-checkbox-inline">
 											<span class="kt-checkbox">
-												<input type="checkbox" name="tds_apply" class="js-switch" <?php echo $customers['tds_apply'] == "0"?"checked":"";?> title="Tds Apply" aria-label="Tds Apply"> Apply TDS for this customer
+												<input type="checkbox" name="tds_apply" class="js-switch" <?php echo $customers['tds_apply'] == "0"?"checked":"";?> title="<?= __('Tds Apply') ?>" aria-label="Tds Apply"> Apply TDS for this customer
 												<span></span>
 											</span>
 										</div>
@@ -1557,13 +1557,13 @@ function toggleRowLock(button) {
 							
 								<div class="row">
 									<div class="col-lg-4">
-										<span class="form-label">LUT No.</span>
+										<span class="form-label"><?= __('LUT No.') ?></span>
 									</div>
 									<div class="col-lg-4 ">
-										<span class="form-label">Bond No.</span>
+										<span class="form-label"><?= __('Bond No.') ?></span>
 									</div>
 									<div class="col-lg-4">
-										<span class="form-label">Finance Year</span>
+										<span class="form-label"><?= __('Finance Year') ?></span>
 									</div>
 								</div>
 								<?php 
@@ -1577,16 +1577,16 @@ function toggleRowLock(button) {
 										<input type="hidden" name="alreadyupdated[<?php echo $bond['id']; ?>]" value="<?php echo $bond['lock_status']; ?>">
 										<input  class="form-control" type="text" 
 											name="lut_no[]"
-											value="<?php echo $bond['lut_no']; ?>" title="Lut No" aria-label="Lut No">
+											value="<?php echo $bond['lut_no']; ?>" title="<?= __('Lut No') ?>" aria-label="Lut No">
 										<input type="hidden" name="lutbond_id[]" value="<?php echo $bond['id']; ?>">
 									</div>
 									<div class="col-lg-4">
-										<input  class="form-control" type="text" name="bond_no[]"	value="<?php echo $bond['bond_no']; ?>" title="Bond No" aria-label="Bond No">
+										<input  class="form-control" type="text" name="bond_no[]"	value="<?php echo $bond['bond_no']; ?>" title="<?= __('Bond No') ?>" aria-label="Bond No">
 									</div>
 									<div class="col-lg-2 w-full">
 										<select  class="form-select js-example-basic-single"
-											name="finance_year[]" onchange="updateFinancialDates(this)" title="Finance Year" aria-label="Finance Year">
-											<option value="">Select Any One</option>
+											name="finance_year[]" onchange="updateFinancialDates(this)" title="<?= __('Finance Year') ?>" aria-label="Finance Year">
+											<option value=""><?= __('Select Any One') ?></option>
 											<?php for ($i = date("Y") - 10; $i <= date("Y"); $i++) { 
 												// Extract year from Start_date if available
 												$financeYear = '';
@@ -1629,18 +1629,18 @@ function toggleRowLock(button) {
 									<div class="col-lg-4 ">
 										<input  class="form-control" type="text" 
 											name="lut_no[]"
-											value="" title="Lut No" aria-label="Lut No">
+											value="" title="<?= __('Lut No') ?>" aria-label="Lut No">
 										<input type="hidden" name="lutbond_id[]" value="">
 									</div>
 									<div class="col-lg-4">
 										<input  class="form-control" type="text" 
 											name="bond_no[]"
-											value="" title="Bond No" aria-label="Bond No">
+											value="" title="<?= __('Bond No') ?>" aria-label="Bond No">
 									</div>
 									<div class="col-lg-2  w-full">
 										<select  class="form-select js-example-basic-single"
-											name="finance_year[]" onchange="updateFinancialDates(this)" title="Finance Year" aria-label="Finance Year">
-											<option value="">Select Any One</option>
+											name="finance_year[]" onchange="updateFinancialDates(this)" title="<?= __('Finance Year') ?>" aria-label="Finance Year">
+											<option value=""><?= __('Select Any One') ?></option>
 											<?php for ($i = date("Y") - 10; $i <= date("Y"); $i++) { ?>
 												<option value="<?php echo $i; ?>">
 													<?php echo "Apr " . $i . " - Mar " . ($i + 1); ?>
@@ -1674,69 +1674,69 @@ function toggleRowLock(button) {
 					<div class="tab-pane" id="payment-billing" role="tabpanel">
 						<div class="from row">
 							<div class="col-lg-6 w-full" style="margin-bottom: 2rem;">
-								<span class="form-label d-block">Preferred Payment Method</span>
-								<select name="pref_payment_method" class="form-control form-select js-example-basic-single" title="Pref Payment Method" aria-label="Pref Payment Method">
-									<option value="">Select Any One</option>
+								<span class="form-label d-block"><?= __('Preferred Payment Method') ?></span>
+								<select name="pref_payment_method" class="form-control form-select js-example-basic-single" title="<?= __('Pref Payment Method') ?>" aria-label="Pref Payment Method">
+									<option value=""><?= __('Select Any One') ?></option>
 									<?php foreach($payment_method as $key=>$pm) { ?>
 										<option value="<?php echo $key; ?>" <?php echo $customers['pref_payment_method']==$key?'selected':'';?> ><?php echo $pm; ?></option>
 									<?php } ?>
 								</select>
 							</div>
 							<div class="col-lg-6 w-full" style="margin-bottom: 2rem;">
-								<span class="form-label">Payment Trems</span>
-								<select name="payment_terms" class="form-control form-select js-example-basic-single" title="Payment Terms" aria-label="Payment Terms">
-									<option value="">Select Any One</option>
+								<span class="form-label"><?= __('Payment Trems') ?></span>
+								<select name="payment_terms" class="form-control form-select js-example-basic-single" title="<?= __('Payment Terms') ?>" aria-label="Payment Terms">
+									<option value=""><?= __('Select Any One') ?></option>
 									<?php foreach($paymenttype as $key=>$st) { ?>
 										<option value="<?php echo $key; ?>" <?php echo $customers['payment_terms']==$key?'selected':'';?> ><?php echo $st; ?></option>
 									<?php } ?>
 								</select>
 							</div>
 							<!-- <div class="col-lg-6 w-full" style="margin-bottom: 2rem;">
-								<span class="form-label">Preferred Payment Method</span>
-								<select name="payment_terms" class="form-control form-select js-example-basic-single" title="Payment Terms" aria-label="Payment Terms">
-									<option value="">Select Any One</option>
+								<span class="form-label"><?= __('Preferred Payment Method') ?></span>
+								<select name="payment_terms" class="form-control form-select js-example-basic-single" title="<?= __('Payment Terms') ?>" aria-label="Payment Terms">
+									<option value=""><?= __('Select Any One') ?></option>
 									<?php foreach($payment_method as $key=>$pm) { ?>
 										<option value="<?php echo $key; ?>" <?php echo $vendordetail['pref_payment_method']==$key?'selected':'';?> ><?php echo $pm; ?></option>
 									<?php } ?>
 								</select>
 							</div> -->
 							<div class="col-lg-6 w-full" style="margin-bottom: 2rem;">
-								<span class="form-label d-block">Preferred Delivery Method</span>
-								<select name="preferred_deliver_method" class="form-control form-select js-example-basic-single" title="Preferred Deliver Method" aria-label="Preferred Deliver Method">
-									<option value="">Select Any One</option>
+								<span class="form-label d-block"><?= __('Preferred Delivery Method') ?></span>
+								<select name="preferred_deliver_method" class="form-control form-select js-example-basic-single" title="<?= __('Preferred Deliver Method') ?>" aria-label="Preferred Deliver Method">
+									<option value=""><?= __('Select Any One') ?></option>
 									<?php foreach($payment_method as $key=>$pm) { ?>
 										<option value="<?php echo $key; ?>" <?php echo $customers['preferred_deliver_method']==$key?'selected':'';?> ><?php echo $pm; ?></option>
 									<?php } ?>
 								</select>
 							</div>
 							<div class="col-lg-4" style="margin-bottom: 2rem;">
-								<span class="form-label">Opening Blance</span>
+								<span class="form-label"><?= __('Opening Blance') ?></span>
 								<div class="kt-input-icon">
-									<input class="form-control text-right" type="number" id="opening_balance" name="opening_balance" value="<?php echo $customers['opening_balance']; ?>" title="Opening Balance" aria-label="Opening Balance">
+									<input class="form-control text-right" type="number" id="opening_balance" name="opening_balance" value="<?php echo $customers['opening_balance']; ?>" title="<?= __('Opening Balance') ?>" aria-label="Opening Balance">
 								</div>
 							</div>
 							<div class="col-lg-2" style="margin-bottom: 2rem;">
-								<span class="form-label">As of</span>
+								<span class="form-label"><?= __('As of') ?></span>
 								<div class="kt-input-icon">
-									<input class="form-control datepicker" type="text" id="asof" name="asof" value="<?php echo fromDate($customers['asof']); ?>" title="Asof" aria-label="Asof">
+									<input class="form-control datepicker" type="text" id="asof" name="asof" value="<?php echo fromDate($customers['asof']); ?>" title="<?= __('Asof') ?>" aria-label="Asof">
 								</div>
 							</div>
 							<div class="col-lg-6" style="margin-bottom: 2rem;">
-								<span class="form-label">The Vendor Pays Me With</span>
+								<span class="form-label"><?= __('The Vendor Pays Me With') ?></span>
 								<div class="kt-input-icon">
-									<input class="form-control text-right" type="text" id="pay_with_me" name="pay_with_me" value="<?php echo $customers['pay_with_me']; ?>" title="Pay With Me" aria-label="Pay With Me">
+									<input class="form-control text-right" type="text" id="pay_with_me" name="pay_with_me" value="<?php echo $customers['pay_with_me']; ?>" title="<?= __('Pay With Me') ?>" aria-label="Pay With Me">
 								</div>
 							</div>
 							<div class="col-lg-3" style="margin-bottom: 2rem;">
-								<span class="form-label">Credit Limit</span>
+								<span class="form-label"><?= __('Credit Limit') ?></span>
 								<div class="kt-input-icon">
-									<input class="form-control text-right" type="number" id="credit_limit" name="credit_limit" value="<?php echo $customers['credit_limit']; ?>" title="Credit Limit" aria-label="Credit Limit">
+									<input class="form-control text-right" type="number" id="credit_limit" name="credit_limit" value="<?php echo $customers['credit_limit']; ?>" title="<?= __('Credit Limit') ?>" aria-label="Credit Limit">
 								</div>
 							</div>
 							<div class="col-lg-3" style="margin-bottom: 2rem;">
-								<span class="form-label">Account Number</span>
+								<span class="form-label"><?= __('Account Number') ?></span>
 								<div class="kt-input-icon">
-									<input class="form-control text-right" type="text" id="account_code" name="account_code" value="<?php echo $customers['account_code']; ?>" title="Account Code" aria-label="Account Code">
+									<input class="form-control text-right" type="text" id="account_code" name="account_code" value="<?php echo $customers['account_code']; ?>" title="<?= __('Account Code') ?>" aria-label="Account Code">
 								</div>
 							</div>
 
@@ -1747,21 +1747,21 @@ function toggleRowLock(button) {
 					<div class="tab-pane" id="sale-discount" role="tabpanel">
 						<div class="form-group row">
 							<div class="col-lg-6" style="margin-bottom: 2rem;">
-								<span class="form-label">Default Discount Percentage (%)</span>
+								<span class="form-label"><?= __('Default Discount Percentage (%)') ?></span>
 								<div class="kt-input-icon">
-									<input class="form-control text-right" type="number" id="default_discount_perc" name="default_discount_perc" value="<?php echo $customers['default_discount_perc']; ?>" title="Default Discount Perc" aria-label="Default Discount Perc">
+									<input class="form-control text-right" type="number" id="default_discount_perc" name="default_discount_perc" value="<?php echo $customers['default_discount_perc']; ?>" title="<?= __('Default Discount Perc') ?>" aria-label="Default Discount Perc">
 								</div> 
 							</div>
 							<div class="col-lg-6" style="margin-bottom: 2rem;">
-								<span class="form-label">Payment Discount Percentage (%)</span>
+								<span class="form-label"><?= __('Payment Discount Percentage (%)') ?></span>
 								<div class="kt-input-icon">
-									<input class="form-control text-right" type="number" id="payment_discount_perc" name="payment_discount_perc" value="<?php echo $customers['payment_discount_perc']; ?>" title="Payment Discount Perc" aria-label="Payment Discount Perc">
+									<input class="form-control text-right" type="number" id="payment_discount_perc" name="payment_discount_perc" value="<?php echo $customers['payment_discount_perc']; ?>" title="<?= __('Payment Discount Perc') ?>" aria-label="Payment Discount Perc">
 								</div> 
 							</div>
 							<!-- <div class="col-lg-6 w-full" style="margin-bottom: 2rem;">
-								<span class="form-label">Sales Type</span>
-								<select name="sales_type" class="form-control form-select js-example-basic-single" title="Sales Type" aria-label="Sales Type">
-									<option value="">Select Any One</option>
+								<span class="form-label"><?= __('Sales Type') ?></span>
+								<select name="sales_type" class="form-control form-select js-example-basic-single" title="<?= __('Sales Type') ?>" aria-label="Sales Type">
+									<option value=""><?= __('Select Any One') ?></option>
 									<?php foreach($salestype as $key=>$st) { ?>
 										<option value="<?php echo $key; ?>" <?php echo $customers['sales_type']==$key?'selected':'';?> ><?php echo $st; ?></option>
 									<?php } ?>
@@ -1772,17 +1772,17 @@ function toggleRowLock(button) {
 					</div><?php /** ?>
 					<div class="tab-pane" id="agreements" role="tabpanel">
 						<div class="p-3">
-							<h4 class="mb-10 font-weight-bold text-dark">Agreemets</h4>
+							<h4 class="mb-10 font-weight-bold text-dark"><?= __('Agreemets') ?></h4>
 							<div class="row">
 								<div class="form-group col-lg-12">
 									<table class="table table-bordered " id="edutable">
 										<tr>
-											<th scope="col" class="" width="2%">Sl NO</th>
-											<th scope="col" class="" width="25%">Type</th>
-											<th scope="col" class="thheader" width="20%">Number</th>
-											<th scope="col" class="" width="20%"> Sign Date</th>
-											<th scope="col" class="thheader" width="20%">Expiry Date </th>
-											<th scope="col" class="thheader" width="15%">Files</th>
+											<th scope="col" class="" width="2%"><?= __('Sl NO') ?></th>
+											<th scope="col" class="" width="25%"><?= __('Type') ?></th>
+											<th scope="col" class="thheader" width="20%"><?= __('Number') ?></th>
+											<th scope="col" class="" width="20%"><?= __('Sign Date') ?></th>
+											<th scope="col" class="thheader" width="20%"><?= __('Expiry Date') ?></th>
+											<th scope="col" class="thheader" width="15%"><?= __('Files') ?></th>
 										</tr>
 									<?php $k=0;  if(count((array)$aggrements) != '0'){ $aggrements[] = array('agreement_name'=>''); }
 									foreach ($aggrements as $inst) { $k++;?>
@@ -1792,24 +1792,24 @@ function toggleRowLock(button) {
 
 											<input type="hidden" name="ag_rowid[]" class="form-control itemRow" value="<?php echo $inst['id']; ?>">
 										</td>
-										<td><input type="text" name="ag_type[]" class="form-control" value="<?php echo $inst['agreement_name']; ?>" autocomplete="off" title="Ag Type" aria-label="Ag Type">  </td>
+										<td><input type="text" name="ag_type[]" class="form-control" value="<?php echo $inst['agreement_name']; ?>" autocomplete="off" title="<?= __('Ag Type') ?>" aria-label="Ag Type">  </td>
 										<td>
-											<input type="text" name="ag_number[]" class="form-control" value="<?php echo $inst['agreement_ref_no']; ?>" autocomplete="off" title="Ag Number" aria-label="Ag Number">
+											<input type="text" name="ag_number[]" class="form-control" value="<?php echo $inst['agreement_ref_no']; ?>" autocomplete="off" title="<?= __('Ag Number') ?>" aria-label="Ag Number">
 										</td>
-										<td><input type="text" name="ag_sin_date[]" class="form-control datepicker "  id="kt_datepicker_3<?php echo $k; ?>" value="<?php echo fromDate($inst['signed_date']); ?>"  autocomplete="off" title="Ag Sin Date" aria-label="Ag Sin Date">  </td>
-										<td><input type="text" name="ag_ex_date[]" class="form-control datepicker" id="kt_datepicker_3_2<?php echo $k; ?>"  value="<?php echo fromDate($inst['expiry_date']); ?>" autocomplete="off" title="Ag Ex Date" aria-label="Ag Ex Date">  </td>
+										<td><input type="text" name="ag_sin_date[]" class="form-control datepicker "  id="kt_datepicker_3<?php echo $k; ?>" value="<?php echo fromDate($inst['signed_date']); ?>"  autocomplete="off" title="<?= __('Ag Sin Date') ?>" aria-label="Ag Sin Date">  </td>
+										<td><input type="text" name="ag_ex_date[]" class="form-control datepicker" id="kt_datepicker_3_2<?php echo $k; ?>"  value="<?php echo fromDate($inst['expiry_date']); ?>" autocomplete="off" title="<?= __('Ag Ex Date') ?>" aria-label="Ag Ex Date">  </td>
 										<td>
 											<div class="row m-t-15">
 												<div class="image-input col-lg-3" id="kt_image_5_<?php echo $k; ?>" style="display: inherit; margin-top: -2px;">
-													<span class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="Upload" >
-														<i class="ti-cloud-up f-20 text-primary f-30 f-w-800" data-toggle="tooltip" title="Upload"></i>
-														<input type="file" name="agreement_file<?php echo $dockey;?>[]" / title="Input" aria-label="Input">
+													<span class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="<?= __('Upload') ?>" >
+														<i class="ti-cloud-up f-20 text-primary f-30 f-w-800" data-toggle="tooltip" title="<?= __('Upload') ?>"></i>
+														<input type="file" name="agreement_file<?php echo $dockey;?>[]" / title="<?= __('Input') ?>" aria-label="Input">
 														<input type="hidden" name="hidden_agreement_file<?php echo $dockey;?>" value="<?php echo $inst['file_url'][$dockey]; ?>"/>
 													</span>
 												</div>
 												<?php if($inst['file_url']!=''){ ?>
 													<div class="col-lg-3">
-														<a href="<?php echo $File_Uploads_Path."/".$inst['file_url']; ?>" data-toggle="tooltip" title="Download" target="_blank" >
+														<a href="<?php echo $File_Uploads_Path."/".$inst['file_url']; ?>" data-toggle="tooltip" title="<?= __('Download') ?>" target="_blank" >
 															<i class="ti-cloud-down f-20 text-warning f-30 f-w-800"></i>
 														</a></div>
 													<?php } ?>
@@ -1820,8 +1820,8 @@ function toggleRowLock(button) {
 								</table>
 								<div class="row">
 									<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-										<!--  <button class="btn btn-danger float-left delete " id="removeRows" onclick="removerows()"  type="button">Delete</button> -->
-										<button class="btn btn-success float-left" onclick="addedurows()" id="addRows" type="button">+ Add More</button>
+										<!--  <button class="btn btn-danger float-left delete " id="removeRows" onclick="removerows()"  type="button"><?= __('Delete') ?></button> -->
+										<button class="btn btn-success float-left" onclick="addedurows()" id="addRows" type="button"><?= __('+ Add More') ?></button>
 									</div>
 								</div>
 							</div>
@@ -1839,20 +1839,20 @@ function toggleRowLock(button) {
 					<div class="row">
 					<div class="col-lg-12" id="tablshrink">
 						<div class="table-responsive">
-							<div class="card-header"><h5 class="text-primary">Rental Properties</h5></div>
+							<div class="card-header"><h5 class="text-primary"><?= __('Rental Properties') ?></h5></div>
 							<?php if(count((array)$property_tenant_details)>0){  ?>
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th scope="col">Owner Name</th>
-											<th scope="col">Property Name</th>
-											<th scope="col">Address</th>
-											<th scope="col">Start Date</th>
-											<th scope="col">End Date</th>
-											<th scope="col">Rented Area</th>
-											<th scope="col">Rent</th>
-											<th scope="col">Invoice</th>
-											<th scope="col">Last Paid</th>
+											<th scope="col"><?= __('Owner Name') ?></th>
+											<th scope="col"><?= __('Property Name') ?></th>
+											<th scope="col"><?= __('Address') ?></th>
+											<th scope="col"><?= __('Start Date') ?></th>
+											<th scope="col"><?= __('End Date') ?></th>
+											<th scope="col"><?= __('Rented Area') ?></th>
+											<th scope="col"><?= __('Rent') ?></th>
+											<th scope="col"><?= __('Invoice') ?></th>
+											<th scope="col"><?= __('Last Paid') ?></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -1914,69 +1914,69 @@ function toggleRowLock(button) {
 					<div class="col-lg-6">
 						<div class="row"><input class="form-control" type="hidden" name="customer_vendor_gst_billing_details_id[]" value="" >
 							<div class="col-lg-6 p-r-5 w-full" style="float: left;">
-								<span class="form-label d-block">GST  Registration type</span>
-								<select  name="gsttype[]" class="form-select js-example-basic-single" title="Gsttype" aria-label="Gsttype">
-									<option value="">Select Any One</option>
+								<span class="form-label d-block"><?= __('GST  Registration type') ?></span>
+								<select  name="gsttype[]" class="form-select js-example-basic-single" title="<?= __('Gsttype') ?>" aria-label="Gsttype">
+									<option value=""><?= __('Select Any One') ?></option>
 									<?php foreach($gstregistrationtype as $gstkey=>$gstregtype) { ?>
 										<option <?php echo $customers['gsttype']==$gstkey? 'selected':'' ?> value="<?php echo $gstkey;?>"><?php echo $gstregtype; ?></option>
 									<?php } ?>
 								</select>
 							</div>
 							<div class="form-group col-lg-6" style="float: left;">
-								<span class="form-label">GSTIN</span>
+								<span class="form-label"><?= __('GSTIN') ?></span>
 								<div class="kt-input-icon">
-									<input class="form-control" type="text" name="gstin[]" onblur="checkalreadyavailableornotcustomerorvendordetails('GSTIN', this)" value="" title="Gstin" aria-label="Gstin">
+									<input class="form-control" type="text" name="gstin[]" onblur="checkalreadyavailableornotcustomerorvendordetails('GSTIN', this)" value="" title="<?= __('Gstin') ?>" aria-label="Gstin">
 									<span class="text-danger f-14 gstinerror" style="display:none"></span>
 								</div>
 							</div>
 							<div class="form-group col-lg-12">
-								<span class="form-label">Billing Adderss</span>
+								<span class="form-label"><?= __('Billing Adderss') ?></span>
 								<div class="kt-input-icon">
-									<textarea type="text" class="form-control" placeholder="Billing Adderss" name="billing_address[]" id="billing_address_`+mkseq+`" title="Billing Adderss" aria-label="Billing Adderss"></textarea>
+									<textarea type="text" class="form-control" placeholder="<?= __('Billing Adderss') ?>" name="billing_address[]" id="billing_address_`+mkseq+`" title="<?= __('Billing Adderss') ?>" aria-label="Billing Adderss"></textarea>
 								</div> 
 							</div>
 							<div class="form-group col-lg-3 w-full" >
-								<span class="form-label">Country</span>
-								<select id="billing_country_`+mkseq+`" class="form-select js-example-basic-single" name="billing_country[]"  onchange="selectedcategory(this.value,'billing_state_`+mkseq+`','states','country_id','selectedbillcountry')" title="Billing Country" aria-label="Billing Country">
-									<option value="">Select Any One</option>
+								<span class="form-label"><?= __('Country') ?></span>
+								<select id="billing_country_`+mkseq+`" class="form-select js-example-basic-single" name="billing_country[]"  onchange="selectedcategory(this.value,'billing_state_`+mkseq+`','states','country_id','selectedbillcountry')" title="<?= __('Billing Country') ?>" aria-label="Billing Country">
+									<option value=""><?= __('Select Any One') ?></option>
 									<?php foreach($countrieslist as $countryvalue) { ?>
 										<option value="<?php echo $countryvalue['id']; ?>"><?php echo $countryvalue['country_name']; ?></option>
 									<?php } ?>
 								</select>
 							</div>
 							<div class="form-group col-lg-3  w-full" >
-								<span class="form-label">State</span>
-								<select id="billing_state_`+mkseq+`" name="billing_state[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'billing_city_`+mkseq+`','cities','state_id','selectedbillstate')" title="Billing State" aria-label="Billing State">
-									<option value="">Select Any One</option>
+								<span class="form-label"><?= __('State') ?></span>
+								<select id="billing_state_`+mkseq+`" name="billing_state[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'billing_city_`+mkseq+`','cities','state_id','selectedbillstate')" title="<?= __('Billing State') ?>" aria-label="Billing State">
+									<option value=""><?= __('Select Any One') ?></option>
 								</select>
 
 							</div>
 							<div class="form-group col-lg-3 p-r-5  w-full" >
-								<span class="form-label">City/Town</span>
-								<select id="billing_city_`+mkseq+`" name="billing_city[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'','city','','selectedbillcity')" title="Billing City" aria-label="Billing City">
-									<option value="">Select Any One</option>
+								<span class="form-label"><?= __('City/Town') ?></span>
+								<select id="billing_city_`+mkseq+`" name="billing_city[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'','city','','selectedbillcity')" title="<?= __('Billing City') ?>" aria-label="Billing City">
+									<option value=""><?= __('Select Any One') ?></option>
 								</select>
 							</div>
 							<div class="form-group col-lg-3 p-r-5" >
-								<span  class="form-label">Pincode</span>
-								<input class="form-control" placeholder="Pincode" type="number" id="billing_post_code_`+mkseq+`" name="billing_post_code[]" value="" title="Pincode" aria-label="Pincode">
+								<span  class="form-label"><?= __('Pincode') ?></span>
+								<input class="form-control" placeholder="<?= __('Pincode') ?>" type="number" id="billing_post_code_`+mkseq+`" name="billing_post_code[]" value="" title="<?= __('Pincode') ?>" aria-label="Pincode">
 
 							</div>
 							<div class="form-group col-lg-3 p-r-5" style="float: right;">
-								<span class="form-label">Contact Person</span>
-								<input class="form-control" placeholder="Contact Person" type="text" id="" name="contact_person[]" value="" title="Contact Person" aria-label="Contact Person">
+								<span class="form-label"><?= __('Contact Person') ?></span>
+								<input class="form-control" placeholder="<?= __('Contact Person') ?>" type="text" id="" name="contact_person[]" value="" title="<?= __('Contact Person') ?>" aria-label="Contact Person">
 
 							</div>
 							<div class="form-group col-lg-3 p-r-5" style="float: left;">
-								<span class="form-label">Mobile</span>
+								<span class="form-label"><?= __('Mobile') ?></span>
 								<div class="kt-input-icon">
-									<input class="form-control" type="number" id="mobile_`+mkseq+`" name="mobile[]" value="" title="Mobile" aria-label="Mobile">	
+									<input class="form-control" type="number" id="mobile_`+mkseq+`" name="mobile[]" value="" title="<?= __('Mobile') ?>" aria-label="Mobile">	
 								</div>
 							</div>
 							<div class="form-group col-lg-3 p-r-5" style="float: right;">
-								<span class="form-label">Fax</span>
+								<span class="form-label"><?= __('Fax') ?></span>
 								<div class="kt-input-icon">
-									<input class="form-control" type="number" id="fax_`+mkseq+`" name="fax[]" value="" title="Fax" aria-label="Fax">
+									<input class="form-control" type="number" id="fax_`+mkseq+`" name="fax[]" value="" title="<?= __('Fax') ?>" aria-label="Fax">
 								</div>
 							</div>
 						</div>
@@ -1987,50 +1987,50 @@ function toggleRowLock(button) {
 								<span class="form-label d-block"></span>
 								<div class="border-checkbox-section  ">
 									<div class="border-checkbox-group border-checkbox-group-primary m-t-30">
-										<input class="border-checkbox" type="checkbox" id="checkbox`+mkseq+`" onclick="cloneShipping(this,`+mkseq+`)" title="Input" aria-label="Input">
-										<label class="form-label border-checkbox-label" for="checkbox`+mkseq+`">My shipping address is the same as my billing address</label>
+										<input class="border-checkbox" type="checkbox" id="checkbox`+mkseq+`" onclick="cloneShipping(this,`+mkseq+`)" title="<?= __('Input') ?>" aria-label="Input">
+										<label class="form-label border-checkbox-label" for="checkbox`+mkseq+`"><?= __('My shipping address is the same as my billing address') ?></label>
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-3 text-right d-flex flex-column justify-content-between text-right">
-								<span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Cliek To Remove" class="cursor-pointer" onclick="removeGSTDiv(`+mkseq+`)">
+								<span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Cliek To Remove') ?>" class="cursor-pointer" onclick="removeGSTDiv(`+mkseq+`)">
 									<i class="ti-trash text-danger"></i> Remove
 								</span>
 								<div class="form-group ">
-									<input type="radio"  name="is_default" value="`+(mkseq-1)+`" title="Is Default" aria-label="Is Default">
+									<input type="radio"  name="is_default" value="`+(mkseq-1)+`" title="<?= __('Is Default') ?>" aria-label="Is Default">
 									<span>Make Default</span>
 								</div>
 							</div>        	
 							<div class="form-group col-lg-12" >
-								<span class="form-label">Shipping Adderss</span>
+								<span class="form-label"><?= __('Shipping Adderss') ?></span>
 								<div class="kt-input-icon">
-									<textarea type="text" class="form-control" placeholder="Street" name="shipping_address[]" id="shipping_address_`+mkseq+`" title="Street" aria-label="Street"></textarea>
+									<textarea type="text" class="form-control" placeholder="<?= __('Street') ?>" name="shipping_address[]" id="shipping_address_`+mkseq+`" title="<?= __('Street') ?>" aria-label="Street"></textarea>
 								</div> 
 							</div>
 							<div class="form-group col-lg-3  w-full" >
-								<span class="form-label">Country</span>
-								<select id="shipping_country_`+mkseq+`" class="form-select js-example-basic-single"  name="shipping_country[]" onchange="selectedcategory(this.value,'shipping_state_`+mkseq+`','states','country_id','selectedshipcountry')" title="Shipping Country" aria-label="Shipping Country">
-									<option value="">Select Any One</option>
+								<span class="form-label"><?= __('Country') ?></span>
+								<select id="shipping_country_`+mkseq+`" class="form-select js-example-basic-single"  name="shipping_country[]" onchange="selectedcategory(this.value,'shipping_state_`+mkseq+`','states','country_id','selectedshipcountry')" title="<?= __('Shipping Country') ?>" aria-label="Shipping Country">
+									<option value=""><?= __('Select Any One') ?></option>
 									<?php foreach($countrieslist as $countryvalue) { ?>
 										<option  value="<?php echo $countryvalue['id'];?>"><?php echo $countryvalue['country_name']; ?></option>
 									<?php } ?>
 								</select>
 							</div>
 							<div class="form-group col-lg-3 w-full">
-								<span class="form-label">State</span>
-								<select id="shipping_state_`+mkseq+`" name="shipping_state[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'shipping_city_`+mkseq+`','cities','state_id','selectedshipstate')" title="Shipping State" aria-label="Shipping State">
-									<option value="">Select Any One</option>
+								<span class="form-label"><?= __('State') ?></span>
+								<select id="shipping_state_`+mkseq+`" name="shipping_state[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'shipping_city_`+mkseq+`','cities','state_id','selectedshipstate')" title="<?= __('Shipping State') ?>" aria-label="Shipping State">
+									<option value=""><?= __('Select Any One') ?></option>
 								</select>
 							</div>
 							<div class="form-group col-lg-3 p-r-5 w-full">
-								<span class="form-label">City/Town</span>
-								<select id="shipping_city_`+mkseq+`" name="shipping_city[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'','city','','selectedshipcity')" title="Shipping City" aria-label="Shipping City">
-									<option value="">Select Any One</option>
+								<span class="form-label"><?= __('City/Town') ?></span>
+								<select id="shipping_city_`+mkseq+`" name="shipping_city[]" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'','city','','selectedshipcity')" title="<?= __('Shipping City') ?>" aria-label="Shipping City">
+									<option value=""><?= __('Select Any One') ?></option>
 								</select>
 							</div>
 							<div class="form-group col-lg-3" >
-								<span class="form-label">Pincode</span>
-								<input class="form-control" placeholder="Pincode" type="number" id="shipping_post_code_`+mkseq+`" name="shipping_post_code[]" value="" title="Pincode" aria-label="Pincode">
+								<span class="form-label"><?= __('Pincode') ?></span>
+								<input class="form-control" placeholder="<?= __('Pincode') ?>" type="number" id="shipping_post_code_`+mkseq+`" name="shipping_post_code[]" value="" title="<?= __('Pincode') ?>" aria-label="Pincode">
 							</div>									
 						</div>
 					</div>
@@ -2040,7 +2040,7 @@ function toggleRowLock(button) {
 
 
 				// <div class="col-lg-3 text-right">
-				// 				<span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Cliek To Remove" class="cursor-pointer" onclick="removeGSTDiv(`+mkseq+`)">
+				// 				<span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Cliek To Remove') ?>" class="cursor-pointer" onclick="removeGSTDiv(`+mkseq+`)">
 				// 					<i class="ti-trash text-danger"></i> Remove
 				// 				</span>
 				// 			</div>

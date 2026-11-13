@@ -82,15 +82,15 @@ function submitdetails(){
 	<table  class="table table-striped table-bordered nowrap"> 
 		<thead>
 			<tr>
-				<th scope="col">Asset Code</th>
-				<th scope="col">Asset Name</th>
-				<th scope="col">Brand</th>
-				<th scope="col">Model</th>
-				<th scope="col">Serial Number</th>
+				<th scope="col"><?= __('Asset Code') ?></th>
+				<th scope="col"><?= __('Asset Name') ?></th>
+				<th scope="col"><?= __('Brand') ?></th>
+				<th scope="col"><?= __('Model') ?></th>
+				<th scope="col"><?= __('Serial Number') ?></th>
 				<!-- <th scope="col">Location </th> -->
-				<!-- <th scope="col">Satus</th> -->
-				<!-- <th scope="col">Condition</th> -->
-				<!-- <th scope="col">Asset Value <span class="requried text-danger">*</span></th> --> 
+				<!-- <th scope="col"><?= __('Status') ?></th> -->
+				<!-- <th scope="col"><?= __('Condition') ?></th> -->
+				<!-- <th scope="col"><?= __('Asset Value') ?> <span class="requried text-danger">*</span></th> --> 
 			</tr>
 		</thead>
 		<tbody>
@@ -106,7 +106,7 @@ function submitdetails(){
 						<td><?php echo $list_asset['serial_no']; ?></td>
 						<!-- <td>
 							<select  class="form-select js-example-basic-single " name="asset_location[]">
-								<option value="">Select Any One</option>
+								<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($locations as $location) { ?>					
 									<option location value="<?php echo $location['id']; ?>" <?php echo $location['id'] == $list_asset['asset_location']?"selected":""; ?>><?php echo ucwords($location['location_name']); ?></option>
 								<?php } ?>
@@ -114,7 +114,7 @@ function submitdetails(){
 						</td> -->
 						<!-- <td><?php //echo $ass_status[$list_asset['status']]; ?>
 							<select  class="form-select js-example-basic-single" name="asset_status[]">
-								<option value="">Select Any One</option>
+								<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($ass_status as $ass_statuskey=>$ass_statuss){ ?>					
 									<option  value="<?php echo $ass_statuskey; ?>" <?php echo $ass_statuskey == $list_asset['status']?"selected":""; ?>><?php echo ucwords($ass_statuss); ?></option>
 								<?php }  ?>
@@ -122,7 +122,7 @@ function submitdetails(){
 						</td> -->
 						<!-- <td>
 							<select  class="form-select js-example-basic-single " name="conditions[]">
-								<option value="">Select Any One</option>
+								<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($ass_condition as $ass_conditiokey=>$ass_conditio) { ?>					
 									<option  value="<?php echo $ass_conditiokey; ?>" <?php echo $ass_conditiokey == $list_asset['conditions']?"selected":""; ?>><?php echo ucwords($ass_conditio); ?></option>
 								<?php } ?>
@@ -142,12 +142,12 @@ function submitdetails(){
 		<div class="row">
 			
 			<div class="form-group col-lg-4">
-				<label>Discard/ Sales  date <span class="requried text-danger">*</span></label>
+				<label><?= __('Discard/ Sales date') ?> <span class="requried text-danger">*</span></label>
 				<span class="d-block error-message text-danger"></span>
 				<input type="text" class="form-control datepicker requried_field" id="discard_and_sales_date"  name="discard_and_sales_date" value="<?php echo fromDate(); ?>">
 			</div>
 			<div class="form-group col-lg-8">
-				<label>Reason <span class="requried text-danger">*</span></label>
+				<label><?= __('Reason') ?> <span class="requried text-danger">*</span></label>
 				<span class="d-block error-message text-danger"></span>
 				<textarea type="text" class="form-control requried_field" id="remarks" rows="4" cols="50" name="discard_and_sales_remarks" ></textarea>
 			</div> 
@@ -160,8 +160,8 @@ function submitdetails(){
 
 <div class="modal-footer">
 	<p>Permanant Remove The Assets</p>
-	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-	<button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()">Submit</button>
+	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
+	<button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()"><?= __('Submit') ?></button>
 </div>
 
 <script src="assets/pages/data-table/extensions/responsive/js/responsive-custom.js"></script>

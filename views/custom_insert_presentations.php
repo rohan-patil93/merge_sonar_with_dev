@@ -131,72 +131,72 @@ if(isset($_GET['PID'] )) {
     <div class="container-fluid">
         <div class="alert alert-warning alert-dismissible">
             <strong><?php echo "This function is used for maintaining <strong>Display Attributes</strong>. * represents mandatory fields."; ?></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
                     <div class="card-header">
-                        <h5>Presentation</h5>
+                        <h5><?php echo __('Presentation'); ?></h5>
                         <div class="card-header-right">
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?php echo __('Back'); ?>
                             </a>
                         </div>
                     </div>
                     <div class="p-2 mt-2">
                         <div class="row mb-3">
                             <div class="col-lg-1">
-                                <span class="col-form-label ml-2" > Presentation<b class="requried">*</b>  </span>
+                                <span class="col-form-label ml-2" > <?php echo __('Presentation'); ?><b class="requried">*</b>  </span>
                             </div>
                             <div class="col-lg-2">
-                                <select aria-label="Ect Presentation" id="selectPresentation" onchange="changePresentation(this.value);" class="form-control form-select js-example-basic-single">
+                                <select aria-label="<?php echo __('Ect Presentation'); ?>" id="selectPresentation" onchange="changePresentation(this.value);" class="form-control form-select js-example-basic-single">
                                     <option><?php echo $presentation_name != "" ?  $presentation_name : 'Choose'; ?></option>
                                     <?php
                                     foreach ($data_presentation as $list) { ?>
-                                        <option <?php if($list['id'] == $_GET['PID'] ){ echo "selected";
+                                        <option <?php if($list['id'] == $_GET['PID'] ){ echo __('selected');
 } ?> value="<?php echo $list['id']; ?>"><?php $list['presentation_name']; echo $list['presentation_name']; ?> </option>
                                     <?php }
 
                                     ?>
-                                    <option value="add">Add New</option>
+                                    <option value="add"><?php echo __('Add New'); ?></option>
                                 </select>
 
-                                <div  style="display: none;color: red;" id="table_err"> Please Select Any List</div>
+                                <div  style="display: none;color: red;" id="table_err"> <?php echo __('Please Select Any List'); ?></div>
 
                             </div>
 
                             <div class="col-lg-1">
-                                <span  class="col-form-label ml-2"> Pages<b class="requried">*</b> </span>
+                                <span  class="col-form-label ml-2"> <?php echo __('Pages'); ?><b class="requried">*</b> </span>
 
                             </div>
                             <div class="col-lg-2">
 
-                                <select aria-label="Ect Presentation Page" id="selectPresentationPage" onchange="changePresentationPage(this.value);" class="form-select js-example-basic-single">
-                                    <option><?php echo 'Choose'; ?></option>
+                                <select aria-label="<?php echo __('Ect Presentation Page'); ?>" id="selectPresentationPage" onchange="changePresentationPage(this.value);" class="form-select js-example-basic-single">
+                                    <option><?php echo __('Choose'); ?></option>
                                     <?php
                                     foreach ($data_presentation_pages as $pages) { ?>
-                                        <option <?php if($pages['id'] == $_GET['PAGEID'] ){ echo "selected";
+                                        <option <?php if($pages['id'] == $_GET['PAGEID'] ){ echo __('selected');
 } ?> value="<?php echo $pages['id']; ?>"><?php echo $pages['header_name']; ?> </option>
                                     <?php } if($_GET['PID']!=""){ ?>
 
-                                        <option value="add">Add New</option>
+                                        <option value="add"><?php echo __('Add New'); ?></option>
                                     <?php } ?>
                                 </select>
-                                <div  style="display: none;color: red;" id="display_list_err"> Please Select Any List</div>
+                                <div  style="display: none;color: red;" id="display_list_err"> <?php echo __('Please Select Any List'); ?></div>
                             </div>
                             <div class="col-lg-3"></div>
                             <div class="col-lg-3">
 
                             <?php if($_GET['PID']!="" && $_GET['PAGEID']!="") {?>
 
-                                    <button type="button" onclick="dynamicinsertpopup('COM_INSERT_PRESENTATION_CONTENT')" class="btn btn-success float-right "> + ADD BLOCK</button>
+                                    <button type="button" onclick="dynamicinsertpopup('COM_INSERT_PRESENTATION_CONTENT')" class="btn btn-success float-right "> <?php echo __('+ ADD BLOCK'); ?></button>
 
                             <?php } ?>
                             <?php if($_GET['PID']!="") {?>
 
-                                <button type="button" onclick="dynamicinsertpopup('COM_INSERT_PRESENTATION_CONTENT')" class="btn btn btn-primary float-right  m-r-5">Perview</button>
+                                <button type="button" onclick="dynamicinsertpopup('COM_INSERT_PRESENTATION_CONTENT')" class="btn btn btn-primary float-right  m-r-5"><?php echo __('Perview'); ?></button>
 
                             <?php } ?>
                         </div>
@@ -231,7 +231,7 @@ if(isset($_GET['PID'] )) {
                                             <div class="<?php echo $column; if($i!=0 && $i!=$required_divisions) { echo "";
 } ?>">
                                                 <div class="float-right">
-                                                    <button type="button" onclick="dynamiceditpopup('COM_INSERT_PRESENTATION_CONTENT',<?php echo "'".deocdeId("id:".$content[id])."'" ?>)" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="Edit Datails" ><i  class="fa fa-edit"></i></button>
+                                                    <button type="button" onclick="dynamiceditpopup('COM_INSERT_PRESENTATION_CONTENT',<?php echo "'".deocdeId("id:".$content[id])."'" ?>)" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="<?php echo __('Edit Datails'); ?>" ><i  class="fa fa-edit"></i></button>
                                                 </div>
                                                 <div class="pt-30 pt-md-25 pb-15 px-5 text-center">
                                                     <!--begin::Icon-->
@@ -277,10 +277,10 @@ if(isset($_GET['PID'] )) {
                             <div class="modal-content"  id="popup2">
                                 <div class="modal-header">
                                     <h5 class="modal-title">
-                                        Presentation
+                                        <?php echo __('Presentation'); ?>
 
                                     </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
                                         <i aria-hidden="true" class="ki ki-close"></i>
                                     </button>
                                 </div>
@@ -290,8 +290,8 @@ if(isset($_GET['PID'] )) {
                                         <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                                             <div class="form-group row">
                                                 <div class="col-lg-12">
-                                                    <span>Presentation Name</span>
-                                                    <textarea aria-label="Presentation Name" class="form-control" name="presentation_name" id="comment"></textarea>
+                                                    <span><?php echo __('Presentation Name'); ?></span>
+                                                    <textarea aria-label="<?php echo __('Presentation Name'); ?>" class="form-control" name="presentation_name" id="comment"></textarea>
                                                 </div>
 
                                             </div>
@@ -301,8 +301,8 @@ if(isset($_GET['PID'] )) {
 
                                     <div class="modal-footer">
                                         <input type="hidden" name="submit_presentation" value="submit">
-                                        <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal">Close</button>
-                                        <button  class="btn btn-primary mr-2">Submit</button>
+                                        <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?php echo __('Close'); ?></button>
+                                        <button  class="btn btn-primary mr-2"><?php echo __('Submit'); ?></button>
                                     </div>
                                 </form>
                             </div>
@@ -315,10 +315,10 @@ if(isset($_GET['PID'] )) {
                         <div class="modal-content"  id="popup3">
                             <div class="modal-header">
                                 <h5 class="modal-title">
-                                    Presentation Header
+                                    <?php echo __('Presentation Header'); ?>
 
                                 </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
                                     <i aria-hidden="true" class="ki ki-close"></i>
                                 </button>
                             </div>
@@ -328,14 +328,14 @@ if(isset($_GET['PID'] )) {
                                     <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                                         <div class="form-group row">
                                             <div class="col-lg-12">
-                                                <span>Header Name</span>
-                                                <input aria-label="Header Name" type="text" class="form-control" name="header_name">
+                                                <span><?php echo __('Header Name'); ?></span>
+                                                <input aria-label="<?php echo __('Header Name'); ?>" type="text" class="form-control" name="header_name">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-lg-12">
-                                                <span>Display Order</span>
-                                                <input aria-label="Display Sequence" type="text" class="form-control" name="display_sequence">
+                                                <span><?php echo __('Display Order'); ?></span>
+                                                <input aria-label="<?php echo __('Display Sequence'); ?>" type="text" class="form-control" name="display_sequence">
                                             </div>
                                         </div>
                                     </div>
@@ -345,8 +345,8 @@ if(isset($_GET['PID'] )) {
                                 <div class="modal-footer">
                                     <input type="hidden" name="submit_header" value="submit">
                                     <input type="hidden" id="parent_id" name="parent_id" value="">
-                                    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal">Close</button>
-                                    <button  class="btn btn-primary mr-2">Submit</button>
+                                    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?php echo __('Close'); ?></button>
+                                    <button  class="btn btn-primary mr-2"><?php echo __('Submit'); ?></button>
                                 </div>
                             </form>
                         </div>

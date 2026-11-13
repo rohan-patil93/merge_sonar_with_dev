@@ -78,7 +78,7 @@ if(isset($_POST['submit_pt'])){
                                         <li class="nav-item">
                                             <a class="nav-link <?php echo $pt!='0'?'active':'';?>" data-bs-toggle="tab" href="#kt_tab_pane_1" role="tab">
 
-                                                <span class="nav-text">ESI</span>
+                                                <span class="nav-text"><?php echo __('ESI'); ?></span>
                                             </a>
                                             <div class="slide"></div>
                                         </li>
@@ -86,20 +86,20 @@ if(isset($_POST['submit_pt'])){
                                         <li class="nav-item">
                                             <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_3" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 
-                                                <span class="nav-text">PF</span>
+                                                <span class="nav-text"><?php echo __('PF'); ?></span>
                                             </a>
 
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link <?php echo $pt=='0'?'active':'';?>" data-bs-toggle="tab" href="#kt_tab_pane_4" role="tab">
 
-                                                <span class="nav-text">Professional Tax</span>
+                                                <span class="nav-text"><?php echo __('Professional Tax'); ?></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_5" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 
-                                                <span class="nav-text">Labour Welfare Fund</span>
+                                                <span class="nav-text"><?php echo __('Labour Welfare Fund'); ?></span>
                                             </a>
                                         </li>
 
@@ -133,27 +133,27 @@ if(isset($_POST['submit_pt'])){
                                             <!--begin::Header-->
                                             <div class="card-header border-0 py-5">
                                                 <h3 class="card-title align-items-start flex-column">
-                                                    <span class="card-label font-weight-bolder text-dark">Bank</span>
-                                                    <span class="text-muted mt-3 font-weight-bold font-size-sm">Experience in different organizations</span>
+                                                    <span class="card-label font-weight-bolder text-dark"><?php echo __('Bank'); ?></span>
+                                                    <span class="text-muted mt-3 font-weight-bold font-size-sm"><?php echo __('Experience in different organizations'); ?></span>
                                                 </h3>
                                             </div>
                                             <div class="card-body">
                                                 <div class="form-group row">
                                                     <div class="col-lg-4">
-                                                        <span>Bank Name</span>
-                                                        <input aria-label="Enter employee ID" type="text" class="form-control" placeholder="Enter employee ID">
+                                                        <span><?php echo __('Bank Name'); ?></span>
+                                                        <input aria-label="<?php echo __('Enter employee ID'); ?>" type="text" class="form-control" placeholder="<?php echo __('Enter employee ID'); ?>">
 
                                                     </div>
                                                     <div class="col-lg-4">
-                                                        <span>IFSC Code</span>
-                                                        <input aria-label="Enter email" type="email" class="form-control" placeholder="Enter email">
+                                                        <span><?php echo __('IFSC Code'); ?></span>
+                                                        <input aria-label="<?php echo __('Enter email'); ?>" type="email" class="form-control" placeholder="<?php echo __('Enter email'); ?>">
 
                                                     </div>
                                                     <div class="col-lg-4">
-                                                        <span>Username:</span>
+                                                        <span><?php echo __('Username'); ?>:</span>
                                                         <div class="input-group">
                                                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
-                                                           <input aria-label="Username:" type="text" class="form-control" placeholder="Username:">
+                                                           <input aria-label="<?php echo __('Username:'); ?>" type="text" class="form-control" placeholder="<?php echo __('Username:'); ?>">
                                                         </div>
 
                                                     </div>
@@ -168,12 +168,12 @@ if(isset($_POST['submit_pt'])){
                                                         <thead>
                                                             <tr class="text-uppercase">
                                                                 <th scope="col" class="table-column-40 pl-7">
-                                                                    <span class="text-dark-75">Company</span>
+                                                                    <span class="text-dark-75"><?php echo __('Company'); ?></span>
                                                                 </th>
-                                                                <th scope="col" class="table-column-min-15">From</th>
-                                                                <th scope="col" class="table-column-min-15">To</th>
-                                                                <th scope="col" class="table-column-min-15">Experience</th>
-                                                                <th scope="col" class="table-column-min-15">Remarks</th>
+                                                                <th scope="col" class="table-column-min-15"><?php echo __('From'); ?></th>
+                                                                <th scope="col" class="table-column-min-15"><?php echo __('To'); ?></th>
+                                                                <th scope="col" class="table-column-min-15"><?php echo __('Experience'); ?></th>
+                                                                <th scope="col" class="table-column-min-15"><?php echo __('Remarks'); ?></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -184,8 +184,8 @@ if(isset($_POST['submit_pt'])){
                                                                             <div class="symbol-label symbol-label-img-26"></div>
                                                                         </div>
                                                                         <div>
-                                                                            <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Sant Extreanet Solution</a>
-                                                                            <span class="text-muted font-weight-bold d-block">HTML, JS, ReactJS</span>
+                                                                            <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('Sant Extreanet Solution'); ?></a>
+                                                                            <span class="text-muted font-weight-bold d-block"><?php echo __('HTML, JS, ReactJS'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -198,8 +198,8 @@ if(isset($_POST['submit_pt'])){
 
                                                                 </td>
                                                                 <td>
-                                                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">9 Years</span>
-                                                                    <span class="text-muted font-weight-bold">10 Months</span>
+                                                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('9 Years'); ?></span>
+                                                                    <span class="text-muted font-weight-bold"><?php echo __('10 Months'); ?></span>
                                                                 </td>
                                                                 <td>
 
@@ -212,8 +212,8 @@ if(isset($_POST['submit_pt'])){
                                                                             <div class="symbol-label symbol-label-img-3"></div>
                                                                         </div>
                                                                         <div>
-                                                                            <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Telegram Development</a>
-                                                                            <span class="text-muted font-weight-bold d-block">C#, ASP.NET, MS SQL</span>
+                                                                            <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('Telegram Development'); ?></a>
+                                                                            <span class="text-muted font-weight-bold d-block"><?php echo __('C#, ASP.NET, MS SQL'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -226,8 +226,8 @@ if(isset($_POST['submit_pt'])){
 
                                                                 </td>
                                                                 <td>
-                                                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">5 Years</span>
-                                                                    <span class="text-muted font-weight-bold">4 Months</span>
+                                                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('5 Years'); ?></span>
+                                                                    <span class="text-muted font-weight-bold"><?php echo __('4 Months'); ?></span>
                                                                 </td>
                                                                 <td>
 
@@ -240,8 +240,8 @@ if(isset($_POST['submit_pt'])){
                                                                             <div class="symbol-label symbol-label-img-5"></div>
                                                                         </div>
                                                                         <div>
-                                                                            <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Payroll Application</a>
-                                                                            <span class="text-muted font-weight-bold d-block">PHP, Laravel, VueJS</span>
+                                                                            <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('Payroll Application'); ?></a>
+                                                                            <span class="text-muted font-weight-bold d-block"><?php echo __('PHP, Laravel, VueJS'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -254,8 +254,8 @@ if(isset($_POST['submit_pt'])){
 
                                                                 </td>
                                                                 <td>
-                                                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">6 Years</span>
-                                                                    <span class="text-muted font-weight-bold">3 Months</span>
+                                                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('6 Years'); ?></span>
+                                                                    <span class="text-muted font-weight-bold"><?php echo __('3 Months'); ?></span>
                                                                 </td>
                                                                 <td>
 
@@ -268,8 +268,8 @@ if(isset($_POST['submit_pt'])){
                                                                             <div class="symbol-label symbol-label-img-18"></div>
                                                                         </div>
                                                                         <div>
-                                                                            <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">HR Management System</a>
-                                                                            <span class="text-muted font-weight-bold d-block">Python, PostgreSQL, ReactJS</span>
+                                                                            <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('HR Management System'); ?></a>
+                                                                            <span class="text-muted font-weight-bold d-block"><?php echo __('Python, PostgreSQL, ReactJS'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -282,8 +282,8 @@ if(isset($_POST['submit_pt'])){
 
                                                                 </td>
                                                                 <td>
-                                                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">7 Years</span>
-                                                                    <span class="text-muted font-weight-bold">5 Months</span>
+                                                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('7 Years'); ?></span>
+                                                                    <span class="text-muted font-weight-bold"><?php echo __('5 Months'); ?></span>
                                                                 </td>
                                                                 <td>
 
@@ -300,8 +300,8 @@ if(isset($_POST['submit_pt'])){
                                             <div class="row">
                                                 <div class="col-lg-4"></div>
                                                 <div class="col-lg-8">
-                                                    <button type="reset" class="btn btn-primary mr-2">Submit</button>
-                                                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                                                    <button type="reset" class="btn btn-primary mr-2"><?php echo __('Submit'); ?></button>
+                                                    <button type="reset" class="btn btn-secondary"><?php echo __('Cancel'); ?></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -313,25 +313,25 @@ if(isset($_POST['submit_pt'])){
                                         <li class="nav-item">
                                             <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                 <span class="nav-icon"><i class="flaticon2-chat-1"></i></span>
-                                                <span class="nav-text">ESI</span>
+                                                <span class="nav-text"><?php echo __('ESI'); ?></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_2" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                 <span class="nav-icon"><i class="flaticon2-pie-chart-4"></i></span>
-                                                <span class="nav-text">Gratuty</span>
+                                                <span class="nav-text"><?php echo __('Gratuty'); ?></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_3" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                 <span class="nav-icon"><i class="flaticon2-pie-chart-4"></i></span>
-                                                <span class="nav-text">PF</span>
+                                                <span class="nav-text"><?php echo __('PF'); ?></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_4" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                 <span class="nav-icon"><i class="flaticon2-pie-chart-4"></i></span>
-                                                <span class="nav-text">Experience</span>
+                                                <span class="nav-text"><?php echo __('Experience'); ?></span>
                                             </a>
                                         </li>
 
@@ -343,20 +343,20 @@ if(isset($_POST['submit_pt'])){
                                                     <!--begin::Header-->
                                                     <div class="card-header border-0 py-0 pl-5">
                                                         <h3 class="card-title align-items-start flex-column">
-                                                            <span class="card-label font-weight-bolder text-dark">Salary</span>
-                                                            <span class="text-muted mt-3 font-weight-bold font-size-sm">Experience in different organizations</span>
+                                                            <span class="card-label font-weight-bolder text-dark"><?php echo __('Salary'); ?></span>
+                                                            <span class="text-muted mt-3 font-weight-bold font-size-sm"><?php echo __('Experience in different organizations'); ?></span>
                                                         </h3>
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="form-group row">
                                                             <div class="col-lg-4">
-                                                                <span>User Name</span>
-                                                                <input aria-label="Enter employee ID" type="text" class="form-control" placeholder="Enter employee ID"/>
+                                                                <span><?php echo __('User Name'); ?></span>
+                                                                <input aria-label="<?php echo __('Enter employee ID'); ?>" type="text" class="form-control" placeholder="<?php echo __('Enter employee ID'); ?>"/>
 
                                                             </div>
                                                             <div class="col-lg-4">
-                                                                <span>Description:</span>
-                                                                <textarea aria-label="Kt Autosize 2" class="form-control textarea-description" id="kt_autosize_2" rows="3">Max 5000 characters</textarea>
+                                                                <span><?php echo __('Description'); ?>:</span>
+                                                                <textarea aria-label="<?php echo __('Kt Autosize 2'); ?>" class="form-control textarea-description" id="kt_autosize_2" rows="3"><?php echo __('Max 5000 characters'); ?></textarea>
                                                             </div>
 
                                                         </div>
@@ -364,7 +364,7 @@ if(isset($_POST['submit_pt'])){
                                                     <!--end::Header-->
                                                     <div class="card-body row pl-5 py-0">
                                                         <div class="col-md-2 mt-3">
-                                                            <span>Annual CTC</span>
+                                                            <span><?php echo __('Annual CTC'); ?></span>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
@@ -372,13 +372,13 @@ if(isset($_POST['submit_pt'])){
                                                                     <div class="input-group-prepend">
                                                                         <span class="input-group-text">$</span>
                                                                     </div>
-                                                                    <input type="text" class="form-control" placeholder="0.00" aria-label="Amount (to the nearest dollar)">
+                                                                    <input type="text" class="form-control" placeholder="0.00" aria-label="<?php echo __('Amount (to the nearest dollar)'); ?>">
 
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2 mt-3">
-                                                            <span>per year</span>
+                                                            <span><?php echo __('per year'); ?></span>
                                                         </div>
                                                     </div>
                                                     <!--begin::Body-->
@@ -389,18 +389,18 @@ if(isset($_POST['submit_pt'])){
                                                                 <thead>
                                                                     <tr class="text-uppercase">
                                                                         <th scope="col" class="table-column-40 pl-7">
-                                                                            <span class="text-dark-75">Salary Component</span>
+                                                                            <span class="text-dark-75"><?php echo __('Salary Component'); ?></span>
                                                                         </th>
-                                                                        <th scope="col" class="table-column-min-20">Calculation Type</th>
-                                                                        <th scope="col" class="table-column-min-20">Amount Monthly</th>
-                                                                        <th scope="col" class="table-column-min-20">Amount Annually</th>
+                                                                        <th scope="col" class="table-column-min-20"><?php echo __('Calculation Type'); ?></th>
+                                                                        <th scope="col" class="table-column-min-20"><?php echo __('Amount Monthly'); ?></th>
+                                                                        <th scope="col" class="table-column-min-20"><?php echo __('Amount Annually'); ?></th>
 
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
                                                                         <td class="pl-0 py-4">
-                                                                            <b>Earning</b>
+                                                                            <b><?php echo __('Earning'); ?></b>
                                                                         </td>
                                                                         <td></td>
                                                                         <td></td>
@@ -411,18 +411,18 @@ if(isset($_POST['submit_pt'])){
                                                                             <div class="d-flex align-items-center">
                                                                                 <div class="form-group row" data-select2-id="38">
                                                                                     <div class="col-lg-4 col-md-9 col-sm-12">
-                                                                                        <select aria-label="Param" class="form-control select2-hidden-accessible" id="kt_select2_1" name="param" data-select2-id="kt_select2_1_2" tabindex="-1">
-                                                                                            <option value="AK" data-select2-id="2">Basic</option>
-                                                                                            <option value="HI" data-select2-id="42">Hawaii</option>
-                                                                                            <option value="CA" data-select2-id="43">California</option>
-                                                                                            <option value="NV" data-select2-id="44">Nevada</option>
-                                                                                            <option value="OR" data-select2-id="45">Oregon</option>
-                                                                                            <option value="WA" data-select2-id="46">Washington</option>
-                                                                                            <option value="AZ" data-select2-id="47">Arizona</option>
-                                                                                            <option value="CO" data-select2-id="48">Colorado</option>
-                                                                                            <option value="ID" data-select2-id="49">Idaho</option>
+                                                                                        <select aria-label="<?php echo __('Param'); ?>" class="form-control select2-hidden-accessible" id="kt_select2_1" name="param" data-select2-id="kt_select2_1_2" tabindex="-1">
+                                                                                            <option value="AK" data-select2-id="2"><?php echo __('Basic'); ?></option>
+                                                                                            <option value="HI" data-select2-id="42"><?php echo __('Hawaii'); ?></option>
+                                                                                            <option value="CA" data-select2-id="43"><?php echo __('California'); ?></option>
+                                                                                            <option value="NV" data-select2-id="44"><?php echo __('Nevada'); ?></option>
+                                                                                            <option value="OR" data-select2-id="45"><?php echo __('Oregon'); ?></option>
+                                                                                            <option value="WA" data-select2-id="46"><?php echo __('Washington'); ?></option>
+                                                                                            <option value="AZ" data-select2-id="47"><?php echo __('Arizona'); ?></option>
+                                                                                            <option value="CO" data-select2-id="48"><?php echo __('Colorado'); ?></option>
+                                                                                            <option value="ID" data-select2-id="49"><?php echo __('Idaho'); ?></option>
 
-                                                                                        </select><span class="select2 select2-container select2-container--default select2-container--below select2-container--focus" dir="ltr" data-select2-id="1"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-kt_select2_1-container" aria-controls="select2-kt_select2_1-results"><span class="select2-selection__rendered" id="select2-kt_select2_1-container" role="textbox" aria-readonly="true" title="Alaska">Basic</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper"></span></span>
+                                                                                        </select><span class="select2 select2-container select2-container--default select2-container--below select2-container--focus" dir="ltr" data-select2-id="1"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-kt_select2_1-container" aria-controls="select2-kt_select2_1-results"><span class="select2-selection__rendered" id="select2-kt_select2_1-container" role="textbox" aria-readonly="true" title="<?php echo __('Alaska'); ?>"><?php echo __('Basic'); ?></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper"></span></span>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -433,7 +433,7 @@ if(isset($_POST['submit_pt'])){
                                                                                     <div class="input-group-prepend">
                                                                                         <span class="input-group-text">$</span>
                                                                                     </div>
-                                                                                    <input type="text" class="form-control" placeholder="30.00" aria-label="Amount (to the nearest dollar)">
+                                                                                    <input type="text" class="form-control" placeholder="30.00" aria-label="<?php echo __('Amount (to the nearest dollar)'); ?>">
 
                                                                                 </div>
                                                                             </div>
@@ -441,7 +441,7 @@ if(isset($_POST['submit_pt'])){
                                                                         <td style="text-align: right;">
                                                                             <div class="form-group">
                                                                                 <div class="input-group">
-                                                                                    <input type="text" class="form-control text-align-right" placeholder="0.00" aria-label="Amount (to the nearest dollar)">
+                                                                                    <input type="text" class="form-control text-align-right" placeholder="0.00" aria-label="<?php echo __('Amount (to the nearest dollar)'); ?>">
 
                                                                                 </div>
                                                                             </div>
@@ -453,13 +453,13 @@ if(isset($_POST['submit_pt'])){
                                                                     <tr>
                                                                         <td class="pl-0 py-4">
                                                                             <div class="align-items-center">
-                                                                                <p>fixed Allowance</p>
+                                                                                <p><?php echo __('fixed Allowance'); ?></p>
 
-                                                                                <span class="text-muted font-weight-bold">Monthly CTC - Sum of all other components</span>
+                                                                                <span class="text-muted font-weight-bold"><?php echo __('Monthly CTC - Sum of all other components'); ?></span>
                                                                             </div>
                                                                         </td>
                                                                         <td>
-                                                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Fixed amount</span>
+                                                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('Fixed amount'); ?></span>
 
                                                                         </td>
                                                                         <td>
@@ -473,7 +473,7 @@ if(isset($_POST['submit_pt'])){
                                                                     </tr>
                                                                     <tr class="row-bg-light-gray">
                                                                         <td class="pl-2 py-4">
-                                                                            <span class="text-dark-75">Cost to Company</span>
+                                                                            <span class="text-dark-75"><?php echo __('Cost to Company'); ?></span>
                                                                         </td>
                                                                         <td></td>
                                                                         <td><span class="fas fa-rupee-sign"></span>
@@ -495,8 +495,8 @@ if(isset($_POST['submit_pt'])){
                                                     <div class="row">
                                                         <div class="col-lg-4"></div>
                                                         <div class="col-lg-8">
-                                                            <button type="reset" class="btn btn-primary mr-2">Submit</button>
-                                                            <button type="reset" class="btn btn-secondary">Cancel</button>
+                                                            <button type="reset" class="btn btn-primary mr-2"><?php echo __('Submit'); ?></button>
+                                                            <button type="reset" class="btn btn-secondary"><?php echo __('Cancel'); ?></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -509,27 +509,27 @@ if(isset($_POST['submit_pt'])){
                                                     <!--begin::Header-->
                                                     <div class="card-header border-0 py-5">
                                                         <h3 class="card-title align-items-start flex-column">
-                                                            <span class="card-label font-weight-bolder text-dark">Bank</span>
-                                                            <span class="text-muted mt-3 font-weight-bold font-size-sm">Experience in different organizations</span>
+                                                            <span class="card-label font-weight-bolder text-dark"><?php echo __('Bank'); ?></span>
+                                                            <span class="text-muted mt-3 font-weight-bold font-size-sm"><?php echo __('Experience in different organizations'); ?></span>
                                                         </h3>
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="form-group row">
                                                             <div class="col-lg-4">
-                                                                <span>Bank Name</span>
-                                                                <input aria-label="Enter employee ID" type="text" class="form-control" placeholder="Enter employee ID"/>
+                                                                <span><?php echo __('Bank Name'); ?></span>
+                                                                <input aria-label="<?php echo __('Enter employee ID'); ?>" type="text" class="form-control" placeholder="<?php echo __('Enter employee ID'); ?>"/>
 
                                                             </div>
                                                             <div class="col-lg-4">
-                                                                <span>IFSC Code</span>
-                                                                <input aria-label="Enter email" type="email" class="form-control" placeholder="Enter email"/>
+                                                                <span><?php echo __('IFSC Code'); ?></span>
+                                                                <input aria-label="<?php echo __('Enter email'); ?>" type="email" class="form-control" placeholder="<?php echo __('Enter email'); ?>"/>
 
                                                             </div>
                                                             <div class="col-lg-4">
-                                                                <span>Username:</span>
+                                                                <span><?php echo __('Username'); ?>:</span>
                                                                 <div class="input-group">
                                                                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
-                                                                   <input aria-label="Username:" type="text" class="form-control" placeholder="Username:"/>
+                                                                   <input aria-label="<?php echo __('Username:'); ?>" type="text" class="form-control" placeholder="<?php echo __('Username:'); ?>"/>
                                                                 </div>
 
                                                             </div>
@@ -544,12 +544,12 @@ if(isset($_POST['submit_pt'])){
                                                                 <thead>
                                                                     <tr class="text-uppercase">
                                                                         <th scope="col" class="table-column-40 pl-7">
-                                                                            <span class="text-dark-75">Company</span>
+                                                                            <span class="text-dark-75"><?php echo __('Company'); ?></span>
                                                                         </th>
-                                                                        <th scope="col" class="table-column-min-15">From</th>
-                                                                        <th scope="col" class="table-column-min-15">To</th>
-                                                                        <th scope="col" class="table-column-min-15">Experience</th>
-                                                                        <th scope="col" class="table-column-min-15">Remarks</th>
+                                                                        <th scope="col" class="table-column-min-15"><?php echo __('From'); ?></th>
+                                                                        <th scope="col" class="table-column-min-15"><?php echo __('To'); ?></th>
+                                                                        <th scope="col" class="table-column-min-15"><?php echo __('Experience'); ?></th>
+                                                                        <th scope="col" class="table-column-min-15"><?php echo __('Remarks'); ?></th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -560,8 +560,8 @@ if(isset($_POST['submit_pt'])){
                                                                                     <div class="symbol-label symbol-label-img-26"></div>
                                                                                 </div>
                                                                                 <div>
-                                                                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Sant Extreanet Solution</a>
-                                                                                    <span class="text-muted font-weight-bold d-block">HTML, JS, ReactJS</span>
+                                                                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('Sant Extreanet Solution'); ?></a>
+                                                                                    <span class="text-muted font-weight-bold d-block"><?php echo __('HTML, JS, ReactJS'); ?></span>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -574,8 +574,8 @@ if(isset($_POST['submit_pt'])){
 
                                                                         </td>
                                                                         <td>
-                                                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">9 Years</span>
-                                                                            <span class="text-muted font-weight-bold">10 Months</span>
+                                                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('9 Years'); ?></span>
+                                                                            <span class="text-muted font-weight-bold"><?php echo __('10 Months'); ?></span>
                                                                         </td>
                                                                         <td>
 
@@ -588,8 +588,8 @@ if(isset($_POST['submit_pt'])){
                                                                                     <div class="symbol-label symbol-label-img-3"></div>
                                                                                 </div>
                                                                                 <div>
-                                                                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Telegram Development</a>
-                                                                                    <span class="text-muted font-weight-bold d-block">C#, ASP.NET, MS SQL</span>
+                                                                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('Telegram Development'); ?></a>
+                                                                                    <span class="text-muted font-weight-bold d-block"><?php echo __('C#, ASP.NET, MS SQL'); ?></span>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -602,8 +602,8 @@ if(isset($_POST['submit_pt'])){
 
                                                                         </td>
                                                                         <td>
-                                                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">5 Years</span>
-                                                                            <span class="text-muted font-weight-bold">4 Months</span>
+                                                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('5 Years'); ?></span>
+                                                                            <span class="text-muted font-weight-bold"><?php echo __('4 Months'); ?></span>
                                                                         </td>
                                                                         <td>
 
@@ -616,8 +616,8 @@ if(isset($_POST['submit_pt'])){
                                                                                     <div class="symbol-label symbol-label-img-5"></div>
                                                                                 </div>
                                                                                 <div>
-                                                                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Payroll Application</a>
-                                                                                    <span class="text-muted font-weight-bold d-block">PHP, Laravel, VueJS</span>
+                                                                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('Payroll Application'); ?></a>
+                                                                                    <span class="text-muted font-weight-bold d-block"><?php echo __('PHP, Laravel, VueJS'); ?></span>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -630,8 +630,8 @@ if(isset($_POST['submit_pt'])){
 
                                                                         </td>
                                                                         <td>
-                                                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">6 Years</span>
-                                                                            <span class="text-muted font-weight-bold">3 Months</span>
+                                                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('6 Years'); ?></span>
+                                                                            <span class="text-muted font-weight-bold"><?php echo __('3 Months'); ?></span>
                                                                         </td>
                                                                         <td>
 
@@ -644,8 +644,8 @@ if(isset($_POST['submit_pt'])){
                                                                                     <div class="symbol-label symbol-label-img-18"></div>
                                                                                 </div>
                                                                                 <div>
-                                                                                    <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">HR Management System</a>
-                                                                                    <span class="text-muted font-weight-bold d-block">Python, PostgreSQL, ReactJS</span>
+                                                                                    <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('HR Management System'); ?></a>
+                                                                                    <span class="text-muted font-weight-bold d-block"><?php echo __('Python, PostgreSQL, ReactJS'); ?></span>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -658,8 +658,8 @@ if(isset($_POST['submit_pt'])){
 
                                                                         </td>
                                                                         <td>
-                                                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">7 Years</span>
-                                                                            <span class="text-muted font-weight-bold">5 Months</span>
+                                                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('7 Years'); ?></span>
+                                                                            <span class="text-muted font-weight-bold"><?php echo __('5 Months'); ?></span>
                                                                         </td>
                                                                         <td>
 
@@ -676,8 +676,8 @@ if(isset($_POST['submit_pt'])){
                                                     <div class="row">
                                                         <div class="col-lg-4"></div>
                                                         <div class="col-lg-8">
-                                                            <button type="reset" class="btn btn-primary mr-2">Submit</button>
-                                                            <button type="reset" class="btn btn-secondary">Cancel</button>
+                                                            <button type="reset" class="btn btn-primary mr-2"><?php echo __('Submit'); ?></button>
+                                                            <button type="reset" class="btn btn-secondary"><?php echo __('Cancel'); ?></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -689,46 +689,46 @@ if(isset($_POST['submit_pt'])){
                                                <div class="card-body">
                                                     <div class="form-group row">
                                                         <div class="col-lg-4">
-                                                            <span>Date of Birth</span>
-                                                            <input aria-label="Date of Birth" type="text" class="form-control" placeholder="Date of Birth"/>
+                                                            <span><?php echo __('Date of Birth'); ?></span>
+                                                            <input aria-label="<?php echo __('Date of Birth'); ?>" type="text" class="form-control" placeholder="<?php echo __('Date of Birth'); ?>"/>
 
                                                         </div>
                                                         <div class="col-lg-4">
-                                                            <span>Age</span>
-                                                            <input aria-label="Age" type="text" class="form-control" placeholder="Age"/>
+                                                            <span><?php echo __('Age'); ?></span>
+                                                            <input aria-label="<?php echo __('Age'); ?>" type="text" class="form-control" placeholder="<?php echo __('Age'); ?>"/>
 
                                                         </div>
                                                         <div class="col-lg-4">
-                                                            <span>Gender</span>
+                                                            <span><?php echo __('Gender'); ?></span>
                                                             <div class="radio-inline">
                                                                <label class="radio radio-solid">
-                                                               <input aria-label="Example 2" type="radio" name="example_2" checked="checked" value="2"/>
+                                                               <input aria-label="<?php echo __('Example 2'); ?>" type="radio" name="example_2" checked="checked" value="2"/>
                                                                <span></span>
-                                                               Male
+                                                               <?php echo __('Male'); ?>
                                                                </label>
                                                                <label class="radio radio-solid">
-                                                               <input aria-label="Example 2" type="radio" name="example_2" value="2"/>
+                                                               <input aria-label="<?php echo __('Example 2'); ?>" type="radio" name="example_2" value="2"/>
                                                                <span></span>
-                                                               Female
+                                                               <?php echo __('Female'); ?>
                                                                </label>
                                                             </div>
-                                                            <span class="form-text text-muted">Please select user group</span>
+                                                            <span class="form-text text-muted"><?php echo __('Please select user group'); ?></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-lg-4">
-                                                            <span>Merital Status</span>
-                                                            <input aria-label="Merital Status" type="text" class="form-control" placeholder="Merital Status"/>
+                                                            <span><?php echo __('Merital Status'); ?></span>
+                                                            <input aria-label="<?php echo __('Merital Status'); ?>" type="text" class="form-control" placeholder="<?php echo __('Merital Status'); ?>"/>
 
                                                         </div>
                                                         <div class="col-lg-4">
-                                                            <span>Marrige Date</span>
-                                                            <input aria-label="Marrige Date" type="text" class="form-control" placeholder="Marrige Date"/>
+                                                            <span><?php echo __('Marrige Date'); ?></span>
+                                                            <input aria-label="<?php echo __('Marrige Date'); ?>" type="text" class="form-control" placeholder="<?php echo __('Marrige Date'); ?>"/>
 
                                                         </div>
                                                         <div class="col-lg-4">
-                                                            <span>Blood Group</span>
-                                                            <input aria-label="Blood Group" type="text" class="form-control" placeholder="Blood Group"/>
+                                                            <span><?php echo __('Blood Group'); ?></span>
+                                                            <input aria-label="<?php echo __('Blood Group'); ?>" type="text" class="form-control" placeholder="<?php echo __('Blood Group'); ?>"/>
 
                                                         </div>
                                                     </div>
@@ -737,8 +737,8 @@ if(isset($_POST['submit_pt'])){
                                                     <div class="row">
                                                         <div class="col-lg-4"></div>
                                                         <div class="col-lg-8">
-                                                            <button type="reset" class="btn btn-primary mr-2">Submit</button>
-                                                            <button type="reset" class="btn btn-secondary">Cancel</button>
+                                                            <button type="reset" class="btn btn-primary mr-2"><?php echo __('Submit'); ?></button>
+                                                            <button type="reset" class="btn btn-secondary"><?php echo __('Cancel'); ?></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -750,8 +750,8 @@ if(isset($_POST['submit_pt'])){
                                                 <!--begin::Header-->
                                                 <div class="card-header border-0 py-5">
                                                     <h3 class="card-title align-items-start flex-column">
-                                                        <span class="card-label font-weight-bolder text-dark">Add Experience</span>
-                                                        <span class="text-muted mt-3 font-weight-bold font-size-sm">Experience in different organizations</span>
+                                                        <span class="card-label font-weight-bolder text-dark"><?php echo __('Add Experience'); ?></span>
+                                                        <span class="text-muted mt-3 font-weight-bold font-size-sm"><?php echo __('Experience in different organizations'); ?></span>
                                                     </h3>
                                                     <div class="card-toolbar">
                                                         <a href="#" class="btn btn-success font-weight-bolder font-size-sm">
@@ -765,7 +765,7 @@ if(isset($_POST['submit_pt'])){
                                                                 </g>
                                                             </svg>
                                                             <!--end::Svg Icon-->
-                                                        </span>Add New Experience</a>
+                                                        </span><?php echo __('Add New Experience'); ?></a>
                                                     </div>
                                                 </div>
                                                 <!--end::Header-->
@@ -777,12 +777,12 @@ if(isset($_POST['submit_pt'])){
                                                             <thead>
                                                                 <tr class="text-uppercase">
                                                                     <th scope="col" class="table-column-width-40 pl-7">
-                                                                        <span class="text-dark-75">Company</span>
+                                                                        <span class="text-dark-75"><?php echo __('Company'); ?></span>
                                                                     </th>
-                                                                    <th scope="col" class="table-column-width-15-min">From</th>
-                                                                    <th scope="col" class="table-column-width-15-min">To</th>
-                                                                    <th scope="col" class="table-column-width-15-min">Experience</th>
-                                                                    <th scope="col" class="table-column-width-15-min">Remarks</th>
+                                                                    <th scope="col" class="table-column-width-15-min"><?php echo __('From'); ?></th>
+                                                                    <th scope="col" class="table-column-width-15-min"><?php echo __('To'); ?></th>
+                                                                    <th scope="col" class="table-column-width-15-min"><?php echo __('Experience'); ?></th>
+                                                                    <th scope="col" class="table-column-width-15-min"><?php echo __('Remarks'); ?></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -793,8 +793,8 @@ if(isset($_POST['submit_pt'])){
                                                                                 <div class="symbol-label symbol-label-img-26"></div>
                                                                             </div>
                                                                             <div>
-                                                                                <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Sant Extreanet Solution</a>
-                                                                                <span class="text-muted font-weight-bold d-block">HTML, JS, ReactJS</span>
+                                                                                <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('Sant Extreanet Solution'); ?></a>
+                                                                                <span class="text-muted font-weight-bold d-block"><?php echo __('HTML, JS, ReactJS'); ?></span>
                                                                             </div>
                                                                         </div>
                                                                     </td>
@@ -807,8 +807,8 @@ if(isset($_POST['submit_pt'])){
 
                                                                     </td>
                                                                     <td>
-                                                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">9 Years</span>
-                                                                        <span class="text-muted font-weight-bold">10 Months</span>
+                                                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('9 Years'); ?></span>
+                                                                        <span class="text-muted font-weight-bold"><?php echo __('10 Months'); ?></span>
                                                                     </td>
                                                                     <td>
 
@@ -821,8 +821,8 @@ if(isset($_POST['submit_pt'])){
                                                                                 <div class="symbol-label symbol-label-img-3"></div>
                                                                             </div>
                                                                             <div>
-                                                                                <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Telegram Development</a>
-                                                                                <span class="text-muted font-weight-bold d-block">C#, ASP.NET, MS SQL</span>
+                                                                                <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('Telegram Development'); ?></a>
+                                                                                <span class="text-muted font-weight-bold d-block"><?php echo __('C#, ASP.NET, MS SQL'); ?></span>
                                                                             </div>
                                                                         </div>
                                                                     </td>
@@ -835,8 +835,8 @@ if(isset($_POST['submit_pt'])){
 
                                                                     </td>
                                                                     <td>
-                                                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">5 Years</span>
-                                                                        <span class="text-muted font-weight-bold">4 Months</span>
+                                                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('5 Years'); ?></span>
+                                                                        <span class="text-muted font-weight-bold"><?php echo __('4 Months'); ?></span>
                                                                     </td>
                                                                     <td>
 
@@ -849,8 +849,8 @@ if(isset($_POST['submit_pt'])){
                                                                                 <div class="symbol-label symbol-label-img-5"></div>
                                                                             </div>
                                                                             <div>
-                                                                                <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Payroll Application</a>
-                                                                                <span class="text-muted font-weight-bold d-block">PHP, Laravel, VueJS</span>
+                                                                                <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('Payroll Application'); ?></a>
+                                                                                <span class="text-muted font-weight-bold d-block"><?php echo __('PHP, Laravel, VueJS'); ?></span>
                                                                             </div>
                                                                         </div>
                                                                     </td>
@@ -863,8 +863,8 @@ if(isset($_POST['submit_pt'])){
 
                                                                     </td>
                                                                     <td>
-                                                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">6 Years</span>
-                                                                        <span class="text-muted font-weight-bold">3 Months</span>
+                                                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('6 Years'); ?></span>
+                                                                        <span class="text-muted font-weight-bold"><?php echo __('3 Months'); ?></span>
                                                                     </td>
                                                                     <td>
 
@@ -877,8 +877,8 @@ if(isset($_POST['submit_pt'])){
                                                                                 <div class="symbol-label symbol-label-img-18"></div>
                                                                             </div>
                                                                             <div>
-                                                                                <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">HR Management System</a>
-                                                                                <span class="text-muted font-weight-bold d-block">Python, PostgreSQL, ReactJS</span>
+                                                                                <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('HR Management System'); ?></a>
+                                                                                <span class="text-muted font-weight-bold d-block"><?php echo __('Python, PostgreSQL, ReactJS'); ?></span>
                                                                             </div>
                                                                         </div>
                                                                     </td>
@@ -891,8 +891,8 @@ if(isset($_POST['submit_pt'])){
 
                                                                     </td>
                                                                     <td>
-                                                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">7 Years</span>
-                                                                        <span class="text-muted font-weight-bold">5 Months</span>
+                                                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('7 Years'); ?></span>
+                                                                        <span class="text-muted font-weight-bold"><?php echo __('5 Months'); ?></span>
                                                                     </td>
                                                                     <td>
 
@@ -910,7 +910,7 @@ if(isset($_POST['submit_pt'])){
                                 </div>
 
                                 <div class="tab-pane fade" id="home-8" role="tabpanel" aria-labelledby="home-tab-8">
-                                    Goals
+                                    <?php echo __('Goals'); ?>
                                 </div>
 
                                 <div class="tab-pane fade" id="home-9" role="tabpanel" aria-labelledby="home-tab-9">
@@ -918,8 +918,8 @@ if(isset($_POST['submit_pt'])){
                                         <!--begin::Header-->
                                         <div class="card-header border-0 py-5">
                                             <h3 class="card-title align-items-start flex-column">
-                                                <span class="card-label font-weight-bolder text-dark">Add Assets</span>
-                                                <span class="text-muted mt-3 font-weight-bold font-size-sm">Experience in different organizations</span>
+                                                <span class="card-label font-weight-bolder text-dark"><?php echo __('Add Assets'); ?></span>
+                                                <span class="text-muted mt-3 font-weight-bold font-size-sm"><?php echo __('Experience in different organizations'); ?></span>
                                             </h3>
                                             <div class="card-toolbar">
                                                 <a href="#" class="btn btn-success font-weight-bolder font-size-sm">
@@ -933,7 +933,7 @@ if(isset($_POST['submit_pt'])){
                                                         </g>
                                                     </svg>
                                                     <!--end::Svg Icon-->
-                                                </span>Add New Assets</a>
+                                                </span><?php echo __('Add New Assets'); ?></a>
                                             </div>
                                         </div>
                                         <!--end::Header-->
@@ -945,12 +945,12 @@ if(isset($_POST['submit_pt'])){
                                                     <thead>
                                                         <tr class="text-uppercase">
                                                             <th scope="col" class="table-column-width-40 pl-7">
-                                                                <span class="text-dark-75">Assets</span>
+                                                                <span class="text-dark-75"><?php echo __('Assets'); ?></span>
                                                             </th>
-                                                            <th scope="col" class="table-column-width-15-min">From</th>
-                                                            <th scope="col" class="table-column-width-15-min">To</th>
+                                                            <th scope="col" class="table-column-width-15-min"><?php echo __('From'); ?></th>
+                                                            <th scope="col" class="table-column-width-15-min"><?php echo __('To'); ?></th>
 
-                                                            <th scope="col" class="table-column-width-15-min">Remarks</th>
+                                                            <th scope="col" class="table-column-width-15-min"><?php echo __('Remarks'); ?></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -961,8 +961,8 @@ if(isset($_POST['submit_pt'])){
                                                                         <div class="symbol-label symbol-label-img-26"></div>
                                                                     </div>
                                                                     <div>
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Sant Extreanet Solution</a>
-                                                                        <span class="text-muted font-weight-bold d-block">HTML, JS, ReactJS</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('Sant Extreanet Solution'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?php echo __('HTML, JS, ReactJS'); ?></span>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -987,8 +987,8 @@ if(isset($_POST['submit_pt'])){
                                                                         <div class="symbol-label symbol-label-img-3"></div>
                                                                     </div>
                                                                     <div>
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Telegram Development</a>
-                                                                        <span class="text-muted font-weight-bold d-block">C#, ASP.NET, MS SQL</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('Telegram Development'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?php echo __('C#, ASP.NET, MS SQL'); ?></span>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -998,8 +998,8 @@ if(isset($_POST['submit_pt'])){
                                                             </td>
 
                                                             <td>
-                                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">5 Years</span>
-                                                                <span class="text-muted font-weight-bold">4 Months</span>
+                                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('5 Years'); ?></span>
+                                                                <span class="text-muted font-weight-bold"><?php echo __('4 Months'); ?></span>
                                                             </td>
                                                             <td>
 
@@ -1012,8 +1012,8 @@ if(isset($_POST['submit_pt'])){
                                                                         <div class="symbol-label symbol-label-img-5"></div>
                                                                     </div>
                                                                     <div>
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Payroll Application</a>
-                                                                        <span class="text-muted font-weight-bold d-block">PHP, Laravel, VueJS</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('Payroll Application'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?php echo __('PHP, Laravel, VueJS'); ?></span>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -1023,8 +1023,8 @@ if(isset($_POST['submit_pt'])){
                                                             </td>
 
                                                             <td>
-                                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">6 Years</span>
-                                                                <span class="text-muted font-weight-bold">3 Months</span>
+                                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('6 Years'); ?></span>
+                                                                <span class="text-muted font-weight-bold"><?php echo __('3 Months'); ?></span>
                                                             </td>
                                                             <td>
 
@@ -1038,8 +1038,8 @@ if(isset($_POST['submit_pt'])){
                                                                         <div class="symbol-label symbol-label-img-18"></div>
                                                                     </div>
                                                                     <div>
-                                                                        <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">HR Management System</a>
-                                                                        <span class="text-muted font-weight-bold d-block">Python, PostgreSQL, ReactJS</span>
+                                                                        <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo __('HR Management System'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?php echo __('Python, PostgreSQL, ReactJS'); ?></span>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -1049,8 +1049,8 @@ if(isset($_POST['submit_pt'])){
                                                             </td>
 
                                                             <td>
-                                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">7 Years</span>
-                                                                <span class="text-muted font-weight-bold">5 Months</span>
+                                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo __('7 Years'); ?></span>
+                                                                <span class="text-muted font-weight-bold"><?php echo __('5 Months'); ?></span>
                                                             </td>
                                                             <td>
 

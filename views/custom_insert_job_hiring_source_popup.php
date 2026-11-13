@@ -71,7 +71,7 @@ function publishdatapopup(job_post_id){
     <h5 class="modal-title">
         <small>&nbsp;&nbsp; <b class="f-w-600"><?php echo $job_postings['job_name']; ?></b></small>
     </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body p-l-50 p-r-50 p-t-50">
     <form class="" action="" method="post">
@@ -82,23 +82,23 @@ function publishdatapopup(job_post_id){
                     <table class="table table-hover"><!--  table table-bordered nowrap -->
                         <thead>
                             <th scope="col" style="width: 5%;">#</th>
-                            <th scope="col" style="width: 20%;">Logo</th>
-                            <th scope="col" style="width: 20%;">Source Name</th>
-                            <th scope="col" style="width: 10%;">Status</th>
-                            <th scope="col" style="width: 10%;">Date</th>
-                            <th scope="col" class="text-center" style="width: 25%;">Action</th>
+                            <th scope="col" style="width: 20%;"><?php echo __('Logo'); ?></th>
+                            <th scope="col" style="width: 20%;"><?php echo __('Source Name'); ?></th>
+                            <th scope="col" style="width: 10%;"><?php echo __('Status'); ?></th>
+                            <th scope="col" style="width: 10%;"><?php echo __('Date'); ?></th>
+                            <th scope="col" class="text-center" style="width: 25%;"><?php echo __('Action'); ?></th>
                         </thead>
                         <?php $m=1; foreach($tabledata as $data){
                             $statucolorname = $stausresult[$publish[$data['id']]]; ?>
                             <tr>
                                 <td><?php echo $m; ?></td>
-                                <td><img class="img-80" src="uploads/all/<?php echo $data['hiring_source_logo']; ?>" alt="Logo"></td>
+                                <td><img class="img-80" src="uploads/all/<?php echo $data['hiring_source_logo']; ?>" alt="<?php echo __('Logo'); ?>"></td>
                                 <td><?php echo $data['hiring_source_name']; ?></td>
                                 <td>
                                     <?php if(in_array($data['id'],(array)$pubids)){ ?>
                                         <span class="form-label label label-danger" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $statusnamelist[$publish[$data['id']]]; ?></span></td>
                                     <?php }else{ ?>
-                                        <span class="form-label label label-warning"> Yet To Published </span></td>
+                                        <span class="form-label label label-warning"> <?php echo __('Yet To Published'); ?> </span></td>
                                     <?php } ?>
                                     <td>
                                         <?php
@@ -123,7 +123,7 @@ function publishdatapopup(job_post_id){
                                             }
                                         }else{
                                             $statucolorname = $stausresult[0];  ?>
-                                            <button type="button" class="btn btn-primary desktop-view text-capitalize" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;" onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'CREATE',<?php echo $data['id']; ?>,'')">Publish</button>
+                                            <button type="button" class="btn btn-primary desktop-view text-capitalize" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;" onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'CREATE',<?php echo $data['id']; ?>,'')"><?php echo __('Publish'); ?></button>
                                         <?php     }
 
                                         ?>
@@ -136,7 +136,7 @@ function publishdatapopup(job_post_id){
                         </table>
                     <?php }else{ ?>
                         <div class="card-px text-center ">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Hiring Sources </p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?php echo __('No Hiring Sources'); ?> </p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
@@ -149,7 +149,7 @@ function publishdatapopup(job_post_id){
         </div>
         <div class="modal-footer">
             <input type="hidden" name="rid" id='rid' value="<?php echo $_POST['rid']; ?>">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
         </div>
     </form>
 </div>

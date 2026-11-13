@@ -45,9 +45,9 @@ $end = $rowdata['stop_date'] !="" ? displayDate($rowdata['stop_date']) : "";
 </script>
 <div class="modal-header">
     <h5 class="modal-title">
-        <small>&nbsp;&nbsp; <b class="f-w-600">Transport</small>
+        <small>&nbsp;&nbsp; <b class="f-w-600"><?php echo __('Transport'); ?></small>
     </h5>
-    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body">
     <form class="kt-form " id="submitformadditionalservice" >
@@ -58,38 +58,38 @@ $end = $rowdata['stop_date'] !="" ? displayDate($rowdata['stop_date']) : "";
     <div  <?php if( count((array)$rowdata)>0){ ?> style="pointer-events: none; opacity: 0.7;" <?php
 } ?> >
         <div class="form-group">
-            <span>Food Type</span>
-            <input aria-label="Input field" type="text" readonly class="form-control" name="" value="<?php echo $row['food_option']; ?>">
+            <span><?php echo __('Food Type'); ?></span>
+            <input aria-label="<?php echo __('Input field'); ?>" type="text" readonly class="form-control" name="" value="<?php echo $row['food_option']; ?>">
         </div>
         <div class="form-group">
-            <span>Start Date</span>
-            <input aria-label="Start Date" type="text" name="start_date" class="form-control datepicker" value="<?php echo $start; ?>">
+            <span><?php echo __('Start Date'); ?></span>
+            <input aria-label="<?php echo __('Start Date'); ?>" type="text" name="start_date" class="form-control datepicker" value="<?php echo $start; ?>">
 
         </div>
         <div class="form-group">
-            <span>End Date</span>
-            <input aria-label="Stop Date" type="text"  class="form-control datepicker" name="stop_date" value="<?php echo $end; ?>">
+            <span><?php echo __('End Date'); ?></span>
+            <input aria-label="<?php echo __('Stop Date'); ?>" type="text"  class="form-control datepicker" name="stop_date" value="<?php echo $end; ?>">
         </div>
         <div class="form-group">
-            <span>Comments</span>
-            <textarea aria-label="Comments" class="form-control" name="comments"><?php echo $rowdata['comments'] ?></textarea>
+            <span><?php echo __('Comments'); ?></span>
+            <textarea aria-label="<?php echo __('Comments'); ?>" class="form-control" name="comments"><?php echo $rowdata['comments'] ?></textarea>
         </div>
     </div>
     <?php if( count((array)$rowdata)==0){ ?>
         </div>
     <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary waves-effect waves-light " onclick="submitintranspotfrom()">Save</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+            <button type="button" class="btn btn-primary waves-effect waves-light " onclick="submitintranspotfrom()"><?php echo __('Save'); ?></button>
 
         </div>
     </form>
 
     <?php }elseif($row['created_by'] != $_SESSION['userid'] && $_SESSION['admin_type'] ==1 && $rowdata['current_status']!=ST_APPROVED){ ?>
             <div class="form-group">
-                <span>Status </span>
+                <span><?php echo __('Status'); ?> </span>
                 <div class="radio radio-outline  mt-1">
                     <?php foreach ($data['status'] as $selectkey => $selectvalue) {  if($selectkey >10){   ?>
-                        <label class="radio radio-inline"> <input aria-label="Radio option" type="radio"  id="current_status_<?php echo $selectkey; ?>"  name="current_status" value='<?php echo $selectkey; ?>'>    <span></span><?php echo $selectvalue; ?> </label>
+                        <label class="radio radio-inline"> <input aria-label="<?php echo __('Radio option'); ?>" type="radio"  id="current_status_<?php echo $selectkey; ?>"  name="current_status" value='<?php echo $selectkey; ?>'>    <span></span><?php echo $selectvalue; ?> </label>
                         <?php $sch++; ?>
                         <?php } ?>
                         <?php } ?>
@@ -98,14 +98,14 @@ $end = $rowdata['stop_date'] !="" ? displayDate($rowdata['stop_date']) : "";
 
     </div>
     <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary waves-effect waves-light " onclick="updatefoodfrom(<?php echo $rowdata['id']; ?>)">Save</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+            <button type="button" class="btn btn-primary waves-effect waves-light " onclick="updatefoodfrom(<?php echo $rowdata['id']; ?>)"><?php echo __('Save'); ?></button>
 
         </div>
     </form>
     <?php }else{ ?>
         <div class="form-group" style="pointer-events: none; opacity: 0.7;">
-                <span>Status </span>
+                <span><?php echo __('Status'); ?> </span>
                 <div>
                     <?php echo $data['status'][$rowdata['current_status']]; ?>
                 </div>

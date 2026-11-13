@@ -75,7 +75,7 @@ $statuse = ViewStatusData();
 		<form id="tasksubmitform">
 			<div class="row">
 				<div class="form-group">
-					<label class="form-label">Comment<span class="text-danger">*</span></label>
+					<label class="form-label"><?= __('Comment') ?><span class="text-danger">*</span></label>
 					<textarea  class="form-control" name="comment" id="popup_comment" ><?php echo $application_task_logs['description'];?></textarea>
 				</div>
 			</div>
@@ -85,6 +85,6 @@ $statuse = ViewStatusData();
 </div>
 <div class="modal-footer" >
 	<span class="text-danger f-w-700" id="popupshowerror" style="display: none">Please fill out all required fields</span>
-	<button type="button" class="btn btn-primary waves-effect waves-light <?php if($application_task_logs['follow_up_type'] == EMAIL_TASK['type'] || $application_task_logs['current_status'] !='0'){ ?>disabled<?php } ?>" onclick="SubmitTaskDetails()" >Submit/Approved</button>
-	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+	<button type="button" class="btn btn-primary waves-effect waves-light <?php if($application_task_logs['follow_up_type'] == EMAIL_TASK['type'] || $application_task_logs['current_status'] !='0'){ ?>disabled<?php } ?>" onclick="SubmitTaskDetails()" ><?= __('Submit/Approved') ?></button>
+	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
 </div>

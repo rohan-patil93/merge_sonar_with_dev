@@ -19,13 +19,13 @@ if($_POST['ajaxsub'] =='Y'){
 <table class="table table-hover m-b-0">
     <thead>
         <tr>
-            <th scope="col">Product</th>
-            <th scope="col"><span class="d-block">Product Code</span></th>
-            <th scope="col"><span class="d-block">Used/Unused</span></th>
-             <th scope="col"><span class="d-block">Price</span></th>
-            <th scope="col"><span class="d-block">Start Date</span></th>
-             <th scope="col"><span class="d-block">End Date</span></th>
-            <th scope="col">Action</th>
+            <th scope="col"><?php echo __('Product'); ?></th>
+            <th scope="col"><span class="d-block"><?php echo __('Product Code'); ?></span></th>
+            <th scope="col"><span class="d-block"><?php echo __('Used/Unused'); ?></span></th>
+             <th scope="col"><span class="d-block"><?php echo __('Price'); ?></span></th>
+            <th scope="col"><span class="d-block"><?php echo __('Start Date'); ?></span></th>
+             <th scope="col"><span class="d-block"><?php echo __('End Date'); ?></span></th>
+            <th scope="col"><?php echo __('Action'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -54,15 +54,15 @@ if($_POST['ajaxsub'] =='Y'){
                <td><b><?php echo $companysubscriptionplans['start_date']; ?></b></td>
                   <td><b><?php echo $companysubscriptionplans['end_date']; ?></b></td>
             <td>
-               <i class="ti-notepad" data-bs-toggle="tooltip" data-placement="bottom" title="History" onclick="viewSubscriptonHistory('<?php echo $companysubscriptionplans['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i> &nbsp;&nbsp;
-                <i class="ti-user" onclick="AddUserPlans('<?php echo $companysubscriptionplans['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Assign Users Policy" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+               <i class="ti-notepad" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('History'); ?>" onclick="viewSubscriptonHistory('<?php echo $companysubscriptionplans['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i> &nbsp;&nbsp;
+                <i class="ti-user" onclick="AddUserPlans('<?php echo $companysubscriptionplans['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Assign Users Policy'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
 
             </td>
         </tr>
     <?php } ?>
     <tfoot>
         <tr>
-            <td class="f-w-700" colspan="2">Total</td>
+            <td class="f-w-700" colspan="2"><?php echo __('Total'); ?></td>
             <td id="totalactualuser" class="f-w-700"><?php echo $totalactualuser; ?></td>
             <td  class="f-w-700" id="totalactualprice"><?php echo "Rs.".$totalactualprice; ?></td>
         </tr>
@@ -75,13 +75,13 @@ if($_POST['ajaxsub'] =='Y'){
     <table class="table table-hover m-b-0">
     <thead>
         <tr>
-            <th scope="col">Product</th>
-            <th scope="col"><span class="d-block">Standard</span><small>(User Limit)</small></th>
+            <th scope="col"><?php echo __('Product'); ?></th>
+            <th scope="col"><span class="d-block"><?php echo __('Standard'); ?></span><small><?php echo __('(User Limit)'); ?></small></th>
 
-            <th scope="col"><span class="d-block">Standard</span><small>(Amount)</small></th>
-            <th scope="col"><span class="d-block">Discount</span></th>
-            <th scope="col"><span class="d-block">Actual</span><small>(Amount)</small></th>
-            <th scope="col">Action</th>
+            <th scope="col"><span class="d-block"><?php echo __('Standard'); ?></span><small><?php echo __('(Amount)'); ?></small></th>
+            <th scope="col"><span class="d-block"><?php echo __('Discount'); ?></span></th>
+            <th scope="col"><span class="d-block"><?php echo __('Actual'); ?></span><small><?php echo __('(Amount)'); ?></small></th>
+            <th scope="col"><?php echo __('Action'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -114,28 +114,28 @@ if($_POST['ajaxsub'] =='Y'){
             <td><b><?php echo $companysubscriptionplans['standard_price']; ?> / <?php echo $subscriptiontypeunit[$companysubscriptionplans['lot_type']];?></b></td>
             <td>
               <input type="hidden" id="standard_price_<?php echo $companysubscriptionplans['id']; ?>" value="<?php echo $companysubscriptionplans['standard_price']; ?>">
-                <input aria-label="Discount Price[]" type="number" name="discount_price[]"  id="discount_price_<?php echo $companysubscriptionplans['id']; ?>" class="form-control discount_prices text-right" value="<?php echo $companysubscriptionplans['discounted_price']; ?>" style="width: 90px;" onblur="chekTotalAmount('<?php echo $companysubscriptionplans['id']; ?>')" <?php echo $companysubscriptionplans['subscription_type']=="N"?"":"readonly"; ?>>
+                <input aria-label="<?php echo __('Discount Price[]'); ?>" type="number" name="discount_price[]"  id="discount_price_<?php echo $companysubscriptionplans['id']; ?>" class="form-control discount_prices text-right" value="<?php echo $companysubscriptionplans['discounted_price']; ?>" style="width: 90px;" onblur="chekTotalAmount('<?php echo $companysubscriptionplans['id']; ?>')" <?php echo $companysubscriptionplans['subscription_type']=="N"?"":"readonly"; ?>>
             </td>
             <td>
-                <input aria-label="Agreed Price[]" type="number" name="agreed_price[]" id="agreed_price_<?php echo $companysubscriptionplans['id']; ?>" class="form-control agreedprice text-right" value="<?php echo $agreed_price; ?>" style="width: 130px;"  readonly>
+                <input aria-label="<?php echo __('Agreed Price[]'); ?>" type="number" name="agreed_price[]" id="agreed_price_<?php echo $companysubscriptionplans['id']; ?>" class="form-control agreedprice text-right" value="<?php echo $agreed_price; ?>" style="width: 130px;"  readonly>
             </td>
             <td>
                 <i class="ti-trash" onclick="doftDeleteRow('<?php echo $companysubscriptionplans['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>&nbsp;
               <?php if($subscription_plansdetails['additional_license_lot'] !='0' && $subscription_plansdetails['additional_license_lot'] !=""){ ?>
-                <i class="ti-plus" data-bs-toggle="tooltip" data-placement="bottom" title="Add Additional Subscription" onclick="AdditionalSubscription('<?php echo $companysubscriptionplans['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>&nbsp;
+                <i class="ti-plus" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Add Additional Subscription'); ?>" onclick="AdditionalSubscription('<?php echo $companysubscriptionplans['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>&nbsp;
               <?php } ?>
 
-                <i class="ti-notepad" data-bs-toggle="tooltip" data-placement="bottom" title="History" onclick="viewSubscriptonHistory('<?php echo $companysubscriptionplans['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                <i class="ti-notepad" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('History'); ?>" onclick="viewSubscriptonHistory('<?php echo $companysubscriptionplans['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
             </td>
         </tr>
     <?php } ?>
     <tfoot>
         <tr>
-            <td class="f-w-700">Total</td>
+            <td class="f-w-700"><?php echo __('Total'); ?></td>
             <td class="f-w-700"><?php echo $totalstandarduser; ?></td>
 
 
-            <td class="f-w-700">Rs.<?php echo $totalstandardprice; ?></td>
+            <td class="f-w-700"><?php echo __('Rs.'); ?><?php echo $totalstandardprice; ?></td>
 
             <td class="f-w-700" id="totaldiscount_prices"><?php echo "Rs.".$totaldiscountprice; ?></td>
             <td  class="f-w-700" id="totalactualprice text-right"><?php echo "Rs.".$totalactualprice; ?></td>
@@ -146,7 +146,7 @@ if($_POST['ajaxsub'] =='Y'){
 <?php }else{ ?>
 
 <div class="card-px text-center py-20 m-t-30">
-    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> No Subscription </p>
+    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> <?php echo __('No Subscription'); ?> </p>
     <div class="text-center px-4">
       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
     </div>

@@ -65,11 +65,11 @@ function lockFloorSpace(cabinseq){
                  $("#submit_error_"+cabinseq).text(result.error_message);
              }else{
                 if(result.equipment_allocation_id == '0'){
-                    tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>','');
+                    tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo __($_SESSION['error_message']['3001']); ?>','');
                 }else{
                     $("#equipment_allocation_id_"+cabinseq).val(result.equipment_allocation_id);
-                    $("#equipment_allocation_btn_"+cabinseq).html('<button type="button" class="btn p-0 border-0 bg-transparent cursor-pointer m-l-20 text-danger" onclick="removeEquipmentAllocations(\''+result.equipment_allocation_id+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i> Remove</button>');
-                    tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3000']; ?>','');
+                    $("#equipment_allocation_btn_"+cabinseq).html('<button type="button" class="btn p-0 border-0 bg-transparent cursor-pointer m-l-20 text-danger" onclick="removeEquipmentAllocations(\''+result.equipment_allocation_id+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i> <?php echo __('Remove'); ?></button>');
+                    tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo __($_SESSION['error_message']['3000']); ?>','');
                 }
                 $("#save_btn_"+cabinseq).hide();
                 $("#edit_btn_"+cabinseq).show('slow');
@@ -102,18 +102,18 @@ function addMorefloorSpaces(){
         $("#equipment_allocation_seq").val(maxrows);
         var htmlrows = '<div class="row mt-2" id="deleteid_'+maxrows+'"><input type="hidden" id="equipment_allocation_id_'+maxrows+'" value="">';
 
-        htmlrows += '<div class="col-lg-4 w-full all_edit_field space_edit_field_'+maxrows+'"> <span id="error_space_type_id_'+maxrows+'" class="text-danger all_error" style="display:none">Please Enter Required Fields</span><select aria-label="Space Type" class="js-example-basic-single" id="space_type_id_'+maxrows+'"  name="space_type_id"> <?php foreach($assets as $asss){ ?><option value="<?php echo $asss['id']; ?>"><?php echo $asss['asset_description']."(".$asss['asset_code'].")"; ?></option><?php
+        htmlrows += '<div class="col-lg-4 w-full all_edit_field space_edit_field_'+maxrows+'"> <span id="error_space_type_id_'+maxrows+'" class="text-danger all_error" style="display:none"><?php echo __('Please Enter Required Fields'); ?></span><select aria-label="<?php echo __('Space Type'); ?>" class="js-example-basic-single" id="space_type_id_'+maxrows+'"  name="space_type_id"> <?php foreach($assets as $asss){ ?><option value="<?php echo $asss['id']; ?>"><?php echo __($asss['asset_description'])."(".$asss['asset_code'].")"; ?></option><?php
 } ?></select></div>';
 
-        htmlrows += '<div class="col-lg-3"><input aria-label="X Size" class="form-control" type="text" id="x_size_'+maxrows+'"  value="0" readonly> </div>';
+        htmlrows += '<div class="col-lg-3"><input aria-label="<?php echo __('X Size'); ?>" class="form-control" type="text" id="x_size_'+maxrows+'"  value="0" readonly> </div>';
 
-        htmlrows += '<div class="col-lg-3"><input aria-label="Y Size" class="form-control" type="text" id="y_size_'+maxrows+'"  value="0" readonly> </div>';
+        htmlrows += '<div class="col-lg-3"><input aria-label="<?php echo __('Y Size'); ?>" class="form-control" type="text" id="y_size_'+maxrows+'"  value="0" readonly> </div>';
 
-        htmlrows += '<div class="col-lg-2"><button type="button" class="all_save_btn cursor-pointer" id="save_btn_'+maxrows+'" onclick="lockFloorSpace('+maxrows+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Save" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-save"></i> Save</button><button type="button" class="all_edit_btn cursor-pointer" id="edit_btn_'+maxrows+'" onclick="editFloorSpace('+maxrows+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Edit" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-edit"></i> Edit</button> <span id="allocateequipment_btn_'+maxrows+'"></span><span class="text-danger sub_error d-block" id="submit_error_'+maxrows+'" ></span></div>';
+        htmlrows += '<div class="col-lg-2"><button type="button" class="all_save_btn cursor-pointer" id="save_btn_'+maxrows+'" onclick="lockFloorSpace('+maxrows+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Save'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-save"></i> <?php echo __('Save'); ?></button><button type="button" class="all_edit_btn cursor-pointer" id="edit_btn_'+maxrows+'" onclick="editFloorSpace('+maxrows+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Edit'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-edit"></i> <?php echo __('Edit'); ?></button> <span id="allocateequipment_btn_'+maxrows+'"></span><span class="text-danger sub_error d-block" id="submit_error_'+maxrows+'" ></span></div>';
         $("#newrowadd").append(htmlrows);
         $(".js-example-basic-single").select2();
 
-        var htmlequipment ='<div id="position_'+maxrows+'" class="equipment-allocation-icon     cursor-pointer free_allocation " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'+maxrows+' Cubicle" style="top: 0%; left: 0%;">'+maxrows+'</div>';
+        var htmlequipment ='<div id="position_'+maxrows+'" class="equipment-allocation-icon     cursor-pointer free_allocation " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'+maxrows+' <?php echo __('Cubicle'); ?>" style="top: 0%; left: 0%;">'+maxrows+'</div>';
 
          $("#extra_equipments_icon").append(htmlequipment);
 
@@ -124,12 +124,12 @@ function addMorefloorSpaces(){
         if(id !=""){
             swal({
                 title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-                text: '<?php echo $_SESSION['error_message']['9120']; ?>',
+                text: '<?php echo __($_SESSION['error_message']['9120']); ?>',
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes",
-                cancelButtonText: "No",
+                confirmButtonText: "<?php echo __('Yes'); ?>",
+                cancelButtonText: "<?php echo __('No'); ?>",
                 closeOnConfirm: true,
                 closeOnCancel: true
             },
@@ -140,7 +140,7 @@ function addMorefloorSpaces(){
                         data:'page=softdeletedrecord&id='+id+'&table=asset_allocations',
                         type: "POST",
                         success:function(response){
-                            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3002']; ?>','');
+                            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo __($_SESSION['error_message']['3002']); ?>','');
                             closeEquipmentAllocations();
                             insertAssetsAllocation('','<?php echo $building_floor_id; ?>','','')
                         }
@@ -167,17 +167,17 @@ function addMorefloorSpaces(){
 
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Building Floor</h4>
-    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="Close" onclick="closeEquipmentAllocations()"></button>
+    <h4 class="modal-title"><?php echo __('Building Floor'); ?></h4>
+    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>" onclick="closeEquipmentAllocations()"></button>
 </div>
 <div class="modal-body m-l-50 m-r-50">
     <div class="col-lg-12 mb-4 courier ">
         <ul class="nav nav-tabs tabs dynamic_card_menu">
             <?php foreach($all_building_floors  as $abf){ ?>
             <li class="nav-item">
-                <button type="button" class="nav-link position-relative text-center p-2 cursor-pointer border-0 bg-transparent <?php echo $abf['id'] == $building_floors['id']?"active":""; ?>" onclick="getBuildingFoolSpaceDetailsNew('<?php echo $abf['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title=""  data-bs-original-title="Click To Open Building Floor Plans">
+                <button type="button" class="nav-link position-relative text-center p-2 cursor-pointer border-0 bg-transparent <?php echo $abf['id'] == $building_floors['id']?"active":""; ?>" onclick="getBuildingFoolSpaceDetailsNew('<?php echo $abf['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title=""  data-bs-original-title="<?php echo __('Click To Open Building Floor Plans'); ?>">
                    <img src="uploads/building_floors/<?php echo $abf['floor_image']; ?>" style="width: 100px; height: 100px;" alt="Attachment Preview">
-                    <span class="text-info f-14 f-w-700"><?php echo $abf['floor_name']; ?></span>
+                    <span class="text-info f-14 f-w-700"><?php echo __($abf['floor_name']); ?></span>
                 </button>
             </li>
             <?php } ?>
@@ -185,13 +185,13 @@ function addMorefloorSpaces(){
     </div>
     <div class="row">
         <div class="col-lg-4">
-            <span class="form-label">Assets</span>
+            <span class="form-label"><?php echo __('Assets'); ?></span>
         </div>
         <div class="col-lg-3">
-            <span class="form-label">X (PX-Top)</span>
+            <span class="form-label"><?php echo __('X (PX-Top)'); ?></span>
         </div>
         <div class="col-lg-3">
-            <span class="form-label">Y (PX-Left)</span>
+            <span class="form-label"><?php echo __('Y (PX-Left)'); ?></span>
         </div>
     </div>
     <div id="newrowadd">
@@ -233,29 +233,29 @@ function addMorefloorSpaces(){
          <div class="row mt-2">
             <input type="hidden" id="equipment_allocation_id_<?php echo $cabincnt; ?>" value="<?php echo $cabin['id']; ?>">
                 <div class="col-lg-4 w-full all_edit_field <?php echo $forecestopedit; ?>space_edit_field_<?php echo $cabincnt; ?> <?php echo $event_disabled; ?>">
-                    <span id="error_space_type_id_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none">Please Enter Required Fields</span>
-                    <select aria-label="Select option" class="js-example-basic-single" id="space_type_id_<?php echo $cabincnt; ?>"  name="space_type_id">
+                    <span id="error_space_type_id_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none"><?php echo __('Please Enter Required Fields'); ?></span>
+                    <select aria-label="<?php echo __('Select option'); ?>" class="js-example-basic-single" id="space_type_id_<?php echo $cabincnt; ?>"  name="space_type_id">
                         <?php foreach($assets as $asss){ ?>
-                        <option value="<?php echo $asss['id']; ?>" <?php echo $cabin['asset_id']==$asss['id']?"selected":""; ?>><?php echo $asss['asset_description']."(".$asss['asset_code'].")"; ?></option>
+                        <option value="<?php echo $asss['id']; ?>" <?php echo $cabin['asset_id']==$asss['id']?"selected":""; ?>><?php echo __($asss['asset_description'])."(".$asss['asset_code'].")"; ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="col-lg-3 all_edit_field space_edit_field_<?php echo $cabincnt; ?> <?php echo $event_disabled; ?>">
-                    <span id="error_x_size_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none">Required</span>
-                    <input aria-label="Input field" class="form-control" type="text" id="x_size_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['top_size']; ?>" readonly>
+                    <span id="error_x_size_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none"><?php echo __('Required'); ?></span>
+                    <input aria-label="<?php echo __('Input field'); ?>" class="form-control" type="text" id="x_size_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['top_size']; ?>" readonly>
                 </div>
                 <div class="col-lg-3 all_edit_field space_edit_field_<?php echo $cabincnt; ?> <?php echo $event_disabled; ?>">
-                    <span id="error_y_size_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none">Required</span>
-                    <input aria-label="Input field" class="form-control" type="text" id="y_size_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['left_size']; ?>" readonly>
+                    <span id="error_y_size_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none"><?php echo __('Required'); ?></span>
+                    <input aria-label="<?php echo __('Input field'); ?>" class="form-control" type="text" id="y_size_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['left_size']; ?>" readonly>
                 </div>
                 <div class="col-lg-2">
-                 <span class="all_save_btn cursor-pointer" id="save_btn_<?php echo $cabincnt; ?>" onclick="lockFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $savebtncss; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Save" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-save"></i> Save</span>
+                 <span class="all_save_btn cursor-pointer" id="save_btn_<?php echo $cabincnt; ?>" onclick="lockFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $savebtncss; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Save'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-save"></i> <?php echo __('Save'); ?></span>
 
-                <span class="all_edit_btn cursor-pointer" id="edit_btn_<?php echo $cabincnt; ?>" onclick="editFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $editbtncss; ?>  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Edit" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-edit"></i> Edit</span>
+                <span class="all_edit_btn cursor-pointer" id="edit_btn_<?php echo $cabincnt; ?>" onclick="editFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $editbtncss; ?>  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Edit'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-edit"></i> <?php echo __('Edit'); ?></span>
 
                 <span id="allocateequipment_btn_<?php echo $cabincnt; ?>">
                     <?php if($cabin['id']!=""){ ?>
-                        <span class="cursor-pointer m-l-20 text-danger" onclick="removeEquipmentAllocations('<?php echo $cabin['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-trash"></i> Remove</span>
+                        <span class="cursor-pointer m-l-20 text-danger" onclick="removeEquipmentAllocations('<?php echo $cabin['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-trash"></i> <?php echo __('Remove'); ?></span>
                     <?php } ?>
                 </span>
                 <span class="text-danger sub_error d-block" id="submit_error_<?php echo $cabincnt; ?>" ></span>
@@ -266,7 +266,7 @@ function addMorefloorSpaces(){
         <input type="hidden" id="max_seq_number"  value="<?php echo $cabincnt; ?>">
     </div>
     <input class="form-control" type="hidden" id="active_floor_space_id"  value="<?php echo $cabincnt; ?>">
-        <button class="btn btn-success m-t-20 col-lg-3" <?php echo $addmorebtn; ?> id="addRows" type="button" onclick="addMorefloorSpaces()"><i class="fa fa-plus m-r-5"></i>Add More Cabin</button>
+        <button class="btn btn-success m-t-20 col-lg-3" <?php echo $addmorebtn; ?> id="addRows" type="button" onclick="addMorefloorSpaces()"><i class="fa fa-plus m-r-5"></i><?php echo __('Add More Cabin'); ?></button>
 
 <div class="row mt-5">
     <div id="floor_cabin">
@@ -275,7 +275,7 @@ function addMorefloorSpaces(){
         $cabincnt = 0;
         foreach($asset_allocations as $ealloc){  $cabincnt++;
             ?>
-            <div id="position_<?php echo $cabincnt; ?>" class="equipment-allocation-icon     cursor-pointer free_allocation " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $cabincnt; ?> Cubicle" style="top: <?php echo $ealloc['top_size']; ?>%; left: <?php echo $ealloc['left_size']; ?>%;"><?php echo $cabincnt; ?></div>
+            <div id="position_<?php echo $cabincnt; ?>" class="equipment-allocation-icon     cursor-pointer free_allocation " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $cabincnt; ?> <?php echo __('Cubicle'); ?>" style="top: <?php echo $ealloc['top_size']; ?>%; left: <?php echo $ealloc['left_size']; ?>%;"><?php echo $cabincnt; ?></div>
         <?php } ?>
         <div id="extra_equipments_icon"></div>
     </div>

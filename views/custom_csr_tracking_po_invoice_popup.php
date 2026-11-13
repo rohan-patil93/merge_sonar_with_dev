@@ -8,7 +8,7 @@ $tracking_id = $_POST['traking_id'] ?? 0;
 $doc_type    = $_POST['doc_type'] ?? '';
 
 if (!$project_id || !$tracking_id || !$doc_type) {
-    echo '<div class="alert alert-danger">Invalid request</div>';
+    echo '<div class="alert alert-danger">' . __('Invalid request') . '</div>';
     exit;
 }
 ?>
@@ -19,7 +19,7 @@ if (!$project_id || !$tracking_id || !$doc_type) {
 	} elseif ($doc_type === 'INVOICE') {
 	    include_once 'custom_csr_invoice_settlement.php';
 	} else {
-	    echo '<div class="alert alert-warning">Invalid document type</div>';
+	    echo '<div class="alert alert-warning">' . __('Invalid document type') . '</div>';
 	}
 ?>
 

@@ -40,8 +40,8 @@ $shiftClockOut = $shift['clock_out'] ?? '--';
 ?>
 
 <div class="modal-header">
-    <h5 class="modal-title">Attendance Info<span class="form-label badge  p-2 m-l-2"><i class="ti-user"></i> (<?php echo $_REQUEST['emp_name']; ?>) </span> </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?php echo __('Attendance Info'); ?><span class="form-label badge  p-2 m-l-2"><i class="ti-user"></i> (<?php echo $_REQUEST['emp_name']; ?>) </span> </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body">
     <div class="row">
@@ -50,7 +50,7 @@ $shiftClockOut = $shift['clock_out'] ?? '--';
                 <form class="kt-form kt-form--label-right" action="" id="popupformattendace" method="post">
                     <div class="card latest-update-card">
                         <div class="card-header">
-                            <h5>Employee Working Details</h5>
+                            <h5><?php echo __('Employee Working Details'); ?></h5>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
@@ -58,25 +58,25 @@ $shiftClockOut = $shift['clock_out'] ?? '--';
                                 <div class="form-radio p-2">
                                     <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input aria-label="Presentcheck" type="radio" name="presentcheck" class="attendance-radio"
+                                            <input aria-label="<?php echo __('Presentcheck'); ?>" type="radio" name="presentcheck" class="attendance-radio"
                                                 value="present" <?= $isPresent ? 'checked' : '' ?>>
-                                            <i class="helper"></i>Present
+                                            <i class="helper"></i><?php echo __('Present'); ?>
                                         </label>
                                     </div>
 
                                     <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input aria-label="Presentcheck" type="radio" name="presentcheck" class="attendance-radio"
+                                            <input aria-label="<?php echo __('Presentcheck'); ?>" type="radio" name="presentcheck" class="attendance-radio"
                                                 value="absent" <?= $isAbsent ? 'checked' : '' ?>>
-                                            <i class="helper"></i>Absent
+                                            <i class="helper"></i><?php echo __('Absent'); ?>
                                         </label>
                                     </div>
 
                                     <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input aria-label="Presentcheck" type="radio" name="presentcheck" class="attendance-radio"
+                                            <input aria-label="<?php echo __('Presentcheck'); ?>" type="radio" name="presentcheck" class="attendance-radio"
                                                 value="leave" <?= $isLeave ? 'checked' : '' ?>>
-                                            <i class="helper"></i>Leave
+                                            <i class="helper"></i><?php echo __('Leave'); ?>
                                         </label>
                                     </div>
                                 </div>
@@ -85,16 +85,16 @@ $shiftClockOut = $shift['clock_out'] ?? '--';
                                 <div class="present-block <?= $isPresent ? '' : 'd-none' ?>">
                                     <div class="row p-2">
                                         <div class="col-lg-6">
-                                            <span class="form-label">Clock In</span>
-                                            <input aria-label="Clock In" type="datetime-local"
+                                            <span class="form-label"><?php echo __('Clock In'); ?></span>
+                                            <input aria-label="<?php echo __('Clock In'); ?>" type="datetime-local"
                                                 name="clock_in"
                                                 class="form-control"
                                                 value="<?= $clockInVal ? date('Y-m-d\TH:i', strtotime($clockInVal)) : '' ?>">
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <span class="form-label">Clock Out</span>
-                                            <input aria-label="Clock Out" type="datetime-local"
+                                            <span class="form-label"><?php echo __('Clock Out'); ?></span>
+                                            <input aria-label="<?php echo __('Clock Out'); ?>" type="datetime-local"
                                                 name="clock_out"
                                                 class="form-control"
                                                 value="<?= $clockOutVal ? date('Y-m-d\TH:i', strtotime($clockOutVal)) : '' ?>">
@@ -104,8 +104,8 @@ $shiftClockOut = $shift['clock_out'] ?? '--';
                                 <div class="absent-block <?= $isAbsent ? '' : 'd-none' ?>">
                                     <div class="row p-2">
                                         <div class="col-lg-6">
-                                            <span class="form-label">Absent Date</span>
-                                            <input aria-label="Absent Date" type="date"
+                                            <span class="form-label"><?php echo __('Absent Date'); ?></span>
+                                            <input aria-label="<?php echo __('Absent Date'); ?>" type="date"
                                                 name="absent_date"
                                                 class="form-control "
                                                 value="<?= $_POST['timesheet_date'] ?? '' ?>">
@@ -115,10 +115,10 @@ $shiftClockOut = $shift['clock_out'] ?? '--';
                                 <div class="leave-block <?= $isLeave ? '' : 'd-none' ?>">
                                     <div class="row p-2">
                                         <div class="col-lg-6">
-                                            <span class="form-label">Leave Category</span>
-                                            <select aria-label="Leave Type" name="leave_type_id"
+                                            <span class="form-label"><?php echo __('Leave Category'); ?></span>
+                                            <select aria-label="<?php echo __('Leave Type'); ?>" name="leave_type_id"
                                                 class="form-control form-select js-example-basic-single">
-                                                <option value="">Select Leave Category</option>
+                                                <option value=""><?php echo __('Select Leave Category'); ?></option>
                                                 <?php if (!empty($alldetails['leave_types'])) {
                                                     foreach ($alldetails['leave_types'] as $lt) { ?>
                                                         <option value="<?= $lt['id'] ?>">
@@ -130,8 +130,8 @@ $shiftClockOut = $shift['clock_out'] ?? '--';
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <span class="form-label">Leave Date</span>
-                                            <input aria-label="Leave Date" type="date"
+                                            <span class="form-label"><?php echo __('Leave Date'); ?></span>
+                                            <input aria-label="<?php echo __('Leave Date'); ?>" type="date"
                                                 name="leave_date"
                                                 class="form-control "
                                                 value="<?= $_POST['timesheet_date'] ?? '' ?>">
@@ -145,7 +145,7 @@ $shiftClockOut = $shift['clock_out'] ?? '--';
                                 <div class="card p-2">
                                     <div class="row text-center">
                                         <div class="col-lg-4 col-12 d-flex flex-row">
-                                            <h6 class="mb-1">Status : <span class="f-w-600"><?= htmlspecialchars($status) ?></span></h6>
+                                            <h6 class="mb-1"><?php echo __('Status :'); ?> <span class="f-w-600"><?= htmlspecialchars($status) ?></span></h6>
 
                                         </div>
                                     </div>
@@ -156,17 +156,17 @@ $shiftClockOut = $shift['clock_out'] ?? '--';
                                     <div class="row text-center">
 
                                         <div class="col-lg-4 col-12">
-                                            <h6 class="mb-1">Shift</h6>
+                                            <h6 class="mb-1"><?php echo __('Shift'); ?></h6>
                                             <span class="f-w-600"><?= htmlspecialchars($shiftName) ?></span>
                                         </div>
 
                                         <div class="col-lg-4 col-6">
-                                            <h6 class="mb-1">Clock In</h6>
+                                            <h6 class="mb-1"><?php echo __('Clock In'); ?></h6>
                                             <span class="f-w-600"><?= $shiftClockIn ?></span>
                                         </div>
 
                                         <div class="col-lg-4 col-6">
-                                            <h6 class="mb-1">Clock Out</h6>
+                                            <h6 class="mb-1"><?php echo __('Clock Out'); ?></h6>
                                             <span class="f-w-600"><?= $shiftClockOut ?></span>
                                         </div>
 
@@ -209,16 +209,16 @@ $shiftClockOut = $shift['clock_out'] ?? '--';
                                     <div class="row text-center">
 
                                         <div class="col-lg-6 col-6">
-                                            <h6>OverTime</h6>
+                                            <h6><?php echo __('OverTime'); ?></h6>
                                             <h5 class="m-b-30 f-w-700 ">
-                                                <?= $overtime ?> Hrs
+                                                <?= $overtime ?> <?php echo __('Hrs'); ?>
                                             </h5>
                                         </div>
 
                                         <div class="col-lg-6 col-6">
-                                            <h6>Absenteeism</h6>
+                                            <h6><?php echo __('Absenteeism'); ?></h6>
                                             <h5 class="m-b-30 f-w-700 ">
-                                                <?= $undertime ?> Hrs
+                                                <?= $undertime ?> <?php echo __('Hrs'); ?>
                                             </h5>
                                         </div>
 
@@ -251,7 +251,7 @@ $shiftClockOut = $shift['clock_out'] ?? '--';
                 <button type="button"
                     class="btn btn-primary"
                     id="saveAttendanceBtn">
-                    Save
+                    <?php echo __('Save'); ?>
                 </button>
             </div>
 
@@ -342,11 +342,11 @@ $shiftClockOut = $shift['clock_out'] ?? '--';
                         alert(data.message || 'Save failed');
                     }
                 } catch (e) {
-                    alert('Invalid response');
+                    alert(<?php echo json_encode(__('Invalid response')); ?>);
                 }
             },
             error: function() {
-                alert('Server error');
+                alert(<?php echo json_encode(__('Server error')); ?>);
             }
         });
 

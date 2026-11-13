@@ -23,58 +23,58 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
 <div class="slide" data-slide="4" <?php echo ($feasibility_requirement_res['current_status'] == ST_APPROVED) ? 'style="pointer-events:none; opacity:0.7"' : '';  ?>>
     <div class="row mt-4">
         <div class="col-lg-12 m-t-10 m-b-10">
-            <h5 style="font-weight: bold;">Feasibility Checklist</h5>
+            <h5 style="font-weight: bold;"><?php echo __('Feasibility Checklist'); ?></h5>
         </div>
         <div class="table-responsive">
             <form id="checklistForm">
                 <table class="table table-bordered" id="checklistTable">
                     <thead>
                         <tr>
-                            <th scope="col">Checklist Item <span class='text-danger'>*</span></th>
-                            <th scope="col">Type <span class='text-danger'>*</span></th>
-                            <th scope="col">Is Done?</th>
-                            <th scope="col">Comment</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?php echo __('Checklist Item'); ?> <span class='text-danger'>*</span></th>
+                            <th scope="col"><?php echo __('Type'); ?> <span class='text-danger'>*</span></th>
+                            <th scope="col"><?php echo __('Is Done?'); ?></th>
+                            <th scope="col"><?php echo __('Comment'); ?></th>
+                            <th scope="col"><?php echo __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody id="checklistTableBody">
                         <?php if (!empty($checklist_res)): ?>
                             <?php foreach ($checklist_res as $row): ?>
                                 <tr>
-                                    <td><input aria-label="Checklist Item Name[]" type="text" class="form-control" name="checklist_item_name[]" value="<?php echo htmlspecialchars($row['item_name']) ?>" required></td>
+                                    <td><input aria-label="<?php echo __('Checklist Item Name[]'); ?>" type="text" class="form-control" name="checklist_item_name[]" value="<?php echo htmlspecialchars($row['item_name']) ?>" required></td>
                                     <input type="hidden" name="check_row_id[]" value="<?php echo $row['id']; ?>" />
 
                                     <td>
-                                        <select aria-label="Checklist Type[]" class="form-select js-example-basic-single " name="checklist_type[]" required>
-                                            <option value="">Select Type</option>
-                                            <option value="technical" <?php echo $row['item_type'] == 'technical' ? 'selected' : '' ?>>Technical</option>
-                                            <option value="legal" <?php echo $row['item_type'] == 'legal' ? 'selected' : '' ?>>Legal</option>
-                                            <option value="safety" <?php echo $row['item_type'] == 'safety' ? 'selected' : '' ?>>Safety</option>
-                                            <option value="operational" <?php echo $row['item_type'] == 'operational' ? 'selected' : '' ?>>Operational</option>
-                                            <option value="others" <?php echo $row['item_type'] == 'others' ? 'selected' : '' ?>>Others</option>
+                                        <select aria-label="<?php echo __('Checklist Type[]'); ?>" class="form-select js-example-basic-single " name="checklist_type[]" required>
+                                            <option value=""><?php echo __('Select Type'); ?></option>
+                                            <option value="technical" <?php echo $row['item_type'] == 'technical' ? 'selected' : '' ?>><?php echo __('Technical'); ?></option>
+                                            <option value="legal" <?php echo $row['item_type'] == 'legal' ? 'selected' : '' ?>><?php echo __('Legal'); ?></option>
+                                            <option value="safety" <?php echo $row['item_type'] == 'safety' ? 'selected' : '' ?>><?php echo __('Safety'); ?></option>
+                                            <option value="operational" <?php echo $row['item_type'] == 'operational' ? 'selected' : '' ?>><?php echo __('Operational'); ?></option>
+                                            <option value="others" <?php echo $row['item_type'] == 'others' ? 'selected' : '' ?>><?php echo __('Others'); ?></option>
                                         </select>
                                     </td>
-                                    <td><input aria-label="Checklist Is Done[]" type="checkbox" class="js-single" name="checklist_is_done[]" value="1" <?php echo $row['is_done'] == 1 ? 'checked' : '' ?>></td>
-                                    <td><input aria-label="Checklist Comment[]" type="text" class="form-control" name="checklist_comment[]" value="<?php echo htmlspecialchars($row['comment']) ?>"></td>
+                                    <td><input aria-label="<?php echo __('Checklist Is Done[]'); ?>" type="checkbox" class="js-single" name="checklist_is_done[]" value="1" <?php echo $row['is_done'] == 1 ? 'checked' : '' ?>></td>
+                                    <td><input aria-label="<?php echo __('Checklist Comment[]'); ?>" type="text" class="form-control" name="checklist_comment[]" value="<?php echo htmlspecialchars($row['comment']) ?>"></td>
                                     <td><button type="button" class="btn btn-danger btn-sm remove-row" onclick="removeChecklistRowBtn(this)"><i class="fa fa-trash"></i></button></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td><input aria-label="Checklist Item Name[]" type="text" class="form-control" name="checklist_item_name[]" required></td>
+                                <td><input aria-label="<?php echo __('Checklist Item Name[]'); ?>" type="text" class="form-control" name="checklist_item_name[]" required></td>
                                 <input type="hidden" name="check_row_id[]" value="" />
                                 <td>
-                                    <select aria-label="Checklist Type[]" class="form-select js-example-basic-single " name="checklist_type[]" required>
-                                        <option value="">Select Type</option>
-                                        <option value="technical">Technical</option>
-                                        <option value="legal">Legal</option>
-                                        <option value="safety">Safety</option>
-                                        <option value="operational">Operational</option>
-                                        <option value="others">Others</option>
+                                    <select aria-label="<?php echo __('Checklist Type[]'); ?>" class="form-select js-example-basic-single " name="checklist_type[]" required>
+                                        <option value=""><?php echo __('Select Type'); ?></option>
+                                        <option value="technical"><?php echo __('Technical'); ?></option>
+                                        <option value="legal"><?php echo __('Legal'); ?></option>
+                                        <option value="safety"><?php echo __('Safety'); ?></option>
+                                        <option value="operational"><?php echo __('Operational'); ?></option>
+                                        <option value="others"><?php echo __('Others'); ?></option>
                                     </select>
                                 </td>
-                                <td><input aria-label="Checklist Is Done[]" type="checkbox" class="js-single" name="checklist_is_done[]" value="1"></td>
-                                <td><input aria-label="Checklist Comment[]" type="text" class="form-control" name="checklist_comment[]"></td>
+                                <td><input aria-label="<?php echo __('Checklist Is Done[]'); ?>" type="checkbox" class="js-single" name="checklist_is_done[]" value="1"></td>
+                                <td><input aria-label="<?php echo __('Checklist Comment[]'); ?>" type="text" class="form-control" name="checklist_comment[]"></td>
                                 <td><button type="button" class="btn btn-danger btn-sm remove-row" onclick="removeChecklistRowBtn(this)"><i class="fa fa-trash"></i></button></td>
                             </tr>
                         <?php endif; ?>
@@ -82,7 +82,7 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
                     <tfoot>
                         <tr>
                             <td colspan="5">
-                                <button type="button" class="btn btn-primary" onclick="addChecklistRowBtn(this)"><i class="fa fa-plus"></i> Add More</button>
+                                <button type="button" class="btn btn-primary" onclick="addChecklistRowBtn(this)"><i class="fa fa-plus"></i> <?php echo __('Add More'); ?></button>
                             </td>
                         </tr>
                     </tfoot>
@@ -92,14 +92,14 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
 
                 <div style="pointer-events: auto; opacity: 1;" class="row">
                     <div class="col-lg-6 mt-3">
-                        <button class="btn btn-secondary prev-btn" type="button" onclick="previous('custom_insert_lead_feasibility_boms', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)">Previous</button>
+                        <button class="btn btn-secondary prev-btn" type="button" onclick="previous('custom_insert_lead_feasibility_boms', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)"><?php echo __('Previous'); ?></button>
                     </div>
                     <div class="col-lg-6 text-end mt-3">
                         <?php if ($feasibility_requirement_res['current_status'] == ST_APPROVED) { ?>
-                            <button class="btn btn-primary next-btn" type="button" id="saveNextBtn" onclick="withOutSaving('custom_insert_feasibility_docs', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>, <?php echo $feasibility_requirement_res['current_status']; ?>)">Save & Next</button>
+                            <button class="btn btn-primary next-btn" type="button" id="saveNextBtn" onclick="withOutSaving('custom_insert_feasibility_docs', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>, <?php echo $feasibility_requirement_res['current_status']; ?>)"><?php echo __('Save & Next'); ?></button>
                         <?php } else { ?>
                             <button class="btn btn-primary next-btn" type="button" onclick="saveAndNextChecklist('custom_insert_feasibility_docs', <?php echo $feasibility_id; ?>, <?php echo $_GET['lead_id']; ?>)">
-                                Save & Next
+                                <?php echo __('Save & Next'); ?>
                             </button><?php } ?>
                     </div>
                 </div>
@@ -131,7 +131,7 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
 
         formData.append('page', 'insertFeasibilityBomAndChecklist');
         formData.append('table_name', 'lead_feasibility_checklists');
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?php echo htmlspecialchars(__('Preview'), ENT_QUOTES); ?>"></div>';
         $("#feasibilitySlides").html(loader);
         $.ajax({
             url: 'ajax.php',
@@ -200,7 +200,7 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
             text: errorMessage,
             type: "error",
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "OK"
+            confirmButtonText: <?php echo json_encode(__('OK')); ?>
         });
 
         console.error("AJAX Error:", {
@@ -215,20 +215,20 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
         const tbody = document.getElementById('checklistTableBody');
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-            <td><input aria-label="Checklist Item Name[]" type="text" class="form-control" name="checklist_item_name[]" required></td>
+            <td><input aria-label="<?php echo __('Checklist Item Name[]'); ?>" type="text" class="form-control" name="checklist_item_name[]" required></td>
             <input type="hidden" name="check_row_id[]" value="" />
             <td>
-                <select aria-label="Checklist Type[]" class="form-select js-example-basic-single " name="checklist_type[]" required>
-                    <option value="">Select Type</option>
-                    <option value="technical">Technical</option>
-                    <option value="legal">Legal</option>
-                    <option value="safety">Safety</option>
-                    <option value="operational">Operational</option>
-                    <option value="others">Others</option>
+                <select aria-label="<?php echo __('Checklist Type[]'); ?>" class="form-select js-example-basic-single " name="checklist_type[]" required>
+                    <option value=""><?php echo __('Select Type'); ?></option>
+                    <option value="technical"><?php echo __('Technical'); ?></option>
+                    <option value="legal"><?php echo __('Legal'); ?></option>
+                    <option value="safety"><?php echo __('Safety'); ?></option>
+                    <option value="operational"><?php echo __('Operational'); ?></option>
+                    <option value="others"><?php echo __('Others'); ?></option>
                 </select>
             </td>
-            <td><input aria-label="Checklist Is Done[]" type="checkbox" class="js-single" name="checklist_is_done[]" value="1"></td>
-            <td><input aria-label="Checklist Comment[]" type="text" class="form-control" name="checklist_comment[]"></td>
+            <td><input aria-label="<?php echo __('Checklist Is Done[]'); ?>" type="checkbox" class="js-single" name="checklist_is_done[]" value="1"></td>
+            <td><input aria-label="<?php echo __('Checklist Comment[]'); ?>" type="text" class="form-control" name="checklist_comment[]"></td>
             <td><button type="button" class="btn btn-danger btn-sm remove-row" onclick="removeChecklistRowBtn(this)"><i class="fa fa-trash"></i></button></td>
         `;
         tbody.appendChild(newRow);
@@ -249,7 +249,7 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
     }
 
     function withOutSaving(page, feasibility_id, lead_id, current_status = '') {
-        var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?php echo htmlspecialchars(__('Preview'), ENT_QUOTES); ?>"></div>';
         $("#feasibilitySlides").html(loader);
 
         $.ajax({
@@ -272,7 +272,7 @@ $feasibility_requirement_res = $res['feasibility_requirement_res'] ?? array();
                 reinitSelect2(); // Reinitialize select2 after loading new content
             },
             error: function(xhr, status, error) {
-                alert('Error loading next page: ' + error);
+                alert(<?php echo json_encode(__('Error loading next page:')); ?> + error);
             }
         });
     }

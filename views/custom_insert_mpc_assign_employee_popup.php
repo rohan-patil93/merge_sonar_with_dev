@@ -150,8 +150,8 @@ foreach($empesgindata as $empesginda){
             message = message.slice(0, -1);
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Please contact your Admin for '+message
+                title: <?php echo json_encode(__('Oops...')); ?>,
+                text: <?php echo json_encode(__('Please contact your Admin for')); ?>+message
             });
         }else{
             $.ajax({
@@ -164,11 +164,11 @@ foreach($empesgindata as $empesginda){
                     console.log(returnres.other_work_order);
                     if(returnres.other_work_order== 'Y'){
                         Swal.fire({
-                          title: 'Already Other Purchase Order Active This Employeee',
+                          title: <?php echo json_encode(__('Already Other Purchase Order Active This Employeee')); ?>,
                           icon: 'info',
                           showDenyButton: true,
                           showCancelButton: false,
-                          confirmButtonText: 'New Create',
+                          confirmButtonText: <?php echo json_encode(__('New Create')); ?>,
                           denyButtonText: 'old continue',
                         }).then((result) => {
                           if (result.isConfirmed) {
@@ -215,16 +215,16 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
 }
 </style>
 <div class="modal-header">
-    <h5 class="modal-title">Assign Employees</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?php echo __('Assign Employees'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body  j-pro">
 
         <div class="row kt-margin-b-20 mb-2 j-content" >
             <div class="col-lg-3 form-group kt-margin-b-10-tablet-and-mobile">
-                <span><?php echo "Cost Center"; ?>:</span>
-                <select aria-label="Cost Center Pp" class=" form-select js-example-basic-single" id="cost_center_pp" name="">
-                    <option value=""> All  </option>
+                <span><?php echo __('Cost Center'); ?>:</span>
+                <select aria-label="<?php echo __('Cost Center Pp'); ?>" class=" form-select js-example-basic-single" id="cost_center_pp" name="">
+                    <option value=""> <?php echo __('All'); ?>  </option>
                     <?php foreach($empcos as $cos){ $emp_cos[$cos['id']]= $cos['cost_center_name']; ?>
                     <option   <?php if($ress['cost_center_pp'] == $cos['id'] ){ ?> selected <?php
 } ?> value="<?php echo $cos['id']; ?>"><?php echo $cos['cost_center_name']; ?></option>
@@ -232,9 +232,9 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
             </select>
         </div>
         <div class="col-lg-3  form-group kt-margin-b-10-tablet-and-mobile">
-            <span><?php echo "Vendors"; ?>:</span>
-            <select aria-label="Vendor" class=" form-select js-example-basic-single" id="vendor" name="">
-                <option value=""> All  </option>
+            <span><?php echo __('Vendors'); ?>:</span>
+            <select aria-label="<?php echo __('Vendor'); ?>" class=" form-select js-example-basic-single" id="vendor" name="">
+                <option value=""> <?php echo __('All'); ?>  </option>
                 <?php foreach($empven as $ven){ $emp_ven[$ven['id']]= $ven['display_name']; ?>
                 <option   <?php if($ress['vendor'] == $ven['id'] ){ ?> selected <?php
 } ?> value="<?php echo $ven['id']; ?>"><?php echo $ven['display_name']; ?></option>
@@ -242,9 +242,9 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
         </select>
     </div>
     <div class="col-lg-3 form-group kt-margin-b-10-tablet-and-mobile">
-        <span><?php echo "Department"; ?>:</span>
-        <select aria-label="Vendor" class=" form-select js-example-basic-single" id="department" name="vendor_id">
-            <option value=""> All  </option>
+        <span><?php echo __('Department'); ?>:</span>
+        <select aria-label="<?php echo __('Vendor'); ?>" class=" form-select js-example-basic-single" id="department" name="vendor_id">
+            <option value=""> <?php echo __('All'); ?>  </option>
             <?php foreach($empdep as $dep){ $emp_dep[$dep['id']]= $dep['department_name'];  ?>
             <option  <?php if($ress['department'] == $dep['id'] ){ ?> selected <?php
 } ?> value="<?php echo $dep['id']; ?>"><?php echo $dep['department_name']; ?></option>
@@ -252,9 +252,9 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
     </select>
 </div>
 <div class="col-lg-3 form-group kt-margin-b-10-tablet-and-mobile">
-    <span><?php echo "Designation"; ?>:</span>
-    <select aria-label="Category" class=" form-select js-example-basic-single" id="designation" name="category_id">
-        <option value=""> All  </option>
+    <span><?php echo __('Designation'); ?>:</span>
+    <select aria-label="<?php echo __('Category'); ?>" class=" form-select js-example-basic-single" id="designation" name="category_id">
+        <option value=""> <?php echo __('All'); ?>  </option>
         <?php foreach($empdes as $des){  $emp_des[$des['id']]= $des['designation_name'];  ?>
         <option  <?php if($ress['designation'] == $des['id'] ){ ?> selected <?php
 } ?> value="<?php echo $des['id']; ?>"><?php echo $des['designation_name']; ?></option>
@@ -262,9 +262,9 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
 </select>
 </div>
 <div class="col-lg-3  form-group kt-margin-b-10-tablet-and-mobile mt-2">
-    <span><?php echo "Location"; ?>:</span>
-    <select aria-label="Location" class=" form-select js-example-basic-single" id="location" name="">
-        <option value=""> All  </option>
+    <span><?php echo __('Location'); ?>:</span>
+    <select aria-label="<?php echo __('Location'); ?>" class=" form-select js-example-basic-single" id="location" name="">
+        <option value=""> <?php echo __('All'); ?>  </option>
         <?php foreach($emploc as $loc){ $emp_loc[$loc['id']]= $loc['location_name']; ?>
         <option   <?php if($ress['location'] == $loc['id'] ){ ?> selected <?php
 } ?> value="<?php echo $loc['id']; ?>"><?php echo $loc['location_name']; ?></option>
@@ -273,9 +273,9 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
 </div>
 
 <div class="col-lg-3 form-group kt-margin-b-10-tablet-and-mobile mt-2">
-    <span><?php echo "Assign Emloyees"; ?>:</span>
-    <select aria-label="Check List" class=" form-select js-example-basic-single" id="check_list" name="">
-        <option value=""> All  </option>
+    <span><?php echo __('Assign Emloyees'); ?>:</span>
+    <select aria-label="<?php echo __('Check List'); ?>" class=" form-select js-example-basic-single" id="check_list" name="">
+        <option value=""> <?php echo __('All'); ?>  </option>
         <?php $empass= array('1'=>'Assign Employees','2'=>"Unassign Employees");
         foreach($empass as $empass_id=>$ass){ ?>
             <option   <?php if($ress['check_list'] == $empass_id){ ?> selected <?php
@@ -284,8 +284,8 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
     </select>
 </div>
 <div class="col-lg-3 form-group kt-margin-b-10-tablet-and-mobile mt-2">
-    <span>Enetr Employee Name/Code</span>
-    <input aria-label="Emp Name Code" type="text" class="form-control" name="emp_name_code"  value="<?php echo $_POST['emp_name_code']; ?>" id="emp_name_code">
+    <span><?php echo __('Enetr Employee Name/Code'); ?></span>
+    <input aria-label="<?php echo __('Emp Name Code'); ?>" type="text" class="form-control" name="emp_name_code"  value="<?php echo $_POST['emp_name_code']; ?>" id="emp_name_code">
 </div>
 <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
     <span>&nbsp;</span>
@@ -294,7 +294,7 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
         <button class="btn btn-primary btn-brand--icon" type="button" id="kt_search" onclick="assignemployeelist(<?php echo $_POST['workorder_id'] ?>)">
             <span>
 
-                <span>Search</span>
+                <span><?php echo __('Search'); ?></span>
             </span>
         </button>
     </div>
@@ -307,14 +307,14 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
             <tr>
                 <th scope="col" style="width: 2%;">&nbsp;</th>
                 <th scope="col" style="width: 2%;">#</th>
-                <th scope="col" style="width: 15%;">Name </th>
+                <th scope="col" style="width: 15%;"><?php echo __('Name'); ?> </th>
 
-                <th scope="col" style="width: 15%;">Cost Center</th>
-                <th scope="col" style="width: 10%;">Location</th>
-                <th scope="col" style="width: 10%;">Department</th>
-                <th scope="col" style="width: 10%;">Designation</th>
-                <th scope="col" style="width: 10%;">Vendor</th>
-                <th scope="col" style="width: 25%;">Job Title</th>
+                <th scope="col" style="width: 15%;"><?php echo __('Cost Center'); ?></th>
+                <th scope="col" style="width: 10%;"><?php echo __('Location'); ?></th>
+                <th scope="col" style="width: 10%;"><?php echo __('Department'); ?></th>
+                <th scope="col" style="width: 10%;"><?php echo __('Designation'); ?></th>
+                <th scope="col" style="width: 10%;"><?php echo __('Vendor'); ?></th>
+                <th scope="col" style="width: 25%;"><?php echo __('Job Title'); ?></th>
 
             </tr>
         </thead>
@@ -324,16 +324,16 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
                 <tr >
                             <td class="p-2">
                                 <label class="kt-checkbox">
-                                    <input aria-label="Input field" onclick="vrcandpoemployeeassign(<?php echo $row['id'].",".$_POST['workorder_id'].",".$_POST['workorder_detail_id'].",'mpc'"; ?>)" class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_sign)){ echo "checked";
+                                    <input aria-label="<?php echo __('Input field'); ?>" onclick="vrcandpoemployeeassign(<?php echo $row['id'].",".$_POST['workorder_id'].",".$_POST['workorder_detail_id'].",'mpc'"; ?>)" class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_sign)){ echo __('checked');
 }?> id="checkbox_<?php echo $row['id']; ?>" type="checkbox" value="<?php echo $row['id']; ?>" onkeydown="">  <span> </span> </label>
                                 </td>
                                 <td class="p-2"><?php echo $i; ?></td>
                                 <td class="p-2">
                                     <div class="align-middle">
                                         <?php if($row['image']!="") {?>
-                                            <img src="uploads/all/<?php echo $row['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                            <img src="uploads/all/<?php echo $row['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?php echo __('Attachment Preview'); ?>">
                                         <?php } else { ?>
-                                            <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($row['display_name']); ?></span>
+                                            <span  alt="<?php echo __('user'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($row['display_name']); ?></span>
                                         <?php } ?>
                                         <div class="d-inline-block width73">
                                             <a href="#!" class="text-danger text-capitalize"><h6>   <?php echo $row['display_name']; ?></h6></a>
@@ -350,8 +350,8 @@ table.custom_asign_emp_mpc tr th, table.custom_asign_emp_mpc tr td {
         <td class="p-2"><p><?php echo $emp_ven[$row['vendor_id']]; ?></p></td>
                     <td class="p-2">
 
-                                <select aria-label="Select option" class=" form-select js-example-basic-single" id="select_job_title<?php echo $row['id']; ?>" name="" style="width:200px;">
-                <?php if(count((array)$vrcdetailrespons) > 0){ ?><option value=""> Select Job title  </option> <?php
+                                <select aria-label="<?php echo __('Select option'); ?>" class=" form-select js-example-basic-single" id="select_job_title<?php echo $row['id']; ?>" name="" style="width:200px;">
+                <?php if(count((array)$vrcdetailrespons) > 0){ ?><option value=""> <?php echo __('Select Job title'); ?>  </option> <?php
 } ?>
         <?php foreach($vrcdetailrespons as $vrcdetailrespone){
             $selected = "";

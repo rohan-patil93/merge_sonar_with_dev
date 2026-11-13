@@ -204,7 +204,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
 <?php } ?>
 <div class="card">
     <div class="card-header">
-        <h5>API Masters</h5>
+        <h5><?= __('API Masters') ?></h5>
         <div class="card-header-right table-card-header ">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
@@ -216,24 +216,23 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
         <form method="post" action="">
             <div class="row"> 
                 <div class="col-md-6 form-group">
-                    <label for="api-service-provider" class="form-label">Service Provider</label>
+                    <label for="api-service-provider" class="form-label"><?= __('Service Provider') ?></label>
                     <input name="api_service_provider" type="text" class="form-control" id="api-service-provider" value="<?php echo $details['api_service_provider']; ?>" placeholder="">
                 </div>
                 <div class="col-md-6 form-group">
-                    <label for="api-name" class="form-label">API Name</label>
+                    <label for="api-name" class="form-label"><?= __('API Name') ?></label>
                     <input name="api_name" type="text" class="form-control" id="api-name" placeholder="" value="<?php echo $details['api_name']; ?>">
                 </div>
                 <div class="col-md-6 form-group">
-                    <label for="api_code" class="form-label">API Code</label>
+                    <label for="api_code" class="form-label"><?= __('API Code') ?></label>
                     <input name="api_code" type="text" class="form-control" id="api_code" placeholder="" value="<?php echo $details['api_code']; ?>" onkeypress="if (event.keyCode === 32) return false;" onblur="buildDynamicUrl()">
                 </div>
                 <div class="col-md-6 form-group">
-                    <label for="unique_id" class="form-label">Unique ID</label>
+                    <label for="unique_id" class="form-label"><?= __('Unique ID') ?></label>
                     <input name="unique_id" id="unique_id" type="text" class="form-control" placeholder="" value="<?php echo $details['unique_id']; ?>">
                 </div>
                 <div class="col-md-6 form-group">
-                    <label for="method" class="form-label">Method
-                        Input</label>
+                    <label for="method" class="form-label"><?= __('Method Input') ?></label>
                     <select name="api_method" class="form-control js-example-basic-single" id="method" onchange="buildDynamicUrl()">
                         <option value="GET" <?php echo $details['api_method'] == 'GET' ? 'selected' : ''; ?>>GET</option>
                         <option value="POST" <?php echo $details['api_method'] == 'POST' ? 'selected' : ''; ?>>POST</option>
@@ -242,30 +241,30 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                     </select>
                 </div>
                 <div class="col-md-6 form-group">
-                    <label for="results-format" class="form-label">Results Format</label>
+                    <label for="results-format" class="form-label"><?= __('Results Format') ?></label>
                     <select name="request_format" class="form-control js-example-basic-single" id="results-format">
-                        <option value="json" <?php echo $details['request_format'] == 'json' ? 'selected' : ''; ?>>JSON string</option>
-                        <option value="xml" <?php echo $details['request_format'] == 'xml' ? 'selected' : ''; ?>>XML</option>
-                        <option value="text" <?php echo $details['request_format'] == 'text' ? 'selected' : ''; ?>>Plain Text</option>
+                        <option value="json" <?php echo $details['request_format'] == 'json' ? 'selected' : ''; ?>><?= __('JSON string') ?></option>
+                        <option value="xml" <?php echo $details['request_format'] == 'xml' ? 'selected' : ''; ?>><?= __('XML') ?></option>
+                        <option value="text" <?php echo $details['request_format'] == 'text' ? 'selected' : ''; ?>><?= __('Plain Text') ?></option>
                     </select>
                 </div>
                 <div class="col-md-6 form-group">
-                    <label for="api_type" class="form-label">API Type</label>
+                    <label for="api_type" class="form-label"><?= __('API Type') ?></label>
                     <select name="api_type" class="form-control js-example-basic-single" id="api_type" onchange="getAPIType()">
-                        <option value="S" <?php echo $details['api_type'] == 'S' ? 'selected' : ''; ?>>Send</option>
-                        <option value="R" <?php echo $details['api_type'] == 'R' ? 'selected' : ''; ?>>Receive</option>
+                        <option value="S" <?php echo $details['api_type'] == 'S' ? 'selected' : ''; ?>><?= __('Send') ?></option>
+                        <option value="R" <?php echo $details['api_type'] == 'R' ? 'selected' : ''; ?>><?= __('Receive') ?></option>
                     </select>
                 </div>
                 <div class="col-md-6 form-group">
-                    <label for="testing_url" class="form-label">Base(Test) URL</label>
+                    <label for="testing_url" class="form-label"><?= __('Base(Test) URL') ?></label>
                     <input name="testing_url" id="testing_url" type="text" class="form-control" placeholder="" value="<?php echo $details['testing_url']; ?>">
                 </div>
                 <div class="col-md-6 form-group">
-                    <label for="production_url" class="form-label">Production URL</label>
+                    <label for="production_url" class="form-label"><?= __('Production URL') ?></label>
                     <input name="production_url" id="production_url" type="text" class="form-control" placeholder="" value="<?php echo $details['production_url']; ?>">
                 </div>
                 <div class="col-md-12 form-group">
-                    <label for="end_point" class="form-label">Endpoint</label>
+                    <label for="end_point" class="form-label"><?= __('Endpoint') ?></label>
                     <input name="end_point" id="end_point" type="text" class="form-control" placeholder="" value="<?php echo $details['end_point']; ?>" readonly>
                 </div>
             </div>
@@ -273,14 +272,14 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Request Parameters</h5>
+                            <h5><?= __('Request Parameters') ?></h5>
                         </div>
                         <div class="card-block">
                             <table id="request_parameters">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Value</th>
+                                        <th scope="col"><?= __('Name') ?></th>
+                                        <th scope="col"><?= __('Value') ?></th>
                                     </tr>
                                 </thead>
                                 <?php $mk=1;  foreach (json_decode($details['api_request_parameters'], true) as $name => $value): ?>
@@ -296,22 +295,22 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                 <?php $mk++; endforeach; ?>
                             </table>
                             <div class="mt-2">
-                                <button type="button" class="btn btn-success" onclick="addrowrequest_parameters()"> Add Rows</button>
-                                <button type="button" class="btn btn-danger" onclick="deleteLastRow('request_parameters')"> Delete Row</button>
+                                <button type="button" class="btn btn-success" onclick="addrowrequest_parameters()"> <?= __('Add Rows') ?></button>
+                                <button type="button" class="btn btn-danger" onclick="deleteLastRow('request_parameters')"> <?= __('Delete Row') ?></button>
 
                             </div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h5>Request Header Parameters</h5>
+                            <h5><?= __('Request Header Parameters') ?></h5>
                         </div>
                         <div class="card-block">
                             <table id="headers" width="100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Value</th>
+                                        <th scope="col"><?= __('Name') ?></th>
+                                        <th scope="col"><?= __('Value') ?></th>
                                     </tr>
                                 </thead>
                                 <?php foreach (json_decode($details['request_header'], true) as $name => $value): ?>
@@ -322,21 +321,21 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                 <?php endforeach; ?>
                             </table>
                             <div class="mt-2">
-                                <button type="button" class="btn btn-success" onclick="addrowheaderstring()"> Add Rows</button>
-                                <button type="button" class="btn btn-danger" onclick="deleteLastRow('headers')"> Delete Row</button>
+                                <button type="button" class="btn btn-success" onclick="addrowheaderstring()"> <?= __('Add Rows') ?></button>
+                                <button type="button" class="btn btn-danger" onclick="deleteLastRow('headers')"> <?= __('Delete Row') ?></button>
                             </div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h5>Request Body POST Parameters</h5>
+                            <h5><?= __('Request Body POST Parameters') ?></h5>
                         </div>
                         <div class="card-block">
                             <table id="postField" width="100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Value</th>
+                                        <th scope="col"><?= __('Name') ?></th>
+                                        <th scope="col"><?= __('Value') ?></th>
                                     </tr>
                                 </thead>
                                 <?php foreach (json_decode($details['api_request_post_parameters'], true) as $name => $value): ?>
@@ -347,8 +346,8 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                 <?php endforeach; ?>
                             </table>
                             <div class="mt-2">
-                                <button type="button" class="btn btn-success" onclick="addrowpostfieldstring()"> Add Rows</button>
-                                <button type="button" class="btn btn-danger" onclick="deleteLastRow('postField')"> Delete Row</button>
+                                <button type="button" class="btn btn-success" onclick="addrowpostfieldstring()"> <?= __('Add Rows') ?></button>
+                                <button type="button" class="btn btn-danger" onclick="deleteLastRow('postField')"> <?= __('Delete Row') ?></button>
                             </div>
                         </div>
                     </div>
@@ -356,35 +355,35 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Response</h5>
+                            <h5><?= __('Response') ?></h5>
                         </div>
                         <div class="card-block">
                             <div class="form-group">
-                                <label for="api_application_table" class="form-label">Transaction</label>
+                                <label for="api_application_table" class="form-label"><?= __('Transaction') ?></label>
                                 <select name="application_table" class="form-control js-example-basic-single" id="api_application_table"  onchange="getApplicationTable()">
-                                     <option value="" >Select Any One</option>
+                                     <option value="" ><?= __('Select Any One') ?></option>
                                     <?php foreach($display_attributes as $datr){ ?>
                                         <option value="<?php echo $datr['application_table_name']; ?>" <?php echo $datr['application_table_name'] == $details['application_table']? 'selected' : ''; ?>> <?php echo ucwords(str_replace('_',' ',$datr['application_table_name'])); ?> </option>
                                     <?php } ?> 
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="response_row_type" class="form-label">Response Records</label>
+                                <label for="response_row_type" class="form-label"><?= __('Response Records') ?></label>
                                 <select name="response_row_type" class="form-control js-example-basic-single" id="response_row_type">
-                                    <option value="" >Select Any One</option>
-                                    <option value="M" <?php echo $details['response_row_type'] == 'M' ? 'selected' : ''; ?>>Multiple</option>
-                                    <option value="S" <?php echo $details['response_row_type'] == 'S' ? 'selected' : ''; ?>>Single</option>
+                                    <option value="" ><?= __('Select Any One') ?></option>
+                                    <option value="M" <?php echo $details['response_row_type'] == 'M' ? 'selected' : ''; ?>><?= __('Multiple') ?></option>
+                                    <option value="S" <?php echo $details['response_row_type'] == 'S' ? 'selected' : ''; ?>><?= __('Single') ?></option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <span class="form-label d-inline-block fw-bold">Response Mapping</span>
+                                <span class="form-label d-inline-block fw-bold"><?= __('Response Mapping') ?></span>
                                 <table id="responseDetails" width="100%" class="mt-0">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Name</th>
-                                            <!-- <th scope="col">Value</th> -->
-                                            <th scope="col">Mapping Field</th>
-                                            <th scope="col">Uniqueness</th>
+                                            <th scope="col"><?= __('Name') ?></th>
+                                            <!-- <th scope="col"><?= __('Value') ?></th> -->
+                                            <th scope="col"><?= __('Mapping Field') ?></th>
+                                            <th scope="col"><?= __('Uniqueness') ?></th>
                                         </tr>
                                     </thead>
                                     <?php $sqo = 1; foreach(json_decode($details['api_response_details'], true) as $name => $value): ?>
@@ -393,9 +392,9 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                             <!-- <td><input type="text" class="form-control" name="get_response_details_value[]" value="<?php //echo $value['value']; ?>" readonly aria-label="Get Response Details Value"></td> -->
                                             <td>
                                                 <select name="get_response_details_value[<?php echo $sqo; ?>]" class="form-control js-example-basic-single application_table_fields" onchange="getMappingField('<?php echo $sqo; ?>')" id="get_response_details_value_<?php echo $sqo; ?>" aria-label="Select">
-                                                    <option value="" >Select Any One</option>
+                                                    <option value="" ><?= __('Select Any One') ?></option>
                                                     <?php foreach($list_attributes as $feild=>$datr){ ?>
-                                                        <option value="<?php echo $feild; ?>" <?php echo $feild == $value['application_table_field']? 'selected' : ''; ?>> <?php echo ucwords(str_replace('_',' ',$datr['lable'])); ?> </option>
+                                                        <option value="<?php echo $feild; ?>" <?php echo $feild == $value['application_table_field']? 'selected' : ''; ?>> <?php echo htmlspecialchars(__(ucwords(str_replace('_',' ',$datr['lable'])))); ?> </option>
                                                     <?php } ?>
                                                 </select> 
                                             </td>
@@ -408,8 +407,8 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                 </table>
                             </div>
                             <div class="mt-2 ">
-                                <button type="button" class="btn btn-success" onclick="addrowresponsedetailsstring()"> Add Rows</button>
-                                <button type="button" class="btn btn-danger " onclick="deleteLastRow('responseDetails')"> Delete Row</button>
+                                <button type="button" class="btn btn-success" onclick="addrowresponsedetailsstring()"> <?= __('Add Rows') ?></button>
+                                <button type="button" class="btn btn-danger " onclick="deleteLastRow('responseDetails')"> <?= __('Delete Row') ?></button>
                             </div>    
                         </div>
                     </div>
@@ -417,12 +416,12 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                 <div class="card-footer border-top ">
                     <?php if ($rid != "") {  ?>
                         <button name='submit' value='update' class="btn waves-effect waves-light btn-primary">
-                            <i class="fa fa-file-text-o"></i> Update
+                            <i class="fa fa-file-text-o"></i> <?= __('Update') ?>
                         </button>
                         <input name="rid" class="form-control" type="hidden" value="<?php echo $rid; ?>">
                     <?php } else {  ?>
                         <button name='submit' value='insert' class="btn waves-effect waves-light btn-primary">
-                            <i class="fa fa-file-text-o"></i> Save
+                            <i class="fa fa-file-text-o"></i> <?= __('Save') ?>
                         </button>
                     <?php } ?>
                 </div>
@@ -502,7 +501,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
       // htmlRows += '<td><input type="text" class="form-control" name="get_response_details_value[]" value="" readonly aria-label="Get Response Details Value"></td>';
 
         htmlRows += '<td>';
-        htmlRows += '<select name="get_response_details_value['+sqo+']" class="form-control js-example-basic-single application_table_fields" onchange="getMappingField('+sqo+')" id="get_response_details_value_'+sqo+'" aria-label="Get Response Details Value[&#039;+sqo+&#039;]"><option value="" >Select Any One</option>';
+        htmlRows += '<select name="get_response_details_value['+sqo+']" class="form-control js-example-basic-single application_table_fields" onchange="getMappingField('+sqo+')" id="get_response_details_value_'+sqo+'" aria-label="Get Response Details Value[&#039;+sqo+&#039;]"><option value="" ><?= __('Select Any One') ?></option>';
 
 
 

@@ -85,9 +85,9 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
         var idtype = type+"_"+seq;
         var deletworid  = 'I_'+maxrow+'_'+seq;
         html +='<div class="row mt-2" id="delete_row_'+deletworid+'"><input type="hidden" class="form-control " name="split_type['+seq+'][]" value="'+type+'">';
-        html +='<div class="col-lg-7 w-full"><select aria-label="Accountcode Split[" name="accountcode_split['+seq+'][]" class="form-control form-select js-example-basic-single" ><option value="">Select Any One </option><?php foreach($chart_of_accounts as $coa) {  ?><option value="<?php echo $coa['account_code']; ?>" <?php echo $coa['id'] ==$di['tax_rate']?"selected":""; ?>><?php echo $coa['account_name']." (".$coa['account_code'].")";?></option><?php
+        html +='<div class="col-lg-7 w-full"><select aria-label="<?php echo __('Accountcode Split['); ?>" name="accountcode_split['+seq+'][]" class="form-control form-select js-example-basic-single" ><option value=""><?php echo __('Select Any One'); ?> </option><?php foreach($chart_of_accounts as $coa) {  ?><option value="<?php echo $coa['account_code']; ?>" <?php echo $coa['id'] ==$di['tax_rate']?"selected":""; ?>><?php echo $coa['account_name']." (".$coa['account_code'].")";?></option><?php
 } ?></select></div>';
-        html +='<div class="col-lg-4"><input aria-label="Tax Rate Split[" type="number" class="form-control text-right distribution'+idtype+'" name="tax_rate_split['+seq+'][]" value="0" onblur="calculateTotal(\''+idtype+'\')"></div>';
+        html +='<div class="col-lg-4"><input aria-label="<?php echo __('Tax Rate Split['); ?>" type="number" class="form-control text-right distribution'+idtype+'" name="tax_rate_split['+seq+'][]" value="0" onblur="calculateTotal(\''+idtype+'\')"></div>';
         html +='<div class="form-group col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRow('+deletworid+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div></div>';
             $("#addmoreinvoice_"+seq).append(html);
         $(".js-example-basic-single").select2();
@@ -118,28 +118,28 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
         var html = '';
         html += '<div class="col-lg-12">';
         html += '<div class="card">';
-        html += '<div class="card-header"><h5>Tax Authorities Rate</h5></div>';
+        html += '<div class="card-header"><h5><?php echo __('Tax Authorities Rate'); ?></h5></div>';
         html += '<div class="card-body p-l-50 p-r-50">';
         html += '<div class="row">'
         html += '<div class="form-group col-lg-6">'
         html += '<span class="form-label">Tax Authorities Rates Name<span class="text-danger">*</span></span>'
         html += '<input type="hidden" class="form-control" name="tax_authorities_rates_seq['+taxauthsq+']" value="'+taxauthsq+'">';
         html += '<input type="hidden" class="form-control" name="tax_authorities_rates_id['+taxauthsq+']" value="">';
-        html += '<input aria-label="Tax Description[" type="text" class="form-control text-capitalize" name="tax_description['+taxauthsq+']" value="">';
+        html += '<input aria-label="<?php echo __('Tax Description['); ?>" type="text" class="form-control text-capitalize" name="tax_description['+taxauthsq+']" value="">';
         html += '</div>';
         html += '<div class="col-lg-6">';
         html += '<div class="row">';
-        html += '<div class="col-lg-7 f-w-700">Rates Split Account</div>';
-        html += '<div class="col-lg-4 text-right f-w-700">Split Base On (%)</div>';
+        html += '<div class="col-lg-7 f-w-700"><?php echo __('Rates Split Account'); ?></div>';
+        html += '<div class="col-lg-4 text-right f-w-700"><?php echo __('Split Base On (%)'); ?></div>';
         html += '</div>';
         html += '<div id="addmoreinvoice_'+taxauthsq+'">';
         html += '</div>';
         html += '<div class="mt-3">';
         html += '<button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn" onclick="addMore(\""I"\",'+taxauthsq+')"><i class="icofont icofont-plus icon-white "></i> Add More</button>';
         html += '<span class="float-end">';
-        html += '<span class="text-danger">Pendding (%) : </span>';
+        html += '<span class="text-danger"><?php echo __('Pendding (%) :'); ?> </span>';
         html += '<span id="totaldistributionpendingI_'+taxauthsq+'"><?php echo 100-round($itotal); ?></span>';
-        html += '<span class="text-warning m-l-20">Total (%) : </span>';
+        html += '<span class="text-warning m-l-20"><?php echo __('Total (%) :'); ?> </span>';
         html += '<span id="totaldistributionI_'+taxauthsq+'"><?php echo round($itotal); ?></span>';
         html += '</span>';
         html += '</div>';
@@ -155,23 +155,23 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
 <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
 <?php } ?>
 
 <form method="post">
     <div class="card">
         <div class="card-header">
-            <h5>Tax Authorities</h5>
+            <h5><?php echo __('Tax Authorities'); ?></h5>
             <div class="card-header-right table-card-header">
-                <button type="button" onclick="history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i> Back</button>
+                <button type="button" onclick="history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i> <?php echo __('Back'); ?></button>
             </div>
         </div>
         <div class="card-body p-l-50 p-r-50">
             <div class="row">
                 <div class="form-group col-lg-12 w-full">
-                    <span class="form-label">HSN And SAC Code <span class="text-danger">*</span></span>
-                    <select aria-label="Hsn And Sac Code []" name="hsn_and_sac_code_id[]" class="form-control form-select js-example-basic-multiple" multiple>
+                    <span class="form-label"><?php echo __('HSN And SAC Code'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?php echo __('Hsn And Sac Code []'); ?>" name="hsn_and_sac_code_id[]" class="form-control form-select js-example-basic-multiple" multiple>
 
                         <?php foreach($hsn_and_sac_codes as $hsnsac) {  ?>
                             <option value="<?php echo $hsnsac['id']; ?>" <?php echo $hsnsac['tax_authority_id'] ==$rid?"selected":""; ?>><?php echo $hsnsac['code']." - ".$hsnsac['code_description']." (".$hsnsac['gst'].")";?></option>
@@ -179,17 +179,17 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
                     </select>
                 </div>
                 <div class="form-group col-lg-3">
-                    <span class="form-label">Tax Name <span class="text-danger">*</span></span>
-                    <input aria-label="Tax Name" type="text" class="form-control text-capitalize" name="tax_name" value="<?php echo $tax_authorities['tax_name']; ?>">
+                    <span class="form-label"><?php echo __('Tax Name'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Tax Name'); ?>" type="text" class="form-control text-capitalize" name="tax_name" value="<?php echo $tax_authorities['tax_name']; ?>">
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Description <span class="text-danger">*</span></span>
-                    <textarea aria-label="Description" class="form-control" name="description" ><?php echo $tax_authorities['description']; ?></textarea>
+                    <span class="form-label"><?php echo __('Description'); ?> <span class="text-danger">*</span></span>
+                    <textarea aria-label="<?php echo __('Description'); ?>" class="form-control" name="description" ><?php echo $tax_authorities['description']; ?></textarea>
                 </div>
                 <div class="form-group col-lg-3 w-full">
-                    <span class="form-label">Tax Computations <span class="text-danger">*</span></span>
-                    <select aria-label="Tax Computation"  name="tax_computation_id" class="form-control form-select js-example-basic-single" onchange="getComputationType(this.value)">
-                        <option value="">Select Any One </option>
+                    <span class="form-label"><?php echo __('Tax Computations'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?php echo __('Tax Computation'); ?>"  name="tax_computation_id" class="form-control form-select js-example-basic-single" onchange="getComputationType(this.value)">
+                        <option value=""><?php echo __('Select Any One'); ?> </option>
                         <?php foreach($tax_computations as $tc) {  ?>
                             <option value="<?php echo $tc['id']; ?>" <?php echo $tc['id'] ==$tax_authorities['tax_computation_id']?"selected":""; ?>><?php echo $tc['tax_computations_name'];?></option>
                         <?php } ?>
@@ -201,7 +201,7 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
 
     <div class="card group_of_tax" <?php echo $tax_authorities['tax_computation_id']=='1'?'':'style="display:none"';?>>
         <div class="card-header">
-            <h5>Group of Tax</h5>
+            <h5><?php echo __('Group of Tax'); ?></h5>
         </div>
         <div class="card-body p-l-50 p-r-50">
             <?php  if(count((array)$all_tax_authorities) !=0){ ?>
@@ -209,10 +209,10 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
                 <thead>
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col">Tax Name</th>
-                        <th scope="col">Tax Type</th>
-                        <th scope="col">Tax Scope</th>
-                        <th scope="col" class="text-right">tax_rate</th>
+                        <th scope="col"><?php echo __('Tax Name'); ?></th>
+                        <th scope="col"><?php echo __('Tax Type'); ?></th>
+                        <th scope="col"><?php echo __('Tax Scope'); ?></th>
+                        <th scope="col" class="text-right"><?php echo __('tax_rate'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -221,7 +221,7 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
                         <td class="p-2">
                             <div class="checkbox-fade fade-in-primary">
                                   <label class="form-label">
-                                <input aria-label="Group Tax[]" type="checkbox" name="group_tax[]" value="<?php echo $ata['id']; ?>" <?php echo in_array($ata['id'], (array)$group_tax)?"checked":""; ?>>
+                                <input aria-label="<?php echo __('Group Tax[]'); ?>" type="checkbox" name="group_tax[]" value="<?php echo $ata['id']; ?>" <?php echo in_array($ata['id'], (array)$group_tax)?"checked":""; ?>>
                                 <span class="cr">
                                   <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                 </span>
@@ -240,7 +240,7 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
             </table>
         <?php }else{ ?>
             <div class="card-px text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Taxes</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?php echo __('No Taxes'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
@@ -255,21 +255,21 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Tax Authorities Rate</h5>
+                    <h5><?php echo __('Tax Authorities Rate'); ?></h5>
                 </div>
 
                 <div class="card-body p-l-50 p-r-50">
                     <div class="row">
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Tax Authorities Rates Name<span class="text-danger">*</span></span>
+                            <span class="form-label"><?php echo __('Tax Authorities Rates Name'); ?><span class="text-danger">*</span></span>
                             <input type="hidden" class="form-control" name="tax_authorities_rates_seq[<?php echo $taseq; ?>]" value="<?php echo $taseq; ?>">
                             <input type="hidden" class="form-control" name="tax_authorities_rates_id[<?php echo $taseq; ?>]" value="<?php echo $tars['id']; ?>">
-                            <input aria-label="Input field" type="text" class="form-control text-capitalize" name="tax_description[<?php echo $taseq; ?>]" value="<?php echo $tars['tax_description']; ?>">
+                            <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control text-capitalize" name="tax_description[<?php echo $taseq; ?>]" value="<?php echo $tars['tax_description']; ?>">
                         </div>
                         <div class="col-lg-6">
                             <div class="row">
-                                <div class="col-lg-7 f-w-700">Rates Split Account</div>
-                                <div class="col-lg-4 text-right f-w-700">Split Base On (%)</div>
+                                <div class="col-lg-7 f-w-700"><?php echo __('Rates Split Account'); ?></div>
+                                <div class="col-lg-4 text-right f-w-700"><?php echo __('Split Base On (%)'); ?></div>
 
                             </div>
                             <div id="addmoreinvoice_<?php echo $taseq; ?>">
@@ -284,15 +284,15 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
                                     <input type="hidden" class="form-control" name="split_type[<?php echo $taseq; ?>][]" value="I">
                                     <input type="hidden" class="form-control" name="srid[<?php echo $taseq; ?>][]" value="<?php echo $di['id']; ?>">
                                     <div class="col-lg-7 w-full">
-                                        <select aria-label="Select option" name="accountcode_split[<?php echo $taseq; ?>][]" class="form-control form-select js-example-basic-single" >
-                                            <option value="">Select Any One </option>
+                                        <select aria-label="<?php echo __('Select option'); ?>" name="accountcode_split[<?php echo $taseq; ?>][]" class="form-control form-select js-example-basic-single" >
+                                            <option value=""><?php echo __('Select Any One'); ?> </option>
                                             <?php foreach($chart_of_accounts as $coa) {  ?>
                                                 <option value="<?php echo $coa['account_code']; ?>" <?php echo $coa['account_code'] ==$di['account_code']?"selected":""; ?>><?php echo $coa['account_name']." (".$coa['account_code'].")";?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-lg-4">
-                                        <input aria-label="Enter number" type="number" class="form-control text-right distributionI_<?php echo $taseq; ?>" name="tax_rate_split[<?php echo $taseq; ?>][]" value="<?php echo $di['tax_rate']; ?>" onblur="calculateTotal('I_<?php echo $taseq; ?>')">
+                                        <input aria-label="<?php echo __('Enter number'); ?>" type="number" class="form-control text-right distributionI_<?php echo $taseq; ?>" name="tax_rate_split[<?php echo $taseq; ?>][]" value="<?php echo $di['tax_rate']; ?>" onblur="calculateTotal('I_<?php echo $taseq; ?>')">
                                     </div>
                                     <div class="form-group col-lg-1"><i class="ti-trash"  onclick="deletRow('I_<?php echo $mk; ?>_<?php echo $taseq; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i> </div>
                                 </div>
@@ -301,12 +301,12 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
                         </div>
 
                         <div class="mt-3">
-                            <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn_2" onclick="addMore('I','<?php echo $taseq; ?>')"><i class="icofont icofont-plus icon-white "></i> Add More</button>
+                            <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn_2" onclick="addMore('I','<?php echo $taseq; ?>')"><i class="icofont icofont-plus icon-white "></i> <?php echo __('Add More'); ?></button>
 
                             <span class="float-end">
-                                <span class="text-danger">Pendding (%) : </span>
+                                <span class="text-danger"><?php echo __('Pendding (%) :'); ?> </span>
                                 <span id="totaldistributionpendingI_<?php echo $taseq; ?>"><?php echo 100-round($itotal); ?></span>
-                                <span class="text-warning m-l-20">Total (%) : </span>
+                                <span class="text-warning m-l-20"><?php echo __('Total (%) :'); ?> </span>
                                 <span id="totaldistributionI_<?php echo $taseq; ?>"><?php echo round($itotal); ?></span>
                             </span>
                         </div>
@@ -320,7 +320,7 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
 
 </div>
 <div class="mt-3">
-        <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn_3" onclick="addMoreTaxAuth()"><i class="icofont icofont-plus icon-white "></i> Add More Tax Authorities Rate</button>
+        <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn_3" onclick="addMoreTaxAuth()"><i class="icofont icofont-plus icon-white "></i> <?php echo __('Add More Tax Authorities Rate'); ?></button>
     </div>
 </div>
 
@@ -328,7 +328,7 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
         <div class="card-body">
             <div>
                 <input type="hidden" name="rid" value="<?php echo $rid; ?>">
-                <button type="submit" class="btn btn-primary waves-effect waves-light" name="submittaxauthorities"><i class="fa fa-check m-r-10"></i> <?php echo $rid ==""?"Submit":"Update"; ?></button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" name="submittaxauthorities"><i class="fa fa-check m-r-10"></i> <?php echo $rid ==""?__('Submit'):__('Update'); ?></button>
             </div>
         </div>
     </div>

@@ -78,21 +78,21 @@ $totalAmount = $result['total_amount'] ?? 0;
 <div class="page-body">
   <div class="card shadow-sm border-0">
     <div class="card-header">
-      <h5 class="mb-0">Stock Transfer Receipt</h5>
+      <h5 class="mb-0"><?php echo __('Stock Transfer Receipt'); ?></h5>
     </div>
 
     <div class="card-body p-4">
       <?php if (!empty($_SESSION['error'])): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <?php echo htmlspecialchars($_SESSION['error']); ?>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
         <?php unset($_SESSION['error']); ?>
       <?php endif; ?>
       <?php if (!empty($_SESSION['stock_transfer_receipt_warning'])): ?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
           <?php echo htmlspecialchars($_SESSION['stock_transfer_receipt_warning']); ?>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
         <?php unset($_SESSION['stock_transfer_receipt_warning']); ?>
       <?php endif; ?>
@@ -102,9 +102,9 @@ $totalAmount = $result['total_amount'] ?? 0;
         <input type="hidden" name="option" value="COM_INSERT_STOCK_TRANSFER_RECEIPT">
 
         <div class="col-md-4 mb-3 w-full">
-          <span class="fw-semibold">Stock Request</span>
-          <select aria-label="Stock Request" name="stock_request_id" class="js-example-basic-single js-stock-request-select" data-auto-submit="1">
-            <option value="">Select Stock Request</option>
+          <span class="fw-semibold"><?php echo __('Stock Request'); ?></span>
+          <select aria-label="<?php echo __('Stock Request'); ?>" name="stock_request_id" class="js-example-basic-single js-stock-request-select" data-auto-submit="1">
+            <option value=""><?php echo __('Select Stock Request'); ?></option>
             <?php
             if (count((array)$stockRequests) > 0) {
               foreach ($stockRequests as $row) {
@@ -125,9 +125,9 @@ $totalAmount = $result['total_amount'] ?? 0;
 
         <?php if ($stock_request_id != '') { ?>
         <div class="col-md-4 mb-3 w-full">
-          <span class="fw-semibold">Stock Transfer</span>
-          <select aria-label="Stock Transfer" name="stock_transfer_id" class="js-example-basic-single js-stock-transfer-select" data-auto-submit="1">
-            <option value="">Select Stock Transfer</option>
+          <span class="fw-semibold"><?php echo __('Stock Transfer'); ?></span>
+          <select aria-label="<?php echo __('Stock Transfer'); ?>" name="stock_transfer_id" class="js-example-basic-single js-stock-transfer-select" data-auto-submit="1">
+            <option value=""><?php echo __('Select Stock Transfer'); ?></option>
             <?php
             if (count((array)$stockTransfers) > 0) {
               foreach ($stockTransfers as $row) {
@@ -158,29 +158,29 @@ $totalAmount = $result['total_amount'] ?? 0;
           <div class="accordion-item mb-3 shadow-sm border-0">
             <h2 class="accordion-header" id="headingTransferDetails">
               <button class="accordion-button collapsed fw-bold text-primary bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTransferDetails" aria-expanded="false" aria-controls="collapseTransferDetails">
-                <i class="bi bi-file-earmark-text me-2"></i> Stock Transfer Details (<?php echo htmlspecialchars($stockTransferDetails['transaction_number'] ?? ''); ?>)
+                <i class="bi bi-file-earmark-text me-2"></i> <?php echo __('Stock Transfer Details ('); ?><?php echo htmlspecialchars($stockTransferDetails['transaction_number'] ?? ''); ?>)
               </button>
             </h2>
             <div id="collapseTransferDetails" class="accordion-collapse collapse" aria-labelledby="headingTransferDetails">
               <div class="accordion-body">
                 <div class="row mb-3">
                   <div class="col-md-4">
-                    <span class="text-muted fw-semibold d-block">Transaction No</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Transaction No'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars($stockTransferDetails['transaction_number'] ?? ''); ?></span>
                   </div>
                   <div class="col-md-4">
-                    <span class="text-muted fw-semibold d-block">Transaction Date</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Transaction Date'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars(fromDate($stockTransferDetails['transaction_date'] ?? '')); ?></span>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <div class="col-md-4">
-                    <span class="text-muted fw-semibold d-block">Total Amount</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Total Amount'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars($totalAmount); ?></span>
                   </div>
                   <div class="col-md-8">
-                    <span class="text-muted fw-semibold d-block">Notes</span>
+                    <span class="text-muted fw-semibold d-block"><?php echo __('Notes'); ?></span>
                     <span class="fs-6 text-dark"><?php echo htmlspecialchars($stockTransferDetails['notes'] ?? ''); ?></span>
                   </div>
                 </div>
@@ -192,7 +192,7 @@ $totalAmount = $result['total_amount'] ?? 0;
           <div class="accordion-item shadow-sm border-0">
             <h2 class="accordion-header" id="headingTransferItems">
               <button class="accordion-button collapsed fw-bold text-primary bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTransferItems" aria-expanded="false" aria-controls="collapseTransferItems">
-                <i class="bi bi-boxes me-2"></i> Stock Transfer Items (<?php echo count($stockTransferItems); ?>)
+                <i class="bi bi-boxes me-2"></i> <?php echo __('Stock Transfer Items ('); ?><?php echo count($stockTransferItems); ?>)
               </button>
             </h2>
             <div id="collapseTransferItems" class="accordion-collapse collapse" aria-labelledby="headingTransferItems">
@@ -202,13 +202,13 @@ $totalAmount = $result['total_amount'] ?? 0;
                     <thead class="table-light text-center">
                       <tr>
                         <th scope="col" class="col-width-50">#</th>
-                        <th scope="col" class="text-start">Item Name</th>
-                        <th scope="col">UOM</th>
-                        <th scope="col">Transfer Qty</th>
-                        <th scope="col">Pending Qty</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Receipt Qty</th>
+                        <th scope="col" class="text-start"><?php echo __('Item Name'); ?></th>
+                        <th scope="col"><?php echo __('UOM'); ?></th>
+                        <th scope="col"><?php echo __('Transfer Qty'); ?></th>
+                        <th scope="col"><?php echo __('Pending Qty'); ?></th>
+                        <th scope="col"><?php echo __('Price'); ?></th>
+                        <th scope="col"><?php echo __('Amount'); ?></th>
+                        <th scope="col"><?php echo __('Receipt Qty'); ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -225,14 +225,14 @@ $totalAmount = $result['total_amount'] ?? 0;
                             <td><?php echo htmlspecialchars(floatval($item['pending_qty'] ?? 0) * floatval($item['item_price'] ?? 0)); ?></td>
                             <td>
                               <input type="hidden" name="items[<?php echo $i; ?>][item_id]" value="<?php echo htmlspecialchars($item['id']); ?>">
-                              <input aria-label="Enter number" type="number" name="items[<?php echo $i; ?>][receipt_qty]" value="<?php echo htmlspecialchars($item['pending_qty'] ?? 0); ?>" step="any" min="0" max="<?php echo htmlspecialchars($item['pending_qty'] ?? 0); ?>" data-pending-qty="<?php echo htmlspecialchars($item['pending_qty'] ?? 0); ?>" class="form-control text-end receipt-qty-input" placeholder="0">
+                              <input aria-label="<?php echo __('Enter number'); ?>" type="number" name="items[<?php echo $i; ?>][receipt_qty]" value="<?php echo htmlspecialchars($item['pending_qty'] ?? 0); ?>" step="any" min="0" max="<?php echo htmlspecialchars($item['pending_qty'] ?? 0); ?>" data-pending-qty="<?php echo htmlspecialchars($item['pending_qty'] ?? 0); ?>" class="form-control text-end receipt-qty-input" placeholder="0">
                             </td>
                           </tr>
                         <?php $i++;
                         }
                       } else { ?>
                         <tr>
-                          <td colspan="8" class="text-center text-muted py-3">No pending receipt items found for this stock transfer.</td>
+                          <td colspan="8" class="text-center text-muted py-3"><?php echo __('No pending receipt items found for this stock transfer.'); ?></td>
                         </tr>
                       <?php } ?>
                     </tbody>
@@ -245,20 +245,20 @@ $totalAmount = $result['total_amount'] ?? 0;
           <?php if (!empty($stockTransferItems)) { ?>
             <div class="text-start mt-4">
               <button type="submit" name="submit" value="save" class="btn btn-primary px-4">
-                <i class="ti ti-save me-2"></i>Submit
+                <i class="ti ti-save me-2"></i><?php echo __('Submit'); ?>
               </button>
             </div>
           <?php } else { ?>
             <div class="alert alert-info text-center py-3 mt-4" role="alert">
               <i class="bi bi-info-circle me-2"></i>
-              <span>This stock transfer has no pending receipt quantity.</span>
+              <span><?php echo __('This stock transfer has no pending receipt quantity.'); ?></span>
             </div>
           <?php } ?>
         </form>
       <?php } else { ?>
         <div class="alert alert-info text-center py-4" role="alert">
           <i class="bi bi-info-circle me-2"></i>
-          <span>Select a Stock Request and Stock Transfer to begin the receipt process.</span>
+          <span><?php echo __('Select a Stock Request and Stock Transfer to begin the receipt process.'); ?></span>
         </div>
       <?php } ?>
     </div>

@@ -55,9 +55,9 @@ function submitEquipmentdetailBTN(){
                   swal("<?php echo ucwords($_SESSION['config']['name']); ?>", datas['message'], "error");
                 }else{
                   if(datas['LASTID'] == "0"){
-                    tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>','');
+                    tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo __($_SESSION['error_message']['3001']); ?>','');
                  }else{
-                  tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3000']; ?>','');
+                  tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo __($_SESSION['error_message']['3000']); ?>','');
                 }
                 closeInsertEquipment();
                 $('#kt_modal_dynamic_popup2').modal("hide");
@@ -70,9 +70,9 @@ function getEquipmentTypePopup(eq_type_val){
     if(eq_type_val !=""){
         var eq_type = eq_type_val.split("||");
         if(eq_type[1] == 'Y'){
-            $("#employee_seating_popup").text("Yes");
+            $("#employee_seating_popup").text("<?php echo __('Yes'); ?>");
         }else{
-            $("#employee_seating_popup").text("No");
+            $("#employee_seating_popup").text("<?php echo __('No'); ?>");
         }
         $("#employee_seating_popup_val").val(eq_type[1]);
     }
@@ -90,8 +90,8 @@ function closeInsertEquipment(){
 </script>
 
 <div class="modal-header  ">
-    <h5 class="modal-title"> Equipments</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"> <?php echo __('Equipments'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <div class="modal-body p-l-50 p-r-50 p-t-50">
     <form id="intertequipment_form">
@@ -100,48 +100,48 @@ function closeInsertEquipment(){
         <div class="col-lg-10">
             <div class="row">
                 <div class=" form-group col-lg-5">
-                    <span class="form-label">Equipment Name <span class="requried">*</span></span>
+                    <span class="form-label"><?php echo __('Equipment Name'); ?> <span class="requried">*</span></span>
                     <span class="d-block error-message text-danger"></span>
-                    <input aria-label="Equipment Name" type="text" class="form-control requried_field" name="equipment_name" value="<?php echo $equipments['equipment_name']; ?>">
+                    <input aria-label="<?php echo __('Equipment Name'); ?>" type="text" class="form-control requried_field" name="equipment_name" value="<?php echo $equipments['equipment_name']; ?>">
                 </div>
                 <div class="form-group col-lg-4">
-                    <span class="form-label">Equipment Type <span class="requried">*</span></span>
+                    <span class="form-label"><?php echo __('Equipment Type'); ?> <span class="requried">*</span></span>
                     <span class="d-block error-message text-danger"></span>
-                    <select aria-label="Equipment Type" class="form-select js-example-basic-single requried_field" id="equipment_type_id" name="equipment_type_id"  onchange="getEquipmentTypePopup(this.value)">
-                        <option value="" > Select Any One</option>
-                         <?php $employee_seating_text = "No"; $employee_seating_val = 'N'; foreach($equipment_types as $equtype){
+                    <select aria-label="<?php echo __('Equipment Type'); ?>" class="form-select js-example-basic-single requried_field" id="equipment_type_id" name="equipment_type_id"  onchange="getEquipmentTypePopup(this.value)">
+                        <option value="" > <?php echo __('Select Any One'); ?></option>
+                         <?php $employee_seating_text = __("No"); $employee_seating_val = 'N'; foreach($equipment_types as $equtype){
                              $selected = "";
                                  if($equtype['id'] == $equipments['equipment_type_id']){
                                      $selected = "selected";
                                      if($equtype['seating_equipment'] == 'Y'){
-                                         $employee_seating_text = "Yes";
+                                         $employee_seating_text = __("Yes");
                                          $employee_seating_val = 'Y';
                                      }
                                  }
 
                              ?>
-                             <option value="<?php echo $equtype['id']."||".$equtype['seating_equipment']; ?>" <?php echo $selected;  ?>> <?php echo $equtype['equipment_types_name']; ?></option>
+                             <option value="<?php echo $equtype['id']."||".$equtype['seating_equipment']; ?>" <?php echo $selected;  ?>> <?php echo __($equtype['equipment_types_name']); ?></option>
                          <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-lg-3">
-                    <span class="form-label d-block">Seating Equipment</span>
+                    <span class="form-label d-block"><?php echo __('Seating Equipment'); ?></span>
                     <span class="" id="employee_seating_popup"><?php echo $employee_seating_text; ?></span>
                     <input type="hidden" class="form-control" name="employee_seating" id="employee_seating_popup_val" value="<?php echo $employee_seating_val; ?>">
                 </div>
                 <div class="form-group col-lg-12">
-                    <span class="form-label">Description</span>
-                    <textarea aria-label="Description" class="form-control" name="description"><?php echo $equipments['description']; ?></textarea>
+                    <span class="form-label"><?php echo __('Description'); ?></span>
+                    <textarea aria-label="<?php echo __('Description'); ?>" class="form-control" name="description"><?php echo $equipments['description']; ?></textarea>
                 </div>
                 <?php if($equipments['qr_code'] !=""){ ?>
                 <div class=" form-group col-lg-6">
-                    <span class="form-label d-block">QR Code</span>
+                    <span class="form-label d-block"><?php echo __('QR Code'); ?></span>
                     <img src="<?php echo "uploads/equipments/qr_code/".$equipments['qr_code'] ; ?>" class="img-100"  width="200" alt="QR Code" />
                 </div>
                 <?php }
 if($equipments['id'] !=""){ ?>
                 <div class=" form-group col-lg-6">
-                    <span class="form-label d-block">Barcode </span>
+                    <span class="form-label d-block"><?php echo __('Barcode'); ?> </span>
 
                     <img src="<?php echo "barcode/barcode.php?text=".$equipments['id'].'-'.$equipments['equipment_code']; ?>" width="300" alt="Attachment Preview" />
                 </div>
@@ -149,11 +149,11 @@ if($equipments['id'] !=""){ ?>
             </div>
         </div>
         <div class="form-group col-lg-2">
-            <span class="form-label d-block">Equipment Image </span>
+            <span class="form-label d-block"><?php echo __('Equipment Image'); ?> </span>
             <span class="fileinputvalidation_error text-danger d-block"></span>
             <div class="profile-pic">
                 <label class="-label" for="equipment_image">
-                    <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                    <span> <i class="fa fa-camera"></i> &nbsp; <?php echo __('Change Image'); ?></span>
                 </label>
                 <input type="file" class="fileinputvalidation" name="equipment_image" id="equipment_image"  <?php echo $accepted_files; ?> data-size="<?php echo $file_upload['file_size']; ?>" onchange="loadFile(event,this.id)"/>
                 <img src="<?php echo "uploads/equipments/".$equipments['equipment_image'] ; ?>" id="outputequipment_image" width="200" alt="Attachment Preview" />
@@ -165,6 +165,6 @@ if($equipments['id'] !=""){ ?>
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitEquipmentdetailBTN()">Submit</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitEquipmentdetailBTN()"><?php echo __('Submit'); ?></button>
 </div>

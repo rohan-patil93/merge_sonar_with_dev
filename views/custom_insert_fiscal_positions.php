@@ -66,16 +66,16 @@ foreach($fiscal_positions_mappings as $fpm){
         var html = '';
 
         if(type == 'T'){
-            html +='<div class="row mt-2" id="delete_row__2"+maxrow+'"><input type="hidden" class="form-control" name="fiscal_type[]" value="T"><input type="hidden" class="form-control" name="srid[]" value=""><div class="col-lg-5 w-full"><select aria-label="Get Type[]" name="get_type[]" class="form-control form-select js-example-basic-single" required><option value="">Select Any One </option><?php foreach($tax_authorities as $ta) {  ?><option value="<?php echo $ta['id']; ?>"><?php echo $ta['tax_name'];?></option><?php
+            html +='<div class="row mt-2" id="delete_row__2"+maxrow+'"><input type="hidden" class="form-control" name="fiscal_type[]" value="T"><input type="hidden" class="form-control" name="srid[]" value=""><div class="col-lg-5 w-full"><select aria-label="<?php echo __('Get Type[]'); ?>" name="get_type[]" class="form-control form-select js-example-basic-single" required><option value=""><?php echo __('Select Any One'); ?> </option><?php foreach($tax_authorities as $ta) {  ?><option value="<?php echo $ta['id']; ?>"><?php echo $ta['tax_name'];?></option><?php
 } ?></select></div>';
-            html +='<div class="col-lg-6 w-full"><select aria-label="Apply Type[]" name="apply_type[]" class="form-control form-select js-example-basic-single" required><option value="">Select Any One </option><?php foreach($tax_authorities as $ta) {  ?><option value="<?php echo $ta['id']; ?>" ><?php echo $ta['tax_name'];?></option><?php
+            html +='<div class="col-lg-6 w-full"><select aria-label="<?php echo __('Apply Type[]'); ?>" name="apply_type[]" class="form-control form-select js-example-basic-single" required><option value=""><?php echo __('Select Any One'); ?> </option><?php foreach($tax_authorities as $ta) {  ?><option value="<?php echo $ta['id']; ?>" ><?php echo $ta['tax_name'];?></option><?php
 } ?></select></div><div class="form-group col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRow('+maxrow+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div></div>';
 
             $("#addmoretax").append(html);
         }else{
-            html +='<div class="row mt-2" id="delete_row__3"+maxrow+'"><input type="hidden" class="form-control" name="fiscal_type[]" value="A"><input type="hidden" class="form-control" name="srid[]" value=""><div class="col-lg-5 w-full"><select aria-label="Get Type[]" name="get_type[]" class="form-control form-select js-example-basic-single" required><option value="">Select Any One </option><?php foreach($chart_of_accounts as $coa) {  ?><option value="<?php echo $coa['id']; ?>" ><?php echo $coa['account_name']." (".$coa['account_code'].")";?></option><?php
+            html +='<div class="row mt-2" id="delete_row__3"+maxrow+'"><input type="hidden" class="form-control" name="fiscal_type[]" value="A"><input type="hidden" class="form-control" name="srid[]" value=""><div class="col-lg-5 w-full"><select aria-label="<?php echo __('Get Type[]'); ?>" name="get_type[]" class="form-control form-select js-example-basic-single" required><option value=""><?php echo __('Select Any One'); ?> </option><?php foreach($chart_of_accounts as $coa) {  ?><option value="<?php echo $coa['id']; ?>" ><?php echo $coa['account_name']." (".$coa['account_code'].")";?></option><?php
 } ?></select></div>';
-            html +='<div class="col-lg-6 w-full"><select aria-label="Apply Type[]" name="apply_type[]" class="form-control form-select js-example-basic-single" required><option value="">Select Any One </option><?php foreach($chart_of_accounts as $coa) {  ?><option value="<?php echo $coa['id']; ?>"><?php echo $coa['account_name']." (".$coa['account_code'].")";?></option><?php
+            html +='<div class="col-lg-6 w-full"><select aria-label="<?php echo __('Apply Type[]'); ?>" name="apply_type[]" class="form-control form-select js-example-basic-single" required><option value=""><?php echo __('Select Any One'); ?> </option><?php foreach($chart_of_accounts as $coa) {  ?><option value="<?php echo $coa['id']; ?>"><?php echo $coa['account_name']." (".$coa['account_code'].")";?></option><?php
 } ?></select></div><div class="form-group col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRow('+maxrow+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div></div>';
 
             $("#addmoreaccount").append(html);
@@ -91,21 +91,21 @@ foreach($fiscal_positions_mappings as $fpm){
 <form method="post">
     <div class="card">
         <div class="card-header">
-            <h5>Fiscal Positions</h5>
+            <h5><?php echo __('Fiscal Positions'); ?></h5>
             <div class="card-header-right table-card-header">
-                <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</button>
+                <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?php echo __('Back'); ?></button>
             </div>
         </div>
         <div class="card-body p-l-50 p-r-50">
             <div class="row">
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Fiscal Positions Name <span class="text-danger">*</span></span>
-                    <input aria-label="Fiscal Positions Name" type="text" class="form-control text-capitalize" name="fiscal_positions_name" value="<?php echo $fiscal_positions['fiscal_positions_name']; ?>" required>
+                    <span class="form-label"><?php echo __('Fiscal Positions Name'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Fiscal Positions Name'); ?>" type="text" class="form-control text-capitalize" name="fiscal_positions_name" value="<?php echo $fiscal_positions['fiscal_positions_name']; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Country <span class="text-danger">*</span></span>
-                    <select aria-label="Country"  name="country_id" class="form-control form-select js-example-basic-single" required>
-                        <option value="">Select Any One </option>
+                    <span class="form-label"><?php echo __('Country'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?php echo __('Country'); ?>"  name="country_id" class="form-control form-select js-example-basic-single" required>
+                        <option value=""><?php echo __('Select Any One'); ?> </option>
                         <?php foreach($countries as $countr) {  ?>
                             <option value="<?php echo $countr['id']; ?>" <?php echo $countr['id'] ==$fiscal_positions['country_id']?"selected":""; ?>><?php echo $countr['country_name'];?></option>
                         <?php } ?>
@@ -119,12 +119,12 @@ foreach($fiscal_positions_mappings as $fpm){
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">
-                    <h5>Tax Mappings</h5>
+                    <h5><?php echo __('Tax Mappings'); ?></h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-5 f-w-700">tax On Product</div>
-                        <div class="col-lg-6 f-w-700">Tax To Apply</div>
+                        <div class="col-lg-5 f-w-700"><?php echo __('tax On Product'); ?></div>
+                        <div class="col-lg-6 f-w-700"><?php echo __('Tax To Apply'); ?></div>
                     </div>
                     <div id="addmoretax">
                         <?php $mk=1;
@@ -136,16 +136,16 @@ foreach($fiscal_positions_mappings as $fpm){
                                 <input type="hidden" class="form-control" name="fiscal_type[]" value="T">
                                 <input type="hidden" class="form-control" name="srid[]" value="<?php echo $di['id']; ?>">
                                 <div class="col-lg-5 w-full">
-                                    <select aria-label="Get Type[]" name="get_type[]" class="form-control form-select js-example-basic-single" required>
-                                        <option value="">Select Any One </option>
+                                    <select aria-label="<?php echo __('Get Type[]'); ?>" name="get_type[]" class="form-control form-select js-example-basic-single" required>
+                                        <option value=""><?php echo __('Select Any One'); ?> </option>
                                         <?php foreach($tax_authorities as $ta) {  ?>
                                             <option value="<?php echo $ta['id']; ?>" <?php echo $ta['id']==$di['get_type']?"selected":""; ?>><?php echo $ta['tax_name'];?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="col-lg-6 w-full">
-                                    <select aria-label="Apply Type[]" name="apply_type[]" class="form-control form-select js-example-basic-single" required>
-                                        <option value="">Select Any One </option>
+                                    <select aria-label="<?php echo __('Apply Type[]'); ?>" name="apply_type[]" class="form-control form-select js-example-basic-single" required>
+                                        <option value=""><?php echo __('Select Any One'); ?> </option>
                                         <?php foreach($tax_authorities as $ta) {  ?>
                                             <option value="<?php echo $ta['id']; ?>" <?php echo $ta['id']==$di['apply_type']?"selected":""; ?>><?php echo $ta['tax_name'];?></option>
                                         <?php } ?>
@@ -158,7 +158,7 @@ foreach($fiscal_positions_mappings as $fpm){
                     </div>
 
                     <div class="mt-3">
-                        <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn" onclick="addMore('T')"><i class="icofont icofont-plus icon-white "></i> Add More</button>
+                        <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn" onclick="addMore('T')"><i class="icofont icofont-plus icon-white "></i> <?php echo __('Add More'); ?></button>
                     </div>
                 </div>
             </div>
@@ -166,14 +166,14 @@ foreach($fiscal_positions_mappings as $fpm){
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">
-                    <h5>Account Mappings</h5>
+                    <h5><?php echo __('Account Mappings'); ?></h5>
                     <div class="card-header-right table-card-header">
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-5 f-w-700">Account On Product</div>
-                        <div class="col-lg-6 f-w-700">Account To Use</div>
+                        <div class="col-lg-5 f-w-700"><?php echo __('Account On Product'); ?></div>
+                        <div class="col-lg-6 f-w-700"><?php echo __('Account To Use'); ?></div>
                     </div>
                     <div id="addmoreaccount">
                         <?php  $mc=1000;
@@ -187,16 +187,16 @@ foreach($fiscal_positions_mappings as $fpm){
                                 <input type="hidden" class="form-control" name="fiscal_type[]" value="A">
                                 <input type="hidden" class="form-control" name="srid[]" value="<?php echo $df['id']; ?>">
                                 <div class="col-lg-5 w-full">
-                                    <select aria-label="Get Type[]" name="get_type[]" class="form-control form-select js-example-basic-single" required>
-                                        <option value="">Select Any One </option>
+                                    <select aria-label="<?php echo __('Get Type[]'); ?>" name="get_type[]" class="form-control form-select js-example-basic-single" required>
+                                        <option value=""><?php echo __('Select Any One'); ?> </option>
                                         <?php foreach($chart_of_accounts as $coa) {  ?>
                                             <option value="<?php echo $coa['id']; ?>" <?php echo $df['get_type'] ==$coa['id']?"selected":""; ?>><?php echo $coa['account_name']." (".$coa['account_code'].")";?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="col-lg-6 w-full">
-                                    <select aria-label="Apply Type[]" name="apply_type[]" class="form-control form-select js-example-basic-single" required>
-                                        <option value="">Select Any One </option>
+                                    <select aria-label="<?php echo __('Apply Type[]'); ?>" name="apply_type[]" class="form-control form-select js-example-basic-single" required>
+                                        <option value=""><?php echo __('Select Any One'); ?> </option>
                                         <?php foreach($chart_of_accounts as $coa) {  ?>
                                             <option value="<?php echo $coa['id']; ?>" <?php echo $df['apply_type'] ==$coa['id']?"selected":""; ?>><?php echo $coa['account_name']." (".$coa['account_code'].")";?></option>
                                         <?php } ?>
@@ -208,7 +208,7 @@ foreach($fiscal_positions_mappings as $fpm){
 } ?>
                     </div>
                     <div class="mt-3">
-                        <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn_2" onclick="addMore('A')"><i class="icofont icofont-plus icon-white "></i> Add More</button>
+                        <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn_2" onclick="addMore('A')"><i class="icofont icofont-plus icon-white "></i> <?php echo __('Add More'); ?></button>
                     </div>
                 </div>
             </div>

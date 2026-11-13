@@ -130,13 +130,13 @@ $_SESSION['apply_js']['multiselest'] = '1';
         count++;
         var htmlRows = '';
         htmlRows += '<tr id="qur_div_'+count+'" >';
-        htmlRows += '<td id="other_'+count+'"><select aria-label="Lcode[]" class="form-control fitemRow js-example-basic-single" id="lcode__2"+count+'" name= "lcode[]"  onchange="chekother(this.value,'+count+')"><option value=""> Select </option><?php foreach ($codes as  $code) { ?><option value="<?php echo $code['code']; ?>"><?php echo $code['code']; ?></option><?php
-} ?> <option value="123">Other</option> </select></td>';
-        htmlRows += '<td><select aria-label="Loperand[]" class="form-control  js-example-basic-single" id="loperand_'+count+'" name= "loperand[]" ><option value=""> Select </option><?php foreach ($operators as  $operator) { ?><option value="<?php echo $operator; ?>"><?php echo $operator; ?></option><?php
+        htmlRows += '<td id="other_'+count+'"><select aria-label="Lcode[]" class="form-control fitemRow js-example-basic-single" id="lcode__2"+count+'" name= "lcode[]"  onchange="chekother(this.value,'+count+')"><option value=""><?= __('Select') ?></option><?php foreach ($codes as  $code) { ?><option value="<?php echo $code['code']; ?>"><?php echo $code['code']; ?></option><?php
+} ?> <option value="123"><?= __('Other') ?></option> </select></td>';
+        htmlRows += '<td><select aria-label="Loperand[]" class="form-control  js-example-basic-single" id="loperand_'+count+'" name= "loperand[]" ><option value=""><?= __('Select') ?></option><?php foreach ($operators as  $operator) { ?><option value="<?php echo $operator; ?>"><?php echo $operator; ?></option><?php
 } ?></select></td>';
-        htmlRows += '<td id="rother_'+count+'"> <select aria-label="Rcode[]" class="form-control  js-example-basic-single" id="rcode__2"+count+'" name= "rcode[]" onchange="chekother(this.value,'+count+')" ><option value=""> Select </option><?php foreach ($codes as  $code) { ?><option value="<?php echo $code['code']; ?>"><?php echo $code['code']; ?></option><?php
-} ?> <option value="321">Other</option> </select></td>';
-        htmlRows += '<td><select aria-label="Roperand[]" class="form-control  js-example-basic-single" id="roperand_'+count+'" name= "roperand[]" ><option value=""> Select </option><?php foreach ($operators as  $operator) { ?><option value="<?php echo $operator; ?>"><?php echo $operator; ?></option><?php
+        htmlRows += '<td id="rother_'+count+'"> <select aria-label="Rcode[]" class="form-control  js-example-basic-single" id="rcode__2"+count+'" name= "rcode[]" onchange="chekother(this.value,'+count+')" ><option value=""><?= __('Select') ?></option><?php foreach ($codes as  $code) { ?><option value="<?php echo $code['code']; ?>"><?php echo $code['code']; ?></option><?php
+} ?> <option value="321"><?= __('Other') ?></option> </select></td>';
+        htmlRows += '<td><select aria-label="Roperand[]" class="form-control  js-example-basic-single" id="roperand_'+count+'" name= "roperand[]" ><option value=""><?= __('Select') ?></option><?php foreach ($operators as  $operator) { ?><option value="<?php echo $operator; ?>"><?php echo $operator; ?></option><?php
 } ?></select></td>';
 
         htmlRows += '<td><input type="hidden" id="delete_value_'+count+'" value="0"><div  id="'+count+'"  class="close" onclick="deletestatickRows(this.id)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-trash"></i></div>';
@@ -155,7 +155,7 @@ $_SESSION['apply_js']['multiselest'] = '1';
 <div class="row col-lg-12">
     <div class="card">
         <div class="card-header table-card-header">
-            <h5>  Earnings</h5>
+            <h5><?= __('Earnings') ?></h5>
             <div class="card-header-right table-card-header ">
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                     <i class="icofont icofont-reply"></i>Back
@@ -170,7 +170,7 @@ $_SESSION['apply_js']['multiselest'] = '1';
                             <div class="form-group col-lg-6">
                                 <span>Category Check</span>
                                 <select aria-label="Category" class="form-select js-example-basic-single" id="kt_select2_41" name="category_id">
-                                    <option value="0"> Select Any one Category</option>
+                                    <option value="0"><?= __('Select Any one Category') ?></option>
                                     <?php foreach($salary_categories as $salary_categorie){ ?>
                                         <option value="<?php echo $salary_categorie['id']; ?>" <?php if($role['category_id']==$salary_categorie['id'] ){ echo "selected";
 } ?>> <?php echo $salary_categorie['name']; ?> </option>
@@ -193,11 +193,11 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                 <div id="code_select" <?php if($show_select == 'N'){ ?> style="display: none;" <?php
 } ?> >
                                 <select aria-label="Code Select" class="form-control js-example-basic-single" name="code_select" id="code_2" onchange="othervalchange(this.value)" >
-                                    <option value=""> Select Any</option>
+                                    <option value=""><?= __('Select Any') ?></option>
                                     <?php foreach($show_fixed as $keyfix=>$fixed){ ?>
                                         <option value="<?php echo $keyfix; ?>"><?php echo $fixed; ?></option>
                                     <?php } ?>
-                                    <option value="OT123">Other (Add New Text Label)</option>
+                                    <option value="OT123"><?= __('Other (Add New Text Label)') ?></option>
                                 </select>
                                 </div>
 
@@ -245,7 +245,7 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                 <div class="form-group col-lg-6">
                                     <span>Calculation Base</span>
                                     <select aria-label="Calculation Category" class="form-select js-example-basic-single" id="kt_select2_42" name="calculation_category">
-                                        <option value="0"> Select Any one Calculation Base</option>
+                                        <option value="0"><?= __('Select Any one Calculation Base') ?></option>
                                         <?php foreach($codes as $code){ ?>
                                             <option <?php if($role['calculation_category']==$code['code']){ echo "selected";
 } ?> value="<?php echo $code['code']; ?>"><?php echo $code['code']; ?></option>
@@ -260,7 +260,7 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                     <span>Calculation Link</span>
                                     <?php $links = array('PF'=>'Provident Fund', 'ESI'=>'ESI', 'PTX'=>'Professional Tax', 'GU'=>'Gratuity','EMPLOYERPF'=>'Employer Provident Fund','EMPLOYERESI'=>'Employer ESI', 'SPA'=>'SPA'); ?>
                                     <select aria-label="Calculation Link" class="form-select js-example-basic-single" id="kt_select2_42_2" name="calculation_link">
-                                        <option value="0"> Select Any one Calculation Link</option>
+                                        <option value="0"><?= __('Select Any one Calculation Link') ?></option>
                                         <?php foreach($links as $clink=>$link){ ?>
                                             <option <?php if($role['calculation_link']==$clink){ echo "selected";
 } ?> value="<?php echo $clink; ?>"><?php echo $link; ?></option>
@@ -275,10 +275,10 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                 <div class="col-lg-8">
                                     <table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem">
                                             <tr>
-                                                <th scope="col" class="" style="width: 35%;">System Code</th>
-                                                <th scope="col" class="thheader" style="width: 5%;">Operator</th>
-                                                <th scope="col" class="thheader" style="width: 35%;">System Code</th>
-                                                <th scope="col" class="thheader" style="width: 5%;">Operator</th>
+                                                <th scope="col" class="" style="width: 35%;"><?= __('System Code') ?></th>
+                                                <th scope="col" class="thheader" style="width: 5%;"><?= __('Operator') ?></th>
+                                                <th scope="col" class="thheader" style="width: 35%;"><?= __('System Code') ?></th>
+                                                <th scope="col" class="thheader" style="width: 5%;"><?= __('Operator') ?></th>
                                                 <th scope="col"></th>
                                             </tr>
                                             <?php  $tr_val = json_decode($role['formula_details'],1);
@@ -295,19 +295,19 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                                             <input aria-label="Lcode[]" type="text" class="form-control fitemRow" name= "lcode[]"  id="lcode_<?php echo $count; ?>" value="<?php echo $td['lcode']; ?>" >
                                                          <?php }else{ ?>
                                                         <select aria-label="Select option" class="form-control fitemRow form-select js-example-basic-single" id="lcode_<?php echo $count; ?>" name= "lcode[]" onchange="chekother(this.value,<?php echo $count; ?>)" >
-                                                            <option value=""> Select </option>
+                                                            <option value=""><?= __('Select') ?></option>
                                                             <?php foreach ($codes as  $code) { ?>
                                                                    <option value="<?php echo $code['code']; ?>" <?php if($td['lcode'] == $code['code']){ echo "selected";
 } ?> ><?php echo $code['code']; ?></option>
                                                                <?php } ?>
-                                                               <option value="123">Other</option>
+                                                               <option value="123"><?= __('Other') ?></option>
                                                         </select>
                                                         <?php } ?>
                                                     </td>
                                                     <td>
 
                                                         <select aria-label="Select option" class="form-control form-select js-example-basic-single" id="loperand_<?php echo $count; ?>" name= "loperand[]"  >
-                                                            <option value=""> Select </option>
+                                                            <option value=""><?= __('Select') ?></option>
                                                         <?php foreach ($operators as $dd) {  ?>
                                                             <option  <?php if($td['loperand'] == $dd){ echo "selected";
 } ?>  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php
@@ -320,18 +320,18 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                                             <input aria-label="Rcode[]" type="text" class="form-control" name= "rcode[]"  id="rcode_<?php echo $count; ?>" value="<?php echo $td['rcode']; ?>" >
                                                          <?php }else{ ?>
                                                         <select aria-label="Select option" class="form-control  form-select js-example-basic-single" id="rcode_<?php echo $count; ?>" name= "rcode[]" onchange="chekother(this.value,<?php echo $count; ?>)"  >
-                                                            <option value=""> Select </option>
+                                                            <option value=""><?= __('Select') ?></option>
                                                             <?php foreach ($codes as  $code) { ?>
                                                                    <option value="<?php echo $code['code']; ?>" <?php if($td['rcode'] == $code['code']){ echo "selected";
 } ?> ><?php echo $code['code']; ?></option>
                                                                <?php } ?>
-                                                                   <option value="321">Other</option>
+                                                                   <option value="321"><?= __('Other') ?></option>
                                                         </select>
                                                         <?php } ?>
                                                     </td>
                                                     <td>
                                                         <select aria-label="Select option" class="form-control form-select js-example-basic-single" id="roperand_<?php echo $count; ?>" name= "roperand[]"  >
-                                                            <option value=""> Select </option>
+                                                            <option value=""><?= __('Select') ?></option>
                                                             <?php foreach ($operators as $dd) {  ?>
                                                             <option  <?php if($td['roperand'] == $dd){ echo "selected";
 } ?>  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php
@@ -348,8 +348,8 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                             <?php } ?>
                                             <?php } ?>
                                     </table>
-                                    <button class="btn btn-success col-lg-4" id="addRows" type="button" onclick="addRowsearning()">+ Add More</button>&nbsp;&nbsp;
-                                <button type="button" class="btn btn-primary col-lg-4" onclick="createFormula()">Bulid Formula</button>
+                                    <button class="btn btn-success col-lg-4" id="addRows" type="button" onclick="addRowsearning()"><?= __('+ Add More') ?></button>&nbsp;&nbsp;
+                                <button type="button" class="btn btn-primary col-lg-4" onclick="createFormula()"><?= __('Bulid Formula') ?></button>
                                 </div>
                                 <div class="col-lg-4">
                                         <span>Show Formula</span>

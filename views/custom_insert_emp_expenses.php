@@ -204,28 +204,28 @@ function itemChange(valuu,val_id,seq){
     htmlRows += '</div>';
     htmlRows += '</div>';
     htmlRows += '<div class="row  m-t-15">';
-    htmlRows += '<div class=" col-lg-5" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Expense Date"><label for="expense_date_'+seqs+'">Date of Spend <span class="text-danger">*</span></label><input aria-label="Expense Date[]" type="text" id="expense_date_'+seqs+'" name="expense_date[]" class="form-control datepicker dateexpens expens_req mileage_req Perdiem_req" onchange="changedateexpense(this.value)" placeholder="" value="">';
+    htmlRows += '<div class=" col-lg-5" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Select Expense Date') ?>"><label for="expense_date_'+seqs+'"><?= __('Date of Spend') ?> <span class="text-danger">*</span></label><input aria-label="Expense Date[]" type="text" id="expense_date_'+seqs+'" name="expense_date[]" class="form-control datepicker dateexpens expens_req mileage_req Perdiem_req" onchange="changedateexpense(this.value)" placeholder="" value="">';
     htmlRows += '</div>'
 
 
-    htmlRows += '<div class="col-lg-7 expens_css_'+seqs+' w-full" style="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Category"><label for="select_category_exp'+seqs+'" class="d-block">Category <span class="text-danger">*</span></label>';
-    htmlRows += '<select aria-label="Category Exp[]" class="form-control form-select js-example-basic-single expens_req" id="select_category_exp'+seqs+'" name="category_exp[]"  ><option value="">Select Any One</option>';
+    htmlRows += '<div class="col-lg-7 expens_css_'+seqs+' w-full" style="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Select Category') ?>"><label for="select_category_exp'+seqs+'" class="d-block"><?= __('Category') ?> <span class="text-danger">*</span></label>';
+    htmlRows += '<select aria-label="Category Exp[]" class="form-control form-select js-example-basic-single expens_req" id="select_category_exp'+seqs+'" name="category_exp[]"  ><option value=""><?= __('Select Any One') ?></option>';
         <?php foreach($datacat as $dataca){ ?>
             htmlRows += '<option value="<?php echo $dataca['category_id']; ?>"><?php echo $dataca['category_name']; ?></option>';
            <?php } ?>
     htmlRows += '</select>';
     htmlRows += '</div>';
-    htmlRows += '<div class="col-lg-7 mileage_css_'+seqs+' w-full" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Mileage"><label for="select_category_mileage'+seqs+'" class="d-block">Mileage <span class="text-danger">*</span></label>';
+    htmlRows += '<div class="col-lg-7 mileage_css_'+seqs+' w-full" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Select Mileage') ?>"><label for="select_category_mileage'+seqs+'" class="d-block"><?= __('Mileage') ?> <span class="text-danger">*</span></label>';
     htmlRows += '<select aria-label="Category Mileage[]" class="form-control form-select js-example-basic-single mileage_req" id="select_category_mileage'+seqs+'" name="category_mileage[]" onchange="itemChange(this.options[this.selectedIndex].text,this.value,'+seqs+')" >';
-     htmlRows += '<option value="">Select Any One</option>';
+     htmlRows += '<option value=""><?= __('Select Any One') ?></option>';
         <?php foreach($mileageslist as $mileageslists){ ?>
              htmlRows += '<option value="<?php echo $mileageslists['id']; ?>" <?php echo $sub_details['category_id']==$mileageslists['id'] ? "selected":"" ;?>><?php echo $vehicle_types[$mileageslists['name']]." (".$mileageslists['amount'].")"; ?></option>';
         <?php } ?>
     htmlRows += '</select>';
     htmlRows += '</div>';
-    htmlRows += '<div class="col-lg-7 Perdiem_css_'+seqs+' w-full" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Perdiem"><label for="select_category_perd'+seqs+'" class="d-block">Per Diem <span class="text-danger">*</span></label>';
+    htmlRows += '<div class="col-lg-7 Perdiem_css_'+seqs+' w-full" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Select Perdiem') ?>"><label for="select_category_perd'+seqs+'" class="d-block"><?= __('Per Diem') ?> <span class="text-danger">*</span></label>';
     htmlRows += '<select aria-label="Category Perd[]" class="form-control form-select js-example-basic-single Perdiem_req" id="select_category_perd'+seqs+'" name="category_perd[]" onchange="itemChange(this.options[this.selectedIndex].text,this.value,'+seqs+')"  >';
-    htmlRows += '<option value="">Select Any One</option>';
+    htmlRows += '<option value=""><?= __('Select Any One') ?></option>';
         <?php foreach($perdiamarray as $perdieam){ ?>
             htmlRows += '<option value="<?php echo $perdieam['id']; ?>"><?php echo $countries[$perdieam['name']]." (".$perdieam['amount'].")"; ?></option>';
         <?php } ?>
@@ -234,7 +234,7 @@ function itemChange(valuu,val_id,seq){
     htmlRows += '</div>';
 
     htmlRows += '<div class="m-t-15">';
-    htmlRows += '<label for="select_trip_transaction_table_'+seqs+'" class="d-block">Trip Slot<span class="text-danger">*</span></label>';
+    htmlRows += '<label for="select_trip_transaction_table_'+seqs+'" class="d-block"><?= __('Trip Slot') ?> <span class="text-danger">*</span></label>';
     htmlRows += '<select aria-label="Select option" class="form-control form-select js-example-basic-single trip_transaction_table" id="select_trip_transaction_table_'+seqs+'" name="trip_transaction_table[]"  >';
         var trip_id = $("#trip_id").val();
         if(trip_id !=""){
@@ -256,22 +256,22 @@ function itemChange(valuu,val_id,seq){
     htmlRows += '</td>';
 
     htmlRows += '<td>';
-    htmlRows += '<input aria-label="Enter purpose" type="text" name="description[]" class="form-control expens_req mileage_req Perdiem_req" placeholder="Enter purpose" value="<?php echo $sub_details['description']; ?>" id="description_'+seqs+'">';
-    htmlRows += '<div class="expens_css_'+seqs+' mt-2"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Please Enter Amount" placeholder="0.00">';
-    htmlRows += '<label for="" class="mb-1">Amount <span class="text-danger">*</span></label>';
+    htmlRows += '<input aria-label="Enter purpose" type="text" name="description[]" class="form-control expens_req mileage_req Perdiem_req" placeholder="<?= __('Enter purpose') ?>" value="<?php echo $sub_details['description']; ?>" id="description_'+seqs+'">';
+    htmlRows += '<div class="expens_css_'+seqs+' mt-2"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Enter Amount') ?>" placeholder="0.00">';
+    htmlRows += '<label for="" class="mb-1"><?= __('Amount') ?> <span class="text-danger">*</span></label>';
 
     htmlRows += '<input aria-label="Rate Exp[]" type="text" name="rate_exp[]" class="form-control text-right rate_exp_row decimalnumberallowe expens_req" value="" onblur="calucateamount('+seqs+')" id="amount_popup_'+seqs+'_exp" >';
 
     htmlRows += '<input type="hidden" name="qty_exp[]" value="1"  class="form-control text-right " readonly id="qty_popup_'+seqs+'_exp" >';
     htmlRows += '</div>';
 
-    htmlRows += '<div class="mileage_css_'+seqs+'  mt-2" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Please Enter KM" placeholder="0.00">';
+    htmlRows += '<div class="mileage_css_'+seqs+'  mt-2" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Enter KM') ?>" placeholder="0.00">';
     htmlRows += '<label for="" class="mb-1">KM <span class="text-danger">*</span><span id="amount_popup_span_'+seqs+'_mileage" class="text-primary f-10"><?php echo "Rs. ".customeummarmonyformate($sub_details['rate']);?></span></label>';
     htmlRows += '<input type="hidden" name="rate_mileage[]" class="form-control text-right " value="<?php echo $sub_details['rate'];?>"  id="amount_popup__2"+seqs+'_mileage" >';
     htmlRows += '<input aria-label="Qty Mileage[]" type="text" name="qty_mileage[]"  onblur="calucateamount('+seqs+')" class="form-control text-right decimalnumberallowe mileage_req"  id="qty_popup__2"+seqs+'_mileage" value="">';
     htmlRows += '</div>';
 
-    htmlRows += '<div class="Perdiem_css_'+seqs+'  mt-2" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Please Days" placeholder="0.00">';
+    htmlRows += '<div class="Perdiem_css_'+seqs+'  mt-2" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Days') ?>" placeholder="0.00">';
     htmlRows += '<label for="" class="mb-1">Days <span class="text-danger">*</span><span id="amount_popup_span__2"+seqs+'_perd" class="text-primary f-10"><?php echo "Rs. ".customeummarmonyformate($sub_details['rate']);?></span></label>';
     htmlRows += '<input type="hidden" name="rate_perd[]"  class="form-control text-right" value="<?php echo $sub_details['rate'];?>"  id="amount_popup__3"+seqs+'_perd" >';
     htmlRows += '<input aria-label="Qty Perd[]" type="text" name="qty_perd[]"  onblur="calucateamount('+seqs+')" class="form-control text-right decimalnumberallowe Perdiem_req"  id="qty_popup__3"+seqs+'_perd" value="">';
@@ -280,16 +280,16 @@ function itemChange(valuu,val_id,seq){
 
 
     htmlRows += '<td>';
-    htmlRows += '<input aria-label="Walmart" type="text" name="merchant_name[]" class="form-control" placeholder="Walmart" value="<?php echo $sub_details['merchant_name']; ?>">';
-    htmlRows += '<label for=""  class="mt-2">Tax </label><input type="text"  class="form-control text-right rowamt_mileage tax_row decimalnumberallowe" onblur="calucateamount('+seqs+')" value="0" name="tax[]" id="tax_popup_'+seqs+'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Please Enter Tax" placeholder="0.00">';
+    htmlRows += '<input aria-label="Walmart" type="text" name="merchant_name[]" class="form-control" placeholder="<?= __('Walmart') ?>" value="<?php echo $sub_details['merchant_name']; ?>">';
+    htmlRows += '<label for="" class="mt-2"><?= __('Tax') ?></label><input type="text"  class="form-control text-right rowamt_mileage tax_row decimalnumberallowe" onblur="calucateamount('+seqs+')" value="0" name="tax[]" id="tax_popup_'+seqs+'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Enter Tax') ?>" placeholder="0.00">';
     htmlRows += '</td>';
     htmlRows += '<td>';
     htmlRows += '<input aria-label="Bill No[]" type="text" name="bill_no[]" class="form-control" value="">';
-    htmlRows += '<label for="" class="mt-2">Total</label><input type="text"  class="form-control text-right rowamt_mileage" value="" name="amount[]" id="total_popup_'+seqs+'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Total Expense" placeholder="0.00" readonly>';
+    htmlRows += '<label for="" class="mt-2"><?= __('Total') ?></label><input type="text"  class="form-control text-right rowamt_mileage" value="" name="amount[]" id="total_popup_'+seqs+'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Total Expense') ?>" placeholder="0.00" readonly>';
     htmlRows += '</td>';
 
     htmlRows += '<td>';
-    htmlRows += '<select aria-label="Payment Mode[]" class="form-control js-example-basic-single" name="payment_mode[]"><option value="">Select Any One</option>';
+    htmlRows += '<select aria-label="Payment Mode[]" class="form-control js-example-basic-single" name="payment_mode[]"><option value=""><?= __('Select Any One') ?></option>';
         <?php foreach($Payment_mode  as  $Paymentkey => $Payment_mode112){ ?>
             htmlRows += '<option value="<?php echo $Paymentkey; ?>" <?php echo $sub_details['payment_mode']==$Paymentkey?"selected":"" ;?>><?php echo $Payment_mode112; ?></option>';
         <?php } ?>
@@ -373,7 +373,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
     }
         ?>
     <div class="card-header">
-        <h5>Expenses</h5>
+        <h5><?= __('Expenses') ?></h5>
         <div class="card-header-right table-card-header m-r-50">
             <?php
                 echo $workflowsteps['workflow_btn'];
@@ -390,7 +390,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 
             ?>
             <a href="index.php?option=COM_VIEW_EMP_EXPENSES&Rid=<?php echo $_GET['Rid']; ?>" class="text-primary" target="_blank"><i class="ti ti-eye text-primary"></i> Report</a>
-            <button type="button" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i> Back </button>
+            <button type="button" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i> <?= __('Back') ?> </button>
         </div>
     </div>
     <!-- m-r-50 m-l-50  -->
@@ -406,9 +406,9 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
         <div class="row">
             <div class="col-lg-3">
                 <div class="form-group">
-                    <span class="form-label d-block">Trip Name</span>
+                    <span class="form-label d-block"><?= __('Trip Name') ?></span>
                     <select aria-label="Trip" class="form-select js-example-basic-single" name="trip_id" id="trip_id" onchange="selectTrips()">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach($trips as $trp){ ?>
                         <option value="<?php echo $trp['id'];?>" data-id="<?php echo $trp['trip_name']."||".$trp['transaction_no']."||".fromDate($trp['transaction_date'])."||".customeNumberFormate($trp['budget_amount']); ?>"   <?php echo (($_GET['TRIPID'] !="" && $_GET['TRIPID'] == $trp['id']) || $emp_expenses['trip_id']==$trp['id'])?"selected":"";?> ><?php echo $trp['transaction_no']." (".$trp['trip_name'].")"; ?></option>
                         <?php } ?>
@@ -416,40 +416,40 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 </div>
             </div>
             <div class="col-lg-2">
-                <span class="form-label">Transaction Date</span>
+                <span class="form-label"><?= __('Transaction Date') ?></span>
                 <input aria-label="Trans Expense Date" class="form-control datepicker" type="text" name="trans_expense_date" value="<?php echo fromDate($emp_expenses['expense_date']);?>">
             </div>
             <div class="col-lg-2">
-                <span class="form-label">Transaction Number</span>
+                <span class="form-label"><?= __('Transaction Number') ?></span>
                 <input aria-label="Expense Code" class="form-control" type="text" name="expense_code" value="<?php echo $emp_expenses['expense_code'];?>" readonly>
             </div>
 
 
             <div class="col-lg-2">
-                <span class="form-label text-right">Amount</span>
+                <span class="form-label text-right"><?= __('Amount') ?></span>
                 <input aria-label="Parent Amount" class="form-control text-right" type="text" name="parent_amount" id="parent_amount" value="<?php echo $emp_expenses['amount'];?>" readonly>
             </div>
             <div class="col-lg-1">
-                <span class="form-label text-right">Tax</span>
+                <span class="form-label text-right"><?= __('Tax') ?></span>
                 <input aria-label="Parent Tax Amount" class="form-control text-right" type="text" name="parent_tax_amount" id="parent_tax_amount" value="<?php echo $emp_expenses['tax_amount'];?>" readonly>
             </div>
             <div class="col-lg-2">
-                <span class="form-label text-right">Total</span>
+                <span class="form-label text-right"><?= __('Total') ?></span>
                 <input aria-label="Parent Total Amount" class="form-control text-right" type="text" name="parent_total_amount" id="parent_total_amount" value="<?php echo $emp_expenses['total_amount'];?>" readonly>
             </div>
             <div class="col-lg-8 trip_details" style="display: none;">
                 <div class=" mt-3">
                     <table class="table table-hover table-sm">
                         <tr>
-                            <th scope="col">Trip Name</th>
+                            <th scope="col"><?= __('Trip Name') ?></th>
                             <td id="trip_name_id"></td>
-                            <th scope="col">Transaction Number</th>
+                            <th scope="col"><?= __('Transaction Number') ?></th>
                             <td id="transaction_no_id"></td>
                         </tr>
                         <tr>
-                            <th scope="col">Transaction Date</th>
+                            <th scope="col"><?= __('Transaction Date') ?></th>
                             <td id="transaction_date_id"></td>
-                            <th scope="col">Budget</th>
+                            <th scope="col"><?= __('Budget') ?></th>
                             <td id="budget_amount_id"></td>
                         </tr>
                     </table>
@@ -466,11 +466,11 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                     <table class="table table-hover" id="expenseTable">
                         <thead style="">
                             <tr style="background-color: #eeeeee;">
-                                <th scope="col" style="width: 38%;">Expense Type <span class="text-danger">*</span></th>
-                                <th scope="col" style="width: 15%;">Purpose <span class="text-danger">*</span></th>
-                                <th scope="col" style="width: 15%;">Merchant Name</th>
-                                <th scope="col" style="width: 15%;">Bill Number</th>
-                                <th scope="col" style="width: 15%;">Payment Mode</th>
+                                <th scope="col" style="width: 38%;"><?= __('Expense Type') ?> <span class="text-danger">*</span></th>
+                                <th scope="col" style="width: 15%;"><?= __('Purpose') ?> <span class="text-danger">*</span></th>
+                                <th scope="col" style="width: 15%;"><?= __('Merchant Name') ?></th>
+                                <th scope="col" style="width: 15%;"><?= __('Bill Number') ?></th>
+                                <th scope="col" style="width: 15%;"><?= __('Payment Mode') ?></th>
                                 <th scope="col" class="text-end" style="width: 2%;"></th>
                             </tr>
                         </thead>
@@ -511,14 +511,14 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                         </div>
                                     </div>
                                     <div class="row  m-t-15">
-                                        <div class=" col-lg-5" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Expense Date">
-                                            <label for="expense_date_<?php echo $seqs; ?>">Date of Spend <span class="text-danger">*</span></label>
+                                        <div class=" col-lg-5" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Select Expense Date') ?>">
+                                            <label for="expense_date_<?php echo $seqs; ?>"><?= __('Date of Spend') ?> <span class="text-danger">*</span></label>
                                             <input aria-label="Expense Date[]" type="text" id="expense_date_<?php echo $seqs; ?>" name="expense_date[]" class="form-control datepicker dateexpens expens_req mileage_req Perdiem_req" onchange="changedateexpense(this.value,'<?php echo $seqs; ?>')" placeholder="" value="<?php echo fromDate($sub_details['expense_date']); ?>" required>
                                         </div>
-                                        <div class="col-lg-7 expens_css_<?php echo $seqs; ?> w-full" style="<?php echo $expens_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Category">
-                                            <label for="select_category_exp_<?php echo $seqs; ?>" class="d-block">Category <span class="text-danger">*</span></label>
+                                        <div class="col-lg-7 expens_css_<?php echo $seqs; ?> w-full" style="<?php echo $expens_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Select Category') ?>">
+                                            <label for="select_category_exp_<?php echo $seqs; ?>" class="d-block"><?= __('Category') ?> <span class="text-danger">*</span></label>
                                             <select aria-label="Select option" class="form-control form-select js-example-basic-single expens_req" id="select_category_exp_<?php echo $seqs; ?>" name="category_exp[]"  >
-                                               <option value="">Select Any One</option>
+                                               <option value=""><?= __('Select Any One') ?></option>
                                                 <?php foreach($datacat as $dataca){
 
                                                     if($dataca['parent_category_id'] == '0'){
@@ -534,19 +534,19 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                     <?php } ?>
                                             </select>
                                         </div>
-                                        <div class="col-lg-7 mileage_css_<?php echo $seqs; ?> w-full" style="<?php echo $mileage_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Mileage">
-                                             <label for="select_category_mileage_<?php echo $seqs; ?>" class="d-block">Mileage <span class="text-danger">*</span></label>
+                                        <div class="col-lg-7 mileage_css_<?php echo $seqs; ?> w-full" style="<?php echo $mileage_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Select Mileage') ?>">
+                                             <label for="select_category_mileage_<?php echo $seqs; ?>" class="d-block"><?= __('Mileage') ?> <span class="text-danger">*</span></label>
                                             <select aria-label="Select option" class="form-control form-select js-example-basic-single mileage_req" id="select_category_mileage_<?php echo $seqs; ?>" name="category_mileage[]" onchange="itemChange(this.options[this.selectedIndex].text,this.value,'<?php echo $seqs; ?>')" >
-                                                   <option value="">Select Any One</option>
+                                                   <option value=""><?= __('Select Any One') ?></option>
                                                    <?php foreach($mileageslist as $mileageslists){ ?>
                                                     <option value="<?php echo $mileageslists['id']; ?>" <?php echo $sub_details['category_id']==$mileageslists['id'] ? "selected":"" ;?>><?php echo $vehicle_types[$mileageslists['name']]." (".$mileageslists['amount'].")"; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                        <div class="col-lg-7 Perdiem_css_<?php echo $seqs; ?> w-full" style="<?php echo $Perdiem_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Perdiem">
-                                            <label for="select_category_perd_<?php echo $seqs; ?>" class="d-block">Per Diem <span class="text-danger">*</span></label>
+                                        <div class="col-lg-7 Perdiem_css_<?php echo $seqs; ?> w-full" style="<?php echo $Perdiem_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Select Perdiem') ?>">
+                                            <label for="select_category_perd_<?php echo $seqs; ?>" class="d-block"><?= __('Per Diem') ?> <span class="text-danger">*</span></label>
                                              <select aria-label="Select option" class="form-control form-select js-example-basic-single Perdiem_req" id="select_category_perd_<?php echo $seqs; ?>" name="category_perd[]" onchange="itemChange(this.options[this.selectedIndex].text,this.value,'<?php echo $seqs; ?>')"  >
-                                                    <option value="">Select Any One</option>
+                                                    <option value=""><?= __('Select Any One') ?></option>
                                                 <?php foreach($perdiamarray as $perdieam){ ?>
                                                     <option value="<?php echo $perdieam['id']; ?>" <?php echo $sub_details['category_id']==$perdieam['id'] ? "selected":"" ;?>><?php echo $countries[$perdieam['name']]." (".$perdieam['amount'].")"; ?></option>
                                                 <?php } ?>
@@ -555,9 +555,9 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                     </div>
 
                                     <div class="m-t-15 ">
-                                        <label for="select_trip_transaction_table_<?php echo $seqs; ?>" class="d-block">Trip Slot</label>
+                                        <label for="select_trip_transaction_table_<?php echo $seqs; ?>" class="d-block"><?= __('Trip Slot') ?></label>
                                         <select aria-label="Select option" class="form-control form-select js-example-basic-single trip_transaction_table" id="select_trip_transaction_table_<?php echo $seqs; ?>" name="trip_transaction_table[]"  >
-                                            <option value="">Select Any One</option>
+                                            <option value=""><?= __('Select Any One') ?></option>
                                            <?php  if(count((array)$local_trips) !=0){ ?>
                                             <optgroup label="Journey">
                                                 <?php foreach($local_trips as $trplocal){   $selectedtrpplan = "";
@@ -593,38 +593,38 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                     </div>
                                 </td>
                                 <td>
-                                    <input aria-label="Enter purpose" type="text" name="description[]" class="form-control expens_req mileage_req Perdiem_req" placeholder="Enter purpose" value="<?php echo $sub_details['description']; ?>" id="description_<?php echo $seqs; ?>">
+                                    <input aria-label="Enter purpose" type="text" name="description[]" class="form-control expens_req mileage_req Perdiem_req" placeholder="<?= __('Enter purpose') ?>" value="<?php echo $sub_details['description']; ?>" id="description_<?php echo $seqs; ?>">
 
-                                    <div class="expens_css_<?php echo $seqs; ?> mt-2" style="<?php echo $expens_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Please Enter Amount" placeholder="0.00">
-                                        <label for="" class="mb-1">Amount <span class="text-danger">*</span></label>
+                                    <div class="expens_css_<?php echo $seqs; ?> mt-2" style="<?php echo $expens_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Enter Amount') ?>" placeholder="0.00">
+                                        <label for="" class="mb-1"><?= __('Amount') ?> <span class="text-danger">*</span></label>
                                         <input aria-label="Rate Exp[]" type="text" name="rate_exp[]" class="form-control text-right rate_exp_row decimalnumberallowe expens_req" value="<?php echo $sub_details['rate'];?>" onblur="calucateamount('<?php echo $seqs; ?>')" id="amount_popup_<?php echo $seqs; ?>_exp" >
                                         <input type="hidden" name="qty_exp[]" value="1"  class="form-control text-right " readonly id="qty_popup_<?php echo $seqs; ?>_exp" >
                                     </div>
-                                    <div class="mileage_css_<?php echo $seqs; ?>  mt-2" style="<?php echo $mileage_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Please Enter KM" placeholder="0.00">
+                                    <div class="mileage_css_<?php echo $seqs; ?>  mt-2" style="<?php echo $mileage_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Enter KM') ?>" placeholder="0.00">
                                         <label for="" class="mb-1">KM <span class="text-danger">*</span><span id="amount_popup_span_<?php echo $seqs; ?>_mileage" class="text-primary f-10"><?php echo "Rs. ".customeummarmonyformate($sub_details['rate']);?></span></label>
                                         <input type="hidden" name="rate_mileage[]" class="form-control text-right " value="<?php echo $sub_details['rate'];?>"  id="amount_popup_<?php echo $seqs; ?>_mileage" >
                                         <input aria-label="Qty Mileage[]" type="text" name="qty_mileage[]"  onblur="calucateamount('<?php echo $seqs; ?>')" class="form-control text-right decimalnumberallowe mileage_req"  id="qty_popup_<?php echo $seqs; ?>_mileage" value="<?php echo $sub_details['qty'];?>">
                                     </div>
-                                    <div class="Perdiem_css_<?php echo $seqs; ?>  mt-2" style="<?php echo $Perdiem_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Please Days" placeholder="0.00">
+                                    <div class="Perdiem_css_<?php echo $seqs; ?>  mt-2" style="<?php echo $Perdiem_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Days') ?>" placeholder="0.00">
                                         <label for="" class="mb-1">Days <span class="text-danger">*</span><span id="amount_popup_span_<?php echo $seqs; ?>_perd" class="text-primary f-10"><?php echo "Rs. ".customeummarmonyformate($sub_details['rate']);?></span></label>
                                         <input type="hidden" name="rate_perd[]"  class="form-control text-right" value="<?php echo $sub_details['rate'];?>"  id="amount_popup_<?php echo $seqs; ?>_perd" >
                                         <input aria-label="Qty Perd[]" type="text" name="qty_perd[]"  onblur="calucateamount('<?php echo $seqs; ?>')" class="form-control text-right decimalnumberallowe Perdiem_req"  id="qty_popup_<?php echo $seqs; ?>_perd" value="<?php echo $sub_details['qty'];?>">
                                     </div>
                                 </td>
                                 <td>
-                                    <input aria-label="Walmart" type="text" name="merchant_name[]" class="form-control" placeholder="Walmart" value="<?php echo $sub_details['merchant_name']; ?>">
-                                    <label for=""  class="mt-2">Tax </label>
-                                    <input aria-label="Input field" type="text"  class="form-control text-right rowamt_mileage tax_row decimalnumberallowe" onblur="calucateamount('<?php echo $seqs; ?>')" value="<?php echo $sub_details['tax_amount']!=""?$sub_details['tax_amount']:"0";?>" name="tax[]" id="tax_popup_<?php echo $seqs; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Please Enter Tax" placeholder="0.00">
+                                    <input aria-label="Walmart" type="text" name="merchant_name[]" class="form-control" placeholder="<?= __('Walmart') ?>" value="<?php echo $sub_details['merchant_name']; ?>">
+                                    <label for="" class="mt-2"><?= __('Tax') ?></label>
+                                    <input aria-label="Input field" type="text"  class="form-control text-right rowamt_mileage tax_row decimalnumberallowe" onblur="calucateamount('<?php echo $seqs; ?>')" value="<?php echo $sub_details['tax_amount']!=""?$sub_details['tax_amount']:"0";?>" name="tax[]" id="tax_popup_<?php echo $seqs; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Enter Tax') ?>" placeholder="0.00">
                                 </td>
 
                                 <td>
                                     <input aria-label="Bill No[]" type="text" name="bill_no[]" class="form-control" value="<?php echo $sub_details['bill_no']; ?>">
-                                    <label for="" class="mt-2">Total</label>
-                                    <input aria-label="Input field" type="text"  class="form-control text-right rowamt_mileage event_disabled" value="<?php echo $sub_details['expense_amount'];?>" name="amount[]" id="total_popup_<?php echo $seqs; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Total Expense" placeholder="0.00"  required>
+                                    <label for="" class="mt-2"><?= __('Total') ?></label>
+                                    <input aria-label="Input field" type="text"  class="form-control text-right rowamt_mileage event_disabled" value="<?php echo $sub_details['expense_amount'];?>" name="amount[]" id="total_popup_<?php echo $seqs; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Total Expense') ?>" placeholder="0.00"  required>
                                 </td>
                                 <td>
                                     <select aria-label="Payment Mode[]" class="form-control js-example-basic-single" name="payment_mode[]">
-                                          <option value="">Select Any One</option>
+                                          <option value=""><?= __('Select Any One') ?></option>
                                         <?php foreach($Payment_mode  as  $Paymentkey => $Payment_mode11){ ?>
                                             <option value="<?php echo $Paymentkey; ?>" <?php echo $sub_details['payment_mode']==$Paymentkey?"selected":"" ;?>><?php echo $Payment_mode11; ?></option>
                                       <?php } ?>
@@ -650,7 +650,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                             <tr>
                                 <td colspan="12">
                                     <button type="button" class="btn btn-primary" id="add_expense" onclick="addExpenseRow()">
-                                        <i class="fa fa-plus"></i> Add More
+                                        <i class="fa fa-plus"></i> <?= __('Add More') ?>
                                     </button>
                                 </td>
                             </tr>
@@ -659,7 +659,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 </div>
                 <div class="mt-2">
                     <input type="hidden" name="submit_value" value="submit_expense">
-                    <button type="button" class="btn btn-primary"  <?php echo $disable; ?> onclick="submitempexpenseform()">Submit</button>
+                    <button type="button" class="btn btn-primary"  <?php echo $disable; ?> onclick="submitempexpenseform()"><?= __('Submit') ?></button>
                 </div>
             </div>
         </div>

@@ -14,13 +14,13 @@ $dcurr = $_POST['dcurr'];
         count++;
         var htmlRows = '';
 
-        htmlRows += '<div class="row align-items-center sfitemRow" id="static_div_'+count+'" style="margin-top: 10px;"><div class="col-lg-3"><select aria-label="From Currency[]" class="form-control form-select js-example-basic-single" name="from_currency[]" id="from_currency_'+count+'"><option value=""> Select Any One</option><?php foreach($currency as $currenc){ ?><option <?php if($dcurr == $currenc[id]){ echo "selected";
+        htmlRows += '<div class="row align-items-center sfitemRow" id="static_div_'+count+'" style="margin-top: 10px;"><div class="col-lg-3"><select aria-label="From Currency[]" class="form-control form-select js-example-basic-single" name="from_currency[]" id="from_currency_'+count+'"><option value=""><?= __('Select Any One') ?></option><?php foreach($currency as $currenc){ ?><option <?php if($dcurr == $currenc[id]){ echo "selected";
 } ?> value="<?php echo $currenc[id]; ?>"> <?php echo $currenc[currency_name]." - ".$currenc[currency_short_code]; ?></option><?php
 } ?></select></div>';
-         htmlRows += '<div class="col-lg-3"><select aria-label="To Currency[]" class="form-control form-select js-example-basic-single" name="to_currency[]" id="to_currency_'+count+'"><option value=""> Select Any One</option><?php foreach($currency as $currenc){ ?><option   value="<?php echo $currenc[id]; ?>"> <?php echo $currenc[currency_name]." - ".$currenc[currency_short_code]; ?></option><?php
+         htmlRows += '<div class="col-lg-3"><select aria-label="To Currency[]" class="form-control form-select js-example-basic-single" name="to_currency[]" id="to_currency_'+count+'"><option value=""><?= __('Select Any One') ?></option><?php foreach($currency as $currenc){ ?><option   value="<?php echo $currenc[id]; ?>"> <?php echo $currenc[currency_name]." - ".$currenc[currency_short_code]; ?></option><?php
 } ?></select></div>';
         htmlRows += '<div class="col-lg-3"><input aria-label="0.00" type="text" class="form-control"  id="ex_rate_'+count+'"  value="" placeholder="0.00"  name="ex_rate[]"></div><div class="col-lg-2"><input aria-label="Ex Date[]" type="text"class="form-control datepicker"  id="ex_date_'+count+'"  value=""   name="ex_date[]"></div>';
-        htmlRows += '<div class="col-lg-1"><input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)">Delete</button></div></div>';
+        htmlRows += '<div class="col-lg-1"><input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)"><?= __('Delete') ?></button></div></div>';
         console.log(htmlRows);
         $('#append_staticks').append(htmlRows);
         $(".js-example-basic-single").select2();
@@ -30,7 +30,7 @@ $dcurr = $_POST['dcurr'];
 </script>
 <div class="modal-header card-header">
 
-    <h5 class="text-white">Currency Convertor</h5>
+    <h5 class="text-white"><?= __('Currency Convertor') ?></h5>
 
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
@@ -43,16 +43,16 @@ $dcurr = $_POST['dcurr'];
                 <div id='append_statick'>
                     <div class="row align-items-center" style="margin-top: 10px;">
                         <div class="col-lg-3">
-                            <span><b>From Currency</b></span>
+                            <span><b><?= __('From Currency') ?></b></span>
                         </div>
                         <div class="col-lg-3">
-                            <span><b>To Currency</b></span>
+                            <span><b><?= __('To Currency') ?></b></span>
                         </div>
                         <div class="col-lg-3">
-                            <span><b>Exachange Rate </b></span>
+                            <span><b><?= __('Exachange Rate') ?></b></span>
                         </div>
                         <div class="col-lg-2">
-                            <span><b>Date</b></span>
+                            <span><b><?= __('Date') ?></b></span>
                         </div>
                         <div class="col-lg-1">
                             <span><b></b></span>
@@ -63,7 +63,7 @@ $dcurr = $_POST['dcurr'];
                         <div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
                             <div class="col-lg-3">
                                 <select aria-label="From Currency[]" class="form-control form-select js-example-basic-single" name="from_currency[]" id="from_currency_<?php echo $i; ?>">
-                                    <option value=""> Select Any One</option>
+                                    <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($currency as $currenc){ ?>
                                         <option <?php if($dcurr == $currenc['id']){ echo "selected";
 } ?> value="<?php echo $currenc['id']; ?>"> <?php echo $currenc['currency_name']." - ".$currenc['currency_short_code']; ?></option>
@@ -72,7 +72,7 @@ $dcurr = $_POST['dcurr'];
                             </div>
                             <div class="col-lg-3">
                                 <select aria-label="To Currency[]" class="form-control form-select js-example-basic-single" name="to_currency[]" id="to_currency_<?php echo $i; ?>">
-                                    <option value=""> Select Any One</option>
+                                    <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($currency as $currenc){ ?>
                                         <option   value="<?php echo $currenc['id']; ?>"> <?php echo $currenc['currency_name']." - ".$currenc['currency_short_code']; ?></option>
                                     <?php } ?>
@@ -86,20 +86,20 @@ $dcurr = $_POST['dcurr'];
                             </div>
                             <div class="col-lg-1">
                                 <input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >
-                                <button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)">Delete</button>
+                                <button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)"><?= __('Delete') ?></button>
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="row align-items-center m-l-5 mt-4  col-lg-2" >
-                    <button class="btn btn-success" id="addstatickRows" type="button" onclick="addstatickRowsadataq()">+ Add More</button>&nbsp;&nbsp;
+                    <button class="btn btn-success" id="addstatickRows" type="button" onclick="addstatickRowsadataq()"><?= __('+ Add More') ?></button>&nbsp;&nbsp;
                 </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Submit</button>
+        <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?= __('Close') ?></button>
+        <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?= __('Submit') ?></button>
     </div>
 
 </form>

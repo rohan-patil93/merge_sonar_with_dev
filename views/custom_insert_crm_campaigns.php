@@ -164,7 +164,7 @@ $company_with_contacts = $res['company_with_contacts'];
             <i class="ti-close icon-x"></i>
         </a>
         <div class="right-icon-control">
-            <h4 class="text-dark f-20 f-w-600 text-left">Add Campaign</h4>
+            <h4 class="text-dark f-20 f-w-600 text-left"><?= __('Add Campaign') ?></h4>
         </div>
     </div>
     <div class="main-friend-list card-body form-design custom-scroll" style="height: 600px">
@@ -174,18 +174,18 @@ $company_with_contacts = $res['company_with_contacts'];
                 <input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>">
                  <input type="hidden" name="transaction_table" id="transaction_table" value="<?php echo $transaction_table; ?>">
                 <div class="bg-white p-3 b-radius-10">
-                    <h5 class="f-18 f-w-600 bg-gray p-2">Campaign Information</h5>
+                    <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Campaign Information') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label">Campaign Name<span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="campaign_name" class="form-control requried_field" type="text" name="campaign_name" placeholder="campaign_name" value="<?php echo $transaction['campaign_name']; ?>">
+                            <input aria-label="campaign_name" class="form-control requried_field" type="text" name="campaign_name" placeholder="<?= __('Campaign Name') ?>" value="<?php echo $transaction['campaign_name']; ?>">
                         </div>
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label">Originator <span class="requried">*</span></span>
                              <span class="d-block error-message text-danger"></span>
                             <select aria-label="Originator" class="form-control js-example-basic-single requried_field" name="originator">
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($application_users as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['originator'] == $uval['id'] || ($transaction['originator'] == "" && $_SESSION['userid']== $uval['id']))?"selected":"";?>><?php echo $uval['display_name']; ?></option>
                                 <?php } ?>
@@ -213,37 +213,37 @@ $company_with_contacts = $res['company_with_contacts'];
                         <div class="col-lg-6 form-group">
                             <span class="form-label">Start Sate <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="Start Date" class="form-control startdatepicker requried_field" type="text" name="campaign_start_date" placeholder="Start Date" value="<?php echo $transaction['campaign_start_date']; ?>">
+                            <input aria-label="Start Date" class="form-control startdatepicker requried_field" type="text" name="campaign_start_date" placeholder="<?= __('Start Date') ?>" value="<?php echo $transaction['campaign_start_date']; ?>">
                         </div>
                         <div class="col-lg-6 form-group">
                             <span class="form-label">End Date <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="End Date" class="form-control requried_field enddatepicker" type="text" name="campaign_end_date" placeholder="End Date" value="<?php echo $transaction['campaign_end_date']; ?>">
+                            <input aria-label="End Date" class="form-control requried_field enddatepicker" type="text" name="campaign_end_date" placeholder="<?= __('End Date') ?>" value="<?php echo $transaction['campaign_end_date']; ?>">
                         </div>
                         <div class="col-lg-6 form-group">
-                            <span class="form-label">Total Budget </span>
-                            <input aria-label="Total Budget" class="form-control" type="number" name="total_budget" placeholder="Total Budget" value="<?php echo $transaction['total_budget']; ?>">
+                            <span class="form-label"><?= __('Total Budget') ?></span>
+                            <input aria-label="Total Budget" class="form-control" type="number" name="total_budget" placeholder="<?= __('Total Budget') ?>" value="<?php echo $transaction['total_budget']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
-                            <span class="form-label">Redirect URL</span>
-                            <input aria-label="Website URL" class="form-control " type="text" name="redirect_url" placeholder="Website URL" value="<?php echo $transaction['redirect_url']; ?>">
+                            <span class="form-label"><?= __('Redirect URL') ?></span>
+                            <input aria-label="Website URL" class="form-control " type="text" name="redirect_url" placeholder="<?= __('Website URL') ?>" value="<?php echo $transaction['redirect_url']; ?>">
                         </div>
 
                          <div class="col-lg-6  form-group">
-                            <span class="form-label">Contact Email Id</span>
+                            <span class="form-label"><?= __('Contact Email Id') ?></span>
 
-                            <input aria-label="Contact Email" class="form-control" type="email" name="contact_email_id" placeholder="Contact Email" value="<?php echo $transaction['contact_email_id']; ?>">
+                            <input aria-label="Contact Email" class="form-control" type="email" name="contact_email_id" placeholder="<?= __('Contact Email') ?>" value="<?php echo $transaction['contact_email_id']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
-                            <span class="form-label">Contact No.</span>
-                            <input aria-label="Contact No." class="form-control" type="phone" name="contact_no" placeholder="Contact No." value="<?php echo $transaction['contact_no']; ?>">
+                            <span class="form-label"><?= __('Contact No.') ?></span>
+                            <input aria-label="Contact No." class="form-control" type="phone" name="contact_no" placeholder="<?= __('Contact No.') ?>" value="<?php echo $transaction['contact_no']; ?>">
                         </div>
                         <div class="col-lg-6">
-                            <span class="form-label">Image</span>
+                            <span class="form-label"><?= __('Image') ?></span>
                             <div class="col-lg-9 col-xl-6 ">
                                 <div class="profile-pic">
                                     <label class="-label" for="display_image">
-                                        <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                                        <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
                                     </label>
                                     <input type="file" name="image" id="display_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
                                     <img src="<?php echo "uploads/all/".$transaction['image'] ; ?>" id="outputdisplay_image" width="200" alt="Attachment Preview" />
@@ -252,15 +252,15 @@ $company_with_contacts = $res['company_with_contacts'];
                             </div>
                         </div>
                         <div class="col-lg-12 form-group">
-                            <span class="form-label">Description</span>
+                            <span class="form-label"><?= __('Description') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Remark" name="remark" placeholder="Remark" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
+                                <textarea aria-label="Remark" name="remark" placeholder="<?= __('Remark') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
                             </div>
                         </div>
                    </div>
                     <div class="mt-2">
-                        <button type="button" class="btn btn-primary waves-effect waves-light sbt_loading_en_dis" onclick="submitLeadForm()">Submit</button>
-                        <button type="reset" class="btn btn-default waves-effect " data-bs-dismiss="modal">Reset</button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light sbt_loading_en_dis" onclick="submitLeadForm()"><?= __('Submit') ?></button>
+                        <button type="reset" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Reset') ?></button>
                     </div>
                 </div>
                 </form>

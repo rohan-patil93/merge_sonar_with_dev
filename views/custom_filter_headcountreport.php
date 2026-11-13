@@ -69,7 +69,7 @@ if (!empty($emp_list_names_raw)) {
 ?>   
 <div class="modal-header">
     <h5 class="modal-title">Filter Options</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
         <i aria-hidden="true" class="ki ki-close"></i>
     </button>
 </div>
@@ -129,20 +129,20 @@ if (!empty($emp_list_names_raw)) {
                                                     </g>
                                                 </svg>
                                             </span>
-                                            <div class="card-label pl-4"><?php echo htmlspecialchars($filter['filter_name'] ?? '', ENT_QUOTES); ?></div>
+                                            <div class="card-label pl-4"><?php echo htmlspecialchars(__($filter['filter_name'] ?? ''), ENT_QUOTES); ?></div>
                                         </div>
                                     </div>
                                     <div id="aaa<?php echo htmlspecialchars((string)$targetid, ENT_QUOTES); ?>" class="collapse mb-5" data-parent="#accordionExample7">
                                         <?php
                                         $table_details = dyanamicselectdata($targettable, $targettable_field);
                                         ?>
-                                        <select onchange="selectemployee()" class="form-control mt-5" id="kt_select2_4<?php echo $index;?>" name="empstatus[]" multiple="multiple" aria-label="<?php echo htmlspecialchars($filter['filter_name'] ?? 'Filter Option', ENT_QUOTES); ?>">
+                                        <select onchange="selectemployee()" class="form-control mt-5" id="kt_select2_4<?php echo $index;?>" name="empstatus[]" multiple="multiple" aria-label="<?php echo htmlspecialchars(__($filter['filter_name'] ?? 'Filter Option'), ENT_QUOTES); ?>">
                                             <?php if (!empty($table_details) && is_array($table_details)) {
                                                 foreach ($table_details as $key => $value) {
                                                     $isSelected = (!empty($selectedlist[$targettable_field]) && in_array($key, array_keys((array)$selectedlist[$targettable_field])));
                                                     $selectedAttr = $isSelected ? 'selected="selected"' : '';
                                             ?>
-                                                <option value="<?php echo htmlspecialchars((string)$key, ENT_QUOTES); ?>" <?php echo $selectedAttr; ?>><?php echo htmlspecialchars((string)$value, ENT_QUOTES); ?></option>
+                                                <option value="<?php echo htmlspecialchars((string)$key, ENT_QUOTES); ?>" <?php echo $selectedAttr; ?>><?php echo htmlspecialchars(__((string)$value), ENT_QUOTES); ?></option>
                                             <?php }
                                             } ?>
                                         </select>
@@ -161,8 +161,8 @@ if (!empty($emp_list_names_raw)) {
         </div>
     </div>
     <div class="modal-footer mt-5">
-        <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary mr-2" onclick="submitrom()">Select</button>
+        <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?php echo __('Close'); ?></button>
+        <button type="button" class="btn btn-primary mr-2" onclick="submitrom()"><?php echo __('Select'); ?></button>
     </div>
 </form>
 <script type="text/javascript">

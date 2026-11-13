@@ -71,10 +71,10 @@ foreach ($account_groups as $ag) {
 <!-- Pradeep HTML Start here -->
 <div class="card">
     <div class="card-header">
-        <h4>Create Service</h4>
+        <h4><?php echo __('Create Service'); ?></h4>
         <div class="card-header-right">
             <a href="account-management.html" class="btn waves-effect waves-light btn-primary">
-                <i class="fa fa-reply text-white"></i> Back
+                <i class="fa fa-reply text-white"></i> <?php echo __('Back'); ?>
             </a>
         </div>
     </div>
@@ -84,20 +84,20 @@ foreach ($account_groups as $ag) {
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-header">
-                    <h5>Basic Information</h5>
+                    <h5><?php echo __('Basic Information'); ?></h5>
                     <input name="rid" class="form-control" type="hidden" value="<?php echo $details['id'] != "" ? $details['id'] : ""; ?>">
                 </div>
                 <div class="card-body">
                     <div class="row mt-4">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Service Name</label>
+                                <label class="form-label"><?php echo __('Service Name'); ?></label>
                                 <select name="account_group_id" class="form-control js-example-basic-single" title="Account Group Id" aria-label="Account Group Id">
-                                    <option value="0">Select Any One</option>
+                                    <option value="0"><?php echo __('Select Any One'); ?></option>
                                     <?php foreach ($ag_list as $id => $group_name): ?>
                                         <option value="<?php echo $id; ?>"
                                             <?php if ($details['account_group_id'] == $id) echo 'selected'; ?>>
-                                            <?php echo $group_name; ?>
+                                            <?php echo htmlspecialchars(__($group_name ?? '')); ?>
                                         </option>
                                     <?php endforeach; ?>
 
@@ -106,20 +106,20 @@ foreach ($account_groups as $ag) {
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Service Company Name</label>
-                                <input name="account_name" class="form-control" type="text" placeholder="Enter Service Company Name" value="<?php echo $details['account_name'] ?? ""; ?>" title="Enter Service Company Name" aria-label="Enter Service Company Name">
+                                <label class="form-label"><?php echo __('Service Company Name'); ?></label>
+                                <input name="account_name" class="form-control" type="text" placeholder="<?php echo __('Enter Service Company Name'); ?>" value="<?php echo $details['account_name'] ?? ""; ?>" title="<?php echo __('Enter Service Company Name'); ?>" aria-label="<?php echo __('Enter Service Company Name'); ?>">
                             </div>
                         </div>
                         
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Payable/Reciveable</label>
+                                <label class="form-label"><?php echo __('Payable/Reciveable'); ?></label>
                                 <select name="payble_or_reciveable" class="form-control js-example-basic-single" title="Payble Or Reciveable" aria-label="Payble Or Reciveable">
-                                    <option>Select Any One</option>
+                                    <option><?php echo __('Select Any One'); ?></option>
                                     <?php foreach ($gcd_list as $genc_detail_code => $genc_detail_name): ?>
                                         <option value="<?php echo $genc_detail_code; ?>"
                                             <?php if ($details['payble_or_reciveable'] == $genc_detail_code) echo 'selected'; ?>>
-                                            <?php echo $genc_detail_name; ?>
+                                            <?php echo htmlspecialchars(__($genc_detail_name ?? '')); ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
@@ -127,42 +127,42 @@ foreach ($account_groups as $ag) {
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Email ID</label>
-                                <input name="email_id" class="form-control" type="text" placeholder="Enter E-mail ID" value="<?php echo $details['email_id'] ?? ''; ?>" title="Enter E-mail ID" aria-label="Enter E-mail ID">
+                                <label class="form-label"><?php echo __('Email ID'); ?></label>
+                                <input name="email_id" class="form-control" type="text" placeholder="<?php echo __('Enter E-mail ID'); ?>" value="<?php echo $details['email_id'] ?? ''; ?>" title="<?php echo __('Enter E-mail ID'); ?>" aria-label="<?php echo __('Enter E-mail ID'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Mobile No</label>
-                                <input name="mobile_no" class="form-control" type="text" placeholder="Enter Mobile No" value="<?php echo $details['mobile_no'] ?? ''; ?>" title="Enter Mobile No" aria-label="Enter Mobile No">
+                                <label class="form-label"><?php echo __('Mobile No'); ?></label>
+                                <input name="mobile_no" class="form-control" type="text" placeholder="<?php echo __('Enter Mobile No'); ?>" value="<?php echo $details['mobile_no'] ?? ''; ?>" title="<?php echo __('Enter Mobile No'); ?>" aria-label="<?php echo __('Enter Mobile No'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Alternative No</label>
-                                <input name="alternative_no" class="form-control" type="text" placeholder="Enter Alternative No" value="<?php echo $details['alternative_no'] ?? ''; ?>" title="Enter Alternative No" aria-label="Enter Alternative No">
+                                <label class="form-label"><?php echo __('Alternative No'); ?></label>
+                                <input name="alternative_no" class="form-control" type="text" placeholder="<?php echo __('Enter Alternative No'); ?>" value="<?php echo $details['alternative_no'] ?? ''; ?>" title="<?php echo __('Enter Alternative No'); ?>" aria-label="<?php echo __('Enter Alternative No'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Address Line 1</label>
-                                <textarea name="address_line1" class="form-control" placeholder="Enter Address" title="Enter Address" aria-label="Enter Address"><?php echo $details['address_line1'] ?? ''; ?></textarea>
+                                <label class="form-label"><?php echo __('Address Line 1'); ?></label>
+                                <textarea name="address_line1" class="form-control" placeholder="<?php echo __('Enter Address'); ?>" title="<?php echo __('Enter Address'); ?>" aria-label="<?php echo __('Enter Address'); ?>"><?php echo $details['address_line1'] ?? ''; ?></textarea>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Address Line 2</label>
-                                <textarea name="address_line2" class="form-control" placeholder="Enter Address" title="Enter Address" aria-label="Enter Address"><?php echo $details['address_line2'] ?? ''; ?></textarea>
+                                <label class="form-label"><?php echo __('Address Line 2'); ?></label>
+                                <textarea name="address_line2" class="form-control" placeholder="<?php echo __('Enter Address'); ?>" title="<?php echo __('Enter Address'); ?>" aria-label="<?php echo __('Enter Address'); ?>"><?php echo $details['address_line2'] ?? ''; ?></textarea>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label class="form-label">Country</label>
-                                <select name="country_id" id="country_id" class="form-control js-example-basic-single" onchange="updateStatesandCities(this)" data-selected-state="<?php echo $details['state_id']; ?>" data-selected-city="<?php echo $details['city_id']; ?>" title="Country Id" aria-label="Country Id">
-                                    <option value="0">Select Any One</option>
+                                <label class="form-label"><?php echo __('Country'); ?></label>
+                                <select name="country_id" id="country_id" class="form-control js-example-basic-single" onchange="updateStatesandCities(this)" data-selected-state="<?php echo $details['state_id']; ?>" data-selected-city="<?php echo $details['city_id']; ?>" title="<?php echo __('Country Id'); ?>" aria-label="<?php echo __('Country Id'); ?>">
+                                    <option value="0"><?php echo __('Select Any One'); ?></option>
                                     <?php foreach ($states_list as $id => $country_name): ?>
                                         <option value="<?php echo $id; ?>" <?php if ($details['country_id'] == $id) echo 'selected'; ?>>
-                                            <?php echo $country_name; ?>
+                                            <?php echo htmlspecialchars(__($country_name ?? '')); ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
@@ -170,85 +170,85 @@ foreach ($account_groups as $ag) {
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label class="form-label">State</label>
-                                <select name="state_id" id="state_id" class="form-control js-example-basic-single" onchange="updateStatesandCities(this)" title="State Id" aria-label="State Id">
-                                    <option value="0">Select Any One</option>
+                                <label class="form-label"><?php echo __('State'); ?></label>
+                                <select name="state_id" id="state_id" class="form-control js-example-basic-single" onchange="updateStatesandCities(this)" title="<?php echo __('State Id'); ?>" aria-label="<?php echo __('State Id'); ?>">
+                                    <option value="0"><?php echo __('Select Any One'); ?></option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label class="form-label">City</label>
-                                <select name="city_id" id="city_id" class="form-control js-example-basic-single" title="City Id" aria-label="City Id">
-                                    <option value="0">Select Any One</option>
+                                <label class="form-label"><?php echo __('City'); ?></label>
+                                <select name="city_id" id="city_id" class="form-control js-example-basic-single" title="<?php echo __('City Id'); ?>" aria-label="<?php echo __('City Id'); ?>">
+                                    <option value="0"><?php echo __('Select Any One'); ?></option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label class="form-label">Pin</label>
-                                <input name="pin" class="form-control" type="text" placeholder="Enter Pin" value="<?php echo $details['pin'] ?? ''; ?>" title="Enter Pin" aria-label="Enter Pin">
+                                <label class="form-label"><?php echo __('Pin'); ?></label>
+                                <input name="pin" class="form-control" type="text" placeholder="<?php echo __('Enter Pin'); ?>" value="<?php echo $details['pin'] ?? ''; ?>" title="<?php echo __('Enter Pin'); ?>" aria-label="<?php echo __('Enter Pin'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">GST No</label>
-                                <input name="gst_no" class="form-control" type="text" placeholder="Enter GST No" value="<?php echo $details['gst_no'] ?? ''; ?>" title="Enter GST No" aria-label="Enter GST No">
+                                <label class="form-label"><?php echo __('GST No'); ?></label>
+                                <input name="gst_no" class="form-control" type="text" placeholder="<?php echo __('Enter GST No'); ?>" value="<?php echo $details['gst_no'] ?? ''; ?>" title="<?php echo __('Enter GST No'); ?>" aria-label="<?php echo __('Enter GST No'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">CST No</label>
-                                <input name="cst_no" class="form-control" type="text" placeholder="Enter CST No" value="<?php echo $details['cst_no'] ?? ''; ?>" title="Enter CST No" aria-label="Enter CST No">
+                                <label class="form-label"><?php echo __('CST No'); ?></label>
+                                <input name="cst_no" class="form-control" type="text" placeholder="<?php echo __('Enter CST No'); ?>" value="<?php echo $details['cst_no'] ?? ''; ?>" title="<?php echo __('Enter CST No'); ?>" aria-label="<?php echo __('Enter CST No'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Vat No</label>
-                                <input name="vat_no" class="form-control" type="text" placeholder="Enter Vat No" value="<?php echo $details['vat_no'] ?? ''; ?>" title="Enter Vat No" aria-label="Enter Vat No">
+                                <label class="form-label"><?php echo __('Vat No'); ?></label>
+                                <input name="vat_no" class="form-control" type="text" placeholder="<?php echo __('Enter Vat No'); ?>" value="<?php echo $details['vat_no'] ?? ''; ?>" title="<?php echo __('Enter Vat No'); ?>" aria-label="<?php echo __('Enter Vat No'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Membership Card No</label>
-                                <input name="membership_card_no" class="form-control" type="text" placeholder="Enter Membership Card No" value="<?php echo $details['membership_card_no'] ?? ''; ?>" title="Enter Membership Card No" aria-label="Enter Membership Card No">
+                                <label class="form-label"><?php echo __('Membership Card No'); ?></label>
+                                <input name="membership_card_no" class="form-control" type="text" placeholder="<?php echo __('Enter Membership Card No'); ?>" value="<?php echo $details['membership_card_no'] ?? ''; ?>" title="<?php echo __('Enter Membership Card No'); ?>" aria-label="<?php echo __('Enter Membership Card No'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Pan No</label>
-                                <input name="pan_no" class="form-control" type="text" placeholder="Enter Pan Card No" value="<?php echo $details['pan_no'] ?? ''; ?>" title="Enter Pan Card No" aria-label="Enter Pan Card No">
+                                <label class="form-label"><?php echo __('Pan No'); ?></label>
+                                <input name="pan_no" class="form-control" type="text" placeholder="<?php echo __('Enter Pan Card No'); ?>" value="<?php echo $details['pan_no'] ?? ''; ?>" title="<?php echo __('Enter Pan Card No'); ?>" aria-label="<?php echo __('Enter Pan Card No'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Aadhaar No</label>
-                                <input name="aadhaar_no" class="form-control" type="text" placeholder="Enter Aadhaar No" value="<?php echo $details['aadhaar_no'] ?? ''; ?>" title="Enter Aadhaar No" aria-label="Enter Aadhaar No">
+                                <label class="form-label"><?php echo __('Aadhaar No'); ?></label>
+                                <input name="aadhaar_no" class="form-control" type="text" placeholder="<?php echo __('Enter Aadhaar No'); ?>" value="<?php echo $details['aadhaar_no'] ?? ''; ?>" title="<?php echo __('Enter Aadhaar No'); ?>" aria-label="<?php echo __('Enter Aadhaar No'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">D.O.B</label>
-                                <input name="dob" class="form-control" type="date" placeholder="" value="<?php echo $details['dob'] ?? ''; ?>" title="Dob" aria-label="Dob">
+                                <label class="form-label"><?php echo __('D.O.B'); ?></label>
+                                <input name="dob" class="form-control" type="date" placeholder="" value="<?php echo $details['dob'] ?? ''; ?>" title="<?php echo __('Dob'); ?>" aria-label="<?php echo __('Dob'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Aniversary</label>
-                                <input name="aniversary" class="form-control" type="date" placeholder="" value="<?php echo $details['aniversary'] ?? ''; ?>" title="Aniversary" aria-label="Aniversary">
+                                <label class="form-label"><?php echo __('Aniversary'); ?></label>
+                                <input name="aniversary" class="form-control" type="date" placeholder="" value="<?php echo $details['aniversary'] ?? ''; ?>" title="<?php echo __('Aniversary'); ?>" aria-label="<?php echo __('Aniversary'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Credit Limit</label>
-                                <input name="credit_limit" class="form-control" type="text" placeholder="Enter Credit Limit" value="<?php echo $details['credit_limit'] ?? ''; ?>" title="Enter Credit Limit" aria-label="Enter Credit Limit">
+                                <label class="form-label"><?php echo __('Credit Limit'); ?></label>
+                                <input name="credit_limit" class="form-control" type="text" placeholder="<?php echo __('Enter Credit Limit'); ?>" value="<?php echo $details['credit_limit'] ?? ''; ?>" title="<?php echo __('Enter Credit Limit'); ?>" aria-label="<?php echo __('Enter Credit Limit'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Bill Limit</label>
-                                <input name="bill_limit" class="form-control" type="text" placeholder="Enter Bill Limit" value="<?php echo $details['bill_limit'] ?? ''; ?>" title="Enter Bill Limit" aria-label="Enter Bill Limit">
+                                <label class="form-label"><?php echo __('Bill Limit'); ?></label>
+                                <input name="bill_limit" class="form-control" type="text" placeholder="<?php echo __('Enter Bill Limit'); ?>" value="<?php echo $details['bill_limit'] ?? ''; ?>" title="<?php echo __('Enter Bill Limit'); ?>" aria-label="<?php echo __('Enter Bill Limit'); ?>">
                             </div>
                         </div>
                     </div>
@@ -256,11 +256,11 @@ foreach ($account_groups as $ag) {
                 <div class="card-footer border-top text-center">
                     <?php if ($rid != "") {  ?>
                         <button name='submit' value='update' class="btn waves-effect waves-light btn-primary">
-                            <i class="fa fa-file-text-o"></i> Update Account
+                            <i class="fa fa-file-text-o"></i> <?php echo __('Update Account'); ?>
                         </button>
                     <?php } else {  ?>
                         <button name='submit' value='update' class="btn waves-effect waves-light btn-primary">
-                            <i class="fa fa-file-text-o"></i> Save Account
+                            <i class="fa fa-file-text-o"></i> <?php echo __('Save Account'); ?>
                         </button>
                     <?php } ?>
                 </div>
@@ -269,51 +269,51 @@ foreach ($account_groups as $ag) {
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="f-18 f-w-600">Additional Information</h4>
+                    <h4 class="f-18 f-w-600"><?php echo __('Additional Information'); ?></h4>
                     <div class="form-group mt-3">
-                        <label class="form-label">Contact Person</label>
-                        <input name="contact_person" class="form-control" type="text" placeholder="Contact Person" value="<?php echo $details['contact_person'] ?? ''; ?>" title="Contact Person" aria-label="Contact Person">
+                        <label class="form-label"><?php echo __('Contact Person'); ?></label>
+                        <input name="contact_person" class="form-control" type="text" placeholder="<?php echo __('Contact Person'); ?>" value="<?php echo $details['contact_person'] ?? ''; ?>" title="<?php echo __('Contact Person'); ?>" aria-label="<?php echo __('Contact Person'); ?>">
                     </div>
                     <div class="form-group mt-3">
-                        <label class="form-label">Opening Balance</label>
-                        <input name="opening_balance" class="form-control" type="text" placeholder="Enter Opening Balance" value="<?php echo $details['opening_balance'] ?? ''; ?>" title="Enter Opening Balance" aria-label="Enter Opening Balance">
+                        <label class="form-label"><?php echo __('Opening Balance'); ?></label>
+                        <input name="opening_balance" class="form-control" type="text" placeholder="<?php echo __('Enter Opening Balance'); ?>" value="<?php echo $details['opening_balance'] ?? ''; ?>" title="<?php echo __('Enter Opening Balance'); ?>" aria-label="<?php echo __('Enter Opening Balance'); ?>">
                     </div>
                     <div class="form-group mt-3">
-                        <label class="form-label">Credit Days for Sale</label>
-                        <input name="credit_days_for_sale" class="form-control" type="text" placeholder="Credit Days for Sale" value="<?php echo $details['credit_days_for_sale'] ?? ''; ?>" title="Credit Days for Sale" aria-label="Credit Days for Sale">
+                        <label class="form-label"><?php echo __('Credit Days for Sale'); ?></label>
+                        <input name="credit_days_for_sale" class="form-control" type="text" placeholder="<?php echo __('Credit Days for Sale'); ?>" value="<?php echo $details['credit_days_for_sale'] ?? ''; ?>" title="<?php echo __('Credit Days for Sale'); ?>" aria-label="<?php echo __('Credit Days for Sale'); ?>">
                     </div>
                     <div class="form-group mt-3">
-                        <label class="form-label">Credit Days for Purchase</label>
-                        <input name="credit_days_for_purchase" class="form-control" type="text" placeholder="Credit Days for Purchase" value="<?php echo $details['credit_days_for_purchase'] ?? ''; ?>" title="Credit Days for Purchase" aria-label="Credit Days for Purchase">
+                        <label class="form-label"><?php echo __('Credit Days for Purchase'); ?></label>
+                        <input name="credit_days_for_purchase" class="form-control" type="text" placeholder="<?php echo __('Credit Days for Purchase'); ?>" value="<?php echo $details['credit_days_for_purchase'] ?? ''; ?>" title="<?php echo __('Credit Days for Purchase'); ?>" aria-label="<?php echo __('Credit Days for Purchase'); ?>">
                     </div>
                     <div class="form-group mt-3">
-                        <label class="form-label">Audit Upto</label>
-                        <input name="audit_upto" class="form-control" type="text" placeholder="Audit Upto" value="<?php echo $details['audit_upto'] ?? ''; ?>" title="Audit Upto" aria-label="Audit Upto">
+                        <label class="form-label"><?php echo __('Audit Upto'); ?></label>
+                        <input name="audit_upto" class="form-control" type="text" placeholder="<?php echo __('Audit Upto'); ?>" value="<?php echo $details['audit_upto'] ?? ''; ?>" title="<?php echo __('Audit Upto'); ?>" aria-label="<?php echo __('Audit Upto'); ?>">
                     </div>
                     <div class="form-group mt-3">
-                        <label class="form-label">Any License No 1</label>
-                        <input name="any_liense_no1" class="form-control" type="text" placeholder="License No" value="<?php echo $details['any_liense_no1'] ?? ''; ?>" title="License No" aria-label="License No">
+                        <label class="form-label"><?php echo __('Any License No 1'); ?></label>
+                        <input name="any_liense_no1" class="form-control" type="text" placeholder="<?php echo __('License No'); ?>" value="<?php echo $details['any_liense_no1'] ?? ''; ?>" title="<?php echo __('License No'); ?>" aria-label="<?php echo __('License No'); ?>">
                     </div>
                     <div class="form-group mt-3">
-                        <label class="form-label">Any License No 2</label>
-                        <input name="any_license_no2" class="form-control" type="text" placeholder="License No" value="<?php echo $details['any_license_no2'] ?? ''; ?>" title="License No" aria-label="License No">
+                        <label class="form-label"><?php echo __('Any License No 2'); ?></label>
+                        <input name="any_license_no2" class="form-control" type="text" placeholder="<?php echo __('License No'); ?>" value="<?php echo $details['any_license_no2'] ?? ''; ?>" title="<?php echo __('License No'); ?>" aria-label="<?php echo __('License No'); ?>">
                     </div>
-                    <h4 class="f-18 f-w-600">Bank Information</h4>
+                    <h4 class="f-18 f-w-600"><?php echo __('Bank Information'); ?></h4>
                     <div class="form-group mt-3">
-                        <label class="form-label">Bank Name</label>
-                        <input name="bank_name" class="form-control" type="text" placeholder="Bank Name" value="<?php echo $details['bank_name'] ?? ''; ?>" title="Bank Name" aria-label="Bank Name">
-                    </div>
-                    <div class="form-group mt-3">
-                        <label class="form-label">Branch Name</label>
-                        <input name="branch_name" class="form-control" type="text" placeholder="Branch Name" value="<?php echo $details['branch_name'] ?? ''; ?>" title="Branch Name" aria-label="Branch Name">
+                        <label class="form-label"><?php echo __('Bank Name'); ?></label>
+                        <input name="bank_name" class="form-control" type="text" placeholder="<?php echo __('Bank Name'); ?>" value="<?php echo $details['bank_name'] ?? ''; ?>" title="<?php echo __('Bank Name'); ?>" aria-label="<?php echo __('Bank Name'); ?>">
                     </div>
                     <div class="form-group mt-3">
-                        <label class="form-label">Account No</label>
-                        <input name="account_no" class="form-control" type="text" placeholder="Account No" value="<?php echo $details['account_no'] ?? ''; ?>" title="Account No" aria-label="Account No">
+                        <label class="form-label"><?php echo __('Branch Name'); ?></label>
+                        <input name="branch_name" class="form-control" type="text" placeholder="<?php echo __('Branch Name'); ?>" value="<?php echo $details['branch_name'] ?? ''; ?>" title="<?php echo __('Branch Name'); ?>" aria-label="<?php echo __('Branch Name'); ?>">
                     </div>
                     <div class="form-group mt-3">
-                        <label class="form-label">IFSC Code</label>
-                        <input name="ifsc_code" class="form-control" type="text" placeholder="IFSC Code" value="<?php echo $details['ifsc_code'] ?? ''; ?>" title="IFSC Code" aria-label="IFSC Code">
+                        <label class="form-label"><?php echo __('Account No'); ?></label>
+                        <input name="account_no" class="form-control" type="text" placeholder="<?php echo __('Account No'); ?>" value="<?php echo $details['account_no'] ?? ''; ?>" title="<?php echo __('Account No'); ?>" aria-label="<?php echo __('Account No'); ?>">
+                    </div>
+                    <div class="form-group mt-3">
+                        <label class="form-label"><?php echo __('IFSC Code'); ?></label>
+                        <input name="ifsc_code" class="form-control" type="text" placeholder="<?php echo __('IFSC Code'); ?>" value="<?php echo $details['ifsc_code'] ?? ''; ?>" title="<?php echo __('IFSC Code'); ?>" aria-label="<?php echo __('IFSC Code'); ?>">
                     </div>
                 </div>
 </form>
@@ -351,7 +351,7 @@ foreach ($account_groups as $ag) {
 
                     if (table_name === 'states') {
                         const stateSelect = document.getElementById('state_id');
-                        stateSelect.innerHTML = '<option value="0">Select Any One</option>';
+                        stateSelect.innerHTML = '<option value="0"><?php echo __('Select Any One'); ?></option>';
 
                         response.forEach(function(state) {
                             const option = document.createElement('option');
@@ -374,7 +374,7 @@ foreach ($account_groups as $ag) {
 
                     if (table_name === 'cities') {
                         const citySelect = document.getElementById('city_id');
-                        citySelect.innerHTML = '<option value="0">Select Any One</option>';
+                        citySelect.innerHTML = '<option value="0"><?php echo __('Select Any One'); ?></option>';
 
                         response.forEach(function(city) {
                             const option = document.createElement('option');
@@ -431,7 +431,7 @@ foreach ($account_groups as $ag) {
     //             console.log(table_name)
     //             if (table_name === 'states') {
     //                 const stateSelect = document.getElementById('state_id');
-    //                 stateSelect.innerHTML = '<option value="0">Select Any One</option>';
+    //                 stateSelect.innerHTML = '<option value="0"><?php echo __('Select Any One'); ?></option>';
 
     //                 // Populate the state dropdown with the response data
     //                 response.forEach(function(state) {
@@ -445,7 +445,7 @@ foreach ($account_groups as $ag) {
     //             }
     //             if (table_name === 'cities') {
     //                 const stateSelect = document.getElementById('city_id');
-    //                 stateSelect.innerHTML = '<option value="0">Select Any One</option>';
+    //                 stateSelect.innerHTML = '<option value="0"><?php echo __('Select Any One'); ?></option>';
 
     //                 // Populate the state dropdown with the response data
     //                 response.forEach(function(state) {

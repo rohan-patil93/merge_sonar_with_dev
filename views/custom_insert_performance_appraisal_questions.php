@@ -16,18 +16,18 @@ $inputanswer = array('EMP'=>'Employee','RO'=>'RO','HOD'=>'HOD');
     var maxoption = 10000;
     function addMoreQuestionOption(row_sq){
         maxoption++;
-        var html = '<div class="input-group input-group-button" id="deletoption_'+maxoption+'"><input aria-label="Question Options[" type="text" name="question_options['+row_sq+'][]" class="form-control width1" value="" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><span class="input-group-text addon-style bg-danger"><span class=""><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-white" onclick="deletRowOption('+maxoption+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </span></span></div>';
+        var html = '<div class="input-group input-group-button" id="deletoption_'+maxoption+'"><input aria-label="<?php echo __('Question Options['); ?>" type="text" name="question_options['+row_sq+'][]" class="form-control width1" value="" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><span class="input-group-text addon-style bg-danger"><span class=""><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-white" onclick="deletRowOption('+maxoption+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </span></span></div>';
         $("#options_"+row_sq).append(html);
     }
     function deletRowOption(option_seq){
         swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: 'Do you want to Delete the Option?',
+            text: <?php echo json_encode(__('Do you want to Delete the Option?')); ?>,
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+            cancelButtonText: <?php echo json_encode(__('No')); ?>,
             closeOnConfirm: true,
             closeOnCancel: true
         },
@@ -41,12 +41,12 @@ $inputanswer = array('EMP'=>'Employee','RO'=>'RO','HOD'=>'HOD');
     function deletQuestion(row_sq) {
         swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: 'Do you want to Delete the Question?',
+            text: <?php echo json_encode(__('Do you want to Delete the Question?')); ?>,
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+            cancelButtonText: <?php echo json_encode(__('No')); ?>,
             closeOnConfirm: true,
             closeOnCancel: true
         },
@@ -59,23 +59,23 @@ $inputanswer = array('EMP'=>'Employee','RO'=>'RO','HOD'=>'HOD');
     var maxquestion = 50000;
     function addMoreQuestion(){
         maxquestion++;
-        var html = '<div class="card" id="deletquestion_'+maxquestion+'"><div class="card-header"><h5>Questions</h5><div class="card-header-right"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger" onclick="deletQuestion('+maxquestion+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div></div>';
+        var html = '<div class="card" id="deletquestion_'+maxquestion+'"><div class="card-header"><h5><?php echo __('Questions'); ?></h5><div class="card-header-right"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger" onclick="deletQuestion('+maxquestion+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div></div>';
 
         html += '<div class="card-body"><div class="row"><div class="col-lg-8"><div class="row">';
-        html += '<div class="form-group col-lg-5"><span class="form-label">Question<span class="text-danger">*</span></span><textarea aria-label="Question[" class="form-control" name="question['+maxquestion+']" spellcheck="false"></textarea></div>';
+        html += '<div class="form-group col-lg-5"><span class="form-label">Question<span class="text-danger">*</span></span><textarea aria-label="<?php echo __('Question['); ?>" class="form-control" name="question['+maxquestion+']" spellcheck="false"></textarea></div>';
 
-        html += '<div class="form-group col-lg-5"><span class="form-label">Description<span class="text-danger">*</span></span><textarea aria-label="Description[" class="form-control" name="description['+maxquestion+']" spellcheck="false"></textarea></div>';
-        html += '<div class="form-group col-lg-2"><span class="form-label">Answer Type<span class="text-danger">*</span></span><select aria-label="Answer Type[" class="form-select js-example-basic-single" name="answer_type['+maxquestion+']" id="answer_type_'+maxquestion+'" onchange="getAnswerType('+maxquestion+')"><?php foreach($answertype as $key=>$keyval){ ?><option value="<?php echo $key; ?>"><?php echo $keyval; ?></option><?php
+        html += '<div class="form-group col-lg-5"><span class="form-label">Description<span class="text-danger">*</span></span><textarea aria-label="<?php echo __('Description['); ?>" class="form-control" name="description['+maxquestion+']" spellcheck="false"></textarea></div>';
+        html += '<div class="form-group col-lg-2"><span class="form-label">Answer Type<span class="text-danger">*</span></span><select aria-label="<?php echo __('Answer Type['); ?>" class="form-select js-example-basic-single" name="answer_type['+maxquestion+']" id="answer_type_'+maxquestion+'" onchange="getAnswerType('+maxquestion+')"><?php foreach($answertype as $key=>$keyval){ ?><option value="<?php echo $key; ?>"><?php echo $keyval; ?></option><?php
 } ?></select></div>';
-        html += '<div class="form-group col-lg-5"><span class="form-label d-block">Display To Enter Answer<span class="text-danger">*</span></span><?php foreach($inputanswer as $key=>$keyval){ ?><div class="checkbox-fade fade-in-primary mr-5"><label class="form-label"><input aria-label="Checkbox" type="checkbox" value="<?php echo $key; ?>" name="display_answer['+maxquestion+'][]"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $keyval; ?></span></label></div><?php
+        html += '<div class="form-group col-lg-5"><span class="form-label d-block">Display To Enter Answer<span class="text-danger">*</span></span><?php foreach($inputanswer as $key=>$keyval){ ?><div class="checkbox-fade fade-in-primary mr-5"><label class="form-label"><input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="<?php echo $key; ?>" name="display_answer['+maxquestion+'][]"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $keyval; ?></span></label></div><?php
 } ?></div>';
 
-        html += '<div class="form-group col-lg-5 "><span class="form-label d-block">Display Question<span class="text-danger">*</span></span><?php foreach($inputanswer as $key=>$keyval){ ?><div class="checkbox-fade fade-in-primary mr-5"><label class="form-label"><input aria-label="Checkbox" type="checkbox" value="<?php echo $key; ?>" name="display_question['+maxquestion+'][]"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $keyval; ?></span></label></div><?php
+        html += '<div class="form-group col-lg-5 "><span class="form-label d-block">Display Question<span class="text-danger">*</span></span><?php foreach($inputanswer as $key=>$keyval){ ?><div class="checkbox-fade fade-in-primary mr-5"><label class="form-label"><input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="<?php echo $key; ?>" name="display_question['+maxquestion+'][]"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $keyval; ?></span></label></div><?php
 } ?></div></div></div>';
 
         html += '<div class="col-lg-4" id="enter_option_'+maxquestion+'" style="display: none"><span class="form-label d-block">Option<span class="text-danger">*</span></span><div id="options_'+maxquestion+'"></div>';
         html += '<button type="button" class="btn btn-success waves-effect waves-light float-left mt-2" onclick="addMoreQuestionOption('+maxquestion+')"><i class="icofont icofont-plus icon-white m-r-10"></i>Add More</button></div>'
-        html += '<div class="col-lg-4" id="enter_ratting_'+maxquestion+'" style="display: none"><span class="form-label d-block">Ratting From 1 To<span class="text-danger">*</span></span><input aria-label="Max Ratting[" type="text" name="max_ratting['+maxquestion+']" class="form-control" value="" ></div></div></div></div>';
+        html += '<div class="col-lg-4" id="enter_ratting_'+maxquestion+'" style="display: none"><span class="form-label d-block">Ratting From 1 To<span class="text-danger">*</span></span><input aria-label="<?php echo __('Max Ratting['); ?>" type="text" name="max_ratting['+maxquestion+']" class="form-control" value="" ></div></div></div></div>';
         $("#addmorequestion").append(html);
         addMoreQuestionOption(maxquestion);
         $(".js-example-basic-single").select2();
@@ -83,7 +83,7 @@ $inputanswer = array('EMP'=>'Employee','RO'=>'RO','HOD'=>'HOD');
 </script>
 <div class="card">
     <div class="card-header">
-        <h5>Performance Appraisal Questions</h5>
+        <h5><?php echo __('Performance Appraisal Questions'); ?></h5>
         <div class="card-header-right"></div>
     </div>
     <div class="p-0">
@@ -97,7 +97,7 @@ $inputanswer = array('EMP'=>'Employee','RO'=>'RO','HOD'=>'HOD');
 
             <div class="card" id="deletquestion_<?php echo $paqseq; ?>">
                 <div class="card-header">
-                    <h5>Questions</h5>
+                    <h5><?php echo __('Questions'); ?></h5>
                     <div class="card-header-right">
                         <i class="ti-trash text-danger"  onclick="deletQuestion('<?php echo $paqseq; ?>','<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                     </div>
@@ -108,56 +108,56 @@ $inputanswer = array('EMP'=>'Employee','RO'=>'RO','HOD'=>'HOD');
                         <div class="col-lg-8">
                             <div class="row">
                                 <div class="form-group col-lg-5">
-                                    <span class="form-label">Question<span class="text-danger">*</span></span>
-                                    <textarea aria-label="Text area" class="form-control header_comment_text" name="question[<?php echo $paqseq; ?>]" spellcheck="false"><?php echo $paq['question']; ?></textarea>
+                                    <span class="form-label"><?php echo __('Question'); ?><span class="text-danger">*</span></span>
+                                    <textarea aria-label="<?php echo __('Text area'); ?>" class="form-control header_comment_text" name="question[<?php echo $paqseq; ?>]" spellcheck="false"><?php echo $paq['question']; ?></textarea>
 
                                 </div>
                                 <div class="form-group col-lg-5">
-                                    <span class="form-label">Description<span class="text-danger">*</span></span>
-                                    <textarea aria-label="Text area" class="form-control header_comment_text" name="description[<?php echo $paqseq; ?>]" spellcheck="false"><?php echo $paq['description']; ?></textarea>
+                                    <span class="form-label"><?php echo __('Description'); ?><span class="text-danger">*</span></span>
+                                    <textarea aria-label="<?php echo __('Text area'); ?>" class="form-control header_comment_text" name="description[<?php echo $paqseq; ?>]" spellcheck="false"><?php echo $paq['description']; ?></textarea>
                                 </div>
                                 <div class="form-group col-lg-2">
-                                    <span class="form-label">Answer Type<span class="text-danger">*</span></span>
-                                    <select aria-label="Select option" class="form-select js-example-basic-single" name="answer_type[<?php echo $paqseq; ?>]" id="answer_type_<?php echo $paqseq; ?>" onchange="getAnswerType('<?php echo $paqseq; ?>')">
+                                    <span class="form-label"><?php echo __('Answer Type'); ?><span class="text-danger">*</span></span>
+                                    <select aria-label="<?php echo __('Select option'); ?>" class="form-select js-example-basic-single" name="answer_type[<?php echo $paqseq; ?>]" id="answer_type_<?php echo $paqseq; ?>" onchange="getAnswerType('<?php echo $paqseq; ?>')">
                                         <?php foreach($answertype as $key=>$keyval){ ?>
                                         <option value="<?php echo $key; ?>" <?php echo $paq['answer_type'] ==$key?"selected":""; ?>><?php echo $keyval; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="form-group col-lg-5">
-                                    <span class="form-label d-block">Display To Enter Answer<span class="text-danger">*</span></span>
+                                    <span class="form-label d-block"><?php echo __('Display To Enter Answer'); ?><span class="text-danger">*</span></span>
                                     <?php
                                     $display_answer = json_decode($paq['display_answer'],1);
                                     foreach($inputanswer as $key=>$keyval){ ?>
                                     <div class="checkbox-fade fade-in-primary mr-5">
                                         <label class="form-label">
-                                            <input aria-label="Checkbox" type="checkbox" value="<?php echo $key; ?>" name="display_answer[<?php echo $paqseq; ?>][]" <?php echo (in_array($key, (array)$display_answer))?"checked":"";?>>
+                                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="<?php echo $key; ?>" name="display_answer[<?php echo $paqseq; ?>][]" <?php echo (in_array($key, (array)$display_answer))?"checked":"";?>>
                                             <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $keyval; ?></span>
                                         </label>
                                     </div>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group col-lg-5 ">
-                                    <span class="form-label d-block">Display Question<span class="text-danger">*</span></span>
+                                    <span class="form-label d-block"><?php echo __('Display Question'); ?><span class="text-danger">*</span></span>
                                     <?php
                                     $display_question = json_decode($paq['display_answer'],1);
                                     foreach($inputanswer as $key=>$keyval){ ?>
                                     <div class="checkbox-fade fade-in-primary mr-5">
                                         <label class="form-label">
-                                            <input aria-label="Checkbox" type="checkbox" value="<?php echo $key; ?>" name="display_question[<?php echo $paqseq; ?>][]" <?php echo (in_array($key, (array)$display_question))?"checked":"";?>>
+                                            <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" value="<?php echo $key; ?>" name="display_question[<?php echo $paqseq; ?>][]" <?php echo (in_array($key, (array)$display_question))?"checked":"";?>>
                                             <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $keyval; ?></span>
                                         </label>
                                     </div>
                                     <?php  } ?>
                                 </div>
                                 <div class="form-group col-lg-2">
-                                    <span class="form-label d-block">Attachments</span>
-                                    <input aria-label="Checkbox" class="js-primary-sm" type="checkbox" name="attachment[<?php echo $paqseq; ?>]" <?php echo ($paq['attachment']=='0')?"checked":"";?> value="0" >
+                                    <span class="form-label d-block"><?php echo __('Attachments'); ?></span>
+                                    <input aria-label="<?php echo __('Checkbox'); ?>" class="js-primary-sm" type="checkbox" name="attachment[<?php echo $paqseq; ?>]" <?php echo ($paq['attachment']=='0')?"checked":"";?> value="0" >
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4" id="enter_option_<?php echo $paqseq; ?>" style="<?php echo ($paq['answer_type'] =='O')?"":"display: none"; ?>">
-                            <span class="form-label d-block">Option<span class="text-danger">*</span></span>
+                            <span class="form-label d-block"><?php echo __('Option'); ?><span class="text-danger">*</span></span>
                             <div id="options_<?php echo $paqseq; ?>">
                             <?php
                             $paoption = json_decode($paq['question_options'],1);
@@ -165,7 +165,7 @@ $inputanswer = array('EMP'=>'Employee','RO'=>'RO','HOD'=>'HOD');
                                 $paoption[] = array();
                             } foreach($paoption as $paopt){ ?>
                                 <div class="input-group input-group-button" id="deletoption_<?php echo $optionseq; ?>">
-                                    <input aria-label="Input field" type="text" name="question_options[<?php echo $paqseq; ?>][]" class="form-control width1" value="<?php echo $paopt; ?>">
+                                    <input aria-label="<?php echo __('Input field'); ?>" type="text" name="question_options[<?php echo $paqseq; ?>][]" class="form-control width1" value="<?php echo $paopt; ?>">
                                     <span class="input-group-text addon-style bg-danger">
                                         <span class="cursor-pointer"><i class="ti-trash text-white"  onclick="deletRowOption('<?php echo $optionseq; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i> </span>
                                     </span>
@@ -173,11 +173,11 @@ $inputanswer = array('EMP'=>'Employee','RO'=>'RO','HOD'=>'HOD');
                                 <?php $optionseq++;
 } ?>
                             </div>
-                            <button type="button" class="btn btn-success waves-effect waves-light float-left mt-2" onclick="addMoreQuestionOption(<?php echo $paqseq; ?>)"><i class="icofont icofont-plus icon-white m-r-10"></i>Add More</button>
+                            <button type="button" class="btn btn-success waves-effect waves-light float-left mt-2" onclick="addMoreQuestionOption(<?php echo $paqseq; ?>)"><i class="icofont icofont-plus icon-white m-r-10"></i><?php echo __('Add More'); ?></button>
                         </div>
                         <div class="col-lg-4" id="enter_ratting_<?php echo $paqseq; ?>" style="<?php echo ($paq['answer_type'] =='R')?"":"display: none"; ?>">
-                            <span class="form-label d-block">Ratting From 1 To<span class="text-danger">*</span></span>
-                            <input aria-label="Input field" type="text" name="max_ratting[<?php echo $paqseq; ?>]" class="form-control" value="<?php echo $paq['max_ratting']; ?>" >
+                            <span class="form-label d-block"><?php echo __('Ratting From 1 To'); ?><span class="text-danger">*</span></span>
+                            <input aria-label="<?php echo __('Input field'); ?>" type="text" name="max_ratting[<?php echo $paqseq; ?>]" class="form-control" value="<?php echo $paq['max_ratting']; ?>" >
                         </div>
                     </div>
                 </div>
@@ -187,12 +187,12 @@ $inputanswer = array('EMP'=>'Employee','RO'=>'RO','HOD'=>'HOD');
 } ?>
 </div>
             <div class="">
-                <button type="button" class="btn btn-success waves-effect waves-light col-lg-3  m-l-20" onclick="addMoreQuestion()"><i class="icofont icofont-plus icon-white m-r-10"></i>Add More</button>
+                <button type="button" class="btn btn-success waves-effect waves-light col-lg-3  m-l-20" onclick="addMoreQuestion()"><i class="icofont icofont-plus icon-white m-r-10"></i><?php echo __('Add More'); ?></button>
             </div>
             <div class="">
                 <input type="hidden" name="appraisal_id" value="<?php echo $performance_appraisal_setup_id; ?>">
                 <input type="hidden" name="parent_tab" value="otherquestion">
-                <button type="submit" class="btn btn-primary waves-effect waves-light mt-5  m-l-20" name="submitperformance_appraisal_questions"><i class="fa fa-check m-r-10"></i>Submit</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light mt-5  m-l-20" name="submitperformance_appraisal_questions"><i class="fa fa-check m-r-10"></i><?php echo __('Submit'); ?></button>
             </div>
         </form>
     </div>

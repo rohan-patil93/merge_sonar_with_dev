@@ -98,7 +98,7 @@ $select_value_json = json_encode($select_value);
 
 <div class="modal-header">
   <h5 class="modal-title">Filter Options</h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 
 <form class="kt-form kt-form-label-right j-pro" action="" method="post">
@@ -186,8 +186,8 @@ $select_value_json = json_encode($select_value);
   </div>
   <input type="hidden" id="employee_names_list">
   <div class="modal-footer mt-5" >
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary mr-2 filter-bulktransfer-submit-btn">Select</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+    <button type="button" class="btn btn-primary mr-2 filter-bulktransfer-submit-btn"><?php echo __('Select'); ?></button>
   </div>
 </form>
 

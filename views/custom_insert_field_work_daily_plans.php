@@ -147,30 +147,30 @@ if ($_GET) {
                         <strong>
                             <?php
                             if ($error == '9999') {
-                                echo "Insert successful.";
+                                echo __('Insert successful.');
                             } elseif ($error == '9998') {
-                                echo "Update successful. ";
+                                echo __('Update successful. ');
                             }
                             ?>
                         </strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
                         </div>         <?php  }else{      ?>
                             <div class="alert alert-light alert-dismissible">
-                                <strong>This function is used for maintaining <strong>Field Work</strong>. * represents mandatory fields.</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <strong><?php echo __('This function is used for maintaining'); ?> <strong><?php echo __('Field Work'); ?></strong><?php echo __('. * represents mandatory fields.'); ?></strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
                             </div>
                         <?php  } ?>
                         <div class="card">
                             <div class="card-header">
-                                <h5>Field Work Daily Plans</h5>
+                                <h5><?php echo __('Field Work Daily Plans'); ?></h5>
 
                                 <div class="card-header-right">
                                     <a href="index.php?option=COM_LIST_FIELD_WORK_DAILY_PLANS" class="btn btn-success mb-2 desktop-view">
 
-                                  User Work Daily Plans List          </a>
+                                  <?php echo __('User Work Daily Plans List'); ?>          </a>
                                   <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                                     <i class="icofont icofont-reply"></i>
-                                    Back
+                                    <?php echo __('Back'); ?>
                                 </a>
                             </div>
                         </div>
@@ -179,9 +179,9 @@ if ($_GET) {
                                 <form id="fieldWorkDailyPlansForm" method="post">
                                     <div class="row">
                                         <div class="form-group col-lg-6">
-                                            <span>User <span class="text-danger" >*</span></span>
-                                            <select aria-label="User" class="form-select js-example-basic-single" id="user_id" name="user_id" >
-                                                <option value="0"> Select Any one </option>
+                                            <span><?php echo __('User'); ?> <span class="text-danger" >*</span></span>
+                                            <select aria-label="<?php echo __('User'); ?>" class="form-select js-example-basic-single" id="user_id" name="user_id" >
+                                                <option value="0"> <?php echo __('Select Any one'); ?> </option>
                                                 <?php
 
                                                 foreach ($application_users as $row){ ?>
@@ -195,7 +195,7 @@ if ($_GET) {
                                             <div class="d-none text-danger"  id="user_id_err"></div>
                                         </div>
                                         <div id="toDateDiv" class="col-lg-6 col-xs-12 form-group d-none" >
-                                            <span>Date <span class="text-danger" >*</span></span>
+                                            <span><?php echo __('Date'); ?> <span class="text-danger" >*</span></span>
                                             <?php
                                             $readonly = '';
                                             if ($rid != "" && $view == '1') {
@@ -203,7 +203,7 @@ if ($_GET) {
                                             }
                                             ?>
 
-                                            <input aria-label="Plan Date" class="form-control" type="date" name="plan_date" id="plan_date" value="<?php echo isset($date) && $date != '' ? date('Y-m-d', strtotime($date)) :  '' ?>" <?php echo $readonly;  ?> min="<?php echo date('Y-m-d');?>"  />
+                                            <input aria-label="<?php echo __('Plan Date'); ?>" class="form-control" type="date" name="plan_date" id="plan_date" value="<?php echo isset($date) && $date != '' ? date('Y-m-d', strtotime($date)) :  '' ?>" <?php echo $readonly;  ?> min="<?php echo date('Y-m-d');?>"  />
                                             <div class="d-none text-danger"  id="plan_date_err"></div>
                                         </div>
 
@@ -216,13 +216,13 @@ if ($_GET) {
                                                     <thead>
                                                         <tr>
                                                             <th scope="col"></th>
-                                                            <th scope="col">Contact Person</th>
-                                                            <th scope="col">Phone No.</th>
-                                                            <th scope="col">Location</th>
-                                                            <th scope="col">Address</th>
-                                                            <th scope="col">Latitude <span class="text-danger" >*</span></th>
-                                                            <th scope="col">Longitude <span class="text-danger" >*</span></th>
-                                                            <th scope="col">Action</th>
+                                                            <th scope="col"><?php echo __('Contact Person'); ?></th>
+                                                            <th scope="col"><?php echo __('Phone No.'); ?></th>
+                                                            <th scope="col"><?php echo __('Location'); ?></th>
+                                                            <th scope="col"><?php echo __('Address'); ?></th>
+                                                            <th scope="col"><?php echo __('Latitude'); ?> <span class="text-danger" >*</span></th>
+                                                            <th scope="col"><?php echo __('Longitude'); ?> <span class="text-danger" >*</span></th>
+                                                            <th scope="col"><?php echo __('Action'); ?></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -230,14 +230,14 @@ if ($_GET) {
                                                             <td>
                                                              <i class="fas fa-trash-alt text-danger cursor-pointer removeRow" ></i>
                                                          </td>
-                                                         <td><input aria-label="Contact Person[]" class="form-control " type="text" name="contact_person[]"></td>
-                                                         <td><input aria-label="Mobile[]" class="form-control " type="text" name="mobile[]"></td>
-                                                         <td><input aria-label="Plan Location[]" class="form-control" type="text" name="plan_location[]"></td>
-                                                         <td><textarea aria-label="Plan Address[]" class="form-control" name="plan_address[]" rows="2" readonly></textarea></td>
-                                                         <td><input aria-label="Plan Latitude[]" class="form-control lat" type="text" name="plan_latitude[]" readonly></td>
-                                                         <td><input aria-label="Plan Longitude[]" class="form-control lng" type="text" name="plan_longitude[]" readonly></td>
+                                                         <td><input aria-label="<?php echo __('Contact Person[]'); ?>" class="form-control " type="text" name="contact_person[]"></td>
+                                                         <td><input aria-label="<?php echo __('Mobile[]'); ?>" class="form-control " type="text" name="mobile[]"></td>
+                                                         <td><input aria-label="<?php echo __('Plan Location[]'); ?>" class="form-control" type="text" name="plan_location[]"></td>
+                                                         <td><textarea aria-label="<?php echo __('Plan Address[]'); ?>" class="form-control" name="plan_address[]" rows="2" readonly></textarea></td>
+                                                         <td><input aria-label="<?php echo __('Plan Latitude[]'); ?>" class="form-control lat" type="text" name="plan_latitude[]" readonly></td>
+                                                         <td><input aria-label="<?php echo __('Plan Longitude[]'); ?>" class="form-control lng" type="text" name="plan_longitude[]" readonly></td>
                                                          <td>
-                                                            <button type="button" class="btn btn-success addMapBtn">Map</button>
+                                                            <button type="button" class="btn btn-success addMapBtn"><?php echo __('Map'); ?></button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -246,9 +246,9 @@ if ($_GET) {
                                                         <td colspan="8">
                                                             <div class="d-flex justify-content-between">
                                                                 <?php if ($view != '1'): ?>
-                                                                    <button type="button" class="btn btn-primary" id="addMoreBtn">Add More</button>
+                                                                    <button type="button" class="btn btn-primary" id="addMoreBtn"><?php echo __('Add More'); ?></button>
                                                                 <?php endif; ?>
-                                                                <button type="button" class="btn btn-success" id="updateMapBtn">View All Map Points</button>
+                                                                <button type="button" class="btn btn-success" id="updateMapBtn"><?php echo __('View All Map Points'); ?></button>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -263,73 +263,73 @@ if ($_GET) {
                                         <div class="row">
                                             <!-- From Date -->
                                             <div class="col-lg-6 col-xs-12 form-group">
-                                                <span>From Date <span class="text-danger" >*</span></span>
-                                                <input aria-label="Work From Date" class="form-control" type="date" name="work_from_date" id="work_from_date" value=""  min="<?php echo date('Y-m-d');?>">
+                                                <span><?php echo __('From Date'); ?> <span class="text-danger" >*</span></span>
+                                                <input aria-label="<?php echo __('Work From Date'); ?>" class="form-control" type="date" name="work_from_date" id="work_from_date" value=""  min="<?php echo date('Y-m-d');?>">
                                                 <div class="d-none text-danger"  id="work_from_date_err"></div>
                                             </div>
 
                                             <!-- To Date -->
                                             <div class="col-lg-6 col-xs-12 form-group">
-                                                <span>To Date <span class="text-danger" >*</span></span>
-                                                <input aria-label="Work To Date" class="form-control" type="date" name="work_to_date" id="work_to_date">
+                                                <span><?php echo __('To Date'); ?> <span class="text-danger" >*</span></span>
+                                                <input aria-label="<?php echo __('Work To Date'); ?>" class="form-control" type="date" name="work_to_date" id="work_to_date">
                                                 <div class="d-none text-danger"  id="work_to_date_err"></div>
                                             </div>
                                             <!-- Time -->
                                             <div class="col-lg-6 col-xs-12 form-group">
-                                                <span>Time <span class="text-danger" >*</span></span>
-                                                <input aria-label="Work Time" class="form-control" type="time" name="work_time" id="work_time">
+                                                <span><?php echo __('Time'); ?> <span class="text-danger" >*</span></span>
+                                                <input aria-label="<?php echo __('Work Time'); ?>" class="form-control" type="time" name="work_time" id="work_time">
                                                 <div class="d-none text-danger"  id="work_time_err"></div>
                                             </div>
 
                                             <!-- Work Radius -->
                                             <div class="col-lg-6 col-xs-12 form-group">
-                                                <span>Work Radius</span>
-                                                <input aria-label="Work Radius" class="form-control" type="number" name="work_radius" id="work_radius">
+                                                <span><?php echo __('Work Radius'); ?></span>
+                                                <input aria-label="<?php echo __('Work Radius'); ?>" class="form-control" type="number" name="work_radius" id="work_radius">
                                                 <div class="d-none text-danger"  id="work_radius_err"></div>
                                             </div>
                                             <!-- Contact person -->
                                             <div class="col-lg-4 col-xs-6 form-group">
-                                                <span>Contact Person</span>
-                                                <input aria-label="Contact Person" class="form-control" type="text" name="contact_person" id="contact_person">
+                                                <span><?php echo __('Contact Person'); ?></span>
+                                                <input aria-label="<?php echo __('Contact Person'); ?>" class="form-control" type="text" name="contact_person" id="contact_person">
 
                                             </div>
                                             <!-- Phone No. -->
                                             <div class="col-lg-4 col-xs-6 form-group">
-                                                <span>Phone No.</span>
-                                                <input aria-label="Mobile" class="form-control" type="text" name="mobile" id="mobile">
+                                                <span><?php echo __('Phone No.'); ?></span>
+                                                <input aria-label="<?php echo __('Mobile'); ?>" class="form-control" type="text" name="mobile" id="mobile">
 
                                             </div>
 
                                             <!-- Location -->
                                             <div class="col-lg-4 col-xs-6 form-group">
-                                                <span>Location Name</span>
-                                                <input aria-label="Location Name" class="form-control" type="text" name="location_name" id="location_name">
+                                                <span><?php echo __('Location Name'); ?></span>
+                                                <input aria-label="<?php echo __('Location Name'); ?>" class="form-control" type="text" name="location_name" id="location_name">
 
                                             </div>
 
                                             <!-- Latitude -->
 
                                             <div class="col-lg-3 col-xs-6 form-group">
-                                                <span>Latitude <span class="text-danger" >*</span> </span>
-                                                <input aria-label="Work Latitude" class="form-control lat" type="text" name="work_latitude" id="work_latitude" readonly>
+                                                <span><?php echo __('Latitude'); ?> <span class="text-danger" >*</span> </span>
+                                                <input aria-label="<?php echo __('Work Latitude'); ?>" class="form-control lat" type="text" name="work_latitude" id="work_latitude" readonly>
                                                 <div class="d-none text-danger"  id="work_latitude_err"></div>
                                             </div>
 
                                             <!-- Longitude -->
                                             <div class="col-lg-3 col-xs-6 form-group">
-                                                <span>Longitude <span class="text-danger" >*</span></span>
-                                                <input aria-label="Work Longitude" class="form-control lng" type="text" name="work_longitude" id="work_longitude" readonly>
+                                                <span><?php echo __('Longitude'); ?> <span class="text-danger" >*</span></span>
+                                                <input aria-label="<?php echo __('Work Longitude'); ?>" class="form-control lng" type="text" name="work_longitude" id="work_longitude" readonly>
                                                 <div class="d-none text-danger"  id="work_longitude_err"></div>
                                             </div>
 
                                             <div class="col-lg-3 col-xs-6 form-group">
-                                                <span>Address</span>
-                                                <textarea aria-label="Work Address" class="form-control lng" type="text" name="work_address" id="work_address" readonly></textarea>
+                                                <span><?php echo __('Address'); ?></span>
+                                                <textarea aria-label="<?php echo __('Work Address'); ?>" class="form-control lng" type="text" name="work_address" id="work_address" readonly></textarea>
 
                                             </div>
 
                                             <div class="col-lg-3 col-xs-6 form-group d-flex justify-content-center align-items-end">
-                                                <button type="button" class="btn btn-success addMapBtn">Add Map Point</button>
+                                                <button type="button" class="btn btn-success addMapBtn"><?php echo __('Add Map Point'); ?></button>
                                             </div>
 
                                         </div>
@@ -341,14 +341,14 @@ if ($_GET) {
                                         <?php if ($view != '1'):
                                             if ($rid != "" && $copy != '1') {  ?>
                                                 <button name='submit' value='update' class="btn waves-effect waves-light btn-primary">
-                                                    Update
+                                                    <?php echo __('Update'); ?>
                                                 </button>
                                                 <input name="rid" type="hidden" value="<?php echo $rid; ?>">
                                                 <input name="date" type="hidden" value="<?php echo $date; ?>">
 
                                             <?php } else {  ?>
                                                 <button name='submit' value='insert' class="btn waves-effect waves-light btn-primary">
-                                                    Save
+                                                    <?php echo __('Save'); ?>
                                                 </button>
                                             <?php }
                                         endif; ?>
@@ -367,8 +367,8 @@ if ($_GET) {
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="mapModalLabel">Map View</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="mapModalLabel"><?php echo __('Map View'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
             <div class="modal-body">
                 <div id="map" class="m-height-500"></div>

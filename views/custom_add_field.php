@@ -47,14 +47,14 @@
 	        success: function(response) {
 	        	console.log(response);    
 	            swal.fire({              
-							title: "Record has been saved successfully ",              
-							text: "Do you want to close ? ",              
+							title: <?= json_encode(__("Record has been saved successfully")) ?>,              
+							text: <?= json_encode(__("Do you want to close ?")) ?>,              
 							type: "success",           
 							buttonsStyling: false,
-							confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",    
+							confirmButtonText: "<i class='la la-hand-o-up'></i>" + <?= json_encode(__("Yes, close!")) ?>,    
 							confirmButtonClass: "btn btn-danger",
 							showCancelButton: true,     
-							cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",      
+							cancelButtonText: "<i class='la la-hand-o-right'></i> " + <?= json_encode(__("No, continue")) ?>,      
 							cancelButtonClass: "btn btn-default"        
 						}).then(function(result) {
 							if (result.value) {
@@ -110,12 +110,12 @@
 		count++;
 		var htmlRows = '';
 		htmlRows += '<tr id="qur_div_'+count+'" >';  
-		htmlRows += '<td><div class="col-lg-6" style="float: left;"><select class="form-control" id="ds_1_'+count+'" aria-label="Select"><option value="0"> Select </option><?php foreach($response as $res){?><option value="<?php echo $res; ?>"><?php echo $res; ?></option><?php } ?></select>	</div><div class="col-lg-6" style="float: left;"><input  class="form-control itemRows" type="text" id="f1_'+count+'" name="" aria-label="Input"></td>';        
+		htmlRows += '<td><div class="col-lg-6" style="float: left;"><select class="form-control" id="ds_1_'+count+'" aria-label="Select"><option value="0"> <?= __("Select") ?> </option><?php foreach($response as $res){?><option value="<?php echo $res; ?>"><?php echo $res; ?></option><?php } ?></select>	</div><div class="col-lg-6" style="float: left;"><input  class="form-control itemRows" type="text" id="f1_'+count+'" name="" aria-label="Input"></td>';        
 		htmlRows += '<td><select class="form-control" id="op1_1_'+count+'" aria-label="Select"><?php foreach($operator as $ope){?><option value="<?php echo $ope; ?>"> <?php echo $ope; ?></option><?php } ?> </select></td>';   		
-		htmlRows += '<td><div class="col-lg-6" style="float: left;"><select class="form-control" id="ds_2_'+count+'" aria-label="Select"><option value="0"> Select </option><?php foreach($response as $res){?><option value="<?php echo $res; ?>"><?php echo $res; ?></option><?php } ?></select>	</div><div class="col-lg-6" style="float: left;"><input type="text" class="form-control" id="s1_'+count+'" name="" aria-label="Input"></td>';	
+		htmlRows += '<td><div class="col-lg-6" style="float: left;"><select class="form-control" id="ds_2_'+count+'" aria-label="Select"><option value="0"> <?= __("Select") ?> </option><?php foreach($response as $res){?><option value="<?php echo $res; ?>"><?php echo $res; ?></option><?php } ?></select>	</div><div class="col-lg-6" style="float: left;"><input type="text" class="form-control" id="s1_'+count+'" name="" aria-label="Input"></td>';	
 		//htmlRows += '<td><input type="text" class="form-control" id="v_'+count+'" name="" aria-label="Input"></td>';	
 		htmlRows += '<td><select class="form-control" id="op1_2_'+count+'" aria-label="Select"><?php foreach($operator as $ope){?><option value="<?php echo $ope; ?>"> <?php echo $ope; ?></option><?php } ?> </select></td>';
-		htmlRows += '<td><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">Delete</button></td>';   
+		htmlRows += '<td><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)"><?= __("Delete") ?></button></td>';   
 		htmlRows += '</tr>';
 		$('#invoiceItem1').append(htmlRows); 
 	}
@@ -149,7 +149,7 @@
 		htmlRows += '<td><input type="text" class="form-control" id="s_'+count+'" name="" aria-label="Input"></td>';	
 		htmlRows += '<td><input type="text" class="form-control" id="v_'+count+'" name="" aria-label="Input"></td>';	
 		htmlRows += '<td><select class="form-control" id="op_2_'+count+'" aria-label="Select"><?php foreach($operator as $ope){?><option value="<?php echo $ope; ?>"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $ope; ?></option><?php } ?> </select></td>';
-		htmlRows += '<td><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">Delete</button></td>';   
+		htmlRows += '<td><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)"><?= __("Delete") ?></button></td>';   
 		htmlRows += '</tr>';
 		$('#invoiceItem').append(htmlRows); 
 	}
@@ -208,7 +208,7 @@
 		<div class="modal-content" style="min-height: 590px;">
 			<div class="modal-header">
 				<h5 class="modal-title">
-					Add Custom Field  <?php echo $get_table; ?>
+					<?= __("Add Custom Field") ?>  <?php echo $get_table; ?>
 					<!-- <small>Autocomplete data source</small> -->
 				</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -228,22 +228,22 @@
 									<label class="kt-radio kt-radio--solid">
 									 
 									<input type="radio"  id='spacer' value="custom_sql"  name="type" checked="checked" onclick="difftype(this.id)" aria-label="Type"> 
-									spacer <span></span>
+									<?= __("spacer") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="text"  value="static"  name="type" onclick="difftype(this.id)" aria-label="Type"> Test <span></span>
+										<input type="radio" id="text"  value="static"  name="type" onclick="difftype(this.id)" aria-label="Type"> <?= __("Test") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="static"  value="static"  name="type" onchange="difftype(this.id)" aria-label="Type"> Static Formula <span></span>
+										<input type="radio" id="static"  value="static"  name="type" onchange="difftype(this.id)" aria-label="Type"> <?= __("Static Formula") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="dynamic"  value="dynamic"  name="type" onchange="difftype(this.id)" aria-label="Type"> Dynamic Formula <span></span>
+										<input type="radio" id="dynamic"  value="dynamic"  name="type" onchange="difftype(this.id)" aria-label="Type"> <?= __("Dynamic Formula") ?> <span></span>
 									</label>
 								</div>
 							</div>
@@ -256,17 +256,17 @@
 									<label class="kt-radio kt-radio--solid">
 									 
 									<input type="radio"  id='insert' value="insert" onclick="viewtype(this.id)"  name="view" checked="checked" aria-label="View"> 
-									Insert <span></span>
+									<?= __("Insert") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="list"  value="list" onclick="viewtype(this.id)"  name="view" aria-label="View"> List <span></span>
+										<input type="radio" id="list"  value="list" onclick="viewtype(this.id)"  name="view" aria-label="View"> <?= __("List") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="all"  value="all" onclick="viewtype(this.id)"  name="view" aria-label="View"> All <span></span>
+										<input type="radio" id="all"  value="all" onclick="viewtype(this.id)"  name="view" aria-label="View"> <?= __("All") ?> <span></span>
 									</label>
 								</div>
 								<input type="hidden" id="view_value" value="insert">
@@ -276,7 +276,7 @@
 					<!---- start spacer----->
 					<div class="row align-items-center" id="spacer_data" style="margin-top: 10px;" >
 						<div class="form-group col-lg-3">
-							<label>Lenth</label>
+							<label><?= __("Lenth") ?></label>
 							<select class="form-control" id="width" name= "width" aria-label="Width">
 								<?php for($i=1; $i<13;$i++){ 
 									$view_type = "col-lg-".$i; ?>
@@ -289,7 +289,7 @@
 					<!---- start test----->
 					<div class="row align-items-center" id="text_data" style="margin-top: 10px;display: none;" >
 						<div class="form-group col-lg-3">
-							<label>Lenth</label>
+							<label><?= __("Lenth") ?></label>
 							<select class="form-control" id="width_text" name= "width" aria-label="Width">
 								<?php for($i=1; $i<13;$i++){ 
 									$view_type = "col-lg-".$i; ?>
@@ -298,11 +298,11 @@
 							</select>		 
 						</div>
 						<div class="form-group col-lg-3">
-							<label>Lable</label>
+							<label><?= __("Lable") ?></label>
 							<input class="form-control"  type="text" id="lable" name="lable"  value="" aria-label="Lable">	 
 						</div>
 						<div class="form-group col-lg-6">
-							<label>Content</label>
+							<label><?= __("Content") ?></label>
 							<textarea class="form-control" id="content" rows="3" aria-label="Textarea"></textarea> 
 						</div>
 					</div>
@@ -310,7 +310,7 @@
 					<!---- start formula----->
 					<div class="row align-items-center" id="static_data" style="margin-top: 10px;display: none;" >
 						<div class="form-group col-lg-3" >
-							<label>Lenth</label>
+							<label><?= __("Lenth") ?></label>
 							<select class="form-control" id="width_static" name= "insert_view_width[]" aria-label="Insert View Width">
 								<?php for($i=1; $i<13;$i++){ 
 									$view_type = "col-lg-".$i; ?>
@@ -319,19 +319,19 @@
 							</select>		 
 						</div>
 						<div class="form-group col-lg-3" >
-							<label>Lable</label>
+							<label><?= __("Lable") ?></label>
 							<input class="form-control"  type="text" id="static_lable" name="lable"  value="" aria-label="Lable">	 
 						</div>
 					
 						<div class="col-lg-7">
 							<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem">	
 									<tr>
-										<th scope="col" class="" width="15%">Frist Field </th>
-										<th scope="col" class="thheader" width="5%">operater</th>
-										<th scope="col" class="thheader" width="15%">Second Field </th>
-										<th scope="col" class="thheader" width="5%">Value</th>
-										<th scope="col" class="thheader" width="5%">operater</th>
-										<th scope="col" class="thheader" width="5%">Delete</th>
+										<th scope="col" class="" width="15%"><?= __("Frist Field") ?> </th>
+										<th scope="col" class="thheader" width="5%"><?= __("operater") ?></th>
+										<th scope="col" class="thheader" width="15%"><?= __("Second Field") ?> </th>
+										<th scope="col" class="thheader" width="5%"><?= __("Value") ?></th>
+										<th scope="col" class="thheader" width="5%"><?= __("operater") ?></th>
+										<th scope="col" class="thheader" width="5%"><?= __("Delete") ?></th>
 										
 									</tr>	
 									<tr>
@@ -358,13 +358,13 @@
 											<?php } ?>
 											</select>
 										</td>
-										<td><button class="btn btn-warning" id="del_row_static_1" type="button" onclick="$(this).closest('tr').remove()">Delete</button></td>
+										<td><button class="btn btn-warning" id="del_row_static_1" type="button" onclick="$(this).closest('tr').remove()"><?= __("Delete") ?></button></td>
 									</tr>
 									
 							</table>
 							<table>
 								<tr>
-										<td > Total</td>
+										<td > <?= __("Total") ?></td>
 										<td > <input type="text" class="form-control" id="total"  name="" aria-label="Input"></td>
 										<td></td>
 										<td></td>
@@ -374,16 +374,16 @@
 
 							<div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
 								<!-- <button class="btn btn-danger delete" id="removeRows_static" type="button">- Delete</button>&nbsp;&nbsp; -->
-								<button class="btn btn-success" id="addRows_static" type="button" onclick="addRowss()">+ Add More</button>&nbsp;&nbsp;
-								<button type="button" class="btn btn-brand" onclick="checkcal()">Check </button>&nbsp;&nbsp;
-								<button type="button" class="btn btn-danger" onclick="createselectquery()">Excute Query</button>
+								<button class="btn btn-success" id="addRows_static" type="button" onclick="addRowss()"><?= __("+ Add More") ?></button>&nbsp;&nbsp;
+								<button type="button" class="btn btn-brand" onclick="checkcal()"><?= __("Check") ?> </button>&nbsp;&nbsp;
+								<button type="button" class="btn btn-danger" onclick="createselectquery()"><?= __("Excute Query") ?></button>
 							</div>
 					</div>
 					<!---- end formula----->
 					<!---- start Dynamic formula----->
 					<div class="row align-items-center" id="dynamic_data" style="margin-top: 10px;display: none;" >
 						<div class="form-group col-lg-3">
-							<label>Lenth</label>
+							<label><?= __("Lenth") ?></label>
 							<select class="form-control" id="width_dynamic" name= "width" aria-label="Width">
 								<?php for($i=1; $i<13;$i++){ 
 									$view_type = "col-lg-".$i; ?>
@@ -392,25 +392,25 @@
 							</select>		 
 						</div>
 						<div class="form-group col-lg-3">
-							<label>Lable</label>
+							<label><?= __("Lable") ?></label>
 							<input class="form-control"  type="text" id="lable_dynamic" name="lable"  value="" aria-label="Lable">	 
 						</div>
 					
 						<div class="col-lg-12">
 							<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem1">	
 									<tr>
-										<th scope="col" class="" width="40%">Frist Table/Static Field  </th>
-										<th scope="col" class="thheader" width="5%">operater</th>
-										<th scope="col" class="thheader" width="40%">Second Table/Static Field </th>
+										<th scope="col" class="" width="40%"><?= __("Frist Table/Static Field") ?> </th>
+										<th scope="col" class="thheader" width="5%"><?= __("operater") ?></th>
+										<th scope="col" class="thheader" width="40%"><?= __("Second Table/Static Field") ?> </th>
 										
-										<th scope="col" class="thheader" width="5%">operater</th>
-										<th scope="col" class="thheader" width="5%">Delete</th>
+										<th scope="col" class="thheader" width="5%"><?= __("operater") ?></th>
+										<th scope="col" class="thheader" width="5%"><?= __("Delete") ?></th>
 									</tr>	
 									<tr>
 										<td>
 										<div class="col-lg-6" style="float: left;">
 											<select class="form-control" id="ds_1_1" aria-label="Select">
-												<option value="0"> Select </option>
+												<option value="0"> <?= __("Select") ?> </option>
 											<?php foreach($response as $res){?>
 												<option value="<?php echo $res; ?>"><?php echo $res; ?></option>
 											<?php } ?>
@@ -429,7 +429,7 @@
 										</td>
 										<td> <div class="col-lg-6" style="float: left;">
 											<select class="form-control" id="ds_2_1" aria-label="Select">
-												<option value="0"> Select </option>
+												<option value="0"> <?= __("Select") ?> </option>
 											<?php foreach($response as $res){?>
 												<option value="<?php echo $res; ?>"><?php echo $res; ?></option>
 											<?php } ?>
@@ -447,7 +447,7 @@
 											<?php } ?>
 											</select>
 										</td>
-										<td><button class="btn btn-warning" id="del_row_dynamic_1" type="button" onclick="$(this).closest('tr').remove()">Delete</button></td>
+										<td><button class="btn btn-warning" id="del_row_dynamic_1" type="button" onclick="$(this).closest('tr').remove()"><?= __("Delete") ?></button></td>
 									</tr>
 									
 							</table>
@@ -459,9 +459,9 @@
 
 							<div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
 								<!-- <button class="btn btn-danger delete" id="removeRows_dynamic" type="button">- Delete</button>&nbsp;&nbsp; -->
-								<button class="btn btn-success" id="addRows_dynamic" type="button" onclick="addRowssd()">+ Add More</button>&nbsp;&nbsp;
-								<button type="button" class="btn btn-brand" onclick="checkval()">Check </button>&nbsp;&nbsp;
-								<button type="button" class="btn btn-danger" onclick="createselectquery()">Excute Query</button>
+								<button class="btn btn-success" id="addRows_dynamic" type="button" onclick="addRowssd()"><?= __("+ Add More") ?></button>&nbsp;&nbsp;
+								<button type="button" class="btn btn-brand" onclick="checkval()"><?= __("Check") ?> </button>&nbsp;&nbsp;
+								<button type="button" class="btn btn-danger" onclick="createselectquery()"><?= __("Excute Query") ?></button>
 							</div>
 						</div>
 					</div>
@@ -474,8 +474,8 @@
 				<input type="hidden" name="tables" id='tables' value="<?php echo $get_table; ?>">
 				
 				<input type="hidden" name="page" value="dis_submit">
-				<button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-default btn-bold btn-upper btn-font-sm" onclick="submitfrom()" >Submit</button>
+				<button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?= __("Close") ?></button>
+				<button type="button" class="btn btn-default btn-bold btn-upper btn-font-sm" onclick="submitfrom()" ><?= __("Submit") ?></button>
 			</div>
 		</div>
 	</form>

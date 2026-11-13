@@ -149,7 +149,7 @@ foreach($result3 as $location){
     }
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Add Candidate</h4>
+    <h4 class="modal-title"><?= __('Add Candidate') ?></h4>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body ">
@@ -166,33 +166,33 @@ foreach($result3 as $location){
             <form id="candidatesform" method="post" >
                 <div class="row ">
                     <div class="form-group col-lg-3">
-                        <span class="form-label">First Name <span class="requried">*</span></span>
+                        <span class="form-label"><?= __('First Name') ?> <span class="requried">*</span></span>
                         <span class="d-block error-message text-danger"></span>
                         <input aria-label="First Name" class="form-control requried_field text-capitalize "  type="text" name="first_name" id="first_name" >
                     </div>
                     <div class="form-group col-lg-3">
-                        <span class="form-label">Last Name <span class="requried">*</span></span>
+                        <span class="form-label"><?= __('Last Name') ?> <span class="requried">*</span></span>
                         <span class="d-block error-message text-danger"></span>
                         <input aria-label="Last Name" class="form-control requried_field text-capitalize"  type="text"  name="last_name">
                     </div>
                     <div class="form-group col-lg-3">
-                        <span class="form-label">Email Id <span class="requried">*</span></span>
+                        <span class="form-label"><?= __('Email Id') ?> <span class="requried">*</span></span>
                         <span class="d-block error-message text-danger"></span>
                         <input aria-label="Email" class="form-control requried_field allemails"  data-errorcls="repeateemailerror"  onblur="checkEmailidAllReadyAvilableOrNot()"  type="email"  name="email_id" >
                          <span class="text-danger f-12 allemailerrer" id="repeateemailerror"  style="display:none">Email Id Already Register</span>
                     </div>
                     <div class="form-group col-lg-3">
-                        <span class="form-label">Phone <span class="requried">*</span></span>
+                        <span class="form-label"><?= __('Phone') ?> <span class="requried">*</span></span>
                         <span class="d-block error-message text-danger"></span>
                         <input aria-label="Phone" class="form-control requried_field"  type="number"  name="phone" >
                     </div>
                     <div class="form-group col-lg-3">
-                        <span class="form-label">Current Location<span class="requried">*</span></span>
+                        <span class="form-label"><?= __('Current Location') ?><span class="requried">*</span></span>
                         <span class="d-block error-message text-danger"></span>
                         <input aria-label="Current Location" class="form-control requried_field"  type="text"  name="current_location" value="<?php echo $result['current_location']; ?>" >
                     </div>
                     <div class="form-group col-lg-3">
-                        <span class="form-label">Experience (years)<span class="requried">*</span></span>
+                        <span class="form-label"><?= __('Experience (years)') ?><span class="requried">*</span></span>
                         <span class="d-block error-message text-danger"></span>
                         <div class="input-group input-group-button ">
                             <input aria-label="Candidate Experiances" class="form-control requried_field width1"  type="number"  name="candidate_experiances" value="<?php echo $result['candidate_experiances']; ?>" >
@@ -202,7 +202,7 @@ foreach($result3 as $location){
                         </div>
                     </div>
                     <div class="form-group col-lg-3 w-full">
-                        <span class="form-label">Preferred Location<span class="requried">*</span></span>
+                        <span class="form-label"><?= __('Preferred Location') ?><span class="requried">*</span></span>
                         <span class="d-block error-message text-danger"></span>
                         <select aria-label="Location" class="form-control js-example-basic-single requried_field" name="location_id" data-type="select" >
                             <?php foreach($result3 as $location){ ?>
@@ -211,7 +211,7 @@ foreach($result3 as $location){
                         </select>
                     </div>
                     <div class="form-group col-lg-3">
-                        <span class="form-label">Current CTC<span class="requried">*</span></span>
+                        <span class="form-label"><?= __('Current CTC') ?><span class="requried">*</span></span>
                         <span class="d-block error-message text-danger"></span>
                         <div class="input-group input-group-button ">
                             <input aria-label="Current Ctc" class="form-control width1 requried_field"  type="number"  name="current_ctc" value="<?php echo $result['current_ctc']; ?>" >
@@ -221,7 +221,7 @@ foreach($result3 as $location){
                         </div>
                     </div>
                     <div class="form-group col-lg-3">
-                        <span class="form-label">Resume</span>
+                        <span class="form-label"><?= __('Resume') ?></span>
                         <input aria-label="File" type="file" name="file"/>
                         <input type="hidden" name="old_file" value="<?php echo $data['files'];?>" />
                     </div>
@@ -238,11 +238,11 @@ foreach($result3 as $location){
                     <div class="form-group col-lg-1"></div>
 
                     <div class="form-group col-lg-3">
-                        <span class="form-label mb-2 f-w-600">Resume</span>
+                        <span class="form-label mb-2 f-w-600"><?= __('Resume') ?></span>
                         <input aria-label="Ai File" type="file" name="ai_file" id="ai_file"/>
                     </div>
                     <div class="form-group col-lg-2">
-                        <button type="button" class="btn btn-primary waves-effect waves-light m-t-20" id="uploadcandidateresumebtn" onclick="uploadCandidateResume()">Submit</button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light m-t-20" id="uploadcandidateresumebtn" onclick="uploadCandidateResume()"><?= __('Submit') ?></button>
                     </div>
                     <div class="form-group col-lg-5 text-danger m-t-20 text-left" id="messsage_result">
                     </div>
@@ -252,6 +252,6 @@ foreach($result3 as $location){
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light disabled" id="submitcandidatepopup"  onclick="submitdetails()">Submit</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light disabled" id="submitcandidatepopup"  onclick="submitdetails()"><?= __('Submit') ?></button>
 </div>

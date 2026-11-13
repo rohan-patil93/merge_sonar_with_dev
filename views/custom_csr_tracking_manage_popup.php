@@ -55,19 +55,19 @@ if ($proposal_id > 0) {
         $tracking_rows = $response['tracking_rows'] ?? array();
         $approved_status = (int)($response['approved_status'] ?? $approved_status);
     } else {
-        $errorMessage = $response['message'] ?? 'Unable to load tracking details';
+        $errorMessage = $response['message'] ?? __('Unable to load tracking details');
     }
 } else {
-    $errorMessage = 'Invalid project details';
+    $errorMessage = __('Invalid project details');
 }
 
-$projectTitle = is_array($proposal) ? ($proposal['subject'] ?? 'Project Tracking') : ($proposal->subject ?? 'Project Tracking');
+$projectTitle = is_array($proposal) ? ($proposal['subject'] ?? __('Project Tracking')) : ($proposal->subject ?? __('Project Tracking'));
 $rowCounter = 0;
 ?>
 
 <div class="modal-header">
-    <h5 class="modal-title"><?php echo csrTrackingManageText($projectTitle); ?> — Tracking</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?php echo csrTrackingManageText($projectTitle); ?> — <?= __('Tracking') ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 </div>
 <div class="modal-body">
     <?php if ($errorMessage != '') { ?>
@@ -82,12 +82,12 @@ $rowCounter = 0;
                 <table class="table table-bordered" id="csr_tracking_manage_table">
                     <thead>
                         <tr>
-                            <th scope="col">Sr. No.</th>
-                            <th scope="col">Tracking Name</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">End Date</th>
-                            <th scope="col">Budget</th>
+                            <th scope="col"><?= __('Sr. No.') ?></th>
+                            <th scope="col"><?= __('Tracking Name') ?></th>
+                            <th scope="col"><?= __('Description') ?></th>
+                            <th scope="col"><?= __('Start Date') ?></th>
+                            <th scope="col"><?= __('End Date') ?></th>
+                            <th scope="col"><?= __('Budget') ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -125,10 +125,10 @@ $rowCounter = 0;
                     </tbody>
                 </table>
             </div>
-            <button type="button" class="btn btn-primary mt-2" id="csr_add_tracking_row">Add More</button>
+            <button type="button" class="btn btn-primary mt-2" id="csr_add_tracking_row"><?= __('Add More') ?></button>
             <div class="text-end mt-3">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= __('Cancel') ?></button>
+                <button type="submit" class="btn btn-primary"><?= __('Save') ?></button>
             </div>
         </form>
     <?php } ?>

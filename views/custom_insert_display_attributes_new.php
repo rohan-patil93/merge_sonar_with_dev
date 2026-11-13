@@ -37,7 +37,7 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
 </script>
 <div class="card" >
     <div class="card-header">
-        <h5>Display Attributes</h5>
+        <h5><?= __('Display Attributes') ?></h5>
         <div class="card-header-right">
             <button type="button" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i>Back</button>
         </div>
@@ -48,9 +48,9 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
-                            <span class="form-label d-block">Select Table</span>
+                            <span class="form-label d-block"><?= __('Select Table') ?></span>
                             <select aria-label="Table Name" class="form-select js-example-basic-single" name="table_name"  onchange="selectTableName(this.value)">
-                                   <option value="0"> Select Any One</option>
+                                   <option value="0"><?= __('Select Any One') ?></option>
                                    <?php foreach ($table_list as $tablename) {  ?>
                                        <option value="<?php echo $tablename; ?>" <?php echo $mastertablename == $tablename?"selected":"";?>> <?php echo ucwords(str_replace('_',' ',$tablename)); ?></option>
                                    <?php } ?>
@@ -59,37 +59,37 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                         <div class="row">
                             <ul class="nav md-tabs infisuite_tab ml-2 mb-2">
                                 <li class="nav-item">
-                                    <button type="button" class="nav-link active" data-bs-toggle="tab" role="tab" tabtable" onclick="cllViewPageFunction('T')">List</button>
+                                    <button type="button" class="nav-link active" data-bs-toggle="tab" role="tab" tabtable" onclick="cllViewPageFunction('T')"><?= __('List') ?></button>
                                 </li>
                                 <li class="nav-item">
-                                    <button type="button" class="nav-link" gridview" data-bs-toggle="tab" role="tab" onclick="cllViewPageFunction('G')">Grid</button>
+                                    <button type="button" class="nav-link" gridview" data-bs-toggle="tab" role="tab" onclick="cllViewPageFunction('G')"><?= __('Grid') ?></button>
                                 </li>
                                 <li class="nav-item">
-                                    <button type="button" class="nav-link" tabform" data-bs-toggle="tab" role="tab" onclick="cllViewPageFunction('F')">Form</button>
+                                    <button type="button" class="nav-link" tabform" data-bs-toggle="tab" role="tab" onclick="cllViewPageFunction('F')"><?= __('Form') ?></button>
                                 </li>
                                 <li class="nav-item">
-                                    <button type="button" class="nav-link" tabview" data-bs-toggle="tab" role="tab" onclick="cllViewPageFunction('V')">View</button>
+                                    <button type="button" class="nav-link" tabview" data-bs-toggle="tab" role="tab" onclick="cllViewPageFunction('V')"><?= __('View') ?></button>
                                 </li>
                             </ul>
                             <div class="tab-content tabs custom-scroll" style="height: 1000px;">
                                 <div class="tab-pane card-body active p-0" id="tabtable" role="tabpanel">
                                     <div class="form-group">
-                                        <span class="form-label d-block">List Page Option</span>
+                                        <span class="form-label d-block"><?= __('List Page Option') ?></span>
                                         <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                                     </div>
                                     <div class="form-group">
-                                        <span class="form-label d-block">List Page Title</span>
+                                        <span class="form-label d-block"><?= __('List Page Title') ?></span>
                                         <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-lg-6">
-                                            <span class="form-label d-block">Sequence No</span>
+                                            <span class="form-label d-block"><?= __('Sequence No') ?></span>
                                             <input aria-label="Mandatory" type="checkbox" value="0" name="mandatory"  class="display js-primary-sm" <?php echo  $editfield['mandatory']=='0'?"checked":""; ?> >
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <span class="form-label d-block">Start Series</span>
+                                            <span class="form-label d-block"><?= __('Start Series') ?></span>
                                             <select aria-label="Table Name" class="form-select js-example-basic-single" name="table_name"  onchange="selectTableName(this.value)">
-                                                   <option value="0"> Select Any One</option>
+                                                   <option value="0"><?= __('Select Any One') ?></option>
                                                    <?php foreach ($startseries as $ss) {  ?>
                                                        <option value="<?php echo $ss['short_code']; ?>" <?php echo $mastertablename == $ss['short_code']?"selected":"";?>> <?php echo $ss['label']; ?></option>
                                                    <?php } ?>
@@ -127,11 +127,11 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                                 </div>
                                 <div class="tab-pane card-body p-0" id="tabform" role="tabpanel">
                                     <div class="form-group">
-                                        <span class="form-label d-block">Insert Page Option</span>
+                                        <span class="form-label d-block"><?= __('Insert Page Option') ?></span>
                                         <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                                     </div>
                                     <div class="form-group">
-                                        <span class="form-label d-block">Insert Page Title</span>
+                                        <span class="form-label d-block"><?= __('Insert Page Title') ?></span>
                                         <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                                     </div>
 
@@ -151,11 +151,11 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                                 </div>
                                 <div class="tab-pane card-body p-0" id="tabview" role="tabpanel">
                                     <div class="form-group">
-                                        <span class="form-label d-block">View Page Option</span>
+                                        <span class="form-label d-block"><?= __('View Page Option') ?></span>
                                         <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                                     </div>
                                     <div class="form-group">
-                                        <span class="form-label d-block">View Page Title</span>
+                                        <span class="form-label d-block"><?= __('View Page Title') ?></span>
                                         <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                                     </div>
                                         <?php foreach($mastertablefield as $keyfield=>$mtf){ ?>
@@ -189,12 +189,12 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
             <div class="col-lg-3" >
                 <div class="card">
                     <div class="card-header">
-                        <h5>Field Details</h5>
+                        <h5><?= __('Field Details') ?></h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group">
-                                <span class="form-label d-block">Display Name</span>
+                                <span class="form-label d-block"><?= __('Display Name') ?></span>
                                 <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                             </div>
                             <div class="form-group w-full">

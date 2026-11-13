@@ -93,21 +93,21 @@ if ($rid != '') {
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5><i class="fa fa-exclamation-circle m-r-5"></i> Product Informations</h5>
+                                    <h5><i class="fa fa-exclamation-circle m-r-5"></i> <?= __('Product Informations') ?></h5>
                                 </div>
 
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Product/Item Name</label>
+                                            <label class="form-label"><?= __('Product/Item Name') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input name="product_name" value="<?php echo $pm_details['product_name'] ?? ""; ?>" class="form-control" type="text" placeholder="Enter Product Name" aria-label="Enter Product Name">
+                                                <input name="product_name" value="<?php echo $pm_details['product_name'] ?? ""; ?>" class="form-control" type="text" placeholder="<?= __('Enter Product Name') ?>" aria-label="Enter Product Name">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Product Description</label>
+                                            <label class="form-label"><?= __('Product Description') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -115,7 +115,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Product Part No/Short Code</label>
+                                            <label class="form-label"><?= __('Product Part No/Short Code') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -123,7 +123,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">HSN/SAC Code</label>
+                                            <label class="form-label"><?= __('HSN/SAC Code') ?></label>
                                         </div>
 
                                         <div class="col-lg-6">
@@ -142,31 +142,31 @@ if ($rid != '') {
 
 
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Purchase Price</label>
+                                            <label class="form-label"><?= __('Purchase Price') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input name="purchase_price" value="<?php echo $pm_details['purchase_price'] ?? ""; ?>" class="form-control" type="number" placeholder="Enter Purchase Price" aria-label="Enter Purchase Price">
+                                                <input name="purchase_price" value="<?php echo $pm_details['purchase_price'] ?? ""; ?>" class="form-control" type="number" placeholder="<?= __('Enter Purchase Price') ?>" aria-label="Enter Purchase Price">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Sale Price</label>
+                                            <label class="form-label"><?= __('Sale Price') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input name="sale_price" value="<?php echo $pm_details['sale_price'] ?? ""; ?>" class="form-control" type="number" placeholder="Enter Sale Price" aria-label="Enter Sale Price">
+                                                <input name="sale_price" value="<?php echo $pm_details['sale_price'] ?? ""; ?>" class="form-control" type="number" placeholder="<?= __('Enter Sale Price') ?>" aria-label="Enter Sale Price">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">MRP</label>
+                                            <label class="form-label"><?= __('MRP') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input name="mrp" value="<?php echo $pm_details['mrp'] ?? ""; ?>" class="form-control" type="number" placeholder="Enter MRP" aria-label="Enter MRP">
+                                                <input name="mrp" value="<?php echo $pm_details['mrp'] ?? ""; ?>" class="form-control" type="number" placeholder="<?= __('Enter MRP') ?>" aria-label="Enter MRP">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Primary Unit</label>
+                                            <label class="form-label"><?= __('Primary Unit') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -174,7 +174,7 @@ if ($rid != '') {
                                                     <option value="0">--Select--</option>
                                                     <?php foreach ($units as $row): ?>
                                                         <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $pm_details['primary_unit'] == $row['genc_detail_code'] ? 'selected' : ''; ?>>
-                                                            <?php echo $row['genc_detail_name']; ?>
+                                                            <?php echo htmlspecialchars(__($row['genc_detail_name'] ?? '')); ?>
                                                         </option>
                                                     <?php endforeach; ?>
 
@@ -182,7 +182,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Alternative Unit</label>
+                                            <label class="form-label"><?= __('Alternative Unit') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -190,14 +190,14 @@ if ($rid != '') {
                                                     <option value="0">--Select--</option>
                                                     <?php foreach ($units as $row): ?>
                                                         <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $pm_details['alternative_unit'] == $row['genc_detail_code'] ? 'selected' : ''; ?>>
-                                                            <?php echo $row['genc_detail_name']; ?>
+                                                            <?php echo htmlspecialchars(__($row['genc_detail_name'] ?? '')); ?>
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Convertion Factor</label>
+                                            <label class="form-label"><?= __('Convertion Factor') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -210,13 +210,13 @@ if ($rid != '') {
                                     <div class="text-center">
                                         <?php if ($rid != "") {  ?>
                                             <button name='submit' value='update' class="btn waves-effect waves-light btn-primary">
-                                                <i class="fa fa-file-text-o"></i> Update Product
+                                                <i class="fa fa-file-text-o"></i> <?= __('Update Product') ?>
                                             </button>
                                             <input name="rid" type="hidden" value="<?php echo $pm_details['id'] != "" ? $pm_details['id'] : ""; ?>">
                                             <input type="hidden" name="existing_image" value="<?php echo $pm_details['image'] ?? ''; ?>">
                                         <?php } else {  ?>
                                             <button name='submit' value='insert' class="btn waves-effect waves-light btn-primary">
-                                                <i class="fa fa-file-text-o"></i> Save Product
+                                                <i class="fa fa-file-text-o"></i> <?= __('Save Product') ?>
                                             </button>
                                         <?php } ?>
                                     </div>
@@ -226,12 +226,12 @@ if ($rid != '') {
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5><i class="fa fa-exclamation-circle m-r-5"></i> Additional Informations</h5>
+                                    <h5><i class="fa fa-exclamation-circle m-r-5"></i> <?= __('Additional Informations') ?></h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Manage Stock</label>
+                                            <label class="form-label"><?= __('Manage Stock') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -239,14 +239,14 @@ if ($rid != '') {
                                                     <option value="0">--Select--</option>
                                                     <?php foreach ($manage_stock as $row): ?>
                                                         <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $pm_details['manage_stock'] == $row['genc_detail_code'] ? 'selected' : ''; ?>>
-                                                            <?php echo $row['genc_detail_name']; ?>
+                                                            <?php echo htmlspecialchars(__($row['genc_detail_name'] ?? '')); ?>
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Item Type</label>
+                                            <label class="form-label"><?= __('Item Type') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -254,14 +254,14 @@ if ($rid != '') {
                                                     <option value="0">--Select--</option>
                                                     <?php foreach ($item_type as $row): ?>
                                                         <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $pm_details['item_type'] == $row['genc_detail_code'] ? 'selected' : ''; ?>>
-                                                            <?php echo $row['genc_detail_name']; ?>
+                                                            <?php echo htmlspecialchars(__($row['genc_detail_name'] ?? '')); ?>
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Building</label>
+                                            <label class="form-label"><?= __('Building') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -276,7 +276,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Building Floor</label>
+                                            <label class="form-label"><?= __('Building Floor') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -287,7 +287,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Building Floor Space</label>
+                                            <label class="form-label"><?= __('Building Floor Space') ?></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -298,7 +298,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Product Image</label>
+                                            <label class="form-label"><?= __('Product Image') ?></label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -306,7 +306,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Min Sale Price</label>
+                                            <label class="form-label"><?= __('Min Sale Price') ?></label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -314,15 +314,15 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Bar Code</label>
+                                            <label class="form-label"><?= __('Bar Code') ?></label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input name="bar_code" value="<?php echo $pm_details['bar_code'] ?? ""; ?>" class="form-control" type="text" placeholder="Enter Bar Code" aria-label="Enter Bar Code">
+                                                <input name="bar_code" value="<?php echo $pm_details['bar_code'] ?? ""; ?>" class="form-control" type="text" placeholder="<?= __('Enter Bar Code') ?>" aria-label="Enter Bar Code">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Openning Stock Pack</label>
+                                            <label class="form-label"><?= __('Openning Stock Pack') ?></label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -330,7 +330,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Openning Stock Loose</label>
+                                            <label class="form-label"><?= __('Openning Stock Loose') ?></label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -338,7 +338,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Openning Stock Value</label>
+                                            <label class="form-label"><?= __('Openning Stock Value') ?></label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -346,7 +346,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Batch</label>
+                                            <label class="form-label"><?= __('Batch') ?></label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -354,7 +354,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Mfg. Date</label>
+                                            <label class="form-label"><?= __('Mfg. Date') ?></label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -362,7 +362,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label">Exp. Date</label>
+                                            <label class="form-label"><?= __('Exp. Date') ?></label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">

@@ -30,8 +30,8 @@ foreach((array)$earnings as $ern){
         var htmlRows = "";
         count = count+1;
         htmlRows+='<div class="row align-items-end pd_row" id="pd_'+count+'">';
-        htmlRows+='<div class="col-lg-5"> <div class="form-group"><span class="form-label f-w-600 f-14">Title</span><input aria-label="Input field" type="text" class="form-control"></div> </div>';
-        htmlRows+='<div class="col-lg-5"><div class="form-group"><span class="form-label f-w-600 f-14">Value</span><input aria-label="Input field" type="text" class="form-control" placeholder=""> </div></div>';
+        htmlRows+='<div class="col-lg-5"> <div class="form-group"><span class="form-label f-w-600 f-14"><?= __('Title') ?></span><input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"></div> </div>';
+        htmlRows+='<div class="col-lg-5"><div class="form-group"><span class="form-label f-w-600 f-14"><?= __('Value') ?></span><input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" placeholder=""> </div></div>';
         htmlRows+='<div class="col-lg-2 text-end mb-3"><button type="button" onclick="deleterow(\'pd_' + count + '\',\'paydetails\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" class="btn p-0 border-0 bg-transparent"><i class="fa fa-trash"></i> </button><button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>  </div>';
         htmlRows+='</div>';
         console.log(htmlRows);
@@ -42,8 +42,8 @@ foreach((array)$earnings as $ern){
         var count = $(".emp_row").length;
          count = count+1;
         htmlRows+='<div class="row align-items-end emp_row" id="emp_'+count+'">';
-        htmlRows+='<div class="col-lg-5"> <div class="form-group"><span class="form-label f-w-600 f-14">Title</span><input aria-label="Input field" type="text" class="form-control"></div> </div>';
-        htmlRows+='<div class="col-lg-5"><div class="form-group"><span class="form-label f-w-600 f-14">Value</span><input aria-label="Input field" type="text" class="form-control" placeholder=""> </div></div>';
+        htmlRows+='<div class="col-lg-5"> <div class="form-group"><span class="form-label f-w-600 f-14"><?= __('Title') ?></span><input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control"></div> </div>';
+        htmlRows+='<div class="col-lg-5"><div class="form-group"><span class="form-label f-w-600 f-14"><?= __('Value') ?></span><input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" placeholder=""> </div></div>';
         htmlRows+='<div class="col-lg-2 text-end mb-3"> <button type="button" onclick="deleterow(\'emp_' + count + '\',\'paydetails\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" class="btn p-0 border-0 bg-transparent"> <i class="fa fa-trash"></i> </button> <button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>  </div>';
         htmlRows+='</div>';
         $('.draggableemplList').append(htmlRows);
@@ -61,8 +61,8 @@ foreach((array)$earnings as $ern){
         }
 
         htmlRows+='<div class="row align-items-end" id="'+ids+'">';
-        htmlRows+=' <div class="col-lg-5"><div class="form-group"> <input aria-label="Er Name" type="text" class="form-control" id="er_name_'+count+'"></div> </div>';
-        htmlRows+='<div class="col-lg-5"><div class="form-group"><input aria-label="Er Code" type="text" readonly class="form-control" id="er_code_'+count+'"> </div></div>';
+        htmlRows+=' <div class="col-lg-5"><div class="form-group"> <input aria-label="<?php echo __('Er Name'); ?>" type="text" class="form-control" id="er_name_'+count+'"></div> </div>';
+        htmlRows+='<div class="col-lg-5"><div class="form-group"><input aria-label="<?php echo __('Er Code'); ?>" type="text" readonly class="form-control" id="er_code_'+count+'"> </div></div>';
         htmlRows+='<div class="col-lg-2 text-end mb-3"> <button type="button" onclick="deleterow(\'' + ids + '\',\'paydetails\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" class="btn p-0 border-0 bg-transparent"> <i class="fa fa-trash"></i><button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button></div>';
         htmlRows+='</div>';
         if(type=='deduction'){
@@ -97,26 +97,26 @@ foreach((array)$earnings as $ern){
 <form class="kt-form"  method="post" action=""  name="myForm" enctype="multipart/form-data">
 <div class="card mt-4">
     <div class="card-header">
-        <h5>Salary Stracture</h5>
+        <h5><?= __('Salary Stracture') ?></h5>
     </div>
 
 </div>
 <div class="card">
     <div class="card-body">
-        <h6 class="f-w-500 m-l-5 bg-gray">Employee Details</h6>
+        <h6 class="f-w-500 m-l-5 bg-gray"><?= __('Employee Details') ?></h6>
         <div class="card-block">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="mb-3">Employee Details</h4>
+                            <h4 class="mb-3"><?= __('Employee Details') ?></h4>
                             <div  id="draggablePanelList" class="draggableemplList">
                                 <div class="row align-items-end emp_row"  id="emp_2">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <span class="form-label f-w-600 f-14">Employee Name</button>
-                                            <select aria-label="Select option" class="form-select js-example-basic-single">
-                                                <option value="0">Select Any One</option>
+                                            <span class="form-label f-w-600 f-14"><?= __('Employee Name') ?></button>
+                                            <select aria-label="<?php echo __('Select option'); ?>" class="form-select js-example-basic-single">
+                                                <option value="0"><?= __('Select Any One') ?></option>
                                                 <?php foreach($employees as $emp){ ?>
                                                     <option value="<?php echo $emp['id']; ?>"><?php echo $emp['display_name']; ?></option>
                                                 <?php } ?>
@@ -125,20 +125,20 @@ foreach((array)$earnings as $ern){
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <span class="form-label f-w-600 f-14">Effective Date</span>
-                                            <input aria-label="Emp Code" type="date" class="form-control" name="emp_code" id="emp_code" value="">
+                                            <span class="form-label f-w-600 f-14"><?= __('Effective Date') ?></span>
+                                            <input aria-label="<?php echo __('Emp Code'); ?>" type="date" class="form-control" name="emp_code" id="emp_code" value="">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <span class="form-label f-w-600 f-14">Description</span>
-                                            <textarea aria-label="Descrption" class="form-control" name="descrption"></textarea>
+                                            <span class="form-label f-w-600 f-14"><?= __('Description') ?></span>
+                                            <textarea aria-label="<?php echo __('Descrption'); ?>" class="form-control" name="descrption"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <span class="form-label f-w-600 f-14">Notes</span>
-                                            <textarea aria-label="Note" class="form-control" name="note"></textarea>
+                                            <span class="form-label f-w-600 f-14"><?= __('Notes') ?></span>
+                                            <textarea aria-label="<?php echo __('Note'); ?>" class="form-control" name="note"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -150,47 +150,47 @@ foreach((array)$earnings as $ern){
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="mb-3">Pay Details</h4>
+                            <h4 class="mb-3"><?= __('Pay Details') ?></h4>
                             <div  id="draggablePanelList_2" class="draggableemplList">
 
                                 <div class="row align-items-end emp_row" id="emp_2_2">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <span class="form-label f-w-600 f-14"> Joining Bonus Applicable</span>
+                                            <span class="form-label f-w-600 f-14"><?= __('Joining Bonus Applicable') ?></span>
                                             <div>
-                                             <input aria-label="Joining Bonus Applicable" type="checkbox" name="joining_bonus_applicable"  class="js-switch" value="0" <?php if($res['  joining_bonus_applicable']== 0 ){ ?> checked <?php
+                                             <input aria-label="<?php echo __('Joining Bonus Applicable'); ?>" type="checkbox" name="joining_bonus_applicable"  class="js-switch" value="0" <?php if($res['  joining_bonus_applicable']== 0 ){ ?> checked <?php
 } ?>  />
                                              </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <span class="form-label f-w-600 f-14">Variable Pay With CTC</span>
+                                            <span class="form-label f-w-600 f-14"><?= __('Variable Pay With CTC') ?></span>
                                             <div>
-                                             <input aria-label="Joining Bonus Applicable" type="checkbox" name="joining_bonus_applicable"  class="js-switch" value="0" <?php if($res['  joining_bonus_applicable']== 0 ){ ?> checked <?php
+                                             <input aria-label="<?php echo __('Joining Bonus Applicable'); ?>" type="checkbox" name="joining_bonus_applicable"  class="js-switch" value="0" <?php if($res['  joining_bonus_applicable']== 0 ){ ?> checked <?php
 } ?>  />
                                              </div>
                                         </div>
                                     </div>
                                      <div class="col-lg-6" id="joining_bouns_text" style="display: none;">
                                         <div class="form-group">
-                                            <span class="form-label f-w-600 f-14">Joining Bonus</span>
+                                            <span class="form-label f-w-600 f-14"><?= __('Joining Bonus') ?></span>
 
-                                             <input aria-label="Joining Bonus Amount" type="text" name="joining_bonus_amount" id="joining_bouns" value=""  class="form-control" />
+                                             <input aria-label="<?php echo __('Joining Bonus Amount'); ?>" type="text" name="joining_bonus_amount" id="joining_bouns" value=""  class="form-control" />
 
                                         </div>
                                     </div>
                                      <div class="col-lg-6" style="display: none;">
                                         <div class="form-group">
-                                            <span class="form-label f-w-600 f-14" >Variable Pay</span>
+                                            <span class="form-label f-w-600 f-14" ><?= __('Variable Pay') ?></span>
 
-                                             <input aria-label="Variable Yearly" type="text" name="variable_yearly" value="" id="variable_yearly"  class="form-control" />
+                                             <input aria-label="<?php echo __('Variable Yearly'); ?>" type="text" name="variable_yearly" value="" id="variable_yearly"  class="form-control" />
 
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <span class="form-label f-w-600 f-14"> CTC</span>
+                                            <span class="form-label f-w-600 f-14"><?= __('CTC') ?></span>
                                             <input aria-label="007" type="text" class="form-control" placeholder="007">
                                         </div>
                                     </div>
@@ -207,7 +207,7 @@ foreach((array)$earnings as $ern){
         <div class="col-lg-12 text-center">
 
             <input type="hidden" name="submit" value="Add">
-            <button   class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="continue"><i class="la la-check-circle"></i>Save</button>
+            <button   class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="continue"><i class="la la-check-circle"></i><?= __('Save') ?></button>
         </div>
     </div>
 </div>

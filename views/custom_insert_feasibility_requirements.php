@@ -18,21 +18,21 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
     if ($feasibility_requirement_res['sales_order_id'] != "") {
         $deocdeId = deocdeId("id:" . $feasibility_requirement_res['sales_order_id']); ?>
         <div class="row mb-2">
-            <a target="_blank" href="index.php?option=COM_INSERT_SALES_ORDERS&Rid=<?php echo $deocdeId; ?>" class="btn btn-primary col-lg-2">Sales Order</a>
+            <a target="_blank" href="index.php?option=COM_INSERT_SALES_ORDERS&Rid=<?php echo $deocdeId; ?>" class="btn btn-primary col-lg-2"><?php echo __('Sales Order'); ?></a>
             <div class="col-lg-9"></div>
         </div>
     <?php } else { ?>
         <div class="row mb-2">
-            <button class="btn btn-primary col-lg-3" onclick="createSalesOrdersWithFeasibilty('<?php echo $feasibility_requirement_res['id']; ?>','<?php echo $feasibility_requirement_res['lead_id']; ?>')">Generate SO</button>
+            <button class="btn btn-primary col-lg-3" onclick="createSalesOrdersWithFeasibilty('<?php echo $feasibility_requirement_res['id']; ?>','<?php echo $feasibility_requirement_res['lead_id']; ?>')"><?php echo __('Generate SO'); ?></button>
             <div class="col-lg-6"></div>
-            <button class="btn btn-danger col-lg-3" onclick="reOpenFeasibility('<?php echo $feasibility_requirement_res['id']; ?>')">Reopen Feasibility</button>
+            <button class="btn btn-danger col-lg-3" onclick="reOpenFeasibility('<?php echo $feasibility_requirement_res['id']; ?>')"><?php echo __('Reopen Feasibility'); ?></button>
         </div>
     <?php }
 }
 if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['current_status'] != ST_APPROVED) { ?>
     <div class="row mb-2">
         <div class="col-lg-9"></div>
-        <button class="btn btn-success col-lg-3" onclick="showFeasibilityReport('<?php echo $feasibility_requirement_res['id']; ?>')">Close Feasibility</button>
+        <button class="btn btn-success col-lg-3" onclick="showFeasibilityReport('<?php echo $feasibility_requirement_res['id']; ?>')"><?php echo __('Close Feasibility'); ?></button>
 
     </div>
 
@@ -42,7 +42,7 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group w-full">
-                <label class="form-label d-block" for="feasibility_type_id">Feasibility Type</label>
+                <label class="form-label d-block" for="feasibility_type_id"><?php echo __('Feasibility Type'); ?></label>
                 <select class="form-select js-example-basic-single form-control" id="feasibility_type_id" onchange="loadFeasibilityFields()">
                     <?php foreach ($feasibility_types_res as $id => $name) { ?>
                         <option value="<?php echo $id; ?>"
@@ -57,7 +57,7 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
     </div>
     <form id="feasibilityForm">
         <div class="col-lg-12 m-t-10 m-b-10 ">
-            <h5 style="font-weight: bold;">Feasibility Requirement</h5>
+            <h5 style="font-weight: bold;"><?php echo __('Feasibility Requirement'); ?></h5>
         </div>
         <div id="dynamic_fields" class="row"></div>
 
@@ -68,9 +68,9 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
     <input type="hidden" name="lead_id" id='lead_id' value="<?php echo $_GET['lead_id'] ?? ''; ?>">
     <div style="pointer-events: auto; opacity: 1;" class="col-lg-12 text-end mt-4">
         <?php if ($feasibility_requirement_res['current_status'] == ST_APPROVED) { ?>
-            <button class="btn btn-primary next-btn" type="button" id="saveNextBtn" onclick="withOutSaving('custom_insert_lead_feasibility_evaluations', <?php echo $feasibility_requirement_res['id']; ?>, <?php echo $_GET['lead_id']; ?>)">Save & Next</button>
+            <button class="btn btn-primary next-btn" type="button" id="saveNextBtn" onclick="withOutSaving('custom_insert_lead_feasibility_evaluations', <?php echo $feasibility_requirement_res['id']; ?>, <?php echo $_GET['lead_id']; ?>)"><?php echo __('Save & Next'); ?></button>
         <?php } else { ?>
-            <button class="btn btn-primary next-btn" type="button" id="saveNextBtn_2" onclick="saveAndNextRequirement('custom_insert_lead_feasibility_evaluations')">Save & Next</button>
+            <button class="btn btn-primary next-btn" type="button" id="saveNextBtn_2" onclick="saveAndNextRequirement('custom_insert_lead_feasibility_evaluations')"><?php echo __('Save & Next'); ?></button>
         <?php } ?>
     </div>
 </div>
@@ -92,7 +92,7 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
             console.warn("Invalid JSON in requirement_json");
         }
         if (!typeId) {
-            $('#dynamic_fields').html('<div class="text-danger">Please select a feasibility type.</div>');
+            $('#dynamic_fields').html('<div class="text-danger"><?php echo __('Please select a feasibility type.'); ?></div>');
             return;
         }
         $.ajax({
@@ -122,7 +122,7 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
             },
             error: function(xhr, status, error) {
                 console.error("Error loading fields:", error);
-                $('#dynamic_fields').html('<div class="text-danger">Failed to load fields.</div>');
+                $('#dynamic_fields').html('<div class="text-danger"><?php echo __('Failed to load fields.'); ?></div>');
             }
         });
     }
@@ -256,7 +256,7 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
             text: errorMessage,
             type: "error",
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "OK"
+            confirmButtonText: <?php echo json_encode(__('OK')); ?>
         });
 
         console.error("AJAX Error:", {
@@ -306,7 +306,7 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
                 reinitSelect2(); // Reinitialize select2 after loading new content
             },
             error: function(xhr, status, error) {
-                alert('Error loading next page: ' + error);
+                alert(<?php echo json_encode(__('Error loading next page:')); ?> + error);
             }
         });
     }
@@ -320,12 +320,12 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
 
         swal({
             title: appName,
-            text: "Are you sure you want to reopen this feasibility?",
+            text: <?php echo json_encode(__('Are you sure you want to reopen this feasibility?')); ?>,
             type: "info",
             showCancelButton: true,
             confirmButtonClass: "btn-success",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+            cancelButtonText: <?php echo json_encode(__('No')); ?>,
             closeOnConfirm: true,
             closeOnCancel: true
         }, function(isConfirm) {

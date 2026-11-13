@@ -62,7 +62,7 @@ $showtables = json_decode($showtablesdata,1);
 ?>
 <script type="text/javascript">
     function droplist(val,type){
-        alert("hai");
+        alert(<?php echo json_encode(__('hai')); ?>);
         var data = $('#droplist').val();
         data = JSON.parse(data);
         if(type == 'add'){
@@ -79,7 +79,7 @@ $showtables = json_decode($showtablesdata,1);
             }
             i++;
         });
-        $("#view_table").html("<select aria-label='Table' class='form-control' id ='table' name='table' onchange='fieldchange(this.value)'><option value=''>Select any table </option>"+option+"</select>");
+        $("#view_table").html("<select aria-label='Table' class='form-control' id ='table' name='table' onchange='fieldchange(this.value)'><option value=''><?php echo __('Select any table'); ?> </option>"+option+"</select>");
 
         console.log(option);
         var chan = JSON.stringify(data);
@@ -134,7 +134,7 @@ $showtables = json_decode($showtablesdata,1);
 
     }
     function fieldchange(val){
-        alert("ravi");
+        alert(<?php echo json_encode(__('ravi')); ?>);
         leftfield(val);
         var data = $('#droplist').val();
         data = JSON.parse(data);
@@ -186,51 +186,51 @@ $showtables = json_decode($showtablesdata,1);
                         <span class="kt-portlet__head-icon">
 
                                 </span>
-                        <h3 class="kt-portlet__head-title"><?php echo "Join Tables";  ?> </h3>
+                        <h3 class="kt-portlet__head-title"><?php echo __('Join Tables');  ?> </h3>
                     </div>
                     <div class="kt-portlet__head-toolbar float-right">
                         <a href="javascript:history.go(-1)" class="btn btn-clean kt-margin-r-10">
                             <i class="la la-arrow-left"></i>
-                            <span class="kt-hidden-mobile">Back</span>
+                            <span class="kt-hidden-mobile"><?php echo __('Back'); ?></span>
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="form-group col-lg-6">
-                            <span>Report Name</span>
+                            <span><?php echo __('Report Name'); ?></span>
                             <div class="kt-input-icon">
-                                <input aria-label="Report Name" type="text" name="report_name" value="<?php echo $data['report_name']; ?>" class="form-control">
+                                <input aria-label="<?php echo __('Report Name'); ?>" type="text" name="report_name" value="<?php echo $data['report_name']; ?>" class="form-control">
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
-                            <span>Report  Display</span>
+                            <span><?php echo __('Report  Display'); ?></span>
                             <div class="kt-input-icon">
-                                <input aria-label="Report Display" type="text" name="report_display_id" value="<?php echo $data['report_display_id']; ?>" class="form-control">
+                                <input aria-label="<?php echo __('Report Display'); ?>" type="text" name="report_display_id" value="<?php echo $data['report_display_id']; ?>" class="form-control">
                             </div>
                         </div>
                         <?php if($rid !=""){ ?>
                         <div class="form-group col-lg-6">
-                            <span>Report Code</span>
+                            <span><?php echo __('Report Code'); ?></span>
                             <div class="kt-input-icon">
-                                <input aria-label="Report Code" type="text"  readonly name="report_code" value="<?php echo $data['report_code']; ?>"  class="form-control">
+                                <input aria-label="<?php echo __('Report Code'); ?>" type="text"  readonly name="report_code" value="<?php echo $data['report_code']; ?>"  class="form-control">
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
-                            <span>Report  Fields</span>
+                            <span><?php echo __('Report  Fields'); ?></span>
                             <div class="kt-input-icon">
                                 <a href="index.php?option=COM_FIELD_REPORT_ATTRIBUTES&Rid=<?php echo $rid; ?>" target="_blank">
-                                <button type="button" class="btn btn-primary"  >Report  Fields</button>
+                                <button type="button" class="btn btn-primary"  ><?php echo __('Report  Fields'); ?></button>
                             </a>
 
                             </div>
                         </div>
                         <?php  } ?>
                         <div class="form-group col-lg-6">
-                            <span>Join Tables</span>
+                            <span><?php echo __('Join Tables'); ?></span>
                             <div class="kt-input-icon">
 
-                                <select aria-label="Select Tables" id="kt_dual_listbox_1_2" class="kt-dual-listbox" multiple data-available-title="Selet Tables" data-selected-title="Joined Tables" >
+                                <select aria-label="<?php echo __('Select Tables'); ?>" id="kt_dual_listbox_1_2" class="kt-dual-listbox" multiple data-available-title="<?php echo __('Selet Tables'); ?>" data-selected-title="<?php echo __('Joined Tables'); ?>" >
                                     <?php foreach ($showtables as $table) { ?>
                                     <option <?php if(in_array($table, (array)$tables)){?> selected <?php
 } ?> value="<?php echo $table; ?>"><?php echo ucwords(str_replace('_', ' ', $table)); ?></option>
@@ -239,14 +239,14 @@ $showtables = json_decode($showtablesdata,1);
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
-                            <span>Join Conditions</span>
+                            <span><?php echo __('Join Conditions'); ?></span>
                             <?php $drop_list=  count((array)$tables)>0 ? json_encode($tables) : "[]"; ?>
                             <input type="hidden" name="tables" class="form-control" value='<?php echo $drop_list; ?>' id="droplist">
                             <div class="form-group kt-input-icon">
-                                <span>Report Tables</span>
+                                <span><?php echo __('Report Tables'); ?></span>
                                 <div id='view_table'>
-                                <select aria-label="Table" class="form-control kt-select2" id='table_2' onchange="fieldchange(this.value)">
-                                    <option value=""> Select any table </option>
+                                <select aria-label="<?php echo __('Table'); ?>" class="form-control kt-select2" id='table_2' onchange="fieldchange(this.value)">
+                                    <option value=""> <?php echo __('Select any table'); ?> </option>
                                     <?php $i=0; foreach ($tables as $tab) {
                                         if($tab != $main_table){?>
                                         <option value="<?php echo $tab; ?>"> <?php echo str_replace('_', ' ', $tab); ?></option>
@@ -258,34 +258,34 @@ $showtables = json_decode($showtablesdata,1);
 
                             </div>
                             <div class="form-group kt-input-icon">
-                                <span>Join Type</span>
-                                <select aria-label="Join Type" class="form-control kt-select2" id='join_type'>
-                                    <option value="INNER JOIN"> INNER JOIN </option>
-                                    <option value="LEFT JOIN"> LEFT JOIN</option>
-                                    <option value="RIGHT JOIN"> RIGHT JOIN</option>
+                                <span><?php echo __('Join Type'); ?></span>
+                                <select aria-label="<?php echo __('Join Type'); ?>" class="form-control kt-select2" id='join_type'>
+                                    <option value="INNER JOIN"> <?php echo __('INNER JOIN'); ?> </option>
+                                    <option value="LEFT JOIN"> <?php echo __('LEFT JOIN'); ?></option>
+                                    <option value="RIGHT JOIN"> <?php echo __('RIGHT JOIN'); ?></option>
                                 </select>
                             </div>
                             <div class="form-group kt-input-icon">
-                                <span>Left Field</span>
+                                <span><?php echo __('Left Field'); ?></span>
                                 <div id='left_field_id'>
-                                    <select aria-label="Left Field" class="form-control" id='left_field_2' name="left_field">
-                                        <option value="0"> Select any field</option>
+                                    <select aria-label="<?php echo __('Left Field'); ?>" class="form-control" id='left_field_2' name="left_field">
+                                        <option value="0"> <?php echo __('Select any field'); ?></option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group kt-input-icon">
-                                <span>Right Field</span>
+                                <span><?php echo __('Right Field'); ?></span>
                                 <div id="right_field_id">
-                                    <select aria-label="Right Field" class="form-control" id='right_field_2' name="right_field">
-                                        <option value="0"> Select any field</option>
+                                    <select aria-label="<?php echo __('Right Field'); ?>" class="form-control" id='right_field_2' name="right_field">
+                                        <option value="0"> <?php echo __('Select any field'); ?></option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group kt-input-icon">
-                                <span>Query</span>
+                                <span><?php echo __('Query'); ?></span>
                                 <input type="hidden" name="join" id="join" value="0" class="form-control" >
                                 <input type="hidden"  id="bquery" value="" name="join_details" class="form-control" >
-                                <textarea aria-label="Content" type="text" class="form-control" id="bulid_query" name="content" value="" ><?php echo urldecode($data['content']);?></textarea>
+                                <textarea aria-label="<?php echo __('Content'); ?>" type="text" class="form-control" id="bulid_query" name="content" value="" ><?php echo urldecode($data['content']);?></textarea>
                             </div>
                         </div>
                         <?php include_once 'submit.php'; ?>

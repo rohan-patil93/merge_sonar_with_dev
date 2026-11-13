@@ -11,7 +11,7 @@
                                             <div class="card-body pt-4">
                                                 <!--begin::Toolbar-->
                                                 <div class="d-flex justify-content-end">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?php echo __('Quick actions'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-hor"></i>
                                                         </a>
@@ -19,49 +19,49 @@
                                                             <!--begin::Navigation-->
                                                             <ul class="navi navi-hover">
                                                                 <li class="navi-header font-weight-bold py-4">
-                                                                    <span class="font-size-lg">Choose Label:</span>
-                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                                    <span class="font-size-lg"><?php echo __('Choose Label:'); ?></span>
+                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?php echo __('Click to learn more...'); ?>"></i>
                                                                 </li>
                                                                 <li class="navi-separator mb-3 opacity-70"></li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                                                            <span class="label label-xl label-inline label-light-success"><?php echo __('Customer'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                                                            <span class="label label-xl label-inline label-light-danger"><?php echo __('Partner'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                                                            <span class="label label-xl label-inline label-light-warning"><?php echo __('Suplier'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                                                            <span class="label label-xl label-inline label-light-primary"><?php echo __('Member'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                                                            <span class="label label-xl label-inline label-light-dark"><?php echo __('Staff'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator mt-3 opacity-70"></li>
                                                                 <li class="navi-footer py-4">
                                                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                                                    <i class="ki ki-plus icon-sm"></i><?php echo __('Add new'); ?></a>
                                                                 </li>
                                                             </ul>
                                                             <!--end::Navigation-->
@@ -76,17 +76,17 @@
                                                         <!--begin::Pic-->
                                                         <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                             <div class="symbol symbol-circle symbol-lg-75">
-                                                                <img src="assets/media/users/300_1.jpg" alt="User Profile" />
+                                                                <img src="assets/media/users/300_1.jpg" alt="<?php echo __('User Profile'); ?>" />
                                                             </div>
                                                             <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
-                                                                <span class="font-size-h3 font-weight-boldest">JM</span>
+                                                                <span class="font-size-h3 font-weight-boldest"><?php echo __('JM'); ?></span>
                                                             </div>
                                                         </div>
                                                         <!--end::Pic-->
                                                         <!--begin::Title-->
                                                         <div class="d-flex flex-column">
-                                                            <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">Luca Doncic</a>
-                                                            <span class="text-muted font-weight-bold">Head of Development</span>
+                                                            <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><?php echo __('Luca Doncic'); ?></a>
+                                                            <span class="text-muted font-weight-bold"><?php echo __('Head of Development'); ?></span>
                                                         </div>
                                                         <!--end::Title-->
                                                     </div>
@@ -94,26 +94,26 @@
                                                 </div>
                                                 <!--end::User-->
                                                 <!--begin::Desc-->
-                                                <p class="mb-7">I distinguish three
-                                                <a href="#" class="text-primary pr-1">#XRS-54PQ</a>objectives First objectives and nice cooked rice</p>
+                                                <p class="mb-7"><?php echo __('I distinguish three'); ?>
+                                                <a href="#" class="text-primary pr-1"><?php echo __('#XRS-54PQ'); ?></a><?php echo __('objectives First objectives and nice cooked rice'); ?></p>
                                                 <!--end::Desc-->
                                                 <!--begin::Info-->
                                                 <div class="mb-7">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                        <a href="#" class="text-muted text-hover-primary">luca@festudios.com</a>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Email:'); ?></span>
+                                                        <a href="#" class="text-muted text-hover-primary"><?php echo __('luca@festudios.com'); ?></a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-cente my-1">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Phone:'); ?></span>
                                                         <a href="#" class="text-muted text-hover-primary">44(76)34254578</a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                        <span class="text-muted font-weight-bold">Barcelona</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Location:'); ?></span>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Barcelona'); ?></span>
                                                     </div>
                                                 </div>
                                                 <!--end::Info-->
-                                                <button type="button" class="btn btn-block btn-sm btn-light-warning font-weight-bolder text-uppercase py-4">write message</button>
+                                                <button type="button" class="btn btn-block btn-sm btn-light-warning font-weight-bolder text-uppercase py-4"><?php echo __('write message'); ?></button>
                                             </div>
                                             <!--end::Body-->
                                         </div>
@@ -128,7 +128,7 @@
                                             <div class="card-body pt-4">
                                                 <!--begin::Toolbar-->
                                                 <div class="d-flex justify-content-end">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?php echo __('Quick actions'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-hor"></i>
                                                         </a>
@@ -140,7 +140,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-drop"></i>
                                                                         </span>
-                                                                        <span class="navi-text">New Group</span>
+                                                                        <span class="navi-text"><?php echo __('New Group'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -148,7 +148,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-list-3"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Contacts</span>
+                                                                        <span class="navi-text"><?php echo __('Contacts'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -156,9 +156,9 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-rocket-1"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Groups</span>
+                                                                        <span class="navi-text"><?php echo __('Groups'); ?></span>
                                                                         <span class="navi-link-badge">
-                                                                            <span class="label label-light-primary label-inline font-weight-bold">new</span>
+                                                                            <span class="label label-light-primary label-inline font-weight-bold"><?php echo __('new'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
@@ -167,7 +167,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-bell-2"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Calls</span>
+                                                                        <span class="navi-text"><?php echo __('Calls'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -175,7 +175,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-gear"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Settings</span>
+                                                                        <span class="navi-text"><?php echo __('Settings'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator my-3"></li>
@@ -184,7 +184,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-magnifier-tool"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Help</span>
+                                                                        <span class="navi-text"><?php echo __('Help'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -192,7 +192,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-bell-2"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Privacy</span>
+                                                                        <span class="navi-text"><?php echo __('Privacy'); ?></span>
                                                                         <span class="navi-link-badge">
                                                                             <span class="label label-light-danger label-rounded font-weight-bold">5</span>
                                                                         </span>
@@ -209,43 +209,43 @@
                                                     <!--begin::Pic-->
                                                     <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                         <div class="symbol symbol-circle symbol-lg-75">
-                                                            <img src="assets/media/users/300_10.jpg" alt="User Profile" />
+                                                            <img src="assets/media/users/300_10.jpg" alt="<?php echo __('User Profile'); ?>" />
                                                         </div>
                                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
-                                                            <span class="font-size-h3 font-weight-boldest">JM</span>
+                                                            <span class="font-size-h3 font-weight-boldest"><?php echo __('JM'); ?></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Pic-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column">
-                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">Charlie Stone</a>
-                                                        <span class="text-muted font-weight-bold">Head of Development</span>
+                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><?php echo __('Charlie Stone'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Head of Development'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                 </div>
                                                 <!--end::User-->
                                                 <!--begin::Desc-->
-                                                <p class="mb-7">I distinguish three
-                                                <a href="#" class="text-primary pr-1">#XRS-65PQ</a>objectives First
-                                                <span class="text-dark-75 font-weight-bolder pr-1">USD342/Annual</span>doloremagna</p>
+                                                <p class="mb-7"><?php echo __('I distinguish three'); ?>
+                                                <a href="#" class="text-primary pr-1"><?php echo __('#XRS-65PQ'); ?></a><?php echo __('objectives First'); ?>
+                                                <span class="text-dark-75 font-weight-bolder pr-1"><?php echo __('USD342/Annual'); ?></span><?php echo __('doloremagna'); ?></p>
                                                 <!--end::Desc-->
                                                 <!--begin::Info-->
                                                 <div class="mb-7">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                        <a href="#" class="text-muted text-hover-primary">luca@festudios.com</a>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Email:'); ?></span>
+                                                        <a href="#" class="text-muted text-hover-primary"><?php echo __('luca@festudios.com'); ?></a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-cente my-1">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Phone:'); ?></span>
                                                         <a href="#" class="text-muted text-hover-primary">44(76)34254578</a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                        <span class="text-muted font-weight-bold">Barcelona</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Location:'); ?></span>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Barcelona'); ?></span>
                                                     </div>
                                                 </div>
                                                 <!--end::Info-->
-                                                <button type="button" class="btn btn-block btn-sm btn-light-danger font-weight-bolder text-uppercase py-4">write message</button>
+                                                <button type="button" class="btn btn-block btn-sm btn-light-danger font-weight-bolder text-uppercase py-4"><?php echo __('write message'); ?></button>
                                             </div>
                                             <!--end::Body-->
                                         </div>
@@ -260,7 +260,7 @@
                                             <div class="card-body pt-4">
                                                 <!--begin::Toolbar-->
                                                 <div class="d-flex justify-content-end">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?php echo __('Quick actions'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-hor"></i>
                                                         </a>
@@ -268,49 +268,49 @@
                                                             <!--begin::Navigation-->
                                                             <ul class="navi navi-hover">
                                                                 <li class="navi-header font-weight-bold py-4">
-                                                                    <span class="font-size-lg">Choose Label:</span>
-                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                                    <span class="font-size-lg"><?php echo __('Choose Label:'); ?></span>
+                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?php echo __('Click to learn more...'); ?>"></i>
                                                                 </li>
                                                                 <li class="navi-separator mb-3 opacity-70"></li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                                                            <span class="label label-xl label-inline label-light-success"><?php echo __('Customer'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                                                            <span class="label label-xl label-inline label-light-danger"><?php echo __('Partner'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                                                            <span class="label label-xl label-inline label-light-warning"><?php echo __('Suplier'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                                                            <span class="label label-xl label-inline label-light-primary"><?php echo __('Member'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                                                            <span class="label label-xl label-inline label-light-dark"><?php echo __('Staff'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator mt-3 opacity-70"></li>
                                                                 <li class="navi-footer py-4">
                                                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                                                    <i class="ki ki-plus icon-sm"></i><?php echo __('Add new'); ?></a>
                                                                 </li>
                                                             </ul>
                                                             <!--end::Navigation-->
@@ -323,43 +323,43 @@
                                                     <!--begin::Pic-->
                                                     <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                         <div class="symbol symbol-circle symbol-lg-75 d-none">
-                                                            <img src="assets/media/users/300_10.jpg" alt="User Profile" />
+                                                            <img src="assets/media/users/300_10.jpg" alt="<?php echo __('User Profile'); ?>" />
                                                         </div>
                                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary">
-                                                            <span class="symbol-label font-size-h3 font-weight-boldest">AK</span>
+                                                            <span class="symbol-label font-size-h3 font-weight-boldest"><?php echo __('AK'); ?></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Pic-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column">
-                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">Anna Krox</a>
-                                                        <span class="text-muted font-weight-bold">Python Developer</span>
+                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><?php echo __('Anna Krox'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Python Developer'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                 </div>
                                                 <!--end::User-->
                                                 <!--begin::Desc-->
-                                                <p class="mb-7">I distinguish three
-                                                <a href="#" class="text-primary pr-1">#XRS-54PQ</a>objectives First merely first
-                                                <span class="text-dark-75 font-weight-bolder pr-1">USD342/Annual</span></p>
+                                                <p class="mb-7"><?php echo __('I distinguish three'); ?>
+                                                <a href="#" class="text-primary pr-1"><?php echo __('#XRS-54PQ'); ?></a><?php echo __('objectives First merely first'); ?>
+                                                <span class="text-dark-75 font-weight-bolder pr-1"><?php echo __('USD342/Annual'); ?></span></p>
                                                 <!--end::Desc-->
                                                 <!--begin::Info-->
                                                 <div class="mb-7">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                        <a href="#" class="text-muted text-hover-primary">giannis@fifestudios.com</a>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Email:'); ?></span>
+                                                        <a href="#" class="text-muted text-hover-primary"><?php echo __('giannis@fifestudios.com'); ?></a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-cente my-2">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Phone:'); ?></span>
                                                         <a href="#" class="text-muted text-hover-primary">52(43)56254826</a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                        <span class="text-muted font-weight-bold">Moscow</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Location:'); ?></span>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Moscow'); ?></span>
                                                     </div>
                                                 </div>
                                                 <!--end::Info-->
-                                                <button type="button" class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">write message</button>
+                                                <button type="button" class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4"><?php echo __('write message'); ?></button>
                                             </div>
                                             <!--end::Body-->
                                         </div>
@@ -374,7 +374,7 @@
                                             <div class="card-body pt-4">
                                                 <!--begin::Toolbar-->
                                                 <div class="d-flex justify-content-end">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?php echo __('Quick actions'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-hor"></i>
                                                         </a>
@@ -382,49 +382,49 @@
                                                             <!--begin::Navigation-->
                                                             <ul class="navi navi-hover">
                                                                 <li class="navi-header font-weight-bold py-4">
-                                                                    <span class="font-size-lg">Choose Label:</span>
-                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                                    <span class="font-size-lg"><?php echo __('Choose Label:'); ?></span>
+                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?php echo __('Click to learn more...'); ?>"></i>
                                                                 </li>
                                                                 <li class="navi-separator mb-3 opacity-70"></li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                                                            <span class="label label-xl label-inline label-light-success"><?php echo __('Customer'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                                                            <span class="label label-xl label-inline label-light-danger"><?php echo __('Partner'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                                                            <span class="label label-xl label-inline label-light-warning"><?php echo __('Suplier'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                                                            <span class="label label-xl label-inline label-light-primary"><?php echo __('Member'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                                                            <span class="label label-xl label-inline label-light-dark"><?php echo __('Staff'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator mt-3 opacity-70"></li>
                                                                 <li class="navi-footer py-4">
                                                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                                                    <i class="ki ki-plus icon-sm"></i><?php echo __('Add new'); ?></a>
                                                                 </li>
                                                             </ul>
                                                             <!--end::Navigation-->
@@ -437,43 +437,43 @@
                                                     <!--begin::Pic-->
                                                     <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                         <div class="symbol symbol-circle symbol-lg-75">
-                                                            <img src="assets/media/users/300_3.jpg" alt="User Profile" />
+                                                            <img src="assets/media/users/300_3.jpg" alt="<?php echo __('User Profile'); ?>" />
                                                         </div>
                                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
-                                                            <span class="font-size-h3 font-weight-boldest">JM</span>
+                                                            <span class="font-size-h3 font-weight-boldest"><?php echo __('JM'); ?></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Pic-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column">
-                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">Jason Muller</a>
-                                                        <span class="text-muted font-weight-bold">Atr Direcrtor</span>
+                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><?php echo __('Jason Muller'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Atr Direcrtor'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                 </div>
                                                 <!--end::User-->
                                                 <!--begin::Desc-->
-                                                <p class="mb-7">Contrary to popular belief, Lorem Ipsum is not
+                                                <p class="mb-7"><?php echo __('Contrary to popular belief, Lorem Ipsum is not'); ?>
                                                 <br />
-                                                <a href="#" class="text-primary pr-1">#XRS-54PQ</a>simply random text</p>
+                                                <a href="#" class="text-primary pr-1"><?php echo __('#XRS-54PQ'); ?></a><?php echo __('simply random text'); ?></p>
                                                 <!--end::Desc-->
                                                 <!--begin::Info-->
                                                 <div class="mb-7">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                        <a href="#" class="text-muted text-hover-primary">jason@fifestudios.com</a>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Email:'); ?></span>
+                                                        <a href="#" class="text-muted text-hover-primary"><?php echo __('jason@fifestudios.com'); ?></a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-cente my-1">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Phone:'); ?></span>
                                                         <a href="#" class="text-muted text-hover-primary">44(76)34254578</a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                        <span class="text-muted font-weight-bold">Melbourne</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Location:'); ?></span>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Melbourne'); ?></span>
                                                     </div>
                                                 </div>
                                                 <!--end::Info-->
-                                                <button type="button" class="btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4">write message</button>
+                                                <button type="button" class="btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4"><?php echo __('write message'); ?></button>
                                             </div>
                                             <!--end::Body-->
                                         </div>
@@ -492,7 +492,7 @@
                                             <div class="card-body pt-4">
                                                 <!--begin::Toolbar-->
                                                 <div class="d-flex justify-content-end">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?php echo __('Quick actions'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-hor"></i>
                                                         </a>
@@ -500,49 +500,49 @@
                                                             <!--begin::Navigation-->
                                                             <ul class="navi navi-hover">
                                                                 <li class="navi-header font-weight-bold py-4">
-                                                                    <span class="font-size-lg">Choose Label:</span>
-                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                                    <span class="font-size-lg"><?php echo __('Choose Label:'); ?></span>
+                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?php echo __('Click to learn more...'); ?>"></i>
                                                                 </li>
                                                                 <li class="navi-separator mb-3 opacity-70"></li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                                                            <span class="label label-xl label-inline label-light-success"><?php echo __('Customer'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                                                            <span class="label label-xl label-inline label-light-danger"><?php echo __('Partner'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                                                            <span class="label label-xl label-inline label-light-warning"><?php echo __('Suplier'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                                                            <span class="label label-xl label-inline label-light-primary"><?php echo __('Member'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                                                            <span class="label label-xl label-inline label-light-dark"><?php echo __('Staff'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator mt-3 opacity-70"></li>
                                                                 <li class="navi-footer py-4">
                                                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                                                    <i class="ki ki-plus icon-sm"></i><?php echo __('Add new'); ?></a>
                                                                 </li>
                                                             </ul>
                                                             <!--end::Navigation-->
@@ -555,42 +555,42 @@
                                                     <!--begin::Pic-->
                                                     <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                         <div class="symbol symbol-circle symbol-lg-75">
-                                                            <img src="assets/media/users/300_2.jpg" alt="User Profile" />
+                                                            <img src="assets/media/users/300_2.jpg" alt="<?php echo __('User Profile'); ?>" />
                                                         </div>
                                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
-                                                            <span class="font-size-h3 font-weight-boldest">JM</span>
+                                                            <span class="font-size-h3 font-weight-boldest"><?php echo __('JM'); ?></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Pic-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column">
-                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">Teresa Fox</a>
-                                                        <span class="text-muted font-weight-bold">Project Manager</span>
+                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><?php echo __('Teresa Fox'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Project Manager'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                 </div>
                                                 <!--end::User-->
                                                 <!--begin::Desc-->
-                                                <p class="mb-7">Lorem Ipsum is simply
-                                                <a href="#" class="text-primary pr-1">#XRS-65PQ</a>dummy text of objectives and nice cooked rice</p>
+                                                <p class="mb-7"><?php echo __('Lorem Ipsum is simply'); ?>
+                                                <a href="#" class="text-primary pr-1"><?php echo __('#XRS-65PQ'); ?></a><?php echo __('dummy text of objectives and nice cooked rice'); ?></p>
                                                 <!--end::Desc-->
                                                 <!--begin::Info-->
                                                 <div class="mb-7">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                        <a href="#" class="text-muted text-hover-primary">teresa@festudios.com</a>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Email:'); ?></span>
+                                                        <a href="#" class="text-muted text-hover-primary"><?php echo __('teresa@festudios.com'); ?></a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-cente my-1">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Phone:'); ?></span>
                                                         <a href="#" class="text-muted text-hover-primary">75(58)87545243</a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                        <span class="text-muted font-weight-bold">France</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Location:'); ?></span>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('France'); ?></span>
                                                     </div>
                                                 </div>
                                                 <!--end::Info-->
-                                                <button type="button" class="btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4">write message</button>
+                                                <button type="button" class="btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4"><?php echo __('write message'); ?></button>
                                             </div>
                                             <!--end::Body-->
                                         </div>
@@ -605,7 +605,7 @@
                                             <div class="card-body pt-4">
                                                 <!--begin::Toolbar-->
                                                 <div class="d-flex justify-content-end">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?php echo __('Quick actions'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-hor"></i>
                                                         </a>
@@ -617,7 +617,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-drop"></i>
                                                                         </span>
-                                                                        <span class="navi-text">New Group</span>
+                                                                        <span class="navi-text"><?php echo __('New Group'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -625,7 +625,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-list-3"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Contacts</span>
+                                                                        <span class="navi-text"><?php echo __('Contacts'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -633,9 +633,9 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-rocket-1"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Groups</span>
+                                                                        <span class="navi-text"><?php echo __('Groups'); ?></span>
                                                                         <span class="navi-link-badge">
-                                                                            <span class="label label-light-primary label-inline font-weight-bold">new</span>
+                                                                            <span class="label label-light-primary label-inline font-weight-bold"><?php echo __('new'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
@@ -644,7 +644,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-bell-2"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Calls</span>
+                                                                        <span class="navi-text"><?php echo __('Calls'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -652,7 +652,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-gear"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Settings</span>
+                                                                        <span class="navi-text"><?php echo __('Settings'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator my-3"></li>
@@ -661,7 +661,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-magnifier-tool"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Help</span>
+                                                                        <span class="navi-text"><?php echo __('Help'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -669,7 +669,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-bell-2"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Privacy</span>
+                                                                        <span class="navi-text"><?php echo __('Privacy'); ?></span>
                                                                         <span class="navi-link-badge">
                                                                             <span class="label label-light-danger label-rounded font-weight-bold">5</span>
                                                                         </span>
@@ -686,43 +686,43 @@
                                                     <!--begin::Pic-->
                                                     <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                         <div class="symbol symbol-circle symbol-lg-75 d-none">
-                                                            <img src="assets/media/users/300_10.jpg" alt="User Profile" />
+                                                            <img src="assets/media/users/300_10.jpg" alt="<?php echo __('User Profile'); ?>" />
                                                         </div>
                                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary">
-                                                            <span class="symbol-label font-size-h3 font-weight-boldest">GN</span>
+                                                            <span class="symbol-label font-size-h3 font-weight-boldest"><?php echo __('GN'); ?></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Pic-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column">
-                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">Giannis Nelson</a>
-                                                        <span class="text-muted font-weight-bold">Python Developer</span>
+                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><?php echo __('Giannis Nelson'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Python Developer'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                 </div>
                                                 <!--end::User-->
                                                 <!--begin::Desc-->
-                                                <p class="mb-7">I distinguish three
-                                                <a href="#" class="text-primary pr-1">#XRS-65PQ</a>objectives First
-                                                <span class="text-dark-75 font-weight-bolder pr-1">USD342/Annual</span>doloremagna</p>
+                                                <p class="mb-7"><?php echo __('I distinguish three'); ?>
+                                                <a href="#" class="text-primary pr-1"><?php echo __('#XRS-65PQ'); ?></a><?php echo __('objectives First'); ?>
+                                                <span class="text-dark-75 font-weight-bolder pr-1"><?php echo __('USD342/Annual'); ?></span><?php echo __('doloremagna'); ?></p>
                                                 <!--end::Desc-->
                                                 <!--begin::Info-->
                                                 <div class="mb-7">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                        <a href="#" class="text-muted text-hover-primary">giannis@fifestudios.com</a>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Email:'); ?></span>
+                                                        <a href="#" class="text-muted text-hover-primary"><?php echo __('giannis@fifestudios.com'); ?></a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-cente my-2">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Phone:'); ?></span>
                                                         <a href="#" class="text-muted text-hover-primary">52(43)56254826</a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                        <span class="text-muted font-weight-bold">Moscow</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Location:'); ?></span>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Moscow'); ?></span>
                                                     </div>
                                                 </div>
                                                 <!--end::Info-->
-                                                <button type="button" class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">write message</button>
+                                                <button type="button" class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4"><?php echo __('write message'); ?></button>
                                             </div>
                                             <!--end::Body-->
                                         </div>
@@ -737,7 +737,7 @@
                                             <div class="card-body pt-4">
                                                 <!--begin::Toolbar-->
                                                 <div class="d-flex justify-content-end">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?php echo __('Quick actions'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-hor"></i>
                                                         </a>
@@ -745,49 +745,49 @@
                                                             <!--begin::Navigation-->
                                                             <ul class="navi navi-hover">
                                                                 <li class="navi-header font-weight-bold py-4">
-                                                                    <span class="font-size-lg">Choose Label:</span>
-                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                                    <span class="font-size-lg"><?php echo __('Choose Label:'); ?></span>
+                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?php echo __('Click to learn more...'); ?>"></i>
                                                                 </li>
                                                                 <li class="navi-separator mb-3 opacity-70"></li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                                                            <span class="label label-xl label-inline label-light-success"><?php echo __('Customer'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                                                            <span class="label label-xl label-inline label-light-danger"><?php echo __('Partner'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                                                            <span class="label label-xl label-inline label-light-warning"><?php echo __('Suplier'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                                                            <span class="label label-xl label-inline label-light-primary"><?php echo __('Member'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                                                            <span class="label label-xl label-inline label-light-dark"><?php echo __('Staff'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator mt-3 opacity-70"></li>
                                                                 <li class="navi-footer py-4">
                                                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                                                    <i class="ki ki-plus icon-sm"></i><?php echo __('Add new'); ?></a>
                                                                 </li>
                                                             </ul>
                                                             <!--end::Navigation-->
@@ -800,43 +800,43 @@
                                                     <!--begin::Pic-->
                                                     <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                         <div class="symbol symbol-circle symbol-lg-75">
-                                                            <img src="assets/media/users/300_16.jpg" alt="User Profile" />
+                                                            <img src="assets/media/users/300_16.jpg" alt="<?php echo __('User Profile'); ?>" />
                                                         </div>
                                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
-                                                            <span class="font-size-h3 font-weight-boldest">LM</span>
+                                                            <span class="font-size-h3 font-weight-boldest"><?php echo __('LM'); ?></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Pic-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column">
-                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">Lisa Moss</a>
-                                                        <span class="text-muted font-weight-bold">USD421/Annual</span>
+                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><?php echo __('Lisa Moss'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('USD421/Annual'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                 </div>
                                                 <!--end::User-->
                                                 <!--begin::Desc-->
-                                                <p class="mb-7">I distinguish three
-                                                <a href="#" class="text-primary pr-1">#XRS-54PQ</a>objectives First merely first
-                                                <span class="text-dark-75 font-weight-bolder pr-1">USD342/Annual</span></p>
+                                                <p class="mb-7"><?php echo __('I distinguish three'); ?>
+                                                <a href="#" class="text-primary pr-1"><?php echo __('#XRS-54PQ'); ?></a><?php echo __('objectives First merely first'); ?>
+                                                <span class="text-dark-75 font-weight-bolder pr-1"><?php echo __('USD342/Annual'); ?></span></p>
                                                 <!--end::Desc-->
                                                 <!--begin::Info-->
                                                 <div class="mb-7">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                        <a href="#" class="text-muted text-hover-primary">lisa@fifestudios.com</a>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Email:'); ?></span>
+                                                        <a href="#" class="text-muted text-hover-primary"><?php echo __('lisa@fifestudios.com'); ?></a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-cente my-1">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Phone:'); ?></span>
                                                         <a href="#" class="text-muted text-hover-primary">43(16)98462644</a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                        <span class="text-muted font-weight-bold">London</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Location:'); ?></span>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('London'); ?></span>
                                                     </div>
                                                 </div>
                                                 <!--end::Info-->
-                                                <button type="button" class="btn btn-block btn-sm btn-light-warning font-weight-bolder text-uppercase py-4">write message</button>
+                                                <button type="button" class="btn btn-block btn-sm btn-light-warning font-weight-bolder text-uppercase py-4"><?php echo __('write message'); ?></button>
                                             </div>
                                             <!--end::Body-->
                                         </div>
@@ -851,7 +851,7 @@
                                             <div class="card-body pt-4">
                                                 <!--begin::Toolbar-->
                                                 <div class="d-flex justify-content-end">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?php echo __('Quick actions'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-hor"></i>
                                                         </a>
@@ -859,49 +859,49 @@
                                                             <!--begin::Navigation-->
                                                             <ul class="navi navi-hover">
                                                                 <li class="navi-header font-weight-bold py-4">
-                                                                    <span class="font-size-lg">Choose Label:</span>
-                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                                    <span class="font-size-lg"><?php echo __('Choose Label:'); ?></span>
+                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?php echo __('Click to learn more...'); ?>"></i>
                                                                 </li>
                                                                 <li class="navi-separator mb-3 opacity-70"></li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                                                            <span class="label label-xl label-inline label-light-success"><?php echo __('Customer'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                                                            <span class="label label-xl label-inline label-light-danger"><?php echo __('Partner'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                                                            <span class="label label-xl label-inline label-light-warning"><?php echo __('Suplier'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                                                            <span class="label label-xl label-inline label-light-primary"><?php echo __('Member'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                                                            <span class="label label-xl label-inline label-light-dark"><?php echo __('Staff'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator mt-3 opacity-70"></li>
                                                                 <li class="navi-footer py-4">
                                                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                                                    <i class="ki ki-plus icon-sm"></i><?php echo __('Add new'); ?></a>
                                                                 </li>
                                                             </ul>
                                                             <!--end::Navigation-->
@@ -914,42 +914,42 @@
                                                     <!--begin::Pic-->
                                                     <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                         <div class="symbol symbol-circle symbol-lg-75">
-                                                            <img src="assets/media/users/300_15.jpg" alt="User Profile" />
+                                                            <img src="assets/media/users/300_15.jpg" alt="<?php echo __('User Profile'); ?>" />
                                                         </div>
                                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
-                                                            <span class="font-size-h3 font-weight-boldest">JM</span>
+                                                            <span class="font-size-h3 font-weight-boldest"><?php echo __('JM'); ?></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Pic-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column">
-                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">Nick Mana</a>
-                                                        <span class="text-muted font-weight-bold">Atr Direcrtor</span>
+                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><?php echo __('Nick Mana'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Atr Direcrtor'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                 </div>
                                                 <!--end::User-->
                                                 <!--begin::Desc-->
-                                                <p class="mb-7">Contrary to popular belief, Lorem Ipsum is not simply random text
-                                                <a href="#" class="text-primary pr-1">#XRS-65PQ.</a></p>
+                                                <p class="mb-7"><?php echo __('Contrary to popular belief, Lorem Ipsum is not simply random text'); ?>
+                                                <a href="#" class="text-primary pr-1"><?php echo __('#XRS-65PQ.'); ?></a></p>
                                                 <!--end::Desc-->
                                                 <!--begin::Info-->
                                                 <div class="mb-7">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                        <a href="#" class="text-muted text-hover-primary">nick@festudios.com</a>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Email:'); ?></span>
+                                                        <a href="#" class="text-muted text-hover-primary"><?php echo __('nick@festudios.com'); ?></a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-cente my-1">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Phone:'); ?></span>
                                                         <a href="#" class="text-muted text-hover-primary">44(76)34254578</a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                        <span class="text-muted font-weight-bold">Melbourne</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Location:'); ?></span>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Melbourne'); ?></span>
                                                     </div>
                                                 </div>
                                                 <!--end::Info-->
-                                                <button type="button" class="btn btn-block btn-sm btn-light-danger font-weight-bolder text-uppercase py-4">write message</button>
+                                                <button type="button" class="btn btn-block btn-sm btn-light-danger font-weight-bolder text-uppercase py-4"><?php echo __('write message'); ?></button>
                                             </div>
                                             <!--end::Body-->
                                         </div>
@@ -968,7 +968,7 @@
                                             <div class="card-body pt-4">
                                                 <!--begin::Toolbar-->
                                                 <div class="d-flex justify-content-end">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?php echo __('Quick actions'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-hor"></i>
                                                         </a>
@@ -976,49 +976,49 @@
                                                             <!--begin::Navigation-->
                                                             <ul class="navi navi-hover">
                                                                 <li class="navi-header font-weight-bold py-4">
-                                                                    <span class="font-size-lg">Choose Label:</span>
-                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                                    <span class="font-size-lg"><?php echo __('Choose Label:'); ?></span>
+                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?php echo __('Click to learn more...'); ?>"></i>
                                                                 </li>
                                                                 <li class="navi-separator mb-3 opacity-70"></li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                                                            <span class="label label-xl label-inline label-light-success"><?php echo __('Customer'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                                                            <span class="label label-xl label-inline label-light-danger"><?php echo __('Partner'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                                                            <span class="label label-xl label-inline label-light-warning"><?php echo __('Suplier'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                                                            <span class="label label-xl label-inline label-light-primary"><?php echo __('Member'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                                                            <span class="label label-xl label-inline label-light-dark"><?php echo __('Staff'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator mt-3 opacity-70"></li>
                                                                 <li class="navi-footer py-4">
                                                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                                                    <i class="ki ki-plus icon-sm"></i><?php echo __('Add new'); ?></a>
                                                                 </li>
                                                             </ul>
                                                             <!--end::Navigation-->
@@ -1031,42 +1031,42 @@
                                                     <!--begin::Pic-->
                                                     <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                         <div class="symbol symbol-circle symbol-lg-75">
-                                                            <img src="assets/media/users/300_1.jpg" alt="User Profile" />
+                                                            <img src="assets/media/users/300_1.jpg" alt="<?php echo __('User Profile'); ?>" />
                                                         </div>
                                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
-                                                            <span class="font-size-h3 font-weight-boldest">JM</span>
+                                                            <span class="font-size-h3 font-weight-boldest"><?php echo __('JM'); ?></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Pic-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column">
-                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">Luca Doncic</a>
-                                                        <span class="text-muted font-weight-bold">Head of Development</span>
+                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><?php echo __('Luca Doncic'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Head of Development'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                 </div>
                                                 <!--end::User-->
                                                 <!--begin::Desc-->
-                                                <p class="mb-7">I distinguish three
-                                                <a href="#" class="text-primary pr-1">#XRS-54PQ</a>objectives First objectives and nice cooked rice</p>
+                                                <p class="mb-7"><?php echo __('I distinguish three'); ?>
+                                                <a href="#" class="text-primary pr-1"><?php echo __('#XRS-54PQ'); ?></a><?php echo __('objectives First objectives and nice cooked rice'); ?></p>
                                                 <!--end::Desc-->
                                                 <!--begin::Info-->
                                                 <div class="mb-7">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                        <a href="#" class="text-muted text-hover-primary">luca@festudios.com</a>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Email:'); ?></span>
+                                                        <a href="#" class="text-muted text-hover-primary"><?php echo __('luca@festudios.com'); ?></a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-cente my-1">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Phone:'); ?></span>
                                                         <a href="#" class="text-muted text-hover-primary">44(76)34254578</a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                        <span class="text-muted font-weight-bold">Barcelona</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Location:'); ?></span>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Barcelona'); ?></span>
                                                     </div>
                                                 </div>
                                                 <!--end::Info-->
-                                                <button type="button" class="btn btn-block btn-sm btn-light-warning font-weight-bolder text-uppercase py-4">write message</button>
+                                                <button type="button" class="btn btn-block btn-sm btn-light-warning font-weight-bolder text-uppercase py-4"><?php echo __('write message'); ?></button>
                                             </div>
                                             <!--end::Body-->
                                         </div>
@@ -1081,7 +1081,7 @@
                                             <div class="card-body pt-4">
                                                 <!--begin::Toolbar-->
                                                 <div class="d-flex justify-content-end">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?php echo __('Quick actions'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-hor"></i>
                                                         </a>
@@ -1093,7 +1093,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-drop"></i>
                                                                         </span>
-                                                                        <span class="navi-text">New Group</span>
+                                                                        <span class="navi-text"><?php echo __('New Group'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -1101,7 +1101,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-list-3"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Contacts</span>
+                                                                        <span class="navi-text"><?php echo __('Contacts'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -1109,9 +1109,9 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-rocket-1"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Groups</span>
+                                                                        <span class="navi-text"><?php echo __('Groups'); ?></span>
                                                                         <span class="navi-link-badge">
-                                                                            <span class="label label-light-primary label-inline font-weight-bold">new</span>
+                                                                            <span class="label label-light-primary label-inline font-weight-bold"><?php echo __('new'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
@@ -1120,7 +1120,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-bell-2"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Calls</span>
+                                                                        <span class="navi-text"><?php echo __('Calls'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -1128,7 +1128,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-gear"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Settings</span>
+                                                                        <span class="navi-text"><?php echo __('Settings'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator my-3"></li>
@@ -1137,7 +1137,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-magnifier-tool"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Help</span>
+                                                                        <span class="navi-text"><?php echo __('Help'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -1145,7 +1145,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-bell-2"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Privacy</span>
+                                                                        <span class="navi-text"><?php echo __('Privacy'); ?></span>
                                                                         <span class="navi-link-badge">
                                                                             <span class="label label-light-danger label-rounded font-weight-bold">5</span>
                                                                         </span>
@@ -1162,43 +1162,43 @@
                                                     <!--begin::Pic-->
                                                     <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                         <div class="symbol symbol-circle symbol-lg-75">
-                                                            <img src="assets/media/users/300_10.jpg" alt="User Profile" />
+                                                            <img src="assets/media/users/300_10.jpg" alt="<?php echo __('User Profile'); ?>" />
                                                         </div>
                                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
-                                                            <span class="font-size-h3 font-weight-boldest">JM</span>
+                                                            <span class="font-size-h3 font-weight-boldest"><?php echo __('JM'); ?></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Pic-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column">
-                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">Charlie Stone</a>
-                                                        <span class="text-muted font-weight-bold">Head of Development</span>
+                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><?php echo __('Charlie Stone'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Head of Development'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                 </div>
                                                 <!--end::User-->
                                                 <!--begin::Desc-->
-                                                <p class="mb-7">I distinguish three
-                                                <a href="#" class="text-primary pr-1">#XRS-65PQ</a>objectives First
-                                                <span class="text-dark-75 font-weight-bolder pr-1">USD342/Annual</span>doloremagna</p>
+                                                <p class="mb-7"><?php echo __('I distinguish three'); ?>
+                                                <a href="#" class="text-primary pr-1"><?php echo __('#XRS-65PQ'); ?></a><?php echo __('objectives First'); ?>
+                                                <span class="text-dark-75 font-weight-bolder pr-1"><?php echo __('USD342/Annual'); ?></span><?php echo __('doloremagna'); ?></p>
                                                 <!--end::Desc-->
                                                 <!--begin::Info-->
                                                 <div class="mb-7">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                        <a href="#" class="text-muted text-hover-primary">luca@festudios.com</a>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Email:'); ?></span>
+                                                        <a href="#" class="text-muted text-hover-primary"><?php echo __('luca@festudios.com'); ?></a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-cente my-1">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Phone:'); ?></span>
                                                         <a href="#" class="text-muted text-hover-primary">44(76)34254578</a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                        <span class="text-muted font-weight-bold">Barcelona</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Location:'); ?></span>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Barcelona'); ?></span>
                                                     </div>
                                                 </div>
                                                 <!--end::Info-->
-                                                <button type="button" class="btn btn-block btn-sm btn-light-danger font-weight-bolder text-uppercase py-4">write message</button>
+                                                <button type="button" class="btn btn-block btn-sm btn-light-danger font-weight-bolder text-uppercase py-4"><?php echo __('write message'); ?></button>
                                             </div>
                                             <!--end::Body-->
                                         </div>
@@ -1213,7 +1213,7 @@
                                             <div class="card-body pt-4">
                                                 <!--begin::Toolbar-->
                                                 <div class="d-flex justify-content-end">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?php echo __('Quick actions'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-hor"></i>
                                                         </a>
@@ -1221,49 +1221,49 @@
                                                             <!--begin::Navigation-->
                                                             <ul class="navi navi-hover">
                                                                 <li class="navi-header font-weight-bold py-4">
-                                                                    <span class="font-size-lg">Choose Label:</span>
-                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                                    <span class="font-size-lg"><?php echo __('Choose Label:'); ?></span>
+                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?php echo __('Click to learn more...'); ?>"></i>
                                                                 </li>
                                                                 <li class="navi-separator mb-3 opacity-70"></li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                                                            <span class="label label-xl label-inline label-light-success"><?php echo __('Customer'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                                                            <span class="label label-xl label-inline label-light-danger"><?php echo __('Partner'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                                                            <span class="label label-xl label-inline label-light-warning"><?php echo __('Suplier'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                                                            <span class="label label-xl label-inline label-light-primary"><?php echo __('Member'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                                                            <span class="label label-xl label-inline label-light-dark"><?php echo __('Staff'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator mt-3 opacity-70"></li>
                                                                 <li class="navi-footer py-4">
                                                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                                                    <i class="ki ki-plus icon-sm"></i><?php echo __('Add new'); ?></a>
                                                                 </li>
                                                             </ul>
                                                             <!--end::Navigation-->
@@ -1276,43 +1276,43 @@
                                                     <!--begin::Pic-->
                                                     <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                         <div class="symbol symbol-circle symbol-lg-75 d-none">
-                                                            <img src="assets/media/users/300_10.jpg" alt="User Profile" />
+                                                            <img src="assets/media/users/300_10.jpg" alt="<?php echo __('User Profile'); ?>" />
                                                         </div>
                                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary">
-                                                            <span class="symbol-label font-size-h3 font-weight-boldest">AK</span>
+                                                            <span class="symbol-label font-size-h3 font-weight-boldest"><?php echo __('AK'); ?></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Pic-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column">
-                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">Anna Krox</a>
-                                                        <span class="text-muted font-weight-bold">Python Developer</span>
+                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><?php echo __('Anna Krox'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Python Developer'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                 </div>
                                                 <!--end::User-->
                                                 <!--begin::Desc-->
-                                                <p class="mb-7">I distinguish three
-                                                <a href="#" class="text-primary pr-1">#XRS-54PQ</a>objectives First merely first
-                                                <span class="text-dark-75 font-weight-bolder pr-1">USD342/Annual</span></p>
+                                                <p class="mb-7"><?php echo __('I distinguish three'); ?>
+                                                <a href="#" class="text-primary pr-1"><?php echo __('#XRS-54PQ'); ?></a><?php echo __('objectives First merely first'); ?>
+                                                <span class="text-dark-75 font-weight-bolder pr-1"><?php echo __('USD342/Annual'); ?></span></p>
                                                 <!--end::Desc-->
                                                 <!--begin::Info-->
                                                 <div class="mb-7">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                        <a href="#" class="text-muted text-hover-primary">giannis@fifestudios.com</a>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Email:'); ?></span>
+                                                        <a href="#" class="text-muted text-hover-primary"><?php echo __('giannis@fifestudios.com'); ?></a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-cente my-2">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Phone:'); ?></span>
                                                         <a href="#" class="text-muted text-hover-primary">52(43)56254826</a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                        <span class="text-muted font-weight-bold">Moscow</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Location:'); ?></span>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Moscow'); ?></span>
                                                     </div>
                                                 </div>
                                                 <!--end::Info-->
-                                                <button type="button" class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">write message</button>
+                                                <button type="button" class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4"><?php echo __('write message'); ?></button>
                                             </div>
                                             <!--end::Body-->
                                         </div>
@@ -1327,7 +1327,7 @@
                                             <div class="card-body pt-4">
                                                 <!--begin::Toolbar-->
                                                 <div class="d-flex justify-content-end">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?php echo __('Quick actions'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-hor"></i>
                                                         </a>
@@ -1335,49 +1335,49 @@
                                                             <!--begin::Navigation-->
                                                             <ul class="navi navi-hover">
                                                                 <li class="navi-header font-weight-bold py-4">
-                                                                    <span class="font-size-lg">Choose Label:</span>
-                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                                    <span class="font-size-lg"><?php echo __('Choose Label:'); ?></span>
+                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?php echo __('Click to learn more...'); ?>"></i>
                                                                 </li>
                                                                 <li class="navi-separator mb-3 opacity-70"></li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                                                            <span class="label label-xl label-inline label-light-success"><?php echo __('Customer'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                                                            <span class="label label-xl label-inline label-light-danger"><?php echo __('Partner'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                                                            <span class="label label-xl label-inline label-light-warning"><?php echo __('Suplier'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                                                            <span class="label label-xl label-inline label-light-primary"><?php echo __('Member'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
                                                                     <a href="#" class="navi-link">
                                                                         <span class="navi-text">
-                                                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                                                            <span class="label label-xl label-inline label-light-dark"><?php echo __('Staff'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator mt-3 opacity-70"></li>
                                                                 <li class="navi-footer py-4">
                                                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                                                    <i class="ki ki-plus icon-sm"></i><?php echo __('Add new'); ?></a>
                                                                 </li>
                                                             </ul>
                                                             <!--end::Navigation-->
@@ -1390,43 +1390,43 @@
                                                     <!--begin::Pic-->
                                                     <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                         <div class="symbol symbol-circle symbol-lg-75">
-                                                            <img src="assets/media/users/300_3.jpg" alt="User Profile" />
+                                                            <img src="assets/media/users/300_3.jpg" alt="<?php echo __('User Profile'); ?>" />
                                                         </div>
                                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
-                                                            <span class="font-size-h3 font-weight-boldest">JM</span>
+                                                            <span class="font-size-h3 font-weight-boldest"><?php echo __('JM'); ?></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Pic-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column">
-                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">Jason Muller</a>
-                                                        <span class="text-muted font-weight-bold">Atr Direcrtor</span>
+                                                        <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0"><?php echo __('Jason Muller'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Atr Direcrtor'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                 </div>
                                                 <!--end::User-->
                                                 <!--begin::Desc-->
-                                                <p class="mb-7">Contrary to popular belief, Lorem Ipsum is not
+                                                <p class="mb-7"><?php echo __('Contrary to popular belief, Lorem Ipsum is not'); ?>
                                                 <br />
-                                                <a href="#" class="text-primary pr-1">#XRS-54PQ</a>simply random text</p>
+                                                <a href="#" class="text-primary pr-1"><?php echo __('#XRS-54PQ'); ?></a><?php echo __('simply random text'); ?></p>
                                                 <!--end::Desc-->
                                                 <!--begin::Info-->
                                                 <div class="mb-7">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                        <a href="#" class="text-muted text-hover-primary">jason@fifestudios.com</a>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Email:'); ?></span>
+                                                        <a href="#" class="text-muted text-hover-primary"><?php echo __('jason@fifestudios.com'); ?></a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-cente my-1">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Phone:'); ?></span>
                                                         <a href="#" class="text-muted text-hover-primary">44(76)34254578</a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                        <span class="text-muted font-weight-bold">Melbourne</span>
+                                                        <span class="text-dark-75 font-weight-bolder mr-2"><?php echo __('Location:'); ?></span>
+                                                        <span class="text-muted font-weight-bold"><?php echo __('Melbourne'); ?></span>
                                                     </div>
                                                 </div>
                                                 <!--end::Info-->
-                                                <button type="button" class="btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4">write message</button>
+                                                <button type="button" class="btn btn-block btn-sm btn-light-success font-weight-bolder text-uppercase py-4"><?php echo __('write message'); ?></button>
                                             </div>
                                             <!--end::Body-->
                                         </div>
@@ -1460,14 +1460,14 @@
                                         </a>
                                     </div>
                                     <div class="d-flex align-items-center">
-                                        <select aria-label="Select option" class="form-control form-control-sm text-primary font-weight-bold mr-4 border-0 bg-light-primary" style="width: 75px;">
+                                        <select aria-label="<?php echo __('Select option'); ?>" class="form-control form-control-sm text-primary font-weight-bold mr-4 border-0 bg-light-primary" style="width: 75px;">
                                             <option value="10">10</option>
                                             <option value="20">20</option>
                                             <option value="30">30</option>
                                             <option value="50">50</option>
                                             <option value="100">100</option>
                                         </select>
-                                        <span class="text-muted">Displaying 10 of 230 records</span>
+                                        <span class="text-muted"><?php echo __('Displaying 10 of 230 records'); ?></span>
                                     </div>
                                 </div>
                                 <!--end::Pagination-->

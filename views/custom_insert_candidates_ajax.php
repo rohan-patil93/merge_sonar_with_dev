@@ -52,12 +52,12 @@ if($_POST['edittype'] == "dependancy"){
     <div class="form-group col-lg-12 dt-responsive table-responsive">
       <table class="table table-framed" id="deptable">
        <tr>
-        <th scope="col" class="" style="width: 25%;"> Name</th>
+        <th scope="col" class="" style="width: 25%;"><?= __('Name') ?></th>
 
-        <th scope="col" class="thheader" style="width: 20%;">Relationship</th>
-        <th scope="col" class="thheader" style="width: 25%;">DOB</th>
-        <th scope="col" class="" style="width: 20%;"> Occupation</th>
-        <th scope="col" class="" style="width: 20%;"> Monthly Income</th>
+        <th scope="col" class="thheader" style="width: 20%;"><?= __('Relationship') ?></th>
+        <th scope="col" class="thheader" style="width: 25%;"><?= __('DOB') ?></th>
+        <th scope="col" class="" style="width: 20%;"><?= __('Occupation') ?></th>
+        <th scope="col" class="" style="width: 20%;"><?= __('Monthly Income') ?></th>
         <th scope="col" style="width: 2%;">--</th>
       </tr>
       <?php
@@ -69,7 +69,7 @@ if($_POST['edittype'] == "dependancy"){
           <td><input aria-label="Dependent Name[]" type="text" name="dependent_name[]" class="form-control " value="<?php echo $depe['dependent_name']; ?>" autocomplete="off">  </td>
           <td>
            <select aria-label="Dependent Relationship Type[]" class="form-select js-example-basic-single" name="dependent_relationship_type[]" >
-            <option value="0"> Select Any One</option>
+            <option value="0"><?= __('Select Any One') ?></option>
             <?php foreach ((array)$relationlist as $relationlistkey => $reladata) {   ?>
               <option   <?php if($depe['dependent_relationship_type']== $relationlistkey){  ?> selected <?php
 } ?> value="<?php echo $relationlistkey; ?>"> <?php echo $reladata; ?></option>
@@ -88,7 +88,7 @@ if($_POST['edittype'] == "dependancy"){
         </table>
         <div class="row">
            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-            <button class="btn btn-success float-left mb-2"  onclick="adddeprows()" id="addRows_dep" type="button">Add More</button>
+            <button class="btn btn-success float-left mb-2"  onclick="adddeprows()" id="addRows_dep" type="button"><?= __('Add More') ?></button>
           </div>
         </div>
     </div>
@@ -122,10 +122,10 @@ if($_POST['edittype'] == "dependancy"){
     <div class="dt-responsive table-responsive">
         <table class="table table-framed " id="awdtable">
            <tr>
-            <th scope="col" class="" style="width: 50%;">Award Name</th>
-            <th scope="col" class="thheader" style="width: 30%;">Award Descrption </th>
-            <th scope="col" class="" style="width: 10%;"> Received Year</th>
-            <th scope="col" style="width: 10%;">Action</th>
+            <th scope="col" class="" style="width: 50%;"><?= __('Award Name') ?></th>
+            <th scope="col" class="thheader" style="width: 30%;"><?= __('Award Descrption') ?></th>
+            <th scope="col" class="" style="width: 10%;"><?= __('Received Year') ?></th>
+            <th scope="col" style="width: 10%;"><?= __('Action') ?></th>
           </tr>
           <?php $k=1;
           $awards= json_decode($candidates['candidate_awards'],1);
@@ -149,7 +149,7 @@ if($_POST['edittype'] == "dependancy"){
         </table>
             <div class="row">
              <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-              <button class="btn btn-success float-left mb-2"  onclick="addawardrows()" id="addRows_award" type="button">Add More</button>
+              <button class="btn btn-success float-left mb-2"  onclick="addawardrows()" id="addRows_award" type="button"><?= __('Add More') ?></button>
             </div>
           </div>
       </div>
@@ -183,7 +183,7 @@ if($_POST['edittype'] == "dependancy"){
         <form id="skillsform">
             <input type="hidden" name="edittype" value="skills">
              <div class="form-group pb-3">
-                <span class="form-label">Skills</span>
+                <span class="form-label"><?= __('Skills') ?></span>
                 <div class="tags_add">
                   <input aria-label="Skills" type="text" name="skills" class="form-control" value="<?php echo $emplode; ?>" data-role="tagsinput">
                 </div>
@@ -208,7 +208,7 @@ if($_POST['editsubmit'] == "edit"){ ?>
 
     <div class="row">
      <div class="form-group col-lg-4">
-      <span class="form-label">Total Experiance</span>
+      <span class="form-label"><?= __('Total Experiance') ?></span>
       <div class="input-group input-icon-right input-group-button">
        <input aria-label="Total Experiance" class="form-control width1"  type="text"  id="total_experiance" name="total_experiance"  value="<?php echo $candidates['total_experiance']; ?>">
        <span class="input-group-text addon-style">
@@ -219,11 +219,11 @@ if($_POST['editsubmit'] == "edit"){ ?>
     <div class="form-group col-lg-12 dt-responsive table-responsive">
     <table class="table table-framed " id="extable">
      <tr>
-      <th scope="col" class="" style="width: 30%;">Company Name</th>
-      <th scope="col" class="thheader" style="width: 30%;">job Descrption </th>
-      <th scope="col" class="" style="width: 20%;"> From</th>
-      <th scope="col" class="thheader" style="width: 20%;">To </th>
-      <th scope="col" style="width: 10%;">Files </th>
+      <th scope="col" class="" style="width: 30%;"><?= __('Company Name') ?></th>
+      <th scope="col" class="thheader" style="width: 30%;"><?= __('job Descrption') ?></th>
+      <th scope="col" class="" style="width: 20%;"><?= __('From') ?></th>
+      <th scope="col" class="thheader" style="width: 20%;"><?= __('To') ?></th>
+      <th scope="col" style="width: 10%;"><?= __('Files') ?></th>
     </tr>
     <?php
     if(count((array)$exper) == '0'){
@@ -240,17 +240,17 @@ if($_POST['editsubmit'] == "edit"){ ?>
         <td>
 
             <div class="image-input image-input-empty image-input-outline" id="kt_image_5" >
-             <label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="Upload" style="left:-5px;top:-15px;">
+             <label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Upload') ?>" style="left:-5px;top:-15px;">
               <span><i class="fa fa-upload"></i></span>
               <input aria-label="Dyanamic File" type="file" name="dyanamic_file" class="qualification_file"/>
               <input type="hidden" name="hidden_file[]" value="<?php echo $expe['compay_file']; ?>"/>
             </label>
             <?php if($expe['compay_file']!=''){ ?>
-            <a href="<?php echo $display_file."/".$expe['compay_file']; ?>"  data-action="remove" data-bs-toggle="tooltip" title="Download" target="_blank" class="mt-2">
+            <a href="<?php echo $display_file."/".$expe['compay_file']; ?>"  data-action="remove" data-bs-toggle="tooltip" title="<?= __('Download') ?>" target="_blank" class="mt-2">
               <span><i class="fa fa-download"></i></span>
               </a>
             <?php } ?>
-            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="Remove" onclick="removedRow('removedworkexperiance<?php echo $mm; ?>')"  role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Remove') ?>" onclick="removedRow('removedworkexperiance<?php echo $mm; ?>')"  role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
               <i class="ti-trash"></i>
             </span>
 
@@ -262,7 +262,7 @@ if($_POST['editsubmit'] == "edit"){ ?>
   </table>
   <div class="row">
    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-    <button class="btn btn-success float-left mb-2"  onclick="addexpreencerows()" id="addRows_exp" type="button">Add More</button>
+    <button class="btn btn-success float-left mb-2"  onclick="addexpreencerows()" id="addRows_exp" type="button"><?= __('Add More') ?></button>
   </div>
 </div>
 </div>
@@ -285,7 +285,7 @@ if($_POST['editsubmit'] == "edit"){ ?>
             <a href="#!"><h6><?php echo $exper1['company_name']; ?></h6></a>
             <p class="text-muted m-b-0"><?php echo $exper1['work_from']." To ".$exper1['work_to']; ?>
             <?php if($exper1['compay_file']!=''){ ?>
-<a href="<?php echo $display_file."/".$exper1['compay_file']; ?>"  data-action="remove" data-bs-toggle="tooltip" title="Download" target="_blank" style="float:left;position:absolute;right:18px;" class="mt-2 float-end" download>
+<a href="<?php echo $display_file."/".$exper1['compay_file']; ?>"  data-action="remove" data-bs-toggle="tooltip" title="<?= __('Download') ?>" target="_blank" style="float:left;position:absolute;right:18px;" class="mt-2 float-end" download>
         <i class="fa fa-download"></i>
               </a>
           <?php } ?>
@@ -313,13 +313,13 @@ if($_POST['editsubmit'] == "edit"){ ?>
 
    <table class="table table-framed " id="edutable">
        <tr>
-        <th scope="col" class="" style="width: 25%;">Institute Name</th>
-        <th scope="col" class="thheader" style="width: 20%;">Type</th>
-        <th scope="col" class="" style="width: 20%;"> Start Date</th>
-        <th scope="col" class="thheader" style="width: 20%;">End Date </th>
-        <th scope="col" class="thheader" style="width: 15%;">Score </th>
-        <th scope="col" class="" style="width: 25%;">Subject taken</th>
-        <th scope="col" class="thheader" style="width: 15%;">Files </th>
+        <th scope="col" class="" style="width: 25%;"><?= __('Institute Name') ?></th>
+        <th scope="col" class="thheader" style="width: 20%;"><?= __('Type') ?></th>
+        <th scope="col" class="" style="width: 20%;"><?= __('Start Date') ?></th>
+        <th scope="col" class="thheader" style="width: 20%;"><?= __('End Date') ?></th>
+        <th scope="col" class="thheader" style="width: 15%;"><?= __('Score') ?></th>
+        <th scope="col" class="" style="width: 25%;"><?= __('Subject taken') ?></th>
+        <th scope="col" class="thheader" style="width: 15%;"><?= __('Files') ?></th>
 
       </tr>
       <?php  if(count((array)$insts) == '0'){
@@ -330,7 +330,7 @@ if($_POST['editsubmit'] == "edit"){ ?>
           <td><input aria-label="Institute Name[]" type="text" name="institute_name[]" class="form-control" value="<?php echo $inst['institute_name']; ?>" autocomplete="off">  </td>
           <td>
            <select aria-label="Education Type[]" class="form-select js-example-basic-single" name="education_type[]" >
-            <option value="0"> Select Any One</option>
+            <option value="0"><?= __('Select Any One') ?></option>
             <?php foreach ((array)$edutypedata as $educode=> $edutype) {   ?>
               <option  <?php if($inst['education_type']== $educode){  ?> selected <?php
 } ?>   value="<?php echo $educode; ?>"> <?php echo $edutype; ?></option>
@@ -344,18 +344,18 @@ if($_POST['editsubmit'] == "edit"){ ?>
         <td>
 
             <div class="image-input image-input-empty image-input-outline" id="kt_image_5_2" >
-             <label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="Upload" >
+             <label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Upload') ?>" >
               <span><i class="fa fa-upload"></i></span>
               <input aria-label="Dyanamic File" type="file" name="dyanamic_file" class="qualification_file" />
               <input type="hidden" name="hidden_qualification_file[]" value="<?php echo $inst['qualification_file']; ?>"/>
             </label>
              <?php if($inst['qualification_file']!=''){ ?>
-            <a href="<?php echo $display_file."/".$inst['qualification_file']; ?>"  data-action="remove" data-bs-toggle="tooltip" title="Download"  target="_blank"  class="mt-2">
+            <a href="<?php echo $display_file."/".$inst['qualification_file']; ?>"  data-action="remove" data-bs-toggle="tooltip" title="<?= __('Download') ?>"  target="_blank"  class="mt-2">
               <span ><i class="fa fa-download"></i></span>
               </a>
             <?php } ?>
 
-            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="Remove" onclick="removedRow('removeeducation<?php echo $kk; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Remove') ?>" onclick="removedRow('removeeducation<?php echo $kk; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                <i class="ti-trash"></i>
             </span>
           </div>
@@ -368,7 +368,7 @@ if($_POST['editsubmit'] == "edit"){ ?>
   <div class="row">
    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
 
-    <button class="btn btn-success float-left mb-2"  onclick="addedurows()" id="addRows_edu" type="button">Add More</button>
+    <button class="btn btn-success float-left mb-2"  onclick="addedurows()" id="addRows_edu" type="button"><?= __('Add More') ?></button>
   </div>
 </div>
 
@@ -390,7 +390,7 @@ if($_POST['editsubmit'] == "edit"){ ?>
                     <p class="text-muted m-b-0"><?php echo $inst['start_date']." To ".$inst['end_date']; ?>
 
  <?php if($inst['qualification_file']!=''){ ?>
-<a href="<?php echo $display_file."/".$inst['qualification_file']; ?>"  data-toggle="tooltip" title="Download"  target="_blank"  class="float-end" download>
+<a href="<?php echo $display_file."/".$inst['qualification_file']; ?>"  data-toggle="tooltip" title="<?= __('Download') ?>"  target="_blank"  class="float-end" download>
         <i class="fa fa-download"></i>
               </a>
           <?php } ?>

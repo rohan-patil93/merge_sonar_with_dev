@@ -169,7 +169,7 @@ if (!empty($announcement['survey_details'])) {
             <div class="card 1 ">
 
                 <div class="card-header table-card-header">
-                    <h5> Company Announcements</h5><button type="button" class="btn p-0 border-0 bg-transparent ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Go Tour" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                    <h5><?= __('Company Announcements') ?></h5><button type="button" class="btn p-0 border-0 bg-transparent ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('Go Tour') ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                     <div class="card-header-right table-card-header ">
 
                         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
@@ -188,9 +188,9 @@ if (!empty($announcement['survey_details'])) {
                                 <input type="hidden" name="application_filter_id" id="filtertbl_rowid" value="<?php echo $filtertbl_rowid;?>">
                                 <div class="row">
                                     <div class="form-group col-lg-6">
-                                        <span>Announcement Category Id</span>
+                                        <span><?= __('Announcement Category Id') ?></span>
                                         <select aria-label="Announcement Category" class="form-select js-example-basic-single" id="announcement_category_id" name="announcement_category_id">
-                                            <option value="0"> Select Any one Announcement Category Id</option>
+                                            <option value="0"><?= __('Select Any one Announcement Category Id') ?></option>
                                             <?php foreach ($announcement_categories as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>"
                                                     <?php echo ($announcement['announcement_category_id'] == $row['id']) ? 'selected' : ''; ?>>
@@ -199,25 +199,25 @@ if (!empty($announcement['survey_details'])) {
                                             <?php endforeach; ?>
 
                                         </select>
-                                        <div style="display: none;color: red;" id="announcement_category_id_err"> Please Select Announcement Category Id </div>
+                                        <div style="display: none;color: red;" id="announcement_category_id_err"> <?= __('Please Select Announcement Category Id') ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Announcement Heading&nbsp;<span class="requried">*</span></span>
+                                        <span class=""><?= __('Announcement Heading') ?>&nbsp;<span class="requried">*</span></span>
                                         <input aria-label="Announcement Heading" class="form-control" type="text" id="announcement_heading" name="announcement_heading" value="<?php echo htmlspecialchars($announcement['announcement_heading'] ?? ''); ?>">
-                                        <div style="display: none;color: red;" id="announcement_heading_err"> Please enter Announcement Heading </div>
+                                        <div style="display: none;color: red;" id="announcement_heading_err"> <?= __('Please enter Announcement Heading') ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span>Announcement Message&nbsp;<span class="requried">*</span></span>
+                                        <span><?= __('Announcement Message') ?>&nbsp;<span class="requried">*</span></span>
                                         <div class="kt-radio-inline">
                                             <textarea aria-label="Announcement Message" type="text" class="form-control " rows="5" cols="5" id="announcement_message" name="announcement_message"><?php echo htmlspecialchars($announcement['announcement_message'] ?? ''); ?></textarea>
                                         </div>
-                                        <div style="display: none;color: red;" id="announcement_message_err"> Please Select Announcement Message </div>
+                                        <div style="display: none;color: red;" id="announcement_message_err"> <?= __('Please Select Announcement Message') ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span>Image Url&nbsp;<span class="requried">*</span></span>
+                                        <span><?= __('Image Url') ?>&nbsp;<span class="requried">*</span></span>
                                         <input aria-label="Image Url" class="form-control" type="file" name="image_url" id="image_url" accept=".png, .jpg, .jpeg" />
                                         <?php if (!empty($announcement['image_url'])): ?>
                                             <img src="uploads/all/<?php echo $announcement['image_url']; ?>"
@@ -226,45 +226,45 @@ if (!empty($announcement['survey_details'])) {
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <span class="">Video Url</span>
+                                        <span class=""><?= __('Video Url') ?></span>
                                         <input aria-label="Video Url" class="form-control" type="text" id="video_url" name="video_url" value="<?php echo htmlspecialchars($announcement['video_url'] ?? ''); ?>">
-                                        <div style="display: none;color: red;" id="video_url_err"> Please enter Video Url </div>
+                                        <div style="display: none;color: red;" id="video_url_err"> <?= __('Please enter Video Url') ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-3">
-                                        <span>Start Date&nbsp;<span class="requried">*</span></span>
+                                        <span><?= __('Start Date') ?>&nbsp;<span class="requried">*</span></span>
                                         <input aria-label="Input field" class="form-control datepicker" type="text" value="<?php echo !empty($announcement['start_date']) ? fromDate($announcement['start_date']) : ''; ?>" name="start_date">
                                     </div>
 
                                     <div class="form-group col-lg-3">
-                                        <span>Expiry Date&nbsp;<span class="requried">*</span></span>
+                                        <span><?= __('Expiry Date') ?>&nbsp;<span class="requried">*</span></span>
                                         <input aria-label="Input field" class="form-control datepicker" type="text" value="<?php echo !empty($announcement['expiry_date']) && $announcement['expiry_date'] != '1970-01-01' ? fromDate($announcement['expiry_date']) : ''; ?>" name="expiry_date">
                                     </div>
                                     <div class="form-group col-lg-6">
 
-                                        <span class="form-label">Asign to <span class="text-danger">*</span></span>
+                                        <span class="form-label"><?= __('Asign to') ?> <span class="text-danger">*</span></span>
                                         <div id="tsk_fortable">
 
                                         </div>
                                         <div class="col-xl-12">
                                              <i class="flaticon2-group text-success"></i>
-                                             <button type="button" onclick="showpopup();">Edit </button>
+                                             <button type="button" onclick="showpopup();"><?= __('Edit') ?> </button>
                                          </div>
 
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <span>Comment & Like / Dislike Visibility </span>
+                                        <span><?= __('Comment & Like / Dislike Visibility') ?> </span>
                                         <div class="col-12 col-form-label">
                                            <div class="radio-inline">
                                                <label class="radio radio-success">
                                                     <input aria-label="Comment Visibility" type="radio" name="comment_visibility" value="Y" <?php if($announcement['comment_visibility']=='Y'){ ?> checked="checked" <?php
 } ?>>
-                                                    <span></span>Public
+                                                    <span></span><?= __('Public') ?>
                                                 </label>
                                                 <label class="radio radio-success">
                                                     <input aria-label="Comment Visibility" type="radio" name="comment_visibility" value="N" <?php if($announcement['comment_visibility']=='N'){ ?> checked="checked" <?php
 } ?>>
-                                                    <span></span>Private
+                                                    <span></span><?= __('Private') ?>
                                                 </label>
                                             </div>
                                         </div>
@@ -274,56 +274,56 @@ if (!empty($announcement['survey_details'])) {
                                         <div class="form-check form-switch">
                                             <input aria-label="Enable Survey" class="form-check-input" type="checkbox" id="enable_survey" name="enable_survey" value="1" <?php echo ($announcement['survey_type'] == 'Y') ? 'checked' : ''; ?>>
                                             <span class="slider round"></span>
-                                            <span>Enable Survey?</span>
+                                            <span><?= __('Enable Survey?') ?></span>
                                         </div>
 
                                     </div>
 
                                     <!-- Survey Type Dropdown -->
                                     <div class="form-group col-lg-6 w-full"  id="survey_type_block" style="display:<?php echo ($announcement['survey_type'] == 'Y') ? 'block' : 'none'; ?>;">
-                                        <span>Survey Type</span>
+                                        <span><?= __('Survey Type') ?></span>
                                         <select aria-label="Survey Type" class="form-select js-example-basic-single" id="survey_type" name="survey_type">
-                                            <option value="">Select Survey Type</option>
-                                            <option value="POLIS" <?php echo ($survey_type_value == 'POLIS') ? 'selected' : ''; ?>>Polis</option>
-                                            <option value="RANKING" <?php echo ($survey_type_value == 'RANKING') ? 'selected' : ''; ?>>Rating</option>
-                                            <option value="CHOICES" <?php echo ($survey_type_value == 'CHOICES') ? 'selected' : ''; ?>>Multi Choice</option>
+                                            <option value=""><?= __('Select Survey Type') ?></option>
+                                            <option value="POLIS" <?php echo ($survey_type_value == 'POLIS') ? 'selected' : ''; ?>><?= __('Polis') ?></option>
+                                            <option value="RANKING" <?php echo ($survey_type_value == 'RANKING') ? 'selected' : ''; ?>><?= __('Rating') ?></option>
+                                            <option value="CHOICES" <?php echo ($survey_type_value == 'CHOICES') ? 'selected' : ''; ?>><?= __('Multi Choice') ?></option>
                                         </select>
                                     </div>
 
 
                                     <div class="form-group col-lg-6" id="survey_polis_block" style="display:<?php echo ($survey_type_value == 'POLIS') ? 'block' : 'none'; ?>;">
-                                        <span>Polis Options</span>
+                                        <span><?= __('Polis Options') ?></span>
                                         <input aria-label="Polis1" type="text" class="form-control mb-2" name="polis1" value="<?php echo $survey_details_decoded['data'][0]['label'] ?? 'YES'; ?>">
                                         <input aria-label="Polis2" type="text" class="form-control" name="polis2" value="<?php echo $survey_details_decoded['data'][1]['label'] ?? 'NO'; ?>">
                                     </div>
 
 
                                     <div class="form-group col-lg-6" id="survey_rating_block" style="display:<?php echo ($survey_type_value == 'RANKING') ? 'block' : 'none'; ?>;">
-                                        <span>Rating Range</span>
+                                        <span><?= __('Rating Range') ?></span>
                                         <div class="row">
                                             <div class="col-6">
-                                                <input aria-label="Start (e.g. 0)" type="number" class="form-control" name="rating_start" id="rating_start" placeholder="Start (e.g. 0)" value="<?php echo $survey_details_decoded['data']['start'] ?? '0'; ?>">
+                                                <input aria-label="Start (e.g. 0)" type="number" class="form-control" name="rating_start" id="rating_start" placeholder="<?= __('Start (e.g. 0)') ?>" value="<?php echo $survey_details_decoded['data']['start'] ?? '0'; ?>">
                                             </div>
                                             <div class="col-6">
-                                                <input aria-label="End (e.g. 10)" type="number" class="form-control" name="rating_end" id="rating_end" placeholder="End (e.g. 10)" value="<?php echo $survey_details_decoded['data']['end'] ?? '10'; ?>">
+                                                <input aria-label="End (e.g. 10)" type="number" class="form-control" name="rating_end" id="rating_end" placeholder="<?= __('End (e.g. 10)') ?>" value="<?php echo $survey_details_decoded['data']['end'] ?? '10'; ?>">
                                             </div>
                                         </div>
                                     </div>
 
 
                                     <div class="form-group col-lg-6" id="survey_choices_block" style="display:<?php echo ($survey_type_value == 'CHOICES') ? 'block' : 'none'; ?>;">
-                                        <span>Multi Choices</span>
+                                        <span><?= __('Multi Choices') ?></span>
                                         <?php if ($survey_type_value == 'CHOICES' && !empty($survey_details_decoded['data'])):
                                             foreach ($survey_details_decoded['data'] as $i => $choice): ?>
                                                 <input aria-label="Input field" type="text" class="form-control mb-2" name="multi<?php echo $i + 1; ?>"
                                                     value="<?php echo htmlspecialchars($choice['label']); ?>">
                                             <?php endforeach;
                                         else: ?>
-                                            <input aria-label="Option 1" type="text" class="form-control mb-2" name="multi1" placeholder="Option 1" value="">
-                                            <input aria-label="Option 2" type="text" class="form-control mb-2" name="multi2" placeholder="Option 2" value="">
-                                            <input aria-label="Option 3" type="text" class="form-control mb-2" name="multi3" placeholder="Option 3" value="">
-                                            <input aria-label="Option 4" type="text" class="form-control mb-2" name="multi4" placeholder="Option 4" value="">
-                                            <input aria-label="Option 5" type="text" class="form-control mb-2" name="multi5" placeholder="Option 5" value="">
+                                            <input aria-label="Option 1" type="text" class="form-control mb-2" name="multi1" placeholder="<?= __('Option 1') ?>" value="">
+                                            <input aria-label="Option 2" type="text" class="form-control mb-2" name="multi2" placeholder="<?= __('Option 2') ?>" value="">
+                                            <input aria-label="Option 3" type="text" class="form-control mb-2" name="multi3" placeholder="<?= __('Option 3') ?>" value="">
+                                            <input aria-label="Option 4" type="text" class="form-control mb-2" name="multi4" placeholder="<?= __('Option 4') ?>" value="">
+                                            <input aria-label="Option 5" type="text" class="form-control mb-2" name="multi5" placeholder="<?= __('Option 5') ?>" value="">
                                         <?php endif; ?>
                                     </div>
                                     <div class="form-group col-lg-6" id="survey_result_block" style="display:<?php echo ($announcement['survey_result_visibility'] == 'Y') ? 'block' : 'none'; ?>;">
@@ -333,12 +333,12 @@ if (!empty($announcement['survey_details'])) {
                                                <label class="radio radio-success">
                                                     <input aria-label="Survey Result Visibility" type="radio" name="survey_result_visibility" value="Y" <?php if($announcement['survey_result_visibility']=='Y'){ ?> checked="checked" <?php
 } ?>>
-                                                    <span></span>Public
+                                                    <span></span><?= __('Public') ?>
                                                 </label>
                                                 <label class="radio radio-success">
                                                     <input aria-label="Survey Result Visibility" type="radio" name="survey_result_visibility" value="N" <?php if($announcement['survey_result_visibility']=='N'){ ?> checked="checked" <?php
 } ?> >
-                                                    <span></span>Private
+                                                    <span></span><?= __('Private') ?>
                                                 </label>
                                             </div>
                                         </div>

@@ -153,7 +153,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
                                     <div class="kt-section kt-section--first">
                                         <div class="kt-section__body">
                                             <div class="form-group  row">
-                                                <span class="col-xl-3 col-lg-3 col-form-label">File Upload</span>
+                                                <span class="col-xl-3 col-lg-3 col-form-label"><?= __('File Upload') ?></span>
                                                 <div class="col-lg-9 col-xl-6">
                                                     <div class="input-group">
                                                         <input aria-label="Data" type="file" name="data" class="">
@@ -168,11 +168,11 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
                                                     <?php if(isset($_GET['Rid']) && $_GET['Rid'] !=''){ ?>
                                                     <input type="hidden" name="hid" value=<?php echo $rid; ?> />
                                                     <input type="hidden" name="submit" value="Update" />
-                                                    <button id="kt_llogin_signup_submit" class="btn btn-success">Upadate</button>
+                                                    <button id="kt_llogin_signup_submit" class="btn btn-success"><?= __('Upadate') ?></button>
                                                 <?php } else{ ?>
                                                     <input type="hidden" name="submit" value="Add" />
-                                                    <button id="kt_llogin_signup_submit_2" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">ADD</button>
-                                                    <button type="reset" class="btn btn-warning btn-elevate btn-pill btn-elevate-air">Cancel</button>
+                                                    <button id="kt_llogin_signup_submit_2" class="btn btn-brand btn-elevate btn-pill btn-elevate-air"><?= __('ADD') ?></button>
+                                                    <button type="reset" class="btn btn-warning btn-elevate btn-pill btn-elevate-air"><?= __('Cancel') ?></button>
                                                 <?php } ?>
                                                 </div>
                                             </div>

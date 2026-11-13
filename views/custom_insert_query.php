@@ -27,7 +27,7 @@
                 console.log(response);
                 swal.fire({
                             title: "<?php echo $_SESSION['error_message']['3003']; ?> ",
-                            text: "Do you want to close ? ",
+                            text: <?php echo json_encode(__('Do you want to close ?')); ?>,
                             type: "success",
                             buttonsStyling: false,
                             confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
@@ -47,8 +47,8 @@
 </script>
 
     <div class="modal-header">
-                        <h5 class="modal-title">Queries</h5>
-                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title"><?php echo __('Queries'); ?></h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
                         </div>
                     <div class="modal-body" >
 
@@ -60,7 +60,7 @@
 
                         <div class="radio radio-inline">
   <label class="form-label">
-   <input aria-label="Query Type" type="radio" id="query_type_2" name="query_type" value="<?php echo $querytype['genc_detail_code']; ?>" id="imp_2">
+   <input aria-label="<?php echo __('Query Type'); ?>" type="radio" id="query_type_2" name="query_type" value="<?php echo $querytype['genc_detail_code']; ?>" id="imp_2">
     <i class="helper"></i><?php echo $querytype['genc_detail_name']; ?>
   </label>
 </div>
@@ -68,7 +68,7 @@
 
 </div>
 
-                        <textarea aria-label="Query Text" name="query_text" id="query_text" class="form-control mt-2"></textarea>
+                        <textarea aria-label="<?php echo __('Query Text'); ?>" name="query_text" id="query_text" class="form-control mt-2"></textarea>
                         <input type="hidden" name="submit_query" value="query">
                         <input type="hidden" id="company_id" name="company_id" value="<?php echo $_SESSION['company_id']; ?>">
                         <input type="hidden" id="trno" name="trno" value="<?php echo $_POST['tran_no']; ?>">
@@ -82,8 +82,8 @@
 
 
             <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Submit</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
+                <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?php echo __('Submit'); ?></button>
             </div>
 
     </form>

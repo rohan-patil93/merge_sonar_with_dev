@@ -128,12 +128,12 @@ $status_progress = $result['status_progress'];
         }else{
             swal({
                 title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-                text: 'Please Enter Annual CTC',
+                text: <?php echo json_encode(__('Please Enter Annual CTC')); ?>,
                 type: "error",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes",
-                cancelButtonText: "No",
+                confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+                cancelButtonText: <?php echo json_encode(__('No')); ?>,
                 closeOnConfirm: true,
                 closeOnCancel: true
             });
@@ -197,12 +197,12 @@ function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,nex
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: "Please note the status of the document will change to "+new_status_name,
+            text: <?php echo json_encode(__('Please note the status of the document will change to')); ?>+new_status_name,
             type: "info",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes')); ?>,
+            cancelButtonText: <?php echo json_encode(__('No')); ?>,
             closeOnConfirm: false
         },
         function(){
@@ -229,12 +229,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...')); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok')); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -264,9 +264,9 @@ var maxrows = 1000;
     maxrows = maxrows+1;
     var html = '';
     html += '<div class="row" id="deleteidvesting_'+maxrows+'">';
-    html += '<div class="form-group col-lg-4"><input aria-label="Vesting Date[]" type="text" class="form-control datepicker vesategdatpicker_'+rowid+'" name="vesting_date[]" ></div>';
-    html += '<div class="form-group col-lg-3"><input aria-label="Vesting Percentage[]" type="number" class="form-control text-right vestingpercentage_'+rowid+'" name="vesting_percentage[]" onblur="calculateVestingPercentage('+rowid+')"></div>';
-    html += '<div class="form-group col-lg-4"><input aria-label="Till Date[]" type="text" class="form-control datepicker vesategetilldate_'+rowid+'" name="till_date[]"></div>';
+    html += '<div class="form-group col-lg-4"><input aria-label="<?php echo __('Vesting Date[]'); ?>" type="text" class="form-control datepicker vesategdatpicker_'+rowid+'" name="vesting_date[]" ></div>';
+    html += '<div class="form-group col-lg-3"><input aria-label="<?php echo __('Vesting Percentage[]'); ?>" type="number" class="form-control text-right vestingpercentage_'+rowid+'" name="vesting_percentage[]" onblur="calculateVestingPercentage('+rowid+')"></div>';
+    html += '<div class="form-group col-lg-4"><input aria-label="<?php echo __('Till Date[]'); ?>" type="text" class="form-control datepicker vesategetilldate_'+rowid+'" name="till_date[]"></div>';
 
     html += '<div class="form-group col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRowVestage('+maxrows+','+rowid+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div>';
     html += '</div>';
@@ -308,7 +308,7 @@ function calculateStockValue(){
         <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
 <?php } ?>
  <?php if($esop_allocations['id'] !=""){
@@ -322,7 +322,7 @@ function calculateStockValue(){
             if($esop_allocations['id'] !=""){ echo $workflowsteps['current_status_ribbon'];
 }  ?>
             <div class="card-header">
-                <h5>ESOP Allocation</h5>
+                <h5><?php echo __('ESOP Allocation'); ?></h5>
                 <div class="card-header-right table-card-header  m-r-50">
                     <?php echo $workflowsteps['workflow_btn']; ?>
                 </div>
@@ -333,96 +333,96 @@ function calculateStockValue(){
 } ?>>
                 <div class="row">
                 <div class="form-group col-lg-12">
-                    <span class="form-label">Employee<span class="text-danger">*</span></span>
-                    <select aria-label="Company Contribution User" class="form-select js-example-basic-single" name="company_contribution_user_id" onchange="selectEmp(this.value)">
-                         <option value="">Select Any One</option>
+                    <span class="form-label"><?php echo __('Employee'); ?><span class="text-danger">*</span></span>
+                    <select aria-label="<?php echo __('Company Contribution User'); ?>" class="form-select js-example-basic-single" name="company_contribution_user_id" onchange="selectEmp(this.value)">
+                         <option value=""><?php echo __('Select Any One'); ?></option>
                          <?php foreach($company_contribution_users as $ccu){ ?>
                          <option value ='<?php echo $ccu['id']; ?>' <?php echo $esop_allocations['company_contribution_user_id'] ==$ccu['id']?"selected":""; ?>> <?php echo $ccu['display_name']; ?></option>
                      <?php } ?>
-                        <option value ='0'>New Employee</option>
+                        <option value ='0'><?php echo __('New Employee'); ?></option>
                     </select>
                 </div>
             </div>
                 <div class="row" id="insertfrmopen"  <?php if($esop_allocations['company_contribution_user_id']==""){ ?>style="pointer-events: none; opacity: 0.8;" <?php
 } ?>>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Employee Code <span class="text-danger">*</span></span>
-                    <input aria-label="Emp Code" type="text" class="form-control" name="emp_code"  id="emp_code" value="<?php echo $esop_allocations['emp_code']; ?>" required>
+                    <span class="form-label"><?php echo __('Employee Code'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Emp Code'); ?>" type="text" class="form-control" name="emp_code"  id="emp_code" value="<?php echo $esop_allocations['emp_code']; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Date of Joning <span class="text-danger">*</span></span>
-                    <input aria-label="Date Of Joining" type="text" class="form-control datepicker" name="date_of_joining" id="date_of_joining" value="<?php echo fromDate($esop_allocations['date_of_joining']); ?>" required>
+                    <span class="form-label"><?php echo __('Date of Joning'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Date Of Joining'); ?>" type="text" class="form-control datepicker" name="date_of_joining" id="date_of_joining" value="<?php echo fromDate($esop_allocations['date_of_joining']); ?>" required>
                 </div>
                 <div class="form-group col-lg-12">
-                    <span class="form-label">Employee Name <span class="text-danger">*</span></span>
-                    <input aria-label="Emp Name" type="text" class="form-control" name="emp_name" id="emp_name" value="<?php echo $esop_allocations['emp_name']; ?>" required>
+                    <span class="form-label"><?php echo __('Employee Name'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Emp Name'); ?>" type="text" class="form-control" name="emp_name" id="emp_name" value="<?php echo $esop_allocations['emp_name']; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Designation </span>
-                    <input aria-label="Designation" type="text" class="form-control" name="designation" id="designation" value="<?php echo $esop_allocations['designation']; ?>" >
+                    <span class="form-label"><?php echo __('Designation'); ?> </span>
+                    <input aria-label="<?php echo __('Designation'); ?>" type="text" class="form-control" name="designation" id="designation" value="<?php echo $esop_allocations['designation']; ?>" >
                 </div>
                  <div class="form-group col-lg-6">
-                    <span class="form-label">Tenure (Year)</span>
-                    <input aria-label="Tenure" type="text" class="form-control" name="tenure"  id="tenure" value="<?php echo $esop_allocations['tenure']; ?>" readonly >
+                    <span class="form-label"><?php echo __('Tenure (Year)'); ?></span>
+                    <input aria-label="<?php echo __('Tenure'); ?>" type="text" class="form-control" name="tenure"  id="tenure" value="<?php echo $esop_allocations['tenure']; ?>" readonly >
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Annual CTC <span class="text-danger">*</span></span>
-                    <input aria-label="Annual Ctc" type="text" class="form-control text-right" name="annual_ctc" id="annual_ctc"  value="<?php echo $esop_allocations['annual_ctc']; ?>" required>
+                    <span class="form-label"><?php echo __('Annual CTC'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Annual Ctc'); ?>" type="text" class="form-control text-right" name="annual_ctc" id="annual_ctc"  value="<?php echo $esop_allocations['annual_ctc']; ?>" required>
                 </div>
                  <div class="form-group col-lg-6">
-                    <span class="form-label">Approval Manager<span class="text-danger">*</span></span>
-                    <select aria-label="Esop Connect" class="form-control js-example-basic-single" name="esop_connect"  id="esop_connect" onchange="selectESOPPlans(this.value)" required>
-                         <option value="">Select Any One</option>
+                    <span class="form-label"><?php echo __('Approval Manager'); ?><span class="text-danger">*</span></span>
+                    <select aria-label="<?php echo __('Esop Connect'); ?>" class="form-control js-example-basic-single" name="esop_connect"  id="esop_connect" onchange="selectESOPPlans(this.value)" required>
+                         <option value=""><?php echo __('Select Any One'); ?></option>
                         <?php foreach($application_users as $au){?>
                              <option value="<?php echo $au['id']; ?>" <?php echo ($au['id']==$esop_allocations['esop_connect'] || ($au['id']==$_SESSION['userid'] && $esop_allocations['esop_connect']=="")) ?"selected":""; ?>><?php echo $au['display_name']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="col-lg-12 form-group">
-                    <span class="form-label">Stock<span class="text-danger">*</span></span>
+                    <span class="form-label"><?php echo __('Stock'); ?><span class="text-danger">*</span></span>
                     <div class="form-radio">
                         <div class="radio radio-inline">
                             <label class="d-inline-block">
-                                <input aria-label="Stock" type="radio"  name="stock"  id="stock" onclick="calculateStockValue()" value="A" <?php echo $esop_allocations['stock'] =="A"?"checked":""; ?> onkeydown="">
-                                <i class="helper"></i>Amount
+                                <input aria-label="<?php echo __('Stock'); ?>" type="radio"  name="stock"  id="stock" onclick="calculateStockValue()" value="A" <?php echo $esop_allocations['stock'] =="A"?"checked":""; ?> onkeydown="">
+                                <i class="helper"></i><?php echo __('Amount'); ?>
                             </label>
                         </div>
                         <div class="radio radio-inline">
                             <label class="m-l-10 d-inline-block">
-                                <input aria-label="Stock" type="radio" name="stock" checked="" id="stock_2" onclick="calculateStockValue()" value="P" <?php echo ($esop_allocations['stock'] =="" || $esop_allocations['stock'] =="P")?"checked":""; ?> onkeydown="">
-                                <i class="helper"></i> Percentage(%)
+                                <input aria-label="<?php echo __('Stock'); ?>" type="radio" name="stock" checked="" id="stock_2" onclick="calculateStockValue()" value="P" <?php echo ($esop_allocations['stock'] =="" || $esop_allocations['stock'] =="P")?"checked":""; ?> onkeydown="">
+                                <i class="helper"></i> <?php echo __('Percentage(%)'); ?>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Value <span class="text-danger">*</span></span>
-                    <input aria-label="Value" type="text" class="form-control text-right" name="value" id="value"  onblur="calculateStockValue()" value="<?php echo $esop_allocations['value'];?>" required>
+                    <span class="form-label"><?php echo __('Value'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Value'); ?>" type="text" class="form-control text-right" name="value" id="value"  onblur="calculateStockValue()" value="<?php echo $esop_allocations['value'];?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Stock Value <span class="text-danger">*</span></span>
-                    <input aria-label="Stock Value" type="text" class="form-control text-right" name="stock_value" id="stock_value"  value="<?php echo $esop_allocations['stock_value'];?>" readonly>
+                    <span class="form-label"><?php echo __('Stock Value'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('Stock Value'); ?>" type="text" class="form-control text-right" name="stock_value" id="stock_value"  value="<?php echo $esop_allocations['stock_value'];?>" readonly>
                 </div>
 
                 <div class="form-group col-lg-12">
-                    <span class="form-label">Email <span class="text-danger">*</span></span>
-                    <input aria-label="User Email" type="email" class="form-control" name="user_email" id="user_email"  value="<?php echo $esop_allocations['user_email']; ?>" required>
+                    <span class="form-label"><?php echo __('Email'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?php echo __('User Email'); ?>" type="email" class="form-control" name="user_email" id="user_email"  value="<?php echo $esop_allocations['user_email']; ?>" required>
                 </div>
 
 
                 <div class="form-group ">
-                    <span class="form-label">ESOP Plans <span class="text-danger">*</span></span>
-                    <select aria-label="Esop Plan" class="form-control js-example-basic-single" name="esop_plan_id" onchange="selectESOPPlans(this.value)" required>
-                         <option value="">Select Any One</option>
+                    <span class="form-label"><?php echo __('ESOP Plans'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?php echo __('Esop Plan'); ?>" class="form-control js-example-basic-single" name="esop_plan_id" onchange="selectESOPPlans(this.value)" required>
+                         <option value=""><?php echo __('Select Any One'); ?></option>
                         <?php foreach($esop_plans as $esopplan){?>
                              <option value="<?php echo $esopplan['id']; ?>" <?php echo $esopplan['id']==$esop_allocations['esop_plan_id']?"selected":""; ?>><?php echo $esopplan['plan_name']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="form-group">
-                    <span class="form-label">Bucket <span class="text-danger">*</span></span>
-                    <select aria-label="Esop Bucket" class="form-control js-example-basic-single" name="esop_bucket_id" id="esop_bucket_id" onchange="selectESOPPlansBuckets(this.value)" required>
-                        <option value="">Select Any One</option>
+                    <span class="form-label"><?php echo __('Bucket'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?php echo __('Esop Bucket'); ?>" class="form-control js-example-basic-single" name="esop_bucket_id" id="esop_bucket_id" onchange="selectESOPPlansBuckets(this.value)" required>
+                        <option value=""><?php echo __('Select Any One'); ?></option>
                         <?php foreach($esop_plan_buckets[$esop_allocations['esop_plan_id']] as $esopplan){ ?>
                              <option value="<?php echo $esopplan['id']; ?>" <?php echo $esopplan['id']==$esop_allocations['esop_bucket_id']?"selected":""; ?>><?php echo ucwords($esopplan['bucket_name']); ?></option>
                         <?php } ?>
@@ -430,20 +430,20 @@ function calculateStockValue(){
                 </div>
                 <div class="card  pt-3 pb-3">
                         <div class="form-group">
-                            <span class="form-label">Grant Date <span class="text-danger">*</span></span>
-                            <input aria-label="Grant Date" type="text" class="form-control datepicker" name="grant_date" id="grant_date" value="<?php echo fromDate($esop_allocations['grant_date']); ?>" required>
+                            <span class="form-label"><?php echo __('Grant Date'); ?> <span class="text-danger">*</span></span>
+                            <input aria-label="<?php echo __('Grant Date'); ?>" type="text" class="form-control datepicker" name="grant_date" id="grant_date" value="<?php echo fromDate($esop_allocations['grant_date']); ?>" required>
                         </div>
                         <div id="vesting_detail">
                            <div id="addmorediv-1">
                                 <div class="row">
                                     <div class="form-group col-lg-4">
-                                        <span>Allocation Date <span class="text-danger">*</span></span>
+                                        <span><?php echo __('Allocation Date'); ?> <span class="text-danger">*</span></span>
                                     </div>
                                     <div class="form-group col-lg-3">
-                                        <span>Percentage <span class="text-danger">*</span></span>
+                                        <span><?php echo __('Percentage'); ?> <span class="text-danger">*</span></span>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <span>Till Date <span class="text-danger">*</span></span>
+                                        <span><?php echo __('Till Date'); ?> <span class="text-danger">*</span></span>
                                     </div>
                                 </div>
                                 <?php
@@ -456,13 +456,13 @@ function calculateStockValue(){
                             ?>
                                 <div class="row" id="deleteidvesting_<?php echo $i; ?>">
                                     <div class="form-group col-lg-4">
-                                       <input aria-label="Vesting Date[]" type="text" class="form-control datepicker vesategdatpicker_1" name="vesting_date[]" value="<?php echo fromDate($vd['vesting_date']); ?>" required>
+                                       <input aria-label="<?php echo __('Vesting Date[]'); ?>" type="text" class="form-control datepicker vesategdatpicker_1" name="vesting_date[]" value="<?php echo fromDate($vd['vesting_date']); ?>" required>
                                     </div>
                                     <div class="form-group col-lg-3">
-                                        <input aria-label="Vesting Percentage[]" type="number" class="form-control text-right vestingpercentage_1" name="vesting_percentage[]" value="<?php echo $vd['vesting_percentage']; ?>" onblur="calculateVestingPercentage(<?php echo $i; ?>)" required>
+                                        <input aria-label="<?php echo __('Vesting Percentage[]'); ?>" type="number" class="form-control text-right vestingpercentage_1" name="vesting_percentage[]" value="<?php echo $vd['vesting_percentage']; ?>" onblur="calculateVestingPercentage(<?php echo $i; ?>)" required>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                       <input aria-label="Till Date[]" type="text" class="form-control datepicker vesategetilldate_1" name="till_date[]" value="<?php echo fromDate($vd['till_date']); ?>" required >
+                                       <input aria-label="<?php echo __('Till Date[]'); ?>" type="text" class="form-control datepicker vesategetilldate_1" name="till_date[]" value="<?php echo fromDate($vd['till_date']); ?>" required >
                                     </div>
                                     <div class="form-group col-lg-1"><i class="ti-trash"  onclick="deletRowVestage('<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i> </div>
                                 </div>
@@ -470,59 +470,59 @@ function calculateStockValue(){
 } ?>
                         </div>
                         <div class="card-footer pt-0">
-                            <button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addMore('1')"><i class="fa fa-check m-r-10"></i>Add More</button>
+                            <button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addMore('1')"><i class="fa fa-check m-r-10"></i><?php echo __('Add More'); ?></button>
                             <span class="float-end m-t-20">
-                                <span class="text-danger">Un-Schedule (%) : </span>
+                                <span class="text-danger"><?php echo __('Un-Schedule (%) :'); ?> </span>
                                 <span id="totaldistributionpending_1"><?php echo 100-$totaldis; ?></span>
-                                <span class="text-warning m-l-20">Total (%) : </span>
+                                <span class="text-warning m-l-20"><?php echo __('Total (%) :'); ?> </span>
                                 <span id="totaldistributionqty_1"><?php echo $totaldis; ?></span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Grant Price</span>
-                    <input aria-label="Grant Price" type="text" class="form-control text-right"  name="grant_price" id="grant_price" value="<?php echo $esop_allocations['grant_price']; ?>" readonly>
+                    <span class="form-label"><?php echo __('Grant Price'); ?></span>
+                    <input aria-label="<?php echo __('Grant Price'); ?>" type="text" class="form-control text-right"  name="grant_price" id="grant_price" value="<?php echo $esop_allocations['grant_price']; ?>" readonly>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Options Granted</span>
-                    <input aria-label="Option Granted" type="text" class="form-control text-right" name="option_granted" id="option_granted" value="<?php echo $esop_allocations['option_granted']; ?>" readonly>
+                    <span class="form-label"><?php echo __('Options Granted'); ?></span>
+                    <input aria-label="<?php echo __('Option Granted'); ?>" type="text" class="form-control text-right" name="option_granted" id="option_granted" value="<?php echo $esop_allocations['option_granted']; ?>" readonly>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Discount per Option</span>
-                    <input aria-label="Discount Per Option" type="text" class="form-control text-right" name="discount_per_option"  id="discount_per_option" value="<?php echo $esop_allocations['discount_per_option']; ?>" readonly>
+                    <span class="form-label"><?php echo __('Discount per Option'); ?></span>
+                    <input aria-label="<?php echo __('Discount Per Option'); ?>" type="text" class="form-control text-right" name="discount_per_option"  id="discount_per_option" value="<?php echo $esop_allocations['discount_per_option']; ?>" readonly>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Total Discount</span>
-                    <input aria-label="Total Discount" type="text" class="form-control text-right" name="total_discount" id="total_discount" value="<?php echo $esop_allocations['total_discount']; ?>" readonly>
+                    <span class="form-label"><?php echo __('Total Discount'); ?></span>
+                    <input aria-label="<?php echo __('Total Discount'); ?>" type="text" class="form-control text-right" name="total_discount" id="total_discount" value="<?php echo $esop_allocations['total_discount']; ?>" readonly>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Expected Options Benefit</span>
-                     <input aria-label="Expected Option Benefit" type="text" class="form-control text-right" name="expected_option_benefit"  id="expected_option_benefit" value="<?php echo $esop_allocations['expected_option_benefit']; ?>" readonly>
+                    <span class="form-label"><?php echo __('Expected Options Benefit'); ?></span>
+                     <input aria-label="<?php echo __('Expected Option Benefit'); ?>" type="text" class="form-control text-right" name="expected_option_benefit"  id="expected_option_benefit" value="<?php echo $esop_allocations['expected_option_benefit']; ?>" readonly>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Total Expected Benefit</span>
-                    <input aria-label="Total Expected Benefit" type="text" class="form-control text-right" name="total_expected_benefit"  id="total_expected_benefit" value="<?php echo $esop_allocations['total_expected_benefit']; ?>" readonly>
+                    <span class="form-label"><?php echo __('Total Expected Benefit'); ?></span>
+                    <input aria-label="<?php echo __('Total Expected Benefit'); ?>" type="text" class="form-control text-right" name="total_expected_benefit"  id="total_expected_benefit" value="<?php echo $esop_allocations['total_expected_benefit']; ?>" readonly>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label">Benefit, CTC</span>
+                    <span class="form-label"><?php echo __('Benefit, CTC'); ?></span>
                     <div class="input-group">
-                        <input aria-label="Benefit Ctc" type="text" class="form-control text-right" name="benefit_ctc" id="benefit_ctc" value="<?php echo $esop_allocations['benefit_ctc']; ?>" readonly>
+                        <input aria-label="<?php echo __('Benefit Ctc'); ?>" type="text" class="form-control text-right" name="benefit_ctc" id="benefit_ctc" value="<?php echo $esop_allocations['benefit_ctc']; ?>" readonly>
                         <span class="input-group-text addon-style" >
                             <span class="">%</span>
                         </span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <span class="form-label">Notes</span>
-                    <textarea aria-label="Note" class="form-control" name="note"><?php echo $esop_allocations['note']; ?></textarea>
+                    <span class="form-label"><?php echo __('Notes'); ?></span>
+                    <textarea aria-label="<?php echo __('Note'); ?>" class="form-control" name="note"><?php echo $esop_allocations['note']; ?></textarea>
                 </div>
                 <input type="hidden" name="rid" value="<?php echo $rid; ?>">
 
              <?php if($rid ==""){ ?>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light col-lg-3 m-l-15" name="submitesopallocation"><i class="fa fa-check m-r-10"></i>Submit</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light col-lg-3 m-l-15" name="submitesopallocation"><i class="fa fa-check m-r-10"></i><?php echo __('Submit'); ?></button>
             <?php }else{ ?>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light col-lg-3 m-l-15" name="submitesopallocation"><i class="fa fa-check m-r-10"></i>Update</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light col-lg-3 m-l-15" name="submitesopallocation"><i class="fa fa-check m-r-10"></i><?php echo __('Update'); ?></button>
             <?php } ?>
 
             </div>
@@ -534,11 +534,11 @@ function calculateStockValue(){
     <div class="col-lg-8 ui-sortable-handle">
         <div class="card">
             <div class="card-header">
-                <h5>Recent ESOP Allocations</h5>
+                <h5><?php echo __('Recent ESOP Allocations'); ?></h5>
                 <div class="card-header-right table-card-header">
-                    <a href="index.php?option=COM_VIEW_ESOP_ALLOCATIONS" class="btn btn-success mb-2 desktop-view"><i class="icofont icofont-plus icon-white "></i>Details</a>
+                    <a href="index.php?option=COM_VIEW_ESOP_ALLOCATIONS" class="btn btn-success mb-2 desktop-view"><i class="icofont icofont-plus icon-white "></i><?php echo __('Details'); ?></a>
                 <?php if($rid !=""){ ?>
-                    <a href="index.php?option=COM_INSERT_ESOP_ALLOCATIONS" class="btn btn-success mb-2 desktop-view"><i class="icofont icofont-plus icon-white "></i>ESOP Allocation</a>
+                    <a href="index.php?option=COM_INSERT_ESOP_ALLOCATIONS" class="btn btn-success mb-2 desktop-view"><i class="icofont icofont-plus icon-white "></i><?php echo __('ESOP Allocation'); ?></a>
                 <?php } ?>
                 </div>
             </div>
@@ -547,13 +547,13 @@ function calculateStockValue(){
                     <?php if(count((array)$esop_allocations_all) != 0){ ?>
                     <table class="table table-bordered table-hover">
                         <tr>
-                            <th scope="col">Employee</th>
-                            <th scope="col">ESOP Plan</th>
-                            <th scope="col">Bucket</th>
-                            <th scope="col" class="text-right">Grant Price</th>
-                            <th scope="col" class="text-right">Options Granted</th>
-                            <th scope="col">Status</th>
-                            <th scope="col" class="text-center">Action</th>
+                            <th scope="col"><?php echo __('Employee'); ?></th>
+                            <th scope="col"><?php echo __('ESOP Plan'); ?></th>
+                            <th scope="col"><?php echo __('Bucket'); ?></th>
+                            <th scope="col" class="text-right"><?php echo __('Grant Price'); ?></th>
+                            <th scope="col" class="text-right"><?php echo __('Options Granted'); ?></th>
+                            <th scope="col"><?php echo __('Status'); ?></th>
+                            <th scope="col" class="text-center"><?php echo __('Action'); ?></th>
                         </tr>
                         <?php foreach($esop_allocations_all as $esopallocations){ ?>
                             <tr>
@@ -567,9 +567,9 @@ function calculateStockValue(){
                                 <td>
                                     <span class="form-label label label-md" style="color:<?php echo $statuse[$esopallocations['current_status']]['color']; ?>; background-color:<?php echo $statuse[$esopallocations['current_status']]['background_color']; ?>;"><?php echo $status_progress[$esopallocations['current_status']]['name']; ?></span>
                                 </td>
-                                 <td class="text-center"><a href="index.php?option=COM_INSERT_ESOP_ALLOCATIONS&Rid=<?php echo deocdeId('id:'.$esopallocations['id']); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Edit" ><i class="fa fa-edit"></i></a>
+                                 <td class="text-center"><a href="index.php?option=COM_INSERT_ESOP_ALLOCATIONS&Rid=<?php echo deocdeId('id:'.$esopallocations['id']); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Edit'); ?>" ><i class="fa fa-edit"></i></a>
                                 <?php if($esopallocations['current_status'] == ST_APPROVED){?>
-                                 <a href="index.php?option=COM_INSERT_ESOP_ALLOCATION_APPROVALS&Rid=<?php echo deocdeId('id:'.$esopallocations['id']); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Allocate Share" class="m-l-10"><i class="ti-wallet"></i></a>
+                                 <a href="index.php?option=COM_INSERT_ESOP_ALLOCATION_APPROVALS&Rid=<?php echo deocdeId('id:'.$esopallocations['id']); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Allocate Share'); ?>" class="m-l-10"><i class="ti-wallet"></i></a>
                              <?php } ?>
                                  </td>
                             </tr>
@@ -577,7 +577,7 @@ function calculateStockValue(){
                     </table>
                 <?php }else{ ?>
                     <div class="card-px text-center ">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No ESOP Allocations</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?php echo __('No ESOP Allocations'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>

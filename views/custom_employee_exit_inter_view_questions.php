@@ -52,9 +52,9 @@ function formsubmit(){
 </script>
 <div class="modal-header">
   <h5 class="modal-title">
-    <?php echo "Exit Interview"; ?> 
+    <?= __('Exit Interview') ?> 
   </h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 </div>
 <div class="modal-body1" > 
   <form method="post" id="myform" name="myform" action="">
@@ -80,7 +80,7 @@ function formsubmit(){
           <div >
             <input type="hidden" name="questionid<?php echo $questionid;?>" value="<?php echo $questionid;?>">
             <!-- <span class="mt-5"><?php echo $question_type = $questiontypes[$display_questions[$questionid]['options_display_type']]; ?></span> -->
-            <h6><?php echo $value_id.". ".$display_questions[$questionid]['survey_question']; ?> <?php if($display_questions[$questionid]['require_response']=="1") echo "*"; ?></h6>
+            <h6><?php echo $value_id.". ".__($display_questions[$questionid]['survey_question']); ?> <?php if($display_questions[$questionid]['require_response']=="1") echo "*"; ?></h6>
             <?php 
             if($display_questions[$questionid]['options_display_type']==1 || $display_questions[$questionid]['options_display_type']==3 ){ 
               $optionlist= json_decode($display_questions[$questionid]['survey_question_option'],1);
@@ -93,14 +93,14 @@ function formsubmit(){
                 ?>
                 <b> <div class="<?php echo $option_cat;?>-group required float-left ml-2">
                   <input type="<?php echo $option_cat;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"  <?php echo in_array($option,(array)$selectedoption )==1 ?  'Checked': '';?> >
-                  <label for="q1"><?php echo $option; ?> </label> </div>
+                  <label for="q1"><?php echo __($option); ?> </label> </div>
                 </b>
               <?php }
             }else if($display_questions[$questionid]['options_display_type']==2){ 
               $selectedoption =$answer[$questionid];
               ?>
 
-              <label class="">Scale from 1 to: <?php echo $option;?></label>
+              <label class=""><?= __('Scale from 1 to:') ?> <?php echo $option;?></label>
               <input type="number"  class="form-control col-md-5" value=<?php echo $selectedoption;?> >
               <?php             
             }else if($display_questions[$questionid]['options_display_type']==4){
@@ -123,6 +123,6 @@ function formsubmit(){
 </div>
 <div class="modal-footer">
 
-  <button type="button" name="submit" onclick="formsubmit()" class="btn btn-primary btn-bold btn-upper btn-font-sm" data-dismiss="modal">Submit</button>
-  <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
+  <button type="button" name="submit" onclick="formsubmit()" class="btn btn-primary btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?= __('Submit') ?></button>
+  <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?= __('Close') ?></button>
 </div>

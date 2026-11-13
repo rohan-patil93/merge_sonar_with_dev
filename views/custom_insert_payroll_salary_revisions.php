@@ -1,7 +1,7 @@
 <div class="card card-custom gutter-b">
     <div class="card-header border-0 ">
         <div class="card-header table-card-header">
-            <h5>  Salary Revisions</h5>
+            <h5>  <?php echo __('Salary Revisions'); ?></h5>
         </div>
     </div>
     <div class="card-body py-0">
@@ -11,9 +11,9 @@
                     <tr>
                         <th scope="col" class="pr-0" style="width: 10px"></th>
                         <th scope="col" class="pr-0" style="width: 80px"></th>
-                        <th scope="col" style="min-width: 150px">Name</th>
-                        <th scope="col" style="min-width: 150px">Code</th>
-                        <th scope="col">Now CTC</th>
+                        <th scope="col" style="min-width: 150px"><?php echo __('Name'); ?></th>
+                        <th scope="col" style="min-width: 150px"><?php echo __('Code'); ?></th>
+                        <th scope="col"><?php echo __('Now CTC'); ?></th>
                     </tr>
                 </thead>
             <?php  $mnm=1;if(count((array)$step5_data)>0){ foreach($step5_data as $dd){?>
@@ -38,7 +38,7 @@
 }
 }else{ ?>
                     <tr>
-                        <td colspan="5" class="text-center"> <b>No Recards Fuond</b></td>
+                        <td colspan="5" class="text-center"> <b><?php echo __('No Recards Fuond'); ?></b></td>
                     </tr>
                 </tbody>
             <?php } ?>

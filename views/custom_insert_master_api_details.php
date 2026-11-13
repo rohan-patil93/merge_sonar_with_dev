@@ -105,177 +105,177 @@ $details = $result['api_masters'];
 </style>
 <div class="card">
     <div class="card-header">
-        <h5>Basic Form Inputs</h5>
+        <h5><?php echo __('Basic Form Inputs'); ?></h5>
     </div>
     <div class="card-block">
-        <h4 class="sub-title">Basic Inputs</h4>
+        <h4 class="sub-title"><?php echo __('Basic Inputs'); ?></h4>
         <form method="post" action="">
             <div class="row mb-3">
-                <span class="form-label col-sm-2 col-form-label">Service Provider</span>
+                <span class="form-label col-sm-2 col-form-label"><?php echo __('Service Provider'); ?></span>
                 <div class="col-sm-10">
-                    <input aria-label="Api Service Provider" name="api_service_provider" type="text" class="form-control" id="api-service-provider" value="<?php echo $details['api_service_provider']; ?>" placeholder="">
+                    <input aria-label="<?php echo __('Api Service Provider'); ?>" name="api_service_provider" type="text" class="form-control" id="api-service-provider" value="<?php echo $details['api_service_provider']; ?>" placeholder="">
 
                 </div>
             </div>
             <div class="row mb-3">
-                <span class="form-label col-sm-2 col-form-label">API Name</span>
+                <span class="form-label col-sm-2 col-form-label"><?php echo __('API Name'); ?></span>
                 <div class="col-sm-10">
-                    <input aria-label="Api Name" name="api_name" type="text" class="form-control" id="api-name" placeholder="" value="<?php echo $details['api_name']; ?>">
+                    <input aria-label="<?php echo __('Api Name'); ?>" name="api_name" type="text" class="form-control" id="api-name" placeholder="" value="<?php echo $details['api_name']; ?>">
 
                 </div>
             </div>
             <div class="row mb-3">
-                <span class="form-label col-sm-2 col-form-label">API Code</span>
+                <span class="form-label col-sm-2 col-form-label"><?php echo __('API Code'); ?></span>
                 <div class="col-sm-10">
-                    <input aria-label="Api Code" name="api_code" type="text" class="form-control" id="api_code" placeholder="" value="<?php echo $details['api_code']; ?>">
+                    <input aria-label="<?php echo __('Api Code'); ?>" name="api_code" type="text" class="form-control" id="api_code" placeholder="" value="<?php echo $details['api_code']; ?>">
 
                 </div>
             </div>
             <div class="mb-3 row">
-                <span class="form-label col-sm-2 col-form-label">Unique ID</span>
+                <span class="form-label col-sm-2 col-form-label"><?php echo __('Unique ID'); ?></span>
                 <div class="col-sm-10">
-                    <input aria-label="Unique" name="unique_id" type="text" class="form-control" placeholder="" value="<?php echo $details['unique_id']; ?>">
+                    <input aria-label="<?php echo __('Unique'); ?>" name="unique_id" type="text" class="form-control" placeholder="" value="<?php echo $details['unique_id']; ?>">
                 </div>
             </div>
             <div class="mb-3 row">
-                <span class="form-label col-sm-2 col-form-label">Base(Test) URL</span>
+                <span class="form-label col-sm-2 col-form-label"><?php echo __('Base(Test) URL'); ?></span>
                 <div class="col-sm-10">
-                    <input aria-label="Testing Url" name="testing_url" type="text" class="form-control" placeholder="" value="<?php echo $details['testing_url']; ?>">
+                    <input aria-label="<?php echo __('Testing Url'); ?>" name="testing_url" type="text" class="form-control" placeholder="" value="<?php echo $details['testing_url']; ?>">
                 </div>
             </div>
             <div class="mb-3 row">
-                <span class="form-label col-sm-2 col-form-label">Production URL</span>
+                <span class="form-label col-sm-2 col-form-label"><?php echo __('Production URL'); ?></span>
                 <div class="col-sm-10">
-                    <input aria-label="Production Url" name="production_url" type="text" class="form-control" placeholder="" value="<?php echo $details['production_url']; ?>">
+                    <input aria-label="<?php echo __('Production Url'); ?>" name="production_url" type="text" class="form-control" placeholder="" value="<?php echo $details['production_url']; ?>">
                 </div>
             </div>
             <div class="mb-3 row">
-                <span class="form-label col-sm-2 col-form-label">Endpoint</span>
+                <span class="form-label col-sm-2 col-form-label"><?php echo __('Endpoint'); ?></span>
                 <div class="col-sm-10">
-                    <input aria-label="End Point" name="end_point" type="text" class="form-control" placeholder="" value="<?php echo $details['end_point']; ?>">
+                    <input aria-label="<?php echo __('End Point'); ?>" name="end_point" type="text" class="form-control" placeholder="" value="<?php echo $details['end_point']; ?>">
                 </div>
             </div>
             <div class="mb-3 row">
-                <span class="form-label col-sm-2 col-form-label">Method
-                    Input</span>
+                <span class="form-label col-sm-2 col-form-label"><?php echo __('Method
+                    Input'); ?></span>
                 <div class="col-sm-10">
-                    <select aria-label="Api Method" name="api_method" class="form-control js-example-basic-single" id="method">
-                        <option value="GET" <?php echo $details['api_method'] == 'GET' ? 'selected' : ''; ?>>GET</option>
-                        <option value="POST" <?php echo $details['api_method'] == 'POST' ? 'selected' : ''; ?>>POST</option>
-                        <option value="PUT" <?php echo $details['api_method'] == 'PUT' ? 'selected' : ''; ?>>PUT</option>
-                        <option value="DELETE" <?php echo $details['api_method'] == 'DELETE' ? 'selected' : ''; ?>>DELETE</option>
+                    <select aria-label="<?php echo __('Api Method'); ?>" name="api_method" class="form-control js-example-basic-single" id="method">
+                        <option value="GET" <?php echo $details['api_method'] == 'GET' ? 'selected' : ''; ?>><?php echo __('GET'); ?></option>
+                        <option value="POST" <?php echo $details['api_method'] == 'POST' ? 'selected' : ''; ?>><?php echo __('POST'); ?></option>
+                        <option value="PUT" <?php echo $details['api_method'] == 'PUT' ? 'selected' : ''; ?>><?php echo __('PUT'); ?></option>
+                        <option value="DELETE" <?php echo $details['api_method'] == 'DELETE' ? 'selected' : ''; ?>><?php echo __('DELETE'); ?></option>
 
                     </select>
                 </div>
             </div>
             <div class="mb-3 row">
-                <span class="form-label col-sm-2 col-form-label">Results Format</span>
+                <span class="form-label col-sm-2 col-form-label"><?php echo __('Results Format'); ?></span>
                 <div class="col-sm-10">
-                    <select aria-label="Request Format" name="request_format" class="form-control js-example-basic-single" id="results-format">
-                        <option value="json" <?php echo $details['request_format'] == 'json' ? 'selected' : ''; ?>>JSON string</option>
-                        <option value="xml" <?php echo $details['request_format'] == 'xml' ? 'selected' : ''; ?>>XML</option>
-                        <option value="text" <?php echo $details['request_format'] == 'text' ? 'selected' : ''; ?>>Plain Text</option>
+                    <select aria-label="<?php echo __('Request Format'); ?>" name="request_format" class="form-control js-example-basic-single" id="results-format">
+                        <option value="json" <?php echo $details['request_format'] == 'json' ? 'selected' : ''; ?>><?php echo __('JSON string'); ?></option>
+                        <option value="xml" <?php echo $details['request_format'] == 'xml' ? 'selected' : ''; ?>><?php echo __('XML'); ?></option>
+                        <option value="text" <?php echo $details['request_format'] == 'text' ? 'selected' : ''; ?>><?php echo __('Plain Text'); ?></option>
                     </select>
                 </div>
             </div>
 
             <div class="row mb-3">
-                <span class="form-label col-sm-2  col-form-label">Request Parameters</span>
+                <span class="form-label col-sm-2  col-form-label"><?php echo __('Request Parameters'); ?></span>
                 <div class="col-sm-10">
                     <table id="request_parameters">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Value</th>
+                                <th scope="col"><?php echo __('Name'); ?></th>
+                                <th scope="col"><?php echo __('Value'); ?></th>
                             </tr>
                         </thead>
                         <?php foreach (json_decode($details['api_request_parameters'], true) as $name => $value): ?>
                             <tr>
 
                                 <td>
-                                    <input aria-label="Get Name[]" type="text" class="form-control request-parameter-row" name="get_name[]" value="<?php echo $name; ?>">
+                                    <input aria-label="<?php echo __('Get Name[]'); ?>" type="text" class="form-control request-parameter-row" name="get_name[]" value="<?php echo $name; ?>">
                                 </td>
                                 <td>
-                                    <input aria-label="Get Value[]" type="text" class="form-control" name="get_value[]" value="<?php echo $value; ?>">
+                                    <input aria-label="<?php echo __('Get Value[]'); ?>" type="text" class="form-control" name="get_value[]" value="<?php echo $value; ?>">
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </table>
                     <div class="mt-2">
-                        <button type="button" class="btn btn-success" onclick="addrowrequest_parameters()"> Add Rows</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteLastRow('request_parameters')"> Delete Row</button>
+                        <button type="button" class="btn btn-success" onclick="addrowrequest_parameters()"> <?php echo __('Add Rows'); ?></button>
+                        <button type="button" class="btn btn-danger" onclick="deleteLastRow('request_parameters')"> <?php echo __('Delete Row'); ?></button>
 
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
-                <span class="form-label col-sm-2 col-form-label">Headers</span>
+                <span class="form-label col-sm-2 col-form-label"><?php echo __('Headers'); ?></span>
                 <div class="col-sm-10">
                     <table id="headers">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Value</th>
+                                <th scope="col"><?php echo __('Name'); ?></th>
+                                <th scope="col"><?php echo __('Value'); ?></th>
                             </tr>
                         </thead>
                         <?php foreach (json_decode($details['request_header'], true) as $name => $value): ?>
                             <tr>
-                                <td><input aria-label="Get Header Name[]" type="text" class="form-control headersrow" name="get_header_name[]" value="<?php echo $name; ?>"></td>
-                                <td><input aria-label="Get Header Value[]" type="text" class="form-control" name="get_header_value[]" value="<?php echo $value; ?>"></td>
+                                <td><input aria-label="<?php echo __('Get Header Name[]'); ?>" type="text" class="form-control headersrow" name="get_header_name[]" value="<?php echo $name; ?>"></td>
+                                <td><input aria-label="<?php echo __('Get Header Value[]'); ?>" type="text" class="form-control" name="get_header_value[]" value="<?php echo $value; ?>"></td>
                             </tr>
                         <?php endforeach; ?>
                     </table>
                     <div class="mt-2">
-                        <button type="button" class="btn btn-success" onclick="addrowheaderstring()"> Add Rows</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteLastRow('headers')"> Delete Row</button>
+                        <button type="button" class="btn btn-success" onclick="addrowheaderstring()"> <?php echo __('Add Rows'); ?></button>
+                        <button type="button" class="btn btn-danger" onclick="deleteLastRow('headers')"> <?php echo __('Delete Row'); ?></button>
 
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
-                <span class="form-label col-sm-2 col-form-label">Body POST Fields</span>
+                <span class="form-label col-sm-2 col-form-label"><?php echo __('Body POST Fields'); ?></span>
                 <div class="col-sm-10">
                     <table id="postField">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Value</th>
+                                <th scope="col"><?php echo __('Name'); ?></th>
+                                <th scope="col"><?php echo __('Value'); ?></th>
                             </tr>
                         </thead>
                         <?php foreach (json_decode($details['api_request_post_parameters'], true) as $name => $value): ?>
                             <tr>
-                                <td><input aria-label="Get Post Field Name[]" type="text" class="form-control postfieldsrow" name="get_post_field_name[]" value="<?php echo $name; ?>"></td>
-                                <td><input aria-label="Get Post Field Value[]" type="text" class="form-control" name="get_post_field_value[]" value="<?php echo $value; ?>"></td>
+                                <td><input aria-label="<?php echo __('Get Post Field Name[]'); ?>" type="text" class="form-control postfieldsrow" name="get_post_field_name[]" value="<?php echo $name; ?>"></td>
+                                <td><input aria-label="<?php echo __('Get Post Field Value[]'); ?>" type="text" class="form-control" name="get_post_field_value[]" value="<?php echo $value; ?>"></td>
                             </tr>
                         <?php endforeach; ?>
                     </table>
                     <div class="mt-2">
-                        <button type="button" class="btn btn-success" onclick="addrowpostfieldstring()"> Add Rows</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteLastRow('postField')"> Delete Row</button>
+                        <button type="button" class="btn btn-success" onclick="addrowpostfieldstring()"> <?php echo __('Add Rows'); ?></button>
+                        <button type="button" class="btn btn-danger" onclick="deleteLastRow('postField')"> <?php echo __('Delete Row'); ?></button>
 
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
-                <span class="form-label col-sm-2 col-form-label">Response Details</span>
+                <span class="form-label col-sm-2 col-form-label"><?php echo __('Response Details'); ?></span>
                 <div class="col-sm-10">
                     <table id="responseDetails">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Value</th>
+                                <th scope="col"><?php echo __('Name'); ?></th>
+                                <th scope="col"><?php echo __('Value'); ?></th>
                             </tr>
                         </thead>
                         <?php foreach (json_decode($details['api_response_details'], true) as $name => $value): ?>
                             <tr>
-                                <td><input aria-label="Get Response Details Name[]" type="text" class="form-control responsedetailsrow" name="get_response_details_name[]" value="<?php echo $name; ?>"></td>
-                                <td><input aria-label="Get Response Details Value[]" type="text" class="form-control" name="get_response_details_value[]" value="<?php echo $value; ?>"></td>
+                                <td><input aria-label="<?php echo __('Get Response Details Name[]'); ?>" type="text" class="form-control responsedetailsrow" name="get_response_details_name[]" value="<?php echo $name; ?>"></td>
+                                <td><input aria-label="<?php echo __('Get Response Details Value[]'); ?>" type="text" class="form-control" name="get_response_details_value[]" value="<?php echo $value; ?>"></td>
                             </tr>
                         <?php endforeach; ?>
                     </table>
                     <div class="mt-2 ">
-                        <button type="button" class="btn btn-success" onclick="addrowresponsedetailsstring()"> Add Rows</button>
-                        <button type="button" class="btn btn-danger " onclick="deleteLastRow('responseDetails')"> Delete Row</button>
+                        <button type="button" class="btn btn-success" onclick="addrowresponsedetailsstring()"> <?php echo __('Add Rows'); ?></button>
+                        <button type="button" class="btn btn-danger " onclick="deleteLastRow('responseDetails')"> <?php echo __('Delete Row'); ?></button>
 
                     </div>
                 </div>
@@ -283,12 +283,12 @@ $details = $result['api_masters'];
             <div class="card-footer border-top text-center">
                 <?php if ($rid != "") {  ?>
                     <button name='submit' value='update' class="btn waves-effect waves-light btn-primary">
-                        <i class="fa fa-file-text-o"></i> Update Data
+                        <i class="fa fa-file-text-o"></i> <?php echo __('Update Data'); ?>
                     </button>
                     <input name="rid" class="form-control" type="hidden" value="<?php echo $rid; ?>">
                 <?php } else {  ?>
                     <button name='submit' value='insert' class="btn waves-effect waves-light btn-primary">
-                        <i class="fa fa-file-text-o"></i> Save Data
+                        <i class="fa fa-file-text-o"></i> <?php echo __('Save Data'); ?>
                     </button>
                 <?php } ?>
             </div>
@@ -302,8 +302,8 @@ $details = $result['api_masters'];
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><input aria-label="Get Name[" type="text" class="form-control request-parameter-row" name="get_name[' + count + ']" value=""></td>';
-        htmlRows += '<td><input aria-label="Get Value[" type="text" class="form-control" name="get_value[' + count + ']" value=""></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Get Name['); ?>" type="text" class="form-control request-parameter-row" name="get_name[' + count + ']" value=""></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Get Value['); ?>" type="text" class="form-control" name="get_value[' + count + ']" value=""></td>';
         htmlRows += '</tr>';
         $('#request_parameters').append(htmlRows);
     }
@@ -313,8 +313,8 @@ $details = $result['api_masters'];
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><input aria-label="Get Header Name[" type="text" class="form-control headersrow" name="get_header_name[' + count + ']" value=""></td>';
-        htmlRows += '<td><input aria-label="Get Header Value[" type="text" class="form-control" name="get_header_value[' + count + ']" value=""></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Get Header Name['); ?>" type="text" class="form-control headersrow" name="get_header_name[' + count + ']" value=""></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Get Header Value['); ?>" type="text" class="form-control" name="get_header_value[' + count + ']" value=""></td>';
         htmlRows += '</tr>';
         $('#headers').append(htmlRows);
     }
@@ -324,8 +324,8 @@ $details = $result['api_masters'];
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><input aria-label="Get Post Field Name[" type="text" class="form-control postfieldsrow" name="get_post_field_name[' + count + ']" value=""></td>';
-        htmlRows += '<td><input aria-label="Get Post Field Value[" type="text" class="form-control" name="get_post_field_value[' + count + ']" value=""></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Get Post Field Name['); ?>" type="text" class="form-control postfieldsrow" name="get_post_field_name[' + count + ']" value=""></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Get Post Field Value['); ?>" type="text" class="form-control" name="get_post_field_value[' + count + ']" value=""></td>';
         htmlRows += '</tr>';
         $('#postField').append(htmlRows);
     }
@@ -335,8 +335,8 @@ $details = $result['api_masters'];
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><input aria-label="Get Response Details Name[" type="text" class="form-control responsedetailsrow" name="get_response_details_name[' + count + ']" value=""></td>';
-        htmlRows += '<td><input aria-label="Get Response Details Value[" type="text" class="form-control" name="get_response_details_value[' + count + ']" value=""></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Get Response Details Name['); ?>" type="text" class="form-control responsedetailsrow" name="get_response_details_name[' + count + ']" value=""></td>';
+        htmlRows += '<td><input aria-label="<?php echo __('Get Response Details Value['); ?>" type="text" class="form-control" name="get_response_details_value[' + count + ']" value=""></td>';
         htmlRows += '</tr>';
         $('#responseDetails').append(htmlRows);
     }
