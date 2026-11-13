@@ -161,38 +161,38 @@ function emptyCheck($valu){
                         <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;" alt="" >
                     </td>
                     <td width="25%" align="center" class="p-1 border-0 f-12" style="vertical-align:top; padding-right: 40px !important;">
-                        <span>THANK YOU FOR YOUR ORDER. THIS DOCUMENT IS A RECEIPT OF YOUR PURCHASE.</span>
+                        <span><?= __('THANK YOU FOR YOUR ORDER. THIS DOCUMENT IS A RECEIPT OF YOUR PURCHASE.'); ?></span>
                     </td>
                     <td width="55%" colspan="4" class="border-0 p-1">
                         <div class="table-responsive">
                             <table class="table">
                                 <tr>
-                                    <td class="f-12">TO</td>
+                                    <td class="f-12"><?= __('TO'); ?></td>
                                     <td class="f-12" align="right">
-                                        <span>FIRST NAME</span>
-                                        <span class="m-l-10">LAST NAME</span>
+                                        <span><?= __('FIRST NAME'); ?></span>
+                                        <span class="m-l-10"><?= __('LAST NAME'); ?></span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="f-12">CUSTOMER ID</td>
+                                    <td class="f-12"><?= __('CUSTOMER ID'); ?></td>
                                     <td class="f-12" align="right">
                                         <span>12345</span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="f-12">DATE</td>
+                                    <td class="f-12"><?= __('DATE'); ?></td>
                                     <td class="f-12" align="right">
-                                        <span>DD-MM-YY</span>
+                                        <span><?= __('DD-MM-YY'); ?></span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="f-12">ORDER NO</td>
+                                    <td class="f-12"><?= __('ORDER NO'); ?></td>
                                     <td class="f-12" align="right">
-                                        <span>T-TF</span>
+                                        <span><?= __('T-TF'); ?></span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="f-12">NUMBER OF ITEMS</td>
+                                    <td class="f-12"><?= __('NUMBER OF ITEMS'); ?></td>
                                     <td class="f-12" align="right">
                                         <span>3</span>
                                     </td>
@@ -206,26 +206,26 @@ function emptyCheck($valu){
                         <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;" alt="" >
                     </td>
                     <td align="center" class="p-1 pt-5 border-0 f-12" style="vertical-align:bottom; padding-right: 40px !important;">
-                        <span>SAR STUDIO WWW.SAR STUDIO.COM +91 000 000 0000</span>
+                        <span><?= __('SAR STUDIO WWW.SAR STUDIO.COM +91 000 000 0000'); ?></span>
                     </td>
                     <td colspan="4" class="p-2 border-0 f-12" style="vertical-align:bottom;">
-                        <span>PRODUCT PURCHASED</span>
+                        <span><?= __('PRODUCT PURCHASED'); ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="6">&nbsp</td>
                 </tr>
                 <tr bgcolor="#eeeeee">
-                    <th scope="col" class="p-1 f-12">ITEM</th>
+                    <th scope="col" class="p-1 f-12"><?= __('ITEM'); ?></th>
                     <th scope="col" class="p-1 f-12"></th>
-                    <th scope="col" class="p-1 f-12" width="20%">PRODUCTION DESCRIPTION</th>
-                    <th scope="col" class="p-1 text-end f-12" width="5%">QTY</th>
-                    <th scope="col" class="text-end p-1 f-12" width="12%">UNIT PRICE <span class="d-block">(INR)</span></th>
-                    <th scope="col" class="text-end p-1 f-12" width="13%">AMOUNT <span class="d-block">(INR)</span></th>
+                    <th scope="col" class="p-1 f-12" width="20%"><?= __('PRODUCTION DESCRIPTION'); ?></th>
+                    <th scope="col" class="p-1 text-end f-12" width="5%"><?= __('QTY'); ?></th>
+                    <th scope="col" class="text-end p-1 f-12" width="12%"><?= __('UNIT PRICE'); ?> <span class="d-block"><?= __('(INR)'); ?></span></th>
+                    <th scope="col" class="text-end p-1 f-12" width="13%"><?= __('AMOUNT'); ?> <span class="d-block"><?= __('(INR)'); ?></span></th>
                 </tr>
                 <tr>
                     <td class="p-1" style="vertical-align:top;">
-                        <img style="width: 100px; height:85px;" class="img-fluid" src="uploads/all/file_1688986265_64abe2999f741.jpg" alt="item" >
+                        <img style="width: 100px; height:85px;" class="img-fluid" src="uploads/all/file_1688986265_64abe2999f741.jpg" alt="<?= htmlspecialchars(__('item'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
                     <td align="" class="p-1" style="vertical-align:top;">
                         <!-- <div class="swatches f-12"></div>
@@ -233,8 +233,8 @@ function emptyCheck($valu){
                         <div class="swatches f-12"></div> -->
                     </td>
                     <td class="p-1" style="vertical-align:top;">
-                        <span class="d-block f-12">BLANKET SOFA</span>
-                        <span class="d-block f-12">S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat</span>
+                        <span class="d-block f-12"><?= __('BLANKET SOFA'); ?></span>
+                        <span class="d-block f-12"><?= __('S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat'); ?></span>
                         <!-- <span class="d-block f-12">BLANKET SOFA</span>
                         <span class="d-block f-12">S-15-F1-BL-15-15</span>
                         <span class="d-block f-12">Sofa 1 Seater</span>
@@ -247,7 +247,7 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="p-1" style="vertical-align:top;">
-                        <img style="width: 100px;height: 85px;" class="img-fluid" src="uploads/all/file_1688986555_64abe3bb28d5f.jpg" alt="item" >
+                        <img style="width: 100px;height: 85px;" class="img-fluid" src="uploads/all/file_1688986555_64abe3bb28d5f.jpg" alt="<?= htmlspecialchars(__('item'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
                     <td align="" class="p-1" style="vertical-align:top;">
                         <!-- <div class="swatches f-12"></div>
@@ -255,8 +255,8 @@ function emptyCheck($valu){
                         <div class="swatches f-12"></div> -->
                     </td>
                     <td class="p-1" style="vertical-align:top;">
-                        <span class="d-block f-12">BLANKET SOFA</span>
-                        <span class="d-block f-12">S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat</span>
+                        <span class="d-block f-12"><?= __('BLANKET SOFA'); ?></span>
+                        <span class="d-block f-12"><?= __('S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat'); ?></span>
                     </td>
                     <td class="p-1 f-12" align="right" style="vertical-align:top;">12</td>
                     <td class="p-1" align="right" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
@@ -264,7 +264,7 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="p-1" style="vertical-align:top;">
-                        <img style="width: 100px;" class="img-fluid" src="uploads/all/file_1688973992_64abb2a8a5325.jpg" alt="item" >
+                        <img style="width: 100px;" class="img-fluid" src="uploads/all/file_1688973992_64abb2a8a5325.jpg" alt="<?= htmlspecialchars(__('item'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
                     <td align="" class="p-1" style="vertical-align:top;">
                         <!-- <div class="swatches f-12"></div>
@@ -272,8 +272,8 @@ function emptyCheck($valu){
                         <div class="swatches f-12"></div> -->
                     </td>
                     <td class="p-1" style="vertical-align:top;">
-                        <span class="d-block f-12">BLANKET SOFA</span>
-                        <span class="d-block f-12">S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat</span>
+                        <span class="d-block f-12"><?= __('BLANKET SOFA'); ?></span>
+                        <span class="d-block f-12"><?= __('S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat'); ?></span>
                         <!-- <span class="d-block f-12">BLANKET SOFA</span>
                         <span class="d-block f-12">S-15-F1-BL-15-15</span>
                         <span class="d-block f-12">Sofa 1 Seater</span>
@@ -291,43 +291,43 @@ function emptyCheck($valu){
                     <td colspan="4" class="border-0 p-1">
                             <table class="table">
                                 <tr>
-                                    <th scope="col" class="f-12 p-0 pt-1 pb-1" width="50%">TOTAL</th>
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1" width="50%"><?= __('TOTAL'); ?></th>
                                     <th scope="col" width="50%" class="text-right f-12 p-0 pt-1 pb-1">
-                                        INR 1,20,000/-
+                                        <?= __('INR 1,20,000/'); ?>-
                                     </th>
                                 </tr>
                                 <tr>
                                     <th scope="col" class="f-12 p-0 pt-1 pb-1">10% DISCOUNT</th>
                                     <th scope="col" class="text-right f-12 p-0 pt-1 pb-1">
-                                        INR 12,000/-
+                                        <?= __('INR 12,000/'); ?>-
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" class="f-12 p-0 pt-1 pb-1">TAXABLE AMOUNT</th>
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1"><?= __('TAXABLE AMOUNT'); ?></th>
                                     <th scope="col" class="text-right f-12 p-0 pt-1 pb-1">
-                                        INR 1,08,000/-
+                                        <?= __('INR 1,08,000/'); ?>-
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" class="f-12 p-0 pt-1 pb-1">CGST 9% (HSN CODE)</th>
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1"><?= __('CGST 9% (HSN CODE)'); ?></th>
                                     <th scope="col" class="text-right f-12 p-0 pt-1 pb-1">
-                                        INR 10,000/-
+                                        <?= __('INR 10,000/'); ?>-
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" class="f-12 p-0 pt-1 pb-1">SGST 9% (HSN CODE)</th>
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1"><?= __('SGST 9% (HSN CODE)'); ?></th>
                                     <th scope="col" class="text-right f-12 p-0 pt-1 pb-1">
-                                        INR 10,000/-
+                                        <?= __('INR 10,000/'); ?>-
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" class="f-12 p-0 pt-1 pb-1">GRAND TOTAL</th>
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1"><?= __('GRAND TOTAL'); ?></th>
                                     <th scope="col" class="text-right f-12 p-0 pt-1 pb-1">
-                                        INR 1,35,000/-
+                                        <?= __('INR 1,35,000/'); ?>-
                                     </th>
                                 </tr>
                                 <tr>
-                                    <td class="f-12 p-0 pt-1 pb-1" colspan="2">ONE LAKH THIRTY FIVE THOUSAND RUPEES ONLY</td>
+                                    <td class="f-12 p-0 pt-1 pb-1" colspan="2"><?= __('ONE LAKH THIRTY FIVE THOUSAND RUPEES ONLY'); ?></td>
                                 </tr>
                             </table>
                     </td>
@@ -335,20 +335,17 @@ function emptyCheck($valu){
                 <tr>
                     <td class="border-0"></td>
                     <td colspan="" class="text-center border-0 pt-4 f-12" style="padding-right: 40px !important; vertical-align: bottom;">
-                        REGISTERED OFFICE ADDRESS:
-                        3RD FLOOR, PLOT NO-39
-                        LEFT BHUSURI COLONY
-                        KOTHRUD, PUNE-411038
+                        <?= __('REGISTERED OFFICE ADDRESS: 3RD FLOOR, PLOT NO-39 LEFT BHUSURI COLONY KOTHRUD, PUNE-411038'); ?>
                     </td>
                     <td colspan="4" class="border-0 pt-4" style=" vertical-align: bottom;">
-                        <span class="f-12">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</span>
+                        <span class="f-12"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s'); ?></span>
                     </td>
                 </tr>
             </table>
         </div>
     </div> 
     <div class="card-body">
-        <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1" onclick="printDiv('printableArea')" >Print Invoice</button>
+        <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1" onclick="printDiv('printableArea')" ><?= __('Print Invoice'); ?></button>
     </div>
 </div>   
 
