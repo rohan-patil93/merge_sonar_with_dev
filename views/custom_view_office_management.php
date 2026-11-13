@@ -305,7 +305,7 @@ document.onreadystatechange = function () {
 
 
     function getDynamicPage(option,divid,pagetype,tab){
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#"+divid).html(loader);
         updateUrlParameter('TAB',tab)
         var currentUrl = window.location.href;
@@ -383,7 +383,7 @@ document.onreadystatechange = function () {
                 <a class="nav-link position-relative text-center <?php if($tab==1){ echo "active";
 } ?>" data-bs-toggle="tab" href="#courier" role="tab" onclick="updateUrlParameter('TAB','1')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="ti-package f-20 text-info"></i>
-                    <span class="text-info f-14 f-w-700">Courier Management</span>
+                    <span class="text-info f-14 f-w-700"><?= __('Courier Management'); ?></span>
                 </a>
             </li>
             <li class="nav-item <?php if($_SESSION['admin_type']!=1 && in_array('COM_LIST_STATIONERY' ,(array)$sub_role) ){ echo  "event_disabled";
@@ -391,35 +391,35 @@ document.onreadystatechange = function () {
                 <a class="nav-link position-relative text-center <?php if($tab==2){ echo "active";
 } ?>" data-bs-toggle="tab" href="#stationery" role="tab"onclick="updateUrlParameter('TAB','2')"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="ti-write f-20 text-info"></i>
-                    <span class="text-info f-14 f-w-700">Inventory Management</span>
+                    <span class="text-info f-14 f-w-700"><?= __('Inventory Management'); ?></span>
                 </a>
             </li>
             <li class="nav-item event_disabled ">
                 <a class="nav-link position-relative text-center <?php if($tab==3){ echo "active";
 } ?>" data-bs-toggle="tab" href="#transport" role="tab" onclick="updateUrlParameter('TAB','3')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="ti-truck f-20 text-info"></i>
-                    <span class="text-info f-14 f-w-700">Transport Management</span>
+                    <span class="text-info f-14 f-w-700"><?= __('Transport Management'); ?></span>
                 </a>
             </li>
             <li class="nav-item event_disabled">
                 <a class="nav-link position-relative text-center <?php if($tab==4){ echo "active";
 } ?>" data-bs-toggle="tab" href="#food" role="tab" onclick="updateUrlParameter('TAB','4')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="ti-thumb-up f-20 text-info"></i>
-                    <span class="text-info f-14 f-w-700">Food Management</span>
+                    <span class="text-info f-14 f-w-700"><?= __('Food Management'); ?></span>
                 </a>
             </li>
             <li class="nav-item event_disabled ">
                 <a class="nav-link position-relative text-center <?php if($tab==5){ echo "active";
 } ?>" data-bs-toggle="tab" href="#asset_tab" role="tab" onclick="getDynamicPage('custom_list_asset_allocations','asset_tab','',5)" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                    <i class="ti-tablet f-20 text-info"></i>
-                    <span class="text-info f-14 f-w-700">Asset Management</span>
+                    <span class="text-info f-14 f-w-700"><?= __('Asset Management'); ?></span>
                 </a>
             </li>
             <li class="nav-item event_disabled">
                 <a class="nav-link position-relative text-center <?php if($tab==6){ echo "active";
 } ?>" data-bs-toggle="tab" href="#maintenance_tab" role="tab" onclick="updateUrlParameter('TAB','6')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="ti-cut f-20 text-info"></i>
-                    <span class="text-info f-14 f-w-700">Maintenance Management</span>
+                    <span class="text-info f-14 f-w-700"><?= __('Maintenance Management'); ?></span>
                 </a>
             </li>
             <li class="nav-item <?php if($_SESSION['admin_type']!=1 &&  in_array('COM_LIST_SEATING_POOLS' ,(array)$sub_role) ){ echo  "event_disabled";
@@ -427,7 +427,7 @@ document.onreadystatechange = function () {
                 <a class="nav-link position-relative text-center <?php if($tab==7){ echo "active";
 } ?>" data-bs-toggle="tab" href="#space_tab" role="tab" onclick="getDynamicPage('custom_view_equipment_allocations','space_tab','',7)" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="ti-bookmark-alt f-20 text-info"></i>
-                    <span class="text-info f-14 f-w-700">Space Management</span>
+                    <span class="text-info f-14 f-w-700"><?= __('Space Management'); ?></span>
                 </a>
             </li>
 
@@ -435,7 +435,7 @@ document.onreadystatechange = function () {
                 <a class="nav-link position-relative text-center <?php if($tab==8){ echo "active";
 } ?>" data-bs-toggle="tab" href="#energy_tab" role="tab" onclick="updateUrlParameter('TAB','8')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                    <i class="ti-wand f-20 text-info"></i>
-                    <span class="text-info f-14 f-w-700">Energy Management</span>
+                    <span class="text-info f-14 f-w-700"><?= __('Energy Management'); ?></span>
                 </a>
             </li>
 
@@ -443,14 +443,14 @@ document.onreadystatechange = function () {
                 <a class="nav-link position-relative text-center <?php if($tab==13){ echo "active";
 } ?>" data-bs-toggle="tab" href="#meeting_tab" role="tab" onclick="updateUrlParameter('TAB','13')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="ti-bookmark-alt f-20 text-info"></i>
-                    <span class="text-info f-14 f-w-700">Meeting Room Bookings</span>
+                    <span class="text-info f-14 f-w-700"><?= __('Meeting Room Bookings'); ?></span>
                 </a>
             </li>
             <li class="nav-item event_disabled">
                 <a class="nav-link position-relative text-center <?php if($tab==10){ echo "active";
 } ?>" data-bs-toggle="tab" href="#security_tab" role="tab" onclick="updateUrlParameter('TAB','10')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="ti-target f-20 text-info"></i>
-                    <span class="text-info f-14 f-w-700">Security Management</span>
+                    <span class="text-info f-14 f-w-700"><?= __('Security Management'); ?></span>
                 </a>
             </li>
 
@@ -459,7 +459,7 @@ document.onreadystatechange = function () {
                 <a class="nav-link position-relative text-center <?php if($tab==12){ echo "active";
 } ?>" data-bs-toggle="tab" href="#health_safty_tab" role="tab" onclick="updateUrlParameter('TAB','12')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="ti-star f-20 text-info"></i>
-                    <span class="text-info f-14 f-w-700">Health & Safty</span>
+                    <span class="text-info f-14 f-w-700"><?= htmlspecialchars(__('Health & Safty'), ENT_QUOTES, 'UTF-8'); ?></span>
                 </a>
             </li>
 
@@ -493,14 +493,14 @@ document.onreadystatechange = function () {
                                 <div class="col-lg-12">
                                      <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold" style="border:0px;">
                                         <li class="nav-item p-l-10 p-r-10">
-                                            <a class="nav-link active" data-bs-toggle="tab" href="#tssemyrequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Search Requests</a>
+                                            <a class="nav-link active" data-bs-toggle="tab" href="#tssemyrequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Search Requests'); ?></a>
                                         </li>
                                         <li class="nav-item p-l-10 p-r-10">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#tsmyrequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">My Requests</a>
+                                            <a class="nav-link" data-bs-toggle="tab" href="#tsmyrequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('My Requests'); ?></a>
                                         </li>
                                         <?php if($_SESSION['admin_type']==1){ ?>
                                         <li class="nav-item p-l-10 p-r-10">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#tsaprequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">To Be Approved</a>
+                                            <a class="nav-link" data-bs-toggle="tab" href="#tsaprequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('To Be Approved'); ?></a>
                                         </li>
                                         <?php } ?>
                                     </ul>
@@ -510,18 +510,18 @@ document.onreadystatechange = function () {
                                 <div class="tab-pane active" id="tssemyrequest" role="tabpanel">
                                     <div class="bus-bg m-b-10" style="background: url(../assets/images/bus.jpg); height:250px; background-size: 100%; background-repeat: no-repeat; position: relative;">
                                         <div class="banner-txt">
-                                            <h2 class="f-w-700 f-35">Get your bus online,<br>Easy &amp; Safely</h2>
+                                            <h2 class="f-w-700 f-35"><?= __('Get your bus online,'); ?><br><?= htmlspecialchars(__('Easy & Safely'), ENT_QUOTES, 'UTF-8'); ?></h2>
                                         </div>
                                         <div class="booking-form">
-                                            <h3 class="">Choose Your Bus</h3>
+                                            <h3 class=""><?= __('Choose Your Bus'); ?></h3>
                                             <div class="row mb-1 mt-4">
                                                 <div class="col-lg-6 m-b-10">
                                                     <div class="input-group">
                                                         <span class="input-group-text addon-style">
                                                             <span class=""><i class="ti-location-arrow"></i></span>
                                                         </span>
-                                                        <select aria-label="Pickup" class="form-control fill border" fdprocessedid="n6szf" id="pickup" name="pickup">
-                                                            <option value="">Pickup Point</option>
+                                                        <select aria-label="<?= htmlspecialchars(__('Pickup'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control fill border" fdprocessedid="n6szf" id="pickup" name="pickup">
+                                                            <option value=""><?= __('Pickup Point'); ?></option>
                                                             <?php foreach($data['listschedlue'] as $listschedlue){ ?>
                                                                 <option value="<?php echo $listschedlue; ?>"><?php echo $listschedlue; ?></option>
                                                             <?php } ?>
@@ -533,8 +533,8 @@ document.onreadystatechange = function () {
                                                         <span class="input-group-text addon-style">
                                                             <span class=""><i class="ti-location-pin"></i></span>
                                                         </span>
-                                                        <select aria-label="Droping" class="form-control border" fdprocessedid="ft4ukt" name="droping" id="droping">
-                                                            <option value="">Dropping Point</option>
+                                                        <select aria-label="<?= htmlspecialchars(__('Droping'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border" fdprocessedid="ft4ukt" name="droping" id="droping">
+                                                            <option value=""><?= __('Dropping Point'); ?></option>
                                                             <?php foreach($data['listschedlue'] as $listschedlue){ ?>
                                                                 <option value="<?php echo $listschedlue; ?>"><?php echo $listschedlue; ?></option>
                                                             <?php } ?>
@@ -546,11 +546,11 @@ document.onreadystatechange = function () {
                                                         <span class="input-group-text addon-style">
                                                             <span class=""><i class="ti-time"></i></span>
                                                         </span>
-                                                        <input aria-label="Pickdate" class="form-control" type="date" name="pickdate" id="pickdate">
+                                                        <input aria-label="<?= htmlspecialchars(__('Pickdate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="pickdate" id="pickdate">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 m-b-10">
-                                                    <button class="btn btn-primary w-100 p-2" onclick="searchtransportbus()" fdprocessedid="s99pj">Find Bus</button>
+                                                    <button class="btn btn-primary w-100 p-2" onclick="searchtransportbus()" fdprocessedid="s99pj"><?= __('Find Bus'); ?></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -565,7 +565,7 @@ document.onreadystatechange = function () {
                                             <div class="row mt-3">
                                                 <div class="col-lg-3">
                                                     <h4 class="f-w-700 "><?php echo $bus[$route['company_transport_id']]['vehicle_name']; ?></h4>
-                                                    <p>Seat Layout <?php echo $bus[$route['company_transport_id']]['seat_layout']; ?></p>
+                                                    <p><?= __('Seat Layout'); ?> <?php echo $bus[$route['company_transport_id']]['seat_layout']; ?></p>
                                                     <span class="text-danger"><?php echo $bus[$route['company_transport_id']]['vehicle_type']; ?></span>
                                                 </div>
                                                 <div class="col-lg-5">
@@ -586,8 +586,8 @@ document.onreadystatechange = function () {
                                                 </div>
                                                 <div class="col-lg-4 text-right">
                                                     <h4 class="f-w-700 f-22 text-success">&#8377 <?php echo $route['route_charges_monthly']; ?> </h4>
-                                                    <p>Off Days: <span class="form-label label label-success"><?php echo implode(" , ",json_decode($route['off_days'],1)); ?></span></p>
-                                                    <button class="btn btn-primary" onclick="viewlocation(<?php echo $route['id']; ?>)">Select Location</button>
+                                                    <p><?= __('Off Days'); ?>: <span class="form-label label label-success"><?php echo implode(" , ",json_decode($route['off_days'],1)); ?></span></p>
+                                                    <button class="btn btn-primary" onclick="viewlocation(<?php echo $route['id']; ?>)"><?= __('Select Location'); ?></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -598,7 +598,7 @@ document.onreadystatechange = function () {
                                                     <div class="col-lg-4 p-2"> <?php echo $transport_schedule['stop_name']; ?> </div>
                                                     <div class="col-lg-2">
                                                         <button onclick="viewrequest(<?php echo $transport_schedule['id']; ?>)" class="btn btn-info" style="font-size: 12px; padding: 5px;" >
-                                                        Request </button>
+                                                        <?= __('Request'); ?> </button>
                                                     </div>
                                                 <?php } ?>
                                             </div>
@@ -611,10 +611,10 @@ document.onreadystatechange = function () {
                                     <div class="card-header-right text-right">
                                         <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold" style="border:0px;">
                                             <li class="nav-item p-l-10 p-r-10">
-                                                <a class="nav-link active" data-bs-toggle="tab" href="#stmyspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending</a>
+                                                <a class="nav-link active" data-bs-toggle="tab" href="#stmyspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending'); ?></a>
                                             </li>
                                             <li class="nav-item p-l-10 p-r-10">
-                                                <a class="nav-link" data-bs-toggle="tab" href="#stmysapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</a>
+                                                <a class="nav-link" data-bs-toggle="tab" href="#stmysapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -713,10 +713,10 @@ document.onreadystatechange = function () {
                                     <div class="card-header-right text-right">
                                         <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold" style="border:0px;">
                                             <li class="nav-item p-l-10 p-r-10">
-                                                <a class="nav-link active" data-bs-toggle="tab" href="#stapmyspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending</a>
+                                                <a class="nav-link active" data-bs-toggle="tab" href="#stapmyspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending'); ?></a>
                                             </li>
                                             <li class="nav-item p-l-10 p-r-10">
-                                                <a class="nav-link" data-bs-toggle="tab" href="#stapmysapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</a>
+                                                <a class="nav-link" data-bs-toggle="tab" href="#stapmysapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -817,12 +817,12 @@ document.onreadystatechange = function () {
                     <div class="col-lg-4"  id="side_view_3"  <?php  ?> >
                         <div class="" style="background: url(../assets/images/transport.jpg);
                             width:100%;height:250px;background-repeat:no-repeat;background-size: 500px auto;border-radius: 15px;">
-                            <h3 class="f-w-600 pt-5 f-25 text-white m-l-50 m-r-50">Ready to elevate your daily commute experience? Click the "Request Transport" button below</h3>
-                            <button class="btn btn-warning waves-effect waves-light m-l-50 mt-4">Request Transport</button>
+                            <h3 class="f-w-600 pt-5 f-25 text-white m-l-50 m-r-50"><?= __('Ready to elevate your daily commute experience? Click the "Request Transport" button below'); ?></h3>
+                            <button class="btn btn-warning waves-effect waves-light m-l-50 mt-4"><?= __('Request Transport'); ?></button>
                         </div>
                         <div class="card mt-4">
                             <div class="card-header">
-                                <h5>Transports</h5>
+                                <h5><?= __('Transports'); ?></h5>
                             </div>
                             <div class="card-body">
                                 <div class="row align-items-center">
@@ -842,7 +842,7 @@ document.onreadystatechange = function () {
                                         </div>
                                         <div class="col-lg-6 p-2">
                                             <h4 class="f-14 m-0 f-w-600"><?php echo $bus[$sidein['company_transport_id']]['vehicle_name']; ?></h4>
-                                            <span class="f-12"> Pickup Point: <?php echo $sidein['pickup_point']." Transport Date".displayDate($sidein['transport_date']) ; ?> </span>
+                                            <span class="f-12"> <?= __('Pickup Point'); ?>: <?php echo $sidein['pickup_point']." Transport Date".displayDate($sidein['transport_date']) ; ?> </span>
                                         </div>
                                         <div class="col-lg-4 p-2">
                                             <span class="form-label label label-<?php echo $stas; ?>" style="background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>;color:<?php echo $_SESSION['status'][$down['current_status']]['color']; ?> "><?php echo $data['status']['employee_transport_requests'][$sidein['current_status']]; ?></span>
@@ -887,7 +887,7 @@ document.onreadystatechange = function () {
 
                                                             $id = "check_".$food_options['id']."_".$mn;
                                                             ?>
-                                                            <input aria-label="Radio option"  type="radio"  <?php if($selectkey==1){ echo "checked";
+                                                            <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>"  type="radio"  <?php if($selectkey==1){ echo "checked";
 } ?> name="descpass[<?php echo $food_options['id']; ?>]" onclick="foodinsert(<?php echo $food_options['id'];  ?>)" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' onkeydown="" />
                                                             <label for="<?php echo $id; ?>"><?php echo $selectvalue; ?></label>
                                                             <?php  $mn++;
@@ -907,12 +907,12 @@ document.onreadystatechange = function () {
                                          <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold" style="border:0px;">
 
                                             <li class="nav-item p-l-10 p-r-10">
-                                                <a class="nav-link active" data-bs-toggle="tab" href="#fdmyrequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">My Requests</a>
+                                                <a class="nav-link active" data-bs-toggle="tab" href="#fdmyrequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('My Requests'); ?></a>
 
                                             </li>
                                             <?php if($_SESSION['admin_type']==1){ ?>
                                             <li class="nav-item p-l-10 p-r-10">
-                                                <a class="nav-link" data-bs-toggle="tab" href="#fdaprequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">To Be Approved</a>
+                                                <a class="nav-link" data-bs-toggle="tab" href="#fdaprequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('To Be Approved'); ?></a>
                                             </li>
                                             <?php } ?>
                                         </ul>
@@ -923,10 +923,10 @@ document.onreadystatechange = function () {
                                         <div class="card-header-right text-right">
                                             <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold" style="border:0px;">
                                                 <li class="nav-item p-l-10 p-r-10">
-                                                    <a class="nav-link active" data-bs-toggle="tab" href="#foodmyspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending</a>
+                                                    <a class="nav-link active" data-bs-toggle="tab" href="#foodmyspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending'); ?></a>
                                                 </li>
                                                 <li class="nav-item p-l-10 p-r-10">
-                                                    <a class="nav-link" data-bs-toggle="tab" href="#foodapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</a>
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#foodapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1025,10 +1025,10 @@ document.onreadystatechange = function () {
                                         <div class="card-header-right text-right">
                                             <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold" style="border:0px;">
                                                 <li class="nav-item p-l-10 p-r-10">
-                                                    <a class="nav-link active" data-bs-toggle="tab" href="#optionfoodmyspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending</a>
+                                                    <a class="nav-link active" data-bs-toggle="tab" href="#optionfoodmyspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending'); ?></a>
                                                 </li>
                                                 <li class="nav-item p-l-10 p-r-10">
-                                                    <a class="nav-link" data-bs-toggle="tab" href="#optionfoodapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</a>
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#optionfoodapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1130,14 +1130,14 @@ document.onreadystatechange = function () {
                     <div class="col-lg-4"  id="side_view_4"  <?php  ?> >
                         <div class="" style="background:url(../assets/images/food.jpg);
                             width:100%;height:250px;background-repeat:no-repeat;background-size: 500px auto;border-radius: 15px;">
-                            <h3 class="f-w-600 pt-5 f-25 m-l-50 m-r-50 text-white">Our office canteen is ready to serve you delicious meals that are just a click away.</h3>
-                            <button class="btn btn-warning waves-effect waves-light m-l-50 mt-4">Book Canteen Food</button>
+                            <h3 class="f-w-600 pt-5 f-25 m-l-50 m-r-50 text-white"><?= __('Our office canteen is ready to serve you delicious meals that are just a click away.'); ?></h3>
+                            <button class="btn btn-warning waves-effect waves-light m-l-50 mt-4"><?= __('Book Canteen Food'); ?></button>
 
 
                         </div>
                         <div class="card mt-4">
                             <div class="card-header">
-                                <h5>Food</h5>
+                                <h5><?= __('Food'); ?></h5>
                             </div>
                             <div class="card-body">
                                 <div class="row align-items-center">
@@ -1177,7 +1177,7 @@ document.onreadystatechange = function () {
                 <div class="card">
                     <div class="card-body">
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Assets</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Assets'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
@@ -1191,7 +1191,7 @@ document.onreadystatechange = function () {
                 <div class="card">
                     <div class="card-body">
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Maintenance</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Maintenance'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
@@ -1205,7 +1205,7 @@ document.onreadystatechange = function () {
                 <div class="card">
                     <div class="card-body">
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Space</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Space'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
@@ -1219,7 +1219,7 @@ document.onreadystatechange = function () {
                 <div class="card">
                     <div class="card-body">
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Energy</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Energy'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
@@ -1238,15 +1238,15 @@ document.onreadystatechange = function () {
                                 <div class="card p-3">
                                     <div class="card mt-0">
                                         <div class="card-header">
-                                            <h5> Meetting Room Booked </h5>
+                                            <h5> <?= __('Meetting Room Booked'); ?> </h5>
                                             <div class="card-header-right">
                                                 <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold" style="border:0px;">
                                                     <li class="nav-item p-l-10 p-r-10">
-                                                        <a class="nav-link active" data-bs-toggle="tab" href="#todaymrb" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Today</a>
+                                                        <a class="nav-link active" data-bs-toggle="tab" href="#todaymrb" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Today'); ?></a>
 
                                                     </li>
                                                     <li class="nav-item p-l-10 p-r-10">
-                                                        <a class="nav-link" data-bs-toggle="tab" href="#last7datmrb" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Last 7 days</a>
+                                                        <a class="nav-link" data-bs-toggle="tab" href="#last7datmrb" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Last 7 days'); ?></a>
 
                                                     </li>
 
@@ -1259,11 +1259,11 @@ document.onreadystatechange = function () {
                                                     <table class="table table-framed">
                                                         <thead class="visually-hidden">
                                                             <tr>
-                                                                <th scope="col">User</th>
-                                                                <th scope="col">Name</th>
-                                                                <th scope="col">Courier / Location</th>
-                                                                <th scope="col">Contact / Time</th>
-                                                                <th scope="col">Actions</th>
+                                                                <th scope="col"><?= __('User'); ?></th>
+                                                                <th scope="col"><?= __('Name'); ?></th>
+                                                                <th scope="col"><?= __('Courier / Location'); ?></th>
+                                                                <th scope="col"><?= __('Contact / Time'); ?></th>
+                                                                <th scope="col"><?= __('Actions'); ?></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -1349,16 +1349,16 @@ document.onreadystatechange = function () {
 
                                                             <div class="bus-bg" style="background: url(../assets/images/bus.jpg); height:250px; background-size: 100%; background-repeat: no-repeat; position: relative; width: 100%;">
                                                                 <div class="banner-txt">
-                                                                    <h2 class="f-w-700 f-20">Get your Search ,<br>Coureier &amp; Details</h2>
+                                                                    <h2 class="f-w-700 f-20"><?= __('Get your Search ,'); ?><br><?= htmlspecialchars(__('Coureier & Details'), ENT_QUOTES, 'UTF-8'); ?></h2>
                                                                 </div>
                                                                 <div class="booking-form">
-                                                                    <h3 class="">Search</h3>
+                                                                    <h3 class=""><?= __('Search'); ?></h3>
                                                                     <div class="row mb-1 mt-4">
                                                                         <div class="col-lg-4 m-b-10">
                                                                             <div class="toggle-button-cover mt-2">
                                                                                 <div class="button-cover">
                                                                                     <div class="button b2" id="button-17">
-                                                                                        <input aria-label="Courier Type" type="checkbox" name="courier_type" class="checkbox" id="courier_type" onchange="" value="2" onclick="couriertype()" onkeydown="">
+                                                                                        <input aria-label="<?= htmlspecialchars(__('Courier Type'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="courier_type" class="checkbox" id="courier_type" onchange="" value="2" onclick="couriertype()" onkeydown="">
                                                                                         <div class="knobs"></div>
                                                                                         <div class="layer"></div>
                                                                                     </div>
@@ -1370,7 +1370,7 @@ document.onreadystatechange = function () {
                                                                                 <span class="input-group-text addon-style">
                                                                                     <span class=""><i class="ti-write"></i></span>
                                                                                 </span>
-                                                                                <input aria-label="Courier Number" type="text" name="courier_ref_no" id="courier_ref_no" class="form-control border" placeholder="Courier Number">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Courier Number'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="courier_ref_no" id="courier_ref_no" class="form-control border" placeholder="<?= htmlspecialchars(__('Courier Number'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-4 m-b-10">
@@ -1378,14 +1378,14 @@ document.onreadystatechange = function () {
                                                                                 <span class="input-group-text addon-style">
                                                                                     <span class=""><i class="ti-home"></i></span>
                                                                                 </span>
-                                                                                <input aria-label="Courier Company" type="text" name="courier_company" id="courier_company" class="form-control border" placeholder="Courier Company">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Courier Company'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="courier_company" id="courier_company" class="form-control border" placeholder="<?= htmlspecialchars(__('Courier Company'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-4 m-b-10">
                                                                             <div class="input-group">
 
-                                                                                <select aria-label="Courier User" class="form-control border js-example-basic-single" name="courier_user_id" id="courier_user_id">
-                                                                                    <option value="">Select Employee</option>
+                                                                                <select aria-label="<?= htmlspecialchars(__('Courier User'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border js-example-basic-single" name="courier_user_id" id="courier_user_id">
+                                                                                    <option value=""><?= __('Select Employee'); ?></option>
                                                                                     <?php foreach($data['emps'] as $employ){ ?>
                                                                                         <option value="<?php echo $employ['id']; ?>"><?php echo $employ['display_name']; ?></option>
                                                                                     <?php } ?>
@@ -1397,11 +1397,11 @@ document.onreadystatechange = function () {
                                                                                 <span class="input-group-text addon-style">
                                                                                     <span class=""><i class="ti-time"></i></span>
                                                                                 </span>
-                                                                                <input aria-label="Courier Date" class="form-control" type="date" name="courier_date" id='courier_date'>
+                                                                                <input aria-label="<?= htmlspecialchars(__('Courier Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="courier_date" id='courier_date'>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-4 m-b-10">
-                                                                            <button class="btn btn-primary w-100 p-2" onclick="searchcourier()" fdprocessedid="s99pj">Find Courier</button>
+                                                                            <button class="btn btn-primary w-100 p-2" onclick="searchcourier()" fdprocessedid="s99pj"><?= __('Find Courier'); ?></button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1420,25 +1420,25 @@ document.onreadystatechange = function () {
                             </div>
                             <div class="col-lg-4"  id="side_view_1"  <?php  ?> >
                                 <div class="" style="background : url(../assets/images/courier.jpg);width:100%;height:250px;background-repeat:no-repeat;background-size: 500px auto;border-radius: 15px;">
-                                    <h3 class="f-w-600 pt-5 f-25 m-l-50 m-r-50 text-white">Ready to enjoy hassle-free meeting room bookings? Just click the 'Book Now' button!</h3>
-                                    <button class="btn btn-warning waves-effect waves-light m-l-50 mt-4" onclick="meetingroombook()">Book Now </button>
+                                    <h3 class="f-w-600 pt-5 f-25 m-l-50 m-r-50 text-white"><?= __('Ready to enjoy hassle-free meeting room bookings? Just click the \'Book Now\' button!'); ?></h3>
+                                    <button class="btn btn-warning waves-effect waves-light m-l-50 mt-4" onclick="meetingroombook()"><?= __('Book Now'); ?> </button>
                                 </div>
 
                                 <div class="card mt-4">
                                     <div class="card-header">
-                                        <h5>Meetting Room Booked</h5>
+                                        <h5><?= __('Meetting Room Booked'); ?></h5>
 
                                     </div>
                                     <div class="card-body" >
                                         <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3">
                                             <li class="nav-item">
-                                                <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#recent15days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">  15 Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$data['all_metting']);?></span></a>
+                                                <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#recent15days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">  <?= __('15 Days'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$data['all_metting']);?></span></a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#recent30days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> 30 Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recentrmb30days);?></span></a>
+                                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#recent30days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('30 Days'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recentrmb30days);?></span></a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#recent45days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> 60 Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recentrmb45days);?></span></a>
+                                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#recent45days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('60 Days'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recentrmb45days);?></span></a>
                                             </li>
                                         </ul>
                                         <div class="tab-content tabs">
@@ -1465,7 +1465,7 @@ document.onreadystatechange = function () {
                                                    </div>
                                             <?php }else{ ?>
                                                 <div class="card-px text-center py-20 m-t-30">
-                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Couriers</p>
+                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
                                                     <div class="text-center px-4">
                                                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                                     </div>
@@ -1494,7 +1494,7 @@ document.onreadystatechange = function () {
 
                                                 <?php }else{ ?>
                                                 <div class="card-px text-center py-20 m-t-30">
-                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Couriers</p>
+                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
                                                     <div class="text-center px-4">
                                                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                                     </div>
@@ -1523,7 +1523,7 @@ document.onreadystatechange = function () {
 
                                                  <?php }else{ ?>
                                                 <div class="card-px text-center py-20 m-t-30">
-                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Couriers</p>
+                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
                                                     <div class="text-center px-4">
                                                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                                     </div>
@@ -1545,7 +1545,7 @@ document.onreadystatechange = function () {
                 <div class="card">
                     <div class="card-body">
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Workplace</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Workplace'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
@@ -1559,7 +1559,7 @@ document.onreadystatechange = function () {
                 <div class="card">
                     <div class="card-body">
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Security</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Security'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
@@ -1573,7 +1573,7 @@ document.onreadystatechange = function () {
                 <div class="card">
                     <div class="card-body">
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Compliance</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Compliance'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
@@ -1587,7 +1587,7 @@ document.onreadystatechange = function () {
                 <div class="card">
                     <div class="card-body">
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Healty & Safty</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= htmlspecialchars(__('No Healty & Safty'), ENT_QUOTES, 'UTF-8'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
