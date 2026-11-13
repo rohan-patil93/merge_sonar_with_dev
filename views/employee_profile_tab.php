@@ -49,9 +49,9 @@
                     </div>
                     <!--end::Contact-->
                     <!--begin::Nav-->
-                    <a href="employee-profile.php" class="btn btn-hover-light-primary font-weight-bold py-3 px-6 mb-2 text-center btn-block active">Overview</a>
-                    <a href="#" class="btn btn-hover-light-primary font-weight-bold py-3 px-6 mb-2 text-center btn-block">Self Service</a>
-                    <a href="basic-info.php" class="btn btn-hover-light-primary font-weight-bold py-3 px-6 mb-2 text-center btn-block">Basic Info</a>
+                    <a href="employee-profile.php" class="btn btn-hover-light-primary font-weight-bold py-3 px-6 mb-2 text-center btn-block active"><?= __('Overview'); ?></a>
+                    <a href="#" class="btn btn-hover-light-primary font-weight-bold py-3 px-6 mb-2 text-center btn-block"><?= __('Self Service'); ?></a>
+                    <a href="basic-info.php" class="btn btn-hover-light-primary font-weight-bold py-3 px-6 mb-2 text-center btn-block"><?= __('Basic Info'); ?></a>
 
                     <!--end::Nav-->
                 </div>
