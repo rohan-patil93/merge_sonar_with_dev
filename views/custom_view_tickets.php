@@ -63,7 +63,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
     }
     function privateMessage() {
         if ($(".private_check").is(":checked")) {
-            var html = '<div class="input-group input-group-button"><select aria-label="Message Type[]" class="form-control form-select js-example-placeholder-multiple" name="message_type[]" required multiple><?php foreach ($publish_message_field as $pmfkey => $pmf) { ?><option value="<?php echo $pmfkey; ?>"><?php echo $pmf; ?></option> <?php
+            var html = '<div class="input-group input-group-button"><select aria-label="<?= htmlspecialchars(__('Message Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-placeholder-multiple" name="message_type[]" required multiple><?php foreach ($publish_message_field as $pmfkey => $pmf) { ?><option value="<?php echo $pmfkey; ?>"><?php echo $pmf; ?></option> <?php
 } ?></select></div>';
             $("#private_message_select").html(html);
             $(".js-example-placeholder-multiple").select2();
@@ -75,7 +75,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
 <div class="page-body">
     <div class="card table-card ">
         <div class="card-header table-card-header ">
-            <h5>Tickets</h5>
+            <h5><?= __('Tickets'); ?></h5>
             <div class="card-header-right table-card-header ">
                 <?php
                 $ticketcurrentstatus = $stausresult[$tasklist['tasklist']['current_status']];
@@ -85,7 +85,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                     style="background-color: <?php echo $stausresultwithcolors['background_color'] ?>; color: <?php echo $stausresultwithcolors['color'] ?>; "><?php echo $ticketcurrentstatus['name']; ?></span>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -100,13 +100,13 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                         $userdetails = $tasklist['users_list'][$client_id];
                         if ($userdetails['user_photo'] != "") { ?>
                             <img src="uploads/all/<?php echo $userdetails['user_photo']; ?>"
-                                class="img-radius img-50 align-top " onerror="this.src='uploads/all/no-image.jpg';" alt="User Profile">
+                                class="img-radius img-50 align-top " onerror="this.src='uploads/all/no-image.jpg';" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php } else { ?>
-                            <span alt="user"
+                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>"
                                 class="img-radius img-50 align-top bg-primary custom_txt_round p-2 f-12 text-center"><?php echo initials($userdetails['display_name']); ?></span>
                         <?php } ?>
                         <div class="d-inline-block">
-                            <span class="f-w-700">Raised By</span>
+                            <span class="f-w-700"><?= __('Raised By'); ?></span>
                             <a class="text-dark">
                                 <h6 class="mt-1"><?php echo $userdetails['display_name']; ?></h6>
                             </a>
@@ -114,34 +114,34 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                     </div>
                 </div>
                 <div class="form-group col-lg-2 col-md-2 col-sm-6 col-12">
-                    <span class="f-w-700">Ticket Number </span> </br>
+                    <span class="f-w-700"><?= __('Ticket Number'); ?> </span> </br>
                     <span
                         class="form-label label label-md bg-primary"><?php echo $tasklist['tasklist']['ticket_id']; ?></span>
                 </div>
                 <div class="form-group col-lg-5 col-md-5 col-sm-9 col-12 text-left">
-                    <span class="f-w-700">Planned </span></br>
+                    <span class="f-w-700"><?= __('Planned'); ?> </span></br>
                     <span class="form-label badge badge-inverse-danger">
-                        <p class="mb-1">Response</p>
+                        <p class="mb-1"><?= __('Response'); ?></p>
                         <?php $response_details = $tasklist['tasklist']['request_completion_date'] != "" ? $tasklist['tasklist']['request_completion_date'] : $tasklist['tasklist']['sla_response'];
                         echo $response_details != "" ? $response_details : " - "; ?>
                     </span>
                     <span class="form-label badge badge-inverse-primary">
-                        <p class="mb-1">Resolution</p>
+                        <p class="mb-1"><?= __('Resolution'); ?></p>
                         <?php $resolition_details = $tasklist['tasklist']['planed_completion_date'] != "" ? $tasklist['tasklist']['planed_completion_date'] : $tasklist['tasklist']['sla_resolution'];
                         echo $resolition_details != "" ? $resolition_details : " - ";
                         ?>
                     </span>
                     <span class="form-label badge badge-inverse-success">
-                        <p class="mb-1">Completion</p>
+                        <p class="mb-1"><?= __('Completion'); ?></p>
                         <?php $completion_details = $tasklist['tasklist']['actual_completion_date'] != "" ? $tasklist['tasklist']['actual_completion_date'] : $tasklist['tasklist']['sla_closure'];
                         echo $completion_details != "" ? $completion_details : "-"; ?>
                     </span>
                 </div>
                 <div class="form-group col-lg-2 col-md-2 col-sm-3 col-12">
-                    <span class="f-w-700">Followers </span> &nbsp;&nbsp;
+                    <span class="f-w-700"><?= __('Followers'); ?> </span> &nbsp;&nbsp;
                     <?php if (defined('TICKET_ASSIGNER_ROLE') && !empty($_SESSION['role_ids']) && in_array(TICKET_ASSIGNER_ROLE, (array) $_SESSION['role_ids'])) { ?>
                         <button type="button" class="btn p-0 border-0 bg-transparent form-label label label-md label-success" onclick="addfollowers()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                            Add &nbsp;&nbsp;<i class="fa fa-user-plus"></i>
+                            <?= __('Add'); ?> &nbsp;&nbsp;<i class="fa fa-user-plus"></i>
                         </button>
                     <?php } ?>
                     <div class="symbol-group symbol-hover">
@@ -165,7 +165,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                         class="symbol-label font-weight-bold">+<?php echo count((array) $followlist) - 3; ?></span>
                                 <?php }
                             } else { ?>
-                                <p class="text-mute f-12">No Follower</p>
+                                <p class="text-mute f-12"><?= __('No Follower'); ?></p>
                             <?php } ?>
                         </div>
                     </div>
@@ -185,7 +185,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                             <p class="f-14 f-w-600"><?php echo $tasklist['tasklist']['description']; ?></p>
                             <?php if (count((array) $tasklist['application_attachments']) != '0') { ?>
                                 <div class="row">
-                                    <span class="form-label col-form-label d-block mt-2"><i class="ti-clip"></i> Attchment
+                                    <span class="form-label col-form-label d-block mt-2"><i class="ti-clip"></i> <?= __('Attchment'); ?>
                                         : </span>
                                     <?php $im = 1;
                                     foreach ($tasklist['application_attachments'] as $attchment) { ?>
@@ -197,7 +197,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                             <?php } ?>
                             <?php if ($tasklist['tasklist']['resolution_description'] != "") { ?>
                                 <div class="row">
-                                    <h5 class="f-w-600"> Fixing Ticket</h5>
+                                    <h5 class="f-w-600"> <?= __('Fixing Ticket'); ?></h5>
                                     <p class="mt-2">
                                         <?php echo $tasklist['tasklist']['resolution_description']; ?>
 
@@ -242,16 +242,14 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="card latest-update-card">
                         <div class="card-header">
-                            <h5>Activity</h5>
+                            <h5><?= __('Activity'); ?></h5>
                         </div>
                         <div class="card-block">
                             <div class="mt-3 mb-2  text-center">
-                                <span class="form-label badge badge-inverse-primary text-center">Total Time </br>
+                                <span class="form-label badge badge-inverse-primary text-center"><?= __('Total Time'); ?> </br>
                                     <?php echo gmdate("H:i", ($inprogrestime) * 60); ?></span>
-                                <span class="form-label badge badge-inverse-danger text-center">Waiting
-                                    Time</br><?php echo gmdate("H:i", ($clientwaitingtime * 60)); ?></span>
-                                <span class="form-label badge badge-inverse-success text-success">Fixing
-                                    Time</br><?php echo gmdate("H:i", (($inprogrestime - $clientwaitingtime) * 60)); ?></span>
+                                <span class="form-label badge badge-inverse-danger text-center"><?= __('Waiting Time'); ?></br><?php echo gmdate("H:i", ($clientwaitingtime * 60)); ?></span>
+                                <span class="form-label badge badge-inverse-success text-success"><?= __('Fixing Time'); ?></br><?php echo gmdate("H:i", (($inprogrestime - $clientwaitingtime) * 60)); ?></span>
                             </div>
                             <div style="height: 480px;">
                                 <?php if (count((array) $transactiontimelog) != '0') { ?>
@@ -287,8 +285,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                     </div>
                                 <?php } else { ?>
                                     <div class="card-px text-center py-20">
-                                        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No
-                                            Activity </p>
+                                        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Activity'); ?> </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png"
                                                 style="max-height: 300px!important;">
@@ -302,7 +299,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="card chat-card">
                         <div class="card-header">
-                            <h5>Ticket logs</h5>
+                            <h5><?= __('Ticket logs'); ?></h5>
                             <div class="card-header-right">
                             </div>
                         </div>
@@ -335,13 +332,13 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                                             <div class="msg">
                                                                 <i class="fa fa-mail-forward float-left cursor-pointer"
                                                                     data-container="body" data-toggle="tooltip" data-placement="bottom"
-                                                                    title="Replay"
+                                                                    title="<?= htmlspecialchars(__('Replay'), ENT_QUOTES, 'UTF-8'); ?>"
                                                                     onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                                                 <p class="m-b-0"><?php echo $datares['description']; ?></p>
                                                                 <?php
                                                                 if (count((array) $tasklist['logs']['attachment'][$ky]) != '0') { ?>
                                                                     <span class="form-label col-form-label d-block"><i class="ti-clip"></i>
-                                                                        Attchment : </span>
+                                                                        <?= __('Attchment'); ?> : </span>
                                                                     <?php $im = 1;
                                                                     foreach ($tasklist['logs']['attachment'][$ky] as $attchmentt) { ?>
                                                                         <a href="uploads/attachments/<?php echo $attchmentt['actual_file_name']; ?>"
@@ -356,9 +353,9 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                                         <div class="col-auto p-l-0">
                                                             <?php if ($empdeails['user_photo'] != "") { ?>
                                                                 <img src="uploads/all/<?php echo $empdeails['user_photo']; ?>"
-                                                                    class="img-radius img-40" onerror="this.src='uploads/all/no-image.jpg';" alt="User Profile">
+                                                                    class="img-radius img-40" onerror="this.src='uploads/all/no-image.jpg';" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?php } else { ?>
-                                                                <span alt="user"
+                                                                <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>"
                                                                     class="img-radius img-40 p-10"><?php echo initials($empdeails['display_name']); ?></span>
                                                             <?php } ?>
                                                         </div>
@@ -368,9 +365,9 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                                         <div class="col-auto p-r-0">
                                                             <?php if ($empdeails['user_photo'] != "") { ?>
                                                                 <img src="uploads/all/<?php echo $empdeails['user_photo']; ?>"
-                                                                    class="img-radius img-40" onerror="this.src='uploads/all/no-image.jpg';" alt="User Profile">
+                                                                    class="img-radius img-40" onerror="this.src='uploads/all/no-image.jpg';" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?php } else { ?>
-                                                                <span alt="user"
+                                                                <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>"
                                                                     class="img-radius img-40 p-10"><?php echo initials($empdeails['display_name']); ?></span>
                                                             <?php } ?>
                                                         </div>
@@ -378,13 +375,13 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                                             <div class="msg">
                                                                 <i class="fa fa-mail-forward float-right cursor-pointer"
                                                                     data-container="body" data-toggle="tooltip" data-placement="bottom"
-                                                                    title="Replay"
+                                                                    title="<?= htmlspecialchars(__('Replay'), ENT_QUOTES, 'UTF-8'); ?>"
                                                                     onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                                                 <p class="m-b-0"><?php echo $datares['description']; ?></p>
                                                                 <?php echo $replay_msg;
                                                                 if (count((array) $tasklist['logs']['attachment'][$ky]) != '0') { ?>
                                                                     <span class="form-label col-form-label d-block"><i class="ti-clip"></i>
-                                                                        Attchment : </span>
+                                                                        <?= __('Attchment'); ?> : </span>
                                                                     <?php $im = 1;
                                                                     foreach ($tasklist['logs']['attachment'][$ky] as $attchmentt) { ?>
                                                                         <a href="uploads/attachments/<?php echo $attchmentt['actual_file_name']; ?>"
@@ -403,8 +400,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                     </div>
                                 <?php } else { ?>
                                     <div class="card-px text-center py-20 mt-2">
-                                        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Ticket
-                                            Logs </p>
+                                        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Ticket Logs'); ?> </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png"
                                                 style="max-height: 300px!important;">
@@ -435,14 +431,14 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                         <div class="image-input image-input-empty image-input-outline mt-2"
                                             id="kt_image_5">
                                             <label class="btn-hover-text-primary mt-1" data-action="change"
-                                                data-toggle="tooltip" title="" data-original-title="Uploade File" aria-label="Upload File">
+                                                data-toggle="tooltip" title="" data-original-title="<?= htmlspecialchars(__('Uploade File'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Upload File'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <i class="ti-clip f-30 mr-5 mt-2"></i>
-                                                <input aria-label="Files[]" type="file" name="files[]" multiple />
+                                                <input aria-label="<?= htmlspecialchars(__('Files'), ENT_QUOTES, 'UTF-8'); ?>[]" type="file" name="files[]" multiple />
                                             </label>
                                         </div>
                                     </button>
-                                    <textarea aria-label="Eg. Descriptions" class="form-control  width1" name="description" value=""
-                                        placeholder="Eg. Descriptions" required></textarea>
+                                    <textarea aria-label="<?= htmlspecialchars(__('Eg. Descriptions'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control  width1" name="description" value=""
+                                        placeholder="<?= htmlspecialchars(__('Eg. Descriptions'), ENT_QUOTES, 'UTF-8'); ?>" required></textarea>
 
                                     <button class="input-group-text addon-style cursor-pointer bg-primary"
                                         name="submitlog">
@@ -453,12 +449,12 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                     <div class="col-lg-6">
                                         <div class="checkbox-fade fade-in-primary" id="checkbosshowhide">
                                             <label class="form-label">
-                                                <input aria-label="Private" type="checkbox" class="private_check" value="0" name="private"
+                                                <input aria-label="<?= htmlspecialchars(__('Private'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="private_check" value="0" name="private"
                                                     onclick="privateMessage()" onkeydown="">
                                                 <span class="cr">
                                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                 </span>
-                                                <span>Private Message</span>
+                                                <span><?= __('Private Message'); ?></span>
                                             </label>
                                         </div>
                                     </div>
@@ -484,8 +480,8 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title modallabel" id="exampleModalLabel">Followers </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title modallabel" id="exampleModalLabel"><?= __('Followers'); ?> </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
             </div>
             <form class="form" id="insertfoolwersform">
                 <input type="hidden" name="rid" value="<?php echo $rid; ?>">
@@ -497,8 +493,8 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                         <div class="form-group row">
                             <?php $followlist = explode(',', $tasklist['tasklist']['follower_ids']); ?>
                             <div class="col-lg-12 w-full">
-                                <span class="form-label col-form-label">Select Followers </span>
-                                <select aria-label="Popupfollow []" class="form-control form-select js-example-basic-multiple"
+                                <span class="form-label col-form-label"><?= __('Select Followers'); ?> </span>
+                                <select aria-label="<?= htmlspecialchars(__('Popupfollow'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-control form-select js-example-basic-multiple"
                                     name="popupfollow_id[]" multiple style="width:100%">
                                     <?php foreach ($users_list as $uvalue) { ?>
                                         <option value="<?php echo $uvalue['id']; ?>" <?php echo (in_array($uvalue['id'], (array) $followlist)) ? "selected" : ""; ?>>
@@ -511,8 +507,8 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary " onclick="submitFollowers()">Submit</button>
+                    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
+                    <button type="button" class="btn btn-primary " onclick="submitFollowers()"><?= __('Submit'); ?></button>
                 </div>
             </form>
         </div>
