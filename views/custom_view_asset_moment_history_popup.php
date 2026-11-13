@@ -58,7 +58,7 @@ function submitdetails(){
                 console.log(data);
                 var res = JSON.parse(data);
                 if(res.errer=="404"){
-                    alert("oops Employee not found");
+                    alert(<?php echo json_encode(__('oops Employee not found'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                 }else{
                 }
             }
@@ -68,8 +68,8 @@ function submitdetails(){
 </script>
 
 <div class="modal-header">
-    <h4 class="modal-title">Asset Allocation</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Asset Allocation'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body j-pro">
     <div class="j-content">
@@ -111,13 +111,13 @@ function submitdetails(){
                                         <a href="#!"><h6><?php echo ucwords($allocation_type[$momenthistore['asset_trans_type']]); ?></h6></a>
                                         <p class="text-muted m-b-0"><?php echo $momenthistore['trans_date']; ?></p>
                                         <div class="label-main">
-                                          <span class="form-label label label-primary">Location : <?php echo $locations_lists[$jsondecode['asset_location']]; ?></span>
+                                          <span class="form-label label label-primary"><?= __('Location'); ?> : <?php echo $locations_lists[$jsondecode['asset_location']]; ?></span>
                                         </div>
                                         <div class="label-main">
-                                          <span class="form-label label label-success">Status : <?php echo $ass_status[$jsondecode['status']]; ?></span>
+                                          <span class="form-label label label-success"><?= __('Status'); ?> : <?php echo $ass_status[$jsondecode['status']]; ?></span>
                                         </div>
                                         <div class="label-main">
-                                          <span class="form-label label label-info">Candition : <?php echo $ass_condition[$jsondecode['conditions']]; ?></span>
+                                          <span class="form-label label label-info"><?= __('Candition'); ?> : <?php echo $ass_condition[$jsondecode['conditions']]; ?></span>
                                         </div>
                                     </div>
 
@@ -169,8 +169,8 @@ function submitdetails(){
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()">Submit</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()"><?= __('Submit'); ?></button>
 </div>
 
 <script src="assets/pages/data-table/extensions/responsive/js/responsive-custom.js"></script>
