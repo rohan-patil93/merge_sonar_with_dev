@@ -4,7 +4,7 @@
 <!--begin::Head-->
 <head><base href="">
    <meta charset="utf-8"/>
-   <title>HRMS QUESTIONS</title>
+   <title><?= __('HRMS QUESTIONS'); ?></title>
    <meta name="description" content="Pricing table example"/>
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -32,7 +32,7 @@
 
 
 <div class="container">
-  <h2>HRMS QUESTIONS</h2>
+  <h2><?= __('HRMS QUESTIONS'); ?></h2>
   <br>
 
          <div class="row">
@@ -43,7 +43,7 @@
                         <span class="nav-icon">
                            <i class="flaticon2-chat-1"></i>
                        </span>
-                       <span class="nav-text">General Info</span>
+                       <span class="nav-text"><?= __('General Info'); ?></span>
                    </a>
                </li>
                 <li class="nav-item mb-2">
@@ -51,7 +51,7 @@
                         <span class="nav-icon">
                            <i class="flaticon2-chat-1"></i>
                        </span>
-                       <span class="nav-text">Attendance Management</span>
+                       <span class="nav-text"><?= __('Attendance Management'); ?></span>
                    </a>
                </li>
 
@@ -60,7 +60,7 @@
                         <span class="nav-icon">
                            <i class="flaticon2-chat-1"></i>
                        </span>
-                       <span class="nav-text">Leave Management</span>
+                       <span class="nav-text"><?= __('Leave Management'); ?></span>
                    </a>
                </li>
                       <li class="nav-item mb-2">
@@ -68,7 +68,7 @@
                         <span class="nav-icon">
                            <i class="flaticon2-chat-1"></i>
                        </span>
-                       <span class="nav-text">Payroll Management</span>
+                       <span class="nav-text"><?= __('Payroll Management'); ?></span>
                    </a>
                </li>
 
