@@ -156,21 +156,21 @@ foreach($mcats as $mm=>$mtatss){
                         <div class="card card-custom " id="kt_page_sticky_card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <h3 class="card-label col-lg-3">&nbsp; Budget Utilization  </h3>
-                                      From<div class="col-lg-3">
-                                            <input aria-label="From Date" class="form-control" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year" />
+                                    <h3 class="card-label col-lg-3">&nbsp; <?= __('Budget Utilization'); ?>  </h3>
+                                      <?= __('From'); ?><div class="col-lg-3">
+                                            <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year" />
                                     </div>
 
-                                      To<div class="col-lg-3">
-                                          <input aria-label="To Date" class="form-control" type="month" name="to_date" value="<?php echo $to_cur_year."-".$to_cur_month?>"  id="att_month_year_2" />
+                                      <?= __('To'); ?><div class="col-lg-3">
+                                          <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="to_date" value="<?php echo $to_cur_year."-".$to_cur_month?>"  id="att_month_year_2" />
                                     </div>
                                     <div class="col-lg-2">
-                                        <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i>Filter</button>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Filter'); ?></button>
                                     </div>
 
                                     <div class="col-lg-2">
                                         <input type="hidden" id="filterby" name="filterby">
-                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
+                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply"><?= __('Apply'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -188,17 +188,17 @@ foreach($mcats as $mm=>$mtatss){
                                 </div>
 
                                 <div class="col-lg-2">
-                                    <h3 class="card-label">&nbsp;  Budget Vs Utilized </h3>
+                                    <h3 class="card-label">&nbsp;  <?= __('Budget Vs Utilized'); ?> </h3>
 
                                     <div class="d-flex mt-10">
-                                        <span class="font-weight-bold mr-4">Total Budget </span>
+                                        <span class="font-weight-bold mr-4"><?= __('Total Budget'); ?> </span>
                                         <div class="progress progress-xs mt-2 mb-2 flex-shrink-0 w-30px w-xl-70px">
                                             <div class="progress-bar bg-primary" role="progressbar" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <span class="font-weight-bolder text-dark ml-4"><?php echo number_format($totalbudget,2);?></span>
                                     </div>
                                     <div class="d-flex mt-5">
-                                        <span class="font-weight-bold mr-4">Total Utilized</span>
+                                        <span class="font-weight-bold mr-4"><?= __('Total Utilized'); ?></span>
                                         <div class="progress progress-xs mt-2 mb-2 flex-shrink-0 w-30px w-xl-70px">
                                             <div class="progress-bar bg-warning" role="progressbar" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
@@ -219,7 +219,7 @@ foreach($mcats as $mm=>$mtatss){
             <table class="table table-separate table-head-custom table-checkable data-table" id="kt_datatable1_2">
                 <tr>
                     <th scope="col" style="width: 3%;"></th>
-                    <th scope="col" style="width: 5%;">SL.NO.</th>
+                    <th scope="col" style="width: 5%;"><?= __('SL.NO.'); ?></th>
                     <?php foreach($employees_fieldlist as $fkey=>$fieldlist){
                         if(in_array($fkey,(array)$defalut_fields)){ ?>
                         <th scope="col"><?php echo $fieldlist; ?> </th>
