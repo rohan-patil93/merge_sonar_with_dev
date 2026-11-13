@@ -15,11 +15,11 @@ $workflowlist = json_decode($workflowlist,1);
     var step = 100;
     function getstepdata(){
         var mac = $(".sttp").length+1
-        var otpion = "<option>Select Any One</option>";
+        var otpion = "<option><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?></option>";
         <?php foreach($userlist as $userlists){ ?>
             otpion += "<option value='<?php echo $userlists['id'];?>'><?php echo $userlists['display_name'];?></option>"
         <?php  } ?>
-        var rows = '<div class="row mt-1 deletestepid'+step+' sttp"><div class="col-lg-1"></div><div class="col-lg-2">Step - <span class="form-label badge bg-info ">'+mac+'</span></div><div class="col-lg-6"><select aria-label="Customsteps[]"  class="kt-dual-listbox form-select js-example-basic-single"   name="customsteps[]">'+otpion+'</select></div><div class="col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti ti-trash text-danger" onclick="deletstep('+step+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div></div>';
+        var rows = '<div class="row mt-1 deletestepid'+step+' sttp"><div class="col-lg-1"></div><div class="col-lg-2"><?= htmlspecialchars(__('Step'), ENT_QUOTES, 'UTF-8'); ?> - <span class="form-label badge bg-info ">'+mac+'</span></div><div class="col-lg-6"><select aria-label="<?= htmlspecialchars(__('Customsteps'), ENT_QUOTES, 'UTF-8'); ?>[]"  class="kt-dual-listbox form-select js-example-basic-single"   name="customsteps[]">'+otpion+'</select></div><div class="col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti ti-trash text-danger" onclick="deletstep('+step+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div></div>';
         $(".stepdata").append(rows);
         $(".js-example-basic-single").select2();
         $(".js-example-disabled-results").select2();
@@ -70,8 +70,8 @@ if($type == "afteraprovassigntask"){
     </script>
 <form method="post" id="afteraprovassigntask">
     <div class="modal-header">
-        <h5 class="modal-title">Configration Action After Final Approval Assign Task</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title"><?= __('Configration Action After Final Approval Assign Task'); ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
     <div class="modal-body j-pro" >
         <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
@@ -79,9 +79,9 @@ if($type == "afteraprovassigntask"){
                 for($i=1;$i <= $_POST['sub_approve_type'];$i++){ $slecttaks = $afterapprovaltask['step_'.$i];
                     ?>
                     <div class="form-group row">
-                        <span class="col-lg-2 form-label">Step <span class="form-label badge bg-info "><?php echo $i; ?></span> Task</span>
+                        <span class="col-lg-2 form-label"><?= __('Step'); ?> <span class="form-label badge bg-info "><?php echo $i; ?></span> <?= __('Task'); ?></span>
                         <div  class="col-lg-8">
-                            <select aria-label="Select option" class="form-select js-example-basic-multiple"  name="after_approval_task[step_<?php echo $i; ?>][]" multiple>
+                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-multiple"  name="after_approval_task[step_<?php echo $i; ?>][]" multiple>
                                 <?php foreach($list as $lists){   ?>
                                     <option value="<?php echo $lists['id']; ?>" <?php echo in_array($lists['id'], $slecttaks)?"selected":""; ?>> <?php echo $lists['task_name']; ?></option>
                                 <?php } ?>
@@ -89,23 +89,23 @@ if($type == "afteraprovassigntask"){
                         </div>
                         <?php if($i == $_POST['sub_approve_type']){ ?>
                             <div class="col-lg-2">
-                                <button type="button" class="ml-2 form-label label label-info border-0" data-bs-toggle="tooltip" data-placement="bottom" title="Add New task" onclick="addnewtask(<?php echo $_POST['rid']; ?>,'<?php  echo $_POST['process_type']?>','<?php echo $_POST['type']; ?>')"><i class="ti-plus"></i> New Task</button>
+                                <button type="button" class="ml-2 form-label label label-info border-0" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Add New task'), ENT_QUOTES, 'UTF-8'); ?>" onclick="addnewtask(<?php echo $_POST['rid']; ?>,'<?php  echo $_POST['process_type']?>','<?php echo $_POST['type']; ?>')"><i class="ti-plus"></i> <?= __('New Task'); ?></button>
                             </div>
                         <?php } ?>
                     </div>
                 <?php } ?>
                 <?php } else { $slecttaks = $afterapprovaltask['step_1']; ?>
                     <div class="form-group row">
-                        <span class="col-lg-2 form-label">Step 1 Task</span>
+                        <span class="col-lg-2 form-label"><?= __('Step 1 Task'); ?></span>
                         <div  class="col-lg-8">
-                            <select aria-label="After Approval Task[step 1][]" class="form-select js-example-basic-multiple" name="after_approval_task[step_1][]"  multiple>
+                            <select aria-label="<?= htmlspecialchars(__('After Approval Task[step 1]'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple" name="after_approval_task[step_1][]"  multiple>
                                 <?php foreach($list as $lists){ ?>
                                     <option value="<?php echo $lists['id']; ?>" <?php echo in_array($lists['id'], $slecttaks)?"selected":""; ?>> <?php echo $lists['task_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-2">
-                            <button type="button" class="ml-2 form-label label label-info border-0" data-bs-toggle="tooltip" data-placement="bottom" title="Add New task" onclick="addnewtask(<?php echo $_POST['rid']; ?>,'<?php  echo $_POST['process_type']?>','<?php echo $_POST['type']; ?>')"><i class="ti-plus"></i> New Task</button>
+                            <button type="button" class="ml-2 form-label label label-info border-0" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Add New task'), ENT_QUOTES, 'UTF-8'); ?>" onclick="addnewtask(<?php echo $_POST['rid']; ?>,'<?php  echo $_POST['process_type']?>','<?php echo $_POST['type']; ?>')"><i class="ti-plus"></i> <?= __('New Task'); ?></button>
                         </div>
                     </div>
 
@@ -119,17 +119,17 @@ if($type == "afteraprovassigntask"){
     <form method="post" id="afteraprovalemailnotification">
 
         <div class="modal-header">
-            <h5 class="modal-title">Configration Action After Final Approval Email Notification</h5>
-            <a href="index.php?option=COM_INSERT_EMAIL_CONTENTS" class="btn btn-info" target="_blank"><i class="ti-plus"></i> Create New Mail</a>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title"><?= __('Configration Action After Final Approval Email Notification'); ?></h5>
+            <a href="index.php?option=COM_INSERT_EMAIL_CONTENTS" class="btn btn-info" target="_blank"><i class="ti-plus"></i> <?= __('Create New Mail'); ?></a>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
         <div class="modal-body" >
             <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                 <div class="form-group row">
-                        <span class="col-lg-2 form-label mt-2">Send Email To</span>
+                        <span class="col-lg-2 form-label mt-2"><?= __('Send Email To'); ?></span>
                         <div  class="col-lg-4">
                             <?php $sendemailtype = ['requester_manager'=>'Requester Manager','everyone_approve'=>'Everyone Approve','everyone_till_approved'=>'Everyone Till Approved']?>
-                            <select aria-label="Send Aproval Email To" class="form-select js-example-basic-single" name="send_aproval_email_to" >
+                            <select aria-label="<?= htmlspecialchars(__('Send Aproval Email To'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="send_aproval_email_to" >
                                 <?php foreach($sendemailtype as $kky => $types){?>
                                     <option value="<?php echo $kky;?>"  <?php echo $workflowlist['send_aproval_email_to']==$kky?"selected":""; ?>><?php echo $types;?></option>
                                 <?php } ?>
@@ -139,11 +139,11 @@ if($type == "afteraprovassigntask"){
                 <div class="form-group row">
                     <div class="dt-responsive table-responsive">
                         <table id="new-cons" class="table table-striped table-bordered nowrap">
-                            <thead><tr><th scope="col"></th><th scope="col">Subject</th></tr> </thead>
+                            <thead><tr><th scope="col"></th><th scope="col"><?= __('Subject'); ?></th></tr> </thead>
                             <tbody>
                                 <?php foreach($list as $lists){ ?><tr><td><div class="form-radio"><div class="radio radio-inline">
                                     <label class="form-label">
-                                        <input aria-label="After Approval Email" type="radio" name="after_approval_email" class="d-none" value="<?php echo $lists['id']; ?>"  <?php echo $workflowlist['after_approval_email']==$lists['id']?"checked":""; ?>>
+                                        <input aria-label="<?= htmlspecialchars(__('After Approval Email'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="after_approval_email" class="d-none" value="<?php echo $lists['id']; ?>"  <?php echo $workflowlist['after_approval_email']==$lists['id']?"checked":""; ?>>
                                         <i class="helper"></i>
                                     </label>
                                     </div></div></td><td><?php echo $lists['email_subject']; ?></td></tr> <?php
@@ -159,15 +159,15 @@ if($type == "afteraprovassigntask"){
             ?>
             <form method="post" id="afteraprovalwebhook">
             <div class="modal-header">
-                <h5 class="modal-title">Configration Action After Final Approval Web Hook</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title"><?= __('Configration Action After Final Approval Web Hook'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
             </div>
             <div class="modal-body" >
                 <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                     <div class="form-group row">
                         <div class="form-group">
-                            <span>Web Hooks</span>
-                            <textarea aria-label="After Approval Call Webhook" class="form-control form-control-lg" name="after_approval_call_webhook" spellcheck="false"><?php echo $workflowlist['after_approval_call_webhook']; ?>
+                            <span><?= __('Web Hooks'); ?></span>
+                            <textarea aria-label="<?= htmlspecialchars(__('After Approval Call Webhook'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg" name="after_approval_call_webhook" spellcheck="false"><?php echo $workflowlist['after_approval_call_webhook']; ?>
                             </textarea>
                         </div>
                     </div>
@@ -179,15 +179,15 @@ if($type == "afteraprovassigntask"){
             <form method="post" id="afteraprovalcallfunction">
             <div class="modal-header">
                 <h5 class="modal-
-                title"> Configration Action After Final Approval Call Function</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                title"> <?= __('Configration Action After Final Approval Call Function'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
             </div>
             <div class="modal-body" >
                 <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                     <div class="form-group row">
                         <div class="form-group">
-                            <span>Call Function</span>
-                            <textarea aria-label="After Approve Call Function" class="form-control form-control-lg" name="after_approve_call_function" spellcheck="false">      <?php echo $workflowlist['after_approve_call_function']; ?>    </textarea>
+                            <span><?= __('Call Function'); ?></span>
+                            <textarea aria-label="<?= htmlspecialchars(__('After Approve Call Function'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg" name="after_approve_call_function" spellcheck="false">      <?php echo $workflowlist['after_approve_call_function']; ?>    </textarea>
                         </div>
                     </div>
                 </div>
@@ -200,8 +200,8 @@ if($type == "afteraprovassigntask"){
             ?>
             <form method="post" id="afterrejectionassigntask">
             <div class="modal-header">
-                <h5 class="modal-title"> Configration Action After Rejection Assign Task</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title"> <?= __('Configration Action After Rejection Assign Task'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
             </div>
             <div class="modal-body" >
                 <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
@@ -209,9 +209,9 @@ if($type == "afteraprovassigntask"){
                 for($i=1;$i <= $_POST['sub_approve_type'];$i++){ $slecttaks = $afterapprovaltask['step_'.$i];
                     ?>
                     <div class="form-group row">
-                        <span class="col-lg-2 form-label">Step <span class="form-label badge bg-info "><?php echo $i; ?></span> Task</span>
+                        <span class="col-lg-2 form-label"><?= __('Step'); ?> <span class="form-label badge bg-info "><?php echo $i; ?></span> <?= __('Task'); ?></span>
                         <div  class="col-lg-8">
-                            <select aria-label="Select option" class="form-select js-example-basic-multiple"  name="after_rejection_task[step_<?php echo $i; ?>][]" multiple>
+                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-multiple"  name="after_rejection_task[step_<?php echo $i; ?>][]" multiple>
                                 <?php foreach($list as $lists){   ?>
                                     <option value="<?php echo $lists['id']; ?>" <?php echo in_array($lists['id'], $slecttaks)?"selected":""; ?>> <?php echo $lists['task_name']; ?></option>
                                 <?php } ?>
@@ -219,23 +219,23 @@ if($type == "afteraprovassigntask"){
                         </div>
                         <?php if($i == $_POST['sub_approve_type']){ ?>
                             <div class="col-lg-2">
-                                <button type="button" class="ml-2 form-label label label-info border-0" data-bs-toggle="tooltip" data-placement="bottom" title="Add New task" onclick="addnewtask(<?php echo $_POST['rid']; ?>,'<?php  echo $_POST['process_type']?>','<?php echo $_POST['type']; ?>')"><i class="ti-plus"></i> New Task</button>
+                                <button type="button" class="ml-2 form-label label label-info border-0" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Add New task'), ENT_QUOTES, 'UTF-8'); ?>" onclick="addnewtask(<?php echo $_POST['rid']; ?>,'<?php  echo $_POST['process_type']?>','<?php echo $_POST['type']; ?>')"><i class="ti-plus"></i> <?= __('New Task'); ?></button>
                             </div>
                         <?php } ?>
                     </div>
                 <?php } ?>
                 <?php } else { $slecttaks = $afterapprovaltask['step_1']; ?>
                     <div class="form-group row">
-                        <span class="col-lg-2 form-label">Step <span class="form-label badge bg-info ">1</span> Task</span>
+                        <span class="col-lg-2 form-label"><?= __('Step'); ?> <span class="form-label badge bg-info ">1</span> <?= __('Task'); ?></span>
                         <div  class="col-lg-8">
-                            <select aria-label="After Rejection Task[step 1][]" class="form-select js-example-basic-multiple" name="after_rejection_task[step_1][]"  multiple>
+                            <select aria-label="<?= htmlspecialchars(__('After Rejection Task[step 1]'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple" name="after_rejection_task[step_1][]"  multiple>
                                 <?php foreach($list as $lists){ ?>
                                     <option value="<?php echo $lists['id']; ?>" <?php echo in_array($lists['id'], $slecttaks)?"selected":""; ?>> <?php echo $lists['task_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-2">
-                            <button type="button" class="ml-2 form-label label label-info border-0" data-bs-toggle="tooltip" data-placement="bottom" title="Add New task" onclick="addnewtask(<?php echo $_POST['rid']; ?>,'<?php  echo $_POST['process_type']?>','<?php echo $_POST['type']; ?>')"><i class="ti-plus"></i> New Task</button>
+                            <button type="button" class="ml-2 form-label label label-info border-0" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Add New task'), ENT_QUOTES, 'UTF-8'); ?>" onclick="addnewtask(<?php echo $_POST['rid']; ?>,'<?php  echo $_POST['process_type']?>','<?php echo $_POST['type']; ?>')"><i class="ti-plus"></i> <?= __('New Task'); ?></button>
                         </div>
                     </div>
 
@@ -248,18 +248,18 @@ if($type == "afteraprovassigntask"){
                 ?>
                 <form method="post" id="afterrejectionemailnotification">
                 <div class="modal-header">
-                    <h5 class="modal-title"> Configration Action After Rejection Email Notification</h5>
+                    <h5 class="modal-title"> <?= __('Configration Action After Rejection Email Notification'); ?></h5>
 
-                    <a href="index.php?option=COM_INSERT_EMAIL_CONTENTS" class="btn btn-info" target="_blank"><i class="ti-plus"></i> Create New Mail</a>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <a href="index.php?option=COM_INSERT_EMAIL_CONTENTS" class="btn btn-info" target="_blank"><i class="ti-plus"></i> <?= __('Create New Mail'); ?></a>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                 </div>
                 <div class="modal-body" >
                     <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                         <div class="form-group row">
-                        <span class="col-lg-2 form-label mt-2">Send Email To</span>
+                        <span class="col-lg-2 form-label mt-2"><?= __('Send Email To'); ?></span>
                         <div  class="col-lg-4">
                             <?php $sendemailtype = ['requester_manager'=>'Requester Manager','everyone_approve'=>'Everyone Approve','everyone_till_approved'=>'Everyone Till Approved']?>
-                            <select aria-label="Send Rejection Email To" class="form-select js-example-basic-single" name="send_rejection_email_to" >
+                            <select aria-label="<?= htmlspecialchars(__('Send Rejection Email To'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="send_rejection_email_to" >
                                 <?php foreach($sendemailtype as $kky => $types){?>
                                     <option value="<?php echo $kky;?>"  <?php echo $workflowlist['send_rejection_email_to']==$kky?"selected":""; ?>><?php echo $types;?></option>
                                 <?php } ?>
@@ -269,11 +269,11 @@ if($type == "afteraprovassigntask"){
                         <div class="form-group row">
                             <div class="dt-responsive table-responsive">
                                 <table id="new-cons_2" class="table table-striped table-bordered nowrap">
-                                    <thead><tr><th scope="col"></th><th scope="col">Subject</th></tr> </thead>
+                                    <thead><tr><th scope="col"></th><th scope="col"><?= __('Subject'); ?></th></tr> </thead>
                                     <tbody>
                                         <?php foreach($list as $lists){ ?><tr><td><div class="form-radio"><div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="After Rejection Email" type="radio" name="after_rejection_email" class="d-none" value="<?php echo $lists['id']; ?>" <?php echo $workflowlist['after_rejection_email']==$lists['id']?"checked":""; ?>>
+                                                <input aria-label="<?= htmlspecialchars(__('After Rejection Email'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="after_rejection_email" class="d-none" value="<?php echo $lists['id']; ?>" <?php echo $workflowlist['after_rejection_email']==$lists['id']?"checked":""; ?>>
                                                 <i class="helper"></i>
                                             </label>
                                             </div></div></td><td><?php echo $lists['email_subject']; ?></td></tr> <?php
@@ -291,15 +291,15 @@ if($type == "afteraprovassigntask"){
                     ?>
                     <form method="post" id="afterrejectionwebhook">
                     <div class="modal-header">
-                        <h5 class="modal-title"> Configration Action After Rejection Web Hook</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title"> <?= __('Configration Action After Rejection Web Hook'); ?></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                     </div>
                     <div class="modal-body" >
                         <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                             <div class="form-group row">
                                 <div class="form-group">
-                                    <span>Web Hooks</span>
-                                    <textarea aria-label="After Rejection Call Webhook" class="form-control form-control-lg " name="after_rejection_call_webhook" spellcheck="false">    <?php echo $workflowlist['after_rejection_call_webhook']; ?>       </textarea>
+                                    <span><?= __('Web Hooks'); ?></span>
+                                    <textarea aria-label="<?= htmlspecialchars(__('After Rejection Call Webhook'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg " name="after_rejection_call_webhook" spellcheck="false">    <?php echo $workflowlist['after_rejection_call_webhook']; ?>       </textarea>
                                 </div>
                             </div>
                         </div>
@@ -311,15 +311,15 @@ if($type == "afteraprovassigntask"){
                     ?>
                     <form method="post" id="afterrejectioncallfunction">
                     <div class="modal-header">
-                        <h5 class="modal-title"> Configration Action After Rejection Call Function</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title"> <?= __('Configration Action After Rejection Call Function'); ?></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                     </div>
                     <div class="modal-body" >
                         <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                             <div class="form-group row">
                                 <div class="form-group">
-                                    <span>Call Function</span>
-                                    <textarea aria-label="After Rejection Call Function" class="form-control form-control-lg" name="after_rejection_call_function" spellcheck="false">     <?php echo $workflowlist['after_rejection_call_function']; ?>    </textarea>
+                                    <span><?= __('Call Function'); ?></span>
+                                    <textarea aria-label="<?= htmlspecialchars(__('After Rejection Call Function'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg" name="after_rejection_call_function" spellcheck="false">     <?php echo $workflowlist['after_rejection_call_function']; ?>    </textarea>
                                 </div>
                             </div>
                         </div>
@@ -330,8 +330,8 @@ if($type == "afteraprovassigntask"){
         <form method="post" id="custom_process">
             <input type="hidden" name="approval_type" value="<?php echo $_POST['approval_type']; ?>">
                     <div class="modal-header">
-                        <h5 class="modal-title"> Configration Custom Steps</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title"> <?= __('Configration Custom Steps'); ?></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                     </div>
                     <div class="modal-body" >
                         <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
@@ -339,9 +339,9 @@ if($type == "afteraprovassigntask"){
                             <?php $k=1; foreach($steps as $key=>$steps){ ?>
                                 <div class="row mt-1 deletestepid1 sttp">
                                     <div class="col-lg-1"></div>
-                                    <div class="col-lg-2"> step - <span class="form-label badge bg-info "><?php echo $k; ?></span>  </div>
-                                    <div class="col-lg-6"><select aria-label="Customsteps[]"  class="kt-dual-listbox form-select js-example-basic-single" name="customsteps[]">
-                                        <option>Select Any One</option>
+                                    <div class="col-lg-2"> <?= __('step'); ?> - <span class="form-label badge bg-info "><?php echo $k; ?></span>  </div>
+                                    <div class="col-lg-6"><select aria-label="<?= htmlspecialchars(__('Customsteps'), ENT_QUOTES, 'UTF-8'); ?>[]"  class="kt-dual-listbox form-select js-example-basic-single" name="customsteps[]">
+                                        <option><?= __('Select Any One'); ?></option>
                                         <?php foreach($userlist as $userlistss){ ?>
                                         <option value="<?php echo $userlistss['id']; ?>" <?php echo $userlistss['id']==$steps?"selected":""; ?>><?php echo $userlistss['display_name'];?></option>
                                 <?php } ?>
@@ -351,7 +351,7 @@ if($type == "afteraprovassigntask"){
                             <?php $k++;
 } ?>
                                 </div>
-                                <button type="button" class="btn btn-info waves-effect waves-light col-lg-2" onclick="getstepdata()"><i class="ti-plus"></i> More Step</button>
+                                <button type="button" class="btn btn-info waves-effect waves-light col-lg-2" onclick="getstepdata()"><i class="ti-plus"></i> <?= __('More Step'); ?></button>
                             </div>
                         </div>
 
@@ -360,8 +360,8 @@ if($type == "afteraprovassigntask"){
                     <div class="modal-footer">
                         <input type="hidden" name="Rid" value="<?php echo $_POST['rid']; ?>">
                         <input type="hidden" name="type" id="type" value="<?php echo $_POST['type']; ?>">
-                         <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary mr-2" onclick="submitrom('<?php echo $_POST['type']; ?>')" >Submit</button>
+                         <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
+                        <button type="button" class="btn btn-primary mr-2" onclick="submitrom('<?php echo $_POST['type']; ?>')" ><?= __('Submit'); ?></button>
                     </div>
                 </form>
 
