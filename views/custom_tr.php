@@ -39,53 +39,53 @@ $(function () {
 </script>
 <table id="tblLocations">
     <tr>
-        <th scope="col">ID </th>
-        <th scope="col">Location</th>
-        <th scope="col">Preference</th>
+        <th scope="col"><?= __('ID'); ?> </th>
+        <th scope="col"><?= __('Location'); ?></th>
+        <th scope="col"><?= __('Preference'); ?></th>
     </tr>
     <tr>
         <td>1</td>
-        <td> Goa</td>
+        <td> <?= __('Goa'); ?></td>
         <td>1</td>
     </tr>
     <tr>
         <td>2</td>
-        <td>Mahabaleshwar</td>
+        <td><?= __('Mahabaleshwar'); ?></td>
         <td>2</td>
     </tr>
     <tr>
         <td>3</td>
-        <td>Kerala</td>
+        <td><?= __('Kerala'); ?></td>
         <td>3</td>
     </tr>
     <tr>
         <td>4</td>
-        <td>Kashmir</td>
+        <td><?= __('Kashmir'); ?></td>
         <td>4</td>
     </tr>
     <tr>
         <td>5</td>
-        <td>Ooty</td>
+        <td><?= __('Ooty'); ?></td>
         <td>5</td>
     </tr>
     <tr>
         <td>6</td>
-        <td>Simla</td>
+        <td><?= __('Simla'); ?></td>
         <td>6</td>
     </tr>
     <tr>
         <td>7</td>
-        <td>Manali</td>
+        <td><?= __('Manali'); ?></td>
         <td>7</td>
     </tr>
     <tr>
         <td>8</td>
-        <td>Darjeeling</td>
+        <td><?= __('Darjeeling'); ?></td>
         <td>8</td>
     </tr>
     <tr>
         <td>9</td>
-        <td>Nanital</td>
+        <td><?= __('Nanital'); ?></td>
         <td>9</td>
     </tr>
 </table>
