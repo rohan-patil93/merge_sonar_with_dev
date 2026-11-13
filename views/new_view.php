@@ -37,7 +37,7 @@ foreach ($lists as $key => $value) {
             <div class="page-body">
                 <div class="alert alert-light alert-dismissible">
                     <strong><?php echo $content; ?></strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
@@ -48,7 +48,7 @@ foreach ($lists as $key => $value) {
 
                                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                         <i class="icofont icofont-reply"></i>
-                                        Back
+                                        <?= __('Back'); ?>
                                     </a>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@ foreach ($lists as $key => $value) {
 } ?>
                                     <div class="col-lg-12 col-xl-6 mb-3">
                                         <div class="table-responsive">
-                                            <table class="table m-0"><thead><tr class="visually-hidden"><th scope="col">Data</th></tr></thead>
+                                            <table class="table m-0"><thead><tr class="visually-hidden"><th scope="col"><?= __('Data'); ?></th></tr></thead>
                                                 <tbody>
 
                                                     <?php echo $one; ?>
@@ -100,7 +100,7 @@ foreach ($lists as $key => $value) {
                                     </div>
                                     <div class="col-lg-12 col-xl-6">
                                         <div class="table-responsive">
-                                            <table class="table m-0"><thead><tr class="visually-hidden"><th scope="col">Data</th></tr></thead>
+                                            <table class="table m-0"><thead><tr class="visually-hidden"><th scope="col"><?= __('Data'); ?></th></tr></thead>
                                                 <tbody>
 
                                                     <?php echo $two; ?>
