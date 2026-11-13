@@ -1,7 +1,7 @@
 <script type="text/javascript">
 
     function getdata(){
-        alert('hai');
+        alert(<?php echo json_encode(__('hai'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         var v = $('#tree-container').jstree(true).get_json();
         var mytext = JSON.stringify(v);
         console.log(mytext);
@@ -20,7 +20,7 @@
                 <div class="kt-portlet__head">
                     <div class="kt-portlet__head-label">
                         <h3 class="kt-portlet__head-title">
-                            Ajax Data
+                            <?= __('Ajax Data'); ?>
                         </h3>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
             </div>
             <!--end::Portlet-->
         </div>
-            <div> <button onclick="getdata()">GET</button> </div>
+            <div> <button onclick="getdata()"><?= __('GET'); ?></button> </div>
 
     </div>
 </div>
