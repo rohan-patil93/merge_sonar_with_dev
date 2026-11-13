@@ -41,24 +41,24 @@ $chart_data = array("Complited"=>count((array)$payrollsteps),"InProcess"=>count(
     <div class="col-lg-5">
         <div class="card">
             <div class="card-header">
-                <h5>PayRoll</h5>
+                <h5><?= __('PayRoll'); ?></h5>
                 <?php
                     $paurolldate = date($_SESSION['config']['default_payroll_day']." M Y");
                     $payrolldates = $payroll['id']==""?$paurolldate:date('d M Y', strtotime('+1 month', strtotime($paurolldate)));
                     $remainingdays = (strtotime($payrolldates)-strtotime(date('d-m-Y'))) / (60 * 60 * 24);
                      ?>
                 <div class="card-header-right">
-                    <span class="form-label label label-lg label-warning" style="font-size: 100%;">Pay Roll Date <?php echo $payrolldates;?> </span>
+                    <span class="form-label label label-lg label-warning" style="font-size: 100%;"><?= __('Pay Roll Date'); ?> <?php echo $payrolldates;?> </span>
                 </div>
             </div>
             <div class="card-body">
                 <div class=" social-card">
                     <div class="row mt-3 mb-3">
                         <div class="col-lg-8">
-                        <h5 class="text-c-yellow f-w-700  m-l-20"><?php echo $remainingdays;?> More Day To Run Pay Roll</h5>
+                        <h5 class="text-c-yellow f-w-700  m-l-20"><?php echo $remainingdays;?> <?= __('More Day To Run Pay Roll'); ?></h5>
                         </div>
                         <div class="col-lg-4">
-                            <a href="index.php?option=COM_INSERT_PAYROLL_PAY_AREA_WISE" class="btn btn-success desktop-view float-end"><i class="icofont icofont-plus icon-white "></i>Run PayRoll</a>
+                            <a href="index.php?option=COM_INSERT_PAYROLL_PAY_AREA_WISE" class="btn btn-success desktop-view float-end"><i class="icofont icofont-plus icon-white "></i><?= __('Run PayRoll'); ?></a>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@ $chart_data = array("Complited"=>count((array)$payrollsteps),"InProcess"=>count(
                             <div class="card-body text-center">
                                 <div class="text-primary"><i class="fab fa fa-users"></i></div>
                                 <h3 class="text-facebook f-w-700 mb-0"><?php echo $payrollempcnt['total_emp']; ?></h3>
-                                <p>Employees</p>
+                                <p><?= __('Employees'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ $chart_data = array("Complited"=>count((array)$payrollsteps),"InProcess"=>count(
                             <div class="card-body text-center">
                                 <div class="text-info"><i class="fab fa fa-user-plus"></i></div>
                                 <h3 class="text-facebook f-w-700 mb-0"><?php echo $payrollempcnt['this_month_join']; ?></h3>
-                                <p>New Hires</p>
+                                <p><?= __('New Hires'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@ $chart_data = array("Complited"=>count((array)$payrollsteps),"InProcess"=>count(
                             <div class="card-body text-center">
                                 <div class="text-danger"><i class="fab fa fa-user-times"></i></div>
                                 <h3 class="text-facebook f-w-700 mb-0"><?php echo $payrollempcnt['this_month_leaving']; ?></h3>
-                                <p>Resignees</p>
+                                <p><?= __('Resignees'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@ $chart_data = array("Complited"=>count((array)$payrollsteps),"InProcess"=>count(
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5>Pay Run Process</h5>
+                <h5><?= __('Pay Run Process'); ?></h5>
             </div>
             <div class="card-body">
                 <input type="hidden" id="payrunprocess" value='<?php echo json_encode($chart_data); ?>'>
@@ -108,14 +108,14 @@ $chart_data = array("Complited"=>count((array)$payrollsteps),"InProcess"=>count(
     <div class="col-lg-3">
         <div class="card">
             <div class="card-header">
-                <h5>To Do Task</h5>
+                <h5><?= __('To Do Task'); ?></h5>
             </div>
             <div class="card-body  custom-scroll" style=" height: 265px;">
                 <?php foreach($todotaskarray as $todotaskarrays){ ?>
                     <div class="row m-b-30 align-items-center">
 
                         <div class="col">
-                            <a href="#!"><h6 class="m-b-5 f-14"><span class="form-label label label-md <?php echo (isset($payrollsteps[$todotaskarrays['id']]))?"bg-success":"bg-warning"; ?>" ><?php echo $todotaskarrays['cnt'] !=""?$todotaskarrays['cnt']:'<i class="ti-wallet"></i>'; ?></span> <?php echo $todotaskarrays['name']; ?> <span class="text-primary float-end f-14">View</span></h6></a>
+                            <a href="#!"><h6 class="m-b-5 f-14"><span class="form-label label label-md <?php echo (isset($payrollsteps[$todotaskarrays['id']]))?"bg-success":"bg-warning"; ?>" ><?php echo $todotaskarrays['cnt'] !=""?$todotaskarrays['cnt']:'<i class="ti-wallet"></i>'; ?></span> <?php echo $todotaskarrays['name']; ?> <span class="text-primary float-end f-14"><?= __('View'); ?></span></h6></a>
                         </div>
                     </div>
                 <?php } ?>
@@ -127,7 +127,7 @@ $chart_data = array("Complited"=>count((array)$payrollsteps),"InProcess"=>count(
     <div class="col-lg-9">
         <div class="card">
             <div class="card-header">
-                <h5>Payroll Cost Summary</h5>
+                <h5><?= __('Payroll Cost Summary'); ?></h5>
             </div>
             <div class="card-body">
                 <div class="card-block">
@@ -140,7 +140,7 @@ $chart_data = array("Complited"=>count((array)$payrollsteps),"InProcess"=>count(
     <div class="col-lg-3">
         <div class="card">
             <div class="card-header">
-                <h5>PayRoll Reports</h5>
+                <h5><?= __('PayRoll Reports'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style=" height: 350px;">
             <?php $incr = 1; foreach($statutory as $statutoryreport){ ?>
