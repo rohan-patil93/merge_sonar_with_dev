@@ -42,13 +42,13 @@ $gen['4'][] = array('acont_name'=>'Fixed Llabillty 1','debit'=>'0.00','credit'=>
                     <span class="kt-portlet__head-icon">
                         <i class="kt-font-brand flaticon2-line-chart"></i>
                     </span>
-                    <h3 class="card-label">&nbsp;<?php echo "Trial Blance ";  ?> </h3>
+                    <h3 class="card-label">&nbsp;<?php echo __("Trial Blance ");  ?> </h3>
                     <form class="kt-form" id="kt_form" method="post" action="" >
                     <div style="float: left;" class="mr-3">
-                            <input aria-label="From Date" class="form-control" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year" />
+                            <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year" />
                     </div>
                     <div style="float: left;">
-                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
+                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply"><?= __('Apply'); ?></button>
                 </div>
                 </form>
                 </div>
@@ -56,7 +56,7 @@ $gen['4'][] = array('acont_name'=>'Fixed Llabillty 1','debit'=>'0.00','credit'=>
                     <div class="card-toolbar">
                             <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                                 <i class="ki ki-long-arrow-back icon-xs"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                     </div>
                 </div>
@@ -69,10 +69,10 @@ $gen['4'][] = array('acont_name'=>'Fixed Llabillty 1','debit'=>'0.00','credit'=>
         <table class="table table-separate table-head-custom table-checkable data-table" id="kt_datatable1">
             <tr>
                 <th scope="col" style="width: 3%;"></th>
-                <th scope="col" style="width: 5%;">SL.NO.</th>
-        <th scope="col" style="width: 60%;"> Account</th>
-        <th scope="col" class="text-right" style="width: 16%;"> Debit Amount</th>
-        <th scope="col" class="text-right" style="width: 16%;">Credit Amount</th>
+                <th scope="col" style="width: 5%;"><?= __('SL.NO.'); ?></th>
+        <th scope="col" style="width: 60%;"> <?= __('Account'); ?></th>
+        <th scope="col" class="text-right" style="width: 16%;"> <?= __('Debit Amount'); ?></th>
+        <th scope="col" class="text-right" style="width: 16%;"><?= __('Credit Amount'); ?></th>
             </tr>
             <?php $k=1; foreach($acconts as  $key=>$vender){ ?>
             <tr class="main">
@@ -94,10 +94,10 @@ $gen['4'][] = array('acont_name'=>'Fixed Llabillty 1','debit'=>'0.00','credit'=>
                     <table class="mb-3" style="width: 100%">
                         <tr>
                             <th scope="col" style="width: 3%;"></th>
-                            <th scope="col" style="width: 5%;">SL.NO.</th>
-                    <th scope="col" style="width: 60%;"> Account</th>
-                    <th scope="col" class="text-right" style="width: 16%;"> Debit Amount</th>
-                    <th scope="col" class="text-right" style="width: 16%;">Credit Amount</th>
+                            <th scope="col" style="width: 5%;"><?= __('SL.NO.'); ?></th>
+                    <th scope="col" style="width: 60%;"> <?= __('Account'); ?></th>
+                    <th scope="col" class="text-right" style="width: 16%;"> <?= __('Debit Amount'); ?></th>
+                    <th scope="col" class="text-right" style="width: 16%;"><?= __('Credit Amount'); ?></th>
                         </tr>
                         <?php $l=1; foreach($gen[$key] as $data){ ?>
                         <tr>
@@ -117,7 +117,7 @@ $gen['4'][] = array('acont_name'=>'Fixed Llabillty 1','debit'=>'0.00','credit'=>
 } ?>
                         <th scope="col" style="width: 3%;"></th>
                         <th scope="col" style="width: 5%;"></th>
-                <th scope="col" class="text-right" style="width: 60%;">Total</th>
+                <th scope="col" class="text-right" style="width: 60%;"><?= __('Total'); ?></th>
                 <th scope="col" class="text-right" style="width: 16%;"> <?php echo customeummarmonyformate('303000'); ?></th>
                 <th scope="col" class="text-right" style="width: 16%;"><?php echo customeummarmonyformate('303000'); ?></th>
         </table>
