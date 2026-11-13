@@ -60,8 +60,8 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
 ?>
 <?php if($_POST['popup'] == "Y"){ ?>
 <div class="modal-header">
-    <h4 class="modal-title">Employee Timesheet Summary</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Employee Timesheet Summary'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <?php } ?>
 <div class="d-flex flex-column-fluid">
@@ -71,11 +71,11 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
                 <div class="card card-custom" id="kt_page_sticky_card">
                     <?php if($_POST['popup'] != "Y"){ ?>
                     <div class="card-header table-card-header mb-2">
-                        <h5><?php echo "Employee Timesheet Summary";  ?></h5>
+                        <h5><?php echo __("Employee Timesheet Summary");  ?></h5>
                         <div class="card-header-right table-card-header ">
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                         </div>
                     </div>
@@ -104,11 +104,11 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
                                         <?php if($_POST['popup'] != "Y"){ ?>
                                         <form method="post" action="#" >
                                             <input type="hidden" name="emp_id" value="<?php echo $empp_id; ?>">
-                                            <label for="example-date-input-from_2" class="col-3 col-form-label">Month</label>
+                                            <label for="example-date-input-from_2" class="col-3 col-form-label"><?= __('Month'); ?></label>
                                             <div class="input-group input-group-button">
-                                                <input aria-label="Fromdate" type="month" name="fromdate" value="<?php echo $currentyear."-".$currentmonth;?>" id="example-date-input-from_2"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">
+                                                <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="fromdate" value="<?php echo $currentyear."-".$currentmonth;?>" id="example-date-input-from_2"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">
                                                 <button type="submit"  name="datefilter" value="exit" class="btn btn-info waves-effect waves-light input-group-text mt-0 p-2">
-                                                    Get Details
+                                                    <?= __('Get Details'); ?>
                                                 </button>
                                             </div>
                                         </form>
@@ -125,15 +125,15 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Timesheet From Date </th>
-                                        <th scope="col">Timesheet To Date </th>
+                                        <th scope="col"><?= __('Timesheet From Date'); ?> </th>
+                                        <th scope="col"><?= __('Timesheet To Date'); ?> </th>
 
-                                        <th scope="col">Billable Hrs </th>
+                                        <th scope="col"><?= __('Billable Hrs'); ?> </th>
                                         <?php if($_SESSION['employee']['billable'] == '1'  && TIMESHEET_BILLABLE_CHECk == 'Y'){ ?>
-                                            <th scope="col">Non Billable Hrs </th>
+                                            <th scope="col"><?= __('Non Billable Hrs'); ?> </th>
                                         <?php } ?>
-                                        <th scope="col">Status </th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('Status'); ?> </th>
+                                        <th scope="col"><?= __('Action'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -156,12 +156,12 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
                                         <td> <?php echo fromDate($weektodate); ?>
                                         </td>
                                         <td>
-                                            <span class="label label-xl font-weight-bolder label-rounded label-success w-50px"  data-toggle="tooltip" title="Total Billable Hours" style="vertical-align: middle;"> <?php echo $loc['billhrs']; ?>
+                                            <span class="label label-xl font-weight-bolder label-rounded label-success w-50px"  data-toggle="tooltip" title="<?= htmlspecialchars(__('Total Billable Hours'), ENT_QUOTES, 'UTF-8'); ?>" style="vertical-align: middle;"> <?php echo $loc['billhrs']; ?>
                                             </span>
                                         </td>
                                         <?php if($_SESSION['employee']['billable'] == '1'  && TIMESHEET_BILLABLE_CHECk == 'Y'){ ?>
                                         <td>
-                                            <span class="label label-xl font-weight-bolder label-rounded label-success w-50px"  data-toggle="tooltip" title="Total Non-Billable Hours" style="vertical-align: middle;"><?php echo $loc['nonbillhrs']; ?>
+                                            <span class="label label-xl font-weight-bolder label-rounded label-success w-50px"  data-toggle="tooltip" title="<?= htmlspecialchars(__('Total Non-Billable Hours'), ENT_QUOTES, 'UTF-8'); ?>" style="vertical-align: middle;"><?php echo $loc['nonbillhrs']; ?>
                                             </span>
                                         </td>
                                         <?php } ?>
@@ -173,7 +173,7 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
                                         </td>
                                         <td>
                                             <a href="index.php?option=COM_INSERT_PROJECT_TIMESHEETS&CHANGE_DATE=<?php echo $weekfromdate; ?>&EMP=<?php echo $empp_id; ?>" target="_blank">
-                                                <span class="btn btn-primary btn-sm" data-toggle="tooltip" title="View Details" style="vertical-align: middle;">View</span>
+                                                <span class="btn btn-primary btn-sm" data-toggle="tooltip" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>" style="vertical-align: middle;"><?= __('View'); ?></span>
                                             </a>
                                         </td>
 
