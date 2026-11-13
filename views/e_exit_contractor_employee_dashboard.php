@@ -46,7 +46,7 @@ table td, table th {
                 <div class="card-body">
                     <div class="row align-items-center m-b-20">
                         <div class="col">
-                            <h6 class="m-b-5 text-white">Active</h6>
+                            <h6 class="m-b-5 text-white"><?= __('Active'); ?></h6>
                             <h3 class="m-b-0 f-w-700 text-white pt-2"><?php echo count((array)$active_emp_res); ?> </h3>
                         </div>
                         <div class="col-auto">
@@ -63,7 +63,7 @@ table td, table th {
                 <div class="card-body">
                     <div class="row align-items-center m-b-20">
                         <div class="col">
-                            <h6 class="m-b-5 text-white">Pending</h6>
+                            <h6 class="m-b-5 text-white"><?= __('Pending'); ?></h6>
                             <h3 class="m-b-0 f-w-700 text-white pt-2"><?php echo count((array)$emp_resign_approval_peding_re); ?> </h3>
                         </div>
                         <div class="col-auto">
@@ -79,7 +79,7 @@ table td, table th {
                 <div class="card-body">
                     <div class="row align-items-center m-b-20">
                         <div class="col">
-                            <h6 class="m-b-5 text-white">Exited</h6>
+                            <h6 class="m-b-5 text-white"><?= __('Exited'); ?></h6>
                             <h3 class="m-b-0 f-w-700 text-white pt-2"><?php echo count((array)$resigned_emp_res); ?> </h3>
                         </div>
                         <div class="col-auto">
@@ -101,7 +101,7 @@ table td, table th {
         <div class="col-xl-6 col-md-12">
           <div class="card latest-update-card">
             <div class="card-header">
-              <h5>Approval Pending
+              <h5><?= __('Approval Pending'); ?>
                 <span class="form-label label label-info">
                   <?php echo count((array)$approval_pending_res); ?>
                 </span>
@@ -109,7 +109,7 @@ table td, table th {
               <div class="card-header-right">
                 <div class="form-group">
                   <div class="input-group">
-                    <input aria-label="Search..." type="text" id="approval_pending_search" class="form-control" placeholder="Search...">
+                    <input aria-label="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="approval_pending_search" class="form-control" placeholder="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span class="input-group-text addon-style mt-0" id="basic-addon3">
                       <span class="fa fa-search"></span>
                     </span>
@@ -123,9 +123,9 @@ table td, table th {
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Resign Date</th>
-                      <th scope="col">Action</th>
+                      <th scope="col"><?= __('Name'); ?></th>
+                      <th scope="col"><?= __('Resign Date'); ?></th>
+                      <th scope="col"><?= __('Action'); ?></th>
                     </tr>
                   </thead>
                   <tbody id="approval_pending_table_body">
@@ -138,16 +138,16 @@ table td, table th {
                       <td>
                               <button onclick='approvalOrReject("<?php echo $row['tranaction_approval_id']; ?>", "<?php echo $row['doa_id']; ?>", 199, "APPROVAL")'
                                 class="btn btn-success btn-sm rounded-3 " >
-                                 Approve
+                                 <?= __('Approve'); ?>
                               </button>
                               <button  onclick='approvalOrReject("<?php echo $row['tranaction_approval_id']; ?>", "<?php echo $row['doa_id']; ?>", 201, "APPROVAL")' class="btn btn-danger btn-sm rounded-3 " >
-                               Reject
+                               <?= __('Reject'); ?>
                               </button>
                             </td>
                     </tr>
                     <?php } ?>
                     <?php } else { ?>
-                    <tr><td colspan="4" class="text-center text-muted">No Records Found</td></tr>
+                    <tr><td colspan="4" class="text-center text-muted"><?= __('No Records Found'); ?></td></tr>
                     <?php } ?>
                   </tbody>
                 </table>
@@ -162,7 +162,7 @@ table td, table th {
         <div class="col-xl-6 col-md-12">
           <div class="card latest-update-card">
             <div class="card-header">
-              <h5>Approval Completed
+              <h5><?= __('Approval Completed'); ?>
                 <span class="form-label label label-info">
                   <?php echo count((array)$approval_completed_res); ?>
                 </span>
@@ -170,7 +170,7 @@ table td, table th {
               <div class="card-header-right">
                 <div class="form-group">
                   <div class="input-group">
-                    <input aria-label="Search..." type="text" id="approval_completed_search" class="form-control" placeholder="Search...">
+                    <input aria-label="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="approval_completed_search" class="form-control" placeholder="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span class="input-group-text addon-style mt-0" id="basic-addon3_2">
                       <span class="fa fa-search"></span>
                     </span>
@@ -184,9 +184,9 @@ table td, table th {
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Resign Date</th>
-                      <th scope="col">Action</th>
+                      <th scope="col"><?= __('Name'); ?></th>
+                      <th scope="col"><?= __('Resign Date'); ?></th>
+                      <th scope="col"><?= __('Action'); ?></th>
                     </tr>
                   </thead>
                   <tbody id="approval_completed_table_body">
@@ -205,7 +205,7 @@ table td, table th {
                                         href="index.php?option=IDC_NDC_EXIT_FORM&Rid=<?php echo $encoded; ?>"
                                         target="_blank"
                                         class="btn btn-light btn-sm"
-                                        title="View No Due Clearance Form"
+                                        title="<?= htmlspecialchars(__('View No Due Clearance Form'), ENT_QUOTES, 'UTF-8'); ?>"
                                       >
                                         <i class="fa fa-file-pdf text-danger"></i>
                                       </a>
@@ -213,7 +213,7 @@ table td, table th {
                       </tr>
                     <?php } ?>
                     <?php } else { ?>
-                    <tr><td colspan="4" class="text-center text-muted">No Records Found</td></tr>
+                    <tr><td colspan="4" class="text-center text-muted"><?= __('No Records Found'); ?></td></tr>
                     <?php } ?>
                   </tbody>
                 </table>
@@ -228,11 +228,11 @@ table td, table th {
         <div class="col-xl-6 col-md-12">
             <div class="card latest-update-card">
                 <div class="card-header">
-                    <h5>Active Employees <span class="form-label label label-info"><?php echo count((array)$active_emp_res); ?></span></h5>
+                    <h5><?= __('Active Employees'); ?> <span class="form-label label label-info"><?php echo count((array)$active_emp_res); ?></span></h5>
                     <div class="card-header-right">
                         <div class="form-group">
                             <div class="input-group">
-                                <input aria-label="Search..." type="text" id="active_search" class="form-control" placeholder="Search...">
+                                <input aria-label="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="active_search" class="form-control" placeholder="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="input-group-text addon-style mt-0" id="basic-addon3_3">
                                     <span class="fa fa-search"></span>
                                 </span>
@@ -246,9 +246,9 @@ table td, table th {
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Name'); ?></th>
+                                    <th scope="col"><?= __('Email'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody id="active_table_body">
@@ -262,7 +262,7 @@ table td, table th {
                                     </td>
                                     <td data-toggle="tooltip" data-placement="top"  data-bs-original-title="<?php echo $row['email_id']; ?>" ><?php echo $row['email_id'] ?? '-'; ?></td>
                                     <td>
-                                        <button class="btn btn-danger btn-sm rounded-3 exit-btn" data-id="<?php echo $row['id']; ?>">E-exit</button>
+                                        <button class="btn btn-danger btn-sm rounded-3 exit-btn" data-id="<?php echo $row['id']; ?>"><?= __('E-exit'); ?></button>
 
                                     </td>
                                 </tr>
@@ -273,7 +273,7 @@ table td, table th {
                                     <td colspan="5">
                                         <div class="text-center">
                                             <p class="text-muted f-16 fw-bold m-b-30">
-                                                <i class="fa fa-warning"></i> No Records
+                                                <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                             </p>
                                             <div class="text-center px-4">
                                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -292,11 +292,11 @@ table td, table th {
         <div class="col-xl-6 col-md-12">
             <div class="card new-cust-card">
                 <div class="card-header">
-                    <h5>Pending <span class="form-label label label-info"><?php echo count((array)$emp_resign_approval_peding_re); ?></span></h5>
+                    <h5><?= __('Pending'); ?> <span class="form-label label label-info"><?php echo count((array)$emp_resign_approval_peding_re); ?></span></h5>
                     <div class="card-header-right">
                         <div class="form-group">
                             <div class="input-group">
-                                <input aria-label="Search..." type="text" id="pending_search" class="form-control" placeholder="Search...">
+                                <input aria-label="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="pending_search" class="form-control" placeholder="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="input-group-text addon-style mt-0" id="basic-addon3_4">
                                     <span class="fa fa-search"></span>
                                 </span>
@@ -310,10 +310,10 @@ table td, table th {
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Name'); ?></th>
+                                    <th scope="col"><?= __('Email'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody id="pending_table_body">
@@ -362,7 +362,7 @@ table td, table th {
                                 href="index.php?option=IDC_NDC_EXIT_FORM&Rid=<?php echo $encoded; ?>"
                                 target="_blank"
                                 class="btn btn-light btn-sm"
-                                title="View No Due Clearance Form"
+                                title="<?= htmlspecialchars(__('View No Due Clearance Form'), ENT_QUOTES, 'UTF-8'); ?>"
                               >
                                 <i class="fa fa-file-pdf text-danger"></i>
                               </a>
@@ -376,7 +376,7 @@ table td, table th {
                                     <td colspan="5">
                                         <div class="text-center">
                                             <p class="text-muted f-16 fw-bold m-b-30">
-                                                <i class="fa fa-warning"></i> No Records
+                                                <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                             </p>
                                             <div class="text-center px-4">
                                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -395,11 +395,11 @@ table td, table th {
         <div class="col-xl-6 col-md-12">
             <div class="card new-cust-card">
                 <div class="card-header">
-                    <h5>Exited <span class="form-label label label-info"><?php echo count((array)$resigned_emp_res); ?></span></h5>
+                    <h5><?= __('Exited'); ?> <span class="form-label label label-info"><?php echo count((array)$resigned_emp_res); ?></span></h5>
                     <div class="card-header-right">
                         <div class="form-group">
                             <div class="input-group">
-                                <input aria-label="Search..." type="text" id="terminated_search" class="form-control" placeholder="Search...">
+                                <input aria-label="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="terminated_search" class="form-control" placeholder="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="input-group-text addon-style mt-0" id="basic-addon3_5">
                                     <span class="fa fa-search"></span>
                                 </span>
@@ -413,10 +413,10 @@ table td, table th {
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Name'); ?></th>
+                                    <th scope="col"><?= __('Email'); ?></th>
+                                    <th scope="col"><?= __('Date'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody id="terminated_table_body">
@@ -440,7 +440,7 @@ table td, table th {
                                 href="index.php?option=IDC_NDC_EXIT_FORM&Rid=<?php echo $encoded; ?>"
                                 target="_blank"
                                 class="btn btn-light btn-sm"
-                                title="View No Due Clearance Form"
+                                title="<?= htmlspecialchars(__('View No Due Clearance Form'), ENT_QUOTES, 'UTF-8'); ?>"
                               >
                                 <i class="fa fa-file-pdf text-danger"></i>
                               </a>
@@ -453,7 +453,7 @@ table td, table th {
                                     <td colspan="5">
                                         <div class="text-center">
                                             <p class="text-muted f-16 fw-bold m-b-30">
-                                                <i class="fa fa-warning"></i> No Records
+                                                <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                             </p>
                                             <div class="text-center px-4">
                                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -478,42 +478,42 @@ table td, table th {
     <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="exitModalLabel">Employee E-Exit</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="exitModalLabel"><?= __('Employee E-Exit'); ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
       </div>
       <div class="modal-body">
         <form id="exitForm">
           <input type="hidden" id="emp_id" name="emp_id">
 
           <div class="mb-3 w-full">
-            <label for="termination_type" class="form-label">Clearance Process Type</label>
+            <label for="termination_type" class="form-label"><?= __('Clearance Process Type'); ?></label>
                     <select class="form-select js-example-basic-single" id="termination_type" name="termination_type" required>
-                        <option value="">Select Clearance Process</option>
+                        <option value=""><?= __('Select Clearance Process'); ?></option>
                         <?php foreach ($clearance_process_res as $loc){ ?>
-                        <option value="<?= $loc['genc_detail_code'] ?>" ><?= htmlspecialchars($loc['genc_detail_name']) ?></option>
+                        <option value="<?= $loc['genc_detail_code'] ?>" ><?= htmlspecialchars(__($loc['genc_detail_name'])) ?></option>
                         <?php } ?>
                     </select>
           </div>
 
           <div class="mb-3">
-            <label for="resign_date" class="form-label">Resigning Date</label>
+            <label for="resign_date" class="form-label"><?= __('Resigning Date'); ?></label>
             <input type="date" class="form-control" id="resign_date" name="resign_date" required>
           </div>
 
           <div class="mb-3">
-            <label for="last_working_date" class="form-label">Last Working Date</label>
+            <label for="last_working_date" class="form-label"><?= __('Last Working Date'); ?></label>
             <input type="date" class="form-control" id="last_working_date" name="last_working_date" required>
           </div>
 
           <div class="mb-3">
-            <label for="remarks" class="form-label">Reason / Remarks</label>
-            <textarea class="form-control" id="remarks" name="remarks" rows="3" placeholder="Enter reason..." required></textarea>
+            <label for="remarks" class="form-label"><?= __('Reason / Remarks'); ?></label>
+            <textarea class="form-control" id="remarks" name="remarks" rows="3" placeholder="<?= htmlspecialchars(__('Enter reason...'), ENT_QUOTES, 'UTF-8'); ?>" required></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" id="saveExit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
+        <button type="button" id="saveExit" class="btn btn-primary"><?= __('Save'); ?></button>
       </div>
     </div>
     </div>
@@ -539,7 +539,7 @@ table td, table th {
 
         },
         error: function(xhr) {
-            alert('Failed to load data');
+            alert(<?php echo json_encode(__('Failed to load data'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         }
     });
     }
@@ -560,17 +560,17 @@ $(document).ready(function() {
     const termination_type = $('#termination_type').val();
 
     if (!termination_type || !resign_date || !last_working_date || !remarks) {
-      Swal.fire('Missing fields', 'Please fill all fields before saving.', 'warning');
+      Swal.fire(<?php echo json_encode(__('Missing fields'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('Please fill all fields before saving.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, 'warning');
       return;
     }
 
     Swal.fire({
-      title: 'Confirm E-Exit?',
-      text: "Are you sure you want to proceed with employee exit?",
+      title: <?php echo json_encode(__('Confirm E-Exit?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+      text: <?php echo json_encode(__('Are you sure you want to proceed with employee exit?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Yes, Confirm',
-      cancelButtonText: 'Cancel',
+      confirmButtonText: <?php echo json_encode(__('Yes, Confirm'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+      cancelButtonText: <?php echo json_encode(__('Cancel'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
       confirmButtonColor: '#d33'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -593,22 +593,22 @@ $(document).ready(function() {
               if (res.status == 'sucess') {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Success',
-                    text: 'Employee exit saved successfully!',
+                    title: <?php echo json_encode(__('Success'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                    text: <?php echo json_encode(__('Employee exit saved successfully!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     allowOutsideClick: false,   //  prevent closing by outside click
                     confirmButtonColor: '#3085d6'
                 }).then(() => {
                   location.reload();
                 });
               } else {
-                Swal.fire('Error', res.message || 'Something went wrong.', 'error');
+                Swal.fire(<?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, res.message || 'Something went wrong.', 'error');
               }
             } catch (e) {
-              Swal.fire('Error', 'Invalid response from server.', 'error');
+              Swal.fire(<?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('Invalid response from server.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, 'error');
             }
           },
           error: function() {
-            Swal.fire('Error', 'Unable to connect to server.', 'error');
+            Swal.fire(<?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('Unable to connect to server.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, 'error');
           }
         });
       }
@@ -633,7 +633,7 @@ $(document).ready(function(){
         'search': search
         },
         beforeSend: function() {
-          $('#active_table_body').html('<tr><td colspan="4" class="text-center text-muted">Searching...</td></tr>');
+          $('#active_table_body').html('<tr><td colspan="4" class="text-center text-muted"><?= htmlspecialchars(__('Searching...'), ENT_QUOTES, 'UTF-8'); ?></td></tr>');
         },
         success: function(response) {
           try {
@@ -660,11 +660,11 @@ $(document).ready(function(){
             } else {
                 Swal.fire({
                     icon: 'warning',
-                    title: 'No Records Found',
+                    title: <?php echo json_encode(__('No Records Found'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     text: `No employee found with code "${search}". Do you want to add a new employee?`,
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, Add Employee',
-                    cancelButtonText: 'Cancel'
+                    confirmButtonText: <?php echo json_encode(__('Yes, Add Employee'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                    cancelButtonText: <?php echo json_encode(__('Cancel'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // DYNAMIC REDIRECT WITH SEARCH CODE
@@ -674,17 +674,17 @@ $(document).ready(function(){
                 });
 
                 $('#active_table_body').html(`
-                  <tr><td colspan="4" class="text-center text-muted">No Records</td></tr>
+                  <tr><td colspan="4" class="text-center text-muted"><?= htmlspecialchars(__('No Records'), ENT_QUOTES, 'UTF-8'); ?></td></tr>
                 `);
             }
 
 
           } catch (err) {
-            $('#active_table_body').html('<tr><td colspan="4" class="text-center text-danger">Invalid server response</td></tr>');
+            $('#active_table_body').html('<tr><td colspan="4" class="text-center text-danger"><?= htmlspecialchars(__('Invalid server response'), ENT_QUOTES, 'UTF-8'); ?></td></tr>');
           }
         },
         error: function() {
-          $('#active_table_body').html('<tr><td colspan="4" class="text-center text-danger">Server Error</td></tr>');
+          $('#active_table_body').html('<tr><td colspan="4" class="text-center text-danger"><?= htmlspecialchars(__('Server Error'), ENT_QUOTES, 'UTF-8'); ?></td></tr>');
         }
       });
     }
@@ -704,7 +704,7 @@ $(document).ready(function(){
           'search': search
         },
         beforeSend: function() {
-          $('#pending_table_body').html('<tr><td colspan="4" class="text-center text-muted">Searching...</td></tr>');
+          $('#pending_table_body').html('<tr><td colspan="4" class="text-center text-muted"><?= htmlspecialchars(__('Searching...'), ENT_QUOTES, 'UTF-8'); ?></td></tr>');
         },
         success: function(response) {
           try {
@@ -740,11 +740,11 @@ $(document).ready(function(){
             $('#pending_table_body').html(html);
 
           } catch (err) {
-            $('#pending_table_body').html('<tr><td colspan="4" class="text-center text-danger">Invalid server response</td></tr>');
+            $('#pending_table_body').html('<tr><td colspan="4" class="text-center text-danger"><?= htmlspecialchars(__('Invalid server response'), ENT_QUOTES, 'UTF-8'); ?></td></tr>');
           }
         },
         error: function() {
-          $('#pending_table_body').html('<tr><td colspan="4" class="text-center text-danger">Server Error</td></tr>');
+          $('#pending_table_body').html('<tr><td colspan="4" class="text-center text-danger"><?= htmlspecialchars(__('Server Error'), ENT_QUOTES, 'UTF-8'); ?></td></tr>');
         }
       });
     }
@@ -764,7 +764,7 @@ $(document).ready(function(){
           'search': search
         },
         beforeSend: function() {
-          $('#terminated_table_body').html('<tr><td colspan="4" class="text-center text-muted">Searching...</td></tr>');
+          $('#terminated_table_body').html('<tr><td colspan="4" class="text-center text-muted"><?= htmlspecialchars(__('Searching...'), ENT_QUOTES, 'UTF-8'); ?></td></tr>');
         },
         success: function(response) {
           try {
@@ -792,11 +792,11 @@ $(document).ready(function(){
             $('#terminated_table_body').html(html);
 
           } catch (err) {
-            $('#terminated_table_body').html('<tr><td colspan="4" class="text-center text-danger">Invalid server response</td></tr>');
+            $('#terminated_table_body').html('<tr><td colspan="4" class="text-center text-danger"><?= htmlspecialchars(__('Invalid server response'), ENT_QUOTES, 'UTF-8'); ?></td></tr>');
           }
         },
         error: function() {
-          $('#terminated_table_body').html('<tr><td colspan="4" class="text-center text-danger">Server Error</td></tr>');
+          $('#terminated_table_body').html('<tr><td colspan="4" class="text-center text-danger"><?= htmlspecialchars(__('Server Error'), ENT_QUOTES, 'UTF-8'); ?></td></tr>');
         }
       });
     }
@@ -810,7 +810,7 @@ $(document).ready(function(){
         <td colspan="5">
           <div class="text-center">
             <p class="text-muted f-16 fw-bold m-b-30">
-              <i class="fa fa-warning"></i> No Records Found
+              <i class="fa fa-warning"></i> <?= htmlspecialchars(__('No Records Found'), ENT_QUOTES, 'UTF-8'); ?>
             </p>
             <div class="text-center px-4">
               <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
