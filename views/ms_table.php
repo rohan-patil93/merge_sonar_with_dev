@@ -57,7 +57,7 @@
             console.log("HHHHHHHHH");
             count++;
             var htmlRows = '';
-            htmlRows += '<tr> <td class=" m-t-5" style="width: 1%;">  <div class="checkbox-fade fade-in-primary" style="display: inherit;margin: 0px;"><label class="kt-checkbox"><input aria-label="Checkbox" class="itemRow" type="checkbox"> <span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div> </td>';
+            htmlRows += '<tr> <td class=" m-t-5" style="width: 1%;">  <div class="checkbox-fade fade-in-primary" style="display: inherit;margin: 0px;"><label class="kt-checkbox"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="itemRow" type="checkbox"> <span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div> </td>';
             htmlRows += '<td  class="p-1">  <input aria-label="Product Code[]" type="text"   name="productCode[]" id="productCode_'+count+'" class="form-control mt-2" autocomplete="off" value=""></td>';
            htmlRows += '<td id="other_'+count+'" class="p-1"> <textarea aria-label="Product Name[]"  name="productName[]" id="productName_'+count+'" class="form-control mt-2"></textarea></td>';
             htmlRows += '<td ><input type="text" class="form-control datepicker minw-140 effective_date "  value=""  name="effective_date[]"  id="kt_datepicker_3_'+count+'" data-bs-toggle="tooltip" data-placement="bottom" title="Planned Date" ></td>';
@@ -80,13 +80,13 @@
 function deleteitem(cardid){
 
 Swal.fire({
-  title: 'Are you sure?',
-  text: "You won't to Delete this!",
+  title: <?php echo json_encode(__('Are you sure?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+  text: <?php echo json_encode(__('You won\'t to Delete this!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
   icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, delete it!'
+  confirmButtonText: <?php echo json_encode(__('Yes, delete it!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
 }).then((result) => {
   if (result.isConfirmed) {
     $(".cardid"+cardid).remove();
@@ -104,19 +104,19 @@ Swal.fire({
                 <th scope="col" class="thheader p-1" style="width: 1%;">
                     <div class="checkbox-fade fade-in-primary" style="display: inherit;margin: 0px;">
                         <label class="kt-checkbox">
-                            <input aria-label="Check All" id="checkAll"  type="checkbox">
+                            <input aria-label="<?= htmlspecialchars(__('Check All'), ENT_QUOTES, 'UTF-8'); ?>" id="checkAll"  type="checkbox">
                             <span class="cr">
                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                             </span>
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="p-1" style="width: 20%;">Phase</th>
-                <th scope="col" class="p-1" style="width: 30%;">Description </th>
-                <th scope="col" class="thheader p-1" style="width: 9%;">Planned Date</th>
-                <th scope="col" class="thheader p-1" style="width: 9%;">Expire Date</th>
-                <th scope="col" class="thheader p-1 text-right" style="width: 20%;">Amount</th>
-                <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Resource <span class="requried">*</span></th>
+                <th scope="col" class="p-1" style="width: 20%;"><?= __('Phase'); ?></th>
+                <th scope="col" class="p-1" style="width: 30%;"><?= __('Description'); ?> </th>
+                <th scope="col" class="thheader p-1" style="width: 9%;"><?= __('Planned Date'); ?></th>
+                <th scope="col" class="thheader p-1" style="width: 9%;"><?= __('Expire Date'); ?></th>
+                <th scope="col" class="thheader p-1 text-right" style="width: 20%;"><?= __('Amount'); ?></th>
+                <th scope="col" class="thheader p-1 text-right" style="width: 15%;"><?= __('Resource'); ?> <span class="requried">*</span></th>
 
             </tr>
              <?php if(count((array)$table2)>0){ $i=1;
@@ -127,7 +127,7 @@ Swal.fire({
                     <td class="  m-t-5" style="width: 1%;">
                         <div class="checkbox-fade fade-in-primary" style="display: inherit;margin: 0px;">
                             <label class="kt-checkbox">
-                                <input aria-label="Checkbox" class="itemRow" type="checkbox">
+                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="itemRow" type="checkbox">
                                 <span class="cr">
                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                 </span>
@@ -135,25 +135,25 @@ Swal.fire({
                         </div>
                     </td>
                    <td id='' class="p-1">
-                        <input aria-label="Product Code[]" type="text"   name="productCode[]" id="productCode_<?php echo $i; ?>" class="form-control mt-2" autocomplete="off" value="<?php echo $tab2['account_code']; ?>">
+                        <input aria-label="<?= htmlspecialchars(__('Product Code'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text"   name="productCode[]" id="productCode_<?php echo $i; ?>" class="form-control mt-2" autocomplete="off" value="<?php echo $tab2['account_code']; ?>">
                     </td>
                     <td id='other_<?php echo $i; ?>' class="p-1">
-                        <textarea aria-label="Product Name[]"  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control mt-2" autocomplete="off"><?php echo $tab2['description']; ?></textarea>
+                        <textarea aria-label="<?= htmlspecialchars(__('Product Name'), ENT_QUOTES, 'UTF-8'); ?>[]"  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control mt-2" autocomplete="off"><?php echo $tab2['description']; ?></textarea>
                     </td>
 
                     <td >
-                        <input aria-label="Input field" type="text" class="form-control datepicker minw-140 effective_date<?php echo $i; ?>"  value="<?php echo fromDate($tab2['effective_date']); ?>"  name="effective_date[]"  id="kt_datepicker_3_<?php echo $i; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="Planned Date" >
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker minw-140 effective_date<?php echo $i; ?>"  value="<?php echo fromDate($tab2['effective_date']); ?>"  name="effective_date[]"  id="kt_datepicker_3_<?php echo $i; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Planned Date'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
                     <td >
-                        <input aria-label="Input field" type="text" class="form-control datepicker minw-140 expire_date<?php echo $i; ?>"  value="<?php echo fromDate($tab2['expire_date']); ?>"  name="expire_date[]"  id="kt_datepicker_4_<?php echo $i; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="Planned Date" >
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker minw-140 expire_date<?php echo $i; ?>"  value="<?php echo fromDate($tab2['expire_date']); ?>"  name="expire_date[]"  id="kt_datepicker_4_<?php echo $i; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Planned Date'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
 
                     <td >
-                      <input aria-label="Price[]" type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off">
+                      <input aria-label="<?= htmlspecialchars(__('Price'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off">
                     </td>
                     <td class="text-center">
                         <?php if($rid!=""){ ?>
-                        <button type="button" class="btn-primary btn" onclick="assignemployeems(<?php echo $rid; ?>, <?php echo $tab2['id'];  ?>)"><i class="ti-plus"></i>Resource</button>
+                        <button type="button" class="btn-primary btn" onclick="assignemployeems(<?php echo $rid; ?>, <?php echo $tab2['id'];  ?>)"><i class="ti-plus"></i><?= __('Resource'); ?></button>
                         <?php } ?>
                     </td>
                 </tr>
