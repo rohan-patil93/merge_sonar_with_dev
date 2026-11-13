@@ -50,27 +50,27 @@ $totaldivdeptnames =  count((array)$div_deptnames);
                 <ul class="nav nav-pills nav-pills-sm nav-dark-75">
                     <li class="nav-item">
                         <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                            <span class="nav-text font-size-sm">Headcount Report</span>
+                            <span class="nav-text font-size-sm"><?= __('Headcount Report'); ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_2" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                            <span class="nav-text font-size-sm">Employment Status</span>
+                            <span class="nav-text font-size-sm"><?= __('Employment Status'); ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_3" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                            <span class="nav-text font-size-sm">Department</span>
+                            <span class="nav-text font-size-sm"><?= __('Department'); ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_4" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                            <span class="nav-text font-size-sm">Division</span>
+                            <span class="nav-text font-size-sm"><?= __('Division'); ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_5" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                            <span class="nav-text font-size-sm">Location</span>
+                            <span class="nav-text font-size-sm"><?= __('Location'); ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -90,7 +90,7 @@ $totaldivdeptnames =  count((array)$div_deptnames);
                 <div class="tab-pane fade show active" id="kt_charts_widget_2_chart_tab_1" role="tabpanel" aria-labelledby="kt_charts_widget_2_chart_tab_1">
                     <!--begin::Chart-->
 
-                        <a target="_blank" href="index.php?option=COM_VIEW_HEADCOUNT_REPORT" class="btn btn-primary offset-10">Full Report</a>
+                        <a target="_blank" href="index.php?option=COM_VIEW_HEADCOUNT_REPORT" class="btn btn-primary offset-10"><?= __('Full Report'); ?></a>
 
                     <input type="hidden" id="years" value="<?php echo $years;?>">
 
