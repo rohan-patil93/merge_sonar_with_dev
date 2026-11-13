@@ -10,9 +10,9 @@
         <div class="card card-custom card-stretch gutter-b">
             <!--begin::Body-->
             <div class="card-body my-3">
-                <a href="#" class="card-title font-weight-bolder text-dark text-hover-state-dark font-size-h6 mb-4 d-block">Requsition Raised</a>
+                <a href="#" class="card-title font-weight-bolder text-dark text-hover-state-dark font-size-h6 mb-4 d-block"><?= __('Requsition Raised'); ?></a>
                 <div class="font-weight-bold text-muted font-size-sm">
-                <span class="text-dark-75 font-size-h2 font-weight-bolder mr-2">₹ <?php echo round($dashboard2_list['active']/100000,2); ?> </span>Lac</div>
+                <span class="text-dark-75 font-size-h2 font-weight-bolder mr-2">₹ <?php echo round($dashboard2_list['active']/100000,2); ?> </span><?= __('Lac'); ?></div>
                 <div class="progress progress-xs mt-7 bg-success-o-60">
                     <?php $pr1 = ($dashboard2_list['active']/$dashboard2_list['budget'])*100; ?>
                     <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $pr1; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -27,9 +27,9 @@
                                         <div class="card card-custom b card-stretch gutter-b">
                                             <!--begin::Body-->
                                             <div class="card-body my-4">
-                                                <a href="#" class="card-title font-weight-bolder text-dark  font-size-h6 mb-4 text-hover-state-dark d-block">Requsition Approved</a>
+                                                <a href="#" class="card-title font-weight-bolder text-dark  font-size-h6 mb-4 text-hover-state-dark d-block"><?= __('Requsition Approved'); ?></a>
                                                 <div class="font-weight-bold text-muted font-size-sm">
-                                                <span class="text-dark-75 font-size-h2 font-weight-bolder mr-2">₹ <?php echo round($dashboard2_list['approve']/100000,2); ?></span>Lac</div>
+                                                <span class="text-dark-75 font-size-h2 font-weight-bolder mr-2">₹ <?php echo round($dashboard2_list['approve']/100000,2); ?></span><?= __('Lac'); ?></div>
                                                 <div class="progress progress-xs mt-7 bg-dark-o-90">
                                                     <?php $pr2 = ($dashboard2_list['approve']/$dashboard2_list['budget'])*100; ?>
                                                     <div class="progress-bar bg-dark" role="progressbar" style="width: <?php echo $pr2; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -45,15 +45,15 @@
                                             <div class="card card-custom  card-stretch gutter-b">
                                                 <div class="card-body my-4">
                                                 <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                                    Active Requsitions
+                                                    <?= __('Active Requsitions'); ?>
                                                     <span class="float-right">₹<?php echo customeummarmonyformate($dashboard2_list['active_only']); ?></span>
                                                 </a>
                                                 <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                                    In Progess Requsitions
+                                                    <?= __('In Progess Requsitions'); ?>
                                                     <span class="float-right">₹<?php echo customeummarmonyformate($dashboard2_list['pending']); ?></span>
                                                 </a>
                                                 <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                                    Approved Requsitions
+                                                    <?= __('Approved Requsitions'); ?>
                                                     <span class="float-right">₹<?php echo customeummarmonyformate($dashboard2_list['approve']); ?></span>
                                                 </a>
                                             </div>
@@ -68,7 +68,7 @@
                                             <div class="card card-custom  card-stretch gutter-b">
                                                 <div class="card-body my-12">
                                                 <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                                    Avalable Budget
+                                                    <?= __('Avalable Budget'); ?>
                                                     <span class="float-right">₹<?php echo customeummarmonyformate($dashboard2_list['budget']); ?></span>
                                                 </a>
 
@@ -88,9 +88,9 @@
                                         <div class="card card-custom card-stretch gutter-b">
                                             <div class="card-body d-flex p-0">
                                                 <div class="flex-grow-1 p-20 pb-40 card-rounded flex-grow-1 bgi-no-repeat" style="background-color: #1B283F; background-position: calc(100% + 0.5rem) bottom; background-size: 50% auto; background-image: url(assets/media/svg/humans/custom-10.svg)">
-                                                    <h2 class="text-white pb-5 font-weight-bolder">Announcements</h2>
+                                                    <h2 class="text-white pb-5 font-weight-bolder"><?= __('Announcements'); ?></h2>
                                                     <p class="text-muted pb-5 font-size-h5"><?php echo substr($anouncement_list['announcement_message'],0,250);?></p>
-                                                    <a href="#" class="btn btn-danger font-weight-bold py-2 px-6">Connect</a>
+                                                    <a href="#" class="btn btn-danger font-weight-bold py-2 px-6"><?= __('Connect'); ?></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,11 +107,11 @@
                                             <!--begin::Header-->
                                             <div class="card-header border-0 pt-5">
                                                 <h3 class="card-title align-items-start flex-column">
-                                                    <span class="card-label font-weight-bolder text-dark">Current Financial Year</span>
+                                                    <span class="card-label font-weight-bolder text-dark"><?= __('Current Financial Year'); ?></span>
 
                                                 </h3>
                                                 <div class="card-toolbar">
-                                                    <a href="#" class="btn btn-light-primary btn-md py-2 font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Branch</a>
+                                                    <a href="#" class="btn btn-light-primary btn-md py-2 font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Branch'); ?></a>
                                                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                                         <!--begin::Navigation-->
                                                         <ul class="nav nav-pills nav-pills-sm nav-dark-75">
@@ -164,13 +164,13 @@
                                                                         </th>
                                                                         <td class="py-6 pl-0">
                                                                             <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo $month_l['item_name']; ?></a>
-                                                                            <span class="text-muted font-weight-bold d-block">Available amount <?php echo $month_l['budget']-$month_l['total_amount']; ?></span>
+                                                                            <span class="text-muted font-weight-bold d-block"><?= __('Available amount'); ?> <?php echo $month_l['budget']-$month_l['total_amount']; ?></span>
                                                                         </td>
                                                                         <td>
                                                                             <div class="d-flex flex-column w-100 mr-2">
                                                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                                                     <span class="text-muted mr-2 font-size-sm font-weight-bold"><?php echo $pre; ?>%</span>
-                                                                                    <span class="text-muted font-size-sm font-weight-bold">Progress</span>
+                                                                                    <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
                                                                                     <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
