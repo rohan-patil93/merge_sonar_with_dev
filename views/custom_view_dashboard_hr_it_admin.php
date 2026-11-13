@@ -12,9 +12,9 @@ $data = json_decode($result, 1);
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="m-b-45">Total Employees</h6>
+                                <h6 class="m-b-45"><?= __('Total Employees'); ?></h6>
                                 <h3 class="f-w-700 text-c-blue"><?php echo $data['total_emp_count']; ?></h3>
-                                <p class="m-b-0">Total joined     employees till now</p>
+                                <p class="m-b-0"><?= __('Total joined employees till now'); ?></p>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-users bg-c-blue"></i>
@@ -28,9 +28,9 @@ $data = json_decode($result, 1);
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="m-b-45">Resigned Employees</h6>
+                                <h6 class="m-b-45"><?= __('Resigned Employees'); ?></h6>
                                 <h3 class="f-w-700 text-c-red"><?php echo $data['total_emp_ter_count']; ?></h3>
-                                <p class="m-b-0">Total resigned employees till now</p>
+                                <p class="m-b-0"><?= __('Total resigned employees till now'); ?></p>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-users bg-c-red"></i>
@@ -42,23 +42,23 @@ $data = json_decode($result, 1);
             <div class="col-lg-6">
                 <div class="card o-hidden">
                     <div class="card-header">
-                        <h5> Employees Asset Submission </h5>
+                        <h5> <?= __('Employees Asset Submission'); ?> </h5>
                         <div class="card-header-right">
-                            <a href="index.php?option=COM_VIEW_RESIGN_EMPLOYEE_ASSETS" class="btn btn-success mb-2 desktop-view"><i class="icofont icofont-plus icon-white "></i> Asset Submission </a>
+                            <a href="index.php?option=COM_VIEW_RESIGN_EMPLOYEE_ASSETS" class="btn btn-success mb-2 desktop-view"><i class="icofont icofont-plus icon-white "></i> <?= __('Asset Submission'); ?> </a>
                         </div>
                     </div>
                     <div class="card-block">
                         <div class="row">
                             <div class="col-4">
-                                <p class="text-muted m-b-6 f-12 f-w-600">Resigned Employees  Assets Submitted </p>
+                                <p class="text-muted m-b-6 f-12 f-w-600"><?= __('Resigned Employees Assets Submitted'); ?> </p>
                                 <h6><?php echo $data['total_emp_uat_count']; ?></h6>
                             </div>
                             <div class="col-4">
-                                <p class="text-muted m-b-6 f-12 f-w-600">Resigned Employees Pending Assets Submition </p>
+                                <p class="text-muted m-b-6 f-12 f-w-600"><?= __('Resigned Employees Pending Assets Submition'); ?> </p>
                                 <h6><?php echo $data['total_emp_ter_count']-$data['total_emp_uat_count']; ?></h6>
                             </div>
                             <div class="col-4">
-                                <p class="text-muted m-b-6 f-12 f-w-600">Non-Resigned Employees Assets Submitted </p>
+                                <p class="text-muted m-b-6 f-12 f-w-600"><?= __('Non-Resigned Employees Assets Submitted'); ?> </p>
                                 <h6><?php echo $data['total_emp_uant_count']; ?></h6>
                             </div>
                         </div>
@@ -70,10 +70,10 @@ $data = json_decode($result, 1);
             <div class="col-lg-6">
                 <div class="card table-card">
                     <div class="card-header">
-                        <h5>Assets</h5>
+                        <h5><?= __('Assets'); ?></h5>
                         <div class="card-header-right">
-                            <a href="index.php?option=COM_LIST_ASSETS" class="btn btn-info mb-2 desktop-view"><i class="icofont icofont-list icon-white "></i> Assets</a>
-                            <a href="index.php?option=COM_INSERT_ASSETS" class="btn btn-success mb-2 desktop-view"><i class="icofont icofont-plus icon-white "></i> Asset </a>
+                            <a href="index.php?option=COM_LIST_ASSETS" class="btn btn-info mb-2 desktop-view"><i class="icofont icofont-list icon-white "></i> <?= __('Assets'); ?></a>
+                            <a href="index.php?option=COM_INSERT_ASSETS" class="btn btn-success mb-2 desktop-view"><i class="icofont icofont-plus icon-white "></i> <?= __('Asset'); ?> </a>
                         </div>
                     </div>
                     <div class="card-block p-b-0 custom-scroll" style=" height: 325px;">
@@ -81,10 +81,10 @@ $data = json_decode($result, 1);
                             <table class="table table-hover m-b-0">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Sl No</th>
-                                        <th scope="col">Asset Code</th>
-                                        <th scope="col">Asset Name</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col"><?= __('Sl No'); ?></th>
+                                        <th scope="col"><?= __('Asset Code'); ?></th>
+                                        <th scope="col"><?= __('Asset Name'); ?></th>
+                                        <th scope="col"><?= __('Status'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -93,7 +93,7 @@ $data = json_decode($result, 1);
                                         <td><?php echo $k; ?></td>
                                         <td><?php echo $asset['asset_code'];  ?></td>
                                         <td><?php echo $asset['asset_description'];  ?></td>
-                                        <td><span class="form-label label label-primary">Active</span></td>
+                                        <td><span class="form-label label label-primary"><?= __('Active'); ?></span></td>
                                     </tr>
                                     <?php $k++;
 } ?>
@@ -107,7 +107,7 @@ $data = json_decode($result, 1);
             <div class="col-lg-3">
                 <div class="card new-cust-card">
                     <div class="card-header">
-                        <h5>New Resigned</h5>
+                        <h5><?= __('New Resigned'); ?></h5>
                         <div class="card-header-right">
 
                         </div>
@@ -129,7 +129,7 @@ $data = json_decode($result, 1);
             <div class="col-lg-3">
                 <div class="card new-cust-card">
                     <div class="card-header">
-                        <h5>Asset Submission</h5>
+                        <h5><?= __('Asset Submission'); ?></h5>
                         <div class="card-header-right">
 
                         </div>
