@@ -19,7 +19,7 @@ if($_POST['ajaxpagecall'] == "Y"){
 ?>
 <script type="text/javascript">
     function selectanyoneleavedate(val){
-        $('#listleave').html('<div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;"><img src="assets/images/spiner/spiner2.gif" style="width: 300px;" alt="Preview"></div>');
+        $('#listleave').html('<div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;"><img src="assets/images/spiner/spiner2.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>');
         jQuery.ajax({
             url: "views/vendorstaq_manage_dashboarad_leaves.php",
             data:'ajaxpagecall=Y&fromdate='+val,
@@ -37,7 +37,7 @@ if($_POST['ajaxpagecall'] == "Y"){
 <input type="hidden" name="calendar_cat" id="calendar_cat" value="25">
 <div class="card card-custom " id="kt_page_sticky_card">
     <div class="card-header table-card-header mb-2">
-        <h5><?php echo "Employee Leaves";  ?></h5>
+        <h5><?php echo __("Employee Leaves");  ?></h5>
         <div class="card-header-right table-card-header ">
 
         </div>
