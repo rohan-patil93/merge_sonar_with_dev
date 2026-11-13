@@ -20,7 +20,7 @@ $dcarray = array('M'=>'Month','Y'=>'Year');
                                                 <!--begin::Header-->
 
 <div class="card-header">
-    <h5>Employee's State Insaurance(ESI)</h5>
+    <h5><?= __('Employee\'s State Insaurance(ESI)'); ?></h5>
     <div class="card-header-right">
           <button type="button" onclick="dynamiceditpopup('COM_INSERT_EMP_STATE_INSAURANCE',<?php echo "'".deocdeId("id:".$esdata['id'])."'" ?>)" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"> <i class="fa fa-edit text-white"></i>   </button>
     </div>
@@ -32,21 +32,21 @@ $dcarray = array('M'=>'Month','Y'=>'Year');
                                                 <div class="card-body">
                                                     <div class="col-md-6">
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted">ESI Number</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted"><?= __('ESI Number'); ?></span>
                                                         <span class="f-w-700 font-weight-bold float-right font-size-lg"><?php echo $esdata['esi_no']; ?></span>
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted">Deductions Cycle</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted"><?= __('Deductions Cycle'); ?></span>
                                                         <span class="f-w-700 font-weight-bold float-right "><?php echo $dcarray[$esdata['deduction_cycle']]; ?></span>
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted ">Employee's Contribution</span>
-                                                        <span class=" f-w-700 font-weight-bold float-right font-size-lg"><?php echo $esdata['employee_contribution']; ?>% of Gross Pay</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted "><?= __('Employee\'s Contribution'); ?></span>
+                                                        <span class=" f-w-700 font-weight-bold float-right font-size-lg"><?php echo $esdata['employee_contribution']; ?><?= __('% of Gross Pay'); ?></span>
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted">Employer's Contribution</span>
-                                                        <span class=" f-w-700 font-weight-bold float-right font-size-lg"><?php echo $esdata['employer_contribution']; ?>% of Gross Pay</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted"><?= __('Employer\'s Contribution'); ?></span>
+                                                        <span class=" f-w-700 font-weight-bold float-right font-size-lg"><?php echo $esdata['employer_contribution']; ?><?= __('% of Gross Pay'); ?></span>
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted">Other Details</span>
-                                                        <span class=" f-w-700 font-weight-bold float-right font-size-lg">Employer's contribution is <?php if($esdata['employer_contribution_in_ctc']!=0){ echo "not";
-} ?> included in the CTC</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted"><?= __('Other Details'); ?></span>
+                                                        <span class=" f-w-700 font-weight-bold float-right font-size-lg"><?= __('Employer\'s contribution is'); ?> <?php if($esdata['employer_contribution_in_ctc']!=0){ echo "not";
+} ?> <?= __('included in the CTC'); ?></span>
                                                     </div>
 
                                                 <!--end::Header-->
