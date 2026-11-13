@@ -80,7 +80,7 @@ $key_dis ="employee";
         });
   }
    function dynamiclistpopup(option){
-    alert("insert"+option);
+    alert(<?php echo json_encode(__('insert'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+option);
     jQuery.ajax({
             url: "views/custom_insert_view_pop.php",
             data:'option='+option+'&popup=Y',
@@ -107,7 +107,7 @@ $key_dis ="employee";
                                     <div class="col-lg-3">
                                         <div class="card card-info"  style="overflow: visible;">
                                             <div class="card-header">
-                                                <h5 class="text-white">KEY TRANSACTIONS</h5>
+                                                <h5 class="text-white"><?= __('KEY TRANSACTIONS'); ?></h5>
                                             </div>
                                             <div class="card-block">
                                                 <?php foreach($disview_array[$key_dis]['step1'] as $step1){ ?>
@@ -126,8 +126,8 @@ $key_dis ="employee";
                                             </div>
                                             <div class="card-footer">
                                                 <a href="index.php?option=COM_LIST_NEW_EMPLOYEE&NI=555">
-                                                <button class="btn waves-effect waves-light btn-grd-info">GO TO DASHBOARD</button></a>
-                                                <img class="mw-100 mx-auto mb-lg-n18" src="assets\images\12.png" style="margin-bottom: -46px!important; height: 220px !important;z-index: 999999;" alt="Preview">
+                                                <button class="btn waves-effect waves-light btn-grd-info"><?= __('GO TO DASHBOARD'); ?></button></a>
+                                                <img class="mw-100 mx-auto mb-lg-n18" src="assets\images\12.png" style="margin-bottom: -46px!important; height: 220px !important;z-index: 999999;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
 
                                         </div>
@@ -139,7 +139,7 @@ $key_dis ="employee";
                                                 <div class="card social-card card-<?php echo $step2['bg_color']; ?>" style="margin-bottom: 20px;">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20">
-                                                            <img class="img-100" src="assets\images\4.png" alt="Preview">
+                                                            <img class="img-100" src="assets\images\4.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         </div>
                                                         <button type="button" class="p-0 border-0 bg-transparent text-reset cursor-pointer" onclick="dynamiclistpopup(<?php echo "'".$step2['url']."'"; ?>)">
                                                                 <h3 class="text-facebook f-16 text-white f-w-700">
@@ -156,13 +156,12 @@ $key_dis ="employee";
                                                     <div class="card-body">
                                                         <div class="row align-items-center m-b-10">
                                                             <div class="col-auto">
-                                                                <img class="" src="assets\images\11.png" style="height: 200px!important" alt="Preview">
+                                                                <img class="" src="assets\images\11.png" style="height: 200px!important" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             </div>
                                                             <div class="col">
-                                                                <h3 class="f-18 text-white f-w-800">QUICK GUIDE</h3>
-                                                                <h6 class="f-14 text-white m-t-20">Explore our powerful
-                                                                documentation</h6>
-                                                                <button class="btn waves-effect waves-light btn-grd-danger mt-4 btn-skew">LEARN MORE</button>
+                                                                <h3 class="f-18 text-white f-w-800"><?= __('QUICK GUIDE'); ?></h3>
+                                                                <h6 class="f-14 text-white m-t-20"><?= __('Explore our powerful documentation'); ?></h6>
+                                                                <button class="btn waves-effect waves-light btn-grd-danger mt-4 btn-skew"><?= __('LEARN MORE'); ?></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -175,15 +174,15 @@ $key_dis ="employee";
                                             <div class="col-lg-12">
                                                 <div class="card latest-update-card">
                                                     <div class="card-header">
-                                                        <h5 class="">Updates</h5>
+                                                        <h5 class=""><?= __('Updates'); ?></h5>
                                                         <div class="card-header-right">
                                                             <button class="btn dropdown-toggle waves-effect waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                                             <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
-                                                                <a class="dropdown-item waves-light waves-effect" href="#">Action</a>
-                                                                <a class="dropdown-item waves-light waves-effect" href="#">Another action</a>
-                                                                <a class="dropdown-item waves-light waves-effect" href="#">Something else</a>
+                                                                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Action'); ?></a>
+                                                                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Another action'); ?></a>
+                                                                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Something else'); ?></a>
                                                                 <div class="dropdown-divider"></div>
-                                                                <a class="dropdown-item waves-light waves-effect" href="#">Something else</a>
+                                                                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Something else'); ?></a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -202,7 +201,7 @@ $key_dis ="employee";
                                                                      ?>
                                                                     <div class="row p-t-20 p-b-30">
                                                                         <div class="col-auto text-end update-meta p-r-0">
-                                                                            <span class="img-radius img-40 align-top m-r-15 update-icon text-dark f-w-700"><?php echo initials(str_replace('_', ' ',$value['Notification_Table'])); ?>RT</span>
+                                                                            <span class="img-radius img-40 align-top m-r-15 update-icon text-dark f-w-700"><?php echo initials(str_replace('_', ' ',$value['Notification_Table'])); ?><?= __('RT'); ?></span>
 
                                                                         </div>
                                                                         <div class="col p-l-5">
@@ -229,7 +228,7 @@ $key_dis ="employee";
                                                 <div class="card social-card card-<?php echo $step2['bg_color']; ?>" style="margin-bottom: 20px;">
                                                     <div class="card-body text-center">
                                                          <div class="text-facebook m-b-20">
-                                                             <img class="img-50" src="assets\images\4.png" alt="Preview">
+                                                             <img class="img-50" src="assets\images\4.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                          </div>
                                                         <button type="button" class="p-0 border-0 bg-transparent text-reset cursor-pointer" onclick="dynamiclistpopup(<?php echo "'".$step2['url']."'"; ?>)">
                                                         <h3 class="text-facebook f-14 text-white f-w-700">
