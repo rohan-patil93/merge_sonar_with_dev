@@ -127,11 +127,11 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
       $(".errorworkorder").text("");
       if(getwork_order == '0'){
         error = 1;
-        $(".errorworkorder").text("Please Select Work Order");
+        $(".errorworkorder").text(<?php echo json_encode(__('Please Select Work Order'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
       }
       if(selected_date == ''){
         error = 1;
-        $(".errordate").text("Please Select Date");
+        $(".errordate").text(<?php echo json_encode(__('Please Select Date'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
       }
       if(error == "0" || $("#getwork_order option").length == '1'){
        window.location = "index.php?option="+option+"&EMP="+emp_id+"&CHANGE_DATE="+selected_date+"&WID="+getwork_order;
@@ -145,13 +145,13 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
 
 <div class="card">
     <div class="card-header table-card-header">
-        <h5>Monthly Timesheet</h5>
+        <h5><?= __('Monthly Timesheet'); ?></h5>
         <span class="form-label badge bg-primary p-2 m-l-5"><i class='ti-user'></i> <?php echo $_SESSION['users'][$_SESSION['userid']]; ?> </span></h5>
         <div class="card-header-right table-card-header ">
 
            <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
           </a>
       </div>
     </div>
@@ -162,21 +162,21 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
 
             <div class="row mt-2">
                 <div class="col-lg-1 text-end">
-                    <span class="form-label mt-2 f-w-600">Date</span>
+                    <span class="form-label mt-2 f-w-600"><?= __('Date'); ?></span>
                 </div>
                 <div class="col-lg-3">
                     <div class="input-group input-group-button">
-                        <input aria-label="From Date" type="month" name="from_date" onchange="changeselectdate()" value="<?php echo $from_cur_year."-".$from_cur_month; ?>"  id="selected_datess"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">
+                        <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="from_date" onchange="changeselectdate()" value="<?php echo $from_cur_year."-".$from_cur_month; ?>"  id="selected_datess"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">
                     </div>
                 </div>
                 <div class="col-lg-1 text-end">
-                    <span class="form-label mt-2 f-w-600">Work Order</span>
+                    <span class="form-label mt-2 f-w-600"><?= __('Work Order'); ?></span>
                 </div>
                 <div class="col-lg-3">
-                    <select aria-label="Work Order" class="form-select js-example-basic-single" name="work_order" id="getwork_order" onchange="changeselectdate()">
+                    <select aria-label="<?= htmlspecialchars(__('Work Order'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="work_order" id="getwork_order" onchange="changeselectdate()">
 
                         <?php if(count((array)$data['workorder'])==0){ ?>
-                            <option value="0">Select Any one</option>
+                            <option value="0"><?= __('Select Any one'); ?></option>
                         <?php } ?>
 
                         <?php foreach((array)$data['workorder']  as $workorder){ ?>
@@ -192,7 +192,7 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
 } ?>  >
 
                             <button type="button" class="btn btn-info btn-md waves-effect waves-light" onclick="submitProjectWorkflowPopUp(<?php echo $cur_status; ?>,<?php echo $from_cur_month; ?>,<?php echo $from_cur_year; ?>)">
-                                <span class="fa fa-thumbs-up text-white"></span> &nbsp; Submit For Approval
+                                <span class="fa fa-thumbs-up text-white"></span> &nbsp; <?= __('Submit For Approval'); ?>
                             </button>
                         </div>
                         <div class="btn-group workflow-btn" id="status_procee_id" <?php if((count((array)$aboveactive)>0 && (count((array)$listactive)==0 || ($data['all_data']['work_days'] != ($data['all_data']['present_days']+$data['all_data']['absent_day']+$data['all_data']['leave_days']))))){ ?> style="" <?php
@@ -200,7 +200,7 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
 } ?>  >
 
                             <button type="button" class="btn btn-info btn-md waves-effect waves-light" style="pointer-events: none;">
-                                <span class="fa fa-thumbs-up text-white"></span> &nbsp; APPROVAL PENDING
+                                <span class="fa fa-thumbs-up text-white"></span> &nbsp; <?= __('APPROVAL PENDING'); ?>
                             </button>
                         </div>
                     </div>
@@ -343,16 +343,16 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
                     <div class="card">
                         <div class="card-block button-list text-center">
 
-                            <button type="button" class="btn btn-primary waves-effect waves-light mb-0 p-2" data-bs-toggle="tooltip" data-placement="top" title="Total Days" style="margin-right:5px;">Total
+                            <button type="button" class="btn btn-primary waves-effect waves-light mb-0 p-2" data-bs-toggle="tooltip" data-placement="top" title="<?= htmlspecialchars(__('Total Days'), ENT_QUOTES, 'UTF-8'); ?>" style="margin-right:5px;"><?= __('Total'); ?>
                               <span class="badge d-block m-0 mt-2"><?php echo  $data['all_data']['work_days']; ?></span>
                             </button>
-                            <button type="button" class="btn btn-success text-white waves-effect waves-light mb-0 p-2" data-bs-toggle="tooltip" data-placement="top" title="Present" style="margin-right:5px;background:#2a9d8f;">Present
+                            <button type="button" class="btn btn-success text-white waves-effect waves-light mb-0 p-2" data-bs-toggle="tooltip" data-placement="top" title="<?= htmlspecialchars(__('Present'), ENT_QUOTES, 'UTF-8'); ?>" style="margin-right:5px;background:#2a9d8f;"><?= __('Present'); ?>
                               <span class="badge d-block m-0 mt-2" id="pp_val" ><?php echo  $data['all_data']['present_days']; ?></span>
                             </button>
-                            <button type="button" class="btn btn-danger text-white waves-effect waves-light mb-0 p-2" data-bs-toggle="tooltip" data-placement="top" title="Absent" style="margin-right:5px;background:#d62828;">Absent
+                            <button type="button" class="btn btn-danger text-white waves-effect waves-light mb-0 p-2" data-bs-toggle="tooltip" data-placement="top" title="<?= htmlspecialchars(__('Absent'), ENT_QUOTES, 'UTF-8'); ?>" style="margin-right:5px;background:#d62828;"><?= __('Absent'); ?>
                               <span class="badge d-block m-0 mt-2" id="ab_val"><?php echo  $data['all_data']['absent_day']; ?></span>
                             </button>
-                            <button type="button" class="btn btn-warning text-white waves-effect waves-light mb-0 p-2" data-bs-toggle="tooltip" data-placement="top" title="Leaves" style="margin-right:5px;background:#e9c46a;">Leaves
+                            <button type="button" class="btn btn-warning text-white waves-effect waves-light mb-0 p-2" data-bs-toggle="tooltip" data-placement="top" title="<?= htmlspecialchars(__('Leaves'), ENT_QUOTES, 'UTF-8'); ?>" style="margin-right:5px;background:#e9c46a;"><?= __('Leaves'); ?>
                               <span class="badge d-block m-0 mt-2"><?php echo  $data['all_data']['leave_days']; ?></span>
                             </button>
 
@@ -360,7 +360,7 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>With Me</h5>
+                            <h5><?= __('With Me'); ?></h5>
                         </div>
                         <div class="card-body custom-scroll text-center" style="max-height:200px;">
 
@@ -379,7 +379,7 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
 
                                 </div>
                                 <div class="col-lg-4 p-1">
-                                    <span class="form-label label label-success">Present</span>
+                                    <span class="form-label label label-success"><?= __('Present'); ?></span>
                                 </div>
                             </div>
                             <?php }
@@ -392,7 +392,7 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>With Manager</h5>
+                            <h5><?= __('With Manager'); ?></h5>
                         </div>
                         <div class="card-body custom-scroll text-center" style="max-height:175px;">
 
@@ -427,7 +427,7 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>Recently Approved</h5>
+                            <h5><?= __('Recently Approved'); ?></h5>
                         </div>
                         <div class="card-body custom-scroll text-center" style="max-height:175px;">
 
@@ -448,7 +448,7 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
 
                                 </div>
                                 <div class="col-lg-3 p-1">
-                                    <span class="form-label label label-success">Present</span>
+                                    <span class="form-label label label-success"><?= __('Present'); ?></span>
                                 </div>
                             </div>
                             <?php }
@@ -464,7 +464,7 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
             <?php }else{?>
                 <div>
                     <div class="text-center text-danger f-26 m-t-30">
-                        Employee work order is not available. Please check with admin email
+                        <?= __('Employee work order is not available. Please check with admin email'); ?>
                         <?php echo $_SESSION['config']['admin_email']; ?>
                     </div>
                 </div>
