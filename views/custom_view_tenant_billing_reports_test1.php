@@ -35,9 +35,9 @@ function printReport(divId) {
 </script>
 <div class="card">
     <div class="card-header">
-        <h5>Tenant Invoice Reports</h5>
+        <h5><?= __('Tenant Invoice Reports'); ?></h5>
         <div class="card-header-right table-card-header ">
-      <a href="javascript:history.go(-1)" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i>Back</a>
+      <a href="javascript:history.go(-1)" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i><?= __('Back'); ?></a>
       </div>
     </div>
     <div class="card-body">
@@ -45,9 +45,9 @@ function printReport(divId) {
         <div class="row">
           <div class="col-lg-3">
                 <div class=" form-group">
-                    <label for="fld_customer_id" class="form-label"> Tenant</label>
+                    <label for="fld_customer_id" class="form-label"> <?= __('Tenant'); ?></label>
                     <select id="fld_customer_id" class="js-example-basic-single form-control"  name="customer_id">
-                      <option value="">All Tenant</option>
+                      <option value=""><?= __('All Tenant'); ?></option>
                       <?php foreach($all_customers as $cust){ ?>
                         <option value="<?php echo $cust['id'];?>" <?php echo $_POST['customer_id'] == $cust['id']?"selected":""; ?>><?php echo $cust['display_name'];?></option>
                       <?php } ?>
@@ -56,18 +56,18 @@ function printReport(divId) {
             </div> 
           <div class="col-lg-2">
               <div class="form-group w-full">
-                  <label for="fld_start_month" class="form-label ">Start Date<span class="text-danger">*</span></label>
+                  <label for="fld_start_month" class="form-label "><?= __('Start Date'); ?><span class="text-danger">*</span></label>
                   <input id="fld_start_month" type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
               </div>
           </div>
           <div class="col-lg-2">
               <div class=" form-group">
-                  <label for="fld_end_month" class="form-label"> End Date</label>
+                  <label for="fld_end_month" class="form-label"> <?= __('End Date'); ?></label>
                   <input id="fld_end_month" type="month" class="form-control" name="end_month"  value="<?php echo $end_month; ?>" >
               </div>
           </div>
           <div class="col-lg-1">
-               <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> Search</button>
+               <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> <?= __('Search'); ?></button>
           </div>
         </div>
      </form>
@@ -103,21 +103,21 @@ function printReport(divId) {
               <thead>
                   <tr> 
                       <th rowspan="2">#</th>      
-                      <th rowspan="2" class="border-right-black">Month Year</th> 
-                      <th colspan="3" class="text-center border-right-black">Rent</th> 
-                      <th colspan="3" class="text-center border-right-black">Utility</th> 
-                      <th colspan="3" class="text-center">Total</th> 
+                      <th rowspan="2" class="border-right-black"><?= __('Month Year'); ?></th> 
+                      <th colspan="3" class="text-center border-right-black"><?= __('Rent'); ?></th> 
+                      <th colspan="3" class="text-center border-right-black"><?= __('Utility'); ?></th> 
+                      <th colspan="3" class="text-center"><?= __('Total'); ?></th> 
                   </tr>
                   <tr> 
-                    <th scope="col" class="text-right">Invoice</th>
-                    <th scope="col" class="text-right ">Payment</th>
-                    <th scope="col" class="text-right border-right-black">Due</th>
-                    <th scope="col" class="text-right">Invoice</th>
-                    <th scope="col" class="text-right ">Payment</th>
-                    <th scope="col" class="text-right border-right-black">Due</th> 
-                    <th scope="col" class="text-right">Invoice</th>
-                    <th scope="col" class="text-right ">Payment</th>
-                    <th scope="col" class="text-right">Due</th>
+                    <th scope="col" class="text-right"><?= __('Invoice'); ?></th>
+                    <th scope="col" class="text-right "><?= __('Payment'); ?></th>
+                    <th scope="col" class="text-right border-right-black"><?= __('Due'); ?></th>
+                    <th scope="col" class="text-right"><?= __('Invoice'); ?></th>
+                    <th scope="col" class="text-right "><?= __('Payment'); ?></th>
+                    <th scope="col" class="text-right border-right-black"><?= __('Due'); ?></th> 
+                    <th scope="col" class="text-right"><?= __('Invoice'); ?></th>
+                    <th scope="col" class="text-right "><?= __('Payment'); ?></th>
+                    <th scope="col" class="text-right"><?= __('Due'); ?></th>
                   </tr>
               </thead>
               <tbody>
@@ -166,7 +166,7 @@ function printReport(divId) {
 
                 ?>
                 <tr>
-                  <th class="p-2 border-right-black" colspan="2">Opening Balance </th>
+                  <th class="p-2 border-right-black" colspan="2"><?= __('Opening Balance'); ?> </th>
                   <td class="p-2 text-right fw-bold"><?php echo customeummarmonyformateifine($opening_balance['ob_rent']['total_amount']); ?></td>
                   <td class="p-2 text-right  fw-bold"><?php echo customeummarmonyformateifine($payment_opening_balance['ob_rent']['total_paid']); ?></td>
                   <td class="p-2 text-right border-right-black fw-bold">-</td>
@@ -219,7 +219,7 @@ function printReport(divId) {
                 </tr>
                 <?php $i++; } ?>
                 <tr>
-                  <th colspan="2" class="text-right border-right-black">Total</th>
+                  <th colspan="2" class="text-right border-right-black"><?= __('Total'); ?></th>
                   <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($column_rent_total); ?></td>
                   <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($column_rent_payment_total); ?></td>
                   <td class="text-right border-right-black fw-bold">-</td>
@@ -232,12 +232,12 @@ function printReport(divId) {
                 </tr>
                 <tr>                  
                   <th class="text-right" colspan="8">-</th>
-                  <th scope="row" colspan="2" class="text-right">Total Credit Notes (-)</th>
+                  <th scope="row" colspan="2" class="text-right"><?= __('Total Credit Notes (-)'); ?></th>
                   <td class="text-right text-danger fw-bold"><?php echo customeummarmonyformateifine($credit_notes[$cust['id']][$ptd['id']]['total_amount']); ?></td>
                 </tr>
                 <tr>                  
                   <th class="text-right" colspan="8">-</th>
-                  <th scope="row" colspan="2" class="text-right">Total Debit Notes (+)</th>
+                  <th scope="row" colspan="2" class="text-right"><?= __('Total Debit Notes (+)'); ?></th>
                   <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($debit_notes[$cust['id']][$ptd['id']]['total_amount']); ?></td>
                 </tr>
                <!--  <tr>                  
@@ -247,7 +247,7 @@ function printReport(divId) {
                 </tr> -->
                 <tr>
                   <th class="text-right" colspan="8">-</th>
-                  <th scope="row" colspan="2" class="text-right">Final Due</th>
+                  <th scope="row" colspan="2" class="text-right"><?= __('Final Due'); ?></th>
                   <td class="text-right text-danger fw-bold"><?php echo customeummarmonyformateifine(($column_rent_utility_total+$debit_notes[$cust['id']][$ptd['id']]['total_amount'])-($credit_notes[$cust['id']][$ptd['id']]['total_amount']+$column_rent_utility_payment_total)); ?></td>
                 </tr>
 
@@ -258,7 +258,7 @@ function printReport(divId) {
        <?php } ?> 
        </div>  
        <div class="row mt-5 m-l-5">
-        <button class="btn waves-effect waves-light btn-grd-success col-lg-2" onclick="printReport('print_report_div');"><i class="fa fa-print"></i> &nbsp Print Report</button>
+        <button class="btn waves-effect waves-light btn-grd-success col-lg-2" onclick="printReport('print_report_div');"><i class="fa fa-print"></i> &nbsp <?= __('Print Report'); ?></button>
       </div>
          </div>
      </div>
