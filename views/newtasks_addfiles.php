@@ -48,9 +48,9 @@ $file_array = array_keys($selectedlist);
 
        <div class="modal-header">
          <h5 class="modal-title">
-          Add Files
+          <?= __('Add Files'); ?>
         </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 
      </div>
 
@@ -70,8 +70,8 @@ $file_array = array_keys($selectedlist);
           </div>
           <div class="col-lg-6">
            <!-- Start content -->
-           <span>Select files</span>
-                <select aria-label="Filelist[]" onchange="selectfiles()" class="form-control mt-5 form-select js-example-basic-multiple" id="kt_select2_42" name="filelist[]" multiple="multiple">
+           <span><?= __('Select files'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Filelist'), ENT_QUOTES, 'UTF-8'); ?>[]" onchange="selectfiles()" class="form-control mt-5 form-select js-example-basic-multiple" id="kt_select2_42" name="filelist[]" multiple="multiple">
            <?php
            foreach ($document_details as $table_data) {
            $field_name='document_name';
@@ -94,9 +94,9 @@ $file_array = array_keys($selectedlist);
 
 
   <div class="modal-footer mt-5" >
-     <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>
+     <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
 
-   <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Attach files</button>
+   <button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?= __('Attach files'); ?></button>
  </div>
 </form>
 
