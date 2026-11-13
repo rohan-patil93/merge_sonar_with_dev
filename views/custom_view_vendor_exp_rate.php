@@ -68,7 +68,7 @@ function averagearray($ave){
 </script>
 <div class="card">
   <div class="card-header">
-    <h5 class="f-30">Job Title Wise Vendor Rates</h5>
+    <h5 class="f-30"><?= __('Job Title Wise Vendor Rates'); ?></h5>
     <div class="card-header-right">
 
     </div>
@@ -78,16 +78,16 @@ function averagearray($ave){
         <form method="post" action="">
           <div class="row col-lg-12 ">
   <div class="col-lg-2">
-  From Date
+  <?= __('From Date'); ?>
   </div>
   <div class="col-lg-2">
-  To Date
+  <?= __('To Date'); ?>
         </div>
   <div class="col-lg-2">
-    Vendors
+    <?= __('Vendors'); ?>
         </div>
   <div class="col-lg-2">
-    Job Titles
+    <?= __('Job Titles'); ?>
         </div>
   <div class="col-lg-4">
 
@@ -95,20 +95,20 @@ function averagearray($ave){
 
         <div class="col-lg-2">
           <div class="form-group">
-            <input aria-label="Fromdate" class="form-control datepicker p-2" name="fromdate" type="text" <?php if($fromdate!=""){ ?>  value="<?php echo $fromdate; ?>" <?php
-} ?> placeholder="From Date" >
+            <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker p-2" name="fromdate" type="text" <?php if($fromdate!=""){ ?>  value="<?php echo $fromdate; ?>" <?php
+} ?> placeholder="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" >
           </div>
         </div>
 
         <div class="col-lg-2">
           <div class="form-group">
-            <input aria-label="Input field" class="form-control datepicker p-2" <?php if($todate!=""){ ?>  value="<?php echo $todate; ?>" <?php
-} ?> name="todate" type="text" placeholder="To Date">
+            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker p-2" <?php if($todate!=""){ ?>  value="<?php echo $todate; ?>" <?php
+} ?> name="todate" type="text" placeholder="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
           </div>
         </div>
         <div class="col-lg-2">
-          <select aria-label="Vendor" class=" form-select js-example-basic-single" name="vendor_id">
-            <option value="0"> Select Vendors</option>
+          <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class=" form-select js-example-basic-single" name="vendor_id">
+            <option value="0"> <?= __('Select Vendors'); ?></option>
             <?php foreach($result['vendor'] as $keyven=>$ven){ ?>
                 <option <?php if($vendor_id == $keyven){ echo "selected";
 } ?> value="<?php echo $keyven; ?>"> <?php echo $ven; ?></option>
@@ -116,8 +116,8 @@ function averagearray($ave){
           </select>
         </div>
         <div class="col-lg-2">
-          <select aria-label="Job Title" class="form-select js-example-basic-single " name="job_title_id">
-            <option value="0"> Select Job Title</option>
+          <select aria-label="<?= htmlspecialchars(__('Job Title'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " name="job_title_id">
+            <option value="0"> <?= __('Select Job Title'); ?></option>
             <?php foreach($result['job_title'] as $keyjob=>$jobtitle){
                     if($keyjob){
               ?>
@@ -129,7 +129,7 @@ function averagearray($ave){
         </div>
         <div class="col-lg-2 mt-1">
           <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-            Apply
+            <?= __('Apply'); ?>
           </button>
           <input type="hidden" name="submit" value="applyform">
         </div>
@@ -140,17 +140,17 @@ function averagearray($ave){
       <div class="col-lg-3">
         <div class="col bg-light-primary ">
           <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-            <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+            <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
           </span>
           <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $_SESSION['config']['name']; ?></span>
         </div>
       </div>
       <div class="col-lg-6">
-        <h4 class="card-label text-center f-w-700">Job Title Wise Vendor Rates</br><small class="f-10">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></small> </h4>
+        <h4 class="card-label text-center f-w-700"><?= __('Job Title Wise Vendor Rates'); ?></br><small class="f-10"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></small> </h4>
       </div>
       <div class="col-lg-3">
         <div>
-          <a href="custom_view_download.php?page=Job_Title_Wise_Vendor_Rates" class="btn btn-primary float-right" target="_blank"> Download </a>
+          <a href="custom_view_download.php?page=Job_Title_Wise_Vendor_Rates" class="btn btn-primary float-right" target="_blank"> <?= __('Download'); ?> </a>
         </div>
       </div>
     </div>
@@ -162,11 +162,11 @@ function averagearray($ave){
         <table class=" table table-bordered">
           <tr style="background-color: #eeeeee;">
             <th scope="col" class="th_head">#</th>
-            <th scope="col" class="th_head">Job Title</th>
-            <th scope="col" class="th_head">Experience</th>
-            <th scope="col" class="th_head">Minimum Rate</th>
-            <th scope="col" class="th_head">Maximum Rate </th>
-            <th scope="col" class="th_head">Average Rate</th>
+            <th scope="col" class="th_head"><?= __('Job Title'); ?></th>
+            <th scope="col" class="th_head"><?= __('Experience'); ?></th>
+            <th scope="col" class="th_head"><?= __('Minimum Rate'); ?></th>
+            <th scope="col" class="th_head"><?= __('Maximum Rate'); ?> </th>
+            <th scope="col" class="th_head"><?= __('Average Rate'); ?></th>
             <?php foreach ($result['vendor'] as $venkey=>$vendor) {  ?>
              <th scope="col" class="th_head"><?php echo $vendor; ?></th>
             <?php } ?>
