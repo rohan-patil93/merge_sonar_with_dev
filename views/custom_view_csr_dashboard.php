@@ -97,12 +97,12 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
 
 <div class="row mt-3">
   <div class="col-lg-7 col-md-12 col-sm-12 col-12">
-    <h3 class="f-w-600 mb-0">CSR Dashboard - Executive Summary</h3>
+    <h3 class="f-w-600 mb-0"><?= __('CSR Dashboard - Executive Summary'); ?></h3>
   </div>
   <div class="col-lg-5 col-md-12 col-sm-12 col-12">
     <form method="GET" id="csrDashboardYearForm" class="csr-dashboard-filter">
       <input type="hidden" name="option" value="<?php echo csrDashboardText($_GET['option'] ?? 'COM_VIEW_CSR_DASHBOARD'); ?>">
-      <label class="form-label f-w-600 mb-0" for="csrDashboardFySelect">FA Year</label>
+      <label class="form-label f-w-600 mb-0" for="csrDashboardFySelect"><?= __('FA Year'); ?></label>
       <select name="fa_year" class="form-control js-example-basic-single csr-dashboard-fy-select" id="csrDashboardFySelect">
         <?php foreach ($financialYears as $fyRow) { ?>
           <?php $fyCode = csrDashboardValue($fyRow, 'genc_detail_code'); ?>
@@ -118,8 +118,8 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
 <div class="csr-dashboard mt-4">
   <div class="csr-dashboard-box">
     <div class="card proj-t-card mb-2">
-      <div class="card-body csr-click cursor-pointer" data-title="Total Active Projects" data-type="active_project" data-fa-year="<?php echo csrDashboardText($selectedFinancialYear); ?>">
-        <span class="f-12 f-w-600">Total Active Projects</span>
+      <div class="card-body csr-click cursor-pointer" data-title="<?= htmlspecialchars(__('Total Active Projects'), ENT_QUOTES, 'UTF-8'); ?>" data-type="active_project" data-fa-year="<?php echo csrDashboardText($selectedFinancialYear); ?>">
+        <span class="f-12 f-w-600"><?= __('Total Active Projects'); ?></span>
         <h4 class="f-24 f-w-600 mt-2"><?php echo csrDashboardText(csrDashboardMoney($summary['active_project_amount'] ?? 0)); ?></h4>
         <div class="pt-badge bg-c-blue"><i class="fa fa-briefcase f-18"></i></div>
       </div>
@@ -127,8 +127,8 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   </div>
   <div class="csr-dashboard-box">
     <div class="card proj-t-card mb-2">
-      <div class="card-body csr-click cursor-pointer" data-title="Project Approved" data-type="project_approved" data-fa-year="<?php echo csrDashboardText($selectedFinancialYear); ?>">
-        <span class="f-12 f-w-600">Project Approved</span>
+      <div class="card-body csr-click cursor-pointer" data-title="<?= htmlspecialchars(__('Project Approved'), ENT_QUOTES, 'UTF-8'); ?>" data-type="project_approved" data-fa-year="<?php echo csrDashboardText($selectedFinancialYear); ?>">
+        <span class="f-12 f-w-600"><?= __('Project Approved'); ?></span>
         <h4 class="f-24 f-w-600 mt-2"><?php echo csrDashboardText(csrDashboardMoney($summary['project_approved'] ?? 0)); ?></h4>
         <div class="pt-badge bg-c-green"><i class="fa fa-check-circle f-18"></i></div>
       </div>
@@ -136,8 +136,8 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   </div>
   <div class="csr-dashboard-box">
     <div class="card proj-t-card mb-2">
-      <div class="card-body csr-click cursor-pointer" data-title="Approval in Process" data-type="approved_in_progress" data-fa-year="<?php echo csrDashboardText($selectedFinancialYear); ?>">
-        <span class="f-12 f-w-600">Approval in Process</span>
+      <div class="card-body csr-click cursor-pointer" data-title="<?= htmlspecialchars(__('Approval in Process'), ENT_QUOTES, 'UTF-8'); ?>" data-type="approved_in_progress" data-fa-year="<?php echo csrDashboardText($selectedFinancialYear); ?>">
+        <span class="f-12 f-w-600"><?= __('Approval in Process'); ?></span>
         <h4 class="f-24 f-w-600 mt-2"><?php echo csrDashboardText(csrDashboardMoney($summary['approved_in_progress'] ?? 0)); ?></h4>
         <div class="pt-badge bg-c-green"><i class="fas fa-hourglass-half f-18"></i></div>
       </div>
@@ -146,7 +146,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   <div class="csr-dashboard-box">
     <div class="card proj-t-card mb-2">
       <div class="card-body">
-        <span class="f-12 f-w-600">Total Obligation</span>
+        <span class="f-12 f-w-600"><?= __('Total Obligation'); ?></span>
         <h4 class="f-24 f-w-600 mt-2"><?php echo csrDashboardText(csrDashboardMoney($summary['total_obligation'] ?? 0)); ?></h4>
         <div class="pt-badge bg-c-blue"><i class="fa fa-calculator f-18"></i></div>
       </div>
@@ -154,8 +154,8 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   </div>
   <div class="csr-dashboard-box">
     <div class="card proj-t-card mb-2">
-      <div class="card-body csr-click cursor-pointer" data-title="Spent" data-type="spent" data-fa-year="<?php echo csrDashboardText($selectedFinancialYear); ?>">
-        <span class="f-12 f-w-600">Spent</span>
+      <div class="card-body csr-click cursor-pointer" data-title="<?= htmlspecialchars(__('Spent'), ENT_QUOTES, 'UTF-8'); ?>" data-type="spent" data-fa-year="<?php echo csrDashboardText($selectedFinancialYear); ?>">
+        <span class="f-12 f-w-600"><?= __('Spent'); ?></span>
         <h4 class="f-24 f-w-600 mt-2"><?php echo csrDashboardText(csrDashboardMoney($summary['spent'] ?? 0)); ?></h4>
         <div class="pt-badge bg-c-green"><i class="fa fa-database f-18"></i></div>
       </div>
@@ -164,7 +164,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   <div class="csr-dashboard-box">
     <div class="card proj-t-card mb-2">
       <div class="card-body">
-        <span class="f-12 f-w-600">Unspent</span>
+        <span class="f-12 f-w-600"><?= __('Unspent'); ?></span>
         <h4 class="f-24 f-w-600 mt-2"><?php echo csrDashboardText(csrDashboardMoney($summary['unspent'] ?? 0)); ?></h4>
         <div class="pt-badge bg-c-red"><i class="fa fa-suitcase f-18"></i></div>
       </div>
@@ -177,7 +177,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
-          <h3 class="f-20 f-w-600">Obligation vs Spent vs Unspent</h3>
+          <h3 class="f-20 f-w-600"><?= __('Obligation vs Spent vs Unspent'); ?></h3>
         </div>
         <div class="csr-chart-wrap"><canvas id="csr-obligation-chart"></canvas></div>
       </div>
@@ -187,7 +187,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
-          <h3 class="f-20 f-w-600">CSR Spent Trend(Year-Wise)</h3>
+          <h3 class="f-20 f-w-600"><?= __('CSR Spent Trend(Year-Wise)'); ?></h3>
         </div>
         <div class="csr-chart-wrap"><canvas id="csr-spent-trend-chart"></canvas></div>
       </div>
@@ -197,7 +197,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
-          <h3 class="f-20 f-w-600">Budget Flow</h3>
+          <h3 class="f-20 f-w-600"><?= __('Budget Flow'); ?></h3>
         </div>
         <div class="csr-chart-wrap"><canvas id="csr-budget-flow-chart"></canvas></div>
       </div>
@@ -209,7 +209,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   <div class="csr-dashboard-box">
     <div class="card proj-t-card mb-2">
       <div class="card-body">
-        <span class="f-12 f-w-600">Total Projects</span>
+        <span class="f-12 f-w-600"><?= __('Total Projects'); ?></span>
         <h4 class="f-30 f-w-600 mt-2"><?php echo (int)($summary['total_project'] ?? 0); ?></h4>
         <div class="pt-badge bg-c-blue"><i class="fa fa-briefcase f-18"></i></div>
       </div>
@@ -218,7 +218,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   <div class="csr-dashboard-box">
     <div class="card proj-t-card mb-2">
       <div class="card-body">
-        <span class="f-12 f-w-600">Active Project</span>
+        <span class="f-12 f-w-600"><?= __('Active Project'); ?></span>
         <h4 class="f-30 f-w-600 mt-2"><?php echo (int)($summary['active_project'] ?? 0); ?></h4>
         <div class="pt-badge bg-c-green"><i class="fa fa-check-circle f-18"></i></div>
       </div>
@@ -227,7 +227,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   <div class="csr-dashboard-box">
     <div class="card proj-t-card mb-2">
       <div class="card-body">
-        <span class="f-12 f-w-600">On Track Project</span>
+        <span class="f-12 f-w-600"><?= __('On Track Project'); ?></span>
         <h4 class="f-30 f-w-600 mt-2"><?php echo (int)($summary['on_track_project'] ?? 0); ?></h4>
         <div class="pt-badge bg-c-green"><i class="fa fa-check-circle f-18"></i></div>
       </div>
@@ -236,7 +236,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   <div class="csr-dashboard-box">
     <div class="card proj-t-card mb-2">
       <div class="card-body">
-        <span class="f-12 f-w-600">At Risk Project</span>
+        <span class="f-12 f-w-600"><?= __('At Risk Project'); ?></span>
         <h4 class="f-30 f-w-600 mt-2"><?php echo (int)($summary['at_risk_project'] ?? 0); ?></h4>
         <div class="pt-badge bg-c-red"><i class="fa fa-exclamation-triangle f-18"></i></div>
       </div>
@@ -245,7 +245,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   <div class="csr-dashboard-box">
     <div class="card proj-t-card mb-2">
       <div class="card-body">
-        <span class="f-12 f-w-600">Sectors Covered</span>
+        <span class="f-12 f-w-600"><?= __('Sectors Covered'); ?></span>
         <h4 class="f-30 f-w-600 mt-2"><?php echo (int)($summary['sectors_covered'] ?? 0); ?></h4>
         <div class="pt-badge bg-c-blue"><i class="fa fa-users f-18"></i></div>
       </div>
@@ -254,7 +254,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   <div class="csr-dashboard-box">
     <div class="card proj-t-card mb-2">
       <div class="card-body">
-        <span class="f-12 f-w-600">Location Covered</span>
+        <span class="f-12 f-w-600"><?= __('Location Covered'); ?></span>
         <h4 class="f-30 f-w-600 mt-2"><?php echo (int)($summary['locations_covered'] ?? 0); ?></h4>
         <div class="pt-badge bg-c-blue"><i class="fa fa-map-marker f-18"></i></div>
       </div>
@@ -264,13 +264,13 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
 
 <div class="row mt-3">
   <div class="col-lg-12">
-    <h3 class="f-w-600">Allocation Insights</h3>
+    <h3 class="f-w-600"><?= __('Allocation Insights'); ?></h3>
   </div>
   <div class="col-lg-6 col-md-6 col-sm-12 col-12">
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
-          <h3 class="f-20 f-w-600">Sector-wise Allocation(Approved Amount)</h3>
+          <h3 class="f-20 f-w-600"><?= __('Sector-wise Allocation(Approved Amount)'); ?></h3>
         </div>
         <div class="csr-chart-wrap"><canvas id="csr-sector-allocation-chart"></canvas></div>
       </div>
@@ -280,7 +280,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
-          <h3 class="f-20 f-w-600">Location-wise Allocation(Approved Amount)</h3>
+          <h3 class="f-20 f-w-600"><?= __('Location-wise Allocation(Approved Amount)'); ?></h3>
         </div>
         <div class="csr-chart-wrap"><canvas id="csr-location-allocation-chart"></canvas></div>
       </div>
@@ -290,14 +290,14 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
 
 <div class="card">
   <div class="card-body">
-    <h3 class="f-w-600 mb-3">Sector-wise Progress</h3>
+    <h3 class="f-w-600 mb-3"><?= __('Sector-wise Progress'); ?></h3>
     <div class="table-responsive">
       <table class="table table-bordered table-sm">
         <tr>
-          <th scope="col">Sector</th>
-          <th scope="col">Approved Amount</th>
-          <th scope="col">Spent</th>
-          <th scope="col">Progress</th>
+          <th scope="col"><?= __('Sector'); ?></th>
+          <th scope="col"><?= __('Approved Amount'); ?></th>
+          <th scope="col"><?= __('Spent'); ?></th>
+          <th scope="col"><?= __('Progress'); ?></th>
         </tr>
         <?php if (count((array)$sectorRows) > 0) { ?>
           <?php foreach ($sectorRows as $row) {
@@ -319,7 +319,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
           <?php } ?>
           <?php $totalProgress = $sectorTotalApproved > 0 ? min(round(($sectorTotalSpent / $sectorTotalApproved) * 100), 100) : 0; ?>
           <tr>
-            <td>Total</td>
+            <td><?= __('Total'); ?></td>
             <td><?php echo csrDashboardText(csrDashboardMoney($sectorTotalApproved)); ?></td>
             <td><?php echo csrDashboardText(csrDashboardMoney($sectorTotalSpent)); ?></td>
             <td>
@@ -331,7 +331,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
           </tr>
         <?php } else { ?>
           <tr>
-            <td colspan="4" class="text-center">No Records</td>
+            <td colspan="4" class="text-center"><?= __('No Records'); ?></td>
           </tr>
         <?php } ?>
       </table>
@@ -343,13 +343,13 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   <div class="col-md-6 col-sm-12 col-12">
     <div class="card">
       <div class="card-body">
-        <h3 class="f-w-600 mb-3">Approved Projects</h3>
+        <h3 class="f-w-600 mb-3"><?= __('Approved Projects'); ?></h3>
         <div class="table-responsive">
           <table class="table table-bordered table-sm">
             <tr>
-              <th scope="col">Project</th>
-              <th scope="col">FA Year</th>
-              <th scope="col">Approved Amount</th>
+              <th scope="col"><?= __('Project'); ?></th>
+              <th scope="col"><?= __('FA Year'); ?></th>
+              <th scope="col"><?= __('Approved Amount'); ?></th>
             </tr>
             <?php if (count((array)$approvedProjects) > 0) { ?>
               <?php foreach ($approvedProjects as $project) { ?>
@@ -366,7 +366,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
               <?php } ?>
             <?php } else { ?>
               <tr>
-                <td colspan="3" class="text-center">No Records</td>
+                <td colspan="3" class="text-center"><?= __('No Records'); ?></td>
               </tr>
             <?php } ?>
           </table>
@@ -377,13 +377,13 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
   <div class="col-md-6 col-sm-12 col-12">
     <div class="card">
       <div class="card-body">
-        <h3 class="f-w-600 mb-3">Rejected Projects</h3>
+        <h3 class="f-w-600 mb-3"><?= __('Rejected Projects'); ?></h3>
         <div class="table-responsive">
           <table class="table table-bordered table-sm">
             <tr>
-              <th scope="col">Project</th>
-              <th scope="col">FA Year</th>
-              <th scope="col">Amount</th>
+              <th scope="col"><?= __('Project'); ?></th>
+              <th scope="col"><?= __('FA Year'); ?></th>
+              <th scope="col"><?= __('Amount'); ?></th>
             </tr>
             <?php if (count((array)$rejectedProjects) > 0) { ?>
               <?php foreach ($rejectedProjects as $project) { ?>
@@ -400,7 +400,7 @@ $chartJson = htmlspecialchars(json_encode($chartData), ENT_QUOTES, 'UTF-8');
               <?php } ?>
             <?php } else { ?>
               <tr>
-                <td colspan="3" class="text-center">No Records</td>
+                <td colspan="3" class="text-center"><?= __('No Records'); ?></td>
               </tr>
             <?php } ?>
           </table>
