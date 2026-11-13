@@ -77,22 +77,22 @@ $totaldivdeptnames =  count((array)$div_deptnames);
                             <ul class="nav nav-pills nav-pills-sm nav-dark-75">
                                 <li class="nav-item">
                                     <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                        <span class="nav-text font-size-sm">Department Wise Jobs</span>
+                                        <span class="nav-text font-size-sm"><?= __('Department Wise Jobs'); ?></span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_2" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                        <span class="nav-text font-size-sm">Vendor Wise Employees</span>
+                                        <span class="nav-text font-size-sm"><?= __('Vendor Wise Employees'); ?></span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_3" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                        <span class="nav-text font-size-sm">Vendor Wise Applicants</span>
+                                        <span class="nav-text font-size-sm"><?= __('Vendor Wise Applicants'); ?></span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_4" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                        <span class="nav-text font-size-sm">Contracts Due</span>
+                                        <span class="nav-text font-size-sm"><?= __('Contracts Due'); ?></span>
                                     </a>
                                 </li>
 
