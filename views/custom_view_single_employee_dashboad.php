@@ -21,17 +21,17 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                 <div class="col-lg-3">
                     <div class="card sale-card mb-2">
                         <div class="card-header">
-                            <h5>Time Sheet</h5>
+                            <h5><?= __('Time Sheet'); ?></h5>
                         </div>
                         <div class="card-block text-center">
                             <img class="img-fluid" src="assets/images/12.png" alt="">
-                            <a href="index.php?option=COM_INSERT_PROJECT_TIMESHEETS"><button class="btn waves-effect waves-light hor-grd btn-grd-primary mb-2">New Time Sheet</button></a>
-                            <a href="index.php?option=COM_VIEW_EMP_TIMESHEETS&PAY_YEAR=<?php echo date("Y")."&PAY_MONTH=".date("m")."&EMP=".$emp_id; ?>"> <button class="btn waves-effect waves-light hor-grd btn-grd-success mb-2">View History</button></a>
+                            <a href="index.php?option=COM_INSERT_PROJECT_TIMESHEETS"><button class="btn waves-effect waves-light hor-grd btn-grd-primary mb-2"><?= __('New Time Sheet'); ?></button></a>
+                            <a href="index.php?option=COM_VIEW_EMP_TIMESHEETS&PAY_YEAR=<?php echo date("Y")."&PAY_MONTH=".date("m")."&EMP=".$emp_id; ?>"> <button class="btn waves-effect waves-light hor-grd btn-grd-success mb-2"><?= __('View History'); ?></button></a>
                         </div>
                     </div>
                     <div class="card sale-card mb-2">
                         <div class="card-header">
-                            <h5><?php echo date("Y"); ?> - Holidays</h5>
+                            <h5><?php echo date("Y"); ?> - <?= __('Holidays'); ?></h5>
                         </div>
                          <div class="card-block  custom-scroll" style="max-height: 300px;">
                             <?php foreach($details['assmentholidays'] as $holiday){ ?>
@@ -88,10 +88,10 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                                 <table class="table table-sm f-12">
                                     <tr>
                                         <th scope="col"></th>
-                                        <th scope="col" class="text-center">With Me</th>
-                                        <th scope="col" class="text-center">With Mgr</th>
-                                        <th scope="col" class="text-center">Approved</th>
-                                        <th scope="col" class="text-center">Total</th>
+                                        <th scope="col" class="text-center"><?= __('With Me'); ?></th>
+                                        <th scope="col" class="text-center"><?= __('With Mgr'); ?></th>
+                                        <th scope="col" class="text-center"><?= __('Approved'); ?></th>
+                                        <th scope="col" class="text-center"><?= __('Total'); ?></th>
                                     </tr>
                                     <?php
                                     $i=1; $wk_active=0; $wk_process=0; $wk_approved=0; $wk_total=0;
@@ -131,7 +131,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
 } ?>
 
                                     <tr>
-                                        <th scope="col" class="text-right">Total</th>
+                                        <th scope="col" class="text-right"><?= __('Total'); ?></th>
                                         <th scope="col" class="text-right"><?php echo $wk_active; ?></th>
                                         <th scope="col" class="text-right"><?php echo $wk_process; ?></th>
                                         <th scope="col" class="text-right"><?php echo $wk_approved; ?></th>
@@ -139,7 +139,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                                     </tr>
                                 </table>
                                 <?php }else{ ?>
-                                    <h6 class="text-center mt-3"> No Data</h6>
+                                    <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                      <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 <?php } ?>
                             </div>
@@ -154,11 +154,11 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                                 <div class="col-lg-6">
                                     <ul class="nav md-tabs infisuite_tab">
                                         <li class="nav-item">
-                                            <a class="nav-link f-w-600 active" data-bs-toggle="tab" href="#current-quater" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Current Quater</a>
+                                            <a class="nav-link f-w-600 active" data-bs-toggle="tab" href="#current-quater" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Current Quater'); ?></a>
                                             <div class="slide"></div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link f-w-600" data-bs-toggle="tab" href="#previous-quater" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Previous Quater</a>
+                                            <a class="nav-link f-w-600" data-bs-toggle="tab" href="#previous-quater" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Previous Quater'); ?></a>
                                             <div class="slide"></div>
                                         </li>
                                     </ul>
@@ -210,7 +210,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="card-header pt-0">
-                                            <h5>Planned Vs Actual</h5>
+                                            <h5><?= __('Planned Vs Actual'); ?></h5>
                                         </div>
                                         <?php if($att1>0){ ?>
 
@@ -223,19 +223,19 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                                                 <div class="s-caption bg-default"></div>
                                                 <div class="s-cont d-inline-block">
                                                     <h5 class="f-w-700 m-b-0 text-right"><?php echo $total_cc; ?></h5>
-                                                    <p class="m-b-0">Planned Hours</p>
+                                                    <p class="m-b-0"><?= __('Planned Hours'); ?></p>
                                                 </div>
                                             </div>
                                             <div class="col-6 b-l-default">
                                                 <div class="s-caption bg-c-red"></div>
                                                 <div class="s-cont d-inline-block">
                                                     <h5 class="f-w-700 m-b-0 text-right"><?php echo $base_total; ?></h5>
-                                                    <p class="m-b-0">Actual Hours</p>
+                                                    <p class="m-b-0"><?= __('Actual Hours'); ?></p>
                                                 </div>
                                             </div>
                                         </div>
                                         <?php }else{ ?>
-                                            <h6 class="text-center mt-3"> No Data</h6>
+                                            <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                         <?php } ?>
                                     </div>
@@ -291,7 +291,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="card-header pt-0">
-                                        <h5 class="text-center">Planned Vs Actual</h5>
+                                        <h5 class="text-center"><?= __('Planned Vs Actual'); ?></h5>
                                         </div>
                                         <?php if($att2>0){ ?>
 
@@ -305,20 +305,20 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                                                 <div class="s-caption bg-default"></div>
                                                 <div class="s-cont d-inline-block">
                                                     <h5 class="f-w-700 m-b-0 text-right"><?php echo $total_cc; ?></h5>
-                                                    <p class="m-b-0">Planned Hours</p>
+                                                    <p class="m-b-0"><?= __('Planned Hours'); ?></p>
                                                 </div>
                                             </div>
                                             <div class="col-6 b-l-default">
                                                 <div class="s-caption bg-c-red"></div>
                                                 <div class="s-cont d-inline-block">
                                                     <h5 class="f-w-700 m-b-0 text-right"><?php echo $base_total; ?></h5>
-                                                    <p class="m-b-0">Actual Hours</p>
+                                                    <p class="m-b-0"><?= __('Actual Hours'); ?></p>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <?php }else{ ?>
-                                            <h6 class="text-center mt-3"> No Data</h6>
+                                            <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                         <?php } ?>
                                     </div>
@@ -330,7 +330,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                 <div class="col-lg-3">
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>With Me</h5>
+                            <h5><?= __('With Me'); ?></h5>
                         </div>
                         <div class="card-body custom-scroll" style="max-height:275px;">
 
@@ -364,7 +364,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>With Manager</h5>
+                            <h5><?= __('With Manager'); ?></h5>
                         </div>
                         <div class="card-body custom-scroll" style="max-height:275px;">
 
@@ -397,7 +397,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>Recently Approved</h5>
+                            <h5><?= __('Recently Approved'); ?></h5>
                         </div>
                         <div class="card-body custom-scroll" style="max-height:275px;">
 
