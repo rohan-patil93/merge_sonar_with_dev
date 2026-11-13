@@ -334,8 +334,8 @@ function getLatestContracts($contracts, $limit = 15)
 <div class="row">
     <from method="post" id="dashboard_form">
         <div class="col-lg-2">
-            <select aria-label="LOCID"  name="LOCID" id="loc_id" class="form-select js-example-basic-single" onchange="changeLocations(this.value)">
-                <option value="">All Locations</option>
+            <select aria-label="<?= htmlspecialchars(__('LOCID'), ENT_QUOTES, 'UTF-8'); ?>"  name="LOCID" id="loc_id" class="form-select js-example-basic-single" onchange="changeLocations(this.value)">
+                <option value=""><?= __('All Locations'); ?></option>
                 <?php foreach ($locations as $locn) { ?>
                     <option <?php echo ($locn['id'] == $_GET['LOCID'])?'selected' : '' ?> value="<?php echo $locn['id']; ?>">
                         <?php echo $locn['location_name']; ?>
@@ -352,14 +352,14 @@ function getLatestContracts($contracts, $limit = 15)
                 <div class="card-body cursor-pointer" onclick="getDynamicContractList('<?php echo urlencode(json_encode($allowedContractsids)); ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <div class="row align-items-center m-b-30">
                         <div class="col">
-                            <h6 class="m-b-5 text-white">Contracts</h6>
+                            <h6 class="m-b-5 text-white"><?= __('Contracts'); ?></h6>
                             <h3 class="m-b-0 f-w-700 text-white"><?= count((array)$allowedContracts) ?></h3>
                         </div>
                         <div class="col-auto">
                             <i class="fa fa-file text-c-red f-18"></i>
                         </div>
                     </div>
-                    <p class="m-b-0 text-white">Total Contracts</p>
+                    <p class="m-b-0 text-white"><?= __('Total Contracts'); ?></p>
                 </div>
             </div>
         </div>
@@ -368,14 +368,14 @@ function getLatestContracts($contracts, $limit = 15)
                 <div class="card-body cursor-pointer" onclick="getDynamicContractList('<?php echo urlencode(json_encode($activeContractsids)); ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <div class="row align-items-center m-b-30">
                         <div class="col">
-                            <h6 class="m-b-5 text-white">Active</h6>
+                            <h6 class="m-b-5 text-white"><?= __('Active'); ?></h6>
                             <h3 class="m-b-0 f-w-700 text-white"><?= count((array)$activeContracts) ?></h3>
                         </div>
                         <div class="col-auto">
                             <i class="fa fa-check text-c-blue f-18"></i>
                         </div>
                     </div>
-                    <p class="m-b-0 text-white">Total Active Contracts</p>
+                    <p class="m-b-0 text-white"><?= __('Total Active Contracts'); ?></p>
                 </div>
             </div>
         </div>
@@ -384,14 +384,14 @@ function getLatestContracts($contracts, $limit = 15)
                 <div class="card-body cursor-pointer" onclick="getDynamicContractList('<?php echo urlencode(json_encode($expiredContractsids)); ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <div class="row align-items-center m-b-30">
                         <div class="col">
-                            <h6 class="m-b-5 text-white">Expired</h6>
+                            <h6 class="m-b-5 text-white"><?= __('Expired'); ?></h6>
                             <h3 class="m-b-0 f-w-700 text-white"><?= count((array)$expiredContracts) ?></h3>
                         </div>
                         <div class="col-auto">
                             <i class="fa fa-times text-c-yellow f-18"></i>
                         </div>
                     </div>
-                    <p class="m-b-0 text-white">Total Expired Contracts</p>
+                    <p class="m-b-0 text-white"><?= __('Total Expired Contracts'); ?></p>
                 </div>
             </div>
         </div>
@@ -402,14 +402,14 @@ function getLatestContracts($contracts, $limit = 15)
                 <div class="card-body">
                     <div class="row align-items-center m-b-30">
                         <div class="col">
-                            <h6 class="m-b-5 text-white">Total Customers</h6>
+                            <h6 class="m-b-5 text-white"><?= __('Total Customers'); ?></h6>
                             <h3 class="m-b-0 f-w-700 text-white"><?= count((array)$allcustomers) ?></h3>
                         </div>
                         <div class="col-auto">
                             <i class="fa fa-user text-c-green f-18"></i>
                         </div>
                     </div>
-                    <p class="m-b-0 text-white">Total Customers</p>
+                    <p class="m-b-0 text-white"><?= __('Total Customers'); ?></p>
                 </div>
             </div>
         </a>
@@ -421,14 +421,14 @@ function getLatestContracts($contracts, $limit = 15)
                 <div class="card-body cursor-pointer">
                     <div class="row align-items-center m-b-30">
                         <div class="col">
-                            <h6 class="m-b-5 text-dark">Total Vendors</h6>
+                            <h6 class="m-b-5 text-dark"><?= __('Total Vendors'); ?></h6>
                             <h3 class="m-b-0 f-w-700 text-dark"><?= count((array)$allvendors) ?></h3>
                         </div>
                         <div class="col-auto">
                             <i class="fa fa-user text-c-dark f-18"></i>
                         </div>
                     </div>
-                    <p class="m-b-0 text-dark">Total Vendors</p>
+                    <p class="m-b-0 text-dark"><?= __('Total Vendors'); ?></p>
                 </div>
             </div>
         </div>
@@ -439,7 +439,7 @@ function getLatestContracts($contracts, $limit = 15)
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Monthly Overview</h5>
+                    <h5><?= __('Monthly Overview'); ?></h5>
                 </div>
                 <div class="card-block">
                     <div id="morris-bar-chart"></div>
@@ -452,11 +452,11 @@ function getLatestContracts($contracts, $limit = 15)
 <ul class="nav md-tabs infisuite_tab mb-2">
     <?php if(CONTRACT_CUSTOMERS != "N"){ ?>
     <li class="nav-item">
-        <a class="nav-link " data-bs-toggle="tab" href="#customers" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti ti-user"></i> Customers</a>
+        <a class="nav-link " data-bs-toggle="tab" href="#customers" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti ti-user"></i> <?= __('Customers'); ?></a>
     </li>
 <?php } ?>
     <li class="nav-item">
-        <a class="nav-link active" data-bs-toggle="tab" href="#vendors" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti ti-user"></i> Vendors</a>
+        <a class="nav-link active" data-bs-toggle="tab" href="#vendors" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti ti-user"></i> <?= __('Vendors'); ?></a>
     </li>
 </ul>
 <div class="tab-content tabs">
@@ -465,8 +465,8 @@ function getLatestContracts($contracts, $limit = 15)
             <div class="col-lg-9">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Customer Contracts</h5>
-                        <a href="index.php?option=COM_LIST_CONTRACTS"  class=" b-b-primary text-primary float-right">View all</a>
+                        <h5><?= __('Customer Contracts'); ?></h5>
+                        <a href="index.php?option=COM_LIST_CONTRACTS"  class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                     </div>
                     <div class="card-body">
 
@@ -474,14 +474,14 @@ function getLatestContracts($contracts, $limit = 15)
                             <table class="table table-bordered" id="contractTable">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Contract</th>
-                                    <th scope="col">Contract Type</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Contract ID</th>
+                                    <th scope="col"><?= __('Contract'); ?></th>
+                                    <th scope="col"><?= __('Contract Type'); ?></th>
+                                    <th scope="col"><?= __('Start Date'); ?></th>
+                                    <th scope="col"><?= __('End Date'); ?></th>
+                                    <th scope="col"><?= __('Contract ID'); ?></th>
 
 
-                                    <th scope="col">Progress</th>
+                                    <th scope="col"><?= __('Progress'); ?></th>
                                 </tr>
 
                                 <?php if (!empty($paginatedFilteredContracts)): ?>
@@ -505,16 +505,16 @@ function getLatestContracts($contracts, $limit = 15)
                                             </td>
                                             <td>
                                                 <?php if ($isAmc) { ?>
-                                                    <span class="badge bg-info">AMC</span>
+                                                    <span class="badge bg-info"><?= __('AMC'); ?></span>
                                                 <?php } else { ?>
-                                                    <span class="badge bg-secondary">Standard</span>
+                                                    <span class="badge bg-secondary"><?= __('Standard'); ?></span>
                                                 <?php } ?>
                                             </td>
                                             <td><?= fromDate($contract['start_date']) ?></td>
                                             <td>
                                                 <?= fromDate($contract['end_date']) ?>
                                                 <?php if ($expired): ?>
-                                                    <span class="form-label label label-danger">Expired</span>
+                                                    <span class="form-label label label-danger"><?= __('Expired'); ?></span>
                                                 <?php endif; ?>
                                             </td>
                                             <td><?= htmlspecialchars($contract['transaction_no'] ?? 'Not Provided') ?></td>
@@ -534,7 +534,7 @@ function getLatestContracts($contracts, $limit = 15)
                                     <?php endforeach; ?>
                                 <?php else: ?>
                                     <tr>
-                                        <td colspan="8" class="text-center">No vendor contracts found</td>
+                                        <td colspan="8" class="text-center"><?= __('No vendor contracts found'); ?></td>
                                     </tr>
                                 <?php endif; ?>
                             </table>
@@ -545,7 +545,7 @@ function getLatestContracts($contracts, $limit = 15)
             <div class="col-lg-3 accordion-block">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Expiring Contracts</h5>
+                        <h5><?= __('Expiring Contracts'); ?></h5>
                     </div>
                     <div class="card-body">
                         <div id="accordionExpiring" role="tablist" aria-multiselectable="true">
@@ -576,10 +576,10 @@ function getLatestContracts($contracts, $limit = 15)
                                                 <?php if (!empty($contractsWithoutRenew)): ?>
                                                     <table class="table table-bordered">
                                                         <tr>
-                                                            <th scope="col">Contract</th>
-                                                            <th scope="col">Days Left</th>
-                                                            <th scope="col">End Date</th>
-                                                            <th scope="col">Action</th>
+                                                            <th scope="col"><?= __('Contract'); ?></th>
+                                                            <th scope="col"><?= __('Days Left'); ?></th>
+                                                            <th scope="col"><?= __('End Date'); ?></th>
+                                                            <th scope="col"><?= __('Action'); ?></th>
                                                         </tr>
                                                         <?php if (!empty((array)$contracts)): ?>
                                                             <?php foreach ($contracts as $contract): ?>
@@ -591,14 +591,14 @@ function getLatestContracts($contracts, $limit = 15)
                                                                 <tr>
                                                                     <td><a class="text-primary" href="index.php?option=COM_INSERT_CONTRACTS&Rid=<?php echo deocdeId("id:".$contract['id']);?>"><?php echo htmlspecialchars($contract['contract_name']." (".$contract['contract_type'].")") ?></a>
                                                                     </td>
-                                                                    <td><?= $daysLeft ?> Days Left</td>
+                                                                    <td><?= $daysLeft ?> <?= __('Days Left'); ?></td>
                                                                     <td><span
                                                                             class="badge bg-danger text-white"><?php //echo  fromDate($contract['end_date']) ?></span>
                                                                     </td>
                                                                     <td>
                                                                         <button onclick="openRenewPage('<?php echo  deocdeId('id:'.$contract['id']); ?>')"
                                                                             class="btn btn-primary btn-sm">
-                                                                            Renew
+                                                                            <?= __('Renew'); ?>
                                                                         </button>
                                                                     </td>
                                                                 </tr>
@@ -608,7 +608,7 @@ function getLatestContracts($contracts, $limit = 15)
                                                 <?php else: ?>
                                                     <table class="table table-bordered">
                                                         <tr>
-                                                            <th scope="col" colspan="4" class="text-center">No contracts Found</th>
+                                                            <th scope="col" colspan="4" class="text-center"><?= __('No contracts Found'); ?></th>
                                                         </tr>
                                                     </table>
                                                 <?php endif;  ?>
@@ -620,7 +620,7 @@ function getLatestContracts($contracts, $limit = 15)
                         </div>
 
 
-                        <h5 class="mt-4">Expired Contracts</h5>
+                        <h5 class="mt-4"><?= __('Expired Contracts'); ?></h5>
                         <div id="accordionExpired_2" role="tablist" aria-multiselectable="true">
                             <?php foreach ($expiredSections as $index => $section): ?>
                                 <?php
@@ -665,9 +665,9 @@ function getLatestContracts($contracts, $limit = 15)
                                             <div class="table-responsive">
                                                 <table class="table table-bordered">
                                                     <tr>
-                                                        <th scope="col">Contract</th>
-                                                        <th scope="col">Days Expired</th>
-                                                        <th scope="col">End Date</th>
+                                                        <th scope="col"><?= __('Contract'); ?></th>
+                                                        <th scope="col"><?= __('Days Expired'); ?></th>
+                                                        <th scope="col"><?= __('End Date'); ?></th>
                                                     </tr>
                                                     <?php if (!empty($expiredContracts)): ?>
                                                         <?php foreach ($expiredContracts as $contract): ?>
@@ -678,7 +678,7 @@ function getLatestContracts($contracts, $limit = 15)
                                                             <tr>
                                                                 <td><a class="text-primary" href="index.php?option=COM_INSERT_CONTRACTS&Rid=<?php echo deocdeId("id:".$contract['id']);?>"><?= htmlspecialchars($contract['contract_name']." (".$contract['contract_type'].")") ?></a>
                                                                 </td>
-                                                                <td><?= $daysExpired ?> Days Ago</td>
+                                                                <td><?= $daysExpired ?> <?= __('Days Ago'); ?></td>
                                                                 <td><span
                                                                         class="badge bg-danger text-white"><?= fromDate($contract['end_date']) ?></span>
                                                                 </td>
@@ -686,9 +686,7 @@ function getLatestContracts($contracts, $limit = 15)
                                                         <?php endforeach; ?>
                                                     <?php else: ?>
                                                         <tr>
-                                                            <td colspan="3" class="text-center">No contracts expired in
-                                                                this
-                                                                range</td>
+                                                            <td colspan="3" class="text-center"><?= __('No contracts expired in this range'); ?></td>
                                                         </tr>
                                                     <?php endif; ?>
                                                 </table>
@@ -729,7 +727,7 @@ function getLatestContracts($contracts, $limit = 15)
     }
 
     function getDynamicContractList(ids){
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $('#dynamic_popupxxl').html(loader);
         $('#kt_modal_dynamic_popupxxl').modal("show");
         var loc_id = $("#loc_id").val();
