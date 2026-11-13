@@ -15,8 +15,8 @@ $ref_details = $result['ref_details'];
 $ref_item_details = $result['ref_item_details'];
 ?>
 <div class="modal-header">
-    <h4 class="modal-title">Journal Voucher</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Journal Voucher'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div class="">
@@ -24,11 +24,11 @@ $ref_item_details = $result['ref_item_details'];
 
         <ul class="nav md-tabs infisuite_tab mb-2">
             <li class="nav-item">
-                <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfdocuments" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Journal Voucher</a>
+                <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfdocuments" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Journal Voucher'); ?></a>
             </li>
             <?php if($journal_vouchers['ref_id'] !=""){ ?>
             <li class="nav-item">
-                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#samerefdocumentssasas" role="tab" aria-selected="true"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Reference Document</a>
+                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#samerefdocumentssasas" role="tab" aria-selected="true"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Reference Document'); ?></a>
             </li>
         <?php } ?>
         </ul>
@@ -45,9 +45,9 @@ $ref_item_details = $result['ref_item_details'];
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col" style="width: 70%;">Particulars</th>
-                                <th scope="col" class="text-right" style="width: 15%;">Debit</th>
-                                <th scope="col" class="text-right" style="width: 15%;">Credit</th>
+                                <th scope="col" style="width: 70%;"><?= __('Particulars'); ?></th>
+                                <th scope="col" class="text-right" style="width: 15%;"><?= __('Debit'); ?></th>
+                                <th scope="col" class="text-right" style="width: 15%;"><?= __('Credit'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,7 +71,7 @@ $ref_item_details = $result['ref_item_details'];
                         <tfoot>
                             <tr>
                                 <th scope="col" class="text-right">
-                                    Total
+                                    <?= __('Total'); ?>
                                 </th>
                                 <td class="text-right"><?php echo customeummarmonyformate($debit_total); ?></td>
                                 <td class="text-right"><?php echo customeummarmonyformate($credit_total); ?></td>
@@ -94,7 +94,7 @@ $ref_item_details = $result['ref_item_details'];
                         <div class="col-lg-8">
                             <table class="table table-td-6">
                                 <thead>
-                                    <tr><th scope="col">Item</th><th scope="col" class="text-right">Quantity</th><th scope="col" class="text-right">Amount</th><th scope="col" class="text-right">Tax</th><th scope="col" class="text-right">Total</th></tr>
+                                    <tr><th scope="col"><?= __('Item'); ?></th><th scope="col" class="text-right"><?= __('Quantity'); ?></th><th scope="col" class="text-right"><?= __('Amount'); ?></th><th scope="col" class="text-right"><?= __('Tax'); ?></th><th scope="col" class="text-right"><?= __('Total'); ?></th></tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($ref_item_details as $tableslist1){?>
@@ -114,23 +114,23 @@ $ref_item_details = $result['ref_item_details'];
                                 <div class="row">
                                     <div class="col-lg-10">
                                 <div class="card-header">
-                                    <h5>Order Summary</h5>
+                                    <h5><?= __('Order Summary'); ?></h5>
                                 </div>
                             </div>
                             </div>
                                 <div class="card-body">
                                     <table class="table table-sm mb-0">
-                                        <tr><th scope="col">Sub Total </th><td style="text-align: right;"><?php echo customeummarmonyformateifine($ref_details['amount']); ?></td></tr>
-                                        <tr><th scope="col">Discount </th><td style="text-align: right;"><?php echo customeummarmonyformateifine($ref_details['discount_amount']); ?></td></tr>
-                                        <tr><th scope="col">Tax</th><td style="text-align: right;"><?php echo customeummarmonyformateifine($ref_details['tax_amount']); ?></td></tr>
-                                        <tr class="bg-primary"><th scope="col">Total</th><td style="text-align: right;"><span class="f-18"><?php echo customeummarmonyformateifine($ref_details['total_amount']); ?></span></td></tr>
+                                        <tr><th scope="col"><?= __('Sub Total'); ?> </th><td style="text-align: right;"><?php echo customeummarmonyformateifine($ref_details['amount']); ?></td></tr>
+                                        <tr><th scope="col"><?= __('Discount'); ?> </th><td style="text-align: right;"><?php echo customeummarmonyformateifine($ref_details['discount_amount']); ?></td></tr>
+                                        <tr><th scope="col"><?= __('Tax'); ?></th><td style="text-align: right;"><?php echo customeummarmonyformateifine($ref_details['tax_amount']); ?></td></tr>
+                                        <tr class="bg-primary"><th scope="col"><?= __('Total'); ?></th><td style="text-align: right;"><span class="f-18"><?php echo customeummarmonyformateifine($ref_details['total_amount']); ?></span></td></tr>
                                     </table>
                                 </div>
 
                             </div>
                         </div>
                         <div class="col-lg-1">
-                                    <a href="index.php?option=<?php echo $insert_page_name; ?>&Rid=<?php echo deocdeId('id:'.$ref_details['id']);?>" class="d-block text-primary f-16 mt-1" target="_blank"><i class="ti-eye"></i> View</a>
+                                    <a href="index.php?option=<?php echo $insert_page_name; ?>&Rid=<?php echo deocdeId('id:'.$ref_details['id']);?>" class="d-block text-primary f-16 mt-1" target="_blank"><i class="ti-eye"></i> <?= __('View'); ?></a>
                         </div>
                     </div>
                 </div>
@@ -143,5 +143,5 @@ $ref_item_details = $result['ref_item_details'];
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
 </div>
