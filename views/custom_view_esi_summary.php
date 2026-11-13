@@ -52,14 +52,14 @@ if(!function_exists('render_esi_summary_table')){
             <table id="basic-btn" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr role="row" style="background-color: #f7f7f7;">
-                        <th scope="col">Employee ID</th>
-                        <th scope="col">Employee Name</th>
-                        <th scope="col">ESI Number</th>
-                        <th scope="col" class="text-right">Employee Contribution %</th>
-                        <th scope="col" class="text-right">Employee Amount</th>
-                        <th scope="col" class="text-right">Employer Contribution %</th>
-                        <th scope="col" class="text-right">Employer Amount</th>
-                        <th scope="col" class="text-right">Total Contribution</th>
+                        <th scope="col"><?= __('Employee ID'); ?></th>
+                        <th scope="col"><?= __('Employee Name'); ?></th>
+                        <th scope="col"><?= __('ESI Number'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Employee Contribution %'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Employee Amount'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Employer Contribution %'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Employer Amount'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Total Contribution'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,7 +83,7 @@ if(!function_exists('render_esi_summary_table')){
                             <?php
                         }
                     }else{
-                        echo "<tr role='row'><td colspan='8'><h4 class='text-center mt-4'><i class='fa fa-warning'></i>No ESI Summary Reports</h4></td></tr>";
+                        echo "<tr role='row'><td colspan='8'><h4 class='text-center mt-4'><i class='fa fa-warning'></i>".__('No ESI Summary Reports')."</h4></td></tr>";
                     }
                     ?>
                 </tbody>
@@ -106,20 +106,20 @@ if(!function_exists('render_esi_summary_table')){
                 <div class="col-lg-3 col-md-3 col-sm-12 col-12 mb-3">
                     <div class="col bg-light-primary ">
                         <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                            <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                            <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                         </span>
                         <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $company_name; ?></span>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-9 col-sm-12 col-12">
-                    <h4 class="card-label text-center f-w-700">ESI Summary Report for <?php echo date("M Y",strtotime($pay_month_year)); ?>     <small class="f-10 d-block">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></small>
+                    <h4 class="card-label text-center f-w-700"><?= __('ESI Summary Report for'); ?> <?php echo date("M Y",strtotime($pay_month_year)); ?>     <small class="f-10 d-block"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></small>
                     </h4>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                     <form method="post" action="#">
                         <div class="input-group input-group-button">
-                            <input aria-label="Pay Month Year" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input"  class="form-control form-control-sm width1" style="font-size: 18px;height: 48px !important;padding: 10px 15px;">  <button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-                                Submit
+                            <input aria-label="<?= htmlspecialchars(__('Pay Month Year'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input"  class="form-control form-control-sm width1" style="font-size: 18px;height: 48px !important;padding: 10px 15px;">  <button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light input-group-text mt-0">
+                                <?= __('Submit'); ?>
                             </button>
                         </div>
                     </form>
@@ -137,7 +137,7 @@ if(!function_exists('render_esi_summary_table')){
                             <?php if(count((array)$pay_area_ids) > 0){ ?>
                             <ul class="nav nav-tabs mb-3">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#esi-summary-tab-all" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">All</a>
+                                    <a class="nav-link active" data-toggle="tab" href="#esi-summary-tab-all" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('All'); ?></a>
                                 </li>
                                 <?php foreach((array)$pay_area_ids as $pay_area_id){ ?>
                                     <li class="nav-item">
