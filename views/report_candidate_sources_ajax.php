@@ -23,7 +23,7 @@ foreach($ckgo as $ckg){
   <script type="text/javascript" src="assets/pages/chart/google/js/custom_report_candidate_sourcs.js"></script>
   <?php }else{?>
     <div class="card-px text-center py-20 m-t-30">
-      <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Data Found </p>
+      <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Data Found'); ?> </p>
       <div class="text-center px-4">
         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
       </div>
