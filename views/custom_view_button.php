@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Popup Positioning</title>
+    <title><?= __('Dynamic Popup Positioning'); ?></title>
     <style type="text/css">
         ul {
             padding: 0;
@@ -45,8 +45,8 @@
             <li>
                 <span class="popup" onclick="openPopup(this,<?php echo $i; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $i; ?></span>
                 <div class="open_popup" id="popup_<?php echo $i; ?>">
-                    PoPup
-                    <b class="close" onclick="closePopup(<?php echo $i; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">close</b>
+                    <?= __('PoPup'); ?>
+                    <b class="close" onclick="closePopup(<?php echo $i; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('close'); ?></b>
                 </div>
             </li>
             <?php } ?>
