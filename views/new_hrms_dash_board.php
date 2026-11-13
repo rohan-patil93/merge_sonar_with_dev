@@ -9,7 +9,7 @@
                     <div class="col-md-12 col-xl-8">
                         <div class="card sale-card">
                             <div class="card-header">
-                                <h5>Deals Analytics</h5>
+                                <h5><?= __('Deals Analytics'); ?></h5>
                             </div>
                             <div class="card-block">
                                 <div id="sales-analytics" class="chart-shadow" style="height:380px"></div>
@@ -21,9 +21,9 @@
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <h6 class="m-b-25">Impressions</h6>
+                                        <h6 class="m-b-25"><?= __('Impressions'); ?></h6>
                                         <h3 class="f-w-700 text-c-blue">1,563</h3>
-                                        <p class="m-b-0">May 23 - June 01 (2017)</p>
+                                        <p class="m-b-0"><?= __('May 23 - June 01 (2017)'); ?></p>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-eye bg-c-blue"></i>
@@ -35,9 +35,9 @@
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <h6 class="m-b-25">Goal</h6>
+                                        <h6 class="m-b-25"><?= __('Goal'); ?></h6>
                                         <h3 class="f-w-700 text-c-green">30,564</h3>
-                                        <p class="m-b-0">May 23 - June 01 (2017)</p>
+                                        <p class="m-b-0"><?= __('May 23 - June 01 (2017)'); ?></p>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-bullseye bg-c-green"></i>
@@ -49,9 +49,9 @@
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <h6 class="m-b-25">Impact</h6>
+                                        <h6 class="m-b-25"><?= __('Impact'); ?></h6>
                                         <h3 class="f-w-700 text-c-yellow">42.6%</h3>
-                                        <p class="m-b-0">May 23 - June 01 (2017)</p>
+                                        <p class="m-b-0"><?= __('May 23 - June 01 (2017)'); ?></p>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-hand-paper bg-c-yellow"></i>
@@ -68,28 +68,28 @@
                             <div class="card-block">
                                 <div class="row">
                                     <div class="col-xl-3 col-md-6">
-                                        <h6>Published Project</h6>
+                                        <h6><?= __('Published Project'); ?></h6>
                                         <h5 class="m-b-30 f-w-700">532<span class="text-c-green m-l-10">+1.69%</span></h5>
                                         <div class="progress">
                                             <div class="progress-bar bg-c-red" style="width:25%"></div>
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-md-6">
-                                        <h6>Completed Task</h6>
+                                        <h6><?= __('Completed Task'); ?></h6>
                                         <h5 class="m-b-30 f-w-700">4,569<span class="text-c-red m-l-10">-0.5%</span></h5>
                                         <div class="progress">
                                             <div class="progress-bar bg-c-blue" style="width:65%"></div>
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-md-6">
-                                        <h6>Successfull Task</h6>
+                                        <h6><?= __('Successfull Task'); ?></h6>
                                         <h5 class="m-b-30 f-w-700">89%<span class="text-c-green m-l-10">+0.99%</span></h5>
                                         <div class="progress">
                                             <div class="progress-bar bg-c-green" style="width:85%"></div>
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-md-6">
-                                        <h6>Ongoing Project</h6>
+                                        <h6><?= __('Ongoing Project'); ?></h6>
                                         <h5 class="m-b-30 f-w-700">365<span class="text-c-green m-l-10">+0.35%</span></h5>
                                         <div class="progress">
                                             <div class="progress-bar bg-c-yellow" style="width:45%"></div>
@@ -107,16 +107,16 @@
                             <div class="card-block p-b-0">
                                 <div class="row m-b-50">
                                     <div class="col">
-                                        <h6 class="m-b-5">Sales In July</h6>
+                                        <h6 class="m-b-5"><?= __('Sales In July'); ?></h6>
                                         <h5 class="m-b-0 f-w-700">$2665.00</h5>
                                     </div>
                                     <div class="col-auto text-center">
-                                        <p class="m-b-5">Direct Sale</p>
+                                        <p class="m-b-5"><?= __('Direct Sale'); ?></p>
                                         <h6 class="m-b-0">$1768</h6>
                                     </div>
 
                                     <div class="col-auto text-center">
-                                        <p class="m-b-5">Referal</p>
+                                        <p class="m-b-5"><?= __('Referal'); ?></p>
                                         <h6 class="m-b-0">$897</h6>
                                     </div>
                                 </div>
@@ -129,7 +129,7 @@
                     <div class="col-xl-4 col-md-12">
                         <div class="card latest-update-card">
                             <div class="card-header">
-                                <h5>What’s New</h5>
+                                <h5><?= __('What’s New'); ?></h5>
                                 <div class="card-header-right">
                                     <ul class="list-unstyled card-option">
                                         <li class="first-opt"><i class="feather icon-chevron-left open-card-option"></i></li>
@@ -146,11 +146,11 @@
                                     <div class="latest-update-box">
                                         <div class="row p-t-20 p-b-30">
                                             <div class="col-auto text-end update-meta p-r-0">
-                                                <img src="assets/images/avatar-4.jpg" alt="user" class="img-radius img-40 align-top m-r-15 update-icon">
+                                                <img src="assets/images/avatar-4.jpg" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-15 update-icon">
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>Your Manager Posted.</h6></a>
-                                                <p class="text-muted m-b-0">Jonny michel</p>
+                                                <a href="#!"><h6><?= __('Your Manager Posted.'); ?></h6></a>
+                                                <p class="text-muted m-b-0"><?= __('Jonny michel'); ?></p>
                                             </div>
                                         </div>
                                         <div class="row p-b-30">
@@ -158,8 +158,8 @@
                                                 <i class="feather icon-briefcase bg-c-red update-icon"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>You have 3 pending Task.</h6></a>
-                                                <p class="text-muted m-b-0">Hemilton</p>
+                                                <a href="#!"><h6><?= __('You have 3 pending Task.'); ?></h6></a>
+                                                <p class="text-muted m-b-0"><?= __('Hemilton'); ?></p>
                                             </div>
                                         </div>
                                         <div class="row p-b-30">
@@ -167,17 +167,17 @@
                                                 <i class="feather icon-check f-w-600 bg-c-green update-icon"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>New Order Received.</h6></a>
-                                                <p class="text-muted m-b-0">Hemilton</p>
+                                                <a href="#!"><h6><?= __('New Order Received.'); ?></h6></a>
+                                                <p class="text-muted m-b-0"><?= __('Hemilton'); ?></p>
                                             </div>
                                         </div>
                                         <div class="row p-b-30">
                                             <div class="col-auto text-end update-meta p-r-0">
-                                                <img src="assets/images/avatar-4.jpg" alt="user" class="img-radius img-40 align-top m-r-15 update-icon">
+                                                <img src="assets/images/avatar-4.jpg" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-15 update-icon">
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>Your Manager Posted.</h6></a>
-                                                <p class="text-muted m-b-0">Jonny michel</p>
+                                                <a href="#!"><h6><?= __('Your Manager Posted.'); ?></h6></a>
+                                                <p class="text-muted m-b-0"><?= __('Jonny michel'); ?></p>
                                             </div>
                                         </div>
                                         <div class="row p-b-30">
@@ -185,8 +185,8 @@
                                                 <i class="feather icon-briefcase bg-c-red update-icon"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>You have 3 pending Task.</h6></a>
-                                                <p class="text-muted m-b-0">Hemilton</p>
+                                                <a href="#!"><h6><?= __('You have 3 pending Task.'); ?></h6></a>
+                                                <p class="text-muted m-b-0"><?= __('Hemilton'); ?></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -194,8 +194,8 @@
                                                 <i class="feather icon-check f-w-600 bg-c-green update-icon"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>New Order Received.</h6></a>
-                                                <p class="text-muted m-b-0">Hemilton</p>
+                                                <a href="#!"><h6><?= __('New Order Received.'); ?></h6></a>
+                                                <p class="text-muted m-b-0"><?= __('Hemilton'); ?></p>
                                             </div>
                                         </div>
                                     </div>
@@ -206,7 +206,7 @@
                     <div class="col-xl-4 col-md-6">
                         <div class="card latest-update-card">
                             <div class="card-header">
-                                <h5>Latest Activity</h5>
+                                <h5><?= __('Latest Activity'); ?></h5>
                                 <div class="card-header-right">
                                     <ul class="list-unstyled card-option">
                                         <li class="first-opt"><i class="feather icon-chevron-left open-card-option"></i></li>
@@ -226,8 +226,8 @@
                                                 <i class="b-primary update-icon ring"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>Devlopment & Update</h6></a>
-                                                <p class="text-muted m-b-0">Lorem ipsum dolor sit amet, <a href="#!" class="text-c-blue"> More</a></p>
+                                                <a href="#!"><h6><?= htmlspecialchars(__('Devlopment & Update'), ENT_QUOTES, 'UTF-8'); ?></h6></a>
+                                                <p class="text-muted m-b-0"><?= __('Lorem ipsum dolor sit amet,'); ?> <a href="#!" class="text-c-blue"> <?= __('More'); ?></a></p>
                                             </div>
                                         </div>
                                         <div class="row p-b-30">
@@ -235,8 +235,8 @@
                                                 <i class="b-primary update-icon ring"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>Showcases</h6></a>
-                                                <p class="text-muted m-b-0">Lorem dolor sit amet, <a href="#!" class="text-c-blue"> More</a></p>
+                                                <a href="#!"><h6><?= __('Showcases'); ?></h6></a>
+                                                <p class="text-muted m-b-0"><?= __('Lorem dolor sit amet,'); ?> <a href="#!" class="text-c-blue"> <?= __('More'); ?></a></p>
                                             </div>
                                         </div>
                                         <div class="row p-b-30">
@@ -244,8 +244,8 @@
                                                 <i class="b-success update-icon ring"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>Miscellaneous</h6></a>
-                                                <p class="text-muted m-b-0">Lorem ipsum dolor sit ipsum amet, <a href="#!" class="text-c-green"> More</a></p>
+                                                <a href="#!"><h6><?= __('Miscellaneous'); ?></h6></a>
+                                                <p class="text-muted m-b-0"><?= __('Lorem ipsum dolor sit ipsum amet,'); ?> <a href="#!" class="text-c-green"> <?= __('More'); ?></a></p>
                                             </div>
                                         </div>
                                         <div class="row p-b-30">
@@ -253,8 +253,8 @@
                                                 <i class="b-danger update-icon ring"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>Your Manager Posted.</h6></a>
-                                                <p class="text-muted m-b-0">Lorem ipsum dolor sit amet, <a href="#!" class="text-c-red"> More</a></p>
+                                                <a href="#!"><h6><?= __('Your Manager Posted.'); ?></h6></a>
+                                                <p class="text-muted m-b-0"><?= __('Lorem ipsum dolor sit amet,'); ?> <a href="#!" class="text-c-red"> <?= __('More'); ?></a></p>
                                             </div>
                                         </div>
                                         <div class="row p-b-30">
@@ -262,8 +262,8 @@
                                                 <i class="b-primary update-icon ring"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>Showcases</h6></a>
-                                                <p class="text-muted m-b-0">Lorem dolor sit amet, <a href="#!" class="text-c-blue"> More</a></p>
+                                                <a href="#!"><h6><?= __('Showcases'); ?></h6></a>
+                                                <p class="text-muted m-b-0"><?= __('Lorem dolor sit amet,'); ?> <a href="#!" class="text-c-blue"> <?= __('More'); ?></a></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -271,8 +271,8 @@
                                                 <i class="b-success update-icon ring"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>Miscellaneous</h6></a>
-                                                <p class="text-muted m-b-0">Lorem ipsum dolor sit ipsum amet, <a href="#!" class="text-c-green"> More</a></p>
+                                                <a href="#!"><h6><?= __('Miscellaneous'); ?></h6></a>
+                                                <p class="text-muted m-b-0"><?= __('Lorem ipsum dolor sit ipsum amet,'); ?> <a href="#!" class="text-c-green"> <?= __('More'); ?></a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -286,7 +286,7 @@
                     <div class="col-md-12">
                         <div class="card table-card">
                             <div class="card-header">
-                                <h5>New Products</h5>
+                                <h5><?= __('New Products'); ?></h5>
                                 <div class="card-header-right">
                                     <ul class="list-unstyled card-option">
                                         <li class="first-opt"><i class="feather icon-chevron-left open-card-option"></i></li>
@@ -303,19 +303,19 @@
                                     <table class="table table-hover m-b-0">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Product Code</th>
-                                                <th scope="col">Customer</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Rating</th>
+                                                <th scope="col"><?= __('Name'); ?></th>
+                                                <th scope="col"><?= __('Product Code'); ?></th>
+                                                <th scope="col"><?= __('Customer'); ?></th>
+                                                <th scope="col"><?= __('Status'); ?></th>
+                                                <th scope="col"><?= __('Rating'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Sofa</td>
-                                                <td>#PHD001</td>
+                                                <td><?= __('Sofa'); ?></td>
+                                                <td><?= __('#PHD001'); ?></td>
                                                 <td>abc@gmail.com</td>
-                                                <td><span class="form-label label label-danger">Out Stock</span></td>
+                                                <td><span class="form-label label label-danger"><?= __('Out Stock'); ?></span></td>
                                                 <td>
                                                     <a href="#!"><i class="fa fa-star f-12 text-c-yellow"></i></a>
                                                     <a href="#!"><i class="fa fa-star f-12 text-c-yellow"></i></a>
@@ -325,10 +325,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Computer</td>
-                                                <td>#PHD002</td>
+                                                <td><?= __('Computer'); ?></td>
+                                                <td><?= __('#PHD002'); ?></td>
                                                 <td>cdc@gmail.com</td>
-                                                <td><span class="form-label label label-success">In Stock</span></td>
+                                                <td><span class="form-label label label-success"><?= __('In Stock'); ?></span></td>
                                                 <td>
                                                     <a href="#!"><i class="fa fa-star f-12 text-c-yellow"></i></a>
                                                     <a href="#!"><i class="fa fa-star f-12 text-c-yellow"></i></a>
@@ -338,10 +338,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Mobile</td>
-                                                <td>#PHD003</td>
+                                                <td><?= __('Mobile'); ?></td>
+                                                <td><?= __('#PHD003'); ?></td>
                                                 <td>pqr@gmail.com</td>
-                                                <td><span class="form-label label label-danger">Out Stock</span></td>
+                                                <td><span class="form-label label label-danger"><?= __('Out Stock'); ?></span></td>
                                                 <td>
                                                     <a href="#!"><i class="fa fa-star f-12 text-c-yellow"></i></a>
                                                     <a href="#!"><i class="fa fa-star f-12 text-c-yellow"></i></a>
@@ -351,10 +351,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Coat</td>
-                                                <td>#PHD004</td>
+                                                <td><?= __('Coat'); ?></td>
+                                                <td><?= __('#PHD004'); ?></td>
                                                 <td>bcs@gmail.com</td>
-                                                <td><span class="form-label label label-success">In Stock</span></td>
+                                                <td><span class="form-label label label-success"><?= __('In Stock'); ?></span></td>
                                                 <td>
                                                     <a href="#!"><i class="fa fa-star f-12 text-c-yellow"></i></a>
                                                     <a href="#!"><i class="fa fa-star f-12 text-c-yellow"></i></a>
@@ -364,10 +364,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Watch</td>
-                                                <td>#PHD005</td>
+                                                <td><?= __('Watch'); ?></td>
+                                                <td><?= __('#PHD005'); ?></td>
                                                 <td>cdc@gmail.com</td>
-                                                <td><span class="form-label label label-success">In Stock</span></td>
+                                                <td><span class="form-label label label-success"><?= __('In Stock'); ?></span></td>
                                                 <td>
                                                     <a href="#!"><i class="fa fa-star f-12 text-c-yellow"></i></a>
                                                     <a href="#!"><i class="fa fa-star f-12 text-c-yellow"></i></a>
@@ -377,10 +377,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Shoes</td>
-                                                <td>#PHD006</td>
+                                                <td><?= __('Shoes'); ?></td>
+                                                <td><?= __('#PHD006'); ?></td>
                                                 <td>pqr@gmail.com</td>
-                                                <td><span class="form-label label label-danger">Out Stock</span></td>
+                                                <td><span class="form-label label label-danger"><?= __('Out Stock'); ?></span></td>
                                                 <td>
                                                     <a href="#!"><i class="fa fa-star f-12 text-c-yellow"></i></a>
                                                     <a href="#!"><i class="fa fa-star f-12 text-c-yellow"></i></a>
