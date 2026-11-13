@@ -133,20 +133,20 @@ $head_1 = array('FY'.$ly.'-'.$lf.' CY'.$lcy.'-'.$lcq.' Current Quarter Actual','
                     <div class="col-lg-3">
                         <div class="col bg-light-primary ">
                             <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                                <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                                <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                             </span>
                             <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $_SESSION['config']['name']; ?></span>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <h4 class="card-label text-center f-w-700">Vendor Wise Yearly Summary</h4>
+                        <h4 class="card-label text-center f-w-700"><?= __('Vendor Wise Yearly Summary'); ?></h4>
                     </div>
                     <div class="col-lg-3">
                         <form class="kt-form" id="kt_form" method="post" action="">
                             <div class="row">
                                 <div class="col-lg-6 w-full form-group">
-                                    <select aria-label="Vendor" name="vendor_id" class="form-select js-example-basic-single">
-                                        <option value="">All Vendors</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" name="vendor_id" class="form-select js-example-basic-single">
+                                        <option value=""><?= __('All Vendors'); ?></option>
                                         <?php foreach($filter_vendors as $vid){ ?>
                                             <option value="<?php echo $vid['vendor_id']; ?>"
                                                 <?php if(isset($_POST['vendor_id']) && $_POST['vendor_id'] == $vid['vendor_id']) { echo 'selected';
@@ -157,8 +157,8 @@ $head_1 = array('FY'.$ly.'-'.$lf.' CY'.$lcy.'-'.$lcq.' Current Quarter Actual','
                                     </select>
                                 </div>
                                 <div class="col-lg-6 w-full form-group">
-                                    <select aria-label="Manager" name="manager_id" class="form-select js-example-basic-single">
-                                        <option value="">All Managers</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Manager'), ENT_QUOTES, 'UTF-8'); ?>" name="manager_id" class="form-select js-example-basic-single">
+                                        <option value=""><?= __('All Managers'); ?></option>
                                         <?php foreach($managers as $mid => $mname){ ?>
                                             <option value="<?php echo $mid; ?>"
                                                 <?php if(isset($_POST['manager_id']) && $_POST['manager_id'] == $mid) { echo 'selected';
@@ -170,7 +170,7 @@ $head_1 = array('FY'.$ly.'-'.$lf.' CY'.$lcy.'-'.$lcq.' Current Quarter Actual','
                                 </div>
                             </div>
                             <div class="input-group input-group-button">
-                                <select aria-label="Year" name="year" id="year" class="form-control form-control-sm width1" required style=" border: 2px solid #ccc;">
+                                <select aria-label="<?= htmlspecialchars(__('Year'), ENT_QUOTES, 'UTF-8'); ?>" name="year" id="year" class="form-control form-control-sm width1" required style=" border: 2px solid #ccc;">
                                     <?php for ($y = date('Y') - 3; $y <= date('Y') + 1; $y++) { ?>
                                         <option value="<?php echo $y; ?>" <?php echo ($y == $selected_year) ? 'selected' : ''; ?>>
                                             <?php echo $y; ?>
@@ -178,19 +178,19 @@ $head_1 = array('FY'.$ly.'-'.$lf.' CY'.$lcy.'-'.$lcq.' Current Quarter Actual','
                                     <?php } ?>
                                 </select>
 
-                                <select aria-label="Quarter" name="quarter" id="quarter" class="form-control form-control-sm width1" required style=" border: 2px solid #ccc;">
+                                <select aria-label="<?= htmlspecialchars(__('Quarter'), ENT_QUOTES, 'UTF-8'); ?>" name="quarter" id="quarter" class="form-control form-control-sm width1" required style=" border: 2px solid #ccc;">
                                     <option value="Q1" <?php if ($selected_quarter == 'Q1') { echo "selected";
-} ?>>Q1 (Jan - Mar)</option>
+} ?>><?= __('Q1 (Jan - Mar)'); ?></option>
                                     <option value="Q2" <?php if ($selected_quarter == 'Q2') { echo "selected";
-} ?>>Q2 (Apr - Jun)</option>
+} ?>><?= __('Q2 (Apr - Jun)'); ?></option>
                                     <option value="Q3" <?php if ($selected_quarter == 'Q3') { echo "selected";
-} ?>>Q3 (Jul - Sep)</option>
+} ?>><?= __('Q3 (Jul - Sep)'); ?></option>
                                     <option value="Q4" <?php if ($selected_quarter == 'Q4') { echo "selected";
-} ?>>Q4 (Oct - Dec)</option>
+} ?>><?= __('Q4 (Oct - Dec)'); ?></option>
                                 </select>
 
                                 <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-                                    Submit
+                                    <?= __('Submit'); ?>
                                 </button>
                             </div>
                         </form>
@@ -211,8 +211,8 @@ $head_1 = array('FY'.$ly.'-'.$lf.' CY'.$lcy.'-'.$lcq.' Current Quarter Actual','
                                         <?php } ?>
                                     </tr>
                                      <tr>
-                                         <th scope="col">Sl No</th>
-                                        <th scope="col">Vendor Name</th>
+                                         <th scope="col"><?= __('Sl No'); ?></th>
+                                        <th scope="col"><?= __('Vendor Name'); ?></th>
                                         <th scope="col"><?php echo $h2quarterMonths[$lcq]." ".$vy; ?></th>
                                         <th scope="col"><?php echo $h2quarterMonths[$lcq]." ".$vy; ?></th>
                                         <th scope="col"><?php echo $h2quarterMonths[$lcq]." ".$vy; ?></th>
@@ -240,7 +240,7 @@ $head_1 = array('FY'.$ly.'-'.$lf.' CY'.$lcy.'-'.$lcq.' Current Quarter Actual','
                                                 <td class="text-right"><?php echo $cur['no_emp']; ?></td>
                                                 <td class="text-right" ><?php echo $last_budget[$cur['vendor_id']]['total']-$cur['total']; ?></td>
                                                 <td>
-                                                    <textarea aria-label="Comments" class="form-control" id="comments" name="comments" onblur="tosavecommentdataquater(<?php echo $cur['vendor_id'].",".$selected_year.",".$quarter_no; ?>, this.value)"><?php echo $comm_data[$cur['vendor_id']];  ?>
+                                                    <textarea aria-label="<?= htmlspecialchars(__('Comments'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="comments" name="comments" onblur="tosavecommentdataquater(<?php echo $cur['vendor_id'].",".$selected_year.",".$quarter_no; ?>, this.value)"><?php echo $comm_data[$cur['vendor_id']];  ?>
                                                     </textarea>
                                                 </td>
                                             </tr>
