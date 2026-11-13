@@ -81,11 +81,11 @@ if(!function_exists('render_pt_annual_statement_table')){
                 <thead>
                     <tr role="row" style="background-color: #f7f7f7;">
                         <th scope="col">#</th>
-                        <th scope="col">Period</th>
-                        <th scope="col" style="text-align:right">No. of Employee's</th>
-                        <th scope="col" style="text-align:right">PT Amount</th>
-                        <th scope="col" style="text-align:center;">PT Payment Number</th>
-                        <th scope="col" style="text-align:right">PT Payment Amount</th>
+                        <th scope="col"><?= __('Period'); ?></th>
+                        <th scope="col" style="text-align:right"><?= __('No. of Employee\'s'); ?></th>
+                        <th scope="col" style="text-align:right"><?= __('PT Amount'); ?></th>
+                        <th scope="col" style="text-align:center;"><?= __('PT Payment Number'); ?></th>
+                        <th scope="col" style="text-align:right"><?= __('PT Payment Amount'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -107,7 +107,7 @@ if(!function_exists('render_pt_annual_statement_table')){
                         <?php $m++;
 }
                     }else{ ?>
-                        <tr role="row"><td colspan="6" class="text-center"><h4 class="mt-4"><i class="fa fa-warning"></i> No Professional Tax Annual Statement Reports</h4></td></tr>
+                        <tr role="row"><td colspan="6" class="text-center"><h4 class="mt-4"><i class="fa fa-warning"></i> <?= __('No Professional Tax Annual Statement Reports'); ?></h4></td></tr>
                     <?php } ?>
                 </tbody>
             </table>
@@ -126,21 +126,21 @@ if(!function_exists('render_pt_annual_statement_table')){
                     <div class="col-lg-3 col-md-3 col-sm-12 col-12 mb-3">
                         <div class="col bg-light-primary ">
                             <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                                <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                                <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                             </span>
                             <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $company_name; ?></span>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-9 col-sm-12 col-12">
-                        <h4 class="card-label text-center f-w-700">PT Annual Return Statement
-                            <small class="f-10 d-block">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></small>
+                        <h4 class="card-label text-center f-w-700"><?= __('PT Annual Return Statement'); ?>
+                            <small class="f-10 d-block"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></small>
                         </h4>
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                         <form method="post" action="#">
                             <div class="input-group input-group-button">
 
-                                <select aria-label="Pay Year" class="js-example-basic-single form-control form-control-sm width1 table-card-header" style=" border: 1px solid #00bcd4;" name="pay_year" >
+                                <select aria-label="<?= htmlspecialchars(__('Pay Year'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single form-control form-control-sm width1 table-card-header" style=" border: 1px solid #00bcd4;" name="pay_year" >
 
                                     <?php for($i=$list_year;$i<=$now_year;$i++){ ?>
                                     <option <?php if($pay_year == $i){ echo "selected";
@@ -148,7 +148,7 @@ if(!function_exists('render_pt_annual_statement_table')){
                                     <?php } ?>
                                 </select>
                                  <button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-                                    Submit
+                                    <?= __('Submit'); ?>
                                 </button>
                             </div>
                         </form>
@@ -162,7 +162,7 @@ if(!function_exists('render_pt_annual_statement_table')){
                 <?php if(count((array)$pay_area_ids) > 0){ ?>
                     <ul class="nav nav-tabs mb-3">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#pt-annual-tab-all" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">All</a>
+                            <a class="nav-link active" data-toggle="tab" href="#pt-annual-tab-all" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('All'); ?></a>
                         </li>
                         <?php foreach((array)$pay_area_ids as $pay_area_id){ ?>
                             <li class="nav-item">
