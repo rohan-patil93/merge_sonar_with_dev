@@ -34,32 +34,32 @@ function submitForm(){
         if(user_id ==""){
             error_check = "Y";
              console.log("empty user id");
-            $("#error_user_id").text("Please Enter Required Fields");
+            $("#error_user_id").text(<?php echo json_encode(__('Please Enter Required Fields'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         }
     }else{
         var project_id = $(".project_ids").val();
         if(project_id ==""){
             error_check = "Y";
             console.log("empty project id");
-            $("#error_project_id").text("Please Enter Required Fields");
+            $("#error_project_id").text(<?php echo json_encode(__('Please Enter Required Fields'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         }
     }
     if(number_of_lead_contact =="" || number_of_lead_contact =="0"){
         error_check = "Y";
          console.log("empty number");
-        $("#error_number_of_lead_contact").text("Please Enter Required Fields");
+        $("#error_number_of_lead_contact").text(<?php echo json_encode(__('Please Enter Required Fields'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
     }
     if(assign_lead_contact == "crm_leads"){
         if(parseInt(crm_lead_total_cnt) < parseInt(number_of_lead_contact)){
             error_check = "Y";
             console.log("Leads");
-            $("#error_number_of_lead_contact").text("Available Leads Is "+crm_lead_total_cnt);
+            $("#error_number_of_lead_contact").text(<?php echo json_encode(__('Available Leads Is').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+crm_lead_total_cnt);
         }
     }else if(assign_lead_contact == "crm_contacts"){
         if(parseInt(crm_contacts_total_cnt) < parseInt(number_of_lead_contact)){
             error_check = "Y";
              console.log("contacts");
-            $("#error_number_of_lead_contact").text("Available Contact Is "+crm_contacts_total_cnt);
+            $("#error_number_of_lead_contact").text(<?php echo json_encode(__('Available Contact Is').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+crm_contacts_total_cnt);
         }else{
             console.log("contacts -"+crm_contacts_total_cnt+" --- "+number_of_lead_contact);
         }
@@ -95,7 +95,7 @@ function submitForm(){
                 <div class="card-body text-center p-2">
 
                     <p class="m-b-30 bg-c-blue lbl-card custom-limit-text" style="--linehide: 1;">
-                    Total Leads </p>
+                    <?= __('Total Leads'); ?> </p>
 
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $dashboard_cnt['crm_lead_total_cnt'] !=""?$dashboard_cnt['crm_lead_total_cnt']:0; ?></h2>
@@ -111,7 +111,7 @@ function submitForm(){
                 <div class="card-body text-center p-2">
 
                     <p class="m-b-30 bg-c-blue lbl-card custom-limit-text" style="--linehide: 1;">
-                    Allocatd Leads</p>
+                    <?= __('Allocatd Leads'); ?></p>
 
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $dashboard_cnt['crm_lead_assigne_cnt'] !=""?$dashboard_cnt['crm_lead_assigne_cnt']:0; ?></h2>
@@ -127,7 +127,7 @@ function submitForm(){
                 <div class="card-body text-center p-2">
 
                     <p class="m-b-30 bg-c-blue lbl-card custom-limit-text" style="--linehide: 1;">
-                    Un-Allocated Leads</p>
+                    <?= __('Un-Allocated Leads'); ?></p>
 
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $dashboard_cnt['crm_lead_un_assigne_cnt'] !=""?$dashboard_cnt['crm_lead_un_assigne_cnt']:0; ?></h2>
@@ -143,7 +143,7 @@ function submitForm(){
                 <div class="card-body text-center p-2">
 
                     <p class="m-b-30 bg-c-yellow  lbl-card custom-limit-text" style="--linehide: 1;">
-                    Total Contacts </p>
+                    <?= __('Total Contacts'); ?> </p>
 
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $dashboard_cnt['crm_contacts_total_cnt'] !=""?$dashboard_cnt['crm_contacts_total_cnt']:0; ?></h2>
@@ -159,7 +159,7 @@ function submitForm(){
                 <div class="card-body text-center p-2">
 
                     <p class="m-b-30 bg-c-yellow  lbl-card custom-limit-text" style="--linehide: 1;">
-                    Allocatd Contacts</p>
+                    <?= __('Allocatd Contacts'); ?></p>
 
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $dashboard_cnt['crm_contacts_assigne_cnt'] !=""?$dashboard_cnt['crm_contacts_assigne_cnt']:0; ?></h2>
@@ -175,7 +175,7 @@ function submitForm(){
                 <div class="card-body text-center p-2">
 
                     <p class="m-b-30 bg-c-yellow  lbl-card custom-limit-text" style="--linehide: 1;">
-                    Un-Allocated Contacts</p>
+                    <?= __('Un-Allocated Contacts'); ?></p>
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $dashboard_cnt['crm_contacts_un_assigne_cnt'] !=""?$dashboard_cnt['crm_contacts_un_assigne_cnt']:0; ?></h2>
                     </div>
@@ -190,11 +190,11 @@ function submitForm(){
     <div class="col-lg-5">
         <div class="card">
             <div class="card-header table-card-header">
-                <h5>User Analysis</h5>
+                <h5><?= __('User Analysis'); ?></h5>
                 <div class="card-header-right table-card-header f-12">
-                     <span class="form-label label label-xs label-info " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Total"><i class="ti-info-alt"></i></span> Total
-                     <span class="form-label label label-xs label-danger " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Yet To start"><i class="ti-info-alt"></i></span> Yet To start
-                     <span class="form-label label label-xs label-success " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="In-Progress"><i class="ti-info-alt"></i></span> In-Progress
+                     <span class="form-label label label-xs label-info " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Total'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-info-alt"></i></span> <?= __('Total'); ?>
+                     <span class="form-label label label-xs label-danger " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Yet To start'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-info-alt"></i></span> <?= __('Yet To start'); ?>
+                     <span class="form-label label label-xs label-success " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('In-Progress'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-info-alt"></i></span> <?= __('In-Progress'); ?>
                 </div>
             </div>
             <div class="card-body">
@@ -202,9 +202,9 @@ function submitForm(){
                     <?php  if(count((array)$application_users) !=0){ ?>
                     <table class="table table-hover">
                         <tr>
-                            <th scope="col">User</th>
-                            <th scope="col">Leads</th>
-                            <th scope="col">Contacts</th>
+                            <th scope="col"><?= __('User'); ?></th>
+                            <th scope="col"><?= __('Leads'); ?></th>
+                            <th scope="col"><?= __('Contacts'); ?></th>
                         </tr>
                        <?php $im=1; foreach($application_users as $auser){
                         $leadcnt = $auser['leads'];
@@ -214,9 +214,9 @@ function submitForm(){
                             <td class="p-2 w-b-w-s">
                                 <div class="align-middle">
                                     <?php if($auser['user_photo']) { ?>
-                                        <img src="uploads/all/<?php echo $auser['user_photo']; ?>"  class="img-radius img-50 align-top m-r-15" alt="User Profile">
+                                        <img src="uploads/all/<?php echo $auser['user_photo']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <?php } else { ?>
-                                        <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($auser['display_name']); ?></span>
+                                        <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($auser['display_name']); ?></span>
                                     <?php } ?>
                                     <div class="d-inline-block width73">
                                         <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('LEAD','<?php echo $auser['id']; ?>')"><h6><?php echo $auser['display_name']; ?></h6></button>
