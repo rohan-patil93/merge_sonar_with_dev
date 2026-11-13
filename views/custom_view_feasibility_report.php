@@ -17,18 +17,18 @@ $response = callAPI($api_url);
 $data = json_decode($response, true);
 ?>
 <div class="modal-header  ">
-    <h5 class="modal-title">Feasibility Report</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Feasibility Report'); ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 
 <div class="modal-body custom-scroll" id="feasibilityReportCard">
 
-    <h6 class="f-w-600 m-b-10 m-t-10">Feasibility Type: <?php echo htmlspecialchars($data['requirement']['feasibility_type']) ?? '-' ?></h6>
+    <h6 class="f-w-600 m-b-10 m-t-10"><?= __('Feasibility Type'); ?>: <?php echo htmlspecialchars($data['requirement']['feasibility_type']) ?? '-' ?></h6>
 
 
     <table class="table table-bordered">
         <tr>
-            <th scope="col" colspan="2">Feasibility Requirement</th>
+            <th scope="col" colspan="2"><?= __('Feasibility Requirement'); ?></th>
         </tr>
         <?php
 
@@ -44,14 +44,14 @@ $data = json_decode($response, true);
 
     <!-- Evaluation -->
 
-    <h6 class="f-w-600 m-b-10 m-t-10">Evaluation</h6>
+    <h6 class="f-w-600 m-b-10 m-t-10"><?= __('Evaluation'); ?></h6>
     <table class="table table-bordered">
         <tr>
-            <th scope="col">Evaluation Date</th>
-            <th scope="col">Evaluation By</th>
-            <th scope="col">Start Date</th>
-            <th scope="col">End Date</th>
-            <th scope="col">Estimated Budget</th>
+            <th scope="col"><?= __('Evaluation Date'); ?></th>
+            <th scope="col"><?= __('Evaluation By'); ?></th>
+            <th scope="col"><?= __('Start Date'); ?></th>
+            <th scope="col"><?= __('End Date'); ?></th>
+            <th scope="col"><?= __('Estimated Budget'); ?></th>
         </tr>
         <?php if (!empty($data['evaluation'])) { ?>
             <tr>
@@ -66,18 +66,18 @@ $data = json_decode($response, true);
 
     <!-- BOM -->
 
-    <h6 class="f-w-600 m-b-10 m-t-10">Bill of Materials (BOM)</h6>
+    <h6 class="f-w-600 m-b-10 m-t-10"><?= __('Bill of Materials (BOM)'); ?></h6>
     <table class="table table-bordered">
         <tr>
-            <th scope="col">Item Name</th>
-            <th scope="col">Unit</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Price</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Planned Required By</th>
-            <th scope="col">Planned Returned By</th>
-            <th scope="col">Actual Required By</th>
-            <th scope="col">Actual Returned By</th>
+            <th scope="col"><?= __('Item Name'); ?></th>
+            <th scope="col"><?= __('Unit'); ?></th>
+            <th scope="col"><?= __('Quantity'); ?></th>
+            <th scope="col"><?= __('Price'); ?></th>
+            <th scope="col"><?= __('Amount'); ?></th>
+            <th scope="col"><?= __('Planned Required By'); ?></th>
+            <th scope="col"><?= __('Planned Returned By'); ?></th>
+            <th scope="col"><?= __('Actual Required By'); ?></th>
+            <th scope="col"><?= __('Actual Returned By'); ?></th>
         </tr>
         <?php if (!empty($data['bom'])) {
             $final_total_cost = 0.0;
@@ -99,7 +99,7 @@ $data = json_decode($response, true);
             <?php }
             ?>
             <tr>
-                <th scope="col" colspan="4" class="text-right">Total Amount:</th>
+                <th scope="col" colspan="4" class="text-right"><?= __('Total Amount'); ?>:</th>
                 <td class="text-right">
                     <?php echo customeummarmonyformate($final_total_cost); ?>
                 </td>
@@ -109,13 +109,13 @@ $data = json_decode($response, true);
         ?>
     </table>
 
-    <h6 class="f-w-600 m-b-10 m-t-10">Feasibility Checklist</h6>
+    <h6 class="f-w-600 m-b-10 m-t-10"><?= __('Feasibility Checklist'); ?></h6>
     <table class="table table-bordered">
         <tr>
-            <th scope="col">Checklist Item</th>
-            <th scope="col">Type</th>
-            <th scope="col">Is Done?</th>
-            <th scope="col">Comment</th>
+            <th scope="col"><?= __('Checklist Item'); ?></th>
+            <th scope="col"><?= __('Type'); ?></th>
+            <th scope="col"><?= __('Is Done?'); ?></th>
+            <th scope="col"><?= __('Comment'); ?></th>
         </tr>
         <?php if (!empty($data['checklist'])) {
             foreach ($data['checklist'] as $row) { ?>
@@ -131,7 +131,7 @@ $data = json_decode($response, true);
 
     <!-- Files -->
     <div class="form-group col-xl-12 col-md-12 mt-2 no-print" style="pointer-events: auto;">
-        <h6 class="f-w-600 m-b-10 m-t-10">Uploaded Files</h6>
+        <h6 class="f-w-600 m-b-10 m-t-10"><?= __('Uploaded Files'); ?></h6>
         <div class="row">
             <?php if (count((array)$data['files']) > 0) {
                 foreach ($data['files'] as $row) { ?>
@@ -148,15 +148,15 @@ $data = json_decode($response, true);
 
 <div class="modal-footer">
 
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
 
     <?php if ($data['feasibility_requirements']['current_status'] != ST_APPROVED) { ?>
         <button class="btn btn-primary waves-effect waves-light <?php echo count((array)$data['bom']) != "0" ? "" : "disabled";  ?>" onclick="closeFeasibility(<?= $feasibility_id ?>)">
-            Close Feasibility
+            <?= __('Close Feasibility'); ?>
         </button>
     <?php } ?>
     <button onclick="printPDF('feasibilityReportCard')" class="btn btn-success btn-primary waves-effect waves-light">
-        Print
+        <?= __('Print'); ?>
     </button>
 </div>
 
@@ -215,8 +215,8 @@ $data = json_decode($response, true);
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonClass: "btn-danger",
-                        confirmButtonText: "Yes",
-                        cancelButtonText: "No",
+                        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         closeOnConfirm: true,
                         closeOnCancel: true
                     }, function(isConfirm) {
@@ -225,7 +225,7 @@ $data = json_decode($response, true);
                                 page: 'closeFeasibility',
                                 feasibility_id: feasibility_id
                             }, function(resp) {
-                                swal(appName, "Feasibility Closed Successfully!", "success");
+                                swal(appName, <?php echo json_encode(__('Feasibility Closed Successfully!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "success");
                                 setTimeout(() => location.reload(), 1500);
                             });
                         }
@@ -233,12 +233,12 @@ $data = json_decode($response, true);
                 } else {
                     swal({
                         title: appName,
-                        text: "All items are returned. Do you want to close this feasibility?",
+                        text: <?php echo json_encode(__('All items are returned. Do you want to close this feasibility?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         type: "info",
                         showCancelButton: true,
                         confirmButtonClass: "btn-success",
-                        confirmButtonText: "Yes",
-                        cancelButtonText: "No",
+                        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         closeOnConfirm: true,
                         closeOnCancel: true
                     }, function(isConfirm) {
@@ -247,7 +247,7 @@ $data = json_decode($response, true);
                                 page: 'closeFeasibility',
                                 feasibility_id: feasibility_id
                             }, function(resp) {
-                                swal(appName, "Feasibility Closed Successfully!", "success");
+                                swal(appName, <?php echo json_encode(__('Feasibility Closed Successfully!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "success");
                                 setTimeout(() => location.reload(), 1500);
                             });
                         }
@@ -263,7 +263,7 @@ $data = json_decode($response, true);
                     text: "An error occurred while loading data.\n\nStatus: " + status + "\nError: " + error,
                     type: "error",
                     confirmButtonClass: "btn-danger",
-                    confirmButtonText: "OK"
+                    confirmButtonText: <?php echo json_encode(__('OK'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
                 });
             }
         });
