@@ -27,11 +27,11 @@ $attendance_data = $data['attendance_data'] ?? array();
     <div class="container-fluid">
         <div class="card card-custom mb-5">
             <div class="card-header">
-                <h5>Pull Employee Attendance Summary</h5>
+                <h5><?= __('Pull Employee Attendance Summary'); ?></h5>
                 <div class="card-header-right">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -40,19 +40,19 @@ $attendance_data = $data['attendance_data'] ?? array();
 
 
                     <div class="form-group col-md-3">
-                        <span class="form-label">From Date</span>
-                        <input aria-label="From Date" type="date" class="form-control" name="from_date" value="<?php echo $from_date; ?>">
+                        <span class="form-label"><?= __('From Date'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="from_date" value="<?php echo $from_date; ?>">
                     </div>
 
                     <div class="form-group col-md-3">
-                        <span class="form-label">To Date</span>
-                        <input aria-label="To Date" type="date" class="form-control" name="to_date" value="<?php echo $to_date; ?>">
+                        <span class="form-label"><?= __('To Date'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="to_date" value="<?php echo $to_date; ?>">
                     </div>
 
                     <div class="form-group col-md-4">
-                        <span class="form-label">Employee</span>
-                        <select aria-label="Employee" class="form-control js-example-basic-single" name="employee_id">
-                            <option value="0">All Employees</option>
+                        <span class="form-label"><?= __('Employee'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Employee'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="employee_id">
+                            <option value="0"><?= __('All Employees'); ?></option>
                             <?php foreach ((array)$employees as $emp) { ?>
                                 <option value="<?php echo (int)$emp['id']; ?>" <?php echo ((int)$employee_id === (int)$emp['id']) ? 'selected' : ''; ?>>
                                     <?php echo htmlspecialchars(($emp['emp_code'] ?? '-') . ' - ' . ($emp['display_name'] ?? '')); ?>
@@ -62,8 +62,8 @@ $attendance_data = $data['attendance_data'] ?? array();
                     </div>
 
                     <div class="form-group col-md-2 d-flex align-items-end">
-                        <button type="submit" class="btn btn-primary mr-2">Apply</button>
-                        <a href="index.php?option=COM_VIEW_EMPLOYEE_DAILY_ATTENDANCE_SUMMARY" class="btn btn-light">Reset</a>
+                        <button type="submit" class="btn btn-primary mr-2"><?= __('Apply'); ?></button>
+                        <a href="index.php?option=COM_VIEW_EMPLOYEE_DAILY_ATTENDANCE_SUMMARY" class="btn btn-light"><?= __('Reset'); ?></a>
                     </div>
                 </form>
 
@@ -129,7 +129,7 @@ $attendance_data = $data['attendance_data'] ?? array();
                     <table class="table table-bordered attendance-table mb-0">
                         <thead>
                             <tr>
-                                <th scope="col" class="sticky-col">Employee</th>
+                                <th scope="col" class="sticky-col"><?= __('Employee'); ?></th>
                                 <th scope="col">P</th>
                                 <th scope="col">A</th>
                                 <?php foreach ((array)$date_headers as $header) { ?>
@@ -148,9 +148,9 @@ $attendance_data = $data['attendance_data'] ?? array();
                                         <td class="sticky-col">
                                             <span class="f-12 mr-2"><?php echo (int)$index; ?></span>
                                             <?php if (!empty($emp_row['employee']['image'])) { ?>
-                                                <img src="uploads/all/<?php echo htmlspecialchars($emp_row['employee']['image']); ?>" class="img-radius img-30 align-top m-r-15" alt="User">
+                                                <img src="uploads/all/<?php echo htmlspecialchars($emp_row['employee']['image']); ?>" class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                                <span class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" title="user image"><?php echo initials($emp_row['employee']['display_name'] ?? ''); ?></span>
+                                                <span class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" title="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo initials($emp_row['employee']['display_name'] ?? ''); ?></span>
                                             <?php } ?>
                                             <span><?php echo htmlspecialchars(($emp_row['employee']['emp_code'] ?? '-') . ' - ' . ($emp_row['employee']['display_name'] ?? '')); ?></span>
                                         </td>
@@ -178,7 +178,7 @@ $attendance_data = $data['attendance_data'] ?? array();
                             <?php } else { ?>
                                 <tr>
                                     <td colspan="<?php echo 3 + count((array)$date_headers); ?>" class="text-center">
-                                        No attendance data found for selected filters.
+                                        <?= __('No attendance data found for selected filters.'); ?>
                                     </td>
                                 </tr>
                             <?php } ?>
