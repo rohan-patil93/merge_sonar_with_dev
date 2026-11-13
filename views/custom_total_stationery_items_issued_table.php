@@ -41,16 +41,16 @@ $_SESSION['download_data'] = [];
 ?>
 <div class="card">
     <div class="card-header">
-        <h5>Total Items Issued (Category-wise)</h5>
+        <h5><?= __('Total Items Issued (Category-wise)'); ?></h5>
         <div class="card-header-right">
             <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=TotalStationeryItemsIssued&format=csv" target="_blank">CSV</a>
+                        href="custom_view_download.php?page=TotalStationeryItemsIssued&format=csv" target="_blank"><?= __('CSV'); ?></a>
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=TotalStationeryItemsIssued&format=excel" target="_blank">Excel</a>
+                        href="custom_view_download.php?page=TotalStationeryItemsIssued&format=excel" target="_blank"><?= __('Excel'); ?></a>
                 </div>
             </div>
         </div>
@@ -59,11 +59,11 @@ $_SESSION['download_data'] = [];
         <div class="table-responsive">
             <table class="table table-hover">
                 <tr>
-                    <th scope="col">Sl No</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Total Issued Qty</th>
+                    <th scope="col"><?= __('Sl No'); ?></th>
+                    <th scope="col"><?= __('Location'); ?></th>
+                    <th scope="col"><?= __('Category'); ?></th>
+                    <th scope="col"><?= __('Item'); ?></th>
+                    <th scope="col"><?= __('Total Issued Qty'); ?></th>
                 </tr>
 
                 <?php
@@ -94,7 +94,7 @@ $_SESSION['download_data'] = [];
                         <td colspan="5">
                             <div class="text-center">
                                 <p class="text-muted f-16 fw-bold">
-                                    <i class="fa fa-warning"></i> No Records
+                                    <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                 </p>
                             </div>
                         </td>
