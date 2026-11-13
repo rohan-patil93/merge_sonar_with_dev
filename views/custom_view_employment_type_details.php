@@ -31,9 +31,9 @@ $vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'emp_id'=>$_GET[
 <div class="second-modal" id="secondModal" style="border: 1px #cccc solid; border-radius: 20px;" >
     <div class="modal-header">
         <h5 class="modal-title">
-            Employment Type History
+            <?= __('Employment Type History'); ?>
         </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
 
     <div class="modal-body" >
@@ -42,12 +42,12 @@ $vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'emp_id'=>$_GET[
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Employment Type</th>
-                    <th scope="col">Effective From Date</th>
-                    <th scope="col">Effective To Date</th>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Billing Amount</th>
-                    <th scope="col">Remarks</th>
+                    <th scope="col"><?= __('Employment Type'); ?></th>
+                    <th scope="col"><?= __('Effective From Date'); ?></th>
+                    <th scope="col"><?= __('Effective To Date'); ?></th>
+                    <th scope="col"><?= __('Customer'); ?></th>
+                    <th scope="col"><?= __('Billing Amount'); ?></th>
+                    <th scope="col"><?= __('Remarks'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -68,7 +68,7 @@ $vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'emp_id'=>$_GET[
                         <tr>
                             <td colspan="7">
                                 <div class="card-px text-center py-20 mt-2">
-                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Data </p>
+                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Data'); ?> </p>
                     <div class="text-center px-4">
                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                     </div>
