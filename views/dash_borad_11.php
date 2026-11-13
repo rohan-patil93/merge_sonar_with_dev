@@ -32,10 +32,10 @@
                                                          <input type="hidden" id="len_data" value='<?php echo $len_data; ?>'>
                                                           <input type="hidden" id="len_data2" value='<?php echo $len_data2; ?>'>
 
-                                                        Daily Petty Cash Expenses
+                                                        <?= __('Daily Petty Cash Expenses'); ?>
                                                     </h3>
                                                     <span class="kt-widget14__desc">
-                                                        Comparision With Previous Month
+                                                        <?= __('Comparision With Previous Month'); ?>
                                                     </span>
                                                 </div>
                                                 <div class="kt-widget14__chart" style="height:120px;">
@@ -59,10 +59,10 @@
                                                               ?>
                                                     <input type="hidden" id="len_data_cri" value='<?php echo $att_list1['pc_limit'].",".$att_list1['consumed']; ?>'>
                                                     <h3 class="kt-widget14__title">
-                                                        Cash Balance
+                                                        <?= __('Cash Balance'); ?>
                                                     </h3>
                                                     <span class="kt-widget14__desc">
-                                                        Petty Cash Balance At Outlet
+                                                        <?= __('Petty Cash Balance At Outlet'); ?>
                                                     </span>
                                                 </div>
                                                 <div class="kt-widget14__content">
@@ -73,11 +73,11 @@
                                                     <div class="kt-widget14__legends">
                                                         <div class="kt-widget14__legend">
                                                             <span class="kt-widget14__bullet kt-bg-success"></span>
-                                                            <span class="kt-widget14__stats"><?php echo 100-$avalprec; ?>% Available</span>
+                                                            <span class="kt-widget14__stats"><?php echo 100-$avalprec; ?><?= __('% Available'); ?></span>
                                                         </div>
                                                         <div class="kt-widget14__legend">
                                                             <span class="kt-widget14__bullet kt-bg-danger"></span>
-                                                            <span class="kt-widget14__stats"><?php echo $avalprec; ?>% Spent</span>
+                                                            <span class="kt-widget14__stats"><?php echo $avalprec; ?><?= __('% Spent'); ?></span>
                                                         </div>
 
 
@@ -122,10 +122,10 @@
                                                     <input type="hidden" id="day_petty_item_pre" value="<?php echo $day_petty_item_pre; ?>">
                                                     <input type="hidden" id="day_petty_item_color" value="<?php echo $day_petty_item_color; ?>">
                                                     <h3 class="kt-widget14__title">
-                                                        Spending Trend
+                                                        <?= __('Spending Trend'); ?>
                                                     </h3>
                                                     <span class="kt-widget14__desc">
-                                                        Petty Cash Spending Trend
+                                                        <?= __('Petty Cash Spending Trend'); ?>
                                                     </span>
                                                 </div>
                                                 <div class="kt-widget14__content">
@@ -165,7 +165,7 @@
                                         <div class="kt-portlet__head">
                                             <div class="kt-portlet__head-label">
                                                 <h3 class="kt-portlet__head-title">
-                                                    Branch-Wise Details
+                                                    <?= __('Branch-Wise Details'); ?>
                                                 </h3>
                                             </div>
 
@@ -192,11 +192,11 @@
                                                                     <thead>
                                                                         <tr>
 
-                                                                            <th scope="col" style="width:40%">Expenses </th>
-                                                                            <th scope="col" style="width:14%">Limit</th>
-                                                                            <th scope="col" style="width:14%">Consumed </th>
-                                                                            <th scope="col" style="width:15%">Status</th>
-                                                                            <th scope="col" style="width:15%" class="kt-align-right">Available </th>
+                                                                            <th scope="col" style="width:40%"><?= __('Expenses'); ?> </th>
+                                                                            <th scope="col" style="width:14%"><?= __('Limit'); ?></th>
+                                                                            <th scope="col" style="width:14%"><?= __('Consumed'); ?> </th>
+                                                                            <th scope="col" style="width:15%"><?= __('Status'); ?></th>
+                                                                            <th scope="col" style="width:15%" class="kt-align-right"><?= __('Available'); ?> </th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -246,7 +246,7 @@
                                         <div class="kt-portlet__head kt-portlet__head--noborder">
                                             <div class="kt-portlet__head-label">
                                                 <h3 class="kt-portlet__head-title">
-                                                    Announcements
+                                                    <?= __('Announcements'); ?>
                                                 </h3>
                                             </div>
                                             <div class="kt-portlet__head-toolbar">
@@ -256,39 +256,39 @@
                                                 <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
                                                     <ul class="kt-nav">
                                                         <li class="kt-nav__section kt-nav__section--first">
-                                                            <span class="kt-nav__section-text">Finance</span>
+                                                            <span class="kt-nav__section-text"><?= __('Finance'); ?></span>
                                                         </li>
                                                         <li class="kt-nav__item">
                                                             <a href="#" class="kt-nav__link">
                                                                 <i class="kt-nav__link-icon flaticon2-graph-1"></i>
-                                                                <span class="kt-nav__link-text">Statistics</span>
+                                                                <span class="kt-nav__link-text"><?= __('Statistics'); ?></span>
                                                             </a>
                                                         </li>
                                                         <li class="kt-nav__item">
                                                             <a href="#" class="kt-nav__link">
                                                                 <i class="kt-nav__link-icon flaticon2-calendar-4"></i>
-                                                                <span class="kt-nav__link-text">Events</span>
+                                                                <span class="kt-nav__link-text"><?= __('Events'); ?></span>
                                                             </a>
                                                         </li>
                                                         <li class="kt-nav__item">
                                                             <a href="#" class="kt-nav__link">
                                                                 <i class="kt-nav__link-icon flaticon2-layers-1"></i>
-                                                                <span class="kt-nav__link-text">Reports</span>
+                                                                <span class="kt-nav__link-text"><?= __('Reports'); ?></span>
                                                             </a>
                                                         </li>
                                                         <li class="kt-nav__section">
-                                                            <span class="kt-nav__section-text">Customers</span>
+                                                            <span class="kt-nav__section-text"><?= __('Customers'); ?></span>
                                                         </li>
                                                         <li class="kt-nav__item">
                                                             <a href="#" class="kt-nav__link">
                                                                 <i class="kt-nav__link-icon flaticon2-calendar-4"></i>
-                                                                <span class="kt-nav__link-text">Notifications</span>
+                                                                <span class="kt-nav__link-text"><?= __('Notifications'); ?></span>
                                                             </a>
                                                         </li>
                                                         <li class="kt-nav__item">
                                                             <a href="#" class="kt-nav__link">
                                                                 <i class="kt-nav__link-icon flaticon2-file-1"></i>
-                                                                <span class="kt-nav__link-text">Files</span>
+                                                                <span class="kt-nav__link-text"><?= __('Files'); ?></span>
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -312,12 +312,12 @@
                                                             <?php echo $_SESSION['users'][$anouncement_list['created_by']]; ?>
                                                         </h3>
                                                         <span class="kt-widget7__time">
-                                                            6 hours ago
+                                                            <?= __('6 hours ago'); ?>
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div class="kt-widget7__button">
-                                                    <a class="btn btn-brand" href="#" role="button">All Feeds</a>
+                                                    <a class="btn btn-brand" href="#" role="button"><?= __('All Feeds'); ?></a>
                                                 </div>
                                             </div>
 
@@ -347,7 +347,7 @@
                                         <div class="kt-portlet__head">
                                             <div class="kt-portlet__head-label">
                                                 <h3 class="kt-portlet__head-title">
-                                                    Recent Activities
+                                                    <?= __('Recent Activities'); ?>
                                                 </h3>
                                             </div>
                                             <div class="kt-portlet__head-toolbar">
@@ -360,8 +360,8 @@
                                                         <!--begin::Nav-->
                                                         <ul class="kt-nav">
                                                             <li class="kt-nav__head">
-                                                                Export Options
-                                                                <span data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">
+                                                                <?= __('Export Options'); ?>
+                                                                <span data-toggle="kt-tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                     <svg xmlns="http:
                                                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                                             <rect x="0" y="0" width="24" height="24" />
