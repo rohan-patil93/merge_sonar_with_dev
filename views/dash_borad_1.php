@@ -24,7 +24,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Petty Cash Summary</h3>
+                    <h3 class="card-label"><?= __('Petty Cash Summary'); ?></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -52,7 +52,7 @@ if($att_list1['pc_limit'] != 0 && $att_list1['pc_limit'] !=""){
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Petty Cash Balance</h3>
+                    <h3 class="card-label"><?= __('Petty Cash Balance'); ?></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -95,7 +95,7 @@ $day_item['percentage'][$n] = ($day_total != 0 && $day_total !="")?round(($day_v
                                         <div class="card card-custom gutter-b">
                                             <div class="card-header">
                                                 <div class="card-title">
-                                                    <h3 class="card-label">Petty Cash Expenses</h3>
+                                                    <h3 class="card-label"><?= __('Petty Cash Expenses'); ?></h3>
                                                 </div>
                                             </div>
                                             <div class="card-body">
@@ -116,9 +116,9 @@ $day_item['percentage'][$n] = ($day_total != 0 && $day_total !="")?round(($day_v
                                         <div class="card card-custom card-stretch gutter-b">
                                             <div class="card-body d-flex p-0">
                                                 <div class="flex-grow-1 p-20 pb-40 card-rounded flex-grow-1 bgi-no-repeat" style="background-color: #1B283F; background-position: calc(100% + 0.5rem) bottom; background-size: 50% auto; background-image: url(assets/media/svg/humans/custom-10.svg)">
-                                                    <h2 class="text-white pb-5 font-weight-bolder">Announcements</h2>
+                                                    <h2 class="text-white pb-5 font-weight-bolder"><?= __('Announcements'); ?></h2>
                                                     <p class="text-muted pb-5 font-size-h5"><?php echo substr($anouncement_list['announcement_message'],0,250);?></p>
-                                                    <a href="#" class="btn btn-danger font-weight-bold py-2 px-6">Connect</a>
+                                                    <a href="#" class="btn btn-danger font-weight-bold py-2 px-6"><?= __('Connect'); ?></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -135,11 +135,11 @@ $day_item['percentage'][$n] = ($day_total != 0 && $day_total !="")?round(($day_v
                                             <!--begin::Header-->
                                             <div class="card-header border-0 pt-5">
                                                 <h3 class="card-title align-items-start flex-column">
-                                                    <span class="card-label font-weight-bolder text-dark">Current Financial Year</span>
+                                                    <span class="card-label font-weight-bolder text-dark"><?= __('Current Financial Year'); ?></span>
 
                                                 </h3>
                                                 <div class="card-toolbar">
-                                                    <a href="#" class="btn btn-light-primary btn-md py-2 font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Branch</a>
+                                                    <a href="#" class="btn btn-light-primary btn-md py-2 font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Branch'); ?></a>
                                                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                                         <!--begin::Navigation-->
                                                         <ul class="nav nav-pills nav-pills-sm nav-dark-75">
@@ -192,13 +192,13 @@ $day_item['percentage'][$n] = ($day_total != 0 && $day_total !="")?round(($day_v
                                                                         </th>
                                                                         <td class="py-6 pl-0">
                                                                             <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo $month_l['item_name']; ?></a>
-                                                                            <span class="text-muted font-weight-bold d-block">Available amount <?php echo $month_l['budget']-$month_l['total_amount']; ?></span>
+                                                                            <span class="text-muted font-weight-bold d-block"><?= __('Available amount'); ?> <?php echo $month_l['budget']-$month_l['total_amount']; ?></span>
                                                                         </td>
                                                                         <td>
                                                                             <div class="d-flex flex-column w-100 mr-2">
                                                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                                                     <span class="text-muted mr-2 font-size-sm font-weight-bold"><?php echo $pre; ?>%</span>
-                                                                                    <span class="text-muted font-size-sm font-weight-bold">Progress</span>
+                                                                                    <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
                                                                                     <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -232,11 +232,11 @@ $day_item['percentage'][$n] = ($day_total != 0 && $day_total !="")?round(($day_v
                                             <!--begin::Header-->
                                             <div class="card-header border-0 pt-5">
                                                 <h3 class="card-title align-items-start flex-column">
-                                                    <span class="card-label font-weight-bolder text-dark">Branch-Wise Petty Cash Details</span>
+                                                    <span class="card-label font-weight-bolder text-dark"><?= __('Branch-Wise Petty Cash Details'); ?></span>
 
                                                 </h3>
                                                 <div class="card-toolbar">
-                                                    <a href="#" class="btn btn-light-primary btn-md py-2 font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Branch</a>
+                                                    <a href="#" class="btn btn-light-primary btn-md py-2 font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Branch'); ?></a>
                                                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                                         <!--begin::Navigation-->
                                                         <ul class="nav nav-pills nav-pills-sm nav-dark-75">
@@ -286,13 +286,13 @@ $day_item['percentage'][$n] = ($day_total != 0 && $day_total !="")?round(($day_v
                                                                         </th>
                                                                         <td class="py-6 pl-0">
                                                                             <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo $month_l['name']; ?></a>
-                                                                            <span class="text-muted font-weight-bold d-block">Available amount <?php echo customeummarmonyformate($month_l['pc_limit']-$month_l['consumed']); ?></span>
+                                                                            <span class="text-muted font-weight-bold d-block"><?= __('Available amount'); ?> <?php echo customeummarmonyformate($month_l['pc_limit']-$month_l['consumed']); ?></span>
                                                                         </td>
                                                                         <td>
                                                                             <div class="d-flex flex-column w-100 mr-2">
                                                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                                                     <span class="text-muted mr-2 font-size-sm font-weight-bold"><?php echo $pre; ?>%</span>
-                                                                                    <span class="text-muted font-size-sm font-weight-bold">Progress</span>
+                                                                                    <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
                                                                                     <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $pre; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
