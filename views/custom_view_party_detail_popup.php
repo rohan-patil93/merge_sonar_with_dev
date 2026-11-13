@@ -33,8 +33,8 @@ if($part_table == "vendors"){
 
 ?>
 <div class="modal-header">
-    <h5 class="modal-title"> Party Details </h5>
-    <button type="button" class="btn-close btn_white"  data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"> <?= __('Party Details'); ?> </h5>
+    <button type="button" class="btn-close btn_white"  data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="">
     <div class="card mb-1 mb-xl-10">
@@ -49,9 +49,9 @@ if($part_table == "vendors"){
                 <div class="col-lg-5">
                     <div class="image-input image-input-empty image-input-outline" id="kt_image_5" >
                         <form method="post" id="profile_pic_file" enctype="multipart/form-data" class="position-relative">
-                            <label class="btn-hover-text-primary position-absolute  text-white" data-action="remove" data-bs-toggle="tooltip" title="Edit Profile Pic" style="left: -3px; top: -2px;">
+                            <label class="btn-hover-text-primary position-absolute  text-white" data-action="remove" data-bs-toggle="tooltip" title="<?= htmlspecialchars(__('Edit Profile Pic'), ENT_QUOTES, 'UTF-8'); ?>" style="left: -3px; top: -2px;">
                                 <span><i class="ti-pencil-altj"></i></span>
-                                <input aria-label="Profile Pic File" type="file" name="profile_pic_file" accept=".png, .jpg, .jpeg"  onchange="updateProfilePic()" />
+                                <input aria-label="<?= htmlspecialchars(__('Profile Pic File'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="profile_pic_file" accept=".png, .jpg, .jpeg"  onchange="updateProfilePic()" />
                             </label>
                             <?php if($vendordetail['image']!=""){ ?>
                                 <img src="<?php echo $image; ?>" class="img-radius img-90" alt="">
@@ -87,16 +87,16 @@ if($vendordetail['phone']!=""){  ?>
                                 <?php } ?>
                                 <div class="font-weight-bold text-dark-50 mt-1 f-14">
                                     <?php if($vendordetail['established_year']!="" && $vendordetail['established_year']!="0"){  ?>
-                                        <b class="f-w-600">Established Year : </b><?php echo $vendordetail['established_year'];?>&nbsp;
+                                        <b class="f-w-600"><?= __('Established Year'); ?> : </b><?php echo $vendordetail['established_year'];?>&nbsp;
                                     <?php }  ?>
                                     <?php if($vendordetail['credit_limit']!=""){  ?>
-                                        <b class="f-w-600">Credit Limit : </b><?php echo customeNumberFormate($vendordetail['credit_limit']);?>&nbsp;
+                                        <b class="f-w-600"><?= __('Credit Limit'); ?> : </b><?php echo customeNumberFormate($vendordetail['credit_limit']);?>&nbsp;
                                     <?php }  ?>
 
                                 </div>
                                 <div class="font-weight-bold text-dark-50 mt-1 f-14">
                                     <?php if($vendordetail['payment_term_name']!=""){  ?>
-                                        <b class="f-w-600">Payment Terms : </b><?php echo $vendordetail['payment_term_name'];?>&nbsp;
+                                        <b class="f-w-600"><?= __('Payment Terms'); ?> : </b><?php echo $vendordetail['payment_term_name'];?>&nbsp;
                                     <?php }  ?>
                                 </div>
                             </div>
@@ -110,13 +110,13 @@ if($vendordetail['phone']!=""){  ?>
                                         <div class="col-6">
                                             <div class="s-cont d-inline-block">
                                                 <span class="f-w-700 m-b-0"><?php echo $quotations[0] !=""?customeNumberFormate($quotations[0]):0; ?></span>
-                                                <p class="m-b-0">Documents</p>
+                                                <p class="m-b-0"><?= __('Documents'); ?></p>
                                             </div>
                                         </div>
                                         <div class="col-6 b-l-default">
                                             <div class="s-cont d-inline-block">
                                                 <span class="f-w-700 m-b-0"><?php echo $quotations[1] !=""?convert_Rupee_Number($quotations[1]):0; ?></span>
-                                                <p class="m-b-0">Amount</p>
+                                                <p class="m-b-0"><?= __('Amount'); ?></p>
                                             </div>
                                         </div>
                                     </div>
@@ -128,13 +128,13 @@ if($vendordetail['phone']!=""){  ?>
                                         <div class="col-6">
                                             <div class="s-cont d-inline-block">
                                                 <span class="f-w-700 m-b-0"><?php echo $purchase_orders[0] !=""?$purchase_orders[0]:0; ?></span>
-                                                <p class="m-b-0">Documents</p>
+                                                <p class="m-b-0"><?= __('Documents'); ?></p>
                                             </div>
                                         </div>
                                         <div class="col-6 b-l-default">
                                             <div class="s-cont d-inline-block">
                                                 <span class="f-w-700 m-b-0"><?php echo $purchase_orders[1] !=""?convert_Rupee_Number($purchase_orders[1]):0; ?></span>
-                                                <p class="m-b-0">Amount</p>
+                                                <p class="m-b-0"><?= __('Amount'); ?></p>
                                             </div>
                                         </div>
                                     </div>
@@ -148,25 +148,25 @@ if($vendordetail['phone']!=""){  ?>
                                         <div class="col-6">
                                             <div class="s-cont d-inline-block">
                                                 <span class="f-w-700 m-b-0"><?php echo $purchase_invoice[0] !=""?$purchase_invoice[0]:0; ?></span>
-                                                <p class="m-b-0">Documents</p>
+                                                <p class="m-b-0"><?= __('Documents'); ?></p>
                                             </div>
                                         </div>
                                         <div class="col-6 b-l-default">
                                             <div class="s-cont d-inline-block">
                                                 <span class="f-w-700 m-b-0"><?php echo $purchase_invoice[1] !=""?convert_Rupee_Number($purchase_invoice[1]):0; ?></span>
-                                                <p class="m-b-0">Amount</p>
+                                                <p class="m-b-0"><?= __('Amount'); ?></p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6 text-center text-danger">
                                     <div class="s-caption  text-primary"><i class="ti-file f-20"></i></div>
-                                    <span class="f-w-700 m-b-0">Due</span>
+                                    <span class="f-w-700 m-b-0"><?= __('Due'); ?></span>
                                     <div class="row">
                                         <div class="col-12 b-l-default">
                                             <div class="s-cont d-inline-block">
                                                 <span class="f-w-700 m-b-0"><?php echo $purchase_invoice[2] !=""?convert_Rupee_Number($purchase_invoice[2]):0; ?></span>
-                                                <p class="m-b-0">Amount</p>
+                                                <p class="m-b-0"><?= __('Amount'); ?></p>
                                             </div>
                                         </div>
                                     </div>
@@ -181,10 +181,10 @@ if($vendordetail['phone']!=""){  ?>
                 <div class="col-lg-8">
                     <div class="card sale-card mb-2">
                         <div class="card-header">
-                            <h5>All Documents <span class="form-label label label-md label-primary"><?php echo count((array)$pending_amt_transactions); ?></span></h5>
+                            <h5><?= __('All Documents'); ?> <span class="form-label label label-md label-primary"><?php echo count((array)$pending_amt_transactions); ?></span></h5>
                             <div class="card-header-right table-card-header">
                                  <div class="input-group input-group-button mb-0">
-                                    <input type="text" id="dynamicfilterhideshow_all_documents" data-id="all_documents" data-type="tr" class="form-control form-control-sm width1 fill dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                    <input type="text" id="dynamicfilterhideshow_all_documents" data-id="all_documents" data-type="tr" class="form-control form-control-sm width1 fill dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text addon-style">
                                         <span class=""><span class="ti-search text-white mt-2"></span></span>
                                     </span>
@@ -197,13 +197,13 @@ if($vendordetail['phone']!=""){  ?>
                                     <table class="table table-hover m-b-0 register_vendor_filter" style="font-size:13px;" >
                                         <thead>
                                             <tr>
-                                                <th scope="col" class="p-2">Inv. No.</th>
-                                                <th scope="col" class="p-2">Date</th>
-                                                <th scope="col" class="p-2 text-right">Amount</th>
-                                                <th scope="col" class="p-2 text-right">Shipping</th>
-                                                <th scope="col" class="p-2 text-right">Discount</th>
-                                                <th scope="col" class="p-2 text-right">Tax</th>
-                                                <th scope="col" class="p-2 text-right">Total</th>
+                                                <th scope="col" class="p-2"><?= __('Inv. No.'); ?></th>
+                                                <th scope="col" class="p-2"><?= __('Date'); ?></th>
+                                                <th scope="col" class="p-2 text-right"><?= __('Amount'); ?></th>
+                                                <th scope="col" class="p-2 text-right"><?= __('Shipping'); ?></th>
+                                                <th scope="col" class="p-2 text-right"><?= __('Discount'); ?></th>
+                                                <th scope="col" class="p-2 text-right"><?= __('Tax'); ?></th>
+                                                <th scope="col" class="p-2 text-right"><?= __('Total'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody id="all_documents">
@@ -224,7 +224,7 @@ if($vendordetail['phone']!=""){  ?>
                                     </table>
                                 <?php }else{ ?>
                                     <div class="card-px text-center ">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-alert"></i> No Documents</p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-alert"></i> <?= __('No Documents'); ?></p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                         </div>
@@ -237,10 +237,10 @@ if($vendordetail['phone']!=""){  ?>
                 <div class="col-lg-4">
                     <div class="card sale-card mb-2">
                         <div class="card-header">
-                            <h5>Due <span class="form-label label label-md label-danger"><?php echo count((array)$pending_amt_transactions); ?></span></h5>
+                            <h5><?= __('Due'); ?> <span class="form-label label label-md label-danger"><?php echo count((array)$pending_amt_transactions); ?></span></h5>
                             <div class="card-header-right table-card-header">
                                  <div class="input-group input-group-button mb-0">
-                                    <input type="text" id="dynamicfilterhideshow_pending_payment" data-id="pending_payment_documents" data-type="tr" class="form-control form-control-sm width1 fill dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                    <input type="text" id="dynamicfilterhideshow_pending_payment" data-id="pending_payment_documents" data-type="tr" class="form-control form-control-sm width1 fill dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text addon-style">
                                         <span class=""><span class="ti-search text-white mt-2"></span></span>
                                     </span>
@@ -253,9 +253,9 @@ if($vendordetail['phone']!=""){  ?>
                                     <table class="table table-hover m-b-0 register_vendor_filter" style="font-size:13px;" >
                                         <thead>
                                             <tr>
-                                                <th scope="col" class="p-2">Inv/Due Date</th>
-                                                <th scope="col" class="p-2 text-right">Amount</th>
-                                                <th scope="col" class="p-2 text-right">Pending Amt</th>
+                                                <th scope="col" class="p-2"><?= __('Inv/Due Date'); ?></th>
+                                                <th scope="col" class="p-2 text-right"><?= __('Amount'); ?></th>
+                                                <th scope="col" class="p-2 text-right"><?= __('Pending Amt'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody id="pending_payment_documents">
@@ -273,7 +273,7 @@ if($vendordetail['phone']!=""){  ?>
                                     </table>
                                 <?php }else{ ?>
                                     <div class="card-px text-center ">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-alert"></i> No Documents</p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-alert"></i> <?= __('No Documents'); ?></p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                         </div>
@@ -287,10 +287,10 @@ if($vendordetail['phone']!=""){  ?>
 
         <div class="card sale-card mb-2">
             <div class="card-header">
-                <h5>Items <span class="form-label label label-md label-danger"><?php echo count((array)$transaction_items); ?></span></h5>
+                <h5><?= __('Items'); ?> <span class="form-label label label-md label-danger"><?php echo count((array)$transaction_items); ?></span></h5>
                 <div class="card-header-right table-card-header">
                      <div class="input-group input-group-button mb-0">
-                        <input type="text" id="dynamicfilterhideshow_item_documents" data-id="item_documents" data-type="tr" class="form-control form-control-sm width1 fill dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                        <input type="text" id="dynamicfilterhideshow_item_documents" data-id="item_documents" data-type="tr" class="form-control form-control-sm width1 fill dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                         <span class="input-group-text addon-style">
                             <span class=""><span class="ti-search text-white mt-2"></span></span>
                         </span>
@@ -303,13 +303,13 @@ if($vendordetail['phone']!=""){  ?>
                         <table class="table table-hover m-b-0 register_vendor_filter" style="font-size:13px;" >
                             <thead>
                                 <tr>
-                                    <th scope="col" class="p-2">Name</th>
-                                    <th scope="col" class="p-2 text-right">Quantity</th>
-                                    <th scope="col" class="p-2 text-right">Item Price</th>
-                                    <th scope="col" class="p-2 text-right">Item Amount</th>
-                                    <th scope="col" class="p-2 text-right">Tax Amount</th>
-                                    <th scope="col" class="p-2 text-right">Total Amount</th>
-                                     <th scope="col" class="p-2 text-right">AVG Price</th>
+                                    <th scope="col" class="p-2"><?= __('Name'); ?></th>
+                                    <th scope="col" class="p-2 text-right"><?= __('Quantity'); ?></th>
+                                    <th scope="col" class="p-2 text-right"><?= __('Item Price'); ?></th>
+                                    <th scope="col" class="p-2 text-right"><?= __('Item Amount'); ?></th>
+                                    <th scope="col" class="p-2 text-right"><?= __('Tax Amount'); ?></th>
+                                    <th scope="col" class="p-2 text-right"><?= __('Total Amount'); ?></th>
+                                     <th scope="col" class="p-2 text-right"><?= __('AVG Price'); ?></th>
                                 </tr>
                             </thead>
                             <tbody id="item_documents">
@@ -329,7 +329,7 @@ if($vendordetail['phone']!=""){  ?>
                         </table>
                     <?php }else{ ?>
                         <div class="card-px text-center ">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-alert"></i> No Items</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-alert"></i> <?= __('No Items'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
@@ -340,7 +340,7 @@ if($vendordetail['phone']!=""){  ?>
         </div>
         <div class="card sale-card mb-2">
             <div class="card-header">
-                <h5>Ageing Report</h5>
+                <h5><?= __('Ageing Report'); ?></h5>
                 <div class="card-header-right"></div>
             </div>
             <div class="card-body">
@@ -400,13 +400,13 @@ if($vendordetail['phone']!=""){  ?>
                                 <table class=" table table-hover m-b-0 m-t-5">
                                       <thead>
                                         <th scope="col"> <?php echo ucwords($part_table); ?> </th>
-                                        <th scope="col" class="text-right">Total </th>
-                                        <th scope="col" class="text-right">15 Days</th>
-                                        <th scope="col" class="text-right">30 Days</th>
-                                        <th scope="col" class="text-right">45 Days</th>
-                                        <th scope="col" class="text-right">60 Days</th>
-                                        <th scope="col" class="text-right">90 Days</th>
-                                        <th scope="col" class="text-right"> > 90 Days</th>
+                                        <th scope="col" class="text-right"><?= __('Total'); ?> </th>
+                                        <th scope="col" class="text-right"><?= __('15 Days'); ?></th>
+                                        <th scope="col" class="text-right"><?= __('30 Days'); ?></th>
+                                        <th scope="col" class="text-right"><?= __('45 Days'); ?></th>
+                                        <th scope="col" class="text-right"><?= __('60 Days'); ?></th>
+                                        <th scope="col" class="text-right"><?= __('90 Days'); ?></th>
+                                        <th scope="col" class="text-right"> <?= __('> 90 Days'); ?></th>
                                     </thead>
                                       <tbody>
                                     <?php
@@ -439,7 +439,7 @@ if($vendordetail['phone']!=""){  ?>
                           <input type="hidden" name="chart_data_gender" id="chart_data_bill_vendor" value="<?php echo implode("||",(array)$gdata); ?>" >
                           <?php if($fistdonut =='1'){ ?>
                               <div class="card-px text-center py-20 m-t-30">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -455,5 +455,5 @@ if($vendordetail['phone']!=""){  ?>
         </div>
     </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
 </div>
