@@ -38,51 +38,51 @@ if($_POST['pagetype'] =="IEQ"){
     <div class="card">
         <form id="form_IEQ">
             <div class="card-header table-card-header">
-                <h5>Equipments</h5>
+                <h5><?= __('Equipments'); ?></h5>
                 <div class="card-header-right">
-                    <button type="button" class="btn btn-success mb-2 desktop-view"  onclick="insertEquipemnt()"><i class="icofont icofont-plus icon-white "></i> Add Equipment</button>
+                    <button type="button" class="btn btn-success mb-2 desktop-view"  onclick="insertEquipemnt()"><i class="icofont icofont-plus icon-white "></i> <?= __('Add Equipment'); ?></button>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-2"></div>
                     <div class="col-lg-2 form-group  w-full">
-                        <span class="form-label">Category</span>
-                         <select aria-label="Equipment Category" class="js-example-basic-single" name="equipment_category_id">
-                             <option value="">All Categories</option>
+                        <span class="form-label"><?= __('Category'); ?></span>
+                         <select aria-label="<?= htmlspecialchars(__('Equipment Category'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="equipment_category_id">
+                             <option value=""><?= __('All Categories'); ?></option>
                             <?php foreach($equipment_categories as $stytpe){ ?>
                             <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['equipment_category_id']?"selected":""; ?>><?php echo $stytpe['category_name']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="col-lg-2 form-group  w-full">
-                        <span class="form-label">Type</span>
-                          <select aria-label="Equipment Type" class="js-example-basic-single" name="equipment_type_id">
-                              <option value="">All Types</option>
+                        <span class="form-label"><?= __('Type'); ?></span>
+                          <select aria-label="<?= htmlspecialchars(__('Equipment Type'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="equipment_type_id">
+                              <option value=""><?= __('All Types'); ?></option>
                             <?php foreach($equipment_types as $stytpe){ ?>
                             <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['equipment_type_id']?"selected":""; ?>><?php echo $stytpe['equipment_types_name']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="col-lg-2 form-group  w-full">
-                        <span class="form-label">Equipment</span>
-                         <select aria-label="Equipment" class="js-example-basic-single" name="equipment_id">
-                             <option value="">All Equipments</option>
+                        <span class="form-label"><?= __('Equipment'); ?></span>
+                         <select aria-label="<?= htmlspecialchars(__('Equipment'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="equipment_id">
+                             <option value=""><?= __('All Equipments'); ?></option>
                             <?php foreach($equipments as $stytpe){ ?>
                             <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['equipment_id']?"selected":""; ?>><?php echo $stytpe['equipment_name']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="col-lg-2 form-group  w-full">
-                        <span class="form-label">Seating Equipment</span>
-                         <select aria-label="Seating Equipment" class="js-example-basic-single" name="seating_equipment">
-                             <option value="">All Equipments</option>
-                            <option value="Y" <?php echo $_POST['seating_equipment']=="Y"?"selected":""; ?>>Yes</option>
-                            <option value="N" <?php echo $_POST['seating_equipment']=="N"?"selected":""; ?>>No</option>
+                        <span class="form-label"><?= __('Seating Equipment'); ?></span>
+                         <select aria-label="<?= htmlspecialchars(__('Seating Equipment'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="seating_equipment">
+                             <option value=""><?= __('All Equipments'); ?></option>
+                            <option value="Y" <?php echo $_POST['seating_equipment']=="Y"?"selected":""; ?>><?= __('Yes'); ?></option>
+                            <option value="N" <?php echo $_POST['seating_equipment']=="N"?"selected":""; ?>><?= __('No'); ?></option>
                         </select>
                     </div>
                     <div class="col-lg-2 text-right">
-                        <button type="button" class="btn btn-primary mb-2 desktop-view mt-4" onclick="getBuildingDynamicPage('IEQ')"><i class="ti-search"></i> Search</button>
+                        <button type="button" class="btn btn-primary mb-2 desktop-view mt-4" onclick="getBuildingDynamicPage('IEQ')"><i class="ti-search"></i> <?= __('Search'); ?></button>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@ if($_POST['pagetype'] =="IEQ"){
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
-                    <h5>Allocated Equipments</h5>
+                    <h5><?= __('Allocated Equipments'); ?></h5>
                     <div class="card-header-right">
                         <span class="form-label label label-md label-success"><?php echo count((array)$allocated_equipments); ?></span>
                     </div>
@@ -112,9 +112,9 @@ if($_POST['pagetype'] =="IEQ"){
                                     <div class="col-lg-7">
                                         <div class="align-middle">
                                             <?php if($equip['equipment_image'] !="") { ?>
-                                                <img src="uploads/equipments/<?php echo $equip['equipment_image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="Attachment Preview">
+                                                <img src="uploads/equipments/<?php echo $equip['equipment_image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['equipment_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['equipment_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
                                                 <h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_name']; ?></h6>
@@ -126,9 +126,9 @@ if($_POST['pagetype'] =="IEQ"){
                                     <div class="col-lg-5">
                                         <div class="align-middle float-left ml-2">
                                               <?php if($empary['image']!=""){?>
-                                                <img src="uploads/all/<?php echo $empary['image']; ?>" class="img-radius img-30 align-top m-r-10" alt="Attachment Preview">
+                                                <img src="uploads/all/<?php echo $empary['image']; ?>" class="img-radius img-30 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php }else{ ?>
-                                                <span  alt="user" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($empary['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($empary['display_name']); ?></span>
                                             <?php } ?>
                                               <div class="d-inline-block">
                                                 <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $empary['display_name']; ?></p>
@@ -138,19 +138,19 @@ if($_POST['pagetype'] =="IEQ"){
                                     </div>
                                 </div>
                                 <div class="text-center pt-2">
-                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="insertEquipemnt('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Details" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="insertEquipemnt('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                    <i class="ti-location-pin m-0 cursor-pointer" onclick="insertEquipmentAllocation('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['building_floor_space_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Allocation" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-location-pin m-0 cursor-pointer" onclick="insertEquipmentAllocation('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['building_floor_space_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                    <i class="ti-eye cursor-pointer m-l-30 m-r-30" onclick="ShowBuildingFloors('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="View Location" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-eye cursor-pointer m-l-30 m-r-30" onclick="ShowBuildingFloors('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                    <a href="index.php?option=COM_INSERT_ONBOARDING_EMPLOYEES&Rid=<?php echo deocdeId('id:'.$empary['id']); ?>" target="_blank"><i class="ti-user m-0 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Employee Details" ></i></a>
+                                    <a href="index.php?option=COM_INSERT_ONBOARDING_EMPLOYEES&Rid=<?php echo deocdeId('id:'.$empary['id']); ?>" target="_blank"><i class="ti-user m-0 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>" ></i></a>
 
-                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equipment_allocat_detail['equipment_id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="View Logs" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equipment_allocat_detail['equipment_id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                     <?php if($equip['seating_equipment']=='Y'){ ?>
-                                        <span class="float-end text-info">Seating</span>
+                                        <span class="float-end text-info"><?= __('Seating'); ?></span>
                                     <?php }else{ ?>
-                                        <span class="float-end text-warning">Non-Seating</span>
+                                        <span class="float-end text-warning"><?= __('Non-Seating'); ?></span>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -159,7 +159,7 @@ if($_POST['pagetype'] =="IEQ"){
                     </div>
                     <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Allocated Equipment</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Allocated Equipment'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
@@ -171,7 +171,7 @@ if($_POST['pagetype'] =="IEQ"){
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
-                    <h5>Un-Allocated Equipments </h5>
+                    <h5><?= __('Un-Allocated Equipments'); ?> </h5>
                     <div class="card-header-right">
                         <span class="form-label label label-md label-warning"><?php echo count((array)$unallocated_equipments); ?></span>
                     </div>
@@ -189,9 +189,9 @@ if($_POST['pagetype'] =="IEQ"){
                                 <div class="row border-bottom">
                                     <div class="align-middle">
                                         <?php if($equip['equipment_image'] !="") { ?>
-                                            <img src="uploads/equipments/<?php echo $equip['equipment_image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="Attachment Preview">
+                                            <img src="uploads/equipments/<?php echo $equip['equipment_image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['equipment_name']); ?></span>
+                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['equipment_name']); ?></span>
                                         <?php } ?>
                                         <div class="d-inline-block width73">
                                             <h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_name']; ?></h6>
@@ -201,17 +201,17 @@ if($_POST['pagetype'] =="IEQ"){
                                     </div>
                                 </div>
                                 <div class="text-center pt-2">
-                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="insertEquipemnt('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Details" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="insertEquipemnt('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                    <i class="ti-location-pin m-0 cursor-pointer" onclick="insertEquipmentAllocation('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['building_floor_space_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Allocation" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-location-pin m-0 cursor-pointer" onclick="insertEquipmentAllocation('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['building_floor_space_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                    <i class="ti-eye cursor-pointer m-l-30" onclick="ShowBuildingFloors('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="View Location" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-eye cursor-pointer m-l-30" onclick="ShowBuildingFloors('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equipment_allocat_detail['equipment_id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="View Logs" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equipment_allocat_detail['equipment_id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                     <?php if($equip['seating_equipment']=='Y'){ ?>
-                                        <span class="float-end text-info">Seating</span>
+                                        <span class="float-end text-info"><?= __('Seating'); ?></span>
                                     <?php }else{ ?>
-                                        <span class="float-end text-warning">Non-Seating</span>
+                                        <span class="float-end text-warning"><?= __('Non-Seating'); ?></span>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -220,7 +220,7 @@ if($_POST['pagetype'] =="IEQ"){
                     </div>
                     <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Un-Allocated Equipments</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Un-Allocated Equipments'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
@@ -232,7 +232,7 @@ if($_POST['pagetype'] =="IEQ"){
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
-                    <h5>Equipments For Which Locations To Be Set </h5>
+                    <h5><?= __('Equipments For Which Locations To Be Set'); ?> </h5>
                     <div class="card-header-right">
                         <span class="form-label label label-md label-danger"><?php echo count((array)$unlocated_equipments); ?></span>
                     </div>
@@ -249,9 +249,9 @@ if($_POST['pagetype'] =="IEQ"){
                                 <div class="row border-bottom">
                                     <div class="align-middle">
                                         <?php if($equip['equipment_image'] !="") { ?>
-                                            <img src="uploads/equipments/<?php echo $equip['equipment_image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="Attachment Preview">
+                                            <img src="uploads/equipments/<?php echo $equip['equipment_image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['equipment_name']); ?></span>
+                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['equipment_name']); ?></span>
                                         <?php } ?>
                                         <div class="d-inline-block width73">
                                             <h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_name']; ?></h6>
@@ -261,16 +261,16 @@ if($_POST['pagetype'] =="IEQ"){
                                     </div>
                                 </div>
                                 <div class="text-center pt-2">
-                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="insertEquipemnt('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Details" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="insertEquipemnt('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                    <i class="ti-location-pin m-0 cursor-pointer" onclick="setLocationEquipments('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Set Location" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-location-pin m-0 cursor-pointer" onclick="setLocationEquipments('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Set Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="View Logs" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
                                     <?php if($equip['seating_equipment']=='Y'){ ?>
-                                        <span class="float-end text-info">Seating</span>
+                                        <span class="float-end text-info"><?= __('Seating'); ?></span>
                                     <?php }else{ ?>
-                                        <span class="float-end text-warning">Non-Seating</span>
+                                        <span class="float-end text-warning"><?= __('Non-Seating'); ?></span>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -279,7 +279,7 @@ if($_POST['pagetype'] =="IEQ"){
                     </div>
                     <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Equipments For Which Locatons To Be Set</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Equipments For Which Locatons To Be Set'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
@@ -304,33 +304,33 @@ if($_POST['pagetype'] =="IEQ"){
                         <div class="card-body pt-0">
                             <div class="d-flex align-items-center mb-4">
                                 <div class="w-80px flex-shrink-0 me-2">
-                                    <img src="uploads/all/<?php echo $buld['building_image']; ?>" class="img-radius align-top m-r-10" alt="Attachment Preview">
+                                    <img src="uploads/all/<?php echo $buld['building_image']; ?>" class="img-radius align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="m-0">
-                                    <h6 class="fw-bold mb-3 ">Building Details</h6>
+                                    <h6 class="fw-bold mb-3 "><?= __('Building Details'); ?></h6>
                                     <div class="d-flex d-grid gap-3">
                                         <div class="d-flex flex-column flex-shrink-0 me-1">
                                             <span class="d-flex align-items-center fs-7 fw-bold text-muted mb-2">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['floor_cnt']; ?> Floors</span>
+                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['floor_cnt']; ?> <?= __('Floors'); ?></span>
                                             </span>
                                             <span class="d-flex align-items-center text-muted fw-bold fs-7">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['building_floor_space_cnt']; ?> Spaces</span>
+                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['building_floor_space_cnt']; ?> <?= __('Spaces'); ?></span>
                                             </span>
                                         </div>
                                         <div class="d-flex flex-column flex-shrink-0">
                                             <span class="d-flex align-items-center fs-7 fw-bold text-muted mb-2">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['equipments_cnt']; ?> Seats</span>
+                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['equipments_cnt']; ?> <?= __('Seats'); ?></span>
                                             </span>
                                             <span class="d-flex align-items-center text-muted fw-bold fs-7">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['free_equipments']; ?> Free</span>
+                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['free_equipments']; ?> <?= __('Free'); ?></span>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="m-0">
-                                <button type="button" class="btn btn-success btn-light me-2 mb-2 f-14" onclick="getEquipemntsWithSeat('AR_SEAT','<?php echo $buld['id']; ?>')">Seat Allocation </button>
-                                <button type="button" class="btn btn-primary mb-2 f-14" onclick="getBuildingDetails('<?php echo $buld['id']; ?>')">Edit Details</button>
+                                <button type="button" class="btn btn-success btn-light me-2 mb-2 f-14" onclick="getEquipemntsWithSeat('AR_SEAT','<?php echo $buld['id']; ?>')"><?= __('Seat Allocation'); ?> </button>
+                                <button type="button" class="btn btn-primary mb-2 f-14" onclick="getBuildingDetails('<?php echo $buld['id']; ?>')"><?= __('Edit Details'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -379,16 +379,16 @@ if($_POST['pagetype'] =="IEQ"){
                             <div class="card-body ">
                                 <div class="row align-items-center" id="ar_seat_id">
                                     <div class="col-lg-5">
-                                        <span class="form-label">Floors</span>
+                                        <span class="form-label"><?= __('Floors'); ?></span>
                                     </div>
                                     <div class="col-lg-7 text-right">
                                         <div class="d-inline-block m-l-10">
                                             <button type="button" class="btn waves-effect waves-light btn-primary p-0 img-30 m-r-10"><?php echo $total_allocated_eq; ?></button>
-                                            <span>Allocated Seat</span>
+                                            <span><?= __('Allocated Seat'); ?></span>
                                         </div>
                                         <div class="d-inline-block m-l-10 m-l-20">
                                             <button type="button" class="btn waves-effect waves-light p-0 img-30 m-r-10" style="border: 1px solid;"><?php echo $total_unallocated_eq; ?></button>
-                                            <span>Free Seat</span>
+                                            <span><?= __('Free Seat'); ?></span>
                                         </div>
 
                                     </div>
@@ -440,14 +440,14 @@ if($_POST['pagetype'] =="IEQ"){
                                                         </li>
                                                     <?php }else{ ?>
                                                          <li class="bg-success">
-                                                              <span class="cursor-pointer" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-bs-toggle="tooltip" data-placement="bottom" title=""  data-bs-original-title="Click To Open Menu"><?php echo $eacnt; ?></span>
+                                                              <span class="cursor-pointer" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-bs-toggle="tooltip" data-placement="bottom" title=""  data-bs-original-title="<?= htmlspecialchars(__('Click To Open Menu'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $eacnt; ?></span>
                                                         <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                                            <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"  onclick="insertEquipemnt('<?php echo $equal['equipment_id']; ?>')">Edit Equipment Details</button>
+                                                            <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"  onclick="insertEquipemnt('<?php echo $equal['equipment_id']; ?>')"><?= __('Edit Equipment Details'); ?></button>
 
-                                                            <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"  onclick="insertEquipmentAllocation('<?php echo $equal['building_floor_id']; ?>','<?php echo $equal['building_floor_space_id']; ?>','<?php echo $equal['id']; ?>')" >Edit Allocation</button>
+                                                            <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"  onclick="insertEquipmentAllocation('<?php echo $equal['building_floor_id']; ?>','<?php echo $equal['building_floor_space_id']; ?>','<?php echo $equal['id']; ?>')" ><?= __('Edit Allocation'); ?></button>
 
-                                                            <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"  onclick="ShowBuildingFloors('<?php echo $equal['building_floor_id']; ?>','<?php echo $equal['id']; ?>')" >View Location</button>
-                                                            <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"  onclick="showEquipmentLogs('<?php echo $equal['equipment_id']; ?>')" >View Logs</button>
+                                                            <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"  onclick="ShowBuildingFloors('<?php echo $equal['building_floor_id']; ?>','<?php echo $equal['id']; ?>')" ><?= __('View Location'); ?></button>
+                                                            <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"  onclick="showEquipmentLogs('<?php echo $equal['equipment_id']; ?>')" ><?= __('View Logs'); ?></button>
                                                         </div>
                                                     </li>
                                                     <?php } ?>
@@ -455,7 +455,7 @@ if($_POST['pagetype'] =="IEQ"){
 } ?>
                                             </ul>
                                         <?php }else{ ?>
-                                            <h5 class="text-center"><i class="ti-alert"></i> No Equipments</h5>
+                                            <h5 class="text-center"><i class="ti-alert"></i> <?= __('No Equipments'); ?></h5>
                                         <?php } ?>
                                         </div>
                                     </div>
@@ -465,7 +465,7 @@ if($_POST['pagetype'] =="IEQ"){
                             <?php } ?>
                             <?php }else{ ?>
                                 <div class="card-px text-center py-20 m-t-30">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Floors</p>
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Floors'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                     </div>
@@ -487,16 +487,16 @@ if($_POST['pagetype'] =="IEQ"){
  ?>
 <div class="card">
     <div class="card-header">
-        <h5>Employees</h5>
+        <h5><?= __('Employees'); ?></h5>
         <div class="card-header-right">
-            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeToAllocateEmployee()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeToAllocateEmployee()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
         </div>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
                 <div class="input-group input-group-button mb-0" >
-                    <input aria-label="Search" type="text" id="filter1111" data-id='categoryfilter' data-type="div" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search">
+                    <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="filter1111" data-id='categoryfilter' data-type="div" class="form-control form-control-sm width1"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="input-group-text addon-style">
                         <span class=""><i class="ti-search text-white mt-2"></i></span>
                     </div>
@@ -510,9 +510,9 @@ if($_POST['pagetype'] =="IEQ"){
                     <div class="col-lg-10">
                         <div class="align-middle  ">
                             <?php if($emplist['image']!=""){?>
-                                <img src="uploads/all/<?php echo $emplist['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="Attachment Preview">
+                                <img src="uploads/all/<?php echo $emplist['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php }else{ ?>
-                                <span  alt="user" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($emplist['display_name']); ?></span>
+                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($emplist['display_name']); ?></span>
                             <?php } ?>
                             <div class="d-inline-block">
                                 <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $emplist['display_name']; ?>
@@ -526,9 +526,9 @@ if($_POST['pagetype'] =="IEQ"){
                     </div>
                     <div class="col-lg-2 d-inline-block">
                         <?php if($postemp == $emplist['id']){ ?>
-                            <i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Un-Allocate Seat" onclick="allocateEmployeeSeat('<?php echo $eq_id; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                            <i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Seat'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeeSeat('<?php echo $eq_id; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                         <?php }else{  ?>
-                            <i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Allocate Seat" onclick="allocateEmployeeSeat('<?php echo $eq_id; ?>','<?php echo $emplist['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                            <i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Seat'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeeSeat('<?php echo $eq_id; ?>','<?php echo $emplist['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                         <?php } ?>
                     </div>
                 </div>
@@ -553,32 +553,32 @@ if($_POST['pagetype'] =="IEQ"){
                         <div class="card-body pt-0">
                             <div class="d-flex align-items-center mb-4">
                                 <div class="w-80px flex-shrink-0 me-2">
-                                    <img src="uploads/all/<?php echo $buld['building_image']; ?>" class="img-radius align-top m-r-10" alt="Attachment Preview">
+                                    <img src="uploads/all/<?php echo $buld['building_image']; ?>" class="img-radius align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="m-0">
-                                    <h6 class="fw-bold mb-3 ">Building Details</h6>
+                                    <h6 class="fw-bold mb-3 "><?= __('Building Details'); ?></h6>
                                     <div class="d-flex d-grid gap-3">
                                         <div class="d-flex flex-column flex-shrink-0 me-1">
                                             <span class="d-flex align-items-center fs-7 fw-bold text-muted mb-2">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['floor_cnt']; ?> Floors</span>
+                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['floor_cnt']; ?> <?= __('Floors'); ?></span>
                                             </span>
                                             <span class="d-flex align-items-center text-muted fw-bold fs-7">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['building_floor_space_cnt']; ?> Spaces</span>
+                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['building_floor_space_cnt']; ?> <?= __('Spaces'); ?></span>
                                             </span>
                                         </div>
                                         <div class="d-flex flex-column flex-shrink-0">
                                             <span class="d-flex align-items-center fs-7 fw-bold text-muted mb-2">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['usedspace_cnt']; ?> Allocated</span>
+                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['usedspace_cnt']; ?> <?= __('Allocated'); ?></span>
                                             </span>
                                             <span class="d-flex align-items-center text-muted fw-bold fs-7">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['building_floor_space_cnt']-$buld['usedspace_cnt']; ?> Free</span>
+                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['building_floor_space_cnt']-$buld['usedspace_cnt']; ?> <?= __('Free'); ?></span>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="m-0 text-center">
-                                <button type="button" class="btn btn-success btn-light me-2 mb-2 f-14" onclick="getEquipemntsWithSeat('CSA_ALLOCATION','<?php echo $buld['id']; ?>')">Cubicle Allocation </button>
+                                <button type="button" class="btn btn-success btn-light me-2 mb-2 f-14" onclick="getEquipemntsWithSeat('CSA_ALLOCATION','<?php echo $buld['id']; ?>')"><?= __('Cubicle Allocation'); ?> </button>
 
                             </div>
                         </div>
@@ -644,25 +644,25 @@ if($_POST['pagetype'] =="IEQ"){
                         <div class="d-inline-block m-l-10">
                             <span class="form-label label label-lg label-danger"><?php echo $inprogresscnt; ?></span>
 
-                            <span class="f-12">In-Progress</span>
+                            <span class="f-12"><?= __('In-Progress'); ?></span>
                         </div>
                         <div class="d-inline-block m-l-10">
                             <span class="form-label label label-lg label-warning"><?php echo $reservecnt; ?></span>
 
-                            <span class="f-12">Reserved</span>
+                            <span class="f-12"><?= __('Reserved'); ?></span>
                         </div>
                         <div class="d-inline-block m-l-10">
                             <span class="form-label label label-lg label-primary" style="background-color: #e4e4e4"><?php echo $empallocatedcnt; ?></span>
 
-                            <span class="f-12" >Allocated</span>
+                            <span class="f-12" ><?= __('Allocated'); ?></span>
                         </div>
                         <div class="d-inline-block m-l-10 m-l-20">
                             <span class="form-label label label-lg text-dark" style="border: 1px black solid;"><?php echo $notallocatedcnt; ?></span>
 
-                            <span class="f-12">Free</span>
+                            <span class="f-12"><?= __('Free'); ?></span>
                         </div>
                         <div class="d-inline-block m-l-10 m-l-20">
-                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close text-danger cursor-pointer" onclick="closeBookingSeat()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Close" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close text-danger cursor-pointer" onclick="closeBookingSeat()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                         </div>
                     </div>
                 </div>
@@ -786,7 +786,7 @@ if($_POST['pagetype'] =="IEQ"){
                 </ul>
             </div>
             <div class="col-lg-2">
-                <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeToAllocateEmployee()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeToAllocateEmployee()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
             </div>
         </div>
     </div>
@@ -796,7 +796,7 @@ if($_POST['pagetype'] =="IEQ"){
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="input-group input-group-button mb-0" >
-                            <input aria-label="Search" type="text" id="filter1111_2" data-id='categoryfilter_2' data-type="div" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search">
+                            <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="filter1111_2" data-id='categoryfilter_2' data-type="div" class="form-control form-control-sm width1"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                             <div class="input-group-text addon-style">
                                 <span class=""><i class="ti-search text-white mt-2"></i></span>
                             </div>
@@ -812,9 +812,9 @@ if($_POST['pagetype'] =="IEQ"){
                                     <div class="col-lg-10">
                                         <div class="align-middle  ">
                                             <?php if($emplist['image']!=""){?>
-                                                <img src="uploads/all/<?php echo $emplist['image']; ?>"   class="img-30 align-middle m-r-10 seating_emp_image" alt="Attachment Preview">
+                                                <img src="uploads/all/<?php echo $emplist['image']; ?>"   class="img-30 align-middle m-r-10 seating_emp_image" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php }else{ ?>
-                                                <span  alt="user" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($emplist['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($emplist['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block align-middle">
                                                 <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $emplist['display_name']; ?>
@@ -828,9 +828,9 @@ if($_POST['pagetype'] =="IEQ"){
                                     </div>
                                     <div class="col-lg-2 d-inline-block align-middle">
                                         <?php if($postemp == $emplist['id']){ ?>
-                                            <i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Un-Allocate Cubicle Space" onclick="allocateEmployeecubicleSpace('<?php echo $bfs_id; ?>','<?php echo $bfsa_id; ?>','','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                            <i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeecubicleSpace('<?php echo $bfs_id; ?>','<?php echo $bfsa_id; ?>','','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                         <?php }else{  ?>
-                                            <i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Allocate Cubicle Space" onclick="allocateEmployeecubicleSpace('<?php echo $bfs_id; ?>','<?php echo $bfsa_id; ?>','<?php echo $emplist['id']; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                            <i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeecubicleSpace('<?php echo $bfs_id; ?>','<?php echo $bfsa_id; ?>','<?php echo $emplist['id']; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -854,7 +854,7 @@ if($_POST['pagetype'] =="IEQ"){
                         <div class="row mt-2" >
                             <div class="col-lg-10">
                                 <div class="align-middle">
-                                    <span  alt="user" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($rpoolval['pool_name']); ?></span>
+                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($rpoolval['pool_name']); ?></span>
 
                                     <div class="d-inline-block align-middle">
                                         <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $rpoolval['pool_name']; ?>
@@ -867,9 +867,9 @@ if($_POST['pagetype'] =="IEQ"){
                             </div>
                             <div class="col-lg-2 d-inline-block align-middle">
                                 <?php if($reserve_pool_id == $rpoolkey){ ?>
-                                    <i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Un-Allocate Cubicle Space" onclick="allocateEmployeecubicleSpace('<?php echo $bfs_id; ?>','<?php echo $bfsa_id; ?>','','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeecubicleSpace('<?php echo $bfs_id; ?>','<?php echo $bfsa_id; ?>','','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                 <?php }else{ ?>
-                                    <i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Allocate Cubicle Space" onclick="allocateEmployeecubicleSpace('<?php echo $bfs_id; ?>','<?php echo $bfsa_id; ?>','','<?php echo $rpoolkey; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeecubicleSpace('<?php echo $bfs_id; ?>','<?php echo $bfsa_id; ?>','','<?php echo $rpoolkey; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                 <?php } ?>
                             </div>
                         </div>
@@ -893,7 +893,7 @@ if($_POST['pagetype'] =="IEQ"){
                                 <div class="row mt-2" >
                                     <div class="col-lg-10">
                                         <div class="align-middle  ">
-                                               <span  alt="user" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($bfsdata['cabin_name']); ?></span>
+                                               <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($bfsdata['cabin_name']); ?></span>
                                             <div class="d-inline-block align-middle">
                                                 <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $bfsdata['cabin_name']; ?>
                                                 </p>
@@ -901,7 +901,7 @@ if($_POST['pagetype'] =="IEQ"){
                                         </div>
                                     </div>
                                     <div class="col-lg-2 d-inline-block align-middle">
-                                        <i class="ti-check text-success f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Allocate Cubicle Space" onclick="allocateEmployeecubicleSpace('<?php echo $bfsdata['id']; ?>','<?php echo $bfsa_id; ?>','','',0)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="ti-check text-success f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeecubicleSpace('<?php echo $bfsdata['id']; ?>','<?php echo $bfsa_id; ?>','','',0)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
                                     </div>
                                 </div>
@@ -926,7 +926,7 @@ if($_POST['pagetype'] =="IEQ"){
                                 <div class="row mt-2" >
                                     <div class="col-lg-10">
                                         <div class="align-middle  ">
-                                               <span  alt="user" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($bfsdata['asset_description']); ?></span>
+                                               <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($bfsdata['asset_description']); ?></span>
                                             <div class="d-inline-block align-middle">
                                                 <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $bfsdata['asset_description']; ?>
                                                 </p>
@@ -935,9 +935,9 @@ if($_POST['pagetype'] =="IEQ"){
                                     </div>
                                     <div class="col-lg-2 d-inline-block align-middle assetallocationwithbtnchnage_<?php echo $bfsdata['id']; ?>" >
                                     <?php if(isset($asset_allocations[$bfsdata['id']])){ ?>
-                                        <i class="ti-trash text-danger f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Un-Allocate Assets"  onclick="insertAssetallocationlist('<?php echo $building_floor_id; ?>','<?php echo $bfs_id; ?>','<?php echo $bfsdata['id']; ?>','<?php echo $asset_allocations[$bfsdata['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="ti-trash text-danger f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Assets'), ENT_QUOTES, 'UTF-8'); ?>"  onclick="insertAssetallocationlist('<?php echo $building_floor_id; ?>','<?php echo $bfs_id; ?>','<?php echo $bfsdata['id']; ?>','<?php echo $asset_allocations[$bfsdata['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                     <?php }else{ ?>
-                                        <i class="ti-check text-success f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Allocate Assets"  onclick="insertAssetallocationlist('<?php echo $building_floor_id; ?>','<?php echo $bfs_id; ?>','<?php echo $bfsdata['id']; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="ti-check text-success f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Assets'), ENT_QUOTES, 'UTF-8'); ?>"  onclick="insertAssetallocationlist('<?php echo $building_floor_id; ?>','<?php echo $bfs_id; ?>','<?php echo $bfsdata['id']; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                     <?php } ?>
                                     </div>
                                 </div>
@@ -992,7 +992,7 @@ if($_POST['pagetype'] =="IEQ"){
 
                 <div class="col-lg-3 form-group  w-full">
                     <span class="form-label">Employee</span>
-                     <select aria-label="Emp" class="js-example-basic-single" name="emp_id" onchange="selectSpaceallocatedemployee(this.value)">
+                     <select aria-label="<?= htmlspecialchars(__('Emp'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="emp_id" onchange="selectSpaceallocatedemployee(this.value)">
                          <option value="">All Employees</option>
                         <?php foreach($result['select_employees'] as $emp){ ?>
                         <option value="<?php echo $emp['id']; ?>" <?php echo $emp['id']==$_POST['emp_id']?"selected":""; ?>><?php echo $emp['display_name']; ?></option>
@@ -1026,12 +1026,12 @@ if($_POST['pagetype'] =="IEQ"){
                                     <div class="row">
                                         <div class="align-middle border-bottom">
                                             <?php if($eqa_detail['image'] !="") { ?>
-                                                <img src="uploads/all/<?php echo $eqa_detail['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="Attachment Preview">
+                                                <img src="uploads/all/<?php echo $eqa_detail['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($eqa_detail['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($eqa_detail['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
-                                                <h6 class="mb-0 custom-limit-text text-primary cursor-pointer" style="--linehide: 1;" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Employee Details" onclick="insertEmployeePopUp('<?php echo $eqa_detail['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo $eqa_detail['display_name']; ?> <i class="ti-pencil f-12"></i></h6>
+                                                <h6 class="mb-0 custom-limit-text text-primary cursor-pointer" style="--linehide: 1;" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertEmployeePopUp('<?php echo $eqa_detail['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo $eqa_detail['display_name']; ?> <i class="ti-pencil f-12"></i></h6>
                                                 <p class="m-b-0 custom-limit-text" style="--linehide: 1;"><?php echo $eqa_detail['emp_code']; ?></p>
                                                 <p class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $eqa_detail['email_id']; ?></p>
                                             </div>
@@ -1080,12 +1080,12 @@ if($_POST['pagetype'] =="IEQ"){
                                     <div class="row">
                                         <div class="align-middle">
                                             <?php if($empdetail['image'] !="") { ?>
-                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="Attachment Preview">
+                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
-                                                <h6 class="mb-0 custom-limit-text text-primary cursor-pointer" style="--linehide: 1;" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Employee Details" onclick="insertEmployeePopUp('<?php echo $empdetail['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo $empdetail['display_name']; ?> <i class="ti-pencil f-12"></i></h6>
+                                                <h6 class="mb-0 custom-limit-text text-primary cursor-pointer" style="--linehide: 1;" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertEmployeePopUp('<?php echo $empdetail['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo $empdetail['display_name']; ?> <i class="ti-pencil f-12"></i></h6>
                                                 <p class="m-b-0 custom-limit-text" style="--linehide: 1;"><?php echo $empdetail['emp_code']; ?></p>
                                                 <p class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $empdetail['email_id']; ?></p>
                                             </div>
@@ -1139,7 +1139,7 @@ if($_POST['pagetype'] =="IEQ"){
                 <div class="col-lg-2"></div>
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label">Building</span>
-                     <select aria-label="Building" class="js-example-basic-single" name="building_id">
+                     <select aria-label="<?= htmlspecialchars(__('Building'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="building_id">
                          <option value="">All Buildings</option>
                         <?php foreach($buildings as $stytpe){ ?>
                         <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['building_id']?"selected":""; ?>><?php echo $stytpe['building_name']; ?></option>
@@ -1148,7 +1148,7 @@ if($_POST['pagetype'] =="IEQ"){
                 </div>
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label">Building Floor</span>
-                      <select aria-label="Building Floor" class="js-example-basic-single" name="building_floor_id">
+                      <select aria-label="<?= htmlspecialchars(__('Building Floor'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="building_floor_id">
                           <option value="">All Building Floor</option>
                         <?php foreach($building_floors as $stytpe){ ?>
                         <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['building_floor_id']?"selected":""; ?>><?php echo $stytpe['floor_name']; ?></option>
@@ -1157,7 +1157,7 @@ if($_POST['pagetype'] =="IEQ"){
                 </div>
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label">Equipment</span>
-                     <select aria-label="Equipment" class="js-example-basic-single" name="equipment_id">
+                     <select aria-label="<?= htmlspecialchars(__('Equipment'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="equipment_id">
                          <option value="">All Equipments</option>
                         <?php foreach($equipments as $stytpe){ ?>
                         <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['equipment_id']?"selected":""; ?>><?php echo $stytpe['equipment_name']; ?></option>
@@ -1166,7 +1166,7 @@ if($_POST['pagetype'] =="IEQ"){
                 </div>
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label">Employee</span>
-                     <select aria-label="Emp" class="js-example-basic-single" name="emp_id">
+                     <select aria-label="<?= htmlspecialchars(__('Emp'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="emp_id">
                          <option value="">All Employees</option>
                         <?php foreach($employees as $emp){ ?>
                         <option value="<?php echo $emp['id']; ?>" <?php echo $emp['id']==$_POST['emp_id']?"selected":""; ?>><?php echo $emp['display_name']; ?></option>
@@ -1200,9 +1200,9 @@ if($_POST['pagetype'] =="IEQ"){
                                     <div class="row border-bottom">
                                         <div class="align-middle">
                                             <?php if($eqa_detail['image'] !="") { ?>
-                                                <img src="uploads/all/<?php echo $eqa_detail['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="Attachment Preview">
+                                                <img src="uploads/all/<?php echo $eqa_detail['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($eqa_detail['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($eqa_detail['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
                                                 <h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $eqa_detail['display_name']; ?></h6>
@@ -1216,11 +1216,11 @@ if($_POST['pagetype'] =="IEQ"){
                                     <div class="mt-2 text-center">
 
 
-                                        <i class="ti-user cursor-pointer " data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Employee Details" onclick="insertEmployeePopUp('<?php echo $eqa_detail['empp_id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="ti-user cursor-pointer " data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertEmployeePopUp('<?php echo $eqa_detail['empp_id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                        <i class="ti-location-pin cursor-pointer m-l-30" onclick="insertEquipmentAllocation('<?php echo $eqa_detail['building_floor_id']; ?>','<?php echo $eqa_detail['building_floor_space_id']; ?>','<?php echo $eqa_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Allocation" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="ti-location-pin cursor-pointer m-l-30" onclick="insertEquipmentAllocation('<?php echo $eqa_detail['building_floor_id']; ?>','<?php echo $eqa_detail['building_floor_space_id']; ?>','<?php echo $eqa_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                        <i class="ti-eye cursor-pointer m-l-30" onclick="ShowBuildingFloors('<?php echo $eqa_detail['building_floor_id']; ?>','<?php echo $eqa_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="View Employee Location" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="ti-eye cursor-pointer m-l-30" onclick="ShowBuildingFloors('<?php echo $eqa_detail['building_floor_id']; ?>','<?php echo $eqa_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Employee Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
                                     </div>
                                 </div>
@@ -1257,9 +1257,9 @@ if($_POST['pagetype'] =="IEQ"){
                                     <div class="row border-bottom">
                                         <div class="align-middle">
                                             <?php if($empdetail['image'] !="") { ?>
-                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="Attachment Preview">
+                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
                                                 <h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $empdetail['display_name']; ?></h6>
@@ -1271,9 +1271,9 @@ if($_POST['pagetype'] =="IEQ"){
                                     <div class="mt-2 text-center">
 
 
-                                        <i class="ti-user cursor-pointer " data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Employee Details" onclick="insertEmployeePopUp('<?php echo $empdetail['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="ti-user cursor-pointer " data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertEmployeePopUp('<?php echo $empdetail['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                        <i class="ti-location-pin cursor-pointer m-l-30" onclick="setLocationEmployee('<?php echo $empdetail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Set Employee Location" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="ti-location-pin cursor-pointer m-l-30" onclick="setLocationEmployee('<?php echo $empdetail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Set Employee Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
                                     </div>
                                 </div>
@@ -1348,7 +1348,7 @@ if($_POST['pagetype'] =="IEQ"){
             <div class="card-body pt-0">
                 <div class="d-flex align-items-center mb-4">
                     <div class="w-80px flex-shrink-0 me-2">
-                        <img src="uploads/all/<?php echo $buld['building_image']; ?>" class="img-radius align-top m-r-10" alt="Attachment Preview">
+                        <img src="uploads/all/<?php echo $buld['building_image']; ?>" class="img-radius align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="m-0">
                         <h6 class="fw-bold mb-3 ">Building Details</h6>
@@ -1383,7 +1383,7 @@ if($_POST['pagetype'] =="IEQ"){
                   <div class="card-header">
                       <h5>Floors <span class="form-label label label-md label-primary"><?php echo count((array)$building_floors[$buld['id']]); ?></span></h5>
                       <div class="card-header-right">
-                        <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closedPopup()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                        <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closedPopup()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                       </div>
                 </div>
                 <div class="card-body custom-scroll" style="max-height: 130px;">
@@ -1394,7 +1394,7 @@ if($_POST['pagetype'] =="IEQ"){
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <img src="uploads/building_floors/<?php echo $bfloor['floor_image']; ?>" class="img-100" alt="Attachment Preview">
+                                        <img src="uploads/building_floors/<?php echo $bfloor['floor_image']; ?>" class="img-100" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
                                     <div class="col-lg-5">
                                         <h5 class="custom-limit-text" style="--linehide: 1;"><?php echo $bfloor['floor_name']; ?></h5>
@@ -1402,21 +1402,21 @@ if($_POST['pagetype'] =="IEQ"){
                                     </div>
 
                                     <div class="col-lg-2">
-                                        <i class="fa fa-edit text-primary mb-2 hidebuildingmenu buildingmenu_MFS" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Manage Cubicle Space"  onclick="getBuildingFoolSpaceDetails('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="fa fa-edit text-primary mb-2 hidebuildingmenu buildingmenu_MFS" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Manage Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"  onclick="getBuildingFoolSpaceDetails('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                        <i class="fa fa-edit text-primary mb-2 hidebuildingmenu buildingmenu_MFSNEW" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Manage Cubicle Space"  onclick="getBuildingFoolSpaceDetailsNew('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="fa fa-edit text-primary mb-2 hidebuildingmenu buildingmenu_MFSNEW" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Manage Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"  onclick="getBuildingFoolSpaceDetailsNew('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                        <i class="ti-widgetized text-primary hidebuildingmenu buildingmenu_AE" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Allocate Equipments" onclick="insertEquipmentAllocation('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="ti-widgetized text-primary hidebuildingmenu buildingmenu_AE" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Allocate Equipments'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertEquipmentAllocation('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                        <i class="ti-user text-primary hidebuildingmenu buildingmenu_AS" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Allocate Seats" onclick="insertEquipmentAllocation('<?php echo $bfloor['id']; ?>','','','','','','','AS')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="ti-user text-primary hidebuildingmenu buildingmenu_AS" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Allocate Seats'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertEquipmentAllocation('<?php echo $bfloor['id']; ?>','','','','','','','AS')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                        <i class="fa fa-eye mt-2 text-primary hidebuildingmenu  buildingmenu_VFD" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Floor Details" onclick="ShowBuildingFloors('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="fa fa-eye mt-2 text-primary hidebuildingmenu  buildingmenu_VFD" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Floor Details'), ENT_QUOTES, 'UTF-8'); ?>" onclick="ShowBuildingFloors('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                        <i class="fa fa-eye mt-2 text-primary hidebuildingmenu  buildingmenu_VCSPACE" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Cubicle Spaces" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="fa fa-eye mt-2 text-primary hidebuildingmenu  buildingmenu_VCSPACE" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Cubicle Spaces'), ENT_QUOTES, 'UTF-8'); ?>" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                        <i class="fa fa-eye mt-2 text-primary hidebuildingmenu  buildingmenu_ASSETALLOCATION" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Insert Asset Allocations" onclick="insertAssetsAllocation('','<?php echo $bfloor['id']; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="fa fa-eye mt-2 text-primary hidebuildingmenu  buildingmenu_ASSETALLOCATION" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Insert Asset Allocations'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertAssetsAllocation('','<?php echo $bfloor['id']; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                        <i class="fa fa-eye mt-2 text-primary hidebuildingmenu  buildingmenu_VIEWASSETALLOCATION" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Asset Allocations" onclick="ShowAssetsLocations('<?php echo $bfloor['id']; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <i class="fa fa-eye mt-2 text-primary hidebuildingmenu  buildingmenu_VIEWASSETALLOCATION" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Asset Allocations'), ENT_QUOTES, 'UTF-8'); ?>" onclick="ShowAssetsLocations('<?php echo $bfloor['id']; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
                                     </div>
                                 </div>
@@ -1497,7 +1497,7 @@ if($_POST['pagetype'] =="IEQ"){
                     <div class="col-lg-6"></div>
                     <div class="col-lg-2 form-group  w-full">
                         <span class="form-label">Category</span>
-                         <select aria-label="Equipment Category" class="js-example-basic-single" name="equipment_category_id">
+                         <select aria-label="<?= htmlspecialchars(__('Equipment Category'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="equipment_category_id">
                              <option value="">All Categories</option>
                             <?php foreach($asset_categories as $stytpe){ ?>
                             <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['equipment_category_id']?"selected":""; ?>><?php echo $stytpe['category_description']; ?></option>
@@ -1506,7 +1506,7 @@ if($_POST['pagetype'] =="IEQ"){
                     </div>
                     <div class="col-lg-2 form-group  w-full">
                         <span class="form-label">Assets</span>
-                          <select aria-label="Equipment Type" class="js-example-basic-single" name="equipment_type_id">
+                          <select aria-label="<?= htmlspecialchars(__('Equipment Type'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="equipment_type_id">
                               <option value="">All Assets</option>
                             <?php foreach($assets as $stytpe){ ?>
                             <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['equipment_type_id']?"selected":""; ?>><?php echo $stytpe['asset_description']; ?></option>
@@ -1543,9 +1543,9 @@ if($_POST['pagetype'] =="IEQ"){
                                 <div class="row border-bottom">
                                     <div class="align-middle">
                                         <?php if($equip['asset_img'] !="") { ?>
-                                            <img src="uploads/equipments/<?php echo $equip['asset_img']; ?>"  class="img-radius img-50 align-top m-r-10" alt="Attachment Preview">
+                                            <img src="uploads/equipments/<?php echo $equip['asset_img']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['asset_description']); ?></span>
+                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['asset_description']); ?></span>
                                         <?php } ?>
                                         <div class="d-inline-block width73">
                                             <h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $equip['asset_description']; ?></h6>
@@ -1556,14 +1556,14 @@ if($_POST['pagetype'] =="IEQ"){
                                     </div>
                                 </div>
                                 <div class="text-center pt-2">
-                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="AddAssets('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Details" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="AddAssets('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                     <i class="ti-location-pin m-0 m-r-30 cursor-pointer" onclick="insertAssetsAllocation('','<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['asset_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Allocation" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                     <i class="ti-location-pin m-0 m-r-30 cursor-pointer" onclick="insertAssetsAllocation('','<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['asset_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                    <i class="ti-eye cursor-pointer m-l-30" onclick="ShowAssetsLocations('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="View Location" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-eye cursor-pointer m-l-30" onclick="ShowAssetsLocations('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
 
-                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equipment_allocat_detail['asset_id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="View Logs" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equipment_allocat_detail['asset_id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
                                 </div>
                             </div>
@@ -1601,9 +1601,9 @@ if($_POST['pagetype'] =="IEQ"){
                                 <div class="row border-bottom">
                                     <div class="align-middle">
                                         <?php if($equip['asset_img'] !="") { ?>
-                                            <img src="uploads/equipments/<?php echo $equip['asset_img']; ?>"  class="img-radius img-50 align-top m-r-10" alt="Attachment Preview">
+                                            <img src="uploads/equipments/<?php echo $equip['asset_img']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['asset_description']); ?></span>
+                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['asset_description']); ?></span>
                                         <?php } ?>
                                         <div class="d-inline-block width73">
                                             <h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $equip['asset_description']; ?></h6>
@@ -1614,11 +1614,11 @@ if($_POST['pagetype'] =="IEQ"){
                                     </div>
                                 </div>
                                 <div class="text-center pt-2">
-                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="AddAssets('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Edit Details" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="AddAssets('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                    <i class="ti-location-pin m-0 cursor-pointer" onclick="setLocationAssets('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Set Location" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-location-pin m-0 cursor-pointer" onclick="setLocationAssets('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Set Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
-                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="View Logs" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                 </div>
                             </div>
                         </div>
@@ -1735,7 +1735,7 @@ $buildingwithfloors = $building_with_floors[$buldd['id']];
             <div class="row">
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label d-block">Building</span>
-                     <select aria-label="Building" class="js-example-basic-single" name="building_id" onchange="getfloorslist(this.value)">
+                     <select aria-label="<?= htmlspecialchars(__('Building'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="building_id" onchange="getfloorslist(this.value)">
                          <option value="">All Buildings</option>
                         <?php foreach($buildings_report as $stytpe){ ?>
                         <option value="<?php echo $stytpe['id']; ?>"><?php echo $stytpe['building_name']; ?></option>
@@ -1744,7 +1744,7 @@ $buildingwithfloors = $building_with_floors[$buldd['id']];
                 </div>
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label d-block">Building Floor</span>
-                      <select aria-label="Building Floor" class="js-example-basic-single" name="building_floor_id" id="detailreportfoolr">
+                      <select aria-label="<?= htmlspecialchars(__('Building Floor'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="building_floor_id" id="detailreportfoolr">
                           <option value="">All Building Floor</option>
                         <?php foreach($buildings_report as $buldd){ ?>
                             <optgroup label="<?php echo $buldd['building_name']; ?>" >
@@ -1759,7 +1759,7 @@ $buildingwithfloors = $building_with_floors[$buldd['id']];
                 </div>
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label d-block">Space Types</span>
-                     <select aria-label="Space Type" class="js-example-basic-single" name="space_type_id">
+                     <select aria-label="<?= htmlspecialchars(__('Space Type'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="space_type_id">
                          <option value="">All Space Types</option>
                         <?php foreach($space_types as $keyid=>$sptype){ ?>
                         <option value="<?php echo $keyid; ?>"><?php echo $sptype; ?></option>
@@ -1768,7 +1768,7 @@ $buildingwithfloors = $building_with_floors[$buldd['id']];
                 </div>
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label d-block">Reserve Pool</span>
-                     <select aria-label="Seating Pool" class="js-example-basic-single" name="seating_pool_id">
+                     <select aria-label="<?= htmlspecialchars(__('Seating Pool'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="seating_pool_id">
                          <option value="">All Reserve Pool</option>
                         <?php foreach($seating_pools as $poll){ ?>
                         <option value="<?php echo $poll['id']; ?>"><?php echo $poll['pool_name']; ?></option>
@@ -2142,7 +2142,7 @@ $buildingwithfloors = $building_with_floors[$buldd['id']];
                     <div class="card-body" >
                         <div class="col-lg-12">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" class="form-control form-control-sm width1" placeholder="Enter Minimum 3 Characters" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search" onkeyup="getSearchEmployeeLocations(this.value)">
+                                <input type="text" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Enter Minimum 3 Characters'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" onkeyup="getSearchEmployeeLocations(this.value)">
                                 <div class="input-group-text addon-style">
                                     <span class=""><i class="ti-search text-white mt-2"></i></span>
                                 </div>
@@ -2170,9 +2170,9 @@ $buildingwithfloors = $building_with_floors[$buldd['id']];
                                 ?>
                             <div class="align-middle mt-3">
                                 <?php if($employees_name_list[$empd['emp_id']]['image'] !="") { ?>
-                                    <img src="uploads/all/<?php echo $empd['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="Attachment Preview">
+                                    <img src="uploads/all/<?php echo $empd['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <?php } else { ?>
-                                    <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($employees_name_list[$empd['emp_id']]['display_name']); ?></span>
+                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($employees_name_list[$empd['emp_id']]['display_name']); ?></span>
                                 <?php } ?>
                                 <div class="d-inline-block width73">
                                     <h7 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $employees_name_list[$empd['emp_id']]['display_name']; ?></h7>
@@ -2210,9 +2210,9 @@ $buildingwithfloors = $building_with_floors[$buldd['id']];
                                 ?>
                             <div class="align-middle mt-3">
                                 <?php if($employees_name_list[$empd['emp_id']]['image'] !="") { ?>
-                                    <img src="uploads/all/<?php echo $empd['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="Attachment Preview">
+                                    <img src="uploads/all/<?php echo $empd['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <?php } else { ?>
-                                    <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($employees_name_list[$empd['emp_id']]['display_name']); ?></span>
+                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($employees_name_list[$empd['emp_id']]['display_name']); ?></span>
                                 <?php } ?>
                                 <div class="d-inline-block width73">
                                     <h7 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $employees_name_list[$empd['emp_id']]['display_name']; ?></h7>
@@ -2444,14 +2444,14 @@ foreach($empparentwithchild[$selecteduser] as $empd){ ?>
                     <div class="card-header">
                         <h5>Assets</h5>
                         <div class="card-header-right">
-                            <button type="button" onclick="getBuildingDynamicPage('ASSETS')" class=" b-b-primary text-primary float-right" data-bs-toggle="tab" costcenter" role="tab" aria-selected="true">View all</button>
+                            <button type="button" onclick="getBuildingDynamicPage('ASSETS')" class=" b-b-primary text-primary float-right" data-bs-toggle="tab" costcenter" role="tab" aria-selected="true"><?= __('View all'); ?></button>
 
                         </div>
                     </div>
                     <div class="card-body" style="height: 300px;">
                     <?php foreach($equipments_list as $equp){ ?>
                         <div class="align-middle mt-3">
-                            <span alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equp['asset_description']); ?></span>
+                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equp['asset_description']); ?></span>
                             <div class="d-inline-block width73">
                                 <h7 class="mb-0 custom-limit-text text-primary cursor-pointer" style="--linehide: 1;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button" onclick="AddAssets('<?php echo $equp['id']; ?>')"><?php echo $equp['asset_description']; ?> </h7>
                                 <span class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $equp['asset_code'];  ?></span>
@@ -2464,7 +2464,7 @@ foreach($empparentwithchild[$selecteduser] as $empd){ ?>
             <div class="col-lg-4">
                 <div class="card" style=" min-height: 500px; max-height: 500px;">
                     <div class="card-header table-card-header ">
-                        <h5>Employees </h5>
+                        <h5><?= __('Employees'); ?> </h5>
                         <div class="card-header-right">
                             <button type="button" onclick="getBuildingDynamicPage('BSEM')" class=" b-b-primary text-primary float-right" data-bs-toggle="tab" costcenter" role="tab" aria-selected="true">View all</button>
                         </div>
