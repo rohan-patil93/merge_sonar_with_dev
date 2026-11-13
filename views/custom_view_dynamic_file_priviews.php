@@ -10,23 +10,23 @@ $googledocsfile = array('docx','pdf');
 ?>
 <div class="modal-header">
       <h5 class="modal-title">
-        Preview Docs
+        <?= __('Preview Docs'); ?>
       </h5>
-     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body  text-center" >
 
-<div class="text-center" id="loader_popup"><img src="assets/images/spiner/spiner3.gif" style="width: 100px;" alt="Preview"></div>
+<div class="text-center" id="loader_popup"><img src="assets/images/spiner/spiner3.gif" style="width: 100px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>
 
     <?php if(in_array($file_extension, $googledocsfile)){ ?>
 
-        <iframe src="<?php echo $path; ?>" width="600" height="400" frameborder="0" id="myIframe_2" title="File Preview"></iframe>
+        <iframe src="<?php echo $path; ?>" width="600" height="400" frameborder="0" id="myIframe_2" title="<?= htmlspecialchars(__('File Preview'), ENT_QUOTES, 'UTF-8'); ?>"></iframe>
     <?php }else{  ?>
-        <iframe src="<?php echo $path; ?>" width="600" height="400" frameborder="0" id="myIframe_3" title="File Preview"></iframe>
+        <iframe src="<?php echo $path; ?>" width="600" height="400" frameborder="0" id="myIframe_3" title="<?= htmlspecialchars(__('File Preview'), ENT_QUOTES, 'UTF-8'); ?>"></iframe>
     <?php } ?>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?= __('Close'); ?></button>
 </div>
 <script>
 var loader = document.getElementById("loader_popup");
