@@ -53,7 +53,7 @@
           damagedqtys = parseFloat(invoiced_quantity)-parseFloat(quantity);
         if(type=="invoiced_quantity"){
             if(parseFloat(order_quantity)<parseFloat(invoiced_quantity)){
-              msg = 'Invoiced quantity cannot be more than Order Quantity';
+              msg = <?php echo json_encode(__('Invoiced quantity cannot be more than Order Quantity'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
               damagedqtys = parseFloat(0);
              $('#invoiced_quantity_'+id).val(order_quantity);
              $('#quantity_'+id).val(order_quantity);
@@ -61,7 +61,7 @@
         }
         if(type=="quantity"){
             if(parseFloat(invoiced_quantity)<parseFloat(quantity)){
-                msg = 'Received quantity cannot be more than invoiced quantity';
+                msg = <?php echo json_encode(__('Received quantity cannot be more than invoiced quantity'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
                 $('#quantity_'+id).val(invoiced_quantity);
                 damagedqtys = parseFloat(0);
             }
@@ -103,7 +103,7 @@
             }
             if (isNaN(obj.base_uom) || obj.base_uom ==null || obj.base_uom =="") {
                 $("#hide_baseuomtext_"+id).val('');
-                $("#baseuomtext_"+id).text('NA');
+                $("#baseuomtext_"+id).text(<?php echo json_encode(__('NA'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             }else{
                 $("#hide_baseuomtext_"+id).val(obj.base_uom);
                  $("#baseuomtext_"+id).text(0);
@@ -121,12 +121,12 @@
             var invquantity = "invoiced_quantity";
             htmlRows += '<tr>';
             htmlRows += '<td class="p-2"><label class="kt-checkbox"> <input aria-label="Checkbox"  class="itemRow" type="checkbox" data-rowid="'+count+'">  <span> </span> </label> </td>';
-            htmlRows += '<td id="other_'+count+'" class="p-2"><select aria-label="Product Code[]" class="form-select js-data-example-ajax-multiselectss'+count+' selectitemorservice" name= "productCode[]" id="productCode__2"+count+'" onchange="itemChange(this.value,'+count+')"  data-tablename="items"  data-fieldsname="item_name" > <option value="0"> Select Any Item </option></select><input type="hidden" name="transaction_item_row_id[]" id="transaction_item_row_id_'+count+'" value=""><input type="hidden" name="ref_transaction_item_table_id[]" id="ref_transaction_item_table_id_'+count+'" value=""><input type="hidden" name="item_name[]" id="item_name__2"+count+'" class="form-control"> <input type="hidden" name="purchase_account[]" id="purchase_account_'+count+'" class="form-control" value=""><input type="hidden" name="purchase_account_aval[]" id="purchase_account_aval_'+count+'" class="form-control" value=""><textarea aria-label="Product Name[]" name="productName[]" id="productName_'+count+'" class="form-control mt-2"></textarea></td>';
-            htmlRows += '<td class="p-2"><select aria-label="Uom[]" class="form-control form-select js-example-basic-single"  name= "uom[]" id="uom_'+count+'" onchange="baseUOMConversion('+count+')"><option value="0">UOM  </option> <?php  foreach ($uomlist as $uom) {  ?> <option value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo $uom['genc_detail_name']; ?> </option> <?php
-} ?></select><div style="display: none;color: red;" id="uom_err_'+count+'"> Enter UOM</div></td> ';
-            htmlRows += '<td class="p-2 "><input aria-label="Invoiced Quantity[]" type="text" name="invoiced_quantity[]" id="invoiced_quantity_'+count+'" onblur="damagedqty('+count+',\''+invquantity+'\')"  class="form-control quantity amount" autocomplete="off"><p><input type="hidden" id="hide_baseuomtext_'+count+'" value=""><span class="float-left f-10">Base Conv :</span><span class="float-right f-10 " id="baseuomtext_'+count+'">NA</span></p><div style="display: none;color: red;" id="quantity_err_'+count+'" > Enter QTY</div></td>';
-            htmlRows += '<td class="p-2 event_disabled"><input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_'+count+'" onblur="damagedqty('+count+',\''+invquantity+'\')"  class="form-control quantity amount mb-2"  autocomplete="off" readonly><p class="text-danger text-right d-none"><span class="d-block">Damaged Qty </span><span id="iddamaged_quantity_'+count+'">0</span></p><input type="hidden" name="damaged_quantity[]" id="damaged_quantity_'+count+'"  class="form-control quantity amount"> <div style="display: none;color: red;" id="quantity_err__2"+count+'"> Enter QTY</div></td>';
-            htmlRows += '<td class="p-2"><input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount" autocomplete="off"><div style="display: none;color: red;" id="price_err_'+count+'"> Enter Rate</div>';
+            htmlRows += '<td id="other_'+count+'" class="p-2"><select aria-label="Product Code[]" class="form-select js-data-example-ajax-multiselectss'+count+' selectitemorservice" name= "productCode[]" id="productCode__2"+count+'" onchange="itemChange(this.value,'+count+')"  data-tablename="items"  data-fieldsname="item_name" > <option value="0"> <?= htmlspecialchars(__('Select Any Item'), ENT_QUOTES, 'UTF-8'); ?> </option></select><input type="hidden" name="transaction_item_row_id[]" id="transaction_item_row_id_'+count+'" value=""><input type="hidden" name="ref_transaction_item_table_id[]" id="ref_transaction_item_table_id_'+count+'" value=""><input type="hidden" name="item_name[]" id="item_name__2"+count+'" class="form-control"> <input type="hidden" name="purchase_account[]" id="purchase_account_'+count+'" class="form-control" value=""><input type="hidden" name="purchase_account_aval[]" id="purchase_account_aval_'+count+'" class="form-control" value=""><textarea aria-label="Product Name[]" name="productName[]" id="productName_'+count+'" class="form-control mt-2"></textarea></td>';
+            htmlRows += '<td class="p-2"><select aria-label="Uom[]" class="form-control form-select js-example-basic-single"  name= "uom[]" id="uom_'+count+'" onchange="baseUOMConversion('+count+')"><option value="0"><?= htmlspecialchars(__('UOM'), ENT_QUOTES, 'UTF-8'); ?>  </option> <?php  foreach ($uomlist as $uom) {  ?> <option value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo __($uom['genc_detail_name']); ?> </option> <?php
+} ?></select><div style="display: none;color: red;" id="uom_err_'+count+'"> <?= htmlspecialchars(__('Enter UOM'), ENT_QUOTES, 'UTF-8'); ?></div></td> ';
+            htmlRows += '<td class="p-2 "><input aria-label="Invoiced Quantity[]" type="text" name="invoiced_quantity[]" id="invoiced_quantity_'+count+'" onblur="damagedqty('+count+',\''+invquantity+'\')"  class="form-control quantity amount" autocomplete="off"><p><input type="hidden" id="hide_baseuomtext_'+count+'" value=""><span class="float-left f-10"><?= htmlspecialchars(__('Base Conv'), ENT_QUOTES, 'UTF-8'); ?> :</span><span class="float-right f-10 " id="baseuomtext_'+count+'"><?= htmlspecialchars(__('NA'), ENT_QUOTES, 'UTF-8'); ?></span></p><div style="display: none;color: red;" id="quantity_err_'+count+'" > <?= htmlspecialchars(__('Enter QTY'), ENT_QUOTES, 'UTF-8'); ?></div></td>';
+            htmlRows += '<td class="p-2 event_disabled"><input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_'+count+'" onblur="damagedqty('+count+',\''+invquantity+'\')"  class="form-control quantity amount mb-2"  autocomplete="off" readonly><p class="text-danger text-right d-none"><span class="d-block"><?= htmlspecialchars(__('Damaged Qty'), ENT_QUOTES, 'UTF-8'); ?> </span><span id="iddamaged_quantity_'+count+'">0</span></p><input type="hidden" name="damaged_quantity[]" id="damaged_quantity_'+count+'"  class="form-control quantity amount"> <div style="display: none;color: red;" id="quantity_err__2"+count+'"> Enter QTY</div></td>';
+            htmlRows += '<td class="p-2"><input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount" autocomplete="off"><div style="display: none;color: red;" id="price_err_'+count+'"> <?= htmlspecialchars(__('Enter Rate'), ENT_QUOTES, 'UTF-8'); ?></div>';
             if(discount_mode == 'DO'){
                 htmlRows += '<input type="hidden" name="pdiscount_amount[]" value="" readonly class="form-control price amount mt-2 discount_textbox" id="pdiscount_amount_'+count+'" data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="Discount">';
             }else{
@@ -137,7 +137,7 @@
              htmlRows += '<td class="p-1 text-center" ><div id="hsn_and_sac_code_id_'+count+'" class="f-12 m-b-20"><span class="d-block">-</span><span class="d-block">-</span></div></td>';
 
             htmlRows += '<td class="p-2"><input type="hidden" id="compliance_specification_documents_'+count+'" value=""><input type="hidden" name="tax[]" id="tax__2"+count+'" value="<?php echo $tab2['tax_value']; ?>">  <input type="hidden" name="taxid[]" id="taxid_'+count+'" value=""> <input type="hidden" name="tax_name[]" id="tax_name_'+count+'" value=""><input type="hidden" name="dis_ptax_amount[]" value="" readonly class="form-control price amount" id="dis_ptax_amount_'+count+'"><input type="hidden" readonly name="p_amount[]" id="p_amount_'+count+'" class="form-control"><input type="hidden" readonly name="ptax_amount[]" id="ptax_amount_'+count+'" class="form-control price amount"><input type="hidden" readonly name="amount[]" id="amount_'+count+'" class="form-control price amount">  <input aria-label="Dis Amount[]" type="text" name="dis_amount[]" readonly id="dis_amount_'+count+'" class="form-control amount" value="" autocomplete="off"></td>';
-            htmlRows += '<td class="p-2"><div  class="btn btn-primary"  id="">lot</div></td>';
+            htmlRows += '<td class="p-2"><div  class="btn btn-primary"  id=""><?= htmlspecialchars(__('lot'), ENT_QUOTES, 'UTF-8'); ?></div></td>';
             htmlRows += '</tr>';
             $('#invoiceItem').append(htmlRows);
             $(".js-example-basic-single").select2();
@@ -213,22 +213,22 @@
         <tr>
             <th scope="col" class="thheader p-1 text-start" style="width: 5%;">
                 <label class="kt-checkbox">
-                    <input aria-label="Check All" id="checkAll"  type="checkbox">
+                    <input aria-label="<?= htmlspecialchars(__('Check All'), ENT_QUOTES, 'UTF-8'); ?>" id="checkAll"  type="checkbox">
                     <span></span>
                 </label>
             </th>
 
-            <th scope="col" class="p-1" class="p-1" style="width: 20%;">Items/Service <span class="requried"></span></th>
+            <th scope="col" class="p-1" class="p-1" style="width: 20%;"><?= __('Items/Service'); ?> <span class="requried"></span></th>
 
-            <th scope="col" class="thheader p-1" class="p-1" style="width: 10%;">UOM <span class="requried">*</span></th>
-            <th scope="col" class="thheader p-1" class="p-1" style="width: 8%;">Invoice Qty <span class="requried">*</span></th>
-            <th scope="col" class="thheader p-1" class="p-1" style="width: 10%;">Received Qty <span class="requried">*</span></th>
+            <th scope="col" class="thheader p-1" class="p-1" style="width: 10%;"><?= __('UOM'); ?> <span class="requried">*</span></th>
+            <th scope="col" class="thheader p-1" class="p-1" style="width: 8%;"><?= __('Invoice Qty'); ?> <span class="requried">*</span></th>
+            <th scope="col" class="thheader p-1" class="p-1" style="width: 10%;"><?= __('Received Qty'); ?> <span class="requried">*</span></th>
 
-            <th scope="col" class="thheader p-1" class="p-1" style="width: 15%;">Rate &nbsp;&nbsp;</th>
-            <th scope="col" class="thheader p-1" style="width: 10%;">HSN/Tax <span class="requried">*</span></th>
+            <th scope="col" class="thheader p-1" class="p-1" style="width: 15%;"><?= __('Rate'); ?> &nbsp;&nbsp;</th>
+            <th scope="col" class="thheader p-1" style="width: 10%;"><?= __('HSN/Tax'); ?> <span class="requried">*</span></th>
 
 
-            <th scope="col" class="thheader p-1" class="p-1" style="width: 18%;">Amount</th>
+            <th scope="col" class="thheader p-1" class="p-1" style="width: 18%;"><?= __('Amount'); ?></th>
             <th scope="col" class="thheader p-1" class="p-1" style="width: 4%;"></th>
 
         </tr>
@@ -236,12 +236,12 @@
         foreach ($table2 as $tab2) { //print_r($tab2); ?>
         <tr>
             <td class="p-1">
-                <label class="kt-checkbox"><input aria-label="Checkbox" class="itemRow" type="checkbox" data-rowid="<?php echo $i; ?>"> <span></span> </label>
+                <label class="kt-checkbox"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="itemRow" type="checkbox" data-rowid="<?php echo $i; ?>"> <span></span> </label>
             </td>
             <td id='other_<?php echo $i; ?>' class="p-1">
                 <?php if($tab2['item_id'] >= 0){ ?>
-                    <select aria-label="Product Code[]" class="form-select js-data-example-ajax-multiselect selectitemorservice "  data-tablename="items"  data-fieldsname="item_name" name= "productCode[]" onchange="itemChange(this.value,<?php echo $i; ?>)" id="productCode_<?php echo $i; ?>">
-                        <option value="0"> Select Any Item  </option>
+                    <select aria-label="<?= htmlspecialchars(__('Product Code'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-data-example-ajax-multiselect selectitemorservice "  data-tablename="items"  data-fieldsname="item_name" name= "productCode[]" onchange="itemChange(this.value,<?php echo $i; ?>)" id="productCode_<?php echo $i; ?>">
+                        <option value="0"> <?= __('Select Any Item'); ?>  </option>
                         <?php $like_item_check = 0; $itmdoclist = "";
                             foreach ($itemres as $item) {
                                 if($tab2['item_id']== $item['id']) {
@@ -251,7 +251,7 @@
                                     <option selected value ='<?php echo $item['id']; ?>'> <?php echo $item['sku']." - ".$item['item_name']; ?>
                                 <?php }
                             } ?>
-                        <option value="-1">Other</option>
+                        <option value="-1"><?= __('Other'); ?></option>
                     </select>
                     <input type="hidden" name="transaction_item_row_id[]" id="transaction_item_row_id_<?php echo $i; ?>"  class="form-control" value="<?php echo $tab2['transaction_item_row_id']; ?>">
 
@@ -261,54 +261,54 @@
                     <input type="hidden" name="purchase_account[]" class="form-control" value="<?php echo $tab2['purchase_account']; ?>">
                     <input type="hidden" name="purchase_account_aval[]" class="form-control" value="<?php echo $response_code[$tab2['purchase_account']]['a']; ?>">
                  <?php }else { ?>
-                <input aria-label="Item Name[]" type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off">
+                <input aria-label="<?= htmlspecialchars(__('Item Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off">
                 <input type="hidden" name="productCode[]" class="form-control" value="<?php echo $tab2['productCode']; ?>">
                 <?php } ?>
-                <textarea aria-label="Product Name[]"  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control mt-1" autocomplete="off"><?php echo $tab2['description']; ?></textarea>
+                <textarea aria-label="<?= htmlspecialchars(__('Product Name'), ENT_QUOTES, 'UTF-8'); ?>[]"  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control mt-1" autocomplete="off"><?php echo $tab2['description']; ?></textarea>
             </td>
             <td class="p-1 w-full uom-custom">
-                <select aria-label="Uom[]" class="form-control form-select js-example-basic-single"  name= "uom[]"  id="uom_<?php echo $i; ?>" onchange="baseUOMConversion('<?php echo $i; ?>')">
-                    <option value="0">UOM</option>
+                <select aria-label="<?= htmlspecialchars(__('Uom'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single"  name= "uom[]"  id="uom_<?php echo $i; ?>" onchange="baseUOMConversion('<?php echo $i; ?>')">
+                    <option value="0"><?= __('UOM'); ?></option>
                     <?php foreach ($uomlist as $uom) {  ?>
                          <option   <?php if($tab2['uom'] == $uom['genc_detail_code']){ ?> selected <?php
-} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo $uom['genc_detail_name']; ?> </option>
+} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo __($uom['genc_detail_name']); ?> </option>
                     <?php } ?>
                 </select>
-                <div style="display: none;color: red;" id="<?php echo 'uom_err_'.$i;  ?>"> Enter UOM</div>
+                <div style="display: none;color: red;" id="<?php echo 'uom_err_'.$i;  ?>"> <?= __('Enter UOM'); ?></div>
             </td>
             <td class="p-1">
-                <input aria-label="Invoiced Quantity[]" type="text" name="invoiced_quantity[]" id="invoiced_quantity_<?php echo $i; ?>"  onblur="damagedqty(<?php echo $i; ?>,'invoiced_quantity')"   class="form-control amount" value="<?php echo $tab2['invoiced_quantity']; ?>"  autocomplete="off" >
+                <input aria-label="<?= htmlspecialchars(__('Invoiced Quantity'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="invoiced_quantity[]" id="invoiced_quantity_<?php echo $i; ?>"  onblur="damagedqty(<?php echo $i; ?>,'invoiced_quantity')"   class="form-control amount" value="<?php echo $tab2['invoiced_quantity']; ?>"  autocomplete="off" >
                 <p>
                     <input type="hidden" id="hide_baseuomtext_<?php echo $i; ?>" value="<?php echo $itemres[$tab2['item_id']]['base_uom']?>">
-                    <span class="float-left f-10">Base Conv :</span>
-                    <span class="float-right f-10 " id="baseuomtext_<?php echo $i; ?>">NA</span>
+                    <span class="float-left f-10"><?= __('Base Conv'); ?> :</span>
+                    <span class="float-right f-10 " id="baseuomtext_<?php echo $i; ?>"><?= __('NA'); ?></span>
                 </p>
                 <input type="hidden" name="order_quantity[]"id="order_quantity_<?php echo $i; ?>"  value="<?php echo $tab2['invoiced_quantity']; ?>" >
             </td>
             <td class="p-1 event_disabled">
-                <input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"  onblur="damagedqty(<?php echo $i; ?>,'quantity')"  class="form-control amount mb-2 decimalnumberallowe" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off" <?php echo $tab2['quantity']!=""?"readonly":""; ?>>
+                <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"  onblur="damagedqty(<?php echo $i; ?>,'quantity')"  class="form-control amount mb-2 decimalnumberallowe" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off" <?php echo $tab2['quantity']!=""?"readonly":""; ?>>
                 <input type="hidden" name="quantity_old[]" id="quantity_old_<?php echo $i; ?>"  class="form-control amount" value="<?php echo $tab2['quantity']; ?>" >
                 <p class="text-danger text-right d-none">
-                    <span class="d-block">Damaged Qty </span>
+                    <span class="d-block"><?= __('Damaged Qty'); ?> </span>
                     <span id="iddamaged_quantity_<?php echo $i; ?>"><?php echo $tab2['damaged_quantity']; ?></span>
                 </p>
                 <input type="hidden" name="damaged_quantity[]" id="damaged_quantity_<?php echo $i; ?>"   class="form-control amount mt-2 decimalnumberallowe" value="<?php echo $tab2['damaged_quantity']; ?>" >
             </td>
             <td class="p-1">
-                <input aria-label="Price[]" type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount decimalnumberallowe" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off">
-                <input aria-label="Input field" type="<?php if($table1['discount_mode'] != 'DI'){ echo "hidden";
+                <input aria-label="<?= htmlspecialchars(__('Price'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount decimalnumberallowe" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off">
+                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php if($table1['discount_mode'] != 'DI'){ echo "hidden";
 } ?>" name="pdiscount_amount[]" value="<?php echo $tab2['discount_amount']; ?>"
  <?php if($table1['discount_mode'] != 'DI'){ echo "readonly";
-} ?> class="form-control price amount mt-2 discount_textbox" id="pdiscount_amount_<?php echo $i; ?>" data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="Discount">
+} ?> class="form-control price amount mt-2 discount_textbox" id="pdiscount_amount_<?php echo $i; ?>" data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="<?= htmlspecialchars(__('Discount'), ENT_QUOTES, 'UTF-8'); ?>">
 
 
-                <div style="display: none;color: red;" id="<?php echo 'price_err_'.$i; ?>"> Enter Rate</div>
+                <div style="display: none;color: red;" id="<?php echo 'price_err_'.$i; ?>"> <?= __('Enter Rate'); ?></div>
             </td>
             <td class="p-1 w-full uom-custom">
                 <div id="hsn_and_sac_code_id_<?php echo $i; ?>" class="f-12  m-b-20">
                 <?php if($tab2['tax_value'] != "" && $tab2['tax_value'] != "0"){ ?>
-                    <span class="d-block"><span class="f-w-600">HSN </span>- <?php echo $itemidwithhsn[$tab2['item_id']]; ?></span>
-                    <span class="d-block"><span class="f-w-600">Tax </span>- <?php echo $tab2['tax_value']; ?></span>
+                    <span class="d-block"><span class="f-w-600"><?= __('HSN'); ?> </span>- <?php echo $itemidwithhsn[$tab2['item_id']]; ?></span>
+                    <span class="d-block"><span class="f-w-600"><?= __('Tax'); ?> </span>- <?php echo $tab2['tax_value']; ?></span>
               <?php }else{ ?><span class="d-block">-</span><span class="d-block">-</span><?php
 } ?>
                 </div>
@@ -324,7 +324,7 @@
 
                 <input type="hidden" name="ptax_amount[]" value="<?php echo $tab2['tax_amount']; ?>" readonly class="form-control price amount" id="ptax_amount_<?php echo $i; ?>">
                  <input type="hidden" name="p_amount[]" value="<?php echo $tab2['taxabled_amount']; ?>" readonly class="form-control" id="p_amount_<?php echo $i; ?>">
-                <input aria-label="Dis Amount[]" type="text" name="dis_amount[]" readonly  id="dis_amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo customeummarmonyformate($tab2['total_amount']); ?>" autocomplete="off">
+                <input aria-label="<?= htmlspecialchars(__('Dis Amount'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="dis_amount[]" readonly  id="dis_amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo customeummarmonyformate($tab2['total_amount']); ?>" autocomplete="off">
                 <input type="hidden" name="amount[]" readonly id="amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo $tab2['total_amount']; ?>">
             </td>
             <td class="p-1">
