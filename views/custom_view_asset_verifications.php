@@ -21,7 +21,7 @@ $avcnt = $result['asset_verifications_cnt'];
         });
     }
     function getVerifyList(type){
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#htmlview").html(loader);
         jQuery.ajax({
             url: "views/custom_view_asset_verifications_table.php",
@@ -38,7 +38,7 @@ $avcnt = $result['asset_verifications_cnt'];
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card" onclick="getVerifyList('ALL','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
             <div class="card-body">
-                <p class="bg-c-red lbl-card"><i class="fas fa-folder-open"></i> Total Verifications</p>
+                <p class="bg-c-red lbl-card"><i class="fas fa-folder-open"></i> <?= __('Total Verifications'); ?></p>
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $avcnt['total'] !=""?$avcnt['total']:0; ?></h2>
                 </div>
@@ -48,7 +48,7 @@ $avcnt = $result['asset_verifications_cnt'];
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card" onclick="getVerifyList('IP')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
             <div class="card-body">
-                <p class="bg-c-blue lbl-card"><i class="fas fa-file-archive"></i> In-process</p>
+                <p class="bg-c-blue lbl-card"><i class="fas fa-file-archive"></i> <?= __('In-process'); ?></p>
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block text-c-blue"><?php echo $avcnt['inprocess_cnt'] !=""?$avcnt['inprocess_cnt']:0; ?></h2>
                 </div>
@@ -58,7 +58,7 @@ $avcnt = $result['asset_verifications_cnt'];
       <div class="col-xl-3 col-md-6">
         <div class="card ticket-card" onclick="getVerifyList('UCV')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
             <div class="card-body">
-                <p class="bg-c-yellow lbl-card"><i class="fas fa-database"></i> Upcoming Schedule Verifications</p>
+                <p class="bg-c-yellow lbl-card"><i class="fas fa-database"></i> <?= __('Upcoming Schedule Verifications'); ?></p>
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block text-c-yellow"><?php echo $avcnt['upcoming_cnt'] !=""?$avcnt['upcoming_cnt']:0; ?></h2>
                 </div>
@@ -68,7 +68,7 @@ $avcnt = $result['asset_verifications_cnt'];
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card" onclick="getVerifyList('COMPL')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
             <div class="card-body">
-                <p class="bg-c-green lbl-card"><i class="fas fa-users"></i> Completed Verifications</p>
+                <p class="bg-c-green lbl-card"><i class="fas fa-users"></i> <?= __('Completed Verifications'); ?></p>
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block text-c-green"><?php echo $avcnt['completed'] !=""?$avcnt['completed']:0; ?></h2>
                 </div>
