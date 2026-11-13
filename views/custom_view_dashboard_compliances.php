@@ -25,11 +25,11 @@ function getDetailsEmployeeTask(id,date){
         <div class="page-body border-bottom">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-header-text">Compliance Dashboard</h5>
+                    <h5 class="card-header-text"><?= __('Compliance Dashboard'); ?></h5>
                     <div class="card-header-right">
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                         </div>
                 </div>
@@ -42,19 +42,19 @@ function getDetailsEmployeeTask(id,date){
 
                             <div class="d-inline-block m-l-10">
                                 <button class="btn waves-effect waves-light btn-success p-2"></button>
-                                <span>Completed</span>
+                                <span><?= __('Completed'); ?></span>
                             </div>
                             <div class="d-inline-block m-l-10">
                                 <button class="btn waves-effect waves-light btn-info p-2"></button>
-                                <span>Completed with Delay</span>
+                                <span><?= __('Completed with Delay'); ?></span>
                             </div>
                             <div class="d-inline-block m-l-10">
                                 <button class="btn waves-effect waves-light btn-warning p-2"></button>
-                                <span>Review Pending</span>
+                                <span><?= __('Review Pending'); ?></span>
                             </div>
                             <div class="d-inline-block m-l-10">
                                 <button class="btn waves-effect waves-light btn-danger p-2"></button>
-                                <span>Incompleted</span>
+                                <span><?= __('Incompleted'); ?></span>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ function getDetailsEmployeeTask(id,date){
                             <div class="col-lg-12">
                                 <div class="card-block accordion-block color-accordion-block">
                                     <div class="color-accordion" id="color-accordion">
-                                        <a class="accordion-msg b-none waves-effect waves-light bg-gray mb-2 f-w-600 f-16">Daily Compliance</a>
+                                        <a class="accordion-msg b-none waves-effect waves-light bg-gray mb-2 f-w-600 f-16"><?= __('Daily Compliance'); ?></a>
                                         <div class="accordion-desc">
                                         <?php foreach($compliancelist['DY'] as $complianlist){ ?>
                                             <div class="row">
@@ -93,7 +93,7 @@ function getDetailsEmployeeTask(id,date){
                                             </div>
                                         <?php } ?>
                                         </div>
-                                        <a class="accordion-msg bg-dark-primary b-none waves-effect waves-light bg-gray mb-2 f-w-600 f-16">Weekly Compliance</a>
+                                        <a class="accordion-msg bg-dark-primary b-none waves-effect waves-light bg-gray mb-2 f-w-600 f-16"><?= __('Weekly Compliance'); ?></a>
                                         <div class="accordion-desc">
                                             <?php foreach($compliancelist['WK'] as $complianlist){ ?>
                                             <div class="row">
@@ -123,7 +123,7 @@ function getDetailsEmployeeTask(id,date){
                                             </div>
                                         <?php } ?>
                                         </div>
-                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light bg-gray mb-2 f-w-600 f-16">Monthly</a>
+                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light bg-gray mb-2 f-w-600 f-16"><?= __('Monthly'); ?></a>
                                         <div class="accordion-desc">
                                             <?php foreach($compliancelist['MN'] as $complianlist){ ?>
                                             <div class="row">
@@ -153,7 +153,7 @@ function getDetailsEmployeeTask(id,date){
                                             </div>
                                         <?php } ?>
                                         </div>
-                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light bg-gray mb-2 f-w-600 f-16">Yearly Compliance</a>
+                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light bg-gray mb-2 f-w-600 f-16"><?= __('Yearly Compliance'); ?></a>
                                         <div class="accordion-desc">
                                             <?php foreach($compliancelist['YR'] as $complianlist){ ?>
                                             <div class="row">
