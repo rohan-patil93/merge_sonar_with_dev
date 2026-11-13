@@ -38,11 +38,11 @@
             <div class="card-header">
                 <div class="card-title">
 
-                    <div id="month_display1"> <h3 class="card-label" >Month Wise - Employees </h3> </div>
-                    <div style="display: none;" id="month_display2"> <h3 class="card-label" >Month Wise - Salaries </h3> </div>
+                    <div id="month_display1"> <h3 class="card-label" ><?= __('Month Wise - Employees'); ?> </h3> </div>
+                    <div style="display: none;" id="month_display2"> <h3 class="card-label" ><?= __('Month Wise - Salaries'); ?> </h3> </div>
                     <div class="card-toolbar ml-15">
-                        <div onclick="changegraph('1')" id="revenue" class="btn btn-primary font-weight-bolder" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">Salaries</div>
-                        <div  class="btn btn-primary font-weight-bolder" onclick="changegraph('2')" id="act_emp" style="display: none;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">Count</div>
+                        <div onclick="changegraph('1')" id="revenue" class="btn btn-primary font-weight-bolder" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?= __('Salaries'); ?></div>
+                        <div  class="btn btn-primary font-weight-bolder" onclick="changegraph('2')" id="act_emp" style="display: none;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?= __('Count'); ?></div>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Full time Employee Ratio</h3>
+                    <h3 class="card-label"><?= __('Full time Employee Ratio'); ?></h3>
                 </div>
             </div>
             <input type="hidden" id="kt_mixed_widget_fultime_dashbord4_chart_value" name="kt_mixed_widget_fultime_dashbord4_chart_value" value="<?php echo ($newemp['regular']/$newemp['em_count'])*100; ?>">
@@ -71,11 +71,11 @@
             <div class="mb-3" style="margin-left: auto; margin-right: auto;">
                 <div style="float: left; " class="mr-3">
                     <div style="width: 15px;height: 15px;background-color: #2b9f9a;float: left;"></div>
-                    <div style="float: left;"><b>&nbsp; Regular </b></div>
+                    <div style="float: left;"><b>&nbsp; <?= __('Regular'); ?> </b></div>
                 </div>
                 <div style="float: left;">
                     <div style="width: 15px;height: 15px;background-color: #d1f8f6;float: left;"></div>
-                    <div style="float: left;"><b>&nbsp; Contract </b></div>
+                    <div style="float: left;"><b>&nbsp; <?= __('Contract'); ?> </b></div>
                 </div>
              </div>
 
@@ -100,7 +100,7 @@
                             </svg>
                             <!--end::Svg Icon-->
                         </span>
-                        <div class="text-inverse-white font-weight-bolder font-size-h5 mb-2 mt-5">Promotion - 2021</div>
+                        <div class="text-inverse-white font-weight-bolder font-size-h5 mb-2 mt-5"><?= __('Promotion - 2021'); ?></div>
                         <div class="font-weight-bold text-inverse-white font-size-sm"><?php echo $data['averge_employee']."%"; ?></div>
                     </div>            <!--end::Body-->
                 </a>
@@ -123,7 +123,7 @@
 </svg>
                             <!--end::Svg Icon-->
                         </span>
-                        <div class="text-inverse-white font-weight-bolder font-size-h5 mb-2 mt-5">Absenteeism - 2021</div>
+                        <div class="text-inverse-white font-weight-bolder font-size-h5 mb-2 mt-5"><?= __('Absenteeism - 2021'); ?></div>
                         <div class="font-weight-bold text-inverse-white font-size-sm"><?php echo $data['absent']." Days"; ?></div>
                     </div>            <!--end::Body-->
                 </a>
@@ -145,7 +145,7 @@
 </svg>
                             <!--end::Svg Icon-->
                         </span>
-                        <div class="text-inverse-white font-weight-bolder font-size-h5 mb-2 mt-5">New Joinee - 2021</div>
+                        <div class="text-inverse-white font-weight-bolder font-size-h5 mb-2 mt-5"><?= __('New Joinee - 2021'); ?></div>
                         <div class="font-weight-bold text-inverse-white font-size-sm"><?php echo $data['joining']." Members"; ?></div>
                     </div>            <!--end::Body-->
                 </a>
@@ -169,7 +169,7 @@
 </svg>
                             <!--end::Svg Icon-->
                         </span>
-                        <div class="text-inverse-white font-weight-bolder font-size-h5 mb-2 mt-5">Separation - 2021</div>
+                        <div class="text-inverse-white font-weight-bolder font-size-h5 mb-2 mt-5"><?= __('Separation - 2021'); ?></div>
                         <div class="font-weight-bold text-inverse-white font-size-sm"><?php echo $data['relive']." Members"; ?></div>
                     </div>            <!--end::Body-->
                 </a>
@@ -184,7 +184,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Manager vs Employee Ratio - 2021</h3>
+                    <h3 class="card-label"><?= __('Manager vs Employee Ratio - 2021'); ?></h3>
                 </div>
             </div>
             <input type="hidden" id="kt_mixed_widget_empmgr_chart_vlaue" name="kt_mixed_widget_empmgr_chart_vlaue" value="<?php  echo ($newemp['manger_count']/$newemp['em_count'])*100;  ?>">
@@ -198,13 +198,13 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Employees by Gender - 2021</h3>
+                    <h3 class="card-label"><?= __('Employees by Gender - 2021'); ?></h3>
                 </div>
             </div>
             <!--begin::Body-->
             <div  class="card-body d-flex align-items-center py-0 mt-8">
                 <div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
-                    <a href="#" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-2 text-hover-primary">Male </a>
+                    <a href="#" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-2 text-hover-primary"><?= __('Male'); ?> </a>
                     <span class="font-weight-bold text-muted font-size-lg"><?php echo $newemp['male']; ?></span>
                 </div>
                 <img src="assets/media/svg/avatars/004-boy-1.svg" alt="" class="align-self-end h-100px" />
@@ -213,7 +213,7 @@
             <!--begin::Body-->
             <div  class="card-body d-flex align-items-center py-0 mt-8">
                 <div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
-                    <a href="#" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-2 text-hover-primary">Female </a>
+                    <a href="#" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-2 text-hover-primary"><?= __('Female'); ?> </a>
                     <span class="font-weight-bold text-muted font-size-lg"><?php echo $newemp['female']; ?></span>
                 </div>
                 <img src="assets/media/svg/avatars/014-girl-7.svg" alt="" class="align-self-end h-100px" />
@@ -225,7 +225,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Absenteeism Rate -2021</h3>
+                    <h3 class="card-label"><?= __('Absenteeism Rate -2021'); ?></h3>
                 </div>
             </div>
             <input type="hidden" name="kt_mixed_widget_absent_chart_value" id="kt_mixed_widget_absent_chart_value" value="<?php echo 100-$data['averge_absent']; ?>">
