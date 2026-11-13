@@ -4,9 +4,9 @@
         <div class="card card-custom card-stretch gutter-b">
             <!--begin::Body-->
             <div class="card-body my-3">
-                <a href="#" class="card-title font-weight-bolder text-dark text-hover-state-dark font-size-h6 mb-4 d-block">Total Income</a>
+                <a href="#" class="card-title font-weight-bolder text-dark text-hover-state-dark font-size-h6 mb-4 d-block"><?= __('Total Income'); ?></a>
                 <div class="font-weight-bold text-muted font-size-sm">
-                <span class="text-dark-75 font-size-h2 font-weight-bolder mr-2">₹ <?php echo "18" ?> </span>Lac</div>
+                <span class="text-dark-75 font-size-h2 font-weight-bolder mr-2">₹ <?php echo "18" ?> </span><?= __('Lac'); ?></div>
                 <div class="progress progress-xs mt-7 bg-success-o-60">
                     <div class="progress-bar bg-success" role="progressbar" style="width: 78%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
@@ -20,9 +20,9 @@
         <div class="card card-custom card-stretch gutter-b">
             <!--begin::Body-->
             <div class="card-body my-3">
-                <a href="#" class="card-title font-weight-bolder text-dark text-hover-state-dark font-size-h6 mb-4 d-block">Total Expenses</a>
+                <a href="#" class="card-title font-weight-bolder text-dark text-hover-state-dark font-size-h6 mb-4 d-block"><?= __('Total Expenses'); ?></a>
                 <div class="font-weight-bold text-muted font-size-sm">
-                <span class="text-dark-75 font-size-h2 font-weight-bolder mr-2">₹ <?php echo "13"; ?> </span>Lac</div>
+                <span class="text-dark-75 font-size-h2 font-weight-bolder mr-2">₹ <?php echo "13"; ?> </span><?= __('Lac'); ?></div>
                 <div class="progress progress-xs mt-7 bg-dark-o-60">
                     <div class="progress-bar bg-dark" role="progressbar" style="width: 84%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
@@ -37,15 +37,15 @@
         <div class="card card-custom  card-stretch gutter-b">
             <div class="card-body my-4">
             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                Equity Ratio
+                <?= __('Equity Ratio'); ?>
                 <span class="float-right">₹<?php echo "17,800"; ?></span>
             </a>
             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                Debt Equity
+                <?= __('Debt Equity'); ?>
                 <span class="float-right">₹<?php echo "1,800"; ?></span>
             </a>
             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                Current Ratio<
+                <?= __('Current Ratio'); ?><
                 <span class="float-right">₹<?php echo "2180"; ?></span>
             </a>
         </div>
@@ -60,7 +60,7 @@
         <div class="card card-custom  card-stretch gutter-b">
             <div class="card-body my-12">
             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                Current Ratio
+                <?= __('Current Ratio'); ?>
                 <span class="float-right">33%</span>
             </a>
 
@@ -77,9 +77,9 @@
                                             <div class="card-body d-flex flex-column p-0">
                                                 <div class="d-flex align-items-center justify-content-between card-spacer flex-grow-1">
                                                     <div class="d-flex flex-column mr-2">
-                                                        <a href="#" class="text-dark-75 text-hover-primary font-weight-bolder font-size-h5">Daily Sales
+                                                        <a href="#" class="text-dark-75 text-hover-primary font-weight-bolder font-size-h5"><?= __('Daily Sales'); ?>
 </a>
-                                                        <span class="text-muted font-weight-bold mt-2">Check out each collumn for more details</span>
+                                                        <span class="text-muted font-weight-bold mt-2"><?= __('Check out each collumn for more details'); ?></span>
                                                     </div>
                                                     <span class="symbol symbol-light-success symbol-45">
                                                         <span class="symbol-label font-weight-bolder font-size-h6">+57</span>
@@ -98,9 +98,9 @@
                                             <div class="card-body d-flex flex-column p-0">
                                                 <div class="d-flex align-items-center justify-content-between card-spacer">
                                                     <div class="d-flex flex-column mr-2">
-                                                        <a href="#" class="text-dark-75 text-hover-primary font-weight-bolder font-size-h5">Profit Share
+                                                        <a href="#" class="text-dark-75 text-hover-primary font-weight-bolder font-size-h5"><?= __('Profit Share'); ?>
 </a>
-                                                        <span class="text-muted font-weight-bold mt-2">Profit Share between customers</span>
+                                                        <span class="text-muted font-weight-bold mt-2"><?= __('Profit Share between customers'); ?></span>
                                                     </div>
                                                     <span class="symbol symbol-light-danger symbol-45">
                                                         <span class="symbol-label font-weight-bolder font-size-h6">+94</span>
@@ -119,9 +119,9 @@
                                             <div class="card-body d-flex flex-column p-0">
                                                 <div class="d-flex align-items-center justify-content-between card-spacer">
                                                     <div class="d-flex flex-column mr-2">
-                                                        <a href="#" class="text-dark-75 text-hover-primary font-weight-bolder font-size-h5">Revenue Change
+                                                        <a href="#" class="text-dark-75 text-hover-primary font-weight-bolder font-size-h5"><?= __('Revenue Change'); ?>
 </a>
-                                                        <span class="text-muted font-weight-bold mt-2">Revenue change breakdown by cities</span>
+                                                        <span class="text-muted font-weight-bold mt-2"><?= __('Revenue change breakdown by cities'); ?></span>
                                                     </div>
                                                     <span class="symbol symbol-light-primary symbol-45">
                                                         <span class="symbol-label font-weight-bolder font-size-h6">+28</span>
@@ -140,7 +140,7 @@
                                         <div class="card card-custom card-stretch gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0">
-                                                <h3 class="card-title font-weight-bolder text-dark">Notifications</h3>
+                                                <h3 class="card-title font-weight-bolder text-dark"><?= __('Notifications'); ?></h3>
                                                 <div class="card-toolbar">
                                                     <div class="dropdown dropdown-inline">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
@@ -150,8 +150,8 @@
                                                             <!--begin::Naviigation-->
                                                             <ul class="navi">
                                                                 <li class="navi-header font-weight-bold py-5">
-                                                                    <span class="font-size-lg">Add New:</span>
-                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                                    <span class="font-size-lg"><?= __('Add New'); ?>:</span>
+                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                                                 </li>
                                                                 <li class="navi-separator mb-3 opacity-70"></li>
                                                                 <li class="navi-item">
@@ -159,7 +159,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-shopping-cart-1"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Order</span>
+                                                                        <span class="navi-text"><?= __('Order'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -167,7 +167,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="navi-icon flaticon2-calendar-8"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Members</span>
+                                                                        <span class="navi-text"><?= __('Members'); ?></span>
                                                                         <span class="navi-label">
                                                                             <span class="label label-light-danger label-rounded font-weight-bold">3</span>
                                                                         </span>
@@ -178,7 +178,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="navi-icon flaticon2-telegram-logo"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Project</span>
+                                                                        <span class="navi-text"><?= __('Project'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -186,7 +186,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="navi-icon flaticon2-new-email"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Record</span>
+                                                                        <span class="navi-text"><?= __('Record'); ?></span>
                                                                         <span class="navi-label">
                                                                             <span class="label label-light-success label-rounded font-weight-bold">5</span>
                                                                         </span>
@@ -194,8 +194,8 @@
                                                                 </li>
                                                                 <li class="navi-separator mt-3 opacity-70"></li>
                                                                 <li class="navi-footer pt-5 pb-4">
-                                                                    <a class="btn btn-clean font-weight-bold btn-sm d-none" href="#" data-toggle="tooltip" data-placement="right" title="Click to learn more...">Learn more</a>
-                                                                    <button type="button" class="btn btn-clean font-weight-bold btn-sm d-none" data-toggle="tooltip" data-placement="right" title="Click to learn more...">Learn more</button>
+                                                                    <a class="btn btn-clean font-weight-bold btn-sm d-none" href="#" data-toggle="tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Learn more'); ?></a>
+                                                                    <button type="button" class="btn btn-clean font-weight-bold btn-sm d-none" data-toggle="tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Learn more'); ?></button>
                                                                 </li>
                                                             </ul>
                                                             <!--end::Naviigation-->
@@ -212,7 +212,7 @@
                                                     <div class="d-flex align-items-center flex-grow-1">
                                                         <!--begin::Checkbox-->
                                                         <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                                            <input aria-label="Checkbox" type="checkbox" value="1" />
+                                                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="1" />
                                                             <span></span>
                                                         </label>
                                                         <!--end::Checkbox-->
@@ -221,15 +221,15 @@
                                                             <!--begin::Info-->
                                                             <div class="d-flex flex-column align-items-cente py-2 w-75">
                                                                 <!--begin::Title-->
-                                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Daily Standup Meeting</a>
+                                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1"><?= __('Daily Standup Meeting'); ?></a>
                                                                 <!--end::Title-->
                                                                 <!--begin::Data-->
-                                                                <span class="text-muted font-weight-bold">Due in 2 Days</span>
+                                                                <span class="text-muted font-weight-bold"><?= __('Due in 2 Days'); ?></span>
                                                                 <!--end::Data-->
                                                             </div>
                                                             <!--end::Info-->
                                                             <!--begin::Label-->
-                                                            <span class="label label-lg label-light-primary label-inline font-weight-bold py-4">Approved</span>
+                                                            <span class="label label-lg label-light-primary label-inline font-weight-bold py-4"><?= __('Approved'); ?></span>
                                                             <!--end::Label-->
                                                         </div>
                                                         <!--end::Section-->
@@ -243,7 +243,7 @@
                                                     <div class="d-flex align-items-center flex-grow-1">
                                                         <!--begin::Checkbox-->
                                                         <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                                            <input aria-label="Checkbox" type="checkbox" value="1" />
+                                                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="1" />
                                                             <span></span>
                                                         </label>
                                                         <!--end::Checkbox-->
@@ -252,15 +252,15 @@
                                                             <!--begin::Info-->
                                                             <div class="d-flex flex-column align-items-cente py-2 w-75">
                                                                 <!--begin::Title-->
-                                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Group Town Hall Meet-up with showcase</a>
+                                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1"><?= __('Group Town Hall Meet-up with showcase'); ?></a>
                                                                 <!--end::Title-->
                                                                 <!--begin::Data-->
-                                                                <span class="text-muted font-weight-bold">Due in 2 Days</span>
+                                                                <span class="text-muted font-weight-bold"><?= __('Due in 2 Days'); ?></span>
                                                                 <!--end::Data-->
                                                             </div>
                                                             <!--end::Info-->
                                                             <!--begin::Label-->
-                                                            <span class="label label-lg label-light-warning label-inline font-weight-bold py-4">In Progress</span>
+                                                            <span class="label label-lg label-light-warning label-inline font-weight-bold py-4"><?= __('In Progress'); ?></span>
                                                             <!--end::Label-->
                                                         </div>
                                                         <!--end::Section-->
@@ -274,7 +274,7 @@
                                                     <div class="d-flex align-items-center flex-grow-1">
                                                         <!--begin::Checkbox-->
                                                         <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                                            <input aria-label="Checkbox" type="checkbox" value="1" />
+                                                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="1" />
                                                             <span></span>
                                                         </label>
                                                         <!--end::Checkbox-->
@@ -283,15 +283,15 @@
                                                             <!--begin::Info-->
                                                             <div class="d-flex flex-column align-items-cente py-2 w-75">
                                                                 <!--begin::Title-->
-                                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Next sprint planning and estimations</a>
+                                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1"><?= __('Next sprint planning and estimations'); ?></a>
                                                                 <!--end::Title-->
                                                                 <!--begin::Data-->
-                                                                <span class="text-muted font-weight-bold">Due in 2 Days</span>
+                                                                <span class="text-muted font-weight-bold"><?= __('Due in 2 Days'); ?></span>
                                                                 <!--end::Data-->
                                                             </div>
                                                             <!--end::Info-->
                                                             <!--begin::Label-->
-                                                            <span class="label label-lg label-light-success label-inline font-weight-bold py-4">Success</span>
+                                                            <span class="label label-lg label-light-success label-inline font-weight-bold py-4"><?= __('Success'); ?></span>
                                                             <!--end::Label-->
                                                         </div>
                                                         <!--end::Section-->
@@ -305,7 +305,7 @@
                                                     <div class="d-flex align-items-center flex-grow-1">
                                                         <!--begin::Checkbox-->
                                                         <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                                            <input aria-label="Checkbox" type="checkbox" value="1" />
+                                                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="1" />
                                                             <span></span>
                                                         </label>
                                                         <!--end::Checkbox-->
@@ -314,15 +314,15 @@
                                                             <!--begin::Info-->
                                                             <div class="d-flex flex-column align-items-cente py-2 w-75">
                                                                 <!--begin::Title-->
-                                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Sprint delivery and project deployment</a>
+                                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1"><?= __('Sprint delivery and project deployment'); ?></a>
                                                                 <!--end::Title-->
                                                                 <!--begin::Data-->
-                                                                <span class="text-muted font-weight-bold">Due in 2 Days</span>
+                                                                <span class="text-muted font-weight-bold"><?= __('Due in 2 Days'); ?></span>
                                                                 <!--end::Data-->
                                                             </div>
                                                             <!--end::Info-->
                                                             <!--begin::Label-->
-                                                            <span class="label label-lg label-light-danger label-inline font-weight-bold py-4">Rejected</span>
+                                                            <span class="label label-lg label-light-danger label-inline font-weight-bold py-4"><?= __('Rejected'); ?></span>
                                                             <!--end::Label-->
                                                         </div>
                                                         <!--end::Section-->
@@ -336,7 +336,7 @@
                                                     <div class="d-flex align-items-center flex-grow-1">
                                                         <!--begin::Checkbox-->
                                                         <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                                            <input aria-label="Checkbox" type="checkbox" value="1" />
+                                                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="1" />
                                                             <span></span>
                                                         </label>
                                                         <!--end::Checkbox-->
@@ -345,15 +345,15 @@
                                                             <!--begin::Info-->
                                                             <div class="d-flex flex-column align-items-cente py-2 w-75">
                                                                 <!--begin::Title-->
-                                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Data analytics research showcase</a>
+                                                                <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1"><?= __('Data analytics research showcase'); ?></a>
                                                                 <!--end::Title-->
                                                                 <!--begin::Data-->
-                                                                <span class="text-muted font-weight-bold">Due in 2 Days</span>
+                                                                <span class="text-muted font-weight-bold"><?= __('Due in 2 Days'); ?></span>
                                                                 <!--end::Data-->
                                                             </div>
                                                             <!--end::Info-->
                                                             <!--begin::Label-->
-                                                            <span class="label label-lg label-light-warning label-inline font-weight-bold py-4">In Progress</span>
+                                                            <span class="label label-lg label-light-warning label-inline font-weight-bold py-4"><?= __('In Progress'); ?></span>
                                                             <!--end::Label-->
                                                         </div>
                                                         <!--end::Section-->
@@ -372,9 +372,9 @@
                                         <div class="card card-custom card-stretch gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0">
-                                                <h3 class="card-title font-weight-bolder text-dark">Trends</h3>
+                                                <h3 class="card-title font-weight-bolder text-dark"><?= __('Trends'); ?></h3>
                                                 <div class="card-toolbar">
-                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                                                         <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                             <i class="ki ki-bold-more-ver"></i>
                                                         </a>
@@ -386,7 +386,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-drop"></i>
                                                                         </span>
-                                                                        <span class="navi-text">New Group</span>
+                                                                        <span class="navi-text"><?= __('New Group'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -394,7 +394,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-list-3"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Contacts</span>
+                                                                        <span class="navi-text"><?= __('Contacts'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -402,9 +402,9 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-rocket-1"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Groups</span>
+                                                                        <span class="navi-text"><?= __('Groups'); ?></span>
                                                                         <span class="navi-link-badge">
-                                                                            <span class="label label-light-primary label-inline font-weight-bold">new</span>
+                                                                            <span class="label label-light-primary label-inline font-weight-bold"><?= __('new'); ?></span>
                                                                         </span>
                                                                     </a>
                                                                 </li>
@@ -413,7 +413,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-bell-2"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Calls</span>
+                                                                        <span class="navi-text"><?= __('Calls'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -421,7 +421,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-gear"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Settings</span>
+                                                                        <span class="navi-text"><?= __('Settings'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-separator my-3"></li>
@@ -430,7 +430,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-magnifier-tool"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Help</span>
+                                                                        <span class="navi-text"><?= __('Help'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="navi-item">
@@ -438,7 +438,7 @@
                                                                         <span class="navi-icon">
                                                                             <i class="flaticon2-bell-2"></i>
                                                                         </span>
-                                                                        <span class="navi-text">Privacy</span>
+                                                                        <span class="navi-text"><?= __('Privacy'); ?></span>
                                                                         <span class="navi-link-badge">
                                                                             <span class="label label-light-danger label-rounded font-weight-bold">5</span>
                                                                         </span>
@@ -472,8 +472,8 @@
                                                     <!--end::Icon-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column flex-grow-1 mr-2">
-                                                        <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">Group lunch celebration</a>
-                                                        <span class="text-muted font-weight-bold">Due in 2 Days</span>
+                                                        <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Group lunch celebration'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?= __('Due in 2 Days'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                     <!--begin::Lable-->
@@ -500,8 +500,8 @@
                                                     <!--end::Icon-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column flex-grow-1 mr-2">
-                                                        <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">Home navigation optimization</a>
-                                                        <span class="text-muted font-weight-bold">Due in 2 Days</span>
+                                                        <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Home navigation optimization'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?= __('Due in 2 Days'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                     <!--begin::Lable-->
@@ -528,8 +528,8 @@
                                                     <!--end::Icon-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column flex-grow-1 mr-2">
-                                                        <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">Rebrand strategy planning</a>
-                                                        <span class="text-muted font-weight-bold">Due in 2 Days</span>
+                                                        <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Rebrand strategy planning'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?= __('Due in 2 Days'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                     <!--begin::Lable-->
@@ -558,8 +558,8 @@
                                                     <!--end::Icon-->
                                                     <!--begin::Title-->
                                                     <div class="d-flex flex-column flex-grow-1 mr-2">
-                                                        <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">Product goals strategy meet-up</a>
-                                                        <span class="text-muted font-weight-bold">Due in 2 Days</span>
+                                                        <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Product goals strategy meet-up'); ?></a>
+                                                        <span class="text-muted font-weight-bold"><?= __('Due in 2 Days'); ?></span>
                                                     </div>
                                                     <!--end::Title-->
                                                     <!--begin::Lable-->
@@ -579,8 +579,8 @@
             <!--begin::Header-->
             <div class="card-header align-items-center border-0 mt-4">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="font-weight-bolder text-dark">My Activity</span>
-                    <span class="text-muted mt-3 font-weight-bold font-size-sm">890,344 Sales</span>
+                    <span class="font-weight-bolder text-dark"><?= __('My Activity'); ?></span>
+                    <span class="text-muted mt-3 font-weight-bold font-size-sm"><?= __('890,344 Sales'); ?></span>
                 </h3>
                 <div class="card-toolbar">
                     <div class="dropdown dropdown-inline">
@@ -591,49 +591,49 @@
                             <!--begin::Navigation-->
                             <ul class="navi navi-hover">
                                 <li class="navi-header font-weight-bold py-4">
-                                    <span class="font-size-lg">Choose Label:</span>
-                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                    <span class="font-size-lg"><?= __('Choose Label'); ?>:</span>
+                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                 </li>
                                 <li class="navi-separator mb-3 opacity-70"></li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                            <span class="label label-xl label-inline label-light-success"><?= __('Customer'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                            <span class="label label-xl label-inline label-light-danger"><?= __('Partner'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                            <span class="label label-xl label-inline label-light-warning"><?= __('Suplier'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                            <span class="label label-xl label-inline label-light-primary"><?= __('Member'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                            <span class="label label-xl label-inline label-light-dark"><?= __('Staff'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-separator mt-3 opacity-70"></li>
                                 <li class="navi-footer py-4">
                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                    <i class="ki ki-plus icon-sm"></i><?= __('Add new'); ?></a>
                                 </li>
                             </ul>
                             <!--end::Navigation-->
@@ -655,7 +655,7 @@
                                                         </div>
                                                         <!--end::Badge-->
                                                         <!--begin::Text-->
-                                                        <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">Outlines keep you honest. And keep structure</div>
+                                                        <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3"><?= __('Outlines keep you honest. And keep structure'); ?></div>
                                                         <!--end::Text-->
                                                     </div>
                                                     <!--end::Item-->
@@ -671,7 +671,7 @@
                                                         <!--end::Badge-->
                                                         <!--begin::Content-->
                                                         <div class="timeline-content d-flex">
-                                                            <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">AEOL meeting</span>
+                                                            <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg"><?= __('AEOL meeting'); ?></span>
                                                         </div>
                                                         <!--end::Content-->
                                                     </div>
@@ -687,8 +687,8 @@
                                                         </div>
                                                         <!--end::Badge-->
                                                         <!--begin::Desc-->
-                                                        <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Make deposit
-                                                        <a href="#" class="text-primary">USD 700</a>. to ESL</div>
+                                                        <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3"><?= __('Make deposit'); ?>
+                                                        <a href="#" class="text-primary"><?= __('USD 700'); ?></a><?= __('. to ESL'); ?></div>
                                                         <!--end::Desc-->
                                                     </div>
                                                     <!--end::Item-->
@@ -703,7 +703,7 @@
                                                         </div>
                                                         <!--end::Badge-->
                                                         <!--begin::Text-->
-                                                        <div class="timeline-content font-weight-mormal font-size-lg text-muted pl-3">Indulging in poorly driving and keep structure keep great</div>
+                                                        <div class="timeline-content font-weight-mormal font-size-lg text-muted pl-3"><?= __('Indulging in poorly driving and keep structure keep great'); ?></div>
                                                         <!--end::Text-->
                                                     </div>
                                                     <!--end::Item-->
@@ -718,8 +718,8 @@
                                                         </div>
                                                         <!--end::Badge-->
                                                         <!--begin::Desc-->
-                                                        <div class="timeline-content font-weight-bolder text-dark-75 pl-3 font-size-lg">New order placed
-                                                        <a href="#" class="text-primary">#XF-2356</a>.</div>
+                                                        <div class="timeline-content font-weight-bolder text-dark-75 pl-3 font-size-lg"><?= __('New order placed'); ?>
+                                                        <a href="#" class="text-primary"><?= __('#XF-2356'); ?></a>.</div>
                                                         <!--end::Desc-->
                                                     </div>
                                                     <!--end::Item-->
@@ -734,7 +734,7 @@
                                                         </div>
                                                         <!--end::Badge-->
                                                         <!--begin::Text-->
-                                                        <div class="timeline-content font-weight-mormal font-size-lg text-muted pl-3">Outlines keep and you honest. Indulging in poorly driving</div>
+                                                        <div class="timeline-content font-weight-mormal font-size-lg text-muted pl-3"><?= __('Outlines keep and you honest. Indulging in poorly driving'); ?></div>
                                                         <!--end::Text-->
                                                     </div>
                                                     <!--end::Item-->
@@ -749,7 +749,7 @@
                                                         </div>
                                                         <!--end::Badge-->
                                                         <!--begin::Text-->
-                                                        <div class="timeline-content font-weight-mormal font-size-lg text-muted pl-3">Indulging in poorly driving and keep structure keep great</div>
+                                                        <div class="timeline-content font-weight-mormal font-size-lg text-muted pl-3"><?= __('Indulging in poorly driving and keep structure keep great'); ?></div>
                                                         <!--end::Text-->
                                                     </div>
                                                     <!--end::Item-->
@@ -764,8 +764,8 @@
                                                         </div>
                                                         <!--end::Badge-->
                                                         <!--begin::Desc-->
-                                                        <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">New order placed
-                                                        <a href="#" class="text-primary">#XF-2356</a>.</div>
+                                                        <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3"><?= __('New order placed'); ?>
+                                                        <a href="#" class="text-primary"><?= __('#XF-2356'); ?></a>.</div>
                                                         <!--end::Desc-->
                                                     </div>
                                                     <!--end::Item-->
@@ -781,10 +781,10 @@
         <div class="card card-custom bg-light-primary card-stretch gutter-b">
             <!--begin::header-->
             <div class="card-header border-0">
-                <h3 class="card-title font-weight-bolder text-primary">Todo</h3>
+                <h3 class="card-title font-weight-bolder text-primary"><?= __('Todo'); ?></h3>
                 <div class="card-toolbar">
-                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="left" data-original-title="Quick actions">
-                        <a href="#" class="btn btn-primary btn-sm font-weight-bolder font-size-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create</a>
+                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="left" data-original-title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <a href="#" class="btn btn-primary btn-sm font-weight-bolder font-size-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Create'); ?></a>
                         <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
                             <!--begin::Navigation-->
                             <ul class="navi navi-hover py-5">
@@ -793,7 +793,7 @@
                                         <span class="navi-icon">
                                             <i class="flaticon2-drop"></i>
                                         </span>
-                                        <span class="navi-text">New Group</span>
+                                        <span class="navi-text"><?= __('New Group'); ?></span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
@@ -801,7 +801,7 @@
                                         <span class="navi-icon">
                                             <i class="flaticon2-list-3"></i>
                                         </span>
-                                        <span class="navi-text">Contacts</span>
+                                        <span class="navi-text"><?= __('Contacts'); ?></span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
@@ -809,9 +809,9 @@
                                         <span class="navi-icon">
                                             <i class="flaticon2-rocket-1"></i>
                                         </span>
-                                        <span class="navi-text">Groups</span>
+                                        <span class="navi-text"><?= __('Groups'); ?></span>
                                         <span class="navi-link-badge">
-                                            <span class="label label-light-primary label-inline font-weight-bold">new</span>
+                                            <span class="label label-light-primary label-inline font-weight-bold"><?= __('new'); ?></span>
                                         </span>
                                     </a>
                                 </li>
@@ -820,7 +820,7 @@
                                         <span class="navi-icon">
                                             <i class="flaticon2-bell-2"></i>
                                         </span>
-                                        <span class="navi-text">Calls</span>
+                                        <span class="navi-text"><?= __('Calls'); ?></span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
@@ -828,7 +828,7 @@
                                         <span class="navi-icon">
                                             <i class="flaticon2-gear"></i>
                                         </span>
-                                        <span class="navi-text">Settings</span>
+                                        <span class="navi-text"><?= __('Settings'); ?></span>
                                     </a>
                                 </li>
                                 <li class="navi-separator my-3"></li>
@@ -837,7 +837,7 @@
                                         <span class="navi-icon">
                                             <i class="flaticon2-magnifier-tool"></i>
                                         </span>
-                                        <span class="navi-text">Help</span>
+                                        <span class="navi-text"><?= __('Help'); ?></span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
@@ -845,7 +845,7 @@
                                         <span class="navi-icon">
                                             <i class="flaticon2-bell-2"></i>
                                         </span>
-                                        <span class="navi-text">Privacy</span>
+                                        <span class="navi-text"><?= __('Privacy'); ?></span>
                                         <span class="navi-link-badge">
                                             <span class="label label-light-danger label-rounded font-weight-bold">5</span>
                                         </span>
@@ -864,18 +864,18 @@
                 <div class="d-flex align-items-center mb-6">
                     <!--begin::Checkbox-->
                     <label class="checkbox checkbox-lg checkbox-primary flex-shrink-0 m-0 mr-4">
-                        <input aria-label="Checkbox" type="checkbox" value="1" />
+                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="1" />
                         <span class="bg-white"></span>
                     </label>
                     <!--end::Checkbox-->
                     <!--begin::Text-->
                     <div class="d-flex flex-column flex-grow-1 py-2">
-                        <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Create FireStone Logo</a>
-                        <a href="#" class="text-muted font-weight-bold text-hover-primary">Due in 2 Days</a>
+                        <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1"><?= __('Create FireStone Logo'); ?></a>
+                        <a href="#" class="text-muted font-weight-bold text-hover-primary"><?= __('Due in 2 Days'); ?></a>
                     </div>
                     <!--end::Text-->
                     <!--begin::Dropdown-->
-                    <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                    <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                         <a href="#" class="btn btn-clean btn-hover-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                             <i class="ki ki-bold-more-hor"></i>
                         </a>
@@ -883,49 +883,49 @@
                             <!--begin::Navigation-->
                             <ul class="navi navi-hover">
                                 <li class="navi-header font-weight-bold py-4">
-                                    <span class="font-size-lg">Choose Label:</span>
-                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                    <span class="font-size-lg"><?= __('Choose Label'); ?>:</span>
+                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                 </li>
                                 <li class="navi-separator mb-3 opacity-70"></li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                            <span class="label label-xl label-inline label-light-success"><?= __('Customer'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                            <span class="label label-xl label-inline label-light-danger"><?= __('Partner'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                            <span class="label label-xl label-inline label-light-warning"><?= __('Suplier'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                            <span class="label label-xl label-inline label-light-primary"><?= __('Member'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                            <span class="label label-xl label-inline label-light-dark"><?= __('Staff'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-separator mt-3 opacity-70"></li>
                                 <li class="navi-footer py-4">
                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                    <i class="ki ki-plus icon-sm"></i><?= __('Add new'); ?></a>
                                 </li>
                             </ul>
                             <!--end::Navigation-->
@@ -938,18 +938,18 @@
                 <div class="d-flex align-items-center mb-6">
                     <!--begin::Checkbox-->
                     <label class="checkbox checkbox-lg checkbox-primary flex-shrink-0 m-0 mr-4">
-                        <input aria-label="Checkbox" type="checkbox" value="1" />
+                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="1" />
                         <span class="bg-white"></span>
                     </label>
                     <!--end::Checkbox-->
                     <!--begin::Text-->
                     <div class="d-flex flex-column flex-grow-1 py-2">
-                        <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Stakeholder Meeting</a>
-                        <a href="#" class="text-muted font-weight-bold text-hover-primary">Due in 3 Weeks</a>
+                        <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1"><?= __('Stakeholder Meeting'); ?></a>
+                        <a href="#" class="text-muted font-weight-bold text-hover-primary"><?= __('Due in 3 Weeks'); ?></a>
                     </div>
                     <!--end::Text-->
                     <!--begin: Dropdown-->
-                    <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                    <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                         <a href="#" class="btn btn-clean btn-hover-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                             <i class="ki ki-bold-more-hor"></i>
                         </a>
@@ -957,49 +957,49 @@
                             <!--begin::Navigation-->
                             <ul class="navi navi-hover">
                                 <li class="navi-header font-weight-bold py-4">
-                                    <span class="font-size-lg">Choose Label:</span>
-                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                    <span class="font-size-lg"><?= __('Choose Label'); ?>:</span>
+                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                 </li>
                                 <li class="navi-separator mb-3 opacity-70"></li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                            <span class="label label-xl label-inline label-light-success"><?= __('Customer'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                            <span class="label label-xl label-inline label-light-danger"><?= __('Partner'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                            <span class="label label-xl label-inline label-light-warning"><?= __('Suplier'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                            <span class="label label-xl label-inline label-light-primary"><?= __('Member'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                            <span class="label label-xl label-inline label-light-dark"><?= __('Staff'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-separator mt-3 opacity-70"></li>
                                 <li class="navi-footer py-4">
                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                    <i class="ki ki-plus icon-sm"></i><?= __('Add new'); ?></a>
                                 </li>
                             </ul>
                             <!--end::Navigation-->
@@ -1012,18 +1012,18 @@
                 <div class="d-flex align-items-center mb-6">
                     <!--begin::Checkbox-->
                     <label class="checkbox checkbox-lg checkbox-primary flex-shrink-0 m-0 mr-4">
-                        <input aria-label="Checkbox" type="checkbox" value="1" />
+                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="1" />
                         <span class="bg-white"></span>
                     </label>
                     <!--end::Checkbox-->
                     <!--begin::Text-->
                     <div class="d-flex flex-column flex-grow-1 py-2">
-                        <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Scoping &amp; Estimations</a>
-                        <a href="#" class="text-muted font-weight-bold text-hover-primary">Due in 8 Hours</a>
+                        <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1"><?= htmlspecialchars(__('Scoping & Estimations'), ENT_QUOTES, 'UTF-8'); ?></a>
+                        <a href="#" class="text-muted font-weight-bold text-hover-primary"><?= __('Due in 8 Hours'); ?></a>
                     </div>
                     <!--end::Text-->
                     <!--begin: Dropdown-->
-                    <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                    <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                         <a href="#" class="btn btn-clean btn-hover-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                             <i class="ki ki-bold-more-hor"></i>
                         </a>
@@ -1031,49 +1031,49 @@
                             <!--begin::Navigation-->
                             <ul class="navi navi-hover">
                                 <li class="navi-header font-weight-bold py-4">
-                                    <span class="font-size-lg">Choose Label:</span>
-                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                    <span class="font-size-lg"><?= __('Choose Label'); ?>:</span>
+                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                 </li>
                                 <li class="navi-separator mb-3 opacity-70"></li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                            <span class="label label-xl label-inline label-light-success"><?= __('Customer'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                            <span class="label label-xl label-inline label-light-danger"><?= __('Partner'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                            <span class="label label-xl label-inline label-light-warning"><?= __('Suplier'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                            <span class="label label-xl label-inline label-light-primary"><?= __('Member'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                            <span class="label label-xl label-inline label-light-dark"><?= __('Staff'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-separator mt-3 opacity-70"></li>
                                 <li class="navi-footer py-4">
                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                    <i class="ki ki-plus icon-sm"></i><?= __('Add new'); ?></a>
                                 </li>
                             </ul>
                             <!--end::Navigation-->
@@ -1086,18 +1086,18 @@
                 <div class="d-flex align-items-center mb-6">
                     <!--begin::Checkbox-->
                     <label class="checkbox checkbox-lg checkbox-primary flex-shrink-0 m-0 mr-4">
-                        <input aria-label="Checkbox" type="checkbox" value="1" />
+                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="1" />
                         <span class="bg-white"></span>
                     </label>
                     <!--end::Checkbox-->
                     <!--begin::Text-->
                     <div class="d-flex flex-column flex-grow-1 py-2">
-                        <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Sprint Showcase</a>
-                        <a href="#" class="text-muted font-weight-bold text-hover-primary">Due in 4 Months</a>
+                        <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1"><?= __('Sprint Showcase'); ?></a>
+                        <a href="#" class="text-muted font-weight-bold text-hover-primary"><?= __('Due in 4 Months'); ?></a>
                     </div>
                     <!--end::Text-->
                     <!--begin: Dropdown-->
-                    <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                    <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                         <a href="#" class="btn btn-clean btn-hover-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                             <i class="ki ki-bold-more-hor"></i>
                         </a>
@@ -1105,49 +1105,49 @@
                             <!--begin::Navigation-->
                             <ul class="navi navi-hover">
                                 <li class="navi-header font-weight-bold py-4">
-                                    <span class="font-size-lg">Choose Label:</span>
-                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                    <span class="font-size-lg"><?= __('Choose Label'); ?>:</span>
+                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                 </li>
                                 <li class="navi-separator mb-3 opacity-70"></li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                            <span class="label label-xl label-inline label-light-success"><?= __('Customer'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                            <span class="label label-xl label-inline label-light-danger"><?= __('Partner'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                            <span class="label label-xl label-inline label-light-warning"><?= __('Suplier'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                            <span class="label label-xl label-inline label-light-primary"><?= __('Member'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                            <span class="label label-xl label-inline label-light-dark"><?= __('Staff'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-separator mt-3 opacity-70"></li>
                                 <li class="navi-footer py-4">
                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                    <i class="ki ki-plus icon-sm"></i><?= __('Add new'); ?></a>
                                 </li>
                             </ul>
                             <!--end::Navigation-->
@@ -1160,18 +1160,18 @@
                 <div class="d-flex align-items-center">
                     <!--begin::Checkbox-->
                     <label class="checkbox checkbox-lg checkbox-primary flex-shrink-0 m-0 mr-4">
-                        <input aria-label="Checkbox" type="checkbox" value="1" />
+                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="1" />
                         <span class="bg-white"></span>
                     </label>
                     <!--end::Checkbox-->
                     <!--begin::Text-->
                     <div class="d-flex flex-column flex-grow-1 py-2">
-                        <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Project Retro</a>
-                        <a href="#" class="text-muted font-weight-bold text-hover-primary">Due in 1 Year</a>
+                        <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1"><?= __('Project Retro'); ?></a>
+                        <a href="#" class="text-muted font-weight-bold text-hover-primary"><?= __('Due in 1 Year'); ?></a>
                     </div>
                     <!--end::Text-->
                     <!--begin::Dropdown-->
-                    <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                    <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                         <a href="#" class="btn btn-clean btn-hover-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                             <i class="ki ki-bold-more-hor"></i>
                         </a>
@@ -1179,49 +1179,49 @@
                             <!--begin::Navigation-->
                             <ul class="navi navi-hover">
                                 <li class="navi-header font-weight-bold py-4">
-                                    <span class="font-size-lg">Choose Label:</span>
-                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                    <span class="font-size-lg"><?= __('Choose Label'); ?>:</span>
+                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                 </li>
                                 <li class="navi-separator mb-3 opacity-70"></li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-success">Customer</span>
+                                            <span class="label label-xl label-inline label-light-success"><?= __('Customer'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                            <span class="label label-xl label-inline label-light-danger"><?= __('Partner'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                            <span class="label label-xl label-inline label-light-warning"><?= __('Suplier'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-primary">Member</span>
+                                            <span class="label label-xl label-inline label-light-primary"><?= __('Member'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
                                         <span class="navi-text">
-                                            <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                            <span class="label label-xl label-inline label-light-dark"><?= __('Staff'); ?></span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="navi-separator mt-3 opacity-70"></li>
                                 <li class="navi-footer py-4">
                                     <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                    <i class="ki ki-plus icon-sm"></i><?= __('Add new'); ?></a>
                                 </li>
                             </ul>
                             <!--end::Navigation-->
