@@ -116,7 +116,7 @@ $sprogress = $statusprogress['full'] ?? array();
             $('#kt_modal_KTDatatable_remote').modal("show");
           },
           error: function (){
-            alert("Unable to open workflow popup.");
+            alert(<?php echo json_encode(__('Unable to open workflow popup.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
           }
         });
     }
@@ -134,7 +134,7 @@ $sprogress = $statusprogress['full'] ?? array();
                     var obj = (typeof data === 'object') ? data : $.parseJSON(data);
                     if(obj.status === 'fail'){
                         if(typeof swal === 'function'){
-                            swal({ title: "Attendance Notice", text: obj.message || "Cannot update attendance.", type: "warning" });
+                            swal({ title: <?php echo json_encode(__('Attendance Notice'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, text: obj.message || "Cannot update attendance.", type: "warning" });
                         } else {
                             alert(obj.message || "Cannot update attendance.");
                         }
@@ -172,7 +172,7 @@ $sprogress = $statusprogress['full'] ?? array();
                 }
             },
             error: function (){
-                alert("Failed to update timesheet.");
+                alert(<?php echo json_encode(__('Failed to update timesheet.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             }
         });   
     }
@@ -182,7 +182,7 @@ $sprogress = $statusprogress['full'] ?? array();
         var option = $("#optionvalue").val();
         var dateVal = targetDate ? targetDate : $("#selected_week_date").val();
         if(!dateVal){
-            alert("Please select a date/week.");
+            alert(<?php echo json_encode(__('Please select a date/week.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return;
         }
         window.location = "index.php?option=" + option + "&EMP=" + emp_id + "&CHANGE_DATE=" + dateVal; 
@@ -192,7 +192,7 @@ $sprogress = $statusprogress['full'] ?? array();
         if(typeof tostarnotify === 'function'){
             tostarnotify('top','right','fa fa-info-circle','form-label label label-danger pt-2 pb-2','animated flipInX','animated flipOutX','Weekly timesheet is already submitted to manager','');
         } else {
-            alert("Weekly timesheet is already submitted to manager.");
+            alert(<?php echo json_encode(__('Weekly timesheet is already submitted to manager.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         }
     }
 
@@ -207,18 +207,18 @@ $sprogress = $statusprogress['full'] ?? array();
         var end_date   = $("#end_date").val();
 
         if(!date || !emp_id){
-            alert("Missing date or employee information.");
+            alert(<?php echo json_encode(__('Missing date or employee information.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return;
         }
 
         swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: 'Are you sure you want to apply for leave? Once confirmed, you cannot change the leave request.',
+            text: <?php echo json_encode(__('Are you sure you want to apply for leave? Once confirmed, you cannot change the leave request.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             closeOnConfirm: true,
             closeOnCancel: true
         },
@@ -246,7 +246,7 @@ $sprogress = $statusprogress['full'] ?? array();
                             var obj = (typeof response === 'object') ? response : JSON.parse(response);
                             if(obj.status === 'fail'){
                                 if(typeof swal === 'function'){
-                                    swal({ title: "Leave Notice", text: obj.message || "Cannot apply leave.", type: "warning" });
+                                    swal({ title: <?php echo json_encode(__('Leave Notice'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, text: obj.message || "Cannot apply leave.", type: "warning" });
                                 } else {
                                     alert(obj.message || "Cannot apply leave.");
                                 }
@@ -260,12 +260,12 @@ $sprogress = $statusprogress['full'] ?? array();
                             // 2. Add pending badge to header if not already present
                             var $header = $td.find('.d-flex.justify-content-between');
                             if($header.find('.badge.bg-warning').length === 0){
-                                $header.append('<span class="badge bg-warning text-white" title="Leave pending manager approval"><i class="fa fa-clock-o"></i> Pending</span>');
+                                $header.append('<span class="badge bg-warning text-white" title="<?= htmlspecialchars(__('Leave pending manager approval'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-clock-o"></i> <?= htmlspecialchars(__('Pending'), ENT_QUOTES, 'UTF-8'); ?></span>');
                             }
 
                             // 3. Update status label
                             $td.find('.att-status-text').remove();
-                            $('<div class="mb-1 att-status-text"><small class="text-warning f-w-600 d-block"><i class="fa fa-hourglass-half"></i> Leave (Pending)</small></div>').insertAfter($header);
+                            $('<div class="mb-1 att-status-text"><small class="text-warning f-w-600 d-block"><i class="fa fa-hourglass-half"></i> <?= htmlspecialchars(__('Leave (Pending)'), ENT_QUOTES, 'UTF-8'); ?></small></div>').insertAfter($header);
 
                             // 4. Remove attendance action buttons since leave is applied
                             $td.find('.btn-att-group').remove();
@@ -298,7 +298,7 @@ $sprogress = $statusprogress['full'] ?? array();
                     error: function(err){
                         is_applying_leave = false;
                         $btn.html(oldHtml);
-                        alert("Failed to submit leave request. Please check network connection.");
+                        alert(<?php echo json_encode(__('Failed to submit leave request. Please check network connection.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                     }
                 });
             } 
@@ -308,13 +308,13 @@ $sprogress = $statusprogress['full'] ?? array();
 
 <div class="card">
     <div class="card-header table-card-header">
-        <h5>Weekly Attendance (Without Work Order)</h5> 
+        <h5><?= __('Weekly Attendance (Without Work Order)'); ?></h5> 
         <span class="badge bg-primary p-2 m-l-5 text-white">
             <i class='ti-user'></i> <?php echo htmlspecialchars($_SESSION['users'][$_SESSION['userid']] ?? 'Employee'); ?>
         </span>
         <div class="card-header-right table-card-header">
            <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-              <i class="icofont icofont-reply" aria-hidden="true"></i> Back
+              <i class="icofont icofont-reply" aria-hidden="true"></i> <?= __('Back'); ?>
           </a>
         </div>
     </div>
@@ -324,15 +324,15 @@ $sprogress = $statusprogress['full'] ?? array();
         <!-- Week Selection and Navigation -->
         <div class="row align-items-center mb-3">
             <div class="col-lg-5 col-md-6 d-flex align-items-center gap-2">
-                <button type="button" class="btn btn-outline-secondary week-nav-btn" title="Previous Week" onclick="changeselectweek('<?php echo $prev_week; ?>')">
-                    <i class="fa fa-chevron-left" aria-hidden="true"></i> Prev Week
+                <button type="button" class="btn btn-outline-secondary week-nav-btn" title="<?= htmlspecialchars(__('Previous Week'), ENT_QUOTES, 'UTF-8'); ?>" onclick="changeselectweek('<?php echo $prev_week; ?>')">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i> <?= __('Prev Week'); ?>
                 </button>
                 <div class="input-group mt-3" style="max-width: 200px;">
-                    <label for="selected_week_date" class="visually-hidden sr-only">Select Week Date</label>
-                    <input type="date" name="week_date" id="selected_week_date" value="<?php echo $start_date; ?>" onchange="changeselectweek(this.value)" class="form-control form-control-sm" style="height: 38px;" aria-label="Select Week Date">
+                    <label for="selected_week_date" class="visually-hidden sr-only"><?= __('Select Week Date'); ?></label>
+                    <input type="date" name="week_date" id="selected_week_date" value="<?php echo $start_date; ?>" onchange="changeselectweek(this.value)" class="form-control form-control-sm" style="height: 38px;" aria-label="<?= htmlspecialchars(__('Select Week Date'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
-                <button type="button" class="btn btn-outline-secondary week-nav-btn" title="Next Week" onclick="changeselectweek('<?php echo $next_week; ?>')">
-                    Next Week <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                <button type="button" class="btn btn-outline-secondary week-nav-btn" title="<?= htmlspecialchars(__('Next Week'), ENT_QUOTES, 'UTF-8'); ?>" onclick="changeselectweek('<?php echo $next_week; ?>')">
+                    <?= __('Next Week'); ?> <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </button>
             </div>
 
@@ -351,20 +351,20 @@ $sprogress = $statusprogress['full'] ?? array();
                 ?>
                 <div class="btn-group workflow-btn" id="status_id" <?php if($can_submit != 1 || $has_above_active){ ?> style="display:none;" <?php } ?>>
                     <button type="button" class="btn btn-info btn-md waves-effect waves-light" onclick="submitWeeklyWorkflowPopUp(<?php echo $cur_status; ?>, '<?php echo $start_date; ?>', '<?php echo $end_date; ?>')"> 
-                        <span class="fa fa-thumbs-up text-white"></span> &nbsp; Submit For Approval
+                        <span class="fa fa-thumbs-up text-white"></span> &nbsp; <?= __('Submit For Approval'); ?>
                     </button>   
                 </div> 
 
                 <?php if($has_above_active && $approved_count < count((array)$aboveactive)){ ?>
                 <div class="btn-group workflow-btn" id="status_procee_id">
                     <button type="button" class="btn btn-warning text-white btn-md waves-effect waves-light" style="pointer-events: none;"> 
-                        <span class="fa fa-clock-o text-white"></span> &nbsp; APPROVAL PENDING
+                        <span class="fa fa-clock-o text-white"></span> &nbsp; <?= __('APPROVAL PENDING'); ?>
                     </button>   
                 </div>  
                 <?php } elseif($has_above_active && $approved_count == count((array)$aboveactive)){ ?>
                 <div class="btn-group workflow-btn">
                     <button type="button" class="btn btn-success btn-md waves-effect waves-light" style="pointer-events: none;"> 
-                        <span class="fa fa-check text-white"></span> &nbsp; APPROVED
+                        <span class="fa fa-check text-white"></span> &nbsp; <?= __('APPROVED'); ?>
                     </button>   
                 </div>  
                 <?php } ?>
@@ -470,7 +470,7 @@ $sprogress = $statusprogress['full'] ?? array();
                                             <?php if($is_future){ ?>
                                                 <small class="text-muted"><i class="fa fa-lock"></i></small>
                                             <?php } elseif($is_pend_leave && !$is_appr_leave){ ?>
-                                                <span class="badge bg-warning text-white" title="Leave pending manager approval"><i class="fa fa-clock-o"></i> Pending</span>
+                                                <span class="badge bg-warning text-white" title="<?= htmlspecialchars(__('Leave pending manager approval'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-clock-o"></i> <?= __('Pending'); ?></span>
                                             <?php } ?>
                                         </div>
 
@@ -483,18 +483,18 @@ $sprogress = $statusprogress['full'] ?? array();
 
                                         <?php if($is_pend_leave && !$is_appr_leave){ ?>
                                             <div class="mb-1 att-status-text">
-                                                <small class="text-warning f-w-600 d-block"><i class="fa fa-hourglass-half"></i> <?php echo !empty($pend_leave_name) ? htmlspecialchars($pend_leave_name) : 'Leave'; ?> (Pending)</small>
+                                                <small class="text-warning f-w-600 d-block"><i class="fa fa-hourglass-half"></i> <?php echo !empty($pend_leave_name) ? htmlspecialchars($pend_leave_name) : 'Leave'; ?> <?= __('(Pending)'); ?></small>
                                             </div>
                                         <?php } ?>
 
                                         <!-- Attendance Action Buttons (P / Z / A / L) -->
                                         <?php if(!$is_future && $ccww != 'o' && $ccww != 'h' && !$is_appr_leave && !$is_pend_leave){ ?>
                                             <div class="mt-2 btn-att-group">
-                                                <button type="button" class="badge badge-hover" style="background-color:#2a9d8f;" title="Mark Present (8h)" aria-label="Mark Present (8h)"
+                                                <button type="button" class="badge badge-hover" style="background-color:#2a9d8f;" title="<?= htmlspecialchars(__('Mark Present (8h)'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Mark Present (8h)'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     <?php if($checkcurrent_status != 1){ ?> onclick="attendanceupload('p','<?php echo $predate; ?>',<?php echo $num; ?>,'Present')" <?php }else{ ?> onclick="alradysubmitedmanager()" <?php } ?>>P</button>
-                                                <button type="button" class="badge badge-hover" style="background-color:#e76f51;" title="Mark Half Day (4h)" aria-label="Mark Half Day (4h)"
+                                                <button type="button" class="badge badge-hover" style="background-color:#e76f51;" title="<?= htmlspecialchars(__('Mark Half Day (4h)'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Mark Half Day (4h)'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     <?php if($checkcurrent_status != 1){ ?> onclick="attendanceupload('z','<?php echo $predate; ?>',<?php echo $num; ?>,'Half Day')" <?php }else{ ?> onclick="alradysubmitedmanager()" <?php } ?>>Z</button>
-                                                <button type="button" class="badge badge-hover" style="background-color:#d62828;" title="Mark Absent" aria-label="Mark Absent"
+                                                <button type="button" class="badge badge-hover" style="background-color:#d62828;" title="<?= htmlspecialchars(__('Mark Absent'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Mark Absent'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     <?php if($checkcurrent_status != 1){ ?> onclick="attendanceupload('a','<?php echo $predate; ?>',<?php echo $num; ?>,'Absent')" <?php }else{ ?> onclick="alradysubmitedmanager()" <?php } ?>>A</button>
                                                 <?php if($ccedit == 0){ ?>
                                                     <button type="button" class="badge badge-hover" id="btn_leave_<?php echo $num; ?>" style="background-color:#e9c46a; color:#fff;" title="Apply Leave for <?php echo date('d M Y', strtotime($predate)); ?>" aria-label="Apply Leave for <?php echo date('d M Y', strtotime($predate)); ?>"
@@ -515,28 +515,28 @@ $sprogress = $statusprogress['full'] ?? array();
                 <!-- Summary Metrics -->
                 <div class="card shadow-sm mb-3">
                     <div class="card-header bg-light py-2">
-                        <h6 class="mb-0 f-w-600">Weekly Summary</h6>
+                        <h6 class="mb-0 f-w-600"><?= __('Weekly Summary'); ?></h6>
                     </div>
                     <div class="card-body p-2 text-center">
                         <div class="d-flex justify-content-around flex-wrap gap-1">
-                            <button type="button" class="btn btn-primary btn-sm p-2" title="Total Working Days">
-                                Work Days
+                            <button type="button" class="btn btn-primary btn-sm p-2" title="<?= htmlspecialchars(__('Total Working Days'), ENT_QUOTES, 'UTF-8'); ?>">
+                                <?= __('Work Days'); ?>
                                 <span class="badge bg-white text-primary d-block mt-1"><?php echo $data['all_data']['work_days'] ?? 0; ?></span>
                             </button>
-                            <button type="button" class="btn btn-success btn-sm p-2" style="background:#2a9d8f;" title="Present">
-                                Present
+                            <button type="button" class="btn btn-success btn-sm p-2" style="background:#2a9d8f;" title="<?= htmlspecialchars(__('Present'), ENT_QUOTES, 'UTF-8'); ?>">
+                                <?= __('Present'); ?>
                                 <span class="badge bg-white text-success d-block mt-1" id="pp_val"><?php echo $data['all_data']['present_days'] ?? 0; ?></span>
                             </button>
-                            <button type="button" class="btn btn-warning text-white btn-sm p-2" style="background:#e76f51;" title="Half Day">
-                                Half Day
+                            <button type="button" class="btn btn-warning text-white btn-sm p-2" style="background:#e76f51;" title="<?= htmlspecialchars(__('Half Day'), ENT_QUOTES, 'UTF-8'); ?>">
+                                <?= __('Half Day'); ?>
                                 <span class="badge bg-white text-dark d-block mt-1" id="half_val"><?php echo $data['all_data']['half_days'] ?? 0; ?></span>
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm p-2" style="background:#d62828;" title="Absent">
-                                Absent
+                            <button type="button" class="btn btn-danger btn-sm p-2" style="background:#d62828;" title="<?= htmlspecialchars(__('Absent'), ENT_QUOTES, 'UTF-8'); ?>">
+                                <?= __('Absent'); ?>
                                 <span class="badge bg-white text-danger d-block mt-1" id="ab_val"><?php echo $data['all_data']['absent_day'] ?? 0; ?></span>
                             </button>
-                            <button type="button" class="btn btn-info btn-sm p-2" style="background:#e9c46a; color:#000;" title="Leaves">
-                                Leaves
+                            <button type="button" class="btn btn-info btn-sm p-2" style="background:#e9c46a; color:#000;" title="<?= htmlspecialchars(__('Leaves'), ENT_QUOTES, 'UTF-8'); ?>">
+                                <?= __('Leaves'); ?>
                                 <span class="badge bg-white text-dark d-block mt-1" id="leave_val"><?php echo $data['all_data']['leave_days'] ?? 0; ?></span>
                             </button>
                             </button>
@@ -547,7 +547,7 @@ $sprogress = $statusprogress['full'] ?? array();
                 <!-- With Me (Draft) -->
                 <div class="card shadow-sm mb-2">
                     <div class="card-header bg-light py-2">
-                        <h6 class="mb-0 f-w-600">With Me (Drafts)</h6>
+                        <h6 class="mb-0 f-w-600"><?= __('With Me (Drafts)'); ?></h6>
                     </div>
                     <div class="card-body custom-scroll text-center p-2" style="max-height:140px; overflow-y:auto;">
                         <?php 
@@ -569,12 +569,12 @@ $sprogress = $statusprogress['full'] ?? array();
                                     </small>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <span class="badge bg-info">Draft</span>
+                                    <span class="badge bg-info"><?= __('Draft'); ?></span>
                                 </div>
                             </div>
                         <?php } } 
                         if($avbl_with_me == 0){ ?>
-                            <p class="text-muted small my-2">No unsubmitted draft entries for this week.</p>
+                            <p class="text-muted small my-2"><?= __('No unsubmitted draft entries for this week.'); ?></p>
                         <?php } ?>
                     </div>
                 </div>
@@ -582,7 +582,7 @@ $sprogress = $statusprogress['full'] ?? array();
                 <!-- With Manager (Pending Approval) -->
                 <div class="card shadow-sm mb-2">
                     <div class="card-header bg-light py-2">
-                        <h6 class="mb-0 f-w-600">With Manager (Pending)</h6>
+                        <h6 class="mb-0 f-w-600"><?= __('With Manager (Pending)'); ?></h6>
                     </div>
                     <div class="card-body custom-scroll text-center p-2" style="max-height:140px; overflow-y:auto;">
                         <?php 
@@ -605,12 +605,12 @@ $sprogress = $statusprogress['full'] ?? array();
                                     </small>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <span class="badge bg-warning text-white">Pending</span>
+                                    <span class="badge bg-warning text-white"><?= __('Pending'); ?></span>
                                 </div>
                             </div>
                         <?php } } 
                         if($avbl_with_mgr == 0){ ?>
-                            <p class="text-muted small my-2">No pending approval records for this week.</p>
+                            <p class="text-muted small my-2"><?= __('No pending approval records for this week.'); ?></p>
                         <?php } ?>
                     </div>
                 </div>
@@ -618,7 +618,7 @@ $sprogress = $statusprogress['full'] ?? array();
                 <!-- Approved -->
                 <div class="card shadow-sm mb-2">
                     <div class="card-header bg-light py-2">
-                        <h6 class="mb-0 f-w-600">Approved</h6>
+                        <h6 class="mb-0 f-w-600"><?= __('Approved'); ?></h6>
                     </div>
                     <div class="card-body custom-scroll text-center p-2" style="max-height:140px; overflow-y:auto;">
                         <?php 
@@ -640,12 +640,12 @@ $sprogress = $statusprogress['full'] ?? array();
                                     </small>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <span class="badge bg-success">Approved</span>
+                                    <span class="badge bg-success"><?= __('Approved'); ?></span>
                                 </div>
                             </div>
                         <?php } } 
                         if($avbl_appr == 0){ ?>
-                            <p class="text-muted small my-2">No approved records for this week.</p>
+                            <p class="text-muted small my-2"><?= __('No approved records for this week.'); ?></p>
                         <?php } ?>
                     </div>
                 </div>
