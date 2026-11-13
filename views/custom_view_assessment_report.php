@@ -11,13 +11,13 @@ $assessmentData = json_decode($configesponse,1);
                 <tr>
                     <th scope="col"></th>
                     <th scope="col"> </th>
-                    <td class="text-primary text-center font-size-h5" colspan="<?php echo $assessmentData['maxoptions']; ?>">Option  </td>
+                    <td class="text-primary text-center font-size-h5" colspan="<?php echo $assessmentData['maxoptions']; ?>"><?= __('Option'); ?>  </td>
                 </tr>
             </thead>
             <thead>
                 <tr>
                     <th scope="col" class="font-size-h5">#</th>
-                    <th scope="col" class="font-size-h5" style="width: 30%;">Questions </th>
+                    <th scope="col" class="font-size-h5" style="width: 30%;"><?= __('Questions'); ?> </th>
                     <?php for($op_count=1; $op_count<=$assessmentData['maxoptions']; $op_count++) { ?>
                     <th scope="col" class="font-size-h5"><?php echo $op_count; ?> </th>
                     <?php } ?>
@@ -36,10 +36,10 @@ $assessmentData = json_decode($configesponse,1);
 
                 <tr>
                     <td></td>
-                    <td><span class="text-success">Number of Responded </span></td>
+                    <td><span class="text-success"><?= __('Number of Responded'); ?> </span></td>
                     <?php foreach($assessmentData['option'][$qkey]['answer'] as $optionans) {
                         ?>
-                    <td> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="Number Of Responded" style="vertical-align: middle;"><?php echo $optionans; ?> </span> </td>
+                    <td> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="<?= htmlspecialchars(__('Number Of Responded'), ENT_QUOTES, 'UTF-8'); ?>" style="vertical-align: middle;"><?php echo $optionans; ?> </span> </td>
                     <?php } ?>
                 </tr>
                 <?php }?>
