@@ -61,7 +61,7 @@ if($_POST['type'] =="login"){
 }
 }else{ ?>
               <div class="card-px text-center py-20 m-t-30">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
@@ -106,7 +106,7 @@ if($_POST['type'] =="login"){
 }
 }else{ ?>
               <div class="card-px text-center py-20 m-t-30">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
@@ -162,9 +162,9 @@ if($_POST['type'] =="login"){
 
     <div class="align-middle">
   <?php if($_SESSION['user_image'][$audittrailv['user_id']] !=""){?>
-    <img src="uploads/all/<?php echo $_SESSION['user_image'][$audittrailv['user_id']]; ?>"  class="img-radius img-30 align-top m-r-15" alt="User Profile">
+    <img src="uploads/all/<?php echo $_SESSION['user_image'][$audittrailv['user_id']]; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
   <?php } else { ?>
-    <span  alt="user" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($_SESSION['users'][$audittrailv['user_id']]); ?></span>
+    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($_SESSION['users'][$audittrailv['user_id']]); ?></span>
   <?php } ?>
   <div class="d-inline-block width73 text-capitalize">
    <?php
@@ -191,7 +191,7 @@ if($audittrailv['type'] == "UPDATE" || $audittrailv['type'] == "INSERT"){ ?>
 }
 }else{ ?>
               <div class="card-px text-center py-20 m-t-30">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
