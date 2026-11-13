@@ -30,9 +30,9 @@
 <div class="banner">
     <img src="assets/images/student-courses/banner-1.jpg" class="" alt="">
     <div class="banner-text">
-        <h2>Start managing supplier invoices with ease!</h2>
-        <p>Helps you in managing: Suppliers, Supplier bills and Payments. Bills Tak does this all through your modern Web Browser. Be assured to track your bills and payments from anywhere anytime.</p>
-        <a href="index.php?option=COM_LIST_PURCHASE_INVOICES" class="btn-white b-radius-5 text-uppercase f-w-600">Browse Invoices</a>
+        <h2><?= __('Start managing supplier invoices with ease!'); ?></h2>
+        <p><?= __('Helps you in managing: Suppliers, Supplier bills and Payments. Bills Tak does this all through your modern Web Browser. Be assured to track your bills and payments from anywhere anytime.'); ?></p>
+        <a href="index.php?option=COM_LIST_PURCHASE_INVOICES" class="btn-white b-radius-5 text-uppercase f-w-600"><?= __('Browse Invoices'); ?></a>
     </div>
 </div>
 <div class="card">
@@ -46,7 +46,7 @@
              </div>
              <div class="flex">
                 <a href="#"><div class="card-title f-w-600 f-16"><?php echo count((array)$vendordashboardd['invice_cnt'])."+ Invoices"?></div>
-                    <p class="card-subtitle text-muted mt-1 f-12"> Total Number Of Invoices</p>
+                    <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Invoices'); ?></p>
                 </a>
             </div>
         </div>
@@ -57,7 +57,7 @@
          <div class="flex">
            <a href="#">
             <div class="card-title f-w-600 f-16"><?php echo count((array)$vendordashboardd['approve_cnt'])."+ Invoices"?></div>
-            <p class="card-subtitle text-muted mt-1 f-12"> Total Number Of Invoices Cleared</p>
+            <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Invoices Cleared'); ?></p>
         </a>
     </div>
 </div>
@@ -68,7 +68,7 @@
     <div class="flex">
        <a href="#">
         <div class="card-title f-w-600 f-16"><?php echo count((array)$vendordashboardd['pending_list'])."+ Invoices"?></div>
-        <p class="card-subtitle text-muted mt-1 f-12"> Total Number Of Invoices Pendding</p>
+        <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Invoices Pendding'); ?></p>
     </a>
 </div>
 </div>
@@ -94,7 +94,7 @@
                                     <div class="d-flex align-items-center col-md">
                                         <i class="fa fa-envelope text-muted f-14 m-r-10"></i>
                                         <div class="flex">
-                                            <p href="#" class="card-title f-14 f-w-600">INVISION</p>
+                                            <p href="#" class="card-title f-14 f-w-600"><?= __('INVISION'); ?></p>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-center col-md">
@@ -106,7 +106,7 @@
                                         <div class="flex">
                                             <div class="dropdown-primary dropdown">
                                                 <div class="displayChatbox " data-bs-toggle="dropdown">
-                                                    <span class="badge bg-c-red">More +<?php echo count($notificationlist);?></span>
+                                                    <span class="badge bg-c-red"><?= __('More +'); ?><?php echo count($notificationlist);?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -124,7 +124,7 @@
                            <div class="card social-card custom_hover_card" style="min-height: 365px;">
                               <div class="card-body text-center">
                                  <div class="text-facebook m-b-20"><i class="ti-announcement "></i></div>
-                                 <h3 class="text-facebook f-w-700">Announcements</h3>
+                                 <h3 class="text-facebook f-w-700"><?= __('Announcements'); ?></h3>
                                  <?php
                                  $anouncement =  API."?mode=togetlatestannouncement";
                                  $anouncement_list = callAPI($anouncement);
@@ -139,7 +139,7 @@
 
                        <div class="card new-cust-card custom_hover_card">
                           <div class="card-header">
-                             <h5>Holidays List</h5> <span class="form-label label label-success"><?php echo $total_holidays; ?></span>
+                             <h5><?= __('Holidays List'); ?></h5> <span class="form-label label label-success"><?php echo $total_holidays; ?></span>
                          </div>
                          <div class="card-block custom-scroll" style=" height: 300px;">
                              <?php
@@ -149,7 +149,7 @@
                                     $Notification_DateTime = $holiday['holiday_date'];
                                     ?>
                                     <div class="align-middle m-b-35">
-                                       <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($Notification_Message); ?></span>
+                                       <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($Notification_Message); ?></span>
                                        <div class="d-inline-block">
                                           <a href="#!"><h6 class="f-14"><?php echo $Notification_Message; ?></h6></a>
                                           <p class="text-muted m-b-0"><?php echo $Notification_DateTime; ?></p>
@@ -157,7 +157,7 @@
                                   </div>
                               <?php } ?>
                               <?php } else {
-                                  echo "<h4><i class='fa fa-warning'></i> No Holidays Available</h4>";
+                                  echo "<h4><i class='fa fa-warning'></i> ".__('No Holidays Available')."</h4>";
                               } ?>
                           </div>
                       </div>
@@ -165,10 +165,10 @@
                   <div class="col-xl-12 col-md-12" >
                     <div class="card table-card">
                        <div class="card-header">
-                          <h5>Pending  Invoices</h5>
+                          <h5><?= __('Pending Invoices'); ?></h5>
                           <div class="card-header-right table-card-header ">
                               <a target="_blank" href="index.php?option=COM_LIST_TABLE_FILTERS&TBALE_NAME=purchase_invoices" class="btn btn-primary mb-2 desktop-view">
-                              History </a>
+                              <?= __('History'); ?> </a>
                           </div>
                       </div>
                       <div class="card-block">
@@ -177,12 +177,12 @@
                                 <thead>
                                    <tr>
                                       <th scope="col">#</th>
-                                      <th scope="col">Vendor</th>
-                                      <th scope="col">Invoices Number</th>
-                                      <th scope="col">Date</th>
-                                      <th scope="col">Price</th>
-                                      <th scope="col">Status</th>
-                                      <th scope="col">Action</th>
+                                      <th scope="col"><?= __('Vendor'); ?></th>
+                                      <th scope="col"><?= __('Invoices Number'); ?></th>
+                                      <th scope="col"><?= __('Date'); ?></th>
+                                      <th scope="col"><?= __('Price'); ?></th>
+                                      <th scope="col"><?= __('Status'); ?></th>
+                                      <th scope="col"><?= __('Action'); ?></th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -210,7 +210,7 @@
 }
 }else{
 
-                                  echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> No Bills Created</h4></td></tr>";
+                                  echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Bills Created')."</h4></td></tr>";
                               } ?>
 
                           </tbody>
