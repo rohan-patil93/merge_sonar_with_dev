@@ -13,9 +13,9 @@ $data = $listdata['subdata'];
 ?>
 <div class="modal-header card-header">
 
-    <h5 class="text-white">Vendor rate card Employees</h5>
+    <h5 class="text-white"><?= __('Vendor rate card Employees'); ?></h5>
 
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 
 </div>
 
@@ -40,7 +40,7 @@ $data = $listdata['subdata'];
     </div>
     <div class="card mt-2">
       <div class="card-header">
-        <h5 class="f-30">Employees</h5>
+        <h5 class="f-30"><?= __('Employees'); ?></h5>
         <div class="card-header-right">
 
         </div>
@@ -49,12 +49,12 @@ $data = $listdata['subdata'];
         <table class=" table table-bordered">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Employee Code</th>
-                <th scope="col">Employee Name</th>
-                <th scope="col">Effective From</th>
-                <th scope="col">Effective To</th>
-                <th scope="col">Total Experience</th>
-                <th scope="col">Similar Vendor/ Rate</th>
+                <th scope="col"><?= __('Employee Code'); ?></th>
+                <th scope="col"><?= __('Employee Name'); ?></th>
+                <th scope="col"><?= __('Effective From'); ?></th>
+                <th scope="col"><?= __('Effective To'); ?></th>
+                <th scope="col"><?= __('Total Experience'); ?></th>
+                <th scope="col"><?= __('Similar Vendor/ Rate'); ?></th>
             </tr>
             <?php $k=1; if(count((array)$data)>0){ foreach($listdata['fulldata'] as $emp){ ?>
             <tr>
@@ -73,7 +73,7 @@ $data = $listdata['subdata'];
 }
 }else{?>
                 <tr>
-                    <td colspan="7"> No data Found</td>
+                    <td colspan="7"> <?= __('No data Found'); ?></td>
                 </tr>
             <?php } ?>
         </table>
