@@ -56,24 +56,24 @@ if (empty($alerts)) {
     <div class="card-header bg-primary">
       <div class="row align-items-center">
         <div class="col-lg-6">
-          <h3 class="mb-0 f-w-600">Infisuite Manufacturing Dashboard</h3>
-          <p class="mb-0 mfg-role-note">Role: MANFACTRUING_ADMIN | Full control, approvals, stock, production, QC and reports</p>
+          <h3 class="mb-0 f-w-600"><?= __('Infisuite Manufacturing Dashboard'); ?></h3>
+          <p class="mb-0 mfg-role-note"><?= __('Role: MANFACTRUING_ADMIN | Full control, approvals, stock, production, QC and reports'); ?></p>
         </div>
         <div class="col-lg-2">
           <div class="form-group mb-0">
-            <select aria-label="Select option" class="form-control border">
-              <option>All Plants</option>
+            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border">
+              <option><?= __('All Plants'); ?></option>
             </select>
           </div>
         </div>
         <div class="col-lg-2">
           <div class="form-group mb-0">
-            <input type="date" class="form-control" aria-label="From date">
+            <input type="date" class="form-control" aria-label="<?= htmlspecialchars(__('From date'), ENT_QUOTES, 'UTF-8'); ?>">
           </div>
         </div>
         <div class="col-lg-2">
           <div class="form-group mb-0">
-            <input type="date" class="form-control" aria-label="To date">
+            <input type="date" class="form-control" aria-label="<?= htmlspecialchars(__('To date'), ENT_QUOTES, 'UTF-8'); ?>">
           </div>
         </div>
       </div>
@@ -85,32 +85,32 @@ if (empty($alerts)) {
       <div class="row">
         <div class="col-xl-4 col-md-6">
           <div class="card comp-card">
-            <div class="card-body"><h3 class="f-w-700 text-c-blue"><?php echo (int)($summary['total_work_orders'] ?? 0); ?></h3><p class="m-b-0">Work Orders</p></div>
+            <div class="card-body"><h3 class="f-w-700 text-c-blue"><?php echo (int)($summary['total_work_orders'] ?? 0); ?></h3><p class="m-b-0"><?= __('Work Orders'); ?></p></div>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
           <div class="card comp-card">
-            <div class="card-body"><h3 class="f-w-700 text-c-green"><?php echo mfgAdminDashboardValue($completedQty); ?></h3><p class="m-b-0">Produced Qty</p></div>
+            <div class="card-body"><h3 class="f-w-700 text-c-green"><?php echo mfgAdminDashboardValue($completedQty); ?></h3><p class="m-b-0"><?= __('Produced Qty'); ?></p></div>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
           <div class="card comp-card">
-            <div class="card-body"><h3 class="f-w-700 text-c-yellow"><?php echo mfgAdminDashboardValue($completionPercent, 2); ?>%</h3><p class="m-b-0">Completion</p></div>
+            <div class="card-body"><h3 class="f-w-700 text-c-yellow"><?php echo mfgAdminDashboardValue($completionPercent, 2); ?>%</h3><p class="m-b-0"><?= __('Completion'); ?></p></div>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
           <div class="card comp-card">
-            <div class="card-body"><h3 class="f-w-700 text-c-red"><?php echo mfgAdminDashboardValue($material['shortage_qty'] ?? 0); ?></h3><p class="m-b-0">Material Shortage</p></div>
+            <div class="card-body"><h3 class="f-w-700 text-c-red"><?php echo mfgAdminDashboardValue($material['shortage_qty'] ?? 0); ?></h3><p class="m-b-0"><?= __('Material Shortage'); ?></p></div>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
           <div class="card comp-card">
-            <div class="card-body"><h3 class="f-w-700 text-c-black"><?php echo mfgAdminDashboardValue($qcFailRate, 2); ?>%</h3><p class="m-b-0">QC Fail Rate</p></div>
+            <div class="card-body"><h3 class="f-w-700 text-c-black"><?php echo mfgAdminDashboardValue($qcFailRate, 2); ?>%</h3><p class="m-b-0"><?= __('QC Fail Rate'); ?></p></div>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
           <div class="card comp-card">
-            <div class="card-body"><h3 class="f-w-700 text-c-blue"><?php echo mfgAdminDashboardValue($operationHours, 2); ?>h</h3><p class="m-b-0">Operation Time</p></div>
+            <div class="card-body"><h3 class="f-w-700 text-c-blue"><?php echo mfgAdminDashboardValue($operationHours, 2); ?>h</h3><p class="m-b-0"><?= __('Operation Time'); ?></p></div>
           </div>
         </div>
       </div>
@@ -118,7 +118,7 @@ if (empty($alerts)) {
     <div class="col-lg-6">
       <div class="card">
         <div class="card-header">
-          <h5 class="text-danger"><i class="fa fa-bell m-r-10"></i>Alerts</h5>
+          <h5 class="text-danger"><i class="fa fa-bell m-r-10"></i><?= __('Alerts'); ?></h5>
         </div>
         <div class="card-block list-tag">
           <ul>
@@ -135,10 +135,10 @@ if (empty($alerts)) {
     <div class="col-lg-8">
       <div class="card">
         <div class="card-header">
-          <h5>Production Trend</h5>
+          <h5><?= __('Production Trend'); ?></h5>
           <div class="card-header-right ml-5">
-            <div class="legend-item"><span class="dot dot-one"></span><span class="f-w-600">Request</span></div>
-            <div class="legend-item"><span class="dot dot-two"></span><span class="f-w-600">Produced</span></div>
+            <div class="legend-item"><span class="dot dot-one"></span><span class="f-w-600"><?= __('Request'); ?></span></div>
+            <div class="legend-item"><span class="dot dot-two"></span><span class="f-w-600"><?= __('Produced'); ?></span></div>
           </div>
         </div>
         <div class="card-block">
@@ -148,33 +148,33 @@ if (empty($alerts)) {
     </div>
     <div class="col-lg-4">
       <div class="card">
-        <div class="card-header"><h5>Quality Defects</h5></div>
+        <div class="card-header"><h5><?= __('Quality Defects'); ?></h5></div>
         <div class="card-block p-0 mt-3">
           <div id="adminQcPie" class="mfg-chart-small"></div>
         </div>
         <div class="mfg-chart-summary">
-          <span><i class="mfg-chart-color-1"></i>Pending: <?php echo (int)($qc['pending'] ?? 0); ?></span>
-          <span><i class="mfg-chart-color-2"></i>Passed: <?php echo (int)($qc['passed'] ?? 0); ?></span>
-          <span><i class="mfg-chart-color-3"></i>Failed: <?php echo (int)($qc['failed'] ?? 0); ?></span>
+          <span><i class="mfg-chart-color-1"></i><?= __('Pending'); ?>: <?php echo (int)($qc['pending'] ?? 0); ?></span>
+          <span><i class="mfg-chart-color-2"></i><?= __('Passed'); ?>: <?php echo (int)($qc['passed'] ?? 0); ?></span>
+          <span><i class="mfg-chart-color-3"></i><?= __('Failed'); ?>: <?php echo (int)($qc['failed'] ?? 0); ?></span>
         </div>
       </div>
     </div>
 
     <div class="col-lg-12">
       <div class="card">
-        <div class="card-header"><h5>Work Orders</h5></div>
+        <div class="card-header"><h5><?= __('Work Orders'); ?></h5></div>
         <div class="card-body">
           <div class="table-responsive mt-3">
             <table class="table table-bordered table-sm" id="workOrdersTable">
               <tr style="background-color: #eeeeee;">
-                <th scope="col">Order No</th>
-                <th scope="col">Product</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Produced</th>
-                <th scope="col">Production</th>
-                <th scope="col">Approval</th>
-                <th scope="col">Shortage</th>
-                <th scope="col">ETA</th>
+                <th scope="col"><?= __('Order No'); ?></th>
+                <th scope="col"><?= __('Product'); ?></th>
+                <th scope="col"><?= __('Quantity'); ?></th>
+                <th scope="col"><?= __('Produced'); ?></th>
+                <th scope="col"><?= __('Production'); ?></th>
+                <th scope="col"><?= __('Approval'); ?></th>
+                <th scope="col"><?= __('Shortage'); ?></th>
+                <th scope="col"><?= __('ETA'); ?></th>
               </tr>
               <?php foreach ((array)$workOrders as $wo) { ?>
                 <tr class="work-order-row cursor-pointer" data-bs-toggle="modal" data-bs-target="#order-number" data-workorder="<?php echo htmlspecialchars(json_encode($wo), ENT_QUOTES, 'UTF-8'); ?>">
@@ -203,20 +203,20 @@ if (empty($alerts)) {
 
     <div class="col-lg-8">
       <div class="card">
-        <div class="card-header"><h5>Machine & Line Status</h5></div>
+        <div class="card-header"><h5><?= htmlspecialchars(__('Machine & Line Status'), ENT_QUOTES, 'UTF-8'); ?></h5></div>
         <div class="card-block mt-3">
           <div class="row">
             <div class="col-xl-3 col-md-6">
-              <div class="card prod-p-card card-green"><div class="card-body"><h6 class="m-b-5">Active Orders</h6><h3 class="m-b-0 f-w-700"><?php echo (int)($production['active'] ?? 0); ?></h3><p class="m-b-0 f-w-600">In production</p></div></div>
+              <div class="card prod-p-card card-green"><div class="card-body"><h6 class="m-b-5"><?= __('Active Orders'); ?></h6><h3 class="m-b-0 f-w-700"><?php echo (int)($production['active'] ?? 0); ?></h3><p class="m-b-0 f-w-600"><?= __('In production'); ?></p></div></div>
             </div>
             <div class="col-xl-3 col-md-6">
-              <div class="card prod-p-card card-yellow"><div class="card-body"><h6 class="m-b-5">Hold Orders</h6><h3 class="m-b-0 f-w-700"><?php echo (int)($production['hold'] ?? 0); ?></h3><p class="m-b-0 f-w-600">Needs action</p></div></div>
+              <div class="card prod-p-card card-yellow"><div class="card-body"><h6 class="m-b-5"><?= __('Hold Orders'); ?></h6><h3 class="m-b-0 f-w-700"><?php echo (int)($production['hold'] ?? 0); ?></h3><p class="m-b-0 f-w-600"><?= __('Needs action'); ?></p></div></div>
             </div>
             <div class="col-xl-3 col-md-6">
-              <div class="card prod-p-card card-green"><div class="card-body"><h6 class="m-b-5">Machines Planned</h6><h3 class="m-b-0 f-w-700"><?php echo (int)($resources['machine_required'] ?? 0); ?></h3><p class="m-b-0 f-w-600">From operations</p></div></div>
+              <div class="card prod-p-card card-green"><div class="card-body"><h6 class="m-b-5"><?= __('Machines Planned'); ?></h6><h3 class="m-b-0 f-w-700"><?php echo (int)($resources['machine_required'] ?? 0); ?></h3><p class="m-b-0 f-w-600"><?= __('From operations'); ?></p></div></div>
             </div>
             <div class="col-xl-3 col-md-6">
-              <div class="card prod-p-card card-red"><div class="card-body"><h6 class="m-b-5">Delayed Orders</h6><h3 class="m-b-0 f-w-700"><?php echo (int)($summary['delayed_orders'] ?? 0); ?></h3><p class="m-b-0 f-w-600">Past planned end</p></div></div>
+              <div class="card prod-p-card card-red"><div class="card-body"><h6 class="m-b-5"><?= __('Delayed Orders'); ?></h6><h3 class="m-b-0 f-w-700"><?php echo (int)($summary['delayed_orders'] ?? 0); ?></h3><p class="m-b-0 f-w-600"><?= __('Past planned end'); ?></p></div></div>
             </div>
           </div>
         </div>
@@ -224,14 +224,14 @@ if (empty($alerts)) {
     </div>
     <div class="col-lg-4">
       <div class="card">
-        <div class="card-header"><h5>Material & Inventory</h5></div>
+        <div class="card-header"><h5><?= htmlspecialchars(__('Material & Inventory'), ENT_QUOTES, 'UTF-8'); ?></h5></div>
         <div class="card-block">
           <div class="table-responsive">
             <table class="table table-bordered table-sm">
-              <tr><td>Required Material</td><th scope="col" class="text-end"><?php echo mfgAdminDashboardValue($material['required_qty'] ?? 0); ?> Units</th></tr>
-              <tr><td>Received Material</td><th scope="col" class="text-end"><?php echo mfgAdminDashboardValue($material['received_qty'] ?? 0); ?> Units</th></tr>
-              <tr><td class="text-danger">Shortage Qty</td><th scope="col" class="text-danger text-end"><?php echo mfgAdminDashboardValue($material['shortage_qty'] ?? 0); ?> Units</th></tr>
-              <tr><td class="text-danger">Shortage Lines</td><th scope="col" class="text-danger text-end"><?php echo (int)($material['shortage_lines'] ?? 0); ?></th></tr>
+              <tr><td><?= __('Required Material'); ?></td><th scope="col" class="text-end"><?php echo mfgAdminDashboardValue($material['required_qty'] ?? 0); ?> <?= __('Units'); ?></th></tr>
+              <tr><td><?= __('Received Material'); ?></td><th scope="col" class="text-end"><?php echo mfgAdminDashboardValue($material['received_qty'] ?? 0); ?> <?= __('Units'); ?></th></tr>
+              <tr><td class="text-danger"><?= __('Shortage Qty'); ?></td><th scope="col" class="text-danger text-end"><?php echo mfgAdminDashboardValue($material['shortage_qty'] ?? 0); ?> <?= __('Units'); ?></th></tr>
+              <tr><td class="text-danger"><?= __('Shortage Lines'); ?></td><th scope="col" class="text-danger text-end"><?php echo (int)($material['shortage_lines'] ?? 0); ?></th></tr>
             </table>
           </div>
         </div>
@@ -240,7 +240,7 @@ if (empty($alerts)) {
 
     <div class="col-lg-6">
       <div class="card">
-        <div class="card-header"><h5>Downtime Causes</h5></div>
+        <div class="card-header"><h5><?= __('Downtime Causes'); ?></h5></div>
         <div class="card-block">
           <div id="adminStatusPie" class="mfg-chart-small"></div>
         </div>
@@ -253,14 +253,14 @@ if (empty($alerts)) {
     </div>
     <div class="col-lg-6">
       <div class="card">
-        <div class="card-header"><h5>Workforce Summary</h5></div>
+        <div class="card-header"><h5><?= __('Workforce Summary'); ?></h5></div>
         <div class="card-block">
           <div class="table-responsive mt-4">
             <table class="table table-bordered">
-              <tr><td>Manpower Required</td><th scope="col" class="text-end"><?php echo mfgAdminDashboardValue($resources['manpower_required'] ?? 0); ?></th></tr>
-              <tr><td>Machine Required</td><th scope="col" class="text-end"><?php echo (int)($resources['machine_required'] ?? 0); ?></th></tr>
-              <tr><td>Operation Hours</td><th scope="col" class="text-end"><?php echo mfgAdminDashboardValue($operationHours, 2); ?></th></tr>
-              <tr><td>Operation Cost</td><th scope="col" class="text-end"><?php echo mfgAdminDashboardValue($resources['operation_cost'] ?? 0, 2); ?></th></tr>
+              <tr><td><?= __('Manpower Required'); ?></td><th scope="col" class="text-end"><?php echo mfgAdminDashboardValue($resources['manpower_required'] ?? 0); ?></th></tr>
+              <tr><td><?= __('Machine Required'); ?></td><th scope="col" class="text-end"><?php echo (int)($resources['machine_required'] ?? 0); ?></th></tr>
+              <tr><td><?= __('Operation Hours'); ?></td><th scope="col" class="text-end"><?php echo mfgAdminDashboardValue($operationHours, 2); ?></th></tr>
+              <tr><td><?= __('Operation Cost'); ?></td><th scope="col" class="text-end"><?php echo mfgAdminDashboardValue($resources['operation_cost'] ?? 0, 2); ?></th></tr>
             </table>
           </div>
         </div>
@@ -269,20 +269,20 @@ if (empty($alerts)) {
 
     <div class="col-lg-4">
       <div class="card">
-        <div class="card-header"><h5>Approval Actions</h5></div>
+        <div class="card-header"><h5><?= __('Approval Actions'); ?></h5></div>
         <div class="card-block">
           <div class="mfg-action-grid">
-            <a class="mfg-action-tile" href="index.php?option=COM_INSERT_MANUFACTURING_FORECAST"><i class="fas fa-chart-line"></i>Forecast</a>
-            <a class="mfg-action-tile" href="index.php?option=COM_INSERT_MANUFACTURING_FIRM_ORDERS"><i class="fas fa-calendar-check"></i>Firm Order</a>
-            <a class="mfg-action-tile" href="index.php?option=COM_INSERT_MANUFACTURING_WORK_ORDERS"><i class="fas fa-cogs"></i>Work Order</a>
-            <a class="mfg-action-tile" href="index.php?option=COM_INSERT_PROCESS_QUALITY_CHECK"><i class="fas fa-check-square"></i>QC Review</a>
+            <a class="mfg-action-tile" href="index.php?option=COM_INSERT_MANUFACTURING_FORECAST"><i class="fas fa-chart-line"></i><?= __('Forecast'); ?></a>
+            <a class="mfg-action-tile" href="index.php?option=COM_INSERT_MANUFACTURING_FIRM_ORDERS"><i class="fas fa-calendar-check"></i><?= __('Firm Order'); ?></a>
+            <a class="mfg-action-tile" href="index.php?option=COM_INSERT_MANUFACTURING_WORK_ORDERS"><i class="fas fa-cogs"></i><?= __('Work Order'); ?></a>
+            <a class="mfg-action-tile" href="index.php?option=COM_INSERT_PROCESS_QUALITY_CHECK"><i class="fas fa-check-square"></i><?= __('QC Review'); ?></a>
           </div>
         </div>
       </div>
     </div>
     <div class="col-lg-8">
       <div class="card">
-        <div class="card-header"><h5>Stock Position</h5></div>
+        <div class="card-header"><h5><?= __('Stock Position'); ?></h5></div>
         <div class="card-block">
           <div id="adminStockBar" class="mfg-chart-small"></div>
           <div class="mfg-chart-summary">
@@ -300,35 +300,35 @@ if (empty($alerts)) {
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Work Order Details</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title"><?= __('Work Order Details'); ?></h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
       </div>
       <div class="modal-body">
-        <h5 class="text-primary">Work Order</h5>
+        <h5 class="text-primary"><?= __('Work Order'); ?></h5>
         <div class="table-responsive mt-4">
-          <table class="table table-sm mfg-work-order-info"><thead><tr class="visually-hidden"><th scope="col">Data</th></tr></thead></table>
+          <table class="table table-sm mfg-work-order-info"><thead><tr class="visually-hidden"><th scope="col"><?= __('Data'); ?></th></tr></thead></table>
         </div>
         <div class="card-block list-tag">
           <div class="row">
             <div class="col-lg-6">
-              <h5 class="f-w-600 mb-3 mt-3">Material Consumption</h5>
+              <h5 class="f-w-600 mb-3 mt-3"><?= __('Material Consumption'); ?></h5>
               <ul class="mfg-material-list"></ul>
             </div>
             <div class="col-lg-6">
-              <h5 class="f-w-600 mb-3 mt-3">Operation Summary</h5>
+              <h5 class="f-w-600 mb-3 mt-3"><?= __('Operation Summary'); ?></h5>
               <ul class="mfg-operation-list"></ul>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal"><?= __('Close'); ?></button>
       </div>
     </div>
   </div>
 </div>
 
-<textarea aria-label="Mfg Dashboard Chart Data" id="mfgDashboardChartData" class="d-none"><?php echo htmlspecialchars(json_encode($adminChartData), ENT_QUOTES, 'UTF-8'); ?></textarea>
+<textarea aria-label="<?= htmlspecialchars(__('Mfg Dashboard Chart Data'), ENT_QUOTES, 'UTF-8'); ?>" id="mfgDashboardChartData" class="d-none"><?php echo htmlspecialchars(json_encode($adminChartData), ENT_QUOTES, 'UTF-8'); ?></textarea>
 <script src="assets/js/custom_view_manufacturing_role_charts.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -351,9 +351,9 @@ if (empty($alerts)) {
         var wo = parseJson(row.getAttribute("data-workorder"));
         document.querySelector("#order-number h5.text-primary").textContent = (wo.transaction_no || "Work Order") + " - " + (wo.product_name || "");
         document.querySelector("#order-number .mfg-work-order-info").innerHTML =
-          "<tr><th scope="col">Planned Qty:</th><td>" + escapeHtml(wo.planned_qty) + "</td><th scope="col">Produced Qty:</th><td>" + escapeHtml(wo.completed_qty) + "</td></tr>" +
-          "<tr><th scope="col">Production:</th><td>" + escapeHtml(wo.production_status_name) + "</td><th scope="col">Approval:</th><td>" + escapeHtml(wo.approval_status_name) + "</td></tr>" +
-          "<tr><th scope="col">Start Date:</th><td>" + escapeHtml(wo.planned_start_date) + "</td><th scope="col">End Date:</th><td>" + escapeHtml(wo.planned_end_date) + "</td></tr>";
+          "<tr><th scope="col"><?= htmlspecialchars(__('Planned Qty'), ENT_QUOTES, 'UTF-8'); ?>:</th><td>" + escapeHtml(wo.planned_qty) + "</td><th scope="col"><?= htmlspecialchars(__('Produced Qty'), ENT_QUOTES, 'UTF-8'); ?>:</th><td>" + escapeHtml(wo.completed_qty) + "</td></tr>" +
+          "<tr><th scope="col"><?= htmlspecialchars(__('Production'), ENT_QUOTES, 'UTF-8'); ?>:</th><td>" + escapeHtml(wo.production_status_name) + "</td><th scope="col"><?= htmlspecialchars(__('Approval'), ENT_QUOTES, 'UTF-8'); ?>:</th><td>" + escapeHtml(wo.approval_status_name) + "</td></tr>" +
+          "<tr><th scope="col"><?= htmlspecialchars(__('Start Date'), ENT_QUOTES, 'UTF-8'); ?>:</th><td>" + escapeHtml(wo.planned_start_date) + "</td><th scope="col"><?= htmlspecialchars(__('End Date'), ENT_QUOTES, 'UTF-8'); ?>:</th><td>" + escapeHtml(wo.planned_end_date) + "</td></tr>";
 
         var materials = parseJson(wo.materials);
         document.querySelector("#order-number .mfg-material-list").innerHTML = materials.length
@@ -363,7 +363,7 @@ if (empty($alerts)) {
                 " - Required " + escapeHtml(item.request_qty) + " " + escapeHtml(item.uom) +
                 ", Received " + escapeHtml(item.stock_receipts_qty) + "</li>";
             }).join("")
-          : "<li>No materials listed</li>";
+          : "<li><?= htmlspecialchars(__('No materials listed'), ENT_QUOTES, 'UTF-8'); ?></li>";
 
         var operations = parseJson(wo.operations);
         document.querySelector("#order-number .mfg-operation-list").innerHTML = operations.length
@@ -373,7 +373,7 @@ if (empty($alerts)) {
                 " - " + escapeHtml(operation.operation_time) + " mins, manpower: " +
                 escapeHtml(operation.operation_manpower) + "</li>";
             }).join("")
-          : "<li>No operations recorded</li>";
+          : "<li><?= htmlspecialchars(__('No operations recorded'), ENT_QUOTES, 'UTF-8'); ?></li>";
       });
     });
   });
