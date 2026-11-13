@@ -30,11 +30,11 @@ $dashboardcall = "Y";
 <div class="banner">
     <img src="assets/images/student-courses/banner-1.jpg" class="" alt="">
     <div class="banner-text">
-        <h2>Start managing Petty Cash Boxes with ease!</h2>
-        <p>Helps you in managing: Petty Cash Boxes Request and Payments. Renatl does this all through your modern Web Browser. Be assured to track your bills and payments from anywhere anytime.</p>
-        <a href="index.php?option=COM_INSERT_PETTY_CASH_BOX_TOPUP_REQUESTS" class="btn-white b-radius-5 text-uppercase f-w-600 m-r-10"> TopUp Request</a>
+        <h2><?= __('Start managing Petty Cash Boxes with ease!'); ?></h2>
+        <p><?= __('Helps you in managing: Petty Cash Boxes Request and Payments. Renatl does this all through your modern Web Browser. Be assured to track your bills and payments from anywhere anytime.'); ?></p>
+        <a href="index.php?option=COM_INSERT_PETTY_CASH_BOX_TOPUP_REQUESTS" class="btn-white b-radius-5 text-uppercase f-w-600 m-r-10"> <?= __('TopUp Request'); ?></a>
 
-        <a href="index.php?option=COM_INSERT_PETTY_CASH" class="btn-white b-radius-5 text-uppercase f-w-600 m-r-10"> Create Expenses</a>
+        <a href="index.php?option=COM_INSERT_PETTY_CASH" class="btn-white b-radius-5 text-uppercase f-w-600 m-r-10"> <?= __('Create Expenses'); ?></a>
 
 
     </div>
@@ -48,8 +48,8 @@ $dashboardcall = "Y";
                         <i class="fa fa-user-plus f-20"></i>
                     </div>
                     <div class="flex">
-                        <a href="index.php?option=COM_LIST_TENANAT_CUSTOMERS"><div class="card-title f-w-600 f-16"><?php echo $total_cnt['total_petty_cash_box_owner']; ?> Boxes</div>
-                            <p class="card-subtitle text-muted mt-1 f-12"> Total Petty Cash Boxes</p>
+                        <a href="index.php?option=COM_LIST_TENANAT_CUSTOMERS"><div class="card-title f-w-600 f-16"><?php echo $total_cnt['total_petty_cash_box_owner']; ?> <?= __('Boxes'); ?></div>
+                            <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Petty Cash Boxes'); ?></p>
                         </a>
                     </div>
                 </div>
@@ -59,8 +59,8 @@ $dashboardcall = "Y";
                     </div>
                     <div class="flex">
                        <a href="index.php?option=COM_LIST_RENTAL_INVOICES">
-                        <div class="card-title f-w-600 f-16"><?php echo $total_cnt['total_petty_cash_box_topup_requests']; ?> Requests</div>
-                        <p class="card-subtitle text-muted mt-1 f-12"> Total Petty Cash Box Top-up Request</p>
+                        <div class="card-title f-w-600 f-16"><?php echo $total_cnt['total_petty_cash_box_topup_requests']; ?> <?= __('Requests'); ?></div>
+                        <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Petty Cash Box Top-up Request'); ?></p>
                         </a>
                     </div>
                 </div>
@@ -70,8 +70,8 @@ $dashboardcall = "Y";
                     </div>
                     <div class="flex">
                        <a href="index.php?option=COM_LIST_RENTAL_INVOICES">
-                        <div class="card-title f-w-600 f-16"><?php echo $total_cnt['total_petty_cash']; ?> Expense</div>
-                        <p class="card-subtitle text-muted mt-1 f-12"> Total Expense</p>
+                        <div class="card-title f-w-600 f-16"><?php echo $total_cnt['total_petty_cash']; ?> <?= __('Expense'); ?></div>
+                        <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Expense'); ?></p>
                         </a>
                     </div>
                 </div>
@@ -82,10 +82,10 @@ $dashboardcall = "Y";
 <div class="row mb-3">
     <div class="col-lg-7"></div>
     <div class="col-lg-3 text-right pt-2">
-        <span class="form-label">Topup Request And Expenses Chart Year</span>
+        <span class="form-label"><?= __('Topup Request And Expenses Chart Year'); ?></span>
     </div>
     <div class="col-lg-2">
-       <select aria-label="Chartyear" class ="form-control js-example-basic-single" id="chartyear" onchange="getChartYear()">
+       <select aria-label="<?= htmlspecialchars(__('Chartyear'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control js-example-basic-single" id="chartyear" onchange="getChartYear()">
           <?php $startyear = date("Y"); for($mk=$startyear-10;$mk <= $startyear; $mk++){
             ?>
             <option  value="<?php echo  $mk; ?>" <?php echo date('Y')==$mk?"selected":"";?>>
@@ -101,7 +101,7 @@ $dashboardcall = "Y";
     <div class="col-md-12 col-xl-6">
         <div class="card sale-card">
             <div class="card-header">
-                <h5>Topup Request</h5>
+                <h5><?= __('Topup Request'); ?></h5>
             </div>
             <div class="card-block">
                 <div id="deal-analytic-bills-chart" class="chart-shadow" style="height:300px"></div>
@@ -111,7 +111,7 @@ $dashboardcall = "Y";
     <div class="col-md-12 col-xl-6">
         <div class="card sale-card">
             <div class="card-header">
-                <h5>Expenses</h5>
+                <h5><?= __('Expenses'); ?></h5>
             </div>
             <div class="card-block">
                 <div id="deal-analytic-pettycashexpenses-chart" class="chart-shadow" style="height:300px"></div>
@@ -130,9 +130,9 @@ $dashboardcall = "Y";
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5>Top 5 Cash Box Expenses</h5>
+                <h5><?= __('Top 5 Cash Box Expenses'); ?></h5>
                 <div class="card-header-right table-card-header ">
-                    <a href="index.php?option=COM_INSERT_PROPERTY_TENANT_DETAILS" class=" b-b-primary text-primary float-right">View all</a>
+                    <a href="index.php?option=COM_INSERT_PROPERTY_TENANT_DETAILS" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                 </div>
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
@@ -140,8 +140,8 @@ $dashboardcall = "Y";
                 <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                     <thead>
                         <tr>
-                            <th scope="col">Tenant Name</th>
-                            <th scope="col" class="text-right">Monthly Rent</th>
+                            <th scope="col"><?= __('Tenant Name'); ?></th>
+                            <th scope="col" class="text-right"><?= __('Monthly Rent'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -155,7 +155,7 @@ $dashboardcall = "Y";
                 </table>
                 <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Contract'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
@@ -169,7 +169,7 @@ $dashboardcall = "Y";
         <div class="col-lg-6">
           <div class="card table-card">
             <div class="card-header">
-              <h5>Approval Pending</h5>
+              <h5><?= __('Approval Pending'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
                 <div class="card-block table-responsive" >
@@ -178,10 +178,10 @@ $dashboardcall = "Y";
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Payment Number</th>
-                        <th scope="col">Request Date</th>
-                        <th scope="col">Transaction Date</th>
-                        <th scope="col" class="text-right">Price</th>
+                        <th scope="col"><?= __('Payment Number'); ?></th>
+                        <th scope="col"><?= __('Request Date'); ?></th>
+                        <th scope="col"><?= __('Transaction Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Price'); ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -200,7 +200,7 @@ $dashboardcall = "Y";
                     </table>
                      <?php }else{ ?>
                     <div class="card-px text-center py-20 m-t-30">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Approval Pending</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Approval Pending'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>
@@ -213,7 +213,7 @@ $dashboardcall = "Y";
         <div class="col-lg-6">
           <div class="card table-card">
             <div class="card-header">
-              <h5>Approved</h5>
+              <h5><?= __('Approved'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
                 <div class="card-block table-responsive" >
@@ -222,10 +222,10 @@ $dashboardcall = "Y";
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Payment Number</th>
-                        <th scope="col">Response Date</th>
-                        <th scope="col">Transaction Date</th>
-                        <th scope="col" class="text-right">Price</th>
+                        <th scope="col"><?= __('Payment Number'); ?></th>
+                        <th scope="col"><?= __('Response Date'); ?></th>
+                        <th scope="col"><?= __('Transaction Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Price'); ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -246,7 +246,7 @@ $dashboardcall = "Y";
                     </table>
                     <?php }else{ ?>
                     <div class="card-px text-center py-20 m-t-30">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Approved</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Approved'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>
