@@ -6,10 +6,10 @@
                                                     <div class="kt-widget14__header">
                                                         <input type="hidden" id="len_data_cri" value="5.6,94.4">
                                                         <h3 class="kt-widget14__title">
-                                                            Payments
+                                                            <?= __('Payments'); ?>
                                                         </h3>
                                                         <span class="kt-widget14__desc">
-                                                            Payments Summary
+                                                            <?= __('Payments Summary'); ?>
                                                         </span>
                                                     </div>
                                                     <div class="kt-widget14__content">
@@ -45,10 +45,10 @@
                                                         <input type="hidden" id="day_petty_item_pre" value="25,3.57,71.43">
                                                         <input type="hidden" id="day_petty_item_color" value="success,danger,brand">
                                                         <h3 class="kt-widget14__title">
-                                                            Top 3 Categories
+                                                            <?= __('Top 3 Categories'); ?>
                                                         </h3>
                                                         <span class="kt-widget14__desc">
-                                                            Category-wise Orders
+                                                            <?= __('Category-wise Orders'); ?>
                                                         </span>
                                                     </div>
                                                     <div class="kt-widget14__content">
@@ -592,7 +592,7 @@
                                                             <ul class="kt-nav">
                                                                 <li class="kt-nav__head">
                                                                     Export Options
-                                                                    <span data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">
+                                                                    <span data-toggle="kt-tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                         <svg xmlns="http:
                                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                                                 <rect x="0" y="0" width="24" height="24" />
@@ -606,25 +606,25 @@
                                                                 <li class="kt-nav__item">
                                                                     <a href="#" class="kt-nav__link">
                                                                         <i class="kt-nav__link-icon flaticon2-drop"></i>
-                                                                        <span class="kt-nav__link-text">Activity</span>
+                                                                        <span class="kt-nav__link-text"><?= __('Activity'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="kt-nav__item">
                                                                     <a href="#" class="kt-nav__link">
                                                                         <i class="kt-nav__link-icon flaticon2-calendar-8"></i>
-                                                                        <span class="kt-nav__link-text">FAQ</span>
+                                                                        <span class="kt-nav__link-text"><?= __('FAQ'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="kt-nav__item">
                                                                     <a href="#" class="kt-nav__link">
                                                                         <i class="kt-nav__link-icon flaticon2-telegram-logo"></i>
-                                                                        <span class="kt-nav__link-text">Settings</span>
+                                                                        <span class="kt-nav__link-text"><?= __('Settings'); ?></span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="kt-nav__item">
                                                                     <a href="#" class="kt-nav__link">
                                                                         <i class="kt-nav__link-icon flaticon2-new-email"></i>
-                                                                        <span class="kt-nav__link-text">Support</span>
+                                                                        <span class="kt-nav__link-text"><?= __('Support'); ?></span>
                                                                         <span class="kt-nav__link-badge">
                                                                             <span class="kt-badge kt-badge--success kt-badge--rounded">5</span>
                                                                         </span>
@@ -632,8 +632,8 @@
                                                                 </li>
                                                                 <li class="kt-nav__separator"></li>
                                                                 <li class="kt-nav__foot">
-                                                                    <button type="button" class="btn btn-label-danger btn-bold btn-sm">Upgrade plan</button>
-                                                                    <button type="button" class="btn btn-clean btn-bold btn-sm" data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">Learn more</button>
+                                                                    <button type="button" class="btn btn-label-danger btn-bold btn-sm"><?= __('Upgrade plan'); ?></button>
+                                                                    <button type="button" class="btn btn-clean btn-bold btn-sm" data-toggle="kt-tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Learn more'); ?></button>
                                                                 </li>
                                                             </ul>
 
@@ -650,7 +650,7 @@
                                                                 <i class="flaticon-pie-chart-1 kt-font-info"></i>
                                                             </span>
                                                             <a href="#" class="kt-widget4__title kt-widget4__title--light">
-                                                                Metronic v6 has been arrived!
+                                                                <?= __('Metronic v6 has been arrived!'); ?>
                                                             </a>
                                                             <span class="kt-widget4__number kt-font-info">+500</span>
                                                         </div>
@@ -659,7 +659,7 @@
                                                                 <i class="flaticon-safe-shield-protection  kt-font-success"></i>
                                                             </span>
                                                             <a href="#" class="kt-widget4__title kt-widget4__title--light">
-                                                                Metronic community meet-up 2019 in Rome.
+                                                                <?= __('Metronic community meet-up 2019 in Rome.'); ?>
                                                             </a>
                                                             <span class="kt-widget4__number kt-font-success">+1260</span>
                                                         </div>
@@ -668,7 +668,7 @@
                                                                 <i class="flaticon2-line-chart kt-font-danger"></i>
                                                             </span>
                                                             <a href="#" class="kt-widget4__title kt-widget4__title--light">
-                                                                Metronic Angular 8 version will be landing soon...
+                                                                <?= __('Metronic Angular 8 version will be landing soon...'); ?>
                                                             </a>
                                                             <span class="kt-widget4__number kt-font-danger">+1080</span>
                                                         </div>
@@ -677,7 +677,7 @@
                                                                 <i class="flaticon2-pie-chart-1 kt-font-primary"></i>
                                                             </span>
                                                             <a href="#" class="kt-widget4__title kt-widget4__title--light">
-                                                                ale! Purchase Metronic at 70% off for limited time
+                                                                <?= __('ale! Purchase Metronic at 70% off for limited time'); ?>
                                                             </a>
                                                             <span class="kt-widget4__number kt-font-primary">70% Off!</span>
                                                         </div>
@@ -686,7 +686,7 @@
                                                                 <i class="flaticon2-rocket kt-font-brand"></i>
                                                             </span>
                                                             <a href="#" class="kt-widget4__title kt-widget4__title--light">
-                                                                Metronic VueJS version is in progress. Stay tuned!
+                                                                <?= __('Metronic VueJS version is in progress. Stay tuned!'); ?>
                                                             </a>
                                                             <span class="kt-widget4__number kt-font-brand">+134</span>
                                                         </div>
@@ -695,7 +695,7 @@
                                                                 <i class="flaticon2-notification kt-font-warning"></i>
                                                             </span>
                                                             <a href="#" class="kt-widget4__title kt-widget4__title--light">
-                                                                Black Friday! Purchase Metronic at ever lowest 90% off for limited time
+                                                                <?= __('Black Friday! Purchase Metronic at ever lowest 90% off for limited time'); ?>
                                                             </a>
                                                             <span class="kt-widget4__number kt-font-warning">70% Off!</span>
                                                         </div>
@@ -704,7 +704,7 @@
                                                                 <i class="flaticon2-file kt-font-success"></i>
                                                             </span>
                                                             <a href="#" class="kt-widget4__title kt-widget4__title--light">
-                                                                Metronic React version is in progress.
+                                                                <?= __('Metronic React version is in progress.'); ?>
                                                             </a>
                                                             <span class="kt-widget4__number kt-font-success">+13%</span>
                                                         </div>
@@ -725,24 +725,24 @@
                                                 <div class="kt-portlet__head">
                                                     <div class="kt-portlet__head-label">
                                                         <h3 class="kt-portlet__head-title">
-                                                            Orders
+                                                            <?= __('Orders'); ?>
                                                         </h3>
                                                     </div>
                                                     <div class="kt-portlet__head-toolbar">
                                                         <ul class="nav nav-pills nav-pills-sm nav-pills-label nav-pills-bold">
                                                             <li class="nav-item">
                                                                 <a class="nav-link active" data-toggle="tab" href="#kt_widget5_tab1_content" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                                                    Latest
+                                                                    <?= __('Latest'); ?>
                                                                 </a>
                                                             </li>
                                                             <li class="nav-item">
                                                                 <a class="nav-link" data-toggle="tab" href="#kt_widget5_tab2_content" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                                                    Month
+                                                                    <?= __('Month'); ?>
                                                                 </a>
                                                             </li>
                                                             <li class="nav-item">
                                                                 <a class="nav-link" data-toggle="tab" href="#kt_widget5_tab3_content" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                                                    All time
+                                                                    <?= __('All time'); ?>
                                                                 </a>
                                                             </li>
                                                         </ul>
@@ -759,15 +759,15 @@
                                                                         </div>
                                                                         <div class="kt-widget5__section">
                                                                             <a href="#" class="kt-widget5__title">
-                                                                                Great Logo Designn
+                                                                                <?= __('Great Logo Designn'); ?>
                                                                             </a>
                                                                             <p class="kt-widget5__desc">
-                                                                                Metronic admin themes.
+                                                                                <?= __('Metronic admin themes.'); ?>
                                                                             </p>
                                                                             <div class="kt-widget5__info">
-                                                                                <span>Author:</span>
-                                                                                <span class="kt-font-info">Keenthemes</span>
-                                                                                <span>Released:</span>
+                                                                                <span><?= __('Author'); ?>:</span>
+                                                                                <span class="kt-font-info"><?= __('Keenthemes'); ?></span>
+                                                                                <span><?= __('Released'); ?>:</span>
                                                                                 <span class="kt-font-info">23.08.17</span>
                                                                             </div>
                                                                         </div>
@@ -775,11 +775,11 @@
                                                                     <div class="kt-widget5__content">
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">19,200</span>
-                                                                            <span class="kt-widget5__sales">sales</span>
+                                                                            <span class="kt-widget5__sales"><?= __('sales'); ?></span>
                                                                         </div>
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">1046</span>
-                                                                            <span class="kt-widget5__votes">votes</span>
+                                                                            <span class="kt-widget5__votes"><?= __('votes'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -790,15 +790,15 @@
                                                                         </div>
                                                                         <div class="kt-widget5__section">
                                                                             <a href="#" class="kt-widget5__title">
-                                                                                Branding Mockup
+                                                                                <?= __('Branding Mockup'); ?>
                                                                             </a>
                                                                             <p class="kt-widget5__desc">
-                                                                                Metronic bootstrap themes.
+                                                                                <?= __('Metronic bootstrap themes.'); ?>
                                                                             </p>
                                                                             <div class="kt-widget5__info">
-                                                                                <span>Author:</span>
-                                                                                <span class="kt-font-info">Fly themes</span>
-                                                                                <span>Released:</span>
+                                                                                <span><?= __('Author'); ?>:</span>
+                                                                                <span class="kt-font-info"><?= __('Fly themes'); ?></span>
+                                                                                <span><?= __('Released'); ?>:</span>
                                                                                 <span class="kt-font-info">23.08.17</span>
                                                                             </div>
                                                                         </div>
@@ -806,11 +806,11 @@
                                                                     <div class="kt-widget5__content">
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">24,583</span>
-                                                                            <span class="kt-widget5__sales">sales</span>
+                                                                            <span class="kt-widget5__sales"><?= __('sales'); ?></span>
                                                                         </div>
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">3809</span>
-                                                                            <span class="kt-widget5__votes">votes</span>
+                                                                            <span class="kt-widget5__votes"><?= __('votes'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -821,15 +821,15 @@
                                                                         </div>
                                                                         <div class="kt-widget5__section">
                                                                             <a href="#" class="kt-widget5__title">
-                                                                                Awesome Mobile App
+                                                                                <?= __('Awesome Mobile App'); ?>
                                                                             </a>
                                                                             <p class="kt-widget5__desc">
-                                                                                Metronic admin themes.Lorem Ipsum Amet
+                                                                                <?= __('Metronic admin themes.Lorem Ipsum Amet'); ?>
                                                                             </p>
                                                                             <div class="kt-widget5__info">
-                                                                                <span>Author:</span>
-                                                                                <span class="kt-font-info">Fly themes</span>
-                                                                                <span>Released:</span>
+                                                                                <span><?= __('Author'); ?>:</span>
+                                                                                <span class="kt-font-info"><?= __('Fly themes'); ?></span>
+                                                                                <span><?= __('Released'); ?>:</span>
                                                                                 <span class="kt-font-info">23.08.17</span>
                                                                             </div>
                                                                         </div>
@@ -837,11 +837,11 @@
                                                                     <div class="kt-widget5__content">
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">210,054</span>
-                                                                            <span class="kt-widget5__sales">sales</span>
+                                                                            <span class="kt-widget5__sales"><?= __('sales'); ?></span>
                                                                         </div>
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">1103</span>
-                                                                            <span class="kt-widget5__votes">votes</span>
+                                                                            <span class="kt-widget5__votes"><?= __('votes'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -856,15 +856,15 @@
                                                                         </div>
                                                                         <div class="kt-widget5__section">
                                                                             <a href="#" class="kt-widget5__title">
-                                                                                Branding Mockup
+                                                                                <?= __('Branding Mockup'); ?>
                                                                             </a>
                                                                             <p class="kt-widget5__desc">
-                                                                                Metronic bootstrap themes.
+                                                                                <?= __('Metronic bootstrap themes.'); ?>
                                                                             </p>
                                                                             <div class="kt-widget5__info">
-                                                                                <span>Author:</span>
-                                                                                <span class="kt-font-info">Fly themes</span>
-                                                                                <span>Released:</span>
+                                                                                <span><?= __('Author'); ?>:</span>
+                                                                                <span class="kt-font-info"><?= __('Fly themes'); ?></span>
+                                                                                <span><?= __('Released'); ?>:</span>
                                                                                 <span class="kt-font-info">23.08.17</span>
                                                                             </div>
                                                                         </div>
@@ -872,11 +872,11 @@
                                                                     <div class="kt-widget5__content">
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">24,583</span>
-                                                                            <span class="kt-widget5__sales">sales</span>
+                                                                            <span class="kt-widget5__sales"><?= __('sales'); ?></span>
                                                                         </div>
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">3809</span>
-                                                                            <span class="kt-widget5__votes">votes</span>
+                                                                            <span class="kt-widget5__votes"><?= __('votes'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -887,15 +887,15 @@
                                                                         </div>
                                                                         <div class="kt-widget5__section">
                                                                             <a href="#" class="kt-widget5__title">
-                                                                                Awesome Mobile App
+                                                                                <?= __('Awesome Mobile App'); ?>
                                                                             </a>
                                                                             <p class="kt-widget5__desc">
-                                                                                Metronic admin themes.Lorem Ipsum Amet
+                                                                                <?= __('Metronic admin themes.Lorem Ipsum Amet'); ?>
                                                                             </p>
                                                                             <div class="kt-widget5__info">
-                                                                                <span>Author:</span>
-                                                                                <span class="kt-font-info">Fly themes</span>
-                                                                                <span>Released:</span>
+                                                                                <span><?= __('Author'); ?>:</span>
+                                                                                <span class="kt-font-info"><?= __('Fly themes'); ?></span>
+                                                                                <span><?= __('Released'); ?>:</span>
                                                                                 <span class="kt-font-info">23.08.17</span>
                                                                             </div>
                                                                         </div>
@@ -903,11 +903,11 @@
                                                                     <div class="kt-widget5__content">
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">210,054</span>
-                                                                            <span class="kt-widget5__sales">sales</span>
+                                                                            <span class="kt-widget5__sales"><?= __('sales'); ?></span>
                                                                         </div>
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">1103</span>
-                                                                            <span class="kt-widget5__votes">votes</span>
+                                                                            <span class="kt-widget5__votes"><?= __('votes'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -918,15 +918,15 @@
                                                                         </div>
                                                                         <div class="kt-widget5__section">
                                                                             <a href="#" class="kt-widget5__title">
-                                                                                Great Logo Designn
+                                                                                <?= __('Great Logo Designn'); ?>
                                                                             </a>
                                                                             <p class="kt-widget5__desc">
-                                                                                Metronic admin themes.
+                                                                                <?= __('Metronic admin themes.'); ?>
                                                                             </p>
                                                                             <div class="kt-widget5__info">
-                                                                                <span>Author:</span>
-                                                                                <span class="kt-font-info">Keenthemes</span>
-                                                                                <span>Released:</span>
+                                                                                <span><?= __('Author'); ?>:</span>
+                                                                                <span class="kt-font-info"><?= __('Keenthemes'); ?></span>
+                                                                                <span><?= __('Released'); ?>:</span>
                                                                                 <span class="kt-font-info">23.08.17</span>
                                                                             </div>
                                                                         </div>
@@ -934,11 +934,11 @@
                                                                     <div class="kt-widget5__content">
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">19,200</span>
-                                                                            <span class="kt-widget5__sales">sales</span>
+                                                                            <span class="kt-widget5__sales"><?= __('sales'); ?></span>
                                                                         </div>
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">1046</span>
-                                                                            <span class="kt-widget5__votes">votes</span>
+                                                                            <span class="kt-widget5__votes"><?= __('votes'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -953,15 +953,15 @@
                                                                         </div>
                                                                         <div class="kt-widget5__section">
                                                                             <a href="#" class="kt-widget5__title">
-                                                                                Awesome Mobile App
+                                                                                <?= __('Awesome Mobile App'); ?>
                                                                             </a>
                                                                             <p class="kt-widget5__desc">
-                                                                                Metronic admin themes.Lorem Ipsum Amet
+                                                                                <?= __('Metronic admin themes.Lorem Ipsum Amet'); ?>
                                                                             </p>
                                                                             <div class="kt-widget5__info">
-                                                                                <span>Author:</span>
-                                                                                <span class="kt-font-info">Fly themes</span>
-                                                                                <span>Released:</span>
+                                                                                <span><?= __('Author'); ?>:</span>
+                                                                                <span class="kt-font-info"><?= __('Fly themes'); ?></span>
+                                                                                <span><?= __('Released'); ?>:</span>
                                                                                 <span class="kt-font-info">23.08.17</span>
                                                                             </div>
                                                                         </div>
@@ -969,11 +969,11 @@
                                                                     <div class="kt-widget5__content">
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">210,054</span>
-                                                                            <span class="kt-widget5__sales">sales</span>
+                                                                            <span class="kt-widget5__sales"><?= __('sales'); ?></span>
                                                                         </div>
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">1103</span>
-                                                                            <span class="kt-widget5__votes">votes</span>
+                                                                            <span class="kt-widget5__votes"><?= __('votes'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -984,15 +984,15 @@
                                                                         </div>
                                                                         <div class="kt-widget5__section">
                                                                             <a href="#" class="kt-widget5__title">
-                                                                                Great Logo Designn
+                                                                                <?= __('Great Logo Designn'); ?>
                                                                             </a>
                                                                             <p class="kt-widget5__desc">
-                                                                                Metronic admin themes.
+                                                                                <?= __('Metronic admin themes.'); ?>
                                                                             </p>
                                                                             <div class="kt-widget5__info">
-                                                                                <span>Author:</span>
-                                                                                <span class="kt-font-info">Keenthemes</span>
-                                                                                <span>Released:</span>
+                                                                                <span><?= __('Author'); ?>:</span>
+                                                                                <span class="kt-font-info"><?= __('Keenthemes'); ?></span>
+                                                                                <span><?= __('Released'); ?>:</span>
                                                                                 <span class="kt-font-info">23.08.17</span>
                                                                             </div>
                                                                         </div>
@@ -1000,11 +1000,11 @@
                                                                     <div class="kt-widget5__content">
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">19,200</span>
-                                                                            <span class="kt-widget5__sales">sales</span>
+                                                                            <span class="kt-widget5__sales"><?= __('sales'); ?></span>
                                                                         </div>
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">1046</span>
-                                                                            <span class="kt-widget5__votes">votes</span>
+                                                                            <span class="kt-widget5__votes"><?= __('votes'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1015,15 +1015,15 @@
                                                                         </div>
                                                                         <div class="kt-widget5__section">
                                                                             <a href="#" class="kt-widget5__title">
-                                                                                Branding Mockup
+                                                                                <?= __('Branding Mockup'); ?>
                                                                             </a>
                                                                             <p class="kt-widget5__desc">
-                                                                                Metronic bootstrap themes.
+                                                                                <?= __('Metronic bootstrap themes.'); ?>
                                                                             </p>
                                                                             <div class="kt-widget5__info">
-                                                                                <span>Author:</span>
-                                                                                <span class="kt-font-info">Fly themes</span>
-                                                                                <span>Released:</span>
+                                                                                <span><?= __('Author'); ?>:</span>
+                                                                                <span class="kt-font-info"><?= __('Fly themes'); ?></span>
+                                                                                <span><?= __('Released'); ?>:</span>
                                                                                 <span class="kt-font-info">23.08.17</span>
                                                                             </div>
                                                                         </div>
@@ -1031,11 +1031,11 @@
                                                                     <div class="kt-widget5__content">
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">24,583</span>
-                                                                            <span class="kt-widget5__sales">sales</span>
+                                                                            <span class="kt-widget5__sales"><?= __('sales'); ?></span>
                                                                         </div>
                                                                         <div class="kt-widget5__stats">
                                                                             <span class="kt-widget5__number">3809</span>
-                                                                            <span class="kt-widget5__votes">votes</span>
+                                                                            <span class="kt-widget5__votes"><?= __('votes'); ?></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
