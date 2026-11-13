@@ -115,26 +115,26 @@ foreach((array)$audits as $audit_row){
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Attendance Audit History</h5>
+            <h5><?= __('Attendance Audit History'); ?></h5>
             <div class="card-header-right">
-                <button type="button" class="btn-primary" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <button type="button" class="btn-primary" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">X</button>
             </div>
         </div>
         <div class="card-body">
             <div class="row mb-4">
                 <div class="col-lg-12">
                     <div class="bg-light p-3 rounded border">
-                        <h6 class="mb-2">Attendance Record</h6>
-                        <p class="mb-1 text-muted">RID: <?php echo attendanceHistorySafe($rid != '' ? $rid : 'NA'); ?></p>
-                        <p class="mb-1 text-muted">Employee: <?php echo attendanceHistorySafe($display_employee_name != '' ? $display_employee_name : 'NA'); ?></p>
-                        <p class="mb-0 text-muted">Attendance Date: <?php echo attendanceHistorySafe($display_attendance_date != '' ? $display_attendance_date : 'NA'); ?></p>
+                        <h6 class="mb-2"><?= __('Attendance Record'); ?></h6>
+                        <p class="mb-1 text-muted"><?= __('RID'); ?>: <?php echo attendanceHistorySafe($rid != '' ? $rid : 'NA'); ?></p>
+                        <p class="mb-1 text-muted"><?= __('Employee'); ?>: <?php echo attendanceHistorySafe($display_employee_name != '' ? $display_employee_name : 'NA'); ?></p>
+                        <p class="mb-0 text-muted"><?= __('Attendance Date'); ?>: <?php echo attendanceHistorySafe($display_attendance_date != '' ? $display_attendance_date : 'NA'); ?></p>
                     </div>
                 </div>
             </div>
 
             <?php if($rid == '' || !$has_history){ ?>
                 <div class="card-px text-center py-20 m-t-30">
-                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No history for this</p>
+                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No history for this'); ?></p>
                     <div class="text-center px-4">
                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                     </div>
@@ -143,7 +143,7 @@ foreach((array)$audits as $audit_row){
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="mb-4">
-                            <h5 class="mb-3">Created At</h5>
+                            <h5 class="mb-3"><?= __('Created At'); ?></h5>
                             <div class="row p-t-20 p-b-20 border-top border-bottom today-border">
                                 <div class="col-lg-2 text-start">
                                     <p><?php echo attendanceHistorySafe($attendance['created_date'] != '' ? date('d M Y h:i:s A', strtotime($attendance['created_date'])) : '-'); ?></p>
@@ -158,7 +158,7 @@ foreach((array)$audits as $audit_row){
                                         <span class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo attendanceHistorySafe(initials($created_actor)); ?></span>
 
                                         <div class="d-inline-block width73 text-capitalize align-top">
-                                            <h6 class="mb-1"><?php echo attendanceHistorySafe($created_actor); ?> created attendance record -<?php echo attendanceHistorySafe($attendance['id']); ?></h6>
+                                            <h6 class="mb-1"><?php echo attendanceHistorySafe($created_actor); ?> <?= __('created attendance record'); ?> -<?php echo attendanceHistorySafe($attendance['id']); ?></h6>
                                             <?php if(count((array)$attendance_details) > 0){ ?>
                                                 <p class="text-muted m-b-0"><?php echo attendanceHistorySafe(implode(' | ', $attendance_details)); ?></p>
                                             <?php } ?>
@@ -169,10 +169,10 @@ foreach((array)$audits as $audit_row){
                         </div>
 
                         <div>
-                            <h5 class="mb-3">Updated At</h5>
+                            <h5 class="mb-3"><?= __('Updated At'); ?></h5>
                             <?php if(count((array)$audits_with_changes) == 0){ ?>
                                 <div class="card-px text-center py-20 border-top border-bottom">
-                                    <p class="text-muted f-16 fw-bold m-b-0"><i class="ti-alert text-warning"></i> No update history found</p>
+                                    <p class="text-muted f-16 fw-bold m-b-0"><i class="ti-alert text-warning"></i> <?= __('No update history found'); ?></p>
                                 </div>
                             <?php }else{ ?>
                                 <?php foreach($audits_with_changes as $audit){
@@ -199,14 +199,14 @@ foreach((array)$audits as $audit_row){
                                         <div class="align-middle">
                                             <span class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo attendanceHistorySafe(initials($audit_actor)); ?></span>
                                             <div class="d-inline-block width73 text-capitalize align-top">
-                                                <h6 class="mb-1"><?php echo attendanceHistorySafe($audit_actor); ?> <span class="f-w-600"><?php echo attendanceHistorySafe(isset($audit['type']) ? $audit['type'] : 'UPDATE'); ?></span> attendance record -<?php echo attendanceHistorySafe(isset($audit['transaction_id']) ? $audit['transaction_id'] : $attendance['id']); ?></h6>
+                                                <h6 class="mb-1"><?php echo attendanceHistorySafe($audit_actor); ?> <span class="f-w-600"><?php echo attendanceHistorySafe(isset($audit['type']) ? $audit['type'] : 'UPDATE'); ?></span> <?= __('attendance record'); ?> -<?php echo attendanceHistorySafe(isset($audit['transaction_id']) ? $audit['transaction_id'] : $attendance['id']); ?></h6>
                                                 <?php if(count((array)$changed_fields) > 0){ ?>
                                             <table style="font-size:12px;margin-top:6px;border-collapse:collapse;width:100%;">
                                                 <thead>
                                                     <tr style="background:#f5f5f5;">
-                                                        <th scope="col" style="padding:4px 8px;border:1px solid #ddd;text-align:left;">Field</th>
-                                                        <th scope="col" style="padding:4px 8px;border:1px solid #ddd;text-align:left;">Before</th>
-                                                        <th scope="col" style="padding:4px 8px;border:1px solid #ddd;text-align:left;">After</th>
+                                                        <th scope="col" style="padding:4px 8px;border:1px solid #ddd;text-align:left;"><?= __('Field'); ?></th>
+                                                        <th scope="col" style="padding:4px 8px;border:1px solid #ddd;text-align:left;"><?= __('Before'); ?></th>
+                                                        <th scope="col" style="padding:4px 8px;border:1px solid #ddd;text-align:left;"><?= __('After'); ?></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
