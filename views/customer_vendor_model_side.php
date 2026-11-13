@@ -12,26 +12,26 @@
         <i class="symbol-badge bg-success"></i>
     </div>
     <div>
-        <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">James Jones</a>
-        <div class="text-muted">Application Developer</div>
+        <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary"><?= __('James Jones'); ?></a>
+        <div class="text-muted"><?= __('Application Developer'); ?></div>
         <div class="mt-2">
-            <button type="button" class="btn btn-sm btn-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1">Chat</button>
-            <button type="button" class="btn btn-sm btn-success font-weight-bold py-2 px-3 px-xxl-5 my-1">Follow</button>
+            <button type="button" class="btn btn-sm btn-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1"><?= __('Chat'); ?></button>
+            <button type="button" class="btn btn-sm btn-success font-weight-bold py-2 px-3 px-xxl-5 my-1"><?= __('Follow'); ?></button>
         </div>
     </div>
 </div>
 <div class="py-9">
     <div class="d-flex align-items-center justify-content-between mb-2">
-        <span class="font-weight-bold mr-2">Email:</span>
+        <span class="font-weight-bold mr-2"><?= __('Email'); ?>:</span>
         <a href="#" class="text-muted text-hover-primary">matt@fifestudios.com</a>
     </div>
     <div class="d-flex align-items-center justify-content-between mb-2">
-        <span class="font-weight-bold mr-2">Phone:</span>
+        <span class="font-weight-bold mr-2"><?= __('Phone'); ?>:</span>
         <span class="text-muted">44(76)34254578</span>
     </div>
     <div class="d-flex align-items-center justify-content-between">
-        <span class="font-weight-bold mr-2">Location:</span>
-        <span class="text-muted">Melbourne</span>
+        <span class="font-weight-bold mr-2"><?= __('Location'); ?>:</span>
+        <span class="text-muted"><?= __('Melbourne'); ?></span>
     </div>
 </div>
 <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
