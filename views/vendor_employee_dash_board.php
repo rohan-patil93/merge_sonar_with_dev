@@ -103,18 +103,18 @@ table.data-table a.edit{display: inline-block; vertical-align: middle;}
         <div class="card-body">
             <div>
                  <button class="btn btn-info waves-effect float-right waves-light input-group-text mt-0">
-                  <a href="index.php?option=COM_VENDOR_EMPLOYEE_DASH_BOARD&LOC=<?php echo $loc; ?>" target="_blank" > History </a>
+                  <a href="index.php?option=COM_VENDOR_EMPLOYEE_DASH_BOARD&LOC=<?php echo $loc; ?>" target="_blank" > <?= __('History'); ?> </a>
                    </button>
             </div>
             <div class="row dt-responsive table-responsive">
                 <table class="table table-separate table-head-custom table-checkable data-table" id="kt_datatable1">
                     <tr>
                         <th scope="col" style="width: 3%;"></th>
-                        <th scope="col" style="width: 5%;">SL.NO.</th>
-                        <th scope="col" style="width: 13%;">Vendor Name</th>
-                        <th scope="col" style="width: 7%;" class="text-right">Employee</th>
-                        <th scope="col" style="width: 10%;" class="text-right">Billable Days</th>
-                        <th scope="col" style="width: 10%;" class="text-right">Billable Amount</th>
+                        <th scope="col" style="width: 5%;"><?= __('SL.NO.'); ?></th>
+                        <th scope="col" style="width: 13%;"><?= __('Vendor Name'); ?></th>
+                        <th scope="col" style="width: 7%;" class="text-right"><?= __('Employee'); ?></th>
+                        <th scope="col" style="width: 10%;" class="text-right"><?= __('Billable Days'); ?></th>
+                        <th scope="col" style="width: 10%;" class="text-right"><?= __('Billable Amount'); ?></th>
                     </tr>
                     <?php $k=1; $lists = array(); foreach((array)$venders as  $vender){
                         $billable_hrs += ($vender['billable_hrs']/8);
