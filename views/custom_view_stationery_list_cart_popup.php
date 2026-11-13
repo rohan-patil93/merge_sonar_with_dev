@@ -22,8 +22,8 @@ $items = $data['item'];
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">Stationery Request </h5>
-    <button type="button" class="btn-close "  aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Stationery Request'); ?> </h5>
+    <button type="button" class="btn-close "  aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div>
@@ -31,9 +31,9 @@ $items = $data['item'];
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">Request No</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Status</th>
+                <th scope="col"><?= __('Request No'); ?></th>
+                <th scope="col"><?= __('Qty'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
                 <th scope="col"></th>
             </tr>
             </thead>
