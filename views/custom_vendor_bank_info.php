@@ -2,7 +2,7 @@
                                             <div class="kt-portlet">
                                                 <div class="kt-portlet__head">
                                                     <div class="kt-portlet__head-label">
-                                                        <h3 class="kt-portlet__head-title">Bank Detail<small>update your bank detail</small></h3>
+                                                        <h3 class="kt-portlet__head-title"><?= __('Bank Detail'); ?><small><?= __('update your bank detail'); ?></small></h3>
                                                     </div>
                                                     <div class="kt-portlet__head-toolbar">
                                                         <div class="kt-portlet__head-wrapper">
@@ -13,36 +13,36 @@
                                                                 <div class="dropdown-menu dropdown-menu-right">
                                                                     <ul class="kt-nav">
                                                                         <li class="kt-nav__section kt-nav__section--first">
-                                                                            <span class="kt-nav__section-text">Export Tools</span>
+                                                                            <span class="kt-nav__section-text"><?= __('Export Tools'); ?></span>
                                                                         </li>
                                                                         <li class="kt-nav__item">
                                                                             <a href="#" class="kt-nav__link">
                                                                                 <i class="kt-nav__link-icon la la-print"></i>
-                                                                                <span class="kt-nav__link-text">Print</span>
+                                                                                <span class="kt-nav__link-text"><?= __('Print'); ?></span>
                                                                             </a>
                                                                         </li>
                                                                         <li class="kt-nav__item">
                                                                             <a href="#" class="kt-nav__link">
                                                                                 <i class="kt-nav__link-icon la la-copy"></i>
-                                                                                <span class="kt-nav__link-text">Copy</span>
+                                                                                <span class="kt-nav__link-text"><?= __('Copy'); ?></span>
                                                                             </a>
                                                                         </li>
                                                                         <li class="kt-nav__item">
                                                                             <a href="#" class="kt-nav__link">
                                                                                 <i class="kt-nav__link-icon la la-file-excel-o"></i>
-                                                                                <span class="kt-nav__link-text">Excel</span>
+                                                                                <span class="kt-nav__link-text"><?= __('Excel'); ?></span>
                                                                             </a>
                                                                         </li>
                                                                         <li class="kt-nav__item">
                                                                             <a href="#" class="kt-nav__link">
                                                                                 <i class="kt-nav__link-icon la la-file-text-o"></i>
-                                                                                <span class="kt-nav__link-text">CSV</span>
+                                                                                <span class="kt-nav__link-text"><?= __('CSV'); ?></span>
                                                                             </a>
                                                                         </li>
                                                                         <li class="kt-nav__item">
                                                                             <a href="#" class="kt-nav__link">
                                                                                 <i class="kt-nav__link-icon la la-file-pdf-o"></i>
-                                                                                <span class="kt-nav__link-text">PDF</span>
+                                                                                <span class="kt-nav__link-text"><?= __('PDF'); ?></span>
                                                                             </a>
                                                                         </li>
                                                                     </ul>
@@ -58,19 +58,19 @@
                                                                 <div class="row">
                                                                     <span class="col-xl-3"></span>
                                                                     <div class="col-lg-9 col-xl-6">
-                                                                        <h3 class="kt-section__title kt-section__title-sm">Bank detail:</h3>
+                                                                        <h3 class="kt-section__title kt-section__title-sm"><?= __('Bank detail'); ?>:</h3>
                                                                     </div>
                                                                 </div>
 
-                                                                    <span class="col-xl-3 col-lg-3 col-form-label">Logo</span>
+                                                                    <span class="col-xl-3 col-lg-3 col-form-label"><?= __('Logo'); ?></span>
                                                                     <div class="col-lg-9 col-xl-6">
                                                                         <div class="kt-avatar kt-avatar--outline" id="kt_user_avatar">
                                                                             <div class="kt-avatar__holder" style="background-image: url(assets/media/users/100_13.jpg)"></div>
-                                                                            <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Change avatar">
+                                                                            <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="<?= htmlspecialchars(__('Change avatar'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                                 <i class="fa fa-pen"></i>
-                                                                                <input aria-label="Profile Avatar" type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Profile Avatar'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
                                                                             </label>
-                                                                            <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancel avatar">
+                                                                            <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="<?= htmlspecialchars(__('Cancel avatar'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                                 <i class="fa fa-times"></i>
                                                                             </span>
                                                                         </div>
@@ -83,16 +83,16 @@
                                                                             <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
                                                                             <div id="kt_repeater_1">
                                                                                 <div class="form-group form-group-last row" id="kt_repeater_1_2">
-                                                                                    <span class="col-lg-2 col-form-label">Bank:</span>
+                                                                                    <span class="col-lg-2 col-form-label"><?= __('Bank'); ?>:</span>
                                                                                     <div data-repeater-list="" class="col-lg-10">
                                                                                         <div data-repeater-item="" class="form-group row align-items-center">
                                                                                             <div class="col-md-8">
                                                                                                 <div class="kt-form__group--inline">
                                                                                                     <div class="kt-form__label">
-                                                                                                        <span>Bank Name:</span>
+                                                                                                        <span><?= __('Bank Name'); ?>:</span>
                                                                                                     </div>
                                                                                                     <div class="kt-form__control">
-                                                                                                        <input aria-label="Bank Name" type="email" class="form-control" placeholder="Bank Name">
+                                                                                                        <input aria-label="<?= htmlspecialchars(__('Bank Name'), ENT_QUOTES, 'UTF-8'); ?>" type="email" class="form-control" placeholder="<?= htmlspecialchars(__('Bank Name'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="d-md-none kt-margin-b-10"></div>
@@ -102,10 +102,10 @@
                                                                                             <div class="col-md-8 mt-3">
                                                                                                 <div class="kt-form__group--inline">
                                                                                                     <div class="kt-form__label">
-                                                                                                        <span>Account Name:</span>
+                                                                                                        <span><?= __('Account Name'); ?>:</span>
                                                                                                     </div>
                                                                                                     <div class="kt-form__control">
-                                                                                                        <input aria-label="Account Name" type="email" class="form-control" placeholder="Account Name">
+                                                                                                        <input aria-label="<?= htmlspecialchars(__('Account Name'), ENT_QUOTES, 'UTF-8'); ?>" type="email" class="form-control" placeholder="<?= htmlspecialchars(__('Account Name'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="d-md-none kt-margin-b-10"></div>
@@ -114,10 +114,10 @@
                                                                                             <div class="col-md-8 mt-3">
                                                                                                 <div class="kt-form__group--inline">
                                                                                                     <div class="kt-form__label">
-                                                                                                        <span class="kt-label m-label--single">Account Number:</span>
+                                                                                                        <span class="kt-label m-label--single"><?= __('Account Number'); ?>:</span>
                                                                                                     </div>
                                                                                                     <div class="kt-form__control">
-                                                                                                        <input aria-label="Account Number" type="email" class="form-control" placeholder="Account Number">
+                                                                                                        <input aria-label="<?= htmlspecialchars(__('Account Number'), ENT_QUOTES, 'UTF-8'); ?>" type="email" class="form-control" placeholder="<?= htmlspecialchars(__('Account Number'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="d-md-none kt-margin-b-10"></div>
@@ -126,10 +126,10 @@
                                                                                             <div class="col-md-8 mt-3">
                                                                                                 <div class="kt-form__group--inline">
                                                                                                     <div class="kt-form__label">
-                                                                                                        <span class="kt-label m-label--single">IFSC Code:</span>
+                                                                                                        <span class="kt-label m-label--single"><?= __('IFSC Code'); ?>:</span>
                                                                                                     </div>
                                                                                                     <div class="kt-form__control">
-                                                                                                        <input aria-label="IFSC Code" type="email" class="form-control" placeholder="IFSC Code">
+                                                                                                        <input aria-label="<?= htmlspecialchars(__('IFSC Code'), ENT_QUOTES, 'UTF-8'); ?>" type="email" class="form-control" placeholder="<?= htmlspecialchars(__('IFSC Code'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="d-md-none kt-margin-b-10"></div>
@@ -138,10 +138,10 @@
                                                                                             <div class="col-md-8 mt-3">
                                                                                                 <div class="kt-form__group--inline">
                                                                                                     <div class="kt-form__label">
-                                                                                                        <span class="kt-label m-label--single">Branch Address:</span>
+                                                                                                        <span class="kt-label m-label--single"><?= __('Branch Address'); ?>:</span>
                                                                                                     </div>
                                                                                                     <div class="kt-form__control">
-                                                                                                        <input aria-label="Branch Address" type="email" class="form-control" placeholder="Branch Address">
+                                                                                                        <input aria-label="<?= htmlspecialchars(__('Branch Address'), ENT_QUOTES, 'UTF-8'); ?>" type="email" class="form-control" placeholder="<?= htmlspecialchars(__('Branch Address'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="d-md-none kt-margin-b-10"></div>
@@ -149,7 +149,7 @@
                                                                                             <div class="col-md-2 mt-4">
                                                                                                 <div class="kt-radio-inline">
                                                                                                     <label class="kt-checkbox kt-checkbox--state-success">
-                                                                                                        <input aria-label="Checkbox" type="checkbox"> Primary
+                                                                                                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox"> <?= __('Primary'); ?>
                                                                                                         <span></span>
                                                                                                     </label>
                                                                                                 </div>
@@ -157,7 +157,7 @@
                                                                                             <div class="col-md-2 mt-4">
                                                                                                 <a href="javascript:;" data-repeater-delete="" class="btn-sm btn btn-label-danger btn-bold">
                                                                                                     <i class="la la-trash-o"></i>
-                                                                                                    Delete
+                                                                                                    <?= __('Delete'); ?>
                                                                                                 </a>
                                                                                             </div>
                                                                                         </div>
@@ -167,7 +167,7 @@
                                                                                     <span class="col-lg-2 col-form-label"></span>
                                                                                     <div class="col-lg-4">
                                                                                         <a href="javascript:;" data-repeater-create="" class="btn btn-bold btn-sm btn-label-brand">
-                                                                                            <i class="la la-plus"></i> Add
+                                                                                            <i class="la la-plus"></i> <?= __('Add'); ?>
                                                                                         </a>
                                                                                     </div>
                                                                                 </div>
@@ -179,8 +179,8 @@
                                                                             <div class="row">
                                                                                 <div class="col-lg-2"></div>
                                                                                 <div class="col-lg-4">
-                                                                                    <button type="reset" class="btn btn-success">Submit</button>
-                                                                                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                                                                                    <button type="reset" class="btn btn-success"><?= __('Submit'); ?></button>
+                                                                                    <button type="reset" class="btn btn-secondary"><?= __('Cancel'); ?></button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
