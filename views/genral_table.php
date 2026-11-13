@@ -6,7 +6,7 @@ $itemres = json_decode($item_data, 1);
 <script type="text/javascript">
     function getPreviousOrder(itemid,seq){
 
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#popup1").html(loader);
         $('#kt_modal_KTDatatable_remote').modal("show");
         var option = '<?php echo $option; ?>';
@@ -53,10 +53,10 @@ $itemres = json_decode($item_data, 1);
                 document.getElementById('tax_'+id).value=obj.igst;
                 document.getElementById('taxid_'+id).value=obj.hsn_code_id;
                 document.getElementById('tax_name_'+id).value=obj.hsn_code;
-                var hsncodetax = '<span class="d-block">HSN - '+obj.hsn_code+'</span><span class="d-block">Tax - '+obj.igst+'</span>';
+                var hsncodetax = '<span class="d-block"><?= htmlspecialchars(__('HSN'), ENT_QUOTES, 'UTF-8'); ?> - '+obj.hsn_code+'</span><span class="d-block"><?= htmlspecialchars(__('Tax'), ENT_QUOTES, 'UTF-8'); ?> - '+obj.igst+'</span>';
                 document.getElementById('hsn_and_sac_code_id_'+id).innerHTML=hsncodetax;
 
-                $('#item_history_detail_btn_'+id).html('<button type="button" class="btn p-0 border-0 bg-transparent m-l-5 text-primary float-end cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Open Item History" onclick="getPreviousOrder('+item_id+','+id+')" tabindex="0"><i class="ti ti-timer icon-dark"></i> Item History</button>');
+                $('#item_history_detail_btn_'+id).html('<button type="button" class="btn p-0 border-0 bg-transparent m-l-5 text-primary float-end cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Open Item History" onclick="getPreviousOrder('+item_id+','+id+')" tabindex="0"><i class="ti ti-timer icon-dark"></i> <?= htmlspecialchars(__('Item History'), ENT_QUOTES, 'UTF-8'); ?></button>');
                 if (isNaN(obj.sales_order_qty)  || obj.sales_order_qty ==null) {
                     $('#item_history_so_'+id).text(0.00);
                     $('#item_history_so_text_'+id).val(0.00);
@@ -106,12 +106,12 @@ $itemres = json_decode($item_data, 1);
                 }
                 if (isNaN(obj.base_uom) || obj.base_uom ==null || obj.base_uom =="") {
                     $("#hide_baseuomtext_"+id).val('');
-                    $("#baseuomtext_"+id).text('NA');
+                    $("#baseuomtext_"+id).text(<?php echo json_encode(__('NA'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                 }else{
                     $("#hide_baseuomtext_"+id).val(obj.base_uom);
                      $("#baseuomtext_"+id).text(0);
                 }
-                $("#party_sku_concat_"+id).text('Party Code : '+obj.party_sku_number);
+                $("#party_sku_concat_"+id).text(<?php echo json_encode(__('Party Code').' : ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+obj.party_sku_number);
                 closePreviousOrder();
             },
             error:function (){}
@@ -125,23 +125,23 @@ $itemres = json_decode($item_data, 1);
             var discount_mode = $('#discount_mode').val();
             htmlRows += '<tr>';
             htmlRows += '<td><input type="hidden" name="tax[]" id="tax_'+count+'" value="<?php echo $tab2['tax_value']; ?>">  <input type="hidden" name="taxid[]" id="taxid_'+count+'" value=""> <input type="hidden" name="tax_name[]" id="tax_name_'+count+'" value=""><label class="kt-checkbox"> <input aria-label="Checkbox"  class="itemRow" type="checkbox" data-rowid="'+count+'">  <span> </span> </label> </td>';
-            htmlRows += '<td id="other_'+count+'" class="p-1"><select aria-label="Product Code[]" class="form-select js-data-example-ajax-multiselectss'+count+' col-lg-4 selectitemorservice" name= "productCode[]" id="productCode_'+count+'" onchange="itemChange(this.value,'+count+')"   data-tablename="items"  data-fieldsname="item_name" > <option value="0"> Select Any Item </option></select> <input type="hidden" name="transaction_item_row_id[]" id="transaction_item_row_id_'+count+'" value=""><input type="hidden" name="ref_transaction_item_table_id[]" id="ref_transaction_item_table_id_'+count+'" value=""><input type="hidden" name="item_name[]" id="item_name_'+count+'" class="form-control"> <input type="hidden" name="purchase_account[]" id="purchase_account_'+count+'" class="form-control" value=""><input type="hidden" name="purchase_account_aval[]" id="purchase_account_aval_'+count+'" class="form-control" value=""><span id="party_sku_concat_'+count+'" class="d-block f-10"><textarea aria-label="Product Name[]" name="productName[]" id="productName_'+count+'" class="form-control mt-1"></textarea></td>';
+            htmlRows += '<td id="other_'+count+'" class="p-1"><select aria-label="Product Code[]" class="form-select js-data-example-ajax-multiselectss'+count+' col-lg-4 selectitemorservice" name= "productCode[]" id="productCode_'+count+'" onchange="itemChange(this.value,'+count+')"   data-tablename="items"  data-fieldsname="item_name" > <option value="0"> <?= htmlspecialchars(__('Select Any Item'), ENT_QUOTES, 'UTF-8'); ?> </option></select> <input type="hidden" name="transaction_item_row_id[]" id="transaction_item_row_id_'+count+'" value=""><input type="hidden" name="ref_transaction_item_table_id[]" id="ref_transaction_item_table_id_'+count+'" value=""><input type="hidden" name="item_name[]" id="item_name_'+count+'" class="form-control"> <input type="hidden" name="purchase_account[]" id="purchase_account_'+count+'" class="form-control" value=""><input type="hidden" name="purchase_account_aval[]" id="purchase_account_aval_'+count+'" class="form-control" value=""><span id="party_sku_concat_'+count+'" class="d-block f-10"><textarea aria-label="Product Name[]" name="productName[]" id="productName_'+count+'" class="form-control mt-1"></textarea></td>';
 
-            htmlRows += '<td class="p-1"><select aria-label="Uom[]" class="form-select js-example-basic-single"  name= "uom[]" id="uom_'+count+'" onchange="baseUOMConversion('+count+')"><option value="0"> UOM  </option><?php  foreach ($uomlist as $uom) {  ?> <option   <?php if($tab2['uom'] == $uom['genc_detail_code']){ ?>selected <?php
-} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo $uom['genc_detail_name']; ?> </option> <?php
-} ?></select><div style="display: none;color: red;" id="uom_err_'+count+'"> Enter UOM</div> <p class="mt-3" id="item_history_detail_btn_'+count+'"></p><div id="custom-popup"><div class="custom-popup-open item_order_details_'+count+' text-start" style="top: -90px; display: none; width:560px; left: 130px;"></div></div></td> ';
+            htmlRows += '<td class="p-1"><select aria-label="Uom[]" class="form-select js-example-basic-single"  name= "uom[]" id="uom_'+count+'" onchange="baseUOMConversion('+count+')"><option value="0"> <?= htmlspecialchars(__('UOM'), ENT_QUOTES, 'UTF-8'); ?>  </option><?php  foreach ($uomlist as $uom) {  ?> <option   <?php if($tab2['uom'] == $uom['genc_detail_code']){ ?>selected <?php
+} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo __($uom['genc_detail_name']); ?> </option> <?php
+} ?></select><div style="display: none;color: red;" id="uom_err_'+count+'"> <?= htmlspecialchars(__('Enter UOM'), ENT_QUOTES, 'UTF-8'); ?></div> <p class="mt-3" id="item_history_detail_btn_'+count+'"></p><div id="custom-popup"><div class="custom-popup-open item_order_details_'+count+' text-start" style="top: -90px; display: none; width:560px; left: 130px;"></div></div></td> ';
 
-             htmlRows += '<td class="p-1"><input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_'+count+'" onblur="quantityCheckold(this.id)" value="0.00" class="form-control quantity amount decimalnumberallowe"  autocomplete="off" readonly><p><input type="hidden" id="hide_baseuomtext_'+count+'" value=""><span class="float-left f-10">Base Conv :</span><span class="float-right f-10 " id="baseuomtext_'+count+'">NA</span></p><div style="display: none;color: red;" id="quantity_err_'+count+'"> Enter QTY</div> <table class="table table-sm border-none mt-3 f-12"><tr data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="Sales Order"><th scope="col" class="text-start p-0">SO</th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_so_'+count+'">0.00</td></tr><tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Purchase Orders"><th scope="col" class="text-start p-0">PO</th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_po_'+count+'">0.00</td></tr></table></td>';
+             htmlRows += '<td class="p-1"><input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_'+count+'" onblur="quantityCheckold(this.id)" value="0.00" class="form-control quantity amount decimalnumberallowe"  autocomplete="off" readonly><p><input type="hidden" id="hide_baseuomtext_'+count+'" value=""><span class="float-left f-10"><?= htmlspecialchars(__('Base Conv'), ENT_QUOTES, 'UTF-8'); ?> :</span><span class="float-right f-10 " id="baseuomtext_'+count+'"><?= htmlspecialchars(__('NA'), ENT_QUOTES, 'UTF-8'); ?></span></p><div style="display: none;color: red;" id="quantity_err_'+count+'"> <?= htmlspecialchars(__('Enter QTY'), ENT_QUOTES, 'UTF-8'); ?></div> <table class="table table-sm border-none mt-3 f-12"><tr data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="<?= htmlspecialchars(__('Sales Order'), ENT_QUOTES, 'UTF-8'); ?>"><th scope="col" class="text-start p-0"><?= htmlspecialchars(__('SO'), ENT_QUOTES, 'UTF-8'); ?></th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_so_'+count+'">0.00</td></tr><tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Purchase Orders'), ENT_QUOTES, 'UTF-8'); ?>"><th scope="col" class="text-start p-0"><?= htmlspecialchars(__('PO'), ENT_QUOTES, 'UTF-8'); ?></th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_po_'+count+'">0.00</td></tr></table></td>';
 
-            htmlRows += '<td class="p-1"><input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount decimalnumberallowe" value="0.00" autocomplete="off" readonly><div style="display: none;color: red;" id="price_err_'+count+'"> Enter Rate</div>';
+            htmlRows += '<td class="p-1"><input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount decimalnumberallowe" value="0.00" autocomplete="off" readonly><div style="display: none;color: red;" id="price_err_'+count+'"> <?= htmlspecialchars(__('Enter Rate'), ENT_QUOTES, 'UTF-8'); ?></div>';
             if(discount_mode == 'DO'){
                 htmlRows += '<input type="hidden" name="pdiscount_amount[]" value="" readonly class="form-control price amount mt-2 discount_textbox" id="pdiscount_amount_'+count+'" data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="Discount">';
             }else{
                 htmlRows += '<input type="text" name="pdiscount_amount[]" value="0" class="form-control price amount mt-2 discount_textbox" id="pdiscount_amount_'+count+'" data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="Discount">';
             }
-          htmlRows += '<table class="table table-sm border-none mt-3 f-12"><tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Quantity On Hand"><th scope="col" class="text-start p-0">QOH</th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_qoh_'+count+'">0.00</td></tr><tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Available Qty"><th scope="col" class="text-start p-0">Max</th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_available_'+count+'">0.00</td></tr></table></td>';
+          htmlRows += '<table class="table table-sm border-none mt-3 f-12"><tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Quantity On Hand'), ENT_QUOTES, 'UTF-8'); ?>"><th scope="col" class="text-start p-0"><?= htmlspecialchars(__('QOH'), ENT_QUOTES, 'UTF-8'); ?></th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_qoh_'+count+'">0.00</td></tr><tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Available Qty'), ENT_QUOTES, 'UTF-8'); ?>"><th scope="col" class="text-start p-0"><?= htmlspecialchars(__('Max'), ENT_QUOTES, 'UTF-8'); ?></th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_available_'+count+'">0.00</td></tr></table></td>';
 
-              htmlRows += '<td class="p-1 text-center" ><div id="hsn_and_sac_code_id_'+count+'" class="f-12 m-b-20"><span class="d-block">-</span><span class="d-block">-</span></div><table class="table table-sm border-none  f-12"><tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Minimum Quantity Level"><th scope="col" class="text-start p-0">Min</th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_min_ql_'+count+'">0.00</td></tr><tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Maximum Quantity Level"><th scope="col" class="text-start p-0">Max</th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_max_ql_'+count+'">0.00</td></tr></table><input type="hidden" name="item_details[so][]" id="item_history_so_text_'+count+'" value="<?php echo customeNumberFormate($item_details['so']);?>"><input type="hidden" name="item_details[po][]" id="item_history_po_text_'+count+'" value="0"><input type="hidden" name="item_details[qoh][]" id="item_history_qoh_text_'+count+'" value="0"><input type="hidden" name="item_details[available][]" id="item_history_available_text_'+count+'" value="0"><input type="hidden" name="item_details[min_ql][]" id="item_history_min_ql_text_'+count+'" value="0"><input type="hidden" name="item_details[max_ql][]" id="item_history_max_ql_text_'+count+'" value="0"></td>';
+              htmlRows += '<td class="p-1 text-center" ><div id="hsn_and_sac_code_id_'+count+'" class="f-12 m-b-20"><span class="d-block">-</span><span class="d-block">-</span></div><table class="table table-sm border-none  f-12"><tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Minimum Quantity Level'), ENT_QUOTES, 'UTF-8'); ?>"><th scope="col" class="text-start p-0"><?= htmlspecialchars(__('Min'), ENT_QUOTES, 'UTF-8'); ?></th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_min_ql_'+count+'">0.00</td></tr><tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Maximum Quantity Level'), ENT_QUOTES, 'UTF-8'); ?>"><th scope="col" class="text-start p-0"><?= htmlspecialchars(__('Max'), ENT_QUOTES, 'UTF-8'); ?></th><td class="p-0">:</td><td class="p-0" style="text-align: right;" id="item_history_max_ql_'+count+'">0.00</td></tr></table><input type="hidden" name="item_details[so][]" id="item_history_so_text_'+count+'" value="<?php echo customeNumberFormate($item_details['so']);?>"><input type="hidden" name="item_details[po][]" id="item_history_po_text_'+count+'" value="0"><input type="hidden" name="item_details[qoh][]" id="item_history_qoh_text_'+count+'" value="0"><input type="hidden" name="item_details[available][]" id="item_history_available_text_'+count+'" value="0"><input type="hidden" name="item_details[min_ql][]" id="item_history_min_ql_text_'+count+'" value="0"><input type="hidden" name="item_details[max_ql][]" id="item_history_max_ql_text_'+count+'" value="0"></td>';
 
             htmlRows += '<td class="p-1"> <input type="hidden" id="compliance_specification_documents_'+count+'" value=""><input type="hidden" name="dis_ptax_amount[]" value="" readonly class="form-control price amount" id="dis_ptax_amount_'+count+'"> <input type="hidden" name="ptax_amount[]" value="" readonly class="form-control" id="ptax_amount_'+count+'"> <input type="hidden" name="p_amount[]" value="<?php echo $tab2['amount']; ?>" readonly class="form-control price amount" id="p_amount_'+count+'"><input aria-label="Dis Amount[]" type="text" name="dis_amount[]" readonly <?php echo $sty; ?> id="dis_amount_'+count+'" class="form-control amount" value="" autocomplete="off"><input type="hidden" name="amount[]" readonly id="amount_'+count+'" class="form-control amount" value=""></td>';
 
@@ -212,19 +212,19 @@ $itemres = json_decode($item_data, 1);
             <th scope="col" class="thheader p-1" style="width: 1%;">
                 <div class="checkbox-fade fade-in-primary" style="display: inherit;margin: 0px;">
                     <label class="kt-checkbox">
-                        <input aria-label="Check All" id="checkAll"  type="checkbox">
+                        <input aria-label="<?= htmlspecialchars(__('Check All'), ENT_QUOTES, 'UTF-8'); ?>" id="checkAll"  type="checkbox">
                         <span class="cr">
                             <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                         </span>
                     </label>
                 </div>
             </th>
-            <th scope="col" class="p-1" style="width: 30%;">Items/Service <span class="requried"></span></th>
-            <th scope="col" class="thheader p-1" style="width: 9%;">UOM <span class="requried">*</span></th>
-            <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Qty <span class="requried">*</span></th>
-            <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Rate <span class="requried">*</span></th>
-            <th scope="col" class="thheader p-1" style="width: 10%;">HSN/Tax <span class="requried">*</span></th>
-            <th scope="col" class="thheader p-1 text-right" style="width: 20%;">Amount</th>
+            <th scope="col" class="p-1" style="width: 30%;"><?= __('Items/Service'); ?> <span class="requried"></span></th>
+            <th scope="col" class="thheader p-1" style="width: 9%;"><?= __('UOM'); ?> <span class="requried">*</span></th>
+            <th scope="col" class="thheader p-1 text-right" style="width: 15%;"><?= __('Qty'); ?> <span class="requried">*</span></th>
+            <th scope="col" class="thheader p-1 text-right" style="width: 15%;"><?= __('Rate'); ?> <span class="requried">*</span></th>
+            <th scope="col" class="thheader p-1" style="width: 10%;"><?= __('HSN/Tax'); ?> <span class="requried">*</span></th>
+            <th scope="col" class="thheader p-1 text-right" style="width: 20%;"><?= __('Amount'); ?></th>
         </tr>
         <?php if(count((array)$table2)>0){ $i=1;
             foreach ($table2 as $tab2) {
@@ -236,20 +236,20 @@ $itemres = json_decode($item_data, 1);
                         <input type="hidden" name="tax[]" id="tax_<?php echo $i; ?>" value="<?php echo $tab2['tax_value']; ?>">
                         <input type="hidden" name="taxid[]" id="taxid_<?php echo $i; ?>" value="<?php echo $tab2['tax_id']; ?>">
                         <input type="hidden" name="tax_name[]" id="tax_name_<?php echo $i; ?>" value="<?php echo $tab2['tax_name']; ?>">
-                        <label class="kt-checkbox"><input aria-label="Checkbox" class="itemRow" type="checkbox" data-rowid="<?php echo $i; ?>"> <span></span> </label>
+                        <label class="kt-checkbox"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="itemRow" type="checkbox" data-rowid="<?php echo $i; ?>"> <span></span> </label>
                     </td>
 
                     <td id='other_<?php echo $i; ?>' class="p-1">
                         <?php if($tab2['item_id'] >= 0){ ?>
-                            <select aria-label="Product Code[]" class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4"  data-tablename="items"  data-fieldsname="item_name"name= "productCode[]" onchange="itemChange(this.value,<?php echo $i; ?>)" id="productCode_<?php echo $i; ?>">
-                             <option value="0"> Select Any Item  </option>
+                            <select aria-label="<?= htmlspecialchars(__('Product Code'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4"  data-tablename="items"  data-fieldsname="item_name"name= "productCode[]" onchange="itemChange(this.value,<?php echo $i; ?>)" id="productCode_<?php echo $i; ?>">
+                             <option value="0"> <?= __('Select Any Item'); ?>  </option>
                              <?php $like_item_check = 0; $itmdoclist = "";  foreach ($itemres as $item) {  if($tab2['item_id']== $item['id']) { $like_item_check = 1;
 }
 if($tab2['item_id']== $item['id']){  $itmdoclist = $item['compliance_specification_documents']; ?>
                                  <option selected value ='<?php echo $item['id']; ?>'> <?php echo $item['sku']." - ".$item['item_name']; ?>
                              <?php } ?>
                              <?php } ?>
-                             <option value="-1">Other</option>
+                             <option value="-1"><?= __('Other'); ?></option>
                          </select>
                          <input type="hidden" name="transaction_item_row_id[]" id="transaction_item_row_id_<?php echo $i; ?>"  class="form-control" value="<?php echo $tab2['transaction_item_row_id']; ?>">
 
@@ -259,25 +259,25 @@ if($tab2['item_id']== $item['id']){  $itmdoclist = $item['compliance_specificati
                          <input type="hidden" name="purchase_account[]" class="form-control" value="<?php echo $tab2['purchase_account']; ?>">
                          <input type="hidden" name="purchase_account_aval[]" class="form-control" value="<?php echo $response_code[$tab2['purchase_account']]['a']; ?>">
                         <?php }else { ?>
-                        <input aria-label="Item Name[]" type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off">
+                        <input aria-label="<?= htmlspecialchars(__('Item Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off">
                         <input type="hidden" name="productCode[]" class="form-control" value="<?php echo $tab2['productCode']; ?>">
                         <?php } ?>
                          <span id="party_sku_concat_<?php echo $i; ?>" class="d-block f-10"><?php echo $tab2['party_sku_number']; ?></span>
-                        <textarea aria-label="Product Name[]"  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control mt-2" autocomplete="off"><?php echo $tab2['description']; ?></textarea>
+                        <textarea aria-label="<?= htmlspecialchars(__('Product Name'), ENT_QUOTES, 'UTF-8'); ?>[]"  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control mt-2" autocomplete="off"><?php echo $tab2['description']; ?></textarea>
                     </td>
 
                 <td class="p-1 w-full uom-custom">
-                    <select aria-label="Uom[]" class="form-control form-select js-example-basic-single"  name= "uom[]"  id="uom_<?php echo $i; ?>" onchange="baseUOMConversion('<?php echo $i; ?>')">
-                        <option value="0"> UOM </option>
+                    <select aria-label="<?= htmlspecialchars(__('Uom'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single"  name= "uom[]"  id="uom_<?php echo $i; ?>" onchange="baseUOMConversion('<?php echo $i; ?>')">
+                        <option value="0"> <?= __('UOM'); ?> </option>
                         <?php foreach ($uomlist as $uom) {  ?>
                          <option   <?php if($tab2['uom'] == $uom['genc_detail_code']){ ?>selected <?php
-} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo $uom['genc_detail_name']; ?> </option>
+} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo __($uom['genc_detail_name']); ?> </option>
                      <?php } ?>
                  </select>
-                 <div style="display: none;color: red;" id="<?php echo 'uom_err_'.$i;  ?>"> Enter UOM</div>
+                 <div style="display: none;color: red;" id="<?php echo 'uom_err_'.$i;  ?>"> <?= __('Enter UOM'); ?></div>
                   <p class="mt-3" id="item_history_detail_btn_<?php echo $i; ?>">
                     <?php if($tab2['item_name'] !=""){ ?>
-                        <span class="m-l-5 text-primary cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Click To Open Item History" onclick="getPreviousOrder('<?php echo $tab2['item_id']; ?>','<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti ti-timer icon-dark"></i> Item History</span>
+                        <span class="m-l-5 text-primary cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Click To Open Item History'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getPreviousOrder('<?php echo $tab2['item_id']; ?>','<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti ti-timer icon-dark"></i> <?= __('Item History'); ?></span>
                     <?php } ?>
                 </p>
                 <div id="custom-popup_2">
@@ -287,27 +287,27 @@ if($tab2['item_id']== $item['id']){  $itmdoclist = $item['compliance_specificati
                 </div>
              </td>
              <td class="p-1">
-                <input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"  onblur="quantityCheckold(this.id)"  class="form-control amount decimalnumberallowe" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off" <?php echo $tab2['quantity']==""?"readonly":""; ?>>
+                <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"  onblur="quantityCheckold(this.id)"  class="form-control amount decimalnumberallowe" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off" <?php echo $tab2['quantity']==""?"readonly":""; ?>>
                 <p>
                     <input type="hidden" id="hide_baseuomtext_<?php echo $i; ?>" value="<?php echo $itemres[$tab2['item_id']]['base_uom']?>">
-                    <span class="float-left f-10">Base Conv :</span>
-                    <span class="float-right f-10 " id="baseuomtext_<?php echo $i; ?>">NA</span>
+                    <span class="float-left f-10"><?= __('Base Conv'); ?> :</span>
+                    <span class="float-right f-10 " id="baseuomtext_<?php echo $i; ?>"><?= __('NA'); ?></span>
                 </p>
                 <input type="hidden" name="quantity_old[]" id="quantity_old_<?php echo $i; ?>"  class="form-control amount" value="<?php echo $tab2['quantity']; ?>">
-                <div style="display: none;color: red;" id="<?php echo 'quantity_err_'.$i; ?>"> Enter QTY</div>
+                <div style="display: none;color: red;" id="<?php echo 'quantity_err_'.$i; ?>"> <?= __('Enter QTY'); ?></div>
             <table class="table table-sm border-none mt-3 f-12">
-                <tr data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="Sales Order">
-                    <th scope="col" class="text-start p-0">SO</th>
+                <tr data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="<?= htmlspecialchars(__('Sales Order'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <th scope="col" class="text-start p-0"><?= __('SO'); ?></th>
                     <td class="p-0">:</td>
                     <td class="p-0" style="text-align: right;" id="item_history_so_<?php echo $i; ?>"><?php echo customeNumberFormate($item_details['so']);?></td>
                 </tr>
-                <tr data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="Purchase Order">
-                    <th scope="col" class="text-start p-0">PO</th>
+                <tr data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="<?= htmlspecialchars(__('Purchase Order'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <th scope="col" class="text-start p-0"><?= __('PO'); ?></th>
                     <td class="p-0">:</td>
                     <td class="p-0" style="text-align: right;" id="item_history_po_<?php echo $i; ?>"><?php echo customeNumberFormate($item_details['po']);?></td>
                 </tr>
                 <tr id="grn_items_inv_qty_<?php echo $tab2['item_id']; ?>">
-                    <th scope="col" class="text-start p-0">Invoice Qty</th>
+                    <th scope="col" class="text-start p-0"><?= __('Invoice Qty'); ?></th>
                     <td class="p-0">:</td>
                     <td class="p-0" style="text-align: right;" ><?php echo customeNumberFormate($item_details['grn_inv_qty']);?></td>
                 </tr>
@@ -315,29 +315,29 @@ if($tab2['item_id']== $item['id']){  $itmdoclist = $item['compliance_specificati
             <!-- item history -->
             </td>
             <td class="p-1">
-                <input aria-label="Price[]" type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount decimalnumberallowe" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off" <?php echo $tab2['item_price']==""?"readonly":""; ?>>
+                <input aria-label="<?= htmlspecialchars(__('Price'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount decimalnumberallowe" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off" <?php echo $tab2['item_price']==""?"readonly":""; ?>>
 
-                <input aria-label="Input field" type="<?php if($table1['discount_mode'] != 'DI'){ echo "hidden";
+                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php if($table1['discount_mode'] != 'DI'){ echo "hidden";
 } ?>" name="pdiscount_amount[]" value="<?php echo $tab2['discount_amount']; ?>"
  <?php if($table1['discount_mode'] != 'DI'){ echo "readonly";
-} ?> class="form-control price amount mt-2 discount_textbox" id="pdiscount_amount_<?php echo $i; ?>" data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="Discount">
+} ?> class="form-control price amount mt-2 discount_textbox" id="pdiscount_amount_<?php echo $i; ?>" data-bs-toggle="tooltip" data-placement="bottom"  data-bs-original-title="<?= htmlspecialchars(__('Discount'), ENT_QUOTES, 'UTF-8'); ?>">
 
-                <div style="display: none;color: red;" id="<?php echo 'price_err_'.$i; ?>"> Enter Rate</div>
+                <div style="display: none;color: red;" id="<?php echo 'price_err_'.$i; ?>"> <?= __('Enter Rate'); ?></div>
                 <!-- item history -->
 
                  <table class="table table-sm border-none mt-3 f-12">
-                    <tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Quantity On Hand">
-                        <th scope="col" class="text-start p-0">QOH</th>
+                    <tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Quantity On Hand'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <th scope="col" class="text-start p-0"><?= __('QOH'); ?></th>
                         <td class="p-0">:</td>
                         <td class="p-0" style="text-align: right;" id="item_history_qoh_<?php echo $i; ?>"><?php echo customeNumberFormate($item_details['qoh']);?></td>
                     </tr>
-                    <tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Available Qty">
-                        <th scope="col" class="text-start p-0">Max</th>
+                    <tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Available Qty'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <th scope="col" class="text-start p-0"><?= __('Max'); ?></th>
                         <td class="p-0">:</td>
                         <td class="p-0" style="text-align: right;" id="item_history_available_<?php echo $i; ?>"><?php echo customeNumberFormate($item_details['available']);?></td>
                     </tr>
                     <tr id="grn_items_qty_<?php echo $tab2['item_id']; ?>" >
-                        <th scope="col" class="text-start p-0">GRN Qty</th>
+                        <th scope="col" class="text-start p-0"><?= __('GRN Qty'); ?></th>
                         <td class="p-0">:</td>
                         <td class="p-0" style="text-align: right;" ><?php echo customeNumberFormate($item_details['grn_qty']);?></td>
                     </tr>
@@ -347,21 +347,21 @@ if($tab2['item_id']== $item['id']){  $itmdoclist = $item['compliance_specificati
             <td class="p-1 w-full text-center" >
                 <div id="hsn_and_sac_code_id_<?php echo $i; ?>" class="f-12 m-b-20">
                     <?php if($tab2['tax_value'] != "" && $tab2['tax_value'] != "0"){ ?>
-                        <span class="d-block"><span class="f-w-600">HSN </span>- <?php echo $tab2['tax_name']; ?></span>
-                        <span class="d-block"><span class="f-w-600">Tax </span>- <?php echo $tab2['tax_value']; ?></span>
+                        <span class="d-block"><span class="f-w-600"><?= __('HSN'); ?> </span>- <?php echo $tab2['tax_name']; ?></span>
+                        <span class="d-block"><span class="f-w-600"><?= __('Tax'); ?> </span>- <?php echo $tab2['tax_value']; ?></span>
                  <?php }else{ ?><span class="d-block">-</span><span class="d-block">-</span><?php
 } ?>
                 </div>
                 <!-- item history -->
 
                 <table class="table table-sm border-none  f-12 ">
-                    <tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Minimum Quantity Level">
-                        <th scope="col" class="text-start p-0">Min</th>
+                    <tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Minimum Quantity Level'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <th scope="col" class="text-start p-0"><?= __('Min'); ?></th>
                         <td class="p-0">:</td>
                         <td class="p-0" style="text-align: right;" id="item_history_min_ql_<?php echo $i; ?>"><?php echo customeNumberFormate($item_details['min_ql']);?></td>
                     </tr>
-                    <tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Maximum Quantity Level">
-                        <th scope="col" class="text-start p-0">Max</th>
+                    <tr data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Maximum Quantity Level'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <th scope="col" class="text-start p-0"><?= __('Max'); ?></th>
                         <td class="p-0">:</td>
                         <td class="p-0" style="text-align: right;" id="item_history_max_ql_<?php echo $i; ?>"><?php echo customeNumberFormate($item_details['max_ql']);?></td>
                     </tr>
@@ -382,7 +382,7 @@ if($tab2['item_id']== $item['id']){  $itmdoclist = $item['compliance_specificati
                 <input type="hidden" name="pdiscount_amount[]" value="<?php echo customeummarmonyformate($tab2['discount_amount']); ?>" readonly class="form-control price amount">
                 <input type="hidden" name="ptax_amount[]" value="<?php echo $tab2['tax_amount']; ?>" readonly class="form-control" id="ptax_amount_<?php echo $i; ?>">
                 <input type="hidden" name="p_amount[]" value="<?php echo $tab2['taxabled_amount']; ?>" readonly class="form-control price amount" id="p_amount_<?php echo $i; ?>">
-                <input aria-label="Dis Amount[]" type="text" name="dis_amount[]" readonly <?php echo $sty; ?> id="dis_amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo customeummarmonyformate($tab2['total_amount']); ?>" autocomplete="off">
+                <input aria-label="<?= htmlspecialchars(__('Dis Amount'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="dis_amount[]" readonly <?php echo $sty; ?> id="dis_amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo customeummarmonyformate($tab2['total_amount']); ?>" autocomplete="off">
                 <input type="hidden" name="amount[]" readonly id="amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo $tab2['total_amount']; ?>">
 
             </td>
