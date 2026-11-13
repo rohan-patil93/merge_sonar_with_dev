@@ -89,14 +89,14 @@
 	<div class="col-lg-12">
 		<div class="text-right">
 			<a href="index.php?option=COM_VIEW_OFFICE_MANAGEMENT" class="btn btn-primary m-b-10">  
-				View Details 
+				<?= __('View Details'); ?> 
 			</a> 
 		</div>
 	</div>
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 		<div class="card">
 			<div class="card-header">
-				<h5>In Couriers</h5>
+				<h5><?= __('In Couriers'); ?></h5>
 			</div>
 			<div class="card-body" style="padding:20px !important;">				
 				<div class="row ">
@@ -106,7 +106,7 @@
 						</div>
 						<div class="s-cont d-inline-block">
 							<h5 class="f-w-700 m-b-0"><?php echo $data['couriers']['total_rec']; ?></h5>
-							<p class="m-b-0 f-12">Total</p>
+							<p class="m-b-0 f-12"><?= __('Total'); ?></p>
 						</div>
 					</div>
 					<div class="col-4 b-l-default text-center">
@@ -115,7 +115,7 @@
 						</div>
 						<div class="s-cont d-inline-block">
 							<h5 class="f-w-700 m-b-0"><?php echo $data['couriers']['rec_pending']; ?></h5>
-							<p class="m-b-0 f-12">Pending </p>
+							<p class="m-b-0 f-12"><?= __('Pending'); ?> </p>
 						</div>
 					</div>
 					<div class="col-4 b-l-default text-center">
@@ -124,13 +124,13 @@
 						</div>
 						<div class="s-cont d-inline-block">
 							<h5 class="f-w-700 m-b-0"><?php echo $data['couriers']['total_rec']-$data['couriers']['rec_pending']; ?></h5>
-							<p class="m-b-0 f-12">Delivered</p>
+							<p class="m-b-0 f-12"><?= __('Delivered'); ?></p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="card-header">
-				<h5>Out Couriers</h5>
+				<h5><?= __('Out Couriers'); ?></h5>
 			</div>
 			<div class="card-body mb-2" style="padding: 20px !important;">				
 				<div class="row ">
@@ -140,7 +140,7 @@
 						</div>
 						<div class="s-cont d-inline-block">
 							<h5 class="f-w-700 m-b-0"><?php echo $data['couriers']['total_send']; ?></h5>
-							<p class="m-b-0 f-12">Total</p>
+							<p class="m-b-0 f-12"><?= __('Total'); ?></p>
 						</div>
 					</div>
 					<div class="col-4 b-l-default text-center">
@@ -149,7 +149,7 @@
 						</div>
 						<div class="s-cont d-inline-block">
 							<h5 class="f-w-700 m-b-0"><?php echo $data['couriers']['send_pending']; ?></h5>
-							<p class="m-b-0 f-12">Pending </p>
+							<p class="m-b-0 f-12"><?= __('Pending'); ?> </p>
 						</div>
 					</div>
 					<div class="col-4 b-l-default text-center">
@@ -158,7 +158,7 @@
 						</div>
 						<div class="s-cont d-inline-block">
 							<h5 class="f-w-700 m-b-0"><?php echo $data['couriers']['total_send']-$data['couriers']['send_pending']; ?></h5>
-							<p class="m-b-0 f-12">Delivered</p>
+							<p class="m-b-0 f-12"><?= __('Delivered'); ?></p>
 						</div>
 					</div>
 				</div>
@@ -171,7 +171,7 @@
 				<div class="card-body">
 					<div class="row align-items-center">
 						<div class="col">
-							<h6 class="m-b-5 text-white">Total Stationery</h6>
+							<h6 class="m-b-5 text-white"><?= __('Total Stationery'); ?></h6>
 							<h3 class="m-b-0 f-w-700 text-white f-18"><?php echo $data['stationery']['total_stat']; ?></h3>
 						</div>
 						<div class="col-auto">
@@ -186,7 +186,7 @@
 				<div class="card-body">
 					<div class="row align-items-center">
 						<div class="col">
-							<h6 class="m-b-5 text-white">Pending Stationery</h6>
+							<h6 class="m-b-5 text-white"><?= __('Pending Stationery'); ?></h6>
 							<h3 class="m-b-0 f-w-700 text-white f-18"><?php echo $data['stationery']['stat_pending']; ?></h3>
 						</div>
 						<div class="col-auto">
@@ -201,7 +201,7 @@
 				<div class="card-body">
 					<div class="row align-items-center">
 						<div class="col">
-							<h6 class="m-b-5 text-white">Received Stationery </h6>
+							<h6 class="m-b-5 text-white"><?= __('Received Stationery'); ?> </h6>
 							<h3 class="m-b-0 f-w-700 text-white f-18"><?php echo $data['stationery']['total_stat']-$data['stationery']['stat_pending']; ?></h3>
 						</div>
 						<div class="col-auto">
@@ -216,7 +216,7 @@
 				<div class="card-body">
 					<div class="row align-items-center">
 						<div class="col">
-							<h6 class="m-b-5 text-white">Below Minimum Quantity</h6>
+							<h6 class="m-b-5 text-white"><?= __('Below Minimum Quantity'); ?></h6>
 							<h3 class="m-b-0 f-w-700 text-white f-18"><?php echo $data['min_sat']['minqty']; ?></h3>
 						</div>
 						<div class="col-auto">
@@ -230,7 +230,7 @@
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 		<div class="card">
 			<div class="card-header">
-				<h5>Transport Requests</h5>
+				<h5><?= __('Transport Requests'); ?></h5>
 			</div>
 			<div id="chart_Donut_mdash" style="width: 100%; height: 280px;"></div>
 			<input type="hidden" name="" id="manga_ransport_sahboard" value="Total Requests:<?php echo $data['employee_transport']['total_emptr']; ?>||Pending Requests:<?php echo $data['employee_transport']['emptr_pending']; ?>||Approved:<?php echo $data['employee_transport']['total_emptr']-$data['employee_transport']['emptr_pending']; ?>">
@@ -239,13 +239,13 @@
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 		<div class="card">
 			<div class="card-header">
-				<h5>Food Requests</h5>
+				<h5><?= __('Food Requests'); ?></h5>
 			</div>
 			<div class="p-3 mb-2">
 				<div class="pp-cont mt-2">
 					<div class="row align-items-center m-b-20">
 						<div class="col-auto">
-							<i class="fas fa fa-life-ring f-24 "></i> <span class="f-20 f-w-600">&nbsp; &nbsp; Total Reuests</span>
+							<i class="fas fa fa-life-ring f-24 "></i> <span class="f-20 f-w-600">&nbsp; &nbsp; <?= __('Total Reuests'); ?></span>
 						</div>
 						<div class="col text-right">
 							<h2 class="m-b-0 text-c-blue"><?php echo $data['employee_food']['total_empfr']; ?></h2>
@@ -253,7 +253,7 @@
 					</div>
 					<div class="row align-items-center m-b-15">
 						<div class="col-auto">
-							<p class="m-b-0">Total </p>
+							<p class="m-b-0"><?= __('Total'); ?> </p>
 						</div>
 						<div class="col text-right">
 							<p class="m-b-0 text-c-blue"><i class="fas fa-long-arrow-alt-up m-r-10"></i>
@@ -272,14 +272,14 @@
 					</div>
 				</div>
 				<div class=" row col-lg-12 mt-3">
-					<div class="col-lg-6 f-14">Pending : <?php echo $data['employee_food']['emptr_pending']; ?></div>
-					<div class="col-lg-6 f-14">Approved :   <?php echo $data['employee_food']['total_empfr'] - $data['employee_food']['emptr_pending']; ?></div>
+					<div class="col-lg-6 f-14"><?= __('Pending'); ?> : <?php echo $data['employee_food']['emptr_pending']; ?></div>
+					<div class="col-lg-6 f-14"><?= __('Approved'); ?> :   <?php echo $data['employee_food']['total_empfr'] - $data['employee_food']['emptr_pending']; ?></div>
 				</div>
 				<div class="mt-3">
 					<div class="card-block">
 						<div class="row align-items-center">
 							<div class="col">
-								<h6 class="m-b-0"> This Month Food Requests</h6>
+								<h6 class="m-b-0"> <?= __('This Month Food Requests'); ?></h6>
 							</div>
 							<div class="col-auto">
 								<h5 class="m-b-0"><?php echo $data['month_food']['record_count']; ?></h5>
@@ -294,14 +294,14 @@
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 		<div class="card new-cust-card">
 			<div class="card-header">
-				<h5>In Couriers</h5>
+				<h5><?= __('In Couriers'); ?></h5>
 				<div class="card-header-right" style="top:15px;right: 15px" >
 					<ul class="nav nav-tabs md-tabs infisuite_tab border-0">
 						<li class="nav-item">
-							<a class="nav-link btn-sm active f-12 f-w-600" data-bs-toggle="tab" href="#month" role="tab">Pending</a>
+							<a class="nav-link btn-sm active f-12 f-w-600" data-bs-toggle="tab" href="#month" role="tab"><?= __('Pending'); ?></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link btn-sm f-12 f-w-600" data-bs-toggle="tab" href="#week" role="tab">Approved</a>
+							<a class="nav-link btn-sm f-12 f-w-600" data-bs-toggle="tab" href="#week" role="tab"><?= __('Approved'); ?></a>
 
 						</li>
 					</ul>
@@ -338,7 +338,7 @@
 							if($checka ==0){?>
 								<div class="card-px text-center">
 									<p class="text-muted f-16 fw-bold">
-										<i class="ti-alert text-warning"></i> No Couriers
+										<i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?>
 									</p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height:250px!important;">
@@ -373,7 +373,7 @@
 						<?php } 
 							if($checkb ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
 									</div>   
@@ -388,15 +388,15 @@
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 		<div class="card new-cust-card">
 			<div class="card-header">
-				<h5>Out Couriers</h5>
+				<h5><?= __('Out Couriers'); ?></h5>
 				<div class="card-header-right" style="top:15px;right:15px" >
 					<ul class="nav nav-tabs md-tabs infisuite_tab border-0">
 						<li class="nav-item">
-							<a class="nav-link btn-sm active f-12 f-w-600" data-bs-toggle="tab" href="#OOmonth" role="tab">Pending</a>
+							<a class="nav-link btn-sm active f-12 f-w-600" data-bs-toggle="tab" href="#OOmonth" role="tab"><?= __('Pending'); ?></a>
 
 						</li>
 						<li class="nav-item">
-							<a class="nav-link btn-sm f-12 f-w-600" data-bs-toggle="tab" href="#OOweek" role="tab">Approved</a>
+							<a class="nav-link btn-sm f-12 f-w-600" data-bs-toggle="tab" href="#OOweek" role="tab"><?= __('Approved'); ?></a>
 
 						</li>
 					</ul>
@@ -429,7 +429,7 @@
 						<?php } 
 							if($checka ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
 									</div>   
@@ -463,7 +463,7 @@
 						<?php } 
 							if($checkb ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
 									</div>   
@@ -478,15 +478,15 @@
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 		<div class="card new-cust-card">
 			<div class="card-header">
-				<h5>Stationery</h5>
+				<h5><?= __('Stationery'); ?></h5>
 				<div class="card-header-right" style="top:15px;right:15px" >
 					<ul class="nav nav-tabs md-tabs infisuite_tab border-0">
 						<li class="nav-item">
-							<a class="nav-link btn-sm active f-12 f-w-600" data-bs-toggle="tab" href="#stmonth" role="tab">Pending</a>
+							<a class="nav-link btn-sm active f-12 f-w-600" data-bs-toggle="tab" href="#stmonth" role="tab"><?= __('Pending'); ?></a>
 
 						</li>
 						<li class="nav-item">
-							<a class="nav-link btn-sm f-12 f-w-600" data-bs-toggle="tab" href="#stweek" role="tab">Approved</a>
+							<a class="nav-link btn-sm f-12 f-w-600" data-bs-toggle="tab" href="#stweek" role="tab"><?= __('Approved'); ?></a>
 
 						</li>
 					</ul>
@@ -519,7 +519,7 @@
 						<?php } 
 							if($checka ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
 									</div>   
@@ -553,7 +553,7 @@
 						<?php } 
 							if($checkb ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
 									</div>   
@@ -568,7 +568,7 @@
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 		<div class="card new-cust-card">
 			<div class="card-header">
-				<h5>Stationery Below Minmum Qty</h5>				
+				<h5><?= __('Stationery Below Minmum Qty'); ?></h5>				
 			</div>
 			<div class="tab-content table-border-style custom-scroll" style="height: 280px;">
 				<div class="card-block">
@@ -583,15 +583,15 @@
 							</h6></a>
 							<span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
 							<p class="text-muted m-b-0">
-								Available Qty: <span class="mt-16 f-w-600"><?php echo $down['available_qty']; ?></span> 
-								Minmum Qty: <span class="mt-16 f-w-600"><?php echo $down['minmum_qty']; ?> </span> 
+								<?= __('Available Qty'); ?>: <span class="mt-16 f-w-600"><?php echo $down['available_qty']; ?></span> 
+								<?= __('Minmum Qty'); ?>: <span class="mt-16 f-w-600"><?php echo $down['minmum_qty']; ?> </span> 
 							</p>
 						</div>
 					</div>
 					<?php } 
 						if($checkb ==0){?>
 							<div class="card-px text-center ">
-								<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>   
+								<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
 								<div class="text-center px-4">
 									<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
 								</div>   
@@ -605,14 +605,14 @@
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 		<div class="card new-cust-card">
 			<div class="card-header">
-				<h5>Transport</h5>
+				<h5><?= __('Transport'); ?></h5>
 				<div class="card-header-right" style="top:15px;right:15px" >
 					<ul class="nav nav-tabs md-tabs infisuite_tab border-0">
 						<li class="nav-item">
-							<a class="nav-link btn-sm active f-12 f-w-600" data-bs-toggle="tab" href="#trmonth" role="tab">Pending</a>
+							<a class="nav-link btn-sm active f-12 f-w-600" data-bs-toggle="tab" href="#trmonth" role="tab"><?= __('Pending'); ?></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link btn-sm f-12 f-w-600" data-bs-toggle="tab" href="#trweek" role="tab">Approved</a>
+							<a class="nav-link btn-sm f-12 f-w-600" data-bs-toggle="tab" href="#trweek" role="tab"><?= __('Approved'); ?></a>
 						</li>
 					</ul>
 				</div>
@@ -644,7 +644,7 @@
 						<?php } 
 							if($checka ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
 									</div>   
@@ -678,7 +678,7 @@
 						<?php } 
 							if($checkb ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
 									</div>   
@@ -693,14 +693,14 @@
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 		<div class="card new-cust-card">
 			<div class="card-header">
-				<h5>Food</h5>
+				<h5><?= __('Food'); ?></h5>
 				<div class="card-header-right" style="top:15px;right:15px" >
 					<ul class="nav nav-tabs md-tabs infisuite_tab border-0" style="">
 						<li class="nav-item">
-							<a class="nav-link btn-sm active f-12 f-w-600" data-bs-toggle="tab" href="#fdmonth" role="tab">Pending</a>
+							<a class="nav-link btn-sm active f-12 f-w-600" data-bs-toggle="tab" href="#fdmonth" role="tab"><?= __('Pending'); ?></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link btn-sm f-12 f-w-600" data-bs-toggle="tab" href="#fdweek" role="tab">Approved</a>
+							<a class="nav-link btn-sm f-12 f-w-600" data-bs-toggle="tab" href="#fdweek" role="tab"><?= __('Approved'); ?></a>
 						</li>
 					</ul>
 				</div>
@@ -732,7 +732,7 @@
 						<?php } 
 							if($checka ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
 									</div>   
@@ -767,7 +767,7 @@
 						<?php } 
 							if($checkb ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
 									</div>   
@@ -782,7 +782,7 @@
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 		<div class="card new-cust-card">
 			<div class="card-header">
-				<h5>This Month Employee Food Requests</h5>				
+				<h5><?= __('This Month Employee Food Requests'); ?></h5>				
 			</div>
 			<div class="tab-content card-block table-border-style custom-scroll" style="height: 280px;">
 				<div class="card-block">
@@ -807,7 +807,7 @@
 					<?php } 
 						if($checkb ==0){?>
 							<div class="card-px text-center ">
-								<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>   
+								<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
 								<div class="text-center px-4">
 									<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
 								</div>   
