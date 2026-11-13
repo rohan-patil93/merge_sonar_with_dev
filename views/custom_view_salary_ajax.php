@@ -159,26 +159,26 @@ function tocalucaltPTX($code_data,$val,$catcode,$pass_esi_val=""){
 }
 echo "<pre>"; print_r($code_data); echo "</pre>";
 ?>
-<h6 class="f-w-500 m-l-5 m-r-5 bg-gray">Salary Details</h6>
+<h6 class="f-w-500 m-l-5 m-r-5 bg-gray"><?= __('Salary Details'); ?></h6>
         <div class="card-block">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="mb-3">Earnings</h4>
+                            <h4 class="mb-3"><?= __('Earnings'); ?></h4>
                             <div class="row align-items-end mt-3">
                                 <div class="col-lg-4">
                                     <div class="">
-                                        <span class="form-label f-w-600 f-14">Salary Component </span>
+                                        <span class="form-label f-w-600 f-14"><?= __('Salary Component'); ?> </span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="">
-                                        <span class="form-label f-w-600 f-14">Calculation Type </span>
+                                        <span class="form-label f-w-600 f-14"><?= __('Calculation Type'); ?> </span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 ">
-                                    <span class="form-label f-w-600 f-14">Amount Monthly </span>
+                                    <span class="form-label f-w-600 f-14"><?= __('Amount Monthly'); ?> </span>
 
                                 </div>
                             </div>
@@ -207,7 +207,7 @@ echo "<pre>"; print_r($code_data); echo "</pre>";
                                 <div class="row align-items-end er_row" id="er_<?php echo $e; ?>">
                                     <div class="col-lg-4">
                                         <div class="form-group mt-3">
-                                            <input aria-label="Input field" type="text" class="form-control" readonly id="er_name_<?php echo $e; ?>" value="<?php echo $ern['name']; ?>">
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" readonly id="er_name_<?php echo $e; ?>" value="<?php echo $ern['name']; ?>">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -218,7 +218,7 @@ echo "<pre>"; print_r($code_data); echo "</pre>";
                                                     $component_number = $placevalue[$ern['id']]['monthly_amount'];
                                                 } ?>
 
-                                            <input aria-label="Input field" type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo $ern['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="<?php echo $ern['code']."_component_number"; ?>" id="<?php echo $ern['code']."_component_number"; ?>" />
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo $ern['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="<?php echo $ern['code']."_component_number"; ?>" id="<?php echo $ern['code']."_component_number"; ?>" />
 
                                             <button style="cursor: none; font-size: 12px;" class="btn btn-primary w-100PX f-10" type="button"><?php echo $codedetail; ?> </button>
                                         </div>
@@ -240,20 +240,20 @@ echo "<pre>"; print_r($code_data); echo "</pre>";
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="mb-3">Deductions</h4>
+                            <h4 class="mb-3"><?= __('Deductions'); ?></h4>
                             <div class="row align-items-end mt-3">
                                 <div class="col-lg-4">
                                     <div class="">
-                                        <span class="form-label f-w-600 f-14">Salary Component </span>
+                                        <span class="form-label f-w-600 f-14"><?= __('Salary Component'); ?> </span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="">
-                                        <span class="form-label f-w-600 f-14">Calculation Type </span>
+                                        <span class="form-label f-w-600 f-14"><?= __('Calculation Type'); ?> </span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 ">
-                                    <span class="form-label f-w-600 f-14">Amount Monthly </span>
+                                    <span class="form-label f-w-600 f-14"><?= __('Amount Monthly'); ?> </span>
 
                                 </div>
                             </div>
@@ -282,7 +282,7 @@ echo "<pre>"; print_r($code_data); echo "</pre>";
                                 <div class="row align-items-end dd_row" id="dd_<?php echo $e; ?>">
                                     <div class="col-lg-4">
                                         <div class="form-group mt-3">
-                                            <input aria-label="Input field" type="text" class="form-control" readonly id="dd_name_<?php echo $e; ?>" value="<?php echo $ern['name']; ?>">
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" readonly id="dd_name_<?php echo $e; ?>" value="<?php echo $ern['name']; ?>">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -291,7 +291,7 @@ echo "<pre>"; print_r($code_data); echo "</pre>";
                                             if ($rid!="" && $ern['calculation_type']=='A') {
                                                     $component_number = $placevalue[$ern['id']]['monthly_amount'];
                                                 } ?>
-                                            <input aria-label="Input field" type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo $ern['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="calucation[]" id="<?php echo 'ernam_'.$ern['id']; ?>" aria-describedby="basic-addon2"/>
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo $ern['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="calucation[]" id="<?php echo 'ernam_'.$ern['id']; ?>" aria-describedby="basic-addon2"/>
                                             <button style="cursor: none; font-size: 12px;" class="btn btn-primary w-100PX f-10" type="button"><?php echo $codedetail; ?> </button>
                                         </div>
                                     </div>
@@ -314,12 +314,12 @@ echo "<pre>"; print_r($code_data); echo "</pre>";
                                     <div class="row align-items-end mt-3" id="draggablePanelList_3">
                                         <div class="col-lg-5">
                                             <div class="form-group">
-                                               <input aria-label="Er Name Nt" type="text" class="form-control" readonly id="er_name_nt" value="<?php echo $lsv['NETPAYABLE']['name']; ?>">
+                                               <input aria-label="<?= htmlspecialchars(__('Er Name Nt'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" readonly id="er_name_nt" value="<?php echo $lsv['NETPAYABLE']['name']; ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
                                             <div class="form-group">
-                                                <input aria-label="Er Code Nt" type="text" readonly  id="er_code_nt" value="" class="form-control">
+                                                <input aria-label="<?= htmlspecialchars(__('Er Code Nt'), ENT_QUOTES, 'UTF-8'); ?>" type="text" readonly  id="er_code_nt" value="" class="form-control">
                                             </div>
                                         </div>
 
@@ -331,24 +331,24 @@ echo "<pre>"; print_r($code_data); echo "</pre>";
                 </div>
             </div>
         </div>
-        <h6 class="f-w-500 m-l-5 m-r-5 bg-gray">Footer Details</h6>
+        <h6 class="f-w-500 m-l-5 m-r-5 bg-gray"><?= __('Footer Details'); ?></h6>
         <div class="col-lg-12 card-block">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-3">Footer Amount</h4>
+                    <h4 class="mb-3"><?= __('Footer Amount'); ?></h4>
                     <div class="row">
                         <div class="col-lg-6 mx-auto">
                             <div class="row align-items-end mt-3" id="draggablePanelList_4">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <span class="form-label f-w-600 f-14">Amount</span>
-                                        <input aria-label="Ex: 75800.00" type="text" readonly class="form-control" placeholder="Ex: 75800.00">
+                                        <span class="form-label f-w-600 f-14"><?= __('Amount'); ?></span>
+                                        <input aria-label="<?= htmlspecialchars(__('Ex: 75800.00'), ENT_QUOTES, 'UTF-8'); ?>" type="text" readonly class="form-control" placeholder="<?= htmlspecialchars(__('Ex: 75800.00'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <span class="form-label f-w-600 f-14">On Words</span>
-                                        <input aria-label="Ex: Seventy five thousand eight hundred" type="text" readonly placeholder="Ex: Seventy five thousand eight hundred" class="form-control">
+                                        <span class="form-label f-w-600 f-14"><?= __('On Words'); ?></span>
+                                        <input aria-label="<?= htmlspecialchars(__('Ex: Seventy five thousand eight hundred'), ENT_QUOTES, 'UTF-8'); ?>" type="text" readonly placeholder="<?= htmlspecialchars(__('Ex: Seventy five thousand eight hundred'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
                                     </div>
                                 </div>
                             </div>
