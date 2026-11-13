@@ -19,34 +19,34 @@ $transactionNo = htmlspecialchars($contract['transaction_no'] ?? '', ENT_QUOTES,
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
             <div>
-                <h5 class="mb-0">AMC Schedules — <?php echo $contractName; ?></h5>
+                <h5 class="mb-0"><?= __('AMC Schedules —'); ?> <?php echo $contractName; ?></h5>
                 <?php if ($transactionNo != '') { ?>
-                    <small class="text-muted">Transaction No: <?php echo $transactionNo; ?></small>
+                    <small class="text-muted"><?= __('Transaction No'); ?>: <?php echo $transactionNo; ?></small>
                 <?php } ?>
             </div>
             <div class="d-flex flex-wrap gap-2">
                 <?php if ($contract_id > 0) { ?>
-                <a href="index.php?option=COM_MANAGE_CONTRACT_AMC_CHECKLIST&contract_id=<?php echo $contract_id; ?>" class="btn btn-outline-secondary btn-sm">Manage Checklist</a>
-                <a href="index.php?option=COM_ASSIGN_CONTRACT_AMC_TECHNICIANS&contract_id=<?php echo $contract_id; ?>" class="btn btn-outline-primary btn-sm">Manage Default <?php echo $assigneeLabel; ?>s</a>
+                <a href="index.php?option=COM_MANAGE_CONTRACT_AMC_CHECKLIST&contract_id=<?php echo $contract_id; ?>" class="btn btn-outline-secondary btn-sm"><?= __('Manage Checklist'); ?></a>
+                <a href="index.php?option=COM_ASSIGN_CONTRACT_AMC_TECHNICIANS&contract_id=<?php echo $contract_id; ?>" class="btn btn-outline-primary btn-sm"><?= __('Manage Default'); ?> <?php echo $assigneeLabel; ?>s</a>
                 <?php } ?>
-                <button type="button" class="btn  btn-sm"><i class="icofont icofont-reply"></i>Back</button>
+                <button type="button" class="btn  btn-sm"><i class="icofont icofont-reply"></i><?= __('Back'); ?></button>
             </div>
         </div>
         <div class="card-body">
             <?php if ($contractIsCancelled) { ?>
                 <div class="alert alert-danger mb-3" role="alert">
-                    This contract has been cancelled. You can review planned visits below, but start/finish job actions are disabled.
+                    <?= __('This contract has been cancelled. You can review planned visits below, but start/finish job actions are disabled.'); ?>
                     <?php if (!empty($contract['cancel_reason'])) { ?>
-                        <span class="d-block mt-1"><strong>Reason:</strong> <?php echo htmlspecialchars($contract['cancel_reason'], ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="d-block mt-1"><strong><?= __('Reason'); ?>:</strong> <?php echo htmlspecialchars($contract['cancel_reason'], ENT_QUOTES, 'UTF-8'); ?></span>
                     <?php } ?>
                 </div>
             <?php } elseif (!$contractIsApproved) { ?>
                 <div class="alert alert-warning mb-3" role="alert">
-                    This contract is not approved yet. You can review planned visits below, but start/finish job actions are disabled until approval is complete.
+                    <?= __('This contract is not approved yet. You can review planned visits below, but start/finish job actions are disabled until approval is complete.'); ?>
                 </div>
             <?php } ?>
             <?php if (count((array)$locations) == 0) { ?>
-                <p class="text-muted mb-0">No AMC locations or schedules found for this contract.</p>
+                <p class="text-muted mb-0"><?= __('No AMC locations or schedules found for this contract.'); ?></p>
             <?php } else { ?>
                 <div class="accordion" id="amcScheduleLocationsAccordion">
                 <?php foreach ($locations as $loc) {
@@ -63,13 +63,13 @@ $transactionNo = htmlspecialchars($contract['transaction_no'] ?? '', ENT_QUOTES,
                     <div class="accordion-item mb-2 border rounded shadow-sm">
                         <h2 class="accordion-header" id="<?php echo $locHeadingId; ?>">
                             <button class="accordion-button collapsed fw-semibold text-primary bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $locCollapseId; ?>" aria-expanded="false" aria-controls="<?php echo $locCollapseId; ?>">
-                                <i class="ti-location-pin me-2"></i><?php echo $locName; ?> (<?php echo $assetCount; ?> asset<?php echo $assetCount == 1 ? '' : 's'; ?>)
+                                <i class="ti-location-pin me-2"></i><?php echo $locName; ?> (<?php echo $assetCount; ?> <?= __('asset'); ?><?php echo $assetCount == 1 ? '' : 's'; ?>)
                             </button>
                         </h2>
                         <div id="<?php echo $locCollapseId; ?>" class="accordion-collapse collapse" aria-labelledby="<?php echo $locHeadingId; ?>">
                             <div class="accordion-body p-2">
                                 <?php if ($assetCount == 0) { ?>
-                                    <p class="text-muted f-12 mb-0">No assets at this location.</p>
+                                    <p class="text-muted f-12 mb-0"><?= __('No assets at this location.'); ?></p>
                                 <?php } else { ?>
                                     <div class="accordion" id="amcScheduleAssetsAccordion_<?php echo $locId; ?>">
                                     <?php foreach ($assets as $asset) {
@@ -94,8 +94,8 @@ $transactionNo = htmlspecialchars($contract['transaction_no'] ?? '', ENT_QUOTES,
                                                     <?php } ?>
                                                     <?php if (count((array)$rollup) > 0) { ?>
                                                     <small class="ms-auto text-muted me-2">
-                                                        Pending: <?php echo (int) ($rollup['pending_count'] ?? 0); ?>
-                                                        <?php if (!empty($rollup['next_visit'])) { ?> | Next: <?php echo fromDate($rollup['next_visit']); ?><?php
+                                                        <?= __('Pending'); ?>: <?php echo (int) ($rollup['pending_count'] ?? 0); ?>
+                                                        <?php if (!empty($rollup['next_visit'])) { ?> <?= __('| Next'); ?>: <?php echo fromDate($rollup['next_visit']); ?><?php
 } ?>
                                                     </small>
                                                     <?php } ?>
@@ -107,18 +107,18 @@ $transactionNo = htmlspecialchars($contract['transaction_no'] ?? '', ENT_QUOTES,
                                                         <table class="table table-bordered table-sm f-12 mb-0">
                                                             <thead class="table-light">
                                                                 <tr>
-                                                                    <th scope="col">Planned</th>
-                                                                    <th scope="col">Actual Start</th>
-                                                                    <th scope="col">Actual End</th>
+                                                                    <th scope="col"><?= __('Planned'); ?></th>
+                                                                    <th scope="col"><?= __('Actual Start'); ?></th>
+                                                                    <th scope="col"><?= __('Actual End'); ?></th>
                                                                     <th scope="col"><?php echo $assigneeLabel; ?></th>
-                                                                    <th scope="col">Repair Order Amount</th>
-                                                                    <th scope="col">Status</th>
-                                                                    <th scope="col">Action</th>
+                                                                    <th scope="col"><?= __('Repair Order Amount'); ?></th>
+                                                                    <th scope="col"><?= __('Status'); ?></th>
+                                                                    <th scope="col"><?= __('Action'); ?></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <?php if (count((array)$schedules) == 0) { ?>
-                                                                    <tr><td colspan="7" class="text-center text-muted">No visits</td></tr>
+                                                                    <tr><td colspan="7" class="text-center text-muted"><?= __('No visits'); ?></td></tr>
                                                                 <?php } else {
                                                                     foreach ($schedules as $sch) {
                                                                         if (is_object($sch)) {
@@ -139,11 +139,11 @@ $transactionNo = htmlspecialchars($contract['transaction_no'] ?? '', ENT_QUOTES,
                                                                                     $isOverride = !empty($sch['technician_is_override']);
                                                                                 }
                                                                                 if ($assigneeName == '') {
-                                                                                    echo '<span class="text-muted">Unassigned</span>';
+                                                                                    echo '<span class="text-muted">'.__('Unassigned').'</span>';
                                                                                 } else {
                                                                                     echo $assigneeName;
                                                                                     if ($isOverride) {
-                                                                                        echo ' <span class="badge bg-warning text-dark">override</span>';
+                                                                                        echo ' <span class="badge bg-warning text-dark">'.__('override').'</span>';
                                                                                     }
                                                                                 }
                                                                                 ?>
@@ -160,7 +160,7 @@ $transactionNo = htmlspecialchars($contract['transaction_no'] ?? '', ENT_QUOTES,
                                                                                         $repairUrl .= '&Rid=' . deocdeId('id:' . (int) $sch['repair_order_id']);
                                                                                     }
                                                                                     ?>
-                                                                                <a href="<?php echo htmlspecialchars($repairUrl, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener noreferrer" class="ms-1" title="Repair order (job in progress)">
+                                                                                <a href="<?php echo htmlspecialchars($repairUrl, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener noreferrer" class="ms-1" title="<?= htmlspecialchars(__('Repair order (job in progress)'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                                     <i class="fa fa-wrench text-warning f-16"></i>
                                                                                 </a>
                                                                                 <?php } elseif (($sch['repair_eligibility'] ?? '') == 'readonly' || !empty($sch['has_repair_order'])) {
@@ -169,7 +169,7 @@ $transactionNo = htmlspecialchars($contract['transaction_no'] ?? '', ENT_QUOTES,
                                                                                         $repairUrl .= '&Rid=' . deocdeId('id:' . (int) $sch['repair_order_id']);
                                                                                     }
                                                                                     ?>
-                                                                                <a href="<?php echo htmlspecialchars($repairUrl, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener noreferrer" class="ms-1" title="View repair order">
+                                                                                <a href="<?php echo htmlspecialchars($repairUrl, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener noreferrer" class="ms-1" title="<?= htmlspecialchars(__('View repair order'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                                     <i class="fa fa-wrench text-muted f-16"></i>
                                                                                 </a>
                                                                                 <?php } ?>
@@ -205,7 +205,7 @@ window.addEventListener("load", function() {
     $(document).on("click", ".openContractAmcScheduleModal", function(e) {
         e.preventDefault();
         var scheduleId = $(this).data("schedule-id");
-        var loader = '<div class="text-center p-5"><img src="assets/images/spiner/spiner3.gif" style="width: 200px;" alt="Preview"></div>';
+        var loader = '<div class="text-center p-5"><img src="assets/images/spiner/spiner3.gif" style="width: 200px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#contract_amc_schedule_modal_body").html(loader);
         $("#kt_modal_contract_amc_schedule").modal("show");
         $.ajax({
