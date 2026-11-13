@@ -83,8 +83,8 @@ function gradenetcolorcodes($grd,$inputValue){
     }
 ?>
 
-  <div class="f-12 f-w-800 float-start" style="width:270px; color: #19D100;">Low </div>
-  <div class="f-12 f-w-800 " style="color: #FF0000;">High</div>
+  <div class="f-12 f-w-800 float-start" style="width:270px; color: #19D100;"><?= __('Low'); ?> </div>
+  <div class="f-12 f-w-800 " style="color: #FF0000;"><?= __('High'); ?></div>
   <div class="float-left">
    <?php $gradient = array('0'=>'#FF0000', '1'=>'#E61900', '2'=>'#CC3200', '3'=>'#B34B00', '4'=>'#996400', '5'=>'#7F7D00', '6'=>'#668600', '7'=>'#4C9F00', '8'=>'#32B800', '9'=>'#19D100');
    for($gn=9;$gn>=0;$gn--){ ?>
@@ -93,7 +93,7 @@ function gradenetcolorcodes($grd,$inputValue){
 </div>
 <?php $top_val = array('J'=>'Job Title', 'P'=>'Item Price', 'U'=>'Purchase UOM', 'M'=>'Min/MAX'); ?>
 <div class="float-right">
-   <span class="f-14 "> <b class="f-14 f-w-600">Currency:</b> <?php
+   <span class="f-14 "> <b class="f-14 f-w-600"><?= __('Currency'); ?>:</b> <?php
 $_SESSION['download_data_currency_code'] = $cc_val_arr[$cc_id];
 
 echo $cc_val_arr[$cc_id]; ?> &nbsp;</span>
@@ -110,13 +110,13 @@ echo $cc_val_arr[$cc_id]; ?> &nbsp;</span>
   <table class=" table table-bordered table-sm">
     <tr style="background-color: #eeeeee;">
       <th scope="col" class="th_head">#</th>
-      <th scope="col" class="th_head">Vendors </th>
+      <th scope="col" class="th_head"><?= __('Vendors'); ?> </th>
       <?php foreach ($ave_array as $ave_arr) {
         if(strpos($ave_arr,'-999')){
           $ave_arr = str_replace('-999','+',$ave_arr);
         }
         ?>
-        <th scope="col" class="th_head">Average of <?php echo $ave_arr; ?> yrs</th>
+        <th scope="col" class="th_head"><?= __('Average of'); ?> <?php echo $ave_arr; ?> <?= __('yrs'); ?></th>
       <?php } ?>
     </tr>
     <?php $sl=1;$lists= array();  if(count((array)$result['data'])>0){
