@@ -83,7 +83,7 @@ if($_REQUEST['assessment_year']){
       });
 
       swal({
-          title: "Please Select Assement Year",
+          title: <?php echo json_encode(__('Please Select Assement Year'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
           type: "error",
           showCancelButton: false,
           closeOnConfirm: true,
@@ -113,15 +113,15 @@ if($_REQUEST['assessment_year']){
   <div class="container-fluid">
     <div class="card">
       <div class="card-header">
-        <h5> Assign Employees</h5>
+        <h5> <?= __('Assign Employees'); ?></h5>
         <div class="card-header-right">
           <button type="button" class="btn btn-primary" onclick="showfilter()">
-            Filter
+            <?= __('Filter'); ?>
           </button>
 
           <input type="hidden" name="filterval" id="filterval" value="0">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-            <i class="icofont icofont-reply"></i>  Back
+            <i class="icofont icofont-reply"></i>  <?= __('Back'); ?>
           </a>
         </div>
       </div>
@@ -129,9 +129,9 @@ if($_REQUEST['assessment_year']){
         <form class="kt-form kt-form--label-right" action="" method="post">
         <div class="row col-lg-12" style="display:none;" id="showfilter">
           <div class="col-lg-3 form-group kt-margin-b-10-tablet-and-mobile">
-              <span><?php echo "Cost Center"; ?>:</span>
-              <select aria-label="Cost Center Pp" class=" form-select js-example-basic-single" id="cost_center_pp" name="cost_center_pp">
-                <option value=""> All  </option>
+              <span><?php echo __("Cost Center"); ?>:</span>
+              <select aria-label="<?= htmlspecialchars(__('Cost Center Pp'), ENT_QUOTES, 'UTF-8'); ?>" class=" form-select js-example-basic-single" id="cost_center_pp" name="cost_center_pp">
+                <option value=""> <?= __('All'); ?>  </option>
                 <?php foreach($empcos as $cos){ $emp_cos[$cos['id']]= $cos['cost_center_name']; ?>
                 <option   <?php if($ress['cost_center_pp'] == $cos['id'] ){ ?> selected <?php
 } ?> value="<?php echo $cos['id']; ?>"><?php echo $cos['cost_center_name']; ?></option>
@@ -139,9 +139,9 @@ if($_REQUEST['assessment_year']){
                </select>
           </div>
           <div class="col-lg-3  form-group kt-margin-b-10-tablet-and-mobile">
-            <span><?php echo "Vendors"; ?>:</span>
-            <select aria-label="Vendor" class=" form-select js-example-basic-single" id="vendor" name="vendor">
-              <option value=""> All  </option>
+            <span><?php echo __("Vendors"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class=" form-select js-example-basic-single" id="vendor" name="vendor">
+              <option value=""> <?= __('All'); ?>  </option>
               <?php foreach($empven as $ven){ $emp_ven[$ven['id']]= $ven['display_name']; ?>
               <option   <?php if($ress['vendor'] == $ven['id'] ){ ?> selected <?php
 } ?> value="<?php echo $ven['id']; ?>"><?php echo $ven['display_name']; ?></option>
@@ -149,9 +149,9 @@ if($_REQUEST['assessment_year']){
             </select>
           </div>
           <div class="col-lg-3 form-group kt-margin-b-10-tablet-and-mobile">
-            <span><?php echo "Department"; ?>:</span>
-            <select aria-label="Department" class=" form-select js-example-basic-single" id="department" name="department">
-              <option value=""> All  </option>
+            <span><?php echo __("Department"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Department'), ENT_QUOTES, 'UTF-8'); ?>" class=" form-select js-example-basic-single" id="department" name="department">
+              <option value=""> <?= __('All'); ?>  </option>
               <?php foreach($empdep as $dep){ $emp_dep[$dep['id']]= $dep['department_name'];  ?>
               <option  <?php if($ress['department'] == $dep['id'] ){ ?> selected <?php
 } ?> value="<?php echo $dep['id']; ?>"><?php echo $dep['department_name']; ?></option>
@@ -159,9 +159,9 @@ if($_REQUEST['assessment_year']){
             </select>
           </div>
           <div class="col-lg-3 form-group kt-margin-b-10-tablet-and-mobile">
-            <span><?php echo "Designation"; ?>:</span>
-            <select aria-label="Designation" class=" form-select js-example-basic-single" id="designation" name="designation">
-              <option value=""> All  </option>
+            <span><?php echo __("Designation"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Designation'), ENT_QUOTES, 'UTF-8'); ?>" class=" form-select js-example-basic-single" id="designation" name="designation">
+              <option value=""> <?= __('All'); ?>  </option>
               <?php foreach($empdes as $des){  $emp_des[$des['id']]= $des['designation_name'];  ?>
               <option  <?php if($ress['designation'] == $des['id'] ){ ?> selected <?php
 } ?> value="<?php echo $des['id']; ?>"><?php echo $des['designation_name']; ?></option>
@@ -169,9 +169,9 @@ if($_REQUEST['assessment_year']){
             </select>
           </div>
           <div class="col-lg-3  form-group kt-margin-b-10-tablet-and-mobile mt-2">
-            <span><?php echo "Location"; ?>:</span>
-            <select aria-label="Location" class=" form-select js-example-basic-single" id="location" name="location">
-              <option value=""> All  </option>
+            <span><?php echo __("Location"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class=" form-select js-example-basic-single" id="location" name="location">
+              <option value=""> <?= __('All'); ?>  </option>
               <?php foreach($emploc as $loc){ $emp_loc[$loc['id']]= $loc['location_name']; ?>
               <option   <?php if($ress['location'] == $loc['id'] ){ ?> selected <?php
 } ?> value="<?php echo $loc['id']; ?>"><?php echo $loc['location_name']; ?></option>
@@ -179,8 +179,8 @@ if($_REQUEST['assessment_year']){
             </select>
           </div>
           <div class="col-lg-3 form-group kt-margin-b-10-tablet-and-mobile mt-2">
-            <span>Enter Employee Name/Code</span>
-            <input aria-label="Emp Name Code" type="text" class="form-control" name="emp_name_code"  value="<?php echo $_POST['emp_name_code']; ?>" id="emp_name_code">
+            <span><?= __('Enter Employee Name/Code'); ?></span>
+            <input aria-label="<?= htmlspecialchars(__('Emp Name Code'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="emp_name_code"  value="<?php echo $_POST['emp_name_code']; ?>" id="emp_name_code">
           </div>
           <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
             <span>&nbsp;</span>
@@ -188,7 +188,7 @@ if($_REQUEST['assessment_year']){
             <input type="hidden" name="submit" value="search" />
             <div>
               <button class="btn btn-primary btn-brand--icon" id="kt_search" >
-                <span><span>Search</span></span>
+                <span><span><?= __('Search'); ?></span></span>
               </button>
             </div>
           </div>
@@ -196,10 +196,10 @@ if($_REQUEST['assessment_year']){
         </form>
         <div class="separator separator-solid mb-3"></div>
         <div class="row col-lg-12">
-          <div class="col-lg-3"> <span>Assement Year:&nbsp;</span> </div>
+          <div class="col-lg-3"> <span><?= __('Assement Year'); ?>:&nbsp;</span> </div>
           <div class="col-lg-3">
-            <select aria-label="Assement" class="js-example-basic-single" name="assement" id="assement" onchange="assementdetail(this.value)">
-              <option value="0">Select Year</option>
+            <select aria-label="<?= htmlspecialchars(__('Assement'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="assement" id="assement" onchange="assementdetail(this.value)">
+              <option value="0"><?= __('Select Year'); ?></option>
               <?php $asyear = date('Y'); $asyear = $asyear-5;
                   for($i=1;$i<6;$i++){
                       $vaass = $asyear."-".($asyear+1);
@@ -216,16 +216,16 @@ if($_REQUEST['assessment_year']){
             <thead >
               <tr>
                 <th scope="col" style="width: 2%;">
-                    <input aria-label="Checkall" type="checkbox"  id="checkall" onclick="tocheckallboxes()" onkeydown="">
+                    <input aria-label="<?= htmlspecialchars(__('Checkall'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox"  id="checkall" onclick="tocheckallboxes()" onkeydown="">
                     <input type="hidden" name="" id="val_select_all" value="0">
                   </div>
                 </th>
                 <th scope="col" style="width: 2%;">#</th>
-                <th scope="col" style="width: 15%;">Name </th>
-                <th scope="col" style="width: 15%;">Cost Center</th>
-                <th scope="col" style="width: 10%;">Location</th>
-                <th scope="col" style="width: 10%;">Department</th>
-                <th scope="col" style="width: 10%;">Designation</th>
+                <th scope="col" style="width: 15%;"><?= __('Name'); ?> </th>
+                <th scope="col" style="width: 15%;"><?= __('Cost Center'); ?></th>
+                <th scope="col" style="width: 10%;"><?= __('Location'); ?></th>
+                <th scope="col" style="width: 10%;"><?= __('Department'); ?></th>
+                <th scope="col" style="width: 10%;"><?= __('Designation'); ?></th>
               </tr>
             </thead>
             <tbody >
@@ -233,7 +233,7 @@ if($_REQUEST['assessment_year']){
                 <tr >
                   <td class="p-2">
                     <div class="form-group mt-2 mb-0">
-                      <input aria-label="Checkcolor"  type="checkbox" name="checkcolor" <?php if(in_array($row['id'],(array)$aemp)){ echo "checked";
+                      <input aria-label="<?= htmlspecialchars(__('Checkcolor'), ENT_QUOTES, 'UTF-8'); ?>"  type="checkbox" name="checkcolor" <?php if(in_array($row['id'],(array)$aemp)){ echo "checked";
 } ?> class="checkbox1" onclick="assignemp(<?php echo $row['id']; ?>, 'single')" id="check_<?php echo $row['id']; ?>" onkeydown="" />
 
                     </div>
@@ -242,9 +242,9 @@ if($_REQUEST['assessment_year']){
                   <td class="p-2">
                     <div class="align-middle">
                       <?php if($row['image']!="") {?>
-                        <img src="uploads/all/<?php echo $row['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                        <img src="uploads/all/<?php echo $row['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                       <?php } else { ?>
-                        <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($row['display_name']); ?></span>
+                        <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($row['display_name']); ?></span>
                       <?php } ?>
                       <div class="d-inline-block width73">
                         <a href="#!" class="text-capitalize"><h6>   <?php echo $row['display_name']; ?></h6></a>
