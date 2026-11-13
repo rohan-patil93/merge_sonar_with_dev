@@ -41,7 +41,7 @@ $arslabs  = $result['arslabs'];
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h6 class="m-b-5 text-white">Total Employess</h6>
+                        <h6 class="m-b-5 text-white"><?= __('Total Employess'); ?></h6>
                         <h3 class="m-b-0 f-w-700 text-white">1</h3>
                     </div>
                     <div class="col-auto">
@@ -56,7 +56,7 @@ $arslabs  = $result['arslabs'];
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h6 class="m-b-5 text-white">Total Appraisals</h6>
+                        <h6 class="m-b-5 text-white"><?= __('Total Appraisals'); ?></h6>
                         <h3 class="m-b-0 f-w-700 text-white"><?php echo $total_cnt['total_appraisals']; ?></h3>
                     </div>
                     <div class="col-auto">
@@ -71,7 +71,7 @@ $arslabs  = $result['arslabs'];
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col col-lg-5">
-                        <h6 class="m-b-5 text-white f-14 text-center">Self Goals</h6>
+                        <h6 class="m-b-5 text-white f-14 text-center"><?= __('Self Goals'); ?></h6>
                         <div class="row align-items-center text-center">
                             <div class="col">
                                 <h3 class="m-b-0 text-white"><?php echo $total_cnt['total_self_goals']; ?></h3>
@@ -82,7 +82,7 @@ $arslabs  = $result['arslabs'];
                         <i class="fas fa-exchange-alt text-c-green f-18"></i>
                     </div>
                     <div class="col col-lg-5">
-                        <h6 class="m-b-5 text-white f-14 text-center">Total Publish</h6>
+                        <h6 class="m-b-5 text-white f-14 text-center"><?= __('Total Publish'); ?></h6>
                         <div class="row align-items-center text-center">
                             <div class="col">
                                 <h3 class="m-b-0 text-white"><?php echo $total_cnt['total_shared_goals']?></h3>
@@ -98,7 +98,7 @@ $arslabs  = $result['arslabs'];
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col col-lg-5">
-                        <h6 class="m-b-5 text-white f-14 text-center">Request FeedBacks</h6>
+                        <h6 class="m-b-5 text-white f-14 text-center"><?= __('Request FeedBacks'); ?></h6>
                         <div class="row align-items-center text-center">
                             <div class="col">
                                 <h3 class="m-b-0 text-white"><?php echo $total_cnt['total_self_feedbacks']; ?></h3>
@@ -109,7 +109,7 @@ $arslabs  = $result['arslabs'];
                         <i class="fas fa-exchange-alt text-c-green f-18"></i>
                     </div>
                     <div class="col col-lg-5">
-                        <h6 class="m-b-5 text-white f-14 text-center">Received FeedBacks</h6>
+                        <h6 class="m-b-5 text-white f-14 text-center"><?= __('Received FeedBacks'); ?></h6>
                         <div class="row align-items-center text-center">
                             <div class="col">
                                 <h3 class="m-b-0 text-white"><?php echo $total_cnt['total_feedback']; ?></h3>
@@ -125,9 +125,9 @@ $arslabs  = $result['arslabs'];
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5>My Appraisals</h5>
+                <h5><?= __('My Appraisals'); ?></h5>
                 <div class="card-header-right table-card-header">
-                    <span class="text-c-yellow f-w-700">Count Of Appraisals : <?php echo count((array)$employee_performance_appraisals); ?></span>
+                    <span class="text-c-yellow f-w-700"><?= __('Count Of Appraisals'); ?> : <?php echo count((array)$employee_performance_appraisals); ?></span>
                 </div>
             </div>
             <div class="card-body">
@@ -135,9 +135,9 @@ $arslabs  = $result['arslabs'];
                     <table class="table table-hover m-b-0" style="font-size:13px;">
                         <thead>
                             <tr>
-                                <th scope="col" class="w-b-w-s" style="width: 70%;">Appraisal</th>
-                                <th scope="col" style="width: 15%;">Self Score</th>
-                                <th scope="col" style="width: 15%;">RO Score</th>
+                                <th scope="col" class="w-b-w-s" style="width: 70%;"><?= __('Appraisal'); ?></th>
+                                <th scope="col" style="width: 15%;"><?= __('Self Score'); ?></th>
+                                <th scope="col" style="width: 15%;"><?= __('RO Score'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -148,7 +148,7 @@ $arslabs  = $result['arslabs'];
                                         <a href="index.php?option=COM_INSERT_EMPLOYEE_PERFORMANCE_APPRAISALS&Rid=<?php echo deocdeId('id:'.$epa['id']); ?>" target="_blank"> <i class="fa fa-edit"></i>
                                             <?php echo $epa['performance_appraisal_name']; ?>
                                         <p><small><?php echo fromDate($eg['start_date']); ?></small>
-                                        To <small><?php echo fromDate($eg['end_date']); ?></small></p>
+                                        <?= __('To'); ?> <small><?php echo fromDate($eg['end_date']); ?></small></p>
                                     </a>
                                     </td>
                                     <td class="p-2 text-right">
@@ -184,9 +184,9 @@ $arslabs  = $result['arslabs'];
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5>My Goals</h5>
+                <h5><?= __('My Goals'); ?></h5>
                 <div class="card-header-right table-card-header">
-                    <span class="text-c-yellow f-w-700">Count Of Goals : <?php echo count((array)$employee_goals); ?></span>
+                    <span class="text-c-yellow f-w-700"><?= __('Count Of Goals'); ?> : <?php echo count((array)$employee_goals); ?></span>
                 </div>
             </div>
             <div class="card-body">
@@ -194,8 +194,8 @@ $arslabs  = $result['arslabs'];
                     <table class="table table-hover m-b-0" style="font-size:13px;">
                         <thead>
                             <tr>
-                                <th scope="col" class="w-b-w-s" style="width: 70%;">Goal</th>
-                                <th scope="col" style="width: 30%;">Progress</th>
+                                <th scope="col" class="w-b-w-s" style="width: 70%;"><?= __('Goal'); ?></th>
+                                <th scope="col" style="width: 30%;"><?= __('Progress'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -205,13 +205,13 @@ $arslabs  = $result['arslabs'];
                                     <td class="p-2 w-b-w-s">
                                         <i class="fa fa-edit"></i>
                                         <?php echo $eg['goal_name']; ?>
-                                        <p><small><?php echo fromDate($eg['goal_start_date']); ?></small> TO <small><?php echo fromDate($eg['goal_end_date']); ?></small></p>
+                                        <p><small><?php echo fromDate($eg['goal_start_date']); ?></small> <?= __('TO'); ?> <small><?php echo fromDate($eg['goal_end_date']); ?></small></p>
                                     </td>
                                     <td class="p-2">
                                         <div class="row align-items-center">
                                             <div class="col">
                                                 <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                                    <span class="">Progress</span>
+                                                    <span class=""><?= __('Progress'); ?></span>
                                                     <span class=""><?php echo $eg['percentage_of_completion']; ?>%</span>
                                                 </div>
                                                 <div class="progress progress-xs">
@@ -232,9 +232,9 @@ $arslabs  = $result['arslabs'];
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5>My FeedBacks</h5>
+                <h5><?= __('My FeedBacks'); ?></h5>
                 <div class="card-header-right table-card-header">
-                    <span class="text-c-yellow f-w-700">Count Of FeedBacks : <?php echo count((array)$employee_feedbacks); ?></span>
+                    <span class="text-c-yellow f-w-700"><?= __('Count Of FeedBacks'); ?> : <?php echo count((array)$employee_feedbacks); ?></span>
                 </div>
             </div>
             <div class="card-body">
@@ -243,8 +243,8 @@ $arslabs  = $result['arslabs'];
                         <thead>
                             <tr>
                                 <th scope="col" style="width: 10%;">#</th>
-                                <th scope="col" class="w-b-w-s" style="width: 80%;">FeedBacks</th>
-                                <th scope="col" style="width: 10%;">Response</th>
+                                <th scope="col" class="w-b-w-s" style="width: 80%;"><?= __('FeedBacks'); ?></th>
+                                <th scope="col" style="width: 10%;"><?= __('Response'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -258,7 +258,7 @@ $arslabs  = $result['arslabs'];
                                     <td class="p-2  text-center">
                                         <?php if($ef['response_status']==''){ echo "Pendding";
 }else{  ?>
-                                            <i class="ti-eye f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View FeedBack" onclick="getEmployeeFeedbacks('<?php echo $ef['id']; ?>','<?php echo $ef['employee_id']?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                            <i class="ti-eye f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View FeedBack'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getEmployeeFeedbacks('<?php echo $ef['id']; ?>','<?php echo $ef['employee_id']?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
                                         <?php } ?>
                                     </td>
                                 </tr>
