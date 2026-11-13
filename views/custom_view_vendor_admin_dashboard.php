@@ -58,17 +58,17 @@ $stausresult = ViewStatusData();
                 <div class="flex-shrink-0 m-r-30 m-l-25 mt-lg-0 mt-3">
                     <?php if($_SESSION['user']['user_photo']!=""){ ?>
                     <div class="symbol symbol-50 symbol-lg-120">
-                      <img src="../uploads/all/<?php echo $_SESSION['user']['user_photo']; ?>" class="img-120 " onerror="this.src='uploads/all/no-image.jpg';" alt="Details"/>
+                      <img src="../uploads/all/<?php echo $_SESSION['user']['user_photo']; ?>" class="img-120 " onerror="this.src='uploads/all/no-image.jpg';" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>"/>
                     </div>
 
                   <?php }else{ ?>
                     <div class="symbol symbol-50 symbol-lg-120">
-                      <img src="../uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-120 " onerror="this.src='uploads/all/no-image.jpg';" alt="Details"/>
+                      <img src="../uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-120 " onerror="this.src='uploads/all/no-image.jpg';" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>"/>
                     </div>
                   <?php } ?>
                     <div class="d-flex align-items-center w-100px w-sm-120px flex-column mt-3 ">
                         <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                          <span class="f-12 f-w-600">Task </span>
+                          <span class="f-12 f-w-600"><?= __('Task'); ?> </span>
                           <span class="f-12 f-w-600"><?php echo $totaltaskper; ?>%</span>
                         </div>
                         <div class="col-md-12">
@@ -108,7 +108,7 @@ $stausresult = ViewStatusData();
                                 <div class="card-body text-center p-0">
                                     <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                     <h3 class="text-facebook f-w-700"><?php echo $result['total_vendors']!=""?$result['total_vendors']:"0"; ?></h3>
-                                    <p>Total Vendors</p>
+                                    <p><?= __('Total Vendors'); ?></p>
                                 </div>
                             </div>
                         </a>
@@ -119,7 +119,7 @@ $stausresult = ViewStatusData();
                                 <div class="card-body text-center p-0">
                                     <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                     <h3 class="text-facebook f-w-700"><?php echo $transaction_vendor_cnt['active_cnt']!=""?$transaction_vendor_cnt['active_cnt']:0; ?></h3>
-                                    <p>Active Vendors</p>
+                                    <p><?= __('Active Vendors'); ?></p>
                                 </div>
                             </div>
                         </a>
@@ -130,7 +130,7 @@ $stausresult = ViewStatusData();
                                 <div class="card-body text-center p-0">
                                     <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                     <h3 class="text-facebook f-w-700"><?php echo $transaction_vendor_cnt['inprogress_cnt']!=""?$transaction_vendor_cnt['inprogress_cnt']:"0"; ?></h3>
-                                    <p>In-Progress Vendors</p>
+                                    <p><?= __('In-Progress Vendors'); ?></p>
                                 </div>
                             </div>
                         </a>
@@ -141,7 +141,7 @@ $stausresult = ViewStatusData();
                                 <div class="card-body text-center p-0">
                                     <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                     <h3 class="text-facebook f-w-700"><?php echo $transaction_vendor_cnt['approved_cnt']!=""?$transaction_vendor_cnt['approved_cnt']:"0"; ?></h3>
-                                    <p>Approved Vendors</p>
+                                    <p><?= __('Approved Vendors'); ?></p>
                                 </div>
                             </div>
                         </a>
@@ -155,35 +155,35 @@ $stausresult = ViewStatusData();
                         <div class="s-caption  text-primary"><i class="ti-list f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totaltask; ?></h5>
-                            <p class="m-b-0 f-12">Total Task</p>
+                            <p class="m-b-0 f-12"><?= __('Total Task'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-danger"><i class="ti-time f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totalyettostartcnttask; ?></h5>
-                            <p class="m-b-0 f-12">Yet To Start</p>
+                            <p class="m-b-0 f-12"><?= __('Yet To Start'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-info"><i class="ti-timer f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totalinprogresstask; ?></h5>
-                            <p class="m-b-0  f-12">In Progress</p>
+                            <p class="m-b-0  f-12"><?= __('In Progress'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-info"><i class="ti-write f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totalreviewpendingtask; ?></h5>
-                            <p class="m-b-0 f-12">Review</p>
+                            <p class="m-b-0 f-12"><?= __('Review'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-success"><i class="ti-check-box f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totalapprovedtask; ?></h5>
-                            <p class="m-b-0 f-12">Completed</p>
+                            <p class="m-b-0 f-12"><?= __('Completed'); ?></p>
                         </div>
                     </div>
                     <div class="col-1 text-center"></div>
@@ -198,13 +198,13 @@ $stausresult = ViewStatusData();
         <div class="col-lg-12 text-left"></div>
         <div class="col-lg-12 text-right">
 
-            <a class="btn btn-warning waves-effect waves-light" href="index.php?option=com_logout" target="_blank"><i class="ti-plus"></i> Document Verification</a>
+            <a class="btn btn-warning waves-effect waves-light" href="index.php?option=com_logout" target="_blank"><i class="ti-plus"></i> <?= __('Document Verification'); ?></a>
 
 
-            <a class="btn btn-info waves-effect waves-light" href="index?option=COM_LIST_APPLICATION_USER_INVITATIONS"><i class="ti-plus"></i> Invite User</a>
+            <a class="btn btn-info waves-effect waves-light" href="index?option=COM_LIST_APPLICATION_USER_INVITATIONS"><i class="ti-plus"></i> <?= __('Invite User'); ?></a>
 
-            <a class="btn btn-success waves-effect waves-light" href="index?option=COM_INSERT_VENDOR_REGISTERS&transaction_table=vendor_registers"><i class="ti-plus"></i> Create Vendor</a>
-            <a class="btn btn-primary waves-effect waves-light" href="index?option=COM_LIST_PROCESS_TASK_SETTINGS"><i class="ti-plus"></i> Task</a>
+            <a class="btn btn-success waves-effect waves-light" href="index?option=COM_INSERT_VENDOR_REGISTERS&transaction_table=vendor_registers"><i class="ti-plus"></i> <?= __('Create Vendor'); ?></a>
+            <a class="btn btn-primary waves-effect waves-light" href="index?option=COM_LIST_PROCESS_TASK_SETTINGS"><i class="ti-plus"></i> <?= __('Task'); ?></a>
         </div>
     </div>
 <?php } ?>
@@ -212,7 +212,7 @@ $stausresult = ViewStatusData();
     <div class="col-lg-3">
         <div class="card">
             <div class="card-header  ">
-                <h5>Registration Requests</h5>
+                <h5><?= __('Registration Requests'); ?></h5>
                 <div class="card-header-right table-card-header ">
                     <span class="form-label label label-md label-warning float-right"><?php echo count((array)$vendor_registration_requests); ?> </span>
                 </div>
@@ -223,7 +223,7 @@ $stausresult = ViewStatusData();
                 <table class="table table-hover m-b-0 register_vendor_filter f-13">
                     <thead>
                         <tr>
-                            <th scope="col" class="p-2">Vendor Registration Requests Details</th>
+                            <th scope="col" class="p-2"><?= __('Vendor Registration Requests Details'); ?></th>
                             <th scope="col" class="p-2"></th>
                         </tr>
                     </thead>
@@ -234,7 +234,7 @@ $stausresult = ViewStatusData();
                         <tr class="showallemp">
                             <td class="p-2">
                                  <div class="align-middle">
-                                    <span  alt="user" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center"><?php echo initials($vendorsres['company_name']); ?></span>
+                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center"><?php echo initials($vendorsres['company_name']); ?></span>
                                     <div class="d-inline-block width73 text-primary">
                                             <?php
                                             if($vendorsres['company_name'] !=""){ ?>
@@ -244,7 +244,7 @@ $stausresult = ViewStatusData();
                                                 <h6 class="mb-0 text-primary  mt-2"><i class="ti-user"></i> <?php echo $vendorsres['display_name']; ?></h6>
                                             <?php } ?>
                                         <p class="text-muted m-b-0  mt-2"><?php echo $vendorsres['user_email']; ?></p>
-                                        <p class="text-muted m-b-0 f-12 f-w-600 ">Requested Date : <?php echo $vendorsres['request_datetime'] !=""?fromDate($vendorsres['request_datetime']):"Pending"; ?></p>
+                                        <p class="text-muted m-b-0 f-12 f-w-600 "><?= __('Requested Date'); ?> : <?php echo $vendorsres['request_datetime'] !=""?fromDate($vendorsres['request_datetime']):"Pending"; ?></p>
                                     </div>
                                 </div>
                                 <div class=" mt-2 text-end">
@@ -253,11 +253,11 @@ $stausresult = ViewStatusData();
                                     <a href="index?option=COM_INSERT_VENDOR_REGISTRATION_REQUESTS&Rid=<?php echo deocdeId('id:'.$vendorsres['id']); ?>" target="_blank" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php if($vendorsres['share_pdf'] == "Y"){ ?>View Registration Details<?php
 }else{  ?>Edit Registration Details<?php
 } ?>"><button class="btn btn-warning waves-effect waves-light btn-mini">
- <?php if($vendorsres['share_pdf'] == "Y"){ ?>View<?php
-}else{  ?>Edit<?php
+ <?php if($vendorsres['share_pdf'] == "Y"){ ?><?= __('View'); ?><?php
+}else{  ?><?= __('Edit'); ?><?php
 } ?></button></a>
                                     <?php if($_SESSION['admin_type'] == 1){ ?>
-                                        <a href="index?option=COM_INSERT_VENDOR_REGISTERS&VTYPE=VR&VRRid=<?php echo deocdeId('id:'.$vendorsres['id']); ?>&transaction_table=vendor_registers" target="_blank" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Register Vendor"><button class="btn btn-success waves-effect waves-light btn-mini"><i class="ti-pencil-alt"></i> Register</button></a>
+                                        <a href="index?option=COM_INSERT_VENDOR_REGISTERS&VTYPE=VR&VRRid=<?php echo deocdeId('id:'.$vendorsres['id']); ?>&transaction_table=vendor_registers" target="_blank" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Register Vendor'), ENT_QUOTES, 'UTF-8'); ?>"><button class="btn btn-success waves-effect waves-light btn-mini"><i class="ti-pencil-alt"></i> <?= __('Register'); ?></button></a>
                                     <?php } ?>
                                 </div>
                             </td>
@@ -267,7 +267,7 @@ $stausresult = ViewStatusData();
                 </table>
                 <?php  }else{ ?>
                 <div class="card-px text-center py-20 mt-2">
-                    <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Vendors </p>
+                    <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Vendors'); ?> </p>
                     <div class="text-center px-4">
                         <img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
                     </div>
@@ -283,25 +283,25 @@ $stausresult = ViewStatusData();
                 <ul class="nav md-tabs infisuite_tab mb-2">
 
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link f-w-600 f-12 active"  data-clone="quotations" data-bs-toggle="tab" href="#vendor-tab" role="tab" aria-selected="false" tabindex="-1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Vendors &nbsp; <span class="form-label label label-md label-success float-right"><?php echo $result['total_vendors']!=""?$result['total_vendors']:"0"; ?> </span></a>
+                        <a class="nav-link f-w-600 f-12 active"  data-clone="quotations" data-bs-toggle="tab" href="#vendor-tab" role="tab" aria-selected="false" tabindex="-1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Vendors'); ?> &nbsp; <span class="form-label label label-md label-success float-right"><?php echo $result['total_vendors']!=""?$result['total_vendors']:"0"; ?> </span></a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link f-w-600 f-12 masmVerificationTab"  data-bs-toggle="tab" href="#masm-verification-tab" role="tab" aria-selected="false" tabindex="-1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending MSME Req &nbsp; <span class="form-label label label-md label-success float-right"><?php echo count((array)$msme_confirmation_logs); ?> </span></a>
+                        <a class="nav-link f-w-600 f-12 masmVerificationTab"  data-bs-toggle="tab" href="#masm-verification-tab" role="tab" aria-selected="false" tabindex="-1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending MSME Req'); ?> &nbsp; <span class="form-label label label-md label-success float-right"><?php echo count((array)$msme_confirmation_logs); ?> </span></a>
                     </li>
                 </ul>
             </div>
             <div class="col-lg-4 text-right">
-                <a class="btn btn-primary waves-effect waves-light" href="index?option=COM_LIST_VENDORS_AND_VENDOR_REGISTERS_REPORTS"><i class="ti-receipt"></i> Report </a>
+                <a class="btn btn-primary waves-effect waves-light" href="index?option=COM_LIST_VENDORS_AND_VENDOR_REGISTERS_REPORTS"><i class="ti-receipt"></i> <?= __('Report'); ?> </a>
             </div>
         </div>
         <div class="tab-content tabs">
             <div class="tab-pane card-body p-0 active" id="vendor-tab" role="tabpanel">
                 <div class="card">
                     <div class="card-header  ">
-                        <h5>Vendors &nbsp; <span class="form-label label label-md label-warning float-right"><?php echo $result['total_vendors']!=""?$result['total_vendors']:"0"; ?> </span></h5>
+                        <h5><?= __('Vendors'); ?> &nbsp; <span class="form-label label label-md label-warning float-right"><?php echo $result['total_vendors']!=""?$result['total_vendors']:"0"; ?> </span></h5>
                         <div class="card-header-right table-card-header ">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" id="entervendornamefind"  class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                <input type="text" id="entervendornamefind"  class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="input-group-text addon-style">
                                     <span class=""><span class="ti-search text-white mt-2"></span></span>
                                 </span>
@@ -323,7 +323,7 @@ $stausresult = ViewStatusData();
                             <table class="table table-hover m-b-0 register_vendor_filter f-13">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="p-2">Vendor Name</th>
+                                        <th scope="col" class="p-2"><?= __('Vendor Name'); ?></th>
                                         <th scope="col" class="p-2"></th>
                                     </tr>
                                 </thead>
@@ -343,12 +343,12 @@ $stausresult = ViewStatusData();
                                     <tr class="showallemp">
                                         <td class="p-2">
                                              <div class="align-middle">
-                                                    <span  alt="user" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center"><?php echo initials($msmecompanyname); ?></span>
+                                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center"><?php echo initials($msmecompanyname); ?></span>
                                                 <div class="d-inline-block width73 text-primary">
-                                                    <a href="index.php?option=<?php echo $msmeoption; ?>&Rid=<?php echo $empiddecode; ?>" target="_blank" data-bs-toggle="tooltip" data-placement="bottom" title=""  data-bs-original-title="Click To Open Vendor Details">
+                                                    <a href="index.php?option=<?php echo $msmeoption; ?>&Rid=<?php echo $empiddecode; ?>" target="_blank" data-bs-toggle="tooltip" data-placement="bottom" title=""  data-bs-original-title="<?= htmlspecialchars(__('Click To Open Vendor Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <h6 class="mb-0 text-primary"><?php echo $msmecompanyname; ?></h6>
                                                     </a>
-                                                    <p class="text-muted m-b-0 f-12 f-w-600">Request date : <?php echo fromDate($msmlog['created_date']); ?></p>
+                                                    <p class="text-muted m-b-0 f-12 f-w-600"><?= __('Request date'); ?> : <?php echo fromDate($msmlog['created_date']); ?></p>
                                                 </div>
                                             </div>
                                         </td>
@@ -358,7 +358,7 @@ $stausresult = ViewStatusData();
                             </table>
                             <?php  }else{ ?>
                             <div class="card-px text-center py-20 mt-2">
-                                <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Vendors </p>
+                                <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Vendors'); ?> </p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
                                 </div>
@@ -375,7 +375,7 @@ $stausresult = ViewStatusData();
     <div class="col-lg-3">
         <div class="card">
             <div class="card-header  ">
-                <h5>Review Pending </h5>
+                <h5><?= __('Review Pending'); ?> </h5>
                 <div class="card-header-right table-card-header ">
                     <span class="form-label label label-md label-warning float-right">
                         <?php echo count((array)$action_transaction_activity_schedule);?>
@@ -388,7 +388,7 @@ $stausresult = ViewStatusData();
                     <table class="table table-hover m-b-0 register_vendor_filter f-13" id="categoryfilter">
                         <thead>
                             <tr>
-                                <th scope="col" class="p-2">Vendor Registration Details</th>
+                                <th scope="col" class="p-2"><?= __('Vendor Registration Details'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -399,9 +399,9 @@ $stausresult = ViewStatusData();
                             <tr>
                                 <td class="w-b-w-s p-2"><a href="index.php?option=COM_INSERT_TRANSACTION_ACTIVITY_SCHEDULES&T1=task_tab&T2=action_task_tab&T3=action_pendding_tab&Rid=<?php echo $empiddecode; ?>" target="_blank"><div class="align-middle">
                                             <?php if($onboardinguseridres['image'] !=""){?>
-                                                 <img src="uploads/all/<?php echo $onboardinguseridres['image']; ?>"  class="img-radius img-40 align-top m-r-5" onerror="this.src='uploads/all/no-image.jpg';" alt="User Profile">
+                                                 <img src="uploads/all/<?php echo $onboardinguseridres['image']; ?>"  class="img-radius img-40 align-top m-r-5" onerror="this.src='uploads/all/no-image.jpg';" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboardinguseridres['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboardinguseridres['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73 text-primary">
                                                 <?php
@@ -412,7 +412,7 @@ $stausresult = ViewStatusData();
                                                     <h6 class="mb-0 text-primary"><i class="ti-user"></i> <?php echo $onboardinguseridres['display_name']; ?></h6>
                                                 <?php } ?>
                                                 <p class="text-muted m-b-0"><?php echo $taskdetails['task_name']; ?></p>
-                                                <p class="text-muted m-b-0 f-12 f-w-600">Request Date : <?php echo fromDate($vendorsres['request_date']); ?></p>
+                                                <p class="text-muted m-b-0 f-12 f-w-600"><?= __('Request Date'); ?> : <?php echo fromDate($vendorsres['request_date']); ?></p>
                                             </div>
                                         </div>
                                     </a>
@@ -423,7 +423,7 @@ $stausresult = ViewStatusData();
                     </table>
                     <?php  }else{ ?>
                     <div class="card-px text-center py-20 mt-2">
-                        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Review Pending  </p>
+                        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Review Pending'); ?>  </p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
                         </div>
