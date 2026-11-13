@@ -44,7 +44,7 @@ function renderContractAmcFmDashboardRows($rows, $page = 1, $limit = 10)
 
     if (count((array)$rows) == 0) {
 
-        echo '<tr><td colspan="7" class="text-center text-muted">No records</td></tr>';
+        echo '<tr><td colspan="7" class="text-center text-muted">'.__('No records').'</td></tr>';
 
         return;
 
@@ -96,7 +96,7 @@ function renderContractAmcFmDashboardRows($rows, $page = 1, $limit = 10)
 
                 <?php if ($canConfirm) { ?>
 
-                <button type="button" class="btn btn-sm btn-primary openContractAmcFmConfirmModal" data-schedule-id="<?php echo $scheduleId; ?>">Confirm</button>
+                <button type="button" class="btn btn-sm btn-primary openContractAmcFmConfirmModal" data-schedule-id="<?php echo $scheduleId; ?>"><?= __('Confirm'); ?></button>
 
                 <?php } else { ?>
 
@@ -142,7 +142,7 @@ function renderContractAmcFmDashboardPagination($sectionKey, $sectionData)
 
             <li class="page-item <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
 
-                <a class="page-link contract-amc-fm-section-page" href="#" data-section="<?php echo htmlspecialchars($sectionKey, ENT_QUOTES, 'UTF-8'); ?>" data-page="<?php echo max(1, $page - 1); ?>">Prev</a>
+                <a class="page-link contract-amc-fm-section-page" href="#" data-section="<?php echo htmlspecialchars($sectionKey, ENT_QUOTES, 'UTF-8'); ?>" data-page="<?php echo max(1, $page - 1); ?>"><?= __('Prev'); ?></a>
 
             </li>
 
@@ -190,7 +190,7 @@ function renderContractAmcFmDashboardPagination($sectionKey, $sectionData)
 
             <li class="page-item <?php echo ($page >= $totalPages) ? 'disabled' : ''; ?>">
 
-                <a class="page-link contract-amc-fm-section-page" href="#" data-section="<?php echo htmlspecialchars($sectionKey, ENT_QUOTES, 'UTF-8'); ?>" data-page="<?php echo min($totalPages, $page + 1); ?>">Next</a>
+                <a class="page-link contract-amc-fm-section-page" href="#" data-section="<?php echo htmlspecialchars($sectionKey, ENT_QUOTES, 'UTF-8'); ?>" data-page="<?php echo min($totalPages, $page + 1); ?>"><?= __('Next'); ?></a>
 
             </li>
 
@@ -230,7 +230,7 @@ function renderContractAmcFmDashboardSectionCard($sectionKey, $title, $sectionDa
 
                 </div>
 
-                <input aria-label="Input field" type="text" class="form-control form-control-sm contract-amc-fm-section-search" id="<?php echo htmlspecialchars($sectionKey, ENT_QUOTES, 'UTF-8'); ?>_search" data-section="<?php echo htmlspecialchars($sectionKey, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Search vendor, asset, contract, planned date...">
+                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control form-control-sm contract-amc-fm-section-search" id="<?php echo htmlspecialchars($sectionKey, ENT_QUOTES, 'UTF-8'); ?>_search" data-section="<?php echo htmlspecialchars($sectionKey, ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= htmlspecialchars(__('Search vendor, asset, contract, planned date...'), ENT_QUOTES, 'UTF-8'); ?>">
 
             </div>
 
@@ -244,19 +244,19 @@ function renderContractAmcFmDashboardSectionCard($sectionKey, $title, $sectionDa
 
                             <tr>
 
-                                <th scope="col" style="width:50px;">S.No</th>
+                                <th scope="col" style="width:50px;"><?= __('S.No'); ?></th>
 
-                                <th scope="col">Vendor</th>
+                                <th scope="col"><?= __('Vendor'); ?></th>
 
-                                <th scope="col">Asset</th>
+                                <th scope="col"><?= __('Asset'); ?></th>
 
-                                <th scope="col">Planned</th>
+                                <th scope="col"><?= __('Planned'); ?></th>
 
-                                <th scope="col">Completed</th>
+                                <th scope="col"><?= __('Completed'); ?></th>
 
-                                <th scope="col">Status</th>
+                                <th scope="col"><?= __('Status'); ?></th>
 
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('Action'); ?></th>
 
                             </tr>
 
@@ -298,17 +298,17 @@ function renderContractAmcFmDashboardSectionCard($sectionKey, $title, $sectionDa
 
             <div>
 
-                <h5 class="mb-0">Facility Manager Dashboard</h5>
+                <h5 class="mb-0"><?= __('Facility Manager Dashboard'); ?></h5>
 
-                <small class="text-muted">Confirm vendor AMC visits after technician completion</small>
+                <small class="text-muted"><?= __('Confirm vendor AMC visits after technician completion'); ?></small>
 
             </div>
 
             <div class="d-flex flex-wrap gap-2">
 
-                <a href="index.php?option=COM_VIEW_AMC_PORTAL_HOME" class="btn btn-outline-info btn-sm">Portal Home</a>
+                <a href="index.php?option=COM_VIEW_AMC_PORTAL_HOME" class="btn btn-outline-info btn-sm"><?= __('Portal Home'); ?></a>
 
-                <button type="button" class="btn btn-secondary btn-sm">Back</button>
+                <button type="button" class="btn btn-secondary btn-sm"><?= __('Back'); ?></button>
 
             </div>
 
@@ -320,7 +320,7 @@ function renderContractAmcFmDashboardSectionCard($sectionKey, $title, $sectionDa
 
                 <div class="alert alert-info mb-0" role="alert">
 
-                    No facility manager contracts are linked to your login. Contact admin to map your user to a customer record and assign you as Customer Connect on a vendor AMC contract.
+                    <?= __('No facility manager contracts are linked to your login. Contact admin to map your user to a customer record and assign you as Customer Connect on a vendor AMC contract.'); ?>
 
                 </div>
 
@@ -328,11 +328,11 @@ function renderContractAmcFmDashboardSectionCard($sectionKey, $title, $sectionDa
 
                 <div class="alert alert-info f-12 mb-3" role="alert">
 
-                    <strong>Due</strong> — upcoming visit. <strong>Delayed</strong> — overdue, technician not finished.
+                    <strong><?= __('Due'); ?></strong> <?= __('— upcoming visit.'); ?> <strong><?= __('Delayed'); ?></strong> <?= __('— overdue, technician not finished.'); ?>
 
-                    <strong>Pending FM</strong> — technician finished; click Confirm to close with remarks and document.
+                    <strong><?= __('Pending FM'); ?></strong> <?= __('— technician finished; click Confirm to close with remarks and document.'); ?>
 
-                    <strong>Closed</strong> — you have confirmed the visit.
+                    <strong><?= __('Closed'); ?></strong> <?= __('— you have confirmed the visit.'); ?>
 
                 </div>
 
@@ -418,7 +418,7 @@ window.addEventListener("load", function() {
 
         if (!rows || rows.length == 0) {
 
-            return '<tr><td colspan="7" class="text-center text-muted">No records</td></tr>';
+            return '<tr><td colspan="7" class="text-center text-muted"><?= htmlspecialchars(__('No records'), ENT_QUOTES, 'UTF-8'); ?></td></tr>';
 
         }
 
@@ -432,7 +432,7 @@ window.addEventListener("load", function() {
 
             var actionCell = row.can_confirm
 
-                ? '<button type="button" class="btn btn-sm btn-primary openContractAmcFmConfirmModal" data-schedule-id="' + scheduleId + '">Confirm</button>'
+                ? '<button type="button" class="btn btn-sm btn-primary openContractAmcFmConfirmModal" data-schedule-id="' + scheduleId + '"><?= htmlspecialchars(__('Confirm'), ENT_QUOTES, 'UTF-8'); ?></button>'
 
                 : '<span class="text-muted">—</span>';
 
@@ -484,7 +484,7 @@ window.addEventListener("load", function() {
 
         html += '<li class="page-item' + (page <= 1 ? ' disabled' : '') + '">'
 
-            + '<a class="page-link contract-amc-fm-section-page" href="#" data-section="' + escapeHtml(sectionKey) + '" data-page="' + Math.max(1, page - 1) + '">Prev</a></li>';
+            + '<a class="page-link contract-amc-fm-section-page" href="#" data-section="' + escapeHtml(sectionKey) + '" data-page="' + Math.max(1, page - 1) + '"><?= htmlspecialchars(__('Prev'), ENT_QUOTES, 'UTF-8'); ?></a></li>';
 
         if (start > 1) {
 
@@ -520,7 +520,7 @@ window.addEventListener("load", function() {
 
         html += '<li class="page-item' + (page >= totalPages ? ' disabled' : '') + '">'
 
-            + '<a class="page-link contract-amc-fm-section-page" href="#" data-section="' + escapeHtml(sectionKey) + '" data-page="' + Math.min(totalPages, page + 1) + '">Next</a></li>';
+            + '<a class="page-link contract-amc-fm-section-page" href="#" data-section="' + escapeHtml(sectionKey) + '" data-page="' + Math.min(totalPages, page + 1) + '"><?= htmlspecialchars(__('Next'), ENT_QUOTES, 'UTF-8'); ?></a></li>';
 
         html += '</ul></nav>';
 
@@ -532,7 +532,7 @@ window.addEventListener("load", function() {
 
         var $tbody = $('#' + section + '_tbody');
 
-        $tbody.html('<tr><td colspan="7" class="text-center text-muted">Loading...</td></tr>');
+        $tbody.html('<tr><td colspan="7" class="text-center text-muted"><?= htmlspecialchars(__('Loading...'), ENT_QUOTES, 'UTF-8'); ?></td></tr>');
 
         $.ajax({
 
@@ -574,7 +574,7 @@ window.addEventListener("load", function() {
 
             error: function() {
 
-                $tbody.html('<tr><td colspan="7" class="text-center text-danger">Unable to load records</td></tr>');
+                $tbody.html('<tr><td colspan="7" class="text-center text-danger"><?= htmlspecialchars(__('Unable to load records'), ENT_QUOTES, 'UTF-8'); ?></td></tr>');
 
             }
 
@@ -632,7 +632,7 @@ window.addEventListener("load", function() {
 
         var scheduleId = $(this).data("schedule-id");
 
-        var loader = '<div class="text-center p-5"><img src="assets/images/spiner/spiner3.gif" style="width: 200px;" alt="Preview"></div>';
+        var loader = '<div class="text-center p-5"><img src="assets/images/spiner/spiner3.gif" style="width: 200px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
 
         $("#contract_amc_fm_confirm_modal_body").html(loader);
 
