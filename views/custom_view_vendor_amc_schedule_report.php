@@ -157,18 +157,18 @@ if ($hasExportData) {
 <div class="page-body">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-            <h5 class="mb-0">Vendor AMC Schedule</h5>
+            <h5 class="mb-0"><?= __('Vendor AMC Schedule'); ?></h5>
             <?php if ($hasExportData) { ?>
-            <a href="custom_view_download.php?page=VendorAmcSchedule&format=csv" target="_blank" class="btn btn-primary waves-effect waves-light">CSV</a>
+            <a href="custom_view_download.php?page=VendorAmcSchedule&format=csv" target="_blank" class="btn btn-primary waves-effect waves-light"><?= __('CSV'); ?></a>
             <?php } ?>
         </div>
         <div class="card-body">
             <form method="get" id="vendorAmcScheduleForm" class="row g-3 mb-3">
                 <input type="hidden" name="option" value="COM_VIEW_VENDOR_AMC_SCHEDULE_REPORT">
                 <div class="col-lg-3">
-                    <span>Vendor <span class="text-danger">*</span></span>
-                    <select aria-label="Vendor" class="form-select js-example-basic-single select2" style="width:100%" name="vendor_id" id="vas_vendor_id">
-                        <option value="">Select Vendor</option>
+                    <span><?= __('Vendor'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single select2" style="width:100%" name="vendor_id" id="vas_vendor_id">
+                        <option value=""><?= __('Select Vendor'); ?></option>
                         <?php if (count((array)($filters['vendors'] ?? array())) > 0) {
                             foreach ($filters['vendors'] as $vendor) { ?>
                         <option value="<?php echo (int) ($vendor['id'] ?? 0); ?>" <?php echo ($selectedVendorId == (string) ($vendor['id'] ?? '')) ? 'selected' : ''; ?>><?php echo htmlspecialchars($vendor['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?></option>
@@ -178,9 +178,9 @@ if ($hasExportData) {
                     <div id="vas_vendor_err" class="text-danger small d-none"></div>
                 </div>
                 <div class="col-lg-3">
-                    <span>Asset Category <span class="text-danger">*</span></span>
-                    <select aria-label="Category" class="form-select js-example-basic-single select2" style="width:100%" name="category_id" id="vas_category_id">
-                        <option value="">Select Category</option>
+                    <span><?= __('Asset Category'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single select2" style="width:100%" name="category_id" id="vas_category_id">
+                        <option value=""><?= __('Select Category'); ?></option>
                         <?php if (count((array)($filters['categories'] ?? array())) > 0) {
                             foreach ($filters['categories'] as $cat) { ?>
                         <option value="<?php echo (int) ($cat['id'] ?? 0); ?>" <?php echo ($selectedCategoryId == (string) ($cat['id'] ?? '')) ? 'selected' : ''; ?>><?php echo htmlspecialchars($cat['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?></option>
@@ -190,9 +190,9 @@ if ($hasExportData) {
                     <div id="vas_category_err" class="text-danger small d-none"></div>
                 </div>
                 <div class="col-lg-2">
-                    <span>Year (Apr–Mar) <span class="text-danger">*</span></span>
-                    <select aria-label="Year" class="form-select js-example-basic-single select2" style="width:100%" name="year" id="vas_year">
-                        <option value="">Select Year</option>
+                    <span><?= __('Year (Apr–Mar)'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?= htmlspecialchars(__('Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single select2" style="width:100%" name="year" id="vas_year">
+                        <option value=""><?= __('Select Year'); ?></option>
                         <?php if (count((array)$yearOptions) > 0) {
                             foreach ($yearOptions as $yr) { ?>
                         <option value="<?php echo (int) $yr; ?>" <?php echo ($selectedYear == (string) $yr) ? 'selected' : ''; ?>><?php echo (int) $yr; ?> – <?php echo (int) $yr + 1; ?></option>
@@ -203,7 +203,7 @@ if ($hasExportData) {
                 </div>
                 <div class="col-lg-2 d-flex align-items-end">
                     <button type="submit" class="btn btn-primary w-100">
-                        <i class="icofont icofont-search"></i> Search
+                        <i class="icofont icofont-search"></i> <?= __('Search'); ?>
                     </button>
                 </div>
             </form>
@@ -213,13 +213,13 @@ if ($hasExportData) {
     <?php if (!$hasSearched) { ?>
     <div class="card">
         <div class="card-body text-center text-muted py-4">
-            <p class="f-16 fw-bold m-b-10"><i class="icofont icofont-search"></i> Select vendor, asset category, and year, then click Search.</p>
+            <p class="f-16 fw-bold m-b-10"><i class="icofont icofont-search"></i> <?= __('Select vendor, asset category, and year, then click Search.'); ?></p>
         </div>
     </div>
     <?php } elseif (count((array)$rows) == 0) { ?>
     <div class="card">
         <div class="card-body text-center text-danger">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No records found for the selected filters.</p>
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No records found for the selected filters.'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
@@ -238,10 +238,10 @@ if ($hasExportData) {
                 <table class="table table-bordered table-hover table-sm mb-0">
                     <thead class="bg-primary text-white">
                         <tr>
-                            <th scope="col" rowspan="2" class="align-middle">S.No</th>
-                            <th scope="col" rowspan="2" class="align-middle">Vendor</th>
-                            <th scope="col" rowspan="2" class="align-middle">Asset (Location)</th>
-                            <th scope="col" rowspan="2" class="align-middle">Frequency</th>
+                            <th scope="col" rowspan="2" class="align-middle"><?= __('S.No'); ?></th>
+                            <th scope="col" rowspan="2" class="align-middle"><?= __('Vendor'); ?></th>
+                            <th scope="col" rowspan="2" class="align-middle"><?= __('Asset (Location)'); ?></th>
+                            <th scope="col" rowspan="2" class="align-middle"><?= __('Frequency'); ?></th>
                             <?php if (count((array)$monthGroups) > 0) {
                                 foreach ($monthGroups as $monthGroup) { ?>
                             <th scope="col" colspan="<?php echo (int) ($monthGroup['colspan'] ?? 2); ?>" class="text-center"><?php echo htmlspecialchars($monthGroup['label'] ?? '', ENT_QUOTES, 'UTF-8'); ?></th>
@@ -251,8 +251,8 @@ if ($hasExportData) {
                         <tr>
                             <?php if (count((array)$visitColumns) > 0) {
                                 foreach ($visitColumns as $visitCol) { ?>
-                            <th scope="col" class="text-center">Plan</th>
-                            <th scope="col" class="text-center">Actual</th>
+                            <th scope="col" class="text-center"><?= __('Plan'); ?></th>
+                            <th scope="col" class="text-center"><?= __('Actual'); ?></th>
                             <?php }
                             } ?>
                         </tr>
@@ -301,15 +301,15 @@ $("#vendorAmcScheduleForm").submit(function(e) {
     var hasError = false;
     $("#vas_vendor_err, #vas_category_err, #vas_year_err").addClass("d-none");
     if (!$("#vas_vendor_id").val()) {
-        $("#vas_vendor_err").text("Please select Vendor").removeClass("d-none");
+        $("#vas_vendor_err").text(<?php echo json_encode(__('Please select Vendor'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass("d-none");
         hasError = true;
     }
     if (!$("#vas_category_id").val()) {
-        $("#vas_category_err").text("Please select Asset Category").removeClass("d-none");
+        $("#vas_category_err").text(<?php echo json_encode(__('Please select Asset Category'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass("d-none");
         hasError = true;
     }
     if (!$("#vas_year").val()) {
-        $("#vas_year_err").text("Please select Year").removeClass("d-none");
+        $("#vas_year_err").text(<?php echo json_encode(__('Please select Year'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass("d-none");
         hasError = true;
     }
     if (hasError) {
