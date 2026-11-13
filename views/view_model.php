@@ -45,7 +45,7 @@ print_r($dis);
                                     <span class="kt-subheader__separator kt-subheader__separator--v"></span>
                                     <div class="kt-subheader__group" id="kt_subheader_search">
                                         <span class="kt-subheader__desc" id="kt_subheader_total">
-                                            <?php echo count((array)$data); ?> Total </span>
+                                            <?php echo count((array)$data); ?> <?= __('Total'); ?> </span>
 
                                     </div>
 
@@ -54,7 +54,7 @@ print_r($dis);
                                     <?php
                                         $link = "index.php?option=".$insert  ?>
                                     <a href="<?php echo $link; ?>" class="btn btn-label-brand btn-bold">
-                                        New <?php echo $title; ?> </a>
+                                        <?= __('New'); ?> <?php echo $title; ?> </a>
 
                                 </div>
                             </div>
@@ -87,31 +87,31 @@ print_r($dis);
                                                         <li class="kt-nav__item">
                                                             <a href="#" class="kt-nav__link">
                                                                 <i class="kt-nav__link-icon flaticon2-line-chart"></i>
-                                                                <span class="kt-nav__link-text">Reports</span>
+                                                                <span class="kt-nav__link-text"><?= __('Reports'); ?></span>
                                                             </a>
                                                         </li>
                                                         <li class="kt-nav__item">
                                                             <a href="#" class="kt-nav__link">
                                                                 <i class="kt-nav__link-icon flaticon2-send"></i>
-                                                                <span class="kt-nav__link-text">Messages</span>
+                                                                <span class="kt-nav__link-text"><?= __('Messages'); ?></span>
                                                             </a>
                                                         </li>
                                                         <li class="kt-nav__item">
                                                             <a href="#" class="kt-nav__link">
                                                                 <i class="kt-nav__link-icon flaticon2-pie-chart-1"></i>
-                                                                <span class="kt-nav__link-text">Charts</span>
+                                                                <span class="kt-nav__link-text"><?= __('Charts'); ?></span>
                                                             </a>
                                                         </li>
                                                         <li class="kt-nav__item">
                                                             <a href="#" class="kt-nav__link">
                                                                 <i class="kt-nav__link-icon flaticon2-avatar"></i>
-                                                                <span class="kt-nav__link-text">Members</span>
+                                                                <span class="kt-nav__link-text"><?= __('Members'); ?></span>
                                                             </a>
                                                         </li>
                                                         <li class="kt-nav__item">
                                                             <a href="#" class="kt-nav__link">
                                                                 <i class="kt-nav__link-icon flaticon2-settings"></i>
-                                                                <span class="kt-nav__link-text">Settings</span>
+                                                                <span class="kt-nav__link-text"><?= __('Settings'); ?></span>
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -124,10 +124,10 @@ print_r($dis);
                                             <div class="kt-widget kt-widget--user-profile-2">
                                                 <div class="kt-widget__head">
                                                     <div class="kt-widget__media">
-                                                        <img class="kt-widget__img kt-hidden-" src="assets/media/project-logos/2.png" alt="Logo">
-                                                        <img class="kt-widget__img kt-hidden" src="assets/media/users/300_19.jpg" alt="User Profile">
+                                                        <img class="kt-widget__img kt-hidden-" src="assets/media/project-logos/2.png" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                        <img class="kt-widget__img kt-hidden" src="assets/media/users/300_19.jpg" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <div class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-boldest  kt-hidden">
-                                                            MP
+                                                            <?= __('MP'); ?>
                                                         </div>
                                                     </div>
                                                     <div class="kt-widget__info">
@@ -135,7 +135,7 @@ print_r($dis);
                                                             <?php echo $bank['Bank_Name'] ?>
                                                         </a>
                                                         <a href="#" class="kt-widget__username kt-hidden">
-                                                            Charlie Stone
+                                                            <?= __('Charlie Stone'); ?>
                                                         </a>
                                                         <span class="kt-widget__desc">
                                                             <?php echo $bank['Bank_Short_Code'] ?>
@@ -144,26 +144,26 @@ print_r($dis);
                                                 </div>
                                                 <div class="kt-widget__body">
                                                     <div class="kt-widget__section">
-                                                        Lorem ipsum dolor sit amet <a href="#" class="kt-font-brand kt-link kt-font-transform-u kt-font-bold"> #xrs-23pq</a>, sed
-                                                        <b>USD342/Annual</b> doloremagna
+                                                        <?= __('Lorem ipsum dolor sit amet'); ?> <a href="#" class="kt-font-brand kt-link kt-font-transform-u kt-font-bold"> <?= __('#xrs-23pq'); ?></a><?= __(', sed'); ?>
+                                                        <b><?= __('USD342/Annual'); ?></b> <?= __('doloremagna'); ?>
                                                     </div>
                                                     <div class="kt-widget__item">
                                                         <div class="kt-widget__contact">
-                                                            <span class="kt-widget__label">From Date:</span>
+                                                            <span class="kt-widget__label"><?= __('From Date'); ?>:</span>
                                                             <a href="#" class="kt-widget__data"> <?php echo  date('M d, Y', strtotime($bank['From_Date']) ); ?> </a>
                                                         </div>
                                                         <div class="kt-widget__contact">
-                                                            <span class="kt-widget__label">To Date:</span>
+                                                            <span class="kt-widget__label"><?= __('To Date'); ?>:</span>
                                                             <a href="#" class="kt-widget__data"><?php echo  date('M d, Y', strtotime($bank['To_Date']) ); ?> </a>
                                                         </div>
                                                         <div class="kt-widget__contact">
-                                                            <span class="kt-widget__label">Status:</span>
+                                                            <span class="kt-widget__label"><?= __('Status'); ?>:</span>
                                                             <span class="kt-widget__data"><?php echo isacStatusDescrption($bank['Current_Status']); ?></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="kt-widget__footer">
-                                                    <button type="button" class="btn btn-label-danger btn-lg btn-upper">view project</button>
+                                                    <button type="button" class="btn btn-label-danger btn-lg btn-upper"><?= __('view project'); ?></button>
                                                 </div>
                                             </div>
 
@@ -228,7 +228,7 @@ print_r($dis);
                                                     </li>
                                                 </ul>
                                                 <div class="kt-pagination__toolbar">
-                                                    <select aria-label="Select option" class="form-control kt-font-brand" style="width: 60px">
+                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt-font-brand" style="width: 60px">
                                                         <option value="10">10</option>
                                                         <option value="20">20</option>
                                                         <option value="30">30</option>
@@ -236,7 +236,7 @@ print_r($dis);
                                                         <option value="100">100</option>
                                                     </select>
                                                     <span class="pagination__desc">
-                                                        Displaying 10 of 230 records
+                                                        <?= __('Displaying 10 of 230 records'); ?>
                                                     </span>
                                                 </div>
                                             </div>
