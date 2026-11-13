@@ -20,25 +20,25 @@ $opening_balance_inv = $result['opening_balance_inv'];
 	<div class="card-header  row">
         
         <div class="col-lg-6">
-            <h5>Tenant Invoice Reports</h5>
+            <h5><?= __('Tenant Invoice Reports'); ?></h5>
         </div>
         <div class="col-lg-2">
             <div class="form-group w-full table-card-header">
-                <label class="form-label ">Start Date<span class="text-danger">*</span></label>
+                <label class="form-label "><?= __('Start Date'); ?><span class="text-danger">*</span></label>
 				<input type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
             </div>
         </div>
         <div class="col-lg-2">
             <div class=" form-group">
-                <label class="form-label"> End Date</label>
+                <label class="form-label"> <?= __('End Date'); ?></label>
                 <input type="month" class="form-control" name="end_month"  value="<?php echo $end_month; ?>" >
             </div>
         </div>
         <div class="col-lg-1">
-             <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> Search</button>
+             <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> <?= __('Search'); ?></button>
         </div>
         <div class="col-lg-1">
-         	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>  
+         	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back'); ?></a>  
          </div>
     
     </div>
@@ -49,18 +49,18 @@ $opening_balance_inv = $result['opening_balance_inv'];
             <thead>
                 <tr> 
                     <th rowspan="2">#</th>      
-                    <th rowspan="2">Tenant Name</th> 
-                    <th rowspan="2">Owner Name</th> 
-                    <th rowspan="2" class="align-center">Property Name</th>
-                    <th rowspan="2" class="align-center">Opening Balance</th>
+                    <th rowspan="2"><?= __('Tenant Name'); ?></th> 
+                    <th rowspan="2"><?= __('Owner Name'); ?></th> 
+                    <th rowspan="2" class="align-center"><?= __('Property Name'); ?></th>
+                    <th rowspan="2" class="align-center"><?= __('Opening Balance'); ?></th>
                     <?php foreach($monthyearary as $mothkey=>$mothlable){ ?> 
                          <th colspan="2" class="text-center"><?php echo $mothlable; ?></th> 
                     <?php } ?> 
                 </tr>
                 <tr> 
                   <?php foreach($monthyearary as $mothkey=>$mothlable){ ?> 
-                         <th>Rent</th> 
-                         <th>Utility</th>
+                         <th><?= __('Rent'); ?></th> 
+                         <th><?= __('Utility'); ?></th>
                     <?php } ?> 
                 </tr>
             </thead>
@@ -74,7 +74,7 @@ $opening_balance_inv = $result['opening_balance_inv'];
                 <span class="d-block"><?php echo $ptd['phone']; ?></span></td>
                 <td class="p-2"><?php echo $property_owners[$ptd['property_owner_id']]; ?></td>
                 <td class="p-2"><?php echo $property_owner_details[$ptd['property_owner_detail_id']]; ?></td>
-                <td class="p-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Opening Balance">
+                <td class="p-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Opening Balance'), ENT_QUOTES, 'UTF-8'); ?>">
                   <table>
                     <tr>
                 <?php 
@@ -100,12 +100,12 @@ $opening_balance_inv = $result['opening_balance_inv'];
                       <td class="text-right p-2">
                       <?php 
                         if($bilamt['rental_invoice_id'] ==""){ 
-                          echo '<p class="d-block text-dark text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Bill Amount">B : '.customeummarmonyformateifine($bilamt['rent_total_amount'])."</span>"; 
+                          echo '<p class="d-block text-dark text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="'.htmlspecialchars(__('Bill Amount'), ENT_QUOTES, 'UTF-8').'">B : '.customeummarmonyformateifine($bilamt['rent_total_amount'])."</span>"; 
                         }else{ // print_r($rentinv);
                         ?> 
-                        <p class="d-block text-dark text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Bill Amount">B : <?php echo customeummarmonyformateifine($bilamt['rent_total_amount']); ?></p>
-                         <p class="d-block text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Invoice Amount"><a href="index.php?option=COM_VIEW_RENTAL_INVOICES&rid=<?php echo $bilamt['rental_invoice_id']; ?>&table=rental_invoices&title=Rental Invoice" target="_blank" class="text-primary text-start">I &nbsp; : <?php echo customeummarmonyformateifine($rentinv['total_amount']); ?></a></p>
-                          <p class="d-block text-danger text-start mb-0" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Due Amount">D : <?php echo customeummarmonyformateifine($rentinv['pending_amount']); ?></p>
+                        <p class="d-block text-dark text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Bill Amount'), ENT_QUOTES, 'UTF-8'); ?>">B : <?php echo customeummarmonyformateifine($bilamt['rent_total_amount']); ?></p>
+                         <p class="d-block text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Invoice Amount'), ENT_QUOTES, 'UTF-8'); ?>"><a href="index.php?option=COM_VIEW_RENTAL_INVOICES&rid=<?php echo $bilamt['rental_invoice_id']; ?>&table=rental_invoices&title=Rental Invoice" target="_blank" class="text-primary text-start">I &nbsp; : <?php echo customeummarmonyformateifine($rentinv['total_amount']); ?></a></p>
+                          <p class="d-block text-danger text-start mb-0" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Due Amount'), ENT_QUOTES, 'UTF-8'); ?>">D : <?php echo customeummarmonyformateifine($rentinv['pending_amount']); ?></p>
                       <?php } ?>
                       </td> 
                       <td class="text-right p-2">
@@ -114,9 +114,9 @@ $opening_balance_inv = $result['opening_balance_inv'];
                           echo '<p class="d-block text-dark text-start mb-2">B : '.customeummarmonyformateifine($bilamt['utility_amount'])."</span>"; 
                         }else{
                         ?> 
-                         <p class="d-block text-dark text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Bill Amount">B : <?php echo customeummarmonyformateifine($bilamt['utility_amount']); ?></p>
-                         <p class="d-block text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Invoice Amount"><a href="index.php?option=COM_VIEW_UTILITY_RENTAL_INVOICES&rid=<?php echo $bilamt['utility_rental_invoice_id']; ?>&table=utility_rental_invoices&title=Utility Rental Invoice" target="_blank" class="text-primary text-start">I &nbsp; : <?php echo customeummarmonyformateifine($utilinv['total_amount']); ?></a></p>
-                          <p class="d-block text-danger text-start mb-0" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Due Amount">D : <?php echo customeummarmonyformateifine($utilinv['pending_amount']); ?></p>
+                         <p class="d-block text-dark text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Bill Amount'), ENT_QUOTES, 'UTF-8'); ?>">B : <?php echo customeummarmonyformateifine($bilamt['utility_amount']); ?></p>
+                         <p class="d-block text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Invoice Amount'), ENT_QUOTES, 'UTF-8'); ?>"><a href="index.php?option=COM_VIEW_UTILITY_RENTAL_INVOICES&rid=<?php echo $bilamt['utility_rental_invoice_id']; ?>&table=utility_rental_invoices&title=Utility Rental Invoice" target="_blank" class="text-primary text-start">I &nbsp; : <?php echo customeummarmonyformateifine($utilinv['total_amount']); ?></a></p>
+                          <p class="d-block text-danger text-start mb-0" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Due Amount'), ENT_QUOTES, 'UTF-8'); ?>">D : <?php echo customeummarmonyformateifine($utilinv['pending_amount']); ?></p>
                       <?php } ?>
                       </td>
                     <?php } ?>
@@ -126,7 +126,7 @@ $opening_balance_inv = $result['opening_balance_inv'];
         </table>
         <?php  }else{ ?>
               <div class="card-px text-center ">
-                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Tenant Invoice Reports</p>   
+                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Tenant Invoice Reports'); ?></p>   
                   <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                   </div>   
