@@ -114,16 +114,16 @@ function amcLandingContractTypeBadge($contract)
 {
     $isAmc = strtoupper($contract['is_amc'] ?? 'N') == 'Y';
     if ($isAmc) {
-        return '<span class="badge bg-c-green">AMC</span>';
+        return '<span class="badge bg-c-green">'.__('AMC').'</span>';
     }
-    return '<span class="badge bg-secondary">Standard</span>';
+    return '<span class="badge bg-secondary">'.__('Standard').'</span>';
 }
 
 function amcLandingRenderContractRows($rows, $limit = 5)
 {
     $rows = amcLandingSliceRows($rows, $limit);
     if (empty($rows)) {
-        echo '<tr><td colspan="8" class="text-center text-muted">No contracts found</td></tr>';
+        echo '<tr><td colspan="8" class="text-center text-muted">'.__('No contracts found').'</td></tr>';
         return;
     }
     $serial = 1;
@@ -144,7 +144,7 @@ function amcLandingRenderContractRows($rows, $limit = 5)
             <td><?php echo htmlspecialchars($contract['transaction_no'] ?? '-', ENT_QUOTES, 'UTF-8'); ?></td>
             <td class="text-nowrap text-center">
                 <?php if ($canEdit) { ?>
-                <a href="<?php echo $editUrl; ?>" title="Edit"><i class="ti-pencil text-primary"></i></a>
+                <a href="<?php echo $editUrl; ?>" title="<?= htmlspecialchars(__('Edit'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-pencil text-primary"></i></a>
                 <?php } else { ?>
                 <span class="text-muted">—</span>
                 <?php } ?>
@@ -159,7 +159,7 @@ function amcLandingRenderVisitRows($rows, $limit = 5, $section = '')
 {
     $rows = amcLandingSliceRows($rows, $limit);
     if (empty($rows)) {
-        echo '<tr><td colspan="7" class="text-center text-muted">No visits found</td></tr>';
+        echo '<tr><td colspan="7" class="text-center text-muted">'.__('No visits found').'</td></tr>';
         return;
     }
     $serial = 1;
@@ -179,15 +179,15 @@ function amcLandingRenderVisitRows($rows, $limit = 5, $section = '')
             <td><?php echo !empty($row['planned_date']) ? fromDate($row['planned_date']) : '-'; ?></td>
             <td><span class="badge <?php echo $statusClass; ?>"><?php echo $statusLabel; ?></span></td>
             <td class="text-nowrap">
-                <a href="<?php echo $scheduleUrl; ?>" title="View Schedules" class="m-r-10"><i class="ti-eye text-info f-16"></i></a>
+                <a href="<?php echo $scheduleUrl; ?>" title="<?= htmlspecialchars(__('View Schedules'), ENT_QUOTES, 'UTF-8'); ?>" class="m-r-10"><i class="ti-eye text-info f-16"></i></a>
                 <?php if ($action == 'assign') { ?>
-                <a href="<?php echo $assignUrl; ?>" class="btn btn-sm btn-outline-primary">Assign</a>
+                <a href="<?php echo $assignUrl; ?>" class="btn btn-sm btn-outline-primary"><?= __('Assign'); ?></a>
                 <?php } ?>
                 <?php if ($section == 'today' && $action == 'start') { ?>
-                <a href="<?php echo $scheduleUrl; ?>" class="btn btn-sm btn-warning">Start</a>
+                <a href="<?php echo $scheduleUrl; ?>" class="btn btn-sm btn-warning"><?= __('Start'); ?></a>
                 <?php } ?>
                 <?php if ($section == 'today' && $action == 'finish') { ?>
-                <a href="<?php echo $scheduleUrl; ?>" class="btn btn-sm btn-success">Finish</a>
+                <a href="<?php echo $scheduleUrl; ?>" class="btn btn-sm btn-success"><?= __('Finish'); ?></a>
                 <?php } ?>
             </td>
         </tr>
@@ -211,7 +211,7 @@ function amcLandingRenderComplaintRows($rows, $limit = 5)
 {
     $rows = amcLandingSliceRows($rows, $limit);
     if (empty($rows)) {
-        echo '<tr><td colspan="8" class="text-center text-muted">No complaints found</td></tr>';
+        echo '<tr><td colspan="8" class="text-center text-muted">'.__('No complaints found').'</td></tr>';
         return;
     }
     $serial = 1;
@@ -227,7 +227,7 @@ function amcLandingRenderComplaintRows($rows, $limit = 5)
             <td><?php echo htmlspecialchars($row['asset_label'] ?? '-', ENT_QUOTES, 'UTF-8'); ?></td>
             <td><?php echo !empty($row['date']) ? fromDate($row['date']) : '-'; ?></td>
             <td><?php amcLandingRenderStatusBadge($row); ?></td>
-            <td><a href="<?php echo htmlspecialchars($respondUrl, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-sm btn-primary">Respond</a></td>
+            <td><a href="<?php echo htmlspecialchars($respondUrl, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-sm btn-primary"><?= __('Respond'); ?></a></td>
         </tr>
         <?php
         $serial++;
@@ -238,7 +238,7 @@ function amcLandingRenderRepairRows($rows, $limit = 5)
 {
     $rows = amcLandingSliceRows($rows, $limit);
     if (empty($rows)) {
-        echo '<tr><td colspan="8" class="text-center text-muted">No repair orders found</td></tr>';
+        echo '<tr><td colspan="8" class="text-center text-muted">'.__('No repair orders found').'</td></tr>';
         return;
     }
     $serial = 1;
@@ -254,7 +254,7 @@ function amcLandingRenderRepairRows($rows, $limit = 5)
             <td><?php echo htmlspecialchars($row['source'] ?? '-', ENT_QUOTES, 'UTF-8'); ?></td>
             <td><?php echo !empty($row['date']) ? fromDate($row['date']) : '-'; ?></td>
             <td><?php amcLandingRenderStatusBadge($row); ?></td>
-            <td><a href="<?php echo htmlspecialchars($openUrl, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-sm btn-outline-primary">Open</a></td>
+            <td><a href="<?php echo htmlspecialchars($openUrl, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-sm btn-outline-primary"><?= __('Open'); ?></a></td>
         </tr>
         <?php
         $serial++;
@@ -278,9 +278,9 @@ function amcLandingRenderExpiryAccordionRows($rows, $mode)
 {
     if (count((array)$rows) == 0) {
         if ($mode == 'expired') {
-            echo '<tr><td colspan="3" class="text-center text-muted">No contracts expired in this range</td></tr>';
+            echo '<tr><td colspan="3" class="text-center text-muted">'.__('No contracts expired in this range').'</td></tr>';
         } else {
-            echo '<tr><td colspan="3" class="text-center text-muted">No contracts found</td></tr>';
+            echo '<tr><td colspan="3" class="text-center text-muted">'.__('No contracts found').'</td></tr>';
         }
         return;
     }
@@ -293,9 +293,9 @@ function amcLandingRenderExpiryAccordionRows($rows, $mode)
         <tr>
             <td><a class="text-primary" href="<?php echo $editUrl; ?>"><?php echo $displayName; ?></a></td>
             <?php if ($mode == 'expired') { ?>
-            <td><?php echo (int) ($row['days_expired'] ?? 0); ?> Days Ago</td>
+            <td><?php echo (int) ($row['days_expired'] ?? 0); ?> <?= __('Days Ago'); ?></td>
             <?php } else { ?>
-            <td><?php echo (int) ($row['days_left'] ?? 0); ?> Days Left</td>
+            <td><?php echo (int) ($row['days_left'] ?? 0); ?> <?= __('Days Left'); ?></td>
             <?php } ?>
             <td><span class="badge bg-danger"><?php echo !empty($row['end_date']) ? fromDate($row['end_date']) : '-'; ?></span></td>
         </tr>
@@ -310,7 +310,7 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
     ?>
     <div class="card h-100 amc-landing-expiry-card">
         <div class="card-header">
-            <h5 class="mb-0">Expiring Contracts</h5>
+            <h5 class="mb-0"><?= __('Expiring Contracts'); ?></h5>
         </div>
         <div class="card-body">
             <div id="amcLandingExpiringAccordion" class="amc-landing-expiry-accordion" role="tablist" aria-multiselectable="true">
@@ -345,9 +345,9 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
                                         <table class="table table-bordered table-sm f-12 mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Contract</th>
-                                                    <th scope="col">Days Left</th>
-                                                    <th scope="col">End Date</th>
+                                                    <th scope="col"><?= __('Contract'); ?></th>
+                                                    <th scope="col"><?= __('Days Left'); ?></th>
+                                                    <th scope="col"><?= __('End Date'); ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody><?php amcLandingRenderExpiryAccordionRows($section['rows'] ?? array(), 'expiring'); ?></tbody>
@@ -360,7 +360,7 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
                 } ?>
             </div>
 
-            <h5 class="amc-landing-expired-title">Expired Contracts</h5>
+            <h5 class="amc-landing-expired-title"><?= __('Expired Contracts'); ?></h5>
             <div id="amcLandingExpiredAccordion" class="amc-landing-expiry-accordion" role="tablist" aria-multiselectable="true">
                 <?php if (count((array)$expiredSections) > 0) {
                     foreach ($expiredSections as $index => $section) {
@@ -394,9 +394,9 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
                                         <table class="table table-bordered table-sm f-12 mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Contract</th>
-                                                    <th scope="col">Days Expired</th>
-                                                    <th scope="col">End Date</th>
+                                                    <th scope="col"><?= __('Contract'); ?></th>
+                                                    <th scope="col"><?= __('Days Expired'); ?></th>
+                                                    <th scope="col"><?= __('End Date'); ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody><?php amcLandingRenderExpiryAccordionRows($section['rows'] ?? array(), 'expired'); ?></tbody>
@@ -418,8 +418,8 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
 <div class="page-body amc-admin-landing-dashboard">
     <div class="row mb-3 align-items-center">
         <div class="col-lg-3 col-md-4">
-            <select aria-label="LOCID" name="LOCID" id="amc_landing_loc_id" class="form-select js-example-basic-single">
-                <option value="" <?php echo ((string) $locId == '') ? 'selected' : ''; ?>>All Locations</option>
+            <select aria-label="<?= htmlspecialchars(__('LOCID'), ENT_QUOTES, 'UTF-8'); ?>" name="LOCID" id="amc_landing_loc_id" class="form-select js-example-basic-single">
+                <option value="" <?php echo ((string) $locId == '') ? 'selected' : ''; ?>><?= __('All Locations'); ?></option>
                 <?php if (count((array)$locations) > 0) {
                     foreach ($locations as $locn) { ?>
                         <option <?php echo ((string) ($locn['id'] ?? '') == (string) $locId) ? 'selected' : ''; ?> value="<?php echo htmlspecialchars($locn['id'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($locn['location_name'], ENT_QUOTES, 'UTF-8'); ?></option>
@@ -476,7 +476,7 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
     </div>
 
     <div class="card mb-3 amc-landing-quick-actions-card">
-        <div class="card-header border-0 pb-0"><h5 class="mb-0">Quick Actions</h5></div>
+        <div class="card-header border-0 pb-0"><h5 class="mb-0"><?= __('Quick Actions'); ?></h5></div>
         <div class="card-body pt-2">
             <div class="amc-landing-quick-actions">
                 <?php if (count((array)$quickActions) > 0) {
@@ -512,8 +512,8 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0">Yearly Overview</h5>
-                    <small class="text-muted yearly-overview-subtitle">Customers · Vendors · In-house</small>
+                    <h5 class="mb-0"><?= __('Yearly Overview'); ?></h5>
+                    <small class="text-muted yearly-overview-subtitle"><?= __('Customers · Vendors · In-house'); ?></small>
                 </div>
                 <div class="card-block">
                     <div id="amc-admin-landing-bar-chart" style="height: 320px;"></div>
@@ -526,22 +526,22 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
         <div class="col-lg-8 col-md-12 mb-3 mb-lg-0">
     <div class="card mb-0 amc-landing-contracts-card h-100">
         <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-            <h5 class="mb-0">Contracts &amp; Approvals</h5>
+            <h5 class="mb-0"><?= htmlspecialchars(__('Contracts & Approvals'), ENT_QUOTES, 'UTF-8'); ?></h5>
             <div class="text-end">
-                <span class="text-muted f-12 d-block amc-landing-contracts-total" data-tab-total="customer">Total: <?php echo (int) $contractTotals['customer']; ?></span>
-                <a href="index.php?option=COM_LIST_CONTRACTS" class="b-b-primary text-primary f-12">View all</a>
+                <span class="text-muted f-12 d-block amc-landing-contracts-total" data-tab-total="customer"><?= __('Total'); ?>: <?php echo (int) $contractTotals['customer']; ?></span>
+                <a href="index.php?option=COM_LIST_CONTRACTS" class="b-b-primary text-primary f-12"><?= __('View all'); ?></a>
             </div>
         </div>
         <div class="card-body">
             <ul class="nav md-tabs infisuite_tab mb-3">
                 <li class="nav-item">
-                    <a class="nav-link active" data-bs-toggle="tab" href="#amcLandingCustomers" role="tab" data-total="<?php echo (int) $contractTotals['customer']; ?>">Customers <span class="badge bg-primary"><?php echo (int) $contractTotals['customer']; ?></span></a>
+                    <a class="nav-link active" data-bs-toggle="tab" href="#amcLandingCustomers" role="tab" data-total="<?php echo (int) $contractTotals['customer']; ?>"><?= __('Customers'); ?> <span class="badge bg-primary"><?php echo (int) $contractTotals['customer']; ?></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" href="#amcLandingVendors" role="tab" data-total="<?php echo (int) $contractTotals['vendor']; ?>">Vendors <span class="badge bg-primary"><?php echo (int) $contractTotals['vendor']; ?></span></a>
+                    <a class="nav-link" data-bs-toggle="tab" href="#amcLandingVendors" role="tab" data-total="<?php echo (int) $contractTotals['vendor']; ?>"><?= __('Vendors'); ?> <span class="badge bg-primary"><?php echo (int) $contractTotals['vendor']; ?></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" href="#amcLandingInhouse" role="tab" data-total="<?php echo (int) $contractTotals['inhouse']; ?>">In-house <span class="badge bg-primary"><?php echo (int) $contractTotals['inhouse']; ?></span></a>
+                    <a class="nav-link" data-bs-toggle="tab" href="#amcLandingInhouse" role="tab" data-total="<?php echo (int) $contractTotals['inhouse']; ?>"><?= __('In-house'); ?> <span class="badge bg-primary"><?php echo (int) $contractTotals['inhouse']; ?></span></a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -551,13 +551,13 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Contract</th>
-                                    <th scope="col">Contract Type</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Contract ID</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Contract'); ?></th>
+                                    <th scope="col"><?= __('Contract Type'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
+                                    <th scope="col"><?= __('Start Date'); ?></th>
+                                    <th scope="col"><?= __('End Date'); ?></th>
+                                    <th scope="col"><?= __('Contract ID'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody><?php amcLandingRenderContractRows($contracts['customer']); ?></tbody>
@@ -570,13 +570,13 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Contract</th>
-                                    <th scope="col">Contract Type</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Contract ID</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Contract'); ?></th>
+                                    <th scope="col"><?= __('Contract Type'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
+                                    <th scope="col"><?= __('Start Date'); ?></th>
+                                    <th scope="col"><?= __('End Date'); ?></th>
+                                    <th scope="col"><?= __('Contract ID'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody><?php amcLandingRenderContractRows($contracts['vendor']); ?></tbody>
@@ -589,13 +589,13 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Contract</th>
-                                    <th scope="col">Contract Type</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Contract ID</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Contract'); ?></th>
+                                    <th scope="col"><?= __('Contract Type'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
+                                    <th scope="col"><?= __('Start Date'); ?></th>
+                                    <th scope="col"><?= __('End Date'); ?></th>
+                                    <th scope="col"><?= __('Contract ID'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody><?php amcLandingRenderContractRows($contracts['inhouse']); ?></tbody>
@@ -635,8 +635,8 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
                                 <?php } ?>
                             </div>
                             <div class="text-end">
-                                <span class="text-muted f-12 d-block">Total: <?php echo $total; ?></span>
-                                <a href="<?php echo amcLandingVisitViewAllUrl($key, $locId); ?>" class="b-b-primary text-primary f-12">View all</a>
+                                <span class="text-muted f-12 d-block"><?= __('Total'); ?>: <?php echo $total; ?></span>
+                                <a href="<?php echo amcLandingVisitViewAllUrl($key, $locId); ?>" class="b-b-primary text-primary f-12"><?= __('View all'); ?></a>
                             </div>
                         </div>
                         <div class="card-body table-responsive">
@@ -644,12 +644,12 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Contract</th>
-                                        <th scope="col">Vendor/Dept</th>
-                                        <th scope="col">Asset</th>
-                                        <th scope="col">Planned Date</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('Contract'); ?></th>
+                                        <th scope="col"><?= __('Vendor/Dept'); ?></th>
+                                        <th scope="col"><?= __('Asset'); ?></th>
+                                        <th scope="col"><?= __('Planned Date'); ?></th>
+                                        <th scope="col"><?= __('Status'); ?></th>
+                                        <th scope="col"><?= __('Action'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody><?php amcLandingRenderVisitRows($visits[$key] ?? array(), 5, $key); ?></tbody>
@@ -665,10 +665,10 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
         <div class="col-lg-6 col-md-12 mb-3">
             <div class="card h-100 amc-landing-complaints-card">
                 <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-                    <h5 class="mb-0">Open Complaints</h5>
+                    <h5 class="mb-0"><?= __('Open Complaints'); ?></h5>
                     <div class="text-end">
-                        <span class="text-muted f-12 d-block">Total: <?php echo (int) $complaintTotal; ?></span>
-                        <a href="index.php?option=COM_LIST_AMC_COMPLAINTS" class="b-b-primary text-primary f-12">View all</a>
+                        <span class="text-muted f-12 d-block"><?= __('Total'); ?>: <?php echo (int) $complaintTotal; ?></span>
+                        <a href="index.php?option=COM_LIST_AMC_COMPLAINTS" class="b-b-primary text-primary f-12"><?= __('View all'); ?></a>
                     </div>
                 </div>
                 <div class="card-body table-responsive">
@@ -676,13 +676,13 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Complaint No</th>
-                                <th scope="col">Contract</th>
-                                <th scope="col">Vendor</th>
-                                <th scope="col">Asset</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('Complaint No'); ?></th>
+                                <th scope="col"><?= __('Contract'); ?></th>
+                                <th scope="col"><?= __('Vendor'); ?></th>
+                                <th scope="col"><?= __('Asset'); ?></th>
+                                <th scope="col"><?= __('Date'); ?></th>
+                                <th scope="col"><?= __('Status'); ?></th>
+                                <th scope="col"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody><?php amcLandingRenderComplaintRows($complaints); ?></tbody>
@@ -693,10 +693,10 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
         <div class="col-lg-6 col-md-12 mb-3">
             <div class="card h-100 amc-landing-repairs-card">
                 <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-                    <h5 class="mb-0">Repair Orders</h5>
+                    <h5 class="mb-0"><?= __('Repair Orders'); ?></h5>
                     <div class="text-end">
-                        <span class="text-muted f-12 d-block">Total: <?php echo (int) $repairTotal; ?></span>
-                        <a href="index.php?option=COM_LIST_AMC_REPAIR_ORDERS" class="b-b-primary text-primary f-12">View all</a>
+                        <span class="text-muted f-12 d-block"><?= __('Total'); ?>: <?php echo (int) $repairTotal; ?></span>
+                        <a href="index.php?option=COM_LIST_AMC_REPAIR_ORDERS" class="b-b-primary text-primary f-12"><?= __('View all'); ?></a>
                     </div>
                 </div>
                 <div class="card-body table-responsive">
@@ -704,13 +704,13 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">RO No</th>
-                                <th scope="col">Contract</th>
-                                <th scope="col">Vendor</th>
-                                <th scope="col">Source</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('RO No'); ?></th>
+                                <th scope="col"><?= __('Contract'); ?></th>
+                                <th scope="col"><?= __('Vendor'); ?></th>
+                                <th scope="col"><?= __('Source'); ?></th>
+                                <th scope="col"><?= __('Date'); ?></th>
+                                <th scope="col"><?= __('Status'); ?></th>
+                                <th scope="col"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody><?php amcLandingRenderRepairRows($repairs); ?></tbody>
