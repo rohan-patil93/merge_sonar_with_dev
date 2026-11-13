@@ -15,7 +15,7 @@ $lists=json_decode($page_response,1);
         <div class="card card-custom">
             <div class="card-header flex-wrap py-5">
                 <div class="card-title">
-                    <h3 class="card-label">Monthly Timesheet
+                    <h3 class="card-label"><?= __('Monthly Timesheet'); ?>
                         </h3>
                     </div>
                     <div class="card-toolbar">
@@ -32,18 +32,18 @@ $lists=json_decode($page_response,1);
                                         </g>
                                     </svg>
                                     <!--end::Svg Icon-->
-                                </span>Export</button>
+                                </span><?= __('Export'); ?></button>
                                 <!--begin::Dropdown Menu-->
                                 <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                     <!--begin::Navigation-->
                                     <ul class="navi flex-column navi-hover py-2">
-                                        <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose an option:</li>
+                                        <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2"><?= __('Choose an option'); ?>:</li>
                                         <li class="navi-item">
                                             <a href="#" class="navi-link">
                                                 <span class="navi-icon">
                                                     <i class="la la-print"></i>
                                                 </span>
-                                                <span class="navi-text">Print</span>
+                                                <span class="navi-text"><?= __('Print'); ?></span>
                                             </a>
                                         </li>
                                         <li class="navi-item">
@@ -51,7 +51,7 @@ $lists=json_decode($page_response,1);
                                                 <span class="navi-icon">
                                                     <i class="la la-copy"></i>
                                                 </span>
-                                                <span class="navi-text">Copy</span>
+                                                <span class="navi-text"><?= __('Copy'); ?></span>
                                             </a>
                                         </li>
                                         <li class="navi-item">
@@ -59,7 +59,7 @@ $lists=json_decode($page_response,1);
                                                 <span class="navi-icon">
                                                     <i class="la la-file-excel-o"></i>
                                                 </span>
-                                                <span class="navi-text">Excel</span>
+                                                <span class="navi-text"><?= __('Excel'); ?></span>
                                             </a>
                                         </li>
                                         <li class="navi-item">
@@ -67,7 +67,7 @@ $lists=json_decode($page_response,1);
                                                 <span class="navi-icon">
                                                     <i class="la la-file-text-o"></i>
                                                 </span>
-                                                <span class="navi-text">CSV</span>
+                                                <span class="navi-text"><?= __('CSV'); ?></span>
                                             </a>
                                         </li>
                                         <li class="navi-item">
@@ -75,7 +75,7 @@ $lists=json_decode($page_response,1);
                                                 <span class="navi-icon">
                                                     <i class="la la-file-pdf-o"></i>
                                                 </span>
-                                                <span class="navi-text">PDF</span>
+                                                <span class="navi-text"><?= __('PDF'); ?></span>
                                             </a>
                                         </li>
                                     </ul>
@@ -86,7 +86,7 @@ $lists=json_decode($page_response,1);
                             <!--end::Dropdown-->
 
                             <button type="button" class="btn btn-primary font-weight-bolder" onclick="show1();">
-                                New Record</button>
+                                <?= __('New Record'); ?></button>
 
                             </div>
                         </div>
@@ -95,15 +95,15 @@ $lists=json_decode($page_response,1);
                             <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">April</th>
-                                        <th id="show1" style="display:none">April</th>
-                                        <th scope="col">May</th>
-                                        <th id="show2" style="display:none">May</th>
-                                        <th scope="col">june</th>
-                                        <th id="show3" style="display:none">june</th>
-                                        <th scope="col">Total</th>
-                                        <th id="show4" style="display:none">Total</th>
+                                        <th scope="col"><?= __('Name'); ?></th>
+                                        <th scope="col"><?= __('April'); ?></th>
+                                        <th id="show1" style="display:none"><?= __('April'); ?></th>
+                                        <th scope="col"><?= __('May'); ?></th>
+                                        <th id="show2" style="display:none"><?= __('May'); ?></th>
+                                        <th scope="col"><?= __('june'); ?></th>
+                                        <th id="show3" style="display:none"><?= __('june'); ?></th>
+                                        <th scope="col"><?= __('Total'); ?></th>
+                                        <th id="show4" style="display:none"><?= __('Total'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -113,7 +113,7 @@ $lists=json_decode($page_response,1);
                                             <div class="d-flex align-items-center">
                                                 <?php if($list['image']!=""){ ?>
                                                 <div class="symbol symbol-50 flex-shrink-0">
-                                                    <img src="assets/media/users/100_11.jpg" alt="User Profile">
+                                                    <img src="assets/media/users/100_11.jpg" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 </div>
                                                 <?php }else{ ?>
                                                 <div class="symbol symbol-50 symbol-light-warning" >
