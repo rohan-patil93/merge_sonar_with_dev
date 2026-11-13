@@ -83,10 +83,10 @@ $all_customers = $admindashboardd['all_customers'];
             "hideBulletsCount": 50,
             "lineThickness": 3,
             "lineColor": "#2ed8b6",
-            "title": "Bills",
+            "title": <?php echo json_encode(__('Bills'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             "useLineColorForBulletBorder": true,
             "valueField": "market1",
-            "balloonText": "[[title]]<br /><b style='font-size: 130%'>[[value]]</b>"
+            "balloonText": "<?= htmlspecialchars(__('[[title]]'), ENT_QUOTES, 'UTF-8'); ?><br /><b style='font-size: 130%'><?= htmlspecialchars(__('[[value]]'), ENT_QUOTES, 'UTF-8'); ?></b>"
         }, {
             "id": "g2",
             "valueAxis": "v2",
@@ -97,10 +97,10 @@ $all_customers = $admindashboardd['all_customers'];
             "hideBulletsCount": 50,
             "lineThickness": 3,
             "lineColor": "#e95753",
-            "title": "Paid",
+            "title": <?php echo json_encode(__('Paid'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             "useLineColorForBulletBorder": true,
             "valueField": "market2",
-            "balloonText": "[[title]]<br /><b style='font-size: 130%'>[[value]]</b>"
+            "balloonText": "<?= htmlspecialchars(__('[[title]]'), ENT_QUOTES, 'UTF-8'); ?><br /><b style='font-size: 130%'><?= htmlspecialchars(__('[[value]]'), ENT_QUOTES, 'UTF-8'); ?></b>"
         }],
         "chartCursor": {
             "pan": true,
@@ -171,10 +171,10 @@ function salesChart(){
             "hideBulletsCount": 50,
             "lineThickness": 3,
             "lineColor": "#2ed8b6",
-            "title": "Bills",
+            "title": <?php echo json_encode(__('Bills'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             "useLineColorForBulletBorder": true,
             "valueField": "market1",
-            "balloonText": "[[title]]<br /><b style='font-size: 130%'>[[value]]</b>"
+            "balloonText": "<?= htmlspecialchars(__('[[title]]'), ENT_QUOTES, 'UTF-8'); ?><br /><b style='font-size: 130%'><?= htmlspecialchars(__('[[value]]'), ENT_QUOTES, 'UTF-8'); ?></b>"
         }, {
             "id": "g2",
             "valueAxis": "v2",
@@ -185,10 +185,10 @@ function salesChart(){
             "hideBulletsCount": 50,
             "lineThickness": 3,
             "lineColor": "#e95753",
-            "title": "Paid",
+            "title": <?php echo json_encode(__('Paid'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             "useLineColorForBulletBorder": true,
             "valueField": "market2",
-            "balloonText": "[[title]]<br /><b style='font-size: 130%'>[[value]]</b>"
+            "balloonText": "<?= htmlspecialchars(__('[[title]]'), ENT_QUOTES, 'UTF-8'); ?><br /><b style='font-size: 130%'><?= htmlspecialchars(__('[[value]]'), ENT_QUOTES, 'UTF-8'); ?></b>"
         }],
         "chartCursor": {
             "pan": true,
@@ -221,10 +221,10 @@ function salesChart(){
 </script>
 <ul class="nav md-tabs infisuite_tab mb-2">
     <li class="nav-item">
-        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#vendarbills" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Vendar Bills</a>
+        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#vendarbills" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Vendar Bills'); ?></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#customerbills" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Customer Bills </a>
+        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#customerbills" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Customer Bills'); ?> </a>
     </li>
 </ul>
 <div class="tab-content tabs" >
