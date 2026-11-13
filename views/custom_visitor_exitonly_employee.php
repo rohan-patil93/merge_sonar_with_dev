@@ -39,10 +39,10 @@ $building_gates_res = $res['building_gates_res'] ?? array();
 
     <div class="card">
         <div class="card-header">
-            <h5>Employee Exit Only (Work-from-Home Asset Out)</h5>
+            <h5><?= __('Employee Exit Only (Work-from-Home Asset Out)'); ?></h5>
             <div class="card-header-right">
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-reply"></i> Back
+                    <i class="icofont icofont-reply"></i> <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -58,9 +58,9 @@ $building_gates_res = $res['building_gates_res'] ?? array();
                 <form id="employeeExitOnlyForm" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-lg-6 col-xs-12">
-                            <span>Employee <b class="text-danger">*</b></span>
-                            <select aria-label="Employee" class="form-select js-example-basic-single" name="employee_id" id="employee_id" required>
-                                <option value="">Select Employee</option>
+                            <span><?= __('Employee'); ?> <b class="text-danger">*</b></span>
+                            <select aria-label="<?= htmlspecialchars(__('Employee'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="employee_id" id="employee_id" required>
+                                <option value=""><?= __('Select Employee'); ?></option>
                                 <?php foreach ($employees as $emp): ?>
                                     <option value="<?= htmlspecialchars($emp['id']) ?>">
                                         <?= htmlspecialchars($emp['emp_code'] . ' - ' . $emp['display_name']) ?>
@@ -77,9 +77,9 @@ $building_gates_res = $res['building_gates_res'] ?? array();
 
                         <!-- Gate (exact syntax you use) -->
                         <div class="form-group col-lg-6 w-full">
-                            <span>Gate No <b class="text-danger">*</b></span>
-                            <select aria-label="Out Gate No" class="form-select js-example-basic-single" id="out_gate_no" name="out_gate_no" required>
-                                <option value="0"> Select Any one </option>
+                            <span><?= __('Gate No'); ?> <b class="text-danger">*</b></span>
+                            <select aria-label="<?= htmlspecialchars(__('Out Gate No'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="out_gate_no" name="out_gate_no" required>
+                                <option value="0"> <?= __('Select Any one'); ?> </option>
                                 <?php if (count((array)$building_gates_res) > 0) {
                                     foreach ($building_gates_res as $value) {  ?>
                                         <option value="<?php echo $value['id']; ?>"
@@ -91,23 +91,23 @@ $building_gates_res = $res['building_gates_res'] ?? array();
                             </select>
                         </div>
                         <div class="form-group col-lg-6 col-xs-12">
-                            <span>Photo</span>
-                            <input aria-label="Image Path" class="form-control mb-1" type="file" name="image_path" id="image_path" />
+                            <span><?= __('Photo'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Image Path'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control mb-1" type="file" name="image_path" id="image_path" />
                         </div>
                     </div>
                     <!-- =========================    STEP 3: Luggage ========================= -->
                     <div class="row mt-4">
                         <div class="form-group col-lg-12">
 
-                            <input aria-label="Visit Type" type="radio" name="visit_type" id="vt_employee" value="employee" checked style="display:none;">
-                            <span>Carrying any items?</span><br>
+                            <input aria-label="<?= htmlspecialchars(__('Visit Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="visit_type" id="vt_employee" value="employee" checked style="display:none;">
+                            <span><?= __('Carrying any items?'); ?></span><br>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="has_luggage" id="lug_no" value="no" checked>
-                                <label class="form-check-label" for="lug_no">No</label>
+                                <label class="form-check-label" for="lug_no"><?= __('No'); ?></label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="has_luggage" id="lug_yes" value="yes">
-                                <label class="form-check-label" for="lug_yes">Yes</label>
+                                <label class="form-check-label" for="lug_yes"><?= __('Yes'); ?></label>
                             </div>
                         </div>
                     </div>
@@ -115,13 +115,13 @@ $building_gates_res = $res['building_gates_res'] ?? array();
                     <div id="luggageSection"  class="d-none mt-3">
                         <div id="luggageScroller" class="luggage-scroller"></div>
                         <div class="mt-4">
-                            <h6 class="mb-2">Carrying Items</h6>
+                            <h6 class="mb-2"><?= __('Carrying Items'); ?></h6>
                             <div id="luggageList" class="luggage-list col-md-6" data-has-prefill="0"></div>
                         </div>
                     </div>
                     <div class="border-top mt-4">
                         <button type="submit" name="submit" value="exitonly" class="btn btn-primary mt-2">
-                            Submit Exit Only
+                            <?= __('Submit Exit Only'); ?>
                         </button>
                     </div>
                 </form>
@@ -133,60 +133,60 @@ $building_gates_res = $res['building_gates_res'] ?? array();
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header py-2">
-                <h6 class="modal-title">Add Item</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h6 class="modal-title"><?= __('Add Item'); ?></h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
             </div>
             <div class="modal-body pt-2">
                 <input type="hidden" id="lm_item_key">
                 <div class="mb-2">
-                    <span class="form-label">Item</span>
-                    <input aria-label="Lm Item Label" type="text" class="form-control" id="lm_item_label" readonly>
+                    <span class="form-label"><?= __('Item'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Lm Item Label'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="lm_item_label" readonly>
                 </div>
                 <div class="mb-2">
-                    <span class="form-label ">Brand Name</span>
-                    <select aria-label="Lm Brand Name" class="form-select" id="lm_brand_name">
-                        <option value="">Select brand</option>
-                        <option>Dell</option>
-                        <option>HP</option>
-                        <option>Apple</option>
-                        <option>Lenovo</option>
-                        <option>Samsung</option>
-                        <option>Sony</option>
-                        <option>LG</option>
-                        <option>Canon</option>
-                        <option>Nikon</option>
-                        <option>Other</option>
+                    <span class="form-label "><?= __('Brand Name'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Lm Brand Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select" id="lm_brand_name">
+                        <option value=""><?= __('Select brand'); ?></option>
+                        <option><?= __('Dell'); ?></option>
+                        <option><?= __('HP'); ?></option>
+                        <option><?= __('Apple'); ?></option>
+                        <option><?= __('Lenovo'); ?></option>
+                        <option><?= __('Samsung'); ?></option>
+                        <option><?= __('Sony'); ?></option>
+                        <option><?= __('LG'); ?></option>
+                        <option><?= __('Canon'); ?></option>
+                        <option><?= __('Nikon'); ?></option>
+                        <option><?= __('Other'); ?></option>
                     </select>
                 </div>
                 <div class="mb-2">
-                    <span class="form-label">Quantity</span>
-                    <input aria-label="Lm Qty" type="number" min="1" class="form-control" id="lm_qty" value="1">
+                    <span class="form-label"><?= __('Quantity'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Lm Qty'), ENT_QUOTES, 'UTF-8'); ?>" type="number" min="1" class="form-control" id="lm_qty" value="1">
                 </div>
                 <div class="mb-2">
-                    <span class="form-label">Serial No / Remarks</span>
-                    <input aria-label="Lm Serial Or Remarks" type="text" class="form-control" id="lm_serial_or_remarks" placeholder="">
+                    <span class="form-label"><?= __('Serial No / Remarks'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Lm Serial Or Remarks'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="lm_serial_or_remarks" placeholder="">
                 </div>
                 <!-- Returnable -->
                 <div class="mb-2">
-                    <span class="form-label me-3">Returnable</span>
+                    <span class="form-label me-3"><?= __('Returnable'); ?></span>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="lm_returnable" id="lm_returnable_yes" value="yes" checked>
-                        <label class="form-check-label" for="lm_returnable_yes">Yes</label>
+                        <label class="form-check-label" for="lm_returnable_yes"><?= __('Yes'); ?></label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="lm_returnable" id="lm_returnable_no" value="no">
-                        <label class="form-check-label" for="lm_returnable_no">No</label>
+                        <label class="form-check-label" for="lm_returnable_no"><?= __('No'); ?></label>
                     </div>
                 </div>
                 <!-- Return Date (shown only when Returnable = Yes) -->
                 <div class="mb-2 d-none" id="lm_return_date_wrap" >
-                    <span class="form-label">Return Date</span>
-                    <input aria-label="Lm Return Date" type="date" class="form-control" id="lm_return_date" value="<?php echo date('Y-m-d'); ?>">
+                    <span class="form-label"><?= __('Return Date'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Lm Return Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" id="lm_return_date" value="<?php echo date('Y-m-d'); ?>">
                 </div>
             </div>
             <div class="modal-footer py-2">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="lm_save_btn">Add</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
+                <button type="button" class="btn btn-primary" id="lm_save_btn"><?= __('Add'); ?></button>
             </div>
         </div>
     </div>
