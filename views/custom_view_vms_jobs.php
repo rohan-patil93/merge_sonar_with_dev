@@ -20,11 +20,11 @@ $jobdept_count = implode('|', (array)$jobstatus['dept_countlist']);
                 <div class="card card-custom gutter-b">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Job Report By Status</h3>
+                            <h3 class="card-label"><?= __('Job Report By Status'); ?></h3>
                         </div>
                     </div>
                     <div class="card-body">
-                        <a target="_blank" href="index.php?option=COM_VIEW_JOB_REPORT" class="btn btn-primary offset-10">Full Report</a>
+                        <a target="_blank" href="index.php?option=COM_VIEW_JOB_REPORT" class="btn btn-primary offset-10"><?= __('Full Report'); ?></a>
                         <!--begin::Chart-->
                         <input type="hidden" id="status" value="<?php echo $jobstatus_names;?>">
                         <input type="hidden" id="count" value="<?php echo $jobstatus_count;?>">
