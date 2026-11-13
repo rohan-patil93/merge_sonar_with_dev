@@ -237,7 +237,7 @@
                        }
                        Swal.fire({
                            icon: 'error',
-                           title: 'Oops...',
+                           title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                            text: auth
                        })
                    }
@@ -320,7 +320,7 @@
     justify-content: center;">
         <div class="card-body text-center" style="z-index: 1; flex:inherit;">
             <div class="text-facebook m-b-20 text-dark"><i class="ti-announcement "></i></div>
-            <h3 class="text-facebook f-w-700 text-dark">Announcements</h3>
+            <h3 class="text-facebook f-w-700 text-dark"><?= __('Announcements'); ?></h3>
             <?php
             $anouncement =  API."?mode=togetlatestannouncement";
             $anouncement_list = callAPI($anouncement);
@@ -329,7 +329,7 @@
             <p class="text-dark"><?php echo substr($anouncement_list['announcement_message'],0,250);?></p>
             <p class="m-b-0 m-t-15">
                 <a  href="index.php?option=COM_VIEW_ANNOUNCEMENTS" class="btn btn-info waves-effect waves-light">
-                    View
+                    <?= __('View'); ?>
                 </a>
             </p>
         </div>
@@ -338,7 +338,7 @@
 <div class="col-lg-<?php echo $awdith; ?>">
     <div class="card new-cust-card custom_hover_card pb-4">
         <div class="card-header">
-            <h5>My Leaves</h5>
+            <h5><?= __('My Leaves'); ?></h5>
             <span class="form-label label label-success"><?php echo count($data['leave']); ?></span>
         </div>
         <div class="card-body custom-scroll" style=" height: 300px;">
@@ -347,9 +347,9 @@
                 foreach ($data['leave'] as  $leave) {?>
                     <div class="align-middle m-b-35">
                         <?php if($data['employee']['image']!=""){ ?>
-                        <img src="uploads/all/<?php echo $data['employee']['image']; ?>"   class="img-radius img-40 align-top m-r-15" alt="Attachment Preview">
+                        <img src="uploads/all/<?php echo $data['employee']['image']; ?>"   class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php }else{ ?>
-                        <span  alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($data['employee']['display_name']); ?></span>
+                        <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($data['employee']['display_name']); ?></span>
                         <?php } ?>
                         <div class="d-inline-block">
                             <a class="f-14 f-w-600" href="index.php?option=COM_INSERT_LEAVE_REQUEST&Rid=<?php echo deocdeId('id:'.$leave['id']); ?>"><p class="f-15 mb-1 text-uppercase"><?php echo $leave_type[$leave['leave_type_id']]; ?></p></a>
@@ -358,7 +358,7 @@
                     </div>
                 <?php }
             }else{ ?>
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
          <div class="text-center px-4">
              <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
           </div>
@@ -369,7 +369,7 @@
 <div class="col-lg-<?php echo $awdith; ?>">
     <div class="card new-cust-card custom_hover_card">
         <div class="card-header">
-            <h5>Recognition</h5>
+            <h5><?= __('Recognition'); ?></h5>
             <span class="form-label label label-success"><?php echo count($data['recognitions']); ?></span>
         </div>
         <div class="card-body custom-scroll" style=" height: 320px;">
@@ -378,9 +378,9 @@
                 foreach ($data['recognitions'] as  $recognitions) { ?>
                     <div class="align-middle m-b-35">
                         <?php if($data['recognition_badges'][$recognitions['badge_id']]['image'] !=""){ ?>
-                        <img src="uploads/all/<?php echo $data['recognition_badges'][$recognitions['badge_id']]['image']; ?>"   class="img-radius img-40 align-top m-r-15" alt="Attachment Preview">
+                        <img src="uploads/all/<?php echo $data['recognition_badges'][$recognitions['badge_id']]['image']; ?>"   class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php }else{ ?>
-                        <span  alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($data['employee']['display_name']); ?></span>
+                        <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($data['employee']['display_name']); ?></span>
                         <?php } ?>
                         <div class="d-inline-block">
                             <a class="f-15 f-w-600 mb-1 text-uppercase" href=""><span onclick="showrecognitioncard('<?php echo $recognitions['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $data['recognition_badges'][$recognitions['badge_id']]['badge_name']; ?></span></a>
@@ -389,7 +389,7 @@
                     </div>
                 <?php }
             }else{ ?>
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
          <div class="text-center px-4">
              <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
           </div>
@@ -401,15 +401,15 @@
 <div class="col-lg-<?php echo $awdith; ?>">
     <div class="card new-cust-card custom_hover_card" style="min-height: 382px;">
         <div class="card-header">
-            <h5>Attendance</h5>
+            <h5><?= __('Attendance'); ?></h5>
             <span class="form-label label label-success m-l-5"><?php echo date("M"); ?></span>
 
         </div>
         <div class="card-body" style="height: 300px;">
             <div class="text-right">
-                <span class="date-item-danger cursor-pointer f-12" style="width:10px;margin: 3px;" data-bs-toggle="tooltip" data-placement="bottom" title="Absent">A</span>
-                <span class="date-item-att cursor-pointer f-12" style="width:10px;margin:4px 8px 0 12px;" data-bs-toggle="tooltip" data-placement="bottom" title="Present">P</span>
-                <span class="date-item-gray cursor-pointer f-12" style="width:10px;margin-top:3px;margin-right: 11px;" data-bs-toggle="tooltip" data-placement="bottom" title="Week Off & Holidays">W</span>
+                <span class="date-item-danger cursor-pointer f-12" style="width:10px;margin: 3px;" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Absent'), ENT_QUOTES, 'UTF-8'); ?>">A</span>
+                <span class="date-item-att cursor-pointer f-12" style="width:10px;margin:4px 8px 0 12px;" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Present'), ENT_QUOTES, 'UTF-8'); ?>">P</span>
+                <span class="date-item-gray cursor-pointer f-12" style="width:10px;margin-top:3px;margin-right: 11px;" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Week Off & Holidays'), ENT_QUOTES, 'UTF-8'); ?>">W</span>
             </div>
             <div id="date-list" class="d-block  mt-1" style="width: 250px;">
                 <?php     $no_week = date('w', strtotime(date('Y')."-".date('m')."-01"));
@@ -468,7 +468,7 @@
 <div class="col-lg-<?php echo $awdith; ?> ">
     <div class="card new-cust-card custom_hover_card pb-4">
         <div class="card-header">
-            <h5> Birthdays & Anniversaries
+            <h5> <?= htmlspecialchars(__('Birthdays & Anniversaries'), ENT_QUOTES, 'UTF-8'); ?>
             </h5><span class="form-label label label-success"><?php echo $wishes_count; ?></span>
         </div>
         <div class="card-body custom-scroll" style=" height: 300px;">
@@ -487,7 +487,7 @@
                     <div class="align-middle m-b-25">
                         <div class="d-inline-block" onclick="popupfeedmsg(<?php echo $sender_emp_id;?>,<?php echo $receiver_emp_id;?>,'<?php echo $msg_title;?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                             <?php if($display_photo) {?>
-                                <img src="uploads/all/<?php echo $display_photo; ?>"   class="img-radius img-40 align-top m-r-15" alt="User Profile">
+                                <img src="uploads/all/<?php echo $display_photo; ?>"   class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php } else { ?>
                                 <span class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-10 text-center"><?php echo initials($display_name); ?></span>
                             <?php } ?>
@@ -511,7 +511,7 @@
                     <div class="align-middle m-b-35">
                         <div class="d-inline-block" onclick="popupfeedmsg(<?php echo $sender_emp_id;?>,<?php echo $receiver_emp_id;?>,'<?php echo $msg_title;?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                             <?php if($display_photo) {?>
-                                <img src="uploads/all/<?php echo $display_photo; ?>"   class="img-radius img-40 align-top m-r-15" alt="User Profile">
+                                <img src="uploads/all/<?php echo $display_photo; ?>"   class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php } else { ?>
                                 <span class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($display_name); ?></span>
                             <?php } ?>
@@ -524,7 +524,7 @@
                     </div>
                 <?php }
             }else{
-                echo "<h4><i class='fa fa-warning'></i> No Birthdays Available</h4>";
+                echo "<h4><i class='fa fa-warning'></i> ".__('No Birthdays Available')."</h4>";
             } ?>
         </div>
     </div>
@@ -532,7 +532,7 @@
 <div class="col-lg-<?php echo $awdith; ?>">
     <div class="card new-cust-card custom_hover_card">
         <div class="card-header">
-            <h5>Welcome New Employees </h5>
+            <h5><?= __('Welcome New Employees'); ?> </h5>
             <span class="form-label label label-success"><?php echo count($data['joins']); ?></span>
         </div>
         <div class="card-body custom-scroll" style=" height: 320px;">
@@ -541,9 +541,9 @@
                 foreach ($data['joins'] as  $joins) { ?>
                     <div class="align-middle m-b-35">
                         <?php if($joins['image']!=""){ ?>
-                        <img src="uploads/all/<?php echo $joins['image']; ?>"   class="img-radius img-40 align-top m-r-15" alt="Attachment Preview">
+                        <img src="uploads/all/<?php echo $joins['image']; ?>"   class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php }else{ ?>
-                        <span  alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($joins['display_name']); ?></span>
+                        <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($joins['display_name']); ?></span>
                         <?php } ?>
                         <div class="d-inline-block">
 
@@ -553,7 +553,7 @@
                     </div>
                 <?php }
             }else{ ?>
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
          <div class="text-center px-4">
              <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
           </div>
@@ -564,7 +564,7 @@
 <div class="col-lg-<?php echo $awdith; ?>">
     <div class="card new-cust-card custom_hover_card">
         <div class="card-header">
-            <h5>Tasks</h5>
+            <h5><?= __('Tasks'); ?></h5>
             <span class="form-label label label-success"><?php echo count($data['task']); ?></span>
         </div>
         <div class="card-body custom-scroll" style=" height: 320px;">
@@ -572,9 +572,9 @@
                 foreach ($data['task'] as  $task) { ?>
                     <div class="align-middle m-b-35">
                         <?php if($data['employee']['image']!=""){ ?>
-                        <img src="uploads/all/<?php echo $data['employee']['image']; ?>"   class="img-radius img-40 align-top m-r-15" alt="Attachment Preview">
+                        <img src="uploads/all/<?php echo $data['employee']['image']; ?>"   class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php }else{ ?>
-                        <span  alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($data['employee']['display_name']); ?></span>
+                        <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($data['employee']['display_name']); ?></span>
                         <?php } ?>
                         <div class="d-inline-block">
                             <a href="#!"><h6 class="f-15 mb-1 text-uppercase f-w-600"><?php echo $task['event_name']; ?></h6></a>
@@ -583,7 +583,7 @@
                     </div>
                 <?php }
             }else{ ?>
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
          <div class="text-center px-4">
              <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
           </div>
@@ -595,7 +595,7 @@
 <div class="col-lg-<?php echo $awdith; ?>">
     <div class="card new-cust-card custom_hover_card">
         <div class="card-header">
-            <h5>Work From Home</h5>
+            <h5><?= __('Work From Home'); ?></h5>
             <span class="form-label label label-success"><?php echo count($data['wfh']); ?></span>
         </div>
         <div class="card-body custom-scroll" style=" height: 320px;">
@@ -604,9 +604,9 @@
                 foreach ($data['wfh'] as  $wfh) { ?>
                     <div class="align-middle m-b-35">
                         <?php if($data['employee']['image']!=""){ ?>
-                        <img src="uploads/all/<?php echo $data['employee']['image']; ?>"   class="img-radius img-40 align-top m-r-15" alt="Attachment Preview">
+                        <img src="uploads/all/<?php echo $data['employee']['image']; ?>"   class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php }else{ ?>
-                        <span  alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($data['employee']['display_name']); ?></span>
+                        <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($data['employee']['display_name']); ?></span>
                         <?php } ?>
                         <div class="d-inline-block">
                             <a href="index.php?option=COM_INSERT_REQUEST_WORK_FROM_HOME&Rid=<?php echo deocdeId('id:'.$wfh['id']); ?>"><h6 class="f-15 mb-1 f-w-600 text-uppercase"><?php echo $wfh['display_name']; ?></h6></a>
@@ -615,7 +615,7 @@
                     </div>
                 <?php }
             }else{ ?>
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
          <div class="text-center px-4">
              <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
           </div>
@@ -626,7 +626,7 @@
 <div class="col-lg-<?php echo $awdith; ?>">
     <div class="card new-cust-card custom_hover_card pb-4">
         <div class="card-header">
-            <h5>Holidays List</h5>
+            <h5><?= __('Holidays List'); ?></h5>
             <span class="form-label label label-success"><?php echo $total_holidays; ?></span>
         </div>
         <div class="card-body custom-scroll" style=" height: 300px;">
@@ -645,7 +645,7 @@
                     </div>
                 <?php }
             }else{ ?>
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
          <div class="text-center px-4">
              <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
           </div>
@@ -659,19 +659,19 @@
    <div class="col-lg-12">
       <div class="card table-card">
          <div class="card-header">
-            <h5>Reviews</h5>
+            <h5><?= __('Reviews'); ?></h5>
          </div>
          <div class="card-body custom-scroll" style="height: 600px;">
             <div>
                <div class="col-lg-12 col-xl-12">
                   <ul class="nav  md-tabs infisuite_tab mt-2 p-2">
                      <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#home7pending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-hourglass-2"></i>  Pending  <span class="form-label badge bg-danger"><?php echo count((array)$reviewdata['pending']); ?></span></a>
+                        <a class="nav-link active" data-bs-toggle="tab" href="#home7pending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-hourglass-2"></i>  <?= __('Pending'); ?>  <span class="form-label badge bg-danger"><?php echo count((array)$reviewdata['pending']); ?></span></a>
                         <div class="slide"></div>
                      </li>
 
                      <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#profile7approve" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-thumbs-up"></i> Approve  <span class="form-label badge bg-warning ml-2"><?php echo count((array)$reviewdata['approve']); ?></span></a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#profile7approve" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-thumbs-up"></i> <?= __('Approve'); ?>  <span class="form-label badge bg-warning ml-2"><?php echo count((array)$reviewdata['approve']); ?></span></a>
                         <div class="slide"></div>
                      </li>
                   </ul>
@@ -681,7 +681,7 @@
                            <thead>
                               <tr>
                                  <th scope="col">#</th>
-                                 <th scope="col">Description</th>
+                                 <th scope="col"><?= __('Description'); ?></th>
 
 
                               </tr>
@@ -715,7 +715,7 @@
                                     <td><?php echo $k; ?></td>
                                     <td>
                                        <div class="d-inline-block align-middle display-flex">
-                                          <span  alt="user" class="img-radius img-50 align-top m-r-15 custom_txt_round p-2 f-12 text-center" ><?php echo $icon_initials; ?></span>
+                                          <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-15 custom_txt_round p-2 f-12 text-center" ><?php echo $icon_initials; ?></span>
                                           <div class="d-inline-block">
                                              <a href="<?php echo $link;?>" class="text-hover-primary mb-0 font-size-sm <?php echo $class_text; ?>"><h6 class="f-15 mb-1 f-w-600"><?php echo $Notification_Message; ?></h6></a>
                                              <p class="text-muted m-b-0 f-13 <?php echo $class_text; ?>"><?php echo $Notification_DateTime; ?></p>
@@ -727,7 +727,7 @@
                                  <?php  $k++;
 }
 } else{
-                                    echo "<tr><td colspan='3'><h4 class='p-40 text-center'><i class='fa fa-warning'></i> No Reviews Available</h4></td></tr>";
+                                    echo "<tr><td colspan='3'><h4 class='p-40 text-center'><i class='fa fa-warning'></i> ".__('No Reviews Available')."</h4></td></tr>";
                                  } ?>
                               </tbody>
                            </table>
@@ -737,7 +737,7 @@
                               <thead>
                                  <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Description</th>
+                                    <th scope="col"><?= __('Description'); ?></th>
 
 
                                  </tr>
@@ -771,7 +771,7 @@
                                         <td><?php echo $k; ?></td>
                                        <td>
                                           <div class="d-inline-block align-middle display-flex">
-                                             <span  alt="user" class="img-radius img-50 align-top m-r-15 custom_txt_round p-2 f-12 text-center" ><?php echo $icon_initials; ?></span>
+                                             <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-15 custom_txt_round p-2 f-12 text-center" ><?php echo $icon_initials; ?></span>
                                              <div class="d-inline-block">
                                                 <a href="<?php echo $link;?>" class="text-hover-primary mb-0 font-size-sm <?php echo $class_text; ?>"><h6><?php echo $Notification_Message; ?></h6></a>
                                                 <p class="text-muted m-b-0 <?php echo $class_text; ?>"><?php echo $Notification_DateTime; ?></p>
@@ -783,7 +783,7 @@
                                     <?php  $k++;
 }
 } else{
-                                       echo "<tr><td colspan='3'><h4 class='p-40 text-center'><i class='fa fa-warning'></i> No Reviews Available</h4></td></tr>";
+                                       echo "<tr><td colspan='3'><h4 class='p-40 text-center'><i class='fa fa-warning'></i> ".__('No Reviews Available')."</h4></td></tr>";
                                     } ?>
                                  </tbody>
                               </table>
