@@ -3,25 +3,25 @@
   <div class="col-lg-3 col-md-6 col-sm-6 col-12">
     <div class="card p-2 infisuite-dashboard infisuite-crm-dashboard b-radius-30">
       <div class="card-body">
-        <p class="text-muted mb-0">Cash In Bank</p>
-        <h3 class="f-w-600 f-50 mt-3 mb-3">₹3.4 Cr</h3>
-        <p class="text-success mb-0 f-w-600">Healthy liquidity position</p>
+        <p class="text-muted mb-0"><?= __('Cash In Bank'); ?></p>
+        <h3 class="f-w-600 f-50 mt-3 mb-3"><?= __('₹3.4 Cr'); ?></h3>
+        <p class="text-success mb-0 f-w-600"><?= __('Healthy liquidity position'); ?></p>
       </div>
     </div>
   </div>
   <div class="col-lg-3 col-md-6 col-sm-6 col-12">
     <div class="card p-2 infisuite-dashboard infisuite-crm-dashboard b-radius-30">
       <div class="card-body">
-        <p class="text-muted mb-0">Total Receivables</p>
-        <h3 class="f-w-600 f-50 mt-3 mb-3">₹1.8 Cr</h3>
-        <p class="text-danger mb-0 f-w-600">Collections need attention</p>
+        <p class="text-muted mb-0"><?= __('Total Receivables'); ?></p>
+        <h3 class="f-w-600 f-50 mt-3 mb-3"><?= __('₹1.8 Cr'); ?></h3>
+        <p class="text-danger mb-0 f-w-600"><?= __('Collections need attention'); ?></p>
       </div>
     </div>
   </div>
   <div class="col-lg-3 col-md-6 col-sm-6 col-12">
     <div class="card p-2 infisuite-dashboard infisuite-crm-dashboard b-radius-30">
       <div class="card-body">
-        <p class="text-muted mb-0">Monthly Burn Rate</p>
+        <p class="text-muted mb-0"><?= __('Monthly Burn Rate'); ?></p>
         <h3 class="f-w-600 f-50 mt-3 mb-3">₹92 L</h3>
         <p class="text-warning mb-0 f-w-600">8% from previous month</p>
       </div>
@@ -32,9 +32,9 @@
       <div class="card-body table-card">
         <span class="text-white mb-0">
           <div class="p-status bg-c-green d-inline-block m-r-5 blink-fade"></div>
-          AI Risk Alert
+          <?= __('AI Risk Alert'); ?>
         </span>
-        <h6 class="f-w-600 f-28 mt-4 mb-2 text-white leading-relaxed">Potential cash shortfall expected in 18 days.</h6>
+        <h6 class="f-w-600 f-28 mt-4 mb-2 text-white leading-relaxed"><?= __('Potential cash shortfall expected in 18 days.'); ?></h6>
       </div>
     </div>
   </div>
@@ -44,10 +44,10 @@
       <div class="card-body table-card">
         <div class="d-flex justify-content-between align-items-center m-d-flex">
           <div class="d-inline-block m-d-block">
-            <h4 class="f-w-600 f-30">Cashflow Command Center</h4>
-            <p class="text-muted f-14 f-w-600">Daily inflow vs outflow analysis</p>
+            <h4 class="f-w-600 f-30"><?= __('Cashflow Command Center'); ?></h4>
+            <p class="text-muted f-14 f-w-600"><?= __('Daily inflow vs outflow analysis'); ?></p>
           </div>
-          <button class="btn bg-blue-50 b-radius-20 pt-1 pb-1 border-blue-100 p-l-10 p-r-10 text-center">Update Live</button>
+          <button class="btn bg-blue-50 b-radius-20 pt-1 pb-1 border-blue-100 p-l-10 p-r-10 text-center"><?= __('Update Live'); ?></button>
         </div>
         <div id="line-example" style="height: 230px;"></div>
       </div>
@@ -59,13 +59,13 @@
       <div class="card-body table-card">
         <div class="d-flex justify-content-between align-items-center m-d-flex">
           <div class="d-inline-block m-d-block">
-            <h4 class="f-w-600 f-30">Receivables Aging</h4>
+            <h4 class="f-w-600 f-30"><?= __('Receivables Aging'); ?></h4>
           </div>
-          <span class="bg-red-50 b-radius-20 pt-1 pb-1 border-red-100 p-l-10 p-r-10 text-center">High Risk</span>
+          <span class="bg-red-50 b-radius-20 pt-1 pb-1 border-red-100 p-l-10 p-r-10 text-center"><?= __('High Risk'); ?></span>
         </div>
         <div class="mt-5">
           <div class="d-flex justify-content-between">
-            <span class="f-w-600 f-14">0 - 30 Days</span>
+            <span class="f-w-600 f-14"><?= __('0 - 30 Days'); ?></span>
             <span class="f-w-600 f-14">₹38 L</span>
           </div>
           <div class="progress progress-sm mt-1">
@@ -74,7 +74,7 @@
         </div>
         <div class="mt-4">
           <div class="d-flex justify-content-between">
-            <span class="f-w-600 f-14">31 - 60 Days</span>
+            <span class="f-w-600 f-14"><?= __('31 - 60 Days'); ?></span>
             <span class="f-w-600 f-14">₹24 L</span>
           </div>
           <div class="progress progress-sm mt-1">
@@ -83,7 +83,7 @@
         </div>
         <div class="mt-4">
           <div class="d-flex justify-content-between">
-            <span class="f-w-600 f-14">61 - 90 Days</span>
+            <span class="f-w-600 f-14"><?= __('61 - 90 Days'); ?></span>
             <span class="f-w-600 f-14">₹12 L</span>
           </div>
           <div class="progress progress-sm mt-1">
@@ -92,7 +92,7 @@
         </div>
         <div class="mt-4">
           <div class="d-flex justify-content-between">
-            <span class="f-w-600 f-14">90+ Days</span>
+            <span class="f-w-600 f-14"><?= __('90+ Days'); ?></span>
             <span class="f-w-600 f-14">₹9 L</span>
           </div>
           <div class="progress progress-sm mt-1">
@@ -108,7 +108,7 @@
       <div class="card-body table-card">
         <div class="d-flex justify-content-between align-items-center m-d-flex">
           <div class="d-inline-block m-d-block">
-            <h4 class="f-w-600 f-30">Expense Intelligence</h4>
+            <h4 class="f-w-600 f-30"><?= __('Expense Intelligence'); ?></h4>
           </div>
         </div>
         <div id="line-example_2" style="min-height: 300px;"></div>
@@ -121,32 +121,32 @@
       <div class="card-body table-card">
         <div class="d-flex justify-content-between align-items-center m-d-flex">
           <div class="d-inline-block m-d-block">
-            <h4 class="f-w-600 f-30">Compliance Radar</h4>
+            <h4 class="f-w-600 f-30"><?= __('Compliance Radar'); ?></h4>
           </div>
           <a href="" class="f-12 text-success bg-green-50 p-2 b-radius-30 f-w-600 text-center">92% Compliant</a>
         </div>
         <div class="mt-4">
           <div class="d-flex justify-content-between bg-green-50 b-radius-20 p-3 border-green-100">
-            <span class="f-16 text-dark">GST Filing</span>
-            <span class="f-16 text-success f-w-600">Completed</span>
+            <span class="f-16 text-dark"><?= __('GST Filing'); ?></span>
+            <span class="f-16 text-success f-w-600"><?= __('Completed'); ?></span>
           </div>
         </div>
         <div class="mt-4">
           <div class="d-flex justify-content-between bg-yellow-50 b-radius-20 p-3 border-green-100">
-            <span class="f-16 text-dark">TDS Payment</span>
-            <span class="f-16 text-danger f-w-600">Due Tomorrow</span>
+            <span class="f-16 text-dark"><?= __('TDS Payment'); ?></span>
+            <span class="f-16 text-danger f-w-600"><?= __('Due Tomorrow'); ?></span>
           </div>
         </div>
         <div class="mt-4 mb-4">
           <div class="d-flex justify-content-between bg-red-50 b-radius-20 p-3 border-yellow-100">
-            <span class="f-16 text-dark">Vendor AML Check</span>
-            <span class="f-16 text-danger f-w-600">3 Pending</span>
+            <span class="f-16 text-dark"><?= __('Vendor AML Check'); ?></span>
+            <span class="f-16 text-danger f-w-600"><?= __('3 Pending'); ?></span>
           </div>
         </div>
         <div class="mt-4 mb-4">
           <div class="d-flex justify-content-between bg-blue-50 b-radius-20 p-3 border-yellow-100">
-            <span class="f-16 text-dark">PF / ESI</span>
-            <span class="f-16 text-primary f-w-600">In Process</span>
+            <span class="f-16 text-dark"><?= __('PF / ESI'); ?></span>
+            <span class="f-16 text-primary f-w-600"><?= __('In Process'); ?></span>
           </div>
         </div>
       </div>
@@ -158,14 +158,14 @@
       <div class="card-body mb-5">
         <div class="d-flex justify-content-between align-items-center m-d-flex">
           <div class="d-inline-block m-d-block">
-            <h4 class="f-w-600 f-30 text-white">AI Risk Engine</h4>
+            <h4 class="f-w-600 f-30 text-white"><?= __('AI Risk Engine'); ?></h4>
           </div>
-          <span class="bg-danger b-radius-20 pt-1 pb-1 p-l-10 p-r-10">Live</span>
+          <span class="bg-danger b-radius-20 pt-1 pb-1 p-l-10 p-r-10"><?= __('Live'); ?></span>
         </div>
         <div class="mt-4 mb-5">
-          <p class="f-16 bg-black-100 b-radius-20 p-3 text-white">Vendor payment duplication risk detected.</p>
-          <p class="f-16 bg-black-100 b-radius-20 p-3 text-white">Unusual increase in travel reimbursements.</p>
-          <p class="f-16 bg-black-100 b-radius-20 p-3 text-white">Customer ABC has high default probability.</p>
+          <p class="f-16 bg-black-100 b-radius-20 p-3 text-white"><?= __('Vendor payment duplication risk detected.'); ?></p>
+          <p class="f-16 bg-black-100 b-radius-20 p-3 text-white"><?= __('Unusual increase in travel reimbursements.'); ?></p>
+          <p class="f-16 bg-black-100 b-radius-20 p-3 text-white"><?= __('Customer ABC has high default probability.'); ?></p>
         </div>
       </div>
     </div>
