@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Candidate Form</title>
+    <title><?= __('Candidate Form'); ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -24,7 +24,7 @@
         function printDiv(divId) {
            var printContents = document.getElementById(divId).innerHTML;
            var originalContents = document.body.innerHTML;
-           document.body.innerHTML = "<html><head><title>Candidate Details</title></head><body>" + printContents + "</body>";
+           document.body.innerHTML = "<html><head><title><?= htmlspecialchars(__('Candidate Details'), ENT_QUOTES, 'UTF-8'); ?></title></head><body>" + printContents + "</body>";
            window.print();
            document.body.innerHTML = originalContents;
         }
@@ -101,70 +101,70 @@ foreach($alldata['castes'] as $maritalstatus1){
         <table class="" style="width:100%;border-collapse : collapse;">
             <tr>
                 <th scope="col">
-                    <img style="width:100px;" src="uploads/all/<?php echo $configdata['display_logo']; ?>" alt="Logo">
+                    <img style="width:100px;" src="uploads/all/<?php echo $configdata['display_logo']; ?>" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>">
                 </th>
                 <th scope="col">
                     <h3 style="font-size: 20px; text-align: center; text-transform: uppercase; margin: 0;"><?php echo $_SESSION['config']['name']; ?></h2>
-                    <p style="font-size:14px; text-align: center; margin: 10px 0 0 0;">(An ISO 900-120-5 Certified Outsourcing Company)</p>
+                    <p style="font-size:14px; text-align: center; margin: 10px 0 0 0;"><?= __('(An ISO 900-120-5 Certified Outsourcing Company)'); ?></p>
                 </th>
                 <th scope="col" style="text-align: right;"></th>
             </tr>
         </table>
         <table class="" style="width:100%; margin: 20px 0 0 0;border-collapse : collapse;">
             <tr>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size: 10px; text-align: left;">Candidate Name</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size: 10px; text-align: left;"><?= __('Candidate Name'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;"><?php echo $data['first_name']; ?></td>
                 <td colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;"><?php echo $data['middle_name']; ?> </td>
                 <td colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;"><?php echo $data['last_name']; ?></td>
                 <th scope="col" rowspan="5" style="border: 1px solid #cccccc;">
                     <?php if($data['image']!=""){ ?>
-                        <img style="width:150px;" src="uploads/<?php echo $_SESSION['DB_NAME']; ?>/1/candidates/<?php echo $rid; ?>/<?php echo $data['image']; ?>" alt="Attachment Preview">
+                        <img style="width:150px;" src="uploads/<?php echo $_SESSION['DB_NAME']; ?>/1/candidates/<?php echo $rid; ?>/<?php echo $data['image']; ?>" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                     <?php }else{?>
-                    <img style="width:150px;" src="uploads2/dummy.jpg" alt="Attachment Preview">
+                    <img style="width:150px;" src="uploads2/dummy.jpg" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                     <?php } ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Father Name</th>
+                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Father Name'); ?></th>
                 <td colspan="4" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;"><?php echo $data['father_name']; ?></td>
             </tr>
             <tr>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Date of Birth</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Date of Birth'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?php echo date("d M Y", strtotime($data['date_of_birth']));  ?></td>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Age</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Age'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?php echo dateyearcalucates($data['date_of_birth']); ?></td>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Sex</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Sex'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?php echo $genders[$data['gender']]; ?></td>
             </tr>
             <tr>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Religion</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Religion'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?php echo $religions[$data['religion']]; ?></td>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Caste</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Caste'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">
                     <?php echo $castes[$data['caste']]; ?>
                 </td>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Present House</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Present House'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"></td>
             </tr>
             <tr>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Marital Status</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Marital Status'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?php echo $maritalstatus[$data['marital_status']]; ?></td>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Identification Mark</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Identification Mark'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">
                     <?php echo $data['identification_mark']; ?>
                 </td>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Blood group</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Blood group'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?php echo $blood_group[$data['blood_group']]; ?></td>
             </tr>
             <tr>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Hobbies</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Hobbies'); ?></th>
                 <td colspan="6" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;">
                      <?php echo $data['hobbies']; ?>
                 </td>
             </tr>
             <tr>
-                <th scope="col" colspan="3" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;">Permanent Address</th>
-                <th scope="col" colspan="4" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;">Present Address</th>
+                <th scope="col" colspan="3" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;"><?= __('Permanent Address'); ?></th>
+                <th scope="col" colspan="4" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;"><?= __('Present Address'); ?></th>
             </tr>
             <tr>
                 <th scope="col" colspan="3" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;"><p style="min-height: 50px;">
@@ -175,38 +175,38 @@ foreach($alldata['castes'] as $maritalstatus1){
                 </p></th>
             </tr>
             <tr>
-                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">E-mail ID</th>
+                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('E-mail ID'); ?></th>
                 <td colspan="5" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?php echo $data['email_id']; ?></td>
             </tr>
             <tr>
-                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Contact Number</th>
+                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Contact Number'); ?></th>
                 <td colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?php echo $data['phone']; ?></td>
-                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Emergency Contact Number</th>
+                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Emergency Contact Number'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">
                     <?php echo $data['emergency_contact_number']; ?>
                 </td>
             </tr>
             <tr>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Height</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Height'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">
                     <?php echo $data['height']; ?>
                 </td>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Weight</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Weight'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">
                     <?php echo $data['weight']; ?>
                 </td>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">State</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('State'); ?></th>
                 <td colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">-</td>
             </tr>
             <tr style="background-color: #eeeeee;">
-                <th scope="col" colspan="7" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;">Family Details</th>
+                <th scope="col" colspan="7" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;"><?= __('Family Details'); ?></th>
             </tr>
             <tr>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Name</th>
-                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Relation</th>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Age</th>
-                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Occupation</th>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Monthly Income</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Name'); ?></th>
+                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Relation'); ?></th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Age'); ?></th>
+                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Occupation'); ?></th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Monthly Income'); ?></th>
             </tr>
 
             <?php $famies = json_decode($data['employee_dependents'], 1);
@@ -221,14 +221,14 @@ foreach($alldata['castes'] as $maritalstatus1){
             </tr>
             <?php } ?>
             <tr style="background-color: #eeeeee;">
-                <th scope="col" colspan="7" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;">Educational Qualification</th>
+                <th scope="col" colspan="7" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;"><?= __('Educational Qualification'); ?></th>
             </tr>
             <tr>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Qualification</th>
-                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Name of School/College/University/Institution</th>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Score</th>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Year Of</th>
-                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Subject taken</th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Qualification'); ?></th>
+                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Name of School/College/University/Institution'); ?></th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Score'); ?></th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Year Of'); ?></th>
+                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Subject taken'); ?></th>
             </tr>
             <?php $quali = json_decode($data['candidate_qualifications'], 1);
                 foreach($quali  as $qual){
@@ -244,13 +244,13 @@ foreach($alldata['castes'] as $maritalstatus1){
 
 
             <tr style="background-color: #eeeeee;">
-                <th scope="col" colspan="7" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;">Experience if Any</th>
+                <th scope="col" colspan="7" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;"><?= __('Experience if Any'); ?></th>
             </tr>
             <tr>
-                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Name of Company</th>
-                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">Designation</th>
-                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">From</th>
-                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">To</th>
+                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Name of Company'); ?></th>
+                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Designation'); ?></th>
+                <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('From'); ?></th>
+                <th scope="col" colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('To'); ?></th>
 
             </tr>
             <?php $expe = json_decode($data['candidate_experiances'], 1);
@@ -265,15 +265,15 @@ foreach($alldata['castes'] as $maritalstatus1){
             <?php } ?>
             <tr style="background-color: #eeeeee;">
                 <th scope="col" colspan="7" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">
-                    <p style="margin: 0;">Declaration: I hereby declare  that the above furnished infomation is ture to the best of my knowledge and belief.</p><br />
-                    <p style="margin: 0;">Date:</p>
-                    <p style="width: 50%; float: left; margin: 10px 0 0 0;">Place:</p>
-                    <p style="width: 50%; float: left; margin: 10px 0 0 0; text-align: right;">Signature of the Candidate</p>
+                    <p style="margin: 0;"><?= __('Declaration: I hereby declare that the above furnished infomation is ture to the best of my knowledge and belief.'); ?></p><br />
+                    <p style="margin: 0;"><?= __('Date'); ?>:</p>
+                    <p style="width: 50%; float: left; margin: 10px 0 0 0;"><?= __('Place'); ?>:</p>
+                    <p style="width: 50%; float: left; margin: 10px 0 0 0; text-align: right;"><?= __('Signature of the Candidate'); ?></p>
                 </th>
             </tr>
             <tr style="background-color: #eeeeee;">
                 <th scope="col" colspan="7" style="border: 1px solid #cccccc; padding: 5px;font-size:10px;">
-                    <p style="margin: 0; text-transform: uppercase; min-height: 80px;">For office use only</p>
+                    <p style="margin: 0; text-transform: uppercase; min-height: 80px;"><?= __('For office use only'); ?></p>
                 </th>
             </tr>
         </table>
@@ -281,10 +281,10 @@ foreach($alldata['castes'] as $maritalstatus1){
     </div>
     <div class="container-fluid clearfix d-print-none" style="margin-top: 5px;">
         <button class="btn waves-effect waves-light tn-grd-success" onclick="printDiv('printDiv');">
-            <i class="fa fa-print"></i> &nbsp Print Invoice
+            <i class="fa fa-print"></i> &nbsp <?= __('Print Invoice'); ?>
         </button>
         <button class="btn waves-effect waves-light btn-grd-info"  onclick="convertHTMLToPDF();">
-            <i class="fa fa-download"></i> &nbsp Download
+            <i class="fa fa-download"></i> &nbsp <?= __('Download'); ?>
         </button>
     </div>
 </body>
