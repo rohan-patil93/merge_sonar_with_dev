@@ -95,7 +95,7 @@ foreach($frist_array as $frist_key =>$frist){
             <th scope="col" colspan="" class="text-center border">
                 <?php echo ucwords(str_replace('_',' ',$transtab)); ?></th>
             <?php } ?>
-            <th scope="col" rowspan="2" class="border">Transaction Total Time</th>
+            <th scope="col" rowspan="2" class="border"><?= __('Transaction Total Time'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -169,7 +169,7 @@ foreach($frist_array as $frist_key =>$frist){
 
                     <?php
                     }
-                    echo "<p class='d-block mb-0'><span class='f-w-600'>Total </span>- ".$usertime['hours']." Hours : ".$usertime['minutes']." Minutes";
+                    echo "<p class='d-block mb-0'><span class='f-w-600'>".__('Total')." </span>- ".$usertime['hours']." Hours : ".$usertime['minutes']." Minutes";
                     ?>
                     </span>
                     <?php
@@ -183,7 +183,7 @@ foreach($frist_array as $frist_key =>$frist){
                 if(count((array)$transactiontotaltime) != 0){
                     sort($transactiontotaltime);
                     $transactiontotaltimes = totalHoursAndMinutesInDateTimeArray($transactiontotaltime);
-                    echo "<span class='f-w-600'>".$transactiontotaltimes['days']." Days : ".$transactiontotaltimes['hours']." Hours : ".$transactiontotaltimes['minutes']." Minutes</span>"."</br>";
+                    echo "<span class='f-w-600'>".$transactiontotaltimes['days']." Days : ".$transactiontotaltimes['hours']." Hours : ".$transactiontotaltimes['minutes']." ".__('Minutes')."</span>"."</br>";
                     }else{
                         echo "-";
                     }
