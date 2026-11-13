@@ -35,9 +35,9 @@ $assets = $result['assets'];
   //       type: "POST",
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Assets Allocations</h4>
+    <h4 class="modal-title"><?= __('Assets Allocations'); ?></h4>
 
-    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="Close" > </button>
+    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" > </button>
 </div>
 <div class="modal-body m-l-50 m-r-50">
   <?php
@@ -55,25 +55,25 @@ $assets = $result['assets'];
   ?>
    <div class="row">
         <div class="col-xl-4 col-md-6 text-center">
-            <h5>Building Name</h5>
+            <h5><?= __('Building Name'); ?></h5>
             <h6 class="f-w-700 mb-0 mt-2"><?php echo $buildings['building_name']; ?></h6>
             <p><i class="ti-location-pin"></i> <?php echo $buildings['building_address']; ?></p>
         </div>
         <div class="col-xl-3 col-md-6 text-center">
-            <h5>Floor Name</h5>
+            <h5><?= __('Floor Name'); ?></h5>
             <h6 class="m-b-30 f-w-700 mt-2"><?php echo $building_floors['floor_name']; ?></h6>
         </div>
         <div class="col-lg-5 text-right">
             <div class="d-inline-block m-l-10 m-l-20">
                 <span class="form-label label label-lg text-dark" style="border: 1px black solid;"><?php echo count((array)$asset_allocations); ?></span>
-              <span class="f-12">Assets</span>
+              <span class="f-12"><?= __('Assets'); ?></span>
             </div>
         </div>
   </div>
   <div class="row">
     <div class="row mt-5">
       <div id="floor_cabin">
-          <img id="disable_crop_floor_image" src="uploads/building_floors/<?php echo $building_floors['floor_image']; ?>" alt="Attachment Preview">
+          <img id="disable_crop_floor_image" src="uploads/building_floors/<?php echo $building_floors['floor_image']; ?>" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
 <?php
             $cabincnt = 0;
             foreach($asset_allocations as $ealloc){
@@ -99,5 +99,5 @@ $assets = $result['assets'];
 <div class="modal-footer">
     <input type="hidden" id="space_allocation_popup" value="Y">
     <input type="hidden" id="space_allocation_popup_building_floor_id" value="<?php echo $rid; ?>">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" >Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" ><?= __('Close'); ?></button>
 </div>
