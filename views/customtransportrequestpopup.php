@@ -42,9 +42,9 @@ $rowdata = $data['value'];
 </script>
 <div class="modal-header">
     <h5 class="modal-title">
-        <small>&nbsp;&nbsp; <b class="f-w-600">Transport</small>
+        <small>&nbsp;&nbsp; <b class="f-w-600"><?= __('Transport'); ?></small>
     </h5>
-    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <form class="kt-form " id="submitformadditionalservice" >
@@ -57,51 +57,51 @@ $rowdata = $data['value'];
     <input type="hidden" name="user_id" value="<?php echo $_SESSION['userid'];?>">
     <div    style="pointer-events: none; opacity: 0.7;"  >
         <div class="form-group">
-            <span>Vehicle Name</span>
-            <input aria-label="Input field" type="text" class="form-control" value="<?php echo $row['vehicle_name']; ?>">
+            <span><?= __('Vehicle Name'); ?></span>
+            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?php echo $row['vehicle_name']; ?>">
         </div>
         <div class="form-group">
-            <span>Vehicle Type</span>
-            <input aria-label="Input field" type="text" class="form-control" value="<?php echo $row['vehicle_type']; ?>">
+            <span><?= __('Vehicle Type'); ?></span>
+            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?php echo $row['vehicle_type']; ?>">
         </div>
         <div class="form-group">
-            <span>Stop Name</span>
-            <input aria-label="Input field" type="text"  class="form-control" value="<?php echo $row['stop_name']; ?>">
+            <span><?= __('Stop Name'); ?></span>
+            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  class="form-control" value="<?php echo $row['stop_name']; ?>">
         </div>
         <div class="form-group">
-            <span>Arrival Time</span>
-            <input aria-label="Input field" type="text" class="form-control" value="<?php echo $row['arrival_time']; ?>">
+            <span><?= __('Arrival Time'); ?></span>
+            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?php echo $row['arrival_time']; ?>">
         </div>
         <div class="form-group">
-            <span>Monthly Charges</span>
-            <input aria-label="Input field" type="text"  class="form-control" value="<?php echo $row['route_charges_monthly']; ?>">
+            <span><?= __('Monthly Charges'); ?></span>
+            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  class="form-control" value="<?php echo $row['route_charges_monthly']; ?>">
         </div>
     </div>
 
     <div class="form-group" <?php if( count((array)$rowdata)>0){ ?> style="pointer-events: none; opacity: 0.7;" <?php
 } ?> >
-            <span>Month </span>
+            <span><?= __('Month'); ?> </span>
             <?php
                 $mshow = $rowdata['transport_date']!="" ? date('Y-m', strtotime($rowdata['transport_date'])) : "";
             ?>
-            <input aria-label="Transport Date" type="month" name="transport_date" id="transport_date" class="form-control" value="<?php echo $mshow; ?>">
+            <input aria-label="<?= htmlspecialchars(__('Transport Date'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="transport_date" id="transport_date" class="form-control" value="<?php echo $mshow; ?>">
     </div>
 
     <?php if( count((array)$rowdata)==0){ ?>
         </div>
     <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary waves-effect waves-light " onclick="submitintranspotfrom()">Save</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+            <button type="button" class="btn btn-primary waves-effect waves-light " onclick="submitintranspotfrom()"><?= __('Save'); ?></button>
 
         </div>
     </form>
 
     <?php }elseif($row['created_by'] != $_SESSION['userid'] && $_SESSION['admin_type'] ==1 && $rowdata['current_status']!=ST_APPROVED){ ?>
             <div class="form-group">
-                <span>Status </span>
+                <span><?= __('Status'); ?> </span>
                 <div class="radio radio-outline  mt-1">
                     <?php foreach ($data['status'] as $selectkey => $selectvalue) {  if($selectkey >10){   ?>
-                        <label class="radio radio-inline"> <input aria-label="Radio option" type="radio"  id="current_status_<?php echo $selectkey; ?>"  name="current_status" value='<?php echo $selectkey; ?>'>    <span></span><?php echo $selectvalue; ?> </label>
+                        <label class="radio radio-inline"> <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  id="current_status_<?php echo $selectkey; ?>"  name="current_status" value='<?php echo $selectkey; ?>'>    <span></span><?php echo $selectvalue; ?> </label>
                         <?php $sch++; ?>
                         <?php } ?>
                         <?php } ?>
@@ -110,14 +110,14 @@ $rowdata = $data['value'];
 
     </div>
     <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary waves-effect waves-light " onclick="updatetranspotfrom(<?php echo $rowdata['id']; ?>)">Save</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+            <button type="button" class="btn btn-primary waves-effect waves-light " onclick="updatetranspotfrom(<?php echo $rowdata['id']; ?>)"><?= __('Save'); ?></button>
 
         </div>
     </form>
     <?php }else{ ?>
         <div class="form-group" style="pointer-events: none; opacity: 0.7;">
-                <span>Status </span>
+                <span><?= __('Status'); ?> </span>
                 <div>
                     <?php echo $data['status'][$rowdata['current_status']]; ?>
                 </div>
