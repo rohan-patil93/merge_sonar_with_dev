@@ -20,7 +20,7 @@
                   <div class="card-header h-auto">
                      <!--begin::Title-->
                      <div class="card-title py-5">
-                        <h3 class="card-label">Payments</h3>
+                        <h3 class="card-label"><?= __('Payments'); ?></h3>
                      </div>
                      <!--end::Title-->
                   </div>
