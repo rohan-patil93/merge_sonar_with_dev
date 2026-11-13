@@ -26,44 +26,44 @@ $employees = $return['employees_data'] ?? [];
                 <table class="gatepass-table" >
                     <tr>
                         <th scope="col" colspan="4" class="gp-header-logo">
-                            <img src="assets/images/logo_vms.png" alt="logo">
+                            <img src="assets/images/logo_vms.png" alt="<?= htmlspecialchars(__('logo'), ENT_QUOTES, 'UTF-8'); ?>">
                         </th>
                     </tr>
                     <tr>
-                        <th scope="col" colspan="4" class="gp-title">Material Gate Pass</th>
+                        <th scope="col" colspan="4" class="gp-title"><?= __('Material Gate Pass'); ?></th>
                     </tr>
                     <tr>
                         <td class="gp-td">
                             <i class="fa-regular fa-square gp-icon" ></i>
-                            Returnable
+                            <?= __('Returnable'); ?>
                         </td>
                         <td class="gp-td">
                             <i class="fa-regular fa-square gp-icon"></i>
-                            Non-Returnable
+                            <?= __('Non-Returnable'); ?>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="col" class="gp-th">Expected Date of Return:</th>
+                        <th scope="col" class="gp-th"><?= __('Expected Date of Return'); ?>:</th>
                         <td class="gp-td">
                             <?= htmlspecialchars($visitor['to_date'] ?? '') ?>&nbsp;
                         </td>
-                        <th scope="col" class="gp-th">Employee ID:</th>
+                        <th scope="col" class="gp-th"><?= __('Employee ID'); ?>:</th>
                         <td class="gp-td">
                             <?= htmlspecialchars($visitor['employee_code'] ?? ($employees['emp_code'] ?? '')) ?>&nbsp;
                         </td>
                     </tr>
                     <tr>
-                        <th scope="col" class="gp-th">Employee Name:</th>
+                        <th scope="col" class="gp-th"><?= __('Employee Name'); ?>:</th>
                         <td class="gp-td">
                             <?= htmlspecialchars($visitor['employee_name'] ?? ($employees['emp_name'] ?? '')) ?>&nbsp;
                         </td>
-                        <th scope="col" class="gp-th">Dept Name:</th>
+                        <th scope="col" class="gp-th"><?= __('Dept Name'); ?>:</th>
                         <td class="gp-td">
                             <?= htmlspecialchars($visitor['employee_department'] ?? ($employees['department'] ?? '')) ?>&nbsp;
                         </td>
                     </tr>
                     <tr>
-                        <th scope="col" colspan="4" class="gp-th">Address:</th>
+                        <th scope="col" colspan="4" class="gp-th"><?= __('Address'); ?>:</th>
                     </tr>
                     <tr>
                         <td colspan="4" class="gp-td">
@@ -71,7 +71,7 @@ $employees = $return['employees_data'] ?? [];
                         </td>
                     </tr>
                     <tr>
-                        <th scope="col" colspan="4" class="gp-th">Reason for Material Movement:</th>
+                        <th scope="col" colspan="4" class="gp-th"><?= __('Reason for Material Movement'); ?>:</th>
                     </tr>
                     <tr>
                         <td colspan="4" class="gp-td">
@@ -80,23 +80,23 @@ $employees = $return['employees_data'] ?? [];
                     </tr>
                     <tr>
                         <td colspan="4" class="gp-td">
-                            Are these goods Bonded:
+                            <?= __('Are these goods Bonded'); ?>:
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4" class="gp-td">
-                            If Yes, then necessary approval is obtained from customs: YES/ NO
+                            <?= __('If Yes, then necessary approval is obtained from customs: YES/ NO'); ?>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4" class="gp-td gp-no-padding">
                             <table class="gatepass-inner-table">
                                 <tr>
-                                    <th scope="col" class="gp-th">Sl No</th>
-                                    <th scope="col" class="gp-th">Description</th>
-                                    <th scope="col" class="gp-th">Bond No</th>
-                                    <th scope="col" class="gp-th">Qty</th>
-                                    <th scope="col" class="gp-th">Value</th>
+                                    <th scope="col" class="gp-th"><?= __('Sl No'); ?></th>
+                                    <th scope="col" class="gp-th"><?= __('Description'); ?></th>
+                                    <th scope="col" class="gp-th"><?= __('Bond No'); ?></th>
+                                    <th scope="col" class="gp-th"><?= __('Qty'); ?></th>
+                                    <th scope="col" class="gp-th"><?= __('Value'); ?></th>
                                 </tr>
                                 <?php
                                 if (!empty($luggages)) {
@@ -130,9 +130,9 @@ $employees = $return['employees_data'] ?? [];
                         <td colspan="4" class="gp-td">&nbsp;</td>
                     </tr>
                     <tr>
-                        <th scope="col" class="gp-th">Employee Signature</th>
-                        <th scope="col" class="gp-th">Security Check & Sign</th>
-                        <th scope="col" colspan="2" class="gp-th">Admin Signature</th>
+                        <th scope="col" class="gp-th"><?= __('Employee Signature'); ?></th>
+                        <th scope="col" class="gp-th"><?= htmlspecialchars(__('Security Check & Sign'), ENT_QUOTES, 'UTF-8'); ?></th>
+                        <th scope="col" colspan="2" class="gp-th"><?= __('Admin Signature'); ?></th>
                     </tr>
                     <tr>
                         <th scope="col" class="gp-th gp-sign"></th>
@@ -141,26 +141,26 @@ $employees = $return['employees_data'] ?? [];
                     </tr>
                     <tr>
                         <td class="gp-td">
-                            <b class="gp-block">Gatepass No:</b>
-                            <span class="gp-small">(Security to update Gatepass No & Date)</span>
+                            <b class="gp-block"><?= __('Gatepass No'); ?>:</b>
+                            <span class="gp-small"><?= htmlspecialchars(__('(Security to update Gatepass No & Date)'), ENT_QUOTES, 'UTF-8'); ?></span>
                         </td>
                         <td class="gp-td">
                             <?= htmlspecialchars($visitor['id'] ?? '') ?>&nbsp;
                         </td>
-                        <th scope="col" class="gp-th">Gatepass Date:</th>
+                        <th scope="col" class="gp-th"><?= __('Gatepass Date'); ?>:</th>
                         <td class="gp-td">
                             <?= !empty($visitor['in_datetime']) ? date('d-m-Y', strtotime($visitor['in_datetime'])) : date('d-m-Y') ?>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4" class="gp-td">
-                            Note: Employee will be deemed responsible for movement of goods. Also, employees ensure the goods are returned within date mentioned and inform security on return/receipt of goods.
+                            <?= __('Note: Employee will be deemed responsible for movement of goods. Also, employees ensure the goods are returned within date mentioned and inform security on return/receipt of goods.'); ?>
                         </td>
                     </tr>
                 </table>
             </div>
 
-            <button  type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1 gp-print-btn js-print-gatepass" data-print-target="printableArea" >Print Gatepass</button>
+            <button  type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1 gp-print-btn js-print-gatepass" data-print-target="printableArea" ><?= __('Print Gatepass'); ?></button>
         </div>
     </div>
 </div>
