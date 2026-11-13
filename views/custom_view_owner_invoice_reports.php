@@ -54,8 +54,8 @@ function getOwnerProperty(valu){
 	    	<div class="row">
 				<div class="col-lg-3">
 		            <div class=" form-group">
-		                <label class="form-label"> Owner Name</label>
-		                <select class="js-example-basic-single form-control" onchange="getOwnerProperty(this.value)" name="property_owner_id">
+		                <label for="fld_property_owner_id" class="form-label"> Owner Name</label>
+		                <select id="fld_property_owner_id" class="js-example-basic-single form-control" onchange="getOwnerProperty(this.value)" name="property_owner_id">
 		                	<option value="">All Owner</option>
 		                	<?php foreach($all_property_owners as $apo){ ?>
 		                		<option value="<?php echo $apo['id'];?>" <?php echo $_POST['property_owner_id'] == $apo['id']?"selected":""; ?>><?php echo $apo['owner_name'];?></option>
@@ -65,7 +65,7 @@ function getOwnerProperty(valu){
 		        </div> 
 		        <div class="col-lg-3">
 		            <div class=" form-group">
-		                <label class="form-label"> Property Name</label>
+		                <label for="property_owner_detail_id" class="form-label"> Property Name</label>
 		                <select class="js-example-basic-single form-control " id="property_owner_detail_id" name="property_owner_detail_id">
 		                	<option value="">All Property</option>
 		                	<?php foreach($all_property_owner_details as $apo){ ?>
@@ -76,14 +76,14 @@ function getOwnerProperty(valu){
 		        </div>
 			    <div class="col-lg-2">    
 		            <div class="form-group w-full table-card-header">
-		                <label class="form-label ">Start Month<span class="text-danger">*</span></label>
-						<input type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
+		                <label for="fld_start_month" class="form-label ">Start Month<span class="text-danger">*</span></label>
+						<input id="fld_start_month" type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
 		            </div>
 		        </div>
 		        <div class="col-lg-2">
 		            <div class=" form-group">
-		                <label class="form-label"> End Month</label>
-		                <input type="month" class="form-control" name="end_month"  value="<?php echo $end_month; ?>" >
+		                <label for="fld_end_month" class="form-label"> End Month</label>
+		                <input id="fld_end_month" type="month" class="form-control" name="end_month"  value="<?php echo $end_month; ?>" >
 		            </div>
 		        </div>
 		        <div class="col-lg-1">
@@ -139,18 +139,18 @@ function getOwnerProperty(valu){
 		     			    <th colspan="4" class="text-center">Total</th>
 		                </tr>
 		                <tr>
-		                	<th class="text-right">Invoice Amt</th> 
-		                    <th class="text-right">DN/CN</th> 
-		                    <th class="text-right">Payments</th>
-		                    <th class="text-right">Due Amt</th>
-		                    <th class="text-right">Invoice Amt</th> 
-		                    <th class="text-right">DN/CN</th> 
-		                    <th class="text-right">Payments</th>
-		                    <th class="text-right">Due Amt</th>
-		                    <th class="text-right">Invoice</th>
-		                    <th class="text-right">DN/CN</th>
-		                    <th class="text-right">Payments</th>
-		                    <th class="text-right">Due</th>
+		                	<th scope="col" class="text-right">Invoice Amt</th> 
+		                    <th scope="col" class="text-right">DN/CN</th> 
+		                    <th scope="col" class="text-right">Payments</th>
+		                    <th scope="col" class="text-right">Due Amt</th>
+		                    <th scope="col" class="text-right">Invoice Amt</th> 
+		                    <th scope="col" class="text-right">DN/CN</th> 
+		                    <th scope="col" class="text-right">Payments</th>
+		                    <th scope="col" class="text-right">Due Amt</th>
+		                    <th scope="col" class="text-right">Invoice</th>
+		                    <th scope="col" class="text-right">DN/CN</th>
+		                    <th scope="col" class="text-right">Payments</th>
+		                    <th scope="col" class="text-right">Due</th>
 		                </tr>
 		            </thead>
 		            <tbody>
@@ -221,24 +221,24 @@ function getOwnerProperty(valu){
 		            <tfoot>
 		            	<tr>
 		            		<th colspan="2" class="text-right">Total </th>
-		            		<th class="text-right"><?php echo customeummarmonyformateifine($t_rent_total_amount); ?></th>
-		            		<th class="text-right">
+		            		<td class="text-right fw-bold"><?php echo customeummarmonyformateifine($t_rent_total_amount); ?></td>
+		            		<td class="text-right fw-bold">
 		            			<span class="d-block"><?php echo customeummarmonyformateifine($t_both_rent_dr-$t_both_rent_cr); ?></span>
-		                	</th>
-		            		<th class="text-right"><?php echo customeummarmonyformateifine($t_rent_payment); ?></th>
-		            		<th class="text-right"><?php echo customeummarmonyformateifine($t_rent_pending_amount); ?></th>
-		            		<th class="text-right"><?php echo customeummarmonyformateifine($t_utility_total_amoun); ?></th>
-		            		<th class="text-right">
+		                	</td>
+		            		<td class="text-right fw-bold"><?php echo customeummarmonyformateifine($t_rent_payment); ?></td>
+		            		<td class="text-right fw-bold"><?php echo customeummarmonyformateifine($t_rent_pending_amount); ?></td>
+		            		<td class="text-right fw-bold"><?php echo customeummarmonyformateifine($t_utility_total_amoun); ?></td>
+		            		<td class="text-right fw-bold">
 		            			<span class="d-block"><?php echo customeummarmonyformateifine($t_both_utility_dr-$t_both_utility_cr); ?></span>
-		                	</th>
-		            		<th class="text-right"><?php echo customeummarmonyformateifine($t_utility_payment); ?></th>
-		            		<th class="text-right"> <?php echo customeummarmonyformateifine($t_utility_pending_amount); ?></th>
-		            		<th class="text-right"><?php echo customeummarmonyformateifine($t_both_total); ?></th>
-		            		<th class="text-right">
+		                	</td>
+		            		<td class="text-right fw-bold"><?php echo customeummarmonyformateifine($t_utility_payment); ?></td>
+		            		<td class="text-right fw-bold"> <?php echo customeummarmonyformateifine($t_utility_pending_amount); ?></td>
+		            		<td class="text-right fw-bold"><?php echo customeummarmonyformateifine($t_both_total); ?></td>
+		            		<td class="text-right fw-bold">
 		            			<span class="d-block"><?php echo customeummarmonyformateifine($t_both_dr-$t_both_cr); ?></span>
-		                	</th>
-		            		<th class="text-right"><?php echo customeummarmonyformateifine($t_both_payment); ?></th>
-		            		<th class="text-right"><?php echo customeummarmonyformateifine($t_both_due); ?></th>
+		                	</td>
+		            		<td class="text-right fw-bold"><?php echo customeummarmonyformateifine($t_both_payment); ?></td>
+		            		<td class="text-right fw-bold"><?php echo customeummarmonyformateifine($t_both_due); ?></td>
 		            	</tr>
 		            </tfoot>
 		        </table>
