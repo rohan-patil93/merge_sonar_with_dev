@@ -40,29 +40,29 @@ if($cntgraphtwo<5){
   <div class="col-lg-4 col-md-6 col-sm-12 col-12">
     <div class="card">
       <div class="card-header">
-        <h5>Health</h5>
+        <h5><?= __('Health'); ?></h5>
       </div>
       <div class="card-body p-4">
         <div class="table-responsive">
           <table class="table table-hover table-sm">
             <tr>
-              <th scope="col">Time</th>
-              <td><?php echo $gaa; ?>% ahead of schedule</td>
+              <th scope="col"><?= __('Time'); ?></th>
+              <td><?php echo $gaa; ?><?= __('% ahead of schedule'); ?></td>
             </tr>
             <tr>
-              <th scope="col">Task</th>
-              <td> <?php echo $graph1['tobe']; ?>  task to be completed</td>
+              <th scope="col"><?= __('Task'); ?></th>
+              <td> <?php echo $graph1['tobe']; ?>  <?= __('task to be completed'); ?></td>
             </tr>
             <tr>
-              <th scope="col">Workload</th>
-              <td><?php echo $graph1['overdue']; ?> task overdue</td>
+              <th scope="col"><?= __('Workload'); ?></th>
+              <td><?php echo $graph1['overdue']; ?> <?= __('task overdue'); ?></td>
             </tr>
             <tr>
-              <th scope="col">Progress</th>
-              <td><?php echo $gab; ?>% Complete</td>
+              <th scope="col"><?= __('Progress'); ?></th>
+              <td><?php echo $gab; ?><?= __('% Complete'); ?></td>
             </tr>
             <tr>
-              <th scope="col">Cost</th>
+              <th scope="col"><?= __('Cost'); ?></th>
               <td>27% under budget</td>
             </tr>
           </table>
@@ -73,7 +73,7 @@ if($cntgraphtwo<5){
   <div class="col-lg-4 col-md-6 col-sm-12 col-12">
     <div class="card">
       <div class="card-header">
-        <h5>Tasks</h5>
+        <h5><?= __('Tasks'); ?></h5>
       </div>
       <div class="card-body p-4" style="height: 300px;">
           <div id="chart_Donut_Project_task" class="float-left" ></div>
@@ -84,7 +84,7 @@ if($cntgraphtwo<5){
   <div class="col-lg-4 col-md-6 col-sm-12 col-12">
     <div class="card">
       <div class="card-header">
-        <h5>Progress</h5>
+        <h5><?= __('Progress'); ?></h5>
       </div>
       <div class="card-body p-4" style="height: 300px;">
        <div id="chart_bar_progress" style="width: 100%; height: 300px; margin-top:-25px;"></div>
@@ -96,7 +96,7 @@ if($cntgraphtwo<5){
   <div class="col-lg-4 col-md-6 col-sm-12 col-12">
     <div class="card">
       <div class="card-header">
-        <h5>Time</h5>
+        <h5><?= __('Time'); ?></h5>
       </div>
       <div class="card-body p-4" style="height: 300px;">
          <div id="chart_bar_time" style="width: 100%; height: 300px; margin-top:-25px;"></div>
@@ -107,7 +107,7 @@ if($cntgraphtwo<5){
   <div class="col-lg-4 col-md-6 col-sm-12 col-12">
     <div class="card">
       <div class="card-header">
-        <h5>Cost</h5>
+        <h5><?= __('Cost'); ?></h5>
       </div>
       <div class="card-body p-4" style="height: 300px;">
         <div id="chart_Combo" style="height:250px;"></div>
@@ -118,7 +118,7 @@ if($cntgraphtwo<5){
   <div class="col-lg-4 col-md-6 col-sm-12 col-12">
     <div class="card">
       <div class="card-header">
-        <h5>Workload</h5>
+        <h5><?= __('Workload'); ?></h5>
       </div>
       <div class="card-body p-4" style="height:300px;">
         <div id="chart_bar_workload" style="width: 100%; height: 300px; margin-top:-25px;"></div>
