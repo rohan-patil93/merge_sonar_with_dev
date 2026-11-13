@@ -19,11 +19,11 @@ $user_assets = $details['user_assets'];
 ?>
 <div class="card">
     <div class="card-header">
-        <h5>Assets</h5>
+        <h5><?= __('Assets'); ?></h5>
         <div class="card-header-right">
             <span class="form-label label label-warning">
                 <span class="d-inline-block" id="astcnt" >0</span>
-                <span class="d-inline-block">- Asset Selected</span>
+                <span class="d-inline-block">- <?= __('Asset Selected'); ?></span>
             </span>
         </div>
     </div>
@@ -35,13 +35,13 @@ $user_assets = $details['user_assets'];
                 <thead>
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col">Asset</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Asset Status</th>
-                        <th scope="col">Condition</th>
-                        <th scope="col">Custodian Name</th>
-                        <th scope="col">User Name</th>
+                        <th scope="col"><?= __('Asset'); ?></th>
+                        <th scope="col"><?= __('Category'); ?></th>
+                        <th scope="col"><?= __('Location'); ?></th>
+                        <th scope="col"><?= __('Asset Status'); ?></th>
+                        <th scope="col"><?= __('Condition'); ?></th>
+                        <th scope="col"><?= __('Custodian Name'); ?></th>
+                        <th scope="col"><?= __('User Name'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,7 +50,7 @@ $user_assets = $details['user_assets'];
                     <td class="text-center">
                         <div class="checkbox-fade fade-in-primary" >
                             <label class="checkbox checkbox-success">
-                                <input aria-label="Checkbox" type="checkbox" class="itemRow checkboxassets" name="checkassets[<?php echo $list_asset['id']; ?>]" value="<?php echo $list_asset['id']; ?>" onchange="selectcheck()">
+                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="itemRow checkboxassets" name="checkassets[<?php echo $list_asset['id']; ?>]" value="<?php echo $list_asset['id']; ?>" onchange="selectcheck()">
                                 <span class="cr">
                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                 </span>
@@ -76,7 +76,7 @@ $user_assets = $details['user_assets'];
             </table>
             <?php }else{ ?>
             <div class="card-px text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Assets</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Assets'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
