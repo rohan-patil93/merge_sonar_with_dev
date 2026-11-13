@@ -127,7 +127,7 @@ if($_POST['in_phone_fileds']!=""){
         <script type="text/javascript">
              $(document).ready(function() {
                 swal({
-                    title: "Saved sucessfuly",
+                    title: <?php echo json_encode(__('Saved sucessfuly'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     type: "success",
                     showCancelButton: false,
                     closeOnConfirm: false,
