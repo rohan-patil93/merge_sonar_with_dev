@@ -37,12 +37,12 @@ $selected_gate_id   = $_SESSION['gate_id'] ?? 1;
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Visitor OUT</h5>
+            <h5><?= __('Visitor OUT'); ?></h5>
             <div class="card-header-right">
 
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -53,23 +53,23 @@ $selected_gate_id   = $_SESSION['gate_id'] ?? 1;
                 <div class="card-body p-3">
                     <div class="row g-2 align-items-end">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                            <span class="form-label">Name / Phone / Visitor ID / ID Card No.</span>
-                            <input aria-label="e.g., Koteswara, 9123456789, VST-00123, AADHAAR-xxxx" type="text" class="form-control" id="historySearchText" placeholder="e.g., Koteswara, 9123456789, VST-00123, AADHAAR-xxxx">
+                            <span class="form-label"><?= __('Name / Phone / Visitor ID / ID Card No.'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('e.g., Koteswara, 9123456789, VST-00123, AADHAAR-xxxx'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="historySearchText" placeholder="<?= htmlspecialchars(__('e.g., Koteswara, 9123456789, VST-00123, AADHAAR-xxxx'), ENT_QUOTES, 'UTF-8'); ?>">
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                            <span class="form-label">Date</span>
-                            <input aria-label="History Search Date" type="date" class="form-control" id="historySearchDate">
+                            <span class="form-label"><?= __('Date'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('History Search Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" id="historySearchDate">
                         </div>
                         <input type="hidden" name="location_id" id="location_id" value="<?php echo $_SESSION['location_id'] ?? 1; ?>" >
                         <div class="col-lg-2 col-md-2 col-sm-6 col-12">
                             <button type="button" class="btn btn-primary w-100 p-2" id="historySearchBtn">
-                                <i class="fa fa-search me-1"></i> Serach
+                                <i class="fa fa-search me-1"></i> <?= __('Serach'); ?>
                             </button>
                         </div>
 
                     </div>
                     <small class="text-muted d-block mt-2">
-                        Tip: Enter any one field or just a date. If only date is given, results for that date are shown.
+                        <?= __('Tip: Enter any one field or just a date. If only date is given, results for that date are shown.'); ?>
                     </small>
                 </div>
             </div>
@@ -85,13 +85,13 @@ $selected_gate_id   = $_SESSION['gate_id'] ?? 1;
                         <div class="bg-gray">
                             <div class="d-flex align-items-center">
                                 <div class="col-auto">
-                                    <span alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center">SW</span>
+                                    <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?= __('SW'); ?></span>
                                 </div>
                                 <div class="col-lg-10">
-                                    <a class="f-w-600 f-18 text-capitalize d-block" href="">Swiggy</a>
-                                    <p class="f-12 f-w-600 text-muted mb-0">VISIT002
+                                    <a class="f-w-600 f-18 text-capitalize d-block" href=""><?= __('Swiggy'); ?></a>
+                                    <p class="f-12 f-w-600 text-muted mb-0"><?= __('VISIT002'); ?>
                                         <b class="float-end d-inline-block">
-                                            <a href="tel:12345678910">Mob:- 8909090767</a>
+                                            <a href="tel:12345678910"><?= __('Mob:- 8909090767'); ?></a>
                                         </b>
                                     </p>
                                 </div>
@@ -99,19 +99,19 @@ $selected_gate_id   = $_SESSION['gate_id'] ?? 1;
                             <div class="table-responsive mt-2 f-12">
                                 <table class="table table-sm">
                                     <tr>
-                                        <th scope="col">Visit Type</th>
-                                        <th scope="col">Check in/Out</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('Visit Type'); ?></th>
+                                        <th scope="col"><?= __('Check in/Out'); ?></th>
+                                        <th scope="col"><?= __('Action'); ?></th>
                                     </tr>
                                     <tr>
-                                        <td>Delivery</td>
+                                        <td><?= __('Delivery'); ?></td>
                                         <td>
                                             <p class="m-0 f-12">2026-02-03 15:01:05</p>
                                             <p class="m-0 f-12">2026-02-03 15:01:05</p>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary js-view-visitor p-2 pt-1 pb-1" data-id="39" data-visit-type="delivery">
-                                                <i class="fa fa-eye"></i>View
+                                                <i class="fa fa-eye"></i><?= __('View'); ?>
                                             </button>
                                         </td>
                                     </tr>
@@ -121,13 +121,13 @@ $selected_gate_id   = $_SESSION['gate_id'] ?? 1;
                         <div class="bg-gray">
                             <div class="d-flex align-items-center">
                                 <div class="col-auto">
-                                    <span alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center">SV</span>
+                                    <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?= __('SV'); ?></span>
                                 </div>
                                 <div class="col-lg-10">
-                                    <a class="f-w-600 f-18 text-capitalize d-block" href="">Sneha Varma</a>
-                                    <p class="f-12 f-w-600 text-muted mb-0">VISIT002
+                                    <a class="f-w-600 f-18 text-capitalize d-block" href=""><?= __('Sneha Varma'); ?></a>
+                                    <p class="f-12 f-w-600 text-muted mb-0"><?= __('VISIT002'); ?>
                                         <b class="float-end d-inline-block">
-                                            <a href="tel:12345678910">Mob:- 8909090767</a>
+                                            <a href="tel:12345678910"><?= __('Mob:- 8909090767'); ?></a>
                                         </b>
                                     </p>
                                 </div>
@@ -135,19 +135,19 @@ $selected_gate_id   = $_SESSION['gate_id'] ?? 1;
                             <div class="table-responsive mt-2 f-12">
                                 <table class="table table-sm">
                                     <tr>
-                                        <th scope="col">Visit Type</th>
-                                        <th scope="col">Check in/Out</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('Visit Type'); ?></th>
+                                        <th scope="col"><?= __('Check in/Out'); ?></th>
+                                        <th scope="col"><?= __('Action'); ?></th>
                                     </tr>
                                     <tr>
-                                        <td>Visitor</td>
+                                        <td><?= __('Visitor'); ?></td>
                                         <td>
                                             <p class="m-0 f-12">2026-02-03 15:01:05</p>
                                             <p class="m-0 f-12">2026-02-03 15:01:05</p>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary js-view-visitor p-2 pt-1 pb-1" data-id="39" data-visit-type="delivery">
-                                                <i class="fa fa-eye"></i>View
+                                                <i class="fa fa-eye"></i><?= __('View'); ?>
                                             </button>
                                         </td>
                                     </tr>
@@ -157,13 +157,13 @@ $selected_gate_id   = $_SESSION['gate_id'] ?? 1;
                         <div class="bg-gray">
                             <div class="d-flex align-items-center">
                                 <div class="col-auto">
-                                    <span alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center">RA</span>
+                                    <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?= __('RA'); ?></span>
                                 </div>
                                 <div class="col-lg-10">
-                                    <a class="f-w-600 f-18 text-capitalize d-block" href="">Rajesh</a>
-                                    <p class="f-12 f-w-600 text-muted mb-0">VISIT002
+                                    <a class="f-w-600 f-18 text-capitalize d-block" href=""><?= __('Rajesh'); ?></a>
+                                    <p class="f-12 f-w-600 text-muted mb-0"><?= __('VISIT002'); ?>
                                         <b class="float-end d-inline-block">
-                                            <a href="tel:12345678910">Mob:- 8909090767</a>
+                                            <a href="tel:12345678910"><?= __('Mob:- 8909090767'); ?></a>
                                         </b>
                                     </p>
                                 </div>
@@ -171,19 +171,19 @@ $selected_gate_id   = $_SESSION['gate_id'] ?? 1;
                             <div class="table-responsive mt-2 f-12">
                                 <table class="table table-sm">
                                     <tr>
-                                        <th scope="col">Visit Type</th>
-                                        <th scope="col">Check in/Out</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('Visit Type'); ?></th>
+                                        <th scope="col"><?= __('Check in/Out'); ?></th>
+                                        <th scope="col"><?= __('Action'); ?></th>
                                     </tr>
                                     <tr>
-                                        <td>Doctor</td>
+                                        <td><?= __('Doctor'); ?></td>
                                         <td>
                                             <p class="m-0 f-12">2026-02-03 15:01:05</p>
                                             <p class="m-0 f-12">2026-02-03 15:01:05</p>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary js-view-visitor p-2 pt-1 pb-1" data-id="39" data-visit-type="delivery">
-                                                <i class="fa fa-eye"></i>View
+                                                <i class="fa fa-eye"></i><?= __('View'); ?>
                                             </button>
                                         </td>
                                     </tr>
