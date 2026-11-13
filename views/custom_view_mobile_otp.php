@@ -2,7 +2,7 @@
 
 <div class="card" >
     <div class="card-header">
-        <h5>Mobile OTP</h5>
+        <h5><?= __('Mobile OTP'); ?></h5>
     </div>
     <div class="card-body j-wrapper  j-wrapper-40p" >
         <form method="post" id="passresetfrm" >
@@ -11,9 +11,9 @@
                 <div class="m-b-20 ">
 
                     <div class="row">
-                        <span class="form-label col-sm-4 col-lg-4 col-form-label">OTP</span>
+                        <span class="form-label col-sm-4 col-lg-4 col-form-label"><?= __('OTP'); ?></span>
                         <div class="col-sm-8 col-lg-8">
-                            <input aria-label="Input field" type="text" readonly class="form-control" value="<?php echo $result['otp']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" readonly class="form-control" value="<?php echo $result['otp']; ?>">
                         </div>
                     </div>
 
