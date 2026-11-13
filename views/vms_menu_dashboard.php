@@ -68,7 +68,7 @@ if(in_array($rr_vv,$permesion_v)){
                                     <div class="col-lg-3">
                                         <div class="card card-info"  style="overflow: visible;">
                                             <div class="card-header">
-                                                <h5 class="text-white">KEY TRANSACTIONS</h5>
+                                                <h5 class="text-white"><?= __('KEY TRANSACTIONS'); ?></h5>
                                             </div>
                                             <div class="card-block">
                                                 <?php foreach($disview_array[$key_dis]['step1'] as $step1){ ?>
@@ -89,8 +89,8 @@ if(in_array($rr_vv,$permesion_v)){
                                             </div>
                                             <div class="card-footer">
                                                 <a href="index.php?option=COM_LIST_NEW_EMPLOYEE&NI=555">
-                                                <button class="btn waves-effect waves-light btn-grd-info">GO TO DASHBOARD</button></a>
-                                                <img class="mw-100 mx-auto mb-lg-n18" src="assets\images\12.png" style="margin-bottom: -46px!important; height: 220px !important;z-index: 999999;" alt="Preview">
+                                                <button class="btn waves-effect waves-light btn-grd-info"><?= __('GO TO DASHBOARD'); ?></button></a>
+                                                <img class="mw-100 mx-auto mb-lg-n18" src="assets\images\12.png" style="margin-bottom: -46px!important; height: 220px !important;z-index: 999999;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
 
                                         </div>
@@ -102,7 +102,7 @@ if(in_array($rr_vv,$permesion_v)){
                                                 <div class="card social-card card-<?php echo $step2['bg_color']; ?>" style="margin-bottom: 20px;">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20">
-                                                            <img class="img-100" src="assets\images\4.png" alt="Preview">
+                                                            <img class="img-100" src="assets\images\4.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         </div>
                                                         <a href="#" onclick="dynamiclistpopup(<?php echo "'".$step2['url']."'"; ?>,<?php echo "'".$step2['name']."'"; ?>)">
                                                             <h3 class="text-facebook f-16 text-white f-w-700">
@@ -119,13 +119,12 @@ if(in_array($rr_vv,$permesion_v)){
                                                     <div class="card-body">
                                                         <div class="row align-items-center m-b-10">
                                                             <div class="col-auto">
-                                                                <img class="" src="assets\images\11.png" style="height: 200px!important" alt="Preview">
+                                                                <img class="" src="assets\images\11.png" style="height: 200px!important" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             </div>
                                                             <div class="col">
-                                                                <h3 class="f-18 text-white f-w-800">QUICK GUIDE</h3>
-                                                                <h6 class="f-14 text-white m-t-20">Explore our powerful
-                                                                documentation</h6>
-                                                                <button class="btn waves-effect waves-light btn-grd-danger mt-4 btn-skew">LEARN MORE</button>
+                                                                <h3 class="f-18 text-white f-w-800"><?= __('QUICK GUIDE'); ?></h3>
+                                                                <h6 class="f-14 text-white m-t-20"><?= __('Explore our powerful documentation'); ?></h6>
+                                                                <button class="btn waves-effect waves-light btn-grd-danger mt-4 btn-skew"><?= __('LEARN MORE'); ?></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -138,15 +137,15 @@ if(in_array($rr_vv,$permesion_v)){
                                             <div class="col-lg-12">
                                                 <div class="card latest-update-card">
                                                     <div class="card-header">
-                                                        <h5 class="">Notifications</h5>
+                                                        <h5 class=""><?= __('Notifications'); ?></h5>
                                                         <div class="card-header-right">
                                                             <button class="btn dropdown-toggle waves-effect waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                                             <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
-                                                                <a class="dropdown-item waves-light waves-effect" href="#">Action</a>
-                                                                <a class="dropdown-item waves-light waves-effect" href="#">Another action</a>
-                                                                <a class="dropdown-item waves-light waves-effect" href="#">Something else</a>
+                                                                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Action'); ?></a>
+                                                                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Another action'); ?></a>
+                                                                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Something else'); ?></a>
                                                                 <div class="dropdown-divider"></div>
-                                                                <a class="dropdown-item waves-light waves-effect" href="#">Something else</a>
+                                                                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Something else'); ?></a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -192,7 +191,7 @@ if(in_array($rr_vv,$permesion_v)){
                                                 <div class="card social-card card-<?php echo $step2['bg_color']; ?>" style="margin-bottom: 20px;">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20">
-                                                            <img class="img-50" src="assets\images\4.png" alt="Preview">
+                                                            <img class="img-50" src="assets\images\4.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         </div>
                                                         <a href="#" onclick="dynamiclistpopup(<?php echo "'".$step2['url']."'"; ?>,<?php echo "'".$step2['name']."'"; ?>)">
                                                         <h3 class="text-facebook f-14 text-white f-w-700">
