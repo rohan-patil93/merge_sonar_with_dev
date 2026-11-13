@@ -9,20 +9,20 @@ $status = $data['status'];
 ?>
 
 <div class="modal-header">
-    <h5 class="modal-title">User Tasks Histories</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('User Tasks Histories'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body ">
     <div class="table-responsive custom-scroll" style="max-height:380px">
         <table class="table table-hover table-sm">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">User </th>
-                <th scope="col">Project Name</th>
-                <th scope="col">Task Name</th>
-                <th scope="col">Start</th>
-                <th scope="col">Finish</th>
-                <th scope="col">Status</th>
+                <th scope="col"><?= __('User'); ?> </th>
+                <th scope="col"><?= __('Project Name'); ?></th>
+                <th scope="col"><?= __('Task Name'); ?></th>
+                <th scope="col"><?= __('Start'); ?></th>
+                <th scope="col"><?= __('Finish'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
             </tr>
             <?php $m=1;
             if(!empty($data['data'])){
@@ -33,7 +33,7 @@ $status = $data['status'];
                         </td>
                         <td>
                             <?php if($dat['user_photo']!=""){?>
-                                <img class="user-name p-0 m-0" style="width:20px" src="/uploads/all/<?php echo $dat['user_photo']; ?>" alt="User Profile">
+                                <img class="user-name p-0 m-0" style="width:20px" src="/uploads/all/<?php echo $dat['user_photo']; ?>" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php }else{ ?>
                                 <span class="user-name"><?php echo initials($dat['display_name']); ?></span>
 
@@ -61,7 +61,7 @@ $status = $data['status'];
                 }else{ ?>
                     <tr>
                         <td colspan="7" class="text-center">
-                            <h6 class=" mt-3"> No Data</h6>
+                            <h6 class=" mt-3"> <?= __('No Data'); ?></h6>
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </td>
                     </tr>
