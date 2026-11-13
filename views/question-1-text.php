@@ -4,16 +4,16 @@
 
     <div class="row preview">
         <div class="col-md-12">
-           <p>This is preview mode. You can't submit assesment.</p>
+           <p><?= __('This is preview mode. You can\'t submit assesment.'); ?></p>
         </div> 
     </div> 
     <div class="row question-1">
         <div class="col-md-6">
-            <h2>INFISTAQ</h2>
+            <h2><?= __('INFISTAQ'); ?></h2>
         </div>
         <div class="col-md-6">
             <div class="countdown float-right">
-               <span class="fas fa-stopwatch"><b>Timing Remaining</b></span> 
+               <span class="fas fa-stopwatch"><b><?= __('Timing Remaining'); ?></b></span> 
                <p id="timer"></p>
             </div>   
         </div>
@@ -21,33 +21,33 @@
     <div class="row q-sec">    
         <div class="col-md-8">
             <div class="q-a">
-                <span>This is a single choise question.</span>
-                <h4>question. 1</h4>
-                <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
+                <span><?= __('This is a single choise question.'); ?></span>
+                <h4><?= __('question. 1'); ?></h4>
+                <h5><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry.'); ?></h5>
                 <b>
                     <input type="radio" name="q1" id="q1">
-                    <label for="q1">Lorem Ipsum is simply dummy text of the printing and</label>
+                    <label for="q1"><?= __('Lorem Ipsum is simply dummy text of the printing and'); ?></label>
                 </b>
                 <b>
                     <input type="radio" name="q1" id="q1_2">
-                    <label for="q1_2">Lorem Ipsum is simply dummy text of the printing and</label>
+                    <label for="q1_2"><?= __('Lorem Ipsum is simply dummy text of the printing and'); ?></label>
                 </b>
                 <b>
                     <input type="radio" name="q1" id="q1_3">
-                    <label for="q1_3">Lorem Ipsum is simply dummy text of the printing and</label>
+                    <label for="q1_3"><?= __('Lorem Ipsum is simply dummy text of the printing and'); ?></label>
                 </b>
                 <b>
                     <input type="radio" name="q1" id="q1_4">
-                    <label for="q1_4">Lorem Ipsum is simply dummy text of the printing and</label>
+                    <label for="q1_4"><?= __('Lorem Ipsum is simply dummy text of the printing and'); ?></label>
                 </b>
                 <b>
                     <input type="radio" name="q1" id="q1_5">
-                    <label for="q1_5">Lorem Ipsum is simply dummy text of the printing and</label>
+                    <label for="q1_5"><?= __('Lorem Ipsum is simply dummy text of the printing and'); ?></label>
                 </b>
                 <div class="submit-sec">
-                    <a href="question-2-text.php">Save & Next <i class="fas fa-chevron-right"></i></a>
-                    <a class="response" href="">clear Response</a>
-                    <input class="float-right" type="submit" name="" value="Submit Assesment">
+                    <a href="question-2-text.php"><?= htmlspecialchars(__('Save & Next'), ENT_QUOTES, 'UTF-8'); ?> <i class="fas fa-chevron-right"></i></a>
+                    <a class="response" href=""><?= __('clear Response'); ?></a>
+                    <input class="float-right" type="submit" name="" value="<?= htmlspecialchars(__('Submit Assesment'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
             </div>     
         </div>
@@ -78,15 +78,15 @@
                 </ul>
                 <div class="row">
                     <input type="checkbox" name="" id="a1">
-                    <label for="a1">Answered Question</label>
+                    <label for="a1"><?= __('Answered Question'); ?></label>
                 </div>
                 <div class="row">
                     <input type="checkbox" name="" id="a2">
-                    <label for="a2">Unanswered and visited</label>
+                    <label for="a2"><?= __('Unanswered and visited'); ?></label>
                 </div>    
                 <div class="row">
                     <input type="checkbox" name="" id="a3">
-                    <label for="a3">Unanswered and not-visited</label>
+                    <label for="a3"><?= __('Unanswered and not-visited'); ?></label>
                 </div>
             </div>    
         </div> 
