@@ -39,11 +39,11 @@ function AddUserPlans(company_subscr_id){
     <div class="container-fluid">
         <div class="card card-custom card-sticky">
             <div class="card-header">
-                <h5>Subscription Plans</h5>
+                <h5><?= __('Subscription Plans'); ?></h5>
                 <div class="card-header-right">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -54,7 +54,7 @@ function AddUserPlans(company_subscr_id){
                         <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Billing Address</h5>
+                                    <h5><?= __('Billing Address'); ?></h5>
 
                                 </div>
                                 <div class="card-body mt-2">
@@ -64,11 +64,11 @@ function AddUserPlans(company_subscr_id){
                                                 <table class="table m-0">
                                                     <tbody>
                                                         <tr>
-                                                            <th scope="col" >Bill to:</th>
+                                                            <th scope="col" ><?= __('Bill to'); ?>:</th>
                                                             <td><?php echo $applicationuser['user_email']; ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <th scope="col" >Customer Name:</th>
+                                                            <th scope="col" ><?= __('Customer Name'); ?>:</th>
                                                             <td><?php echo $applicationuser['display_name']; ?></td>
                                                         </tr>
                                                         <?php
@@ -89,12 +89,12 @@ function AddUserPlans(company_subscr_id){
                                                 <table class="table m-0">
                                                     <tbody>
                                                         <tr>
-                                                            <th scope="row">Subscription Fees:</th>
-                                                            <td>Rs.0.00/Year</td>
+                                                            <th scope="row"><?= __('Subscription Fees'); ?>:</th>
+                                                            <td><?= __('Rs.0.00/Year'); ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <th scope="row">Billing method:</th>
-                                                            <td>Manual</td>
+                                                            <th scope="row"><?= __('Billing method'); ?>:</th>
+                                                            <td><?= __('Manual'); ?></td>
                                                         </tr>
 
                                                     </tbody>
@@ -106,7 +106,7 @@ function AddUserPlans(company_subscr_id){
                             </div>
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Subscribed Products:</h5>
+                                    <h5><?= __('Subscribed Products'); ?>:</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -117,7 +117,7 @@ function AddUserPlans(company_subscr_id){
                             </div>
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Recent Invoice</h5>
+                                    <h5><?= __('Recent Invoice'); ?></h5>
 
                                 </div>
                                 <div class="card-body">
@@ -127,9 +127,9 @@ function AddUserPlans(company_subscr_id){
                                                 <?php
                                                 foreach($csplres as $csplress){  //print_r($csplress);?>
                                                 <tr>
-                                                    <th scope="col" class="min-w-400px">Invoice No. <?php echo $licensecode[$csplress['csp_id']]; ?> User License :
-                                                        <a href="#" class="fw-bolder text-gray-800 text-hover-primary me-1"><?php echo $csplress['added_license_users']; ?></a> Price : <?php echo $csplress['price']; ?>
-                                                      <?php echo $csplress['payment_type']=="N"?'<span class="badge label-warning ms-2">Pendding</span>':'<span class="badge label-success ms-2">Done</span>'; ?>
+                                                    <th scope="col" class="min-w-400px"><?= __('Invoice No.'); ?> <?php echo $licensecode[$csplress['csp_id']]; ?> <?= __('User License'); ?> :
+                                                        <a href="#" class="fw-bolder text-gray-800 text-hover-primary me-1"><?php echo $csplress['added_license_users']; ?></a> <?= __('Price'); ?> : <?php echo $csplress['price']; ?>
+                                                      <?php echo $csplress['payment_type']=="N"?'<span class="badge label-warning ms-2">'.__('Pendding').'</span>':'<span class="badge label-success ms-2">'.__('Done').'</span>'; ?>
                                                         </th>
                                                         <th scope="col" class="pe-0 text-gray-600 text-end min-w-200px">
                                                             <?php echo $csplress['request_date']; ?>
@@ -146,48 +146,48 @@ function AddUserPlans(company_subscr_id){
                                         <div class="col-lg-4">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h5>Summary</h5>
+                                                    <h5><?= __('Summary'); ?></h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    <h6 class="mt-5 f-w-600">Customer Details</h6>
+                                                    <h6 class="mt-5 f-w-600"><?= __('Customer Details'); ?></h6>
                                                     <div class="d-block mt-3">
                                                         <a class="f-w-600" href=""><?php echo $applicationuser['display_name']; ?></a>
-                                                        <div class="badge label-success ms-2">Active</div>
+                                                        <div class="badge label-success ms-2"><?= __('Active'); ?></div>
                                                     </div>
                                                     <div class="d-block border-bottom pb-4">
                                                         <a class="f-w-600" href=""><?php echo $applicationuser['user_email']; ?></a>
                                                     </div>
                                                     <div class="d-block border-bottom pb-4 mt-3">
-                                                        <div class="badge bg-light text-primary ms-2">Basic Bundle</div>
+                                                        <div class="badge bg-light text-primary ms-2"><?= __('Basic Bundle'); ?></div>
                                                         <span class="d-inline-block mr-2 f-w-600" id="totalpricesubscription"><?php echo "Rs.".$totalactualprice; ?></span>
                                                     </div>
                                                     <div class="d-block border-bottom pb-4 mt-3">
-                                                        <h6 class="f-w-600">Payment Details</h6>
+                                                        <h6 class="f-w-600"><?= __('Payment Details'); ?></h6>
                                                         <div class="d-block mt-2">
-                                                            <span class="d-inline-block mr-2 f-w-600">Manual</span>
+                                                            <span class="d-inline-block mr-2 f-w-600"><?= __('Manual'); ?></span>
                                                         </div>
                                                     </div>
                                                     <div class="d-block mt-3">
-                                                        <h6 class="f-w-600">Subscription Details</h6>
+                                                        <h6 class="f-w-600"><?= __('Subscription Details'); ?></h6>
                                                         <div class="table-responsive">
                                                             <table class="table m-0">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <th scope="row">Subscription Group</th>
+                                                                        <th scope="row"><?= __('Subscription Group'); ?></th>
                                                                         <td><?php echo $applicationuser['group_name']; ?></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Started</th>
+                                                                        <th scope="row"><?= __('Started'); ?></th>
                                                                         <td>15 Apr 2021</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Status</th>
+                                                                        <th scope="row"><?= __('Status'); ?></th>
                                                                         <td >
-                                                                            <div class="badge label-success ms-2">Active</div>
+                                                                            <div class="badge label-success ms-2"><?= __('Active'); ?></div>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Next Invoice</th>
+                                                                        <th scope="row"><?= __('Next Invoice'); ?></th>
                                                                         <td>15 Apr 2022</td>
                                                                     </tr>
                                                                 </tbody>
