@@ -249,11 +249,11 @@ function updateTaskStatus(task_id,status){
         console.log(response);
         var jsonres = JSON.parse(response);
         if(jsonres.status == "<?php echo ST_INPROGRESS; ?>"){
-          $(".statusid_"+rid).html('<span class="form-label label label-md" style="color: #FFFFFF;    background:  #f5b700; border-color: ##f5b700;">In Progress </span>');
+          $(".statusid_"+rid).html('<span class="form-label label label-md" style="color: #FFFFFF;    background:  #f5b700; border-color: ##f5b700;"><?= htmlspecialchars(__('In Progress'), ENT_QUOTES, 'UTF-8'); ?> </span>');
         }
         if(jsonres.status == "<?php echo ST_COMPLETE; ?>"){
           $('.sendapprove_'+rid).attr("disabled", true);
-          $(".statusid_"+rid).html('<span class="form-label label label-md" style="color:#2ed8b6;background:#bc00dd;border-color:#FFFFFF;">Completed</span>');
+          $(".statusid_"+rid).html('<span class="form-label label label-md" style="color:#2ed8b6;background:#bc00dd;border-color:#FFFFFF;"><?= htmlspecialchars(__('Completed'), ENT_QUOTES, 'UTF-8'); ?></span>');
         }
         tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>','');
 
@@ -296,10 +296,10 @@ function updateTaskStatus(task_id,status){
             title: msg,
             type: "success",
             buttonsStyling: false,
-            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, close!'), ENT_QUOTES, 'UTF-8'); ?>",
             confirmButtonClass: "btn btn-danger",
             showCancelButton: false,
-            cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+            cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
             cancelButtonClass: "btn btn-default"
           }).then(function(result) {
             if (result.value) {
@@ -334,7 +334,7 @@ function updateTaskStatus(task_id,status){
         data:"page=candidaterequestdocs&"+formdetails,
         type: "POST",
         success:function(data){
-        $("#docssatusbtn_"+id).html('<span class="form-label label label-md" style="color: #FFFFFF;    background:  #bc00dd; border-color: #bc00dd;">Requested</span>')
+        $("#docssatusbtn_"+id).html('<span class="form-label label label-md" style="color: #FFFFFF;    background:  #bc00dd; border-color: #bc00dd;"><?= htmlspecialchars(__('Requested'), ENT_QUOTES, 'UTF-8'); ?></span>')
         $("#docssatusbtnemt_"+id).html('');
         tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3000']; ?>','');
         closeSmallPopUp();
@@ -377,25 +377,25 @@ function candidateUploadDocuments(){
       <div class="col-lg-3">
         <div class="card">
           <div class="card-header">
-            <h5>About</h5>
+            <h5><?= __('About'); ?></h5>
             <div class="card-header-right">
-              <button type="button" class="btn p-0 border-0 bg-transparent ti-pencil" onclick="editFormShow('contact_detailsL','contact_detailsT','edit_contact_details','save_contact_details','Edit')" id="edit_contact_details" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Edit" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+              <button type="button" class="btn p-0 border-0 bg-transparent ti-pencil" onclick="editFormShow('contact_detailsL','contact_detailsT','edit_contact_details','save_contact_details','Edit')" id="edit_contact_details" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Edit'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
 
-              <button type="button" class="btn p-0 border-0 bg-transparent ti-back-left" data-bs-toggle="tooltip" id="save_contact_details_undo" data-placement="bottom" title="" data-bs-original-title="Cancel" onclick="cancelChange('contact_detailsT','contact_detailsL','save_contact_details','edit_contact_details')" style="display: none" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
-              <button class="btn waves-effect waves-light btn-primary pt-1 pb-1 m-l-20" id="save_contact_details" onclick="editFormShow('contact_detailsT','contact_detailsL','save_contact_details','edit_contact_details','Save','contactdetailsfrom')" style="display: none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Save">Save</button>
+              <button type="button" class="btn p-0 border-0 bg-transparent ti-back-left" data-bs-toggle="tooltip" id="save_contact_details_undo" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Cancel'), ENT_QUOTES, 'UTF-8'); ?>" onclick="cancelChange('contact_detailsT','contact_detailsL','save_contact_details','edit_contact_details')" style="display: none" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+              <button class="btn waves-effect waves-light btn-primary pt-1 pb-1 m-l-20" id="save_contact_details" onclick="editFormShow('contact_detailsT','contact_detailsL','save_contact_details','edit_contact_details','Save','contactdetailsfrom')" style="display: none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Save'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Save'); ?></button>
             </div>
           </div>
           <div class="card-block">
             <form id="contactdetailsfrom">
             <div class="mb-2 pb-2">
-              <span class="f-w-600 form-label">Job Role</span>
+              <span class="f-w-600 form-label"><?= __('Job Role'); ?></span>
               <p class="f-14 mb-0 contact_detailsL" > <?php echo $candidates['candidate_current_role'] !=""?$candidates['candidate_current_role']:"N/A";?></p>
-              <input aria-label="Candidate Current Role" class="form-control contact_detailsT" data-type="text"  type="text"  id="candidate_current_role"  name="candidate_current_role"  value="<?php echo $candidates['candidate_current_role']; ?>" style="display: none">
+              <input aria-label="<?= htmlspecialchars(__('Candidate Current Role'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control contact_detailsT" data-type="text"  type="text"  id="candidate_current_role"  name="candidate_current_role"  value="<?php echo $candidates['candidate_current_role']; ?>" style="display: none">
             </div>
             <div class="mb-2 pb-2">
-              <span class="f-w-600 form-label">Department</span>
+              <span class="f-w-600 form-label"><?= __('Department'); ?></span>
               <p class="f-14 mb-0 contact_detailsL"><?php echo $candidates['department_id'] !=""?$job_titles[$candidates['department_id']]:"N/A";?></p>
-              <select aria-label="Department" class="form-select contact_detailsT" data-type="select" id="department_id" name="department_id" style="display: none">
+              <select aria-label="<?= htmlspecialchars(__('Department'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select contact_detailsT" data-type="select" id="department_id" name="department_id" style="display: none">
                 <?php foreach($departments as $key4=> $department){ ?>
                   <option <?php if($key4 == $candidates['department_id']){  ?> selected <?php
 } ?>  value="<?php echo $key4; ?>"><?php echo $department;  ?></option>
@@ -403,9 +403,9 @@ function candidateUploadDocuments(){
               </select>
             </div>
             <div class=" mb-2 pb-2">
-              <span class="f-w-600 form-label">Designation</span>
+              <span class="f-w-600 form-label"><?= __('Designation'); ?></span>
               <p class="f-14 mb-0 contact_detailsL"><?php echo $candidates['job_tittle_id'] !=""?$job_titles[$candidates['job_tittle_id']]:"N/A";?></p>
-              <select aria-label="Job Tittle" class="form-select  contact_detailsT" data-type="select" id="job_tittle_id" name="job_tittle_id" style="display: none">
+              <select aria-label="<?= htmlspecialchars(__('Job Tittle'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select  contact_detailsT" data-type="select" id="job_tittle_id" name="job_tittle_id" style="display: none">
                 <?php foreach($job_titles as $key5=>$job_title){ ?>
                   <option <?php if($key5 == $candidates['job_tittle_id']){  ?> selected <?php
 } ?>  value="<?php echo $key5; ?>"><?php echo $job_title;  ?></option>
@@ -417,20 +417,20 @@ function candidateUploadDocuments(){
       </div>
       <div class="card">
         <div class="card-header">
-          <h5>Key Contacts</h5>
+          <h5><?= __('Key Contacts'); ?></h5>
           <div class="card-header-right">
-            <button type="button" class="btn p-0 border-0 bg-transparent ti-pencil" onclick="editFormShow('personal_detailsL','personal_detailsT','edit_personal_details','save_personal_details','Edit')" id="edit_personal_details" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Edit" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
-            <button type="button" class="btn p-0 border-0 bg-transparent ti-back-left" data-bs-toggle="tooltip" id="save_personal_details_undo" data-placement="bottom" title="" data-bs-original-title="Cancel" onclick="cancelChange('personal_detailsT','personal_detailsL','save_personal_details','edit_personal_details')" style="display: none" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
-            <button class="btn waves-effect waves-light btn-primary pt-1 pb-1 m-l-20" id="save_personal_details" onclick="editFormShow('personal_detailsT','personal_detailsL','save_personal_details','edit_personal_details','Save','personaldetailsfrom')" style="display: none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Save">Save</button>
+            <button type="button" class="btn p-0 border-0 bg-transparent ti-pencil" onclick="editFormShow('personal_detailsL','personal_detailsT','edit_personal_details','save_personal_details','Edit')" id="edit_personal_details" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Edit'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+            <button type="button" class="btn p-0 border-0 bg-transparent ti-back-left" data-bs-toggle="tooltip" id="save_personal_details_undo" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Cancel'), ENT_QUOTES, 'UTF-8'); ?>" onclick="cancelChange('personal_detailsT','personal_detailsL','save_personal_details','edit_personal_details')" style="display: none" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+            <button class="btn waves-effect waves-light btn-primary pt-1 pb-1 m-l-20" id="save_personal_details" onclick="editFormShow('personal_detailsT','personal_detailsL','save_personal_details','edit_personal_details','Save','personaldetailsfrom')" style="display: none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Save'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Save'); ?></button>
           </div>
         </div>
         <div class="card-block">
          <form id="personaldetailsfrom">
 
           <div class=" mb-2 pb-2">
-            <span class="f-w-600 form-label">HR Manager</span>
+            <span class="f-w-600 form-label"><?= __('HR Manager'); ?></span>
             <p class="f-14 mb-0 personal_detailsL"><?php echo $candidates['hr_connect'] !=""?$_SESSION['users'][$candidates['hr_connect']]:"N/A"; ?></p>
-            <select aria-label="Hr Connect" class="form-select  personal_detailsT" data-type="select" id="hr_connect" name="hr_connect" style="display: none">
+            <select aria-label="<?= htmlspecialchars(__('Hr Connect'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select  personal_detailsT" data-type="select" id="hr_connect" name="hr_connect" style="display: none">
               <?php foreach($applicationusers as $key7=>$displayname){ ?>
                 <option <?php if($candidates['hr_connect'] == $key7){  ?> selected <?php
 } ?>  value="<?php echo $key7; ?>"><?php echo $displayname;  ?></option>
@@ -449,7 +449,7 @@ function candidateUploadDocuments(){
         <div class="col-lg-8">
           <ul class="nav md-tabs infisuite_tab mb-2">
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#candidateprofiletab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Profile Readiness</a>
+              <a class="nav-link active" data-bs-toggle="tab" href="#candidateprofiletab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Profile Readiness'); ?></a>
             </li>
 
           </ul>
@@ -460,7 +460,7 @@ function candidateUploadDocuments(){
         <div class="tab-pane active" id="candidateprofiletab" role="tabpanel">
           <div class="accordion-block color-accordion-block">
             <div class="color-accordion" id="color-accordion">
-              <a class="accordion-msg b-none waves-effect waves-light f-w-700">Profile Readiness</a>
+              <a class="accordion-msg b-none waves-effect waves-light f-w-700"><?= __('Profile Readiness'); ?></a>
               <div class="accordion-desc p-0">
                 <table class="table table-hover table-md">
                   <tbody>
@@ -481,7 +481,7 @@ function candidateUploadDocuments(){
                         <th scope="col" style="text-align: right;">
                           <div class="d-flex align-items-center w-100px w-sm-120px flex-column ">
                             <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                              <span class="f-12 f-w-600">Profile </span>
+                              <span class="f-12 f-w-600"><?= __('Profile'); ?> </span>
                               <span class="f-12 f-w-600"><?php echo round($percentage); ?>%</span>
                             </div>
                             <div class="col-md-12">
@@ -504,7 +504,7 @@ function candidateUploadDocuments(){
 <div class="col-lg-3">
       <div class="card">
         <div class="card-header">
-          <h5>Upload Documents</h5>
+          <h5><?= __('Upload Documents'); ?></h5>
           <div class="card-header-right">
              <button type="button" class="btn waves-effect waves-light btn-primary" onclick="candidateUploadDocuments()"><i class="ti-upload m-r-10 text-white"></i></button>
           </div>
@@ -529,8 +529,8 @@ function candidateUploadDocuments(){
           </table>
         <?php  }else{  ?>
             <div class="card-px text-center py-20 m-t-30" >
-              <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Upload Documents </p>
-              <button type="button" class="btn waves-effect waves-light btn-success" onclick="candidateUploadDocuments()"><i class="ti-upload"></i> Upload Document</button>
+              <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Upload Documents'); ?> </p>
+              <button type="button" class="btn waves-effect waves-light btn-success" onclick="candidateUploadDocuments()"><i class="ti-upload"></i> <?= __('Upload Document'); ?></button>
               <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
               </div>
