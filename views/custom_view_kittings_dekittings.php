@@ -39,11 +39,11 @@ function findUomName($id, $uoms) {
 ?>
 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
     <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Search Kitting Process</h5>
+        <h5 class="mb-0"><?= __('Search Kitting Process'); ?></h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light">
                 <i class="icofont icofont-reply mr-1"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -52,22 +52,22 @@ function findUomName($id, $uoms) {
 
             <div class="row">
                 <div class="form-group col-lg-4">
-                    <span class="form-label">Process Type</span>
+                    <span class="form-label"><?= __('Process Type'); ?></span>
                     <div class="d-flex">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="process_type" id="kitting" value="kitting" checked>
-                            <label class="form-check-label" for="kitting">Kitting</label>
+                            <label class="form-check-label" for="kitting"><?= __('Kitting'); ?></label>
                         </div>
                         <div class="form-check form-check-inline ml-4">
                             <input class="form-check-input" type="radio" name="process_type" id="dekitting" value="dekitting">
-                            <label class="form-check-label" for="dekitting">Dekitting</label>
+                            <label class="form-check-label" for="dekitting"><?= __('Dekitting'); ?></label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span class="form-label" id="product_label">Select Product</span>
-                    <select aria-label="Product Selection" class="form-select js-example-basic-single" id="product_selection">
-                        <option value="">Select a product</option>
+                    <span class="form-label" id="product_label"><?= __('Select Product'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Product Selection'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="product_selection">
+                        <option value=""><?= __('Select a product'); ?></option>
                     </select>
                 </div>
 
@@ -75,7 +75,7 @@ function findUomName($id, $uoms) {
                 <div class="form-group col-lg-2">
                     <div class="col-lg-12 text-right">
                         <button type="button" id="search_btn" class="btn btn-primary">
-                            <i class="fa fa-search mr-1"></i> Search
+                            <i class="fa fa-search mr-1"></i> <?= __('Search'); ?>
                         </button>
                     </div>
                 </div>
@@ -86,7 +86,7 @@ function findUomName($id, $uoms) {
         <div id="results_section" style="display: none;">
             <hr class="my-4">
 
-            <h6 class="mb-3" id="result_heading">Components</h6>
+            <h6 class="mb-3" id="result_heading"><?= __('Components'); ?></h6>
 
 
             <div id="kitting_results">
@@ -99,9 +99,9 @@ function findUomName($id, $uoms) {
                         <thead class="bg-light">
                             <tr>
                                 <th scope="col" style="width: 50px;">#</th>
-                                <th scope="col">Component Name</th>
-                                <th scope="col">UOM</th>
-                                <th scope="col">Quantity</th>
+                                <th scope="col"><?= __('Component Name'); ?></th>
+                                <th scope="col"><?= __('UOM'); ?></th>
+                                <th scope="col"><?= __('Quantity'); ?></th>
                             </tr>
                         </thead>
                         <tbody id="kitting_components">
@@ -122,9 +122,9 @@ function findUomName($id, $uoms) {
                         <thead class="bg-light">
                             <tr>
                                 <th scope="col" style="width: 50px;">#</th>
-                                <th scope="col">Component Name</th>
-                                <th scope="col">UOM</th>
-                                <th scope="col">Quantity</th>
+                                <th scope="col"><?= __('Component Name'); ?></th>
+                                <th scope="col"><?= __('UOM'); ?></th>
+                                <th scope="col"><?= __('Quantity'); ?></th>
                             </tr>
                         </thead>
                         <tbody id="dekitting_components">
@@ -176,7 +176,7 @@ function findUomName($id, $uoms) {
             const processType = document.querySelector('input[name="process_type"]:checked').value;
             const available = getAvailableProducts(processType);
             const select = document.getElementById('product_selection');
-            select.innerHTML = '<option value="">Select a product</option>';
+            select.innerHTML = '<option value=""><?= htmlspecialchars(__('Select a product'), ENT_QUOTES, 'UTF-8'); ?></option>';
             available.forEach(item => {
                 const opt = document.createElement('option');
                 opt.value = item.id;
@@ -213,7 +213,7 @@ function findUomName($id, $uoms) {
             const productId = document.getElementById('product_selection').value;
             console.log(productId);
             if (!productId) {
-                alert('Please select a product to search');
+                alert(<?php echo json_encode(__('Please select a product to search'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                 return;
             }
 
@@ -239,7 +239,7 @@ function findUomName($id, $uoms) {
                 document.getElementById('kitting_process_details').innerHTML = `
                     <div class="col-md-12">
                         <div class="alert alert-info">
-                            No kitting processes found for this product.
+                            <?= htmlspecialchars(__('No kitting processes found for this product.'), ENT_QUOTES, 'UTF-8'); ?>
                         </div>
                     </div>
                 `;
@@ -297,7 +297,7 @@ function findUomName($id, $uoms) {
             } else {
                 document.getElementById('kitting_components').innerHTML = `
                     <tr>
-                        <td colspan="4" class="text-center">No components found for this kitting process.</td>
+                        <td colspan="4" class="text-center"><?= htmlspecialchars(__('No components found for this kitting process.'), ENT_QUOTES, 'UTF-8'); ?></td>
                     </tr>
                 `;
             }
@@ -310,7 +310,7 @@ function findUomName($id, $uoms) {
                 document.getElementById('dekitting_process_details').innerHTML = `
                     <div class="col-md-12">
                         <div class="alert alert-info">
-                            No dekitting processes found for this product.
+                            <?= htmlspecialchars(__('No dekitting processes found for this product.'), ENT_QUOTES, 'UTF-8'); ?>
                         </div>
                     </div>
                 `;
@@ -367,7 +367,7 @@ function findUomName($id, $uoms) {
             } else {
                 document.getElementById('dekitting_components').innerHTML = `
                     <tr>
-                        <td colspan="4" class="text-center">No components found for this dekitting process.</td>
+                        <td colspan="4" class="text-center"><?= htmlspecialchars(__('No components found for this dekitting process.'), ENT_QUOTES, 'UTF-8'); ?></td>
                     </tr>
                 `;
             }
