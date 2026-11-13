@@ -56,11 +56,11 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
                 <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
                     <div class="card card-custom " id="kt_page_sticky_card">
                         <div class="card-header table-card-header mb-2">
-                            <h5><?php echo "Employee Timesheet Summary";  ?></h5>
+                            <h5><?php echo __("Employee Timesheet Summary");  ?></h5>
                             <div class="card-header-right table-card-header ">
                                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                     <i class="icofont icofont-reply"></i>
-                                    Back
+                                    <?= __('Back'); ?>
                                 </a>
                             </div>
                         </div>
@@ -87,10 +87,10 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
 
                                                     <form method="post" action="#" >
                                                         <input type="hidden" name="emp_id" value="<?php echo $empp_id; ?>">
-                                                        <label for="example-date-input-from_2" class="col-3 col-form-label">Month</label>
+                                                        <label for="example-date-input-from_2" class="col-3 col-form-label"><?= __('Month'); ?></label>
                                                         <div class="input-group input-group-button">
-                                                            <input aria-label="Fromdate" type="month" name="fromdate" value="<?php echo $currentyear."-".$currentmonth;?>" id="example-date-input-from_2"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">  <button type="submit"  name="datefilter" value="exit" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-                                                                Get Details
+                                                            <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="fromdate" value="<?php echo $currentyear."-".$currentmonth;?>" id="example-date-input-from_2"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">  <button type="submit"  name="datefilter" value="exit" class="btn btn-info waves-effect waves-light input-group-text mt-0">
+                                                                <?= __('Get Details'); ?>
                                                             </button> </div>
                                                         </form>
                                                     </div>
@@ -106,11 +106,11 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
-                                                            <th scope="col">Employee  </th>
-                                                            <th scope="col">Email id  </th>
-                                                            <th scope="col">Timesheet Hrs </th>
+                                                            <th scope="col"><?= __('Employee'); ?>  </th>
+                                                            <th scope="col"><?= __('Email id'); ?>  </th>
+                                                            <th scope="col"><?= __('Timesheet Hrs'); ?> </th>
 
-                                                            <th scope="col">Action</th>
+                                                            <th scope="col"><?= __('Action'); ?></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -129,9 +129,9 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
                                                         <div class="align-middle">
                                                             <?php if($loc['image']!=""){
                                                                 $loc_img_src = !empty($loc['image']) ? 'uploads/all/' . $loc['image'] : 'uploads/all/no-image.jpg'; ?>
-                                                                <img src="<?php echo $loc_img_src; ?>" class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                                                <img src="<?php echo $loc_img_src; ?>" class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?php } else { ?>
-                                                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($loc['display_name']); ?></span>
+                                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($loc['display_name']); ?></span>
                                                             <?php } ?>
                                                             <div class="d-inline-block width73">
                                                                 <h6><?php echo $loc['display_name']; ?></h6>
@@ -142,13 +142,13 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
                                                     </td>
                                                     <td> <?php echo $loc['email_id']; ?></td>
                                                     <td>
-                                                        <span class="label label-xl font-weight-bolder label-rounded label-success w-50px"  data-toggle="tooltip" title="Total Billable Hours" style="vertical-align: middle;">
+                                                        <span class="label label-xl font-weight-bolder label-rounded label-success w-50px"  data-toggle="tooltip" title="<?= htmlspecialchars(__('Total Billable Hours'), ENT_QUOTES, 'UTF-8'); ?>" style="vertical-align: middle;">
                                                             <?php if($_SESSION['employee']['billable'] == '0'){ echo $loc['billable_hrs'];
 }else{ echo $loc['nonbillable_hrs'];
 } ?>
                                                         </span>
                                                     </td>
-                                                    <td> <button type="button" onclick="getEmployeeDetails('<?php echo $currentyear; ?>','<?php echo $currentmonth; ?>','<?php echo $loc['id']; ?>')"> <span class="btn btn-primary "  data-toggle="tooltip" title="View Details" style="vertical-align: middle;">  View </span></button>  </td>
+                                                    <td> <button type="button" onclick="getEmployeeDetails('<?php echo $currentyear; ?>','<?php echo $currentmonth; ?>','<?php echo $loc['id']; ?>')"> <span class="btn btn-primary "  data-toggle="tooltip" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>" style="vertical-align: middle;">  <?= __('View'); ?> </span></button>  </td>
                                                 </tr>
 
                                             <?php } ?>
