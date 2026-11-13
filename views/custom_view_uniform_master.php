@@ -170,18 +170,18 @@ foreach ((array)$data['locations'] as $row) {
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h4 class="mb-0 text-primary">Uniform Stock</h4>
+            <h4 class="mb-0 text-primary"><?= __('Uniform Stock'); ?></h4>
             <div class="card-header-right uniform-tabs-open">
                 <ul class="nav nav-pills uniform-tabs" id="uniformTabs">
                     <li class="nav-item">
                         <a class="nav-link" id="tabNewItem" href="javascript:void(0)">
-                            <i class="fa fa-plus-circle me-2"></i> New Item
+                            <i class="fa fa-plus-circle me-2"></i> <?= __('New Item'); ?>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" id="tabTopupItem" href="javascript:void(0)">
-                            <i class="fa fa-level-up-alt me-2"></i> Topup Item
+                            <i class="fa fa-level-up-alt me-2"></i> <?= __('Topup Item'); ?>
                         </a>
                     </li>
                 </ul>
@@ -202,7 +202,7 @@ foreach ((array)$data['locations'] as $row) {
 
                 <div class="card mb-3" id="adminFilterSection">
                     <div class="card-header ">
-                        <div class="section-title">Admin: Uniform Search Filters</div>
+                        <div class="section-title"><?= __('Admin: Uniform Search Filters'); ?></div>
 
                     </div>
 
@@ -213,9 +213,9 @@ foreach ((array)$data['locations'] as $row) {
                             <!-- LOCATION -->
                             <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Location <span class="text-danger">*</span></span>
-                                    <select aria-label="Admin Location" id="adminLocation" class="form-control js-example-basic-single">
-                                        <option value="">-- Select Location --</option>
+                                    <span class="form-label"><?= __('Location'); ?> <span class="text-danger">*</span></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Admin Location'), ENT_QUOTES, 'UTF-8'); ?>" id="adminLocation" class="form-control js-example-basic-single">
+                                        <option value="">-- <?= __('Select Location'); ?> --</option>
                                     </select>
                                 </div>
                             </div>
@@ -223,9 +223,9 @@ foreach ((array)$data['locations'] as $row) {
                             <!-- EMPLOYEE -->
                             <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Employee <span class="text-danger">*</span></span>
-                                    <select aria-label="Admin Employee" id="adminEmployee" class="form-control js-example-basic-single">
-                                        <option value="">-- Select Employee --</option>
+                                    <span class="form-label"><?= __('Employee'); ?> <span class="text-danger">*</span></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Admin Employee'), ENT_QUOTES, 'UTF-8'); ?>" id="adminEmployee" class="form-control js-example-basic-single">
+                                        <option value="">-- <?= __('Select Employee'); ?> --</option>
                                     </select>
                                 </div>
                             </div>
@@ -233,9 +233,9 @@ foreach ((array)$data['locations'] as $row) {
 
                             <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Uniform Type</span>
-                                    <select aria-label="Admin Type" id="adminType" class="form-control js-example-basic-single">
-                                        <option value="">-- All Types --</option>
+                                    <span class="form-label"><?= __('Uniform Type'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Admin Type'), ENT_QUOTES, 'UTF-8'); ?>" id="adminType" class="form-control js-example-basic-single">
+                                        <option value="">-- <?= __('All Types'); ?> --</option>
                                     </select>
                                 </div>
                             </div>
@@ -247,9 +247,9 @@ foreach ((array)$data['locations'] as $row) {
                             <!-- SIZE -->
                             <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Size</span>
-                                    <select aria-label="Admin Size" id="adminSize" class="form-control js-example-basic-single">
-                                        <option value="">-- All Sizes --</option>
+                                    <span class="form-label"><?= __('Size'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Admin Size'), ENT_QUOTES, 'UTF-8'); ?>" id="adminSize" class="form-control js-example-basic-single">
+                                        <option value="">-- <?= __('All Sizes'); ?> --</option>
                                     </select>
                                 </div>
                             </div>
@@ -257,9 +257,9 @@ foreach ((array)$data['locations'] as $row) {
                             <!-- COLOR -->
                             <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <span class="form-label">Color</span>
-                                    <select aria-label="Admin Color" id="adminColor" class="form-control js-example-basic-single">
-                                        <option value="">-- All Colors --</option>
+                                    <span class="form-label"><?= __('Color'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Admin Color'), ENT_QUOTES, 'UTF-8'); ?>" id="adminColor" class="form-control js-example-basic-single">
+                                        <option value="">-- <?= __('All Colors'); ?> --</option>
                                     </select>
                                 </div>
                             </div>
@@ -267,7 +267,7 @@ foreach ((array)$data['locations'] as $row) {
 
                             <div class="col-lg-4 col-md-4 col-sm-6 col-12 d-flex align-items-end">
                                 <button class="btn btn-success w-100" id="adminSearchBtn">
-                                    <i class="fa fa-search me-2"></i> Search Items
+                                    <i class="fa fa-search me-2"></i> <?= __('Search Items'); ?>
                                 </button>
                             </div>
 
@@ -288,7 +288,7 @@ foreach ((array)$data['locations'] as $row) {
                             },
                             success: function(response) {
                                 let res = JSON.parse(response);
-                                $("#adminLocation").html('<option value="">-- Select Location --</option>');
+                                $("#adminLocation").html('<option value="">-- <?= htmlspecialchars(__('Select Location'), ENT_QUOTES, 'UTF-8'); ?> --</option>');
                                 res.forEach(loc => {
                                     $("#adminLocation").append(`<option value="${loc.id}">${loc.location_name}</option>`);
                                 });
@@ -300,7 +300,7 @@ foreach ((array)$data['locations'] as $row) {
                         $("#adminLocation").change(function() {
                             let loc = $(this).val();
                             if (!loc) {
-                                $("#adminEmployee").html('<option value="">-- Select Employee --</option>');
+                                $("#adminEmployee").html('<option value="">-- <?= htmlspecialchars(__('Select Employee'), ENT_QUOTES, 'UTF-8'); ?> --</option>');
                                 return;
                             }
 
@@ -313,7 +313,7 @@ foreach ((array)$data['locations'] as $row) {
                                 },
                                 success: function(response) {
                                     let res = JSON.parse(response);
-                                    $("#adminEmployee").html('<option value="">-- Select Employee --</option>');
+                                    $("#adminEmployee").html('<option value="">-- <?= htmlspecialchars(__('Select Employee'), ENT_QUOTES, 'UTF-8'); ?> --</option>');
                                     res.forEach(emp => {
                                         $("#adminEmployee").append(`<option value="${emp.id}">${emp.display_name}</option>`);
                                     });
@@ -337,19 +337,19 @@ foreach ((array)$data['locations'] as $row) {
                                     let res = JSON.parse(response);
 
                                     // LOAD TYPES
-                                    $("#adminType").html('<option value="">-- All Types --</option>');
+                                    $("#adminType").html('<option value="">-- <?= htmlspecialchars(__('All Types'), ENT_QUOTES, 'UTF-8'); ?> --</option>');
                                     res.types.forEach(t => {
                                         $("#adminType").append(`<option value="${t.uniform_type_id}">${t.uniform_type_name}</option>`);
                                     });
 
                                     // LOAD SIZES
-                                    $("#adminSize").html('<option value="">-- All Sizes --</option>');
+                                    $("#adminSize").html('<option value="">-- <?= htmlspecialchars(__('All Sizes'), ENT_QUOTES, 'UTF-8'); ?> --</option>');
                                     res.sizes.forEach(s => {
                                         $("#adminSize").append(`<option value="${s.size_id}">${s.size_name}</option>`);
                                     });
 
                                     // LOAD COLORS
-                                    $("#adminColor").html('<option value="">-- All Colors --</option>');
+                                    $("#adminColor").html('<option value="">-- <?= htmlspecialchars(__('All Colors'), ENT_QUOTES, 'UTF-8'); ?> --</option>');
                                     if (res.job_grade_color) {
                                         // Only allow one color
                                         $("#adminColor").append(`<option value="${res.job_grade_color}">${res.job_grade_color_name}</option>`);
@@ -368,12 +368,12 @@ foreach ((array)$data['locations'] as $row) {
                             let emp = $("#adminEmployee").val();
 
                             if (!loc) {
-                                Swal.fire("Location Required", "Please select location", "warning");
+                                Swal.fire(<?php echo json_encode(__('Location Required'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('Please select location'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "warning");
                                 return;
                             }
 
                             if (!emp) {
-                                Swal.fire("Employee Required", "Please select employee", "warning");
+                                Swal.fire(<?php echo json_encode(__('Employee Required'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('Please select employee'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "warning");
                                 return;
                             }
 
@@ -392,7 +392,7 @@ foreach ((array)$data['locations'] as $row) {
                         let color_id = $("#adminColor").val();
                         let config_jobgrade = $("#config_jobgrade").val() || "";
 
-                        $("#itemGrid").html("<div class='text-center p-3'>Loading...</div>");
+                        $("#itemGrid").html("<div class='text-center p-3'><?= htmlspecialchars(__('Loading...'), ENT_QUOTES, 'UTF-8'); ?></div>");
 
                         $.ajax({
                             url: "ajax/uniform_ajax.php",
@@ -414,7 +414,7 @@ foreach ((array)$data['locations'] as $row) {
                                     $("#itemGrid").html(`
                                     <div class="text-center">
                                     <p class="text-muted f-16 fw-bold m-b-30">
-                                        <i class="fa fa-warning"></i>No items found.
+                                        <i class="fa fa-warning"></i><?= htmlspecialchars(__('No items found.'), ENT_QUOTES, 'UTF-8'); ?>
                                     </p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -428,7 +428,7 @@ foreach ((array)$data['locations'] as $row) {
                                 if (items.length === 0) {
                                     $("#itemGrid").html(`<div class="text-center">
                                         <p class="text-muted f-16 fw-bold m-b-30">
-                                            <i class="fa fa-warning"></i>No items found.
+                                            <i class="fa fa-warning"></i><?= htmlspecialchars(__('No items found.'), ENT_QUOTES, 'UTF-8'); ?>
                                         </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -491,10 +491,10 @@ foreach ((array)$data['locations'] as $row) {
 
                     <!-- LEFT SIDE — AVAILABLE ITEMS -->
                     <div class="col-lg-7 col-md-12 col-sm-12 col-12">
-                        <div class="section-title">Available Uniform Items</div>
+                        <div class="section-title"><?= __('Available Uniform Items'); ?></div>
 
                         <div class="mb-3">
-                            <input aria-label="Search item, color, size..." type="text" id="searchItem" class="form-control" placeholder="Search item, color, size...">
+                            <input aria-label="<?= htmlspecialchars(__('Search item, color, size...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="searchItem" class="form-control" placeholder="<?= htmlspecialchars(__('Search item, color, size...'), ENT_QUOTES, 'UTF-8'); ?>">
                         </div>
 
                         <div class="row" id="itemGrid">
@@ -511,21 +511,21 @@ foreach ((array)$data['locations'] as $row) {
 
                                             <div class="item-title"><?= $row['item_name'] ?></div>
                                             <div class="mt-2">
-                                                <span class="badge-uniform_type">Uniform Type: <?= $row['uniform_type_name'] ?></span>
+                                                <span class="badge-uniform_type"><?= __('Uniform Type'); ?>: <?= $row['uniform_type_name'] ?></span>
                                             </div>
 
                                             <?php if ($_SESSION['config']['job_grade'] == "Y") { ?>
                                                 <div class="mt-2">
-                                                    <span class="badge-color">Color: <?= $row['color_name'] ?></span>
+                                                    <span class="badge-color"><?= __('Color'); ?>: <?= $row['color_name'] ?></span>
                                                 </div>
                                             <?php } ?>
 
                                             <div class="mt-2">
-                                                <span class="badge-size">Size: <?= $row['size_name'] ?></span>
+                                                <span class="badge-size"><?= __('Size'); ?>: <?= $row['size_name'] ?></span>
                                             </div>
 
                                             <div class="qty-box mt-2"><?= $row['available_qty'] ?></div>
-                                            <div class="text-muted" style="font-size:12px">Available Qty</div>
+                                            <div class="text-muted" style="font-size:12px"><?= __('Available Qty'); ?></div>
 
                                             <button class="btn btn-primary w-100 mt-3 addToCartBtn"
                                                 data-id="<?= $row['id'] ?>"
@@ -536,7 +536,7 @@ foreach ((array)$data['locations'] as $row) {
                                                 data-size="<?= $row['size_name'] ?>"
                                                 data-uniform_type_id="<?= $row['uniform_type_id'] ?>"
                                                 data-available="<?= $row['available_qty'] ?>"
-                                                data-location="<?= $row['location_id'] ?>">Add</button>
+                                                data-location="<?= $row['location_id'] ?>"><?= __('Add'); ?></button>
 
                                         </div>
                                     </div>
@@ -547,7 +547,7 @@ foreach ((array)$data['locations'] as $row) {
                                 <div class="col-12  text-muted">
                                     <div class="text-center">
                                         <p class="text-muted f-16 fw-bold m-b-30">
-                                            <i class="fa fa-warning"></i>No uniform items available.
+                                            <i class="fa fa-warning"></i><?= __('No uniform items available.'); ?>
                                         </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -560,7 +560,7 @@ foreach ((array)$data['locations'] as $row) {
                         </div>
                         <div id="noSearchResults" class="col-12 text-center d-none">
                             <p class="text-muted f-16 fw-bold m-b-30">
-                                <i class="fa fa-warning"></i> No items Matching.
+                                <i class="fa fa-warning"></i> <?= __('No items Matching.'); ?>
                             </p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -574,29 +574,29 @@ foreach ((array)$data['locations'] as $row) {
 
 
 <div class="card shadow-sm mb-4">
-    <div class="section-title">Employee Information</div>
+    <div class="section-title"><?= __('Employee Information'); ?></div>
 
     <div class="card-body">
 
 
-            <div class="form-label fw-bold text-secondary">Employee Name: <span class="form-label fw-bold text-secondary fs-5"><?= $data['employee']['display_name'] ?></span></div>
+            <div class="form-label fw-bold text-secondary"><?= __('Employee Name'); ?>: <span class="form-label fw-bold text-secondary fs-5"><?= $data['employee']['display_name'] ?></span></div>
 
-            <div class="form-label fw-bold text-secondary">Location: <span class="form-label fw-bold text-secondary fs-6">
+            <div class="form-label fw-bold text-secondary"><?= __('Location'); ?>: <span class="form-label fw-bold text-secondary fs-6">
                 <?= $locations[$data['employee']['location_id']] ?? '' ?></span>
             </div>
 
-            <div class="form-label fw-bold text-secondary">Job Grade :
+            <div class="form-label fw-bold text-secondary"><?= __('Job Grade'); ?> :
             <?php if (!empty($data['employee']['job_grade_id'])) { ?>
                 <span class=" fw-bold text-secondary fs-6">
                     <?php $job_color_id = $job_grades[$data['employee']['job_grade_id']]['uniform_color'];
-                    echo $colors[$job_color_id] ?? ''; ?> (Color Code)
+                    echo $colors[$job_color_id] ?? ''; ?> <?= __('(Color Code)'); ?>
                 </span>
             <?php } else { ?>
 
             <?php } ?>
             </div>
 
-            <div class="form-label fw-bold text-secondary">Uniform Eligibility:
+            <div class="form-label fw-bold text-secondary"><?= __('Uniform Eligibility'); ?>:
             <div class="mt-2">
             <?php if (!empty($data['employee_uniforms'])) { ?>
                 <ul class="list-group">
@@ -630,17 +630,17 @@ foreach ((array)$data['locations'] as $row) {
         <div class="modal-content">
 
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">Edit Job Grade & Uniform Types</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title"><?= htmlspecialchars(__('Edit Job Grade & Uniform Types'), ENT_QUOTES, 'UTF-8'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 
             </div>
 
             <div class="modal-body">
 
                 <!-- JOB GRADE -->
-                <h6 class="text-primary">Job Grade</h6>
-                <select aria-label="Job Grade Dropdown" id="jobGradeDropdown" class="form-control mb-4 js-example-basic-single">
-                    <option value="">-- Select Job Grade --</option>
+                <h6 class="text-primary"><?= __('Job Grade'); ?></h6>
+                <select aria-label="<?= htmlspecialchars(__('Job Grade Dropdown'), ENT_QUOTES, 'UTF-8'); ?>" id="jobGradeDropdown" class="form-control mb-4 js-example-basic-single">
+                    <option value="">-- <?= __('Select Job Grade'); ?> --</option>
 
                     <?php foreach ($job_grades as $jg) { ?>
                         <option value="<?= $jg['id'] ?>"
@@ -651,7 +651,7 @@ foreach ((array)$data['locations'] as $row) {
                 </select>
                 <hr>
 
-                <h6 class="text-primary">Uniform Types</h6>
+                <h6 class="text-primary"><?= __('Uniform Types'); ?></h6>
                 <div id="existingUniformList">
 
                     <?php foreach ($emp_uniforms as $u) { ?>
@@ -663,9 +663,9 @@ foreach ((array)$data['locations'] as $row) {
 
                             <div>
                                 <strong><?= $u['uniform_type_name'] ?></strong><br>
-                                <small>Size:</small>
+                                <small><?= __('Size'); ?>:</small>
 
-                                <select aria-label="Select option" class="form-control sizeField js-example-basic-single"
+                                <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control sizeField js-example-basic-single"
                                         data-id="<?= $u['id'] ?>"
                                         style="width:150px; display:inline-block;">
 
@@ -694,8 +694,8 @@ foreach ((array)$data['locations'] as $row) {
 
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-5 col-12">
-                        <select aria-label="New Uniform Type" id="newUniformType" class="form-control js-example-basic-single">
-                            <option value="">-- Select Uniform Type --</option>
+                        <select aria-label="<?= htmlspecialchars(__('New Uniform Type'), ENT_QUOTES, 'UTF-8'); ?>" id="newUniformType" class="form-control js-example-basic-single">
+                            <option value="">-- <?= __('Select Uniform Type'); ?> --</option>
                             <?php foreach ($uniform_types as $ut) { ?>
                             <option value="<?= $ut['id'] ?>"><?= $ut['uniform_type_name'] ?></option>
                             <?php } ?>
@@ -703,8 +703,8 @@ foreach ((array)$data['locations'] as $row) {
                     </div>
 
                     <div class="col-lg-5 col-md-5 col-sm-5 col-12">
-                        <select aria-label="New Uniform Size" id="newUniformSize" class="form-control js-example-basic-single">
-                            <option value="">-- Select Size --</option>
+                        <select aria-label="<?= htmlspecialchars(__('New Uniform Size'), ENT_QUOTES, 'UTF-8'); ?>" id="newUniformSize" class="form-control js-example-basic-single">
+                            <option value="">-- <?= __('Select Size'); ?> --</option>
                             <?php foreach ($sizes as $s) { ?>
                             <option value="<?= $s['genc_detail_code'] ?>"><?= $s['size_name'] ?></option>
                             <?php } ?>
@@ -712,14 +712,14 @@ foreach ((array)$data['locations'] as $row) {
                     </div>
 
                     <div class="col-lg-2 col-md-2 col-sm-2 col-12">
-                        <button class="btn btn-success w-100" id="addUniformTypeBtn">+ Add</button>
+                        <button class="btn btn-success w-100" id="addUniformTypeBtn">+ <?= __('Add'); ?></button>
                     </div>
                 </div>
 
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-primary" id="saveUniformDataBtn">Save Changes</button>
+                <button class="btn btn-primary" id="saveUniformDataBtn"><?= __('Save Changes'); ?></button>
             </div>
 
         </div>
@@ -738,7 +738,7 @@ foreach ((array)$data['locations'] as $row) {
         let sizeText = $("#newUniformSize option:selected").text();
 
         if (!type_id || !size_id) {
-            Swal.fire("Error", "Please select both Uniform Type and Size", "warning");
+            Swal.fire(<?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('Please select both Uniform Type and Size'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "warning");
             return;
         }
 
@@ -836,11 +836,11 @@ foreach ((array)$data['locations'] as $row) {
                 let r = JSON.parse(res);
 
                 if (r.status === "success") {
-                    Swal.fire("Saved", r.msg, "success").then(() => {
+                    Swal.fire(<?php echo json_encode(__('Saved'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, r.msg, "success").then(() => {
                         location.reload();
                     });
                 } else {
-                    Swal.fire("Error", r.msg || "Error while saving", "error");
+                    Swal.fire(<?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, r.msg || "Error while saving", "error");
                 }
             }
         });
@@ -850,7 +850,7 @@ foreach ((array)$data['locations'] as $row) {
 
 <?php } ?>
 
-                        <div class="section-title">Requested Items</div>
+                        <div class="section-title"><?= __('Requested Items'); ?></div>
 
                         <div id="cartList" class="mb-3">
 
@@ -859,14 +859,14 @@ foreach ((array)$data['locations'] as $row) {
                         </div>
 
                         <div class="card p-3">
-                            <span>Required Date</span>
-                            <input aria-label="Require Date" type="date" id="requireDate" class="form-control mb-3"
+                            <span><?= __('Required Date'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Require Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" id="requireDate" class="form-control mb-3"
                                 value="<?= date('Y-m-d') ?>">
                                 <input type="hidden" name="location_id" id="location_id" value="<?php echo $location_id ?? 0; ?>">
-                            <span>Remarks</span>
-                            <textarea aria-label="Request Comment" id="requestComment" class="form-control mb-3"></textarea>
+                            <span><?= __('Remarks'); ?></span>
+                            <textarea aria-label="<?= htmlspecialchars(__('Request Comment'), ENT_QUOTES, 'UTF-8'); ?>" id="requestComment" class="form-control mb-3"></textarea>
 
-                            <button class="btn btn-success w-100" id="submitAllBtn">Save & Submit For Apporval</button>
+                            <button class="btn btn-success w-100" id="submitAllBtn"><?= htmlspecialchars(__('Save & Submit For Apporval'), ENT_QUOTES, 'UTF-8'); ?></button>
                         </div>
                     </div>
 
@@ -1019,7 +1019,7 @@ foreach ((array)$data['locations'] as $row) {
         let items = Object.values(cart);
 
         if (items.length === 0) {
-            Swal.fire("Error", "No items selected", "warning");
+            Swal.fire(<?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('No items selected'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "warning");
             return;
         }
 
@@ -1037,19 +1037,19 @@ foreach ((array)$data['locations'] as $row) {
                 let r = JSON.parse(res);
                 if (r.status === "success") {
                     Swal.fire({
-                        title: "Request Submitted!",
-                        html: "<b>Request No:</b> " + r.request_no,
+                        title: <?php echo json_encode(__('Request Submitted!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                        html: "<b><?= htmlspecialchars(__('Request No'), ENT_QUOTES, 'UTF-8'); ?>:</b> " + r.request_no,
                         icon: "success",
                         allowOutsideClick: false,
                         allowEscapeKey: false,
-                        confirmButtonText: "OK",
+                        confirmButtonText: <?php echo json_encode(__('OK'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         confirmButtonColor: "#3085d6"
                     }).then(() => {
                         location.reload();
                     });
 
                 }else {
-                    Swal.fire("Error", "Unknown error occurred", "error");
+                    Swal.fire(<?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('Unknown error occurred'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "error");
                 }
             }
         });
