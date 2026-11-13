@@ -51,7 +51,7 @@ function selectMenuOption(menu_label,option,seq){
     $(".spanicon").html('');
     $("#dynamic_label").text(menu_label+" Invices");
     $("#spanicon_"+seq).html('<i class="fa fa-check-circle text-warning f-16"></i>');
-    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#htmlview").html(loader);
     jQuery.ajax({
         url: "views/custom_view_dynamic_module_dashboard_ajax.php",
@@ -65,7 +65,7 @@ function selectMenuOption(menu_label,option,seq){
 }
 function getTransactionInvoiceList(){
     var option =$("#transaction_option_name").val();
-    var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#htmlview").html(loader);
     jQuery.ajax({
         url: "views/custom_list_dynamic_transaction_invoices.php",
@@ -125,13 +125,13 @@ function getTransactionInvoiceList(){
     onclick="handleArtificialIntelligenceClick()"
     data-bs-toggle="tooltip"
     data-bs-placement="bottom"
-    title="Dashboard Summary With AI">
+    title="<?= htmlspecialchars(__('Dashboard Summary With AI'), ENT_QUOTES, 'UTF-8'); ?>">
     <i class="ti-info spin-infinite"></i>
 </button>
 
 <?php if($cntmenu == 0){ ?>
     <div class="card-px text-center ">
-        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Menu Setup</p>
+        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Menu Setup'); ?></p>
         <div class="text-center px-4">
             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
         </div>
