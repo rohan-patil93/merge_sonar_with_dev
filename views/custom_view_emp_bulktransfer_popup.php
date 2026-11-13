@@ -46,10 +46,10 @@ $category_name = $bulkchange_categories[$_GET['bulkchange_categoryid']]['categor
                 console.log(response);
                  Swal.fire({
                   title:  category_name,
-                  text: "Choosen Employee's "+ category_name + " To " + movetodata + " is Completed!",
+                  text: <?php echo json_encode(__('Choosen Employee\'s').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+ category_name + " To " + movetodata + " is Completed!",
                   icon: "success",
                   buttonsStyling: false,
-                  confirmButtonText: "OK!",
+                  confirmButtonText: <?php echo json_encode(__('OK!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                   customClass: {
                    confirmButton: "btn btn-primary"
                   }
@@ -67,7 +67,7 @@ $category_name = $bulkchange_categories[$_GET['bulkchange_categoryid']]['categor
     <h5 class="modal-title text-center">
          <?php echo $category_name; ?>
     </h5>
-<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body" data-scroll="true" data-height="500" style="height: 500px;">
     <div class="form-group row" >
@@ -80,9 +80,9 @@ $category_name = $bulkchange_categories[$_GET['bulkchange_categoryid']]['categor
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name </th>
-                                <th scope="col">Transfer From </th>
-                                <th scope="col">Transfer To </th>
+                                <th scope="col"><?= __('Name'); ?> </th>
+                                <th scope="col"><?= __('Transfer From'); ?> </th>
+                                <th scope="col"><?= __('Transfer To'); ?> </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,9 +98,9 @@ $category_name = $bulkchange_categories[$_GET['bulkchange_categoryid']]['categor
 
 
 <?php if($allemployees[$empvalue]['image']!="") { ?>
-                                            <img src="uploads/all/<?php echo $allemployees[$empvalue]['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                            <img src="uploads/all/<?php echo $allemployees[$empvalue]['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($allemployees[$empvalue]['display_name']); ?></span>
+                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($allemployees[$empvalue]['display_name']); ?></span>
                                         <?php } ?>
 
                                          &nbsp;
@@ -126,8 +126,8 @@ $category_name = $bulkchange_categories[$_GET['bulkchange_categoryid']]['categor
     <input type="hidden" id="movetodata" value="<?php echo $moveto; ?>">
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>
-        <button id="confirm" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" onclick="confirmbulktransfer();" name="submitform" value="exit"></i>Confirm</button>
+        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
+        <button id="confirm" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" onclick="confirmbulktransfer();" name="submitform" value="exit"></i><?= __('Confirm'); ?></button>
     </div>
 
 </div>
