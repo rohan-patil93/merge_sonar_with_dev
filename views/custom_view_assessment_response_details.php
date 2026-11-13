@@ -3,12 +3,12 @@
     <div class="container-fluid">
         <!--begin::Accordion-->
         <div class="card-header">
-                <h5>Responses</h5>
+                <h5><?= __('Responses'); ?></h5>
                 <div class="card-header-right">'
 
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div>
             </div>
