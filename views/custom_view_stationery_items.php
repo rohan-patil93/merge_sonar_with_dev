@@ -29,7 +29,7 @@ include_once '../comm.php';
                 <div class="d-flex align-items-center justify-content-between">
                     <h4 class="f-12 text-primary f-w-600 text-uppercase mb-0 m-l-5"><?php echo $stationery_items['item_name'] ?></h4>
                     <?php if($_SESSION['admin_type'] == 1){ ?>
-                        <button type="button" class="btn btn-link p-0 text-primary" title="Edit Item" onclick="editstationeryitem('<?php echo $stationery_items['id']; ?>')">
+                        <button type="button" class="btn btn-link p-0 text-primary" title="<?= htmlspecialchars(__('Edit Item'), ENT_QUOTES, 'UTF-8'); ?>" onclick="editstationeryitem('<?php echo $stationery_items['id']; ?>')">
                             <i class="ti-pencil-alt"></i>
                         </button>
                     <?php } ?>
@@ -37,7 +37,7 @@ include_once '../comm.php';
                 <h3 class="f-16 f-w-600 m-l-10 m-b-15"><?php echo $stationery_items['description'] ?></h3>
                 <div class="row align-items-center mb-2">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                        <span class="m-l-5 mb-0">Qty:</span>
+                        <span class="m-l-5 mb-0"><?= __('Qty'); ?>:</span>
                         <span class="mb-0"><?php echo $stationery_items['available_qty']; ?></span>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
@@ -48,7 +48,7 @@ include_once '../comm.php';
                                     <i class="ti-minus m-0"></i>
                                 </button>
                             </b>
-                            <input aria-label="Quantity" type="text"  name='quantity' id="qty_<?php echo $stationery_items['id'] ?>" value='<?php echo $sqty; ?>'  onblur="addqty(<?php echo $stationery_items['id'] ?>)"  class="form-control input-number text-center" min="1" max="100">
+                            <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  name='quantity' id="qty_<?php echo $stationery_items['id'] ?>" value='<?php echo $sqty; ?>'  onblur="addqty(<?php echo $stationery_items['id'] ?>)"  class="form-control input-number text-center" min="1" max="100">
                             <b class="input-group-btn position-static">
                               <button type="button" class="quantity-right-plus btn btn-success btn-number p-1" onclick="addmins('add',<?php echo $stationery_items['id'] ?>)" >
                                   <i class="ti-plus m-0"></i>
@@ -64,7 +64,7 @@ include_once '../comm.php';
    <?php } ?>
     <?php }else{?>
         <div class="col-lg-12 col-md-4 sol-sm-4 col-6 m-t-25 f-24 text-danger text-center">
-            No Data Found
+            <?= __('No Data Found'); ?>
         </div>
     <?php } ?>
 </div>
