@@ -40,25 +40,25 @@ foreach($transaction_approval_logs as $tal){
 </script>
 <div class="card" id="kt_page_sticky_card">
     <div class="card-header">
-        <h5>Performance Appraisals</h5>
+        <h5><?= __('Performance Appraisals'); ?></h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                <i class="icofont icofont-reply"></i>  Back
+                <i class="icofont icofont-reply"></i>  <?= __('Back'); ?>
             </a>
         </div>
     </div>
     <div class="card-body">
         <ul class="nav md-tabs infisuite_tab">
             <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="tab" href="#appraisal_setting_team" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Team Appraisals</a>
+                <a class="nav-link active" data-bs-toggle="tab" href="#appraisal_setting_team" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Team Appraisals'); ?></a>
                 <div class="slide"></div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#appraisal_setting_self" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Self Appraisals</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#appraisal_setting_self" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Self Appraisals'); ?></a>
                 <div class="slide"></div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#approvalpayments" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Approval Payments</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#approvalpayments" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Approval Payments'); ?></a>
                 <div class="slide"></div>
             </li>
         </ul>
@@ -75,7 +75,7 @@ foreach($transaction_approval_logs as $tal){
                                             <a> <?php echo $assetyaerkey; ?></a>
                                         </h6>
                                     </div>
-                                    <div class="col-auto" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Count Of Appraisals" >
+                                    <div class="col-auto" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Count Of Appraisals'), ENT_QUOTES, 'UTF-8'); ?>" >
                                         <i class="fas bg-c-blue" ><?php echo count((array)$performancesetu); ?></i>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@ foreach($transaction_approval_logs as $tal){
                     <?php } ?>
                     <?php } else { ?>
                     <div class="card-px text-center py-20 mt-2">
-                        <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Team Appraisals </p>
+                        <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Team Appraisals'); ?> </p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>
@@ -105,7 +105,7 @@ foreach($transaction_approval_logs as $tal){
                                     <div class="col">
                                         <h6 class="m-b-25"> <a> <?php echo $assetyaerkey; ?></a></h6>
                                     </div>
-                                    <div class="col-auto" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Count Of Appraisals" >
+                                    <div class="col-auto" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Count Of Appraisals'), ENT_QUOTES, 'UTF-8'); ?>" >
                                         <i class="fas bg-c-blue"><?php echo count((array)$performancesetupary); ?></i>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@ foreach($transaction_approval_logs as $tal){
                     <?php } ?>
                     <?php } else { ?>
                     <div class="card-px text-center py-20 mt-2">
-                        <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Self Appraisals </p>
+                        <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Self Appraisals'); ?> </p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>
@@ -130,7 +130,7 @@ foreach($transaction_approval_logs as $tal){
                     <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                         <div class="card table-card">
                             <div class="card-header">
-                                <h5>Approval Pending</h5>
+                                <h5><?= __('Approval Pending'); ?></h5>
                             </div>
                             <div class="card-body custom-scroll" style="max-height: 250px; min-height: 250px;">
                                 <div class="card-block table-responsive" >
@@ -138,9 +138,9 @@ foreach($transaction_approval_logs as $tal){
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Request Date</th>
-                                                <th scope="col">Transaction Date</th>
+                                                <th scope="col"><?= __('Name'); ?></th>
+                                                <th scope="col"><?= __('Request Date'); ?></th>
+                                                <th scope="col"><?= __('Transaction Date'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -156,7 +156,7 @@ foreach($transaction_approval_logs as $tal){
                                             <?php $mq++;
 }
 }else{
-                                                echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> No Approval Pending</h4></td></tr>";
+                                                echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Approval Pending')."</h4></td></tr>";
                                             } ?>
                                         </tbody>
                                     </table>
@@ -167,7 +167,7 @@ foreach($transaction_approval_logs as $tal){
                     <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                         <div class="card table-card">
                             <div class="card-header">
-                                <h5>Approved</h5>
+                                <h5><?= __('Approved'); ?></h5>
                             </div>
                             <div class="card-body custom-scroll" style="max-height: 250px; min-height: 250px;">
                                 <div class="card-block table-responsive" >
@@ -175,9 +175,9 @@ foreach($transaction_approval_logs as $tal){
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Response Date</th>
-                                                <th scope="col">Transaction Date</th>
+                                                <th scope="col"><?= __('Name'); ?></th>
+                                                <th scope="col"><?= __('Response Date'); ?></th>
+                                                <th scope="col"><?= __('Transaction Date'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -194,7 +194,7 @@ foreach($transaction_approval_logs as $tal){
                                             <?php $mq++;
 }
 }else{
-                                                echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> No Approved</h4></td></tr>";
+                                                echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Approved')."</h4></td></tr>";
                                             } ?>
                                         </tbody>
                                     </table>
