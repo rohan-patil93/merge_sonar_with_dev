@@ -74,12 +74,12 @@ function csrProjectMonitoringFyLabel($financialYear) {
 
 <div class="row mt-3">
   <div class="col-lg-7 col-md-12 col-sm-12 col-12">
-    <h3 class="f-w-600 mb-0">Project Monitoring</h3>
+    <h3 class="f-w-600 mb-0"><?= __('Project Monitoring'); ?></h3>
   </div>
   <div class="col-lg-5 col-md-12 col-sm-12 col-12 text-end">
     <form method="GET" id="csrProjectMonitoringYearForm" class="csr-dashboard-filter d-inline-flex align-items-center justify-content-end w-auto">
       <input type="hidden" name="option" value="<?php echo csrProjectMonitoringText($_GET['option'] ?? 'COM_VIEW_PROJECT_MONITORING'); ?>">
-      <label class="form-label f-w-600 mb-0 me-2 text-nowrap" for="csrProjectMonitoringFySelect" style="min-width: 55px;">FA Year</label>
+      <label class="form-label f-w-600 mb-0 me-2 text-nowrap" for="csrProjectMonitoringFySelect" style="min-width: 55px;"><?= __('FA Year'); ?></label>
       <select name="fa_year" class="form-control js-example-basic-single csr-dashboard-fy-select" id="csrProjectMonitoringFySelect" style="width: 170px; min-width: 170px;">
         <?php foreach ($financialYears as $fyRow) { ?>
           <?php $fyCode = csrProjectMonitoringValue($fyRow, 'genc_detail_code'); ?>
@@ -100,7 +100,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <i class="fa fa-user f-24 text-primary"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600">Total Project</span>
+            <span class="f-12 f-w-600"><?= __('Total Project'); ?></span>
             <h4 class="f-30 f-w-600"><?php echo (int)($summary['total_project'] ?? 0); ?></h4>
           </div>
         </div>
@@ -115,7 +115,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <i class="fa fa-database f-24 text-success"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600">Total Obligation (FY <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</span>
+            <span class="f-12 f-w-600"><?= __('Total Obligation (FY'); ?> <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</span>
 <h4 class="f-24 f-w-600"><?php echo csrProjectMonitoringText(csrProjectMonitoringMoney($summary['total_obligation']  ?? 0)); ?></h4>
           </div>
         </div>
@@ -130,7 +130,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <i class="fa fa-database f-24 text-primary"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600"> Spent (FY <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</span>
+            <span class="f-12 f-w-600"> <?= __('Spent (FY'); ?> <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</span>
             <h4 class="f-24 f-w-600"><?php echo csrProjectMonitoringText(csrProjectMonitoringMoney($summary['selected_spent_amount']-$p_spent ?? 0)); ?></h4>
           </div>
         </div>
@@ -145,7 +145,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <i class="fa fa-database f-24 text-primary"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600">Spent ( Previous Year )</span>
+            <span class="f-12 f-w-600"><?= __('Spent ( Previous Year )'); ?></span>
             <h4 class="f-24 f-w-600"><?php echo csrProjectMonitoringText(csrProjectMonitoringMoney($p_spent ?? 0)); ?></h4>
           </div>
         </div>
@@ -160,7 +160,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <i class="fa fa-database f-24 text-purple"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600">Total Unspent (FY <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</span>
+            <span class="f-12 f-w-600"><?= __('Total Unspent (FY'); ?> <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</span>
             <h4 class="f-24 f-w-600"><?php echo csrProjectMonitoringText(csrProjectMonitoringMoney($summary['unallocated_funds'] ?? 0)); ?></h4>
           </div>
         </div>
@@ -175,7 +175,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <i class="fa fa-pie-chart f-24 text-purple"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600">Utilization (FY <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</span>
+            <span class="f-12 f-w-600"><?= __('Utilization (FY'); ?> <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</span>
             <h4 class="f-24 f-w-600"><?php echo csrProjectMonitoringText($summary['utilization_percent'] ?? 0); ?>%</h4>
           </div>
         </div>
@@ -190,7 +190,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <i class="fa fa-exclamation-triangle f-24 text-danger"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600">At Risk Projects</span>
+            <span class="f-12 f-w-600"><?= __('At Risk Projects'); ?></span>
             <h4 class="f-24 f-w-600"><?php echo (int)($summary['delayed_project'] ?? 0); ?></h4>
           </div>
         </div>
@@ -206,15 +206,15 @@ function csrProjectMonitoringFyLabel($financialYear) {
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-start">
           <h4 class="f-w-600 f-20 mb-0 d-flex align-items-center flex-wrap">
-            Previous Project Spent 
+            <?= __('Previous Project Spent'); ?> 
           </h4>
         </div>
         <div class="table-responsive mt-3 custom-scroll" style="height:450px;">
           <table class="table table-borderless table-sm">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Project Name</th>
-              <th scope="col">Spant</th>
+              <th scope="col"><?= __('Project Name'); ?></th>
+              <th scope="col"><?= __('Spant'); ?></th>
             </tr>
             <?php $ik=1; foreach($out_rows as $out_row){ ?> 
               <tr>
@@ -227,7 +227,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
              } ?>
              <tr class="f-w-600">
                 <td></td>
-                <td><?php echo "Total"; ?></td>
+                <td><?php echo __("Total"); ?></td>
                 <td><?php echo customeummarmonyformate($total_spent); ?></td>
               </tr>
           </table>
@@ -265,7 +265,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
                   <?php echo csrProjectMonitoringText(csrProjectMonitoringValue($project, 'subject') ?: '-'); ?>
                 </a>
                 <?php if ($projectCurrentStatus === 0) { ?>
-                  <a href="<?php echo csrProjectMonitoringText($editUrl); ?>" class="csr-project-monitoring-edit-link ms-2" title="Edit proposal">
+                  <a href="<?php echo csrProjectMonitoringText($editUrl); ?>" class="csr-project-monitoring-edit-link ms-2" title="<?= htmlspecialchars(__('Edit proposal'), ENT_QUOTES, 'UTF-8'); ?>">
                     <i class="fa fa-edit btn-warning p-2 b-radius-5"></i>
                   </a>
                 <?php } ?>
@@ -275,27 +275,27 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <div class="table-responsive mt-3">
               <table class="table table-borderless table-sm">
                 <tr>
-                  <th scope="col">Type</th>
+                  <th scope="col"><?= __('Type'); ?></th>
                   <th scope="col"><?php echo csrProjectMonitoringText(csrProjectMonitoringValue($project, 'type_of_project') ?: csrProjectMonitoringValue($project, 'type_of_work') ?: '-'); ?></th>
                 </tr>
                 <tr>
-                  <th scope="col">Sector</th>
+                  <th scope="col"><?= __('Sector'); ?></th>
                   <th scope="col"><?php echo csrProjectMonitoringText(csrProjectMonitoringValue($project, 'sector') ?: '-'); ?></th>
                 </tr>
                 <tr>
-                  <th scope="col">Location</th>
+                  <th scope="col"><?= __('Location'); ?></th>
                   <th scope="col"><?php echo csrProjectMonitoringText(csrProjectMonitoringValue($project, 'location_name') ?: '-'); ?></th>
                 </tr>
                 <tr>
-                  <th scope="col">Amount</th>
+                  <th scope="col"><?= __('Amount'); ?></th>
                   <th scope="col"><?php echo csrProjectMonitoringText(csrProjectMonitoringMoney(csrProjectMonitoringValue($project, 'total_budget_grand_total'))); ?></th>
                 </tr>
               </table>
             </div>
             <?php if ($hasTracking) { ?>
-              <a href="<?php echo csrProjectMonitoringText($trackingUrl); ?>" class="csr-project-monitoring-progress-link d-block text-decoration-none text-body mb-4" title="View project tracking">
+              <a href="<?php echo csrProjectMonitoringText($trackingUrl); ?>" class="csr-project-monitoring-progress-link d-block text-decoration-none text-body mb-4" title="<?= htmlspecialchars(__('View project tracking'), ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="d-flex justify-content-between">
-                  <span class="f-w-600 f-14">Progress</span>
+                  <span class="f-w-600 f-14"><?= __('Progress'); ?></span>
                   <span class="f-w-600 f-14"><?php echo $progress; ?>%</span>
                 </div>
                 <div class="progress progress-sm mt-1">
@@ -303,26 +303,26 @@ function csrProjectMonitoringFyLabel($financialYear) {
                 </div>
                 <?php if ($trackingTotal > 0) { ?>
                 <div class="csr-project-monitoring-tracking-stats mt-3">
-                  <p class="f-w-600 f-12 mb-2 text-muted">Tracking Statistics</p>
+                  <p class="f-w-600 f-12 mb-2 text-muted"><?= __('Tracking Statistics'); ?></p>
                   <div class="row text-center g-1">
                     <div class="col csr-project-monitoring-tracking-stat">
-                      <p class="f-11 f-w-600 mb-0 text-muted">Total</p>
+                      <p class="f-11 f-w-600 mb-0 text-muted"><?= __('Total'); ?></p>
                       <span class="f-w-600 f-14"><?php echo csrProjectMonitoringText($trackingTotal); ?></span>
                     </div>
                     <div class="col csr-project-monitoring-tracking-stat">
-                      <p class="f-11 f-w-600 mb-0 text-muted">Yet to Start</p>
+                      <p class="f-11 f-w-600 mb-0 text-muted"><?= __('Yet to Start'); ?></p>
                       <span class="f-w-600 f-14"><?php echo csrProjectMonitoringText($trackingYetToStart); ?></span>
                     </div>
                     <div class="col csr-project-monitoring-tracking-stat">
-                      <p class="f-11 f-w-600 mb-0 text-muted">In Progress</p>
+                      <p class="f-11 f-w-600 mb-0 text-muted"><?= __('In Progress'); ?></p>
                       <span class="f-w-600 f-14"><?php echo csrProjectMonitoringText($trackingInProgress); ?></span>
                     </div>
                     <div class="col csr-project-monitoring-tracking-stat">
-                      <p class="f-11 f-w-600 mb-0 text-muted">Hold</p>
+                      <p class="f-11 f-w-600 mb-0 text-muted"><?= __('Hold'); ?></p>
                       <span class="f-w-600 f-14"><?php echo csrProjectMonitoringText($trackingHold); ?></span>
                     </div>
                     <div class="col csr-project-monitoring-tracking-stat">
-                      <p class="f-11 f-w-600 mb-0 text-muted">Completed</p>
+                      <p class="f-11 f-w-600 mb-0 text-muted"><?= __('Completed'); ?></p>
                       <span class="f-w-600 f-14"><?php echo csrProjectMonitoringText($trackingCompleted); ?></span>
                     </div>
                   </div>
@@ -333,7 +333,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <?php } else { ?>
             <div class="csr-project-monitoring-progress-static mb-4">
               <div class="d-flex justify-content-between">
-                <span class="f-w-600 f-14">Progress</span>
+                <span class="f-w-600 f-14"><?= __('Progress'); ?></span>
                 <span class="f-w-600 f-14"><?php echo $projectCurrentStatus === 0 ? 'Draft' : ($projectCurrentStatus > 100 && $projectCurrentStatus < (int)ST_APPROVED ? 'In Progress' : ($projectCurrentStatus === (int)ST_REJECTED ? 'Rejected' : $progress . '%')); ?></span>
               </div>
               <div class="progress progress-sm mt-1">
@@ -341,14 +341,14 @@ function csrProjectMonitoringFyLabel($financialYear) {
               </div>
             </div>
             <?php } ?>
-            <h3 class="f-w-600 f-14 mb-2">Planned Timeline</h3>
+            <h3 class="f-w-600 f-14 mb-2"><?= __('Planned Timeline'); ?></h3>
             <div class="mt-1">
               <div class="d-flex justify-content-between border-top border-bottom p-2">
                 <div>
                   <i class="fa fa-calendar me-2"></i>
                   <span class="f-w-600 f-14"><?php echo csrProjectMonitoringText(csrProjectMonitoringDate(csrProjectMonitoringValue($project, 'project_start_date'))); ?></span>
                 </div>
-                <span class="f-w-600 f-14">to</span>
+                <span class="f-w-600 f-14"><?= __('to'); ?></span>
                 <div>
                   <i class="fa fa-calendar me-2"></i>
                   <span class="f-w-600 f-14"><?php echo csrProjectMonitoringText(csrProjectMonitoringDate(csrProjectMonitoringValue($project, 'project_end_date'))); ?></span>
@@ -358,15 +358,15 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <div class="mt-4 mb-3 bg-gray p-3">
               <div class="row">
                 <div class="col-md-4 col-sm-4 col-12 text-center mb-2">
-                  <p class="f-14 f-w-600 mb-0 text-muted">Approved (FY <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</p>
+                  <p class="f-14 f-w-600 mb-0 text-muted"><?= __('Approved (FY'); ?> <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</p>
                   <span class="f-w-600 f-18"><?php echo csrProjectMonitoringText(csrProjectMonitoringMoney($selectedApproved)); ?></span>
                 </div>
                 <div class="col-md-4 col-sm-4 col-12 text-center mb-2">
-                  <p class="f-14 f-w-600 mb-0 text-muted">Spent (FY <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</p>
+                  <p class="f-14 f-w-600 mb-0 text-muted"><?= __('Spent (FY'); ?> <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</p>
                   <span class="f-w-600 f-18"><?php echo csrProjectMonitoringText(csrProjectMonitoringMoney($selectedSpent)); ?></span>
                 </div>
                 <div class="col-md-4 col-sm-4 col-12 text-center mb-2">
-                  <p class="f-14 f-w-600 mb-0 text-muted">Unspent (FY <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</p>
+                  <p class="f-14 f-w-600 mb-0 text-muted"><?= __('Unspent (FY'); ?> <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</p>
                   <span class="f-w-600 f-18"><?php echo csrProjectMonitoringText(csrProjectMonitoringMoney($selectedUnspent)); ?></span>
                 </div>
               </div>
@@ -379,7 +379,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body text-center">
-          <h4 class="f-w-600 mb-0">No projects found for selected financial year.</h4>
+          <h4 class="f-w-600 mb-0"><?= __('No projects found for selected financial year.'); ?></h4>
         </div>
       </div>
     </div>
@@ -392,38 +392,38 @@ function csrProjectMonitoringFyLabel($financialYear) {
   <div class="col-lg-6 col-md-6 col-sm-12 col-12">
     <div class="card">
       <div class="card-body">
-        <h3 class="f-w-600">Compliance & Risk Overview</h3>
+        <h3 class="f-w-600"><?= htmlspecialchars(__('Compliance & Risk Overview'), ENT_QUOTES, 'UTF-8'); ?></h3>
         <div class="table-responsive mt-3 risk-overview">
           <table class="table table-bordered align-middle">
             <tr>
               <td><span class="user-icon-40 b-radius-15 bg-yellow-50 f-14 f-w-600 text-center"><i class="ti-user f-16 text-success f-w-600"></i></span></td>
-              <th scope="col">CSR Obligation Due Date</th>
+              <th scope="col"><?= __('CSR Obligation Due Date'); ?></th>
               <th scope="col"><?php echo csrProjectMonitoringText($selectedFinancialYear != '' ? '31 March ' . ('20' . substr($selectedFinancialYear, -2)) : '-'); ?></th>
-              <td><span class="form-label label label-success">On Track</span></td>
+              <td><span class="form-label label label-success"><?= __('On Track'); ?></span></td>
             </tr>
             <tr>
               <td><span class="user-icon-40 b-radius-15 bg-yellow-50 f-14 f-w-600 text-center"><i class="ti-user f-16 text-warning f-w-600"></i></span></td>
-              <th scope="col">Board Approval Pending</th>
+              <th scope="col"><?= __('Board Approval Pending'); ?></th>
               <th scope="col"><?php echo csrProjectMonitoringText(csrProjectMonitoringMoney($summary['board_approval_pending'] ?? 0)); ?></th>
-              <td><span class="form-label label label-warning">Pending</span></td>
+              <td><span class="form-label label label-warning"><?= __('Pending'); ?></span></td>
             </tr>
             <tr>
               <td><span class="user-icon-40 b-radius-15 bg-yellow-50 f-14 f-w-600 text-center"><i class="ti-user f-16 text-warning f-w-600"></i></span></td>
-              <th scope="col">Project Delayed</th>
+              <th scope="col"><?= __('Project Delayed'); ?></th>
               <th scope="col"><?php echo (int)($summary['delayed_project'] ?? 0); ?></th>
-              <td><span class="form-label label label-warning">At Risk</span></td>
+              <td><span class="form-label label label-warning"><?= __('At Risk'); ?></span></td>
             </tr>
             <tr>
               <td><span class="user-icon-40 b-radius-15 bg-red-50 f-14 f-w-600 text-center"><i class="ti-user f-16 text-danger f-w-600"></i></span></td>
-              <th scope="col">Unallocated CSR Funds</th>
+              <th scope="col"><?= __('Unallocated CSR Funds'); ?></th>
               <th scope="col"><?php echo csrProjectMonitoringText(csrProjectMonitoringMoney($summary['unallocated_funds'] ?? 0)); ?></th>
-              <td><span class="form-label label label-danger">High</span></td>
+              <td><span class="form-label label label-danger"><?= __('High'); ?></span></td>
             </tr>
             <tr>
               <td><span class="user-icon-40 b-radius-15 bg-yellow-50 f-14 f-w-600 text-center"><i class="ti-user f-16 text-warning f-w-600"></i></span></td>
-              <th scope="col">Utilization Certificate Pending</th>
+              <th scope="col"><?= __('Utilization Certificate Pending'); ?></th>
               <th scope="col"><?php echo (int)($summary['utilization_certificate_pending'] ?? 0); ?></th>
-              <td><span class="form-label label label-warning">Pending</span></td>
+              <td><span class="form-label label label-warning"><?= __('Pending'); ?></span></td>
             </tr>
           </table>
         </div>
@@ -433,7 +433,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
   <div class="col-lg-6 col-md-6 col-sm-12 col-12">
     <div class="card">
       <div class="card-body">
-        <h3 class="f-w-600">AI Insights</h3>
+        <h3 class="f-w-600"><?= __('AI Insights'); ?></h3>
         <div class="table-responsive mt-3 ai-insights">
           <table class="table table-bordered align-middle">
             <?php if (count((array)$insights) > 0) { ?>
@@ -445,12 +445,12 @@ function csrProjectMonitoringFyLabel($financialYear) {
               <?php } ?>
             <?php } else { ?>
               <tr>
-                <td colspan="2" class="text-center">No insights available</td>
+                <td colspan="2" class="text-center"><?= __('No insights available'); ?></td>
               </tr>
             <?php } ?>
           </table>
         </div>
-        <a href="index.php?option=COM_VIEW_CSR_DASHBOARD&fa_year=<?php echo csrProjectMonitoringText(urlencode($selectedFinancialYear)); ?>" class="bg-blue-50 p-2 b-radius-30 float-end f-w-600 text-primary">View Detailed Insights</a>
+        <a href="index.php?option=COM_VIEW_CSR_DASHBOARD&fa_year=<?php echo csrProjectMonitoringText(urlencode($selectedFinancialYear)); ?>" class="bg-blue-50 p-2 b-radius-30 float-end f-w-600 text-primary"><?= __('View Detailed Insights'); ?></a>
       </div>
     </div>
   </div>
@@ -458,7 +458,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
 
 <div class="card">
   <div class="card-body">
-    <h3>Impact Snapshot (FY <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</h3>
+    <h3><?= __('Impact Snapshot (FY'); ?> <?php echo csrProjectMonitoringText(csrProjectMonitoringFyLabel($selectedFinancialYear)); ?>)</h3>
     <div class="user-details-sec mt-3">
       <div class="details-box">
         <div class="card m-h-auto b-radius-10 mb-2">
@@ -466,7 +466,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <div class="d-flex">
               <span class="user-icon bg-blue-50 p-2 b-radius-15 text-center me-3"><i class="fa fa-graduation-cap f-24 text-primary"></i></span>
               <div class="d-inline-block">
-                <span class="f-12 f-w-600">Student Supported</span>
+                <span class="f-12 f-w-600"><?= __('Student Supported'); ?></span>
                 <h4 class="f-30 f-w-600"><?php echo (int)($impact['student_supported'] ?? 0); ?></h4>
               </div>
             </div>
@@ -479,7 +479,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <div class="d-flex">
               <span class="user-icon bg-purple-50 p-2 b-radius-15 text-center me-3"><i class="fa fa-home f-24 text-purple"></i></span>
               <div class="d-inline-block">
-                <span class="f-12 f-w-600">Villages Covered</span>
+                <span class="f-12 f-w-600"><?= __('Villages Covered'); ?></span>
                 <h4 class="f-24 f-w-600"><?php echo (int)($impact['villages_covered'] ?? 0); ?></h4>
               </div>
             </div>
@@ -492,7 +492,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <div class="d-flex">
               <span class="user-icon bg-red-50 p-2 b-radius-15 text-center me-3"><i class="far fa-heart f-24 text-danger"></i></span>
               <div class="d-inline-block">
-                <span class="f-12 f-w-600">Health Camps Conducted</span>
+                <span class="f-12 f-w-600"><?= __('Health Camps Conducted'); ?></span>
                 <h4 class="f-24 f-w-600"><?php echo (int)($impact['health_camps_conducted'] ?? 0); ?></h4>
               </div>
             </div>
@@ -505,7 +505,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <div class="d-flex">
               <span class="user-icon bg-green-50 p-2 b-radius-15 text-center me-3"><i class="fa fa-tree f-24 text-success"></i></span>
               <div class="d-inline-block">
-                <span class="f-12 f-w-600">Trees Planted</span>
+                <span class="f-12 f-w-600"><?= __('Trees Planted'); ?></span>
                 <h4 class="f-24 f-w-600"><?php echo (int)($impact['trees_planted'] ?? 0); ?></h4>
               </div>
             </div>
@@ -518,7 +518,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
             <div class="d-flex">
               <span class="user-icon bg-purple-50 p-2 b-radius-15 text-center me-3"><i class="fas fa-female f-24 text-purple"></i></span>
               <div class="d-inline-block">
-                <span class="f-12 f-w-600">Women Benefited</span>
+                <span class="f-12 f-w-600"><?= __('Women Benefited'); ?></span>
                 <h4 class="f-24 f-w-600"><?php echo (int)($impact['women_benefited'] ?? 0); ?></h4>
               </div>
             </div>
