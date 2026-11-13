@@ -34,10 +34,10 @@ foreach ($querylist as $value) {
         <form method="post" action="">
             <div class="notes">
                 <?php foreach ($querytypelist as $querytype) { ?>
-                    <input aria-label="Query Type" type="radio" name="query_type" value="<?php echo $querytype['genc_detail_code']; ?>" id="imp">
-                    <label for="imp"><?php echo $querytype['genc_detail_name']; ?></label>
+                    <input aria-label="<?= htmlspecialchars(__('Query Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="query_type" value="<?php echo $querytype['genc_detail_code']; ?>" id="imp">
+                    <label for="imp"><?php echo __($querytype['genc_detail_name']); ?></label>
                 <?php } ?>
-                <textarea aria-label="Query Text" name="query_text" class="form-control mt-2"></textarea>
+                <textarea aria-label="<?= htmlspecialchars(__('Query Text'), ENT_QUOTES, 'UTF-8'); ?>" name="query_text" class="form-control mt-2"></textarea>
                 <input type="hidden" name="submit" value="query">
                 <input type="hidden" name="company_id" value="<?php echo $_SESSION['company_id']; ?>">
                 <input type="hidden" name="trno" value="<?php echo $tran_no; ?>">
@@ -46,7 +46,7 @@ foreach ($querylist as $value) {
                 <input type="hidden" name="created_by" value="<?php echo $_SESSION['userid']; ?>">
                 <input type="hidden" name="send_id" value="<?php echo $originator; ?>">
                 <input type="hidden" name="new_reply" value="N">
-                <button class="btn btn-info" style="margin-top: 10px;">Submit New Query</button>
+                <button class="btn btn-info" style="margin-top: 10px;"><?= __('Submit New Query'); ?></button>
 
             </div>
         </form>
@@ -84,7 +84,7 @@ foreach ($querylist as $value) {
 
                                     <?php if($replay_display == 'Y'){ ?>
                                         <span class="text-muted font-weight-normal font-size-sm">
-                                            <button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" onclick="replyquery(this.id)" id="<?php echo $k; ?>">Reply</button>
+                                            <button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" onclick="replyquery(this.id)" id="<?php echo $k; ?>"><?= __('Reply'); ?></button>
                                         </span>
                                     <?php } ?>
                                 </div>
@@ -107,7 +107,7 @@ foreach ($querylist as $value) {
                                         <div class="kt-notes__section">
                                             <div class="kt-notes__info">
                                                 <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder pr-6">
-                                                    Reply&nbsp;<?php echo $m; ?>:&nbsp;&nbsp; <?php echo $_SESSION['users'][$answer['created_by']]; ?>
+                                                    <?= __('Reply'); ?>&nbsp;<?php echo $m; ?>:&nbsp;&nbsp; <?php echo $_SESSION['users'][$answer['created_by']]; ?>
                                                 </a>
                                                 <span class="kt-notes__desc">
                                                     <?php echo date('d m, Y', strtotime($answer['created_date'])); ?>
@@ -126,7 +126,7 @@ foreach ($querylist as $value) {
                             <div style="margin-top: 5px; display: none" id="reply_<?php echo $k; ?>">
                                 <form action="" method="post">
                                     <div>
-                                        <textarea aria-label="Query Text" type="text" class="form-control" name="query_text"></textarea>
+                                        <textarea aria-label="<?= htmlspecialchars(__('Query Text'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="query_text"></textarea>
                                     </div>
                                     <div style="margin-top: 3px;">
                                         <input type="hidden" name="parent_query" value="<?php echo $list['id']; ?>">
@@ -139,7 +139,7 @@ foreach ($querylist as $value) {
                                         <input type="hidden" name="created_by" value="<?php echo $_SESSION['userid']; ?>">
                                         <input type="hidden" name="send_id" value="<?php echo $list['created_by']; ?>">
                                         <input type="hidden" name="submit" value="query">
-                                        <button class="btn btn-primary btn-shadow-hover font-weight-bold mr-2">Submit</button>
+                                        <button class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"><?= __('Submit'); ?></button>
                                     </div>
                                 </form>
                             </div>
@@ -149,7 +149,7 @@ foreach ($querylist as $value) {
 } ?>
                     </div>
                 </div>
-                <?php }else{  echo '<div class="text-center p-20"><h4 class="text-info"><i class="fa fa-warning"></i> No Queries</h
+                <?php }else{  echo '<div class="text-center p-20"><h4 class="text-info"><i class="fa fa-warning"></i> '.__('No Queries').'</h
   4></div>';
 } ?>
             </div>
