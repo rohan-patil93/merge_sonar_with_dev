@@ -70,7 +70,7 @@ foreach($employees as $emplist){
     function insertEmployeePopUp(emp_id=""){
 
         $('#kt_modal_dynamic_popup').modal("show");
-        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $('#dynamic_popup1').html(htmloader);
 
         jQuery.ajax({
@@ -121,8 +121,8 @@ foreach($employees as $emplist){
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             closeOnConfirm: true,
             closeOnCancel: true
         },
@@ -167,11 +167,11 @@ foreach($employees as $emplist){
                 <div class="flex-shrink-0 m-r-30 m-l-25 mt-lg-0 mt-3">
                     <?php if($_SESSION['user']['user_photo']!=""){ ?>
                     <div class="symbol symbol-50 symbol-lg-120">
-                      <img src="../uploads/all/<?php echo $_SESSION['user']['user_photo']; ?>" class="img-120 " alt="Details" onerror="this.src='uploads/all/no-image.jpg';"/>
+                      <img src="../uploads/all/<?php echo $_SESSION['user']['user_photo']; ?>" class="img-120 " alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';"/>
                     </div>
                   <?php }else{ ?>
                     <div class="symbol symbol-50 symbol-lg-120">
-                      <img src="../uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-120 " alt="Details" onerror="this.src='uploads/all/no-image.jpg';"/>
+                      <img src="../uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-120 " alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';"/>
                     </div>
                   <?php } ?>
 
@@ -206,7 +206,7 @@ foreach($employees as $emplist){
                             <div class="card-body text-center p-0">
                                 <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                 <h3 class="text-facebook f-w-700"><?php echo count((array)$allocatedTaskemployees)+count((array)$unallocatedTaskemployees); ?></h3>
-                                <p>Total Employees</p>
+                                <p><?= __('Total Employees'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -216,7 +216,7 @@ foreach($employees as $emplist){
                             <div class="card-body text-center p-0">
                                 <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                 <h3 class="text-facebook f-w-700"><?php echo count((array)$allocatedTaskemployees); ?></h3>
-                                <p>Informed Employees</p>
+                                <p><?= __('Informed Employees'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -226,7 +226,7 @@ foreach($employees as $emplist){
                             <div class="card-body text-center p-0">
                                 <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                 <h3 class="text-facebook f-w-700"><?php echo count((array)$unallocatedTaskemployees); ?></h3>
-                                <p>Yet To Inform</p>
+                                <p><?= __('Yet To Inform'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -237,42 +237,42 @@ foreach($employees as $emplist){
                         <div class="s-caption  text-primary"><i class="ti-list f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totaltask; ?></h5>
-                            <p class="m-b-0 f-12">Total Task</p>
+                            <p class="m-b-0 f-12"><?= __('Total Task'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-danger"><i class="ti-time f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totalyettostartcnttask; ?></h5>
-                            <p class="m-b-0 f-12">Yet To Start</p>
+                            <p class="m-b-0 f-12"><?= __('Yet To Start'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-info"><i class="ti-timer f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totalinprogresstask; ?></h5>
-                            <p class="m-b-0  f-12">In Progress</p>
+                            <p class="m-b-0  f-12"><?= __('In Progress'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-info"><i class="ti-write f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totalreviewpendingtask; ?></h5>
-                            <p class="m-b-0 f-12">Review</p>
+                            <p class="m-b-0 f-12"><?= __('Review'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-success"><i class="ti-check-box f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totalapprovedtask; ?></h5>
-                            <p class="m-b-0 f-12">Completed</p>
+                            <p class="m-b-0 f-12"><?= __('Completed'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-danger"><i class="ti-pulse f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0 text-danger"><?php echo $totaldelayedcnttask; ?></h5>
-                            <p class="m-b-0 f-12 text-danger">Delayed Task</p>
+                            <p class="m-b-0 f-12 text-danger"><?= __('Delayed Task'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -287,10 +287,10 @@ foreach($employees as $emplist){
                 <div class="col-lg-8">
                     <ul class="nav md-tabs infisuite_tab mt-2 mb-2">
                         <li class="nav-item">
-                            <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#allocatedtask" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Informed Employees  <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$allocatedTaskemployees);?></span></a>
+                            <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#allocatedtask" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Informed Employees'); ?>  <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$allocatedTaskemployees);?></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#unallocatedtask" role="tab"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Yet To Inform   <span class="form-label label label-xs label-danger m-l-10"><?php echo count((array)$unallocatedTaskemployees);?></span></a>
+                            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#unallocatedtask" role="tab"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Yet To Inform'); ?>   <span class="form-label label label-xs label-danger m-l-10"><?php echo count((array)$unallocatedTaskemployees);?></span></a>
                         </li>
                     </ul>
                 </div>
@@ -298,10 +298,10 @@ foreach($employees as $emplist){
             <div class="tab-content tabs">
                 <div class="tab-pane card-body p-0 active" id="allocatedtask" role="tabpanel">
                     <div class="card-header  ">
-                        <h5>Allocated Task &nbsp;<span class="form-label label label-md label-warning float-right"><?php echo count((array)$allocatedTaskemployees); ?> </span></h5>
+                        <h5><?= __('Allocated Task'); ?> &nbsp;<span class="form-label label label-md label-warning float-right"><?php echo count((array)$allocatedTaskemployees); ?> </span></h5>
                         <div class="card-header-right table-card-header ">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" id="dynamicfilterhideshow_allocated" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                <input type="text" id="dynamicfilterhideshow_allocated" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="input-group-text addon-style">
                                     <span class=""><span class="ti-search text-white mt-2"></span></span>
                                 </span>
@@ -315,14 +315,14 @@ foreach($employees as $emplist){
                          if(count((array)($allocatedTaskemployees)) != 0){ ?>
                         <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                             <thead>
-                                <tr><th scope="col">Employees</th>
-                                    <th scope="col">Task</th>
-                                    <th scope="col">Yet To Start</th>
-                                    <th scope="col">In-progress</th>
-                                    <th scope="col">Review</th>
-                                    <th scope="col">Completed</th>
+                                <tr><th scope="col"><?= __('Employees'); ?></th>
+                                    <th scope="col"><?= __('Task'); ?></th>
+                                    <th scope="col"><?= __('Yet To Start'); ?></th>
+                                    <th scope="col"><?= __('In-progress'); ?></th>
+                                    <th scope="col"><?= __('Review'); ?></th>
+                                    <th scope="col"><?= __('Completed'); ?></th>
 
-                                    <th scope="col">Status</th>
+                                    <th scope="col"><?= __('Status'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -342,9 +342,9 @@ foreach($employees as $emplist){
 
                                         <div class="align-middle">
                                             <?php if($onboard_emp['image'] !=""){?>
-                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="Attachment Preview" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73 text-primary">
                                                 <h6 class="mb-0"><?php echo $onboard_emp['display_name']; ?></h6>
@@ -381,7 +381,7 @@ foreach($employees as $emplist){
                         </table>
                         <?php  }else{ ?>
                         <div class="card-px text-center py-20 mt-2">
-                            <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Task </p>
+                            <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Task'); ?> </p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
@@ -392,10 +392,10 @@ foreach($employees as $emplist){
                 </div>
                 <div class="tab-pane card-body p-0" id="unallocatedtask" role="tabpanel">
                     <div class="card-header">
-                        <h5>Unallocated Task</h5>
+                        <h5><?= __('Unallocated Task'); ?></h5>
                         <div class="card-header-right table-card-header ">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" id="dynamicfilterhideshow_unallocated" data-id="categoryfilter_2" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                <input type="text" id="dynamicfilterhideshow_unallocated" data-id="categoryfilter_2" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="input-group-text addon-style">
                                     <span class=""><span class="ti-search text-white mt-2"></span></span>
                                 </span>
@@ -403,14 +403,14 @@ foreach($employees as $emplist){
                         </div>
                     </div>
                     <div class="card-body">
-                            <button class="btn btn-primary checked_emp" style="display: none;" onclick="assignTaskCheckedEmployee()"> Requist Tax Declaration </button>
+                            <button class="btn btn-primary checked_emp" style="display: none;" onclick="assignTaskCheckedEmployee()"> <?= __('Requist Tax Declaration'); ?> </button>
                           <?php if(count((array)($unallocatedTaskemployees)) != 0){ ?>
                         <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_2">
                             <thead>
                                 <tr><th scope="col"></th>
-                                    <th scope="col">Employees</th>
-                                    <th scope="col">Joining Date</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Employees'); ?></th>
+                                    <th scope="col"><?= __('Joining Date'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -423,7 +423,7 @@ foreach($employees as $emplist){
                                     <td>
                                         <div class="checkbox-fade fade-in-primary m-0" role="group" onchange="assigneTaskChecked()">
                                             <label class="form-label text-auto-hight line-height24 m-0" >
-                                                <input aria-label="Checkbox" type="checkbox" value="<?php echo $onboard_emp['id']; ?>" class="check_emp_id" >
+                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="<?php echo $onboard_emp['id']; ?>" class="check_emp_id" >
                                                 <span class="cr float-left m-0">
                                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                 </span>
@@ -433,9 +433,9 @@ foreach($employees as $emplist){
                                     <td><a href="index.php?option=COM_VIEW_ONBOARDING_EMPLOYEE_DASHBOARDS&Rid=<?php echo $empiddecode; ?>&FY=<?php echo $finance_tax_year; ?>" target="_blank">
                                          <div class="align-middle">
                                             <?php if($onboard_emp['image'] !=""){?>
-                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="Attachment Preview" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73 text-primary">
                                                 <h6 class="mb-0"><?php echo $onboard_emp['display_name']; ?></h6>
@@ -451,7 +451,7 @@ foreach($employees as $emplist){
                                     </td>
                                     <td>
                                         <?php if($empidwithuserid[$onboard_emp['finance_buddy']] !=""){ ?>
-                                        <button class="btn btn-primary btn_emp" onclick="assignTaskEmployee('<?php echo $onboard_emp['id']; ?>')"> Requist Tax Declaration</button></td>
+                                        <button class="btn btn-primary btn_emp" onclick="assignTaskEmployee('<?php echo $onboard_emp['id']; ?>')"> <?= __('Requist Tax Declaration'); ?></button></td>
                                         <?php }else{ echo "-";
 } ?>
                                 </tr>
@@ -460,7 +460,7 @@ foreach($employees as $emplist){
                         </table>
                         <?php  }else{ ?>
                              <div class="card-px text-center py-20 mt-2">
-                              <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Task </p>
+                              <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Task'); ?> </p>
                               <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                               </div>
@@ -474,17 +474,17 @@ foreach($employees as $emplist){
 <div class="col-lg-4">
     <ul class="nav md-tabs infisuite_tab mt-2 mb-2">
         <li class="nav-item">
-            <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#taskstatustab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Task Status</a>
+            <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#taskstatustab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Task Status'); ?></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#reviewpenddingtab" role="tab"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Review Pendings  <span class="form-label label label-xs label-danger m-l-10"><?php echo count((array)$action_transaction_activity_schedule);?></span></a>
+            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#reviewpenddingtab" role="tab"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Review Pendings'); ?>  <span class="form-label label label-xs label-danger m-l-10"><?php echo count((array)$action_transaction_activity_schedule);?></span></a>
         </li>
     </ul>
     <div class="tab-content tabs">
         <div class="tab-pane card-body p-0 active" id="taskstatustab" role="tabpanel">
             <div class="card">
                 <div class="card-header">
-                    <h5>Task Status</h5>
+                    <h5><?= __('Task Status'); ?></h5>
                     <div class="card-header-right"></div>
                 </div>
                 <div class="card-body custom-scroll" style="min-height: 400px; max-height: 400px;">
@@ -492,7 +492,7 @@ foreach($employees as $emplist){
                     <input type="hidden" name="chart_data_contact_chart" id="chart_data_contact_chart" value='<?php echo json_encode((array)$crm_contacts_chart); ?>' >
                     <?php if(count((array)$crm_contacts_chart) =='0'){ ?>
                       <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
@@ -506,7 +506,7 @@ foreach($employees as $emplist){
         <div class="tab-pane card-body p-0" id="reviewpenddingtab" role="tabpanel">
             <div class="card">
                 <div class="card-header  ">
-                    <h5>Review Pendings </h5>
+                    <h5><?= __('Review Pendings'); ?> </h5>
                         <div class="card-header-right table-card-header "><span class="form-label label label-md label-warning float-right"><?php echo count((array)$action_transaction_activity_schedule); ?> </span></div>
                 </div>
                 <div class="card-body">
@@ -515,7 +515,7 @@ foreach($employees as $emplist){
                         <table class="table table-hover m-b-0 register_vendor_filter" style="font-size:13px;" id="categoryfilter_3">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="p-2">Task Details</th>
+                                    <th scope="col" class="p-2"><?= __('Task Details'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -526,9 +526,9 @@ foreach($employees as $emplist){
                                 <tr>
                                     <td class="w-b-w-s p-2"><a href="index.php?option=COM_INSERT_TRANSACTION_ACTIVITY_SCHEDULES&T1=task_tab&T2=action_task_tab&T3=action_pendding_tab&Rid=<?php echo $empiddecode; ?>" target="_blank"><div class="align-middle">
                                                 <?php if($onboardinguseridres['image'] !=""){?>
-                                                    <img src="uploads/all/<?php echo $onboardinguseridres['image']; ?>"  class="img-radius img-40 align-top m-r-5" alt="User Profile" onerror="this.src='uploads/all/no-image.jpg';">
+                                                    <img src="uploads/all/<?php echo $onboardinguseridres['image']; ?>"  class="img-radius img-40 align-top m-r-5" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
                                                 <?php } else { ?>
-                                                    <span  alt="user" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboardinguseridres['display_name']); ?></span>
+                                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboardinguseridres['display_name']); ?></span>
                                                 <?php } ?>
                                                 <div class="d-inline-block width73 text-primary">
                                                     <?php
@@ -539,7 +539,7 @@ foreach($employees as $emplist){
                                                         <h6 class="mb-0 text-primary"><i class="ti-user"></i> <?php echo $onboardinguseridres['display_name']; ?></h6>
                                                     <?php } ?>
                                                     <p class="text-muted m-b-0"><?php echo $taskdetails['task_name']; ?></p>
-                                                    <p class="text-muted m-b-0 f-12 f-w-600">Request Date : <?php echo fromDate($vendorsres['request_date']); ?></p>
+                                                    <p class="text-muted m-b-0 f-12 f-w-600"><?= __('Request Date'); ?> : <?php echo fromDate($vendorsres['request_date']); ?></p>
                                                 </div>
                                             </div>
                                         </a>
@@ -550,7 +550,7 @@ foreach($employees as $emplist){
                         </table>
                         <?php  }else{ ?>
                         <div class="card-px text-center py-20 mt-2">
-                            <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Review Pending  </p>
+                            <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Review Pending'); ?>  </p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
