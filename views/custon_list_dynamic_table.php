@@ -95,7 +95,7 @@ $total_pages = $dynamictableres['total_pages'];
                              }
 }?>
                       <?php } ?>
-                      <th scope="col">Action</th>
+                      <th scope="col"><?= __('Action'); ?></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -131,7 +131,7 @@ $total_pages = $dynamictableres['total_pages'];
                                 $str = "<div style='background: #".$bill[$header['name']].";width: 20px;height: 20px;'>&nbsp;</div>";
                               }elseif( $header['type'] == 'image'){
                                 $bimage = 'uploads/all/'.$bill[$header['name']];
-                                $str = "<img src='$bimage' style='width:35px;' alt='Preview'>";
+                                $str = "<img src='$bimage' style='width:35px;' alt='".htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8')."'>";
                               }else{
                                 $str =  $bill[$header['name']];
 
@@ -193,10 +193,10 @@ $total_pages = $dynamictableres['total_pages'];
                             $view =  "index.php?option=".$view_page."&Rid=".$rid
                           ?>
 
-                  <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="Edit Details" <?php echo $edit_permissionbtn; ?>><i class="fa fa-edit" ></i></a>
+                  <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" <?php echo $edit_permissionbtn; ?>><i class="fa fa-edit" ></i></a>
                              <?php if($page_details['insert_page_type'] == 1){ ?>
-                 <a href="<?php echo $link_copy; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Copy Details"><i class="fa fa-clone"></i> </a>
-                              <a href="<?php echo $view; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="View Details"><i class="fa fa-eye"></i></a>
+                 <a href="<?php echo $link_copy; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Copy Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-clone"></i> </a>
+                              <a href="<?php echo $view; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i></a>
                             <?php } ?>
 
              </td>
@@ -207,7 +207,7 @@ $total_pages = $dynamictableres['total_pages'];
                   </tbody>
                    <?php }else{ ?>
                     <div class="card-px text-center py-20 m-t-30">
-                        <h2 class="f-40 fw-bolder m-b-30">Hello!</h2>
+                        <h2 class="f-40 fw-bolder m-b-30"><?= __('Hello!'); ?></h2>
                         <p class="text-muted f-16 fw-bold m-b-30"><?php echo $empty_data; ?></p>
                         <?php if($_SESSION['user_type']!=3){ ?>
                         <?php if($list['insert_page_type'] ==2){?>
@@ -235,10 +235,10 @@ $total_pages = $dynamictableres['total_pages'];
                 </table>
 
 <div class="mt-5" >
-<nav aria-label="Page navigation example p-2" style="overflow-x: scroll !important;">
+<nav aria-label="<?= htmlspecialchars(__('Page navigation example p-2'), ENT_QUOTES, 'UTF-8'); ?>" style="overflow-x: scroll !important;">
     <ul class="pagination">
       <li class="page-item <?php echo ($current_page =="1" || $current_page =="")?"disabled":""; ?>">
-          <button type="button" class="page-link" tabindex="-1" onclick="dynamicFilterTable('','<?php echo $current_page-1; ?>')">Previous</button>
+          <button type="button" class="page-link" tabindex="-1" onclick="dynamicFilterTable('','<?php echo $current_page-1; ?>')"><?= __('Previous'); ?></button>
       </li>
     <?php
        for ($i = 1; $i <= $total_pages; $i++){
@@ -250,7 +250,7 @@ $total_pages = $dynamictableres['total_pages'];
         <?php } ?>
 
         <li class="page-item <?php echo ($total_pages <= $current_page)?"disabled":""; ?>">
-            <button type="button" class="page-link" tabindex="-1" onclick="dynamicFilterTable('','<?php echo $current_page+1; ?>')">Next</button>
+            <button type="button" class="page-link" tabindex="-1" onclick="dynamicFilterTable('','<?php echo $current_page+1; ?>')"><?= __('Next'); ?></button>
         </li>
     </ul>
 </nav>
