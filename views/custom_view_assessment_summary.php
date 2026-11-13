@@ -97,7 +97,7 @@ $who_can_see_the_results = json_decode($assessment_details['who_can_see_the_resu
 
                                                                          <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
 
                                         </div>
@@ -119,19 +119,19 @@ $who_can_see_the_results = json_decode($assessment_details['who_can_see_the_resu
                                                     </span>
                                                 </div>
                                                 <div class="mr-5">
-                                                    <div class="font-weight-bold mb-2 mr-5">Responded </div>
+                                                    <div class="font-weight-bold mb-2 mr-5"><?= __('Responded'); ?> </div>
                                                     <span class="form-label label label-lg label-primary">
                                                         <?php echo $no_of_responds;?>
                                                     </span>
                                                 </div>
                                                 <div class="mr-5">
-                                                    <div class="font-weight-bold mb-2 mr-5">Started Date</div>
+                                                    <div class="font-weight-bold mb-2 mr-5"><?= __('Started Date'); ?></div>
                                                     <span class="form-label label label-lg label-primary">
                                                         <?php echo date('d M, Y',strtotime($assessment_details['assessment_start_date']));?>
                                                     </span>
                                                 </div>
                                                 <div class="mr-5">
-                                                    <div class="font-weight-bold mb-2 mr-5">Expiry Date</div>
+                                                    <div class="font-weight-bold mb-2 mr-5"><?= __('Expiry Date'); ?></div>
                                                     <span class="form-label label label-lg label-danger">
                                                         <?php echo date('d M, Y',strtotime($assessment_details['assessment_end_date']));?>
                                                     </span>
@@ -142,7 +142,7 @@ $who_can_see_the_results = json_decode($assessment_details['who_can_see_the_resu
                                         <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3 col-lg-4">
 
                                             <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                                <span class="fw-bold fs-6 text-gray-400">Completion Rate</span>
+                                                <span class="fw-bold fs-6 text-gray-400"><?= __('Completion Rate'); ?></span>
                                                 <span class="fw-bolder fs-6"><?php echo $rate; ?>%</span>
                                             </div>
                                             <div class="col-md-12">
