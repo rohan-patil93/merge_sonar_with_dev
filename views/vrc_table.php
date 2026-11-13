@@ -68,21 +68,21 @@
         htmlRows += '<div class="col-md-6 itemRow cardid'+count+'"> <div class="card  p-5 "><button type="button" class="btn p-0 border-0 bg-transparent deleteiconcustom text-danger f-22" onclick="deleteitem('+count+')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete VRC Card" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-trash"></i></button>';
 
 
- htmlRows += '<div class="row"><div class="col-md-5"><span>job Title</span></div><div class="col-md-7"> <select aria-label="Product Code[]" class="form-select js-data-example-ajax-multiselectss'+count+' col-lg-4 selectitemorservice"  name= "productCode[]" id="productCode__3"+count+'"  onchange="itemChangejob(this.value,'+count+')" data-tablename="job_titles"  data-fieldsname="job_title" > <option value="0"> Select Job Title </option></select><input type="hidden" name="item_name[]" id="item_name__3"+count+'" class="form-control" value="">  <input type="hidden" name="purchase_account[]" id="purchase_account__3"+count+'" class="form-control" value=""> <input type="hidden" name="purchase_account_aval[]" id="purchase_account_aval__3"+count+'" class="form-control" value=""></div></div><hr>';
- htmlRows += '<div class="row"><div class="col-md-5"><span>Description</span></div><div class="col-md-7"> <input type="text" name="productName[]" id="productName__3"+count+'" value="" class="form-control " placeholder="Description" data-bs-toggle="tooltip" data-placement="bottom" title="Description"></div></div><hr>';
-htmlRows += '<div class="row"><div class="col-md-5"><span>Min Experience</span></div><div class="col-md-7"> <div class="input-group input-group-button "> <input type="text" name="min_exp[]" id="min_exp__2"+count+'"  class="form-control form-control-sm width1" value="" placeholder="Min Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Minmum Experience" > <span class="input-group-text addon-style"><span class="">Years</span></span></div></div></div><hr>';
- htmlRows += '<div class="row"><div class="col-md-5"><span>Max Experience</span></div><div class="col-md-7"><div class="input-group input-group-button "> <input type="hidden" name="quantity_old[]" id="quantity_old__2"+count+'"  class="form-control amount" value=""><input type="text" name="max_exp[]" id="max_exp__2"+count+'" class="form-control form-control-sm  width1" value="" placeholder="Max Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Maxmum Experience"> <span class="input-group-text addon-style"><span class="">Years</span></span></div> </div></div><hr>';
-  htmlRows += '<div class="row"><div class="col-md-5"><span>Monthly Leaves</span></div><div class="col-md-7"><div class="input-group input-group-button"> <input type="text" name="min_leave[]" id="min_leave__2"+count+'" class="form-control width1" placeholder="Monthly Leaves" data-bs-toggle="tooltip" data-placement="bottom" title="Monthly Leaves"> <span class="input-group-text addon-style"><span class="">Days</span></span></div></div></div><hr>';
- htmlRows += '<div class="row"><div class="col-md-5"><span>Units *</span></div><div class="col-md-7"><select aria-label="Uom[]" class="form-control form-select js-example-basic-single"  name= "uom[]"  id="uom__2"+count+'"><option value="0"> Select Any Units </option> <?php foreach ($uomlist as $uom) {  ?>
+ htmlRows += '<div class="row"><div class="col-md-5"><span><?= htmlspecialchars(__('job Title'), ENT_QUOTES, 'UTF-8'); ?></span></div><div class="col-md-7"> <select aria-label="Product Code[]" class="form-select js-data-example-ajax-multiselectss'+count+' col-lg-4 selectitemorservice"  name= "productCode[]" id="productCode__3"+count+'"  onchange="itemChangejob(this.value,'+count+')" data-tablename="job_titles"  data-fieldsname="job_title" > <option value="0"> <?= htmlspecialchars(__('Select Job Title'), ENT_QUOTES, 'UTF-8'); ?> </option></select><input type="hidden" name="item_name[]" id="item_name__3"+count+'" class="form-control" value="">  <input type="hidden" name="purchase_account[]" id="purchase_account__3"+count+'" class="form-control" value=""> <input type="hidden" name="purchase_account_aval[]" id="purchase_account_aval__3"+count+'" class="form-control" value=""></div></div><hr>';
+ htmlRows += '<div class="row"><div class="col-md-5"><span><?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?></span></div><div class="col-md-7"> <input type="text" name="productName[]" id="productName__3"+count+'" value="" class="form-control " placeholder="Description" data-bs-toggle="tooltip" data-placement="bottom" title="Description"></div></div><hr>';
+htmlRows += '<div class="row"><div class="col-md-5"><span><?= htmlspecialchars(__('Min Experience'), ENT_QUOTES, 'UTF-8'); ?></span></div><div class="col-md-7"> <div class="input-group input-group-button "> <input type="text" name="min_exp[]" id="min_exp__2"+count+'"  class="form-control form-control-sm width1" value="" placeholder="Min Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Minmum Experience" > <span class="input-group-text addon-style"><span class="">Years</span></span></div></div></div><hr>';
+ htmlRows += '<div class="row"><div class="col-md-5"><span><?= htmlspecialchars(__('Max Experience'), ENT_QUOTES, 'UTF-8'); ?></span></div><div class="col-md-7"><div class="input-group input-group-button "> <input type="hidden" name="quantity_old[]" id="quantity_old__2"+count+'"  class="form-control amount" value=""><input type="text" name="max_exp[]" id="max_exp__2"+count+'" class="form-control form-control-sm  width1" value="" placeholder="Max Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Maxmum Experience"> <span class="input-group-text addon-style"><span class="">Years</span></span></div> </div></div><hr>';
+  htmlRows += '<div class="row"><div class="col-md-5"><span><?= htmlspecialchars(__('Monthly Leaves'), ENT_QUOTES, 'UTF-8'); ?></span></div><div class="col-md-7"><div class="input-group input-group-button"> <input type="text" name="min_leave[]" id="min_leave__2"+count+'" class="form-control width1" placeholder="Monthly Leaves" data-bs-toggle="tooltip" data-placement="bottom" title="Monthly Leaves"> <span class="input-group-text addon-style"><span class="">Days</span></span></div></div></div><hr>';
+ htmlRows += '<div class="row"><div class="col-md-5"><span><?= htmlspecialchars(__('Units'), ENT_QUOTES, 'UTF-8'); ?> *</span></div><div class="col-md-7"><select aria-label="Uom[]" class="form-control form-select js-example-basic-single"  name= "uom[]"  id="uom__2"+count+'"><option value="0"> <?= htmlspecialchars(__('Select Any Units'), ENT_QUOTES, 'UTF-8'); ?> </option> <?php foreach ($uomlist as $uom) {  ?>
                  <option    value ="<?php echo $uom[genc_detail_code]; ?>" > <?php echo $uom[genc_detail_name]; ?> </option> <?php
 } ?>  </select> </div></div><hr>';
 
 
- htmlRows += '<div class="row"><div class="col-md-5"><span>Resources</span></div><div class="col-md-7"><input aria-label="Resources" type="text" name="quantity[]" id="quantity__2"+count+'"  onblur="quantityCheckold(this.id)"  class="form-control amount" value=""  autocomplete="off" placeholder="Resources"> </div></div><hr>';
+ htmlRows += '<div class="row"><div class="col-md-5"><span><?= htmlspecialchars(__('Resources'), ENT_QUOTES, 'UTF-8'); ?></span></div><div class="col-md-7"><input aria-label="Resources" type="text" name="quantity[]" id="quantity__2"+count+'"  onblur="quantityCheckold(this.id)"  class="form-control amount" value=""  autocomplete="off" placeholder="Resources"> </div></div><hr>';
 
-  htmlRows += '<div class="row"><div class="col-md-5"><span>Base Rate*</span></div><div class="col-md-7"> <input aria-label="Rate" type="text" name="price[]" id="price__2"+count+'" class="form-control price amount" value="" autocomplete="off" placeholder="Rate"></div></div><hr>';
-    htmlRows += '<div class="row"><div class="col-md-5"><span>Amount</span></div><div class="col-md-7"><input type="hidden" name="dis_ptax_amount[]" value="" readonly class="form-control price amount" id="dis_ptax_amount__2"+count+'"><input type="hidden" name="pdiscount_amount[]" value="" readonly class="form-control price amount" id="pdiscount_amount__2"+count+'"><input type="hidden" name="ptax_amount[]" value="" readonly class="form-control price amount" id="ptax_amount__2"+count+'"> <input type="hidden" name="p_amount[]" value="" readonly class="form-control price amount" id="p_amount__2"+count+'"><input aria-label="Amount" type="text" name="dis_amount[]" readonly id="dis_amount__2"+count+'" class="form-control amount" placeholder="Amount" value="" autocomplete="off"> <input type="hidden" name="amount[]" readonly id="amount__2"+count+'" class="form-control amount" value=""></div></div><hr>';
-     htmlRows += '<div class="row"> <div class="col-md-5"><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="Experience Base[" type="checkbox"  name="experience_base['+(count-1)+']"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span> <span>Report Expe Base </span> </label>  </div> </div><div class="col-md-7"><div class="checkbox-fade fade-in-primary "> <label class="form-label"><input aria-label="Allow Overtime[" type="checkbox"  name="allow_overtime['+(count-1)+']"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span> <span>&nbsp;Allow Overtime </span></label></div></div></div>';
+  htmlRows += '<div class="row"><div class="col-md-5"><span><?= htmlspecialchars(__('Base Rate'), ENT_QUOTES, 'UTF-8'); ?>*</span></div><div class="col-md-7"> <input aria-label="Rate" type="text" name="price[]" id="price__2"+count+'" class="form-control price amount" value="" autocomplete="off" placeholder="Rate"></div></div><hr>';
+    htmlRows += '<div class="row"><div class="col-md-5"><span><?= htmlspecialchars(__('Amount'), ENT_QUOTES, 'UTF-8'); ?></span></div><div class="col-md-7"><input type="hidden" name="dis_ptax_amount[]" value="" readonly class="form-control price amount" id="dis_ptax_amount__2"+count+'"><input type="hidden" name="pdiscount_amount[]" value="" readonly class="form-control price amount" id="pdiscount_amount__2"+count+'"><input type="hidden" name="ptax_amount[]" value="" readonly class="form-control price amount" id="ptax_amount__2"+count+'"> <input type="hidden" name="p_amount[]" value="" readonly class="form-control price amount" id="p_amount__2"+count+'"><input aria-label="Amount" type="text" name="dis_amount[]" readonly id="dis_amount__2"+count+'" class="form-control amount" placeholder="Amount" value="" autocomplete="off"> <input type="hidden" name="amount[]" readonly id="amount__2"+count+'" class="form-control amount" value=""></div></div><hr>';
+     htmlRows += '<div class="row"> <div class="col-md-5"><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="Experience Base[" type="checkbox"  name="experience_base['+(count-1)+']"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span> <span><?= htmlspecialchars(__('Report Expe Base'), ENT_QUOTES, 'UTF-8'); ?> </span> </label>  </div> </div><div class="col-md-7"><div class="checkbox-fade fade-in-primary "> <label class="form-label"><input aria-label="Allow Overtime[" type="checkbox"  name="allow_overtime['+(count-1)+']"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span> <span>&nbsp;<?= htmlspecialchars(__('Allow Overtime'), ENT_QUOTES, 'UTF-8'); ?> </span></label></div></div></div>';
 
         htmlRows += '</div></div>';
         $('#invoiceItem').append(htmlRows);
@@ -158,13 +158,13 @@ htmlRows += '<div class="row"><div class="col-md-5"><span>Min Experience</span><
 function deleteitem(cardid){
 
 Swal.fire({
-  title: 'Are you sure?',
-  text: "You won't to Delete this!",
+  title: <?php echo json_encode(__('Are you sure?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+  text: <?php echo json_encode(__('You won\'t to Delete this!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
   icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, delete it!'
+  confirmButtonText: <?php echo json_encode(__('Yes, delete it!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
 }).then((result) => {
   if (result.isConfirmed) {
     $(".cardid"+cardid).remove();
@@ -187,14 +187,14 @@ Swal.fire({
 <div class="row" id="invoiceItem">
     <?php if(count((array)$table2)>0){ $i=1;
  foreach ($table2 as $tab2) { $tab2['id']=0; ?>
-    <div class="col-md-6 itemRow cardid<?php echo $i;?>"><div class="card  p-5 "><span class="deleteiconcustom text-danger f-22" onclick="deleteitem(<?php echo $i;?>)" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete VRC Card" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-trash"></i></span>
+    <div class="col-md-6 itemRow cardid<?php echo $i;?>"><div class="card  p-5 "><span class="deleteiconcustom text-danger f-22" onclick="deleteitem(<?php echo $i;?>)" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Delete VRC Card'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-trash"></i></span>
         <div class="row">
             <div class="col-md-5">
-                <span>job Title</span>
+                <span><?= __('job Title'); ?></span>
             </div>
             <div class="col-md-7">
-                  <select aria-label="Product Code[]" class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4"  data-tablename="job_titles"  data-fieldsname="job_title" name= "productCode[]"  id="productCode_<?php echo $i; ?>" onchange="itemChangejob(this.value,<?php echo $i; ?>)">
-                     <option value="0"> Select Job Title  </option>
+                  <select aria-label="<?= htmlspecialchars(__('Product Code'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4"  data-tablename="job_titles"  data-fieldsname="job_title" name= "productCode[]"  id="productCode_<?php echo $i; ?>" onchange="itemChangejob(this.value,<?php echo $i; ?>)">
+                     <option value="0"> <?= __('Select Job Title'); ?>  </option>
                     <?php $like_item_check = 0; foreach ($itemres as $item) {  if($tab2['item_id']== $item['id']){  ?>
                      <option selected value ='<?php echo $item['id']; ?>'> <?php echo $item['job_title']; ?> </option>
                         <?php } ?>
@@ -209,24 +209,24 @@ Swal.fire({
 
         <div class="row">
             <div class="col-md-5">
-                <span>Description</span>
+                <span><?= __('Description'); ?></span>
             </div>
             <div class="col-md-7">
 
-        <input aria-label="Product Name[]" type="text" name="productName[]" id="productName_<?php echo $i; ?>" value="<?php echo $tab2['description']; ?>" class="form-control " placeholder="Description" data-bs-toggle="tooltip" data-placement="bottom" title="Description">
+        <input aria-label="<?= htmlspecialchars(__('Product Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="productName[]" id="productName_<?php echo $i; ?>" value="<?php echo $tab2['description']; ?>" class="form-control " placeholder="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>">
 
             </div>
         </div>
         <hr>
          <div class="row">
             <div class="col-md-5">
-                <span>Min Experience</span>
+                <span><?= __('Min Experience'); ?></span>
             </div>
             <div class="col-md-7">
                  <div class="input-group input-group-button ">
-                    <input aria-label="Min Exp[]" type="text" name="min_exp[]" id="min_exp_<?php echo $i; ?>"  class="form-control form-control-sm width1" value="<?php echo $tab2['min_exp']; ?>" placeholder="Min Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Minmum Experience">
+                    <input aria-label="<?= htmlspecialchars(__('Min Exp'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="min_exp[]" id="min_exp_<?php echo $i; ?>"  class="form-control form-control-sm width1" value="<?php echo $tab2['min_exp']; ?>" placeholder="<?= htmlspecialchars(__('Min Exp'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Minmum Experience'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span class="input-group-text addon-style">
-                        <span class="">Years</span>
+                        <span class=""><?= __('Years'); ?></span>
                     </span>
                 </div>
             </div>
@@ -234,13 +234,13 @@ Swal.fire({
         <hr>
          <div class="row">
             <div class="col-md-5">
-                <span>Max Experience</span>
+                <span><?= __('Max Experience'); ?></span>
             </div>
             <div class="col-md-7">
                 <div class="input-group input-group-button ">
-                    <input aria-label="Max Exp[]" type="text" name="max_exp[]" id="max_exp_<?php echo $i; ?>" class="form-control form-control-sm width1" value="<?php echo $tab2['max_exp']; ?>" placeholder="Max Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Maxmum Experience">
+                    <input aria-label="<?= htmlspecialchars(__('Max Exp'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="max_exp[]" id="max_exp_<?php echo $i; ?>" class="form-control form-control-sm width1" value="<?php echo $tab2['max_exp']; ?>" placeholder="<?= htmlspecialchars(__('Max Exp'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Maxmum Experience'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span class="input-group-text addon-style">
-                        <span class="">Years</span>
+                        <span class=""><?= __('Years'); ?></span>
                     </span>
                 </div>
             </div>
@@ -248,13 +248,13 @@ Swal.fire({
         <hr>
          <div class="row">
             <div class="col-md-5">
-                <span>Monthly Leaves</span>
+                <span><?= __('Monthly Leaves'); ?></span>
             </div>
             <div class="col-md-7">
                   <div class="input-group input-group-button">
-        <input aria-label="Min Leave[]" type="text" class="form-control width1" name="min_leave[]" id="min_leave_<?php echo $i; ?>" placeholder="Monthly Leaves" data-bs-toggle="tooltip" value="<?php echo $tab2['min_leave']; ?>" data-placement="bottom" title="Monthly Leaves">
+        <input aria-label="<?= htmlspecialchars(__('Min Leave'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control width1" name="min_leave[]" id="min_leave_<?php echo $i; ?>" placeholder="<?= htmlspecialchars(__('Monthly Leaves'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" value="<?php echo $tab2['min_leave']; ?>" data-placement="bottom" title="<?= htmlspecialchars(__('Monthly Leaves'), ENT_QUOTES, 'UTF-8'); ?>">
     <span class="input-group-text addon-style">
-    <span class="">Days</span>
+    <span class=""><?= __('Days'); ?></span>
 </span>
     </div>
 
@@ -263,14 +263,14 @@ Swal.fire({
         <hr>
                 <div class="row">
             <div class="col-md-5">
-                <span>Unit *</span>
+                <span><?= __('Unit'); ?> *</span>
             </div>
             <div class="col-md-7">
-                <select aria-label="Uom[]" class="form-control form-select js-example-basic-single"  name= "uom[]"  id="uom_<?php echo $i; ?>">
-                    <option value="0"> Select Any UOM  </option>
+                <select aria-label="<?= htmlspecialchars(__('Uom'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single"  name= "uom[]"  id="uom_<?php echo $i; ?>">
+                    <option value="0"> <?= __('Select Any UOM'); ?>  </option>
                     <?php foreach ($uomlist as $uom) {  ?>
                          <option   <?php if($tab2['uom'] == $uom['genc_detail_code']){ ?> selected <?php
-} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo $uom['genc_detail_name']; ?> </option>
+} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo __($uom['genc_detail_name']); ?> </option>
                     <?php } ?>
                 </select>
             </div>
@@ -278,34 +278,34 @@ Swal.fire({
         <hr>
         <div class="row">
             <div class="col-md-5">
-                <span>Resources *</span>
+                <span><?= __('Resources'); ?> *</span>
             </div>
             <div class="col-md-7">
-                      <input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"  onblur="quantityCheckold(this.id)"  class="form-control amount" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off" placeholder="Resources">
+                      <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"  onblur="quantityCheckold(this.id)"  class="form-control amount" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off" placeholder="<?= htmlspecialchars(__('Resources'), ENT_QUOTES, 'UTF-8'); ?>">
         <input type="hidden" name="quantity_old[]" id="quantity_old_<?php echo $i; ?>"  class="form-control amount" value="<?php echo $tab2['quantity']; ?>">
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-md-5">
-                <span>Base Rate *</span>
+                <span><?= __('Base Rate'); ?> *</span>
             </div>
             <div class="col-md-7">
-                  <input aria-label="Price[]" type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off" placeholder="Rate">
+                  <input aria-label="<?= htmlspecialchars(__('Price'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off" placeholder="<?= htmlspecialchars(__('Rate'), ENT_QUOTES, 'UTF-8'); ?>">
 
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-md-5">
-                <span>Amount</span>
+                <span><?= __('Amount'); ?></span>
             </div>
             <div class="col-md-7">
                 <input type="hidden" name="dis_ptax_amount[]" value="<?php echo customeummarmonyformate($tab2['tax_amount']); ?>" readonly class="form-control price amount" id="dis_ptax_amount_<?php echo $i; ?>">
         <input type="hidden" name="pdiscount_amount[]" value="<?php echo customeummarmonyformate($tab2['tax_amount']); ?>" readonly class="form-control price amount" id="pdiscount_amount_<?php echo $i; ?>">
         <input type="hidden" name="ptax_amount[]" value="<?php echo $tab2['tax_amount']; ?>" readonly class="form-control price amount" id="ptax_amount_<?php echo $i; ?>">
          <input type="hidden" name="p_amount[]" value="<?php echo $tab2['amount']; ?>" readonly class="form-control price amount" id="p_amount_<?php echo $i; ?>">
-        <input aria-label="Dis Amount[]" type="text" name="dis_amount[]" readonly <?php echo $sty; ?> id="dis_amount_<?php echo $i; ?>" class="form-control amount" placeholder="Amount" value="<?php echo customeummarmonyformate($tab2['total_amount']); ?>" autocomplete="off">
+        <input aria-label="<?= htmlspecialchars(__('Dis Amount'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="dis_amount[]" readonly <?php echo $sty; ?> id="dis_amount_<?php echo $i; ?>" class="form-control amount" placeholder="<?= htmlspecialchars(__('Amount'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo customeummarmonyformate($tab2['total_amount']); ?>" autocomplete="off">
         <input type="hidden" name="amount[]" readonly id="amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo $tab2['total_amount']; ?>">
             </div>
         </div>
@@ -313,30 +313,30 @@ Swal.fire({
         <div class="row">
             <div class="col-md-2">
                 <?php if($_GET['Rid'] !="" && isset($_GET['Rid'])){ ?>
-                 <div class="btn btn-icon btn-primary btn-circle mr-2" onclick="toopenpredim(<?php echo $i.",".$tab2['id']; ?>)" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Per-diem" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fas fa-dollar-sign"></i></div>
+                 <div class="btn btn-icon btn-primary btn-circle mr-2" onclick="toopenpredim(<?php echo $i.",".$tab2['id']; ?>)" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Per-diem'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fas fa-dollar-sign"></i></div>
              <?php } ?>
             </div>
             <div class="col-md-5">
                  <div class="checkbox-fade fade-in-primary">
               <label class="form-label">
-                <input aria-label="Checkbox" type="checkbox" <?php if($tab2['experience_base']=='0'){ echo "checked";
+                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" <?php if($tab2['experience_base']=='0'){ echo "checked";
 } ?> name="experience_base[<?php echo $i; ?>]">
                 <span class="cr">
                   <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                 </span>
-                <span>Report Expe Base </span>
+                <span><?= __('Report Expe Base'); ?> </span>
               </label>
             </div>
             </div>
             <div class="col-md-5">
                  <div class="checkbox-fade fade-in-primary">
               <label class="form-label">
-                <input aria-label="Checkbox" type="checkbox" <?php if($tab2['allow_overtime']=='0'){ echo "checked";
+                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" <?php if($tab2['allow_overtime']=='0'){ echo "checked";
 } ?> name="allow_overtime[<?php echo $i; ?>]">
                 <span class="cr">
                   <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                 </span>
-                <span>Allow Overtime</span>
+                <span><?= __('Allow Overtime'); ?></span>
               </label>
             </div>
             </div>
