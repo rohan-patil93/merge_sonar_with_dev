@@ -61,7 +61,7 @@ $questions = $data['questions'];
   <h5 class="modal-title">
     <?php echo "Vendor Feedback - ".$feedback_setup_details['feedback_name']; ?>
   </h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body1 col-lg-9 mx-auto mt-1 mb-5">
   <form method="post" id="myform" name="myform" action="">
@@ -98,7 +98,7 @@ $questions = $data['questions'];
                 }
                 ?>
                 <b> <div class="<?php echo $option_cat;?>-group required float-left ml-2 deep">
-                  <input aria-label="Input field" type="<?php echo $option_cat;?>" value="<?php echo $option;?>" name="response_option[<?php echo $questionid; ?>]"  <?php echo in_array($option,(array)$selectedoption )==1 ?  'Checked': '';?> >
+                  <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php echo $option_cat;?>" value="<?php echo $option;?>" name="response_option[<?php echo $questionid; ?>]"  <?php echo in_array($option,(array)$selectedoption )==1 ?  'Checked': '';?> >
                   <label for="q1"><?php echo $option; ?> </label> </div>
                 </b>
 
@@ -117,7 +117,7 @@ $questions = $data['questions'];
             }elseif($val['options_display_type']==4){
 
              ?>
-             <textarea aria-label="Text area" id="response_option<?php echo $questionid;?>"  name="response_option[<?php echo $questionid; ?>]" class="form-control mb-2" placeholder=""></textarea>
+             <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" id="response_option<?php echo $questionid;?>"  name="response_option[<?php echo $questionid; ?>]" class="form-control mb-2" placeholder=""></textarea>
              <?php
            }
 
@@ -130,7 +130,7 @@ $questions = $data['questions'];
       <div class="col-lg-12 mt-4" >
           <div >
 
-            <h6 class="f-w-600"><?php $value_id++; echo $value_id; ?> Vendor over all ratting  *</h6>
+            <h6 class="f-w-600"><?php $value_id++; echo $value_id; ?> <?= __('Vendor over all ratting'); ?>  *</h6>
 
               <div class="rating">
                 <?php for($i=10;$i>=1; $i--){ ?>
@@ -147,7 +147,7 @@ $questions = $data['questions'];
   </form>
 </div>
 <div class="modal-footer modal-fixed">
-  <button type="button" name="submit" onclick="formsubmit('199')" class="btn btn-primary btn-bold btn-upper btn-font-sm" data-dismiss="modal">Save & Submit</button>
-  <button type="button" name="submit" onclick="formsubmit('2')" class="btn btn-primary btn-bold btn-upper btn-font-sm" data-dismiss="modal">Save</button>
-  <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
+  <button type="button" name="submit" onclick="formsubmit('199')" class="btn btn-primary btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?= htmlspecialchars(__('Save & Submit'), ENT_QUOTES, 'UTF-8'); ?></button>
+  <button type="button" name="submit" onclick="formsubmit('2')" class="btn btn-primary btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?= __('Save'); ?></button>
+  <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?= __('Close'); ?></button>
 </div>
