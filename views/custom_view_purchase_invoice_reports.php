@@ -19,7 +19,7 @@ $invoices = $result['invoices'];
 function printReport(divId) {
     var printContents = $("#" + divId).html();
   var printWindow = window.open('', '_blank');
-  printWindow.document.write('<html lang="en"><head><title>Purchase Invoice Report</title></head><body>' + printContents + '</body></html>');
+  printWindow.document.write('<html lang="en"><head><title><?= htmlspecialchars(__('Purchase Invoice Report'), ENT_QUOTES, 'UTF-8'); ?></title></head><body>' + printContents + '</body></html>');
   printWindow.document.close(); // close the document stream
   printWindow.print();
   printWindow.onafterprint = function() {
@@ -29,9 +29,9 @@ function printReport(divId) {
 </script>
 <div class="card">
     <div class="card-header">
-        <h5><?php echo $party_lable; ?> Monthly Reports</h5>
+        <h5><?php echo $party_lable; ?> <?= __('Monthly Reports'); ?></h5>
         <div class="card-header-right table-card-header ">
-      <a href="javascript:history.go(-1)" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i>Back</a>
+      <a href="javascript:history.go(-1)" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i><?= __('Back'); ?></a>
       </div>
     </div>
     <div class="card-body">
@@ -40,8 +40,8 @@ function printReport(divId) {
           <div class="col-lg-3">
                 <div class=" form-group">
                     <span class="form-label"> <?php echo $party_lable; ?></span>
-                    <select aria-label="Party" class="js-example-basic-single form-control" name="party_id">
-                      <option value="">All <?php echo $party_lable; ?></option>
+                    <select aria-label="<?= htmlspecialchars(__('Party'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single form-control" name="party_id">
+                      <option value=""><?= __('All'); ?> <?php echo $party_lable; ?></option>
                       <?php foreach($all_parties as $cust){ ?>
                         <option value="<?php echo $cust['id'];?>" <?php echo $_POST['party_id'] == $cust['id']?"selected":""; ?>><?php echo "(".$cust['company'].") ".$cust['display_name'];?></option>
                       <?php } ?>
@@ -50,18 +50,18 @@ function printReport(divId) {
             </div>
           <div class="col-lg-2">
               <div class="form-group w-full">
-                  <span class="form-label ">Start Date<span class="text-danger">*</span></span>
-                  <input aria-label="Start Month" type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
+                  <span class="form-label "><?= __('Start Date'); ?><span class="text-danger">*</span></span>
+                  <input aria-label="<?= htmlspecialchars(__('Start Month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
               </div>
           </div>
           <div class="col-lg-2">
               <div class=" form-group">
-                  <span class="form-label"> End Date</span>
-                  <input aria-label="End Month" type="month" class="form-control" name="end_month"  value="<?php echo $end_month; ?>" >
+                  <span class="form-label"> <?= __('End Date'); ?></span>
+                  <input aria-label="<?= htmlspecialchars(__('End Month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" name="end_month"  value="<?php echo $end_month; ?>" >
               </div>
           </div>
           <div class="col-lg-1">
-               <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> Search</button>
+               <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> <?= __('Search'); ?></button>
           </div>
         </div>
      </form>
@@ -86,14 +86,14 @@ function printReport(divId) {
               <thead>
                   <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Inv Number</th>
-                      <th scope="col">Inv Date</th>
-                      <th scope="col">Due Date</th>
-                      <th scope="col" class="text-right">Invoice</th>
-                      <th scope="col" class="text-right">Payment</th>
-                      <th scope="col" class="text-right">Due</th>
-                      <th scope="col" class="text-right">Debit Note</th>
-                      <th scope="col" class="text-right">Credit Note</th>
+                      <th scope="col"><?= __('Inv Number'); ?></th>
+                      <th scope="col"><?= __('Inv Date'); ?></th>
+                      <th scope="col"><?= __('Due Date'); ?></th>
+                      <th scope="col" class="text-right"><?= __('Invoice'); ?></th>
+                      <th scope="col" class="text-right"><?= __('Payment'); ?></th>
+                      <th scope="col" class="text-right"><?= __('Due'); ?></th>
+                      <th scope="col" class="text-right"><?= __('Debit Note'); ?></th>
+                      <th scope="col" class="text-right"><?= __('Credit Note'); ?></th>
                   </tr>
               </thead>
               <tbody>
@@ -122,7 +122,7 @@ function printReport(divId) {
                   <?php $i++;
 } ?>
                   <tr>
-                    <th scope="col" colspan="4" class="p-2 text-right">Total</th>
+                    <th scope="col" colspan="4" class="p-2 text-right"><?= __('Total'); ?></th>
                     <th scope="col" class="p-2 text-right"><?php echo customeummarmonyformateifine($t_total_amount); ?></th>
                     <th scope="col" class="p-2 text-right"><?php echo customeummarmonyformateifine($t_payment); ?></th>
                     <th scope="col" class="p-2 text-right"><?php echo customeummarmonyformateifine($t_pending_amount); ?></th>
@@ -131,7 +131,7 @@ function printReport(divId) {
                   </tr>
                 <?php }else{ ?>
                   <tr>
-                    <th scope="col" colspan="10"  class="text-center"><i class="ti-alert text-warning"></i> No Invoices</th>
+                    <th scope="col" colspan="10"  class="text-center"><i class="ti-alert text-warning"></i> <?= __('No Invoices'); ?></th>
                   </tr>
                 <?php } ?>
 
@@ -140,7 +140,7 @@ function printReport(divId) {
          <?php } ?>
        </div>
        <div class="row mt-5 m-l-5">
-        <button class="btn waves-effect waves-light btn-grd-success col-lg-2" onclick="printReport('print_report_div');"><i class="fa fa-print"></i> &nbsp Print Report</button>
+        <button class="btn waves-effect waves-light btn-grd-success col-lg-2" onclick="printReport('print_report_div');"><i class="fa fa-print"></i> &nbsp <?= __('Print Report'); ?></button>
       </div>
          </div>
      </div>
