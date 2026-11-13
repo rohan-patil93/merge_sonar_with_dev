@@ -35,7 +35,7 @@ foreach((array)$data['building_gates_res'] as $gate){
 <div class="card">
     <div class="continer-fluid">
         <div class="card-header">
-            <h3 class="mb-3">Visitor View</h3>
+            <h3 class="mb-3"><?= __('Visitor View'); ?></h3>
             <div class="card-heder-right">
 
             </div>
@@ -88,42 +88,42 @@ foreach((array)$data['building_gates_res'] as $gate){
 
             <div class="card">
                 <div class="card-header">
-                    <h5>Visitor Details </h5>
+                    <h5><?= __('Visitor Details'); ?> </h5>
                 </div>
                 <div class="card-body">
                     <div class="visitor-details">
                         <div class="visitor-row">
-                            <div class="visitor-col">Name</div>
+                            <div class="visitor-col"><?= __('Name'); ?></div>
                             <div class="visitor-col"><?= ($row['name'] ?? '') ?></div>
-                            <div class="visitor-col">Whom to meet</div>
+                            <div class="visitor-col"><?= __('Whom to meet'); ?></div>
                             <div class="visitor-col"><?= $_SESSION['users'][$row['whom_to_meet']] ?? '' ?></div>
                         </div>
 
                         <div class="visitor-row">
-                            <div class="visitor-col">Phone</div>
+                            <div class="visitor-col"><?= __('Phone'); ?></div>
                             <div class="visitor-col"><?= ($row['phone'] ?? '') ?></div>
-                            <div class="visitor-col">Purpose</div>
+                            <div class="visitor-col"><?= __('Purpose'); ?></div>
                             <div class="visitor-col"><?= ($row['purpose'] ?? '') ?></div>
                         </div>
 
                         <div class="visitor-row">
-                            <div class="visitor-col">Email</div>
+                            <div class="visitor-col"><?= __('Email'); ?></div>
                             <div class="visitor-col"><?= ($row['email'] ?? '') ?></div>
-                            <div class="visitor-col">Visitor Pass No</div>
+                            <div class="visitor-col"><?= __('Visitor Pass No'); ?></div>
                             <div class="visitor-col"><?= ($row['visitor_idcard_no'] ?? '') ?></div>
                         </div>
 
                         <div class="visitor-row">
-                            <div class="visitor-col">Address</div>
+                            <div class="visitor-col"><?= __('Address'); ?></div>
                             <div class="visitor-col"><?= ($row['address'] ?? '') ?></div>
-                            <div class="visitor-col">In Gate No</div>
+                            <div class="visitor-col"><?= __('In Gate No'); ?></div>
                             <div class="visitor-col"><?=($gates[$row['in_gate_no']] ?? '') ?></div>
                         </div>
 
                         <div class="visitor-row">
-                            <div class="visitor-col">ID Card No(<?= ($row['genc_detail_name'] ?? '') ?>)</div>
+                            <div class="visitor-col"><?= __('ID Card No('); ?><?= ($row['genc_detail_name'] ?? '') ?>)</div>
                             <div class="visitor-col"><?= ($row['idcard_number'] ?? '') ?></div>
-                            <div class="visitor-col">In Date Time</div>
+                            <div class="visitor-col"><?= __('In Date Time'); ?></div>
                             <div class="visitor-col"><?= ($row['in_datetime'] ?? '') ?></div>
                         </div>
                     </div>
