@@ -65,7 +65,7 @@ $arslabs  = $result['arslabs'];
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h6 class="m-b-20 text-white">Total Employess 2</h6>
+                        <h6 class="m-b-20 text-white"><?= __('Total Employess 2'); ?></h6>
                         <h3 class="m-b-0 f-w-700 text-white"><?php echo $total_cnt['total_employee']; ?></h3>
                     </div>
                     <div class="col-auto">
@@ -80,7 +80,7 @@ $arslabs  = $result['arslabs'];
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col col-lg-5">
-                        <h6 class="m-b-20 text-white f-14 text-center">Total Appraisals</h6>
+                        <h6 class="m-b-20 text-white f-14 text-center"><?= __('Total Appraisals'); ?></h6>
                         <div class="row align-items-center text-center">
                             <div class="col">
                                 <h3 class="m-b-0 text-white"><?php echo $total_cnt['total_appraisals']; ?></h3>
@@ -91,7 +91,7 @@ $arslabs  = $result['arslabs'];
                         <i class="fas fa-exchange-alt text-c-green f-18"></i>
                     </div>
                     <div class="col col-lg-5">
-                        <h6 class="m-b-20 text-white f-14 text-center">Total Publish</h6>
+                        <h6 class="m-b-20 text-white f-14 text-center"><?= __('Total Publish'); ?></h6>
                         <div class="row align-items-center text-center">
                             <div class="col">
                                 <h3 class="m-b-0 text-white"><?php echo $total_cnt['total_appraisal_shared']; ?></h3>
@@ -107,7 +107,7 @@ $arslabs  = $result['arslabs'];
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col col-lg-5">
-                        <h6 class="m-b-20 text-white f-14 text-center">Total Goals</h6>
+                        <h6 class="m-b-20 text-white f-14 text-center"><?= __('Total Goals'); ?></h6>
                         <div class="row align-items-center text-center">
                             <div class="col">
                                 <h3 class="m-b-0 text-white"><?php echo $total_cnt['total_goals']; ?></h3>
@@ -118,7 +118,7 @@ $arslabs  = $result['arslabs'];
                         <i class="fas fa-exchange-alt text-c-green f-18"></i>
                     </div>
                     <div class="col col-lg-5">
-                        <h6 class="m-b-20 text-white f-14 text-center">Total Publish</h6>
+                        <h6 class="m-b-20 text-white f-14 text-center"><?= __('Total Publish'); ?></h6>
                         <div class="row align-items-center text-center">
                             <div class="col">
                                 <h3 class="m-b-0 text-white"><?php echo $total_cnt['total_shared_goals']?></h3>
@@ -134,7 +134,7 @@ $arslabs  = $result['arslabs'];
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col col-lg-5">
-                        <h6 class="m-b-5 text-white f-14 text-cente">Request FeedBacks</h6>
+                        <h6 class="m-b-5 text-white f-14 text-cente"><?= __('Request FeedBacks'); ?></h6>
                         <div class="row align-items-center text-center">
                             <div class="col">
                                 <h3 class="m-b-0 text-white"><?php echo $total_cnt['total_goals']; ?></h3>
@@ -145,7 +145,7 @@ $arslabs  = $result['arslabs'];
                         <i class="fas fa-exchange-alt text-c-green f-18"></i>
                     </div>
                     <div class="col col-lg-5">
-                        <h6 class="m-b-5 text-white f-14 text-center">Received FeedBacks</h6>
+                        <h6 class="m-b-5 text-white f-14 text-center"><?= __('Received FeedBacks'); ?></h6>
                         <div class="row align-items-center text-center">
                             <div class="col">
                                 <h3 class="m-b-0 text-white"><?php echo $total_cnt['total_feedbacks']; ?></h3>
@@ -161,7 +161,7 @@ $arslabs  = $result['arslabs'];
     <div class="col-lg-5 col-md-5 col-sm-12 col-12">
         <div class="card">
             <div class="card-header">
-                <h5>Employee Count By Rattings</h5>
+                <h5><?= __('Employee Count By Rattings'); ?></h5>
             </div>
             <input type="hidden" id="employee_performance_appraisals_ratting" value='<?php echo json_encode((array)$employee_performance_appraisals_ratting); ?>'>
             <div class="card-body" style="height: 500px; width: 500px">
@@ -172,9 +172,9 @@ $arslabs  = $result['arslabs'];
      <div class="col-lg-7 col-md-7 col-sm-12 col-12">
         <div class="card">
             <div class="card-header">
-                <h5>My Goals</h5>
+                <h5><?= __('My Goals'); ?></h5>
                 <div class="card-header-right table-card-header">
-                    <span class="text-c-yellow f-w-700">Count Of Goals : <?php echo count((array)$employee_goals); ?></span>
+                    <span class="text-c-yellow f-w-700"><?= __('Count Of Goals'); ?> : <?php echo count((array)$employee_goals); ?></span>
                 </div>
             </div>
             <div class="card-body">
@@ -184,21 +184,21 @@ $arslabs  = $result['arslabs'];
                             <div class="card-body text-center">
                                 <div class="text-info"><i class="fa fa-question-circle"></i></div>
                                 <h3 class="text-facebook f-w-700 mb-0"><?php echo $yet_to_start; ?></h3>
-                                <p>Yet To Start</p>
+                                <p><?= __('Yet To Start'); ?></p>
                             </div>
                         </div>
                         <div class="social-card">
                             <div class="card-body text-center">
                                 <div class="text-primary"><i class="fa fa-hourglass-half"></i></div>
                                 <h3 class="text-facebook f-w-700 mb-0"><?php echo $inprogress; ?></h3>
-                                <p>In Progress</p>
+                                <p><?= __('In Progress'); ?></p>
                             </div>
                         </div>
                         <div class="social-card">
                             <div class="card-body text-center">
                                 <div class="text-danger"><i class="fa fa-thumbs-up"></i></div>
                                 <h3 class="text-facebook f-w-700 mb-0"><?php echo $completed; ?></h3>
-                                <p>Completed</p>
+                                <p><?= __('Completed'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -207,10 +207,10 @@ $arslabs  = $result['arslabs'];
                             <table class="table table-hover m-b-0" style="font-size:13px;">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="w-b-w-s" style="width: 30%;">Employee</th>
-                                        <th scope="col" class="w-b-w-s" style="width: 30%;">Question</th>
-                                        <th scope="col" style="width: 10%;">End Date</th>
-                                        <th scope="col" style="width: 10%;">End Date</th>
+                                        <th scope="col" class="w-b-w-s" style="width: 30%;"><?= __('Employee'); ?></th>
+                                        <th scope="col" class="w-b-w-s" style="width: 30%;"><?= __('Question'); ?></th>
+                                        <th scope="col" style="width: 10%;"><?= __('End Date'); ?></th>
+                                        <th scope="col" style="width: 10%;"><?= __('End Date'); ?></th>
                                         <th scope="col" style="width: 20%;"></th>
                                     </tr>
                                 </thead>
@@ -222,9 +222,9 @@ $arslabs  = $result['arslabs'];
                                         <td class="p-2 w-b-w-s">
                                             <div class="align-middle">
                                             <?php if($empdetail['image'] !=""){?>
-                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="Attachment Preview" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius align-middle m-r-0 custom_txt_round p-1 f-12 text-center img-40"><?php echo initials($empdetail['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-middle m-r-0 custom_txt_round p-1 f-12 text-center img-40"><?php echo initials($empdetail['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
                                                 <span class="f-12"><?php echo $empdetail['display_name']; ?></span>
@@ -239,7 +239,7 @@ $arslabs  = $result['arslabs'];
                                             <div class="row align-items-center">
                                                 <div class="col">
                                                     <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                                        <span class="fw-bold fs-6 text-gray-400">Progress</span>
+                                                        <span class="fw-bold fs-6 text-gray-400"><?= __('Progress'); ?></span>
                                                         <span class="fw-bolder fs-6 ml-2"><?php echo $eg['percentage_of_completion']; ?>%</span>
                                                     </div>
                                                     <div class="progress progress-xs">
@@ -263,12 +263,12 @@ $arslabs  = $result['arslabs'];
     <div class="card-header">
         <div class="row">
             <div class="col-lg-7 col-md-7 col-sm-12 col-12">
-                <h5>Appraisals</h5>
+                <h5><?= __('Appraisals'); ?></h5>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-                 <span class="form-label text-start">Aassessment Year</span>
-                <select aria-label="Assessment Year" class="form-select js-example-basic-single" name="assessment_year" >
-                    <option value="">Select Any One</option>
+                 <span class="form-label text-start"><?= __('Aassessment Year'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Assessment Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="assessment_year" >
+                    <option value=""><?= __('Select Any One'); ?></option>
                     <?php for ($i=2020; $i<2090;$i++) {
                         $k= $i+1; $view_assemnt_year =$i."-".$k; ?>
                         <option <?php if(date('Y') == $view_assemnt_year){ echo "selected";
@@ -277,7 +277,7 @@ $arslabs  = $result['arslabs'];
                 </select>
             </div>
             <div class="col-lg-1 col-md-1 col-sm-12 col-12">
-               <a href="#!" onclick="viewAllRecord('quotations',2)" class=" b-b-primary text-primary float-right" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">View all</a>
+               <a href="#!" onclick="viewAllRecord('quotations',2)" class=" b-b-primary text-primary float-right" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('View all'); ?></a>
            </div>
         </div>
     </div>
@@ -286,13 +286,13 @@ $arslabs  = $result['arslabs'];
             <table class="table table-hover m-b-0" style="font-size:13px;">
                 <thead>
                     <tr>
-                        <th scope="col" class="w-b-w-s">Appraisal Name</th>
-                        <th scope="col">Assessment Year</th>
-                        <th scope="col">Assessment Start Date</th>
-                        <th scope="col">Assessment End Date</th>
-                        <th scope="col">Self Assessment Start Date</th>
-                        <th scope="col">Self Assessment Start Date</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" class="w-b-w-s"><?= __('Appraisal Name'); ?></th>
+                        <th scope="col"><?= __('Assessment Year'); ?></th>
+                        <th scope="col"><?= __('Assessment Start Date'); ?></th>
+                        <th scope="col"><?= __('Assessment End Date'); ?></th>
+                        <th scope="col"><?= __('Self Assessment Start Date'); ?></th>
+                        <th scope="col"><?= __('Self Assessment Start Date'); ?></th>
+                        <th scope="col"><?= __('Action'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -308,18 +308,18 @@ $arslabs  = $result['arslabs'];
                         <div class=" custom-popup-open open-popup-appraisal<?php echo $pas['id']; ?> text-start" style="display: none; width: 500px; ">
                             <div class="card">
                                 <div class="card-header">
-                                  <h5>Appraisals Employee</h5>
+                                  <h5><?= __('Appraisals Employee'); ?></h5>
                                   <div class="card-header-right">
-                                    <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                    <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                   </div>
                                 </div>
                                 <div class="card-body  custom-scroll" style="height: 250px;">
                                     <table class="table table-hover m-b-0" style="font-size:13px;">
                                         <thead>
                                             <tr>
-                                                <th scope="col" class="w-b-w-s">Employee</th>
-                                                <th scope="col" class="text-right">Self Score</th>
-                                                <th scope="col" class="text-right">Ro Score</th>
+                                                <th scope="col" class="w-b-w-s"><?= __('Employee'); ?></th>
+                                                <th scope="col" class="text-right"><?= __('Self Score'); ?></th>
+                                                <th scope="col" class="text-right"><?= __('Ro Score'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -331,9 +331,9 @@ $arslabs  = $result['arslabs'];
                                                     <a href="index.php?option=COM_INSERT_EMPLOYEE_PERFORMANCE_APPRAISALS&Rid=<?php echo deocdeId('id:'.$epadeatail['id']); ?>" target="_blank">
                                                     <div class="align-middle">
                                                     <?php if($empdetail['image'] !=""){?>
-                                                        <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="Attachment Preview" onerror="this.src='uploads/all/no-image.jpg';">
+                                                        <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
                                                     <?php } else { ?>
-                                                        <span alt="user" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
+                                                        <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
                                                     <?php } ?>
                                                         <div class="d-inline-block width73">
                                                             <span class="f-12"><?php echo $empdetail['display_name']; ?></span>
@@ -385,7 +385,7 @@ $arslabs  = $result['arslabs'];
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header">
-                <h5>Goals</h5>
+                <h5><?= __('Goals'); ?></h5>
                 <div class="card-header-right table-card-header m-r-10">
                 </div>
             </div>
@@ -394,10 +394,10 @@ $arslabs  = $result['arslabs'];
                     <table class="table table-hover m-b-0" style="font-size:13px;">
                         <thead>
                             <tr>
-                                <th scope="col" class="w-b-w-s" style="width: 50%;">Goal Name</th>
-                                <th scope="col" style="width: 20%;">Goal Start Date</th>
-                                <th scope="col" style="width: 20%;">Goal End Date</th>
-                                <th scope="col" style="width: 10%;">Action</th>
+                                <th scope="col" class="w-b-w-s" style="width: 50%;"><?= __('Goal Name'); ?></th>
+                                <th scope="col" style="width: 20%;"><?= __('Goal Start Date'); ?></th>
+                                <th scope="col" style="width: 20%;"><?= __('Goal End Date'); ?></th>
+                                <th scope="col" style="width: 10%;"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -408,17 +408,17 @@ $arslabs  = $result['arslabs'];
                                     <div class=" custom-popup-open open-popup-goals<?php echo $pas['id']; ?> text-start" style="display: none; width: 500px; ">
                                     <div class="card">
                                         <div class="card-header">
-                                          <h5>Appraisals Employee</h5>
+                                          <h5><?= __('Appraisals Employee'); ?></h5>
                                           <div class="card-header-right">
-                                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                           </div>
                                         </div>
                                         <div class="card-body  custom-scroll" style="height: 250px;">
                                             <table class="table table-hover m-b-0" style="font-size:13px;">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Employee</th>
-                                                        <th scope="col">Progress</th>
+                                                        <th scope="col"><?= __('Employee'); ?></th>
+                                                        <th scope="col"><?= __('Progress'); ?></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -429,9 +429,9 @@ $arslabs  = $result['arslabs'];
                                                         <td class="p-2 w-b-w-s">
                                                             <div class="align-middle">
                                                             <?php if($empdetail['image'] !=""){?>
-                                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="Attachment Preview" onerror="this.src='uploads/all/no-image.jpg';">
+                                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
                                                             <?php } else { ?>
-                                                                <span alt="user" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
+                                                                <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
                                                             <?php } ?>
                                                                 <div class="d-inline-block width73">
                                                                     <span class="f-12"><?php echo $empdetail['display_name']; ?></span>
@@ -443,7 +443,7 @@ $arslabs  = $result['arslabs'];
                                                             <div class="row align-items-center">
                                                                 <div class="col">
                                                                     <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                                                        <span class="fw-bold fs-6 text-gray-400">Progress</span>
+                                                                        <span class="fw-bold fs-6 text-gray-400"><?= __('Progress'); ?></span>
                                                                         <span class="fw-bolder fs-6 ml-2"><?php echo $empgoaldetails['percentage_of_completion']; ?>%</span>
                                                                     </div>
                                                                     <div class="progress progress-xs">
@@ -479,7 +479,7 @@ $arslabs  = $result['arslabs'];
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header">
-                <h5>FeedBacks</h5>
+                <h5><?= __('FeedBacks'); ?></h5>
                 <div class="card-header-right table-card-header m-r-10">
                 </div>
             </div>
@@ -488,8 +488,8 @@ $arslabs  = $result['arslabs'];
                     <table class="table table-hover m-b-0" style="font-size:13px;">
                         <thead>
                             <tr>
-                                <th scope="col" class="w-b-w-s" style="width: 80%;">Question</th>
-                                <th scope="col" style="width: 20%;">Action</th>
+                                <th scope="col" class="w-b-w-s" style="width: 80%;"><?= __('Question'); ?></th>
+                                <th scope="col" style="width: 20%;"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -500,17 +500,17 @@ $arslabs  = $result['arslabs'];
                                 <div class=" custom-popup-open open-popup-feedbacks<?php echo $pas['id']; ?> text-start" style="display: none; width: 500px; left: 40px;">
                                     <div class="card">
                                         <div class="card-header">
-                                          <h5>Employee FeedBack</h5>
+                                          <h5><?= __('Employee FeedBack'); ?></h5>
                                           <div class="card-header-right">
-                                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                           </div>
                                         </div>
                                         <div class="card-body  custom-scroll" style="height: 250px;">
                                             <table class="table table-hover m-b-0" style="font-size:13px;">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col" class="w-b-w-s" style="width: 80%;">Employee</th>
-                                                        <th scope="col" style="width: 20%;">Response</th>
+                                                        <th scope="col" class="w-b-w-s" style="width: 80%;"><?= __('Employee'); ?></th>
+                                                        <th scope="col" style="width: 20%;"><?= __('Response'); ?></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -521,9 +521,9 @@ $arslabs  = $result['arslabs'];
                                                         <td class="p-2 w-b-w-s">
                                                             <div class="align-middle">
                                                             <?php if($empdetail['image'] !=""){?>
-                                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="Attachment Preview" onerror="this.src='uploads/all/no-image.jpg';">
+                                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
                                                             <?php } else { ?>
-                                                                <span alt="user" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
+                                                                <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
                                                             <?php } ?>
                                                                 <div class="d-inline-block width73">
                                                                     <span class="f-12"><?php echo $empdetail['display_name']; ?></span>
@@ -534,7 +534,7 @@ $arslabs  = $result['arslabs'];
                                                         <td class="p-2  text-center">
                                                             <?php if($feeddetail['response_status']==''){ echo "Pendding";
 }else{  ?>
-                                                                <i class="ti-eye f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View FeedBack" onclick="getEmployeeFeedbacks('<?php echo $feeddetail['id']; ?>','<?php echo $feeddetail['employee_id']?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                                                <i class="ti-eye f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View FeedBack'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getEmployeeFeedbacks('<?php echo $feeddetail['id']; ?>','<?php echo $feeddetail['employee_id']?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                                             <?php } ?>
                                                         </td>
                                                     </tr>
