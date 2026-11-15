@@ -97,7 +97,7 @@ function deleteitem(cardid){
 				<div class="card-body">
 <form method="post" action="">
 <div class="row">
-	<label class="col-lg-2 f-w-700 "><?= __('Select table name') ?></label>
+	<span class="col-lg-2 f-w-700  d-inline-block" style="margin-bottom:5px"><?= __('Select table name') ?></span>
 	<div class="col-lg-3">
 	  <select class="form-select js-example-basic-single" name="application_table_name" onchange="selecttablename(this.value)" aria-label="Application Table Name">
 			<option value = "0"> Select Any One</option>
