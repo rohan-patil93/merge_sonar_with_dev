@@ -259,7 +259,7 @@ function listUserType(){
                 <span class="col-lg-9 f-12"> <?php echo $vendorslist['user_mobile']!=""?$vendorslist['user_mobile']:"-"; ?> </span>
               </div>
               <?php if($tven == '0'){ ?>
-              <i class="ti-share float-right position-absolute text-white" data-bs-toggle="tooltip" data-placement="bottom" title="" onclick="resendrequest('<?php echo $vendorslist['user_id']; ?>')" data-bs-original-title="Re-Invite User" style="right: 70px;top: 10px;"></i>
+              <i role="button" tabindex="0" aria-label="Re-Invite User" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-share float-right position-absolute text-white" data-bs-toggle="tooltip" data-placement="bottom" title="" onclick="resendrequest('<?php echo $vendorslist['user_id']; ?>')" data-bs-original-title="Re-Invite User" style="right: 70px;top: 10px;"></i>
             <?php } ?>
             </div>
           </div>
