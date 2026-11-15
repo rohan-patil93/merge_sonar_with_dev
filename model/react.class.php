@@ -1110,7 +1110,7 @@ class reactClass extends userClass{
 		$return['result'] = $permissionres;
 		return $return;
 	}
-	public function insertworkflowactivityreact($get, $post)
+	public function insertworkflowactivityreact($get, $unusedPost)
 	{
 		global $callConfig;
 		$return = array();
@@ -1160,7 +1160,7 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	public function insertcontrolversionreact($get, $post)
+	public function insertcontrolversionreact($get, $unusedPost)
 	{
 		global $callConfig;
 		$return = array();
@@ -1194,7 +1194,7 @@ class reactClass extends userClass{
 		}
 		return $return;
 	}
-	public function insertactivityreact($get, $post){
+	public function insertactivityreact($get, $unusedPost){
 		global $callConfig;
 		$return = array();
 		$inputJSON = file_get_contents('php://input');
