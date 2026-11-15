@@ -16,7 +16,7 @@ $employees = $result['table'] ?? array();
             <div class="row">
                 <!-- Employee -->
                 <div class="form-group col-md-4">
-                    <label><?= __('Employee') ?> <span style="color:red;">*</span></label>
+                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Employee') ?> <span style="color:red;">*</span></span>
                     <select aria-label="<?= htmlspecialchars(__('Employee id'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="employee_id">
                         <option value="0"><?= __('Select Employee') ?></option>
                         <?php foreach ($employees as $row): ?>
@@ -29,13 +29,13 @@ $employees = $result['table'] ?? array();
 
                 <!-- Month -->
                 <div class="form-group col-md-3">
-                    <label><?= __('Month') ?> <span style="color:red;">*</span></label>
+                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Month') ?> <span style="color:red;">*</span></span>
                     <input aria-label="<?= htmlspecialchars(__('Report month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" id="report_month">
                 </div>
 
                 <!-- Search -->
                 <div class="form-group col-md-2">
-                    <label>&nbsp;</label>
+                    <span class="d-inline-block fw-bold" style="margin-bottom:5px">&nbsp;</span>
                     <button type="button" class="btn btn-primary form-control" id="searchBtn">
                         <?= __('Search') ?>
                     </button>
