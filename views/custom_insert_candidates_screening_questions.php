@@ -166,7 +166,7 @@ var max = 500;
                         <tr>
                             <td class="p-2 w-b-w-s">
 
-                                <p <?php if($jpc['screening_status'] == "Y"){ ?> class="text-primary cursor-pointer" onclick="getScreeningResponse('<?php echo $jpc['id']; ?>')" <?php } ?>><?php echo $jpc['job_number']." - ".$jpc['job_name']; ?></p>
+                                <p role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" <?php if($jpc['screening_status'] == "Y"){ ?> class="text-primary cursor-pointer" onclick="getScreeningResponse('<?php echo $jpc['id']; ?>')" <?php } ?>><?php echo $jpc['job_number']." - ".$jpc['job_name']; ?></p>
                                 <p class="mb-0"><?php echo "Start -".$jpc['screening_start_datetime'];  ?></p>
                                 <p class="mb-0"><?php echo "End -".$jpc['screening_end_datetime']; ?></p>
                                 <p class="mb-0"><?php echo "Summary -".$jpc['ai_summary']; ?></p>
