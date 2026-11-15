@@ -2286,30 +2286,30 @@ if($page=="commanworkflowsubmit"){
 	if($_POST['type']=="afteraprovalemailnotification"){
 		$postdata['send_aproval_email_to'] = $_POST['send_aproval_email_to'];
 		$postdata['after_approval_email'] = $_POST['after_approval_email'];
-	}else if($_POST['type']=="afterrejectionemailnotification"){
+	}elseif($_POST['type']=="afterrejectionemailnotification"){
 		$postdata['send_rejection_email_to'] = $_POST['send_rejection_email_to'];
 		$postdata['after_rejection_email'] = $_POST['after_rejection_email'];
-	}else if($_POST['type']=="afteraprovalwebhook"){
+	}elseif($_POST['type']=="afteraprovalwebhook"){
 		$postdata['after_approval_call_webhook'] = $_POST['after_approval_call_webhook'];
-	}else if($_POST['type']=="afteraprovalcallfunction"){
+	}elseif($_POST['type']=="afteraprovalcallfunction"){
 		$postdata['after_approve_call_function'] = $_POST['after_approve_call_function'];
-	}else if($_POST['type']=="afterrejectionwebhook"){
+	}elseif($_POST['type']=="afterrejectionwebhook"){
 		$postdata['after_rejection_call_webhook'] = $_POST['after_rejection_call_webhook'];
-	}else if($_POST['type']=="afterrejectioncallfunction"){
+	}elseif($_POST['type']=="afterrejectioncallfunction"){
 		$postdata['after_rejection_call_function'] = $_POST['after_rejection_call_function'];
-	}else if($_POST['type']=="afteraprovassigntask"){
+	}elseif($_POST['type']=="afteraprovassigntask"){
 		$ret = array();
 		foreach($_POST['after_approval_task'] as $keyy=>$task){
 			$ret[$keyy] = $task;
 		}
 		$postdata['after_approval_task'] = json_encode($ret);
-	}else if($_POST['type']=="afterrejectionassigntask"){
+	}elseif($_POST['type']=="afterrejectionassigntask"){
 		$ret = array();
 		foreach($_POST['after_rejection_task'] as $keyy=>$task){
 			$ret[$keyy] = $task;
 		}
 		$postdata['after_rejection_task'] = json_encode($ret);
-	}else if($_POST['type']=="custom_process"){
+	}elseif($_POST['type']=="custom_process"){
 		$ret = array();
 		foreach($_POST['customsteps'] as $keyu => $steps){
 			$f = $keyu+1;
@@ -2319,13 +2319,13 @@ if($page=="commanworkflowsubmit"){
 		$postdata['approval_type'] = $_POST['approval_type'];
 		$postdata['sub_approve_type'] = json_encode($ret);
 		$postdata['approve_update_status'] = json_encode($approveupdatestatus);
-	}else if($_POST['type']=="aprove_updatefields"){
+	}elseif($_POST['type']=="aprove_updatefields"){
 		$ret = array();
 		foreach($_POST['status'] as $key => $filelds){
 			$ret[] = array("status"=>$_POST['status'][$key],'followup_days'=>$_POST['followup_days'][$key],'auto_forword_days'=>$_POST['auto_forword_days'][$key],'work_flow_field'=>$_POST['work_flow_field'][$key]);
 		}
 		$postdata['approve_update_status'] = json_encode($ret,1);
-	}else if($_POST['type']=="rejection_updatefields"){
+	}elseif($_POST['type']=="rejection_updatefields"){
 		$ret = array();
 		foreach($_POST['status'] as $key => $filelds){
 			$ret[] = array("status"=>$_POST['status'][$key],'followup_days'=>$_POST['followup_days'][$key],'auto_forword_days'=>$_POST['auto_forword_days'][$key],'work_flow_field'=>$_POST['work_flow_field'][$key]);
@@ -2353,7 +2353,7 @@ if($page=="insertprocesstasksettings"){
 		$_POST['current_status'] = 0;
 		if($_POST['due_date']=="no_action") {
 		  $_POST['no_action'] = '1';
-		}else if($_POST['due_date']=="on_the_day") {
+		}elseif($_POST['due_date']=="on_the_day") {
 		  $_POST['on_the_day'] = '1';
 		}
 		$task_list = $tasks_details['task_list'][$_POST['process_id']];
@@ -2501,13 +2501,13 @@ if($page=="getdaterangempc"){
 	$eefectivedate = $_POST['effectiveDate'] ==""?date($_SESSION['date_formate']):$_POST['effectiveDate'];
 	if($_POST['vall']=="PM"){
 		$return = array('effectiveDate'=>$eefectivedate,'expire_date'=>date($_SESSION['date_formate'], strtotime($eefectivedate."+1 months")));
-	}else if($_POST['vall']=="PY"){
+	}elseif($_POST['vall']=="PY"){
 		$return = array('effectiveDate'=>$eefectivedate,'expire_date'=>date($_SESSION['date_formate'], strtotime($eefectivedate."+1 years")));
 
-	}else if($_POST['vall']=="PS"){
+	}elseif($_POST['vall']=="PS"){
 		$return = array('effectiveDate'=>$eefectivedate,'expire_date'=>date($_SESSION['date_formate'], strtotime($eefectivedate."+6 months")));
 
-	}else if($_POST['vall']=="PT"){
+	}elseif($_POST['vall']=="PT"){
 	$return = array('effectiveDate'=>$eefectivedate,'expire_date'=>date($_SESSION['date_formate'], strtotime($eefectivedate."+3 months")));
 	}else{
 	$return = array('effectiveDate'=>'','expire_date'=>'');
@@ -8452,7 +8452,7 @@ if ($page == 'refresh_vehicle_table') {
 				$exitTime = strtotime($vehicle['exit_date'] . ' ' . $exit_time);
 				$entryTime = strtotime($vehicle['entry_date'] . ' ' . $entry_time);
 				$duration = round(($entryTime - $exitTime) / 60);
-			} else if (!empty($vehicle['exit_timestamp'])) {
+			} elseif (!empty($vehicle['exit_timestamp'])) {
 				$duration = round((time() - strtotime($vehicle['exit_timestamp'])) / 60);
 			} else {
 				$duration = 0;

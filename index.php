@@ -206,7 +206,7 @@ if($user['user_type'] ==4){  //db config get candidate type
         //$_GET['option'] = 'COM_LIST_CANDIDATE_INFO';
         include_once("includes/controller.php");
     }
-}else if($user['user_type'] ==3){ //db config get Vendor type
+}elseif($user['user_type'] ==3){ //db config get Vendor type
     if(count((array)$_SESSION['application_pages']) == 0){
         $_SESSION['application_pages'] = $login_details['application_pages'];
     }
