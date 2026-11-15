@@ -24,13 +24,13 @@ $opening_balance_inv = $result['opening_balance_inv'];
         </div>
         <div class="col-lg-2">
             <div class="form-group w-full table-card-header">
-                <label class="form-label "><?= __('Start Date'); ?><span class="text-danger">*</span></label>
+                <span class="form-label  d-inline-block fw-bold"><?= __('Start Date'); ?><span class="text-danger">*</span></span>
 				<input aria-label="<?= htmlspecialchars(__('Start month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
             </div>
         </div>
         <div class="col-lg-2">
             <div class=" form-group">
-                <label class="form-label"> <?= __('End Date'); ?></label>
+                <span class="form-label d-inline-block fw-bold"> <?= __('End Date'); ?></span>
                 <input aria-label="<?= htmlspecialchars(__('End month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" name="end_month"  value="<?php echo $end_month; ?>" >
             </div>
         </div>
