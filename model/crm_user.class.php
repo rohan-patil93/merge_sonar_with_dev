@@ -1,6 +1,6 @@
 <?php 
 class crmuserClass extends userClass{
-	function getCRMLeads($get){
+	public function getCRMLeads($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -293,7 +293,7 @@ class crmuserClass extends userClass{
 		}
 		return $return;
 	}
-	function insertCRMLeads($get,$post){
+	public function insertCRMLeads($get,$post){
 		global $callConfig;
 		$return = array();
 		$return['post'] = $post;
@@ -382,7 +382,7 @@ class crmuserClass extends userClass{
 
 		return $return;
 	}
-	function insertCRMLeadDetails($get,$post){
+	public function insertCRMLeadDetails($get,$post){
 		global $callConfig; 
 		$return = array(); 
 		if($post['rid'] !=""){ // updatre status
@@ -447,7 +447,7 @@ class crmuserClass extends userClass{
 		$return['res'] = $crmleaddetails;
 		return $return;
 	}
-	function dynamicUpdateStatus($get,$post){
+	public function dynamicUpdateStatus($get,$post){
 		global $callConfig;
 		$return = array();
 		$return['post'] = $post;
@@ -462,7 +462,7 @@ class crmuserClass extends userClass{
 
 //Start Email New Code 
 
-	function emailsendmediaternew($senddata){
+	public function emailsendmediaternew($senddata){
 		global $callConfig;
 		$senddata['super_admin_email_id'] = SUPERADMIN_EMAIL_ID;
 		$senddata['super_admin_company_name'] = SUPERADMIN_COMPNAY_NAME;
@@ -504,7 +504,7 @@ class crmuserClass extends userClass{
 		}
 		return $ress;
 	} 
-	function sendEmailslistnew($data){
+	public function sendEmailslistnew($data){
 		global $callConfig;
 		$email_data = array('email_source'=>$data['sender'], 'content'=>$data['content'], 'email_type'=>$data['email_type'], 'is_active'=>0 , 'current_status'=>0,'email_content_ref_id'=>$data['email_content_ref_id'], 'created_by'=>$data['created_by'] ,'created_date'=> date('Y-m-d H:i:s'));   
 		foreach ($data['revicer'] as $email) {
@@ -521,7 +521,7 @@ class crmuserClass extends userClass{
 		//echo "email send sucess";
 		return $email_data;
 	} 	
-	function emailtemplatenew($send_data){
+	public function emailtemplatenew($send_data){
 		global $callConfig;
 		$temp = "";
 		$configsql = "SELECT name,contact_address,application_module,admin_email,display_logo FROM config WHERE id = 1";
@@ -602,7 +602,7 @@ class crmuserClass extends userClass{
 
 //End Email New Code
 
-	function setStateCity($get){
+	public function setStateCity($get){
 		global $callConfig;
 		$citiessql = "SELECT id,city_name FROM cities";
 		$citiesres=$callConfig->getAllRows($citiessql);
@@ -657,7 +657,7 @@ class crmuserClass extends userClass{
 		print_r($return);
 
 	}
-	function leadConvertToContacts($get,$post){
+	public function leadConvertToContacts($get,$post){
 		global $callConfig;
 		$transaction_id = $post['transaction_id'];
 		$exicutesql = "INSERT INTO `crm_contacts`(`crm_lead_id`,`company_name`,`company_id`, `first_name`, `middle_name`, `last_name`, `display_name`, `email_id`, `phone`, `office_phone`, `fax`, `website`, `address`, `post_code`, `country_id`, `state_id`, `city_id`, `originator`, `contact_source`, `is_active`, `current_status`, `created_date`, `created_by`,`image`) SELECT `id`,`company_name`,'".$post['company_id']."', `first_name`, `middle_name`, `last_name`, `display_name`, `email_id`, `phone`, `office_phone`, `fax`, `website`, `address`, `post_code`, `country_id`, `state_id`, `city_id`, `originator`, `contact_source`, 0, 0,'".date('Y-m-d H:i:s')."', '".$post['user_id']."',`image` FROM `crm_leads` WHERE id='".$transaction_id."'";
@@ -673,7 +673,7 @@ class crmuserClass extends userClass{
 		return $res; 
 
 	}
-	function getLeadAndContactAssigned($get){
+	public function getLeadAndContactAssigned($get){
 		global $callConfig;
 		if($get['admin_type'] != 1){
 			$originatercondition = " AND crml.originator = '".$get['user_id']."'";
@@ -719,7 +719,7 @@ class crmuserClass extends userClass{
 
 		return $return; 
 	}
-	function leadAndContactAssigning($get,$post){
+	public function leadAndContactAssigning($get,$post){
 		global $callConfig;
 		$return['post'] = $post;
 		$order_by = $post['order_by'];
@@ -767,7 +767,7 @@ class crmuserClass extends userClass{
 		}
 		return $return; 
 	}
-	function testAPI($get){
+	public function testAPI($get){
 		global $callConfig;
 		$return = array();
 
@@ -1254,7 +1254,7 @@ payment tersm**/
 	}
 
 	//Koteswar start
-	function importCSV($get, $post){
+	public function importCSV($get, $post){
     	global $callConfig;
     	$return = array();
     	// $return['get'] = $get;
@@ -1353,17 +1353,17 @@ payment tersm**/
 
 	}
 	
-	function toMySQLDate($dateString) {
+	public function toMySQLDate($dateString) {
 	    $date = DateTime::createFromFormat('d-m-Y', trim($dateString));
 	    return $date ? $date->format('Y-m-d') : null;
 	}
 
-	function toMySQLDateTime($dateTimeString) {
+	public function toMySQLDateTime($dateTimeString) {
 	    $date = DateTime::createFromFormat('d-m-Y H:i:s', trim($dateTimeString));
 	    return $date ? $date->format('Y-m-d H:i:s') : null;
 	}
 
-	function getSalesInvoiceDynamicData($get){
+	public function getSalesInvoiceDynamicData($get){
 		global $callConfig;
         $accountlist = array();
         $return['get'] = $get;
@@ -1410,7 +1410,7 @@ payment tersm**/
 		return $return;
 	}
 
-	function getSalesInvoiceDynamicExcelList($get){
+	public function getSalesInvoiceDynamicExcelList($get){
 		global $callConfig;
         $accountlist = array();
         // $return['get'] = $get;
@@ -1430,7 +1430,7 @@ payment tersm**/
 
 	}
 
-	function createSalesInvoice($get, $post) {
+	public function createSalesInvoice($get, $post) {
 	    global $callConfig;
 	    $return =  array();
 	    $table = '';
@@ -1723,7 +1723,7 @@ payment tersm**/
 	}
 	//Koteswar End
 	//OOmkar Data uploaded - 23-06-2025
-	function importleadcontactCSV($get, $post)
+	public function importleadcontactCSV($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -1785,7 +1785,7 @@ payment tersm**/
 		$return['summary'] = ['total_rows' => count($rows) - 2, 'inserted' => $inserted, 'duplicates' => $duplicates, 'failed' => $failed];
 		return $return;
 	}
-	function getlistcontactleaddata($get)
+	public function getlistcontactleaddata($get)
 	{
 		global $callConfig;
 		$return['get'] = $get;
@@ -1800,7 +1800,7 @@ payment tersm**/
 		return $return;
 	}
 
-	function insertcontactdata($get, $post){
+	public function insertcontactdata($get, $post){
 		global $callConfig;
 		$return = [];
 		$rows = $post['rows'] ?? [];
@@ -1828,7 +1828,7 @@ payment tersm**/
 	}
 	
 
-	function insertleaddata($get, $post){
+	public function insertleaddata($get, $post){
 		global $callConfig;
 		$return = [];
 		$rows = $post['rows'] ?? [];
@@ -1857,7 +1857,7 @@ payment tersm**/
 		}
 		return ['status' => 'success','summary' => ['total_rows' => count($rows), 'inserted' => $inserted, 'duplicates' => $duplicates, 'failed' => $failed]];
 	}
-	function getleadcontactsourcetype($get){
+	public function getleadcontactsourcetype($get){
 		global $callConfig;
 		$return['get'] = $get;
 		$query = "SELECT id, code, value, label FROM crm_general_codes WHERE company_id = '" . $get['company_id'] . "' AND code = 'SOURCETYPE' AND is_active = 0";
@@ -2102,7 +2102,7 @@ payment tersm**/
     **/
 
     // Feasibilty
-    function getFeasiblityData($get){
+    public function getFeasiblityData($get){
         global $callConfig;
         $return = array();
         $id = $get['rid'] ?? '';
@@ -2185,7 +2185,7 @@ payment tersm**/
 
         return $return;
     }
-    function getFeasibilityFields($get){
+    public function getFeasibilityFields($get){
         global $callConfig;
         $return = array();
         if(isset($get['rid']) && $get['rid'] != ''){
@@ -2239,7 +2239,7 @@ payment tersm**/
         }
         return $html;
     }
-    function insertFeasibilityBomAndChecklist($get, $post){
+    public function insertFeasibilityBomAndChecklist($get, $post){
         // print_r($get);
         // print_r($post); exit;
         global $callConfig;
@@ -2381,7 +2381,7 @@ payment tersm**/
 		}
         return $return;
     }
-    function getFeasibilityReport($get) {
+    public function getFeasibilityReport($get) {
         global $callConfig;
         $feasibility_id = $get['feasibility_id'];
         $company_id = $get['company_id'];
@@ -2446,7 +2446,7 @@ payment tersm**/
 		$report['items_res'] = $items_res;
         return $report;
     }
-    function checkBOMReturns($get){
+    public function checkBOMReturns($get){
         global $callConfig;
         $return = array();
         $fid = $get['feasibility_id'];
@@ -2456,7 +2456,7 @@ payment tersm**/
         $return['unreturned_items'] = $items;
         return $return;
     }
-    function closeFeasibility($get){
+    public function closeFeasibility($get){
         global $callConfig;
         $updated_date = date("Y-m-d H:i:s");
         $updated_by = $get['user_id'];
@@ -2466,7 +2466,7 @@ payment tersm**/
         return $rows;
 
     }
-    function getFeasibilityDashboard($get){
+    public function getFeasibilityDashboard($get){
         global $callConfig;
         $query = "SELECT 
             fr.id AS feasibility_id,
@@ -2488,7 +2488,7 @@ payment tersm**/
         $data = $callConfig->getAllRows($query);
         return $data;
     }
-    function updateReturnDate($get){
+    public function updateReturnDate($get){
         global $callConfig;
         $updated_date = date("Y-m-d H:i:s");
         $updated_by = $get['user_id'];
@@ -2500,7 +2500,7 @@ payment tersm**/
         $result = $callConfig->executeQuery($update_sql);
         return $result;
     }
-	function getFeasibilityTableAndFields($get) {
+	public function getFeasibilityTableAndFields($get) {
 		global $callConfig;
 
 		$html = "";
@@ -2627,7 +2627,7 @@ $html .= "</div>";
 
 		return $html;
 	}	
-	function insertFeasibilityfeildslist($get, $post) {
+	public function insertFeasibilityfeildslist($get, $post) {
 		global $callConfig;
 		$return = array();
 
@@ -2696,7 +2696,7 @@ $html .= "</div>";
 		return $return;
 	}
 
-	function reOpenFeasibility($get){
+	public function reOpenFeasibility($get){
         global $callConfig;
         $updated_date = date("Y-m-d H:i:s");
         $updated_by = $get['user_id'];
@@ -2710,7 +2710,7 @@ $html .= "</div>";
 
 
 
-    function createSalesOrdersWithFeasibilty($get){
+    public function createSalesOrdersWithFeasibilty($get){
     	global $callConfig;
     	$return = array();
     	$feasibility_id = $get['feasibility_id'];
@@ -2786,7 +2786,7 @@ $html .= "</div>";
 		}
         return $return;
     }
-    function createCustomerWithContactLeadDetails($crm_contactsres, $crm_lead_contact_id, $crm_company_id="", $get){
+    public function createCustomerWithContactLeadDetails($crm_contactsres, $crm_lead_contact_id, $crm_company_id="", $get){
     	global $callConfig;
     	$return = array();
     	$post = array();
@@ -2820,7 +2820,7 @@ $html .= "</div>";
 		return $return;
      }
 
-    function checkCompanyNameAvilableOrNotInCustomer($get, $post){
+    public function checkCompanyNameAvilableOrNotInCustomer($get, $post){
     	global $callConfig;
 		$company_name = $post['company_name'];
 		$customerssql = "SELECT id FROM customers WHERE company_id = ".$get['company_id']." AND company LIKE '%".$company_name."%' AND is_active = 0";
@@ -2830,7 +2830,7 @@ $html .= "</div>";
     }
 
 	// start Data comparision by koti
-    function compareDatabaseSchemas($get) {
+    public function compareDatabaseSchemas($get) {
         $dbName1 = $get['db1']; // e.g., 'db_reference'
         $dbName2 = $get['db2']; // e.g., 'db_target'
         $db1 = $this->connectToDatabaseByName($dbName1);
@@ -2938,7 +2938,7 @@ $html .= "</div>";
 
     }
 
-    function connectToDatabaseByName($dbName) {
+    public function connectToDatabaseByName($dbName) {
         $host = HOSTNAME;
         $user = USERNAME;
         $pass = PASSWORD;
@@ -2952,7 +2952,7 @@ $html .= "</div>";
 
 
 
-	function generatingApplicationSerialNumberMastersTst($transaction_table,$get){
+	public function generatingApplicationSerialNumberMastersTst($transaction_table,$get){
 		global $callConfig;
 		$return = array();
 		$transaction_date = $get['transaction_date'];
@@ -3173,7 +3173,7 @@ $html .= "</div>";
 		$returnres = array('main_transaction_number'=>$main_transaction_number,'monthly_transaction_number'=>$monthly_transaction_number, 'yearly_transaction_number'=>$yearly_transaction_number, 'lifetime_transaction_number'=>$lifetime_transaction_number);	
 		return 	$returnres;		
 	}
-	function getCRMAIDashboards($get){
+	public function getCRMAIDashboards($get){
 		global $callConfig;
 		$todaydate = date("Y-m-d");
 		$originatercondition = '';
