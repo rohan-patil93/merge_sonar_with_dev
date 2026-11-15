@@ -19,7 +19,7 @@ $candidates = $result['candidates'];
 		<div class="input-group input-group-button mb-0">
             <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
             <span class="input-group-text addon-style">
-                <label class=""><span class="ti-search text-white mt-2"></span></label>
+                <span class=" d-inline-block fw-bold" style="margin-bottom:5px"><span class="ti-search text-white mt-2"></span></span>
             </span>
         </div>
 		<div class="card-body custom-scroll" style=" height: 450px;">
