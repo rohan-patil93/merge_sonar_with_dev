@@ -306,7 +306,7 @@ function submitsurvey(){
                 foreach ($optionlist as $option) {
                   if($display_questions[$questionid]['allow_multiple_selections']==1) {
                     $option_cat = "radio";
-                  }else if ($display_questions[$questionid]['allow_multiple_selections']==0) {
+                  }elseif ($display_questions[$questionid]['allow_multiple_selections']==0) {
                     $option_cat = "checkbox";
                   }
                   ?>
@@ -315,7 +315,7 @@ function submitsurvey(){
                     <label for="q1"><?php echo $option; ?> </label> </div>
                   </b>
                 <?php }
-              }else if($display_questions[$questionid]['options_display_type']==2){
+              }elseif($display_questions[$questionid]['options_display_type']==2){
                 $selectedoption =json_decode($markedanswer[$display_questions[$questionid]['queid']],1)[0];
                 ?>
 
@@ -323,7 +323,7 @@ function submitsurvey(){
                 <input type="number" <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> id="response_option_scale_<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]" class="form-control col-md-5" value="<?php echo $markedanswer;?>" placeholder="<?php echo $selectedoption;?>">
                 <?php
               }
-              else if($display_questions[$questionid]['options_display_type']==4){
+              elseif($display_questions[$questionid]['options_display_type']==4){
                 $selectedoption =json_decode($markedanswer[$display_questions[$questionid]['queid']],1)[0];
 
                 ?>

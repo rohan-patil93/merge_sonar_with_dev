@@ -300,7 +300,7 @@ function submitassessment(){
                 foreach ($optionlist as $option) {
                   if($display_questions[$questionid]['options_display_type']=='MCQ') {
                     $option_cat = "radio";
-                  }else if ($display_questions[$questionid]['options_display_type']=='MCA') {
+                  }elseif ($display_questions[$questionid]['options_display_type']=='MCA') {
                     $option_cat = "checkbox";
                   }
                   ?>
@@ -309,7 +309,7 @@ function submitassessment(){
                     <label for="q1"><?php echo htmlspecialchars(__($option ?? '')); ?> </label> </div>
                   </b>
                 <?php }
-              }else if($display_questions[$questionid]['options_display_type']== 'FT'){
+              }elseif($display_questions[$questionid]['options_display_type']== 'FT'){
                 $answer =$answer[0];
                 ?>
                 <textarea id="response_option<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]"  <?php if($display_questions[$questionid]['require_response']=="1") echo "required"; ?> class="form-control mt-10 col-md-10" placeholder=""><?php echo $answer;?></textarea>

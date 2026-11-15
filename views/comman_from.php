@@ -58,7 +58,7 @@ foreach($disvalue as  $fullvalue){
 		<input class="form-control"  type="text" <?php echo $read_only; ?>  id="<?php echo $key; ?>"  name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>">
 		<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please enter') ?> <?php echo __($value); ?> </div>
 	</div>
-	<?php } else  if($fullvalue['type'] == 'serial_no'){ $read_only= "readonly"; ?>
+	<?php } elseif($fullvalue['type'] == 'serial_no'){ $read_only= "readonly"; ?>
 <?php if( $role[$key] =="") { $role[$key] = dyanamicserialnumber($table_name); } ?>
 	<div class="<?php echo $class; ?>">
 		<span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></span>
@@ -68,7 +68,7 @@ foreach($disvalue as  $fullvalue){
 		</div>
 		<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please enter') ?> <?php echo __($value); ?> </div>
 	</div>
-<?php } else if($fullvalue['type']=='select' || $fullvalue['type']=='disable_select' ) {  $read_only="";  $_SESSION['apply_js']['multiselest'] = 1; if($fullvalue['type'] == 'disable_select'){ $read_only= "disabled"; }?>
+<?php } elseif($fullvalue['type']=='select' || $fullvalue['type']=='disable_select' ) {  $read_only="";  $_SESSION['apply_js']['multiselest'] = 1; if($fullvalue['type'] == 'disable_select'){ $read_only= "disabled"; }?>
 <?php
 $attribute_types_list = dyanamicSelectDataTablenameAllFileds($table_name,$key);
 if($attribute_types_list['refer_by_action']=='0'){
@@ -95,7 +95,7 @@ if($key == "hsn_and_sac_code_id"){
 	    <?php } ?>
 		<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?> </div>
 	</div>
-	<?php $select++; } else if($fullvalue['type']=='auto_select' || $fullvalue['type']=='disable_select' ) {  $read_only=""; if($fullvalue['type'] == 'disable_select'){ $read_only= "disabled"; } ?>
+	<?php $select++; } elseif($fullvalue['type']=='auto_select' || $fullvalue['type']=='disable_select' ) {  $read_only=""; if($fullvalue['type'] == 'disable_select'){ $read_only= "disabled"; } ?>
 <?php ///$selectdata = dyanamicselectdata($table_name,$key);
 
 $attribute_types_list = dyanamicSelectDataTablenameAllFileds($table_name,$key);
@@ -118,7 +118,7 @@ if($attribute_types_list['refer_by_action']=='0'){
 	    <?php } ?>
 		<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?> </div>
 	</div>
-	<?php $select++; }else if($fullvalue['type']=='radio') {  ?>
+	<?php $select++; }elseif($fullvalue['type']=='radio') {  ?>
 	<?php $selectdata = dyanamicselectdata($table_name,$key); ?>
 		<div class="<?php echo $class; ?>">
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
@@ -167,7 +167,7 @@ if($attribute_types_list['refer_by_action']=='0'){
 		</div>
 		</div>
 
-<?php } else if($fullvalue['type']=='checkbox') { ?>
+<?php } elseif($fullvalue['type']=='checkbox') { ?>
 		<?php $selectdata = dyanamicselectdata($table_name,$key);
 		if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_decode($role[$key],1); }
 		?>
@@ -186,7 +186,7 @@ if($attribute_types_list['refer_by_action']=='0'){
 					<?php } ?>
 			<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?> </div>
 		</div>
-<?php } else if($fullvalue['type']=='multi_select') {
+<?php } elseif($fullvalue['type']=='multi_select') {
 if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_decode($role[$key],1); } ?>
 	<div class="<?php echo $class; ?>">
 		<?php $selectdata = dyanamicselectdata($table_name,$key); ?>
@@ -218,7 +218,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 			<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?> </div>
 	</div>
 <?php $mutiselet++;
-}else if($fullvalue['type']=='date_pick') {
+}elseif($fullvalue['type']=='date_pick') {
 		$date_pick[] = $key;
 		 ?>
 		<div class="<?php echo $class; ?>" >
@@ -226,7 +226,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 				<?php $date_pic = fromDate($role[$key]); ?>
 <input class="form-control datepicker" type="text" value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>" >
 		</div>
-<?php $dateid++; }else if($fullvalue['type']=='month_year') {
+<?php $dateid++; }elseif($fullvalue['type']=='month_year') {
 		$month = $role[$key]!="" ? $role[$key] : date('Y-m');?>
 		<div class="<?php echo $class; ?>" >
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
@@ -234,7 +234,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 		     	<input class="form-control" type="month" value="<?php echo  $month; ?>"  name="<?php echo $key; ?>" id="example-month-input"/>
 		    </div>
 		</div>
-<?php  }else if($fullvalue['type']=='time_pick') {
+<?php  }elseif($fullvalue['type']=='time_pick') {
 
 		$time_pic = $role[$key]!="" ? $role[$key] : date('h:i:s');
 		 ?>
@@ -244,7 +244,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
   <div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?> </div>
 
 		</div>
-<?php $dateid++; } else if($fullvalue['type']=='email'){ ?>
+<?php $dateid++; } elseif($fullvalue['type']=='email'){ ?>
 
 		<div  class="<?php echo $class; ?>" >
 				<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
@@ -252,7 +252,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 				<input class="form-control" id="kt_inputmask_9" type="text" name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" />
 			</div>
 		</div>
-<?php } else if($fullvalue['type']=='phone'){  $in_phone_fileds[] = $key;?>
+<?php } elseif($fullvalue['type']=='phone'){  $in_phone_fileds[] = $key;?>
 		<div class="<?php echo $class; ?>">
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
 			<div>
@@ -261,7 +261,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 				<!-- <span class="form-text text-muted">Phone number mask: <code>(999) 999-9999</code></span> -->
 			</div>
 		</div>
-<?php } else if($fullvalue['type']=='currency'){ $in_currency_fileds[] = $key; ?>
+<?php } elseif($fullvalue['type']=='currency'){ $in_currency_fileds[] = $key; ?>
 		<div class="<?php echo $class; ?>">
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
 			<div>
@@ -270,7 +270,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 				<!-- <span class="form-text text-muted">Phone number mask: <code>(999) 999-9999</code></span> -->
 			</div>
 		</div>
-<?php } else if($fullvalue['type']=='number' || $fullvalue['type']=='number_type'){ ?>
+<?php } elseif($fullvalue['type']=='number' || $fullvalue['type']=='number_type'){ ?>
 		<div class="<?php echo $class; ?>">
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
 			<div>
@@ -282,7 +282,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 
 
 
-<?php } else if($fullvalue['type']=='rating'){ ?>
+<?php } elseif($fullvalue['type']=='rating'){ ?>
 		<div class="<?php echo $class; ?>">
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
 
@@ -299,7 +299,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
     	<input type="hidden" class="form-control m-l-10"  name="<?php echo $key; ?>" id="star_value_input<?php echo $rattig; ?>"  value="<?php echo $role[$key]!="" ? $role[$key] :0; ?>"/>
 </div>
 		</div>
-<?php $rattig++; } else if($fullvalue['type']=='password'){ ?>
+<?php $rattig++; } elseif($fullvalue['type']=='password'){ ?>
 
 		<div class="<?php echo $class; ?>">
 			<label><?php echo __($value).$key; if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
@@ -309,7 +309,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 			</div>
 			<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please enter') ?> <?php echo __($value); ?> </div>
 		</div>
-<?php } else if($fullvalue['type']=='color_pick'){ ?>
+<?php } elseif($fullvalue['type']=='color_pick'){ ?>
 		<div class="<?php echo $class; ?>">
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
 			<div class="input-group">
@@ -320,7 +320,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 		 	</div>
 
 		</div>
-<?php } else if($fullvalue['type']=='image'){ $bimage = $role[$key]; $bimage = $bimage!="" ?'uploads/all/'.$bimage: 'uploads/all/no-image.jpg';  ?>
+<?php } elseif($fullvalue['type']=='image'){ $bimage = $role[$key]; $bimage = $bimage!="" ?'uploads/all/'.$bimage: 'uploads/all/no-image.jpg';  ?>
 		 <div class="<?php echo $class; ?>">
                  <label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
                 <div class="col-lg-9 col-xl-6 mt-2">
@@ -354,7 +354,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 
                 </div>
             </div>
-<?php $img++; }else if($fullvalue['type']=='file_upload'){  ?>
+<?php $img++; }elseif($fullvalue['type']=='file_upload'){  ?>
 
 						<div class="<?php echo $class; ?>">
    						  <label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
@@ -362,7 +362,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
                                             <input type="file" class="form-control" name="<?php echo $key; ?>" id="<?php echo $key; ?>" value="<?php echo $role[$key]; ?>">
                                         </div>
                                     </div>
-<?php $img++; } else if($fullvalue['type']=='editor'){ ?>
+<?php $img++; } elseif($fullvalue['type']=='editor'){ ?>
 		<div class="<?php echo $class; ?>">
 		<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?>
 			</label>
@@ -376,7 +376,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 
 			<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?>
 	</div></div>
-<?php } else if($fullvalue['type']=='slider'){ ?>
+<?php } elseif($fullvalue['type']=='slider'){ ?>
 		<div class="<?php echo $class; ?>">
 		<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?>
 			</label>
@@ -390,7 +390,7 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 			</div>
 			<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?>
 	</div></div>
-<?php $slider++; }else if($fullvalue['type']=='hidden'){
+<?php $slider++; }elseif($fullvalue['type']=='hidden'){
         //echo $key."//".$role[$key]; print_r($role);
 	    $hidden_key = $role[$key] !="" ? $role[$key] : $_SEESSION[$key];
 

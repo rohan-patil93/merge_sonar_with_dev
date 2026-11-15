@@ -64,11 +64,11 @@ function emdEsc($value)
                             <tr>
                                 <td colspan="8" class="text-center employee-missing-empty"><?= __('Company context missing in session.') ?></td>
                             </tr>
-                        <?php } else if (!is_array($apiResponse)) { ?>
+                        <?php } elseif (!is_array($apiResponse)) { ?>
                             <tr>
                                 <td colspan="8" class="text-center employee-missing-empty"><?= __('Unable to load employee details.') ?></td>
                             </tr>
-                        <?php } else if (count($missEmployees) == 0) { ?>
+                        <?php } elseif (count($missEmployees) == 0) { ?>
                             <tr>
                                 <td colspan="8" class="text-center employee-missing-empty"><?= __('No missing employee details found.') ?></td>
                             </tr>

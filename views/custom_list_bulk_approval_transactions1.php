@@ -325,7 +325,7 @@
 											<div class="kt-todo__datetime" data-toggle="view">
 												<?php $days = dateDiffInDays($list['request_date']);
 													if($days == 0){ echo "To day"; }
-													else if($days < 7){ echo $days ." days ago"; }
+													elseif($days < 7){ echo $days ." days ago"; }
 													else{ echo date('M d, Y',strtotime($list['request_date'])); }
 												 ?>
 

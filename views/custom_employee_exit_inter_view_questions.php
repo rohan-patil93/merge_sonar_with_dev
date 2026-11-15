@@ -87,7 +87,7 @@ function formsubmit(){
               foreach ($optionlist as $option) {
                 if($display_questions[$questionid]['allow_multiple_selections']==1) {
                   $option_cat = "radio";
-                }else if ($display_questions[$questionid]['allow_multiple_selections']==0) {
+                }elseif ($display_questions[$questionid]['allow_multiple_selections']==0) {
                   $option_cat = "checkbox";
                 }
                 ?>
@@ -96,14 +96,14 @@ function formsubmit(){
                   <label for="q1"><?php echo __($option); ?> </label> </div>
                 </b>
               <?php }
-            }else if($display_questions[$questionid]['options_display_type']==2){
+            }elseif($display_questions[$questionid]['options_display_type']==2){
               $selectedoption =$answer[$questionid];
               ?>
 
               <span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Scale from 1 to:') ?> <?php echo $option;?></span>
               <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="number"  class="form-control col-md-5" value=<?php echo $selectedoption;?> >
               <?php
-            }else if($display_questions[$questionid]['options_display_type']==4){
+            }elseif($display_questions[$questionid]['options_display_type']==4){
              //$selectedoption =$answer[$questionid];
 
              ?>

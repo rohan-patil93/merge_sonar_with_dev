@@ -85,7 +85,7 @@ foreach ($qustion_types as $qtype) {
                   foreach ($optionlist as $option) {
                     if($display_questions[$questionid]['allow_multiple_selections']==1) {
                       $option_cat = "radio";
-                    }else if ($display_questions[$questionid]['allow_multiple_selections']==0) {
+                    }elseif ($display_questions[$questionid]['allow_multiple_selections']==0) {
                       $option_cat = "checkbox";
                     }
                     ?>
@@ -94,14 +94,14 @@ foreach ($qustion_types as $qtype) {
                       <label for="q1"><?= htmlspecialchars(__($option ?? '')) ?> </label> </div>
                     </b>
                   <?php }
-                }else if($display_questions[$questionid]['options_display_type']==2){
+                }elseif($display_questions[$questionid]['options_display_type']==2){
 
                   ?>
 
                  <span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Scale from 1 to:") ?> <?php echo $option;?></span>
                   <input type="number"  class="form-control col-md-5" name="response_option<?php echo $questionid;?>"   id="response_option_scale_<?php echo $questionid;?>" value=<?php echo $selectedoption;?> >
                   <?php
-                }else if($display_questions[$questionid]['options_display_type']==4){
+                }elseif($display_questions[$questionid]['options_display_type']==4){
 
                  ?>
                  <textarea id="response_option<?php echo $questionid;?>"  name="response_option<?php echo $questionid;?>" class="form-control mb-2 col-lg-8" placeholder=""><?php echo $selectedoption;?></textarea>

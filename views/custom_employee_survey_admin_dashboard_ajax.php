@@ -72,7 +72,7 @@ if(count((array)$rows) > 0) {
 				<a href="<?php echo $resultUrl; ?>" class="btn btn-sm btn-outline-primary f-w-600 f-12 text-primary p-2 b-radius-5 mb-1">
 					<i class="fa fa-eye m-r-5"></i> <?php echo htmlspecialchars(__($surveyRow['action_label'])); ?>
 				</a>
-				<?php } else if($surveyRow['action'] == 'expired') { ?>
+				<?php } elseif($surveyRow['action'] == 'expired') { ?>
 				<button type="button" class="btn btn-sm btn-warning f-w-600 f-12 p-2 b-radius-5 mb-1" disabled><?php echo htmlspecialchars(__($surveyRow['action_label'])); ?></button>
 				<?php } else { ?>
 				<a href="<?php echo $responseUrl; ?>" class="btn btn-sm btn-outline-primary f-w-600 f-12 text-primary p-2 b-radius-5 mb-1">

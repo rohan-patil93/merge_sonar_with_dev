@@ -53,7 +53,7 @@ function csrOblDashCsvBaseRow($label, $totalAmount, $fyRange, $fyValues, $isPct)
       $val = isset($fyValues[$yIdx]) ? $fyValues[$yIdx] : '';
       if ($isPct && is_numeric($val)) {
         $row['FY ' . $fyCode] = number_format((float)$val * 100, 2) . '%';
-      } else if (is_numeric($val)) {
+      } elseif (is_numeric($val)) {
         $row['FY ' . $fyCode] = (float)$val;
       } else {
         $row['FY ' . $fyCode] = '-';
@@ -352,7 +352,7 @@ $_SESSION['download_data'] = array();
                           $statusClass = 'csr-obl-status-process';
                           if ($project['status'] == 'Completed') {
                             $statusClass = 'csr-obl-status-completed';
-                          } else if ($project['status'] == 'Not Started') {
+                          } elseif ($project['status'] == 'Not Started') {
                             $statusClass = 'csr-obl-status-notstarted';
                           }
                           $csvRow = array(
@@ -516,7 +516,7 @@ $_SESSION['download_data'] = array();
                       $locStatusClass = 'csr-obl-status-process';
                       if ($loc['status'] == 'Completed') {
                         $locStatusClass = 'csr-obl-status-completed';
-                      } else if ($loc['status'] == 'Not Started') {
+                      } elseif ($loc['status'] == 'Not Started') {
                         $locStatusClass = 'csr-obl-status-notstarted';
                       }
                     ?>

@@ -49,22 +49,22 @@ if($return == 0){
 
 	if(strpos("data".$option,"COM_REPORT")){
 		$disptemp = "custom_report.php";
-	}else if(in_array($option, (array)$inv_pages)){
+	}elseif(in_array($option, (array)$inv_pages)){
 		$display_invoice_page  = $inv_pages_list[$option];
 		if($_SESSION['work_module_setup_id'] == 19){
 			$disptemp = "custom_insert_quotation_vms.php";
 		}else{
 			$disptemp = $display_invoice_page['display_page'].".php";
 		}
-	}else if(in_array($option, (array)$array_list)){
+	}elseif(in_array($option, (array)$array_list)){
 		$chosse_list=1;
 	$disptemp = "view_roll_back1.php";
 	//$disptemp = "views/view_model1.php";
-	}else if(in_array($option, (array)$array_insert)){
+	}elseif(in_array($option, (array)$array_insert)){
 		$disptemp = "new_from.php";
 	}/*else if($option=='COM_INSERT_EMPLOYEES'){
 		$disptemp = "views/new_from.php";
-	}*/else if(in_array($option, (array)$array_view)){
+	}*/elseif(in_array($option, (array)$array_view)){
 		$disptemp = "new_view.php";
 	}else{
 		$name = strtolower(str_replace("COM_", "CUSTOM_",$option));

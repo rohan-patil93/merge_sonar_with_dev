@@ -40,7 +40,7 @@ $trendTextClass = 'text-muted';
 if($trendDirection == 'up'){
 	$trendIconClass = 'ti-arrow-up';
 	$trendTextClass = 'text-success';
-}else if($trendDirection == 'down'){
+}elseif($trendDirection == 'down'){
 	$trendIconClass = 'ti-arrow-down';
 	$trendTextClass = 'text-danger';
 }

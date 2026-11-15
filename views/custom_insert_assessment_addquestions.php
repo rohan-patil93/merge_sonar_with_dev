@@ -5,7 +5,7 @@ include_once('../comm.php');
 $typeofquestion= array('1'=>'MCQ','2'=>'MCA','3'=>'FT');
 if($_GET['type']== $typeofquestion['1']){
 	$settype = 1;
-} else if($_GET['type']== $typeofquestion['2']){
+} elseif($_GET['type']== $typeofquestion['2']){
 	$settype =2;
 }
 else{
