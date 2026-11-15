@@ -391,7 +391,7 @@ function emptyCheck($valu){
                                     <?php if($bank_accounts['upi_qr_code_image'] != ''){ ?>
                                     
                                         <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight: 500;">Scan to pay via UPI</h3>
-                                         <img src="uploads/all/<?php echo $bank_accounts['upi_qr_code_image']; ?>" style="width:80px;margin: 10px 0 0 0;"> 
+                                         <img alt="" src="uploads/all/<?php echo $bank_accounts['upi_qr_code_image']; ?>" style="width:80px;margin: 10px 0 0 0;"> 
                                         <?php if($bank_accounts['upi_id'] !=""){ ?>
                                         <p style="font-size: 12px;color:#333333;font-weight: bold;"><?php echo emptyCheck($bank_accounts['upi_id']); ?></p>
                                     <?php } ?>
