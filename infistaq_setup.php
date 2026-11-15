@@ -14,7 +14,8 @@ if(isset($_SESSION['sbt_message']) && $_SESSION['sbt_message'] == 1){ ?>
       }
     </script>
 
-<?php  unset($_SESSION['sbt_message']); }
+<?php  unset($_SESSION['sbt_message']);
+}
 
 
 $helptext = array('location'=>'Please Enter Your Location',
@@ -847,7 +848,8 @@ function addslabrows(){
                                      $cc=1; $timezonelists = json_decode($tzlist1['time_zones'],1);
                                       foreach($timezonelists as $timezonelists1){ ?>
                                         <option id="tzlist1_<?php echo $cc."_".$tzlist1['id'];?>" value="<?php echo $timezonelists1['zoneName']; ?>"><?php echo $timezonelists1['zoneName'];?></option>
-                                     <?php $cc++; }
+                                     <?php $cc++;
+                                     }
                                     }
                                   ?>
                                 </select>

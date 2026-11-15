@@ -71,7 +71,8 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
 
-                                <?php } }?>
+                                <?php }
+                                }?>
 
 							    <form class="md-float-material form-material" action="" method="post" >
 

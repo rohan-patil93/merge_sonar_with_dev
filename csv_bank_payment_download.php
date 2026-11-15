@@ -21,10 +21,13 @@ $narra = json_decode($bankdata['narration'],1);
 $str="";
 foreach($narra as $key=>$narr){
 	//print_r($narr); echo key($narr);
-	 if(key($narr) == 'text'){ $str.= $narr['text']; }
+	 if(key($narr) == 'text'){ $str.= $narr['text'];
+	 }
 	 if(key($narr) == 'list'){
-	 if( $narr['list'] == 'M'){ $str.= date('M', strtotime($listdate)); }
-	 if($narr['list'] == 'Y'){ $str.= $pay_year; }
+	 if( $narr['list'] == 'M'){ $str.= date('M', strtotime($listdate));
+	 }
+	 if($narr['list'] == 'Y'){ $str.= $pay_year;
+	 }
 	 }
 }
 $todate = date('d-m-Y');

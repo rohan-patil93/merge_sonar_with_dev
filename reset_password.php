@@ -83,7 +83,8 @@ function getIPAddress(){
                           <span class="f-14"><?php echo $dis_error[$error]; ?></span>
                           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                           </div>
-                    <?php }} ?>
+                    <?php }
+                    } ?>
                 <h2 class="f-26 f-w-600 mt-4">Reset Password</h2>
                 <form class="md-float-material form-material" action="" method="post">
                     <div class="width-60 text-left mt-5">

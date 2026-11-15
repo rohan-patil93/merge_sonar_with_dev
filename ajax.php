@@ -677,10 +677,14 @@ if($page=='selectedattendancelist'){
 }
 if($page == 'setupcomponents'){
 	//print_r($_POST);
-	if(isset($_POST['start_date'])){ $_POST['start_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['start_date']))); }
-	if(isset($_POST['end_date'])){ $_POST['end_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['end_date']))); }
-	 if(isset($_POST['courier_date'])){ $_POST['courier_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['courier_date']))); }
-	 if(isset($_POST['publish_date'])){ $_POST['publish_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['publish_date']))); }
+	if(isset($_POST['start_date'])){ $_POST['start_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['start_date'])));
+	}
+	if(isset($_POST['end_date'])){ $_POST['end_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['end_date'])));
+	}
+	 if(isset($_POST['courier_date'])){ $_POST['courier_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['courier_date'])));
+	 }
+	 if(isset($_POST['publish_date'])){ $_POST['publish_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['publish_date'])));
+	 }
 
 
 	$table_name = $_POST['table_name'];
@@ -727,8 +731,10 @@ if($page=='getselectedlist'){
 	$cudata='';
 	if($_POST['id']!=''){
 		$data1["where"] = array($_POST['field']=> $_POST['id'], 'is_active' => 0);
-		if($_POST['table_name'] == "states"){ $data1["order"] = "state_name"; }
-		if($_POST['table_name'] == "cities"){ $data1["order"] = "city_name"; }
+		if($_POST['table_name'] == "states"){ $data1["order"] = "state_name";
+		}
+		if($_POST['table_name'] == "cities"){ $data1["order"] = "city_name";
+		}
 		$data = urlencode(json_encode($data1));
 		$post="&data=".$data;
 		$curl = API."?mode=gettabledetailswithconditions&table=".$_POST['table_name'].$post;
@@ -3669,7 +3675,9 @@ if($page == 'checkandupdatecolorprojecttask'){
 	$url = API."?mode=checkandupdatecolorprojecttask&method=post";
 	$response = file_post_contents($url, $_POST, 'Update');
 	//echo $response;
-	if(strpos($response,'add')){ $res = 1; }else{ $res = 2;}
+	if(strpos($response,'add')){ $res = 1;
+	}else{ $res = 2;
+	}
 	//echo json_decode($res,1);
 	echo $res;
 }
@@ -4027,7 +4035,8 @@ if($page=="getesopplansbuckets"){
 					</div>
 					<div class="form-group col-lg-1"><i class="ti-trash"  onclick="deletRowVestage('.$mk.')"></i> </div>
 				</div>';
-		 $mk++; }
+		 $mk++;
+		 }
 		$html .= '</div>';
 		$pending = (100-$totaldis);
 		$html .= '<div class="card-footer pt-0">
@@ -4583,7 +4592,8 @@ if($page=="gettenantproperty"){
 									<textarea class="form-control" name="remarks[]">'.$bd['remarks'].'</textarea>
 								</td>';
 							$html2 .='</tr>';
-		 			 	$i++; }
+		 			 	$i++;
+		 			 	}
 		 		$html .=$html2;
 		 		$html .='</tbody></table>';
 	}
@@ -4768,7 +4778,8 @@ if($page=="getpaymentterms"){
 	  			<input type="hidden" name="payment_term_history['.$i.'][tax_amount]" value="'.$duetaxamount.'">';
 	  		$html .='</td></tr>';
 
-	  $i++;	}
+	  $i++;
+	  }
 	  	$html .='</table></td>';
 	}
 	$returnary['payment_terms'] = $html;
@@ -5879,7 +5890,8 @@ if($page == 'addupdatequestionfeddback'){
 	$question_id=$res['question_id'];
 	$str = '';
 	$_POST['change_id'] = $_POST['change_id']!="" ? $_POST['change_id'] : $question_id;
-	if($_POST['question_id']==""){ $str.= '<div class="" id="ques_id_'.$question_id.'">';   }
+	if($_POST['question_id']==""){ $str.= '<div class="" id="ques_id_'.$question_id.'">';
+	}
 	$str.= '<div class="p-20 z-depth-top-0 m-t-10 row" id="" >
                 <div class="col-lg-11">
                     <h6>'.$_POST['question'].'</h6>
@@ -5911,7 +5923,8 @@ if($page == 'addupdatequestionfeddback'){
 	}
     $str.='</div>';
 
-	if($_POST['question_id']==""){ $str.= '</div>'; }
+	if($_POST['question_id']==""){ $str.= '</div>';
+	}
 	echo $str;
 }
 if($page == 'createnewversionvendorfeedback'){

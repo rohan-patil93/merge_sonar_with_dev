@@ -735,7 +735,8 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
    <!--  <img alt="Logo" style="width:70px;" src="assets/images/logo.png" />  -->
    <?php if($_SESSION['config']['display_logo']!=""){ ?>
                     <img class="img-fluid img-100" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
-                <?php }else{ echo $_SESSION['config']['display_logo']; } ?></a>
+                <?php }else{ echo $_SESSION['config']['display_logo'];
+                } ?></a>
          <!---
 		 <div class="d-flex align-items-center">
             <button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle"> <span></span> </button>
@@ -787,7 +788,8 @@ if($register_data['current_status'] !=""){
                  <?php
                      echo $workflowsteps['workflow_btn'];
     $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,ST_CALLBACK,'');
-   if(!in_array($register_data['current_status'], $check_array)){ $disablecss = "style='pointer-events: none; opacity: 0.7;'";  } ?>
+   if(!in_array($register_data['current_status'], $check_array)){ $disablecss = "style='pointer-events: none; opacity: 0.7;'";
+   } ?>
 
                 <a href="index.php?option=com_logout" class="btn btn-danger">
                   <i class="ti-power-off"></i> Logout
@@ -1022,7 +1024,9 @@ if($register_data['current_status'] !=""){
 <div class=" col-lg-6 mt-10">
  <div class="checkbox-fade fade-in-primary">
   <label class="form-label">
-    <input type="checkbox" style="display:none" <?php if($register_data['shipping_address']==$register_data['billing_address'] && $rowid!="") { echo 'checked'; } else { echo ''; } ?> id="is_same" onclick="sameaddress()" title="Input" aria-label="Input">
+    <input type="checkbox" style="display:none" <?php if($register_data['shipping_address']==$register_data['billing_address'] && $rowid!="") { echo 'checked';
+    } else { echo '';
+    } ?> id="is_same" onclick="sameaddress()" title="Input" aria-label="Input">
     <span class="cr">
       <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
     </span><span>
@@ -1254,7 +1258,8 @@ if($register_data['current_status'] !=""){
                                 </div>
                               <?php } ?>
                               <div class="title" style="border-radius: 5px;">
-      <a  class="text-white" <?php if($vendor_documen['filename']!=""){ ?>  href="<?php  echo $File_Uploads_Path.$vendor_documen['filename'];   ?>"  target="_blank" <?php } ?> > <h6 class="f-14 m-l-10"> <?php if($vendor_documen['filename']!=""){ echo '<i class="ti-cloud-down"></i>'; } ?> <?php echo ucwords($docvalue['document_name']); ?> <?php if($vendor_documen['filename']!="" && $vendor_documen['current_status'] != ST_REJECTED){  ?><span class="label label-info" style="color: <?php echo "#". $filestatus['color']; ?>; background: <?php echo "#".strval($filestatus['background_color'] ); ?>; border-color: <?php echo "#".strval($filestatus['background_color']); ?>;"><?php echo $filestatus['name']; ?></span><?php } ?></h6> </a>
+      <a  class="text-white" <?php if($vendor_documen['filename']!=""){ ?>  href="<?php  echo $File_Uploads_Path.$vendor_documen['filename'];   ?>"  target="_blank" <?php } ?> > <h6 class="f-14 m-l-10"> <?php if($vendor_documen['filename']!=""){ echo '<i class="ti-cloud-down"></i>';
+      } ?> <?php echo ucwords($docvalue['document_name']); ?> <?php if($vendor_documen['filename']!="" && $vendor_documen['current_status'] != ST_REJECTED){  ?><span class="label label-info" style="color: <?php echo "#". $filestatus['color']; ?>; background: <?php echo "#".strval($filestatus['background_color'] ); ?>; border-color: <?php echo "#".strval($filestatus['background_color']); ?>;"><?php echo $filestatus['name']; ?></span><?php } ?></h6> </a>
                               </div>
                               <div class="x_content">
                                 <div class="">
@@ -1270,7 +1275,8 @@ if($register_data['current_status'] !=""){
                                              <i class="fa fa-thumbs-up"></i>
                                            <?php }else{  ?>
                                              <i class="fa fa-hourglass-half"></i>
-                                           <?php } }else{ ?>
+                                           <?php }
+                                           }else{ ?>
                                              <i class="fa fa-upload"></i>
                                            <?php }     ?>
                                          </div>
@@ -1282,7 +1288,8 @@ if($register_data['current_status'] !=""){
                                            <option value="">Select Any One</option>
                                            <?php foreach($doctypes[$dockey] as $docltype) { ?>
                                             <option value="<?php echo $docltype['id']?>" <?php echo $vendor_documen['document_id']==$docltype['id'] ? 'selected':'' ?>><?php echo $docltype['document_type']; ?></option>
-                                          <?php } } ?>
+                                          <?php }
+                                          } ?>
                                         </select>
                                       </div>
                                       <?php if($vendor_documen['current_status'] != ST_APPROVED){ ?>
@@ -1497,7 +1504,9 @@ if($register_data['current_status'] !=""){
           </div>
         </a>
       </div>
-      <?php $aci++; }  }
+      <?php $aci++;
+      }
+      }
       if($aci == 0){?>
         <a href="javascript:;" class="kt-notification__item">
           <div class="kt-notification__item-details">

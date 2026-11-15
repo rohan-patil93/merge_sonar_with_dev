@@ -52,7 +52,8 @@ $presentation_array = json_decode($configesponse,1);
 							<?php
 							foreach ($data['data'] as  $content) {
 								?>
-								<div class="<?php echo $column; if($i!=0 && $i!=$required_divisions) { echo $border; } ?>">
+								<div class="<?php echo $column; if($i!=0 && $i!=$required_divisions) { echo $border;
+								} ?>">
 									<div class="pt-30 pt-md-25 pb-15 px-5 text-center">
 										<!--begin::Icon-->
 										<?php if($content['image']!="")

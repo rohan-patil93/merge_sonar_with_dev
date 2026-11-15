@@ -81,7 +81,8 @@ include_once 'comm.php';
 			$start_date = $value['start_date'].'T'.$value['start_time'];
 			//if($value['start_time']!="00:00:00"){ $start_date.='T'.$value['start_time'];}
 			$end_date = $value['end_date'];
-			if($value['end_time']!="00:00:00"){ $end_date.='T'.$value['end_time'];}
+			if($value['end_time']!="00:00:00"){ $end_date.='T'.$value['end_time'];
+			}
 			$arr['id'] = $value['id'];
 			$arr['title'] = $cate[$value['event_category_id']]['category_name'];
 			$arr['start'] = $start_date;

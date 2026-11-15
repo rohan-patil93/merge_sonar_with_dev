@@ -12,7 +12,8 @@ $i=1;
 foreach($array_data as $array){
 	$data .="\n";
 	$data .= $i.",".strtoupper(implode(',', $array));
-$i++;}
+$i++;
+}
 
 header('Content-Type: application/csv');
 header('Content-Disposition: attachment; filename="'.$table.'.csv"');

@@ -54,13 +54,15 @@ class phptextClass
 		for( $i=0; $i<$noiceLines; $i++ ) {
 			imageline($im, random_int(0,$imgWidth), random_int(0,$imgHeight),
 			random_int(0,$imgWidth), random_int(0,$imgHeight), $noiceColor);
-		}}
+		}
+		}
 
 		if($noiceDots>0){/* generating the dots randomly in background */
 		for( $i=0; $i<$noiceDots; $i++ ) {
 			imagefilledellipse($im, random_int(0,$imgWidth),
 			random_int(0,$imgHeight), 3, 3, $textColor);
-		}}
+		}
+		}
 
 		imagefill($im,0,0,$backgroundColor);
 		list($x, $y) = $this->ImageTTFCenter($im, $text, $font, $fontSize);

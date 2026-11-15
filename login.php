@@ -135,7 +135,8 @@ function getBrowser() {
   }
 
   // check if we have a number
-  if ($version==null || $version=="") {$version="?";}
+  if ($version==null || $version=="") {$version="?";
+  }
 
   $data = array(  'userAgent' => $u_agent,'name'      => $bname, 'version'   => $version,'platform'  => $platform, 'pattern'    => $pattern);
   return $data['name'].",".$data['version'];

@@ -21,7 +21,8 @@ $i=1; foreach($array_data as $key=>$array){
 		//$data .="\n";
 	     }
 	    $data .= " ,".implode(',', $listarray);
-	$m++; }
+	$m++;
+	}
 	//$data .="\n";
 	$i++;
 }

@@ -178,7 +178,8 @@ foreach($modulelinklists as $linking){
 						<?php if(isset($linkingmodules[$modul['module_id']])){ ?>
 
 					<?php } ?>
-					<?php }  }?>
+					<?php }
+					}?>
 				</div>
 			</div>
 			<div class="card-footer">

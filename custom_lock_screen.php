@@ -100,7 +100,8 @@ function getBrowser() {
     $version= $matches['version'][0];
   }
   // check if we have a number
-  if ($version==null || $version=="") {$version="?";}
+  if ($version==null || $version=="") {$version="?";
+  }
 
   $data = array(  'userAgent' => $u_agent,'name'      => $bname, 'version'   => $version,'platform'  => $platform, 'pattern'    => $pattern);
   return $data['name'].",".$data['version'];
@@ -185,7 +186,8 @@ function getIPAddress(){
 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
-                        <?php } }?>
+                        <?php }
+                        }?>
 
     <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
     <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >

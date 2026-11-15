@@ -918,7 +918,8 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 										<div class="custom-popup-open custom-popup-slide-<?php echo $modul['module_id']; ?> text-start" style="left:227px; top:0px; display: none; z-index: 999; width : 600px;">
 										</div>
 									</div>
-								<?php }  } ?>
+								<?php }
+								} ?>
 							</div>
 							<form id="submit_form_id_6" enctype='multipart/form-data'>
 								<input type="hidden" name="setup_page_id" value="6">

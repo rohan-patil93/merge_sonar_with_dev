@@ -471,10 +471,12 @@ if($timeprint == '1' && $maxtimeshow >= '17'){
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
 	 <?php
-		if($timeprint == '1' && $maxtimeshow >= '18'){	echo "before Header - ".date('m/d/Y h:i:s a')."</br>"; }
+		if($timeprint == '1' && $maxtimeshow >= '18'){	echo "before Header - ".date('m/d/Y h:i:s a')."</br>";
+		}
 		include_once "partials/_header.php";
 
-		if($timeprint == '1' && $maxtimeshow >= '18'){	echo "After Header - ".date('m/d/Y h:i:s a')."</br>"; }
+		if($timeprint == '1' && $maxtimeshow >= '18'){	echo "After Header - ".date('m/d/Y h:i:s a')."</br>";
+		}
 	?>
 	<script>
              var HOST_URL = "https://demo.hrstaq.com/";
@@ -513,7 +515,8 @@ if($_SESSION['timesheetalertshow'] != '0' && in_array('11',(array)$_SESSION['mod
        <strong><a href="index.php?option=<?php echo $getTimeSheetNotSubmitedDeatils['option']; ?>" class="f-14"> <?php echo $getTimeSheetNotSubmitedDeatils['mes']; ?></a></strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-<?php }  } ?>
+<?php }
+} ?>
 
                         <!-- [ breadcrumb ] start -->
 

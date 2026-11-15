@@ -108,7 +108,8 @@ if($transaction_table!=""){
 			$data .="\n";
 		     }
 		    $data .= " ,".implode(',', $listarray);
-		$m++; }
+		$m++;
+		}
 		//$data .="\n";
 		$i++;
 	}

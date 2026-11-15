@@ -1545,7 +1545,8 @@ if($mode == 'gettabledetailswithconditions'){
 			$led[$i]['currency_name']= $dd->currency_short_code;
 			$led[$i]['currency_short_code']= $dd->currency_short_code;
 
-			$i++;}
+			$i++;
+			}
 			$details = $led;
 		}
 	//	echo "<pre>"; print_r($details);

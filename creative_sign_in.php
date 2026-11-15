@@ -46,7 +46,8 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
 
-                        <?php } }?>
+                        <?php }
+                        }?>
                                    <!--- <p class="text-muted f-14 f-w-600">Your Social Campaigns</p>
                                       <div class="d-block mt-5 text-center">
                                         <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg" alt="" > Sign in with Google</button>
