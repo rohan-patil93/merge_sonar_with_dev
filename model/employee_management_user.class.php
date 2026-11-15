@@ -88,7 +88,7 @@ class employeeManagementUserClass extends userClass{
                     $show_filter_cond = explode('&',$show_filter_cond);
                     foreach($show_filter_cond as $show_filter_co){
                         $fieldname = explode("=",$show_filter_co);
-                        if($fieldname['0']!="check" AND $fieldname['0']!="table"){
+                        if($fieldname['0']!="check" and $fieldname['0']!="table"){
                             $show_filter_condion[$fieldname['0']]=$fieldname['1'];
                         }
                     }

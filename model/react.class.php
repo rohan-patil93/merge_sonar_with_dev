@@ -26,7 +26,7 @@ class reactClass extends userClass{
 		//echo "___________________";echo "array"; print_r($get); exit;
 		$rid = $get['rid'];
 		$fid = $get['fid'] !='' ? $get['fid'] : 'id';
-		$res=$callConfig->updateRecord($get['table'],array('is_active'=>NULL),$fid,$rid);
+		$res=$callConfig->updateRecord($get['table'],array('is_active'=>null),$fid,$rid);
 		return $res;
 	}
 	public function dynamiclistatreact($get){
@@ -338,7 +338,7 @@ class reactClass extends userClass{
 				if (isset($post['contact_persons']) && is_array($post['contact_persons'])) {
 					$contact_personsary = array();
 					foreach($post['contact_persons']['name'] as $key=>$conpers){
-						if($post['contact_persons']['name'][$key] !="" AND $post['contact_persons']['number'][$key]!=""){
+						if($post['contact_persons']['name'][$key] !="" and $post['contact_persons']['number'][$key]!=""){
 							$contact_personsary[] =  array('name'=>$post['contact_persons']['name'][$key],'email'=>$post['contact_persons']['email'][$key],'number'=>$post['contact_persons']['number'][$key]);
 						}
 					}
@@ -524,7 +524,7 @@ class reactClass extends userClass{
 					if(count((array)$selected_location_ids) > 0){
 						$admin_cond = "(JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL AND location_id IN (".implode(',', $selected_location_ids)."))";
 					}
-					if($insert_array['originator'] !="" AND $get['user_id'] !=""){
+					if($insert_array['originator'] !="" and $get['user_id'] !=""){
 						$conditins = " AND (".$admin_cond." OR id = '".$insert_array['originator']."' OR id = '".$get['user_id']."')";
 					}elseif($insert_array['originator'] !=""){
 						$conditins = " AND (".$admin_cond." OR id = '".$insert_array['originator']."')";
@@ -771,7 +771,7 @@ class reactClass extends userClass{
 			 			$cntsql = "SELECT COUNT(id) as cnt FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0".$condition.$admin_or_user_whr;
 			     		$cntres =  $callConfig->getRow($cntsql);
 			     		$return['total_record_cnt'] = $cntres;
-			     		$respons_data_cnt =  ($cntres->cnt!="" AND $cntres->cnt !=0)?$cntres->cnt:0;
+			     		$respons_data_cnt =  ($cntres->cnt!="" and $cntres->cnt !=0)?$cntres->cnt:0;
 				     	$divide_limit = $respons_data_cnt/$get['limit_select'];
 						$total_pages = ceil($respons_data_cnt / $get['limit_select']);
 						$current_page = isset($get['current_page']) ? (int)$get['current_page'] : 1;
@@ -846,7 +846,7 @@ class reactClass extends userClass{
 						foreach ($existingDocs as $existingDoc) {
 							if (!in_array($existingDoc->id, $keepDocIds)) {
 								$deleteArray = [
-									'is_active' => NULL, 'updated_by' => $post['user_id'], 'updated_date' => date('Y-m-d H:i:s')
+									'is_active' => null, 'updated_by' => $post['user_id'], 'updated_date' => date('Y-m-d H:i:s')
 								];
 								$deleteRes = $callConfig->updateRecord('contract_documents', $deleteArray, 'id', $existingDoc->id);
 								$return['deleted_results'][] = ['id' => $existingDoc->id, 'file_name' => $existingDoc->file_name, 'result' => $deleteRes];

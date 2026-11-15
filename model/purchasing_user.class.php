@@ -92,7 +92,7 @@ class purchasingUserClass extends userClass{
                 $return['parent_update'] = $res;
 
                 // Soft-delete existing child records
-            $upary = array('is_active' => NULL);
+            $upary = array('is_active' => null);
                 $callConfig->updateRecord('subcontract_work_order_items', $upary, 'transaction_id', $rid);
             } else {
                 // INSERT mode

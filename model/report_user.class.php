@@ -6,7 +6,7 @@ class reportUserClass extends userClass{
         $return = array();
         $condition = "";
         $transaction_table = $get['transaction_table'];
-       if($get['from_date'] !="" AND $get['to_date'] !=""){
+       if($get['from_date'] !="" and $get['to_date'] !=""){
             $condition .= " AND transaction_date >= '".$this->dateconvertdbformat($get['from_date'])."'  AND transaction_date <= '".$this->dateconvertdbformat($get['to_date'])."'";
         }
         if(!empty($get['party_id'])){
@@ -667,7 +667,7 @@ function getSalesRegisterReport($get)
 				$refrancetransactions[$reftra->id] = $reftra;
 			}
 			$return['refrance_transactions'] = $refrancetransactions;
-		}elseif($transaction_table == "sales_invoices" OR $transaction_table == "purchase_orders"){
+		}elseif($transaction_table == "sales_invoices" or $transaction_table == "purchase_orders"){
 			$reftranssql = "SELECT id, transaction_number, transaction_date FROM sales_orders WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 			$reftransres = $callConfig->getAllRows($reftranssql);
 			foreach($reftransres as $reftra){

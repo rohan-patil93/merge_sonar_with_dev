@@ -4870,12 +4870,12 @@ public function toimportthedataintotablesemployeessalary($get){
 		            $parts[$m] = $finyaer;
 		            //$checksequincerow[$m] = $finyaer;
 		        }
-		        if(isset($position_with_val[$m]) AND $position_with_val[$m]['display_type'] =="STATIC"){
+		        if(isset($position_with_val[$m]) and $position_with_val[$m]['display_type'] =="STATIC"){
 		            if($position_with_val[$m]['static_value'] != ""){
 		            	//$parts[$m] = $position_with_val[$m]['static_value'];
 		            	$checksequincerow[$m] = $position_with_val[$m]['static_value'];
 		            }
-		        }elseif(isset($position_with_val[$m]) AND $position_with_val[$m]['display_type'] =="DYNAMIC"){
+		        }elseif(isset($position_with_val[$m]) and $position_with_val[$m]['display_type'] =="DYNAMIC"){
 		            if($position_with_val[$m]['dynamic_value'] != ""){
 		            	//$parts[$m] = $position_with_val[$m]['dynamic_value'];
 		            	$checksequincerow[$m] = $position_with_val[$m]['dynamic_value'];
@@ -4889,7 +4889,7 @@ public function toimportthedataintotablesemployeessalary($get){
 
 		    	if($seq_val == "PARTY_NAME"){
 
-					if($partytable !="" AND $party_id !=""){
+					if($partytable !="" and $party_id !=""){
 						$partysql = "SELECT id, short_name FROM ".$partytable." WHERE company_id = ".$get['company_id']." AND id = ".$party_id." AND is_active = 0";
 						$partyres = $callConfig->getRow($partysql);
 						if($partyres->short_name !=""){

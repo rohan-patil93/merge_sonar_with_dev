@@ -259,7 +259,7 @@ class userClass{
 		if($callConfig->module_id!=""){
 			$defaultmoduleid = $callConfig->module_id;
 			$working_role_short_code = $callConfig->working_role_short_code;
-		}elseif($userrow2[0]->module_setup_id!="" AND $userrow2[0]->module_setup_id !=0){
+		}elseif($userrow2[0]->module_setup_id!="" and $userrow2[0]->module_setup_id !=0){
 			$defaultmoduleid = $userrow2[0]->module_setup_id;
 			$working_role_short_code =  $userrow2[0]->role_short_code;
 		}else{
@@ -641,7 +641,7 @@ class userClass{
 
 			$row=$callConfig->getRow($query);
 
-			if(isset($row->id) AND $row->id !=""){ //database not available
+			if(isset($row->id) and $row->id !=""){ //database not available
 
 				$db_id = $row->id;
 				$db_name = $row->db_name;
@@ -2670,7 +2670,7 @@ class userClass{
 		global $callConfig;
 		$where = " item_table != '' AND tax_table != '' AND is_active = 0";
 		$configesponse = $this->getAllTablesData(TBL_DYNAMIC_MAPPING_TABLES,'*',$where);
-		foreach($configesponse AS $con){
+		foreach($configesponse as $con){
 			$table_list[$con->application_table_name] ['item']= $con->item_table;
 			$table_list[$con->application_table_name] ['tax']= $con->tax_table;
 			$table_list[$con->application_table_name] ['option'] = $con->option_url;
@@ -2683,7 +2683,7 @@ class userClass{
 		$table_list = array();
 		global $callConfig;
 		$configesponse = $this->getAllTablesData(TBL_DYNAMIC_MAPPING_TABLES,'*','','');
-		foreach($configesponse AS $con){
+		foreach($configesponse as $con){
 			$table_list[$con->application_table_name] ['item']= $con->item_table;
 			$table_list[$con->application_table_name] ['tax']= $con->tax_table;
 			$table_list [$con->application_table_name] ['option'] = $con->option_url;
@@ -2812,7 +2812,7 @@ class userClass{
 	public function togetitemwadayrate($item_d, $company_id){
 		global $callConfig;
 		$day_rate = 0;
-		if($company_id !="" AND $item_d !=""){
+		if($company_id !="" and $item_d !=""){
 			$whrstp1="company_id = '".$company_id."'  AND item_id= '".$item_d."'";
 			$query1=$callConfig->selectQuery('item_wa_balances','day_rate',$whrstp1,'balance_date DESC','0','1');
 			//echo $query1;
@@ -2995,7 +2995,7 @@ class userClass{
 		$txvalc1 = 0;
 		$txvalc2 = 0;
 		foreach ($post['productCode'] as $key => $item) {
-			if($post['tax'][$key] !='0' AND $post['tax'][$key]!=''){
+			if($post['tax'][$key] !='0' and $post['tax'][$key]!=''){
 				if($tax_flag == "S"){
 					$txperc1 = $post['tax'][$key]*$split_1;
 					$txvalc1 += $post['ptax_amount'][$key]*$split_1;
@@ -3042,15 +3042,15 @@ class userClass{
 
 		$fieldnames=array('company_id'=>$post['company_id'],'transaction_number'=>$post['transaction_number'],'transaction_date'=>$invoiced_at,'currency_id'=>$post['currency_id'],'currency_rate'=>$post['currency_rate'],'party_id'=>$post['party_id'],'party_name'=>$post['party_name'],'party_email'=>$post['party_email'],'party_tax_number'=>$post['party_tax_number'],'party_phone'=>$post['party_phone'],'party_address'=>$post['party_address'],'party_ship_adderss'=>$post['party_ship_adderss'],'place_of_supply'=>$post['place_of_supply'],'payment_terms'=>$post['payment_terms'],'notes'=>$post['notes'],'amount'=>$post['subTotal'],'tax_amount'=>$post['taxRate'], 'discount_type'=>$post['discount_type'],'discount_value'=>$post['discount_value'],'discount_amount'=>$post['discount_amount'], 'total_amount'=>$post['grandtotal'], 'current_status'=> $status, 'ref_id'=>$post['ref_id'], 'ref_no'=>$post['ref_no'], 'ref_date'=>date("Y-m-d",strtotime($post['ref_date'])),'ref_type'=>$post['ref_type'],'originator'=>$post['originator'],'printing_notes'=>$post['printing_notes'],'type'=>$post['type'],'tax_type'=>$post['tax_type'],'shipping_tax'=>$post['shipping_tax'],'shipping_amount'=>$post['shipping_amount'],'shipping_tax_amount'=>$post['shipping_tax_amount'],'printing_notes'=>$post['printing_notes'],'tax_state'=>$tax_flag,'opex_cpex'=>$post['opex_cpex'],'due_date'=>$due_date,'transaction_location_id'=>$post['transaction_location_id'],'transaction_warehouse_id'=>$post['transaction_warehouse_id'],'pending_amount'=>$post['grandtotal'],'doc_ref_no'=>$post['doc_ref_no'],'doc_ref_date'=>$doc_ref_date,'originator_currency_id'=>$post['originator_currency_id'],'originator_state_id'=>$post['originator_state_id'],'supplier_state_id'=>$post['supplier_state_id'],'additional_charges'=>$additional_charges_json,'cost_center_id'=>$post['cost_center_id'],'total_tax_split_details'=>$total_tax_split_details_json,'rounding_off'=>$rounding_off,'discount_mode'=>$post['discount_mode']);
 		//empty check valaidation part added With azure
-			$fieldnames['discount_value'] = ($fieldnames['discount_value']!="" AND is_null($fieldnames['discount_value'])  !=1)?$fieldnames['discount_value']:0;
-			$fieldnames['discount_amount'] = ($fieldnames['discount_amount']!="" AND is_null($fieldnames['discount_amount'])  !=1)?$fieldnames['discount_amount']:0;
-			$fieldnames['total_amount'] = ($fieldnames['total_amount']!="" AND is_null($fieldnames['total_amount'])  !=1)?$fieldnames['total_amount']:0;
-			$fieldnames['shipping_tax'] = ($fieldnames['shipping_tax']!="" AND is_null($fieldnames['shipping_tax']) !=1)?$fieldnames['shipping_tax']:0;
-			$fieldnames['shipping_amount'] = ($fieldnames['shipping_amount']!="" AND is_null($fieldnames['shipping_amount'])  !=1)?$fieldnames['shipping_amount']:0;
-			$fieldnames['shipping_tax_amount'] = ($fieldnames['shipping_tax_amount']!="" AND is_null($fieldnames['shipping_tax_amount'])  !=1)?$fieldnames['shipping_tax_amount']:0;
-			$fieldnames['total_tds_amount'] = ($fieldnames['total_tds_amount']!="" AND is_null($fieldnames['total_tds_amount'])  !=1)?$fieldnames['total_tds_amount']:0;
-			$fieldnames['advance_payment'] = ($fieldnames['advance_payment']!="" AND is_null($fieldnames['advance_payment'])  !=1)?$fieldnames['advance_payment']:0;
-			$fieldnames['pending_advance_payment'] = ($fieldnames['pending_advance_payment']!="" AND is_null($fieldnames['pending_advance_payment'])  !=1)?$fieldnames['pending_advance_payment']:0;
+			$fieldnames['discount_value'] = ($fieldnames['discount_value']!="" and is_null($fieldnames['discount_value'])  !=1)?$fieldnames['discount_value']:0;
+			$fieldnames['discount_amount'] = ($fieldnames['discount_amount']!="" and is_null($fieldnames['discount_amount'])  !=1)?$fieldnames['discount_amount']:0;
+			$fieldnames['total_amount'] = ($fieldnames['total_amount']!="" and is_null($fieldnames['total_amount'])  !=1)?$fieldnames['total_amount']:0;
+			$fieldnames['shipping_tax'] = ($fieldnames['shipping_tax']!="" and is_null($fieldnames['shipping_tax']) !=1)?$fieldnames['shipping_tax']:0;
+			$fieldnames['shipping_amount'] = ($fieldnames['shipping_amount']!="" and is_null($fieldnames['shipping_amount'])  !=1)?$fieldnames['shipping_amount']:0;
+			$fieldnames['shipping_tax_amount'] = ($fieldnames['shipping_tax_amount']!="" and is_null($fieldnames['shipping_tax_amount'])  !=1)?$fieldnames['shipping_tax_amount']:0;
+			$fieldnames['total_tds_amount'] = ($fieldnames['total_tds_amount']!="" and is_null($fieldnames['total_tds_amount'])  !=1)?$fieldnames['total_tds_amount']:0;
+			$fieldnames['advance_payment'] = ($fieldnames['advance_payment']!="" and is_null($fieldnames['advance_payment'])  !=1)?$fieldnames['advance_payment']:0;
+			$fieldnames['pending_advance_payment'] = ($fieldnames['pending_advance_payment']!="" and is_null($fieldnames['pending_advance_payment'])  !=1)?$fieldnames['pending_advance_payment']:0;
 			$fieldnames['tax_state'] = $tax_flag !=""?$tax_flag:"I";
 		//empty check valaidation part added With azure
 
@@ -3072,11 +3072,11 @@ class userClass{
 		}
 		//Advance payment parts End
 
-		if(isset($post['payment_term_history']) AND $post['payment_term_history'] !=""){
+		if(isset($post['payment_term_history']) and $post['payment_term_history'] !=""){
 			$payment_term_history = json_encode($post['payment_term_history']);
 			$fieldnames['payment_term_history'] = $payment_term_history;
 		}
-		if(isset($post['follow_up_level_ids']) AND $post['follow_up_level_ids'] !=""){
+		if(isset($post['follow_up_level_ids']) and $post['follow_up_level_ids'] !=""){
 			$follow_up_level_ids = json_encode($post['follow_up_level_ids']);
 			$fieldnames['follow_up_level_ids'] = $follow_up_level_ids;
 		}
@@ -3160,7 +3160,7 @@ class userClass{
 		if($insert_id > 0){
 			if($type == 'update'){
 				// update all items table start
-				$updaterecord=array('is_active'=>NULL,'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id']);
+				$updaterecord=array('is_active'=>null,'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id']);
 				$callConfig->updateRecord($fieldarray[$table]['item'],$updaterecord,'transaction_id',$insert_id);
 				$callConfig->updateRecord($fieldarray[$table]['tax'],$updaterecord,'transaction_id',$insert_id);
 				// update all items table end
@@ -3177,12 +3177,12 @@ class userClass{
 				$fifo_day_rate = $this->togetitemfifodayrate($itemres->item_id, $get['company_id']);
 				$lifo_day_rate = $this->togetitemlifodayrate($itemres->item_id, $get['company_id']);
 				$wa_day_rate = $day_rate;
-				$wa_day_rate = ($wa_day_rate != '0' AND $wa_day_rate !="")?$wa_day_rate:$post['price'][$key];
-				$fifo_day_rate = ($fifo_day_rate != '0' AND $fifo_day_rate !="")?$fifo_day_rate:$post['price'][$key];
-				$lifo_day_rate = ($lifo_day_rate != '0' AND $lifo_day_rate !="")?$lifo_day_rate:$post['price'][$key];
+				$wa_day_rate = ($wa_day_rate != '0' and $wa_day_rate !="")?$wa_day_rate:$post['price'][$key];
+				$fifo_day_rate = ($fifo_day_rate != '0' and $fifo_day_rate !="")?$fifo_day_rate:$post['price'][$key];
+				$lifo_day_rate = ($lifo_day_rate != '0' and $lifo_day_rate !="")?$lifo_day_rate:$post['price'][$key];
 
 				$itemfieldnames=array('company_id'=>$post['company_id'],'transaction_id'=>$insert_id,'item_id'=>$item,'item_name'=>$post['item_name'][$key],'description'=>$post['productName'][$key],'purchase_uom'=>$post['uom'][$key],'item_quantity'=>$post['quantity'][$key],'item_price'=>$post['price'][$key],'item_amount'=>$post['amount'][$key],'tax_amount'=>$post['ptax_amount'][$key],'total_amount'=>$post['amount'][$key],'discount_amount'=>$post['pdiscount_amount'][$key],'req_date'=>$req_date,'account_code'=>$post['purchase_account'][$key],'item_wa_cost'=>$wa_day_rate,'item_fifo_cost'=>$fifo_day_rate,'item_lifo_cost'=>$lifo_day_rate,'pending_qty'=>$post['quantity'][$key],'is_active'=>'0','current_status'=>'0','ref_transaction_item_table_id'=>$post['ref_transaction_item_table_id'][$key]);
-				if($post['ref_id'] !="" AND $post['ref_id'] !="0"){
+				if($post['ref_id'] !="" and $post['ref_id'] !="0"){
 					$itemfieldnames['ref_transaction_table_id'] =$post['ref_id'];
 				}
 				if(in_array($table, (array)$sales_tables)){
@@ -3194,7 +3194,7 @@ class userClass{
 					$itemfieldnames['doc_ref_no'] = $post['doc_ref_no'][$key];
 					$itemfieldnames['doc_ref_date'] = $item_doc_ref_date;
 				}
-				if($table == 'goods_receipt_notes' OR $table == 'delivery_orders' OR $table == 'rgp_delivery_orders' OR $table == 'rgp_sales_returns' OR $table == 'nrgp_delivery_orders' OR $table =='stock_transfers' OR $table =='stock_transfer_receipts' OR $table =='stock_transfer_returns' OR $table =='subcontract_work_order_transfers' OR $table =='subcontract_work_order_receipts'){
+				if($table == 'goods_receipt_notes' or $table == 'delivery_orders' or $table == 'rgp_delivery_orders' or $table == 'rgp_sales_returns' or $table == 'nrgp_delivery_orders' or $table =='stock_transfers' or $table =='stock_transfer_receipts' or $table =='stock_transfer_returns' or $table =='subcontract_work_order_transfers' or $table =='subcontract_work_order_receipts'){
 					$itemfieldnames['invoice_item_quantity'] = $post['invoiced_quantity'][$key];
 				}
 				if($table == 'requisitions'){
@@ -3220,7 +3220,7 @@ class userClass{
 
 
 				$taxfield=array('company_id'=>$post['company_id'],'transaction_id'=>$insert_id,'transaction_item_id'=>$item,'tax_id'=>$post['taxid'][$key],'tax_name'=>$post['tax_name'][$key],'amount'=>$post['p_amount'][$key],'tax_amount'=>$post['ptax_amount'][$key],'total_amount' =>$post['amount'][$key],'tax_type' =>$tax_flag, 'tax_value'=>$post['tax'][$key],'is_active'=>'0','current_status'=>'0');
-				if($post['tax'][$key] !='0' AND $post['tax'][$key]!=''){
+				if($post['tax'][$key] !='0' and $post['tax'][$key]!=''){
 					if($tax_flag == "S"){
 						$txper1 = $post['tax'][$key]*$split_1;
 						$txval1 = $post['ptax_amount'][$key]*$split_1;
@@ -3276,7 +3276,7 @@ class userClass{
 					//}
 					//Item table Insert data End
 					//Tax table Insert data Start
-					if($post['tax'][$key]!='0' AND $post['tax'][$key]!=''){
+					if($post['tax'][$key]!='0' and $post['tax'][$key]!=''){
 						$where = "transaction_id = '".$insert_id."' AND transaction_item_row_id	= '".$transaction_item_row_id."'";
 						$itemquery=$callConfig->selectQuery($fieldarray[$table]['tax'],'*',$where,'','','');
 						$data_tax = $callConfig->getRow($itemquery);
@@ -3306,7 +3306,7 @@ class userClass{
 					$transaction_item_row_id = $item_transaction['LASTID'];
 					//Item table Insert data End
 					//Tax table Insert data Start
-					if($post['tax'][$key]!='0' AND $post['tax'][$key]!=''){
+					if($post['tax'][$key]!='0' and $post['tax'][$key]!=''){
 						$taxfield['created_date'] = date('Y-m-d h:i:s');
 						$taxfield['created_by'] = $get['user_id'];
 						$taxfield['transaction_item_row_id'] = $transaction_item_row_id;
@@ -4163,7 +4163,7 @@ class userClass{
 		$partytable = trim($explosql[0]); //get Table name
 
 
-		if($table_name == 'debit_notes' OR $table_name == 'credit_notes'){
+		if($table_name == 'debit_notes' or $table_name == 'credit_notes'){
 			if($row['ref_type'] == "purchase_invoices" || $row['ref_type'] == "supplier_bills" || $row['ref_type'] == "purchase_invoice_cancellations"  || $row['ref_type'] == "supplier_bill_cancellations" || $row['ref_type'] == "purchase_order_cancellations"){
 				$partytable = "vendors";
 			}elseif($row['ref_type'] == "sales_invoices" || $row['ref_type'] == "sales_invoice_cancellations" || $row['ref_type'] == "sales_order_cancellations" || $row['ref_type'] ==  "sample_orders"){
@@ -4264,14 +4264,14 @@ class userClass{
 
 			$jvary = array('company_id'=>$row['company_id'],  'transaction_location_id'=>$transaction_location_id,  'transaction_id'=>$row['transaction_id'],  'transaction_item_id'=>$transaction_item_id['code'],  'item_id'=>$itemrow['item_id'], 'particulars'=>$particulars, 'item_name'=>$itemrow['item_name'],  'description'=>$itemrow['description'],  'purchase_uom'=>$itemrow['purchase_uom'],  'item_quantity'=>$itemrow['item_quantity'],  'item_price'=>$itemrow['item_price'],  'item_amount'=>$itemrow['item_amount'],  'tax_amount'=>$itemrow['tax_amount'],  'discount_amount'=>$itemrow['discount_amount'],  'total_amount'=>$itemrow['total_amount'],  'name_type'=>'C',  'doc_ref_no'=>$itemrow['doc_ref_no'],  'doc_ref_date'=>$itemrow['doc_ref_date'],  'req_date'=>$itemrow['req_date'],  'approved_quantity'=>$itemrow['approved_quantity'],  'transaction_type'=>$itemrow['transaction_type'],  'transaction_qty'=>$itemrow['transaction_qty'],  'pending_qty'=>$itemrow['pending_qty'],  'is_active'=>'0',  'current_status'=>'0','created_by'=>$itemrow['created_by']);
 
-			if($table_name == 'goods_receipt_notes' OR $table_name == 'sales_returns' OR $table_name == 'rgp_sales_returns'){
+			if($table_name == 'goods_receipt_notes' or $table_name == 'sales_returns' or $table_name == 'rgp_sales_returns'){
 				//goods_received_not_invoiced_account
 				$itemaccount_code = "";
-				if($itemtabledetails->goods_received_not_invoiced_account !="" AND $itemtabledetails->goods_received_not_invoiced_account !="0"){
+				if($itemtabledetails->goods_received_not_invoiced_account !="" and $itemtabledetails->goods_received_not_invoiced_account !="0"){
 					$itemaccount_code = $itemtabledetails->goods_received_not_invoiced_account;
-				}elseif($itemcategoorytabledetails->goods_received_not_invoiced_account !="" AND $itemcategoorytabledetails->goods_received_not_invoiced_account !="0"){
+				}elseif($itemcategoorytabledetails->goods_received_not_invoiced_account !="" and $itemcategoorytabledetails->goods_received_not_invoiced_account !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->goods_received_not_invoiced_account;
-				}elseif($config->config_inventory_asset_account !="" AND $config->config_inventory_asset_account !="0"){
+				}elseif($config->config_inventory_asset_account !="" and $config->config_inventory_asset_account !="0"){
 					$itemaccount_code = $config->config_inventory_asset_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['goods_received_not_invoiced_account'];
@@ -4285,11 +4285,11 @@ class userClass{
 				$itemref[$itemaccount_code][] = $jvary;
 				//inventory_asset_account
 				$itemaccount_code = "";
-				if($itemtabledetails->inventory_asset_account !="" AND $itemtabledetails->inventory_asset_account !="0"){
+				if($itemtabledetails->inventory_asset_account !="" and $itemtabledetails->inventory_asset_account !="0"){
 					$itemaccount_code = $itemtabledetails->inventory_asset_account;
-				}elseif($itemcategoorytabledetails->inventory_asset_account !="" AND $itemcategoorytabledetails->inventory_asset_account !="0"){
+				}elseif($itemcategoorytabledetails->inventory_asset_account !="" and $itemcategoorytabledetails->inventory_asset_account !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->inventory_asset_account;
-				}elseif($config->config_inventory_asset_account !="" AND $config->config_inventory_asset_account !="0"){
+				}elseif($config->config_inventory_asset_account !="" and $config->config_inventory_asset_account !="0"){
 					$itemaccount_code = $config->config_inventory_asset_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['inventory_asset_account'];
@@ -4301,26 +4301,26 @@ class userClass{
 			 	$jvary['debit_amount'] = round($itemrow['item_amount'],$rounddigits);
 				$itemref[$itemaccount_code][] = $jvary;
 
-			}elseif($table_name == 'delivery_orders' OR $table_name == 'rgp_delivery_orders' OR $table_name == 'nrgp_delivery_orders'){
+			}elseif($table_name == 'delivery_orders' or $table_name == 'rgp_delivery_orders' or $table_name == 'nrgp_delivery_orders'){
 				//goods_received_not_invoiced_account
 				$itemaccount_code = "";
 				if($itemtabledetails->default_costing_type == "W"){
-					$sales_profitt_st_item_codt = ($itemrow['item_wa_cost'] !="" AND $itemrow['item_wa_cost'] !="0")?$itemrow['item_wa_cost']:$itemrow['item_price'];
+					$sales_profitt_st_item_codt = ($itemrow['item_wa_cost'] !="" and $itemrow['item_wa_cost'] !="0")?$itemrow['item_wa_cost']:$itemrow['item_price'];
 				}elseif($itemtabledetails->default_costing_type == "F"){
-					$sales_profitt_st_item_codt = ($itemrow['item_fifo_cost'] !="" AND $itemrow['item_fifo_cost'] !="0")?$itemrow['item_fifo_cost']:$itemrow['item_price'];
+					$sales_profitt_st_item_codt = ($itemrow['item_fifo_cost'] !="" and $itemrow['item_fifo_cost'] !="0")?$itemrow['item_fifo_cost']:$itemrow['item_price'];
 				}else{
-					$sales_profitt_st_item_codt = ($itemrow['item_lifo_cost'] !="" AND $itemrow['item_lifo_cost'] !="0")?$itemrow['item_lifo_cost']:$itemrow['item_price'];
+					$sales_profitt_st_item_codt = ($itemrow['item_lifo_cost'] !="" and $itemrow['item_lifo_cost'] !="0")?$itemrow['item_lifo_cost']:$itemrow['item_price'];
 				}
 
-				$sales_profitt_item_qty = ($itemrow['item_quantity'] !="" AND $itemrow['item_quantity'] !="0")?$itemrow['item_quantity']:1;
+				$sales_profitt_item_qty = ($itemrow['item_quantity'] !="" and $itemrow['item_quantity'] !="0")?$itemrow['item_quantity']:1;
 
 				$sales_profitt_item_amt = $sales_profitt_st_item_codt*$sales_profitt_item_qty;
 
-				if($itemtabledetails->goods_sold_not_invoiced_account !="" AND $itemtabledetails->goods_sold_not_invoiced_account !="0"){
+				if($itemtabledetails->goods_sold_not_invoiced_account !="" and $itemtabledetails->goods_sold_not_invoiced_account !="0"){
 					$itemaccount_code = $itemtabledetails->goods_sold_not_invoiced_account;
-				}elseif($itemcategoorytabledetails->goods_sold_not_invoiced_account !="" AND $itemcategoorytabledetails->goods_sold_not_invoiced_account !="0"){
+				}elseif($itemcategoorytabledetails->goods_sold_not_invoiced_account !="" and $itemcategoorytabledetails->goods_sold_not_invoiced_account !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->goods_sold_not_invoiced_account;
-				}elseif($config->config_inventory_asset_account !="" AND $config->config_inventory_asset_account !="0"){
+				}elseif($config->config_inventory_asset_account !="" and $config->config_inventory_asset_account !="0"){
 					$itemaccount_code = $config->config_inventory_asset_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['goods_sold_not_invoiced_account'];
@@ -4333,11 +4333,11 @@ class userClass{
 				$itemref[$itemaccount_code][] = $jvary;
 				//inventory_asset_account
 				$itemaccount_code = "";
-				if($itemtabledetails->inventory_asset_account !="" AND $itemtabledetails->inventory_asset_account !="0"){
+				if($itemtabledetails->inventory_asset_account !="" and $itemtabledetails->inventory_asset_account !="0"){
 					$itemaccount_code = $itemtabledetails->inventory_asset_account;
-				}elseif($itemcategoorytabledetails->inventory_asset_account !="" AND $itemcategoorytabledetails->inventory_asset_account !="0"){
+				}elseif($itemcategoorytabledetails->inventory_asset_account !="" and $itemcategoorytabledetails->inventory_asset_account !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->inventory_asset_account;
-				}elseif($config->config_inventory_asset_account !="" AND $config->config_inventory_asset_account !="0"){
+				}elseif($config->config_inventory_asset_account !="" and $config->config_inventory_asset_account !="0"){
 					$itemaccount_code = $config->config_inventory_asset_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['inventory_asset_account'];
@@ -4348,14 +4348,14 @@ class userClass{
 				$jvary['credit_amount'] = round($sales_profitt_item_amt,$rounddigits);
 			 	$jvary['debit_amount'] = 0;
 				$itemref[$itemaccount_code][] = $jvary;
-			}elseif($table_name == 'supplier_bills' OR $table_name == 'purchase_invoices' OR $table_name == 'sales_invoice_cancellations'){
+			}elseif($table_name == 'supplier_bills' or $table_name == 'purchase_invoices' or $table_name == 'sales_invoice_cancellations'){
 				//goods_received_not_invoiced_account
 				$itemaccount_code = "";
-				if($itemtabledetails->goods_received_not_invoiced_account !="" AND $itemtabledetails->goods_received_not_invoiced_account !="0"){
+				if($itemtabledetails->goods_received_not_invoiced_account !="" and $itemtabledetails->goods_received_not_invoiced_account !="0"){
 					$itemaccount_code = $itemtabledetails->goods_received_not_invoiced_account;
-				}elseif($itemcategoorytabledetails->goods_received_not_invoiced_account !="" AND $itemcategoorytabledetails->goods_received_not_invoiced_account !="0"){
+				}elseif($itemcategoorytabledetails->goods_received_not_invoiced_account !="" and $itemcategoorytabledetails->goods_received_not_invoiced_account !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->goods_received_not_invoiced_account;
-				}elseif($config->config_inventory_asset_account !="" AND $config->config_inventory_asset_account !="0"){
+				}elseif($config->config_inventory_asset_account !="" and $config->config_inventory_asset_account !="0"){
 					$itemaccount_code = $config->config_inventory_asset_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['goods_received_not_invoiced_account'];
@@ -4366,14 +4366,14 @@ class userClass{
 			 	$jvary['debit_amount'] = round($itemrow['item_amount'],$rounddigits);
 			 	$jvary['account_code'] = $itemaccount_code;
 				$itemref[$itemaccount_code][] = $jvary;
-			}elseif($table_name == 'sales_invoices' OR $table_name == 'purchase_invoice_cancellations' OR $table_name == 'supplier_bill_cancellations'){
+			}elseif($table_name == 'sales_invoices' or $table_name == 'purchase_invoice_cancellations' or $table_name == 'supplier_bill_cancellations'){
 				//goods_received_not_invoiced_account
 				$itemaccount_code = "";
-				if($itemtabledetails->sales_revenue_account  !="" AND $itemtabledetails->sales_revenue_account  !="0"){
+				if($itemtabledetails->sales_revenue_account  !="" and $itemtabledetails->sales_revenue_account  !="0"){
 					$itemaccount_code = $itemtabledetails->sales_revenue_account ;
-				}elseif($itemcategoorytabledetails->sales_revenue_account  !="" AND $itemcategoorytabledetails->sales_revenue_account  !="0"){
+				}elseif($itemcategoorytabledetails->sales_revenue_account  !="" and $itemcategoorytabledetails->sales_revenue_account  !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->sales_revenue_account ;
-				}elseif($config->config_inventory_asset_account !="" AND $config->config_inventory_asset_account !="0"){
+				}elseif($config->config_inventory_asset_account !="" and $config->config_inventory_asset_account !="0"){
 					$itemaccount_code = $config->config_inventory_asset_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['sales_revenue_account'];
@@ -4391,20 +4391,20 @@ class userClass{
 				////////////////////Sales Profit entry //////////////////////////////
 				$itemaccount_code = "";
 				if($itemtabledetails->default_costing_type == "W"){
-					$sales_profitt_st_item_codt = ($itemrow['item_wa_cost'] !="" AND $itemrow['item_wa_cost'] !="0")?$itemrow['item_wa_cost']:$itemrow['item_price'];
+					$sales_profitt_st_item_codt = ($itemrow['item_wa_cost'] !="" and $itemrow['item_wa_cost'] !="0")?$itemrow['item_wa_cost']:$itemrow['item_price'];
 				}elseif($itemtabledetails->default_costing_type == "F"){
-					$sales_profitt_st_item_codt = ($itemrow['item_fifo_cost'] !="" AND $itemrow['item_fifo_cost'] !="0")?$itemrow['item_fifo_cost']:$itemrow['item_price'];
+					$sales_profitt_st_item_codt = ($itemrow['item_fifo_cost'] !="" and $itemrow['item_fifo_cost'] !="0")?$itemrow['item_fifo_cost']:$itemrow['item_price'];
 				}else{
-					$sales_profitt_st_item_codt = ($itemrow['item_lifo_cost'] !="" AND $itemrow['item_lifo_cost'] !="0")?$itemrow['item_lifo_cost']:$itemrow['item_price'];
+					$sales_profitt_st_item_codt = ($itemrow['item_lifo_cost'] !="" and $itemrow['item_lifo_cost'] !="0")?$itemrow['item_lifo_cost']:$itemrow['item_price'];
 				}
-				$sales_profitt_item_qty = ($itemrow['item_quantity'] !="" AND $itemrow['item_quantity'] !="0")?$itemrow['item_quantity']:1;
+				$sales_profitt_item_qty = ($itemrow['item_quantity'] !="" and $itemrow['item_quantity'] !="0")?$itemrow['item_quantity']:1;
 				//$sales_profitt_st_item_codt = ($itemrow['item_st_cost'] !="" AND $itemrow['item_st_cost'] !="0")?$itemrow['item_st_cost']:$itemrow['item_price'];
 				$sales_profitt_item_amt = $sales_profitt_st_item_codt*$sales_profitt_item_qty;
-				if($itemtabledetails->goods_sold_not_invoiced_account  !="" AND $itemtabledetails->goods_sold_not_invoiced_account  !="0"){
+				if($itemtabledetails->goods_sold_not_invoiced_account  !="" and $itemtabledetails->goods_sold_not_invoiced_account  !="0"){
 					$itemaccount_code = $itemtabledetails->goods_sold_not_invoiced_account ;
-				}elseif($itemcategoorytabledetails->goods_sold_not_invoiced_account  !="" AND $itemcategoorytabledetails->goods_sold_not_invoiced_account  !="0"){
+				}elseif($itemcategoorytabledetails->goods_sold_not_invoiced_account  !="" and $itemcategoorytabledetails->goods_sold_not_invoiced_account  !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->goods_sold_not_invoiced_account ;
-				}elseif($config->config_inventory_asset_account !="" AND $config->config_inventory_asset_account !="0"){
+				}elseif($config->config_inventory_asset_account !="" and $config->config_inventory_asset_account !="0"){
 					$itemaccount_code = $config->config_inventory_asset_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['goods_sold_not_invoiced_account'];
@@ -4420,11 +4420,11 @@ class userClass{
 
 				/// Reverser Profit entry
 				$itemaccount_code = "";
-				if($itemtabledetails->cogs_account  !="" AND $itemtabledetails->cogs_account  !="0"){
+				if($itemtabledetails->cogs_account  !="" and $itemtabledetails->cogs_account  !="0"){
 					$itemaccount_code = $itemtabledetails->cogs_account ;
-				}elseif($itemcategoorytabledetails->cogs_account  !="" AND $itemcategoorytabledetails->cogs_account  !="0"){
+				}elseif($itemcategoorytabledetails->cogs_account  !="" and $itemcategoorytabledetails->cogs_account  !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->cogs_account ;
-				}elseif($config->config_inventory_asset_account !="" AND $config->config_inventory_asset_account !="0"){
+				}elseif($config->config_inventory_asset_account !="" and $config->config_inventory_asset_account !="0"){
 					$itemaccount_code = $config->config_inventory_asset_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['cogs_account'];
@@ -4441,7 +4441,7 @@ class userClass{
 
 
 				$itemaccount_code = "";
-				if($itemrow['account_code'] !="" AND $itemrow['account_code'] !="0"){
+				if($itemrow['account_code'] !="" and $itemrow['account_code'] !="0"){
 					$itemaccount_code = $itemrow['account_code'];
 				}
 				if($chartofaccount[$itemaccount_code] =="" || $itemaccount_code ==""){ // chart Of Account Not Found Suspens Account Enter data
@@ -4462,7 +4462,7 @@ class userClass{
 				}
 			}elseif($table_name == 'credit_notes'){
 				$itemaccount_code = "";
-				if($itemrow['account_code'] !="" AND $itemrow['account_code'] !="0"){
+				if($itemrow['account_code'] !="" and $itemrow['account_code'] !="0"){
 					$itemaccount_code = $itemrow['account_code'];
 				}
 				if($chartofaccount[$itemaccount_code] =="" || $itemaccount_code ==""){ // chart Of Account Not Found Suspens Account Enter data
@@ -4484,9 +4484,9 @@ class userClass{
 			}elseif($table_name == 'stock_transfers' || $table_name == 'stock_transfer_returns' || $table_name == 'subcontract_work_order_transfers'){
 				//Ceadit Account
 				$itemaccount_code = "";
-				if($itemtabledetails->inventory_asset_account !="" AND $itemtabledetails->inventory_asset_account !="0"){
+				if($itemtabledetails->inventory_asset_account !="" and $itemtabledetails->inventory_asset_account !="0"){
 					$itemaccount_code = $itemtabledetails->inventory_asset_account;
-				}elseif($itemcategoorytabledetails->inventory_asset_account !="" AND $itemcategoorytabledetails->inventory_asset_account !="0"){
+				}elseif($itemcategoorytabledetails->inventory_asset_account !="" and $itemcategoorytabledetails->inventory_asset_account !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->inventory_asset_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['inventory_asset_account'];
@@ -4499,9 +4499,9 @@ class userClass{
 				$itemref[$itemaccount_code][] = $jvary;
 				//Debit Account
 				$itemaccount_code = "";
-				if($itemtabledetails->stock_transfer_account !="" AND $itemtabledetails->stock_transfer_account !="0"){
+				if($itemtabledetails->stock_transfer_account !="" and $itemtabledetails->stock_transfer_account !="0"){
 					$itemaccount_code = $itemtabledetails->stock_transfer_account;
-				}elseif($itemcategoorytabledetails->stock_transfer_account !="" AND $itemcategoorytabledetails->stock_transfer_account !="0"){
+				}elseif($itemcategoorytabledetails->stock_transfer_account !="" and $itemcategoorytabledetails->stock_transfer_account !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->stock_transfer_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['stock_transfer_account'];
@@ -4516,9 +4516,9 @@ class userClass{
 			}elseif($table_name == 'stock_transfer_receipts' || $table_name == 'subcontract_work_order_receipts'){
 				//Debit Account
 				$itemaccount_code = "";
-				if($itemtabledetails->inventory_asset_account !="" AND $itemtabledetails->inventory_asset_account !="0"){
+				if($itemtabledetails->inventory_asset_account !="" and $itemtabledetails->inventory_asset_account !="0"){
 					$itemaccount_code = $itemtabledetails->inventory_asset_account;
-				}elseif($itemcategoorytabledetails->inventory_asset_account !="" AND $itemcategoorytabledetails->inventory_asset_account !="0"){
+				}elseif($itemcategoorytabledetails->inventory_asset_account !="" and $itemcategoorytabledetails->inventory_asset_account !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->inventory_asset_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['inventory_asset_account'];
@@ -4531,9 +4531,9 @@ class userClass{
 				$itemref[$itemaccount_code][] = $jvary;
 				//Ceadit Account
 				$itemaccount_code = "";
-				if($itemtabledetails->stock_transfer_account !="" AND $itemtabledetails->stock_transfer_account !="0"){
+				if($itemtabledetails->stock_transfer_account !="" and $itemtabledetails->stock_transfer_account !="0"){
 					$itemaccount_code = $itemtabledetails->stock_transfer_account;
-				}elseif($itemcategoorytabledetails->stock_transfer_account !="" AND $itemcategoorytabledetails->stock_transfer_account !="0"){
+				}elseif($itemcategoorytabledetails->stock_transfer_account !="" and $itemcategoorytabledetails->stock_transfer_account !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->stock_transfer_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['stock_transfer_account'];
@@ -4570,7 +4570,7 @@ class userClass{
 				$tax_split_details = json_decode($txtval->tax_split_details, 1);
 
 				foreach($tax_split_details as $tsd){
-					if($tsd['account_code'] !="" AND $tsd['account_code'] !="0"){
+					if($tsd['account_code'] !="" and $tsd['account_code'] !="0"){
 						$gsttax_acount = $tsd['account_code'];
 					}
 					if($chartofaccount[$gsttax_acount] =="" || $gsttax_acount ==""){ // chart Of Account Not Found Suspens Account Enter data
@@ -4610,15 +4610,15 @@ class userClass{
 
 		//Discount ammount -------------------------------
 		if(!in_array($table_name, $notadded_discount)){
-			if($row['discount_amount'] !='0' AND $row['discount_amount'] !=''){
+			if($row['discount_amount'] !='0' and $row['discount_amount'] !=''){
 
 			if($table_name == 'sales_invoices' || $table_name == 'sales_invoice_cancellations'){
-				if($config->default_sales_discount_account !="" AND $config->default_sales_discount_account !="0"){
+				if($config->default_sales_discount_account !="" and $config->default_sales_discount_account !="0"){
 					$default_purchase_discount_account = $config->default_sales_discount_account;
 				}
 				$default_purchase_discount_account!=""?$default_purchase_discount_account:$defaultaccount['default_sales_discount_account'];
 			}else{
-				if($config->default_purchase_discount_account !="" AND $config->default_purchase_discount_account !="0"){
+				if($config->default_purchase_discount_account !="" and $config->default_purchase_discount_account !="0"){
 					$default_purchase_discount_account = $config->default_purchase_discount_account;
 				}
 				$default_purchase_discount_account!=""?$default_purchase_discount_account:$defaultaccount['default_purchase_discount_account'];
@@ -4670,7 +4670,7 @@ class userClass{
 				//echo "<pre>"; print_r($additional_charges); //print_r($additional_charges_list);
 				foreach($additional_charges as $valu){ //debit row
 					$addchrgdetail = $additional_charges_list[$valu['charge_id']];
-					if($addchrgdetail->account_code !="" AND $addchrgdetail->account_code !="0"){
+					if($addchrgdetail->account_code !="" and $addchrgdetail->account_code !="0"){
 						$additional_charges_acc =$addchrgdetail->account_code;
 					}
 					if($chartofaccount[$additional_charges_acc] =="" || $additional_charges_acc ==""){ // chart Of Account Not Found Suspens Account Enter data
@@ -4706,8 +4706,8 @@ class userClass{
 
 
 			//tds added account
-			if($row['total_tds_amount'] !='0' AND $row['total_tds_amount'] !=''){
-				if($config->tds_clearing_account !="" AND $config->tds_clearing_account !="0"){
+			if($row['total_tds_amount'] !='0' and $row['total_tds_amount'] !=''){
+				if($config->tds_clearing_account !="" and $config->tds_clearing_account !="0"){
 					$tds_clearing_account =$config->tds_clearing_account;
 				}
 				$tds_clearing_account!=""?$tds_clearing_account:$defaultaccount['tds_clearing_account'];
@@ -4738,7 +4738,7 @@ class userClass{
 			}
 			//End tds added account
 
-			if($party_account_number !="" AND $party_account_number !="0"){
+			if($party_account_number !="" and $party_account_number !="0"){
 				$party_accountt =$party_account_number;
 			}
 			if($chartofaccount[$party_accountt] =="" || $party_accountt ==""){ // chart Of Account Not Found Suspens Account Enter data
@@ -5177,7 +5177,7 @@ class userClass{
 	}
 	public function insertorupdateitem_ledgerwa($post){
 		global $callConfig;
-		if($post['location_id'] !="" AND  $post['item_id'] !="" AND $post['document_type']!="" AND $post['document_no'] !=""){
+		if($post['location_id'] !="" and  $post['item_id'] !="" and $post['document_type']!="" and $post['document_no'] !=""){
 			$whr="location_id='".$post['location_id']."' AND item_id = '".$post['item_id']."' AND document_type='".$post['document_type']."' AND document_no='".$post['document_no']."' AND is_active=0";
 			$query1=$callConfig->selectQuery('item_ledger_wa','*',$whr,'','','');
 			$row = $callConfig->getRow($query1);
@@ -5223,7 +5223,7 @@ class userClass{
 	}
 	public function insertorupdateitem_ledgerlifo($post){
 		global $callConfig;
-		if($post['location_id'] !="" AND $post['item_id'] !="" AND $post['document_type'] !="" AND $post['document_no']!=""){
+		if($post['location_id'] !="" and $post['item_id'] !="" and $post['document_type'] !="" and $post['document_no']!=""){
 			$whr="location_id='".$post['location_id']."' AND item_id = '".$post['item_id']."' AND document_type='".$post['document_type']."' AND document_no='".$post['document_no']."'";
 			$query1=$callConfig->selectQuery('loc_item_ledger_lifo','*',$whr,'','','');
 			//echo $query1;
@@ -5504,7 +5504,7 @@ class userClass{
 				$insert['day_value'] = ($data->day_value-($data->day_rate*$post['out_qty']));
 				$insert['out_value'] = ($data->day_rate*$post['out_qty']);
 			}
-			if($insert['closing_qty'] !="" AND $insert['closing_qty']!="0"){
+			if($insert['closing_qty'] !="" and $insert['closing_qty']!="0"){
 				$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];
 			}else{
 				$insert['day_rate'] = 0;
@@ -5524,7 +5524,7 @@ class userClass{
 				$insert['out_value'] = ($data2->day_rate*$post['out_qty']);
 			}
 			$insert['opening_rate'] = $data2->day_rate;
-			if($insert['closing_qty'] !="" AND $insert['closing_qty']!="0"){
+			if($insert['closing_qty'] !="" and $insert['closing_qty']!="0"){
 				$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];
 			}else{
 				$insert['day_rate'] = 0;
@@ -5571,7 +5571,7 @@ class userClass{
 				$insert['day_value'] = ($data->day_value-($data->day_rate*$post['out_qty']));
 				$insert['out_value'] = ($data->day_rate*$post['out_qty']);
 			}
-			if($insert['closing_qty'] !="" AND $insert['closing_qty']!="0"){
+			if($insert['closing_qty'] !="" and $insert['closing_qty']!="0"){
 				$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];
 			}else{
 				$insert['day_rate'] = 0;
@@ -5589,7 +5589,7 @@ class userClass{
 				$insert['out_value'] = ($data2->day_rate*$post['out_qty']);
 			}
 			$insert['opening_rate'] = $data2->day_rate;
-			if($insert['closing_qty'] !="" AND $insert['closing_qty']!="0"){
+			if($insert['closing_qty'] !="" and $insert['closing_qty']!="0"){
 				$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];
 			}else{
 				$insert['day_rate'] = 0;
@@ -5635,7 +5635,7 @@ class userClass{
 				$insert['day_value'] = ($data->day_value-($data->day_rate*$post['out_qty']));
 				$insert['out_value'] = ($data->day_rate*$post['out_qty']);
 			}
-			if($insert['closing_qty'] !="" AND $insert['closing_qty']!="0"){
+			if($insert['closing_qty'] !="" and $insert['closing_qty']!="0"){
 				$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];
 			}else{
 				$insert['day_rate'] = 0;
@@ -5653,7 +5653,7 @@ class userClass{
 				$insert['out_value'] = ($data2->day_rate*$post['out_qty']);
 			}
 			$insert['opening_rate'] = $data2->day_rate;
-			if($insert['closing_qty'] !="" AND $insert['closing_qty']!="0"){
+			if($insert['closing_qty'] !="" and $insert['closing_qty']!="0"){
 				$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];
 			}else{
 				$insert['day_rate'] = 0;
@@ -5699,7 +5699,7 @@ class userClass{
 				$insert['day_value'] = ($data->day_value-($data->day_rate*$post['out_qty']));
 				$insert['out_value'] = ($data->day_rate*$post['out_qty']);
 			}
-			if($insert['closing_qty'] !="" AND $insert['closing_qty']!="0"){
+			if($insert['closing_qty'] !="" and $insert['closing_qty']!="0"){
 				$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];
 			}else{
 				$insert['day_rate'] = 0;
@@ -5717,7 +5717,7 @@ class userClass{
 				$insert['out_value'] = ($data2->day_rate*$post['out_qty']);
 			}
 			$insert['opening_rate'] = $data2->day_rate;
-			if($insert['closing_qty'] !="" AND $insert['closing_qty']!="0"){
+			if($insert['closing_qty'] !="" and $insert['closing_qty']!="0"){
 				$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];
 			}else{
 				$insert['day_rate'] = 0;
@@ -6133,7 +6133,7 @@ class userClass{
 		$transaction_item_ref_id = array();
 		if(count((array)$itemsre) != 0){
 			foreach ($itemsre as $itlist) {
-				if($data->current_status != ST_APPROVED AND $itlist->item_id !=""){
+				if($data->current_status != ST_APPROVED and $itlist->item_id !=""){
 					$transaction_item_tab_detail  = json_decode($itlist->item_details,1);
 					$item_details_before_approval = json_encode(array('so'=>$itaares->sales_order_qty,'po'=>$itaares->purchase_order_qty,'qoh'=>$itaares->stock_in_hand,'available'=>$itaares->available_qty,'min_ql'=>$itaares->minimum_level,'max_ql'=>$itaares->maximum_capacity,'grn_inv_qty'=>$transaction_item_tab_detail['grn_inv_qty'],'grn_qty'=>$transaction_item_tab_detail['grn_qty']));
 					$itlist->item_details  = $item_details_before_approval;
@@ -6161,26 +6161,26 @@ class userClass{
 			}
 		}
 		$pr['itemidwithhsn'] =$hsnresult;
-		if($id !="" AND $fieldarray['tax']!=""){
+		if($id !="" and $fieldarray['tax']!=""){
 			$whrs = "transaction_id = '".$id."' AND is_active = 0";
 			$pr['taxes'] = $this->getAllTablesData($fieldarray['tax'],'*',$whrs,'');
 		}
-		if($id !="" AND $table!=""){
+		if($id !="" and $table!=""){
 			$whrs1 = "transaction_id = '".$id."' AND application_table_name = '".$table."' AND is_active != 1";
 			$pr['files'] = $this->getAllTablesData(TBL_APPLICATION_ATTACHMENTS,'*',$whrs1,'');
 		}
 
 		//added rohan - to ref table details
-		if($data->ref_type !="" AND ($data->ref_id !="" OR $data->multi_reference =="Y")){
+		if($data->ref_type !="" and ($data->ref_id !="" or $data->multi_reference =="Y")){
 			$fieldarray  = $this->toGetInvoicetabledata($data->ref_type);
 			$where = "id = '".$data->ref_id."'  AND is_active = 0";
 			$query=$callConfig->selectQuery($data->ref_type,'*',$where,'','','');
 			$data1 = $callConfig->getRow($query);
 			$reftable['data'] = $data1;
 
-			if(($table == "purchase_invoices" OR $table == "sales_invoices") AND ($data->ref_type == "purchase_orders" OR $data->ref_type == "sales_orders")){
+			if(($table == "purchase_invoices" or $table == "sales_invoices") and ($data->ref_type == "purchase_orders" or $data->ref_type == "sales_orders")){
         		$selectfieldlist = " ,ref_pending_qty_1 as pending_qty";
-        	}elseif(($table == "purchase_orders" OR $table == "quotations" OR $table == "requisitions") AND ($data->ref_type == "sales_orders" OR $data->ref_type == "enquiries" OR $data->ref_type == "estimates")){
+        	}elseif(($table == "purchase_orders" or $table == "quotations" or $table == "requisitions") and ($data->ref_type == "sales_orders" or $data->ref_type == "enquiries" or $data->ref_type == "estimates")){
         		$selectfieldlist = " ,pending_order_qty as pending_qty";
         	}else{
         		$selectfieldlist = " ,pending_qty";
@@ -6196,7 +6196,7 @@ class userClass{
 			//$reftable['items'] = $this->getAllTablesData($fieldarray['item'],'id,item_id,item_quantity,approved_quantity,pending_qty,item_name',$whr,'');
 			$pr['ref_table_details'] = $reftable;
 
-			if($data1->ref_type !="" AND $data1->ref_id !=""){
+			if($data1->ref_type !="" and $data1->ref_id !=""){
 				$fieldarray  = $this->toGetInvoicetabledata($data1->ref_type);
 				$whr = "transaction_id = '".$data1->ref_id."' AND is_active = 0";
 				$secondreftable['items'] = $this->getAllTablesData($fieldarray['item'],'transaction_id,item_id,item_quantity,approved_quantity,pending_qty,item_name',$whr,'');
@@ -6245,7 +6245,7 @@ class userClass{
 
 
         // -------------------- Start project_task_details ---------------------------
-        if($data->company_id !="" AND $data->id!="" AND $table !=""){
+        if($data->company_id !="" and $data->id!="" and $table !=""){
 			$project_task_detailssql = "SELECT id,task_name,planned_start,current_status FROM `project_task_details` WHERE company_id = '".$data->company_id."' AND ref_table = 'follow_up_levels' AND transaction_table = '".$table."' AND transaction_id = '".$data->id."' AND is_active =0";
 	        $project_task_detailsres = $callConfig->getAllRows($project_task_detailssql);
 	        $pr['project_task_details']= $project_task_detailsres;
@@ -6259,7 +6259,7 @@ class userClass{
 	        $pr['tax_authorities_rates_split']= $tax_authorities_rates_splitres;
 	    }
         // -------------------- End project_task_details --------------------------
-	    if($data->company_id !="" AND $id!="" AND $table !=""){
+	    if($data->company_id !="" and $id!="" and $table !=""){
 	        $debit_notessql = "SELECT count(id) as cnt FROM debit_notes WHERE company_id = '".$data->company_id."' AND ref_type = '".$table."' AND ref_id = '".$id."' AND is_active = 0";
 			$debit_notesres = $callConfig->getRow($debit_notessql);
 			$pr['debit_notessql']  = $debit_notessql;
@@ -6280,7 +6280,7 @@ class userClass{
 		}
 		$partytable = trim($explosql[0]); //get Table name
 		$pr['partytable'] =$partytable;
-		if($partytable !="" AND $data->party_id !=""){
+		if($partytable !="" and $data->party_id !=""){
 			$sql1 = "SELECT * FROM customer_vendor_gst_billing_details WHERE transaction_table = '".$partytable."' AND customer_vendor_id = '".$data->party_id."'";
 	    	$res1 = $callConfig->getAllRows($sql1);
 	    	$pr['customer_vendor_gst_billing_details'] =$res1;
@@ -7143,7 +7143,7 @@ class userClass{
         $insert_table = $data['new_table'];
         $party_type = $data['party_type'];
 
-        if(($transaction_table == 'enquiries' OR $transaction_table == 'estimates' OR $transaction_table == 'sales_orders') && ($insert_table == 'requisitions' OR $insert_table == 'quotations' OR $insert_table == 'purchase_orders')){
+        if(($transaction_table == 'enquiries' or $transaction_table == 'estimates' or $transaction_table == 'sales_orders') && ($insert_table == 'requisitions' or $insert_table == 'quotations' or $insert_table == 'purchase_orders')){
             $pending_qty = "pending_order_qty";
             $item_quantity = "pending_order_qty";
         }else{
@@ -8441,7 +8441,7 @@ public function insertORUpadateStatusprogressaction($post){
 	}
 	foreach($post['target'] as $target){
 		foreach($modulelist as $module_id){
-			if(in_array($target, (array)$statuaction) AND in_array($modulesetupid, (array)$module_id)){
+			if(in_array($target, (array)$statuaction) and in_array($modulesetupid, (array)$module_id)){
 				$update = "update status_progress_actions set is_active = 0,module_setup_id = '".$modulelist."',email_groups='".$post['email_groups']."',notify_users='".$post['notify_users']."',work_flow_field= '".$post['work_flow_field']."' where status_progress_id ='".$post['status_progress']."' and target_status = '".$target."'";
 				$update_data=$callConfig->executeQuery($update);
 			}else{
@@ -8498,7 +8498,7 @@ public function toGetItemcostingtyewithdata($post){
 	}elseif($return->config_inventory_asset_account !=""){
 		$return->purchase_account = $return->config_inventory_asset_account;
 	}
-	if($post['date'] !="" AND $post['item_id'] !=""){
+	if($post['date'] !="" and $post['item_id'] !=""){
 		$query2 = "SELECT  `day_rate` FROM item_wa_balances WHERE `item_id`=".$post['item_id']." AND company_id =".$post['company_id']." AND `balance_date`<='".$this->dateconvertdbformat($post['date'])."'  ORDER BY  balance_date DESC LIMIT 0,1";
 			//echo $query2;
 		$wadata = $callConfig->getRow($query2);
@@ -8509,7 +8509,7 @@ public function toGetItemcostingtyewithdata($post){
 
 	//$sales_tables = array('enquiries','estimates','delivery_orders','sales_orders','sales_returns');
 	$sales_tables = array('enquiries','estimates','delivery_orders','sales_orders','sales_returns','sales_invoices','rgp_sales_returns','nrgp_delivery_orders','rgp_delivery_orders');
-	if($data->default_costing_type == 'W' AND !in_array($post['table'], (array)$sales_tables)){
+	if($data->default_costing_type == 'W' and !in_array($post['table'], (array)$sales_tables)){
 		$return->purchase_price = $wadata->day_rate!=""?$wadata->day_rate:$return->purchase_price;
 	}elseif(in_array($post['table'], (array)$sales_tables)){
 		$return->purchase_price = $return->sale_price;
@@ -9260,7 +9260,7 @@ public function addorupdatesalary($post, $urldata){
 	}
 	//candidate insert salary this time trigger Only
 	$return['post'] = $post;
-	if($post['candidate_id'] !="" AND $post['send_mail'] != 'N'){
+	if($post['candidate_id'] !="" and $post['send_mail'] != 'N'){
 
 		$ctcsql = "SELECT stc.component_name, stc.yearly_amount, ear.code FROM salary_template_components stc, earnings ear WHERE  stc.company_id = '".$post['company_id']."' AND stc.company_id = ear.company_id AND  ear.code = 'CTC' AND stc.component_id = ear.id AND stc.salary_template_id = '".$insert['LASTID']."' AND stc.is_active = 0 AND stc.is_active = ear.is_active";
 		$ctcres = $callConfig->getRow($ctcsql);
@@ -9851,7 +9851,7 @@ public function addjobpostingapplicatantdata($post,$get){
 		$insert = $callConfig->insertRecord('application_users',$insert_array);
 		$returnarray['new_user_create'] = $insert;
 		$lastuserid = $insert['LASTID'];
-		if($insert['status'] == "sucess" OR $post['submit_employee'] == "E"){
+		if($insert['status'] == "sucess" or $post['submit_employee'] == "E"){
 			$query = "SELECT application_module,id,role_short_code FROM application_roles where company_id = '".$get['company_id']."' AND (role_short_code ='".EMPLOYEE_ONBOARDING."' OR role_short_code ='".EMPLOYEE_ROLE."') AND is_active = 0";
 			$roleresult = $callConfig->getAllRows($query);
 			foreach($roleresult  as $roleres){
@@ -10103,7 +10103,7 @@ public function addjobpostingapplicatantdata($post,$get){
 					}else{
 						$approval_user_id = $cadndidata->rm_id;
 					}
-					if($assigned_to !="" AND $approval_user_id !=""){
+					if($assigned_to !="" and $approval_user_id !=""){
 						$planned_day = $tasks->planned_day !=""?$tasks->planned_day:0;
 						$finish_date = date('Y-m-d', strtotime($planned_day.' days', strtotime($days_ago)));
 						$task_array = array('company_id'=>$get['company_id'],'transaction_table'=>'candidates','transaction_id'=>$cadndidata->id,'task_id'=>$tasks->id,'assigned_to'=>$assigned_to,'approval_user_id'=>$approval_user_id,'action_date'=>$days_ago,'check_list'=>$tasks->check_list,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'finish_date'=>$finish_date,'process_id'=>$tasks->process_id,'task_name'=>$tasks->task_name);
@@ -11614,7 +11614,7 @@ public function getemployeeinfoforupdation($get) {
 
 	/* return fieldset : from : employees_display_fields */
 	//$like = "'".'%"'.$get['role_id'].'"%'."'";
-	if($get['role_id']=="" OR $get['role_id']== 'null'){
+	if($get['role_id']=="" or $get['role_id']== 'null'){
 		$get['role_id'] = ADMIN_ROLE;
 	}
 	$display_data = "select * from employees_display_fields where role_id LIKE '".$get['role_id']."' and is_active='0' and company_id='".$company_id."'";
@@ -11828,7 +11828,7 @@ public function getemployeeinfoforupdation($get) {
 		$emp_details['module_setup'] = $module_setupres;
 
 		foreach($module_setupres as $modulelist){
-			if($modulelist->is_active == '0' AND $modulelist->linking == '1'){
+			if($modulelist->is_active == '0' and $modulelist->linking == '1'){
 				$activemodule[$modulelist->module_id] = $modulelist->module_id;
 			}
 		}
@@ -13127,7 +13127,7 @@ public function convertToYYYYMMDD($dateString) {
     	}
     	$terminationres =  $callConfig->getRow($terminationsql);
     	$details['employee_terminations'] = $terminationres;
-    	if(isset($terminationres->id) AND $terminationres->id !=""){
+    	if(isset($terminationres->id) and $terminationres->id !=""){
     		$emp_id = 	$terminationres->emp_id;
     	}else{
     		$emp_id = $get['employee_id'];
@@ -13524,7 +13524,7 @@ public function convertToYYYYMMDD($dateString) {
 		}
 
 		$details['recognition_allemp'] = $allrecvs;
-		if(isset($get['recognition_id']) AND $get['recognition_id'] !=""){
+		if(isset($get['recognition_id']) and $get['recognition_id'] !=""){
 			$whr4 = "company_id = ".$get['company_id']." AND is_active = 0 AND id in (".$get['recognition_id'].")";
 			$query4=$callConfig->selectQuery(TBL_EMPLOYEE_RECOGNITIONS,'*',$whr4,'','','');
 			$recog_items = $callConfig->getAllRows($query4);
@@ -16601,7 +16601,7 @@ public function getChartJobReport($data){
 	$statusList = $this->getPageStatus("job_postings");
 	$arraydata=array();
 	$condition = '';
-	if($data['from']!="" AND $data['to']!=""){
+	if($data['from']!="" and $data['to']!=""){
 		$condition = " requested_date >='".$data['from']."' and requested_date <='".$data['to']."' AND";
 	}
 	foreach($statusList as $row){
@@ -16615,7 +16615,7 @@ public function getChartJobReport($data){
 public function getListChartJobReport($data){
 	global $callConfig;
 	$condition = '';
-	if($data['from']!="" AND $data['to']!=""){
+	if($data['from']!="" and $data['to']!=""){
 		$condition = " requested_date >='".$data['from']."' and requested_date <='".$data['to']."' AND";
 	}
 	$sql = "SELECT jp.job_number,jp.job_name,jp.job_desc, sp.name FROM `job_postings` jp LEFT JOIN status_progress sp on jp.current_status = sp.status WHERE ".$condition." sp.table_name = 'job_postings' and jp.is_active = 0";
@@ -16630,7 +16630,7 @@ public function getHeadCountCurrentReport($data){
 	$vendarlist = $callConfig->getAllRows($vendarsql);
 	$arraydata=array();
 	$condition = '';
-	if($data['from']!="" AND $data['to']!=""){
+	if($data['from']!="" and $data['to']!=""){
 			//$condition = " date_of_leaving >='".$data['from']."' and date_of_leaving <='".$data['to']."' AND";
 	}
 	foreach($vendarlist as $row){
@@ -16644,7 +16644,7 @@ public function getHeadCountCurrentReport($data){
 public function getListHeadCountCurrentReport($data){
 	global $callConfig;
 	$condition = '';
-	if($data['from']!="" AND $data['to']!=""){
+	if($data['from']!="" and $data['to']!=""){
 			//$condition = " where e.date_of_leaving >='".$data['from']."' and e.date_of_leaving <='".$data['to']."'";
 	}
 	$sql="SELECT e.id,e.emp_code,e.email_id,e.joining_date,e.display_name,v.display_name as vendor_name FROM `employees` e LEFT JOIN vendors v on e.vendor_id = v.id  ".$condition;
@@ -16657,7 +16657,7 @@ public function getChartCandidatesReport($data){
 	global $callConfig;
 	$statusList = $this->getPageStatus("candidates");
 	$arraydata=array();
-	if($data['from']!="" AND $data['to']!=""){
+	if($data['from']!="" and $data['to']!=""){
 		$condition = " reporting_date >='".$data['from']."' and reporting_date <='".$data['to']."' AND";
 	}
 	foreach($statusList as $row){
@@ -16670,7 +16670,7 @@ public function getChartCandidatesReport($data){
 }
 public function getListchartcandidatesreport($data){
 	global $callConfig;
-	if($data['from']!="" AND $data['to']!=""){
+	if($data['from']!="" and $data['to']!=""){
 		$condition = " c.reporting_date >='".$data['from']."' and c.reporting_date <='".$data['to']."' AND";
 	}
 	$sql = "SELECT c.candidate_code,c.display_name,c.phone,sp.name FROM `candidates` c LEFT JOIN status_progress sp on c.current_status = sp.status WHERE ".$condition." sp.table_name = 'job_postings' and c.is_active = 0";
@@ -16915,7 +16915,7 @@ public function insertEmpHistries($data){
 		$where = "id = '".$data['cand_id']."'";
 		$res=$callConfig->updateRecord("job_posting_candidates",$datas,"","",$where);
 
-		if($data['candidate_id'] !="" AND $data['status'] =="0"){
+		if($data['candidate_id'] !="" and $data['status'] =="0"){
 			$where = "id = '".$data['candidate_id']."'";
 			$res=$callConfig->updateRecord("candidates",$candidatesdatas,"","",$where);
 		}
@@ -17075,7 +17075,7 @@ public function insertEmpHistries($data){
 		global $callConfig;
 		$return = array();
 		$condition ="";
-		if($data['start_date']!="" AND $data['end_date']!=""){
+		if($data['start_date']!="" and $data['end_date']!=""){
 			$condition .= " AND jp.requested_date >='".$data['start_date']."' and jp.requested_date <='".$data['end_date']."'";
 		}else{
 			$condition .= " AND jp.requested_date >='".date('Y-m-d', strtotime('first day of this month'))."' and jp.requested_date <='".date('Y-m-d', strtotime('last day of this month'))."'";
@@ -17805,7 +17805,7 @@ public function insertEmpHistries($data){
 			if($docaccesssetupsuser['opex_cpex'] !=""){
 				$conditionbuild .=" AND po.opex_cpex = ".$docaccesssetupsuser['opex_cpex'];
 			}
-			if($docaccesssetupsuser['amount'] !="" AND $docaccesssetupsuser['amount'] !="0"){
+			if($docaccesssetupsuser['amount'] !="" and $docaccesssetupsuser['amount'] !="0"){
 				$conditionbuild .=" AND po.total_amount <= ".$docaccesssetupsuser['amount'];
 			}
 			$item_categorylist = json_decode($docaccesssetupsuser['item_category']);
@@ -17979,7 +17979,7 @@ public function insertEmpHistries($data){
 		if($data['extracat'] !=""){
 			$attchsql = ", ".$data['extracat'];
 		}
-		if($data['transaction_date'] !="" AND $data['table'] = 'items'){
+		if($data['transaction_date'] !="" and $data['table'] = 'items'){
 			$extraconditon = " AND (from_date <='".$this->dateconvertdbformat($data['transaction_date'])."' AND to_date >= '".$this->dateconvertdbformat($data['transaction_date'])."' OR from_date IS NULL)";
 		}
 		if($data['table'] == 'chart_of_accounts'){
@@ -18669,11 +18669,11 @@ public function findbuddyid($checkcriteria,$data){
 public function emailSendWorkflow($data,$workflow,$type){
 	global $callConfig;
 	$sendstatus = 1;
-	if($workflow->after_approval_email !="" AND $type ="approve"){
+	if($workflow->after_approval_email !="" and $type ="approve"){
 		$emailcontain_id = $workflow->after_approval_email;
 		$emailtype = $workflow->send_aproval_email_to;
 		$sendstatus =0;
-	}elseif($workflow->after_rejection_email !="" AND $type ="reject"){
+	}elseif($workflow->after_rejection_email !="" and $type ="reject"){
 		$emailcontain_id = $workflow->after_rejection_email;
 		$emailtype = $workflow->send_rejection_email_to;
 		$sendstatus =0;
@@ -18844,8 +18844,8 @@ public function checkEmployeeLeaveAvailableOrNot($data){
 	global $callConfig;
 	$leavestartdate = $data['leave_from'];
 	$leaveenddate = $data['leave_to'];
-	$start_half_day = ($data['start_half_day'] =='1' OR $data['start_half_day'] =='2')?"1":"0";
-	$end_half_day =($data['end_half_day'] =='1' OR $data['end_half_day'] =='2')?"1":"0";
+	$start_half_day = ($data['start_half_day'] =='1' or $data['start_half_day'] =='2')?"1":"0";
+	$end_half_day =($data['end_half_day'] =='1' or $data['end_half_day'] =='2')?"1":"0";
 	$leaveaplye = 0;
 	$halfdayscnt = 0;
 	$dayarrays =["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
@@ -18967,11 +18967,11 @@ $availabeleaves = $emp_leave_balances->applicable_leaves - $consumed_leaves;
 $finalappllayleavecount = count((array)$datenames)-$weeckendandholidayscount;
 
 $returnresultarray['withouthlfdays'] = $finalappllayleavecount;
-if($start_half_day == '1' OR $end_half_day == '1'){ //half day check or not
+if($start_half_day == '1' or $end_half_day == '1'){ //half day check or not
 	$halfdayscnt = 0;
-	if($start_half_day == '1' AND $end_half_day == '1'){ //Both half day check this true 1 days counsume
+	if($start_half_day == '1' and $end_half_day == '1'){ //Both half day check this true 1 days counsume
 		$halfdayscnt = 1;
-	}elseif($start_half_day == '1' OR $end_half_day == '1'){ //single half day check this true 0.5 days counsume
+	}elseif($start_half_day == '1' or $end_half_day == '1'){ //single half day check this true 0.5 days counsume
 		$halfdayscnt = 0.5;
 	}
 	if($finalappllayleavecount > 1){
@@ -18990,7 +18990,7 @@ if($availabeleaves < 0){
 //$returnresultarray['error_code33333333333333333333333'] = '3';
 }
 //duration Not leave
-if($emp_leave_balances->duration_allowed == '0' AND $emp_leave_balances->duration_allowed !=""){
+if($emp_leave_balances->duration_allowed == '0' and $emp_leave_balances->duration_allowed !=""){
 	$todaydate = strtotime("- ".$emp_leave_balances->duration_leave_count." day", strtotime(date('d-m-Y')));
 	$leavestartdate =strtotime($leavestartdate);
 	$returnresultarray['duration_allowed'] = date('d-m-Y',$leavestartdate);
@@ -19003,7 +19003,7 @@ if($emp_leave_balances->duration_allowed == '0' AND $emp_leave_balances->duratio
 		$returnresultarray['error_msg'] = $emp_leave_balances->duration_leave_count;
 	}
 }
- 	if(round($leave_type_levels->leave_span) < $finalappllayleavecount AND $leave_type_levels->leave_span !="" AND $leave_type_levels->leave_span !="0"){  	// leaev type leavels excide
+ 	if(round($leave_type_levels->leave_span) < $finalappllayleavecount and $leave_type_levels->leave_span !="" and $leave_type_levels->leave_span !="0"){  	// leaev type leavels excide
  		$returnresultarray['leaveaplye'] = '1';
  		$returnresultarray['error_code'] = '8010';
  		$returnresultarray['leave_span'] = $leave_type_levels->leave_span;
@@ -19539,7 +19539,7 @@ public function updatedynamicapprovallognew($data){
 				$restotaltransaction = $callConfig->getRow($totaltransaction);
 				$min = ($resutlworkflow->minimum =="" || $resutlworkflow->minimum =='0' || $resutlworkflow->approval_process == 'E')?$restotaltransaction->cnt:$resutlworkflow->minimum;
 			//echo "minimu -".$min." --- coint approve -".$samestatusrescnt->cnt." -- process tyoe-". $resutlworkflow->approval_process;
-				if(($min <= $samestatusrescnt->cnt AND $resutlworkflow->approval_process == 'M') || ($min <= $restotaltransaction->cnt AND $resutlworkflow->approval_process == 'E') || $resutlworkflow->approval_process == 'A'){
+				if(($min <= $samestatusrescnt->cnt and $resutlworkflow->approval_process == 'M') || ($min <= $restotaltransaction->cnt and $resutlworkflow->approval_process == 'E') || $resutlworkflow->approval_process == 'A'){
 					$st = $data['status']=='-1'?ST_APPROVED:$data['status'];
 					$updatequery ="UPDATE ".$data['table']." SET current_status = ".$st." WHERE id IN(".$data['rid'].")";
 					$res1 = $callConfig->executeQuery($updatequery);
@@ -19632,7 +19632,7 @@ public function updatedynamicapprovallognew($data){
 
 			$min = ($resutlworkflow->minimum =="" || $resutlworkflow->minimum =='0' || $resutlworkflow->approval_process == 'E')?$restotaltransaction->cnt:$resutlworkflow->minimum;
 
-			if(($min <= $samestatusrescnt->cnt AND $resutlworkflow->approval_process == 'M') || ($min <= $restotaltransaction->cnt AND $resutlworkflow->approval_process == 'E') ||  $resutlworkflow->approval_process == 'A'){
+			if(($min <= $samestatusrescnt->cnt and $resutlworkflow->approval_process == 'M') || ($min <= $restotaltransaction->cnt and $resutlworkflow->approval_process == 'E') ||  $resutlworkflow->approval_process == 'A'){
 				$st = $data['status']=='-1'?ST_REJECTED:$data['status'];
 				$updatequery ="UPDATE ".$data['table']." SET current_status = ".$st." WHERE id IN(".$data['rid'].")";
 				$res1dd = $callConfig->executeQuery($updatequery);
@@ -19713,7 +19713,7 @@ public function updateleavedays($status,$post){
 		$fieldnames = array('is_active'=>'0','company_id'=>$post['company_id'],'employee_id'=>$emp_leaveres->employee_id,'leave_type'=>$emp_leaveres->leave_type_id,'consumed_leaves'=>$emp_leaveres->leave_days,'current_status'=>'0','leave_year'=>date('Y'),'transaction_date'=>date('Y-m-d'),'type'=>'1');
 		$res = $callConfig->insertRecord('emp_leave_allocations',$fieldnames);
 	}
-	if($status == ST_REJECTED OR $status == ST_CALLBACK OR $status == ST_SEND_BACK){
+	if($status == ST_REJECTED or $status == ST_CALLBACK or $status == ST_SEND_BACK){
 		$emp_leavesql = "select leave_days,employee_id,leave_type_id From employee_leaves WHERE company_id = '".$post['company_id']."' AND is_active = 0 AND id = '".$post['transaction_no']."'";
 		$emp_leaveres = $callConfig->getRow($emp_leavesql);
 		$levtypesql = "select id From leave_types WHERE company_id = '".$post['company_id']."' AND is_active = 0 AND leave_category_id = '".$emp_leaveres->leave_type_id."'";
@@ -19871,7 +19871,7 @@ public function getUserStatusStep($data){
 	$cdsc['maindatares'] = $maindatares;
 	$workflowid = $maindatares->workflow_id;
 	$transactionlogid = $maindatares->id;
-	if(isset($maindatares->id) AND $maindatares->id !=""){
+	if(isset($maindatares->id) and $maindatares->id !=""){
 	//if($totalworkresponscnt->cnt > $updateworkresponscnt->cnt  || $totalworkresponscnt->cnt=='0'){  //steps update
 		$workflowsql = "select * from workflow_configuration where is_active='0' and company_id = '".$data['company_id']."' AND id='".$workflowid."'";
 		$workrespons = $callConfig->getRow($workflowsql);
@@ -19998,7 +19998,7 @@ public function startWorkFlow($data){
 	$getstaturow = $data['level']-1;
 	$changestatus = $statuse[$getstaturow];
 		//[rid] => 1 [level] => 1 [tablename] => emp_expenses [user_id] => 1 [company_id] => 1
-	if(isset($details['workflow_configuration']->id) AND $details['nextstepuid']!=""){
+	if(isset($details['workflow_configuration']->id) and $details['nextstepuid']!=""){
 			if($statuse[0]['work_flow_field'] !=""){ //this sttaus field name get resion used -1
 				$data['table'] = $data['tablename'];
 				$getfiledid = $this->workFlowFieldId($statuse[0],$data);
@@ -21170,9 +21170,9 @@ public function getEmployeeTickets($data){
 	$condition = "";
 	if($data['emp_id']!=""){  $condition .= " AND emp_id = '".$data['emp_id']."'";}
 	if($data['priority']!=""){ $condition .=  " AND priority = '".$data['priority']."'";  }
-	if($data['current_status']!="" AND isset($data['current_status'])){ $condition .=  " AND current_status = '".$data['current_status']."'"; }
-	if($data['filterfromdate']!="" AND $data['filtertodate']!=""){ $condition .=  " and created_date >= '".$data['filterfromdate']."' and created_date <= '".$data['filtertodate']."'"; }
-	if($data['field']!="" AND $data['field'] !="emp_id" AND $data['user_id']!=""){
+	if($data['current_status']!="" and isset($data['current_status'])){ $condition .=  " AND current_status = '".$data['current_status']."'"; }
+	if($data['filterfromdate']!="" and $data['filtertodate']!=""){ $condition .=  " and created_date >= '".$data['filterfromdate']."' and created_date <= '".$data['filtertodate']."'"; }
+	if($data['field']!="" and $data['field'] !="emp_id" and $data['user_id']!=""){
 		$condition .=  " AND ".$data['field']." = '".$data['user_id']."'";
 	}
 	if($data['field']=="emp_id"){
@@ -21251,7 +21251,7 @@ public function insertemployeedetails($post){
 		$user=$callConfig->insertRecord('application_users',$fieldnames);
 		$userid = $user['LASTID'];
 		$returnarray['user_create'] = $user;
-		if($post['roll_short_code'] ==EMPLOYEE_ROLE AND isset($user['LASTID']) AND $user['LASTID'] !=""){
+		if($post['roll_short_code'] ==EMPLOYEE_ROLE and isset($user['LASTID']) and $user['LASTID'] !=""){
 			$query = "SELECT application_module,id,role_short_code FROM application_roles where company_id = '".$post['company_id']."' AND role_short_code ='".EMPLOYEE_ROLE."' AND is_active = 0 ";
 			$roleres = $callConfig->getRow($query);
 			$insertarray = array("company_id"=>$get['company_id'],"user_id"=>$userid,"module_setup_id"=>$roleres->application_module,"application_module_id"=>27,"role_id"=>$roleres->id,"role_short_code"=>$roleres->role_short_code,"is_active"=>"0","current_status"=>"0","created_date"=>date('Y-m-d h:i:s'),"created_by"=>$post['user_id']);
@@ -21285,7 +21285,7 @@ public function insertemployeedetails($post){
 
 		$emp_array= array("company_id"=>$post['company_id'],'billable'=>$post['billable'],"hiring_source"=>$post['hiring_source'],"relevant_experience"=>$post['relevant_experience'],"display_name"=>$post['display_name'],"emp_code"=>$post['emp_code'],"email_id"=>$post['email_id'],"first_name"=>$post['first_name'],"middle_name"=>$post['middle_name'],"last_name"=>$post['last_name'],"phone"=>$post['phone'],"fax"=>$post['fax'],"address"=>$post['address'],"post_code"=>$post['post_code'],"department_id"=>$post['department_id'],"vertical_id"=>$post['vertical_id'],"reporting_manager_id"=>$post['reporting_manager_id'],"designation_id"=>$post['designation_id'],"joining_date"=>$this->dateconvertdbformat($post['joining_date']),"total_experiance"=>$post['total_experiance'],"experience_current_organization"=>$post['experience_current_organization'],"band_id"=>$post['band_id'],"level_id"=>$post['level_id'],"notice_period"=>$post['notice_period'],"location_id"=>$post['location_id'],"role_id"=>$post['role_id'],"employee_type"=>$post['employee_type'],"office_phone"=>$post['office_phone'],"office_ext"=>$post['office_ext'],"gender"=>$post['gender'],"marital_status"=>$post['marital_status'],"date_of_birth"=>$this->dateconvertdbformat($post['date_of_birth']),"wedding_date"=>$this->dateconvertdbformat($post['wedding_date']),"blood_group"=>$post['blood_group'],"created_date"=>date('Y-m-d H:i:s'),"created_by"=>$post['user_id'],'current_status'=>'0','is_active'=>'0','user_id'=>$userid,'loc_buddy'=>$post['loc_buddy'],'project_buddy'=>$post['project_buddy'],'hr_buddy'=>$post['hr_buddy'],'finance_buddy'=>$post['finance_buddy'],'admin_buddy'=>$post['admin_buddy'],'soc_facebook'=>$post['soc_facebook'],'soc_twitter'=>$post['soc_twitter'],'soc_linkedin'=>$post['soc_linkedin'],'adhar_no'=>$post['adhar_no'],'adhar_issue_date'=>$this->dateconvertdbformat($post['adhar_issue_date']),'passport'=>$post['passport'],'passport_issue_date'=>$this->dateconvertdbformat($post['passport_issue_date']),'passport_expiry_date'=>$this->dateconvertdbformat($post['passport_expiry_date']),'driving_licence'=>$post['driving_licence'],'driving_licence_issue_date'=>$this->dateconvertdbformat($post['driving_licence_issue_date']),'driving_licence_expiry_date'=>$this->dateconvertdbformat($post['driving_licence_expiry_date']),'pan_number'=>$post['pan_number'],'pan_issue_date'=>$this->dateconvertdbformat($post['pan_issue_date']),'pf_no'=>$post['pf_no'],'pf_issue_date'=>$this->dateconvertdbformat($post['pf_issue_date']),'pf_uan'=>$post['pf_uan'],'pf_uan_issue_date'=>$this->dateconvertdbformat($post['pf_uan_issue_date']));
 
-			if(EMPLOYEE_INSERT_FORM_BANK_DETAIL_INSERT == "Y" AND $res['LASTID'] !="" AND $post['	bank_id']!="" AND $post['bank_link']!="" AND $post['bank_account_no']!=""){
+			if(EMPLOYEE_INSERT_FORM_BANK_DETAIL_INSERT == "Y" and $res['LASTID'] !="" and $post['	bank_id']!="" and $post['bank_link']!="" and $post['bank_account_no']!=""){
 				$emp_array['bank_id'] = $post['bank_id'];
 				$emp_array['bank_link'] = $post['bank_link'];
 				$emp_array['bank_account_no'] = $post['bank_account_no'];
@@ -21307,7 +21307,7 @@ public function insertemployeedetails($post){
 			}
 
 
-			if(EMPLOYEE_INSERT_FORM_BANK_DETAIL_INSERT == "Y" AND $res['LASTID'] !="" AND $post['bank_id']!="" AND $post['bank_link']!="" AND $post['bank_account_no']!=""){
+			if(EMPLOYEE_INSERT_FORM_BANK_DETAIL_INSERT == "Y" and $res['LASTID'] !="" and $post['bank_id']!="" and $post['bank_link']!="" and $post['bank_account_no']!=""){
 				$postdata_emerge = array('emp_id'=>$res['LASTID'],'company_id'=>$post['company_id'],'bank_id'=>$post['bank_id'],'ifsc_code'=>$post['bank_link'],'bank_account_no'=>$post['bank_account_no'],'request_note'=>"",'activation_status'=>'Y','is_active'=>'0','current_status'=>'199','created_date'=>date('Y-m-d H:i:s'),'created_by'=>$post['user_id']);
 				$callConfig->insertRecord('emp_banks',$postdata_emerge);
 			}
@@ -21608,7 +21608,7 @@ public function getLitsAttendancesApi($get){
 				$dates[$date] = array('day'=>'H','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['H']['color_code'],'display_value'=>$shift['H']['display_value'],'key_name'=>$shift['H']['key_name'],'key_bgcolor'=>$shift['H']['key_bgcolor']);
 			}elseif(!in_array($dy, (array)$workingdays)){
 				$dates[$date] = array('day'=>'O','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['O']['color_code'],'display_value'=>$shift['O']['display_value'],'key_name'=>$shift['O']['key_name'],'key_bgcolor'=>$shift['O']['key_bgcolor']);
-			}elseif(isset($attendacnearray[$ky][$date]) AND isset($leavesdetailsarray[$ky][$date])){
+			}elseif(isset($attendacnearray[$ky][$date]) and isset($leavesdetailsarray[$ky][$date])){
 				$dates[$date] = array('day'=>'V','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['V']['color_code'],'display_value'=>$shift['V']['display_value'],'strthalfday'=>$tempdetailary[$ky][$date]['start_half_day'],'endthalfday'=>$tempdetailary[$ky][$date]['end_half_day'],'working_color'=>$shift['W']['color_code'],'key_name'=>$shift['V']['key_name'],'key_bgcolor'=>$shift['V']['key_bgcolor']);
 				$discrepancy[$ky] = $emp;
 				$monthworkingdays++;
@@ -22879,7 +22879,7 @@ public function getLeaveWithStatus($data){
 			global $callConfig;
 			$returnarray = array();
 			$condition = "";
-			if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
+			if($get['admin_type'] != 1 or $get['admin_access_employee'] == 'Y'){
 				$condition .= " AND originator = '".$get['user_id']."'";
 			}
 			$vendorssql = "SELECT * FROM purchase_invoices WHERE company_id = '".$get['company_id']."' AND is_active = 0".$condition;
@@ -23034,7 +23034,7 @@ public function getLeaveWithStatus($data){
 	 	$fieldnames=array('company_id'=>$get['company_id'],'emp_id'=>$get['emp_id'],'user_id'=>$get['user_id'],'expense_date'=>$expense_date,'currency_id'=>$get['currency_id'],'client_reimbursement'=>$get['client_reimbursement'],'transport_assign_id'=>$get['transport_assign_id'],'reference_date'=>$reference_date,'project_name'=>$get['project_id'],'amount'=>$get['amount'],'total_amount'=>$get['amount'],'pending_amount'=>$get['amount'],'cost_center_id'=>$get['cost_center_id'],'trip_id'=>$get['trip_id']);
 	 	$returnarray['array'] = $fieldnames;
 	 	$returnarray['Rid'] = $get['Rid'];
-	 	if($get['Rid'] != '0' AND $get['Rid'] != ''){
+	 	if($get['Rid'] != '0' and $get['Rid'] != ''){
 	 		$fieldnames['updated_date'] = date('Y-m-d h:i:s');
 	 		$fieldnames['updated_by'] = $get['user_id'];
 	 		$insert_data=$callConfig->updateRecord('emp_expenses',$fieldnames,'id',$get['Rid']);
@@ -23243,13 +23243,13 @@ public function getLeaveWithStatus($data){
 
 	 	$workcheck = "SELECT id FROM user_reimbursement_policies WHERE policy_id NOT IN('".$get['policy_number']."') AND company_id= '".$get['company_id']."' AND user_id=".$get['emp_id']." AND is_active= '0'";
 	 	$workcheckdata = $callConfig->getRow($workcheck);
-	 	if($workcheckdata->id !="" AND $get['newcreate'] !="Y"){
+	 	if($workcheckdata->id !="" and $get['newcreate'] !="Y"){
 	 		$returnarray['other_policy'] = 'Y';
 	 	}else{
 
 	 		if($get['newcreate']=="Y"){
 				//$insert_array['is_active']= NULL;
-	 			$insert_arrayold = array('is_active'=>NULL,'updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d H:i:s'),'end_date'=>date('Y-m-d',strtotime('-1 day')));
+	 			$insert_arrayold = array('is_active'=>null,'updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d H:i:s'),'end_date'=>date('Y-m-d',strtotime('-1 day')));
 	 			$where = "id = '".$workcheckdata->id."'";
 	 			$res=$callConfig->updateRecord("user_reimbursement_policies",$insert_arrayold,"","",$where);
 	 		}
@@ -23259,7 +23259,7 @@ public function getLeaveWithStatus($data){
 	 		$fieldnames=array('company_id'=>$get['company_id'],'policy_id'=>$get['policy_number'],'user_id'=>$get['emp_id'],'current_status'=>'0');
 	 		if($datas->id!=""){
 	 			if($datas->is_active =="0"){
-	 				$fieldnames['is_active'] = NULL;
+	 				$fieldnames['is_active'] = null;
 	 			}else{
 	 				$fieldnames['is_active'] = '0';
 	 			}
@@ -24005,7 +24005,7 @@ public function setComplianceAllocation($get){
 				}
 			}
 			if($row->action_frequency == 'YR'){
-				if(date('m', $i) == $row->on_the_month AND date('d', $i) == $row->on_the_day_year){
+				if(date('m', $i) == $row->on_the_month and date('d', $i) == $row->on_the_day_year){
 					foreach($employeesres as $empid){
 						$sql .= "('".$get['company_id']."','".$row->id."','".$empid->id."','".$row->task_name."','".$row->check_list."','".$task_date."','0','0','".date('Y-m-d h:i:s')."','".$get['user_id']."'),";
 					}
@@ -25372,7 +25372,7 @@ public function inserttasks($post, $get){
     	$textfieldapplicable = array('text','email','phone','number','currency','textarea','serial_no','read_only');
     	$searchfieldapplicable = array('select','multi_select','disable_select','radio','checklist');
     	$emp_array  =$empidcheckarray = array();
-    	if($get['admin_type'] !=1 OR $admin_access_employee =='Y'){
+    	if($get['admin_type'] !=1 or $admin_access_employee =='Y'){
     		$emp_array= array('emp_id','employee_id');
     	}
     	if($get['user_type']==3){
@@ -25400,7 +25400,7 @@ public function inserttasks($post, $get){
     		}
 
     		//if(in_array($value['type'], (array)$type_array) AND $value['display_list'] ==1){
-    		if(in_array($value['type'], (array)$searchfieldapplicable) AND $value['display_list'] ==1){
+    		if(in_array($value['type'], (array)$searchfieldapplicable) and $value['display_list'] ==1){
     			$tablefield = $this->getDyanamicSelectData($application_table, $key);
     			if($tablefield['type'] != 'function'){
     				$field[$key] = $tablefield['res'];
@@ -25409,7 +25409,7 @@ public function inserttasks($post, $get){
     			}
     		}
 
-    		if($get['filter_text'] !="" AND $value['display_list'] ==1){
+    		if($get['filter_text'] !="" and $value['display_list'] ==1){
 	    		if(in_array($value['type'], (array)$textfieldapplicable)){
 	    			if($ftextseq == 1){
 	    				$textcondition .= " ".$key." LIKE '%".$get['filter_text']."%'";
@@ -25421,7 +25421,7 @@ public function inserttasks($post, $get){
 	    	}
     	}
 
-    	if($get['filter_text'] !="" AND $textcondition !=""){  // text box item filter
+    	if($get['filter_text'] !="" and $textcondition !=""){  // text box item filter
     		$condition .= " AND (".$textcondition.") ";
     	}
     	if($get['filter_dynamic_select'] !=""){   // list item filter
@@ -25440,7 +25440,7 @@ public function inserttasks($post, $get){
     	foreach($status_progress as $statusprogress){
 			$returnres['status_progress'][$statusprogress->status] = $statusprogress;
 		}
-    	if($get['curr_status'] !="-1" AND $get['curr_status'] !=""){
+    	if($get['curr_status'] !="-1" and $get['curr_status'] !=""){
     		$condition .= " AND current_status = '".$get['curr_status']."'";
     	}
     	if($get['status'] =="0" || $get['status'] ==""){
@@ -25448,7 +25448,7 @@ public function inserttasks($post, $get){
     	}elseif($get['status'] =="1"){
     		$condition .= " AND is_active IS null OR is_active !='0'";
     	}
-    	if(($get['admin_type'] == 0 OR $admin_access_employee =='Y') AND !in_array('emp_id', (array)$empidcheckarray) AND !in_array('employee_id', (array)$empidcheckarray) AND $displayattributesres->originator_check_required_or_not == 'Y'){
+    	if(($get['admin_type'] == 0 or $admin_access_employee =='Y') and !in_array('emp_id', (array)$empidcheckarray) and !in_array('employee_id', (array)$empidcheckarray) and $displayattributesres->originator_check_required_or_not == 'Y'){
     		$condition .= " AND created_by ='".$get['user_id']."'";
     	}
     	if($application_table== "process_task_settings"){
@@ -25459,7 +25459,7 @@ public function inserttasks($post, $get){
      			$cntsql = "SELECT COUNT(id) as cnt FROM ".$application_table." WHERE company_id = '".$get['company_id']."' ".$condition;
 	     		$cntres =  $callConfig->getRow($cntsql);
 	     		$returnres['total_record_cnt'] = $cntres;
-	     		$respons_data_cnt =  ($cntres->cnt!="" AND $cntres->cnt !=0)?$cntres->cnt:0;
+	     		$respons_data_cnt =  ($cntres->cnt!="" and $cntres->cnt !=0)?$cntres->cnt:0;
 
 		     	$divide_limit = $respons_data_cnt/$get['limit_select'];
 				$total_pages = ceil($respons_data_cnt / $get['limit_select']);
@@ -25697,7 +25697,7 @@ public function inserttasks($post, $get){
     	$usage_trash_holder_type = $post['usage_trash_holder_type'] == 'Y'?"Y":"N";
     	$pro_rata_billing = $post['pro_rata_billing'] == 'Y'?"Y":"N";
     	foreach($post['fieldname'] as $kK=>$Value){
-    		if($post['fieldname'][$kK] !="" AND $post['fieldvalue'][$kK] !=""){
+    		if($post['fieldname'][$kK] !="" and $post['fieldvalue'][$kK] !=""){
     			$custom_field[$post['fieldname'][$kK]] =$post['fieldvalue'][$kK];
     		}
     	}
@@ -25923,17 +25923,17 @@ public function inserttasks($post, $get){
 			if($get['location_id'] !=""){
 				$condition .=" AND location_id = '".$get['location_id']."'";
 			}
-			if($get['job_tittle_id'] !="" AND  !empty(json_decode($get['job_tittle_id']))){
+			if($get['job_tittle_id'] !="" and  !empty(json_decode($get['job_tittle_id']))){
 				$decod = json_decode($get['job_tittle_id'],1);
 				$json = implode(',',(array)$decod);
 				$condition .=" AND job_tittle_id  IN(".$json.")";
 			}
-			if($get['gender'] !="" AND !empty(json_decode($get['gender']))){
+			if($get['gender'] !="" and !empty(json_decode($get['gender']))){
 				$decod = json_decode($get['gender'],1);
 				$json = implode("','",(array)$decod);
 				$condition .=" AND gender  IN('".$json."')";
 			}
-			if($get['job_type'] !="" AND !empty(json_decode($get['job_type']))){
+			if($get['job_type'] !="" and !empty(json_decode($get['job_type']))){
 				$decod = json_decode($get['job_type'],1);
 				$json = implode("','",(array)$decod);
 				$condition .=" AND job_type  IN('".$json."')";
@@ -25942,10 +25942,10 @@ public function inserttasks($post, $get){
 				$condition .=" AND display_name like '".$get['alphabet']."%'";
 			}
 
-			if($get['expected_ctc_start'] !="" AND $get['expected_ctc_end'] !=""){
+			if($get['expected_ctc_start'] !="" and $get['expected_ctc_end'] !=""){
 				$condition .=" AND expected_ctc >= ".$get['expected_ctc_start']." AND expected_ctc <=".$get['expected_ctc_end'];
 			}
-			if($get['total_experiance_start'] !="" AND $get['total_experiance_end'] !=""){
+			if($get['total_experiance_start'] !="" and $get['total_experiance_end'] !=""){
 				$condition .=" AND total_experiance >= ".$get['total_experiance_start']." AND total_experiance <=".$get['total_experiance_end'];
 			}
 			/*if($get['job_tittle_id'] !="" AND $get['job_tittle_id'] != "null"){
@@ -25953,7 +25953,7 @@ public function inserttasks($post, $get){
 				$json = implode(',',(array)$decod);
 				$condition .=" AND job_tittle_id  IN(".$json.")";
 			}*/
-			if($get['skill'] !="" AND !empty(json_decode($get['skill']))){
+			if($get['skill'] !="" and !empty(json_decode($get['skill']))){
 				$decod = json_decode($get['skill'],1);
 				foreach($decod as $decods){
 					$condition .=" AND skills LIKE '".'%"'.$decods.'"%'."'";
@@ -26371,7 +26371,7 @@ function sendNotificationAndEmails($notarry,$emailarray,$actionid){
 } **/
 public function sendNotificationAndEmails($notarry,$emailarray,$actionid){
 	global $callConfig;
-	if($actionid !="" AND count((array)$emailarray) != 0 AND $emailarray !=""){
+	if($actionid !="" and count((array)$emailarray) != 0 and $emailarray !=""){
 		if($emailarray['databasename'] !=""){
 			$databasename = $emailarray['databasename'].".";
 		}
@@ -26394,7 +26394,7 @@ public function sendNotificationAndEmails($notarry,$emailarray,$actionid){
 
 	}
 	//echo "rferfref"; print_r($emailarray); exit;
-	if(count((array)$notarry) !='0' AND $notarry !=""){
+	if(count((array)$notarry) !='0' and $notarry !=""){
 		$sendnotification = $this->tosendnotifiations($notarry);
 	}
 	return $emailarray;
@@ -27262,7 +27262,7 @@ public function insertCandiDatesPopup($post){
 	$insertarray1['candidate_code'] = $transation;
 	$insertarray1['display_name'] = $post['first_name']." ".$post['last_name'];
 	$insert1 = $callConfig->insertRecord('candidates',$insertarray1);
-	if($insert1['status'] == "sucess" AND $post['job_posting_id'] !=""){
+	if($insert1['status'] == "sucess" and $post['job_posting_id'] !=""){
 		$post['candidate_id'] = $insert1['LASTID'];
 		//$post['job_posting_id'] = array($post['job_posting_id']);
 		$job_posting_candidates = $this->assigneCandidateJobPostingPopup($post);
@@ -27567,7 +27567,7 @@ public function getviewalldetilarecruitmentdashboard($get){
 		$insertarray1['candidate_code'] = $transation;
 		$insertarray1['display_name'] = $post['candidate_name'];
 		$insert1 = $callConfig->insertRecord('candidates',$insertarray1);
-		if($insert1['status'] == "sucess" AND $post['job_posting_id'] !=""){
+		if($insert1['status'] == "sucess" and $post['job_posting_id'] !=""){
 			$insert_array = array('company_id'=>$get['company_id'],'candidate_id'=>$insert1['LASTID'],'job_posting_id'=>$post['extid'],'candidate_name'=>$post['candidate_name'],'candidate_email'=>$post['candidate_email'],'candidate_phone'=>$post['candidate_phone'],'image'=>$post['resume'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
 			$insert = $callConfig->insertRecord('job_posting_candidates',$insert_array);
 		}
@@ -27995,7 +27995,7 @@ function updatetransactionactivityschedule($post){
 		global $callConfig;
 		$return = array();
 		$condition ="";
-		if($get['field_name'] !="" AND $get['field_name'] !="All"){
+		if($get['field_name'] !="" and $get['field_name'] !="All"){
 			$condition = " AND ca.".$get['field_name']." = '".$get['value']."' ";
 		}
 		$job_posting_candidatessql = "SELECT jpc.id, jpc.job_posting_id, jpc.candidate_name, jpc.candidate_email, jpc.candidate_id, jpc.job_selection_process_step_id, jpc.current_status,jpc.created_date,(SELECT jhs.hiring_source_name FROM job_hiring_source jhs WHERE jhs.company_id = jpc.company_id AND jhs.id = jpc.job_hiring_source_id AND jhs.is_active = jpc.is_active) as job_hiring_source_name FROM job_posting_candidates jpc, candidates ca WHERE jpc.company_id = '".$get['company_id']."' AND jpc.company_id = ca.company_id AND jpc.candidate_id = ca.id AND jpc.job_posting_id = '".$get['job_posting_id']."' ".$condition."  AND jpc.is_active = 0 AND jpc.is_active = ca.is_active";
@@ -28032,7 +28032,7 @@ function updatetransactionactivityschedule($post){
 		$fielddata = json_encode($post['fieldgrpaccess']);
 		$dashboard_field_list = json_encode($post['dashboard_field_list']);
 		$return['post'] = $post;
-		if(isset($post['Rid']) AND $post['Rid'] !=""){
+		if(isset($post['Rid']) and $post['Rid'] !=""){
 			$post_array= array("role_short_code"=>$post['role_short_code'],"field_list"=>$fielddata,"dashboard_field_list"=>$dashboard_field_list,"updated_by"=>$post['user_id'],"updated_date"=>date('Y-m-d H:i:s'));
 			$res=$callConfig->updateRecord('candidate_display_fields',$post_array,'id',$post['Rid']);
 		}else{
@@ -28235,13 +28235,13 @@ function updatetransactionactivityschedule($post){
 			$tablename[] = "general_code_details opex_capexs";
 			$joins[] = " AND opex_capexs.genc_code = 'OPEXCAPEX' AND opex_capexs.company_id = '".$get['company_id']."' AND opex_capexs.is_active = 0";
 		}
-		if(in_array('department_id',(array)$workingprocess) AND in_array('cost_center_id', (array)$workingprocess)){
+		if(in_array('department_id',(array)$workingprocess) and in_array('cost_center_id', (array)$workingprocess)){
 			$joins[] = " AND departments.id = cost_centers.department_id";
 		}
-		if(in_array('department_id', (array)$workingprocess) AND in_array('division_id', (array)$workingprocess)){
+		if(in_array('department_id', (array)$workingprocess) and in_array('division_id', (array)$workingprocess)){
 			$joins[] = " AND departments.division_id = divisions.id";
 		}
-		if(count((array)$fieldname) != 0 AND count((array)$tablename) != 0){
+		if(count((array)$fieldname) != 0 and count((array)$tablename) != 0){
 			$sql = "SELECT ".implode(",",(array)$fieldname)." FROM ".implode(",",(array)$tablename)." WHERE 1 ".implode(" ",(array)$joins);
 			$return['sql'] = $sql;
 			$res=$callConfig->getAllRows($sql);
@@ -28413,7 +28413,7 @@ function updatetransactionactivityschedule($post){
 			$return['approval'] = $transaction_approval_logsres;
 			$return['approvalsql']= $transaction_approval_logssql;
 		}else{
-			if($get['action_type'] !="" AND $get['action_type'] != "null"){
+			if($get['action_type'] !="" and $get['action_type'] != "null"){
 				$json  = implode("','",(array)$decod);
 				$condition .=" AND type IN('".$json."')";
 			}else{
@@ -28493,7 +28493,7 @@ function updatetransactionactivityschedule($post){
 		//$return['passwordencry'] = $callConfig->passwordEncrypt('Password#1972');
 		$originator = $get['fieldaccess'] !=""?"party_id":"originator";
 		$checkuserid = $get['fieldaccess'] !=""?$get['vendor_id']:$get['user_id'];
-		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
+		if($get['admin_type'] != 1 or $get['admin_access_employee'] == 'Y'){
 			$condition = " AND pt.".$originator." = '".$checkuserid."'";
 		}
 		$get['transaction_date_check'] = date('Y-m-d');
@@ -28615,7 +28615,7 @@ function updatetransactionactivityschedule($post){
 				}
 				//$conditionpopup .= " AND pt.".$originator." = '".$checkuserid."'";
 			}
-			if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
+			if($get['admin_type'] != 1 or $get['admin_access_employee'] == 'Y'){
 				$conditionpopup .= " AND pt.".$originator." = '".$checkuserid."'";
 			}
 			$dtablesql = "SELECT pt.id, pt.transaction_number, pt.transaction_date, pt.originator,pt.party_id ,pt.party_name, pt.total_amount, pt.cost_center_id, pt.current_status, pt.pending_amount FROM ".$dmtres->application_table_name." pt WHERE pt.company_id = '".$get['company_id']."' ".$conditionpopup."  AND pt.is_active = 0";
@@ -28677,7 +28677,7 @@ function updatetransactionactivityschedule($post){
 					if($docaccesssetupsuser['opex_cpex'] !=""){
 						$conditionbuild .=" AND po.opex_cpex = ".$docaccesssetupsuser['opex_cpex'];
 					}
-					if($docaccesssetupsuser['amount'] !="" AND $docaccesssetupsuser['amount'] !="0"){
+					if($docaccesssetupsuser['amount'] !="" and $docaccesssetupsuser['amount'] !="0"){
 						$conditionbuild .=" AND po.total_amount <= ".$docaccesssetupsuser['amount'];
 					}
 					$item_categorylist = json_decode($docaccesssetupsuser['item_category']);
@@ -28905,7 +28905,7 @@ function updatetransactionactivityschedule($post){
 			$flowstatus[$workflowres->workflow_trigger_status] = $workflowres->workflow_trigger_status;
 			$transactionownerfield = $workflowres->transaction_owner_field;
 			$transaction_owner_field = $temp_owner_id = $transactionres->$transactionownerfield;
-			if($workflowres->transaction_owner_type !="" AND $workflowres->transaction_owner_type !="AU"){
+			if($workflowres->transaction_owner_type !="" and $workflowres->transaction_owner_type !="AU"){
 				$uidsql = "SELECT user_id FROM ".$workflowres->transaction_owner_type." WHERE company_id = '".$get['company_id']."' AND id = ".$transaction_owner_field." AND is_active = 0";
 				$uidres = $callConfig->getRow($uidsql);
 				$transaction_owner_field = $uidres->user_id;
@@ -28927,7 +28927,7 @@ function updatetransactionactivityschedule($post){
 			$transactionallstatus[ST_SEND_BACK] = ST_SEND_BACK;
 			$validatestatusarry = array();
 			//check current stutus workflow start ,applicable or not
-			if($workflowres->workflow_trigger_status == $current_status OR in_array($current_status, (array)$transactionallstatus)){
+			if($workflowres->workflow_trigger_status == $current_status or in_array($current_status, (array)$transactionallstatus)){
 				$workflowdetailsql = "SELECT id, approval_level_criteria, doa_amount, final_approval FROM workflow_configuration_details WHERE company_id = '".$get['company_id']."' AND workflow_id = '".$workflowres->id."' AND is_active = 0";
 				$workflowdetailres = $callConfig->getAllRows($workflowdetailsql);
 				$cntworkflowdetailres = count((array)$workflowdetailres);
@@ -28940,7 +28940,7 @@ function updatetransactionactivityschedule($post){
 		$tranaprrlogsql = "SELECT id, previous_status,user_id, send_back_flag, call_back, response_type FROM transaction_approval_logs WHERE company_id = '".$get['company_id']."' AND transaction_table= '".$transaction_table."' AND transaction_id= '".$transaction_no."'";
 		$tranaprrlogres = $callConfig->getAllRows($tranaprrlogsql);
 		foreach($tranaprrlogres as $tranaprrlog){
-			if($tranaprrlog->send_back_flag=='0' AND $tranaprrlog->call_back == '1' AND $tranaprrlog->response_type == '0'){
+			if($tranaprrlog->send_back_flag=='0' and $tranaprrlog->call_back == '1' and $tranaprrlog->response_type == '0'){
 				$return['transaction_approval_logs'][$tranaprrlog->user_id] = $tranaprrlog;
 			}
 			if($tranaprrlog->response_type !='0'){
@@ -28982,7 +28982,7 @@ function updatetransactionactivityschedule($post){
 								$transaction_amount = $transactionres->$trigerfield; //Get Transaction Amount
 							}
 							if($limit_amount['end_doa'] >=$transaction_amount){    /// out side or inside amount checked
-								if(($step_amount['end_doa'] <= $transaction_amount AND $step_amount['end_doa'] !="") OR $workflowres->doa == 1){
+								if(($step_amount['end_doa'] <= $transaction_amount and $step_amount['end_doa'] !="") or $workflowres->doa == 1){
 								//if(($step_amount['start_doa'] <= $transaction_amount AND $step_amount['end_doa'] >=$transaction_amount) OR  ($step_amount['end_doa'] <=$transaction_amount AND $step_amount['end_doa'] !="") OR $workflowres->doa == 1){
 									$passarray = array("get"=>$get,"transactionres"=>$transactionres,"workflowres"=>$workflowres,"nextstepvalue"=>$nextstepvalue,"transaction_owner_field"=>$transaction_owner_field,'temp_owner_id'=>$temp_owner_id);
 									$steps = $this->workFlowCheckSteps($passarray);
@@ -29646,7 +29646,7 @@ public function purchaseInvoiceThroughgoodsreceiptnotesCreated($get){
 	$return['transtablesql'] = $transtablesql;
 	$return['transtableres'] = $transtableres;
 	//echo "csdcsdc"; exit;
-	if($transtableres->ref_no =="" AND $transaction_id !=""){
+	if($transtableres->ref_no =="" and $transaction_id !=""){
 
 		$transaction_table_dmtsql = "SELECT id, page_title, application_table_name,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$company_id."' AND application_table_name = '".$transaction_table."' AND is_active = 0 AND item_table !='' AND tax_table!=''";
 		$transaction_table_dmtres=$callConfig->getRow($transaction_table_dmtsql);
@@ -29819,7 +29819,7 @@ public function extraFunctionCall($get){
 	 		$pettycash = $this->updateTransactionActivitySchedule1($get);
 	 		$return = $pettycash;
 	 	}
-	 }elseif($get['next_status']==ST_REJECTED OR $get['next_status']==ST_SEND_BACK OR $get['next_status'] == ST_CALLBACK){
+	 }elseif($get['next_status']==ST_REJECTED or $get['next_status']==ST_SEND_BACK or $get['next_status'] == ST_CALLBACK){
 		if($get['transaction_table']=="petty_cash"){
 			$pettycashObj=new pettyCashUserClass();
 			$pettycash = $pettycashObj->insertPettyCashBalances($get,'+');
@@ -29932,7 +29932,7 @@ public function submitStatusDynamicWorkFlow($get){
 		$infouser_ids[$translogres->user_id] = $translogres->user_id;
 	}
 
-	if($get['user_id'] !="" AND $get['transaction_no'] !=""){
+	if($get['user_id'] !="" and $get['transaction_no'] !=""){
 		$apprlogupdatear=array('comments'=>$get['comment'],'response_type'=>$get['next_status'],'response_date'=>date("Y-m-d H:i:s"));
 		$where = " user_id = '".$get['user_id']."' AND transaction_id = '".$get['transaction_no']."' AND response_type = 0 AND send_back_flag = 0 AND call_back = 1";
 		$transaction_log_update=$callConfig->updateRecord(TBL_TRANSACTION_APPROVAL_LOGS,$apprlogupdatear,'','',$where);
@@ -30036,7 +30036,7 @@ public function submitStatusDynamicWorkFlow($get){
 			$return['originator_email'] = $this->sendNotificationAndEmails($notarry,$emailarray,70);
 			//chnage part today - 2024-11-08
 
-		}elseif($get['next_status']==ST_APPROVED OR $get['next_status']==ST_REJECTED OR $get['next_status']==ST_SEND_BACK){
+		}elseif($get['next_status']==ST_APPROVED or $get['next_status']==ST_REJECTED or $get['next_status']==ST_SEND_BACK){
 			/**
 			if(in_array($get['transaction_table'], (array)$out_array) AND ($get['next_status']==ST_REJECTED OR $get['next_status']==ST_SEND_BACK)){
 				$this->updateTransactionItemsQty($get,$transaction_details,"-");
@@ -30192,7 +30192,7 @@ public function submitStatusDynamicWorkFlow($get){
 
 
 
-		}elseif($nextlevelstatus !=ST_APPROVED AND $transactiontableupdateornot == '0'){
+		}elseif($nextlevelstatus !=ST_APPROVED and $transactiontableupdateornot == '0'){
 
 			$loginusersql = "SELECT id, display_name, user_email FROM `application_users` WHERE company_id = '".$get['company_id']."' AND id = '".$get['user_id']."' AND is_active = 0";
 			$loginuserres = $callConfig->getRow($loginusersql);
@@ -30256,7 +30256,7 @@ public function documentGenerationNextProcess($get,$transaction,$nexttransaction
 	$transaction_owner_id = $get['transaction_owner_id'];
 	$getdocaccesssetup = $this->getdocumentsAccessSetupsRule($get);
 	$allowdivisionusers = $allowdepartmentusers = $allowcostcenterusers = $allowlocationusers =array();
-	if(count((array)$getdocaccesssetup['document_access_setupsres']) !=0 AND $getdocaccesssetup['document_access_setupsres'] !=""){
+	if(count((array)$getdocaccesssetup['document_access_setupsres']) !=0 and $getdocaccesssetup['document_access_setupsres'] !=""){
 		$return['getdocaccesssetup'] = $getdocaccesssetup;
 		$nextlevelcreationuser = $getdocaccesssetup['user_document_access_setups'];
 		$table_name = $get['table_name'];
@@ -30270,7 +30270,7 @@ public function documentGenerationNextProcess($get,$transaction,$nexttransaction
 		}
 		$allowcostcenter = array();
 		$userwithrolepermision = $getdocaccesssetup['document_access_setupsres']->create_access_users;
-		if(count((array)$userwithrolepermision) != 0 AND $userwithrolepermision !=""){
+		if(count((array)$userwithrolepermision) != 0 and $userwithrolepermision !=""){
 			/** cost center check
 			foreach($userwithrolepermision as $keyuid=>$uidper){
 				$alluserid[$keyuid] =$keyuid;
@@ -30357,7 +30357,7 @@ public function documentGenerationNextProcess($get,$transaction,$nexttransaction
 						$nomatch++;
 					}
 				}
-				if($docaccesssetupsuser['amount'] !="" AND $docaccesssetupsuser['amount'] !="0"){
+				if($docaccesssetupsuser['amount'] !="" and $docaccesssetupsuser['amount'] !="0"){
 					if($transaction->total_amount <= $docaccesssetupsuser['amount']){ }else{
 						$nomatch++;
 					}
@@ -30669,7 +30669,7 @@ public function getdocumentsAccessSetupsRule($get){
 	}
 
 	//$approved_user_criteria = json_decode($document_access_setupsres->approved_user_criteria,1);
-	if($get['transaction_date_check'] !="" AND $document_access_setupsres->id !=""){
+	if($get['transaction_date_check'] !="" and $document_access_setupsres->id !=""){
 		$transaction_date_check = $this->dateconvertdbformat($get['transaction_date_check']);
 		$document_access_setup_userssql = "SELECT id, transaction_access_permission_id, user_id, approved_type, opex_cpex, item_category, amount, onbehalf, foruser, from_date, permission_view, permission_insert, permission_update, permission_delete, permission_print, permission_import, permission_export, permission_download, permission_approval, permission_analytic,transaction_type, backdate_limit FROM transaction_access_permission_users WHERE company_id = '".$get['company_id']."' AND transaction_access_permission_id = '".$document_access_setupsres->id."'AND from_date <= '".$transaction_date_check."' AND to_date >= '".$transaction_date_check."'";
 		$document_access_setup_usersres=$callConfig->getAllRows($document_access_setup_userssql);
@@ -30900,10 +30900,10 @@ public function dynamicCheckQtyValidation($get){
 		// }
 		$dmtsql = "SELECT id,page_title,application_table_name,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$get['ref_table']."' AND is_active = 0";
 		$dmtres=$callConfig->getRow($dmtsql);
-		if(($get['ref_table'] == 'enquiries' OR $get['ref_table'] == 'estimates' OR $get['ref_table'] == 'sales_orders') && ($get['table_name'] == 'requisitions' OR $get['table_name'] == 'quotations' OR $get['table_name'] == 'purchase_orders')){
+		if(($get['ref_table'] == 'enquiries' or $get['ref_table'] == 'estimates' or $get['ref_table'] == 'sales_orders') && ($get['table_name'] == 'requisitions' or $get['table_name'] == 'quotations' or $get['table_name'] == 'purchase_orders')){
 			$select_pending_qty = ", pending_order_qty as pending_qty";
 		//}elseif(($get['table_name'] == 'supplier_bills' OR $get['table_name'] ==  'purchase_invoices') AND ($get['ref_table'] =="purchase_orders")){
-		}elseif(($get['table_name'] == "purchase_invoices" OR $get['table_name'] == "sales_invoices") AND ($get['ref_table']  == "purchase_orders" OR $get['ref_table'] == "sales_orders")){
+		}elseif(($get['table_name'] == "purchase_invoices" or $get['table_name'] == "sales_invoices") and ($get['ref_table']  == "purchase_orders" or $get['ref_table'] == "sales_orders")){
 			$select_pending_qty = ", ref_pending_qty_1 as pending_qty";
 		}else{
 			$select_pending_qty = ", pending_qty";
@@ -31023,7 +31023,7 @@ public function updateTransactionItemsQty($get,$transaction,$operation =""){
 		$convresd = $callConfig->getRow($convsql);
 		if($convresd->id !=""){
 			//ok coneversion
-			if($convresd->conversion_ratio !="0" AND $convresd->conversion_ratio !=""){
+			if($convresd->conversion_ratio !="0" and $convresd->conversion_ratio !=""){
 				$len['in_qty'] = $itemres->item_quantity*$convresd->conversion_ratio;
 				$len['in_value'] = $itemres->item_amount*$convresd->conversion_ratio;
 			}
@@ -31032,7 +31032,7 @@ public function updateTransactionItemsQty($get,$transaction,$operation =""){
 			$convsql = "SELECT id,conversion_ratio FROM uom_conversions WHERE company_id = '".$get['company_id']."' AND  ((parent_uom_id = '".$parent_uom_id."' AND child_uom_id = '".$child_uom_id."') OR (parent_uom_id = '".$child_uom_id."' AND child_uom_id = '".$parent_uom_id."'))  AND is_active = 0";
 			$convresd = $callConfig->getRow($convsql);
 			if($convresd->id !=""){
-				if($convresd->conversion_ratio !="0" AND $convresd->conversion_ratio !=""){
+				if($convresd->conversion_ratio !="0" and $convresd->conversion_ratio !=""){
 					$len['in_qty'] = $itemres->item_quantity/$convresd->conversion_ratio;
 					$len['in_value'] = $itemres->item_amount/$convresd->conversion_ratio;
 				}
@@ -31078,7 +31078,7 @@ public function updateTransactionItemsQty($get,$transaction,$operation =""){
 		// $return['updatesql']['childdmtres'] = $childdmtres;
 		//End Ref item Table deatils
 		//if(($transaction->ref_type == 'enquiries' OR $transaction->ref_type == 'estimates' OR $transaction->ref_type == 'sales_orders') && ($get['transaction_table'] == 'requisitions' OR $get['transaction_table'] == 'quotations' OR $get['transaction_table'] == 'purchase_orders')){
-        if(($get['transaction_table'] == 'purchase_invoices' OR $get['transaction_table'] == 'sales_invoices') AND $transaction->ref_type !='subcontract_work_order_receipts'){
+        if(($get['transaction_table'] == 'purchase_invoices' or $get['transaction_table'] == 'sales_invoices') and $transaction->ref_type !='subcontract_work_order_receipts'){
             $pending_qty_condition = "rq_i.pending_order_qty = (rq_i.pending_order_qty ".$operation." po_i.item_quantity)";
         }else{
             $pending_qty_condition = "rq_i.pending_qty = (rq_i.pending_qty ".$operation." po_i.item_quantity)";
@@ -31206,7 +31206,7 @@ public function getDynamicpopUpVendorsAssignRequisition($get){
 		$return['selected_documents'] = $selected_documentsres;
 
 
-		if(($get['table'] == 'enquiries' OR $get['table'] == 'estimates' OR $get['table'] == 'sales_orders') && ($get['new_table'] == 'requisitions' OR $$get['new_table']  == 'quotations' OR $get['new_table']  == 'purchase_orders')){
+		if(($get['table'] == 'enquiries' or $get['table'] == 'estimates' or $get['table'] == 'sales_orders') && ($get['new_table'] == 'requisitions' or $$get['new_table']  == 'quotations' or $get['new_table']  == 'purchase_orders')){
             $pending_qty = "qti.pending_order_qty as pending_qty";
             $item_quantity = "qti.item_quantity as item_quantity";
         }else{
@@ -31254,7 +31254,7 @@ public function getDynamicpopUpVendorsAssignRequisition($get){
 		$selected_documentsres=$callConfig->getRow($selected_documentssql);
 		$return['selected_documents'] = $selected_documentsres;
 
-		if(($get['table'] == 'enquiries' OR $get['table'] == 'estimates' OR $get['table'] == 'sales_orders') && ($get['new_table'] == 'requisitions' OR $$get['new_table']  == 'quotations' OR $get['new_table']  == 'purchase_orders')){
+		if(($get['table'] == 'enquiries' or $get['table'] == 'estimates' or $get['table'] == 'sales_orders') && ($get['new_table'] == 'requisitions' or $$get['new_table']  == 'quotations' or $get['new_table']  == 'purchase_orders')){
             $pending_qty = "qti.pending_order_qty as pending_qty";
             $item_quantity = "qti.item_quantity as item_quantity";
         }else{
@@ -31540,15 +31540,15 @@ public function insertTransActionAccessPermission($post){
 			$varitem_category = json_encode($post['item_category'][$userid]);
 		}
 		$insertuserarray=array('company_id'=>$post['company_id'],'transaction_access_permission_id'=>$lastid,'user_id'=>$userid,'approved_type'=>$post['approved_type'][$userid],'opex_cpex'=>$post['opex_cpex'][$userid],'item_category'=>$varitem_category,'amount'=>$post['amount'][$userid],'onbehalf'=>$post['onbehalf'][$userid],'foruser'=>$varforuser,'transaction_type'=>$vartransaction_type,'is_active'=>'0','backdate_limit'=>$post['backdate_limit'][$userid]);
-		$insertuserarray['permission_view'] = isset($exclude_users['list'][$userid])?"0":Null;
-		$insertuserarray['permission_insert'] = isset($exclude_users['create'][$userid])?"0":Null;
-		$insertuserarray['permission_update'] = isset($exclude_users['edit'][$userid])?"0":Null;
-		$insertuserarray['permission_delete'] = isset($exclude_users['delete'][$userid])?"0":Null;
-		$insertuserarray['permission_print'] = isset($exclude_users['print'][$userid])?"0":Null;
-		$insertuserarray['permission_import'] = isset($exclude_users['import'][$userid])?"0":Null;
-		$insertuserarray['permission_download'] = isset($exclude_users['download'][$userid])?"0":Null;
-		$insertuserarray['permission_approval'] = isset($exclude_users['approval'][$userid])?"0":Null;
-		$insertuserarray['permission_analytic'] = isset($exclude_users['analytic'][$userid])?"0":Null;
+		$insertuserarray['permission_view'] = isset($exclude_users['list'][$userid])?"0":null;
+		$insertuserarray['permission_insert'] = isset($exclude_users['create'][$userid])?"0":null;
+		$insertuserarray['permission_update'] = isset($exclude_users['edit'][$userid])?"0":null;
+		$insertuserarray['permission_delete'] = isset($exclude_users['delete'][$userid])?"0":null;
+		$insertuserarray['permission_print'] = isset($exclude_users['print'][$userid])?"0":null;
+		$insertuserarray['permission_import'] = isset($exclude_users['import'][$userid])?"0":null;
+		$insertuserarray['permission_download'] = isset($exclude_users['download'][$userid])?"0":null;
+		$insertuserarray['permission_approval'] = isset($exclude_users['approval'][$userid])?"0":null;
+		$insertuserarray['permission_analytic'] = isset($exclude_users['analytic'][$userid])?"0":null;
 		$newdate = $this->dateconvertdbformat($post['from_date'][$userid]);
 		$old_from_date = $this->dateconvertdbformat($post['old_from_date'][$userid]);
 		if($post['dasu_id'][$userid] !=""){
@@ -31618,12 +31618,12 @@ public function userAndCurrencyDetails($get){
 	$res=$callConfig->getRow($sql);
 	//$return['rolesql'] = $sql;
 	$return['application_users'] = $res;
-	if($res->default_state_id !="" AND $res->default_state_id !="0"){
+	if($res->default_state_id !="" and $res->default_state_id !="0"){
 		$state_id = $res->default_state_id;
 	}elseif($res->company_state_id){
 		$state_id = $res->company_state_id;
 	}
-	if($res->default_currency_id !="" AND $res->default_currency_id !="0"){
+	if($res->default_currency_id !="" and $res->default_currency_id !="0"){
 		$currency_id = $res->default_currency_id;
 	}elseif($res->config_currency_id){
 		$currency_id = $res->config_currency_id;
@@ -31772,7 +31772,7 @@ public function getDisplayAttributesNewVersion($get){
 					$show_filter_cond = explode('&',$show_filter_cond);
 					foreach($show_filter_cond as $show_filter_co){
 						$fieldname = explode("=",$show_filter_co);
-						if($fieldname['0']!="check" AND $fieldname['0']!="table"){
+						if($fieldname['0']!="check" and $fieldname['0']!="table"){
 							$show_filter_condion[$fieldname['0']]=$fieldname['1'];
 						}
 					}
@@ -32055,25 +32055,25 @@ public function getDisplayAttributesNewVersion($get){
         $cvgstbdres = $callConfig->getAllRows($cvgstbdsql);
         if(!empty($cvgstbdres)){
             foreach($cvgstbdres as $cvgst){
-                if($cvgst->billing_country !="" AND $cvgst->billing_country !="0"){
+                if($cvgst->billing_country !="" and $cvgst->billing_country !="0"){
                     $countryid[$cvgst->billing_country] = $cvgst->billing_country;
                 }
-                if($cvgst->billing_state !="" AND $cvgst->billing_state !="0"){
+                if($cvgst->billing_state !="" and $cvgst->billing_state !="0"){
                     $statesid[$cvgst->billing_state] = $cvgst->billing_state;
                 }
-                if($cvgst->shipping_country !="" AND $cvgst->shipping_country !="0"){
+                if($cvgst->shipping_country !="" and $cvgst->shipping_country !="0"){
                     $countryid[$cvgst->shipping_country] = $cvgst->shipping_country;
                 }
-                if($cvgst->shipping_state !="" AND $cvgst->shipping_state !="0"){
+                if($cvgst->shipping_state !="" and $cvgst->shipping_state !="0"){
                     $statesid[$cvgst->shipping_state] = $cvgst->shipping_state;
                 }
             }
         }
         if(!empty($vendorres)){
-            if($vendorres->bank_country !="" AND $vendorres->bank_country !="0"){
+            if($vendorres->bank_country !="" and $vendorres->bank_country !="0"){
                 $countryid[$vendorres->bank_country] = $vendorres->bank_country;
             }
-            if($vendorres->bank_state !="" AND $vendorres->bank_state !="0"){
+            if($vendorres->bank_state !="" and $vendorres->bank_state !="0"){
                 $statesid[$vendorres->bank_state] = $vendorres->bank_state;
             }
         }
@@ -32336,13 +32336,13 @@ public function getDisplayAttributesNewVersion($get){
     			$invoicepecentage = 100;
     			$taxpercentage = 0;
 
-    			if($term->tax_amount !="0" AND $term->tax_amount !=""){
+    			if($term->tax_amount !="0" and $term->tax_amount !=""){
 					$taxpercentage = ($term->tax_amount/$term->amount)*100;
 					$invoicepecentage = $invoicepecentage-$taxpercentage;
 				}
 				if($paymentamount > 0){
     				if($paymentamount >= $term->pending_amount){
-    					if($taxpercentage !="0" AND $taxpercentage !=""){
+    					if($taxpercentage !="0" and $taxpercentage !=""){
     						$taxamount = ($taxpercentage/100)*$term->pending_amount;
     						$invoiceamount = ($invoicepecentage/100)*$term->pending_amount;
     					}else{
@@ -32379,7 +32379,7 @@ public function getDisplayAttributesNewVersion($get){
 
     					$paymentamount = $paymentamount-$term->pending_amount;
     				}else{
-    					if($taxpercentage !="0" AND $taxpercentage !=""){
+    					if($taxpercentage !="0" and $taxpercentage !=""){
     						$taxamount = ($taxpercentage/100)*$paymentamount;
     						$invoiceamount = ($invoicepecentage/100)*$paymentamount;
     					}else{
@@ -32869,7 +32869,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 		$return['bank_accounts'] = $bankaccountsres;
 		if($get['type'] == 'list'){
 			$condition = "";
-			if($get['user_id'] !="" AND $get['admin_type'] != '1'){
+			if($get['user_id'] !="" and $get['admin_type'] != '1'){
 				$condition .= " AND originator = '".$get['user_id']."'";
 			}
 			if($get['vendor_id'] !=""){
@@ -33080,7 +33080,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 	    	$return['setup_page_logs'] = $setup_page_logsres;
 
 	    	foreach($module_setupres as $modulelist){
-				if($modulelist->is_active == '0' AND $modulelist->linking == '1'){
+				if($modulelist->is_active == '0' and $modulelist->linking == '1'){
 					$activemodule[$modulelist->module_id] = $modulelist->module_id;
 				}
 			}
@@ -33170,7 +33170,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 			}
 		}
 		if($insertcompany == '0'){
-			if(isset($post['company_id']) AND $post['company_id'] !=""){
+			if(isset($post['company_id']) and $post['company_id'] !=""){
 				$insertcomp['updated_by'] = $post['user_id'];
 				$insertcomp['updated_date'] = date('Y-m-d H:i:s');
 				$updaterow = $callConfig->updateRecord('companies',$insertcomp,'id',$post['company_id']);
@@ -33188,7 +33188,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 			}
 		}
 		if($insertconfig == '0'){
-			if(isset($post['config_id']) AND $post['config_id'] !=""){
+			if(isset($post['config_id']) and $post['config_id'] !=""){
 				$insertcomp['updated_by'] = $post['user_id'];
 				$insertcomp['updated_date'] = date('Y-m-d H:i:s');
 				$updaterow = $callConfig->updateRecord('config',$insertcomp,'id',$post['config_id']);
@@ -33278,7 +33278,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
     	$callConfig->executeQuery('TRUNCATE stock_adjustment_reasons');
     	$insertdivi = "INSERT INTO `stock_adjustment_reasons`(`company_id`, `reason`, `upordown`, `is_active`, `current_status`,`created_date`, `created_by`) VALUES ";
 		foreach($post['reason'] as $sdvkey=>$dvname){
-			if($dvname !="" AND $post['upordown'][$sdvkey] !=""){
+			if($dvname !="" and $post['upordown'][$sdvkey] !=""){
 				$insertst=0;
 				$insertdivi .= "('".$post['company_id']."', '".$dvname."', '".$post['upordown'][$sdvkey]."','0','0', '".date("Y-m-d H:i:s")."', '".$post['user_id']."'),";
 			}
@@ -33379,7 +33379,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 			$attendance_settingssql = "SELECT id FROM `attendance_settings` WHERE company_id = '".$post['company_id']."' AND location_id = '".$loc."'";
     		$attendance_settingsres = $callConfig->getRow($attendance_settingssql);
 			$attendance_setup = array('company_id'=>$post['company_id'],'working_days'=>json_encode($post['working_days'],1),'minimum_hours_required'=>$post['minimum_hours_required'],'maximum_hours_cap'=>$post['maximum_hours_cap'],'full_day_hours'=>$post['full_day_hours'],'half_day_hours'=>$post['half_day_hours'],'break_time'=>$post['break_time'],'grace_perieod'=>$post['grace_perieod'],'entry_grace_perieod'=>$post['entry_grace_perieod'],'exit_perieod'=>$post['exit_perieod'],'location_id'=>$loc,'created_by'=>$post['user_id'],'is_active'=>'0','created_date'=>date("Y-m-d H:i:s"));
-			if(isset($attendance_settingsres->id) AND $attendance_settingsres->id !=""){
+			if(isset($attendance_settingsres->id) and $attendance_settingsres->id !=""){
 				$attendance_setup['updated_by'] = $post['user_id'];
 				$attendance_setup['updated_date'] = date('Y-m-d H:i:s');
 				$res = $callConfig->updateRecord(TBL_ATTENDANCE_SETTINGS,$attendance_setup,'id',$attendance_settingsres->id);
@@ -33502,7 +33502,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 		$insertst = 1;
 		$insertdivi = "INSERT INTO `warehouses`(`company_id`, `location_id`, `warehouse_short_name`, `warehouse_name`, `is_active`, `current_status`,`created_date`, `created_by`) VALUES ";
 		foreach($post['location_id'] as $sdvkey=>$dvname){
-			if($dvname !="" AND $post['warehouse_short_name'][$sdvkey] !=""){
+			if($dvname !="" and $post['warehouse_short_name'][$sdvkey] !=""){
 				if($post['warehouse_id'][$sdvkey] !=""){
 					$updatedivi = array('location_id'=>$dvname, 'warehouse_short_name'=>$post['warehouse_short_name'][$sdvkey], 'warehouse_name'=>$post['warehouse_name'][$sdvkey],'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id'],'is_active'=>0);
 					$wh = " id = '".$post['warehouse_id'][$sdvkey]."'";
@@ -33529,7 +33529,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 		$insertst = 1;
 		$insertdivi = "INSERT INTO `items`(`company_id`, `sku`, `item_name`, `sale_price`, `purchase_price`,`is_active`, `current_status`,`created_date`, `created_by`) VALUES ";
 		foreach($post['sku'] as $sdvkey=>$dvname){
-			if($dvname !="" AND $post['item_name'][$sdvkey] !=""){
+			if($dvname !="" and $post['item_name'][$sdvkey] !=""){
 				if($post['old_item_id'][$sdvkey] !=""){
 					$updatedivi = array('sku'=>$dvname, 'item_name'=>$post['item_name'][$sdvkey], 'sale_price'=>$post['sale_price'][$sdvkey], 'purchase_price'=>$post['purchase_price'][$sdvkey],'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id'],'is_active'=>0);
 					$wh = " id = '".$post['old_item_id'][$sdvkey]."'";
@@ -33866,7 +33866,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 		global $callConfig;
 		$return['post'] = $post;
 		foreach($post['transaction_table'] as $sdvkey=>$tablename){
-			if($tablename !="" AND $post['option_type'][$sdvkey] !="" AND ($post['application_message_code'][$sdvkey] !="" OR $post['extra_message'][$sdvkey] !="" )){
+			if($tablename !="" and $post['option_type'][$sdvkey] !="" and ($post['application_message_code'][$sdvkey] !="" or $post['extra_message'][$sdvkey] !="" )){
 				$updatedivi[] = array('transaction_table'=>$tablename, 'option_type'=>$post['option_type'][$sdvkey], 'application_message_code'=>$post['application_message_code'][$sdvkey], 'extra_message'=>$post['extra_message'][$sdvkey]);
 
 			}
@@ -34094,7 +34094,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 	        $return['customer_lut_bond_details']= $lut_bond_numberres;
 	    }
 
-	    if($rental_invoicesres->ref_type !="" AND $rental_invoicesres->ref_id !=""){
+	    if($rental_invoicesres->ref_type !="" and $rental_invoicesres->ref_id !=""){
 		    $reftranssql = "SELECT * FROM ".$rental_invoicesres->ref_type." WHERE company_id = '".$get['company_id']."' AND id = '".$rental_invoicesres->ref_id."'  AND is_active =0";
 	        $reftransres=$callConfig->getRow($reftranssql);
 	        $return['refrance_transaction_master'] = $reftransres;
@@ -34120,7 +34120,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
        	$return['payment_terms']= $payment_terms;
 
 
-       	if($partytable !="" AND $rental_invoicesres->party_id !=""){
+       	if($partytable !="" and $rental_invoicesres->party_id !=""){
        		$party_sku_codes = array();
 			if($partytable == "customers"){
 				$itemskusql = "SELECT id, item_id, customer_id, customer_part_no as party_sku_number, customer_part_name as party_sku_name FROM customer_items WHERE company_id = '".$get['company_id']."' AND customer_id = '".$rental_invoicesres->party_id."' AND item_id IN(".$item_ids.") AND is_active = 0";
@@ -34543,7 +34543,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 							}
 							$planned_finish = date('Y-m-d', strtotime($tasks->planned_day.' days', strtotime($days_ago)));
 							//$planned_finish = date('Y-m-d', strtotime($tasks->planned_day.' + '.$days_ago.' days'));
-							if($approval_user_id !="" AND $assigned_to !=""){
+							if($approval_user_id !="" and $assigned_to !=""){
 								$task_array = array('company_id'=>$get['company_id'],'transaction_table'=>$transaction_table,'transaction_id'=>$vendor_register_id,'task_id'=>$tasks->id,'assigned_to'=>$assigned_to,'approval_user_id'=>$approval_user_id,'action_date'=>$days_ago,'revised_action_date'=>$days_ago,'actual_action_date'=>$days_ago,'check_list'=>$tasks->check_list,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'process_id'=>$tasks->process_id,'task_name'=>$tasks->task_name);
 								$res = $callConfig->insertRecord('transaction_activity_schedule',$task_array);
 								$return['transaction_activity_schedule'][] =$task_array;
@@ -35690,7 +35690,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 		$return = array();
 		$return['post'] = $post;
 		$fielddata = json_encode($post['fieldgrpaccess']);
-		if(isset($post['Rid']) AND $post['Rid'] !=""){
+		if(isset($post['Rid']) and $post['Rid'] !=""){
 			$post_array= array("role_id"=>$post['role_short_code'],"field_list"=>$fielddata,"updated_by"=>$post['user_id'],"updated_date"=>date('Y-m-d H:i:s'));
 			$res=$callConfig->updateRecord('employees_display_fields',$post_array,'id',$post['Rid']);
 		}else{
@@ -35972,7 +35972,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 			$updateworkexp = array('is_active'=>null);
 			$callConfig->updateRecord(TBL_EMP_WORK_EXPERIENCES,$updateworkexp,'emp_id',$employee_id);
 			foreach($post['company_name'] as $expekey => $expe){
-				if($expe !="" AND $post['work_from'][$expekey] !=""){
+				if($expe !="" and $post['work_from'][$expekey] !=""){
 					$work_from = $this->dateconvertdbformat($post['work_from'][$expekey]);
 					$work_to = $post['work_to'][$expekey] !=""?$this->dateconvertdbformat($post['work_to'][$expekey]):"";
 					$postdata_main = array('emp_id'=>$employee_id,'company_id'=>$post['company_id'],'company_name'=>$expe,'job_descrption'=>$post['job_descrption'][$expekey],'work_from'=>$work_from,'work_to'=>$work_to,'file'=>$post['we_attachment'][$expekey],'is_active'=>'0','current_status'=>'0');
@@ -35994,7 +35994,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 			$updateworkexp = array('is_active'=>null);
 			$callConfig->updateRecord(TBL_EMP_EDUCATIONS,$updateworkexp,'emp_id',$employee_id);
 			foreach($post['institute_name'] as $edukey => $edu){
-				if($edu !="" AND $post['education_type'][$edukey] !="" AND $post['end_date'][$edukey] !=""){
+				if($edu !="" and $post['education_type'][$edukey] !="" and $post['end_date'][$edukey] !=""){
 					$end_date =  $post['end_date'][$edukey] !=""?$this->dateconvertdbformat($post['end_date'][$edukey]):"";
 					$start_date =  $post['start_date'][$edukey] !=""?$this->dateconvertdbformat($post['start_date'][$edukey]):"";
 					$postdata_edu = array('emp_id'=>$employee_id,'company_id'=>$post['company_id'],
@@ -36017,7 +36017,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 			$updaterow = array('is_active'=>null);
 			$callConfig->updateRecord(TBL_EMP_DEPENDENTS,$updaterow,'emp_id',$employee_id);
 			foreach ($post['dependent_name'] as $depkey => $dep) {
-				if($dep !="" AND $post['dependent_relationship_type'][$depkey] !=""){
+				if($dep !="" and $post['dependent_relationship_type'][$depkey] !=""){
 					$dependent_date_of_birth = $this->dateconvertdbformat($post['dependent_date_of_birth'][$depkey]);
 					$postdata_dep = array('emp_id'=>$employee_id,'company_id'=>$post['company_id'],'dependent_name'=>$dep,'dependent_relationship_type'=>$post['dependent_relationship_type'][$depkey],'dependent_date_of_birth'=>$dependent_date_of_birth,'is_active'=>'0','current_status'=>'0');
 					if($post['dependent_rowid'][$depkey] !=""){
@@ -36038,7 +36038,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 			$updaterow = array('is_active'=>null);
 			$callConfig->updateRecord(TBL_EMP_CONTACTS,$updaterow,'emp_id',$employee_id);
 			foreach ($post['contact_name'] as $emergeky => $eme) {
-				if($eme !="" AND $post['contact_relationship'][$emergeky] !=""){
+				if($eme !="" and $post['contact_relationship'][$emergeky] !=""){
 					$postdata_emerge = array('emp_id'=>$employee_id,'company_id'=>$post['company_id'],'contact_name'=>$eme,'contact_relationship'=>$post['contact_relationship'][$emergeky],'contact_home_no'=>$post['contact_home_no'][$emergeky],'contact_mobile_no'=>$post['contact_mobile_no'][$emergeky],'contact_office_no'=>$post['contact_office_no'][$emergeky],'is_active'=>'0','current_status'=>'0');
 					if($post['contact_rowid'][$emergeky]!=""){
 						$postdata_emerge['updated_date'] = date('Y-m-d H:i:s');
@@ -36060,7 +36060,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 			$updaterow = array('is_active'=>null);
 			$callConfig->updateRecord('emp_visa',$updaterow,'emp_id',$employee_id);
 			foreach ($post['visa_number'] as $visakey => $vis_number) {
-				if($vis_number !="" AND $post['country_id'][$visakey] !=""  AND $post['visa_issue_date'][$visakey] !=""){
+				if($vis_number !="" and $post['country_id'][$visakey] !=""  and $post['visa_issue_date'][$visakey] !=""){
 					$visa_issue_date =  $post['visa_issue_date'][$visakey] !=""?$this->dateconvertdbformat($post['visa_issue_date'][$visakey]):"";
 					$visa_expiry_date =  $post['visa_expiry_date'][$visakey] !=""?$this->dateconvertdbformat($post['visa_expiry_date'][$visakey]):"";
 					$postdata_emerge = array('emp_id'=>$employee_id,'company_id'=>$post['company_id'],'visa_number'=>$vis_number,'country_id'=>$post['country_id'][$visakey],'visa_issue_date'=>$visa_issue_date,'visa_expiry_date'=>$visa_expiry_date,'is_active'=>'0','current_status'=>'0');
@@ -36266,7 +36266,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 				$partyitemres = $callConfig->getRow($partyitemsql);
 
 			}
-			if($post['Rid']!="" OR $partyitemres->id !=""){
+			if($post['Rid']!="" or $partyitemres->id !=""){
 				$rid = $post['Rid']!=""?$post['Rid']:$partyitemres->id;
 				$postdata['updated_date'] = date('Y-m-d H:i:s');
 				$postdata['updated_by'] = $post['user_id'];
@@ -36311,14 +36311,14 @@ $itemref[$vendorsres->account_code][] = $jvary;
 			}
 			$mappingtabsql = "SELECT id,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$company_id."' AND application_table_name = '".$transaction_table."' AND item_table !='' AND is_active = 0";
 			$mappingtabres=$callConfig->getRow($mappingtabsql);
-			if($mappingtabres->item_table !="" AND $partyinvoice->party_id !=""){
+			if($mappingtabres->item_table !="" and $partyinvoice->party_id !=""){
 				$sbsql = "SELECT SUM(item_amount) as total_payments FROM ".$transaction_table." sb, ".$mappingtabres->item_table." sbi WHERE sb.company_id ='".$company_id."' AND sb.company_id = sbi.company_id  AND sb.id = sbi.transaction_id AND sb.party_id = '".$partyinvoice->party_id."' AND sb.is_active = sbi.is_active AND sb.current_status = '".ST_APPROVED."' AND sb.is_active = 0 ";
 				$sbres=$callConfig->getRow($sbsql);
-				if($sbres->total_payments !="" AND isset($sbres->total_payments)){
+				if($sbres->total_payments !="" and isset($sbres->total_payments)){
 					$total_payments = $sbres->total_payments+$partyinvoiceitem_total;
 				}
 			}
-			if($mappingtabres->item_table !="" AND $partyinvoice->id !=""){
+			if($mappingtabres->item_table !="" and $partyinvoice->id !=""){
 				$partyinvoiceitemsql = "SELECT iv.*, it.item_name, it.category_id, ic.category_description, ic.tax_deducted_source_id, ic.tax_collected_source_id FROM ".$mappingtabres->item_table." iv, items it ,item_categories ic WHERE iv.company_id = '".$company_id."' AND iv.company_id = it.company_id AND iv.company_id = ic.company_id AND iv.item_id = it.id AND it.category_id = ic.id AND iv.transaction_id = '".$partyinvoice->id."' AND iv.is_active = it.is_active AND iv.is_active = ic.is_active AND iv.is_active = 0";
 				$partyinvoiceitemres=$callConfig->getAllRows($partyinvoiceitemsql);
 
@@ -36341,7 +36341,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 						}
 						$vendoritem_amount = $total_payments;
 						$tds_threshold = $applaytds->threshold;
-						if($tds_threshold <= $vendoritem_amount AND $tds_threshold !="" AND $vendoritem_amount !=""){
+						if($tds_threshold <= $vendoritem_amount and $tds_threshold !="" and $vendoritem_amount !=""){
 								$tdsitempayment = ($itemres->item_amount*$applay_percentage)/100;
 								$total_tds += $tdsitempayment;
 								$updatedata['tds_amount'] = $tdsitempayment;
@@ -36374,7 +36374,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 			$partyinvoiceitemsql = "SELECT iv.*, it.item_name, it.category_id, ic.category_description, ic.tax_deducted_source_id, ic.tax_collected_source_id FROM si_items iv, items it ,item_categories ic WHERE iv.company_id = '".$company_id."' AND iv.company_id = it.company_id AND iv.company_id = ic.company_id AND iv.item_id = it.id AND it.category_id = ic.id AND iv.transaction_id = '".$partyinvoice->id."' AND iv.is_active = it.is_active AND iv.is_active = ic.is_active AND iv.is_active = 0";
 			$partyinvoiceitemres=$callConfig->getAllRows($partyinvoiceitemsql);
 			foreach($partyinvoiceitemres as $itemres){
-				if($itemres->tax_collected_source_id !="" AND $itemres->tax_collected_source_id !="0"){
+				if($itemres->tax_collected_source_id !="" and $itemres->tax_collected_source_id !="0"){
 					$tdsitempayment = $itemres->tds_amount;
 					$total_tds += $itemres->tds_amount;
 					$insertapplicationtdstcs = array('company_id'=>$company_id,'transaction_table'=>$transaction_table,'transaction_id'=>$transaction_no,'transaction_number'=>$partyinvoice->transaction_number,'party_transaction_table'=>$party_transaction_table,'party_id'=>$partyinvoice->party_id,'transaction_item_table'=>'si_items','transaction_item_table_id'=>$itemres->id,'item_id'=>$itemres->item_id,'item_amount'=>$itemres->item_amount,'tax_amount'=>$itemres->tax_amount,'total_amount'=>$itemres->total_amount,'tds_tcs_id'=>$itemres->tax_collected_source_id,'tds_tcs_amount'=>$tdsitempayment,'tds_tcs_details'=>urlencode(json_encode((array)$itemres)),'transaction_table_details'=>urlencode(json_encode((array)$partyinvoice)),'party_transaction_table_details'=>urlencode(json_encode((array)$party_detail)),'transaction_item_table_details'=>urlencode(json_encode((array)$itemres)),'is_active'=>0,'current_status'=>0,'created_date'=>date('Y-m-d H:i:s'),'created_by'=>$get['user_id']);
@@ -36388,7 +36388,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 			$pth_cnt = count((array)$payment_term_history);
 			$mk = 1;
 			foreach($payment_term_history as $key=>$pterh){
-				if($pth_cnt == $key AND in_array($transaction_table, $customertable)){
+				if($pth_cnt == $key and in_array($transaction_table, $customertable)){
 					$pterh['amount']  = $pterh['amount']+$total_tds;
 				}
 				$insertdata = array('company_id'=>$company_id,'transaction_table'=>$transaction_table,'transaction_id'=>$transaction_no,'transaction_number'=>$partyinvoice->transaction_number,'party_id'=>$partyinvoice->party_id,'due_date'=>$this->dateconvertdbformat($pterh['due_date']),'due_amount'=>$pterh['amount'],'advance_offer_date'=>$this->dateconvertdbformat($pterh['extra_date']),'advance_offer_amount'=>$pterh['extra_amt'],'pending_amount'=>$pterh['amount'],'is_active'=>'0','current_status'=>'0','created_date'=>date('Y-m-d H:i:s'),'created_by'=>$get['user_id'],'amount'=>$pterh['without_tax_amount'],'tax_amount'=>$pterh['tax_amount'],'percentage'=>$pterh['percentage'],'without_tax_pending_amount'=>$pterh['without_tax_amount'],'tax_pending_amount'=>$pterh['tax_amount']);
@@ -36756,7 +36756,7 @@ public function gerReferanceTableDetails($get){
 	public function togetitemfifodayrate($item_d, $company_id){
 		global $callConfig;
 		$day_rate = 0;
-		if($company_id !="" AND $item_d !=""){
+		if($company_id !="" and $item_d !=""){
 			$whrstp1="company_id = '".$company_id."'  AND item_id= '".$item_d."'";
 			$query1=$callConfig->selectQuery('item_fifo_balances','day_rate',$whrstp1,'balance_date ASC','0','1');
 			//echo $query1;
@@ -36769,7 +36769,7 @@ public function gerReferanceTableDetails($get){
 	public function togetitemlifodayrate($item_d, $company_id){
 		global $callConfig;
 		$day_rate = 0;
-		if($company_id !="" AND $item_d !=""){
+		if($company_id !="" and $item_d !=""){
 			$whrstp1="company_id = '".$company_id."'  AND item_id= '".$item_d."'";
 			$query1=$callConfig->selectQuery('item_lifo_balances','day_rate',$whrstp1,'balance_date DESC','0','1');
 			//echo $query1;
@@ -36977,10 +36977,10 @@ public function gerReferanceTableDetails($get){
 		$return['result'] = $res;
 		$return['rid'] = $rid;
 		if($rid !=""){
-			$updvi = $callConfig->updateRecord('vendor_items',array('is_active'=>NULL),'item_id',$rid);
+			$updvi = $callConfig->updateRecord('vendor_items',array('is_active'=>null),'item_id',$rid);
 			if(count((array)$vendor_items['vendor_id']) !=0){
 				foreach($vendor_items['vendor_id'] as $keyid =>$vll){
-					if($vendor_items['vendor_part_no'][$keyid] !="" AND $vendor_items['vendor_part_name'][$keyid] !=""){
+					if($vendor_items['vendor_part_no'][$keyid] !="" and $vendor_items['vendor_part_name'][$keyid] !=""){
 						$vendor_itemsary = array('company_id'=>$post['company_id'],'item_id'=>$rid,'vendor_id'=>$vll,'vendor_part_no'=>$vendor_items['vendor_part_no'][$keyid],'vendor_part_name'=>$vendor_items['vendor_part_name'][$keyid]);
 						if($vendor_items['vendor_item_id'][$keyid]!=""){
 							$vendor_itemsary['updated_date'] = date('Y-m-d H:i:s');
@@ -37000,10 +37000,10 @@ public function gerReferanceTableDetails($get){
 			}
 
 
-			$updvi = $callConfig->updateRecord('customer_items',array('is_active'=>NULL),'item_id',$rid);
+			$updvi = $callConfig->updateRecord('customer_items',array('is_active'=>null),'item_id',$rid);
 			if(count((array)$customer_items['customer_id']) !=0){
 				foreach($customer_items['customer_id'] as $keyid =>$vll){
-					if($customer_items['customer_part_no'][$keyid] !="" AND $customer_items['customer_part_name'][$keyid] !=""){
+					if($customer_items['customer_part_no'][$keyid] !="" and $customer_items['customer_part_name'][$keyid] !=""){
 						$customer_itemsary = array('company_id'=>$post['company_id'],'item_id'=>$rid,'customer_id'=>$vll,'customer_part_no'=>$customer_items['customer_part_no'][$keyid],'customer_part_name'=>$customer_items['customer_part_name'][$keyid]);
 						if($customer_items['customer_item_id'][$keyid]!=""){
 							$customer_itemsary['updated_date'] = date('Y-m-d H:i:s');
@@ -37023,7 +37023,7 @@ public function gerReferanceTableDetails($get){
 			}
 
 
-			if($post['opening_quantity']!="" AND $post['opening_quantity']!="0"){
+			if($post['opening_quantity']!="" and $post['opening_quantity']!="0"){
 				$in_value = $post['opening_quantity']*$post['purchase_price'];
 				$location_id = $transaction_warehouse_id = "";
 				if($post['warehouse_id'] !=""){
@@ -37235,7 +37235,7 @@ public function gerReferanceTableDetails($get){
 
 
 
-		if(($transaction_table == 'enquiries' OR $transaction_table == 'estimates' OR $transaction_table == 'sales_orders') && ($clone_table == 'requisitions' OR $clone_table == 'quotations' OR $clone_table == 'purchase_orders')){
+		if(($transaction_table == 'enquiries' or $transaction_table == 'estimates' or $transaction_table == 'sales_orders') && ($clone_table == 'requisitions' or $clone_table == 'quotations' or $clone_table == 'purchase_orders')){
             $pending_qty = "qti.pending_order_qty as pending_qty";
             $item_quantity = "qti.item_quantity as item_quantity";
         }else{
@@ -37385,7 +37385,7 @@ public function gerReferanceTableDetails($get){
 		}
 		$return['transaction_item_taxe_table_res'] = $transaction_item_taxe_table_res;
 
-		if($transaction_table_res->ref_type !="" AND $transaction_table_res->ref_id !=""){
+		if($transaction_table_res->ref_type !="" and $transaction_table_res->ref_id !=""){
 
 			$ref_table_dmtsql = "SELECT id, page_title, application_table_name,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$post['company_id']."' AND application_table_name = '".$transaction_table_res->ref_type."' AND is_active = 0 AND item_table !='' AND tax_table!=''";
 			$ref_table_dmtres=$callConfig->getRow($ref_table_dmtsql);
@@ -37433,12 +37433,12 @@ public function gerReferanceTableDetails($get){
 
 			//items table
 				//inactive
-				$ref_transaction_item_table_ary = array("is_active"=>NULL);
+				$ref_transaction_item_table_ary = array("is_active"=>null);
 				$wher = "company_id = '".$post['company_id']."' AND transaction_id = '".$transaction_table_res->ref_id."' AND is_active = 0";
 				$ref_transaction_item_table_res=$callConfig->updateRecord($ref_table_dmtres->item_table,$ref_transaction_item_table_ary,'','',$wher);
 				$return['ref_transaction_item_table_res'] = $ref_transaction_item_table_res;
 
-				$ref_transaction_item_table_ary1 = array("is_active"=>NULL);
+				$ref_transaction_item_table_ary1 = array("is_active"=>null);
 				$wher1 = "company_id = '".$post['company_id']."' AND transaction_id = '".$transaction_table_res->ref_id."' AND is_active = 0";
 				$ref_transaction_item_tax_table_res=$callConfig->updateRecord($ref_table_dmtres->tax_table,$ref_transaction_item_table_ary1,'','',$wher1);
 				$return['ref_transaction_item_tax_table_res'] = $ref_transaction_item_tax_table_res;
@@ -37507,7 +37507,7 @@ public function gerReferanceTableDetails($get){
 				$itemtaxres = $callConfig->executeQuery($itemtaxsql);
 				$return['item_tax'][] = $itemtaxres;
 
-				if($another_transaction_table_res->ref_type !="" AND $another_transaction_table_res->ref_id !=""){
+				if($another_transaction_table_res->ref_type !="" and $another_transaction_table_res->ref_id !=""){
 					$this->InsertAmendment($another_transaction_table_res->ref_type,$another_transaction_table_res->ref_id,$post);
 				}
 
@@ -37838,7 +37838,7 @@ public function gerReferanceTableDetails($get){
 		    }
 	    	foreach($importdata as $idata){
 				if($idata[0] !=""){  //id possition
-					if($idata[5] !="" AND $idata[5] !="0"){
+					if($idata[5] !="" and $idata[5] !="0"){
 						if(!in_array($idata[0], (array)$items)){ // already update open qty
 							$postupd['updated_date'] = date('Y-m-d H:i:s');
 							$postupd['updated_by'] = $post['user_id'];
@@ -38228,7 +38228,7 @@ public function gerReferanceTableDetails($get){
                     $startdate = $startyear."-04-01";
                     $enddate = $endyear."-03-31";
                 }
-                if($res->doc_no_length !="" AND $res->serial_number_type !="" AND $table_name !=""){
+                if($res->doc_no_length !="" and $res->serial_number_type !="" and $table_name !=""){
                     $insertary=array('company_id'=>$res->company_id,'application_table_name'=>$table_name,'serial_number'=>'1','pre_fix'=>$res->pre_fix,'post_fix'=>$res->post_fix,'doc_no_length'=>$res->doc_no_length,'serial_number_type'=>$res->serial_number_type,'start_date'=>$startdate,'end_date'=>$enddate,'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id'],'created_date'=>date("Y-m-d H:i:s"));
                     $return['res_item_insertary'] = $insertary;
                     $res1 = $callConfig->insertRecord('application_finance_year_serial_numbers',$insertary);
@@ -38587,7 +38587,7 @@ public function gerReferanceTableDetails($get){
         	if($party_id !=""){
         		$conditiond = " AND transtab.party_id = '".$party_id."'";
         	}
-        	if(($document_type == "purchase_invoices" OR $document_type == "sales_invoices") AND ($reference_document_type == "purchase_orders" OR $reference_document_type == "sales_orders")){
+        	if(($document_type == "purchase_invoices" or $document_type == "sales_invoices") and ($reference_document_type == "purchase_orders" or $reference_document_type == "sales_orders")){
         		$pending_qty_condition = " AND trnitm.ref_pending_qty_1 > 0";
 
         	}else{
@@ -38615,7 +38615,7 @@ public function gerReferanceTableDetails($get){
 
         	if($get['transaction_id'] !=""){
         	 	$transaction_id = $get['transaction_id'];
-        	 	if(($document_type == "purchase_invoices" OR $document_type == "sales_invoices") AND ($reference_document_type == "purchase_orders" OR $reference_document_type == "sales_orders")){
+        	 	if(($document_type == "purchase_invoices" or $document_type == "sales_invoices") and ($reference_document_type == "purchase_orders" or $reference_document_type == "sales_orders")){
 	        		$pending_qty_condition = " AND trnitm.ref_pending_qty_1 > 0";
 	        		$selectfieldlist = " ,trnitm.ref_pending_qty_1 as pending_qty";
 	        	}else{
@@ -38638,7 +38638,7 @@ public function gerReferanceTableDetails($get){
 
 
 		}
-		if($get['multi_ref_transaction_id'] !="" AND $get['multi_ref_transaction_table'] !=""){
+		if($get['multi_ref_transaction_id'] !="" and $get['multi_ref_transaction_table'] !=""){
 			$dmtsql = "SELECT id, page_title, application_table_name,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$get['multi_ref_transaction_table']."' AND is_active = 0 AND item_table !='' AND tax_table!=''";
 			$dmtres=$callConfig->getRow($dmtsql);
 			//$return['dynamic_mapping_tables'] = $dmtsql;
@@ -38683,7 +38683,7 @@ public function gerReferanceTableDetails($get){
 
 			$fieldnames=array('company_id'=>$post['company_id'],'currency_rate'=>1,'amount'=>0,'tax_amount'=>0, 'discount_amount'=>0, 'total_amount'=>0,'ref_type'=>$reference_document_type,'originator'=>$post['user_id'],'pending_amount'=>0,'rounding_off'=>0);
 
-			if($party_table != "" AND $party_id !=""){
+			if($party_table != "" and $party_id !=""){
 				$partysql = "SELECT prty.id, prty.display_name, prty.company, prty.email, prty.phone, prty.billing_address, prty.shipping_address, prty.payment_terms, custaddr.id as cvgstbill_id FROM ".$party_table." prty LEFT JOIN customer_vendor_gst_billing_details custaddr ON prty.company_id = custaddr.company_id AND prty.id = custaddr.customer_vendor_id AND custaddr.transaction_table = '".$party_table."' AND custaddr.is_default = 'Y' AND custaddr.is_active = prty.is_active WHERE prty.company_id = '".$post['company_id']."' AND prty.id = ".$party_id." AND prty.is_active = 0";
 				$partyres = $callConfig->getRow($partysql);
 				$return['vendor_or_customer_list'] = $partyres;
@@ -38697,7 +38697,7 @@ public function gerReferanceTableDetails($get){
 				$fieldnames['place_of_supply'] = $partyres->cvgstbill_id;
 				$fieldnames['payment_terms'] = $partyres->payment_terms;
 			}
-			if($post['multi_ref_transaction_id'] != '' AND $post['multi_ref_transaction_id'] != '0'){
+			if($post['multi_ref_transaction_id'] != '' and $post['multi_ref_transaction_id'] != '0'){
 				$fieldnames['updated_date'] = $post['updated_date'];
 				$fieldnames['updated_by'] = $post['updated_by'];
 				$insert_data=$callConfig->updateRecord($document_type,$fieldnames,'id',$post['multi_ref_transaction_id']);
@@ -38715,7 +38715,7 @@ public function gerReferanceTableDetails($get){
 				$return['transaction_id'] = $insert_id;
 
 				// update all items table start
-				$updaterecord=array('is_active'=>NULL,'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id']);
+				$updaterecord=array('is_active'=>null,'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id']);
 				$callConfig->updateRecord($tres->item_table,$updaterecord,'transaction_id',$insert_id);
 				$callConfig->updateRecord($tres->tax_table,$updaterecord,'transaction_id',$insert_id);
 				// update all items table end
@@ -38767,7 +38767,7 @@ public function gerReferanceTableDetails($get){
 			foreach($drtres1 as $transdetails){
     			$itemfieldnames=array('company_id'=>$post['company_id'],'transaction_id'=>$insert_id,'item_id'=>$transdetails->item_id,'item_name'=>$transdetails->item_name,'description'=>$transdetails->description,'purchase_uom'=>$transdetails->purchase_uom,'account_code'=>$transdetails->account_code,'item_wa_cost'=>0,'item_fifo_cost'=>0,'item_lifo_cost'=>0,'is_active'=>'0','ref_transaction_item_table_id'=>$transdetails->id,'ref_transaction_table_id'=>$transdetails->ref_transaction_table_id);
 
-    			if($document_type == 'goods_receipt_notes' OR $document_type == 'delivery_orders' OR $document_type == 'rgp_delivery_orders' OR $document_type == 'rgp_sales_returns' OR $document_type == 'nrgp_delivery_orders' OR $document_type =='stock_transfers' OR $document_type =='stock_transfer_receipts' OR $document_type =='stock_transfer_returns'){
+    			if($document_type == 'goods_receipt_notes' or $document_type == 'delivery_orders' or $document_type == 'rgp_delivery_orders' or $document_type == 'rgp_sales_returns' or $document_type == 'nrgp_delivery_orders' or $document_type =='stock_transfers' or $document_type =='stock_transfer_receipts' or $document_type =='stock_transfer_returns'){
 					$itemfieldnames['item_quantity'] = $transdetails->item_quantity;
 				}
 
@@ -38949,12 +38949,12 @@ public function gerReferanceTableDetails($get){
 		            $parts[$m] = $finyaer;
 		            //$checksequincerow[$m] = $finyaer;
 		        }
-		        if(isset($position_with_val[$m]) AND $position_with_val[$m]['display_type'] =="STATIC"){
+		        if(isset($position_with_val[$m]) and $position_with_val[$m]['display_type'] =="STATIC"){
 		            if($position_with_val[$m]['static_value'] != ""){
 		            	//$parts[$m] = $position_with_val[$m]['static_value'];
 		            	$checksequincerow[$m] = $position_with_val[$m]['static_value'];
 		            }
-		        }elseif(isset($position_with_val[$m]) AND $position_with_val[$m]['display_type'] =="DYNAMIC"){
+		        }elseif(isset($position_with_val[$m]) and $position_with_val[$m]['display_type'] =="DYNAMIC"){
 		            if($position_with_val[$m]['dynamic_value'] != ""){
 		            	//$parts[$m] = $position_with_val[$m]['dynamic_value'];
 		            	$checksequincerow[$m] = $position_with_val[$m]['dynamic_value'];
@@ -38968,7 +38968,7 @@ public function gerReferanceTableDetails($get){
 
 		    	if($seq_val == "PARTY_NAME"){
 
-					if($partytable !="" AND $party_id !=""){
+					if($partytable !="" and $party_id !=""){
 						$partysql = "SELECT id, short_name FROM ".$partytable." WHERE company_id = ".$get['company_id']." AND id = ".$party_id." AND is_active = 0";
 						$partyres = $callConfig->getRow($partysql);
 						if($partyres->short_name !=""){
@@ -39147,7 +39147,7 @@ public function gerReferanceTableDetails($get){
 			$return['approval'] = $transaction_approval_logsres;
 			$return['approvalsql']= $transaction_approval_logssql;
 		}else{
-			if($get['action_type'] !="" AND $get['action_type'] != "null"){
+			if($get['action_type'] !="" and $get['action_type'] != "null"){
 				$json  = implode("','",(array)$decod);
 				$condition .=" AND type IN('".$json."')";
 			}else{

@@ -482,7 +482,7 @@ class vendorPortelUserClass extends userClass
 		$return['post'] = $post;
 		$fielddata = json_encode($post['fieldgrpaccess']);
 		$dashboard_field_list = json_encode($post['dashboard_field_list']);
-		if (isset($post['Rid']) AND $post['Rid'] != "") {
+		if (isset($post['Rid']) and $post['Rid'] != "") {
 			$post_array = array("role_short_code" => $post['role_short_code'], "field_list" => $fielddata, "dashboard_field_list" => $dashboard_field_list, "updated_by" => $post['user_id'], "updated_date" => date('Y-m-d H:i:s'));
 			$res = $callConfig->updateRecord('vendor_display_fields', $post_array, 'id', $post['Rid']);
 		} else {
@@ -991,7 +991,7 @@ class vendorPortelUserClass extends userClass
 						$planned_finish = date('Y-m-d', strtotime($tasks->planned_day . ' days', strtotime($days_ago)));
 						//$planned_finish = date('Y-m-d', strtotime($tasks->planned_day.' + '.$days_ago.' days'));
 
-						if ($approval_user_id != "" AND $assigned_to != "") {
+						if ($approval_user_id != "" and $assigned_to != "") {
 							$task_array = array('company_id' => $get['company_id'], 'transaction_table' => $transaction_table, 'transaction_id' => $vendor_register_id, 'task_id' => $tasks->id, 'assigned_to' => $assigned_to, 'approval_user_id' => $approval_user_id, 'action_date' => $days_ago, 'revised_action_date' => $days_ago, 'actual_action_date' => $days_ago, 'check_list' => $tasks->check_list, 'is_active' => '0', 'current_status' => '0', 'created_by' => $get['user_id'], 'process_id' => $tasks->process_id, 'task_name' => $tasks->task_name);
 							$res = $callConfig->insertRecord('transaction_activity_schedule', $task_array);
 							$return['transaction_activity_schedule'][] = $task_array;
@@ -1181,7 +1181,7 @@ class vendorPortelUserClass extends userClass
 						}
 						$planned_finish = date('Y-m-d', strtotime($tasks->planned_day . ' days', strtotime($days_ago)));
 						//$planned_finish = date('Y-m-d', strtotime($tasks->planned_day.' + '.$days_ago.' days'));
-						if ($approval_user_id != "" AND $assigned_to != "") {
+						if ($approval_user_id != "" and $assigned_to != "") {
 							$task_array = array('company_id' => $get['company_id'], 'transaction_table' => $transaction_table, 'transaction_id' => $vendor_register_id, 'task_id' => $tasks->id, 'assigned_to' => $assigned_to, 'approval_user_id' => $approval_user_id, 'action_date' => $days_ago, 'revised_action_date' => $days_ago, 'actual_action_date' => $days_ago, 'check_list' => $tasks->check_list, 'is_active' => '0', 'current_status' => '0', 'created_by' => $get['user_id'], 'process_id' => $tasks->process_id, 'task_name' => $tasks->task_name);
 							$res = $callConfig->insertRecord('transaction_activity_schedule', $task_array);
 							$return['transaction_activity_schedule'][] = $task_array;
@@ -1318,7 +1318,7 @@ class vendorPortelUserClass extends userClass
 				$cntres = $callConfig->getRow($cntsql);
 				$return['total_vendors'] = $cntres->cnt;
 				$return['total_record_cnt'] = $cntres;
-				$respons_data_cnt = ($cntres->cnt != "" AND $cntres->cnt != 0) ? $cntres->cnt : 0;
+				$respons_data_cnt = ($cntres->cnt != "" and $cntres->cnt != 0) ? $cntres->cnt : 0;
 
 				$divide_limit = $respons_data_cnt / $get['limit_select'];
 				$total_pages = ceil($respons_data_cnt / $get['limit_select']);
@@ -1592,25 +1592,25 @@ class vendorPortelUserClass extends userClass
 		$cvgstbdres = $callConfig->getAllRows($cvgstbdsql);
 		if (!empty($cvgstbdres)) {
 			foreach ($cvgstbdres as $cvgst) {
-				if ($cvgst->billing_country != "" AND $cvgst->billing_country != "0") {
+				if ($cvgst->billing_country != "" and $cvgst->billing_country != "0") {
 					$countryid[$cvgst->billing_country] = $cvgst->billing_country;
 				}
-				if ($cvgst->billing_state != "" AND $cvgst->billing_state != "0") {
+				if ($cvgst->billing_state != "" and $cvgst->billing_state != "0") {
 					$statesid[$cvgst->billing_state] = $cvgst->billing_state;
 				}
-				if ($cvgst->shipping_country != "" AND $cvgst->shipping_country != "0") {
+				if ($cvgst->shipping_country != "" and $cvgst->shipping_country != "0") {
 					$countryid[$cvgst->shipping_country] = $cvgst->shipping_country;
 				}
-				if ($cvgst->shipping_state != "" AND $cvgst->shipping_state != "0") {
+				if ($cvgst->shipping_state != "" and $cvgst->shipping_state != "0") {
 					$statesid[$cvgst->shipping_state] = $cvgst->shipping_state;
 				}
 			}
 		}
 		if (!empty($vendorres)) {
-			if ($vendorres->bank_country != "" AND $vendorres->bank_country != "0") {
+			if ($vendorres->bank_country != "" and $vendorres->bank_country != "0") {
 				$countryid[$vendorres->bank_country] = $vendorres->bank_country;
 			}
-			if ($vendorres->bank_state != "" AND $vendorres->bank_state != "0") {
+			if ($vendorres->bank_state != "" and $vendorres->bank_state != "0") {
 				$statesid[$vendorres->bank_state] = $vendorres->bank_state;
 			}
 		}

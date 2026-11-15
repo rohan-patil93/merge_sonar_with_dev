@@ -88,29 +88,29 @@ class assetUserClass extends userClass{
 			$return['asset_cnt'] = $res2;
 			$return['asset_cnt_sql'] = $sql2;
 
-			if(isset($get['ownership']) AND $get['ownership'] !=""){ //self/partner
+			if(isset($get['ownership']) and $get['ownership'] !=""){ //self/partner
 				$conditionassetlist .= " AND ownership  = '".$get['ownership']."'";
 			}
-			if(isset($get['allocation_status']) AND $get['allocation_status'] !=""){
+			if(isset($get['allocation_status']) and $get['allocation_status'] !=""){
 				$conditionassetlist .= " AND allocation_status = '".$get['allocation_status']."'";
 			}
-			if(isset($get['parent_asset']) AND $get['parent_asset'] !=""){ //parent vendor
+			if(isset($get['parent_asset']) and $get['parent_asset'] !=""){ //parent vendor
 				if($get['parent_asset'] == "Y"){
 					$conditionassetlist  .= " AND parent_asset !=''";
 				}else{
 					$conditionassetlist .= " AND parent_asset IS NULL";
 				}
 			}
-			if(isset($get['category']) AND $get['category'] !=""){
+			if(isset($get['category']) and $get['category'] !=""){
 				$conditionassetlist .= " AND category_id  = '".$get['category']."'";
 			}
-			if(isset($get['location']) AND $get['location'] !=""){
+			if(isset($get['location']) and $get['location'] !=""){
 				$conditionassetlist .= " AND asset_location  = '".$get['location']."'";
 			}
-			if(isset($get['status']) AND $get['status'] !=""){
+			if(isset($get['status']) and $get['status'] !=""){
 				$conditionassetlist .= " AND asset_status ='".$get['status']."'";
 			}
-			if(isset($get['candition']) AND $get['candition'] !=""){
+			if(isset($get['candition']) and $get['candition'] !=""){
 				$conditionassetlist .= " AND conditions  = '".$get['candition']."'";
 			}
 			$assetsql = "SELECT * FROM assets WHERE company_id = '".$get['company_id']."' AND is_active =0 ".$conditionassetlist." ".$codition;
@@ -467,13 +467,13 @@ class assetUserClass extends userClass{
 			//$return['assetsql'] = $alreadyusedasset;
 
 			$conditionrequest = "";
-			if(isset($get['categroy_list']) AND $get['categroy_list'] !=""){
+			if(isset($get['categroy_list']) and $get['categroy_list'] !=""){
 				$conditionrequest .= " AND category_id  IN (".$get['categroy_list'].")";
 			}
-			if(isset($get['asset_status']) AND $get['asset_status'] !=""){
+			if(isset($get['asset_status']) and $get['asset_status'] !=""){
 				$conditionrequest .= " AND asset_status IN('".$get['asset_status']."')";
 			}
-			if(isset($get['asset_condition']) AND $get['asset_condition'] !=""){
+			if(isset($get['asset_condition']) and $get['asset_condition'] !=""){
 				$conditionrequest .= " AND conditions IN ('".$get['asset_condition']."')";
 			}
 			if($alreadyusedasset !=""){
@@ -611,10 +611,10 @@ class assetUserClass extends userClass{
 			$return['locations_sql'] = $locationsql;
 		}else{
 			$admin_access_employee = $get['admin_access_employee'];
-			if($get['admin_type'] !=1 OR $admin_access_employee =='Y'){
+			if($get['admin_type'] !=1 or $admin_access_employee =='Y'){
 	    		$codition = " AND av.user_id = '".$get['user_id']."'";
 	    	}
-	    	if(isset($get['type']) AND $get['type'] !=""){
+	    	if(isset($get['type']) and $get['type'] !=""){
 	    		if($get['type'] == "IP"){
 	    			$codition .= " AND av.start_date_time <= '".$todaytedate." 23:59:59'  AND av.current_status != '".ST_APPROVED."' ";
 	    		}elseif($get['type'] == "UCV"){
@@ -870,40 +870,40 @@ public function insertAsset($post){
 		$empassetcoditon = "";
 		$todaytedate = date('Y-m-d');
 		$admin_access_employee = $get['admin_access_employee'];
-		if($get['admin_type'] !=1 OR $admin_access_employee =='Y'){
+		if($get['admin_type'] !=1 or $admin_access_employee =='Y'){
     		$codition = " AND av.user_id = '".$get['user_id']."'";
     	}
 		if($get['list']=='Y'){
-			if(isset($get['assetid']) AND $get['assetid'] !=""){
+			if(isset($get['assetid']) and $get['assetid'] !=""){
 				$conditionassetlist .= " AND ass.id IN(".$get['assetid'].")";
 			}
-			if(isset($get['ownership']) AND $get['ownership'] !=""){
+			if(isset($get['ownership']) and $get['ownership'] !=""){
 				$conditionassetlist .= " AND ass.ownership  = '".$get['ownership']."'";
 			}
-			if(isset($get['allocation_status']) AND $get['allocation_status'] !=""){
+			if(isset($get['allocation_status']) and $get['allocation_status'] !=""){
 				$conditionassetlist .= " AND ass.allocation_status = '".$get['allocation_status']."'";
 			}
-			if(isset($get['parent_asset']) AND $get['parent_asset'] !=""){
+			if(isset($get['parent_asset']) and $get['parent_asset'] !=""){
 				if($get['parent_asset'] == "Y"){
 					$conditionassetlist  .= " AND ass.parent_asset !=''";
 				}else{
 					$conditionassetlist .= " AND ass.parent_asset IS NULL";
 				}
 			}
-			if(isset($get['category']) AND $get['category'] !=""){
+			if(isset($get['category']) and $get['category'] !=""){
 				$conditionassetlist .= " AND ass.category_id  = '".$get['category']."'";
 			}
-			if(isset($get['location']) AND $get['location'] !=""){
+			if(isset($get['location']) and $get['location'] !=""){
 				$conditionassetlist .= " AND ass.asset_location  = '".$get['location']."'";
 			}
-			if(isset($get['asset_owner']) AND $get['asset_owner'] !=""){
+			if(isset($get['asset_owner']) and $get['asset_owner'] !=""){
 				$conditionassetlist .= " AND emp_ass.user_id = '".$get['asset_owner']."'";
 				//$empassetcoditon .=" AND emp_ass.emp_id = '".$get['employee']."'";
 			}
-			if(isset($get['status']) AND $get['status'] !=""){
+			if(isset($get['status']) and $get['status'] !=""){
 				$conditionassetlist .= " AND ass.asset_status ='".$get['status']."'";
 			}
-			if(isset($get['candition']) AND $get['candition'] !=""){
+			if(isset($get['candition']) and $get['candition'] !=""){
 				$conditionassetlist .= " AND ass.conditions  = '".$get['candition']."'";
 			}
 			$assetsql = "SELECT ass.id,ass.asset_code,ass.asset_description,ass.category_id,ass.serial_no,ass.asset_location,ass.asset_img,ass.brand,ass.model,ass.conditions,ass.asset_status,ass.asset_owner,ass.allocation_status,ass.attribute, ass.ownership, ass.allocation_status, ass.Parent_asset, ass.current_status, emp_ass.end_date,emp_ass.remarks,emp_ass.allocation_type,emp_ass.id as emp_asset_id,emp_ass.attribute as emp_attribute, emp_ass.user_id as user_assets_user_id FROM assets ass LEFT JOIN user_assets emp_ass on ass.is_active =emp_ass.is_active AND ass.company_id = emp_ass.company_id AND ass.id = emp_ass.asset_id WHERE ass.is_active =0 AND ass.company_id = '".$get['company_id']."'".$conditionassetlist;
@@ -924,7 +924,7 @@ public function insertAsset($post){
 		}
 
 		if($get['assetupdate']=='Y'){
-			if(isset($get['assetid']) AND $get['assetid'] !=""){
+			if(isset($get['assetid']) and $get['assetid'] !=""){
 				$conditionassetlist .= " AND ass.id IN(".$get['assetid'].")";
 			}
 			$assetsql = "SELECT ass.*,emp_ass.end_date,emp_ass.remarks,emp_ass.id as emp_asset_id,emp_ass.attribute as emp_attribute FROM assets ass LEFT JOIN user_assets emp_ass on ass.is_active =emp_ass.is_active AND ass.company_id = emp_ass.company_id  AND ass.id = emp_ass.asset_id WHERE ass.is_active =0 AND ass.company_id = '".$get['company_id']."'".$conditionassetlist;
@@ -964,13 +964,13 @@ public function insertAsset($post){
 			if($requestres->asset_category_id != ""){
 				$conditionrequest .= " AND ass.category_id  = '".$requestres->asset_category_id."'";
 			}
-			if(isset($get['categroy_list']) AND $get['categroy_list'] !=""){
+			if(isset($get['categroy_list']) and $get['categroy_list'] !=""){
 				$conditionrequest .= " AND ass.category_id  IN (".$get['categroy_list'].")";
 			}
-			if(isset($get['asset_status']) AND $get['asset_status'] !=""){
+			if(isset($get['asset_status']) and $get['asset_status'] !=""){
 				$conditionrequest .= " AND ass.asset_status IN('".$get['asset_status']."')";
 			}
-			if(isset($get['asset_condition']) AND $get['asset_condition'] !=""){
+			if(isset($get['asset_condition']) and $get['asset_condition'] !=""){
 				$conditionrequest .= " AND ass.conditions IN ('".$get['asset_condition']."')";
 			}
 			$assetssql = "SELECT ass.id,ass.asset_code,ass.asset_description,ass.category_id,ass.serial_no,ass.asset_location,ass.asset_img,ass.brand,ass.model,ass.conditions,ass.asset_status,ass.asset_owner,emp_ass.end_date,ass.allocation_status FROM assets ass LEFT JOIN user_assets emp_ass on ass.is_active =emp_ass.is_active AND ass.company_id = emp_ass.company_id  AND ass.id = emp_ass.asset_id WHERE ass.is_active =0 AND ass.company_id = '".$get['company_id']."' ".$conditionrequest;

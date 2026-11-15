@@ -2474,12 +2474,12 @@ class vMSUserClass extends userClass{
 		$returnarray = array();
 		$workcheck = "SELECT id,work_order_id FROM emp_work_order WHERE company_id= '".$data['company_id']."' AND work_order_id !=".$data['workorder_id']." AND is_active= '0' AND emp_id=".$emp_id;
 		$workcheckdata = $callConfig->getRow($workcheck);
-		if($workcheckdata->id !="" AND $data['newcreate'] !="Y"){
+		if($workcheckdata->id !="" and $data['newcreate'] !="Y"){
 			$returnarray['other_work_order'] = 'Y';
 		}else{
 			if($data['newcreate']=="Y"){
-				$insert_array['is_active']= NULL;
-				$insert_arrayold = array('is_active'=>NULL,'updated_by'=>$data['user_id'],'updated_date'=>date('Y-m-d H:i:s'));
+				$insert_array['is_active']= null;
+				$insert_arrayold = array('is_active'=>null,'updated_by'=>$data['user_id'],'updated_date'=>date('Y-m-d H:i:s'));
 				$where = "id = '".$workcheckdata->id."'";
 				$res=$callConfig->updateRecord("emp_work_order",$insert_array,"","",$where);
 				$returnarray['other_work_order_update'] = 'Y- '.$workcheckdata->id;
@@ -2489,7 +2489,7 @@ class vMSUserClass extends userClass{
 			$datas = $callConfig->getRow($query2);
 			if($datas->id!=""){
 				if($data['inserttype'] == "N"){
-					$insert_array['is_active']= NULL;
+					$insert_array['is_active']= null;
 				}else{
 					$insert_array = array('work_order_id'=>$data['workorder_id'],'work_order_detail_id'=>$data['workorder_detail_id'],'vrc_id'=>$data['vrc_id'],'vrc_item_id'=>$data['vrcdetail_id'],'price'=>$data['item_price'],'effective_from_date'=>$data['effective_date'],'effective_to_date'=>$data['expire_date'],'emp_id'=>$emp_id,'is_active'=>'0','current_status'=>'0','updated_by'=>$data['user_id'],'updated_date'=>date('Y-m-d H:i:s'));
 				}
@@ -2570,7 +2570,7 @@ class vMSUserClass extends userClass{
     			$dateTo = new DateTime($expire_date);
     			$datenames = [];
     			while($dateFrom <= $dateTo){
-    				if(in_array($dateFrom->format('D'),$working_days) AND !in_array($dateFrom->format('Y-m-d'), $holidaysdatas)){
+    				if(in_array($dateFrom->format('D'),$working_days) and !in_array($dateFrom->format('Y-m-d'), $holidaysdatas)){
     					$workday++;
     				}
     				$dateFrom->modify('+1 days');
@@ -2630,7 +2630,7 @@ class vMSUserClass extends userClass{
 		if($config->esign_time_sheet_lock == 1){
 			$esignid=1;
 		}
-        if($esignid !="" AND  $post['timesheetdata']['0']['work_order'] !=""){
+        if($esignid !="" and  $post['timesheetdata']['0']['work_order'] !=""){
         	for($i=0;$i<count($post['timesheetdata']);$i++){
         		$rowid = $post['timesheetdata'][$i]['rowid'];
         		unset($post['timesheetdata'][$i]['rowid']);
@@ -2725,7 +2725,7 @@ class vMSUserClass extends userClass{
     		$maxleaveused = $mpcitemddetails->max_leave;
     		while($dateFrom <= $dateTo){
     			$calculationdays++;
-    			if(in_array($dateFrom->format('l'),(array)$working_days) AND !in_array($dateFrom->format('Y-m-d'), (array)$holidaysdatas)){
+    			if(in_array($dateFrom->format('l'),(array)$working_days) and !in_array($dateFrom->format('Y-m-d'), (array)$holidaysdatas)){
     				$testarrau['working_dates'][] = $dateFrom->format('Y-m-d');
 					//$testarrau['days'][] = $dateFrom->format('l');
     				$workday++;
@@ -3845,7 +3845,7 @@ class vMSUserClass extends userClass{
 		global $callConfig;
 		//	print_r($get); exit;
 		$condition = "";
-		if($get['old_ref_no']!="" AND ($get['vrc_id']=="" || $get['vrc_id']=="0")){
+		if($get['old_ref_no']!="" and ($get['vrc_id']=="" || $get['vrc_id']=="0")){
 			$condition .= " AND vrc.transaction_number = '".$get['old_ref_no']."'";
 		}
 		if($get['vrc_id']!="" and $get['vrc_id']!="0"){
@@ -4397,16 +4397,16 @@ class vMSUserClass extends userClass{
 		foreach($row as $emplist){
 			$totalactive++;
 			$type_billable[$emplist->billable] = $type_billable[$emplist->billable]+1;
-			if($emplist->joining_date <= $enddate AND $emplist->joining_date >= $startdate ){
+			if($emplist->joining_date <= $enddate and $emplist->joining_date >= $startdate ){
 				$join++;
 			}
-			if($emplist->date_of_leaving <= $enddate AND $emplist->date_of_leaving >= $startdate){
+			if($emplist->date_of_leaving <= $enddate and $emplist->date_of_leaving >= $startdate){
 				$resign++;
 			}
-			if($emplist->joining_date <= $prevenddate AND $emplist->joining_date >= $prevstartdate ){
+			if($emplist->joining_date <= $prevenddate and $emplist->joining_date >= $prevstartdate ){
 				$prejoin++;
 			}
-			if($emplist->date_of_leaving <= $prevenddate AND $emplist->date_of_leaving >= $prevstartdate){
+			if($emplist->date_of_leaving <= $prevenddate and $emplist->date_of_leaving >= $prevstartdate){
 				$preresign++;
 			}
 			if($emplist->vendor_id != "" && $emplist->vendor_id != "0" ){
@@ -6360,7 +6360,7 @@ class vMSUserClass extends userClass{
             		$maxleaveused = $mpcitemddetails->max_leave;
             		while($dateFrom <= $dateTo){
             			$calculationdays++;
-            			if(in_array($dateFrom->format('l'),(array)$working_days) AND !in_array($dateFrom->format('Y-m-d'), (array)$holidaysdatas)){
+            			if(in_array($dateFrom->format('l'),(array)$working_days) and !in_array($dateFrom->format('Y-m-d'), (array)$holidaysdatas)){
             				$testarrau['working_dates'][] = $dateFrom->format('Y-m-d');
 							//$testarrau['days'][] = $dateFrom->format('l');
             				$workday++;
@@ -6560,16 +6560,16 @@ class vMSUserClass extends userClass{
 		foreach($row as $emplist){
 			$totalactive++;
 			$type_billable[$emplist->billable] = $type_billable[$emplist->billable]+1;
-			if($emplist->joining_date <= $enddate AND $emplist->joining_date >= $startdate ){
+			if($emplist->joining_date <= $enddate and $emplist->joining_date >= $startdate ){
 				$join++;
 			}
-			if($emplist->date_of_leaving <= $enddate AND $emplist->date_of_leaving >= $startdate){
+			if($emplist->date_of_leaving <= $enddate and $emplist->date_of_leaving >= $startdate){
 				$resign++;
 			}
-			if($emplist->joining_date <= $prevenddate AND $emplist->joining_date >= $prevstartdate ){
+			if($emplist->joining_date <= $prevenddate and $emplist->joining_date >= $prevstartdate ){
 				$prejoin++;
 			}
-			if($emplist->date_of_leaving <= $prevenddate AND $emplist->date_of_leaving >= $prevstartdate){
+			if($emplist->date_of_leaving <= $prevenddate and $emplist->date_of_leaving >= $prevstartdate){
 				$preresign++;
 			}
 			if($emplist->vendor_id != "" && $emplist->vendor_id != "0" ){
@@ -6743,14 +6743,14 @@ public function  vendorstaqAdminDashboard($get){
 	$resign = 0;
 	$join = 0;
 	foreach($return as $emplist){
-		if($emplist->pt_month == $checkmonthyear AND $emplist->joining_date <= $edate AND $emplist->date_of_leaving >= $edate){
+		if($emplist->pt_month == $checkmonthyear and $emplist->joining_date <= $edate and $emplist->date_of_leaving >= $edate){
 			$postarray[$i->format('Y-m')][] = $emplist;
 		}
-		if($emplist->pt_month == $checkmonthyear AND $emplist->joining_date <= $edate AND $emplist->joining_date >= $sdane){
+		if($emplist->pt_month == $checkmonthyear and $emplist->joining_date <= $edate and $emplist->joining_date >= $sdane){
 			$join++;
 		}
 
-		if($emplist->pt_month == $checkmonthyear AND $emplist->date_of_leaving <= $edate AND $emplist->date_of_leaving >= $sdane){
+		if($emplist->pt_month == $checkmonthyear and $emplist->date_of_leaving <= $edate and $emplist->date_of_leaving >= $sdane){
 			$resign++;
 		}
 
@@ -7734,10 +7734,10 @@ public function  vmssingleemployeedashoard_new($get){
 	                    'user_id'           => $user_id,
 	                    'request_date'      => $request_date,
 	                    'send_back_flag'    => 0,
-	                    'response_date'     => NULL,
-	                    'comments'          => NULL,
+	                    'response_date'     => null,
+	                    'comments'          => null,
 	                    'doa_id'            => $doaTypeMap[$type] ?? 0,
-	                    'workflow_id'       => NULL,
+	                    'workflow_id'       => null,
 	                    'note'              => $sectionName,
 	                    'ref_field'         => $location_id,
 	                    'read_status'       => $read_status

@@ -1176,7 +1176,7 @@ GROUP BY tl.item_id";
 			$convresd = $callConfig->getRow($convsql);
 			if($convresd->id !=""){
 				//ok coneversion
-				if($convresd->conversion_ratio !="0" AND $convresd->conversion_ratio !=""){
+				if($convresd->conversion_ratio !="0" and $convresd->conversion_ratio !=""){
 					$len['in_qty'] = $itemres->item_quantity*$convresd->conversion_ratio;
 					$len['in_value'] = $itemres->item_amount*$convresd->conversion_ratio;
 				}
@@ -1185,7 +1185,7 @@ GROUP BY tl.item_id";
 				$convsql = "SELECT id,conversion_ratio FROM uom_conversions WHERE company_id = '".$get['company_id']."' AND  parent_uom_id = '".$child_uom_id."' AND child_uom_id = '".$parent_uom_id."' AND is_active = 0";
 				$convresd = $callConfig->getRow($convsql);
 				if($convresd->id !=""){
-					if($convresd->conversion_ratio !="0" AND $convresd->conversion_ratio !=""){
+					if($convresd->conversion_ratio !="0" and $convresd->conversion_ratio !=""){
 						$len['in_qty'] = $post['in_qty']/$convresd->conversion_ratio;
 						$len['in_value'] = $itemres->item_amount/$convresd->conversion_ratio;
 					}
@@ -1271,11 +1271,11 @@ GROUP BY tl.item_id";
 			if($child_trans_table == 'dekitting_items'){
 				//inventory_asset_account
 				$itemaccount_code = "";
-				if($itemtabledetails->inventory_asset_account !="" AND $itemtabledetails->inventory_asset_account !="0"){
+				if($itemtabledetails->inventory_asset_account !="" and $itemtabledetails->inventory_asset_account !="0"){
 					$itemaccount_code = $itemtabledetails->inventory_asset_account;
-				}elseif($itemcategoorytabledetails->inventory_asset_account !="" AND $itemcategoorytabledetails->inventory_asset_account !="0"){
+				}elseif($itemcategoorytabledetails->inventory_asset_account !="" and $itemcategoorytabledetails->inventory_asset_account !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->inventory_asset_account;
-				}elseif($config->config_inventory_asset_account !="" AND $config->config_inventory_asset_account !="0"){
+				}elseif($config->config_inventory_asset_account !="" and $config->config_inventory_asset_account !="0"){
 					$itemaccount_code = $config->config_inventory_asset_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['inventory_asset_account'];
@@ -1291,11 +1291,11 @@ GROUP BY tl.item_id";
 
 				//inventory_asset_account
 				$itemaccount_code = "";
-				if($itemtabledetails->inventory_asset_account !="" AND $itemtabledetails->inventory_asset_account !="0"){
+				if($itemtabledetails->inventory_asset_account !="" and $itemtabledetails->inventory_asset_account !="0"){
 					$itemaccount_code = $itemtabledetails->inventory_asset_account;
-				}elseif($itemcategoorytabledetails->inventory_asset_account !="" AND $itemcategoorytabledetails->inventory_asset_account !="0"){
+				}elseif($itemcategoorytabledetails->inventory_asset_account !="" and $itemcategoorytabledetails->inventory_asset_account !="0"){
 					$itemaccount_code = $itemcategoorytabledetails->inventory_asset_account;
-				}elseif($config->config_inventory_asset_account !="" AND $config->config_inventory_asset_account !="0"){
+				}elseif($config->config_inventory_asset_account !="" and $config->config_inventory_asset_account !="0"){
 					$itemaccount_code = $config->config_inventory_asset_account;
 				}
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['inventory_asset_account'];
@@ -1342,11 +1342,11 @@ GROUP BY tl.item_id";
 		if($transaction_table == 'kittings'){
 			//inventory_asset_account
 			$itemaccount_code = "";
-			if($itemtabledetails->inventory_asset_account !="" AND $itemtabledetails->inventory_asset_account !="0"){
+			if($itemtabledetails->inventory_asset_account !="" and $itemtabledetails->inventory_asset_account !="0"){
 				$itemaccount_code = $itemtabledetails->inventory_asset_account;
-			}elseif($itemcategoorytabledetails->inventory_asset_account !="" AND $itemcategoorytabledetails->inventory_asset_account !="0"){
+			}elseif($itemcategoorytabledetails->inventory_asset_account !="" and $itemcategoorytabledetails->inventory_asset_account !="0"){
 				$itemaccount_code = $itemcategoorytabledetails->inventory_asset_account;
-			}elseif($config->config_inventory_asset_account !="" AND $config->config_inventory_asset_account !="0"){
+			}elseif($config->config_inventory_asset_account !="" and $config->config_inventory_asset_account !="0"){
 				$itemaccount_code = $config->config_inventory_asset_account;
 			}
 			$itemaccount_code!=""?$itemaccount_code:$defaultaccount['inventory_asset_account'];
@@ -1364,11 +1364,11 @@ GROUP BY tl.item_id";
 		}elseif($transaction_table == 'dekittings'){
 			//inventory_asset_account
 			$itemaccount_code = "";
-			if($itemtabledetails->inventory_asset_account !="" AND $itemtabledetails->inventory_asset_account !="0"){
+			if($itemtabledetails->inventory_asset_account !="" and $itemtabledetails->inventory_asset_account !="0"){
 				$itemaccount_code = $itemtabledetails->inventory_asset_account;
-			}elseif($itemcategoorytabledetails->inventory_asset_account !="" AND $itemcategoorytabledetails->inventory_asset_account !="0"){
+			}elseif($itemcategoorytabledetails->inventory_asset_account !="" and $itemcategoorytabledetails->inventory_asset_account !="0"){
 				$itemaccount_code = $itemcategoorytabledetails->inventory_asset_account;
-			}elseif($config->config_inventory_asset_account !="" AND $config->config_inventory_asset_account !="0"){
+			}elseif($config->config_inventory_asset_account !="" and $config->config_inventory_asset_account !="0"){
 				$itemaccount_code = $config->config_inventory_asset_account;
 			}
 			$itemaccount_code!=""?$itemaccount_code:$defaultaccount['inventory_asset_account'];

@@ -284,7 +284,7 @@ class spaceUserClass extends userClass{
 			}else{
 				$return['employee_fillter'] = null;
 			}
-		}elseif($get['pagetype'] == 'REPORT' OR $get['pagetype'] == 'DETAILREPORT'){
+		}elseif($get['pagetype'] == 'REPORT' or $get['pagetype'] == 'DETAILREPORT'){
 
 			if($get['admin_type']!='1'){
 				$condition = " AND JSON_SEARCH(originator, 'one', '".$get['user_id']."') IS NOT NULL";
@@ -918,7 +918,7 @@ class spaceUserClass extends userClass{
 				$detailassetsql = "SELECT aa.id, aa.building_floor_space_id,(SELECT build.originator FROM building_floors bf, buildings build WHERE bf.company_id = aa.company_id AND build.company_id = aa.company_id AND bf.id = aa.building_floor_id AND bf.building_id = build.id AND bf.is_active = aa.is_active AND build.is_active = aa.is_active) as building_originator,(SELECT bfs.cabin_name FROM building_floor_spaces bfs WHERE bfs.company_id = aa.company_id AND bfs.id = aa.building_floor_space_id AND bfs.is_active = aa.is_active) as cabin_name, aa.asset_id, (SELECT ass.asset_description FROM assets ass WHERE ass.company_id = aa.company_id AND ass.id = aa.asset_id AND ass.is_active = aa.is_active) as asset_description FROM asset_allocations aa WHERE aa.company_id = '".$get['company_id']."' AND aa.id = '".$post['equipment_allocation_id']."' AND aa.is_active = 0";
 				$detailasset = $callConfig->getRow($detailassetsql);
 
-				$return['result'] = $callConfig->updateRecord('asset_allocations',array('is_active'=>NULL),'id',$post['equipment_allocation_id']);
+				$return['result'] = $callConfig->updateRecord('asset_allocations',array('is_active'=>null),'id',$post['equipment_allocation_id']);
 
 				$ausql = "SELECT id as user_id, user_email as email_id, display_name FROM application_users WHERE company_id = ".$get['company_id']." AND id = '".$detailasset->building_originator."' AND is_active = 0";
 				$ausres = $callConfig->getRow($ausql);
@@ -1161,7 +1161,7 @@ class spaceUserClass extends userClass{
 		//update all record same building space
 	//	return  $return;
 		//Start approval usert id get and email or notification get
-		if($emp_asssign_status=="Y" OR $emp_asssign_status=="N"){
+		if($emp_asssign_status=="Y" or $emp_asssign_status=="N"){
 			$emp_query = "SELECT id, display_name, email_id, user_id, hr_buddy, admin_buddy, loc_buddy  FROM employees WHERE company_id = ".$get['company_id']." AND id=".$emp_id_available;
 			$emp_data = $callConfig->getRow($emp_query);
 			$informationlist['employee'][] = $emp_data;
@@ -1207,7 +1207,7 @@ class spaceUserClass extends userClass{
 		$return['location_user_id'] = $location_user_id;
 		$return['location_user_email_id'] = $location_user_email_id;
 		$return['location_user_display_name'] = $location_user_display_name;
-		if($building_res->space_type_id == '7' AND $location_user_id !="" AND $emp_asssign_status=="Y"){
+		if($building_res->space_type_id == '7' and $location_user_id !="" and $emp_asssign_status=="Y"){
 				unset($informationlist['location_connect']);
 				unset($informationlist['employee']);
 					$notarry['notification_users'] = array($location_user_id);
@@ -1228,7 +1228,7 @@ class spaceUserClass extends userClass{
 					$emailarray['requester_display_name'] = $application_users[$post['user_id']]->display_name;
 					return array('data_email'=>$emailarray,'data_notarry'=>$notarry);
 		}
-		if($emp_asssign_status=="Y" OR $emp_asssign_status=="N"){
+		if($emp_asssign_status=="Y" or $emp_asssign_status=="N"){
 
 			foreach($informationlist as $keydata=>$userdetails){
 				foreach($userdetails as $listdetails){

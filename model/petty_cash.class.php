@@ -5,7 +5,7 @@ class pettyCashUserClass extends userClass{
 		$return = array();
 		$condition = "";
 		$todaydate = date("Y-m-d");
-		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
+		if($get['admin_type'] != 1 or $get['admin_access_employee'] == 'Y'){
 			$condition .= " AND pcbo.owner_id = '".$get['user_id']."'";
 		}
 		$cntsql = "SELECT * FROM ((SELECT count(*) as total_petty_cash_box_topup_requests FROM petty_cash_box_topup_requests WHERE company_id = '".$get['company_id']."' AND is_active =0) as total_petty_cash_box_topup_requests , (SELECT count(*) as total_petty_cash FROM petty_cash WHERE company_id = '".$get['company_id']."' and is_active =0) as total_petty_cash, (SELECT count(*) as total_petty_cash_box_owner FROM petty_cash_box_owner pcbo, petty_cash_boxes pcb WHERE pcbo.company_id = '".$get['company_id']."' AND pcbo.company_id = pcb.company_id AND pcbo.pc_box_id = pcb.id  AND pcbo.is_active = pcb.is_active ".$condition." AND pcbo.is_active = 0) as total_petty_cash_box_owner)";
@@ -44,7 +44,7 @@ class pettyCashUserClass extends userClass{
 	public function getPettyCashBoxTopUpRequests($get){
 		global $callConfig;
 		$condition = "";
-		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
+		if($get['admin_type'] != 1 or $get['admin_access_employee'] == 'Y'){
 			$condition .= " AND pcbtr.originator = '".$get['user_id']."'";
 		}
 		if($get['petty_cash_box_id'] !=""){
@@ -64,7 +64,7 @@ class pettyCashUserClass extends userClass{
 	public function getExpensePettyCash($get){
 		global $callConfig;
 		$condition = "";
-		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
+		if($get['admin_type'] != 1 or $get['admin_access_employee'] == 'Y'){
 			$condition .= " AND originator = '".$get['user_id']."'";
 		}
 		if($get['petty_cash_box_id'] !=""){
@@ -128,7 +128,7 @@ class pettyCashUserClass extends userClass{
 	public function getPettyCashTopUpDashboardChart($get){
 		global $callConfig;
 		$exploderole = explode(',', $get['roleshortcode']);
-		if(!in_array(PETTY_CASH_ADMIN_ROLE, $exploderole) OR $get['admin_type'] != '1' OR $get['admin_access_employee'] == 'Y'){
+		if(!in_array(PETTY_CASH_ADMIN_ROLE, $exploderole) or $get['admin_type'] != '1' or $get['admin_access_employee'] == 'Y'){
 			$condition = " AND originator = ".$get['user_id'];
 		}
 		$year = $get['reimbursementsyear'];
@@ -152,7 +152,7 @@ class pettyCashUserClass extends userClass{
 	public function getPettyCashDashboardChart($get){
 		global $callConfig;
 		$exploderole = explode(',', $get['roleshortcode']);
-		if(!in_array(PETTY_CASH_ADMIN_ROLE, $exploderole) OR $get['admin_type'] != '1' OR $get['admin_access_employee'] == 'Y'){
+		if(!in_array(PETTY_CASH_ADMIN_ROLE, $exploderole) or $get['admin_type'] != '1' or $get['admin_access_employee'] == 'Y'){
 			$condition = " AND originator = ".$get['user_id'];
 		}
 		$year = $get['reimbursementsyear'];

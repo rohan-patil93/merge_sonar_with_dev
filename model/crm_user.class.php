@@ -189,7 +189,7 @@ class crmuserClass extends userClass{
 
 
 
-		}elseif($get['rid'] !=0 AND $get['rid'] !="" AND $get['transaction_table'] !=""){
+		}elseif($get['rid'] !=0 and $get['rid'] !="" and $get['transaction_table'] !=""){
 			//* requird please don't add filed list
 			$crm_leadssql = "SELECT * FROM ".$get['transaction_table']." WHERE company_id = '".$get['company_id']."' AND id = '".$get['rid']."' AND is_active = 0";
 			$crm_leadsres=$callConfig->getRow($crm_leadssql);
@@ -277,16 +277,16 @@ class crmuserClass extends userClass{
 			$crm_all_pending_contactres=$callConfig->getAllRows($crm_all_pending_contactsql);
 			$return['without_company_contacts'] = $crm_all_pending_contactres;
 
-		}elseif($get['transaction_table'] =="crm_deals" OR $get['transaction_table'] =="crm_contacts"){
+		}elseif($get['transaction_table'] =="crm_deals" or $get['transaction_table'] =="crm_contacts"){
 			$crm_companiessql = "SELECT id, company_name FROM crm_companies WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 			$crm_companiesres=$callConfig->getAllRows($crm_companiessql);
 			$return['crm_companies'] = $crm_companiesres;
-		}elseif($get['transaction_table'] =="projects" OR $get['transaction_table'] =="crm_projects"){
+		}elseif($get['transaction_table'] =="projects" or $get['transaction_table'] =="crm_projects"){
 			$customerssql = "SELECT id, display_name, company FROM customers WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 			$customersres=$callConfig->getAllRows($customerssql);
 			$return['customers'] = $customersres;
 		}
-		if($get['transaction_table'] =="crm_leads" OR $get['transaction_table'] =="crm_contacts"){
+		if($get['transaction_table'] =="crm_leads" or $get['transaction_table'] =="crm_contacts"){
 			$crm_campaignssql = "SELECT id, campaign_name FROM crm_campaigns WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 			$crm_campaignsres=$callConfig->getAllRows($crm_campaignssql);
 			$return['crm_campaigns'] = $crm_campaignsres;
@@ -332,7 +332,7 @@ class crmuserClass extends userClass{
 		}elseif($transaction_table =="projects"){
 			$insertary=array('company_id'=>$post['company_id'],'project_name'=>$post['project_name'],'customer_id'=>$post['customer_id'],'project_cost'=>$post['project_cost'],'planned_start'=>$this->dateconvertdbformat($post['planned_start']),'planned_finish'=>$this->dateconvertdbformat($post['planned_finish']),'assigner_id'=>$post['originator'],'description'=>$post['description'],'assigner_id'=>$post['originator'],'project_logo'=>$post['image']);
 		}
- 		if($post['rid'] !="" AND $post['rid'] !="0"){
+ 		if($post['rid'] !="" and $post['rid'] !="0"){
 			$insertary['updated_date']=date('Y-m-d h:i:s');
 			$insertary['updated_by']=$post['user_id'];
 			$return['res'] = $callConfig->updateRecord($transaction_table,$insertary,'id',$post['rid']);
@@ -370,7 +370,7 @@ class crmuserClass extends userClass{
 			$return['res'] =$tapres;
 			$lastid = $tapres['LASTID'];
 
-			if($tapres['status'] == 'sucess' AND $transaction_table == "projects"){
+			if($tapres['status'] == 'sucess' and $transaction_table == "projects"){
 				if(count((array)$post['project_team_user_id']) != '0'){
 					foreach($post['project_team_user_id'] as $userid){
 						$insertary1=array('company_id'=>$post['company_id'],'project_id'=>$lastid,'user_id'=>$userid,'is_active'=>'0','created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
@@ -1485,7 +1485,7 @@ payment tersm**/
 
 
 	        	//$userdeatil = (count((array)$application_usersuser_name[$first->user_name])!='0')?$application_usersuser_name[$first->user_name]:$application_usersdiplay_name[$first->user_name];
-		       	$salemannameid = NULL;
+		       	$salemannameid = null;
 	        	// if(isset($salesmendetails[$first->user_name])){
 	        	// 	$salemannameid = $salesmendetails[$first->user_name];
 	        	// }else{
@@ -1557,7 +1557,7 @@ payment tersm**/
 						$return['split_1'] = $split_1;
 					}
 
-		       		if($itmlist->sgst !='0' AND $itmlist->sgst!=''){
+		       		if($itmlist->sgst !='0' and $itmlist->sgst!=''){
 						if($tax_flag == "S"){
 							$perc = ($totaltax/$itmlist->plan_amount)*100;
 							$txperc1 = $perc*$split_1;
@@ -1676,7 +1676,7 @@ payment tersm**/
 	                    $return['res_item'][] = $res2;
 
 
-						if($itmlist->sgst !='0' AND $itmlist->sgst!=''){
+						if($itmlist->sgst !='0' and $itmlist->sgst!=''){
 							$perc = (($itmlist->sgst + $itmlist->cgst)/$itmlist->plan_amount)*100;
 
 
@@ -2996,12 +2996,12 @@ $html .= "</div>";
 		            $parts[$m] = $finyaer;
 		            //$checksequincerow[$m] = $finyaer;
 		        }
-		        if(isset($position_with_val[$m]) AND $position_with_val[$m]['display_type'] =="STATIC"){
+		        if(isset($position_with_val[$m]) and $position_with_val[$m]['display_type'] =="STATIC"){
 		            if($position_with_val[$m]['static_value'] != ""){
 		            	//$parts[$m] = $position_with_val[$m]['static_value'];
 		            	$checksequincerow[$m] = $position_with_val[$m]['static_value'];
 		            }
-		        }elseif(isset($position_with_val[$m]) AND $position_with_val[$m]['display_type'] =="DYNAMIC"){
+		        }elseif(isset($position_with_val[$m]) and $position_with_val[$m]['display_type'] =="DYNAMIC"){
 		            if($position_with_val[$m]['dynamic_value'] != ""){
 		            	//$parts[$m] = $position_with_val[$m]['dynamic_value'];
 		            	$checksequincerow[$m] = $position_with_val[$m]['dynamic_value'];
@@ -3015,7 +3015,7 @@ $html .= "</div>";
 
 		    	if($seq_val == "PARTY_NAME"){
 
-					if($partytable !="" AND $party_id !=""){
+					if($partytable !="" and $party_id !=""){
 						$partysql = "SELECT id, short_name FROM ".$partytable." WHERE company_id = ".$get['company_id']." AND id = ".$party_id." AND is_active = 0";
 						$partyres = $callConfig->getRow($partysql);
 						if($partyres->short_name !=""){

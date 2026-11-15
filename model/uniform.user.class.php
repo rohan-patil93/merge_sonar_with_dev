@@ -247,12 +247,12 @@ class uniformClass extends userClass{
 
 		    $update = array(
 		        'location_id'   => $post['location_id'] ?? 0,
-		        'item_name'     => $post['item_name'] ?? NULL,
-		        'description'   => $post['description'] ?? NULL,
+		        'item_name'     => $post['item_name'] ?? null,
+		        'description'   => $post['description'] ?? null,
 		        'available_qty' => $new_qty,
 		        'minmum_qty'    => $post['minmum_qty'] ?? 0,
-		        'color'         => $post['color'] ?? NULL,
-		        'size'          => $post['size'] ?? NULL,
+		        'color'         => $post['color'] ?? null,
+		        'size'          => $post['size'] ?? null,
 		        'updated_by'    => $get['user_id'],
 		        'updated_date'  => date("Y-m-d H:i:s")
 		    );
@@ -285,12 +285,12 @@ class uniformClass extends userClass{
 				'company_id'    => $get['company_id'],
 				'location_id'   => $post['location_id'] ?? 0,
 				'category_id'   => $post['category_id'] ?? 0,
-				'item_name'     => $post['item_name'] ?? NULL,
-				'description'   => $post['description'] ?? NULL,
+				'item_name'     => $post['item_name'] ?? null,
+				'description'   => $post['description'] ?? null,
 				'available_qty' => $post['available_qty'] ?? 0,
 				'minmum_qty'    => $post['minmum_qty'] ?? 0,
-				'color'         => $post['color'] ?? NULL,
-				'size'          => $post['size'] ?? NULL,
+				'color'         => $post['color'] ?? null,
+				'size'          => $post['size'] ?? null,
 				'cost'          => isset($post['cost']) ? $post['cost'] : 0
 			);
 
@@ -574,7 +574,7 @@ class uniformClass extends userClass{
 	    $user_id     = $get['user_id'];
 	    $item_id     = $post['item_id'];
 	    $req_qty     = intval($post['qty']);
-	    $require_date = $post['require_date'] ?? NULL;
+	    $require_date = $post['require_date'] ?? null;
 	    $comment     = $post['comment'] ?? '';
 	    $location_id = $post['location_id'] ?? ($_SESSION['location_id'] ?? 1);
 
@@ -629,7 +629,7 @@ class uniformClass extends userClass{
 
 	    // From frontend
 	    $items = json_decode($post['items'], true); // array of {item_id, qty}
-	    $require_date = $post['require_date'] ?? NULL;
+	    $require_date = $post['require_date'] ?? null;
 	    $comment = $post['comment'] ?? '';
 	    $location_id = $post['location_id'] ?? 0;
 
@@ -1111,7 +1111,7 @@ class uniformClass extends userClass{
 	    if (!$rid) {
 	        return array("status" => "error", "msg" => "Invalid Request ID");
 	    }
-	    $update = array("is_active" => NULL);
+	    $update = array("is_active" => null);
 	    $res = $callConfig->updateRecord('stationery_requests',$update,'id',$rid);
 	    return array(
 	        "status" => "success",
@@ -1180,7 +1180,7 @@ class uniformClass extends userClass{
 	    if (!empty($deleted_uniforms)) {
 	        foreach ($deleted_uniforms as $del_id) {
 	          $res['D'][] =  $callConfig->updateRecord('emp_uniforms',
-	                array('is_active' => NULL, 'updated_by' => $user_id, 'updated_date' => date("Y-m-d H:i:s")),'id',$del_id);
+	                array('is_active' => null, 'updated_by' => $user_id, 'updated_date' => date("Y-m-d H:i:s")),'id',$del_id);
 	        }
 	    }
 

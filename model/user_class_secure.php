@@ -244,7 +244,7 @@ class userClass{
 		if($callConfig->module_id!=""){
 			$defaultmoduleid = $callConfig->module_id;
 			$working_role_short_code = $callConfig->working_role_short_code;
-		}elseif($userrow2[0]->module_setup_id!="" AND $userrow2[0]->module_setup_id !=0){
+		}elseif($userrow2[0]->module_setup_id!="" and $userrow2[0]->module_setup_id !=0){
 			$defaultmoduleid = $userrow2[0]->module_setup_id;
 			$working_role_short_code =  $userrow2[0]->role_short_code;
 		}else{

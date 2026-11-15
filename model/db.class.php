@@ -180,7 +180,7 @@ class configClass
 					}
 				}
 			}
-			if($lastid !="" AND $type == "UPDATE"){
+			if($lastid !="" and $type == "UPDATE"){
 				$query = "UPDATE `audit_trails` SET after_transaction_details='".$remarks."' WHERE id = '".$lastid ."'";
 			}elseif($type == "UPDATE"){
 				$query = "INSERT INTO `audit_trails`(`company_id`,`module_setup_id`, `user_id`, `type`, `page_option`,`extra_paramiter`, `transaction_table`, `transaction_id`, `log_query`, `where_condition`, `before_transaction_details`, `is_active`, `current_status`, `created_date`, `created_by`) VALUES ('".$this->company_id."','".$this->module_id."','".$this->user_id."','".$type."','".$this->option."','".$this->extra_paramiter."','".$table."','".$id."','".urlencode($query)."','".urlencode($where)."','".$remarks."','0','0','".date("Y-m-d H:i:s")."','".$this->user_id."')";
@@ -329,7 +329,7 @@ class configClass
 		$query=DBUP.$tablename.DBSET.$str;
 
 		$whereparamiter = "";
-		if($where!="" AND $field_ids !=""){
+		if($where!="" and $field_ids !=""){
 			$query.=' '.DBWHR.$where." IN('".$field_ids."')";
 			$whereparamiter .= $where." IN('".$field_ids."')";
 		}

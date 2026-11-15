@@ -22,7 +22,7 @@ class esopUserClass extends userClass{
 		$updateary = array('is_active'=>null);
 		$callConfig->updateRecord('company_valuation_distributions',$updateary,'company_valuation_id',$rid);
 		foreach($post['distributer_name'] as $keyid=>$keyvalue){
-			if($post['distributer_name'][$keyid] !="" AND $post['distribute_percentage'][$keyid] !=""){
+			if($post['distributer_name'][$keyid] !="" and $post['distribute_percentage'][$keyid] !=""){
 				$dilution_seq = $post['dilution_seq'][$keyid];
 				$dilution = $post['dilution'][$dilution_seq]=='0'?'0':'1';
 				$distributamount = round($post['total_share'][$keyid]*$post['per_share_value']);
@@ -138,7 +138,7 @@ class esopUserClass extends userClass{
 				$vesting_date = $this->dateconvertdbformat($_POST['vesting_date'][$seq][$position]);
 				$till_date = $this->dateconvertdbformat($_POST['till_date'][$seq][$position]);
 				$vesting_percentage = $_POST['vesting_percentage'][$seq][$position];
-				if($vesting_date !="" AND $vesting_percentage !=""){
+				if($vesting_date !="" and $vesting_percentage !=""){
 		        	$vesting_schedule[] = array('vesting_date'=>$vesting_date,'vesting_percentage'=>$vesting_percentage,'till_date'=>$till_date);
 		    	}
 		    }
@@ -252,7 +252,7 @@ class esopUserClass extends userClass{
 			$return['insertau'] = $user;
 			$userid = $user['LASTID'];
 			$returnarray['user_create'] = $user;
-			if(isset($user['LASTID']) AND $user['LASTID'] !=""){
+			if(isset($user['LASTID']) and $user['LASTID'] !=""){
 				$query = "SELECT application_module,id,role_short_code FROM application_roles where company_id = '".$post['company_id']."' AND role_short_code ='".ESOP_USER_ROLE."' AND is_active = 0 ";
 				$roleres = $callConfig->getRow($query);
 
@@ -299,7 +299,7 @@ class esopUserClass extends userClass{
 		foreach($post['vesting_percentage'] as $seq=>$val){
 			$vesting_date = $post['vesting_date'][$seq];
 			$till_date = $post['till_date'][$seq];
-			if($val !="" AND $till_date !="" AND $vesting_date !=""){
+			if($val !="" and $till_date !="" and $vesting_date !=""){
         		$vesting_schedule[] = array('vesting_date'=>$vesting_date,'vesting_percentage'=>$val,'till_date'=>$till_date);
     		}
     	}

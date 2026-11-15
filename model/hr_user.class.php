@@ -61,7 +61,7 @@ class hrUserClass extends userClass{
 			$shiftresarray[$shiftress->emp_id] = $shiftress;
 		}
 		foreach ($empdatas as $value){
-			if($shift_check == '1' AND $get['shift_categroy'] !=""){
+			if($shift_check == '1' and $get['shift_categroy'] !=""){
 				if($shiftresarray[$value->id]->id ==$get['shift_categroy']){
 					$empidlist[$value->id] = array('display_name'=>$value->display_name,'image'=>$value->image,'emp_code'=>$value->emp_code,'joining_date'=>$value->joining_date,'date_of_leaving'=>$value->date_of_leaving);
 				}
@@ -159,7 +159,7 @@ class hrUserClass extends userClass{
 					$dy = $start->format('l');
 					if(in_array($date,(array)$holidaysdatas)){
 						$dates[$date] = array('day'=>'H','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['H']['color_code'],'display_value'=>$shift['H']['display_value']);
-					}elseif((!in_array($dy, (array)$workingdays) AND $shift_check == '0' AND OFF_CHECK == '0') OR (!in_array($dy, (array)$emp_shift_days) AND $shift_check == '1' AND OFF_CHECK == '0')){
+					}elseif((!in_array($dy, (array)$workingdays) and $shift_check == '0' and OFF_CHECK == '0') or (!in_array($dy, (array)$emp_shift_days) and $shift_check == '1' and OFF_CHECK == '0')){
 						$dates[$date] = array('day'=>'O','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['O']['color_code'],'display_value'=>$shift['O']['display_value']);
 					}
 					//elseif(isset($attendacnearray[$ky][$date]) AND isset($leavesdetailsarray[$ky][$date])){
@@ -222,7 +222,7 @@ class hrUserClass extends userClass{
 						$dates[$date] = array('day'=>'A','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['A']['color_code'],'display_value'=>$shift['A']['display_value']);
 					}elseif(in_array($date,(array)$holidaysdatas)){
 						$dates[$date] = array('day'=>'H','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['H']['color_code'],'display_value'=>$shift['H']['display_value']);
-					}elseif((!in_array($dy, (array)$workingdays) AND $shift_check == '0' AND OFF_CHECK == '0') OR (!in_array($dy, (array)$emp_shift_days) AND $shift_check == '1') AND OFF_CHECK == '0'){
+					}elseif((!in_array($dy, (array)$workingdays) and $shift_check == '0' and OFF_CHECK == '0') or (!in_array($dy, (array)$emp_shift_days) and $shift_check == '1') and OFF_CHECK == '0'){
 						$dates[$date] = array('day'=>'O','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['O']['color_code'],'display_value'=>$shift['O']['display_value']);
 					}elseif($tempdetailary[$ky][$date] !=""){
 
@@ -410,7 +410,7 @@ class hrUserClass extends userClass{
 					$insertleave=$callConfig->insertRecord('employee_leaves',$insert_leave_array);
 					$returnarray['employee_leaves'][] =  $insertleave;
 					//}elseif(!in_array($dy, $workingdays)){
-				}elseif((!in_array($dy, (array)$workingdays) AND $shift_check == '0' AND OFF_CHECK == '0') OR (!in_array($dy, (array)$emp_shift_days) AND $shift_check == '1' AND OFF_CHECK == '0')){
+				}elseif((!in_array($dy, (array)$workingdays) and $shift_check == '0' and OFF_CHECK == '0') or (!in_array($dy, (array)$emp_shift_days) and $shift_check == '1' and OFF_CHECK == '0')){
 				//off days
 				}else{
 					$starttime = $presentarray[$ky][$date]->clock_in;
@@ -487,7 +487,7 @@ class hrUserClass extends userClass{
 			$date = $start->format('Y-m-d');
 			$dy = $start->format('l');
 		//if(in_array($date,$holidaysdatas) || !in_array($dy, $workingdays)){
-			if(in_array($date,(array)$holidaysdatas) || (!in_array($dy, (array)$workingdays) AND $shift_check == '0') OR (!in_array($dy, (array)$emp_shift_days) AND $shift_check == '1')){
+			if(in_array($date,(array)$holidaysdatas) || (!in_array($dy, (array)$workingdays) and $shift_check == '0') or (!in_array($dy, (array)$emp_shift_days) and $shift_check == '1')){
 				$returnarray['holidaynotworking'][] = $date;
 			}else{
 				$query2 = "SELECT id FROM temp_attendance_details WHERE company_id = '".$data['company_id']."'  AND attendance_date='".$date."' AND employee_id=".$data['emp_id'];
@@ -497,11 +497,11 @@ class hrUserClass extends userClass{
 				$start_half_days = "";
 				$end_half_days = "";
 				$halfdaysleave = '1';
-				if($start_half_day=='0' AND date("Ymd",strtotime($formdate)) == date("Ymd",strtotime($date))){
+				if($start_half_day=='0' and date("Ymd",strtotime($formdate)) == date("Ymd",strtotime($date))){
 					$start_half_days = '0';
 					$halfdaysleave = '0.5';
 				}
-				if($end_half_day=='0' AND date("Ymd",strtotime($todate)) == date("Ymd",strtotime($date))){
+				if($end_half_day=='0' and date("Ymd",strtotime($todate)) == date("Ymd",strtotime($date))){
 					$end_half_days = '0';
 					$halfdaysleave = '0.5';
 				}
@@ -618,7 +618,7 @@ class hrUserClass extends userClass{
 			    	// $sunday = date("D",strtotime($columns));
 			    	$dayName = date("l", strtotime($columns));
 
-			    	if($employee_terminations[$importres->column2] !="" AND strtotime($employee_terminations[$importres->column2]) <= strtotime($columns)){
+			    	if($employee_terminations[$importres->column2] !="" and strtotime($employee_terminations[$importres->column2]) <= strtotime($columns)){
 			    		$absenttcnt++;
 			    	}elseif($importres->$field == "O"){
 			    		$offarray++;
@@ -717,13 +717,13 @@ class hrUserClass extends userClass{
 					if(strpos(strtoupper(trim($rows->column1)), strtoupper("Department")) !== false) {
 						$deaprtname = str_replace('|', '_', str_replace(' ', '_', strtolower(trim($rows->column4))));
 					}else{
-						if($deaprtname!="" AND $rows->column1 !=""){
+						if($deaprtname!="" and $rows->column1 !=""){
 							if(strpos(strtoupper(trim($rows->column1)), strtoupper("Employee")) !== false) {
 								$explode = explode(":", $rows->column4);
 								$empnamed = str_replace(' ', '_', strtoupper(trim($explode[0])));
 								$displayempnamed = strtolower(trim($explode[1]));
 							}
-							if($empnamed!="" AND $rows->column1 !=""){
+							if($empnamed!="" and $rows->column1 !=""){
 								$departmentwithemp[$empnamed][] = $rows;
 								//$departmentwithemp[$empnamed] = $rows;
 							}
@@ -754,7 +754,7 @@ class hrUserClass extends userClass{
 						$dateaarray1 = $dateaarray[$dy];
 						$intime = $value['2']->$dateaarray1;
 						$outtime = $value['3']->$dateaarray1;
-						if($value['1']->$dateaarray1 == 'P' AND $intime !="" AND $outtime  !=""){
+						if($value['1']->$dateaarray1 == 'P' and $intime !="" and $outtime  !=""){
 							//echo "<span style='".$bgcolor."'>".$empcodekey." - ".trim($emplist[$empcodekey]->display_name)."- empid - ".$empid."- ".$date." -- ".$value['1']->$dateaarray1." -- ".$value['2']->$dateaarray1." -- ".$value['3']->$dateaarray1." -- ".$value['4']->$dateaarray1." -- ".$value['5']->$dateaarray1." -- ".$value['6']->$dateaarray1."</span></br>";
 							$insdailyattendancedetails .= "('".$get['company_id']."', '".$empid."', '".$date."','3','".$intime."','".$outtime."','0','0', '".date("Y-m-d H:i:s")."', '".$get['user_id']."'),";
 						}else{
@@ -828,7 +828,7 @@ class hrUserClass extends userClass{
 		    	$total_day++;
 		    	$sunday = date("D",strtotime($dateval));
 		    	$attendance_date = date("Y-m-d",strtotime($dateval));
-		    	if($employee_terminations[$importres->column2] !="" AND strtotime($employee_terminations[$importres->column2]) <= strtotime($dateval)){
+		    	if($employee_terminations[$importres->column2] !="" and strtotime($employee_terminations[$importres->column2]) <= strtotime($dateval)){
 		    		$insdailyattendancedetails .= "('".$post['company_id']."', '".$importres->column2."', '".$attendance_date."','','A','','','','','','0','0', '".date("Y-m-d H:i:s")."', '".$post['user_id']."','',''),";
 
     			}elseif(!in_array($importres->$field, $notleaveattendancekey)){  // leave insert
@@ -2725,7 +2725,7 @@ class hrUserClass extends userClass{
 			$shiftresarray[$shiftress->emp_id] = $shiftress;
 		}
 		foreach ($empdatas as $value){
-			if($shift_check == '1' AND $get['shift_categroy'] !=""){
+			if($shift_check == '1' and $get['shift_categroy'] !=""){
 				if($shiftresarray[$value->id]->id ==$get['shift_categroy']){
 					$empidlist[$value->id] = array('display_name'=>$value->display_name,'image'=>$value->image,'emp_code'=>$value->emp_code,'joining_date'=>$value->joining_date,'date_of_leaving'=>$value->date_of_leaving);
 				}
@@ -2823,7 +2823,7 @@ class hrUserClass extends userClass{
 					$dy = $start->format('l');
 					if(in_array($date,(array)$holidaysdatas)){
 						$dates[$date] = array('day'=>'H','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['H']['color_code'],'display_value'=>$shift['H']['display_value']);
-					}elseif((!in_array($dy, (array)$workingdays) AND $shift_check == '0' AND OFF_CHECK == '0') OR (!in_array($dy, (array)$emp_shift_days) AND $shift_check == '1' AND OFF_CHECK == '0')){
+					}elseif((!in_array($dy, (array)$workingdays) and $shift_check == '0' and OFF_CHECK == '0') or (!in_array($dy, (array)$emp_shift_days) and $shift_check == '1' and OFF_CHECK == '0')){
 						$dates[$date] = array('day'=>'O','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['O']['color_code'],'display_value'=>$shift['O']['display_value']);
 					}
 					//elseif(isset($attendacnearray[$ky][$date]) AND isset($leavesdetailsarray[$ky][$date])){
@@ -2886,7 +2886,7 @@ class hrUserClass extends userClass{
 						$dates[$date] = array('day'=>'A','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['A']['color_code'],'display_value'=>$shift['A']['display_value']);
 					}elseif(in_array($date,(array)$holidaysdatas)){
 						$dates[$date] = array('day'=>'H','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['H']['color_code'],'display_value'=>$shift['H']['display_value']);
-					}elseif((!in_array($dy, (array)$workingdays) AND $shift_check == '0' AND OFF_CHECK == '0') OR (!in_array($dy, (array)$emp_shift_days) AND $shift_check == '1') AND OFF_CHECK == '0'){
+					}elseif((!in_array($dy, (array)$workingdays) and $shift_check == '0' and OFF_CHECK == '0') or (!in_array($dy, (array)$emp_shift_days) and $shift_check == '1') and OFF_CHECK == '0'){
 						$dates[$date] = array('day'=>'O','date'=>$date,'billable_hrs'=>$timeshettempoyee[$date]['billable_hrs'],'timesheetid'=>$timeshettempoyee[$date]['id'],'color_code'=>$shift['O']['color_code'],'display_value'=>$shift['O']['display_value']);
 					}elseif($tempdetailary[$ky][$date] !=""){
 
@@ -3089,7 +3089,7 @@ class hrUserClass extends userClass{
 					$insertleave=$callConfig->insertRecord('employee_leaves',$insert_leave_array);
 					$returnarray['employee_leaves'][] =  $insertleave;
 					//}elseif(!in_array($dy, $workingdays)){
-				}elseif((!in_array($dy, (array)$workingdays) AND $shift_check == '0' AND OFF_CHECK == '0') OR (!in_array($dy, (array)$emp_shift_days) AND $shift_check == '1' AND OFF_CHECK == '0')){
+				}elseif((!in_array($dy, (array)$workingdays) and $shift_check == '0' and OFF_CHECK == '0') or (!in_array($dy, (array)$emp_shift_days) and $shift_check == '1' and OFF_CHECK == '0')){
 				//off days
 				}else{
 					$starttime = $presentarray[$ky][$date]->clock_in;

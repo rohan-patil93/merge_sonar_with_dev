@@ -15,7 +15,7 @@ class pmsUserClass extends userClass{
 			$show_filter_cond = explode('&',$show_filter_cond);
 			foreach($show_filter_cond as $show_filter_co){
 				$fieldname = explode("=",$show_filter_co);
-				if($fieldname['0']!="check" AND $fieldname['0']!="table"){
+				if($fieldname['0']!="check" and $fieldname['0']!="table"){
 					$show_filter_condion[$fieldname['0']]=$fieldname['1'];
 				}
 			}
@@ -95,7 +95,7 @@ class pmsUserClass extends userClass{
 		$up_array_emp = array('self_achievement'=>$post['self_achievement'][$gkey],'achievement_percent'=>$post['achievement_percent'][$gkey],'approved_achievement'=>$post['approved_achievement'][$gkey],'approved_score'=>$post['approved_score'][$gkey]);
 		$resupdate[] = $callConfig->updateRecord('employee_goals',$up_array_emp,'id',$gid);
 	}
-	$up_array = array('is_active'=>NULL);
+	$up_array = array('is_active'=>null);
 		//$resupdate[] = $callConfig->updateRecord('employee_performance_appraisals',$up_array,'appraisal_id',$post['appraisal_id']);
 	$insertsql = "INSERT INTO employee_performance_appraisal_details (company_id, epa_header_id, appraisal_id, employee_id, assessment_year, header_id, filed_1, filed_2, filed_3, filed_4, filed_5, filed_6, is_active, current_status, created_date, created_by) VALUES ";
 	// used how meny time loop run
@@ -709,7 +709,7 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 		$show_filter_cond = explode('&',$show_filter_cond);
 		foreach($show_filter_cond as $show_filter_co){
 			$fieldname = explode("=",$show_filter_co);
-			if($fieldname['0']!="check" AND $fieldname['0']!="table"){
+			if($fieldname['0']!="check" and $fieldname['0']!="table"){
 				$show_filter_condion[$fieldname['0']]=$fieldname['1'];
 			}
 		}
@@ -726,19 +726,19 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 			}
 		}
 	}
-	if($get['department_id'] !="" AND $get['department_id'] !="all"){
+	if($get['department_id'] !="" and $get['department_id'] !="all"){
 		$ids = $get['department_id'];
 		$where .= " AND dept.id IN(".$ids.")";
 	}else{
 		$where .= $dipartcondition;
 	}
-	if($get['designation_id'] !="" AND $get['designation_id'] !="all"){
+	if($get['designation_id'] !="" and $get['designation_id'] !="all"){
 		$ids = $get['designation_id'];
 		$where  .= " AND jt.id IN(".$ids.")";
 	}else{
 		$where .= $designationcondition;
 	}
-	if($get['location_id'] !="" AND $get['location_id'] !="all"){
+	if($get['location_id'] !="" and $get['location_id'] !="all"){
 		$ids = $get['location_id'];
 		$where  .= " AND loc.id IN(".$ids.")";
 	}else{
@@ -775,7 +775,7 @@ public function getKRATagging($get){
 		$show_filter_cond = explode('&',$show_filter_cond);
 		foreach($show_filter_cond as $show_filter_co){
 			$fieldname = explode("=",$show_filter_co);
-			if($fieldname['0']!="check" AND $fieldname['0']!="table"){
+			if($fieldname['0']!="check" and $fieldname['0']!="table"){
 				$show_filter_condion[$fieldname['0']]=$fieldname['1'];
 			}
 		}

@@ -654,7 +654,7 @@ class employeeLoanClass extends userClass
 			'is_active' => '0',
 			"gateway_type" => $post['gateway_type'],
 			'process_val' => $process_val,
-			'requested_by' => isset($post['requested_by']) ? (int)$post['requested_by'] : NULL,
+			'requested_by' => isset($post['requested_by']) ? (int)$post['requested_by'] : null,
 			'authorized_by' => $post['authorized_by'] ?? $get['user_id']
 		);
 
@@ -907,7 +907,7 @@ class employeeLoanClass extends userClass
 
 		$time_value = $post['entry_time'] ?? date('H:i:s');
 		$date_value = $post['entry_date'] ?? date('Y-m-d');
-		$vehicle_reading = $post['vehicle_reading'] ?? NULL;
+		$vehicle_reading = $post['vehicle_reading'] ?? null;
 
 		$fieldnames = array(
 			'company_id' => $post['company_id'],
@@ -3308,7 +3308,7 @@ class employeeLoanClass extends userClass
 			$goods_checked = $post['goods_checked'] ?? 0;
 			$security_check = $post['security_check'] ?? 0;
 			$authorized_by = $post['authorized_by'] ?? '';
-			$meater_reading = $post['meater_reading'] ?? NULL;
+			$meater_reading = $post['meater_reading'] ?? null;
 
 			if (!$vehicle_id) {
 				return ['status' => 'error', 'message' => 'Vehicle ID is required'];
