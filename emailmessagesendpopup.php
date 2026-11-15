@@ -148,19 +148,19 @@ session_start();
                                         <div class="form-group form-primary mt-4 mb-0">
                                             <input type="text" required name="name" id="name" class="form-control" required="" aria-label="Name">
                                             <span class="form-bar"></span>
-                                            <label class="form-label float-label">Name*</label>
+                                            <span class="form-label float-label d-inline-block fw-bold">Name*</span>
                                         </div>
                                         <div id="name_err" class="text-danger f-12 position-absolute" style="display:none;">Please enter the name</div>
                                         <div class="form-group form-primary mt-4 mb-0">
                                             <input type="text" name="email" id="email" class="form-control" required="" aria-label="Email">
                                             <span class="form-bar"></span>
-                                            <label class="form-label float-label">Email ID*</label>
+                                            <span class="form-label float-label d-inline-block fw-bold">Email ID*</span>
                                         </div>
                                         <div id="email_err" class="text-danger f-12 position-absolute" style="display:none;">Please enter the email</div>
                                         <div class="form-group form-primary mt-4 mb-0 txtarea-sec">
                                             <textarea style="height: 100px;" class="form-control" name="message" id="message" aria-label="Message"></textarea>
                                             <span class="form-bar"></span>
-                                            <label class="form-label float-label">Message*</label>
+                                            <span class="form-label float-label d-inline-block fw-bold">Message*</span>
                                         </div>
                                         <div id="message_err" class="text-danger f-12 position-absolute" style="display:none;">Please enter the message</div>
 
