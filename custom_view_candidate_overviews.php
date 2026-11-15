@@ -627,7 +627,7 @@ $due_date_period_list = $result['period_list'];
                                 </a>
                        </td>
                        <td id="docssatusbtn_<?php echo $details['id']; ?>">
-                           <label class="form-label label label-md" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></label>
+                           <span class="form-label label label-md d-inline-block fw-bold" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></span>
                            <span class="label label-md" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></span>
                        </td>
                        <td align="right">
@@ -670,7 +670,7 @@ $due_date_period_list = $result['period_list'];
                                </div>
                                <div class="card-body"> 
                                  <div class="form-group">
-                                   <label class="form-label">Joining Date : <?php echo fromDate($data['reporting_date']); ?></label>
+                                   <span class="form-label d-inline-block fw-bold">Joining Date : <?php echo fromDate($data['reporting_date']); ?></span>
                                    <span class="form-label d-block">Joining Date : <?php echo fromDate($data['reporting_date']); ?></span>
                                  </div>
                                  <form id="docrequestform_<?php echo $details['id']; ?>">
