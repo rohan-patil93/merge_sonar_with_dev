@@ -612,7 +612,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
 </div>
 <div class="row">
 	<div class="col-lg-6">
-		<ul class="nav md-tabs infisuite_tab mb-3" role="tablist">
+		<ul class="nav md-tabs infisuite_tab mb-3">
             <li class="nav-item">
                 <a class="nav-link f-w-600 f-12 active_crm_home active active_all_class" data-bs-toggle="tab" href="#home-tab" role="tab" aria-selected="true" onclick="viewAllListPage('home')"><?= __('Home'); ?></a>
             </li>
@@ -644,11 +644,11 @@ foreach ($feasibility_requirements_expiry_days as $item) {
         <div class="row mb-2" style="display: none" id="custome_date">
             <div  class="col-lg-5">
                 <label  class="form-label"><?= __('Start Date'); ?></label>
-                <input type="text" class="form-control filterdynamic datepicker" name="from_date" id="from_date" value="<?php echo $from_date; ?>">
+                <input aria-label="<?= htmlspecialchars(__('From date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="from_date" id="from_date" value="<?php echo $from_date; ?>">
             </div>
             <div class="col-lg-5">
                 <label  class="form-label"><?= __('End Date'); ?></label>
-                <input type="text" class="form-control filterdynamic datepicker" name="to_date" id="to_date" value="<?php echo $to_date; ?>">
+                <input aria-label="<?= htmlspecialchars(__('To date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="to_date" id="to_date" value="<?php echo $to_date; ?>">
             </div>
             <div class="col-lg-2">
                 <button class="btn btn-primary mt-4 desktop-view" onclick="getCRMListDashboard()"><span class="ti-search mt-2"></span></button>
