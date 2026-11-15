@@ -87,7 +87,7 @@
 											
 
 											<td class="text-center"> 
-												<i class="fa fa-eye" onclick="requestAssets('<?php echo $requestdeatil['id']; ?>')"></i>
+												<i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Request assets'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="fa fa-eye" onclick="requestAssets('<?php echo $requestdeatil['id']; ?>')"></i>
                                     		</td>
 										</tr>
 									<?php } ?>
