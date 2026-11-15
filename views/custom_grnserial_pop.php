@@ -231,13 +231,13 @@ if($item_daata['tracking_type'] == 2){
 				<div id='append_statick'>
 				<div class="row align-items-center" style="margin-top: 10px;">
 					<div class="col-lg-3">
-						<label><b><?php echo __('Lot Number'); ?></b></label>
+						<span class="d-inline-block fw-bold" style="margin-bottom:5px"><b><?php echo __('Lot Number'); ?></b></span>
 					</div>
 					<div class="col-lg-3">
-						<label><b><?php echo __('Qty'); ?></b></label>
+						<span class="d-inline-block fw-bold" style="margin-bottom:5px"><b><?php echo __('Qty'); ?></b></span>
 					</div>
 					<div class="col-lg-3">
-						<label><b></b></label>
+						<span class="d-inline-block fw-bold" style="margin-bottom:5px"><b></b></span>
 					</div>
 				</div>
 				<div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
