@@ -738,7 +738,7 @@ th{
                                 <div class="card card-custom card-sticky table-responsive">
                                     <div class="card-header">
                                         <h5 class="text-primary"><?= __('Assets'); ?></h5>
-                                         <a href="#" onclick="addeditassets(<?php echo $emp_id; ?>)" class="mb-2  ml-1 float-right"><button class="btn btn-primary  m-l-10"><?= __('Add / Edit Asset'); ?></button> </a>
+                                         <a href="#top" onclick="addeditassets(<?php echo $emp_id; ?>)" class="mb-2  ml-1 float-right"><button class="btn btn-primary  m-l-10"><?= __('Add / Edit Asset'); ?></button> </a>
                                     </div>
                                     <table class="table">
                                         <tr>
