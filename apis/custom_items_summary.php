@@ -33,7 +33,7 @@ if($_GET['refresh'] =="Y"){
 	$response23 = curl_exec($curl);
 	$decores = json_decode($response23,1);
 	$returnresult = array('company_id'=>$itsum_company_id,'application_table'=>$transaction_table,'transaction_id'=>$transaction_id,'api_master_id'=>47,'api_url'=>'','api_request_parameters'=>$sendpostreq,'request_date_time'=>date("Y-m-d H:i:s"),'api_response_details'=>urlencode(json_encode($decores)),'response_date_time'=>date("Y-m-d H:i:s"),'is_active'=>'0','current_status'=>'0','created_date'=>date("Y-m-d H:i:s"),'created_by'=>$itsum_user_id,'response_status'=>200);
- 	$inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$itsum_company_id."&data_name=".$itsum_data_name."&userid=".$itsum_user_id; 
+ 	$inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$itsum_company_id."&data_name=".$itsum_data_name."&userid=".$itsum_user_id;
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $inserturl);
 	curl_setopt($ch, CURLOPT_POST, true);
@@ -42,13 +42,13 @@ if($_GET['refresh'] =="Y"){
 	$insertresponse = curl_exec($ch);
 	$decore11 = json_decode($insertresponse,1);
 }else{
-	
+
 	$data1["where"] = array('id'=>556);
 	$data1["field"] = "id,request_date_time,api_response_details";
 	$data1['order'] = "id DESC";
 	$data = urlencode(json_encode($data1));
-	
-	$curl = $apiurl."?mode=gettabledetailswithconditions&table=api_hits&company_id=".$itsum_company_id."&data_name=".$itsum_data_name."&userid=".$itsum_user_id."&data=".$data; 
+
+	$curl = $apiurl."?mode=gettabledetailswithconditions&table=api_hits&company_id=".$itsum_company_id."&data_name=".$itsum_data_name."&userid=".$itsum_user_id."&data=".$data;
 	$cudata = callAPI($curl);
 	$returnresult11 = json_decode($cudata,1);
 	$returnresult = $returnresult11[0];
@@ -56,13 +56,13 @@ if($_GET['refresh'] =="Y"){
 	$decores = json_decode(urldecode($returnres11),1);
 }
 $itemaummaryary = array();
-foreach($decores['flagged_items'] as $flagitem){ 
+foreach($decores['flagged_items'] as $flagitem){
  	if($flagitem['status'] == 'WARNING'){
  		$itemaummaryary['WARNING'][] = $flagitem;
  	}elseif($flagitem['status'] == 'CRITICAL'){
  		$itemaummaryary['CRITICAL'][] = $flagitem;
  	}elseif($flagitem['status'] == 'INFO'){
- 		$itemaummaryary['INFO'][] = $flagitem;	
+ 		$itemaummaryary['INFO'][] = $flagitem;
  	}
 }
 $loopstatus = array('WARNING','CRITICAL','INFO');
@@ -113,9 +113,9 @@ $loopstatus = array('WARNING','CRITICAL','INFO');
 		<tbody id="tableBody">
 			<?php
 			foreach($loopstatus as $lstat){
-			 if(count((array)$itemaummaryary[$lstat]) !='0'){ 
+			 if(count((array)$itemaummaryary[$lstat]) !='0'){
 					foreach($itemaummaryary[$lstat]  as $flagitem){ ?>
-			
+
 			<tr class="stock-row row-<?php echo $flagitem['status']; ?> <?php echo $lstat == "CRITICAL"?"":"d-none"; ?>">
 				<td class="w-b-w-s">
 					<strong><?php echo $flagitem['item_name']; ?></strong><br>

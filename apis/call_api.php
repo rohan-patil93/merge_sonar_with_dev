@@ -13,13 +13,13 @@ date_default_timezone_set('Asia/Kolkata');
 $api_code = $_REQUEST['api_code'];
 
 
-  //Get details Pass API Code 
+  //Get details Pass API Code
   $masterurl = API."?mode=singlerowtabledata&fid=api_code&rid=".$api_code."&table=api_masters";
   $materres = callAPI($masterurl);
   $master_data = json_decode($materres,1);
   $api_request_parameters = json_decode($master_data['api_request_parameters'], 1);
   $request =$request1 = array();
-  foreach($api_request_parameters as $api_request){ //get paramiter In Database To replace with Post Values 
+  foreach($api_request_parameters as $api_request){ //get paramiter In Database To replace with Post Values
       if(isset($_FILES['card_image']) AND $api_request == "card_image"){
         $fileTmpPath = $_FILES['card_image']['tmp_name'];
         if(file_exists($fileTmpPath)) {
@@ -48,7 +48,7 @@ $api_code = $_REQUEST['api_code'];
             $request1[$api_request] = $base64Encoded;
         }
       }elseif($api_request == "face_match" && $api_code == "FACELIVENESS"){
-        
+
         $userdataapi = API."?mode=singlerowtabledata&fid=id&rid=".$_POST['user_id']."&table=application_users";
         $userdatacallapi = callAPI($userdataapi);
         $user_detail = json_decode($userdatacallapi,1);
@@ -69,14 +69,14 @@ $api_code = $_REQUEST['api_code'];
         }
       }else{
         if($api_code == "FACELIVENESS"){
-            $request[$api_request] = $_POST[$api_request]; 
+            $request[$api_request] = $_POST[$api_request];
         }else{
-            $request1[$api_request] = $_POST[$api_request]; 
+            $request1[$api_request] = $_POST[$api_request];
         }
       }
   }
   $request['mode'] = "sync";
-  $request['task_id'] = "8bbb54f3-d299-4535-b00e-e74d2d5a3997"; 
+  $request['task_id'] = "8bbb54f3-d299-4535-b00e-e74d2d5a3997";
   $request['data'] = $request1;
 
   $send_req = json_encode($request);
@@ -96,10 +96,10 @@ $api_code = $_REQUEST['api_code'];
   $in_array['current_status'] ='0';
   $in_array['created_date'] = nowDate();
   $in_array['created_by'] = $_SESSION['userid'];
-  $url = API."?mode=adddata&table=api_hits&method=post"; 
+  $url = API."?mode=adddata&table=api_hits&method=post";
   $dataresponse = file_post_contents($url, $in_array, 'insert');
   $res = json_decode($dataresponse,1);
-  $last_id = $res['LASTID']; 
+  $last_id = $res['LASTID'];
   if($api_code == "FACELIVENESS"){
       $stringvalue = $_POST['company_id']."-".$last_id."-".$_POST['data_name'];
       $encryptedDbName = encodeString($stringvalue);
@@ -124,7 +124,7 @@ $api_code = $_REQUEST['api_code'];
       'app-id: 68a83c79126f9d00287c9bb8',
       'api-key: SQRPZD3-HZZM3CX-P62GH67-313MMFP',
     ),
-   
+
   ));
   $response = curl_exec($curl);
   $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -134,7 +134,7 @@ $api_code = $_REQUEST['api_code'];
   if($httpCode == "503" || $httpCode == "504"){
     $returnresult['response_message'] = "The server is currently unavailable. Please try again after sometime. If the issue persists, contact your administrator for assistance";
   }
- 
+
   $result = json_encode($returnresult);
   echo $result;
   $data['response_status'] = $httpCode;

@@ -6,7 +6,7 @@ $transaction_id = '';
 $data1["where"] = array('company_id'=> $_POST['company_id'],'api_code'=>'CANDIDATESCREENINGGENERATEQUESTION','is_active'=>'0');
 $data1["field"] = "id, api_code, production_testing, production_url, testing_url";
 $data = urlencode(json_encode($data1));
-$masterurl = API."?mode=gettabledetailswithconditions&table=api_masters&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&data=".$data; 
+$masterurl = API."?mode=gettabledetailswithconditions&table=api_masters&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&data=".$data;
 $postData = array();
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $masterurl);
@@ -27,7 +27,7 @@ if (curl_errno($ch)) {
         $api_url = "https://recruitstaq.digixlabs.cloud/api/screening/generate/";
         $aipostData = $_POST;
         $insertarray = array('company_id'=>$_POST['company_id'],'application_table'=>$transaction_table,'transaction_id'=>$transaction_id,'api_master_id'=>$masterresult[0]['id'],'api_url'=>$api_url,'api_request_parameters'=>urlencode(json_encode($aipostData)),'request_date_time'=>date("Y-m-d H:i:s"),'is_active'=>'0','current_status'=>'0','created_date'=>date("Y-m-d H:i:s"),'created_by'=>$_POST['user_id'],'response_status'=>200);
-        $inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']; 
+        $inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id'];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $inserturl);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -57,18 +57,18 @@ if (curl_errno($ch)) {
             ));
             if (curl_errno($ch2)) {
                 echo json_encode(array('result'=>curl_error($ch2),'msg'=> 'Oops! There seems to be a server-side issue. Please connect with our IT team to investigate and resolve it.', 'status'=>'failed', 'lastid'=>''));
-            }else{  
+            }else{
                 $response11 = curl_exec($ch2);
                 $retres = json_decode($response11,1);
                 $screening = $retres['screening'];
                 $questions = $screening['questions'];
-                $screeningwhatsid = $screening['_id'];                
+                $screeningwhatsid = $screening['_id'];
                 $buttonhtml = '<button type="button" class="btn btn-primary float-right mb-1" id="ai_spproved_and_start" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click here to Start Screening" onclick="approvedstartScreening(\''.$screeningwhatsid.'\')"><i class="ti-light-bulb"></i> Scre. Start</button>';
                 $question = '<div class="row " ><table class="table table-bordered table-md">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Question</th>
-                        </tr>';    
+                        </tr>';
                 $sq = 1;
                 foreach($questions as $qou){
                   $question .= '<tr>
@@ -78,21 +78,21 @@ if (curl_errno($ch)) {
                 }
                 $question .= '</table>';
                 $question .= $buttonhtml;
-                $question .= '</div>';   
+                $question .= '</div>';
                 echo json_encode(array('status'=>'success','result'=>$retres, 'question'=> $question, 'buttonhtml'=> $buttonhtml));
                 $data21['api_response_details'] =  urlencode(json_encode($retres));
                 $data21['response_date_time'] = nowDate();
                 $data21['updated_date'] = nowDate();
                 $data21['updated_by'] = $_POST['userid'];
-                $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&rid=".$last_id; 
+                $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&rid=".$last_id;
                 $upch = curl_init();
                 curl_setopt($upch, CURLOPT_URL, $inserturl);
                 curl_setopt($upch, CURLOPT_POST, true);
                 curl_setopt($upch, CURLOPT_POSTFIELDS, $data21);
                 curl_setopt($upch, CURLOPT_RETURNTRANSFER, true);
                 curl_exec($upch);
-            } 
-           
+            }
+
         }
     }
 }

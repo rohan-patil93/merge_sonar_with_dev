@@ -674,10 +674,10 @@ $financeshowtabmodule = array(4);
                         </td>
                       </tr>
 
-                      <!--  <tr class="data-row"> 
-                          <td>Date</td> 
-                          <td>Description</td> 
-                          <td align="right">Balance</td> 
+                      <!--  <tr class="data-row">
+                          <td>Date</td>
+                          <td>Description</td>
+                          <td align="right">Balance</td>
                         </tr> -->
 
                       <tr class="data-row">

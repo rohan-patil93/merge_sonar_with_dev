@@ -8,7 +8,7 @@ file_put_contents("webhook_all_logs.json", json_encode($data, JSON_PRETTY_PRINT)
 header("HTTP/1.1 200 OK");
 $urlrefkey = $_GET['refkey'];
 $explodeurl = explode("?action=",$urlrefkey);
-if($explodeurl[1] == 'liveness-success'){	
+if($explodeurl[1] == 'liveness-success'){
 	session_start();
 	include_once('../dbconfig.php');
 	include_once('../comm.php');
@@ -25,7 +25,7 @@ if($explodeurl[1] == 'liveness-success'){
 		$postdata['updated_date'] = nowDate();
 		$url = API."?mode=updaterowtabledata&rid=".$api_hit_id."&table=api_hits&method=post&data_name=".$dataname;
 		$response = file_post_contents($url, $postdata, 'update');
-		file_put_contents($logFile, ''); 
+		file_put_contents($logFile, '');
 	}
 }else{
 	session_start();

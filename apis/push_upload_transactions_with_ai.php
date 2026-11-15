@@ -17,7 +17,7 @@ $fullPathfilename = $File_Uploads_Path.$upload_transactions_file;
 $data1["where"] = array('company_id'=> $_POST['company_id'],'api_code'=>'AIINTEGRATIONPUSHFILE','is_active'=>'0');
 $data1["field"] = "id, api_code, production_testing, production_url, testing_url";
 $data = urlencode(json_encode($data1));
-$masterurl = API."?mode=gettabledetailswithconditions&table=api_masters&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&data=".$data; 
+$masterurl = API."?mode=gettabledetailswithconditions&table=api_masters&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&data=".$data;
 $postData = array();
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $masterurl);
@@ -45,7 +45,7 @@ if (curl_errno($ch)) {
             'upload_transactions_file' => $upload_transactions_file
         ];
         $insertarray = array('company_id'=>$_POST['company_id'],'application_table'=>$transaction_table,'transaction_id'=>$transaction_id,'api_master_id'=>$masterresult[0]['id'],'api_url'=>$api_url,'api_request_parameters'=>json_encode((array)$aipostData),'request_date_time'=>date("Y-m-d H:i:s"),'is_active'=>'0','current_status'=>'0','created_date'=>date("Y-m-d H:i:s"),'created_by'=>$_POST['user_id'],'response_status'=>200);
-        $inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']; 
+        $inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id'];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $inserturl);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -61,23 +61,23 @@ if (curl_errno($ch)) {
             curl_setopt($ch2, CURLOPT_URL, $aiurl);
             curl_setopt($ch2, CURLOPT_POST, true);
             curl_setopt($ch2, CURLOPT_POSTFIELDS, $aipostData);
-            curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true); 
+            curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
             $headers = [
                 'API-Token: X9mQ2Zp7Lk4T8wE5rV1yU0cN6bH3sAqD',
-                'Content-Type: multipart/form-data' 
+                'Content-Type: multipart/form-data'
             ];
-            curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers);           
+            curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers);
             if (curl_errno($ch2)) {
                 echo 'Error: ' . curl_error($ch2);
-            }else{  
+            }else{
                 $response11 = curl_exec($ch2);
                 $retres = json_decode($response11,1);
-              if ($retres['status'] === 'completed'){ 
+              if ($retres['status'] === 'completed'){
                     $data21['api_response_details'] =  json_encode((array)$retres);
                     $data21['response_date_time'] = nowDate();
                     $data21['updated_date'] = nowDate();
                     $data21['updated_by'] = $_POST['userid'];
-                    $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&rid=".$last_id; 
+                    $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&rid=".$last_id;
                     $upch = curl_init();
                     curl_setopt($upch, CURLOPT_URL, $inserturl);
                     curl_setopt($upch, CURLOPT_POST, true);
@@ -90,7 +90,7 @@ if (curl_errno($ch)) {
                     $data21['response_date_time'] = nowDate();
                     $data21['updated_date'] = nowDate();
                     $data21['updated_by'] = $_POST['userid'];
-                    $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&rid=".$last_id; 
+                    $inserturl = API."?mode=updaterowtabledata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id']."&rid=".$last_id;
                     $upch = curl_init();
                     curl_setopt($upch, CURLOPT_URL, $inserturl);
                     curl_setopt($upch, CURLOPT_POST, true);
@@ -104,8 +104,8 @@ if (curl_errno($ch)) {
                         </div>   
                     </div>';
                }
-            } 
-           
+            }
+
         }
     }
 }
@@ -151,8 +151,8 @@ function transactionDetailsUI($retres, $fullPathfilename){
             </thead>
             <tbody>';
 
-          $matcherorse1 =1; 
-          foreach($matchValidationErrors as $matcherror){    
+          $matcherorse1 =1;
+          foreach($matchValidationErrors as $matcherror){
     $html .= '<tr>
                     <td class="p-2">'.$matcherorse1.'</td>
                     <td class="w-b-w-s p-2 text-danger">'.$matcherror.'</td>
@@ -171,8 +171,8 @@ function transactionDetailsUI($retres, $fullPathfilename){
                 </thead>
                 <tbody>';
 
-          $matcherorse1 =1; 
-          foreach($validationWarnings as $matchworning){    
+          $matcherorse1 =1;
+          foreach($validationWarnings as $matchworning){
     $html .= '<tr>
                     <td class="p-2">'.$matcherorse1.'</td>
                     <td class="w-b-w-s p-2">'.$matchworning.'</td>
@@ -273,8 +273,8 @@ function transactionDetailsUI($retres, $fullPathfilename){
                     </tr>
                 </thead>
             <tbody>';
-          $matcherorse1 =1; 
-          foreach($lineItems as $litem){    
+          $matcherorse1 =1;
+          foreach($lineItems as $litem){
                 $html .= '<tr>
                     <td class="p-2">'.$matcherorse1.'</td>
                     <td class="w-b-w-s p-2">'.$litem['productBarcode'].' - '.$litem['productName'].'</td>
@@ -286,7 +286,7 @@ function transactionDetailsUI($retres, $fullPathfilename){
                     <td class="w-b-w-s p-2">'.$litem['taxAmount'].'</td>
                     <td class="w-b-w-s p-2">'.$litem['discountAmount'].'</td>
                 </tr>';
-                $matcherorse1++;  
+                $matcherorse1++;
             }
     $html .= '</tbody>
         </table></div>';

@@ -1,4 +1,4 @@
-<?php 
+<?php
 $curl = curl_init();
 curl_setopt_array($curl, array(
   CURLOPT_URL => 'https://deskallocator.microchip.com/api.php?mode=sendcronjobcontractexpirynotifications&data_name=infisuite_seat&user_id=1&company_id=1',
