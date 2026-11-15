@@ -79,6 +79,13 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 <html lang="en">
 
 <head>
+<script>
+/* Image fallback: replaces the former inline onerror="this.src='...'" handlers (same behaviour; stops if the fallback itself fails). */
+document.addEventListener('error', function (e) {
+    var t = e.target, fb = t && t.tagName === 'IMG' ? t.getAttribute('data-onerror-src') : null;
+    if (fb && t.getAttribute('src') !== fb) { t.src = fb; }
+}, true);
+</script>
 	<title>Infistaq | Home</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -294,7 +301,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   											<span> <i class="fa fa-camera"></i> &nbsp; Upload Logo</span>
   										</label>
   										<input type="file" name="image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/ aria-label="Image">
-  										<img src="<?php echo "uploads/all/".$role['image'] ; ?>" id="outputdisplay_logo" width="200" onerror="this.src='uploads/all/no-image.jpg';" alt="" />
+  										<img src="<?php echo "uploads/all/".$role['image'] ; ?>" id="outputdisplay_logo" width="200" data-onerror-src="uploads/all/no-image.jpg" alt="" />
   										<input type="hidden" name="hid_image" value="<?php echo $role['image'] ;  ?>">
   									</div>
   								</div>
