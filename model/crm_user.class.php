@@ -1861,7 +1861,6 @@ payment tersm**/
 		global $callConfig;
 		$return['get'] = $get;
 		$query = "SELECT id, code, value, label FROM crm_general_codes WHERE company_id = '" . $get['company_id'] . "' AND code = 'SOURCETYPE' AND is_active = 0";
-		$return['crm_general_codes'] = $query;
 		$data = $callConfig->getAllRows($query);
 		$return['crm_general_codes'] = $data;
 		return $return;
