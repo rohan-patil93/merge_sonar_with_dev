@@ -4,7 +4,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 class vendorPortelUserClass extends userClass
 {
-	function getApplicationTickets($get)
+	public function getApplicationTickets($get)
 	{
 		global $callConfig;
 		if ($get['page_type'] == "LT") {
@@ -25,7 +25,7 @@ class vendorPortelUserClass extends userClass
 		$return['priority'] = $priority;
 		return $return;
 	}
-	function insertapplicationtickets($get, $post)
+	public function insertapplicationtickets($get, $post)
 	{
 		global $callConfig;
 		$return['post'] = $post;
@@ -60,7 +60,7 @@ class vendorPortelUserClass extends userClass
 		$emails = $this->tosendnotifiations($notdataa);
 		return $res;
 	}
-	function updateApplicationTickets($get, $post)
+	public function updateApplicationTickets($get, $post)
 	{
 		$res = null;
 		global $callConfig;
@@ -75,7 +75,7 @@ class vendorPortelUserClass extends userClass
 		//$res = $callConfig->updateRecord('application_users',$updateary,'id',$appuserre->id);
 		return $res;
 	}
-	function vendorapicallforvmslist($get)
+	public function vendorapicallforvmslist($get)
 	{
 		global $callConfig;
 		$return['get'] = $get;
@@ -87,7 +87,7 @@ class vendorPortelUserClass extends userClass
 		$daa = $callConfig->executeQuery($query);
 		return $return;
 	}
-	function vmsvendorupdatetoapi($get)
+	public function vmsvendorupdatetoapi($get)
 	{
 		global $callConfig;
 		$return['get'] = $get;
@@ -108,7 +108,7 @@ class vendorPortelUserClass extends userClass
 		}
 		return $return;
 	}
-	function getVendorRegistrationRequests($get)
+	public function getVendorRegistrationRequests($get)
 	{
 		global $callConfig;
 		if ($get['viewpage'] == "popup") {
@@ -165,7 +165,7 @@ class vendorPortelUserClass extends userClass
 
 		return $return;
 	}
-	function generateVendorRegistartationRequestPDF($get)
+	public function generateVendorRegistartationRequestPDF($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -206,7 +206,7 @@ class vendorPortelUserClass extends userClass
 		$callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
 		return $filename;
 	}
-	function insertVendorRegistrationRequests($get, $post)
+	public function insertVendorRegistrationRequests($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -282,7 +282,7 @@ class vendorPortelUserClass extends userClass
 		}
 		return $return;
 	}
-	function updateSendVerificationProfileStatus($get, $post)
+	public function updateSendVerificationProfileStatus($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -376,7 +376,7 @@ class vendorPortelUserClass extends userClass
 		//End All task Sedn to Approve
 		return $res;
 	}
-	function updateVendorProfileUpdateStatus($get, $post)
+	public function updateVendorProfileUpdateStatus($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -394,7 +394,7 @@ class vendorPortelUserClass extends userClass
 		$res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
 		return $res;
 	}
-	function updateVendorVerifications($get, $post)
+	public function updateVendorVerifications($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -415,7 +415,7 @@ class vendorPortelUserClass extends userClass
 		$return['res'] = $res;
 		return $return;
 	}
-	function checkOneLogin($get, $post)
+	public function checkOneLogin($get, $post)
 	{
 		global $callConfig;
 		$where = "user_email='" . $post['chrUserName'] . "'  and is_active ='0'";
@@ -456,7 +456,7 @@ class vendorPortelUserClass extends userClass
 		}
 		return $return;
 	}
-	function getVendorDisplayFields($get)
+	public function getVendorDisplayFields($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -476,7 +476,7 @@ class vendorPortelUserClass extends userClass
 		$return['sql'] = $application_rolessql;
 		return $return;
 	}
-	function insertVendorDisplayFields($get, $post)
+	public function insertVendorDisplayFields($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -498,7 +498,7 @@ class vendorPortelUserClass extends userClass
 	//omkar vdocument verification code added -----
 
 
-	function insertupdatevendorverificationdetails($get, $post)
+	public function insertupdatevendorverificationdetails($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -630,7 +630,7 @@ class vendorPortelUserClass extends userClass
 		return $return;
 	}
 	//End omkar vdocument verification code added -----
-	function insertVendorandVendorRegistersSynchAPI($get)
+	public function insertVendorandVendorRegistersSynchAPI($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -681,7 +681,7 @@ class vendorPortelUserClass extends userClass
 		}
 		return $return;
 	}
-	function getvendorandvendorregisterssynchapi()
+	public function getvendorandvendorregisterssynchapi()
 	{
 		global $callConfig;
 		$return = array();
@@ -690,7 +690,7 @@ class vendorPortelUserClass extends userClass
 		$return['vendors'] = $vendorres;
 		return $return;
 	}
-	function getApiData($url, $postData = null)
+	public function getApiData($url, $postData = null)
 	{
 		$ch = curl_init($url);
 		if (!empty($postData)) {
@@ -710,7 +710,7 @@ class vendorPortelUserClass extends userClass
 		}
 		return $return;
 	}
-	function getVendorsDetailsReports($get)
+	public function getVendorsDetailsReports($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -876,7 +876,7 @@ class vendorPortelUserClass extends userClass
 			return $return;
 		} **/
 
-	function MSMEConfirmationUpdate($get, $post)
+	public function MSMEConfirmationUpdate($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -885,7 +885,7 @@ class vendorPortelUserClass extends userClass
 		$return['res'] = $callConfig->insertRecord('msme_confirmation_logs', $post_array);
 		return $return;
 	}
-	function insertVendorsAndVendorRegisters($get, $post)
+	public function insertVendorsAndVendorRegisters($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -1037,7 +1037,7 @@ class vendorPortelUserClass extends userClass
 
 		return $return;
 	}
-	function sendEmailAPIWithoutLogDocumentVerification($get, $post)
+	public function sendEmailAPIWithoutLogDocumentVerification($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -1061,7 +1061,7 @@ class vendorPortelUserClass extends userClass
 		$emails = $this->sendNotificationAndEmails($notdataa, $emailarray, 74);
 		return $emails;
 	}
-	function insertApplicationUserInvitations($get, $post)
+	public function insertApplicationUserInvitations($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -1218,7 +1218,7 @@ class vendorPortelUserClass extends userClass
 		}
 		return $retresult;
 	}
-	function getInvitationVendors($get)
+	public function getInvitationVendors($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -1297,11 +1297,11 @@ class vendorPortelUserClass extends userClass
 
 		return $return;
 	}
-	function getVendorAdminDashboardPost($get, $post)
+	public function getVendorAdminDashboardPost($get, $post)
 	{
 		return $this->getVendorAdminDashboard($post);
 	}
-	function getVendorAdminDashboard($get)
+	public function getVendorAdminDashboard($get)
 	{
 		global $callConfig;
 		if ($get['vendorcreate'] == 'Y') {
@@ -1411,7 +1411,7 @@ class vendorPortelUserClass extends userClass
 		}
 		return $return;
 	}
-	function getVendorsDetails($get)
+	public function getVendorsDetails($get)
 	{
 		global $callConfig;
 		$return = array();
