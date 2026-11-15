@@ -73,7 +73,7 @@ $grand_total_unspent  = 0;
                 <input type="hidden" name="option" value="<?php echo htmlspecialchars($_GET['option'] ?? 'CSR_PROJECTWISE_SUMMARY_REPORT', ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="row mb-3">
                     <div class="col-md-3">
-                        <label><b><?= __('Financial Year') ?></b></label>
+                        <span class="d-inline-block fw-bold" style="margin-bottom:5px"><b><?= __('Financial Year') ?></b></span>
                         <select aria-label="<?= htmlspecialchars(__('Year'), ENT_QUOTES, 'UTF-8'); ?>" name="year" id="csrProjectSummaryYearSelect" class="form-control js-example-basic-single">
                             <?php if (count((array)$financial_years) > 0) {
                                 foreach ($financial_years as $fyRow) {
