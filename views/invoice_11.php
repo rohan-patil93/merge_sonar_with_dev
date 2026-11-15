@@ -165,7 +165,7 @@ function emptyCheck($valu){
                     </td>
                     <td width="55%" colspan="4" class="border-0 p-1">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table role="presentation" class="table">
                                 <tr>
                                     <td class="f-12"><?= __('TO'); ?></td>
                                     <td class="f-12" align="right">
