@@ -73,7 +73,7 @@
                       <div class="example-preview">
                         <div class="form-group row">
                           <?php foreach((array)$yeardata as $monthkey=>$monthdata){   ?>
-                          <div style="cursor: pointer;" onclick="showpayslip(<?php echo $employee_id.",".$keyyear.",".$monthkey; ?>)" class="col-12 col-form-label "><?= __(date("F", strtotime($keyyear."-".$monthkey."-01"))) ?></div>
+                          <div role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" style="cursor: pointer;" onclick="showpayslip(<?php echo $employee_id.",".$keyyear.",".$monthkey; ?>)" class="col-12 col-form-label "><?= __(date("F", strtotime($keyyear."-".$monthkey."-01"))) ?></div>
                           <?php } ?>
                         </div>
                       </div>
