@@ -2100,7 +2100,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                 </div>
                                 <div class="badge-card-body">
                                     <div class="badge-photo-area">
-                                        <img id="badgePreviewPhoto"
+                                        <img alt="" id="badgePreviewPhoto"
                                             src="<?php echo !empty($return['image_path']) ? 'uploads/visitors/' . htmlspecialchars($return['image_path']) : ''; ?>"
                                             class="<?php echo empty($return['image_path']) ? 'd-none' : ''; ?>">
                                         <div
