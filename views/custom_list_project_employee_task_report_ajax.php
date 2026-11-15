@@ -87,11 +87,11 @@ $today = date('Y-m-d');
 					<td><?php echo htmlspecialchars($planned_start_display); ?></td>
 					<td><?php echo htmlspecialchars($planned_finish_display); ?></td>
 					<td>
-						<label class="form-label label label-md csr-status-label"
+						<span class="form-label label label-md csr-status-label d-inline-block fw-bold"
 							data-color="<?php echo $status_color; ?>"
 							data-bg="<?php echo $status_bg; ?>">
 							<?php echo $status_label; ?>
-						</label>
+						</span>
 					</td>
 				</tr>
 			<?php
