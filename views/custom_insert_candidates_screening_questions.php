@@ -178,10 +178,10 @@ var max = 500;
                                     if($jpc['is_active'] == "0"){
                                         if($jpc['screening_status'] == "N"){ 
                                             ?>
-                                            <span class="form-label label label-primary text-white cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click Here to Create Manual Questions') ?>"  onclick="createManualQuestions('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"> <i class="ti-plus"></i> Ques. </span>
+                                            <span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="form-label label label-primary text-white cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click Here to Create Manual Questions') ?>"  onclick="createManualQuestions('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"> <i class="ti-plus"></i> Ques. </span>
                                         
 
-                                            <span class="form-label label label-primary text-white cursor-pointer" id="ai_generate_job_description" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click Here to Create AI Questions') ?>"  onclick="startScreening('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"><i class="ti-light-bulb"></i>AI Question Gen.</span>
+                                            <span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="form-label label label-primary text-white cursor-pointer" id="ai_generate_job_description" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click Here to Create AI Questions') ?>"  onclick="startScreening('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"><i class="ti-light-bulb"></i>AI Question Gen.</span>
                                             <?php
                                         }else{
                                              echo "Active";
