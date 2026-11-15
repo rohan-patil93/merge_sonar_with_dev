@@ -710,7 +710,7 @@ function insertReleive(){
 			 		<div class="row col-lg-12">  
 			 		
 			 		<div class="form-group col-lg-6">
-			 				<label class="form-label"><?php echo __('Relieve Reason'); ?> </label>
+			 				<span class="form-label d-inline-block fw-bold"><?php echo __('Relieve Reason'); ?> </span>
 			 				<select aria-label="<?= htmlspecialchars(__('Termination type'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" id="termination_type" name="termination_type"> 
 			 					<option value="0"><?php echo __('Select Any One'); ?></option>
 			 					<?php foreach($result['termination_type'] as $termination_types){ ?>
@@ -719,23 +719,23 @@ function insertReleive(){
 			 				</select>
 			 			</div> 
 			 			<div class="form-group col-lg-6">
-			 				<label class="form-label"><?php echo __('Resignation Date'); ?> </label>
+			 				<span class="form-label d-inline-block fw-bold"><?php echo __('Resignation Date'); ?> </span>
 			 				<span class="d-block error-message text-danger"></span>
 			 				<input aria-label="<?= htmlspecialchars(__('Effective date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker " id="effective_date" name="effective_date" value="<?php echo fromDate($data_termination['effective_date']); ?>">
 			 			</div>
 			 			<div class="form-group col-lg-6">
-			 				<label class="form-label"><?php echo __('Last Working  Date'); ?> </label>
+			 				<span class="form-label d-inline-block fw-bold"><?php echo __('Last Working  Date'); ?> </span>
 			 				<span class="d-block error-message text-danger"></span>
 			 				<input aria-label="<?= htmlspecialchars(__('Releive date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker " id="releive_date" name="releive_date" value="<?php echo fromDate($data_termination['releive_date']); ?>">
 			 			</div>
 			 			<div class="form-group col-lg-6">
-			 				<label class="form-label"><?php echo __('Settle On Date'); ?> </label>
+			 				<span class="form-label d-inline-block fw-bold"><?php echo __('Settle On Date'); ?> </span>
 			 				<span class="d-block error-message text-danger"></span>
 			 				<input aria-label="<?= htmlspecialchars(__('Settle on'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker " id="settle_on" name="settle_on" value="<?php echo fromDate($data_termination['settle_on']); ?>">
 			 			</div>
 			 			<div id="releive_date_error" style="display: none;"> <?php echo __('Please Fill The Releive Date'); ?></div>
 			 			<div class="form-group col-lg-6 ">
-			 				<label><?php echo __('Comments'); ?></label>
+			 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Comments'); ?></span>
 			 				<textarea aria-label="<?= htmlspecialchars(__('Releive comments'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " id="releive_comments" name="releive_comments"><?php echo $data_termination['remarks_by_admin']; ?> </textarea> 
 			 			</div> 
 			 		</div>
@@ -1319,7 +1319,7 @@ function insertReleive(){
 										<div class="row">
 											<div class="col-6">
 												<div class="s-cont d-inline-block">       
-													<input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-success-sm" <?php if($team['on_off_site']==0){ echo __('checked'); } ?> onchange="changeonsite(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;<label style="font-size: 12px; <?php if($team['on_off_site']==1){ echo __('color: red'); } ?>" class="col-form-label onsite_lable<?php echo $team['id']; ?>"><?php if($team['on_off_site']==1){ echo __('Off-Site'); }else{ echo __('On-Site'); } ?> </label>
+													<input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-success-sm" <?php if($team['on_off_site']==0){ echo __('checked'); } ?> onchange="changeonsite(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;<span style="font-size: 12px; <?php if($team['on_off_site']==1){ echo __('color: red'); } ?>" class="col-form-label onsite_lable<?php echo $team['id']; ?> d-inline-block fw-bold"><?php if($team['on_off_site']==1){ echo __('Off-Site'); }else{ echo __('On-Site'); } ?> </span>
 													<input type="hidden" id="onsite_<?php echo $team['id']; ?>" value="<?php echo $team['on_off_site']; ?>">  
 												</div>
 											</div>
