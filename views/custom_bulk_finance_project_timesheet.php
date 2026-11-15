@@ -633,7 +633,7 @@ $erp = json_decode($erp_data,1);
 
 								<div class="col-lg-4">
 									<div class="d-flex align-items-center">
-										<label class="mr-3 mb-0 d-none d-md-block"><?= __("Manger:") ?>&nbsp;</label>
+										<span class="mr-3 mb-0 d-none d-md-block fw-bold" style="margin-bottom:5px"><?= __("Manger:") ?>&nbsp;</span>
 										<select aria-label="<?= htmlspecialchars(__('Reports to'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="kt_datatable_search_status"  name="reports_to">
 											<option value="0"><?= __("All") ?></option>
 
@@ -649,7 +649,7 @@ $erp = json_decode($erp_data,1);
 								</div>
 								<div class="col-lg-4">
 									<div class="d-flex align-items-center">
-										<label class="mr-3 mb-0 d-none d-md-block"><?= __("Vendor:") ?>&nbsp;</label>
+										<span class="mr-3 mb-0 d-none d-md-block fw-bold" style="margin-bottom:5px"><?= __("Vendor:") ?>&nbsp;</span>
 										<select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="kt_datatable_search_type" name="vendor">
 											<option value="0"><?= __("All") ?></option>
 											<?php foreach($vendor_list as $vkey=>$vlist){ ?>
@@ -697,7 +697,7 @@ $erp = json_decode($erp_data,1);
 								<?php $billist =""; if($_GET['PAY_YEAR']!=""){ $billist = "&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH']; } ?>
 								<label class="radio nav-item" name="all_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?php if($gtnvk==2){ echo 'active'; } ?>"><?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?> <?php echo "All"; ?></a> </label> 
 								<label class="radio nav-item" name="billale_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-warning waves-effect waves-light <?php if($gtnvk==1){ echo 'active'; } ?>"><?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Billable"; ?></a> </label> 
-								<label class="radio nav-item" name="nonbillable_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-danger waves-effect waves-light <?php if($gtnvk==0){ echo 'active'; } ?>"><?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Non-billable"; ?></a> </label> 
+								<span class="radio nav-item d-inline-block fw-bold" name="nonbillable_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-danger waves-effect waves-light <?php if($gtnvk==0){ echo 'active'; } ?>"><?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Non-billable"; ?></a> </span> 
 							</div>
 						</div>
 					</div>
