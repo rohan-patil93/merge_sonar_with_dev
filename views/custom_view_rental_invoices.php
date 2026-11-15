@@ -496,7 +496,7 @@ function emptyCheck($valu){
 			            </table>
 			            <div style="margin-top: 10px;vertical-align: top;">
 			            	<span style="font-size: 12px; color: #333333;font-weight: 600;"><?= __('Invoice total in words'); ?></span>
-				            <p style="font-size: 12px; color: #333333; margin-top: 10px;white-space:initial;"><?php echo numberToWordFormate(round($transaction['total_amount']));?> </p>
+				            <p style="font-size: 12px; color: #333333; margin-top: 10px;white-space:initial;"><?php numberToWordFormate(round($transaction['total_amount']));?> </p>
 				        </div>
 			        </td>
 			    </tr>
