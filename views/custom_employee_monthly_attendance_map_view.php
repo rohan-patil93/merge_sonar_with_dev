@@ -17,7 +17,7 @@ $employees = $result['table'] ?? array();
                 <!-- Employee -->
                 <div class="form-group col-md-4">
                     <label><?= __('Employee') ?> <span style="color:red;">*</span></label>
-                    <select class="form-select js-example-basic-single" id="employee_id">
+                    <select aria-label="<?= htmlspecialchars(__('Employee id'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="employee_id">
                         <option value="0"><?= __('Select Employee') ?></option>
                         <?php foreach ($employees as $row): ?>
                             <option value="<?= $row['id']; ?>">
@@ -30,7 +30,7 @@ $employees = $result['table'] ?? array();
                 <!-- Month -->
                 <div class="form-group col-md-3">
                     <label><?= __('Month') ?> <span style="color:red;">*</span></label>
-                    <input type="month" class="form-control" id="report_month">
+                    <input aria-label="<?= htmlspecialchars(__('Report month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" id="report_month">
                 </div>
 
                 <!-- Search -->
