@@ -13,13 +13,10 @@ curl_setopt_array($curl, array(
 ));
 
 $response = curl_exec($curl);
-//echo $response;
 
 $datas = json_decode($response,1);
 $post['chcek']='chcek';
 $post['data']=$response;
-//echo json_encode($post);
-//echo "<pre>"; print_r($datas); echo "</pre>"; exit;
 
 
 if(count((array)$datas)>0){
@@ -38,9 +35,7 @@ if(count((array)$datas)>0){
   ));
 
   $res = curl_exec($curl);
-  //echo $res;
   $lodids = json_decode($res,1);
-  //print_r($lodids); exit;
 
   if(count((array)$lodids['resids'])){
       $curl = curl_init();
