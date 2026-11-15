@@ -553,7 +553,7 @@ $due_date_period_list = $result['period_list'];
                                   <div
                                     class="progress-bar progress-bar-<?php echo round($percentage) >= 50 ? "success" : "danger"; ?>"
                                     role="progressbar" style="width:  <?php echo round($percentage); ?>%;"
-                                    aria-valuenow=" 55" aria-valuemin="0" aria-valuemax="100"></div>
+                                    aria-valuenow="<?php echo round($percentage); ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                               </div>
                             </div>
