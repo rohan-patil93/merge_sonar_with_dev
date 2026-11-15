@@ -20,14 +20,14 @@ $api_code = $_REQUEST['api_code'];
   $api_request_parameters = json_decode($master_data['api_request_parameters'], 1);
   $request =$request1 = array();
   foreach($api_request_parameters as $api_request){ //get paramiter In Database To replace with Post Values
-      if(isset($_FILES['card_image']) AND $api_request == "card_image"){
+      if(isset($_FILES['card_image']) and $api_request == "card_image"){
         $fileTmpPath = $_FILES['card_image']['tmp_name'];
         if(file_exists($fileTmpPath)) {
             $fileContent = file_get_contents($fileTmpPath);
             $base64Encoded = base64_encode($fileContent);
             $request1[$api_request] = $base64Encoded;
         }
-      }elseif($api_request == "card_image" AND $api_code == "FACEMATCH"){
+      }elseif($api_request == "card_image" and $api_code == "FACEMATCH"){
           $userdataapi = API."?mode=singlerowtabledata&fid=id&rid=".$_POST['user_id']."&table=application_users";
           $userdatacallapi = callAPI($userdataapi);
           $user_detail = json_decode($userdatacallapi,1);
@@ -40,7 +40,7 @@ $api_code = $_REQUEST['api_code'];
             $request1[$api_request] ="";
           }
 
-      }elseif(isset($_FILES['user_image']) AND $api_request == "user_image"){
+      }elseif(isset($_FILES['user_image']) and $api_request == "user_image"){
         $fileTmpPath = $_FILES['user_image']['tmp_name'];
         if(file_exists($fileTmpPath)) {
             $fileContent = file_get_contents($fileTmpPath);
