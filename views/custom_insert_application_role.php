@@ -42,7 +42,7 @@ $module_setup = $result['module_setup'];
   	<div class="row mb-3">
   		<div class="col-lg-4">
   			<label class="form-label"><?= __('Module') ?></label>
-  			<select class="form-select js-example-basic-single" id="module_id" onchange="changeModule(this.value)" >
+  			<select aria-label="<?= htmlspecialchars(__('Module id'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="module_id" onchange="changeModule(this.value)" >
   				<option value="0">Select Any One Module</option>
 				<?php foreach($module_setup as $module_setups){ ?>
 					<option value="<?php echo $module_setups['module_id']; ?>" ><?php echo htmlspecialchars(__($module_setups['display_name'] ?? '')); ?></option>
@@ -69,7 +69,7 @@ $module_setup = $result['module_setup'];
             <div class="card card-custom cursor-pointer card-stretch" onclick="addrolemodal()">
               <div class="card-header">
                 <div class="card-title">
-                  <img style="width: 100%;" src="assets/images/role_edite.png">
+                  <img alt="" style="width: 100%;" src="assets/images/role_edite.png">
                 </div>
               </div>
               <div class="card-body" style="min-height: 106px;">
