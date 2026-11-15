@@ -30,7 +30,7 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
     <h5><?php echo __('Visit'); ?></h5>
     <div class="card-header-right">
         <div class="input-group input-group-button"> 
-            <input type="month" name="from_date" id="att_month_year" class="form-control form-control-sm width1" value="<?php echo $year_month; ?>">  
+            <input aria-label="<?= htmlspecialchars(__('From date'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="from_date" id="att_month_year" class="form-control form-control-sm width1" value="<?php echo $year_month; ?>">  
         </div>
     </div>
 </div>
