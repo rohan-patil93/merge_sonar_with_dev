@@ -38,7 +38,7 @@ function menudisplaytop($menuarray, $type)
                 //document.getElementById("myForm").submit();
                 swal.fire({
                     title: msg,
-                    //text: "Do you want to close ? ",              
+                    //text: "Do you want to close ? ",
                     type: "success",
                     buttonsStyling: false,
                     confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
@@ -173,7 +173,7 @@ function menudisplaytop($menuarray, $type)
                                 </div>
                                 <?php } ?>
                                 <div class="col-lg-6 float-left text-center">
-                                    <span class="switch switch-outline switch-icon switch-success"> 
+                                    <span class="switch switch-outline switch-icon switch-success">
                                     <label class="col-form-label m-r-10">
                                                     <span>Transport </span><br />
                                                     <input type="checkbox" class="js-primary-sm" onclick="checkemptransportrequest(<?php echo $_SESSION['emp_id'] . "," . $emptransport['id']; ?>)" value="<?php echo $emptransport['id']; ?>"  name="" <?php if ($emptransport['id'] != "") { ?> checked <?php } ?> >
@@ -252,7 +252,7 @@ function menudisplaytop($menuarray, $type)
                                     <span class="pcoded-micon"><i class="feather icon-home"></i></span>
                                     <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
                                 </a>
-                            
+
                             <?php if (count($nav['child']) > 0) {
                                 echo menudisplaytop($nav['child'], 'left');
                             } ?>

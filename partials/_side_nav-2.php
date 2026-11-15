@@ -1,4 +1,4 @@
-<?php 
+<?php
 function menudisplaytop($menuarray,$type){
     $str = '<ul class="pcoded-submenu">';
     foreach ($menuarray as $menuarrayvalue) {
@@ -9,7 +9,7 @@ function menudisplaytop($menuarray,$type){
         $icon = "";
         $str .= '<li class="'.$drop.'" >
                 <a href="'.$link.'" class="waves-effect waves-dark"> &nbsp;<i class="'.$icon.'"><span></span></i><span class="pcoded-mtext">'.$menuarrayvalue['Label'].'</span>';
-        
+
         $str.='</a>';
         if(count($menuarrayvalue['child'])>0){
             $str.=menudisplaytop($menuarrayvalue['child'],'right');
@@ -35,22 +35,22 @@ function menudisplaytop($menuarray,$type){
                 //alert(response);
                 //$('.success').html(response);
                 //document.getElementById("myForm").submit();
-                swal.fire({              
-                    title: msg,              
-                            //text: "Do you want to close ? ",              
-                            type: "success",           
+                swal.fire({
+                    title: msg,
+                            //text: "Do you want to close ? ",
+                            type: "success",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",    
-                            confirmButtonClass: "btn btn-danger", 
-                            showCancelButton: false,     
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",      
-                            cancelButtonClass: "btn btn-default"        
+                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+                            confirmButtonClass: "btn btn-danger",
+                            showCancelButton: false,
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                            cancelButtonClass: "btn btn-default"
                         }).then(function(result) {
                             if (result.value) {
                                 $('#kt_modal_KTDatatable_remote').modal('hide');
                                 window.location.reload();
                             }
-                        }); 
+                        });
                     }
                 });
     }
@@ -152,9 +152,9 @@ function menudisplaytop($menuarray,$type){
                                             </div>
                                             <?php } ?>
                                             <div class="col-lg-6 float-left text-center">
-                                                <span class="switch switch-outline switch-icon switch-success"> 
+                                                <span class="switch switch-outline switch-icon switch-success">
                                                 <label class="col-form-label m-r-10">
-                                                    <span>Transport </span><br />       
+                                                    <span>Transport </span><br />
                                                     <input type="checkbox" class="js-primary-sm" onclick="checkemptransportrequest(<?php echo $_SESSION['emp_id'].",".$emptransport['id']; ?>)" value="<?php echo $emptransport['id']; ?>"  name="" <?php if($emptransport['id']!=""){ ?> checked <?php } ?> >
                                                 </label>
                                                 </span>
@@ -178,8 +178,8 @@ function menudisplaytop($menuarray,$type){
                 <?php } } ?>
                 <?php  if (count($topnav) >0 && in_array('TN', $_SESSION['role_nav'])){ foreach($topnav as $nav){    $child = count($nav['child']);
                         $link = $child >0 ?  'javascript:;' : 'index.php?option='.$nav['Page_Name'];
-                        $drop =  $child >0 ?  'pcoded-hasmenu ' : ''; 
-			$nav['Menu_Icon'] = $nav['Menu_Icon']!='' ? $nav['Menu_Icon'] : "icon-control-play";                                     
+                        $drop =  $child >0 ?  'pcoded-hasmenu ' : '';
+			$nav['Menu_Icon'] = $nav['Menu_Icon']!='' ? $nav['Menu_Icon'] : "icon-control-play";
                 ?>
                         <ul class="pcoded-item pcoded-left-item custom-menu-nav">
                             <li class="<?php echo  $drop; ?>">
@@ -189,14 +189,14 @@ function menudisplaytop($menuarray,$type){
                             <span class="svg-icon menu-icon">
                                 <?php echo $nav['Menu_Icon']; ?>
                             </span>
-                        <?php }else{ ?>                                 
-                            <i class="<?php echo $nav['Menu_Icon']; ?>"></i> 
+                        <?php }else{ ?>
+                            <i class="<?php echo $nav['Menu_Icon']; ?>"></i>
                         <?php } ?>
                         <!-- <i class="feather icon-sidebar"></i> -->
 				    </span>
                                     <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
                                 </a>
-                            
+
                             <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');  } ?>
                             </li>
                         </ul>
@@ -206,7 +206,7 @@ function menudisplaytop($menuarray,$type){
                         $child = count($nav['child']);
                     $listnav_pagename = $nav['Page_Name'];
                     if($_SESSION['userid']==50 && $listnav['Page_Name']=='COM_BULK_PROJECT_TIMESHEET'){ $listnav_pagename  = "COM_BULK_HR_PROJECT_TIMESHEET"; }
-                    if($_SESSION['userid']==100 && $listnav['Page_Name']=='COM_BULK_PROJECT_TIMESHEET' ){ $listnav_pagename  = "COM_BULK_FINANCE_PROJECT_TIMESHEET"; }                  
+                    if($_SESSION['userid']==100 && $listnav['Page_Name']=='COM_BULK_PROJECT_TIMESHEET' ){ $listnav_pagename  = "COM_BULK_FINANCE_PROJECT_TIMESHEET"; }
                     $link = $child >0 ?  'javascript:;' : 'index.php?option='.$listnav_pagename;
                     $drop =  $child >0 ?  'menu-toggle' : '';
                 ?>
@@ -216,18 +216,18 @@ function menudisplaytop($menuarray,$type){
                                     <span class="pcoded-micon"><i class="feather icon-home"></i></span>
                                     <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
                                 </a>
-                            
+
                             <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');  } ?>
                             </li>
                         </ul> -->
 
 
-                        
+
 
                 <?php } } ?>
 
 
-                
+
 
     </div>
 </div>

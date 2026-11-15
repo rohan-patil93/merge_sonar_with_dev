@@ -39,16 +39,16 @@
                 //alert(response);
                 //$('.success').html(response);
                 //document.getElementById("myForm").submit();
-                /*swal.fire({              
-                    title: msg,              
-                            //text: "Do you want to close ? ",              
-                            type: "success",           
+                /*swal.fire({
+                    title: msg,
+                            //text: "Do you want to close ? ",
+                            type: "success",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",    
-                            confirmButtonClass: "btn btn-danger", 
-                            showCancelButton: false,     
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",      
-                            cancelButtonClass: "btn btn-default"        
+                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+                            confirmButtonClass: "btn btn-danger",
+                            showCancelButton: false,
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                            cancelButtonClass: "btn btn-default"
                         }).then(function(result) {
                             if (result.value){
                                 $('#kt_modal_KTDatatable_remote').modal('hide');
@@ -192,11 +192,11 @@
                 if(page_type == 'NT'){
                     $('#popupm').html(data);
                     $('#kt_modal_KTDatatable_remotem').modal("show");
-                }else{  
+                }else{
                     $('#dynamic_popup1').html(data);
                     $('#kt_modal_dynamic_popup').modal("show");
                 }
-                
+
                 $(".js-example-basic-single").select2();
             },
             error:function (){}
@@ -270,7 +270,7 @@
             pausedTimedash = Date.now();
             console.log(pausedTimedash);
             //document.getElementById('pauseButton').textContent = 'Resume';
-            
+
             $('#dislogclose').hide();
             sessionstartandinsertimelog('pause',startTimedash,pausedTimedash);
         }
@@ -278,7 +278,7 @@
     //rohan Commented?
     //document.getElementById('startButtondash').addEventListener('click', startTimerdash);
     //document.getElementById('pauseButtondash').addEventListener('click', pauseTimerdash);
-   
+
 
     function sessionstartandinsertimelog(type,starttime,endtime){
         var task_id = $('#task_id_dash').val();
@@ -299,24 +299,24 @@
         var work_module_setup_id = $("#work_module_setup_id").val();
         var selectmodule = '';
         var selectrole = '';
-        
+
         if(module_id !=""){
             selectmodule = module_id;
         }else{
-            selectmodule = work_module_setup_id; 
+            selectmodule = work_module_setup_id;
         }
         if(role_short_code !=""){
             selectrole = role_short_code;
         }else{
-            selectrole = working_role_short_code; 
+            selectrole = working_role_short_code;
         }
         window.location.href = "index.php?option=COM_CHANGE_MODULE_GROUPS&Rid="+selectmodule+"&working_role_short_code="+selectrole;
-        // $href = "index.php?option=COM_CHANGE_MODULE_GROUPS&Rid=".base64_encode($module_list['module_id']);               
+        // $href = "index.php?option=COM_CHANGE_MODULE_GROUPS&Rid=".base64_encode($module_list['module_id']);
     }
 
 
 </script>
-<?php //echo "<pre>Goodddd";print_r($_SESSION['application_menu_TNC']); echo "</pre>"; 
+<?php //echo "<pre>Goodddd";print_r($_SESSION['application_menu_TNC']); echo "</pre>";
     if($timeprint == '1' AND $maxtimeshow >= '18'){ echo "Start Header after script  - ".date('m/d/Y h:i:s a')."</br>"; }
 ?>
 
@@ -353,7 +353,7 @@
                         </div>
 
                         <span id="timerdash" class="m-l-5"><?php echo convertSecondsToHMS($ptl['work_time']); ?></span>
-                    
+
                     <input type="hidden" name="oldtimedash" id="oldtimedash" value="<?php echo $ptl['work_time']*1000;  ?>">
                     <input type="hidden" name="currenttimelogdash" id="currenttimelogdash" value="<?php echo  $ptl['task_start'];  ?>">
                     <input type="hidden" name="task_id_dash" id="task_id_dash" value="<?php echo  $ptl['task_id'];  ?>">
@@ -361,22 +361,22 @@
                 </div>
             </li>
         <?php } ?>
-<?php if($_SESSION['user_activated'] == 'Y'){ ?>                
+<?php if($_SESSION['user_activated'] == 'Y'){ ?>
          <?php  ?>
                 <li class="header-notification m-r-20">
-                 <?php //if(in_array($_SESSION['config']['application_module'],$menu_check_array)){ 
+                 <?php //if(in_array($_SESSION['config']['application_module'],$menu_check_array)){
                      if(in_array($_SESSION['work_module_setup_id'], array(MODUL_HR,MODUL_ATTENDANCE))  && (/*$_SESSION['emp_pay_area']['attendance_by'] == 1*/ $_SESSION['user_clock_status'] == 'Y' || $_SESSION['admin_type'] ==1 )&& (in_array(EMPLOYEE_ROLE,(array)$_SESSION['role_ids'])) ){     ?>
                     <div class="my-lg-0 my-3">
-                        <?php 
+                        <?php
                         $check_in_display = $clock_data['clock_in'] !="" ? $clock_data['clock_in'] : "00:00:00" ;
                         $check_out_display = $clock_data['clock_out'] !="" ? $clock_data['clock_out'] : "00:00:00" ;
                         if($clock_data['clock_out'] !='' || count((array)$clock_data) == 0){
 
                             ?>
                             <button type="button" onclick="checkinattendence('You have clocked in')"  class="btn btn-primary font-weight-bold btn-pill btn-round" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in  &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;<?php echo $check_out_display; ?> </div> </div> "> <i class="ti-alarm-clock"></i> <?php echo __('Check-in'); ?> &nbsp; </button>
-                        <?php }else{?> 
+                        <?php }else{?>
                             <button type="button" onclick="checkinattendence('You have clocked out')" class="btn btn-success font-weight-bold btn-pill btn-round" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in  &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;00:00:00  </div> </div> "> <i class="ti-alarm-clock"></i> <?php echo __('Check-Out'); ?> &nbsp; </button>
-                        <?php } ?> 
+                        <?php } ?>
                     </div>
                     <?php } ?>
                 </li>
@@ -391,7 +391,7 @@
                 </li>
             <?php } ?>
 
-             <?php /**if( in_array($_SESSION['work_module_setup_id'], array(MODUL_HR,MODUL_PAYROLL,MODUL_ATTENDANCE)) && ($_SESSION['admin_type'] == '1' || $_SESSION['pay_admin_emp'] > 0)){ ?>   
+             <?php /**if( in_array($_SESSION['work_module_setup_id'], array(MODUL_HR,MODUL_PAYROLL,MODUL_ATTENDANCE)) && ($_SESSION['admin_type'] == '1' || $_SESSION['pay_admin_emp'] > 0)){ ?>
                 <li class="header-notification m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Work Attendance">
                     <div class="dropdown-primary" role="button" tabindex="0" aria-label="Work Attendance" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_WORK_ATTENDANCES';">
                         <div class="" data-bs-toggle="dropdown" >
@@ -406,7 +406,7 @@
                     $vkv = "COM_VIEW_DOCUMENT_DASH_BOARD";
                 }
 
-        ?>   
+        ?>
                 <li class="header-notification m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Document Dashboard">
                     <div class="dropdown-primary" role="button" tabindex="0" aria-label="Document Dashboard" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=<?php echo $vkv; ?>';">
                         <div class="" data-bs-toggle="dropdown" >
@@ -451,9 +451,9 @@
                 </div>
             </div>
         </li> -->
-        
-        
-        
+
+
+
         <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Settings">
             <div class="dropdown-primary" role="button" tabindex="0" aria-label="Settings" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_APPLICATION_MENU_SETTINGS';">
                 <div class="" data-bs-toggle="dropdown">
@@ -467,7 +467,7 @@
             <div class="dropdown-primary" role="button" tabindex="0" aria-label="Reports" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_MY_REPORTS';">
                 <div class="" data-bs-toggle="dropdown">
                     <!-- <i class="ti-stats-up" ></i> -->
-                    <i class="ti-pie-chart" ></i> 
+                    <i class="ti-pie-chart" ></i>
                 </div>
             </div>
         </li>
@@ -479,7 +479,7 @@
                     <span class="badge bg-c-green customcount"><?php echo $inboxcount['index_cnt']; ?></span>
                 </div>
             </div>
-        </li> 
+        </li>
         <?php **/?>
          <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Announcements'); ?>">
             <div class="dropdown-primary" role="button" tabindex="0" aria-label="Announcements" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_VIEW_ANNOUNCEMENTS';">
@@ -487,7 +487,7 @@
                     <i class="ti-announcement"></i>
                 </div>
             </div>
-        </li> 
+        </li>
 
 
     <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Notifications'); ?>" onclick="getNotificationList()">
@@ -505,7 +505,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                 <?php if($_SESSION['admin_type'] !='1'){ ?>
                     <a class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('NT')"><?php echo __('New Ticket'); ?></a>
-               
+
                 <a class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('LT')"><?php echo __('My Tickets'); ?></a>
                 <?php  } ?>
                 <?php if($_SESSION['admin_type'] =='1'){ ?>
@@ -542,7 +542,7 @@
                     <div class="dropdown-primary dropdown">
                         <div class="dropdown-toggle" data-bs-toggle="dropdown">
 
-                          <?php 
+                          <?php
                           $dis_name = $_SESSION['user']['display_name']!=""?$_SESSION['user']['display_name']:$_SESSION['display_name'];
                         if($_SESSION['user']['user_photo']!=""){ ?>
                            <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="img-radius img-50 align-top m-r-15  mt-3" alt="User profile" >
@@ -552,7 +552,7 @@
                           <span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  mt-1"><?php echo initials($dis_name); ?></span>
                       <?php } ?>
 
-                      <span><?php 
+                      <span><?php
                       echo ucwords(__($dis_name)); ?>
 
                   </span>
@@ -575,10 +575,10 @@
                     </li>
                 <?php } ?>
                 <li>
-                    <?php  
+                    <?php
                         if($user['user_type'] ==3){
                             $profileurl = "index.php?option=COM_INSERT_VENDORS";
-                        }elseif($user['user_type'] ==4){ 
+                        }elseif($user['user_type'] ==4){
                             $profileurl = "index.php?option=COM_INSERT_CANDIDATES";
                         }else{
                             $profileurl = "index.php?option=COM_VIEW_PROFILE_APPLICATION_USERS";
@@ -589,24 +589,24 @@
 
                     </a>
                 </li>
-               <!--  <li>    
-                    <a href="?option=COM_LIST_NOT_EMPLOYEE&tab=cp"> 
-                        <i class="ti-key"></i> Change Password  
-                    </a>    
+               <!--  <li>
+                    <a href="?option=COM_LIST_NOT_EMPLOYEE&tab=cp">
+                        <i class="ti-key"></i> Change Password
+                    </a>
                 </li> -->
                 <li>
                     <a href="index.php?option=COM_LIST_INBOX">
                         <i class="ti-email"></i> <?php echo __('My Messages'); ?>
 
                     </a>
-                </li> 
+                </li>
                 <?php if(in_array(SUPERADMIN_ROLE,(array)$_SESSION['role_ids']) || in_array(ADMIN_ROLE,(array)$_SESSION['role_ids'])){ ?>
                     <li>
                         <a href="index.php?option=COM_INSERT_CONFIG&Rid=YVdRNk1RPT0=">
                             <i class="ti-settings"></i> <?php echo __('Config'); ?>
 
                         </a>
-                    </li> 
+                    </li>
                 <?php } ?>
                 <li onclick="location.href='index.php?option=com_logout';">
                     <a href="#!" class="text-danger">
@@ -623,12 +623,12 @@
                 <!-- <i class="ti-view-grid"></i> -->
                 <img src="assets/images/favicon.ico" class="img-30" alt="" >
             </div>
-            <div class="show-notification notification-view dropdown-menu pt-0 pb-0" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" 
+            <div class="show-notification notification-view dropdown-menu pt-0 pb-0" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
                 style="">
                 <div class="row m-0" style="background: url('assets/images/bg-6.jpg');">
-                    <?php 
+                    <?php
                     $showswitch = 0; //1
-                    /*foreach($_SESSION['module_setp'] as $module_list12){ 
+                    /*foreach($_SESSION['module_setp'] as $module_list12){
                         if(in_array($module_list12['role_admin_short_code'],(array)$_SESSION['role_ids']) AND $_SESSION['work_module_setup_id'] == $module_list12['module_id']){
                             $showswitch = 0;
                         }
@@ -638,7 +638,7 @@
                     <div class="<?php echo (in_array(ADMIN_ROLES,(array)$_SESSION['role_ids']) OR $showswitch == '0')?"col-lg-6 col-md-6 col-sm-6 col-6 text-left":"col-lg-12 text-center"; ?>" >
                         <h4 class="mb-0 text-white p-3"><?php echo __('Modules'); ?></h4>
                     </div>
-                    <?php 
+                    <?php
                     if(in_array(ADMIN_ROLES,(array)$_SESSION['role_ids']) OR $showswitch == '0'){
                    // if(in_array(ADMIN_ROLES,(array)$_SESSION['role_ids'])){ ?>
                     <!-- <div class="col-lg-3 text-white">Employee</div> -->
@@ -659,13 +659,13 @@
                         <?php } ?>
                         </select>
                     </div>
-                    
+
                 <?php } ?>
                 </div>
                 <div class="row text-center custom-notification m-0 module-width <?php //echo count((array)$_SESSION['module_setp']) >=8?"custom-scroll":""; ?>" <?php //echo //count((array)$_SESSION['module_setp']) >=8?'style="height: 610px;"':''; ?>>
-                    <?php  
+                    <?php
                     //echo "<pre>"; print_r($_SESSION['module_setp']);  echo "</pre>";
-                    foreach($_SESSION['module_setp'] as $module_list11){ 
+                    foreach($_SESSION['module_setp'] as $module_list11){
                         if($module_list11['linking'] == 1){
                             if(!isset($_SESSION['application_user_module_roles'][$module_list11['module_id']]) AND !in_array(ADMIN_ROLES,(array)$_SESSION['role_ids'])){
                                 $notaccesmodule[] = $module_list11;
@@ -680,17 +680,17 @@
                     }
                     //echo "dfdfbv";
                     //echo "<pre>"; print_r($accesmodule); echo "</pre>";
-                    foreach($modulelists as $module_list){ 
+                    foreach($modulelists as $module_list){
                     if($module_list['linking'] == 1){
                         $style =  "";
                         $modultitle = "";
                         $pointrernone="";
                         $modulerolename = "";
                         if($_SESSION['admin_type'] == '1'){
-                            $modulerolename = $_SESSION['modulewithroledetails'][$module_list['module_id']][0]['role_short_code'] !=""?$_SESSION['modulewithroledetails'][$module_list['module_id']][0]['role_short_code']:$_SESSION['module_setp'][$module_list['module_id']]['role_admin_short_code']; 
+                            $modulerolename = $_SESSION['modulewithroledetails'][$module_list['module_id']][0]['role_short_code'] !=""?$_SESSION['modulewithroledetails'][$module_list['module_id']][0]['role_short_code']:$_SESSION['module_setp'][$module_list['module_id']]['role_admin_short_code'];
                         }else{
                             $modulerolename = $_SESSION['modulewithroledetails'][$module_list['module_id']][0]['role_short_code'];
-                        
+
                         }
                         $modulfunction = "chnageModuleWithRole('".base64_encode($module_list['module_id'])."','".$modulerolename."')";
                         $icon = "";
@@ -702,17 +702,17 @@
                             $style = "background-color: #cccc;'";
                             $href = "#";
                             $modultitle ='data-bs-toggle="tooltip" data-placement="bottom" title="'.__('This Module Is Not Activated').'"';
-                           // $pointrernone = "style='pointer-events: none'"; 
+                           // $pointrernone = "style='pointer-events: none'";
                             $modulfunction = "";
                         }
                             if($_SESSION['work_module_setup_id'] == $module_list['module_id']){
                                  $icon = '<i class="fa fa-check-circle text-warning f-20"></i>';
                                  $style .= "box-shadow: 0px 0px 10px grey;";
-                            } 
+                            }
                             ?>
                         <div class="col-lg-3 p-1 border" style="<?php echo $style;?> " <?php echo $modultitle; ?>  role="button" tabindex="0" <?php echo $modulfunction == "" ? 'aria-disabled="true"' : ''; ?> onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="<?php echo $modulfunction;?>">
                             <?php echo $icon; ?>
-                            <img src="uploads/all/<?php echo $module_list['module_logo']; ?>" class="img-40" alt="" > 
+                            <img src="uploads/all/<?php echo $module_list['module_logo']; ?>" class="img-40" alt="" >
                             <h5 class=" f-12"><?php echo __($module_list['module_name']); ?></h5>
                         </div>
                     <?php } } ?>
@@ -723,20 +723,20 @@
         </div>
     </li>
     <?php } ?>
-    <input type="hidden" id="work_module_setup_id" value="<?php echo base64_encode($_SESSION['work_module_setup_id']); ?>"> 
+    <input type="hidden" id="work_module_setup_id" value="<?php echo base64_encode($_SESSION['work_module_setup_id']); ?>">
 </ul>
-<?php //echo "<pre>Goodddd";print_r($_SESSION['application_menu_TNC']); echo "</pre>"; 
+<?php //echo "<pre>Goodddd";print_r($_SESSION['application_menu_TNC']); echo "</pre>";
     if($timeprint == '1' AND $maxtimeshow >= '18'){ echo "After Header Menu  - ".date('m/d/Y h:i:s a')."</br>"; }
 ?>
-<?php 
+<?php
 //echo "<pre>Goodddd";print_r($_SESSION['role_nav']); print_r($topnavcenter); echo "</pre>";
 
-if($_SESSION['user_activated'] == 'Y'){ ?>     
+if($_SESSION['user_activated'] == 'Y'){ ?>
 <!------ Add allin one menu  End--->
 <ul class="<!--nav-left--> nav-left">
          <?php if($user['user_type'] !=4 AND $user['user_type'] !=3 AND $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_logo'] !=""){ ?>
     <li class="nav-item has-megamenu">
-    <a class="nav-link  text-primary f-w-600" href="index.php" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_name'];?> Home"> 
+    <a class="nav-link  text-primary f-w-600" href="index.php" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_name'];?> Home">
        <!-- <i class="ti-home btn waves-effect waves-light btn-success btn-icon"></i>  -->
        <img src="uploads/all/<?php echo $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_logo'];?>" class="img-40" alt="" >
 
@@ -744,24 +744,24 @@ if($_SESSION['user_activated'] == 'Y'){ ?>
     </li>
 <?php } ?>
 
-<?php 
+<?php
 if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav'])){  //echo "<pre>"; print_r($topnavcenter); echo "</pre>";
     foreach ($topnavcenter as  $listnav) {?>
         <li class="nav-item dropdown has-megamenu">
-            <a class="nav-link dropdown-toggle text-primary" href="#" data-bs-toggle="dropdown"> 
-                <?php ///echo $listnav['Label']."q".$listnav['id']; ?> 
+            <a class="nav-link dropdown-toggle text-primary" href="#" data-bs-toggle="dropdown">
+                <?php ///echo $listnav['Label']."q".$listnav['id']; ?>
                 <?php if(strpos($listnav['Menu_Icon'], "svg")){ ?>
                     <span class="svg-icon menu-icon f-12">
                         <?php echo $listnav['Menu_Icon']; ?>
                     </span>
             <?php echo ucwords(__($listnav['Label'])); ?>
-                <?php }else{ ?>                                 
-                    <i class="<?php echo $listnav['Menu_Icon']; ?> btn waves-effect waves-light btn-success btn-icon f-12"></i> 
+                <?php }else{ ?>
+                    <i class="<?php echo $listnav['Menu_Icon']; ?> btn waves-effect waves-light btn-success btn-icon f-12"></i>
                     <span style="font-size:14px;"> <?php echo ucwords(__($listnav['Label'])); ?> </span>
                 <?php } ?>
             </a>
             <?php
-            $cntrow = count((array)$listnav['child']); 
+            $cntrow = count((array)$listnav['child']);
             if($cntrow >= 6){
                 $cntrow = 6;
                 $collg = 12/6;
@@ -788,12 +788,12 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
             <div class="dropdown-menu megamenu" role="menu" style="left: 15px; width: <?php echo $menuwidth;  ?>% !important;">
                 <div class="row g-3" style = "margin-bottom: calc(var(--bs-gutter-y) * -1);">
                     <?php if($menucheck==1){ ?>
-                     
-                    
 
-<?php foreach ($listnav['child'] as  $chieldlist) {  //echo  "<pre>";print_r($chieldlist); echo "</pre>";?> 
+
+
+<?php foreach ($listnav['child'] as  $chieldlist) {  //echo  "<pre>";print_r($chieldlist); echo "</pre>";?>
   <div class="col-lg-<?php echo $collgw; ?> float-left" style=" width: <?php echo  $collgwidth; ?>%">
-    <?php foreach ($chieldlist as  $list) { ?>    
+    <?php foreach ($chieldlist as  $list) { ?>
             <div class="col-megamenu">
                 <ul class="list-unstyled">
                     <h6 class="title"><?php echo ucwords(__($list['Label'])); ?></h6>
@@ -829,15 +829,15 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
   <?php } } ?>
     <?php  if (count((array)$toplistnav) >0 && in_array('TNL', (array)$_SESSION['role_nav'])){ foreach ($toplistnav as  $listnav) {?>
         <li class="nav-item dropdown has-megamenu">
-            <a class="nav-link dropdown-toggle text-primary" href="#" data-bs-toggle="dropdown"> 
-                <?php ///echo $listnav['Label']."q".$listnav['id']; ?> 
+            <a class="nav-link dropdown-toggle text-primary" href="#" data-bs-toggle="dropdown">
+                <?php ///echo $listnav['Label']."q".$listnav['id']; ?>
                 <?php if(strpos($listnav['Menu_Icon'], "svg")){ ?>
                     <span class="svg-icon menu-icon f-12">
                         <?php echo $listnav['Menu_Icon']; ?>
                     </span>
             <?php echo ucwords(__($listnav['Label'])); ?>
-                <?php }else{ ?>                                 
-                    <i class="<?php echo $listnav['Menu_Icon']; ?> btn waves-effect waves-light btn-success btn-icon f-12"></i> 
+                <?php }else{ ?>
+                    <i class="<?php echo $listnav['Menu_Icon']; ?> btn waves-effect waves-light btn-success btn-icon f-12"></i>
                     <span style="font-size:14px;letter-spacing: 1px;"> <?php echo ucwords(__($listnav['Label'])); ?> </span>
                 <?php } ?>
             </a>
@@ -880,13 +880,13 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                               </ul>
                           </div> <!-- col-megamenu.// -->
                       </div><!-- end col-3 -->
-                    <?php } ?>                       
+                    <?php } ?>
               </div><!-- end row -->
           </div> <!-- dropdown-mega-menu.// -->
       </li>
   <?php } } ?>
 
-<?php 
+<?php
         $ttimesheet ="";
         if(in_array('19',(array)$_SESSION['module_list'])){
         if(in_array('4',(array)$_SESSION['role_ids'])){
@@ -900,22 +900,22 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
 ?>
 <?php if($ttimesheet !=""){ ?>
     <li class="nav-item has-megamenu">
-            <a href="index.php?option=<?php echo $ttimesheet; ?>" class="nav-link  text-white f-w-600   btn btn-primary btn-shadow-hover font-weight-bold  " style="border-radius: 25px;margin-top:12px;padding: 5px 10px;"> 
-        <span style="font-size:14px;"> Bulk Timesheet Approval </span> 
+            <a href="index.php?option=<?php echo $ttimesheet; ?>" class="nav-link  text-white f-w-600   btn btn-primary btn-shadow-hover font-weight-bold  " style="border-radius: 25px;margin-top:12px;padding: 5px 10px;">
+        <span style="font-size:14px;"> Bulk Timesheet Approval </span>
     </a>
        </li>
 <?php } ?>
 <?php if(ESOP_ADMIN_ROLE == $_SESSION['working_role_short_code']){ ?>
     <li class="nav-item has-megamenu">
-            <a href="index.php?option=COM_VIEW_ESOP_ALLOCATIONS" class="nav-link  text-white f-w-600   btn btn-primary btn-shadow-hover font-weight-bold  " style="border-radius: 25px;margin-top:12px;padding: 6px 35px;"> 
-        <span style="font-size:14px;"> ESOP Overview </span> 
+            <a href="index.php?option=COM_VIEW_ESOP_ALLOCATIONS" class="nav-link  text-white f-w-600   btn btn-primary btn-shadow-hover font-weight-bold  " style="border-radius: 25px;margin-top:12px;padding: 6px 35px;">
+        <span style="font-size:14px;"> ESOP Overview </span>
     </a>
        </li>
 <?php } ?>
 
    <!---  <li class="nav-item has-megamenu">
-    <a href="<?php echo $link; ?>" class="nav-link  text-white f-w-600   btn btn-primary btn-shadow-hover font-weight-bold  " style="border-radius: 25px;margin-top:12px;padding: 5px 10px;"> 
-        Bulk Timesheet Approval 
+    <a href="<?php echo $link; ?>" class="nav-link  text-white f-w-600   btn btn-primary btn-shadow-hover font-weight-bold  " style="border-radius: 25px;margin-top:12px;padding: 5px 10px;">
+        Bulk Timesheet Approval
     </a>
     </li>
    <li class="header-search p-custom-search">
@@ -964,9 +964,9 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                         </div>
                     </div>
                 </div>
-                <div class="main-friend-list p-2" id="popnotifiction"> 
-                   
-                  
+                <div class="main-friend-list p-2" id="popnotifiction">
+
+
 </div>
 </div>
 </div>
@@ -975,7 +975,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
 <!-- [ chat user list ] end -->
 
 
-<!-- 
+<!--
 <div id="sidebar" class="users p-chat-user showChat">
     <div class="had-container">
         <div class="p-fixed users-main">
@@ -1046,7 +1046,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
 </div> -->
 <!-- [ chat user list ] end -->
 
-<!-- [ chat message ] start 
+<!-- [ chat message ] start
 <div class="showChat_inner">
     <div class="d-flex chat-inner-header">
         <a class="back_chatBox">
@@ -1102,4 +1102,3 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
 </div>
          [ chat message ] end -->
 
-         

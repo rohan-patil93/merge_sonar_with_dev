@@ -28,7 +28,7 @@ document.addEventListener('error', function (e) {
 <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
 <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
 <link rel="stylesheet" type="text/css" href="assets/css/font-awesome-n.min.css">
- 
+
 
 <?php /** rohan comment all icons not used ?>
 <!-- feather icon -->
@@ -51,7 +51,7 @@ document.addEventListener('error', function (e) {
 
 <!-- Chartlist chart css -->
 <link rel="stylesheet" href="assets/bower_components/chartist/css/chartist.css" type="text/css" media="all">
-<!-- Bootstrap date-time-picker js -->	
+<!-- Bootstrap date-time-picker js -->
 <link rel="stylesheet" type="text/css" href="assets/pages/advance-elements/css/bootstrap-datetimepicker.css">
 <link rel="stylesheet" type="text/css" href="assets/css/date-jquery-ui.css">
 <!-- Date-range picker css  -->
@@ -71,10 +71,10 @@ document.addEventListener('error', function (e) {
 <link rel="stylesheet" type="text/css" href="assets/bower_components/switchery/css/switchery.min.css">
 <!-- Tags js -->
 <link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap-tagsinput/css/bootstrap-tagsinput.css" />
-<!-- Style.css -->	
+<!-- Style.css -->
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 <link rel="stylesheet" type="text/css" href="assets/css/component.css">
-<link rel="stylesheet" type="text/css" href="assets/css/pages.css">	
+<link rel="stylesheet" type="text/css" href="assets/css/pages.css">
 <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
 <link rel="stylesheet" type="text/css" href="assets/css/custom_mobile.css">
 <link rel="stylesheet" href="assets/bower_components/chartist/css/chartist.css" type="text/css" media="all">
@@ -82,7 +82,7 @@ document.addEventListener('error', function (e) {
 <link rel="stylesheet" type="text/css" href="assets/pages/notification/notification.css">
 <?php if($_SESSION['apply_css']['wavecss']==1){ ?>
 <!-- waves.css -->
-<link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">   
+<link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
 <?php } ?>
 <?php if($_SESSION['apply_css']['calendercss']==1){ ?>
 <!-- Calender css -->
@@ -91,7 +91,7 @@ document.addEventListener('error', function (e) {
 <link rel="stylesheet" type="text/css" href="assets/bower_components/owl.carousel/css/owl.carousel.css">
 <?php } ?>
 <?php if($_SESSION['apply_css']['starcss']==1){ // crm dashboard open startcss?>
-<!-- star rating theme css -->    
+<!-- star rating theme css -->
 <link rel="stylesheet" type="text/css" href="assets/bower_components/jquery-bar-rating/css/bars-1to10.css">
 <link rel="stylesheet" type="text/css" href="assets/bower_components/jquery-bar-rating/css/bars-horizontal.css">
 <link rel="stylesheet" type="text/css" href="assets/bower_components/jquery-bar-rating/css/bars-movie.css">
@@ -116,7 +116,7 @@ document.addEventListener('error', function (e) {
 <link rel="stylesheet" type="text/css" href="assets/css/widget.css">
 <?php } ?>
 <!--- <link rel="stylesheet" type="text/css" href="assets/css/widget.css">  -->
-<!-- <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>    
+<!-- <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
 
 
@@ -127,7 +127,7 @@ document.addEventListener('error', function (e) {
     <link rel="stylesheet" type="text/css" href="assets/bower_components/sweetalert/css/sweetalert.css">
   <!-- sweet alert framework -->
 
-<!--  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+<!--  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  -->
  <?php if($_SESSION['apply_css']['kanban']==1){ ?>
 <link rel="stylesheet" type="text/css" href="assets/css/kanban_style.css">
@@ -137,7 +137,7 @@ document.addEventListener('error', function (e) {
 <link rel="stylesheet" type="text/css" href="assets/bower_components/cropper/css/cropper.css">
 <?php } ?>
 <!-- Cropper css -->
-     <?php 
+     <?php
 
         header("X-Frame-Options: DENY");
         header("X-Frame-Options: SAMEORIGIN");
