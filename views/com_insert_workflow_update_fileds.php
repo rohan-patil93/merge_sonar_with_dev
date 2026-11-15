@@ -62,7 +62,7 @@ if($_POST['approval_type'] =='custom_process'){
 		<div class="form-group row">
 			<div class="col-lg-2 mt-4"><?= __('Level') ?> <span class="badge bg-info "><?php echo $i; ?></span></div>
 			<div class="col-lg-3">
-				<label class="form-label"><?= __('Status') ?></label>
+				<span class="form-label d-inline-block fw-bold"><?= __('Status') ?></span>
 				<select class="form-select js-example-basic-single" name="status[]" aria-label="<?= __('Status') ?>">
 				<option value=""><?= __('Select Any One') ?></option>	
 					<?php foreach($statusrow as $statusrows){ ?>
@@ -71,15 +71,15 @@ if($_POST['approval_type'] =='custom_process'){
 				</select>
 			</div>
 			<div class="col-lg-2">
-				<label class="form-label"><?= __('Followup Days') ?></label>
+				<span class="form-label d-inline-block fw-bold"><?= __('Followup Days') ?></span>
 				<input class="form-control"  type="number" name="followup_days[]" value="<?php echo  $updatefields[$mk]['followup_days']; ?>" placeholder="<?= __('Eg.5') ?>" aria-label="<?= __('Eg.5') ?>">
 			</div>
 			<div class="col-lg-2">
-				<label class="form-label"><?= __('Auto Forward Days') ?></label>
+				<span class="form-label d-inline-block fw-bold"><?= __('Auto Forward Days') ?></span>
 				<input class="form-control"  type="number" name="auto_forword_days[]" value="<?php echo  $updatefields[$mk]['auto_forword_days']; ?>" placeholder="<?= __('Eg.2') ?>" aria-label="<?= __('Eg.2') ?>">
 			</div>
 			<div class="col-lg-3">
-				<label class="form-label"><?= __('Work Flow Field') ?></label>
+				<span class="form-label d-inline-block fw-bold"><?= __('Work Flow Field') ?></span>
 				<select class="form-select js-example-basic-single" name="work_flow_field[]" aria-label="<?= __('Work Flow Field') ?>">
 				<option value=""><?= __('Select Any One') ?></option>	
 					<?php  foreach($field_list as $ros){  ?>
@@ -95,7 +95,7 @@ for($i=0;$i <= 1;$i++){
 		<div class="form-group row">
 			<div class="col-lg-2 mt-4"><?= __('Level') ?> <span class="badge bg-info "><?php echo $mk; ?></span></div>
 			<div class="col-lg-3">
-				<label class="form-label"><?= __('Status') ?></label>
+				<span class="form-label d-inline-block fw-bold"><?= __('Status') ?></span>
 				<select class="form-select js-example-basic-single" name="status[]" aria-label="<?= __('Status') ?>">
 				<option value=""><?= __('Select Any One') ?></option>	
 					<?php foreach($statusrow as $statusrows){ ?>
@@ -104,15 +104,15 @@ for($i=0;$i <= 1;$i++){
 				</select>
 			</div>
 			<div class="col-lg-2">
-				<label class="form-label"><?= __('Followup Days') ?></label>
+				<span class="form-label d-inline-block fw-bold"><?= __('Followup Days') ?></span>
 				<input class="form-control"  type="number" name="followup_days[]" value="<?php echo  $updatefields[$i]['followup_days']; ?>" placeholder="<?= __('Eg.5') ?>" aria-label="<?= __('Eg.5') ?>">
 			</div>
 			<div class="col-lg-2">
-				<label class="form-label"><?= __('Auto Forward Days') ?></label>
+				<span class="form-label d-inline-block fw-bold"><?= __('Auto Forward Days') ?></span>
 				<input class="form-control"  type="number" name="auto_forword_days[]" value="<?php echo  $updatefields[$i]['auto_forword_days']; ?>" placeholder="<?= __('Eg.2') ?>" aria-label="<?= __('Eg.2') ?>">
 			</div>
 			<div class="col-lg-3">
-				<label class="form-label"><?= __('Work Flow Field') ?></label>
+				<span class="form-label d-inline-block fw-bold"><?= __('Work Flow Field') ?></span>
 				<select class="form-select js-example-basic-single" name="work_flow_field[]" aria-label="<?= __('Work Flow Field') ?>">
 				<option value=""><?= __('Select Any One') ?></option>	
 					<?php  foreach($field_list as $ros){  ?>
@@ -173,7 +173,7 @@ for($i=0;$i <= 1;$i++){
 		<div class="form-group row">
 			<div class="col-lg-2 mt-4"><?= __('Level') ?> <span class="badge bg-info ">1</span></div>
 			<div class="col-lg-3">
-				<label class="form-label"><?= __('Status') ?></label>
+				<span class="form-label d-inline-block fw-bold"><?= __('Status') ?></span>
 				<select class="form-select js-example-basic-single" name="status[]" aria-label="<?= __('Status') ?>">
 				<option value=""><?= __('Select Any One') ?></option>	
 					<?php foreach($statusrow as $statusrows){ ?>
@@ -182,15 +182,15 @@ for($i=0;$i <= 1;$i++){
 				</select>
 			</div>
 			<div class="col-lg-2">
-				<label class="form-label"><?= __('Followup Days') ?></label>
+				<span class="form-label d-inline-block fw-bold"><?= __('Followup Days') ?></span>
 				<input class="form-control"  type="number" name="followup_days[]" value="<?php echo  $updatefields[0]['followup_days']; ?>" placeholder="<?= __('Eg.5') ?>" aria-label="<?= __('Eg.5') ?>">
 			</div>
 			<div class="col-lg-2">
-				<label class="form-label"><?= __('Auto Forward Days') ?></label>
+				<span class="form-label d-inline-block fw-bold"><?= __('Auto Forward Days') ?></span>
 				<input class="form-control"  type="number" name="auto_forword_days[]" value="<?php echo  $updatefields[0]['auto_forword_days']; ?>" placeholder="<?= __('Eg.2') ?>" aria-label="<?= __('Eg.2') ?>">
 			</div>
 			<div class="col-lg-3">
-				<label class="form-label"><?= __('Work Flow Field') ?></label>
+				<span class="form-label d-inline-block fw-bold"><?= __('Work Flow Field') ?></span>
 				<select class="form-select js-example-basic-single" name="work_flow_field[]" aria-label="<?= __('Work Flow Field') ?>">
 				<option value=""><?= __('Select Any One') ?></option>	
 					<?php  foreach($field_list as $ros){  ?>
