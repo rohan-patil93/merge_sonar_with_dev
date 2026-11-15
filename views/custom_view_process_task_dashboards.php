@@ -74,12 +74,12 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                 <div class="flex-shrink-0 m-r-30 m-l-25 mt-lg-0 mt-3">
                     <?php if($_SESSION['user']['user_photo']!=""){ ?>
                     <div class="symbol symbol-50 symbol-lg-120">
-                      <img src="../uploads/all/<?php echo $_SESSION['user']['user_photo']; ?>" class="img-120 " alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';"/>
+                      <img src="../uploads/all/<?php echo $_SESSION['user']['user_photo']; ?>" class="img-120 " alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" data-onerror-src="uploads/all/no-image.jpg"/>
                     </div>
 
                   <?php }else{ ?>
                     <div class="symbol symbol-50 symbol-lg-120">
-                      <img src="../uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-120 " alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';"/>
+                      <img src="../uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-120 " alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" data-onerror-src="uploads/all/no-image.jpg"/>
                     </div>
                   <?php } ?>
                     <div class="d-flex align-items-center w-100px w-sm-120px flex-column mt-3 ">
@@ -285,7 +285,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
 
                                         <div class="align-middle">
                                             <?php if($onboard_emp['image'] !=""){?>
-                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" data-onerror-src="uploads/all/no-image.jpg">
                                             <?php } else { ?>
                                                 <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
                                             <?php } ?>
@@ -374,7 +374,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                                     <td><a href="index.php?option=COM_VIEW_ONBOARDING_EMPLOYEE_DASHBOARDS&Rid=<?php echo $empiddecode; ?>" target="_blank">
                                          <div class="align-middle">
                                             <?php if($onboard_emp['image'] !=""){?>
-                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" data-onerror-src="uploads/all/no-image.jpg">
                                             <?php } else { ?>
                                                 <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
                                             <?php } ?>
@@ -440,7 +440,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                                      <td><a href="index.php?option=COM_VIEW_ONBOARDING_EMPLOYEE_DASHBOARDS&Rid=<?php echo $empiddecode; ?>" target="_blank">
                                          <div class="align-middle">
                                             <?php if($onboard_emp['image'] !=""){?>
-                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" data-onerror-src="uploads/all/no-image.jpg">
                                             <?php } else { ?>
                                                 <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
                                             <?php } ?>
@@ -503,7 +503,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                             <tr>
                                 <td><a href="index.php?option=COM_VIEW_ONBOARDING_EMPLOYEE_DASHBOARDS&Rid=<?php echo $empiddecode; ?>" target="_blank"><div class="align-middle">
                                             <?php if($onboardinguseridres['image'] !=""){?>
-                                                <img src="uploads/all/<?php echo $onboardinguseridres['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img src="uploads/all/<?php echo $onboardinguseridres['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>" data-onerror-src="uploads/all/no-image.jpg">
                                             <?php } else { ?>
                                                 <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboardinguseridres['display_name']); ?></span>
                                             <?php } ?>
