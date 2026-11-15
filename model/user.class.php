@@ -36812,7 +36812,8 @@ public function gerReferanceTableDetails($get){
 	    	}
 	    	if($items_res->purchase_price_variance_account !=""){
 	        	$accountlist[$items_res->purchase_price_variance_account] = $items_res->purchase_price_variance_account;
-	    	}if($items_res->freight_expense_account !=""){
+	    	}
+	    	if($items_res->freight_expense_account !=""){
 	        	$accountlist[$items_res->freight_expense_account] = $items_res->freight_expense_account;
 	    	}
 	    	if($items_res->packaging_expense_account !=""){
@@ -36847,13 +36848,17 @@ public function gerReferanceTableDetails($get){
 	    	}
 	    	if($items_res->wip_asset_account !=""){
 	        	$accountlist[$items_res->wip_asset_account] = $items_res->wip_asset_account;
-	    	}if($items_res->goods_received_not_invoiced_account !=""){
+	    	}
+	    	if($items_res->goods_received_not_invoiced_account !=""){
 	        	$accountlist[$items_res->goods_received_not_invoiced_account] = $items_res->goods_received_not_invoiced_account;
-	    	}if($items_res->invoiced_not_received_account !=""){
+	    	}
+	    	if($items_res->invoiced_not_received_account !=""){
 	        	$accountlist[$items_res->invoiced_not_received_account] = $items_res->invoiced_not_received_account;
-	    	}if($items_res->base_uom !=""){
+	    	}
+	    	if($items_res->base_uom !=""){
 	        	$accountlist[$items_res->base_uom] = $items_res->base_uom;
-	    	}if($items_res->base_uom !=""){
+	    	}
+	    	if($items_res->base_uom !=""){
 	        	$accountlist[$items_res->base_uom] = $items_res->base_uom;
 	    	}
 
@@ -37076,7 +37081,8 @@ public function gerReferanceTableDetails($get){
 	    	}
 	    	if($items_res->purchase_price_variance_account !=""){
 	        	$accountlist[$items_res->purchase_price_variance_account] = $items_res->purchase_price_variance_account;
-	    	}if($items_res->freight_expense_account !=""){
+	    	}
+	    	if($items_res->freight_expense_account !=""){
 	        	$accountlist[$items_res->freight_expense_account] = $items_res->freight_expense_account;
 	    	}
 	    	if($items_res->packaging_expense_account !=""){
@@ -37111,13 +37117,17 @@ public function gerReferanceTableDetails($get){
 	    	}
 	    	if($items_res->wip_asset_account !=""){
 	        	$accountlist[$items_res->wip_asset_account] = $items_res->wip_asset_account;
-	    	}if($items_res->goods_received_not_invoiced_account !=""){
+	    	}
+	    	if($items_res->goods_received_not_invoiced_account !=""){
 	        	$accountlist[$items_res->goods_received_not_invoiced_account] = $items_res->goods_received_not_invoiced_account;
-	    	}if($items_res->invoiced_not_received_account !=""){
+	    	}
+	    	if($items_res->invoiced_not_received_account !=""){
 	        	$accountlist[$items_res->invoiced_not_received_account] = $items_res->invoiced_not_received_account;
-	    	}if($items_res->base_uom !=""){
+	    	}
+	    	if($items_res->base_uom !=""){
 	        	$accountlist[$items_res->base_uom] = $items_res->base_uom;
-	    	}if($items_res->base_uom !=""){
+	    	}
+	    	if($items_res->base_uom !=""){
 	        	$accountlist[$items_res->base_uom] = $items_res->base_uom;
 	    	}
 
