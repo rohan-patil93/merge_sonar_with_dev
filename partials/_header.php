@@ -545,9 +545,9 @@
                           <?php 
                           $dis_name = $_SESSION['user']['display_name']!=""?$_SESSION['user']['display_name']:$_SESSION['display_name'];
                         if($_SESSION['user']['user_photo']!=""){ ?>
-                           <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="img-radius img-50 align-top m-r-15  mt-3" alt="User-Profile-Image" >
+                           <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="img-radius img-50 align-top m-r-15  mt-3" alt="User profile" >
                        <?php }elseif($_SESSION['employee']['gender'] !=""){ ?>
-                                <img src="uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-radius img-50 align-top m-r-15  mt-3" alt="image" />
+                                <img src="uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-radius img-50 align-top m-r-15  mt-3" alt="" />
                         <?php }else{ ?>
                           <span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  mt-1"><?php echo initials($dis_name); ?></span>
                       <?php } ?>
