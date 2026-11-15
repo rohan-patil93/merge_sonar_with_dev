@@ -76,7 +76,7 @@ $statuse = ViewStatusData();
 			<div class="row">
 				<div class="form-group">
 					<label class="form-label"><?= __('Comment') ?><span class="text-danger">*</span></label>
-					<textarea  class="form-control" name="comment" id="popup_comment" ><?php echo $application_task_logs['description'];?></textarea>
+					<textarea aria-label="<?= htmlspecialchars(__('Comment'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control" name="comment" id="popup_comment" ><?php echo $application_task_logs['description'];?></textarea>
 				</div>
 			</div>
 			<input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>"> 
