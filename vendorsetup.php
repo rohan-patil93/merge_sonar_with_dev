@@ -1159,7 +1159,7 @@ if($register_data['current_status'] !=""){
 
                                       </div>
                                  <?php /** ?>     <div class="form-group col-lg-6">
-                                       <label>Account Type</label>
+                                       <span class="d-inline-block fw-bold" style="margin-bottom:5px">Account Type</span>
                                        <div class="input-group input-icon-right">
                                         <input type="text" class="form-control" value="<?php echo $register_data['account_type'];?>" name="account_type" placeholder="<?php echo $placeholder['account_type'];?>" title="Account Type" aria-label="Account Type">
                                         
