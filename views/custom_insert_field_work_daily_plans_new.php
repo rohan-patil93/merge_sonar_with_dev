@@ -185,7 +185,7 @@ if ($rid != "" && $view == '1') {
                         <form id="fieldWorkDailyPlansForm" method="post">
                             <div class="row g-3">
                                 <div class="col-md-4 form-group">
-                                    <label class="fwdp-label"><?php echo __('User'); ?> <span class="text-danger">*</span></label>
+                                    <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('User'); ?> <span class="text-danger">*</span></span>
                                     <select class="form-select js-example-basic-single" id="user_id" name="user_id" aria-label="<?php echo __('User Id'); ?>">
                                         <option value="0"><?php echo __('Select Any one'); ?></option>
                                         <?php if (count((array)$application_users) > 0) {
@@ -200,7 +200,7 @@ if ($rid != "" && $view == '1') {
                                 </div>
 
                                 <div id="toDateDiv" class="col-md-4 form-group d-none">
-                                    <label class="fwdp-label"><?php echo __('Date'); ?> <span class="text-danger">*</span></label>
+                                    <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Date'); ?> <span class="text-danger">*</span></span>
                                     <input class="form-control" type="date" name="plan_date" id="plan_date" value="<?php echo isset($date) && $date != '' ? date('Y-m-d', strtotime($date)) : ''; ?>" <?php echo $planDateReadonly; ?> min="<?php echo date('Y-m-d'); ?>" / aria-label="<?php echo __('Plan Date'); ?>">
                                     <div class="d-none text-danger" id="plan_date_err"></div>
                                 </div>
@@ -223,23 +223,23 @@ if ($rid != "" && $view == '1') {
                                         </div>
                                         <div class="row g-3">
                                             <div class="col-md-3">
-                                                <label class="fwdp-label"><?php echo __('Contact Person'); ?></label>
+                                                <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Contact Person'); ?></span>
                                                 <input class="form-control" type="text" name="contact_person[]" aria-label="<?php echo __('Contact Person'); ?>">
                                             </div>
                                             <div class="col-md-3">
-                                                <label class="fwdp-label"><?php echo __('Phone No.'); ?></label>
+                                                <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Phone No.'); ?></span>
                                                 <input class="form-control" type="text" name="mobile[]" aria-label="<?php echo __('Mobile'); ?>">
                                             </div>
                                             <div class="col-md-3">
-                                                <label class="fwdp-label"><?php echo __('Location Name'); ?></label>
+                                                <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Location Name'); ?></span>
                                                 <input class="form-control" type="text" name="plan_location[]" aria-label="<?php echo __('Plan Location'); ?>">
                                             </div>
                                             <div class="col-md-3">
-                                                <label class="fwdp-label"><?php echo __('Planned Time'); ?></label>
+                                                <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Planned Time'); ?></span>
                                                 <input class="form-control" type="time" name="plan_time[]" aria-label="<?php echo __('Plan Time'); ?>">
                                             </div>
                                             <div class="col-12">
-                                                <label class="fwdp-label"><?php echo __('Address'); ?></label>
+                                                <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Address'); ?></span>
                                                 <textarea class="form-control fwdp-address-field" name="plan_address[]" rows="2" readonly aria-label="<?php echo __('Plan Address'); ?>"></textarea>
                                             </div>
                                             <div class="col-md-6 d-none">
@@ -272,49 +272,49 @@ if ($rid != "" && $view == '1') {
                                 <div class="fwdp-security-card">
                                     <div class="row g-3">
                                         <div class="col-lg-6 form-group">
-                                            <label class="fwdp-label"><?php echo __('From Date'); ?> <span class="text-danger">*</span></label>
+                                            <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('From Date'); ?> <span class="text-danger">*</span></span>
                                             <input class="form-control" type="date" name="work_from_date" id="work_from_date" value="" min="<?php echo date('Y-m-d'); ?>" aria-label="<?php echo __('Work From Date'); ?>">
                                             <div class="d-none text-danger" id="work_from_date_err"></div>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <label class="fwdp-label"><?php echo __('To Date'); ?> <span class="text-danger">*</span></label>
+                                            <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('To Date'); ?> <span class="text-danger">*</span></span>
                                             <input class="form-control" type="date" name="work_to_date" id="work_to_date" aria-label="<?php echo __('Work To Date'); ?>">
                                             <div class="d-none text-danger" id="work_to_date_err"></div>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <label class="fwdp-label"><?php echo __('Time'); ?> <span class="text-danger">*</span></label>
+                                            <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Time'); ?> <span class="text-danger">*</span></span>
                                             <input class="form-control" type="time" name="work_time" id="work_time" aria-label="<?php echo __('Work Time'); ?>">
                                             <div class="d-none text-danger" id="work_time_err"></div>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <label class="fwdp-label"><?php echo __('Work Radius'); ?></label>
+                                            <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Work Radius'); ?></span>
                                             <input class="form-control" type="number" name="work_radius" id="work_radius" aria-label="<?php echo __('Work Radius'); ?>">
                                             <div class="d-none text-danger" id="work_radius_err"></div>
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label"><?php echo __('Contact Person'); ?></label>
+                                            <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Contact Person'); ?></span>
                                             <input class="form-control" type="text" name="contact_person" id="contact_person" aria-label="<?php echo __('Contact Person'); ?>">
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label"><?php echo __('Phone No.'); ?></label>
+                                            <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Phone No.'); ?></span>
                                             <input class="form-control" type="text" name="mobile" id="mobile" aria-label="<?php echo __('Mobile'); ?>">
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label"><?php echo __('Location Name'); ?></label>
+                                            <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Location Name'); ?></span>
                                             <input class="form-control" type="text" name="location_name" id="location_name" aria-label="<?php echo __('Location Name'); ?>">
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label"><?php echo __('Latitude'); ?> <span class="text-danger">*</span></label>
+                                            <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Latitude'); ?> <span class="text-danger">*</span></span>
                                             <input class="form-control lat" type="text" name="work_latitude" id="work_latitude" readonly aria-label="<?php echo __('Work Latitude'); ?>">
                                             <div class="d-none text-danger" id="work_latitude_err"></div>
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label"><?php echo __('Longitude'); ?> <span class="text-danger">*</span></label>
+                                            <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Longitude'); ?> <span class="text-danger">*</span></span>
                                             <input class="form-control lng" type="text" name="work_longitude" id="work_longitude" readonly aria-label="<?php echo __('Work Longitude'); ?>">
                                             <div class="d-none text-danger" id="work_longitude_err"></div>
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label"><?php echo __('Address'); ?></label>
+                                            <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Address'); ?></span>
                                             <textarea class="form-control fwdp-address-field" name="work_address" id="work_address" rows="2" readonly aria-label="<?php echo __('Work Address'); ?>"></textarea>
                                         </div>
                                         <div class="col-12">
@@ -363,7 +363,7 @@ if ($rid != "" && $view == '1') {
                     <div id="fwdpMapDistance" class="fwdp-map-distance" style="display:none;"></div>
                 </div>
                 <div class="fwdp-map-selected" id="fwdpMapSelectedWrap">
-                    <label class="fwdp-label"><?php echo __('Route Summary'); ?></label>
+                    <span class="fwdp-label d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Route Summary'); ?></span>
                     <p id="fwdpSelectedAddress"><?php echo __('Click on the map or search to select a location.'); ?></p>
                     <div id="fwdpRouteSummary" class="fwdp-route-summary" style="display:none;"></div>
                     <div id="fwdpNavActions" class="fwdp-nav-actions" style="display:none;">
