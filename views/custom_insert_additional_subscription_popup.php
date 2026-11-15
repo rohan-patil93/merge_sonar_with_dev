@@ -96,35 +96,35 @@ function popDiscount(){
 <div class="modal-body">
 			<div class="row mb-2">
 				<div class="col-lg-3 form-group text-center">
-					<label class="form-label f-w-700"><?php echo __('Plan Name'); ?></label>
+					<span class="form-label f-w-700 d-inline-block"><?php echo __('Plan Name'); ?></span>
 					<p><?php echo htmlspecialchars(__($subscription_plans['plan_name'] ?? ''));?></p>
 				</div>
 				<div class="col-lg-2 form-group text-center">
-					<label class="form-label f-w-700"><?php echo __('Plan Price'); ?></label>
+					<span class="form-label f-w-700 d-inline-block"><?php echo __('Plan Price'); ?></span>
 					<p><?php echo $standard_price;?></p>
 				</div>
 				<div class="col-lg-4 form-group text-center">
-					<label class="form-label f-w-700"><?php echo __('Additional Lic. Lot limit'); ?></label>
+					<span class="form-label f-w-700 d-inline-block"><?php echo __('Additional Lic. Lot limit'); ?></span>
 					<p><?php echo $additional_license_lot;?></p>
 				</div>
 				<div class="col-lg-3 form-group text-center">
-					<label class="form-label f-w-700"><?php echo __('Additi Lot Price'); ?></label>
+					<span class="form-label f-w-700 d-inline-block"><?php echo __('Additi Lot Price'); ?></span>
 					<p><?php echo $additional_license_lot_price; ?></p>
 				</div>
 				<div class="col-lg-3 form-group">
-					<label class="form-label "><?php echo __('Additi License Users'); ?></label>
+					<span class="form-label  d-inline-block fw-bold"><?php echo __('Additi License Users'); ?></span>
 				 	<input class="form-control text-right" type="text" name="additional_license_lot_popup" id="additional_license_lot_popup" value="" onblur="additionalLicenseValidation()" aria-label="<?php echo __('Additional License Lot Popup'); ?>"> 
 				</div>
 				<div class="col-lg-3 form-group">
-					<label class="form-label"><?php echo __('Additi License Price'); ?></label>
+					<span class="form-label d-inline-block fw-bold"><?php echo __('Additi License Price'); ?></span>
 				 	<input class="form-control text-right" type="text" name="additional_license_lot_price" id="additional_license_lot_price" value="0" readonly="" aria-label="<?php echo __('Additional License Lot Price'); ?>"> 
 				</div>
 				<div class="col-lg-3 form-group">
-					<label class="form-label"><?php echo __('Discount'); ?></label>
+					<span class="form-label d-inline-block fw-bold"><?php echo __('Discount'); ?></span>
 				 	<input class="form-control text-right" type="text" name="additional_license_lot_discount" id="additional_license_lot_discount" value="0" onblur="popDiscount()" aria-label="<?php echo __('Additional License Lot Discount'); ?>"> 
 				</div>
 				<div class="col-lg-3 form-group">
-					<label class="form-label"><?php echo __('Total Price'); ?></label>
+					<span class="form-label d-inline-block fw-bold"><?php echo __('Total Price'); ?></span>
 
 				 	<input class="form-control text-right" type="text" name="total_license_lot_price" id="total_license_lot_price" value="0" readonly="" aria-label="<?php echo __('Total License Lot Price'); ?>"> 
 				</div>
