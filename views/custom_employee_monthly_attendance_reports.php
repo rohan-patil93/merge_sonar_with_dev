@@ -42,7 +42,7 @@ if (isset($_GET['employee_id']) || isset($_GET['month'])) {
                     <!-- Employee -->
                     <div class="form-group col-md-4">
                         <label><?= __('Employee') ?> <span style="color:red;">*</span></label>
-                        <select class="form-select js-example-basic-single" id="employee_id" name="employee_id">
+                        <select aria-label="<?= htmlspecialchars(__('Employee id'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="employee_id" name="employee_id">
                             <option value="0"><?= __('Select Employee') ?></option>
                             <?php foreach ($employees as $row): ?>
                                 <option value="<?= $row['id']; ?>" <?= ((int)$row['id'] === (int)$employee_id) ? 'selected' : ''; ?>>
@@ -55,7 +55,7 @@ if (isset($_GET['employee_id']) || isset($_GET['month'])) {
                     <!-- Month -->
                     <div class="form-group col-md-3">
                         <label><?= __('Month') ?> <span style="color:red;">*</span></label>
-                        <input type="month" class="form-control" id="report_month" name="month" value="<?= htmlspecialchars($report_month, ENT_QUOTES); ?>">
+                        <input aria-label="<?= htmlspecialchars(__('Month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" id="report_month" name="month" value="<?= htmlspecialchars($report_month, ENT_QUOTES); ?>">
                     </div>
 
                     <!-- Search -->
