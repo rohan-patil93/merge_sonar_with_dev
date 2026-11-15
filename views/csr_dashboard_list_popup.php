@@ -51,7 +51,7 @@ $projects = $response['projects'] ?? array();
                                         <?php } else { ?>
                                             <span alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8') ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$project['created_by']] ?? ''); ?></span>
                                         <?php } ?>
-                                        <label class="mt-2 ml-2"><?php echo $_SESSION['users'][$project['created_by']] ?? ''; ?></label>
+                                        <span class="mt-2 ml-2 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo $_SESSION['users'][$project['created_by']] ?? ''; ?></span>
                                     </td>
                                     <td>
                                         <a class="text-primary m-r-5" href="index.php?option=COM_VIEW_CSR_PROPOSAL_DETAILS&Rid=<?= deocdeId('id:' . $project['id']) ?>" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<?= htmlspecialchars($project['subject'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
