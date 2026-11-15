@@ -30,7 +30,7 @@ function valueemtpydash($val){
 				<div class="col-lg-3">		
 					<form class="kt-form" id="kt_form" method="post" action="" >
 						<div class="input-group input-group-button"> 
-							<input type="month" name="from_date" value="<?php echo $selecteddate;?>"  id="att_month_year"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">  <button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light input-group-text mt-0">
+							<input aria-label="<?= htmlspecialchars(__('From date'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="from_date" value="<?php echo $selecteddate;?>"  id="att_month_year"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">  <button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light input-group-text mt-0">
 								<?= __('Submit'); ?>
 							</button> </div>
 						</form>
