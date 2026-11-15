@@ -884,4 +884,3 @@ public function random_code()
 		return strtolower(str_replace(' ','+',$string));
 		}
 }
-?>

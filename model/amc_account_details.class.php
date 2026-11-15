@@ -1550,4 +1550,3 @@ class amcAccountDetailsClass extends userClass{
 
 }
 
-?>

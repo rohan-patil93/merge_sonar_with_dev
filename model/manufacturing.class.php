@@ -777,4 +777,3 @@ class manufacturingUserClass extends userClass{
 	    return $exquery;
 	}
 }
-?>

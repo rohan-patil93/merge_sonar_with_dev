@@ -809,4 +809,3 @@ class webViewClass extends userClass{
 	}
 
 }
-?>

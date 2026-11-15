@@ -6587,4 +6587,3 @@ public function toimportthedataintotablesemployeessalary($get){
 		return $resins;*/
 	}
 }
-?>

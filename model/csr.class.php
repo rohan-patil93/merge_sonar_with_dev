@@ -4918,4 +4918,3 @@ public function getUsersMapPointsData($get){
         return $return;
     }
 }
-?>

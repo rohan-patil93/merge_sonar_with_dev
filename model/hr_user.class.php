@@ -3371,4 +3371,3 @@ class hrUserClass extends userClass{
 		return $res;
 	}
 }
-?>

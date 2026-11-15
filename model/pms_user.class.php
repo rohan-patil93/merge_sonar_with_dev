@@ -1607,4 +1607,3 @@ public function getOrganizationGoals($get){
 	}
 }
 
-?>

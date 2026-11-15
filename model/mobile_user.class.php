@@ -9212,4 +9212,3 @@ $creditside = array('credit_notes','payments');
 		return $return;
 	}
 }
-?>

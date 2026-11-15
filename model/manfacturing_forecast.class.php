@@ -2897,4 +2897,3 @@ class manfacturingForecastUserClass extends userClass{
     }
 
 }
-?>

@@ -1712,4 +1712,3 @@ class vendorPortelUserClass extends userClass
 	}
 
 }
-?>

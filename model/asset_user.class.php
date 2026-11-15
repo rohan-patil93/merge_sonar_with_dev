@@ -1402,4 +1402,3 @@ public function insertAsset($post){
 	}
 
 }
-?>

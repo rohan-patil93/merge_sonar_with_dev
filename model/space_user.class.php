@@ -1402,4 +1402,3 @@ class spaceUserClass extends userClass{
 		echo "<pre>"; print_r($return);
 	}
 }
-?>
