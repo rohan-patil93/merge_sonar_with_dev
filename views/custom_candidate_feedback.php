@@ -98,7 +98,7 @@ foreach ($qustion_types as $qtype) {
                   
                   ?>
                         
-                 <label class=""><?= __("Scale from 1 to:") ?> <?php echo $option;?></label>
+                 <span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Scale from 1 to:") ?> <?php echo $option;?></span>
                   <input type="number"  class="form-control col-md-5" name="response_option<?php echo $questionid;?>"   id="response_option_scale_<?php echo $questionid;?>" value=<?php echo $selectedoption;?> > 
                   <?php             
                 }else if($display_questions[$questionid]['options_display_type']==4){
