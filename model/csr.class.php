@@ -108,7 +108,7 @@ class CSRClass
     return $res;
 }
 
-function getTracckingPerentage($get)
+public function getTracckingPerentage($get)
 {
     global $callConfig;
     $rid = $get['id'];
@@ -121,7 +121,7 @@ function getTracckingPerentage($get)
     return $res;
 }
 
-function getCommitteMembers($get)
+public function getCommitteMembers($get)
 {
     global $callConfig;
     $query = "SELECT au.id, au.display_name, au.user_email FROM application_user_module_roles aumr LEFT JOIN application_users au ON au.id = aumr.user_id 
@@ -321,7 +321,7 @@ function getCommitteMembers($get)
 
         return $return;
     }
-function getApprovedMembers($get)
+public function getApprovedMembers($get)
 {
     global $callConfig;
     $id = $get['id'];
@@ -335,7 +335,7 @@ function getApprovedMembers($get)
     return $res;
 }
 
-function getCsrSetting($get)
+public function getCsrSetting($get)
 {
     global $callConfig;
     $id = $get['id'];
@@ -347,7 +347,7 @@ function getCsrSetting($get)
 
 
    // MAP Point 
-function getCompaniesData($get)
+public function getCompaniesData($get)
 {
     global $callConfig;
     $return = array();
@@ -398,7 +398,7 @@ function getCompaniesData($get)
     return $return;
 }
 
-function getMapPoints($get){
+public function getMapPoints($get){
     global $callConfig;
     $return = array();
     $userid = $get['userid'];
@@ -433,7 +433,7 @@ function getMapPoints($get){
     return $return;
 }
 
-function getFieldWorkDailyPlanData($get){
+public function getFieldWorkDailyPlanData($get){
     global $callConfig;
     $return = array();
     $from_date = $get['from_date'];
@@ -513,7 +513,7 @@ function getFieldWorkDailyPlanData($get){
     return $return;
 }
 
-function fetchFieldWorkDailyPlans($get)
+public function fetchFieldWorkDailyPlans($get)
 {
     $table = $get['table'];
     $userid = $get['userid'];
@@ -532,7 +532,7 @@ function fetchFieldWorkDailyPlans($get)
     }
     return $return;
 }
-function updateFieldWorkDailyPlans($get)
+public function updateFieldWorkDailyPlans($get)
 {
     global $callConfig;
     $rid = $get['rid'];
@@ -550,7 +550,7 @@ function updateFieldWorkDailyPlans($get)
     return $res;
 }
 
-function getApplicationUsersData($get)
+public function getApplicationUsersData($get)
 {
     global $callConfig;
     $return = array();
@@ -575,7 +575,7 @@ function getApplicationUsersData($get)
     return $return;
 }
 
-function getApplicationUsersDataforInsert($get)
+public function getApplicationUsersDataforInsert($get)
 {
     global $callConfig;
     $return = array();
@@ -601,7 +601,7 @@ function getApplicationUsersDataforInsert($get)
     return $return;
 }
 
-function getFieldWorkUserMapPointsData($get){
+public function getFieldWorkUserMapPointsData($get){
         global $callConfig;
         $return = array();
         $from_date = $get['from_date'];
@@ -655,7 +655,7 @@ function getFieldWorkUserMapPointsData($get){
         }
         return $return;
     }
-function getUsersMapPointsData($get){
+public function getUsersMapPointsData($get){
     global $callConfig;
     $date = date('Y-m-d');
     $return = array();
