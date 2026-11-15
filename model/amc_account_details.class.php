@@ -1500,8 +1500,9 @@ class amcAccountDetailsClass extends userClass{
     $return['amc_registration_running'] = (int)($r->running ?? 0);
 
     
-    $get['date'] = date('Y-m-d');
-    $return['today_services'] = $this->getamcschedulesbydate($get);
+    $getToday = $get;
+    $getToday['date'] = date('Y-m-d');
+    $return['today_services'] = $this->getamcschedulesbydate($getToday);
     $get['date'] = date('Y-m-d', strtotime('-1 day'));
     $return['yesterday_services'] = $this->getamcschedulesbydate($get);
     return $return;
