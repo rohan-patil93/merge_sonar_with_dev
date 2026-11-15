@@ -116,7 +116,7 @@
 										<div class="symbol-group symbol-hover">
 											<?php if($cmtdata['created_by_image']!=""){ ?>
 												<div class="m-r-15 text-center userimageround">
-													<img src="<?php echo $fileupload_path.$cmtdata['created_by_image']; ?>" alt="image" class="img-radius img-50">
+													<img src="<?php echo $fileupload_path.$cmtdata['created_by_image']; ?>" alt="" class="img-radius img-50">
 												</div>
 											<?php }else{ ?>
 												<div class="img-radius img-50 align-top m-r-15 text-center userimageround symbol-primary" title="">
