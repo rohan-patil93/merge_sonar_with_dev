@@ -489,7 +489,7 @@ function getDepreciationMethod(){
 						</div>
 						<?php /** ?>
 						<div class="form-group col-lg-4 w-full" style="pointer-events:none; opacity:0.7">
-							<label class="form-label d-block"><?= __('Depreciation Account') ?></label>
+							<span class="form-label d-block fw-bold"><?= __('Depreciation Account') ?></span>
 							<select name="depreciation_account" id="depreciation_account" class="form-control form-select js-example-basic-single" required aria-label="Depreciation Account">
 								<option value="">Select Any One </option>
 								<?php foreach($chart_of_accounts as $coa) {  ?>
@@ -498,7 +498,7 @@ function getDepreciationMethod(){
 							</select>	
 						</div>
 						<div class="form-group col-lg-4 w-full" style="pointer-events:none; opacity:0.7">
-							<label class="form-label d-block"><?= __('Expense Account') ?></label>
+							<span class="form-label d-block fw-bold"><?= __('Expense Account') ?></span>
 							<select name="expense_account" id="expense_account" class="form-control form-select js-example-basic-single" required aria-label="Expense Account">
 								<option value="">Select Any One </option>
 								<?php foreach($chart_of_accounts as $coa) {  ?>
@@ -507,7 +507,7 @@ function getDepreciationMethod(){
 							</select>	
 						</div>
 						<div class="form-group col-lg-4 w-full" style="pointer-events:none; opacity:0.7">
-							<label class="form-label d-block"><?= __('Journal') ?></label>
+							<span class="form-label d-block fw-bold"><?= __('Journal') ?></span>
 							<select name="journal_id"  id="journal_id" class="form-control form-select js-example-basic-single" required aria-label="Journal Id">
 								<option value="">Select Any One </option>
 								<?php foreach($journals as $jou) {  ?>
