@@ -456,7 +456,7 @@ class employeeLoanClass extends userClass
             ";
             $avg_duration = $callConfig->getRow($avg_query);
 
-            $result = [
+            return [
                 'current_persons' => $formatted_persons,
                 'statistics' => [
                     'current_count' => count($formatted_persons),
@@ -465,7 +465,6 @@ class employeeLoanClass extends userClass
                     'avg_duration_minutes' => round($avg_duration->avg_duration ?? 0)
                 ]
             ];
-            return $result;
         } catch (Exception $e) {
             return [
                 'current_persons' => [],
@@ -663,8 +662,7 @@ class employeeLoanClass extends userClass
 		$res['fieldnames'] = $fieldnames;
 		$res['entry_id'] = $entry_id;
 
-		$res = $callConfig->updateRecord("transport_personal_gateway", $fieldnames, 'id', $post['entry_id']);
-		return $res;
+		return $callConfig->updateRecord("transport_personal_gateway", $fieldnames, 'id', $post['entry_id']);
 	}
 
 	public function getvehiclegateway($get)
@@ -970,8 +968,7 @@ class employeeLoanClass extends userClass
             'updated_date' => date('Y-m-d H:i:s')
         );
 
-        $res = $callConfig->updateRecord('transport_vehicle_master', $fieldnames, 'id', $post['vehicle_id']);
-        return $res;
+        return $callConfig->updateRecord('transport_vehicle_master', $fieldnames, 'id', $post['vehicle_id']);
     }
 
 	public function inserttransportvehiclemaster($get, $post)
@@ -1010,8 +1007,7 @@ class employeeLoanClass extends userClass
             'created_date' => date('Y-m-d H:i:s')
         );
 
-        $res = $callConfig->insertRecord('transport_vehicle_master', $fieldnames);
-        return $res;
+        return $callConfig->insertRecord('transport_vehicle_master', $fieldnames);
     }
 
 
@@ -1070,8 +1066,7 @@ class employeeLoanClass extends userClass
         $user_id = $get['user_id'];
 
         $query = "UPDATE transport_vehicle_master SET is_active = NULL, updated_by = " . intval($user_id) . ", updated_date = '" . date('Y-m-d H:i:s') . "' WHERE id = " . intval($rid) . " AND company_id = " . intval($company_id);
-        $res = $callConfig->executeQuery($query);
-        return $res;
+        return $callConfig->executeQuery($query);
     }
 
 	public function getfuelentrydata($get)
@@ -1091,8 +1086,7 @@ class employeeLoanClass extends userClass
 		$company_id = $get['company_id'];
 		$query = "SELECT * FROM departments WHERE company_id = $company_id AND is_active = '0'";
 		$return['query'] = $query;
-		$result = $callConfig->getAllRows($query);
-		return $result;
+		return $callConfig->getAllRows($query);
 	}
 
 	public function getdepartmentemployeesdetails($get)
@@ -1103,8 +1097,7 @@ class employeeLoanClass extends userClass
 		$department_id = $get['department_id'];
 		$query = "SELECT * FROM employees WHERE company_id = $company_id AND department_id = $department_id AND is_active = '0'";
 		$return['query'] = $query;
-		$result = $callConfig->getAllRows($query);
-		return $result;
+		return $callConfig->getAllRows($query);
 	}
 
 
@@ -1218,8 +1211,7 @@ class employeeLoanClass extends userClass
 			'created_by' => $post['user_id']
 		);
 
-		$res = $callConfig->insertRecord('transport_fuel', $fieldnames);
-		return $res;
+		return $callConfig->insertRecord('transport_fuel', $fieldnames);
 	}
 
 
@@ -1268,8 +1260,7 @@ class employeeLoanClass extends userClass
 			'updated_by' => $post['user_id']
 		);
 
-		$res = $callConfig->updateRecord('transport_fuel', $fieldnames, 'id', $post['fuel_id']);
-		return $res;
+		return $callConfig->updateRecord('transport_fuel', $fieldnames, 'id', $post['fuel_id']);
 	}
 
 
@@ -1311,8 +1302,7 @@ class employeeLoanClass extends userClass
 			'updated_by' => $post['user_id']
 		);
 
-		$res = $callConfig->updateRecord('transport_fuel', $fieldnames, 'id', $post['fuel_id']);
-		return $res;
+		return $callConfig->updateRecord('transport_fuel', $fieldnames, 'id', $post['fuel_id']);
 	}
 	// omkar related code end
 	//

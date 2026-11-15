@@ -6,8 +6,7 @@ class userClass
 		global $callConfig;
 		$whr = "is_active = '0'";
 		$query=$callConfig->selectQuery('banner','*',$whr,'','','');
-		$data = $callConfig->getAllRows($query);
-		return $data;
+		return $callConfig->getAllRows($query);
 	}
 	public function toGetMenuDetails() {
 		global $callConfig;
@@ -24,15 +23,13 @@ class userClass
 		global $callConfig;
 		$whr = "is_active = '0' And sub_category_id ='".$post['sub_id']."'";
 		$query=$callConfig->selectQuery('product','*',$whr,'','','');
-		$data = $callConfig->getAllRows($query);
-		return $data;
+		return $callConfig->getAllRows($query);
 	}
 	public function toGetProductDetails($post) {
 		global $callConfig;
 		$whr = "is_active = '0' And id ='".$post['id']."'";
 		$query=$callConfig->selectQuery('product','*',$whr,'','','');
-		$data = $callConfig->getAllRows($query);
-		return $data;
+		return $callConfig->getAllRows($query);
 	}
 }
 

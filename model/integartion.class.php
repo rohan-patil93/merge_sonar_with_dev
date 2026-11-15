@@ -1646,8 +1646,7 @@ public function togettopprojectworkspacelist($get){
 }
 public function updatemoretabledata($post, $get){
 	global $callConfig;
-	$res=$callConfig->updateRecord($get['table_name'],$post,'id',$get['hid']);
-	return $res;
+	return $callConfig->updateRecord($get['table_name'],$post,'id',$get['hid']);
 }
 
 public function checkandupdatecolorprojecttask($post, $get){
@@ -1762,8 +1761,7 @@ public function insertstatusprocesss($post, $get){
 	$res['afterstatus'] = $status;
 	$insert_array = array('company_id'=>$get['company_id'],'project_id'=>$post['project_id'],'table_name'=>$post['table_name'], 'name'=>$post['listname'],'action_label'=>$post['listname'], 'status'=>$status, 'display_priority'=>$post['position'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
 	$res['insert_array'] = $insert_array;
-	$insert = $callConfig->insertRecord('project_task_status',$insert_array);
-	return $insert;
+	return $callConfig->insertRecord('project_task_status',$insert_array);
 }
 public function togetprojectviewalldetails($get){
 	global $callConfig;
@@ -1932,16 +1930,14 @@ public function togetprojecteamaddetails($get){
 public function togetunassigntaskslist($get){
 	global $callConfig;
 	$query = "SELECT id,project_id,task_name  FROM project_task_details WHERE company_id =".$get['company_id']." AND project_id = ".$get['project_id']." AND  is_active = 0";
-	$return = $callConfig->getAllRows($query);
-	return $return;
+	return $callConfig->getAllRows($query);
 }
 public function tocheckprojectteamuncompletetasks($get){
 	global $callConfig;
 	$query = "SELECT * FROM project_teams WHERE id = ".$get['rowid'];
 	$data = $callConfig->getRow($query);
 	$query = "SELECT count(id) as cc FROM project_task_details WHERE assigen_id = ".$data->user_id." AND project_id =".$data->project_id. " AND current_status !=4 AND is_active = 0";
-	$countdata = $callConfig->getRow($query);
-	return $countdata;
+	return $callConfig->getRow($query);
 }
 
 public function tosendwhatsappdatatodatain($data){
@@ -2614,8 +2610,7 @@ public function addupdaterolememberdetail($post, $get){
 public function addupdateprojectphases($post, $get){
 	global $callConfig;
 	$insert_array = array('company_id'=>$get['company_id'],'project_id'=>$post['project_id'], 'project_phase_name'=>$post['project_phase_name'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-	$insert = $callConfig->insertRecord('project_phases',$insert_array);
-	return $insert;
+	return $callConfig->insertRecord('project_phases',$insert_array);
 }
 public function togetprojectdnewashboarddetails($get){
 	global $callConfig;
@@ -2672,8 +2667,7 @@ public function tochangeprojectowner($get){
 	$upquery = "UPDATE project_teams SET is_active = 1 WHERE company_id =".$get['company_id']." AND user_id =".$get['old_assinger_id']." AND project_id = ".$get['rid']." AND is_active = 0";
 	$callConfig->executeQuery($upquery);
 	$insert_array = array('company_id'=>$get['company_id'], 'project_id'=>$get['rid'], 'role_id'=>1, 'user_id'=>$get['assinger_id'],  'is_active'=>'0', 'current_status'=>'0', 'created_by'=>$get['user_id']);
- 	$res= $callConfig->insertRecord('project_teams',$insert_array);
-	return $res;
+ 	return $callConfig->insertRecord('project_teams',$insert_array);
 
 }
 public function togetprojectmahinematerial($get){
@@ -3215,8 +3209,7 @@ public function addstationery($post, $get){
 	$insert_id = $res['LASTID'];
 	$insert_array = array('company_id'=>$post['company_id'],'request_no'=>'Topup','item_id'=>$insert_id,'in_qty'=>$post['available_qty'],'out_qty'=>0,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
 	$insert_array['request_date'] = date('Y-m-d');
-	$res=$callConfig->insertRecord('stationery_item_ledger',$insert_array);
-	return $res;
+	return $callConfig->insertRecord('stationery_item_ledger',$insert_array);
 }
 public function updatestationeryrequest($post, $get){
 	global $callConfig;
@@ -3254,8 +3247,7 @@ public function updatestationeryrequest($post, $get){
 	$ss = $this->tosendnotifiations($notdata1);
 
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>44, 'user_display_name'=>$user->display_name,'request_no'=>$req->request_no,'status_name'=>$status->name,'cc_users'=>$notuser1,'to_users'=>'');
-	$res = $this->emailsendmediater($senddata);
-	return $res;
+	return $this->emailsendmediater($senddata);
 }
 public function topupstationery($post, $get){
 	global $callConfig;
@@ -3289,8 +3281,7 @@ public function updatetranspotfrom($get){
 	$ss = $this->tosendnotifiations($notdata1);
 
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>43, 'user_display_name'=>$user->display_name,'status_name'=>$status->action_label,'cc_users'=>$notuser1,'to_users'=>'','transport_date'=>$req->transport_date);
-	$res = $this->emailsendmediater($senddata);
-	return $res;
+	return $this->emailsendmediater($senddata);
 }
 public function togetinsertdetalsfoods($get){
 	global $callConfig;
@@ -3355,8 +3346,7 @@ public function updatefoodrequest($get){
 	$ss = $this->tosendnotifiations($notdata1);
 
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>45, 'user_display_name'=>$user->display_name,'start_date'=>$req->start_date,'stop_date'=>$req->stop_date,'cc_users'=>$notuser2,'to_users'=>$notuser1);
-	$res = $this->emailsendmediater($senddata);
-	return $res;
+	return $this->emailsendmediater($senddata);
 }
 public function searchstationeryreport($get){
 	global $callConfig;
@@ -3368,8 +3358,7 @@ public function searchstationeryreport($get){
 		$whr.= " AND item_id = '".$get['item_id']."'";
 	}
 	$query = "SELECT * FROM `stationery_item_ledger` WHERE company_id = ".$get['company_id']." ".$whr." AND is_active =0 ORDER By id ASC";
-	$datas  =  $callConfig->getAllRows($query);
-	return $datas;
+	return $callConfig->getAllRows($query);
 }
 public function togetofficemanagementdashboard($get){
 	global $callConfig;
@@ -3800,8 +3789,7 @@ public function togetgeneralcodedetails($get){
 public function togetimplodesdetailsount($get){
 	global $callConfig;
 	 $query = "SELECT count(id) cc , count(id) rc FROM edi_data WHERE file_name = '".$get['file_name']."'";
-	$return = $callConfig->getRow($query);
-	return $return;
+	return $callConfig->getRow($query);
 }
 public function toimportthedataintotablesemployeessalary($get){
 	global $callConfig;
@@ -5250,9 +5238,7 @@ public function toimportthedataintotablesemployeessalary($get){
 		$last_id = $insert['LASTID'];
 
 		$uquery = "UPDATE stationery_cart SET request_no = '".$rnd."', deliver_type = '".$get['deliver_type']."',request_id='{$last_id}'  WHERE company_id = ".$get['company_id']." AND user_id = ".$get['user_id']."  AND request_no IS NULL AND is_active = 0";
-		$edata = $callConfig->executeQuery($uquery);
-
-		return $edata;
+		return $callConfig->executeQuery($uquery);
 	}
     public function getStationeryAvailableItemsData($get){
         global $callConfig;

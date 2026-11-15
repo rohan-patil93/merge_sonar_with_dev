@@ -169,8 +169,7 @@ class pettyCashUserClass extends userClass{
 			$pt_owner_id = $petty_cashres->party_id;
 		}
 		$sql = "SELECT closing_balance FROM `petty_cash_balances` WHERE company_id='".$get['company_id']."' AND pc_box_id = '".$pc_box_id."' AND pt_owner_id = '".$pt_owner_id."' ORDER BY balance_date DESC limit 1";
-		$ptres = $callConfig->getRow($sql);
-		return $ptres;
+		return $callConfig->getRow($sql);
 	}
 	public function getPettyCash($get){
 		global $callConfig;

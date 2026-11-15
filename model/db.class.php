@@ -651,8 +651,7 @@ class configClass
 		public function getCount($query)
 		{
 			$res=@mysqli_query($this->con, $query);
-			$cnt=@mysqli_num_rows($res);
-			return $cnt;
+			return @mysqli_num_rows($res);
 		}
 
 

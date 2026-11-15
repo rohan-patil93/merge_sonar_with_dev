@@ -779,7 +779,6 @@ class manufacturingUserClass extends userClass{
 	public function toafterapprovaltoupdatemanufirmorder($transaction_no, $get){
 	    global $callConfig;
 	    $upquery = "UPDATE manufacturing_firm_order_items SET current_status =".ST_APPROVED." WHERE company_id=".$get['company_id']." AND manufacturing_firm_order_id='".$transaction_no."' AND is_active=0";
-	    $exquery = $callConfig->executeQuery($upquery);
-	    return $exquery;
+	    return $callConfig->executeQuery($upquery);
 	}
 }

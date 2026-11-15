@@ -425,8 +425,7 @@ class mobileUserClass extends userClass{
     	$query = "UPDATE `transaction_approval_logs` SET `response_type` = '0' WHERE user_id = 377";
     	$res = $callConfig->executeQuery($query);
     	$query = "UPDATE `requisitions` SET `current_status` = 101 WHERE id IN(411,412,413)";
-    	$res = $callConfig->executeQuery($query);
- 		return $res;
+    	return $callConfig->executeQuery($query);
     }
     public function togetcreatedapproverejectinvoicedetails($get){
     	global $callConfig;
@@ -688,8 +687,7 @@ class mobileUserClass extends userClass{
     	$update = "update user_mobile_details set is_active = NULL, updated_by = ".$get['user_id']." where user_id ='".$get['user_id']."' AND is_active = 0";
 		$update_data=$callConfig->executeQuery($update);
     	$insert_array = array('company_id'=>$get['company_id'],'user_id'=>$get['user_id'],'fcm_token'=>$post['fcm_token'],'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
-		$res=$callConfig->insertRecord('user_mobile_details',$insert_array);
-		return $res;
+		return $callConfig->insertRecord('user_mobile_details',$insert_array);
     }
     public function togenratefirebaseheaderauthentication($get){
 		$url = SITEURL."/cfa_token.php";
@@ -697,8 +695,7 @@ class mobileUserClass extends userClass{
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HEADER, false);
-		$response = curl_exec($ch);
-		return $response;
+		return curl_exec($ch);
 
     }
     public function verifyFirebaseToken($idToken) {
@@ -1285,8 +1282,7 @@ class mobileUserClass extends userClass{
  	public function todeletemobileempleave($get){
  		global $callConfig;
  		$update_query = "UPDATE employee_leaves SET is_active = NULL WHERE id =".$get['ref_id'];
- 		$res = $callConfig->executeQuery($update_query);
- 		return $res;
+ 		return $callConfig->executeQuery($update_query);
  	}
  	public function toinsertfieldmapuser($get,$post){
  		global $callConfig;
@@ -1602,8 +1598,7 @@ class mobileUserClass extends userClass{
 	public function todeletecomplaintbasedonid($get){
  		global $callConfig;
  		$upquery = "UPDATE complaints SET is_active = NULL, updated_by = ".$get['user_id']."  WHERE company_id =".$get['company_id']." AND id=".$get['complaint_id']."  AND is_active=0";
- 		$data = $callConfig->executeQuery($upquery);
- 		return $data;
+ 		return $callConfig->executeQuery($upquery);
  	}
  	public function toupdatecomplanatedetails($get, $post){
  		global $callConfig;
@@ -1846,8 +1841,7 @@ class mobileUserClass extends userClass{
  	public function toinactiveasedontableid($get){
  		global $callConfig;
  		$upquery = "UPDATE ".$get['table']." SET is_active = 1 WHERE company_id=".$get['company_id']." AND id=".$get['ref_id'];
- 		$res = $callConfig->executeQuery($upquery);
- 		return $res;
+ 		return $callConfig->executeQuery($upquery);
  	}
 
  	public function toupdatedynamicfielddata($get,$post){
@@ -1955,8 +1949,7 @@ class mobileUserClass extends userClass{
     public function tomapouttimeallcase($get){
  		global $callConfig;
  		$upquery = "UPDATE field_work_user_map_points SET map_out_time = '".$get['map_out_time']."' WHERE company_id=".$get['company_id']." AND id=".$get['ref_id'];
- 		$res = $callConfig->executeQuery($upquery);
- 		return $res;
+ 		return $callConfig->executeQuery($upquery);
  	}
  	public function togetsecurtydetails($get){
         global $callConfig;
@@ -2146,8 +2139,7 @@ class mobileUserClass extends userClass{
     	$post['current_status'] = '0';
     	$post['created_by'] = $get['user_id'];
     	$post['created_date'] = date("Y-m-d H:i:s");
-		$res=$callConfig->insertRecord($get['table'],$post);
-		return $res;
+		return $callConfig->insertRecord($get['table'],$post);
     }
     public function togetpostvaldynmicdetials($get, $post){
     	global $callConfig;
@@ -2161,14 +2153,12 @@ class mobileUserClass extends userClass{
 		}
 		$where.= " AND is_active =0";
 		$query = $callConfig->selectQuery($get['table'],'*',$where,'','','');
-		$res = $callConfig->getAllRows($query);
-		return $res;
+		return $callConfig->getAllRows($query);
     }
     public function togetrelatedworkusermapointmob($get){
     	global $callConfig;
     	$query="SELECT map_title, phone, address, map_latitude, map_longitude, map_date FROM `field_work_user_map_points` WHERE company_id =".$get['company_id']." AND user_id = ".$get['user_id']." AND is_active =0 GROUP BY phone";
-    	$res = $callConfig->getAllRows($query);
-    	return $res;
+    	return $callConfig->getAllRows($query);
     }
     public function dyanamicgenccodedetailformobile($get){
     	global $callConfig;
@@ -2196,8 +2186,7 @@ class mobileUserClass extends userClass{
     	global $callConfig;
     	$insert_array = array('company_id'=>$get['company_id'], 'data'=> json_encode($post), 'get_data'=>json_encode($get),'created_by'=>$get['user_id']);
     	$res=$callConfig->insertRecord('field_mobile_orders',$insert_array);
-    	$res=$this->toinsertpurchaseordermobile($get,$post);
-		return $res;
+    	return $this->toinsertpurchaseordermobile($get,$post);
     }
     public function toinsertpurchaseordermobile($get,$post){
 		global $callConfig;
@@ -2351,8 +2340,7 @@ class mobileUserClass extends userClass{
 		global $callConfig;
 		$return = array();
 		$resciptlist = $this->getReceipts($get);
-		$return = $resciptlist['payments'];
-		return $return;
+		return $resciptlist['payments'];
 	}
 	public function getMobileTransactionReceipts($get){
 		global $callConfig;
@@ -2421,8 +2409,7 @@ class mobileUserClass extends userClass{
 	public function toretrivewebviewlogin($get){
 		global $callConfig;
 		$query = "SELECT * FROM application_users WHERE id =".$get['user_id']." AND is_active=0";
-		$res = $callConfig->getRow($query);
-		return $res;
+		return $callConfig->getRow($query);
 	}
 	public function getMobileExpenseDetails($get){
 		global $callConfig;
@@ -2505,8 +2492,7 @@ class mobileUserClass extends userClass{
 	public function togetdeliveryschedulesdetails($get){
 		global $callConfig;
 		$query = "SELECT application_table_name as transaction_table, ref_transaction_number as transaction_number, transaction_id, planned_qty, planned_delivery_date, planned_delivery_time FROM delivery_schedules WHERE id=".$get['ref_id'];
-		$return=$callConfig->getRow($query);
-		return $return;
+		return $callConfig->getRow($query);
 	}
 	public function getFaceLivenessResponse($get){
 		global $callConfig;
@@ -2540,15 +2526,13 @@ class mobileUserClass extends userClass{
 	public function getMobileAllEmployeeLeaves($get){
 		global $callConfig;
 		$query = "SELECT emp_code, display_name, leaves FROM `ai_employees` WHERE id < 5 AND company_id= ".$get['company_id']." AND is_active =0";
-		$return=$callConfig->getAllRows($query);
-		return $return;
+		return $callConfig->getAllRows($query);
 	}
 	public function getMobileSingleEmployeeLeaves($get){
 		global $callConfig;
 		$empname = $get['empname'];
 		$query = "SELECT emp_code, display_name, leaves FROM `ai_employees` WHERE company_id= ".$get['company_id']."  AND display_name LIKE '%".$empname."%'  AND is_active =0";
-		$return=$callConfig->getRow($query);
-		return $return;
+		return $callConfig->getRow($query);
 	}
 	public function insertMobileEmployeeLeaves($get,$post){
 		global $callConfig;
@@ -2954,8 +2938,7 @@ class mobileUserClass extends userClass{
 		    pws.id, pws.name
 		ORDER BY 
 		    pws.name";
-		$return = $callConfig->getAllRows($query);
-		return $return;
+		return $callConfig->getAllRows($query);
     }
     public function togetprojecteditdetailsval($get){
     	global $callConfig;
@@ -3147,8 +3130,7 @@ class mobileUserClass extends userClass{
 		$datas= $callConfig->getAllRows($query);
 		$upquery = $callConfig->executeQuery("UPDATE `project_task_details` SET  to_date= ".date('Y-m-d')." WHERE id=".$post['task_id']);
 		if(count((array)$datas)>0){
-			$return = array('status'=>'fail','message'=>'user already exits');
-			return $return;
+			return array('status'=>'fail','message'=>'user already exits');
 		}else{
 			$insert_array = array('company_id'=>$get['company_id'],'project_id'=>$post['project_id'], 'project_task_id'=>$post['task_id'], 'project_role_id'=>$post['role_id'],'user_id'=>$post['member_ids'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
 			$insert = $callConfig->insertRecord('project_task_teams',$insert_array);
@@ -3247,8 +3229,7 @@ class mobileUserClass extends userClass{
     public function togetchatdatabasetableandtransactionid($get){
     	global $callConfig;
     	$query = "SELECT table_name, transaction_id, query_text, originator, created_date, (SELECT au.display_name FROM application_users au WHERE au.id =originator ) as display_name  FROM `transaction_queries` WHERE company_id =".$get['company_id']." AND  table_name = '".$get['table_name']."' AND transaction_id =".$get['transaction_id']." AND is_active =0";
-    	$data = $callConfig->getAllRows($query);
-    	return $data;
+    	return $callConfig->getAllRows($query);
     }
     public function togetchatdiscussdatadetails($get){
     	global $callConfig;
@@ -5149,7 +5130,7 @@ public function GETProcurementModulesDashboardSummaryCashFlow($get){
 
 
 
-	$returnary = [
+	return [
         "operating_activities" => [
             [
                 "label" => "Profit/(Loss) before tax",
@@ -5249,9 +5230,6 @@ public function GETProcurementModulesDashboardSummaryCashFlow($get){
             ]
         ]
     ];
-
-
-    return $returnary;
 }
 
 //End Cash Flow

@@ -1114,8 +1114,7 @@ public function insertAsset($post){
 	public function getassetTransferRequestsold($get){
 		global $callConfig;
 		$assettrareqsql = "SELECT id,request_date,required_by,admin_buddy,request_status,description FROM asset_transfer_requests WHERE is_active =0 AND company_id = '".$get['company_id']."' AND (required_by = '".$get['required_by']."' OR admin_buddy = '".$get['admin_buddy']."')";
-		$assettrareqres=$callConfig->getAllRows($assettrareqsql);
-		return $assettrareqres;
+		return $callConfig->getAllRows($assettrareqsql);
 	}
 
 	/*End asset allocation */
@@ -1255,8 +1254,7 @@ public function insertAsset($post){
 	public function togetassetsempassetdetails($get,$post){
 		global $callConfig;
 		$emp_assetssql = " SELECT emp_a.id, emp_a.start_date, emp_a.end_date, emp_a.current_status, asset.asset_code , asset.asset_description FROM `user_assets` emp_a, assets asset WHERE emp_a.company_id = '".$get['company_id']."' AND emp_a.is_active = 0 AND emp_a.asset_id = asset.id AND emp_a.user_id =  '".$get['empid']."'";
-		$emp_assetres = $callConfig->getAllRows($emp_assetssql);
-		return $emp_assetres;
+		return $callConfig->getAllRows($emp_assetssql);
 	}
 	public function togetassestdashboarddetails($get,$post){
 		global $callConfig;

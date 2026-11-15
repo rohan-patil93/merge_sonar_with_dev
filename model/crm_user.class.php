@@ -2367,8 +2367,7 @@ payment tersm**/
         $updated_by = $get['user_id'];
         $fid = $get['feasibility_id'];
         $query = "UPDATE feasibility_requirements SET current_status = ".ST_APPROVED.", updated_date = '{$updated_date}', updated_by={$updated_by}  WHERE id = $fid";
-        $rows = $callConfig->executeQuery($query);
-        return $rows;
+        return $callConfig->executeQuery($query);
 
     }
     public function getFeasibilityDashboard($get){
@@ -2390,8 +2389,7 @@ payment tersm**/
         WHERE fr.current_status = ".ST_APPROVED."
         AND (b.actual_return_by IS NULL OR b.actual_return_by = '')
         AND fr.company_id = " .$get['company_id']." AND  fr.is_active = 0";
-        $data = $callConfig->getAllRows($query);
-        return $data;
+        return $callConfig->getAllRows($query);
     }
     public function updateReturnDate($get){
         global $callConfig;
@@ -2402,8 +2400,7 @@ payment tersm**/
         $bom_id = intval($bom_id);
         $actual_return_by = $this->dateconvertdbformat($actual_return_by); // sanitize
         $update_sql = "UPDATE lead_feasibility_boms SET actual_return_by = '{$actual_return_by}', updated_date = '{$updated_date}', updated_by={$updated_by} WHERE id = $bom_id";
-        $result = $callConfig->executeQuery($update_sql);
-        return $result;
+        return $callConfig->executeQuery($update_sql);
     }
 	public function getFeasibilityTableAndFields($get) {
 		global $callConfig;
@@ -2607,8 +2604,7 @@ $html .= "</div>";
         $updated_by = $get['user_id'];
         $feasibility_id = $get['feasibility_id'] ?? '';
         $update_sql = "UPDATE feasibility_requirements SET current_status = " . ST_ACTIVE .", updated_date = '{$updated_date}', updated_by={$updated_by} WHERE id = $feasibility_id";
-        $result = $callConfig->executeQuery($update_sql);
-        return $result;
+        return $callConfig->executeQuery($update_sql);
     }
 
     // End feasibilty part By Kote - 25-06-2025

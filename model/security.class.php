@@ -1909,8 +1909,7 @@ public function getVisitorsDataBasedOnDate($get)
             'current_Status' => $newStatus,
             'status_date' => date('Y-m-d H:i:s')
         ];
-        $res = $callConfig->updateRecord('visitor_logs', $upd, 'id', $rid);
-        return $res;
+        return $callConfig->updateRecord('visitor_logs', $upd, 'id', $rid);
     }
 
     public function getVisitorStatus($rid) {

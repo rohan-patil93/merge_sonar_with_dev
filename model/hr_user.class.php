@@ -3,8 +3,7 @@ class hrUserClass extends userClass{
 	public function getAttendanceData($data){
 	 	global $callConfig;
 	 	$query2 = "SELECT attendace_date,check_in_type,clock_in,check_out_type,clock_out FROM employee_daily_attendance_details WHERE is_active=0 AND company_id = '".$data['company_id']."'  AND attendace_date='".$data['date']."' AND employee_id=".$data['emp_id']." order By clock_in ASC";
-	 	$datas = $callConfig->getAllRows($query2);
-	 	return $datas;
+	 	return $callConfig->getAllRows($query2);
 	}
 	public function togetdatewiseattendancedata($get){
 		global $callConfig;
@@ -848,8 +847,7 @@ class hrUserClass extends userClass{
 		$query = "UPDATE emp_shifts SET is_active =1 WHERE emp_id=".$post['newempid'];
 		$res = $callConfig->executeQuery($query);
 		$insert_array = array('company_id'=>$get['company_id'],'emp_id'=>$post['newempid'],'shift_id'=>$post['shift_id'],'shift_work_day_id'=>$post['shift_setting_id'],'shift_from'=>date('Y-m-d'),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
-		$res = $callConfig->insertRecord('emp_shifts',$insert_array);
-		return $res;
+		return $callConfig->insertRecord('emp_shifts',$insert_array);
 	}
 	public function employeeleaveapplyattendance($get){
 		global $callConfig;
@@ -982,8 +980,7 @@ class hrUserClass extends userClass{
 		$return['insert_array'] = $insert_array;
 		$res = $callConfig->insertRecord('payroll_exclusions',$insert_array);
 		$hquery = $callConfig->selectQuery('employees','id,emp_code, display_name, user_id','id='.$post['emp_id'],'','','');
-		$hudata = $callConfig->getRow($hquery);
-		return $hudata;
+		return $callConfig->getRow($hquery);
 	}
 	public function toinsertpayrollexcuinedata($get,$returns_data,$cat){
 		global $callConfig;
@@ -1533,8 +1530,7 @@ class hrUserClass extends userClass{
 		unset($post['submit']);
 		unset($post['submit_value_exit']);
 		unset($post['rid']);
-		$res = $callConfig->insertRecord('contract_employee_pay',$post);
-		return $res;
+		return $callConfig->insertRecord('contract_employee_pay',$post);
 	}
 	public function togetcontractorctcreportdetails($data){
 		global $callConfig;
@@ -2579,8 +2575,7 @@ class hrUserClass extends userClass{
         $company_id = $get['company_id'] ?? 0;
         $employee_id = $get['employee_id'] ?? 0;
         $query = "SELECT pac.* FROM pay_area_config pac INNER JOIN pay_area_employees pae ON pae.pay_area_id = pac.pay_area_id WHERE pae.emp_id = {$employee_id} AND pae.company_id = {$company_id} AND pae.is_active = 0 AND pac.company_id = {$company_id} AND pac.is_active = 0 LIMIT 1";
-        $payarea_arr = $callConfig->getRow($query);
-        return $payarea_arr;
+        return $callConfig->getRow($query);
     }
 
 	public function getemployeeworkattendancespayareawise($get){

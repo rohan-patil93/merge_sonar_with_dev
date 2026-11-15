@@ -8,8 +8,7 @@ class recruitmentUserClass extends userClass{
 		$sql = "SELECT id,annual_ctc from salary_template where candidate_id='".$data['candidate_id']."' AND company_id = '".$data['company_id']."' and is_active = 0";
 		$val=$callConfig->getRow($sql);
 		$fieldnames=array('candidate_id'=>$data['candidate_id'],'company_id'=>$data['company_id'],'status_date'=>date('Y-m-d'),'current_status'=>$data['current_status'],'is_active'=>'0','offer_amount'=>$val->annual_ctc,'created_by'=>$data['user_id'],'comments'=>$data['comments']);
-		$res=$callConfig->insertRecord('candidate_offer_histories',$fieldnames);
-		return $res;
+		return $callConfig->insertRecord('candidate_offer_histories',$fieldnames);
 	}
 	public function candidateofferAccept($get,$post){
 		global $callConfig;

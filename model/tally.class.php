@@ -3,8 +3,7 @@ class tallyClass extends userClass{
 	public function topostmasterdetails($get, $post){
 	 	global $callConfig;
 	 	$api_hits = array('company_id'=>$get['company_id'],'api_url'=>$get['mode'],'api_request_parameters'=>json_encode($get),'api_response_details'=>json_encode($post), 'application_table'=> $get['table'], 'status_json'=>$get['json_data'], 'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
-		$res=$callConfig->insertRecord('api_hits',$api_hits);
-	 	return $res;
+		return $callConfig->insertRecord('api_hits',$api_hits);
 	}
 	public function tosenditem_categoriestotally($get){
 	 	global $callConfig;
@@ -83,8 +82,7 @@ class tallyClass extends userClass{
 
 	public function insertAPIHits($get){
 	 	global $callConfig;
-	 	$res=$callConfig->insertRecord('api_hits',$get);
-	 	return $res;
+	 	return $callConfig->insertRecord('api_hits',$get);
 	}
 
 	public function getLedgerMaster($get,$post){

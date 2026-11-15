@@ -8,22 +8,19 @@ class reactClass extends userClass{
 		$data['current_status'] = '0';
 		$data['created_by'] = $get['user_id'];
 		$data['created_date'] = date("Y-m-d H:i:s");
-		$res=$callConfig->insertRecord($get['table'],$data);
-		return $res;
+		return $callConfig->insertRecord($get['table'],$data);
 	}
 	public function dynamicupdateatareact($get, $data){
 		global $callConfig;
 		$rid = $get['rid'];
 		$fid = $get['fid'] !='' ? $get['fid'] : 'id';
-		$res=$callConfig->updateRecord($get['table'],$data,$fid,$rid);
-		return $res;
+		return $callConfig->updateRecord($get['table'],$data,$fid,$rid);
 	}
 	public function dynamicdeletebyridreact($get){
 		global $callConfig;
 		$rid = $get['rid'];
 		$fid = $get['fid'] !='' ? $get['fid'] : 'id';
-		$res=$callConfig->updateRecord($get['table'],array('is_active'=>null),$fid,$rid);
-		return $res;
+		return $callConfig->updateRecord($get['table'],array('is_active'=>null),$fid,$rid);
 	}
 	public function dynamiclistatreact($get){
 		global $callConfig;
@@ -67,8 +64,7 @@ class reactClass extends userClass{
 		global $callConfig;
 		$whr = "";
 		$module_query = "SELECT module_id,module_name as display_name, display_name as full_name, module_logo FROM module_setup WHERE company_id = ".$get['company_id']." AND linking =1  AND is_active =0 ".$whr;
-		$module_data = $callConfig->getAllRows($module_query);
-		return $module_data;
+		return $callConfig->getAllRows($module_query);
 	}
 	public function getReactMenuList($get){
 		global $callConfig;
@@ -5013,12 +5009,11 @@ class reactClass extends userClass{
 		if ($singleSection != '' && in_array($singleSection, $sectionKeys)) {
 			$page = (int) ($get['page'] ?? $get[$singleSection . '_page'] ?? 1);
 			$search = trim((string) ($get['search'] ?? $get[$singleSection . '_search'] ?? ''));
-			$return = array(
+			return array(
 				'has_access' => true,
 				'section' => $singleSection,
 				$singleSection => $this->getContractAmcFmDashboardSection($get, $singleSection, $page, $search),
 			);
-			return $return;
 		}
 
 		foreach ($sectionKeys as $key) {

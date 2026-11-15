@@ -84,8 +84,7 @@ class CSRClass
             WHERE id = '" . $get['rid'] . "';
             ";
 
-            $res = $callConfig->executeQuery($query);
-            return $res;
+            return $callConfig->executeQuery($query);
         }
     }
 
@@ -104,8 +103,7 @@ class CSRClass
         GROUP BY proposal_id
         HAVING COUNT(*) = SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END)
     )";
-    $res = $callConfig->getAllRows($query);
-    return $res;
+    return $callConfig->getAllRows($query);
 }
 
 public function getTracckingPerentage($get)
@@ -117,8 +115,7 @@ public function getTracckingPerentage($get)
     SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) AS completed_count
     FROM csr_project_tracking
     WHERE proposal_id=" . $rid . " AND company_id='" . $get['company_id'] . "'";
-    $res = $callConfig->getRow($query);
-    return $res;
+    return $callConfig->getRow($query);
 }
 
 public function getCommitteMembers($get)
@@ -128,8 +125,7 @@ public function getCommitteMembers($get)
     WHERE aumr.role_short_code='CSR_COMMITTEE_MEMBER'
     AND aumr.company_id='" . $get['company_id'] . "' 
     AND aumr.is_active='0'";
-    $res = $callConfig->getAllRows($query);
-    return $res;
+    return $callConfig->getAllRows($query);
 }
 // function getCsrData($get)
 // {
@@ -330,8 +326,7 @@ public function getApprovedMembers($get)
     WHERE tal.transaction_id = '" . $id . "' AND tal.transaction_table='" . $table . "'
     AND tal.company_id='" . $get['company_id'] . "' 
     AND au.is_active='0'";
-    $res = $callConfig->getAllRows($query);
-    return $res;
+    return $callConfig->getAllRows($query);
 }
 
 public function getCsrSetting($get)
@@ -340,8 +335,7 @@ public function getCsrSetting($get)
     $id = $get['id'];
     $table = $get['table'];
     $query = "SELECT * FROM  csr_setting WHERE company_id='" . $get['company_id'] . "' AND is_active='0'";
-    $res = $callConfig->getRow($query);
-    return $res;
+    return $callConfig->getRow($query);
 }
 
 
@@ -1200,8 +1194,7 @@ public function getUsersMapPointsData($get){
         global $callConfig;
         $updated_date = date('Y-m-d H:i:s');
         $query = "UPDATE " . $get['table_name'] . "  SET current_status = 199 , updated_date='" . $updated_date . "', updated_by='" . $get['user_id'] . "'  WHERE id = '" . $get['transaction_id'] . "'";
-        $res = $callConfig->executeQuery($query);
-        return $res;
+        return $callConfig->executeQuery($query);
 
     }
 
@@ -3292,8 +3285,7 @@ public function getUsersMapPointsData($get){
             'created_by' => $created_by != '' ? $created_by : null
         );
 
-        $res = $callConfig->insertRecord('csr_project_documents', $insertData);
-        return $res;
+        return $callConfig->insertRecord('csr_project_documents', $insertData);
     }
 
     public function updateCsrProjectDocument($get, $post = array()) {
@@ -3332,8 +3324,7 @@ public function getUsersMapPointsData($get){
 
         $updateData['updated_by'] = $get['user_id'];
         $updateData['updated_date'] = date('Y-m-d H:i:s');
-        $res = $callConfig->updateRecord('csr_project_documents', $updateData, 'id', $document_id);
-        return $res;
+        return $callConfig->updateRecord('csr_project_documents', $updateData, 'id', $document_id);
     }
     public function getCsrProjectTrackingManage($get) {
         global $callConfig;

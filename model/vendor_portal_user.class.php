@@ -385,8 +385,7 @@ class vendorPortelUserClass extends userClass
 		$verification_profile_users[$post['user_id']]['updatedatetime'] = date("Y-m-d H:i:s");
 		$verification_profile_users[$post['user_id']]['comment'] = $post['profile_review_comments'];
 		$updateary = array('verification_profile_users' => json_encode($verification_profile_users), 'updated_by' => $post['user_id'], 'updated_date' => date("Y-m-d H:i:s"));
-		$res = $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
-		return $res;
+		return $callConfig->updateRecord($transaction_table, $updateary, 'id', $transaction_id);
 	}
 	public function updateVendorVerifications($get, $post)
 	{
@@ -1044,8 +1043,7 @@ class vendorPortelUserClass extends userClass
 		$extramsg .= "<tbody>";
 		$emailarray['extra_informations'] = $extramsg;
 		$notdataa = array();
-		$emails = $this->sendNotificationAndEmails($notdataa, $emailarray, 74);
-		return $emails;
+		return $this->sendNotificationAndEmails($notdataa, $emailarray, 74);
 	}
 	public function insertApplicationUserInvitations($get, $post)
 	{
