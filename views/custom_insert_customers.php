@@ -850,8 +850,6 @@ function toggleRowLock(button) {
 										<?php if($customers['id'] !=""){ ?><i class="fa fa-check-square"></i>
 									Update <?php }else{  ?><i class="icofont icofont-plus"></i>
 									Submit<?php } ?> </button>
-									<!-- <button type="button" class="btn btn-primary m-b-20"><i class="icofont icofont-ui-messaging"></i>
-									Message</button> -->
 									<input type="hidden" name="rid" value="<?php echo $rid; ?>">
 								</div>
 							</div>
@@ -887,22 +885,10 @@ function toggleRowLock(button) {
 						<a class="nav-link" data-bs-toggle="tab" href="#payment-billing" role="tab">Payment and Billing</a>
 						<div class="slide"></div>
 					</li>
-					<!-- <li class="nav-item">
-						<a class="nav-link" data-bs-toggle="tab" href="#sale-discount" role="tab">Sale / Discount</a>
-						<div class="slide"></div>
-					</li> -->
-					<!-- <li class="nav-item">
-						<a class="nav-link" data-bs-toggle="tab" href="#agreements" role="tab">Agreements</a>
-						<div class="slide"></div>
-					</li> -->
 					<li class="nav-item">
 						<a class="nav-link" data-bs-toggle="tab" href="#attachments" role="tab">Attachments</a>
 						<div class="slide"></div>
 					</li>
-					<!-- <li class="nav-item">
-						<a class="nav-link" data-bs-toggle="tab" href="#no-hiring" role="tab">No hiring clause</a>
-						<div class="slide"></div>
-					</li> -->
 					<li class="nav-item">
 						<a class="nav-link" data-bs-toggle="tab" href="#reantal_properties" role="tab">Rental Properties</a>
 						<div class="slide"></div>
@@ -917,10 +903,6 @@ function toggleRowLock(button) {
 						<div class="slide"></div>
 					</li>
 				<?php } ?>
-					<!-- <li class="nav-item">
-						<a class="nav-link" data-bs-toggle="tab" href="#reantal_properties_2" role="tab">Rental Properties - 2</a>
-						<div class="slide"></div>
-					</li> -->
 
 				</ul>
 				<!-- Tab panes -->

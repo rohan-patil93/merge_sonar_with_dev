@@ -74,7 +74,6 @@ function submitdetails(){
 				<th scope="col"><?= __('Brand') ?></th>
 				<th scope="col"><?= __('Model') ?></th>
 				<th scope="col"><?= __('Serial Number') ?></th>
-				<!-- <th scope="col">Location </th> -->
 				<!-- <th scope="col"><?= __('Status') ?></th> -->
 				<!-- <th scope="col"><?= __('Condition') ?></th> -->
 				<!-- <th scope="col"><?= __('Asset Value') ?> <span class="requried text-danger">*</span></th> -->
@@ -114,9 +113,6 @@ function submitdetails(){
 									<option  value="<?php echo $ass_conditiokey; ?>" <?php echo $ass_conditiokey == $list_asset['conditions']?"selected":""; ?>><?php echo ucwords($ass_conditio); ?></option>
 								<?php } ?>
 							</select>
-						</td> -->
-						<!-- <td>
-							<input type="text" class="form-control text-right" name="asset_value[]" value="">
 						</td> -->
 				</tr>
 			<?php } ?>
@@ -163,5 +159,3 @@ function submitdetails(){
 		changeYear: true
 	});
 </script>
-<!--
-<script src="assets/pages/data-table/extensions/buttons/js/extension-btns-custom.js"></script> -->

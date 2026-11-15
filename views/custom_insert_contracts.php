@@ -1981,9 +1981,6 @@ if (count((array) $milestones) > 0) {
                 <i class="icofont icofont-reply"></i>Back
             </a>
             <?php if ($show_contract_type_toggle && empty($contract_form_locked) && !$amc_is_cancelled): ?>
-                <!-- <button type="button" class="btn btn-primary btn-sm cc-btn-submit desktop-view ms-1">
-                <i class="icofont icofont-check"></i> Submit Contract
-            </button> -->
             <?php endif; ?>
             <?php
             $is_cancelled = !empty($formData['cancel_status']) && $formData['cancel_status'] == 'Y';
@@ -2236,9 +2233,6 @@ if (count((array) $milestones) > 0) {
                                                 <i class="fa fa-refresh"></i> Renew Contract
                                             </button>
                                         <?php else: ?>
-                                            <!--  <button type="button" class="btn btn-primary btn-sm cc-btn-submit">
-                                            <i class="icofont icofont-check"></i> Submit Contract
-                                        </button> -->
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 </div>
@@ -3936,7 +3930,6 @@ if (count((array) $milestones) > 0) {
 
 
         <!-- SweetAlert2 CDN -->
-        <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 
         <!-- Hidden data for JavaScript -->
         <div id="php-data" style="display: none;">
@@ -3969,7 +3962,6 @@ if (count((array) $milestones) > 0) {
 
         <link rel="stylesheet"
             href="assets/css/custom_insert_create_contract.css?v=<?= @filemtime(__DIR__ . '/assets/css/custom_insert_create_contract.css') ?: time() ?>">
-        <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
         <script
             src="../assets/js/custom_insert_amc_contract.js?v=<?= @filemtime(__DIR__ . '/assets/js/custom_insert_amc_contract.js') ?: time() ?>"></script>
     </div><!-- .card-block -->

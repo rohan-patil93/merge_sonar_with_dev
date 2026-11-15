@@ -1162,7 +1162,6 @@ function calculateTotal(){
 
             <?php }
             }?>
-                <!-- <a class="dropdown-item" href="#">Invoice</a> -->
             </div>
            <?php  } ?>
         </div>
@@ -1320,7 +1319,7 @@ function calculateTotal(){
             <div class="card">
                 <div class="card-header" id="headingTwo6">
                     <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo6" aria-expanded="false" aria-controls="collapseTwo6">
-                        <!-- <i class="flaticon2-notification"></i> --> <?php echo __('Contact Detail'); ?>
+                         <?php echo __('Contact Detail'); ?>
                     </div>
                 </div>
                 <div id="collapseTwo6" class="collapse" aria-labelledby="headingTwo6" data-parent="#accordionExample6">
@@ -1555,7 +1554,6 @@ function calculateTotal(){
                             $stausresult = ViewStatusData();
                             foreach ($commentss as  $lists) {?>
                             <div class="kt-timeline-v2__item">
-                                <!-- <span class="kt-timeline-v2__item-time"> </span> -->
                                 <div class="kt-timeline-v2__item-cricle">
                                     <?php if($lists['response_type'] == '3'){ ?>
                                     <i class="fa fa-genderless kt-font-success"></i>
@@ -1651,10 +1649,6 @@ function calculateTotal(){
 </div>
 </div>
 </div>
-<!-- <div class="form-group row">
-    <label class="col-form-label col-lg-3 col-sm-12">&nbsp;</label>
-    <input type="hidden" class="form-control" name="file" >
-</div> -->
 <?php if($rid !=''){ ?>
 <div class="form-group row">
     <span class="col-form-label col-lg-3 col-sm-12 d-inline-block fw-bold"><?php echo __('File Upload'); ?></span>
@@ -1743,7 +1737,6 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
                                     <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
                                         <?php foreach ($vdata_details as  $vdvalue) {?>
                                         <div class="kt-timeline-v2__item">
-                                            <!-- <span class="kt-timeline-v2__item-time"> </span> -->
                                             <div class="kt-timeline-v2__item-cricle">
                                                 <?php if($vdvalue['transaction_type'] == 'INSERT'){ ?>
                                                 <i class="fa fa-genderless kt-font-success"></i>

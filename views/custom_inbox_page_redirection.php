@@ -74,6 +74,3 @@ if($return == 0){
 }
 ?>
 
-<!-- <script type="text/javascript" src="assets/bower_components/moment/js/moment.min.js"></script>
-<script type="text/javascript" src="assets/bower_components/fullcalendar/js/fullcalendar.min.js"></script>
-<script type="text/javascript" src="assets/pages/full-calender/calendar.js"></script> -->

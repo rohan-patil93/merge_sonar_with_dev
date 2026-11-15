@@ -68,8 +68,6 @@ foreach ($tracking_inprogress_arr as $row) {
 
 <div class="page-body">
 	<!-- Pradeep HTML Start here -->
-	<!-- <div class="card proj-progress-card">
-		<div class="card-block"> -->
 	<div class="row">
 		<!-- xyz -->
 		<?php

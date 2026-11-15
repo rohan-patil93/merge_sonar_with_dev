@@ -121,7 +121,6 @@ if(isset($row_id) && $row_id != '' && !in_array($currentStatus, $editableStatuse
  $disabled = 'event_disabled';
 }
 ?>
-<!-- <script src="assets/js/pages/myscrpit/bootstrap-daterangepicker.js"></script>  -->
 <script type="text/javascript">
  function deletequestion(qid){
   $.ajax({

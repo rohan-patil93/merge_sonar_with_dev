@@ -203,13 +203,11 @@
 </script>
 
 <div id="kt_modal_add_custom_field" class="modal fade" role="dialog" aria-hidden="true">
- <!-- <div> -->
 	<div class="modal-dialog modal-xl">
 		<div class="modal-content" style="min-height: 590px;">
 			<div class="modal-header">
 				<h5 class="modal-title">
 					<?= __("Add Custom Field") ?>  <?php echo $get_table; ?>
-					<!-- <small>Autocomplete data source</small> -->
 				</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -373,7 +371,6 @@
 						</div>
 
 							<div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
-								<!-- <button class="btn btn-danger delete" id="removeRows_static" type="button">- Delete</button>&nbsp;&nbsp; -->
 								<button class="btn btn-success" id="addRows_static" type="button" onclick="addRowss()"><?= __("+ Add More") ?></button>&nbsp;&nbsp;
 								<button type="button" class="btn btn-brand" onclick="checkcal()"><?= __("Check") ?> </button>&nbsp;&nbsp;
 								<button type="button" class="btn btn-danger" onclick="createselectquery()"><?= __("Excute Query") ?></button>
@@ -458,7 +455,6 @@
 
 
 							<div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
-								<!-- <button class="btn btn-danger delete" id="removeRows_dynamic" type="button">- Delete</button>&nbsp;&nbsp; -->
 								<button class="btn btn-success" id="addRows_dynamic" type="button" onclick="addRowssd()"><?= __("+ Add More") ?></button>&nbsp;&nbsp;
 								<button type="button" class="btn btn-brand" onclick="checkval()"><?= __("Check") ?> </button>&nbsp;&nbsp;
 								<button type="button" class="btn btn-danger" onclick="createselectquery()"><?= __("Excute Query") ?></button>

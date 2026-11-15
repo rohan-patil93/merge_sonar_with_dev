@@ -643,22 +643,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                  <?php ?>
 
         	</div>
-	<!--
-			<div class="tab-pane card-body p-0" id="contact-tab" role="tabpanel">
-
-			</div>
-			<div class="tab-pane card-body p-0" id="company-tab" role="tabpanel">
-
-			</div>
-			<div class="tab-pane card-body p-0" id="deal-tab" role="tabpanel">
-
-			</div>
-            <div class="tab-pane card-body p-0" id="campaigns-tab" role="tabpanel">
-
-            </div>
-            <div class="tab-pane card-body p-0" id="project-tab" role="tabpanel">
-
-            </div> --></div>
+	</div>
 
 
 

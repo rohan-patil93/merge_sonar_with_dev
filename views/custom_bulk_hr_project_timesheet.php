@@ -641,9 +641,7 @@ $total_vs_p = (($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'
 												<th scope="col" class="p-0 min-w-200px text-center"><?= __("Vendor") ?></th>
 												<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>__('Rate Card Value'))); ?> </th>
 												<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>__('PO Value'))); ?></th>
-												<!-- <th scope="col" class="p-0 min-w-100px text-right">Billable Amount</th>-->
 												<th scope="col" class="p-0 min-w-125px text-center"><?= __("Billable Hours") ?></th>
-											<!-- 	<th scope="col" class="p-0 min-w-125px text-right">Nonbillable Hours</th> -->
 												<th scope="col" class="p-0 min-w-110px text-center"><?= __("Status") ?></th>
 												<th scope="col" class=" min-w-50px text-center">
 																		<div class="checkbox-fade fade-in-primary">
@@ -840,9 +838,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 													<th scope="col" class="p-0 min-w-200px text-center"><?= __("Vendor") ?></th>
 													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>__('Rate Card Value'))); ?></th>
 													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>__('PO Value'))); ?></th>
-													<!--  <th scope="col" class="p-0 min-w-100px text-right">Billable Amount</th> -->
 													<th scope="col" class="p-0 min-w-125px text-center"> <?= __("Hours") ?></th>
-													<!-- <th scope="col" class="p-0 min-w-125px text-right">Nonbillable Hours</th> -->
 													<th scope="col" class="p-0 min-w-110px text-center"><?= __("Status") ?></th>
 													<th scope="col" class=" min-w-50px text-center">
 														<div class="checkbox-fade fade-in-primary" name="approval_check_box">

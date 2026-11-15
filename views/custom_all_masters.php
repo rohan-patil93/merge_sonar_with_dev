@@ -150,7 +150,6 @@ $datas = json_decode($emailgroupdata,1);
          <div class="d-flex align-items-center">
             <div class="flex-shrink-0 mr-4 symbol symbol-60 symbol-circle">
                <span class="kt-media kt-media--lg kt-media--circle">
-                  <!-- <img src="assets/media/project-logos/3.png" alt="image"> -->
                   <div style="background: #fbce44;width: 50px;height: 50px; border-radius: 50%;text-align: center;">
                     <span style="color: #FFF;font-size: 25px;margin: 8px; font-weight: bold;"><?php echo initials(ucwords($data['application_table_name'])); ?></span>
                 </div>
@@ -202,10 +201,6 @@ $datas = json_decode($emailgroupdata,1);
           <i class="ti-list"></i>
           <a href="#" class="kt-widget__value kt-font-brand"><?php echo $total; ?> <?= __("Recards") ?></a>
       </div>
-    									<!-- <div class="kt-widget__blog">
-    										<i class="flaticon2-talk"></i>
-    										<a href="#" class="kt-widget__value kt-font-brand">648 Comments</a>
-    									</div> -->
     								</div>
 
     								<div class="kt-widget__section float-right ml-5">

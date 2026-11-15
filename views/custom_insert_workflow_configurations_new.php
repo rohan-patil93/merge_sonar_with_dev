@@ -586,7 +586,6 @@ $stausresult = ViewStatusData();
 									<span class="form-label d-inline-block fw-bold">Document Type</span>
 									<select class="form-select js-example-basic-single" name="document_type_id"
 										id="document_type_id" aria-label="Document Type Id">
-										<!-- <option value="">Select Document Type</option> -->
 										<?php if (count((array) $documentTypes) > 0) {
 											foreach ($documentTypes as $docType) {
 												$docType = is_array($docType) ? $docType : (array) $docType;
@@ -769,19 +768,12 @@ $stausresult = ViewStatusData();
 
 						</div>
 					</div>
-					<!-- <div class="card">
-					<div class="card-header">
-						<h5>WorkFlow Levels</h5>
-					</div>
-					<div class="card-body" id="workflow_level"> -->
 					<div id="workflow_level">
 						<?php
 						$_POST['workflowlevelcnt'] = $workflowconfiguration['workflow_level'];
 						$_POST['work_level_type'] = $workflowconfiguration['work_level_type'];
 						include_once 'views/custom_insert_workflow_configurations_new_ajax.php'; ?>
 					</div>
-					<!-- </div>
-					</div> -->
 				</div>
 			</div>
 		</div>

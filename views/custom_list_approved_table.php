@@ -227,7 +227,6 @@ $get_option = $_REQUEST['option'];
 
 <?php /**/ $shortcode = "TM"; $from_date = fromDate(date("Y-m-01")); $to_date =fromDate(date("Y-m-t")); ?>
 <div class="col-lg-4 mb-2">
-								<!-- <span class="form-label d-block">Transaction Date</label>	 -->
 								<input type="hidden" name="pick_date" id="pick_date" value="Today">
 								<input type="hidden" name="shortcode_date" id="shortcode_date" value="TD">
 							<div class="btn-group dropdown-split-primary" style="width: 100%;">

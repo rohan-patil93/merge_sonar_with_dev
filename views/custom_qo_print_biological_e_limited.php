@@ -1,5 +1,4 @@
     <div class="width-800 m-auto" id="printDiv" style="width: 800px; display: block; margin: 0 auto !important; background: #ffffff;">
-            <!-- <link rel="stylesheet" type="text/css" href="../assets/css/custom_qo_print_aditya_industries.css"> -->
 
 
             <table style="width: 100%; border-collapse: collapse; border: 1px solid #cccccc; font-family: 'Tahoma';">

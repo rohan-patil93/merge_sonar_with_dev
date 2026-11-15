@@ -232,29 +232,6 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
                           <a href="#!" onclick="OpenInsertDebitNotePopUp('<?php echo $ri['id']; ?>')" class="input-group-text  cursor-pointer float-left btn btn-success" > Debit Note</a>
                           <a href="#!"  onclick="OpenInsertCreditNotePopUp('<?php echo $ri['id']; ?>')" class="input-group-text cursor-pointer float-right btn btn-danger m-l-5" >Credit Note</a>
                     </div>
-                   <!--  <div class="card-footer">
-                      <div class="row">
-                      <div class="col-lg-7"></div>
-                      <div class="col-lg-1">
-                              <a target="_blank" href="index.php?option=COM_QO_PRINT&amp;rid=2&amp;table=rental_invoices&amp;title=Rental+Invoices" class="btn btn-clean"><i class="ti-printer"></i>
-                              </a>
-                            </div>
-                            <div class="col-lg-1">
-                              <a target="_blank" href="index.php?option=COM_QO_PRINT&amp;rid=2&amp;table=rental_invoices&amp;title=Rental+Invoices" class="btn btn-clean">
-                                <i class="fa fa-download"></i>
-                              </a>
-                            </div>
-                            <div class="col-lg-1">
-                                <a target="_blank" href="index.php?option=COM_QO_PRINT&amp;rid=2&amp;table=rental_invoices&amp;title=Rental+Invoices" class="btn btn-clean">
-                                <i class="ti-mobile" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Phone Conversation Request"></i></a>
-                              </div>
-                              <div class="col-lg-1">
-                                <a target="_blank" href="index.php?option=COM_QO_PRINT&amp;rid=2&amp;table=rental_invoices&amp;title=Rental+Invoices" class="btn btn-clean">
-                              <i class="ti-email" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Send Email"></i>
-                            </a>
-                            </div>
-                      </div>
-                    </div> -->
                   </div>
               </div>
             <?php }

@@ -259,7 +259,6 @@ function fileUplodingDisplay(){
 
 							  <div class="col-lg-2">
 									<span  class="col-form-label ml-2"> Select View Type <b class="requried">*</b> </span>
-								<!-- <div class="col-lg-4" > </div> -->
 				 			  </div>
 							  <div class="col-lg-3">
 
@@ -381,9 +380,6 @@ function fileUplodingDisplay(){
 							<div class="col-lg-1">
 								<span class="">wizard</span>
 							</div>
-							<!-- <div class="col-lg-1-5">
-								<span class="">  Add Custom Field  </span>
-							</div> -->
 						</div>
 					</div>
 
@@ -563,7 +559,6 @@ function fileUplodingDisplay(){
 										<div class="card">
 											<div class="card-header" id="headingTwo6" style="padding: 10px !important;">
 												<div class="accordion-msg waves-effect waves-dark scale_active collapsed" data-bs-toggle="collapse" data-parent="#accordion" href="#collapseTwo6right" aria-expanded="true" aria-controls="collapseTwo6right" style="padding: 5px;border-top: 0px;">File Upload
-													<!--<b class="f-24 float-right">+</b> -->
 												</div>
 											</div>
 											<div id="collapseTwo6right" class="collapse" aria-labelledby="headingTwo6" data-parent="#accordionExample6">

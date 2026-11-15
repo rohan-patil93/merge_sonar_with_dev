@@ -66,10 +66,7 @@ function updateApplicationTickets(rid,status){
 				<th scope="col"><?= __('Issue') ?></th>
 				<th scope="col"><?= __('Request') ?></th>
 				<th scope="col"><?= __('File') ?></th>
-				<!-- <th scope="col">Response</th> -->
-				<!-- <th scope="col">Completion</th> -->
 				<th scope="col"><?= __('Status') ?></th>
-				<!-- <th scope="col"></th> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -133,8 +130,6 @@ function updateApplicationTickets(rid,status){
 				<th scope="col"><?= __('Issue') ?></th>
 				<th scope="col"><?= __('Request') ?></th>
 				<th scope="col"><?= __('File') ?></th>
-				<!-- <th scope="col">Response</th> -->
-				<!-- <th scope="col">Completion</th> -->
 				<th scope="col"><?= __('Status') ?></th>
 			</tr>
 		</thead>

@@ -400,9 +400,6 @@ if($totaldoc != 0 && $totaldoc !=""){
                                 <!-- <span class="label label-xs label-success m-l-10"><?php echo count((array)$gdocs);?></span>-->
 </a>                            </li>
                         <?php } ?>
-                        <!-- <li class="nav-item float-right">
-                            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#schedules_tab" role="tab" aria-selected="true" onclick="getSchedulesOrders()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">Schedules</a>
-                        </li> -->
                         <?php  /** if($table_name == 'work_orders'){ ?>
                         <li class="nav-item">
                             <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#itemssummary" role="tab" aria-selected="true">Items Summary</a>
@@ -900,7 +897,6 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
                                     <!-- <div class="p-1 b-radius-25 text-center left-icon-width" style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;"> -->
-                                        <!-- <i class=" ti-briefcase f-w-600"></i> -->
 
                 <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
@@ -909,7 +905,6 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
                 </div>
-                                <!--    </div> -->
                                 </div>
                                 <div class="col p-0 m-l-10">
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$activeres1['id']); ?>" <?php echo $edit_permissionbtn; ?>>

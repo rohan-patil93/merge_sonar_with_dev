@@ -257,7 +257,6 @@ function submitdetails(){
 	<button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails()"><?= __('Submit') ?></button>
 </div>
 
-<!-- <script src="assets/pages/data-table/extensions/responsive/js/responsive-custom.js"></script> -->
 <script type="text/javascript">
 	// $(".js-example-basic-single").select2();
 	// $(".js-example-disabled-results").select2();
@@ -269,5 +268,3 @@ function submitdetails(){
 	// 	changeYear: true
 	// });
 </script>
-<!--
-<script src="assets/pages/data-table/extensions/buttons/js/extension-btns-custom.js"></script> -->

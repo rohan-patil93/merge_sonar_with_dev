@@ -2625,12 +2625,6 @@ if($checktimeprint > 0){
                             </div>
                             </div>
                         </div>
-                        <!-- <div class="kt-portlet__head-label float-left">
-                            <h3 class="kt-portlet__head-title"> Items/Services </h3>
-                        </div>
-                        <div style="float: right;">
-
-                         </div> -->
                     </div>
 
                     <div class="kt-portlet__body1" style="padding: 10px;">
@@ -3217,11 +3211,9 @@ if($rid !='' && isset($file_data['file_upload']) && $file_data['file_upload']==0
                         </div>
 
                         <div class="col-lg-2 text-right mt-2 mb-2">
-                            <!-- <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button> -->
                         </div>
                     </div>
             </div>
-             <!-- <button  id="btndisableck1" class="btn btn-primary mr-2"  ><i class="la la-check"></i>Update</button> -->
         </form>
     </div>
     </div>
@@ -3243,13 +3235,6 @@ if($rid !='' && isset($file_data['file_upload']) && $file_data['file_upload']==0
     }
     echo $todisplaythree = todisplaythree(array('table'=>$table_name,'originator'=>$rpdata['created_by'],'encode'=>'no','id'=>$passid,'dis_query'=>'yes','dis_timeline'=>'yes','dis_comments'=>'yes','dis_track'=>'yes'));
 ?>
-<!-- <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl" style="max-width: 800px;">
-        <div class="modal-content" style="min-height: 50px;width: 800px;" id="popup1">
-
-        </div>
-    </div>
-</div> -->
 <script type="text/javascript">
 
 </script>

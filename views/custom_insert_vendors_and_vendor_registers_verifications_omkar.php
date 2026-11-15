@@ -959,10 +959,6 @@ function showNotificationIcon($status)
             <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">
                 Next <i class="fa fa-arrow-right"></i>
             </button>
-            <!-- <button type="button" class="btn btn-success" id="finishBtn" onclick="finishVerification()"
-                style="display: none;">
-                <i class="fa fa-check"></i> Complete Verification
-            </button> -->
         </div>
     </div>
 </div>

@@ -160,7 +160,6 @@ $account_groups = $result['account_groups'];
      </div>
      <?php if($chartofaccountssingle['id']==""){ ?>
      <div class="form-group col-lg-6">
-       <!--  <label for="opening_balance" class="form-label">Opening Balance <span class="text-danger">*</span></label> -->
          <span class="d-block error-message text-danger"></span>
         <input type="number"  class="form-control text-right requried_field"  id="opening_balance" value="0" readonly="" />
       </div>

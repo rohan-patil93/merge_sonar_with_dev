@@ -372,12 +372,8 @@ function emptyCheck($valu)
                 <tr style="background: #eeeeee;">
                     <th scope="col" style="padding:5px;text-align: left;font-size: 12px;">Item Name</th>
                     <th scope="col" style="padding:5px;text-align: left;font-size: 12px;">Note</th>
-                    <!--<th scope="col" style="padding:10px;text-align: right;">HSN/SAC</th>
-                    <th scope="col" style="padding:10px;text-align: right;">GST Rate</th>
-                    <th scope="col" style="padding:10px;text-align: right;">QTY.</th> -->
                     <th scope="col" style="padding:5px;text-align: right;font-size: 12px;">Rate</th>
                     <th scope="col" style="padding:5px;text-align: right;font-size: 12px;">Tax</th>
-                    <!--<th scope="col" style="padding:10px;text-align: right;">IGST</th> -->
                     <th scope="col" style="padding:5px;text-align: right;font-size: 12px;">Total</th>
                 </tr>
                 <?php foreach ($transaction_items as $ta) { ?>
@@ -420,7 +416,6 @@ function emptyCheck($valu)
                                         <p style="font-size: 12px;color:#333333;font-weight: bold;">
                                             <?php echo emptyCheck($bank_accounts['upi_id']); ?>
                                         </p>
-                                        <!-- <p style="font-size:13px;color:#333333;white-space:initial;">Maximum of 1 lakh can be transfered via UPI in a single day</p> -->
                                     </td>
                                 </tr>
                                 <tr>
@@ -585,11 +580,6 @@ function emptyCheck($valu)
                 </tr>
                 <tr>
                     <td style="width:60%;vertical-align: top;">
-                        <!-- <div class="" style="display: block; box-sizing:border-box;background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right: 10px;margin-top: 10px;">
-                            <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight:bold;">Term & Condition</h3>
-                            <p style="font-size:12px;color:#333333;font-weight:500;white-space:initial;margin-top: 10px;">Please pay within 15 days from the date of invoice, overdue intrest @ 14% will be charged on display payment.</p>
-                            <p style="font-size:13px;color:#333333;font-weight:500;white-space:initial;">Please quote invoice number when remaining fund.</p>
-                        </div> -->
                         <div class=""
                             style="display: block; box-sizing:border-box;background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right: 10px; margin-top:10px;">
                             <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight:bold;">Additional Notes</h3>

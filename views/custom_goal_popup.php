@@ -129,7 +129,6 @@ include_once '../comm.php';
 											<?php/* $count++;  } }*/ ?>
 									</table>
 									<div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
-								<!-- <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>&nbsp;&nbsp; -->
 								<button class="btn btn-success" id="addRows" type="button" onclick="addmoreRows()">+ <?php echo __('Add More'); ?></button>&nbsp;&nbsp;
 
 							</div>
@@ -144,7 +143,6 @@ include_once '../comm.php';
 				<button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo __('Close'); ?></button>
 				<button type="button" class="btn btn-primary" onclick="submitrom()" ><?php echo __('Submit'); ?></button>
 			</div>
-<!-- </div> -->
 	</form>
 </div>
 <!-- local datatable modal -->

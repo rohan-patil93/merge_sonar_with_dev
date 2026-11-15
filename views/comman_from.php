@@ -273,7 +273,6 @@ if(is_array($role[$key])){ $mulcheck = $role[$key];
 			<div>
 				<!-- <input class="form-control" id="kt_inputmask_3" type="text"   name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" /> -->
  <input type="text" class="form-control mob_no" name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" data-mask="9999-999-999">
-				<!-- <span class="form-text text-muted">Phone number mask: <code>(999) 999-9999</code></span> -->
 			</div>
 		</div>
 <?php } elseif($fullvalue['type']=='currency'){ $in_currency_fileds[] = $key; ?>
@@ -282,7 +281,6 @@ if(is_array($role[$key])){ $mulcheck = $role[$key];
 			<div>
 			<!-- 	<input class="form-control" id="kt_inputmask_7" type="text"   name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>" /> -->
 <input type="text" class="form-control autonumber text-right" data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>"  name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>">
-				<!-- <span class="form-text text-muted">Phone number mask: <code>(999) 999-9999</code></span> -->
 			</div>
 		</div>
 <?php } elseif($fullvalue['type']=='number' || $fullvalue['type']=='number_type'){ ?>
@@ -290,7 +288,6 @@ if(is_array($role[$key])){ $mulcheck = $role[$key];
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
 			<div>
 					<input class="form-control text-right" type="text"  id ="<?php echo $key; ?>" name="<?php echo $key; ?>"  value="<?php echo $role[$key]!="" ? $role[$key] :0; ?>" />
-				<!-- <span class="form-text text-muted">Phone number mask: <code>(999) 999-9999</code></span> -->
 			</div>
 		</div>
 

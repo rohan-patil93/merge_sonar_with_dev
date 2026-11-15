@@ -103,7 +103,6 @@ foreach ($qustion_types as $qtype) {
                <?php }  ?>
                <div class="col-lg-12 row">
                 <!-- <textarea id="comments<?php echo $questionid;?>"  name="comments<?php echo $questionid;?>" class="form-control mb-2 col-lg-8" placeholder="Comments"><?php echo $selectedoption;?></textarea> -->
-                <!-- <input type="text" class="form-control col-lg-3 ml-2" name="" placeholder="Ratting"> -->
 
               </div>
              </div>

@@ -162,9 +162,6 @@ function listUserType(){
           </a>
       <?php  // } ?>
 	</div>
-		<!-- 		<div class="col-lg-1">
-				<a href="javascript:history.go(-1)" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i>Back</a>
-				</div> -->
 			</div>
 
         <div class="row p-4">

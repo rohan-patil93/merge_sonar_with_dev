@@ -78,7 +78,6 @@ $ecr_list = json_decode($configesponse,1);
 		<div class="card-header flex-wrap border-0 pt-4 pb-0 pl-5 mx-auto">
 			<div class="card-title">
 				<h3 class="card-label text-center f-w-700">EPF-ECR Report for <?php echo $pay_month_year; ?>
-				<!-- <span class="d-block text-muted pt-2 font-size-sm">Contribution period from 01/09/2020 to 30/09/2020</span> -->
 			</h3>
 			</div>
 		</div>

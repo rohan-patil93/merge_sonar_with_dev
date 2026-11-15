@@ -129,7 +129,6 @@ if($emp_list_names!="") {
 </div>
 </div>
 <!--end: Search Form -->
-<!-- </div> -->
 </div>
 <div class="modal-footer mt-5" >
   <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?php echo __('Close'); ?></button>

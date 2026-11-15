@@ -695,11 +695,6 @@
 							<!--begin::Item-->
 							<div class="d-flex align-items-center justify-content-between mb-10">
 								<div class="d-flex align-items-center mr-2">
-									<!-- <div class="symbol symbol-50 symbol-light mr-3 flex-shrink-0">
-										<div class="symbol-label">
-											<img src="assets/media/svg/misc/006-plurk.svg" alt="" class="h-50" />
-										</div>
-									</div> -->
 									<div>
 										<a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Last Month Budget</a>
 										<div class="font-size-sm text-muted font-weight-bold mt-1">
@@ -713,11 +708,6 @@
 							<!--begin::Item-->
 							<div class="d-flex align-items-center justify-content-between mb-10">
 								<div class="d-flex align-items-center mr-2">
-								<!-- 	<div class="symbol symbol-50 symbol-light mr-3 flex-shrink-0">
-										<div class="symbol-label">
-											<img src="assets/media/svg/misc/015-telegram.svg" alt="" class="h-50" />
-										</div>
-									</div> -->
 									<div>
 										<a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder"><?= __("Last Month Approved Budget") ?></a>
 										<div class="font-size-sm text-muted font-weight-bold mt-1"><?php echo date('M-Y',strtotime($lmonth['period'])); ?></div>
@@ -735,7 +725,6 @@
 										<div class="font-size-sm text-muted font-weight-bold mt-1"><?php echo $lmonth['vendor_ids']."-".$lmonth['employee_ids']; ?> </div>
 									</div>
 								</div> -->
-								<!-- <div class="label label-light label-inline font-weight-bold text-dark-50 py-4 px-3 font-size-base">+75$</div> -->
 							</div>
 							<!--end::Item-->
 						</div>

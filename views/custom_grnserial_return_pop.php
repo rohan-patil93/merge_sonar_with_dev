@@ -194,15 +194,12 @@ if($item_daata['tracking_type'] == 2){
 </script>
 
 <!-- remote datatable modal -->
-<!-- <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true"> -->
-<!-- <div> -->
 	<div class="modal-header">
 						<h5 class="modal-title">
 							<?php echo __('Serial No'); ?>
 							<small>&nbsp;&nbsp; <b><?php echo __('Transaction Type 122'); ?>: </b>&nbsp; <?php echo htmlspecialchars(__(viewtitle($table) ?? '')); ?>  </small>
 						</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
-							<!-- <span aria-hidden="true">&times;</span> -->
 						</button>
 					</div>
 					<div class="modal-body" style="overflow-y: scroll;" >
@@ -284,10 +281,7 @@ if($item_daata['tracking_type'] == 2){
 				<input type="hidden" name="type" id='type' value="<?php echo $item_daata['tracking_type']; ?>">
 				<input type="hidden" name="random" id='random' value="<?php echo $_POST['random']; ?>">
 
-				<!-- <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary btn-bold btn-upper btn-font-sm" onclick="submitrom()" >Submit</button> -->
 			</div>
-<!-- </div> -->
 	</form>
 </div>
 <!-- local datatable modal -->

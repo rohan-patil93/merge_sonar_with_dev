@@ -175,9 +175,6 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 // }
 
 </script>
-<!-- <button type="button" class="btn btn-success alert-success-msg m-b-10" onclick="sweetalertf();">click</button>
-<button type="button" class="btn btn-success alert-success-msg m-b-10" onclick="sweetalertf2();">click2</button>
- -->
  <div class="row">
  	<?php
  	$transactiontableary = array("job_categories"=>array("application_messages"=>"9097","option"=>"COM_LIST_JOB_CATEGORIES"),"job_descrption_categories"=>array("application_messages"=>"9105","option"=>"COM_LIST_JOB_DESCRPTION_CATEGORIES"),"job_descrptions"=>array("application_messages"=>"9098","option"=>"COM_LIST_JOB_DESCRPTIONS"),"job_descrption_categories"=>array("application_messages"=>"9099","option"=>"COM_LIST_JOB_DESCRPTION_CATEGORIES"),"job_selection_process"=>array("application_messages"=>"9100","option"=>"COM_LIST_JOB_SELECTION_PROCESS"),"job_selection_process_steps"=>array("application_messages"=>"9101","option"=>"COM_LIST_JOB_SELECTION_PROCESS_STEPS"),"candidates"=>array("application_messages"=>"9102","option"=>"COM_LIST_CANDIDATES"),"locations"=>array("application_messages"=>"9103","option"=>"COM_LIST_LOCATIONS"));
@@ -216,8 +213,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 							<p class="m-b-30 bg-c-blue lbl-card"><i class="ti-briefcase"></i>&nbsp;&nbsp;<?= __('Total Jobs'); ?></p>
 							<div class="text-center">
 								<h2 class="m-b-0 d-inline-block text-c-red"><?php echo customNanAndEmptyValidation($result['total_jobs']); ?></h2>
-							<!-- 	<p class="m-b-0 m-t-15"><i class="fas fa-caret-down m-r-10 f-18 text-c-red"></i>From Previous Month</p>
-							--></div>
+							</div>
 						</div>
 					</div>
 				</a>
@@ -241,8 +237,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 							<p class="m-b-30 bg-c-red lbl-card"><i class="ti-briefcase"></i>&nbsp;&nbsp;<?= __('Close Jobs'); ?></p>
 							<div class="text-center">
 								<h2 class="m-b-0 d-inline-block text-c-red"><?php echo customNanAndEmptyValidation($result['close_jobs']); ?></h2>
-							<!-- 	<p class="m-b-0 m-t-15"><i class="fas fa-caret-down m-r-10 f-18 text-c-red"></i>From Previous Month</p>
-							--></div>
+							</div>
 						</div>
 					</div>
 				</a>
@@ -254,8 +249,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 							<p class="m-b-30 bg-c-yellow lbl-card"><i class="ti-briefcase"></i>&nbsp;&nbsp;<?= __('Hold Jobs'); ?></p>
 							<div class="text-center">
 								<h2 class="m-b-0 d-inline-block text-c-red"><?php echo customNanAndEmptyValidation($result['hold_jobs']); ?></h2>
-							<!-- 	<p class="m-b-0 m-t-15"><i class="fas fa-caret-down m-r-10 f-18 text-c-red"></i>From Previous Month</p>
-							--></div>
+							</div>
 						</div>
 					</div>
 				</a>
@@ -612,7 +606,6 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 															<div class="col-lg-5 text-right">
 																<div class="d-flex align-items-center mt-3 float-right">
 																	<span class="f-18 f-w-600 m-r-10"><?php echo count((array)$jobpostingcandidates2); ?> / <?php echo $candidatecnt; ?></span>
-																	<!-- <span class="label label-success">100%</span> -->
 																</div>
 															</div>
 														</div>
@@ -662,7 +655,6 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 															<div class="col-lg-5 text-right">
 																<div class="d-flex align-items-center mt-3 float-right">
 																	<span class="f-18 f-w-600 m-r-10"><?php echo count((array)$jobpostingcandidates2); ?> / <?php echo $candidatecnt; ?></span>
-																	<!-- <span class="label label-success">100%</span> -->
 																</div>
 															</div>
 														</div>
@@ -696,10 +688,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 										<span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[$job_postings['0']['current_status']]['background_color']);?> !important" ><?php echo $result['job_postings_count']; ?></span>
 									</h5>
 									<?php ?>
-										<!-- <a href="index.php?option=COM_LIST_VIEW_ALL_DASH_BOARD&TYPE=ACTIVE" class=" b-b-primary text-primary float-right">View all</a> -->
 										<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','ACTIVE')" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
 
-										<!-- <a href="#" class=" b-b-primary text-primary float-right">View all</a> -->
 										<?php // } ?>
 									</div>
 									<div class="card-body">

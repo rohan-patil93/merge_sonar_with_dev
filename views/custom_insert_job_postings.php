@@ -744,7 +744,6 @@ $joblevel_list = $results['job_grade'];
        <div class="checkbox-inline">
         <div class="col-lg-12 col-md-12 col-sm-12">
          <!--   <textarea class="summernote" name="summa" id="kt_summernote_1" aria-label="Summa"><?php echo base64_decode($jobpostlist['job_desc']); ?></textarea> -->
-         <!--     <textarea class="summernote" name="description" aria-label="Description"></div> -->
 
            <textarea class="form-control textediters" name="summa" id="<?php echo $key; ?>" aria-label="<?php echo __('Summa'); ?>"><?php echo base64_decode($jobpostlist['job_desc']); ?></textarea>
 

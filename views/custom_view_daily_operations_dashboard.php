@@ -515,7 +515,6 @@ $successChangeLabel = ($successRateChange >= 0 ? '&#8593; ' : '&#8595; ') . abs(
     </div>
   </div>
 
-  <!-- <a href="index.php?option=COM_INSERT_FIELD_WORK_DAILY_PLANS_NEW" class="dod-fab" title="Add New">+</a> -->
 
 </div>
 

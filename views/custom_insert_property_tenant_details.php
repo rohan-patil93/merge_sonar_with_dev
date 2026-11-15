@@ -642,8 +642,6 @@ if($property_tenant_details['parent_id'] !="0" && $property_tenant_details['orig
 					<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="lockTenanatDetails()"><i class="ti-lock text-white"></i> <?php echo __('Lock Up Details?'); ?></button>
 				<?php } **/ ?>
 
-					<!-- <a href="#!" class="btn waves-effect waves-light mb-2 desktop-view" onclick="invoiceGenerate()">Invoice Generate</a> -->
-				<!-- <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>   -->
 				</div>
 			</div>
 			<div class="card-body" <?php echo $dyncss; ?>>
@@ -803,7 +801,6 @@ if($property_tenant_details['parent_id'] !="0" && $property_tenant_details['orig
 						<input type="number" class="form-control text-right " name="security_deposit" value="<?php echo $property_tenant_details['security_deposit']; ?>" >
 					</div>
 
-					<!-- <div class="col-lg-12"> </div> -->
 
 
 					<div class="form-group col-lg-5">
@@ -831,7 +828,6 @@ if($property_tenant_details['parent_id'] !="0" && $property_tenant_details['orig
 							<div class="col-lg-6">
 								<span class="d-block error-message text-danger"></span>
 								<select name="rent_bill_to_be_raise" class="form-control form-select js-example-basic-single f-14 requried_field" >
-									<!-- <option value="">Select Any One </option> -->
 									<?php for($r=1; $r<=31; $r++){ ?>
 										<option value="<?php echo $r; ?>" <?php echo $r == $property_tenant_details['rent_bill_to_be_raise']?"selected":""; ?>><?php echo $r; ?></option>
 									<?php } ?>
@@ -840,7 +836,6 @@ if($property_tenant_details['parent_id'] !="0" && $property_tenant_details['orig
 							<div class="col-lg-6">
 								<span class="d-block error-message text-danger"></span>
 								<select name="rent_bill_to_be_raise_type" class="form-control form-select js-example-basic-single requried_field" >
-									<!-- <option value="">Select Any One </option> -->
 									<?php foreach($rentbilltoberaise as $rbr) {  ?>
 										<option value="<?php echo $rbr['genc_detail_code']; ?>" <?php echo $property_tenant_details['rent_bill_to_be_raise_type'] ==$rbr['genc_detail_code']?"selected":""; ?>><?php echo $rbr['genc_detail_name'];?></option>
 									<?php } ?>

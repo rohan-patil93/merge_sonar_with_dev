@@ -27,7 +27,6 @@ $reviewdata = json_decode($reviewdata, 1);
 						<th scope="col"></th>
 						<th scope="col"><?= __('Description') ?></th>
 						<th scope="col"><?= __('Status') ?></th>
-						<!-- 	<th scope="col">Actions</th> -->
 					</tr>
 				</thead>
 				<tbody>
@@ -91,7 +90,6 @@ $reviewdata = json_decode($reviewdata, 1);
 							<th scope="col"></th>
 							<th scope="col"><?= __('Description') ?></th>
 							<th scope="col"><?= __('Status') ?></th>
-							<!-- 	<th scope="col">Actions</th> -->
 						</tr>
 					</thead>
 					<tbody>

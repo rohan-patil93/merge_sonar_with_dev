@@ -77,7 +77,7 @@ foreach ($roledata as $roles) {
 				foreach ($navelistdata as  $navdata) { ?>
 				<li class="nav-item">
 					<a class="nav-link <?php if ($i==1){ ?> active <?php } ?> " data-bs-toggle="tab" href="#kt_tabs_1_<?php echo $navdata['genc_detail_code']; ?>">
-						<!-- <i class="la la-exclamation-triangle"></i> --> <?= htmlspecialchars(__($navdata['genc_detail_name'] ?? '')) ?>
+						 <?= htmlspecialchars(__($navdata['genc_detail_name'] ?? '')) ?>
 					</a>
 				</li>
 			<?php $i++;

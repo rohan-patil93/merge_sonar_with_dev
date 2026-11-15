@@ -1820,9 +1820,6 @@ if ($userData['user_photo'] != '') {
                 <button class="btn btn-outline-dark btn-sm mb-2" data-target="page_footer_optionsVisibility">
                   <i class="bi bi-aspect-ratio"></i> Footer Options
                 </button>
-                <!-- <button class="btn btn-outline-dark btn-sm mb-2" data-target="page_footer_positions">
-                  <i class="bi bi-aspect-ratio"></i> Footer Positions
-                </button> -->
               </div>
               <?php
               $footerOptions = json_decode($invdata['footer_options'], true);

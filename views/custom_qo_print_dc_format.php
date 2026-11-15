@@ -22,16 +22,10 @@
                         <tr>
                             <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Customer Name</th>
                             <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Customer No.</th>
-                            <!-- <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">IRN</th> -->
-                            <!-- <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Ack.No.</th> -->
-                            <!-- <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Ack. Date</th> -->
                         </tr>
                         <tr>
                             <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding:5px;font-weight:normal;"><?php echo $Billed_to_party_name; ?></td>
                             <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;font-weight:normal;">NA</td>
-                            <!-- <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;font-weight:normal;">9830181afe95a9ded1086b9adbeb46fc2</td> -->
-                            <!-- <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;font-weight:normal;">112632054050630</td> -->
-                            <!-- <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;font-weight:normal;">21-08-2026 12:22:00</td> -->
                         </tr>
                     </table>
                 </th>

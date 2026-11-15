@@ -215,18 +215,10 @@ function emptyCheck($valu){
                         <img style="width: 100px; height:85px;" class="img-fluid" src="uploads/all/file_1688986265_64abe2999f741.jpg" alt="<?= htmlspecialchars(__('item'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
                     <td align="" class="p-1" style="vertical-align:top;">
-                        <!-- <div class="swatches f-12"></div>
-                        <div class="swatches f-12"></div>
-                        <div class="swatches f-12"></div> -->
                     </td>
                     <td class="p-1" style="vertical-align:top;">
                         <span class="d-block f-12"><?= __('BLANKET SOFA'); ?></span>
                         <span class="d-block f-12"><?= __('S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat'); ?></span>
-                        <!-- <span class="d-block f-12">BLANKET SOFA</span>
-                        <span class="d-block f-12">S-15-F1-BL-15-15</span>
-                        <span class="d-block f-12">Sofa 1 Seater</span>
-                        <span class="d-block f-12">DM1 - Toak Natural</span>
-                        <span class="d-block f-12">DM2 - Seat Nougat</span> -->
                     </td>
                     <td class="p-1 f-12" align="right" style="vertical-align:top;">15</td>
                     <td class="p-1" align="right" style="vertical-align:top;"><b class="f-w-600 f-12">40,000,0000/-</b></td>
@@ -237,9 +229,6 @@ function emptyCheck($valu){
                         <img style="width: 100px;height: 85px;" class="img-fluid" src="uploads/all/file_1688986555_64abe3bb28d5f.jpg" alt="<?= htmlspecialchars(__('item'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
                     <td align="" class="p-1" style="vertical-align:top;">
-                        <!-- <div class="swatches f-12"></div>
-                        <div class="swatches f-12"></div>
-                        <div class="swatches f-12"></div> -->
                     </td>
                     <td class="p-1" style="vertical-align:top;">
                         <span class="d-block f-12"><?= __('BLANKET SOFA'); ?></span>
@@ -254,18 +243,10 @@ function emptyCheck($valu){
                         <img style="width: 100px;" class="img-fluid" src="uploads/all/file_1688973992_64abb2a8a5325.jpg" alt="<?= htmlspecialchars(__('item'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
                     <td align="" class="p-1" style="vertical-align:top;">
-                        <!-- <div class="swatches f-12"></div>
-                        <div class="swatches f-12"></div>
-                        <div class="swatches f-12"></div> -->
                     </td>
                     <td class="p-1" style="vertical-align:top;">
                         <span class="d-block f-12"><?= __('BLANKET SOFA'); ?></span>
                         <span class="d-block f-12"><?= __('S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat'); ?></span>
-                        <!-- <span class="d-block f-12">BLANKET SOFA</span>
-                        <span class="d-block f-12">S-15-F1-BL-15-15</span>
-                        <span class="d-block f-12">Sofa 1 Seater</span>
-                        <span class="d-block f-12">DM1 - Toak Natural</span>
-                        <span class="d-block f-12">DM2 - Seat Nougat</span> -->
                     </td>
                     <td class="p-1" align="right" style="vertical-align:top;">100</td>
                     <td class="p-1" align="right" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>

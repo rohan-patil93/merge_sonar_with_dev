@@ -26,7 +26,6 @@ if(count((array)$rows) > 0){
 			<tr>
 				<th scope="col">Sl. No.</th>
 				<th scope="col">Date</th>
-				<!-- <th scope="col">ID No.</th> -->
 				<th scope="col">Name</th>
 				<th scope="col">Card NO</th>
 				<th scope="col">Access NO</th>

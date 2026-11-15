@@ -75,8 +75,6 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
 							<th scope="col"><?= __('Attendance Date') ?></th>
 							<th scope="col"><?= __('Clock In') ?></th>
 							<th scope="col"><?= __('Clock Out') ?></th>
-                            <!-- <th scope="col">Over Time</th>
-                            <th scope="col">Absenteeism</th> -->
 							<th scope="col"><?= __('Status') ?></th>
                             <th scope="col"></th>
 						</tr>

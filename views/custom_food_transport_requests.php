@@ -115,7 +115,6 @@ if(isset($_POST['datefilter'])){
 							<div class="col-lg-8 form-group">
 
 								<table class="table table-separate table-head-custom table-checkable bordered dataTable px-6 " id="kt_datatable1">
-									<!-- <table class="table table-separate table-head-custom table-checkable" id="kt_datatable1"> -->
 										<thead>
 											<tr>
 												<th scope="col">#</th>

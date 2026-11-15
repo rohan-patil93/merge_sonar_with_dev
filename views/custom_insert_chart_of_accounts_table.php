@@ -33,7 +33,6 @@ $account_groups = $result['account_groups'] ?? [];
                                 <th scope="col" style="width: 5%;">#</th>
                                 <th scope="col" colspan="2" style="width: 90%;"><?= __('Chart Of Account Name') ?></th>
                                 <th scope="col" class="text-right" style="width: 5%;">
-                                	<!-- <button class="btn bg-primary" href="#" onclick="editFinanaceGrp(0)"><i class="ti-plus"></i> COA</button> -->
                                 </th>
                             </tr>
                         </thead>

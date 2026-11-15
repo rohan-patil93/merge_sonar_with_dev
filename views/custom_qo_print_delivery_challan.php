@@ -7,7 +7,6 @@
 </script>
 <div id="printDiv" style="width: 800px; display: block; margin: 0 auto !important; background: #ffffff;">
 
-    <!-- <link rel="stylesheet" type="text/css" href="../assets/css/custom_qo_print_aditya_industries.css"> -->
 
 
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" style="border: 1px solid #cccccc; border-collapse: collapse; background-color: #ffffff;">

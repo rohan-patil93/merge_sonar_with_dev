@@ -11,7 +11,6 @@ $_SESSION['apply_js']['from-validation'] = "1";
 				<div class="card-header-right table-card-header m-r-50">
 
 					&nbsp;  &nbsp;
-					<!-- <input type="hidden" name="status_values" id="status_values" value=""> -->
 					<input type="hidden" name="status_values" id="status_values" value="2">
 					<input type="hidden" name="status_old_value" id="status_old_value" value="">
 				</div>

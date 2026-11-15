@@ -158,32 +158,6 @@
 							</span>
 						</a>
 					</li>
-					<!-- <li class="kt-nav__item">
-						<a href="#" class="kt-nav__link" data-action="list" data-type="draft">
-							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-nav__link-icon">
-								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-									<rect x="0" y="0" width="24" height="24" />
-									<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
-									<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3" />
-								</g>
-							</svg> <span class="kt-nav__link-text">Calendar</span>
-						</a>
-					</li>
-					<li class="kt-nav__item">
-						<a href="#" class="kt-nav__link" data-action="list" data-type="draft">
-							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-nav__link-icon">
-								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-									<rect x="0" y="0" width="24" height="24" />
-									<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000" />
-									<rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) " x="16.3255682" y="2.94551858" width="3" height="18" rx="1" />
-								</g>
-							</svg> <span class="kt-nav__link-text">Reports</span>
-							<span class="kt-nav__link-badge">
-								<span class="kt-badge kt-badge--unified-warning kt-badge--md kt-badge--rounded kt-badge--boldest">1</span>
-							</span>
-						</a>
-					</li>
-					 -->
 					<?php $sutittle = array();$sutittle2 = array();
 						$i=0; foreach ($approval_data['data'] as $approval) {
 							$sutittle[$approval['table']] = $approval['description']; ?>
@@ -191,7 +165,6 @@
 					<li class="kt-nav__item kt-margin-t-20 kt-margin-b-20 card-header" id="requisitions">
 						<div class="card-title collapsed" data-toggle="collapse" data-target="<?php echo '#'.$approval['table']; ?>" aria-expanded="true" aria-controls="<?php echo '#'.$approval['table']; ?>">
 							<span class="kt-nav__link-title"><?php echo  $approval['description']; ?></span>
-							<!-- <span class="kt-badge kt-badge--unified-success kt-badge--md kt-badge--rounded  float-right mrgn-less">3</span> -->
 							<?php $main_count = array_sum($count[$approval['table']]) !='' ? array_sum($count[$approval['table']]) : 0;?>
 							<span class="kt-badge kt-badge--brand kt-badge--square float-right mrgn-less"><?php echo  $main_count; ?></span>
 						</div>
@@ -239,15 +212,6 @@
 
 						<!--Begin:: Tasks Users-->
 						<div class="kt-todo__users">
-							<!-- <a href="#" class="kt-media kt-media--xs" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Nick Mana">
-								<img src="assets/media/users/100_1.jpg" alt="image">
-							</a>
-							<a href="#" class="kt-media kt-media--xs kt-media--danger" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Sean Stone">
-								<span>S</span>
-							</a>
-							<a href="#" class="kt-media kt-media--xs  kt-media--info" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Anna Krox">
-								<span>A</span>
-							</a> -->
 							<a href="#" class="kt-media kt-media--xs  kt-bg-success kt-margin-l-10" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Add Participants">
 								<span><i class="kt-nav__link-icon fa flaticon2-plus kt-font-light"></i></span>
 							</a>
@@ -275,11 +239,7 @@
 
 													<span></span>
 												</label>
-												<!-- <button type="button" class="kt-todo__icon kt-todo__icon--light" data-toggle="kt-tooltip" title="Reload list">
-													<i class="flaticon2-refresh-arrow"></i>
-												</button> -->
 												<?php $lists_status = toGetStatusProgressAction($transaction_type, $status);?>
-												<!-- <button type="button" class="btn btn-label-success btn-upper btn-sm btn-bold">new task</button> -->
 											</div>
 											<div class="kt-todo__panel" style="margin-left: 10px;">
 												<?php foreach($lists_status as $list_status){?>
@@ -288,7 +248,6 @@
 
 											</div>
 										</div>
-										<!-- <button type="button" class="btn btn-label-success btn-upper btn-sm btn-bold">new task</button> -->
 									</div>
 								</div>
 								<div class="kt-todo__body">
@@ -311,7 +270,6 @@
 												<div class="kt-todo__labels">
 													<span class="kt-todo__label kt-badge kt-badge--unified-brand kt-badge--bold kt-badge--inline"><?php echo date('M d, Y',strtotime($list['transaction_date'])); ?></span>
 													<span class="kt-todo__label kt-badge kt-badge--unified-brand kt-badge--bold kt-badge--inline"><?php echo $gen_code[$list['type']]; ?></span>
-													<!-- <span class="kt-todo__label kt-badge kt-badge--unified-brand kt-badge--bold kt-badge--inline">Projects</span> -->
 													<?php $opex_cpex = $list['transaction_number'] == "1" ? : 'Cpex' ; 'Opex';?>
 													<span class="kt-todo__label kt-badge kt-badge--unified-brand kt-badge--bold kt-badge--inline"><?php echo $opex_cpex; ?></span>
 													<span class="kt-todo__label kt-badge kt-badge--unified-brand kt-badge--bold kt-badge--inline"><?php echo customeummarmonyformate($list['total_amount']); ?></span>
@@ -348,40 +306,6 @@
 
 									</div>
 								</div>
-								<!-- <div class="kt-todo__foot">
-									<div class="kt-todo__toolbar">
-										<div class="kt-todo__controls">
-											<div class="kt-todo__pages" data-toggle="kt-tooltip" title="Records per page">
-												<span class="kt-todo__perpage" data-toggle="dropdown">1 - 50 of 235</span>
-												<div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-xs">
-													<ul class="kt-nav">
-														<li class="kt-nav__item">
-															<a href="#" class="kt-nav__link">
-																<span class="kt-nav__link-text">20 per page</span>
-															</a>
-														</li>
-														<li class="kt-nav__item kt-nav__item--active">
-															<a href="#" class="kt-nav__link">
-																<span class="kt-nav__link-text">50 par page</span>
-															</a>
-														</li>
-														<li class="kt-nav__item">
-															<a href="#" class="kt-nav__link">
-																<span class="kt-nav__link-text">100 per page</span>
-															</a>
-														</li>
-													</ul>
-												</div>
-											</div>
-											<button class="kt-todo__icon" data-toggle="kt-tooltip" title="Previose page">
-												<i class="flaticon2-left-arrow"></i>
-											</button>
-											<button class="kt-todo__icon" data-toggle="kt-tooltip" title="Next page">
-												<i class="flaticon2-right-arrow"></i>
-											</button>
-										</div>
-									</div>
-								</div> -->
 							</div>
 						</div>
 

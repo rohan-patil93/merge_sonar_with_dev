@@ -50,35 +50,6 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 	         </div>
 	    </div>
 	</form>
-<!-- 	<div class="card-header  row">
-        <div class="col-lg-7">
-            <h5>Owner Reports</h5>
-        </div>
-        <div class="col-lg-2">
-            <div class="form-group w-full table-card-header">
-                <label class="form-label ">Owner List<span class="text-danger">*</span></label>
-				<select name="property_owner_detail_id" class="form-control form-select js-example-basic-single" >
-					<option value="">Select Any One </option>
-				</select>
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class=" form-group">
-                <label class="form-label"> Owner Name</label>
-                <input type="text" class="form-control" name="month" id="month" value="" >
-            </div>
-        </div>
-         <div class="col-lg-1">
-         	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>
-         </div>
-    </div> -->
-<!-- 	<div class="card-header">
-
-		<h5>Owner Reports</h5>
-		<div class="card-header-right table-card-header">
-			<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>
-		</div>
-	</div> -->
 	<div class="card-body">
 		<?php if(count((array)$property_owners) !=0){  ?>
 			<table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc" >

@@ -686,9 +686,7 @@ $erp = json_decode($erp_data,1);
 												<th scope="col" class="p-0 min-w-200px"><?= __("Vendor") ?></th>
 												<th scope="col" class=" p-0 min-w-200px"><?php echo headerlables(array('name'=>__('Rate Card Value'))); ?></th>
 												<th scope="col" class=" p-0 min-w-200px"><?php echo headerlables(array('name'=>__('PO Value'))); ?></th>
-												<!-- <th scope="col" class="p-0 min-w-100px text-right">Billable Amount</th> -->
 												<th scope="col" class="p-0 min-w-125px text-center"><?= __("Billable Hours") ?></th>
-											<!-- 	<th scope="col" class="p-0 min-w-125px text-right">Nonbillable Hours</th> -->
 												<th scope="col" class="p-0 min-w-110px text-center"><?= __("Status") ?></th>
 
 												<th scope="col" class=" min-w-50px text-center">
@@ -886,7 +884,6 @@ $llablecolor = lableandleave($k);
 													<th scope="col" class=" p-0 min-w-200px"><?php echo headerlables(array('name'=>__('Rate Card Value'))); ?></th>
 												<th scope="col" class=" p-0 min-w-200px"><?php echo headerlables(array('name'=>__('PO Value'))); ?></th>
 												<th scope="col" class="p-0 min-w-125px text-center"><?= __("Billable Hours") ?></th>
-											<!-- 	<th scope="col" class="p-0 min-w-125px text-right">Nonbillable Hours</th> -->
 												<th scope="col" class="p-0 min-w-110px text-center"><?= __("Status") ?></th>
 
 												<th scope="col" class=" min-w-50px text-center">

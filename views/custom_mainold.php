@@ -242,19 +242,6 @@
 
 													<!--begin::Nav-->
 													<ul class="kt-nav">
-														<!-- <li class="kt-nav__head">
-															Export Options
-															<span data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">
-																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--brand kt-svg-icon--md1">
-																	<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																		<rect x="0" y="0" width="24" height="24" />
-																		<circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-																		<rect fill="#000000" x="11" y="10" width="2" height="7" rx="1" />
-																		<rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
-																	</g>
-																</svg> </span>
-														</li>
-														<li class="kt-nav__separator"></li> -->
 														<li class="kt-nav__item">
 															<a href="#" class="kt-nav__link">
 																<i class="kt-nav__link-icon flaticon2-drop"></i>
@@ -286,20 +273,6 @@
 															</a>
 														</li>
 
-														<!-- <li class="kt-nav__item">
-															<a href="#" class="kt-nav__link">
-																<i class="kt-nav__link-icon flaticon2-new-email"></i>
-																<span class="kt-nav__link-text">Yearly</span>
-																<span class="kt-nav__link-badge">
-																	<span class="kt-badge kt-badge--success kt-badge--rounded">5</span>
-																</span>
-															</a>
-														</li>
-														<li class="kt-nav__separator"></li>
-														<li class="kt-nav__foot">
-															<a class="btn btn-label-danger btn-bold btn-sm" href="#">Upgrade plan</a>
-															<a class="btn btn-clean btn-bold btn-sm" href="#" data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">Learn more</a>
-														</li> -->
 													</ul>
 
 													<!--end::Nav-->
@@ -661,9 +634,6 @@
 												 <div class="kt-portlet__body">
 													<div id="kt_amcharts_3" style="height: 250px;"></div>
 												</div>
-												<!--<div class="kt-widget12__chart" style="height:250px;">
-													<canvas id="kt_chart_order_statistics"></canvas>
-												</div> -->
 											</div>
 										</div>
 									</div>
@@ -1088,21 +1058,6 @@
 							</div>
 
 							<!--End::Row-->
-<!-- <div class="kt-portlet">
-										<div class="kt-portlet__head">
-											<div class="kt-portlet__head-label">
-												<span class="kt-portlet__head-icon kt-hidden">
-													<i class="la la-gear"></i>
-												</span>
-												<h3 class="kt-portlet__head-title">
-													Animated Time-Line Pie Chart
-												</h3>
-											</div>
-										</div>
-										<div class="kt-portlet__body">
-											<div id="kt_amcharts_13" style="height: 500px;"></div>
-										</div>
-									</div> -->
 							<!--End::Dashboard 6-->
 						</div>
 

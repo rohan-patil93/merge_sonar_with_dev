@@ -1347,12 +1347,6 @@ function viewApprovalAllUsers(id){
                             </div>
                         </div>
                         </div>
-                        <!-- <div class="kt-portlet__head-label float-left">
-                            <h3 class="kt-portlet__head-title"> Items/Services </h3>
-                        </div>
-                        <div style="float: right;">
-
-                         </div> -->
                     </div>
                     <div class="kt-portlet__body1" style="padding: 10px;">
 
@@ -1555,7 +1549,6 @@ function viewApprovalAllUsers(id){
                                 <td colspan="2" >
                                     <table  id='exchange'  class=" table table-bordered " style="float: right;">
                                         <tr>
-                                            <!-- <th scope="col" class="amount">Exchange Rate</th> -->
                                             <th scope="col" class="amount"><?= __('Sub total') ?></th>
                                             <th scope="col" class="amount"><?= __('Tax') ?></th>
                                             <th scope="col" class="amount"><?= __('Discount') ?></th>

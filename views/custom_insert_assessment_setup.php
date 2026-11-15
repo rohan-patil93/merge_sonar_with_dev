@@ -263,7 +263,6 @@ function getnamelist(){
                         <div class="form-group">
                            <label for="assessment_name" class="font-weight-bolder"><?php echo $display_tag; ?> <?= __('Name') ?> <span class="text-danger">*</span></label>
                            <input type="text" name="assessment_name" id="assessment_name" value="<?php echo $assessment_details['assessment_name'];?>" class="form-control" placeholder="<?= __('Enter Title') ?>" aria-label="<?php echo $display_tag; ?> Name">
-                           <!-- <span class="form-text text-muted">We'll never share your email with anyone else.</span> -->
                         </div>
                         <div class="form-group">
                            <label for="assessment_type" class="font-weight-bolder"><?php echo $display_tag; ?> <?= __('Type') ?> <span class="text-danger">*</span></label>
@@ -275,12 +274,10 @@ function getnamelist(){
                                        <span></span><?php echo htmlspecialchars(__($value['genc_detail_name'] ?? '')); ?></label>
                                     <?php } ?>
                                  </div>
-                                 <!-- <span class="form-text text-muted">We'll never share your email with anyone else.</span> -->
                               </div>
                               <div class="form-group mt-3">
                                  <label for="assessment_description" class="font-weight-bolder"><?php echo $display_tag; ?> <?= __('Description') ?> <span class="text-danger">*</span></label>
                                  <textarea class="form-control" name="description" id="assessment_description" placeholder="<?= __('Enter Title') ?>" aria-label="<?php echo $display_tag; ?> Description"> <?php echo $assessment_details['description'];?> </textarea>
-                                 <!-- <span class="form-text text-muted">We'll never share your email with anyone else.</span> -->
                               </div>
                               <div class="form-group mt-3">
                                  <label for="assessment_start_date" class="font-weight-bolder"><?php echo $display_tag; ?> <?= __('Date Range') ?> <span class="text-danger">*</span></label>
@@ -294,14 +291,6 @@ function getnamelist(){
 								 <!--  <input type='date' class="form-control"  name="assessment_date" placeholder="Select date &amp; time range" value="<?php echo $assessment_date; ?> " / aria-label="Select date &amp;amp; time range"> -->
 
 								</div>
-								<!-- <div class='input-group' id='kt_daterangepicker_assessment'>
-
-                                     <div class="input-group-append">
-                                       <span class="input-group-text">
-                                          <i class="la la-calendar-check-o"></i>
-                                       </span>
-                                    </div>
-                                 </div>-->
                               </div>
                               <div class="form-group mt-3">
                                  <label for="allocated_time" class="font-weight-bolder"><?php echo $display_tag; ?> <?= __('Duration In Minutes') ?> <span class="text-danger">*</span></label>

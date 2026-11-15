@@ -85,7 +85,6 @@ $res_data = json_decode($res_data, 1);
 							<div>
 								<div style="float: left;">
 									<span class="d-inline-block fw-bold" style="margin-bottom:5px;margin-top: 10px;"> <?php echo htmlspecialchars(__($title ?? '')); ?><span class="requried">*</span> &nbsp;&nbsp; </span>
-								<!-- <div class="col-lg-4" > </div> -->
 
 				 			  </div>
 				 			  <div style="float: left;">

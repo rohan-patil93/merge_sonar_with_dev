@@ -372,8 +372,6 @@ elem.forEach(function(html) {
 	}
 </style>
 <!-- remote datatable modal -->
-<!-- <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true"> -->
-	<!-- <div> -->
 		<div class="modal-header">
 
 
@@ -603,7 +601,6 @@ elem.forEach(function(html) {
 
 
 											<div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
-												<!-- <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>&nbsp;&nbsp; -->
 												<button class="btn btn-success col-lg-2" id="addRows" type="button" onclick="addRows123()"><?= __("+ Add More") ?></button>&nbsp;&nbsp;
 												<button type="button" class="btn btn-primary col-lg-2" onclick="createselectquery()"><?= __("Bulid Query") ?></button>&nbsp;&nbsp;
 												<button type="button" class="btn btn-danger col-lg-2" onclick="createselectquery()"><?= __("Excute Query") ?></button>
@@ -676,21 +673,9 @@ elem.forEach(function(html) {
 								<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __("Close") ?></button>
 								<button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitrom()" ><?= __("Submit") ?></button>
 							</div>
-							<!-- </div> -->
 						</form>
 					</div>
 					<!-- local datatable modal -->
-					<!-- <script src="assets/js/pages/crud/forms/widgets/bootstrap-select.js"></script> -->
 					<!-- Select 2 js -->
 
 
-<!--
-					<script type="text/javascript" src="assets/bower_components/select2/js/select2.full.min.js"></script>
-					<script type="text/javascript" src="assets/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js">
-					</script>
-					<script type="text/javascript" src="assets/bower_components/multiselect/js/jquery.multi-select.js"></script>
-					<script type="text/javascript" src="assets/js/jquery.quicksearch.js"></script>
-					<script type="text/javascript" src="assets/pages/advance-elements/select2-custom.js"></script>
-
-					 <script type="text/javascript" src="assets/bower_components/switchery/js/switchery.min.js"></script> -->
-<!-- <script type="text/javascript" src="assets/pages/advance-elements/swithces.js"></script> -->

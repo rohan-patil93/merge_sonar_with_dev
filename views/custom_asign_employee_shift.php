@@ -154,7 +154,6 @@ $designations = json_decode($designations,1);
 					<thead>
 						<tr>
 							<th scope="col"></th>
-							<!-- <th scope="col">Company Name</th> -->
 							<th scope="col"><?= __("Employee Code") ?></th>
 							<th scope="col"><?= __("Employee Name") ?></th>
 							<th scope="col"><?= __("Employee Email") ?></th>

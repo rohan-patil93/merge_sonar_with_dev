@@ -144,7 +144,6 @@ include_once '../comm.php';
 	<div class="modal-footer">
 	    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
 		<button type="button" class="btn btn-primary mr-2" onclick="questionsubmit()" ><?php echo __('Save'); ?></button>
-	<!--	<button class="btn btn-success"  onclick="questionsubmit()" type="button">Save</button>-->
 	</div>
 
 </div>

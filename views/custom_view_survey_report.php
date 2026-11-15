@@ -7,7 +7,6 @@ $maxoptions = isset($surveyData['maxoptions']) ? (int)$surveyData['maxoptions'] 
 
 <div class="col-lg-12">
 	<table class="table table-separate table-head-custom table-checkable bordered" id="kt_datatable1">
-		<!-- <table class="table table-separate table-head-custom table-checkable" id="kt_datatable1"> -->
 			<thead>
 				<tr>
 					<th scope="col"></th>

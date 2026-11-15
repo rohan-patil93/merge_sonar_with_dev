@@ -261,12 +261,11 @@ foreach ($cusresponse_dump as $custt) {
             </th>
             <th scope="col" class="" width="15%"><?= __('Account') ?> <span class="requried"></span></th>
             <th scope="col" class="" width="15%"><?= __('Description') ?></th>
-            <th scope="col" class="thheader text-start" width="15%"><?= __('Name') ?> <!-- <span class="requried">*</span> --></th>
-            <!-- <th scope="col" class="thheader" width="10%">Tax  <span class="requried">*</span> </th> -->
-            <th scope="col" class="thheader text-start" width="15%"><?= __('Location') ?> <!-- <span class="requried">*</span> -->
+            <th scope="col" class="thheader text-start" width="15%"><?= __('Name') ?> </th>
+            <th scope="col" class="thheader text-start" width="15%"><?= __('Location') ?> 
             </th>
-            <th scope="col" class="thheader text-start" width="15%"><?= __('Debits') ?><!--  <span class="requried">*</span> --></th>
-            <th scope="col" class="thheader text-start" width="15%"><?= __('Credits') ?><!--  <span class="requried">*</span> -->
+            <th scope="col" class="thheader text-start" width="15%"><?= __('Debits') ?></th>
+            <th scope="col" class="thheader text-start" width="15%"><?= __('Credits') ?>
             </th>
         </tr>
         <?php if (count((array) $table2) > 0) {

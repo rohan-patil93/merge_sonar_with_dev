@@ -436,16 +436,6 @@ function refrashpage(){
 </div>
 
 
-<!--
-
-<div id="kt_modal_dynamic_popupxxl" class="modal fade" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl"  style="max-width: 98% !important;" >
-        <div class="modal-content"  id="dynamic_popupxxl" style="border-radius: 20px;" style="border:none;">
-
-        </div>
-    </div>
-</div>
- -->
 
 
 <div class="modal fade" id="modal_payment_details" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
@@ -453,7 +443,6 @@ function refrashpage(){
     <div class="modal-content" id="" style="border-radius: 20px;" style="border:none;">
       <div class="modal-header">
         <h5 class="modal-title"><?= __('Payment Details') ?></h5>
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
         <form class="form" id="insertpaymentsubscrifrm">
             <div class="card-body">

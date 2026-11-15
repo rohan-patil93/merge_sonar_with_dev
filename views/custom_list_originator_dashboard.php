@@ -483,7 +483,6 @@ $progress_var =  gettableStatusArray($table_name1);
 											<th scope="col">End Date</th>
 											<th scope="col" class='text-center'>Cost</th>
 											<th scope="col">Status</th>
-											<!-- <th scope="col"></th> -->
 										</tr>
 									</thead>
 

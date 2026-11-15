@@ -228,7 +228,6 @@ if(isset($_POST['submittenantbills'])){
 								<th class="text-right"><?php echo __('Total Amount'); ?></th>
 								<th><?php echo __('Rent Due Date'); ?></th>
 								<th class="text-center"><?php echo __('Rent'); ?></th>
-								<!-- <th class="text-center">Action</th> -->
 							</tr>
 						</thead>
 						<tbody>

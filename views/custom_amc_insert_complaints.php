@@ -107,9 +107,6 @@ $contracts = $result['contracts'] ?? array();
 		<div class="card-header">
 			<h5><?= __("AMC Complaint") ?> <?php echo $return['transaction_no'] != '' ? '('.$return['transaction_no'].')' : ''; ?></h5>
 			<div class="card-header-right">
-				<!-- <a href="index.php?option=COM_LIST_AMC_COMPLAINTS" class="btn btn-success mb-2 desktop-view">
-					<i class="icofont icofont-plus icon-white "></i>
-				AMC Complaints List</a> -->
 				<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
 					<i class="icofont icofont-reply"></i>
 					<?= __("Back") ?>

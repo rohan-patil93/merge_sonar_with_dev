@@ -2714,4 +2714,3 @@ if (!empty($delivery_company_res)) {
         </div>
     </div>
 </div>
-<!-- <script src="assets/js/custom_insert_visitor_logs.js?v="></script> -->

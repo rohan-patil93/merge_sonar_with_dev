@@ -248,13 +248,6 @@ function submitsurvey(){
     <form method="post"  class="p-4" id="myform" name="myform" action="">
       <div class="row">
 
-       <!--  <div class="col-md-6">
-          <div class="countdown float-right">
-            <span class="fas fa-stopwatch"><b>Timing Remaining </b></span>
-            <div id="duration"> </div>
-            <div id="timerdisplay" class="font-weight-bold font-size-h3 text-danger"> Not Yet Start</div>
-          </div>
-        </div> -->
       </div>
       <div class="row q-sec">
         <div class="col-md-5">

@@ -730,7 +730,6 @@ if(catlink=='PTX'){
                                                 <th scope="col" style="width: 20%"><span class="f-14 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Calculation Type'); ?></span></th>
                                                 <th scope="col" style="width: 20%;text-align: center;"><span class="f-14 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Amount Monthly'); ?></span></th>
                                                 <th scope="col" style="width: 20%"><span class="f-14 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Amount Annually'); ?></span></th>
-                                                <!-- <th scope="col" style="width: 15%">Remarks</th> -->
                                             </tr>
                                         </thead>
                                     </table>

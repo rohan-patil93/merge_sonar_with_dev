@@ -42,7 +42,6 @@ function valueemtpydash($val){
 			<div class="card-body">
 
 				<div class="dt-responsive table-responsive">
-					<!-- <table id="new-cons" class="table table-striped table-bordered nowrap"> -->
 							<table id="basic-btn" class="table  table-bordered nowrap">
 							<thead>
 								<tr>
