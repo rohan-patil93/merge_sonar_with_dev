@@ -1497,7 +1497,8 @@ if($register_data['current_status'] !=""){
           </div>
         </a>
       </div>
-      <?php $aci++; }  } if($aci == 0){?>
+      <?php $aci++; }  }
+      if($aci == 0){?>
         <a href="javascript:;" class="kt-notification__item">
           <div class="kt-notification__item-details">
             <div class="kt-notification__item-title">

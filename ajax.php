@@ -7174,7 +7174,8 @@ if($page == 'insertFeasibility'){
 		echo $response;
 	}
 	exit;
-}if($page == 'getFeasibilityFields'){
+}
+if($page == 'getFeasibilityFields'){
 	$cudata = '';
 	if ($_POST['id'] != '') {
 		$url = API . "?mode=getFeasibilityFields&rid=" . $_POST['id'];
