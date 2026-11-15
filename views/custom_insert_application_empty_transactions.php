@@ -101,7 +101,7 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
     	<form method="post">
     	<div class="row">
 	    	<div class="form-group col-lg-5">
-		        <label class="form-label"><?= __('Module Setup') ?> </label>
+		        <span class="form-label d-inline-block fw-bold"><?= __('Module Setup') ?> </span>
 		        <select name="module_setup_id" class="form-control form-select js-example-basic-single" aria-label="Module Setup Id">
 		            <option value="">Select Any One </option>
 		            <?php foreach($module_setup as $mods) {  ?>
@@ -110,10 +110,10 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
 		        </select>  
 	        </div>
 	        <div class="form-group col-lg-2 text-center ">
-	        	<label class="form-label  mt-4"> <?= __('OR') ?> </label>
+	        	<span class="form-label  mt-4 d-inline-block fw-bold"> <?= __('OR') ?> </span>
 	        </div>
 	        <div class="form-group col-lg-5">
-	          	<label class="form-label"> <?= __('Option') ?> <span class="text-danger">*</span></label>
+	          	<span class="form-label d-inline-block fw-bold"> <?= __('Option') ?> <span class="text-danger">*</span></span>
 	          	<select name="page_option" class="form-control form-select js-example-basic-single" aria-label="Page Option">
 		            <option value="">Select Any One </option>
 		            <?php foreach($application_pages as $optionkey=>$val) {  ?>
@@ -124,16 +124,16 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
 	    </div>
 	    <div class="row">
 	    	<div class="col-lg-3">
-	    		<label class="form-label"> <?= __('Transaction Table') ?> <span class="text-danger">*</span></label>
+	    		<span class="form-label d-inline-block fw-bold"> <?= __('Transaction Table') ?> <span class="text-danger">*</span></span>
 	    	</div>
 	    	<div class="col-lg-2">
-	    		<label class="form-label"> <?= __('Option Type') ?> <span class="text-danger">*</span></label>
+	    		<span class="form-label d-inline-block fw-bold"> <?= __('Option Type') ?> <span class="text-danger">*</span></span>
 	    	</div>
 	    	<div class="col-lg-3">
-	    		<label class="form-label"> <?= __('Application Message') ?> <span class="text-danger">*</span></label>
+	    		<span class="form-label d-inline-block fw-bold"> <?= __('Application Message') ?> <span class="text-danger">*</span></span>
 	    	</div>
 	    	<div class="col-lg-3">
-	    		<label class="form-label"> <?= __('Extra Message') ?> <span class="text-danger">*</span></label>
+	    		<span class="form-label d-inline-block fw-bold"> <?= __('Extra Message') ?> <span class="text-danger">*</span></span>
 	    	</div>
 	    </div>
 	    <div id="newaddmoreapplicationemptytransactions">
