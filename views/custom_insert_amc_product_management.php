@@ -99,7 +99,7 @@ if ($rid != '') {
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Product/Item Name') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Product/Item Name') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -107,7 +107,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Product Description') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Product Description') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -115,7 +115,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Product Part No/Short Code') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Product Part No/Short Code') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -123,7 +123,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('HSN/SAC Code') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('HSN/SAC Code') ?></span>
                                         </div>
 
                                         <div class="col-lg-6">
@@ -142,7 +142,7 @@ if ($rid != '') {
 
 
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Purchase Price') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Purchase Price') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -150,7 +150,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Sale Price') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Sale Price') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -158,7 +158,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('MRP') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('MRP') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -166,7 +166,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Primary Unit') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Primary Unit') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -182,7 +182,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Alternative Unit') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Alternative Unit') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -197,7 +197,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Convertion Factor') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Convertion Factor') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -231,7 +231,7 @@ if ($rid != '') {
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Manage Stock') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Manage Stock') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -246,7 +246,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Item Type') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Item Type') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -261,7 +261,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Building') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Building') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -276,7 +276,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Building Floor') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Building Floor') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -287,7 +287,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Building Floor Space') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Building Floor Space') ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -298,7 +298,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Product Image') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Product Image') ?></span>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -306,7 +306,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Min Sale Price') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Min Sale Price') ?></span>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -314,7 +314,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Bar Code') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Bar Code') ?></span>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -322,7 +322,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Openning Stock Pack') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Openning Stock Pack') ?></span>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -330,7 +330,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Openning Stock Loose') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Openning Stock Loose') ?></span>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -338,7 +338,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Openning Stock Value') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Openning Stock Value') ?></span>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -346,7 +346,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Batch') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Batch') ?></span>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -354,7 +354,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Mfg. Date') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Mfg. Date') ?></span>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
@@ -362,7 +362,7 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label class="form-label"><?= __('Exp. Date') ?></label>
+                                            <span class="form-label d-inline-block fw-bold"><?= __('Exp. Date') ?></span>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
