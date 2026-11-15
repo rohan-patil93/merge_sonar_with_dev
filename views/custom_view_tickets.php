@@ -100,7 +100,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                         $userdetails = $tasklist['users_list'][$client_id];
                         if ($userdetails['user_photo'] != "") { ?>
                             <img src="uploads/all/<?php echo $userdetails['user_photo']; ?>"
-                                class="img-radius img-50 align-top " onerror="this.src='uploads/all/no-image.jpg';" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
+                                class="img-radius img-50 align-top " data-onerror-src="uploads/all/no-image.jpg" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php } else { ?>
                             <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>"
                                 class="img-radius img-50 align-top bg-primary custom_txt_round p-2 f-12 text-center"><?php echo initials($userdetails['display_name']); ?></span>
@@ -353,7 +353,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                                         <div class="col-auto p-l-0">
                                                             <?php if ($empdeails['user_photo'] != "") { ?>
                                                                 <img src="uploads/all/<?php echo $empdeails['user_photo']; ?>"
-                                                                    class="img-radius img-40" onerror="this.src='uploads/all/no-image.jpg';" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                                    class="img-radius img-40" data-onerror-src="uploads/all/no-image.jpg" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?php } else { ?>
                                                                 <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>"
                                                                     class="img-radius img-40 p-10"><?php echo initials($empdeails['display_name']); ?></span>
@@ -365,7 +365,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                                         <div class="col-auto p-r-0">
                                                             <?php if ($empdeails['user_photo'] != "") { ?>
                                                                 <img src="uploads/all/<?php echo $empdeails['user_photo']; ?>"
-                                                                    class="img-radius img-40" onerror="this.src='uploads/all/no-image.jpg';" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                                    class="img-radius img-40" data-onerror-src="uploads/all/no-image.jpg" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?php } else { ?>
                                                                 <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>"
                                                                     class="img-radius img-40 p-10"><?php echo initials($empdeails['display_name']); ?></span>
