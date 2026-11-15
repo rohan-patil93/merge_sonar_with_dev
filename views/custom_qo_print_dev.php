@@ -173,7 +173,7 @@ function emptyCheck($valu)
 ?>
 <?php if ($callapi != 'Y') { ?>
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
 
     <head>
         <title>InfiSuite</title>
