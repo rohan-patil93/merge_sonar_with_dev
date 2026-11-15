@@ -137,11 +137,13 @@ $loopstatus = array('WARNING','CRITICAL','INFO');
 				<td class="w-b-w-s"><?php echo $flagitem['gpt_issue']; ?></td>
 				<td class="w-b-w-s"><?php echo $flagitem['gpt_recommendation']; ?></td>
 			</tr>
-			<?php } }else{ ?>
+			<?php }
+			}else{ ?>
 			<tr class="stock-row row-<?php echo $lstat; ?> <?php echo $lstat == "CRITICAL"?"":"d-none"; ?>">
 				<td class="w-b-w-s text-center" colspan="4"><i class="ti-alert"></i> No Data</td>
 			</tr>
-			<?php } } ?>
+			<?php }
+			} ?>
 		</tbody>
 	</table>
 </div>

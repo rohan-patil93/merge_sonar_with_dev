@@ -157,7 +157,8 @@ function transactionDetailsUI($retres, $fullPathfilename){
                     <td class="p-2">'.$matcherorse1.'</td>
                     <td class="w-b-w-s p-2 text-danger">'.$matcherror.'</td>
                 </tr>';
-          $matcherorse1++;  }
+          $matcherorse1++;
+          }
     $html .= '</tbody>
         </table>  
     </div>
@@ -177,7 +178,8 @@ function transactionDetailsUI($retres, $fullPathfilename){
                     <td class="p-2">'.$matcherorse1.'</td>
                     <td class="w-b-w-s p-2">'.$matchworning.'</td>
                 </tr>';
-          $matcherorse1++;  }
+          $matcherorse1++;
+          }
     $html .= '</tbody>
                     </table>
                 </div>
