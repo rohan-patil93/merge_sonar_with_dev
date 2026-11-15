@@ -49,7 +49,7 @@ $emp_id = $_POST['emp_id'] ?? ($_SESSION['emp_id'] ?? 0);
 			<div class="form-group row">
 				<div class="col-lg-12">
 					<label class="form-label f-w-600">Comment / Note</label>
-					<textarea class="form-control" name="comment" id="comment" rows="3" placeholder="Add any comments for the manager (optional)"></textarea>
+					<textarea aria-label="<?= htmlspecialchars(__('Add any comments for the manager (optional)'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="comment" id="comment" rows="3" placeholder="Add any comments for the manager (optional)"></textarea>
 				</div>								
 			</div>
 		</div>
