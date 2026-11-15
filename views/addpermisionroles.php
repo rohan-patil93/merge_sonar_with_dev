@@ -39,7 +39,7 @@ foreach($resutlvalue as $resultlist){
  $valuegs = $valueg[0];
     ?>
       <div class="form-group row">
-        <label class="col-md-2  control-label" style="margin-top:10px"><?php echo htmlspecialchars(ucwords(__($resultlist['name'] ?? ''))); ?></label>
+        <span class="col-md-2  control-label d-inline-block fw-bold" style="margin-bottom:5px;margin-top:10px"><?php echo htmlspecialchars(ucwords(__($resultlist['name'] ?? ''))); ?></span>
         <input type="hidden" name="processname[<?php echo $i; ?>]" value="<?php echo $resultlist['application_page_name']; ?>">
         <input type="hidden" name="processpageid[<?php echo $i; ?>]" value="<?php echo $resultlist['id']; ?>">
           <input type="hidden" name="processtablename[<?php echo $i; ?>]" value="<?php echo checkTableName($resultlist['application_page_name']); ?>">
