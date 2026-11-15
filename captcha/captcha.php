@@ -11,4 +11,3 @@
 	imagettftext($captcha, 20, 0, random_int(30, 180), random_int(20, 70), $color, $font, $random );
 	imagepng($captcha);
 	imagedestroy($captcha);
-?>

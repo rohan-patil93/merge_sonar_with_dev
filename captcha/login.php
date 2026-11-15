@@ -14,4 +14,3 @@
 			echo "<div class='text-center'><span class='text-danger'>Invalid username or password</span></div>";
 		}
 	}
-?>
