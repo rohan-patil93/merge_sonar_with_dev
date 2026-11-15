@@ -1250,7 +1250,7 @@ function calculateTotal(){
 //}
  ?>
  <?php if(in_array($table_name, (array)$originator_tables)){  ?>
-   <label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Originator'); ?>:</label>
+   <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Originator'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <select class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValueEmployee(this.value)" aria-label="Party Id">
             <option value="0"> <?php echo __('Select Any EMployee'); ?> </option>
@@ -1261,7 +1261,7 @@ function calculateTotal(){
         </select>
     </div>
 <?php } elseif(in_array($table_name, (array)$stock_table)){ ?> 
-    <label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Location'); ?>:</label>
+    <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Location'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <select class="form-control" id="transfer_location_id" name= "transfer_location_id" aria-label="Transfer Location Id">
             <option value="0"> <?php echo __('Select Any Location'); ?> </option>
@@ -1273,7 +1273,7 @@ function calculateTotal(){
     </div>    
 
 <?php }else{ ?> 
-    <label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Vendor'); ?>:</label>
+    <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Vendor'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <select class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValue(this.value)" aria-label="Party Id">
             <option value="0"> <?php echo __('Select Any Vendor'); ?> </option>
@@ -1284,7 +1284,7 @@ function calculateTotal(){
         </select>
     </div>
 <?php } ?>
-    <label class="col-lg-2 col-form-label"><?php echo __('Transaction Number'); ?>:</label>
+    <span class="col-lg-2 col-form-label d-inline-block fw-bold"><?php echo __('Transaction Number'); ?>:</span>
     <div class="col-lg-3">
         <input class="form-control" type='hidden' id="ord_no" value='<?php echo $invoicenumber; ?>' name="invoice_serial_number"/>
         <input  class="form-control" readonly type='text' value='<?php echo $tran_no; ?>'   name="invoice_number" id="invoice_number" / aria-label="<?php echo __('Invoice Number'); ?>">
@@ -1292,7 +1292,7 @@ function calculateTotal(){
     </div>
 </div>
 <div class="form-group row">
-    <label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Cost Center'); ?>:</label>
+    <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Cost Center'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <select class="form-control" id="cost_center" name="cost_center" aria-label="Cost Center">
             <option value="0"> <?php echo __('Select any'); ?>  </option>
@@ -1306,7 +1306,7 @@ function calculateTotal(){
         <?php } ?>
         </select>
     </div>
-    <label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Transaction Date'); ?>:</label>
+    <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Transaction Date'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <div class="input-group date">
             <?php $from = fromDate($table1['qo_date']); ?>
@@ -1318,7 +1318,7 @@ function calculateTotal(){
     </div>
 </div>
 <div class="form-group row" <?php echo $petty_cash_style; ?>>
-    <label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Department'); ?>:</label>
+    <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Department'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <select class="form-control kt-select2" id="kt_select2_3" name="param" aria-label="Param">
            <?php foreach ($departmentslist as  $department) { ?>
@@ -1328,7 +1328,7 @@ function calculateTotal(){
         </select>
     </div>
      <?php $table1['place_of_supply'] = $table1['place_of_supply'] !='' ? $table1['place_of_supply'] : $location_state; ?>
-    <label class="col-lg-2 col-form-label"><?php echo __('Place Of Supply'); ?>:</label>
+    <span class="col-lg-2 col-form-label d-inline-block fw-bold"><?php echo __('Place Of Supply'); ?>:</span>
     <div class="col-lg-3">
         <select class="form-control" name="place_of_supply" id="party_place_of_supply" onchange="displaytaxes()" aria-label="Place Of Supply">
             <option value="0"> <?php echo __('Select Any Place'); ?> </option>
@@ -1344,7 +1344,7 @@ function calculateTotal(){
 <?php if($table_name != 'petty_cash'){ 
         if($table_name != 'bills'){
     ?>
-<label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Category'); ?>:</label>
+<span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Category'); ?>:</span>
 <div class=" col-lg-3 col-md-9 col-sm-12">
     <select class="form-control" id="kt_select2_4" name= "type" aria-label="Type">
                <?php foreach ($itemtypelist as $itemtype) {  ?>
@@ -1353,7 +1353,7 @@ function calculateTotal(){
      </select>
 </div>
 <?php } } else{ ?>
-<label class="col-form-label col-lg-2 col-sm-12"><?php echo __('Branch'); ?>:</label>
+<span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Branch'); ?>:</span>
 <div class=" col-lg-3 col-md-9 col-sm-12">
     <select class="form-control" id="kt_select2_4" name= "type" aria-label="Type">
                <?php foreach ($boxlist as $itemtype) {  ?>
@@ -1362,7 +1362,7 @@ function calculateTotal(){
      </select>
 </div>
 <?php } ?>
-<label class="col-lg-2 col-form-label" <?php echo $petty_cash_style; ?>><?php echo __('Type'); ?>:</label>
+<span class="col-lg-2 col-form-label d-inline-block fw-bold" <?php echo $petty_cash_style; ?>><?php echo __('Type'); ?>:</span>
 <div class="col-lg-3" <?php echo $petty_cash_style; ?>>
     <div class="kt-radio-inline">
         <label class="kt-radio"> <input type="radio"  <?php if($table1['opex_cpex']== 0){ ?>checked <?php } ?> name="opex_cpex" value='0' aria-label="<?php echo __('Opex'); ?>"><?php echo __('Opex'); ?>    <span></span></label>
@@ -1390,7 +1390,7 @@ function calculateTotal(){
                             </div>
                             <div class="">
                                 <div class="form-group row">
-                                    <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Billing Address'); ?></label>
+                                    <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Billing Address'); ?></span>
                                     <div class="col-lg-8 col-md-8 col-sm-12">
                                        <textarea type="text" name="party_address" id="party_address" class="form-control" placeholder="<?php echo __('Enter your address'); ?>" aria-label="<?php echo __('Enter your address'); ?>"><?php echo $table1['party_address'] ?></textarea>
                                     </div>
@@ -1398,7 +1398,7 @@ function calculateTotal(){
                             </div>
                             <div class="">
                                 <div class="form-group row">
-                                    <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Shipping Address'); ?></label>
+                                    <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Shipping Address'); ?></span>
                                     <div class="col-lg-8 col-md-8 col-sm-12">
                                        <textarea type="text" class="form-control" id="party_ship_adderss" name='party_ship_adderss' placeholder="<?php echo __('Enter your address'); ?>" aria-label="<?php echo __('Enter your address'); ?>"><?php echo $table1['party_address'] ?></textarea>
                                     </div>
@@ -1406,13 +1406,13 @@ function calculateTotal(){
                             </div>
                                 
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Email Address'); ?></label>
+                                <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Email Address'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <input type='text' class="form-control" id="party_email" readonly name="party_email"  value="<?php echo $table1['party_email']; ?>"/ aria-label="Party Email">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Phone Number'); ?></label>
+                                <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Phone Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <input type='text' id="party_phone" name="party_phone" class="form-control" readonly value="<?php echo $table1['party_phone']; ?>" / aria-label="Party Phone">
                                     <input type='hidden'  name="company_id" id="company_id" class="form-control" readonly value="<?php echo $_SESSION['company_id']; ?>" />
@@ -1443,7 +1443,7 @@ function calculateTotal(){
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Payment Terms'); ?></label>
+                                <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Payment Terms'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                      <select class="form-control"  onchange="duedate()"  name="payment_terms" id="party_payment_terms" aria-label="Payment Terms">
                                             <option value="0"> <?php echo __('Select Any Term'); ?> </option>
@@ -1457,7 +1457,7 @@ function calculateTotal(){
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Currency'); ?></label>
+                                <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Currency'); ?></span>
                                 <?php  $table1['currency_id'] =  $table1['currency_id'] !="" ? $table1['currency_id'] : $_SESSION['config']['default_currency_id'];?>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <select class="form-control" onchange="currencychange(this.value,<?php echo  $_SESSION['config']['default_currency_id'];  ?>)"  name="currency_id" id="currency_id" aria-label="Currency Id">
@@ -1471,13 +1471,13 @@ function calculateTotal(){
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Ex Rate'); ?></label>
+                                <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Ex Rate'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                    <input type='text' class="form-control" id="currency_rate" onchange="exchangerate()"  name="currency_rate"  value="<?php echo customeummarmonyformate($table1['currency_rate']); ?>"/ aria-label="Currency Rate">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Due Date'); ?>:</label>
+                                <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Due Date'); ?>:</span>
                                   <?php $duee = $table1['due_date'] !='' ?  fromDate($table1['due_date']) :  ''; ?>
                                    <div class="col-lg-8 col-md-8 col-sm-12">
                                 <input type='text' class="form-control" id="due_date"   name="due_date"  value=" <?php  echo $duee; ?>" readonly / aria-label="Due Date">
@@ -1486,7 +1486,7 @@ function calculateTotal(){
                             <?php if(!in_array($table_name, (array)$originator_table_withbill)){ 
                                   $req_list = toGetPendingRequisitionQty($rtable_name);?>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Number'); ?></label>
+                                <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Refernce Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                      <select class="form-control"  name="ref_id" id="ref_id" onchange="toredriacte(this.value,<?php echo  "'".$option."'"; ?>,<?php echo  "'".$rtable_name."'"; ?>)" aria-label="Ref Id">
                                         <option value="0"> <?php echo __('Select Any Refernce'); ?> </option>
@@ -1500,7 +1500,7 @@ function calculateTotal(){
 
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Date'); ?></label>
+                                <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Refernce Date'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <div class="kt-input-icon kt-input-icon--right" >
                                         <input type='text' class="form-control" readonly id="ref_date"  name="ref_date"  value="<?php echo $table1['ref_date']; ?>"/ aria-label="Ref Date">
@@ -1510,7 +1510,7 @@ function calculateTotal(){
                             </div>
                             <?php } if($table_name == 'bills'){?>       
                              <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Number'); ?></label>
+                                <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Refernce Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     
                                     <input type='text' class="form-control"  name="doc_ref_no"  value="<?php echo $table1['doc_ref_no']; ?>"/ aria-label="Doc Ref No">
@@ -1518,7 +1518,7 @@ function calculateTotal(){
 
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Date'); ?></label>
+                                <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Refernce Date'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <div class="kt-input-icon kt-input-icon--right" >
                                         <input type='text' class="form-control"  id="kt_datepicker_32"  name="doc_ref_date"  value="<?php echo $table1['doc_ref_date']; ?>"/ aria-label="Doc Ref Date">
@@ -1708,7 +1708,7 @@ function calculateTotal(){
 </div> -->
 <?php if($rid !=''){ ?>
 <div class="form-group row">
-    <label class="col-form-label col-lg-3 col-sm-12"><?php echo __('File Upload'); ?></label>
+    <span class="col-form-label col-lg-3 col-sm-12 d-inline-block fw-bold"><?php echo __('File Upload'); ?></span>
     <div class="col-lg-4 col-md-9 col-sm-12">
         <div class="dropzone dropzone-default dropzone-brand" id="kt_dropzone_2" >
 
