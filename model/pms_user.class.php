@@ -345,7 +345,7 @@ class pmsUserClass extends userClass{
 	return $retuenres;
 }
 
-function getPerFormanceAppraisal($get){ //please removed not working code
+public function getPerFormanceAppraisal($get){ //please removed not working code
 	global $callConfig;
 	$retuenres = array(); //emp_id
 	if($get['ajax']=="Y"){  // Ajax Not Call
@@ -752,7 +752,7 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 	$returnaray['res']=$pasettingres;
 	return $returnaray;
 }
-function getKRATagging($get){
+public function getKRATagging($get){
 	global $callConfig;
 	$retuenres = array();
 	$dipartcondition = "";
@@ -805,7 +805,7 @@ function getKRATagging($get){
 	$retuenres['location_list'] = $locares;
 	return $retuenres;
 }
-function insertGoalData($get,$post){
+public function insertGoalData($get,$post){
 		global $callConfig;
 		$returnaray = array();
 		$returnaray['post'] = $post;
@@ -879,7 +879,7 @@ function insertGoalData($get,$post){
 	$returnaray['post'] = $post; 
 	return $returnaray;
 }
-function pmsDashboard1($get){
+public function pmsDashboard1($get){
 		global $callConfig;
 		$return = array();
 		$performance_setupsql = "SELECT id, name,assessment_year FROM performance_setup WHERE company_id = '".$get['company_id']."' AND is_active = 0 ORDER BY assessment_start_date DESC"; 
@@ -995,7 +995,7 @@ function pmsDashboard1($get){
 	}
 	return $retuenres;
 }
-function getOrganizationGoals($get){
+public function getOrganizationGoals($get){
 	global $callConfig;
 	$return = array();
 	$return['get'] = $get;
