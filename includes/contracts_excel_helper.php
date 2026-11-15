@@ -241,8 +241,7 @@ function cex_normalize_header($header)
 {
     $h = strtolower(trim((string) $header));
     $h = preg_replace('/\s+/', '_', $h);
-    $h = preg_replace('/[^a-z0-9_]/', '', $h);
-    return $h;
+    return preg_replace('/[^a-z0-9_]/', '', $h);
 }
 
 function cex_grid_to_assoc_rows($grid, $maxCol)
