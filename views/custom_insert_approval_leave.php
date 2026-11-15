@@ -176,7 +176,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 								    <div class="d-flex align-items-center">				
 								    		<?php /** if($emps['image'] !=''){ ?>			
 								    	<div class="symbol symbol-60 symbol-sm flex-shrink-0">								
-								    		<img class="userimageround" src="uploads/all/<?php echo $emps['image']; ?>" alt="photo">				
+								    		<img class="userimageround" src="uploads/all/<?php echo $emps['image']; ?>" alt="">				
 										</div>	
 									<?php }else{ ?>
 										<div class="img-radius img-50 align-top m-r-15 text-center userimageround">
@@ -226,7 +226,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 												<div class="d-flex align-items-center">	
 												<?php if($empdata[$othemp['employee_id']]['image'] !=''){ ?>			
 												<div class="symbol symbol-60 symbol-sm flex-shrink-0">								
-													<img class="img-radius img-50" src="uploads/all/<?php echo $empdata[$othemp['employee_id']]['image']; ?>" alt="photo">				
+													<img class="img-radius img-50" src="uploads/all/<?php echo $empdata[$othemp['employee_id']]['image']; ?>" alt="">				
 												</div>	
 											<?php }else{ ?>
 												<div class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center">
