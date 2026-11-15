@@ -4623,7 +4623,7 @@ class mobileUserClass extends userClass{
 
 	}
 
-function GETProcurementModulesDashboardSummary($get){
+public function GETProcurementModulesDashboardSummary($get){
 		global $callConfig;
 		$return = array();
 		$user_id= $get['user_id'];
@@ -4788,7 +4788,7 @@ function GETProcurementModulesDashboardSummary($get){
 
 
 //profit and loss report
-function calculateBalances($parentCode, $map, &$total, $type){
+public function calculateBalances($parentCode, $map, &$total, $type){
     if(empty($map[$parentCode])) return;
 
     foreach($map[$parentCode] as $coa){
@@ -4806,7 +4806,7 @@ function calculateBalances($parentCode, $map, &$total, $type){
         $this->calculateBalances($code, $map, $total, $type);
     }
 }
-function processBalances($balances, &$total, $type){
+public function processBalances($balances, &$total, $type){
     $map = [];
 
     foreach($balances as $row){
@@ -4815,7 +4815,7 @@ function processBalances($balances, &$total, $type){
 
     $this->calculateBalances(0, $map, $total, $type);
 }
-function GETProcurementModulesDashboardSummaryProfitLoass($get){
+public function GETProcurementModulesDashboardSummaryProfitLoass($get){
 
     $get['start_date'] = $this->dateconvertdbformat($get['start_date']);
     $get['end_date']   = $this->dateconvertdbformat($get['end_date']);
@@ -4879,7 +4879,7 @@ function GETProcurementModulesDashboardSummaryProfitLoass($get){
 
 
 //start Balance Sheet
-function GETProcurementModulesDashboardSummaryBalanceSheets($get){
+public function GETProcurementModulesDashboardSummaryBalanceSheets($get){
 
     // STEP 1: Get data (your existing function)
 	$get['balance_date'] = date('Y-m-d',strtotime($get['start_date']));
@@ -5380,7 +5380,7 @@ $prev_balances = json_decode(json_encode($result['prev_balances']), true);
 
 //Start Cash Flow
 
-function GETProcurementModulesDashboardSummaryCashFlow($get){
+public function GETProcurementModulesDashboardSummaryCashFlow($get){
     
     include_once("account_user.class.php");
     $obj = new accountUserClass();
@@ -5770,7 +5770,7 @@ function GETProcurementModulesDashboardSummaryCashFlow($get){
 
 
 //Start customer ledegr
-function GETProcurementCustomerLedger($get){
+public function GETProcurementCustomerLedger($get){
 	
 	include_once("account_user.class.php");
     $obj = new accountUserClass();
@@ -5868,7 +5868,7 @@ function GETProcurementCustomerLedger($get){
 }
 
 
-function GETProcurementVendorLedger($get){
+public function GETProcurementVendorLedger($get){
 
 	include_once("account_user.class.php");
     $obj = new accountUserClass();
