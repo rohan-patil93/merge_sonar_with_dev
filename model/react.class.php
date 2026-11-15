@@ -6676,7 +6676,7 @@ class reactClass extends userClass{
 		return $this->getAmcRepairOrderContractAssetsData($get['company_id'], $contractId);
 	}
 
-	public function buildAmcRepairOrderScheduleSummary($get, $scheduleId, $schedule = array(), $detail = array())
+	public function buildAmcRepairOrderScheduleSummary($get, $scheduleId, $schedule = array(), $unusedDetail = array())
 	{
 		global $callConfig;
 		$scheduleId = (int) $scheduleId;
