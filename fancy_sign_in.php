@@ -4,7 +4,7 @@
         <div class="loader-bar"></div>
     </div>
     <!-- <div class="mobile-view-logo bg-primary text-center">
-        <img class="img-100 m-3" src="assets/images/sign-in/HRstaq-1.png" alt="" >   
+        <img class="img-100 m-3" src="assets/images/sign-in/HRstaq-1.png" alt="" >
     </div> -->
     <div class="row fancy-sign-in">
         <div class="col-lg-5 bg-white">

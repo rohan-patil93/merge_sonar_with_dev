@@ -278,7 +278,7 @@ function exportname($name)
 function statusData($table)
 {
 	$statusurl = API . "?mode=statusdata&fid=table_name&rid=" . $table . "&table=" . TBL_STATUSPROGRES;
-	//echo $statusurl; 
+	//echo $statusurl;
 	$statusres = callAPI($statusurl);
 	//$statusres = file_get_contents($statusurl, false, $context);
 	$stausresult = json_decode($statusres, 1);
@@ -314,7 +314,7 @@ function toGetStatusProgressAction($table_name, $status)
 
 function dateFormate($daate)
 {
-	$date = $daate != "" ? $daate : date("Y-m-d");  // Rohan changes Issue year 1970 show 
+	$date = $daate != "" ? $daate : date("Y-m-d");  // Rohan changes Issue year 1970 show
 	return date($_SESSION['date_formate'], strtotime($date));
 }
 function viewTitle($title)
@@ -330,8 +330,8 @@ function viewTitle($title)
 }
 // function customeummarmonyformateifine($number){
 // 	$num = $_SESSION['config']['number_format'] !='' ? $_SESSION['config']['number_format'] :2;
-// 	$return = number_format($number, $num, '.', ','); 
-// 	return $return!='0.00' ? $_SESSION['config']['currency_symbol']."".$return : '-'; 
+// 	$return = number_format($number, $num, '.', ',');
+// 	return $return!='0.00' ? $_SESSION['config']['currency_symbol']."".$return : '-';
 // }
 function customeummarmonyformateifinecheck($number)
 {
@@ -355,8 +355,8 @@ function customeummarmonyformateifine($number)
 		return $formatvalue;
 		// if((array)$_SESSION['config']['number_format'] !='' && (array)$_SESSION['config']['currency_symbol']){
 		// 	$num = $_SESSION['config']['number_format'] !='' ? $_SESSION['config']['number_format'] :2;
-		// 	$return = number_format($number, $num, '.', ','); 
-		// 	return $return!='0.00' ? $_SESSION['config']['currency_symbol']." ".$return : '-';	
+		// 	$return = number_format($number, $num, '.', ',');
+		// 	return $return!='0.00' ? $_SESSION['config']['currency_symbol']." ".$return : '-';
 		// }else{
 		// 	return $number;
 		// }
@@ -714,7 +714,7 @@ function toGetMenuDetailsBaseMenuPageName($page)
 		//print_r($page); //exit;
 		//echo $pages['Page_Name']."==". $page."</br>";
 		if ($pages['page_name'] == $page) {
-			//echo "ravi"; 
+			//echo "ravi";
 			$data = $pages;
 			break;
 		}
@@ -780,7 +780,7 @@ function toGETNavDetailslastest($type)
 	//echo $type."<pre>"; print_r($_SESSION['role_permission']); echo $type." Menus:"; print_r($menu); //exit;
 	//echo "<pre>".$type." Menus:"; print_r($menu);
 	foreach ($menu as $key => $value) {
-		//echo $value['page_name']."||".$type ."||". $value['parent_menu']."||".$res."</br>"; 		
+		//echo $value['page_name']."||".$type ."||". $value['parent_menu']."||".$res."</br>";
 		if ($value['menu_location'] == $type && $value['parent_menu'] == 0) {
 			//$res = checkPremission($value['page_name']);
 			//echo "<br>SHANKAR".$value['page_name']."||".$value['menu_label']."Check Premission:".$res;
@@ -843,7 +843,7 @@ function toGETNavDetails($type)
 
 			if ($_SESSION['config']['role_permission'] == 0) {
 				//echo "Ravi";
-				//echo "if the loopt".$key;	
+				//echo "if the loopt".$key;
 				if (in_array($value['page_name'], (array) $_SESSION['application_no_permission_pages']['option'])) {
 					$res = 1;
 				} else {
@@ -910,7 +910,7 @@ function checkPremission($name)
 	$return = 0;
 	//echo  $name; //exit;
 	//echo "<pre>"; print_r($_SESSION['role_permission']);print_r($_SESSION['role_permission']);
-	//rohan added page with paramiter passe tis time not working 
+	//rohan added page with paramiter passe tis time not working
 	if (strpos($name, '&')) {
 		$explode = explode('&', $name);
 		$name = $explode[0];
@@ -952,7 +952,7 @@ function checkPremission($name)
 	if (isset($_SESSION['role_permission'][$table][$approvaltype]) && $_SESSION['role_permission'][$table][$approvaltype] == 0) {
 		$return = 1;
 	}
-	//print_r($_SESSION['role_permission']);	
+	//print_r($_SESSION['role_permission']);
 	//echo $table." -- ".$type." --- ".$return; exit;
 	//approval check
 	return $return;
@@ -1094,30 +1094,30 @@ function notificationdatesdiff($date, $cond = "", $ladate = "")
 	} else {
 		$date1 = strtotime(date("Y-m-d h:i:sa"));
 	}
-	// Formulate the Difference between two dates 
+	// Formulate the Difference between two dates
 	$diff = abs($date2 - $date1);
-	// To get the year divide the resultant date into // total seconds in a year (365*60*60*24) 
+	// To get the year divide the resultant date into // total seconds in a year (365*60*60*24)
 	$years = floor($diff / (365 * 60 * 60 * 24));
-	// To get the month, subtract it with years and 
-// divide the resultant date into 
-// total seconds in a month (30*60*60*24) 
+	// To get the month, subtract it with years and
+// divide the resultant date into
+// total seconds in a month (30*60*60*24)
 	$months = floor(($diff - $years * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
-	// To get the day, subtract it with years and 
-// months and divide the resultant date into 
-// total seconds in a days (60*60*24) 
+	// To get the day, subtract it with years and
+// months and divide the resultant date into
+// total seconds in a days (60*60*24)
 	$days = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
-	// To get the hour, subtract it with years, 
-// months & seconds and divide the resultant 
-// date into total seconds in a hours (60*60) 
+	// To get the hour, subtract it with years,
+// months & seconds and divide the resultant
+// date into total seconds in a hours (60*60)
 	$hours = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24) / (60 * 60));
-	// To get the minutes, subtract it with years, 
-// months, seconds and hours and divide the 
-// resultant date into total seconds i.e. 60 
+	// To get the minutes, subtract it with years,
+// months, seconds and hours and divide the
+// resultant date into total seconds i.e. 60
 	$minutes = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 - $hours * 60 * 60) / 60);
-	// To get the minutes, subtract it with years, 
-// months, seconds, hours and minutes 
+	// To get the minutes, subtract it with years,
+// months, seconds, hours and minutes
 	$seconds = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 - $hours * 60 * 60 - $minutes * 60));
-	// Print the result 
+	// Print the result
 //printf("%d years, %d months, %d days, %d hours, "	. "%d minutes, %d seconds",$years, $months, $days, $hours, $minutes, $seconds);
 	$str = '';
 	if ($years > 0) {
@@ -1212,7 +1212,7 @@ function numberToWordFormateRupees($number)
 }
 function toGetCountryNameBaseCountryID($id)
 {
-	//echo "hai||".$id; 
+	//echo "hai||".$id;
 	$cu = API . "?mode=singlerowtabledata&rid=$id&table=" . TBL_COUNREIES;
 	//echo $cu;
 	$res = callAPI($cu);
@@ -1224,7 +1224,7 @@ function toGetCountryNameBaseCountryID($id)
 function toGETConfigartion()
 {
 	$configurl = API . "?mode=singlerowtabledata&fid=company_id&rid=" . $_SESSION['company_id'] . "&table=" . TBL_CONFIG;
-	//echo $configurl; 
+	//echo $configurl;
 	$configesponse = callAPI($configurl);
 	$configdata = json_decode($configesponse, 1);
 	//print_r($configdata); exit;
@@ -1337,7 +1337,7 @@ function toGetApplicationSerialNumber($table_name)
 	$vdata1["where"] = array('application_table_name' => $table_name, 'is_active' => 0);
 	$vdata = urlencode(json_encode($vdata1));
 	$vurl = API . "?mode=gettabledetailswithconditions&table=" . TBL_APPLICATION_SERIAL_NUMBERS . "&data=" . $vdata;
-	// echo $vurl; 
+	// echo $vurl;
 	$res = callAPI($vurl);
 	$res = json_decode($res, 1);
 	$res = $res[0];
@@ -1825,7 +1825,7 @@ function todiplaycomments($data)
 }
 function todisplaytracking($data)
 {
-	//$vurl = API."?mode=gettrackingdynamic"; 
+	//$vurl = API."?mode=gettrackingdynamic";
 	$vurl = API . "?mode=gettrackingdynamic&table=" . $data['table'] . "&transaction_id=" . $data['transaction_id'];
 	//echo $vurl;
 	$vdata_details = callAPI($vurl);
@@ -1981,10 +1981,10 @@ function filleUploadingList($transactiontablename, $id, $isactive = '')
 // 	$deleteimages="";
 // 	$values =  filleUploadingList($trasnsactiontablename,$aplicationid,$isactive);
 // 	$empty = (!empty($values))? " dz-started" : "cd";
-// 	foreach($values as $result){ 
-// 		$images .='<div class="delete'.$result['id'].' dz-preview dz-processing dz-image-preview   dz-success dz-complete ">  <div class="dz-image"><img data-dz-thumbnail="" alt="'.$result['file_name'].'" src="uploads/attachments/'.$result['actual_file_name'].'" style="height: 120px; width: 100%;"></div>  <div class="dz-details">    <div class="dz-size"><span data-dz-size=""><strong>0.6</strong> MB</span></div>    <div class="dz-filename"><span data-dz-name="">'.$result['file_name'].'</span></div>  </div>  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress="" style="width: 100%;"></span></div>  <div class="dz-error-message"><span data-dz-error-message=""></span></div>  <div class="dz-success-mark">    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title>Check</title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>      </g>    </svg>  </div> 
+// 	foreach($values as $result){
+// 		$images .='<div class="delete'.$result['id'].' dz-preview dz-processing dz-image-preview   dz-success dz-complete ">  <div class="dz-image"><img data-dz-thumbnail="" alt="'.$result['file_name'].'" src="uploads/attachments/'.$result['actual_file_name'].'" style="height: 120px; width: 100%;"></div>  <div class="dz-details">    <div class="dz-size"><span data-dz-size=""><strong>0.6</strong> MB</span></div>    <div class="dz-filename"><span data-dz-name="">'.$result['file_name'].'</span></div>  </div>  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress="" style="width: 100%;"></span></div>  <div class="dz-error-message"><span data-dz-error-message=""></span></div>  <div class="dz-success-mark">    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title>Check</title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>      </g>    </svg>  </div>
 // 		<a class="dz-remove" onclick="removeattachfile('.$result['id'].',\''.$result['actual_file_name'].'\')" data-dz-remove="">Remove file</a></div>';
-// 	} 
+// 	}
 // 	$message .= '<div class="form-group col-lg-12 row"><div class="form-group col-lg-'.$dropwidthwidth.'">
 // 	<label>'.ucwords($lable).'</label>
 // 	<div>
@@ -2001,17 +2001,17 @@ function filleUploadingList($transactiontablename, $id, $isactive = '')
 // 		if(is_array($deletelist)){ foreach($deletelist as $list){
 // 			$deleteimages .= '<div class="col-md-2 dz-preview dz-processing dz-image-preview dz-success dz-complete divss del'.$list['id'].'" onclick="reused(\''.$list['actual_file_name'].'\','.$list['id'].')"><a class="dleteimages">reused</a><div class="dz-image"><img src="uploads/attachments/'.$list['actual_file_name'].'" style="  width: 100%;" ></div></div>';
 
-// 		}} 
+// 		}}
 // 		$message .='<div class=" form-group col-lg-'.$widthdelete.'">
 // 		<label class="">Delete List</label>
 // 		<div class="">
 // 		<div class="dropzone dropzone-default dropzone-primary deletesrow" >';
 // 		$message .= $deleteimages;
-// 		$message .=	'</div></div></div>';	
+// 		$message .=	'</div></div></div>';
 // 	}
 // 	$message .=	'<input type="hidden" id="application_table_name" value="'.$fileuploading[application_table_name].'">
 // 	<input type="hidden" id="transaction_id" value="'.$fileuploading[transaction_id].'">  </div>';
-// 	echo $message;	
+// 	echo $message;
 // }
 
 function fileUplodingUi($fileuploading)
@@ -2301,7 +2301,7 @@ function checkWhoShouldApprove($val)
 {   // find who should approve
 	$ssql = API . "?mode=checkwhoshouldapproves&tablename=" . $val['tablename'] . "&rid=" . $val['rid'] . "&exicute_type=" . $val['exicute_type'] . "&emp_id=" . $_SESSION['emp_id'];
 	$rowreturn = callAPI($ssql);
-	//$rowreturns = json_decode($rowreturn,1);	
+	//$rowreturns = json_decode($rowreturn,1);
 	return $rowreturn;
 }
 function checkcriteria($val)
@@ -2658,7 +2658,7 @@ function nearestDateFirstShowone($arry, $field)
 	$nearendholiday = array();
 	$holdyadate = array();
 	foreach ($arry as $key => $value) {
-		//$dateggd[] = date('Y').'-'.date('m-d',strtotime($value[$field])); 
+		//$dateggd[] = date('Y').'-'.date('m-d',strtotime($value[$field]));
 		if (strtotime(date('Y') . '-' . date('m-d', strtotime($value[$field]))) >= strtotime(date("Y-m-d"))) {
 			//$value[$field.'_1']  = date('Y').'-'.date('m-d',strtotime($value[$field]));
 			$nearstartholiday[] = $value;
@@ -2668,8 +2668,8 @@ function nearestDateFirstShowone($arry, $field)
 		}
 	}
 	$resultary = array_merge($nearstartholiday, $nearendholiday);
-	//$resultary['new'] =  $nearstartholiday; 
-	//$resultary['old'] =  $nearendholiday; 
+	//$resultary['new'] =  $nearstartholiday;
+	//$resultary['old'] =  $nearendholiday;
 	return $resultary;
 }
 
@@ -2711,7 +2711,7 @@ function todisplayWorkflowstatuslist($data)
 						$oricon = '<i class="far fa-hourglass text-warning"></i> &nbsp;';
 						$ork = 0;
 					}
-					if($checkcurrent_status == $pwlist['status']){    
+					if($checkcurrent_status == $pwlist['status']){
 						$orcolor = "text-primary";
 						$oricon = '<i class="far fa-check-circle text-success"></i> &nbsp;';
 						$ork = 1;
@@ -2911,7 +2911,7 @@ function togetprojecttasktimelog()
 /**
 function getWorkflowStatus($table_name,$transaction_no,$current_status){
 	//echo "table_name:".$table_name."--transaction_no:".$transaction_no."---current_status:".$current_status;
-	$url = API."?mode=getdynamicworkflowsteps&transaction_table=".$table_name."&transaction_no=".$transaction_no."&current_status=".$current_status; 
+	$url = API."?mode=getdynamicworkflowsteps&transaction_table=".$table_name."&transaction_no=".$transaction_no."&current_status=".$current_status;
 	$api = callAPI($url);
 	$result = json_decode($api,1);
 	//echo "<pre>"; print_r($result); echo "</pre>";
@@ -2953,16 +2953,16 @@ function getWorkflowStatus($table_name,$transaction_no,$current_status){
 					//$display_name =  ucwords(str_replace("_"," ",($breadcrumb[$statuskey]['sub_approve_type']))).' <i class="ti-arrow-circle-down" onclick="'.$multiuserlistfun.'"></i>';
 					//$display_name .=  ucwords(str_replace("_"," ",($breadcrumb[$statuskey]['sub_approve_type'])));
 				$mk=1;	foreach($userdetails as $userdetail){
-						$display_name .=  '<span class="d-block">'.$mk.'. '.$userdetail['display_name'].' ';	
+						$display_name .=  '<span class="d-block">'.$mk.'. '.$userdetail['display_name'].' ';
 						if(isset($talapproved[$userdetail['user_id']])){
 							$display_name .=  '<i class="far fa-check-circle text-success f-10"></i>';
 						}else{
-							$display_name .=  '<i class="far fa-hourglass text-warning f-10"></i>';		
+							$display_name .=  '<i class="far fa-hourglass text-warning f-10"></i>';
 						}
 						$display_name .=  '</span>';
 					$mk++; }
 
-				}	
+				}
 			}
 			if($statuskey == $current_status){
 				$successicons = "";
@@ -3006,7 +3006,7 @@ function getWorkflowStatus($table_name,$transaction_no,$current_status){
 						//$multiuserlistfun = "viewApprovalAllUsers('".json_encode($userdetails)."')";
 						$multiuserlistfun = "viewApprovalAllUsers('open-slide_popup".$statuskey."')";
 						$display_name =  ucwords(str_replace("_"," ",($breadcrumb[$statuskey]['sub_approve_type']))).' <i class="ti-arrow-circle-down" onclick="'.$multiuserlistfun.'"></i>';
-					}	
+					}
 				}
 				$activeclass ="";
 				if($statuskey == $current_status){
@@ -3023,16 +3023,16 @@ function getWorkflowStatus($table_name,$transaction_no,$current_status){
 								<i class="ti-close" onclick="viewApprovalAllUsers()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed"></i>
 							</div>
 						</div>';
-				$dis_str .= '<div class="card-body">'; 
-				$mk=1; 
+				$dis_str .= '<div class="card-body">';
+				$mk=1;
 				foreach($userdetails AS $userdetail){
 					if(isset($talapproved[$userdetail['user_id']])){
 						$icons =  '<i class="far fa-check-circle text-success f-16"></i>';
 					}else{
-						$icons =  '<i class="far fa-hourglass text-warning f-16"></i>';		
+						$icons =  '<i class="far fa-hourglass text-warning f-16"></i>';
 					}
 					$dis_str .= '<p class="f-16 mb-4">'.$icons." ".$userdetail['permision'].' '.$mk.'. '.$userdetail['display_name'].'</p>';
-				$mk++;} 
+				$mk++;}
 
 				$dis_str .= '</div>';
 				$dis_str .= '</div>';
@@ -3048,7 +3048,7 @@ function getWorkflowStatus($table_name,$transaction_no,$current_status){
 				// $dis_str.=  "Approved";
 			// $dis_str.=  "</a>";
 			}
-		}	
+		}
 		//}
 		if($current_status == ST_APPROVED){
 			$activeclassr = "active";
@@ -3089,7 +3089,7 @@ function getWorkflowStatus($table_name,$transaction_no,$current_status){
 				$dynamicfunction  = "submitDynamicWorkflow('".$table_name."','".$transaction_no."','".$current_status."','".ST_CALLBACK."','".$status_progress[$workflowsteps[$current_status]['current_status']]['name']."','".$status_progress[ST_CALLBACK]['action_label']."')";
 				$workflow_btn .= '<button type="button" class="btn btn-info btn-sm waves-effect waves-light" onclick="'.$dynamicfunction.'"> <span class="fa fa-retweet text-white"></span> &nbsp; '.$status_progress[ST_CALLBACK]['name'].'</button>';
 
-			}elseif(isset($transaction_approval_logs[$_SESSION['userid']])){	
+			}elseif(isset($transaction_approval_logs[$_SESSION['userid']])){
 					$next_step_owner = $_SESSION['userid'];
 		//	}elseif($current_transactionauthprized['user_id'] ==$_SESSION['userid']){
 
@@ -3110,7 +3110,7 @@ function getWorkflowStatus($table_name,$transaction_no,$current_status){
 		}
 		$workflow_btn .= '</div>';
 		}
-		$returnarray = array('breadcrumb'=>$dis_str,'workflow_btn'=>$workflow_btn,'current_transaction_details'=>$current_transactionauthprized,'current_status_ribbon'=>$current_status_ribbon,'transaction_owner_id'=>$transaction_owner_id,'all_steps_workflow'=>$breadcrumb,'next_status'=>$nextstepkeyvalue[$current_status],'next_step_owner'=>$next_step_owner);	
+		$returnarray = array('breadcrumb'=>$dis_str,'workflow_btn'=>$workflow_btn,'current_transaction_details'=>$current_transactionauthprized,'current_status_ribbon'=>$current_status_ribbon,'transaction_owner_id'=>$transaction_owner_id,'all_steps_workflow'=>$breadcrumb,'next_status'=>$nextstepkeyvalue[$current_status],'next_step_owner'=>$next_step_owner);
 	}else{
 
 		$workflow_btn .= '<div class="btn-group workflow-btn" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title=".btn-xlg">';
@@ -3124,8 +3124,8 @@ function getWorkflowStatus($table_name,$transaction_no,$current_status){
 
 		}
 		$workflow_btn .= '</div>';
-		$returnarray = array('workflow_btn'=>$workflow_btn,'current_transaction_details'=>$current_transactionauthprized,'current_status_ribbon'=>$current_status_ribbon,'transaction_owner_id'=>$transaction_owner_id,'next_status'=>$nextstepkeyvalue[$current_status]);	
-	}	
+		$returnarray = array('workflow_btn'=>$workflow_btn,'current_transaction_details'=>$current_transactionauthprized,'current_status_ribbon'=>$current_status_ribbon,'transaction_owner_id'=>$transaction_owner_id,'next_status'=>$nextstepkeyvalue[$current_status]);
+	}
 
 	return $returnarray;
 
@@ -4756,17 +4756,17 @@ function __($input_label){
 			$input_label = $_SESSION['application_language_translations'][$input_label][$_SESSION['selected_application_languages']];
 		}else{
 			$dynamic_label = "";
-			$strtoary = explode(" ", $input_label);	
+			$strtoary = explode(" ", $input_label);
 			foreach ($strtoary as $labvalue) {
 				if(isset($_SESSION['application_language_translations'][$labvalue]) && trim((string)$_SESSION['application_language_translations'][$labvalue]) !== ''){
 					$dynamic_label .= " ".$_SESSION['application_language_translations'][$labvalue][$_SESSION['selected_application_languages']];
 				}else{
 					$dynamic_label .= " ".$labvalue;
 				}
-			}	
+			}
 			$input_label = $dynamic_label;
 		}
-	}	
+	}
 	return $input_label;
 }
 ?>

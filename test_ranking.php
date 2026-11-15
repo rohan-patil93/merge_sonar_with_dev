@@ -55,7 +55,7 @@
     height: 24px;
     border-radius: 50%;
     background: #2563eb;
-    border: 2px solid #fff; 
+    border: 2px solid #fff;
     box-shadow: 0 0 4px rgba(0,0,0,0.3);
     cursor: pointer;
   }
@@ -126,7 +126,7 @@
     });
   });
 
-  
+
 </script>
 
 </body>

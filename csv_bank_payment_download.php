@@ -6,7 +6,7 @@ $head_array = array('PYMT_PROD_TYPE_CODE','PYMT_MODE','DEBIT_ACC_NO','BNF_NAME',
 $data[] = $head_array;
 $pay_year =$_GET['pay_year'];
 $pay_month = $_GET['pay_month'];
-$vurl = API."?mode=tortrivepaymetbankdetails&pay_year=".$pay_year."&pay_month=".$pay_month."&pay_area_id=".$_GET['pay_area_id']."&version=1"; 
+$vurl = API."?mode=tortrivepaymetbankdetails&pay_year=".$pay_year."&pay_month=".$pay_month."&pay_area_id=".$_GET['pay_area_id']."&version=1";
 $exdetails = callAPI($vurl);
 $exdetails = json_decode($exdetails,1);
 $bankdata = $exdetails['bank_details'];
@@ -45,13 +45,13 @@ function array_to_csv_download($array, $filename = "export.csv", $delimiter=",")
     header('Content-Disposition: attachment; filename="'.$filename.'";');
     header('Pragma: no-cache');
     header("Expires: 0");
-	
+
     $f = fopen('php://output', 'w');
     foreach ($array as $line) {
 	//fwrite($f, '<cols><col min="1" max="1" width="100" customWidth="1"/><col min="2" max="6" width="30" customWidth="1"/></cols>');
 	//fwrite($this->sheetFilePointer, '<cols><col min="1" max="1" width="100" customWidth="1"/><col min="2" max="6" width="30" customWidth="1"/></cols>');
         fputcsv($f, $line, $delimiter);
     }
-}  
+}
 
 ?>

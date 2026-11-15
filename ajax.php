@@ -1,32 +1,32 @@
-<?php 
+<?php
 include_once('includes/session.php');
 include_once('dbconfig.php');
 include_once('comm.php');
  $page = $_POST['page'];
  $response = 'Empty';
- if ($page == 'login') { 
+ if ($page == 'login') {
 	if ($_POST['username'] !=''){
 		$url = API."?mode=ajaxCheck&table_name=".TPREFIX.TBL_USERS."&filedname=user_name&value=".$_POST['username'];
 		$response = file_get_contents($url, false, $context);
 	}
 	echo $response; exit;
  }
- if ($page == 'login_email'&& $_POST['email']!='') { 
+ if ($page == 'login_email'&& $_POST['email']!='') {
 	$url = API."?mode=ajaxCheck&table_name=".TPREFIX.TBL_USERS."&filedname=email&value=".$_POST['email'];
 	$response = file_get_contents($url, false, $context);
 	echo $response; exit;
  }
- if ($page == 'login_phone'&& $_POST['phone']!='') { 
+ if ($page == 'login_phone'&& $_POST['phone']!='') {
 	$url = API."?mode=ajaxCheck&table_name=".TPREFIX.TBL_USERS."&filedname=email&value=".$_POST['phone'];
 	$response = file_get_contents($url, false, $context);
 	echo $response; exit;
  }
- if ($page == 'bank'&& $_POST['bankname']!='') { 
+ if ($page == 'bank'&& $_POST['bankname']!='') {
 	$url = API."?mode=ajaxCheck&table_name=".TBL_BANKS."&filedname=Bank_Name&value=".urlencode($_POST['bankname']);
 	$response = file_get_contents($url, false, $context);
 	echo $response; exit;
  }
- if ($page == 'bill_customer'&& $_POST['cus_id']!='') { 
+ if ($page == 'bill_customer'&& $_POST['cus_id']!='') {
 	$url = API."?mode=singlerowtabledata&table=".TBL_CUSTOMERS."&fid=id&rid=".$_POST['cus_id'];
 	$response = callAPI($url);
 	//$res = json_decode($response,1);
@@ -34,7 +34,7 @@ include_once('comm.php');
 	//$result = "<address><p>".$res['name']."</p><p>".$res['address']."</p><p>".$res['phone']."</p><p>".$res['email']."</p></address>";
 	echo $response; exit;
  }
- if ($page == 'invoice'&& $_POST['item_id']!='') { 
+ if ($page == 'invoice'&& $_POST['item_id']!='') {
 	$url = API."?mode=singlerowtabledata&table=".TBL_ITEMS_BALANCE."&fid=item_id&rid=".$_POST['item_id'];
 	//echo $url;
 	$response = file_get_contents($url, false, $context);
@@ -42,7 +42,7 @@ include_once('comm.php');
 	$res = json_decode($response,1);
 	echo $res['qty']; exit;
  }
- if ($page == 'vendor'&& $_POST['ven_id']!='') { 
+ if ($page == 'vendor'&& $_POST['ven_id']!='') {
 	$url = API."?mode=singlerowtabledata&table=".TBL_VENDOR."&fid=id&rid=".$_POST['ven_id'];
 	//echo $url;
 	$response = callAPI($url);
@@ -51,7 +51,7 @@ include_once('comm.php');
 	//$result = "<address><p>".$res['name']."</p><p>".$res['address']."</p><p>".$res['phone']."</p><p>".$res['email']."</p></address>";
 	echo $response; exit;
  }
- if ($page == 'dis_att_type'&& $_POST['table']!='') { 
+ if ($page == 'dis_att_type'&& $_POST['table']!='') {
 	$url = API."?mode=filednames&table=".$_POST['table'];
 	echo $url;
 	$response = callAPI($url);
@@ -65,7 +65,7 @@ include_once('comm.php');
 	}
 	echo $str; exit;
  }
- if ($page == 'dis_submit') { 
+ if ($page == 'dis_submit') {
 	//print_r($_POST);
 	$data = urlencode(json_encode($_POST));
 	//echo "<br>".$data;
@@ -77,7 +77,7 @@ include_once('comm.php');
 	//$response = file_get_contents($url, false, $context);
 	echo $response; exit;
 }
-if ($page == 'custom_left_join'&& $_POST['table']!='') { 
+if ($page == 'custom_left_join'&& $_POST['table']!='') {
 	$url = API."?mode=filednames&table=".$_POST['table'];
 	echo $url;
 	$response = callAPI($url);
@@ -91,7 +91,7 @@ if ($page == 'custom_left_join'&& $_POST['table']!='') {
 	}
 	echo $str; exit;
 }
-if ($page == 'custom_right_join'&& $_POST['table']!='') { 
+if ($page == 'custom_right_join'&& $_POST['table']!='') {
 	$url = API."?mode=morefilednames&table=".json_encode($_POST['table']);
 	echo $url;
 	$response = callAPI($url);
@@ -107,7 +107,7 @@ if ($page == 'custom_right_join'&& $_POST['table']!='') {
 	}
 	echo $str; exit;
 }
-if ($page == 'custom_query_join'&& $_POST['table']!='') { 
+if ($page == 'custom_query_join'&& $_POST['table']!='') {
 	$tables = json_decode($_POST['table'],1);
 	$data = json_decode($_POST['data'],1);
 	$i=0; $str='';
@@ -122,20 +122,20 @@ if ($page == 'custom_query_join'&& $_POST['table']!='') {
 					$str.= $dat['join']." ".$table." ON ".$table.".".$dat['left_field']." = ".$dat['right_field']." " ;
 				}
 				//}
-				
+
 			}else{
 				if($i>0){
 					break;
 				}
 				$str.= $table." ";
-				
+
 			}
 			$i++;
 		}
 	}
 	echo $str; exit;
 }
-if ($page == 'save_report_filter') { 
+if ($page == 'save_report_filter') {
 	//print_r($_POST); //exit;
 	$array = array();
 	$array['report_id'] = $_POST['report_id'];
@@ -146,7 +146,7 @@ if ($page == 'save_report_filter') {
 	$array['display_field'] = $_POST['value'];
 
 	$array['content'] = urlencode($_POST['dis_custom_sql']);
-	$array['content_details'] = urlencode (json_encode($_POST)); 
+	$array['content_details'] = urlencode (json_encode($_POST));
 	$url = API."?mode=reportfilter&method=post";
 	$response = file_post_contents($url, $array);
 	//$response = file_get_contents($url, false, $context);
@@ -157,7 +157,7 @@ if($page == 'ItemDetails'&& $_POST['item_id']!=''){
 	//print_r($_POST); exit;
 	$url = API."?mode=toGetItemcostingtyewithdata&table=".$_POST['table_name']."&item_id=".$_POST['item_id']."&date=".$_POST['ddate']."&party_id=".$_POST['party_id'];
 	//echo $url;exit;
-	$response = callAPI($url); 
+	$response = callAPI($url);
 	$response = json_decode($response,1);
 	//$data1["field"] = "ex_rate";
 	//`` =1 AND `` =1 AND `` = '7650076576500050' AND `fiscal_year` = '20202021'
@@ -165,13 +165,13 @@ if($page == 'ItemDetails'&& $_POST['item_id']!=''){
 	$data1["where"] = array('company_id'=> $_POST['company_id'],'cost_center_id'=> $_POST['cost_center_id'],'account_code'=>$response['purchase_account'],'fiscal_year' => FISCALYEAR);
 	//print_r($data1);
 	$data = urlencode(json_encode($data1));
-	$curl = API."?mode=gettabledetailswithconditions&table=budget_balances&data=".$data; 
+	$curl = API."?mode=gettabledetailswithconditions&table=budget_balances&data=".$data;
 	//echo $curl;
 	$cudata = callAPI($curl);
 	//echo $cudata;  exit;
 	//print_r($cudata);
 	//$churl = API."?mode=budgetdataformonth&fid=id&rid=".$_POST['item_id'];
-	$cudata = json_decode($cudata,1); 
+	$cudata = json_decode($cudata,1);
 	//print_r($cudata); exit;
 	$fy = explode('/', $_POST['fiscal_year']);
 	$month = fiscalmonth($fy[0]);
@@ -188,17 +188,17 @@ if($page == 'ItemDetails'&& $_POST['item_id']!=''){
 }
 if($page == 'chartofaccount' && $_POST['item_id']!=''){
 	$url = API."?mode=singlerowtabledata&table=".TBL_CHART_OF_ACCOUNTS."&fid=id&rid=".$_POST['item_id'];
-	$response = callAPI($url); 
+	$response = callAPI($url);
 	echo $response; exit;
 }
 if($page =='userDetails'&& $_POST['user_id']!=''){
 	//echo "hah11a"; exit;
 	$url = API."?mode=singlerowtabledata&table=".TBL_USERS."&fid=id&rid=".$_POST['user_id'];
-	$response = callAPI($url); 
+	$response = callAPI($url);
 	//echo $response;
 	$res = json_decode($response,1);
 	$locurl = API."?mode=singlerowtabledata&table=".TBL_LOCATIONS."&fid=id&rid=".$res['locaion_id'];
-	$locares = callAPI($locurl); 
+	$locares = callAPI($locurl);
 	//echo $locares;
 	$locares = json_decode($locares,1);
 	$data['display_name'] = $res['first_name'].' '.$res['middle_name'].' '.$res['last_name'];
@@ -219,7 +219,7 @@ if($page =='changestatus'){
 	//print_r($sarray);
 	/*if($_POST['hid'] != 3){
 		$furl = API."?mode=updaterowtabledata&rid=".$_POST['hid']."&table=".$_POST['table']."&method=post";
-		$response1 = file_post_contents($furl, $farray);	
+		$response1 = file_post_contents($furl, $farray);
 	}*/
 	$url = API."?mode=updateapprovallog&table=".TBL_TRANSACTION_APPROVAL_LOGS."&method=post";
 	$response = file_post_contents($url, $sarray);
@@ -232,17 +232,17 @@ if($page == 'currency_convert'){
 	$data1["field"] = "ex_rate";
 	$data1["where"] = array('from_currency'=> $from_currency,'to_currency'=> $to_currency);
 	$data = urlencode(json_encode($data1));
-	$curl = API."?mode=gettabledetailswithconditions&table=".TBL_CURRENCY_CONVERTOR."&data=".$data; 
+	$curl = API."?mode=gettabledetailswithconditions&table=".TBL_CURRENCY_CONVERTOR."&data=".$data;
 	//echo $curl;
 	$cudata = callAPI($curl);
 	$res = json_decode($cudata, 1);
 	echo $res['0']['ex_rate']; exit;
-} 
+}
 if($page == 'pettycashdetails' && $_POST['item_id']!=''){
 	$url = API."?mode=singlerowtabledata&table=petty_cash_expenses&fid=id&rid=".$_POST['item_id'];
-	$response = callAPI($url); 
+	$response = callAPI($url);
 	$response  = json_decode($response,1);
-	$curl = API."?mode=getpettycashbuget&table=budget_balances&branch_id=".$_POST['item_id']; 
+	$curl = API."?mode=getpettycashbuget&table=budget_balances&branch_id=".$_POST['item_id'];
 	//echo $curl;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
@@ -260,7 +260,7 @@ if($page == 'pettycashdetails' && $_POST['item_id']!=''){
 	echo $response; exit;
 }
 if($page == 'blukapproval'){
-	
+
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
 
@@ -275,7 +275,7 @@ if($page == 'blukapproval'){
 	//echo $response; exit;
 }
 if($page == 'insertvenderquatation'){
-	
+
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
 	$url = API."?mode=insertvenderquatation&method=post";
@@ -284,7 +284,7 @@ if($page == 'insertvenderquatation'){
 }
 if($page == 'pettycashbranchamount'){
 	//print_r($_POST); exit;
-	$curl = API."?mode=pettycashbranchamount&data=".json_encode($_POST); 
+	$curl = API."?mode=pettycashbranchamount&data=".json_encode($_POST);
 	//echo $curl;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
@@ -292,7 +292,7 @@ if($page == 'pettycashbranchamount'){
 }
 if($page == 'remove_file'){
 	//print_r($_POST); exit;
-	$curl = API."?mode=updaterowtabledata&table=".TBL_APPLICATION_ATTACHMENTS."&rid=".$_POST['file_id']."&data=".urlencode(json_encode(array('is_active'=>1))); 
+	$curl = API."?mode=updaterowtabledata&table=".TBL_APPLICATION_ATTACHMENTS."&rid=".$_POST['file_id']."&data=".urlencode(json_encode(array('is_active'=>1)));
 	//echo $curl;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
@@ -302,7 +302,7 @@ if($page == 'statusprogrssacton'){
 	$data1["where"] = array('company_id'=> $_POST['company_id'],'table_name'=> $_POST['table_name']);
 	//print_r($data1);
 	$data = urlencode(json_encode($data1));
-	$curl = API."?mode=gettabledetailswithconditions&table=status_progress&data=".$data; 
+	$curl = API."?mode=gettabledetailswithconditions&table=status_progress&data=".$data;
 	//echo $curl."</br>";
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
@@ -343,7 +343,7 @@ if($page == 'current_status_drop'){
 	//print_r($appruser_list_data); echo "ravi";
 	$tablewr["where"] = array('id'=> $_POST['id']);
 	$tablecon = urlencode(json_encode($tablewr));
-	$tableurl = API."?mode=gettabledetailswithconditions&table=".$_POST['table']."&data=".$tablecon; 
+	$tableurl = API."?mode=gettabledetailswithconditions&table=".$_POST['table']."&data=".$tablecon;
 	//echo $tableurl;
 	$tabledata = callAPI($tableurl);
 	$tabledata = json_decode($tabledata,1);
@@ -351,8 +351,8 @@ if($page == 'current_status_drop'){
 	$str ="";
 	// print_r($lists); exit;
 
-	foreach ((array)$lists as $list) { 
-	  
+	foreach ((array)$lists as $list) {
+
 		$str .= '<a href="#!" class="dropdown-item waves-effect waves-light" onclick="statuspopup('. $list['status'] .','. $_POST['id'] .')" name="status" id="status" value="'. $list['status'] .'">'.$list['action_label'].'</a>';
 	}
 	$str_d=$str;
@@ -384,7 +384,7 @@ if($page == 'current_status_drop_table'){
 	//print_r($appruser_list_data); echo "ravi";
 	$tablewr["where"] = array('id'=> $_POST['id']);
 	$tablecon = urlencode(json_encode($tablewr));
-	$tableurl = API."?mode=gettabledetailswithconditions&table=".$_POST['table']."&data=".$tablecon; 
+	$tableurl = API."?mode=gettabledetailswithconditions&table=".$_POST['table']."&data=".$tablecon;
 	//echo $tableurl;
 	$tabledata = callAPI($tableurl);
 	$tabledata = json_decode($tabledata,1);
@@ -392,7 +392,7 @@ if($page == 'current_status_drop_table'){
 	$str ="";
 	// print_r($lists); exit;
 	$table_name = "'".$_POST['table']."'";
-	foreach((array)$lists as $list) { 
+	foreach((array)$lists as $list) {
 	  //$str .= ' <div  class="btn btn-primary"  name="status" id="status" value="'. $list[status] .'">'.$list[action_label].'</div>';
 		$str .= '<a href="#!"  class="dropdown-item waves-effect waves-light" onclick="statuspopup('. $list['status'] .','. $_POST['id'] .','.$table_name.')" name="status" id="status" value="'. $list['status'] .'">'.$list['action_label'].'</a>';
 	}
@@ -401,20 +401,20 @@ if($page == 'current_status_drop_table'){
 			$str = '<a href="#!"  class="dropdown-item waves-effect waves-light text-danger">'.$_SESSION['error_message']['9002'].'</a>';
 		}
 	}else{
-		if($_SESSION['userid'] != $tabledata[0]['requested_by']){ 
+		if($_SESSION['userid'] != $tabledata[0]['requested_by']){
 			$str = '<a href="#!"  class="dropdown-item waves-effect waves-light text-danger">'.$_SESSION['error_message']['9002'].'</a>';
 		}
 	}
 	if($str == ""){
 		$str = '<a href="#!"  class="dropdown-item waves-effect waves-light text-danger">'.$_SESSION['error_message']['9003'].'</a>';
 	}
-	echo $str; exit; 
+	echo $str; exit;
 }
 if($page == 'changekpiroleid'){
 	//print_r($_POST);
 	$data1["where"] = array('company_id'=> $_SESSION['company_id'],'role_id'=> $_POST['id']);
 	$data = urlencode(json_encode($data1));
-	$curl = API."?mode=gettabledetailswithconditions&table=key_performance_indicators&data=".$data; 
+	$curl = API."?mode=gettabledetailswithconditions&table=key_performance_indicators&data=".$data;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
 	$str = "<option value = '0'>Select Any One </option>";$vers=array(); $new_ver=1;
@@ -437,7 +437,7 @@ if($page == 'task_submit'){
 if($page == 'goalscheckandadd'){
 	$url = API."?mode=goalscheckandadd&assemnt_year=".$_POST['assemnt_year']."&role_id=".$_POST['role_id']."&version=".$_POST['version'];
 	//echo $url;
-	$data = callAPI($url); 
+	$data = callAPI($url);
 	echo $data;
 }
 if($page == 'employeegoalscheckandadd'){
@@ -452,7 +452,7 @@ if($page == 'dynmictabledata'){
 		$tablewr["where"] [$_POST['rid']] = $_POST['fid'];
 	}
 	$tablecon = urlencode(json_encode($tablewr));
-	$tableurl = API."?mode=gettabledetailswithconditions&table=".$_POST['table']."&data=".$tablecon; 
+	$tableurl = API."?mode=gettabledetailswithconditions&table=".$_POST['table']."&data=".$tablecon;
 	//echo $tableurl;
 	$tabledata = callAPI($tableurl);
 	$tabledata = json_decode($tabledata,1);
@@ -465,7 +465,7 @@ if($page == 'dynamictabledata'){
 	$tablewr["where"] = array('is_active'=> 0,'id'=>$_POST['fid']);
 	//print_r($tablewr);
 	$tablecon = urlencode(json_encode($tablewr));
-	$tableurl = API."?mode=gettabledetailswithconditions&table=".$_POST['table']."&data=".$tablecon; 
+	$tableurl = API."?mode=gettabledetailswithconditions&table=".$_POST['table']."&data=".$tablecon;
 	//echo $tableurl;
 	$tabledata = callAPI($tableurl);
 	$tabledata = json_decode($tabledata,1)[0];
@@ -473,22 +473,22 @@ if($page == 'dynamictabledata'){
 }
 if($page == 'candidateautoregistation'){
 
-	$tableurl = API."?mode=candidateautoregistation&method=post"; 
+	$tableurl = API."?mode=candidateautoregistation&method=post";
 	//echo $tableurl;print_r($_POST);
 	$response = file_post_contents($tableurl, $_POST);
 	echo $response;
 	//echo "ajax";
-}	
+}
 if($page == 'updateonlystatus'){
-	$tableurl = API."?mode=updateonlystatus&table=".$_POST['table']."&status=".$_POST['status']."&hid=".$_POST['hid']; 
+	$tableurl = API."?mode=updateonlystatus&table=".$_POST['table']."&status=".$_POST['status']."&hid=".$_POST['hid'];
 	echo $tableurl;
 	$return = callAPI($tableurl);
 	echo $return;
 }
 if($page == 'usernotify'){
    // print_r($_POST); exit;
-	$tableurl = API."?mode=usernotify&method=post"; 
-	//$tableurl = API."?mode=usernotify&send_id=".$_POST['user_id']."&comments=".$_POST['comment']; 
+	$tableurl = API."?mode=usernotify&method=post";
+	//$tableurl = API."?mode=usernotify&send_id=".$_POST['user_id']."&comments=".$_POST['comment'];
 	//echo $tableurl; exit;
 	$return = file_post_contents($tableurl, $_POST);
 	echo $return;
@@ -501,8 +501,8 @@ if($page == 'employeeclocks'){
 	$_POST['time'] = date('H:i:s');
 	$tableurl = API."?mode=employeeclocks&method=post";
 	//echo $tableurl;
-	print_r($_POST); 
-	//$tableurl = API."?mode=usernotify&send_id=".$_POST['user_id']."&comments=".$_POST['comment']; 
+	print_r($_POST);
+	//$tableurl = API."?mode=usernotify&send_id=".$_POST['user_id']."&comments=".$_POST['comment'];
 	//echo $tableurl; exit;
 	$return = file_post_contents($tableurl, $_POST);//exit;
 	echo $return;
@@ -523,19 +523,19 @@ if($page == 'dynmicupdatetable'){
 if($page == 'tocheckpayrolldetailsfull'){
 	$_POST['company_id'] = $_SESSION['company_id'];
 	print_r($_POST); //exit;
-	echo $tableurl = API."?mode=tocheckpayrolldetailsfull&payroll_steps_cat=".$_POST['payroll_steps_cat']."&pay_year=".$_POST['pay_year']."&pay_month=".$_POST['pay_month']."&pay_area_id=".$_POST['pay_area_id']; 
+	echo $tableurl = API."?mode=tocheckpayrolldetailsfull&payroll_steps_cat=".$_POST['payroll_steps_cat']."&pay_year=".$_POST['pay_year']."&pay_month=".$_POST['pay_month']."&pay_area_id=".$_POST['pay_area_id'];
 	$return  = callAPI($tableurl);
 	echo $return;
 }
 if($page == 'holdpayroll_exclusions'){
 	print_r($_POST); //exit;
-	$tableurl = API."?mode=holdpayroll_exclusions&method=post"; 
+	$tableurl = API."?mode=holdpayroll_exclusions&method=post";
 	$return = file_post_contents($tableurl, $_POST);
 	echo $return;
 }
 if($page == 'insertpayrollexcludd'){
 	//print_r($_POST); //exit;
-	$tableurl = API."?mode=insertpayrollexcludd&method=post"; 
+	$tableurl = API."?mode=insertpayrollexcludd&method=post";
 	$return = file_post_contents($tableurl, $_POST);
 	//echo $return;
 	$emda = json_decode($return,1);
@@ -614,21 +614,21 @@ if($page == 'tasksendmail'){
 	$url = API."?mode=tasksendmail&task_id=".$_POST['task_id'];
 	$data = callAPI($url);
 	//exit;
-	echo $data; exit;	
+	echo $data; exit;
 }
 if($page == 'selectedfilter'){
 	$tableurl = API."?mode=gettotalemployeesbyfilter&method=post";
 	$return = file_post_contents($tableurl, $_POST);
 
 	echo $return;exit;
-	
+
 }
 if($page=='selectedsetup'){
-	$tableurl = API."?mode=sendtousersettings&method=post"; 
+	$tableurl = API."?mode=sendtousersettings&method=post";
 	$_POST['load_date'] = nowDate();
 	$_POST['user_id'] = $_SESSION['user_id'];
 	$response = file_post_contents($tableurl, $_POST);
-	echo $response; 
+	echo $response;
 }
 if($page=='selectedattendancelist'){
 	$nameslist = $_POST['names'];
@@ -656,7 +656,7 @@ if($page=='selectedattendancelist'){
 	$employee = $empattendance_data['emp_names'];
 	$empattendance=$empattendance_data['emp_attendance'];
 	$return ='<table class="work-entry text-center" width="100%"><thead><tr><th scope="col" rowspan="0">Work Entries</th>	<th scope="col" colspan="31" align="center">'.$mon. " ".$attendance_year.'</th>	</tr><tr>';
-	for($i=1;$i<=$maxdays;$i++) { 
+	for($i=1;$i<=$maxdays;$i++) {
 		$return .= '<th scope="col">'.$i.'</th>';
 	}
 	$return .= '</tr>	</thead>';
@@ -676,7 +676,7 @@ if($page=='selectedattendancelist'){
 	echo $return;
 }
 if($page == 'setupcomponents'){
-	//print_r($_POST); 
+	//print_r($_POST);
 	if(isset($_POST['start_date'])){ $_POST['start_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['start_date']))); }
 	if(isset($_POST['end_date'])){ $_POST['end_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['end_date']))); }
 	 if(isset($_POST['courier_date'])){ $_POST['courier_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['courier_date']))); }
@@ -684,7 +684,7 @@ if($page == 'setupcomponents'){
 
 
 	$table_name = $_POST['table_name'];
-	$id = $_POST['id']; 
+	$id = $_POST['id'];
 	unset($_POST['table_name']);
 	unset($_POST['page']);
 	unset($_POST['id']);
@@ -718,7 +718,7 @@ if($page=='getcomponents'){
 		$data1["where"] = array('id'=> $_POST['id']);
 		$data = urlencode(json_encode($data1));
 		$post="&data=".$data;
-		echo $curl = API."?mode=gettabledetailswithconditions&table=".$_POST['table_name'].$post; 
+		echo $curl = API."?mode=gettabledetailswithconditions&table=".$_POST['table_name'].$post;
 		$cudata = callAPI($curl);
 	}
 	echo $cudata;
@@ -731,7 +731,7 @@ if($page=='getselectedlist'){
 		if($_POST['table_name'] == "cities"){ $data1["order"] = "city_name"; }
 		$data = urlencode(json_encode($data1));
 		$post="&data=".$data;
-		$curl = API."?mode=gettabledetailswithconditions&table=".$_POST['table_name'].$post; 
+		$curl = API."?mode=gettabledetailswithconditions&table=".$_POST['table_name'].$post;
 		$cudata = callAPI($curl);
 	}
 	echo $cudata;
@@ -739,9 +739,9 @@ if($page=='getselectedlist'){
 if($page=='getCountrylist'){
 	$cudata='';
 	$url = API."?mode=gettabledetailswithconditions&table=countries";
-	$cudata = callAPI($url); 
+	$cudata = callAPI($url);
 	echo $cudata;
-	
+
 }
 
 if($page=='getannouncements'){
@@ -750,17 +750,17 @@ if($page=='getannouncements'){
 	$data = urlencode(json_encode($data1,1));
 	$post="&data=".$data;
 	$url = API."?mode=gettabledetailswithconditions&table=".$_POST['table_name'].$post;
-	$cudata = callAPI($url); 
+	$cudata = callAPI($url);
 	$cudata = json_decode($cudata,1);
 	$resdata['rowid'] = $cudata[0]['id'];
 	//$resdata['liketype'] = $cudata[0]['liketype'];
 	$resdata['like_type'] = $cudata[0]['like_type'];
-	echo json_encode($resdata); exit; 
+	echo json_encode($resdata); exit;
 }
 
 if($page == 'summaryannouncements'){
 	$table_name = $_POST['table_name'];
-	$id = $_POST['id']; 
+	$id = $_POST['id'];
 	unset($_POST['table_name']);
 	unset($_POST['page']);
 	unset($_POST['id']);
@@ -800,13 +800,13 @@ if($page == 'updatestatuscandidatesign'){
 /**
 	$farray  = array('current_status' => $_POST['field']);
 	$sarray  = array('comments' => $_POST['comment'], 'response_type' => $_POST['field'], 'user_id' => $_SESSION['userid'], 'response_date' => $_POST['date'],'table' => $_POST['table'],'hid' => $_POST['hid'],'company_id'=> $_SESSION['company_id'],'status'=>$_POST['status'],'updated_by'=>$_SESSION['userid']);
-	
+
 	$historyurl = API."?mode=candidatesofferhistories&candidate_id=".$_POST['hid']."&company_id=".$_SESSION['company_id']."&status_date=".$_POST['date']."&current_status=".$_POST['status']."&is_active=0&comments=".$_POST['comment'];
 	$histroy = callAPI($historyurl);
-	
+
 	$url = API."?mode=updatedynamicapprovallog&method=post";
 	$response = file_post_contents($url, $sarray);
-	
+
 	$tableurl = API."?mode=candidateofferAccept&candidate_id=".$_POST['hid']."&table=candidates";
 
 	$return = callAPI($tableurl);
@@ -814,16 +814,16 @@ if($page == 'updatestatuscandidatesign'){
 	$sign = array();
 	$sign['signature']= $_POST['sign'];
 	$sign['current_status']= ST_LOIACCEPTED;
-	
+
 	$tableurl = API."?mode=updaterowtabledata&method=post&rid=".$_POST['hid']."&table=candidates";
 	$return = file_post_contents($tableurl, $sign);    **/
 	//echo $response; exit;
 }
 if($page == 'updatejobpostcandidate'){
-	if($_POST['type']=="process"){ 
-		$sign['job_selection_process_step_id']= $_POST['type_id']; 
+	if($_POST['type']=="process"){
+		$sign['job_selection_process_step_id']= $_POST['type_id'];
 	}else{
-		$sign['ratting']= $_POST['rate']; 
+		$sign['ratting']= $_POST['rate'];
 	}
 	$tableurl = API."?mode=updaterowtabledata&method=post&rid=".$_POST['job_can_id']."&table=job_posting_candidates";
 	$return = file_post_contents($tableurl, $sign);
@@ -838,7 +838,7 @@ if($page == 'datediffval'){
 	$date2 = str_replace('/', '-', $date2);
 	$date1 = $_POST['date1'];
 	$date1 = str_replace('/', '-', $date1);
-	echo (strtotime($date2) - strtotime($date1)) / (60 * 60 * 24)+1; 
+	echo (strtotime($date2) - strtotime($date1)) / (60 * 60 * 24)+1;
 }
 /**if($page == 'datediffval'){
 	echo (strtotime($_POST['date2']) - strtotime($_POST['date1'])) / (60 * 60 * 24);
@@ -855,7 +855,7 @@ if($page=='confirmrecognition'){
 		$_POST['updated_by'] = $_SESSION['userid'];
 		$url = API."?mode=insertrecognition&rid=".$rowid."&method=post";
 		$response = file_post_contents($url, $_POST, 'update');
-	}else{ 
+	}else{
 		$_POST['current_status'] ='0';
 		$_POST['created_date'] = nowDate();
 		$_POST['created_by'] = $_SESSION['userid'];
@@ -863,7 +863,7 @@ if($page=='confirmrecognition'){
 		$url = API."?mode=insertrecognition&method=post";
 		$response = file_post_contents($url, $_POST, 'insert');
 	}
-	echo $response; 
+	echo $response;
 }
 if($page=='confirmbulktransfer'){
 	$_POST['created_by'] = $_SESSION['userid'];
@@ -911,7 +911,7 @@ if($page == 'leavedatecheck'){
 	//echo $leave_cat_id."***";
 	$vdata1["where"] = array('is_active'=> 0);
 	$vdata = urlencode(json_encode($vdata1));
-	$vurl = API."?mode=gettabledetailswithconditions&table=leave_categories&data=".$vdata; 
+	$vurl = API."?mode=gettabledetailswithconditions&table=leave_categories&data=".$vdata;
 	$configesponse = callAPI($vurl);
 	$cate = json_decode($configesponse,1);
 	foreach($cate as $cat){
@@ -922,7 +922,7 @@ if($page == 'leavedatecheck'){
 	//echo $days;
 	$vdataee["where"] = array('is_active'=> 0,'employee_id'=>$_SESSION['emp_id']);
 	$vdata = urlencode(json_encode($vdataee));
-	$vurl = API."?mode=gettabledetailswithconditions&table=emp_leave_balances&data=".$vdata; 
+	$vurl = API."?mode=gettabledetailswithconditions&table=emp_leave_balances&data=".$vdata;
 	$empbalances = callAPI($vurl);
 	$empbalances = json_decode($empbalances,1);
 	//print_r($vdata);
@@ -942,7 +942,7 @@ if($page == 'leavedatecheck'){
 if($page=='removeqidfromsession') {
 	$unsetqid = $_POST['qid'];
 	unset($_SESSION['questions_list'][$unsetqid]);
-	
+
 }
 if($page=='notestarttime'){
 	$_SESSION['response_start_time'] = date('H:i:s');
@@ -987,7 +987,7 @@ if($page=='formsurveyquestions'){
 		</div>
 		<div class="form-group text-left">
 		<div class="checkbox-inline">';
-		if($value['type']==1 || $value['type']==3)	{ 
+		if($value['type']==1 || $value['type']==3)	{
 			$display_question .='
 			<label class="checkbox checkbox-primary">
 			<input type="checkbox" name="allow_multiple_selections'.$value_id.'" id="allow_multiple_selections'.$value_id.'" '.$allow_multiple_selections_status.'/>
@@ -1006,9 +1006,9 @@ if($page=='formsurveyquestions'){
 		</label>
 		</div>
 		</div>';
-		if($value['type']==1 || $value['type']==3)	{ 
+		if($value['type']==1 || $value['type']==3)	{
 			$display_question .= '<div id="options'.$value_id.'">';
-			foreach ($options as $opkey => $opvalue) { 
+			foreach ($options as $opkey => $opvalue) {
 				$display_question .= '<div id="optionlist'.$value_id.$opkey.'">
 				<div class="form-group row" id="'.$opkey.'">
 				<div class="col-lg-1"></div>
@@ -1033,16 +1033,16 @@ if($page=='formsurveyquestions'){
 			<input type="hidden" value="'.$opkey.'" id="option_row"/>
 			<button class="btn btn-success"  onclick="addnewoptionrows('."'".$value_id."'".')" id="addNewRows" type="button">+ Add More Options</button>
 			</div>';
-		}	
-		if($value['type']==2)	{ 
+		}
+		if($value['type']==2)	{
 			$display_question .= '	<div class="form-group text-left mt-10">
 			<label>Scale from 1 to: <span class="text-danger">*</span></label>
 			<input type="number" name="survey_question_option'.$value_id.'[]"  class="form-control" placeholder="'.$options[0].'" value="'.$options[0].'" > 
 			</div>';
-		} 	
-		if($value['type']==4)	{ 
+		}
+		if($value['type']==4)	{
 			$display_question .= '	<input type="hidden" name="survey_question_option'.$value_id.'[]"  class="form-control" value=""> ';
-		} 
+		}
 
 		$display_question .= '</div> </div>  </div>';
 		$value_id ++;
@@ -1067,7 +1067,7 @@ if($page=='filternamelist'){
 }
 if($page=='insertinquiries'){
 	print_r($_POST);
-	for ($i=1; $i < $_POST['count'] ; $i++) { 
+	for ($i=1; $i < $_POST['count'] ; $i++) {
 		$id = 'id_'.$i;
 		$senddata['id'] []= $_POST['id_'.$i];
 		$senddata['qty'][] = $_POST['qty_'.$i];
@@ -1076,7 +1076,7 @@ if($page=='insertinquiries'){
 	$response = file_post_contents($url, $senddata);
 	//$data = json_decode($_POST['data']);
 	print_r($senddata);
-} 
+}
 if($page=='addtimesheetentries'){
 	$table_name = TBL_PROJECT_TIMESHEETS;
 	$_POST['created_date'] = nowDate();
@@ -1090,13 +1090,13 @@ if($page=='addtimesheetentries'){
 }
 if($page=='resenduserdetails'){
 	$url = API."?mode=NewUserEmailresent&sent_id=".$_POST['id'];
-	$cudata = callAPI($url); 
+	$cudata = callAPI($url);
 	echo $cudata; exit;
 }
 if($page=='dynamictablerowdata'){
 	$url = API."?mode=singlerowtabledata&table=".$_POST['table_name']."&fid=id&rid=".$_POST['item_id'];
 	//echo $url;
-	$response = callAPI($url); 
+	$response = callAPI($url);
 	$response  = json_decode($response,1);
 	$str = $response['total_min_experience'].",".$response['total_max_experience'];
 	echo $str; exit;
@@ -1116,9 +1116,9 @@ if($page == 'updatedynamicfied'){
 		$url= API."?mode=adddata&table=".$_POST['table']."&method=post";
 		echo $url; print_r($post);
 		$return = file_post_contents($url, $post);
-		
+
 	}else{
-		$post[$_POST['fid']] = $_POST['rid'];	
+		$post[$_POST['fid']] = $_POST['rid'];
 		$url= API."?mode=updaterowtabledata&table=".$_POST['table']."&rid=".$_POST['hid']."&method=post";
 		echo $url; print_r($post);
 		$return = file_post_contents($url, $post);
@@ -1169,17 +1169,17 @@ if($page=='formassessmentquestions'){
 		$display_question .= '<div class="col-lg-4">
 		<label>Marks <span class="text-danger">*</span></label>
 		<input type="text" class="form-control" id="markfield" name="marks'.$value_id.'" value="'.$marks.'"  >
-		</div>'; 
+		</div>';
 
 		$display_question .= '</div>';
-		if($value['type']== $typeofquestion['MCQ'] || $value['type']== $typeofquestion['MCA'])	{ 
+		if($value['type']== $typeofquestion['MCQ'] || $value['type']== $typeofquestion['MCA'])	{
 			$display_question .= '<div class="col-lg-12 mt-4 mb-4">	Mark the Correct Answer	</div>';
 			$display_question .= '<div id="options'.$value_id.'">';
-			foreach ($options as $opkey => $opvalue) { 
+			foreach ($options as $opkey => $opvalue) {
 				$checkstatus = $checkedstatus[$opkey];
 				$display_question .= '<div id="optionlist'.$value_id.$opkey.'">
 				<div class="form-group row" id="'.$opkey.'">
-				<div class="col-lg-12 row ml-5"> <div class="">  '; 
+				<div class="col-lg-12 row ml-5"> <div class="">  ';
 				if($value['type']== $typeofquestion['MCQ'] ) {
 					$display_question .= '<label class="radio radio-primary mt-4" >
 					<input type="radio"  name="assessment_correct_option'.$value_id.'['.$opkey.']" id="singlechoice'.$value_id.$opkey.'" '.$checkstatus.'>"
@@ -1194,7 +1194,7 @@ if($page=='formassessmentquestions'){
 					<span></span>
 					</label>
 					<input type="hidden" name="allow_multiple_selections'.$value_id.'" id="allow_multiple_selections'.$value_id.'" value="1" />';
-				} 
+				}
 				$display_question .= '
 				
 				</div><div class="col-lg-8"> 
@@ -1215,10 +1215,10 @@ if($page=='formassessmentquestions'){
 			<input type="hidden" value="'.$opkey.'" id="option_row"/>
 			<button class="btn btn-success"  onclick="addnewoptionrows('."'".$value_id."'".",'".$value['type']."'".')" id="addNewRows" type="button">+ Add More Options</button>
 			</div>';
-		}	
-		if($value['type']==$typeofquestion['FT'])	{ 
+		}
+		if($value['type']==$typeofquestion['FT'])	{
 			$display_question .= '	<input type="hidden" name="assessment_question_option'.$value_id.'[]"  class="form-control" value=""> ';
-		} 
+		}
 
 		$display_question .= '</div> </div>  </div></div>';
 		$value_id ++;
@@ -1226,17 +1226,17 @@ if($page=='formassessmentquestions'){
 	}
 
 	$response = $questiondetails;
-	echo $display_question;	
+	echo $display_question;
 }
 if($page=='getcategorybyfilter'){
 	$categoryid = "id:".$_POST['categoryid'];
 	$drid = deocdeId($categoryid);
-	echo $drid;		
+	echo $drid;
 }
 if($page=='add_perdiem'){
 	$url= API."?mode=indertupdateperdiem&method=post";
 		//echo $url; print_r($_POST);
-	$return = file_post_contents($url, $_POST);	
+	$return = file_post_contents($url, $_POST);
 	echo $return; exit;
 }
 if($page == 'updateprojecttimesheetsblukforhr'){
@@ -1293,7 +1293,7 @@ if($page=='selectetimesheetlist'){
 	$empattendance=$empattendance_data['emp_attendance'];
 	//print_r($empattendance); exit;
 	$return ='<table class="work-entry text-center" width="100%"><thead><tr><th scope="col" rowspan="0">Work Entries</th>	<th scope="col" colspan="31" align="center">'.$mon. " ".$attendance_year.'</th>	</tr><tr>';
-	for($i=1;$i<=$maxdays;$i++) { 
+	for($i=1;$i<=$maxdays;$i++) {
 		$return .= '<th scope="col">'.$i.'</th>';
 	}
 	$return .= '</tr>	</thead>';
@@ -1322,12 +1322,12 @@ if($page == 'insertseriallot'){
 // 	//print_r($_FILES);
 // 	$filedetails=array();
 // 	$filedetails['originalname'] = basename($_FILES['file']['name']);
-// 	$filedetails['filesize'] =basename($_FILES['file']['size']);     
+// 	$filedetails['filesize'] =basename($_FILES['file']['size']);
 // 	//echo "Step2";print_r($filedetails); echo "Step3";
 // 	$name = time().basename($_FILES['file']['name']);
 // 	if(move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/attachments/".$name)) {
-// 		//echo "Step4";echo "if uplodes"; 
-// 		 $filedetails['filename'] = $name;	
+// 		//echo "Step4";echo "if uplodes";
+// 		 $filedetails['filename'] = $name;
 // 	}
 // 	//$filarray = filleuploading($_FILES);
 // 	//echo "Step5"; print_r($filedetails); exit;
@@ -1348,7 +1348,7 @@ if ($page == 'imageuploading'){
 $wh1["where"] = array('company_id'=>$_SESSION['company_id'],'application_table_name'=>$_POST['applicationTableName'],'transaction_id'=>$_POST['transactionId'],'file_name'=>$_FILES['file']['name'],'is_active'=>0);
 $wh1["field"] = "id";
 $data1 = urlencode(json_encode($wh1));
-$url1 = API."?mode=gettabledetailswithconditions&table=application_attachments&data=".$data1; 
+$url1 = API."?mode=gettabledetailswithconditions&table=application_attachments&data=".$data1;
 $data_details1 = callAPI($url1);
 $data_details1 = json_decode($data_details1,1);
 if(!empty($data_details1)){
@@ -1357,7 +1357,7 @@ if(!empty($data_details1)){
 	if(($_FILES['file']['size'] >= $maxsize) || ($_FILES["file"]["size"] == 0)) {
 		 $errors[1] =  $_SESSION['error_message'][3021].' '.round(($_POST['file_size']/1000000),1)." MB";
 	}
-	
+
 	$string = $_FILES['file']['name'];
 	$exploded = explode('.', $string);
 	$exploded = end($exploded);
@@ -1373,17 +1373,17 @@ if(!empty($errors)){
 }else{
 	$filedetails=array();
 	$filedetails['originalname'] = basename($_FILES['file']['name']);
-	$filedetails['filesize'] =basename($_FILES['file']['size']);      
+	$filedetails['filesize'] =basename($_FILES['file']['size']);
 	$name = time().basename($_FILES['file']['name']);
-		if(move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/attachments/".$name)) { 
-		 $filedetails['filename'] = $name;	
+		if(move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/attachments/".$name)) {
+		 $filedetails['filename'] = $name;
 	}
 	//$filarray = filleuploading($_FILES);
 	$_POST['fila']=$filedetails;
 	$_POST['company_id']=$_SESSION['company_id'];
 	$response = file_post_contents($url, $_POST);
 	echo $response; exit;
-	
+
 }
 }
 
@@ -1396,7 +1396,7 @@ if ($page == 'fileuploadingdelete'){
 	echo $res; exit;
 }
 if ($page == 'elementortype'){
-	textboxes($_POST['id'],$_POST['type'],""); 
+	textboxes($_POST['id'],$_POST['type'],"");
 	exit;
 }
 
@@ -1414,14 +1414,14 @@ if($page == "fileuploadingstatusdisplay"){
 	<div class="col-lg-12 col-md-12 col-sm-12">
 	<div class="dropzone dropzone-default dropzone-primary digits" id="kt_dropzone_2">
 	</div></div></div>';
-	echo $message;			
+	echo $message;
 }
 
 if($page == "elementordesign"){
 	$filedTypes ="";
 	foreach($filed_array as $key => $value){
 		$filedTypes .='<option value="'.$key.'" >'.$value.'</option>';
-	} 
+	}
 	$message ='<div class="card card_count deleterow'.$_POST['id'].'">
 	<div class="card-header" id="headingOne'.$_POST['id'].'">
 	<div class="card-title collapsed textboxclass'.$_POST['id'].'" data-toggle="collapse" data-target="#collapseOnee'.$_POST['id'].'">
@@ -1682,7 +1682,7 @@ if($page== "elementordesignbutton"){
 	$button = '<div class="col-lg-6" id="buttondiv'.$_POST['id'].'">
 
 	<button type="button" class="btn btn-primary mr-2 textcapital" id="buttonid'.$_POST['id'].'"><i class="la la-check"></i>Save</button>
-	</div>';		
+	</div>';
 	echo json_encode(array('setting'=>$message,'textfileds'=>$button));
 
 }
@@ -1691,7 +1691,7 @@ if($page== "elementordesignbutton"){
 //start auto ui designs
 if($page == "gettableavailable"){
 
-	$url = API."?mode=gettablerow&tablename=".$_POST['table']."&fields=".$_POST['fields']."&where=".$_POST['where']."&list=1"; 
+	$url = API."?mode=gettablerow&tablename=".$_POST['table']."&fields=".$_POST['fields']."&where=".$_POST['where']."&list=1";
 	$collfunction = callAPI($url);
 	// $jsondecode = json_decode($collfunction,1);
 	echo $collfunction;
@@ -1704,8 +1704,8 @@ if($page == "getfildsarraycreatedocuments"){
 if($page == "printdesigningtextfields"){
 	$tableattributes= getListAttributes($_POST['tablename']);
 	$fields="";
-	foreach($tableattributes as $result){ 
-		$fields .="<option value='".$result['Field']."'>".$result['Field']."</option>"; 
+	foreach($tableattributes as $result){
+		$fields .="<option value='".$result['Field']."'>".$result['Field']."</option>";
 	}
 	$text = '<div class="card">
 	<div class="card-header" id="headingOnee'.$_POST['num'].'">
@@ -1748,13 +1748,13 @@ if($page == "printdesigningtextfields"){
 	</span>
 	</div>
 	</div></div></div></div></div></div></div>';
-	$textfileds = '<div class="d-flex mb-3 col-lg-4" id="textfiledid'.$_POST['num'].'"><span class="mr-15 font-weight-bolder" id="textfiledlabel'.$_POST['num'].'">Label :</span><span  class="text-right " id="textfiledvalue'.$_POST['num'].'">eg. details function</span></div>';					
+	$textfileds = '<div class="d-flex mb-3 col-lg-4" id="textfiledid'.$_POST['num'].'"><span class="mr-15 font-weight-bolder" id="textfiledlabel'.$_POST['num'].'">Label :</span><span  class="text-right " id="textfiledvalue'.$_POST['num'].'">eg. details function</span></div>';
 	echo json_encode(array('dropdown'=>$text,'textfileds'=>$textfileds));
 }
 //end print designing
 //Start project task
 if($page=="projecttaskchart"){
-	$url = API."?mode=projecttaskchart&empid=".$_POST['empid']; 
+	$url = API."?mode=projecttaskchart&empid=".$_POST['empid'];
 	$task = callAPI($url);
 	$jsontask = json_decode($task,1);
 	$status = array("0"=>array("Active","primary"),"3"=>array("Inprogess","info"),"5"=>array("Ready","warning"),"4"=>array("Complete","success"));
@@ -1768,11 +1768,11 @@ if($page=="projecttaskchart"){
 			//$statuscolor = filterArrayValue(ViewStatusData(),'name',"Active");
 			$prioritycolor = array_search($values['priority'], $priority);
 			if($values['image']!=""){
-				$img = '<img alt="Pic" src="assets/media/users/300_24.jpg" />';	
+				$img = '<img alt="Pic" src="assets/media/users/300_24.jpg" />';
 			}else{
 				$img = "<h1>".initials($values['display_name'])."</h1>";
 			}
-			$pusharray[]= array("title"=>'<div class="d-flex align-items-center" ><div class="symbol symbol-success mr-3">'.$img.'</div> <div class="d-flex flex-column  align-items-start"><span class=" font-weight-bold mb-1 ">'.$values['task_name'].'</span> <span class="label label-inline  font-weight-bold '.$prioritycolor.'">'.strtoupper($values['priority']).'</span></div></div>','taskid'=>$values['id'],'tab'=>'xyz');	
+			$pusharray[]= array("title"=>'<div class="d-flex align-items-center" ><div class="symbol symbol-success mr-3">'.$img.'</div> <div class="d-flex flex-column  align-items-start"><span class=" font-weight-bold mb-1 ">'.$values['task_name'].'</span> <span class="label label-inline  font-weight-bold '.$prioritycolor.'">'.strtoupper($values['priority']).'</span></div></div>','taskid'=>$values['id'],'tab'=>'xyz');
 		}
 		$taskarray[] = array("id"=>"_".$status[0],'title'=>$status[0],'class'=>$status[1],'item'=>$pusharray);
 	}
@@ -1782,33 +1782,33 @@ if($page=="projecttaskchart"){
 if($page=="updateprojecttaskstatuse"){
 	$status = array("0"=>"Active","3"=>"Inprogess","5"=>"Ready","4"=>"Complete");
 	$statuse = array_search($_POST['dropclass'], $status);
-	$url = API."?mode=updateprojecttaskstatuse&id=".$_POST['taskid']."&status=".$statuse; 
+	$url = API."?mode=updateprojecttaskstatuse&id=".$_POST['taskid']."&status=".$statuse;
 	$task = callAPI($url);
 	echo json_encode($task);
 }
 //End  project task
 if($page=="deletemyreport"){
-	$url = API."?mode=deletemyreport&reportid=".$_POST['id']; 
+	$url = API."?mode=deletemyreport&reportid=".$_POST['id'];
 	$task = callAPI($url);
 	$jsontask = json_decode($task,1);
 
 }
 //start job_posting_chart
 if($page=="getchartjobreport"){
-	$url = API."?mode=getchartjobreport&from=".$_POST['from']."&to=".$_POST['to']; 
+	$url = API."?mode=getchartjobreport&from=".$_POST['from']."&to=".$_POST['to'];
 	echo $task = callAPI($url);
 }
 //END job_posting_chart
 //start custom_view_head_count_current_report
 if($page=="getheadcountcurrentreport"){
-	$url = API."?mode=getheadcountcurrentreport&from=".$_POST['from']."&to=".$_POST['to']; 
+	$url = API."?mode=getheadcountcurrentreport&from=".$_POST['from']."&to=".$_POST['to'];
 	echo $task = callAPI($url);
 }
 //END custom_view_head_count_current_report
 
 //start COM_VIEW_CHART_CANDIDED_REPORT
 if($page=="getchartcandidatesreport"){
-	$url = API."?mode=getchartcandidatesreport&from=".$_POST['from']."&to=".$_POST['to']; 
+	$url = API."?mode=getchartcandidatesreport&from=".$_POST['from']."&to=".$_POST['to'];
 	echo $task = callAPI($url);
 }
 //END COM_VIEW_CHART_CANDIDED_REPORT
@@ -1826,14 +1826,14 @@ if($page=="toinsertandpdateesignemployeeonlyone"){
 }
 if($page=="insertemphistries"){
 	//print_r($_POST);
-	$_POST['company_id']=$_SESSION['company_id'];	
-	$_POST['user_id']=$_SESSION['userid'];	
+	$_POST['company_id']=$_SESSION['company_id'];
+	$_POST['user_id']=$_SESSION['userid'];
 	$url = API."?mode=insertemphistries&method=post";
 	echo $response = file_post_contents($url, $_POST);
 }
 if($page=="deletetimesheets"){
 	//print_r($_POST);
-	$url = API."?mode=deletetimesheets&id=".$_POST['id']; 
+	$url = API."?mode=deletetimesheets&id=".$_POST['id'];
 	$task = callAPI($url);
 	echo $task;
 }
@@ -1851,7 +1851,7 @@ if($page=="getbugetamountesignvendorwise"){
 	unset($commondata['duration_taken']);
 	unset($commondata['partial_complete']);
 	unset($commondata['category']);
-	
+
 	foreach($_POST['value_id'] as $q_no) {
 	   $ans_data= $_POST['response_option'.$q_no];
 	   $commondata['question_id']=$_POST['questionid'.$q_no];
@@ -1860,14 +1860,14 @@ if($page=="getbugetamountesignvendorwise"){
 	}
 	//echo "<pre>"; print_r($data); exit;
 	$url = API."?mode=savesurveyreponses&table=survey_responses&method=post";
-	$retunn_inserted_qid = file_post_contents($url,$data,'insert'); 
+	$retunn_inserted_qid = file_post_contents($url,$data,'insert');
 	echo $retunn_inserted_qid; exit;
  }
  if($page=='add_share_data'){
 	$data_post = array('company_id'=>$_SESSION['company_id'],'module_setup_id'=>$_SESSION['work_module_setup_id'],'application_table'=>$_POST['share_table'],'transaction_id'=>$_POST['share_table_id'],'share_id'=>$_POST['share_id'],'comments'=>$_POST['comments'],'is_active'=>'0','current_status'=>'0','created_by'=>$_SESSION['userid'],'created_date'=>date("Y-m-d H:i:s"));
 	print_r($data_post);
 	$url= API."?mode=adddata&table=application_share&method=post";
-	$return = file_post_contents($url, $data_post);	
+	$return = file_post_contents($url, $data_post);
 	$url= API."?mode=tosendnotifiations&method=post";
 	$option = "COM_JOB_CANDIDATE_POPUP&job_post_can_id=".$_POST['share_table_id'];
 	$notdataa = array('company_id'=>$_SESSION['company_id'], 'notification_message'=>"Candidate Profile is Shared", 'transaction_number'=>$notarry['share_table_id'], 'application_table_name'=>$_POST['share_table'], 'type'=>'ACTION', 'notification_users'=>array($_POST['share_id']),'option'=>$option);
@@ -1892,7 +1892,7 @@ if($page=="insertcommentjobposting"){
 	$url = API."?mode=insertcommentjobposting&method=post";
 	echo $response = file_post_contents($url, $_POST, 'insert');
 
-  //   $url = API."?mode=insertcommentjobposting&value=".$_POST['value']."&company_id=".$_SESSION['company_id']."&job_posting_candedate_id=".$_POST['job_post_can_id']."&job_selection_step_id=".$_POST['job_selection_step_id']; 
+  //   $url = API."?mode=insertcommentjobposting&value=".$_POST['value']."&company_id=".$_SESSION['company_id']."&job_posting_candedate_id=".$_POST['job_post_can_id']."&job_selection_step_id=".$_POST['job_selection_step_id'];
 		// echo  $data_details = callAPI($url);
 }
 if($page=="inserttagjobposting"){
@@ -1902,12 +1902,12 @@ if($page=="inserttagjobposting"){
 	$_POST['value']=$value;
 	$_POST['job_posting_candedate_id']=$_POST['job_post_can_id'];
 	$url = API."?mode=inserttagjobposting&method=post";
-	echo $response = file_post_contents($url, $_POST, 'insert');	
+	echo $response = file_post_contents($url, $_POST, 'insert');
 }
 
 if($page=="updatecandidateshortlist"){
-	$url = API."?mode=updatecandidateshortlist&cand_id=".$_POST['cand_id']."&status=".$_POST['status']."&user_role=".$_POST['user_role']."&candidate_id=".$_POST['candidate_id']; 
-	echo  $data_details = callAPI($url);		
+	$url = API."?mode=updatecandidateshortlist&cand_id=".$_POST['cand_id']."&status=".$_POST['status']."&user_role=".$_POST['user_role']."&candidate_id=".$_POST['candidate_id'];
+	echo  $data_details = callAPI($url);
 }
 if($page=='formcandidatefeedbackquestions'){
 	$uniq_qid = uniqid();
@@ -1956,7 +1956,7 @@ if($page=='formcandidatefeedbackquestions'){
 		</div>
 		<div class="form-group text-left">
 		<div class="checkbox-inline">';
-		if($value['type']==1 || $value['type']==3)	{ 
+		if($value['type']==1 || $value['type']==3)	{
 			$display_question .='
 			<label class="checkbox checkbox-primary">
 			<input type="checkbox" name="allow_multiple_selections'.$value_id.'" id="allow_multiple_selections'.$value_id.'" '.$allow_multiple_selections_status.'/>
@@ -1975,9 +1975,9 @@ if($page=='formcandidatefeedbackquestions'){
 		</label>
 		</div>
 		</div>';
-		if($value['type']==1 || $value['type']==3)	{ 
+		if($value['type']==1 || $value['type']==3)	{
 			$display_question .= '<div id="options'.$value_id.'">';
-			foreach ($options as $opkey => $opvalue) { 
+			foreach ($options as $opkey => $opvalue) {
 				$display_question .= '<div id="optionlist'.$value_id.$opkey.'">
 				<div class="form-group row" id="'.$opkey.'">
 				<div class="col-lg-1"></div>
@@ -1998,16 +1998,16 @@ if($page=='formcandidatefeedbackquestions'){
 			<input type="hidden" value="'.$opkey.'" id="option_row"/>
 			<button class="btn btn-success"  onclick="addnewoptionrows('."'".$value_id."'".')" id="addNewRows" type="button">+ Add More Options</button>
 			</div>';
-		}	
-		if($value['type']==2)	{ 
+		}
+		if($value['type']==2)	{
 			$display_question .= '	<div class="form-group text-left mt-10">
 			<label>Scale from 1 to: <span class="text-danger">*</span></label>
 			<input type="number" name="survey_question_option'.$value_id.'[]"  class="form-control" placeholder="'.$options[0].'" value="'.$options[0].'" > 
 			</div>';
-		} 	
-		if($value['type']==4)	{ 
+		}
+		if($value['type']==4)	{
 			$display_question .= '	<input type="hidden" name="survey_question_option'.$value_id.'[]"  class="form-control" value=""> ';
-		} 
+		}
 
 		$display_question .= '</div> </div>  </div>';
 		$value_id ++;
@@ -2020,15 +2020,15 @@ if($page=='formcandidatefeedbackquestions'){
 if($page=="job_posting_candidate_response"){
 	//print_r($_POST);
 	$url = API."?mode=savejobfeedbackreponses&method=post";
-	$retunn_inserted_qid = file_post_contents($url,$_POST,'insert'); 
+	$retunn_inserted_qid = file_post_contents($url,$_POST,'insert');
 	echo $retunn_inserted_qid; exit;
 }
 if($page=="insertrole"){
 	$_POST['user_id'] = $_SESSION['userid'];
-	$_POST['company_id']=$_SESSION['company_id']; 
+	$_POST['company_id']=$_SESSION['company_id'];
 	$url = API."?mode=insertrole&method=post";
-		echo $response = file_post_contents($url, $_POST); 
-		exit;  
+		echo $response = file_post_contents($url, $_POST);
+		exit;
 		//$resutlvalue = json_decode($response,1);
 }
 
@@ -2037,7 +2037,7 @@ if($page=="getjobdecription"){
 	  $wh1["field"] = "id,job_title,job_description";
 	  //$wh1['order'] = "id DESC";
 	  $data1 = urlencode(json_encode($wh1));
-	  $url1 = API."?mode=gettabledetailswithconditions&table=job_titles&data=".$data1; 
+	  $url1 = API."?mode=gettabledetailswithconditions&table=job_titles&data=".$data1;
 	  echo $data_details1 = callAPI($url1);
 }
 if($page=="resetnewpassword"){
@@ -2053,7 +2053,7 @@ if($page == "getfildsarrayemailcontains"){
 $wh1["where"] = array('apply_table_name'=>$table_name,'is_active'=>0,'company_id'=>$_SESSION['company_id']);
 $wh1["field"] = "id,fields,label,application_table_name,preview_value";
 $data1 = urlencode(json_encode($wh1));
-$url1 = API."?mode=gettabledetailswithconditions&table=create_documents_fields&data=".$data1; 
+$url1 = API."?mode=gettabledetailswithconditions&table=create_documents_fields&data=".$data1;
 $jsondecode = callAPI($url1);
 $jsondecode = json_decode($jsondecode,1);
 $inputFildsArray =array();
@@ -2065,7 +2065,7 @@ echo json_encode($inputFildsArray);
 // start treeeeeeeee
 //user list tree
 if($page=="getfamilytreelist"){
-	  $url = API."?mode=getfamilytreelist&user_ids=".$_POST['user_id']; 
+	  $url = API."?mode=getfamilytreelist&user_ids=".$_POST['user_id'];
 	  $task = callAPI($url);
 	  echo $task;
 }
@@ -2073,14 +2073,14 @@ if($page=="getfamilytreelist"){
 
 //employee list tree
 if($page=="getemployeetreelist"){
-	  $url = API."?mode=getemployeetreelist&user_ids=".$_POST['user_id']; 
+	  $url = API."?mode=getemployeetreelist&user_ids=".$_POST['user_id'];
 	  $task = callAPI($url);
 	  echo $task;
 }
 //End employee list tree
 //Chart of account list tree
 if($page=="getchartofaccountreelist"){
-	  $url = API."?mode=getchartofaccountreelist&user_ids=".$_POST['user_id']; 
+	  $url = API."?mode=getchartofaccountreelist&user_ids=".$_POST['user_id'];
 	  $task = callAPI($url);
 	  echo $task;
 }
@@ -2089,14 +2089,14 @@ if($page=="selecttablenamefiledlist"){
 $return = array();
 $aray = explode(",",$_POST['table']);
 $option = "";
-$returntable = "";    
+$returntable = "";
 foreach($aray as $aray){
 	$option .= '<div class="col-lg-3 tablenameclass'.$aray.'"><label>'.ucwords(str_replace('_', ' ', $aray)).'*</label><select class="form-select js-example-basic-multiple tablefiledsselect" onchange="buildQuery()" data-table="'.$aray.'" name="tablefiledsselect['.$aray.'][]" multiple required>';
 		$res = getListAttributes($aray);
 		foreach($res  as $ress){
 			$option .= "<option value='".$aray.".".$ress['Field']."'>".$ress['Field']."</option>";
 		}
-		$option .="</select></div>"; 
+		$option .="</select></div>";
 }
 //echo "hello";
 echo json_encode(array('option'=>$option));
@@ -2126,7 +2126,7 @@ foreach($aray as $aray){
 		foreach($res  as $ress){
 			$option .= "<option value='".$aray.".".$ress['Field']."'>".$ress['Field']."</option>";
 		}
-		$option .="</select></div>"; 
+		$option .="</select></div>";
 }
 echo json_encode(array('option'=>$option));
 }
@@ -2149,7 +2149,7 @@ $option = "";
 	$wh1["where"] = array('is_active'=>0,'company_id'=>$_SESSION['company_id'],'application_table_name'=>$_POST['table_name']);
 $wh1["field"] = "id,list_attributes";
 $data1 = urlencode(json_encode($wh1));
-$url1 = API."?mode=gettabledetailswithconditions&table=display_attributes&data=".$data1; 
+$url1 = API."?mode=gettabledetailswithconditions&table=display_attributes&data=".$data1;
 $pagenamesapi = callAPI($url1);
 $pagenamesrow = json_decode($pagenamesapi,1);
 $listfields = json_decode($pagenamesrow[0]['list_attributes'],1);
@@ -2178,7 +2178,7 @@ if($page=="getapprovetypelist"){
 		$wh1["where"] = array('is_active'=>0,'company_id'=>$_SESSION['company_id']);
 		$wh1["field"] = "id,display_name";
 		$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=application_users&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=application_users&data=".$data1;
 		$jsondecode = callAPI($url1);
 		$list = json_decode($jsondecode,1);
 		foreach($list as $lists){
@@ -2188,7 +2188,7 @@ if($page=="getapprovetypelist"){
 		$wh1["where"] = array('is_active'=>0,'company_id'=>$_SESSION['company_id']);
 		$wh1["field"] = "id ,name";
 		$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=email_groups&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=email_groups&data=".$data1;
 		$jsondecode = callAPI($url1);
 		$list = json_decode($jsondecode,1);
 		foreach($list as $lists){
@@ -2198,7 +2198,7 @@ if($page=="getapprovetypelist"){
 		$wh1["where"] = array('is_active'=>0,'company_id'=>$_SESSION['company_id']);
 		$wh1["field"] = "id ,role_short_code,name";
 		$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=application_roles&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=application_roles&data=".$data1;
 		$jsondecode = callAPI($url1);
 		$list = json_decode($jsondecode,1);
 		foreach($list as $lists){
@@ -2208,7 +2208,7 @@ if($page=="getapprovetypelist"){
 		$wh1["where"] = array('genc_code'=>"HIERARCHICALLEVEL",'is_active'=>0,'company_id'=>$_SESSION['company_id']);
 		$wh1["field"] = "genc_detail_code ,genc_detail_name";
 		$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=general_code_details&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=general_code_details&data=".$data1;
 		$jsondecode = callAPI($url1);
 		$list = json_decode($jsondecode,1);
 		foreach($list as $lists){
@@ -2220,7 +2220,7 @@ if($page=="getapprovetypelist"){
 		$wh1["where"] = array('genc_code'=>"EMPLOYEEBUDDIES",'is_active'=>0,'company_id'=>$_SESSION['company_id']);
 		$wh1["field"] = "genc_detail_code ,genc_detail_name";
 		$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=general_code_details&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=general_code_details&data=".$data1;
 		$jsondecode = callAPI($url1);
 		$list = json_decode($jsondecode,1);
 		foreach($list as $lists){
@@ -2232,7 +2232,7 @@ if($page=="getapprovetypelist"){
 		$wh1["where"] = array('is_active'=>0,'company_id'=>$_SESSION['company_id']);
 		$wh1["field"] = "id,role_name";
 		$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=employment_roles&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=employment_roles&data=".$data1;
 		$jsondecode = callAPI($url1);
 		$list = json_decode($jsondecode,1);
 		foreach($list as $lists){
@@ -2243,7 +2243,7 @@ if($page=="getapprovetypelist"){
 		$wh1["where"] = array('is_active'=>0,'company_id'=>$_SESSION['company_id'],'application_table_name'=>$_POST['process_name']);
 		$wh1["field"] = "id,list_attributes";
 		$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=display_attributes&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=display_attributes&data=".$data1;
 		$pagenamesapi = callAPI($url1);
 		$pagenamesrow = json_decode($pagenamesapi,1);
 		$listfields = json_decode($pagenamesrow[0]['list_attributes'],1);
@@ -2261,7 +2261,7 @@ if($page=="getapprovetypelist"){
 			$whf["where"] = array('is_active'=>0,'company_id'=>$_SESSION['company_id'],'application_table_name'=>$_POST['process_name']);
 			$whf["field"] = "id,list_attributes";
 			$dataf = urlencode(json_encode($whf));
-			$urlf = API."?mode=gettabledetailswithconditions&table=display_attributes&data=".$dataf; 
+			$urlf = API."?mode=gettabledetailswithconditions&table=display_attributes&data=".$dataf;
 			$pagenamesapif = callAPI($urlf);
 			$pagenamesrowf = json_decode($pagenamesapif,1);
 			$listfieldsf = json_decode($pagenamesrowf[0]['list_attributes'],1);
@@ -2321,13 +2321,13 @@ if($page=="commanworkflowsubmit"){
 		$postdata['approve_update_status'] = json_encode($approveupdatestatus);
 	}else if($_POST['type']=="aprove_updatefields"){
 		$ret = array();
-		foreach($_POST['status'] as $key => $filelds){	
+		foreach($_POST['status'] as $key => $filelds){
 			$ret[] = array("status"=>$_POST['status'][$key],'followup_days'=>$_POST['followup_days'][$key],'auto_forword_days'=>$_POST['auto_forword_days'][$key],'work_flow_field'=>$_POST['work_flow_field'][$key]);
 		}
 		$postdata['approve_update_status'] = json_encode($ret,1);
 	}else if($_POST['type']=="rejection_updatefields"){
 		$ret = array();
-		foreach($_POST['status'] as $key => $filelds){	
+		foreach($_POST['status'] as $key => $filelds){
 			$ret[] = array("status"=>$_POST['status'][$key],'followup_days'=>$_POST['followup_days'][$key],'auto_forword_days'=>$_POST['auto_forword_days'][$key],'work_flow_field'=>$_POST['work_flow_field'][$key]);
 		}
 		$postdata['rejection_update_status'] = json_encode($ret,1);
@@ -2340,7 +2340,7 @@ if($page=="commanworkflowsubmit"){
 	if($_POST['type'] == 'aprove_updatefields' || $_POST['type']=='custom_process'){
 		echo json_encode($ret);
 	}else{
-		echo $response; 
+		echo $response;
 	}
 }
 if($page=="insertprocesstasksettings"){
@@ -2367,26 +2367,26 @@ if($page=="insertprocesstasksettings"){
 		 if($value!=""){
 			if(isset($_FILES['file'.$key])){
 				//$path = $_SESSION['DB_NAME']."/".$_SESSION['company_id']."/candidates/".$_POST['candidate_id']."/Documents";
-				$compay_file = imageuploadwitharray("all",'file'.$key,'','',$key);	
+				$compay_file = imageuploadwitharray("all",'file'.$key,'','',$key);
 				$listdata[$key]['downloadfile']= $compay_file;
 			}
 			$checkboxid = $_POST['checkboxid'][$key];
 			$listdata[$key]['mandatory_checklist'] = $_POST['mandatory_checklist'][$checkboxid] == "Y"?"Y":"N";
 			$listdata[$key]['attachment_requerd'] = $_POST['attachment_requerd'][$checkboxid] == "Y"?"Y":"N";
-			
+
 		   $listdata[$key]['name'] = $value;
 		   $listdata[$key]['check_value'] = "";
 		 }
 		}
 
 		$_POST['check_list'] = json_encode($listdata,1);
-		
+
 		 $url = API."?mode=processtasksettings&method=post";
 		$response = file_post_contents($url,$_POST,'insert');
 		echo $response; //exit;
 }
 if($page == 'dynamicchangestatusnew'){
-	$pagename = getPagenametotable($_POST['table'],'approval_page_name');//."&pagename=".$pagename;  
+	$pagename = getPagenametotable($_POST['table'],'approval_page_name');//."&pagename=".$pagename;
 	$_POST['pagename'] = $pagename;
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
@@ -2398,7 +2398,7 @@ if($page == 'checkemployeeleaveavailableornot'){
 	$leavecheckurl = API."?mode=checkemployeeleaveavailableornot&emp_id=".$_SESSION['emp_id']."&leavetype=".$_POST['leave_type_id']."&leave_from=".$_POST['leave_from']."&leave_to=".$_POST['leave_to']."&rid=".$_POST['rid']."&old_leave_days=".$_POST['old_leave_days']."&start_half_day=".$_POST['start_half_day']."&end_half_day=".$_POST['end_half_day'];
 	$leavecheckresponse = callAPI($leavecheckurl);
 	$details = json_decode($leavecheckresponse,1);
-	if($_POST['leave_from']!="" AND $_POST['leave_to']!=""){	
+	if($_POST['leave_from']!="" AND $_POST['leave_to']!=""){
 		$date2 = $_POST['leave_to'];
 		$date2 = str_replace('/', '-', $date2);
 		$date1 = $_POST['leave_from'];
@@ -2409,7 +2409,7 @@ if($page == 'checkemployeeleaveavailableornot'){
 	echo $details_res;
 }
 if($page == 'leavedaystoworkdays'){
-	if($_POST['leave_from']!="" AND $_POST['leave_to']!=""){	
+	if($_POST['leave_from']!="" AND $_POST['leave_to']!=""){
 		$date2 = $_POST['leave_to'];
 		$date2 = str_replace('/', '-', $date2);
 		$date1 = $_POST['leave_from'];
@@ -2445,7 +2445,7 @@ if($page == "getstatvaluewithlist"){
 	$chk["where"] = array('is_active'=>0);
 	 $wh1["field"] = "id,state_name";
 	$chks = urlencode(json_encode($chk));
-	$sateurl = API."?mode=gettabledetailswithconditions&table=states&data=".$chks; 
+	$sateurl = API."?mode=gettabledetailswithconditions&table=states&data=".$chks;
 	$satedata =  callAPI($sateurl);
 	$satedata = json_decode($satedata,1);
 	foreach($satedata as $satedatas){
@@ -2453,12 +2453,12 @@ if($page == "getstatvaluewithlist"){
 	if($_POST['state_id'] ==$satedatas['id']){
 		$selected = "selected";
 	}
-		$option .="<option value='".$satedatas['id']."'  ".$selected.">".$satedatas['state_name']."</option>"; 
+		$option .="<option value='".$satedatas['id']."'  ".$selected.">".$satedatas['state_name']."</option>";
 	}
 	echo $option;
 }
 if($page=="insertcheckpayroll"){
-	$url1 = API."?mode=insertcheckpayroll&id=".$_POST['id']."&year=".$_POST['year']."&month=".$_POST['month']; 
+	$url1 = API."?mode=insertcheckpayroll&id=".$_POST['id']."&year=".$_POST['year']."&month=".$_POST['month'];
 	$data_details1 = callAPI($url1);
 	echo $data_details1;
 }
@@ -2467,7 +2467,7 @@ if($page=="vrcdata"){
 	$wh1["where"] = array('company_id'=>$_SESSION['company_id'],'transaction_id'=>$_POST['vid'],'item_id'=>$_POST['item_id'],'is_active'=>0);
 	//print_r($wh1);
 	$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=vrc_items&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=vrc_items&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$data_details1 = json_decode($data_details1,1);
 	//print_r($data_details1);
@@ -2476,7 +2476,7 @@ if($page=="vrcdata"){
 }
 if($page=='edittimesheetbillablehrs'){
 	$_POST['user_id'] = $_SESSION['userid'];
-	$_POST['company_id']=$_SESSION['company_id'];   
+	$_POST['company_id']=$_SESSION['company_id'];
 	  $url = API."?mode=edittimesheetbillablehrs&method=post";
 	  echo $response = file_post_contents($url, $_POST);
 }
@@ -2484,14 +2484,14 @@ if($page=="dyanamicreferfunc"){
 	$respons = dyanamicreferFunc($_POST['val'],$_POST['referfield'],$_POST['table']);
 	$option = '<option value="">Select '.ucwords(str_replace("_"," ",$_POST['referfield'])).'</option>';
 	foreach ($respons as $key => $value) {
-		$option .="<option value=".$key.">".$value."</option>"; 
+		$option .="<option value=".$key.">".$value."</option>";
 	}
 	echo $option;
 	exit;
 }
 if($page=='insertpmcasignemployee'){
 	$_POST['user_id'] = $_SESSION['userid'];
-	$_POST['company_id']=$_SESSION['company_id']; 
+	$_POST['company_id']=$_SESSION['company_id'];
 	$url = API."?mode=insertpmcasignemployee&method=post";
 	$response = file_post_contents($url,$_POST);
 	echo $response; exit;
@@ -2506,11 +2506,11 @@ if($page=="getdaterangempc"){
 
 	}else if($_POST['vall']=="PS"){
 		$return = array('effectiveDate'=>$eefectivedate,'expire_date'=>date($_SESSION['date_formate'], strtotime($eefectivedate."+6 months")));
-	
+
 	}else if($_POST['vall']=="PT"){
 	$return = array('effectiveDate'=>$eefectivedate,'expire_date'=>date($_SESSION['date_formate'], strtotime($eefectivedate."+3 months")));
 	}else{
-	$return = array('effectiveDate'=>'','expire_date'=>'');	
+	$return = array('effectiveDate'=>'','expire_date'=>'');
 	}
 	echo json_encode($return);
 }
@@ -2523,11 +2523,11 @@ if($page == 'getworkorderperhrstime'){
 	$data_details1 = json_decode($data_details1,1);
 	echo $data_details1[0]['per_hrs_rate'];
 }
-if($page=="closenotificationinfo"){	
-   $url1 = API."?mode=closenotificationinfo&id=".$_POST['id']; 	
-	$data_details1 = callAPI($url1);	
-	//echo $data_details1;	
-	exit;	
+if($page=="closenotificationinfo"){
+   $url1 = API."?mode=closenotificationinfo&id=".$_POST['id'];
+	$data_details1 = callAPI($url1);
+	//echo $data_details1;
+	exit;
 }
 if($page == 'current_status_drop_project_timesheets'){
 	$str = '<div class="dropdown-item text-danger">'.$_SESSION['error_message']['9040'].'</div>';
@@ -2539,35 +2539,35 @@ if($page == 'current_status_drop_project_timesheets'){
 	}else{
 	   $url = API."?mode=singlerowtabledata&table=application_users&fid=id&rid=".$user_id;
 	   //echo $url;
-	   $response = callAPI($url); 
+	   $response = callAPI($url);
 	   $response  = json_decode($response,1);
 	   //print_r($response);
 	   $approval_manager_id = $response['approval_manager'];
-	   $reports_to = $response['reports_to'];	   
+	   $reports_to = $response['reports_to'];
 	}
 	if($approval_manager_id !="" && $reports_to !=""){
 	   $appruser_list_data = togetaprovaluserlist($_POST['table'], $_POST['id']);
 	   $appruser_list = $appruser_list_data['user'];
 	   $tablewr["where"] = array('id'=> $_POST['id']);
 	   $tablecon = urlencode(json_encode($tablewr));
-	   $tableurl = API."?mode=gettabledetailswithconditions&table=".$_POST['table']."&data=".$tablecon; 
+	   $tableurl = API."?mode=gettabledetailswithconditions&table=".$_POST['table']."&data=".$tablecon;
 	   $tabledata = callAPI($tableurl);
 	   $tabledata = json_decode($tabledata,1);
-	   $str ="";	
+	   $str ="";
 	   $checkapprovemanager = checkApproveManager($user_id,$_POST['current_status']);
 	   $lists = toGetStatusProgressAction($_POST['table'], $_POST['current_status']);
 	   //echo "test"; print_r($lists);
 	   if($checkapprovemanager == ST_APPROVAL_MANAGER AND ($_POST['current_status']==ST_ACTIVE || $_POST['current_status']==ST_SEND_BACK )){
-		foreach ($lists as $list){ 
-			$str .= '<div class="dropdown-item" onclick="statuspopupActiveStatusOnly('.ST_APPROVAL_MANAGER.','. $_POST[id] .')" name="status" id="status" value="'.ST_APPROVAL_MANAGER.'">'.$list[action_label].'</div>';	
+		foreach ($lists as $list){
+			$str .= '<div class="dropdown-item" onclick="statuspopupActiveStatusOnly('.ST_APPROVAL_MANAGER.','. $_POST[id] .')" name="status" id="status" value="'.ST_APPROVAL_MANAGER.'">'.$list[action_label].'</div>';
 		}
 	   }elseif($checkapprovemanager == ST_APPROVAL_PENDING AND ($_POST['current_status']==ST_ACTIVE || $_POST['current_status']==ST_SEND_BACK)){
-		foreach ($lists as $list){ 
-			$str .= '<div class="dropdown-item" onclick="statuspopupActiveStatusOnly('.ST_APPROVAL_PENDING.','. $_POST[id] .')" name="status" id="status" value="'.ST_APPROVAL_PENDING.'">'.$list[action_label].'</div>';	
+		foreach ($lists as $list){
+			$str .= '<div class="dropdown-item" onclick="statuspopupActiveStatusOnly('.ST_APPROVAL_PENDING.','. $_POST[id] .')" name="status" id="status" value="'.ST_APPROVAL_PENDING.'">'.$list[action_label].'</div>';
 		}
 	   }else{
 		foreach ($lists as $list){
-			$str .= '<div class="dropdown-item" onclick="statuspopup('.$list[status].','. $_POST[id] .')" name="status" id="status" value="'. $list[status] .'">'.$list[action_label].'</div>';	
+			$str .= '<div class="dropdown-item" onclick="statuspopup('.$list[status].','. $_POST[id] .')" name="status" id="status" value="'. $list[status] .'">'.$list[action_label].'</div>';
 		}
 	   }
 	   $str_d=$str;
@@ -2603,7 +2603,7 @@ if($page == 'setdynamichelptext'){
 		$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'application_table_name'=>$table_name,'display'=>'1');
 		$wh1['order'] = "sequence ASC";
 		$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=application_tours&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=application_tours&data=".$data1;
 		$data_details1 = callAPI($url1);
 		$json = json_decode($data_details1,1);
 		$i=1;
@@ -2639,17 +2639,17 @@ if($page == 'insertupdateesgcpopup'){
 }
 if($page=="addorremoveusersubtable"){
 	print_r($_POST);
-	$url = API."?mode=addorremoveusersubtable&method=post"; 	
+	$url = API."?mode=addorremoveusersubtable&method=post";
 	$return = file_post_contents($url, $_POST, 'update');
-	exit;	
+	exit;
 }
 if($page=="closenotificationinfo"){
-	$url1 = API."?mode=closenotificationinfo&id=".$_POST['id']; 
+	$url1 = API."?mode=closenotificationinfo&id=".$_POST['id'];
 	$data_details1 = callAPI($url1);
 	//echo $data_details1;
 	exit;
-} 
-//attendance form leave 
+}
+//attendance form leave
 if($page == 'inserttempattendaceform'){
 	$_POST['company_id']=$_SESSION['company_id'];
 	$_POST['user_id']=$_SESSION['userid'];
@@ -2658,26 +2658,26 @@ if($page == 'inserttempattendaceform'){
 	$json = json_decode($response,1);
 	$listfieldarray = array('return'=>$_POST,'leavedate'=>$json);
 	echo json_encode($listfieldarray);
-	
+
 }
 if($page == "getavailableleaveemployee"){
-$url1 = API."?mode=checkleavebalanceorhalfday&categorytype=".$_POST['leavetype']."&emp_id=".$_POST['emp_id']."&leave_year=".$_POST['year']."&month=".$_POST['month']; 
+$url1 = API."?mode=checkleavebalanceorhalfday&categorytype=".$_POST['leavetype']."&emp_id=".$_POST['emp_id']."&leave_year=".$_POST['year']."&month=".$_POST['month'];
 		 $data_details1 = callAPI($url1);
 	  $result = json_decode($data_details1,1);
 	echo json_encode(array("applicable_leaves"=>$result['leave_details']['applicable_leaves'],"applicable_leaves"=>$result['leave_details']['applicable_leaves'],"consumed_leaves"=>$result['leave_details']['consumed_leaves'],"available_leaves"=>$result['leave_details']['applicable_leaves']-$result['leave_details']['consumed_leaves']-$result['templeaves'],"halfday"=>$result['leave_details']['halfday'],"templeaves"=>$result['templeaves']));
 
 }
 if($page == "insertemployeeworkattendances"){
-		echo $url1 = API."?mode=insertemployeeworkattendances&month=".$_POST['month']."&year=".$_POST['year']."&monthstartday=".$_POST['monthstartday']."&admin_type=".$_SESSION['admin_type']."&emp_id=".$_SESSION['emp_id']; 
+		echo $url1 = API."?mode=insertemployeeworkattendances&month=".$_POST['month']."&year=".$_POST['year']."&monthstartday=".$_POST['monthstartday']."&admin_type=".$_SESSION['admin_type']."&emp_id=".$_SESSION['emp_id'];
 	   echo  $data_details1 = callAPI($url1);
 }
-//attendance form leave 
+//attendance form leave
 //Tickets Start
 if($page=='inserttickets'){
 	$filedetails=array();
 	if(isset($_FILES['file'])){
 	$filedetails['originalname'] = basename($_FILES['file']['name']);
-	$filedetails['filesize'] =basename($_FILES['file']['size']);      
+	$filedetails['filesize'] =basename($_FILES['file']['size']);
 	$name = time().basename($_FILES['file']['name']);
 		if (move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/attachments/".$name)) {
 			$filedetails['filename'] = $name;
@@ -2689,7 +2689,7 @@ if($page=='inserttickets'){
 	unset($_POST['file']);
 	$url = API."?mode=inserttickets&method=post";
 	$response = file_post_contents($url,$_POST);
-	echo $response; 
+	echo $response;
 }
 if($page == 'updateticketdetails'){
 $url = API."?mode=updateticketdetails&id=".$_POST['id']."&filed_name=".$_POST['filed_name']."&value=".$_POST['value']."&uid=".$_POST['uid'];
@@ -2713,7 +2713,7 @@ if($page == "insertemployeedetails"){
 //insert employees
 if($page=='insertpayareaasignemployee'){
 	$_POST['user_id'] = $_SESSION['userid'];
-	$_POST['company_id']=$_SESSION['company_id']; 
+	$_POST['company_id']=$_SESSION['company_id'];
 	print_r($_POST);
 	$url = API."?mode=insertpayareaasignemployee&method=post";
 			$response = file_post_contents($url,$_POST);
@@ -2721,7 +2721,7 @@ if($page=='insertpayareaasignemployee'){
 }
 if($page=='insertpayrolladminasignemployee'){
 	$_POST['user_id'] = $_SESSION['userid'];
-	$_POST['company_id']=$_SESSION['company_id']; 
+	$_POST['company_id']=$_SESSION['company_id'];
 	//print_r($_POST);
 	$url = API."?mode=insertpayrolladminasignemployee&method=post";
 	$response = file_post_contents($url,$_POST);
@@ -2748,14 +2748,14 @@ if($page =="getweekinmonth"){
 	foreach($weekly_date as $keyweek=>$weekly_date){
 		if(date("dmY",strtotime($startingdate)) == date("dmY",strtotime($weekly_date[0]))){
 			$class = 'nav-link bg-primary me-6 active';
-		}else{                  
+		}else{
 			$class = 'btn btn-light';
 		}
 		$mess .= '<div class="float-left m-r-5 b-radius-5 nav-item ">';
 		$mess .='<a class="'.$class.' nav-link  me-6 active " style="font-size: 12px !important;" href="index.php?option=COM_LIST_WEEKLY_BULK_APPROVAL_TIMESHEETS&SDATE='.$weekly_date[0].'&EDATE='.$weekly_date[count($weekly_date)-1].'">Week - '.$keyweek;
 		$mess .='</br><span class="f-10">'.date("d D",strtotime($weekly_date[0])).'</span></a>';
 		$mess .='</div>';
-	  } 
+	  }
 	  echo $mess;
 }
 if($page == "insertstocktakesitems"){
@@ -2764,7 +2764,7 @@ if($page == "insertstocktakesitems"){
 		$uomaray[$key]['qty'] = $value;
 		$uomaray[$key]['conversion_ratio'] = $_POST['conversion_ratio'][$key];
 		$uomaray[$key]['uom_id'] = $_POST['popuouomid'][$key];
-	}	
+	}
 	$uom_details = json_encode($uomaray);
 	$_POST['uom_details'] = json_encode($uomaray);
 	$_POST['company_id']=$_SESSION['company_id'];
@@ -2774,20 +2774,20 @@ if($page == "insertstocktakesitems"){
 	echo $uom_details;
 }
 if($page == "startstocktakes"){
-	$url1 = API."?mode=startstocktakes&userid=".$_POST['userid']."&sid=".$_POST['sid']; 
+	$url1 = API."?mode=startstocktakes&userid=".$_POST['userid']."&sid=".$_POST['sid'];
 	echo $data_details1 = callAPI($url1);
 }
 if($page == "getstocktakelocations"){
-	$url1 = API."?mode=getstocktakelocations&selectitems=".$_POST['selectitems']; 
+	$url1 = API."?mode=getstocktakelocations&selectitems=".$_POST['selectitems'];
 	$location = callAPI($url1);
 	$locations = json_decode($location,1);
 	foreach($locations as $locatio){
-		$option .="<option value='".$locatio['location_id']."'>".$locatio['location_name']."</option>"; 
+		$option .="<option value='".$locatio['location_id']."'>".$locatio['location_name']."</option>";
 	}
 	echo $option;
 }
 if($page =="softdeletedrecord"){
-	$url1 = API."?mode=softdeletedrecord&id=".$_POST['id']."&table=".$_POST['table']; 
+	$url1 = API."?mode=softdeletedrecord&id=".$_POST['id']."&table=".$_POST['table'];
 	echo $recorddeleted = callAPI($url1);
 }
 /* asset allocation */
@@ -2805,16 +2805,16 @@ if($page =="insertasset"){
 		}
 	}else{
 		$_POST['asset_img'] = $_POST['oldattachment'];
-	} 
+	}
 	$custom_field= array();
 	foreach($_POST['fieldname'] as $key=>$value){
 		$custom_field[$key]['fieldname'] = $value;
 		$custom_field[$key]['fieldtype'] = $_POST['fieldtype'][$key];
 		$custom_field[$key]['fieldvalue'] = $_POST['fieldvalue'][$key];
 	}
-	unset($_POST['fieldname']);	
-	unset($_POST['fieldtype']);	
-	unset($_POST['fieldvalue']);	
+	unset($_POST['fieldname']);
+	unset($_POST['fieldtype']);
+	unset($_POST['fieldvalue']);
 	//$_POST['custom_field'] = json_encode($custom_field);
 	$_POST['custom_field'] =urlencode(json_encode($custom_field));
 	//$_POST['asset_img'] = $filename;
@@ -2844,7 +2844,7 @@ if($page=="insertassetallocationsingle"){
 		}
 	}else{
 		$_POST['asset_img'] = $_POST['oldattachment'];
-	} 
+	}
 	$_POST['company_id']=$_SESSION['company_id'];
 	$_POST['user_id']=$_SESSION['userid'];
 	$_POST['singleasset']="Y";
@@ -2872,13 +2872,13 @@ if($page=="insertassetrequest"){
 	echo $response = file_post_contents($url, $_POST, 'insert');
 }
 if($page == "selectAssetCategory"){
-	$url1 = API."?mode=getassetandattributes&cat_id=".$_POST['catgoryid']; 
+	$url1 = API."?mode=getassetandattributes&cat_id=".$_POST['catgoryid'];
 	$assets = callAPI($url1);
 	$json = json_decode($assets,1);
 	$checkattributes = "";
 	$option = '<option value="">Select Any One</option>';
 	foreach($json['assetlist'] as $locatio){
-		$option .="<option value='".$locatio['id']."'>".$locatio['asset_description']."</option>"; 
+		$option .="<option value='".$locatio['id']."'>".$locatio['asset_description']."</option>";
 	}
 	$checked = $_POST['check']=="N"?"":"checked";
 	foreach($json['asset_attributes'] as $asset_attributes){
@@ -2890,7 +2890,7 @@ if($page == "selectAssetCategory"){
 										</span>
 										<span>'.$asset_attributes['name'].'</span>
 									  </label>
-									</div>'; 
+									</div>';
 	}
 	echo  json_encode(array('option'=>$option,'asset_attributes'=>$checkattributes));
 }
@@ -2915,17 +2915,17 @@ if($page == "getmodulesetupoption"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'module_group_id'=>$_POST['gmid']);
 	$wh1['field'] = "id,module_name";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=module_setup&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=module_setup&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$option = '<option value="">Select Any One</option>';
 	foreach($json as $locatio){
-		$option .="<option value='".$locatio['id']."'>".$locatio['module_name']."</option>"; 
+		$option .="<option value='".$locatio['id']."'>".$locatio['module_name']."</option>";
 	}
 	echo $option;
 }
 
-//bill demo 
+//bill demo
 if($page =="insertempexpenses"){
 	$File_Uploads_Path = "uploads/reimbursement/";
 	if($_FILES['file']['error'] != "4"){
@@ -2938,14 +2938,14 @@ if($page =="insertempexpenses"){
 	}
 	if($filename ==""){
 		$filename = $_POST['oldattachment'];
-	}   
+	}
 	$_POST['company_id'] = $_SESSION['company_id'];
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['bill_file'] = $filename;
 	$url = API."?mode=insertandupdateempexpenses&method=post";
 	$response = file_post_contents($url, $_POST, 'insert');
 	$response = json_decode($response,1);
-	echo deocdeId("id:".$response['LASTID']); 
+	echo deocdeId("id:".$response['LASTID']);
 }
 if($page=="assignemployeelistpolicy"){
 	$empurl = API."?mode=assignemployeelistpolicy&emp_id=".$_POST['emp_id']."&policy_number=".$_POST['policy_number']."&newcreate=".$_POST['newcreate'];
@@ -2959,18 +2959,18 @@ $enddate = strtotime($_POST['enddate']);
 	if($selectdate >= $startdate && $selectdate <= $enddate){
 	   echo "1";
 	}else{
-	   echo "0";  
-	}  
+	   echo "0";
+	}
 }
 if($page == 'updatestatusvendordocuments'){
 	print_r($_POST);
-	$tableurl = API."?mode=updatestatusvendordocuments&table=".$_POST['table']."&status=".$_POST['status']."&hid=".$_POST['hid']."&vendor_register_id=".$_POST['vendor_register_id']."&user_idd=".$_POST['user_id']; 
+	$tableurl = API."?mode=updatestatusvendordocuments&table=".$_POST['table']."&status=".$_POST['status']."&hid=".$_POST['hid']."&vendor_register_id=".$_POST['vendor_register_id']."&user_idd=".$_POST['user_id'];
 	$return = callAPI($tableurl);
 	echo $return;
 }
- 
+
 if($page == 'reaprovevendordoc'){
-	$tableurl = API."?mode=reaprovevendordoc&useridd=".$_POST['userid']."&vendor_id=".$_POST['vendor_id']."&hid=".$_POST['hid']; 
+	$tableurl = API."?mode=reaprovevendordoc&useridd=".$_POST['userid']."&vendor_id=".$_POST['vendor_id']."&hid=".$_POST['hid'];
 	$return = callAPI($tableurl);
 	echo $return;
 }
@@ -3000,12 +3000,12 @@ if($page == "getsubcategroy"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'parent_category_id'=>$_POST['cat_id']);
 	$wh1['field'] = "id,category_name";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=tasks_categories&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=tasks_categories&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$option = '<option value="">Select Any One</option>';
 	foreach($json as $locatio){
-		$option .="<option value='".$locatio['id']."'>".$locatio['category_name']."</option>"; 
+		$option .="<option value='".$locatio['id']."'>".$locatio['category_name']."</option>";
 	}
 	echo $option;
 }
@@ -3013,23 +3013,23 @@ if($page == "getsubacts"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'parent_category_id'=>$_POST['act_id']);
 	$wh1['field'] = "id,category_name";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=act_categories&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=act_categories&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$option = '<option value="">Select Any One</option>';
 	foreach($json as $locatio){
-		$option .="<option value='".$locatio['id']."'>".$locatio['category_name']."</option>"; 
+		$option .="<option value='".$locatio['id']."'>".$locatio['category_name']."</option>";
 	}
 	echo $option;
 }
 if($page =="setcompliance"){
-	$url1 = API."?mode=setcompliance&id=".$_POST['id'];  
+	$url1 = API."?mode=setcompliance&id=".$_POST['id'];
 	$data_details1 = callAPI($url1);
 	$response = json_decode($data_details1,1);
 	print_r($response);
 }
 if($page =="setcomplianceallocation"){
-	$url1 = API."?mode=setcomplianceallocation&start_date=".$_POST['start_date']."&end_date=".$_POST['end_date'];  
+	$url1 = API."?mode=setcomplianceallocation&start_date=".$_POST['start_date']."&end_date=".$_POST['end_date'];
 	$data_details1 = callAPI($url1);
 	$response = json_decode($data_details1,1);
 	print_r($response);
@@ -3046,15 +3046,15 @@ if($page =="insertcompliancetaskanswer"){
 if($page == "updateticketfollowers"){
 	//print_r($_POST);
 	$_POST['popupfollow_id'] = implode(',',$_POST['popupfollow_id']);
-	$url1 = API."?mode=updateticketfollowers&rid=".$_POST['rid']."&popupfollow_id=".$_POST['popupfollow_id'];  
+	$url1 = API."?mode=updateticketfollowers&rid=".$_POST['rid']."&popupfollow_id=".$_POST['popupfollow_id'];
 	$data_details1 = callAPI($url1);
 	$response = json_decode($data_details1,1);
 	print_r($response);
 }
 if($page=="startworkflow"){
 	//print_r($_POST);
-	$pagename = getPagenametotable($_POST['transaction_table'],'approval_page_name');//."&pagename=".$pagename;  
-	$url1 = API."?mode=startworkflow&rid=".$_POST['rid']."&tablename=".$_POST['transaction_table']."&level=1&emp_id=".$_SESSION['emp_id']."&pagename=".$pagename;  
+	$pagename = getPagenametotable($_POST['transaction_table'],'approval_page_name');//."&pagename=".$pagename;
+	$url1 = API."?mode=startworkflow&rid=".$_POST['rid']."&tablename=".$_POST['transaction_table']."&level=1&emp_id=".$_SESSION['emp_id']."&pagename=".$pagename;
 	echo $data_deta = callAPI($url1);
 	//echo $response = json_decode($data_deta,1);
 	//$response = json_decode($data_deta,1);
@@ -3076,23 +3076,23 @@ if($page =="getemployeementlevel"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'employment_band_id'=>$_POST['id']);
 	$wh1['field'] = "id,level_name";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=employment_levels&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=employment_levels&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$option = '<option value="">Select Any One</option>';
 	foreach($json as $locatio){
-		$option .="<option value='".$locatio['id']."'>".$locatio['level_name']."</option>"; 
+		$option .="<option value='".$locatio['id']."'>".$locatio['level_name']."</option>";
 	}
 	echo $option;
 }
-if($page=="reportfloderlist"){	
+if($page=="reportfloderlist"){
 	$data12["where"]['is_active'] = '0';
 	$data12["where"]['parent_id'] = $_POST['report_id'];
 	$data = urlencode(json_encode($data12));
-	$itemurl = API."?mode=gettabledetailswithconditions&table=my_reports&data=".$data; 
+	$itemurl = API."?mode=gettabledetailswithconditions&table=my_reports&data=".$data;
 	$item_data = callAPI($itemurl);
 	$row = json_decode($item_data, 1);
-	
+
 	$str = "";
 	$str.='<input type="hidden" id="page_id" value="'.$_POST['report_id'].'"/>
 		<input type="hidden" id="ppage_name" value="'.$_POST['page_name'].'"/>';
@@ -3115,27 +3115,27 @@ if($page=="reportfloderlist"){
 			</div>';
 		}
 	}
-	echo $str; exit;	
+	echo $str; exit;
 }
 if($page =="addfloderupdatereportid"){
 	$url = API."?mode=addfloderupdatereportid&method=post";
 	$response = file_post_contents($url,  $_POST, 'insert');
-	echo $rseponse; 
-	
+	echo $rseponse;
+
 }
 if($page=="checkandaddmontlock"){
 	//print_r($_POST); exit;
 	$yearmonth = explode("-",$_POST['yearmonth']);
 	$vdata1["where"] = array('application_table_name'=> $_POST['application_table_name'],'month'=>$yearmonth['1'],'year'=>$yearmonth['0'],'is_active'=>'0');
 	$vdata = urlencode(json_encode($vdata1));
-	$vurl = API."?mode=gettabledetailswithconditions&table=application_monthly_lock&data=".$vdata; 
+	$vurl = API."?mode=gettabledetailswithconditions&table=application_monthly_lock&data=".$vdata;
 	$res = callAPI($vurl);
 	$resdata = json_decode($res,1);
 	//print_r($vdata1); print_r($resdata); print_r($_SESSION['error_message']);
 	$return = "success";
 	if($resdata['0']['id']==""){
 		//echo "--------------dd-----";
-		$vurl = API."?mode=getcountpendingtimesheet&yearmonth=".$_POST['yearmonth']; 
+		$vurl = API."?mode=getcountpendingtimesheet&yearmonth=".$_POST['yearmonth'];
 		$res = callAPI($vurl);
 		$countdata = json_decode($res,1);
 		if($countdata['pcount']==0){
@@ -3164,11 +3164,11 @@ if($page=="checkandaddmontlock"){
 		//echo "--------------xx-----";
 		$return = $_SESSION['error_message']['9044'];
 	}
-	echo  $return; exit;	
+	echo  $return; exit;
 }
 //Rohan Added 22-11-2022
 if($page =="updatepormanace"){
-	$url1 = API."?mode=updatepormanace&id=".$_POST['id']."&applicable=".$_POST['applicable']."&appraisal_id=".$_POST['appraisal_id'];  
+	$url1 = API."?mode=updatepormanace&id=".$_POST['id']."&applicable=".$_POST['applicable']."&appraisal_id=".$_POST['appraisal_id'];
 	echo $data_deta = callAPI($url1);
 }
 if($page =="addkra"){
@@ -3180,7 +3180,7 @@ if($page =="addkra"){
 if($page =="getkpalist"){
 	//$kpaidlist = implode(',',$_POST['selected_kpa']);
 	$krakpiid = $_POST['organization_goalsidd'];
-	$url1 = API."?mode=getorganizationgoalsdetails&kra_list=Y&kpaidlist=".$_POST['selected_kpa']."&krakpiid=".$krakpiid."&appraisal_id=".$_POST['appraisal_id'];  
+	$url1 = API."?mode=getorganizationgoalsdetails&kra_list=Y&kpaidlist=".$_POST['selected_kpa']."&krakpiid=".$krakpiid."&appraisal_id=".$_POST['appraisal_id'];
 	$response = callAPI($url1);
 	$kipandkradetails = json_decode($response,1);
 	$modellist  = $kipandkradetails['modellist'];
@@ -3200,7 +3200,7 @@ if($page =="getkpalist"){
 	include_once("views/custom_insert_organization_goal_ajax.php");
 }
 if($page == "checkassemntyearcopetency"){
-	$url = API."?mode=getjobtitlecompetencies&checkassetyear=Y&assessment_year=".$_POST['assemntyearcopetency']; 
+	$url = API."?mode=getjobtitlecompetencies&checkassetyear=Y&assessment_year=".$_POST['assemntyearcopetency'];
 	echo $response = callAPI($url);
 	//$json = json_decode($data_details1,1);
 }
@@ -3237,12 +3237,12 @@ if($page == "updateperformanaceappraiserheader"){
 	include_once("views/custom_insert_performance_appraisal_headers_ajax.php");
 }
 if($page == "publichappraisal"){
-	$url1 = API."?mode=publichappraisal&id=".$_POST['id']."&assessment_year=".$_POST['assessment_year'];  
+	$url1 = API."?mode=publichappraisal&id=".$_POST['id']."&assessment_year=".$_POST['assessment_year'];
 	echo $data_deta = callAPI($url1);
 
 }
 if($page == "insertappraisalkra"){
-	$url1 = API."?mode=insertappraisalkra&appraisal_id=".$_POST['appraisal_id'];  
+	$url1 = API."?mode=insertappraisalkra&appraisal_id=".$_POST['appraisal_id'];
 	echo $data_deta = callAPI($url1);
 
 }
@@ -3255,18 +3255,18 @@ if($page == "getorganizationgoalcheck"){
 	$dep_id= array();
 	$des_id = array();
 	$locdepdesigary = array();
-	$url1 = API."?mode=getorganizationgoalcheck&appraisal_id=".$_POST['appraisal_id']."&location_id=".$_POST['location_id']."&department_id=".$_POST['department_id']."&designation_id=".$_POST['designation_id'];  
+	$url1 = API."?mode=getorganizationgoalcheck&appraisal_id=".$_POST['appraisal_id']."&location_id=".$_POST['location_id']."&department_id=".$_POST['department_id']."&designation_id=".$_POST['designation_id'];
 	$data_detar = callAPI($url1);
 	$data_deta = json_decode($data_detar,1);
 	foreach($data_deta['ogres'] as $ogres){
 		$locdepdesigary[$ogres['location_id']][$ogres['department_id']][$ogres['job_title_id']] = "Y";
 	}
 	foreach($data_deta['res'] as $data_detares){
-		$idname  = "loc_".$data_detares['loc_id']."_dep_".$data_detares['dept_id']."_des_".$data_detares['desg_id']; 
+		$idname  = "loc_".$data_detares['loc_id']."_dep_".$data_detares['dept_id']."_des_".$data_detares['desg_id'];
 		$name  = "locatdepdesignatio[".$data_detares['loc_id']."][".$data_detares['dept_id']."][".$data_detares['desg_id']."]";
 			$function = 'checkperformanace("'.$idname.'")';
 			$style="style='opacity: 0.4;'";
-		if($locdepdesigary[$data_detares['loc_id']][$data_detares['dept_id']][$data_detares['desg_id']] == "Y"){	
+		if($locdepdesigary[$data_detares['loc_id']][$data_detares['dept_id']][$data_detares['desg_id']] == "Y"){
 			$htmlview .='<div class="col-lg-2" onclick="editKrAandKip('.$data_detares['loc_id'].','.$data_detares['dept_id'].','.$data_detares['desg_id'].')">
 							<div class="card social-card" '.$style.'>
 								<div class="inputGroup text-right" >
@@ -3277,7 +3277,7 @@ if($page == "getorganizationgoalcheck"){
 									</label>
 								</div>
 							</div>
-						</div>';			
+						</div>';
 		}else{
 			$htmlview .='<div class="col-lg-2">
 							<div class="card social-card">
@@ -3290,9 +3290,9 @@ if($page == "getorganizationgoalcheck"){
 									</label>
 								</div>
 							</div>
-						</div>'; 
+						</div>';
 		}
-	}	
+	}
 	echo $htmlview;
 }
 if($page == "updatekrakpitagging"){
@@ -3321,7 +3321,7 @@ if($page == "insertadditionalserviceslicense"){
 	print_r($response1);
 }
 if($page == "assigneduserlicens"){
-	$url1 = API."?mode=assigneduserlicens&company_subscr_id=".$_POST['company_subscr_id']."&checktype=".$_POST['checktype']."&userid=".$_POST['userid'];  
+	$url1 = API."?mode=assigneduserlicens&company_subscr_id=".$_POST['company_subscr_id']."&checktype=".$_POST['checktype']."&userid=".$_POST['userid'];
 	echo $data_deta = callAPI($url1);
 	$response1 = json_decode($response,1);
 	print_r($response1);
@@ -3336,13 +3336,13 @@ if($page == "assigneduserlicens"){
 if($page== "insertemployeeleave"){
 	$data['hr_user_id'] = $_POST['hr_user_id'];
 	$data['finance_user_id'] = $_POST['finance_user_id'];
-	$data['leave_from'] = date("Y-m-d",strtotime($_POST['leave_from'])); 
+	$data['leave_from'] = date("Y-m-d",strtotime($_POST['leave_from']));
 	$data['start_half_day'] = $_POST['start_half_day'];
 	$data['leave_to'] = date("Y-m-d",strtotime($_POST['leave_to']));
 	$data['end_half_day'] = $_POST['end_half_day'];
 	$data['leave_type_id'] = $_POST['leave_type_id'];
 	$data['special_request'] = $_POST['special_request'];
-	$data['leave_days'] = $_POST['days'];	
+	$data['leave_days'] = $_POST['days'];
 	$data['employee_id'] = $_SESSION['emp_id'];
 	$data['company_id'] = $_SESSION['company_id'];
 	$data['rid'] = $_POST['rid'];
@@ -3353,7 +3353,7 @@ if($page== "insertemployeeleave"){
 	if($_POST['submit']=='Add'){
 		$data['status_date'] = nowDate();
 		$data['created_date'] = nowDate();
-		$data['created_by'] = $_SESSION['userid'];	
+		$data['created_by'] = $_SESSION['userid'];
 		$url = API."?mode=insertleaverequest&table=".$table_name."&method=post";//custom leave policy url
 		$response1 = file_post_contents($url, $data, 'insert');
 		$res = json_decode($response1,1);
@@ -3372,11 +3372,11 @@ if($page== "insertemployeeleave"){
 					$msgg = $response['message'];
 				}
 			}else{
-				$msgg = $_SESSION['error_message']['3000'];	
-			}	
+				$msgg = $_SESSION['error_message']['3000'];
+			}
 		}
 		echo json_encode(array('leavestatus'=>$res['leavestatus'],'leaveinsert'=>$res['leaveinsert'],'msg'=>$msgg));
-	}	
+	}
 }
 
 //mobile ajax----------------------------
@@ -3391,7 +3391,7 @@ if($page =="insertcandidatedetails"){
 			if(isset($_FILES['file'.$seq])){
 				//echo "indie--- ";
 				$path = $_SESSION['DB_NAME']."/".$_SESSION['company_id']."/candidates/".$_POST['candidate_id']."/Documents";
-				$compay_file = imageuploadwitharray($path,'file'.$seq,'','',$key);	
+				$compay_file = imageuploadwitharray($path,'file'.$seq,'','',$key);
 				$_POST['hidden_file'][$seq] = $compay_file;
 				//print_r($compay_file);
 			}
@@ -3401,7 +3401,7 @@ if($page =="insertcandidatedetails"){
 		foreach($_POST['institute_name'] as $seq=>$comname){
 			if(isset($_FILES['file'.$seq])){
 				$path = $_SESSION['DB_NAME']."/".$_SESSION['company_id']."/candidates/".$_POST['candidate_id']."/Documents";
-				$compay_file = imageuploadwitharray($path,'file'.$seq,'','',$key);	
+				$compay_file = imageuploadwitharray($path,'file'.$seq,'','',$key);
 				$_POST['hidden_qualification_file'][$seq] = $compay_file;
 			}
 		}
@@ -3410,7 +3410,7 @@ if($page =="insertcandidatedetails"){
 	$response = file_post_contents($url, $_POST, 'insert');
 	$response1 = json_decode($response,1);
 	print_r($response1);
-}	
+}
 if($page=="insertcandidatespopup"){
 		$File_Uploads_Path = "uploads/all/";
 		if($_FILES['file']['error'] != "4"){
@@ -3441,7 +3441,7 @@ if($page=="insertcandidatespopup"){
  //   $_POST['display_name'] = $_POST['first_name']." ".$_POST['last_name'];
  //      unset($_POST['page']);
  //      $_POST['created_date'] = nowDate();
- //      $_POST['created_by'] = $_SESSION['userid'];   
+ //      $_POST['created_by'] = $_SESSION['userid'];
  //      print_r($_POST);
  //      // $url = API."?mode=adddata&table=candidates&method=post";
  //      // $response = file_post_contents($url, $_POST, 'insert');
@@ -3453,7 +3453,7 @@ if($page=="insertcandidatespopup"){
  //      	$response2 = file_post_contents($url2, $_POST, 'insert');
  //      	$response2 = json_decode($response2,1);
  //      	print_r($response2);
-	//}	
+	//}
 	//echo json_encode($response1);
 }
 if($page=="assignecandidatejobpostingpopup"){
@@ -3476,14 +3476,14 @@ if($page =="updatetransactionactivityschedule"){
 	if($_FILES['file']['error'] != "4" AND isset($_FILES['file']['error'])){
 		$transaction_table = $_POST['transaction_table'] !=""?$_POST['transaction_table']:"candidates";
 	   	$path = $_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$transaction_table."/".$_POST['assigned_to']."/Documents";
-		$filename = imageuploadwitharray($path,'file'.$seq,'','',$key);	
+		$filename = imageuploadwitharray($path,'file'.$seq,'','',$key);
 		$_POST['attachment_file'] = $filename;
 	}else{
 		$_POST['attachment_file'] = $_POST['old_attachments'];
-	} 
+	}
 	$_POST['company_id'] = $_SESSION['company_id'];
 	$_POST['user_id'] = $_SESSION['userid'];
-	
+
 	$url = API."?mode=updatetransactionactivityschedule&method=post";
 	echo $response = file_post_contents($url, $_POST, 'insert');
 }
@@ -3491,7 +3491,7 @@ if($page == "getcandidateemailtemplate"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'template_reference_id'=>$_POST['temp_id']);
 	$wh1['field'] = "id,email_subject_to,email_content_to";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=email_content&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=email_content&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$json = $json[0];
@@ -3538,7 +3538,7 @@ if($page=="insertadittrails"){
 	$vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'id'=>$_POST['id']);
 	$vdata1["field"] = "id,time_zones";
 	$vdata = urlencode(json_encode($vdata1));
-	e$vurl = API."?mode=gettabledetailswithconditions&table=".$_POST['table_name']."&data=".$vdata; 
+	e$vurl = API."?mode=gettabledetailswithconditions&table=".$_POST['table_name']."&data=".$vdata;
 	$cudata = callAPI($vurl);
 	$timezones = json_decode($cudata['0']['time_zones'],1);
 	$str = "";
@@ -3548,29 +3548,29 @@ if($page=="insertadittrails"){
 	echo $str;
 }*/
 if($page =="getlocationpettycashtransaction"){
-	$url1 = API."?mode=pettycashdashboard&startdate=".$startdate."&enddate=".$enddate."&location_transaction=Y&location_id=".$_POST['loc_id']; 
+	$url1 = API."?mode=pettycashdashboard&startdate=".$startdate."&enddate=".$enddate."&location_transaction=Y&location_id=".$_POST['loc_id'];
 	$resultapi = callAPI($url1);
 	$result = json_decode($resultapi,1);
-	print_r($result);	
+	print_r($result);
 }
 if($page == "displayattributesfieldoptionlist"){
 	$option ="";
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'application_table_name'=>$_POST['transactiontablename']);
 	$wh1['field'] = "id,list_attributes";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=display_attributes&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=display_attributes&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$fieldlist =  json_decode($json[0]['list_attributes'],1);
 	$option = '<option value="">Select Any One</option>';
 	foreach($fieldlist as $feldname=>$listfield){
-		$option .="<option value='".$feldname."'>".$listfield['lable']."</option>"; 
+		$option .="<option value='".$feldname."'>".$listfield['lable']."</option>";
 	}
-	echo $option;	
+	echo $option;
 }
 if($page == "submitstatusdynamicworkflow"){
 
-	// $url1 = API."?mode=submitstatusdynamicworkflow&transaction_table=".$_POST['table_name']."&current_status=".$_POST['current_status']."&transaction_no=".$_POST['transaction_id']."&next_status=".$_POST['next_status']; 
+	// $url1 = API."?mode=submitstatusdynamicworkflow&transaction_table=".$_POST['table_name']."&current_status=".$_POST['current_status']."&transaction_no=".$_POST['transaction_id']."&next_status=".$_POST['next_status'];
 	// echo $resultapi = callAPI($url1);
 
 
@@ -3580,7 +3580,7 @@ if($page == "submitstatusdynamicworkflow"){
 	$_POST['company_id'] = $_SESSION['company_id'];
 	$url = API."?mode=submitstatusdynamicworkflow&method=post";
 	// echo "<pre>".$url ; print_r($_POST); exit;
-	
+
 	$response = file_post_contents($url, $_POST, 'update');
 	echo $response;
 
@@ -3618,7 +3618,7 @@ if($page=="updatestatusdynamicprojecttask"){
 	print_r($data);
 	$url = API."?mode=updatestatusdynamicprojecttask&method=post";
 	$response = file_post_contents($url, $data, 'Update');
-	echo $response;	
+	echo $response;
 }
 if($page=="insertprojecttaskdetails"){
 	$table_name = "project_task_details";
@@ -3633,7 +3633,7 @@ if($page=="insertprojecttaskdetails"){
 	unset($_POST['table_name']);
 	$url= API."?mode=toaddprojecttaskdetails&table=".$table_name."&method=post";
 	$return = file_post_contents($url, $_POST);
-	
+
 	if($table_name == "project_task_details"){
 		$res = json_decode($return,1);
 		$str = "";
@@ -3647,7 +3647,7 @@ if($page == 'updatedynamicfiedrojecttaskdetail'){
 	print_r($_POST);
 	$url = API."?mode=updatedynamicfiedrojecttaskdetail&method=post";
 	$response = file_post_contents($url, $_POST, 'Update');
-	echo $response;	
+	echo $response;
 }
 
 if($page == 'dynamiccheckqtyvalidation'){
@@ -3716,7 +3716,7 @@ if($page == 'fileattachupload'){
 	}*/
 }
 if($page == 'customunassignprjecttaskdetails'){
-	$curl = API."?mode=togetunassigntaskslist&project_id=".$_POST['project_id']; 
+	$curl = API."?mode=togetunassigntaskslist&project_id=".$_POST['project_id'];
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
 	$str = '';
@@ -3728,16 +3728,16 @@ if($page == 'customunassignprjecttaskdetails'){
 	echo $str;
 }
 if($page == 'tocheckprojectteamuncompletetasks'){
-	$curl = API."?mode=tocheckprojectteamuncompletetasks&rowid=".$_POST['rowid']; 
+	$curl = API."?mode=tocheckprojectteamuncompletetasks&rowid=".$_POST['rowid'];
 	$cudata = callAPI($curl);
-	$cudata = json_decode($cudata,1); 
+	$cudata = json_decode($cudata,1);
 	$msg = "Do you want to remove member from this project? There are ".$cudata['cc']." tasked assigned to this user";
 	echo $msg;
 }
 if($page == 'toaddupdatetheprojectteamdata'){
-	print_r($_POST); 
+	print_r($_POST);
 	$table_name = $_POST['table_name'];
-	$id = $_POST['id']; 
+	$id = $_POST['id'];
 	unset($_POST['table_name']);
 	unset($_POST['page']);
 	unset($_POST['id']);
@@ -3766,7 +3766,7 @@ if($page == 'toinsertupdateprojecttasktimlog'){
 	$_SESSION['project_task_log'] =	1;
 	$_SESSION['project_task_start'] = $post['starttime'];
 	$_SESSION['project_task_end'] =	$post['endtime'];
-	$curl = API."?mode=toinsertupdateprojecttasktimlog&rowid=".$_POST['rowid']; 
+	$curl = API."?mode=toinsertupdateprojecttasktimlog&rowid=".$_POST['rowid'];
 	$_POST['created_date'] = nowDate();
 	$_POST['is_active'] = 0;
 	$_POST['created_by'] = $_SESSION['userid'];
@@ -3781,14 +3781,14 @@ if($page == "getdynamicreftype"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'current_status'=>ST_APPROVED);
 	$wh1['field'] = "id,transaction_number";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=".$_POST['key']."&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=".$_POST['key']."&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$option = '<option value="">Select Any One</option>';
 	foreach($json as $listfield){
-		$option .="<option value='".$listfield['id']."'>".$listfield['transaction_number']."</option>"; 
+		$option .="<option value='".$listfield['id']."'>".$listfield['transaction_number']."</option>";
 	}
-	echo $option;	
+	echo $option;
 }
 
 if($page == 'toinsertthedataonitemquality'){
@@ -3799,7 +3799,7 @@ if($page == 'toinsertthedataonitemquality'){
 }
 if($page == 'currencyconversionrate'){
 	//print_r($_POST);
-	$url1 = API."?mode=currencyconversionrate&trandate=".$_POST['trandate']."&originator_currency_id=".$_POST['originator_currency_id']."&currency_id=".$_POST['currency_id']; 
+	$url1 = API."?mode=currencyconversionrate&trandate=".$_POST['trandate']."&originator_currency_id=".$_POST['originator_currency_id']."&currency_id=".$_POST['currency_id'];
 	$respons = callAPI($url1);
 	$result = json_decode($respons,1);
 	//print_r($result);
@@ -3815,7 +3815,7 @@ if($page == 'currencyconversionrate'){
 	echo json_encode($resultary);
 }
 if($page == "userandcurrencydetails"){
-	$url1 = API."?mode=userandcurrencydetails&selectuserid=".$_POST['user_id']."&currency_id=".$_POST['currency_id']."&trandate=".$_POST['trandate']; 
+	$url1 = API."?mode=userandcurrencydetails&selectuserid=".$_POST['user_id']."&currency_id=".$_POST['currency_id']."&trandate=".$_POST['trandate'];
 	$respons = callAPI($url1);
 	echo $respons;
 	//$result = json_decode($respons,1);
@@ -3825,7 +3825,7 @@ if($page == "checkhsncodegst"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'id'=>$_POST['values']);
 	$wh1['field'] = "id,gst";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=hsn_and_sac_codes&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=hsn_and_sac_codes&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	if($json[0]['gst'] !=""){
@@ -3839,18 +3839,18 @@ if($page == "gettransactionwarehouse"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'location_id'=>$_POST['id']);
 	$wh1['field'] = "id,warehouse_name";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=warehouses&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=warehouses&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$option = '<option value="">Select Any One</option>';
 	foreach($json as $locatio){
-		$option .="<option value='".$locatio['id']."'>".$locatio['warehouse_name']."</option>"; 
+		$option .="<option value='".$locatio['id']."'>".$locatio['warehouse_name']."</option>";
 	}
 
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'id'=>$_POST['id']);
 	$wh1['field'] = "id,location_state";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=locations&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=locations&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$loc = json_decode($data_details1,1);
 
@@ -3858,7 +3858,7 @@ if($page == "gettransactionwarehouse"){
 }
 if($page ==  "assigntaskschedule"){
 	$employee_id = $_POST['emp_id'];
-	$url = API."?mode=getemployeeonboardingtask&employee_id=".$employee_id."&taskassign=Y&submit=Y"; 
+	$url = API."?mode=getemployeeonboardingtask&employee_id=".$employee_id."&taskassign=Y&submit=Y";
 	$api = callAPI($url);
 	$result = json_decode($api,1);
 	print_r($result);
@@ -3925,12 +3925,12 @@ if($page=="insertassetverification"){
 }
 if($page=="getreimbursementdashboardchart"){
 	$roleshortcode = implode(",",(array)$_SESSION['role_ids']);
-	$url = API."?mode=getreimbursementdashboardchart&reimbursementsyear=".$_POST['reimbursementsyear']."&emp_id=".$_SESSION['emp_id']."&admin_type=".$_SESSION['admin_type']."&admin_access_employee=".$_SESSION['admin_access_employee']."&roleshortcode=".$roleshortcode."&paymentsdashboard=".$_POST['paymentsdashboard']; 
+	$url = API."?mode=getreimbursementdashboardchart&reimbursementsyear=".$_POST['reimbursementsyear']."&emp_id=".$_SESSION['emp_id']."&admin_type=".$_SESSION['admin_type']."&admin_access_employee=".$_SESSION['admin_access_employee']."&roleshortcode=".$roleshortcode."&paymentsdashboard=".$_POST['paymentsdashboard'];
 	echo $api = callAPI($url);
 }
 if($page=="getbillsstackdashboardchart"){
 	$roleshortcode = implode(",",(array)$_SESSION['role_ids']);
-	$url = API."?mode=getbillsstackdashboardchart&reimbursementsyear=".$_POST['reimbursementsyear']."&transaction_table=".$_POST['transaction_table']."&emp_id=".$_SESSION['emp_id']."&admin_type=".$_SESSION['admin_type']."&admin_access_employee=".$_SESSION['admin_access_employee']."&roleshortcode=".$roleshortcode; 
+	$url = API."?mode=getbillsstackdashboardchart&reimbursementsyear=".$_POST['reimbursementsyear']."&transaction_table=".$_POST['transaction_table']."&emp_id=".$_SESSION['emp_id']."&admin_type=".$_SESSION['admin_type']."&admin_access_employee=".$_SESSION['admin_access_employee']."&roleshortcode=".$roleshortcode;
 	echo $api = callAPI($url);
 }
 
@@ -3947,7 +3947,7 @@ if($page =="updateassetverificationstatus"){
 		}
 	}else{
 		$_POST['asset_img'] = $_POST['oldattachment'];
-	} 
+	}
 	$custom_field= array();
 	foreach($_POST['fieldname'] as $key=>$value){
 		$custom_field[$key]['fieldname'] = $value;
@@ -3965,7 +3965,7 @@ if($page=="getesopplansbucketsoption"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'id'=>$_POST['esop_plan_id']);
 	$wh1['field'] = "id,date_of_grant";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=esop_plans&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=esop_plans&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json1 = json_decode($data_details1,1);
 	$res = $json1[0];
@@ -3978,12 +3978,12 @@ if($page=="getesopplansbucketsoption"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'esop_plans_id'=>$_POST['esop_plan_id']);
 	$wh1['field'] = "id,bucket_name";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=esop_plan_buckets&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=esop_plan_buckets&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$option = '<option value="">Select Any One</option>';
 	foreach($json as $result){
-		$option .="<option value='".$result['id']."'>".$result['bucket_name']."</option>"; 
+		$option .="<option value='".$result['id']."'>".$result['bucket_name']."</option>";
 	}
 	$return['option'] = $option;
 	echo json_encode($return);
@@ -3992,7 +3992,7 @@ if($page=="getesopplansbuckets"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'id'=>$_POST['esop_bucket_id']);
 	//$wh1['field'] = "id,bucket_name";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=esop_plan_buckets&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=esop_plan_buckets&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$res = $json[0];
@@ -4048,7 +4048,7 @@ if($page=="getcompanycontributionusers"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'id'=>$_POST['id'],'user_type'=>$_POST['user_type']);
 	$wh1['field'] = "id,display_name,emp_code,date_of_joining,designation,annual_ctc,user_email,user_id,esop_connect";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=company_contribution_users&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=company_contribution_users&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$res = $json[0];
@@ -4111,14 +4111,14 @@ if($page == "selectchartofaccont"){
 	//if(count($groupaccountlist) =="0"){
 	  $checkall = "checked";
    // }
-	
+
 	foreach($cudata['chart_of_accounts_parent'] as $cudatas){
 		$alreadwork = "";
 		if(isset($alreadyused[$cudatas['account_code']])){
 		  $alreadwork = '<i class="ti-alert float-end  text-danger"></i>';
-		} 
+		}
 		$singlecheck = (isset($groupaccountlist[$cudatas['account_code']]))?"checked":"";
-		$list .='<div class="col-xl-12 mt-2"><h4 class="sub-title"><div class="checkbox-fade fade-in-primary"><label class="form-label" style="pointer-events: none;"><input type="checkbox" name="chart_of_account_code[]" value="'.$cudatas['account_code'].'" '.$checkall.' '.$singlecheck.' readonly><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>'.$cudatas['account_name'].'</label></div>'.$alreadwork.'</h4><ul>'; 
+		$list .='<div class="col-xl-12 mt-2"><h4 class="sub-title"><div class="checkbox-fade fade-in-primary"><label class="form-label" style="pointer-events: none;"><input type="checkbox" name="chart_of_account_code[]" value="'.$cudatas['account_code'].'" '.$checkall.' '.$singlecheck.' readonly><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>'.$cudatas['account_name'].'</label></div>'.$alreadwork.'</h4><ul>';
 		foreach($chilaccount[$cudatas['account_code']] as $chilaccounts){
 		  $alreadwork = "";
 		  if(isset($alreadyused[$chilaccounts['account_code']])){
@@ -4151,7 +4151,7 @@ if($page =="geteditnotes"){
 	$data1["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0','id'=>$_POST['id']);
   $data1["field"] = 'id,parent_id,note_number,note_name,description';
   $data = urlencode(json_encode($data1));
-  $curl = API."?mode=gettabledetailswithconditions&table=notes&data=".$data; 
+  $curl = API."?mode=gettabledetailswithconditions&table=notes&data=".$data;
   $cudata = callAPI($curl);
   $cudata = json_decode($cudata,1);
   $cudata = $cudata[0];
@@ -4182,7 +4182,7 @@ if($page == "getdepreciationtable"){
 				<td class="p-2 text-right"><input type="hidden" name="accumulated_depreciation[]" value="0">0</td>
 				<td class="text-right p-2"><input type="hidden" name="depreciation_price[]" value="'.$depn_rate.'">'.customeummarmonyformate($depn_rate).'</td>
 			</tr>';
-		
+
 	$depreciationprice = $depn_rate;
 	if($depreciation_method == 'SL'){
 		$peryeardeprciation = $depn_rate;
@@ -4200,7 +4200,7 @@ if($page == "getdepreciationtable"){
 				<td class="p-2 text-right"><input type="hidden" name="per_year_deprciation[]" value="'.$peryeardeprciation.'">'.customeummarmonyformate($peryeardeprciation).'</td>
 				<td class="p-2 text-right"><input type="hidden" name="accumulated_depreciation[]" value="'.$accumulateddep.'">'.customeummarmonyformate($accumulateddep).'</td>
 				<td class="text-right p-2"><input type="hidden" name="depreciation_price[]" value="'.$depreciationprice.'">'.customeummarmonyformate($depreciationprice).'</td>
-			</tr>';	
+			</tr>';
 			//echo $i." -- ".$depreciationdate." -- ".$depreciationprice." --- ";
 		}
 
@@ -4212,14 +4212,14 @@ if($page == "getdepreciationtable"){
 			$depreciationdate=date('Y-m-d', strtotime('+'.$i.' year', strtotime($capitalization_date)));
 			$peryearlessprice = (($depreciationprice/100)*$peryearpercentage)*2;
 			$depreciationprice = $depreciationprice -$peryearlessprice;
-			
+
 			$accumulateddep = $depn_rate-$depreciationprice;
 			$html .= '<tr><td class="p-2">'.$seq+$i.'</td>
 				<td class="p-2"><input type="hidden" name="depreciation_date[]" value="'.$depreciationdate.'">'.$depreciationdate.'</td>
 				<td class="p-2 text-right"><input type="hidden" name="per_year_deprciation[]" value="'.$peryearlessprice.'">'.customeummarmonyformate($peryearlessprice).'</td>
 				<td class="p-2 text-right"><input type="hidden" name="accumulated_depreciation[]" value="'.$accumulateddep.'">'.customeummarmonyformate($accumulateddep).'</td>
 				<td class="text-right p-2"><input type="hidden" name="depreciation_price[]" value="'.$depreciationprice.'">'.customeummarmonyformate($depreciationprice).'</td>
-			</tr>';	
+			</tr>';
 		}
 
 
@@ -4230,16 +4230,16 @@ if($page == "getdepreciationtable"){
 			$depreciationdate=date('Y-m-d', strtotime('+'.$i.' year', strtotime($capitalization_date)));
 			$peryearlessprice = (($depreciationprice/100)*$peryearpercentage);
 			$depreciationprice = $depreciationprice -$peryearlessprice;
-			
+
 			$accumulateddep = $depn_rate-$depreciationprice;
 			$html .= '<tr><td class="p-2">'.$seq+$i.'</td>
 				<td class="p-2"><input type="hidden" name="depreciation_date[]" value="'.$depreciationdate.'">'.$depreciationdate.'</td>
 				<td class="p-2 text-right"><input type="hidden" name="per_year_deprciation[]" value="'.$peryearlessprice.'">'.customeummarmonyformate($peryearlessprice).'</td>
 				<td class="p-2 text-right"><input type="hidden" name="accumulated_depreciation[]" value="'.$accumulateddep.'">'.customeummarmonyformate($accumulateddep).'</td>
 				<td class="text-right p-2"><input type="hidden" name="depreciation_price[]" value="'.$depreciationprice.'">'.customeummarmonyformate($depreciationprice).'</td>
-			</tr>';	
+			</tr>';
 		}
-	}	
+	}
 
 	$html .= '</tbody></table>';
 	$returnary['depreciation_table'] =$html;
@@ -4265,18 +4265,18 @@ if($page == "getpropertytypes"){
 	$data1["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0','parent_id'=>$_POST['property_type_id']);
 	$data1["field"] = 'id,property_type_name';
 	$data = urlencode(json_encode($data1));
-	$curl = API."?mode=gettabledetailswithconditions&table=property_types&data=".$data; 
+	$curl = API."?mode=gettabledetailswithconditions&table=property_types&data=".$data;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
 	$html = '';
 	$html .= '<option value="">Select Any One</option>';
-	foreach($cudata as $ppt){ 
-			$html .='<option value="'.$ppt['id'].'">'.$ppt['property_type_name'].'</option>'; 
-	 } 
+	foreach($cudata as $ppt){
+			$html .='<option value="'.$ppt['id'].'">'.$ppt['property_type_name'].'</option>';
+	 }
 	echo $html;
 }
 if($page == "getajaxpropertyownerdetails"){
-	$url1 = API."?mode=getajaxpropertyownerdetails&ownerid=".$_POST['ownerid'];  
+	$url1 = API."?mode=getajaxpropertyownerdetails&ownerid=".$_POST['ownerid'];
 	$data_details1 = callAPI($url1);
 	$result =  json_decode($data_details1,1);
 	$property_owner_details = $result['property_owner_details'];
@@ -4287,12 +4287,12 @@ if($page == "getajaxpropertyownerdetails"){
 	$html = '';
 	$html .= '<option value="">Select Any One</option>';
 	foreach($property_owner_details as $pod){
-		$html .='<option value="'.$pod['id'].'">'.$pod['property_name'].'</option>'; 
+		$html .='<option value="'.$pod['id'].'">'.$pod['property_name'].'</option>';
 	}
 	/**foreach($property_owner_details as $pod){
 		$html .= '<div class="col-lg-6">
 				<label class="form-label d-block f-w-600">'.$pod['property_name'].'</label>';
-		foreach($property_owner_detail_areas_ary[$pod['id']] as $poda){					
+		foreach($property_owner_detail_areas_ary[$pod['id']] as $poda){
 			$html .= '<div class="checkbox-fade fade-in-primary">
 						<label class="form-label">
 							<input type="checkbox" class="podalist" onchange="getPropertyOwnerDetailAreas()" value="'.$poda['id'].'">
@@ -4309,12 +4309,12 @@ if($page == "getajaxpropertyownerdetails"){
 
 }
 if($page == 'getajaxpropertyownerdetailareas'){
-	$url1 = API."?mode=getajaxpropertyownerdetails&rid=".$_POST['rid']."&ownerdetailid=".$_POST['ownerdetailid'];  
+	$url1 = API."?mode=getajaxpropertyownerdetails&rid=".$_POST['rid']."&ownerdetailid=".$_POST['ownerdetailid'];
 	$data_details1 = callAPI($url1);
 	$result =  json_decode($data_details1,1);
 	$property_owner_detail_areas = $result['property_owner_detail_areas'];
 	$html = '';
-	foreach($property_owner_detail_areas as $poda){					
+	foreach($property_owner_detail_areas as $poda){
 		$html .= '<div class="col-lg-4"><div class="checkbox-fade fade-in-primary">
 					<label class="form-label">
 						<input type="checkbox" class="podalist" onchange="getPropertyOwnerDetailAreas()" name="property_owner_area_ids[]" value="'.$poda['id'].'">
@@ -4328,7 +4328,7 @@ if($page == 'getajaxpropertyownerdetailareas'){
 	echo $html;
 }
 if($page == 'getajaxpropertyownerdetailareasselection'){
-	$url1 = API."?mode=getajaxpropertyownerdetails&rid=".$_POST['rid']."&ownerdetailareaid=".$_POST['ownerdetailareaid'];  
+	$url1 = API."?mode=getajaxpropertyownerdetails&rid=".$_POST['rid']."&ownerdetailareaid=".$_POST['ownerdetailareaid'];
 	$data_details1 = callAPI($url1);
 	$result =  json_decode($data_details1,1);
 	$property_owner_detail_areas = $result['property_owner_detail_areas'];
@@ -4352,7 +4352,7 @@ if($page == 'getajaxpropertyownerdetailareasselection'){
 								</tr></thead><tbody>';
 	foreach($property_owner_detail_areas as $poda){
 	$per_sq_ft_discount = 0;
-	$rent =  $poda['property_area']*$poda['per_sq_ft_rate']; 	
+	$rent =  $poda['property_area']*$poda['per_sq_ft_rate'];
 		if(isset($areaidpersqrent[$poda['id']])){
 			$per_sq_ft_discount = $areaidpersqrent[$poda['id']];
 			$rent = $areaidrent[$poda['id']];
@@ -4375,7 +4375,7 @@ if($page=='adddaystodate'){
 	echo fromDate($return);
 }
 if($page=='insertrentalinvoices'){
-	$url1 = API."?mode=insertrentalinvoices&rid=".$_POST['rid'];  
+	$url1 = API."?mode=insertrentalinvoices&rid=".$_POST['rid'];
 	$data_details1 = callAPI($url1);
 	$result =  json_decode($data_details1,1);
 	print_r($result);
@@ -4384,7 +4384,7 @@ if($page== "getcustomerdetails"){
 	$data1["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0','id'=>$_POST['custid']);
 	$data1["field"] = 'id,email,phone,display_name,billing_address,billing_post_code,company';
 	$data = urlencode(json_encode($data1));
-	$curl = API."?mode=gettabledetailswithconditions&table=customers&data=".$data; 
+	$curl = API."?mode=gettabledetailswithconditions&table=customers&data=".$data;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
 	$res = $cudata[0];
@@ -4393,7 +4393,7 @@ if($page== "getcustomerdetails"){
 }
 if($page=="getrentaldashboardchart"){
 	$roleshortcode = implode(",",(array)$_SESSION['role_ids']);
-	$url = API."?mode=getrentaldashboardchart&reimbursementsyear=".$_POST['reimbursementsyear']."&emp_id=".$_SESSION['emp_id']."&admin_type=".$_SESSION['admin_type']."&admin_access_employee=".$_SESSION['admin_access_employee']."&roleshortcode=".$roleshortcode; 
+	$url = API."?mode=getrentaldashboardchart&reimbursementsyear=".$_POST['reimbursementsyear']."&emp_id=".$_SESSION['emp_id']."&admin_type=".$_SESSION['admin_type']."&admin_access_employee=".$_SESSION['admin_access_employee']."&roleshortcode=".$roleshortcode;
 	echo $api = callAPI($url);
 }
 if($page=="updatepropertytenantbillings"){
@@ -4411,11 +4411,11 @@ if($page=="updatepropertytenantbillings"){
    	echo  json_encode($res);
 }
 if($page=="renatalinvoicesend"){
-	$url = API."?mode=renatalinvoicesend&property_tenant_billings_id=".$_POST['property_tenant_billings_id']."&bill_type=".$_POST['bill_type']; 
+	$url = API."?mode=renatalinvoicesend&property_tenant_billings_id=".$_POST['property_tenant_billings_id']."&bill_type=".$_POST['bill_type'];
 	echo $api = callAPI($url);
 }
 if($page=="addstationerycartqty"){
-	$url = API."?mode=addstationerycartqty&qty=".$_POST['qty']."&item_id=".$_POST['item_id']; 
+	$url = API."?mode=addstationerycartqty&qty=".$_POST['qty']."&item_id=".$_POST['item_id'];
 	$api = callAPI($url);
 	$json = json_decode($api,1);
 	echo $json['count_cart'];
@@ -4425,25 +4425,25 @@ if($page=="tocreateuserstationeryrequest"){
 	if($_POST['request_date'] =='undefined'){
 		$_POST['request_date'] = $_POST['require_date'];
 	}
-	$_POST['request_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['request_date']))); 
-	$_POST['require_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['require_date']))); 
+	$_POST['request_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['request_date'])));
+	$_POST['require_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['require_date'])));
 
 	// print_r($_POST); exit;
-	$url = API."?mode=tocreateuserstationeryrequest&deliver_type=".$_POST['deliver_type']."&qty=".$_POST['total_qty']."&request_date=".$_POST['request_date']."&require_date=".$_POST['require_date']."&building_id=".$_POST['building_id']."&building_floor_id=".$_POST['building_floor_id']."&building_floor_space_id=".$_POST['building_floor_space_id']."&location_id=".$_POST['location_id']."&st_emp_id=".$_POST['emp_id']."&st_current_status=".$_POST['st_current_status']."&other_name=".$_POST['other_name']; 
+	$url = API."?mode=tocreateuserstationeryrequest&deliver_type=".$_POST['deliver_type']."&qty=".$_POST['total_qty']."&request_date=".$_POST['request_date']."&require_date=".$_POST['require_date']."&building_id=".$_POST['building_id']."&building_floor_id=".$_POST['building_floor_id']."&building_floor_space_id=".$_POST['building_floor_space_id']."&location_id=".$_POST['location_id']."&st_emp_id=".$_POST['emp_id']."&st_current_status=".$_POST['st_current_status']."&other_name=".$_POST['other_name'];
 	$api = callAPI($url);
 	echo json_decode($api,1);
 }
 if($page=="addcouriers"){
-	 if(isset($_POST['courier_date'])){ 
-		$_POST['courier_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['courier_date']))); 
+	 if(isset($_POST['courier_date'])){
+		$_POST['courier_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['courier_date'])));
 	 }
 	 print_r($_POST);
 	$table_name = $_POST['table_name'];
-	$id = $_POST['id']; 
+	$id = $_POST['id'];
 	unset($_POST['table_name']);
 	unset($_POST['page']);
 	unset($_POST['id']);
-	
+
 	if($id==''){
 		$_POST['created_date'] = nowDate();
 		$_POST['is_active'] = 0;
@@ -4464,16 +4464,16 @@ if($page=="addcouriers"){
 }
 if($page=="toinserttranspordatarequest"){
 	print_r($_POST);
-	
-	if(isset($_POST['transport_date'])){ 
-		$_POST['transport_date'] = $_POST['transport_date']."-01"; 
+
+	if(isset($_POST['transport_date'])){
+		$_POST['transport_date'] = $_POST['transport_date']."-01";
 	 }
 	$table_name = $_POST['table_name'];
-	$id = $_POST['id']; 
+	$id = $_POST['id'];
 	unset($_POST['table_name']);
 	unset($_POST['page']);
 	unset($_POST['id']);
-	
+
 	if($id==''){
 		$_POST['created_date'] = nowDate();
 		$_POST['is_active'] = 0;
@@ -4492,9 +4492,9 @@ if($page=="toinserttranspordatarequest"){
 }
 
 if($page=="gettenantproperty"){
-	
 
-	$url1 = API."?mode=gettenantproperty&type=".$_POST['type']."&valu=".$_POST['valu']."&bill_type=".$_POST['bill_type'];  
+
+	$url1 = API."?mode=gettenantproperty&type=".$_POST['type']."&valu=".$_POST['valu']."&bill_type=".$_POST['bill_type'];
 	$data_details1 = callAPI($url1);
 	$result =  json_decode($data_details1,1);
 	$html = '';
@@ -4503,13 +4503,13 @@ if($page=="gettenantproperty"){
 	if($_POST['type'] == 'getcustid'){
 		$html .= '<option value="">Select Any One</option>';
 		foreach($property_tenant_details as $pod){
-			$html .='<option value="'.$pod['id'].'">'.$pod['value']."-".ucwords($pod['company_name'])." (".date("d-M-Y",strtotime($pod['rent_commencement_date'])).')</option>'; 
+			$html .='<option value="'.$pod['id'].'">'.$pod['value']."-".ucwords($pod['company_name'])." (".date("d-M-Y",strtotime($pod['rent_commencement_date'])).')</option>';
 		}
 	}elseif($_POST['type'] == 'getproperty_tenant_detail_id'){
 		$html .= '<option value="">Select Any One</option>';
 		foreach($property_tenant_details as $pod){
-			$html .='<option value="'.$pod['id'].'">'.date("d-M-Y",strtotime($pod['month_start_date'])).'</option>'; 
-			//$html .='<option value="'.$pod['id'].'">'.date("d-M-Y",strtotime($pod['month_start_date'])).' - '.customeummarmonyformate(($pod['total_amount']!='' || $pod['total_amount'] !=0)?$pod['total_amount']:0).'</option>'; 
+			$html .='<option value="'.$pod['id'].'">'.date("d-M-Y",strtotime($pod['month_start_date'])).'</option>';
+			//$html .='<option value="'.$pod['id'].'">'.date("d-M-Y",strtotime($pod['month_start_date'])).' - '.customeummarmonyformate(($pod['total_amount']!='' || $pod['total_amount'] !=0)?$pod['total_amount']:0).'</option>';
 		}
 	}elseif($_POST['type'] == 'getproperty_tenant_billings_id'){
 		$property_tenant_billing_id = $_POST['valu'];
@@ -4524,7 +4524,7 @@ if($page=="gettenantproperty"){
 			$due_date = $property_tenant_details['rent_due_date'];
 			$additional_notes = $property_tenant_details['rent_additional_notes'];
 		}
-		
+
 		$html .='<input type="hidden" name="property_tenant_billing_idd" id="property_tenant_billing_idd" value="'.$property_tenant_billing_id.'"><form method="post" id="form_id_new_'.$property_tenant_billing_id.'">';
 		$html .='<div class="row">';
 		$html .='<div class="col-lg-4"><label for="transaction_date" class="form-label d-block">Transaction Date</label><input type="text" class="datepicker form-control" id="transaction_date" name="transaction_date" value="'.fromDate($transaction_date).'"></div>';
@@ -4543,7 +4543,7 @@ if($page=="gettenantproperty"){
 					</thead>
 					<tbody>';
 						$html2 = '';
-						 $i=1;foreach($bill_detail as $bd){ 
+						 $i=1;foreach($bill_detail as $bd){
 						 	$redonlytext = $extrlebl = '';
 							if($bd['transaction_table']=='property_owner_detail_areas' OR $bd['utility_bill_auto_and_fix']=='F'){
 								$redonlytext = 'readonly';
@@ -4560,7 +4560,7 @@ if($page=="gettenantproperty"){
 								if($bd['condition'] =="="){  // only enter value this used
 									$html2 .='<td class="p-1" colspan="3">';
 									$html2 .='<input class="form-control text-right" type="number" name="rate[]" value="'.$bd['rate'].'" id="rentinvpopup_rate_'.$bd['poda_and_rbt_id'].'" onblur="rentalInvoicePopupCalculattion('.$bd['poda_and_rbt_id'].','.$bd['parent_id'].')">';
-									
+
 								//$html2 .='<input class="form-control text-right" type="number" name="qty[]" value="'.$bd['qty'].'" id="rentinvpopup_qty_'.$bd['poda_and_rbt_id'].'" onblur="rentalInvoicePopupCalculattion('.$bd['poda_and_rbt_id'].','.$bd['parent_id'].')">';
 									$html2 .='<input type="hidden" id="rentinvpopup_condition_'.$bd['poda_and_rbt_id'].'" value="'.$bd['condition'].'">';
 									$html2 .='<input type="hidden" name="qty[]" value="1" id="rentinvpopup_rate_'.$bd['poda_and_rbt_id'].'">';
@@ -4571,10 +4571,10 @@ if($page=="gettenantproperty"){
 									$html2 .='<td class="p-1" ><input class="form-control text-right" type="number" name="rate[]" value="'.$bd['rate'].'" id="rentinvpopup_rate_'.$bd['poda_and_rbt_id'].'" onblur="rentalInvoicePopupCalculattion('.$bd['poda_and_rbt_id'].','.$bd['parent_id'].')"></td>';
 								}
 								if($bd['rent'] !="" AND $bd['rent'] !="0"){
-									$rent =$bd['rent'];	
+									$rent =$bd['rent'];
 								}else{
-									$rent = calculateStringCalculation($bd['qty'].$bd['condition'].$bd['rate']);	
-								}	
+									$rent = calculateStringCalculation($bd['qty'].$bd['condition'].$bd['rate']);
+								}
 								$html2 .='<td class="p-1" ><input class="form-control text-right checkamountnotepmty_new_'.$property_tenant_billing_id.' rentinvpopup_child_rent_'.$bd['parent_id'].'" type="number" name="rent[]" value="'.round($rent).'" id="rentinvpopup_rent_'.$bd['poda_and_rbt_id'].'" readonly></td>';
 							}else{
 								$html2 .='<td class="p-1" colspan="4"><input type="hidden" name="qty[]"><input type="hidden" name="rate[]"><input class="form-control text-right checkamountnotepmty_new_'.$property_tenant_billing_id.'" type="number" name="rent[]" value="'.$bd['rent'].'" '.$redonlytext.' id="rentinvpopup_parent_rent_'.$bd['poda_and_rbt_id'].'"></td>';
@@ -4584,7 +4584,7 @@ if($page=="gettenantproperty"){
 								</td>';
 							$html2 .='</tr>';
 		 			 	$i++; }
-		 		$html .=$html2;	 	
+		 		$html .=$html2;
 		 		$html .='</tbody></table>';
 	}
 	echo $html;
@@ -4608,7 +4608,7 @@ if($page=="getassetcategorydetails"){
 	 $data1["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0','id'=>$_POST['category_id']);
 	  $data1["field"] = 'id,category_description,depreciation_account,disposal_account,Journal_id,duration,duration_type,default_depn_type';
 	  $data = urlencode(json_encode($data1));
-	  $curl = API."?mode=gettabledetailswithconditions&table=asset_categories&data=".$data; 
+	  $curl = API."?mode=gettabledetailswithconditions&table=asset_categories&data=".$data;
 	  $cudata = callAPI($curl);
 	  $cudata = json_decode($cudata,1);
 	  $cudata = $cudata[0];
@@ -4616,12 +4616,12 @@ if($page=="getassetcategorydetails"){
 	  //print_r($cudata);
 
 
-	
+
 	$depreciation_method = $cudata['default_depn_type'];
 	$duration = $cudata['duration'];
 	$capitalization_date = $_POST['capitalization_date'];
 	$depn_rate = $_POST['depn_rate'];
-	 
+
 	$end_of_life=date('Y-m-d', strtotime('+'.$duration.' year', strtotime($capitalization_date)));
 	$returnary['end_of_life'] =fromDate($end_of_life);
 	$seq = 1;
@@ -4640,7 +4640,7 @@ if($page=="getassetcategorydetails"){
 				<td class="p-2 text-right"><input type="hidden" name="accumulated_depreciation[]" value="0">0</td>
 				<td class="text-right p-2"><input type="hidden" name="depreciation_price[]" value="'.$depn_rate.'">'.customeummarmonyformate($depn_rate).'</td>
 			</tr>';
-		
+
 	$depreciationprice = $depn_rate;
 	if($depreciation_method == 'SL'){
 		$peryeardeprciation = $depn_rate;
@@ -4658,7 +4658,7 @@ if($page=="getassetcategorydetails"){
 				<td class="p-2 text-right"><input type="hidden" name="per_year_deprciation[]" value="'.$peryeardeprciation.'">'.customeummarmonyformate($peryeardeprciation).'</td>
 				<td class="p-2 text-right"><input type="hidden" name="accumulated_depreciation[]" value="'.$accumulateddep.'">'.customeummarmonyformate($accumulateddep).'</td>
 				<td class="text-right p-2"><input type="hidden" name="depreciation_price[]" value="'.$depreciationprice.'">'.customeummarmonyformate($depreciationprice).'</td>
-			</tr>';	
+			</tr>';
 			//echo $i." -- ".$depreciationdate." -- ".$depreciationprice." --- ";
 		}
 
@@ -4670,14 +4670,14 @@ if($page=="getassetcategorydetails"){
 		 	$depreciationdate=date('Y-m-d', strtotime('+'.$i.' year', strtotime($capitalization_date)));
 		 	$peryearlessprice = (($depreciationprice/100)*$peryearpercentage)*2;
 			$depreciationprice = $depreciationprice -$peryearlessprice;
-			
+
 			$accumulateddep = $depn_rate-$depreciationprice;
 			$html .= '<tr><td class="p-2">'.$seq+$i.'</td>
 				<td class="p-2"><input type="hidden" name="depreciation_date[]" value="'.$depreciationdate.'">'.fromDate($depreciationdate).'</td>
 				<td class="p-2 text-right"><input type="hidden" name="per_year_deprciation[]" value="'.$peryearlessprice.'">'.customeummarmonyformate($peryearlessprice).'</td>
 				<td class="p-2 text-right"><input type="hidden" name="accumulated_depreciation[]" value="'.$accumulateddep.'">'.customeummarmonyformate($accumulateddep).'</td>
 				<td class="text-right p-2"><input type="hidden" name="depreciation_price[]" value="'.$depreciationprice.'">'.customeummarmonyformate($depreciationprice).'</td>
-			</tr>';	
+			</tr>';
 		}
 
 
@@ -4688,16 +4688,16 @@ if($page=="getassetcategorydetails"){
 		 	$depreciationdate=date('Y-m-d', strtotime('+'.$i.' year', strtotime($capitalization_date)));
 		 	$peryearlessprice = (($depreciationprice/100)*$peryearpercentage);
 			$depreciationprice = $depreciationprice -$peryearlessprice;
-			
+
 			$accumulateddep = $depn_rate-$depreciationprice;
 			$html .= '<tr><td class="p-2">'.$seq+$i.'</td>
 				<td class="p-2"><input type="hidden" name="depreciation_date[]" value="'.$depreciationdate.'">'.fromDate($depreciationdate).'</td>
 				<td class="p-2 text-right"><input type="hidden" name="per_year_deprciation[]" value="'.$peryearlessprice.'">'.customeummarmonyformate($peryearlessprice).'</td>
 				<td class="p-2 text-right"><input type="hidden" name="accumulated_depreciation[]" value="'.$accumulateddep.'">'.customeummarmonyformate($accumulateddep).'</td>
 				<td class="text-right p-2"><input type="hidden" name="depreciation_price[]" value="'.$depreciationprice.'">'.customeummarmonyformate($depreciationprice).'</td>
-			</tr>';	
+			</tr>';
 		}
-	}	
+	}
 
 	$html .= '</tbody></table>';
 	$returnary['depreciation_table'] =$html;
@@ -4714,11 +4714,11 @@ if($page=="getpaymentterms"){
 	$data1["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0','id'=>$payment_term_id);
   	$data1["field"] = 'id, content';
   	$data = urlencode(json_encode($data1));
-  	$curl = API."?mode=gettabledetailswithconditions&table=payment_terms&data=".$data; 
+  	$curl = API."?mode=gettabledetailswithconditions&table=payment_terms&data=".$data;
   	$data = callAPI($curl);
   	$res = json_decode($data,1);
   	$result = $res[0];
-  	$content = json_decode(str_replace("'", '', urldecode($result['content'])),1); 
+  	$content = json_decode(str_replace("'", '', urldecode($result['content'])),1);
   	$due_days = 0;
   	$html = "";
   	$i=1;
@@ -4726,13 +4726,13 @@ if($page=="getpaymentterms"){
 	  	$html .= '<td colspan="2" class="p-2"><table class=" table table-bordered mb-0">';
 	  	foreach($content as $row){
 	  		if($row['due_type'] == "P"){
-	  			$duetypediscountamt = ($row['value'] / 100)*$grandtotal;	
+	  			$duetypediscountamt = ($row['value'] / 100)*$grandtotal;
 	  			$duesubtotal = ($row['value'] / 100)*$subtotal;
 	  			$duetaxamount = ($row['value'] / 100)*$taxamount;
 	  		}elseif($row['due_type'] == "F"){
-	  			$duetypediscountamt = $row['value'];	
+	  			$duetypediscountamt = $row['value'];
 	  		}elseif($row['due_type'] == "B"){
-	  			$duetypediscountamt = $remainingamt;	
+	  			$duetypediscountamt = $remainingamt;
 	  		}
 	  		$paymentamt = $paymentamt+$duetypediscountamt;
 	  		if($grandtotal < $paymentamt){
@@ -4753,12 +4753,12 @@ if($page=="getpaymentterms"){
 	  			$finalday = $days-$row['discount_day'];
 	  			$before_date = date('Y-m-d', strtotime($transaction_date.' + '.$finalday.' days'));
 	  			$discountamt = ($row['discount'] / 100)*$duetypediscountamt;
-	  			$discountwithamt = $duetypediscountamt-$discountamt;	
+	  			$discountwithamt = $duetypediscountamt-$discountamt;
 	  			$extradescount = "<spam class='d-block f-10 f-w-600'>Before Date ".fromDate($before_date)." (".customeummarmonyformate($discountwithamt).")  </span>";
 	  		}
 	  		$due_dates = date('Y-m-d', strtotime($transaction_date.' + '.$days.' days'));
 	  		$html .='<tr> <td class="p-2">'.fromDate($due_dates).'</td><td class="p-2 text-right">'.customeummarmonyformate($duetypediscountamt).' '.$extradescount;
-	  		
+
 	  		$html .='<input type="hidden" name="payment_term_history['.$i.'][due_date]" value="'.$due_dates.'">
 	  			<input type="hidden" name="payment_term_history['.$i.'][amount]" value="'.$duetypediscountamt.'">
 	  			<input type="hidden" name="payment_term_history['.$i.'][extra_date]" value="'.$before_date.'">
@@ -4766,21 +4766,21 @@ if($page=="getpaymentterms"){
 	  			<input type="hidden" name="payment_term_history['.$i.'][percentage]" value="'.$row['value'].'">
 	  			<input type="hidden" name="payment_term_history['.$i.'][without_tax_amount]" value="'.$duesubtotal.'">
 	  			<input type="hidden" name="payment_term_history['.$i.'][tax_amount]" value="'.$duetaxamount.'">';
-	  		$html .='</td></tr>';	
+	  		$html .='</td></tr>';
 
 	  $i++;	}
 	  	$html .='</table></td>';
-	} 	
+	}
 	$returnary['payment_terms'] = $html;
 	$due_date = date('Y-m-d', strtotime($transaction_date.' + '.$due_days.' days'));
 	$returnary['due_date'] = fromDate($due_date);
 	echo json_encode($returnary);
 }
 if($page=="searchcourierdata"){
-	
-	//$url1 = API."?mode=searchcourierdata&".$_POST['search']; 
+
+	//$url1 = API."?mode=searchcourierdata&".$_POST['search'];
 	$tb_in_courier = array('SL.NO','Date','From','To ','Courier Company','Courier Ref No' ,'In Time','Description','Qty', 'Invoice No', 'Tracking','Emp Receiver Name','Receiver Name');
-	$url1 = API."?mode=searchcourierdata&courier_type=".$_POST['courier_type']."&courier_ref_no=".$_POST['courier_ref_no']."&courier_company=".$_POST['courier_company']."&courier_user_id=".$_POST['courier_user_id']."&courier_date=".$_POST['courier_date']."&from_detail=".$_POST['from_detail']."&to_detail=".$_POST['to_detail']."&courier_to_date=".$_POST['courier_to_date']; 
+	$url1 = API."?mode=searchcourierdata&courier_type=".$_POST['courier_type']."&courier_ref_no=".$_POST['courier_ref_no']."&courier_company=".$_POST['courier_company']."&courier_user_id=".$_POST['courier_user_id']."&courier_date=".$_POST['courier_date']."&from_detail=".$_POST['from_detail']."&to_detail=".$_POST['to_detail']."&courier_to_date=".$_POST['courier_to_date'];
 	$data_details1 = callAPI($url1);
 	$data =  json_decode($data_details1,1);
 
@@ -4790,15 +4790,15 @@ if($page=="searchcourierdata"){
 	$html = '';
 	$html .='<table class="table table-framed">
 	 <thead>.';
-	 foreach($tb_in_courier as $th){ 
+	 foreach($tb_in_courier as $th){
         $html .='<th scope="col">'.$th.'</th>';
       }
       $html .='  <th scope="col"></th> </thead><tbody>';
 	if(count((array)$data['courier'])>0){
 	$csvData = array();
-	$sl=0; 
+	$sl=0;
 	foreach((array)$data['courier'] as $down){
-	$sl++; 
+	$sl++;
 	$csvData[] = array(
 		'SL.NO' => $sl,
 		'Date' => fromDate($down['courier_date']),
@@ -4837,7 +4837,7 @@ if($page=="searchcourierdata"){
 
     </tr>';
        // <td>'.$data['deliver_types'][$down['deliver_type']].'</td>
-	
+
 	}
 	$_SESSION['download_data'] = $csvData;
 	$_SESSION['csv_header']['company_name'] = $_SESSION['config']['name'] ?? '';
@@ -4851,9 +4851,9 @@ if($page=="searchcourierdata"){
 }
 
 if($page=="searchstationery"){
-	
-	//$url1 = API."?mode=searchcourierdata&".$_POST['search']; 
-	$url1 = API."?mode=searchstationerydata&request_date=".$_POST['request_date']."&require_date=".$_POST['require_date']."&stationery_request_ref_no=".$_POST['stationery_request_ref_no']."&stationery_user_id=".$_POST['stationery_user_id']; 
+
+	//$url1 = API."?mode=searchcourierdata&".$_POST['search'];
+	$url1 = API."?mode=searchstationerydata&request_date=".$_POST['request_date']."&require_date=".$_POST['require_date']."&stationery_request_ref_no=".$_POST['stationery_request_ref_no']."&stationery_user_id=".$_POST['stationery_user_id'];
 	$data_details1 = callAPI($url1);
 	$data =  json_decode($data_details1,1);
 	$html = '';
@@ -4862,11 +4862,11 @@ if($page=="searchstationery"){
 	if(count((array)$data['stationery_requests'])>0){
 	foreach((array)$data['stationery_requests'] as $down){
 	$request_no = "'".$down['request_no']."'";
-	
+
 	$html .='<tr><td width="10%" scope="row">';
 	if($data['emps'][$down['user_id']]['image']!=""){
 	$html .=' <a href=""><img  src="/uploads/all/'.$data['emps'][$down['user_id']]['image'].'" class="img-radius img-40" alt=""></a>';
-			}else{ 
+			}else{
 	$html .='<a href=""><span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  mt-1">'.initials($data['emps'][$down['user_id']]['display_name']).'</span></a>';
 		}
 	$html .='       </td>
@@ -5029,13 +5029,13 @@ if($page =="searchstationeryreport"){
 }
 if($page=='searchtransportbus'){
 
-	echo $url1 = API."?mode=searchtransportbus&pickup=".$_POST['pickup']."&droping=".$_POST['droping']."&pickdate=".$_POST['pickdate']; 
+	echo $url1 = API."?mode=searchtransportbus&pickup=".$_POST['pickup']."&droping=".$_POST['droping']."&pickdate=".$_POST['pickdate'];
 	$data_details1 = callAPI($url1);
 	$data =  json_decode($data_details1,1);
 	echo "--------------"; print_r($data); echo "***************";
 	$html = "";
 	if(count((array)$data['routes'])>0){
-		foreach((array)$data['routes'] as $route){ 
+		foreach((array)$data['routes'] as $route){
 	        $listroute[$route['id']] = $route;
 		    $html.= '<div class="card">
 		            <div class="card-body">
@@ -5070,17 +5070,17 @@ if($page=='searchtransportbus'){
 		            <input type="hidden" name="" id="view_location_'.$route['id'].'" value="1"> 
 		            <div class="card-body" style="display: none;" id="dis_location_'.$route['id'].'" >
 		                <div class="row col-lg-12">';
-		                    foreach((array)$data['transport_schedule'][$route['id']] as $transport_schedule){ 
+		                    foreach((array)$data['transport_schedule'][$route['id']] as $transport_schedule){
 		    $html.= '                 <div class="col-lg-4 p-2">'.$transport_schedule['stop_name'].' </div>
 		                        <div class="col-lg-2">
 		                            <button onclick="viewrequest('.$transport_schedule['id'].')" class="btn btn-info" style="font-size: 12px; padding: 5px;" > 
 		                            Request </button>
 		                        </div>';
-		                     } 
+		                     }
 		    $html.= '   </div>
 		            </div>
 		        </div>';
-	    } 
+	    }
     }else{
 		$html .=' 	<h6 class="text-center mt-3"> No Data Found</h6><img class="mw-100 " alt="" src="assets/images/work.png">';
 	}
@@ -5109,7 +5109,7 @@ if($page == "updatenormalizations"){
 	echo $return;
 }
 if($page=="getappraisalbellcurves"){
-	$curl = API."?mode=getappraisalbellcurves&rid=".$_POST['rid']; 
+	$curl = API."?mode=getappraisalbellcurves&rid=".$_POST['rid'];
 	$cudata = callAPI($curl);
 	$result = json_decode($cudata,1);
 	$appraisal_bell_curves = $result['appraisal_bell_curves'];
@@ -5122,13 +5122,13 @@ if($page=="getappraisalbellcurves"){
 	foreach($slabs as $slab){
 			$slabdetails =$slabdetail[$slab['appraisal_rating_slab_id']];
 			$html  .= '<span class="label label-lg label-inline f-w-700" style="background-color :'.$slabdetails['background_color'].'">'.$slabdetails['slabs_name']." - ".$slab['percentage'].'%</span>';
-	}	
-	echo $html;							
+	}
+	echo $html;
 }
 if($page=="assignemptofrom16a"){
-	echo $curl = API."?mode=assignemptofrom16a&list_id=".$_POST['list_id']."&assement=".$_POST['assement_year']."&month=".$_POST['month']."&empids=".implode(',',$_SESSION['document'][$_POST['assement_year']][$_POST['list_id']]); 
+	echo $curl = API."?mode=assignemptofrom16a&list_id=".$_POST['list_id']."&assement=".$_POST['assement_year']."&month=".$_POST['month']."&empids=".implode(',',$_SESSION['document'][$_POST['assement_year']][$_POST['list_id']]);
 	$cudata = callAPI($curl);
-	$result = json_decode($cudata,1);	
+	$result = json_decode($cudata,1);
 }
 if($page=="addsessiondocumenttypeyear"){
 	print_r($_POST['document']);
@@ -5141,12 +5141,12 @@ if($page=="addsessiondocumenttypeyear"){
 }
 if($page=="getpettycashtopupdashboardchart"){
 	$roleshortcode = implode(",",(array)$_SESSION['role_ids']);
-	$url = API."?mode=getpettycashtopupdashboardchart&reimbursementsyear=".$_POST['reimbursementsyear']."&emp_id=".$_SESSION['emp_id']."&admin_type=".$_SESSION['admin_type']."&admin_access_employee=".$_SESSION['admin_access_employee']."&roleshortcode=".$roleshortcode; 
+	$url = API."?mode=getpettycashtopupdashboardchart&reimbursementsyear=".$_POST['reimbursementsyear']."&emp_id=".$_SESSION['emp_id']."&admin_type=".$_SESSION['admin_type']."&admin_access_employee=".$_SESSION['admin_access_employee']."&roleshortcode=".$roleshortcode;
 	echo $api = callAPI($url);
 }
 if($page=="getpettycashdashboardchart"){
 	$roleshortcode = implode(",",(array)$_SESSION['role_ids']);
-	$url = API."?mode=getpettycashdashboardchart&reimbursementsyear=".$_POST['reimbursementsyear']."&emp_id=".$_SESSION['emp_id']."&admin_type=".$_SESSION['admin_type']."&admin_access_employee=".$_SESSION['admin_access_employee']."&roleshortcode=".$roleshortcode; 
+	$url = API."?mode=getpettycashdashboardchart&reimbursementsyear=".$_POST['reimbursementsyear']."&emp_id=".$_SESSION['emp_id']."&admin_type=".$_SESSION['admin_type']."&admin_access_employee=".$_SESSION['admin_access_employee']."&roleshortcode=".$roleshortcode;
 	echo $api = callAPI($url);
 }
 if($page=="insertpettycash"){
@@ -5175,7 +5175,7 @@ if($page == "getState"){
 	$result = json_decode($data_details1,1);
 	$option = '<option value="">Select Any One</option>';
 	foreach($result as $res){
-		$option .="<option value='".$res['id']."'>".$res['state_name']."</option>"; 
+		$option .="<option value='".$res['id']."'>".$res['state_name']."</option>";
 	}
 	echo $option;
 }
@@ -5188,7 +5188,7 @@ if($page == "getcity"){
 	$result = json_decode($data_details1,1);
 	$option = '<option value="">Select Any One</option>';
 	foreach($result as $res){
-		$option .="<option value='".$res['id']."'>".$res['city_name']."</option>"; 
+		$option .="<option value='".$res['id']."'>".$res['city_name']."</option>";
 	}
 	echo $option;
 }
@@ -5200,7 +5200,7 @@ if($page == "updatemodulestatus"){
 		$url = API."?mode=updaterowtabledata&fid=module_id&rid=".$_POST['module_id']."&table=module_setup&method=post";
 		$return = file_post_contents($url, $data, 'update');
 	}
-	$ptapi = API."?mode=getsetupdetails"; 
+	$ptapi = API."?mode=getsetupdetails";
 	$callptapi = callAPI($ptapi);
 	$result = json_decode($callptapi,1);
 	$modulelists =  $result['module_setup'];
@@ -5215,9 +5215,9 @@ if($page == "updatemodulestatus"){
 			$activemodule[$modulelist['module_id']] = $modulelist['module_id'];
 			$setuppa = json_decode($modulelist['setup_pages'],1);
 			if(count((array)$setuppa) !='0'){
-				$seqpageary = array_unique(array_merge($seqpageary,$setuppa));		
+				$seqpageary = array_unique(array_merge($seqpageary,$setuppa));
 			}
-		} 
+		}
 	}
 	sort($seqpageary);
 	$module_setup_linkings =  $result['module_setup_linkings'];
@@ -5231,9 +5231,9 @@ if($page == "updatemodulestatus"){
 			$setuppages[$setpage['parent_sequence']][] = $setpage;
 		}
 	}
-	$pagedetail = $setuppages[$seqpageary[0]][0];	
+	$pagedetail = $setuppages[$seqpageary[0]][0];
 	$firstnextseqstartnumber = $pagedetail['sequence'];
-	
+
 	//$nextseqstartnumber = $pagedetail['sequence'];
 	$previousseqnumber = "6";
 	$lastsetup_page_id = $_POST['nextpageseq'];
@@ -5275,7 +5275,7 @@ if($page=="submitsetup"){
 			}
 		}else{
 			$_POST['display_logo'] = $_POST['hid_image'];
-		} 
+		}
 	}
 	$_POST['company_id'] = $_SESSION['company_id'];
 	$_POST['user_id'] = $_SESSION['userid'];
@@ -5294,7 +5294,7 @@ if($page == "getaddmoresetupdepartment"){
 	$html ="";
 	$option = '<option value="">Select Any One</option>';
 	foreach($result as $res){
-		$option .="<option value='".$res['id']."'>".$res['division_name']."</option>"; 
+		$option .="<option value='".$res['id']."'>".$res['division_name']."</option>";
 	}
 	$html = '<div class="row mt-3" id="'.$_POST['rowid'].'"><div class="col-lg-6"><input type="text" class="form-control" name="department_name[]"></div><div class="col-lg-5"><select class="js-example-basic-single" name="division_id[]">'.$option.'</select></div><div class="col-lg-1 p-t-25"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeOrganizationSetup(\''.$_POST['rowid'].'\')"></i></div></div>';
 	echo $html;
@@ -5310,7 +5310,7 @@ if($page == "getaddmoresetupcostcenter"){
 	$html ="";
 	$option = '<option value="">Select Any One</option>';
 	foreach($result as $res){
-		$option .="<option value='".$res['id']."'>".$res['department_name']."</option>"; 
+		$option .="<option value='".$res['id']."'>".$res['department_name']."</option>";
 	}
 	$html = '<div class="row mt-3" id="'.$_POST['rowid'].'"><div class="col-lg-6"><input type="text" class="form-control" name="cost_center_name[]"></div><div class="col-lg-5"><select class="js-example-basic-single" name="department_id[]">'.$option.'</select></div><div class="col-lg-1 p-t-25"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeOrganizationSetup(\''.$_POST['rowid'].'\')"></i></div></div>';
 	echo $html;
@@ -5325,10 +5325,10 @@ if($page == "getaddmoresetupwarehouse"){
 	$html ="";
 	$option = '<option value="">Select Any One</option>';
 	foreach($result as $res){
-		$option .="<option value='".$res['id']."'>".$res['location_name']."</option>"; 
+		$option .="<option value='".$res['id']."'>".$res['location_name']."</option>";
 	}
 	$html = '<div class="row mt-3" id="'.$_POST['rowid'].'">';
-	
+
 	$html .= '<div class="col-lg-5"><input type="text" class="form-control" name="warehouse_name[]"></div>';
 	$html .= '<div class="col-lg-2"><input type="text" class="form-control" name="warehouse_short_name[]"></div>';
 	$html .= '<div class="col-lg-3"><select class="js-example-basic-single" name="location_id[]">'.$option.'</select></div>';
@@ -5337,7 +5337,7 @@ if($page == "getaddmoresetupwarehouse"){
 	echo $html;
 }
 if($page == "getaddmoresetupapplicationusers"){
-	$ptapi = API."?mode=getsetupdetails"; 
+	$ptapi = API."?mode=getsetupdetails";
 	$callptapi = callAPI($ptapi);
 	$result = json_decode($callptapi,1);
 	$module_setup =  $result['module_setup'];
@@ -5356,18 +5356,18 @@ if($page == "getaddmoresetupapplicationusers"){
 	$option = '';
 	foreach($roles as $key=>$rolesd){
         $option .='<optgroup label="'.$module[$key].'">';
-       	foreach($rolesd as $rolesr){ 
+       	foreach($rolesd as $rolesr){
         	$option .='<option value="'.$rolesr['role_short_code'].'">'.$rolesr['display_name'].'</option>';
         }
       	$option .='</optgroup>';
-     } 
+     }
     $errorkeyid =  "error_".$_POST['rowid'];
     $keyid =  "email_".$_POST['rowid'];
     $funclick = "checkdomainname('".$keyid."','email_id','".$errorkeyid."')";
 	$html = '<div class="row mt-3" id="'.$_POST['rowid'].'">';
-	
+
 	$html .= '<div class="col-lg-3"><input type="text" class="form-control" name="first_name[]"><input type="hidden" name="user_type[]" value="1"></div>';
-	
+
 	$html .= '<div class="col-lg-3"><input type="text" class="form-control" name="last_name[]"></div>';
 
 	$html .= '<div class="col-lg-5"><input type="text" class="form-control mb-2 allemails" data-errorcls="'.$errorkeyid.'" name="user_email[]" id="'.$keyid.'" onblur="'.$funclick.'"> <span class="text-danger f-12" id="'.$errorkeyid.'"  style="display:none">Email Id Already Register</span> <select class="form-control js-example-basic-single mt-2" name="role_id[]" required="" onblur="">'.$option.'</select></div>';
@@ -5392,12 +5392,12 @@ if($page == "checkdomainavailability"){
 		$wh1["where"] = array('is_active'=>'0',$_POST['field']=>$_POST['domain']);
 		$wh1['field'] = "id";
 		$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=".MAINDB.".domain_registrations&data_name=".MAINDB."&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=".MAINDB.".domain_registrations&data_name=".MAINDB."&data=".$data1;
 	}else{
 		$wh1["where"] = array('is_active'=>'0','user_email'=>$_POST['domain']);
 		$wh1['field'] = "id";
 		$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=".MAINDB.".user_registered_groups&data_name=".MAINDB."&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=".MAINDB.".user_registered_groups&data_name=".MAINDB."&data=".$data1;
 	}
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
@@ -5431,7 +5431,7 @@ if($page=="updatepropertytenantdetails"){
 }
 if($page=="getdatetorentalinvoices"){
 	$html = "";
-	$url1 = API."?mode=getpropertytenantdetails&un_lock_date=".$_POST['un_lock_date']."&rid=".$_POST['rid'];  
+	$url1 = API."?mode=getpropertytenantdetails&un_lock_date=".$_POST['un_lock_date']."&rid=".$_POST['rid'];
 	$data_details1 = callAPI($url1);
 	$result =  json_decode($data_details1,1);
 	$rental_invoices = $result['rental_invoices'];
@@ -5457,26 +5457,26 @@ if($page=="insertempshiftsdata"){
 	echo $return;
 }
 if($page=="newcandidateautoregistation"){
-	echo $curl = API."?mode=newcandidateautoregistation&candidate_id=".$_POST['candidate_id']; 
+	echo $curl = API."?mode=newcandidateautoregistation&candidate_id=".$_POST['candidate_id'];
 	$cudata = callAPI($curl);
-	$result = json_decode($cudata,1);	
+	$result = json_decode($cudata,1);
 }
 if($page=="savegenralcodedetails"){
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
 	//print_r($_POST);
 	//echo json_encode($_POST);
-    $curl = API."?mode=savegenralcodedetails&method=post"; 
+    $curl = API."?mode=savegenralcodedetails&method=post";
 	$response = file_post_contents($curl, $_POST);
 	echo $response; exit;
 }
 if($page=="gnrolepermision"){
-	$curl = API."?mode=gnrolepermision&code=".$_POST['code']."&role=".$_POST['role']; 
+	$curl = API."?mode=gnrolepermision&code=".$_POST['code']."&role=".$_POST['role'];
 	$cudata = callAPI($curl);
 	$result = json_decode($cudata,1);
 	echo $result['status']; exit;
-}	
-	
+}
+
 if($page=="submitcandidatedocuments"){
 	$path = $_SESSION['DB_NAME']."/".$_SESSION['company_id']."/candidates/".$_POST['candidate_id']."/Documents";
 	if($_FILES['document_file']['error'] != "4"){
@@ -5523,7 +5523,7 @@ if($page == "checkemailidallreadyavilableornot"){
 	$url = API."?mode=checkemailidallreadyavilableornot&method=post";
 	$return = file_post_contents($url, $_POST);
 	echo $return;
-}	
+}
 if($page == "checkcompanynameallreadyavilableornot"){
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
@@ -5541,7 +5541,7 @@ if($page == "createvendorregistertovendor"){
 	$apicall = callAPI($url);
 	$result = json_decode($apicall,1);
 	print_r($result);
-}		
+}
 if($page == "updateapplicationusers"){
 	if($_POST['formtype'] == 'application_users_form'){
 		$File_Uploads_Path = "uploads/all/";
@@ -5555,9 +5555,9 @@ if($page == "updateapplicationusers"){
 			}
 		}else{
 			$_POST['user_photo'] = $_POST['old_user_photo'];
-		} 
+		}
 	}elseif($_POST['formtype'] == "application_user_module_roles"){
-	}elseif($_POST['formtype'] == "remove_application_user_module_roles"){	
+	}elseif($_POST['formtype'] == "remove_application_user_module_roles"){
 	}
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
@@ -5574,7 +5574,7 @@ if($page == "insertbuildings"){
 		if($value!=""){
 			$floor_image = $_POST['old_floor_image'][$key];
 			if(isset($_FILES['file'.$key])){
-				$floor_image = imageuploadwitharray("building_floors",'file'.$key,'','',$key);	
+				$floor_image = imageuploadwitharray("building_floors",'file'.$key,'','',$key);
 			}
 			$listdata['floor_image'][]= $floor_image;
 			$listdata['floor_name'][] = $_POST['floor_name'][$key];
@@ -5605,7 +5605,7 @@ if($page == "insertbuildingfloorcabins"){
 	// 	if($value!=""){
 	// 		$floor_image = $_POST['old_floor_image'][$key];
 	// 		if(isset($_FILES['file'.$key])){
-	// 			$floor_image = imageuploadwitharray("building_floors",'file'.$key,'','',$key);	
+	// 			$floor_image = imageuploadwitharray("building_floors",'file'.$key,'','',$key);
 	// 		}
 	// 		$listdata['floor_image'][]= $floor_image;
 	// 		$listdata['floor_name'][] = $_POST['floor_name'][$key];
@@ -5625,7 +5625,7 @@ if($page == "getequipmenttypes"){
 	$data1["where"] = array('company_id'=> $_SESSION['company_id'],'equipment_category_id'=> $_POST['equipment_category_id'],'is_active'=>'0');
 	$data1["field"] = "id,equipment_types_name";
 	$data = urlencode(json_encode($data1));
-	$curl = API."?mode=gettabledetailswithconditions&table=equipment_types&data=".$data; 
+	$curl = API."?mode=gettabledetailswithconditions&table=equipment_types&data=".$data;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
 	$str = "<option value=''>Select Any One </option>";
@@ -5639,7 +5639,7 @@ if($page == "getequipments"){
 		$data1["where"] = array('company_id'=> $_SESSION['company_id'],'id'=> $_POST['equipment_id'],'is_active'=>'0');
 		$data1["field"] = "id,equipment_name,employee_seating";
 		$data = urlencode(json_encode($data1));
-		$curl = API."?mode=gettabledetailswithconditions&table=equipments&data=".$data; 
+		$curl = API."?mode=gettabledetailswithconditions&table=equipments&data=".$data;
 		$cudata = callAPI($curl);
 		$cudata = json_decode($cudata,1);
 		$cudata = $cudata[0];
@@ -5648,7 +5648,7 @@ if($page == "getequipments"){
 		$data1["where"] = array('company_id'=> $_SESSION['company_id'],'equipment_type_id'=> $_POST['equipment_type_id'],'is_active'=>'0');
 		$data1["field"] = "id,equipment_name";
 		$data = urlencode(json_encode($data1));
-		$curl = API."?mode=gettabledetailswithconditions&table=equipments&data=".$data; 
+		$curl = API."?mode=gettabledetailswithconditions&table=equipments&data=".$data;
 		$cudata = callAPI($curl);
 		$cudata = json_decode($cudata,1);
 		$str = "<option value=''>Select Any One </option>";
@@ -5692,7 +5692,7 @@ if($page == "gettransactionactivityschedulecheckList"){
 	$transaction_activity_schedule = $result['transaction_activity_schedule'];
 	//echo "<pre>"; print_r($transaction_activity_schedule); echo "</pre>";
 	$check_list = json_decode($transaction_activity_schedule['check_list'], 1);
-	$alldone = $requerdcnt =$mandatory = 0; 
+	$alldone = $requerdcnt =$mandatory = 0;
 	foreach($check_list as $check_lits){
 		if($check_lits['checklist_completed'] =='Y'){
 			$alldone++; // solve count
@@ -5704,10 +5704,10 @@ if($page == "gettransactionactivityschedulecheckList"){
 			$mandatory++; // all mandatory solve requerd
 		}
 	}
-	
+
 	$visibleclckstatus =array(ST_ACTIVE,ST_INPROGRESS,ST_SEND_BACK,ST_CALLBACK);
 	$custom_readonly = $error_message = '';
-	 
+
 	if($transaction_activity_schedule['assigned_to'] == $_SESSION['userid']){ //not approval message show
 		if(!in_array($transaction_activity_schedule['current_status'], $visibleclckstatus)){
 			$error_message = '<span class="text-danger"><i class="ti-alert"></i>'.$_SESSION['error_message']['9116'].'</span>';
@@ -5720,13 +5720,13 @@ if($page == "gettransactionactivityschedulecheckList"){
 	}else{
 		$error_message = '<span class="text-danger"><i class="ti-alert"></i>'.$_SESSION['error_message']['9115'].'</span>';
 		$custom_readonly = 'custom_readonly';
-	} 
+	}
 	$workflowsteps = getWorkflowStatus('transaction_activity_schedule',$transaction_activity_schedule['id'],$transaction_activity_schedule['current_status']);
 	//print_r($workflowsteps);
 	$workflow_btn = "";
 	$transaction_table = $transaction_activity_schedule['transaction_table'];
-	if($requerdcnt <= $alldone AND $mandatory == '0' AND ($transaction_activity_schedule['approval_user_id'] == $_SESSION['userid'] || ($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] AND $transaction_activity_schedule['current_status'] == ST_SEND_BACK AND ($transaction_table == 'employees' || $transaction_table == 'vendor_registers' || $transaction_table == 'vendors')) || ($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] AND $transaction_table != 'vendor_registers' AND $transaction_table != 'vendors' AND $transaction_table != 'employees'))){ 
-	//if($requerdcnt <= $alldone AND $mandatory == '0'){ 
+	if($requerdcnt <= $alldone AND $mandatory == '0' AND ($transaction_activity_schedule['approval_user_id'] == $_SESSION['userid'] || ($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] AND $transaction_activity_schedule['current_status'] == ST_SEND_BACK AND ($transaction_table == 'employees' || $transaction_table == 'vendor_registers' || $transaction_table == 'vendors')) || ($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] AND $transaction_table != 'vendor_registers' AND $transaction_table != 'vendors' AND $transaction_table != 'employees'))){
+	//if($requerdcnt <= $alldone AND $mandatory == '0'){
 		$workflow_btn = $workflowsteps['workflow_btn'];
 		//echo "statr workflow";
 	}else{
@@ -5734,60 +5734,60 @@ if($page == "gettransactionactivityschedulecheckList"){
 	}
 	$html .= '<div class="card">'.$workflowsteps['current_status_ribbon'];
 	$html .= '<div class="card-header"><h5>Declaration</h5><div class="card-header-right  table-card-header m-r-50">'.$workflow_btn.'</div></div>';
-	if($workflowsteps['breadcrumb'] !=""){ 
+	if($workflowsteps['breadcrumb'] !=""){
 		$html .= '<div class="">'.$workflowsteps['breadcrumb'].'</div>';
 	}else{
 		$html .= '<div class="mt-5"></div>';
 	}
 	$html .= '<div class="card-body custom-scroll" style="height: 500px;">';
-	
+
 	$html .= '<div >';
 	$html .= $error_message;
     $html .= '<table width="100%" class="table table-hover table-md">';
     $html .= '<tbody>';
-  	
-  	foreach($check_list as $positionkey=>$list){   
+
+  	foreach($check_list as $positionkey=>$list){
     	$checkboxcl=$classcheck="";
-    	if($list['checklist_completed']=="Y"){ 
-	      	$taskstatus++; 
+    	if($list['checklist_completed']=="Y"){
+	      	$taskstatus++;
 	      	$classcheck="check-task check-task done-task";
 	      	$checkboxcl = "checked disabled";
-	    } 
+	    }
 	    $html .= '<tr>';
 	    $onclickfunction = $extraparam = "";
 	   if($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] AND in_array($transaction_activity_schedule['current_status'], $visibleclckstatus)){
 	    	//$onclickfunction = 'onclick="getSingleCheckList('.$transaction_activity_schedule['id'].','.$positionkey.')"';
 	    	$onclickfunctionclass = 'getSingleCheckList';
 	    	$extraparam = "data-task_id='".$transaction_activity_schedule['id']."' data-positionkey='".$positionkey."'";
-	    	
+
 	    }
-	    $html .= '<td width="90%" class="w-b-w-s p-b-10 '.$custom_readonly.'"><div class="to-do-list"><div class="checkbox-fade fade-in-primary m-b-0" id="checklist_div_'.$transaction_activity_schedule['id'].'_'.$positionkey.'"><label class="mb-0 form-label check-task '.$onclickfunctionclass.'  '.$classcheck.'" '.$extraparam.' id="checklist_label_'.$transaction_activity_schedule['id'].'_'.$positionkey.'" '.$onclickfunction.'><input type="checkbox" value="" '.$checkboxcl.' class="" id="checklist_checkbox_'.$transaction_activity_schedule['id'].'_'.$positionkey.'"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary" ></i></span><span style="display: table;">'.$list['name']; 
-	    if($list['mandatory_checklist']=="Y"){ 
+	    $html .= '<td width="90%" class="w-b-w-s p-b-10 '.$custom_readonly.'"><div class="to-do-list"><div class="checkbox-fade fade-in-primary m-b-0" id="checklist_div_'.$transaction_activity_schedule['id'].'_'.$positionkey.'"><label class="mb-0 form-label check-task '.$onclickfunctionclass.'  '.$classcheck.'" '.$extraparam.' id="checklist_label_'.$transaction_activity_schedule['id'].'_'.$positionkey.'" '.$onclickfunction.'><input type="checkbox" value="" '.$checkboxcl.' class="" id="checklist_checkbox_'.$transaction_activity_schedule['id'].'_'.$positionkey.'"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary" ></i></span><span style="display: table;">'.$list['name'];
+	    if($list['mandatory_checklist']=="Y"){
 			$html .= '<span class="text-danger">*</span>';
-		} 
+		}
 		$html .= '</span></label>';
 
-		if($list['comment'] !=""){ 
+		if($list['comment'] !=""){
 			$html .= '<span class="d-block"><span class="ti-notepad"></span> &nbsp;'.$list['comment'].'</span>';
-	 	} 
-		$html .= '</div></div></td>'; 
+	 	}
+		$html .= '</div></div></td>';
 
 		$html .= '<td width="10%"><span class="float_end">';
-            if(trim($list['attachment_name']) !="" AND strlen($list['attachment_name']) !='0'){ 
+            if(trim($list['attachment_name']) !="" AND strlen($list['attachment_name']) !='0'){
              	$path = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$transaction_activity_schedule['transaction_table']."/".$transaction_activity_schedule['assigned_to']."/Documents/";
             	//$html .= '<a href="'.$path.$list['attachment_name'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download Attachment" download><i class="ti-cloud-down m-l-20"></i></a>';
             	$html .= '<a class="dynamicFilePriviews" data-pathurl="'.$path.$list['attachment_name'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Attachment"><i class="ti-eye"></i></a>';
-            	
-            } 
-             if(trim($list['downloadfile']) !="" AND strlen($list['downloadfile']) !='0'){ 
-              $html .= '<a href="uploads/all/'.$list['downloadfile'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download Document" download><i class="ti-exchange-vertical  m-l-20"></i></a>'; 
+
             }
-            if($tas['link_page'] == '0'){ 
+             if(trim($list['downloadfile']) !="" AND strlen($list['downloadfile']) !='0'){
+              $html .= '<a href="uploads/all/'.$list['downloadfile'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download Document" download><i class="ti-exchange-vertical  m-l-20"></i></a>';
+            }
+            if($tas['link_page'] == '0'){
             	$html .= '<a href="'.$tas['page_url'].'" target="_blank" class="text-primary UpdateTransactionActivitySchedule1" data-seqid="'.$tas['id'].'"><h6 class="mb-0 f-14" ><i class="ti-new-window"></i></h6></a>';
             }
            $html .= '</span></td>';
 	    $html .= '</tr>';
-    } 
+    }
 	$html .= '</tbody>';
 	$html .= '</table>';
 	$html .= '</div>';
@@ -5806,7 +5806,7 @@ if($page == 'gettransactionactivityschedulesinglechecklist'){
 	//print_r($file_upload);
 	$check_list = json_decode($transaction_activity_schedule['check_list'], 1);
 	$checklist_position_detail = $check_list[$_POST['checklist_position']];
-	
+
 	$fileaccetformat = implode(',',(array)$file_upload['accepted_files']);
 	$accepted_files =$accepted_file_message= "";
 	if($fileaccetformat !=""){
@@ -5829,30 +5829,30 @@ if($page == 'gettransactionactivityschedulesinglechecklist'){
 		$stylcss = "display:none";
 		if($checklist_position_detail['attachment_requerd']=='Y'){
 			$stylcss = "display:block";
-		}  
+		}
 		//
 
-	
+
 
 	$html .= '<div class="col-lg-10  form-group" style="'.$stylcss.'">
 			<label for="popupfile" class="form-label">Attchements<span class="text-danger">*</span></label>
 			<span class="fileinputvalidation_error text-danger d-block"></span>
 			<input class="form-control mb-2 fileinputvalidation" id="popupfile" type="file" '.$accepted_files.' data-size="'.$file_upload['file_size'].'"><input class="form-control" type="hidden" value="'.$checklist_position_detail['attachment_name'].'" name="old_attachments" id="old_attachments">';
-	
+
 	$html .= '<span class="text-danger d-block f-12">'.$accepted_file_message.'</span>';
 
 	$html .= '</div><div class="col-lg-2"><span class="form-label d-block">File</span>';
-	if(trim($checklist_position_detail['attachment_name']) !="" AND strlen($checklist_position_detail['attachment_name']) !='0'){ 
+	if(trim($checklist_position_detail['attachment_name']) !="" AND strlen($checklist_position_detail['attachment_name']) !='0'){
      	$path = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$transaction_activity_schedule['transaction_table']."/".$transaction_activity_schedule['assigned_to']."/Documents/";
     	//$html .= '<a href="'.$path.$checklist_position_detail['attachment_name'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Old Attachments Download" class=" text-primary" download><i class="ti-cloud-down"></i> &nbsp; Old Attachment Download</a>';
     	$html .= '<a class="dynamicFilePriviews" data-pathurl="'.$path.$checklist_position_detail['attachment_name'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Old Attachments Preview"><i class="ti-eye"></i></a>';
     }else{
     	$html .= ' - ';
-    } 
-	if(trim($checklist_position_detail['downloadfile']) !="" AND strlen($checklist_position_detail['downloadfile']) !='0'){ 
-	    $html .= '<a href="uploads/all/'.$checklist_position_detail['downloadfile'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download Document" download><i class="ti-exchange-vertical m-l-10"></i></a>'; 
+    }
+	if(trim($checklist_position_detail['downloadfile']) !="" AND strlen($checklist_position_detail['downloadfile']) !='0'){
+	    $html .= '<a href="uploads/all/'.$checklist_position_detail['downloadfile'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download Document" download><i class="ti-exchange-vertical m-l-10"></i></a>';
 	}
-	
+
 	$html .= '</div></div>';
 
 	$html .= '<input type="hidden" name="attachment_type" id="attachment_type" value="'.$check_list[$_POST['checklist_position']]['attachment_requerd'].'">
@@ -5893,14 +5893,14 @@ if($page == 'addupdatequestionfeddback'){
     }
     if($_POST['question_type']==2){
     	$str.='<div class="rating f-12 text-warning mt-2 d-inline-block">';
-     	for($n=1;$n<=$_POST['question_option']['2']['0'];$n++){ 
-          $str.='<i class="fa fa-star f-16 text-warning" ></i>';                  
+     	for($n=1;$n<=$_POST['question_option']['2']['0'];$n++){
+          $str.='<i class="fa fa-star f-16 text-warning" ></i>';
        	}
     	$str.='</div>';
     }
     if($_POST['question_type']==3){
     	$str.='<div class="">';
-	    foreach ($_POST['question_option']['3'] as $option){ 
+	    foreach ($_POST['question_option']['3'] as $option){
 	    	$str.='<b> 
 	        <div class="radio-group required float-left ml-2">
 	            <input type="radio" value="" name="response" >
@@ -5910,7 +5910,7 @@ if($page == 'addupdatequestionfeddback'){
 		}
 	}
     $str.='</div>';
-    	
+
 	if($_POST['question_id']==""){ $str.= '</div>'; }
 	echo $str;
 }
@@ -5938,7 +5938,7 @@ if($page == "intertequipments"){
 }
 
 if($page == "getremaingequipmentslist"){
-	$url = API."?mode=getequipmentallocations&pagetype=getremaingequipmentslist&equipment_type_id=".$_POST['equipment_type_id']; 
+	$url = API."?mode=getequipmentallocations&pagetype=getremaingequipmentslist&equipment_type_id=".$_POST['equipment_type_id'];
 	$response = callAPI($url);
 	$result = json_decode($response,1);
 	$equipments_list = $result['equipments_list'];
@@ -5952,7 +5952,7 @@ if($page == "getequipmenttypespopup"){
 	$data1["where"] = array('company_id'=> $_SESSION['company_id'],'equipment_category_id'=> $_POST['equipment_category_id'],'is_active'=>'0');
 	$data1["field"] = "id, equipment_types_name, seating_equipment";
 	$data = urlencode(json_encode($data1));
-	$curl = API."?mode=gettabledetailswithconditions&table=equipment_types&data=".$data; 
+	$curl = API."?mode=gettabledetailswithconditions&table=equipment_types&data=".$data;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
 	$str = "<option value=''>Select Any One </option>";
@@ -6007,7 +6007,7 @@ if($page == "getemployeeemailidalreadyavailableornot"){
 	$wh1["where"] = array('is_active'=>'0','email_id'=>$_POST['email_id']);
 	$wh1['field'] = "id";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=employees&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=employees&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$json = $json[0];
@@ -6047,7 +6047,7 @@ if($page == "insertapplicationtickets"){
 		}
 	}else{
 		//$_POST['attachment'] = $_POST['oldattachment'];
-	} 
+	}
 	$_POST['company_id']=$_SESSION['company_id'];
 	$_POST['user_id']=$_SESSION['userid'];
 	$url = API."?mode=insertapplicationtickets&method=post";
@@ -6071,7 +6071,7 @@ if($page == "checkvendorinstructions"){
 	echo $return = file_post_contents($url, $data, 'update');
 }
 if($page == "getitemsorders"){
-	$url = API."?mode=getitemsorders&item_id=".$_POST['item_id']."&table_name=".$_POST['table_name']; 
+	$url = API."?mode=getitemsorders&item_id=".$_POST['item_id']."&table_name=".$_POST['table_name'];
 	$response = callAPI($url);
 	$result = json_decode($response,1);
 	$transactions = $result['res'];
@@ -6082,11 +6082,11 @@ if($page == "getitemsorders"){
                 <i class="ti-close" onclick="closePreviousOrder()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed"></i>
             </div>
         </div>';**/
-    $str = '<div class="modal-header"><h4 class="modal-title">Item History</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>';    
+    $str = '<div class="modal-header"><h4 class="modal-title">Item History</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>';
     $str .= '<div class="modal-body">';
     if(count((array)$transactions) != 0){
 	    $str .='<table class=" table table-hover ">';
-	    $str .= '<tr><th scope="col">Trans. No.</th><th scope="col">Party</th><th scope="col">Date</th><th scope="col">Qty</th><th scope="col">Price</th><th scope="col">Amount</th></tr>';  
+	    $str .= '<tr><th scope="col">Trans. No.</th><th scope="col">Party</th><th scope="col">Date</th><th scope="col">Qty</th><th scope="col">Price</th><th scope="col">Amount</th></tr>';
 		foreach ($transactions as  $trns){
 	       $str .= '<tr>
 	            <td class="p-2"><a href="index?option='.$_POST['option'].'&Rid='.deocdeId("id:".$trns['id']).'" target="_blank" class="text-primary">'.$trns['transaction_number'].'</a></td>
@@ -6135,7 +6135,7 @@ if($page == "getpropertyownerdetails"){
 	$data1["where"] = array('company_id'=> $_SESSION['company_id'],'property_owner_id'=> $_POST['property_owner_id'],'is_active'=>'0');
 	$data1["field"] = "id, property_name";
 	$data = urlencode(json_encode($data1));
-	$curl = API."?mode=gettabledetailswithconditions&table=property_owner_details&data=".$data; 
+	$curl = API."?mode=gettabledetailswithconditions&table=property_owner_details&data=".$data;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
 	$str = "<option value=''>All Property</option>";
@@ -6147,7 +6147,7 @@ if($page == "getpropertyownerdetails"){
 if($page == "projecttimesheetmontly"){
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
-	//print_r($_POST); 
+	//print_r($_POST);
 	$url = API."?mode=addupdateprojecttimesheetmontly&method=post";
 	$response = file_post_contents($url, $_POST, 'insert');
 	echo $response;
@@ -6180,7 +6180,7 @@ if($page == "updateemployees"){
 		foreach ($_POST['old_work_experience_attachment'] as $key=>$value){
 			$file = $value;
 			if(isset($_FILES['file'.$key]['error'])){
-				$file = imageuploadwitharray("all",'file'.$key,'','',$key);	
+				$file = imageuploadwitharray("all",'file'.$key,'','',$key);
 			}
 			$_POST['we_attachment'][]= $file;
 		}
@@ -6188,7 +6188,7 @@ if($page == "updateemployees"){
 		foreach ($_POST['old_educations_attachment'] as $key=>$value){
 			$file = $value;
 			if(isset($_FILES['file'.$key]['error'])){
-				$file = imageuploadwitharray("all",'file'.$key,'','',$key);	
+				$file = imageuploadwitharray("all",'file'.$key,'','',$key);
 			}
 			$_POST['we_attachment'][]= $file;
 		}
@@ -6267,13 +6267,13 @@ if($page == "updateemployees"){
 	$url = API."?mode=updateemployees&method=post";
 	$response = file_post_contents($url, $_POST, 'insert');
 	echo $response;
-	
+
 }
 if($page == "getselectskills"){
 	$wh1["where"] = array('is_active'=>'0','id'=>$_POST['skill_id']);
 	$wh1['field'] = "max_ratting";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=skills&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=skills&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$result = json_decode($data_details1,1);
 	$max_ratting = ($result[0]['max_ratting'] !="" || $result[0]['max_ratting'] !="0")?$result[0]['max_ratting']:10;
@@ -6281,7 +6281,7 @@ if($page == "getselectskills"){
 	for($i=1; $i <= $max_ratting; $i++){
 		$str.= "<option value = '".$i."'>".$i."</option>";
 	}
-	echo $str;	
+	echo $str;
 }
 if($page == "insertempbanks"){
 	$_POST['user_id'] = $_SESSION['userid'];
@@ -6311,7 +6311,7 @@ if($page == "userpasswordreset"){
 	echo $response;
 }
 if($page == "getemployeelistwithbuildingdetailfilter"){
-	$url = API."?mode=getequipmentallocations&pagetype=getemployeelistwithbuildingdetailfilter&value=".$_POST['value']; 
+	$url = API."?mode=getequipmentallocations&pagetype=getemployeelistwithbuildingdetailfilter&value=".$_POST['value'];
 	$response = callAPI($url);
 	$result = json_decode($response,1);
 	$employee_fillter = $result['employee_fillter'];
@@ -6325,7 +6325,7 @@ if($page == "getemployeelistwithbuildingdetailfilter"){
 	        	$str.= '<img src="uploads/all/'.$emplist['image'].'"   class="img-30 align-middle m-r-15 seating_emp_image" onerror="this.src='.$no_image.';">';
 			}else{
 	        	$str.= '<span  alt="user image" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" >'.initials($emplist['display_name']).'</span>';
-	        } 
+	        }
 	        $str.= '<div class="d-inline-block align-middle">';
 	       	$str.= '<p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;">'.$emplist['display_name'];
 	       	$str.= '</p>';
@@ -6336,7 +6336,7 @@ if($page == "getemployeelistwithbuildingdetailfilter"){
 	       	}else{
 	       		$str.= '<span class="f-10 mb-0 text-danger float-end mr-5"><i class="ti-alert"></i>  Unknown location</span>';
 	       	}
-			$str.= '</div>'; 
+			$str.= '</div>';
 		}
 	}else{
 		$str.= '<div class="card-px text-center py-20 m-t-30">
@@ -6352,7 +6352,7 @@ if($page == "getgrnitems"){
 	$wh1["where"] = array('is_active'=>'0','id'=>$_POST['grn_id']);
 	$wh1['field'] = "id, doc_ref_no, doc_ref_date, transaction_number, transaction_date";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=goods_receipt_notes&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=goods_receipt_notes&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$mainresult = json_decode($data_details1,1);
 	$mainresult = $mainresult[0];
@@ -6360,7 +6360,7 @@ if($page == "getgrnitems"){
 	$wh1["where"] = array('is_active'=>'0','transaction_id'=>$_POST['grn_id']);
 	$wh1['field'] = "id, item_id, invoice_item_quantity, item_quantity";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=grn_items&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=grn_items&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$result = json_decode($data_details1,1);
 	$result_cnt = count((array)$result);
@@ -6371,7 +6371,7 @@ if($page == "getdeliveryorderitems"){
 	$wh1["where"] = array('is_active'=>'0','id'=>$_POST['grn_id']);
 	$wh1['field'] = "id, doc_ref_no, doc_ref_date, transaction_number, transaction_date";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=delivery_orders&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=delivery_orders&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$mainresult = json_decode($data_details1,1);
 	$mainresult = $mainresult[0];
@@ -6379,7 +6379,7 @@ if($page == "getdeliveryorderitems"){
 	$wh1["where"] = array('is_active'=>'0','transaction_id'=>$_POST['grn_id']);
 	$wh1['field'] = "id, item_id, invoice_item_quantity, item_quantity";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=do_items&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=do_items&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$result = json_decode($data_details1,1);
 	$result_cnt = count((array)$result);
@@ -6399,7 +6399,7 @@ if($page == "getpendingadvanecepayments"){
 	$wh1["where"] = array('is_active'=>'0','id'=>$ref_id);
 	$wh1['field'] = "id, advance_payment, pending_advance_payment";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=".$ref_table."&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=".$ref_table."&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$result = json_decode($data_details1,1);
 	$result2 = $result[0];
@@ -6412,7 +6412,7 @@ if($page == "getchildchartofaccount"){
 	$wh1["where"] = array('is_active'=>'0','parent_account_code'=>$accountno);
 	$wh1['field'] = "id,account_name,account_code,parent_account_code";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=chart_of_accounts&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=chart_of_accounts&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$result = json_decode($data_details1,1);
 	$result_cnt = count((array)$result);
@@ -6435,7 +6435,7 @@ if($page == "getdebitcreditnotereftypelist"){
 	$wh1["where"] = array('cancel_invoice'=>'N','is_active'=>'0','current_status'=>ST_APPROVED);
 	$wh1['field'] = "id,transaction_number,transaction_date";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=".$ref_type."&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=".$ref_type."&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$result = json_decode($data_details1,1);
 	$result_cnt = count((array)$result);
@@ -6448,16 +6448,16 @@ if($page == "getdebitcreditnotereftypelist"){
 }
 
 if($page=="emailinvoicesend"){
-	$url = API."?mode=emailinvoicesend&transaction_id=".$_POST['transaction_id']."&transaction_table=".$_POST['transaction_table']."&template_reference_id=".$_POST['template_reference_id']; 
+	$url = API."?mode=emailinvoicesend&transaction_id=".$_POST['transaction_id']."&transaction_table=".$_POST['transaction_table']."&template_reference_id=".$_POST['template_reference_id'];
 	echo $api = callAPI($url);
 }
 if($page == "approvedapaceallocationsstatus"){
-	$url = API."?mode=approvedapaceallocationsstatus&building_floor_space_allocation_id=".$_POST['building_floor_space_allocation_id']; 
+	$url = API."?mode=approvedapaceallocationsstatus&building_floor_space_allocation_id=".$_POST['building_floor_space_allocation_id'];
 	echo $api = callAPI($url);
 
 }
 if($page == "getenquiryvendororcustomer"){
-	$url = API."?mode=getenquiryvendororcustomer&value=".$_POST['value']."&searchvendorcustomertype=".$_POST['searchvendorcustomertype']; 
+	$url = API."?mode=getenquiryvendororcustomer&value=".$_POST['value']."&searchvendorcustomertype=".$_POST['searchvendorcustomertype'];
 	$response = callAPI($url);
 	$result = json_decode($response,1);
 	$search_result = $result['search_result'];
@@ -6471,7 +6471,7 @@ if($page == "getenquiryvendororcustomer"){
 	        	$str.= '<img src="uploads/all/'.$vencust['image'].'"   class="img-30 align-middle m-r-15 seating_emp_image" onerror="this.src='.$no_image.';">';
 			}else{
 	        	$str.= '<span  alt="user image" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" >'.initials($vencust['company']).'</span>';
-	        } 
+	        }
 	        $str.= '<div class="d-inline-block align-middle">';
 	       	$str.= '<p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;">'.$vencust['company'].' - '.$vencust['display_name'];
 	       	$str.= '</p>';
@@ -6480,7 +6480,7 @@ if($page == "getenquiryvendororcustomer"){
 
 	       	$str.= '<span class="f-10 mb-0 float-end text-primary cursor-pointer mr-5" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Click To Open Details" onclick="getEnquiryVendororCustomerPartyDetailspopup('.$vencust['id'].',\''.$_POST['searchvendorcustomertype'].'\')"><i class="ti-eye"></i> View</span>';
 
-			$str.= '</div>'; 
+			$str.= '</div>';
 		}
 	}else{
 		$str.= '<div class="card-px text-center py-20 m-t-30">
@@ -6541,7 +6541,7 @@ if($page=="getdisplayattributesfieldslist"){
 	$wh1["where"] = array('is_active'=>0,'company_id'=>$_SESSION['company_id'],'application_table_name'=>$_POST['table_name']);
 	$wh1["field"] = "id,list_attributes";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=display_attributes&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=display_attributes&data=".$data1;
 	$pagenamesapi = callAPI($url1);
 	$pagenamesrow = json_decode($pagenamesapi,1);
 	$listfields = json_decode($pagenamesrow[0]['list_attributes'],1);
@@ -6559,13 +6559,13 @@ if($page == "checkapidatavalidateornot"){
 	$result = json_decode($response,1);
 	//echo "<pre>"; print_r($result); echo "</pre>";
 	$api_hits = $result['api_hits'];
-	//$api_hits_response_details123 = json_decode($api_hits['api_response_details'],1); 
+	//$api_hits_response_details123 = json_decode($api_hits['api_response_details'],1);
 	$api_hits_response_details = $result['result'];
-	
+
 		//print_r($api_hits_response_details);
 	$api_masters = $result['api_masters'];
 	$api_code = $api_masters['api_code'];
-	$api_masters_response_details = json_decode($api_masters['api_response_details'],1); 
+	$api_masters_response_details = json_decode($api_masters['api_response_details'],1);
 
 	$result_cnt = count((array)$result['result']);
 	$html_res = "";
@@ -6576,13 +6576,13 @@ if($page == "checkapidatavalidateornot"){
 
 
 
-			$html_res .= '<table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc" id="htmlajaxapihits"><tr><th scope="col"></th><th scope="col">Transaction No.</th><th scope="col">Transaction Date</th><th scope="col" class="text-right">Total</th><th scope="col" >Required*</th><th scope="col">Status</th></tr>'; 
-			foreach($result['result'] as $trans_id=>$tableslist){ 
+			$html_res .= '<table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc" id="htmlajaxapihits"><tr><th scope="col"></th><th scope="col">Transaction No.</th><th scope="col">Transaction Date</th><th scope="col" class="text-right">Total</th><th scope="col" >Required*</th><th scope="col">Status</th></tr>';
+			foreach($result['result'] as $trans_id=>$tableslist){
 					$arychunks = array_chunk($tableslist['Ledger_Entries'], 2);
 					$recepttotalamt = 0;
 					foreach($arychunks as $partydetailandtransdetail){
 						$recepttotalamt += $partydetailandtransdetail[0]['AMOUNT'];
-					}	
+					}
 
 				$trcolor = "";
 				if($tableslist['response']['status'] != 1062){
@@ -6591,7 +6591,7 @@ if($page == "checkapidatavalidateornot"){
 				}else{
 					$trcolor="";
 					$status_transaction_res =$tableslist['response']['error'];
-				}	
+				}
 
 				$html_res .= '<tr class="main '.$trcolor.'">';
 				$html_res .= '<td class="cursor-pointer"><i class="ti-angle-double-down" onclick="opensubtable('.$trans_id.')"></i><input type="hidden" class="showclassval" id="showhide'.$trans_id.'" value="0"></td>';
@@ -6626,16 +6626,16 @@ if($page == "checkapidatavalidateornot"){
 					$html_res .= '<tr>';
 					$html_res .= '<td class="w-b-w-s">'.$tableslist1[0]['Bill_Details']['Bill_NO'].'</td>';
 					$html_res .= '<td class="w-b-w-s">'.$tableslist1[0]['Party_Name'].'</td>';
-					$html_res .= '<td class="text-right">'.customeummarmonyformate($tableslist1[0]['AMOUNT']).'</td>';	
+					$html_res .= '<td class="text-right">'.customeummarmonyformate($tableslist1[0]['AMOUNT']).'</td>';
 					$html_res .= '</tr>';
-				} 
+				}
 					$html_res .= '</tbody>';
 					$html_res .= '</table>';
 					$html_res .= '</div>';
 					$html_res .= '</div>';
 					$html_res .= '</td>';
 					$html_res .= '</tr>';
-				} 	
+				}
 				$html_res .= '</table>';
 
 
@@ -6643,10 +6643,10 @@ if($page == "checkapidatavalidateornot"){
 
 
 		}elseif($api_code == "RECEIVEPURCHASEORDERS" || $api_code == "RECEIVEPURCHASEINVOICES" || $api_code == "RECEIVEGOODSRECEIPTNOTES" || $api_code == "RECEIVESALESORDERS" || $api_code == "RECEIVESALESINVOICES" || $api_code == "RECEIVEDELIVERYORDERS" || $api_code == "RECEIVEDEBITNOTES" || $api_code == "RECEIVECREDITNOTES"){
-			
+
 			$html_res .= '<table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc"><tr><th scope="col"></th><th scope="col">Transaction No.</th><th scope="col">Transaction Date</th><th scope="col">Party Name</th><th scope="col" class="text-right">Amount</th><th scope="col" class="text-right">Tax</th><th scope="col" class="text-right">Total</th><th scope="col" >Required*</th><th scope="col">Status</th></tr>';
 
-				foreach($result['result'] as $trans_id=>$tableslist){ 
+				foreach($result['result'] as $trans_id=>$tableslist){
 					if($tableslist['Voucher_Amount']!=""){
 						$invtotalamt = str_replace(",","",$tableslist['Voucher_Amount']);
 					}
@@ -6656,8 +6656,8 @@ if($page == "checkapidatavalidateornot"){
 							$totaltax += $ledgerentr['AMOUNT'];
 						}
 					}
-					$transaction = $tableslist['response']['transaction']; 
-					$transaction_res = $tableslist['response']['transaction_res']; 
+					$transaction = $tableslist['response']['transaction'];
+					$transaction_res = $tableslist['response']['transaction_res'];
 					$trcolor = "";
 					if($tableslist['response']['status'] != 1062){
 						$trcolor = "bg-warning";
@@ -6665,7 +6665,7 @@ if($page == "checkapidatavalidateornot"){
 					}else{
 						$trcolor="";
 						$status_transaction_res =$tableslist['response']['error'];
-					}	 
+					}
 					$html_res .= '<tr class="main '.$trcolor.'">';
 					$html_res .= '<td class="cursor-pointer">
 							<i class="ti-angle-double-down" onclick="opensubtable('.$trans_id.')"></i>
@@ -6673,15 +6673,15 @@ if($page == "checkapidatavalidateornot"){
 						</td>';
 					$html_res .= '<td>'.$tableslist['VOUCHERNUMBER'].'</td>';
 					$html_res .= '<td>'.$tableslist['InvDate'].'</td>';
-				
+
 					$html_res .= '<td class="'.$trcolor.'">'.$tableslist['PARTYNAME'].'</td>';
-					
+
 					$html_res .= '<td class="'.$trcolor.' text-right">'.customeummarmonyformate($invtotalamt-$totaltax).'</td>';
-			
+
 					$html_res .= '<td class="'.$trcolor.' text-right">'.customeummarmonyformate($totaltax).'</td>';
-					
+
 					$html_res .= '<td class="'.$trcolor.' text-right">'.customeummarmonyformate($invtotalamt).'</td>';
-				
+
 					$summarydetails = "";
 					$sq = 1;
 					if(count((array)$tableslist['valuenotavailablefieldary']) !=0){
@@ -6699,10 +6699,10 @@ if($page == "checkapidatavalidateornot"){
 					}
 					$html_res .= '<td class="text-right">'.$status_transaction_res.'</td>';
 					$html_res .= '</tr>';
-					
+
 					$html_res .= '<tr class="data showclass'.$trans_id.' showclassdiv"><td colspan="20"><div class="row"><div class="col-lg-12"><table class="table table-td-6"><thead><tr><th scope="col">Item</th><th scope="col">SKU</th><th scope="col">Account No</th><th scope="col" class="text-right">Quantity</th><th scope="col" class="text-right">Price</th><th scope="col" class="text-right">Amount</th><th scope="col" class="text-right">Total</th></tr></thead><tbody>';
 					foreach($tableslist['Item_Entries'] as $seqkey=>$tableslist1){
-						$transactionitem = $tableslist['response']['transaction_item'][$seqkey]; 
+						$transactionitem = $tableslist['response']['transaction_item'][$seqkey];
 						$html_res .= '<tr>';
 						$html_res .= '<td class="w-b-w-s">'.$tableslist1['Stock_Item'].'</td>';
 						$html_res .= '<td >'.$tableslist1['part_no'].'</td>';
@@ -6712,16 +6712,16 @@ if($page == "checkapidatavalidateornot"){
 						$html_res .= '<td class="text-right">'.customeummarmonyformate($tableslist1['AMOUNT']).'</td>';
 						$html_res .= '<td class="text-right">'.$transactionitem['total_amount'].'</td>';
 						$html_res .= '</tr>';
-					} 
+					}
 					$html_res .= '</tbody></table></div>';
-					
+
 					//$html_res .= '<div class="col-lg-3 col-md-3 col-sm-6 col-6"><div class="card" style="background: #f5f6f7;"><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-6"><div class="card-header"><h5>Order Summary</h5></div></div></div><div class="card-body"><table class="table table-sm mb-0">';
 					//$html_res .= '<tr><th scope="col">Sub Total </th><td align="right">'.($invtotalamt-$totaltax).'</td></tr>';
 					//$html_res .= '<tr><th scope="col">Tax</th><td align="right">'.$totaltax.'</td></tr>';
 					//$html_res .= '<tr class="bg-primary"><th scope="col">Total</th><td align="right"><span class="f-18">'.$invtotalamt.'</span></td></tr>';
 					//$html_res .= '</table></div></div></div></div></td></tr>';
 					$html_res .= '</div></td></tr>';
-				} 	
+				}
 				$html_res .= '</table>';
 
 		}else{
@@ -6731,14 +6731,14 @@ if($page == "checkapidatavalidateornot"){
 			$html_res .= '<th scope="col">#</th>';
 			foreach($api_masters_response_details as $keyfield=>$mappingfield){
 				$html_res .= '<th scope="col">'.$keyfield.'</th>';
-			} 
+			}
 			$html_res .= '<th scope="col">Status</th>';
 			$html_res .= '<th scope="col">Error</th>';
 			$html_res .= '<th scope="col">Query</th>';
 			$html_res .= '</tr>';
 			$html_res .= '</thead>';
 			$html_res .= '<tbody>';
-			$im=1; 
+			$im=1;
 			foreach($api_hits_response_details as $apijitrdetail){
 				$html_res .= '<tr>';
 				$html_res .= '<td class="p-2">'.$im.'</td>';
@@ -6750,11 +6750,11 @@ if($page == "checkapidatavalidateornot"){
 				$html_res .= '<td class="p-2 w-b-w-s"><span class="d-block">'.$errorstr.'</span></td>';
 				$html_res .= '<td class="p-2 w-b-w-s"><span class="d-block">'.$apijitrdetail['response']['query'].'</span></td>';
 				$html_res .= '</tr>';
-				$im++; 
+				$im++;
 			}
 			$html_res .= '</tbody>';
 			$html_res .= '</table>';
-		}	
+		}
 
 
 
@@ -6777,13 +6777,13 @@ if($page == "insertassetrequesttransfers"){
 if ($page == 'insertCSR') {
 
     $fileUploadsPath = "uploads/csr/";
-    $uploadedFiles = []; 
+    $uploadedFiles = [];
     $table_name = $_POST['table_name'];
 	foreach ($_FILES as $key => $file) {
 	    if ($file['error'] != UPLOAD_ERR_NO_FILE) { // Check if file is provided.
 	        $temp = explode(".", $file['name']);
 	        $uniqueFilename = "file_" . time() . "_" . uniqid() . "." . end($temp);
-	        
+
 	        // Move the file to the desired location.
 	        if (move_uploaded_file($file['tmp_name'], $fileUploadsPath . $uniqueFilename)) {
 	            $uploadedFiles[$key] = $uniqueFilename;
@@ -6881,7 +6881,7 @@ if ($page == 'getFieldWorkDailyPlanData') {
 	} else {
 	    $user_ids_string = $user_ids;
 	}
-	
+
 	$cudata = '';
 	$url = API . "?mode=getFieldWorkDailyPlanData&method=get&userids=".urlencode($user_ids_string)."&from_date=".$from_date. "&to_date=" . $to_date."&manager_ids=".urlencode($manager_ids_string);
 	$cudata = callAPI($url);
@@ -6954,7 +6954,7 @@ if($page == "getbuildingoptionlist"){
 	$data1["where"] = array('company_id'=> $_SESSION['company_id'],'building_id'=> $_POST['building_id'],'is_active'=>'0');
 	$data1["field"] = "id, floor_name";
 	$data = urlencode(json_encode($data1));
-	$curl = API."?mode=gettabledetailswithconditions&table=building_floors&data=".$data; 
+	$curl = API."?mode=gettabledetailswithconditions&table=building_floors&data=".$data;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
 	$str = "<option value=''>All Building Floor</option>";
@@ -6994,7 +6994,7 @@ if($page == "getcrmcontactslist"){
 	$data1["where"] = array('company_id'=> $_SESSION['company_id'],'crm_company_id'=> $_POST['crm_company_id'],'is_active'=>'0');
 	$data1["field"] = "id, display_name";
 	$data = urlencode(json_encode($data1));
-	$curl = API."?mode=gettabledetailswithconditions&table=crm_contacts&data=".$data; 
+	$curl = API."?mode=gettabledetailswithconditions&table=crm_contacts&data=".$data;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
 	$str = "<option value=''>Select Any One</option>";
@@ -7069,7 +7069,7 @@ if($page == "cancelpayments"){
 if($page ==  "assigneemdtaskschedule"){
 	$employee_id = $_POST['emp_id'];
 	$finance_tax_year = $_POST['finance_tax_year']; // 2022 means -> 01/04/2022 To 31/03/2023
-	$url = API."?mode=getemtaskassignelist&employee_id=".$employee_id."&taskassign=Y&submit=Y&finance_tax_year=".$finance_tax_year; 
+	$url = API."?mode=getemtaskassignelist&employee_id=".$employee_id."&taskassign=Y&submit=Y&finance_tax_year=".$finance_tax_year;
 	$api = callAPI($url);
 	$result = json_decode($api,1);
 	print_r($result);
@@ -7092,26 +7092,26 @@ if($page == "updatesendverificationdocumentsem"){
 	// echo $return = file_post_contents($url, $data, 'update');
 }
 if($page=="selectadditionalcharge"){
-    $curl = API."?mode=getsetupdetails&getsetupdetails=Y&additional_charge_id=".$_POST['additional_charge_id']; 
+    $curl = API."?mode=getsetupdetails&getsetupdetails=Y&additional_charge_id=".$_POST['additional_charge_id'];
 	echo $cudata = callAPI($curl);
     //$res = json_decode($cudata,1);
    	//echo  json_encode($res);
 }
 if($page=="submitextendagreement"){
-    $curl = API."?mode=insertrentalinvoices&rid=".$_POST['rid']."&extend_agreement_month=".$_POST['extend_agreement_month']; 
+    $curl = API."?mode=insertrentalinvoices&rid=".$_POST['rid']."&extend_agreement_month=".$_POST['extend_agreement_month'];
 	echo $cudata = callAPI($curl);
     //$res = json_decode($cudata,1);
    	//echo  json_encode($res);
 }
 if($page == 'dynamicchangestatusmonthprojecttimesheet'){
-	
+
 	$url = API."?mode=dynamicchangestatusmonthprojecttimesheet&method=post";
 	//echo $url; print_r($sarray); exit;
 	$response = file_post_contents($url, $_POST);
 	echo $response; exit;
 }
 if($page=="getstockbalanceavailability"){
-    $curl = API."?mode=getstockbalanceavailability&transaction_table=".$_POST['transaction_table']."&transaction_id=".$_POST['transaction_id']; 
+    $curl = API."?mode=getstockbalanceavailability&transaction_table=".$_POST['transaction_table']."&transaction_id=".$_POST['transaction_id'];
 	$cudata = callAPI($curl);
     echo $cudata;
     //$res = json_decode($cudata,1);
@@ -7167,9 +7167,9 @@ if($page == 'insertFeasibility'){
 			$lead_id = $_POST['lead_id'];
 			$updatadata['feasibility_check'] = "Y";
 			$updatadata['updated_date'] = date('Y-m-d H:i:s');
-			$updatadata['updated_by'] = $_SESSION['userid']; 
+			$updatadata['updated_by'] = $_SESSION['userid'];
 			$url2 = API . "?mode=updaterowtabledata&rid=" . $lead_id . "&table=" . $transaction_table . "&method=post";
-			file_post_contents($url2, $updatadata, 'update');		
+			file_post_contents($url2, $updatadata, 'update');
 		}
 		echo $response;
 	}
@@ -7222,7 +7222,7 @@ if($page == 'uploadFeasibilityFiles'){
                 $fileSizeMB = round($fileSizeBytes / (1024 * 1024), 2);
                 // Prepare upload directory
                 $destinationPath = "uploads/" . $uniqueFilename;
-                // Ensure the directory exists  
+                // Ensure the directory exists
                 if (!is_dir('uploads/')) {
                     mkdir('uploads/', 0750, true);
                 }
@@ -7338,7 +7338,7 @@ if($page == "submitemploymenttype"){
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
 	$url = API."?mode=submitemploymenttype&method=post";
-	//echo $url; print_r($_POST); 
+	//echo $url; print_r($_POST);
 	$response = file_post_contents($url, $_POST, 'insert');
 	echo $response;exit;
 }
@@ -7346,7 +7346,7 @@ if($page == "insertapplicationserialnumbers"){
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
 	$url = API."?mode=insertapplicationserialnumbers&method=post";
-	//echo $url; print_r($_POST); 
+	//echo $url; print_r($_POST);
 	$response = file_post_contents($url, $_POST, 'insert');
 	echo $response;exit;
 }
@@ -7382,7 +7382,7 @@ if ($page == 'add_party') {
     $response = file_post_contents($url, $partyData, 'insert');
     $result = json_decode($response, true);
 
-	
+
 
     $isSuccess = false;
     if (is_array($result)) {
@@ -7429,7 +7429,7 @@ if ($page == 'load_recharge_history') {
 
 
 if($page == 'tosavemrttingroom'){
-	
+
 	if (isset($_POST['submit']) && $_POST['submit'] == 'insert') {
 		$table_name = 'meeting_room_bookings';
 		unset($_POST['submit']);
@@ -7466,7 +7466,7 @@ if($page == 'tosavemrttingroom'){
 if($page == 'getDynamicCities'){
 	$cudata = '';
 	// return $_POST;
-	if ($_POST['q'] != '') { 
+	if ($_POST['q'] != '') {
 		$text = urlencode($_POST['q']);
 		$url = API . "?mode=getDynamicCities&method=get&q=".$text."&pagination=".$_POST['pagination'];
 		$cudata = callAPI($url);
@@ -7482,7 +7482,7 @@ if($page =="getTrevllingPlanData"){
 	$url = API . "?mode=getTrevllingPlanData&method=get&id=".$trip_id."&journyid=".$journyid."&trip_type=".$trip_type."&transaction_date=".$transaction_date;
 	$result = callAPI($url);
 	$response = json_decode($result, 1);
-	if($response['res'] !=""){ 
+	if($response['res'] !=""){
 		echo json_encode(array("response"=>"Y",'limit'=>$response['res']['max_expense_limit'],'allresult'=>$response));
 	}else{
 		echo json_encode(array("response"=>"N",'limit'=>0,'allresult'=>$response));
@@ -7494,12 +7494,12 @@ if( $page=='todisplayfloorbasedbuildid'){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'building_id'=>$_POST['build_id']);
 	$wh1['field'] = "id,floor_name";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=building_floors&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=building_floors&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$option = '<option value="">Select Any One</option>';
 	foreach($json as $locatio){
-		$option .="<option value='".$locatio['id']."'>".$locatio['floor_name']."</option>"; 
+		$option .="<option value='".$locatio['id']."'>".$locatio['floor_name']."</option>";
 	}
 	echo $option;
 
@@ -7508,12 +7508,12 @@ if( $page=='todisplayspacebasedfloorid'){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'building_floor_id'=>$_POST['floor_id']);
 	$wh1['field'] = "id,cabin_name";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=building_floor_spaces&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=building_floor_spaces&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$option = '<option value="">Select Any One</option>';
 	foreach($json as $locatio){
-		$option .="<option value='".$locatio['id']."'>".$locatio['cabin_name']."</option>"; 
+		$option .="<option value='".$locatio['id']."'>".$locatio['cabin_name']."</option>";
 	}
 	echo $option;
 
@@ -7522,7 +7522,7 @@ if( $page=='todisplayspacebasedfloorid'){
 // if($page == 'getVisitorsByPhoneAndEmpCode'){
 // 	$cudata = '';
 // 	// return $_POST;
-// 	if ($_POST['phone']!='' || $_POST['employee_code']!='') { 
+// 	if ($_POST['phone']!='' || $_POST['employee_code']!='') {
 // 		$url = API . "?mode=getVisitorsByPhoneAndEmpCode&method=get&phone=".$_POST['phone']."&employee_code=".$_POST['employee_code']."&location_id=".$_POST['location_id'];
 // 		$cudata = callAPI($url);
 // 	}
@@ -7533,7 +7533,7 @@ if( $page=='todisplayspacebasedfloorid'){
 // if($page == 'getVisitorsSearch'){
 // 	$cudata = '';
 // 	// return $_POST;
-// 	if ($_POST['text'] !='' || $_POST['date']!='') { 
+// 	if ($_POST['text'] !='' || $_POST['date']!='') {
 // 		$url = API . "?mode=getVisitorsSearch&method=get&text=".$_POST['text']."&date=".$_POST['date']."&location_id=".$_POST['location_id'];
 // 		$cudata = callAPI($url);
 // 	}
@@ -7564,7 +7564,7 @@ if($page=="checkiteminlinediscount"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'id'=>$item_id);
 	$wh1['field'] = "id,minimum_discount";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=items&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=items&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$resu = $json[0];
@@ -7599,12 +7599,12 @@ if($page == "getmultireferencepagedetails"){
 	if($_POST['gettype'] == 'document_type'){
 		//Document list
 		$option = '<option value="">Select Any One</option>';
-		foreach($result['dynamic_reference_tables'] as $drtres){ 
+		foreach($result['dynamic_reference_tables'] as $drtres){
 			$selectedlist = "";
 			if($alreday_selected_transaction_table == $drtres['transaction_table']){
 				$selectedlist = "selected";
 			}
-			$option .="<option value='".$drtres['transaction_table']."' ".$selectedlist.">".ucwords(str_replace('_',' ',$drtres['transaction_table']))."</option>"; 
+			$option .="<option value='".$drtres['transaction_table']."' ".$selectedlist.">".ucwords(str_replace('_',' ',$drtres['transaction_table']))."</option>";
 		}
 		//Party List
 		$option1 = '<option value="">Select Any One</option>';
@@ -7613,12 +7613,12 @@ if($page == "getmultireferencepagedetails"){
 			if($alreday_selected_transaction_party_id == $drtres['id']){
 				$selectedlist = "selected";
 			}
-			$option1 .="<option value='".$drtres['id']."' ".$selectedlist.">".$drtres['company']." - ".ucwords(str_replace('_',' ',$drtres['display_name']))."</option>"; 
+			$option1 .="<option value='".$drtres['id']."' ".$selectedlist.">".$drtres['company']." - ".ucwords(str_replace('_',' ',$drtres['display_name']))."</option>";
 		}
 
 		$return = json_encode(array('all_result'=>$result,'option'=>$option,'vendor_or_customer_list'=>$option1,'party_table'=>$result['party_table']));
 	}elseif($_POST['gettype'] == 'transaction_list'){
-		
+
 		$iseq = 1;
 		$tables = '<table class="table table-hover m-b-0"><thead><tr><th scope="col">#</th><th scope="col">Transaction No.</th><th scope="col">Amount</th></tr></thead><tbody>';
 		if(count((array)$result['transaction_list']) != 0){
@@ -7636,9 +7636,9 @@ if($page == "getmultireferencepagedetails"){
 	                </span>
 	                <span>".$iseq."</span>
 	              </label>
-	            </div></td>"; 
-				$tables .="<td class='p-2'>".ucwords(str_replace('_',' ',$drtres['transaction_number']))." <span class='d-block'>".fromDate($drtres['transaction_date'])."</span></td>"; 
-				$tables .="<td class='p-2'>".$drtres['total_amount']."</td><tr>"; 
+	            </div></td>";
+				$tables .="<td class='p-2'>".ucwords(str_replace('_',' ',$drtres['transaction_number']))." <span class='d-block'>".fromDate($drtres['transaction_date'])."</span></td>";
+				$tables .="<td class='p-2'>".$drtres['total_amount']."</td><tr>";
 				$iseq++;
 			}
 		}else{
@@ -7681,13 +7681,13 @@ if($page == "getmultireferencepagedetails"){
                         </span>
                         <span>".$iseq."</span>
                       </label>
-                    </div></td>"; 
-			$tables .="<td class='p-2'>".$drtres['transaction_number']."</td>"; 
-			$tables .="<td class='w-b-w-s p-2'>".ucwords($drtres['item_name'])."</td>"; 
+                    </div></td>";
+			$tables .="<td class='p-2'>".$drtres['transaction_number']."</td>";
+			$tables .="<td class='w-b-w-s p-2'>".ucwords($drtres['item_name'])."</td>";
 			$tables .="<td class='p-2'>".$drtres['item_quantity']." <span class='text-danger'>(".$drtres['pending_qty'].")</span> <input type='hidden' id='pending_qty_".$drtres['id']."'  value='".$drtres['pending_qty']."'><input type='hidden' id='item_quantity_".$drtres['id']."' value='".$drtres['item_quantity']."'></td>";
-			
-			$tables .="<td class='p-2'>".customeummarmonyformate($drtres['item_price'])."<input type='hidden' id='item_price_".$drtres['id']."'  value='".$drtres['item_price']."'></td>"; 
-			
+
+			$tables .="<td class='p-2'>".customeummarmonyformate($drtres['item_price'])."<input type='hidden' id='item_price_".$drtres['id']."'  value='".$drtres['item_price']."'></td>";
+
 			$tables .="<td class='p-2'>".customeummarmonyformate($drtres['tax_amount']);
 			if($drtres['tax_value'] !=""){
 				$tables .= "<span class='d-block f-10'>".$drtres['tax_name']." - ".$drtres['tax_value']."%</span>";
@@ -7695,17 +7695,17 @@ if($page == "getmultireferencepagedetails"){
 			$tables .= "<input type='hidden' id='tax_amount_".$drtres['id']."'  value='".$drtres['tax_amount']."'>";
 			$tables .= "<input type='hidden' id='tax_value_".$drtres['id']."'  value='".$drtres['tax_value']."'>";
 			$tables .="</td>";
-			
+
 			$tables .="<td class='p-2'>".customeummarmonyformate($drtres['total_amount'])."<input type='hidden' id='total_amount_".$drtres['id']."'  value='".$drtres['total_amount']."'></td>";
-			
+
 			//$tables .="<td class='p-2'>";
 			//$tables .="<input type='number' class='form-control' id='invoice_qty_".$drtres['id']."' name='invoice_qty[]' onblur='allCalculation()' max='".$drtres['pending_qty']."' readonly>";
 			//$tables .="<span class='d-block removeerrormsg text-danger' id='invoice_qty_error_".$drtres['id']."'></span>";
 			//$tables .="</td>";
-			
+
 			//$tables .="<td class='p-2'><span id='label_invoice_tax_".$drtres['id']."'>".customeummarmonyformate(0)."</span></td>";
 			//$tables .="<td class='p-2'><span id='label_invoice_total_".$drtres['id']."'>".customeummarmonyformate(0)."</span></td>";
-			$tables .="<tr>"; 
+			$tables .="<tr>";
 			$iseq++;
 		}
 		$tables .= '</tbody></table>';
@@ -7749,7 +7749,7 @@ if ($page == 'save_po_details') {
 			'po_details' => $_POST['po_details'][$i] ?? '',
 			'remarks' => $_POST['remarks'][$i] ?? ''
 		);
-		
+
 		$data = array_map('trim', $data_array);
 		 // Skip empty rows
 		if (empty(array_filter($data))) {
@@ -7762,7 +7762,7 @@ if ($page == 'save_po_details') {
 			$data['updated_by'] = $_SESSION['userid'];
 			$url = API . "?mode=updaterowtabledata&rid=" . $rid . "&table=" . $table_name . "&method=post&fid=" . $fid;
 			$response = file_post_contents($url, $data, 'update');
-			$return[] = $response;				
+			$return[] = $response;
 		} else {
 			$data['current_status'] = '0';
 			$data['is_active'] = '0';
@@ -7841,7 +7841,7 @@ if ($page == "insertvendorsandvendorregisters") {
 	$data['user_id'] = $_SESSION['userid'] ?? '';
 	$data['is_active'] = 0;
 	$data['current_status'] = 0;
-	if ($_POST['verification_type'] == "PAN") { 
+	if ($_POST['verification_type'] == "PAN") {
 		$data['company'] = trim($_POST['company_name']);
 		$data['email'] = trim($_POST['company_email']);
 		$data['display_name'] = trim($_POST['display_name']);
@@ -7872,10 +7872,10 @@ if ($page == "insertvendorsandvendorregisters") {
 		$url = API . "?mode=insertupdatevendorverificationdetails&method=post";
 		$res = file_post_contents($url, $data, 'insert');
 		$result = json_decode($res, true);
-		$nrid = "id:" . $result['LASTID']; 
+		$nrid = "id:" . $result['LASTID'];
 		$return = json_encode(array('all_result' => $result, 'rid' => deocdeId($nrid)));
 	} elseif($_POST['verification_type'] == "GSTIN"){
-		 
+
 		$verrifyary['user_id'] = $_SESSION['userid'];
 		$verrifyary['company_id'] = $_SESSION['company_id'];
 		$verrifyary['transaction_table'] = $_POST['transaction_table'];
@@ -7895,10 +7895,10 @@ if ($page == "insertvendorsandvendorregisters") {
 		if ($verificatioresult && isset($verificatioresult['LASTID'])) {
 			$verificatioresult['status'] = 'success';
 		}
-		 
+
 		$return = json_encode(array('result' => $verificatioresult));
 	} elseif($_POST['verification_type'] == "MSME"){
-		 
+
 		$verrifyary['user_id'] = $_SESSION['userid'];
 		$verrifyary['company_id'] = $_SESSION['company_id'];
 		$verrifyary['transaction_table'] = $_POST['transaction_table'];
@@ -7915,7 +7915,7 @@ if ($page == "insertvendorsandvendorregisters") {
 		}
 		$return = json_encode(array('result' => $verificatioresult));
 	}elseif($_POST['verification_type'] == "TAN"){
-		 
+
 		$verrifyary['user_id'] = $_SESSION['userid'];
 		$verrifyary['company_id'] = $_SESSION['company_id'];
 		$verrifyary['transaction_table'] = $_POST['transaction_table'];
@@ -7932,7 +7932,7 @@ if ($page == "insertvendorsandvendorregisters") {
 		}
 		$return = json_encode(array('result' => $verificatioresult));
 	}elseif($_POST['verification_type'] == "BANK"){
-		 
+
 		$verrifyary['user_id'] = $_SESSION['userid'];
 		$verrifyary['company_id'] = $_SESSION['company_id'];
 		$verrifyary['transaction_table'] = $_POST['transaction_table'];
@@ -7988,7 +7988,7 @@ if ($page == 'insertqrgeneration') {
     // 4. Return response
     echo $response;
     exit;
- 
+
 }
 if($page == "insertvendorandvendorregisterssynchapi"){
 	$url = API . "?mode=insertvendorandvendorregisterssynchapi";
@@ -7996,8 +7996,8 @@ if($page == "insertvendorandvendorregisterssynchapi"){
 	echo $cudata;
 }
 if($page == 'getmanufacturingboms'){
-	$url = API."?mode=getmanufacturingboms&item_id=".$_POST['item_id']."&manufacturing_operation_id=".$_POST['manufacturing_operation_id']."&gettype=".$_POST['gettype']; 
-	$response = callAPI($url); 
+	$url = API."?mode=getmanufacturingboms&item_id=".$_POST['item_id']."&manufacturing_operation_id=".$_POST['manufacturing_operation_id']."&gettype=".$_POST['gettype'];
+	$response = callAPI($url);
 	$response1 = json_decode($response,1);
 
 	if($_POST['gettype'] == "SELECTMANUFACTURINGOPERATION"){
@@ -8014,12 +8014,12 @@ if($page == 'getmanufacturingboms'){
 		}
 		$response1['alternate_items_options'] = $htmloption;
 	}
-	
+
 	echo json_encode($response1); exit;
 }
 if($page == 'getmanufacturingworkorders'){
-	$url = API."?mode=getmanufacturingworkorders&manufacturing_firm_order_id=".$_POST['manufacturing_firm_order_id']."&work_order_item_id=".$_POST['work_order_item_id']."&gettype=".$_POST['gettype']; 
-	$response = callAPI($url); 
+	$url = API."?mode=getmanufacturingworkorders&manufacturing_firm_order_id=".$_POST['manufacturing_firm_order_id']."&work_order_item_id=".$_POST['work_order_item_id']."&gettype=".$_POST['gettype'];
+	$response = callAPI($url);
 	//$response = json_decode($response,1);
 	echo $response; exit;
 }
@@ -8067,7 +8067,7 @@ if ($page == 'get_personal_entry_details') {
             if (!empty($entryData['person_details'])) {
                 $personData = json_decode($entryData['person_details'], true) ?: [];
             }
-            
+
             $formattedData = [
                 'employee_name' => $personData['employee_name'] ?? 'N/A',
                 'employee_contact' => $personData['employee_contact'] ?? 'N/A',
@@ -8108,7 +8108,7 @@ if ($page == 'get_current_persons') {
         //echo $url;
         $response = callAPI($url);
         $data = json_decode($response, true);
-       
+
         echo json_encode([
             'status' => 'success',
             'data' => $data['current_persons'] ?? []
@@ -8129,7 +8129,7 @@ if ($page == 'get_personal_statistics') {
         $url = API . "?mode=getpersonalgateway&method=get&company_id=" . $company_id . "&work_admin_type=" . $work_admin_type . "&employee_id=" . $employee_id;
         $response = callAPI($url);
         $data = json_decode($response, true);
-       
+
         echo json_encode([
             'status' => 'success',
             'data' => $data['statistics'] ?? [
@@ -8155,7 +8155,7 @@ if ($page == 'get_personal_recent_activity') {
         //echo $url;
         $response = callAPI($url);
         $data = json_decode($response, true);
-        
+
         echo json_encode([
             'status' => 'success',
             'data' => $data['data'] ?? []
@@ -8179,20 +8179,20 @@ if ($page == 'insert_personal_entry') {
     $_POST['created_by'] = $_SESSION['userid'];
     $_POST['created_date'] = date('Y-m-d H:i:s');
     $_POST['is_active'] = 0;
-     
+
     $method_type = isset($_POST['method_type']) && $_POST['method_type'] !== '' ? $_POST['method_type'] : 'entry_first';
     $_POST['method_type'] = $method_type;
-    $_POST['entry_date'] = $_POST['entry_date'] ?? date('Y-m-d'); 
-    $time_value = $_POST['in_time'] ?? date('H:i:s'); 
-    if ($method_type === 'exit_first') { 
+    $_POST['entry_date'] = $_POST['entry_date'] ?? date('Y-m-d');
+    $time_value = $_POST['in_time'] ?? date('H:i:s');
+    if ($method_type === 'exit_first') {
         $_POST['exit_time'] = $time_value;
-        unset($_POST['entry_time']); 
+        unset($_POST['entry_time']);
         $_POST['current_status'] = 'outside';
-    } else { 
+    } else {
         $_POST['entry_time'] = $time_value;
-        unset($_POST['exit_time']);  
+        unset($_POST['exit_time']);
         $_POST['current_status'] = 'inside';
-    } 
+    }
     $rid = isset($_POST['entry_id']) && !empty($_POST['entry_id']) ? $_POST['entry_id'] : '';
     $url = API . "?mode=insertpersonalgateway&method=post&rid=" . $rid;
     $response = file_post_contents($url, $_POST, 'insert');
@@ -8204,15 +8204,15 @@ if ($page == 'update_personal_exit_old') {
         echo json_encode(['status' => 'error', 'message' => 'Entry ID is required.']);
         exit;
     }
-    
+
     $method_type = $_POST['method_type'] ?? 'entry_first';
     $_POST['updated_by'] = $_SESSION['userid'];
     $_POST['updated_date'] = date('Y-m-d H:i:s');
     $_POST['user_id'] = $_SESSION['userid'];
-    
+
     $time_value = $_POST['exit_time'] ?? date('H:i:s');
     $date_value = $_POST['exit_date'] ?? date('Y-m-d');
-    
+
     if ($method_type === 'exit_first') {
         $_POST['entry_time'] = $time_value;
         $_POST['entry_date'] = $date_value;
@@ -8224,7 +8224,7 @@ if ($page == 'update_personal_exit_old') {
         $_POST['exit_timestamp'] = date('Y-m-d H:i:s');
         $_POST['current_status'] = 'completed';
     }
-    
+
     $url = API . "?mode=updatepersonalexit&method=post";
     $response = file_post_contents($url, $_POST, 'update');
     echo $response;
@@ -8253,7 +8253,7 @@ if ($page == 'get_vehicle_details') {
 		$wh1["where_in"] = $emp_ids_array;
 		$wh1["field"] = "id,display_name";
 		$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=employees&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=employees&data=".$data1;
 		$jsondecode = callAPI($url1);
 		$emp_list = json_decode($jsondecode,1) ?? array();
 
@@ -8340,7 +8340,7 @@ if ($page == 'get_recent_activity') {
 		]);
 	}
 	exit;
-} 
+}
 if ($page == 'lookup_vehicle_details' && $_POST['vehicle_number'] != '') {
 	$url = API . "?mode=lookup_vehicle_details" . "&method=get" . "&vehicle_number=" . $_POST['vehicle_number'] . "&company_id=" . $_SESSION['company_id'];
 	$response = callAPI($url);
@@ -8352,19 +8352,19 @@ if ($page == 'insert_vehicle_entry') {
 		echo json_encode(['status' => 'error', 'message' => 'Please fill in all required fields including location.']);
 		exit;
 	}
-	
+
 	$_POST['company_id'] = $_SESSION['company_id'];
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['created_by'] = $_SESSION['userid'];
 	$_POST['created_date'] = date('Y-m-d H:i:s');
 	$_POST['is_active'] = 0;
-	
+
 	$method_type = isset($_POST['method_type']) && $_POST['method_type'] !== '' ? $_POST['method_type'] : 'entry_first';
 	$_POST['method_type'] = $method_type;
 	$_POST['entry_date'] = $_POST['entry_date'] ?? date('Y-m-d');
-	
+
 	$time_value = $_POST['entry_time'] ?? date('H:i:s');
-	
+
 	if ($method_type === 'exit_first') {
 		$_POST['exit_time'] = $time_value;
 		$_POST['exit_timestamp'] = date('Y-m-d H:i:s');
@@ -8378,23 +8378,23 @@ if ($page == 'insert_vehicle_entry') {
 		unset($_POST['exit_timestamp']);
 		$_POST['current_status'] = 'inside';
 	}
-	
+
 	$url = API . "?mode=insertvehiclegateway&method=post";
 	$response = file_post_contents($url, $_POST, 'insert');
 	echo $response;
 	exit;
 }
-if ($page == 'insert_transport_vehicle_master') { 
+if ($page == 'insert_transport_vehicle_master') {
     if (empty($_POST['vehicle_reg_no']) || empty($_POST['vehicle_type'])) {
         echo json_encode(['status' => 'error', 'message' => 'Vehicle registration number and type are required.']);
         exit;
     }
- 
+
     $_POST['company_id'] = $_SESSION['company_id'];
     $_POST['created_by'] = $_SESSION['userid'];
     $_POST['created_date'] = date('Y-m-d H:i:s');
     $_POST['vehicle_reg_no'] = strtoupper(trim($_POST['vehicle_reg_no']));
-     
+
     $_POST['is_active'] = $_POST['is_active'] ?? '0';
     $_POST['current_status'] = $_POST['current_status'] ?? '0';
     $_POST['km_driven'] = $_POST['km_driven'] ?? 0;
@@ -8405,12 +8405,12 @@ if ($page == 'insert_transport_vehicle_master') {
     echo $response;
     exit;
 }
-if ($page == 'update_transport_vehicle_master') { 
+if ($page == 'update_transport_vehicle_master') {
     if (empty($_POST['vehicle_id']) || empty($_POST['vehicle_reg_no']) || empty($_POST['vehicle_type'])) {
         echo json_encode(['status' => 'error', 'message' => 'Vehicle ID, registration number and type are required.']);
         exit;
     }
- 
+
     $_POST['company_id'] = $_SESSION['company_id'];
     $_POST['updated_by'] = $_SESSION['userid'];
     $_POST['updated_date'] = date('Y-m-d H:i:s');
@@ -8443,10 +8443,10 @@ if ($page == 'refresh_vehicle_table') {
 		$method_type = $vehicle['method_type'] ?? 'entry_first';
 		$entry_time = $vehicle['entry_time'] ?? null;
 		$exit_time = $vehicle['exit_time'] ?? null;
-		
+
 		if ($entry_time === '00:00:00') $entry_time = null;
 		if ($exit_time === '00:00:00') $exit_time = null;
-		
+
 		if ($method_type == 'exit_first') {
 			if (!empty($entry_time) && !empty($exit_time)) {
 				$exitTime = strtotime($vehicle['exit_date'] . ' ' . $exit_time);
@@ -8464,7 +8464,7 @@ if ($page == 'refresh_vehicle_table') {
 				$duration = round((time() - strtotime($vehicle['entry_timestamp'])) / 60);
 			}
 		}
-		
+
 		if ($duration < 0) $duration = abs($duration);
 		return $duration >= 60 ? floor($duration / 60) . 'h ' . ($duration % 60) . 'm' : $duration . 'm';
 	}
@@ -8488,10 +8488,10 @@ if ($page == 'refresh_vehicle_table') {
 			$in_time = $vehicle['entry_time'] ?? null;
 			$out_time = $vehicle['exit_time'] ?? null;
 			$record_date = $vehicle['entry_date'] ?? $vehicle['exit_date'] ?? null;
-			
+
 			if ($in_time === '00:00:00') $in_time = null;
 			if ($out_time === '00:00:00') $out_time = null;
-			
+
 			if ($method_type == 'exit_first') {
 				$is_complete = !empty($in_time) && !empty($out_time);
 				$status_bg = $is_complete ? '#6c757d' : '#dc3545';
@@ -8505,7 +8505,7 @@ if ($page == 'refresh_vehicle_table') {
 				$status_text = $is_complete ? 'Completed' : 'Inside';
 				$action_btn_class = 'danger';
 			}
-			
+
 			$duration = formatVehicleDurationRefresh($vehicle);
 			$status_color = '#fff';
 
@@ -8649,7 +8649,7 @@ if($page == "getbaseuomconversion"){
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'parent_uom_id'=>$_POST['baseuom_id'],'child_uom_id'=>$_POST['uom_id']);
 	$wh1['field'] = "id,conversion_ratio";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=uom_conversions&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=uom_conversions&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	if(count((array)$json) != 0){
@@ -8670,7 +8670,7 @@ if ($page == 'get_employees_by_buddy_type') {
  	echo $response;
  	exit;
 }
- 
+
  // Buddy Reassignment - Get affected employees for preview
 if ($page == 'get_buddy_employees') {
  	$_POST['company_id'] = $_SESSION['company_id'];
@@ -8679,7 +8679,7 @@ if ($page == 'get_buddy_employees') {
  	echo $response;
  	exit;
 }
- 
+
  // Buddy Reassignment - Confirm and update
 if ($page == 'confirm_buddy_reassignment') {
  	$_POST['company_id'] = $_SESSION['company_id'];
@@ -8705,7 +8705,7 @@ if ($page == 'load_leave_balance_data') {
 	$_POST['company_id'] = $_SESSION['company_id'];
 	$_POST['user_id'] = $_SESSION['userid'];
 	$url = API . "?method=get&mode=getLeaveBalanceAndAllocations";
-	$response = callAPI($url . "&company_id=" . $_POST['company_id'] . "&user_id=" . $_POST['user_id'] . 
+	$response = callAPI($url . "&company_id=" . $_POST['company_id'] . "&user_id=" . $_POST['user_id'] .
 	                     "&employee_id=" . $_POST['employee_id'] . "&leave_year=" . $_POST['leave_year']);
 	echo $response;
 	exit;
@@ -8835,11 +8835,11 @@ if($page=="tocreateuserstationeryrequestnewhr"){
 	if($_POST['request_date'] =='undefined'){
 		$_POST['request_date'] = $_POST['require_date'];
 	}
-	$_POST['request_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['request_date']))); 
-	$_POST['require_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['require_date']))); 
+	$_POST['request_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['request_date'])));
+	$_POST['require_date'] = date('Y-m-d', strtotime(str_replace('/"', '-', $_POST['require_date'])));
 
 	// print_r($_POST); exit;
-	$url = API."?mode=tocreateuserstationeryrequestnewhr&deliver_type=".$_POST['deliver_type']."&qty=".$_POST['total_qty']."&request_date=".$_POST['request_date']."&require_date=".$_POST['require_date']."&building_id=".$_POST['building_id']."&building_floor_id=".$_POST['building_floor_id']."&building_floor_space_id=".$_POST['building_floor_space_id']."&location_id=".$_POST['location_id']."&st_emp_id=".$_POST['emp_id']."&st_current_status=".$_POST['st_current_status']."&other_name=".$_POST['other_name']; 
+	$url = API."?mode=tocreateuserstationeryrequestnewhr&deliver_type=".$_POST['deliver_type']."&qty=".$_POST['total_qty']."&request_date=".$_POST['request_date']."&require_date=".$_POST['require_date']."&building_id=".$_POST['building_id']."&building_floor_id=".$_POST['building_floor_id']."&building_floor_space_id=".$_POST['building_floor_space_id']."&location_id=".$_POST['location_id']."&st_emp_id=".$_POST['emp_id']."&st_current_status=".$_POST['st_current_status']."&other_name=".$_POST['other_name'];
 	$api = callAPI($url);
 	echo json_decode($api,1);
 }
@@ -9046,7 +9046,7 @@ if ($page == 'get_personal_gateway_authorizers') {
 }
 
 if($page == "insertemployeeworkattendancespayareawise"){
-		$url1 = API."?mode=insertemployeeworkattendancespayareawise&month=".$_POST['month']."&year=".$_POST['year']."&monthstartday=".$_POST['monthstartday']."&admin_type=".$_SESSION['admin_type']."&emp_id=".$_SESSION['emp_id']."&pay_area_id=".$_POST['pay_area_id']; 
+		$url1 = API."?mode=insertemployeeworkattendancespayareawise&month=".$_POST['month']."&year=".$_POST['year']."&monthstartday=".$_POST['monthstartday']."&admin_type=".$_SESSION['admin_type']."&emp_id=".$_SESSION['emp_id']."&pay_area_id=".$_POST['pay_area_id'];
 	   echo  $data_details1 = callAPI($url1);
 }
 
@@ -9087,7 +9087,7 @@ if ($page == 'save_invoice_excel_upload') {
 	echo $response;
 	exit;
 }
-if ($page == 'tosavecommentdataquater') { 
+if ($page == 'tosavecommentdataquater') {
 	print_r($_POST);
 	$url = API."?mode=tosavecommentdataquater&method=post";
 	$response = callAPI($url);
@@ -9104,7 +9104,7 @@ if($page == 'saveemployeeexit'){
 	$response = file_post_contents($url, $post_arr,'insert');
 	echo $response; exit;
 }
-if ($page == 'geteexitcontrantractoremployeedata') { 
+if ($page == 'geteexitcontrantractoremployeedata') {
 	$url = API."?mode=geteexitcontrantractoremployeedata&method=get&status=".urlencode($_POST['status'])."&search=".urlencode($_POST['search']);
 	$response = callAPI($url);
 	echo $response; exit;
@@ -9118,9 +9118,9 @@ if($page == 'getEmployeesByLocation'){
 	  $data1["where"] = $where;	$data = urlencode(json_encode($data1));
 	$curl = API."?mode=gettabledetailswithconditions&table=employees&data=".$data;
 	$response = callAPI($curl);
-	echo $response; exit; 
+	echo $response; exit;
 }
-if ($page == 'saveApprovedTimesheetOvertime') { 
+if ($page == 'saveApprovedTimesheetOvertime') {
 	// print_r($_POST);
 	$url = API."?mode=saveApprovedTimesheetOvertime&method=post";
 	// echo $url;
@@ -9155,7 +9155,7 @@ if ($page == 'manager_team_leave_status') {
 	echo $response;
 	exit;
 }
-// if ($page == 'getreferencetransactions') { 
+// if ($page == 'getreferencetransactions') {
 // 	$url = API . "?mode=getVisitorInsertRelatedData&vendor_supplier_document_type=" . $_POST['vendor_supplier_document_type'];
 // 	$results = callAPI($url);
 // 	$result = json_decode($results, 1);
@@ -9341,7 +9341,7 @@ if ($page == 'getamcrepairordercontractassets') {
 
 
 
-//Omkar Security code 
+//Omkar Security code
 
 if ($page == 'getVisitorsByPhoneAndEmpCode') {
 	$cudata = '';
@@ -9438,13 +9438,13 @@ if ($page == 'updateReturnDate') {
 if ($page == 'insertVisitorBundle') {
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
-	
+
 
     // 1) Photo: Check webcam first, then file upload, then fallback to existing
     $existingImage = $_POST['existing_image'] ?? '';
     $webcamImage = $_POST['webcam_image'] ?? '';
     $newImageName = '';
- 
+
     if (!empty($webcamImage) && strpos($webcamImage, 'data:image') === 0) {
         // Webcam capture processing
         $parts = explode(',', $webcamImage);
@@ -9467,7 +9467,7 @@ if ($page == 'insertVisitorBundle') {
         $newImageName = $existingImage;
     }
     $_POST['image_path'] = $newImageName;
- 
+
     // 2) Normalize visiting_company_id and process files for vendor_supplier
     $visit_type = $_POST['visit_type'] ?? '';
     if ($visit_type === 'delivery') {
@@ -9480,7 +9480,7 @@ if ($page == 'insertVisitorBundle') {
         $_POST['visiting_company_id'] = $_POST['visiting_company_id_doctor'] ?? '';
     } elseif ($visit_type === 'vendor_supplier') {
         $_POST['visiting_company_id'] = $_POST['vendor_supplier_transaction_no'] ?? '';
- 
+
         $uploaded_proof_files = [];
         if (isset($_FILES['vendor_supplier_proof_document_file']['name']) && is_array($_FILES['vendor_supplier_proof_document_file']['name'])) {
             foreach ($_FILES['vendor_supplier_proof_document_file']['name'] as $idx => $fname) {
@@ -9501,15 +9501,15 @@ if ($page == 'insertVisitorBundle') {
                 }
             }
         }
- 
+
         $proof_types = isset($_POST['vendor_supplier_proof_type']) && is_array($_POST['vendor_supplier_proof_type']) ? implode(',', array_filter($_POST['vendor_supplier_proof_type'])) : ($_POST['vendor_supplier_proof_type'] ?? '');
         $proof_nos = isset($_POST['vendor_supplier_proof_document_no']) && is_array($_POST['vendor_supplier_proof_document_no']) ? implode(',', array_filter($_POST['vendor_supplier_proof_document_no'])) : ($_POST['vendor_supplier_proof_document_no'] ?? '');
         $proof_files = implode(',', array_filter($uploaded_proof_files));
- 
+
         $_POST['vendor_supplier_proof_type'] = $proof_types;
         $_POST['vendor_supplier_proof_document_no'] = $proof_nos;
         $_POST['vendor_supplier_proof_document_file'] = $proof_files;
- 
+
         $newDocFile = '';
         if (isset($_FILES['vendor_supplier_document_file']) && $_FILES['vendor_supplier_document_file']['error'] === UPLOAD_ERR_OK) {
             $newDocFile = imageupload('visitors', 'vendor_supplier_document_file', $_POST['existing_vendor_supplier_document_file'] ?? '');
@@ -9520,7 +9520,7 @@ if ($page == 'insertVisitorBundle') {
     } elseif ($visit_type === 'visitor' || $visit_type === 'others') {
         $_POST['visiting_company_id'] = $_POST['visiting_company_id_visitor'] ?? '';
     }
- 
+
     $type = (int)($_POST['rid'] ?? 0) > 0 ? 'update' : 'insert';
     $url = API . "?mode=insertVisitorBundle&method=post";
     $resp = file_post_contents($url, $_POST, $type);
@@ -9590,14 +9590,14 @@ if ($page == 'add_custom_visitor_option') {
     }
     exit;
 }
-//End Omkar Security code 
+//End Omkar Security code
 
 // Office Module start
 if($page=="getstationeryitemsbycategory"){
 	$html = '<option value="">Select Item</option>';
 	if($_POST['category_id']!="" && $_POST['location_id']!=""){
 		$vdata1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'category_id'=>$_POST['category_id'],'location_id'=>$_POST['location_id']);
-		
+
 		$vdata1["field"] = "id,item_name";
 		$vdata1['order'] = "item_name ASC";
 		$vdata = urlencode(json_encode($vdata1));
@@ -9658,7 +9658,7 @@ if ($page == 'get_items_by_category') {
 	}
 	$vdataee['field'] = "id,item_name";
 	$vdata = urlencode(json_encode($vdataee));
-	$vurl = API."?mode=gettabledetailswithconditions&table=items&data=".$vdata; 
+	$vurl = API."?mode=gettabledetailswithconditions&table=items&data=".$vdata;
 	$empbalances = callAPI($vurl);
 	$empbalances = json_decode($empbalances,1);
 
@@ -9668,7 +9668,7 @@ if ($page == 'get_items_by_category') {
         $selected = ($selected_item_id == $item['id']) ? 'selected' : '';
         echo '<option ' . $selected . ' value="' . $item['id'] . '">' . $item['item_name'] . '</option>';
     }
-	exit;  
+	exit;
 }
 if($page == 'getprocessqctransactions'){
     $url = API."?mode=getprocessqctransactions&process=".urlencode($_POST['process']);
@@ -9873,12 +9873,12 @@ if ($page == 'createrecruitingmanagerdashboardcandidatesfolder') {
 	if (!file_exists($folder)) {
 	    if (mkdir($folder, 0750, true)) {
 	        chmod($folder, 0750);
-	         $result = array('status' => 'Success', 'message' => 'Folder created successfully.'); 
+	         $result = array('status' => 'Success', 'message' => 'Folder created successfully.');
 	    } else {
-	        $result = array('status' => 'Fail', 'message' => 'Failed to create folder.'); 
+	        $result = array('status' => 'Fail', 'message' => 'Failed to create folder.');
 	    }
 	} else {
-		    $result = array('status' => 'Fail', 'message' => 'Folder already exists.'); 
+		    $result = array('status' => 'Fail', 'message' => 'Folder already exists.');
 	}
 	echo json_encode($result);
 }
@@ -9899,7 +9899,7 @@ if($page == "uploadresumefiles"){
 	}
 }
 
-//contract excel import 
+//contract excel import
 
 //workflow new
 if($page=="getlocationwiseusers"){
@@ -9909,7 +9909,7 @@ if($page=="getlocationwiseusers"){
 		$wh1["where"] = array('is_active'=>0,'company_id'=>$_SESSION['company_id'],'location_id'=>$location_id);
 		$wh1["field"] = "id,display_name";
 		$data1 = urlencode(json_encode($wh1));
-		$url1 = API."?mode=gettabledetailswithconditions&table=application_users&data=".$data1; 
+		$url1 = API."?mode=gettabledetailswithconditions&table=application_users&data=".$data1;
 		$jsondecode = callAPI($url1);
 		$list = json_decode($jsondecode,1);
 		if(count((array)$list) > 0){

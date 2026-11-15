@@ -1,9 +1,9 @@
-﻿<?php 
+﻿<?php
 /*include_once('dbconfig.php');
 session_start();
 $row = $_GET;
 $_SESSION['userid'] = $row['id'];
-    
+
 $_SESSION['company_id'] = $row['company_id'];
 $_SESSION['DB_NAME']=$row['db'];
 echo $_SESSION; exit;*/

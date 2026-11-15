@@ -63,19 +63,19 @@ if($type!="CREATE"){
     CURLOPT_HTTPHEADER => array(
       'Authorization: Basic YWRtaW46U3VwZXJAMTIz'
     ),
-  ));    
+  ));
 }*/
 $response = curl_exec($curl);
 
 //echo "Title:".$title;
 //echo "content:".$content;
 //echo "Test End".$response;
-$data['response_data'] = $response; 
+$data['response_data'] = $response;
 $res_data = json_decode($response,1);
 $data['status'] = $res_data['status'];
 //$res_data = json_decode($_POST['data'],1);
 $data['ref_id'] = $res_data['data']['ID'];
-$data['type'] = $_POST['type']; 
+$data['type'] = $_POST['type'];
 $data['post_id'] = $_POST['post_id'];
 $data['source_id'] = $_POST['source_id'];
 $data['publish_id'] = $_POST['publish_id'];

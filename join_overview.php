@@ -1,4 +1,4 @@
-<?php 
+<?php
 ini_set('display_errors' ,0);
 include_once('includes/session.php');
 include_once('dbconfig.php');
@@ -20,7 +20,7 @@ $presentation_array = json_decode($configesponse,1);
 	<div class="d-flex flex-column-fluid">
 		<!--begin::Container-->
 		<div class="container-fluid">
-			<?php 
+			<?php
 			$loop = 1;
 			foreach ($presentation_array as $key => $data) {
 				$required_divisions = count($data['data']);
@@ -41,15 +41,15 @@ $presentation_array = json_decode($configesponse,1);
 						</div>
 					</div>
 					<div class="card-body">
-						<?php 
-						if($loop != 1) { 
+						<?php
+						if($loop != 1) {
 							echo' <a href="#" class="btn btn-primary text-uppercase font-weight-bolder px-15 py-3 float-left">Previous</a>';
-						} 
+						}
 						$loop++;
 						?>
 						<div class="row justify-content-center my-20">
 							<!--begin: Pricing-->
-							<?php 
+							<?php
 							foreach ($data['data'] as  $content) {
 								?>
 								<div class="<?php echo $column; if($i!=0 && $i!=$required_divisions) { echo $border; } ?>">
@@ -58,7 +58,7 @@ $presentation_array = json_decode($configesponse,1);
 										<?php if($content['image']!="")
 										{
 											echo "<img src='".$content['image']."' width='300px' />";
-										} 
+										}
 										?>
 										<!--end::Icon-->
 										<!--begin::Content-->
@@ -71,14 +71,14 @@ $presentation_array = json_decode($configesponse,1);
 										<?php if($content['button_flag'])
 										{
 											echo '<a href="'.$content['button_url'].'" class="btn btn-primary text-uppercase font-weight-bolder px-15 py-3">'.$content['button_label'].'</a>';
-										} 
+										}
 										?>
 									</div>
 								</div>
 							<?php }    ?>
 						</div>
 						<?php if($loop==count($presentation_array)) { ?>
-						<a href="<?php echo '#column'.$loop ?>" class="btn btn-primary text-uppercase font-weight-bolder px-15 py-3 float-right">Next</a> 						
+						<a href="<?php echo '#column'.$loop ?>" class="btn btn-primary text-uppercase font-weight-bolder px-15 py-3 float-right">Next</a>
 						<?php } ?>
 						<!--end: Pricing-->
 					</div>

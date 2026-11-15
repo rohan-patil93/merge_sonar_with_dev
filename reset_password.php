@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('dbconfig.php');
 include_once('comm.php');
 //print_r($_POST);
@@ -26,13 +26,13 @@ if (isset($_POST['submit'])){
              $_SESSION['reset_password'] = 1;
               header("location:login.php");
           }
-        }  
+        }
     }
 }
 //print_r($_SESSION['reset_password']);
 function getIPAddress(){
     return $_SERVER['REMOTE_ADDR'];
-}?> 
+}?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,12 +47,12 @@ function getIPAddress(){
       <!-- Favicon icon -->
 
       <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-      <!-- Google font-->     
+      <!-- Google font-->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
       <!-- Required Fremwork -->
       <link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap/css/bootstrap.min.css">
       <!-- waves.css -->
-      <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all"><!-- feather icon --> 
+      <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all"><!-- feather icon -->
       <link rel="stylesheet" type="text/css" href="assets/css/style.css"><link rel="stylesheet" type="text/css" href="assets/css/pages.css">
         <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
 
@@ -68,16 +68,16 @@ function getIPAddress(){
         <div class="loader-bar"></div>
     </div>
     <div class="mobile-view-logo bg-primary text-center">
-        <img class="img-100 m-3" src="assets/images/sign-in/compliance_logo.png" alt="" >   
+        <img class="img-100 m-3" src="assets/images/sign-in/compliance_logo.png" alt="" >
     </div>
     <div class="row align-items-center">
         <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 bg-white text-center">
             <div class="p-5 custom-login-on">
-               <?php 
+               <?php
                       $error = $_GET['error'];
                       $dis_error['6009'] = "The old password entered is incorrect, </br>please check and reenter";
                       $dis_error['6008'] = "New password and confirm password does not match,</br please check";
-                      if($error !='') { 
+                      if($error !='') {
                         if($error == '6008' || $error == '6009'){   ?>
                       <div class="alert alert-warning alert-dismissible">
                           <span class="f-14"><?php echo $dis_error[$error]; ?></span>
@@ -86,7 +86,7 @@ function getIPAddress(){
                     <?php }} ?>
                 <h2 class="f-26 f-w-600 mt-4">Reset Password</h2>
                 <form class="md-float-material form-material" action="" method="post">
-                    <div class="width-60 text-left mt-5"> 
+                    <div class="width-60 text-left mt-5">
                         <div class="form-group">
                             <label for="oldPassword" class="visually-hidden">Old Password</label>
                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" placeholder="Old Password" id="oldPassword" name="old_password" autocomplete="off" required="" aria-label="Old Password">

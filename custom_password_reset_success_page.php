@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 session_start();
 session_destroy ();
@@ -62,7 +62,7 @@ session_destroy ();
   <!-- Calender css -->
   <link rel="stylesheet" type="text/css" href="assets/bower_components/fullcalendar/css/fullcalendar.css">
   <link rel="stylesheet" type="text/css" href="assets/bower_components/fullcalendar/css/fullcalendar.print.css" media='print'>
-  <!-- star rating theme css -->    
+  <!-- star rating theme css -->
   <link rel="stylesheet" type="text/css" href="assets/bower_components/jquery-bar-rating/css/bars-1to10.css">
   <link rel="stylesheet" type="text/css" href="assets/bower_components/jquery-bar-rating/css/bars-horizontal.css">
   <link rel="stylesheet" type="text/css" href="assets/bower_components/jquery-bar-rating/css/bars-movie.css">

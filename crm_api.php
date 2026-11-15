@@ -35,7 +35,7 @@ if($method == 'post'){
 		$details = $userObj->salesInvoiceThroughDeliveryOrderCreated($_GET);
 		echo json_encode($details);
 	}
-	
+
 
 
 }

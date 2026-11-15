@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('dbconfig.php');
 session_start();
 ?>
@@ -8,7 +8,7 @@ session_start();
 <head>
 <title>InfiSuite</title>
       <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-      <!-- Google font-->     
+      <!-- Google font-->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
       <!-- Required Fremwork -->
       <link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap/css/bootstrap.min.css">
@@ -96,7 +96,7 @@ session_start();
                       <div class="circle"></div>
                   </div>
               </div>
-            
+
               <div class="spinner-layer spinner-yellow">
                   <div class="circle-clipper left">
                       <div class="circle"></div>
@@ -108,7 +108,7 @@ session_start();
                       <div class="circle"></div>
                   </div>
               </div>
-            
+
               <div class="spinner-layer spinner-green">
                   <div class="circle-clipper left">
                       <div class="circle"></div>
@@ -131,7 +131,7 @@ session_start();
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    
+
                     <!-- Authentication card start -->
                     <form class="md-float-material form-material" id="from_data">
                         <div class="auth-box">
@@ -169,7 +169,7 @@ session_start();
                                         <div class="form-group mb-1">
                                             <img src="captcha.php?rand=<?php echo random_int(0, PHP_INT_MAX);?>" id='captchaimg' alt="" ><br>
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray"  id="captcha_code11" name="captcha_code" type="text" placeholder="Enter Captcha" aria-label="Enter Captcha">
-                                           
+
                                             <br>
                                             Can't read the image? click <a href='javascript: refreshCaptcha();' class="text-primary">here</a> to refresh.
                                         </div>
@@ -191,7 +191,7 @@ session_start();
     <!-- Login page end here -->
 
 
-    
+
 <!-- Required Jquery -->
 <script type="text/javascript" src="assets/bower_components/jquery/js/jquery.min.js"></script>
 <script type="text/javascript" src="assets/bower_components/jquery-ui/js/jquery-ui.min.js"></script>

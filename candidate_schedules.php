@@ -1,4 +1,4 @@
-<?php 
+<?php
   include_once('dbconfig.php');
   include_once('comm.php');
   if(isset($_POST['btnsubmited'])){
@@ -11,7 +11,7 @@
 			  if (document.readyState == "complete") {
 			    var mesg = "Time Slot Succesfully Book";
 			    tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',mesg,'');
-			  } 
+			  }
 			}
 		</script>
        	<?php
@@ -48,7 +48,7 @@ $countries = $getreturnresponse['countries'];
     <meta name="author" content="colorlib" />
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-    <!-- Google font-->     
+    <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap/css/bootstrap.min.css">
@@ -83,7 +83,7 @@ $countries = $getreturnresponse['countries'];
         var time_zone = $("#time_zone").val();
         var Rid = $("#Rid").val();
         var option = $("#option").val();
-        
+
         $('#btnsubmited').prop('disabled', true);
         $.ajax({
             url: "views/custom_list_candidate_timezone_ajax.php",
@@ -98,7 +98,7 @@ $countries = $getreturnresponse['countries'];
                   $("#timeslectiondiv").html("<p>Unfortunately, we regret to inform you that the interview slot you were hoping for is not currently available.Unfortunately, we regret to inform you that the interview slot you were hoping for is not currently available.</p>");
               }
             }
-        }); 
+        });
 
       }
    </script>
@@ -117,10 +117,10 @@ $countries = $getreturnresponse['countries'];
           <div class="card">
             <div class="card-body p-l-50 p-r-50 p-b-50">
                 <div class="text-center">
-                   <img class="img-200" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
+                   <img class="img-200" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
                 </div>
                 <?php if($getresponse['current_status'] == ST_ACTIVE){ ?>
-                <form class="md-float-material form-material m-t-50" action="" method="post"> 
+                <form class="md-float-material form-material m-t-50" action="" method="post">
                       <div class="row mt-5">
                           <div class="col-lg-4">
                               <h4><i class="ti-briefcase text-success"></i> <?php echo $candidate_details['Job_title']; ?></h4>
@@ -134,7 +134,7 @@ $countries = $getreturnresponse['countries'];
                                <div class="mt-2">
                                   <i class="ti-alarm-clock"></i>
                                   <span class="f-w-700"><?php echo CANDIDATE_TIMESLOT_MINUTS; ?> Minutes</span>
-                              </div>  
+                              </div>
                               <div class="mt-2">
                               	<?php if($getresponse['schedule_type'] == "1"){ ?>
                                   <i class="ti-mobile"></i>
@@ -154,7 +154,7 @@ $countries = $getreturnresponse['countries'];
                                   <label for="time_zone" class="form-label d-block">Time zone</label>
                                   <select class="form-control js-example-basic-single" name="timezone" id="time_zone" onchange="selectTimezone()" required>
                                     <?php foreach($timezonelist as $timezonekey=>$timezonedetail){ ?>
-										
+
 										<optgroup label="<?php echo $timezonekey; ?>" >
 										    <?php foreach($timezonedetail as $timezonekey1=>$timezonedetail1){ ?>
 										    	<option value="<?php echo $timezonekey1; ?>" ><?php echo $timezonekey1." (".$timezonedetail1['timezonetime12'].")"; ?></option>
@@ -165,7 +165,7 @@ $countries = $getreturnresponse['countries'];
                               </div>
                               <div class="form-group" id="timeslectiondiv">
                               </div>
-                              <div class="form-group mt-5"> 
+                              <div class="form-group mt-5">
                                 <input type="hidden" name="time" id="time" required>
                                 <input type="hidden" name="Rid" id="Rid" value="<?php echo $candidate_details['Rid']; ?>" >
                                 <input type="hidden" name="softversion" id="softversion" value="<?php echo base64_encode($candidate_details['dbname']); ?>" >
@@ -178,10 +178,10 @@ $countries = $getreturnresponse['countries'];
                 </form>
             <?php }else{ ?>
             	<div class="card-px text-center py-20 m-t-30">
-					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Already Scheduled Time</p>	 
+					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Already Scheduled Time</p>
 					<div class="text-center px-4">
 						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-					</div>	 
+					</div>
 				</div>
             <?php } ?>
             </div>

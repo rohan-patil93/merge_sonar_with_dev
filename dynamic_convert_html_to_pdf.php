@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('dbconfig.php');
 include_once('includes/session.php');
 require_once "dompdf/autoload.inc.php";
@@ -26,7 +26,7 @@ if($_POST['removepdf'] !=""){
 	$filename = "New_".$_SESSION['pdf_file_name']."_".time().'.pdf';
 	$sFilePath = SITEROOT.'/uploads/genrate_pdf/'.$filename;
 	$output = $dompdf->output();
-	file_put_contents($sFilePath, $output); 
+	file_put_contents($sFilePath, $output);
 	$response = ["pdf_url" => "uploads/genrate_pdf/".$filename,"pdf_name" =>$filename];
 	echo json_encode($response);
 }

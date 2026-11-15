@@ -104,7 +104,7 @@ if (isset($_GET['confirm']) && $_GET['confirm'] != '') {
   $confirm = base64_decode($_GET['confirm']);
   //echo $confirm;
   $url = API . "?mode=emailconfirm&confirm=" . $confirm;
-  //echo $url; exit;  
+  //echo $url; exit;
   $response = file_get_contents($url, false, $context);
   //echo $response;
   header("location:login.php?error=6001");
@@ -145,14 +145,14 @@ if (isset($_POST['submit'])) {
   if ($_POST['submit'] == "signup") {
     $_POST['email_check'] = 0;
     $url = API . "?mode=signup&data=" . json_encode($_POST, 1);
-    //echo $url; exit;  
+    //echo $url; exit;
     $response = file_get_contents($url, false, $context);
     //echo $response;
     header("location:login.php?error=6003");
   }
   if ($_POST['submit'] == "forgot") {
     $url = API . "?mode=forgotpassword&data=" . $_POST['email'];
-    // echo $url; exit;  
+    // echo $url; exit;
     $response = file_get_contents($url, false, $context);
     $row = json_decode($response, 1);
     //print_r($row); exit;

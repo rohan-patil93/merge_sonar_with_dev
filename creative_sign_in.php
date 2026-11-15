@@ -3,7 +3,7 @@
     <div class="loader-bg">
         <div class="loader-bar"></div>
     </div>
-    
+
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-lg-6">
@@ -21,10 +21,10 @@
                             <div class="card-body">
                                 <div class="p-5 custom-login-on">
                                     <div class="text-center mb-5">
-                                        <img class="img-200" src="assets/images/sign-in/HRstaq.png" alt="" >   
+                                        <img class="img-200" src="assets/images/sign-in/HRstaq.png" alt="" >
                                     </div>
                                     <h2 class="f-26 f-w-600 mt-4">Sign In</h2>
-									  <?php 
+									  <?php
                             $error = $_GET['error'];
                             $dis_error['6001'] = "Thank you very much for confirming your registration, </br> please login using email ID.";
                             $dis_error['6002'] = "Incorrect username or password.  Please try again.";
@@ -33,9 +33,9 @@
                             $dis_error['6005']  = "The email is not registered with us,</br>  please register to access the system";
                             $dis_error['6006']  = "Details are sent to your registered email,</br>  please check";
 
-                            if($error !='') { 
+                            if($error !='') {
                             if($error == '6002' || $error == '6004' || $error == '6005' ){ ?>
-                          
+
                             <div class="alert alert-warning alert-dismissible">
                                 <strong class="f-14"><?php echo $dis_error[$error]; ?></strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -45,7 +45,7 @@
                                 <strong class="f-14"><?php echo $dis_error[$error]; ?></strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                          
+
                         <?php } }?>
                                    <!--- <p class="text-muted f-14 f-w-600">Your Social Campaigns</p>
                                       <div class="d-block mt-5 text-center">
@@ -55,11 +55,11 @@
                                     <div class="d-block mt-5">
                                         <h3 class="text-muted f-14">Or with email</h3>
                                     </div>    -->
-										<form class="md-float-material form-material" action="" method="post" novalidate> 
-                           
+										<form class="md-float-material form-material" action="" method="post" novalidate>
+
                                     <div class="text-left mt-5">
-							
-                                        <div class="form-group"> 
+
+                                        <div class="form-group">
                                             <label for="chrUserName" class="visually-hidden">User Name</label>
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="chrUserName" id="chrUserName" required="" placeholder="User Name" aria-label="User Name">
                                         </div>
@@ -78,7 +78,7 @@
                                     </div>
 									</form>
                                 </div>
-								
+
 								<div class="p-5 regsterform" style="display:none">
                                     <h2 class="f-26 f-w-600 mt-2 text-center">Sign Up</h2>
                                   <!---  <p class="text-muted f-14 f-w-600 text-center">Your Social Campaigns</p>
@@ -90,7 +90,7 @@
                                         <h3 class="text-muted f-14">Or with email</h3>
                                     </div>   -->
 										<form class="md-float-material form-material" action="" method="post" novalidate>
-                           
+
                                     <div class="text-left mt-4">
                                         <div class="form-group">
                                             <label for="regUserName" class="visually-hidden">User Name</label>
@@ -104,7 +104,7 @@
                                             <label for="regPassword" class="visually-hidden">Password</label>
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="password" id="regPassword" required="" placeholder="Password" aria-label="Password">
                                              <span class="text-muted f-12 text-left ">Use 8 or more characters with a mix of letters, numbers & symbols.</span>
-                   
+
 										</div>
                                     <!---    <div class="form-group mb-1 text-left mt-2">
                                             <input type="checkbox" name="" id="term">
@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="p-5 mt-5 forgotpasswordon" style="display:none">
 									<form class="md-float-material form-material" action="" method="post" novalidate>
-                           
+
                                     <div class="">
                                         <h2 class="f-26 f-w-600 mt-2">Forgot Password</h2>
                                         <p class="text-muted f-14 f-w-600">Enter your email to reset your password.</p>

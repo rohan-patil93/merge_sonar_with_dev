@@ -4,7 +4,7 @@
     <div class="loader-bg">
         <div class="loader-bar"></div>
     </div>
-    
+
     <div class="" style="">
         <div class="container-fluid">
             <div class="row align-items-center">
@@ -18,7 +18,7 @@
                           <!--   <h2 class="text-dark f-30 f-w-600"><?php echo $image; ?></h2> -->
                             <p class="f-14 text-muted p-2 m-l-30 m-r-30 margin-0">Cubicle management system streamlines workspace allocation by enabling administrators to assign cubicles to employees efficiently. It also allows for the assignment of necessary equipment, ensuring each workspace is fully equipped and ready for use. This system enhances organization and maximizes resource utilization.</p>
                         </div>
-                    </div>          
+                    </div>
                 </div>
                 <div class="col-lg-6 text-center">
                     <div class="width-70">
@@ -27,10 +27,10 @@
                                 <div class="p-3 custom-login-on mob-pd">
                                     <img class="img-100 mt-3" src="<?php echo $image; ?>" alt="" >
                                     <h2 class="f-26 f-w-600 mt-2">Sign In</h2>
-									  <?php 
-                            if($error !='') { 
+									  <?php
+                            if($error !='') {
                             if($error == '6002' || $error == '6004' || $error == '6005' ){ ?>
-                          
+
                             <div class="alert alert-warning alert-dismissible">
                                 <strong class="f-14"><?php echo $dis_error[$error]; ?></strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -40,7 +40,7 @@
                                 <strong class="f-14"><?php echo $dis_error[$error]; ?></strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                          
+
                         <?php } }?>
                                     <!---   <p class="text-muted f-14 f-w-600">Your Social Campaigns</p>
                                    <div class="d-block mt-5">
@@ -51,8 +51,8 @@
                                         <h3 class="text-muted f-14">Or with email</h3>
                                     </div>   -->
 								<form class="md-float-material form-material" action="" method="post" >
-                                    
-                                    <div class="text-left mt-5"> 
+
+                                    <div class="text-left mt-5">
                                         <div class="form-group">
                                             <label for="chrUserName" class="visually-hidden">User Name</label>
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="chrUserName" id="chrUserName" required="" placeholder="User Name" aria-label="User Name">
@@ -61,7 +61,7 @@
                                             <label for="chrPassword" class="visually-hidden">Password</label>
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="chrPassword" id="chrPassword" required="" placeholder="Password" aria-label="Password">
                                         </div>
-                                        <?php if(CAPTCHA_YES_NO == 'YES'){ ?> 
+                                        <?php if(CAPTCHA_YES_NO == 'YES'){ ?>
                                   <div class="text-center"><img style="height: 50px;" src="captcha/captcha.php" alt="CAPTCHA" /></div>
                                             </br>
                                 <div class="form-group form-primary login-mean-class" >
@@ -79,7 +79,7 @@
                                         </div>
                                        <!--  <p class="text-muted f-w-600">Not a Member yet? <a class="text-primary" href="#" onclick="registerform()">Sign up</a></p> -->
                                     </div>
-								</form>	
+								</form>
                                 </div>
 								<div class="p-5 regsterform" style="display:none">
 								<form class="md-float-material form-material" action="" method="post" >
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="d-block mt-4 text-center">
                                         <h3 class="text-muted f-14">Or with email</h3>
-                                    </div>  ---> 
+                                    </div>  --->
                                     <div class="text-left mt-4">
                                         <div class="form-group">
                                             <label for="regUserName" class="visually-hidden">User Name</label>
@@ -106,7 +106,7 @@
                                             <label for="regPassword" class="visually-hidden">Password</label>
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="password" id="regPassword" required="" placeholder="Password" aria-label="Password">
                                              <span class="text-muted f-12 text-left ">Use 8 or more characters with a mix of letters, numbers & symbols.</span>
-                   
+
 										</div>
                                      <!---   <div class="form-group mb-1 text-left mt-2">
                                             <input type="checkbox" name="" id="term">

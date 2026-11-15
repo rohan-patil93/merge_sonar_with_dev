@@ -4,7 +4,7 @@ include_once('includes/session.php');
 include_once('dbconfig.php');
 include_once('comm.php');
 
-if(isset($_POST['submit'])){ 
+if(isset($_POST['submit'])){
 	$_POST['company_id']=$_SESSION['company_id'];
 	$_POST['user_id']=$_SESSION['userid'];
 	if(count($_POST['module_id']) !=0){
@@ -26,7 +26,7 @@ if(isset($_POST['submit'])){
 				  title: 'Oops...',
 				  text: '<?php echo $_SESSION['error_message']['9048'];?>'
 				});
-			  } 
+			  }
 			}
 			</script>
 <?php	}
@@ -44,7 +44,7 @@ foreach($modulelists as $modulelist){
 	}
 	if($modulelist['is_active'] == '0'){
 		$activemodule[$modulelist['module_id']] = $modulelist['module_id'];
-	} 
+	}
 }
 
 $modulesetuplinkwh["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0');
@@ -70,7 +70,7 @@ foreach($modulelinklists as $linking){
 	<!-- Favicon icon -->
 
 	<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-	<!-- Google font-->     
+	<!-- Google font-->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
 	<!-- Required Fremwork -->
 	<link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap/css/bootstrap.min.css">
@@ -118,8 +118,8 @@ foreach($modulelinklists as $linking){
 		}
 	}
 	function closeModuleSelection(){
-		$(".custom-popup-open").hide('slow');	
-		$(".custom-popup-open").html('');	
+		$(".custom-popup-open").hide('slow');
+		$(".custom-popup-open").html('');
 	}
 	// function submitModule(){
 	// 	var modules = [];
@@ -151,7 +151,7 @@ foreach($modulelinklists as $linking){
 			<div class="card-body">
 				<div class="row">
 
-					<?php 
+					<?php
 					//echo "<pre>";  print_r($allmodule); echo "</pre>";
 					foreach($allmodule as $modul){ if($modul['linking'] == 1){ ?>
 						<div class="col-lg-2 position-relative" >
@@ -163,20 +163,20 @@ foreach($modulelinklists as $linking){
 											<?php if($modul['module_logo'] !=""){ ?>
 												<img src='uploads/module/<?php echo $modul['module_logo']; ?>' class="img-60" style="height: auto;" alt="" >
 											<?php }else{ ?>
-												
+
 											<?php  } ?>
 										</span>
 										<h3 class="text-facebook f-w-700 f-16 mb-0 mt-2"><?php echo $modul['module_name']; ?></h3>
-										<p class="f-10 mb-0"><?php echo $modul['display_name']; 
+										<p class="f-10 mb-0"><?php echo $modul['display_name'];
 										//if(count($linkingmodules[$modul['module']])) ?></p>
 									</label>
 								</div>
 							</div>
 							<div class="custom-popup-open custom-popup-slide-<?php echo $modul['module_id']; ?> text-start" style="left:227px; top:0px; display: none; z-index: 999; width : 600px;">
 							</div>
-						</div>	
+						</div>
 						<?php if(isset($linkingmodules[$modul['module_id']])){ ?>
-						
+
 					<?php } ?>
 					<?php }  }?>
 				</div>

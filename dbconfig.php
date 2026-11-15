@@ -40,7 +40,7 @@
 ###################################################################
 
 ob_start();
-//session_start(); 
+//session_start();
 ini_set("display_errors", 0);
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -620,10 +620,10 @@ define('ST_INVOICE_GENERATED', '203');
 define("VMS_ROLES", [1 => "1", 2 => "5", 3 => "5", 4 => "5", 5 => "3", 6 => "5", 7 => "5", 8 => "4", 9 => "5", 10 => "5", 11 => "5", 12 => "5", 13 => "2", 14 => "5", 15 => "5", 16 => "5", 17 => "5", 18 => "5"]);
 
 define('PRIMARY', '#4099ff'); //primary
-define('SUCCESS', '#2ed8b6'); //success 
-define('WARNING', '#FFB64D'); //warning 
-define('DANGER', '#FF5370'); //warning 
-define('INFO', '#00bcd4'); //info 
+define('SUCCESS', '#2ed8b6'); //success
+define('WARNING', '#FFB64D'); //warning
+define('DANGER', '#FF5370'); //warning
+define('INFO', '#00bcd4'); //info
 
 define('SUPERADMIN_ROLE', 'SUPERADMIN');
 define('ADMIN_ROLE', 'ADMIN');
@@ -693,7 +693,7 @@ define('FIELD_AUTO_CHECK', '1');
 define('INFISUITESOURCE', '4');
 
 define('DEFAULT_PHONE_NUMBER_FORMAT', array("digit_format" => "/^(\d{3})(\d{3})(\d{4})$/", "view_format" => "($1) $2-$3"));
-#####################################candidate schedule insert entry email#################### 
+#####################################candidate schedule insert entry email####################
 
 define('CANDIDATE_TIMESLOT_MINUTS', '45');
 define('TELEPHONINC_INTERVIEW', '12');
@@ -717,7 +717,7 @@ define('MODUL_ATTENDANCE', 9);
 
 
 
-#####################################candidate schedule insert entry email#################### 
+#####################################candidate schedule insert entry email####################
 
 
 // define("SUBSCRIPTION_ROLE",'13');
@@ -759,7 +759,7 @@ define('DB_LIKE', ' LIKE ');
 
 ###################################################################
 
-######### Physical Path Constants 
+######### Physical Path Constants
 
 ###################################################################
 
@@ -784,7 +784,7 @@ define("USER_IMAGE_ROOT", SITEROOT . "/images/");
 
 ###################################################################
 
-######### Url Constants 
+######### Url Constants
 
 ###################################################################
 

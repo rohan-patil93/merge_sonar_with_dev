@@ -22,7 +22,7 @@ if($method == 'post'){
     $return = $tallyObj->getAPImastersAPICode($_GET,$data);
     $response = json_encode($return);
     echo $response;
-}else{ 
+}else{
     include_once("model/tally.class.php");
     $tallyObj=new tallyClass();
     $return = $tallyObj->getAPImastersAPICode($_GET,$_POST);

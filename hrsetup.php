@@ -79,7 +79,7 @@ if(isset($_POST['Save'])){
   }
   if($_POST['payroll_day']!='0' || $_POST['payroll_day']=='' ){
    $_POST['default_payroll_day'] = '31';
- } 
+ }
  $_POST['esi_employer_contribution_in_ctc'] = '0';
  $_POST['epf_employer_contribution_in_ctc'] = '0';
  if($_POST['esi_employer_contribution_in_ctc']){
@@ -188,7 +188,7 @@ document.addEventListener('error', function (e) {
       background-color: white;
       overflow-y: scroll;
       height: 500px;
-      width: 75% !important; 
+      width: 75% !important;
     }
     .steps.clearfix {
       width: 20% !important;
@@ -230,9 +230,9 @@ document.addEventListener('error', function (e) {
           console.log(response);
           var response = JSON.parse(response);
           console.log(response.length);
-          var select = document.getElementById(element_id); 
+          var select = document.getElementById(element_id);
           document.getElementById(element_id).innerHTML = null;
-          for (var i = 0; i < response.length; i++) 
+          for (var i = 0; i < response.length; i++)
           {
            var el = document.createElement("option");
            if(table_name=='states'){
@@ -262,9 +262,9 @@ document.addEventListener('error', function (e) {
       success: function(response) {
         var response = JSON.parse(response);
         console.log(response.length);
-        var select = document.getElementById(element_id); 
+        var select = document.getElementById(element_id);
         document.getElementById(element_id).innerHTML = null;
-        for (var i = 0; i < response.length; i++) 
+        for (var i = 0; i < response.length; i++)
         {
          var el = document.createElement("option");
          if(table_name=='states'){
@@ -474,7 +474,7 @@ document.addEventListener('error', function (e) {
 
                 document.getElementById("rcomponentid_"+updaterowid).innerHTML = '<div class="col-xl-5"> <label class="checkbox checkbox-primary" style="float: left;">  <input type="checkbox" checked name="selectedcomponentlist3[]" title="Selectedcomponentlist3" aria-label="Selectedcomponentlist3"> <span></span>  </label> &nbsp;<a href="#"  onclick="showreimburse(\''+funname+'\',\''+updaterowid+'\',\''+table_name+'\')"><label>'+document.getElementById('reimpop_name').value+'</label> </a></div>  <div class="col-xl-2"><label>'+document.getElementById('reimpop_code').value+'</label></div><div class="col-xl-5"><label>'+document.getElementById('reimpop_calculation_number').value+'</label></div>';
               }
-            } 
+            }
             else {
              var newcolum="";
 
@@ -556,7 +556,7 @@ document.addEventListener('error', function (e) {
       }
     }
     document.getElementById('updaterowid').value ="";
-  }      
+  }
 });
 }
 function  removeslabrows(argument) {
@@ -569,13 +569,13 @@ function  removeslabrows(argument) {
 function addslabrows(){
                 // var count = $(".itemRow").length;
                 //  count++;
-                jQuery(document).ready(function() {    
+                jQuery(document).ready(function() {
                  KTBootstrapDatepicker.init();
                });
                 var htmlRows = '';
                 htmlRows += '<tr>';
                 htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input type="checkbox" value="" class="itemRow d-none" title="Input" aria-label="Input"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span></label></div></td>';
-                htmlRows += '<td>       <input type="text" class="form-control"   autocomplete="off" name="start_range[]" title="Start Range" aria-label="Start Range">  </td><td><input type="text" class="form-control"  autocomplete="off" name="end_range[]" title="End Range" aria-label="End Range"></td>  <td><input class="form-control"   autocomplete="off" type="text" name="tax_amount[]" title="Tax Amount" aria-label="Tax Amount"> </td>';   
+                htmlRows += '<td>       <input type="text" class="form-control"   autocomplete="off" name="start_range[]" title="Start Range" aria-label="Start Range">  </td><td><input type="text" class="form-control"  autocomplete="off" name="end_range[]" title="End Range" aria-label="End Range"></td>  <td><input class="form-control"   autocomplete="off" type="text" name="tax_amount[]" title="Tax Amount" aria-label="Tax Amount"> </td>';
                 htmlRows += '</tr>';
                 $('#slabtable').append(htmlRows);
               }
@@ -604,7 +604,7 @@ function addslabrows(){
              <div class=" flex-column-fluid">
                <div class="card card-custom">
                 <div class="card-body p-0">
-<!-- 
+<!--
                  <a href="#"onclick="showreimburse('Reimbursement','','system_other_earnings');" class="btn btn-success waves-effect waves-light">
                   <i class="ti-plus"></i> New Reimbursement
                 </a> -->
@@ -655,15 +655,15 @@ function addslabrows(){
 
 
 
-  </div>  
+  </div>
   <span class="form-text text-muted"><?php //echo $helptext['logo'];?> </span>
-</div> 
+</div>
 <div class="form-group col-lg-6">
   <span class="d-inline-block fw-bold" style="margin-bottom:5px">Location</span>
   <div class="input-group input-icon-right">
     <input type="text"  class="form-control " name="location" placeholder="<?php echo $placeholder['location'];?>" title="Location" aria-label="Location">
 
-  </div>                                                   
+  </div>
   <!--   <span class="form-text text-muted"><?php echo $helptext['location'];?> </span> -->
 
 </div>
@@ -675,7 +675,7 @@ function addslabrows(){
       <?php foreach($industrylist as $valueindustry) { ?>
         <option value="<?php echo $valueindustry['id'];?>"><?php echo $valueindustry['industries']; ?></option>
       <?php } ?>
-    </select> 
+    </select>
 
   </div>
   <!--       <span class="form-text text-muted"><?php echo $helptext['industry'];?> </span> -->
@@ -694,7 +694,7 @@ function addslabrows(){
   <div class="input-group input-icon-right">
     <input type="text"  name="admin_email" class="form-control required" placeholder="<?php echo $placeholder['email'];?>" title="Admin Email" aria-label="Admin Email">
 
-    
+
   </div>
   <!--     <span class="form-text text-muted"><?php echo $helptext['org_name'];?></span> -->
 </div>
@@ -758,7 +758,7 @@ function addslabrows(){
     <?php foreach($dateformatlist as $valuedates) { ?>
       <option value="<?php echo $valuedates;?>"><?php echo $valuedates; ?></option>
     <?php } ?>
-  </select> 
+  </select>
 
 </div>
 <!--   <span class="form-text text-muted"><?php echo $helptext['dateformat'];?> </span> -->
@@ -921,7 +921,7 @@ function addslabrows(){
   </div>
 
 
-  <div class="col-lg-4"> 
+  <div class="col-lg-4">
     <select class="form-control mt-5 form-select js-example-basic-single"  name="default_payroll_day" title="Default Payroll Day" aria-label="Default Payroll Day">
       <?php for($i=1; $i<=31; $i++) { ?>
         <option value="<?php echo $i;?>"><?php echo $i; ?></option>
@@ -931,7 +931,7 @@ function addslabrows(){
 
                                        <!--      <span class="form-text text-muted"><?php echo $helptext['payroll'];?> </span>
                                        -->   </div>
-                                       
+
                                        <!--end::Select-->
                                      </div>
                                      <!--end: Wizard Step 3-->
@@ -1027,20 +1027,20 @@ function addslabrows(){
                                                     <input type="text" class="form-control" placeholder="<?php echo $placeholder['epfemprc'];?>"  name="epf_employer_contribution" title="Epf Employer Contribution" aria-label="Epf Employer Contribution">
                                                   </div>
                                                   <!--   <span class="form-text text-muted"><?php echo $helptext['epfemprc'];?> </span> -->
-                                                </div> 
-                                                <div class="form-group col-lg-12"> 
+                                                </div>
+                                                <div class="form-group col-lg-12">
                                                   <div class="checkbox-fade fade-in-primary">
                                                     <div class="form-label">
-                                                      <label class="checkbox"> 
+                                                      <label class="checkbox">
                                                         <input type="checkbox" style="display: none"  name="payroll_day" value="31" title="Payroll Day" aria-label="Payroll Day"> <span class="cr">
                                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                         </span>
                                                         <span>  Employer Contribution In CTC </span>
                                                       </label>
-                                                    </div> 
+                                                    </div>
                                                   </div>
-                                                </div> 
-                                                <div class="form-group col-lg-12"> 
+                                                </div>
+                                                <div class="form-group col-lg-12">
                                                   <div class="checkbox-fade fade-in-primary">
                                                     <label class="form-label">
                                                       <input type="checkbox"  style="display: none" name="allow_override" title="Allow Override" aria-label="Allow Override">   <span class="cr">
@@ -1048,10 +1048,10 @@ function addslabrows(){
                                                       </span> &nbsp;  Override Contribution rate at employee level
                                                     </label>
                                                   </div>
-                                                </div>               
-                                              </div>             
-                                              <div class="row">                          
-                                               <div class="col-lg-6">      
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                               <div class="col-lg-6">
                                                 <a href="#"  onclick="setenable('epf')" class="btn btn-bg-light" id="epf">Enable</a>
                                                 <input type="hidden" name="pf_checked" id="pf_checked" value="0">
                                               </div>
@@ -1089,7 +1089,7 @@ function addslabrows(){
                                             <div class="input-group input-icon-right">
                                               <input type="text" class="form-control" placeholder="<?php echo $placeholder['esi'];?>" name="esi_no" title="Esi No" aria-label="Esi No">
 
-                      </div><!-- 
+                      </div><!--
                       <span class="form-text text-muted"><?php echo $helptext['esi'];?> </span> -->
 
                     </div>
@@ -1099,14 +1099,14 @@ function addslabrows(){
                        <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
                          <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
                        <?php } ?>
-                    </select><!-- 
+                    </select><!--
                     <span class="form-text text-muted"><?php echo $helptext['esideduct'];?> </span> -->
                   </div>
                   <div class="form-group col-lg-6">
                     <span class="d-inline-block fw-bold" style="margin-bottom:5px">Employee Contribution (%):</span>
                     <div class="input-group input-icon-right">
                       <input type="text" class="form-control"  name="esi_employee_contribution" placeholder="<?php echo $placeholder['esiempc'];?>" title="Esi Employee Contribution" aria-label="Esi Employee Contribution">
-                    </div><!-- 
+                    </div><!--
                     <span class="form-text text-muted"><?php echo $helptext['esiempc'];?> </span> -->
                   </div>
                   <div class="form-group col-lg-6">
@@ -1114,14 +1114,14 @@ function addslabrows(){
                     <div class="input-group input-icon-right">
                       <input type="text" class="form-control"  placeholder="<?php echo $placeholder['esiemprc'];?>" name="esi_employer_contribution" title="Esi Employer Contribution" aria-label="Esi Employer Contribution">
 
-                    </div><!-- 
+                    </div><!--
                     <span class="form-text text-muted"><?php echo $helptext['esiemprc'];?> </span> -->
-                  </div> 
-                  <div class="form-group col-lg-6"> 
+                  </div>
+                  <div class="form-group col-lg-6">
 
                     <div class="checkbox-fade fade-in-primary">
                       <div class="form-label">
-                        <label class="checkbox"> 
+                        <label class="checkbox">
                           <input type="checkbox" style="display: none"  name="esi_employer_contribution_in_ctc" value="31" title="Esi Employer Contribution In Ctc" aria-label="Esi Employer Contribution In Ctc"> <span class="cr">
                             <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                           </span>
@@ -1129,9 +1129,9 @@ function addslabrows(){
                         </label>
                       </div> </div>
 
-                    </div>  
+                    </div>
                   </div>
-                  <div class="col-xl-6 mt-10">      
+                  <div class="col-xl-6 mt-10">
                    <a href="#"  onclick="setenable('esi')" class="btn btn-bg-light" id="esi">Enable</a>
 
                    <input type="hidden" name="esi_checked" id="esi_checked"  value="0">
@@ -1162,14 +1162,14 @@ function addslabrows(){
                   <div class="input-group input-icon-right">
                     <input type="text" class="form-control"  name="pt_number" placeholder="<?php echo $placeholder['pt'];?>" title="Pt Number" aria-label="Pt Number">
 
-                      </div><!-- 
+                      </div><!--
                       <span class="form-text text-muted"><?php echo $helptext['pt'];?> </span> -->
                     </div>
                     <div class="form-group col-lg-6">
                       <span class="d-inline-block fw-bold" style="margin-bottom:5px">Work Location</span>
                       <div class="input-group input-icon-right">
                         <input type="text" class="form-control"  placeholder="<?php echo $placeholder['ptloc'];?>" name="work_location_id" title="Work Location Id" aria-label="Work Location Id">
-                      </div><!-- 
+                      </div><!--
                       <span class="form-text text-muted"><?php echo $helptext['ptloc'];?> </span> -->
                     </div>
 
@@ -1180,7 +1180,7 @@ function addslabrows(){
                        <?php foreach ($statelist as $statevalue)  { ?>
                          <option value="<?php echo $statevalue['id']; ?>"><?php echo $statevalue['state_name']; ?></option>
                        <?php } ?>
-                      </select><!-- 
+                      </select><!--
                       <span class="form-text text-muted"><?php echo $helptext['ptstate'];?> </span>    -->
                     </div>
                     <div class="form-group col-lg-6">
@@ -1189,7 +1189,7 @@ function addslabrows(){
                        <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
                          <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
                        <?php } ?>
-                      </select><!-- 
+                      </select><!--
                       <span class="form-text text-muted"><?php echo $helptext['ptdeduct'];?> </span> -->
                     </div>
                     <div class="form-group col-lg-12">
@@ -1239,7 +1239,7 @@ function addslabrows(){
              </div>
 
            </div>
-           <div class="">      
+           <div class="">
              <a href="#"  onclick="setenable('pt')" class="btn btn-bg-light" id="pt">Enable</a>
 
              <input type="hidden" name="pt_checked" id="pt_checked"  value="0" >
@@ -1269,7 +1269,7 @@ function addslabrows(){
             <?php foreach ($statelist as $statevalue)  { ?>
              <option value="<?php echo $statevalue['id']; ?>"><?php echo $statevalue['state_name']; ?></option>
            <?php } ?>
-                      </select><!-- 
+                      </select><!--
                       <span class="form-text text-muted"><?php echo $helptext['lwfloc'];?> </span> -->
 
                     </div>
@@ -1279,13 +1279,13 @@ function addslabrows(){
                        <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
                          <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
                        <?php } ?>
-                  </select><!-- 
+                  </select><!--
                   <span class="form-text text-muted"><?php echo $helptext['lwfdeduct'];?> </span> -->
 
                 </div>
                 <div class="form-group col-lg-6">
                  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Employer Contribution Amount:</span>
-                 <div class="input-group input-group-button "> 
+                 <div class="input-group input-group-button ">
                   <button class="btn btn-info" type="button" onclick="deloptionrows('s1rowid1')">RS.</button>
                   <input type="text" class="form-control width1"  name="lwf_employer_contribution" placeholder="<?php echo $placeholder['lwfrs'];?>" title="Lwf Employer Contribution" aria-label="Lwf Employer Contribution">
                 </div>
@@ -1293,7 +1293,7 @@ function addslabrows(){
               </div>
 
             </div>
-            <div class="">      
+            <div class="">
              <a href="#"  onclick="setenable('lwf')" class="btn btn-bg-light" id="lwf">Enable</a>
 
              <input type="hidden" name="lwf_checked" id="lwf_checked"  value="0">
@@ -1325,7 +1325,7 @@ function addslabrows(){
 
 
 
-<!-- 
+<!--
 
        <div class="card">
           <div class="card-header" id="headingTwo3">
@@ -1340,7 +1340,7 @@ function addslabrows(){
                       <label>ESI Number</label>
                       <div class="input-group input-icon-right">
                           <input type="text" class="form-control" placeholder="<?php echo $placeholder['esi'];?>" name="esi_no" title="Esi No" aria-label="Esi No">
-                     
+
                       </div>
                       <span class="form-text text-muted"><?php echo $helptext['esi'];?> </span>
 
@@ -1365,22 +1365,22 @@ function addslabrows(){
                     <label>Employer Contribution (%):</label>
                     <div class="input-group input-icon-right">
                         <input type="text" class="form-control"  placeholder="<?php echo $placeholder['esiemprc'];?>" name="esi_employer_contribution" title="Esi Employer Contribution" aria-label="Esi Employer Contribution">
-                   
+
                     </div>
                     <span class="form-text text-muted"><?php echo $helptext['esiemprc'];?> </span>
-                </div> 
-                <div class="form-group col-lg-6"> 
+                </div>
+                <div class="form-group col-lg-6">
                   <label>&nbsp;</label>
                     <div class="radio-inline">
-                      <label class="checkbox"> 
-                        <input type="checkbox"  name="esi_employer_contribution_in_ctc" value="31" title="Esi Employer Contribution In Ctc" aria-label="Esi Employer Contribution In Ctc">  <span></span> &nbsp; Employer Contribution In CTC 
+                      <label class="checkbox">
+                        <input type="checkbox"  name="esi_employer_contribution_in_ctc" value="31" title="Esi Employer Contribution In Ctc" aria-label="Esi Employer Contribution In Ctc">  <span></span> &nbsp; Employer Contribution In CTC
                       </label>
                     </div>
-                </div>  
                 </div>
-                <div class="col-xl-6 mt-10">      
+                </div>
+                <div class="col-xl-6 mt-10">
                    <a href="#"  onclick="setenable('esi')" class="btn btn-bg-light" id="esi">Enable</a>
-                   
+
                    <input type="hidden" name="esi_checked" id="esi_checked"  value="0">
                 </div>
              </div>
@@ -1399,7 +1399,7 @@ function addslabrows(){
                       <label>PT Number</label>
                       <div class="input-group input-icon-right">
                           <input type="text" class="form-control"  name="pt_number" placeholder="<?php echo $placeholder['pt'];?>" title="Pt Number" aria-label="Pt Number">
-                     
+
                       </div>
                       <span class="form-text text-muted"><?php echo $helptext['pt'];?> </span>
                   </div>
@@ -1410,7 +1410,7 @@ function addslabrows(){
                       </div>
                       <span class="form-text text-muted"><?php echo $helptext['ptloc'];?> </span>
                   </div>
-                   
+
                    <div class="form-group col-lg-6">
                     <input type="hidden" name="pt_state_id" id="pt_state_id">
                       <label>State</label>
@@ -1419,7 +1419,7 @@ function addslabrows(){
                          <option value="<?php echo $statevalue['id']; ?>"><?php echo $statevalue['state_name']; ?></option>
                          <?php } ?>
                       </select>
-                        <span class="form-text text-muted"><?php echo $helptext['ptstate'];?> </span>   
+                        <span class="form-text text-muted"><?php echo $helptext['ptstate'];?> </span>
                    </div>
                    <div class="form-group col-lg-6">
                      <div> <label>Deduction Cycle</label></div>
@@ -1431,7 +1431,7 @@ function addslabrows(){
                       <span class="form-text text-muted"><?php echo $helptext['ptdeduct'];?> </span>
                   </div>
                    <div class="form-group col-lg-12">
-                      
+
                          <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer text-center" id="slabtable">
                             <tr>
                                <th scope="col"  width="2%"></th>
@@ -1448,11 +1448,11 @@ function addslabrows(){
                                 </td>
                                <td>
                                  <input type="text" class="form-control" autocomplete="off" name="end_range[]" title="End Range" aria-label="End Range">
-                                  
+
                                </td>
                                <td>
                                 <input type="text" class="form-control" autocomplete="off" name="tax_amount[]" title="Tax Amount" aria-label="Tax Amount">
-                            
+
                                </td>
                             </tr>
                          </table>
@@ -1463,11 +1463,11 @@ function addslabrows(){
                             </div>
                          </div>
                       </div>
-                   
+
                 </div>
-                <div class="">      
+                <div class="">
                    <a href="#"  onclick="setenable('pt')" class="btn btn-bg-light" id="pt">Enable</a>
-                    
+
                    <input type="hidden" name="pt_checked" id="pt_checked"  value="0" >
                 </div>
              </div>
@@ -1479,7 +1479,7 @@ function addslabrows(){
                 Labour Welfare Fund (LWF)
              </div>
           </div>
-         
+
 
 
 
@@ -1515,16 +1515,16 @@ function addslabrows(){
                     <div class="input-group input-icon-right">
                        <div class="input-group-prepend"><span class="input-group-text"><span>Rs</span></span></div>
                         <input type="text" class="form-control"  name="lwf_employer_contribution" placeholder="<?php echo $placeholder['lwfrs'];?>" title="Lwf Employer Contribution" aria-label="Lwf Employer Contribution">
-                       
+
                     </div>
                     <span class="form-text text-muted"><?php echo $helptext['lwfrs'];?> </span>
 
                 </div>
-                
+
                 </div>
-                <div class="">      
+                <div class="">
                    <a href="#"  onclick="setenable('lwf')" class="btn btn-bg-light" id="lwf">Enable</a>
-                 
+
                    <input type="hidden" name="lwf_checked" id="lwf_checked"  value="0">
                 </div>
              </div>
@@ -1560,7 +1560,7 @@ function addslabrows(){
         <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_3" role="tab">Reimbursements</a>
       </li>
     </ul>
-    
+
     <div class="tab-content mt-5" id="myTabContent">
       <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
         <div class="text-right">
@@ -1579,12 +1579,12 @@ function addslabrows(){
             <h4 class="mb-10 font-weight-bold text-dark">Calculation</h4>
           </div>
         </div>
-        <?php 
+        <?php
         foreach ($earnings_componentlist as $scvalue) {
 
           ?>
           <div class="row" id="componentid_<?php echo $scvalue['id'];?>">
-            <div class="col-xl-5 " > 
+            <div class="col-xl-5 " >
                   <div class="checkbox-fade fade-in-primary">
                     <label class="form-label">
                       <input class="itemRow d-none" type="checkbox" <?php echo $scvalue['is_active']=='0'?'checked':'';?> name="selectedcomponentlist1[]" value="<?php echo $scvalue['id'];?>" title="Selectedcomponentlist1" aria-label="Selectedcomponentlist1">
@@ -1600,33 +1600,33 @@ function addslabrows(){
 
 
 
-                  <div class="col-xl-2"> 
+                  <div class="col-xl-2">
                     <label><?php echo $scvalue['code']; ?></label>
                   </div>
-                  <div class="col-xl-5">      
+                  <div class="col-xl-5">
                     <label>
-                      <?php   $scvalue['varible_pay']=='0' ? 
+                      <?php   $scvalue['varible_pay']=='0' ?
                       $display_text_calculationtype = "Variable; " : $display_text_calculationtype = "Fixed; ";
 
                       if($scvalue['calculation_type']=='A')  {
-                        $display_text_calculationtype .= "Flat Amount"; 
+                        $display_text_calculationtype .= "Flat Amount";
                       }
 
                       if($scvalue['calculation_number']!=0) {
                         if($scvalue['calculation_type']=='P')  {
-                          $display_text_calculationtype .= $scvalue['calculation_number']."% of ".$scvalue['calculation_category']; 
+                          $display_text_calculationtype .= $scvalue['calculation_number']."% of ".$scvalue['calculation_category'];
                         }else{
                           $display_text_calculationtype .=' of '.$scvalue['calculation_number'];
 
                         }
 
-                      } 
+                      }
 
                       echo $display_text_calculationtype; ?>
                     </label>
                   </div>
                 </div>
-                <?php 
+                <?php
               } ?>
             </div>
             <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
@@ -1656,8 +1656,8 @@ function addslabrows(){
             foreach ($deduction_componentlist as $scvalue) {
               ?>
               <div class="row" id='componentid_<?php echo $scvalue['id'];?>' >
-                <div class="col-xl-5" id="componentid_<?php echo $scvalue['id'];?>"> 
-                <!--   <label class="checkbox checkbox-primary" style="float: left;">      
+                <div class="col-xl-5" id="componentid_<?php echo $scvalue['id'];?>">
+                <!--   <label class="checkbox checkbox-primary" style="float: left;">
                     <input type="checkbox" <?php echo $scvalue['is_active']=='0'?'checked':'';?> name="selectedcomponentlist2[]" value="<?php echo $scvalue['id'];?>" / title="Selectedcomponentlist2" aria-label="Selectedcomponentlist2"> <span></span>  </label> &nbsp;
                   -->
 
@@ -1675,33 +1675,33 @@ function addslabrows(){
 
 
                   </div>
-                  <div class="col-xl-2">      
+                  <div class="col-xl-2">
                     <label><?php echo $scvalue['code']; ?></label>
                   </div>
-                  <div class="col-xl-5">      
+                  <div class="col-xl-5">
                     <label>
-                      <?php   $scvalue['varible_pay']=='0' ? 
+                      <?php   $scvalue['varible_pay']=='0' ?
                       $display_text_calculationtype = "Variable; " : $display_text_calculationtype = "Fixed; ";
 
                       if($scvalue['calculation_type']=='A')  {
-                        $display_text_calculationtype .= "Flat Amount"; 
+                        $display_text_calculationtype .= "Flat Amount";
                       }
 
                       if($scvalue['calculation_number']!=0) {
                         if($scvalue['calculation_type']=='P')  {
-                          $display_text_calculationtype .= $scvalue['calculation_number']."% of ".$scvalue['calculation_category']; 
+                          $display_text_calculationtype .= $scvalue['calculation_number']."% of ".$scvalue['calculation_category'];
                         }else{
                           $display_text_calculationtype .=' of '.$scvalue['calculation_number'];
 
                         }
 
-                      } 
+                      }
 
                       echo $display_text_calculationtype; ?>
                     </label>
                   </div>
                 </div>
-                <?php 
+                <?php
               } ?>
             </div>
             <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
@@ -1725,15 +1725,15 @@ function addslabrows(){
                       <h4><i class="kt-font-brand flaticon-add-circular-button text-primary "> </i>New Reimbursement</h4>
                     </a>
                   </div>
-                  <div class="col-xl-6"> 
+                  <div class="col-xl-6">
                   </div> -->
                 </div>
                 <?php
                 foreach ($other_earnings_componentlist as $scvalue) {
                   ?>
                   <div class="row" id="rcomponentid_<?php echo $scvalue['id'];?>">
-                   <div class="col-xl-5" >      
-                  <!--   <label class="checkbox checkbox-primary" style="float: left;"> 
+                   <div class="col-xl-5" >
+                  <!--   <label class="checkbox checkbox-primary" style="float: left;">
                       <input type="checkbox" <?php echo $scvalue['is_active']=='0'?'checked':'';?> name="selectedcomponentlist3[]" value="<?php echo $scvalue['id'];?>" / title="Selectedcomponentlist3" aria-label="Selectedcomponentlist3"> <span></span>  </label> &nbsp;
                       <a href="#" onclick="showreimburse('Reimbursement','<?php echo $scvalue['id'];?>','system_other_earnings');">
                         <label><?php echo $scvalue['earning_name']; ?></label> </a> -->
@@ -1752,20 +1752,20 @@ function addslabrows(){
 
 
                       </div>
-                      <div class="col-xl-2">      
+                      <div class="col-xl-2">
                         <label><?php echo $scvalue['system_code']; ?></label>
                       </div>
-                      <div class="col-xl-5">      
+                      <div class="col-xl-5">
                         <label> <?php echo $scvalue['earning_upto_amount'] . " Per month";?></label>
                       </div>
                     </div>
-                    <?php 
+                    <?php
                   } ?>
                 </div>
                 <!--end::Section-->
               </div>
             </div>
-            <!--end: Wizard Step 5--> 
+            <!--end: Wizard Step 5-->
 
 
           </fieldset>
@@ -1795,7 +1795,7 @@ function addslabrows(){
     <div id="earnings_popup" style="display: none">
      <div class="row">
       <div class="form-group col-xl-6">
-       <label>Component Category</label></br> 
+       <label>Component Category</label></br>
        <select class="form-select js-example-basic-single  kt_select2_46" title="Select" aria-label="Select">
          <option value=0> Select Any One  </option>
          <?php foreach ($salary_categories as $catname)  { ?>
@@ -1867,7 +1867,7 @@ function addslabrows(){
    <div class="radio radio-inline">
     <label class="form-label">
       <input type="radio" id="pop_calculation_type1" name="pop_calculation_type"   value="A" class="d-none" title="Pop Calculation Type" aria-label="Pop Calculation Type">
-      <i class="helper"></i>Flat Amount 
+      <i class="helper"></i>Flat Amount
     </label>
   </div>
 
@@ -1882,9 +1882,9 @@ function addslabrows(){
 <div class="row">
  <div class="col-lg-6 form-group">
    <label>Calculation Value</label>
-   <div class="input-group input-group-button"> 
+   <div class="input-group input-group-button">
      <button class="btn btn-info" type="button" >Rs.</button>
-     <input type="text"  id="pop_calculation_number" placeholder="<?php echo $placeholder['compamt'];?>" class="form-control text-right width1" title="Input" aria-label="Input"> 
+     <input type="text"  id="pop_calculation_number" placeholder="<?php echo $placeholder['compamt'];?>" class="form-control text-right width1" title="Input" aria-label="Input">
 
    </div>
  </div>
@@ -1937,16 +1937,16 @@ function addslabrows(){
   <div class="input-group-prepend"><span class="input-group-text"><span>Rs</span></span></div>
   <input type="text" class="form-control" id="reimpop_calculation_number" placeholder="<?php echo $placeholder['compamt'];?>" name="reimpop_calculation_number" title="Reimpop Calculation Number" aria-label="Reimpop Calculation Number">
 </div> -->
-<div class="input-group input-group-button"> 
+<div class="input-group input-group-button">
      <button class="btn btn-info" type="button" >Rs.</button>
-     <input type="text"  id="reimpop_calculation_number" placeholder="<?php echo $placeholder['compamt'];?>" name="reimpop_calculation_number" class="form-control text-right width1" title="Reimpop Calculation Number" aria-label="Reimpop Calculation Number"> 
+     <input type="text"  id="reimpop_calculation_number" placeholder="<?php echo $placeholder['compamt'];?>" name="reimpop_calculation_number" class="form-control text-right width1" title="Reimpop Calculation Number" aria-label="Reimpop Calculation Number">
 
    </div>
 <span class="form-text text-muted"><?php echo $helptext['compamt'];?> </span>
 </div>
 <div class="form-group ml-5">
  <div class="row">
- <!--  <label class="checkbox checkbox-primary"> 
+ <!--  <label class="checkbox checkbox-primary">
     <input type="checkbox" class="checkbox checkbox-primary"  id="reimpop_partofctc"/ title="Input" aria-label="Input"><span></span>  </label>
     &nbsp; <label>Include this as a Flexible Benefit Plan Component.</label>
     <div class="form-text text-muted">(You have to enable at employee level.)</div>
@@ -1967,7 +1967,7 @@ function addslabrows(){
 </div>
 </div>
     <div class="modal-footer">
-     
+
       <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
       <button type="button" class="btn btn-primary font-weight-bold" onclick="submitpopup()">Save changes</button>
     </div>

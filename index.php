@@ -1,4 +1,4 @@
-<?php 
+<?php
 $timeprint = '0';
 $maxtimeshow = 40;
 $start =0;
@@ -24,19 +24,19 @@ if($_GET['check_m'] =="SSS"){
 }
 $_SESSION['nav_type'] = "TOP";
 //if(!isset($_SESSION['login_details']) || $_SESSION['login_details'] == "" || count((array)$_SESSION['login_details']) == 0){
- 
+
 $login_details = togetlogindetails();
 
-   
-    //print_r($login_details['callConfig']); print_r($login_details['callConfig2']); 
-    //print_r($login_details['application_menu']); 
+
+    //print_r($login_details['callConfig']); print_r($login_details['callConfig2']);
+    //print_r($login_details['application_menu']);
     //print_r($login_details['application_pages']);
     //echo "</pre>";
   //echo "<pre>"; echo "default_module_id"; print_r($login_details['application_menu']);  echo "</pre>"; exit;
    $_SESSION['login_details'] = $login_details;
    $_SESSION['emp_pay_area'] = $login_details['emp_pay_area'];
-   $_SESSION['pay_admin_emp'] = $login_details['pay_admin_emp']; 
-   $_SESSION['allroles']  = $login_details['rolepermission']['all_roles']; 
+   $_SESSION['pay_admin_emp'] = $login_details['pay_admin_emp'];
+   $_SESSION['allroles']  = $login_details['rolepermission']['all_roles'];
    $_SESSION['user_clock_status'] = 'Y';
    if(count((array)$_SESSION['login_details']['emp_clock_status'])>0){
         $_SESSION['user_clock_status'] = 'Y';
@@ -67,11 +67,11 @@ if(count((array)$_SESSION['modulewithrole']) ==0){
         $_SESSION['module_code'][] = $mwithrole['role_short_code'];
         //$_SESSION['working_role_short_code'] = $mwithrole['role_short_code'];
     }
-    $_SESSION['modulewithrole'] = $modulewithrole;  
+    $_SESSION['modulewithrole'] = $modulewithrole;
     $_SESSION['module_setp'] = $login_details['module_setup'];
 }
 //echo "<pre>"; print_r($_SESSION['modulewithroledetails']); echo "</pre>";//print_r($_SESSION['working_role_short_code']);echo "</pre>";
-//print_r($_SESSION['user']);  
+//print_r($_SESSION['user']);
 if(!isset($_SESSION['user']) AND count((array)$_SESSION['user']) == 0){
 //if(count((array)$_SESSION['user']) == 0){
     $user = $login_details['users'];
@@ -82,7 +82,7 @@ if(!isset($_SESSION['user']) AND count((array)$_SESSION['user']) == 0){
 }
 
 if(count((array)$_SESSION['application_user_module_roles']) == 0){
-    
+
     $_SESSION['application_user_module_roles'] = $login_details['application_user_module_roles'];
 }
 if($timeprint == '1' AND $maxtimeshow >= '3'){
@@ -94,10 +94,10 @@ if($timeprint == '1' AND $maxtimeshow >= '3'){
 //setcookie("working_role_short_code", $_SESSION['working_role_short_code'], time() + (86400 * 30), "/");   ///set coockies
 $_SESSION['user_type'] = $user['user_type'];
 $_SESSION['user_email'] = $user['user_email'];
-$_SESSION['user_mobile'] = $user['user_mobile']; 
+$_SESSION['user_mobile'] = $user['user_mobile'];
 $_SESSION['display_name'] = $user['display_name'];
 $_SESSION['company_id'] = $user['company_id'];
-$_SESSION['location_id'] = $user['location_id']; 
+$_SESSION['location_id'] = $user['location_id'];
 $_SESSION['admin_type'] = 0;
 $user_roles = json_decode($user['role_id'],1);
 $_SESSION['role_ids'] = $user_roles;
@@ -121,7 +121,7 @@ if(!isset($_SESSION['working_role_short_code'])){
       $_SESSION['working_role_short_code'] = $login_details['working_role_short_code'];
 }
 $_SESSION['permission_check'] = 'N';
-foreach($_SESSION['module_setp'] as $module_list12){ 
+foreach($_SESSION['module_setp'] as $module_list12){
     if((in_array($module_list12['role_admin_short_code'],(array)$_SESSION['role_ids']) || in_array($module_list12['role_view_short_code'],(array)$_SESSION['role_ids'])) AND $_SESSION['work_module_setup_id'] == $module_list12['module_id']){
         $_SESSION['admin_type'] = 1;
         //$_SESSION['config']['role_permission']=1;
@@ -197,7 +197,7 @@ if($user['user_type'] ==4){  //db config get candidate type
     }
     if($_GET['option']==''|| $_GET['option']=="COM_LIST_CANDIDATES"){
         $_GET['option'] = 'COM_INSERT_CANDIDATE';
-    } 
+    }
     $check = array('com_logout','COM_INSERT_CANDIDATE','COM_LIST_CANDIDATE_DOCUMENTS','COM_LIST_CANDIDATE_QUERY','COM_LIST_CANDIDATE_OFFER','COM_LIST_JOIN_REQUIRED_DOCUMENTS','COM_INSERT_EMPLOYEE_CONTRACT','COM_VIEW_CANDIDATE_DETAILS');
     if(!in_array($_GET['option'], (array)$check) AND $_GET['option'] !=""){
         include_once("includes/controller.php");
@@ -244,25 +244,25 @@ if($user['user_type'] ==4){  //db config get candidate type
         //COM_INSERT_VENDORS
        //header("location:vendorsetup.php");
     }
-    
 
-    $return = checkPremission($_GET['option']); 
+
+    $return = checkPremission($_GET['option']);
     if($_GET['option']==''){
         $_GET['option'] = 'COM_INSERT_VENDORS';
         //$_GET['option'] = 'COM_VIEW_DASHBOARD_VENDORS';
-    }    
+    }
 
     //$check = array('com_logout','COM_INSERT_VENDOR','COM_LIST_EMPLOYEES','COM_INSERT_VENDORS','COM_LIST_VENDOR_RATE_CARDS','COM_INSERT_VENDOR_RATE_CARDS','COM_LIST_JOB_POSTING_CANDIDATES','COM_LIST_CONTRACT_EMPLOYEES','COM_LIST_INBOX','COM_LIST_JOB_POSTING_CANDIDATE','COM_INSERT_CANDIDATE','COM_INSERT_EMP_CONTRACTS','COM_INSERT_EMPLOYEE_CONTRACT','COM_INSERT_CANDIDATES','COM_LIST_CANDIDATE_DOCUMENTS','COM_LIST_CANDIDATE_QUERY','COM_LIST_CANDIDATE_OFFER','COM_LIST_JOIN_REQUIRED_DOCUMENTS','COM_VIEW_PROJECT_TIMESHEETS','COM_VIEW_DASHBOARD_VENDORS','COM_INSERT_PURCHASE_INVOICES','COM_LIST_TABLE_FILTERS');
     include_once("includes/controller.php");
 }else{
-	
-	
-	
+
+
+
     //print_r($user);
     //if($_GET['option']=='' &&  $user['role_id'] == '["5"]' ){
       //  $_GET['option'] = 'COM_LIST_ONLY_EMPLOYEE';
-    //}  
-	
+    //}
+
     if(isset($_POST['user_image']) && $_POST['user_image']=='user_image'){
         if($_FILES['profile_avatar']['name']!=""){
             $image_nname = imageupload('all','profile_avatar','');
@@ -273,28 +273,28 @@ if($user['user_type'] ==4){  //db config get candidate type
 
  if(count((array)$_SESSION['employee']) == 0){  //To Get Employee Details For The session
 	   $_SESSION['employee'] =   $login_details['employees'];
-    }	
+    }
 if($timeprint == '1' AND $maxtimeshow >= '7'){
 	echo "GEt employe details - ".date('m/d/Y h:i:s a')."</br>";
 }
     $_SESSION['emp_id'] = $_SESSION['employee']['id'];
     if($_SESSION['confirmed_basic_ino_val'] == 2){
-        $_SESSION['confirmed_basic_ino'] = 10;	
+        $_SESSION['confirmed_basic_ino'] = 10;
     }
 
     if($_SESSION['emp_id']!="" && $_SESSION['user_type']==1 &&  $_SESSION['confirmed_basic_ino']==1 && $user['confirmed_basic_ino']=="1"){
-        //$_GET['option'] = "COM_INSERT_ONBOARDING_EMPLOYEES";  
+        //$_GET['option'] = "COM_INSERT_ONBOARDING_EMPLOYEES";
         $_SESSION['confirmed_basic_ino'] = 0;
         $_SESSION['confirmed_basic_ino_val'] = 2;
         //toupdateuserconfirmedbasicinfo();
     }
- 		
+
     if(count((array)$_SESSION['application_pages']) == 0){
         $_SESSION['application_pages'] = $login_details['application_pages'];
     }
-if($timeprint == '1' AND $maxtimeshow >= '8'){	
+if($timeprint == '1' AND $maxtimeshow >= '8'){
 	echo "Application Pages - ".date('m/d/Y h:i:s a')."</br>";
-}	
+}
 if($_SESSION['rolepermisionget'] != '1'){
 	$_SESSION['rolepermisionget'] = '1';
  	$role_data = $login_details['rolepermission'];
@@ -312,7 +312,7 @@ if($_SESSION['rolepermisionget'] != '1'){
     $_SESSION['role_page_permission'] = $role_data['page_permission'];
     $_SESSION['role_permission_pages'] = $role_data['permission'];
 }
-//echo "<pre>"; print_r($_SESSION['application_pages']);echo "<pre>"; 
+//echo "<pre>"; print_r($_SESSION['application_pages']);echo "<pre>";
 if($timeprint == '1' AND $maxtimeshow >= '9'){
 echo "page Permission - ".date('m/d/Y h:i:s a')."</br>";
 }
@@ -343,20 +343,20 @@ if(count((array)$_SESSION['application_menu']) == 0 AND !isset($_SESSION['applic
 	}
     $saidnav = $_SESSION['application_menu_LN'];
     $topnav =  $_SESSION['application_menu_TN'];
-    $toplistnav =   $_SESSION['application_menu_TNL']; 
+    $toplistnav =   $_SESSION['application_menu_TNL'];
     $topnavcenter =  $_SESSION['application_menu_TNC'];
 
     //echo "<pre>"; print_r($topnavcenter);// echo "</pre>";
     //print_r($saidnav);print_r($topnav);print_r($toplistnav);
     // echo "-----------"; print_r($_SESSION['role_nav']); echo "</pre>";
-    
+
 	if($timeprint == '1' AND $maxtimeshow >= '11'){
 		echo "Status - ".date('m/d/Y h:i:s a')."</br>";
 	}
 
    /* if(count($_SESSION['field_secruity']) == 0){
        $_SESSION['field_secruity'] = $login_details['field_secruity'];
-    }*/ 
+    }*/
 	if($timeprint == '1' AND $maxtimeshow >= '12'){
 		echo "security - ".date('m/d/Y h:i:s a')."</br>";
 	}
@@ -364,19 +364,19 @@ if(count((array)$_SESSION['application_menu']) == 0 AND !isset($_SESSION['applic
     $_SESSION['check_value'] = $_SESSION['check'];
     $_SESSION['check'] ='';
     $alertcheck =  $_SESSION['check_value']!="" ?$_SESSION['check_value'] : 0 ;
-   
+
     if(count((array)$_SESSION['error_message']) == 0){
-        $_SESSION['error_message']  = $login_details['error_message']; 
+        $_SESSION['error_message']  = $login_details['error_message'];
     }
 	if($timeprint == '1' AND $maxtimeshow >= '13'){
-		echo "Errer - ".date('m/d/Y h:i:s a')."</br>";	
-	}	
+		echo "Errer - ".date('m/d/Y h:i:s a')."</br>";
+	}
     $error = $_SESSION['error_message'][$_SESSION['check_value']];
     if(count((array)$_SESSION['company']) == 0){
-        $_SESSION['company'] = $login_details['companies']; 
-    } 
+        $_SESSION['company'] = $login_details['companies'];
+    }
     if(count((array)$_SESSION['user_company']) == 0){
-        $_SESSION['user_company'] = $login_details['user_company']; 
+        $_SESSION['user_company'] = $login_details['user_company'];
     }
 	if($timeprint == '1' AND $maxtimeshow >= '14'){
 		echo "Comoany details - ".date('m/d/Y h:i:s a')."</br>";
@@ -384,14 +384,14 @@ if(count((array)$_SESSION['application_menu']) == 0 AND !isset($_SESSION['applic
    	//if(isset($_GET['noti_id'])){ // repeted used
       //  $not = NotificationRead($_GET['noti_id']);
     //} // repeted used
-	 
+
     if($_SESSION['emp_id']!=""){
         $clock_data =toGetclockdata();
     }
 	if($timeprint == '1' AND $maxtimeshow >= '15'){
 		echo "Clock in out details - ".date('m/d/Y h:i:s a')."</br>";
 	}
-   include_once("includes/controller.php"); 
+   include_once("includes/controller.php");
    if($timeprint == '1' AND $maxtimeshow >= '16'){
 	   echo "control page include - ".date('m/d/Y h:i:s a')."</br>";
    }
@@ -403,25 +403,25 @@ $_SESSION['apply_js'] = array();
 
 
 $wizardary = array('COM_INSERT_ONBOARDING_EMPLOYEES','COM_INSERT_EMPLOYEES','COM_INSERT_CANDIDATE','COM_VIEW_AUDITTRAILS','COM_INSERT_VENDOR_REGISTERS','COM_INSERT_NEW_EMPLOYEE_FULL_DETAILS');
-if(in_array($_GET['option'],(array)$wizardary) || in_array($_GET['PAGENAME'],(array)$wizardary) || $_SESSION['work_module_setup_id'] =='28'){	
+if(in_array($_GET['option'],(array)$wizardary) || in_array($_GET['PAGENAME'],(array)$wizardary) || $_SESSION['work_module_setup_id'] =='28'){
 	$_SESSION['apply_css']['wizardcss'] = 1;
 }
 
 $calendorarray = array('676','563','566','759','560');
 $calendorpagearray = array('COM_INSERT_LEAVE_REQUEST','COM_INSERT_APPROVAL_LEAVE');
 if(in_array($_GET['NI'],(array)$calendorarray) || in_array($_GET['option'],(array)$calendorpagearray)){
-	$_SESSION['apply_js']['calender']='1';	
+	$_SESSION['apply_js']['calender']='1';
 	$_SESSION['apply_css']['calendercss'] = '1';
 }
 
 $cropcss = array('COM_INSERT_BUILDING_FLOORS','COM_VIEW_OFFICE_MANAGEMENT');
-if(in_array($_GET['option'],(array)$cropcss)){ 
+if(in_array($_GET['option'],(array)$cropcss)){
     $_SESSION['apply_css']['crop_image'] = '1';
 }
 
 
 /*rohan added*/
-$_SESSION['apply_js']['calender']='1';  
+$_SESSION['apply_js']['calender']='1';
 $_SESSION['apply_css']['calendercss'] = '1';
 /*rohan added*/
 
@@ -434,7 +434,7 @@ $_SESSION['apply_css']['calendercss'] = '1';
      $_SESSION['admin_dash_list'] = dashviewlisthr();
     }
 
-    insertAuditTrail(); 
+    insertAuditTrail();
     $_SESSION['apply_css']['kanban'] =0;
     if($_GET['option'] == "COM_VIEW_PROJECT_KANBAN"){
     $_SESSION['apply_css']['kanban'] =1;
@@ -470,10 +470,10 @@ if($timeprint == '1' AND $maxtimeshow >= '17'){
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
-	 <?php  
+	 <?php
 		if($timeprint == '1' AND $maxtimeshow >= '18'){	echo "before Header - ".date('m/d/Y h:i:s a')."</br>"; }
-		include_once("partials/_header.php"); 
-               
+		include_once("partials/_header.php");
+
 		if($timeprint == '1' AND $maxtimeshow >= '18'){	echo "After Header - ".date('m/d/Y h:i:s a')."</br>"; }
 	?>
 	<script>
@@ -484,27 +484,27 @@ if($timeprint == '1' AND $maxtimeshow >= '17'){
         	</script>
 	<div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-			<?php		$count_nav = count((array)$topnav); 
+			<?php		$count_nav = count((array)$topnav);
             			//$count_nav = 3;
             			 if($count_nav >0){
-                                    if($_SESSION['nav_type'] == "LEFT" || $count_nav>8){ 
+                                    if($_SESSION['nav_type'] == "LEFT" || $count_nav>8){
                                         include_once("partials/_side_nav.php");
-                                        
+
                                      }else{
                                        include_once("partials/_side_top_nav.php");
-                                       
+
                                     }
             			}
-                        
+
             			if($timeprint == '1' AND $maxtimeshow >= '19'){
             					echo "After Side nav - ".date('m/d/Y h:i:s a')."</br>";
             				}
                     ?>
                     <div class="pcoded-content ">
-					
-<?php   
-if($_SESSION['timesheetalertshow'] != '0' AND in_array('11',(array)$_SESSION['module_list'])){   
-   $_SESSION['timesheetalertshow'] = '0'; 
+
+<?php
+if($_SESSION['timesheetalertshow'] != '0' AND in_array('11',(array)$_SESSION['module_list'])){
+   $_SESSION['timesheetalertshow'] = '0';
    $getTimeSheetNotSubmitedDeatils = getTimeSheetNotSubmitedDeatils();
    // print_r($getTimeSheetNotSubmitedDeatils);
     if($getTimeSheetNotSubmitedDeatils['timesheetsmessagecode'] !='0' AND (in_array('3',(array)$_SESSION['role_ids']) || in_array('5',(array)$_SESSION['role_ids']))){
@@ -514,7 +514,7 @@ if($_SESSION['timesheetalertshow'] != '0' AND in_array('11',(array)$_SESSION['mo
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php }  } ?>
-		
+
                         <!-- [ breadcrumb ] start -->
 
                         <!-- [ breadcrumb ] end -->
@@ -523,24 +523,24 @@ if($_SESSION['timesheetalertshow'] != '0' AND in_array('11',(array)$_SESSION['mo
 						 <div class="page-header card" style="margin: 15px !important;">
 
 
-     <?php // include_once("partials/_sub_header.php"); 
+     <?php // include_once("partials/_sub_header.php");
 if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
      $disptemp = 'views/custom_insert_application_users.php';
 }else{
     //getApplicationEmptyTransactions($_GET['option']);
 }
                         ?>
-                        <?php 
-                            
+                        <?php
+
                         //echo "&&&&&&&&&".$disptemp;
                         include_once($disptemp); //echo $count_nav; //include_once("views/new_hrms_dash_board.php");
-                         ?>   
-                        <?php 
+                         ?>
+                        <?php
 						if($timeprint == '1' AND $maxtimeshow >= '20'){
 							echo "Page End - ".date('m/d/Y h:i:s a')."</br>";
-						} 
+						}
 						?>
-						</div>                       
+						</div>
                     </div>
                     <!-- [ style Customizer ] start -->
                     <div id="styleSelector">
@@ -549,48 +549,48 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
                 </div>
             </div>
         </div>
-	<?php include_once("partials/_footer.php"); 
+	<?php include_once("partials/_footer.php");
 	?>
     </div>
-    <?php 
-        if(!isset($_SESSION['expiryalert']) AND EXPIRY_DOCUMENT_DISPLAY=='Y'){  
+    <?php
+        if(!isset($_SESSION['expiryalert']) AND EXPIRY_DOCUMENT_DISPLAY=='Y'){
             $_SESSION['expiryalert'] = '1';
-            include_once('views/custom_list_expiry_documents.php'); 
+            include_once('views/custom_list_expiry_documents.php');
         }
     ?>
     <!-- Warning Section Ends -->
 <div id="kt_modal_dynamic_popup" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl" <?php if($_GET['option']=="COM_LIST_JOB_POSTING_CANDIDATE" || $_GET['option']=="COM_INSERT_JOB_POSTING_CANDIDATES" ){ ?> style="max-width: 1200px !important;" <?php } ?> >
         <div class="modal-content"  id="dynamic_popup1" style="border:none;">
-            
+
         </div>
     </div>
 </div>
  <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg " >
         <div class="modal-content"  id="popup1" style="border:none;">
-            
+
         </div>
     </div>
 </div>
 <div id="kt_modal_KTDatatable_remotem" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg " >
         <div class="modal-content"  id="popupm" style="border:none;">
-            
+
         </div>
     </div>
 </div>
 <div id="kt_modal_dynamic_popup2" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl" style="max-width: 1200px !important;">
         <div class="modal-content"  id="dynamic_popup11" style="border:none;">
-            
+
         </div>
     </div>
 </div>
 <div id="kt_modal_dynamic_popupxxl" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl"  style="max-width: 98% !important;" >
         <div class="modal-content"  id="dynamic_popupxxl" style="border-radius: 20px;" style="border:none;">
-            
+
         </div>
     </div>
 </div>
@@ -598,7 +598,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 <div id="kt_modal_KTDatatable_remotesq" class="modal fade" role="dialog" aria-hidden="true">
 
     <div class="modal-dialog modal-lg " >
-        <div class="modal-content"  id="popupsq" style="border:none;">            
+        <div class="modal-content"  id="popupsq" style="border:none;">
 
         </div>
     </div>
@@ -613,7 +613,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
  <script type="text/javascript" src="assets/bower_components/jquery/js/jquery.min.js"></script>
     <script type="text/javascript" src="assets/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="assets/bower_components/popper.js/js/popper.min.js"></script>
-    <script type="text/javascript" src="assets/bower_components/bootstrap/js/bootstrap.min.js"></script> 
+    <script type="text/javascript" src="assets/bower_components/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/pages/waves/js/waves.min.js"></script>
     <!-- jquery slimscroll js -->
     <script type="text/javascript" src="assets/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
@@ -630,7 +630,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
       <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr-custom.js"></script>
     <!-- <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr.js"></script>
     <script type="text/javascript" src="assets/bower_components/modernizr/js/css-scrollbars.js"></script> -->
-    
+
     <!-- peity Chart js -->
     <script src="assets//bower_components/peity/js/jquery.peity.js"></script>
     <script type="text/javascript" src="assets/pages/chart/peity/peity-custom-chart.js"></script>
@@ -642,7 +642,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 
     <?php if($_SESSION['nav_type'] == "LEFT" || $count_nav>8){ ?>
     <script src="assets/js/vertical/vertical-layout.min.js"></script>
-    <?php }else{ ?> 
+    <?php }else{ ?>
     <script src="assets/js/vertical/horizontal-layout.min.js"></script>
     <?php } ?>
     <script type="text/javascript" src="assets/js/script.min.js"></script>
@@ -653,12 +653,12 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
     <script src="assets/pages/chart/float/jquery.flot.categories.js"></script>
     <script src="assets/pages/chart/float/curvedLines.js"></script>
     <script src="assets/pages/chart/float/jquery.flot.tooltip.min.js"></script>
-   
+
     <!-- Chartlist charts -->
     <script src="assets/bower_components/chartist/js/chartist.js"></script>
 	 <!-- Chart js Rohan Added Leave -->
     <script type="text/javascript" src="assets/bower_components/chart.js/js/Chart.js"></script>
-	
+
     <?php } ?>
     <?php if($_SESSION['apply_js']['new_hr_admin']==1){ ?>
         <script src="assets/bower_components/chartist/js/chartist.js"></script>
@@ -678,7 +678,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 <script src="assets/pages/chart/float/jquery.flot.js"></script>
 <script src="assets/pages/chart/float/jquery.flot.categories.js"></script>
 <script src="assets/pages/chart/float/jquery.flot.pie.js"></script>
-       
+
     <?php } ?>
     <?php if($_SESSION['apply_js']['amchart']==1){ ?>
     <!-- amchart js -->
@@ -698,7 +698,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
     <script type="text/javascript" src="assets/bower_components/modernizr/js/css-scrollbars.js"></script> -->
 
 
-   
+
    <!-- data-table js check -->
 <!-- <script src="assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="assets/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -716,7 +716,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
     <script src="assets/pages/data-table/extensions/buttons/js/vfs_fonts.js"></script>
     <script src="assets/pages/data-table/extensions/responsive/js/dataTables.responsive.min.js"></script>
     <script src="assets/pages/data-table/extensions/buttons/js/buttons.colVis.min.js"></script>
-    <script src="assets/pages/data-table/extensions/responsive/js/responsive-custom.js"></script> 
+    <script src="assets/pages/data-table/extensions/responsive/js/responsive-custom.js"></script>
     <script src="assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="assets/pages/data-table/js/pdfmake.min.js"></script>
     <script src="assets/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -735,7 +735,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 	<script src="assets/bower_components/jquery.steps/js/jquery.steps.js"></script>
 	<script src="assets/bower_components/jquery-validation/js/jquery.validate.js"></script>
 	<script src="assets/pages/forms-wizard-validation/form-wizard.js"></script>
-	<?php } ?>  
+	<?php } ?>
     <!--------- End wizard js -------------------->
 	<!-- Select 2 js -->
 	<script type="text/javascript" src="assets/bower_components/select2/js/select2.full.min.js"></script>
@@ -747,19 +747,19 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 	<!-- Custom js -->
 	<script type="text/javascript" src="assets/pages/advance-elements/select2-custom.js"></script>
 	<script type="text/javascript" src="assets/pages/advance-elements/moment-with-locales.min.js"></script>
-	<?php } ?>  
+	<?php } ?>
 	<!-- Date picker js -->
     <script type="text/javascript" src="assets/bower_components/moment/js/moment.min.js"></script>
 	<script type="text/javascript" src="assets/pages/advance-elements/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="assets/js/custom_datepicker.js"></script>
-	<?php if($_SESSION['apply_js']['colorpicker'] == 1){ ?>	  <!-- COlor Picker important -->	
+	<?php if($_SESSION['apply_js']['colorpicker'] == 1){ ?>	  <!-- COlor Picker important -->
 	<!-- Date-range picker js -->
 	<script type="text/javascript" src="assets/bower_components/bootstrap-daterangepicker/js/daterangepicker.js"></script>
-<?php } ?>	
+<?php } ?>
      	<!-- Date-dropper js -->
 	<script type="text/javascript" src="assets/bower_components/datedropper/js/datedropper.min.js"></script>
 
-	<?php if($_SESSION['apply_js']['colorpicker'] == '1'){ ?>	 <!--- Color Picker ---> 
+	<?php if($_SESSION['apply_js']['colorpicker'] == '1'){ ?>	 <!--- Color Picker --->
 		<!-- Color picker js -->
 		<script type="text/javascript" src="assets/bower_components/spectrum/js/spectrum.js"></script>
 		<script type="text/javascript" src="assets/bower_components/jscolor/js/jscolor.js"></script>
@@ -767,16 +767,16 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 		<script type="text/javascript" src="assets/bower_components/jquery-minicolors/js/jquery.minicolors.min.js"></script>
 		<script type="text/javascript" src="assets/pages/advance-elements/custom-picker.js"></script>
 	<?php } ?>
-	<?php if($_SESSION['apply_js']['textediter'] == 1){ ?>	  <!--- Text Editors ---> 
+	<?php if($_SESSION['apply_js']['textediter'] == 1){ ?>	  <!--- Text Editors --->
 		<!-- tinymce js -->
-		<script src="assets/pages/wysiwyg-editor/js/tinymce.min.js"></script> 
+		<script src="assets/pages/wysiwyg-editor/js/tinymce.min.js"></script>
 		<!-- Editor js -->
 		<script src="assets/pages/wysiwyg-editor/wysiwyg-editor.js"></script>
 		<script src="assets/pages/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="assets/pages/ckeditor/ckeditor-custom.js"></script>
 	<?php } ?>
 
-	<?php if($_SESSION['apply_js']['inputmask'] == 1){ ?>   <!--- inputmask ---> 
+	<?php if($_SESSION['apply_js']['inputmask'] == 1){ ?>   <!--- inputmask --->
 	<!-- Masking js -->
 	<script src="assets/pages/form-masking/inputmask.js"></script>
 	<script src="assets/pages/form-masking/jquery.inputmask.js"></script>
@@ -789,34 +789,34 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 	<script type="text/javascript" src="assets/bower_components/bootstrap-maxlength/js/bootstrap-maxlength.js"></script>
 	<script type="text/javascript" src="assets/pages/advance-elements/swithces.js"></script>
     <?php //} ?>
-<?php if($_SESSION['apply_js']['tagsinput'] == 1){ ?> <!--- To strick out the Task ---> 
+<?php if($_SESSION['apply_js']['tagsinput'] == 1){ ?> <!--- To strick out the Task --->
     <!----- Todo Js --->
  <script type="text/javascript" src="assets/pages/advance-elements/tagsinput.js"></script>
     <?php } ?>
 
-	<?php if($_SESSION['apply_js']['todo'] == 1){ ?> <!--- To strick out the Task ---> 
+	<?php if($_SESSION['apply_js']['todo'] == 1){ ?> <!--- To strick out the Task --->
 	<!----- Todo Js --->
 	<script type="text/javascript" src="assets/pages/todo/todo.js"></script>
 	<?php } ?>
-	
-	<?php if($_SESSION['apply_js']['dropzone'] == 1){ ?> <!--- File Uploading ---> 
+
+	<?php if($_SESSION['apply_js']['dropzone'] == 1){ ?> <!--- File Uploading --->
 	<!-- File Uploading Accordion js -->
 	<script type="text/javascript" src="assets/js/dropzone.js"></script>
 	<script type="text/javascript" src="assets/js/custom_file_uploading.js"></script>
-	<?php } ?> 
+	<?php } ?>
 	<?php if($_SESSION['apply_js']['tag']==1){ ?>  <!--console errer occure -->
 	<!-- Tags js --->
 	<script type="text/javascript" src="assets/bower_components/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
 	<script src="/assets/js/moment/typeahead.bundle.min.js"></script>
 	<?php } ?>
 	<?php if($_SESSION['apply_js']['ratting']==1){ ?>  <!--ratting js  -->
-	<!-- Star Rating theme js --> 
+	<!-- Star Rating theme js -->
 	<script type="text/javascript" src="assets/bower_components/jquery-bar-rating/js/jquery.barrating.js"></script>
 	<script type="text/javascript" src="assets/js/rating.js"></script>
 	<?php } ?>
-	
+
     <?php if($_SESSION['apply_js']['rangeslide']==1){ ?>  <!--range slide js  -->
-    <!-- Star Rating theme js --> 
+    <!-- Star Rating theme js -->
      <script type="text/javascript" src="assets/js/custome_range_slider.js"></script>
     <?php } ?>
     <?php if($_SESSION['apply_js']['crop_image']==1){ ?>
@@ -826,8 +826,8 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
     <?php } ?>
  	<!------- Genral item work ------------------------------>
 	 <script> var table_name ='<?php echo $table_name; ?>';  </script>
-	  <script type="text/javascript" src="assets/js/custom.js"></script> 
-	
+	  <script type="text/javascript" src="assets/js/custom.js"></script>
+
 <!-- scrollbars modernizr js -->
  <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr-custom.js"></script>
 	<!-- <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr.js"></script>
@@ -838,64 +838,64 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 	<script type="text/javascript" src="assets/js/modalEffects.js"></script>
 	<script type="text/javascript" src="assets/pages/accordion/accordion.js"></script>
 
-	<?php if($_SESSION['apply_js']['calender']==1){ ?> 
+	<?php if($_SESSION['apply_js']['calender']==1){ ?>
 	<!-- calender js -->
 	<script type="text/javascript" src="assets/bower_components/moment/js/moment.min.js"></script>
 	<script type="text/javascript" src="assets/bower_components/fullcalendar/js/fullcalendar.min.js"></script>
 	<script type="text/javascript" src="assets/pages/full-calender/calendar.js"></script>
 	<?php } ?>
 	<?php //if($_GET['option']=='COM_INSERT_APPLICATION_ROLE') {
-		 if($_SESSION['apply_js']['role']==1){  ?> 
+		 if($_SESSION['apply_js']['role']==1){  ?>
 		<script src="assets/js/custom_insert_application_role.js"></script>
 	<?php  } ?>
-	<?php // if($_GET['option']=='COM_INSERT_JOB_POSTINGS') { 
-		if($_SESSION['apply_js']['jobposting']==1){  ?> 
+	<?php // if($_GET['option']=='COM_INSERT_JOB_POSTINGS') {
+		if($_SESSION['apply_js']['jobposting']==1){  ?>
  		<script src="assets/js/custom_job_post.js"></script>
 	<?php } ?>
 	<?php ?>
-	
+
 	<script type="text/javascript" src="assets/js/bootstrap-growl.min.js"></script>
 	<script type="text/javascript" src="assets/pages/notification/notification.js"></script>
 
 	<?php if($_SESSION['apply_js']['tour']==1){ ?>
 		<script type="text/javascript" src="assets/bower_components/intro.js/js/intro.js"></script>
 	<?php } ?>
-	<?php // if(strtoupper($_GET['option'])=='COM_INSERT_DISPLAY_ATTRIBUTES') { 
+	<?php // if(strtoupper($_GET['option'])=='COM_INSERT_DISPLAY_ATTRIBUTES') {
 		if($_SESSION['apply_js']['custom_insert_display_attributes']==1){ ?>
 	<script src="assets/js/custom_insert_display_attributes.js"></script>
 	<?php } ?>
-	<?php // if(strtoupper($_GET['option'])=="COM_INSERT_LETTERS"){ 
+	<?php // if(strtoupper($_GET['option'])=="COM_INSERT_LETTERS"){
 		if($_SESSION['apply_js']['custom_insert_letters']==1){ ?>
 	<script src="assets/js/custom_insert_latter.js"></script>
 	<?php } ?>
-	<?php // if(strtoupper($_GET['option'])=="COM_INSERT_MY_REPORTS" || strtoupper($_GET['option'])=="COM_INSERT_REPORT_ATTRIBUTES_NEW"){ 
+	<?php // if(strtoupper($_GET['option'])=="COM_INSERT_MY_REPORTS" || strtoupper($_GET['option'])=="COM_INSERT_REPORT_ATTRIBUTES_NEW"){
 		if($_SESSION['apply_js']['custom_insert_my_reports']==1){ ?>
 	<script src="assets/js/custom_insert_my_reports.js"></script>
 	<?php } ?>
 <!-- 	<script type="text/javascript" src="assets/pages/widget/widget-chart.js"></script> -->
-  <!---------------- Main Chart ---------------------------> 
+  <!---------------- Main Chart --------------------------->
 	<?php if($_SESSION['apply_js']['knobchart']==1){ ?>
 		<!-- Knob Chart js -->
    		<script type="text/javascript" src="assets/pages/chart/knob/knob-custom-chart.js"></script>
 	<?php } ?>
-	<?php //if($_GET['option']=='' && $pass_module['0']['page'] == 'vendorstaq_admin_dashboarad'){ 
-		if($_SESSION['apply_js']['vendorstaq_admin_dashboarad_new']==1){ ?> 
+	<?php //if($_GET['option']=='' && $pass_module['0']['page'] == 'vendorstaq_admin_dashboarad'){
+		if($_SESSION['apply_js']['vendorstaq_admin_dashboarad_new']==1){ ?>
             <script src="assets/pages/widget/amchart/amcharts.js"></script>
             <script src="assets/pages/widget/amchart/serial.js"></script>
             <script src="assets/bower_components/chartist/js/chartist.js"></script>
             <script type="text/javascript" src="assets/pages/widget/vendorstaq_admin_dashboarad.js"></script>
-	<?php } ?> 
-	<?php //if($_GET['option']=='COM_LIST_EMPLOYEE_LEAVES') { 
-		if($_SESSION['apply_js']['employee_leaves']==1){ ?> 
+	<?php } ?>
+	<?php //if($_GET['option']=='COM_LIST_EMPLOYEE_LEAVES') {
+		if($_SESSION['apply_js']['employee_leaves']==1){ ?>
 	    <script type="text/javascript" src="assets/pages/widget/leaves_widget.js"></script>
-	<?php } ?> 
-	<?php //if($_GET['option']=='COM_BULK_PROJECT_TIMESHEET') { 
-		if($_SESSION['apply_js']['bulk_project_timesheet']==1){ ?> 
- 	    
+	<?php } ?>
+	<?php //if($_GET['option']=='COM_BULK_PROJECT_TIMESHEET') {
+		if($_SESSION['apply_js']['bulk_project_timesheet']==1){ ?>
+
 	    <script type="text/javascript" src="assets/pages/widget/demo_dashboard4.js"></script>
 	<?php } ?>
 	<?php //if($pass_module['0']['page'] == 'hr_admin_dashboard' || $_GET['option']==''){
-		if($_SESSION['apply_js']['hr_admin_dashboard']==1){ ?> 
+		if($_SESSION['apply_js']['hr_admin_dashboard']==1){ ?>
             <script src="assets/pages/widget/amchart/amcharts.js"></script>
             <script src="assets/pages/widget/amchart/serial.js"></script>
             <script src="assets/bower_components/chartist/js/chartist.js"></script>
@@ -926,7 +926,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<script type="text/javascript" src="assets/pages/chart/google/js/custom-google-chart.js"></script><!-- End google chart --->
 	<?php } ?>
-	<?php //if($_GET['option']=='COM_INSERT_PAYSLIP' || in_array('8',$_SESSION['module_list'])) { 
+	<?php //if($_GET['option']=='COM_INSERT_PAYSLIP' || in_array('8',$_SESSION['module_list'])) {
 		if($_SESSION['apply_js']['payslipchart']==1){ 	?>
 		<!-- google chart custom_list_candidate_offer-->
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -945,7 +945,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
         <script type="text/javascript" src="assets/pages/chart/google/js/com_view_project_dash_board_task.js"></script>
         <!-- End google chart -->
     <?php } ?>
-    
+
     <?php if($_SESSION['apply_js']['project_dashboard_progress']==1){   ?>
         <!-- google chart custom_list_candidate_offer-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -980,14 +980,14 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
     <?php  if($_SESSION['apply_js']['standart_report_hrr']==1){   ?>
         <!-- google chart custom_list_candidate_offer-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript" 
+        <script type="text/javascript"
         src="assets/pages/chart/google/js/custom_view_standared_age_report.js"></script>
         <!-- End google chart -->
     <?php } ?>
     <?php  if($_SESSION['apply_js']['standart_report_hr_gender']==1){   ?>
         <!-- google chart custom_list_candidate_offer-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript" 
+        <script type="text/javascript"
         src="assets/pages/chart/google/js/custom_view_standared_gender_report.js"></script>
         <!-- End google chart -->
     <?php } ?>
@@ -1004,7 +1004,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
     <?php  if($_SESSION['apply_js']['standart_report_bill_vendor']==1){   ?>
         <!-- google chart custom_list_candidate_offer-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript" 
+        <script type="text/javascript"
         src="assets/pages/chart/google/js/custom_view_report_bill_vendor.js"></script>
          <!-- End google chart -->
     <?php } ?>
@@ -1015,7 +1015,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 <?php  if($_SESSION['apply_js']['Payroll_dashboard']==1){   ?>
     <!-- google chart custom_list_candidate_offer-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" 
+    <script type="text/javascript"
     src="assets/js/custom_view_payroll_dashboard.js"></script>
     <!-- End google chart -->
 <?php } ?>
@@ -1061,7 +1061,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 <script type="text/javascript" src="assets/pages/form-validation/validate.js"></script>
 <script type="text/javascript" src="assets/pages/form-validation/form-validation.js"></script>
 <!---Rohan Include validation testing---->
-    
+
 <?php } ?>
 <!---Rohan Include Chart Not Ajx Show PaySlip---->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -1089,7 +1089,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
         <script type="text/javascript" src="assets/js/custom_view_rental_admin_dashboard.js"></script>
  <!-- google chart custom_list_candidate_offer-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript" 
+        <script type="text/javascript"
         src="assets/js/custom_rental_aging_and_projection_reports.js"></script>
          <!-- End google chart -->
  <?php } ?>
@@ -1097,7 +1097,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
         <script type="text/javascript" src="assets/js/custom_view_petty_cash_dashboard.js"></script>
  <!-- google chart custom_list_candidate_offer -->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript" 
+        <script type="text/javascript"
         src="assets/js/custom_petty_cash_aging_and_projection_reports.js"></script>
          <!-- End google chart -->
  <?php } ?>
@@ -1135,7 +1135,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 <?php if($_SESSION['apply_js']['PURCHASE_INVOICE_AND_SUPPLIRE_INVOICE_DASHBOARD']==1){ ?>
     <!-- google chart custom_list_candidate_offer-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript" 
+        <script type="text/javascript"
         src="assets/js/custom_view_purchase_invoice_and_supplire_invoice_dashboard.js"></script>
          <!-- End google chart -->
 <?php } ?>
@@ -1190,7 +1190,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 <?php if($_SESSION['apply_js']['custom_insert_visitor_logs']==1){ ?>
 <script src="assets/js/custom_insert_visitor_logs.js?v=<?= time() ?>"></script>
 <?php } ?>
-    <!-- Session timeout js 
+    <!-- Session timeout js
     <script type="text/javascript" src="assets/pages/session-idle-Timeout/session_timeout.min.js"></script>
     <script type="text/javascript" src="assets/pages/session-idle-Timeout/session-idle-Timeout-custom.js"></script>
 -->
@@ -1223,7 +1223,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 	}
 	}
      });
- 
+
 </script>
 
 <?php
@@ -1231,7 +1231,7 @@ if($timeprint == '1' AND $maxtimeshow >= '21'){
 	echo "Javascript End - ".date('m/d/Y h:i:s a')."</br>";
 }
 						?>
-						
+
 
 </body>
 

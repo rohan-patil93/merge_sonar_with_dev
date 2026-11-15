@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('dbconfig.php');
 session_start();
 //session_destroy();
@@ -12,7 +12,7 @@ if(isset($_POST['submit'])){
      $data = urlencode(json_encode($_POST));
         $url = API."?mode=login&data=".$data;
         $response = file_get_contents($url, false, $context);
-        $row = json_decode($response,1);  
+        $row = json_decode($response,1);
         if ($row['id'] !=''){
             $_SESSION['userid'] = $row['id'];
             $_SESSION['us_name']=$row['user_name'];
@@ -28,10 +28,10 @@ if(isset($_POST['submit'])){
             $_SESSION['work_module_setup_id'] = $_POST['work_module_setup_id'];
             $_SESSION['working_role_short_code'] =  $_POST['working_role_short_code'];
             if($_POST['option']==""){
-                header("location:index.php"); 
+                header("location:index.php");
             }else{
-                 header("location:index.php?option=".$_POST['option']); 
-            } 
+                 header("location:index.php?option=".$_POST['option']);
+            }
         }else {
             //echo $row['error']; exit;
             $error = $row['error'];
@@ -40,7 +40,7 @@ if(isset($_POST['submit'])){
         exit;
     }
 }
-function getBrowser() { 
+function getBrowser() {
   $u_agent = $_SERVER['HTTP_USER_AGENT'];
   $bname = 'Unknown';
   $platform = 'Unknown';
@@ -122,7 +122,7 @@ function getIPAddress(){
     <meta name="author" content="colorlib" />
     <!-- Favicon icon -->
    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-      <!-- Google font-->     
+      <!-- Google font-->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
       <!-- Required Fremwork -->
       <link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap/css/bootstrap.min.css">
@@ -139,7 +139,7 @@ function getIPAddress(){
   </head>
 
   <body themebg-pattern="theme1">
- 
+
   <!-- Pre-loader end -->
   <section class="login-block">
         <!-- Container-fluid starts -->
@@ -147,11 +147,11 @@ function getIPAddress(){
             <div class="row">
                 <div class="col-sm-12">
                     <!-- Login card start -->
-                                   
+
 
                     <form class="md-float-material form-material"  action="" method="post" novalidate>
-                
-                         
+
+
                                <div class="text-center">
                             <img src="assets/images/logos/logo-dark_2.png" alt="logo.png">
                         </div>
@@ -163,7 +163,7 @@ function getIPAddress(){
                                         <h3 class="text-center"><i class="icofont icofont-lock text-primary f-80"></i></h3>
                                     </div>
                                 </div>
-                                              <?php 
+                                              <?php
                             $error = $_GET['error'];
                             $dis_error['6001'] = "Thank you very much for confirming your registration, </br> please login using email ID.";
                             $dis_error['6002'] = "Incorrect password. Please try again.";
@@ -172,9 +172,9 @@ function getIPAddress(){
                             $dis_error['6005']  = "The email is not registered with us,</br>  please register to access the system";
                             $dis_error['6006']  = "Details are sent to your registered email,</br>  please check";
 
-                            if($error !='') { 
+                            if($error !='') {
                             if($error == '6002' || $error == '6004' || $error == '6005' ){ ?>
-                          
+
                             <div class="alert alert-warning alert-dismissible">
 <strong class="f-14"><?php echo $dis_error[$error]; ?></strong>
 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -184,7 +184,7 @@ function getIPAddress(){
 <strong class="f-14"><?php echo $dis_error[$error]; ?></strong>
 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-                          
+
                         <?php } }?>
 
     <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
@@ -194,7 +194,7 @@ function getIPAddress(){
     <input type="hidden" name="option" id="option" class="form-control" value="<?php echo $_COOKIE['cookie_option']; ?>">
     <input type="hidden" name="work_module_setup_id" id="work_module_setup_id" class="form-control" value="<?php echo $_COOKIE['work_module_setup_id']; ?>">
     <input type="hidden" name="working_role_short_code" id="working_role_short_code" class="form-control" value="<?php echo $_COOKIE['working_role_short_code']; ?>">
-        
+
 
 
                                  <div class="form-group form-primary">
@@ -207,13 +207,13 @@ function getIPAddress(){
                                         <div class="d-grid">
 
                                             <button type="submit" class="btn btn-primary btn-md waves-effect text-center b-radius m-b-20 fw-bold">
-                                                <i class="icofont icofont-lock"></i> Unlock Screen 
+                                                <i class="icofont icofont-lock"></i> Unlock Screen
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                                 <p class="text-inverse text-end">Back to <a href="index.php?option=COM_logout" class="text-primary cursor-pointer"><b> &nbsp; &nbsp; Login </b></a></p>
-                             
+
                             </div>
                         </div>
                     </form>

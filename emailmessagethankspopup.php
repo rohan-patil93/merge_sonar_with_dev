@@ -19,7 +19,7 @@
       <!-- Favicon icon -->
 
       <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-      <!-- Google font-->     
+      <!-- Google font-->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
       <!-- Required Fremwork -->
       <link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap/css/bootstrap.min.css">
@@ -62,7 +62,7 @@
                       <div class="circle"></div>
                   </div>
               </div>
-            
+
               <div class="spinner-layer spinner-yellow">
                   <div class="circle-clipper left">
                       <div class="circle"></div>
@@ -74,7 +74,7 @@
                       <div class="circle"></div>
                   </div>
               </div>
-            
+
               <div class="spinner-layer spinner-green">
                   <div class="circle-clipper left">
                       <div class="circle"></div>
@@ -107,7 +107,7 @@
                                     <h1 class="f-60 text-primary">Thank You</h1>
                                     <p>Thank you for reaching out to us. Your message has been successfully sent. We appreciate you taking the time to contact us and will get back to you as soon as possible.</p>
                                     <i class="ti-check-box f-60 mt-4 text-primary"></i>
-                                    
+
                                     <p class="mt-4">Thank you for your patience, and we look forward to assisting you!</p>
                                     <button style="width:80px;" class="btn waves-effect waves-light hor-grd btn-grd-primary m-auto mt-2">Ok</button>
                                 </div>

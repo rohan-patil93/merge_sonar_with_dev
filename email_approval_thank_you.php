@@ -105,9 +105,9 @@
 </head>
 <body>
   <div class="thankyou-container">
-    <?php 
+    <?php
       $base = base64_decode(base64_decode(base64_decode($_GET['QWasD'])));
-      $list_data = explode("&", $base); 
+      $list_data = explode("&", $base);
       unset($list_data['0']);
       foreach($list_data as $list){
         $list_val  = explode('=',$list);
@@ -128,7 +128,7 @@
     <i class="fa-solid fa-circle-check check-icon"></i>
     <h1>Thank you for <br />Aproved</h1>
     <p>Your aproval has been successfully submitted. </p>
-    
+
     <!-- Corner icons with animation -->
     <i class="fa-solid fa-paper-plane corner-icon left"></i>
     <i class="fa-solid fa-envelope-open-text corner-icon right"></i>

@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: http://contracts.wftracker.com"); 
+header("Access-Control-Allow-Origin: http://contracts.wftracker.com");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Accept");
 ini_set('display_errors', 1);
@@ -57,7 +57,7 @@ if ($method == 'post'){
 	}
 	//echo "fff".$mode;
 	if($mode == 'loginflutter'){
-		//print_r($_POST); print_r($_GET);		
+		//print_r($_POST); print_r($_GET);
 		$post = $_POST;
 		$data['chrUserName'] = $post['useremail'];
 		$data['chrPassword'] = $post['password'];
@@ -72,7 +72,7 @@ if ($method == 'post'){
 			$res = $intiObj->infisuitejobcandedatesave($_POST,$_GET);
 			echo json_encode($res); exit;
 		}
-		
+
 	}
 	if($mode == "toinsertupdatethejobpostingpublish"){
 		$res = $intiObj->toinsertupdatethejobpostingpublish($_POST,$_GET);
@@ -102,14 +102,14 @@ if ($method == 'post'){
 		//print_r($data);
 		$res = $userObj->updateapprovallog($data);
 		echo json_encode($res);
-		
+
 	}
 	if($mode == 'updatedynamicapprovallog'){
 		$data = $_POST;
 		//print_r($data);
 		$res = $userObj->updatedynamicapprovallog($data);
 		echo json_encode($res);
-		
+
 	}
 	if ($mode == 'updaterowtabledata') {
 		//echo "sada"; exit;
@@ -136,7 +136,7 @@ if ($method == 'post'){
 		$res = $userObj->updaterowbasepimarydata($data,$_GET['table'],$rid);
 		echo json_encode($res); exit;
 	}
-	
+
 	if($mode == "addbills"){
 		//echo "ravi"; exit;
 		$res = $userObj->insertBills($_POST,$_GET['type']);
@@ -154,11 +154,11 @@ if ($method == 'post'){
 	if($mode == 'addjournalvouchers'){
 		$res = $userObj->addjournalvouchers($_POST,$_GET['table'],$_GET['type']);
 		echo json_encode($res);
-	} 
-	
+	}
+
 	if($mode=='inserttasks'){
 		$details = $userObj->inserttasks($_POST,$_GET);
-		echo json_encode($details);	
+		echo json_encode($details);
 	}
 	if($mode == 'displayattributetye'){
 		//echo "ravi"; exit;
@@ -172,9 +172,9 @@ if ($method == 'post'){
 		$data['display_field'] = $post['value'];
 		$data['value_field'] = $post['field_name'];
 		$data['content'] = urlencode($post['dis_custom_sql']);
-		$data['refer_action'] = $post['refer_action'];	
-		$data['refer_field'] = $post['refer_field'];	
-		$data['refer_by_action'] = $post['refer_by_action'];	
+		$data['refer_action'] = $post['refer_action'];
+		$data['refer_field'] = $post['refer_field'];
+		$data['refer_by_action'] = $post['refer_by_action'];
 		$data['refer_by_field'] = $post['refer_by_field'];
 		if($post['content'] != ""){
 			$data['content'] = $post['content'];
@@ -187,7 +187,7 @@ if ($method == 'post'){
 			}
 			$data['content'] = json_encode($arra);
 		}
-		
+
 		if(isset($post['discontent']) && $post['discontent'] != ""){
 			$discon = explode('#', $post['discontent'] );
 			foreach ($discon as $dis) {
@@ -214,7 +214,7 @@ if ($method == 'post'){
 		$data['attribute_type'] = $post['type'];
 		$data['content_details'] = urlencode(json_encode($post));
 		print_r($data); //exit;
-		
+
 		$whr = "application_table_name='".$post['table']."' and field_name='".$post['field']."'";
 		//echo $whr;
 		$userObj->deleterows(TBL_DISPLAYATTRIBUTES_TYPE,$whr);
@@ -227,47 +227,47 @@ if ($method == 'post'){
 		/*echo "ravi";
 		print_r($_POST); print_r($_GET); exit;*/
 		$res =$userObj->addorupdatewizardsettings($_POST,$_GET);
-		echo json_encode($res);	
+		echo json_encode($res);
 	}
 	if($mode == 'addorupdategoals'){
 		$res =$userObj->addorupdategoals($_POST,$_GET);
-		echo json_encode($res);	
+		echo json_encode($res);
 	}
 	if($mode == 'addsalary'){
 		$res =$userObj->addorupdatesalary($_POST,$_GET);
-		echo json_encode($res);	
+		echo json_encode($res);
 	}
-	if($mode == 'addgradesalary'){	
-		$res =$userObj->addorupdategradesalary($_POST,$_GET);	
-		echo json_encode($res);		
+	if($mode == 'addgradesalary'){
+		$res =$userObj->addorupdategradesalary($_POST,$_GET);
+		echo json_encode($res);
 	}
-	if($mode == 'addgradesalary'){		
-		$res =$userObj->addorupdategradesalary($_POST,$_GET);		
-		echo json_encode($res);			
+	if($mode == 'addgradesalary'){
+		$res =$userObj->addorupdategradesalary($_POST,$_GET);
+		echo json_encode($res);
 	}
 	if($mode == 'addjobpostingapplicatantdata'){
 		$res =$userObj->addjobpostingapplicatantdata($_POST,$_GET);
-		echo json_encode($res);	
+		echo json_encode($res);
 	}
 	if($mode == 'candidateautoregistation'){
 		//echo "api check"; exit;
 		$res =$userObj->candidateautoregistation($_POST,$_GET);
-		echo json_encode($res);	
+		echo json_encode($res);
 	}
 	if($mode == 'addorupdatecandaitedocument'){
 		//echo "api check"; exit;
 		$res =$userObj->addorupdatecandaitedocument($_POST,$_GET);
-		echo json_encode($res);	
+		echo json_encode($res);
 	}
 	if($mode == 'updatecandaitedocument'){
 		//echo "api check"; exit;
 		$res =$userObj->updatecandaitedocument($_POST,$_GET);
-		echo json_encode($res);	
+		echo json_encode($res);
 	}
 	if($mode == 'toinsertpayrnsummary'){
 		//echo "api check"; exit;
 		$res =$userObj->toinsertpayrnsummary($_POST,$_GET);
-		echo json_encode($res);	
+		echo json_encode($res);
 	}
 	if($mode == 'genratecandidatetoemployee'){
 	//echo "ravi"; exit;
@@ -277,17 +277,17 @@ if ($method == 'post'){
 	if($mode == 'genratecandidatesalarytemplate'){
 		//echo "api check"; exit;
 		$res =$userObj->genratecandidatesalarytemplate($_POST,$_GET);
-		echo json_encode($res);	
+		echo json_encode($res);
 	}
 	if($mode == 'usernotify'){
 		//echo "api check"; exit;
 		$res =$userObj->usernotify($_POST,$_GET);
-		echo json_encode($res);	
+		echo json_encode($res);
 	}
 	if($mode == 'employeeclocks'){
         //echo "api check"; exit;
 		$res =$userObj->employeeclocks($_POST,$_GET);
-		echo json_encode($res);   
+		echo json_encode($res);
 	}
 	if($mode =="multiinsert"){
 		//echo "hai"; exit;
@@ -295,7 +295,7 @@ if ($method == 'post'){
 		$res = $userObj->testTableInsert($_POST,$_GET['filename'],$get);
 		echo $res;
 	}
-	
+
 	if($mode =="payrollupdateonetime"){
 		//echo "hai"; exit;
 		//print_r($_POST); exit;
@@ -308,29 +308,29 @@ if ($method == 'post'){
 		$res = $userObj->addorupdateitdeclaration80c($_POST,$_GET);
 		echo $res;
 	}
-	if($mode=='processtasksettings') {	
-		$details = $userObj->processtasksettings($_POST,$_GET);	
-		echo json_encode($details); 	
-	}	
-	if($mode=='gettotalemployeesbyfilter') {	
-		$details = $userObj->gettotalemployeesbyfilter($_POST,$_GET);	
-		echo json_encode($details);	
-	}	
-	if($mode=='savetofiltertable') {	
-		$details = $userObj->savetofiltertable($_POST,$_GET);	
-		echo json_encode($details);	
-    	//echo "345";	
+	if($mode=='processtasksettings') {
+		$details = $userObj->processtasksettings($_POST,$_GET);
+		echo json_encode($details);
+	}
+	if($mode=='gettotalemployeesbyfilter') {
+		$details = $userObj->gettotalemployeesbyfilter($_POST,$_GET);
+		echo json_encode($details);
+	}
+	if($mode=='savetofiltertable') {
+		$details = $userObj->savetofiltertable($_POST,$_GET);
+		echo json_encode($details);
+    	//echo "345";
 	}
 	if($mode=='employeedetailsupdate') {
         //echo "employeedetailsupdate";exit;
 		$details = $userObj->employeedetailsupdate($_POST,$_GET);
-		echo json_encode($details); 
+		echo json_encode($details);
 	}
 
 	if($mode=='employeesdisplayfieldsset') {
         //echo "employeedetailsupdate";exit;
 		$details = $userObj->employeesdisplayfieldsset($_POST,$_GET);
-		echo json_encode($details); 
+		echo json_encode($details);
 	}
 	if($mode=='sendtousersettings'){
 		$details = $userObj->saveusersettings($_POST,$_GET);
@@ -340,7 +340,7 @@ if ($method == 'post'){
 		//print_r($_POST);
 		$details = $userObj->getemployeeattendance($_POST,$_GET);
    	 //exit;
-		echo json_encode($details); 
+		echo json_encode($details);
 	}
 	if($mode=='setuppayroll') {
 		$details = $userObj->setuppayroll($_POST,$_GET);
@@ -350,10 +350,10 @@ if ($method == 'post'){
 		$details = $userObj->setuphr($_POST,$_GET);
 		echo json_encode($details);
 	}
-	
+
 	if($mode=='saveleaveapplication') {
 		$details = $userObj->saveleaveapplication($_POST,$_GET);
-		echo json_encode($details); 
+		echo json_encode($details);
 	}
 	if($mode=='addeployeeshifts') {
     	//echo "Ravi"; exit;
@@ -362,7 +362,7 @@ if ($method == 'post'){
 	}
 	if($mode=='setupvendor'){
 		$details = $userObj->setupvendor($_POST,$_GET);
-		echo json_encode($details); 
+		echo json_encode($details);
 	}
 	if($mode=='savetermination'){
 		$details = $userObj->savetermination($_POST,$_GET);
@@ -378,14 +378,14 @@ if ($method == 'post'){
 	}
 	if($mode=='savesurveyreponses'){
 		$details = $userObj->savesurveyreponses($_POST,$_GET);
-		echo json_encode($details); 
+		echo json_encode($details);
 	}
 	if($mode=='createsurveys'){
 		$details = $userObj->createsurveys($_POST,$_GET);
 		//echo json_encode($details);
 		echo json_encode(10);
 	}
-	
+
 	if($mode=='insertinquiries'){
 		$details = $userObj->insertinquiries($_POST,$_GET);
 		echo json_encode($details);
@@ -439,7 +439,7 @@ if ($method == 'post'){
 		echo json_encode($details);
     	//exit;
 	}
-	
+
 	if($mode=='saveperformanceresponse'){
 		$details = $userObj->saveperformanceresponse($_POST,$_GET);
 		echo json_encode($details);
@@ -454,29 +454,29 @@ if ($method == 'post'){
 		$details = $userObj->insertandupdateperformancesetupquestions($_POST,$_GET);
 		echo json_encode($details);
 	}
-	
+
 	if($mode == 'insertandupdateempexpenses'){
 		$details = $userObj->insertandupdateempexpenses($_POST,$_GET);
 		echo json_encode($details);
 	}
-	
+
 	if($mode == 'insertseriallot'){
 		$details = $userObj->insertseriallot($_POST,$_GET);
-		echo json_encode($details); 
+		echo json_encode($details);
 	}
 	if($mode == 'togetmyreporserach'){
 		$details = $userObj->togetmyreporserach($_POST,$_GET);
-		echo json_encode($details); 
+		echo json_encode($details);
 	}
 	if($mode == 'toinsertandpdateesignemployee'){
 		//echo "ravi"; print_r($_POST);print_r($_GET);
 		$details = $userObj->toinsertandpdateesignemployee($_POST,$_GET);
-		echo json_encode($details); 
-	}	
+		echo json_encode($details);
+	}
 	if($mode == 'toinsertandpdateesignemployeeonlyone'){
 		//echo "ravi"; print_r($_POST);print_r($_GET);
 		$details = $userObj->toinsertandpdateesignemployeeonlyone($_POST,$_GET);
-		echo json_encode($details); 
+		echo json_encode($details);
 	}
 	if($mode=='createjobfeedback'){
 		//echo "ssss"; exit;
@@ -501,7 +501,7 @@ if ($method == 'post'){
 	if($mode == 'readchekallinbox'){
 		$res = $userObj->readchekallinbox($_POST,$_GET);
 		echo json_encode($res);
-	} 
+	}
 	if($mode=='addfloderupdatereportid'){
 		//echo "ssss"; exit;
 		$details = $userObj->addfloderupdatereportid($_POST,$_GET);
@@ -509,7 +509,7 @@ if ($method == 'post'){
 	}
 	if($mode=='togetemployeedetaila'){
 		$details = $userObj->togetemployeedetaila($_POST,$_GET);
-		echo json_encode($details); 
+		echo json_encode($details);
 	}
 	if($mode == 'addupdateassetsallocation'){
 		$res = $assetObj->addupdateassetsallocation($_POST,$_GET);
@@ -533,7 +533,7 @@ if ($method == 'post'){
 		$details = $intiObj->$fun($_POST,$_GET);
 		//print_r($_GET);
 		echo json_encode($details);
-		
+
 	}
 
 	$check_array = array('insertletters'=>'insertLetters','statusprogressaction'=>'insertORUpadateStatusprogressaction','productupload'=>'productupload','budgetinsert'=>'budgetinsert','serchforpos'=>'serchforpos','querynotificationandemail'=>'querynotificationandemail','insertvenderquatation'=>'ToInserttransactions','upadateblukapproval'=>'upadateblukapproval','budgetcheckreftadledata'=>'budgetcheckreftadledata','reportfilter'=>'insertorupdatereportfilter','insertorupdatepermissions'=>'insertorupdatepermissions','insertprintdesigning'=>'insertPrintDesigning','insertdisplayattribute'=>'insertDisplayAttribute','imageuploading'=>'imageuploading','insertautodesigntable'=>'insertAutoDesignTable','insertemphistries'=>'insertEmpHistries','tosendnotifiations'=>'tosendnotifiations','interviewschedule'=>'interviewSchedule','insertjobpost'=>'insertJobPost','insertrole'=>'insertRole','resetnewpassword'=>'resetNewPassword','insertemailcontain'=>'insertEmailContain','insertreportattributesnew'=>'insertReportAttributesNew','insertworkflownew'=>'insertWorkFlowNew','updatedynamicapprovallognew'=>'updateDynamicApprovalLogNew','updatedynamicapprovallognew'=>'updateDynamicApprovalLogNew','insertleaverequest'=>'insertLeaveRequest','insertapplicationtours'=>'insertapplicationtours','inserttickets'=>'insertTickets','getemployeetickets'=>'getEmployeeTickets','insertprojecttasklogs'=>'insertProjectTaskLogs','insertemployeedetails'=>'insertemployeedetails','insertpayareaasignemployee'=>'insertpayareaasignemployee','insertpayrolladminasignemployee'=>'insertpayrolladminasignemployee','insertvendorinvitation'=>'insertVendorInvitation','insertexpensespolicies'=>'insertexpensespolicies','insertexpensespoliciescategory'=>'insertExpensesPoliciesCategory','insertexpensesmileagesperdiem'=>'insertExpensesMileagesPerDiem','insertstocktakes'=>'insertStockTakes','insertstocktakesitems'=>'insertStockTakesItems','getstocktakeadjustments'=>'getStockTakeAdjustments','insertcompliance'=>'insertCompliance','insertcompliancetaskanswer'=>'insertComplianceTaskAnswer','insertapplicationuser'=>'insertapplicationuser','insertjobtitlecompetencies'=>'insertJobTitleCompetencies','inserperformanaceappraiserheader'=>'inserPerformanaceAppraiserHeader','udateleaveforvms' => 'udateleaveforvms', 'loginafterdetails' => 'loginafterdetails', 'togetemployeeuserids' => 'togetemployeeuserids','insertperformancesetup'=>'insertPerformanceSetup','insertfeeds'=>'insertFeeds','inserthrservices'=>'insertHRServices','insertcompanysubscriptionplans'=>'insertCompanySubscriptionPlans','insertcompanysubscription'=>'insertCompanySubscription','insertregistiredgroups'=>'insertRegistiredGroups','insertadditionalserviceslicense'=>'insertAdditionalServicesLicense','insertcandidatedetails'=>'insertCandidateDetails','insertuserinvitation'=>'insertUserInvitation','assignecandidatejobpostingpopup'=>'assigneCandidateJobPostingPopup','insertcandidatespopup'=>'insertCandiDatesPopup','insertcandidatelogs'=>'insertCandidateLogs','sendcandidatemailpopup'=>'sendCandidatEmailPopup','candidaterequestdocs'=>'candidateRequestDocs','insertcandidateaccessright'=>'insertCandidateAccessRight','insertcandidateschedule'=>'insertCandidateSchedule','getcandidateschedule'=>'getCandidateSchedule','updatemoduleselection'=>'UpdateModuleSelection','submitstatusdynamicworkflow'=>'submitStatusDynamicWorkFlow','insertdocumentaccesssetups'=>'insertDocumentAccessSetups','inserttransactionaccesspermission'=>'insertTransActionAccessPermission','updatetransactionactivityschedule'=>'updatetransactionactivityschedule','updateonboardingtaskstatus'=>'updateOnBoardingTaskStatus','insertcommentjobposting'=>'insertCommentJobPosting','inserttagjobposting'=>'inserttagjobposting', 'addorupdateitdeclarationotherincome'=>'addorupdateitdeclarationotherincome','insertpayments'=>'insertPayments','submitsetup'=>'submitSetup','insertapplicationemptytransactions'=>'insertApplicationEmptyTransactions','updateprojecttaskdetailsfollowup'=>'updateProjectTaskDetailsFollowUp','insertdynamiccancelinvoice'=>'insertDynamicCancelInvoice','checkemailidallreadyavilableornot'=>'checkEmailidAllReadyAvilableOrNot','updateapplicationusers'=>'updateApplicationUsers','getinvitationvendors'=>'getInvitationVendors','updateapplicationfavourites'=>'updateApplicationFavourites','insertemployeesdisplayfields'=>'insertEmployeesDisplayFields','updateemployees'=>'updateEmployees','insertempbanks'=>'insertEMPBanks','insertvendorcustomeritems'=>'insertVendorCustomerItems','insertreceipts'=>'insertReceipts','insertitems'=>'insertItems','insertitemcategories'=>'insertItemCategories','insertclonetransactions'=>'insertCloneTransactions','getitemsearch'=>'getItemSearch','insertimportexceldata'=>'insertImportExcelData','insertdynamicinvoice'=>'insertdynamicinvoice');
@@ -576,7 +576,7 @@ if ($method == 'post'){
 		$fun = $asset_class_array[$mode];
 		$details = $assetObj->$fun($_GET,$_POST);
 		echo json_encode($details);
-	}	
+	}
 
 
 	$esop_class_array =  array('insertcompanyvaluations'=>'insertCompanyValuations','insertesopplans'=>'insertESOPPlans','insertesopallocations'=>'insertESOPAllocations');
@@ -662,7 +662,7 @@ if ($method == 'post'){
 				}
 			}else{
 				$_POST['receipt_image'] = $_POST['old_receipt_image'];
-			} 
+			}
 		}
 
 		$fun = $mobilecheck_array[$mode];
@@ -728,7 +728,7 @@ if ($method == 'post'){
 
 	$react_post = array('dynamicadddatareact'=>'dynamicadddatareact', 'dynamicupdateatareact'=>'dynamicupdateatareact','insertcontracts'=>'insertContracts','insertworkflowreact'=>'insertworkflowreact','insertpermissionreact'=>'insertpermissionreact','insertworkflowactivityreact'=>'insertworkflowactivityreact','insertcontrolversionreact'=>'insertcontrolversionreact','insertactivityreact'=>'insertactivityreact','insertCustomersreact'=>'insertCustomersreact','insertVendorsreact'=>'insertVendorsreact','insertcontractsreact'=>'insertcontractsreact','insertcontractrechargedetails'=>'insertContractRechargeDetails');
 	if(isset($react_post[$mode])) {
-		
+
 		//echo "Api call check "; print_r($data); print_r($_GET);  exit;
 		include_once("model/react.class.php");
 		$reactObj=new reactClass();
@@ -761,14 +761,14 @@ if ($method == 'post'){
 
 	if($mode == "imageuploadtoreact"){
 		$images = explode("," , $_POST['image_names']);
-		/*print_r($_POST);		
+		/*print_r($_POST);
 		print_r($images);
 		print_r($_GET);
 		 print_r($_FILES); exit;	*/
 		 $get = $_GET;
 		$file_uploads_path = "uploads/all/";
 		foreach($images as $img){
-			$image = $img;			
+			$image = $img;
 			//print_r($_FILES); //exit;
 			$temp = explode(".", $_FILES[$image]['name']);
 			$Filename=  "file_".time()."_".uniqid();
@@ -782,7 +782,7 @@ if ($method == 'post'){
 				echo "<br> Nooo";
 			}*/
 		}
-		echo json_encode($res);exit; 
+		echo json_encode($res);exit;
 	}
 
 	$csr_array = array(
@@ -861,7 +861,7 @@ if ($mode == 'signup') {
 	$data = json_decode($_GET['data'],1);
 	//print_r($data); exit;
 	$res=$userObj->insertAdminUser($data);
-	echo json_encode($res); 
+	echo json_encode($res);
 	//echo $data; exit;
 }
 if ($mode == 'userdetails') {
@@ -1107,7 +1107,7 @@ if($mode == 'displayattributes'){
 	$res = $userObj->getrowTablesData(TPREFIX.TBL_DISPLAYATTRIBUTES,'*',$whr);
 	//print_r($res);
 	echo json_encode($res);
-	//echo "1";	
+	//echo "1";
 }
 if($mode == 'displayattributesview'){
 	$view = $_GET['view'];
@@ -1117,47 +1117,47 @@ if($mode == 'displayattributesview'){
 	}
 	$whr = $id."='".$view."'".$condition;
 	$res = $userObj->getrowTablesData(TBL_DISPLAYATTRIBUTES,'*',$whr);
-	echo json_encode($res);	
+	echo json_encode($res);
 }
 if($mode == 'rolesdetails'){
 	$res = $userObj->getAllTablesData(TPREFIX.TBL_ROLES);
-	echo json_encode($res);	
+	echo json_encode($res);
 }
 if($mode == 'recurringdetails'){
 	$res = $userObj->getAllTablesData(TPREFIX.TBL_RECURRING);
-	echo json_encode($res);	
+	echo json_encode($res);
 }
 if($mode == 'permissionsdetails'){
 	$res = $userObj->getAllTablesData(TPREFIX.TBL_PERMISSIONS);
-	echo json_encode($res);	
+	echo json_encode($res);
 }
 if($mode == 'sitesettingsdetails'){
 	$res = $userObj->getAllTablesData(TPREFIX.TBL_SITESETTINGS);
-	echo json_encode($res);	
+	echo json_encode($res);
 }
 if($mode == 'paymentdetails'){
 	$res = $userObj->getAllTablesData(TPREFIX.TBL_PAYMENTS);
-	echo json_encode($res);	
+	echo json_encode($res);
 }
 if($mode == 'transfersdetails'){
 	$res = $userObj->getAllTablesData(TPREFIX.TBL_TRANSFERS);
-	echo json_encode($res);	
+	echo json_encode($res);
 }
 if($mode == 'vendorsdetails'){
 	$res = $userObj->getAllTablesData(TPREFIX.TBL_VENDORS);
-	echo json_encode($res);	
+	echo json_encode($res);
 }
 if($mode == 'taxdetails'){
 	$res = $userObj->getAllTablesData(TPREFIX.TBL_TAXVW);
-	echo json_encode($res);	
+	echo json_encode($res);
 }
 if($mode == 'useretails'){
 	$res = $userObj->getAllTablesData(TPREFIX.TBL_USERVW);
-	echo json_encode($res);	
+	echo json_encode($res);
 }
 if($mode == 'billitemdetails'){
 	$res = $userObj->getAllTablesData(TPREFIX.TBL_BILLITEMVW);
-	echo json_encode($res);	
+	echo json_encode($res);
 }
 if($mode == 'adddata'){
 	//echo "ha"; //exit;
@@ -1189,7 +1189,7 @@ if($mode == 'gettabledetails'){
 	$whr ='';
 	$field = '*';
 	if($_GET['fid'] !='' && $_GET['rid'] !=''){
-		
+
 		$rid = $_GET['rid'] !='' ? $_GET['rid'] : '';
 		$fid = $_GET['fid'] !='' ? $_GET['fid'] : '';
 		$whr = $fid."='".$rid."'";
@@ -1200,12 +1200,12 @@ if($mode == 'gettabledetails'){
 	if($_GET['field'] !=''){
 
 		$field = $_GET['field'] !='' ? $_GET['field'] : '*';
-		
+
 	}
 	//echo "hai".$orderby;
 	$res = $userObj->getAllTablesData($_GET['table'],'*',$whr,$orderby);
 	//print_r($res);
-	echo json_encode($res);	
+	echo json_encode($res);
 }
 if ($mode == 'singlerowtabledata') {
 	$rid = $_GET['rid'];
@@ -1257,7 +1257,7 @@ if ($mode == 'adddebitnote') {
 	/*$data['company_id'] =3;*/
 	$res = $userObj->insertdebitnoteTables($data);
 	echo $res;
-} 
+}
 if ($mode == 'addcreaditnote') {
 	$data = json_decode($_GET['data'],1);
 	//print_r($data);
@@ -1271,7 +1271,7 @@ if ($mode == 'adddquotation') {
 	/*$data['company_id'] =3;*/
 	$res = $userObj->insertquotationTables($data);
 	echo $res;
-} 
+}
 /*if($mode == 'billdetails'){
 	$res = biillData(2);
 	echo $res;
@@ -1407,7 +1407,7 @@ if($mode == 'notificationinsert'){
 	$data1['Notification_Type'] = 'Action';
 	$users =  explode(',', $post['notification_users']);
 	foreach ($users as $key => $value) {
-		$data1['User_id'] = $value;	
+		$data1['User_id'] = $value;
 		//print_r($data1); exit;
 		$res = $userObj->insertTablesdata($data1, TBL_USER_NOTIFICATON);
 	}
@@ -1424,7 +1424,7 @@ if($mode == 'displayrolepermission'){
 	//echo $role_id; exit;
 	$rolepermission = $userObj->displayrolepermission($role_id);
 	echo json_encode($rolepermission);
-	
+
 }
 if($mode == 'toGetRolePermissions'){
 	$table = $_GET['dis_table'];
@@ -1507,7 +1507,7 @@ if($mode == 'gettabledetailswithconditions'){
 	$where = '';	$fieldnames = '*'; $order = ''; $limit1=''; $limit2='';
 	if($whr !=''){
 		foreach ($whr as $key => $value) {
-			$where.= $key." = '".$value."' AND ";		
+			$where.= $key." = '".$value."' AND ";
 		}
 
 		$where = trim($where,'AND ');
@@ -1515,7 +1515,7 @@ if($mode == 'gettabledetailswithconditions'){
 		//$where = implode(' AND ', $where);
 	}
 	if($whr_in_key !=''){
-		
+
 		$whr_in_con = " AND ".$whr_in_key." IN (".implode(',',$whr_in).")";
 		$where.= $whr_in_con;
 		//echo $where;
@@ -1544,7 +1544,7 @@ if($mode == 'gettabledetailswithconditions'){
     	    //$led[$i]['currency_list']= base64_encode($dd->currency_list);
 			$led[$i]['currency_name']= $dd->currency_short_code;
 			$led[$i]['currency_short_code']= $dd->currency_short_code;
-			
+
 			$i++;}
 			$details = $led;
 		}
@@ -1622,8 +1622,8 @@ if($mode == 'gettabledetailswithconditions'){
 		echo json_encode($details);
 	}
 	if($mode == 'dyanamicserialnumber'){
-		$details = $userObj->toGetApplicationSerialNumber($_GET['table']); 
-		echo json_encode($details);	
+		$details = $userObj->toGetApplicationSerialNumber($_GET['table']);
+		echo json_encode($details);
 	}
 	if($mode == "infisuitejobcandedatesave"){
 		if($_POST['extid']!=""){
@@ -1631,14 +1631,14 @@ if($mode == 'gettabledetailswithconditions'){
 			echo json_encode($res); exit;
 		}
 	}
-	if($mode=='sendmailwithsmtp'){ 
+	if($mode=='sendmailwithsmtp'){
 		//echo "-------------------"; exit;
-		$details = $userObj->sendmailwithsmtp('shilpa.duttapattanayak@microchip.com', 'Test mail', 'body', '',''); 
-		echo json_encode($details);	
+		$details = $userObj->sendmailwithsmtp('shilpa.duttapattanayak@microchip.com', 'Test mail', 'body', '','');
+		echo json_encode($details);
 	}
 	if($mode == 'updatetransactiontcs'){
 		$details = $userObj->updateTransactionTCS($_GET['transaction_table'],$_GET['transaction_id'],$_GET);
-		echo json_encode($details);	
+		echo json_encode($details);
 	}
 	$vms_get_class_array =  array('toGetEmployessWorkorderswthTimesheet'=>'toGetEmployessWorkorderswthTimesheet', 'togetverticaldata'=>'togetverticaldata', 'togetcoscentergraphdata'=>'togetcoscentergraphdata', 'togetvendorgraphdata'=>'togetvendorgraphdata', 'togetteammeberattdences'=>'togetteammeberattdences', 'togetteammeberemployeeids'=>'togetteammeberemployeeids', 'togetvendorwiseprojecttimesheetdata'=>'togetvendorwiseprojecttimesheetdata', 'customadmdashboardmodule3'=>'customadmdashboardmodule3', 'bugetvendorrareports'=>'bugetvendorrareports', 'toGetblukProjectTimesheet'=>'toGetblukProjectTimesheet', 'toGetblukProjectTimesheetlastmonths'=> 'toGetblukProjectTimesheetlastmonths', 'toGetblukHrProjectTimesheet'=>'toGetblukHrProjectTimesheet', 'toGetblukFinaceProjectTimesheet'=>'toGetblukFinaceProjectTimesheet', 'toGetblukHrProjectTimesheetlastmonths'=>'toGetblukHrProjectTimesheetlastmonths', 'togetteamcount'=>'togetteamcount', 'togetteamlisttohr'=>'togetteamlisttohr', 'gettimesheetsummary'=>'gettimesheetsummary','getempconnect'=>'getempconnect', 'emplist'=>'empList', 'getbugetamountesignvendorwise'=>'getbugetamountesignvendorwise','deletetimesheets'=>'deleteTimeSheets','togetemployeesesignvenderratecarddetail'=>'togetemployeesesignvenderratecarddetail', 'getexpireagreementslist'=>'getExpireAgreementsList','timesheethrsdashboard'=>'timeSheetHrsDashboard','nextmonthprojection'=>'nextMonthProjection','togetvendoremployeedetails'=>'togetvendoremployeedetails','gettimesheetworkentryedit'=>'getTimeSheetWorkEntryWdit','esigncunsumebugetchage'=>'esigncunsumebugetchage', 'gettimesheetentries'=>'gettimesheetentries','toretriveminhorsandweksanddayebasedondates'=>'toretriveminhorsandweksanddayebasedondates', 'togetesignvendororderdata'=>'togetesignvendororderdata','getprojecttimesheetworkorderid'=>'getprojecttimesheetworkorderid', 'togetempvmstransactionslist'=>'togetempvmstransactionslist','getcheckexpirydetails'=>'getcheckexpirydetails','yearlyprojecttimesheetreports'=>'yearlyprojecttimesheetreports','gettimesheetsubmitpending'=>'getTimesheetSubmitPending','gettimesheetsholidaysleaveoff'=>'getTimesheetsHolidaysLeaveOff','getapprovalmanagers'=>'getapprovalmanagers','getweecklytimesheetsummary'=>'getWeecklyTimeSheetSummary','getweecklybulkapprovaltimesheet'=>'getWeecklyBulkApprovalTimesheet','changestatusweeklybulkapproval'=>'changestatusweeklybulkapproval','updateprojecttimesheetsblukforhrweekly'=>'updateprojecttimesheetsblukforhrweekly', 'togetvmsemployeedetails'=>'togetvmsemployeedetails','togetesignpolistpopup'=>'togetesignpolistpopup','getvendorratecardidordetailsid'=>'getvendorratecardidordetailsid','getweecklystatustimesheetsummary'=>'getWeecklyStatusTimeSheetSummary','checkvalll'=>'checkvalll','togetananthdownloadreport'=>'togetananthdownloadreport','admindashboarddetails'=>'admindashboarddetails','togettransactionlogtalbe'=>'togettransactionlogtalbe','getcountpendingtimesheet'=>'getcountpendingtimesheet','bugetvendorrareport'=>'bugetvendorrareport', 'tocalworkingdays'=>'tocalworkingdays','getvendors'=>'getvendors', 'getvendorfeedbackdata'=>'getvendorfeedbackdata', 'getvendorfeedbackresponsedata'=>'getvendorfeedbackresponsedata', 'getvendorfeedbackeditdetails'=>'getvendorfeedbackeditdetails','togetempvmsdetails'=>'togetempvmsdetails','togetvendorfeedbackpopdetails'=>'togetvendorfeedbackpopdetails','vendorreviewalldetails'=>'vendorreviewalldetails','CreateNewversionvendorsetup'=>'CreateNewversionvendorsetup','togetvendorfeedbacksetupdetails'=>'togetvendorfeedbacksetupdetails', 'getmonthlytimesheetentries'=>'getmonthlytimesheetentries', 'replacevendor'=>'replacevendor',  'addupdateempassignmilestone'=>'addupdateempassignmilestone','admindashboarddetails_newdashboard'=>'admindashboarddetails_newdashboard','vendorstaqadmindashboard' => 'vendorstaqAdminDashboard', 'vendorlistforadminmanag'=>'vendorlistforadminmanag', 'togetretrivemanageremployeeleaves'=>'togetretrivemanageremployeeleaves', 'togetretrivemanageremployetermination'=>'togetretrivemanageremployetermination', 'vmssingleemployeedashoard_new'=>'vmssingleemployeedashoard_new', 'togetemployeemonthattendancedetails'=>'togetemployeemonthattendancedetails', 'togetemployeelistleaedata'=>'togetemployeelistleaedata');
 	if(isset($vms_get_class_array[$mode])){
@@ -1647,8 +1647,8 @@ if($mode == 'gettabledetailswithconditions'){
 		echo json_encode($details);
 	}
 
-	$check_array = array('projecttaskchart'=>'projectTaskChart','updateprojecttaskstatuse'=>'updateProjectTaskStatuse','getprojecttaskemplist'=>'getProjectTaskEmpList','getlistcreatdocumentsfields'=>'getListCreatDocumentsFields','gettablerow'=>'getListTableRow','getprintdesigning'=>'getPrintDesigning','gettableattributes'=>'getTableAttributes','getlisttable'=>'getListTable','getattribute'=>'getAttribute','fileuploadingdelete'=>'fileUploadingDelete','filleuploadinglist'=>'filleUploadingList','getjobpostingsreport'=>'getjobpostingsreport','getempreport'=>'getempreport','getemprequests'=>'getemprequests','togetVendorAgreementexpirelist'=>'togetVendorAgreementexpirelist','getpeerfeedbackquestionsandoptions'=>'getpeerfeedbackquestionsandoptions','getperformanceemployees'=>'getperformanceemployees','getempperformancepeerfeedback'=>'getempperformancepeerfeedback','getperformanceassessment'=>'getperformanceassessment','employeedashboard'=>'employeedashboard','togetepfecrsummary'=>'togetepfecrsummary','togetesisummary'=>'togetesisummary','togetepfsummary'=>'togetepfsummary','togetpayslipctcreports'=>'togetpayslipctcreports','togetstateinsurance'=>'togetstateinsurance','togetpercentofempprovidentfunds'=>'togetpercentofempprovidentfunds','togetsumofempsalaryoncomponentidbtwdates'=>'togetsumofempsalaryoncomponentidbtwdates','togetsumofempsalaryoncomponentid'=>'togetsumofempsalaryoncomponentid','togetsalarytotaldetails'=>'togetsalarytotaldetails','getcandidatededata'=>'getcandidatededata','gettimesheedays'=>'gettimesheedays','getjobsreport'=>'getjobsreport','getempassessment'=>'getempassessment','getassessmentreport'=>'getassessmentreport','getassessmentresult'=>'getassessmentresult','getassessmentlist'=>'getassessmentlist','getassessmentsummary'=>'getassessmentsummary','getsharedassessmentdetails'=>'getsharedassessmentdetails','getassessmentdetails'=>'getassessmentdetails','getemployeeworkordertimesheethorus'=>'getemployeeworkordertimesheethorus','getbudgetlist'=>'getbudgetlist','getbudgetfilterdetails'=>'getbudgetfilterdetails','getvmsbudgetutilization'=>'getvmsbudgetutilization','gettimesheetscalendar'=>'gettimesheetscalendar','togetjobdetails'=>'togetjobdetails','getcontractemployees'=>'getcontractemployees','getvendorwisereport'=>'getvendorwisereport','NewUserEmailresent'=>'NewUserEmailresent','getprojecttimesheets'=>'getprojecttimesheets','togetprojectdetails'=>'togetprojectdetails','toGetVendorDashBoardData'=>'toGetVendorDashBoardData','getempsurvey'=>'getempsurvey','getsurveyreport'=>'getsurveyreport','getsurveyresult'=>'getsurveyresult','getsurveylist'=>'getsurveylist','getsurveysummary'=>'getsurveysummary','getsharedsurveydetails'=>'getsharedsurveydetails','getsurveydetails'=>'getsurveydetails','employeeshift'=>'employeeshift','toGetInboxCountUsingUserId'=>'toGetInboxCountUsingUserId','getfilteremployeenames'=>'getfilteremployeenames','updatebulktransferemployees'=>'updatebulktransferemployees','getbulkchangecategories'=>'getbulkchangecategories','toGetTransactionLogdata'=>'toGetTransactionLogdata','getrecognitionsettings'=>'getrecognitionsettings','getfilterdetails'=>'getfilterdetails','getheadcountreport'=>'getheadcountreport','wrokflowlist'=>'wrokflowlist','getterminatesettings'=>'getterminatesettings','getannouncements'=>'getannouncements','getvendorsettings'=>'getvendorsettings','tosearchemployee'=>'tosearchemployee','tosearchempleavesbydate'=>'tosearchempleavesbydate','togetleaveform'=>'togetleaveform','getconfigsettings'=>'getconfigsettings','togetallpayslipdetails'=>'togetallpayslipdetails','toimportthedataintotables'=>'toimportthedataintotables','getsalarygroupsitreportdata'=>'getsalaryreportinggroupsdata','togetnoteslist'=>'togetnoteslist','getemployeeinfoforupdation'=>'getemployeeinfoforupdation','tasksendmail'=>'tasksendmail','gettasksdetails'=>'gettasksdetails','singlestatusdata'=>'singlestatusdata','payrolldetails'=>'payrolldetails','togetkpitaskstatus'=>'togetkpitaskstatus','togetkpitaskhistories'=>'togetkpitaskhistories','togetemployeeslist'=>'togetemployeeslist','togetempleavebalances'=>'togetempleavebalances','togetpresentationpagedetails'=>'togetpresentationpagedetails','togetpresentationdetails'=>'togetpresentationdetails','togetemployeeattendanacecalucater'=>'togetemployeeattendanacecalucater','togetcurrentmonthsalaryrevisions'=>'togetcurrentmonthsalaryrevisions','togetcurrentmonthexitemployes'=>'togetcurrentmonthexitemployes','togetpayslipdetails'=>'togetpayslipdetails','togetpayrolledetails'=>'togetpayrolledetails','updateonlystatus'=>'updateonlystatus','employeegoalscheckandadd'=>'employeegoalscheckandadd','goalscheckandadd'=>'goalscheckandadd','togetsalarycatdetaillist'=>'togetsalarycatdetaillist','togetcandidatedocumentlist'=>'togetcandidatedocumentlist','gettabledetailswithtransationlogconditions'=>'employeeDetails','employeedetails'=>'employeeDetails','toGetItemcostingtyewithdata'=>'toGetItemcostingtyewithdata','togetstatusprogressactiondetails'=>'togetstatusprogressactiondetails','togetgenralledgerlistdata'=>'togetgenralledgerlistdata','pendingquerieslist'=>'pendingQuerieslist','togetbudgetuserdeails'=>'togetbudgetuserdeails','togetstatusprogresstables'=>'togetstatusprogresstables','dasboaradrequisition1coscenterdetails'=>'dasboaradrequisition1coscenterdetails','dasboaradrequisition1details'=>'dasboaradrequisition1details','montlypettycashdetails'=>'montlypettycashdetails','dailypettycashdaydetails'=>'dailypettycashdaydetails','dailypettycashmonth'=>'dailypettycashmonth','dailypettycashdetails'=>'dailypettycashformonth','togetuserpettycashboxdetails'=>'togetuserpettycashboxdetails','toGetTaxrates'=>'toGetTaxrates','togetpettycashsummary'=>'toGetPettyCashSummary','togetbluckstatusdata'=>'toGetBluckStatusData','toGetBluckApprovaldata'=>'toGetBluckApprovaldata','pettycashdetails'=>'pettycashdetails','getchartofaccountdetailsuseglaccountuser'=>'getchartofaccountdetailsuseglaccountuser','getapprovallogdata'=>'getApprovalLogData','getmyreportlist'=>'getMyReportList','deletemyreport'=>'deleteMyReport','getchartjobreport'=>'getChartJobReport','getlistchartjobreport'=>'getListChartJobReport','getheadcountcurrentreport'=>'getHeadCountCurrentReport','getlistheadcountcurrentreport'=>'getListHeadCountCurrentReport','getchartcandidatesreport'=>'getChartCandidatesReport','getlistchartcandidatesreport'=>'getListchartcandidatesreport','tocheckesginemployee'=>'tocheckesginemployee','blukapprovalvendorchart'=>'blukapprovalvendorchart','processtaskschecduleview'=>'processTaskSchecduleView','processtaskschecduleoverview'=>'processTaskSchecduleOverView','getlistjobpostingslist'=>'getListJobPostingsList','getjoboverview'=>'getJobOverView','updatecandidateshortlist'=>'updateCandidateShortList','getcandidatefeedbackresult'=>'getcandidatefeedbackresult','candidateactivityreports'=>'candidateActivityReports','togetfeedbackcandidate'=>'togetfeedbackcandidate','getlist'=>'getList','applicationprocesslist'=>'applicationProcessList','applicationprocesspages'=>'applicationProcessPages','applictionprocelist'=>'applictionProceList','updateapplicationprocesspages'=>'updateApplicationProcessPages','userlistwithrole'=>'userlistwithrole','getfeedbackcandidatereport'=>'getfeedbackcandidatereport','getriviewsdata'=>'getRiviewsData','getcitydatasautotype'=>'getcitydatasautotype','gettrackingdynamic'=>'gettrackingdynamic','getfamilytreelist'=>'getFamilyTreeList','getemployeetreelist'=>'getEmployeeTreeList','getchartofaccountreelist'=>'getCharTofAccounTreeList','myreportviewsql'=>'myreportViewSql','reportfilterselectdata'=>'reportFilterSelectData','checkcriteria'=>'checkCriteria','checkwhoshouldapproves'=>'checkWhoShouldApproves','customgetstatusworkflow'=>'customGetStatusWorkFlow','updatedynamicapprovallognew'=>'updateDynamicApprovalLogNew','testingfunction'=>'testingfunction','checkemployeeleaveavailableornot'=>'checkEmployeeLeaveAvailableOrNot','cronjobleave'=>'cronJobLeave','checkleaveapplicable'=>'checkLeaveApplicable','checkleavebalanceorhalfday'=>'checkLeaveBalanceOrHalfDay','tocerateapplicationuser'=>'tocerateapplicationuser','getemployeeworkingentrys'=>'getEmployeeWorkingEntrys','edittimesheetbillablehrs'=>'editTimeSheetBillableHrs','tocreatemutltiusercreate'=>'tocreatemutltiusercreate','getmonthlyctcreports'=>'getMonthlyCTCReports','insertcheckpayroll'=>'insertCheckPayRoll','dyanamicreferfunc'=>'dyanamicReferFunc', 'closenotificationinfo'=>'closeNotificationInfo', 'tocerateapplicationuserbasedonalltype'=>'tocerateapplicationuserbasedonalltype','togetptanualstatment'=>'togetPtAnualStatment','getemployeectcreports'=>'getEmployeeCTCReports','closenotificationinfo'=>'closeNotificationInfo','bugetvendorrareporttest'=>'bugetvendorrareporttest','updateticketdetails'=>'updateTicketDetails','getviewticketdetails'=>'getViewTicketDetails','getheadcountreportemployefilter'=>'getheadcountreportEmployeFilter11','getlitsattendancesapi'=>'getLitsAttendancesApi','getleavewithstatus'=>'getLeaveWithStatus','togetpayrollpayarea'=>'togetpayrollpayarea','payareapayrolldetails'=>'payareapayrolldetails','listoutpayareapayrolldetails'=>'listoutpayareapayrolldetails','getgrosssalarywithregim'=>'getgrosssalarywithregim','getmyreportfields'=>'getMyReportfields','getadmindashboard'=>'getAdminDashboard','gettablefilter'=>'getTableFilter','getemployeeexpencesdetails'=>'getEmployeeExpencesDetails','getexpensespoliciesdetails'=>'getExpensesPoliciesDetails','assignemployeelistpolicy'=>'assignEmployeeListPolicy','getuserinvitations'=>'getUserInvitations','updatestatusvendordocuments'=>'updatestatusvendordocuments','reaprovevendordoc'=>'reAproVevendorDoc','getstocktakes'=>'getStockTakes','getstocktakesuom'=>'getstocktakesuom','getstocktakeadjustments'=>'getStockTakeAdjustments','startstocktakes'=>'startstocktakes','getstocktakelocations'=>'getStockTakeLocations','softdeletedrecord'=>'softDeletedRecord','getjobpostings'=>'getJobPostings','getassetallocationvms'=>'getAssetAllocationVms','getcompliancedetails'=>'getComplianceDetails','setcompliance'=>'setCompliance','setcomplianceallocation'=>'setComplianceAllocation','getcompliancesdashbord'=>'getCompliancesDashbord','updateticketfollowers'=>'updateTicketFollowers','getstatusworkflow'=>'getStatusWorkFlow','startworkflow'=>'startWorkFlow','getuserstatusstep'=>'getUserStatusStep','getstatusprogresslist'=>'getStatusProgressList','insertemployeesalary'=>'insertemployeesalary','closeallnotifications'=>'closeallnotifications','closesinglenotifications'=>'closesinglenotifications','getnewemployeedashboarddetails'=>'getnewemployeedashboarddetails','getwrokflowsteps'=>'getWrokflowSteps','checkworkflowcriteria'=>'checkWorkFlowCriteria','insertleaverequest'=>'insertLeaveRequest','gettocheckleavetypecriteria'=>'getToCheckLeaveTypeCriteria','loginafterdetails'=>'loginafterdetails','togettransactionlogempitdeclaration'=>'togettransactionlogempitdeclaration','updatepormanace'=>'updatePormanace','addkra'=>'addKra','getorganizationgoalsdetails'=>'getOrganizationGoalsSetails','getjobtitlecompetencies'=>'getJobTitleCompetencies','getperformanaceappraiserheader'=>'getPerformanaceAppraiserHeader','getpeerfeedback'=>'getPeerFeedback','getperformanceappraisalsettings'=>'getPerFormanceAppraisalAettings','getviewperformanceappraisalsettig'=>'getViewPerFormanceAppraisalSettig','getpayrunsummarysalary'=>'getPayRunSummarySalary','getemployeenotattendance'=>'getEmployeeNotAttendance','getindexmobiledetails'=>'getIndexMobileDetails','getdashboardmobiledetails'=>'getDashboardMobileDetails','getemployeehrservice'=>'getEmployeeHRService','togettransactionLoginbox'=>'toGetTransactionLogInbox','getleaveavailability'=>'getLeaveAvailability','getleavecalender'=>'getLeaveCalender','getdynamictabledetails'=>'getDynamicTableDetails','getholidayscalendor'=>'getHolidaysCalendor','getsubscriptionusers'=>'getSubscriptionUsers','employeeattendaceupload'=>'employeeattendaceupload','employeesalaryupload'=>'employeesalaryupload','employeesalarycomponetsupload'=>'employeesalarycomponetsupload','insertemployeectcrrohan'=>'insertemployeectcrrohan','getcandidates'=>'getCandidates','getcandidatedetails'=>'getCandidateDetails','getrecruitmentdashboard'=>'getRecruitmentDashboard','getcandidateoverviews'=>'getCandidateOverViews','getcandidatelogs'=>'getCandidateLogs','getapplicationrole'=>'getApplicationRole','getnewjoinjobcandidates'=>'getnewjoinjobcandidates','getlistofjobcandidate'=>'getlistofjobcandidate','getviewalldetilarecruitmentdashboard'=>'getviewalldetilarecruitmentdashboard','getjobhiringsource'=>'getJobHiringSource','getcandidateemailpopup'=>'getCandidateEmailPopup','getjobpostingpagedetails'=>'getJobPostingPageDetails','getrecruitngmanagerdashboard'=>'getRecruitngManagerDashboard','getcandidateaccessright'=>'getCandidateAccessRight','getworkflowconfiguration'=>'getWorkFlowConfiguration','domainverifye'=>'domainVerifye','insertaudittrail'=>'insertAuditTrail','getaudittrails'=>'getAuditTrails','getdynamicmoduledashboard'=>'getDynamicModuleDashboard','payrolldashboard'=>'payRollDashboard', 'getreportsalesbycustomer'=> 'getReportSalesByCustomer','getdynamicworkflowsteps'=>'getDynamicWorkFlowSteps','submitstatusdynamicworkflow'=>'submitStatusDynamicWorkFlow','getdynamicquotationdetails'=>'getDynamicQuotationDetails','gettopupdetails'=>'getTopUpdetails','dynamiccheckqtyvalidation'=>'dynamicCheckQtyValidation','getdynamictransactioninvoices'=>'getDynamicTransactionInvoices','getdynamicpopupvendorsassignrequisition'=>'getDynamicpopUpVendorsAssignRequisition','getdocumentaccesssetups'=>'getDocumentAccessSetups','getapplicationroles'=>'getApplicationRoles', 'currencyconversionrate'=>'currencyConversionRate', 'userandcurrencydetails' => 'userAndCurrencyDetails', 'tochecktransactionlocationwarehousebefore' => 'tochecktransactionlocationwarehousebefore','getdisplayattributesnewversion'=>'getDisplayAttributesNewVersion','getcandidategenerateemployee'=>'getCandidateGenerateEmployee','getemployeeonboardingtask'=>'getEmployeeOnboardingTask','getvendordashboard'=>'getVendorDashboard','getvendorsdetails'=>'getVendorsDetails','checkbilldetails'=>'toGetblancebill','getpayments'=>'getPayments','getbillsstackdashboardchart'=>'getBillsStackDashboardChart','togethremployeedetails'=>'togethremployeedetails','sendmailwithpdf'=>'sendMailWithPDF','getsetupdetails'=>'getSetupDetails','replicateListofCommonTables'=>'replicateListofCommonTables','dynamicapplicationemptytransactions'=>'dynamicApplicationEmptyTransactions','getapplicationemptytransactions'=>'getApplicationEmptyTransactions', 'getadditionalcharge'=>'getAdditionalCharge','setfollowuplevels'=>'setfollowUpLevels','getdynamicinvoiceprint'=>'getDynamicInvoicePrint','cronjobfollowuplevels'=>'cronJobFollowUpLevels','getprojecttaskdetailsfolloups'=>'getProjectTaskDetailsFolloUps','newcandidateautoregistation'=>'newcandidateautoregistation','getsalarytemplatecomponents'=>'getSalaryTemplateComponents','getinvitationvendors'=>'getInvitationVendors','tocreateprocesstaskintotaskdatail'=>'tocreateprocesstaskintotaskdatail','vendorregistartiontasksssigne'=>'vendorRegistartionTaskAssigne','getvendoradmindashboard'=>'getVendorAdminDashboard','getapplicationusers'=>'getApplicationUsers','gettransactionactivityschedules'=>'getTransactionActivitySchedules','gettransactionactivityschedulesdashboartd'=>'getTransactionActivitySchedulesDashboartd', 'togenrateholdemployees'=>'togenrateholdemployees','emailfunctioncheck'=> 'emailfunctioncheck','getitempricehistoriesbyitemid'=>'getitempricehistoriesbyitemid','getitemsorders'=>'getItemsOrders','getpartydetails'=>'getPartyDetails','getapplicationuserinvitations'=>'getApplicationUserInvitations','setcronjobworkflowconfigurationsnew'=>'setCronJobWorkFlowConfigurationsNew','allocateemployeeseat'=>'allocateEmployeeSeat','getemployeesdisplayfields'=>'getEmployeesDisplayFields','getapplicationreports'=>'getApplicationReports','getemployees'=>'getEmployees','getempbanks'=>'getEMPBanks','toinvoitesendmail'=>'toInvoiteSendMail','userpasswordreset'=>'userPasswordReset','getpurchaseinvoiceandsupplireinvoicedashboard'=>'getPurchaseInviceandSupplireInvoiceDashboard','getvendorcustomeritems'=>'getVendorCustomerItems','updatetransactiontds'=>'updateTransactionTDS','gerreferancetabledetails'=>'gerReferanceTableDetails','getreceipts'=>'getReceipts', 'tosendotpmessage'=>'tosendotpmessage', 'togetotpmobiledetails'=>'togetotpmobiledetails', 'toupdatemobilenumber'=>'toupdatemobilenumber', 'toverifymobileotp'=> 'toverifymobileotp','emailinvoicesend'=>'emailInvoiceSend','getitems'=>'getItems','getitemcategories'=>'getItemCategories','getclonetransactions'=>'getCloneTransactions', 'getslatrackinglogreports'=>'getSLSTrackingLogReports','getitemsearch'=>'getItemSearch','getimportexceldata'=>'getImportCxcelData','getdynamicinvocedetails'=>'getdynamicinvocedetails', 'gettranslations'=>'gettranslations');	   
- 
+	$check_array = array('projecttaskchart'=>'projectTaskChart','updateprojecttaskstatuse'=>'updateProjectTaskStatuse','getprojecttaskemplist'=>'getProjectTaskEmpList','getlistcreatdocumentsfields'=>'getListCreatDocumentsFields','gettablerow'=>'getListTableRow','getprintdesigning'=>'getPrintDesigning','gettableattributes'=>'getTableAttributes','getlisttable'=>'getListTable','getattribute'=>'getAttribute','fileuploadingdelete'=>'fileUploadingDelete','filleuploadinglist'=>'filleUploadingList','getjobpostingsreport'=>'getjobpostingsreport','getempreport'=>'getempreport','getemprequests'=>'getemprequests','togetVendorAgreementexpirelist'=>'togetVendorAgreementexpirelist','getpeerfeedbackquestionsandoptions'=>'getpeerfeedbackquestionsandoptions','getperformanceemployees'=>'getperformanceemployees','getempperformancepeerfeedback'=>'getempperformancepeerfeedback','getperformanceassessment'=>'getperformanceassessment','employeedashboard'=>'employeedashboard','togetepfecrsummary'=>'togetepfecrsummary','togetesisummary'=>'togetesisummary','togetepfsummary'=>'togetepfsummary','togetpayslipctcreports'=>'togetpayslipctcreports','togetstateinsurance'=>'togetstateinsurance','togetpercentofempprovidentfunds'=>'togetpercentofempprovidentfunds','togetsumofempsalaryoncomponentidbtwdates'=>'togetsumofempsalaryoncomponentidbtwdates','togetsumofempsalaryoncomponentid'=>'togetsumofempsalaryoncomponentid','togetsalarytotaldetails'=>'togetsalarytotaldetails','getcandidatededata'=>'getcandidatededata','gettimesheedays'=>'gettimesheedays','getjobsreport'=>'getjobsreport','getempassessment'=>'getempassessment','getassessmentreport'=>'getassessmentreport','getassessmentresult'=>'getassessmentresult','getassessmentlist'=>'getassessmentlist','getassessmentsummary'=>'getassessmentsummary','getsharedassessmentdetails'=>'getsharedassessmentdetails','getassessmentdetails'=>'getassessmentdetails','getemployeeworkordertimesheethorus'=>'getemployeeworkordertimesheethorus','getbudgetlist'=>'getbudgetlist','getbudgetfilterdetails'=>'getbudgetfilterdetails','getvmsbudgetutilization'=>'getvmsbudgetutilization','gettimesheetscalendar'=>'gettimesheetscalendar','togetjobdetails'=>'togetjobdetails','getcontractemployees'=>'getcontractemployees','getvendorwisereport'=>'getvendorwisereport','NewUserEmailresent'=>'NewUserEmailresent','getprojecttimesheets'=>'getprojecttimesheets','togetprojectdetails'=>'togetprojectdetails','toGetVendorDashBoardData'=>'toGetVendorDashBoardData','getempsurvey'=>'getempsurvey','getsurveyreport'=>'getsurveyreport','getsurveyresult'=>'getsurveyresult','getsurveylist'=>'getsurveylist','getsurveysummary'=>'getsurveysummary','getsharedsurveydetails'=>'getsharedsurveydetails','getsurveydetails'=>'getsurveydetails','employeeshift'=>'employeeshift','toGetInboxCountUsingUserId'=>'toGetInboxCountUsingUserId','getfilteremployeenames'=>'getfilteremployeenames','updatebulktransferemployees'=>'updatebulktransferemployees','getbulkchangecategories'=>'getbulkchangecategories','toGetTransactionLogdata'=>'toGetTransactionLogdata','getrecognitionsettings'=>'getrecognitionsettings','getfilterdetails'=>'getfilterdetails','getheadcountreport'=>'getheadcountreport','wrokflowlist'=>'wrokflowlist','getterminatesettings'=>'getterminatesettings','getannouncements'=>'getannouncements','getvendorsettings'=>'getvendorsettings','tosearchemployee'=>'tosearchemployee','tosearchempleavesbydate'=>'tosearchempleavesbydate','togetleaveform'=>'togetleaveform','getconfigsettings'=>'getconfigsettings','togetallpayslipdetails'=>'togetallpayslipdetails','toimportthedataintotables'=>'toimportthedataintotables','getsalarygroupsitreportdata'=>'getsalaryreportinggroupsdata','togetnoteslist'=>'togetnoteslist','getemployeeinfoforupdation'=>'getemployeeinfoforupdation','tasksendmail'=>'tasksendmail','gettasksdetails'=>'gettasksdetails','singlestatusdata'=>'singlestatusdata','payrolldetails'=>'payrolldetails','togetkpitaskstatus'=>'togetkpitaskstatus','togetkpitaskhistories'=>'togetkpitaskhistories','togetemployeeslist'=>'togetemployeeslist','togetempleavebalances'=>'togetempleavebalances','togetpresentationpagedetails'=>'togetpresentationpagedetails','togetpresentationdetails'=>'togetpresentationdetails','togetemployeeattendanacecalucater'=>'togetemployeeattendanacecalucater','togetcurrentmonthsalaryrevisions'=>'togetcurrentmonthsalaryrevisions','togetcurrentmonthexitemployes'=>'togetcurrentmonthexitemployes','togetpayslipdetails'=>'togetpayslipdetails','togetpayrolledetails'=>'togetpayrolledetails','updateonlystatus'=>'updateonlystatus','employeegoalscheckandadd'=>'employeegoalscheckandadd','goalscheckandadd'=>'goalscheckandadd','togetsalarycatdetaillist'=>'togetsalarycatdetaillist','togetcandidatedocumentlist'=>'togetcandidatedocumentlist','gettabledetailswithtransationlogconditions'=>'employeeDetails','employeedetails'=>'employeeDetails','toGetItemcostingtyewithdata'=>'toGetItemcostingtyewithdata','togetstatusprogressactiondetails'=>'togetstatusprogressactiondetails','togetgenralledgerlistdata'=>'togetgenralledgerlistdata','pendingquerieslist'=>'pendingQuerieslist','togetbudgetuserdeails'=>'togetbudgetuserdeails','togetstatusprogresstables'=>'togetstatusprogresstables','dasboaradrequisition1coscenterdetails'=>'dasboaradrequisition1coscenterdetails','dasboaradrequisition1details'=>'dasboaradrequisition1details','montlypettycashdetails'=>'montlypettycashdetails','dailypettycashdaydetails'=>'dailypettycashdaydetails','dailypettycashmonth'=>'dailypettycashmonth','dailypettycashdetails'=>'dailypettycashformonth','togetuserpettycashboxdetails'=>'togetuserpettycashboxdetails','toGetTaxrates'=>'toGetTaxrates','togetpettycashsummary'=>'toGetPettyCashSummary','togetbluckstatusdata'=>'toGetBluckStatusData','toGetBluckApprovaldata'=>'toGetBluckApprovaldata','pettycashdetails'=>'pettycashdetails','getchartofaccountdetailsuseglaccountuser'=>'getchartofaccountdetailsuseglaccountuser','getapprovallogdata'=>'getApprovalLogData','getmyreportlist'=>'getMyReportList','deletemyreport'=>'deleteMyReport','getchartjobreport'=>'getChartJobReport','getlistchartjobreport'=>'getListChartJobReport','getheadcountcurrentreport'=>'getHeadCountCurrentReport','getlistheadcountcurrentreport'=>'getListHeadCountCurrentReport','getchartcandidatesreport'=>'getChartCandidatesReport','getlistchartcandidatesreport'=>'getListchartcandidatesreport','tocheckesginemployee'=>'tocheckesginemployee','blukapprovalvendorchart'=>'blukapprovalvendorchart','processtaskschecduleview'=>'processTaskSchecduleView','processtaskschecduleoverview'=>'processTaskSchecduleOverView','getlistjobpostingslist'=>'getListJobPostingsList','getjoboverview'=>'getJobOverView','updatecandidateshortlist'=>'updateCandidateShortList','getcandidatefeedbackresult'=>'getcandidatefeedbackresult','candidateactivityreports'=>'candidateActivityReports','togetfeedbackcandidate'=>'togetfeedbackcandidate','getlist'=>'getList','applicationprocesslist'=>'applicationProcessList','applicationprocesspages'=>'applicationProcessPages','applictionprocelist'=>'applictionProceList','updateapplicationprocesspages'=>'updateApplicationProcessPages','userlistwithrole'=>'userlistwithrole','getfeedbackcandidatereport'=>'getfeedbackcandidatereport','getriviewsdata'=>'getRiviewsData','getcitydatasautotype'=>'getcitydatasautotype','gettrackingdynamic'=>'gettrackingdynamic','getfamilytreelist'=>'getFamilyTreeList','getemployeetreelist'=>'getEmployeeTreeList','getchartofaccountreelist'=>'getCharTofAccounTreeList','myreportviewsql'=>'myreportViewSql','reportfilterselectdata'=>'reportFilterSelectData','checkcriteria'=>'checkCriteria','checkwhoshouldapproves'=>'checkWhoShouldApproves','customgetstatusworkflow'=>'customGetStatusWorkFlow','updatedynamicapprovallognew'=>'updateDynamicApprovalLogNew','testingfunction'=>'testingfunction','checkemployeeleaveavailableornot'=>'checkEmployeeLeaveAvailableOrNot','cronjobleave'=>'cronJobLeave','checkleaveapplicable'=>'checkLeaveApplicable','checkleavebalanceorhalfday'=>'checkLeaveBalanceOrHalfDay','tocerateapplicationuser'=>'tocerateapplicationuser','getemployeeworkingentrys'=>'getEmployeeWorkingEntrys','edittimesheetbillablehrs'=>'editTimeSheetBillableHrs','tocreatemutltiusercreate'=>'tocreatemutltiusercreate','getmonthlyctcreports'=>'getMonthlyCTCReports','insertcheckpayroll'=>'insertCheckPayRoll','dyanamicreferfunc'=>'dyanamicReferFunc', 'closenotificationinfo'=>'closeNotificationInfo', 'tocerateapplicationuserbasedonalltype'=>'tocerateapplicationuserbasedonalltype','togetptanualstatment'=>'togetPtAnualStatment','getemployeectcreports'=>'getEmployeeCTCReports','closenotificationinfo'=>'closeNotificationInfo','bugetvendorrareporttest'=>'bugetvendorrareporttest','updateticketdetails'=>'updateTicketDetails','getviewticketdetails'=>'getViewTicketDetails','getheadcountreportemployefilter'=>'getheadcountreportEmployeFilter11','getlitsattendancesapi'=>'getLitsAttendancesApi','getleavewithstatus'=>'getLeaveWithStatus','togetpayrollpayarea'=>'togetpayrollpayarea','payareapayrolldetails'=>'payareapayrolldetails','listoutpayareapayrolldetails'=>'listoutpayareapayrolldetails','getgrosssalarywithregim'=>'getgrosssalarywithregim','getmyreportfields'=>'getMyReportfields','getadmindashboard'=>'getAdminDashboard','gettablefilter'=>'getTableFilter','getemployeeexpencesdetails'=>'getEmployeeExpencesDetails','getexpensespoliciesdetails'=>'getExpensesPoliciesDetails','assignemployeelistpolicy'=>'assignEmployeeListPolicy','getuserinvitations'=>'getUserInvitations','updatestatusvendordocuments'=>'updatestatusvendordocuments','reaprovevendordoc'=>'reAproVevendorDoc','getstocktakes'=>'getStockTakes','getstocktakesuom'=>'getstocktakesuom','getstocktakeadjustments'=>'getStockTakeAdjustments','startstocktakes'=>'startstocktakes','getstocktakelocations'=>'getStockTakeLocations','softdeletedrecord'=>'softDeletedRecord','getjobpostings'=>'getJobPostings','getassetallocationvms'=>'getAssetAllocationVms','getcompliancedetails'=>'getComplianceDetails','setcompliance'=>'setCompliance','setcomplianceallocation'=>'setComplianceAllocation','getcompliancesdashbord'=>'getCompliancesDashbord','updateticketfollowers'=>'updateTicketFollowers','getstatusworkflow'=>'getStatusWorkFlow','startworkflow'=>'startWorkFlow','getuserstatusstep'=>'getUserStatusStep','getstatusprogresslist'=>'getStatusProgressList','insertemployeesalary'=>'insertemployeesalary','closeallnotifications'=>'closeallnotifications','closesinglenotifications'=>'closesinglenotifications','getnewemployeedashboarddetails'=>'getnewemployeedashboarddetails','getwrokflowsteps'=>'getWrokflowSteps','checkworkflowcriteria'=>'checkWorkFlowCriteria','insertleaverequest'=>'insertLeaveRequest','gettocheckleavetypecriteria'=>'getToCheckLeaveTypeCriteria','loginafterdetails'=>'loginafterdetails','togettransactionlogempitdeclaration'=>'togettransactionlogempitdeclaration','updatepormanace'=>'updatePormanace','addkra'=>'addKra','getorganizationgoalsdetails'=>'getOrganizationGoalsSetails','getjobtitlecompetencies'=>'getJobTitleCompetencies','getperformanaceappraiserheader'=>'getPerformanaceAppraiserHeader','getpeerfeedback'=>'getPeerFeedback','getperformanceappraisalsettings'=>'getPerFormanceAppraisalAettings','getviewperformanceappraisalsettig'=>'getViewPerFormanceAppraisalSettig','getpayrunsummarysalary'=>'getPayRunSummarySalary','getemployeenotattendance'=>'getEmployeeNotAttendance','getindexmobiledetails'=>'getIndexMobileDetails','getdashboardmobiledetails'=>'getDashboardMobileDetails','getemployeehrservice'=>'getEmployeeHRService','togettransactionLoginbox'=>'toGetTransactionLogInbox','getleaveavailability'=>'getLeaveAvailability','getleavecalender'=>'getLeaveCalender','getdynamictabledetails'=>'getDynamicTableDetails','getholidayscalendor'=>'getHolidaysCalendor','getsubscriptionusers'=>'getSubscriptionUsers','employeeattendaceupload'=>'employeeattendaceupload','employeesalaryupload'=>'employeesalaryupload','employeesalarycomponetsupload'=>'employeesalarycomponetsupload','insertemployeectcrrohan'=>'insertemployeectcrrohan','getcandidates'=>'getCandidates','getcandidatedetails'=>'getCandidateDetails','getrecruitmentdashboard'=>'getRecruitmentDashboard','getcandidateoverviews'=>'getCandidateOverViews','getcandidatelogs'=>'getCandidateLogs','getapplicationrole'=>'getApplicationRole','getnewjoinjobcandidates'=>'getnewjoinjobcandidates','getlistofjobcandidate'=>'getlistofjobcandidate','getviewalldetilarecruitmentdashboard'=>'getviewalldetilarecruitmentdashboard','getjobhiringsource'=>'getJobHiringSource','getcandidateemailpopup'=>'getCandidateEmailPopup','getjobpostingpagedetails'=>'getJobPostingPageDetails','getrecruitngmanagerdashboard'=>'getRecruitngManagerDashboard','getcandidateaccessright'=>'getCandidateAccessRight','getworkflowconfiguration'=>'getWorkFlowConfiguration','domainverifye'=>'domainVerifye','insertaudittrail'=>'insertAuditTrail','getaudittrails'=>'getAuditTrails','getdynamicmoduledashboard'=>'getDynamicModuleDashboard','payrolldashboard'=>'payRollDashboard', 'getreportsalesbycustomer'=> 'getReportSalesByCustomer','getdynamicworkflowsteps'=>'getDynamicWorkFlowSteps','submitstatusdynamicworkflow'=>'submitStatusDynamicWorkFlow','getdynamicquotationdetails'=>'getDynamicQuotationDetails','gettopupdetails'=>'getTopUpdetails','dynamiccheckqtyvalidation'=>'dynamicCheckQtyValidation','getdynamictransactioninvoices'=>'getDynamicTransactionInvoices','getdynamicpopupvendorsassignrequisition'=>'getDynamicpopUpVendorsAssignRequisition','getdocumentaccesssetups'=>'getDocumentAccessSetups','getapplicationroles'=>'getApplicationRoles', 'currencyconversionrate'=>'currencyConversionRate', 'userandcurrencydetails' => 'userAndCurrencyDetails', 'tochecktransactionlocationwarehousebefore' => 'tochecktransactionlocationwarehousebefore','getdisplayattributesnewversion'=>'getDisplayAttributesNewVersion','getcandidategenerateemployee'=>'getCandidateGenerateEmployee','getemployeeonboardingtask'=>'getEmployeeOnboardingTask','getvendordashboard'=>'getVendorDashboard','getvendorsdetails'=>'getVendorsDetails','checkbilldetails'=>'toGetblancebill','getpayments'=>'getPayments','getbillsstackdashboardchart'=>'getBillsStackDashboardChart','togethremployeedetails'=>'togethremployeedetails','sendmailwithpdf'=>'sendMailWithPDF','getsetupdetails'=>'getSetupDetails','replicateListofCommonTables'=>'replicateListofCommonTables','dynamicapplicationemptytransactions'=>'dynamicApplicationEmptyTransactions','getapplicationemptytransactions'=>'getApplicationEmptyTransactions', 'getadditionalcharge'=>'getAdditionalCharge','setfollowuplevels'=>'setfollowUpLevels','getdynamicinvoiceprint'=>'getDynamicInvoicePrint','cronjobfollowuplevels'=>'cronJobFollowUpLevels','getprojecttaskdetailsfolloups'=>'getProjectTaskDetailsFolloUps','newcandidateautoregistation'=>'newcandidateautoregistation','getsalarytemplatecomponents'=>'getSalaryTemplateComponents','getinvitationvendors'=>'getInvitationVendors','tocreateprocesstaskintotaskdatail'=>'tocreateprocesstaskintotaskdatail','vendorregistartiontasksssigne'=>'vendorRegistartionTaskAssigne','getvendoradmindashboard'=>'getVendorAdminDashboard','getapplicationusers'=>'getApplicationUsers','gettransactionactivityschedules'=>'getTransactionActivitySchedules','gettransactionactivityschedulesdashboartd'=>'getTransactionActivitySchedulesDashboartd', 'togenrateholdemployees'=>'togenrateholdemployees','emailfunctioncheck'=> 'emailfunctioncheck','getitempricehistoriesbyitemid'=>'getitempricehistoriesbyitemid','getitemsorders'=>'getItemsOrders','getpartydetails'=>'getPartyDetails','getapplicationuserinvitations'=>'getApplicationUserInvitations','setcronjobworkflowconfigurationsnew'=>'setCronJobWorkFlowConfigurationsNew','allocateemployeeseat'=>'allocateEmployeeSeat','getemployeesdisplayfields'=>'getEmployeesDisplayFields','getapplicationreports'=>'getApplicationReports','getemployees'=>'getEmployees','getempbanks'=>'getEMPBanks','toinvoitesendmail'=>'toInvoiteSendMail','userpasswordreset'=>'userPasswordReset','getpurchaseinvoiceandsupplireinvoicedashboard'=>'getPurchaseInviceandSupplireInvoiceDashboard','getvendorcustomeritems'=>'getVendorCustomerItems','updatetransactiontds'=>'updateTransactionTDS','gerreferancetabledetails'=>'gerReferanceTableDetails','getreceipts'=>'getReceipts', 'tosendotpmessage'=>'tosendotpmessage', 'togetotpmobiledetails'=>'togetotpmobiledetails', 'toupdatemobilenumber'=>'toupdatemobilenumber', 'toverifymobileotp'=> 'toverifymobileotp','emailinvoicesend'=>'emailInvoiceSend','getitems'=>'getItems','getitemcategories'=>'getItemCategories','getclonetransactions'=>'getCloneTransactions', 'getslatrackinglogreports'=>'getSLSTrackingLogReports','getitemsearch'=>'getItemSearch','getimportexceldata'=>'getImportCxcelData','getdynamicinvocedetails'=>'getdynamicinvocedetails', 'gettranslations'=>'gettranslations');
+
 	if(isset($check_array[$mode])){
 		//echo "api data"; exit;
 		$fun = $check_array[$mode];
@@ -1761,7 +1761,7 @@ if(isset($space_class_array[$mode])){
 	echo json_encode($details);
 }
 
-$mobilecheck_array = array('mobileaprovelistwithmodle'=>'mobileaprovelistwithmodle', 'togetuserdetailsbaseonuserid'=>'togetuserdetailsbaseonuserid', 'togetuserdetailsbaseonuserid'=>'togetuserdetailsbaseonuserid', 'togetbaseonmoduluelistandapprovals'=>'togetbaseonmoduluelistandapprovals', 'togetdynamicinvoicedetails'=>'togetdynamicinvoicedetails','togetconfigmobiledata'=>'togetconfigmobiledata', 'togetrecallstatusdata'=>'togetrecallstatusdata','togetcreatedapproverejectinvoicedetails'=>'togetcreatedapproverejectinvoicedetails', 'tocallmobilenotificationmob'=>'tocallmobilenotificationmob', 'togetapproveinvoicedetails'=>'togetapproveinvoicedetails', 'togetrecjectinvoicedetails'=>'togetrecjectinvoicedetails', 'togetcreatedinvoicedetails'=>'togetcreatedinvoicedetails', 'notificationsforuserid'=>'notificationsforuserid', 'countLines'=>'countLines', 'togetemployeeattendatailsbasedondate'=>'togetemployeeattendatailsbasedondate', 'mobileemployeeclocks'=>'mobileemployeeclocks',				'listgetmonthattendancedetails'=>'listgetmonthattendancedetails', 'togetyearlymonthwisedataperce' =>'togetyearlymonthwisedataperce', 'togetmobileleavedetails'=>'togetmobileleavedetails', 'todeletemobileempleave'=>'todeletemobileempleave', 'togetfieldworkusermappoints'=>'togetfieldworkusermappoints', 'togenrateqrcodebasetype'=>'togenrateqrcodebasetype','togetemloyeemodeleraiodcricle'=>'togetemloyeemodeleraiodcricle','togetcreatecomplientdetails'=>'togetcreatecomplientdetails', 'togetapproalcomplientdetails'=>'togetapproalcomplientdetails', 'togenrateqrcodebaseontypelist'=>'togenrateqrcodebaseontypelist', 'togetbulidingfloors'=>'togetbulidingfloors', 'tocancelthecomplients'=>'tocancelthecomplients', 'tocheckpermissiontoqrcodeapproval'=>'tocheckpermissiontoqrcodeapproval', 'togetcomplientsbyiddetails'=> 'togetcomplientsbyiddetails', 'todeletecomplaintbasedonid'=>'todeletecomplaintbasedonid','togetsalaryyearmonthlist' => 'togetsalaryyearmonthlist',  'togetsalarydetailsyearbasemonthlist' => 'togetsalarydetailsyearbasemonthlist','mobileregistationcheckotp'=>'mobileregistationcheckotp', 'togetmobfielddailyplans'=>'togetmobfielddailyplans', 'togetmobfieldworkdetails'=>'togetmobfieldworkdetails', 'togetmobmanagerfielddailyplans'=>'togetmobmanagerfielddailyplans', 'togetmobmanagerfieldworkdetails'=>'togetmobmanagerfieldworkdetails', 'toinactiveasedontableid'=>'toinactiveasedontableid', 'tocheckuserfieldwortype'=>'tocheckuserfieldwortype','togetworkfielddataperdate'=>'togetworkfielddataperdate', 'togetworkfielddatapermonth'=>'togetworkfielddatapermonth', 'map_out_time'=>'map_out_time', 'togetsecurtydetails'=>'togetsecurtydetails', 'togetuserfieldworkdata'=>'togetuserfieldworkdata', 'togetlistfiledworkdatabasedate'=>'togetlistfiledworkdatabasedate', 'togetholidayslistbaseyear'=>'togetholidayslistbaseyear', 'togetweekdayslist'=>'togetweekdayslist', 'togetfieldworkdailyplansfrmobile'=>'togetfieldworkdailyplansfrmobile', 'togetgeolocationresaonlist'=>'togetgeolocationresaonlist', 'togetuserslistformobile'=>'togetuserslistformobile', 'togetuserssecurtydaydetailswithhistory'=>'togetuserssecurtydaydetailswithhistory', 'togetrelatedworkusermapointmob'=>'togetrelatedworkusermapointmob', 'dyanamicgenccodedetailformobile'=>'dyanamicgenccodedetailformobile', 'togetproductformitemonmobile'=>'togetproductformitemonmobile', 'togetproductcustomeronmobile'=>'togetproductcustomeronmobile', 'toinsertpurchaseordermobile'=>'toinsertpurchaseordermobile','getmobiletransactionreceipts'=>'getMobileTransactionReceipts', 'getmobilereceipts'=>'getMobileReceipts','getmoblieuserrelateddetails'=>'getMoblieUserRelatedDetails', 'tokengenrateformobile'=>'tokengenrateformobile','toretrivewebviewlogin'=>'toretrivewebviewlogin','getMobileexpensedetails'=>'getMobileExpenseDetails', 'getMobileOrders' => 'getMobileOrders',	'getMobileOrderInfo'=> 'getMobileOrderInfo','getmobilecrmdetails'=>'getMobileCRMDetails','togetdeliveryschedulesdetails'=>'togetdeliveryschedulesdetails','getfacelivenessresponse'=>'getFaceLivenessResponse','deliverdorderlistbasepartyid'=>'deliverdorderlistbasepartyid','getmobileallemployeeleaves'=>'getMobileAllEmployeeLeaves','getmobilesingleemployeeleaves'=>'getMobileSingleEmployeeLeaves','getmobilereportingmanageremployeeleave'=>'getMobileReportingManagerEmployeeLeave','getinsertemployeeleaves'=>'getInsertEmployeeLeaves','checkworkflowstatuswithapprove'=>'checkWorkFlowStatusWithApprove','transportrequestcreate' => 'transportrequestcreate', 'togetdrivelistalldata'=>'togetdrivelistalldata','togetinprocesstripdetailswithexpencess'=>'togetinprocesstripdetailswithexpencess','togetdynamicresaonlist'=>'togetdynamicresaonlist', 'togetemployeeexpensesbyuser'=>'togetemployeeexpensesbyuser', 'togettaskdaworkspacenoprojectandtask'=>'togettaskdaworkspacenoprojectandtask', 'togetprojecteditdetailsval'=>'togetprojecteditdetailsval', 'togetmobileprojectsview'=>'togetmobileprojectsview', 'todisplaytasklistview'=>'todisplaytasklistview', 'togettaskcreatelistdata'=>'togettaskcreatelistdata', 'togetmobiletaskdetailsall'=>'togetmobiletaskdetailsall', 'togetmobileprojectdetails'=>'togetmobileprojectdetails', 
+$mobilecheck_array = array('mobileaprovelistwithmodle'=>'mobileaprovelistwithmodle', 'togetuserdetailsbaseonuserid'=>'togetuserdetailsbaseonuserid', 'togetuserdetailsbaseonuserid'=>'togetuserdetailsbaseonuserid', 'togetbaseonmoduluelistandapprovals'=>'togetbaseonmoduluelistandapprovals', 'togetdynamicinvoicedetails'=>'togetdynamicinvoicedetails','togetconfigmobiledata'=>'togetconfigmobiledata', 'togetrecallstatusdata'=>'togetrecallstatusdata','togetcreatedapproverejectinvoicedetails'=>'togetcreatedapproverejectinvoicedetails', 'tocallmobilenotificationmob'=>'tocallmobilenotificationmob', 'togetapproveinvoicedetails'=>'togetapproveinvoicedetails', 'togetrecjectinvoicedetails'=>'togetrecjectinvoicedetails', 'togetcreatedinvoicedetails'=>'togetcreatedinvoicedetails', 'notificationsforuserid'=>'notificationsforuserid', 'countLines'=>'countLines', 'togetemployeeattendatailsbasedondate'=>'togetemployeeattendatailsbasedondate', 'mobileemployeeclocks'=>'mobileemployeeclocks',				'listgetmonthattendancedetails'=>'listgetmonthattendancedetails', 'togetyearlymonthwisedataperce' =>'togetyearlymonthwisedataperce', 'togetmobileleavedetails'=>'togetmobileleavedetails', 'todeletemobileempleave'=>'todeletemobileempleave', 'togetfieldworkusermappoints'=>'togetfieldworkusermappoints', 'togenrateqrcodebasetype'=>'togenrateqrcodebasetype','togetemloyeemodeleraiodcricle'=>'togetemloyeemodeleraiodcricle','togetcreatecomplientdetails'=>'togetcreatecomplientdetails', 'togetapproalcomplientdetails'=>'togetapproalcomplientdetails', 'togenrateqrcodebaseontypelist'=>'togenrateqrcodebaseontypelist', 'togetbulidingfloors'=>'togetbulidingfloors', 'tocancelthecomplients'=>'tocancelthecomplients', 'tocheckpermissiontoqrcodeapproval'=>'tocheckpermissiontoqrcodeapproval', 'togetcomplientsbyiddetails'=> 'togetcomplientsbyiddetails', 'todeletecomplaintbasedonid'=>'todeletecomplaintbasedonid','togetsalaryyearmonthlist' => 'togetsalaryyearmonthlist',  'togetsalarydetailsyearbasemonthlist' => 'togetsalarydetailsyearbasemonthlist','mobileregistationcheckotp'=>'mobileregistationcheckotp', 'togetmobfielddailyplans'=>'togetmobfielddailyplans', 'togetmobfieldworkdetails'=>'togetmobfieldworkdetails', 'togetmobmanagerfielddailyplans'=>'togetmobmanagerfielddailyplans', 'togetmobmanagerfieldworkdetails'=>'togetmobmanagerfieldworkdetails', 'toinactiveasedontableid'=>'toinactiveasedontableid', 'tocheckuserfieldwortype'=>'tocheckuserfieldwortype','togetworkfielddataperdate'=>'togetworkfielddataperdate', 'togetworkfielddatapermonth'=>'togetworkfielddatapermonth', 'map_out_time'=>'map_out_time', 'togetsecurtydetails'=>'togetsecurtydetails', 'togetuserfieldworkdata'=>'togetuserfieldworkdata', 'togetlistfiledworkdatabasedate'=>'togetlistfiledworkdatabasedate', 'togetholidayslistbaseyear'=>'togetholidayslistbaseyear', 'togetweekdayslist'=>'togetweekdayslist', 'togetfieldworkdailyplansfrmobile'=>'togetfieldworkdailyplansfrmobile', 'togetgeolocationresaonlist'=>'togetgeolocationresaonlist', 'togetuserslistformobile'=>'togetuserslistformobile', 'togetuserssecurtydaydetailswithhistory'=>'togetuserssecurtydaydetailswithhistory', 'togetrelatedworkusermapointmob'=>'togetrelatedworkusermapointmob', 'dyanamicgenccodedetailformobile'=>'dyanamicgenccodedetailformobile', 'togetproductformitemonmobile'=>'togetproductformitemonmobile', 'togetproductcustomeronmobile'=>'togetproductcustomeronmobile', 'toinsertpurchaseordermobile'=>'toinsertpurchaseordermobile','getmobiletransactionreceipts'=>'getMobileTransactionReceipts', 'getmobilereceipts'=>'getMobileReceipts','getmoblieuserrelateddetails'=>'getMoblieUserRelatedDetails', 'tokengenrateformobile'=>'tokengenrateformobile','toretrivewebviewlogin'=>'toretrivewebviewlogin','getMobileexpensedetails'=>'getMobileExpenseDetails', 'getMobileOrders' => 'getMobileOrders',	'getMobileOrderInfo'=> 'getMobileOrderInfo','getmobilecrmdetails'=>'getMobileCRMDetails','togetdeliveryschedulesdetails'=>'togetdeliveryschedulesdetails','getfacelivenessresponse'=>'getFaceLivenessResponse','deliverdorderlistbasepartyid'=>'deliverdorderlistbasepartyid','getmobileallemployeeleaves'=>'getMobileAllEmployeeLeaves','getmobilesingleemployeeleaves'=>'getMobileSingleEmployeeLeaves','getmobilereportingmanageremployeeleave'=>'getMobileReportingManagerEmployeeLeave','getinsertemployeeleaves'=>'getInsertEmployeeLeaves','checkworkflowstatuswithapprove'=>'checkWorkFlowStatusWithApprove','transportrequestcreate' => 'transportrequestcreate', 'togetdrivelistalldata'=>'togetdrivelistalldata','togetinprocesstripdetailswithexpencess'=>'togetinprocesstripdetailswithexpencess','togetdynamicresaonlist'=>'togetdynamicresaonlist', 'togetemployeeexpensesbyuser'=>'togetemployeeexpensesbyuser', 'togettaskdaworkspacenoprojectandtask'=>'togettaskdaworkspacenoprojectandtask', 'togetprojecteditdetailsval'=>'togetprojecteditdetailsval', 'togetmobileprojectsview'=>'togetmobileprojectsview', 'todisplaytasklistview'=>'todisplaytasklistview', 'togettaskcreatelistdata'=>'togettaskcreatelistdata', 'togetmobiletaskdetailsall'=>'togetmobiletaskdetailsall', 'togetmobileprojectdetails'=>'togetmobileprojectdetails',
 	'touserwisetaskbaseoninputmobile'=> 'touserwisetaskbaseoninputmobile', 'togetchatdatabasetableandtransactionid'=>'togetchatdatabasetableandtransactionid', 'togetchatdiscussdatadetails'=>'togetchatdiscussdatadetails');
 	if(isset($mobilecheck_array[$mode])){
 		//echo "RRRR"; exit;
@@ -1898,6 +1898,5 @@ $react_post = array('dynamicdeletebyridreact'=>'dynamicdeletebyridreact', 'dynam
 		echo json_encode($details);
 	}
 
-}// End GET Method    
+}// End GET Method
 
-	

@@ -1,4 +1,4 @@
-<?php 
+<?php
 ini_set('display_errors' ,0);
 include_once('includes/session.php');
 include_once('dbconfig.php');
@@ -9,7 +9,7 @@ if(isset($_POST['submit'])){
 		$temp = explode(".", $_FILES["image"]["name"]);
 		$Filename=  "file_".time()."_".uniqid();
 		$newfilename = $Filename.'.' .end($temp);
-		move_uploaded_file($_FILES["image"]["tmp_name"], $File_Uploads_Path.$newfilename); 
+		move_uploaded_file($_FILES["image"]["tmp_name"], $File_Uploads_Path.$newfilename);
 	}
 	$_POST['display_logo'] = $newfilename;
 	$_POST['company_id'] = $_SESSION['company_id'];
@@ -19,7 +19,7 @@ if(isset($_POST['submit'])){
 	$reponse = json_decode($re,1);
 	$response = $reponse['insert_config'];
 	if($response['status'] == 'sucess'){
-		unset($_SESSION['login_details']);         
+		unset($_SESSION['login_details']);
 		?>
 		<script type="text/javascript">
 			document.onreadystatechange = function(){
@@ -41,7 +41,7 @@ if(isset($_POST['submit'])){
 						}
 					});
 					setTimeout(function() {window.location.href = 'index.php'; }, 2000);
-				} 
+				}
 			}
 		</script>
 		<?php
@@ -61,7 +61,7 @@ if(isset($_POST['submit'])){
   //echo "<pre>"; print_r($res); echo "</pre>";
     //header('Location:index.php?option=COM_VIEW_PROJECT_KANBAN&RID='.$res['project_id']);
 }
-$ptapi = API."?mode=getsetupdetails"; 
+$ptapi = API."?mode=getsetupdetails";
 $callptapi = callAPI($ptapi);
 $result = json_decode($callptapi,1);
 //echo "<pre>"; print_r($result); echo "</pre>";
@@ -112,7 +112,7 @@ document.addEventListener('error', function (e) {
 	<link rel="stylesheet" type="text/css" href="assets/pages/data-table/extensions/buttons/css/buttons.dataTables.min.css">
 	<!-- Chartlist chart css -->
 	<link rel="stylesheet" href="assets/bower_components/chartist/css/chartist.css" type="text/css" media="all">
-	<!-- Bootstrap date-time-picker js -->	
+	<!-- Bootstrap date-time-picker js -->
 	<link rel="stylesheet" type="text/css" href="assets/pages/advance-elements/css/bootstrap-datetimepicker.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/date-jquery-ui.css">
 	<!-- Date-range picker css  -->
@@ -132,10 +132,10 @@ document.addEventListener('error', function (e) {
 	<link rel="stylesheet" type="text/css" href="assets/bower_components/switchery/css/switchery.min.css">
 	<!-- Tags js -->
 	<link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap-tagsinput/css/bootstrap-tagsinput.css" />
-	<!-- Style.css -->	
+	<!-- Style.css -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/component.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/pages.css">	
+	<link rel="stylesheet" type="text/css" href="assets/css/pages.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/custom.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/custom_mobile.css">
 	<link rel="stylesheet" href="assets/bower_components/chartist/css/chartist.css" type="text/css" media="all">
@@ -148,16 +148,16 @@ document.addEventListener('error', function (e) {
 </head>
 <style type="text/css">
 	.tags_add .bootstrap-tagsinput{ width: 100%; }
-	.heightcss{ max-height: 110px;min-height: 110px; } 
-	.footer_btn{ 
+	.heightcss{ max-height: 110px;min-height: 110px; }
+	.footer_btn{
 		position: fixed;
 		left: 0;
 		bottom: 0px;
 		padding: 15px;
 		width: 100%;
 		background-color: white;
-		text-align: center; 
-	}  
+		text-align: center;
+	}
 	body{background-color: transparent; background-image: none;}
 </style>
 <script type="text/javascript">
@@ -184,7 +184,7 @@ document.addEventListener('error', function (e) {
 			success: function(response) {
 				console.log(response);
 				$("#getstate").html(response);
-			} 
+			}
 		});
 		var html ="";
 		console.log(timezone);
@@ -202,7 +202,7 @@ document.addEventListener('error', function (e) {
 			success: function(response) {
 				console.log(response);
 				$("#getcity").html(response);
-			} 
+			}
 		});
 	}
 </script>
@@ -213,13 +213,13 @@ document.addEventListener('error', function (e) {
 			<div class="alert alert-danger background-danger alert-dismissible">
 				<strong><?php echo $error_message; ?></strong>
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>  
+			</div>
 		<?php } ?>
     <!-- <div class="taskda-bg-top float-right">
       <div class="container-fluid text-right">
         <div class="top-logo p-2">
           <a href="">
-            <img class="img-100" src="assets/images/sign-in/<?php //echo LOGIN_INFO['logo']; ?>" alt="" >  
+            <img class="img-100" src="assets/images/sign-in/<?php //echo LOGIN_INFO['logo']; ?>" alt="" >
           </a>
         </div>
       </div>
@@ -229,7 +229,7 @@ document.addEventListener('error', function (e) {
   	<div class="row align-items-center">
   		<div class="col-lg-6 bg-white" style="">
   			<div class="center-sec" style="">
-  				<div class="" style="vertical-align: middle;align-items: center;"> 
+  				<div class="" style="vertical-align: middle;align-items: center;">
   					<div class="p-5">
   						<h2 class="f-w-600">Welcome to Infistaq</h2>
   						<p class="f-w-500 mt-4">
@@ -248,7 +248,7 @@ document.addEventListener('error', function (e) {
   			<div class="col-lg-6 text-center position-relative">
   				<div class="top-logo p-2">
   					<a href="">
-  						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
+  						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
   					</a>
   				</div>
   				<div class="text-position text-start">
@@ -290,7 +290,7 @@ document.addEventListener('error', function (e) {
   										<?php foreach($industrylist as $valueindustry) { ?>
   											<option value="<?php echo $valueindustry['id'];?>"><?php echo $valueindustry['industries']; ?></option>
   										<?php } ?>
-  									</select> 
+  									</select>
   								</div>
   							</div>
   							<div class="col-lg-6 text-center">
@@ -309,12 +309,12 @@ document.addEventListener('error', function (e) {
 <!--                   <div class="col-lg-6 form-group w-full">
                       <label class="form-label">Number of Employee</label>
                       <input type="number" class="form-control" name="no_of_users" value="0" aria-label="No Of Users">
-                  </div> 
+                  </div>
                   <div class="col-lg-12 form-group">
                       <label class="form-label">Revenue</label>
                       <div class="row">
                         <div class="col-lg-6">
-                           <div class="input-group input-group-button "> 
+                           <div class="input-group input-group-button ">
                           <input type="number" class="form-control width1" name="min_revenue" value="" aria-label="Min Revenue">
                            <span class="input-group-text addon-style">
                                 <label class="">Lac</label>
@@ -322,14 +322,14 @@ document.addEventListener('error', function (e) {
                         </div>
                         </div>
                         <div class="col-lg-6">
-                          <div class="input-group input-group-button "> 
+                          <div class="input-group input-group-button ">
                               <input type="number" class="form-control width1" name="max_revenue" value="0" aria-label="Max Revenue">
                               <span class="input-group-text addon-style">
                                 <label class="">Lac</label>
                             </span>
                         </div>
                         </div>
-                        
+
                       </div>
                   </div> -->
               </div>
@@ -342,7 +342,7 @@ document.addEventListener('error', function (e) {
       <div class="col-lg-6 text-center position-relative">
       	<div class="top-logo p-2">
       		<a href="">
-      			<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
+      			<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
       		</a>
       	</div>
       	<div class="text-position text-start">
@@ -412,10 +412,10 @@ document.addEventListener('error', function (e) {
                  </div>
              </div>
          </div>
-         <div class="col-lg-6 text-center position-relative"> 
+         <div class="col-lg-6 text-center position-relative">
          	<div class="top-logo p-2">
          		<a href="">
-         			<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
+         			<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
          		</a>
          	</div>
          	<div class="text-position text-start">
@@ -465,10 +465,10 @@ document.addEventListener('error', function (e) {
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6 text-center position-relative"> 
+			<div class="col-lg-6 text-center position-relative">
 				<div class="top-logo p-2">
 					<a href="">
-						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
+						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
 					</a>
 				</div>
 				<div class="text-position text-start">
@@ -529,10 +529,10 @@ document.addEventListener('error', function (e) {
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6 text-center position-relative"> 
+			<div class="col-lg-6 text-center position-relative">
 				<div class="top-logo p-2">
 					<a href="">
-						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
+						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
 					</a>
 				</div>
 				<div class="text-position text-start">
@@ -573,10 +573,10 @@ document.addEventListener('error', function (e) {
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6 text-center position-relative"> 
+			<div class="col-lg-6 text-center position-relative">
 				<div class="top-logo p-2">
 					<a href="">
-						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
+						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
 					</a>
 				</div>
 				<div class="text-position text-start">

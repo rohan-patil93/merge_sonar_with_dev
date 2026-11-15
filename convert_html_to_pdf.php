@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('dbconfig.php');
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
@@ -27,7 +27,7 @@ if($_POST['removepdf'] !=""){
 	$filename = $_POST['title']."_".time().'.pdf';
 	$sFilePath = SITEROOT.'/uploads/rental_invoices/'.$filename;
 	$output = $dompdf->output();
-	file_put_contents($sFilePath, $output); 
+	file_put_contents($sFilePath, $output);
 	$response = ["pdf_url" => "uploads/rental_invoices/".$filename,"pdf_name" =>$filename];
 	echo json_encode($response);
 }

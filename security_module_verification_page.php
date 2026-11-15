@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('dbconfig.php');
 //ini_set("display_errors",1);
 $param= $_GET['param'];

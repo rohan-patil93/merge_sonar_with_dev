@@ -1,10 +1,10 @@
 <?php
 	session_start();
-	include_once("./phptextClass.php");	
-	
+	include_once("./phptextClass.php");
+
 	/*create class object*/
-	$phptextObj = new phptextClass();	
+	$phptextObj = new phptextClass();
 	/*phptext function to genrate image with text*/
 	//header('Content-type:image/jpg');
-	$phptextObj->phpcaptcha('#162453','#fff',120,40,10,25);	
+	$phptextObj->phpcaptcha('#162453','#fff',120,40,10,25);
  ?>

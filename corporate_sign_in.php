@@ -18,14 +18,14 @@
         <div class="loader-bar"></div>
     </div>
     <div class="mobile-view-logo bg-primary text-center">
-        <img class="img-100 m-0" src="<?php echo $image; ?>" alt="" >   
+        <img class="img-100 m-0" src="<?php echo $image; ?>" alt="" >
     </div>
     <div class="row align-items-center">
         <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 bg-white text-center position-relative" style="">
             <div class="p-4 custom-login-on">
                 <img class="img-100 mt-0 rentalji" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
                 <h2 class="f-26 f-w-600 mt-4">Sign In</h2>
-				  <?php 
+				  <?php
                             $error = $_GET['error'];
                             $dis_error['6001'] = "Thank you very much for confirming your registration, </br> please login using email ID.";
                             $dis_error['6002'] = "Incorrect username or password.  Please try again.";
@@ -34,9 +34,9 @@
                             $dis_error['6005']  = "The email is not registered with us,</br>  please register to access the system";
                             $dis_error['6006']  = "Details are sent to your registered email,</br>  please check";
 
-                            if($error !='') { 
+                            if($error !='') {
                             if($error == '6002' || $error == '6004' || $error == '6005' ){ ?>
-                          
+
                             <div class="alert alert-warning alert-dismissible">
                                 <strong class="f-14"><?php echo $dis_error[$error]; ?></strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -46,7 +46,7 @@
                                 <strong class="f-14"><?php echo $dis_error[$error]; ?></strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                          
+
                         <?php } }?>
                <!---  <p class="text-muted f-14 f-w-600">Your Social Campaigns</p>
                  <div class="d-block mt-5">
@@ -57,8 +57,8 @@
                     <h3 class="text-muted f-14">Or with email</h3>
                 </div>   -->
 					<form class="md-float-material form-material" action="" method="post" novalidate>
-                           
-                <div class="width-60 text-left mt-3"> 
+
+                <div class="width-60 text-left mt-3">
                     <div class="form-group">
                         <label for="chrUserName" class="visually-hidden">User Name</label>
                         <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="chrUserName" id="chrUserName" required="" placeholder="User Name" aria-label="User Name">
@@ -90,7 +90,7 @@
                     <h3 class="text-muted f-14">Or with email</h3>
                 </div>   -->
 					<form class="md-float-material form-material" action="" method="post" novalidate>
-                           
+
                 <div class="width-60 text-left mt-4">
                     <div class="form-group">
                         <label for="regUserName" class="visually-hidden">User Name</label>
@@ -104,7 +104,7 @@
                         <label for="regPassword" class="visually-hidden">Password</label>
                         <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="password" id="regPassword" required="" placeholder="Password" aria-label="Password">
                        <!-- <span class="text-muted f-12 text-left ">Use 8 or more characters with a mix of letters, numbers & symbols.</span>  -->
-                   
+
 					</div>
                  <!--   <div class="form-group mb-1 text-left mt-2">
                         <input type="checkbox" name="" id="term">
@@ -122,7 +122,7 @@
             </div>
             <div class="p-3 forgotpasswordon" style="display:none">
 				<form class="md-float-material form-material" action="" method="post" novalidate>
-                           
+
                 <div class="width-60">
                     <img class="img-100 mt-0 rentalji" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
                     <h2 class="f-26 f-w-600 mt-2">Forgot Password</h2>
@@ -133,7 +133,7 @@
                     </div>
                     <div class="form-group text-center">
 									<input type="hidden" name="submit" value="forgot" />
-                        
+
                         <button class="btn btn-primary waves-effect waves-light" type="submit">Submit</button>
                         <button  type="button" class="btn bg-gray waves-effect waves-light cancel-forgot-pwd" style="padding:6px 15px; margin: 0;" onclick="loginpagedisplay()">Cancel</button>
                     </div>
@@ -176,7 +176,7 @@
                     <b class="f-w-600 d-block text-start mt-3">Having trouble accessing your account?</b>
                     <ul class="text-start mt-2 m-l-10 login-ul" style="list-style: disc; list-style-position: inside;">
                         <li class="">Click the "Forgot Password" link below to initiate a password reset process.</li>
-                       
+
                     </ul>
                     <b class="f-w-600 text-start d-block mt-3">Forgot Password?</b>
                     <ul class="text-start mt-2 login-ul m-l-10" style="list-style: disc; list-style-position: inside;">
@@ -186,7 +186,7 @@
                     <ul class="text-start mt-2 m-l-10" style="list-style: disc; list-style-position: inside;">
                         <li class="">If you are a new vendor seeking to establish a business relationship with us, please <span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="text-primary cursor-pointer"  onclick="loginemailpopup()" >click here</span></li>
                     </ul>
-                    <b class="f-w-600 text-start d-block mt-3">For Your Security</b> 
+                    <b class="f-w-600 text-start d-block mt-3">For Your Security</b>
                     <p class="text-start mt-2 mb-2">We prioritize the security of your account information. Please be mindful of the following:</p>
                     <ul class="text-start mt-2 m-l-10" style="list-style: disc; list-style-position: inside;">
                         <li class="">Do not share your login credentials with anyone.</li>

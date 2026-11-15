@@ -1,4 +1,4 @@
-<?php 
+<?php
 //echo $_SERVER['DOCUMENT_ROOT'];
  /*if(isset($_POST['submit'])){
 print_r($_POST); exit;
@@ -31,9 +31,9 @@ $image = "assets/images/logo.png";
     $domainresult = json_decode($domainres,1);
     //print_r($domainresult); exit;
     $zqr_connect = $domainresult['zqr_connect'];
-    $domainresult = $domainresult['domain_registrations']; 
-      
-    $_POST['zqr_connect'] = $zqr_connect; 
+    $domainresult = $domainresult['domain_registrations'];
+
+    $_POST['zqr_connect'] = $zqr_connect;
     $host = $_SERVER['HTTP_HOST'];
     $parts = explode('.', $host);
     // Check if domain has subdomain
@@ -70,7 +70,7 @@ unset($_SESSION['application_menu']);
 session_destroy ();
 
 $_SESSION = array();*/
-function getBrowser() { 
+function getBrowser() {
   $u_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
   $bname = 'Unknown';
   $platform = 'Unknown';
@@ -139,7 +139,7 @@ function getBrowser() {
 
   $data = array(  'userAgent' => $u_agent,'name'      => $bname, 'version'   => $version,'platform'  => $platform, 'pattern'    => $pattern);
   return $data['name'].",".$data['version'];
-} 
+}
 if(!empty($_SESSION['userid'])){
     header("location:index.php");
 }
@@ -147,9 +147,9 @@ if(isset($_GET['confirm']) && $_GET['confirm'] != ''){
     $confirm = base64_decode($_GET['confirm']);
     //echo $confirm;
     $url = API."?mode=emailconfirm&confirm=".$confirm;
-    //echo $url; exit;  
+    //echo $url; exit;
     $response = file_get_contents($url, false, $context);
-    $response = json_decode($response,1);  
+    $response = json_decode($response,1);
     // echo "<pre>";
     // print_r($response);
     //  echo "</pre>";
@@ -160,11 +160,11 @@ if(isset($_GET['confirm']) && $_GET['confirm'] != ''){
 }
 if (isset($_POST['submit'])){
     $_POST['subdomain'] = $subdomain;
-    
+
     if($_POST['submit']=="Login") {
       // code for check server side validation
-      //if(empty($_SESSION['captcha_code'] ) || strcasecmp($_SESSION['captcha_code'], $_POST['captcha_code']) == 0){ 
-      //if(empty($_SESSION['captcha'] ) || strcasecmp($_SESSION['captcha'], $_POST['captcha']) == 0){  
+      //if(empty($_SESSION['captcha_code'] ) || strcasecmp($_SESSION['captcha_code'], $_POST['captcha_code']) == 0){
+      //if(empty($_SESSION['captcha'] ) || strcasecmp($_SESSION['captcha'], $_POST['captcha']) == 0){
           $_POST['php_session'] = $session_id;
             //echo "yes captcha code"; exit;
             //$data = urlencode(json_encode($_POST));
@@ -179,14 +179,14 @@ if (isset($_POST['submit'])){
           );
         $context = stream_context_create($opts);
         $response = file_get_contents($url, false, $context);
-        
+
         //echo $url; exit;
         //$response = file_get_contents($url, false, $context);
         //echo $response;
         if (is_string($response)) {
             $response = preg_replace('/^[\xEF\xBB\xBF\r\n\s]+/', '', $response);
         }
-        $row = json_decode($response,1);  
+        $row = json_decode($response,1);
         //print_r($row); //exit;
         if (isset($row['id']) && $row['id'] !=''){
             //echo "data"; exit;
@@ -213,26 +213,26 @@ if (isset($_POST['submit'])){
             header("location:login?error=$error");
            exit;
         }
-      // }else{// Captcha verification is Correct. Final Code Execute here!    
+      // }else{// Captcha verification is Correct. Final Code Execute here!
       //   //echo "No captcha code"; exit;
-      //   $error = '6007'; 
+      //   $error = '6007';
       //    header("location:login?error=$error");
-      //      exit;   
+      //      exit;
       // }
     }
     if($_POST['submit']=="signup"){
     $_POST['email_check'] =0;
         $url = API."?mode=signup&data=".json_encode($_POST,1);
-        //echo $url; exit;  
+        //echo $url; exit;
         $response = file_get_contents($url, false, $context);
         //echo $response;
         header("location:login?error=6003");
     }
     if($_POST['submit']=="forgot"){
         $url = API."?mode=forgotpassword&data=".$_POST['email'];
-       // echo $url; exit;  
+       // echo $url; exit;
         $response = file_get_contents($url, false, $context);
-        $row = json_decode($response,1);  
+        $row = json_decode($response,1);
         //print_r($row); exit;
         if ($row['error'] =='6005'){
             header("location:login?error=6005");
@@ -281,7 +281,7 @@ $dis_error['6007']  = "The Captcha code does not match!";
       <!-- Favicon icon -->
 
       <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-      <!-- Google font-->     
+      <!-- Google font-->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
       <!-- Required Fremwork -->
       <link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap/css/bootstrap.min.css">
@@ -312,17 +312,17 @@ $dis_error['6007']  = "The Captcha code does not match!";
         </style>
   </head>
 
-  <?php 
+  <?php
   if(isset($_GET['page'])){
-    $pageid  = $_GET['page'];  
+    $pageid  = $_GET['page'];
   }else{
     $pageid  = LOGIN_PAGE_ID;
-  } 
+  }
     //echo LOGIN_ARRAY[$pageid];
     if(isset(LOGIN_ARRAY[$pageid]) AND LOGIN_ARRAY[$pageid] !=""){
         include_once(LOGIN_ARRAY[$pageid]);
     }else{
-        include_once("common_login.php"); 
+        include_once("common_login.php");
     }
 
     ?>
@@ -330,7 +330,7 @@ $dis_error['6007']  = "The Captcha code does not match!";
   <div id="kt_modal_dynamic_popup2" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" >
         <div class="modal-content"  id="dynamic_popup2" style="border:none;">
-            
+
         </div>
     </div>
 </div>
@@ -369,7 +369,7 @@ function fergotpassworddisplay(){
     $(".custom-login-on").hide();
     $(".regsterform").hide();
     $(".forgotpasswordon").show('slide');
-    
+
 }
 
 </script>

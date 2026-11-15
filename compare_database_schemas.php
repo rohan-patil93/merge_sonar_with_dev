@@ -27,32 +27,32 @@
         // Compare tables
         $tables1 = getTablesDB($db1);
         $tables2 = getTablesDB($db2);
-        
+
         $allTables = array_unique(array_merge($tables1, $tables2));
-        
+
         foreach ($allTables as $table) {
             echo "Checking table: $table\n";
-        
+
             $existsInDb1 = in_array($table, $tables1);
             $existsInDb2 = in_array($table, $tables2);
-        
+
             if (!$existsInDb1) {
                 echo " - Table missing in DB1: $table\n";
             }
             if (!$existsInDb2) {
                 echo " - Table missing in DB2: $table\n";
             }
-        
+
             if ($existsInDb1 && $existsInDb2) {
                 $fields1 = getFieldsDB($db1, $table);
                 $fields2 = getFieldsDB($db2, $table);
-        
+
                 $allFields = array_unique(array_merge(array_keys($fields1), array_keys($fields2)));
-        
+
                 foreach ($allFields as $field) {
                     $in1 = array_key_exists($field, $fields1);
                     $in2 = array_key_exists($field, $fields2);
-        
+
                     if (!$in1) {
                         echo "   - Field '$field' missing in DB1.$table\n";
                     }
@@ -64,7 +64,7 @@
                     }
                 }
             }
-        
+
             echo "\n";
         }
     }

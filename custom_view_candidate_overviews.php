@@ -59,7 +59,7 @@ if (isset($_POST['submitrequerd_docs'])) {
       }
     </script>
   <?php
-    //header("location:index.php?option=COM_INSERT_CANDIDATE&NI=1&Rid=".$RID_c);   
+    //header("location:index.php?option=COM_INSERT_CANDIDATE&NI=1&Rid=".$RID_c);
   }
 }
 //request documents
@@ -156,7 +156,7 @@ $due_date_period_list = $result['period_list'];
 
 // $statuslist  = getstatusprogresslist('candidate_documents');
 // foreach($statuslist as $statuslist){
-//   $candidatedocumentsstatusname[$statuslist['status']] = $statuslist['name']; 
+//   $candidatedocumentsstatusname[$statuslist['status']] = $statuslist['name'];
 //   $candidatedocumentsstatusnameaction[$statuslist['status']] = $statuslist['action_label'];
 // }
 
@@ -292,7 +292,7 @@ $due_date_period_list = $result['period_list'];
     //       });
 
     // }
-    // }); 
+    // });
     console.log("open");
 
     $(".custom-popup-slide-updatechecklist-" + id).show('slow');
@@ -486,7 +486,7 @@ $due_date_period_list = $result['period_list'];
           <h5>Assigned To</h5>
            <div class="card-header-right">
             <a class="text-primary" href=""><i class="ti-pencil"></i></a>
-          </div> 
+          </div>
         </div>
         <div class="card-block">
           <div class="row mb-2 pb-2">
@@ -496,7 +496,7 @@ $due_date_period_list = $result['period_list'];
           <div class="row mb-2 pb-2">
             <h4 class="f-w-600 f-16 mb-0">Buddy</h4>
             <p class="f-14 mb-0">3 People</p>
-          </div> 
+          </div>
         </div>
       </div> -->
       <?php echo $todisplaythree = todisplaythree(array('table' => 'candidates', 'originator' => $rpdata['created_by'], 'encode' => 'yes', 'id' => $_GET['Rid'], 'dis_query' => 'no', 'dis_timeline' => 'yes', 'dis_comments' => 'no', 'dis_track' => 'no')); ?>
@@ -513,7 +513,7 @@ $due_date_period_list = $result['period_list'];
           </li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" href="#candidatettask" role="tab"> Tasks</a>
-          </li> 
+          </li>
         </ul> -->
         <div class="tab-content card-block p-0">
           <div class="tab-pane active" id="candidateprofiletab" role="tabpanel">
@@ -575,20 +575,20 @@ $due_date_period_list = $result['period_list'];
                  <form method="post"  enctype="multipart/form-data">
                    <div class="accordion-block color-accordion-block">
            <div class="color-accordion" id="color-accordion-documents-commented">
-       <?php 
+       <?php
        $subbtn = 1;
-       foreach($parentdocumentslist as $parentdocuments){ 
+       foreach($parentdocumentslist as $parentdocuments){
                  $docsdetails = $allvdata_details[$parentdocuments['id']];
-                 $vdata_details = $docsdetails; 
+                 $vdata_details = $docsdetails;
                  $candidateuserid = 6;
                  $candidateuserid = $data['user_id'];
                  if($candidateuserid == $_SESSION['userid']){
                    $vdata_details= array();
-                       foreach ($docsdetails as $detail1){ 
+                       foreach ($docsdetails as $detail1){
                            if($checkl[$detail1['id']]){
                                $vdata_details[] = $detail1;
                            }
-                       }                            
+                       }
                  }
                   if(count((array)$vdata_details) != 0){
                    ?>
@@ -596,33 +596,33 @@ $due_date_period_list = $result['period_list'];
              <div class="accordion-desc p-0">
                <table class="table table-hover m-b-0 " style="font-size:13px;">
                  <tbody>
-                   <?php foreach ($vdata_details as $details){ 
+                   <?php foreach ($vdata_details as $details){
                      $candidatedocument = $checkl[$details['id']];
                      if($candidatedocument['current_status'] ==""){
                        $statucolorname = $stausresult[ST_ACTIVE];
-                       $candidatedocument['current_status'] = ST_ACTIVE; 
+                       $candidatedocument['current_status'] = ST_ACTIVE;
                      }else{
-                       $statucolorname = $stausresult[$candidatedocument['current_status']]; 
+                       $statucolorname = $stausresult[$candidatedocument['current_status']];
                      }
-                      $displaydocuments = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$table_name."/".$candidate_id."/Documents/".$candidatedocument['document_shared']; 
+                      $displaydocuments = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$table_name."/".$candidate_id."/Documents/".$candidatedocument['document_shared'];
                      ?>
                       <tr id="custom-popup-docs-old">
                        <td class="w-b-w-s">
 
-                           <?php if($candidatedocument['document_shared']!=""){  ?> 
+                           <?php if($candidatedocument['document_shared']!=""){  ?>
                            <a class="text-primary text-capitalize f-14" href="<?php  echo $displaydocuments; ?>"  target="_blank" download>
                        <?php } ?>
                            <?php if($candidatedocument['document_shared']!=""){  ?>
-                                 <?php if($candidatedocument['current_status'] == ST_REJECTED){ ?> 
-                                   <i class="fa fa-times text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Rejected"></i> 
-                                 <?php }elseif($candidatedocument['current_status'] == ST_APPROVED){ ?>  
+                                 <?php if($candidatedocument['current_status'] == ST_REJECTED){ ?>
+                                   <i class="fa fa-times text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Rejected"></i>
+                                 <?php }elseif($candidatedocument['current_status'] == ST_APPROVED){ ?>
                                    <i class="fa fa-thumbs-up" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Approved"></i>
                                  <?php }else{  ?>
                                   <i class="fa fa-hourglass-half" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Pendding"></i>
                                 <?php } }else{ ?>
                                  <i class="fa fa-upload" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Uploading Pendding"></i>
-                               <?php }  
-                               echo ucwords($details['document_name']); 
+                               <?php }
+                               echo ucwords($details['document_name']);
                                   ?>
                                 </a>
                        </td>
@@ -633,7 +633,7 @@ $due_date_period_list = $result['period_list'];
                        <td align="right">
                          <div id="docssatusbtnemt_<?php echo $details['id']; ?>">
 
-                         <?php if($candidatedocument['current_status'] =="" || $candidatedocument['current_status'] ==ST_ACTIVE){ 
+                         <?php if($candidatedocument['current_status'] =="" || $candidatedocument['current_status'] ==ST_ACTIVE){
                            $statucolorname = $stausresult[ST_INPROGRESS];
                            ?>
                            <button onclick="yetToRequestDocs('<?php echo $details['id']; ?>')" class="btn btn-primary desktop-view text-capitalize" type="button" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusnameaction[ST_INPROGRESS]; ?></button>
@@ -668,16 +668,16 @@ $due_date_period_list = $result['period_list'];
                                    <i class="ti-close" onclick="closeSmallPopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Close"></i>
                                  </div>
                                </div>
-                               <div class="card-body"> 
+                               <div class="card-body">
                                  <div class="form-group">
                                    <span class="form-label d-inline-block fw-bold">Joining Date : <?php echo fromDate($data['reporting_date']); ?></span>
                                    <span class="form-label d-block">Joining Date : <?php echo fromDate($data['reporting_date']); ?></span>
                                  </div>
                                  <form id="docrequestform_<?php echo $details['id']; ?>">
-                                 <input type="hidden" name="category_id" value="<?php echo $parentdocuments['id']; ?>">  
-                                 <input type="hidden" name="candidate_id" value="<?php echo $candidate_id; ?>"> 
-                                 <input type="hidden" name="document_id" value="<?php echo $details['id']; ?>"> 
-                                  <input type="hidden" name="reporting_date" value="<?php echo $data['reporting_date']; ?>"> 
+                                 <input type="hidden" name="category_id" value="<?php echo $parentdocuments['id']; ?>">
+                                 <input type="hidden" name="candidate_id" value="<?php echo $candidate_id; ?>">
+                                 <input type="hidden" name="document_id" value="<?php echo $details['id']; ?>">
+                                  <input type="hidden" name="reporting_date" value="<?php echo $data['reporting_date']; ?>">
                                  <div class="row">
                                    <div class="form-group col-lg-8 w-full">
                                      <label for="before_or_after_<?php echo $details['id']; ?>" class="form-label d-block">Due Date</label>
@@ -686,7 +686,7 @@ $due_date_period_list = $result['period_list'];
                                          <?php foreach ($due_date_period_list as $due){  ?>
                                            <option value="<?php echo $due['genc_detail_code'];?>" ><?php echo $due['genc_detail_name']." Joining";?></option>
                                          <?php } ?>
-                                       </select> 
+                                       </select>
                                    </div>
                                    <div class="form-group col-lg-4">
                                      <label for="day_<?php echo $details['id']; ?>" class="form-label">Days</label>
@@ -704,10 +704,10 @@ $due_date_period_list = $result['period_list'];
                                </div>
                              </div>
                            </div>
-                          <?php } ?> 
+                          <?php } ?>
                        </td>
                      </tr>
-                     <?php }?>  
+                     <?php }?>
                  </tbody>
                </table>
              </div>
@@ -717,9 +717,9 @@ $due_date_period_list = $result['period_list'];
        <?php if($subbtn == 0 AND $candidateuserid == $_SESSION['userid']){ ?>
         <div class="card-footer">
            <div class="row">
-             <div class="col-lg-4">                   
+             <div class="col-lg-4">
               <input type="hidden" name="candidate_id" value="<?php echo $candidate_id;  ?>" />
-              <input type="hidden" name="submit_doc" value="submit_doc" />  
+              <input type="hidden" name="submit_doc" value="submit_doc" />
               <button id="kt_login_signin_submit_old" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i>Submit</button>
             </div>
           </div>
@@ -916,18 +916,18 @@ $due_date_period_list = $result['period_list'];
 
 
 
-                <?php /** ?>  
+                <?php /** ?>
              <a class="accordion-msg b-none waves-effect waves-light f-w-700">Forms</a>
              <div class="accordion-desc">
-              <?php if(count((array)$linktransactionactivityschedule) != 0){  foreach($linktransactionactivityschedule as $key1=>$transactionactivityschedule11){?> 
+              <?php if(count((array)$linktransactionactivityschedule) != 0){  foreach($linktransactionactivityschedule as $key1=>$transactionactivityschedule11){?>
                <a class="accordion-msg b-none waves-effect waves-light f-w-700"><?php echo $taskscategories[$key1];?>
                <span class="float-end"><?php echo count((array)$linktransactionactivityschedule[$key1])
                ;?> of <?php echo $linkcomplitedtask[$key1] !=""?$linkcomplitedtask[$key1]:"0";?> Completed</span>
-             </a> 
+             </a>
              <div class="accordion-desc">
                <table class="table table-hover">
                  <tbody>
-                   <?php foreach($transactionactivityschedule11 as $tas){ 
+                   <?php foreach($transactionactivityschedule11 as $tas){
                      ?>
                       <tr id="custom-popup-form-<?php echo $tas['id']; ?>" >
                        <td class="w-b-w-s">
@@ -935,12 +935,12 @@ $due_date_period_list = $result['period_list'];
                          <?php if($tas['link_page'] == '0'){?>
                            <!--    <a href="<?php echo $tas['page_url']; ?>" target="_blank"><h6 class="mb-0 f-14" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i class="ti-new-window"></i> <?php echo $tas['task_name']; ?></h6></a> -->
                            <a href="<?php echo $tas['page_url'];  ?>" target="_blank" onclick="UpdateTransactionActivitySchedule1('<?php echo $tas['id']; ?>')" class="text-primary"><h6 class="mb-0 f-14" ><i class="ti-new-window"></i> <?php echo $tas['task_name']; ?></h6></a>
-                         <?php  }else{ ?> 
+                         <?php  }else{ ?>
                            <h6 class="mb-0 f-14" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i class="ti-check-box"></i> <?php echo $tas['task_name']; ?></h6>
-                         <?php } ?> 
+                         <?php } ?>
                        </td>
                        <td align="center" class="statusid_<?php echo $tas['id']; ?>">
-                        <?php $stausresultv = $stausresult[$tas['current_status']]; 
+                        <?php $stausresultv = $stausresult[$tas['current_status']];
                         ?>
                         <span class="label label-success" style="color: <?php echo "#".$stausresultv['color']; ?>;    background:  <?php echo $stausresultv['background_color']; ?>; border-color: <?php echo $stausresultv['background_color']; ?>;" ><?php echo $stausresultv['name']; ?></span>
                       </td>
@@ -952,11 +952,11 @@ $due_date_period_list = $result['period_list'];
             </div>
           <?php }  }else{ ?>
             <div class="card-px text-center py-20 mt-2">
-             <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Task </p>   
+             <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Task </p>
              <div class="text-center px-4">
                <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-             </div>   
-           </div> 
+             </div>
+           </div>
          <?php } ?>
        </div>
        <?php **/ ?>
@@ -1160,7 +1160,7 @@ $due_date_period_list = $result['period_list'];
                     <div class="tab-pane active" id="uploaddocumentstab" role="tabpanel">
                       <form method="post" enctype="multipart/form-data" class="row">
                         <?php
-                        /*   if(count((array)$candidatedocumentlist)>=1){      
+                        /*   if(count((array)$candidatedocumentlist)>=1){
                              $displaydocuments = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$table_name."/".$candidate_id."/Documents/";
                              foreach ($candidatedocumentlist as $parentkey => $parentdocuments){
                                ?>
@@ -1172,7 +1172,7 @@ $due_date_period_list = $result['period_list'];
                                   </div>
                                   <div class="x_content">
                                    <div class="">
-                                     <div class="pricing_features">    
+                                     <div class="pricing_features">
                                        <?php
                                        foreach($parentdocuments as $value){ ?>
 
@@ -1182,9 +1182,9 @@ $due_date_period_list = $result['period_list'];
                                            <div class="symbol symbol-35 symbol-success mr-3 mt-1">
                                              <?php if($value['document_shared']!=""){  ?>
 
-                                               <?php if($value['current_status'] == ST_REJECTED){ ?> 
-                                                 <i class="fa fa-times text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Rejected"></i> 
-                                               <?php }elseif($value['current_status'] == ST_APPROVED){ ?>  
+                                               <?php if($value['current_status'] == ST_REJECTED){ ?>
+                                                 <i class="fa fa-times text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Rejected"></i>
+                                               <?php }elseif($value['current_status'] == ST_APPROVED){ ?>
                                                  <i class="fa fa-thumbs-up" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Approved"></i>
                                                <?php }else{  ?>
                                                 <i class="fa fa-hourglass-half" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Pendding"></i>
@@ -1196,8 +1196,8 @@ $due_date_period_list = $result['period_list'];
                                             <a <?php if($value['document_shared']!=""){ ?> class=" nav-link text-active-primary me-6 active text-capitalize" href="<?php  echo $displaydocuments.$value['document_shared'];   ?>"  target="_blank" <?php }else{ echo "class='nav-link me-6 text-capitalize'"; } ?> >  <?php echo ucwords($documentlist[$value['document_list_id']]); ?></a>
                                           </div>
 
-                                          <div class="d-flex font-weight-bold">   
-                                            <?php if($value['current_status'] != ST_APPROVED){ ?> 
+                                          <div class="d-flex font-weight-bold">
+                                            <?php if($value['current_status'] != ST_APPROVED){ ?>
                                               <div class="image-input image-input-empty image-input-outline mr-10 mt-2" id="kt_image_5"  style=" height:0px; ">
                                                 <label class="btn-hover-text-primary mt-1 <?php //echo $value['document_shared']!=""?"mt-3":"mt-1"; ?>" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
                                                   <i class="ti-clip" style="font-size: 20px;"></i>
@@ -1208,7 +1208,7 @@ $due_date_period_list = $result['period_list'];
                                               </div>
 
                                             <?php } ?>
-                                            <?php if($value['document_shared']!="" AND $_SESSION['user_type']!='4'){ ?>                           
+                                            <?php if($value['document_shared']!="" AND $_SESSION['user_type']!='4'){ ?>
                                              <div class="dropdown-primary dropdown open" title="<?php if($value['current_status'] == ST_REJECTED){  echo "Rejected"; }elseif($value['current_status'] == ST_APPROVED){ echo "Approved"; }else{  echo "Active"; } ?>">
                                                <button class="label label-sm label-success" style="height: 18px; border-radius: 30px;"  type="button" data-content="<?php echo $value[$current_status]['name']; ?>"></button>
                                                <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
@@ -1217,7 +1217,7 @@ $due_date_period_list = $result['period_list'];
                                                    <div class="dropdown-item <?php echo $value['current_status'] == ST_REJECTED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_REJECTED; ?>)"  name="status" id="status" value="<?php echo ST_REJECTED; ?>)">Rejected</div>
                                                  <?php } ?>
                                                </div>
-                                             </div> 
+                                             </div>
 
                                            <?php } ?>
 
@@ -1238,9 +1238,9 @@ $due_date_period_list = $result['period_list'];
                      <?php } ?>
                        <div class="card-footer">
                          <div class="row">
-                           <div class="col-lg-4">                   
+                           <div class="col-lg-4">
                             <input type="hidden" name="candidate_id" value="<?php echo $candidate_id;  ?>" />
-                            <input type="hidden" name="submit_doc" value="submit_doc" />  
+                            <input type="hidden" name="submit_doc" value="submit_doc" />
                             <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i>Submit</button>
                           </div>
                         </div>
@@ -1248,11 +1248,11 @@ $due_date_period_list = $result['period_list'];
                     <?php    }else{    ?>
 
                       <div class="card-px text-center py-20 mt-2">
-                       <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Required Documents</p>   
+                       <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Required Documents</p>
                        <div class="text-center px-4">
                          <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                       </div>   
-                     </div> 
+                       </div>
+                     </div>
                    <?php   }  */ ?>
                         <form>
 

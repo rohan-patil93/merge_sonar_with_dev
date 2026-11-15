@@ -18,7 +18,7 @@ $notchecktokanary = array('login', 'domainverifye', 'signup', 'forgotpassword');
 /*if(!in_array($mode, $notchecktokanary) AND $method == 'post'){
 	if($infi_token){
 		 try {
-			$decoded = JWT::decode($infi_token, new Key(JWT_SECRET_KEY, JWT_ALGORITHM));  
+			$decoded = JWT::decode($infi_token, new Key(JWT_SECRET_KEY, JWT_ALGORITHM));
 		} catch (Exception $e) {
 			http_response_code(401);
 			echo json_encode([
@@ -27,7 +27,7 @@ $notchecktokanary = array('login', 'domainverifye', 'signup', 'forgotpassword');
 				'message' => $e->getMessage(),
 			]);
 			exit;
-		}   
+		}
 	}else{
 		http_response_code(401);
 			echo json_encode([
@@ -110,7 +110,7 @@ if ($method == 'post') {
 		exit;
 	}
 	if ($mode == 'loginflutter') {
-		//print_r($_POST); print_r($_GET);		
+		//print_r($_POST); print_r($_GET);
 		$post = $_POST;
 		$data['chrUserName'] = $post['useremail'];
 		$data['chrPassword'] = $post['password'];
@@ -417,7 +417,7 @@ if ($method == 'post') {
 	if ($mode == 'savetofiltertable') {
 		$details = $userObj->savetofiltertable($_POST, $_GET);
 		echo json_encode($details);
-		//echo "345";	
+		//echo "345";
 	}
 	if ($mode == 'employeedetailsupdate') {
 		//echo "employeedetailsupdate";exit;
@@ -959,7 +959,7 @@ if ($method == 'post') {
 
 	if ($mode == "imageuploadtoreact") {
 		$images = explode(",", $_POST['image_names']);
-		/*print_r($_POST);		
+		/*print_r($_POST);
 		print_r($images);
 		print_r($_GET);
 		 print_r($_FILES); exit;	*/
@@ -1512,7 +1512,7 @@ if ($method == 'post') {
 		$res = $userObj->getrowTablesData(TPREFIX . TBL_DISPLAYATTRIBUTES, '*', $whr);
 		//print_r($res);
 		echo json_encode($res);
-		//echo "1";	
+		//echo "1";
 	}
 	if ($mode == 'displayattributesview') {
 		$view = $_GET['view'];
@@ -2927,7 +2927,7 @@ if ($method == 'post') {
 		$details = $aiObj->$fun($_GET);
 		echo json_encode($details);
 	}
-	//omkar added code 
+	//omkar added code
 
 	if ($mode == 'approveVisitor') {
 		$rid = (int) ($_GET['rid'] ?? 0);
@@ -2988,4 +2988,4 @@ if ($method == 'post') {
 		echo json_encode($details);
 	}
 
-}// End GET Method    
+}// End GET Method

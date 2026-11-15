@@ -5,8 +5,8 @@
         display: flex;
     }
     .login_left, .login_right{
-        
-    }    
+
+    }
     .logo_width{
         width: 100px;
     }
@@ -52,7 +52,7 @@
     }
     @media (max-width:1440px){
         .login_left{  background-position: center;}
-        
+
     }
 
     @media (max-width:1299px){
@@ -107,7 +107,7 @@
     <div class="loader-bg">
         <div class="loader-bar"></div>
     </div>
-    
+
     <div class="" style="">
         <div class="login_container align-items-center">
             <div class="login_right text-center">
@@ -117,10 +117,10 @@
                             <div class="p-3 custom-login-on mob-pd">
                                 <img class="mt-2 mb-3" src="<?php echo $image; ?>" alt="" >
                                 <h2 class="f-26 f-w-600">Welcome Back</h2>
-								<?php 
-                                if($error !='') { 
+								<?php
+                                if($error !='') {
                                 if($error == '6002' || $error == '6004' || $error == '6005' ){ ?>
-                      
+
                                 <div class="alert alert-warning alert-dismissible">
                                     <strong class="f-14"><?php echo $dis_error[$error]; ?></strong>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -130,12 +130,12 @@
                                     <strong class="f-14"><?php echo $dis_error[$error]; ?></strong>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
-                      
+
                                 <?php } }?>
-                                
+
 							    <form class="md-float-material form-material" action="" method="post" >
-                                
-                                    <div class="text-left mt-4"> 
+
+                                    <div class="text-left mt-4">
                                         <div class="form-group">
                                             <label for="chrUserName" class="visually-hidden">User Name</label>
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="chrUserName" id="chrUserName" required="" placeholder="User Name" aria-label="User Name">
@@ -150,7 +150,7 @@
                                                 <i class="fa fa-eye" id="eyeIcon"></i>
                                             </span>
                                         </div>
-                                        <?php if(CAPTCHA_YES_NO == 'YES' && $subdomain !='uat' ){ ?> 
+                                        <?php if(CAPTCHA_YES_NO == 'YES' && $subdomain !='uat' ){ ?>
                                         <div class="text-center"><img style="height: 50px;" src="captcha/captcha.php" alt="CAPTCHA" /></div>
                                         <div class="form-group form-primary login-mean-class" >
                                             <input type="text" class="form-control" name="captcha" id="captcha" placeholder="Enter Captcha" aria-label="Enter Captcha" required="required"/>
@@ -166,13 +166,13 @@
                                             <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-4">Sign In</button>
                                         </div>
                                     </div>
-							    </form>	
+							    </form>
                             </div>
 							<div class="p-5 regsterform" style="display:none">
 							    <form class="md-float-material form-material" action="" method="post" >
                                     <img class="img-100 mt-0 rentalji" src="<?php echo $image; ?>" alt="" >
 								    <h2 class="f-26 f-w-600 mt-4">Sign Up</h2>
-                              
+
                                     <div class="text-left mt-4">
                                         <div class="form-group">
                                             <label for="regUserName" class="visually-hidden">User Name</label>
@@ -187,7 +187,7 @@
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="password" id="regPassword" required="" placeholder="Password" aria-label="Password">
                                              <span class="text-muted f-12 text-left ">Use 8 or more characters with a mix of letters, numbers & symbols.</span>
                                         </div>
-                                 
+
                                         <div class="form-group">
 									        <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
                                             <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
@@ -222,8 +222,8 @@
             </div>
             <div class="login_left text-center" style="">
                 <div class="ps-5 mob-pd">
-                    
-                </div>          
+
+                </div>
             </div>
         </div>
     </div>

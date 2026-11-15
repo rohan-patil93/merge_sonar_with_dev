@@ -6,7 +6,7 @@ include_once('comm.php');
 $user_id =  $_SESSION['userid'];
 $data12["where"] = array('email'=>$_SESSION['email']);
 $datw12 = urlencode(json_encode($data12));
-$curl12 = API."?mode=gettabledetailswithconditions&table=vendors&data=".$datw12; 
+$curl12 = API."?mode=gettabledetailswithconditions&table=vendors&data=".$datw12;
 $cudata12 = callAPI($curl12);
 $approved = json_decode($cudata12,1);
 $approved_data = $approved[0];
@@ -24,8 +24,8 @@ if(isset($_POST) && !empty($_POST)){
         $Filename=  "file_".time()."_".uniqid();
         $newfilename = $Filename.'.' .end($temp);
         $documents[] = array('doc_id'=>$_POST['document_file_id'][$kkk],'document_id'=>$docvalue,'categoryid'=>$_POST['document_categoryid'][$kkk],'filename'=>$newfilename);
-        move_uploaded_file($_FILES["fileToUpload"]["tmp_name"][$kkk], $File_Uploads_Path.$newfilename);	
-    }else{ 
+        move_uploaded_file($_FILES["fileToUpload"]["tmp_name"][$kkk], $File_Uploads_Path.$newfilename);
+    }else{
         $documents[] = array('doc_id'=>$_POST['document_file_id'][$kkk],'document_id'=>$docvalue,'categoryid'=>$_POST['document_categoryid'][$kkk],'filename'=>$_POST['hidden_fileToUpload'][$kkk]);
     }
   }
@@ -52,14 +52,14 @@ if($rowid !=""){
      $_POST['updated_by'] = $_SESSION['userid'];
      $url = API."?mode=setupvendor&rid=".$rowid."&method=post";
      $response = file_post_contents($url, $_POST, 'update');
- }else{ 
-   
+ }else{
+
     $_POST['company_id'] = $_SESSION['company_id'];
     $_POST['is_active'] = '0';
     $_POST['created_date'] = nowDate();
     $_POST['created_by'] = $_SESSION['userid'];
     $url = API."?mode=setupvendor&method=post";
-    $response = file_post_contents($url, $_POST, 'insert'); 
+    $response = file_post_contents($url, $_POST, 'insert');
 }
 $response = json_decode($response,1);
 if($response['status'] == 'fail'){
@@ -78,13 +78,13 @@ if($response['status'] == 'fail'){
         document.onreadystatechange = function(){
             if(document.readyState == "complete") {
                 tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>','');
-            } 
+            }
         }
     </script>
 <?php
-} 
 }
-   
+}
+
 $helptext = array('first_name'=>'Please Enter Your Proprietor/Owner/CEO First Name',
   'last_name' =>  'Please Enter Proprietor/Owner/CEO Last Name',
   'fax' =>  'Please Enter Your Fax Number',
@@ -189,7 +189,7 @@ document.addEventListener('error', function (e) {
 
   <!-- Chartlist chart css -->
   <link rel="stylesheet" href="assets/bower_components/chartist/css/chartist.css" type="text/css" media="all">
-  <!-- Bootstrap date-time-picker js -->  
+  <!-- Bootstrap date-time-picker js -->
   <link rel="stylesheet" type="text/css" href="assets/pages/advance-elements/css/bootstrap-datetimepicker.css">
   <link rel="stylesheet" type="text/css" href="assets/css/date-jquery-ui.css">
   <!-- Date-range picker css  -->
@@ -209,10 +209,10 @@ document.addEventListener('error', function (e) {
   <link rel="stylesheet" type="text/css" href="assets/bower_components/switchery/css/switchery.min.css">
   <!-- Tags js -->
   <link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap-tagsinput/css/bootstrap-tagsinput.css" />
-  <!-- Style.css -->  
+  <!-- Style.css -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <link rel="stylesheet" type="text/css" href="assets/css/component.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/pages.css"> 
+  <link rel="stylesheet" type="text/css" href="assets/css/pages.css">
   <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
   <link rel="stylesheet" type="text/css" href="assets/css/custom_mobile.css">
   <link rel="stylesheet" href="assets/bower_components/chartist/css/chartist.css" type="text/css" media="all">
@@ -234,7 +234,7 @@ document.addEventListener('error', function (e) {
   <!-- sweet alert framework -->
 
 
- <?php /** ?> 
+ <?php /** ?>
   <!-- Required Fremwork -->
   <link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap/css/bootstrap.min.css">
   <!-- waves.css -->
@@ -296,7 +296,7 @@ document.addEventListener('error', function (e) {
     background-color: white;
     overflow-y: scroll;
     height: 500px;
-    width: 75% !important; 
+    width: 75% !important;
   }
   .steps.clearfix {
     width: 20% !important;
@@ -434,7 +434,7 @@ document.addEventListener('error', function (e) {
      // var e = document.getElementById("kt_select2_102");
      // var selectcountry = e.options[e.selectedIndex].text;
      // console.log(selectcountry);
-     
+
      // var e1 = document.getElementById("kt_select2_101");
      // var selectstate = e1.options[e1.selectedIndex].text;
 
@@ -448,7 +448,7 @@ document.addEventListener('error', function (e) {
       var option = new Option(selectedOptions[i].text, selectedOptions[i].id, true, true);
       $("#kt_select2_104").append(option);
     }
-   
+
     $('#kt_select2_105').select2();
     var selectedOptions = $("#kt_select2_101").select2("data");
     $('#kt_select2_105').empty();
@@ -470,16 +470,16 @@ document.addEventListener('error', function (e) {
 
       // var select = $('#kt_select2_102').html();
       // console.log(select);
-      // $('#kt_select2_104').html(select);  
+      // $('#kt_select2_104').html(select);
     //  select.options[select.selectedIndex].text = selectcountry;
-     
-     // var select = document.getElementById('kt_select2_104'); 
+
+     // var select = document.getElementById('kt_select2_104');
      // select.options[select.selectedIndex].text = selectcountry;
 
-     // var select1 = document.getElementById('kt_select2_105'); 
+     // var select1 = document.getElementById('kt_select2_105');
      // select1.options[select1.selectedIndex].text = selectstate;
 
-     // var select2 = document.getElementById('kt_select2_106'); 
+     // var select2 = document.getElementById('kt_select2_106');
      // select2.options[select2.selectedIndex].text = selectcity;
 
    } else {
@@ -497,8 +497,8 @@ document.addEventListener('error', function (e) {
       success: function(response) {
                   console.log(response);
                  response = JSON.parse(response);
-                 var country = document.getElementById('kt_select2_104'); 
-                 for (var i = 0; i < response.length; i++) 
+                 var country = document.getElementById('kt_select2_104');
+                 for (var i = 0; i < response.length; i++)
                  {
                   var el = document.createElement("option");
                   el.textContent = response[i].country_name;
@@ -524,9 +524,9 @@ document.addEventListener('error', function (e) {
                     var response = JSON.parse(response);
                     console.log(response.length);
                     console.log(response);
-                    var select = document.getElementById(element_id); 
+                    var select = document.getElementById(element_id);
                     document.getElementById(element_id).innerHTML = "";
-                    for (var i = 0; i < response.length; i++) 
+                    for (var i = 0; i < response.length; i++)
                     {
                      var el = document.createElement("option");
                      if(table_name=='states'){
@@ -558,7 +558,7 @@ document.addEventListener('error', function (e) {
        $("#dropdownlist").html(data);
      },
      error:function (){}
-   }); 
+   });
  }
  function statuspopup(status,id){
    var table_name = 'vendor_registers';
@@ -588,8 +588,8 @@ document.addEventListener('error', function (e) {
    }
  });
  }
- 
- 
+
+
  function reaprovedoc(hid){
    var vendor_hrconnect = $("#vendor_hrconnect").val();
    var user_id = $("#user_id").val();
@@ -615,7 +615,7 @@ function(isConfirm) {
         type: "POST",
         success:function(data){
           console.log(data);
-         //location.reload(); 
+         //location.reload();
          tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success  pt-2 pb-2','animated flipInX','animated flipOutX','Notification Successfully Sent','');
        },
        error:function (){}
@@ -645,7 +645,7 @@ function(isConfirm) {
   //       type: "POST",
   //       success:function(data){
   //         console.log(data);
-		// 	   //location.reload(); 
+		// 	   //location.reload();
   //        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success  pt-2 pb-2','animated flipInX','animated flipOutX','Notification Successfully Sent','');
   //      },
   //      error:function (){}
@@ -653,13 +653,13 @@ function(isConfirm) {
   //   }
   // })
 
- } 
- 
- 
+ }
+
+
  function checkFileSelect(e,id){
   var filename = e.target.files[0].name;
   $("#fileattach_"+id).text(filename);
-} 
+}
 
 function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,next_status){
     jQuery.ajax({
@@ -723,7 +723,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 },
                 error:function (){}
             });
-        }); 
+        });
 }
 </script>
 <!--begin::Body-->
@@ -736,7 +736,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
    <?php if($_SESSION['config']['display_logo']!=""){ ?>
                     <img class="img-fluid img-100" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
                 <?php }else{ echo $_SESSION['config']['display_logo']; } ?></a>
-         <!--- 
+         <!---
 		 <div class="d-flex align-items-center">
             <button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle"> <span></span> </button>
             <button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle"> <span></span> </button>
@@ -746,11 +746,11 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 
 
        </div>
-       <?php 
+       <?php
 if($register_data['current_status'] !=""){
         $workflowsteps = getWorkflowStatus('vendor_registers',$register_data['id'],$register_data['current_status']);
 
-    
+
         }
             ?>
 
@@ -784,7 +784,7 @@ if($register_data['current_status'] !=""){
                <div class="card-header-right table-card-header m-r-50">
                   <button  type="button" class="displayChatbox  btn waves-effect waves-light btn-instagram bg-white" data-bs-toggle="dropdown"  style="overflow: visible; "> <i class="ti-bell text-mute"></i> <span class="badge bg-c-red custom_bell"><?php echo $nptificationcnt; ?></span></button>
 
-                 <?php 
+                 <?php
                      echo $workflowsteps['workflow_btn'];
     $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,ST_CALLBACK,'');
    if(!in_array($register_data['current_status'], $check_array)){ $disablecss = "style='pointer-events: none; opacity: 0.7;'";  } ?>
@@ -805,7 +805,7 @@ if($register_data['current_status'] !=""){
                       <div class="alert alert-danger background-danger alert-dismissible">
                         <strong><?php echo $error_message; ?></strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div>	
+                      </div>
                     <?php } ?>
                     <div id="wizard">
                       <section>
@@ -829,7 +829,7 @@ if($register_data['current_status'] !=""){
     <input type="hidden" name="finance_connect" id="finance_connect" value="<?php echo $connect_user['finance_connect']; ?>">
     <input type="hidden" name="purchase_connect" id="purchase_connect" value="<?php echo $connect_user['purchase_connect']; ?>">
     <input type="hidden" name="admin_connect" id="admin_connect" value="<?php echo $connect_user['admin_connect']; ?>">
-                
+
                                   <span class="d-inline-block fw-bold" style="margin-bottom:5px">Proprietor/Owner/CEO Name <span class="requried">*</span></span>
                                   <input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id;?>">
                                    <input type="text" class="form-control required text-capitalize" name="first_name" placeholder="<?php echo $placeholder['first_name']; ?>" value="<?php echo $register_data['first_name'] !=""?$register_data['first_name']:$_SESSION['user']['first_name'];?>" / title="First Name" aria-label="First Name">
@@ -866,9 +866,9 @@ if($register_data['current_status'] !=""){
                               <input type="hidden" name="logo_remove" >
                               <img src="<?php echo $logo; ?>" id="outputdisplay_logo" width="200"  data-onerror-src="uploads/all/no-image.jpg" alt="" />
                             </div>
-                          </div>  
+                          </div>
                           <span class="form-text text-muted"><?php //echo $helptext['logo'];?> </span>
-                        </div> 
+                        </div>
                         <div class="form-group col-lg-12">
                          <span class="d-inline-block fw-bold" style="margin-bottom:5px">Email <span class="requried">*</span></span>
                           <input type="text" class="form-control input-group-solid required"  name="email" readonly value="<?php echo $_SESSION['email'];?>" placeholder="<?php //echo $placeholder['email']; ?>"  / title="Email" aria-label="Email">
@@ -890,7 +890,7 @@ if($register_data['current_status'] !=""){
                        </div>
                        <!--end::Input-->
                      </div>
-                     <div class="col-xl-6"> 
+                     <div class="col-xl-6">
                       <div class="form-group">
                        <span class="d-inline-block fw-bold" style="margin-bottom:5px">Phone Number</span>
                          <input type="number" class="form-control" name="phone" value="<?php echo $register_data['phone'];?>" placeholder="<?php echo $placeholder['phone']; ?>"  / title="Phone" aria-label="Phone">
@@ -1019,10 +1019,10 @@ if($register_data['current_status'] !=""){
         <?php } ?>
   </select>
 </div>
-<div class=" col-lg-6 mt-10"> 
- <div class="checkbox-fade fade-in-primary"> 
-  <label class="form-label"> 
-    <input type="checkbox" style="display:none" <?php if($register_data['shipping_address']==$register_data['billing_address'] && $rowid!="") { echo 'checked'; } else { echo ''; } ?> id="is_same" onclick="sameaddress()" title="Input" aria-label="Input">   
+<div class=" col-lg-6 mt-10">
+ <div class="checkbox-fade fade-in-primary">
+  <label class="form-label">
+    <input type="checkbox" style="display:none" <?php if($register_data['shipping_address']==$register_data['billing_address'] && $rowid!="") { echo 'checked'; } else { echo ''; } ?> id="is_same" onclick="sameaddress()" title="Input" aria-label="Input">
     <span class="cr">
       <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
     </span><span>
@@ -1058,7 +1058,7 @@ if($register_data['current_status'] !=""){
     <?php foreach($states as $states1) { ?>
           <option <?php echo $register_data['shipping_state']==$states1['id'] ? 'selected':'' ?> value="<?php echo $states1['id'];?>"><?php echo $states1['state_name']; ?></option>
         <?php } ?>
-  
+
 </select>
 </div>
 
@@ -1087,17 +1087,17 @@ if($register_data['current_status'] !=""){
                                                      <span class="d-inline-block fw-bold" style="margin-bottom:5px">PAN Number<span class="requried">*</span></span>
                                                      <div class="input-group input-icon-right">
                                                       <input type="text" class="form-control outline-blue required" value="<?php echo $register_data['pan_no'];?>" name="pan_no" placeholder="<?php echo $placeholder['pan_no'];?>" title="Pan No" aria-label="Pan No">
-                                                      
+
                                                     </div>
                                                     <!--       <span class="form-text text-muted"><?php echo $helptext['pan_no'];?> </span> -->
 
                                                   </div>
-                                                  
+
                                                   <div class="form-group col-lg-6">
                                                    <span class="d-inline-block fw-bold" style="margin-bottom:5px">VAT Number<span class="requried">*</span></span>
                                                    <div class="input-group input-icon-right">
                                                     <input type="text" class="form-control outline-blue required"  name="vat_number" value="<?php echo $register_data['vat_number'];?>" placeholder="<?php echo $placeholder['vat_number'];?>" title="Vat Number" aria-label="Vat Number">
-                                                    
+
                                                   </div>
                                                   <!--    <span class="form-text text-muted"><?php echo $helptext['vat_number'];?> </span> -->
 
@@ -1106,7 +1106,7 @@ if($register_data['current_status'] !=""){
                                                  <span class="d-inline-block fw-bold" style="margin-bottom:5px">TIN Number</span>
                                                  <div class="input-group input-icon-right">
                                                   <input type="text" class="form-control" value="<?php echo $register_data['tin_number'];?>" name="tin_number" placeholder="<?php echo $placeholder['tin_number'];?>" title="Tin Number" aria-label="Tin Number">
-                                                  
+
                                                 </div>
                                                 <!--   <span class="form-text text-muted"><?php echo $helptext['tin_number'];?> </span> -->
 
@@ -1123,20 +1123,20 @@ if($register_data['current_status'] !=""){
                                              <span class="d-inline-block fw-bold" style="margin-bottom:5px">GST Number</span>
                                              <div class="input-group input-icon-right">
                                               <input type="text" class="form-control" value="<?php echo $register_data['gstin'];?>"  name="gstin" placeholder="<?php echo $placeholder['gstin'];?>" title="Gstin" aria-label="Gstin">
-                                              
+
                                             </div>
                                             <!--       <span class="form-text text-muted"><?php echo $helptext['gstin'];?> </span> -->
 
                                           </div>
 
 
-                                          
+
 
 
                                         </div>
                                       </div>
-                                      
-                                      
+
+
                                     </fieldset>
                                     <h3> Bank Details </br><small>Vendor bank details</small></h3>
                                     <fieldset>
@@ -1150,17 +1150,17 @@ if($register_data['current_status'] !=""){
                                            <span class="d-inline-block fw-bold" style="margin-bottom:5px">Bank Account Name<span class="requried">*</span></span>
                                            <div class="input-group input-icon-right">
                                             <input type="text" class="form-control required" value="<?php echo $register_data['bank_account_name'];?>" name="bank_account_name" placeholder="<?php echo $placeholder['bank_ac_name'];?>" title="Bank Account Name" aria-label="Bank Account Name">
-                                            
+
                                           </div>
                                           <!--    <span class="form-text text-muted"><?php echo $helptext['bank_ac_name'];?> </span> -->
 
                                         </div>
-                                        
+
                                         <div class="form-group col-lg-6">
                                          <span class="d-inline-block fw-bold" style="margin-bottom:5px">Bank Name<span class="requried">*</span></span>
                                          <div class="input-group input-icon-right">
                                           <input type="text" class="form-control required"  name="bank_name" value="<?php echo $register_data['bank_name'];?>" placeholder="<?php echo $placeholder['bank_name'];?>" title="Bank Name" aria-label="Bank Name">
-                                          
+
                                         </div>
                                         <!--    <span class="form-text text-muted"><?php echo $helptext['bank_name'];?> </span> -->
 
@@ -1169,7 +1169,7 @@ if($register_data['current_status'] !=""){
                                        <span class="d-inline-block fw-bold" style="margin-bottom:5px">Account Type</span>
                                        <div class="input-group input-icon-right">
                                         <input type="text" class="form-control" value="<?php echo $register_data['account_type'];?>" name="account_type" placeholder="<?php echo $placeholder['account_type'];?>" title="Account Type" aria-label="Account Type">
-                                        
+
                                       </div>
                                       <!--   <span class="form-text text-muted"><?php echo $helptext['account_type'];?> </span> -->
 
@@ -1185,7 +1185,7 @@ if($register_data['current_status'] !=""){
                                        foreach($genc_code_list as $genc_code_lists) { ?>
                                         <option value="<?php echo $genc_code_lists['genc_detail_code']; ?>" <?php echo $register_data['account_type']==$genc_code_lists['genc_detail_code']?"selected":""; ?> ><?php echo $genc_code_lists['genc_detail_name']; ?></option>
                                       <?php } ?>
-                                    </select>  
+                                    </select>
                                   </div>
 
 
@@ -1235,11 +1235,11 @@ if($register_data['current_status'] !=""){
 
                           <?php
  //echo "<pre>"; print_r($attach_doccategory);print_r($attach_filename); echo "</pre>";
-                          foreach ($document_lists as $dockey => $docvalue){ 
+                          foreach ($document_lists as $dockey => $docvalue){
                             $vendor_documen = $vendor_documents[$dockey];
                             $filestatus = $_SESSION['status'][$vendor_documen['current_status']];
 
-                            ?>							
+                            ?>
 
                             <div class="col-md-6 col-sm-6 col-xs-12 mb-10 " >
 
@@ -1249,24 +1249,24 @@ if($register_data['current_status'] !=""){
                                <?php if($vendor_documen['current_status'] ==ST_REJECTED){ ?>
                                  <div class="ribbon ribbon-clip ribbon-right ribbanid_<?php echo $vendor_documen['id']; ?>">
                                   <div class="ribbon-target f-10 bg-danger" >
-                                    <span class="ribbon-inner" ></span> <?php echo "Rejected"; ?> 
+                                    <span class="ribbon-inner" ></span> <?php echo "Rejected"; ?>
                                   </div>
-                                </div> 
+                                </div>
                               <?php } ?>
                               <div class="title" style="border-radius: 5px;">
       <a  class="text-white" <?php if($vendor_documen['filename']!=""){ ?>  href="<?php  echo $File_Uploads_Path.$vendor_documen['filename'];   ?>"  target="_blank" <?php } ?> > <h6 class="f-14 m-l-10"> <?php if($vendor_documen['filename']!=""){ echo '<i class="ti-cloud-down"></i>'; } ?> <?php echo ucwords($docvalue['document_name']); ?> <?php if($vendor_documen['filename']!="" && $vendor_documen['current_status'] != ST_REJECTED){  ?><span class="label label-info" style="color: <?php echo "#". $filestatus['color']; ?>; background: <?php echo "#".strval($filestatus['background_color'] ); ?>; border-color: <?php echo "#".strval($filestatus['background_color']); ?>;"><?php echo $filestatus['name']; ?></span><?php } ?></h6> </a>
                               </div>
                               <div class="x_content">
                                 <div class="">
-                                  <div class="pricing_features">    
+                                  <div class="pricing_features">
                                     <div style="  box-shadow: 0px 1px 9px #cccccc; padding: 2px 10px 2px 10px;" class="alert alert-custom alert-white fade show" role="alert">
                                       <div class="alert-text">
 
                                         <div class="d-flex align-items-center mb-0">
                                           <div class="symbol symbol-35 symbol-success mr-3 mt-1">
-                                            <?php if($vendor_documen['filename']!=""){ if($vendor_documen['current_status'] == ST_REJECTED){ ?> 
-                                             <i class="fa fa-times text-danger"></i> 
-                                           <?php }elseif($vendor_documen['current_status'] == ST_APPROVED){ ?>  
+                                            <?php if($vendor_documen['filename']!=""){ if($vendor_documen['current_status'] == ST_REJECTED){ ?>
+                                             <i class="fa fa-times text-danger"></i>
+                                           <?php }elseif($vendor_documen['current_status'] == ST_APPROVED){ ?>
                                              <i class="fa fa-thumbs-up"></i>
                                            <?php }else{  ?>
                                              <i class="fa fa-hourglass-half"></i>
@@ -1286,16 +1286,16 @@ if($register_data['current_status'] !=""){
                                         </select>
                                       </div>
                                       <?php if($vendor_documen['current_status'] != ST_APPROVED){ ?>
-                                       <div class="d-flex font-weight-bold">   
+                                       <div class="d-flex font-weight-bold">
                                         <div class="image-input image-input-empty image-input-outline mr-10" id="kt_image_5"  style=" height:0px; ">
                                           <label class="btn-hover-text-primary  <?php //echo $value['document_shared']!=""?"mt-3":"mt-1"; ?>" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
                                             <i class="ti-clip" style="font-size: 20px;"></i>
-                                            <input type="file" class="custom-file-input" id="customFile" name="fileToUpload[]"  onchange="checkFileSelect(event,'<?php echo $dockey; ?>')"/ title="Filetoupload" aria-label="Filetoupload">			
+                                            <input type="file" class="custom-file-input" id="customFile" name="fileToUpload[]"  onchange="checkFileSelect(event,'<?php echo $dockey; ?>')"/ title="Filetoupload" aria-label="Filetoupload">
                                             <input type="hidden" name="hidden_fileToUpload[]" value="<?php echo $vendor_documen['filename']; ?>">
                                           </label>
                                         </div>
                                       </div>
-                                    <?php } ?>	
+                                    <?php } ?>
                                   </div>
                                   <p class="mb-0 text-right f-10 " id="fileattach_<?php echo $dockey; ?>"></p>
                                 </div>
@@ -1313,7 +1313,7 @@ if($register_data['current_status'] !=""){
 
 
 
-                  <?php } ?>	
+                  <?php } ?>
 
 
 							  <?php /** ?>
@@ -1340,8 +1340,8 @@ if($register_data['current_status'] !=""){
                                         <option value="<?php echo $docltype['id']?>" <?php echo $attach_doccategory[$dockey]==$docltype['id'] ? 'selected':'' ?>><?php echo $docltype['document_type']; ?></option>
                                       <?php } ?>
                                     </select></td>
-                                    <td> 
-                                                    
+                                    <td>
+
                                                     <div class="custom-file">
                                                       <input type="hidden" name="hidden_fileToUpload<?php echo $dockey;?>" value="<?php echo $attach_filename[$dockey]; ?>">
                                                       <input type="file" class="custom-file-input" id="customFile" name="fileToUpload<?php echo $dockey;?>" / title="Input" aria-label="Input">
@@ -1362,7 +1362,7 @@ if($register_data['current_status'] !=""){
 
                                            </div>
                                          </div>
-                                         
+
                                        </fieldset>
 
 
@@ -1407,7 +1407,7 @@ if($register_data['current_status'] !=""){
               </div>
             </div>
           </div>
-          
+
           <!--end::Demo Panel-->
 
           <div class="footer bg-white p-1" id="kt_footer">
@@ -1472,7 +1472,7 @@ if($register_data['current_status'] !=""){
                     </ul>
                     <div class="tab-content tabs card-block ">
                       <div class="tab-pane active custom-scroll" style="height: 550px;" id="home1" role="tabpanel" >
-                        <?php $aci = 0; foreach ($notificationlist as  $value) { 
+                        <?php $aci = 0; foreach ($notificationlist as  $value) {
     if($value['Notification_Type'] == 'ACTION' || $value['Notification_Type'] == 'INFORMATION'){ //print_r($value);
       $option_url = $value['option'];
       $recent_notification = $value;
@@ -1524,7 +1524,7 @@ if($register_data['current_status'] !=""){
 <script type="text/javascript" src="assets/bower_components/jquery/js/jquery.min.js"></script>
 <script type="text/javascript" src="assets/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="assets/bower_components/popper.js/js/popper.min.js"></script>
-<script type="text/javascript" src="assets/bower_components/bootstrap/js/bootstrap.min.js"></script> 
+<script type="text/javascript" src="assets/bower_components/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/pages/waves/js/waves.min.js"></script>
 <!-- jquery slimscroll js -->
 <script type="text/javascript" src="assets/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
@@ -1567,7 +1567,7 @@ if($register_data['current_status'] !=""){
 <!-- Switch component js -->
 <script type="text/javascript" src="assets/bower_components/switchery/js/switchery.min.js"></script>
 <script type="text/javascript" src="assets/bower_components/bootstrap-maxlength/js/bootstrap-maxlength.js"></script>
-<script type="text/javascript" src="assets/pages/advance-elements/swithces.js"></script>     
+<script type="text/javascript" src="assets/pages/advance-elements/swithces.js"></script>
 
 <!------- Genral item work ------------------------------>
 <script> var table_name ='employees';  </script>
@@ -1710,7 +1710,7 @@ if($register_data['current_status'] !=""){
     <script src="assets/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="assets/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="assets/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-    
+
 
 
     <!-- Select 2 js -->

@@ -1,11 +1,11 @@
-<?php 
+<?php
 $_SESSION['apply_js']['multiselest'] = "1";
 ini_set('display_errors' ,0);
 include_once('includes/session.php');
 include_once('dbconfig.php');
 include_once('comm.php');
 if($_GET['setup'] == 'F'){
-   unset($_SESSION['login_details']);         
+   unset($_SESSION['login_details']);
         ?>
     <script type="text/javascript">
         document.onreadystatechange = function(){
@@ -27,13 +27,13 @@ if($_GET['setup'] == 'F'){
                   }
                 });
                setTimeout(function() {window.location.href = 'index.php'; }, 3000);
-            } 
+            }
         }
     </script>
     <?php
 }else{
 
-	$ptapi = API."?mode=getsetupdetails"; 
+	$ptapi = API."?mode=getsetupdetails";
 	$callptapi = callAPI($ptapi);
 	$result = json_decode($callptapi,1);
 	$countries = $result['countries'];
@@ -61,9 +61,9 @@ if($_GET['setup'] == 'F'){
 			$activemodule[$modulelist['module_id']] = $modulelist['module_id'];
 			$setuppa = json_decode($modulelist['setup_pages'],1);
 			if(count((array)$setuppa) !='0'){
-				$seqpageary = array_unique(array_merge($seqpageary,$setuppa));		
+				$seqpageary = array_unique(array_merge($seqpageary,$setuppa));
 			}
-		} 
+		}
 	}
 	sort($seqpageary);
 	$module_setup_linkings =  $result['module_setup_linkings'];
@@ -77,14 +77,14 @@ if($_GET['setup'] == 'F'){
 			$setuppages[$setpage['parent_sequence']][] = $setpage;
 		}
 	}
-	$pagedetail = $setuppages[$seqpageary[0]][0];	
+	$pagedetail = $setuppages[$seqpageary[0]][0];
 	$nextseqstartnumber = $pagedetail['sequence'];
 
 	if($config['id'] !=""){
 	  // header("location:index.php");
 	}
 	//echo "nextseqstartnumber   --  <pre>"; print_r($setup_page_logs); echo "</pre>";
-	$lastsetupnumber = 6;  
+	$lastsetupnumber = 6;
 	$dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/DD/YYYY','DD/MM/YYYY');
 	//$currency_format = array('L'=>'Lakhs (99,99,99,999.99)','M'=>'Million (999,999,999.99)');
 	$currency_format = array('1'=>'Lakhs (0)','1.1'=>'Lakhs (0.0)','1.2'=>'Lakhs (0.00)','1.3'=>'Lakhs (0.000)','1.4'=>'Lakhs (0.0000)','2'=>'Millians (0)','2.1'=>'Millians (0.0)','2.2'=>'Millians (0.00)','2.3'=>'Millians (0.000)','2.4'=>'Millians (0.0000)');
@@ -102,7 +102,7 @@ if(isset($_POST['submit'])){
 		$temp = explode(".", $_FILES["image"]["name"]);
 		$Filename=  "file_".time()."_".uniqid();
 		$newfilename = $Filename.'.' .end($temp);
-		move_uploaded_file($_FILES["image"]["tmp_name"], $File_Uploads_Path.$newfilename); 
+		move_uploaded_file($_FILES["image"]["tmp_name"], $File_Uploads_Path.$newfilename);
 	}
 	$_POST['display_logo'] = $newfilename;
 	$_POST['company_id'] = $_SESSION['company_id'];
@@ -112,7 +112,7 @@ if(isset($_POST['submit'])){
 	$reponse = json_decode($re,1);
 	$response = $reponse['insert_config'];
 	if($response['status'] == 'sucess'){
-		unset($_SESSION['login_details']);         
+		unset($_SESSION['login_details']);
 		?>
 		<script type="text/javascript">
 			document.onreadystatechange = function(){
@@ -134,7 +134,7 @@ if(isset($_POST['submit'])){
 						}
 					});
 					setTimeout(function() {window.location.href = 'index.php'; }, 2000);
-				} 
+				}
 			}
 		</script>
 		<?php
@@ -153,7 +153,7 @@ if(isset($_POST['submit'])){
   	//echo "<pre>"; print_r($res); echo "</pre>";
     //header('Location:index.php?option=COM_VIEW_PROJECT_KANBAN&RID='.$res['project_id']);
 } **//**
-$ptapi = API."?mode=getsetupdetails"; 
+$ptapi = API."?mode=getsetupdetails";
 $callptapi = callAPI($ptapi);
 $result = json_decode($callptapi,1);
 $countries = $result['countries'];
@@ -181,9 +181,9 @@ foreach($modulelists as $modulelist){
 		$activemodule[$modulelist['module_id']] = $modulelist['module_id'];
 		$setuppa = json_decode($modulelist['setup_pages'],1);
 		if(count((array)$setuppa) !='0'){
-			$seqpageary = array_unique(array_merge($seqpageary,$setuppa));		
+			$seqpageary = array_unique(array_merge($seqpageary,$setuppa));
 		}
-	} 
+	}
 }
 //echo "<pre>"; print_r($seqpageary);echo "</pre>";
 
@@ -201,7 +201,7 @@ foreach($setup_pages as $setpage){
 		$setuppages[$setpage['parent_id']][] = $setpage;
 	}
 }
-$pagedetail = $setuppages[$seqpageary[0]][0];	
+$pagedetail = $setuppages[$seqpageary[0]][0];
 $nextseqstartnumber = $pagedetail['sequence'];
 
 if($config['id'] !=""){
@@ -245,7 +245,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 	<link rel="stylesheet" type="text/css" href="assets/pages/data-table/extensions/buttons/css/buttons.dataTables.min.css">
 	<!-- Chartlist chart css -->
 	<link rel="stylesheet" href="assets/bower_components/chartist/css/chartist.css" type="text/css" media="all">
-	<!-- Bootstrap date-time-picker js -->	
+	<!-- Bootstrap date-time-picker js -->
 	<link rel="stylesheet" type="text/css" href="assets/pages/advance-elements/css/bootstrap-datetimepicker.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/date-jquery-ui.css">
 	<!-- Date-range picker css  -->
@@ -265,10 +265,10 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 	<link rel="stylesheet" type="text/css" href="assets/bower_components/switchery/css/switchery.min.css">
 	<!-- Tags js -->
 	<link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap-tagsinput/css/bootstrap-tagsinput.css" />
-	<!-- Style.css -->	
+	<!-- Style.css -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/component.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/pages.css">	
+	<link rel="stylesheet" type="text/css" href="assets/css/pages.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/custom.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/custom_mobile.css">
 	<link rel="stylesheet" href="assets/bower_components/chartist/css/chartist.css" type="text/css" media="all">
@@ -281,17 +281,17 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 </head>
 <style type="text/css">
 	.tags_add .bootstrap-tagsinput{ width: 100%; }
-	.heightcss{ max-height: 110px;min-height: 110px; } 
-	.footer_btn{ 
+	.heightcss{ max-height: 110px;min-height: 110px; }
+	.footer_btn{
 		position: fixed;
 		left: 0;
 		bottom: 0px;
 		padding: 15px;
 		width: 100%;
 		background-color: white;
-		text-align: center; 
+		text-align: center;
 		z-index: 1;
-	}  
+	}
 	body{background-color: transparent; background-image: none;}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
@@ -299,7 +299,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 	function nextsetupview(page,submit_field=""){
 		/**if(submit_field !=""){
 			$(".field_validate_"+submit_field).each(function() {
-			    
+
 			     console.log($(this).val());
 			    var id = $(this).attr('id');
 			    console.log(id);
@@ -311,7 +311,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 			     	//$('#'+id).next('.error-message').text(' ');
 			     }
 			});
-			
+
 		}else{
 			$(".setuphide").hide('slow');
 			$("#setup"+page).show('slow');
@@ -326,16 +326,16 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 			success: function(response) {
 				console.log(response);
 				//$("#getstate").html(response);
-			} 
+			}
 		}); **/
-	$("#ajaxloaderdiv").show();	
+	$("#ajaxloaderdiv").show();
 	if(submit_field !=""){
 		var formData = new FormData();
-	    formData.append("page", "submitsetup"); 
+	    formData.append("page", "submitsetup");
 	    var dataArray = $("#submit_form_id_"+submit_field).serializeArray(),
 	    dataObj = {};
 	    $(dataArray).each(function(i, field){
-	      formData.append(field.name, field.value); 
+	      formData.append(field.name, field.value);
 	    });
 	    formData.append('company_id', '<?php echo $companies['id']; ?>');
 	    formData.append('config_id', '<?php echo $config['id']; ?>');
@@ -362,7 +362,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
     				$(".setuphide").hide('slow');
 					$("#setup"+page).show('slow');
 					selectModule('','',page);
-				}else{ 	
+				}else{
 					window.location.href = "setup.php?setup=F";
 				}
             },
@@ -373,8 +373,8 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 		$(".setuphide").hide('slow');
 		$("#setup"+page).show('slow');
 		$("#ajaxloaderdiv").hide('slow','linear');
-	} 
-	
+	}
+
 		//$(".setuphide").hide('slow');
 		//$("#setup"+page).show('slow');
 	}
@@ -401,7 +401,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 			success: function(response) {
 				console.log(response);
 				$("#getstate").html(response);
-			} 
+			}
 		});
 		var html ="";
 		console.log(timezone);
@@ -419,7 +419,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 			success: function(response) {
 				console.log(response);
 				$("#getcity").html(response);
-			} 
+			}
 		});
 	}
 	function selectModule(module_id ='', type ='', nextpageseq=''){
@@ -454,7 +454,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 				$("#modulesubmitbtn").attr("onclick","nextsetupview("+res.nextseqstartnumber+",6)");
 				$(".js-example-basic-single").select2();
         		$(".js-example-basic-multiple").select2();
-        		$("#ajaxloaderdiv").hide('slow','linear');	
+        		$("#ajaxloaderdiv").hide('slow','linear');
 				//tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',msg,'');
 			}
 		});
@@ -479,8 +479,8 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 		}
 	}
 	function closeModuleSelection(){
-		$(".custom-popup-open").hide('slow');	
-		$(".custom-popup-open").html('');	
+		$(".custom-popup-open").hide('slow');
+		$(".custom-popup-open").html('');
 	}
 	function removeOrganizationSetup(idd){
 		$("#"+idd).remove();
@@ -530,7 +530,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 			<div class="alert alert-danger background-danger alert-dismissible">
 				<strong><?php echo $error_message; ?></strong>
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>  
+			</div>
 		<?php } ?>
 		<div id="ajaxloaderdiv">
 			<div class="loaderajax"></div>
@@ -539,13 +539,13 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 			<a href="index.php?option=COM_LOGOUT"><span class="f-18 m-r-50 m-t-15 text-danger">
 			<i class="fa fa-power-off "></i> Log Out </span></a>
 		</div>
-	
+
 		<!-- Pre- setup1  Start-->
 		<div id="setup1" class="setuphide" <?php echo ($lastsetup_page_id == '1' || $lastsetup_page_id == '')?'':'style="display:none;"'; ?>>
 			<div class="row align-items-center">
 				<div class="col-lg-6 bg-white" style="">
 					<div class="center-sec" style="">
-						<div class="" style="vertical-align: middle;align-items: center;"> 
+						<div class="" style="vertical-align: middle;align-items: center;">
 							<div class="p-5">
 								<h2 class="f-w-600">Welcome to Infistaq</h2>
 								<p class="f-w-500 mt-4">
@@ -565,7 +565,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 				<div class="col-lg-6 text-center position-relative">
 					<div class="top-logo p-2">
 						<a href="">
-							<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+							<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">
 						</a>
 					</div>
 					<div class="text-position text-start">
@@ -610,7 +610,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 											<?php foreach((array)$industrylist as $valueindustry) { ?>
 												<option value="<?php echo $valueindustry['id'];?>" <?php echo $config['industry'] == $valueindustry['id']?"selected":""; ?>><?php echo $valueindustry['industries']; ?></option>
 											<?php } ?>
-										</select> 
+										</select>
 									</div>
 								</div>
 								<div class="col-lg-6 text-center">
@@ -639,7 +639,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 					<div class="col-lg-6 text-center position-relative">
 						<div class="top-logo p-2">
 							<a href="">
-								<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+								<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">
 							</a>
 						</div>
 						<div class="text-position text-start" >
@@ -682,9 +682,9 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 									<label for="setup_country" class="form-label d-block">Country</label>
 									<select id="setup_country" name="country" class="form-control form-select js-example-basic-single" onchange="selectCounty(this.value)" value="<?php echo $config['display_logo'] ;  ?>">
 										<option value="">Select Any One</option>
-										<?php 
+										<?php
 										$timezone = "";
-										foreach((array)$countries as $countr) { 
+										foreach((array)$countries as $countr) {
 											if($companies['country'] ==$countr['id']){
 												$timezone = $countr['time_zones'];
 											}
@@ -724,10 +724,10 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 text-center position-relative"> 
+					<div class="col-lg-6 text-center position-relative">
 						<div class="top-logo p-2">
 							<a href="">
-								<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+								<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">
 							</a>
 						</div>
 						<div class="text-position text-start">
@@ -779,10 +779,10 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 text-center position-relative"> 
+					<div class="col-lg-6 text-center position-relative">
 						<div class="top-logo p-2">
 							<a href="">
-								<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+								<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">
 							</a>
 						</div>
 						<div class="text-position text-start">
@@ -832,7 +832,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 										<?php } ?>
 									</select>
 								</div>
-								<div class="form-group col-lg-6"> 
+								<div class="form-group col-lg-6">
 									<label class="form-label">Default Currency</label>
 									<select name="default_currency_id" class="form-control form-select js-example-basic-single" >
 										<option value="">Select Any One</option>
@@ -841,7 +841,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 										<?php } ?>
 									</select>
 								</div>
-								<div class="form-group col-lg-6"> 
+								<div class="form-group col-lg-6">
 									<label class="form-label">Currency Format</label>
 									<select name="currency_formate" class="form-control form-select js-example-basic-single" >
 										<option value="">Select Any One</option>
@@ -860,10 +860,10 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 text-center position-relative"> 
+					<div class="col-lg-6 text-center position-relative">
 						<div class="top-logo p-2">
 							<a href="">
-								<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+								<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">
 							</a>
 						</div>
 						<div class="text-position text-start">
@@ -885,18 +885,18 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 						<div class="m-20">
 							<h3 class="f-w-600 mb-5">Modul Setup</h3>
 							<div class="row custom-scroll" style="max-height: 500px;">
-								<?php 
+								<?php
 								$minoneactive = 1; // not active
-								foreach((array)$allmodule as $modul){ 
+								foreach((array)$allmodule as $modul){
 									if($modul['linking'] == 1){
-										$childModul = "N"; 
-										if(isset($linkingmodules[$modul['module_id']])){ 
+										$childModul = "N";
+										if(isset($linkingmodules[$modul['module_id']])){
 											$childModul = "Y";
 										}
 										if(isset($activemodule[$modul['module_id']])){
 											$minoneactive = 0; // active
 										}
-										
+
 										?>
 									<div class="col-lg-4 position-relative" >
 										<div class="card social-card">
@@ -917,7 +917,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 										</div>
 										<div class="custom-popup-open custom-popup-slide-<?php echo $modul['module_id']; ?> text-start" style="left:227px; top:0px; display: none; z-index: 999; width : 600px;">
 										</div>
-									</div>	
+									</div>
 								<?php }  } ?>
 							</div>
 							<form id="submit_form_id_6" enctype='multipart/form-data'>
@@ -925,15 +925,15 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 							</form>
 							<div class="footer_btn">
 								<button type="button"  class="btn btn-success m-r-50" onclick="nextsetupview('5')"><i class="ti-arrow-left"></i> Previous Step</button>
-								
+
 								<button type="button" id="modulesubmitbtn"  class="btn btn-primary" onclick="nextsetupview('<?php echo $nextseqstartnumber; ?>','6')" <?php echo $minoneactive !=0?"style='display:none'":"";?>><i class="ti-arrow-right"></i>  Next Step</button>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 text-center position-relative"> 
+					<div class="col-lg-6 text-center position-relative">
 						<div class="top-logo p-2">
 							<a href="">
-								<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+								<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">
 							</a>
 						</div>
 						<div class="text-position text-start">
@@ -948,13 +948,13 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 			</div>
 		</div>
 		<div id="nextpageadded">
-		<?php 
+		<?php
 			/**
 
 			$previousseqnumber = "6";
 			$nextpagesqeq = "0";
 			foreach($setuppage as $key=>$spage){
-				//echo "setups/".$spage['page_name'].".php"; 
+				//echo "setups/".$spage['page_name'].".php";
 				$nextpagesqeq++;
 				$nextseqstartnumber = $setuppage[$nextpagesqeq]['seq'][0];
 				include_once("setups/".$spage['page_name'].".php");
@@ -974,7 +974,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 				include_once("setups/".$pagedetail[0]['page_name'].".php");
 				$previousarray = end($pagedetail);
 				$previousseqnumber = $previousarray['sequence'];
-			}  /**/ 
+			}  /**/
 		?>
 		</div>
 		<?php ///include_once("setups/product_and_service_setup.php"); ?>

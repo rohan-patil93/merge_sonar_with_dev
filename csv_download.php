@@ -1,17 +1,17 @@
 <?php
 
 include_once('includes/session.php');
-//print_r($_SESSION); exit;	
+//print_r($_SESSION); exit;
 include_once('dbconfig.php');
 include_once('comm.php');
-$table = $_GET['table']; 
+$table = $_GET['table'];
 $array = array();
 if($_GET['DISPLAY_ATTRIBUTE']!=""){
 	//echo "Ravi";exit;
 	$pageurl = API."?mode=displayattributesview&fid=application_table_name&view=".$table;
 	$page_response = callAPI($pageurl);
 	$list = json_decode($page_response,1);
-	$lists = json_decode($list['list_attributes'],1); 
+	$lists = json_decode($list['list_attributes'],1);
 	foreach ($lists as  $key=>$value) {
 		if($value['insert_display_list']== 1 ){
 			$array[]  = $key;
@@ -22,13 +22,13 @@ if($_GET['DISPLAY_ATTRIBUTE']!=""){
 	//echo "Shankar"; exit;
 	$no_array = array('id','company_id','current_status','status_date','from_date','to_date','created_date','created_by','updated_by','updated_date');
 
-	if($table != "salary_template"){	
+	if($table != "salary_template"){
 		if($table=='earnings' || $table=='deductions'){
 			$array[] = 'Employee Number';
 		}
 		$vdata1["where"] = array('is_active'=> '0');
 		$vdata = urlencode(json_encode($vdata1));
-		$vurl = API."?mode=listofTableFieldsonly&table=".$table; 
+		$vurl = API."?mode=listofTableFieldsonly&table=".$table;
     //echo $vurl; exit;
 		$configesponse = callAPI($vurl);
 		$array = json_decode($configesponse,1);
