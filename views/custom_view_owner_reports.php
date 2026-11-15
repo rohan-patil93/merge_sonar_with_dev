@@ -35,7 +35,7 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 	        <div class="col-lg-2">
 	            <div class="form-group w-full table-card-header">
 	                <label class="form-label "><?= __('Owner List'); ?><span class="text-danger">*</span></label>
-					<select name="property_owner_id" class="form-control form-select js-example-basic-single" >
+					<select aria-label="<?= htmlspecialchars(__('Property owner id'), ENT_QUOTES, 'UTF-8'); ?>" name="property_owner_id" class="form-control form-select js-example-basic-single" >
 						<option value=""><?= __('Select Any One'); ?> </option>
 						<?php foreach($property_owners_all as $po){ ?>
 							<option value="<?php echo $po['id']; ?>" <?php echo $po['id'] == $_POST['property_owner_id']?"selected":""; ?>><?php echo $po['owner_name']; ?></option>
