@@ -12,7 +12,7 @@ $wesudata = json_decode($wesudata,1);
     <h5><?= __('Labour Welfare Fund'); ?></h5>
 
     <div class="card-header-right">
-               <a href="#" onclick="dynamicinsertpopup('COM_INSERT_LABOUR_WELFARE_FUND')" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"> <i class="la la-plus"></i><?= __('Labour Welfare Fund'); ?></a>
+               <a href="#top" onclick="dynamicinsertpopup('COM_INSERT_LABOUR_WELFARE_FUND')" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"> <i class="la la-plus"></i><?= __('Labour Welfare Fund'); ?></a>
     </div>
 </div>
 
