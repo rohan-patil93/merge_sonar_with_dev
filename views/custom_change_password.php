@@ -82,21 +82,21 @@
                 <div class="m-b-20 ">
 
                     <div class="row">
-                        <label class="form-label col-sm-4 col-lg-4 col-form-label"><?= __('Old Password') ?></label>
+                        <span class="form-label col-sm-4 col-lg-4 col-form-label d-inline-block fw-bold"><?= __('Old Password') ?></span>
                         <div class="col-sm-8 col-lg-8">
                             <input type="Password" name="old_password" id="old_password" class="form-control " aria-label="<?= __('Old Password') ?>">
                             <span class="f-12 text-danger old_password"></span>
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <label class="form-label col-sm-4 col-lg-4 col-form-label"><?= __('New Password') ?></label>
+                        <span class="form-label col-sm-4 col-lg-4 col-form-label d-inline-block fw-bold"><?= __('New Password') ?></span>
                         <div class="col-sm-8 col-lg-8">
                             <input type="Password" name="new_password"  id="new_password"  class="form-control " aria-label="<?= __('New Password') ?>">
                             <span class="f-12 text-danger new_password"></span>
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <label class="form-label col-sm-4 col-lg-4 col-form-label"><?= __('Confirm Password') ?></label>
+                        <span class="form-label col-sm-4 col-lg-4 col-form-label d-inline-block fw-bold"><?= __('Confirm Password') ?></span>
                         <div class="col-sm-8 col-lg-8">
 
                             <input type="Password" name="confirm_password" id="confirm_password" class="form-control" aria-label="<?= __('Confirm Password') ?>">
