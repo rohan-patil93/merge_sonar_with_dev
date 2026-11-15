@@ -1,8 +1,8 @@
 <?php 
 if($_GET['ajaxcall'] =='Y'){
-	include('../includes/session.php');
-	include('../dbconfig.php');
-	include('../comm.php');
+	include_once('../includes/session.php');
+	include_once('../dbconfig.php');
+	include_once('../comm.php');
 	$dyncss = 'style="pointer-events: none; opacity: 0.6;"';
 }
 $_SESSION['apply_js']['multiselest'] = "1";
