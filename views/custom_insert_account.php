@@ -1383,7 +1383,7 @@ function calculateTotal(){
                 <div id="collapseTwo6" class="collapse" aria-labelledby="headingTwo6" data-parent="#accordionExample6">
                     <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Name'); ?></label>
+                                <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Name'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                   <input readonly class="form-control"  type='text' id="party_name" name="party_name"    value="<?php echo $table1['party_name']; ?>" / aria-label="Party Name">
                                 </div>
@@ -1437,7 +1437,7 @@ function calculateTotal(){
                 <div id="collapseTax" class="collapse" aria-labelledby="headingTax" data-parent="#accordionTax">
                     <div class="card-body">                                 
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12"><?php echo __('Tax Number'); ?></label>
+                                <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Tax Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <input type='text' id="party_tax_number" name="party_tax_number" class="form-control" readonly value="<?php echo $table1['party_tax_number']; ?>" / aria-label="Party Tax Number">
                                 </div>
