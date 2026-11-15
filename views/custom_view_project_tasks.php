@@ -378,7 +378,7 @@ foreach ($ticketHistories as $ticket) {
                                                                 <li>
                                                                     <hr class="dropdown-divider">
                                                                 </li>
-                                                                <li><a class="dropdown-item" href="#" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
+                                                                <li><a class="dropdown-item" href="#top" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
                                                                         onclick="editTicket('<?= $ticketId ?>')"><?= __('Edit'); ?></a></li>
                                                                 <li><a class="dropdown-item" href="<?= $url ?>"
                                                                         target="_blank"><?= __('View'); ?></a></li>
@@ -526,7 +526,7 @@ foreach ($ticketHistories as $ticket) {
                                                                 </a>
                                                             <?php endif; ?>
                                                             <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" href="#" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
+                                                            <a class="dropdown-item" href="#top" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
                                                                 onclick="editTicket('<?= $ticketId ?>')"><?= __('Edit'); ?></a>
                                                             <a class="dropdown-item" href="<?= $url ?>" target="_blank"><?= __('View'); ?></a>
                                                         </div>
