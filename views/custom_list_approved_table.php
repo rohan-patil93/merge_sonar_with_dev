@@ -239,11 +239,11 @@ $get_option = $_REQUEST['option'];
 					</div> -->
 				<?php /** ?>	
 					<div class="col-lg-2">
-						<label class="form-label">Start Date <span class="text-danger">*</span></label>
+						<span class="form-label d-inline-block fw-bold">Start Date <span class="text-danger">*</span></span>
 						<input type="text" class="form-control datepicker" name="from" placeholder="From" data-col-index="5" value="<?php echo $ress['from']; ?>" required/ aria-label="From">
 					</div>
 					<div class="col-lg-2">
-						<label class="form-label">End Date <span class="text-danger">*</span></label>
+						<span class="form-label d-inline-block fw-bold">End Date <span class="text-danger">*</span></span>
 						<input type="text" class="form-control datepicker" name="to" placeholder="To" data-col-index="5" value="<?php echo $ress['to']; ?>" required="" / aria-label="To">
 					</div> 
 <?php **/ ?>
