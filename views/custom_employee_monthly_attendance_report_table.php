@@ -292,7 +292,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                             
                             </td>
                             <td style="width:150px">
-                                <select style="width:150px" class="form-select"
+                                <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" style="width:150px" class="form-select"
                                         data-rid="<?= $timesheet_id ?>"
                                         data-emp-id="<?= $employee_id ?>"
                                         data-date="<?= $date ?>"
