@@ -92,7 +92,7 @@ function formsubmit(){
                 }
                 ?>
                 <b> <div class="<?php echo $option_cat;?>-group required float-left ml-2">
-                  <input type="<?php echo $option_cat;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"  <?php echo in_array($option,(array)$selectedoption )==1 ?  'Checked': '';?> >
+                  <input aria-label="<?= htmlspecialchars(__('Response option'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php echo $option_cat;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"  <?php echo in_array($option,(array)$selectedoption )==1 ?  'Checked': '';?> >
                   <label for="q1"><?php echo __($option); ?> </label> </div>
                 </b>
               <?php }
@@ -101,7 +101,7 @@ function formsubmit(){
               ?>
 
               <label class=""><?= __('Scale from 1 to:') ?> <?php echo $option;?></label>
-              <input type="number"  class="form-control col-md-5" value=<?php echo $selectedoption;?> >
+              <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="number"  class="form-control col-md-5" value=<?php echo $selectedoption;?> >
               <?php             
             }else if($display_questions[$questionid]['options_display_type']==4){
              //$selectedoption =$answer[$questionid];
