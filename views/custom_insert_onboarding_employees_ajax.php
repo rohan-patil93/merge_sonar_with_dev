@@ -1,9 +1,9 @@
 <?php
 if($_POST['ajaxcallemployee'] =="Y"){
 	$employee_id = $_POST['employee_id'];
-	include('../includes/session.php');
-	include('../dbconfig.php');
-	include('../comm.php');
+	include_once('../includes/session.php');
+	include_once('../dbconfig.php');
+	include_once('../comm.php');
 	$url = API."?mode=getemployees&employee_id=".$employee_id."&working_role_short_code=".$_SESSION['working_role_short_code']; 
 	$response = callAPI($url);
 	$result = json_decode($response,1);
