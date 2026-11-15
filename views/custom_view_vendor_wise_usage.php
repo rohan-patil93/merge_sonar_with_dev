@@ -68,7 +68,7 @@
                                           <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="to_date" value="<?php echo $to_cur_year."-".$to_cur_month?>"  id="att_month_year_2" />
                                     </div>
                                     <div class="col-lg-3">
-                                        <a href="#" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Filter'); ?></a>
+                                        <a href="#top" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Filter'); ?></a>
                                     </div>
                                     <div class="col-lg-2">
                                         <input type="hidden" id="filterby" name="filterby">
