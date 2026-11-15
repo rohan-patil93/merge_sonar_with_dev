@@ -192,7 +192,7 @@ function averagearray($ave){
                      foreach( $exp[$venkey] as $expvven){
                          if(!in_array($expvven['item_price'],$viewarray)){
                      ?>
-                    <a href="#" class="text-primary" onclick="showdetails(<?php echo $expvven['transaction_id'].",".$expvven['job_title_id'].",".$expvven['min_exp'].",".$expvven['max_exp'].",".$expvven['vendor_id'].",".$expvven['item_price']; ?>)">
+                    <a href="#top" class="text-primary" onclick="showdetails(<?php echo $expvven['transaction_id'].",".$expvven['job_title_id'].",".$expvven['min_exp'].",".$expvven['max_exp'].",".$expvven['vendor_id'].",".$expvven['item_price']; ?>)">
                      <?php echo customeummarmonyformate($expvven['item_price']);
                         $viewaallrray[]="(".$expvven['item_price'].")"; ?>
                    </a></br>
