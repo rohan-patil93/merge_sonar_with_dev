@@ -90,7 +90,7 @@ foreach ($qustion_types as $qtype) {
                     }
                     ?>
                     <b> <div class="<?php echo $option_cat;?>-group required float-left ml-2">
-                      <input type="<?php echo $option_cat;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"  <?php echo ($option==$selectedoption )==1 ?  'Checked': '';?> >
+                      <input aria-label="<?= htmlspecialchars(__('Response option'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php echo $option_cat;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"  <?php echo ($option==$selectedoption )==1 ?  'Checked': '';?> >
                       <label for="q1"><?= htmlspecialchars(__($option ?? '')) ?> </label> </div>
                     </b>
                   <?php }
