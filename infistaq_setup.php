@@ -5,7 +5,7 @@ include_once 'includes/session.php';
 include_once 'dbconfig.php';
 include_once 'comm.php';
 
-if(isset($_SESSION['sbt_message']) and $_SESSION['sbt_message'] == 1){ ?>
+if(isset($_SESSION['sbt_message']) && $_SESSION['sbt_message'] == 1){ ?>
     <script type="text/javascript">
       document.onreadystatechange = function () {
         if (document.readyState == "complete") {

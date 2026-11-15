@@ -319,7 +319,7 @@ $dis_error['6007']  = "The Captcha code does not match!";
     $pageid  = LOGIN_PAGE_ID;
   }
     //echo LOGIN_ARRAY[$pageid];
-    if(isset(LOGIN_ARRAY[$pageid]) and LOGIN_ARRAY[$pageid] !=""){
+    if(isset(LOGIN_ARRAY[$pageid]) && LOGIN_ARRAY[$pageid] !=""){
         include_once LOGIN_ARRAY[$pageid];
     }else{
         include_once "common_login.php";
