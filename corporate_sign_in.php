@@ -155,7 +155,7 @@
             </div>
 
             <div class="" style="bottom: 10px; left: 20px; right: 20px;">
-                <b class="f-w-600 f-13">For any issues (login credentials, registration, technical assistance, etc.) in accessing the portal <span class="text-primary cursor-pointer"  onclick="loginemailpopup()" >click here</span></b>
+                <b class="f-w-600 f-13">For any issues (login credentials, registration, technical assistance, etc.) in accessing the portal <span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="text-primary cursor-pointer"  onclick="loginemailpopup()" >click here</span></b>
             </div>
         </div>
         <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 text-center desktop-view-bg">
@@ -180,11 +180,11 @@
                     </ul>
                     <b class="f-w-600 text-start d-block mt-3">Forgot Password?</b>
                     <ul class="text-start mt-2 login-ul m-l-10" style="list-style: disc; list-style-position: inside;">
-                        <li class="">Click here to reset your password: <span class="text-primary f-w-600 cursor-pointer" onclick="fergotpassworddisplay()">Forgot Password</span></li>
+                        <li class="">Click here to reset your password: <span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="text-primary f-w-600 cursor-pointer" onclick="fergotpassworddisplay()">Forgot Password</span></li>
                     </ul>
                     <b class="f-w-600 text-start d-block mt-3">New Vendor Registration</b>
                     <ul class="text-start mt-2 m-l-10" style="list-style: disc; list-style-position: inside;">
-                        <li class="">If you are a new vendor seeking to establish a business relationship with us, please <span class="text-primary cursor-pointer"  onclick="loginemailpopup()" >click here</span></li>
+                        <li class="">If you are a new vendor seeking to establish a business relationship with us, please <span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="text-primary cursor-pointer"  onclick="loginemailpopup()" >click here</span></li>
                     </ul>
                     <b class="f-w-600 text-start d-block mt-3">For Your Security</b> 
                     <p class="text-start mt-2 mb-2">We prioritize the security of your account information. Please be mindful of the following:</p>
