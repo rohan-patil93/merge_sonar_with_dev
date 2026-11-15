@@ -333,7 +333,7 @@
 																<tbody>
 																	<tr>
 																		<td>
-																			<label class="kt-checkbox kt-checkbox--single">
+																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single">
 																				<input type="checkbox"><span></span>
 																			</label>
 																		</td>
@@ -353,7 +353,7 @@
 																	</tr>
 																	<tr>
 																		<td>
-																			<label class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
+																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
 																		</td>
 																		<td>
 																			<a href="#" class="kt-widget11__title">Selto</a>
@@ -371,7 +371,7 @@
 																	</tr>
 																	<tr>
 																		<td>
-																			<label class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
+																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
 																		</td>
 																		<td>
 																			<a href="#" class="kt-widget11__title">Jippo</a>
@@ -389,7 +389,7 @@
 																	</tr>
 																	<tr>
 																		<td>
-																			<label class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
+																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
 																		</td>
 																		<td>
 																			<a href="#" class="kt-widget11__title">Verto</a>
@@ -437,7 +437,7 @@
 																<tbody>
 																	<tr>
 																		<td>
-																			<label class="kt-checkbox kt-checkbox--single">
+																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single">
 																				<input type="checkbox"><span></span>
 																			</label>
 																		</td>
@@ -452,7 +452,7 @@
 																	</tr>
 																	<tr>
 																		<td>
-																			<label class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
+																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
 																		</td>
 																		<td>
 																			<span class="kt-widget11__title">Selto</span>
@@ -465,7 +465,7 @@
 																	</tr>
 																	<tr>
 																		<td>
-																			<label class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
+																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
 																		</td>
 																		<td>
 																			<span class="kt-widget11__title">Jippo</span>
@@ -478,7 +478,7 @@
 																	</tr>
 																	<tr>
 																		<td>
-																			<label class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
+																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
 																		</td>
 																		<td>
 																			<span class="kt-widget11__title">Verto</span>
