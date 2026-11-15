@@ -697,7 +697,7 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 					<div class="form-group col-lg-6" <?php echo $un_lockdyncss; ?>>
 						<label class="form-label "><?php echo __('Property Owner Name'); ?> <span class="text-danger">*</span></label>
 						<span class="d-block error-message text-danger"></span>
-						<select name="property_owner_id" id="property_owner_id" class="form-control form-select js-example-basic-single requried_field" onchange="getPropertyOwner(this.value)">
+						<select aria-label="<?= htmlspecialchars(__('Property owner id'), ENT_QUOTES, 'UTF-8'); ?>" name="property_owner_id" id="property_owner_id" class="form-control form-select js-example-basic-single requried_field" onchange="getPropertyOwner(this.value)">
 							<option value=""><?php echo __('Select Any One'); ?> </option>
 							<?php foreach($property_owners as $coa) {  ?>
 								<option value="<?php echo $coa['id']; ?>" <?php echo $property_tenant_details['property_owner_id'] ==$coa['id']?"selected":""; ?>><?php echo $coa['owner_name'];?></option>
@@ -707,7 +707,7 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 					<div class="form-group col-lg-6" <?php echo $un_lockdyncss; ?>>
 						<label class="form-label "><?php echo __('Property'); ?> <span class="text-danger">*</span></label>
 						<span class="d-block error-message text-danger"></span>
-						<select name="property_owner_detail_id" class="form-control form-select js-example-basic-single requried_field" id="property_owner_detail_id" onchange="getPropertyOwnerDetail(this.value)" >
+						<select aria-label="<?= htmlspecialchars(__('Property owner detail id'), ENT_QUOTES, 'UTF-8'); ?>" name="property_owner_detail_id" class="form-control form-select js-example-basic-single requried_field" id="property_owner_detail_id" onchange="getPropertyOwnerDetail(this.value)" >
 							<option value=""><?php echo __('Select Any One'); ?> </option>
 							<?php foreach($property_owner_details as $pod) {  ?>
 								<option value="<?php echo $pod['id']; ?>" <?php echo $property_tenant_details['property_owner_detail_id'] ==$pod['id']?"selected":""; ?>><?php echo $pod['property_name'];?></option>
