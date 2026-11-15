@@ -54,14 +54,14 @@ foreach($disvalue as  $fullvalue){
 	?>
 	<?php if($fullvalue['type'] == 'text' || $fullvalue['type'] == 'read_only' ){ $read_only=""; if($fullvalue['type'] == 'read_only'){ $read_only= "readonly"; }?>
 	<div class="<?php echo $class; ?>">
-		<label class=""><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
+		<span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></span>
 		<input class="form-control"  type="text" <?php echo $read_only; ?>  id="<?php echo $key; ?>"  name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>">
 		<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please enter') ?> <?php echo __($value); ?> </div> 
 	</div>
 	<?php } else  if($fullvalue['type'] == 'serial_no'){ $read_only= "readonly"; ?>
 <?php if( $role[$key] =="") { $role[$key] = dyanamicserialnumber($table_name); } ?>
 	<div class="<?php echo $class; ?>">
-		<label class=""><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
+		<span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></span>
 		<div class="input-group input-icon-right">
 			<input class="form-control"  type="text" <?php echo $read_only; ?> id="<?php echo $key; ?>" name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>">
 			<div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
@@ -82,7 +82,7 @@ if($key == "hsn_and_sac_code_id"){
 }
 ?>
 		<div class="<?php echo $class; ?>">
-		<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
+		<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></span>
 		<select class="form-select js-example-basic-single" id="<?php echo $key; ?>" <?php echo $read_only; ?> name="<?php echo $key; ?>" <?php if($attribute_types_list['refer_action'] == '0'){ ?>onchange="dyanamicreferFunc(this.value,'<?php echo $attribute_types_list['refer_field']; ?>','<?php echo $attribute_types_list['application_table_name']; ?>')" <?php } ?> <?php echo $dynamicfunction; ?>>
 			<option value="0"> <?= __('Select Any one') ?> <?php echo __($value); ?></option>
 		<?php foreach ($selectdata as $selectkey => $selectvalue) {  ?> 
