@@ -26,7 +26,7 @@
 <tr>
     <td class="p-1" id='other_<?php echo $i; ?>' style="width: 150px;"> 
         <input type="hidden" class="itemRow">
-        <input type="hidden" name="productCode[]" id="productCode_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_id']; ?>" autocomplete="off"> 
+        <input type="hidden" name="productCode[]" id="productCode_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_id']; ?>"> 
         <input type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off" readonly> 
         <textarea  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control mt-2 " autocomplete="off"><?php echo $tab2['description']; ?></textarea>
     </td> 
@@ -39,7 +39,7 @@
 
     <td class="p-1">
         <input type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"  class="form-control amount" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off" readonly> 
-        <input type="hidden" name="quantity_old[]" id="quantity_old_<?php echo $i; ?>"  class="form-control" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off">
+        <input type="hidden" name="quantity_old[]" id="quantity_old_<?php echo $i; ?>"  class="form-control" value="<?php echo $tab2['quantity']; ?>">
     </td> 
     <td class="p-1"><input type="text" name= "uom[]"  id="uom_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['uom']; ?>" autocomplete="off" readonly></td> 
     <td class="p-1">
@@ -65,7 +65,7 @@
         <input type="hidden" name="p_amount[]" value="<?php echo $tab2['item_price']; ?>" readonly class="form-control price amount" id="p_amount_<?php echo $i; ?>">
         
         <input type="text" name="dis_amount[]" readonly <?php echo $sty; ?> id="dis_amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo customeummarmonyformate($taxabled_amount); ?>" autocomplete="off">
-        <input type="hidden" name="amount[]" readonly id="amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo $tab2['item_price']; ?>" autocomplete="off">
+        <input type="hidden" name="amount[]" readonly id="amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo $tab2['item_price']; ?>">
     </div>
     </div>
     <input type="hidden" class="form-control"  value="<?php echo reqDate($tab2['req_date']); ?>"  name="req_date[]"  id="kt_datepicker_3<?php echo $dateid; ?>" />
