@@ -223,16 +223,16 @@ function getDepreciationMethod(){
 			<div class="col-lg-8">  
 				<div class="row">
 					<div class="form-group col-lg-6">
-						<label class="form-label"><?= __('Name') ?><span class="requried text-danger">*</span></label>
+						<span class="form-label d-inline-block fw-bold"><?= __('Name') ?><span class="requried text-danger">*</span></span>
 						<span class="d-block error-message text-danger"></span>
 						<input class="form-control requried_field"  type="text"  id="asset_description" name="asset_description"  value="<?php echo $assetsdeatil['asset_description']; ?>" aria-label="Asset Description">
 					</div> 
 					<div class="form-group col-lg-6">
-						<label class="form-label"><?= __('Code') ?></label>
+						<span class="form-label d-inline-block fw-bold"><?= __('Code') ?></span>
 						<input class="form-control"  type="text"  id="asset_code" name="asset_code"  value="<?php echo $assetsdeatil['asset_code']; ?>" readonly aria-label="Asset Code">
 					</div> 
 					<div class="form-group col-lg-6 w-full">
-						<label class="form-label"><?= __('Category') ?><span class="requried text-danger">*</span></label>
+						<span class="form-label d-inline-block fw-bold"><?= __('Category') ?><span class="requried text-danger">*</span></span>
 						<span class="d-block error-message text-danger"></span>
 						<select  class="form-select js-example-basic-single requried_field" name="category_id" id="asset_category_id" onchange="selectAssetCategory()" aria-label="Category Id">
 							<option value=""><?= __('Select Any One') ?></option>
@@ -242,7 +242,7 @@ function getDepreciationMethod(){
 						</select> 
 					</div> 
 					<div class="form-group col-lg-6 w-full">
-						<label class="form-label"><?= __('Location') ?> <span class="requried text-danger">*</span></label>
+						<span class="form-label d-inline-block fw-bold"><?= __('Location') ?> <span class="requried text-danger">*</span></span>
 						<span class="d-block error-message text-danger"></span>
 						<select  class="form-select js-example-basic-single requried_field" name="asset_location" aria-label="Asset Location">
 							<option value=""><?= __('Select Any One') ?></option>
@@ -252,7 +252,7 @@ function getDepreciationMethod(){
 						</select> 
 					</div> 
 					<div class="form-group col-lg-6 w-full">
-						<label class="form-label"><?= __('Status') ?> <span class="requried text-danger">*</span></label>
+						<span class="form-label d-inline-block fw-bold"><?= __('Status') ?> <span class="requried text-danger">*</span></span>
 						<span class="d-block error-message text-danger"></span>
 						<select  class="form-select js-example-basic-single requried_field" name="status" aria-label="Status">
 							<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>					
@@ -355,7 +355,7 @@ function getDepreciationMethod(){
 								</select> 
 							</div> 
 							<div class="form-group col-lg-6 w-full">
-								<label class="form-label"><?= __('Linked Asset') ?></label>
+								<span class="form-label d-inline-block fw-bold"><?= __('Linked Asset') ?></span>
 								<select  class="form-select js-example-basic-single " name="Parent_asset" aria-label="Parent Asset">
 										<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($assets_list as $assets_list) { ?>					
@@ -364,11 +364,11 @@ function getDepreciationMethod(){
 								</select> 
 							</div>
 							<div class="form-group col-lg-6">
-								<label class="form-label"><?= __('Description') ?></label>
+								<span class="form-label d-inline-block fw-bold"><?= __('Description') ?></span>
 								<textarea type="text" class="form-control" id="long_description" rows="4" cols="50" name="long_description" aria-label="Long Description"><?php echo $assetsdeatil['long_description']; ?></textarea>
 							</div> 
 							<div class="col-lg-6">
-								<label class="form-label"><?= __('Ownership') ?></label>
+								<span class="form-label d-inline-block fw-bold"><?= __('Ownership') ?></span>
 								<div class="form-radio">
 								    <div class="radio radio-inline">
 								      <label class="form-label">
@@ -405,32 +405,32 @@ function getDepreciationMethod(){
 				    <div class="card-body">
 				    	<div class="row">
 		                	<div class="form-group col-lg-6">
-								<label class="form-label"><?= __('PO Number') ?></label>
+								<span class="form-label d-inline-block fw-bold"><?= __('PO Number') ?></span>
 								<input class="form-control"  type="text"  id="po_number" name="po_number"  value="<?php echo $assetsdeatil['po_number']; ?>" aria-label="Po Number">
 							</div>
 							<div class="form-group col-lg-6">
-								<label class="form-label"><?= __('PO Date') ?></label>
+								<span class="form-label d-inline-block fw-bold"><?= __('PO Date') ?></span>
 								<input class="form-control datepicker"  type="text"  id="po_date" name="po_date"  value="<?php echo  $assetsdeatil['po_date']!=""?fromDate($assetsdeatil['po_date']):""; ?>" aria-label="Po Date">
 							</div>
 							<div class="form-group col-lg-6">
-								<label class="form-label"><?= __('Invoice Number') ?></label>
+								<span class="form-label d-inline-block fw-bold"><?= __('Invoice Number') ?></span>
 								<input class="form-control"  type="text"  id="invoice_number" name="invoice_number"  value="<?php echo $assetsdeatil['invoice_number']; ?>" aria-label="Invoice Number">
 							</div>
 							<div class="form-group col-lg-6">
-								<label class="form-label"><?= __('Invoice Date') ?></label>
+								<span class="form-label d-inline-block fw-bold"><?= __('Invoice Date') ?></span>
 								<input class="form-control datepicker"  type="text"  id="Invoice_date" name="Invoice_date" value="<?php echo  $assetsdeatil['Invoice_date']!=""?fromDate($assetsdeatil['Invoice_date']):""; ?>" aria-label="Invoice Date">
 							</div>
 							<div class="form-group col-lg-6">
-								<label class="form-label"><?= __('Purchase Number') ?></label>
+								<span class="form-label d-inline-block fw-bold"><?= __('Purchase Number') ?></span>
 								<input class="form-control "  type="text"  id="purchase_number" name="purchase_number"  value="<?php echo $assetsdeatil['purchase_number']; ?>" aria-label="Purchase Number">
 							</div>
 							<div class="form-group col-lg-6">
-								<label class="form-label"><?= __('Purchase Date') ?> <span class="requried text-danger">*</span></label>
+								<span class="form-label d-inline-block fw-bold"><?= __('Purchase Date') ?> <span class="requried text-danger">*</span></span>
 								<span class="d-block error-message text-danger"></span>
 								<input class="form-control datepicker requried_field"  type="text"  id="purchase_date" name="purchase_date"  value="<?php echo  $assetsdeatil['purchase_date']!=""?fromDate($assetsdeatil['purchase_date']):""; ?>" aria-label="Purchase Date">
 							</div>
 							<div class="form-group col-lg-6 w-full">
-								<label class="form-label "><?= __('Vendor') ?></label>
+								<span class="form-label  d-inline-block fw-bold"><?= __('Vendor') ?></span>
 								<select class="form-select js-example-basic-single " name="vendor" aria-label="Vendor">
 									<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($vendors as $vendors1) { ?>					
@@ -439,7 +439,7 @@ function getDepreciationMethod(){
 								</select> 
 							</div>
 							<div class="form-group col-lg-6">
-								<label class="form-label"><?= __('Purchase Price') ?> <span class="requried text-danger">*</span></label>
+								<span class="form-label d-inline-block fw-bold"><?= __('Purchase Price') ?> <span class="requried text-danger">*</span></span>
 								<span class="d-block error-message text-danger"></span>
 								<input class="form-control text-right requried_field"  type="text"  id="asset_cost" name="asset_cost"  value="<?php echo $assetsdeatil['asset_cost']; ?>" onblur="getscrapPrice()" aria-label="Asset Cost">
 							</div>
@@ -458,19 +458,19 @@ function getDepreciationMethod(){
 							<input class="form-control text-right"  type="text"  id="capitalization_price" name="capitalization_price"  value="<?php //echo $assetsdeatil['capitalization_price']; ?>" onblur="returnDepreciation()" aria-label="Capitalization Price">
 						</div> -->
 						<div class="form-group col-lg-6">
-							<label class="form-label"><?= __('Capitalization Date') ?></label>
+							<span class="form-label d-inline-block fw-bold"><?= __('Capitalization Date') ?></span>
 							<input class="form-control datepicker"  type="text"  id="capitalization_date" name="capitalization_date"  value="<?php echo $assetsdeatil['capitalization_date'] !=""?fromDate($assetsdeatil['capitalization_date']):""; ?>"  onchange="returnDepreciation()" aria-label="Capitalization Date">
 						</div>
 						<div class="form-group col-lg-3">
-							<label class="form-label"><?= __('Scrap Price') ?></label>
+							<span class="form-label d-inline-block fw-bold"><?= __('Scrap Price') ?></span>
 							<input class="form-control text-right"  type="text"  id="disposal_proceeds" name="disposal_proceeds"  value="<?php echo $assetsdeatil['disposal_proceeds']; ?>" onblur="getscrapPrice(this.value)" aria-label="Disposal Proceeds">
 						</div>
 						<div class="form-group col-lg-3">
-							<label class="form-label"><?= __('Book Value') ?></label>
+							<span class="form-label d-inline-block fw-bold"><?= __('Book Value') ?></span>
 							<input class="form-control text-right"  type="text"  id="depn_rate" name="depn_rate"  value="<?php echo $assetsdeatil['depn_rate']; ?>" readonly aria-label="Depn Rate">
 						</div>
 						<div class="form-group col-lg-6 w-full" style="">
-							<label class="form-label"><?= __('Depreciation methods') ?> <span class="requried">*</span></label>
+							<span class="form-label d-inline-block fw-bold"><?= __('Depreciation methods') ?> <span class="requried">*</span></span>
 							<select class="form-select js-example-basic-single " name="depreciation_method"  id="depreciation_method" onchange="getDepreciationMethod()" aria-label="Depreciation Method">
 							<option value=""><?= __('Select Any One') ?></option>
 							<?php foreach($depreciation_method as $dm) { 
@@ -480,11 +480,11 @@ function getDepreciationMethod(){
 							</select> 
 						</div> 
 						<div class="form-group col-lg-3" style="pointer-events:none; opacity:0.7">
-							<label class="form-label"><?= __('Duration') ?></label>
+							<span class="form-label d-inline-block fw-bold"><?= __('Duration') ?></span>
 							<input class="form-control text-right"  type="number"  id="duration" name="duration"  value="<?php echo $assetsdeatil['duration']; ?>" onblur="getDepreciationMethod()" aria-label="Duration">
 						</div>
 						<div class="form-group col-lg-3" style="pointer-events:none; opacity:0.7">
-							<label class="form-label"><?= __('End Of life') ?></label>
+							<span class="form-label d-inline-block fw-bold"><?= __('End Of life') ?></span>
 							<input class="form-control datepicker"  type="text"  id="end_of_life" name="end_of_life"  value="<?php echo  $assetsdeatil['end_of_life']!=""?fromDate($assetsdeatil['end_of_life']):""; ?>" onblur="getDepreciationMethod()" aria-label="End Of Life">
 						</div>
 						<?php /** ?>
@@ -565,7 +565,7 @@ function getDepreciationMethod(){
                 			}
                 		 ?>
                         <div class="form-group col-lg-6">
-							<label><?= __('Manufacturing Date') ?></label>
+							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Manufacturing Date') ?></span>
 							<input class="form-control <?php echo $clss; ?>  fieldname"  type="<?php echo $types; ?>"   name="fieldvalue[]"  value="<?php echo $custom_fields['fieldvalue']; ?>" aria-label="Fieldvalue">
 							<input  type="hidden" class="fieldname"  name="fieldname[]"  value="<?php echo $custom_fields['fieldname']; ?>">
 							<input  type="hidden" class="fieldname"  name="fieldtype[]"  value="<?php echo $custom_fields['fieldtype']; ?>">
@@ -574,12 +574,12 @@ function getDepreciationMethod(){
 				 	</div>
 				 	<div class="row">
 				 		<div class="col-lg-4 form-group">
-					 		<label><?= __('Enter Field Name') ?></label>
+					 		<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Enter Field Name') ?></span>
 					 		<input class="form-control "  type="text"  id="ent_field_name" aria-label="Input">
 							<span class="text-danger" id="fileserrormess"></span>								
 						</div>
 						<div class="col-lg-4 form-group w-full">
-					 		<label><?= __('Type') ?></label>
+					 		<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Type') ?></span>
 							<select  class="form-select js-example-basic-single " id="slct_field_type" aria-label="Select">
 									<option value="text"><?= __('Text') ?></option>
 									<option value="number"><?= __('Number') ?></option>
