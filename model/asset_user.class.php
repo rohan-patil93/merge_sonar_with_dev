@@ -319,6 +319,7 @@ class assetUserClass extends userClass{
 
 		}elseif($get['resultgettype'] =='MULTIPLEASSETUPDATE'){ //Insert Page data
 			
+			$conditionrequest = '';
 			$assetsql = "SELECT id, asset_code, allocation_status,brand, model, serial_no, asset_location, asset_img, asset_description, category_id, asset_status FROM assets WHERE company_id = '".$get['company_id']."' AND id IN(".$get['assetid'].") AND is_active =0".$conditionrequest;
 			$assets=$callConfig->getAllRows($assetsql);
 			$return['assetsql'] = $assetsql;
