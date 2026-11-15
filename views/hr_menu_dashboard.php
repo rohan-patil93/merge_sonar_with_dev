@@ -116,7 +116,7 @@ $key_dis ="employee";
                                                         <i class="<?php echo $step1['icon']; ?> text-white"></i>
                                                     </div>
                                                     <div class="col mt-2">
-                                                        <a href="#" onclick="dynamiclistpopup(<?php echo "'".$step1['url']."'"; ?>)"><h6 class="m-b-5 text-white">
+                                                        <a href="#top" onclick="dynamiclistpopup(<?php echo "'".$step1['url']."'"; ?>)"><h6 class="m-b-5 text-white">
                                                                 <?php echo ucwords(strtolower($step1['name'])); ?>
                                                             </h6></a>
                                                     </div>
