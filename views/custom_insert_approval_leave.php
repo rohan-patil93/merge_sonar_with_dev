@@ -185,7 +185,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 									    <?php }  **/?>	
  <?php if($emps['image'] !=''){ ?>	
    <div class=" m-r-15 text-center">
-      <img src="uploads/all/<?php echo $emps['image']; ?>"   class="img-radius img-50 align-top m-r-15 mt-4" >
+      <img alt="" src="uploads/all/<?php echo $emps['image']; ?>"   class="img-radius img-50 align-top m-r-15 mt-4" >
    </div>
    <?php }else{ ?>
    <span  alt="user image" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($emps['display_name']); ?></span>
