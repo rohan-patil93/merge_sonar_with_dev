@@ -276,7 +276,7 @@
 					<!---- start spacer----->
 					<div class="row align-items-center" id="spacer_data" style="margin-top: 10px;" >
 						<div class="form-group col-lg-3">
-							<label><?= __("Lenth") ?></label>
+							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lenth") ?></span>
 							<select class="form-control" id="width" name= "width" aria-label="Width">
 								<?php for($i=1; $i<13;$i++){ 
 									$view_type = "col-lg-".$i; ?>
@@ -289,7 +289,7 @@
 					<!---- start test----->
 					<div class="row align-items-center" id="text_data" style="margin-top: 10px;display: none;" >
 						<div class="form-group col-lg-3">
-							<label><?= __("Lenth") ?></label>
+							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lenth") ?></span>
 							<select class="form-control" id="width_text" name= "width" aria-label="Width">
 								<?php for($i=1; $i<13;$i++){ 
 									$view_type = "col-lg-".$i; ?>
@@ -298,11 +298,11 @@
 							</select>		 
 						</div>
 						<div class="form-group col-lg-3">
-							<label><?= __("Lable") ?></label>
+							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lable") ?></span>
 							<input class="form-control"  type="text" id="lable" name="lable"  value="" aria-label="Lable">	 
 						</div>
 						<div class="form-group col-lg-6">
-							<label><?= __("Content") ?></label>
+							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Content") ?></span>
 							<textarea class="form-control" id="content" rows="3" aria-label="Textarea"></textarea> 
 						</div>
 					</div>
@@ -310,7 +310,7 @@
 					<!---- start formula----->
 					<div class="row align-items-center" id="static_data" style="margin-top: 10px;display: none;" >
 						<div class="form-group col-lg-3" >
-							<label><?= __("Lenth") ?></label>
+							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lenth") ?></span>
 							<select class="form-control" id="width_static" name= "insert_view_width[]" aria-label="Insert View Width">
 								<?php for($i=1; $i<13;$i++){ 
 									$view_type = "col-lg-".$i; ?>
@@ -319,7 +319,7 @@
 							</select>		 
 						</div>
 						<div class="form-group col-lg-3" >
-							<label><?= __("Lable") ?></label>
+							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lable") ?></span>
 							<input class="form-control"  type="text" id="static_lable" name="lable"  value="" aria-label="Lable">	 
 						</div>
 					
@@ -383,7 +383,7 @@
 					<!---- start Dynamic formula----->
 					<div class="row align-items-center" id="dynamic_data" style="margin-top: 10px;display: none;" >
 						<div class="form-group col-lg-3">
-							<label><?= __("Lenth") ?></label>
+							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lenth") ?></span>
 							<select class="form-control" id="width_dynamic" name= "width" aria-label="Width">
 								<?php for($i=1; $i<13;$i++){ 
 									$view_type = "col-lg-".$i; ?>
@@ -392,7 +392,7 @@
 							</select>		 
 						</div>
 						<div class="form-group col-lg-3">
-							<label><?= __("Lable") ?></label>
+							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lable") ?></span>
 							<input class="form-control"  type="text" id="lable_dynamic" name="lable"  value="" aria-label="Lable">	 
 						</div>
 					
