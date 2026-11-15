@@ -162,7 +162,7 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
                           <div id="dynamiccanceldiv"><span>Cancel Invoice</span></div>
                       <?php } ?>
                       <div class="card-header table-card-header">
-                          <h5 class="">  Utility Invoices <label class="form-label label label-primary" style="color: <?php echo $stausresult[$ri['current_status']]['color']; ?>;    background:  <?php echo $stausresult[$ri['current_status']]['background_color']; ?>; border-color: <?php echo $stausresult[$ri['current_status']]['background_color']; ?>;"><?php echo $stausresult[$ri['current_status']]['name']; ?></label></h5>
+                          <h5 class="">  Utility Invoices <span class="form-label label label-primary d-inline-block fw-bold" style="color: <?php echo $stausresult[$ri['current_status']]['color']; ?>;    background:  <?php echo $stausresult[$ri['current_status']]['background_color']; ?>; border-color: <?php echo $stausresult[$ri['current_status']]['background_color']; ?>;"><?php echo $stausresult[$ri['current_status']]['name']; ?></span></h5>
                           <div class="card-header-right">
                             <i role="button" tabindex="0" aria-label="Print" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-printer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Print" onclick="goToAnotherPageAndPrint('<?php echo $ri['id']; ?>','utility_rental_invoices')"></i>
 
