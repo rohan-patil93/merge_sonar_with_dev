@@ -1,5 +1,5 @@
 <?php
-	if(ISSET($_POST['login'])){
+	if(isset($_POST['login'])){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		$captcha = $_POST['captcha'];
