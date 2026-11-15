@@ -47,7 +47,7 @@ $projects = $response['projects'] ?? array();
                                     <td><?php echo $i++; ?></td>
                                     <td>
                                         <?php if (($_SESSION['user_image'][$project['created_by']] ?? '') != '') { ?>
-                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$project['created_by']]; ?>" class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
+                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$project['created_by']]; ?>" class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
                                         <?php } else { ?>
                                             <span alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8') ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$project['created_by']] ?? ''); ?></span>
                                         <?php } ?>
