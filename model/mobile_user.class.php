@@ -1691,7 +1691,7 @@ class mobileUserClass extends userClass{
 			$data['second']['value'] = $abs;
 			$data['second']['percentage'] = $total>0 ?round(($abs/$total)*100):0;
 			$data['query'] = $query;
- 		}else if($get['module_id']==7){
+ 		}elseif($get['module_id']==7){
  			$month = date('m');
  			$year = date('Y');
  			$att = 0;
@@ -7136,7 +7136,7 @@ $creditside = array('credit_notes','payments');
 
 	    }
 	    // cart_type = 0: REMOVE (decrease qty)
-	    else if ($cart_type == 0) {
+	    elseif ($cart_type == 0) {
 	        // cart_id is required for decrease operation
 	        if (empty($cart_id)) {
 	            return array(

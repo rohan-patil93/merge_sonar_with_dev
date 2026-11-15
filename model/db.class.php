@@ -51,9 +51,7 @@ class configClass
 
 		if(count($fields1)>1)
 		$fields1=implode(",",$fields1);
-		else
-
-		if(count($fields2)>1)
+		elseif(count($fields2)>1)
 		$fields2=implode(",",$fields2);
 		else
 
@@ -476,11 +474,11 @@ class configClass
 
 			if(($extension == 'jpg') || ($extension == 'JPG')){
 					$upimg = imagejpeg($dst_img, $imgdir.$filename,90);
-			}else if(($extension == 'gif') || ($extension == 'GIF')){
+			}elseif(($extension == 'gif') || ($extension == 'GIF')){
 					$upimg = imagegif($dst_img, $imgdir.$filename,90);
-			}else if(($extension == 'png') || ($extension == 'PNG')){
+			}elseif(($extension == 'png') || ($extension == 'PNG')){
 					$upimg = imagepng($dst_img, $imgdir.$filename,1);
-			}else if(($extension == 'jpeg')|| ($extension == 'JPEG')){
+			}elseif(($extension == 'jpeg')|| ($extension == 'JPEG')){
 					$upimg = imagejpeg($dst_img, $imgdir.$filename,90);
 			}
 			$imageparameter = array(status=>$upimg,filename=>$filename);

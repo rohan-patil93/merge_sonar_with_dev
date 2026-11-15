@@ -243,13 +243,13 @@ class surveyPollUserClass extends userClass
 
     			if($completionrate==100){
     				$surveyvalues['completionratecolor'] = "success";
-    			}else if($completionrate>=80){
+    			}elseif($completionrate>=80){
     				$surveyvalues['completionratecolor'] = "primary";
     			}
-    			else if($completionrate>=60 && $completionrate <80){
+    			elseif($completionrate>=60 && $completionrate <80){
     				$surveyvalues['completionratecolor'] = "warning";
     			}
-    			else if($completionrate>=50 && $qresponse->completionrate <60){
+    			elseif($completionrate>=50 && $qresponse->completionrate <60){
     				$surveyvalues['completionratecolor'] = "info";
     			}
     			else {
@@ -354,7 +354,7 @@ class surveyPollUserClass extends userClass
     			if($qtype==$Qtypes['MultilpleChoice'] || $qtype==$Qtypes['Ranking']){
     				$detailoptions = json_decode($survey_answer_details->survey_question_option,1);
     			}
-    			else if($qtype==$Qtypes['Rating']){
+    			elseif($qtype==$Qtypes['Rating']){
     				$rating = json_decode($survey_answer_details->survey_question_option,1)[0];
     				for($no=1; $no<=$rating; $no++){
     					$detailoptions[] = $no;
@@ -424,7 +424,7 @@ class surveyPollUserClass extends userClass
     				if($list->current_status == ST_COMPLETE){
     					$surveyvalues['completionrate'] = ST_COMPLETE;
     					$surveyvalues['completionratecolor'] = "success";
-    				}else if (date('Y-m-d') > $svalues->survey_end_date && strtotime($enddatatime = $svalues->survey_end_date." ".$svalues->survey_end_time) < strtotime(date('Y-m-d H:i:s'))) {
+    				}elseif (date('Y-m-d') > $svalues->survey_end_date && strtotime($enddatatime = $svalues->survey_end_date." ".$svalues->survey_end_time) < strtotime(date('Y-m-d H:i:s'))) {
                 			$surveyvalues['completionratecolor'] = "warning"; // Expired
                 			$surveyvalues['completionrate'] = ST_INACTIVE;
                 		} else {
@@ -514,9 +514,9 @@ class surveyPollUserClass extends userClass
 		}
 		if($filterId != "" && $filterLabelCache[$filterId] != ""){
 			$assignedLabel = $filterLabelCache[$filterId];
-		}else if((int)$survey->assigned_to_count > 0 && $totalEmployeeCount > 0 && (int)$survey->assigned_to_count == $totalEmployeeCount){
+		}elseif((int)$survey->assigned_to_count > 0 && $totalEmployeeCount > 0 && (int)$survey->assigned_to_count == $totalEmployeeCount){
 			$assignedLabel = 'All Employees';
-		}else if((int)$survey->assigned_to_count > 0){
+		}elseif((int)$survey->assigned_to_count > 0){
 			$assignedLabel = (int)$survey->assigned_to_count.' Employees';
 		}else{
 			$assignedLabel = 'Not Assigned';
@@ -594,9 +594,9 @@ class surveyPollUserClass extends userClass
 				$details['summary']['total']++;
 				if($statusInfo['code'] == 'running'){
 					$details['summary']['active']++;
-				}else if($statusInfo['code'] == 'completed'){
+				}elseif($statusInfo['code'] == 'completed'){
 					$details['summary']['completed']++;
-				}else if($statusInfo['code'] == 'draft'){
+				}elseif($statusInfo['code'] == 'draft'){
 					$details['summary']['draft']++;
 				}
 
@@ -605,7 +605,7 @@ class surveyPollUserClass extends userClass
 				if($endTs != false && $endTs < $nowTs){
 					if($endTs >= $last30Start){
 						$completedEndLast30++;
-					}else if($endTs >= $prev30Start && $endTs < $last30Start){
+					}elseif($endTs >= $prev30Start && $endTs < $last30Start){
 						$completedEndPrev30++;
 					}
 				}
@@ -626,7 +626,7 @@ class surveyPollUserClass extends userClass
 
 		if($completedEndPrev30 > 0){
 			$trendDelta = round((($completedEndLast30 - $completedEndPrev30) / $completedEndPrev30) * 100);
-		}else if($completedEndLast30 > 0){
+		}elseif($completedEndLast30 > 0){
 			$trendDelta = 100;
 		}else{
 			$trendDelta = 0;
@@ -634,7 +634,7 @@ class surveyPollUserClass extends userClass
 		$details['completion_rate']['trend_percent'] = abs($trendDelta);
 		if($trendDelta > 0){
 			$details['completion_rate']['trend_direction'] = 'up';
-		}else if($trendDelta < 0){
+		}elseif($trendDelta < 0){
 			$details['completion_rate']['trend_direction'] = 'down';
 		}else{
 			$details['completion_rate']['trend_direction'] = 'flat';
@@ -970,9 +970,9 @@ class surveyPollUserClass extends userClass
 					$details['summary']['assigned']++;
 					if($assignmentRow->current_status == ST_COMPLETE){
 						$details['summary']['completed']++;
-					}else if($assignmentRow->current_status == ST_INPROGRESS){
+					}elseif($assignmentRow->current_status == ST_INPROGRESS){
 						$details['summary']['in_progress']++;
-					}else if($isExpired){
+					}elseif($isExpired){
 						$details['summary']['pending']++;
 					}
 				}
@@ -999,7 +999,7 @@ class surveyPollUserClass extends userClass
 								'icon_class'=>'ti-pencil-alt bg-c-blue',
 								'sort_ts'=>strtotime($assignmentRow->response_start_date." ".($assignmentRow->response_start_time != "" ? $assignmentRow->response_start_time : "00:00:00"))
 							);
-						}else if($progressPercent == 0){
+						}elseif($progressPercent == 0){
 							$activityRows[] = array(
 								'type'=>'assigned',
 								'title'=>'Assigned: '.$assignmentRow->survey_name,
@@ -1017,7 +1017,7 @@ class surveyPollUserClass extends userClass
 							$urgency = 'info';
 							if($daysLeft <= 3){
 								$urgency = 'danger';
-							}else if($daysLeft <= 7){
+							}elseif($daysLeft <= 7){
 								$urgency = 'warning';
 							}
 							$deadlineRows[] = array(

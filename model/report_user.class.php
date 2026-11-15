@@ -1049,7 +1049,7 @@ function getSalesRegisterReport($get)
         $movement = isset($get['movement']) ? $get['movement'] : '';
         if($movement == 'inside'){
             $where .= " AND (vl.out_datetime IS NULL OR vl.out_datetime = '' OR vl.out_datetime = '0000-00-00 00:00:00') ";
-        }else if($movement == 'exited'){
+        }elseif($movement == 'exited'){
             $where .= " AND vl.out_datetime IS NOT NULL AND vl.out_datetime != '' AND vl.out_datetime != '0000-00-00 00:00:00' ";
         }
 
@@ -1076,7 +1076,7 @@ function getSalesRegisterReport($get)
         $card_return = isset($get['card_return']) ? $get['card_return'] : '';
         if($card_return == 'returned'){
             $where .= " AND EXISTS (SELECT 1 FROM visitor_badges vb2 WHERE vb2.visitor_log_id = vl.id AND vb2.company_id = vl.company_id AND vb2.returned_at IS NOT NULL AND vb2.returned_at != '' AND vb2.returned_at != '0000-00-00 00:00:00') ";
-        }else if($card_return == 'not_returned'){
+        }elseif($card_return == 'not_returned'){
             $where .= " AND NOT EXISTS (SELECT 1 FROM visitor_badges vb2 WHERE vb2.visitor_log_id = vl.id AND vb2.company_id = vl.company_id AND vb2.returned_at IS NOT NULL AND vb2.returned_at != '' AND vb2.returned_at != '0000-00-00 00:00:00') ";
         }
 
@@ -1085,7 +1085,7 @@ function getSalesRegisterReport($get)
             $search_esc = addslashes($search);
             if($visit_type == 'vendor_supplier'){
                 $where .= " AND (vl.vendor_supplier_driver_name LIKE '%".$search_esc."%' OR vl.vendor_supplier_driver_mobile LIKE '%".$search_esc."%' OR vl.vendor_supplier_vehicle_number LIKE '%".$search_esc."%' OR vl.name LIKE '%".$search_esc."%' OR vl.visitor_idcard_no LIKE '%".$search_esc."%' OR vl.phone LIKE '%".$search_esc."%' OR EXISTS (SELECT 1 FROM visitor_badges vb3 WHERE vb3.visitor_log_id = vl.id AND vb3.full_code LIKE '%".$search_esc."%')) ";
-            }else if($visit_type == 'employee'){
+            }elseif($visit_type == 'employee'){
                 $where .= " AND (vl.employee_name LIKE '%".$search_esc."%' OR vl.emp_temp_name LIKE '%".$search_esc."%' OR vl.employee_code LIKE '%".$search_esc."%' OR vl.visitor_idcard_no LIKE '%".$search_esc."%' OR EXISTS (SELECT 1 FROM visitor_badges vb3 WHERE vb3.visitor_log_id = vl.id AND vb3.full_code LIKE '%".$search_esc."%')) ";
             }else{
                 $where .= " AND (vl.name LIKE '%".$search_esc."%' OR vl.phone LIKE '%".$search_esc."%' OR vl.visitor_idcard_no LIKE '%".$search_esc."%' OR EXISTS (SELECT 1 FROM visitor_badges vb3 WHERE vb3.visitor_log_id = vl.id AND vb3.full_code LIKE '%".$search_esc."%')) ";
@@ -1136,13 +1136,13 @@ function getSalesRegisterReport($get)
                 $coming_from = '';
                 if(isset($r['company_name']) && $r['company_name'] != ''){
                     $coming_from = $r['company_name'];
-                }else if(isset($r['address']) && $r['address'] != ''){
+                }elseif(isset($r['address']) && $r['address'] != ''){
                     $coming_from = $r['address'];
                 }
                 $card_no = '';
                 if(isset($r['visitor_idcard_no']) && $r['visitor_idcard_no'] != ''){
                     $card_no = $r['visitor_idcard_no'];
-                }else if(isset($r['badge_code']) && $r['badge_code'] != ''){
+                }elseif(isset($r['badge_code']) && $r['badge_code'] != ''){
                     $card_no = $r['badge_code'];
                 }
                 $return['rows'][] = array(
@@ -1209,13 +1209,13 @@ function getSalesRegisterReport($get)
                 $name = '';
                 if(isset($r['vendor_supplier_driver_name']) && $r['vendor_supplier_driver_name'] != ''){
                     $name = $r['vendor_supplier_driver_name'];
-                }else if(isset($r['name']) && $r['name'] != ''){
+                }elseif(isset($r['name']) && $r['name'] != ''){
                     $name = $r['name'];
                 }
                 $contact = '';
                 if(isset($r['vendor_supplier_driver_mobile']) && $r['vendor_supplier_driver_mobile'] != ''){
                     $contact = $r['vendor_supplier_driver_mobile'];
-                }else if(isset($r['phone']) && $r['phone'] != ''){
+                }elseif(isset($r['phone']) && $r['phone'] != ''){
                     $contact = $r['phone'];
                 }
                 $coming_from = '';
@@ -1231,7 +1231,7 @@ function getSalesRegisterReport($get)
                 $card_no = '';
                 if(isset($r['visitor_idcard_no']) && $r['visitor_idcard_no'] != ''){
                     $card_no = $r['visitor_idcard_no'];
-                }else if(isset($r['badge_code']) && $r['badge_code'] != ''){
+                }elseif(isset($r['badge_code']) && $r['badge_code'] != ''){
                     $card_no = $r['badge_code'];
                 }
                 $gov_id = isset($r['vendor_supplier_proof_document_no']) ? $r['vendor_supplier_proof_document_no'] : '';
@@ -1292,15 +1292,15 @@ function getSalesRegisterReport($get)
                 $name = '';
                 if(isset($r['employee_name']) && $r['employee_name'] != ''){
                     $name = $r['employee_name'];
-                }else if(isset($r['emp_temp_name']) && $r['emp_temp_name'] != ''){
+                }elseif(isset($r['emp_temp_name']) && $r['emp_temp_name'] != ''){
                     $name = $r['emp_temp_name'];
-                }else if(isset($r['name']) && $r['name'] != ''){
+                }elseif(isset($r['name']) && $r['name'] != ''){
                     $name = $r['name'];
                 }
                 $card_no = '';
                 if(isset($r['badge_code']) && $r['badge_code'] != ''){
                     $card_no = $r['badge_code'];
-                }else if(isset($r['visitor_idcard_no']) && $r['visitor_idcard_no'] != ''){
+                }elseif(isset($r['visitor_idcard_no']) && $r['visitor_idcard_no'] != ''){
                     $card_no = $r['visitor_idcard_no'];
                 }
                 $in_dt = isset($r['in_datetime']) ? $r['in_datetime'] : '';

@@ -1549,7 +1549,7 @@ GROUP BY tl.item_id";
 		if($get['rid'] && $get['type']){
 			if($get['type'] == 'PO'){
 				$query = "SELECT * FROM po_items WHERE company_id = '".$get['company_id']."' AND transaction_id = ".$get['rid']." AND is_active = 0";
-			}else if($get['type'] == 'GRN'){
+			}elseif($get['type'] == 'GRN'){
 				$query = "SELECT * FROM grn_items WHERE company_id = '".$get['company_id']."' AND transaction_id = ".$get['rid']." AND is_active = 0";
 			}
 			$data = $callConfig->getAllRows($query);
@@ -1770,7 +1770,7 @@ GROUP BY tl.item_id";
 						WHERE company_id = '".$get['company_id']."' 
 							AND transaction_id = ".$get['rid']." 
 							AND is_active = 0";
-			} else if ($get['type'] == 'DO') {
+			} elseif ($get['type'] == 'DO') {
 				$query = "SELECT * FROM do_items 
 						WHERE company_id = '".$get['company_id']."' 
 							AND transaction_id = ".$get['rid']." 

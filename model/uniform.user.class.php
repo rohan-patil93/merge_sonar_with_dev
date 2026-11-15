@@ -850,7 +850,7 @@ class uniformClass extends userClass{
 	    $flt_color = "";
 	    if ($job_grade_color != "") {
 	        $flt_color = " AND si.color = '{$job_grade_color}' ";
-	    } else if ($color_id != "") {
+	    } elseif ($color_id != "") {
 	        $flt_color = " AND si.color = '{$color_id}' ";
 	    }
 

@@ -826,9 +826,9 @@ class manfacturingForecastUserClass extends userClass{
         foreach ((array)$rows as $row) {
             if ((string)($row->work_log_status ?? '') === '0') {
                 $summary['active']++;
-            } else if ((string)($row->work_log_status ?? '') === '1') {
+            } elseif ((string)($row->work_log_status ?? '') === '1') {
                 $summary['hold']++;
-            } else if ((string)($row->work_log_status ?? '') === '199') {
+            } elseif ((string)($row->work_log_status ?? '') === '199') {
                 $summary['completed']++;
             } else {
                 $summary['not_started']++;

@@ -391,13 +391,13 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 			$assessqselect->number_of_options = count((array)json_decode($assessqselect->question_option,1));
 			if($assessqselect->assign_type==0){
 				$emp_questions[$assessqselect->id] = $assessqselect;
-			}else if($assessqselect->assign_type==1) {
+			}elseif($assessqselect->assign_type==1) {
 				$mgr_questions[$assessqselect->id] = $assessqselect;
 			}
-			else if($assessqselect->assign_type==2) {
+			elseif($assessqselect->assign_type==2) {
 				$reviewmgr_questions[$assessqselect->id] = $assessqselect;
 			}
-			else if($assessqselect->assign_type==3) {
+			elseif($assessqselect->assign_type==3) {
 				$peer_questions[$assessqselect->id] = $assessqselect;
 			}
 		}

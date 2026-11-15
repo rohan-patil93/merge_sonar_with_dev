@@ -3222,13 +3222,13 @@ public function getUsersMapPointsData($get){
             $where = "";
             if ($type == 'project_approved') {
                 $where = " AND p.current_status = ".ST_APPROVED;
-            } else if ($type == 'approved_in_progress') {
+            } elseif ($type == 'approved_in_progress') {
                 $where = " AND p.current_status > 100 AND p.current_status < ".ST_APPROVED;
-            } else if ($type == 'active_project') {
+            } elseif ($type == 'active_project') {
                 $where = " AND p.current_status != 0";
-            } else if ($type == 'spent') {
+            } elseif ($type == 'spent') {
                 $where = " AND IFNULL(inv.spent_amount, 0) > 0";
-            } else if ($type == 'pending_obligation') {
+            } elseif ($type == 'pending_obligation') {
                 $where = " AND p.current_status = ".ST_APPROVED." AND (IFNULL(po.approved_amount, 0) - IFNULL(inv.spent_amount, 0)) > 0";
             } else {
                 $where = " AND 1=0";
@@ -4424,7 +4424,7 @@ public function getUsersMapPointsData($get){
                     foreach ($loc_row['statuses'] as $st) {
                         if ($st == 'Completed') {
                             $has_completed = 1;
-                        } else if ($st == 'In-Process') {
+                        } elseif ($st == 'In-Process') {
                             $has_process = 1;
                         } else {
                             $has_not_started = 1;
@@ -4433,7 +4433,7 @@ public function getUsersMapPointsData($get){
                 }
                 if ($has_process == 1 || ($has_completed == 1 && $has_not_started == 1)) {
                     $status = 'In-Process';
-                } else if ($has_completed == 1 && $has_process == 0 && $has_not_started == 0) {
+                } elseif ($has_completed == 1 && $has_process == 0 && $has_not_started == 0) {
                     $status = 'Completed';
                 } else {
                     $status = 'Not Started';

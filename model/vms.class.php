@@ -1979,22 +1979,22 @@ class vMSUserClass extends userClass{
 		if($gvalue->genc_detail_code=='H'){
 		$genc_holiday_shiftkey= $gvalue->genc_detail_code;
 		}
-		else if($gvalue->genc_detail_code=='O'){
+		elseif($gvalue->genc_detail_code=='O'){
 		$genc_off_shiftkey= $gvalue->genc_detail_code;
 		}
-		else if($gvalue->genc_detail_code=='W'){
+		elseif($gvalue->genc_detail_code=='W'){
 		$genc_work_shiftkey= $gvalue->genc_detail_code;
 		}
-		else if($gvalue->genc_detail_code=='S'){
+		elseif($gvalue->genc_detail_code=='S'){
 		$genc_sick_shiftkey= $gvalue->genc_detail_code;
 		}
-		else if($gvalue->genc_detail_code=='R'){
+		elseif($gvalue->genc_detail_code=='R'){
 		$genc_partial_shiftkey= $gvalue->genc_detail_code;
 		}
-		else if($gvalue->genc_detail_code=='V'){
+		elseif($gvalue->genc_detail_code=='V'){
 		$genc_vacation_shiftkey= $gvalue->genc_detail_code;
 		}
-		else if($gvalue->genc_detail_code=='A'){
+		elseif($gvalue->genc_detail_code=='A'){
 		$genc_absence_shiftkey= $gvalue->genc_detail_code;
 		}
 		}
@@ -2561,9 +2561,9 @@ class vMSUserClass extends userClass{
 			// $holiday_dates = json_decode($post['holiday_dates'],1);
     		if($uom == 'PH'){
     			$perhrsrate = $price;
-    		}else if($uom == 'PD'){
+    		}elseif($uom == 'PD'){
     			$perhrsrate = $minimum_hours_required != 0 ? $price/$minimum_hours_required : 0;
-    		}else if($uom == 'PW'){
+    		}elseif($uom == 'PW'){
     			$perhrsrate = ($minimum_hours_required*$total_working_day) != 0 ? $price/($minimum_hours_required*$total_working_day) : 0;
     		}else{
     			$dateFrom = new DateTime($effective_date);
@@ -3058,7 +3058,7 @@ class vMSUserClass extends userClass{
 			$notdataa['type'] = "ACTION";
 			$notdataa['notification_message'] = "Timesheets submited for approval ".$from_date."-".$to_date." by ".$allthreeuser[$user_id];
 			$this->tosendnotifiations($notdataa);
-		}else if($post['status'] == '10' && $old_status == '0'){
+		}elseif($post['status'] == '10' && $old_status == '0'){
 			$mail_data['manager_name'] = $allthreeuser[$reporting_manager_id];
 			$mail_data['email_content_id'] = 3;
 			$email_array = $this->emailtemplate($mail_data);
@@ -3078,7 +3078,7 @@ class vMSUserClass extends userClass{
 			$notdataa['type'] = "ACTION";
 			$notdataa['notification_message'] = "Timesheets submited for approval ".$from_date."-".$to_date." by ".$allthreeuser[$user_id];
 			$this->tosendnotifiations($notdataa);
-		}else if($post['status'] == '10' && $old_status == '8'){
+		}elseif($post['status'] == '10' && $old_status == '8'){
 			$mail_data['manager_name'] = $allthreeuser[$reporting_manager_id];
 			$mail_data['email_content_id'] = 6;
 			$email_array = $this->emailtemplate($mail_data);
@@ -3614,7 +3614,7 @@ class vMSUserClass extends userClass{
 		//$whr = "id=".$get['emp_id']." AND is_active=0";
 		if($get['employe_id']!=""){
 			$whr = "id=".$get['employe_id']." AND is_active=0";
-		}else if($get['emp_code']!=""){
+		}elseif($get['emp_code']!=""){
 			$whr = "emp_code='".$get['emp_code']."' AND is_active=0";
 		}else{
 			$whr = "id='' AND is_active=0";
@@ -5883,7 +5883,7 @@ class vMSUserClass extends userClass{
 
 		if($data->current_status ==52){
 			$parent_ref_id =  $get['setup_id'];
-		}else if($data->parent_ref_id !="" ){
+		}elseif($data->parent_ref_id !="" ){
 			$parent_ref_id = $data->parent_ref_id;
 		}
 		//echo $parent_ref_id;  exit;
@@ -6272,7 +6272,7 @@ class vMSUserClass extends userClass{
 									if($attval[$valda]==8){
 										$per= $per+1;
 										$pre_days[] = $valda;
-									}else if($attval[$valda]==4){
+									}elseif($attval[$valda]==4){
 										$per= $per+0.5;
 										$absent = $absent+0.5;
 										$pre_days[] = $valda;

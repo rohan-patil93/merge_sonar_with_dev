@@ -457,7 +457,7 @@ class hrUserClass extends userClass{
 		if($data['presentcheck'] == '3'){
 			$start = new DateTime($datee);
 			$end = new DateTime($datee);
-		}else if($data['presentcheck'] == '1'){
+		}elseif($data['presentcheck'] == '1'){
 			$start = new DateTime($absentfrom);
 			$end = new DateTime($absentto);
 		}else{
@@ -2390,7 +2390,7 @@ class hrUserClass extends userClass{
             $matched_user = null;
             if ($emp_user_id > 0 && isset($usersById[$emp_user_id])) {
                 $matched_user = $usersById[$emp_user_id];
-            } else if ($emp_email_key != '' && isset($user_emails[$emp_email_key])) {
+            } elseif ($emp_email_key != '' && isset($user_emails[$emp_email_key])) {
                 $matched_user = $user_emails[$emp_email_key];
             }
 

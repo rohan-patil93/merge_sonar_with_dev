@@ -6945,7 +6945,7 @@ class userClass{
 					//if($mvalue->response_type == 13){	$val['sent_back'][] = $mvalue->id;	}
 
 					if($mvalue->response_type == ST_REJECTED){	$val['reject'][]  =	$mvalue->id;	}
-					else if($mvalue->response_type == 0){	$val['pending'][] =	$mvalue->id;	}
+					elseif($mvalue->response_type == 0){	$val['pending'][] =	$mvalue->id;	}
 					else{	$val['approve'][] =	$mvalue->id;	}
 				}
 				if($doaval == 'A'){
@@ -8156,7 +8156,7 @@ class userClass{
 				$active_only = $active_only+$data->total_amount;
 				//echo "active_only=".$data->total_amount;
 			}
-			else if($data->current_status == ST_APPROVED || $data->current_status == ST_QUOTATION_GENERATED || $data->current_status == ST_PURCHASE_ORDER_GENRATED  ){
+			elseif($data->current_status == ST_APPROVED || $data->current_status == ST_QUOTATION_GENERATED || $data->current_status == ST_PURCHASE_ORDER_GENRATED  ){
 				$approve = $approve+$data->total_amount;
 				//echo "approve=".$data->total_amount;
 			}else{
@@ -8770,7 +8770,7 @@ public function togetemployeeteamdata($data){
 				foreach ($maindata as $mvalue) {
 					//if($mvalue->response_type == 13){	$val['sent_back'][] = $mvalue->id;	}
 					if($mvalue->response_type == ST_REJECTED){	$val['reject'][]  =	$mvalue->id;	}
-					else if($mvalue->response_type == 0){	$val['pending'][] =	$mvalue->id;	}
+					elseif($mvalue->response_type == 0){	$val['pending'][] =	$mvalue->id;	}
 					else{	$val['approve'][] =	$mvalue->id;	}
 				}
 				if($doaval == 'A'){
@@ -12395,22 +12395,22 @@ public function convertToYYYYMMDD($dateString) {
     		if($gvalue->genc_detail_code=='H'){
     			$genc_holiday_shiftkey= $gvalue->genc_detail_code;
     		}
-    		else if($gvalue->genc_detail_code=='O'){
+    		elseif($gvalue->genc_detail_code=='O'){
     			$genc_off_shiftkey= $gvalue->genc_detail_code;
     		}
-    		else if($gvalue->genc_detail_code=='W'){
+    		elseif($gvalue->genc_detail_code=='W'){
     			$genc_work_shiftkey= $gvalue->genc_detail_code;
     		}
-    		else if($gvalue->genc_detail_code=='S'){
+    		elseif($gvalue->genc_detail_code=='S'){
     			$genc_sick_shiftkey= $gvalue->genc_detail_code;
     		}
-    		else if($gvalue->genc_detail_code=='R'){
+    		elseif($gvalue->genc_detail_code=='R'){
     			$genc_partial_shiftkey= $gvalue->genc_detail_code;
     		}
-    		else if($gvalue->genc_detail_code=='V'){
+    		elseif($gvalue->genc_detail_code=='V'){
     			$genc_vacation_shiftkey= $gvalue->genc_detail_code;
     		}
-    		else if($gvalue->genc_detail_code=='A'){
+    		elseif($gvalue->genc_detail_code=='A'){
     			$genc_absence_shiftkey= $gvalue->genc_detail_code;
     		}
     	}
@@ -12464,7 +12464,7 @@ public function convertToYYYYMMDD($dateString) {
     				$empattendance['first_reg'] = '0';
     				$empattendance['second_reg'] = '0';
     			}
-    			else if(in_array($valday, (array)$working_days)){
+    			elseif(in_array($valday, (array)$working_days)){
         		//Working Days
     				if($min_working_sec > $days[$valda]){
     					if ($half_working_sec < $days[$valda]) {
@@ -12779,7 +12779,7 @@ public function convertToYYYYMMDD($dateString) {
     			$day = "";
     			if($post['accured_action_based'][$key] == "W"){
     				$month_year_weeck = $post['on_the_week'][$key];
-    			}else if($post['accured_action_based'][$key] == "M"){
+    			}elseif($post['accured_action_based'][$key] == "M"){
     				$day = $post['on_the_day'][$key];
     			}elseif($post['accured_action_based'][$key] == "Y"){
     				$month_year_weeck = $post['on_the_month'][$key];
@@ -12801,7 +12801,7 @@ public function convertToYYYYMMDD($dateString) {
     			$day = "";
     			if($post['accured_action_based'][$key] == "W"){
     				$month_year_weeck = $post['on_the_week'][$key];
-    			}else if($post['accured_action_based'][$key] == "M"){
+    			}elseif($post['accured_action_based'][$key] == "M"){
     				$day = $post['on_the_day'][$key];
     			}elseif($post['accured_action_based'][$key] == "Y"){
     				$month_year_weeck = $post['on_the_month'][$key];
@@ -14929,13 +14929,13 @@ public function convertToYYYYMMDD($dateString) {
 
 			if($completionrate==100){
 				$assessmentvalues['completionratecolor'] = "success";
-			}else if($completionrate>=80){
+			}elseif($completionrate>=80){
 				$assessmentvalues['completionratecolor'] = "primary";
 			}
-			else if($completionrate>=60 && $completionrate <80){
+			elseif($completionrate>=60 && $completionrate <80){
 				$assessmentvalues['completionratecolor'] = "warning";
 			}
-			else if($completionrate>=50 && $qresponse->completionrate <60){
+			elseif($completionrate>=50 && $qresponse->completionrate <60){
 				$assessmentvalues['completionratecolor'] = "info";
 			}
 			else {
@@ -15110,7 +15110,7 @@ public function convertToYYYYMMDD($dateString) {
 					$assessmentvalues['completionrate'] = ST_COMPLETE;
 					$assessmentvalues['completionratecolor'] = "success";
 				}
-				else if (date('Y-m-d') > $svalues->assessment_end_date && strtotime($enddatatime = $svalues->assessment_end_date." ".$svalues->assessment_end_time) < strtotime(date('Y-m-d H:i:s'))) {
+				elseif (date('Y-m-d') > $svalues->assessment_end_date && strtotime($enddatatime = $svalues->assessment_end_date." ".$svalues->assessment_end_time) < strtotime(date('Y-m-d H:i:s'))) {
 					$assessmentvalues['completionratecolor'] = "warning"; // Expired
 					$assessmentvalues['completionrate'] = ST_INACTIVE;
 				}  else {
@@ -15633,13 +15633,13 @@ public function convertToYYYYMMDD($dateString) {
 		 	$assessqselect->number_of_options = count((array)json_decode($assessqselect->question_option,1));
 		 	if($assessqselect->assign_type==0){
 		 		$emp_questions[$assessqselect->id] = $assessqselect;
-		 	}else if($assessqselect->assign_type==1) {
+		 	}elseif($assessqselect->assign_type==1) {
 		 		$mgr_questions[$assessqselect->id] = $assessqselect;
 		 	}
-		 	else if($assessqselect->assign_type==2) {
+		 	elseif($assessqselect->assign_type==2) {
 		 		$reviewmgr_questions[$assessqselect->id] = $assessqselect;
 		 	}
-		 	else if($assessqselect->assign_type==3) {
+		 	elseif($assessqselect->assign_type==3) {
 		 		$peer_questions[$assessqselect->id] = $assessqselect;
 		 	}
 		 }
@@ -19099,7 +19099,7 @@ public function checkLeaveApplicable($data){
 						$transaction_date = "";
 						if($leave_type_levels->accured_action_based == "W"){
 							$transaction_date = date('Y-m-d', strtotime($leave_type_levels->month_year_weeck, strtotime($todaydates)));
-						}else if($leave_type_levels->accured_action_based == "M"){
+						}elseif($leave_type_levels->accured_action_based == "M"){
 							$transaction_date = date("Y-m-".$leave_type_levels->day);
 							if(strtotime($transaction_date) <= strtotime($todaydates)){
 								$transaction_date = date("Y-m-d", strtotime("+1 month", strtotime($transaction_date)));
@@ -22361,9 +22361,9 @@ public function getLeaveWithStatus($data){
 
 		if($cfdata->professional_tax_type==1){
 			$ptdata = $pt_loc_data[$payarea_data['location_id']];
-		}else if($cfdata->professional_tax_type==2){
+		}elseif($cfdata->professional_tax_type==2){
 			$ptdata = $pt_loc_data[$emp->location_id];
-		}else if($cfdata->professional_tax_type==3){
+		}elseif($cfdata->professional_tax_type==3){
 			$ptdata = $pt_loc_data[$cfdata->default_professional_tax_location_id];
 		}else{
 			$ptdata = $ptalldata['0'];
@@ -24592,13 +24592,13 @@ if($get['ajax']=="Y"){  // Ajax Not Call
 		$assessqselect->number_of_options = count((array)json_decode($assessqselect->question_option,1));
 		if($assessqselect->assign_type==0){
 			$emp_questions[$assessqselect->id] = $assessqselect;
-		}else if($assessqselect->assign_type==1) {
+		}elseif($assessqselect->assign_type==1) {
 			$mgr_questions[$assessqselect->id] = $assessqselect;
 		}
-		else if($assessqselect->assign_type==2) {
+		elseif($assessqselect->assign_type==2) {
 			$reviewmgr_questions[$assessqselect->id] = $assessqselect;
 		}
-		else if($assessqselect->assign_type==3) {
+		elseif($assessqselect->assign_type==3) {
 			$peer_questions[$assessqselect->id] = $assessqselect;
 		}
 	}
@@ -36511,9 +36511,9 @@ public function gerReferanceTableDetails($get){
 
 			if($cfdata->professional_tax_type==1){
 				$ptdata = $pt_loc_data[$payarea_data['location_id']];
-			}else if($cfdata->professional_tax_type==2){
+			}elseif($cfdata->professional_tax_type==2){
 				$ptdata = $pt_loc_data[$emp->location_id];
-			}else if($cfdata->professional_tax_type==3){
+			}elseif($cfdata->professional_tax_type==3){
 				$ptdata = $pt_loc_data[$cfdata->default_professional_tax_location_id];
 			}else{
 				$ptdata = $ptalldata['0'];

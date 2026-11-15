@@ -428,9 +428,9 @@ class reactClass extends userClass{
 							if ($value === "" || $value === null) {
 								if (in_array($key, ['renewal_frequency', 'parent_contract_id', 'party_id', 'current_status'])) {
 									$final_data[$key] = 0;
-								} else if (in_array($key, ['contract_amount'])) {
+								} elseif (in_array($key, ['contract_amount'])) {
 									$final_data[$key] = 0.00;
-								} else if (in_array($key, ['start_date', 'end_date'])) {
+								} elseif (in_array($key, ['start_date', 'end_date'])) {
 									$final_data[$key] = date('Y-m-d');
 								} else {
 									$final_data[$key] = $value ?? '';
@@ -595,7 +595,7 @@ class reactClass extends userClass{
 
 					if ($edit_option === 'Amendment') {
 						$activity_text = "Contract Amended (New Version Created, Valid until {$endDate})";
-					} else if ($edit_option === 'Addendum') {
+					} elseif ($edit_option === 'Addendum') {
 						$activity_text = "Contract Addendum Added (New Version Created, Valid until {$endDate})";
 					} else {
 						$activity_text = "Contract Updated (Standard Save, Valid until {$endDate})";
@@ -1256,7 +1256,7 @@ class reactClass extends userClass{
 			if (count($nameParts) > 2) {
 				$middleName = $nameParts[1];
 				$lastName = $nameParts[count($nameParts) - 1];
-			} else if (count($nameParts) == 2) {
+			} elseif (count($nameParts) == 2) {
 				$lastName = $nameParts[1];
 			}
 		}
@@ -1316,7 +1316,7 @@ class reactClass extends userClass{
 			if (count($nameParts) > 2) {
 				$middleName = $nameParts[1];
 				$lastName = $nameParts[count($nameParts) - 1];
-			} else if (count($nameParts) == 2) {
+			} elseif (count($nameParts) == 2) {
 				$lastName = $nameParts[1];
 			}
 		}
@@ -1972,9 +1972,9 @@ class reactClass extends userClass{
 				if ($value === "" || $value === null) {
 					if (in_array($key, ['renewal_frequency', 'parent_contract_id', 'party_id', 'contract_payment_terms', 'current_status'])) {
 						$final_data[$key] = 0;
-					} else if (in_array($key, ['contract_amount'])) {
+					} elseif (in_array($key, ['contract_amount'])) {
 						$final_data[$key] = 0.00;
-					} else if (in_array($key, ['start_date', 'end_date'])) {
+					} elseif (in_array($key, ['start_date', 'end_date'])) {
 						$final_data[$key] = date('Y-m-d');
 					} else {
 						$final_data[$key] = $value ?? '';
@@ -2570,9 +2570,9 @@ class reactClass extends userClass{
 					if ($value === "" || $value === null) {
 						if (in_array($key, ['renewal_frequency', 'parent_contract_id', 'party_id', 'payment_term_id', 'current_status'])) {
 							$final_data[$key] = 0;
-						} else if (in_array($key, ['contract_amount'])) {
+						} elseif (in_array($key, ['contract_amount'])) {
 							$final_data[$key] = 0.00;
-						} else if (in_array($key, ['start_date', 'end_date'])) {
+						} elseif (in_array($key, ['start_date', 'end_date'])) {
 							$final_data[$key] = date('Y-m-d');
 						} else {
 							$final_data[$key] = $value ?? '';
@@ -2762,7 +2762,7 @@ class reactClass extends userClass{
 
 			if ($edit_option === 'Amendment') {
 				$activity_text = "Contract Amended (New Version Created, Valid until {$endDate})";
-			} else if ($edit_option === 'Addendum') {
+			} elseif ($edit_option === 'Addendum') {
 				$activity_text = "Contract Addendum Added (New Version Created, Valid until {$endDate})";
 			} else {
 				$activity_text = "Contract Updated (Standard Save, Valid until {$endDate})";

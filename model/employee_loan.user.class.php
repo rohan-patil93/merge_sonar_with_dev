@@ -3595,7 +3595,7 @@ class employeeLoanClass extends userClass
                     $updateData['entry_timestamp'] = $exit_timestamp;
 
                 }
-            } else if ($method_type == 'entry_first') {
+            } elseif ($method_type == 'entry_first') {
                 // For entry_first: first record is entry_time, second is exit_time
                 if ($entry->process_val == 1) {
                     // Recording entry time

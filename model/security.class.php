@@ -169,11 +169,11 @@ public function getVisitorsDataBasedOnDate($get)
     $whr = '';
     if ($day_type == 'TODAY') {
         $whr = " AND in_datetime >= CURDATE() AND in_datetime < CURDATE() + INTERVAL 1 DAY ";
-    } else if ($day_type == 'YESTERDAY') {
+    } elseif ($day_type == 'YESTERDAY') {
         $whr = " AND in_datetime >= CURDATE() - INTERVAL 1 DAY AND in_datetime < CURDATE() ";
-    } else if ($day_type == 'LAST7DAYS') {
+    } elseif ($day_type == 'LAST7DAYS') {
         $whr = " AND in_datetime >= CURDATE() - INTERVAL 7 DAY AND in_datetime < CURDATE() + INTERVAL 1 DAY ";
-    } else if ($day_type == 'ALL') {
+    } elseif ($day_type == 'ALL') {
         $whr = "";
     }
 
