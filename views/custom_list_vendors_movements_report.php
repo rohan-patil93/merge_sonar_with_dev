@@ -31,11 +31,11 @@ $today = date('Y-m-d');
 					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>To Date <span class="text-danger">*</span></label>
+					<span class="d-inline-block fw-bold" style="margin-bottom:5px">To Date <span class="text-danger">*</span></span>
 					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="To Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Location</label>
+					<span class="d-inline-block fw-bold" style="margin-bottom:5px">Location</span>
 					<select class="form-control js-example-basic-single" id="location_id" name="location_id" style="width:100%" aria-label="Location Id">
 						<option value="">All Locations</option>
 						<?php if(count((array)$locations) > 0){
@@ -49,7 +49,7 @@ $today = date('Y-m-d');
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Department</label>
+					<span class="d-inline-block fw-bold" style="margin-bottom:5px">Department</span>
 					<select class="form-control js-example-basic-single" id="department_id" name="department_id" style="width:100%" aria-label="Department Id">
 						<option value="">All Departments</option>
 						<?php if(count((array)$departments) > 0){
@@ -63,7 +63,7 @@ $today = date('Y-m-d');
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Movement</label>
+					<span class="d-inline-block fw-bold" style="margin-bottom:5px">Movement</span>
 					<select class="form-control js-example-basic-single" id="movement" name="movement" style="width:100%" aria-label="Movement">
 						<option value="">All</option>
 						<option value="inside">Still Inside</option>
@@ -71,11 +71,11 @@ $today = date('Y-m-d');
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Search</label>
+					<span class="d-inline-block fw-bold" style="margin-bottom:5px">Search</span>
 					<input class="form-control" type="text" name="search" id="search" placeholder="Driver / Mobile / Vehicle / Card" value="" aria-label="Driver / Mobile / Vehicle / Card">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>&nbsp;</label>
+					<span class="d-inline-block fw-bold" style="margin-bottom:5px">&nbsp;</span>
 					<button type="button" class="btn btn-primary form-control" id="getVendorsMovementsReportBtn">Search</button>
 				</div>
 			</div>
