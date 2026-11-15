@@ -140,4 +140,3 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 	}
 }
 
-?>
