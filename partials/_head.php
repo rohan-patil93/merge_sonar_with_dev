@@ -150,7 +150,6 @@ document.addEventListener('error', function (e) {
         header("Referrer-Policy: no-referrer");
         header("Permissions-Policy: geolocation=(), microphone=(), camera=()");
         header("Expect-CT: enforce, max-age=86400, report-uri='".SITEURL."'");
-        //header("Content-Security-Policy: frame-ancestors https://example.com https://trusted-site.com;");
     ?>
 
 

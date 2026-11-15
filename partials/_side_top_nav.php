@@ -5,7 +5,6 @@ function menudisplaytop($menuarray,$type){
         $child = count($menuarrayvalue['child']);
         $link = $child >0 ?  'javascript:;' : 'index.php?option='.$menuarrayvalue['Page_Name'];
         $drop =  $child >0 ?  'pcoded-hasmenu' : '';
-            //$icon = ($menuarrayvalue['Menu_Icon']== '' )?'kt-menu__link-bullet kt-menu__link-bullet--dot' : $menuarrayvalue['Menu_Icon'].'icon-xl';
         $icon = "";
         $str .= '<li class="'.$drop.'" >
                 <a href="'.$link.'" class="waves-effect waves-dark"> &nbsp;<i class="'.$icon.'"><span></span></i><span class="pcoded-mtext">'.$menuarrayvalue['Label'].'</span>';

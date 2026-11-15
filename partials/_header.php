@@ -316,7 +316,7 @@
 
 
 </script>
-<?php //echo "<pre>Goodddd";print_r($_SESSION['application_menu_TNC']); echo "</pre>";
+<?php 
     if($timeprint == '1' && $maxtimeshow >= '18'){ echo "Start Header after script  - ".date('m/d/Y h:i:s a')."</br>";
     }
 ?>
@@ -339,7 +339,7 @@
                 <i class="ti-more-alt"></i>
             </a>
         </div>
-     <?php //$ptl = togetprojecttasktimelog();  ?>
+     <?php ?>
         <div class="navbar-container container-fluid">
             <ul class="nav-right">
                 <?php if($ptl['id']!=""){ ?>
@@ -366,7 +366,7 @@
 <?php if($_SESSION['user_activated'] == 'Y'){ ?>
          <?php  ?>
                 <li class="header-notification m-r-20">
-                 <?php //if(in_array($_SESSION['config']['application_module'],$menu_check_array)){
+                 <?php 
                      if(in_array($_SESSION['work_module_setup_id'], array(MODUL_HR,MODUL_ATTENDANCE))  && (/*$_SESSION['emp_pay_area']['attendance_by'] == 1*/ $_SESSION['user_clock_status'] == 'Y' || $_SESSION['admin_type'] ==1 )&& (in_array(EMPLOYEE_ROLE,(array)$_SESSION['role_ids'])) ){     ?>
                     <div class="my-lg-0 my-3">
                         <?php
@@ -520,7 +520,7 @@
             <div class="dropdown-primary dropdown">
                 <div class="displayChatbox dropdown-toggle" data-bs-toggle="dropdown">
                    <i class="feather icon-bell"></i>
-                    <span class="badge bg-c-green customcount"><?php // count($notificationlist);?></span>
+                    <span class="badge bg-c-green customcount"><?php ?></span>
                 </div>
             </div>
         </li> -->
@@ -630,11 +630,6 @@
                 <div class="row m-0" style="background: url('assets/images/bg-6.jpg');">
                     <?php
                     $showswitch = 0; //1
-                    /*foreach($_SESSION['module_setp'] as $module_list12){
-                        if(in_array($module_list12['role_admin_short_code'],(array)$_SESSION['role_ids']) AND $_SESSION['work_module_setup_id'] == $module_list12['module_id']){
-                            $showswitch = 0;
-                        }
-                    } */
                     ?>
 
                     <div class="<?php echo (in_array(ADMIN_ROLES,(array)$_SESSION['role_ids']) || $showswitch == '0')?"col-lg-6 col-md-6 col-sm-6 col-6 text-left":"col-lg-12 text-center"; ?>" >
@@ -645,7 +640,7 @@
                    // if(in_array(ADMIN_ROLES,(array)$_SESSION['role_ids'])){ ?>
                     <!-- <div class="col-lg-3 text-white">Employee</div> -->
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                        <!-- <input type="checkbox" class="js-switch" id="admin_access_employee" onchange="changeAdminToEmployee()" <?php // echo $_SESSION['admin_access_employee']=="Y"?"checked":"";?> aria-label="Input"> -->
+                        <!-- <input type="checkbox" class="js-switch" id="admin_access_employee" onchange="changeAdminToEmployee()" <?php ?> aria-label="Input"> -->
                         <?php /** ?><div class="toggle-button-cover mt-2">
                             <div class="button-cover">
                                 <div class="button b2" id="button-16">
@@ -664,9 +659,8 @@
 
                 <?php } ?>
                 </div>
-                <div class="row text-center custom-notification m-0 module-width <?php //echo count((array)$_SESSION['module_setp']) >=8?"custom-scroll":""; ?>" <?php //echo //count((array)$_SESSION['module_setp']) >=8?'style="height: 610px;"':''; ?>>
+                <div class="row text-center custom-notification m-0 module-width <?php ?>" <?php //echo //count((array)$_SESSION['module_setp']) >=8?'style="height: 610px;"':''; ?>>
                     <?php
-                    //echo "<pre>"; print_r($_SESSION['module_setp']);  echo "</pre>";
                     foreach($_SESSION['module_setp'] as $module_list11){
                         if($module_list11['linking'] == 1){
                             if(!isset($_SESSION['application_user_module_roles'][$module_list11['module_id']]) && !in_array(ADMIN_ROLES,(array)$_SESSION['role_ids'])){
@@ -680,8 +674,6 @@
                     if(count((array)$accesmodule) != 0 && count((array)$notaccesmodule) != 0){
                        $modulelists = array_merge($accesmodule,$notaccesmodule);
                     }
-                    //echo "dfdfbv";
-                    //echo "<pre>"; print_r($accesmodule); echo "</pre>";
                     foreach($modulelists as $module_list){
                     if($module_list['linking'] == 1){
                         $style =  "";
@@ -699,12 +691,10 @@
                         $style = "";
                         $modultitle = "";
                         $href = "";
-                       // $href = "index.php?option=COM_CHANGE_MODULE_GROUPS&Rid=".base64_encode($module_list['module_id']);
                         if(!isset($_SESSION['application_user_module_roles'][$module_list['module_id']]) && !in_array(ADMIN_ROLES,(array)$_SESSION['role_ids'])){
                             $style = "background-color: #cccc;'";
                             $href = "#";
                             $modultitle ='data-bs-toggle="tooltip" data-placement="bottom" title="'.__('This Module Is Not Activated').'"';
-                           // $pointrernone = "style='pointer-events: none'";
                             $modulfunction = "";
                         }
                             if($_SESSION['work_module_setup_id'] == $module_list['module_id']){
@@ -728,12 +718,11 @@
     <?php } ?>
     <input type="hidden" id="work_module_setup_id" value="<?php echo base64_encode($_SESSION['work_module_setup_id']); ?>">
 </ul>
-<?php //echo "<pre>Goodddd";print_r($_SESSION['application_menu_TNC']); echo "</pre>";
+<?php 
     if($timeprint == '1' && $maxtimeshow >= '18'){ echo "After Header Menu  - ".date('m/d/Y h:i:s a')."</br>";
     }
 ?>
 <?php
-//echo "<pre>Goodddd";print_r($_SESSION['role_nav']); print_r($topnavcenter); echo "</pre>";
 
 if($_SESSION['user_activated'] == 'Y'){ ?>
 <!------ Add allin one menu  End--->
@@ -749,7 +738,7 @@ if($_SESSION['user_activated'] == 'Y'){ ?>
 <?php } ?>
 
 <?php
-if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav'])){  //echo "<pre>"; print_r($topnavcenter); echo "</pre>";
+if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav'])){
     foreach ($topnavcenter as  $listnav) {?>
         <li class="nav-item dropdown has-megamenu">
             <a class="nav-link dropdown-toggle text-primary" href="#" data-bs-toggle="dropdown">
@@ -795,7 +784,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
 
 
 
-<?php foreach ($listnav['child'] as  $chieldlist) {  //echo  "<pre>";print_r($chieldlist); echo "</pre>";?>
+<?php foreach ($listnav['child'] as  $chieldlist) {?>
   <div class="col-lg-<?php echo $collgw; ?> float-left" style=" width: <?php echo  $collgwidth; ?>%">
     <?php foreach ($chieldlist as  $list) { ?>
             <div class="col-megamenu">

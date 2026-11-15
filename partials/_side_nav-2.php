@@ -5,7 +5,6 @@ function menudisplaytop($menuarray,$type){
         $child = count($menuarrayvalue['child']);
         $link = $child >0 ?  'javascript:;' : 'index.php?option='.$menuarrayvalue['Page_Name'];
         $drop =  $child >0 ?  'pcoded-hasmenu' : '';
-            //$icon = ($menuarrayvalue['Menu_Icon']== '' )?'kt-menu__link-bullet kt-menu__link-bullet--dot' : $menuarrayvalue['Menu_Icon'].'icon-xl';
         $icon = "";
         $str .= '<li class="'.$drop.'" >
                 <a href="'.$link.'" class="waves-effect waves-dark"> &nbsp;<i class="'.$icon.'"><span></span></i><span class="pcoded-mtext">'.$menuarrayvalue['Label'].'</span>';
@@ -63,7 +62,7 @@ function menudisplaytop($menuarray,$type){
                     <div class="sale-card ">
                         <!-- <div class="card-header">
                             <h5 class="card-herder-left">
-                                <a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3 f-16 f-w-600"><?php // echo $_SESSION['employee']['display_name'];?>
+                                <a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3 f-16 f-w-600"><?php ?>
                                 </a>
                                 <a href="#">
                                     <i class="flaticon2-correct text-success font-size-h5 mr-2"></i>
@@ -94,8 +93,8 @@ function menudisplaytop($menuarray,$type){
                                         <a href="#" class="text-dark-75 text-hover-primary font-size-h6 font-weight-bold mr-3 f-14 f-w-600 text-white"><?php echo $_SESSION['employee']['display_name'];?>
                                         </a>
                                     </h6>
-                                    <h6 class="f-14"><?php // echo $desig['designation_name'];?></h6>
-                                    <h6 class="f-14"><?php // echo $location['location_name'];?></h6>
+                                    <h6 class="f-14"><?php ?></h6>
+                                    <h6 class="f-14"><?php ?></h6>
                                     <h6 class="text-white f-14"><?php echo 'CFO'; ?></h6>
                                     <h6 class="text-white f-14"><?php echo 'Hydrabad'; ?></h6>
                                 </div>
