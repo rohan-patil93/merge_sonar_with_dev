@@ -254,7 +254,7 @@ if ($isPolicyActive) {
                         <div class="card-body mt-2">
                             <div class="row g-3">
                                 <div class="col-md-4">
-                                    <label class="form-label fw-bold"><?= __("Policy Name *") ?></label>
+                                    <span class="form-label fw-bold d-inline-block"><?= __("Policy Name *") ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('Policy name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="policy_name" 
                                            value="<?php echo htmlspecialchars($currentPolicy['policy_name'] ?: 'Corporate Sensitive Data Policy'); ?>" 
                                            required <?php echo !$isAdmin ? 'disabled' : ''; ?>>
@@ -262,19 +262,19 @@ if ($isPolicyActive) {
                                     
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label fw-bold"><?= __("From Date") ?></label>
+                                    <span class="form-label fw-bold d-inline-block"><?= __("From Date") ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('From date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="from_date" id="from_date" 
                                            value="<?php echo htmlspecialchars($currentPolicy['from_date'] ?? date('Y-01-01')); ?>" 
                                            <?php echo !$isAdmin ? 'disabled' : ''; ?>>
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label fw-bold"><?= __("To Date") ?></label>
+                                    <span class="form-label fw-bold d-inline-block"><?= __("To Date") ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('To date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="to_date" id="to_date" 
                                            value="<?php echo htmlspecialchars($currentPolicy['to_date'] ?? date('Y-12-31', strtotime('+4 years'))); ?>" 
                                            <?php echo !$isAdmin ? 'disabled' : ''; ?>>
                                 </div>
                                 <div class="col-md-4 mt-2">
-                                    <label class="form-label fw-bold"><?= __("Policy Description / Business Notes") ?></label>
+                                    <span class="form-label fw-bold d-inline-block"><?= __("Policy Description / Business Notes") ?></span>
                                     <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="description" rows="2" placeholder="<?= __("Explain the data protection compliance objectives...") ?>" <?php echo !$isAdmin ? 'disabled' : ''; ?>><?php echo htmlspecialchars($currentPolicy['description'] ?? 'Automated masking policy for sensitive personal and financial identifiers.'); ?></textarea>
                                 </div>
                             </div>
@@ -567,21 +567,21 @@ if ($isPolicyActive) {
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label class="form-label fw-bold"><?= __("Field Name / Label") ?> <span class="text-danger">*</span></label>
+                    <span class="form-label fw-bold d-inline-block"><?= __("Field Name / Label") ?> <span class="text-danger">*</span></span>
                     <input aria-label="<?= htmlspecialchars(__('Custom field label'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="custom_field_label" placeholder="<?= __("e.g. Salary, SSN, Driving License") ?>">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-bold"><?= __("Field Key Identifier") ?> <span class="text-danger">*</span></label>
+                    <span class="form-label fw-bold d-inline-block"><?= __("Field Key Identifier") ?> <span class="text-danger">*</span></span>
                     <input aria-label="<?= htmlspecialchars(__('Custom field key'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control font-monospace" id="custom_field_key" placeholder="<?= __("e.g. salary, ssn, driving_license") ?>">
                     <small class="text-muted"><?= __("Unique lowercase identifier used in code calls") ?></small>
                 </div>
                 <div class="row g-2">
                     <div class="col-6 mb-3">
-                        <label class="form-label fw-bold"><?= __("Show Start Chars") ?></label>
+                        <span class="form-label fw-bold d-inline-block"><?= __("Show Start Chars") ?></span>
                         <input aria-label="<?= htmlspecialchars(__('Custom field show first'), ENT_QUOTES, 'UTF-8'); ?>" type="number" min="0" max="10" class="form-control font-monospace" id="custom_field_show_first" value="2">
                     </div>
                     <div class="col-6 mb-3">
-                        <label class="form-label fw-bold"><?= __("Show End Chars") ?></label>
+                        <span class="form-label fw-bold d-inline-block"><?= __("Show End Chars") ?></span>
                         <input aria-label="<?= htmlspecialchars(__('Custom field show last'), ENT_QUOTES, 'UTF-8'); ?>" type="number" min="0" max="10" class="form-control font-monospace" id="custom_field_show_last" value="2">
                     </div>
                 </div>
