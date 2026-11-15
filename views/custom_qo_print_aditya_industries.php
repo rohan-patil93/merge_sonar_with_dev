@@ -183,7 +183,7 @@ function emptyCheck($valu){
 ?>
 <?php if($callapi !='Y'){ ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>InfiSuite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
