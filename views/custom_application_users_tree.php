@@ -29,7 +29,7 @@ $jsondecode = json_decode($jsondecode,1);
 				<div class="card-header table-card-header mb-3">
 					<h5> <?= __("User Lists") ?> </h5>
 					<div class="card-header-right table-card-header mb-2">
-				<label class="form-label  col-form-label m-r-20"><?= __("User List") ?></label>		
+				<span class="form-label  col-form-label m-r-20 d-inline-block fw-bold"><?= __("User List") ?></span>		
 
 <select aria-label="<?= htmlspecialchars(__('Hid userid'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " id="hid_userid" onchange="usertree(this.value)">
 	<?php foreach($jsondecode as $dt){ ?>
