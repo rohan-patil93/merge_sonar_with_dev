@@ -110,12 +110,12 @@ $bank_work_flow = "Y";
 	      	</div>
 	      	<?php }if($fieldaccesright['field']['first_name']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
-	          	<label class="form-label d-block"><?php echo __('First Name'); ?></label>
+	          	<span class="form-label d-block fw-bold"><?php echo __('First Name'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['first_name']); ?></p>
 	      	</div>
 	      	<?php }if($fieldaccesright['field']['middle_name']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
-	          	<label class="form-label d-block"><?php echo __('Middle Name'); ?></label>
+	          	<span class="form-label d-block fw-bold"><?php echo __('Middle Name'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['middle_name']); ?></p>
 	      	</div>
 	      	<?php }if($fieldaccesright['field']['last_name']!="NA"){  ?>
@@ -130,12 +130,12 @@ $bank_work_flow = "Y";
 	      	</div>
 	      	<?php }if($fieldaccesright['field']['address']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
-	          	<label class="form-label d-block"><?php echo __('Permanent Address'); ?></label>
+	          	<span class="form-label d-block fw-bold"><?php echo __('Permanent Address'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['address']); ?></p>
 	      	</div>
 	      	<?php }if($fieldaccesright['field']['contact_address']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
-	          	<label class="form-label d-block"><?php echo __('Current Address'); ?></label>
+	          	<span class="form-label d-block fw-bold"><?php echo __('Current Address'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['contact_address']); ?></p>
 	      	</div>
 	      	<?php }if($fieldaccesright['field']['post_code']!="NA"){  ?>
@@ -346,7 +346,7 @@ $bank_work_flow = "Y";
 		                   	<span class="form-label d-block fw-bold"><?php echo __('IFSC Code'); ?></span>
 		                    <p> <?php  echo renderSensitiveDataWithToggle($data['bank_link'], 'ifsc', false);  ?></p>
 		                    
-		                    <label class="form-label d-block"><?php echo __('Account No'); ?></label>
+		                    <span class="form-label d-block fw-bold"><?php echo __('Account No'); ?></span>
 		                   	<p> <?php  echo renderSensitiveDataWithToggle($data['bank_account_no'], 'bank_account', false);  ?></p>
 
 		                </div>
@@ -1080,7 +1080,7 @@ $bank_work_flow = "Y";
 		    <?php }if($fieldaccesright['field']['office_phone']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['office_phone'] !="E"?"custom_readonly":""; ?>  
 		    <div class="col-xl-6 mt-2" >
-		        <label class="form-label"><?php echo __('Office Phone'); ?>  </label>
+		        <span class="form-label d-inline-block fw-bold"><?php echo __('Office Phone'); ?>  </span>
 		        <input aria-label="<?= htmlspecialchars(__('Office phone'), ENT_QUOTES, 'UTF-8'); ?>"  type="number" class="form-control <?php echo $readonlycheck; ?>" name="office_phone" placeholder="<?php echo __('Enter Office Phone'); ?>" value="<?php echo $data['office_phone']; ?>"/>
 		    </div>
 		    <?php }if($fieldaccesright['field']['office_ext']!="NA"){ 
@@ -1160,7 +1160,7 @@ $bank_work_flow = "Y";
 	    <?php }if($fieldaccesright['field']['blood_group']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['blood_group'] !="E"?"custom_readonly":""; ?> 
 	    <div class="col-xl-6 mt-2" >
-		    <label class="form-label"><?php echo __('Blood Group'); ?></label>
+		    <span class="form-label d-inline-block fw-bold"><?php echo __('Blood Group'); ?></span>
 		    <div class="<?php echo $readonlycheck; ?>">
 				<select aria-label="<?= htmlspecialchars(__('Blood group'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-select js-example-basic-single" name="blood_group">
 				  	<option value=""><?php echo __('Select Any One'); ?></option>
