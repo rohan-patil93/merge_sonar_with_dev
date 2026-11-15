@@ -384,7 +384,7 @@ function getDepreciationMethod(){
 								</div>
 							</div> 
 							<div class="form-group col-lg-6 ownerships w-full" style="display:<?php echo ($assetsdeatil['ownership']=="S" || $assetsdeatil['ownership']=="")?"none":""; ?>">
-								<label class="form-label"><?= __('Partner Vendor') ?></label>
+								<span class="form-label d-inline-block fw-bold"><?= __('Partner Vendor') ?></span>
 								<select class="form-select js-example-basic-single " name="vendor" aria-label="Vendor">
 									<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($vendors as $vendors1){ ?>					
