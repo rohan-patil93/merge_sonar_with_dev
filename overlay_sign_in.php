@@ -43,14 +43,6 @@
 
                         <?php }
                         }?>
-                                    <!---   <p class="text-muted f-14 f-w-600">Your Social Campaigns</p>
-                                   <div class="d-block mt-5">
-                                        <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg" alt="" > Sign in with Google</button>
-                                        <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/apple-black.svg" alt="" > Sign in with Apple</button>
-                                    </div>
-                                    <div class="d-block mt-5">
-                                        <h3 class="text-muted f-14">Or with email</h3>
-                                    </div>   -->
 								<form class="md-float-material form-material" action="" method="post" >
 
                                     <div class="text-left mt-5">
@@ -78,7 +70,6 @@
                                       <input type="hidden" name="submit" value="Login" />
                                             <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-4">Sign In</button>
                                         </div>
-                                       <!--  <p class="text-muted f-w-600">Not a Member yet? <a class="text-primary" href="#" onclick="registerform()">Sign up</a></p> -->
                                     </div>
 								</form>
                                 </div>
@@ -86,14 +77,6 @@
 								<form class="md-float-material form-material" action="" method="post" >
                                     <img class="img-100 mt-0 rentalji" src="<?php echo $image; ?>" alt="" >
 									 <h2 class="f-26 f-w-600 mt-4">Sign Up</h2>
-                                  <!---   <p class="text-muted f-14 f-w-600">Your Social Campaigns</p>
-                                   <div class="d-block mt-5">
-                                        <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg" alt="" > Sign in with Google</button>
-                                        <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/apple-black.svg" alt="" > Sign in with Apple</button>
-                                    </div>
-                                    <div class="d-block mt-4 text-center">
-                                        <h3 class="text-muted f-14">Or with email</h3>
-                                    </div>  --->
                                     <div class="text-left mt-4">
                                         <div class="form-group">
                                             <label for="regUserName" class="visually-hidden">User Name</label>
@@ -109,10 +92,6 @@
                                              <span class="text-muted f-12 text-left ">Use 8 or more characters with a mix of letters, numbers & symbols.</span>
 
 										</div>
-                                     <!---   <div class="form-group mb-1 text-left mt-2">
-                                            <input type="checkbox" name="" id="term">
-                                            <label for="trem">I Accept the <a class="text-primary" href="">Terms</a></label>
-                                        </div>  -->
                                         <div class="form-group">
 										  <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
                                       <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >

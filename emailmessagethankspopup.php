@@ -97,9 +97,6 @@
             <div class="row">
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
-                     <!-- <div class="text-right">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
-                    </div> -->
                     <form class="md-float-material form-material">
                         <div class="auth-box p-5">
                             <div class="card-block">
@@ -126,18 +123,6 @@
     <!-- Thank you page  end here -->
 <!-- Warning Section Ends -->
 <!-- Required Jquery -->
-<!-- <script type="text/javascript" src="assets/bower_components/jquery/js/jquery.min.js"></script>
-<script type="text/javascript" src="assets/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="assets/bower_components/popper.js/js/popper.min.js"></script>
-<script type="text/javascript" src="assets/bower_components/bootstrap/js/bootstrap.min.js"></script>
-
-<script src="assets/pages/waves/js/waves.min.js"></script>
-
-<script type="text/javascript" src="assets/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
-
-<script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr.js"></script>
-<script type="text/javascript" src="assets/bower_components/modernizr/js/css-scrollbars.js"></script>
-<script type="text/javascript" src="assets/js/common-pages.js"></script> -->
 </body>
 
 </html>

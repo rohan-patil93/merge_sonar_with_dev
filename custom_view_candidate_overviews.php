@@ -457,31 +457,9 @@ $due_date_period_list = $result['period_list'];
                 <?php echo $job_posting_candidates['recruitment_manager'] != "" ? $_SESSION['users'][$job_posting_candidates['recruitment_manager']] : "N/A"; ?>
               </p>
             </div>
-            <!--           <div class="row mb-2 pb-2">
-            <h4 class="f-w-600 f-16 mb-0">Mentor</h4>
-            <p class="f-14 mb-0">Rohan</p>
-          </div> -->
           </form>
         </div>
       </div>
-      <!-- <div class="card">
-        <div class="card-header">
-          <h5>Assigned To</h5>
-           <div class="card-header-right">
-            <a class="text-primary" href=""><i class="ti-pencil"></i></a>
-          </div>
-        </div>
-        <div class="card-block">
-          <div class="row mb-2 pb-2">
-            <h4 class="f-w-600 f-16 mb-0">Manager</h4>
-            <p class="f-14 mb-0">1 Person</p>
-          </div>
-          <div class="row mb-2 pb-2">
-            <h4 class="f-w-600 f-16 mb-0">Buddy</h4>
-            <p class="f-14 mb-0">3 People</p>
-          </div>
-        </div>
-      </div> -->
       <?php echo $todisplaythree = todisplaythree(array('table' => 'candidates', 'originator' => $rpdata['created_by'], 'encode' => 'yes', 'id' => $_GET['Rid'], 'dis_query' => 'no', 'dis_timeline' => 'yes', 'dis_comments' => 'no', 'dis_track' => 'no')); ?>
     </div>
 
@@ -490,14 +468,6 @@ $due_date_period_list = $result['period_list'];
 
     <div class="col-lg-6">
       <div class="card mb-4">
-        <!--   <ul class="nav md-tabs infisuite_tab mb-2">
-          <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab" href="#candidateprofiletab" role="tab">Profile Readiness</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#candidatettask" role="tab"> Tasks</a>
-          </li>
-        </ul> -->
         <div class="tab-content card-block p-0">
           <div class="tab-pane active" id="candidateprofiletab" role="tabpanel">
 
@@ -1264,7 +1234,6 @@ $due_date_period_list = $result['period_list'];
                             <div class="row">
                               <div class="col-lg-4">
                                 <input type="hidden" name="candidate_id" value="<?php echo $candidate_id; ?>" />
-                                <!--  <input type="hidden" name="submit" value="submit" />   -->
                                 <button id="kt_login_signin_submit_request" class="btn btn-primary mr-2"
                                   name="submitrequerd_docs" value="exit"><i class="la la-check"></i>Submit</button>
                               </div>

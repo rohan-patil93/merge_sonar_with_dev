@@ -301,32 +301,6 @@ document.addEventListener('error', function (e) {
   									</div>
   								</div>
   							</div>
-<!--                   <div class="col-lg-6 form-group w-full">
-                      <label class="form-label">Number of Employee</label>
-                      <input type="number" class="form-control" name="no_of_users" value="0" aria-label="No Of Users">
-                  </div>
-                  <div class="col-lg-12 form-group">
-                      <label class="form-label">Revenue</label>
-                      <div class="row">
-                        <div class="col-lg-6">
-                           <div class="input-group input-group-button ">
-                          <input type="number" class="form-control width1" name="min_revenue" value="" aria-label="Min Revenue">
-                           <span class="input-group-text addon-style">
-                                <label class="">Lac</label>
-                            </span>
-                        </div>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="input-group input-group-button ">
-                              <input type="number" class="form-control width1" name="max_revenue" value="0" aria-label="Max Revenue">
-                              <span class="input-group-text addon-style">
-                                <label class="">Lac</label>
-                            </span>
-                        </div>
-                        </div>
-
-                      </div>
-                  </div> -->
               </div>
               <div class="footer_btn">
               	<button type="button"  class="btn btn-success m-r-50" onclick="nextsetupview(1)"><i class="ti-arrow-left"></i> Previous Step</button>

@@ -287,8 +287,6 @@ $dis_error['6007']  = "The Captcha code does not match!";
 <script type="text/javascript" src="assets/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
 <!-- modernizr js -->
  <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr-custom.js"></script>
-<!-- <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr.js"></script>
-<script type="text/javascript" src="assets/bower_components/modernizr/js/css-scrollbars.js"></script> -->
 <script type="text/javascript" src="assets/js/common-pages.js"></script>
  <script type="text/javascript" src="assets/js/script.js"></script>
 <script>

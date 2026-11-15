@@ -49,14 +49,6 @@
 
                         <?php }
                         }?>
-               <!---  <p class="text-muted f-14 f-w-600">Your Social Campaigns</p>
-                 <div class="d-block mt-5">
-                    <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg" alt="" > Sign in with Google</button>
-                    <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/apple-black.svg" alt="" > Sign in with Apple</button>
-                </div>
-                <div class="d-block mt-5">
-                    <h3 class="text-muted f-14">Or with email</h3>
-                </div>   -->
 					<form class="md-float-material form-material" action="" method="post" novalidate>
 
                 <div class="width-60 text-left mt-3">
@@ -75,21 +67,12 @@
                                       <input type="hidden" name="submit" value="Login" />
                         <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-4 btn-custom-color" style="">Sign In</button>
                     </div>
-                    <!-- <p class="text-muted f-w-600">Not a Member yet? <a class="text-primary" href="#" onclick="registerform()">Sign up</a></p> -->
                 </div>
 				</form>
             </div>
 			<div class="p-2 regsterform" style="display:none">
                 <img class="img-100 mt-0 rentalji" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
                 <h2 class="f-26 f-w-600 mt-2 text-center">Sign Up</h2>
-               <!---  <p class="text-muted f-14 f-w-600 text-center">Your Social Campaigns</p>
-                 <div class="d-block mt-5 text-center">
-                    <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg" alt="" > Sign in with Google</button>
-                    <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/apple-black.svg" alt="" > Sign in with Apple</button>
-                </div>
-                <div class="d-block mt-4 text-center">
-                    <h3 class="text-muted f-14">Or with email</h3>
-                </div>   -->
 					<form class="md-float-material form-material" action="" method="post" novalidate>
 
                 <div class="width-60 text-left mt-4">
@@ -104,13 +87,8 @@
                     <div class="form-group mb-1">
                         <label for="regPassword" class="visually-hidden">Password</label>
                         <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="password" id="regPassword" required="" placeholder="Password" aria-label="Password">
-                       <!-- <span class="text-muted f-12 text-left ">Use 8 or more characters with a mix of letters, numbers & symbols.</span>  -->
 
 					</div>
-                 <!--   <div class="form-group mb-1 text-left mt-2">
-                        <input type="checkbox" name="" id="term">
-                        <label for="trem">I Accept the <a class="text-primary" href="">Terms</a></label>
-                    </div>  -->
                     <div class="form-group">
 					  <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
                                       <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
@@ -164,7 +142,6 @@
                 <!-- <div class="text-center d-block">
                     <img class="img-100 mt-3" src="assets/images/sign-in/<?php ?>" alt="" >
                 </div> -->
-                <!-- <img class="mt-5 mb-5" src="assets/images/sign-in/auth-screens.png" style="" alt="" > -->
                 <div class="mt-4 text-center text-dark">
                     <h2 class="f-30 f-w-600">Welcome to Vendor Registration Portal<?php ?></h2>
                     <!-- <p class="f-14 text-white p-2 m-l-30 m-r-30"><?php ?></p> -->
@@ -172,7 +149,6 @@
                     <ul class="text-start m-l-10" style="list-style: disc; list-style-position: inside;">
                         <li class=""><b class="f-w-600">Username/Email:</b> Enter the email address associated with your registration.</li>
                         <li class=""><b class="f-w-600">Password:</b> Enter your password. Password fields are case-sensitive.</li>
-                        <!-- <li class="p-2"><b class="f-w-600">Remember Me:</b> (Optional) Select this option if you are using a personal device and would like your credentials remembered for future logins. Security Reminder: We strongly recommend against using this function on public or shared computers.</li> -->
                     </ul>
                     <b class="f-w-600 d-block text-start mt-3">Having trouble accessing your account?</b>
                     <ul class="text-start mt-2 m-l-10 login-ul" style="list-style: disc; list-style-position: inside;">
@@ -198,12 +174,6 @@
                     <ul class="text-start mt-2 m-l-10" style="list-style: disc; list-style-position: inside;">
                         <li class="">Click the "Sign in" button to securely access your vendor portal account.</li>
                     </ul>
-                    <!-- <b class="f-w-600 text-start d-block mt-3">Additional Information</b>
-                    <ul class="text-start mt-2" style="list-style: disc; list-style-position: inside;">
-                        <li class="p-2">For detailed information regarding our privacy practices, please refer to our Privacy Policy: link to your Privacy Policy.</li>
-                        <li class="p-2">Our comprehensive Terms and Conditions outline the rights and responsibilities of using the vendor portal. Please review them at your convenience: Terms and Conditions: link to your Terms and Conditions.</li>
-                        <li class="p-2">Should you require assistance with login or encounter any technical difficulties, please contact our Vendor Support team at [phone number] or [email address].</li>
-                    </ul> -->
                 </div>
             </div>
         </div>

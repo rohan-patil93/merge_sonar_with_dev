@@ -3,16 +3,12 @@
     <div class="loader-bg">
         <div class="loader-bar"></div>
     </div>
-    <!-- <div class="mobile-view-logo bg-primary text-center">
-        <img class="img-100 m-3" src="assets/images/sign-in/HRstaq-1.png" alt="" >
-    </div> -->
     <div class="row fancy-sign-in">
         <div class="col-lg-5 bg-white">
             <div class="m-l-20 p-l-20 margin-0 mob-pd">
                 <div class="logo m-l-30"> <img src="<?php echo $image; ?>" style="width: :150px !important;" alt="">
                 </div>
                 <div class="p-5 custom-login-on pt-0 pb-0">
-                    <!-- <p class="text-muted f-w-600 text-center f-18 text-muted">Not a Member yet? <a class="text-primary" href="#" onclick="registerform()">Sign up</a></p> -->
 
                     <h2 class="f-26 f-w-600 mt-4">Sign In</h2>
                     <p class="text-muted f-14 f-w-600"><?php echo LOGIN_INFO['heding']; ?></p>
@@ -80,24 +76,7 @@
                                             In</button>
                                     </div>
                                 </div>
-                                <!--   <div class="col-lg-6 text-right mt-4">
-                                    <b class="m-r-15">Or</b>
-                                    <a class="m-r-10" href=""><img class="img-20" src="assets/images/sign-in/google-icon.svg" alt="" ></a>
-                                    <a class="m-r-10" href=""><i class="fa fa-facebook-official f-20 mt-2"></i></a>
-                                    <a class="" href=""><img class="img-20" src="assets/images/sign-in/apple-black.svg" alt="" ></a>
-                                </div> -->
                             </div>
-                            <!--  <div class="row mt-5">
-                                <div class="col-lg-6">
-                                    <select class="form-control border">
-                                        <option>English</option>
-                                        <option>Spanish</option>
-                                        <option>German</option>
-                                        <option>Japanese</option>
-                                        <option>French</option>
-                                    </select>
-                                </div>
-                            </div>  -->
                         </div>
                     </form>
                 </div>
@@ -120,7 +99,6 @@
                                 <label for="regEmail" class="visually-hidden">Email Id</label>
                                 <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text"
                                     name="email" id="regEmail" required="" placeholder="Email Id" aria-label="Email Id">
-                                <!-- <span class="text-muted f-12 text-left">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</span>  -->
                             </div>
                             <div class="form-group mb-1">
                                 <label for="regPassword" class="visually-hidden">Password</label>
@@ -147,12 +125,6 @@
                                             class="btn btn-primary waves-effect waves-light w-100 mt-4">Submit</button>
                                     </div>
                                 </div>
-                                <!--   <div class="col-lg-6 text-right mt-4">
-                                <b class="m-r-15">Or</b>
-                                <a class="m-r-10" href=""><img class="img-20" src="assets/images/sign-in/google-icon.svg" alt="" ></a>
-                                <a class="m-r-10" href=""><i class="fa fa-facebook-official f-20 mt-2"></i></a>
-                                <a class="" href=""><img class="img-20" src="assets/images/sign-in/apple-black.svg" alt="" ></a>
-                            </div> -->
                             </div>
                         </div>
                     </form>
@@ -182,7 +154,6 @@
             </div>
         </div>
         <div class="col-lg-7 desktop-view-bg why-choose" style="">
-            <!-- <img class="w-100 fancy-bg" src="assets/images/sign-in/recruitstaq_side_image.png" style="" alt="" > -->
             <div class="row align-items-center">
                 <div class="col-lg-4">
                     <div class="why-box hrstaq-box float-end wow fadeInLeft">

@@ -254,7 +254,6 @@ session_destroy ();
   <script src="assets/pages/forms-wizard-validation/form-wizard.js"></script>
 
   <script type="text/javascript" src="assets/js/custom.js"></script>
-  <!-- <script type="text/javascript" src="assets/pages/widget/demo_dashboard4.js"></script> -->
   <script type="text/javascript" src="assets/pages/todo/todo.js"></script>
 
   <script src="assets/pages/ckeditor/ckeditor.js"></script>
@@ -262,7 +261,6 @@ session_destroy ();
   <script src="assets/js/custom_insert_latter.js"></script>
   <script src="assets/pages/data-table/extensions/buttons/js/extension-btns-custom.js"></script>
   <script src="assets/js/pcoded.min.js"></script>
-  <!-- <script src="assets/js/vertical/vertical-layout.min.js"></script> -->
   <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 
 

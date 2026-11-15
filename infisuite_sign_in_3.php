@@ -141,9 +141,6 @@
                                             <label for="chrUserName" class="visually-hidden">User Name</label>
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="chrUserName" id="chrUserName" required="" placeholder="User Name" aria-label="User Name">
                                         </div>
-                                        <!-- <div class="form-group mb-1">
-                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="chrPassword" required="" placeholder="Password">
-                                        </div> -->
                                         <div class="password-wrapper">
                                             <label for="chrPassword" class="visually-hidden">Password</label>
                                             <input type="password" id="chrPassword" class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" required="" placeholder="Enter Password" name="chrPassword" aria-label="Password">

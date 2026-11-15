@@ -100,7 +100,6 @@ $file_array = array_keys($selectedlist);
 
   <!--end: Search Form -->
 
-  <!-- </div> -->
 
 
   <div class="modal-footer mt-5" >

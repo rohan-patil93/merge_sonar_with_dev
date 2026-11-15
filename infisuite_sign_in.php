@@ -44,10 +44,6 @@
 				    <!--  <div class="text-center d-block">
 					   <img class="img-100 mt-3" src="<?php echo $image; ?>" alt="" >
 				    </div> -->
-                    <!-- <img class=" img-vector"  src="assets/images/sign-in/seating_image.png" style="width: 460px;" alt="" > -->
-                    <!-- <div class="mt-2 text-center">
-                        <p class="f-14 text-muted p-2 m-l-30 m-r-30 margin-0">1. Cubicle management system streamlines workspace allocation by enabling administrators to assign cubicles to employees efficiently. It also allows for the assignment of necessary equipment, ensuring each workspace is fully equipped and ready for use. This system enhances organization and maximizes resource utilization.</p>
-                    </div> -->
                 </div>
             </div>
             <div class="login_right text-center">

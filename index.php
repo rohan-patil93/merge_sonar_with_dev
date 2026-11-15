@@ -552,8 +552,6 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
     <?php if($_SESSION['apply_js']['headcount'] == "1"){ ?>
      <!-- modernizr js -->
       <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr-custom.js"></script>
-    <!-- <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr.js"></script>
-    <script type="text/javascript" src="assets/bower_components/modernizr/js/css-scrollbars.js"></script> -->
 
     <!-- peity Chart js -->
     <script src="assets//bower_components/peity/js/jquery.peity.js"></script>
@@ -618,22 +616,10 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
    <?php if($_SESSION['apply_js']['table']==1){ ?>
     <!--------------  data table   --------------->
     <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr-custom.js"></script>
-    <!-- <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr.js"></script>
-    <script type="text/javascript" src="assets/bower_components/modernizr/js/css-scrollbars.js"></script> -->
 
 
 
    <!-- data-table js check -->
-<!-- <script src="assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="assets/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="assets/pages/data-table/extensions/buttons/js/dataTables.buttons.min.js"></script>
-<script src="assets/pages/data-table/extensions/buttons/js/buttons.flash.min.js"></script>
-<script src="assets/pages/data-table/extensions/buttons/js/jszip.min.js"></script>
-<script src="assets/pages/data-table/extensions/buttons/js/buttons.colVis.min.js"></script>
-<script src="assets/js/pcoded.min.js"></script>
-<script src="assets/js/vertical/vertical-layout.min.js"></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script type="text/javascript" src="assets/js/script.js"></script> -->
 
 <!-- data-table js end check -->
     <script src="assets/pages/data-table/js/jszip.min.js"></script>
@@ -744,8 +730,6 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
      <script type="text/javascript" src="assets/js/custome_range_slider.js"></script>
     <?php } ?>
     <?php if($_SESSION['apply_js']['crop_image']==1){ ?>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script> -->
-       <!--  <script src="assets/bower_components/cropper/js/cropper.js"></script> -->
         <script src="assets/bower_components/cropper/js/custom_cropper.js"></script>
     <?php } ?>
  	<!------- Genral item work ------------------------------>
@@ -754,8 +738,6 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 
 <!-- scrollbars modernizr js -->
  <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr-custom.js"></script>
-	<!-- <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr.js"></script>
-	<script type="text/javascript" src="assets/bower_components/modernizr/js/css-scrollbars.js"></script> -->
 
 	<!-- modal window POPUP  modalEffects js nifty modal window effects -->
 	<script src="assets/js/classie.js"></script>
@@ -796,7 +778,6 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 		if($_SESSION['apply_js']['custom_insert_my_reports']==1){ ?>
 	<script src="assets/js/custom_insert_my_reports.js"></script>
 	<?php } ?>
-<!-- 	<script type="text/javascript" src="assets/pages/widget/widget-chart.js"></script> -->
   <!---------------- Main Chart --------------------------->
 	<?php if($_SESSION['apply_js']['knobchart']==1){ ?>
 		<!-- Knob Chart js -->
@@ -934,7 +915,6 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
     <?php } ?>
 <!-- sweet alert js Rohan Added-->
 <script type="text/javascript" src="assets/bower_components/sweetalert/js/sweetalert.min.js"></script>
-<!-- <script type="text/javascript" src="assets/js/modal.js"></script> -->
 <!-- sweet alert  js Rohan Added-->
 <?php  if($_SESSION['apply_js']['Payroll_dashboard']==1){   ?>
     <!-- google chart custom_list_candidate_offer-->
@@ -964,8 +944,6 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
     <script src="assets/pages/chart/float/jquery.flot.categories.js"></script>
     <script src="assets/pages/chart/float/jquery.flot.pie.js"></script>
     <!-- Custom js -->
-<!--     <script type="text/javascript" src="assets/pages/chart/float/float-chart-custom.js"></script>
- -->
     <script type="text/javascript" src="assets/js/custom_view_pms_dashboard_2.js"></script>
     <!-- End google chart -->
 <?php } ?>
@@ -999,7 +977,6 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 <?php if($_SESSION['apply_js']['amc_dashboard_js']==1){ ?>
     <script src="assets/pages/chart/float/jquery.flot.js"></script>
     <script src="assets/pages/chart/float/jquery.flot.categories.js"></script>
-   <!--  <script src="assets/pages/chart/float/jquery.flot.pie.js"></script> -->
     <script type="text/javascript" src="assets/js/custom_list_amc_allocations.js"></script>
 <?php } ?>
 
@@ -1087,7 +1064,6 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 <script src="assets/bower_components/raphael/js/raphael.min.js"></script>
 <script src="assets/bower_components/morris.js/js/morris.js"></script>
 <!-- Custom js -->
-<!-- <script src="assets/pages/chart/morris/morris-custom-chart.js"></script> -->
 <?php } ?>
 
 <?php if($_SESSION['apply_js']['MANUFACTURING1_DASHBOARD']==1){ ?>
@@ -1114,10 +1090,6 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 <?php if($_SESSION['apply_js']['custom_insert_visitor_logs']==1){ ?>
 <script src="assets/js/custom_insert_visitor_logs.js?v=<?= time() ?>"></script>
 <?php } ?>
-    <!-- Session timeout js
-    <script type="text/javascript" src="assets/pages/session-idle-Timeout/session_timeout.min.js"></script>
-    <script type="text/javascript" src="assets/pages/session-idle-Timeout/session-idle-Timeout-custom.js"></script>
--->
 	<script>
     	$(document).ready(function() {
        		 $('[data-bs-toggle="tooltip"]').tooltip();

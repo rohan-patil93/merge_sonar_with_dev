@@ -282,7 +282,6 @@
              </tr>
            </table>
          </div>
-         <!-- <a href="" class="text-primary f-14 f-w-600 d-block">View All</a> -->
        </div>
      </div>
    </div>
@@ -551,7 +550,6 @@ $(document).ready(function() {
 
            </table>
          </div>
-         <!-- <a href="" class="text-primary f-14 f-w-600 d-block mt-2">View All Reports</a> -->
        </div>
      </div>
    </div>
@@ -586,7 +584,6 @@ $(document).ready(function() {
              <?php } ?>
            </table>
          </div>
-         <!-- <a href="" class="text-primary f-14 f-w-600 mt-3">View All Payroll Runs</a> -->
        </div>
      </div>
    </div>
@@ -636,7 +633,6 @@ $(document).ready(function() {
              </tr>
            </table>
          </div>
-         <!-- <a href="" class="text-primary f-14 f-w-600 d-block">View All Alerts</a> -->
        </div>
      </div>
    </div>

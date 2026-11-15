@@ -602,10 +602,6 @@ function addslabrows(){
              <div class=" flex-column-fluid">
                <div class="card card-custom">
                 <div class="card-body p-0">
-<!--
-                 <a href="#"onclick="showreimburse('Reimbursement','','system_other_earnings');" class="btn btn-success waves-effect waves-light">
-                  <i class="ti-plus"></i> New Reimbursement
-                </a> -->
 
 
                 <!-- Form wizard with validation card start -->
@@ -617,7 +613,6 @@ function addslabrows(){
                         <div id="wizard">
                           <section>
                         <form class="wizard-form" id="example-advanced-form_new"  method="post" action="" enctype="multipart/form-data">
-                         <!--      <form class="form wizard-form" id="verticle-wizard" method="post" action="" enctype="multipart/form-data"> -->
                                  <input type="hidden" name="Save" value="Save">
                                 <h3> Organisation Setup </h3>
                                 <fieldset>
@@ -868,7 +863,6 @@ function addslabrows(){
     <div class="form-group col-lg-12">
       <span class="d-inline-block fw-bold" style="margin-bottom:5px">Select days you worked in a calendar week.</span>
 
-      <!--<label>Select days you worked in a calendar week. </label>-->
       <select class="selectlist form-select js-example-basic-multiple"  name="working_days[]" multiple="multiple" title="Working Days" aria-label="Working Days">
         <option value="Mon" selected>Mon</option>
         <option value="Tue" selected>Tue</option>
@@ -1201,7 +1195,6 @@ function addslabrows(){
                      </tr>
                      <tr>
                        <td>
-                        <!--       <label class="checkbox checkbox-primary"><input class="form-control itemRow" type="checkbox" title="Input" aria-label="Input"> <span></span> </label> -->
 
                         <div class="checkbox-fade fade-in-primary">
                           <label class="form-label">
@@ -1643,12 +1636,6 @@ function addslabrows(){
               <div class="col-xl-5">
                 <h4 class="font-weight-bold text-dark">Calculation </h4>
               </div>
-           <!--    <div class="col-xl-6 mb-10">
-                <a href="#" onclick="showpopup('Deduction','','system_earnings');">
-                  <h4><i class="kt-font-brand flaticon-add-circular-button text-primary "> </i>New Deduction</h4>
-                </a>
-              </div>
-              <div class="col-xl-6"> </div> -->
             </div>
             <?php
             foreach ($deduction_componentlist as $scvalue) {
@@ -1718,13 +1705,6 @@ function addslabrows(){
               <div class="col-xl-5">
                 <h4 class="font-weight-bold text-dark">Maximum Amount</h4>
               </div>
-                 <!--  <div class="col-xl-6 mb-10">
-                    <a href="#" onclick="showreimburse('Reimbursement','','system_other_earnings');">
-                      <h4><i class="kt-font-brand flaticon-add-circular-button text-primary "> </i>New Reimbursement</h4>
-                    </a>
-                  </div>
-                  <div class="col-xl-6">
-                  </div> -->
                 </div>
                 <?php
                 foreach ($other_earnings_componentlist as $scvalue) {
@@ -1806,8 +1786,7 @@ function addslabrows(){
        <label>Component Name</label>
        <div class="input-group input-icon-right">
         <input type="text" class="form-control" id="pop_name" placeholder="<?php echo $placeholder['compname'];?>" name="pop_name" title="Pop Name" aria-label="Pop Name">
-  <!--   <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span>
-  --></div>
+  </div>
 </div>
 <span class="form-text text-muted"><?php echo $helptext['compname'];?> </span>
 </div>
@@ -1816,16 +1795,14 @@ function addslabrows(){
    <label>Component Type</label>
    <div class="input-group input-icon-right">
     <input type="text" class="form-control" id="pop_code" placeholder="<?php echo $placeholder['comptype'];?>" name="pop_code" title="Pop Code" aria-label="Pop Code">
-<!--   <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
---></div>
+</div>
 <span class="form-text text-muted"><?php echo $helptext['comptype'];?> </span>
 </div>
 <div class="form-group col-lg-6">
  <label>Name in Payslip</label>
  <div class="input-group input-icon-right">
   <input type="text" class="form-control" id="pop_payslip_name" placeholder="<?php echo $placeholder['compdisplay'];?>" name="pop_payslip_name" title="Pop Payslip Name" aria-label="Pop Payslip Name">
-<!--   <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
---></div>
+</div>
 <span class="form-text text-muted"><?php echo $helptext['compdisplay'];?> </span>
 </div>
 </div>
@@ -1909,7 +1886,6 @@ function addslabrows(){
    <label>Component Name</label>
    <div class="input-group input-icon-right">
     <input type="text" class="form-control" id="reimpop_name" placeholder="<?php echo $placeholder['rcompname'];?>" name="reimpop_name" title="Reimpop Name" aria-label="Reimpop Name">
-   <!--  <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div> -->
   </div>
   <!-- <span class="form-text text-muted"><?php echo $helptext['compname'];?> </span> -->
 </div>
@@ -1917,7 +1893,6 @@ function addslabrows(){
  <label>Component Type</label>
  <div class="input-group input-icon-right">
   <input type="text" class="form-control" id="reimpop_code" placeholder="<?php echo $placeholder['rcomptype'];?>" name="reimpop_code" title="Reimpop Code" aria-label="Reimpop Code">
-  <!-- <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div> -->
 </div>
 <!-- <span class="form-text text-muted"><?php echo $helptext['rcomptype'];?> </span> -->
 </div>
@@ -1925,7 +1900,6 @@ function addslabrows(){
  <label>Name in Payslip</label>
  <div class="input-group input-icon-right">
   <input type="text" class="form-control" id="reimpop_payslip_name" placeholder="<?php echo $placeholder['rcompdisplay'];?>" name="reimpop_payslip_name" title="Reimpop Payslip Name" aria-label="Reimpop Payslip Name">
-  <!-- <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div> -->
 </div>
 <!-- <span class="form-text text-muted"><?php echo $helptext['rcompdisplay'];?> </span> -->
 </div>
@@ -1944,11 +1918,6 @@ function addslabrows(){
 </div>
 <div class="form-group ml-5">
  <div class="row">
- <!--  <label class="checkbox checkbox-primary">
-    <input type="checkbox" class="checkbox checkbox-primary"  id="reimpop_partofctc"/ title="Input" aria-label="Input"><span></span>  </label>
-    &nbsp; <label>Include this as a Flexible Benefit Plan Component.</label>
-    <div class="form-text text-muted">(You have to enable at employee level.)</div>
- -->
 <div class="checkbox-fade fade-in-primary">
   <label class="form-label">
     <input type="checkbox" value="" id="reimpop_partofctc" title="Input" aria-label="Input">
@@ -2117,10 +2086,7 @@ function addslabrows(){
 
 <!-- Custom js -->
 <script src="assets/pages/data-table/extensions/buttons/js/extension-btns-custom.js"></script>
-<!--     <script src="assets/js/pcoded.min.js"></script> -->
-<!--    <script src="assets/js/vertical/vertical-layout.min.js"></script> -->
 <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<!--    <script type="text/javascript" src="assets/js/script.js"></script> -->
 <script type="text/javascript" src="assets/js/custom.js"></script>
 
 </body>

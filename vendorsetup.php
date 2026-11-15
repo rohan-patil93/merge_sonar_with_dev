@@ -731,17 +731,10 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
   <div id="kt_header_mobile" class="header-mobile align-items-center  header-mobile-fixed p-1" style="background-color: white;">
    <a href="">
-   <!--  <img alt="Logo" style="width:70px;" src="assets/images/logo.png" />  -->
    <?php if($_SESSION['config']['display_logo']!=""){ ?>
                     <img class="img-fluid img-100" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
                 <?php }else{ echo $_SESSION['config']['display_logo'];
                 } ?></a>
-         <!---
-		 <div class="d-flex align-items-center">
-            <button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle"> <span></span> </button>
-            <button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle"> <span></span> </button>
-         </div>
-         --->
 
 
 
@@ -793,9 +786,6 @@ if($register_data['current_status'] !=""){
                 <a href="index.php?option=com_logout" class="btn btn-danger">
                   <i class="ti-power-off"></i> Logout
                 </a>
-				<!--	<a onclick="showFormDetailPopuop()" class="btn btn-danger">
-                       Popup
-                     </a>   -->
                    </div>
                  </div>
                  <div class="card-block">
@@ -1595,7 +1585,6 @@ if($register_data['current_status'] !=""){
 
 <!-- sweet alert js Rohan Added-->
 <script type="text/javascript" src="assets/bower_components/sweetalert/js/sweetalert.min.js"></script>
-<!-- <script type="text/javascript" src="assets/js/modal.js"></script> -->
 
 <?php /** ?>
 <!-- [ chat user list ] end -->
