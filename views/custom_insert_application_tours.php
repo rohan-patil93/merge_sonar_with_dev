@@ -87,7 +87,7 @@ function deleteitem(cardid){
 	<div class="container-fluid ">
 		<div class="card card-custom card-sticky " id="kt_page_sticky_card">
 			<div class="card-header">
-				<h5><?= __('Take A Tours') ?></h5><i class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Go Toure"></i> 
+				<h5><?= __('Take A Tours') ?></h5><i role="button" tabindex="0" aria-label="Go Toure" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Go Toure"></i> 
 				<div class="card-header-right">
 				       <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                      <i class="icofont icofont-reply"></i> <?= __('Back') ?></a>
