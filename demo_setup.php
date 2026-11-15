@@ -264,11 +264,11 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   						<div class="row mb-5">
   							<div class="col-lg-6">
   								<div class="form-group">
-  									<label class="form-label">Company Name</label>
+  									<span class="form-label d-inline-block fw-bold">Company Name</span>
   									<input type="text" class="form-control" name="name" value="<?php echo $companies['name']; ?>" readonly aria-label="Name">
   								</div>
   								<div class="form-group w-full">
-  									<label class="form-label">Type of Company</label>
+  									<span class="form-label d-inline-block fw-bold">Type of Company</span>
   									<select name="company_type_id" class="form-control form-select js-example-basic-single" aria-label="Company Type Id">
   										<option value="">Select Any One </option>
   										<?php foreach($company_types as $ct){ ?>
@@ -277,7 +277,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   									</select>
   								</div>
   								<div class="form-group  w-full">
-  									<label>Industry</label>
+  									<span class="d-inline-block fw-bold" style="margin-bottom:5px">Industry</span>
   									<select class="form-select js-example-basic-single"  name="industry" aria-label="Industry">
   										<option value="">Select Any One </option>
   										<?php foreach($industrylist as $valueindustry) { ?>
@@ -288,7 +288,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   							</div>
   							<div class="col-lg-6 text-center">
   								<div class=" form-group">
-  									<label class="form-label">Company logo</label>
+  									<span class="form-label d-inline-block fw-bold">Company logo</span>
   									<div class="profile-pic mt-2">
   										<label class="-label" for="display_logo">
   											<span> <i class="fa fa-camera"></i> &nbsp; Upload Logo</span>
@@ -358,19 +358,19 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 					<h3 class="f-w-600 mb-5">Contact Details</h3>
 					<div class="row mb-5">
 						<div class="col-lg-6 form-group">
-							<label class="form-label">Contact Person Name</label>
+							<span class="form-label d-inline-block fw-bold">Contact Person Name</span>
 							<input type="text" class="form-control" name="incharge_name" aria-label="Incharge Name">
 						</div>
 						<div class="col-lg-6 form-group">
-							<label class="form-label">Contact Number</label>
+							<span class="form-label d-inline-block fw-bold">Contact Number</span>
 							<input type="text" class="form-control" name="telephone" aria-label="Telephone">
 						</div>
 						<div class="col-lg-6 form-group">
-							<label class="form-label">Email</label>
+							<span class="form-label d-inline-block fw-bold">Email</span>
 							<input type="text" class="form-control" name="email" aria-label="Email">
 						</div>
 						<div class="col-lg-6 form-group">
-							<label class="form-label">Address</label>
+							<span class="form-label d-inline-block fw-bold">Address</span>
 							<textarea type="text" class="form-control" name="address1" aria-label="Address1"></textarea>
 						</div>
 						<div class="col-lg-6 form-group w-full">
@@ -432,23 +432,23 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 					<h3 class="f-w-600 mb-5">Tax Information</h3>
 					<div class="row">
 						<div class="form-group col-lg-6">
-							<label class="form-label">License Number</label>
+							<span class="form-label d-inline-block fw-bold">License Number</span>
 							<input type="text" class="form-control"  name="license_number" placeholder="<?php echo $placeholder['licensenumber'];?>" aria-label="License Number">
 						</div>
 						<div class="form-group col-lg-6">
-							<label class="form-label">PAN Number</label>
+							<span class="form-label d-inline-block fw-bold">PAN Number</span>
 							<input type="text" class="form-control"  name="pan_number" placeholder="<?php echo $placeholder['licensenumber'];?>" aria-label="Pan Number">
 						</div>
 						<div class="form-group col-lg-6">
-							<label class="form-label">TAN Number</label>
+							<span class="form-label d-inline-block fw-bold">TAN Number</span>
 							<input type="text" class="form-control"  name="tan_number" placeholder="<?php echo $placeholder['licensenumber'];?>" aria-label="Tan Number">
 						</div>
 						<div class="form-group col-lg-6">
-							<label class="form-label">GST Number</label>
+							<span class="form-label d-inline-block fw-bold">GST Number</span>
 							<input type="text" class="form-control"  name="gst_number" placeholder="<?php echo $placeholder['licensenumber'];?>" aria-label="Gst Number">
 						</div>
 						<div class="form-group col-lg-6">
-							<label class="form-label">CIN Number</label>
+							<span class="form-label d-inline-block fw-bold">CIN Number</span>
 							<input type="text" class="form-control"  name="cin_number" placeholder="<?php echo $placeholder['licensenumber'];?>" aria-label="Cin Number">
 						</div>
 					</div>
@@ -484,13 +484,13 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 					<h3 class="f-w-600 mb-5">System Configuration</h3>
 					<div class="row">
 						<div class="col-lg-6 form-group w-full">
-		                      <label class="form-label">Time Zone</label>
+		                      <span class="form-label d-inline-block fw-bold">Time Zone</span>
 		                      <select name="time_zone" id="time_zone" class="form-control form-select js-example-basic-single" aria-label="Time Zone">
 		                        <option value="">Select Any One</option>
 		                     </select>
 		                 </div>
 		                <div class="col-lg-6 form-group w-full">
-		                      <label class="form-label">Date Format</label>
+		                      <span class="form-label d-inline-block fw-bold">Date Format</span>
 		                      <select name="date_format" class="form-control form-select js-example-basic-single" aria-label="Date Format">
 		                        <?php foreach($dateformatlist as $valuedates) { ?>
 		                          <option value="<?php echo $valuedates;?>"><?php echo $valuedates; ?></option>
@@ -498,19 +498,19 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 		                     </select>
 		                </div>
 						<div class="form-group col-lg-6">
-							<label class="form-label">Number Format</label>
+							<span class="form-label d-inline-block fw-bold">Number Format</span>
 							<select name="number_format" class="form-control form-select js-example-basic-single" aria-label="Number Format">
 								<option value="">Select Any One</option>
 							</select>
 						</div>
 						<div class="form-group col-lg-6">
-							<label class="form-label">Default Currency</label>
+							<span class="form-label d-inline-block fw-bold">Default Currency</span>
 							<select name="default_currency_id" class="form-control form-select js-example-basic-single" aria-label="Default Currency Id">
 								<option value="">Select Any One</option>
 							</select>
 						</div>
 						<div class="form-group col-lg-6">
-							<label class="form-label">Currency Format</label>
+							<span class="form-label d-inline-block fw-bold">Currency Format</span>
 							<select name="currency_formate" class="form-control form-select js-example-basic-single" aria-label="Currency Formate">
 								<option value="">Select Any One</option>
 							</select>
@@ -548,11 +548,11 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 					<h3 class="f-w-600 mb-5">Locations</h3>
 					<div class="row">
 						<div class="col-lg-6">
-							<label class="form-label">Locations Name</label>
+							<span class="form-label d-inline-block fw-bold">Locations Name</span>
 							<input type="text" class="form-control" name="location_name[]" aria-label="Location Name">
 						</div>
 						<div class="col-lg-6">
-							<label class="form-label">Locations Short Name</label>
+							<span class="form-label d-inline-block fw-bold">Locations Short Name</span>
 							<input type="text" class="form-control" name="short_name[]" aria-label="Short Name">
 						</div>
 					</div>
