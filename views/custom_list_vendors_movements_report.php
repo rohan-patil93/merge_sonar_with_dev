@@ -27,7 +27,7 @@ $today = date('Y-m-d');
 		<div class="card-body p-4">
 			<div class="row">
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>From Date <span class="text-danger">*</span></label>
+					<span class="d-inline-block fw-bold" style="margin-bottom:5px">From Date <span class="text-danger">*</span></span>
 					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
