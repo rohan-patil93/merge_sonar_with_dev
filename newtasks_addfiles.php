@@ -79,7 +79,7 @@ $file_array = array_keys($selectedlist);
           <div class="col-lg-6">
            <!-- Start content -->
            <label>Select files</label>
-                <select onchange="selectfiles()" class="form-control mt-5 form-select js-example-basic-multiple" id="kt_select2_42" name="filelist[]" multiple="multiple">
+                <select aria-label="<?= htmlspecialchars(__('Filelist'), ENT_QUOTES, 'UTF-8'); ?>" onchange="selectfiles()" class="form-control mt-5 form-select js-example-basic-multiple" id="kt_select2_42" name="filelist[]" multiple="multiple">
            <?php 
            foreach ($document_details as $table_data) {
            $field_name='document_name';
