@@ -94,7 +94,7 @@ if(count((array)($vendors)) != 0){  ?>
                     <td class="p-2" style="width: 50%;">
                         <div class="align-middle">
                             <?php if($onboard_emp['image'] !=""){?>
-                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-5" onerror="this.src='uploads/all/no-image.jpg';" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
+                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-5" data-onerror-src="uploads/all/no-image.jpg" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php } else { ?>
                                 <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
                             <?php } ?>
