@@ -2512,3 +2512,9 @@
     font-size: 14px;
 }
 
+
+/* Orphan <label> elements were turned into <span class="vl-label">: same look as the theme label rule (zero specificity, so
+   classes still override it) plus the page's own label rules above. */
+:where(.vl-label) { display: inline-block; font-weight: 700; margin-bottom: 5px; }
+.form-group .vl-label { font-weight: 550; color: #334155; margin-bottom: 8px; font-size: 14px; }
+.guided-large-input-wrap .vl-label { font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 6px; }
