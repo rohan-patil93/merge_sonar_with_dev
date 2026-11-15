@@ -85,7 +85,7 @@ include_once '../comm.php';
 	</div>
 	<div class="card-body">
 		<div class="form-group text-left">
-			<label><?php echo __('Question Text:'); ?> <span class="text-danger">*</span></label>
+			<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Question Text:'); ?> <span class="text-danger">*</span></span>
 			<textarea id="survey_question" name="survey_question" class="form-control" placeholder="" aria-label="<?php echo __('Survey Question'); ?>"> </textarea>
 		</div>
 		<div class="form-group text-left">
@@ -133,7 +133,7 @@ include_once '../comm.php';
 		<?php } ?>
 		<?php if($_GET['type']==2)	{ ?>
 			<div class="form-group text-left mt-10">
-				<label><?php echo __('Scale from 1 to:'); ?> <span class="text-danger">*</span></label>
+				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Scale from 1 to:'); ?> <span class="text-danger">*</span></span>
 				<input type="number" name="survey_question_option[]"  class="form-control" placeholder="10" aria-label="10"> 
 			</div>
 		<?php } ?>	
