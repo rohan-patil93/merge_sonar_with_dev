@@ -213,7 +213,7 @@ function refrashpage(){
                                         <input type="hidden" id="subscription_group_id"  name="subscription_group_id" value="<?php echo $rid; ?>">
                                         <div class="align-middle">
                                             <?php if($applicationuser['user_photo']) {?>
-                                                <img src="uploads/all/<?php echo $applicationuser['user_photo']; ?>"  class="img-radius img-50 align-top m-r-15" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img alt="" src="uploads/all/<?php echo $applicationuser['user_photo']; ?>"  class="img-radius img-50 align-top m-r-15" onerror="this.src='uploads/all/no-image.jpg';">
                                             <?php } else { ?>
                                                 <span  alt="<?= __('user image') ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($applicationuser['display_name']); ?></span>
                                             <?php } ?>
@@ -334,7 +334,7 @@ function refrashpage(){
                                                             <input class="form-control" type="text" name="fieldvalue[]" value="<?php echo $custoval; ?>" aria-label="<?= __('Field Value') ?>">
                                                         </td>
                                                         <td>
-                                                            <i class="ti-trash text-danger" onclick="deleteRow('1')"></i>
+                                                            <i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Delete row'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" onclick="deleteRow('1')"></i>
 
                                                         </td>
                                                     </tr>
