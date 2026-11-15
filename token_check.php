@@ -30,4 +30,3 @@ if (isset($data['email'])) {
     http_response_code(401);
     echo 'Token invalid or expired.';
 }
-?>

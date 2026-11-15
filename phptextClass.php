@@ -115,4 +115,3 @@ class phptextClass
 		return array($x, $y);
 	}
 }
-?>

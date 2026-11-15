@@ -60,4 +60,3 @@ function array_to_csv_download($array, $filename = "export.csv", $delimiter=",")
     }
 }
 
-?>

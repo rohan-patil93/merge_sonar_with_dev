@@ -30,4 +30,3 @@ if($method == 'post'){
     echo $response;
 }
 
-?>

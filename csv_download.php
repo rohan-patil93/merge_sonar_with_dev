@@ -66,4 +66,3 @@ $data = strtoupper(implode(',', $array));
 header('Content-Type: application/csv');
 header('Content-Disposition: attachment; filename="'.$table.'.csv"');
 echo $data; exit;
-?>

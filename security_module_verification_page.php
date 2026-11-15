@@ -36,4 +36,3 @@ echo '<!DOCTYPE html><html><head><title>Visitor Authorization</title>
 h2{margin:0 0 10px;color:#1e293b}p{color:#64748b;font-size:14px;margin:0;line-height:1.5}</style></head>
 <body><div class="card"><div class="icon ' . $class . '">' . $emoji . '</div>
 <h2>' . $title . '</h2><p>' . $msg . '</p></div></body></html>';
-?>

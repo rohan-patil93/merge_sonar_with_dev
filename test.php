@@ -72,4 +72,3 @@ if($_GET['method']=='tocheckpost'){
 	}
 	echo json_encode($array);exit;
 }*/
-?>

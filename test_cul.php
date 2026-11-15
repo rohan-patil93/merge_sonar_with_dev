@@ -84,4 +84,3 @@ $url = API."?mode=toinsertupdatethejobpostingpublish&method=post";
 $return = file_post_contents($url, $data, 'insert');
 //$role = json_decode($response,1);
 echo $return; exit;
-?>

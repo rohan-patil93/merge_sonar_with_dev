@@ -11,4 +11,3 @@ try {
 } catch (Exception $e) {
     echo "Database Connection Failed: " . $e->getMessage();
 }
-?>

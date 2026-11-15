@@ -39,4 +39,3 @@ if($method == 'post'){
 
 
 }
-?>

@@ -29,4 +29,3 @@ $i=1; foreach($array_data as $key=>$array){
 header('Content-Type: application/csv');
 header('Content-Disposition: attachment; filename="'.$table.'.csv"');
 echo $data; exit;
-?>

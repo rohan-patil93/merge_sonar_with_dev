@@ -100,4 +100,3 @@ if (isset($_GET['month'])) {
     echo "Invalid request. Month parameter is required.";
     exit;
 }
-?>

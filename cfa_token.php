@@ -53,4 +53,3 @@ try {
     echo 'Error: ' . $e->getMessage() . PHP_EOL;
 }
 
-?>

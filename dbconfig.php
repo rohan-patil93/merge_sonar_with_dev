@@ -841,4 +841,3 @@ define("POLL_CAT_ID", 2);
 // added by koti end
 //define(SITEPATH_URL,'http://'.$_SERVER['HTTP_HOST']);
 
-?>

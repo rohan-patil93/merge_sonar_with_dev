@@ -20,4 +20,3 @@
   curl_exec($ch);
   // Close file
   fclose($fp);
-?>

@@ -116,4 +116,3 @@ if($transaction_table!=""){
 	header('Content-Disposition: attachment; filename="'.$table.'.csv"');
 	echo $data; exit;
 }
-?>

@@ -35,4 +35,3 @@ try {
 } catch (\Kreait\Firebase\Exception\Auth\FailedToVerifyToken $e) {
     echo "Invalid token: " . $e->getMessage();
 }
-?>
