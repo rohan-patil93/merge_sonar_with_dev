@@ -292,7 +292,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
             <div class="card-header">
                 <h5><?= __('Tenants Invoice/Payments'); ?></h5>
                 <div class="float-right">
-            <select class ="form-control js-example-basic-single" id="billchartyear" onchange="billChart()">
+            <select class ="form-control js-example-basic-single" id="billchartyear" aria-label="<?= htmlspecialchars(__('Year'), ENT_QUOTES, 'UTF-8'); ?>" onchange="billChart()">
               <?php $startyear = date("Y"); for($mk=$startyear-10;$mk <= $startyear; $mk++){
                 ?>
                 <option  value="<?php echo  $mk; ?>" <?php echo date('Y')==$mk?"selected":"";?>>
@@ -323,7 +323,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                     $totalpaidamount= round($vendorinvoicecnt['total_amount'])-round($vendorinvoicecnt['total_pending']);
                     $percengraf = 0;
                     if($tamount !="" AND $tamount !=0){
-                      $percengraf = customNanAndEmptyValidation(round(($totalpaidamount/$tamount)*100),1); 
+                      $percengraf = customNanAndEmptyValidation(round(($totalpaidamount/$tamount)*100)); 
                        //$percengraf = customNanAndEmptyValidation(round(($tamount/)*100),1); 
                     }       
                   ?>
@@ -356,7 +356,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
     <div class="row mb-3">
         <div class="col-lg-8"></div>
         <div class="col-lg-2 text-right">
-            <label class="form-label"> <?= __('Rent Month'); ?> </label>
+            <label for="month" class="form-label"> <?= __('Rent Month'); ?> </label>
         </div>
         <div class="col-lg-2">
             <div class=" form-group mb-0">
@@ -378,15 +378,15 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                 </div>
             </div>
             <div class="card-body" >
-                <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3" role="tablist">
+                <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3">
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#recent15days" role="tab" aria-selected="true">  <?= __('15 Days'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recent15days);?></label></a>
+                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#recent15days" role="tab" aria-selected="true">  <?= __('15 Days'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$recent15days);?></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#recent30days" role="tab" aria-selected="true"> <?= __('30 Days'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recent30days);?></label></a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#recent30days" role="tab" aria-selected="true"> <?= __('30 Days'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$recent30days);?></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#recent45days" role="tab" aria-selected="true"> <?= __('45 Days'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recent45days);?></label></a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#recent45days" role="tab" aria-selected="true"> <?= __('45 Days'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$recent45days);?></span></a>
                     </li>
                 </ul>
                 <div class="tab-content tabs">
@@ -484,15 +484,15 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                 </div>
             </div>
             <div class="card-body" >
-                <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3" role="tablist">
+                <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3">
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#expire15days" role="tab" aria-selected="true">  <?= __('15 Days'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$expire15days);?></label></a>
+                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#expire15days" role="tab" aria-selected="true">  <?= __('15 Days'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$expire15days);?></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#expire30days" role="tab" aria-selected="true"> <?= __('30 Days'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$expire30days);?></label></a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#expire30days" role="tab" aria-selected="true"> <?= __('30 Days'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$expire30days);?></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#expire45days" role="tab" aria-selected="true"> <?= __('45 Days'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$expire45days);?></label></a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#expire45days" role="tab" aria-selected="true"> <?= __('45 Days'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$expire45days);?></span></a>
                     </li>
                 </ul>
                 <div class="tab-content tabs">
@@ -590,15 +590,15 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                 </div>
             </div>
             <div class="card-body" >
-                <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3" role="tablist">
+                <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3">
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#renewal15days" role="tab" aria-selected="true">  <?= __('15 Days'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$renewal15days);?></label></a>
+                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#renewal15days" role="tab" aria-selected="true">  <?= __('15 Days'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$renewal15days);?></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#renewal30days" role="tab" aria-selected="true"> <?= __('30 Days'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$renewal30days);?></label></a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#renewal30days" role="tab" aria-selected="true"> <?= __('30 Days'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$renewal30days);?></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#renewal45days" role="tab" aria-selected="true"> <?= __('45 Days'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$renewal45days);?></label></a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#renewal45days" role="tab" aria-selected="true"> <?= __('45 Days'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$renewal45days);?></span></a>
                     </li>
                 </ul>
                 <div class="tab-content tabs">
@@ -882,7 +882,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
         $pending_amount= $vendorslist['total_amount']-$vendorslist['pending_amount'];
         $percengraf = 0;
         if($tamount !="" AND $tamount !=0){
-        $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100),1); } 
+        $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100)); } 
       
 
                               ?>    
@@ -956,7 +956,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                           $pending_amount= $vendorsrecentjoin['total_amount']-$vendorsrecentjoin['pending_amount'];
                           $percengraf = 0;
                           if($tamount !="" AND $tamount !=0){
-                          $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100),1); } 
+                          $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100)); } 
       
 
                       ?> 
