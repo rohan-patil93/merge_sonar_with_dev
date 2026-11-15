@@ -344,18 +344,18 @@ if($viewtime ==1 ){
 
             <?php }elseif($list['insert_page_type'] ==1 && !in_array($table,$noinsertview)){ ?>
               <?php if($page_details['insert_page_type']  == '2'){  ?>
-            <a href="#" onclick="dynamicInsertPopUpNew(<?php echo "'".$insert."'"; ?>)" class="btn btn-success mb-2 desktop-view" <?php echo $insert_permissionbtn; ?>>
+            <a href="#top" onclick="dynamicInsertPopUpNew(<?php echo "'".$insert."'"; ?>)" class="btn btn-success mb-2 desktop-view" <?php echo $insert_permissionbtn; ?>>
               <i class="icofont icofont-plus icon-white"></i>
               <?php echo $title;  ?>
             </button>
           <?php }else{  ?>
-            <a href="#" onclick="dynamicinsertpopup(<?php echo "'".$insert."'"; ?>)" class="btn btn-success mb-2 desktop-view" <?php echo $insert_permissionbtn; ?>>
+            <a href="#top" onclick="dynamicinsertpopup(<?php echo "'".$insert."'"; ?>)" class="btn btn-success mb-2 desktop-view" <?php echo $insert_permissionbtn; ?>>
               <i class="icofont icofont-plus icon-white"></i>
               <?php echo $title;  ?>
             </button>
           <?php } ?>
 
-            <a href="#" onclick="dynamicinsertpopup(<?php echo "'".$insert."'"; ?>)" class="mb-2 mob-import" <?php echo $permission_importbtn; ?>>
+            <a href="#top" onclick="dynamicinsertpopup(<?php echo "'".$insert."'"; ?>)" class="mb-2 mob-import" <?php echo $permission_importbtn; ?>>
               <span class="btn btn-primary btn-outline-primary btn-icon m-l-10"><i class="icon-plus text-primary"></i></span>
             </button>
 
