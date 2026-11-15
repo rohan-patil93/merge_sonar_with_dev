@@ -57,7 +57,7 @@ class amcAccountDetailsClass extends userClass{
       // $insertary['customer_since']=date('Y-m-d');
       $insertary['is_active'] = 0;
       $insertary['current_status'] = 0;
-      ;
+      
       $insertary['created_by'] = $post['user_id'];
       $insertary['created_date'] = date("Y-m-d H:i:s");
       $res = $callConfig->insertRecord('amc_account_details', $insertary);

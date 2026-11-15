@@ -12,7 +12,7 @@ class esopUserClass extends userClass{
 			$rid = $post['rid'];
 		}else{
 			$insertary['is_active']=0;
-			$insertary['current_status']=0;;
+			$insertary['current_status']=0;
 			$insertary['created_by']=$post['user_id'];
 			$insertary['created_date']=date("Y-m-d H:i:s");
 			$res = $callConfig->insertRecord('company_valuations',$insertary);
@@ -45,7 +45,7 @@ class esopUserClass extends userClass{
 					$return['item'][]= $callConfig->updateRecord('company_valuation_distributions',$insertary,'id',$post['irid'][$keyid]);
 				}else{
 					$insertary['is_active']=0;
-					$insertary['current_status']=0;;
+					$insertary['current_status']=0;
 					$insertary['created_by']=$post['user_id'];
 					$insertary['created_date']=date("Y-m-d H:i:s");
 					$return['item'][] = $callConfig->insertRecord('company_valuation_distributions',$insertary);
@@ -118,7 +118,7 @@ class esopUserClass extends userClass{
 			$rid = $post['rid'];
 		}else{
 			$insertary['is_active']=0;
-			$insertary['current_status']=0;;
+			$insertary['current_status']=0;
 			$insertary['created_by']=$post['user_id'];
 			$insertary['created_date']=date("Y-m-d H:i:s");
 			$res = $callConfig->insertRecord('esop_plans',$insertary);
@@ -152,7 +152,7 @@ class esopUserClass extends userClass{
 					$return['item'][]= $callConfig->updateRecord('esop_plan_buckets',$insertary,'id',$post['irid'][$keyid]);
 				}else{
 					$insertary['is_active']=0;
-					$insertary['current_status']=0;;
+					$insertary['current_status']=0;
 					$insertary['created_by']=$post['user_id'];
 					$insertary['created_date']=date("Y-m-d H:i:s");
 					$return['item'][] = $callConfig->insertRecord('esop_plan_buckets',$insertary);
@@ -285,7 +285,7 @@ class esopUserClass extends userClass{
 		}else{
 			$inseruser['user_id']=$userid;
 			$inseruser['is_active']=0;
-			$inseruser['current_status']=0;;
+			$inseruser['current_status']=0;
 			$inseruser['created_by']=$post['user_id'];
 			$inseruser['created_date']=date("Y-m-d H:i:s");
 			$res1 = $callConfig->insertRecord('company_contribution_users',$inseruser);
@@ -324,7 +324,7 @@ class esopUserClass extends userClass{
 
 		}else{
 			$insertary['is_active']=0;
-			$insertary['current_status']=0;;
+			$insertary['current_status']=0;
 			$insertary['created_by']=$post['user_id'];
 			$insertary['created_date']=date("Y-m-d H:i:s");
 			$insertary['user_id'] = $userid;

@@ -558,7 +558,7 @@ class reactClass extends userClass{
 						$emailarray['created_by'] = $get['user_id'];
 						$emailarray['contract_creation_or_updation'] = $contract_creation_or_updation;
 						$emailarray['contract_name'] = $insert_array['transaction_no']." - ".$insert_array['contract_name'];
-						$emailarray['contract_user_name'] = $originatordetailary->display_name;;
+						$emailarray['contract_user_name'] = $originatordetailary->display_name;
 						$emailarray['contract_update_datetime'] = date('Y-m-d H:i:s');
 						$emailarray['contract_update_by'] = $updatedby->display_name;
 
@@ -2715,7 +2715,7 @@ class reactClass extends userClass{
 						$emailarray['contract_name'] = $insert_array['contract_name'];
 						$emailarray['contract_number'] = $insert_array['transaction_no'];
 						$emailarray['contract_type'] = "";
-						$emailarray['contract_user_name'] = $originatordetailary->display_name;;
+						$emailarray['contract_user_name'] = $originatordetailary->display_name;
 						$emailarray['contract_update_datetime'] = date('Y-m-d H:i:s');
 
 						$sendnotification =$this->sendNotificationAndEmails($notarry,$emailarray,6);

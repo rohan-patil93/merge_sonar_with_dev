@@ -99,7 +99,7 @@ class pettyCashUserClass extends userClass{
 			$insertary['originator']=$post['user_id'];
 			$insertary['company_id']=$post['company_id'];
 			$insertary['is_active']=0;
-			$insertary['current_status']=0;;
+			$insertary['current_status']=0;
 			$insertary['created_by']=$post['user_id'];
 			$insertary['created_date']=date("Y-m-d H:i:s");
 			$res = $callConfig->insertRecord('petty_cash_box_topup_requests',$insertary);

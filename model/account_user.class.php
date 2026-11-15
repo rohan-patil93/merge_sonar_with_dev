@@ -408,7 +408,7 @@ class accountUserClass extends userClass{
             $rid = $post['rid'];
         }else{
             $insertary['is_active']=0;
-            $insertary['current_status']=0;;
+            $insertary['current_status']=0;
             $insertary['created_by']=$post['user_id'];
             $insertary['created_date']=date("Y-m-d H:i:s");
             $res = $callConfig->insertRecord('journal_settings',$insertary);
@@ -491,7 +491,7 @@ class accountUserClass extends userClass{
             $rid = $post['rid'];
         }else{
             $insertary['is_active']=0;
-            $insertary['current_status']=0;;
+            $insertary['current_status']=0;
             $insertary['created_by']=$post['user_id'];
             $insertary['created_date']=date("Y-m-d H:i:s");
             $res = $callConfig->insertRecord('tax_authorities',$insertary);
@@ -516,7 +516,7 @@ class accountUserClass extends userClass{
                 $return['tax_authorities_rates'][] = $res11;
                 $tax_authorities_rates_id = $post['tax_authorities_rates_id'][$parseq];
             }else{
-                $insertary['current_status']=0;;
+                $insertary['current_status']=0;
                 $insertary['created_by']=$post['user_id'];
                 $insertary['created_date']=date("Y-m-d H:i:s");
                 $res11 = $callConfig->insertRecord('tax_authorities_rates',$insertary);
@@ -533,7 +533,7 @@ class accountUserClass extends userClass{
                             $res= $callConfig->updateRecord('tax_authorities_rates_split',$insertary,'id',$post['srid'][$parseq][$keyid]);
                             $return['splite_res'][] = $res;
                         }else{
-                            $insertary['current_status']=0;;
+                            $insertary['current_status']=0;
                             $insertary['created_by']=$post['user_id'];
                             $insertary['created_date']=date("Y-m-d H:i:s");
                             $res = $callConfig->insertRecord('tax_authorities_rates_split',$insertary);
@@ -587,7 +587,7 @@ class accountUserClass extends userClass{
             $rid = $post['rid'];
         }else{
             $insertary['is_active']=0;
-            $insertary['current_status']=0;;
+            $insertary['current_status']=0;
             $insertary['created_by']=$post['user_id'];
             $insertary['created_date']=date("Y-m-d H:i:s");
             $res = $callConfig->insertRecord('fiscal_positions',$insertary);
@@ -605,7 +605,7 @@ class accountUserClass extends userClass{
                     $res= $callConfig->updateRecord('fiscal_positions_mappings',$insertary,'id',$post['srid'][$keyid]);
                     $return['ampping_res'][] = $res;
                 }else{
-                    $insertary['current_status']=0;;
+                    $insertary['current_status']=0;
                     $insertary['created_by']=$post['user_id'];
                     $insertary['created_date']=date("Y-m-d H:i:s");
                     $res = $callConfig->insertRecord('fiscal_positions_mappings',$insertary);
@@ -654,7 +654,7 @@ class accountUserClass extends userClass{
             $rid = $post['rid'];
         }else{
             $insertary['is_active']=0;
-            $insertary['current_status']=0;;
+            $insertary['current_status']=0;
             $insertary['created_by']=$post['user_id'];
             $insertary['created_date']=date("Y-m-d H:i:s");
             $res = $callConfig->insertRecord('deferred_revenues',$insertary);
@@ -710,7 +710,7 @@ class accountUserClass extends userClass{
             $rid = $post['rid'];
         }else{
             $insertary['is_active']=0;
-            $insertary['current_status']=0;;
+            $insertary['current_status']=0;
             $insertary['created_by']=$post['user_id'];
             $insertary['created_date']=date("Y-m-d H:i:s");
             $res = $callConfig->insertRecord('follow_up_levels',$insertary);
@@ -782,7 +782,7 @@ class accountUserClass extends userClass{
             $rid = $post['rid'];
         }else{
             $insertary['is_active']=0;
-            $insertary['current_status']=0;;
+            $insertary['current_status']=0;
             $insertary['created_by']=$post['user_id'];
             $insertary['created_date']=date("Y-m-d H:i:s");
             $res = $callConfig->insertRecord('reconciliations',$insertary);
@@ -992,7 +992,7 @@ class accountUserClass extends userClass{
             $post['transaction_number']=$transation;
             $insertary['originator']=$post['user_id'];
             $insertary['is_active']=0;
-            $insertary['current_status']=0;;
+            $insertary['current_status']=0;
             $insertary['created_by']=$post['user_id'];
             $insertary['created_date']=date("Y-m-d H:i:s");
             $res = $callConfig->insertRecord('journal_vouchers',$insertary);
@@ -1345,7 +1345,7 @@ class accountUserClass extends userClass{
             $post['transaction_number']=$transation;
             $insertary['originator']=$post['user_id'];
             $insertary['is_active']=0;
-            $insertary['current_status']=0;;
+            $insertary['current_status']=0;
             $insertary['created_by']=$post['user_id'];
             $insertary['created_date']=date("Y-m-d H:i:s");
             $res = $callConfig->insertRecord('bank_vouchers',$insertary);
@@ -1561,7 +1561,7 @@ class accountUserClass extends userClass{
             $post['transaction_number']=$transation;
             $insertary['originator']=$post['user_id'];
             $insertary['is_active']=0;
-            $insertary['current_status']=0;;
+            $insertary['current_status']=0;
             $insertary['created_by']=$post['user_id'];
             $insertary['created_date']=date("Y-m-d H:i:s");
             $res = $callConfig->insertRecord('cash_vouchers',$insertary);

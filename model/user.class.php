@@ -1628,7 +1628,7 @@ class userClass{
 
 		foreach ($lines as $line) {
 		    if (trim($line) !== '') {
-		        $data[] = explode(',', $line);;
+		        $data[] = explode(',', $line);
 		    }
 		}
 		//print_r($data); exit;
@@ -9741,16 +9741,16 @@ public function addjobpostingapplicatantdata($post,$get){
 
 		$stmp = $callConfig->getAllRows($query1stm);
 		//print()t_r($stmp);
-		$bankquery = $callConfig->selectQuery('banks','id,bank_name','id='.$st1->bank_id,'','','');;
+		$bankquery = $callConfig->selectQuery('banks','id,bank_name','id='.$st1->bank_id,'','','');
 		$bankdata = $callConfig->getRow($bankquery);
 
-		$locationquery = $callConfig->selectQuery('locations','id,location_name','id='.$st1->location_id,'','','');;
+		$locationquery = $callConfig->selectQuery('locations','id,location_name','id='.$st1->location_id,'','','');
 		$locationdata = $callConfig->getRow($locationquery);
 
-		$departmentsquery = $callConfig->selectQuery('departments','id,department_name','id='.$emp->department_id,'','','');;
+		$departmentsquery = $callConfig->selectQuery('departments','id,department_name','id='.$emp->department_id,'','','');
 		$departmentsdata = $callConfig->getRow($departmentsquery);
 
-		$designationsquery = $callConfig->selectQuery('designations','id,designation_name','id='.$st1->designation_id,'','','');;
+		$designationsquery = $callConfig->selectQuery('designations','id,designation_name','id='.$st1->designation_id,'','','');
 		$designationsdata = $callConfig->getRow($designationsquery);
 
 		$data['month']= date("F", mktime(0, 0, 0, $post['month'], 10));
@@ -10598,7 +10598,7 @@ public function addjobpostingapplicatantdata($post,$get){
     			if($join_day!=1){
     				$lastmanday = date('t', strtotime($post['joining_date']));
     				//echo "</br>step3-1-lastmanday-".$lastmanday;
-    				$remanday = $join_day-1;;
+    				$remanday = $join_day-1;
     				//echo "</br>step3-2-remanday-".$remanday;
     				$calslab_total = $calslab_total - (($monthly_calslab_total/$lastmanday)*$remanday);
     				//echo "</br>step4--".$calslab_total;
@@ -14904,7 +14904,7 @@ public function convertToYYYYMMDD($dateString) {
 		}
 		$details['rate']= $rate." %";
 
-		$whr="company_id=".$get['company_id']." and is_active='0' and category=".$get['category'] ;;
+		$whr="company_id=".$get['company_id']." and is_active='0' and category=".$get['category'] ;
 		$query=$callConfig->selectQuery(TBL_ASSESSMENT_SETUP,'*',$whr,'','','');
 		$response = $callConfig->getAllRows($query);
 		foreach($response as $svalues){
@@ -15064,7 +15064,7 @@ public function convertToYYYYMMDD($dateString) {
 					foreach($query_opt_details as $opt){
 						$response = json_decode($opt->response_option,1);
 						if(in_array($optionsdata, (array)$response)){
-							$count = $count+1;;
+							$count = $count+1;
 						}else{
 							$count=0;
 						}
@@ -15073,7 +15073,7 @@ public function convertToYYYYMMDD($dateString) {
 					foreach($query_opt_details as $opt){
 						$response = json_decode($opt->response_option,1)[0];
 						if($response!=''){
-							$count = $count+1;;
+							$count = $count+1;
 						}else{
 							$count=0;
 						}
@@ -19932,7 +19932,7 @@ public function getStatusWorkFlow($data){
 		}elseif($checkcriteria['workflow_configuration']->approval_type == 'custom_process'){
 			$conjson = json_decode($checkcriteria['workflow_configuration']->sub_approve_type,1);
 			$m = $data['level'];
-			$reporttolist['nextstepuid'][]  = $conjson['step_'.$m];;
+			$reporttolist['nextstepuid'][]  = $conjson['step_'.$m];
 		}elseif($checkcriteria['workflow_configuration']->approval_type == 'access_levels'){
 			$like = "'".'%"'.$checkcriteria['workflow_configuration']->sub_approve_type.'"%'."'";
 			$sql = "SELECT id FROM `application_users` WHERE  is_active = 0 AND company_id = '".$data['company_id']."' AND role_id like ".$like;
@@ -22895,7 +22895,7 @@ public function getLeaveWithStatus($data){
 			$usersres = $callConfig->getAllRows($userssql);
 			$returnarray['pending_cnt'] = $usersres;
 
-			$pending_list = "SELECT id,transaction_number,transaction_date,party_name,party_id,current_status,party_name,amount FROM purchase_invoices WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND current_status NOT IN('".ST_APPROVED."')".$condition;;
+			$pending_list = "SELECT id,transaction_number,transaction_date,party_name,party_id,current_status,party_name,amount FROM purchase_invoices WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND current_status NOT IN('".ST_APPROVED."')".$condition;
 			$pending_listres = $callConfig->getAllRows($pending_list);
 			$returnarray['pending_list'] = $pending_listres;
 
@@ -26132,7 +26132,7 @@ public function inserttasks($post, $get){
 			$ex =array();
 			foreach ($post['company_name'] as $key=> $company_name) {
 				if($company_name != ""){
-					$compay_file = $post['hidden_file'][$key];;
+					$compay_file = $post['hidden_file'][$key];
 					$ex['company_name'] = $company_name;
 					$ex['job_descrption'] = $post['job_descrption'][$key];
 					$ex['work_from'] = $post['work_from'][$key];
@@ -28820,7 +28820,7 @@ function updatetransactionactivityschedule($post){
 				$filed = $menuda['field'];
 			//echo $menudeta->$filed;
 			//print_r($menudeta); exit;
-				$edata[$menudeta->id] = $menudeta->$filed;;
+				$edata[$menudeta->id] = $menudeta->$filed;
 			}
 			$menudata[$menuda['table_name']]['data'] =  $edata;
 		}
@@ -32433,7 +32433,7 @@ public function getDisplayAttributesNewVersion($get){
 			$selectfield = ",display_name as company,email_id as email,address as billing_address,address as shipping_address,'".$config->sundry_creditors_acc."' as account_code";
 		}else{
 			$party_table = "vendors";
-			$creaditamount = $paymentsres->amount;;
+			$creaditamount = $paymentsres->amount;
 		}
 		$senddata = array('company_id'=>$post['company_id'],'transaction_location_id'=>$user->location_id,  'department_id'=>$user->department_id,  'cost_center_id'=>$user->cost_center,'transaction_number'=>'',  'transaction_date'=>$paymentsres->payment_date,  'currency_id'=>$user->default_currency_id,  'currency_rate'=>1,  'originator'=>$paymentsres->originator,  'party_id'=>'',  'party_name'=>$user->display_name,  'party_email'=>$user->user_email,  'party_tax_number'=>'',  'party_phone'=>$user->user_mobile,  'party_address'=>'',  'party_ship_adderss'=>'',  'place_of_supply'=>'',  'payment_terms'=>'',  'notes'=>'',  'printing_notes'=>'',  'parent_id'=>'','amount'=>$paymentsres->amount,  'tax_amount'=>0,  'type'=>'',  'tax_type'=>'',  'discount_type'=>'',  'discount_value'=>0,  'discount_amount'=>0,  'total_amount'=>$paymentsres->amount,  'debit_amount'=>$debitamount,  'credit_amount'=>$creaditamount,  'debit_tax'=>0,  'credit_tax'=>0,  'shipping_tax'=>0,  'shipping_amount'=>0,  'shipping_tax_amount'=>0,  'tax_state'=>0,  'opex_cpex'=>'',  'doc_ref_no'=>'',  'doc_ref_date'=>'',  'due_date'=>'',  'ref_type'=>$transaction_table,  'ref_id'=>$transaction_id,  'ref_no'=>$paymentsres->transaction_no,  'ref_date'=>$paymentsres->payment_date,   'is_active'=>'0',  'status_date'=>date("Y-m-d"),  'from_date'=>date("Y-m-d"),  'to_date'=>'',  'created_date'=>date("Y-m-d H:i:s"),'created_by'=>$paymentsres->originator,'current_status'=>ST_APPROVED); // master table entry
 		if($paymentsres->payment_type == 'bank'){
@@ -35548,7 +35548,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 						$emailarray['created_by'] = $userdetail->id;
 						$emailarray['transaction_name'] = ucwords(str_replace('_', ' ', $transaction_table));
 						$emailarray['transaction_list'] = $transactionlisttable;
-						$emailarray['request_date'] = date("d M Y",strtotime($todaydate));;
+						$emailarray['request_date'] = date("d M Y",strtotime($todaydate));
 						//Email part
 						$notarry = array();
 						// $email = $this->sendNotificationAndEmails($notarry,$emailarray,$follow_up_email_content_ref_id);
@@ -35610,7 +35610,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 						$emailarray1['created_by'] = $userdetail->id;
 						$emailarray1['transaction_name'] = ucwords(str_replace('_', ' ', $transaction_table));
 						$emailarray1['transaction_list'] = $transactionlisttable;
-						$emailarray1['request_date'] = date("d M Y",strtotime($todaydate));;
+						$emailarray1['request_date'] = date("d M Y",strtotime($todaydate));
 						//Email part
 						$notarry = array();
 						//$email = $this->sendNotificationAndEmails($notarry,$emailarray1,$escalation_email_content_ref_id);
@@ -38731,7 +38731,7 @@ public function gerReferanceTableDetails($get){
 	            //start - Serial Number Masters
 				$post['transaction_date'] = date("Y-m-d");
 				$post['party_id'] = $party_id;
-				$post['transaction_type'] = $document_type;;
+				$post['transaction_type'] = $document_type;
 				$transaction_number_details = $this->generatingApplicationSerialNumberMasters($document_type,$post);
 				$fieldnames['transaction_number'] = $transaction_number_details['main_transaction_number'];
 				$fieldnames['monthly_transaction_number'] = $transaction_number_details['monthly_transaction_number'];

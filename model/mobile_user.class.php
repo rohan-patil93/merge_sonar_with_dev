@@ -3610,7 +3610,7 @@ class mobileUserClass extends userClass{
 			foreach($teams as $list){
 				$mobilsendnotification = array();
 				$mobilsendnotification = $get;
-				$mobilsendnotification['message'] ='Someone has added a new user for this task. '.$task_data->task_name;;
+				$mobilsendnotification['message'] ='Someone has added a new user for this task. '.$task_data->task_name;
 				$mobilsendnotification['user_id'] =$list->user_id;
 				$mobilsendnotification['title'] = 'Task Assign';
 				$mobilsendnotification['data'] = array('module' => 'TASKDA', 'module_id' => '25', 'click_action' => 'OPEN_TASK','task_id' =>$post['transaction_id'], 'project_id' =>$task_data->project_id, 'event_type' => 'task_assign', 'application_table_name' => 'project_task_details');

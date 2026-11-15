@@ -1310,7 +1310,7 @@ payment tersm**/
 		        $insert_array['mode_of_renew'] = trim($columns[8]);
 		        $insert_array['bill_no'] = trim($columns[9]);
 		        $insert_array['activation_type'] = trim($columns[10]);
-		        $insert_array['plan_activation_date'] = $this->toMySQLDate($columns[11]);;
+		        $insert_array['plan_activation_date'] = $this->toMySQLDate($columns[11]);
 		        $insert_array['bill_date'] = $this->toMySQLDateTime($columns[12]);
 		        $insert_array['plan_amount'] = trim($columns[13]);
 		        $insert_array['client_gst'] = trim($columns[14]);

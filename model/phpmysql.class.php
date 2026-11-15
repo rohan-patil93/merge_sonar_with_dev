@@ -25,7 +25,7 @@ class phpMysqlClass{
 		global $callConfig;
 		$return = array();
 		$table_list = array();
-    	$return['dbname'] = $callConfig->dbname;;
+    	$return['dbname'] = $callConfig->dbname;
     	$row=$callConfig->getAllRows("SHOW TABLES");
 		$rowdb = 'Tables_in_'.$callConfig->dbname;
 		foreach($row as $table){

@@ -65,7 +65,7 @@ class rentalUserClass extends userClass{
 			$property_owner_id = $post['rid'];
 		}else{
 			$insertary['is_active']=0;
-			$insertary['current_status']=0;;
+			$insertary['current_status']=0;
 			$insertary['created_by']=$post['user_id'];
 			$insertary['created_date']=date("Y-m-d H:i:s");
 			$res = $callConfig->insertRecord('property_owners',$insertary);
@@ -102,7 +102,7 @@ class rentalUserClass extends userClass{
 					$property_owner_detail_id = $post['property_owner_detail_id'][$keyid];
 				}else{
 					$insertary['is_active']=0;
-					$insertary['current_status']=0;;
+					$insertary['current_status']=0;
 					$insertary['created_by']=$post['user_id'];
 					$insertary['created_date']=date("Y-m-d H:i:s");
 					$res1 = $callConfig->insertRecord('property_owner_details',$insertary);
@@ -120,7 +120,7 @@ class rentalUserClass extends userClass{
 							$return['item_child'][]= $callConfig->updateRecord('property_owner_detail_areas',$insertary,'id',$post['property_owner_detail_area_id'][$keyid][$keyyid]);
 						}else{
 							$insertary['is_active']=0;
-							$insertary['current_status']=0;;
+							$insertary['current_status']=0;
 							$insertary['created_by']=$post['user_id'];
 							$insertary['created_date']=date("Y-m-d H:i:s");
 							$res1 = $callConfig->insertRecord('property_owner_detail_areas',$insertary);
@@ -316,7 +316,7 @@ class rentalUserClass extends userClass{
 			$property_owner_id = $post['rid'];
 		}else{
 			$insertary['is_active']=0;
-			$insertary['current_status']=0;;
+			$insertary['current_status']=0;
 			$insertary['created_by']=$post['user_id'];
 			$insertary['created_date']=date("Y-m-d H:i:s");
 			$res = $callConfig->insertRecord('property_tenant_details',$insertary);
@@ -1423,7 +1423,7 @@ class rentalUserClass extends userClass{
 		if($get['admin_type'] != 1){
 			$condition .= " AND created_by = '".$get['user_id']."'";
 		}
-		$custsql = "SELECT id, email, phone, company, display_name, image, customer_since FROM customers WHERE company_id = '".$get['company_id']."' ".$condition." AND is_active = 0 ".$sortby." ".$limit;;
+		$custsql = "SELECT id, email, phone, company, display_name, image, customer_since FROM customers WHERE company_id = '".$get['company_id']."' ".$condition." AND is_active = 0 ".$sortby." ".$limit;
 		$custres = $callConfig->getAllRows($custsql);
 		$return['customers_sql'] = $custsql;
 		$return['customers'] = $custres;
@@ -1556,7 +1556,7 @@ class rentalUserClass extends userClass{
 		}else{
 			$insertary['customer_since']=date('Y-m-d');
 			$insertary['is_active']=0;
-			$insertary['current_status']=0;;
+			$insertary['current_status']=0;
 			$insertary['created_by']=$post['user_id'];
 			$insertary['created_date']=date("Y-m-d H:i:s");
 			$res = $callConfig->insertRecord('customers',$insertary);

@@ -5577,7 +5577,7 @@ class vMSUserClass extends userClass{
 			$catids[]= $fdetail->id;
 		}
 		$details['feedback_details'] = $fbdetails;
-		$whr="company_id=".$get['company_id']." AND  transaction_id IN (".implode(",",$catids).")";;
+		$whr="company_id=".$get['company_id']." AND  transaction_id IN (".implode(",",$catids).")";
 		$query=$callConfig->selectQuery('vendor_feedback_setup_questions','*',$whr,'','','');
 		$qustion_details = $callConfig->getAllRows($query);
 
@@ -6308,10 +6308,10 @@ class vMSUserClass extends userClass{
         //echo "New"; print_r($post); exit;
         /*$query ="SELECT ewo.work_order_id, ewo.vrc_id, ese.esgin_budget_approval_id,ewo.work_order_detail_id FROM `emp_work_order` ewo, esgin_employees ese WHERE ewo.company_id = ese.company_id AND ewo.emp_id = ese.emp_id AND ewo.company_id = '".$get['company_id']."' AND ewo.emp_id = '".$post['emp_id']."' AND ewo.is_active = ese.is_active AND ese.is_active = 0 and ewo.work_order_id = '".$post['work_order_id']."'";
         $esigndetails = $callConfig->getRow($query);
-        $testarrau['esigndata'] = $esigndetails*/;
+        $testarrau['esigndata'] = $esigndetails*/
 
          $post['startingdate'] = date('Y-m-01',strtotime($post['date']));
-         $post['endingdate'] = date('Y-m-t',strtotime($post['date']));;
+         $post['endingdate'] = date('Y-m-t',strtotime($post['date']));
         $mpcitem ="SELECT mi.purchase_uom,mi.item_price as item_amount,vi.allow_overtime ,vi.max_leave,vi.purchase_uom as vrci_purchase_uom,vi.item_price as vrci_item_price,ewo.vrc_item_id FROM `emp_work_order` ewo left JOIN mpc_items mi ON ewo.work_order_detail_id = mi.id LEFT join vrc_items vi ON ewo.vrc_item_id = vi.id WHERE ewo.id = '".$post['work_order']."' AND ewo.emp_id = '".$post['emp_id']."' AND ewo.is_active = '0' AND ewo.company_id='".$get['company_id']."'";
         $mpcitemddetails = $callConfig->getRow($mpcitem);
         $testarrau['mpcitemddetails_query'] = $mpcitem;
@@ -6583,7 +6583,7 @@ class vMSUserClass extends userClass{
 		$data['start_date'] = $startdate;
 		$data['end_date'] = $enddate;
 		$data['month'] = date('m', strtotime($startdate));
-		$data['year'] = date('Y', strtotime($enddate));;
+		$data['year'] = date('Y', strtotime($enddate));
 		$gdata =$this->vendorstaqAdminDashboard($data);
 		$return =   array("total_emp"=>$totalactive,"this_month_join"=>$join,"previous_month_join"=>$prejoin,"this_month_leaving"=>$resign,"previous_month_leaving"=>$preresign,"total_ven"=>count($totalvendor), 'type_billable'=>$type_billable, "sql"=>$sql, 'emp_query' => $emp_query,"emp_data"=>$employee,'huor_query'=>$huor_query, 'hr_dis_data'=>$hr_dis_data, 'report_data'=>$report_data, "mainemp"=>$gdata['mainemp'],'joining'=>$gdata['joining'],'resign'=>$gdata['resign'],'ssql'=>$query, "get"=>$data);
 		return $return;

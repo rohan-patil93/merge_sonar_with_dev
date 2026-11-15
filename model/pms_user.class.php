@@ -672,7 +672,7 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 		$returnre['key_performance_indicators'] = $insert;
 		$returnre['sql'] = $sql;
 		$returnre['post'] = $post;
-		$returnre['upsql'] = $upsql;;
+		$returnre['upsql'] = $upsql;
 		return $returnre;
 	}
 	public function insertAppraisalKRA($get){

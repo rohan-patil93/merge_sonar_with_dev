@@ -456,7 +456,7 @@ class integartionClass{
 				$filed = $menuda['field'];
 			//echo $menudeta->$filed;
 			//print_r($menudeta); exit;
-				$edata[$menudeta->id] = $menudeta->$filed;;
+				$edata[$menudeta->id] = $menudeta->$filed;
 			}
 			$menudata[$menuda['table_name']]['data'] =  $edata;
 		}

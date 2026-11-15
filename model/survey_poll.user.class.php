@@ -375,7 +375,7 @@ class surveyPollUserClass extends userClass
     					foreach($query_opt_details as $opt){
     						$response = json_decode($opt->response_option,1);
     						if(in_array($optionsdata, (array)$response)){
-    							$count = $count+1;;
+    							$count = $count+1;
     						}
 							// else{
     						// 	$count=0;
@@ -385,7 +385,7 @@ class surveyPollUserClass extends userClass
     					foreach($query_opt_details as $opt){
     						$response = json_decode($opt->response_option,1)[0];
     						if($response!=''){
-    							$count = $count+1;;
+    							$count = $count+1;
     						}else{
     							$count=0;
     						}
