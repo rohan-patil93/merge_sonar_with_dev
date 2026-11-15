@@ -142,7 +142,7 @@
 				<ul class="kt-nav card">
 					<li class="kt-nav__item">
 						<a href="#" class="kt-nav__link" data-action="list" data-type="inbox">
-							<img style="width:25px; height:25px; margin:0 11px 0 0;" src="assets/media/users/300_16.jpg" alt="image"> <span class="kt-nav__link-text"><?php echo $users[$_SESSION['userid']]['name'] ?></span>
+							<img style="width:25px; height:25px; margin:0 11px 0 0;" src="assets/media/users/300_16.jpg" alt=""> <span class="kt-nav__link-text"><?php echo $users[$_SESSION['userid']]['name'] ?></span>
 							</span>
 						</a>
 					</li>
