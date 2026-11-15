@@ -132,7 +132,7 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
               <div class="input-group input-group-button mb-0">
                   <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="div" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
                   <span class="input-group-text addon-style">
-                      <label class=""><span class="ti-search text-white mt-2"></span></label>
+                      <span class=" d-inline-block fw-bold" style="margin-bottom:5px"><span class="ti-search text-white mt-2"></span></span>
                   </span>
               </div>
             </div>
