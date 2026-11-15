@@ -7,8 +7,7 @@ function isacStatusDescrption($value)
 	$statusres = file_get_contents($statusurl, false, $context);
 	$stausresult = json_decode($statusres, 1);
 	$dgc = "#" . strval($stausresult["background_color"]);
-	$string = '<span style = "color: #' . $stausresult["color"] . ';    background: ' . $dgc . ';" class="kt-badge  kt-badge--inline kt-badge--pill">' . $stausresult["name"] . '</span>';
-	return $string;
+	return '<span style = "color: #' . $stausresult["color"] . ';    background: ' . $dgc . ';" class="kt-badge  kt-badge--inline kt-badge--pill">' . $stausresult["name"] . '</span>';
 }
 function errorMessageUseErrorCode($code)
 {
@@ -46,22 +45,19 @@ function candidatedetais($email)
 {
 	$statusurl = API . "?mode=singlerowtabledata&fid=email_id&rid=" . $email . "&table=candidates";
 	$statusres = callAPI($statusurl);
-	$stausresult = json_decode($statusres, 1);
-	return $stausresult;
+	return json_decode($statusres, 1);
 }
 function vendordetails($email)
 {
 	$statusurl = API . "?mode=singlerowtabledata&fid=email&rid=" . $email . "&table=vendors";
 	$statusres = callAPI($statusurl);
-	$stausresult = json_decode($statusres, 1);
-	return $stausresult;
+	return json_decode($statusres, 1);
 }
 function vendorRegisterdetails($email)
 {
 	$statusurl = API . "?mode=singlerowtabledata&fid=email&rid=" . $email . "&table=vendor_registers";
 	$statusres = callAPI($statusurl);
-	$stausresult = json_decode($statusres, 1);
-	return $stausresult;
+	return json_decode($statusres, 1);
 }
 function dyanamicselectdata($table_name, $filed_name)
 {
@@ -99,15 +95,13 @@ function dyanamicselectreportdata($report_id, $filed_name)
 	$dsurl = API . "?mode=dyanamicselectreportdata&report_id=" . $report_id . "&filed_name=" . $filed_name;
 	$resresponse = callAPI($dsurl);
 	$res = json_decode($resresponse, 1);
-	$return = $res['res'];
-	return $return;
+	return $res['res'];
 }
 function dyanamicafterdata($table_name, $filed_name)
 {
 	$dsurl = API . "?mode=dyanamicafterdata&&table_name=" . $table_name . "&filed_namee=" . $filed_name;
 	$resresponse = file_get_contents($dsurl, false, $context);
-	$res = json_decode($resresponse, 1);
-	return $res;
+	return json_decode($resresponse, 1);
 }
 function imageupload($jnt, $imagename, $hidimage, $exname = "")
 {
@@ -247,8 +241,7 @@ function statusData($table)
 {
 	$statusurl = API . "?mode=statusdata&fid=table_name&rid=" . $table . "&table=" . TBL_STATUSPROGRES;
 	$statusres = callAPI($statusurl);
-	$stausresult = json_decode($statusres, 1);
-	return $stausresult;
+	return json_decode($statusres, 1);
 }
 function nowDate()
 {
@@ -262,15 +255,13 @@ function ViewStatusValue($value, $table_name = '')
 {
 	$statusurl = API . "?mode=singlestatusdata&status=" . $value . "&table=" . $table_name;
 	$statusres = callAPI($statusurl);
-	$stausresult = json_decode($statusres, 1);
-	return $stausresult;
+	return json_decode($statusres, 1);
 }
 function toGetStatusProgressAction($table_name, $status)
 {
 	$statusurl = API . "?mode=toGetStatusProgressActionList&table=" . $table_name . "&status=" . $status;
 	$statusres = callAPI($statusurl);
-	$stausresult = json_decode($statusres, 1);
-	return $stausresult;
+	return json_decode($statusres, 1);
 
 }
 
@@ -308,8 +299,7 @@ function customeummarmonyformateifinecheck($number)
 function customeummarmonyformateifine($number)
 {
 	if ($number != "") {
-		$formatvalue = customeummarmonyformate($number);
-		return $formatvalue;
+		return customeummarmonyformate($number);
 
 	} else {
 		return "-";
@@ -323,8 +313,7 @@ function customeummarmonyformate($number)
 		if ($expoldform[0] == 1) {
 			$formatter = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
 			$formatter->setAttribute(\NumberFormatter::MIN_FRACTION_DIGITS, $expoldform[1]);
-			$formattedNumber = $formatter->formatCurrency($number, 'INR');
-			return $formattedNumber;
+			return $formatter->formatCurrency($number, 'INR');
 		} else {
 			return number_format($number, $expoldform[1], '.', ',');
 		}
@@ -338,8 +327,7 @@ function customeNumberFormate($number)
 			$formatter = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
 			$formatter->setAttribute(\NumberFormatter::MIN_FRACTION_DIGITS, $expoldform[1]);
 			$formattedNumber = $formatter->formatCurrency($number, 'INR');
-			$formattedCurrencyWithoutSymbol = trim(str_replace($formatter->getSymbol(NumberFormatter::CURRENCY_SYMBOL), '', $formattedNumber));
-			return $formattedCurrencyWithoutSymbol;
+			return trim(str_replace($formatter->getSymbol(NumberFormatter::CURRENCY_SYMBOL), '', $formattedNumber));
 		} else {
 			return number_format($number, $expoldform[1], '.', ',');
 		}
@@ -478,8 +466,7 @@ function toGetRolePermisssionsByUserId($user_id)
 {
 	$rolesurl = API . "?mode=getrolepermission&user_id=" . $user_id;
 	$roledata = callAPI($rolesurl);
-	$roledata = json_decode($roledata, 1);
-	return $roledata;
+	return json_decode($roledata, 1);
 }
 function timezoan()
 {
@@ -595,8 +582,7 @@ function callAPI($page)
 	);
 	$context = stream_context_create($opts);
 
-	$res = file_get_contents($url, false, $context);
-	return $res;
+	return file_get_contents($url, false, $context);
 }
 function toGetApplicationPagesList()
 {
@@ -606,16 +592,14 @@ function toGetApplicationPagesList()
 	$data1 = urlencode(json_encode($wh1));
 	$pages = API . "?mode=gettabledetailswithconditions&table=" . TBL_APPLICATION_PAGES . "&data=" . $data1;
 	$page_list = callAPI($pages);
-	$res = json_decode($page_list, 1);
-	return $res;
+	return json_decode($page_list, 1);
 }
 function logout()
 {
 	$pages = API . "?mode=logout&user_id=" . $_SESSION['userid'];
 	$page_list = callAPI($pages);
 
-	$res = json_decode($page_list, 1);
-	return $res;
+	return json_decode($page_list, 1);
 }
 function toGetTableNameBaseApplicationPagesList($type, $type_name, $case = '')
 {
@@ -657,8 +641,7 @@ function toGetApplicationMenuListold()
 	$menu = API . "?mode=gettabledetailswithconditions&table=application_menu&data=" . $vdata;
 
 	$page_list = callAPI($menu);
-	$res = json_decode($page_list, 1);
-	return $res;
+	return json_decode($page_list, 1);
 }
 function toGETModuleList()
 {
@@ -668,8 +651,7 @@ function toGETModuleList()
 	$vdata = urlencode(json_encode($vdata1));
 	$menu = API . "?mode=gettabledetailswithconditions&table=module_setup&data=" . $vdata;
 	$page_list = callAPI($menu);
-	$res = json_decode($page_list, 1);
-	return $res;
+	return json_decode($page_list, 1);
 }
 function toGetApplicationMenuList()
 {
@@ -686,8 +668,7 @@ function toGetApplicationMenuList()
 	$vdata = urlencode(json_encode($vdata1));
 	$menu = API . "?mode=gettabledetailswithconditions&table=application_menu&data=" . $vdata;
 	$page_list = callAPI($menu);
-	$res = json_decode($page_list, 1);
-	return $res;
+	return json_decode($page_list, 1);
 }
 function toGETNavDetailslastest($type)
 {
@@ -953,8 +934,7 @@ function toGetNotigficationListByUsingUserId($user_id, $type = "")
 {
 	$url_noti = API . "?mode=toGetNotigficationListByUsingUserId&user_id=$user_id&type=$type";
 	$res = callAPI($url_noti);
-	$res = json_decode($res, 1);
-	return $res;
+	return json_decode($res, 1);
 }
 function toGetNotigficationListByUsingUserIdAndGrpId($user_id, $type = "", $defaultgrpid = "")
 {
@@ -978,8 +958,7 @@ function toGetInboxCountUsingUserId()
 {
 	$url_noti = API . "?mode=toGetInboxCountUsingUserId";
 	$res = callAPI($url_noti);
-	$res = json_decode($res, 1);
-	return $res;
+	return json_decode($res, 1);
 }
 function notificationdatesdiff($date, $cond = "", $ladate = "")
 {
@@ -1116,8 +1095,7 @@ function toGETConfigartion()
 {
 	$configurl = API . "?mode=singlerowtabledata&fid=company_id&rid=" . $_SESSION['company_id'] . "&table=" . TBL_CONFIG;
 	$configesponse = callAPI($configurl);
-	$configdata = json_decode($configesponse, 1);
-	return $configdata;
+	return json_decode($configesponse, 1);
 }
 function toGetTaxrates()
 {
@@ -1264,8 +1242,7 @@ function Insertqueries($post)
 	$response = file_post_contents($url, $dats, 'insert');
 	$post['user_id'] = $_SESSION['userid'];
 	$notiurrl = API . "?mode=querynotificationandemail&method=post";
-	$res = file_post_contents($notiurrl, $post, 'insert');
-	return $res;
+	return file_post_contents($notiurrl, $post, 'insert');
 }
 function updatequeries($da)
 {
@@ -1275,15 +1252,13 @@ function updatequeries($da)
 	$data['updated_date'] = nowDate();
 
 	$url = API . "?mode=updaterowtabledata&rid=" . $da['reply_id'] . "&table=" . TBL_TRANSACTION_QUERIES . "&method=post";
-	$response = file_post_contents($url, $data, 'update');
-	return $response;
+	return file_post_contents($url, $data, 'update');
 }
 function insertatchments($data)
 {
 	$vdata = urlencode(json_encode($data));
 	$vurl = API . "?mode=adddata&table=" . TBL_APPLICATION_ATTACHMENTS . "&data=" . $vdata;
-	$response = callAPI($vurl);
-	return $response;
+	return callAPI($vurl);
 }
 
 function validategstin($gstNumber)
@@ -1781,8 +1756,7 @@ function filleUploadingList($transactiontablename, $id, $isactive = '')
 {
 	$pages = API . "?mode=filleuploadinglist&id=" . $id . "&isactive=" . $isactive . "&transactiontablename=" . $transactiontablename;
 	$page_list = callAPI($pages);
-	$res = json_decode($page_list, 1);
-	return $res;
+	return json_decode($page_list, 1);
 }
 // function fileUplodingUi($fileuploading){
 // 	$aplicationid =  $fileuploading['transaction_id'];
@@ -1945,15 +1919,13 @@ function getListTables($database = "")
 {
 	$url = API . "?mode=getlisttable&db=" . $database;
 	$collfunction = callAPI($url);
-	$jsondecode = json_decode($collfunction, 1);
-	return $jsondecode;
+	return json_decode($collfunction, 1);
 }
 function getListAttributes($tablename = "")
 {
 	$url = API . "?mode=gettableattributes&table=" . $tablename;
 	$collfunction = callAPI($url);
-	$jsondecode = json_decode($collfunction, 1);
-	return $jsondecode;
+	return json_decode($collfunction, 1);
 }
 //print designing End
 function textboxes($s, $type = "", $placeholder = "", $values = "")
@@ -1995,8 +1967,7 @@ function getTableRow($table, $fields = "", $where = "", $list = "0")
 {
 	$url = API . "?mode=gettablerow&tablename=" . $table . "&fields=" . $fields . "&where=" . $where . "&list=" . $list;
 	$collfunction = callAPI($url);
-	$jsondecode = json_decode($collfunction, 1);
-	return $jsondecode;
+	return json_decode($collfunction, 1);
 }
 //End  auto ui designs
 function getListCreatDocumentsFields()
@@ -2025,8 +1996,7 @@ function getProjectTaskEmpList($projectid)
 {
 	$url = API . "?mode=getprojecttaskemplist&projectid=" . $projectid;
 	$collfunction = callAPI($url);
-	$jsondecode = json_decode($collfunction, 1);
-	return $jsondecode;
+	return json_decode($collfunction, 1);
 }
 function permisions($role_data, $option)
 {
@@ -2048,15 +2018,13 @@ function permisions($role_data, $option)
 function getList($tablename = "", $id = "")
 {
 	$url = API . "?mode=getlist&tablename=" . $tablename . "&id=" . $id;
-	$collfunction = callAPI($url);
-	return $collfunction;
+	return callAPI($url);
 }
 function userlistwithrole($data)
 {
 	global $callConfig;
 	$sql = "SELECT * FROM `application_users` WHERE role_id like '%" . $data['roleid'] . "%'";
-	$row = $callConfig->getAllRows($sql);
-	return $row;
+	return $callConfig->getAllRows($sql);
 }
 function convert_Rupee_Nomber($amount)
 {
@@ -2078,8 +2046,7 @@ function dyanamicselectAutoSelect($table_name, $filed_name, $word)
 {
 	$dsurl = API . "?mode=dyanamicautoselectdata&table_name=" . $table_name . "&filed_namee=" . $filed_name . "&words=" . $word;
 	$resresponse = callAPI($dsurl);
-	$res = json_decode($resresponse, 1);
-	return $res;
+	return json_decode($resresponse, 1);
 }
 function customNanAndEmptyValidation($val)
 {
@@ -2103,8 +2070,7 @@ function reportFilterSelectData($report_id, $filed_name)
 function checkWhoShouldApprove($val)
 {   // find who should approve
 	$ssql = API . "?mode=checkwhoshouldapproves&tablename=" . $val['tablename'] . "&rid=" . $val['rid'] . "&exicute_type=" . $val['exicute_type'] . "&emp_id=" . $_SESSION['emp_id'];
-	$rowreturn = callAPI($ssql);
-	return $rowreturn;
+	return callAPI($ssql);
 }
 function checkcriteria($val)
 {
@@ -2121,8 +2087,7 @@ function getstatusprogresslist($table)
 {
 	$url = API . "?mode=getstatusprogresslist&table=" . $table;
 	$responce = callAPI($url);
-	$result = json_decode($responce, 1);
-	return $result;
+	return json_decode($responce, 1);
 }
 function customgetstatusworkflow($table, $id, $currnet_status, $created_by)
 {
@@ -2574,8 +2539,7 @@ function togetlogindetails()
 {
 	$url = API . "?mode=loginafterdetails";
 	$che = callAPI($url);
-	$return = json_decode($che, 1);
-	return $return;
+	return json_decode($che, 1);
 }
 function emptytextdashShow($val)
 {
@@ -2628,8 +2592,7 @@ function insertAuditTrail($parent_option = "", $extra_paramiter = "", $extra_det
 	}
 	$url = API . "?mode=insertaudittrail&extra_paramiter=" . $extra_paramiter . "&extra_details=" . $extra_details . $paramiter;
 	$che = callAPI($url);
-	$return = json_decode($che, 1);
-	return $return;
+	return json_decode($che, 1);
 }
 function getTheDay($date)
 {
@@ -2689,8 +2652,7 @@ function togetprojecttasktimelog()
 {
 	$url = API . "?mode=togetprojecttasktimelog&user_id=" . $_SESSION['userid'];
 	$api = callAPI($url);
-	$result = json_decode($api, 1);
-	return $result;
+	return json_decode($api, 1);
 }
 
 /**
@@ -3212,8 +3174,7 @@ function getMainDomainName()
 	$url = SITEURL;
 	$host = parse_url($url, PHP_URL_HOST);
 	$parts = explode('.', $host);
-	$mainDomain = $parts[count($parts) - 2] . '.' . $parts[count($parts) - 1];
-	return $mainDomain;
+	return $parts[count($parts) - 2] . '.' . $parts[count($parts) - 1];
 }
 function dateyearcalucates($date1, $date2 = "")
 {
