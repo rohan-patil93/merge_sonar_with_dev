@@ -34,7 +34,7 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 	        </div>
 	        <div class="col-lg-2">
 	            <div class="form-group w-full table-card-header">
-	                <label class="form-label "><?= __('Owner List'); ?><span class="text-danger">*</span></label>
+	                <span class="form-label  d-inline-block fw-bold"><?= __('Owner List'); ?><span class="text-danger">*</span></span>
 					<select aria-label="<?= htmlspecialchars(__('Property owner id'), ENT_QUOTES, 'UTF-8'); ?>" name="property_owner_id" class="form-control form-select js-example-basic-single" >
 						<option value=""><?= __('Select Any One'); ?> </option>
 						<?php foreach($property_owners_all as $po){ ?>
@@ -107,7 +107,7 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 						<td><?php echo emptytextdashShow($po['gst_no']); ?></td>
 						<td><?php echo emptytextdashShow($banks[$po['bank_id']]); ?></td>
 						<td><?php echo emptytextdashShow($po['bank_account_no']); ?></td>
-						<td><label class="form-label label label-md label-primary"><?php echo count((array)$property_owner_details[$po['id']]); ?></label></td>
+						<td><span class="form-label label label-md label-primary d-inline-block fw-bold"><?php echo count((array)$property_owner_details[$po['id']]); ?></span></td>
 						<td>
 						 	<a href="index?option=COM_INSERT_PROPERTY_OWNERS&Rid=<?php echo deocdeId('id:'.$po['id']); ?>" target="_blank"><button type="button" class="cursor-pointer float-left btn btn-primary"> <?= __('View'); ?> </button></a>
 						</td>
@@ -143,7 +143,7 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 										<td class="w-b-w-s"><?php echo emptytextdashShow($pod['property_address']); ?></td>	
 										<td><?php echo $property_types[$pod['property_type']]; ?></td>	
 										<td><?php echo $property_types[$pod['property_sub_type']]; ?></td>	
-										<td><label class="form-label label label-md label-primary"><?php echo count((array)$property_owner_detail_areas[$pod['id']]); ?></label></td>
+										<td><span class="form-label label label-md label-primary d-inline-block fw-bold"><?php echo count((array)$property_owner_detail_areas[$pod['id']]); ?></span></td>
 										
 									</tr>
 									<tr class="data secondlevelchildhideshow_<?php echo $parentchildtb; ?>">
