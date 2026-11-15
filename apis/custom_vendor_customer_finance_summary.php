@@ -42,7 +42,6 @@ if ($_GET['refresh'] == "Y") {
   $decore11 = json_decode($insertresponse, 1);
 } else {
   $data1 = array();
-  //$data1["where"] = array('api_master_id'=>48,'created_by'=>$itsum_user_id);
   $data1["where"] = array('id' => 554, 'created_by' => $itsum_user_id);
   $data1["field"] = "id,request_date_time,api_response_details";
   $data1['order'] = "id DESC";
@@ -52,8 +51,6 @@ if ($_GET['refresh'] == "Y") {
   $returnresult11 = json_decode($cudata, 1);
   $returnresult = $returnresult11[0];
   $returnres11 = $returnresult['api_response_details'];
-  //$returnres11 = str_replace('u2014', '\\u2014', $returnres11);
-  //$returnres = preg_replace("/\r?\n/", "\\n", $returnres11);
   $decores = json_decode(urldecode($returnres11), 1);
 }
 $notifications = $decores['notifications'];
@@ -149,7 +146,7 @@ $financeshowtabmodule = array(4);
         <li class="nav-item">
           <a class="nav-link text-center border" data-bs-toggle="tab" href="#finance-health" role="tab"
             aria-selected="false">
-            <h3 class="f-w-600 f-30 mb-0"><i class="ti-check-box"></i> <?php //echo $finance['total_pending']; ?></h3>
+            <h3 class="f-w-600 f-30 mb-0"><i class="ti-check-box"></i> <?php ?></h3>
             <p class="m-0 f-w-600">Finance Health</p>
             <p class="m-0"><?php echo $finance['total_pending']; ?></p>
           </a>
@@ -898,7 +895,7 @@ $financeshowtabmodule = array(4);
                   <td><?php echo $metrics_snapshot['category']; ?></td>
                   <td><?php echo $metrics_snapshot['metric']; ?></td>
                   <td><?php echo $metrics_snapshot['value']; ?></td>
-                  <!-- <td><i class="ti-angle-<?php //echo $metrics_snapshot['trend']; ?>"></i></td> -->
+                  <!-- <td><i class="ti-angle-<?php ?>"></i></td> -->
                   <td><span class="badge badge-inverse-success"><i class="fa fa-check f-10"></i>
                       <?php echo $metrics_snapshot['status']; ?></span></td>
                 </tr>

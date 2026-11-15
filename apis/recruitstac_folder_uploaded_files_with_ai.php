@@ -24,8 +24,6 @@ if (curl_errno($ch)) {
         }else{
             $api_url = $masterresult[0]['testing_url'];
         }
-       // $aiurl = "https://aidev.digixlabs.cloud/api/upload";
-       // echo "sdcssv"; exit;
         $aipostData = $_POST;
         //AI Data
         $insertarray = array('company_id'=>$_POST['company_id'],'application_table'=>$transaction_table,'transaction_id'=>$transaction_id,'api_master_id'=>$masterresult[0]['id'],'api_url'=>$api_url,'api_request_parameters'=>urlencode(json_encode($aipostData)),'request_date_time'=>date("Y-m-d H:i:s"),'is_active'=>'0','current_status'=>'0','created_date'=>date("Y-m-d H:i:s"),'created_by'=>$_POST['user_id'],'response_status'=>200);
@@ -41,7 +39,6 @@ if (curl_errno($ch)) {
 
         if (curl_errno($ch)) {
             echo json_encode(array('result'=>curl_error($ch2),'msg'=> 'api hits Not Inserted', 'status'=>'failed', 'lastid'=>''));
-           // echo 'Error: ' . curl_error($ch);
         }else{
             $aipostData = array();
             $ch2 = curl_init();

@@ -29,7 +29,6 @@ if (curl_errno($ch)) {
         }else{
             $api_url = $masterresult[0]['testing_url'];
         }
-       // echo "sdcssv"; exit;
         $aipostData = $_POST;
         unset($aipostData['screening_key']);
         unset($aipostData['screening_question']);
@@ -39,7 +38,6 @@ if (curl_errno($ch)) {
 
         //AI Data
         $insertarray = array('company_id'=>$_POST['company_id'],'application_table'=>$transaction_table,'transaction_id'=>$transaction_id,'api_master_id'=>$masterresult[0]['id'],'api_url'=>$api_url,'api_request_parameters'=>urlencode(json_encode($aipostData)),'request_date_time'=>date("Y-m-d H:i:s"),'is_active'=>'0','current_status'=>'0','created_date'=>date("Y-m-d H:i:s"),'created_by'=>$_POST['user_id'],'response_status'=>200);
-       // print_r($insertarray);
         $inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$_POST['company_id']."&data_name=".$_POST['data_name']."&userid=".$_POST['user_id'];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $inserturl);
@@ -51,9 +49,7 @@ if (curl_errno($ch)) {
         $last_id = $insertresponsede['LASTID'];
         if (curl_errno($ch)) {
             echo json_encode(array('result'=>curl_error($ch2),'msg'=> 'api hits Not Inserted', 'status'=>'failed', 'lastid'=>''));
-           // echo 'Error: ' . curl_error($ch);
         }else{
-         //  echo "<pre>"; print_r(json_encode($aipostData)); echo "</pre>";
             $ch2 = curl_init();
             curl_setopt_array($ch2, array(
              // CURLOPT_URL => 'https://callen-ungossiping-nonoily.ngrok-free.dev/api/screening/create',
@@ -77,9 +73,7 @@ if (curl_errno($ch)) {
 
                 $response11 = curl_exec($ch2);
                 $retres = json_decode($response11,1);
-               // echo "<pre>"; print_r($retres); echo "</pre>"; exit;
 
-               // echo json_encode(array('status'=>'success','result'=>$retres, 'question'=> $question, 'buttonhtml'=> $buttonhtml));
 
                 $data21['api_response_details'] =  urlencode(json_encode($retres));
                 $data21['response_date_time'] = nowDate();

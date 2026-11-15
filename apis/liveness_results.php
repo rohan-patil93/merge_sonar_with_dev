@@ -6,7 +6,6 @@ if($request_id !=""){
 	$logFile = 'webhook_logs.json';
 	if (file_exists($logFile)) {
 		$logContent = file_get_contents($logFile);
-		//echo "<pre>"; //print_r($logContent);
 	   	$logContent1 = str_replace("null","",$logContent);
 	   	$logContent1 = str_replace("}{","},{",$logContent);
 	   	$data = json_decode("[".$logContent1."]", true);
