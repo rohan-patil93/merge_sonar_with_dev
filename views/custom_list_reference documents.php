@@ -8,4 +8,3 @@ $apires = callAPI($url);
 $result = json_decode($apires,1);
 $transactiontables = $result['transaction_list'];
 $status_progress = $result['status_progress'];
-?>

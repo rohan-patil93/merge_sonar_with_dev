@@ -15,4 +15,3 @@ $sFilePath = '/home/infistaq/live_infistaq_com/uploads/rental_invoices/'.$filena
 $output = $dompdf->output();
 file_put_contents($sFilePath, $output);
 echo "uploads/rental_invoices/".$filename.".pdf";
-?>

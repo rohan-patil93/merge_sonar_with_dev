@@ -79,4 +79,3 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
       echo json_encode($arrara);
   }
 }
-?>

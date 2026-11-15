@@ -1,1 +1,1 @@
-<?php echo "custom_view_schedules_orders"; ?>
+<?php echo "custom_view_schedules_orders";

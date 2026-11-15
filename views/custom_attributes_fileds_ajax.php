@@ -293,4 +293,3 @@ if ($page == 'elementortype'){
 	textboxes($_POST['id'],$_POST['type'],"");
 	exit;
 }
-?>

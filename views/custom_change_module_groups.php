@@ -25,4 +25,3 @@ $_SESSION['HTTP_INFI_TOKEN'] = $row['HTTP_INFI_TOKEN'];
 //print_r($_SESSION);
 header("Location:index");
 exit;
-?>
