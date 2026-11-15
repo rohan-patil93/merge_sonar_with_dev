@@ -624,7 +624,7 @@ function addslabrows(){
                                     <!--begin::Input-->
                                     <div class="form-group row">
                                       <div class="form-group col-lg-8">
-                                        <label class="form-label block">Organisation Name <span class="requried">*</span></label>
+                                        <span class="form-label block fw-bold">Organisation Name <span class="requried">*</span></span>
                                         <div class="input-group input-icon-right">
                                          <input type="text" class="form-control required" name="company_name" placeholder="<?php echo $placeholder['org_name'];?>" title="Company Name" aria-label="Company Name">
 
@@ -632,7 +632,7 @@ function addslabrows(){
                                        <!--    <span class="form-text text-muted"><?php echo $helptext['org_name'];?></span> -->
                                      </div>
                                      <div class="form-group col-lg-4">
-                                       <label class="ml-5">Logo</label>
+                                       <span class="ml-5 d-inline-block fw-bold" style="margin-bottom:5px">Logo</span>
                                        <div class="col-lg-9 col-xl-6">
     <div class="profile-pic">
       <label class="-label" for="display_logo">
@@ -652,7 +652,7 @@ function addslabrows(){
   <span class="form-text text-muted"><?php //echo $helptext['logo'];?> </span>
 </div> 
 <div class="form-group col-lg-6">
-  <label>Location</label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Location</span>
   <div class="input-group input-icon-right">
     <input type="text"  class="form-control " name="location" placeholder="<?php echo $placeholder['location'];?>" title="Location" aria-label="Location">
 
@@ -661,7 +661,7 @@ function addslabrows(){
 
 </div>
 <div class="form-group col-lg-6">
-  <label>Industry</label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Industry</span>
   <div class="input-group input-icon-right">
     <select class="form-select js-example-basic-single"  name="industry" title="Industry" aria-label="Industry">
       <option value="">Select Any One </option>
@@ -675,7 +675,7 @@ function addslabrows(){
 
 </div>
 <div class="form-group col-lg-6">
-  <label>Phone <span class="requried">*</span></label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Phone <span class="requried">*</span></span>
   <div class="input-group input-icon-right">
    <input type="text"  name="phone_number" class="form-control required" placeholder="<?php echo $placeholder['phone'];?>" title="Phone Number" aria-label="Phone Number">
 
@@ -683,7 +683,7 @@ function addslabrows(){
  <!--    <span class="form-text text-muted"><?php echo $helptext['phone'];?> </span> -->
 </div>
 <div class="form-group col-lg-6">
-  <label>Email <span class="requried">*</span></label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Email <span class="requried">*</span></span>
   <div class="input-group input-icon-right">
     <input type="text"  name="admin_email" class="form-control required" placeholder="<?php echo $placeholder['email'];?>" title="Admin Email" aria-label="Admin Email">
 
@@ -692,11 +692,11 @@ function addslabrows(){
   <!--     <span class="form-text text-muted"><?php echo $helptext['org_name'];?></span> -->
 </div>
 <div class="form-group col-lg-12">
-  <label>Address</label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Address</span>
   <textarea type="text" class="form-control"  name="address" title="Address" aria-label="Address"></textarea>
 </div>
 <div class="form-group col-lg-6">
-  <label>Country</label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Country</span>
   <input type="hidden" name="country" id="selectedcountry">
   <input type="hidden" name="state" id="selectedstate">
   <input type="hidden" name="city" id="selectedcity">
@@ -715,7 +715,7 @@ function addslabrows(){
   <!--   <span class="form-text text-muted"><?php echo $helptext['country'];?> </span> -->
 </div>
 <div class="form-group col-lg-6">
-  <label>State</label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">State</span>
   <div class="input-group input-icon-right">
     <select class="form-select js-example-basic-single" class="form-control" id="kt_select2_51" onchange="selectedcategory(this.value,'kt_select2_33','cities','state_id')" title="Select" aria-label="Select">
       <option value="">Select Any One</option>
@@ -725,7 +725,7 @@ function addslabrows(){
   <!--    <span class="form-text text-muted"><?php echo $helptext['state'];?> </span> -->
 </div>
 <div class="form-group col-lg-6">
-  <label>City</label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">City</span>
   <div class="input-group input-icon-right">
    <select class="form-select js-example-basic-single" class="form-control" id="kt_select2_33" onchange="selectedcategory(this.value,'','city','')" title="Select" aria-label="Select">
     <option value="">Select Any One</option>
@@ -735,7 +735,7 @@ function addslabrows(){
 <!--   <span class="form-text text-muted"><?php echo $helptext['city'];?> </span> -->
 </div>
 <div class="form-group col-lg-6">
-  <label>Pincode <span class="requried">*</span></label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Pincode <span class="requried">*</span></span>
   <div class="input-group input-icon-right">
     <input type="text" class="form-control required"  name="pincode" placeholder="<?php echo $placeholder['pincode'];?>" title="Pincode" aria-label="Pincode">
 
@@ -744,7 +744,7 @@ function addslabrows(){
 </div>
 
 <div class="form-group col-lg-4">
-  <label>Date Format</label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Date Format</span>
   <div class="input-group input-icon-right">
    <select class="form-select js-example-basic-single"  name="date_format" title="Date Format" aria-label="Date Format">
     <option value="">Select Any One </option>
@@ -758,7 +758,7 @@ function addslabrows(){
 
 </div>
 <div class="form-group col-lg-4">
-  <label>Default KPI Weekly Task Day</label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Default KPI Weekly Task Day</span>
   <select class="form-select js-example-basic-single"  name="default_kpi_weekly_task_day" title="Default Kpi Weekly Task Day" aria-label="Default Kpi Weekly Task Day">
     <option value="">Select Any One</option>
 
@@ -774,7 +774,7 @@ function addslabrows(){
 
 </div>
 <div class="form-group col-lg-4">
- <label>Default KPI Monthly Task Day</label>
+ <span class="d-inline-block fw-bold" style="margin-bottom:5px">Default KPI Monthly Task Day</span>
  <select  class="form-select js-example-basic-single selectlist "  name="default_kpi_monthly_task_day" title="Default Kpi Monthly Task Day" aria-label="Default Kpi Monthly Task Day">
   <?php for($i=1; $i<=31; $i++) { ?>
     <option value="<?php echo $i;?>">&nbsp;&nbsp;<?php echo $i; ?>&nbsp;&nbsp;</option>
@@ -799,7 +799,7 @@ function addslabrows(){
     <!--begin::Input-->
     <div class="form-group row">
       <div class="form-group col-lg-6">
-       <label>License Number<span class="requried">*</span></label>
+       <span class="d-inline-block fw-bold" style="margin-bottom:5px">License Number<span class="requried">*</span></span>
        <div class="input-group input-icon-right">
         <input type="text" class="form-control required"  name="license_number" placeholder="<?php echo $placeholder['licensenumber'];?>" title="License Number" aria-label="License Number">
 
@@ -809,7 +809,7 @@ function addslabrows(){
 
     </div>
     <div class="form-group col-lg-6">
-     <label>PAN Number<span class="requried">*</span></label>
+     <span class="d-inline-block fw-bold" style="margin-bottom:5px">PAN Number<span class="requried">*</span></span>
      <div class="input-group input-icon-right">
       <input type="text" class="form-control required"  name="pan_number" placeholder="<?php echo $placeholder['pan'];?>" title="Pan Number" aria-label="Pan Number">
 
@@ -818,7 +818,7 @@ function addslabrows(){
 
   </div>
   <div class="form-group col-lg-6">
-   <label>TAN Number</label>
+   <span class="d-inline-block fw-bold" style="margin-bottom:5px">TAN Number</span>
    <div class="input-group input-icon-right">
     <input type="text" class="form-control"  name="tan_number" placeholder="<?php echo $placeholder['tan'];?>" title="Tan Number" aria-label="Tan Number">
   </div>
@@ -826,7 +826,7 @@ function addslabrows(){
 
 </div>
 <div class="form-group col-lg-6">
- <label>GST Number<span class="requried">*</span></label>
+ <span class="d-inline-block fw-bold" style="margin-bottom:5px">GST Number<span class="requried">*</span></span>
  <div class="input-group input-icon-right">
   <input type="text" class="form-control required"  name="gst_number" placeholder="<?php echo $placeholder['gst'];?>" title="Gst Number" aria-label="Gst Number">
 </div>
@@ -834,7 +834,7 @@ function addslabrows(){
 
 </div>
 <div class="form-group col-lg-6">
- <label>CIN Number</label>
+ <span class="d-inline-block fw-bold" style="margin-bottom:5px">CIN Number</span>
  <div class="input-group input-icon-right">
   <input type="text" class="form-control"  name="cin_number" placeholder="<?php echo $placeholder['cin'];?>" title="Cin Number" aria-label="Cin Number">
 
@@ -861,7 +861,7 @@ function addslabrows(){
   <!--begin::Select-->
   <div class="row mt-2">
     <div class="form-group col-lg-12">
-      <label>Select days you worked in a calendar week.</label>
+      <span class="d-inline-block fw-bold" style="margin-bottom:5px">Select days you worked in a calendar week.</span>
 
       <!--<label>Select days you worked in a calendar week. </label>-->
       <select class="selectlist form-select js-example-basic-multiple"  name="working_days[]" multiple="multiple" title="Working Days" aria-label="Working Days">
@@ -898,7 +898,7 @@ function addslabrows(){
 </div>
 
 <div class="col-lg-12 row">
-  <label>Pay your employees on</label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Pay your employees on</span>
   <div class="form-radio  mb-2 col-lg-5">
     <div class="radio radio-inline">
       <label class="form-label">
@@ -992,14 +992,14 @@ function addslabrows(){
 
                                                  <div class="form-group row">
                                                   <div class="form-group col-lg-6">
-                                                    <label>EPF Number</label>
+                                                    <span class="d-inline-block fw-bold" style="margin-bottom:5px">EPF Number</span>
                                                     <div class="input-group input-icon-right">
                                                       <input type="text" class="form-control"  name="epf_number" placeholder="<?php echo $placeholder['epf'];?>" title="Epf Number" aria-label="Epf Number">
                                                     </div>
                                                     <!--   <span class="form-text text-muted"><?php echo $helptext['epf'];?> </span> -->
                                                   </div>
                                                   <div class="form-group col-lg-6">
-                                                    <label>Deduction Cycle</label>
+                                                    <span class="d-inline-block fw-bold" style="margin-bottom:5px">Deduction Cycle</span>
                                                     <select  class="form-control form-select js-example-basic-single" name="epf_deduction_cycle" title="Epf Deduction Cycle" aria-label="Epf Deduction Cycle">
                                                      <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
                                                        <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
@@ -1008,14 +1008,14 @@ function addslabrows(){
                                                    <!--  <span class="form-text text-muted"><?php echo $helptext['epfdeduct'];?> </span>  -->
                                                  </div>
                                                  <div class="form-group col-lg-6">
-                                                  <label>Employee Contribution (%):</label>
+                                                  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Employee Contribution (%):</span>
                                                   <div class="input-group input-icon-right">
                                                     <input type="text" class="form-control"  name="epf_employee_contribution" placeholder="<?php echo $placeholder['epfempc'];?>" title="Epf Employee Contribution" aria-label="Epf Employee Contribution">
                                                   </div>
                                                   <!--      <span class="form-text text-muted"><?php echo $helptext['epfempc'];?> </span> -->
                                                 </div>
                                                 <div class="form-group col-lg-6">
-                                                  <label>Employer Contribution (%):</label>
+                                                  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Employer Contribution (%):</span>
                                                   <div class="input-group input-icon-right">
                                                     <input type="text" class="form-control" placeholder="<?php echo $placeholder['epfemprc'];?>"  name="epf_employer_contribution" title="Epf Employer Contribution" aria-label="Epf Employer Contribution">
                                                   </div>
@@ -1078,7 +1078,7 @@ function addslabrows(){
                                        <div class="card-body">
                                         <div class="form-group row">
                                           <div class="form-group col-lg-6">
-                                            <label>ESI Number</label>
+                                            <span class="d-inline-block fw-bold" style="margin-bottom:5px">ESI Number</span>
                                             <div class="input-group input-icon-right">
                                               <input type="text" class="form-control" placeholder="<?php echo $placeholder['esi'];?>" name="esi_no" title="Esi No" aria-label="Esi No">
 
@@ -1087,7 +1087,7 @@ function addslabrows(){
 
                     </div>
                     <div class="form-group col-lg-6">
-                      <label>Deduction Cycle</label>
+                      <span class="d-inline-block fw-bold" style="margin-bottom:5px">Deduction Cycle</span>
                       <select  class="form-select js-example-basic-single" name="esi_deduction_cycle" title="Esi Deduction Cycle" aria-label="Esi Deduction Cycle">
                        <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
                          <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
@@ -1096,14 +1096,14 @@ function addslabrows(){
                     <span class="form-text text-muted"><?php echo $helptext['esideduct'];?> </span> -->
                   </div>
                   <div class="form-group col-lg-6">
-                    <label>Employee Contribution (%):</label>
+                    <span class="d-inline-block fw-bold" style="margin-bottom:5px">Employee Contribution (%):</span>
                     <div class="input-group input-icon-right">
                       <input type="text" class="form-control"  name="esi_employee_contribution" placeholder="<?php echo $placeholder['esiempc'];?>" title="Esi Employee Contribution" aria-label="Esi Employee Contribution">
                     </div><!-- 
                     <span class="form-text text-muted"><?php echo $helptext['esiempc'];?> </span> -->
                   </div>
                   <div class="form-group col-lg-6">
-                    <label>Employer Contribution (%):</label>
+                    <span class="d-inline-block fw-bold" style="margin-bottom:5px">Employer Contribution (%):</span>
                     <div class="input-group input-icon-right">
                       <input type="text" class="form-control"  placeholder="<?php echo $placeholder['esiemprc'];?>" name="esi_employer_contribution" title="Esi Employer Contribution" aria-label="Esi Employer Contribution">
 
@@ -1159,7 +1159,7 @@ function addslabrows(){
                       <span class="form-text text-muted"><?php echo $helptext['pt'];?> </span> -->
                     </div>
                     <div class="form-group col-lg-6">
-                      <label>Work Location</label>
+                      <span class="d-inline-block fw-bold" style="margin-bottom:5px">Work Location</span>
                       <div class="input-group input-icon-right">
                         <input type="text" class="form-control"  placeholder="<?php echo $placeholder['ptloc'];?>" name="work_location_id" title="Work Location Id" aria-label="Work Location Id">
                       </div><!-- 
@@ -1168,7 +1168,7 @@ function addslabrows(){
 
                     <div class="form-group col-lg-6">
                       <input type="hidden" name="pt_state_id" id="pt_state_id">
-                      <label>State</label>
+                      <span class="d-inline-block fw-bold" style="margin-bottom:5px">State</span>
                       <select  class="form-select js-example-basic-single" name="pt_state_id" title="Pt State Id" aria-label="Pt State Id">
                        <?php foreach ($statelist as $statevalue)  { ?>
                          <option value="<?php echo $statevalue['id']; ?>"><?php echo $statevalue['state_name']; ?></option>
@@ -1177,7 +1177,7 @@ function addslabrows(){
                       <span class="form-text text-muted"><?php echo $helptext['ptstate'];?> </span>    -->
                     </div>
                     <div class="form-group col-lg-6">
-                     <div> <label>Deduction Cycle</label></div>
+                     <div> <span class="d-inline-block fw-bold" style="margin-bottom:5px">Deduction Cycle</span></div>
                      <select  class="form-select js-example-basic-single" name="pt_deduction_cycle" title="Pt Deduction Cycle" aria-label="Pt Deduction Cycle">
                        <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
                          <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
@@ -1267,7 +1267,7 @@ function addslabrows(){
 
                     </div>
                     <div class="form-group col-lg-6">
-                      <div><label>Deduction Cycle</label> </div>
+                      <div><span class="d-inline-block fw-bold" style="margin-bottom:5px">Deduction Cycle</span> </div>
                       <select  class="form-control form-select js-example-basic-single" name="lwf_deduction_cycle" title="Lwf Deduction Cycle" aria-label="Lwf Deduction Cycle">
                        <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
                          <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
@@ -1277,7 +1277,7 @@ function addslabrows(){
 
                 </div>
                 <div class="form-group col-lg-6">
-                 <label>Employer Contribution Amount:</label>
+                 <span class="d-inline-block fw-bold" style="margin-bottom:5px">Employer Contribution Amount:</span>
                  <div class="input-group input-group-button "> 
                   <button class="btn btn-info" type="button" onclick="deloptionrows('s1rowid1')">RS.</button>
                   <input type="text" class="form-control width1"  name="lwf_employer_contribution" placeholder="<?php echo $placeholder['lwfrs'];?>" title="Lwf Employer Contribution" aria-label="Lwf Employer Contribution">
