@@ -64,7 +64,7 @@
                             </div> -->
                             <?php } ?>
                             <div class="row text-right">
-                                <a class="float-right f-w-600 text-primary forgot-pwd-open" href="#"
+                                <a class="float-right f-w-600 text-primary forgot-pwd-open" href="#top"
                                     onclick="fergotpassworddisplay()">Forgot Password?</a>
                             </div>
                             <div class="row mt-4">
@@ -105,7 +105,7 @@
                     <form class="md-float-material form-material" action="" method="post" novalidate>
 
                         <p class="text-muted f-w-600 text-center f-18 text-muted">Already A Member <a
-                                class="text-primary" href="#" onclick="loginpagedisplay()">Sign In</a></p>
+                                class="text-primary" href="#top" onclick="loginpagedisplay()">Sign In</a></p>
 
                         <h2 class="f-26 f-w-600 mt-4">Create an Account</h2>
                         <p class="text-muted f-14 f-w-600">Get unlimited access & earn money</p>
