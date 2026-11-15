@@ -707,12 +707,12 @@ $stausresult = ViewStatusData();
 										onchange="followUp()" aria-label="Follow Up">
 								</div>
 								<div class="form-group col-lg-6 followup">
-									<label class="form-label">Days</label>
+									<span class="form-label d-inline-block fw-bold">Days</span>
 									<input type="number" class="form-control" name="follow_up_day" placeholder="Day"
 										value="<?php echo $workflowconfiguration['follow_up_day']; ?>" aria-label="Day">
 								</div>
 								<div class="form-group col-lg-6 followup">
-									<label class="form-label">Follow Up Email</label>
+									<span class="form-label d-inline-block fw-bold">Follow Up Email</span>
 									<select class="form-select js-example-basic-single"
 										name="follow_up_email_content_ref_id" aria-label="Follow Up Email Content Ref Id">
 										<option value="0"> Select Any One</option>
@@ -728,12 +728,12 @@ $stausresult = ViewStatusData();
 										onchange="Escalation()" aria-label="Escalation">
 								</div>
 								<div class="form-group col-lg-6 escalationclass">
-									<label class="form-label">Days</label>
+									<span class="form-label d-inline-block fw-bold">Days</span>
 									<input type="number" class="form-control" name="escalation_day" placeholder="Day"
 										value="<?php echo $workflowconfiguration['escalation_day']; ?>" aria-label="Day">
 								</div>
 								<div class="form-group col-lg-6 escalationclass">
-									<label class="form-label">Escalation Email</label>
+									<span class="form-label d-inline-block fw-bold">Escalation Email</span>
 									<select class="form-select js-example-basic-single"
 										name="escalation_email_content_ref_id" aria-label="Escalation Email Content Ref Id">
 										<option value="0"> Select Any One</option>
@@ -749,7 +749,7 @@ $stausresult = ViewStatusData();
 										onchange="autoForward()" aria-label="Auto Forward">
 								</div>
 								<div class="form-group col-lg-8 autoforward_class">
-									<label class="form-label">Days</label>
+									<span class="form-label d-inline-block fw-bold">Days</span>
 									<input type="number" class="form-control" name="auto_forward_day" placeholder="Day"
 										value="<?php echo $workflowconfiguration['auto_forward_day']; ?>" aria-label="Day">
 								</div>
@@ -971,10 +971,10 @@ $stausresult = ViewStatusData();
 							$valuefields = "{[" . $workflowconfiguration['process_name'] . "." . $keyy . "]}";
 							?>
 							<p id="fieldspro_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-							<label class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
+							<span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 								onclick="copyfiled('#fieldspro_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-								data-placement="bottom" title="Click Copy To used"><?php echo ucwords($aray['lable']); ?> <i
-									class="ti-layers"></i></label>
+								data-placement="bottom" title="Click Copy To used" style="margin-bottom:5px"><?php echo ucwords($aray['lable']); ?> <i
+									class="ti-layers"></i></span>
 							<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
 								onclick="copyfiled('#fieldspro_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
 								data-placement="bottom" title="Click Copy To used"><?php echo ucwords($aray['lable']); ?> <i
@@ -1000,10 +1000,10 @@ $stausresult = ViewStatusData();
 									$valuefields = "{[application_users." . $keyy . "]}";
 									?>
 									<p id="fieldsappuser_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-									<label class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
+									<span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 										onclick="copyfiled('#fieldsappuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-										data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i
-											class="ti-layers"></i></label>
+										data-placement="bottom" title="Click Copy To used" style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
+											class="ti-layers"></i></span>
 									<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
 										onclick="copyfiled('#fieldsappuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
 										data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i
@@ -1017,10 +1017,10 @@ $stausresult = ViewStatusData();
 									$valuefields = "{[employees." . $keyy . "]}";
 									?>
 									<p id="fieldsemp_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-									<label class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
+									<span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 										onclick="copyfiled('#fieldsemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-										data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i
-											class="ti-layers"></i></label>
+										data-placement="bottom" title="Click Copy To used" style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
+											class="ti-layers"></i></span>
 									<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
 										onclick="copyfiled('#fieldsemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
 										data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i
@@ -1049,10 +1049,10 @@ $stausresult = ViewStatusData();
 										$valuefields = "{[session_user." . $keyy . "]}";
 										?>
 										<p id="fieldssesiuser_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-										<label class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
+										<span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 											onclick="copyfiled('#fieldssesiuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-											data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i
-												class="ti-layers"></i></label>
+											data-placement="bottom" title="Click Copy To used" style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
+												class="ti-layers"></i></span>
 										<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
 											onclick="copyfiled('#fieldssesiuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
 											data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i
@@ -1066,10 +1066,10 @@ $stausresult = ViewStatusData();
 										$valuefields = "{[session_employee." . $keyy . "]}";
 										?>
 										<p id="fieldssesiemp_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-										<label class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
+										<span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 											onclick="copyfiled('#fieldssesiemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-											data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i
-												class="ti-layers"></i></label>
+											data-placement="bottom" title="Click Copy To used" style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
+												class="ti-layers"></i></span>
 										<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
 											onclick="copyfiled('#fieldssesiemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
 											data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i
@@ -1087,12 +1087,12 @@ $stausresult = ViewStatusData();
 						<div class="card">
 							<div class="card-body">
 								<div class="form-group">
-									<label>Submit/Approve</label>
+									<span class="d-inline-block fw-bold" style="margin-bottom:5px">Submit/Approve</span>
 									<textarea class="form-control "
 										name="approve_message" aria-label="Approve Message"><?php echo $transaction_message_res['approve_message']; ?></textarea>
 								</div>
 								<div class="form-group">
-									<label>Submit/Approve Informations</label>
+									<span class="d-inline-block fw-bold" style="margin-bottom:5px">Submit/Approve Informations</span>
 									<textarea class="form-control "
 										name="approve_message_information" aria-label="Approve Message Information"><?php echo $transaction_message_res['approve_message_information']; ?></textarea>
 								</div>
