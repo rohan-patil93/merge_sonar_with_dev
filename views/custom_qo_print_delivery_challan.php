@@ -10,12 +10,12 @@
     <!-- <link rel="stylesheet" type="text/css" href="../assets/css/custom_qo_print_aditya_industries.css"> -->
 
 
-    <table border="0" cellpadding="0" cellspacing="0" align="center" style="border: 1px solid #cccccc; border-collapse: collapse; background-color: #ffffff;">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" style="border: 1px solid #cccccc; border-collapse: collapse; background-color: #ffffff;">
 
         <!-- HEADER SECTION -->
         <tr>
             <td style="padding: 10px; border-bottom: 1px solid #cccccc;">
-                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td style="font-size: 16px; font-weight: bold; font-family: Arial, sans-serif;">
                             DELIVERY CHALLAN
@@ -34,11 +34,11 @@
         <!-- CONTACT PERSON & CHALLAN INFO -->
         <tr>
             <td style="padding: 10px 10px 5px 10px;">
-                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <!-- Left Info Box -->
                         <td width="48%" valign="top" style="border: 1px solid #cccccc; padding: 6px;">
-                            <table width="100%" border="0" cellpadding="2" cellspacing="0" style="font-size: 11px;">
+                            <table role="presentation" width="100%" border="0" cellpadding="2" cellspacing="0" style="font-size: 11px;">
                                 <tr>
                                     <td width="35%" style="font-weight: bold;">Contact Person</td>
                                     <td width="5%">:</td>
@@ -66,7 +66,7 @@
 
                         <!-- Right Info Box -->
                         <td width="48%" valign="top" style="border: 1px solid #cccccc; padding: 6px;">
-                            <table width="100%" border="0" cellpadding="2" cellspacing="0" style="font-size: 11px;">
+                            <table role="presentation" width="100%" border="0" cellpadding="2" cellspacing="0" style="font-size: 11px;">
                                 <tr>
                                     <td width="35%" style="font-weight: bold;">Challan No.</td>
                                     <td width="5%">:</td>
@@ -102,7 +102,7 @@
         <!-- ADDRESSES SECTION -->
         <tr>
             <td style="padding: 5px 10px;">
-                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <!-- Billed by -->
                         <td width="31%" valign="top" style="border: 1px solid #cccccc; padding: 6px;">
@@ -110,7 +110,7 @@
                             <div style="font-weight: bold; font-size: 12px;">Suresh Enterprises</div>
                             <div style="font-size: 12px;">Suresh Enterprises</div>
                             
-                            <table width="100%" border="0" cellpadding="1" cellspacing="0" style="font-size: 11px;">
+                            <table role="presentation" width="100%" border="0" cellpadding="1" cellspacing="0" style="font-size: 11px;">
                                 <tr>
                                     <td width="30%" style="font-weight: bold;">GSTIN</td>
                                     <td width="10%">:</td>
@@ -132,7 +132,7 @@
                             <div style="font-weight: bold; font-size: 12px;">National Rubber Industries</div>
                             <div style="font-size: 12px;">NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063</div>
                 
-                            <table width="100%" border="0" cellpadding="1" cellspacing="0" style="font-size: 11px;">
+                            <table role="presentation" width="100%" border="0" cellpadding="1" cellspacing="0" style="font-size: 11px;">
                                 <tr>
                                     <td width="30%" style="font-weight: bold;">GSTIN</td>
                                     <td width="10%">:</td>
@@ -154,7 +154,7 @@
                             <div style="font-weight: bold; font-size: 12px;">National Rubber Industries</div>
                             <div style="font-size: 12px;">NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063</div>
                 
-                            <table width="100%" border="0" cellpadding="1" cellspacing="0" style="font-size: 11px;">
+                            <table role="presentation" width="100%" border="0" cellpadding="1" cellspacing="0" style="font-size: 11px;">
                                 <tr>
                                     <td width="30%" style="font-weight: bold;">GSTIN</td>
                                     <td width="10%">:</td>
@@ -227,10 +227,10 @@
         <!-- PACKAGES & REMARKS SECTION -->
         <tr>
             <td style="padding: 5px 10px;">
-                <table width="100%" border="0" cellpadding="0" cellspacing="0" style="border: 1px solid #cccccc;">
+                <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="border: 1px solid #cccccc;">
                     <tr>
                         <td width="50%" valign="top" style="border-right: 1px solid #cccccc; padding: 6px;">
-                            <table width="100%" border="0" cellpadding="2" cellspacing="0" style="font-size: 10px;">
+                            <table role="presentation" width="100%" border="0" cellpadding="2" cellspacing="0" style="font-size: 10px;">
                                 <tr>
                                     <td width="45%" style="font-weight: bold;">Total Packages / Boxes</td>
                                     <td width="5%">:</td>
@@ -270,12 +270,12 @@
         <!-- FOOTER SECTION -->
         <tr>
             <td style="padding: 5px 10px 10px 10px;">
-                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <!-- Left: Acknowledgment Box -->
                         <td width="35%" valign="top" style="border: 1px solid #cccccc; padding: 6px;">
                             <div style="font-weight: bold; font-size: 10px; margin-bottom: 12px;">Received the above goods in good condition</div>
-                            <table width="100%" border="0" cellpadding="4" cellspacing="0" style="font-size: 10px;">
+                            <table role="presentation" width="100%" border="0" cellpadding="4" cellspacing="0" style="font-size: 10px;">
                                 <tr>
                                     <td width="30%">Name</td>
                                     <td width="5%">:</td>
@@ -303,7 +303,7 @@
 
                         <!-- Middle: Schedule & Payment Terms -->
                         <td width="28%" valign="top">
-                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                            <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td style="border: 1px solid #cccccc; padding: 4px; text-align: center;">
                                         <div style="font-weight: bold; font-size: 10px;">Delivery Schedule</div>
@@ -324,7 +324,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <table width="100%" border="1" bordercolor="#cccccc" cellpadding="4" cellspacing="0" style="border-collapse: collapse; font-size: 10px; text-align: center;">
+                                        <table role="presentation" width="100%" border="1" bordercolor="#cccccc" cellpadding="4" cellspacing="0" style="border-collapse: collapse; font-size: 10px; text-align: center;">
                                             <tr>
                                                 <td width="50%">02 Sep 2026</td>
                                                 <td width="50%">&#8377;35,966.40</td>
