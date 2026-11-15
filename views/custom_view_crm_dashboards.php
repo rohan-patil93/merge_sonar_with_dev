@@ -476,12 +476,12 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                 <div class="flex-shrink-0 m-r-30 m-l-25 mt-lg-0 mt-3">
                     <?php if($_SESSION['user']['user_photo']!=""){ ?>
                     <div class="symbol symbol-50 symbol-lg-120">
-                      <img src="../uploads/all/<?php echo $_SESSION['user']['user_photo']; ?>" class="img-120 " alt="<?= htmlspecialchars(__('image'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';"/>
+                      <img src="../uploads/all/<?php echo $_SESSION['user']['user_photo']; ?>" class="img-120 " alt="" onerror="this.src='uploads/all/no-image.jpg';"/>
                     </div>
 
                   <?php }else{ ?>
                     <div class="symbol symbol-50 symbol-lg-120">
-                      <img src="../uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-120 " alt="<?= htmlspecialchars(__('image'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';"/>
+                      <img src="../uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-120 " alt="" onerror="this.src='uploads/all/no-image.jpg';"/>
                     </div>
                   <?php } ?>
                     <!-- <div class="d-flex align-items-center w-100px w-sm-120px flex-column mt-3 ">
