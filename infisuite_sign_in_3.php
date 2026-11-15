@@ -146,7 +146,7 @@
                                         <div class="password-wrapper">
                                             <label for="chrPassword" class="visually-hidden">Password</label>
                                             <input type="password" id="chrPassword" class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" required="" placeholder="Enter Password" name="chrPassword" aria-label="Password">
-                                            <span class="toggle-password" onclick="togglePassword()">
+                                            <span role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Toggle password'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="toggle-password" onclick="togglePassword()">
                                                 <i class="fa fa-eye" id="eyeIcon"></i>
                                             </span>
                                         </div>
