@@ -83,7 +83,7 @@ $schedulesUrl = 'index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=' 
                                         <?php if ($canExecute) { ?>
                                         <div class="d-flex flex-wrap align-items-end gap-2 mb-3 p-2 bg-light rounded border">
                                             <div class="flex-grow-1" style="min-width:220px;">
-                                                <label class="form-label f-12 mb-1"><?= __("Apply to all assets at this location") ?></label>
+                                                <span class="form-label f-12 mb-1 d-inline-block fw-bold"><?= __("Apply to all assets at this location") ?></span>
                                                 <select class="form-control js-example-basic-single amc-loc-bulk-assignee-select" data-loc-id="<?php echo $locId; ?>" aria-label="Select">
                                                     <option value=""><?= __("Select") ?> <?php echo strtolower(__($assigneeLabel)); ?></option>
                                                     <?php
