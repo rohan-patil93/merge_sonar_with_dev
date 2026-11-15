@@ -316,11 +316,11 @@ foreach ($cusresponse_dump as $custt) {
                         <?php } ?>
                     </td>
                     <td>
-                        <textarea name="description[]" class="form-control mob_width_txtarea"
+                        <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" name="description[]" class="form-control mob_width_txtarea"
                             autocomplete="off"><?php echo $tab2['description']; ?></textarea>
                     </td>
                     <td class="mob_name">
-                        <select class="form-control form-select js-example-basic-single" name="name[]">
+                        <select aria-label="<?= htmlspecialchars(__('Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="name[]">
                             <option value="0"><?= __('Select Any Name') ?></option>
                             <?php foreach ($name_li as $nam) { ?>
                                 <option <?php if ($tab2['name_id'] . "#" . $tab2['name_type'] == $nam['id'] . "#" . $nam['type']) { ?>selected
@@ -344,7 +344,7 @@ foreach ($cusresponse_dump as $custt) {
                </td> 
                <?php **/ ?>
                     <td class="mob_location">
-                        <select class="form-control form-select js-example-basic-single" name="location[]">
+                        <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="location[]">
                             <option value="0"> <?= __('Select Any location') ?> </option>
                             <?php foreach ($locations_data as $locationn) { ?>
                                 <option <?php if ($tab2['location'] == $locationn['id']) { ?>selected <?php } ?>
