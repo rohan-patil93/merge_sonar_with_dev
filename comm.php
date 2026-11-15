@@ -42,7 +42,7 @@ function toGetUserDetais()
 	$url = API . "?mode=userdetails&userid=" . $_SESSION['userid'];
 	$res = callAPI($url);
 	return json_decode($res, 1);
-	;
+	
 }
 function candidatedetais($email)
 {

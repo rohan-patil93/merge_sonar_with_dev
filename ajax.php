@@ -496,7 +496,7 @@ if($page == 'usernotify'){
 if($page == 'employeeclocks'){
 	//print_r($_POST);
 	date_default_timezone_set('Asia/Kolkata');
-	$_POST['emp_id']=$_SESSION['emp_id'];;
+	$_POST['emp_id']=$_SESSION['emp_id'];
 	$_POST['date'] = date('Y-m-d');
 	$_POST['time'] = date('H:i:s');
 	$tableurl = API."?mode=employeeclocks&method=post";
@@ -7866,7 +7866,7 @@ if ($page == "insertvendorsandvendorregisters") {
 		$data['first_name'] = $firstname;
 		$data['middle_name'] = $middlename;
 		$data['last_name'] = $lastname;
-		$data['vendor_verifications'] = json_encode(array("PAN" => array("status" => "N"), "GSTIN" => array("status" => "N"), "TAN" => array("status" => "N"), "BANK" => array("status" => "N"), "MSME" => array("status" => "N")));;
+		$data['vendor_verifications'] = json_encode(array("PAN" => array("status" => "N"), "GSTIN" => array("status" => "N"), "TAN" => array("status" => "N"), "BANK" => array("status" => "N"), "MSME" => array("status" => "N")));
 		$data['verification_type'] = $_POST['verification_type'];
 		$data['api_hit_id'] = $_POST['api_hit_id'];
 		$url = API . "?mode=insertupdatevendorverificationdetails&method=post";
