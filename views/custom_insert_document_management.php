@@ -263,7 +263,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
 
                 <div class="row">
                     <div class="col-md-4 form-group">
-                        <label><?= __('Document Type') ?> <span class="text-danger">*</span></label>
+                        <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Document Type') ?> <span class="text-danger">*</span></span>
                         <select name="document_type_id" class="form-control js-example-basic-single" required aria-label="Document Type Id">
                             <option value=""><?= __('Select Document Type') ?></option>
                             <?php if (count((array)$documentTypes) > 0) {
@@ -280,7 +280,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
                         </select>
                     </div>
                     <div class="col-md-4 form-group">
-                        <label><?= __('Document Name') ?> <span class="text-danger">*</span></label>
+                        <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Document Name') ?> <span class="text-danger">*</span></span>
                         <input type="text" name="document_name" class="form-control" value="<?php echo dmText($selectedDocumentName); ?>" required aria-label="Document Name">
                     </div>
                 </div>
