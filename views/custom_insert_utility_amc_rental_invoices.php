@@ -403,11 +403,11 @@ function cancelInvoices(transaction_table,transaction_id){
             </div>
             <div class="col-lg-3 form-group">
                 <label for="originator" class="inline-block mb-1 f-w-600">Originator</label>
-                <input type="text" class="form-control" value="<?= $_SESSION['users'][$transaction_data['originator']]; ?>"  readonly>
+                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= $_SESSION['users'][$transaction_data['originator']]; ?>"  readonly>
             </div>
             <div class="col-lg-3 form-group">
                 <label for="parent_ref_id" class="inline-block mb-1 f-w-600">Property Owner</label>
-                 <input type="text" class="form-control" value="<?php echo  $owner_additional_details['owner_company_name']; ?>"  readonly>
+                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?php echo  $owner_additional_details['owner_company_name']; ?>"  readonly>
                 
             </div>
             <div class="col-lg-3 form-group">
@@ -420,7 +420,7 @@ function cancelInvoices(transaction_table,transaction_id){
             </div>
             <div class="col-lg-3 form-group">
                 <label for="party" class="inline-block mb-1 f-w-600">Party/Tenant</label>
-                <input type="text" class="form-control"  value="<?= htmlspecialchars($transaction_data['party_name'] ?? '') ?>" readonly>
+                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="<?= htmlspecialchars($transaction_data['party_name'] ?? '') ?>" readonly>
             </div>
             <div class="col-lg-3 form-group">
                 <label for="party_email" class="inline-block mb-1 f-w-600">Party
@@ -429,7 +429,7 @@ function cancelInvoices(transaction_table,transaction_id){
             </div>
             <div class="col-lg-3 form-group">
                 <label for="party_phone" class="inline-block mb-1 f-w-600">Party Contact Number</label>
-                <input type="text" value="<?= htmlspecialchars($transaction_data['party_phone'] ?? '') ?>" name="party_phone" class="form-control"  readonly>
+                <input aria-label="<?= htmlspecialchars(__('Party phone'), ENT_QUOTES, 'UTF-8'); ?>" type="text" value="<?= htmlspecialchars($transaction_data['party_phone'] ?? '') ?>" name="party_phone" class="form-control"  readonly>
             </div>
             <div class="col-lg-3 form-group">
                 <label for="party_address" class="inline-block mb-1 f-w-600">Billing Address</label>
@@ -437,7 +437,7 @@ function cancelInvoices(transaction_table,transaction_id){
             </div>
             <div class="col-lg-3 form-group">
                 <label for="party_address" class="inline-block mb-1 f-w-600">Shiping Address</label>
-                <textarea name="party_ship_adderss" disabled id="party_ship_adderss" Class="form-control"><?= htmlspecialchars($transaction_data['party_ship_adderss'] ?? '') ?> </textarea>
+                <textarea aria-label="<?= htmlspecialchars(__('Party ship adderss'), ENT_QUOTES, 'UTF-8'); ?>" name="party_ship_adderss" disabled id="party_ship_adderss" Class="form-control"><?= htmlspecialchars($transaction_data['party_ship_adderss'] ?? '') ?> </textarea>
             </div>
 
            <!--  <input type="hidden" id="originator_state_id" value="<?php echo $transaction_data['originator_state_id']; ?>">
@@ -445,7 +445,7 @@ function cancelInvoices(transaction_table,transaction_id){
             -->
             <div class="col-lg-3 form-group">
                 <label for="party_address" class="inline-block mb-1 f-w-600">Billing State</label>
-                <select name="originator_state_id" id="originator_state_id" class="form-control js-example-basic-single" onchange="calculatetotals()">
+                <select aria-label="<?= htmlspecialchars(__('Originator state id'), ENT_QUOTES, 'UTF-8'); ?>" name="originator_state_id" id="originator_state_id" class="form-control js-example-basic-single" onchange="calculatetotals()">
                     <option value="">Select Any One</option>
                     <?php foreach($states as $stn){ ?>
                     	<option value="<?php echo $stn['id']; ?>" <?php echo $transaction_data['originator_state_id'] == $stn['id']?"SELECTED":"";?> ><?php echo $stn['state_name']; ?></option>
@@ -455,7 +455,7 @@ function cancelInvoices(transaction_table,transaction_id){
             </div>
             <div class="col-lg-3 form-group">
                 <label for="party_address" class="inline-block mb-1 f-w-600">Party/Tenant State</label>
-            	<select name="supplier_state_id"  id="supplier_state_id"  class="form-control js-example-basic-single" onchange="calculatetotals()">
+            	<select aria-label="<?= htmlspecialchars(__('Supplier state id'), ENT_QUOTES, 'UTF-8'); ?>" name="supplier_state_id"  id="supplier_state_id"  class="form-control js-example-basic-single" onchange="calculatetotals()">
                     <option value="">Select Any One</option>
                     <?php foreach($states as $stn){ ?>
                     	<option value="<?php echo $stn['id']; ?>" <?php echo $transaction_data['supplier_state_id'] == $stn['id']?"SELECTED":"";?> ><?php echo $stn['state_name']; ?></option>
@@ -495,7 +495,7 @@ function cancelInvoices(transaction_table,transaction_id){
 							<td  class="p-1"><?php echo $bd['parent_id'] == 0?$i:"-"; ?></td>
 							<td class="p-1"><?php echo $bd['item_name']; ?></td>
 							<td class="p-1">
-								<textarea class="form-control" name="description[]"><?php echo $bd['description']; ?></textarea>
+								<textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="description[]"><?php echo $bd['description']; ?></textarea>
 							</td>
 							<td class="p-1">
 
@@ -525,7 +525,7 @@ function cancelInvoices(transaction_table,transaction_id){
 							</td>
 							<?php if($bd['parent_id'] != 0){ ?>
 							<td class="p-1">
-								<select name="purchase_uom[]"  class="form-control js-example-basic-single">
+								<select aria-label="<?= htmlspecialchars(__('Purchase uom'), ENT_QUOTES, 'UTF-8'); ?>" name="purchase_uom[]"  class="form-control js-example-basic-single">
 			                        <option value="">N/A</option>
 			                        <?php foreach($utility_uom as $utiuom){ ?>
 			                        	<option value="<?php echo $utiuom['genc_detail_name']; ?>" <?php echo $bd['purchase_uom'] == $utiuom['genc_detail_name']?"SELECTED":"";?> ><?php echo $utiuom['genc_detail_code']; ?></option>
@@ -626,7 +626,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                                 </span>
                                             </span>
                                         </th>
-                                        <th class="p-2 text-end border">
+                                        <th scope="col" class="p-2 text-end border">
                                             <span class="tax_amount_display">
                                                 ₹<?= number_format($transaction_data['tax_amount']/2, 2) ?>
                                             </span>
@@ -646,7 +646,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                                 </span>
                                             </span>
                                         </th>
-                                        <th class="p-2 text-end border">
+                                        <th scope="col" class="p-2 text-end border">
                                             <span class="tax_amount_display">
                                                 ₹<?= number_format($transaction_data['tax_amount'], 2) ?>
                                             </span>
@@ -673,7 +673,7 @@ function cancelInvoices(transaction_table,transaction_id){
                             <th class="text-start p-2 border">
                                 <span>Grand Total</span>
                             </th>
-                            <th class="p-2 text-end border">
+                            <th scope="col" class="p-2 text-end border">
                                 <span class="total_amount_display"> <?= number_format($transaction_data['total_amount'], 2) ?>
                                 </span>
                                 <input type="hidden" class="total_amount_input" name="grand_total_amount" value="<?= $transaction_data['total_amount'] ?>">
@@ -683,7 +683,7 @@ function cancelInvoices(transaction_table,transaction_id){
                             <th class="text-start p-2 border">
                                 <span>Rounding Off</span>
                             </th>
-                            <th class="p-2 text-end border">
+                            <th scope="col" class="p-2 text-end border">
                                 <input type="hidden" class="rounding_off" name="rounding_off" value="<?php echo $transaction_data['rounding_off']!=""?$transaction_data['rounding_off']:0; ?>">
                                 <span id="rounding_off">
                                     ₹<?= number_format($transaction_data['rounding_off'], 2) ?>
@@ -700,11 +700,11 @@ function cancelInvoices(transaction_table,transaction_id){
             <div class="row">
                 <div class="col-lg-4 form-group">
                     <label for="transaction_number" class="inline-block mb-1 f-w-600">Internal Note(s) </label>
-                    <textarea id="notes" name="notes" rows="4" class="form-control border" placeholder="Enter Description"><?= htmlspecialchars($transaction_data['notes'] ?? '') ?></textarea>
+                    <textarea aria-label="<?= htmlspecialchars(__('Enter Description'), ENT_QUOTES, 'UTF-8'); ?>" id="notes" name="notes" rows="4" class="form-control border" placeholder="Enter Description"><?= htmlspecialchars($transaction_data['notes'] ?? '') ?></textarea>
                 </div>
                 <div class="col-lg-4 form-group">
                     <label for="transaction_number" class="inline-block mb-1 f-w-600">Printing Note(s) </label>
-                    <textarea id="printing_notes" name="printing_notes" rows="4" class="form-control border" placeholder="Enter Description"><?= htmlspecialchars($transaction_data['printing_notes'] ?? '') ?></textarea>
+                    <textarea aria-label="<?= htmlspecialchars(__('Enter Description'), ENT_QUOTES, 'UTF-8'); ?>" id="printing_notes" name="printing_notes" rows="4" class="form-control border" placeholder="Enter Description"><?= htmlspecialchars($transaction_data['printing_notes'] ?? '') ?></textarea>
                 </div>
             </div>
         </div>
