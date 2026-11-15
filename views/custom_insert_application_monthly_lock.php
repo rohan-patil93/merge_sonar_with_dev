@@ -162,7 +162,7 @@ function checkAll(ele) {
                                 
                                 <?php foreach($vendordata as $vkey=>$vendor){ ?>
                                  <div class="form-group col-lg-3">
-                                   <?php /**?> <label><?php echo $vendor['company']; ?></label>  
+                                   <?php /**?> <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo $vendor['company']; ?></span>  
                                     <input type="checkbox"  class="js-switch" value="<?php echo $vendor['id']; ?>"  name="lock_list[<?php echo $vendor['id']; ?>]" / aria-label="Input">
                                     </div> <?php **/ ?>
                                     <div class="checkbox-zoom zoom-primary mt-1">
