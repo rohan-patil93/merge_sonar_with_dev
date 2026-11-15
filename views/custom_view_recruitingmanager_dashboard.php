@@ -531,7 +531,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 																	</td> 
 																	<td class="text-center">
 																		<div class="btn-group">
-																			<span class="cursor-pointer" onclick="displaystausdrop(<?php echo $tabval['candidate_id']; ?>,<?php echo "'candidates'"; ?>,<?php echo $tabval['current_status']; ?>,'tab_<?php echo $k;?>')" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > <i class="ti-target"></i> </span>
+																			<span role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Displaystausdrop'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="cursor-pointer" onclick="displaystausdrop(<?php echo $tabval['candidate_id']; ?>,<?php echo "'candidates'"; ?>,<?php echo $tabval['current_status']; ?>,'tab_<?php echo $k;?>')" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > <i class="ti-target"></i> </span>
 																			<div class="dropdown-menu" id="dropdownlist_tab_<?php echo $k."_".$tabval['candidate_id']; ?>">
 																			</div>
 																		</div>
@@ -719,7 +719,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 
 													<div class="col-lg-3 text-right">
 														<div class="btn-group">
-															<span onclick="displaystausdrop(<?php echo $jobpostings['id']; ?>,<?php echo "'job_postings'"; ?>,<?php echo $jobpostings['current_status']; ?>,'act')" class="btn " style="color: <?php echo "#". $nmm['color']; ?>;    background:  <?php echo "#".strval($nmm['background_color'] ); ?>; border-color: <?php echo "#".strval($nmm['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="ti-target"></i> </span>
+															<span role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Displaystausdrop'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" onclick="displaystausdrop(<?php echo $jobpostings['id']; ?>,<?php echo "'job_postings'"; ?>,<?php echo $jobpostings['current_status']; ?>,'act')" class="btn " style="color: <?php echo "#". $nmm['color']; ?>;    background:  <?php echo "#".strval($nmm['background_color'] ); ?>; border-color: <?php echo "#".strval($nmm['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="ti-target"></i> </span>
 															<div class="dropdown-menu" id="dropdownlist_act_<?php echo $jobpostings['id']; ?>">
 															</div>
 														</div>
