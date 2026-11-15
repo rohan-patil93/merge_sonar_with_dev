@@ -170,7 +170,7 @@ $designations = json_decode($designations,1);
 						<tr>
 							<td>
 								<div class="checkbox-inline">
-					                <label class="checkbox checkbox-primary">
+					                <label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="checkbox checkbox-primary">
 					                    <input type="checkbox" value="<?php echo $empp['id'];  ?>"  name="check_employee[]"/>
 					                    <span></span>
 					                    
