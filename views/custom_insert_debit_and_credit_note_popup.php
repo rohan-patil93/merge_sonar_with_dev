@@ -223,7 +223,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 }
 </script>
 <?php
-if($_SESSION['config']['debit_credit_note_creation_days'] !="" AND $_SESSION['config']['debit_credit_note_creation_days'] !="0"){
+if($_SESSION['config']['debit_credit_note_creation_days'] !="" and $_SESSION['config']['debit_credit_note_creation_days'] !="0"){
     $debit_credit_note_creation_days =   $_SESSION['config']['debit_credit_note_creation_days'];
     $expiryDate = date('Y-m-d', strtotime($transactions['transaction_date'] . " +{$debit_credit_note_creation_days} days"));
     if(date('Y-m-d') >= $expiryDate){

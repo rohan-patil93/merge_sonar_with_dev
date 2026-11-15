@@ -20,7 +20,7 @@ if(isset($_POST['submit'])){
     $res = json_decode($response1,1);
 	//echo "<pre>";print_r($res); echo "</pre>";
 	for ($i = 0; $i < count((array)$_POST['lut_no']); $i++) {
-	 	if(($_POST['lut_no'][$i] !="" OR $_POST['bond_no'][$i] !="") AND $_POST['lock_status'][$i] =='1'){
+	 	if(($_POST['lut_no'][$i] !="" or $_POST['bond_no'][$i] !="") and $_POST['lock_status'][$i] =='1'){
 			$additional_notice = "Please lock your row(s) in Tax Info. Otherwise, it may not be used anywhere.";
 		}
 	}

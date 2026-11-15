@@ -73,7 +73,7 @@ if(isset($_POST['submittenantbills'])){
 	foreach($property_tenant_billings as $ptb){
 		if($ptb['shared'] == '0'){
 			$invoicesharedwithtenant[] = $ptb;
-		}elseif($ptb['generated_invoice'] == '0' AND $ptb['rental_invoice_id'] !=""){
+		}elseif($ptb['generated_invoice'] == '0' and $ptb['rental_invoice_id'] !=""){
 			$invoicetobeemailed[] = $ptb;
 		}else{
 			$invoicetobegenerated[] = $ptb;
@@ -269,7 +269,7 @@ if(isset($_POST['submittenantbills'])){
 														<tbody>
 															<?php $i=1;foreach($bill_detail as $bd){
 																$redonlytext = $extrlebl = '';
-																if($bd['transaction_table']=='property_owner_detail_areas' OR $bd['utility_bill_auto_and_fix']=='F'){
+																if($bd['transaction_table']=='property_owner_detail_areas' or $bd['utility_bill_auto_and_fix']=='F'){
 																	$redonlytext = 'readonly';
 																	$extrlebl = "<span>Rent (".$bd['monthly_rent'].")+ Tax (".$bd['rent_tax'].")</span>";
 																}
@@ -526,7 +526,7 @@ if(isset($_POST['submittenantbills'])){
 															<tbody>
 																<?php $i=1;foreach($utility_details as $bd){
 																	$redonlytext = $extrlebl = '';
-																	if($bd['transaction_table']=='property_owner_detail_areas' OR $bd['utility_bill_auto_and_fix']=='F'){
+																	if($bd['transaction_table']=='property_owner_detail_areas' or $bd['utility_bill_auto_and_fix']=='F'){
 																		$redonlytext = 'readonly';
 																		$extrlebl = "<span>Rent (".$bd['monthly_rent'].")+ Tax (".$bd['rent_tax'].")</span>";
 																	}

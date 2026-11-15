@@ -256,7 +256,7 @@ function getDepreciationMethod(){
 						<span class="d-block error-message text-danger"></span>
 						<select  class="form-select js-example-basic-single requried_field" name="status" aria-label="Status">
 							<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>
-								<option  value="<?php echo $ass_statukey; ?>" <?php echo ($ass_statukey == $assetsdeatil['asset_status'] OR ($assetsdeatil['asset_status'] == '' AND $assetsdeatil['asset_status'] == '1'))?"selected":""; ?>><?php echo ucwords($ass_statu); ?></option>
+								<option  value="<?php echo $ass_statukey; ?>" <?php echo ($ass_statukey == $assetsdeatil['asset_status'] or ($assetsdeatil['asset_status'] == '' and $assetsdeatil['asset_status'] == '1'))?"selected":""; ?>><?php echo ucwords($ass_statu); ?></option>
 							<?php } ?>
 						</select>
 					</div>
@@ -266,7 +266,7 @@ function getDepreciationMethod(){
 						<select  class="form-select js-example-basic-single requried_field" name="asset_custodian" aria-label="Asset Custodian">
 							<option value=""><?= __('Select Any One') ?></option>
 							<?php foreach ($users as $userlist) { ?>
-							<option value="<?php echo $userlist['id']; ?>" <?php echo ($assetsdeatil['asset_custodian'] == $userlist['id'] || ($assetsdeatil['asset_custodian'] =="" AND $userlist['id'] == $_SESSION['userid']))?"selected":"";?>><?php echo ucwords($userlist['display_name']); ?></option>
+							<option value="<?php echo $userlist['id']; ?>" <?php echo ($assetsdeatil['asset_custodian'] == $userlist['id'] || ($assetsdeatil['asset_custodian'] =="" and $userlist['id'] == $_SESSION['userid']))?"selected":"";?>><?php echo ucwords($userlist['display_name']); ?></option>
 							<?php } ?>
 						</select>
 					</div>

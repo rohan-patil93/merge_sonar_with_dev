@@ -637,7 +637,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 												$dateloop = 0;	$donutchartary = array(); foreach($montharray2 as $key2=>$date2){
 													$jobpostingcandidates2 = $job_posting_candidates[$key2];
 													if($dateloop == 3){
-														Break;
+														break;
 													}
 													$donutchartlist = $donutchart[$key2];
 													$donutchartary[ST_ACTIVE] += $donutchartlist[ST_ACTIVE];

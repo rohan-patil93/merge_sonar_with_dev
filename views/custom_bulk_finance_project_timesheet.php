@@ -560,7 +560,7 @@ $erp = json_decode($erp_data,1);
 			<input type="hidden"  id="bg_ut_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','budgeted_amount'=>'budgeted_amount','billable_amount'=>'billable_amount')); ?>' >
 												</div>
 											</div>
-											<?php $total_p = ($total_budget_amount !="" AND $total_budget_amount !="0")?number_format((($ttcount/$total_budget_amount)*100),0):0; ?>
+											<?php $total_p = ($total_budget_amount !="" and $total_budget_amount !="0")?number_format((($ttcount/$total_budget_amount)*100),0):0; ?>
 
 											<div class="row align-items-center m-b-15">
 												<div class="col-auto">
@@ -600,7 +600,7 @@ $erp = json_decode($erp_data,1);
 												</div>
 
 											</div>
-											<?php $total_apv_p = ($ttcount !="0" AND $ttcount !="")?number_format((($apv_billable_amount/$ttcount)*100),0):0; ?>
+											<?php $total_apv_p = ($ttcount !="0" and $ttcount !="")?number_format((($apv_billable_amount/$ttcount)*100),0):0; ?>
 											<div class="progress" style="height:6px;">
 												<div class="progress-bar bg-c-yellow" style="width:<?php echo $total_apv_p; ?>%"></div>
 											</div>

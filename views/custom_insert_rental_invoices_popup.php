@@ -221,7 +221,7 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 			<select aria-label="<?= htmlspecialchars(__('Cust id'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single" name="cust_id" id="cust_id" onchange="getTenantDetails('getcustid',this.value)">
 				<option value=""><?php echo __('Select Any One'); ?></option>
 				<?php foreach ($customers as $cust) { ?>
-					<option  value="<?php echo $cust['id']; ?>" <?php echo ($_SESSION['userid']!=$cust['created_by'] AND $_SESSION['admin_type'] != 1)?"disabled":""; ?>><?php echo ucwords($cust['display_name']); ?></option>
+					<option  value="<?php echo $cust['id']; ?>" <?php echo ($_SESSION['userid']!=$cust['created_by'] and $_SESSION['admin_type'] != 1)?"disabled":""; ?>><?php echo ucwords($cust['display_name']); ?></option>
 				<?php } ?>
 			</select>
 		</div>

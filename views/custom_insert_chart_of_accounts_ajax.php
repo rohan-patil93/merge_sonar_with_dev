@@ -105,7 +105,7 @@ $account_groups = $result['account_groups'];
          <?php } ?>
        </select>
      </div>
-     <div class="form-group col-lg-6 <?php echo ($reportgroupid !="" AND $reportgroupid !="0")?"event_disabled":""; ?>">
+     <div class="form-group col-lg-6 <?php echo ($reportgroupid !="" and $reportgroupid !="0")?"event_disabled":""; ?>">
         <label for="fld_account_groups" class="form-label"><?= __('Account Groups') ?> <span class="text-danger">*</span></label>
         <span class="d-block error-message text-danger"></span>
         <select id="fld_account_groups" class="form-control border js-example-basic-single requried_field" name="account_groups"
@@ -121,7 +121,7 @@ $account_groups = $result['account_groups'];
           <?php } ?>
         </select>
       </div>
-     <div class="form-group col-lg-6 <?php echo ($reportgroupid !="" AND $reportgroupid !="0")?"event_disabled":""; ?>">
+     <div class="form-group col-lg-6 <?php echo ($reportgroupid !="" and $reportgroupid !="0")?"event_disabled":""; ?>">
         <label for="fld_account_type" class="form-label"><?= __('Account Type') ?> <span class="text-danger">*</span></label>
         <span class="d-block error-message text-danger"></span>
         <select id="fld_account_type" class="form-control border js-example-basic-single requried_field" name="account_type" style="-webkit-appearance:auto;">
@@ -267,7 +267,7 @@ $account_groups = $result['account_groups'];
 
   <div class="col-lg-12 form-group">
     <input type="hidden" name="Rid" id="Rid" value="<?php echo $chartofaccountssingle['id']; ?>">
-    <button type="button" class="btn btn-primary mt-2" onclick="addFinaanceAccGrp()" >  <?php if($chartofaccountssingle['id'] !="" AND $chartofaccountssingle['id'] !="0"){ echo __("Update Chart Of Accounts"); }else{ echo "<i class='fa fa-plus'></i> " . __("Chart Of Accounts"); } ?></button></div>
+    <button type="button" class="btn btn-primary mt-2" onclick="addFinaanceAccGrp()" >  <?php if($chartofaccountssingle['id'] !="" and $chartofaccountssingle['id'] !="0"){ echo __("Update Chart Of Accounts"); }else{ echo "<i class='fa fa-plus'></i> " . __("Chart Of Accounts"); } ?></button></div>
   </div>
 </div>
 </form>

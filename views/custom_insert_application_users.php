@@ -216,7 +216,7 @@ $countriesres   = json_decode($countriesres,1);
 							</div>
 
 
-<?php if(in_array(ADMIN_ROLE,(array)$_SESSION['role_ids']) AND $_SESSION['user_activated'] == 'N'){
+<?php if(in_array(ADMIN_ROLE,(array)$_SESSION['role_ids']) and $_SESSION['user_activated'] == 'N'){
 	$dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/DD/YYYY','DD/MM/YYYY');
  ?>
 

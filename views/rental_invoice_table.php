@@ -31,7 +31,7 @@
         <textarea  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control mt-2 " autocomplete="off"><?php echo $tab2['description']; ?></textarea>
     </td>
         <td class="p-1 w-full text-center" id="hsn_and_sac_code_id_<?php echo $i; ?>">
-        <?php if($tab2['tax_value'] != "" AND $tab2['tax_value'] != "0"){ ?>
+        <?php if($tab2['tax_value'] != "" and $tab2['tax_value'] != "0"){ ?>
             <span class="d-block"><?= __('HSN'); ?> - <?php echo $hsn_and_sac_codes[$tab2['tax_id']]; ?></span>
             <span class="d-block"><?= __('Tax'); ?> - <?php echo $tab2['tax_value']; ?></span>
       <?php }else{ echo " - "; } ?>

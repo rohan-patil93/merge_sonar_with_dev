@@ -59,7 +59,7 @@ if($transaction_table == 'sales_orders'){
     $invoicedatelable = "Invoice Date";
 }
 //if($transaction_table == 'purchase_invoices' OR $transaction_table == 'supplier_bills'){
-if($transaction_table == 'sales_invoices' OR $transaction_table == 'sales_invoice_receipts'){
+if($transaction_table == 'sales_invoices' or $transaction_table == 'sales_invoice_receipts'){
     $paymentshow = "Y";
 }
 
@@ -279,7 +279,7 @@ function emptyCheck($valu){
                             </tr>
                             <tr>
                                 <?php
-                                $transaction['doc_ref_date'] = ($transaction['doc_ref_date']!='0000-00-00' AND $transaction['doc_ref_date']!='1970-01-01')?date("d M Y",strtotime($transaction['doc_ref_date'])):"";
+                                $transaction['doc_ref_date'] = ($transaction['doc_ref_date']!='0000-00-00' and $transaction['doc_ref_date']!='1970-01-01')?date("d M Y",strtotime($transaction['doc_ref_date'])):"";
                                 ?>
                                 <th scope="col" class="f-14 text-end">Buyer's Order No.</th>
                                 <th scope="col" class="f-14 text-start"><?php echo emptyCheck($transaction['doc_ref_no']); ?></th>

@@ -211,7 +211,7 @@ function updateApplicationTickets(rid,status){
     <button type="button" class="btn btn-primary waves-effect waves-light" id="insertemployeedetails_btn" onclick="insertApplicationTickets()"><?= __('Submit') ?></button>
 </div>
 <?php } ?>
-<?php if($_POST['page_type'] == "PT" OR $_POST['page_type'] == "LT"){ ?>
+<?php if($_POST['page_type'] == "PT" or $_POST['page_type'] == "LT"){ ?>
 
     <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr.js"></script>
     <script type="text/javascript" src="assets/bower_components/modernizr/js/css-scrollbars.js"></script>

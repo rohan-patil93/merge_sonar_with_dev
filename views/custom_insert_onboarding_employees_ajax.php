@@ -326,7 +326,7 @@ $bank_work_flow = "Y";
 		            <div class="card social-res-card">
 		                <div class="card-body">
 		                    <span class="form-label d-block  fw-bold"><?php echo __('Bank'); ?>
-		                    	<?php if($fieldaccesright['access'] !="V" AND $fieldaccesright['field']['bank_details']!="V"){ ?>
+		                    	<?php if($fieldaccesright['access'] !="V" and $fieldaccesright['field']['bank_details']!="V"){ ?>
 		                    	<?php if($emp_bank['activation_status'] == 'Y'){ ?>
 		                    		<span class="form-label label label-warning float-end d-inline-block fw-bold"><?php echo __('Active'); ?></span>
 		                    	<?php }else{
@@ -413,7 +413,7 @@ $bank_work_flow = "Y";
 	            <tr>
 	                <th class="p-2"><?php echo __('Passport'); ?></th>
 	                <td class="p-2"><?php echo renderSensitiveDataWithToggle($data['passport'], 'passport'); ?></td>
-	                <td class="p-2"><?php echo ($data['passport_expiry_date']!="0000-00-00" AND $data['passport_expiry_date']!="")?fromDate($data['passport_expiry_date']):" - "; ?></td>
+	                <td class="p-2"><?php echo ($data['passport_expiry_date']!="0000-00-00" and $data['passport_expiry_date']!="")?fromDate($data['passport_expiry_date']):" - "; ?></td>
 	                <td class="p-2">
 	                <?php if($attached_files['passport_attachment'] !=""){ ?>
                 	<a href="uploads/all/<?php echo $attached_files['passport_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['passport_attachment']; ?></a>
@@ -424,7 +424,7 @@ $bank_work_flow = "Y";
 	            <tr>
 	                <th class="p-2"><?php echo __('Driving Licence'); ?></th>
 	                <td class="p-2"><?php echo renderSensitiveDataWithToggle($data['driving_licence'], 'driving_licence'); ?></td>
-	                <td class="p-2"><?php echo ($data['driving_licence_expiry_date']!="0000-00-00" AND $data['driving_licence_expiry_date']!="")?fromDate($data['driving_licence_expiry_date']):" - "; ?></td>
+	                <td class="p-2"><?php echo ($data['driving_licence_expiry_date']!="0000-00-00" and $data['driving_licence_expiry_date']!="")?fromDate($data['driving_licence_expiry_date']):" - "; ?></td>
 	                <td class="p-2">
 		                <?php if($attached_files['driving_licence_attachment'] !=""){ ?>
 	                	<a href="uploads/all/<?php echo $attached_files['driving_licence_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['driving_licence_attachment']; ?></a>
@@ -991,7 +991,7 @@ $bank_work_flow = "Y";
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Date of Joining'); ?> </span>
 		        <div class="<?php echo $readonlycheck; ?>">
-  					<input aria-label="<?= htmlspecialchars(__('Joining date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" value="<?php echo ($data['joining_date']!="0000-00-00" AND $data['joining_date']!="")?fromDate($data['joining_date']):""; ?>"  name="joining_date" placeholder="<?php echo __('Enter Date of Joining'); ?>"/>
+  					<input aria-label="<?= htmlspecialchars(__('Joining date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" value="<?php echo ($data['joining_date']!="0000-00-00" and $data['joining_date']!="")?fromDate($data['joining_date']):""; ?>"  name="joining_date" placeholder="<?php echo __('Enter Date of Joining'); ?>"/>
   				</div>
 		    </div>
 		    <?php }if($fieldaccesright['field']['experience_current_organization']!="NA"){
@@ -1100,7 +1100,7 @@ $bank_work_flow = "Y";
 		<div class="col-xl-6 mt-2" >
 		    <span class="form-label d-inline-block fw-bold"><?php echo __('Date of Birth'); ?> </span>
 		    <div class="<?php echo $readonlycheck; ?>">
-			    <input aria-label="<?= htmlspecialchars(__('Date of birth'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control form-control-lg datepicker"  value="<?php echo  ($data['date_of_birth']!="0000-00-00" AND $data['date_of_birth']!="")?fromDate($data['date_of_birth']):""; ?>"  name="date_of_birth" placeholder="<?php echo __('Enter Date of Birth'); ?>" onchange="selectdateOfBirth(this.value)" />
+			    <input aria-label="<?= htmlspecialchars(__('Date of birth'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control form-control-lg datepicker"  value="<?php echo  ($data['date_of_birth']!="0000-00-00" and $data['date_of_birth']!="")?fromDate($data['date_of_birth']):""; ?>"  name="date_of_birth" placeholder="<?php echo __('Enter Date of Birth'); ?>" onchange="selectdateOfBirth(this.value)" />
 			</div>
 	    </div>
 	    <?php } /**if($fieldaccesright['field']['age']!="NA"){
@@ -1135,7 +1135,7 @@ $bank_work_flow = "Y";
 			<div class="mt-2" id="marriagedateshow1">
 			  	<span  class="form-label d-inline-block fw-bold"><?php echo __('Marrige Date'); ?></span>
 			  	<div class="<?php echo $readonlycheck; ?>">
-				  	<input aria-label="<?= htmlspecialchars(__('Wedding date'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  class="form-control datepicker" name="wedding_date" id="wedding_date" value="<?php echo ($data['wedding_date']!="0000-00-00" AND $data['wedding_date']!="")?fromDate($data['wedding_date']):""; ?>" placeholder="<?php echo __('Enter Marrige Date'); ?>"/>
+				  	<input aria-label="<?= htmlspecialchars(__('Wedding date'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  class="form-control datepicker" name="wedding_date" id="wedding_date" value="<?php echo ($data['wedding_date']!="0000-00-00" and $data['wedding_date']!="")?fromDate($data['wedding_date']):""; ?>" placeholder="<?php echo __('Enter Marrige Date'); ?>"/>
 				</div>
 			</div>
 		</div>
@@ -1182,7 +1182,7 @@ $bank_work_flow = "Y";
 			    ?>
 			    <div class="radio radio-inline">
 			     	<label class="form-label" onclick="selectDisability()">
-			       	<input type="radio" name="disability" id="disability" <?php if($data['disability'] == $ynkey OR ($data['disability'] =="" AND $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
+			       	<input type="radio" name="disability" id="disability" <?php if($data['disability'] == $ynkey or ($data['disability'] =="" and $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
 			       	<i class="helper"></i>
 			       	<?php echo $yn; ?>
 			     	</label>
@@ -1206,7 +1206,7 @@ $bank_work_flow = "Y";
 			    ?>
 			    <div class="radio radio-inline">
 			     	<label class="form-label">
-			       	<input   type="radio" name="work_textile_industry" <?php if($data['work_textile_industry '] == $ynkey OR ($data['work_textile_industry'] =="" AND $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
+			       	<input   type="radio" name="work_textile_industry" <?php if($data['work_textile_industry '] == $ynkey or ($data['work_textile_industry'] =="" and $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
 			       	<i class="helper"></i>
 			       	<?php echo $yn; ?>
 			    	</label>
@@ -1224,7 +1224,7 @@ $bank_work_flow = "Y";
 			    ?>
 			    <div class="radio radio-inline">
 			     	<label class="form-label">
-			       	<input   type="radio" name="physically_challenged_children" <?php if($data['physically_challenged_children'] == $ynkey OR ($data['work_textile_industry'] =="" AND $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
+			       	<input   type="radio" name="physically_challenged_children" <?php if($data['physically_challenged_children'] == $ynkey or ($data['work_textile_industry'] =="" and $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
 			       	<i class="helper"></i>
 			       	<?php echo $yn; ?>
 			     	</label>
@@ -1627,7 +1627,7 @@ $bank_work_flow = "Y";
 					<input type="text" name="passport" class="form-control" value="<?php echo dynamicDataDecode($data['passport']); ?>" placeholder="<?php echo __('Enter Passport No.'); ?>">
 				</td>
 				<td class="p-2">
-					<input type="text" name="passport_expiry_date" class="form-control datepicker" value="<?php echo ($data['passport_expiry_date']!="0000-00-00" AND $data['passport_expiry_date']!="")?fromDate($data['passport_expiry_date']):""; ?>" placeholder="<?php echo __('Enter Expiry Date'); ?>">
+					<input type="text" name="passport_expiry_date" class="form-control datepicker" value="<?php echo ($data['passport_expiry_date']!="0000-00-00" and $data['passport_expiry_date']!="")?fromDate($data['passport_expiry_date']):""; ?>" placeholder="<?php echo __('Enter Expiry Date'); ?>">
 				</td>
 				<td class="p-2">
 					<input class="form-control" type="file" id="passport_attachment" value="" accept=".jpg,.png,.pdf">
@@ -1646,7 +1646,7 @@ $bank_work_flow = "Y";
 					<input type="text" name="driving_licence" class="form-control" value="<?php echo dynamicDataDecode($data['driving_licence']); ?>" placeholder="<?php echo __('Enter Driving Licence'); ?>">
 				</td>
 				<td class="p-2">
-					<input type="text" name="driving_licence_expiry_date" class="form-control datepicker" value="<?php echo ($data['driving_licence_expiry_date']!="0000-00-00" AND $data['driving_licence_expiry_date']!="")?fromDate($data['driving_licence_expiry_date']):""; ?>" placeholder="<?php echo __('Enter Driving Licence Expiry Date'); ?>">
+					<input type="text" name="driving_licence_expiry_date" class="form-control datepicker" value="<?php echo ($data['driving_licence_expiry_date']!="0000-00-00" and $data['driving_licence_expiry_date']!="")?fromDate($data['driving_licence_expiry_date']):""; ?>" placeholder="<?php echo __('Enter Driving Licence Expiry Date'); ?>">
 				</td>
 				<td class="p-2">
 					<input class="form-control" type="file" id="driving_licence_attachment" value="" accept=".jpg,.png,.pdf">
@@ -1761,10 +1761,10 @@ $bank_work_flow = "Y";
 					<input type="text" name="job_descrption[]" class="form-control" value="<?php echo $expe['job_descrption']; ?>" autocomplete="off" placeholder="<?php echo __('Enter Job Description'); ?>">
 				</td>
 				<td class="p-2">
-					<input type="text d-block" name="work_from[]" class="form-control datepicker"  value="<?php echo ($expe['work_from']!="0000-00-00" AND $expe['work_from']!="")?fromDate($expe['work_from']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter From Date'); ?>">
+					<input type="text d-block" name="work_from[]" class="form-control datepicker"  value="<?php echo ($expe['work_from']!="0000-00-00" and $expe['work_from']!="")?fromDate($expe['work_from']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter From Date'); ?>">
 				</td>
 				<td class="p-2">
-					<input type="txet" name="work_to[]" class="form-control datepicker" value="<?php echo ($expe['work_to']!="0000-00-00" AND $expe['work_to']!="")?fromDate($expe['work_to']):""; ?>"autocomplete="off" placeholder="<?php echo __('Enter To Date'); ?>">
+					<input type="txet" name="work_to[]" class="form-control datepicker" value="<?php echo ($expe['work_to']!="0000-00-00" and $expe['work_to']!="")?fromDate($expe['work_to']):""; ?>"autocomplete="off" placeholder="<?php echo __('Enter To Date'); ?>">
 				</td>
 				<td class="p-2 w-b-w-s">
 					<div class="row">

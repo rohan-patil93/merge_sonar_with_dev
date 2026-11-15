@@ -323,7 +323,7 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-2 ">
-                            <?php if ($_GET['Rid'] != "" AND isset($_GET['Rid'])) { ?>
+                            <?php if ($_GET['Rid'] != "" and isset($_GET['Rid'])) { ?>
                                 <div class="btn btn-icon btn-primary btn-circle mr-2" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Per-diem'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
                                     onclick="toopenpredim(<?php echo $i . "," . $tab2['id']; ?>)" data-container="body"
                                     data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Per-diem'), ENT_QUOTES, 'UTF-8'); ?>"><i
