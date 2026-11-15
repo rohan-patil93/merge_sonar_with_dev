@@ -255,7 +255,7 @@ function formSubmitBTN(){
 	<div class="card-body">
 		<div class="form-group col-lg-6">
 			<label class="form-label"><?= __('Process Name') ?></label>
-			<select class="form-select js-example-basic-single" name="process_name" id="process_name" onchange="selectProcessName(this.value)">
+			<select aria-label="<?= htmlspecialchars(__('Process name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="process_name" id="process_name" onchange="selectProcessName(this.value)">
 				<option value=""><?= __('Select Any One') ?></option>
 				<?php foreach($dynamic_mapping_tables as $process){ ?>
 					<option value="<?php echo $process['application_table_name']; ?>" <?php echo $workflowconfiguration['process_name']==$process['application_table_name']?"selected":"" ?> ><?php echo ucwords(str_replace("_"," ",($process['application_table_name']))); ?></option>
