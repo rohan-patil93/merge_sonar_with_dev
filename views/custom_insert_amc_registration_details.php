@@ -90,7 +90,7 @@ foreach ($gc_details as $row) {
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label"><?= __('AMC Name') ?> <span class="text-danger">*</span></label>
+                            <span class="form-label d-inline-block fw-bold"><?= __('AMC Name') ?> <span class="text-danger">*</span></span>
                             <input type="text" class="form-control" name="amc_name" id="amc_name" placeholder="<?= __('Enter AMC Name') ?>" value="<?php echo $isEdit?$editData['amc_name']:''; ?>" required aria-label="Enter AMC Name">
                         </div>
                     </div>
@@ -108,7 +108,7 @@ foreach ($gc_details as $row) {
                     <!-- Type Selection -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label"><?= __('Type') ?> <span class="text-danger">*</span></label><br>
+                            <span class="form-label d-inline-block fw-bold"><?= __('Type') ?> <span class="text-danger">*</span></span><br>
 
                             <label class="mr-3"><input type="radio" name="party_type" value="customer"
                                     <?php echo $selectedType == 'customer' ? 'checked' : ''; ?> aria-label="Party Type">
@@ -125,7 +125,7 @@ foreach ($gc_details as $row) {
                     <!-- Product -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label"><?= __('Product') ?> <span class="text-danger">*</span></label>
+                            <span class="form-label d-inline-block fw-bold"><?= __('Product') ?> <span class="text-danger">*</span></span>
                             <select name="product_id" class="form-control js-example-basic-single" required aria-label="Product Id">
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach ($products as $p){ ?>
@@ -141,7 +141,7 @@ foreach ($gc_details as $row) {
                     <div class="col-md-3 party-box" id="customer_box"
                         style="<?php echo $selectedType == 'customer' ? '' : 'display:none;'; ?>">
                         <div class="form-group w-full">
-                            <label class="form-label"><?= __('Customer') ?> <span class="text-danger">*</span></label>
+                            <span class="form-label d-inline-block fw-bold"><?= __('Customer') ?> <span class="text-danger">*</span></span>
                             <select name="customer_id" id="customer_id"
                                 class="form-control js-example-basic-single"
                                 <?php echo $selectedType == 'customer' ? 'required' : ''; ?> aria-label="Customer Id">
@@ -162,7 +162,7 @@ foreach ($gc_details as $row) {
                 <div class="col-md-3 party-box" id="vendor_box"
                     style="<?php echo $selectedType == 'vendor' ? '' : 'display:none;'; ?>">
                     <div class="form-group w-full">
-                        <label class="form-label"><?= __('Vendor') ?> <span class="text-danger">*</span></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Vendor') ?> <span class="text-danger">*</span></span>
                         <select name="vendor_id" id="vendor_id"
                             class="form-control js-example-basic-single"
                             <?php echo $selectedType == 'vendor' ? 'required' : ''; ?> aria-label="Vendor Id">
@@ -182,14 +182,14 @@ foreach ($gc_details as $row) {
                     <!-- Activation & Deactivation Dates -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label"><?= __('Activation Date') ?> <span class="text-danger">*</span></label>
+                            <span class="form-label d-inline-block fw-bold"><?= __('Activation Date') ?> <span class="text-danger">*</span></span>
                             <input type="date" name="activation_date" id="activationDate" class="form-control"
                                 value="<?php echo $isEdit?$editData['activation_date']:''; ?>" onchange="setDeactivationDate()" required aria-label="Activation Date">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label"><?= __('Deactivation Date') ?></label>
+                            <span class="form-label d-inline-block fw-bold"><?= __('Deactivation Date') ?></span>
                             <input type="date" name="deactivation_date" id="deactivationDate" class="form-control"
                                 value="<?php echo $isEdit?$editData['deactivation_date']:''; ?>" readonly aria-label="Deactivation Date">
                         </div>
@@ -198,7 +198,7 @@ foreach ($gc_details as $row) {
                     <!-- Payment Type -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label">Payment / Service <?= __('Type') ?> <span class="text-danger">*</span></label>
+                            <span class="form-label d-inline-block fw-bold">Payment / Service <?= __('Type') ?> <span class="text-danger">*</span></span>
                             <select name="payment_type" class="form-control js-example-basic-single" id="serviceType" onchange="toggleServiceCharge()" required aria-label="Payment Type">
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach ($payment_types as $pt){ ?>
@@ -213,7 +213,7 @@ foreach ($gc_details as $row) {
                     <!-- Service Charge -->
                     <div class="col-md-3" id="serviceChargeContainer" style="<?php echo ($isEdit && $editData['payment_type']=='2')?'':'display:none;'; ?>">
                         <div class="form-group">
-                            <label class="form-label"><?= __('Service Charge') ?> <span class="text-danger">*</span></label>
+                            <span class="form-label d-inline-block fw-bold"><?= __('Service Charge') ?> <span class="text-danger">*</span></span>
                             <input type="number" name="service_charge" id="serviceCharge" class="form-control"
                                    value="<?php echo $isEdit?$editData['service_charge']:''; ?>"
                                    <?php echo ($isEdit && $editData['payment_type']=='2')?'required':''; ?> aria-label="Service Charge">
