@@ -2393,7 +2393,8 @@ class employeeLoanClass extends userClass
 		// Extract unique IDs and build them for IN clause
 		$unique_ids = array();
 		foreach ($buddy_ids as $row) {
-			$id_value = $row->{$buddy_type};
+			$id_value = $row->{$buddy_type
+			};
 			if (!empty($id_value) && !in_array($id_value, $unique_ids)) {
 				$unique_ids[] = intval($id_value);
 			}
@@ -2480,8 +2481,10 @@ class employeeLoanClass extends userClass
 
 				// Get current buddy name
 				$buddy_name = '';
-				if ($emp->{$buddy_type}) {
-					$buddy_query = "SELECT display_name, first_name, last_name FROM employees WHERE id='" . $emp->{$buddy_type} . "' AND company_id='".$company_id."' AND is_active=0";
+				if ($emp->{$buddy_type
+				}) {
+					$buddy_query = "SELECT display_name, first_name, last_name FROM employees WHERE id='" . $emp->{$buddy_type
+					} . "' AND company_id='".$company_id."' AND is_active=0";
 					$buddy_row = $callConfig->getRow($buddy_query);
 					if ($buddy_row) {
 						$buddy_name = $buddy_row->display_name ?: ($buddy_row->first_name . ' ' . $buddy_row->last_name);

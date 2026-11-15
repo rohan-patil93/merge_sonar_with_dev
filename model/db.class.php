@@ -115,10 +115,13 @@ class configClass
 			$log['log_message'] = '';
 			$sub = substr($query, 0, 6);
 			//echo $sub; exit;
-			if($sub=='INSERT' || $sub=='insert') { $log['log_message'] = '3001'; }
-			if($sub=='UPDATE' || $sub=='update') { $log['log_message'] = '3010'; }
+			if($sub=='INSERT' || $sub=='insert') { $log['log_message'] = '3001';
+			}
+			if($sub=='UPDATE' || $sub=='update') { $log['log_message'] = '3010';
+			}
 			//if($sub=='SELECT' || $sub=='select') { $this->insertAuditTrail('SELECT',$query); }
-			if($sub=='DELETE' || $sub=='delete') { $this->insertAuditTrail('DELETE','','','',$query); }
+			if($sub=='DELETE' || $sub=='delete') { $this->insertAuditTrail('DELETE','','','',$query);
+			}
 			//print_r($log); exit;
 			$result = null;
 			if (mysqli_query($this->con, $query)) {
@@ -133,8 +136,10 @@ class configClass
 				$error_message =  $error_no." : ".mysqli_error($this->con);
 				$log['log_message']=str_replace("'", " ", $error_message);
 				$fields = null;
-				if($error_no == '1062' || $error_no == '1406' ){ $fields = $this->toGetUbiquekeyFields($error_message); }
-				if($error_no == '1048'){ $fields = $this->toGetcannotbenull($error_message); }
+				if($error_no == '1062' || $error_no == '1406' ){ $fields = $this->toGetUbiquekeyFields($error_message);
+				}
+				if($error_no == '1048'){ $fields = $this->toGetcannotbenull($error_message);
+				}
 				$queryresult = array('status' => 'fail' , 'message' => $error_message, 'error_no' => $error_no, 'other' => $fields, 'query' => $query);
 			}
 			$this->insertErorrLog($log);
@@ -158,7 +163,8 @@ class configClass
 				$cdsc['query1'] = $query1;
 				$exicutesql= mysqli_query($this->con,$query1);
 				$valuessql=mysqli_fetch_object($exicutesql);
-				if($id==''){ $id = $valuessql->id; }
+				if($id==''){ $id = $valuessql->id;
+				}
 				$remarks = urlencode(json_encode($valuessql));
 			}else{
 				if($type == "SELECT"){
@@ -433,7 +439,8 @@ class configClass
 
 		public function create_image_byoriginal($srcpath,$dir,$width,$height)
 	   {
-		if(!is_dir($dir)) { mkdir($dir); }
+		if(!is_dir($dir)) { mkdir($dir);
+		}
 
 		if(!empty($srcpath))
 		{

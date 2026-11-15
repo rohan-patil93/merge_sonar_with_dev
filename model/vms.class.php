@@ -2508,12 +2508,18 @@ class vMSUserClass extends userClass{
 		global $callConfig;
 		$data = $data['where'];
 		$condition = "";
-		if($data['department_id']!=""){  $condition .= "AND department_id = '".$data['department_id']."'"; }
-		if($data['designation_id']!=""){ $condition .=  " AND designation_id = '".$data['designation_id']."'";  }
-		if($data['location_id']!=""){ $condition .=  " AND location_id = '".$data['location_id']."'"; }
-		if($data['vendor_id']!=""){ $condition .=  " AND vendor_id = '".$data['vendor_id']."'"; }
-		if($data['cost_center_id']!=""){ $condition .=  " AND cost_center_id = '".$data['cost_center_id']."'"; }
-		if($data['emp_name_code']!=""){ $condition .=  " AND  (display_name like '%".$data['emp_name_code']."%' OR  emp_code like '%".$data['emp_name_code']."%') "; }
+		if($data['department_id']!=""){  $condition .= "AND department_id = '".$data['department_id']."'";
+		}
+		if($data['designation_id']!=""){ $condition .=  " AND designation_id = '".$data['designation_id']."'";
+		}
+		if($data['location_id']!=""){ $condition .=  " AND location_id = '".$data['location_id']."'";
+		}
+		if($data['vendor_id']!=""){ $condition .=  " AND vendor_id = '".$data['vendor_id']."'";
+		}
+		if($data['cost_center_id']!=""){ $condition .=  " AND cost_center_id = '".$data['cost_center_id']."'";
+		}
+		if($data['emp_name_code']!=""){ $condition .=  " AND  (display_name like '%".$data['emp_name_code']."%' OR  emp_code like '%".$data['emp_name_code']."%') ";
+		}
 		$query2 = "SELECT * FROM employees WHERE is_active=0 AND company_id = '".$data['company_id']."'".$condition;
 		$datas = $callConfig->getAllRows($query2);
 		$returnarray['emp_list'] = $datas;
@@ -2601,7 +2607,8 @@ class vMSUserClass extends userClass{
     			$timesheetdata[$k][$task->timesheet_date] = $task;
     			$stauseandid[$k][$task->id] = $task->current_status;
     			$workorderid = $task->work_order;
-    			$k++;}
+    			$k++;
+    			}
     		}
     		$details['days'] = $days;
     		$details['task'] = $tasks;
@@ -2737,7 +2744,8 @@ class vMSUserClass extends userClass{
     		$testarrau['maxleave'] = $maxlim;
     		$testarrau['totalleave'] = $lev;
     		$leavedays = 0;
-    		if($maxlim <= $lev){  $leavedays = $lev-$maxlim;  $workday = $workday-$leavedays; }
+    		if($maxlim <= $lev){  $leavedays = $lev-$maxlim;  $workday = $workday-$leavedays;
+    		}
     		$totaldays = $workday;
     	}
     	$testarrau['mpc_rate_per_hrs'] = $this->ratePerHrs($mpcitemddetails->purchase_uom ,$mpcitemddetails->item_amount,$total_working_day,$minimum_hours_required,$totaldays);
@@ -3374,9 +3382,12 @@ class vMSUserClass extends userClass{
 			$empdatas = $callConfig->getAllRows($query);
 			//echo "<pre>"; print_r($empdatas);
 			foreach($empdatas as $empdata){
-				if($empdata->month=='jan'){	$ldate = "2022-01";	}
-				if($empdata->month=='feb'){	$ldate = "2022-02";	}
-				if($empdata->month=='mar'){	$ldate = "2022-03";	}
+				if($empdata->month=='jan'){	$ldate = "2022-01";
+				}
+				if($empdata->month=='feb'){	$ldate = "2022-02";
+				}
+				if($empdata->month=='mar'){	$ldate = "2022-03";
+				}
 				$eequery = "SELECT id  FROM employees WHERE emp_code='".$empdata->emp_id."'";
 				//echo $eequery;
 				$eeee = $callConfig->getRow($eequery);
@@ -4661,11 +4672,17 @@ class vMSUserClass extends userClass{
 				$mquery = "SELECT * FROM mpc_items WHERE id=".$mpc_id;
 				$mpcdata = $callConfig->getRow($mquery);
 				$mrate = $mpcdata->item_price;
-				if($mpcdata->purchase_uom=='PH'){ $hmrate = $mrate; }elseif($mpcdata->purchase_uom=='PD'){ $hmrate = $mrate/8; }else{$hmrate = $mrate/152;}
+				if($mpcdata->purchase_uom=='PH'){ $hmrate = $mrate;
+				}elseif($mpcdata->purchase_uom=='PD'){ $hmrate = $mrate/8;
+				}else{$hmrate = $mrate/152;
+				}
 				$vquery = "SELECT * FROM vrc_items WHERE id=".$vrc_item_id;
 				$vrcdata = $callConfig->getRow($vquery);
 				$vrate = $vrcdata->item_price;
-				if($vrcdata->purchase_uom=='PH'){ $hvrate = $vrate; }elseif($vrcdata->purchase_uom=='PD'){ $hvrate = $vrate/8; }else{$hvrate = $vrate/152;}
+				if($vrcdata->purchase_uom=='PH'){ $hvrate = $vrate;
+				}elseif($vrcdata->purchase_uom=='PD'){ $hvrate = $vrate/8;
+				}else{$hvrate = $vrate/152;
+				}
 				print_r($ewr);print_r($mpcdata);print_r($vrcdata); echo $hmrate."/".$hvrate;
 				echo $uquery = "UPDATE project_timesheets SET bill_amount = billable_hrs * ".$hmrate.", vrc_billable_amount= billable_hrs *".$hvrate.", rate_per_hrs=".$hmrate." WHERE emp_id=".$ptd->emp_id." AND timesheet_date LIKE '2022-10-%'";
 				$upp = $callConfig->executeQuery($uquery);
@@ -6372,7 +6389,8 @@ class vMSUserClass extends userClass{
             		$testarrau['maxleave'] = $maxlim;
             		$testarrau['totalleave'] = $lev;
             		$leavedays = 0;
-            		if($maxlim <= $lev){  $leavedays = $lev-$maxlim;  $workday = $workday-$leavedays; }
+            		if($maxlim <= $lev){  $leavedays = $lev-$maxlim;  $workday = $workday-$leavedays;
+            		}
             		$totaldays = $workday;
             	}
 
@@ -6390,12 +6408,18 @@ class vMSUserClass extends userClass{
 		global $callConfig;
 		$data = $data['where'];
 		$condition = "";
-		if($data['department_id']!=""){  $condition .= "AND department_id = '".$data['department_id']."'"; }
-		if($data['designation_id']!=""){ $condition .=  " AND designation_id = '".$data['designation_id']."'";  }
-		if($data['location_id']!=""){ $condition .=  " AND location_id = '".$data['location_id']."'"; }
-		if($data['vendor_id']!=""){ $condition .=  " AND vendor_id = '".$data['vendor_id']."'"; }
-		if($data['cost_center_id']!=""){ $condition .=  " AND cost_center_id = '".$data['cost_center_id']."'"; }
-		if($data['emp_name_code']!=""){ $condition .=  " AND  (display_name like '%".$data['emp_name_code']."%' OR  emp_code like '%".$data['emp_name_code']."%') "; }
+		if($data['department_id']!=""){  $condition .= "AND department_id = '".$data['department_id']."'";
+		}
+		if($data['designation_id']!=""){ $condition .=  " AND designation_id = '".$data['designation_id']."'";
+		}
+		if($data['location_id']!=""){ $condition .=  " AND location_id = '".$data['location_id']."'";
+		}
+		if($data['vendor_id']!=""){ $condition .=  " AND vendor_id = '".$data['vendor_id']."'";
+		}
+		if($data['cost_center_id']!=""){ $condition .=  " AND cost_center_id = '".$data['cost_center_id']."'";
+		}
+		if($data['emp_name_code']!=""){ $condition .=  " AND  (display_name like '%".$data['emp_name_code']."%' OR  emp_code like '%".$data['emp_name_code']."%') ";
+		}
 		$query2 = "SELECT * FROM employees WHERE  company_id = '".$data['company_id']."'".$condition." AND  is_active = 0";
 		$datas = $callConfig->getAllRows($query2);
 		$returnarray['emp_list'] = $datas;

@@ -111,7 +111,8 @@ class demoClass extends userClass{
 							                    	<p style="text-align:right;margin:0;">'.$item->total_amount.'</p>
 							                    </td>
 							                </tr>';
-                                  $i++; }
+                                  $i++;
+                                  }
                                   	$content .= $tablecontent;
                                     $content .= '<tr>
 								                    <td style="padding:5pt;text-align:right;" colspan="4" class="">

@@ -6835,7 +6835,8 @@ class userClass{
 		global $callConfig;
 		$mes1= strpos($mesg,'[')+1;
 		$mes2= strpos($mesg,']');
-		if($mes2 == ''){ $mes2=0; }
+		if($mes2 == ''){ $mes2=0;
+		}
 		//echo "11qww".$mes1."ppp".$mes2;
 		if($mes1>0 && $mes2>0){
 			$str =''; $sstr ='';
@@ -6944,22 +6945,29 @@ class userClass{
 				foreach ($maindata as $mvalue) {
 					//if($mvalue->response_type == 13){	$val['sent_back'][] = $mvalue->id;	}
 
-					if($mvalue->response_type == ST_REJECTED){	$val['reject'][]  =	$mvalue->id;	}
-					elseif($mvalue->response_type == 0){	$val['pending'][] =	$mvalue->id;	}
-					else{	$val['approve'][] =	$mvalue->id;	}
+					if($mvalue->response_type == ST_REJECTED){	$val['reject'][]  =	$mvalue->id;
+					}
+					elseif($mvalue->response_type == 0){	$val['pending'][] =	$mvalue->id;
+					}
+					else{	$val['approve'][] =	$mvalue->id;
+					}
 				}
 				if($doaval == 'A'){
-					if($count == count((array)$val['approve'])){ $return = ST_APPROVED; }
-					if(count((array)$val['reject'])>0){ $return = ST_REJECTED; }
+					if($count == count((array)$val['approve'])){ $return = ST_APPROVED;
+					}
+					if(count((array)$val['reject'])>0){ $return = ST_REJECTED;
+					}
 				}
 				if($doaval == 'M'){
 
-					if($doanum <= count((array)$val['approve']) ){ $return = ST_APPROVED;  }
+					if($doanum <= count((array)$val['approve']) ){ $return = ST_APPROVED;
+					}
 					elseif (count((array)$val['reject'])<= 0) {
 						$return = $post['status_old'];
 					}else{
 						$check = count((array)$val['approve'])+count((array)$val['pending']);
-						if($check < $doanum ){ $return = ST_REJECTED; }
+						if($check < $doanum ){ $return = ST_REJECTED;
+						}
 					}
 					 //echo $count."|||".$return;
 				}
@@ -7295,7 +7303,8 @@ class userClass{
 	                    $item_data['total_amount'] = 0;
 	                }
 
-	                if($insert_table == 'purchase_orders' || $insert_table == 'sales_orders'){ }else{
+	                if($insert_table == 'purchase_orders' || $insert_table == 'sales_orders'){
+	                }else{
 	                	 unset($item_data['ref_pending_qty_1']); //this filed not available every whare this resion unsert
 	                }
 
@@ -8663,7 +8672,8 @@ public function togetemployeeteamdata($data){
 				$post['originator']  = $data11['created_by'];
 				$post['transaction_type'] = $post['table'];
 				$post['transaction_number'] = $post['hid'];
-				if(isset($data11['transaction_number'])){ $post['transaction_number'] = $data11['transaction_number']; }
+				if(isset($data11['transaction_number'])){ $post['transaction_number'] = $data11['transaction_number'];
+				}
 				$post['total_amount'] = $post['amount'];
 				$post['status_old_value'] = $post['status_old'];
 				$post['Rid'] = $post['hid'];
@@ -8769,22 +8779,29 @@ public function togetemployeeteamdata($data){
 				$doanum = $res->approval_number;
 				foreach ($maindata as $mvalue) {
 					//if($mvalue->response_type == 13){	$val['sent_back'][] = $mvalue->id;	}
-					if($mvalue->response_type == ST_REJECTED){	$val['reject'][]  =	$mvalue->id;	}
-					elseif($mvalue->response_type == 0){	$val['pending'][] =	$mvalue->id;	}
-					else{	$val['approve'][] =	$mvalue->id;	}
+					if($mvalue->response_type == ST_REJECTED){	$val['reject'][]  =	$mvalue->id;
+					}
+					elseif($mvalue->response_type == 0){	$val['pending'][] =	$mvalue->id;
+					}
+					else{	$val['approve'][] =	$mvalue->id;
+					}
 				}
 				if($doaval == 'A'){
-					if($count == count((array)$val['approve'])){ $return = ST_APPROVED; }
-					if(count((array)$val['reject'])>0){ $return = ST_REJECTED; }
+					if($count == count((array)$val['approve'])){ $return = ST_APPROVED;
+					}
+					if(count((array)$val['reject'])>0){ $return = ST_REJECTED;
+					}
 				}
 				if($doaval == 'M'){
 
-					if($doanum <= count((array)$val['approve']) ){ $return = ST_APPROVED;  }
+					if($doanum <= count((array)$val['approve']) ){ $return = ST_APPROVED;
+					}
 					elseif (count((array)$val['reject'])<= 0) {
 						$return = $post['status_old'];
 					}else{
 						$check = count((array)$val['approve'])+count((array)$val['pending']);
-						if($check < $doanum ){ $return = ST_REJECTED; }
+						if($check < $doanum ){ $return = ST_REJECTED;
+						}
 					}
 					 //echo $count."|||".$return;
 				}
@@ -9526,7 +9543,8 @@ public function addjobpostingapplicatantdata($post,$get){
 
 		if($st1->id !=''){
 			$version = $st1->revision_no+1;
-		}else{ $version = 1; }
+		}else{ $version = 1;
+		}
 		$datess = $this->payrollfromtodates($get);
 		$date1 = $datess['date1']; $date2 = $datess['date2'];
 		$cfquery = $callConfig->selectQuery('config','default_payroll_day,show_leave_member','id=1','','','');
@@ -9615,7 +9633,8 @@ public function addjobpostingapplicatantdata($post,$get){
 					//echo "ravi";
 					if($stc->component_id!="15" && $stc->component_id!=16){
 						if($earn_pro_rata[$stc->component_id]=="0" && $insert_array['total_lop_days'] >0){
-							if($insert_array['total_lop_days']==$total_month_working_days){ $insert_array['total_lop_days'] = $total_working_days; }
+							if($insert_array['total_lop_days']==$total_month_working_days){ $insert_array['total_lop_days'] = $total_working_days;
+							}
 							$act =($stc->monthly_amount/$total_working_days) * ($total_working_days-$insert_array['total_lop_days']);
 						}else{
 							$act = $stc->monthly_amount;
@@ -9625,12 +9644,15 @@ public function addjobpostingapplicatantdata($post,$get){
 
 					//echo "<br>".$act; exit;
 						$salary_component_type=3;
-						if($earn_compontnent[$stc->component_id] =='ADD'){ $salary_component_type =  '0';}
-						if($earn_compontnent[$stc->component_id] =='MINUS'){ $salary_component_type =  '1';}
+						if($earn_compontnent[$stc->component_id] =='ADD'){ $salary_component_type =  '0';
+						}
+						if($earn_compontnent[$stc->component_id] =='MINUS'){ $salary_component_type =  '1';
+						}
 					//$salary_component_type =  $earn_compontnent[$stc->component_id] !='ADD' ? '1' : '0';
 					//$inaa=array('11','12','20');
 						$inaa = array();
-						$cp =0;	if (in_array($stc->component_id, (array)$inaa)){ $cp =1; }
+						$cp =0;	if (in_array($stc->component_id, (array)$inaa)){ $cp =1;
+						}
 						$insert_componet_array =  array('company_id'=>$get['company_id'] ,'revision_no'=>$version, 'pay_run_summary_id'=>$insert['LASTID'], 'location_id'=>$emp->location_id,'pay_year'=>$post['pay_year'],'pay_month'=>$post['pay_month'],'location_id'=>$user->location_id,'employee_id'=>$emp->id,'component_id'=>$stc->component_id,'compnent_type'=>0,'salary_component_standard'=>$stc->monthly_amount,'salary_component_actual'=>$act,'salary_component_type'=>$salary_component_type,'compnent_type'=>$salary_component_type,'location_id'=>$emp->location_id,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d h:i:s'));
 						$insert_componets = $callConfig->insertRecord('pay_run_summary_components',$insert_componet_array);
 					//print_r($insert_componet_array); print_r($insert_componets); echo "<br>"; exit;
@@ -9640,7 +9662,8 @@ public function addjobpostingapplicatantdata($post,$get){
 
 				$pass = array('emp_id'=>$emp->id,'date1'=>$date1,'date2'=>$date2,'pay_month'=>$post['pay_month'],'pay_year'=>$post['pay_year']);
 				$row = $this->employeeadvancepaymntsamountwithupdate($pass);
-				if($row->adv_amount==""){$row->adv_amount=0; }
+				if($row->adv_amount==""){$row->adv_amount=0;
+				}
 				$salary_component_type=1;
 				$insert_componet_array =  array('company_id'=>$get['company_id'] ,'revision_no'=>$version, 'pay_run_summary_id'=>$insert['LASTID'], 'location_id'=>$emp->location_id,'pay_year'=>$post['pay_year'],'pay_month'=>$post['pay_month'],'location_id'=>$user->location_id,'employee_id'=>$emp->id,'component_id'=>15,'compnent_type'=>0,'salary_component_standard'=>0,'salary_component_actual'=>$row->adv_amount,'salary_component_type'=>$salary_component_type,'compnent_type'=>$salary_component_type,'location_id'=>$emp->location_id,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d h:i:s'));
 				$insert_componets = $callConfig->insertRecord('pay_run_summary_components',$insert_componet_array);
@@ -9698,7 +9721,8 @@ public function addjobpostingapplicatantdata($post,$get){
 				}
 
 			}
-	/*if($v==2){ exit;}*/ $v++;	} //exit;
+	/*if($v==2){ exit;}*/ $v++;
+	} //exit;
 	//}
 	return $total_working_days;
 }
@@ -12040,10 +12064,14 @@ public function getemployeeinfoforupdation($get) {
     		$edi_dump_data = json_decode($edddata->field_data,1);
 			//print_r($edi_dump_data);
     		foreach ($maps as $fkey => $map) {
-    			if($map == 'employee_id'){ $employee_code_id = $fkey;  }
-    			if($map == 'ctc_monthly'){ $monthly_ctc_id = $fkey;  }
-    			if($map == 'ctc_yearly'){ $annual_ctc_id = $fkey;  }
-    			if($map == 'affected_date'){ $affected_date_id = $fkey;  }
+    			if($map == 'employee_id'){ $employee_code_id = $fkey;
+    			}
+    			if($map == 'ctc_monthly'){ $monthly_ctc_id = $fkey;
+    			}
+    			if($map == 'ctc_yearly'){ $annual_ctc_id = $fkey;
+    			}
+    			if($map == 'affected_date'){ $affected_date_id = $fkey;
+    			}
 
     		}
     		$remove = array('employee_code','ctc_monthly','ctc_yearly','affected_date','yearly_gross_salary','EMPLOYEE_CODE','BASIC_NUMBER', 'HRA_NUMBER', 'OTHER ALLOWANCE_NUMBER', 'MONTHLY_CTC', 'ANNUAL_CTC');
@@ -14298,7 +14326,8 @@ public function convertToYYYYMMDD($dateString) {
             				$itemfieldnames['created_date'] = $post['created_date'];
             				$item_id=$callConfig->insertRecord($fieldarray[$table]['item'],$itemfieldnames);
             			}
-            			$inum++;	}
+            			$inum++;
+            			}
             		}
             		$attachmentarray = array('table_name'=>$post['table_name'],'transaction_number'=>$post['transaction_number'],'id'=>$insert_id);
             		$this->updatefillAttachments($attachmentarray);
@@ -16781,19 +16810,28 @@ public function insertEmpHistries($data){
 			foreach ($task_data as $key => $tasks) {
 				$days_ago = $estdata['employee_leaving_date'];
 				if($task_data->on_the_day !=1 ){
-					if($tasks->action_frequency == 'DY'){	$day = $tasks->on_the_day; 	}
-					if($tasks->action_frequency == 'WK'){	$day = 7; 	}
-					if($tasks->action_frequency == 'MON'){	$day = 30; 	}
-					if($tasks->before_or_after == 'BF'){ $day = "-".$day; }else{ $day = "+".$day; }
+					if($tasks->action_frequency == 'DY'){	$day = $tasks->on_the_day;
+					}
+					if($tasks->action_frequency == 'WK'){	$day = 7;
+					}
+					if($tasks->action_frequency == 'MON'){	$day = 30;
+					}
+					if($tasks->before_or_after == 'BF'){ $day = "-".$day;
+					}else{ $day = "+".$day;
+					}
 					$days_ago = date('Y-m-d', strtotime($day.' days', strtotime($offer_post['reporting_date'])));
 				}
 
 				/*$task_array = array('company_id'=>$get['company_id'],'transaction_table'=>'candidates','transaction_id'=>$post['candidate_id'],'task_id'=>$tasks->id,'assigned_to'=>$cadndidata->hr_connect,'action_date'=>$days_ago,'revised_action_date'=>$days_ago,'actual_action_date'=>$days_ago,'check_list'=>$tasks->check_list,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
 				$res = $callConfig->insertRecord('transaction_activity_schedule',$task_array);*/
-				if($tasks->assigned_to =='HB'){ $filed = "hr_buddy"; }
-				if($tasks->assigned_to =='AB'){ $filed = "admin_buddy"; }
-				if($tasks->assigned_to =='FB'){ $filed = "finance_buddy"; }
-				if($tasks->assigned_to =='PB'){ $filed = "finance_buddy"; }
+				if($tasks->assigned_to =='HB'){ $filed = "hr_buddy";
+				}
+				if($tasks->assigned_to =='AB'){ $filed = "admin_buddy";
+				}
+				if($tasks->assigned_to =='FB'){ $filed = "finance_buddy";
+				}
+				if($tasks->assigned_to =='PB'){ $filed = "finance_buddy";
+				}
 				$qq = "SELECT au.id as user_id,emp.id emp_id,au.display_name display_name FROM application_users au, employees emp WHERE au.company_id = emp.company_id AND au.id = emp.user_id AND emp.is_active=0 AND au.is_active=0 AND emp.id in ( SELECT ".$filed." From employee_buddies WHERE employee_id=".$estdata->emp_id.")";
 				if($tasks->assigned_to =='OB'){
 					$asssdata = $estdata;
@@ -18905,8 +18943,14 @@ public function checkEmployeeLeaveAvailableOrNot($data){
 		$holidaysdatas[] = $hvalue->holiday_date;
 	}
 //Accrual Schedule start day to leave
-	if($leave_type_levels->before_or_after=="B"){$before_or_after  = "-";}else{$before_or_after = "+"; }
-	if($leave_type_levels->action_frequency  == 'W'){$startleavetype = "week";}elseif($leave_type_levels->action_frequency  == 'M'){$startleavetype = "months"; }elseif($leave_type_levels->action_frequency  == 'Y'){ 	$startleavetype = "years"; }else{ 	$startleavetype = "days"; }
+	if($leave_type_levels->before_or_after=="B"){$before_or_after  = "-";
+	}else{$before_or_after = "+";
+	}
+	if($leave_type_levels->action_frequency  == 'W'){$startleavetype = "week";
+	}elseif($leave_type_levels->action_frequency  == 'M'){$startleavetype = "months";
+	}elseif($leave_type_levels->action_frequency  == 'Y'){ 	$startleavetype = "years";
+	}else{ 	$startleavetype = "days";
+	}
 	$leavestart = strtotime($employee_details->joining_date. ' '.$before_or_after.' '.round($leave_type_levels->action_number).' '.$startleavetype);
 // End Accrual Schedule start day to leave
 if(!isset($emp_leave_balances->id)){ // leave policy not defind
@@ -19075,8 +19119,14 @@ public function checkLeaveApplicable($data){
 			$employee_details = $callConfig->getAllRows($employee_detailsurl);
 			$resultreturn['employee_details'][] = $employee_details;
 			foreach($employee_details as $employee_detail){
-				if($leave_type_levels->before_or_after=="B"){ $before_or_after  = "-";}else{ $before_or_after = "+"; }
-				if($leave_type_levels->action_frequency  == 'W'){ $startleavetype = "week";}elseif( $leave_type_levels->action_frequency  == 'M'){$startleavetype = "months"; }elseif($leave_type_levels->action_frequency  == 'Y'){ 	$startleavetype = "years"; }else{ 	$startleavetype = "days"; }
+				if($leave_type_levels->before_or_after=="B"){ $before_or_after  = "-";
+				}else{ $before_or_after = "+";
+				}
+				if($leave_type_levels->action_frequency  == 'W'){ $startleavetype = "week";
+				}elseif( $leave_type_levels->action_frequency  == 'M'){$startleavetype = "months";
+				}elseif($leave_type_levels->action_frequency  == 'Y'){ 	$startleavetype = "years";
+				}else{ 	$startleavetype = "days";
+				}
 				$leavestart = strtotime($employee_detail->joining_date. ' '.$before_or_after.' '.round($leave_type_levels->action_number).' '.$startleavetype);
 				$resultreturn['leave_start_date'][] = $leavestart;
 				$todaydates = date('Y-m-d');
@@ -19119,7 +19169,11 @@ public function checkLeaveApplicable($data){
 							$month = $leave_type_levels->base_on * 12;
 							$years = $leave_type_levels->base_on * 1; //old value 1 year direct multiple but year days remaining so month count
 							$days =  $leave_type_levels->base_on * ((strtotime($todaydate. ' + 1 years') - strtotime($todaydate)) / (60 * 60 * 24));
-							if($leave_type_levels->accured_action_based  == 'W'){ $addedleave=$week;  }elseif($leave_type_levels->accured_action_based  == 'M'){$addedleave=$month;  }elseif($leave_type_levels->accured_action_based  == 'Y'){ 	$addedleave=$years; }else{ 	$addedleave=$days; }
+							if($leave_type_levels->accured_action_based  == 'W'){ $addedleave=$week;
+							}elseif($leave_type_levels->accured_action_based  == 'M'){$addedleave=$month;
+							}elseif($leave_type_levels->accured_action_based  == 'Y'){ 	$addedleave=$years;
+							}else{ 	$addedleave=$days;
+							}
 							$resultreturn['first_accrual'][] = "full";
 						}
 						$resultreturn['addedleave'][] = $addedleave;
@@ -19182,8 +19236,14 @@ public function cronJobLeave($data){
 		$employee_detailsurl = "select id,joining_date FROM employees where is_active='0' and company_id = '".$data['company_id']."' and id='".$emp_leave_balancess->employee_id."'";
 		$employee_details = $callConfig->getRow($employee_detailsurl);
 
-		if($leave_type_levels->before_or_after=="B"){$before_or_after  = "-";}else{$before_or_after = "+"; }
-		if($leave_type_levels->action_frequency  == 'W'){$startleavetype = "week";}elseif($leave_type_levels->action_frequency  == 'M'){$startleavetype = "months"; }elseif($leave_type_levels->action_frequency  == 'Y'){ 	$startleavetype = "years"; }else{ 	$startleavetype = "days"; }
+		if($leave_type_levels->before_or_after=="B"){$before_or_after  = "-";
+		}else{$before_or_after = "+";
+		}
+		if($leave_type_levels->action_frequency  == 'W'){$startleavetype = "week";
+		}elseif($leave_type_levels->action_frequency  == 'M'){$startleavetype = "months";
+		}elseif($leave_type_levels->action_frequency  == 'Y'){ 	$startleavetype = "years";
+		}else{ 	$startleavetype = "days";
+		}
 		$leavestart = strtotime($employee_details->joining_date. ' '.$before_or_after.' '.round($leave_type_levels->action_number).' '.$startleavetype);
 // End Accrual Schedule start day to leave
 		$returnresultarray['employe_id'] = $emp_leave_balancess->employee_id;
@@ -19202,7 +19262,11 @@ public function cronJobLeave($data){
 				$returnresultarray['lastupdatedate'] = $lastupdatedate;
 			}
 
-			if($leave_type_levels->accured_action_based  == 'W'){ $accruedaddtype = "week"; }elseif($leave_type_levels->accured_action_based  == 'M'){$accruedaddtype = "months"; }elseif($leave_type_levels->accured_action_based  == 'Y'){ 	$accruedaddtype = "years"; }else{ 	$accruedaddtype = "days"; }
+			if($leave_type_levels->accured_action_based  == 'W'){ $accruedaddtype = "week";
+			}elseif($leave_type_levels->accured_action_based  == 'M'){$accruedaddtype = "months";
+			}elseif($leave_type_levels->accured_action_based  == 'Y'){ 	$accruedaddtype = "years";
+			}else{ 	$accruedaddtype = "days";
+			}
 			$returnresultarray['increment_days'] = $leave_type_levels->base_on;
 	$statusupdatedatetodayornot = strtotime($lastupdatedate. ' + 1 '.$accruedaddtype);  //increment days in date
 	$statusupdatedatetodayornots = date('Y-m-d',$statusupdatedatetodayornot);
@@ -19224,7 +19288,11 @@ public function cronJobLeave($data){
 			$month = $leave_type_levels->base_on * 12;
 			$years = $leave_type_levels->base_on * 1;
 			$days =  $leave_type_levels->base_on * ((strtotime($todaydate. ' + 1 years') - strtotime($todaydate)) / (60 * 60 * 24));
-			if($leave_type_levels->accured_action_based  == 'W'){ $addedleave=$week;  }elseif($leave_type_levels->accured_action_based  == 'M'){$addedleave=$month;  }elseif($leave_type_levels->accured_action_based  == 'Y'){ 	$addedleave=$years; }else{ 	$addedleave=$days; }
+			if($leave_type_levels->accured_action_based  == 'W'){ $addedleave=$week;
+			}elseif($leave_type_levels->accured_action_based  == 'M'){$addedleave=$month;
+			}elseif($leave_type_levels->accured_action_based  == 'Y'){ 	$addedleave=$years;
+			}else{ 	$addedleave=$days;
+			}
 		}
 		$returnresultarray['addedleave'] = $addedleave;
 
@@ -19847,7 +19915,9 @@ public function replacestringwithpreview($tablename,$array,$msg){
 
 public function checkAlreadyTransactionApprovalLogs($data,$checkcriteria,$row){
 	global $callConfig;
-	if($data['tablename']=="project_timesheets"){ $rids = explode(',',$data['rid']); $rid = $rids[0]; }else{ $rid = $data['rid']; }
+	if($data['tablename']=="project_timesheets"){ $rids = explode(',',$data['rid']); $rid = $rids[0];
+	}else{ $rid = $data['rid'];
+	}
 	$already = "select * from transaction_approval_logs where transaction_table  = '".$checkcriteria['workflow_configuration']->process_type."' and transaction_id   = '".$rid."' and user_id  = '".$row['reports_to']."'  and company_id = '".$data['company_id']."' AND workflow_id = '".$checkcriteria['workflow_configuration']->id."' AND send_back_flag  = '0'";
 	$alreadydata = $callConfig->getRow($already);
 	if(!isset($alreadydata->id)){
@@ -20583,7 +20653,8 @@ public function toinsertpayrnsummarynew($post, $get){
 			$salary_component_type=1;
 			$pass = array('emp_id'=>$emp->id,'date1'=>$date1,'date2'=>$date2,'pay_month'=>$post['pay_month'],'pay_year'=>$post['pay_year']);
 			$row = $this->employeeadvancepaymntsamountwithupdate($pass);
-			if($row->adv_amount==""){$row->adv_amount=0; }
+			if($row->adv_amount==""){$row->adv_amount=0;
+			}
 			$insert_componet_array[] =  array('company_id'=>$get['company_id'] ,'revision_no'=>$version, 'pay_run_summary_id'=>$insert['LASTID'], 'location_id'=>$emp->location_id,'pay_year'=>$post['pay_year'],'pay_month'=>$post['pay_month'],'location_id'=>$user->location_id,'employee_id'=>$emp->id,'component_id'=>15,'compnent_type'=>0,'salary_component_standard'=>0,'salary_component_actual'=>$row->adv_amount,'salary_component_type'=>$salary_component_type,'compnent_type'=>$salary_component_type,'location_id'=>$emp->location_id,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d h:i:s'),'base_amount'=>'0.00','calculation_formula'=>'','calculation_type'=>'L', 'display_in_payslip'=>3);
 
 
@@ -20729,10 +20800,14 @@ public function tocalucaltPTX($code_data,$val,$catcode,$month,$pass_esi_val=""){
 }
 public function calucalationsum($item1,$item2,$option){
 	$res ="0";
-	if($option=='+'){ $res = $item1+$item2; }
-	if($option=='-'){ $res = $item1-$item2; }
-	if($option=='*'){ $res = $item1*$item2; }
-	if($option=='/'){ $res = $item1/$item2; }
+	if($option=='+'){ $res = $item1+$item2;
+	}
+	if($option=='-'){ $res = $item1-$item2;
+	}
+	if($option=='*'){ $res = $item1*$item2;
+	}
+	if($option=='/'){ $res = $item1/$item2;
+	}
 	return  $res;
 }
 
@@ -21168,10 +21243,14 @@ public function getEmployeeTickets($data){
 	global $callConfig;
 	$returnresul = array();
 	$condition = "";
-	if($data['emp_id']!=""){  $condition .= " AND emp_id = '".$data['emp_id']."'";}
-	if($data['priority']!=""){ $condition .=  " AND priority = '".$data['priority']."'";  }
-	if($data['current_status']!="" && isset($data['current_status'])){ $condition .=  " AND current_status = '".$data['current_status']."'"; }
-	if($data['filterfromdate']!="" && $data['filtertodate']!=""){ $condition .=  " and created_date >= '".$data['filterfromdate']."' and created_date <= '".$data['filtertodate']."'"; }
+	if($data['emp_id']!=""){  $condition .= " AND emp_id = '".$data['emp_id']."'";
+	}
+	if($data['priority']!=""){ $condition .=  " AND priority = '".$data['priority']."'";
+	}
+	if($data['current_status']!="" && isset($data['current_status'])){ $condition .=  " AND current_status = '".$data['current_status']."'";
+	}
+	if($data['filterfromdate']!="" && $data['filtertodate']!=""){ $condition .=  " and created_date >= '".$data['filterfromdate']."' and created_date <= '".$data['filtertodate']."'";
+	}
 	if($data['field']!="" && $data['field'] !="emp_id" && $data['user_id']!=""){
 		$condition .=  " AND ".$data['field']." = '".$data['user_id']."'";
 	}
@@ -21803,8 +21882,10 @@ public function getLeaveWithStatus($data){
 
 			$saltemp_array = array('company_id'=>$post['company_id'],'grade_salary_template_id'=>$insert['LASTID'],'component_id'=>$id,'component_name'=>$post['name'][$key],'component_category'=>$post['cat_cat'][$key],'component_type'=>$post['cat_type'][$key],'component_number'=>$post['cat_num'][$key],'monthly_amount'=>$post['monthly_amount'][$key],'yearly_amount'=>$post['yearly_amount'][$key],'is_active'=>'0','current_status'=>0,'created_by'=>$post['created_by']);
 			$insert_data[] = $callConfig->insertRecord('grade_salary_template_components',$saltemp_array);
-			if($earns['GS']==$id){ $gross_early = $post['yearly_amount'][$key];}
-			if($earns['COSTTOCOMPANY']==$id){ $ctc_y = $post['yearly_amount'][$key]; $ctc_m=$post['monthly_amount'][$key]; }
+			if($earns['GS']==$id){ $gross_early = $post['yearly_amount'][$key];
+			}
+			if($earns['COSTTOCOMPANY']==$id){ $ctc_y = $post['yearly_amount'][$key]; $ctc_m=$post['monthly_amount'][$key];
+			}
 		}
 		$inserttasks = $callConfig->updateRecord('grade_salary_template',array('yearly_gross_salary'=>$gross_early,'ctc_yearly'=>$ctc_y,'ctc_monthly'=>$ctc_m),'id',$insert['LASTID']);
 		return $insert;
@@ -22176,7 +22257,8 @@ public function getLeaveWithStatus($data){
 				foreach($recoveries as $recover){
 					$pass = array('emp_id'=>$emp->id,'date1'=>$date1,'date2'=>$date2,'pay_month'=>$post['pay_month'],'pay_year'=>$post['pay_year'],'component_id'=>$recover);
 					$row = $this->employeeadvancepaymntsamountwithupdate($pass);
-					if($row->adv_amount==""){$row->adv_amount=0; }
+					if($row->adv_amount==""){$row->adv_amount=0;
+					}
 					$insert_componet_array[] =  array('company_id'=>$post['company_id'] ,'revision_no'=>$version, 'pay_run_summary_id'=>$insert['LASTID'], 'location_id'=>$emp->location_id,'pay_year'=>$post['pay_year'],'pay_month'=>$post['pay_month'],'location_id'=>$user->location_id,'employee_id'=>$emp->id,'component_id'=>$recover,'compnent_type'=>0,'salary_component_standard'=>0,'salary_component_actual'=>$row->adv_amount,'salary_component_type'=>$salary_component_type,'compnent_type'=>$salary_component_type,'location_id'=>$emp->location_id,'is_active'=>'0','current_status'=>'0','created_by'=>$post['user_id'],'created_date'=>date('Y-m-d h:i:s'),'base_amount'=>'0.00','calculation_formula'=>'','calculation_type'=>'L', 'display_in_payslip'=>3);
 				}
 
@@ -24943,7 +25025,9 @@ public function inserttasks($post, $get){
 			if($post['assign_type'] == '0'){
 				$assign_type = '0';
 			}
-			if($post['display_questions']){$display_questions = '1'; }else{ $display_questions = '0'; }
+			if($post['display_questions']){$display_questions = '1';
+			}else{ $display_questions = '0';
+			}
 
 			if($post[$rr]==""){
 				$insert_array = array('company_id'=>$get['company_id'],'assessment_id'=>$post['rid'],'assign_type'=>$post['assign_type'],'display_questions'=>$display_questions,'assessment_question'=>$ques,'options_display_type'=>$options_display_type,'question_option'=>$question_option,'display_remark'=>$display_remarks,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d h:i:s'));
@@ -25083,7 +25167,8 @@ public function inserttasks($post, $get){
 				$payslip_array[$k] = array($month,$total_monthly_earnings,$total_monthly_deductions,$total_monthly_gross,$financial_year);
 			}
 			$startmonth0->modify('+1 month');
-		$k++; }
+		$k++;
+		}
 		//print_r($array); exit;
 		$retuenres['payslip_array'] = $payslip_array;
 		$retuenres['total_monthly_earnings'] = $total_monthly_earnings;
@@ -25389,8 +25474,10 @@ public function inserttasks($post, $get){
     	foreach ($lists as $key => $value) {
     		if(in_array($key, (array)$emp_array)){
     			if($get['user_type']==3){
-    				if($key == 'party_id'){ $condition .= " AND ".$key." = '".$get['vendor_id']."'";  }
-    				if($key == 'vendor_id'){  $condition .= " AND ".$key." = '".$get['vendor_id']."'";  }
+    				if($key == 'party_id'){ $condition .= " AND ".$key." = '".$get['vendor_id']."'";
+    				}
+    				if($key == 'vendor_id'){  $condition .= " AND ".$key." = '".$get['vendor_id']."'";
+    				}
     			}else{
     				if($get['option']!='COM_LIST_SALARY'){
     					$condition .= " AND ".$key." = '".$get['emp_id']."'";
@@ -30334,44 +30421,52 @@ public function documentGenerationNextProcess($get,$transaction,$nexttransaction
 				// }
 				if($docaccesssetupsuser['approved_type'] !=""){
 					if($docaccesssetupsuser['approved_type'] =="DIV"){
-						if(isset($allowdivisionusers[$userid])){ }else{
+						if(isset($allowdivisionusers[$userid])){
+						}else{
 							$nomatch++;
 						}
 					}elseif($docaccesssetupsuser['approved_type'] =="D"){
-						if(isset($allowdepartmentusers[$userid])){ }else{
+						if(isset($allowdepartmentusers[$userid])){
+						}else{
 							$nomatch++;
 						}
 					}elseif($docaccesssetupsuser['approved_type'] =="cost_center_id"){
-						if(isset($allowcostcenterusers[$userid])){ }else{
+						if(isset($allowcostcenterusers[$userid])){
+						}else{
 							$nomatch++;
 						}
 					}elseif($docaccesssetupsuser['approved_type'] =="L"){
-						if(isset($allowlocationusers[$userid])){ }else{
+						if(isset($allowlocationusers[$userid])){
+						}else{
 							$nomatch++;
 						}
 					}
 				}
 				//echo $docaccesssetupsuser['approved_type']."-userid - ".$userid." -- ".$nomatch."</br>";
 				if($docaccesssetupsuser['opex_cpex'] !=""){
-					if($transaction->opex_cpex == $docaccesssetupsuser['opex_cpex']){ }else{
+					if($transaction->opex_cpex == $docaccesssetupsuser['opex_cpex']){
+					}else{
 						$nomatch++;
 					}
 				}
 				if($docaccesssetupsuser['amount'] !="" && $docaccesssetupsuser['amount'] !="0"){
-					if($transaction->total_amount <= $docaccesssetupsuser['amount']){ }else{
+					if($transaction->total_amount <= $docaccesssetupsuser['amount']){
+					}else{
 						$nomatch++;
 					}
 				}
 				$item_categorylist = json_decode($docaccesssetupsuser['item_category']);
 				if(count((array)$item_categorylist) !="0"){
 					$matchornot = array_intersect((array)$catgoryarr, (array)$item_categorylist);
-					if (count((array)$matchornot) > 0) { }else{
+					if (count((array)$matchornot) > 0) {
+					}else{
 						$nomatch++;
 					}
 				}
 				$transaction_type = json_decode($docaccesssetupsuser['transaction_type']);
 				if(count((array)$transaction_type) !="0"){
-					if(in_array($transaction->opex_cpex, (array)$transaction_type)){ }else{
+					if(in_array($transaction->opex_cpex, (array)$transaction_type)){
+					}else{
 						$nomatch++;
 					}
 				}
@@ -31801,10 +31896,15 @@ public function getDisplayAttributesNewVersion($get){
 						$approval_id = $connectdetails['hr_connect'];
 					}
 					if($tasks->on_the_day !=1){
-						if($tasks->action_frequency == 'DY'){	$day = $tasks->on_the_day; 	}
-						if($tasks->action_frequency == 'WK'){	$day = 7; 	}
-						if($tasks->action_frequency == 'MON'){	$day = 30; 	}
-						if($tasks->before_or_after == 'BF'){ $day = "-".$day; }else{ $day = "+".$day; }
+						if($tasks->action_frequency == 'DY'){	$day = $tasks->on_the_day;
+						}
+						if($tasks->action_frequency == 'WK'){	$day = 7;
+						}
+						if($tasks->action_frequency == 'MON'){	$day = 30;
+						}
+						if($tasks->before_or_after == 'BF'){ $day = "-".$day;
+						}else{ $day = "+".$day;
+						}
 						$days_ago = date('Y-m-d', strtotime($day.' days', strtotime($employees->joining_date)));
 					}
 					$task_array = array('company_id'=>$get['company_id'],'transaction_table'=>'employees','transaction_id'=>$get['employee_id'],'task_id'=>$tasks->id,'assigned_to'=>$employees->user_id,'action_date'=>$days_ago,'action_flag'=>'0', 'check_list'=>$tasks->check_list,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'approval_user_id'=>$approval_id,'task_name'=>$tasks->task_name);
@@ -31875,7 +31975,8 @@ public function getDisplayAttributesNewVersion($get){
 		$taskactivityres = $callConfig->getRow($taskactivitysql);
 		$return['taskactivityres'] = $taskactivitysql;
 		$updatearray = array('current_status'=>$post['status'],'comments'=>$post['comment']);
-		if($post['status'] == ST_APPROVED){ $updatearray['approval_date'] = date('Y-m-d H:i:s'); }
+		if($post['status'] == ST_APPROVED){ $updatearray['approval_date'] = date('Y-m-d H:i:s');
+		}
 		$return['res'] = $callConfig->updateRecord('transaction_activity_schedule',$updatearray,'id',$post['transaction_id']);
 		if($post['status'] == ST_APPROVED){
 			$approvalmsg = $taskactivityres->task_name.' Task Successfully Approved';
@@ -36559,7 +36660,8 @@ public function gerReferanceTableDetails($get){
 				$recoqq = $callConfig->getRow($recoquery);
 
 				$one_time_amount = 0; $salary_actual_amount =0; $gst_amount =0;
-				if(count((array)$recoqq)>0){ $one_time_amount= $recoqq->approved_amount; }
+				if(count((array)$recoqq)>0){ $one_time_amount= $recoqq->approved_amount;
+				}
 				//echo "ddxxxYYYYYY"; exit;
 				$wkdays = $total_month_working_days-$work_leave_days;
 
@@ -39209,7 +39311,8 @@ public function gerReferanceTableDetails($get){
 			}
 
 			// Get all items at once for efficiency
-			$item_ids = array_filter(array_unique(array_map(function($item) { return intval($item->item_id); }, $work_order_items_res)));
+			$item_ids = array_filter(array_unique(array_map(function($item) { return intval($item->item_id);
+			}, $work_order_items_res)));
 			if(empty($item_ids)){
 				$return_arr['message'] = 'No valid item ids found for stock request creation.';
 				return $return_arr;

@@ -1809,7 +1809,8 @@ public function todatainsertall(){
 			$insert[] = $callConfig->insertRecord(TBL_PROJECT_TASK_DETAILS,$insert_array);
 			//echo "<pre>"; print_r($insert_array); print_r($dat); echo "</pre>"; exit;
 		}
-	$k++; }
+	$k++;
+	}
 	echo "<pre>"; print_r($insert); echo "</pre>"; exit;
 }
 public function insertstatusprocesss($post, $get){
@@ -5971,9 +5972,15 @@ public function toimportthedataintotablesemployeessalary($get){
 		$number_field = 'id';
 		$item_field = '';
 		$date_field = 'created_date';
-		foreach($number_fields as $field){ if(in_array($field, $columns)){ $number_field = $field; break; } }
-		foreach($item_fields as $field){ if(in_array($field, $columns)){ $item_field = $field; break; } }
-		foreach($date_fields as $field){ if(in_array($field, $columns)){ $date_field = $field; break; } }
+		foreach($number_fields as $field){ if(in_array($field, $columns)){ $number_field = $field; break;
+		}
+		}
+		foreach($item_fields as $field){ if(in_array($field, $columns)){ $item_field = $field; break;
+		}
+		}
+		foreach($date_fields as $field){ if(in_array($field, $columns)){ $date_field = $field; break;
+		}
+		}
 		if($item_field == ''){
 			return array('status'=>'error','message'=>'This process does not have a direct item/product field yet');
 		}
@@ -6203,7 +6210,8 @@ public function toimportthedataintotablesemployeessalary($get){
 		$search = trim($get['search'] ?? '');
 		$page_no = max(1, intval($get['page_no'] ?? 1));
 		$limit = intval($get['limit'] ?? 25);
-		if(!in_array($limit, array(25,50,100))){ $limit = 25; }
+		if(!in_array($limit, array(25,50,100))){ $limit = 25;
+		}
 		$where = "pqi.company_id = '{$company_id}' AND pqi.application_table_name = '{$process}' AND pqi.transaction_id = '{$tranid}' AND pqi.item_id = '{$item_id}' AND pqi.is_active = 0";
 		if($status !== 'all' && in_array(strval($status), array('0','1','2','3'))){
 			$where .= " AND pqi.qc_status = '".intval($status)."'";
@@ -6215,7 +6223,8 @@ public function toimportthedataintotablesemployeessalary($get){
 		$total_row = $callConfig->getRow("SELECT COUNT(1) AS total FROM application_table_quality_check_items pqi LEFT JOIN items i ON i.id = pqi.item_id WHERE ".$where);
 		$total = intval($total_row->total ?? 0);
 		$total_pages = max(1, intval(ceil($total / $limit)));
-		if($page_no > $total_pages){ $page_no = $total_pages; }
+		if($page_no > $total_pages){ $page_no = $total_pages;
+		}
 		$offset = ($page_no - 1) * $limit;
 		$rows = $callConfig->getAllRows("SELECT pqi.*, i.item_name, i.sku, DATE_FORMAT(pqi.updated_date, '%d-%m-%Y %H:%i') AS last_saved FROM application_table_quality_check_items pqi LEFT JOIN items i ON i.id = pqi.item_id WHERE ".$where." ORDER BY pqi.item_id ASC, FIELD(pqi.qc_status, 1, 0, 3, 2), pqi.id ASC LIMIT ".$offset.",".$limit);
 		return array(
@@ -6233,14 +6242,16 @@ public function toimportthedataintotablesemployeessalary($get){
 	public function getProcessQcGroupedParameters($company_id, $mapping){
 		global $callConfig;
 		$spec = json_decode($mapping->specifications ?? '', true);
-		if(!is_array($spec)){ return array(); }
+		if(!is_array($spec)){ return array();
+		}
 		$param_meta = array();
 		foreach((array)($spec['parameters'] ?? array()) as $param){
 			if(isset($param['id'])){
 				$param_meta[intval($param['id'])] = $param;
 			}
 		}
-		if(count($param_meta) == 0){ return array(); }
+		if(count($param_meta) == 0){ return array();
+		}
 		$ids = implode(',', array_keys($param_meta));
 		$params = $callConfig->getAllRows("SELECT * FROM quality_parameters WHERE company_id = ".intval($company_id)." AND id IN (".$ids.") AND is_active = 0 ORDER BY quality_parameter_group_id ASC, id ASC");
 		$group_ids = array();
@@ -6380,8 +6391,10 @@ public function toimportthedataintotablesemployeessalary($get){
 		}
 		$responses = $post['item_attribute_res'] ?? array();
 		$remarks = $post['item_attribute_remarks'] ?? array();
-		if(!is_array($responses)){ $responses = array(); }
-		if(!is_array($remarks)){ $remarks = array(); }
+		if(!is_array($responses)){ $responses = array();
+		}
+		if(!is_array($remarks)){ $remarks = array();
+		}
 		if($complete){
 			foreach($required as $pid=>$name){
 				if(!isset($responses[$pid]) || trim((string)$responses[$pid]) === ''){
@@ -6427,7 +6440,8 @@ public function toimportthedataintotablesemployeessalary($get){
 			$detail_ids[] = $insert;
 			if($is_required_result){
 				$checked_count++;
-				if($quality_check == 1){ $failed_count++; }
+				if($quality_check == 1){ $failed_count++;
+				}
 			}
 		}
 		$required_count = $this->getProcessQcParameterCount($context['mapping']);

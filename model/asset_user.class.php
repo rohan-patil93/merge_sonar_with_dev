@@ -1249,8 +1249,12 @@ public function insertAsset($post){
 				$query = "SELECT id,current_status FROM user_assets WHERE company_id =".$get['company_id']." AND asset_id =".$asset." AND user_id =".$post['emp_id']." AND is_active =0";
 				$adata = $callConfig->getRow($query);
 
-				if($post['start_date'][$key]!=""){  $start_date = date('Y-m-d', strtotime(str_replace('/', '-', $post['start_date'][$key]))); }else{ $start_date = $post['start_date'][$key]; }
-				if($post['end_date'][$key]!=""){ $end_date = date('Y-m-d', strtotime(str_replace('/', '-', $post['end_date'][$key]))); }else{ $end_date = $post['end_date'][$key]; }
+				if($post['start_date'][$key]!=""){  $start_date = date('Y-m-d', strtotime(str_replace('/', '-', $post['start_date'][$key])));
+				}else{ $start_date = $post['start_date'][$key];
+				}
+				if($post['end_date'][$key]!=""){ $end_date = date('Y-m-d', strtotime(str_replace('/', '-', $post['end_date'][$key])));
+				}else{ $end_date = $post['end_date'][$key];
+				}
 				if($adata->id!=""){
 					$updatequery = "UPDATE user_assets SET start_date='".$start_date."',end_date='".$end_date."',remarks='".$post['remarks'][$key]."',updated_by=".$get['user_id'].",current_status=".$post['current_status'][$key]." WHERE id=".$adata->id;
 					$res = $callConfig->executeQuery($updatequery);
@@ -1267,8 +1271,10 @@ public function insertAsset($post){
 		}
 		$query = "SELECT id,display_name,user_id,it_buddy,admin_buddy FROM employees WHERE id =".$post['emp_id'];
 		$emp_data = $callConfig->getRow($query);
-		if($emp_data->it_buddy!="") { $adminusers[] = $emp_data->it_buddy; }
-		if($emp_data->admin_buddy!="") { $adminusers[] = $emp_data->admin_buddy; }
+		if($emp_data->it_buddy!="") { $adminusers[] = $emp_data->it_buddy;
+		}
+		if($emp_data->admin_buddy!="") { $adminusers[] = $emp_data->admin_buddy;
+		}
 		$query = "SELECT id,display_name,user_id,it_buddy,admin_buddy FROM employees WHERE id IN(".implode(",",(array)$adminusers).")";
 		$empusser_data = $callConfig->getAllRows($query);
 		foreach($empusser_data as $empusser_da){

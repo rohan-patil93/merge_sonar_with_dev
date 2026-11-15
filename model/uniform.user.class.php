@@ -734,7 +734,8 @@ class uniformClass extends userClass{
 	            WHERE id='{$item_id}' AND company_id='{$company_id}' AND is_active=0";
 	    $row = $callConfig->getRow($sql);
 
-	    if(!$row){ return false; }
+	    if(!$row){ return false;
+	    }
 
 	    $old_qty = intval($row->available_qty);
 	    $new_qty = $old_qty - $req_qty;

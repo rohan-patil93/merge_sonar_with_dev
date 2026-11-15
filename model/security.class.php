@@ -1173,7 +1173,8 @@ public function getVisitorsDataBasedOnDate($get)
         $rows = $callConfig->getAllRows(
             "SELECT id FROM visitor_luggages WHERE company_id={$company_id} AND visitor_log_id={$visitor_log_id} AND is_active=0"
         );
-        foreach ($rows as $r) { $dbIds[] = (int)$r->id; }
+        foreach ($rows as $r) { $dbIds[] = (int)$r->id;
+        }
 
         $submittedIds = []; // to know which ones to keep
         if (!empty($post['luggage']) && is_array($post['luggage'])) {
@@ -1184,7 +1185,8 @@ public function getVisitorsDataBasedOnDate($get)
                 // Skip empty rows
                 $hasAny = false;
                 foreach (['item_key','item_name','brand_name','qty','serial_or_remarks','returnable','return_date','id'] as $k) {
-                    if (!empty($row[$k])) { $hasAny = true; break; }
+                    if (!empty($row[$k])) { $hasAny = true; break;
+                    }
                 }
                 if (!$hasAny) continue;
 
@@ -1592,7 +1594,8 @@ public function getVisitorsDataBasedOnDate($get)
                 // Skip empty rows
                 $hasAny = false;
                 foreach (['item_key','item_name','brand_name','qty','serial_or_remarks','returnable','return_date','id'] as $k) {
-                    if (!empty($row[$k])) { $hasAny = true; break; }
+                    if (!empty($row[$k])) { $hasAny = true; break;
+                    }
                 }
                 if (!$hasAny) continue;
 

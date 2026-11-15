@@ -119,13 +119,20 @@ class manufacturingUserClass extends userClass{
 			}
 		}
 		$errors = array();
-		if($companyId <= 0){ $errors[] = 'Company is required.'; }
-		if($userId <= 0){ $errors[] = 'User is required.'; }
-		if($bomItemId <= 0){ $errors[] = 'BOM item is required.'; }
-		if($bomUom <= 0){ $errors[] = 'BOM UOM is required.'; }
-		if($bomQuantity <= 0){ $errors[] = 'BOM quantity must be greater than zero.'; }
-		if($transactionDate == ''){ $errors[] = 'Transaction date is required.'; }
-		if($validMaterialRows == 0){ $errors[] = 'At least one material item with quantity is required.'; }
+		if($companyId <= 0){ $errors[] = 'Company is required.';
+		}
+		if($userId <= 0){ $errors[] = 'User is required.';
+		}
+		if($bomItemId <= 0){ $errors[] = 'BOM item is required.';
+		}
+		if($bomUom <= 0){ $errors[] = 'BOM UOM is required.';
+		}
+		if($bomQuantity <= 0){ $errors[] = 'BOM quantity must be greater than zero.';
+		}
+		if($transactionDate == ''){ $errors[] = 'Transaction date is required.';
+		}
+		if($validMaterialRows == 0){ $errors[] = 'At least one material item with quantity is required.';
+		}
 		if(count($errors) > 0){
 			$return['manufacturing_boms'] = array('status'=>'fail','message'=>implode(' ', $errors));
 			return $return;

@@ -1479,7 +1479,8 @@ function viewApprovalAllUsers(id= ""){
             <form class="kt-form kt-form--label-right" name="myForm" id="myForm" action="" method="post" enctype="multipart/form-data"  >
             <div class="kt-portlet">
                          <div class="card">
-                            <?php if($rid != "" && $copy == 1){ echo $rtable_name ==""?$workflowsteps['current_status_ribbon']:""; } ?>
+                            <?php if($rid != "" && $copy == 1){ echo $rtable_name ==""?$workflowsteps['current_status_ribbon']:"";
+                            } ?>
                         <div class="card-header table-card-header">
                           <h5><?php echo $title;  ?></h5>
                           <div class="card-header-right table-card-header m-r-50">
@@ -1491,7 +1492,8 @@ function viewApprovalAllUsers(id= ""){
                     </a>
 
                     <?php
-                    if($_GET['error_messages'] && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE)){ }else{
+                    if($_GET['error_messages'] && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE)){
+                    }else{
 
                         echo $rtable_name ==""?$workflowsteps['workflow_btn']:"";
                     }
@@ -1686,7 +1688,8 @@ function viewApprovalAllUsers(id= ""){
                                         </td>
                                     </tr>
                                 <?php }?>
-                            <?php } } ?>
+                            <?php }
+                            } ?>
                                         <tr>
                                             <td class="p-2">Total Tax</td>
                                             <td class="text-end p-2"><span id="dis_taxRateid"><?php echo customeummarmonyformateifine($tattax); ?></span> </td>
@@ -1774,7 +1777,8 @@ if($rid !='' && isset($file_data['file_upload']) && $file_data['file_upload']==0
  } ?>
 <?php
     $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,'');
-    if(!in_array($table1['current_status'], $check_array) && $rtable_name ==""){ $disable = "disabled" ;} ?>
+    if(!in_array($table1['current_status'], $check_array) && $rtable_name ==""){ $disable = "disabled" ;
+    } ?>
             <div class="card-footer">
                 <div class="kt-form__actions">
                     <div class="row">

@@ -202,11 +202,16 @@ class reactClass extends userClass{
 		foreach ($rolepermission['application_pages'] as  $value) {
 			if($value->list_page_name==$name || $value->insert_page_name==$name || $value->edit_page_name==$name || $value->view_page_name==$name){
 				$table = $value->application_table_name;
-				if($value->list_page_name==$name){	$type = 'permission_list';	}
-				if($value->insert_page_name==$name){	$approvaltype = 'permission_approval';	}
-				if($value->insert_page_name==$name){	$type = 'permission_insert'; }
-				if($value->edit_page_name==$name){	$type = 'permission_update';	}
-				if($value->view_page_name==$name){	$type = 'permission_list';	}
+				if($value->list_page_name==$name){	$type = 'permission_list';
+				}
+				if($value->insert_page_name==$name){	$approvaltype = 'permission_approval';
+				}
+				if($value->insert_page_name==$name){	$type = 'permission_insert';
+				}
+				if($value->edit_page_name==$name){	$type = 'permission_update';
+				}
+				if($value->view_page_name==$name){	$type = 'permission_list';
+				}
 			}
 		}
 
@@ -287,11 +292,16 @@ class reactClass extends userClass{
 			if($res->id !=""){
     	//echo "iiiiii";
 				$value = (array)$res;
-				if($value['list_page_name']==$name){	$type = 'list';	}
-				if($value['insert_page_name']==$name){	$approvaltype = 'approval';	}
-				if($value['insert_page_name']==$name){	$type = 'insert'; }
-				if($value['edit_page_name']==$name){	$type = 'update';	}
-				if($value['view_page_name']==$name){	$type = 'list';	}
+				if($value['list_page_name']==$name){	$type = 'list';
+				}
+				if($value['insert_page_name']==$name){	$approvaltype = 'approval';
+				}
+				if($value['insert_page_name']==$name){	$type = 'insert';
+				}
+				if($value['edit_page_name']==$name){	$type = 'update';
+				}
+				if($value['view_page_name']==$name){	$type = 'list';
+				}
 				$return['work_page'] = $type;
 				$return['application_table_name'] = $value['application_table_name'];
 				$page_type = $type."_page_type";

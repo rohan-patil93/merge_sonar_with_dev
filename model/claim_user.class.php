@@ -582,9 +582,12 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 		global $callConfig;
 		$data = $data['where'];
 		$condition = "";
-		if($data['location_id']!=""){ $condition .=  " AND location_id = '".$data['location_id']."'"; }
-		if($data['cost_center_id']!=""){ $condition .=  " AND cost_center = '".$data['cost_center_id']."'"; }
-		if($data['emp_name_code']!=""){ $condition .=  " AND  (display_name like '%".$data['emp_name_code']."%' OR  user_email like '%".$data['emp_name_code']."%') "; }
+		if($data['location_id']!=""){ $condition .=  " AND location_id = '".$data['location_id']."'";
+		}
+		if($data['cost_center_id']!=""){ $condition .=  " AND cost_center = '".$data['cost_center_id']."'";
+		}
+		if($data['emp_name_code']!=""){ $condition .=  " AND  (display_name like '%".$data['emp_name_code']."%' OR  user_email like '%".$data['emp_name_code']."%') ";
+		}
 
 		$query2 = "SELECT id, display_name, user_email, user_mobile, user_photo, cost_center, location_id FROM application_users WHERE is_active=0 AND company_id = '".$data['company_id']."'".$condition;
 		$datas = $callConfig->getAllRows($query2);
