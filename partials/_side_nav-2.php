@@ -86,7 +86,7 @@ function menudisplaytop($menuarray,$type){
                         </div> -->
                         <div class="card-block text-center">
                             <div data-label="" class="radial-bar radial-bar-100 radial-bar-md radial-bar-danger mb-2 mt-0 custom-radial">
-                                <img src="uploads/all/<?php echo $_SESSION['employee']['image']; ?>" class="img-120 " alt="image" />
+                                <img src="uploads/all/<?php echo $_SESSION['employee']['image']; ?>" class="img-120 " alt="" />
                             </div>
                             <div class="row mb-2">
                                 <div class="col-lg-12">
