@@ -183,7 +183,6 @@ class manfacturingForecastUserClass extends userClass{
                 $return['forecast_rows'][] = $callConfig->insertRecord('manufacturing_forecast_items', $record);
             }
         }
-        // return $return;
         return array(array('status' => 'sucess', 'LASTID' => $forecastHeaderId, 'message' => 'Forecast saved successfully.'));
 
     }
@@ -1269,7 +1268,6 @@ class manfacturingForecastUserClass extends userClass{
         else {
             $whr = "application_table_name = 'manufacturing_product_notes' ";
             $query = $callConfig->selectQuery(TBL_APPLICATION_SERIAL_NUMBERS, '*', $whr, '', '', '');
-            // $return['query'] = $query;
             $query_res = $callConfig->getRow($query);
             $res = $query_res;
             $le = $res->doc_no_length;

@@ -6,43 +6,32 @@ class userClass{
 	public function checkAdmin($post) {
 		global $callConfig;
 		$login_type = 'N';
-	   //print_r($post); echo "kkkkk"; exit;
 	   $where="user_email='?'  and is_active ='0'";
 	   $params = [$where, $post];
 	   if($post['zqr_connect'] !=""){
 	   		$where .=" AND zqr_connect = '?'";
 	   		$params = [$where, $post];
 	   }
-	   //print_r($where);  exit;
 	   $query=$callConfig->selectQuery(MAINDB.'.'.TBL_USER_REGISTIRED_GROUPS,'*',$where,'','','');
 	   $params = [$query, $callConfig->selectQuery, $where];
-	   //echo $query; exit;
 	   $row=$callConfig->getRowNew($query);
-	   //print_r($row); exit;
 	   if($row->id!="" && $row->email_active==1) {
 	   	$whr=" id='?' and  is_active='0'";
 	   	$params = [$whr, $row->zqr_connect];
 	   	$query_db=$callConfig->selectQuery(MAINDB.'.'.TBL_DATABASE_ALLOCATIONS,'*',$whr,'','','');
 	   	$params = [$query_db, $callConfig->selectQuery, $whr];
-		//echo $query_db; exit;
 	   	$row_db=$callConfig->getRowNew($query_db);
-		//print_r($row_db);
-				//echo "<pre>";
 	   	$row->db = $row_db->db_name;
 	   	$wheres ="user_email='?' and user_password='?' and is_active ='0'";
 	   	$params = [$wheres, $post, $callConfig->passwordEncrypt, $post];
 	   	$query_user=$callConfig->selectQuery($row_db->db_name.'.application_users','*',$wheres,'','','');
 	   	$params = [$query_user, $callConfig->selectQuery, $row_db->db_name, $wheres];
-		//echo $query_user;
 	   	$user = $callConfig->getRowNew($query_user);
 	   	if($user->id != ''){
 	   		$login_type = 'U';
 	   		$user->db = $row_db->db_name;
-			//print_r($post); exit;
 	   		$timm =date("Y-m-d H:i:s");
-					//echo $timm;
 	   		$fieldnames=array('company_id'=>$user->company_id,'user_id'=>$user->id,'login_from'=>$timm,'login_ip'=>$post['ip'],'login_browser'=>$post['browser'], 'php_session'=>$post['php_session']);
-					//print_r($fieldnames); exit;
 	   		$query_last = "SELECT * FROM ?.application_user_logins where user_id =? ORDER BY id DESC LIMIT 0,1";
 	   		$params = [$query_last, $row_db->db_name, $user->id];
 	   		$last = $callConfig->getRowNew($query_last);
@@ -50,13 +39,10 @@ class userClass{
 	   		$user->reset_password = $row->reset_password;
 	   		$res=$callConfig->insertRecord($row_db->db_name.'.application_user_logins',$fieldnames);
 	   		$params = [$res, $callConfig->insertRecord, $row_db->db_name, $fieldnames];
-					//print_r($row); exit;
 	   		unset($user->user_password);
-					//unset($user->remember_token);
 	   		$user->data_name = $row_db->db_name;
 	   		$query_employee = "SELECT id FROM ?.employees where user_id =? AND is_active=0 ";
 	   		$params = [$query_employee, $row_db->db_name, $user->id];
-				//$user->query_employee = $query_employee;
 				$employee = $callConfig->getRowNew($query_employee);
 				$user->emp_id = $employee->id;
 	   		if($post['mobile']=='Y'){
@@ -80,16 +66,13 @@ class userClass{
 	   }else{
 
 	   	if($row->email_active === '0') {
-				//echo "ravi".$row->email_active."fa";
 	   		$return ['error'] = '6004';
 	   	}else{
-				//echo "ravi".$row->email_active."er";
 	   		if($post['mobile']=='Y'){
 				$wheres ="user_email='?' and user_password='?' and is_active ='0'";
 				$params = [$wheres, $post, $callConfig->passwordEncrypt, $post];
 				$query_user=$callConfig->selectQuery(MAINDB.'.mobile_user_registrations','*',$wheres,'','','');
 				$params = [$query_user, $callConfig->selectQuery, $wheres];
-					//echo $query_user;
 				$user = $callConfig->getRowNew($query_user);
 				if($user->id != ''){
 					$login_type = 'M';
@@ -106,7 +89,6 @@ class userClass{
 	   	}
 	   }
 
-		//print_r($row);exit;
 	   return $return;
 
 	}
@@ -120,7 +102,6 @@ class userClass{
 
    		$subdomain = '';
    		$host = $_SERVER['HTTP_HOST'];
-   		//echo "Host: ".$host;//exit;
 	    $parts = explode('.', $host);
 	    $params = [$parts, $host];
 	    if (count($parts) > 2) {
@@ -140,18 +121,10 @@ class userClass{
 		//To Get login user Deatails
 		$return['callConfig'] = $callConfig;
 		$whrs = "id= ".$get['user_id'];
-	/*	$query = $callConfig->selectQuery('application_users','*',$whrs,'','','');
-		echo $query; echo "<br>";
-		$userrow = $callConfig->getRow($query);
-		print_r($userrow);echo "<br>";*/
 		$query = $callConfig->selectQueryNew('application_users','*',$whrs,'','','');
-		//print_r($query);  echo "<br>";
 		$userrow = $callConfig->getRowNew($query);
-		//print_r($userrow); exit;
 		if($userrow->country_id!=""){
 			$whrs2 = "company_id= ".$get['company_id']." AND id=".$userrow->country_id;
-			//$whrs2 = "company_id= ? AND id=".$userrow->country_id;
-			//$params = [$whrs2, $get, $userrow->country_id];
 			$query2 = $callConfig->selectQueryNew('countries','*',$whrs2,'','','');
 			print_r($query2); exit;
 			$currencysymboll = $callConfig->getRowNew($query2);
@@ -239,7 +212,6 @@ class userClass{
 		//To Get module wise menu Deatails
 		//$query = "SELECT * FROM application_menu WHERE company_id =".$get['company_id']." AND aplication_module IN (".implode(",",$module_id).") AND is_active = 0 ORDER BY display_priority ASC";
 
-		//$defaultmoduleid = $callConfig->module_id!=""?$callConfig->module_id:$module_id[0];
 		$return['callConfig2'] = $userrow2[0];
 		if($callConfig->module_id!=""){
 			$defaultmoduleid = $callConfig->module_id;
@@ -318,7 +290,6 @@ class userClass{
 		$params = [$whrs, $get];
 		$query = $callConfig->selectQuery('status','id,name_value,name,background_color,color',$whrs,'','','');
 		$allstatus = $callConfig->getAllRowsNew($query);
-		//print_r($allstatus);
 
 		foreach($allstatus as $value){
 			$name_value = $value->name_value;

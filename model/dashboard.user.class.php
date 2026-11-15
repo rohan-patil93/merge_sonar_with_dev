@@ -77,7 +77,6 @@ class dashboardUserClass{
 		OR date_of_leaving > '{$today}'
 		)
 		";
-		//echo $query; exit;
 		$row = $callConfig->getRow($query);
 		$total_employees = isset($row->total) ? (int)$row->total : 0;
 		$return['total_employees'] = $total_employees;
@@ -630,7 +629,6 @@ class dashboardUserClass{
           AND is_active = 0";
 	    $row = $callConfig->getRow($query);
 	    $total_employees = isset($row->total_employees) ? (int)$row->total_employees : 0;
-	    //$return['total_employee_query'] = $query;
 	    $return['total_employees'] = $total_employees;
 		// Gross Payroll
 	    $query = "

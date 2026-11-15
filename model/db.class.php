@@ -28,7 +28,6 @@ class configClass
 			$this->extra_details=$extra['extra_details'];
 			$this->module_id=$extra['module_id'];
 			$this->working_role_short_code=$extra['working_role_short_code'];
-		//	$this->con=mysqli_connect(HOSTNAME,USERNAME,PASSWORD,$db);
 			$this->con=mysqli_connect(HOSTNAME,USERNAME,PASSWORD,$db,PORT);
     	}
 		public function configClass($db,$extra)
@@ -66,15 +65,11 @@ class configClass
 			$start=0;
 			$query.=DB_LMT.$start.",".$limit;
 		}
-		//echo $query;exit;
 		return $query;
 		}
 
 		public function configConnection($db="",$extra="")
 		{
-			// $con=mysqli_connect($this->hostname,$this->username,$this->password);
-			// $connection=mysqli_select_db($con, $this->dbname);
-			//if(!$connection) echo "fail".mysqli_error();
 			$con=mysqli_connect(HOSTNAME,USERNAME,PASSWORD,$db,PORT);
 		}
 		public function insertErorrLog($data){
@@ -85,7 +80,6 @@ class configClass
 			}
 			$str=rtrim(implode($val),',');
 			$query=DBIN.'application_logs'.DBSET.$str;
-			//echo $query; exit;
 			return mysqli_query($this->con, $query);
 		}
 		public function insertActionLog($data){
@@ -100,12 +94,9 @@ class configClass
 			}
 			$str=rtrim(implode($val),',');
 			$query=DBIN.'action_log'.DBSET.$str;
-			//echo $query; //exit;
 			return mysqli_query($this->con, $query);
-			//return $query;
 		}
 		public function executeQuery($query){
-			//echo $query; exit;
 			$log = array();
 			$log['user_id']=$this->user_id;
 			$log['company_id']=$this->company_id;
@@ -114,24 +105,19 @@ class configClass
 			$log['log_source'] = $this->option;
 			$log['log_message'] = '';
 			$sub = substr($query, 0, 6);
-			//echo $sub; exit;
 			if($sub=='INSERT' || $sub=='insert') { $log['log_message'] = '3001';
 			}
 			if($sub=='UPDATE' || $sub=='update') { $log['log_message'] = '3010';
 			}
-			//if($sub=='SELECT' || $sub=='select') { $this->insertAuditTrail('SELECT',$query); }
 			if($sub=='DELETE' || $sub=='delete') { $this->insertAuditTrail('DELETE','','','',$query);
 			}
-			//print_r($log); exit;
 			$result = null;
 			if (mysqli_query($this->con, $query)) {
 
 			    $insert_id = mysqli_insert_id($this->con);
 				$update_id = mysqli_affected_rows($this->con);
 				$queryresult = array('status' => 'sucess', 'LASTID'=>$insert_id, 'Result'=>$result, 'UpdatedRes'=>$update_id);
-				//echo "STEP 1 last"; exit;
 			} else {
-				//echo "STEP 12"; exit;
 				$error_no = mysqli_errno($this->con);
 				$error_message =  $error_no." : ".mysqli_error($this->con);
 				$log['log_message']=str_replace("'", " ", $error_message);
@@ -143,10 +129,8 @@ class configClass
 				$queryresult = array('status' => 'fail' , 'message' => $error_message, 'error_no' => $error_no, 'other' => $fields, 'query' => $query);
 			}
 			$this->insertErorrLog($log);
-			//print_r($queryresult); exit;
 			return $queryresult;
 		}
-		//insertAuditTrail('UPDATE',$tablename,$ids,$whereparamiter,$query);
 		public function insertAuditTrail($type,$table,$id,$where,$query,$lastid=""){
 			$remarks = "";
 			$cdsc = array();
@@ -192,7 +176,6 @@ class configClass
 				$query = "INSERT INTO `audit_trails`(`company_id`, `module_setup_id`,`user_id`, `type`, `page_option`,`extra_paramiter`, `transaction_table`, `transaction_id`, `log_query`, `where_condition`, `after_transaction_details`, `is_active`, `current_status`, `created_date`, `created_by`) VALUES ('".$this->company_id."','".$this->module_id."','".$this->user_id."','".$type."','".$this->option."','".$this->extra_paramiter."','".$table."','".$id."','".urlencode($query)."','".urlencode($where)."','".$remarks."','0','0','".date("Y-m-d H:i:s")."','".$this->user_id."')";
 			}
 			$res =configClass::executeQuery($query);
-			//$res =configClass::executeQueryString($query);
 			return $res;
 		}
 		public function toGetcannotbenull($error_message){
@@ -204,7 +187,6 @@ class configClass
 		public function toGetUbiquekeyFields($error_message){
 			$last_word_start = strrpos($error_message, ' ') + 1; // +1 so we don't  the space in our result
 				$last_word = substr($error_message, $last_word_start);
-				//echo $last_word;
 				$uniq = trim($last_word,"'");
 				$query1 = "SELECT  tc.table_name,kcu.column_name FROM information_schema.table_constraints tc inner JOIN information_schema.key_column_usage kcu  ON tc.constraint_catalog = kcu.constraint_catalog AND tc.constraint_schema = kcu.constraint_schema AND tc.constraint_name = kcu.constraint_name AND tc.table_name = kcu.table_name LEFT JOIN information_schema.referential_constraints rc ON tc.constraint_catalog = rc.constraint_catalog AND tc.constraint_schema = rc.constraint_schema AND tc.constraint_name = rc.constraint_name AND tc.table_name = rc.table_name WHERE tc.constraint_schema = '$this->dbname' and tc.CONSTRAINT_NAME = '$uniq'";
 				$data = $this->getAllRows($query1);
@@ -269,7 +251,6 @@ class configClass
 			if($res['status'] == 'sucess'){
 				$data_arraay = array('company_id'=> $this->company_id,'module_setup_id'=>$this->module_id,'transaction_table' => $tablename, 'transaction_type'=> "INSERT" , 'transaction_primary_1' => $res['LASTID'] ,'action_log'=> "Record Created by ", 'user_id'=> $this->user_id, 'status_value'=> $status );
 				$this->insertActionLog($data_arraay);
-				//$this->insertAuditTrail('INSERT',$tablename,$res['LASTID'],'',$query);
 			}
 			return $res;
 		}
@@ -277,7 +258,6 @@ class configClass
 		    return mysqli_real_escape_string($this->con, $value);
 		}
 		public function selectIN($tablename,$fields,$where,$ids,$order=""){
-			//echo "hai"; exit;
 			if(is_array($ids)){
 				$field_ids=implode(",",$ids);
 			}else{
@@ -301,7 +281,6 @@ class configClass
 		}
 		public function updateRecord($tablename,$fieldnames,$where,$ids,$where_con = '')
 		{
-		//echo $where_con;
 		$status = '';
 		if(is_array($ids)){
 		$field_ids=implode(",",$ids);
@@ -326,7 +305,6 @@ class configClass
 			if($k == 'current_status'){
 				$status = $values;
 			}
-			//echo $k."||||".$values."<br>";
 			$val[]=$k."=".$values.",";
 		}
 		$str=rtrim(implode($val),',');
@@ -352,12 +330,9 @@ class configClass
 
 		$insertauditrails = $this->insertAuditTrail('UPDATE',$tablename,$ids,$whereparamiter,$query);
 		$res = configClass::executeQuery($query);
-		//$res['audit_trail'] = $insertauditrails;
 		if($res['status'] == 'sucess' && $res['UpdatedRes'] == '1' ){
-			//$insertauditrails['LASTID'];
 			$this->insertAuditTrail('UPDATE',$tablename,$ids,$whereparamiter,$query,$insertauditrails['LASTID']);
 		}
-		//print_r($res); exit;
 		$res['query'] = $query;
 		return $res;
 		}
@@ -366,20 +341,17 @@ class configClass
 		$query=DBDEL.DBFROM.$tablename;
 		if($where!="")
 		$query.=DBWHR.$where;
-		//echo $query; exit;
 		$res = configClass::executeQuery($query);
 		return $res['UpdatedRes'];
 		}
 
 		public function headerRedirect($con)
 		{
-			//echo HEAD_LTN.$con;exit;
 		  header(HEAD_LTN.$con);
 		}
 
 		public function selectQuery($tablename,$fields,$where,$order,$start,$limit)
 		{
-		//echo "---------------------"; print_r($fields); //exit;
 		if(is_array($fields)){
 			echo "************"; print_r($fields); exit;
 			$fields=implode(",",$fields);
@@ -399,7 +371,6 @@ class configClass
 			$start=0;
 			$query.=DB_LMT.$start.",".$limit;
 		}
-		//echo $query;
 		return $query;
 		}
 		public function selectQueryNew($tablename, $fields, $whereConData = "", $order = "", $start = "", $limit = "") {
@@ -519,7 +490,7 @@ class configClass
 		public function freeimageUploadcomncode($jnt,$imagename,$path,$thumb_path,$hdnimage,$width,$height)
 		{
 			if($_FILES[$imagename]['name']!="")
-			{// print_r($_FILES);exit;
+			{
 				if($width!="")
 				$thumb_newwidth=$width;
 				else
@@ -574,7 +545,6 @@ class configClass
 			$values = (object)array();
 			$res= mysqli_query($this->con,$query);
 			if (!$res) {
-				//$values->error = mysqli_error($this->con);
 			}else{
 			   $values=mysqli_fetch_object($res);
 			}
@@ -596,10 +566,6 @@ class configClass
 			$values = array();
 			$res=mysqli_query($this->con, $query);
 			if (!$res) {
-				// $objectary = (object)array();
-				// $objectary->error = mysqli_error($this->con);
-				// $objectary->query = $query;
-				// $values =$objectary;
 			}else{
 				while($rows=mysqli_fetch_object($res)){
 					$values[]=$rows;
@@ -615,9 +581,7 @@ class configClass
 		        $sql = $asql['query'];
 		        $params = $asql['params'];
 		    }
-		    //echo "--- ".$sql; print_r($params); print_r($sql); exit;
 	        $stmt = $this->prepareAndExecute($sql, $params);
-	        //echo "--- ".$sql; print_r($params); echo "--- ".$stmt; exit;
 	        $result = $stmt->get_result();
 	        $return = $result->fetch_assoc();
 	        return (object)$return;
@@ -636,27 +600,20 @@ class configClass
 	        return (object)$return;
 	    }
 	    public function prepareAndExecute($sql, $params) {
-	    	//echo "=== ".$sql; print_r($params); echo "<br>"; //exit;
 	        $stmt = $this->con->prepare($sql);
-	        //echo "++++ ".$sql; print_r($params); //exit;
 	        if (!$stmt) {
 
 	            die("Prepare failed: " . $this->con->error);
 	        }
 
 	        if (!empty($params)) {
-	        	//echo "-----s------";
 	            $types = $this->getParamTypes($params);
-	            //echo "-----s------".$types;
 	            $stmt->bind_param($types, ...$params);
-	            //echo "-----tt------";
 	        }
 
 	        if (!$stmt->execute()) {
-	        	//echo "----d-------";
 	            die("Execution failed: " . $stmt->error);
 	        }
-	 		//echo "-----a------";
 	        return $stmt;
 	    }
 	    public function getParamTypes($params) {
@@ -682,10 +639,6 @@ class configClass
 				$return['status'] = 404;
 				$return['respons'] = mysqli_error($this->con);
 
-				// $objectary = (object)array();
-				// $objectary->error = mysqli_error($this->con);
-				// $objectary->query = $query;
-				// $values =$objectary;
 			}else{
 				while($rows=mysqli_fetch_object($res)){
 					$values[]=$rows;
@@ -730,7 +683,6 @@ public function generateRandomString($length)
       }
     }
 	return $password;
-    //return $password.time();
   }
 
 public function random_code()

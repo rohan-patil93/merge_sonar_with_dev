@@ -69,7 +69,6 @@ class crmuserClass extends userClass{
 				foreach($crm_leadsres as $crmdet){
 					$return['crm_pendding_task_details'][$transtable][$crmdet->id] = $crmdet;
 				}
-				//$return['crm_pendding_task_details'][$transtable] = $ids;
 			}
 
 			$frsql =  "SELECT fr.id as feasibility_id, cc.id as crm_contact_id, cc.display_name, cc.email_id, cc.phone, cc.company_name, cc.crm_company_id FROM feasibility_requirements fr, crm_contacts cc WHERE fr.company_id = '".$get['company_id']."' AND fr.company_id = cc.company_id AND fr.lead_id = cc.id AND fr.is_active = cc.is_active  AND fr.is_active = 0 AND fr.sales_order_id IS NULL AND fr.current_status = '".ST_APPROVED."'".$feasibiltycondition;
@@ -159,19 +158,11 @@ class crmuserClass extends userClass{
 				LEFT JOIN feasibility_types ft  ON fr.feasibility_type_id = ft.id AND ft.company_id = fr.company_id AND  ft.is_active = 0
 				LEFT JOIN crm_contacts crm_con ON fr.lead_id = crm_con.id AND crm_con.company_id = fr.company_id AND  crm_con.is_active = 0
 				WHERE fr.company_id = " .$get['company_id']." AND fr.created_date BETWEEN '".$from_date." 00:00:00' AND '".$to_date." 23:59:59' AND fr.is_active = 0";
-			// $return['crm_feasibilities_query'] = $query;
 			$crm_feasibilities = $callConfig->getAllRows($query);
 			$return['crm_feasibilities'] = $crm_feasibilities;
 
 		}
-		// $crmldid = array();
-			// foreach($crm_leadsres as $crmlead){
-			// 	$crmldid[$crmlead->id] = $crmlead->id;
-			// }
 
-			// $lastcrmleadssql = "SELECT id, transaction_id, lead_type, date, time, address, country_id, state_id, city_id, post_code, phone, sms_text, email_content_id, recipient_email_id, member, comment, max(updated_date) as max_updated_date FROM crm_lead_details WHERE company_id = '".$get['company_id']."' AND transaction_id IN(".implode(',', $crmldid).") AND is_active = 0 GROUP BY transaction_id,updated_date ORDER BY max_updated_date ASC";
-			// $lastcrmleadsres=$callConfig->getAllRows($lastcrmleadssql);
-			// $return['lastactivity_crm_lead_details'] = $lastcrmleadsres;
 
 			$todaycrmleadssql = "SELECT crmp.id, crmp.transaction_table, crmp.transaction_id, crmp.lead_type, crmp.date, crmp.time, crmp.address, crmp.country_id, crmp.state_id, crmp.city_id, crmp.post_code, crmp.phone, crmp.sms_text, crmp.email_content_id, crmp.recipient_email_id, crmp.member, crmp.comment, crmp.created_date FROM crm_histories crmp WHERE crmp.company_id = '".$get['company_id']."' AND crmp.is_active = 0 AND crmp.id IN(SELECT MAX(id) as id FROM crm_histories crmc WHERE crmc.company_id = crmp.company_id AND crmc.is_active = crmp.is_active AND crmc.transaction_table = crmp.transaction_table AND crmc.transaction_id = crmp.transaction_id GROUP BY crmc.transaction_table, crmc.transaction_id)";
 			$todaycrmleadsres=$callConfig->getAllRows($todaycrmleadssql);
@@ -267,7 +258,6 @@ class crmuserClass extends userClass{
 			$project_task_status[$aulres->table_name][$aulres->status]= $aulres;
 		}
 		$return['project_task_status'] = $project_task_status;
-		//echo "ascsdcvsvsfvsfvsfv".$get['transaction_table']; exit;
 		if($get['transaction_table'] =="crm_companies"){
 			$crm_lead_detailssql = "SELECT id, display_name FROM crm_contacts WHERE company_id = '".$get['company_id']."' AND (crm_company_id IN ('".$get['rid']."') OR crm_company_id IS NULL) AND is_active = 0";
 			$crm_lead_detailsres=$callConfig->getAllRows($crm_lead_detailssql);
@@ -310,7 +300,6 @@ class crmuserClass extends userClass{
 			$insertary['crm_campaign_id'] = $post['crm_campaign_id'];
 			$insertary['feasibility_check'] = $post['feasibility_check'] =="Y"?"Y":"N";
 		}elseif($transaction_table =="crm_companies"){
-			//$insertary=array('company_id'=>$post['company_id'],'company_name'=>$post['company_name'],'business_size'=>$post['business_size'],'business_type'=>$post['business_type'],'established_year'=>$post['established_year'],'tin_number'=>$post['tin_number'],'vat_number'=>$post['vat_number'],'website_url'=>$post['website_url'],'pan_no'=>$post['pan_no'],'company_trading_name'=>$post['company_trading_name'],'company_registration_number'=>$post['company_registration_number'],'tan_number'=>$post['tan_number'],'address'=>$post['address'],'post_code'=>$post['post_code'],'country_id'=>$post['country_id'],'state_id'=>$post['state_id'],'city_id'=>$post['city_id'],'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
 
 			$insertary=array('company_id'=>$post['company_id'],'company_name'=>$post['company_name'],'website_url'=>$post['website_url'],'pan_no'=>$post['pan_no'],'gstin'=>$post['gstin'],'fax'=>$post['fax'],'address'=>$post['address'],'post_code'=>$post['post_code'],'country_id'=>$post['country_id'],'state_id'=>$post['state_id'],'city_id'=>$post['city_id'],'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
 
@@ -360,7 +349,6 @@ class crmuserClass extends userClass{
 			}
 
 		}else{
-			//$insertary['lead_code'] = $this->toGetApplicationSerialNumber('crm_contacts');
 			$return['insertary---'] = $insertary;
 			$insertary['created_by']=$post['user_id'];
 			$insertary['created_date']=date("Y-m-d H:i:s");
@@ -438,7 +426,6 @@ class crmuserClass extends userClass{
 			if($post['lead_type'] == '5'){
 				$senddata = array('session_company_id'=>$get['company_id'],'template_reference_id'=>$post['email_content_id'],'to_users'=>$ccuserarray,'cc_users'=>array(),'recipient_email_id'=>array($post['recipient_email_id']));
 				$res = $this->emailsendmediaternew($senddata);
-				//$return['senddata'] = $res;
 				$msg = "Email Send Successfully";
 				$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'INFORMATION', 'notification_users'=>$ccuserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
 				$sendnotification = $this->tosendnotifiations($notdataa);
@@ -518,7 +505,6 @@ class crmuserClass extends userClass{
 			$subject = ucwords(str_replace('_', ' ', $data['subject']));
 			mail($email,$subject,$data['mesg'],$headers);
 		}
-		//echo "email send sucess";
 		return $email_data;
 	}
 	public function emailtemplatenew($send_data){
@@ -535,7 +521,6 @@ class crmuserClass extends userClass{
 			$emailcontentsql = "SELECT email_subject_cc as email_subject,email_header_cc as email_header,email_content_cc as email_content_1,button_label,email_footer  as email_fotter FROM email_content WHERE company_id = '".$send_data['session_company_id']."' AND  template_reference_id = '".$send_data['template_reference_id'] ."' AND is_active = 0";
 		}
 		$return['emailcontentsql'] = $emailcontentsql;
-		//print_r($send_data);
 		$emailcontentres=$callConfig->getRow($emailcontentsql);
 		$subject =  $this->emaildatareplace($send_data, $emailcontentres->email_subject);
 
@@ -628,28 +613,9 @@ class crmuserClass extends userClass{
 			$customers[$cust->id]['post_code'] = $postalCode;
 			//End Get Post Code
 
-			// $words = preg_split('/[\s,]+/', $cust->billing_address);
-		 //    foreach ($words as $word) {
-		 //        if (in_array(ucfirst(strtolower($word)), $stateNames, true)) {
-		 //            $customers[$cust->id]['state_name'] =  ucfirst(strtolower($word));
-		 //        }
-		 //    }
-
-		 //    foreach ($stateNames as $index => $city) {
-			//     // Check if the city exists in the input string (case-insensitive)
-			//     if (stripos($cust->billing_address, $city) !== false) {
-			//         $cityPosition = $index; // Get the index of the matched city
-			//         $customers[$cust->id]['cityNames2'] =  ucfirst(strtolower($city));
-			//     }
-			// }
 
 
-			// foreach($citiesres as $citt){
-		 //        if (stripos($cust->billing_address, $citt->city_name) !== false) {
-		 //            $customers[$cust->id]['city_id'] = $citt->id;
-		 //        	$customers[$cust->id]['city_city_name'] = $citt->city_name;
-		 //        }
-		 //    }
+
 			$updateary = array('billing_city'=>'','billing_state'=>'','billing_post_code'=>$postalCode,'billing_country'=>'101','shipping_city'=>'','shipping_state'=>'','shipping_post_code'=>$postalCode,'shipping_country'=>'101');
 			$return['res'] = $callConfig->updateRecord('customers',$updateary,'id',$cust->id);
 		}
@@ -662,7 +628,6 @@ class crmuserClass extends userClass{
 		$transaction_id = $post['transaction_id'];
 		$exicutesql = "INSERT INTO `crm_contacts`(`crm_lead_id`,`company_name`,`company_id`, `first_name`, `middle_name`, `last_name`, `display_name`, `email_id`, `phone`, `office_phone`, `fax`, `website`, `address`, `post_code`, `country_id`, `state_id`, `city_id`, `originator`, `contact_source`, `is_active`, `current_status`, `created_date`, `created_by`,`image`) SELECT `id`,`company_name`,'".$post['company_id']."', `first_name`, `middle_name`, `last_name`, `display_name`, `email_id`, `phone`, `office_phone`, `fax`, `website`, `address`, `post_code`, `country_id`, `state_id`, `city_id`, `originator`, `contact_source`, 0, 0,'".date('Y-m-d H:i:s')."', '".$post['user_id']."',`image` FROM `crm_leads` WHERE id='".$transaction_id."'";
 		$res = $callConfig->executeQuery($exicutesql);
-		//$res['exicutesql'] = $exicutesql;
 		if($res['status'] == 'sucess'){
 			$insertary['updated_date']=date('Y-m-d h:i:s');
 			$insertary['updated_by']=$post['user_id'];
@@ -772,10 +737,6 @@ class crmuserClass extends userClass{
 		$return = array();
 
 
-		// $get['transaction_date'] = date("Y-m-d");
-		// $get['party_id'] = 1;
-		// $get['transaction_type'] = '';
-		// $return['transaction_number_details'] = $this->generatingApplicationSerialNumberMastersTst('purchase_invoices',$get);
 
 /**payment tersm
 		$transaction_table = 'sales_invoices';
@@ -798,8 +759,6 @@ class crmuserClass extends userClass{
 payment tersm**/
 
 
-		//	$mobilsendnotification = array('company_id'=>1,'message'=>'hi test message','user_id'=>14,'title'=>'Test');
-		//	$this->tocallmobilenotificationmob($mobilsendnotification);
 
 //Start opening balance stock upload
 	/**
@@ -1250,15 +1209,12 @@ payment tersm**/
 
 		echo "Working<pre>"; print_r($return);
 
-		//return $return;
 	}
 
 	//Koteswar start
 	public function importCSV($get, $post){
     	global $callConfig;
     	$return = array();
-    	// $return['get'] = $get;
-    	// $return['post'] = $post;
     	$parent_id =  '';
 
     	$data = array(
@@ -1273,7 +1229,6 @@ payment tersm**/
 	        'invoice_from_date' =>$this->dateconvertdbformat($post['invoice_from_date']),
 	        'invoice_to_date' =>$this->dateconvertdbformat($post['invoice_to_date'])
     	);
-    	// print_r($data);
 
     	$res = $callConfig->insertRecord('sales_invoice_data_parent', $data);
     	$parent_id = $res['LASTID'];
@@ -1283,7 +1238,6 @@ payment tersm**/
 
 	    $rows = explode("\n", $csvData);
 	    $headerSkipped = false;
-	    // print_r($rows);  exit;
 	    if($parent_id != '' && $parent_id > 0){
 			foreach ($rows as $line) {
 			    if (!$headerSkipped) {
@@ -1292,7 +1246,6 @@ payment tersm**/
 			    }
 
 			    $columns = str_getcsv($line, ",", '"');
-			    // print_r($columns);  exit;
 			    if (count($columns) < 32 && count(array_filter($columns)) === 0) {
 				    continue; // skip only completely empty lines
 				}
@@ -1338,7 +1291,6 @@ payment tersm**/
 		        $insert_array['created_date'] = date('Y-m-d H:i:s');
 		        $insert_array['created_by'] = $get['user_id'];
 
-		        // print_r($insert_array); exit;
 		        $res1 = $callConfig->insertRecord('sales_invoice_data_excel', $insert_array);
 		        $return['res'][] = $res1;
 		       	if (!$res1) {
@@ -1347,7 +1299,6 @@ payment tersm**/
 
 			}
 		}
-	    // echo json_encode(['status' => 'success', 'message' => 'Data imported']);
 
 	   	return $return;
 
@@ -1367,7 +1318,6 @@ payment tersm**/
 		global $callConfig;
         $accountlist = array();
         $return['get'] = $get;
-        // $sql = "SELECT id,user_name,party_name,mobile_no,expiry_date,bill_no, count(*) as line_of_item_count FROM sales_invoice_data_excel WHERE company_id = '".$get['company_id']."'  AND is_active = 0 GROUP BY bill_no";
         $sql = "SELECT s.id,s.user_name,s.party_name,s.mobile_no,s.expiry_date,s.bill_no, s.plan_name,
 			    CASE 
 			        WHEN (c.company IS NOT NULL  OR c.display_name IS NOT NULL) THEN 'Yes' 
@@ -1413,7 +1363,6 @@ payment tersm**/
 	public function getSalesInvoiceDynamicExcelList($get){
 		global $callConfig;
         $accountlist = array();
-        // $return['get'] = $get;
         $condlimi = '';
         if($get['LIMIT']!=""){
         	$condlimi = " LIMIT ".$get['LIMIT'];
@@ -1443,32 +1392,16 @@ payment tersm**/
     		$implodeid = implode("','",$selected_ids);
 	    	$query = "SELECT * FROM sales_invoice_data_excel WHERE bill_no IN ('".$implodeid."') AND company_id = ".$get['company_id']." AND parent_id = '".$post['sales_invoice_data_parent_id']."' AND is_active = 0";
 	    	$query_result = $callConfig->getAllRows($query);
-	        //$return['sales_invoice_data_excel_res'] = $query_result;
 	        foreach($query_result as $side){
 	        	$bill_no_array[$side->bill_no][] = $side;
 	        }
 	        $return['bill_no_array'] = $bill_no_array;
-	        // $auquery = "SELECT id, user_name, display_name FROM application_users WHERE company_id = ".$get['company_id']." AND is_active = 0";
-            // $aures = $callConfig->getAllRows($auquery);
-            // foreach($aures as $auser){
-	        // 	$application_usersuser_name[$auser->user_name] = $auser;
-	        // 	$application_usersdiplay_name[$auser->user_name] = $auser;
-	        // }
-	        //$return['application_usersuser_name'] = $application_usersuser_name;
-	        //$return['application_usersdiplay_name'] = $application_usersdiplay_name;
             $custquery = "SELECT id, company, display_name,email, phone, mobile, billing_address, shipping_address, payment_terms, gstin, pan_no FROM customers WHERE company_id = ".$get['company_id']." AND is_active = 0";
             $custres = $callConfig->getAllRows($custquery);
             foreach($custres as $custrs){
 	        	$customerscompany[$custrs->company] = $custrs;
 	        	$customersdisplay_name[$custrs->display_name] = $custrs;
 	        }
-	       //$return['customerscompany'] = $customerscompany;
-	       // $return['customersdisplay_name'] = $customersdisplay_name;
-           	// $smquery = "SELECT id, salesman_name FROM salesmen WHERE company_id = ".$get['company_id']." AND is_active = 0";
-            // $smres = $callConfig->getAllRows($smquery);
-            // foreach($smres as $smres1){
-	        // 	$salesmendetails[$smres1->salesman_name] = $smres1->id;
-	        // }
 
 	        $itemquery = "SELECT id, sku, item_name, sale_uom FROM items WHERE company_id = ".$get['company_id']." AND is_active = 0";
             $itemres = $callConfig->getAllRows($itemquery);
@@ -1479,21 +1412,11 @@ payment tersm**/
 
 	        $tax_authorities_rates_splitsql = "SELECT id, split_name, (tax_rate/100) as tax_rate, account_code, split_type, sales_account_code FROM `tax_authorities_rates_split` WHERE company_id = '".$post['company_id']."' AND is_active =0";
 	        $tax_authorities_rates_splitres1 = $callConfig->getAllRows($tax_authorities_rates_splitsql);
-	        //$return['tax_authorities_rates_splitres1'] = $tax_authorities_rates_splitsql;
 	        foreach($bill_no_array as $billno=>$billitems){
 	        	$first = $billitems[0];
 
 
-	        	//$userdeatil = (count((array)$application_usersuser_name[$first->user_name])!='0')?$application_usersuser_name[$first->user_name]:$application_usersdiplay_name[$first->user_name];
 		       	$salemannameid = null;
-	        	// if(isset($salesmendetails[$first->user_name])){
-	        	// 	$salemannameid = $salesmendetails[$first->user_name];
-	        	// }else{
-	        	// 	$insertsalesmenary = array('company_id'=>$post['company_id'],'salesman_name'=>$first->user_name,'is_active'=>0,'current_status'=>0,'created_date'=>date('Y-m-d H:i:s'),'created_by'=>$get['user_id']);
-				// 	$salesmenres = $callConfig->insertRecord('salesmen', $insertsalesmenary);
-				// 	$salemannameid = $salesmenres['LASTID'];
-				// 	$salesmendetails[$first->user_name] = $salemannameid;
-	        	// }
 
 
 	        	if(isset($customerscompany[$first->party_name])){
@@ -1530,7 +1453,6 @@ payment tersm**/
 				       	$tax_authorities_rates_splitres = json_decode(json_encode($tax_authorities_rates_splitres1), true);
 						$return['tax_authorities_rates_splitres'] = $tax_authorities_rates_splitres;
 
-						//if($post['originator_state_id'] == $post['supplier_state_id']){
 							$tax_flag = "S";
 							$split_1_name = $tax_authorities_rates_splitres[0]['split_name'];
 						    $split_2_name = $tax_authorities_rates_splitres[1]['split_name'];
@@ -1573,7 +1495,6 @@ payment tersm**/
 
 
 				$total_tax_split_details = array();
-				//if($txperc1 == '0'){
 					if($tax_flag == "S"){
 						$total_tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txperc1,'tax_amount'=>$txvalc1,'account_code'=>$split_1_gl_account_code),array('tax_name'=>$split_2_name,'tax_percentage'=>$txperc2,'tax_amount'=>$txvalc2,'account_code'=>$split_2_gl_account_code));
 					}else{
@@ -1654,17 +1575,7 @@ payment tersm**/
 			        	}
 					    $item_data = [];
 
-	                   	// $req_date = $$this->dateconvertdbformat($itmlist->bill_date);
-						// $mainitem = $this->togetitemvalues($itemdetail->id);
-						// $day_rate = $this->togetitemwadayrate($itemdetail->id, $post['company_id']);
-						// $fifo_day_rate = $this->togetitemfifodayrate($itemdetail->id, $get['company_id']);
-						// $lifo_day_rate = $this->togetitemlifodayrate($itemdetail->id, $get['company_id']);
-						// $wa_day_rate = $day_rate;
-						// $wa_day_rate = ($wa_day_rate != '0' AND $wa_day_rate !="")?$wa_day_rate:$post['price'][$key];
-						// $fifo_day_rate = ($fifo_day_rate != '0' AND $fifo_day_rate !="")?$fifo_day_rate:$post['price'][$key];
-						// $lifo_day_rate = ($lifo_day_rate != '0' AND $lifo_day_rate !="")?$lifo_day_rate:$post['price'][$key];
 
-						//$descriptions = $itmlist->site." ".$itmlist->building_name." ".$itmlist->zone_name." ".$itmlist->operator_name." ".$itmlist->franchisee_name;
 
 						$req_date = '';
 						$wa_day_rate = 0;
@@ -1794,7 +1705,6 @@ payment tersm**/
 		$data = $callConfig->getAllRows($query);
 		$return['crm_import_files'] = $data;
 		$query = "SELECT id, crm_import_file_id, display_name, first_name, last_name, email, phone, office_phone, address, company_name, campaign_name, is_duplicate FROM crm_lead_and_contact_import_items WHERE company_id = '" . $get['company_id'] . "' AND crm_import_file_id = '" . $get['rid'] . "' AND is_active = 0";
-		// $return['query'] = $query;
 		$data = $callConfig->getAllRows($query);
 		$return['crm_import_file_rows'] = $data;
 		return $return;
@@ -2232,15 +2142,11 @@ payment tersm**/
                     }
                 }
                 $html .= "</div>";
-                // $feasibility_fields_res[] = $row;
             }
-            // $return['feasibility_fields_res'] = $feasibility_fields_res;
         }
         return $html;
     }
     public function insertFeasibilityBomAndChecklist($get, $post){
-        // print_r($get);
-        // print_r($post); exit;
         global $callConfig;
         $return = array();
         $feasibility_id = $post['feasibility_id'];
@@ -2929,7 +2835,6 @@ $html .= "</div>";
             if (!empty($report['status']) || !empty($report['actions'])) {
                 $output[] = $report;
             }
-        // return $output;
         }
         echo "<pre>";
         print_r($output);
@@ -2994,16 +2899,13 @@ $html .= "</div>";
 		        }
 		        if (!empty($finyaer) && $asnres->financial_year_check == "Y" && $financial_year_position == $m){
 		            $parts[$m] = $finyaer;
-		            //$checksequincerow[$m] = $finyaer;
 		        }
 		        if(isset($position_with_val[$m]) && $position_with_val[$m]['display_type'] =="STATIC"){
 		            if($position_with_val[$m]['static_value'] != ""){
-		            	//$parts[$m] = $position_with_val[$m]['static_value'];
 		            	$checksequincerow[$m] = $position_with_val[$m]['static_value'];
 		            }
 		        }elseif(isset($position_with_val[$m]) && $position_with_val[$m]['display_type'] =="DYNAMIC"){
 		            if($position_with_val[$m]['dynamic_value'] != ""){
-		            	//$parts[$m] = $position_with_val[$m]['dynamic_value'];
 		            	$checksequincerow[$m] = $position_with_val[$m]['dynamic_value'];
 		            }
 		        }
@@ -3176,11 +3078,6 @@ $html .= "</div>";
 		global $callConfig;
 		$todaydate = date("Y-m-d");
 		$originatercondition = '';
-		// if($get['admin_type'] != 1){
-		// 	$originatercondition = " AND originator = '".$get['user_id']."'";
-		// 	$prooriginatercondition = " AND assigner_id = '".$get['user_id']."'";
-		// 	$feasibiltycondition = " AND fr.created_by = '".$get['user_id']."'";
-		// }
 		$crm_leadssql = "SELECT id, type_name, type, created_date, created_by FROM crm_activity_types WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0";
 		$crm_leadsres=$callConfig->getAllRows($crm_leadssql);
 		$return['crm_activity_types'] = $crm_leadsres;

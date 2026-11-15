@@ -165,7 +165,6 @@ class manufacturingUserClass extends userClass{
 				}
 
 				$manufacturing_bom_items_seq_no = $post['manufacturing_bom_items_seq_no'][$seq] ?? $seq;
-				//$return['manufacturing_bom_items_seq_no'][] = $post;
 				$alternate_manufacturing_bom_items = array();
 
 				foreach((array)($post['alternate_item_id'][$manufacturing_bom_items_seq_no] ?? array()) as $sq1=>$alteritmid){

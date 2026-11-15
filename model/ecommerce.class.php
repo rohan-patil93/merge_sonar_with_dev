@@ -6,7 +6,6 @@ class userClass
 		global $callConfig;
 		$whr = "is_active = '0'";
 		$query=$callConfig->selectQuery('banner','*',$whr,'','','');
-		//echo $query;
 		$data = $callConfig->getAllRows($query);
 		return $data;
 	}

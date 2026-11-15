@@ -54,15 +54,7 @@ class pmsUserClass extends userClass{
 
 
 
-// $insert_array = array('company_id'=>$get['company_id'],'appraisal_id'=>$get['id'],'employee_id'=>$empd->id,'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id'],'created_date'=>date('Y-m-d h:i:s'));
-// 			$insert = $callConfig->insertRecord('performance_appraisal_setups',$insert_array);
-// 			$epaid = $insert['LASTID'];
 
-// if(isset($res['LASTID'])){
-	// 	$employee_goals = "INSERT INTO `employee_goals`(`company_id`, `employee_id`, `assessment_year`, `indicator_name`, `key_reslut_id`,`key_performance_id`, `weightage`, `model`, `uom`,`assessment_frequency`, `traget`, `is_active`, `current_status`, `created_date`, `created_by`) SELECT '".$post['company_id']."',emp.id,og.assessment_year,og.indicator_name,og.key_reslut_id,og.key_performance_id,og.weightage,og.model, og.uom,og.assessment_frequency ,og.traget,0,0,'".date('Y-m-d h:i:s')."','".$post['user_id']."' FROM organization_goals og, employees emp, appraisal_key_result_areas kra  WHERE og.company_id ='".$post['company_id']."' AND og.assessment_year = '".$post['assessment_year']."' AND kra.appraisal_id = '".$post['appraisal_id']."' AND kra.id = og.key_reslut_id AND og.company_id = emp.company_id AND og.company_id = kra.company_id AND og.job_title_id = emp.job_title_id AND og.department_id = emp.department_id AND og.location_id = emp.location_id AND emp.is_active = 0 AND emp.is_active = og.is_active AND emp.is_active = kra.is_active AND kra.id IN(".$kra_ids.")";
-	// 	$res = $callConfig->executeQuery($employee_goals);
-	// 	$returnaray['employee_goals'] = $employee_goals;
-	// }
 
 
 
@@ -96,7 +88,6 @@ class pmsUserClass extends userClass{
 		$resupdate[] = $callConfig->updateRecord('employee_goals',$up_array_emp,'id',$gid);
 	}
 	$up_array = array('is_active'=>null);
-		//$resupdate[] = $callConfig->updateRecord('employee_performance_appraisals',$up_array,'appraisal_id',$post['appraisal_id']);
 	$insertsql = "INSERT INTO employee_performance_appraisal_details (company_id, epa_header_id, appraisal_id, employee_id, assessment_year, header_id, filed_1, filed_2, filed_3, filed_4, filed_5, filed_6, is_active, current_status, created_date, created_by) VALUES ";
 	// used how meny time loop run
 	$newewarray = array();
@@ -137,7 +128,6 @@ class pmsUserClass extends userClass{
 				$resid = $post['response'][$utype][$queid];
 				if($resid !=""){
 					$insert_array = array('response_option'=>$answ, 'response_remark'=>$textrepons,'updated_by'=>$post['user_id'],'updated_date'=>date('Y-m-d h:i:s'));
-					//$insert_a[] = $insert_array;
 					$callConfig->updateRecord('performance_responses_details',$insert_array,'id',$resid);
 				}else{
 					$responsdetailssql .= "('".$post['company_id']."','".$post['employee_id']."','".$post['epa_header_id']."','".$queid."','".$answ."','".$textrepons."','0','0','".date('Y-m-d h:i:s')."','".$post['user_id']."'),";
@@ -155,76 +145,15 @@ class pmsUserClass extends userClass{
 		$insert_array = array('self_score'=>$post['text_finalkra_total_employee'],'approved_score'=>$post['text_finalkra_total_manager'],'current_status'=>$post['current_status'],'updated_by'=>$post['user_id'],'updated_date'=>date('Y-m-d h:i:s'));
 		$callConfig->updateRecord('employee_performance_appraisal_headers',$insert_array,'id',$post['epa_header_id']);
 
-	//$returnaray['insertsql'] = $insertsql;
-		//$this->checkWorkFlowCriteria(array('tablename'=>'employee_performance_appraisal_headers','company_id'=>$post['company_id'],'rid'=>$post['epa_header_id']));
 
-	//$returnaray['uparray'] = $insert_a;
 		$returnaray['resupdate'] = $resupdate;
-	//$returnaray['post'] = $post;
 		return $returnaray;
 	}
 
-	// function publichAppraisal($get){
-	// 	global $callConfig;
-	// 	$returnarray = array();
-	// 	$pssal ="SELECT id,name, name, employee_start FROM performance_setup WHERE company_id =".$get['company_id']." AND id = '".$get['id']."' AND is_active = 0";
-	// 	$psres = $callConfig->getRow($pssal);
 
-	// 	$update_transaction_id = array("publish"=>"Y","updated_by"=>$get['user_id'],"updated_date"=>date('Y-m-d h:i:s'));
-	// 	$res =$callConfig->updateRecord('performance_setup',$update_transaction_id,'id',$get['id']);
-	// 	$returnarray['performance_setup'] = $res;
 
-	// 	$condition = "";
-	// 	$filtersql = "SELECT ft.id,ft.content, ft.filter_condition FROM filter_tables ft  WHERE ft.company_id = '".$get['company_id']."' AND ft.transaction_id = '".$get['id']."' AND ft.application_tablename ='performance_setup'";
-	// 	$returnarray['filtersql'] = $filtersql;
-	// 	$filterres = $callConfig->getRow($filtersql);
-	// 	if($filterres->id !="" || $filterres->content !=""){
-	// 		$show_filter_cond = $filterres->filter_condition;
-	// 		$show_filter_cond = explode('&',$show_filter_cond);
-	// 		foreach($show_filter_cond as $show_filter_co){
-	// 			$fieldname = explode("=",$show_filter_co);
-	// 			if($fieldname['0']!="check" AND $fieldname['0']!="table"){
-	// 				$show_filter_condion[$fieldname['0']]=$fieldname['1'];
-	// 			}
-	// 		}
-	// 		foreach($show_filter_condion as $keys=>$vale){
-	// 			if($vale !=""){
-	// 				$condition .= ' AND '.$keys.'  IN ('.$vale.')';
-	// 			}
-	// 		}
-	// 	}
-	// 	$employeesql = "SELECT id,user_id FROM employees WHERE is_active='0' and company_id='".$get['company_id']."' AND (date_of_leaving IS NULL OR date_of_leaving >= '".$psres->employee_start."')".$condition;
-	// 	$returnarray['employeesql'] = $employeesql;
-	// 	$employee_goals_list = $callConfig->getAllRows($employeesql);
-	// 	$empwithuser = array();
-	// 	$insert_heade = "INSERT INTO `employee_performance_appraisal_headers` (`company_id`, `appraisal_id`, `employee_id`, `assessment_year`, `is_active`, `current_status`, `created_by`, `created_date`) VALUES ";
-	// 	foreach($employee_goals_list as $employee_goals_list){
-	// 		$empwithuser[$employee_goals_list->id] = $employee_goals_list->user_id;
-	// 		$insert_heade .= "('".$get['company_id']."','".$get['id']."','".$employee_goals_list->id."','".$get['assessment_year']."','0','".ST_DRAFT."','".$get['user_id']."','".date('Y-m-d h:i:s')."'),";
-	// 	}
-	// 	$insertsql = rtrim($insert_heade, ',');
-	// 	//print_r($empwithuser);
-	// 	//$returnarray['insertsql'] = $insertsql;
-	// 	$res = $callConfig->executeQuery($insertsql);
 
-	// 	$getupdatesql ="SELECT epah.id,epah.appraisal_id,epah.employee_id,epah.assessment_year,epah.created_by FROM employee_performance_appraisal_headers epah WHERE epah.company_id = '".$get['company_id']."' AND epah.appraisal_id = '".$get['id']."' AND is_active = 0";
-	// 	$getupdateres = $callConfig->getAllRows($getupdatesql);
-	// 	$returnarray['getupdateres'] = $getupdateres;
-	// 	foreach($getupdateres as $getupdatere){
-	// 		$update_emp_goal = "UPDATE employee_goals eg, appraisal_key_result_areas kra SET eg.epa_header_id = '".$getupdatere->id."' WHERE eg.company_id = '".$get['company_id']."' AND eg.key_reslut_id = kra.id AND kra.appraisal_id = '".$get['id']."' AND eg.employee_id = '".$getupdatere->employee_id."' AND eg.assessment_year = '".$getupdatere->assessment_year."' AND eg.company_id = kra.company_id AND eg.is_active = kra.is_active AND eg.is_active = 0";
-	// 		$assetupdate = $callConfig->executeQuery($update_emp_goal);
-	// 		$returnarray['employee_goals'][] = $update_emp_goal;
-	// 		if(isset($empwithuser[$getupdatere->employee_id])){
-	// 			$user_ids = array('0'=>$empwithuser[$getupdatere->employee_id]);
-	// 			$option = "COM_INSERT_PERFORMANCE_APPRAISALS";
-	// 			$msg = "performanc appraisal - ".$getupdatere->id."(".$getupdatere->assessment_year.")";
-	// 			$notdataa = array('company_id'=>$get['company_id'],'notification_message'=>$msg, 'id'=>$getupdatere->id,'application_table_name'=>'employee_performance_appraisal_headers', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
-	// 			$sendnotification = $this->tosendnotifiations($notdataa);
-	// 		}
 
-	// 	}
-	// return $returnarray;
-	// }
 	/**function getPerFormanceAppraisalReport($get){
 		global $callConfig;
 		$returnaray = array();
@@ -314,19 +243,7 @@ class pmsUserClass extends userClass{
 			}
 			$retuenres['performance_appraisal_setups'] = $performance_appraisal_setups;
 
-			// $pasettingsql = "SELECT pas.id, pas.performance_appraisal_name, pas.assessment_year FROM performance_appraisal_setups pas, employee_performance_appraisals epa WHERE pas.company_id = '".$get['company_id']."' AND pas.company_id = epa.company_id AND pas.id = epa.appraisal_id ".$condition." AND pas.is_active = 0 AND pas.is_active = epa.is_active group by pas.id,pas.assessment_year";
-			// $pasettingres = $callConfig->getAllRows($pasettingsql);
-			// $idds = array();
-			// foreach($pasettingres as $ress){
-			// 	$idds[] = $ress->id;
-			// }
-			// $psid = implode(',', (array)$idds);
-			// $retuenres['performance_appraisal_setups'] = $pasettingres;
 
-			// $epahlsql = "SELECT epah.id, epah.appraisal_id, epah.employee_id, epah.assessment_year, epah.hr_user_id,epah.current_status, emp.emp_code, emp.display_name, emp.image,epah.self_score,epah.approved_score FROM employee_performance_appraisal_headers epah, employees emp WHERE epah.company_id = '".$get['company_id']."' AND epah.company_id = emp.company_id AND epah.employee_id = emp.id AND epah.is_active = emp.is_active AND epah.is_active = 0 AND epah.appraisal_id IN(".$psid.") ".$condition;
-			// $epahlres = $callConfig->getAllRows($epahlsql);
-			// $retuenres['employee_performance_appraisal_headers_Sql'] = $epahlsql;
-			// $retuenres['employee_performance_appraisal_headers'] = $epahlres;
 
 		}else{
 
@@ -498,7 +415,6 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 		$return = array();
 		$passql ="SELECT * FROM performance_appraisal_setups WHERE company_id =".$get['company_id']." AND id = '".$get['rid']."' AND is_active = 0";
 		$pasres = $callConfig->getRow($passql);
-		//$return['performance_appraisal_setups_sql'] = $passql;
 		$return['performance_appraisal_setups'] = $pasres;
 
 		$filter_tablessql ="SELECT id FROM filter_tables WHERE company_id =".$get['company_id']." AND transaction_id = '".$get['rid']."' AND application_tablename ='performance_appraisal_setups' AND is_active = 0";
@@ -565,7 +481,6 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 				$returnarray['insert'][] = $insert;
 			}
 		}
-		//$returnarray['insert'] = $insert;
 		$return = $returnarray;
 		return $return;
 	}
@@ -608,9 +523,6 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 			$kpires = $callConfig->getAllRows($kpisql);
 			$retuenres['kpilist'] = $kpires;
 
-			// $performance_setupsql = "SELECT id,name FROM performance_setup WHERE  company_id = '".$get['company_id']."'  AND  id='".$get['appraisal_id']."' AND is_active = 0 ";
-			// $performance_setupres = $callConfig->getRow($performance_setupsql);
-			// $retuenres['performance_setup'] = $performance_setupres;
 
 		}
 		return $retuenres;
@@ -688,10 +600,6 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 		$insertkpires = $callConfig->executeQuery($insertkpi);
 		$returnara['insertkpiresres'] =$insertkpires;
 		$returnara['insertkpiressql'] =$insertkpi;
-		// $inserttask = "INSERT INTO `appraisal_kpi_tasks`(`company_id`, `kpi_id`, `task_name`, `description`, `task_shot_code`, `task_frequency`, `mandatory`, `is_active`, `current_status`,`created_date`, `created_by`) SELECT `company_id`, (SELECT id FROM appraisal_key_performance_indicators akpi WHERE kpi_tasks.company_id =akpi.company_id AND kpi_tasks.kpi_id = akpi.kpi_id) kpi_ids, `task_name`, `description`, `task_shot_code`, `task_frequency`, `mandatory`, '0','0',`created_date`, `created_by` FROM `kpi_tasks`  WHERE kpi.company_id = '".$get['company_id']."' AND kpi.is_active = 0";
-		// $insertres = $callConfig->executeQuery($inserttask);
-		// $returnara['insertres'] =$insertres;
-		// $returnara['insertressql'] =$inserttask;
 		return $returnara;
 	}
 	public function getorganizationgoalcheck($get){
@@ -812,29 +720,8 @@ public function insertGoalData($get,$post){
 		$formtable = '';
 		$where = '';
 		$select = '';
-		// if($post['inserttype'] =="OLD"){
-		// 	$updatesql = "UPDATE `organization_goals` SET is_active=NULL WHERE id IN(".$post['organization_goalsidd'].")";
-		// 	$returnaray['updatesql'] = $updatesql;
-		// 	$callConfig->executeQuery($updatesql);
-		// 	$updatesql = "DELETE FROM `employee_goals` WHERE key_performance_id IN(".$post['organization_goalsidd'].")";
-		// 	$returnaray['updatesql'] = $updatesql;
-		// 	$callConfig->executeQuery($updatesql);
-		// }
 		$kra_ids = implode(',', (array)$post['kra_ids']);
 		$locatdepdesignatio =  json_decode($post['locatdepdesignatio'],1);
-	// if($post['department_id'] !=""){
-	// 	$ids = implode(',', json_decode($post['department_id'],1));
-	// 	$where .= " AND kra.company_id = dept.company_id AND dept.id IN(".$ids.")";
-	// }
-	// if($post['designation_id'] !=""){
-	// 	$ids = implode(',', json_decode($post['designation_id'],1));
-	// 	$where  .= " AND kra.company_id = jt.company_id AND jt.id  IN(".$ids.")";
-	// }
-	// if($post['location_id'] !=""){
-	// 	$ids = implode(',', json_decode($post['location_id'],1));
-	// 	$where  .= " AND kra.company_id = loc.company_id AND loc.id  IN(".$ids.")";
-	// }
-	//$sql = "SELECT  kra.id kra_id,kpi.id kpi_id, kpi.indicator_name, kpi.weightage, kpi.model,kpi.uom ,kpi.display_sequence, dept.id dept_id, jt.id desg_id , loc.id loc_id FROM appraisal_key_result_areas kra, appraisal_key_performance_indicators kpi, departments dept, job_titles jt, locations loc WHERE kra.company_id = '".$post['company_id']."'  AND kra.id IN(".$kra_ids.") AND kra.id = kpi.key_reslut_id ".$where;
 
 	$sql = "SELECT akra.id kra_id,akpi.id kpi_id FROM appraisal_key_result_areas akra, appraisal_key_performance_indicators akpi WHERE akra.company_id = '".$post['company_id']."' AND akra.company_id =akpi.company_id AND akra.id IN(".$kra_ids.") AND akra.id = akpi.key_reslut_id AND akra.is_active = akpi.is_active";
 	$returnaray['getemployee_sql'] = $sql;
@@ -868,11 +755,6 @@ public function insertGoalData($get,$post){
 		}
 	}
 
-	// if(isset($res['LASTID'])){
-	// 	$employee_goals = "INSERT INTO `employee_goals`(`company_id`, `employee_id`, `assessment_year`, `indicator_name`, `key_reslut_id`,`key_performance_id`, `weightage`, `model`, `uom`,`assessment_frequency`, `traget`, `is_active`, `current_status`, `created_date`, `created_by`) SELECT '".$post['company_id']."',emp.id,og.assessment_year,og.indicator_name,og.key_reslut_id,og.key_performance_id,og.weightage,og.model, og.uom,og.assessment_frequency ,og.traget,0,0,'".date('Y-m-d h:i:s')."','".$post['user_id']."' FROM organization_goals og, employees emp, appraisal_key_result_areas kra  WHERE og.company_id ='".$post['company_id']."' AND og.assessment_year = '".$post['assessment_year']."' AND kra.appraisal_id = '".$post['appraisal_id']."' AND kra.id = og.key_reslut_id AND og.company_id = emp.company_id AND og.company_id = kra.company_id AND og.job_title_id = emp.job_title_id AND og.department_id = emp.department_id AND og.location_id = emp.location_id AND emp.is_active = 0 AND emp.is_active = og.is_active AND emp.is_active = kra.is_active AND kra.id IN(".$kra_ids.")";
-	// 	$res = $callConfig->executeQuery($employee_goals);
-	// 	$returnaray['employee_goals'] = $employee_goals;
-	// }
 	$returnaray['insertsql'] = $insertsql;
 	$returnaray['max'] = $sql;
 	$returnaray['checkmenyrows'] = $checkmenyrows;
@@ -909,47 +791,9 @@ public function pmsDashboard1($get){
 	}
 
 
-// function pmsDashboard2($get){
-// 	global $callConfig;
-// 	$return = array();
-// 	$performance_setupsql = "SELECT id, name,assessment_year FROM performance_setup WHERE company_id = '".$get['company_id']."' AND is_active = 0 ORDER BY assessment_start_date DESC";
-// 	$performance_setupres = $callConfig->getAllRows($performance_setupsql);
-// 	$return['performance_setup'] = $performance_setupres;
-// 	if($get['appraisal_id'] ==""){
-// 		$performance_setup_id = $performance_setupres[0]->id;
-// 	}else{
-// 		$performance_setup_id = $get['appraisal_id'];
-// 	}
-// 	$return['performance_setup_id'] =$performance_setup_id;
-// 	$sql = "SELECT epah.employee_id, epah.hr_user_id, epah.finance_user_id, epah.self_score, epah.approved_score, epah.current_status,emp.display_name,emp.image,emp.joining_date FROM employee_performance_appraisal_headers epah, employees emp WHERE epah.company_id = '".$get['company_id']."' AND epah.appraisal_id = '".$performance_setup_id."' AND epah.hr_user_id = '336' AND epah.employee_id = emp.id AND epah.is_active =emp.is_active AND epah.is_active = 0";
-// 	$res1=$callConfig->getAllRows($sql);
-// 	foreach($res1 as $res_1){
-// 		if($res_1->joining_date >= date('Y-01-01')){
-// 			$empidthisyearjoin[$res_1->employee_id] =$res_1->employee_id;
-// 		}
-// 		$empid[$res_1->employee_id] =$res_1->employee_id;
-// 		$return['my_team'][] = $res_1;
-// 	}
 
-// 	$return['employee_performance_appraisal_headers'] = $empidthisyearjoin;
-// //AND eg.employee_id  IN(".implode(",",(array)$emoid).")
-// 	$listorg_goal_sql = "SELECT eg.employee_id,eg.indicator_name,akra.id akra_id,akra.area_name, eg.weightage, eg.assessment_frequency, eg.traget, eg.self_achievement, eg.approved_achievement, eg.approved_score FROM employee_goals eg, appraisal_key_result_areas akra WHERE eg.company_id = '".$get['company_id']."' AND eg.company_id = akra.company_id AND eg.key_reslut_id = akra.id AND akra.appraisal_id = '".$performance_setup_id."' AND eg.employee_id  IN(".implode(",",(array)$empid).") AND eg.is_active = 0 AND eg.is_active = akra.is_active";
-// 	$listgoals = $callConfig->getAllRows($listorg_goal_sql);
-// 	foreach($listgoals as $listgoal){
-// 		if(isset($empidthisyearjoin[$listgoal->employee_id])){
-// 			$return['new_hierd_employee_goals'][] = $listgoal;
-// 		}
 
-// 	}
-// 	$org_goal_sql = "SELECT eg.indicator_name,akra.id akra_id,akra.area_name, eg.weightage, eg.assessment_frequency, eg.traget, eg.self_achievement, eg.approved_achievement, eg.approved_score FROM employee_goals eg, appraisal_key_result_areas akra WHERE eg.company_id = '".$get['company_id']."' AND eg.company_id = akra.company_id AND eg.key_reslut_id = akra.id AND akra.appraisal_id = '".$performance_setup_id."' AND eg.employee_id = '".$get['employee_id']."' AND eg.is_active = 0 AND eg.is_active = akra.is_active";
-// 	$listgoal = $callConfig->getAllRows($org_goal_sql);
-// 	$return['employee_goals'] = $listgoal;
 
-// 	$arssql = "SELECT score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-// 	$arsres = $callConfig->getAllRows($arssql);
-// 	$return['arslabs'] = $arsres;
-// 	return $return;
-// }
 
 	public function pmsDashboard2($get){
 		global $callConfig;
@@ -960,7 +804,6 @@ public function pmsDashboard1($get){
 	public function getEmployeeGoalsDetails($get){
 	global $callConfig;
 	$retuenres = array();
-		//$retuenres['scsdc'] = $get;
 	if($get['popup'] == 'Y'){
 		$org_goal_sql = "SELECT eg.indicator_name,akra.id akra_id,akra.area_name, eg.weightage, eg.assessment_frequency, eg.traget FROM employee_goals eg, appraisal_key_result_areas akra WHERE eg.company_id = '".$get['company_id']."' AND eg.company_id = akra.company_id AND eg.key_reslut_id = akra.id AND akra.appraisal_id = '".$get['appraisal_id']."' AND eg.employee_id = '".$get['emp_id']."' AND eg.is_active = 0 AND eg.is_active = akra.is_active";
 		$listgoal = $callConfig->getAllRows($org_goal_sql);
@@ -1205,19 +1048,11 @@ public function getOrganizationGoals($get){
 		}
 		$return['appraisal_key_result_areas'] = $appraisal_key_result_areas;
 
-		// $sql ="SELECT id,key_reslut_id,indicator_name,weightage,model,uom, display_sequence FROM `appraisal_key_performance_indicators` WHERE company_id =".$get['company_id']." AND appraisal_id = '".$epares->appraisal_id."' AND is_active = 0";
-		// $epares2 = $callConfig->getAllRows($sql);
-		// $return['appraisal_key_performance_indicators'] = $epares2;
 
 		$organization_goal_id = json_decode($epares->organization_goal_id,1);
 		$implodeid = implode(',', (array)$organization_goal_id);
-		//$ogsql ="SELECT og.id, og.key_reslut_id, og.key_performance_id,  og.assessment_frequency, og.traget, akra.area_name, akra.description, akra.weightage as appraisal_key_result_area_weightage, akpi.indicator_name, akpi.weightage as appraisal_key_performance_indicator_weightage,  akpi.model, akpi.uom FROM organization_goals og, appraisal_key_result_areas akra, appraisal_key_performance_indicators akpi WHERE og.company_id = ".$get['company_id']." AND og.company_id = akra.company_id AND og.company_id = akpi.company_id AND og.appraisal_id ='".$epares->appraisal_id."' AND og.appraisal_id = akra.appraisal_id AND og.key_reslut_id = akra.id AND og.key_performance_id = akpi.id AND og.id IN(".$implodeid.") AND og.is_active = 0 AND og.is_active = akra.is_active";
 		$ogsql ="SELECT og.id, og.key_reslut_id, og.key_performance_id,  og.assessment_frequency, og.traget, akpi.indicator_name, akpi.weightage as appraisal_key_performance_indicator_weightage,  akpi.model, akpi.uom FROM organization_goals og, appraisal_key_performance_indicators akpi WHERE og.company_id = ".$get['company_id']." AND og.company_id = akpi.company_id AND og.appraisal_id ='".$epares->appraisal_id."' AND og.key_performance_id = akpi.id AND og.id IN(".$implodeid.") AND og.is_active = 0 AND og.is_active = akpi.is_active";
 		$organization_goals = $callConfig->getAllRows($ogsql);
-		// $organization_goals = array();
-		// foreach($ogres as $og){
-		// 	$organization_goals[$og->key_reslut_id][]= $og;
-		// }
 		$return['organization_goals'] = $organization_goals;
 
 
@@ -1277,7 +1112,6 @@ public function getOrganizationGoals($get){
 		$self_achived = json_encode($post['self_achived']);
 		$ro_achived= json_encode($post['ro_achived']);
 		$insert_array = array('self_achived'=>$self_achived,'ro_achived'=>$ro_achived,'self_total'=>$post['self_total'],'ro_total'=>$post['ro_total'],'performance_appraisal_questions'=>$performance_appraisal_questions,'employee_comment'=>$post['employee_comment'],'ro_comment'=>$post['ro_comment'],'hod_comment'=>$post['hod_comment'],'workflow_approval_level'=>$post['workflow_approval_level'],'self_appraisal_rating_slab_id'=>$self_appraisal_rating_slab_id,'ro_appraisal_rating_slab_id'=>$ro_appraisal_rating_slab_id);
-		// $insert_array = array('performance_appraisal_questions'=>$performance_appraisal_questions);
 		$insert_array['updated_by'] = $post['userid'];
 		$insert_array['updated_date'] = date('Y-m-d h:i:s');
 		$insert = $callConfig->updateRecord('employee_performance_appraisals',$insert_array,'id',$post['rid']);
@@ -1505,7 +1339,6 @@ public function getOrganizationGoals($get){
 			$employeesidsql = "SELECT GROUP_CONCAT(id SEPARATOR ',') AS id FROM employees WHERE company_id='".$get['company_id']."' ".$emp_condition." AND is_active=0";
 			$return['reports_to'] = $employeesidsql;
 			$employeesids = $callConfig->getRow($employeesidsql);
-			//if(isset($employeesids->id)){
 				$condition = " AND employee_id IN(".$employeesids->id.")";
 			//}
 			$epasql = "SELECT * FROM employee_performance_appraisals WHERE company_id = '".$get['company_id']."' AND normalization_status = '0' ".$condition." AND is_active = 0";

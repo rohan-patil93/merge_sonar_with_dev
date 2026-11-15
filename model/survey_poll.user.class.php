@@ -16,7 +16,6 @@ class surveyPollUserClass extends userClass
 		$whr="company_id=".$get['company_id']." and is_active='0' and survey_id=".$get['survey_id'];
 		$query=$callConfig->selectQuery(TBL_SURVEY_SETUP_QUESTIONS,'*',$whr,'','','');
 		$details['survey_qustion_details'] = $callConfig->getAllRows($query);
-        	//print_r($whr); exit;
 
 		$whr="company_id=".$get['company_id']." and is_active='0' and survey_id=".$get['survey_id'];
 		$query=$callConfig->selectQuery(TBL_SURVEY_SETUP_QUESTION_OPTIONS,'*',$whr,'','','');
@@ -34,7 +33,6 @@ class surveyPollUserClass extends userClass
 		$whr2="company_id=".$get['company_id']." and is_active='0' and genc_code='SURVEY_QTYPE'";
 		$query=$callConfig->selectQuery('general_code_details','genc_detail_code,genc_detail_name',$whr2,'','','');
 		$details['qustion_types'] = $callConfig->getAllRows($query);
-     //  echo '<pre>'; print_r($details['survey_qustion_details']); exit;
 		return $details;
 	}
 
@@ -63,10 +61,8 @@ class surveyPollUserClass extends userClass
 		foreach($shared_ids1 as $ids){
 			$shared_idslist[]= $ids['id_value'];
 		}
-		// $main['assigned_to_employees'] = json_encode($shared_idslist,1);
 		$main['assigned_to_employees'] = json_encode((array)$shared_idslist);
 		$main['assigned_to_count']  = count((array)$shared_idslist);
-    	//print_r($main);exit;
 		if($rowid=="") {
 			$array = array('company_id'=>$main['company_id'],'is_active'=>'0','created_by'=>$main['created_by'],'created_date'=>$main['created_date']);
 			$res=$callConfig->insertRecord($table_setup,$main);
@@ -107,14 +103,13 @@ class surveyPollUserClass extends userClass
 				$value['survey_id'] = $rowid;
 				$survey_question_option['survey_question_option'] = $value['survey_question_option'];
 				$survey_question_option['survey_id'] = $rowid;
-    				$question_id = $value['question_id'];//exit;
+    				$question_id = $value['question_id'];
     				unset($value['survey_question_option']);
     				unset($value['question_id']);
     				unset($value['rid']);
     				$quesion_array = array_merge($value,$array);
     				if($question_id!=''){
     					$qres=$callConfig->updateRecord($table_questions,$quesion_array,'id',$question_id);
-    					//$survey_question_option['question_id'] = $question_id;
     					$answer_array = array_merge($survey_question_option,$array);
     					$qrespons=$callConfig->updateRecord($table_options,$answer_array,'question_id',$question_id);
     				}else{
@@ -205,7 +200,6 @@ class surveyPollUserClass extends userClass
     		$presponse = $callConfig->getRow($queryresponse);
 
     		$details['summary'][] = array('data'=>$presponse->partial==''?'0':$presponse->partial,'name'=>'Partial','bgcolor'=>'warning');
-    //	$details['summary'][] = array('data'=>($sresponse->total_surveys-$response->total_responses)==''?'0':($sresponse->collectors-$response->total_responses),'name'=>'Incomplete','bgcolor'=>'info');
 
     		$details['summary'][] = array('data'=>$response->avg_duration_taken==''?'0':$response->avg_duration_taken,'name'=>'Avg Time','bgcolor'=>'dark');
     		if($sresponse->total_surveys>0){
@@ -219,7 +213,6 @@ class surveyPollUserClass extends userClass
     		$whr="company_id=".$get['company_id']." and is_active='0' and category=".$get['category'].$condition;
     		$query=$callConfig->selectQuery(TBL_SURVEY_SETUP,'*',$whr,'','','');
     		$response = $callConfig->getAllRows($query);
-			// return $response;
     		foreach($response as $svalues){
     			$surveyvalues = array('survey_id'=>$svalues->id,'survey_name'=>$svalues->survey_name,'survey_start_date'=>date('d M, Y',strtotime($svalues->survey_start_date)),'survey_end_date'=>date('d M, Y',strtotime($svalues->survey_end_date)),'current_status'=>$svalues->current_status);
     			$whr="company_id=".$get['company_id']." and is_active='0' and survey_id=".$svalues->id;
@@ -291,7 +284,6 @@ class surveyPollUserClass extends userClass
     		$queryresponse = "SELECT * FROM ".TBL_SURVEY_RESPONSES." WHERE is_active=0 and company_id=".$get['company_id']." and survey_id=".$get['survey_id']." group by employee_id";
     		$response = $callConfig->getAllRows($queryresponse);
     		$details['response'] = $response;
-    	//echo "<pre>"; print_r($details);
     		return $details;
     	}
 
@@ -396,7 +388,6 @@ class surveyPollUserClass extends userClass
     			}
     		}
     		$details['maxoptions'] = $maxoptions;
-    	//echo "<pre>"; print_r($details);
     		return $details;
     	}
 
@@ -411,7 +402,6 @@ class surveyPollUserClass extends userClass
     			$whr="company_id=".$get['company_id']." and is_active='0' and category=".$get['category']." and id=".$list->survey_id." AND survey_type!='".EXITE_INTERVIEW_TYPE."'";
     			$query=$callConfig->selectQuery(TBL_SURVEY_SETUP,'*',$whr,'','','');
     			$response = $callConfig->getAllRows($query);
-    	//print_r($response);
 
     			foreach($response as $svalues){
     				$survyidlist[] = $svalues->id;
@@ -472,7 +462,6 @@ class surveyPollUserClass extends userClass
                 	$survey_qtypes[$qustion_types->genc_detail_name] = $qresponse->totaltypequestion;
                 }
                 $details['survey_qtypes'] = $survey_qtypes;
-    //	echo "<pre>"; print_r($details);exit;
 
                 return $details;
             }
@@ -573,7 +562,6 @@ class surveyPollUserClass extends userClass
 		$totalEmployeeCount = (int)$empCountRow->total_employees;
 
 		$surveyQuery = "SELECT * FROM ".TBL_SURVEY_SETUP." WHERE is_active='0' AND company_id='".$companyId."' AND category='".$category."' AND survey_type!='".EXITE_INTERVIEW_TYPE."' ORDER BY created_date DESC";
-		// echo $surveyQuery; exit;
 		$surveyRows = $callConfig->getAllRows($surveyQuery);
 
 		$surveyMeta = array();
@@ -582,7 +570,6 @@ class surveyPollUserClass extends userClass
 		$nowTs = time();
 		$last30Start = strtotime('-30 days', $nowTs);
 		$prev30Start = strtotime('-60 days', $nowTs);
-		// echo count((array)$surveyRows); exit;
 
 		if(count((array)$surveyRows) > 0){
 			foreach($surveyRows as $surveyRow){
@@ -1102,7 +1089,6 @@ class surveyPollUserClass extends userClass
 		global $callConfig;
 		$start = date("Y-m-d", strtotime($get['fromdate']."-01"));
 		$end = date("Y-m-t", strtotime($start));
-		//echo $start."-".$end;
 		$query = "SELECT  emp_id , work_order_id, work_order_detail_id, effective_from_date, effective_to_date,vrc_id, vrc_item_id FROM emp_work_order WHERE company_id =".$get['company_id']." AND effective_from_date <= '".$end."' AND ( effective_to_date IS NULL   OR effective_to_date >= '".$start."') AND is_active = 0 ";
     	$work_orders = $callConfig->getAllRows($query);
     	foreach($work_orders as $work_order){
@@ -1137,11 +1123,6 @@ class surveyPollUserClass extends userClass
     		}
     	}
     	if(count(array($work_order_ids))>0){
-    		/*$query = "SELECT * FROM manpower_contracts WHERE company_id =".$get['company_id']." AND id IN (".implode(",",$work_order_ids).")";
-    		$contarcts = $callConfig->getAllRows($query);
-    		foreach($contarcts as $contarct){
-    			$po[$contarct->id]=$contarct;
-    		}*/
     		$query = "SELECT  id, transaction_id, item_id, purchase_uom, min_exp, max_exp, item_price FROM mpc_items WHERE company_id =".$get['company_id']." AND id IN (".implode(",",$work_order_detail_ids).")";
     		$impcs = $callConfig->getAllRows($query);
     		foreach($impcs as $impc){
@@ -1165,7 +1146,6 @@ class surveyPollUserClass extends userClass
     	foreach($emp_data as $emp){
     		$emp_all = (array)$emp;
     		$emp_id = $emp->employee_id;
-    		//print_r($empwork[$emp->employee_id]);
     		$emp_rate_card_id = $empwork[$emp_id]['vrc_id'];
     		///print_r($card[$emp_rate_card_id]);
 			$emp_vendor_id = $card[$emp_rate_card_id]['customer_id'];
@@ -1175,7 +1155,6 @@ class surveyPollUserClass extends userClass
 			$mpc_amount = $mpc[$empwork[$emp_id]['work_order_detail_id']]['item_price'];
 			$location_id = $emp->location_id;
 
-			//echo "<pre>";print_r($loc_holiday[$location_id]); exit;
     		$emp_all['vendor_id'] = $emp_vendor_id;
     		$emp_all['vendor_name'] = $vend[$emp_vendor_id]['display_name'];
     		$emp_all['billable_hrs'] = isset($timesheet[$emp_id]['billable_hrs']) ? $timesheet[$emp_id]['billable_hrs'] :0 ;
@@ -1215,11 +1194,9 @@ class surveyPollUserClass extends userClass
 			$max_exp = $emp_all['max_exp'];
 			$remark = ($experience >= $min_exp && $experience <= $max_exp) ? '' : 'Experience Mismatch';
     		$emp_all['remark'] = $remark;
-    		//echo $emp_vendor_id; exit;
     		$return[] = $emp_all;
     	}
     	return $return;
-    	//echo "<pre>tuiop";  print_r($loc_holiday);print_r($emp_data); exit;
 	}
 	public function toretriveminhorsandweksanddayebasedondateswork($get){
 		global $callConfig;
@@ -1228,17 +1205,13 @@ class surveyPollUserClass extends userClass
 		$location_sql = "SELECT id FROM locations WHERE is_active=0 AND main_location =0 AND  company_id=".$get['company_id'];
 		$locations = $callConfig->getAllRows($location_sql);
 		$holidays = "SELECT holiday_date, location_id FROM holidays WHERE company_id=".$get['company_id']." AND holiday_date >='".$get['from_date']."' AND holiday_date <='".$get['to_date']."' AND is_active=0 ";
-		//echo $holidays;//exit;
 		$holidaysdata = $callConfig->getAllRows($holidays);
 		$holidaydates = array();
 		foreach ((array)$holidaysdata as $hkey=>$hvalue) {
 			$holidaydates[$hvalue->location_id][] = $hvalue->holiday_date;
-			//$locations_holidays[$hvalue->location_id] = $hvalue->location_id;
 		}
-		//print_r($holidaydates); //exit;
 		$attendancewhurl1 = "SELECT id,minimum_hours_required,working_days FROM attendance_settings WHERE is_active=0 and company_id=".$get['company_id'];
 		$attendance_settings = $callConfig->getRow($attendancewhurl1);
-		//print_r($attendance_settings); exit;
 		$testarrau['attendance_settings'] = $attendance_settings;
 		$minimum_hours = explode(':',$attendance_settings->minimum_hours_required);
 		$minimum_hours_required = $minimum_hours[0].'.'.$minimum_hours[1];
@@ -1246,17 +1219,14 @@ class surveyPollUserClass extends userClass
 		$work_days=0;
 		$datediff = strtotime($to) - strtotime($from);
 		$datediff = floor($datediff/(60*60*24));
-		//print_r($locations); exit;
 		foreach($locations as $location){
-			//print_r($location);
 		$work_days = 0; $offdays =0;
 		$work_dates = array();
 			for($i = 0; $i < $datediff+1; $i++){
 				$valda =  date("Y-m-d", strtotime($from . ' + ' . $i . 'day'));
 				$valday = ucwords(date("l", strtotime($from . ' + ' . $i . 'day')));
-				//echo $valday."step1".$valday."--";
 				if(in_array($valday, $weekly_working_days)){
-					if(!in_array($valda, $holidaydates[$location->id])){ //echo "step2";
+					if(!in_array($valda, $holidaydates[$location->id])){
 						$work_days = $work_days+1;
 						$work_dates[] = $valda;
 					}
@@ -1266,7 +1236,6 @@ class surveyPollUserClass extends userClass
 			}
 			$return[$location->id] = array('holidaydates'=>$holidaydates[$location->id],'count_hoilydays'=>count($holidaydates[$location->id]),'minimum_hours'=>$minimum_hours_required,'week_days'=>$weekly_working_days,'count_week'=>count($weekly_working_days),'count_working_days'=>$work_days,'work_dates'=>$work_dates,'offdays'=>$offdays,'work_hrs'=>$work_days*$minimum_hours_required);
 		}
-		//print_r($return);
 		return 	$return;
 	}
 }

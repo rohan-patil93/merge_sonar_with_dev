@@ -61,7 +61,6 @@ class recruitmentUserClass extends userClass{
 		$rm_users_sql = "SELECT id,display_name,user_email FROM application_users WHERE company_id = '".$get['company_id']."'  AND is_active = 0 AND id='".$candidatesres->rm_id."'";
 		$rm_users_res = $callConfig->getRow($rm_users_sql);
 
-		//$emailarray['candidates.job_title'] = $candidatesres->email_id;
 
 		$emailarray['rm_email_id'] = $rm_users_res->user_email;
 		$emailarray['rm_display_name'] = $rm_users_res->display_name;
@@ -122,7 +121,6 @@ class recruitmentUserClass extends userClass{
         $updateary = array('offer_latter_pdf_name'=>$filename,'updated_date'=>date("Y-m-d H:i:s"));
         $callConfig->updateRecord($transaction_table,$updateary,'id',$candidate_id);
         return $filename;
-       // return $content;
     }
 
 	/**
@@ -253,7 +251,6 @@ class recruitmentUserClass extends userClass{
 		$salary_templateres=$callConfig->getRow($salary_templatesql);
 		$returnresult['salary_template'] = $salary_templateres;
 		$salary_template_componentssql = "SELECT stc.id, stc.salary_template_id, stc.component_id, stc.component_cat_id, stc.component_name, stc.component_category, stc.component_type, stc.monthly_amount, stc.yearly_amount, ear.name, ear.display_in_salary_structure FROM salary_template_components stc, earnings ear WHERE stc.company_id = '".$get['company_id']."' AND stc.company_id = ear.company_id AND stc.salary_template_id =  '".$salary_templateres->id."' AND stc.component_id = ear.id AND stc.is_active = ear.is_active AND stc.is_active = 0 ORDER BY ear.display_seq ASC";
-		//$salary_template_componentssql = "SELECT * FROM salary_template_components WHERE company_id = '".$get['company_id']."' AND salary_template_id =  '".$salary_templateres->id."' AND is_active =0";
 		$salary_template_componentsres=$callConfig->getAllRows($salary_template_componentssql);
 		$returnresult['salary_template_components'] = $salary_template_componentsres;
 
@@ -382,8 +379,6 @@ class recruitmentUserClass extends userClass{
 	}
 	public function getrecruitmentintegdashboard($get){
 		global $callConfig;
-		//echo "<pre>";
-		//print_r($get); exit;
 		if($get['apitype'] == "candidatelistpopup"){
 			$candidatessql = "SELECT id, candidate_code, display_name, email_id, phone, skills FROM candidates WHERE company_id = '".$get['company_id']."' AND id IN(".$get['candidate_ids'].") AND is_active =0";
 			$candidatesres=$callConfig->getAllRows($candidatessql);
@@ -396,21 +391,16 @@ class recruitmentUserClass extends userClass{
 		$reportstartdate = $get['reportstartdate'];
 		$reportenddate = $get['reportenddate'];
 		$whr = ""; $whrjp="";
-		//if($get['roleshortcode']==HIRINGMANAGER_ROLE){
 		if(in_array(HIRINGMANAGER_ROLE, (array)$roleshortcodes)){
 			$whr = " AND requested_by = ".$get['user_id'];
 			$whrjp = " AND jp.requested_by = ".$get['user_id'];
 		}
-		//if($get['roleshortcode']==RECRUITINGMANAGER_ROLE){
 		if(in_array(RECRUITINGMANAGER_ROLE, (array)$roleshortcodes)){
-			//$whr = " AND recruitment_manager = ".$get['user_id'];
 			$whr = " AND (recruitment_manager = '".$get['user_id']."' AND current_status > 0)";
 			$whrjp = " AND (jp.recruitment_manager = '".$get['user_id']."' AND jp.current_status > 0)";
-			//$whrjp = " AND jp.recruitment_manager = ".$get['user_id'];
 		}
 		/*--------- Job Details ---------------- */
 		$query1 = "SELECT count(id) total_jobs , sum(if(job_status=0,1,0)) open_jobs, sum(if(job_status=1,1,0)) close_jobs, sum(if(job_status=2,1,0)) hold_jobs FROM `job_postings` where company_id = '".$get['company_id']."' AND is_active = 0 ".$whr;
-		//$query1 = "SELECT SUM(IF(recruitment_manager = '".$get['user_id']."',1,0))rm_total_jobs, SUM(if(recruitment_manager = '".$get['user_id']."' AND job_status=0,1,0)) rm_open_jobs,  SUM(if(recruitment_manager = '".$get['user_id']."' AND job_status=1,1,0)) rm_close_jobs, SUM(if(recruitment_manager = '".$get['user_id']."' AND job_status=2,1,0)) rm_hold_jobs, SUM(IF(requested_by = '".$get['user_id']."',1,0)) hm_total_jobs, SUM(if(requested_by = '".$get['user_id']."' AND job_status=0,1,0)) hm_open_jobs, SUM(if(requested_by = '".$get['user_id']."' AND job_status=1,1,0)) hm_close_jobs, SUM(if(requested_by = '".$get['user_id']."' AND job_status=2,1,0)) hm_hold_jobs FROM `job_postings` WHERE company_id = '".$get['company_id']."' AND is_active = 0 ".$whr;
 		$roleres1 = $callConfig->getRow($query1);
 		$return = (array)$roleres1;
 		$return['cnt_sql'] = $query1;
@@ -436,7 +426,6 @@ class recruitmentUserClass extends userClass{
 		$allcountdata = $callConfig->getRow($countsql);
 		$return['job_postings_count']= $allcountdata->cc;
 		/*--------- All Yet to submit  3 Job Details ---------------- */
-		//if($get['roleshortcode']==HIRINGMANAGER_ROLE){
 		if(in_array(HIRINGMANAGER_ROLE, (array)$roleshortcodes)){
 			$job_postingssql = "SELECT id, requested_date, job_number, job_name, current_status, updated_date FROM `job_postings` WHERE company_id = '".$get['company_id']."' ".$whr." AND current_status=51 AND is_active = 0  ORDER BY `updated_date` DESC LIMIT 0,3";
 			$return['job_post_status']['name'] = "Jobs Yet to Publish";
@@ -444,7 +433,6 @@ class recruitmentUserClass extends userClass{
 
 		}
 		if(in_array(RECRUITINGMANAGER_ROLE, (array)$roleshortcodes)){
-		//if($get['roleshortcode']==RECRUITINGMANAGER_ROLE){
 			$job_postingssql = "SELECT id, requested_date, job_number, job_name, current_status FROM `job_postings` WHERE company_id = '".$get['company_id']."' ".$whr." AND current_status=51 AND is_active = 0  ORDER BY `updated_date` DESC LIMIT 0,3";
 			$return['job_post_status']['name'] = "Jobs Yet to Publish";
 			$countsql = "SELECT count(id) cc FROM `job_postings` WHERE company_id = '".$get['company_id']."' ".$whr." AND current_status=51 AND is_active = 0";
@@ -473,12 +461,10 @@ class recruitmentUserClass extends userClass{
 		$allcountdata = $callConfig->getRow($countsql);
 		$return['recent_unpublish']['count']= $allcountdata->cc;
 		/*--------- Month Wise Job Details ---------------- */
-		/*$candidatessql = "SELECT id,display_name,candidate_code,reporting_date, image FROM `candidates` WHERE company_id = '".$get['company_id']."' AND is_active = 0 ORDER BY `candidates`.`id` DESC limit 0,3";*/
 		$candidatessql = "SELECT jpc.id,jpc.candidate_id ,jpc.candidate_name display_name,jpc.candidate_email, jpc.created_date,jpc.image FROM job_posting_candidates jpc,job_postings jp WHERE jpc.company_id = jp.company_id AND jpc.company_id ='".$get['company_id']."' AND jpc.job_posting_id = jp.id ".$whrjp." AND jpc.is_active = 0 ORDER BY jpc.id DESC limit 0,3";
 		$candidatesres = $callConfig->getAllRows($candidatessql);
 		$return['candidates'] = $candidatesres;
 
-		//$condidate_postingssql = "SELECT jpc.job_posting_id,COUNT(ca.id) as apply_total, SUM(IF(ca.current_status >'30', 1,0)) AS filter_cnt, SUM(IF(ca.current_status ='30', 1,0)) AS reject_cnt FROM job_posting_candidates jpc, candidates ca where jpc.company_id = ca.company_id AND ca.company_id = ".$get['company_id']." AND jpc.candidate_id = ca.id AND ca.is_active = 0 GROUP BY job_posting_id";
 		$condidate_postingssql = "SELECT jpc.job_posting_id,COUNT(jpc.id) as apply_total,SUM(IF(ca.current_status =".ST_RMSHORTLISTED.", 1,0)) AS rm_shortlisted,SUM(IF(ca.current_status =".ST_HMSHORTLISTED.", 1,0)) AS hm_shortlisted, SUM(IF(ca.current_status =".ST_LOIREQUESTED.", 1,0)) AS loi_requested, SUM(IF(ca.current_status =".ST_LOIGENERATED.", 1,0)) AS loi_generated, SUM(IF(ca.current_status =".ST_LOIACCEPTED.", 1,0)) AS loi_accepted,SUM(IF(ca.current_status =".ST_REJECTED.", 1,0)) AS loi_rejected,  SUM(IF(ca.current_status >'30', 1,0)) AS filter_cnt FROM job_posting_candidates jpc, candidates ca where jpc.company_id = ca.company_id AND ca.company_id = ".$get['company_id']." AND jpc.candidate_id = ca.id AND jpc.is_active = 0 GROUP BY job_posting_id";
 		$condidate_postingsres = $callConfig->getAllRows($condidate_postingssql);
 		$job_posting_candidates = array();
@@ -545,7 +531,6 @@ class recruitmentUserClass extends userClass{
 		$return['approved_job_candidate_interview_schedules'] = $job_candidate_interview_schedules;
 
 
-		//$candidatesql = "SELECT COUNT(can.id) AS total_candidates, COUNT(DISTINCT jpc.candidate_id) AS linked_candidates, COUNT(can.id) - COUNT(DISTINCT jpc.candidate_id) AS unlinked_candidates, COUNT(DISTINCT CASE WHEN jpc.ai_shortlisted = 'HOLD' THEN jpc.candidate_id END) AS hold_count, COUNT(DISTINCT CASE WHEN jpc.ai_shortlisted = 'PROCEED' THEN jpc.candidate_id END) AS proceed_count, COUNT(DISTINCT CASE  WHEN jpc.ai_shortlisted = 'REJECT' THEN jpc.candidate_id END) AS reject_count, COUNT(DISTINCT CASE WHEN jpc.screening_status = 'Y' THEN jpc.candidate_id END) AS screening_started, COUNT(DISTINCT CASE WHEN jpc.screening_status = 'N' THEN jpc.candidate_id END) AS screening_not_started FROM candidates can LEFT JOIN job_posting_candidates jpc ON jpc.candidate_id = can.id AND jpc.company_id = can.company_id AND jpc.is_active = can.is_active WHERE can.company_id = '".$get['company_id']."' AND can.is_active = 0";
 		$candidatesql = "SELECT COUNT(can.id) AS total_candidates, GROUP_CONCAT(DISTINCT can.id) AS total_candidate_ids, COUNT(DISTINCT jpc.candidate_id) AS linked_candidates, GROUP_CONCAT(DISTINCT CASE WHEN jpc.candidate_id IS NOT NULL THEN can.id END) AS linked_candidate_ids, COUNT(can.id) - COUNT(DISTINCT jpc.candidate_id) AS unlinked_candidates,GROUP_CONCAT(DISTINCT CASE WHEN jpc.candidate_id IS NULL THEN can.id END) AS unlinked_candidate_ids, COUNT(DISTINCT CASE WHEN jpc.ai_shortlisted = 'HOLD' THEN jpc.candidate_id END) AS hold_count,    GROUP_CONCAT(DISTINCT CASE WHEN jpc.ai_shortlisted = 'HOLD' THEN can.id END) AS hold_candidate_ids, COUNT(DISTINCT CASE WHEN jpc.ai_shortlisted = 'PROCEED' THEN jpc.candidate_id END) AS proceed_count, GROUP_CONCAT(DISTINCT CASE WHEN jpc.ai_shortlisted = 'PROCEED' THEN can.id END) AS proceed_candidate_ids,COUNT(DISTINCT CASE WHEN jpc.ai_shortlisted = 'REJECT' THEN jpc.candidate_id END) AS reject_count,  GROUP_CONCAT(DISTINCT CASE WHEN jpc.ai_shortlisted = 'REJECT' THEN can.id END) AS reject_candidate_ids, COUNT(DISTINCT CASE WHEN jpc.screening_status = 'Y' THEN jpc.candidate_id END) AS screening_started, GROUP_CONCAT(DISTINCT CASE WHEN jpc.screening_status = 'Y' THEN can.id END) AS screening_started_ids, COUNT(DISTINCT CASE WHEN jpc.screening_status = 'N' THEN jpc.candidate_id END) AS screening_not_started, GROUP_CONCAT(DISTINCT CASE WHEN jpc.screening_status = 'N' THEN can.id END) AS screening_not_started_ids FROM candidates can LEFT JOIN job_posting_candidates jpc ON jpc.candidate_id = can.id AND jpc.company_id = can.company_id AND jpc.is_active = can.is_active WHERE can.company_id = '1' AND can.is_active = 0";
 		$candidateres = $callConfig->getRow($candidatesql);
 		$return['candidate_dashboard'] = $candidateres;

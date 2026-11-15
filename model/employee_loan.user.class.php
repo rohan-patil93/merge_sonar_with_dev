@@ -228,7 +228,6 @@ class employeeLoanClass extends userClass
 		$return['query'] = $query;
 		$result['result'] = $callConfig->getAllRows($query);
 
-		// $query = "SELECT id, vehicle_reg_no, model, model_group, vehicle_type FROM transport_vehicle_master WHERE company_id = $company_id AND is_active = 0";
 		$query = "SELECT m.id, m.vehicle_reg_no, m.model, m.model_group, m.vehicle_type FROM transport_vehicle_master m WHERE  m.vehicle_reg_no !='' AND vehicle_reg_no NOT IN ( SELECT vehicle_number FROM transport_gateway WHERE `process_val` =0 AND is_active = 0 ) AND m.company_id = $company_id AND m.is_active =0 AND m.vehicle_type='demo'";
 		$result['transport_vehicle_master'] = $callConfig->getAllRows($query);
 
@@ -340,83 +339,18 @@ class employeeLoanClass extends userClass
         return $return;
     }
 
-	// function getVehicleGatewayList($get)
-	// {
-	// 	global $callConfig;
-	// 	$return['get'] = $get;
-
-	// 	$company_id = $get['company_id'] ?? $_SESSION['company_id'];
-	// 	$where = "company_id = " . $company_id . " AND is_active = 0";
-
-	// 	if (!empty($get['from_date']) && !empty($get['to_date'])) {
-	// 		$where .= " AND ((entry_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "') OR (exit_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "'))";
-	// 	} elseif (!empty($get['from_date'])) {
-	// 		$where .= " AND (entry_date >= '" . $get['from_date'] . "' OR exit_date >= '" . $get['from_date'] . "')";
-	// 	} elseif (!empty($get['to_date'])) {
-	// 		$where .= " AND (entry_date <= '" . $get['to_date'] . "' OR exit_date <= '" . $get['to_date'] . "')";
-	// 	}
-
-	// 	$limit = !empty($get['limit']) ? $get['limit'] : '';
-	// 	$query = $callConfig->selectQuery("transport_gateway", '*', $where, 'created_date DESC', '', $limit);
-	// 	$rows = $callConfig->getAllRows($query);
-
-	// 	$vehicles = array();
-	// 	foreach ($rows as $row) {
-	// 		$vehicles[] = array(
-	// 			'id' => $row->id,
-	// 			'vehicle_number' => $row->vehicle_number,
-	// 			'vehicle_type' => $row->vehicle_type,
-	// 			'driver_name' => $row->driver_name,
-	// 			'driver_contact' => $row->driver_contact,
-	// 			'visit_purpose' => $row->visit_purpose,
-	// 			'visiting_person' => $row->visiting_person ?? '',
-	// 			'location' => $row->location ?? '',
-	// 			'method_type' => $row->method_type ?? 'entry_first',
-	// 			'entry_date' => $row->entry_date,
-	// 			'entry_time' => $row->entry_time,
-	// 			'entry_timestamp' => $row->entry_timestamp,
-	// 			'exit_date' => $row->exit_date,
-	// 			'exit_time' => $row->exit_time,
-	// 			'exit_timestamp' => $row->exit_timestamp,
-	// 			'current_status' => $row->current_status
-	// 		);
-	// 	}
-	// 	$return['vehicles'] = $vehicles;
-
-	// 	return $return;
-	// }
 
 
-	// function gettransportvehiclemasterlist($get)
-    // {
-    //     global $callConfig;
-    //     $return = array();
-    //     $company_id = $get['company_id'];
-    //     $statusQuery = "SELECT id, name, name_value, background_color, color FROM status WHERE company_id = " . $company_id . "  AND is_active = 0";
-    //     $statusList = $callConfig->getAllRows($statusQuery);
-    //     $return['status_list'] = $statusList;
 
-    //     $where = "company_id = ".$company_id;
-    //     if (isset($get['is_active']) && $get['is_active'] !== '') {
-    //         $where .= " AND is_active = " . intval($get['is_active']);
-    //     } else {
-    //         $where .= " AND is_active IS NOT NULL";
-    //     }
 
-    //     if (!empty($get['from_date']) && !empty($get['to_date'])) {
-    //         $from_date = $get['from_date'];
-    //         $to_date = $get['to_date'];
-    //         $where .= " AND DATE(created_date) BETWEEN '" . $from_date . "' AND '" . $to_date . "'";
-    //     }
 
-    //     $query = $callConfig->selectQuery('transport_vehicle_master', '*', $where, 'vehicle_reg_no ASC', '', '');
-    //     $vehicles = $callConfig->getAllRows($query);
 
-    //     $return['vehicles'] = $vehicles;
-    //     $return['query'] = $query;
 
-    //     return $return;
-    // }
+
+
+
+
+
 
 	public function getpersonalgatewayold($get)
     {
@@ -952,11 +886,6 @@ class employeeLoanClass extends userClass
 		}
 
 		$res = $callConfig->insertRecord('transport_gateway', $fieldnames);
-		// if ($res['status'] == 'sucess' && isset($post['vehicle_ownership']) && $post['vehicle_ownership'] == 'company') {
-		// 	if (!isset($post['vehicle_found_in_lookup']) || $post['vehicle_found_in_lookup'] !== true) {
-		// 		$this->addVehicleToTransportsTable($get, $post);
-		// 	}
-		// }
 		return $res;
 	}
 
@@ -2456,7 +2385,6 @@ class employeeLoanClass extends userClass
 				  AND e." . $buddy_type . "='" . $from_buddy . "'";
 
 		$employees = $callConfig->getAllRows($query);
-        // return $employees;
 
 
 		$affected_employees = array();
@@ -3030,7 +2958,6 @@ class employeeLoanClass extends userClass
 	          AND is_active = 0 
 	    ";
 	    $rows = $callConfig->getAllRows($query);
-	    //print_r($rows); exit;
 	    $updated = [];
 
 	    foreach($rows as $row){
@@ -3041,7 +2968,6 @@ class employeeLoanClass extends userClass
 	        $clock_out     = $row->clock_out ?? '';
 
 	        $attendance_key_short_code = "";
-	        //print_r($row); exit;
 	        /* Step 2: MP logic */
 	        if(
 	            ($clock_in != '' && $clock_in != '00:00:00' && $clock_in != '00:00') &&
@@ -3080,14 +3006,11 @@ class employeeLoanClass extends userClass
 	                                AND company_id = {$get['company_id']} 
 	                                AND is_active = 0";
 	                    $data3 = $callConfig->getRow($query);
-	                    //echo "<pre>"; print_r($row); print_r($data1);print_r($data2);print_r($data3); exit;
 	                    if(!empty($data3)){
 
 	                    	$clockInDate = $row->clock_in_date;
 	                    	$clockOutDate = $row->clock_out_date;
 
-	                       // $in  = strtotime($clock_in);
-	                        //$out = strtotime($clock_out);
 	                        $clockInTime  = $clock_in;
 	                        $clockOutTime = $clock_out;
 
@@ -3096,7 +3019,6 @@ class employeeLoanClass extends userClass
 
 	                        if($out > $in){
 
-	                            //$workedMinutes = ($out - $in) / 60;
 	                           $workedMinutes =  ($out->getTimestamp() - $in->getTimestamp()) / 60;
 
 	                            list($fd_h, $fd_m) = explode(':', $data3->minimum_hours_required);
@@ -3113,14 +3035,8 @@ class employeeLoanClass extends userClass
 								$graceMinutes = ($g_h * 60) + $g_m;
 
 								$nclockIn      = $data2->clock_in;$ngracePeriod  = $data3->grace_perieod;
-								/*$clockInTime = new DateTime($nclockIn);
-								$clockInTime->modify('+' . $ngracePeriod);
-								$check_grace = $clockInTime->format('H:i:s');*/
 								$seconds =   (strtotime($nclockIn) - strtotime('today')) + (strtotime($ngracePeriod) - strtotime('today'));
 								$check_grace = gmdate('H:i:s', $seconds);
-								//echo $nclockIn."//".$ngracePeriod."//";
-								//echo "<pre>".$check_grace ; print_r($row); print_r($data1);print_r($data2);print_r($data3);
-								//echo "clockInDate:".$clockInDate; echo "/// clockOutDate:".$clockOutDate; exit;
 
 								$cccheck = strtotime($check_grace);
 								$ccin  = strtotime($clock_in);
@@ -3148,19 +3064,17 @@ class employeeLoanClass extends userClass
 	        }
 
 	        /* Step 4: update only attendance_key_short_code by id */
-	        // if($attendance_key_short_code != ""){
 
 	            $updateArray = array(
 	                'attendance_key_short_code' => $attendance_key_short_code
 	            );
 
 	            $res = $callConfig->updateRecord( 'employee_daily_attendances', $updateArray,	                'id',$attendance_id    );
-	            //echo "<br>Emp ID".$emp_id."/ clock In".$clockInDate . '-' . $clockInTime."/ clock_out".$clockOutDate . '-' . $clockOutTime."/ short code".$attendance_key_short_code;
 	            $updated[] = $attendance_id;
 	        // }
 	    }
 
-	    } //exit;
+	    }
 	    return array(
 	        'updated_count' => count($updated),
 	        'updated_ids'   => $updated
@@ -3621,7 +3535,6 @@ class employeeLoanClass extends userClass
 			}
 
 			$result = $callConfig->updateRecord('transport_personal_gateway', $updateData, 'id', $entry_id);
-			//$this->toupdatetransportpersonalgatewayprocess_val(['id'=>$entry_id,'company_id'=>$company_id]);
 			if ($result) {
 				return ['status' => 'success', 'message' => 'Record updated successfully', 'entry_id' => $entry_id];
 			} else {

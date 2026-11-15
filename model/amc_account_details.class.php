@@ -45,16 +45,12 @@ class amcAccountDetailsClass extends userClass{
       'ifsc_code' => $post['ifsc_code']
     );
     if ($post['rid'] != "") {
-      // echo $post['rid']; exit;
       $insertary['updated_date'] = date('Y-m-d h:i:s');
       $insertary['updated_by'] = $post['user_id'];
-      // print_r($callConfig); exit;
       $res = $callConfig->updateRecord('amc_account_details', $insertary, 'id', $post['rid']);
-      // echo "res: ".$res; exit;
       $return['res'] = $res;
       $customer_id = $post['rid'];
     } else {
-      // $insertary['customer_since']=date('Y-m-d');
       $insertary['is_active'] = 0;
       $insertary['current_status'] = 0;
       
@@ -71,23 +67,16 @@ class amcAccountDetailsClass extends userClass{
     $exquery = null;
     global $callConfig;
     print_r($get); echo "transaction_no".$transaction_no; exit;
-    /*$query = "SELECT * FROM manufacturing_forecast WHERE company_id=".$get['company_id']." AND id=".$transaction_no;
-    $data = $callConfig->getRow($query);
-    $upquery = "UPDATE manufacturing_forecast SET current_status =".ST_APPROVED." WHERE company_id=".$get['company_id']." AND year='".$data->year."' AND is_active=0";
-    $exquery = $callConfig->executeQuery($upquery);*/
     return $exquery;
   }
   public function getAmcAccountDetails($get){
     global $callConfig;
-     //$res = $this->toafterapprovaltoupdatemanufirmorder($get['transaction_no'],$get);
-    //print_r($get); print_r($res); exit;
     $return = array();
     $return['get'] = $get;
     if ($get['id'] != "") {
       $account_details_query = "SELECT * FROM amc_account_details WHERE id = '".$get['id']."' AND is_active = 0";
       $account_details = $callConfig->getRow($account_details_query);
       $return['amc_details'] = $account_details;
-      // print_r($account_details); exit;
     } else {
       $amc_account_details = "SELECT * FROM  amc_account_details WHERE is_active =0";
       $amc_account_details = $callConfig->getAllRows($amc_account_details);
@@ -141,7 +130,6 @@ class amcAccountDetailsClass extends userClass{
     }
     $return['gc_details'] = $gc_details;
 
-    //$tax_details = "SELECT id, rate,slad_from,slad_to FROM tax_slads WHERE assessment_year='2024-2025' and is_active =0 group by rate ";
     $tax_details = "SELECT id, code,code_description FROM hsn_and_sac_codes WHERE   is_active =0 AND company_id='" . $get['company_id'] . "'";
     $tax_details = $callConfig->getAllRows($tax_details);
     $ts_details = array();
@@ -263,8 +251,6 @@ class amcAccountDetailsClass extends userClass{
   }
   public function insertAmcRegistrationDetails($get, $post){
     global $callConfig;
-    // $return['post'] = $post;
-    // $return['get'] = $get;
     $insertary = array(
       'company_id' => $get['company_id'],
       'amc_name' => $post['amc_name'],
@@ -411,7 +397,6 @@ class amcAccountDetailsClass extends userClass{
     return $return;
   }
   public function getAmcRegistrationDetails($get){
-    // print_r($get);    exit;
     global $callConfig;
     $return = array();
     $return['get'] = $get;
@@ -422,10 +407,6 @@ class amcAccountDetailsClass extends userClass{
 
       $dynamic_fields_query = "SELECT * FROM amc_registration_services WHERE registration_id = '" . $get['id'] . "' AND company_id={$get['company_id']} AND is_active = 0";
       $dynamic_fields_details_list = $callConfig->getAllRows($dynamic_fields_query);
-      // $dynamic_fields_details = array();
-      // foreach ($dynamic_fields_details_list as $row) {
-      //   $dynamic_fields_details[$row->id] = $row;
-      // }
       $return['dynamic_fields_details'] = $dynamic_fields_details_list;
 
       $checklist_query = "SELECT id,  check_name FROM application_check_lists WHERE transaction_id = '" . $get['id'] . "' AND application_tablename='amc_registration_details' AND company_id={$get['company_id']} AND is_active = 0";
@@ -460,7 +441,6 @@ class amcAccountDetailsClass extends userClass{
   }
 
   public function createSchedule($get){
-    // print_r($get);    exit;
     global $callConfig;
     $return = array();
     $return['get'] = $get;
@@ -588,7 +568,6 @@ class amcAccountDetailsClass extends userClass{
         } elseif ($serviceOn == '4') { // Yearly
           for ($i = 1; $i <= $noOfServices; $i++) {
             $serviceDate = $serviceDetails[$i];
-            // $serviceDate = date('Y-m-d', strtotime("+$i year", strtotime($activationDate)));
             $values = [
               'company_id' => $companyId,
               'registration_id' => $registrationId,
@@ -666,7 +645,6 @@ class amcAccountDetailsClass extends userClass{
     return $return;
   }
   public function getAmcServiceDetails($get){
-    // print_r($get);    exit;
     global $callConfig;
     $return = array();
     $return['get'] = $get;
@@ -715,7 +693,6 @@ class amcAccountDetailsClass extends userClass{
 
   public function togetuserfielddashboard($get){
     global $callConfig;
-   // echo "<pre>"; print_r($get); exit;
     $whr = "";
 
     if($get['moduletype']=='FIELD_EMPLOYEE'){
@@ -734,7 +711,6 @@ class amcAccountDetailsClass extends userClass{
     $return['all_user_extra_map'] = $return['all_user_map']- $return['all_user_daily_map'];
     $return['alldatamonth'] = $this->togetoprationlistbasedonmonthly($get);
 
-    //print_r($return); exit;
     return $return;
   }
   public function togetoprationlistbasedonmonthly($get){
@@ -761,8 +737,6 @@ class amcAccountDetailsClass extends userClass{
   }
   public function updateAmcServiceDetailsAndCheckList($get, $post){
     global $callConfig;
-    // $return['post'] = $post;
-    // $return['get'] = $get;
     $update_arr = array(
       'service_date' => $post['service_date'],
       'payment_type' => $post['payment_type'],
@@ -790,7 +764,6 @@ class amcAccountDetailsClass extends userClass{
             'updated_by' => $get['user_id'],
             'updated_date' => date("Y-m-d H:i:s")
           );
-          // $result = $callConfig->insertRecord('amc_check_list', $check_array);
           $res = $callConfig->updateRecord('amc_check_list', $check_update_arr, 'id', $post['new_checklist_ids'][$i]);
 
           $return['checklist_result'][$check_id] = $res;
@@ -1085,7 +1058,6 @@ class amcAccountDetailsClass extends userClass{
     }else{
       $whr = "application_table_name = 'stationery_grn' ";
           $query = $callConfig->selectQuery(TBL_APPLICATION_SERIAL_NUMBERS, '*', $whr, '', '', '');
-          // $return['query'] = $query;
           $query_res = $callConfig->getRow($query);
           $res = $query_res;
           $le = $res->doc_no_length;
@@ -1543,7 +1515,6 @@ class amcAccountDetailsClass extends userClass{
       ORDER BY ars.service_date ASC, ars.id ASC";
 
     $return['schedule_data']=$callConfig->getAllRows($sql);
-    // $return['sql']=($sql);
     return $return;
   }
 

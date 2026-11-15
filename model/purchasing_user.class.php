@@ -349,7 +349,6 @@ class purchasingUserClass extends userClass{
 
             // 3. Insert parent record into sub_contract_work_order_issues
             $get['transaction_date'] = $parent_record->transaction_date;
-            // $transaction_number = '';
             $transaction_number = $this->toGetApplicationSerialNumber('sub_contract_work_order_issues', $get);
 
             $issue_parent_data = array(

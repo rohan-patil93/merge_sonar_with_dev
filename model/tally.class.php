@@ -2,7 +2,6 @@
 class tallyClass extends userClass{
 	public function topostmasterdetails($get, $post){
 	 	global $callConfig;
-	 	//echo "<pre>";  print_r($post); print_r($get); echo "</pre>";  exit;
 	 	$api_hits = array('company_id'=>$get['company_id'],'api_url'=>$get['mode'],'api_request_parameters'=>json_encode($get),'api_response_details'=>json_encode($post), 'application_table'=> $get['table'], 'status_json'=>$get['json_data'], 'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
 		$res=$callConfig->insertRecord('api_hits',$api_hits);
 	 	return $res;
@@ -27,14 +26,6 @@ class tallyClass extends userClass{
  		$return['api_masters'] = $data;
 
 
- 		//print_r($return);
- 		// if($data->application_table!=""){
- 		// 	$query="show COLUMNS from ".$data->application_table;
-			// //echo $query;
-			// $dataa = $callConfig->getAllRows($query);
-			// $return['table_filed'] = $dataa;
- 		// }
- 		//print_r($dataa); exit;
  		return $return;
 	}
 	public function getApiMastersDetails($get){
@@ -125,17 +116,8 @@ class tallyClass extends userClass{
 
 		$ledger_master = array();
 
-		// $vendorsql = "SELECT company_id, company, display_name, billing_address, billing_country, billing_state, billing_city, billing_post_code, email, website_url, pan_no, gstin, account_code FROM `vendors` WHERE company_id='".$company_id."' AND is_active = '0'";
-		// $vendorres = $callConfig->getAllRows($vendorsql);
-		// foreach($vendorres as $ven){
-		// 	$ven->company_id = $companies[$ven->company_id];
-		// 	$chartofaccount = 	$chart_of_accounts[$cust->account_code]->accgro_group_id;
 
-		// 	$cust->ledger_group = $account_groups[$chartofaccount];
 
-		// 	$ven->ledger_group = $chart_of_accounts[$ven->account_code]->account_name;
-		// 	$ledger_master[] = (array)$ven;
-		// }
 
 		$customersql = "SELECT company_id, company, display_name, billing_address, billing_country, billing_state, billing_city, billing_post_code, email, website_url, pan_no, gstin, account_code FROM `customers` WHERE company_id='".$company_id."' AND is_active = '0'";
 		$customerres = $callConfig->getAllRows($customersql);
@@ -167,7 +149,6 @@ class tallyClass extends userClass{
 
 		foreach($chartofaccountsres as $cca){
 			$ledgeary = array();
-		//	$ledgeary = array('company_id'=>$cca->company_id, 'company'=>$cca->account_name, 'ledger_group'=>$cca->account_name);
 			if($cca->account_name !=""){
 				$cca->company_id = $companies[$cca->company_id];
 				$ledger_group_name = $account_groups[$cca->accgro_group_id];
@@ -177,7 +158,6 @@ class tallyClass extends userClass{
     	}
     	$return['status'] = 200;
 		$return['result'] = $ledger_master;
-		//echo "<pre>"; print_r($return);
 		return $return;
 
 	}
@@ -239,7 +219,6 @@ class tallyClass extends userClass{
 
 
 	 	if($transaction_table !=""){
-			//echo "<pre>";
 			$dmtsql = "SELECT id, page_title, application_table_name, display_table, item_table, tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$transaction_table."' AND is_active = 0";
 			$dmtres=$callConfig->getRow($dmtsql);
 
@@ -272,18 +251,8 @@ class tallyClass extends userClass{
 
 
 
-					// $taxitementry['hsn_code'] = $itemtaxtrans->tax_name !=""?$itemtaxtrans->tax_name:"";
-					// $taxitementry['tax_name'] = $ttt['tax_name'] !=""?$ttt['tax_name']:"";
-					// $taxitementry['amount'] = $ttt['tax_amount'] !=""?$ttt['tax_amount']:0;
-					// $taxitementry['account_code'] = $ttt['account_code'] !=""?$ttt['account_code']:"";
-					// $taxitementry['tax_percentage'] = $ttt['tax_percentage'] !=""?$ttt['tax_percentage']:"";
-					// $taxitementry['ledger_name'] = $chart_of_accounts[$ttt['account_code']]->account_name !=""?$chart_of_accounts[$ttt['account_code']]->account_name:"";
 
-					//$item_tax_trans[$itemtaxtrans->transaction_id][$ttt['account_code']] = $taxitementry;
 				}
-				// $item_tax_trans[$itemtaxtrans->transaction_id][$itemtaxtrans->tax_id]['hsn_code'] = $itemtaxtrans->tax_name !=""?$itemtaxtrans->tax_name:"";
-				// $item_tax_trans[$itemtaxtrans->transaction_id][$itemtaxtrans->tax_id]['tax_value'] = $itemtaxtrans->tax_value !=""?$itemtaxtrans->tax_value:"";
-				// $item_tax_trans[$itemtaxtrans->transaction_id][$itemtaxtrans->tax_id]['amount'] += $itemtaxtrans->tax_amount !=""?$itemtaxtrans->tax_amount:0;
 			}
 
 
@@ -297,7 +266,6 @@ class tallyClass extends userClass{
 
 			}
 
-			//print_r($item_trans);
 			$main_transaction_sql = "SELECT id, company_id, transaction_number, DATE_FORMAT(transaction_date, '%d-%m-%Y') AS transaction_date, party_id, party_name, party_email, party_phone, party_address, supplier_state_id, place_of_supply, ref_type, ref_no FROM ".$dmtres->application_table_name." WHERE company_id='".$company_id."' AND is_active = '0'";
 			$main_transaction_res = $callConfig->getAllRows($main_transaction_sql);
 			$transaction_entry = array();
@@ -322,7 +290,6 @@ class tallyClass extends userClass{
 					}
 					$trans->item_tax = $itemtaxentry;
 
-					//$trans->item_tax = $item_tax_trans[$trans->id];
 				}else{
 					$trans->item_tax = array();
 				}
@@ -331,14 +298,7 @@ class tallyClass extends userClass{
 					if(isset($journal_vouchers[$trans->id])){
 						$journal_vouchersjvv = array();
 						foreach($journal_vouchers[$trans->id] as $lfgdetail){
-							// if(in_array($lfgdetail->account_code, (array)$vendcustarray)){
-							// 	$lfgdetail->ledger_name = $trans->party_name;
-							// 	$journal_vouchersjvv[] = $lfgdetail;
-							// }else{
-							// 	$journal_vouchersjvv[] = $lfgdetail;
-							// }
 							if(!in_array($lfgdetail->account_code, (array)$vendcustarray)){
-								//$lfgdetail->ledger_name = $trans->party_name;
 								$journal_vouchersjvv[] = $lfgdetail;
 							}
 
@@ -346,7 +306,6 @@ class tallyClass extends userClass{
 						}
 
 						$trans->ledger_entries = $journal_vouchersjvv;
-						//$trans->ledger_entries = $journal_vouchers[$trans->id];
 					}else{
 						$trans->ledger_entries = array();
 					}
@@ -367,8 +326,6 @@ class tallyClass extends userClass{
     		$return['status'] = 404;
 			$return['result'] = $ledger_master;
     	}
-    	//echo "<pre>"; print_r($return);
-	 	//$return['transaction_table'] = $transaction_table;
 	 	return $return;
 
 	}
@@ -449,7 +406,6 @@ class tallyClass extends userClass{
 
 
 
-		//print_r($item_trans);
 		$payments_sql = "SELECT id, company_id, transaction_no, DATE_FORMAT(payment_date, '%d-%m-%Y') AS payment_date, payment_type, account_code FROM payments WHERE company_id='".$company_id."' AND is_active = '0'";
 		$payments_res = $callConfig->getAllRows($payments_sql);
 		$transaction_entry = array();
@@ -468,17 +424,11 @@ class tallyClass extends userClass{
 			}else{
 				$paytrans->item_entries = array();
 			}
-			// if(isset($journal_vouchers[$paytrans->id])){
-			// 	$paytrans->ledger_entries = $journal_vouchers[$paytrans->id];
-			// }else{
-			// 	$paytrans->ledger_entries = array();
-			// }
 
 			$transaction_entry[] = $paytrans;
 		}
 		$return['status'] = 200;
 		$return['result'] = $transaction_entry;
-		//echo "<pre>"; print_r($return);
 		return $return;
 	}
 	public function getAPIReceipts($get,$post){
@@ -556,7 +506,6 @@ class tallyClass extends userClass{
 
 
 
-		//print_r($item_trans);
 		$payments_sql = "SELECT id, company_id, transaction_no, DATE_FORMAT(payment_date, '%d-%m-%Y') AS payment_date, payment_type, account_code FROM receipts WHERE company_id='".$company_id."' AND is_active = '0'";
 		$payments_res = $callConfig->getAllRows($payments_sql);
 		$transaction_entry = array();
@@ -571,22 +520,15 @@ class tallyClass extends userClass{
 			}
 
 
-			//$paytrans->bank_account_id = $bank_accounts[$paytrans->bank_account_id];
 			if(isset($item_trans[$paytrans->id])){
 				$paytrans->item_entries = $item_trans[$paytrans->id];
 			}else{
 				$paytrans->item_entries = array();
 			}
-			// if(isset($journal_vouchers[$paytrans->id])){
-			// 	$paytrans->ledger_entries = $journal_vouchers[$paytrans->id];
-			// }else{
-			// 	$paytrans->ledger_entries = array();
-			// }
 			$transaction_entry[] = $paytrans;
 		}
 		$return['status'] = 200;
 		$return['result'] = $transaction_entry;
-		//echo "<pre>"; print_r($return);
 		return $return;
 	}
 	public function getAPIJournalVouchers($get,$post){
@@ -615,7 +557,6 @@ class tallyClass extends userClass{
 		$journal_vouchers = array();
 		$transaction_entry = array();
 		foreach($jvres as $jv){
-			//$journal_vouchers[$jv->ref_id][] = $jv;
 			if(isset($jv_items[$jv->id])){
 				$jv->ledger_entries = $jv_items[$jv->id];
 			}else{
@@ -625,7 +566,6 @@ class tallyClass extends userClass{
 		}
 	    $return['status'] = 200;
 		$return['result'] = $transaction_entry;
-		//echo "<pre>"; print_r($return);
 		return $return;
 	}
 	public function getAPIItems($get,$post){
@@ -658,7 +598,6 @@ class tallyClass extends userClass{
 		}
 	    $return['status'] = 200;
 		$return['result'] = $items;
-		//echo "<pre>"; print_r($return);
 		return $return;
 	}
 	public function getAPImastersAPICode($get,$post){
@@ -676,10 +615,8 @@ class tallyClass extends userClass{
   				$api_code = $apimastersres->api_code;
   				if($api_code == "SENDLEDGERMASTER"){   //Start ladger Masters
   					$return = $this->getLedgerMaster($get,$post);
-					//return $return;
 				}elseif($api_code == "SENDSALESINVOICES" || $api_code =="SENDSALESORDERS" || $api_code == "SENDPURCHASEORDERS" || $api_code == "SENDPURCHASEINVOICES" || $api_code == "SENDGOODSRECEIPTNOTES" || $api_code == "SENDDEBITNOTES" || $api_code == "SENDCREDITNOTES" || $api_code == "SENDDELIVERYORDERS"){   //Start Sales Invoice
 					$return = $this->getTransactionInvoices($get,$post,$apimastersres->application_table);
-					//echo "<pre>"; print_r($return);
 				}elseif($api_code == "SENDPAYMENTS"){   //Start Sales Invoice
 					$return = $this->getAPIPayments($get,$post);
 				}elseif($api_code == "SENDRECEIPTS"){   //Start Sales Invoice
@@ -738,7 +675,6 @@ class tallyClass extends userClass{
 	  						}
 	  						$returnres[] = $finalresdata;
 	  					}
-	  					//echo "<pre>"; print_r($returnres); echo "</pre>";
 	  					$return['status'] = 200;
 			 			$return['result'] = $returnres;
 			 		}else{
@@ -757,7 +693,6 @@ class tallyClass extends userClass{
   		$final_status = $return['status']!=""?$return['status']:"200";
   		$api_hits = array('company_id'=>$company_id,'api_url'=>$api_url,'api_master_id'=>$api_master_id,'api_request_parameters'=>urlencode(json_encode((array)$get)),'api_response_details'=>urlencode(json_encode((array)$return)), 'request_date_time'=> date('Y-m-d H:i:s'), 'response_status'=>$final_status, 'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
     	$this->insertAPIHits($api_hits);
-    	//echo "<pre>"; print_r($return);
 	 	return $return;
 	}
 	public function tallyAPIReceiveReceipts($get,$post,$api_hitsres,$apimastersres){
@@ -805,11 +740,9 @@ class tallyClass extends userClass{
 		//recept list
 		$receiptssql = "SELECT id, transaction_no, amount, unallocated_amount, allocated_amount, paid_amonut, tds_amount FROM receipts WHERE company_id='".$company_id."' AND is_active = '0'";
       	$receiptsres = $callConfig->getAllRows($receiptssql);
-  		//$return['receipts'] = $receiptsres;
 
   		$receipt_allocationssql = "SELECT id, receipt_id, transaction_no AS bill_transaction_no , total_paid_amonut FROM receipt_allocations WHERE company_id='".$company_id."' AND is_active = '0'";
       	$receipt_allocationsres = $callConfig->getAllRows($receipt_allocationssql);
-  		//$return['receipt_allocations'] = $receipt_allocationsres;
 
   		foreach($receipt_allocationsres as $recalcpt){
 			$receipt_allocations[$recalcpt->receipt_id] =  $recalcpt;
@@ -821,7 +754,6 @@ class tallyClass extends userClass{
  		}
  		unset($receipts['REC00016']);
  		foreach($api_hit_api_response_details[$api_code] as $apihitre){
-			//$return['apihitre'] = $apihitre;
 			$paymentarray = $paymentallocationarrayre = array();
 			if(isset($receipts[$apihitre['VOUCHERNUMBER']])){
 				$stringary['status'] = 1062;
@@ -915,9 +847,7 @@ class tallyClass extends userClass{
 			$apihitre['valuenotavailablefieldary'] =$valuenotavailablefieldary;
 			$responsary[] = $apihitre;
 		}
-		//$return['responsary'] = $responsary;
 
-		//echo "<pre>"; print_r($return);
  		return $responsary;
 	}
 
@@ -968,11 +898,9 @@ class tallyClass extends userClass{
 		//recept list
 		$receiptssql = "SELECT id, transaction_no, amount, unallocated_amount, allocated_amount, paid_amonut, tds_amount FROM payments WHERE company_id='".$company_id."' AND is_active = '0'";
       	$receiptsres = $callConfig->getAllRows($receiptssql);
-  		//$return['receipts'] = $receiptsres;
 
   		$receipt_allocationssql = "SELECT id, payment_id, transaction_no AS bill_transaction_no , total_paid_amonut FROM payment_allocations WHERE company_id='".$company_id."' AND is_active = '0'";
       	$receipt_allocationsres = $callConfig->getAllRows($receipt_allocationssql);
-  		//$return['receipt_allocations'] = $receipt_allocationsres;
 
   		foreach($receipt_allocationsres as $recalcpt){
 			$receipt_allocations[$recalcpt->payment_id] =  $recalcpt;
@@ -983,7 +911,6 @@ class tallyClass extends userClass{
 			$receipts[$recpt->transaction_no] =  $recpt; //marge two table data
  		}
  		foreach($api_hit_api_response_details[$api_code] as $apihitre){
-			//$return['apihitre'] = $apihitre;
 			if(isset($receipts[$apihitre['VOUCHERNUMBER']])){
 				$stringary['status'] = 1062;
 		        $stringary['query'] = $getstringlist;
@@ -1169,9 +1096,6 @@ class tallyClass extends userClass{
 				}
 				//Start VALIDATION PARTS
 
-				// if(round($tallywiithgstamount,2) != round($maintotal_amount,2)){
-				// 	$valuenotavailablefieldary['total_amount'] =$maintotal_amount;
-				// }
 				foreach($maintransactionary as $fieldkey=>$fieldval){
 					if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
 						$valuenotavailablefieldary[$fieldkey] =$fieldval;
@@ -1236,8 +1160,6 @@ class tallyClass extends userClass{
 
 
 
-//$return['responsary'] = $responsary;
-		//echo "<pre>"; print_r($responsary); exit;
  		return $responsary;
 
 
@@ -1280,15 +1202,12 @@ class tallyClass extends userClass{
 	 	$transaction_warehouse_id = "";
 	 	$originator_currency_id = $application_usersres->default_currency_id;
 	 	$originator_state_id = $application_usersres->default_state_id;
-	 	//echo $application_table;
 	 	$api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
-	 	//echo "<pre>"; print_r($api_hit_api_response_details);
 		$api_mastersr_api_response_details = json_decode($apimastersres->api_response_details, 1);
 		$responsary = array();
 
 		$displayattributessql = "SELECT id,application_table_name,help_text,list_attributes,empty_table_message,insert_page_type FROM display_attributes WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$application_table."' AND is_active = 0";
 		$displayattributesres =  $callConfig->getRow($displayattributessql);
-				//echo "<pre>"; print_r($displayattributesres); exit;
 		$fieldkeywithvalue = array();
 		$checklists = array('InvDate'=>'transaction_date', 'VOUCHERNUMBER'=>'transaction_number', 'PARTYNAME'=>'party_name', 'STATE'=>'party_address', 'PLACEOFSUPPLY'=>'place_of_supply', 'mobile_number'=>'party_phone', 'email_address'=>'party_email');
 		$checkfiled = array();
@@ -1298,10 +1217,8 @@ class tallyClass extends userClass{
 		if($displayattributesres->list_attributes !=""){
 			$lists = json_decode($displayattributesres->list_attributes,1);
 			$type_array = array('select','auto_select','multi_select','disable_select','radio','checkbox', 'color_pick','image');
-			//print_r($lists);
 			$listsechck = array();
 			foreach ($lists as $key => $value){
-				//if(in_array($value['type'], (array)$checkfiled)){
 					if(in_array($value['type'], (array)$type_array)){
 						$listsechck[] = $key;
 						$tablefield = $this->getDyanamicSelectData($application_table, $key);
@@ -1353,8 +1270,6 @@ class tallyClass extends userClass{
 				$tax_amount= 0;
 				$maintotal_amount = $mainamount = $tax_amount = $tax_percentage   =$maintax_amount_total = 0;
 				foreach($apihitre['Item_Entries'] as $itmss){
-					//$amount += $itmss['AMOUNT'];
-					//$total_amount +=  $itmss['AMOUNT'];
 					if(isset($items[$itmss['part_no']])){
 						$tax_percentage = $items[$itmss['part_no']]->gst;
 						if($tax_percentage !=""){
@@ -1420,7 +1335,6 @@ class tallyClass extends userClass{
 				}
 				foreach($transactionitemsql as $itemtble){
 					foreach ($itemtble as  $fieldkey=>$fieldval) {
-						//echo $fieldkey."====".$fieldval."</br>";
 						if(in_array($fieldkey, (array)$popisosichildtablerequirdary) && $fieldval ==""){
 							$valuenotavailablefieldary[$fieldkey] =$fieldval;
 						}
@@ -1467,8 +1381,6 @@ class tallyClass extends userClass{
 			$apihitre['valuenotavailablefieldary'] =$valuenotavailablefieldary;
 			$responsary[] = $apihitre;
 		}
-		//$return['responsary'] = $responsary;
-		//echo "<pre>"; print_r($responsary); exit;
  		return $responsary;
 	}
 
@@ -1477,8 +1389,6 @@ class tallyClass extends userClass{
  		$return['post'] = $post;
  		$api_hit_id = $post['api_hit_id'] !=""?$post['api_hit_id']:$get['api_hit_id'];
 	 	$checkstatus = $post['checkstatus'] !=""?$post['checkstatus']:$get['checkstatus'];
- 		//$api_hit_id = $post['api_hit_id'];
-	 	//$checkstatus = $post['checkstatus'];
 	 	$api_hitssql = "SELECT * FROM api_hits WHERE company_id='".$get['company_id']."' AND id = '".$api_hit_id."' AND is_active = '0'";
       	$api_hitsres = $callConfig->getRow($api_hitssql);
       	$return['api_hits'] = $api_hitsres;
@@ -1491,9 +1401,6 @@ class tallyClass extends userClass{
   			$api_url = $apimastersres->end_point;
   			$api_code = $apimastersres->api_code;
 
-  			////echo $api_code;
-  			//$api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
-  			//echo "<pre>"; print_r($api_hit_api_response_details);
   			if($apimastersres->api_type == "S"){
 				//Send /...................
   				$return['status'] = 4040404;
@@ -1575,7 +1482,6 @@ class tallyClass extends userClass{
 	  					}
 	  					if($alreadyavilablecheck =="Y"){
 	  						$alreadyavilablesql .= " is_active = 0";
-	  						//echo $alreadyavilablesql; echo "</br>";
 	  						$alreadyavilableresult = $callConfig->getRow($alreadyavilablesql);
 	  					}else{
 	  						$alreadyavilableresult->id = "";
@@ -2093,7 +1999,6 @@ echo "<pre>cvfcgbfgjh"; print_r($api_hit_api_response_details); exit;
   					}
   					if($alreadyavilablecheck =="Y"){
   						$alreadyavilablesql .= " is_active = 0";
-  						//echo $alreadyavilablesql; echo "</br>";
   						$alreadyavilableresult = $callConfig->getRow($alreadyavilablesql);
   					}else{
   						$alreadyavilableresult->id = "";
@@ -2138,56 +2043,10 @@ echo "<pre>cvfcgbfgjh"; print_r($api_hit_api_response_details); exit;
 	 	}
 
 
-	//function tallyAPIReceiveReceipts($get,$post,$api_hitsres,$apimastersres){
-	// 	global $callConfig;
-	// 	$api_hit_id = $post['api_hit_id'] !=""?$post['api_hit_id']:$get['api_hit_id'];
-	//  	$checkstatus = $post['checkstatus'] !=""?$post['checkstatus']:$get['checkstatus'];
-	//  	$company_id = $get['company_id'];
-	// 	//start get masters
-	// 	$chartofaccountssql = "SELECT id,company_id, account_name,account_code,account_type FROM `chart_of_accounts` WHERE company_id = ".$company_id." AND allow_posting = 0 AND is_active =0";
-	//     $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
-	//     $chart_of_accounts = array();
-	//     foreach($chartofaccountsres as $cca){
-	//     	$chart_of_accounts_name[$cca->account_name] = $cca;
-	//         $chart_of_accounts[$cca->account_code] = $cca;
-	//     }
-	//     $customerssql = "SELECT ctm.customer_id, ctm.party_name, cust.id, cust.company, cust.account_code FROM customer_tally_mappings ctm, customers cust WHERE ctm.company_id = ".$company_id." AND ctm.company_id = cust.company_id AND ctm.customer_id = cust.id AND ctm.is_active = cust.is_active AND ctm.is_active = 0";
-	// 	$customersres = $callConfig->getAllRows($customerssql);
-	// 	$customers = array();
-	//     foreach($customersres as $custre){
-	//         $customers[$custre->party_name] = $custre;
-	//     }
-	// 	$banckaccountsql = "SELECT id, account_code, bank_account_name, bank_account_number FROM bank_accounts WHERE company_id = '".$company_id."' AND is_active=0";
-	// 	$banckaccountres = $callConfig->getAllRows($banckaccountsql);
- //    	foreach($banckaccountres as $payres){
-	// 		$bank_accounts[$payres->account_code] = (array)$payres;
-	// 	}
-	// 	$sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id FROM sales_invoices WHERE company_id = '".$company_id."' AND is_active=0";
-	// 	$sales_invoicesres = $callConfig->getAllRows($sales_invoicessql);
- //    	foreach($sales_invoicesres as $si){
-	// 		$sales_invoices[$si->transaction_number] = (array)$si;
-	// 	}
 
-	// 	//end get master
-	// 	$api_master_id = $apimastersres->id;
-	// 	$api_url = $apimastersres->end_point;
-	// 	$api_code = $apimastersres->api_code;
- // 		$api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
-	// 	$api_mastersr_api_response_details = json_decode($apimastersres->api_response_details, 1);
-	// 	$responsary = $receipt_allocations= array();
 
-	// 	//recept list
-	// 	$receiptssql = "SELECT id, transaction_no, amount, unallocated_amount, allocated_amount, paid_amonut, tds_amount FROM receipts WHERE company_id='".$company_id."' AND is_active = '0'";
- //      	$receiptsres = $callConfig->getAllRows($receiptssql);
- //  		//$return['receipts'] = $receiptsres;
 
- //  		$receipt_allocationssql = "SELECT id, receipt_id, transaction_no AS bill_transaction_no , total_paid_amonut FROM receipt_allocations WHERE company_id='".$company_id."' AND is_active = '0'";
- //      	$receipt_allocationsres = $callConfig->getAllRows($receipt_allocationssql);
- //  		//$return['receipt_allocations'] = $receipt_allocationsres;
 
- //  		foreach($receipt_allocationsres as $recalcpt){
-	// 		$receipt_allocations[$recalcpt->receipt_id] =  $recalcpt;
-	// 	}
 
 	// 	foreach($receiptsres as $recpt){
 	// 		$recpt->bll_details = $receipt_allocations[$recpt->id];
@@ -2212,34 +2071,7 @@ echo "<pre>cvfcgbfgjh"; print_r($api_hit_api_response_details); exit;
 	// 					$recepttotalamt += $partydetailandtransdetail[0]['AMOUNT'];
 	// 					$receptaccountname = $partydetailandtransdetail[1]['Ledger_Name'];
 
-	// 					if(isset($customers[$partydetailandtransdetail[0]['Party_Name']])){
-	// 						$custid = $customers[$partydetailandtransdetail[0]['Party_Name']]->id;
-	// 						$party_id[$custid] = $custid;
-	// 					}
-	// 				}
-	// 				//total amount recepts
-	// 				if(isset($chart_of_accounts_name[$receptaccountname])){
-	// 					$payment_account_details = $chart_of_accounts_name[$receptaccountname];
-	// 					if(isset($bank_accounts[$payment_account_details->account_code])){
-	// 						$bankaccountdetails = $bank_accounts[$payment_account_details->account_code];
-	// 						$payment_type = "bank";
-	// 						$bank_account_id = $bankaccountdetails['id'];
-	// 						$account_code = $bankaccountdetails['account_code'];
-	// 					}
-	// 				}
-	// 				//payment_type
 
-	// 				//strat insert transaction
-	// 				$transaction_no	= $this->toGetApplicationSerialNumber('receipts');
-	// 				$paymentarray = array('company_id'=>$company_id,'transaction_type'=>'customers','transaction_no'=>$transaction_no,'payment_date'=>$payment_date,'party_id'=>json_encode($party_id),'payment_type'=>$payment_type,'bank_account_id'=>$bank_account_id,'account_code'=>$account_code,'amount'=>$recepttotalamt,'ref_no'=>'','due_date'=>$payment_date,'unallocated_amount'=>0,'allocated_amount'=>$recepttotalamt,'remarks'=>'','originator'=>1,'is_active'=>'0','current_status'=>'199','paid_amonut'=>$recepttotalamt,'tds_amount'=>0,'payment_process'=>'NP','created_by'=>1,'created_date'=>date("Y-m-d H:i:s"));
-	// 				$res = $callConfig->insertRecord('receipts',$paymentarray);
-	// 				$receipt_id = $res['LASTID'];
-	// 				if($res['status'] == 'sucess'){
-	// 					foreach($arychunks as $partydetailandtransdetail){
-	// 						$transaction_details = $sales_invoices[$partydetailandtransdetail[0]['Bill_Details']['Bill_NO']];
-	// 						$paymentallocationarray = array('company_id'=>$company_id,'receipt_id'=>$receipt_id,'transaction_table'=>'sales_invoices','transaction_id'=>$transaction_details['id'],'transaction_no'=>$transaction_details['transaction_number'],'total_amount'=>$partydetailandtransdetail[0]['AMOUNT'],'pending_amount'=>0,'paid_amonut'=>$partydetailandtransdetail[0]['AMOUNT'],'is_active'=>'0','current_status'=>'0','created_by'=>1,'created_date'=>date("Y-m-d H:i:s"),'tds_amount'=>0,'total_paid_amonut'=>$partydetailandtransdetail[0]['AMOUNT'],'total_tax_split_details'=>'','party_id'=>$transaction_details['party_id']);
-	// 						$payallocationres = $callConfig->insertRecord('receipt_allocations',$paymentallocationarray);
-	// 					}
 
 	// 					$stringary['status'] = 200;
 	// 		        	$stringary['query'] = $paymentarray;
@@ -2259,8 +2091,5 @@ echo "<pre>cvfcgbfgjh"; print_r($api_hit_api_response_details); exit;
 	// 	}
 	// 	$return['responsary'] = $responsary;
 
-	// 	echo "<pre>"; print_r($return);
- // 		return $return;
-	// }
 
 }

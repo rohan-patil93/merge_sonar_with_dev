@@ -130,7 +130,6 @@ class ComplaintsClass{
 		$table_details = "SELECT * FROM  application_attachments 
 		WHERE $whr company_id='{$get['company_id']}' AND  is_active='0' ";
 		$table_details = $callConfig->getAllRows($table_details);
-		// echo $table_details;
 		$table = array();
 		$i = 1;
 		foreach ($table_details as $row) {
@@ -186,7 +185,6 @@ class ComplaintsClass{
 		LEFT JOIN application_users au ON au.id = uoa.user_id
 		WHERE $whr DATE(au.created_date) BETWEEN '$from_date' AND '$to_date' AND uoa.company_id='{$get['company_id']}' AND  uoa.is_active='0' AND uoa.current_status='199' ";
 		$table_details = $callConfig->getAllRows($table_details);
-		// print_r($table_details);
 		$table = array();
 		$i = 1;
 		foreach ($table_details as $row) {
@@ -212,7 +210,6 @@ class ComplaintsClass{
 			LEFT JOIN application_users t2 ON t2.id = t1.user_id
 			WHERE {$whr} t1.company_id='{$get['company_id']}' AND  t1.is_active='0' ";
 		$table_details = $callConfig->getAllRows($table_details);
-		// print_r($table_details);
 		$table = array();
 		$i = 1;
 		foreach ($table_details as $row) {

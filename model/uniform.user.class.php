@@ -580,7 +580,6 @@ class uniformClass extends userClass{
 
 	    $whr = "application_table_name = 'stationery_requests' ";
         $query = $callConfig->selectQuery(TBL_APPLICATION_SERIAL_NUMBERS, '*', $whr, '', '', '');
-        // $return['query'] = $query;
         $query_res = $callConfig->getRow($query);
         $res = $query_res;
         $le = $res->doc_no_length;

@@ -3,30 +3,11 @@ class assetUserClass extends userClass{
 	public function getAssetAllocation($get){
 		global $callConfig;
 		$return = array();
-		//print_r($get); exit;
 		$return['get']= $get;
 		$todaytedate = date('Y-m-d');
 		if($get['resultgettype'] =="ADMINDASH"){
 			$codition = "";
 			$conditionassetlist = "";
-			// echo "<pre>";
-			// $display_attributessql = "SELECT * FROM display_attributes WHERE  company_id = '".$get['company_id']."' AND is_active =0 GROUP BY application_table_name";
-			// $display_attributessres=$callConfig->getAllRows($display_attributessql);
-			// foreach($display_attributessres as $sar){
-			// 	$list_attributes = json_decode($sar->list_attributes,1);
-			// 	$application_table_name = $sar->application_table_name;
-			// 	$sqnc = 10;
-			// 	foreach($list_attributes as $fieldname => $fieldval){
-			// 		$insert_display_list = $fieldval->insert_display_list =="1"?0:1;
-			// 		$type = $fieldval->field_type !=""?$fieldval->field_type:'text';
-			// 		$insert_array = array('application_module'=>'','company_id'=>$get['company_id'],'application_table_name'=>$application_table_name,'help_text'=>'','menu_path'=>'','field_name'=>$fieldname,'reference_field_name'=>$fieldname,'field_type'=>$type,'sequence'=>$sqnc,'display'=>$insert_display_list,'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id'],'created_date'=>date("Y-m-d H:i:s"));
-			// 		$approval_id=$callConfig->insertRecord('application_tours',$insert_array);
-			// 		$sqnc =$sqnc +10;
-			// 	}
-			// 	//exit;
-			// }
-			// //display_attributessres
-			// exit;
 
 			if($get['admin_type'] !='1'){
 	    		$codition = " AND asset_custodian = '".$get['user_id']."'";
@@ -138,9 +119,6 @@ class assetUserClass extends userClass{
 
 			}elseif($get['pagetype'] == 'ASSET_RETURNS'){
 
-				//$asset_requestssql = "SELECT * FROM asset_returns WHERE company_id = '".$get['company_id']."' AND originator = '".$get['user_id']."' AND is_active =0";
-			//	$asset_requestsres=$callConfig->getAllRows($asset_requestssql);
-				//$return['asset_returns'] = $asset_requestsres;
 
 				$asset_requestssql = "SELECT ass.asset_code, ass.asset_description, ass.category_id, assretur.id, assretur.return_date, assretur.description, assretur.approve_datetime, assretur.current_status FROM asset_returns assretur , assets ass WHERE assretur.company_id = '".$get['company_id']."' AND assretur.originator = '".$get['user_id']."' AND assretur.company_id = ass.company_id AND assretur.asset_id = ass.id  AND assretur.is_active = ass.is_active AND ass.is_active =0";
 				$asset_requestsres=$callConfig->getAllRows($asset_requestssql);
@@ -218,9 +196,6 @@ class assetUserClass extends userClass{
 
 
 
-		// 	$asset_categorie = "SELECT id,category_description,depreciation_account,disposal_account,Journal_id,duration,duration_type FROM  asset_categories WHERE  company_id = '".$get['company_id']."' AND is_active =0";
-		// 	$asset_categorieres=$callConfig->getAllRows($asset_categorie);
-		// 	$return['asset_categories'] = $asset_categorieres;
 
 			$locationsql = "SELECT id,location_name FROM locations WHERE company_id = '".$get['company_id']."' AND is_active =0";
 			$locationsres=$callConfig->getAllRows($locationsql);
@@ -229,25 +204,13 @@ class assetUserClass extends userClass{
 			}
 			$return['locations'] = $locations;
 
-		// 	$assetstatussql = "SELECT id,name FROM asset_status WHERE company_id = '".$get['company_id']."' AND is_active =0";
-		// 	$assetstatusres=$callConfig->getAllRows($assetstatussql);
-		// 	$return['asset_status'] = $assetstatusres;
 
 
-		// $asset_condition_typesql = "SELECT id,condition_name FROM asset_condition_type WHERE is_active =0 AND company_id = '".$get['company_id']."'";
-		// 	$asset_condition_typeres=$callConfig->getAllRows($asset_condition_typesql);
-		// 	foreach($asset_condition_typeres as $assetct){
-		// 		$assetcondition[$assetct->id] = $assetct->condition_name;
-		// 	}
-		// 	$return['asset_condition_type'] = $assetcondition;
 
 			$user = "SELECT id,display_name FROM application_users WHERE company_id = '".$get['company_id']."' AND JSON_SEARCH(role_id, 'one', '".ASSET_EXECUTIVE_ROLE."') IS NOT NULL AND is_active = 0";
 			$users=$callConfig->getAllRows($user);
 			$return['users'] = $users;
 
-			// $assetlistsql = "SELECT id,asset_description,asset_code  FROM assets WHERE is_active =0 AND company_id = '".$get['company_id']."'";
-			// $assetslist=$callConfig->getAllRows($assetlistsql);
-			// $return['list_assets'] = $assetslist;
 
 
 		}elseif($get['resultgettype'] =='INSERTASSETRETURN'){ //Insert Page data
@@ -297,10 +260,6 @@ class assetUserClass extends userClass{
 				$return['momenthistory'] = $assets;
 			}
 
-			// $assetsql = "SELECT ass.id,ass.asset_code,ass.asset_description,ass.category_id,ass.serial_no,ass.asset_location,ass.asset_img,ass.brand,ass.model,ass.conditions,ass.asset_status,ass.asset_owner,ass.allocation_status,ass.attribute, ass.ownership, ass.allocation_status, ass.Parent_asset, ass.current_status, emp_ass.end_date,emp_ass.remarks,emp_ass.allocation_type,emp_ass.id as emp_asset_id,emp_ass.attribute as emp_attribute, emp_ass.user_id as user_assets_user_id FROM assets ass LEFT JOIN user_assets emp_ass on ass.is_active =emp_ass.is_active AND ass.company_id = emp_ass.company_id AND ass.id = emp_ass.asset_id WHERE ass.is_active =0 AND ass.company_id = '".$get['company_id']."' AND ass.id IN(".$get['assetid'].")";
-			// $return['list_assets_sql'] = $assetsql;
-			// $assets=$callConfig->getAllRows($assetsql);
-			// $return['list_assets'] = $assets;
 
 		}elseif($get['resultgettype'] == "ASSETREQUESTTRANSFERSACCEPTORREJECT"){
 
@@ -350,8 +309,6 @@ class assetUserClass extends userClass{
 			$costcentersql = "SELECT id,cost_center_name FROM cost_centers WHERE company_id = '".$get['company_id']."' AND is_active =0";
 			$costcenter=$callConfig->getAllRows($costcentersql);
 			$return['costcenter'] = $costcenter;
-			//$employeessql = "SELECT id,display_name FROM employees WHERE date_of_leaving IS NULL AND company_id = '".$get['company_id']."' AND is_active =0";
-			//print_r($return); exit;
 			$employeessql = "SELECT id,display_name FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active =0";
 			$employees=$callConfig->getAllRows($employeessql);
 			$return['employees'] = $employees;
@@ -368,7 +325,6 @@ class assetUserClass extends userClass{
 			$departmentsql = "SELECT id,department_name FROM departments WHERE company_id = '".$get['company_id']."' AND is_active =0";
 			$departmentres=$callConfig->getAllRows($departmentsql);
 			$return['departments'] = $departmentres;
-			//print_r($return); exit;
 			$asset_condition_typesql = "SELECT id,condition_name FROM asset_condition_type WHERE is_active =0 AND company_id = '".$get['company_id']."'";
 			$asset_condition_typeres=$callConfig->getAllRows($asset_condition_typesql);
 			foreach((array)$asset_condition_typeres as $assetct){
@@ -390,7 +346,6 @@ class assetUserClass extends userClass{
 			$vendorsql = "SELECT id,display_name  FROM vendors WHERE is_active =0 AND company_id = '".$get['company_id']."'";
 			$vendorlist=$callConfig->getAllRows($vendorsql);
 			$return['vendors'] = $vendorlist;
-			//print_r($return); exit;
 
 			$depreciationmethodsql = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ".$get['company_id']." AND genc_code = 'DEPRECIATIONMETHOD' AND is_active =0";
 		    $depreciationmethodres = $callConfig->getAllRows($depreciationmethodsql);
@@ -399,12 +354,7 @@ class assetUserClass extends userClass{
 		     $chart_of_accountssql = "SELECT id, account_code, account_name FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND is_active =0 ORDER BY display_priority ASC";
 		    $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
 		    $return['chart_of_accounts']= $chart_of_accountsres;
-		    // print_r($return); exit;
 
-		   /* $journalssql = "SELECT id, journal_name FROM `journals` WHERE company_id = ".$get['company_id']." AND is_active =0 ORDER BY journal_name ASC";
-		    $journalsres = $callConfig->getAllRows($journalssql);
-		    $return['journals']= $journalsres;*/
-		    //print_r($return); exit;
 		}elseif($get['resultgettype'] =='INSERTASSETREQUESTS'){
 			$asset_categorie = "SELECT id,category_description,depreciation_account,disposal_account,Journal_id,duration,duration_type FROM  asset_categories WHERE  company_id = '".$get['company_id']."' AND is_active =0";
 			$asset_categorieres=$callConfig->getAllRows($asset_categorie);
@@ -417,9 +367,6 @@ class assetUserClass extends userClass{
 			$applicationuserssql = "SELECT id, reports_to FROM application_users WHERE company_id = '".$get['company_id']."' AND id = '".$get['user_id']."' AND is_active =0";
 			$applicationusersres=$callConfig->getRow($applicationuserssql);
 			$return['reporting_manager'] = $applicationusersres;
-			//$attributessql = "SELECT id,name FROM asset_attributes WHERE is_active =0 AND company_id = '".$get['company_id']."' AND category_id IN(".$requestres->asset_category_id.")";
-			//$attributesres=$callConfig->getAllRows($attributessql);
-			//$returnresult['attributes'] = $attributesres;
 		}
 
 		return $return;
@@ -431,7 +378,6 @@ class assetUserClass extends userClass{
 		$insert_requst= array('company_id'=>$post['company_id'],'request_datetime'=>date("Y-m-d H:i:s"),'category_id'=>$post['category_id'],'originator'=>$post['user_id'],'asset_required_start_date'=>$this->dateconvertdbformat($post['asset_required_start_date']),'asset_required_end_date'=>$this->dateconvertdbformat($post['asset_required_end_date']),'description'=>$post['description'],'location_id'=>$post['location_id'],'attribute'=>$attributes,'delivery_type'=>$post['delivery_type'],'approval_user_id'=>$post['approval_user_id'],'quantity'=>$post['quantity'],'delivery_address'=>$post['delivery_address'],'is_active' =>'0','current_status'=>ST_INPROGRESS,'created_date'=>date('Y-m-d H:i:s'),'created_by'=>$post['user_id']);
 		$insert_requstres = $callConfig->insertRecord('asset_requests',$insert_requst);
 		$return['res']= $insert_requstres;
-		// $returnresult['insert_request']  = $insert_requstres;
 		if($insert_requstres['LASTID'] !=""){
 			$user_ids = array('0'=>$post['approval_user_id']);
 			$msg = "Asset Request ".$insert_requstres['LASTID'];
@@ -464,7 +410,6 @@ class assetUserClass extends userClass{
 			$return['all_assets'] = $all_assets;
 
 			$alreadyusedasset = $this->getactiveassetanystage($get);
-			//$return['assetsql'] = $alreadyusedasset;
 
 			$conditionrequest = "";
 			if(isset($get['categroy_list']) && $get['categroy_list'] !=""){
@@ -560,7 +505,6 @@ class assetUserClass extends userClass{
 
 		$sql2 = "SELECT asset_id FROM `user_assets` WHERE company_id = '".$get['company_id']."' AND asset_return_status = 'N' AND is_active = 0";
 		$res2=$callConfig->getAllRows($sql2);
-		//$asset_ids = array();
 		foreach($res2 as $asres1){
 			$asset_ids[$asres1->asset_id] = $asres1->asset_id;
 		}
@@ -682,30 +626,12 @@ class assetUserClass extends userClass{
 			$sendnotification = $this->tosendnotifiations($notdataa);
 		}
 
-		// if($post['allocation_type'] == '2'){
-		// 	$msg = "Asset Rejected";
-		// 	$res['asset_trans_type'] = '4';
-		// 	$assetupdatearray = array('conditions'=>$post['conditions'][$asset_idkey],'allocation_status'=>'N');
-		// }else{
-		// 	$msg = "Asset Accepted";
-		// 	$res['asset_trans_type'] = '5';
-		// 	$assetupdatearray = array('conditions'=>$post['conditions'][$asset_idkey],'allocation_status'=>'Y');
-		// }
-		// $get['employee_id'] = $post['emp_id'];
-		// $get['company_id'] = $post['company_id'];
-		// $user_id  =  $this->getempconnect($get);
-		// $user_ids = array('0'=>$user_id['admin_connect']);
-		// $option = "COM_LIST_ASSET_ALLOCATIONS";
-		// $notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['asset_id'],'application_table_name'=>'user_assets', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
-		// $sendnotification = $this->tosendnotifiations($notdataa);
-		//$returnresult['history'] = $this->insertAssetTransaction($post,$table,$res,$assetupdatearray);
 		return $returnresult;
 	}
 public function updateAssetAllocation($get, $post){
 		global $callConfig;
 		$table =  "Assets";
 		foreach($post['asset_id'] as $key=>$rid){
-			//$insert_array = array('asset_description' =>$post['asset_description'][$key],'category_id'=>$post['category_id'][$key],'serial_no' =>$post['serial_no'][$key],'asset_location'=>$post['asset_location'][$key],'asset_cost'=>$post['asset_cost'][$key],'accum_depn'=>$post['accum_depn'][$key],'purchase_date'=>$this->dateconvertdbformat($post['purchase_date'][$key]),'disposal_proceeds'=>$post['disposal_proceeds'][$key],'depn_rate'=>$post['depn_rate'][$key],'long_description'=>$post['long_description'][$key],'brand'=>$post['brand'][$key],'model'=>$post['model'][$key],'conditions'=>$post['conditions'][$key],'po_number'=>$post['po_number'][$key],'po_date'=>$this->dateconvertdbformat($post['po_date'][$key]),'invoice_number'=>$post['invoice_number'][$key],'Invoice_date'=>$this->dateconvertdbformat($post['Invoice_date'][$key]),'purchase_number'=>$post['purchase_number'][$key],'capitalization_price'=>$post['capitalization_price'][$key],'capitalization_date'=>$this->dateconvertdbformat($post['capitalization_date'][$key]),'end_of_life'=>$this->dateconvertdbformat($post['end_of_life'][$key]),'asset_status'=>$post['status'][$key]);
 			$insert_array = array('asset_description' =>$post['asset_description'][$key],'category_id'=>$post['category_id'][$key],'serial_no' =>$post['serial_no'][$key],'asset_location'=>$post['asset_location'][$key],'asset_cost'=>$post['asset_cost'][$key],'accum_depn'=>$post['accum_depn'][$key],'purchase_date'=>$this->dateconvertdbformat($post['purchase_date'][$key]),'disposal_proceeds'=>$post['disposal_proceeds'][$key],'depn_rate'=>$post['depn_rate'][$key],'long_description'=>$post['long_description'][$key],'brand'=>$post['brand'][$key],'model'=>$post['model'][$key],'conditions'=>$post['conditions'][$key],'asset_status'=>$post['status'][$key]);
 			$insert_array['updated_date'] = date('Y-m-d H:i:s');
 			$insert_array['updated_by'] = $post['user_id'];
@@ -722,7 +648,6 @@ public function updateAssetAllocation($get, $post){
 public function insertAsset($post){
 	global $callConfig;
 	$returncdc['post'] = $post;
-	//return $returncdc;
 	$qruploadDir =  SITEROOT.'/uploads/equipments/qr_code/';
 	$table = "assets";
 	$attributes =implode(",",(array)$post['attribute']);
@@ -731,9 +656,7 @@ public function insertAsset($post){
 		$depreciation_table[] =array('depreciation_date'=>$valu,'per_year_deprciation'=>$post['per_year_deprciation'][$keyid],'accumulated_depreciation'=>$post['accumulated_depreciation'][$keyid],'depreciation_price'=>$post['depreciation_price'][$keyid]);
 	}
 	$depreciationtable = json_encode((array)$depreciation_table);
-	//return $returncdc;
 	$insert_array = array('company_id' =>$post['company_id'],'asset_description' =>$post['asset_description'],'category_id'=>$post['category_id'],'serial_no' =>$post['serial_no'],'is_active' =>'0','current_status'=>0,'asset_location'=>$post['asset_location'],'asset_cost'=>$post['asset_cost'],'accum_depn'=>$post['accum_depn'],'purchase_date'=>$this->dateconvertdbformat($post['purchase_date']),'disposal_proceeds'=>$post['disposal_proceeds'],'depn_rate'=>$post['depn_rate'],'long_description'=>$post['long_description'],'asset_img'=>$post['asset_img'],'brand'=>$post['brand'],'model'=>$post['model'],'conditions'=>$post['conditions'],'Parent_asset'=>$post['Parent_asset'],'vendor'=>$post['vendor'],'ownership'=>$post['ownership'],'rented_from'=>$post['rented_from'],'po_number'=>$post['po_number'],'po_date'=>$this->dateconvertdbformat($post['po_date']),'invoice_number'=>$post['invoice_number'],'Invoice_date'=>$this->dateconvertdbformat($post['Invoice_date']),'purchase_number'=>$post['purchase_number'],'capitalization_price'=>$post['capitalization_price'],'capitalization_date'=>$this->dateconvertdbformat($post['capitalization_date']),'end_of_life'=>$this->dateconvertdbformat($post['end_of_life']),'custom_field'=>$post['custom_field'],'attribute'=>$attributes,'asset_status'=>$post['status'],'asset_custodian'=>$post['asset_custodian'],'warranty_expiry_date'=>$this->dateconvertdbformat($post['warranty_expiry_date']),'depreciation_method'=>$post['depreciation_method'],'duration'=>$post['duration'],'depreciation_account'=>$post['depreciation_account'],'expense_account'=>$post['expense_account'],'journal_id'=>$post['journal_id'],'depreciation_table'=>$depreciationtable);
-	//return $insert_array;
 	if($post['Rid'] !=""){
 
 		//QR Code Generater
@@ -761,7 +684,6 @@ public function insertAsset($post){
 			$callConfig->insertRecord('equipment_logs',$insertlog);
 
 	}else{
-		//	return $insert_array;
 	    		$assets_transaction_id = $this->toGetApplicationSerialNumber('assets',$post);
 			$insert_array['asset_code'] = $assets_transaction_id;
 			//return $insert_array;
@@ -774,9 +696,7 @@ public function insertAsset($post){
 			$insert_array['created_date'] = date('Y-m-d H:i:s');
 			$insert_array['created_by'] = $post['user_id'];
 			$insert_array['current_status'] = '0';
-			//return $insert_array;
 			$res = $callConfig->insertRecord('assets',$insert_array);
-			//return array('res'=>$res);
 			if($res['status'] == 'sucess'){
 				$res['asset_id']  = $res['LASTID'];
 				$res['asset_trans_type'] = '1'; // Create Assets
@@ -810,7 +730,6 @@ public function insertAsset($post){
 			$res = $callConfig->insertRecord('asset_returns',$insert_array);
 			$return['res']  =$res;
 
-			//$this->insertAssetTransaction($post,$table,$res,$assetupdatearray);
 
 			$user_ids = array('0'=>$assetsres->asset_custodian);
 			$msg = "Asset Return Request - ".$res['LASTID'];
@@ -898,7 +817,6 @@ public function insertAsset($post){
 			}
 			if(isset($get['asset_owner']) && $get['asset_owner'] !=""){
 				$conditionassetlist .= " AND emp_ass.user_id = '".$get['asset_owner']."'";
-				//$empassetcoditon .=" AND emp_ass.emp_id = '".$get['employee']."'";
 			}
 			if(isset($get['status']) && $get['status'] !=""){
 				$conditionassetlist .= " AND ass.asset_status ='".$get['status']."'";
@@ -982,7 +900,6 @@ public function insertAsset($post){
 	$costcentersql = "SELECT id,cost_center_name FROM cost_centers WHERE company_id = '".$get['company_id']."' AND is_active =0";
 	$costcenter=$callConfig->getAllRows($costcentersql);
 	$returnresult['costcenter'] = $costcenter;
-	//$employeessql = "SELECT id,display_name FROM employees WHERE date_of_leaving IS NULL AND company_id = '".$get['company_id']."' AND is_active =0";
 
 	$employeessql = "SELECT id,display_name FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active =0";
 	$employees=$callConfig->getAllRows($employeessql);
@@ -1046,8 +963,6 @@ public function insertAsset($post){
 		if($post['singleasset']=="Y"){ //single asset alocation request page
 			$attributes =implode(",",(array)$post['attribute']);
 			$emp_id = $post['employee_id'];
-			// $getuseridemployeesql = "SELECT user_id FROM employees WHERE is_active =0 AND company_id = '".$get['company_id']."' AND id = '".$emp_id."'";
-			// $useriid=$callConfig->getRow($getuseridemployeesql);
 			$asset_id = $post['asset_id'];
 			$insert_array = array('company_id' =>$post['company_id'],'is_active' =>'0','current_status'=>'0','asset_id'=>$asset_id,'user_id'=>$emp_id,'start_date'=>$this->dateconvertdbformat($post['start_date']),'end_date'=>$this->dateconvertdbformat($post['end_date']),'remarks'=>$post['remarks'],'attribute'=>$attributes,'Location'=>$post['location_id'],'conditions'=>$post['candition'],'asset_deliver'=>$post['asset_deliver'],'asset_img'=>$post['asset_img']);
 			$res = $callConfig->insertRecord('user_assets',$insert_array);
@@ -1073,20 +988,6 @@ public function insertAsset($post){
 			$returnresult['notification_array']  = $notdataa;
 			$sendnotification = $this->tosendnotifiations($notdataa);
 		}else{
-			// if($post['allocation_type'] == "CC"){ //cost center
-			// 	$employeesql = "SELECT id FROM employees WHERE is_active =0 AND company_id = '".$post['company_id']."' AND cost_center_id = '".$post['coast_center_id']."' AND role_id = '".COST_CENTER_ROLE."'";
-			// 	$employees=$callConfig->getRow($employeesql);
-			// 	$emp_id = $employees->id;
-			// }elseif($post['allocation_type'] == "D"){ // Departments
-			// 	$employeesql = "SELECT id FROM employees WHERE is_active =0 AND company_id = '".$post['company_id']."' AND department_id = '".$post['departent_id']."' AND role_id = '".DEPARTMENT_ROLE."'";
-			// 	$employees=$callConfig->getRow($employeesql);
-			// 	$emp_id = $employees->id;
-			// }elseif($post['allocation_type'] == "E"){ // employees
-			// 	$emp_id = $post['employee_id'];
-			// }
-			//$getuseridemployeesql = "SELECT user_id FROM employees WHERE is_active =0 AND company_id = '".$post['company_id']."' AND id = '".$emp_id."'";
-			//$useriid=$callConfig->getRow($getuseridemployeesql);
-			//$user_ids = array('0'=>$useriid->user_id);
 			$select_user_id =  $post['select_user_id'];
 			$option = "";
 			foreach($post['asset_id'] as $asset_idkey=>$asset_id){
@@ -1130,7 +1031,6 @@ public function insertAsset($post){
 	}
 	public function insertAssetTransaction($post,$table,$res,$assetupdatearray=""){
 		global $callConfig;
-		//print_r($res);
 		$returnresult['resdd'][] =$res;
 		$asset_id = $res['asset_id'];
 		if($assetupdatearray !=""){
@@ -1154,7 +1054,6 @@ public function insertAsset($post){
 		global $callConfig;
 		$get['employee_id'] = $post['emp_id'];
 		$get['company_id'] = $post['company_id'];
-		//$user_id  =  $this->getempconnect($get);
 		$user_id = array('admin_connect' => 'NOT-CONFIGURED');
 		$returnresult['admin_buddy']  = $user_id;
 		if($post['extension_type'] == "A"){
@@ -1183,7 +1082,6 @@ public function insertAsset($post){
 		$returnresult['post'] = $post;
 		$get['employee_id'] = $post['emp_id'];
 		$get['company_id'] = $post['company_id'];
-		//$user_id  =  $this->getempconnect($get);
 		$user_id = array('admin_connect' => 'NOT-CONFIGURED');
 		$returnresult['admin_buddy']  = $user_id;
 		if($user_id['admin_connect'] != "NOT-CONFIGURED"){
@@ -1223,7 +1121,6 @@ public function insertAsset($post){
 	/*End asset allocation */
 	public function getemployeeassetandassetsdata($get, $post){
 		global $callConfig;
-		//$whr = "emp_id=".$get['empid']." AND is_active=0";
 		$equery = "SELECT eas.id id, eas.asset_id,  eas.start_date, eas.end_date, eas.remarks, eas.current_status, ast.asset_code, ast.serial_no, ast.asset_description FROM user_assets eas, assets ast WHERE eas.company_id = ast.company_id AND eas.asset_id = ast.id AND eas.user_id = ".$get['empid']."  AND eas.is_active = 0";
 		$return['emp_assets'] = $callConfig->getAllRows($equery);
 		$equery = "SELECT id,asset_code,asset_description,category_id,serial_no FROM assets WHERE id NOT IN (SELECT asset_id FROM user_assets WHERE current_status =".ST_ALLOCATE." AND is_active = 0)";
@@ -1337,7 +1234,6 @@ public function insertAsset($post){
 		}
 		$fdate=$fristdate;
 		for($i=1;$i<190;$i++){
-				//echo $fdate."<br>";
 			if(strtotime($fdate)<=strtotime($lastdate)){
 				$n = date("n",strtotime($fdate));
 				$day = date("w",strtotime($fdate));
@@ -1358,7 +1254,6 @@ public function insertAsset($post){
 	}
 	public function togetassetsempassetdetails($get,$post){
 		global $callConfig;
-			//print_r($get);
 		$emp_assetssql = " SELECT emp_a.id, emp_a.start_date, emp_a.end_date, emp_a.current_status, asset.asset_code , asset.asset_description FROM `user_assets` emp_a, assets asset WHERE emp_a.company_id = '".$get['company_id']."' AND emp_a.is_active = 0 AND emp_a.asset_id = asset.id AND emp_a.user_id =  '".$get['empid']."'";
 		$emp_assetres = $callConfig->getAllRows($emp_assetssql);
 		return $emp_assetres;

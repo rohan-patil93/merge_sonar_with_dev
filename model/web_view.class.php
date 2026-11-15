@@ -11,7 +11,6 @@ class webViewClass extends userClass{
 	   	$return['main_data'] = $res;
 
 	   	$query = "SELECT * FROM $table_name t1 WHERE t1.originator=$user_id AND t1.company_id = $company_id AND t1.is_active = 0";
-        //echo $query;
         $ress = $callConfig->getAllRows($query);
         $return['data'] = $ress;
 
@@ -55,14 +54,12 @@ class webViewClass extends userClass{
             	WHERE t2.transaction_id=$rid AND  t2.company_id=$company_id AND t2.is_active=0";
             	$data = $callConfig->getAllRows($query);
             	$return['items'] = $data;
-            	//$return['items_sql'] = $query;
             }
             if($tax_table != ''){
             	$query = "SELECT t3.* FROM $tax_table t3 WHERE t3.transaction_id=$rid AND  t3.company_id=$company_id AND t3.is_active=0";
             	$data = $callConfig->getAllRows($query);
 
             	$return['taxes'] = $data;
-            	//$return['taxes_sql'] = $query;
             }
         }
 		return $return;
@@ -181,7 +178,6 @@ class webViewClass extends userClass{
 		$return = array();
 		$company_id = $get['company_id'];
 		$user_id = $get['user_id'];
-		// return $get;
 
 		$rid = $get['rid'];
         if(isset($rid) && $rid != ''){
@@ -219,7 +215,6 @@ class webViewClass extends userClass{
 		$return = array();
 		$company_id = $get['company_id'];
 		$user_id = $get['user_id'];
-		// return $get;
 
 		$rid = $get['rid'];
         if(isset($rid) && $rid != ''){
@@ -616,7 +611,6 @@ class webViewClass extends userClass{
 			$sql .= " AND adm.id > '".$get['last_message_id']."'";
 		}
 		$sql .= " ORDER BY adm.id ASC";
-		// $return['sql'] = $sql;
 
 		$rows = $callConfig->getAllRows($sql);
 		$messages = array();

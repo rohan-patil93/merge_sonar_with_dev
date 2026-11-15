@@ -2,7 +2,6 @@
 class esopUserClass extends userClass{
 	public function insertCompanyValuations($post){
 		global $callConfig;
-		//$return['post'] = $post;
 		$insertary=array('company_id'=>$post['company_id'],'valuation_name'=>$post['valuation_name'],'valuation_date'=>$this->dateconvertdbformat($post['valuation_date']),'company_value'=>$post['company_value'],'old_share_qty'=>$post['old_share_qty'],'valuation_shareholding'=>$post['valuation_shareholding'],'new_share_qty'=>$post['new_share_qty'],'total_share_qty'=>$post['total_share_qty'],'per_share_value'=>$post['per_share_value'],'notes'=>$post['notes']);
 		if($post['rid'] !=""){
 			$insertary['updated_date']=date('Y-m-d h:i:s');
@@ -26,7 +25,6 @@ class esopUserClass extends userClass{
 				$dilution_seq = $post['dilution_seq'][$keyid];
 				$dilution = $post['dilution'][$dilution_seq]=='0'?'0':'1';
 				$distributamount = round($post['total_share'][$keyid]*$post['per_share_value']);
-				//$distributshare = round(($post['distribute_percentage'][$keyid]/100)*$post['total_share_qty'],2);
 
 				$equity_shares_percentage_share = round(($post['equity_shares_percentage'][$keyid]/100)*$post['total_share'][$keyid]);
 				$equity_shares_percentage_amt = round(($post['equity_shares_percentage'][$keyid]/100)*$distributamount,2);
@@ -393,7 +391,6 @@ class esopUserClass extends userClass{
 	    	$companyvaluationsres = $callConfig->getAllRows($companyvaluationssql);
 	    	$return['company_valuations_all'] = $companyvaluationsres;
 
-	    	//$companyvaluationssql = "SELECT id, valuation_name, valuation_date, company_value, old_share_qty,valuation_shareholding, new_share_qty, total_share_qty, per_share_value, notes FROM company_valuations WHERE company_id = '".$get['company_id']."' AND is_active=0 ORDER BY valuation_date DESC limit 1";
 	    	$companyvaluationssql = "SELECT id, valuation_name, valuation_date, company_value, old_share_qty,valuation_shareholding, new_share_qty, total_share_qty, per_share_value, notes FROM company_valuations WHERE company_id = '".$get['company_id']."' AND id = '".$get['rid']."' AND is_active=0";
 
 	    	$companyvaluationssingle = $callConfig->getRow($companyvaluationssql);
@@ -406,9 +403,6 @@ class esopUserClass extends userClass{
 	    	$return['company_valuation_distributions'] = $company_valuation_distributionsres;
 
 
-			// $esopallocationsql = "SELECT ea.id, (ea.annual_ctc+ea.total_expected_benefit) as total, ea.emp_code, ea.emp_name, ep.date_of_grant  FROM esop_allocations ea, esop_plans ep WHERE ea.company_id =  '".$get['company_id']."' AND ea.company_id = ep.company_id AND ea.esop_plan_id = ep.id AND ea.is_active = ep.is_active AND ea.is_active = 0 ORDER BY ep.date_of_grant ASC";
-	  //   	$esopallocationres = $callConfig->getAllRows($esopallocationsql);
-	  //   	$return['esop_allocations'] = $esopallocationres;
 	    }
 
 
@@ -539,9 +533,6 @@ class esopUserClass extends userClass{
 	public function getESOPDetails($get){
 		global $callConfig;
 
-		// $esop_planscntsql = "SELECT count(*) as esop_cnt, SUM(share) as total_share_cnt, (SELECT SUM(epb.allocated_shares) FROM esop_plan_buckets epb WHERE ep.company_id = epb.company_id AND ep.is_active = epb.is_active) as allocated_shares_cnt FROM esop_plans ep WHERE ep.company_id = '".$get['company_id']."' AND ep.is_active=0";
-  //   	$esop_planscntres = $callConfig->getRow($esop_planscntsql);
-  //   	$return['esop_plans_cnt'] = $esop_planscntres;
 
 		$esop_planssql = "SELECT ep.id, ep.plan_name, ep.date_of_grant, ep.company_valuation, ep.share, ep.share_price_at_grant_time FROM esop_plans ep WHERE ep.company_id = '".$get['company_id']."' AND ep.is_active=0";
     	$esop_plansres = $callConfig->getAllRows($esop_planssql);

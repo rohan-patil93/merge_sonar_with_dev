@@ -181,7 +181,6 @@ public function getCommitteMembers($get)
         AND tal.company_id='" . $get['company_id'] . "' 
         AND cpd.is_active='0' AND cpd.current_status='" . $current_status . "' ORDER BY cpd.id DESC";
 
-        // $return['pending_approval_query'] = $pending_approval_query;
 
         $pending_approval_query = $callConfig->getAllRows($pending_approval_query);
         $pending_approvals = array();
@@ -406,7 +405,6 @@ public function getMapPoints($get){
     $user_field_work_type = $get['user_field_work_type'];
     if ($user_field_work_type == '1') {
         $query1 = "SELECT id, user_id, plan_date, plan_longitude as lng, plan_latitude as lat, plan_location as name From field_work_daily_plans Where user_id='" . $userid . "' AND plan_date='" . $map_date . "' AND company_id='" . $get['company_id'] . "' AND is_active =0 ";
-            // return $query1;
         $query1 = $callConfig->getAllRows($query1);
         $assignedLocations  = array();
         $i = 1;
@@ -588,7 +586,6 @@ public function getApplicationUsersDataforInsert($get)
         $whr ="id = '".$get['user_id']."' AND ";
     }
     $application_users_details = "SELECT id, display_name, user_field_work_type FROM  application_users WHERE company_id='" . $get['company_id'] . "' AND  ".$whr." is_active =0";
-    //echo   $application_users_details;
     $application_users_details = $callConfig->getAllRows($application_users_details);
     $application_users = array();
     $i = 1;
@@ -645,7 +642,6 @@ public function getFieldWorkUserMapPointsData($get){
                     AND fwump.company_id = '" . $get['company_id'] . "'  AND fwump.is_active = '0'
                 GROUP BY  au.display_name,  au.user_email, au.user_field_work_type, fwump.map_date";
             }
-            //echo $query1;
             $result = $callConfig->getAllRows($query1);
             if ($result) {
                 foreach ($result as $row) {
@@ -682,7 +678,6 @@ public function getUsersMapPointsData($get){
         $return = array();
         $userids_string = $get['userids'];
         $application_users_details = "SELECT id, display_name, user_field_work_type FROM  application_users WHERE reports_to in (".$userids_string.") AND company_id='" . $get['company_id'] . "' AND  is_active =0";
-        // echo $application_users_details;
         $application_users_details = $callConfig->getAllRows($application_users_details);
         $return['qeury_reslut'] = $application_users_details;
         return $return;
@@ -760,9 +755,6 @@ public function getUsersMapPointsData($get){
         }
         $return['tracking_inprogress'] = $tracking_inprogress;
 
-        // $query3 = "SELECT DISTINCT proposal_id
-        //     FROM csr_project_tracking
-        //     WHERE (status = '' OR status IS NULL) AND proposal_id IN (SELECT id FROM csr_proposal_data WHERE company_id = '" . $get['company_id'] . "' AND orgininaor = '" . $orgininaor . "' AND is_active = 0 AND current_status = 199  AND tracking_status=0)";
         $query3 = "SELECT id AS proposal_id FROM csr_proposal_data
         WHERE company_id = '" . $get['company_id'] . "'
             AND orgininaor = '" . $orgininaor . "'
@@ -813,17 +805,7 @@ public function getUsersMapPointsData($get){
         }
         $return['tracking_percent_arr'] = $tracking_percent_arr;
 
-        // $query2 = "SELECT au.id, au.display_name, au.user_email FROM application_user_module_roles aumr LEFT JOIN application_users au ON au.id = aumr.user_id
-        // WHERE aumr.role_short_code='CSR_COMMITTEE_MEMBER'
-        // AND aumr.company_id='" . $get['company_id'] . "'
-        // AND aumr.is_active='0'";
 
-        // $query2_res = $callConfig->getAllRows($query2);
-        // $users_arr = array();
-        // foreach ($query2_res as $row) {
-        //     $users_arr[] = $row;
-        // }
-        // $return['users_arr'] = $users_arr;
         $query2 = "SELECT au.id, au.display_name, au.user_email, aumr.role_short_code FROM application_user_module_roles aumr LEFT JOIN application_users au ON au.id = aumr.user_id 
         WHERE aumr.role_short_code IN ('CSR_CREATER', 'CSR_CREATOR', 'CSR_COMMITTEE_GROUP', 'CSR_COMMITTEE_MEMBER', 'CSR_COMMITTEE_HEAD')
         AND aumr.company_id='" . $get['company_id'] . "' 
@@ -885,7 +867,6 @@ public function getUsersMapPointsData($get){
 
         $query1 = "SELECT  id, date, subject, project_start_date, project_end_date, institue_name, created_by, total_budget_grand_total, current_status, tracking_status FROM  csr_proposal_data
         where project_start_date >= '".$from_date."'   AND project_start_date <= '".$to_date."' AND company_id = '" . $get['company_id'] . "' AND is_active=0";
-        // $return['query'] = $query;
         $query_res = $callConfig->getAllRows($query1);
         $csr_history = array();
         foreach ($query_res as $row) {
@@ -903,7 +884,6 @@ public function getUsersMapPointsData($get){
         if(isset($rid) && $rid != ''){
             $query1 = "SELECT * FROM  csr_yearly_budget
             where company_id = '" . $get['company_id'] . "' AND id = ".$rid." AND is_active=0";
-            // $return['query'] = $query1;
             $query_res = $callConfig->getRow($query1);
             $csr_yearly_budget = array();
             if(!empty($query_res)){
@@ -929,7 +909,6 @@ public function getUsersMapPointsData($get){
         }else{
             $query1 = "SELECT * FROM  csr_yearly_budget
             where company_id = '" . $get['company_id'] . "' AND is_active=0";
-            // $return['query'] = $query;
             $query_res = $callConfig->getAllRows($query1);
             $csr_yearly_budget = array();
             if(!empty($query_res)){
@@ -952,7 +931,6 @@ public function getUsersMapPointsData($get){
         }
         $query1 = "SELECT * FROM  csr_contractor_registations
         where company_id = '" . $get['company_id'] . "' ".$whr." AND is_active=0";
-        // $return['query'] = $query;
         $query_res = $callConfig->getAllRows($query1);
         $csr_contractors = array();
         foreach ($query_res as $row) {
@@ -1085,10 +1063,8 @@ public function getUsersMapPointsData($get){
                     }
 
                 }
-                // $return[$tableName]['row'.'****'.$key] = $row;
 
                 if (isset($existingRows[$pkValue]) && $existingRows[$pkValue] != '') {
-                    // $return[$tableName]['row'.'_'.$key] = $row;
 
                     if (!empty($existingRows[$pkValue][$timestampColumn]) && !empty($timestampValue)) {
                         if ($existingRows[$pkValue][$timestampColumn] < $timestampValue) {
@@ -1098,7 +1074,6 @@ public function getUsersMapPointsData($get){
                             }
                             $setClause = implode(", ", $set);
                             $updateQuery = "UPDATE `$tableName` SET $setClause WHERE `$primaryKey` = '$pkValue'";
-                            // $return[$tableName]['updateQuery'.'_'.$key] = $updateQuery;
 
                             $res =  $callConfig->executeQuery($updateQuery);
                             $return[$tableName]['updateQuery'.'_'.$key] = $res;
@@ -1110,7 +1085,6 @@ public function getUsersMapPointsData($get){
                     $columns = implode(", ", array_keys($escapedRow));
                     $values = implode(", ", array_values($escapedRow));
                     $insertQuery = "INSERT INTO `$tableName` ($columns) VALUES ($values)";
-                            // $return[$tableName]['insertQuery'.'_'.$key] = $insertQuery;
 
                     $res = $callConfig->executeQueryString($insertQuery);
                      $return[$tableName]['insertQuery'.'_'.$key] = $res;
@@ -1192,11 +1166,6 @@ public function getUsersMapPointsData($get){
                             foreach ($row as $column => $value) {
                                 $escapedRow[$column] = is_null($value) ? "NULL" : "'" . $callConfig->real_escape_string($value) . "'";
                             }
-                            // $columns = implode(", ", array_keys($escapedRow));
-                            // $values = implode(", ", array_values($escapedRow));
-                            // $insertQuery = "INSERT INTO notifications ($columns) VALUES ($values)";
-                            // $res = $callConfig->executeQuery($insertQuery);
-                            // $lastId = $res['LASTID'] ?? null;
                             $insertary = array();
                             foreach ($row as $column => $value) {
                                 $insertary[$column] = $value;
@@ -1264,7 +1233,6 @@ public function getUsersMapPointsData($get){
         global $callConfig;
         $return = array();
         $data = json_decode($post['data'], 1);
-        // return $data;
 
         $query = "SELECT id FROM  application_users WHERE company_id = '" .$get['company_id']. "' AND is_active=0";
         $query_res = $callConfig->getAllRows($query);
@@ -1472,7 +1440,6 @@ public function getUsersMapPointsData($get){
         $return  = array();
         $table = $get['table_name'];
         $data = json_decode($post['data'], true);
-        // return $data;
         if (empty($data['response'])) return ['status' => 'No data'];
         $dateFieldMap = [
             'transaction_approval_logs' => 'response_date',
@@ -1531,7 +1498,6 @@ public function getUsersMapPointsData($get){
     }
 
     public function insertSyncLog($get, $post) {
-        // return $post;
         global $callConfig;
 
         $insertary = array(
@@ -1764,7 +1730,6 @@ public function getUsersMapPointsData($get){
         }
         $return['selected_year'] = $selected_year;
 
-        // $proposal_fy_where = $selected_year != '' ? " AND p.financial_year = '".$selected_year."'" : "";
         $proposal_fy_where = '';
         $inv_fy_where = $selected_year != ''
             ? " AND (CASE WHEN financial_year REGEXP '^[0-9]{4}-[0-9]{4}$'
@@ -2694,7 +2659,6 @@ public function getUsersMapPointsData($get){
             HAVING allocation_amount > 0 OR approved_amount > 0 OR spent_amount > 0
             ORDER BY allocation_amount DESC";
         $sector_rows = $callConfig->getAllRows($sector_query);
-        // $return['sector_query'] = $sector_query;
 
         $location_query = "SELECT IFNULL(NULLIF(loc.location_name, ''), 'Not Mapped') AS label,
                 SUM(IFNULL(p.total_budget_grand_total, 0)) AS allocation_amount,
@@ -4857,7 +4821,6 @@ public function getUsersMapPointsData($get){
                 " . $type_whr . "
             ORDER BY ee.expense_date DESC, ee.expense_code ASC, eed.id ASC";
         $data_rows = $callConfig->getAllRows($data_q);
-        // $return['data_q'] = $data_q;
 
         $normalized = array();
         $claim_ids = array();

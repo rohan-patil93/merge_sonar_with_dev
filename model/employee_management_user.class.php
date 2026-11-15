@@ -27,7 +27,6 @@ class employeeManagementUserClass extends userClass{
         $return['employees'] = $empres;
         $onboardempid = array();
         foreach($empres as $empres){
-           // $empidwithuserid[$empres->id] = $empres->user_id;
             $onboardempid[$empres->id] = $empres->id;
         }
         $reviewtask[$get['user_id']] = $get['user_id'];
@@ -54,7 +53,6 @@ class employeeManagementUserClass extends userClass{
             $startdate =date($finance_tax_year."-04-01");
             $enddate =date(($finance_tax_year+1)."-03-31");
         }
-        //echo "<pre>";
         if(trim($get['taskassign']) == "Y"){
             $taslarraylist = array();
             $employeesquery = $callConfig->selectQuery('employees','*','id='.$get['employee_id'],'','','');
@@ -121,24 +119,10 @@ class employeeManagementUserClass extends userClass{
                     }else{
                         $approval_id = $connectdetails['hr_connect'];
                     }
-                    // if($tasks->on_the_day !=1){
-                    //     if($tasks->action_frequency == 'DY'){   $day = $tasks->on_the_day !=""?$tasks->on_the_day:0;  }
-                    //     if($tasks->action_frequency == 'WK'){   $day = 7;   }
-                    //     if($tasks->action_frequency == 'MON'){  $day = 30;  }
-                    //     if($tasks->action_frequency == ''){  $day = 0;  }
-                    //     if($tasks->before_or_after == 'BF'){ $day = "-".$day; }else{ $day = "+".$day; }
-                    //     echo $tasks->action_frequency." -- ".$employees->joining_date." ---  ".$day;
-                    //     $days_ago = date('Y-m-d', strtotime($day.' days', strtotime($employees->joining_date)));
-                    // }
-                   // echo $days_ago." ---  ".$enddate;
                     $task_array = array('company_id'=>$get['company_id'],'transaction_table'=>'employees','transaction_id'=>$get['employee_id'],'task_id'=>$tasks->id,'assigned_to'=>$employees->user_id,'action_date'=>$days_ago,'action_flag'=>'0', 'check_list'=>$tasks->check_list,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'approval_user_id'=>$approval_id,'task_name'=>$tasks->task_name,'process_id'=>$tasks->process_id);
 
-                    // if($get['submit'] != 'Y'){
-                    //     $task_array['process_id'] = $tasks->process_id; ///extrea
-                    // }
                     $taslarraylist[] = $task_array;
                     if($get['submit'] == 'Y'){
-                       // unset($task_array['task_name']);
                         $res = $callConfig->insertRecord('transaction_activity_schedule',$task_array);
                         $return['transaction_activity_schedule_insert'] = $res;
                     }
@@ -189,7 +173,6 @@ class employeeManagementUserClass extends userClass{
         $tasks_categoriessql = "SELECT id,category_name FROM tasks_categories where company_id = '".$get['company_id']."' AND is_active = 0";
         $tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);
         $return['tasks_categories'] = $tasks_categoriesres;
-        //print_r($return);
         return $return;
     }
     public function assigntasktoemployeesmanagement($get, $post){
@@ -197,12 +180,10 @@ class employeeManagementUserClass extends userClass{
         $return = array();
         $return['get'] = $get;
         $return['Post'] = $post;
-        //$finance_tax_year = $get['finance_tax_year'];
         $get['taskassign'] = "Y";
         $get['submit'] = "Y";
         $get['finance_tax_year'] = $post['finance_tax_year'];
         $check_emp_id = explode(",",$post['check_emp_id']);
-        //$check_emp_id = $post['check_emp_id'];
         foreach($check_emp_id as $empid){
             $get['employee_id'] = $empid;
             $return['res'][] = $this->getEMTaskAssigneList($get);

@@ -46,7 +46,6 @@ class phpMysqlClass{
 	    		$removellimt = explode("LIMIT",$sql_textarea);
 				$removellimtsql = $removellimt[0];
 				$removellimtres=$callConfig->getAllRowsError($removellimtsql);
-				//$return['error_status'] = $removellimtres['status'];
 				$return['removellimtsql'] =$removellimtsql;
 				if($removellimtres['status'] == '200'){
 					$respons_data_cnt = count((array)$removellimtres['respons']);
@@ -60,11 +59,9 @@ class phpMysqlClass{
 	    		$sql_rewsult=$callConfig->getAllRowsError($sql_textarea);
 	    		$return['else_removellimtsql'] =$sql_textarea;
 	    		if($sql_rewsult['status'] == '200'){
-	    			//$return['error_status'] = $sql_rewsult['status'];
 		    		$respons_data_cnt = count((array)$sql_rewsult['respons']);
 		    		$return['total_record_cnt'] = $respons_data_cnt;
 	    		}else{
-	    			//$return['error_status'] = $sql_rewsult['status'];
 	    			$respons_data_cnt = 0;
 		    		$return['total_record_cnt'] = $respons_data_cnt;
 	    		}

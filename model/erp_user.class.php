@@ -1,8 +1,4 @@
 <?php
-/*require_once "dompdf/autoload.inc.php";
-use Dompdf\Dompdf;
-use Dompdf\Options;
-*/
 class erpUserClass extends userClass{
 	public function togetinventorysummaryrepot($get){
 		global $callConfig;
@@ -11,7 +7,6 @@ class erpUserClass extends userClass{
 		if($get['from_date']!="" && $get['to_date']!=""){
 			$whr = " AND tl.document_date >= '".$get['from_date']."' AND tl.document_date <= '".$get['to_date']."'";
 		}
-		//$query = "SELECT it.id item_id, it.sku, it.item_name, sum(tl.in_qty) in_qty, sum(tl.out_qty) out_qty, 0 ord_qty, 0 sh_qty, 0 cm_qty  FROM item_ledger_st tl, items it WHERE tl.company_id = it.company_id AND tl.company_id =".$get['company_id']." AND tl.item_id = it.id ".$whr." GROUP BY tl.item_id";
 		$query = "SELECT 
 		it.id item_id, 
         it.sku, it.item_name, 
@@ -71,12 +66,6 @@ GROUP BY tl.item_id";
 	public function togetstocksummaryrepot($get){
 		global $callConfig;
 		$return['get']= $get;
-		//print_r($return); exit;
-		// $whr = "";
-		// if($get['from_date']!="" && $get['to_date']!=""){
-		// 	$whr = " AND tl.document_date >= '".$get['from_date']."' AND tl.document_date <= '".$get['to_date']."'";
-		// }
-		//$query = "SELECT it.id item_id, it.sku, it.item_name, sum(tl.in_qty) in_qty, sum(tl.out_qty) out_qty, 0 open_qty FROM item_ledger_st tl, items it WHERE tl.company_id = it.company_id AND tl.company_id =".$get['company_id']." AND tl.item_id = it.id ".$whr." GROUP BY tl.item_id";
 
 		$query = "SELECT it.id item_id,
 		(SELECT iwb.closing_qty
@@ -251,7 +240,6 @@ GROUP BY tl.item_id";
 			$whr = " AND pay.payment_date >= '".$get['from_date']."' AND pay.payment_date <= '".$get['to_date']."'";
 		}
 		$query = "SELECT pay.id, pay.transaction_no, pay.payment_date, pay.payment_type, pay.payment_process, pay.ref_no, pay.remarks ,  pa.transaction_no, pa.party_id, pa.total_paid_amonut, ven.company , ven.display_name FROM payments pay, payment_allocations pa, vendors ven WHERE pay.company_id = ".$get['company_id']." AND pay.company_id = pa.company_id AND pay.company_id = ven.company_id AND pay.id = pa.payment_id AND pay.is_active = pa.is_active AND pay.is_active = ven.is_active AND pay.is_active = 0 AND pay.transaction_type = 'vendors' AND ven.id = pa.party_id ".$whr;
-		//$query = "SELECT py.*, vn.display_name FROM payments py, vendors vn WHERE py.company_id = vn.company_id AND py.company_id = ".$get['company_id']." AND py.party_id = vn.id ".$whr." AND py.is_active =0";
 		$return['query'] = $query;
 		$data = $callConfig->getAllRows($query);
 		$return['data']= $data;
@@ -265,7 +253,6 @@ GROUP BY tl.item_id";
 		if($get['itemids']!=""){
 			$item_con = " AND ilw.item_id IN (".$get['itemids'].")";
 			$opening_item_con = " AND itm.id IN (".$get['itemids'].")";
-			//$opening_balance_condition = " AND ilw.item_id IN (".$get['itemids'].")";
 		/**$query = "SELECT
 		    itm.id,
 		    itm.sku,
@@ -421,7 +408,6 @@ GROUP BY tl.item_id";
 	}
 	//Koteswar code added start
 	public function togetvendorbalances($get){
-		// return $get;
 		global $callConfig;
 		$return['get']= $get;
 		$vendor_ids = $get['vendor_ids'];
@@ -458,13 +444,11 @@ GROUP BY tl.item_id";
 		GROUP BY v.id
 		ORDER BY vendor_name, pi.transaction_date";
 		$return['query'] = $query;
-		// return $return;
 		$data = $callConfig->getAllRows($query);
 		$return['data']= $data;
 		return $return;
 	}
 	public function togetbilldetails($get){
-		// return $get;
 		global $callConfig;
 		$return['get']= $get;
 		$vendor_ids = $get['vendor_ids'];
@@ -504,14 +488,12 @@ GROUP BY tl.item_id";
 		ORDER BY 
 		    pi.transaction_date";
 		$return['query'] = $query;
-		// return $return;
 
 		$data = $callConfig->getAllRows($query);
 		$return['data']= $data;
 		return $return;
 	}
 	public function togetvendorcreditdetails($get){
-		// return $get;
 		global $callConfig;
 		$return['get']= $get;
 		$vendor_ids = $get['vendor_ids'];
@@ -555,7 +537,6 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 	public function togetpaymentsmade($get){
-		// return $get;
 		global $callConfig;
 		$return['get']= $get;
 		$vendor_ids = $get['vendor_ids'];
@@ -598,7 +579,6 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 	public function togetpodetails($get){
-		// return $get;
 		global $callConfig;
 		$return['get']= $get;
 		$vendor_ids = $get['vendor_ids'];
@@ -631,7 +611,6 @@ GROUP BY tl.item_id";
 		ORDER BY 
 		    po.transaction_date DESC";
 		$return['query'] = $query;
-		// return $return;
 		$data = $callConfig->getAllRows($query);
 		$return['data']= $data;
 		return $return;
@@ -701,7 +680,6 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 		public function togetCustomerBalances($get){
-		// return $get;
 		global $callConfig;
 		$return['get']= $get;
 		$vendor_ids = $get['vendor_ids'];
@@ -738,14 +716,12 @@ GROUP BY tl.item_id";
 		GROUP BY v.id
 		ORDER BY vendor_name, pi.transaction_date";
 		$return['query'] = $query;
-		// return $return;
 		$data = $callConfig->getAllRows($query);
 		$return['data']= $data;
 		return $return;
 	}
 	public function getStockBalanceAvailability($get){
 		global $callConfig;
-		//echo "<pre>";
 		$return['get']= $get;
 		$transaction_table = $get['transaction_table'];
 		$transaction_id = $get['transaction_id'];
@@ -819,7 +795,6 @@ GROUP BY tl.item_id";
 			}
 		}
 		$return['errorthrow'] = array('details'=>$errorthrow,'errorcount'=>count((array)$errorthrow));
-		//print_r($return);
 		return $return;
 
 	}
@@ -911,7 +886,6 @@ GROUP BY tl.item_id";
 			// Delete existing child records before adding new one
 			$whr = "transaction_id =" . $transaction_id;
             $updateData = array('is_active' => null);
-            // $return['update_items_is_active_null'] = $updateData;
             $updateResult = $callConfig->updateRecord('dekitting_items', $updateData, '', '', $whr);
             $return['update_items_is_active_null'] = $updateResult;
             $updatedComponentIds = array();
@@ -936,7 +910,6 @@ GROUP BY tl.item_id";
 		}
 
 		$return['transaction_id'] = $transaction_id;
-		//$return['components'] = $post['components'];
 
 		// Build components from nested or parallel arrays
 		$components = [];
@@ -1022,7 +995,6 @@ GROUP BY tl.item_id";
 
 			$whr = "transaction_id =" . $transaction_id;
             $updateData = array('is_active' => null);
-            // $return['update_items_is_active_null'] = $updateData;
             $updateResult = $callConfig->updateRecord('kitting_items', $updateData, '', '', $whr);
             $return['update_items_is_active_null'] = $updateResult;
             $updatedComponentIds = array();
@@ -1108,7 +1080,6 @@ GROUP BY tl.item_id";
 		}else{
 			$child_trans_table = 'kitting_items';
 		}
-		//$ausql = "SELECT * FROM application_users WHERE company_id = '".$get['company_id']."' AND id = '".$get['user_id']."' AND is_active=0";
 		$ausql = "SELECT au.*, (SELECT department_id FROM cost_centers cc WHERE au.company_id = cc.company_id AND au.cost_center = cc.id AND au.is_active = cc.is_active) as department_id FROM application_users au WHERE au.company_id = '".$get['company_id']."' AND au.id = '".$get['user_id']."' AND au.is_active = 0";
 	    $aures = $callConfig->getRow($ausql);
 
@@ -1117,7 +1088,6 @@ GROUP BY tl.item_id";
 	    $res_parent = $callConfig->getRow($sql);
  		$itemids[$res_parent->parent_item_id] = $res_parent->parent_item_id;
  		$mainitem = $this->togetitemvalues($res_parent->parent_item_id);
-		//$day_rate = $this->togetitemwadayrate($res_parent->parent_item_id, $get['company_id']);
 		$day_rate = $res_parent->parent_item_day_rate;
 		$itemres = null;
 		$len = array('company_id' =>$get['company_id'] , 'location_id' =>$aures->location_id, 'transaction_warehouse_id' => $aures->default_warehouse_id, 'transaction_date' => $res_parent->transaction_date, 'item_id' =>$res_parent->parent_item_id,'document_no'=>$res_parent->id,'document_type' =>$transaction_table,'document_ref_no' =>'','in_qty' =>$res_parent->parent_quantity,'in_value'=>0,'item_in_value' =>0,'reason_id'=>0,'out_qty' =>$res_parent->parent_quantity,'out_value' =>0,'sale_price'=>0,'sale_value'=>0,'item_wa_cost'=>$day_rate,'item_st_cost'=>$mainitem->purchase_price,'is_active'=>'0','current_status'=>'0','sales_qty'=>0,'purchase_qty'=>0,'day_rate'=>$day_rate);
@@ -1151,7 +1121,6 @@ GROUP BY tl.item_id";
 			$itemids[$itemres->item_id] = $itemres->item_id;
 
 			$mainitem = $this->togetitemvalues($itemres->item_id);
-			//$day_rate = $this->togetitemwadayrate($itemres->item_id, $get['company_id']);
 			$day_rate = $itemres->component_day_rate;
 			$itemres->mainitem = $mainitem;
 			$itemres->day_rate = $day_rate;
@@ -1331,8 +1300,6 @@ GROUP BY tl.item_id";
 		$itemtabledetails = $items[$res_parent->parent_item_id];
 		$itemcategoorytabledetails = $item_categories[$itemtabledetails->category_id];
 
-		//$mainitem = $this->togetitemvalues($res_parent->parent_item_id);
-		//$day_rate = $this->togetitemwadayrate($res_parent->parent_item_id, $get['company_id']);
 		$day_rate = $res_parent->parent_item_day_rate;
 		$totalamt = ($res_parent->parent_quantity*$day_rate);
 
@@ -1400,9 +1367,7 @@ GROUP BY tl.item_id";
 		$jvary = array('company_id'=>$get['company_id'],  'transaction_location_id'=>$transaction_location_id,  'transaction_id'=>$transaction_id,  'transaction_item_id'=>'',  'item_id'=>'', 'particulars'=>'JV Suspense', 'item_name'=>'JV Suspense',  'description'=>'JV Suspense',  'purchase_uom'=>'',  'item_quantity'=>1,  'item_price'=>0,  'item_amount'=>0,  'tax_amount'=>0,  'discount_amount'=>0,  'total_amount'=>0,  'name_type'=>'C',  'doc_ref_no'=>'',  'doc_ref_date'=>'',  'req_date'=>$res_parent->transaction_date,  'approved_quantity'=>'',  'transaction_type'=>'',  'transaction_qty'=>'',  'pending_qty'=>'',  'is_active'=>'0',  'current_status'=>'0','created_by'=>$get['user_id'],'account_code'=>$suspense_account);
 
 		if(round($tot_debit_amount,2) > round($tot_credit_amount,2)){
-		//if($tot_debit_amount > $tot_credit_amount){
 			$suspencamount = round($tot_debit_amount,2) - round($tot_credit_amount,2);
-			//$suspencamount = $tot_debit_amount - $tot_credit_amount;
 			$total_credit_amt +=round($suspencamount,$rounddigits);
 			$suspensearry['credit_amount'] = $suspencamount;
 			$jvary['credit_amount'] = $suspencamount;
@@ -1411,9 +1376,7 @@ GROUP BY tl.item_id";
 			$itemref[$suspense_account][] = $jvary;
 			$witemlist[] =$suspensearry;
 		}elseif(round($tot_debit_amount,2) < round($tot_credit_amount,2)){
-		//}elseif($tot_debit_amount < $tot_credit_amount){
 			$suspencamount = round($tot_credit_amount,2) - round($tot_debit_amount,2);
-			//$suspencamount = $tot_credit_amount - $tot_debit_amount;
 			$total_debit_amt += round($suspencamount,$rounddigits);
 			$suspensearry['debit_amount'] = $suspencamount;
 			$jvary['debit_amount'] = $suspencamount;
@@ -1427,11 +1390,8 @@ GROUP BY tl.item_id";
 		$ref_id = '';
 		$senddata = array('company_id'=>$get['company_id'],'transaction_location_id'=>$transaction_location_id,  'department_id'=>$department_id,  'cost_center_id'=> $cost_center_id,  'transaction_number'=>'',  'transaction_date'=>$res_parent->transaction_date,  'currency_id'=>$aures->default_currency_id,  'currency_rate'=>1,  'originator'=>$res_parent->originator, 'created_date'=>date('Y-m-d h:i:s'),  'created_by'=>$get['user_id'],'credit_amount'=>$total_credit_amt, 'debit_amount'=>$total_debit_amt,'debit_tax'=>0,'credit_tax'=>'0','current_status'=>ST_APPROVED); // master table entry
 
-		//echo "<pre>";print_r($witemlist);
 		$postdata = array('main'=>$senddata,'items'=>$witemlist,'itemref'=>$itemref,'update_id'=>'','ref_id'=>$ref_id,'company_id'=>$get['company_id']);
 		$return['postdatajvdata'] = $postdata;
-		//echo "<pre>"; print_r($postdata); exit;
-		//echo "working 11 ";
 		$addjournalvouchers = $this->addjournalvouchers($postdata, $table_name);
 		$return['addjournalvouchers'] = $addjournalvouchers;
 //**/
@@ -1868,7 +1828,6 @@ GROUP BY tl.item_id";
 	public function togetspendanalysisbyvendor($get){
 		global $callConfig;
 		$return = array();
-		// $return['get'] = $get;
 		$company_id = $get['company_id'];
 		$whr = "";
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {

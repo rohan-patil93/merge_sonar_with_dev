@@ -4,13 +4,10 @@ class spaceUserClass extends userClass{
 		global $callConfig;
 		$building_floors = $post['building_floors'];
 		$insertary=array('building_name'=>$post['building_name'],'building_address'=>$post['building_address'],'building_image'=>$post['building_image'],'location_id'=>$post['location_id'],'originator'=>json_encode($post['originator']));
-		// return $insertary;
 		if($post['rid'] !=""){
 			$insertary['updated_date']=date('Y-m-d h:i:s');
 			$insertary['updated_by']=$post['user_id'];
-			//	return $insertary;
 			$return['result'] = $callConfig->updateRecord('buildings',$insertary,'id',$post['rid']);
-			//return $insertary;
 			$building_id = $post['rid'];
 		}else{
 			$insertary['created_by']=$post['user_id'];
@@ -21,27 +18,21 @@ class spaceUserClass extends userClass{
 			$building_id = $tapres['LASTID'];
 			$return['result'] =$tapres;
 		}
-		//return $return;
 		$wh = "company_id = '".$post['company_id']."' AND is_active =0 AND building_id = '".$building_id."'";
 		$res = $callConfig->updateRecord('building_floors',array('is_active'=>null),'','',$wh); // all disabled
-		//return $return;
 		foreach((array)$building_floors['floor_name'] as $key=>$keyvalue){
 			$insertary=array('building_id'=>$building_id,'floor_name'=>$building_floors['floor_name'][$key],'floor_image'=>$building_floors['floor_image'][$key],'is_active'=>'0');
 
 			if($post['building_floors_id'][$key] !=""){
 				$insertary['updated_date']=date('Y-m-d h:i:s');
 				$insertary['updated_by']=$post['user_id'];
-				//return $return;
 				$return['building_floors'][] = $callConfig->updateRecord('building_floors',$insertary,'id',$post['building_floors_id'][$key]);
 			}else{
 				$insertary['created_by']=$post['user_id'];
 				$insertary['company_id']=$post['company_id'];
 				$insertary['created_date']=date("Y-m-d H:i:s");
-				//return $return;
 				$tapres = $callConfig->insertRecord('building_floors',$insertary);
-			//	return $return;
 				$return['building_floors'][] =$tapres;
-			//	return $return;
 			}
 		}
 		return $return;
@@ -69,8 +60,6 @@ class spaceUserClass extends userClass{
 	}
 	public function getBuildingFloors($get){
 		global $callConfig;
-		//echo "------------------------";
-		//print_r($get); exit;
 
 		$building_floorssql = "SELECT id,building_id,floor_name,floor_image FROM building_floors WHERE company_id = '".$get['company_id']."'  AND  id = '".$get['rid']."' AND is_active = 0";
 		$building_floorsres = $callConfig->getRow($building_floorssql);
@@ -87,7 +76,6 @@ class spaceUserClass extends userClass{
 		$space_typesql = "SELECT id,space_type_name FROM space_types WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$space_typeres = $callConfig->getAllRows($space_typesql);
 		$return['space_types'] =$space_typeres;
-		//return $return;
 		$orderbywhere = "";
 		if($get['ORDERBY'] !=""){
 			$orderbywhere = " ORDER BY cabin_name ".$get['ORDERBY'];
@@ -100,7 +88,6 @@ class spaceUserClass extends userClass{
 		foreach((array)$building_floor_spacesres as $bfspae){
 			$buildingfloorspaceid[$bfspae->id] = $bfspae->id;
 		}
-		//return $return;
 		$building_floor_space_id = implode(',', (array)$buildingfloorspaceid);
 
 		if(count((array)$buildingfloorspaceid)>0){
@@ -109,7 +96,6 @@ class spaceUserClass extends userClass{
 		$building_floor_space_allocationsres = $callConfig->getAllRows($building_floor_space_allocationssql);
 		$return['building_floor_space_allocations'] =$building_floor_space_allocationsres;
 		}
-		//return $return;
 		$employeessql = "SELECT id, display_name, emp_code, email_id, image FROM employees WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$employeesres = $callConfig->getAllRows($employeessql);
 		$return['employees'] =$employeesres;
@@ -157,33 +143,12 @@ class spaceUserClass extends userClass{
 	public function getEquipmentAllocations($get){
 		global $callConfig;
 		$return['get'] = $get;
-		// if($get['gettype']=="buildings_list"){
-		// 	$buildingssql = "SELECT id, building_name, building_address,building_image FROM buildings WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-		// 	$buildingsres = $callConfig->getAllRows($buildingssql);
-		// 	$buildingresult = array();
-		// 	foreach($buildingsres as $buldg){
-		// 		$buildingresult[$buldg->id] = $buldg;
-		// 	}
-		// 	$return['buildings'] =$buildingresult;
 
-		// 	$building_floorssql = "SELECT id, floor_name, building_id, floor_image FROM building_floors WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-		// 	$building_floorsres = $callConfig->getAllRows($building_floorssql);
-		// 	$building_floors =$building_with_floors = array();
-		// 	foreach($building_floorsres as $buldg){
-		// 		$building_with_floors[$buldg->building_id][$buldg->id] = $buldg;
-		// 		$building_floors[$buldg->id] = $buldg;
-		// 	}
-		// 	$return['building_with_floors'] =$building_with_floors;
-		// 	$return['building_floors'] =$building_floors;
 
 		// }else{
 		if($get['pagetype'] == 'HOME'){
 
-			//if($get['admin_type']!='1'){
-				//$condition = "AND originator = '".$get['user_id']."'";
 			$condition = " AND (location_id = ".$get['location_id']." OR JSON_SEARCH(originator, 'one', '".$get['user_id']."') IS NOT NULL)";
-			//	$condition = " AND (location_id = ".$get['location_id']." OR FIND_IN_SET('".$get['user_id']."', originator))";
- 			//	$condition = " AND JSON_SEARCH(originator, 'one', '".$get['user_id']."') IS NOT NULL";
 				$approvalcondition = "AND approval_user_id = '".$get['user_id']."'";
 			//}
 			$buildings_id = array();
@@ -225,9 +190,6 @@ class spaceUserClass extends userClass{
 			$seating_poolsres = $callConfig->getAllRows($seating_poolssql);
 			$return['seating_pools'] =$seating_poolsres;
 
-			// $equipmentssql = "SELECT id, equipment_type_id, equipment_name, employee_seating FROM equipments WHERE company_id = '".$get['company_id']."' AND is_active = 0 ORDER BY created_date DESC limit 6";
-			// $equipmentsres = $callConfig->getAllRows($equipmentssql);
-			// $return['equipments_list'] =$equipmentsres;
 
 			$equipmentssql = "SELECT id,asset_code,asset_description FROM assets WHERE company_id = '".$get['company_id']."' AND is_active = 0 ORDER BY created_date DESC limit 6";
 			$equipmentsres = $callConfig->getAllRows($equipmentssql);
@@ -288,7 +250,6 @@ class spaceUserClass extends userClass{
 
 			if($get['admin_type']!='1'){
 				$condition = " AND JSON_SEARCH(originator, 'one', '".$get['user_id']."') IS NOT NULL";
-				//$condition = "AND originator = '".$get['user_id']."'";
 			}
 			if($get['building_id'] !=""){
 				$condition .= " AND id = ".$get['building_id'];
@@ -347,9 +308,7 @@ class spaceUserClass extends userClass{
 
 		}elseif($get['pagetype'] == 'B'){
 				if($get['admin_type']!='1'){
-					//$condition = " AND bu.originator = '".$get['user_id']."'";
 					$condition = " AND (bu.location_id = ".$get['location_id']." OR JSON_SEARCH(bu.originator, 'one', '".$get['user_id']."') IS NOT NULL)";
-					//$condition = " AND (bu.location_id = ".$get['location_id']." OR FIND_IN_SET('".$get['user_id']."', bu.originator))";
 
 				}
 				$buildingsql = "SELECT bu.id, bu.building_name,bu.building_address,bu.building_image,(SELECT COUNT(bf.id) AS cnt FROM building_floors bf WHERE bf.company_id = bu.company_id AND bf.building_id = bu.id AND bf.is_active = bu.is_active) AS floor_cnt, (  SELECT  COUNT(bfs.id) AS cnt FROM building_floor_spaces bfs WHERE  bfs.company_id = bu.company_id AND bfs.building_floor_id IN(  SELECT bf.id FROM building_floors bf WHERE bf.company_id = bu.company_id AND bf.building_id = bu.id AND bf.is_active = bu.is_active) AND bfs.is_active = 0 ) AS building_floor_space_cnt,( SELECT   COUNT(bfsa.id) AS cnt  FROM building_floor_space_allocations bfsa  WHERE  bfsa.company_id = bu.company_id AND bfsa.emp_id IS NOT NULL AND bfsa.building_floor_space_id IN(  SELECT  bfs.id FROM building_floor_spaces bfs WHERE bfs.company_id = bu.company_id AND bfs.building_floor_id IN( SELECT bf.id FROM building_floors bf WHERE bf.company_id = bu.company_id AND bf.building_id = bu.id AND bf.is_active = bu.is_active) AND bfs.is_active = 0 AND(bfsa.reserve_pool_id IS NULL OR bfsa.emp_id IS NULL)) AND bfsa.is_active = bu.is_active) AS usedspace_cnt FROM buildings bu WHERE bu.company_id = '".$get['company_id']."' AND bu.is_active = 0".$condition;
@@ -357,13 +316,6 @@ class spaceUserClass extends userClass{
 				$return['buildingsql'] =$buildingsql;
 				$return['buildings'] =$buildingres;
 
-				// $buildingssql = "SELECT id, building_name, building_address,building_image FROM buildings WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-				// $buildingsres = $callConfig->getAllRows($buildingssql);
-				// $buildingresult = array();
-				// foreach($buildingsres as $buldg){
-				// 	$buildingresult[$buldg->id] = $buldg;
-				// }
-				// $return['buildings'] =$buildingresult;
 
 				$building_floorssql = "SELECT id, floor_name, building_id, floor_image FROM building_floors WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 				$building_floorsres = $callConfig->getAllRows($building_floorssql);
@@ -682,20 +634,7 @@ class spaceUserClass extends userClass{
 				if($get['equipment_type_id'] !=""){
 					$assets_condition .= " AND id = ".$get['equipment_type_id'];
 				}
-				// if($get['equipment_id'] !=""){
-				// 	$condition .= " AND eq.id = ".$get['equipment_id'];
-				// }
-				// if($get['seating_equipment'] !=""){
-				// 	$condition .= " AND eq_type.seating_equipment = '".$get['seating_equipment']."'";
-				// }
-				// $equipmentsql ="SELECT eq.id, eq.equipment_type_id, eq.equipment_name, eq.employee_seating, eq.qr_code, eq.bar_code, eq.equipment_image, eq_cat.category_name, eq_type.equipment_types_name,eq_type.seating_equipment FROM equipments eq, equipment_categories eq_cat, equipment_types eq_type WHERE eq.company_id = '".$get['company_id']."' AND eq.company_id = eq_cat.company_id AND eq.company_id = eq_type.company_id AND eq.equipment_type_id = eq_type.id AND eq_type.equipment_category_id = eq_cat.id AND eq.is_active = 0 AND eq.is_active = eq_cat.is_active AND eq.is_active = eq_type.is_active".$condition;
-				// $equipments = $callConfig->getAllRows($equipmentsql);
-				// $return['equipmentsql'] =$equipmentsql;
-				// $return['equipments_list'] =$equipments;
 
-				// $equipment_allocationssql = "SELECT eq_al.id, eq_al.building_floor_space_id, eq_al.equipment_category_id, eq_al.equipment_type_id, eq_al.equipment_id, eq_al.emp_id, eq_al.top_size, eq_al.left_size, bfs.cabin_name, bfs.building_floor_id, bf.floor_name, bf.building_id FROM equipment_allocations eq_al, building_floor_spaces bfs, building_floors bf WHERE eq_al.company_id = '".$get['company_id']."' AND eq_al.company_id = bfs.company_id AND eq_al.company_id = bf.company_id AND eq_al.building_floor_space_id = bfs.id AND bfs.building_floor_id = bf.id AND eq_al.is_active = 0 ";
-				// $equipment_allocationsres = $callConfig->getAllRows($equipment_allocationssql);
-				// $return['equipment_allocations'] =$equipment_allocationsres;
 
 				$assetssql ="SELECT * FROM assets WHERE company_id = '".$get['company_id']."' ".$assets_condition." AND is_active = 0";
 				$assetsres = $callConfig->getAllRows($assetssql);
@@ -718,7 +657,6 @@ class spaceUserClass extends userClass{
 			}elseif($get['pagetype'] == 'IEM'){ // Employees Tab
 				$condition = "";
 				$empcondition = "";
-				//$return['get'] = $get;
 				if($get['building_id'] !=""){
 					$condition .= " AND bf.building_id = ".$get['building_id'];
 				}
@@ -732,9 +670,6 @@ class spaceUserClass extends userClass{
 					$condition .= " AND eq_al.emp_id = ".$get['emp_id'];
 					$empcondition .= " AND id = ".$get['emp_id'];
 				}
-				// $equipmentsql ="SELECT eq.id, eq.equipment_type_id, eq.equipment_name, eq.employee_seating, eq.qr_code, eq.bar_code, eq_cat.category_name, eq_type.equipment_types_name FROM equipments eq, equipment_categories eq_cat, equipment_types eq_type WHERE eq.company_id = '".$get['company_id']."' AND eq.company_id = eq_cat.company_id AND eq.company_id = eq_type.company_id AND eq.equipment_type_id = eq_type.id AND eq_type.equipment_category_id = eq_cat.id AND  eq.is_active = 0 AND eq.is_active = eq_cat.is_active AND eq.is_active = eq_type.is_active";
-				// $equipments = $callConfig->getAllRows($equipmentsql);
-				// $return['equipments_list'] =$equipments;
 
 				$employeessql = "SELECT id, display_name, emp_code, email_id, image FROM employees WHERE company_id = '".$get['company_id']."' ".$empcondition." AND id NOT IN(SELECT emp_id FROM equipment_allocations WHERE company_id = '".$get['company_id']."'  AND emp_id IS NOT NULL AND is_active = 0) AND is_active = 0";
 				$employeesres = $callConfig->getAllRows($employeessql);
@@ -756,7 +691,6 @@ class spaceUserClass extends userClass{
 
 			}elseif($get['pagetype'] == 'BSEM'){ // Employees Tab
 				$condition = "";
-				//$return['get'] = $get;
 				if($get['building_id'] !=""){
 					$condition .= " AND bf.building_id = ".$get['building_id'];
 				}
@@ -764,7 +698,6 @@ class spaceUserClass extends userClass{
 					$condition .= " AND bf.id = ".$get['building_floor_id'];
 				}
 				if($get['location_id'] !=""){
-					//$emplocatincondition .= " AND location_id = ".$get['location_id'];
 
 					$locsql = "SELECT id, location_name FROM locations WHERE company_id = '".$get['company_id']."' AND id = '".$get['location_id']."' AND is_active = 0";
 					$locres = $callConfig->getRow($locsql);
@@ -776,13 +709,6 @@ class spaceUserClass extends userClass{
 				if($get['admin_type']!='1'){
 					$emplocatincondition = "AND (location_id = '".$get['location_id']."' OR location_id IS NULL)";
 				}
-				// if($get['equipment_id'] !=""){
-				// 	$condition .= " AND eq_al.equipment_id = ".$get['equipment_id'];
-				// }
-				// if($get['emp_id'] !=""){
-				// 	$condition .= " AND eq_al.emp_id = ".$get['emp_id'];
-				// 	$empcondition .= " AND id = ".$get['emp_id'];
-				// }
 				$employeessql = "SELECT id, display_name, emp_code, email_id, image, reporting_manager_id, user_id FROM employees WHERE company_id = '".$get['company_id']."' ".$emplocatincondition." AND is_active = 0";
 				$return['select_employees_sql'] =$employeessql;
 				$employeesres = $callConfig->getAllRows($employeessql);
@@ -795,9 +721,6 @@ class spaceUserClass extends userClass{
 				$return['building_floor_space_allocations'] =$building_floor_space_allocationsres;
 
 
-				// $equipment_allocationssql = "SELECT eq_al.id, eq_al.building_floor_space_id, eq_al.equipment_category_id, eq_al.equipment_type_id, eq_al.equipment_id, eq_al.emp_id, eq_al.top_size, eq_al.left_size, bfs.cabin_name, bfs.building_floor_id, bf.floor_name, bf.building_id, emp.id as empp_id, emp.display_name, emp.emp_code, emp.email_id, emp.image FROM equipment_allocations eq_al, building_floor_spaces bfs, building_floors bf, employees emp WHERE eq_al.company_id = '".$get['company_id']."' AND eq_al.company_id = bfs.company_id AND eq_al.company_id = bf.company_id AND eq_al.company_id = emp.company_id AND eq_al.building_floor_space_id = bfs.id AND bfs.building_floor_id = bf.id AND eq_al.emp_id = emp.id  AND eq_al.is_active = emp.is_active  AND eq_al.is_active = 0 ".$condition;
-				// $equipment_allocationsres = $callConfig->getAllRows($equipment_allocationssql);
-				// $return['equipment_allocations'] =$equipment_allocationsres;
 
  				$buildingssql = "SELECT id, building_name, building_address,building_image FROM buildings WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 				$buildingsres = $callConfig->getAllRows($buildingssql);
@@ -864,9 +787,6 @@ class spaceUserClass extends userClass{
 					$building_floor_spacesres = $callConfig->getRow($building_floor_spacessql);
 					$return['building_floor_spaces'] =$building_floor_spacesres;
 
-					// $equipment_allocationssql = "SELECT id,building_floor_space_id, equipment_category_id, equipment_type_id, equipment_id, emp_id, top_size, left_size FROM equipment_allocations WHERE company_id = '".$get['company_id']."' AND building_floor_space_id = '".$get['rid']."' AND is_active = 0";
-					// $equipment_allocationsres = $callConfig->getAllRows($equipment_allocationssql);
-					// $return['equipment_allocations'] =$equipment_allocationsres;
 
 					$building_floorssql = "SELECT id,building_id,floor_name,floor_image FROM building_floors WHERE company_id = '".$get['company_id']."' AND id = '".$building_floor_spacesres->building_floor_id."' AND is_active = 0";
 					$building_floorsres = $callConfig->getRow($building_floorssql);
@@ -946,7 +866,6 @@ class spaceUserClass extends userClass{
 
 
 			}else{ //allocation asssets
-			//	return $post;
 				$eqalsql = "SELECT id FROM asset_allocations WHERE company_id = '".$post['company_id']."' AND asset_id = '".$post['asset_id']."' AND is_active = 0";
 				$eqalres = $callConfig->getRow($eqalsql);
 				if($eqalres->id !=""){ //Allreadu allocation asssets
@@ -954,13 +873,9 @@ class spaceUserClass extends userClass{
 				}else{ //Not allocation asssets
 					$bfssql = "SELECT bfs.x_size, bfs.y_size, bfs.cabin_name, (SELECT build.originator FROM building_floors bf, buildings build WHERE bf.company_id = bfs.company_id AND build.company_id = bfs.company_id AND bf.id = bfs.building_floor_id AND bf.building_id = build.id AND bf.is_active = bfs.is_active AND build.is_active = bfs.is_active limit 1) as building_originator FROM building_floor_spaces bfs WHERE bfs.company_id = '".$post['company_id']."' AND bfs.id = '".$post['building_floor_space_id']."' AND bfs.is_active = 0";
 					$bfsres = $callConfig->getRow($bfssql);
-					//return $bfsres;
 					$insertary=array('company_id'=>$post['company_id'],'building_floor_id'=>$post['building_floor_id'],'top_size'=>$bfsres->x_size,'left_size'=>$bfsres->y_size,'asset_id'=>$post['asset_id'],'building_floor_space_id'=>$post['building_floor_space_id'],'is_active'=>0);
-					//return $insertary;
 					$tapres = $callConfig->insertRecord('asset_allocations',$insertary);
-					//print_r($tapres);
 					$return['result'] =$tapres;
-					//return $ruturn;
 					$return['bfssql'][] = $bfssql;
 
 
@@ -989,7 +904,6 @@ class spaceUserClass extends userClass{
 					$emailarray['asset_name'] = $sqlasres->asset_description;
 				//email data
 					$return['emailarray'][] = $emailarray;
-					//$return['emails'][] =$this->sendNotificationAndEmails($notarry,$emailarray,67);
 
 				}
 			}
@@ -1184,10 +1098,8 @@ class spaceUserClass extends userClass{
 		}
 		$resbfsa_id = "";
 		if($post['building_floor_space_allocation_id']!=""){
-			//return  $return;
 			$postdataary['updated_date'] = date('Y-m-d H:i:s');
 			$postdataary['updated_by'] = $post['user_id'];
-			//$postdataary['is_active'] = 0;
 			$return['building_floor_space_allocations']=$callConfig->updateRecord('building_floor_space_allocations',$postdataary,'id',$post['building_floor_space_allocation_id']);
 			$resbfsa_id = $post['building_floor_space_allocation_id'];
 		}else{
@@ -1195,11 +1107,8 @@ class spaceUserClass extends userClass{
 			$postdataary['created_date'] = date('Y-m-d H:i:s');
 			$postdataary['created_by'] = $post['user_id'];
 			$postdataary['is_active'] = 0;
-			//return  $return;
-			//print_r($postdataary); exit;
 			$resbfsa = $callConfig->insertRecord('building_floor_space_allocations',$postdataary);
 			$return['building_floor_space_allocations']=$resbfsa;
-			//return  $return;
 			$resbfsa_id = $resbfsa['LASTID'];
 		}
 
@@ -1252,10 +1161,8 @@ class spaceUserClass extends userClass{
 					$return['emailarray'][]=$emailarray;
 					if($emp_asssign_status=="Y"){
 						$notarry['notification_message'] = "I wanted to inform you that ".$emp_data->display_name." has been allocated to Cubicle Space name ".$building_res->cabin_name;
-						//$insertApplication['emails'] =$this->sendNotificationAndEmails($notarry,$emailarray,65);
 					}elseif($emp_asssign_status=="N"){
 						$notarry['notification_message'] = "I wanted to inform you that ".$emp_data->display_name." has been unallocated to Cubicle Space name ".$building_res->cabin_name;
-						//$insertApplication['emails'] =$this->sendNotificationAndEmails($notarry,$emailarray,66);
 					}
 					$return['notarry'][]=$notarry;
 					$insertApplication = array();
@@ -1327,7 +1234,6 @@ class spaceUserClass extends userClass{
 		$emailarray['building_admin'] = $application_users[$buildares->originator]->display_name;
 		$insertApplication['emails'] =$this->sendNotificationAndEmails($notarry,$emailarray,65);
 
-		//$this->tosendnotifiations($notarry);
 		$return['notarry'] =$notarry;
 		//notification
 		return $return;
@@ -1337,10 +1243,6 @@ class spaceUserClass extends userClass{
 		$return['get'] =$get;
 
 
-		// $sql = "SELECT * FROM goods_receipt_notes WHERE company_id = '".$get['company_id']."' AND current_status = 199 AND is_active = 0 and id = 2";
-		// $transaction=$callConfig->getRow($sql);
-		// $get['transaction_table']= 'goods_receipt_notes';
-		// $return['supplier_bills'][] =  $this->updateTransactionItemsQty($get,$transaction,'+');
 
 /**
 
@@ -1384,20 +1286,6 @@ class spaceUserClass extends userClass{
 
 
 
-	// $sql = "SELECT * FROM `sales_invoices` WHERE is_active = 0";
-	// $dsfsdcpartyinvoice = $callConfig->getAllRows($sql);
-	// foreach($dsfsdcpartyinvoice as $partyinvoice){
-	// 	$payment_term_history = json_decode($partyinvoice->payment_term_history,1);
-	// 	if(count((array)$payment_term_history) != "0"){
-	// 		$pth_cnt = count((array)$payment_term_history);
-	// 		$mk = 1;
-	// 		foreach($payment_term_history as $key=>$pterh){
-	// 			$insertdata = array('company_id'=>1,'transaction_table'=>'sales_invoices','transaction_id'=>$partyinvoice->id,'transaction_number'=>$partyinvoice->transaction_number,'party_id'=>$partyinvoice->party_id,'due_date'=>$this->dateconvertdbformat($pterh['due_date']),'due_amount'=>$pterh['amount'],'advance_offer_date'=>$this->dateconvertdbformat($pterh['extra_date']),'advance_offer_amount'=>$pterh['extra_amt'],'pending_amount'=>$pterh['amount'],'is_active'=>'0','current_status'=>'0','created_date'=>date('Y-m-d H:i:s'),'created_by'=>$get['user_id'],'amount'=>$pterh['without_tax_amount'],'tax_amount'=>$pterh['tax_amount'],'percentage'=>$pterh['percentage'],'without_tax_pending_amount'=>$pterh['without_tax_amount'],'tax_pending_amount'=>$pterh['tax_amount']);
-	// 			$callConfig->insertRecord('payment_term_transactions',$insertdata);
-	// 			$mk++;
-	// 		}
-	// 	}
-	// }
 
 		echo "<pre>"; print_r($return);
 	}

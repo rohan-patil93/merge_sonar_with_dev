@@ -20,7 +20,6 @@ class accountUserClass extends userClass{
     		$financereportgroupssqll = "SELECT * FROM `finance_report_groups` WHERE company_id = ".$get['company_id']." AND id = '".$get['Rid']."' AND is_active =0 ";
     		$financereportgroupsress = $callConfig->getRow($financereportgroupssqll);
     		$return['finance_report_groups_edit']= $financereportgroupsress;
-    		//print_r($financereportgroupsress);
     		if($financereportgroupsress->chart_of_account_codes !="" && $financereportgroupsress->chart_of_account_codes!='null'){
     			$imlpod = implode("','",json_decode($financereportgroupsress->chart_of_account_codes,1));
     			$get['chart_of_account_codes'] = "'".$imlpod."'";
@@ -88,7 +87,6 @@ class accountUserClass extends userClass{
     		$whrcon = "(finance_report_group_id ='".$post['Rid']."' OR chart_of_account_code IN('".$implode."')) AND is_active='0'";
 			$updateres = $callConfig->updateRecord('finance_report_chart_of_account',$updatearray,'','',$whrcon);
 	 		$return['whrcon'] = $whrcon;
-    		//$updateres=$callConfig->updateRecord('finance_report_chart_of_account',$updatearray,'finance_report_group_id',$post['Rid']);
     		foreach($post['chart_of_account_code'] as $acountid){
     			$insertarray = array('company_id'=>$get['company_id'],'finance_report_group_id'=>$post['Rid'],'chart_of_account_code'=>$acountid,'assigned_date'=>date('Y-m-d'),'from_date'=>date('Y-m-d'),'to_date'=>date('Y-'.'12-31'),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
     			$insertdata=$callConfig->insertRecord('finance_report_chart_of_account',$insertarray);
@@ -106,7 +104,6 @@ class accountUserClass extends userClass{
 			foreach($post['chart_of_account_code'] as $acountid){
     			$insertarray = array('company_id'=>$get['company_id'],'finance_report_group_id'=>$insert_data['LASTID'],'chart_of_account_code'=>$acountid,'assigned_date'=>date('Y-m-d'),'from_date'=>date('Y-m-d'),'to_date'=>date('Y-'.'12-31'),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
     			$insertdata=$callConfig->insertRecord('finance_report_chart_of_account',$insertarray);
-    			//$return['frcoa'][] = $insertdata;
     		}
     	}
 		return $return;
@@ -151,7 +148,6 @@ class accountUserClass extends userClass{
     		$financereportgroupssqll = "SELECT * FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND id = '".$get['Rid']."' AND is_active =0 ";
     		$financereportgroupsress = $callConfig->getRow($financereportgroupssqll);
     		$return['chart_of_accounts_single']= $financereportgroupsress;
-    		//$return['selectedaccountlist'] = $this->selectChartOfAccont($get);
     	}
 
         $accountgroupsssql = "SELECT id,group_name,parent_group_id,pl_yn,tb_seq,bs_seq,accsec_section_id FROM `account_groups` WHERE company_id = " . $get['company_id'] . " AND is_active =0";
@@ -255,7 +251,6 @@ class accountUserClass extends userClass{
     }
     public function getTextOfContentReports($get){
     	global $callConfig;
-    	//echo "<pre>";
     	if($get['inputformreport'] =="Y"){
 	    	$text_of_contentssql = "SELECT id, toc_name FROM text_of_contents WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 			$text_of_contentsres = $callConfig->getAllRows($text_of_contentssql);
@@ -285,7 +280,6 @@ class accountUserClass extends userClass{
 
 		$create_documents_fieldssql = "SELECT id, apply_table_name, application_table_name,  display_field, value_field, label,preview_value,field_type FROM create_documents_fields WHERE company_id = '".$get['company_id']."' AND apply_table_name = 'toc_headers'  AND is_active = 0";
 		$createdocumentsfieldsres = $callConfig->getAllRows($create_documents_fieldssql);
-		//print_r($createdocumentsfieldsres);
 		$stringfields = array();
 		$tables = array();
 		$tablesresult = array();
@@ -318,22 +312,10 @@ class accountUserClass extends userClass{
         $financereportgroupsres = $callConfig->getAllRows($financereportgroupssql);
         $return['finance_report_groups']= $financereportgroupsres;
 
-        // $financereportssql = "SELECT id,report_name FROM `finance_reports` WHERE company_id = ".$get['company_id']." AND is_active =0";
-  //    $financereportgroupsres = $callConfig->getAllRows($financereportssql);
-  //    $return['finance_reports']= $financereportgroupsres;
-// $chartofaccounts = "SELECT coa.id,coa.account_code, coa.account_name ,coa.account_type,atype.account_type_name,atype.transaction_type FROM chart_of_accounts coa, account_type atype WHERE coa.company_id = ".$get['company_id']." AND coa.company_id = atype.company_id AND coa.account_type = atype.id AND coa.is_active = atype.is_active AND coa.is_active  = 0";
-//      $chartofaccountsres = $callConfig->getAllRows($chartofaccounts);
-//      $return['chart_of_accounts']= $chartofaccountsres;
 
 
-        // $financereportchartofaccountsql = "SELECT id,finance_report_group_id,chart_of_account_code FROM `finance_report_chart_of_account` WHERE company_id = ".$get['company_id']." AND is_active =0";
-  //    $financereportchartofaccountres = $callConfig->getAllRows($financereportchartofaccountsql);
-  //    $return['finance_report_chart_of_account']= $financereportchartofaccountres;
 
 
-// $trialbalancesql = "SELECT id,customer_account_code,account_name,debit_amount,credit_amount,mapping_account_code FROM `trial_balance` WHERE company_id = ".$get['company_id']." AND is_active =0";
-//      $trialbalanceres = $callConfig->getAllRows($trialbalancesql);
-//      $return['trial_balance']= $trialbalanceres;
 
 
     $sql = "SELECT tb.opening_balance,tb.debit_amount,tb.credit_amount,tb.closing_balance,tb.mapping_account_code,coa.account_type,frcoa.finance_report_group_id,atype.transaction_type, atype.account_type_name FROM trial_balance tb, chart_of_accounts coa, finance_report_chart_of_account frcoa, account_type atype WHERE tb.company_id = ".$get['company_id']." AND tb.company_id = coa.company_id AND tb.mapping_account_code = coa.account_code AND tb.is_active = coa.is_active AND tb.company_id = frcoa.company_id AND tb.mapping_account_code = frcoa.chart_of_account_code AND tb.is_active = frcoa.is_active AND tb.company_id = atype.company_id AND coa.account_type = atype.id AND tb.is_active = atype.is_active AND tb.is_active = 0";
@@ -369,9 +351,6 @@ class accountUserClass extends userClass{
         $currenciesres = $callConfig->getRow($currenciessql);
         $return['journal_settings']= $currenciesres;
 
-        //  $journal_typesql = "SELECT id,journal_type_name FROM `journal_type` WHERE company_id = ".$get['company_id']." AND is_active =0";
-        // $journal_typeres = $callConfig->getAllRows($journal_typesql);
-        // $return['journal_type']= $journal_typeres;
 
         $chart_of_accountssql = "SELECT id, account_code, account_name FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND is_active =0 ORDER BY display_priority ASC";
         $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
@@ -437,7 +416,6 @@ class accountUserClass extends userClass{
 
         $tax_computationssql = "SELECT id, tax_computations_name FROM `tax_computations` WHERE company_id = ".$get['company_id']." AND is_active =0";
         $tax_computationsres = $callConfig->getAllRows($tax_computationssql);
-        //$return['tax_computations']= $tax_computationsres;
         $tax_computations = array();
         foreach($tax_computationsres as $tc){
             $tax_computations[$tc->id] = $tc;
@@ -667,16 +645,7 @@ class accountUserClass extends userClass{
          global $callConfig;
         $return =array();
         $return['get'] = $get;
-        // $followupactivityssql = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ".$get['company_id']." AND genc_code = 'FOLLOUPACTIVITY' AND is_active =0";
-        // $followupactivitysres = $callConfig->getAllRows($followupactivityssql);
-        // $crm_lead_typessql = "SELECT id,type_name FROM crm_lead_types WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-        // $crm_lead_typesres=$callConfig->getAllRows($crm_lead_typessql);
 
-        // $follow_up_activity = array();
-        // foreach($crm_lead_typesres as $fua){
-        //     $follow_up_activity[$fua->id] = $fua->type_name;
-        // }
-        // $return['follow_up_activity']= $follow_up_activity;
 
         $email_contentsql = "SELECT id, template_name FROM `email_content` WHERE company_id = ".$get['company_id']." AND is_active =0";
         $email_contentres = $callConfig->getAllRows($email_contentsql);
@@ -818,7 +787,6 @@ class accountUserClass extends userClass{
 			$main[$value3->id] = (array)$value3;
 			$main[$value3->id]['data'] = $returns [$value3->id];
 		}
-		//echo "<pre>".$account_section; print_r($main);
 
 		$query3 = "SELECT cc.id, cc.cost_center_name, cc.cost_center_type FROM cost_centers cc, user_cost_centers ucc WHERE cc.company_id = ucc.company_id AND cc.company_id = ".$post['company_id']." AND cc.id = ucc.cost_center_id AND ucc.user_id = ".$post['user_id']." AND ucc.is_active =0 AND cc.is_active = 0";
 		$cost_centers = $callConfig->getAllRows($query3);
@@ -832,7 +800,6 @@ class accountUserClass extends userClass{
 	}
 	public function budgetinsertaccount($get,$post){
 		global $callConfig;
-		//print_r($post); exit;
 		$whrqu= "UPDATE account_budgets SET is_active = NULL , updated_by = ".$get['user_id']." WHERE company_id= '".$get['company_id']."' AND  cost_center_id='".$post['cost_center_id']."' AND fiscal_year='".$post['fiscal_year']."' AND is_active = 0";
 		$rres = $callConfig->executeQuery($whrqu);
 		$whrqu= "UPDATE budget SET is_active = NULL , updated_by = ".$get['user_id']." WHERE company_id= '".$get['company_id']."' AND  cost_center_id='".$post['cost_center_id']."' AND fiscal_year='".$post['fiscal_year']."' AND is_active = 0";
@@ -842,7 +809,6 @@ class accountUserClass extends userClass{
 		$res[]=$callConfig->insertRecord('account_budgets',$insert_array);
 		foreach ($post['data'] as $value) {
 			$value['company_id'] = $get['company_id'];
-			//$value['account_code'] = $post['account_code'];
 			$value['budget_version'] = $post['budget_version'];
 			$value['budget_date'] = $post['budget_date'];
 			$value['budget_created'] = $post['inveral'];
@@ -856,7 +822,6 @@ class accountUserClass extends userClass{
 			$value['action_if_exceed_quaterly'] = $post['action_if_exceed_quaterly'];
 			$value['action_if_exceed_halfyearly'] = $post['action_if_exceed_halfyearly'];
 			$value['action_if_exceed_month'] = $post['action_if_exceed_month'];
-			//$data = $this->insertorupdatebudgetaccount($value);
 			$res[]=$callConfig->insertRecord('budget',$value);
 		}
 		return $res;
@@ -865,7 +830,6 @@ class accountUserClass extends userClass{
 		global $callConfig;
 		$whr1="company_id= '".$post['company_id']."' and budget_version='".$post['budget_version']."' and cost_center_id='".$post['cost_center_id']."' and account_code='".$post['account_code']."' and fiscal_year='".$post['fiscal_year']."'";
 		$query2 = $callConfig->selectQuery('budget','*',$whr1,'','','');
-		//echo $query2; exit;
 		$data = $callConfig->getRow($query2);
 		if($data->id !=''){
 			$suc_data=$callConfig->updateRecord('budget',$post,'id',$data->id);
@@ -902,8 +866,6 @@ class accountUserClass extends userClass{
                 $return['ref_item_details_sql']= $ref_item_deatils_sql;
                 $return['ref_item_details']= $ref_item_deatils_res;
 
-                //$get['transaction_table'] = $parentdmtres->application_table_name;
-               // $return['display_attributes'] = $this->getTopUpdetails($get);
             }
 
 
@@ -1158,7 +1120,6 @@ class accountUserClass extends userClass{
 
             $oldAmountChange = $isDebit ? $oldDebitAmount - $oldCreditAmount : $oldCreditAmount - $oldDebitAmount;
 
-           // $amountDifference = $amountChange - $oldAmountChange;
 
             // Update the balance for the existing entry
             $updatedBalance = $existingEntry->closing_balance + $amountChange;
@@ -1213,7 +1174,6 @@ class accountUserClass extends userClass{
 
             $oldAmountChange = $isDebit ? $oldDebitAmount - $oldCreditAmount : $oldCreditAmount - $oldDebitAmount;
 
-            //$amountDifference = $amountChange - $oldAmountChange;
 
             // Update the balance for the existing entry
             $updatedBalance = $existingEntry1->closing_balance + $amountChange;
@@ -1692,21 +1652,6 @@ class accountUserClass extends userClass{
 
         $return['chart_of_accounts']= $chartofaccountsres;
         $gl_condition = "";
-       // if($get['account_code'] !=""){
-            //$gl_condition = " AND voucher_id IN(SELECT voucher_id FROM `general_ledger` WHERE company_id = ".$get['company_id']." AND is_active =0 AND account_code = '".$get['account_code']."')";
-       // }
-        // if($get['first_account_code'] !=""){
-        //      $gl_condition = " AND voucher_id IN(SELECT voucher_id FROM `general_ledger` WHERE company_id = ".$get['company_id']." AND is_active =0 AND account_code = '".$get['first_account_code']."')";
-        // }
-        // if($post['second_account_code'] !=""){
-        //      $gl_condition = " AND voucher_id IN(SELECT voucher_id FROM `general_ledger` WHERE company_id = ".$get['company_id']." AND is_active =0 AND account_code = '".$get['second_account_code']."')";
-        // }
-        // if($get['third_account_code'] !=""){
-        //      $gl_condition = " AND voucher_id IN(SELECT voucher_id FROM `general_ledger` WHERE company_id = ".$get['company_id']." AND is_active =0 AND account_code = '".$get['third_account_code']."')";
-        // }
-        // if($get['fourth_account_code'] !=""){
-        //     $gl_condition = " AND voucher_id IN(SELECT voucher_id FROM `general_ledger` WHERE company_id = ".$get['company_id']." AND is_active =0 AND account_code = '".$get['fourth_account_code']."')";
-        // }
         if($get['from_date'] !="" && $get['to_date'] !=""){
             $gl_condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= voucher_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= voucher_date";
         }
@@ -1794,7 +1739,6 @@ class accountUserClass extends userClass{
                 $data = 1;
             }
         }
-        //return $return;
         return trim($data);
     }
 
@@ -2118,7 +2062,6 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
                     }
                }
             }
-          // $return['jv'] = $this->tocreatejounalvoucherbaseallcases($note_type, $rid);
         }
         return $return;
     }
@@ -2255,7 +2198,6 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
             $return['last_account_balances_sql']= $lastbalancesql;
             $return['last_account_balances']= $lastbalanceres;
             $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id, ref_type, ref_no, amount, total_amount as p_total_amount, due_date, payment_term_history, ref_id FROM `sales_invoices` WHERE company_id = ".$get['company_id']." AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
-            //$sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id, ref_type, ref_no, amount, total_amount as p_total_amount, due_date, payment_term_history, ref_id FROM `sales_invoices` WHERE company_id = ".$get['company_id']." AND is_active =0 ".$condition;
             $sales_invoicesres = $callConfig->getAllRows($sales_invoicessql);
             $return['sales_invoices_sql'] =$sales_invoicessql;
             foreach($sales_invoicesres as $si){
@@ -2317,7 +2259,6 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
 
         if($get['from_date'] !="" && $get['to_date'] !=""){
             $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
-           // $paycondition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= rec.transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= rec.transaction_date";
         }
         if($get['customer_id'] !=""){
 
@@ -2393,7 +2334,6 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
             $return['last_account_balances_sql']= $lastbalancesql;
             $return['last_account_balances']= $lastbalanceres;
             $sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id, ref_type, ref_no, amount, total_amount as p_total_amount, due_date, payment_term_history, ref_id FROM `supplier_bills` WHERE company_id = ".$get['company_id']." AND party_id = '".$get['customer_id']."' AND is_active =0 ".$condition;
-            //$sales_invoicessql = "SELECT id, transaction_number, transaction_date, party_id, ref_type, ref_no, amount, total_amount as p_total_amount, due_date, payment_term_history, ref_id FROM `sales_invoices` WHERE company_id = ".$get['company_id']." AND is_active =0 ".$condition;
             $sales_invoicesres = $callConfig->getAllRows($sales_invoicessql);
             $return['sales_invoices_sql'] =$sales_invoicessql;
             foreach($sales_invoicesres as $si){

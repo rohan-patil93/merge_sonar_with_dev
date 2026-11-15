@@ -171,8 +171,6 @@ class aicallUserClass extends userClass{
 	public function endCandidateScreeningQuestionsAndAnswers($get, $post){
 		global $callConfig;
 		$return = array();
-		//$return['post'] = $post;
-		//$return['get'] = $get;
 /**
 		$query = "SELECT * FROM api_hits can WHERE id = 614";
 		$rowdata = $callConfig->getrow($query);

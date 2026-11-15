@@ -6,7 +6,6 @@ class vMSUserClass extends userClass{
 		$query = "select distinct mpc.id, mpc.transaction_number, (select display_name from vendors where id = mpc.customer_id) vendor_name, mpc.customer_id vendor_id, emp.display_name, emp.id as emp_id, emp.image,emp.email_id,( select job_title from job_titles where id = emp.job_title_id) designation, item_price monthlyrate, pt.timesheet_date, pt.billable_hrs, (item_price/160) *pt.billable_hrs chargable_amount from manpower_contracts mpc, mpc_items, employees emp, emp_work_order ewo, project_timesheets pt WHERE mpc.company_id = mpc_items.company_id AND mpc.id = mpc_items.transaction_id AND mpc.id = 4 AND emp.company_id =ewo.company_id AND emp.id = ewo.emp_id AND ewo.work_order_id = mpc.id AND emp.job_title_id = mpc_items.item_id AND pt.company_id = ewo.company_id AND pt.work_order = ewo.work_order_id AND pt.emp_id = emp.id order by 1";
 		$returns = $callConfig->getAllRows($query);
 		$returns = (array)$returns;
-		//print_r($returns);
 		foreach($returns as $return){
 			$return = (array)$return;
 			$month_year = date('Y-m',strtotime($return['timesheet_date']));
@@ -22,13 +21,11 @@ class vMSUserClass extends userClass{
 		global $callConfig;
 		$query="select emp.vertical_id , (select vertical_name from verticals vlc where vlc.id = emp.vertical_id) verticallame, sum(pt.billable_hrs)/160 billabehours, SUM((item_price/160) *pt.billable_hrs) chargable_amount from manpower_contracts mpc, mpc_items, employees emp, emp_work_order ewo, project_timesheets pt WHERE mpc.company_id = mpc_items.company_id AND mpc.id = mpc_items.transaction_id AND emp.company_id =ewo.company_id AND emp.id = ewo.emp_id AND ewo.work_order_id = mpc.id AND emp.job_title_id = mpc_items.item_id AND (pt.timesheet_date BETWEEN mpc_items.effective_date and mpc_items.expire_date) AND pt.company_id = ewo.company_id AND pt.work_order = ewo.work_order_id AND pt.emp_id = emp.id GROUP BY verticallame";
 		$returns = $callConfig->getAllRows($query);
-	   // print_r($returns);
 		$total_billabe = 0;  $total_charge = 0;
 		foreach($returns as $return){
 			$total_billabe = $total_billabe+$return->billabehours;
 			$total_charge = $total_charge+$return->chargable_amount;
 		}
-	    // echo $total_billabe."#".$total_charge;
 		foreach($returns as $return){
 			$return->bill = number_format($total_billabe != 0 ? ($return->billabehours/$total_billabe)*100 : 0, 1);
 			$return->charg = number_format($total_charge != 0 ? ($return->chargable_amount/$total_charge)*100 : 0, 1);
@@ -138,7 +135,6 @@ class vMSUserClass extends userClass{
 	public function customadmdashboardmodule3($get){
 		global $callConfig;
 		$company_id = $get['company_id'];
-		//$months = strtotime("-11 month", strtotime($get['fromdate']));
 		$months = strtotime($get['fromdate']);
 		$end = strtotime($get['todate']);
 		$condition = "";
@@ -240,11 +236,9 @@ class vMSUserClass extends userClass{
 			job_title";
 			$query111[] = $query;
 			$employee_list = $callConfig->getAllRows($query);
-			//$employee_lists[$i] = array();
 			$employee_lists[$yymm]=$employee_list;
 			$months = strtotime("+1 month", $months);
 		}
-			//echo "<pre>"; print_r($query111);
 		return $employee_lists;
 	}
 	public function savevendoragreements($post, $get) {
@@ -253,14 +247,12 @@ class vMSUserClass extends userClass{
 		$postdata['vendor_id'] = $post['vendor_id'];
 		$postdata['is_active'] = '0';
 		$postdata['current_status'] = '0';
-		//print_r($post);exit;
 		foreach ($post['ag_type'] as $agkey => $ag) {
 			$postdata['agreement_name'] = $post['ag_type'][$agkey];
 			$postdata['agreement_ref_no'] = $post['ag_number'][$agkey];
 			$postdata['signed_date'] = $post['ag_sin_date'][$agkey];
 			$postdata['expiry_date'] = $post['ag_ex_date'][$agkey];
 			$postdata['file_url'] = $post['file_url'][$agkey];
-			//print_r($postdata);
 			if(!empty($post['ag_rowid'][$agkey]))
 			{
     		// update
@@ -481,7 +473,6 @@ class vMSUserClass extends userClass{
 		mpc_uom,
 		vrc_uom
 		,vrc_item_price,experience_base";
-		//echo $query; exit;
 		$return = $callConfig->getAllRows($query);
 		return $return;
 	}
@@ -689,13 +680,11 @@ class vMSUserClass extends userClass{
 						)
 				END
 		) ORDER By 2, 4";
-		//	echo $query; exit;
 		$return = $callConfig->getAllRows($query);
 		return $return;
 	}
 	public function indertupdateperdiem($post, $get){
 	 	global $callConfig;
-			//echo "<pre>tyr";print_r($post);exit;
 	 	if($post['rowid']!=""){
 	 		$update = "update vrc_per_diem set is_active = 1  where vrc_item_id =".$post['rowid'];
 	 		$data = $callConfig->executeQuery($update);
@@ -706,13 +695,11 @@ class vMSUserClass extends userClass{
 	 		$pre_diem="pre_diem_".$i;
 	 		$travel="travel_".$i;
 	 		$itemfieldnames=array('company_id'=>$get['company_id'],'vrc_item_id'=>$post['rowid'],'country_id'=>$post[$country],'currency_id'=>$post[$country],'per_diem'=>$post[$pre_diem],'travel_expenses'=>$post[$travel],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-				//print_r($itemfieldnames);
 	 		$item_id=$callConfig->insertRecord('vrc_per_diem',$itemfieldnames);
 	 	}
 	}
 	public function  toGetblukProjectTimesheet($get){
 		global $callConfig;
-		//echo "data";
 		$month = $get['month'];
 		$year = $get['year'];
 		$startdate = $get['year']."-".$get['month']."-01";
@@ -880,13 +867,11 @@ class vMSUserClass extends userClass{
 		purchase_uom,
 		vrc_purchase_uom,
 		vrc_max_leave";
-		//echo $query;
 		$return = $callConfig->getAllRows($query);
 		return $return;
 	}
 	public function  toGetblukProjectTimesheetlastmonths($get){
 		global $callConfig;
-		//echo "data";
 		$month_date = $get['year']."-".$get['month']."-01";
 		for($i=1; $i<2; $i++){
 		$mont_date = date("Y-m-d", strtotime($month_date."-".$i." month"));
@@ -994,7 +979,6 @@ class vMSUserClass extends userClass{
 		GROUP by
 		current_status,
 		pt_status_id";
-		//echo $query; //exit;
 		$return = $callConfig->getAllRows($query);
 		$keyy = $year."-".$month;
 		$data[$keyy] = $return;
@@ -1003,7 +987,6 @@ class vMSUserClass extends userClass{
 	}
 	public function  toGetblukHrProjectTimesheet($get){
 		global $callConfig;
-		//echo "data";
 		$company_id = $get['company_id'];
 		$month = $get['month'];
 		$year = $get['year'];
@@ -1181,14 +1164,12 @@ class vMSUserClass extends userClass{
 		purchase_uom,
 		vrc_purchase_uom,
 		vrc_max_leave";
-		// echo $query;
 		$return = $callConfig->getAllRows($query);
 		return $return;
 	}
 	public function  toGetblukFinaceProjectTimesheet($get){
 		global $callConfig;
 		$company_id = $get['company_id'];
-		//echo "data";
 		$month = $get['month'];
 		$year = $get['year'];
 		$startdate = $get['year']."-".$get['month']."-01";
@@ -1373,7 +1354,6 @@ class vMSUserClass extends userClass{
 	}
 	public function  toGetblukHrProjectTimesheetlastmonths($get){
 		global $callConfig;
-		//echo "data";
 		$month_date = $get['year']."-".$get['month']."-01";
 		for($i=1; $i<7; $i++){
 		$mont_date = date("Y-m-d", strtotime($month_date."-".$i." month"));
@@ -1489,7 +1469,6 @@ class vMSUserClass extends userClass{
 		reporting_manger,
 		current_status,
 		pt_status_id";
-		// echo $query;
 		$return = $callConfig->getAllRows($query);
 		$keyy = $year."-".$month;
 		$data[$keyy] = $return;
@@ -1501,39 +1480,28 @@ class vMSUserClass extends userClass{
 	  	$post = array('hid'=>'');
 	  	$quer = "SELECT `hr_buddy` FROM `employee_buddies` WHERE `employee_id`=".$get['emp_id'];
 	  	$hrb = $callConfig->getRow($quer);
-	  	//print_r($hrb); exit;
 	  	$empquery = "SELECT id,user_id,display_name,email_id,reporting_manager_id,approval_manager_id FROM employees WHERE id IN ( SELECT emp_id FROM project_timesheets WHERE hr_id=".$hrb->hr_buddy." AND  current_status=101 AND MONTH(timesheet_date)=MONTH('".$get['extra']."')) AND reporting_manager_id = ".$geet['user_id'];
 	  	$listemployes = $callConfig->getAllRows($empquery);
 	  	$query = "UPDATE project_timesheets SET  hr_submit= '".date('Y-m-d h:i:s')."',current_status=".$get['status']." WHERE hr_id=".$hrb->hr_buddy." AND  current_status=101 AND MONTH(timesheet_date)=MONTH('".$get['extra']."') AND emp_id IN ( SELECT id FROM employees  WHERE reporting_manager_id = ".$geet['user_id']." )" ;
-			//echo $query;
 	  	$upp = $callConfig->executeQuery($query);
 	  	$quere = "SELECT user_id,display_name,email_id FROM `employees` WHERE `id`=".$hrb->hr_buddy;
 	  	$urb = $callConfig->getRow($quere);
 	  	$user_ids = array();
 	  	$user_ids[] = $urb->user_id;
-	  	//echo "test1"; exit;
-	  	//print_r($user_ids);
 	  	$msg = date('M Y',strtotime($get['extra']))." Timesheet sumitted for your approval by Hiring Manager";
 	  	$option = "COM_BULK_HR_PROJECT_TIMESHEET&PAY_YEAR=".date('Y',strtotime($get['extra']))."&PAY_MONTH=".date('m',strtotime($get['extra']));
 	  	$notarry = array('id'=>'');
 	  	$notdataa = array('company_id'=>$geet['company_id'], 'notification_message'=>$msg, 'transaction_number'=>$notarry['id'], 'application_table_name'=>'project_timesheets', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
-			//print_r($notdataa);
-	  	/*$ss = $this->tosendnotifiations($notdataa);*/
 		$month_year =  date('M Y',strtotime($get['extra']));
 	  	$approvequery = "SELECT id,display_name,user_name,user_email FROM application_users WHERE is_active = 0 AND company_id = '".$geet['company_id']."' AND id =".$geet['user_id'];
 		$approvemanagerdata = $callConfig->getRow($approvequery);
 
 	  	$mail_data = array('month-year'=>$month_year,'approval_manager_name'=>ucwords($approvemanagerdata->display_name),'hr_buddy_name'=>ucwords($urb->display_name),'month_year'=>$month_year);
 	  	$mail_data['email_content_id'] = 12;
-	  	//print_r($mail_data);
 		$email_array = $this->emailtemplate($mail_data);
-		//print_r($email_array);
 		$email_array['revicer'] = array($urb->email_id);
 		$lenn = $this->sendEmailslist($email_array);
 	  	$email['hr'] =  array($urb->email_id);
-	  	//print_r($email);
-	  	//exit;
-	  	//echo "test2"; exit;
 
 	  	//---------------------------User Names -------------------//
 
@@ -1542,7 +1510,6 @@ class vMSUserClass extends userClass{
 	  	$reporting_mangers = array();
 	  	$approval_managers = array();
 	  	$user_emailids = array();
-	  	//$mail_data = array('month-year'=>$month_year,'approval_manager_name'=>ucwords($approvemanagerdata->display_name),'hr_buddy_name'=>ucwords($urb->display_name),'month_year'=>$month_year);
 	  	foreach($listemployes as $sinemp){
 	  		if($sinemp->reporting_manager_id != $sinemp->approval_manager_id){
 	  			$reporting_mangers[] = $sinemp->reporting_manager_id;
@@ -1580,7 +1547,6 @@ class vMSUserClass extends userClass{
 		  	 $approvalmanagerquery = "SELECT id,display_name,user_name,user_email FROM application_users  WHERE  company_id = '".$geet['company_id']."' AND id IN (".implode(",",$approval_managers).") AND is_active = 0";
 
 		  	$approvemanagers = $callConfig->getAllRows($approvalmanagerquery);
-		  	//print_r($approvemanagers);
 		  	foreach($approvemanagers as $approvemanager){
 		  		$mail_data['approval_manager_name'] = ucwords($approvemanager->display_name);
 		  		$mail_data['email_content_id'] = 11;
@@ -1603,8 +1569,6 @@ class vMSUserClass extends userClass{
 		$notdataa['type'] = "ACTION";
 		$notdataa['notification_message'] = "Timesheets submited for your approval ".$month_year;
 		$this->tosendnotifiations($notdataa);
-	  	//echo "test6"; exit;
-	  	//print_r($email);  print_r($$urb); print_r($reporting_mangers); print_r($approval_managers); exit;
 	  	$listquries = array();
 	  	$listquries[] = $quer;$listquries[] = $empquery;$listquries[] = $quere;$listquries[] = $approvequery;$listquries[] = $reportmangerquery;$listquries[] = $approvalmanagerquery;
 	  	$nott[]=$notdataa;
@@ -1623,9 +1587,7 @@ class vMSUserClass extends userClass{
 		$hrb = $callConfig->getRow($quer);
 		$empquery = "SELECT id,user_id,display_name,email_id,reporting_manager_id,approval_manager_id,hr_buddy,finance_buddy FROM employees WHERE id IN ( SELECT emp_id FROM project_timesheets WHERE finance_id=".$hrb->finance_buddy." AND  current_status=103 AND MONTH(timesheet_date)=MONTH('".$post['extra']."') AND hr_id = ".$get['emp_id']." )";
 		$listemployes = $callConfig->getAllRows($empquery);
-		//echo $empquery; print_r($listemployes); exit;
 		$query = "UPDATE project_timesheets SET  finance_submit= '".date('Y-m-d h:i:s')."',current_status=".$post['status']." WHERE finance_id=".$hrb->finance_buddy." AND  current_status=103 AND MONTH(timesheet_date)=MONTH('".$post['extra']."')  AND hr_id = ".$get['emp_id'];
-		//echo $query;
 		$upp = $callConfig->executeQuery($query);
 		$quere = "SELECT user_id,display_name,email_id,user_id FROM `employees` WHERE `id`=".$hrb->finance_buddy;
 		$urb = $callConfig->getRow($quere);
@@ -1713,9 +1675,6 @@ class vMSUserClass extends userClass{
 		$notdataa['type'] = "ACTION";
 		$notdataa['notification_message'] = "Timesheets submited for your approval ".$month_year;
 		$this->tosendnotifiations($notdataa);
-		/*print_r($hrbdata);
-		print_r($reporting_mangers);print_r($approval_managers); print_r($user_emailids);
-		print_r($email); exit;*/
 		$nott[]=$notdataa;
 		$listquries = array();
 		return array('queries'=>$listquries,'upp'=>$user_emailids,'email'=>$email,'notification'=>$nott);
@@ -1724,9 +1683,7 @@ class vMSUserClass extends userClass{
 		global $callConfig;
 		$empquery = "SELECT id,user_id,display_name,email_id,reporting_manager_id,approval_manager_id,hr_buddy,finance_buddy FROM employees WHERE id IN ( SELECT emp_id FROM project_timesheets WHERE emp_id IN (".$post['hid'].") AND MONTH(timesheet_date)=MONTH('".$post['extra']."') )";
 		$listemployes = $callConfig->getAllRows($empquery);
-		//echo $empquery; print_r($listemployes); exit;
 		$query = "UPDATE project_timesheets SET current_status=".$post['status']." WHERE emp_id IN (".$post['hid'].") AND MONTH(timesheet_date)=MONTH('".$post['extra']."')" ;
-		//echo $query;
 		$upp = $callConfig->executeQuery($query);
 
 		$quere = "SELECT user_id,display_name,email_id,user_id FROM `employees` WHERE `id`=".$get['emp_id'];
@@ -1832,7 +1789,6 @@ class vMSUserClass extends userClass{
 		$enddate = date("Y-m-t",strtotime($year."-".$month."-01"));
 		$str  = "";
 		if($get['vendor_id']!='0' || $get['emp_name']!='0'){
-		//$str = "";
 		if($get['vendor_id']!='0'){
 		$str.= " AND emp.vendor_id=".$get['vendor_id'];
 		}
@@ -1840,9 +1796,6 @@ class vMSUserClass extends userClass{
 
 		$str.= " AND  emp.display_name LIKE '%".$get['emp_name']."%' ";
 		}
-		/*if($get['approval_manager']!='0'){
-		$str.= " AND approval_manager=".$get['approval_manager'];
-		}*/
 		}
 		$company_id = $get['company_id'];
 		$query = "SELECT
@@ -1927,7 +1880,6 @@ class vMSUserClass extends userClass{
 		ELSE	2
 		END
 		)=1 ".$str;
-		//$query = "SELECT id,display_name,first_name,email_id,image,user_id,job_title_id,billable emp_billable,(select job_title from job_titles jt	where jt.id = job_title_id ) job_title FROM employees WHERE user_id IN (SELECT id FROM application_users WHERE reports_to=".$get['user_id'].") AND is_active=0";
 		$data = $callConfig->getAllRows($query);
 		$return['data'] = $data;
 		$return['team'] = count($data);
@@ -1937,7 +1889,6 @@ class vMSUserClass extends userClass{
 	public function togetteamlisttohr($get){
 		global $callConfig;
 		$query = "SELECT id, display_name, reports_to, ( SELECT display_name FROM application_users au2 WHERE au2.id = au.reports_to AND au2.company_id = au.company_id )reports_to_name FROM `application_users` au WHERE au.id in ( SELECT user_id FROM employees WHERE id IN ( SELECT employee_id FROM employee_buddies eb WHERE eb.company_id = au.company_id AND eb.hr_buddy =".$get['emp_id']."))";
-		//$query = "SELECT id,display_name,first_name,image,job_title_id,(select job_title from job_titles jt where jt.id = job_title_id) job_title FROM employees WHERE user_id IN (SELECT id FROM application_users WHERE reports_to=".$get['emp_id'].")";
 
 		$data = $callConfig->getAllRows($query);
 		return $data;
@@ -1958,7 +1909,6 @@ class vMSUserClass extends userClass{
 		$empidlist[$key]=$value;
 		}
 		}
-		//print_r($empidlist); exit;
 		$attstc = "SELECT * FROM attendance_settings WHERE is_active=0 and company_id=".$get['company_id'];
 		$atsdata = $callConfig->getRow($attstc);
 
@@ -2021,12 +1971,10 @@ class vMSUserClass extends userClass{
 		unset($days);
 		$attendance = $callConfig->getAllRows($attendancequery);
 		foreach ($attendance as $emptime) {
-		//print_r($emptime);
 		$days[$emptime->timesheet_date]['date'] = $emptime->timesheet_date;
 		$days[$emptime->timesheet_date]['billable_hrs'] = $emptime->billable_hrs;
 		$days[$emptime->timesheet_date]['nonbillable_hrs'] = $emptime->nonbillable_hrs;
 		}
-		//echo "<pre>"; print_r($days);
 		$datediff = strtotime($to_date) - strtotime($from_date);
 		$datediff = floor($datediff/(60*60*24));
 		for($i = 0; $i <= $datediff ; $i++){
@@ -2046,7 +1994,6 @@ class vMSUserClass extends userClass{
 		}
 		$empattendancedata['emp_names'] = $empidlist;
 		$empattendancedata['emp_attendance'] = $empattendance_details;
-		//echo "<pre>"; print_r($empattendance_details);exit;
 		return $empattendancedata;
 	}
 	public function gettimesheetsummary($get) {
@@ -2078,7 +2025,6 @@ class vMSUserClass extends userClass{
 		$totalhrs['3'] = $allresponse->nonbillable_hrs;
 
 		$queryresponse = "SELECT sum(billable_hrs) as billable_hrs,task_name from  project_timesheets where company_id = '".$get['company_id']."' AND is_active=0 AND emp_id = ".$emp_id." AND  `timesheet_date` >= '".$start_month_fromdate."' and `timesheet_date` <= '".$end_month_todate."' group by task_name";
-		//echo "?/: ".$queryresponse."<br>";
 		$taskresponse = $callConfig->getAllRows($queryresponse);
 		foreach($taskresponse as $task){
 		if($task->task_name!=''){
@@ -2088,7 +2034,6 @@ class vMSUserClass extends userClass{
 		$details['tasks'] = $tasks;
 		$details['summary'] = $totalhrs;
 		$queryresponse = "SELECT sum(billable_hrs) as billable_hrs,sum(nonbillable_hrs) as nonbillable_hrs,timesheet_date,max(current_status) as current_status from  project_timesheets where is_active=0 AND emp_id = ".$emp_id." AND  `timesheet_date` >= '".$start_month_fromdate."' and `timesheet_date` <= '".$get['todate']."' group by timesheet_date";
-		//echo "main:  ".$queryresponse."<br>";
 		$allresponseweek = $callConfig->getAllRows($queryresponse);
 		foreach($allresponseweek as $dayhrs){
 		$datewise[$dayhrs->timesheet_date]['date'] = $dayhrs->timesheet_date;
@@ -2160,7 +2105,6 @@ class vMSUserClass extends userClass{
 		$totalhrs['3'] = $allresponse->nonbillable_hrs;
 
 		$queryresponse = "SELECT sum(billable_hrs) as billable_hrs,task_name from  project_timesheets where is_active=0 AND emp_id = ".$emp_id." AND  `timesheet_date` >= '".$start_month_fromdate."' and `timesheet_date` <= '".$end_month_todate."' group by task_name";
-		//echo "?/: ".$queryresponse."<br>";
 		$taskresponse = $callConfig->getAllRows($queryresponse);
 		foreach($taskresponse as $task){
 		if($task->task_name!=''){
@@ -2170,7 +2114,6 @@ class vMSUserClass extends userClass{
 		$details['tasks'] = $tasks;
 		$details['summary'] = $totalhrs;
 		$queryresponse = "SELECT sum(billable_hrs) as billable_hrs,sum(nonbillable_hrs) as nonbillable_hrs,timesheet_date,max(current_status) as current_status from  project_timesheets where is_active=0 AND emp_id = ".$emp_id." AND  `timesheet_date` >= '".$start_month_fromdate."' and `timesheet_date` <= '".$get['todate']."' group by timesheet_date";
-		//echo "main:  ".$queryresponse."<br>";
 		$allresponseweek = $callConfig->getAllRows($queryresponse);
 		foreach($allresponseweek as $dayhrs){
 		$datewise[$dayhrs->timesheet_date]['date'] = $dayhrs->timesheet_date;
@@ -2281,28 +2224,6 @@ class vMSUserClass extends userClass{
 		global $callConfig;
 		$from_date = date('Y',strtotime($get['extra']))."-".date('m',strtotime($get['extra']))."-01";
 		$to_date = date('Y',strtotime($get['extra']))."-".date('m',strtotime($get['extra']))."-31";
-		/*$query = "SELECT vendor_id,sum(bill_amount*(billable_hrs/8)) bidget FROM project_timesheets WHERE emp_id IN (".$get['emp_ids'].") AND `timesheet_date`>= '".$from_date."' AND  `timesheet_date` <= '".$to_date."' GROUP By vendor_id";
-		//echo $query;
-		$bud_data = $callConfig->getAllRows($query);
-		foreach($bud_data as $bud){
-			$ven_bud[$bud->vendor_id] =  number_format($bud->bidget, 2, '.', '');
-		}
-		//echo "ravi"; print_r($ven_bud);
-		$query1 = "SELECT * FROM esign_budget_consumed Where is_active=0";
-		$ven_data = $callConfig->getAllRows($query1);
-		foreach($ven_data as $esign_data){
-			$esig_ven[$esign_data->vendor_id] =  number_format($esign_data->available, 2, '.', '');
-		}
-		//echo "Shankar";print_r($esig_ven);
-		$check=0;
-		foreach($ven_bud as $key=>$venn){
-			//echo $key."/".$esig_ven[$key]."<".$venn."</br>";
-			if($esig_ven[$key] < $venn){
-				$check = 1; break;
-				$aa['vendor_id'] = $key;
-			}
-		}*/
-		//$query = "SELECT pt.esgin_budget_approval_id esign_id, eba.id esign_detail_id, pt.vendor_id, sum(pt.vrc_billable_amount) actual_amount FROM project_timesheets pt, eba_vendors_allocations eba WHERE pt.company_id = eba.company_id AND pt.esgin_budget_approval_id = eba.transaction_id AND pt.vendor_id = eba.item_id AND pt.company_id = ".$get['company_id']." AND emp_id IN (".$get['emp_ids'].") AND `timesheet_date` >= '".$from_date."' AND `timesheet_date` <= '".$to_date."'  GROUP By pt.esgin_budget_approval_id, eba.id, pt.vendor_id";
 
 		$query = "SELECT eba.id esign_id,ebava.id esign_detail_id, ebava.item_id vendor_id, sum(pt.vrc_billable_amount) actual_amount FROM project_timesheets pt, esgin_budget_approvals eba, eba_vendors_allocations ebava,  esgin_employees ese WHERE  pt.company_id = eba.company_id AND eba.company_id = ebava.company_id AND eba.id = ebava.transaction_id AND eba.company_id = ese.company_id  AND ese.esgin_budget_approval_id = eba.id  AND ese.eba_vendors_allocation_id = ebava.id AND pt.company_id = ".$get['company_id']." AND pt.emp_id = ese.emp_id AND ese.valid_from = eba.effective_from_date AND ese.valid_to = eba.effective_to_date AND pt.timesheet_date >= eba.effective_from_date AND pt.timesheet_date <= eba.effective_to_date AND pt.is_active = 0 AND pt.is_active = ese.is_active AND pt.emp_id IN (".$get['emp_ids'].") AND pt.timesheet_date >=  '".$from_date."' AND pt.timesheet_date <= '".$to_date."' GROUP By eba.id, ebava.id,ebava.item_id";
 
@@ -2315,14 +2236,12 @@ class vMSUserClass extends userClass{
 			$ven_bud['actual_amount'] =  round(number_format($bud->actual_amount, 2, '.', ''));
 			$ven_budget[] = $ven_bud;
 		}
-		//echo "ravi"; print_r($ven_bud);
 
 		$query1 = "SELECT * FROM esign_budget_consumed Where is_active=0";
 		$ven_data = $callConfig->getAllRows($query1);
 		foreach($ven_data as $esign_data){
 			$esig_ven[$esign_data->vendor_id][$esign_data->esign_id][$esign_data->esign_detail_id] =  round(number_format($esign_data->available, 2, '.', ''));
 		}
-		//echo "Shankar";print_r($esig_ven);
 
 
 		$check=0;
@@ -2340,7 +2259,6 @@ class vMSUserClass extends userClass{
 		}
 		$aa['check'] = $check;
 		return $check;
-		//return $query;
 	}
 	public function deleteTimeSheets($data){
 		global $callConfig;
@@ -2399,7 +2317,6 @@ class vMSUserClass extends userClass{
 			$pdata = array();
 
 			$query1 = "SELECT SUM(`bill_amount`) as bill_amount,sum(`billable_hrs`) as billable_hrs, sum(`nonbillable_hrs`) as nonbillable_hrs FROM `project_timesheets` WHERE `emp_id`=".$employee->id." AND `timesheet_date`>='".$get['fromdate']."' AND `timesheet_date` <= '".$get['todate']."' AND is_active=0";
-			//echo $query1;
 			$data1 = $callConfig->getRow($query1);
 			$pdata['bill_amount']=$data1->bill_amount;
 			$pdata['billable_hrs']=$data1->billable_hrs;
@@ -2564,7 +2481,6 @@ class vMSUserClass extends userClass{
     		$total_working_day = count(json_decode($attendance_settings->working_days,1));
     		$working_days = json_decode($attendance_settings->working_days,1);
     		$workday =0;
-			// $holiday_dates = json_decode($post['holiday_dates'],1);
     		if($uom == 'PH'){
     			$perhrsrate = $price;
     		}elseif($uom == 'PD'){
@@ -2614,7 +2530,6 @@ class vMSUserClass extends userClass{
     		$details['task'] = $tasks;
     		$details['timesheets'] = $timesheetdata;
     		$details['stauseandid'] = $stauseandid;
-    		//$query = "SELECT sum(if(current_status=".ST_APPROVED.",billable_hrs,0)) as approve , sum(billable_hrs) as submit from project_timesheets where emp_id =".$get['emp_id']." And work_order =".$workorderid." AND  is_active = '0' AND `timesheet_date` >= '".$get['startingdate']."' AND `timesheet_date` < '".$get['endingdate']."'";
     		$query = "SELECT sum(if(current_status=".ST_APPROVED.",billable_hrs,0)) as approve , sum(billable_hrs) as submit from project_timesheets where emp_id =".$get['emp_id']." AND  is_active = '0' AND `timesheet_date` >= '".$get['startingdate']."' AND `timesheet_date` < '".$get['endingdate']."'";
     		$res = $callConfig->getRow($query);
     		$details['approve_hrs'] = $res->approve;
@@ -2631,7 +2546,6 @@ class vMSUserClass extends userClass{
     	$vrc_rate_per_hrs = round($bilableamtcalculation['vrc_rate_per_hrs'],2);
     	$esignid = $bilableamtcalculation['esigndata']->esgin_budget_approval_id;
     	$vrcid = $bilableamtcalculation['esigndata']->vrc_id;
-    	//$esignid = $vrcid = '0';
 		$queryemp = $callConfig->selectQuery('config','esign_time_sheet_lock,esign_buget_approval_lock','company_id =1 AND is_active=0','','','');
 		$config = $callConfig->getRow($queryemp);
 		if($config->esign_time_sheet_lock == 1){
@@ -2684,7 +2598,6 @@ class vMSUserClass extends userClass{
         	$testarrau['error'] = '404';
         }
     	return $testarrau;
-    	//return $post;
     }
 	public function getBillableAmountTimesheetcalculatio($post,$get){
     	global $callConfig;
@@ -2718,7 +2631,6 @@ class vMSUserClass extends userClass{
     	}
     	$testarrau['startdate'] = $post['startingdate'];
     	$testarrau['enddate'] = $post['endingdate'];
-    	//$testarrau['enddate']  = $leavesqql;
     	if(TIMESHEET_RATE_CALCULATION_TYPE == 1){
     		$totaldays=((strtotime($post['endingdate']) - strtotime($post['startingdate'])) / (60 * 60 * 24))+1;
     	}else{
@@ -2734,7 +2646,6 @@ class vMSUserClass extends userClass{
     			$calculationdays++;
     			if(in_array($dateFrom->format('l'),(array)$working_days) && !in_array($dateFrom->format('Y-m-d'), (array)$holidaysdatas)){
     				$testarrau['working_dates'][] = $dateFrom->format('Y-m-d');
-					//$testarrau['days'][] = $dateFrom->format('l');
     				$workday++;
     			}
     			$dateFrom->modify('+1 days');
@@ -2787,13 +2698,10 @@ class vMSUserClass extends userClass{
 		$location_sql = "SELECT id FROM locations WHERE is_active=0 and company_id=".$get['company_id'];
 		$locations = $callConfig->getAllRows($location_sql);
 		$holidays = "SELECT holiday_date, location_id FROM holidays WHERE is_active=0 and company_id=".$get['company_id']." AND holiday_date >='".$get['from_date']."' AND holiday_date <='".$get['to_date']."'";
-		//echo $holidays;
 		$holidaysdata = $callConfig->getAllRows($holidays);
 		foreach ($holidaysdata as $hkey=>$hvalue) {
 			$holidaydates[$hvalue->location_id][] = $hvalue->holiday_date;
-			//$locations_holidays[$hvalue->location_id] = $hvalue->location_id;
 		}
-		//print_r($holidaydates);
 		$attendancewhurl1 = "SELECT id,minimum_hours_required,working_days FROM attendance_settings WHERE is_active=0 and company_id=".$get['company_id'];
 		$attendance_settings = $callConfig->getRow($attendancewhurl1);
 		$testarrau['attendance_settings'] = $attendance_settings;
@@ -2809,9 +2717,8 @@ class vMSUserClass extends userClass{
 			for($i = 0; $i < $datediff+1; $i++){
 				$valda =  date("Y-m-d", strtotime($from . ' + ' . $i . 'day'));
 				$valday = ucwords(date("l", strtotime($from . ' + ' . $i . 'day')));
-				//echo $valday."step1".$valday."--";
 				if(in_array($valday, $weekly_working_days)){
-					if(!in_array($valda, $holidaydates[$location->id])){ //echo "step2";
+					if(!in_array($valda, $holidaydates[$location->id])){
 						$work_days = $work_days+1;
 						$work_dates[] = $valda;
 					}
@@ -2819,7 +2726,6 @@ class vMSUserClass extends userClass{
 			}
 			$return[$location->id] = array('holidaydates'=>$holidaydates[$location->id],'count_hoilydays'=>count($holidaydates[$location->id]),'minimum_hours'=>$minimum_hours_required,'week_days'=>$weekly_working_days,'count_week'=>count($weekly_working_days),'count_working_days'=>$work_days,'work_dates'=>$work_dates);
 		}
-		//print_r($return);
 		return 	$return;
 	}
 	public function togetesignvendororderdata($data){
@@ -2849,7 +2755,6 @@ class vMSUserClass extends userClass{
     	AND vrc.ref_id = ese.esgin_budget_approval_id
     	AND vrci.transaction_id = vrc.id
     	AND vrci.item_id = emp.job_title_id";
-		//echo $query; exit;
     	$return = $callConfig->getRow($query);
     	$return = (array)$return;
     	return $return;
@@ -2880,7 +2785,6 @@ class vMSUserClass extends userClass{
 		$endtdate = date("Y-m-t",strtotime($startdate));
 		$query = "SELECT emp.id, emp.display_name, po.work_order_id , po.vrc_id, esg.esgin_budget_approval_id ,esb.transaction_number etn, mc.transaction_number mtn, vc.transaction_number vtn FROM employees emp, emp_work_order po, esgin_employees esg, esgin_budget_approvals esb, manpower_contracts mc,vendor_rate_cards vc WHERE po.emp_id = emp.id AND esg.emp_id = emp.id AND esb.id = esg.esgin_budget_approval_id AND mc.id = po.work_order_id AND vc.id = po.vrc_id AND emp.is_active=0 AND po.is_active=0 AND esg.is_active=0 AND esg.valid_from < '".$endtdate."' AND esg.valid_to >= '".$startdate."'";
 		$details  = $callConfig->getAllRows($query);
-		//print_r($details);
 		foreach ($details as $detail){
 			$return[$detail->id] =$detail;
 		}
@@ -2989,14 +2893,12 @@ class vMSUserClass extends userClass{
 	}
 	public function updateapprovallogprojecttimesheets($post){
 		global $callConfig;
-		//print_r($post); exit;
 		$projecttssql = "SELECT current_status,created_by FROM project_timesheets WHERE is_active = 0 AND company_id = '".$post['company_id']."' AND id='".$post['hid']."'";
 		$projecttsres = $callConfig->getRow($projecttssql);
 		$user_id = $projecttsres->created_by;
 		$userdetailsurl = "SELECT id,reports_to,approval_manager FROM application_users WHERE is_active = 0 AND company_id = '".$post['company_id']."' AND id='".$projecttsres->created_by."'";
 		$old_status = $projecttsres->current_status;
 		$new_status = $post['status'];
-		//$userdetailsurl = "SELECT id,reports_to,approval_manager FROM application_users WHERE is_active = 0 AND company_id = '".$post['company_id']."' AND id='".$post['user_id']."'";
 		$userdetails = $callConfig->getRow($userdetailsurl);
 		$reporting_manager_id = $userdetails->approval_manager;
 		$approval_manager_id = $userdetails->reports_to;
@@ -3021,12 +2923,9 @@ class vMSUserClass extends userClass{
 
 		$updateprojecttimesheet = $this->updateprojecttimesheets($post,$post);
 
-		/*$upadate_array = array('updated_by'=>$post['user_id'],'updated_date'=>date("Y-m-d H:i:s"),'current_status'=>$post['status']);
-		$inserttasks = $callConfig->updateRecord('project_timesheets',$upadate_array,'id',$post['hid']);*/
 		$ndcndfc['approval_id'] =  $approval_id;
 		$inserttasks = null;
 		$ndcndfc['task'] =  $inserttasks;
-		//$msg = $post['table']." - ".$post['hid'];
 		$msg = '';
 		$user_ids = array();
 		$notdataa = array('company_id'=>$post['company_id'], 'id'=>$post['hid'],'notification_message'=>$msg, 'id'=>$post['hid'],'application_table_name'=>$post['table'], 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>"COM_INSERT_PROJECT_TIMESHEETS",'action_label'=>'', 'transaction_type'=>$post['table'], 'transaction_number'=>$post['hid'], 'transaction_date'=>date('Y-m-d'),'status'=>$post['status']);
@@ -3118,11 +3017,9 @@ class vMSUserClass extends userClass{
 		}
 
 		return $ndcndfc;
-		//return $updateprojecttimesheet;
 	}
 	public function yearlyprojecttimesheetreports($data){
 		global $callConfig;
-		// return $data;
 		$last_date = date('Y-m-t');
 		$frist_date = date('Y-m-01');
 		$fl_date = date('Y-m-01', strtotime("-13 months"));
@@ -3243,18 +3140,13 @@ class vMSUserClass extends userClass{
 		  ".$filempname.", 
 		  dept_name
 		ORDER by  2";
-			// echo $query;
 		$return = $callConfig->getAllRows($query);
-		// echo "<pre>"; print_r($return);
 
 		foreach($return as $res){
 			$returnarray['headlist'][$res->$filempname ] = $res->dept_name;
 			for($i=0;$i<12;$i++){
 				$var = "s".($i+1);
-				//echo $i."/".date('M Y',strtotime('-'.$i.' month',strtotime($frist_date)))."/<br>";
 			  $returnarray['months'][date("Ym",strtotime('-'.$i.' month',strtotime($frist_date)))] = date('M Y',strtotime('-'.$i.' month',strtotime($frist_date)));
-			 //	$valda =  date("Y-m-d", strtotime($from . ' + ' . $i . 'day'));
-			 // $returnarray['list'][$res->$filempname ][date("Ym",strtotime('-'.$i.' month',strtotime($frist_date)))]['po_billable_amount'] = "";
 			  $returnarray['list'][$res->$filempname ][date("Ym",strtotime('-'.$i.' month',strtotime($frist_date)))]['po_billable_amount']=$res->$var;
 			 $returnarray['list'][$res->$filempname ][date("Ym",strtotime('-'.$i.' month',strtotime($frist_date)))]['vrc_billable_amount']=$res->$var;
 			}
@@ -3380,7 +3272,6 @@ class vMSUserClass extends userClass{
 		foreach($tables as $table){
 			$query = "SELECT emp_id , sum(leaves) sl , month FROM ".$table." GROUP BY emp_id ,month HAVING sl >0";
 			$empdatas = $callConfig->getAllRows($query);
-			//echo "<pre>"; print_r($empdatas);
 			foreach($empdatas as $empdata){
 				if($empdata->month=='jan'){	$ldate = "2022-01";
 				}
@@ -3389,9 +3280,7 @@ class vMSUserClass extends userClass{
 				if($empdata->month=='mar'){	$ldate = "2022-03";
 				}
 				$eequery = "SELECT id  FROM employees WHERE emp_code='".$empdata->emp_id."'";
-				//echo $eequery;
 				$eeee = $callConfig->getRow($eequery);
-				//print_r($eeee);
 				$pquery = "SELECT * FROM `project_timesheets` WHERE emp_id =".$eeee->id." AND timesheet_date LIKE '%".$ldate."%' AND billable_hrs !=0 ORDER BY timesheet_date LIMIT 0,".$empdata->sl;
 				$prdatas = $callConfig->getAllRows($pquery);
 				$earray = array();
@@ -3399,8 +3288,6 @@ class vMSUserClass extends userClass{
 					$earray[]= $prdata->id;
 				}
 				$eids = implode(",",$earray);
-			//	$upquery = "UPDATE project_timesheets SET bill_amount=0.00, vrc_billable_amount= 0.00, billable_hrs=0.00 WHERE id IN (".$eids.")";
-			//	echo $upquery."<br>";
 				$aa[] = $callConfig->executeQuery($upquery);
 			}
 		}
@@ -3544,7 +3431,6 @@ class vMSUserClass extends userClass{
 			foreach($timesheetsyattosubmitres as $row2){
 				$retrunyattusubmit[$row2->id] =  $row2;
 			}
-		//	$retrunarry = array("res"=>$result,"log"=>$retrunlog,'yattosubmit'=>$retrunyattusubmit,'sqlapproval'=>$query,'yattosubmitsql'=>$timesheetsyattosubmitsql);
 			$retrunarry = array("res"=>$result,'yattosubmit'=>$retrunyattusubmit,'sqlapproval'=>$query,'yattosubmitsql'=>$timesheetsyattosubmitsql);
 			return $retrunarry;
 	}
@@ -3580,7 +3466,6 @@ class vMSUserClass extends userClass{
 			$ss = $this->tosendnotifiations($notdataa);
 
 		}else{
-			//$msg = date('d M Y',strtotime($data['weekstartdate'])).' Your Time Sheet is Approved by Reporting';
 			foreach((array)$report_tosendnotification as $empidkey=>$report_to){
 				$appv_fieldnames=array('company_id'=>$data['company_id'],'transaction_table'=>$data['table'],'transaction_id'=>$emp_time_array[$empidkey],'user_id'=>$report_to,'request_date'=>date("Y-m-d H:i:s"),'send_back_flag' => '0','response_type'=>'0');
 				$approval_id=$callConfig->insertRecord(TBL_TRANSACTION_APPROVAL_LOGS,$appv_fieldnames);
@@ -3622,7 +3507,6 @@ class vMSUserClass extends userClass{
   	/*************VMS single page Start*************************************************************/
     public function togetvmsemployeedetails($get){
 		global $callConfig;
-		//$whr = "id=".$get['emp_id']." AND is_active=0";
 		if($get['employe_id']!=""){
 			$whr = "id=".$get['employe_id']." AND is_active=0";
 		}elseif($get['emp_code']!=""){
@@ -3669,7 +3553,6 @@ class vMSUserClass extends userClass{
 		$return['employee_list'] = $callConfig->getAllRows($equery);
 		$whr = "employee_id=".$emp->id." AND is_active=0";
 		$equery = $callConfig->selectQuery('employee_buddies','*',$whr,'','','');
-		//echo $equery;exit;
 		$return['employee_buddies'] = $callConfig->getRow($equery);
 		$whr = "emp_id=".$emp->id." AND is_active=0";
 		$equery = $callConfig->selectQuery('esgin_employees','*',$whr,'','','');
@@ -3702,9 +3585,7 @@ class vMSUserClass extends userClass{
 		global $callConfig;
 		$emp_id = $post['employee_id'];
 		$query2 = "SELECT * FROM employee_buddies WHERE is_active=0 AND  employee_id=".$emp_id;
-		//echo $query1."</br>";
 		$datas = $callConfig->getRow($query2);
-		//print_r($insert_array);
 		if($datas->id!=""){
 			$remove_array = array('is_active'=>1,'updated_by'=>$get['user_id']);
 			$where = "id = '".$datas->id."'";
@@ -3854,7 +3735,6 @@ class vMSUserClass extends userClass{
 	}
 	public function getvendorratecardidordetailsid($get){
 		global $callConfig;
-		//	print_r($get); exit;
 		$condition = "";
 		if($get['old_ref_no']!="" && ($get['vrc_id']=="" || $get['vrc_id']=="0")){
 			$condition .= " AND vrc.transaction_number = '".$get['old_ref_no']."'";
@@ -3871,7 +3751,6 @@ class vMSUserClass extends userClass{
 	}
  	public function getWeecklyStatusTimeSheetSummary($get){
 	   global $callConfig;
-	  //print_r($get); exit;
 	  $company_id = $get['company_id'];
 	   $startdate = $get['year']."-".$get['month']."-01";
 	   $enddate = date("Y-m-t",strtotime($startdate));
@@ -4021,8 +3900,6 @@ class vMSUserClass extends userClass{
 		foreach($result as $row){
 			$retrunarray[$row->reports_to][$row->approval_manager][$row->emp_id] = $row;
 		}
-		//echo "<pre>";
-		//print_r($retrunarray);
 		 return $retrunarray;
 	}
 	public function checkvalll($get){
@@ -4044,7 +3921,6 @@ class vMSUserClass extends userClass{
 			 	break;
 			 }
 			}
-			//print_r($data); echo "<br>";
 		}
 		return $data;
 	}
@@ -4326,7 +4202,6 @@ class vMSUserClass extends userClass{
 		    ) END
 		  )
 		  ORDER BY employee_name";
-		//echo $query;
     		$return = $callConfig->getAllRows($query);
   		return  $return;
 	}
@@ -4424,8 +4299,6 @@ class vMSUserClass extends userClass{
 			$totalvendor[$emplist->vendor_id] = $emplist->vendor_id;
 			}
 		}
-		//echo "total - ".$totalactive."- join - ".$join." -resign : ".$resign."- prejoin - ".$prejoin." -preresign : ".$preresign;
-		//$return =   array("total_emp"=>$sql,"this_month_join"=>$sql1,"previous_month_join"=>$sql3,"this_month_leaving"=>$sql4,"previous_month_leaving"=>$sql5);
 		$return =   array("total_emp"=>$totalactive,"this_month_join"=>$join,"previous_month_join"=>$prejoin,"this_month_leaving"=>$resign,"previous_month_leaving"=>$preresign,"total_ven"=>count($totalvendor),"sql"=>$sql);
 		return $return;
 	}
@@ -4633,7 +4506,6 @@ class vMSUserClass extends userClass{
 							)
 					END
 			) ORDER By 2, 4";
-		//echo $query;
 		$return = $callConfig->getAllRows($query);
 		return $return;
 	}
@@ -4644,7 +4516,6 @@ class vMSUserClass extends userClass{
 
 		$query = "SELECT * FROM transaction_approval_logs WHERE user_id=".$get['user_id']." AND transaction_table = '".$get['table']."'";
 		$mydata = $callConfig->getAllRows($query);
-        //print_r($mydata);
 		foreach($mydata as $data){
 			$ids[] = $data->transaction_id;
 		}
@@ -4662,7 +4533,6 @@ class vMSUserClass extends userClass{
           global $callConfig;
 		 $query = "SELECT DISTINCT(emp_id) emp_id,vendor_rate_card_id, work_order FROM project_timesheets WHERE emp_id IN (SELECT id FROM employees WHERE location_id =1 AND is_active =0) AND is_active = 0 AND timesheet_date LIKE '2022-11-%'";
 		   $ptdt = $callConfig->getAllRows($query);
-	      //	print_r($ptdt); exit;
 		   foreach($ptdt as $ptd){
 			$query = "SELECT * FROM emp_work_order WHERE emp_id = ".$ptd->emp_id." AND work_order_id".$ptd->work_order_id." AND vrc_id=".$ptd->vendor_rate_card_id." AND is_active = 0";
 			$ewr = $callConfig->getRow($query);
@@ -4699,30 +4569,22 @@ class vMSUserClass extends userClass{
 	}
 	public function addorremoveusersubtable($post,$get){
 		global $callConfig;
-		//print_r($post);//print_r($get);exit;
 		 $query = "SELECT * FROM ".$post['main_table']." WHERE company_id = ".$get['company_id']." AND  user_id = ".$post['user_id']." AND ".$post['main_reort_id']."=".$post['report_id']." AND is_active = 0";
-		//echo $query; //exit;
 		$data = $callConfig->getRow($query);
 		print_r($data);
 		if($data->id!=""){
-			//echo "data";
-			//$query=$callConfig->updateRecord($post['main_table'],array('is_active'=>'1','updated_by'=>$post['user_id']),'id',$data->id);
 			$query= "UPDATE ".$post['main_table']." SET is_active=1, updated_by=".$get['user_id']." WHERE id = ".$data->id;
-			//echo $query;
 			$qres = $callConfig->executeQuery($query);
 		}else{
-			//echo "check";
 			$distribute = array('company_id'=>$get['company_id'],'user_id'=>$post['user_id'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
 			$distribute[$post['main_reort_id']] = $post['report_id'];
 
-			//print_r($distribute);
            		$qres=$callConfig->insertRecord($post['main_table'],$distribute);
 		}
 		return $qres;
 	}
 	public function bugetvendorrareport($get){
         global $callConfig;
-		//echo "Check Test";
         if($get['fromdate']!=""){
                 $ym = explode("-", $get['fromdate']);
                 $month = $ym[1];
@@ -5201,13 +5063,11 @@ class vMSUserClass extends userClass{
 		  ) a 
 		ORDER BY 
 		  1,3";
-		//	echo $query; exit;
 	        $return = $callConfig->getAllRows($query);
         	return $return;
 	}
 	public function  vmssingleemployeedashoard($get){
 		global $callConfig;
-		//print_r($get);
 		$fristdate = date("Y-m-01", strtotime( date( 'Y-m-01' )." -6 months"));
 		$lastdate = date("Y-m-t");
 		$query ="SELECT WEEK(timesheet_date) week, DATE( DATE_ADD( timesheet_date, INTERVAL( 1 - DAYOFWEEK(timesheet_date) ) DAY ) ) as startofweek, DATE( DATE_ADD( timesheet_date, INTERVAL( 7 - DAYOFWEEK(timesheet_date) ) DAY ) ) as lastofweek, MONTH(timesheet_date) month, YEAR(timesheet_date) year, sum(billable_hrs) hrs, current_status FROM project_timesheets WHERE emp_id = ".$get['empid']." AND timesheet_date >= '".$fristdate."' AND timesheet_date <= '".$lastdate."' AND is_active = 0 GROUP BY week, startofweek, lastofweek, month, year, current_status ORDER BY startofweek ASC";
@@ -5241,7 +5101,6 @@ class vMSUserClass extends userClass{
 		}
 		$fdate=$fristdate;
 		for($i=1;$i<190;$i++){
-			//echo $fdate."<br>";
 			if(strtotime($fdate)<=strtotime($lastdate)){
 				$n = date("n",strtotime($fdate));
 				$day = date("w",strtotime($fdate));
@@ -5278,13 +5137,11 @@ class vMSUserClass extends userClass{
 		$atsdata = $callConfig->getRow($attstc);
 		$workingdays = $atsdata->working_days;
 		$working_days = json_decode($workingdays,1);
-		//echo "<pre>"; print_r($working_days);
 		$holidayquery = "SELECT * FROM holidays WHERE holiday_date >='".$from."' AND holiday_date <= '".$to."' AND is_active=0";
 		$holidaydata = $callConfig->getAllRows($holidayquery);
 		foreach((array)$holidaydata  as $holidayda){
 			$holidays[$holidayda->location_id][] = $holidayda->holiday_date;
 		}
-		//print_r($holidays);
 		$datediff = strtotime($to) - strtotime($from);
 		$datediff = floor($datediff/(60*60*24));
 		for($i = 0; $i < $datediff + 1; $i++){
@@ -5292,7 +5149,6 @@ class vMSUserClass extends userClass{
 			$valday = ucwords(date("l", strtotime($from . ' + ' . $i . 'day')));
 			if(in_array($valday, (array)$working_days)){
 				if(!in_array($valda, (array)$holidays)){
-					//echo "step2";
 					$work_days = $work_days+1;
 				}
 			}
@@ -5398,31 +5254,10 @@ class vMSUserClass extends userClass{
 		$table_options = "vendor_feedback_setup_question_options";
 		$main = $post['main'];
 		$quesion_data = $post['qustion'];
-		/*$whr="company_id=".$get['company_id']." and is_active='0' and id=".$main['survey_assigned_to'];
-		$query=$callConfig->selectQuery(TBL_FILTER_TABLES,'*',$whr,'','','');
-		$shared_content_details = $callConfig->getRow($query);
-		$shared_list = $shared_content_details->content;
-		$shared_list = rtrim($shared_list,'"');
-		$shared_list = ltrim($shared_list,'"');
-		$shared_ids = json_decode($shared_list,1);
-		$assigned_to_employees = json_encode($shared_ids['matches_names'],1);
-		$shared_list1 = rtrim($assigned_to_employees,'"');
-		$shared_list1 = ltrim($shared_list1,'"');
-		$shared_ids1 = json_decode($shared_list1,1);
-		foreach($shared_ids1 as $ids){
-			$shared_idslist[]= $ids['id_value'];
-		}
-		$main['assigned_to_employees'] = json_encode($shared_idslist,1);
-		$main['assigned_to_count']  = count((array)$shared_idslist);*/
-    	//print_r($main);exit;
 		if($rowid=="") {
 			$array = array('company_id'=>$main['company_id'],'is_active'=>'0','created_by'=>$main['created_by'],'created_date'=>$main['created_date']);
 			$res=$callConfig->insertRecord($table_setup,$main);
 			$s_id = $res['LASTID'];
-			/*foreach($shared_ids1 as $ids){
-				$response_array = array('company_id'=>$main['company_id'],'is_active'=>'0','created_by'=>$main['created_by'],'created_date'=>$main['created_date'],'employee_id'=>$ids['id_value'],'survey_id'=>$s_id,'category'=>$main['category']);
-				$res=$callConfig->insertRecord(TBL_SURVEY_RESPONSES,$response_array);
-			}*/
 			foreach ($quesion_data as $key => $value) {
 				$value['transaction_id'] = $s_id;
 				$survey_question_option['question_option'] = $value['survey_question_option'];
@@ -5443,11 +5278,6 @@ class vMSUserClass extends userClass{
 			$setisactive = array('is_active'=>'1');
 			$qrespons=$callConfig->updateRecord($table_questions,$setisactive,'transaction_id',$rowid);
 			$qrespons=$callConfig->updateRecord($table_options,$setisactive,'transaction_id',$rowid);
-			//$qrespons=$callConfig->updateRecord(TBL_SURVEY_RESPONSES,$setisactive,'survey_id',$rowid);
-			/*foreach($shared_ids1 as $ids){
-				$response_array = array('company_id'=>$main['company_id'],'is_active'=>'0','created_by'=>$main['created_by'],'created_date'=>$main['created_date'],'employee_id'=>$ids['id_value'],'survey_id'=>$rowid,'category'=>$main['category']);
-				$res=$callConfig->insertRecord(TBL_SURVEY_RESPONSES,$response_array);
-			}*/
 			foreach ((array)$quesion_data as $key => $value) {
     			//if(qustionid!='') thn update is_active=0 and values questintabe
     			//update is_active=0 and valus in option table conditoon survey id and question id
@@ -5455,14 +5285,13 @@ class vMSUserClass extends userClass{
 				$value['transaction_id'] = $rowid;
 				$survey_question_option['question_option'] = $value['survey_question_option'];
 				$survey_question_option['transaction_id'] = $rowid;
-				$question_id = $value['question_id'];//exit;
+				$question_id = $value['question_id'];
 				unset($value['survey_question_option']);
 				unset($value['question_id']);
 				unset($value['rid']);
 				$quesion_array = array_merge($value,$array);
 				if($question_id!=''){
 					$qres=$callConfig->updateRecord($table_questions,$quesion_array,'id',$question_id);
-					//$survey_question_option['question_id'] = $question_id;
 					$answer_array = array_merge($survey_question_option,$array);
 					$qrespons=$callConfig->updateRecord($table_options,$answer_array,'question_id',$question_id);
 				}else{
@@ -5487,7 +5316,6 @@ class vMSUserClass extends userClass{
 		$whr="company_id=".$get['company_id']." and is_active='0' and transaction_id=".$get['survey_id'];
 		$query=$callConfig->selectQuery('vendor_feedback_setup_questions','*',$whr,'','','');
 		$details['survey_qustion_details'] = $callConfig->getAllRows($query);
-        	//print_r($whr); exit;
 
 		$whr="company_id=".$get['company_id']." and is_active='0' and transaction_id=".$get['survey_id'];
 		$query=$callConfig->selectQuery('vendor_feedback_setup_question_options','*',$whr,'','','');
@@ -5498,7 +5326,6 @@ class vMSUserClass extends userClass{
 
 
 
-     	//  echo '<pre>'; print_r($details['survey_qustion_details']); exit;
 		return $details;
 	}
     public function getvendorfeedbackdata($get){
@@ -5903,7 +5730,6 @@ class vMSUserClass extends userClass{
 		}elseif($data->parent_ref_id !="" ){
 			$parent_ref_id = $data->parent_ref_id;
 		}
-		//echo $parent_ref_id;  exit;
 		$query = "SELECT count(id) as cc FROM vendor_feedback_setup WHERE parent_ref_id=".$parent_ref_id;
 
 		$ccdata = $callConfig->getRow($query);
@@ -5915,7 +5741,6 @@ class vMSUserClass extends userClass{
 
 		$versions = explode('.',$data->version_no);
 		$version = $versions['0'].".".$version_val;
-		//echo $parent_ref_id."/".$version; exit;
 		$query = "INSERT INTO `vendor_feedback_setup`( `company_id`, `feedback_name`, `version_no`, `description`, `start_date`, `end_date`, `allow_multiple_times`, `applicable_locations`, `applicable_vendors`, `provide_locations`, `provide_departments`, `provide_designations`, `provide_roles`, `provide_employees`, `publish_status`, `publish_by`, `publish_date`, `ref_id`, `parent_ref_id`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`) SELECT  `company_id`, `feedback_name`, ".$version.", `description`, `start_date`, `end_date`, `allow_multiple_times`, `applicable_locations`, `applicable_vendors`, `provide_locations`, `provide_departments`, `provide_designations`, `provide_roles`, `provide_employees`, `publish_status`, `publish_by`, `publish_date`, ".$get['setup_id']." , ".$parent_ref_id.", `is_active`, '0', `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM vendor_feedback_setup WHERE  id=".$get['setup_id'];
 		$allqueries[] = $query;
 		$main = $callConfig->executeQuery($query);
@@ -5941,7 +5766,6 @@ class vMSUserClass extends userClass{
 				$querun = $callConfig->executeQuery($query);
 			}
 		}
-		//return array('main'=>$main, 'allqueries'=>$allqueries);
 		return array('main'=>$main);
 	}
 	public function togetvendorfeedbacksetupdetails($get){
@@ -5956,7 +5780,6 @@ class vMSUserClass extends userClass{
 		$emp_data = $callConfig->getRow($emp_query);
 		$view = 0; $list_setup = array();
 		foreach($lists as $list){
-			//echo "<pre>"; print_r($list);
 			$applicable_locations = json_decode($list->applicable_locations,1);
 			if(in_array('0',(array)$applicable_locations)){
 				$view = 1;
@@ -6105,8 +5928,6 @@ class vMSUserClass extends userClass{
  		$return['min'] = $min;
  		$return['max'] = $max;
  		$return['ave'] = $ave;
- 		//$return['vendor'] = $vendor;
- 		//$return['job_title'] = $job_title;
  		$return['data'] = $data;
  		$jobtitle_query = "SELECT id,job_title FROM job_titles WHERE company_id = ".$get['company_id']." AND is_active = 0";
  		$return['jobtitle_query'] = $jobtitle_query;
@@ -6127,16 +5948,13 @@ class vMSUserClass extends userClass{
 	}
 	public function getmonthlytimesheetentries($get){
      	global $callConfig;
-     	//echo "Ravi"; print_r($get); exit;
      	$ymdate = $get['year']."-".$get['month']."-";
      	$valid_from = $ymdate."01";
      	$valid_from = date('Y-m-01', strtotime($valid_from));
      	$valid_to = date('Y-m-t', strtotime($valid_from));
-     	//echo "Ravi"; print_r($get); exit;
      	$atquery="SELECT *  FROM attendance_settings WHERE company_id='".$get['company_id']."' AND is_active=0 LIMIT 0,1";
     	$attendance  = $callConfig->getRow($atquery);
 
-    	//$query2 = "SELECT * FROM emp_work_order WHERE  emp_id =".$get['empid']." AND effective_to_date >'".$valid_from."' AND is_active = 0";
     	$workordersql = "SELECT ewo.id,mpc.transaction_number  
 		FROM `emp_work_order` ewo, manpower_contracts mpc  
 		WHERE   ewo.company_id='".$get['company_id']."'
@@ -6153,14 +5971,12 @@ class vMSUserClass extends userClass{
     	$details['workorder_query'] = $workordersql;
 		$workorder = $callConfig->getAllRows($workordersql);
 
-     	//$hquery="SELECT *  FROM holidays WHERE company_id='".$get['company_id']."' AND holiday_date LIKE '".$ymdate."%' AND is_active=0";
      	$hquery = "SELECT holiday_date FROM `holidays` WHERE company_id =".$get['company_id']." AND holiday_date >= '".$valid_from."' AND holiday_date <= '".$valid_to."' AND location_id IN (SELECT location_id FROM employees WHERE id=".$get['empid'].") AND is_active =0";
     	$holidays  = $callConfig->getAllRows($hquery);
     	foreach((array)$holidays as $holida){
     		$workholiday[$holida->holiday_date] = $holida;
     		$listholidays[] = $holida->holiday_date;
     	}
-    	//echo "Ravi w"; print_r($get); exit;
     	$equery="SELECT *  FROM employee_leaves WHERE company_id='".$get['company_id']."' AND leave_from >= '".$valid_from."' AND leave_to <= '".$valid_to."' AND is_active=0";
     	$leaves  = $callConfig->getAllRows($equery);
     	foreach((array)$leaves as $leav){
@@ -6172,14 +5988,12 @@ class vMSUserClass extends userClass{
     			$ssdate = date('Y-m-d', strtotime("+1 day", strtotime($ssdate)));
     		}
     	}
-    	//echo "Ravi Q"; print_r($get); exit;
      	$quer_5="SELECT *  FROM ".TBL_PROJECT_TIMESHEETS." WHERE company_id='".$get['company_id']."' AND emp_id=".$get['empid']." AND timesheet_date LIKE '".$ymdate."%' AND is_active=0";
     	$empdatas  = $callConfig->getAllRows($quer_5);
     	foreach((array)$empdatas as $empda){
     		$workdata[$empda->timesheet_date] = $empda;
     		$timesheet[] = $empda->timesheet_date;
     	}
-    	//echo "Ravi E "; print_r($get); exit;
     	$details['attendance'] = $attendance;
 		$details['holidays'] = $workholiday;
     	$details['listholidays'] = $listholidays;
@@ -6193,17 +6007,14 @@ class vMSUserClass extends userClass{
     	$details['no_leaves'] = count((array)$leave);
     	$get['employee_id'] = $get['empid'];
     	$get['date'] = $valid_from;
-    	//print_r($get); exit;
     	$all_data = $this->togetemployeemonthattendancedetails($get);
     	$details['all_data'] = $all_data;
     	return $details;
     }
     public function addupdateprojecttimesheetmontly($post, $get){
     	global $callConfig;
-    	//print_r($get); print_r($post); exit;
 
     	$bilableamtcalculation = $this->getBillableAmountTimesheetcalculationday($post, $get);
-    	//return $post;
     	$mpc_rate_per_hrs = round($bilableamtcalculation['mpc_rate_per_hrs'],2);
         $vrc_rate_per_hrs = round($bilableamtcalculation['vrc_rate_per_hrs'],2);
         $esignid = $bilableamtcalculation['esigndata']->esgin_budget_approval_id;
@@ -6223,15 +6034,12 @@ class vMSUserClass extends userClass{
     			$nonhrs = $hrs;
     			$hrs = 0;
     	}
-    	//return $post;
     	$upquery = "UPDATE project_timesheets SET is_active = NULL WHERE company_id =".$get['company_id']." AND timesheet_date='".$post['date']."' AND emp_id =".$post['emp_id']." AND is_active =0";
     	$res = $callConfig->executeQuery($upquery);
     	$insert_array = array('company_id'=>$get['company_id'],'timesheet_date'=>$post['date'],'task_name'=>'','work_order'=>$data['work_order_id'],'vendor_rate_card_id'=>$data['vrc_id'],'rate_per_hrs'=>$mpc_rate_per_hrs,'bill_amount'=>$mpc_rate_per_hrs*$hrs,'vrc_billable_amount'=>$vrc_rate_per_hrs*$hrs,'billable_hrs'=>$hrs,'nonbillable_hrs'=>$nonhrs,'emp_id'=>$post['emp_id'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-    	 //print_r($insert_array); exit;
     	$exe = $callConfig->insertRecord('project_timesheets', $insert_array);
     	$insert_array['employee_id'] = $post['emp_id'];
     	$insert_array['date'] = $post['date'];
-    	//return $post;
     	$redata = $this->togetemployeemonthattendancedetails($insert_array);
     	return $redata;
     }
@@ -6244,7 +6052,6 @@ class vMSUserClass extends userClass{
     	}
     	$fromdate = date('Y-m-01', strtotime($get['date']));
     	$todate = date('Y-m-t', strtotime($fromdate));
-    	//echo "<pre>".$fromdate."---".$todate; print_r($get); exit;
     	$query = "SELECT working_days FROM attendance_settings WHERE company_id =".$get['company_id']." AND is_active =0";
     	$attendances = $callConfig->getRow($query);
 
@@ -6253,7 +6060,6 @@ class vMSUserClass extends userClass{
     	foreach((array)$listholidays as $listholiday){
     		$holidays[] = $listholiday->holiday_date;
     	}
-    	//echo $query; print_r($holidays); exit;
     	$query = "SELECT leave_from,leave_to FROM employee_leaves WHERE company_id =".$get['company_id']." AND employee_id = ".$emp_id." AND  is_active =0";
     	$leaves = $callConfig->getRow($query);
 
@@ -6272,16 +6078,12 @@ class vMSUserClass extends userClass{
     	}
 
     	$working_days = json_decode($attendances->working_days,1);
-    	//echo "<pre>".$fromdate."---".$todate; print_r($attendances);print_r($weekdays); print_r($get); exit;
     	$datediff = strtotime($todate) - strtotime($fromdate);
 		$datediff = floor($datediff/(60*60*24));
 		$absent =0; $per=0;
-		//echo "<pre>".$fromdate."---".$todate."////".$datediff; print_r($working_days); exit;
-		// print_r($working_days);
 	    	for($i = 0; $i < $datediff + 1; $i++){
 				$valda =  date("Y-m-d", strtotime($fromdate . ' + ' . $i . 'day'));
 				$valday = ucwords(date("l", strtotime($fromdate . ' + ' . $i . 'day')));
-				//echo "--".$valday."<br>";
 				if(in_array($valday, (array)$working_days)){
 						if(!in_array($valda, (array)$holidays)){
 							if(!in_array($valda, (array)$listleavedays)){
@@ -6317,12 +6119,10 @@ class vMSUserClass extends userClass{
 		$return['work_days'] = $totaldays-$return['weekoff_days']-$return['holi_days'];
 		$return['present_days'] = $per;
 		$return['absent_day'] = $absent;
-		//echo "<pre>"; print_r($weekoff);print_r($pre_days);print_r($absent_days);
 		return $return;
     }
     public function getBillableAmountTimesheetcalculationday($post, $get){
         global $callConfig;
-        //echo "New"; print_r($post); exit;
         /*$query ="SELECT ewo.work_order_id, ewo.vrc_id, ese.esgin_budget_approval_id,ewo.work_order_detail_id FROM `emp_work_order` ewo, esgin_employees ese WHERE ewo.company_id = ese.company_id AND ewo.emp_id = ese.emp_id AND ewo.company_id = '".$get['company_id']."' AND ewo.emp_id = '".$post['emp_id']."' AND ewo.is_active = ese.is_active AND ese.is_active = 0 and ewo.work_order_id = '".$post['work_order_id']."'";
         $esigndetails = $callConfig->getRow($query);
         $testarrau['esigndata'] = $esigndetails*/
@@ -6333,7 +6133,6 @@ class vMSUserClass extends userClass{
         $mpcitemddetails = $callConfig->getRow($mpcitem);
         $testarrau['mpcitemddetails_query'] = $mpcitem;
         $testarrau['mpcitemddetails'] = $mpcitemddetails;
-        //echo "New"; print_r($testarrau); exit;
 		$employeesql ="SELECT billable,location_id FROM employees where company_id = '".$get['company_id']."' AND id = '".$post['emp_id']."' AND is_active = 0";
 		$employeerow = $callConfig->getRow($employeesql);
 
@@ -6363,7 +6162,6 @@ class vMSUserClass extends userClass{
             	}
             	$testarrau['startdate'] = $post['startingdate'];
             	$testarrau['enddate'] = $post['endingdate'];
-            	//$testarrau['enddate']  = $leavesqql;
             	if(TIMESHEET_RATE_CALCULATION_TYPE == 1){
             		$totaldays=((strtotime($post['endingdate']) - strtotime($post['startingdate'])) / (60 * 60 * 24))+1;
             	}else{
@@ -6379,7 +6177,6 @@ class vMSUserClass extends userClass{
             			$calculationdays++;
             			if(in_array($dateFrom->format('l'),(array)$working_days) && !in_array($dateFrom->format('Y-m-d'), (array)$holidaysdatas)){
             				$testarrau['working_dates'][] = $dateFrom->format('Y-m-d');
-							//$testarrau['days'][] = $dateFrom->format('l');
             				$workday++;
             			}
             			$dateFrom->modify('+1 days');
@@ -6401,7 +6198,6 @@ class vMSUserClass extends userClass{
 		$testarrau['minimum_hours_required'] = $minimum_hours_required;
     	$testarrau['calculationdays'] = $calculationdays;
     	$testarrau['billable_type'] = $employeerow->billable;
-    	//echo "ayy"; print_r($testarrau); exit;
     	return $testarrau;
     }
     public function getmilestoneAssignEmployeeListPopup($data,$get){
@@ -6458,7 +6254,6 @@ class vMSUserClass extends userClass{
 	}
 	public function addupdateempassignmilestone($get){
 		global $callConfig;
-		//echo "haiii"; print_r($get);
 		$query = "SELECT id FROM emp_assign_milestone WHERE company_id =".$get['company_id']." AND transaction_id =".$get['transaction_id']." AND ms_item_id =".$get['item_id']." AND emp_id =".$get['empid']." AND is_active = 0";
 		$data = $callConfig->getRow($query);
 		$res['status'] = "sucess";
@@ -6487,12 +6282,8 @@ class vMSUserClass extends userClass{
 		}
 		$newdata = $data;
 		$newdata['emp_id'] = $data['employee_id'];
-		//$newdata['leavetype'] = $data['leave_type_id'];
 		$newdata['rid'] = $rid;
 
-			/*$data['unpaid_days'] = $checkleave['unpaid_days'];
-			$data['weekend_leave_consume'] = $checkleave['weeckendandnumberdate'];
-			$data['holiday_leave_consume'] = $checkleave['holidaysnumberdate'];*/
 			if($rid!=""){
 				$data['created_date'] = date('Y-m-d H:i:s');
 				$data['created_by'] = $userid;
@@ -6502,7 +6293,6 @@ class vMSUserClass extends userClass{
 				$data['updated_date'] = date('Y-m-d H:i:s');
 				$data['updated_by'] = $userid;
 				$res=$callConfig->insertRecord('employee_leaves',$data);
-				//$this->checkWorkFlowCriteria(array('tablename'=>'employee_leaves','company_id'=>$data['company_id'],'rid'=>$res['LASTID'])); //check workflow criteria
 			}
 			$returnarray['leaveinsert'] = $res;
 
@@ -6516,9 +6306,6 @@ class vMSUserClass extends userClass{
 		$prevstartdate = date('Y-m-d',strtotime('first day of previous month'));
 		$prevenddate =  date('Y-m-d',strtotime('last day of previous month'));
 		$loccondition = "";
-		//if($data['location_id']!="" && $data['location_id']!="0"){
-		//	$loccondition = "  OR (emp.location_id = ".$data['location_id_value'].")";
-		//}
 		$lastdate = date("Y-m-t");
 		$prevmonthfdate = date("Y-m-01", strtotime( date( 'Y-m-01' )." -1 months"));
 		$emp_query = "SELECT emp.id, emp.emp_code, emp.email_id, emp.image, emp.display_name, emp.designation_id, emp.location_id, ( SELECT des.designation_name FROM designations des WHERE des.company_id = emp.company_id AND des.id = emp.designation_id )designation_name, ( SELECT au.display_name FROM application_users au WHERE au.company_id = emp.company_id AND au.id = emp.approval_manager_id )reporting_manager FROM employees emp WHERE emp.company_id = '".$data['company_id']."' AND  emp.id =".$data['employee_id'];
@@ -6600,9 +6387,6 @@ class vMSUserClass extends userClass{
 			$totalvendor[$emplist->vendor_id] = $emplist->vendor_id;
 			}
 		}
-		//echo "total - ".$totalactive."- join - ".$join." -resign : ".$resign."- prejoin - ".$prejoin." -preresign : ".$preresign;
-		//$return =   array("total_emp"=>$sql,"this_month_join"=>$sql1,"previous_month_join"=>$sql3,"this_month_leaving"=>$sql4,"previous_month_leaving"=>$sql5);
-		//$data['fromdate']='2024-05';
 		$report_data = $this->bugetvendorrareport($data);
 		$data['start_date'] = $startdate;
 		$data['end_date'] = $enddate;
@@ -6752,9 +6536,7 @@ public function  vendorstaqAdminDashboard($get){
 		  display_name,
 		  job_title_id,
 		  job_title";
-	//echo $query;
 	$return = $callConfig->getAllRows($query);
-	//print_r($get); exit;
 	$begin = new DateTime($startdate);
 	$end   = new DateTime($endtdate);
 	$postarray =array();
@@ -6794,8 +6576,6 @@ public function vendorlistforadminmanag($get){
 	}
 public function togetretrivemanageremployeeleaves($get){
  	global $callConfig;
- 	//$get['fromdate'] = date("Y-m-01", strtotime($get['year_month']));
- 	//$get['todate'] = date("Y-m-t", strtotime($get['fromdate']));
  	$get['todate'] = date("Y-m-t", strtotime(date('Y-m-d')));
  	$get['fromdate'] = date("Y-m-01", strtotime( $get['todate']." -7 months"));
  	if($get['admin_type']==1){
@@ -6819,12 +6599,10 @@ public function togetretrivemanageremployetermination($get){
 }
 public function  vmssingleemployeedashoard_new($get){
 		global $callConfig;
-		//print_r($get);
 		$fristdate = date("Y-m-01", strtotime( date( 'Y-m-01' )." -6 months"));
 
 		$lastdate = date("Y-m-t");
 		$prevmonthfdate = date("Y-m-01", strtotime( date( 'Y-m-01' )." -1 months"));
-		//$empquery = "SELECT emp.id, emp.emp_code, emp.email_id, emp.image, emp.display_name, emp.designation_id, des.designation_name, emp.location_id , au.display_name reporting_manager FROM employees emp, designations des, application_users au WHERE emp.company_id = des.company_id AND emp.company_id = au.company_id AND emp.company_id = '".$get['company_id']."' AND emp.approval_manager_id = au.id AND emp.designation_id = des.id AND emp.id =".$get['empid'];
 		$empquery ="SELECT emp.id, emp.emp_code, emp.email_id, emp.image, emp.display_name, emp.designation_id, emp.location_id, ( SELECT des.designation_name FROM designations des WHERE des.company_id = emp.company_id AND des.id = emp.designation_id )designation_name, ( SELECT au.display_name FROM application_users au WHERE au.company_id = emp.company_id AND au.id = emp.approval_manager_id )reporting_manager FROM employees emp WHERE emp.company_id = '".$get['company_id']."' AND  emp.id =".$get['empid'];
 		$employee = $callConfig->getRow($empquery);
 
@@ -6842,7 +6620,6 @@ public function  vmssingleemployeedashoard_new($get){
 			}
 		}
 
-	 	//  $query = "SELECT WEEK(timesheet_date) week, DATE(DATE_ADD(timesheet_date, INTERVAL(1-DAYOFWEEK(timesheet_date)) DAY)) as startofweek, DATE(DATE_ADD(timesheet_date, INTERVAL(7-DAYOFWEEK(timesheet_date)) DAY)) as lastofweek,MONTH(timesheet_date) month,YEAR(timesheet_date) year,timesheet_date,sum(billable_hrs) hrs,current_status FROM project_timesheets WHERE emp_id = ".$get['empid']." AND timesheet_date >= '".$fristdate."' AND timesheet_date <= '".$lastdate."' AND is_active = 0 GROUP BY week , current_status ORDER BY timesheet_date ASC";
 		$query ="SELECT WEEK(timesheet_date) week, DATE( DATE_ADD( timesheet_date, INTERVAL( 1 - DAYOFWEEK(timesheet_date) ) DAY ) ) as startofweek, DATE( DATE_ADD( timesheet_date, INTERVAL( 7 - DAYOFWEEK(timesheet_date) ) DAY ) ) as lastofweek, MONTH(timesheet_date) month, YEAR(timesheet_date) year, sum(billable_hrs) hrs, current_status FROM project_timesheets WHERE emp_id = ".$get['empid']." AND timesheet_date >= '".$fristdate."' AND timesheet_date <= '".$lastdate."' AND is_active = 0 GROUP BY week, startofweek, lastofweek, month, year, current_status ORDER BY startofweek ASC";
 		$queries['timesheet'] = $query;
 		$lists = $callConfig->getAllRows($query);
@@ -6851,19 +6628,13 @@ public function  vmssingleemployeedashoard_new($get){
 			$weekdates[$list->year."-".$list->month][$list->week]['start'] = $list->startofweek;
 			$weekdates[$list->year."-".$list->month][$list->week]['end'] = $list->lastofweek;
 		}
-		//	$query = "SELECT WEEK(timesheet_date) week, DATE( DATE_ADD( timesheet_date, INTERVAL( 1 - DAYOFWEEK(timesheet_date) ) DAY ) ) as startofweek, DATE( DATE_ADD( timesheet_date, INTERVAL( 7 - DAYOFWEEK(timesheet_date) ) DAY ) ) as lastofweek, MONTH(timesheet_date) month, YEAR(timesheet_date) year,  sum(billable_hrs) hrs  FROM project_timesheets WHERE emp_id = ".$get['empid']." AND is_active = 0 AND current_status NOT IN (".ST_APPROVED.",".ST_ACTIVE.") GROUP BY week,year ORDER BY created_date  DESC LIMIT 0,10";
-		//$query = "SELECT * FROM `project_timesheets` WHERE `emp_id` = ".$get['empid']." AND current_status = 10 AND is_active =0 ORDER BY updated_date DESC LIMIT 0,3";
 		$query = "SELECT WEEK(timesheet_date) week, DATE( DATE_ADD( timesheet_date, INTERVAL( 1 - DAYOFWEEK(timesheet_date) ) DAY ) ) as startofweek, DATE( DATE_ADD( timesheet_date, INTERVAL( 7 - DAYOFWEEK(timesheet_date) ) DAY ) ) as lastofweek, MONTH(timesheet_date) month, YEAR(timesheet_date) year,  sum(billable_hrs) hrs  FROM project_timesheets WHERE emp_id = ".$get['empid']." AND is_active = 0 AND current_status NOT IN (".ST_APPROVED.",".ST_ACTIVE.") GROUP BY week, startofweek, lastofweek, month, year ORDER BY startofweek  DESC LIMIT 0,10";
 
 		$queries['submit'] = $query;
 		$sumit = $callConfig->getAllRows($query);
-		//$query = "SELECT MONTH(timesheet_date) month, YEAR(timesheet_date) year, timesheet_date, sum(billable_hrs) hrs, current_status FROM project_timesheets WHERE emp_id = ".$get['empid']." AND is_active = 0 AND current_status = ".ST_APPROVED." GROUP BY year,month ORDER BY created_date DESC LIMIT 0, 10";
-		//$query = "SELECT * FROM `project_timesheets` WHERE `emp_id` = ".$get['empid']." AND current_status = 199 AND is_active =0 ORDER BY updated_date DESC LIMIT 0,3";
 		$query = "SELECT MONTH(timesheet_date) month, YEAR(timesheet_date) year, sum(billable_hrs) hrs FROM project_timesheets WHERE emp_id = ".$get['empid']." AND is_active = 0 AND current_status = ".ST_APPROVED." GROUP BY  month,year ORDER BY month DESC LIMIT 0, 10";
 		$queries['approve'] = $query;
 		$approve = $callConfig->getAllRows($query);
-		//	$query = "SELECT WEEK(timesheet_date) week, DATE( DATE_ADD( timesheet_date, INTERVAL( 1 - DAYOFWEEK(timesheet_date) ) DAY ) ) as startofweek, DATE( DATE_ADD( timesheet_date, INTERVAL( 7 - DAYOFWEEK(timesheet_date) ) DAY ) ) as lastofweek, MONTH(timesheet_date) month, YEAR(timesheet_date) year, timesheet_date, sum(billable_hrs) hrs, current_status FROM project_timesheets WHERE emp_id = ".$get['empid']." AND is_active = 0 AND current_status = ".ST_ACTIVE."  GROUP BY week,year ORDER BY created_date  DESC LIMIT 0,10";
-		//$query = "SELECT * FROM `project_timesheets` WHERE `emp_id` = ".$get['empid']." AND current_status = 199 AND is_active =0 ORDER BY updated_date DESC LIMIT 0,3";
 		 $query = "SELECT WEEK(timesheet_date) week, DATE( DATE_ADD( timesheet_date, INTERVAL( 1 - DAYOFWEEK(timesheet_date) ) DAY ) ) as startofweek, DATE( DATE_ADD( timesheet_date, INTERVAL( 7 - DAYOFWEEK(timesheet_date) ) DAY ) ) as lastofweek, MONTH(timesheet_date) month, YEAR(timesheet_date) year, sum(billable_hrs) hrs, current_status FROM project_timesheets WHERE emp_id = ".$get['empid']." AND is_active = 0 AND current_status = ".ST_ACTIVE."   GROUP BY week, startofweek, lastofweek, month, year, current_status ORDER BY startofweek  DESC LIMIT 0,10";
 		$create = $callConfig->getAllRows($query);
 
@@ -6879,7 +6650,6 @@ public function  vmssingleemployeedashoard_new($get){
 		}
 		$fdate=$fristdate;
 		for($i=1;$i<190;$i++){
-			//echo $fdate."<br>";
 			if(strtotime($fdate)<=strtotime($lastdate)){
 				$n = date("n",strtotime($fdate));
 				$day = date("w",strtotime($fdate));
@@ -6900,15 +6670,12 @@ public function  vmssingleemployeedashoard_new($get){
 
 		$query = "SELECT * FROM holidays WHERE holiday_date >= '".$fristdate."' AND location_id = ".$employee->location_id." AND  is_active = 0";
 		$assmentholiydays = $callConfig->getAllRows($query);
-		//echo "<pre>"; print_r($assmentholiydays);
 		$holicountmy = array();
 
 		foreach($assmentholiydays as $assmentholiday){
 			$daymoonty = date("Y-m", strtotime($assmentholiday->holiday_date));
-			//echo  $daymoonty."<br>";
 			$holicountmy[$daymoonty] = ($holicountmy[$daymoonty] ?? 0)+1;
 		}
-		//print_r($holicountmy); exit;
 		$cc_da = array();
 		for($k=0;$k<12;$k++){
 			$ccdd =  date("Y-m-01", strtotime( date( $fristdate )." +".$k." months"));
@@ -6966,7 +6733,6 @@ public function  vmssingleemployeedashoard_new($get){
 	}
 	public function getmonthlybulkapprovaltimesheet($get){
 		global $callConfig;
-		//echo "<pre>"; print_r($get);
 		$query = "SELECT id, emp_code, display_name, email_id, joining_date, date_of_leaving, image FROM employees WHERE company_id = ".$get['company_id']." AND user_id IN (SELECT id FROM application_users WHERE company_id = ".$get['company_id']." AND approval_manager = ".$get['user_id']." AND is_active =0) AND joining_date >= ".$get['endingdate']." AND  (
 			 CASE WHEN (
 			 	date_of_leaving IS NOT NULL 
@@ -6977,7 +6743,6 @@ public function  vmssingleemployeedashoard_new($get){
 			 ) THEN 1 ELSE 2 END
 			 )= 1 AND is_active =0";
 		$user_lists = $callConfig->getAllRows($query);
-		//echo "<pre>"; print_r($user_lists);
 		foreach($user_lists as $user_list){
 			$empids[] = $user_list->id;
 		}
@@ -7075,7 +6840,6 @@ public function  vmssingleemployeedashoard_new($get){
 		global $callConfig;
 		$start = $get['ym']."-01";
     		$end   = date("Y-m-t",strtotime($start));
-		//echo $start."__".$end ; exit;
     		$allday = 0;$wo=0;
    		 while ($start <= $end) {
         		$dayOfWeek =  date("N",strtotime($start));
@@ -7085,7 +6849,6 @@ public function  vmssingleemployeedashoard_new($get){
 			$allday++;
         		$start = date("Y-m-d", strtotime($start . " +1 day"));
     		}
-		//echo $allday;print_r($get);exit;
 		$dw = array('1'=> $allday-$wo,'2'=> $allday-$wo,'3'=> $allday-$wo);
 		$query = "SELECT location_id, COUNT(id) as cc FROM `holidays` WHERE holiday_date Like '".$get['ym']."-%' GROUP BY location_id";
 		$hdays =  $callConfig->getAllRows($query);
@@ -7093,12 +6856,8 @@ public function  vmssingleemployeedashoard_new($get){
 		  $dw[$hday->location_id] = $allday-($wo+$hday->cc);
 		}
 		$whr_emp = "";
-		//$whr_emp = " AND pt.emp_id IN (406,475,574,618,639,833,852,869,901,622,923,914,915)";
-		//echo $allday;print_r($dw);print_r($get);exit;
-		//$query = "SELECT DISTINCT emp_id FROM `project_timesheets` WHERE company_id =1 AND timesheet_date LIKE '%".$get['ym']."-%' AND is_active =0";
 		$query = "SELECT DISTINCT pt. emp_id, emp.location_id FROM `project_timesheets` pt, employees emp WHERE emp.id = pt.emp_id AND pt.company_id =1  AND pt.timesheet_date LIKE '%".$get['ym']."-%' AND pt.is_active =0".$whr_emp;
 		$emp_datas = $callConfig->getAllRows($query);
-		//	echo $query; print_r($emp_datas); exit;
 		$updata = array();
 		foreach($emp_datas as $emp_data){
 			$dd = $dw[$emp_data->location_id];
@@ -7116,11 +6875,8 @@ public function  vmssingleemployeedashoard_new($get){
                                 $rate_hr =  $emp_val->item_price;
                         }
 
-			//echo $dd."----".$query; print_r($emp_data);// exit;
-		//	$upquery = "UPDATE project_timesheets pt SET  pt.rate_per_hrs = ".$rate_hr." WHERE pt.emp_id = ".$emp_data->emp_id." AND pt.timesheet_date LIKE '%".$get['ym']."-%' AND pt.is_active =0";
 			$upquery = "UPDATE project_timesheets pt SET  pt.rate_per_hrs = ".$rate_hr.", bill_amount = billable_hrs *".$rate_hr.", vrc_billable_amount = billable_hrs *".$rate_hr." WHERE pt.emp_id = ".$emp_data->emp_id." AND pt.timesheet_date LIKE '%".$get['ym']."-%' AND pt.is_active =0";
 
-			//echo $upquery; print_r($emp_val); echo $rate_hr;   exit;
 			$updata[] = $callConfig->executeQuery($upquery);
 		}
 		return $updata;
@@ -7205,7 +6961,6 @@ public function  vmssingleemployeedashoard_new($get){
 		$return['query']=$query;
 		$return['days']=$local_dw;
 		$return['data']=$data;
-    	//echo "<pre>"; print_r($get);echo $hquery; print_r($local_dw); echo $query; print_r($data); exit;
     	return $return;
     }
 	public function toupdatepurchaseordertransaction($post,$get){
@@ -7620,7 +7375,6 @@ public function  vmssingleemployeedashoard_new($get){
 	public function saveemployeeexit($post,$get){
 		global $callConfig;
 		$return = array();
-		// return $post;
 		$query = "UPDATE employees SET date_of_leaving='{$post['last_working_date']}', updated_by = '{$post['user_id']}',  updated_date = '{$post['status_date']}'  WHERE id={$post['emp_id']}";
 		$res = $callConfig->executeQuery($query);
 		$return['res'] = $res;
@@ -7634,12 +7388,6 @@ public function  vmssingleemployeedashoard_new($get){
 		$insert_arr = array('company_id'=>$post['company_id'],'termination_reason'=>$termination_reason,'termination_type'=>$termination_type,'notice_period_required'=>$notice_period_required,'effective_date'=>$post['resign_date'],'employee_leaving_date'=>$post['last_working_date'],'emp_id'=>$post['emp_id'],'noticeperiod_days'=>$diff_days,'shortfalldays_in_noticeperiod'=>abs($notice_period_required - $diff_days),'remarks_by_employee'=>$post['remarks'],'is_active'=>'0','current_status'=>'0','created_by'=>$post['user_id'],'created_date'=>date('Y-m-d H:i:s'));
 		$res1=$callConfig->insertRecord('employee_terminations',$insert_arr);
 		$return['res1']= $res1;
-		// $result = $this->insertExitClearanceApprovals([
-		//     'company_id'     => $post['company_id'],
-		//     'transaction_id' => $res1['LASTID'] ?? 1,
-		//     'employee_id'    => $post['emp_id'] // initiator
-		// ]);
-		// $return['result'] = $result;
 		return $return;
 	}
 	public function getworkflowassigndata($get) {
@@ -7792,12 +7540,10 @@ public function  vmssingleemployeedashoard_new($get){
 
 	                    // Send Notification
 	                    if (function_exists('sendNotification')) {
-	                        // $this->sendNotification($user_id, $notifMsg, $transaction_id, $company_id);
 	                    }
 
 	                    // Send Email
 	                    if (function_exists('sendEmail')) {
-	                        // $this->sendEmail($approver_email, $emailSubject, $emailBody);
 	                    }
 	                }
 	            }
@@ -7976,7 +7722,6 @@ public function  vmssingleemployeedashoard_new($get){
 	        FROM employees e
 	        LEFT JOIN departments d ON d.id = e.department_id AND d.company_id = {$get['company_id']} AND d.is_active = 0
 	        WHERE e.id = {$employee_id} AND e.company_id = {$get['company_id']} AND e.is_active = 0 LIMIT 1";
-	        // exit($empQuery);
 
 	    $employee = $callConfig->getRow($empQuery);
 
@@ -8089,13 +7834,11 @@ public function  vmssingleemployeedashoard_new($get){
 		$get['quarterly'] =$qarray[$quarter];
 		$ex_month = explode(",",$get['quarterly']);
 		$query = "SELECT COUNT(*) as cc_val FROM quarterly_accrual_revenue qar WHERE  qar.company_id = '{$company_id}' AND qar.year = '{$year}' AND qar.quarter = '{$quarter}' AND qar.is_active = 0";
-		//echo $query;
 		$cc_res = $callConfig->getRow($query);
 		foreach($ex_month as $exm){
 			$xstart = $year."-".$exm."-01";
 			$start = date("Y-m-d",strtotime($xstart));
  	    	$end   = date("Y-m-t",strtotime($start));
-			//echo $start."__".$end ; exit;
 	    	$allday = 0;$wo=0;
 	   		 while ($start <= $end) {
         		$dayOfWeek =  date("N",strtotime($start));
@@ -8105,7 +7848,6 @@ public function  vmssingleemployeedashoard_new($get){
 				$allday++;
         		$start = date("Y-m-d", strtotime($start . " +1 day"));
     		}
-			//echo $allday;print_r($get);exit;
 			$dw = array('1'=> $allday-$wo,'2'=> $allday-$wo,'3'=> $allday-$wo);
 			$query = "SELECT location_id, COUNT(id) as cc FROM `holidays` WHERE holiday_date Like '".$get['ym']."-%' GROUP BY location_id";
 			$hdays =  $callConfig->getAllRows($query);
@@ -8114,7 +7856,6 @@ public function  vmssingleemployeedashoard_new($get){
 			}
 			$mallloc[$exm]=$dw;
 		}
-		//return $mallloc;
 		if($cc_res->cc_val==0){
 			$fdate = $year."-".$ex_month['0']."-01";
 			$wdate = $year."-".$ex_month['2']."-01";
@@ -8175,7 +7916,6 @@ public function  vmssingleemployeedashoard_new($get){
 				$prscquery.="('".$company_id."','".$year."','".$qut_val."','".$empdata['customer_id']."','".$empdata['emp_id']."','".$empdata['item_id']."','".$empdata['vrc_id']."','".$empdata['vrc_item_id']."','".$empdata['item_price']."','".$empdata['purchase_uom']."','".$amount1."','".$amount2."','".$amount3."','".$mday1."','".$mday2."','".$mday3."','".$amount1."','".$amount2."','".$amount3."','0','0','".date("Y-m-d H:i:s")."','".$get['user_id']."'),";
 			}
 			$prscquery = trim($prscquery,",").";";
-			//echo $prscquery; exit;
 			$res1 = $callConfig->executeQuery($prscquery);
 		}
 		return $res1;
@@ -8442,7 +8182,6 @@ public function  vmssingleemployeedashoard_new($get){
 	    return array("status" => "success", "id" => $id, 'res' => $res, 'res1' => $res1);
 	}
 	public function togetlastvscurrentquarterlyaccrual($get){
-		// return $get;
 		global $callConfig;
 		$quarter = $get['quarter'];
 		if ($quarter == "Q1") {
@@ -8493,7 +8232,6 @@ public function  vmssingleemployeedashoard_new($get){
 			$vendors[$vend->id] = $vend->display_name;
 		}
 		$return['vendors'] = $vendors;
-		// return $return;
 
 		$query = "SELECT vendor_id FROM quarterly_accrual_revenue WHERE company_id =".$get['company_id']." AND year = '".$year."' AND quarter = ".$quarter." AND vendor_id!='' AND is_active = 0 ";
 		// Special logic ONLY for filter_vendors query
@@ -8534,7 +8272,6 @@ public function  vmssingleemployeedashoard_new($get){
 
 
 		$query = "SELECT vendor_id, COUNT(id) as no_emp, ( SUM(`month1_amount`)+sum(`month2_amount`)+sum(`month3_amount`)) total FROM `quarterly_accrual_revenue` WHERE company_id =".$get['company_id']." AND `year` = '".$year."' AND `quarter` = ".$quarter." AND vendor_id!='' $whr_vendor_id AND is_active = 0 GROUP BY `vendor_id`";
-		//echo $query; exit;
 		$quacl = $callConfig->getAllRows($query);
 		$current_budget = array();
 		foreach($quacl as $qua){
@@ -8558,13 +8295,11 @@ public function  vmssingleemployeedashoard_new($get){
 			$quarter =$quarter-1;
 		}
 		$query = "SELECT vendor_id, COUNT(id) as no_emp, ( SUM(`month1_amount`)+sum(`month2_amount`)+sum(`month3_amount`)) total FROM `quarterly_accrual_revenue` WHERE company_id =".$get['company_id']." AND `year` = '".$year."' AND `quarter` = ".$quarter." AND vendor_id!='' $whr_vendor_id AND is_active = 0 GROUP BY `vendor_id`";
-		//echo $query; exit;
 		$quac2 = $callConfig->getAllRows($query);
 		foreach($quac2 as $qua){
 			$last_budget[$qua->vendor_id] = $qua;
 		}
 		$return['last_budget'] = $last_budget;
-		//echo "<pre>"; print_r($return);exit;
 		$ft = array('1'=>array('f'=>'01-01','t'=>'03-31'), '2'=>array('f'=>'04-01','t'=>'06-30'), '3'=>array('f'=>'07-01','t'=>'09-30'), '4'=>array('f'=>'10-01','t'=>'12-31'));
 		$from = $year."-".$ft[$quarter]['f'];
 		$to = $year."-".$ft[$quarter]['t'];
@@ -8605,7 +8340,6 @@ public function  vmssingleemployeedashoard_new($get){
 		$upquery = "UPDATE last_current_quarterly_accrual_comments SET is_active = NULL WHERE company_id =".$get['company_id']." AND vendor_id='".$post['vendor_id']."' AND quarter_year =".$post['year']."  AND quarter =".$post['quarter']." AND is_active =0";
     	$res = $callConfig->executeQuery($upquery);
     	$insert_array = array('company_id'=>$get['company_id'],'vendor_id'=>$post['vendor_id'],'quarter_year'=>$post['year'],'quarter'=>$post['quarter'],'comments'=>$post['val'], 'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-    	 //print_r($insert_array); exit;
     	$exe = $callConfig->insertRecord('last_current_quarterly_accrual_comments', $insert_array);
     	}
     	return $exe;

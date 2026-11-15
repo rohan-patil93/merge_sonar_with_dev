@@ -999,9 +999,6 @@ function getSalesRegisterReport($get)
                 $ename = is_array($emp_row) ? $emp_row['display_name'] : $emp_row->display_name;
                 $user_id = is_array($emp_row) ? (isset($emp_row['user_id']) ? $emp_row['user_id'] : '') : (isset($emp_row->user_id) ? $emp_row->user_id : '');
                 $map[$eid] = $ename;
-                // if($user_id != ''){
-                //     $map[$user_id] = $ename;
-                // }
             }
         }
         return $map;
@@ -1223,11 +1220,6 @@ function getSalesRegisterReport($get)
                 	$coming_from = $vendors[$r['vendor_supplier_vendor_id']];
                 }
 
-                // if(isset($r['company_name']) && $r['company_name'] != ''){
-                //     $coming_from = $r['company_name'];
-                // }else if(isset($r['address']) && $r['address'] != ''){
-                //     $coming_from = $r['address'];
-                // }
                 $card_no = '';
                 if(isset($r['visitor_idcard_no']) && $r['visitor_idcard_no'] != ''){
                     $card_no = $r['visitor_idcard_no'];

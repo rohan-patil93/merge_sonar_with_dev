@@ -597,7 +597,6 @@ public function getVisitorsDataBasedOnDate($get)
         if ($phone != '') {
             $query = "SELECT id, `name`, `phone`, `email`, `address`, `whom_to_meet`, `purpose`, `idcard_type`, `idcard_number`, `visit_type`, `image_path`, `visitor_idcard_no`, `in_gate_no`, `in_datetime`, `in_security_id`, `out_security_id`, `out_datetime`, `out_gate_no`, `remarks`, is_active, current_Status FROM visitor_logs 
             WHERE company_id = " . $get['company_id'] . " AND phone = '" . $phone . "' AND is_active = 0 $location_id ORDER BY id DESC LIMIT 5";
-            // $return['query'] = $query;
             $data = $callConfig->getAllRows($query);
             $return['visitor_logs_res'] = $data;
         }
@@ -605,7 +604,6 @@ public function getVisitorsDataBasedOnDate($get)
         if ($employee_code != '') {
             $query = "SELECT emp.id, emp.emp_code, emp.display_name, dept.department_name FROM employees emp, departments dept
             WHERE emp.department_id=dept.id AND emp.company_id = " . $get['company_id'] . " AND emp.emp_code = '" . $employee_code . "' AND emp.is_active = 0  $location_id";
-            // $return['query'] = $query;
             $data = $callConfig->getRow($query);
             $return['emp_res'] = $data;
         }

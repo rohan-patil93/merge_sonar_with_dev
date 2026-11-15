@@ -23,21 +23,8 @@ class pettyCashUserClass extends userClass{
 		$return['bills_sql'] = $query;
 		$return['bills'] = $callConfig->getAllRows($query);
 
-		// $query = "SELECT ptb.id, ptb.total_amount, ptb.month_start_date, ptd.customer_id FROM property_tenant_billings ptb, property_tenant_details ptd WHERE ptb.company_id = ".$get['company_id']." AND ptb.company_id = ptd.company_id AND ptb.property_tenant_detail_id = ptd.id and ptb.month_start_date > '".$todaydate."' AND ptb.is_active = ptd.is_active AND ptb.is_active = 0";
-		// $return['projection_report_sql'] = $query;
-		// $return['projection_report'] = $callConfig->getAllRows($query);
 
 
-		//$frequencysql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='TASKFREQUENCY' AND is_active=0";
-		// $frequencyres = $callConfig->getAllRows($frequencysql);
-		// $topup_frequency = array();
-		// foreach($frequencyres as $frq){
-		// 	$topup_frequency[$frq->genc_detail_code] = $frq->genc_detail_name;
-		// }
-		// $return['topup_frequency'] = $topup_frequency;
-		// $sql = "SELECT pcbo.id, pcbo.pc_box_id, pcbo.pc_limit, pcbo.pc_type_id, pcb.pc_box_code, pcb.pc_box_description, pcb.topup_frequency, pcb.topup_amount FROM petty_cash_box_owner pcbo, petty_cash_boxes pcb WHERE pcbo.company_id = '".$get['company_id']."' AND pcbo.company_id = pcb.company_id AND pcbo.pc_box_id = pcb.id  AND pcbo.is_active = pcb.is_active ".$condition." AND pcbo.is_active = 0";
-		// $res=$callConfig->getAllRows($sql);
-		// $return['petty_cash_box_owner'] = $res;
 
 		return $return;
 	}
@@ -70,9 +57,6 @@ class pettyCashUserClass extends userClass{
 		if($get['petty_cash_box_id'] !=""){
 			$condition .= " AND ref_id = '".$get['petty_cash_box_id']."'";
 		}
-		// if($get['petty_cash_box_id'] != ""){
-		// 	$condition .= " AND pcbtr.originator = '".$get['petty_cash_box_id']."'";
-		// }
 		$sql = "SELECT id, transaction_number, transaction_date, originator, total_amount, due_date, current_status  FROM `petty_cash` WHERE company_id = '".$get['company_id']."' ".$condition." AND is_active = 0";
 		$res=$callConfig->getAllRows($sql);
 		$return['petty_cash']= $res;
@@ -111,7 +95,6 @@ class pettyCashUserClass extends userClass{
 	public function getPettyCashRequests($get){
 		global $callConfig;
 		$return['get']= $get;
-		//if($get['rid'] !=""){
 			$pcrsql = "SELECT * FROM petty_cash_box_topup_requests WHERE company_id = '".$get['company_id']."' AND id = '".$get['rid']."' AND is_active = 0";
 			$pcrres=$callConfig->getRow($pcrsql);
 			$return['petty_cash_box_topup_requests'] = $pcrres;
@@ -386,9 +369,6 @@ class pettyCashUserClass extends userClass{
 
 					}
 				}else{
-					//$insertcust = array('company_id'=>$post['company_id'],'pt_owner_id'=>$pcbrres->party_id,'pc_box_id'=>$pcbrres->ref_id,'balance_date'=>$pcbrres->transaction_date,'debit_amount'=>$pcbrres->total_amount,'credit_amount'=>0,'opening_balance'=>0,'closing_balance'=>$pcbrres->total_amount,'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
-					//$pc_itemsres = $callConfig->insertRecord('petty_cash_balances',$insertcust);
-					//$return['pc_itemsres'] = $pc_itemsres;
 				}
 			}else{
 				$return['not_inside'] = "Y";
@@ -397,29 +377,9 @@ class pettyCashUserClass extends userClass{
 		return $return;
 	}
 
-	// function pettyCashDashboard($get){
-	// 	global $callConfig;
-	// 	$return = array();
-	// 	if($get['location_transaction'] =="Y"){
-	// 		$sql = "SELECT pc.transaction_number,pc.transaction_date, pc.party_name, au.display_name, au.location_id, pc.total_amount, pc.current_status, pcbo.pc_box_id FROM petty_cash pc, application_users au, petty_cash_box_owner pcbo  WHERE pc.company_id  = ".$get['company_id']." AND pc.company_id = au.company_id AND pc.company_id = pcbo.company_id AND pc.originator = au.id AND au.location_id = '".$get['location_id']."' AND pc.originator = pcbo.owner_id AND pc.is_active = au.is_active AND pc.is_active = pcbo.is_active AND pc.is_active = 0";
-	// 		$res=$callConfig->getAllRows($sql);
-	// 		$return['location_pettycashbox'] = $res;
 
-	// 		$lsql = "SELECT id,pc_box_description FROM `petty_cash_boxes` WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-	// 		$lres=$callConfig->getAllRows($lsql);
-	// 		$return['petty_cash_boxes'] = $lres;
 
-	// 	}else{
-	// 		$lsql = "SELECT id,location_name FROM `locations` WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-	// 		$lres=$callConfig->getAllRows($lsql);
-	// 		$return['locations'] = $lres;
 
-	// 		$sql = "SELECT pcbo.pc_box_id, pcbo.owner_id, pcbo.pc_limit, au.location_id, (SELECT pcb.closing_balance FROM petty_cash_balances pcb WHERE pcb.company_id = pcbo.company_id AND pcb.pc_box_id = pcbo.pc_box_id AND pcb.is_active = pcbo.is_active ORDER BY pcb.balance_date DESC limit 1) as pc_balance FROM petty_cash_box_owner pcbo, application_users au WHERE pcbo.company_id = ".$get['company_id']." AND au.id = pcbo.owner_id AND au.is_active = pcbo.is_active AND pcbo.is_active = 0";
-	// 		$res=$callConfig->getAllRows($sql);
-	// 		$return['location_pettycashbox'] = $res;
-	// 	}
 
-	// 	return $return;
-	// }
 
 }

@@ -71,7 +71,6 @@ class vendorPortelUserClass extends userClass
 		} elseif ($post['status'] == ST_APPROVED) {
 			$updateary['completion_datetime'] = date('Y-m-d h:i:s');
 		}
-		//$res = $callConfig->updateRecord('application_users',$updateary,'id',$appuserre->id);
 		return $res;
 	}
 	public function vendorapicallforvmslist($get)
@@ -172,7 +171,6 @@ class vendorPortelUserClass extends userClass
 		$transaction_table = $get['transaction_table'];
 		$get['rid'] = $transaction_id;
 		$postarray = $this->getVendorRegistrationRequests($get);
-		//$postarray['callapi'] = 'Y';
 		$api_url = SITEURL . 'views/custom_insert_vendor_registration_request_popup.php';
 		$postdata = http_build_query($postarray);
 		$opts = array(
@@ -246,8 +244,6 @@ class vendorPortelUserClass extends userClass
 			$get['transaction_table'] = 'vendor_registration_requests';
 			$generatepdf = $this->generateVendorRegistartationRequestPDF($get);
 			$attachment_file_path = SITEROOT . "/uploads/vendor/" . $generatepdf;
-			//$pdfContent = file_get_contents($attachment_file_path);
-			//$return['pdfContent'] = $generatepdf;
 			$emailarray['user_email_id'] = $userres->user_email;
 			$emailarray['user_display_name'] = $userres->display_name;
 			$emailarray['creater_display_name'] = $createruserres->display_name;
@@ -268,7 +264,6 @@ class vendorPortelUserClass extends userClass
 				$user_ids[] = $adminres->id;
 			}
 			$option = "";
-			//$notdataa['type'] = "INFORMATION";
 			$notdataa = array('company_id' => $post['company_id'], 'notification_message' => $msg, 'id' => $res['LASTID'], 'application_table_name' => 'vendor_registration_requests', 'type' => 'INFORMATION', 'notification_users' => $user_ids, 'option' => $option, 'assigner_id' => $post['user_id']);
 			$emails = $this->sendNotificationAndEmails($notdataa, $emailarray, 60);
 			$return['emails'] = $emails;
@@ -535,7 +530,6 @@ class vendorPortelUserClass extends userClass
 				$insertuserarray['created_by'] = $post['user_id'];
 				$insertuserarray['created_date'] = $now;
 				$res = $callConfig->insertRecord($transaction_table, $insertuserarray);
-				//  $transaction_id = is_array($insert_id) && isset($insert_id['LASTID']) ? $insert_id['LASTID'] : $insert_id;
 				$return['LASTID'] = $res['LASTID'];
 			} else {
 				$vendor_verification[$verification_type] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
@@ -615,7 +609,6 @@ class vendorPortelUserClass extends userClass
 				$existingHistory[] = ['date' => $now, 'field' => 'ifsc_code', 'value' => $previousres->ifsc_code];
 			}
 			$vendor_verification[$verification_type] = ['status' => 'Y', 'verification_user_id' => $post['user_id'], 'verification_datetime' => $now, 'api_hit_id' => $post['api_hit_id']];
-			// $updateary = ['vendor_verifications' => json_encode($vendor_verification), 'previous_verifications' => json_encode($existingHistory), 'bank_name' => $post['bank_name'], 'bank_account_no' => $post['bank_account_no'], 'ifsc_code' => $post['ifsc_code'], 'updated_by' => $post['user_id'], 'updated_date' => $now ];
 			$ifsc_code = $post['ifsc_code'];
 			$bank_account_no = $post['bank_account_no'];
 			$bank_name = $post['bank_name'];
@@ -642,7 +635,6 @@ class vendorPortelUserClass extends userClass
 		$transaction_table = "vendors";
 		$urlDev = "https://dev.infistaq.in/api.php?mode=getvendorandvendorregisterssynchapi&company_id=1&user_id=1&data_name=" . $outsidedatabase;
 
-		//$urlDev = "https://partnerconnect.microchip.com/api.php/?mode=getvendorandvendorregisterssynchapi&company_id=1&user_id=1&data_name=vendorstaq_partner";
 		$fieldgetsql = "SHOW COLUMNS FROM " . $transaction_table;
 		$fieldgetres = $callConfig->getAllRows($fieldgetsql);
 		$dataDev = $this->getApiData($urlDev, $postdata);
@@ -651,7 +643,6 @@ class vendorPortelUserClass extends userClass
 
 				$odmapsql = "SELECT id,internal_mapping FROM outside_api_data_mappings WHERE mapping_system_name = '" . $outsidedatabase . "' AND transaction_table = '" . $transaction_table . "' AND external_mapping = '" . $venddata['id'] . "' AND is_active = 0";
 				$odmapres = $callConfig->getRow($odmapsql);
-				//$return['odmapres'] = $odmapsql;
 				if ($odmapres->internal_mapping != "") {
 					$insertfieldary = array();
 					foreach ($fieldgetres as $field) {
@@ -917,8 +908,6 @@ class vendorPortelUserClass extends userClass
 				$ausql = "SELECT * FROM " . $transaction_table . " WHERE company_id = '" . $get['company_id'] . "' AND id = '" . $vendor_register_id . "' AND is_active = 0";
 				$aures = $callConfig->getRow($ausql);
 				$return['aures'] = $aures;
-				//$venregary = array('hr_connect'=>$get['user_id'],'admin_connect'=>$get['user_id'],'finance_connect'=>$get['user_id'],'project_connect'=>$get['user_id'],'location_connect'=>$get['user_id'],'esop_connect'=>$get['user_id'],'legal_connect'=>$get['user_id'],'user_id'=>$get['user_id']);
-				//$aures = (object) $venregary;
 				$aures->user_id = $post['created_by'];
 
 				$tasquery = "SELECT task_id, assigned_to FROM `transaction_activity_schedule` WHERE company_id = '" . $get['company_id'] . "' AND transaction_table = '" . $transaction_table . "' AND transaction_id = '" . $vendor_register_id . "' AND is_active = 0";
@@ -989,7 +978,6 @@ class vendorPortelUserClass extends userClass
 							$approval_user_id = $aures->user_id;
 						}
 						$planned_finish = date('Y-m-d', strtotime($tasks->planned_day . ' days', strtotime($days_ago)));
-						//$planned_finish = date('Y-m-d', strtotime($tasks->planned_day.' + '.$days_ago.' days'));
 
 						if ($approval_user_id != "" && $assigned_to != "") {
 							$task_array = array('company_id' => $get['company_id'], 'transaction_table' => $transaction_table, 'transaction_id' => $vendor_register_id, 'task_id' => $tasks->id, 'assigned_to' => $assigned_to, 'approval_user_id' => $approval_user_id, 'action_date' => $days_ago, 'revised_action_date' => $days_ago, 'actual_action_date' => $days_ago, 'check_list' => $tasks->check_list, 'is_active' => '0', 'current_status' => '0', 'created_by' => $get['user_id'], 'process_id' => $tasks->process_id, 'task_name' => $tasks->task_name);
@@ -1180,7 +1168,6 @@ class vendorPortelUserClass extends userClass
 							$approval_user_id = $aures->user_id;
 						}
 						$planned_finish = date('Y-m-d', strtotime($tasks->planned_day . ' days', strtotime($days_ago)));
-						//$planned_finish = date('Y-m-d', strtotime($tasks->planned_day.' + '.$days_ago.' days'));
 						if ($approval_user_id != "" && $assigned_to != "") {
 							$task_array = array('company_id' => $get['company_id'], 'transaction_table' => $transaction_table, 'transaction_id' => $vendor_register_id, 'task_id' => $tasks->id, 'assigned_to' => $assigned_to, 'approval_user_id' => $approval_user_id, 'action_date' => $days_ago, 'revised_action_date' => $days_ago, 'actual_action_date' => $days_ago, 'check_list' => $tasks->check_list, 'is_active' => '0', 'current_status' => '0', 'created_by' => $get['user_id'], 'process_id' => $tasks->process_id, 'task_name' => $tasks->task_name);
 							$res = $callConfig->insertRecord('transaction_activity_schedule', $task_array);
@@ -1210,9 +1197,6 @@ class vendorPortelUserClass extends userClass
 			$emailarray['template_reference_id'] = 3;
 			$emill = $this->NewUserformate($emailarray, $post['data_name']);
 
-			// $get['process_type'] = 'VR';
-			// $get['transaction_id'] = $res['LASTID']; // vendor user id
-			// $retresult['task_creation'] = $this->tocreateprocesstaskintotaskdatail($get); // task creation
 		}
 		return $retresult;
 	}
@@ -1250,9 +1234,6 @@ class vendorPortelUserClass extends userClass
 			}
 			$return['module_setup'] = $module;
 
-			// $ausql = "SELECT id,display_name FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-			// $aures = $callConfig->getAllRows($ausql);
-			// $return['application_users'] = $aures;
 
 			$application_userssql = "SELECT id, display_name FROM application_users WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0 AND (JSON_SEARCH(role_id, 'one', '" . VENDOR_MODULE_ADMIN_ROLE . "') IS NOT NULL OR JSON_SEARCH(role_id, 'one', '" . VENDOR_ADMIN_ROLE . "') IS NOT NULL) ";
 			$application_usersres = $callConfig->getAllRows($application_userssql);
@@ -1342,13 +1323,8 @@ class vendorPortelUserClass extends userClass
 
 
 
-			//$getvrid = ", (SELECT vr.id FROM vendor_registers vr  WHERE vr.company_id =  '".$get['company_id']."' AND ven.id = vr.vendor_id  AND vr.is_active = 0 limit 1) as vr_id";
-			//$vendorsql = "SELECT id,user_id,display_name,created_date,image,email,created_by,company, send_verification_profile_status, verification_profile_users, current_status, send_verification_profile_status, vendor_id, originator, vendor_type_id ".$getvrid." FROM ".$dashboard_transaction_table." ven WHERE company_id =  '".$get['company_id']."' AND (`hr_connect` = '".$get['user_id']."' OR `finance_connect`  = '".$get['user_id']."' OR `purchase_connect`= '".$get['user_id']."' OR `admin_connect` = '".$get['user_id']."' OR  `project_connect` = '".$get['user_id']."' OR `location_connect` = '".$get['user_id']."' OR `legal_connect` = '".$get['user_id']."' OR `created_by` = '".$get['user_id']."' OR '".$get['admin_type']."'='1' ) AND is_active = 0";
 
 
-			//$vendorres = $callConfig->getAllRows($vendorsql);
-			// $return['vendors'] = $vendorres;
-			// $return['total_vendors'] = count((array)$vendorres);
 			$vendoruserid = $registervid = array();
 			foreach ($vendorres as $venre) {
 				$vendoruserid[$venre->user_id] = $venre->user_id;
@@ -1421,16 +1397,8 @@ class vendorPortelUserClass extends userClass
 		$vendorslistres = $callConfig->getAllRows($vendorslistsql);
 		$return['vendorslist'] = $vendorslistres;
 
-		// $vendorssql = "SELECT * FROM vendors WHERE company_id = '".$get['company_id']."' AND id = '".$get['id']."' AND is_active = 0";
-		// $vendorres = $callConfig->getRow($vendorssql);
-		// $return['vendors'] = $vendorres;
 		if ($get['id'] != "") {
-			//if($get['transaction_table'] =="vendor_registers" AND $get['id']!=""){
-			// if($get['id'] !=""){
 			$vendregcond = " AND id = '" . $get['id'] . "' ";
-			// }else{
-			// 	$vendregcond= " AND user_id = '".$get['user_id']."' ";
-			// }
 
 
 			$vendor_registerssql = "SELECT * FROM " . $type . " WHERE company_id = '" . $get['company_id'] . "'  AND is_active = 0 " . $vendregcond;
@@ -1453,25 +1421,8 @@ class vendorPortelUserClass extends userClass
 			$return['vendor_documents'] = $vendor_documentssres;
 
 
-			// if($vendorres->id !=""){
-			// 	$vendorssql = "SELECT id FROM vendors WHERE company_id = '".$get['company_id']."' AND email = '".$vendorres->email."' AND is_active = 0";
-			// 	$venid = $callConfig->getRow($vendorssql);
-			// 	$vendorres->created_vendor_id  =$venid->id;
-			// 	$return['vendor_registers'] = $vendorres;
-			// 	$return['vendor_registers_sql'] = $vendor_registerssql;
 
-			// 	// if($get['admin_type']!='1'){
-			// 	// 	$comdition = " AND tas.assigned_to = '".$get['user_id']."'";
-			// 	// }
-			// 	$taskactivitysql = "SELECT tas.id,tas.action_date,tas.revised_action_date, tas.actual_action_date, tas.action_flag, tas.check_list, tas.current_status, tas.process_id, tas.task_name, tas.approval_user_id,  tas.assigned_to  FROM transaction_activity_schedule tas WHERE tas.company_id = '".$get['company_id']."' AND tas.transaction_table = 'vendor_registers' AND transaction_id= '".$vendorres->id."' ".$comdition." AND tas.is_active = 0";
-			// 	$taskactivityres = $callConfig->getAllRows($taskactivitysql);
-			// 	$return['sql'] = $taskactivitysql;
-			// 	$return['transaction_activity_schedule'] = $taskactivityres;
 
-			// 	$tasks_cntssql = "SELECT count(*) as total_task_cnt, sum(if(current_status=".ST_APPROVED.",1,0)) as approve_cnt, sum(if(current_status=".ST_COMPLETE.",1,0)) as review_cnt, sum(if(current_status=".ST_INPROGRESS.",1,0)) as inprogress_cnt, sum(if(current_status=".ST_ACTIVE.",1,0)) as yet_to_start_cnt FROM transaction_activity_schedule tas WHERE  tas.company_id = '".$get['company_id']."' AND tas.transaction_table = 'vendor_registers'  AND transaction_id= '".$vendor_registersres->id."'  ".$comdition." AND tas.is_active = 0";
-			// 	$tasks_cntsres = $callConfig->getRow($tasks_cntssql);
-			// 	$return['task_cnt'] = $tasks_cntsres;
-			// }
 		}
 
 		$vendor_agreementssql = "SELECT * FROM vendor_agreements WHERE company_id = '" . $get['company_id'] . "' AND vendor_id = '" . $vendorres->id . "' AND is_active = 0";
@@ -1504,18 +1455,8 @@ class vendorPortelUserClass extends userClass
 		$empres = $callConfig->getAllRows($empsql);
 		$return['employess'] = $empres;
 
-		// $whrcat ="company_id = '".$get['company_id']."' AND is_active=0";
-		// $query=$callConfig->selectQuery('countries','id,country_name',$whrcat,'','','');
-		// $components6= (array)$callConfig->getAllRows($query);
-		// $return['countries'] = (array)$components6;
 
-		// $statessql = "SELECT id, state_name FROM `states` WHERE company_id = '".$get['company_id']."' AND (country_id = '".$vendorres->billing_country."' || country_id = '".$vendorres->shipping_country."' || country_id = '".$vendorres->bank_country."') AND is_active=0";
-		// $statesres = $callConfig->getAllRows($statessql);
-		// $return['states'] = $statesres;
 
-		// $citiessql = "SELECT id, city_name FROM `cities` WHERE company_id = '".$get['company_id']."' AND (state_id = '".$vendorres->billing_state."' || state_id = '".$vendorres->shipping_state."' || state_id = '".$vendorres->bank_state."') AND is_active=0";
-		// $citiesres = $callConfig->getAllRows($citiessql);
-		// $return['cities'] = $citiesres;
 
 		$tasks_categoriessql = "SELECT id,category_name FROM tasks_categories where company_id = '" . $get['company_id'] . "' AND is_active = 0";
 		$tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);
