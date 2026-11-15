@@ -23,7 +23,8 @@ $sub_header_name = json_decode($paheaders['sub_header_name'],1);
                 <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control" name="<?php echo $fieldname; ?>"  <?php echo $sub_headerres[$loginuser_type] == "N"?"readonly":""; ?> >
             </div>
         </td>
-    <?php $fieldcnt++; } ?>
+    <?php $fieldcnt++;
+    } ?>
     <?php if($paheaders['sub_header_addmore'] == '0'){ //delete button visible 0 or 1 is not ?>
         <td>
                 <i class="fa fa-trash text-danger" onclick="appraiserDeleteRow(<?php echo $header_id.$hedcnt; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>

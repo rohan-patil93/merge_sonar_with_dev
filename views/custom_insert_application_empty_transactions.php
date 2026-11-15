@@ -173,7 +173,8 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
 			    		<i role="button" tabindex="0" aria-label="Remove" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeRow('<?php echo $rowid; ?>')"></i>
 			    	</div>
 			    </div>
-			<?php $im++; } ?>
+			<?php $im++;
+			} ?>
 		</div>
 	    <div class="mt-3 mb-5">
 			<button type="button"  class="btn btn-success" onclick="addMoreApplicationEmptyTransactions()"><i class="ti-plus"></i>  <?= __('Add More Transaction') ?></button>

@@ -2514,7 +2514,8 @@ if($checktimeprint > 0){
             <strong><?php echo $iterr; ?> </strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
-    <?php } } ?>
+    <?php }
+    } ?>
     <div class="">
         <div class="">
             <?php
@@ -2523,7 +2524,8 @@ if($checktimeprint > 0){
             <form class="kt-form kt-form--label-right" name="myForm" id="form-validation-nouse" action="" method="post" enctype="multipart/form-data"  >
                 <div class="kt-portlet">
                     <div class="card">
-                        <?php if($rid != "" && $copy == 1){ echo $rtable_name ==""?$workflowsteps['current_status_ribbon']:""; } ?>
+                        <?php if($rid != "" && $copy == 1){ echo $rtable_name ==""?$workflowsteps['current_status_ribbon']:"";
+                        } ?>
                         <div class="card-header table-card-header">
                             <h5><?php echo $title;  ?></h5>
                             <div class="card-header-right table-card-header m-r-50">
@@ -2534,7 +2536,8 @@ if($checktimeprint > 0){
              <?php
                     $allpermision = $_SESSION['role_permission'][$table_name];
 
-                    if($allpermision['permission_print'] == '1'){$permission_listbtn = "disabled"; }
+                    if($allpermision['permission_print'] == '1'){$permission_listbtn = "disabled";
+                    }
 
 ?>
                     <?php
@@ -2554,7 +2557,8 @@ if($checktimeprint > 0){
 
                     <?php
 
-                    if(($chartofacounterrer == '1' || $_GET['error_messages']) && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE)){ }else{
+                    if(($chartofacounterrer == '1' || $_GET['error_messages']) && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE)){
+                    }else{
 
 
                         echo ($rtable_name =="" && (isset($table2[0]['item_id'])))?$workflowsteps['workflow_btn']:"";
@@ -2751,7 +2755,8 @@ if($checktimeprint > 0){
 
                                     </div>
 
-                                    <?php  } }else{ ?>
+                                    <?php  }
+                                    }else{ ?>
                                         <span><i class="ti-alert text-warning"></i> <?php echo __('No Attachment'); ?></span>
                                     <?php } ?>
 
@@ -2797,7 +2802,8 @@ if($checktimeprint > 0){
 
                                             </td>
                                         </tr>
-                                    <?php $i++; } ?>
+                                    <?php $i++;
+                                    } ?>
                                     </table>
                                     </div>
                                 <?php } ?>
@@ -2837,7 +2843,8 @@ if($checktimeprint > 0){
                                 </th>
                             </tr>
                             <tr>
-                                <th scope="col" class="amount text-start p-2 <?php if($table1['discount_mode'] == 'DI'){ echo __('event_disabled'); } ?>" id="overall_discount_div">
+                                <th scope="col" class="amount text-start p-2 <?php if($table1['discount_mode'] == 'DI'){ echo __('event_disabled');
+                                } ?>" id="overall_discount_div">
                                     <div class="form-radio">
                                     <span><?php echo __('Discount'); ?> </span>
                                     <div class="radio radio-inline m-0">
@@ -2879,7 +2886,8 @@ if($checktimeprint > 0){
                                             <input type="hidden" name="charge_id_ac[]" value="<?php echo $addchrg['charge_id'];?>">
                                         </td>
                                     </tr>
-                                <?php $mk++; } ?>
+                                <?php $mk++;
+                                } ?>
 
                             <tr id="rowadditionalcharges">
                                  <input type="hidden" name="" id="tds_tax" value="0">
@@ -2996,7 +3004,8 @@ if($checktimeprint > 0){
                                         </td>
                                     </tr>
                                 <?php }?>
-                            <?php } }  ?>
+                            <?php }
+                            }  ?>
                                         <tr>
                                             <td class="p-2"><?php echo __('Total Tax'); ?></td>
                                             <td class="text-end p-2"><span id="dis_taxRateid"><?php echo customeummarmonyformateifine($tattax); ?></span> </td>
@@ -3137,7 +3146,8 @@ if($checktimeprint > 0){
                                             <input type="hidden" name="payment_term_history['.$mjk.'][amount]" value="'.$pth['amount'].'">
                                             <input type="hidden" name="payment_term_history['.$mjk.'][extra_date]" value="'.$pth['extra_date'].'">
                                             <input type="hidden" name="payment_term_history['.$mjk.'][extra_amt]" value="'.$pth['extra_amt'].'"><input type="hidden" name="payment_term_history['.$mjk.'][percentage]" value="'.$pth['percentage'].'"><input type="hidden" name="payment_term_history['.$mjk.'][without_tax_amount]" value="'.$pth['without_tax_amount'].'"><input type="hidden" name="payment_term_history['.$mjk.'][tax_amount]" value="'.$pth['tax_amount'].'">';
-                                            $mjk++; } ?>
+                                            $mjk++;
+                                            } ?>
                                     </table>
                                 </td>
                                 <?php } ?>

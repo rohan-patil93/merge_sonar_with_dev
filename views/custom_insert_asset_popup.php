@@ -475,7 +475,8 @@ function getDepreciationMethod(){
 							<select class="form-select js-example-basic-single " name="depreciation_method"  id="depreciation_method" onchange="getDepreciationMethod()" aria-label="Depreciation Method">
 							<option value=""><?= __('Select Any One') ?></option>
 							<?php foreach($depreciation_method as $dm) {
-								$disable =''; if($dm['genc_detail_code'] == 'PU'){ $disable = 'disabled'; } ?>
+								$disable =''; if($dm['genc_detail_code'] == 'PU'){ $disable = 'disabled';
+								} ?>
 									<option value="<?php echo $dm['genc_detail_code']; ?>" <?php echo $assetsdeatil['depreciation_method'] ==$dm['genc_detail_code']?"selected":""; ?> <?php echo $disable;?>><?php echo $dm['genc_detail_name'];?></option>
 								<?php } ?>
 							</select>
@@ -539,7 +540,8 @@ function getDepreciationMethod(){
 												<td class="p-2 text-right"><?php echo $dp['accumulated_depreciation']; ?></td>
 												<td class="text-right p-2"><?php echo $dp['depreciation_price']; ?></td>
 											</tr>
-											<?php $i++; } ?>
+											<?php $i++;
+											} ?>
 										</tbody>
 									</table>
 								</div>

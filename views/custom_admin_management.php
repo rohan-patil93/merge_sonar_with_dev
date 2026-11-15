@@ -84,7 +84,8 @@ foreach ($roledata as $roles) {
 						<!-- <i class="la la-exclamation-triangle"></i> --> <?= htmlspecialchars(__($navdata['genc_detail_name'] ?? '')) ?>
 					</a>
 				</li>
-			<?php $i++;  }	?>
+			<?php $i++;
+			}	?>
 			<li class="nav-item">
 				<a class="nav-link" data-toggle="tab" onclick="redirectpage('COM_INSERT_ROLE_PERMISSIONS')" href=""> <?= __("All") ?> </a>
 			</li>
@@ -182,7 +183,8 @@ foreach ($roledata as $roles) {
 											<a class="nav-link <?php if ($j==1){ ?> active <?php } ?> " data-bs-toggle="tab" href="#kt_tabs_2_<?php echo $key; ?>">
 												<?= htmlspecialchars(__($child['Label'] ?? '')) ?></a>
 										</li>
-										<?php $j++; } ?>
+										<?php $j++;
+										} ?>
 									</ul>
 
 									<div class="mt-5 tab-content">
@@ -205,7 +207,8 @@ foreach ($roledata as $roles) {
 													<span class="d-inline-block fw-bold" style="margin-bottom:5px">   <?= __("Delete") ?></span>
 												</div>
 												<?php
-												if(count((array)$child['child']) < 1){  $child['child'] = $arrayName = array($child);  }
+												if(count((array)$child['child']) < 1){  $child['child'] = $arrayName = array($child);
+												}
 												foreach ($child['child'] as  $value) { ?>
 												<?php $table_name = toGetTableNameUsingPageName($value['Page_Name']); $value['display_list']=1; ?>
 												<div class="col-lg-3 p-1">
@@ -249,7 +252,8 @@ foreach ($roledata as $roles) {
 												<?php } ?>
 											</div>
 										</div>
-										<?php $j++; } ?>
+										<?php $j++;
+										} ?>
 									</div>
 								</div>
 							</div>
@@ -260,7 +264,8 @@ foreach ($roledata as $roles) {
 				    <?php  }	?>
 				</div>
 			</div>
-			<?php $j++;  }	?>
+			<?php $j++;
+			}	?>
 		</div>
 
 	</div>

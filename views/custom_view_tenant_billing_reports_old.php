@@ -121,7 +121,8 @@ $opening_balance_inv = $result['opening_balance_inv'];
                       </td>
                     <?php } ?>
                  </tr>
-             <?php $mk++;} ?>
+             <?php $mk++;
+             } ?>
             </tbody>
         </table>
         <?php  }else{ ?>

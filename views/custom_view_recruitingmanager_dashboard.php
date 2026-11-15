@@ -195,7 +195,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 		        <button type="button" class="btn-close text-danger" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 		    </div>
 		</div>
-	<?php } } ?>
+	<?php }
+	} ?>
 </div>
 
 <ul class="nav md-tabs infisuite_tab mb-2">
@@ -304,7 +305,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 											<p class="text-muted m-b-0"><?php echo $Notification_DateTime; ?></p>
 										</div>
 									</div>
-								<?php } }else{
+								<?php }
+								}else{
 									echo "<h4><i class='fa fa-warning'></i> ".__('No Holidays Available')."</h4>";
 								} ?>
 							</div>
@@ -382,7 +384,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 									<li class="nav-item">
 										<a class="nav-link f-w-600 f-12 <?php echo $mk == count((array)$montharray)?"active":""; ?>" data-bs-toggle="tab" href="#month<?php echo date("M",strtotime($ff));?>" role="tab" aria-selected="true"><?php echo date("F",strtotime($ff));?><span class="label label-xs label-success m-l-10"><?php echo count((array)$jobpostingcandidates55); ?></span></a>
 									</li>
-									<?php $mk++; } ?>
+									<?php $mk++;
+									} ?>
 
 								</ul>
 							</div>
@@ -451,7 +454,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 
 							<?php } ?>
 						</div>
-						<?php $mm++; } ?>
+						<?php $mm++;
+						} ?>
 					</div>
 				</div>
 				<!----- Start --->
@@ -504,7 +508,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								<div class="tab-content tabs card-body custom-scroll" style=" height: 500px;">
 
 									<?php $k=1; foreach($lola as $las){ ?>
-										<div class="tab-pane <?php if($k==1){ echo "active"; } ?>" id="<?php echo $las; ?>" role="tabpanel">
+										<div class="tab-pane <?php if($k==1){ echo "active";
+										} ?>" id="<?php echo $las; ?>" role="tabpanel">
 											<div class="table-responsive">
 												<table class="table table-hover m-b-0 " style="font-size:13px;">
 													<thead>
@@ -537,7 +542,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 																		</div>
 																	</td>
 																</tr>
-															<?php } }else{?>
+															<?php }
+															}else{?>
 																<tr>
 																	<td colspan="5">
 																		<div class="card-px text-center ">
@@ -554,7 +560,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 												</div>
 
 											</div>
-											<?php $k++; } ?>
+											<?php $k++;
+											} ?>
 										</div>
 
 									</div>
@@ -618,7 +625,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 															</div>
 														</div>
 													</div>
-												<?php } $dateloop++; } ?>
+												<?php } $dateloop++;
+												} ?>
 											</div>
 											<div class="col-lg-7">
 												<input type="hidden" id="chart_data_2" class="chertvalues" data-id="chart_Donut0" value="Un-Published:<?php echo $donutchartary[ST_ACTIVE]; ?>||Published:<?php echo $donutchartary[ST_INPROGRESS]; ?>||Hold:<?php echo $donutchartary[ST_HOLD]; ?>||Closed:<?php echo $donutchartary[ST_COMPLETE]; ?>">
@@ -668,7 +676,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 														</div>
 													</div>
 
-													<?php $dateloop++;} //print_r($donutchartary); ?>
+													<?php $dateloop++;
+													} //print_r($donutchartary); ?>
 
 												</div>
 												<div class="col-lg-7">
@@ -726,7 +735,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 
 													</div>
 												</div>
-											<?php } }else{?>
+											<?php }
+											}else{?>
 												<div class="card-px text-center ">
 													<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>
 													<div class="text-center px-4">
@@ -783,7 +793,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 											<?php } ?>
 
 										</div>
-									<?php } }else{?>
+									<?php }
+									}else{?>
 										<div class="card-px text-center ">
 											<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>
 											<div class="text-center px-4">
@@ -836,7 +847,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 											</div>
 										<?php } ?>
 									</div>
-								<?php }  }else{?>
+								<?php }
+								}else{?>
 									<div class="card-px text-center ">
 										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>
 										<div class="text-center px-4">
@@ -879,7 +891,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 									</div>
 
 								</div>
-							<?php } }else{?>
+							<?php }
+							}else{?>
 								<div class="card-px text-center ">
 									<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>
 									<div class="text-center px-4">

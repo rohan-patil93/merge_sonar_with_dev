@@ -153,7 +153,8 @@ function getOwnerProperty(valu){
 					                    <td class="p-2 text-right"><?php echo customeummarmonyformateifine($inv['debit_total_amount']); ?></td>
 					                    <td class="p-2 text-right"><?php echo customeummarmonyformateifine($inv['credit_total_amount']); ?></td>
 					                </tr>
-			    			<?php $mk++; } ?>
+			    			<?php $mk++;
+			    			} ?>
 			    				</tbody>
 				        </table>
 				    </div>
@@ -186,7 +187,8 @@ function getOwnerProperty(valu){
 					                    <td class="p-2 text-right"><?php echo customeummarmonyformateifine($inv['debit_total_amount']); ?></td>
 					                    <td class="p-2 text-right"><?php echo customeummarmonyformateifine($inv['credit_total_amount']); ?></td>
 					                </tr>
-			    			<?php $mk++; } ?>
+			    			<?php $mk++;
+			    			} ?>
 			    				</tbody>
 						</table>
 				    </div>

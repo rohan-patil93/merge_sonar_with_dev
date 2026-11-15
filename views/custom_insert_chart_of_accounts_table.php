@@ -91,11 +91,17 @@ $account_groups = $result['account_groups'] ?? [];
                                 <td colspan="2" class="<?php echo count((array)$Alevel7) !='0'?"f-w-700":""; ?> w-b-w-s"><span class="m-l-50"><?php echo $i.".".$mk.".".$mj.".".$mm.".".$jm.".".$jk." - ".$level6['account_name']." - ".$level6['account_short_name']." (".$level6['account_code'].")".((($level6['lock_and_unlock_status'] ?? '') =="Y")?'<span class="pcoded-badge label label-danger m-l-10">' . __('Locked') . '</span>':''); ?></span></td>
                                 <td><button type="button" class="btn bg-primary p-0 pt-1" onclick="editFinanaceGrp(0,'<?php echo $level6['account_code'] ?? ''; ?>','<?php echo $level6['account_type'] ?? ''; ?>','<?php echo $level6['accgro_group_id'] ?? ''; ?>')" aria-label="Add sub-account to <?php echo htmlspecialchars($level6['account_name'] ?? '', ENT_QUOTES); ?>"><i class="ti-plus text-white m-l-5" aria-hidden="true"></i></button></td>
                             </tr>
-                    <?php $jk++; } ?>
-                    <?php $jm++; } ?>
-                    <?php $mm++; } ?>
-                    <?php $mj++; } ?>
-                    <?php $mk++; } ?>
-                        <?php  $i++; } //} ?>
+                    <?php $jk++;
+                    } ?>
+                    <?php $jm++;
+                    } ?>
+                    <?php $mm++;
+                    } ?>
+                    <?php $mj++;
+                    } ?>
+                    <?php $mk++;
+                    } ?>
+                        <?php  $i++;
+                        } //} ?>
 
                         </tbody> </table>

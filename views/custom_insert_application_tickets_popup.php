@@ -86,7 +86,8 @@ function updateApplicationTickets(rid,status){
 				<td class="p-2 text-center">
 					<?php if($at['attachment']!=""){ ?>
 						<a onclick="dynamicFilePriviews('uploads/all/<?php echo $at['attachment']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Attachments Preview"><i class="ti-eye"></i></a>
-					<?php }else{ echo " - "; } ?>
+					<?php }else{ echo " - ";
+					} ?>
 				</td>
 				<td class="p-2">
 					<span class="label label-md label-primary"><?php echo $status[$at['current_status']]; ?></span>
@@ -149,7 +150,8 @@ function updateApplicationTickets(rid,status){
 				<td class="p-2 text-center">
 					<?php if($at['attachment']!=""){ ?>
 						<a onclick="dynamicFilePriviews('uploads/all/<?php echo $at['attachment']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Attachments Preview"><i class="ti-eye"></i></a>
-					<?php }else{ echo " - "; } ?>
+					<?php }else{ echo " - ";
+					} ?>
 				</td>
 				<td class="p-2">
 					<span class="label label-md label-primary"><?php echo $status[$at['current_status']]; ?></span>

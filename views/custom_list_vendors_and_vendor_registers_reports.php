@@ -197,7 +197,9 @@ $_SESSION['download_data'] = array();
 						<td class="p-2"><?php echo emptytextdashShow($venddetails['short_name']); ?> </td>
 						<td class="p-2"><?php echo emptytextdashShow($venddetails['bp_code']); ?> </td>
 	          		</tr>
-	          		<?php $seq++; } $_SESSION['download_data'] = $cssdata; }else{ ?>
+	          		<?php $seq++;
+	          		} $_SESSION['download_data'] = $cssdata;
+	          		}else{ ?>
 	  				<tr>
 			            <td colspan="50">
 			              	<div class="card-px text-center py-20 m-t-30">

@@ -216,7 +216,8 @@ function getOwnerProperty(valu){
 		                	<td class="p-2 text-right"><?php echo customeummarmonyformateifine($total_due); ?></td>
 		                </tr>
 
-		            	<?php $i++; } ?>
+		            	<?php $i++;
+		            	} ?>
 		            </tbody>
 		            <tfoot>
 		            	<tr>

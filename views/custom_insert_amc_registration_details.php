@@ -343,7 +343,8 @@ foreach ($gc_details as $row) {
                                             <i class="icofont icofont-trash"></i>
                                         </button>
                                     </div>
-                                <?php } } ?>
+                                <?php }
+                                } ?>
                             </div>
                             <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="addChecklistField()">
                                 <i class="icofont icofont-plus"></i> <?= __('Add More') ?>

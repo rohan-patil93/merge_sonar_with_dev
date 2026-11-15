@@ -189,7 +189,9 @@ $datas = json_decode($emailgroupdata,1);
                   <span class="btn btn-primary btn-sm font-weight-bold btn-upper btn-text"><?php echo $count_value  ; ?></span>
               </div>
           </div>
-      <?php } elseif($value['status_name'] == 'total' ){ $total =$value['count'];  } } ?>
+      <?php } elseif($value['status_name'] == 'total' ){ $total =$value['count'];
+      }
+      } ?>
   </div>
 </div>
 </div>

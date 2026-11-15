@@ -162,7 +162,9 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
                             <td><?php echo $ptde['extend_agreement_month_year']; ?></td>
                             <td><?php echo $ptde['extend_agreement_datetime']; ?></td>
                           </tr>
-                        <?php } }else{ echo "<tr><td colspan='2' class='text-center'>No Data</td></tr>"; } ?>
+                        <?php }
+                        }else{ echo "<tr><td colspan='2' class='text-center'>No Data</td></tr>";
+                        } ?>
                       </tbody>
                     </table>
 

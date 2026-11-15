@@ -76,7 +76,9 @@ $reviewdata = json_decode($reviewdata, 1);
 								</div>
 							</td>
 						</tr>
-						<?php  $k++; } } else{
+						<?php  $k++;
+						}
+						} else{
 							echo "<tr><td colspan='3'><h4 class='p-40 text-center'><i class='fa fa-warning'></i> " . __('No Reviews Available') . "</h4></td></tr>";
 						} ?>
 					</tbody>
@@ -135,7 +137,9 @@ $reviewdata = json_decode($reviewdata, 1);
 									</div>
 								</td>
 							</tr>
-							<?php  $k++; } } else{
+							<?php  $k++;
+							}
+							} else{
 								echo "<tr><td colspan='3'><h4 class='p-40 text-center'><i class='fa fa-warning'></i> " . __('No Reviews Available') . "</h4></td></tr>";
 							} ?>
 						</tbody>

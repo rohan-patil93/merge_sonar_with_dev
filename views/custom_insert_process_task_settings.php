@@ -142,7 +142,9 @@ $task_for = $display_data['task_for'];
                           <?php } ?>
                         </div>
                       </div>
-                      <?php if(($main_data['assigned_to'] ?? '') !='OB'){ $csd = "d-none"; }else{ $csd = ""; }?>
+                      <?php if(($main_data['assigned_to'] ?? '') !='OB'){ $csd = "d-none";
+                      }else{ $csd = "";
+                      }?>
                       <div id="emplistshow" class="col-xl-4 w-full <?php echo $csd; ?>">
                         <span class="form-label"><?php echo __('Employee'); ?></span>
                         <select aria-label="<?php echo __('Employee'); ?>" name="other_id" class="form-control form-select js-example-basic-single" id="fdrf">
@@ -168,7 +170,9 @@ $task_for = $display_data['task_for'];
                           <?php } ?>
                         </div>
                       </div>
-                      <?php if(($main_data['approval_type'] ?? '') !='OB'){ $csd = "d-none"; }else{ $csd = ""; }?>
+                      <?php if(($main_data['approval_type'] ?? '') !='OB'){ $csd = "d-none";
+                      }else{ $csd = "";
+                      }?>
                       <div id="emplistshowapprovaltype" class="col-xl-4 w-full mb-2 <?php echo $csd; ?>">
                         <span class="form-label"><?php echo __('Employee'); ?></span>
                         <select aria-label="<?php echo __('Approval Employee'); ?>" name="approval_other_id" class="form-control form-select js-example-basic-single">

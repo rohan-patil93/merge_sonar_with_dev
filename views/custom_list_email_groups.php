@@ -113,7 +113,8 @@ $rid = deocdeId("id:".$email['id']);
                                                 <div class="symbol symbol-35 symbol-circle" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $member['name']; ?>">
                                                     <span class="symbol-label font-weight-bold"> <?php echo initials($member['name']); ?></span>
                                                 </div>
-                                            <?php $mk++; if($mk == '3'){ break; } ?>
+                                            <?php $mk++; if($mk == '3'){ break;
+                                            } ?>
                                             <?php } ?>
                                             <?php if($email['count'] > 3){ ?>
                                                     <span class="symbol-label font-weight-bold">+<?php echo $email['count'] - 3; ?></span>

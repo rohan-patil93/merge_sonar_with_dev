@@ -1,6 +1,8 @@
 <?php
-	if($_GET['PAY_MONTH']==''){ $_GET['PAY_MONTH'] = date('m'); }
-	if($_GET['PAY_YEAR']==''){ $_GET['PAY_YEAR'] = date('Y');}
+	if($_GET['PAY_MONTH']==''){ $_GET['PAY_MONTH'] = date('m');
+	}
+	if($_GET['PAY_YEAR']==''){ $_GET['PAY_YEAR'] = date('Y');
+	}
 	$apv = array();
 	$sba = array();
 	$approval_url = API."?mode=toGetblukFinaceProjectTimesheet&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&emp_id=".$_SESSION['emp_id'];
@@ -643,7 +645,8 @@ $erp = json_decode($erp_data,1);
 
 													<span class="label label-success label-rounded mr-3"><?php echo "- ".count((array)$reportto_count[$rkey])." (".count((array)$team_report_count[$rkey]).")";  ?></span>
 												</option>
-											<?php } } ?>
+											<?php }
+											} ?>
 										</select>
 									</div>
 								</div>
@@ -694,10 +697,14 @@ $erp = json_decode($erp_data,1);
 								</div>
 						<div class="col-lg-4">
 							<div class="radio-inline float-right infisuite_tab">
-								<?php $billist =""; if($_GET['PAY_YEAR']!=""){ $billist = "&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH']; } ?>
-								<span class="radio nav-item d-inline-block fw-bold" name="all_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?php if($gtnvk==2){ echo 'active'; } ?>"><?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?> <?php echo "All"; ?></a> </span>
-								<span class="radio nav-item d-inline-block fw-bold" name="billale_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-warning waves-effect waves-light <?php if($gtnvk==1){ echo 'active'; } ?>"><?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Billable"; ?></a> </span>
-								<span class="radio nav-item d-inline-block fw-bold" name="nonbillable_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-danger waves-effect waves-light <?php if($gtnvk==0){ echo 'active'; } ?>"><?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Non-billable"; ?></a> </span>
+								<?php $billist =""; if($_GET['PAY_YEAR']!=""){ $billist = "&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH'];
+								} ?>
+								<span class="radio nav-item d-inline-block fw-bold" name="all_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?php if($gtnvk==2){ echo 'active';
+								} ?>"><?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?> <?php echo "All"; ?></a> </span>
+								<span class="radio nav-item d-inline-block fw-bold" name="billale_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-warning waves-effect waves-light <?php if($gtnvk==1){ echo 'active';
+								} ?>"><?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Billable"; ?></a> </span>
+								<span class="radio nav-item d-inline-block fw-bold" name="nonbillable_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-danger waves-effect waves-light <?php if($gtnvk==0){ echo 'active';
+								} ?>"><?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Non-billable"; ?></a> </span>
 							</div>
 						</div>
 					</div>
@@ -854,7 +861,9 @@ $llablecolor = lableandleave($k);
 												$td_budget = $td_budget+($sb['budgeted_amount']*$mulval);
 												$td_hrs =$td_hrs+$sb['billable_hrs'];
 												$td_nonhrs =$td_nonhrs+$sb['nonbillable_hrs'];
-												$k= $k-1;} }
+												$k= $k-1;
+												}
+												}
 												$td_ra_pre = number_format((($td_ra_bilable/$td_ra_budget)*100),2);
 												$td_pre = number_format((($td_bilable/$td_budget)*100),2);
 												$vrcbbg_color = lableandbgcolor($td_ra_pre);
@@ -893,7 +902,8 @@ $llablecolor = lableandleave($k);
 														<td></td>
 														<td></td>
 													</tr>
-												<?php } }?>
+												<?php }
+												}?>
 										</tbody>
 									</table>
 								</div>
@@ -1061,7 +1071,9 @@ $llablecolor = lableandleave($k);
 												$td_budget = $td_budget+($sb['budgeted_amount']*$mulval);
 												$td_hrs =$td_hrs+$sb['billable_hrs'];
 												$td_nonhrs =$td_nonhrs+$sb['nonbillable_hrs'];
-												$k= $k-1;} }
+												$k= $k-1;
+												}
+												}
 												$td_ra_pre = number_format((($td_ra_bilable/$td_ra_budget)*100),2);
 												$td_pre = number_format((($td_bilable/$td_budget)*100),2);
 												$vrcbbg_color = lableandbgcolor($td_ra_pre);
@@ -1100,7 +1112,8 @@ $llablecolor = lableandleave($k);
 														<td></td>
 														<td></td>
 													</tr>
-												<?php } }?>
+												<?php }
+												}?>
 										</tbody>
 									</table>
 								</div>

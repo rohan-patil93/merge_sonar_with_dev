@@ -90,7 +90,8 @@ $module_setup = $result['module_setup'];
               <ul class="legend list-unstyled text-gray-600" style="min-height: 215px;">
                 <?php
                 $resutlvalue = $application_process[$resultlist['id']];
-                foreach($resutlvalue as $key => $resutlvalue){  if($key==5){ break; }?>
+                foreach($resutlvalue as $key => $resutlvalue){  if($key==5){ break;
+                }?>
                 <li>
                   <p>
                     <span class="icon"><i style="color: cornflowerblue;" class="fa fa-minus"></i></span> <span class="name"><?php echo $resutlvalue['process_name']; ?></span>

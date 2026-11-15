@@ -1218,7 +1218,8 @@ function calculateTotal(){
                 <?php }else{?>
                     <div role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'4')" name="status" id="status" value="<?php echo $list['status']; ?>"><?php echo $list['action_label']; ?></div>
 
-            <?php } }?>
+            <?php }
+            }?>
                 <!-- <a class="dropdown-item" href="#">Invoice</a> -->
             </div>
            <?php  } ?>
@@ -1352,7 +1353,8 @@ function calculateTotal(){
                 <?php } ?>
      </select>
 </div>
-<?php } } else{ ?>
+<?php }
+} else{ ?>
 <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Branch'); ?>:</span>
 <div class=" col-lg-3 col-md-9 col-sm-12">
     <select class="form-control" id="kt_select2_4" name= "type" aria-label="Type">
@@ -1621,9 +1623,13 @@ function calculateTotal(){
                                     <?php } ?>
                                 </div>
                                 <div class="kt-timeline-v2__item-text  kt-padding-top-5">
-                                    <?php if($lists['response_type'] == 0){ $list_date = $lists['request_date']; }else{ echo $list_date = $lists['response_date']; }?>
+                                    <?php if($lists['response_type'] == 0){ $list_date = $lists['request_date'];
+                                    }else{ echo $list_date = $lists['response_date'];
+                                    }?>
                                     <b> <?php echo date("M d, Y g:i A", strtotime($list_date)); ?></b>
-                                    <?php echo " ".$_SESSION['users'][$lists['user_id']]." with Status "; ?><span style="color: <?php echo "#".$stausresult[$lists['response_type']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$lists['response_type']]['background_color']); ?>;" class="kt-badge  kt-badge--inline kt-badge--pill"><?php if($lists['response_type'] == 0){ echo "Yet to respond"; }else{ echo $stausresult[$lists['response_type']]['name']; }?></span>
+                                    <?php echo " ".$_SESSION['users'][$lists['user_id']]." with Status "; ?><span style="color: <?php echo "#".$stausresult[$lists['response_type']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$lists['response_type']]['background_color']); ?>;" class="kt-badge  kt-badge--inline kt-badge--pill"><?php if($lists['response_type'] == 0){ echo "Yet to respond";
+                                    }else{ echo $stausresult[$lists['response_type']]['name'];
+                                    }?></span>
                                    <?php echo "</br>".$lists['comments']; ?>
 
 
@@ -1683,7 +1689,8 @@ function calculateTotal(){
                        </td></tr>
 
                     <?php }?>
-                        <?php } } ?>
+                        <?php }
+                        } ?>
                     </tbody>
                 </table>
             </td>
@@ -1738,7 +1745,9 @@ function calculateTotal(){
     <a class="dz-remove" href="javascript:undefined;" data-dz-remove="" onclick="removefile(<?php echo $file_value['id']; ?>)"><?php echo __('Remove'); ?></a>
     <a class="dz-remove" target="_blank" href="uploads/121/files/<?php echo $file_value['file_name']; ?>" ><?php echo __('Download'); ?></a>
 </div>
-<?php $n++; } }else{ ?>
+<?php $n++;
+}
+}else{ ?>
 
             <div class="dropzone-msg dz-message needsclick">
                 <h3 class="dropzone-msg-title"><?php echo __('Drop files here or click to upload.'); ?></h3>
@@ -1754,7 +1763,8 @@ function calculateTotal(){
 <!--begin::Submit part -->
 <?php
 $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK);
-$disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $disable = "disabled" ;} ?>
+$disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $disable = "disabled" ;
+} ?>
 <div class="kt-portlet__foot">
     <div class="kt-form__actions">
         <div class="row">

@@ -114,7 +114,8 @@ foreach ($qustion_types as $qtype) {
               </div>
              </div>
            </div>
-         <?php } } ?>
+         <?php }
+         } ?>
        </div>
      </form>
    </div>

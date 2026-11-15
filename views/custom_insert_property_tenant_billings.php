@@ -282,7 +282,8 @@ if(isset($_POST['submittenantbills'])){
 																		<textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="remarks[]"><?php echo $bd['remarks']; ?></textarea>
 																	</td>
 																</tr>
-																<?php $i++; } ?>
+																<?php $i++;
+																} ?>
 															</tbody>
 														</table>
 													</div>
@@ -299,7 +300,8 @@ if(isset($_POST['submittenantbills'])){
 										<td class="p-2 text-center"><i class="fa fa-cog  f-16" role="button" tabindex="0" aria-label="<?php echo __('Utility Bill'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>" onclick="opentTenantUtilityPopUp('<?php echo $ptb['id']; ?>')" ></i>
 										</td>
 									</tr>
-									<?php  $m++; } ?>
+									<?php  $m++;
+									} ?>
 								</tbody>
 							</table>
 						<?php }else{?>
@@ -361,7 +363,8 @@ if(isset($_POST['submittenantbills'])){
 												<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="renatalInvoiceSend('<?php echo $ptb['id']; ?>')"> <?php echo __('Send'); ?></button>
 											</td>
 										</tr>
-										<?php  $m++; } ?>
+										<?php  $m++;
+										} ?>
 									</tbody>
 								</table>
 							<?php }else{ ?>
@@ -422,7 +425,8 @@ if(isset($_POST['submittenantbills'])){
 											</td>
 
 										</tr>
-										<?php  $m++; } ?>
+										<?php  $m++;
+										} ?>
 									</tbody>
 								</table>
 							<?php }else{ ?>
@@ -539,7 +543,8 @@ if(isset($_POST['submittenantbills'])){
 																			<textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="remarks[]"><?php echo $bd['remarks']; ?></textarea>
 																		</td>
 																	</tr>
-																	<?php $i++; } ?>
+																	<?php $i++;
+																	} ?>
 																</tbody>
 															</table>
 														</div>
@@ -555,7 +560,8 @@ if(isset($_POST['submittenantbills'])){
 										<td class="p-2 text-center"><i class="fa fa-cog  f-16" role="button" tabindex="0" aria-label="<?php echo __('Utility Bill'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>" onclick="opentTenantUtilityonlyPopUp('<?php echo $ptb['id']; ?>')" ></i>
 										</td>
 									</tr>
-									<?php  $m++; } ?>
+									<?php  $m++;
+									} ?>
 								</tbody>
 							</table>
 						<?php }else{?>
@@ -605,7 +611,8 @@ if(isset($_POST['submittenantbills'])){
 												<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="renatalInvoiceSend('<?php echo $ptb['id']; ?>','U')"> <?php echo __('Send'); ?></button>
 											</td>
 										</tr>
-										<?php  $m++; } ?>
+										<?php  $m++;
+										} ?>
 									</tbody>
 								</table>
 							<?php }else{ ?>
@@ -656,7 +663,8 @@ if(isset($_POST['submittenantbills'])){
 											</td>
 
 										</tr>
-										<?php  $m++; } ?>
+										<?php  $m++;
+										} ?>
 									</tbody>
 								</table>
 							<?php }else{ ?>

@@ -334,7 +334,8 @@ function emptyCheck($valu){
                     <td class="f-14"><?php echo emptyCheck($ta['item_quantity']); ?></td>
                     <td class="f-14"><?php echo currencyFormat($ta['total_amount'],$config); ?></td>
                 </tr>
-                <?php $seq++; } ?>
+                <?php $seq++;
+                } ?>
                 <tr>
                     <th scope="col" colspan="4" class="text-start">
                         Amount In words(Rupees):- <?php echo numberToWordFormate($transaction['total_amount']);?>
@@ -426,7 +427,8 @@ function emptyCheck($valu){
                                         <th scope="col" class="f-14 text-end"><?php echo currencyFormat($ktax['tax_amount'],$config); ?></th>
                                     </tr>
                                 <?php }?>
-                            <?php } }  ?>
+                            <?php }
+                            }  ?>
 
                         </table>
                     </td>

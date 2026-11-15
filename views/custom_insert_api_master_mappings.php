@@ -94,11 +94,14 @@ $selectdata = $data['table_filed'];
 								?>
 								<option  <?php if(strtolower($edidump) ==strtolower($select)){ ?> selected <?php } ?> value="<?php echo $select;  ?>"><?php echo htmlspecialchars(__(viewTitle($select)));  ?></option>
 
-							<?php } }  ?>
+							<?php }
+							}  ?>
 						</select>
 					</div>
 				</div>
-			<?php } } } ?>
+			<?php }
+			}
+			} ?>
 		</div>
 		<div class="card-footer">
 			<div class="row">

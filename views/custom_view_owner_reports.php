@@ -174,17 +174,20 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 													<td> - </td>
 
 												</tr>
-											<?php $parentchildtb_2++; } ?>
+											<?php $parentchildtb_2++;
+											} ?>
 											</tbody>
 										</table>
 									</td>
 									</tr>
-								<?php $parentchildtb++; }  ?>
+								<?php $parentchildtb++;
+								}  ?>
 								</tbody>
 							</table>
 						</td>
 					</tr>
-				<?php $parenttb++;} ?>
+				<?php $parenttb++;
+				} ?>
 
 			</table>
 		<?php  }else{ ?>

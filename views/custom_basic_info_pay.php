@@ -80,7 +80,8 @@
                     </div>
                   </div>
                 </div>
-                <?php $m++;} ?>
+                <?php $m++;
+                } ?>
               </div>
             </div>
           </div>

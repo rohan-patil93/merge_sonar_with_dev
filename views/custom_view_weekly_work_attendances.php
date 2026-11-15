@@ -464,7 +464,8 @@ $sprogress = $statusprogress['full'] ?? array();
                                         $view_data = "Week Off";
                                     }
                                 ?>
-                                    <td id="td_<?php echo $num; ?>" class="week_<?php echo $ccww; ?>" <?php if($is_future){ echo "style='pointer-events:none; opacity:0.4;'"; } ?>>
+                                    <td id="td_<?php echo $num; ?>" class="week_<?php echo $ccww; ?>" <?php if($is_future){ echo "style='pointer-events:none; opacity:0.4;'";
+                                    } ?>>
                                         <div class="d-flex justify-content-between align-items-center mb-1">
                                             <span class="badge bg-secondary"><?php echo date('d', strtotime($predate)); ?></span>
                                             <?php if($is_future){ ?>
@@ -572,7 +573,8 @@ $sprogress = $statusprogress['full'] ?? array();
                                     <span class="badge bg-info"><?= __('Draft'); ?></span>
                                 </div>
                             </div>
-                        <?php } }
+                        <?php }
+                        }
                         if($avbl_with_me == 0){ ?>
                             <p class="text-muted small my-2"><?= __('No unsubmitted draft entries for this week.'); ?></p>
                         <?php } ?>
@@ -608,7 +610,8 @@ $sprogress = $statusprogress['full'] ?? array();
                                     <span class="badge bg-warning text-white"><?= __('Pending'); ?></span>
                                 </div>
                             </div>
-                        <?php } }
+                        <?php }
+                        }
                         if($avbl_with_mgr == 0){ ?>
                             <p class="text-muted small my-2"><?= __('No pending approval records for this week.'); ?></p>
                         <?php } ?>
@@ -643,7 +646,8 @@ $sprogress = $statusprogress['full'] ?? array();
                                     <span class="badge bg-success"><?= __('Approved'); ?></span>
                                 </div>
                             </div>
-                        <?php } }
+                        <?php }
+                        }
                         if($avbl_appr == 0){ ?>
                             <p class="text-muted small my-2"><?= __('No approved records for this week.'); ?></p>
                         <?php } ?>

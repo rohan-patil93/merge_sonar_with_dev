@@ -195,7 +195,8 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                         if (isset($attendance_map[$date])) {
                             $clock_in  = $attendance_map[$date]['clock_in'] ?? '-';
                             $clock_out = $attendance_map[$date]['clock_out'] ?? '-';
-                            if($clock_out=='00:00:00'){ $clock_out = '-'; }
+                            if($clock_out=='00:00:00'){ $clock_out = '-';
+                            }
                             $timesheet_id = $attendance_map[$date]['timesheet_id'];
                             $employee_id = $attendance_map[$date]['employee_id'];
                             $save_type = 'update';

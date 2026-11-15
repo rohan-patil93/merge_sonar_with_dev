@@ -146,7 +146,8 @@ function checkAll(ele) {
 
 
                             <input type="hidden" name="company_id" id="company_id" value="<?php echo $_SESSION['company_id']; ?>">
-                            <div class="form-group row col-lg-12" id="locktype" <?php if(count((array)$checkven)>0){ echo ""; }else{ ?>  style="display:none;" <?php } ?>>
+                            <div class="form-group row col-lg-12" id="locktype" <?php if(count((array)$checkven)>0){ echo "";
+                            }else{ ?>  style="display:none;" <?php } ?>>
 
                                 <div class="col-lg-9 mb-3"> <span class="form-label fw-bold font-weight-bold"> Vendors </span> </div>
                                 <div class="col-lg-3 mb-3">
@@ -167,7 +168,8 @@ function checkAll(ele) {
                                     </div> <?php **/ ?>
                                     <div class="checkbox-zoom zoom-primary mt-1">
                                         <label class="form-label" for="vendor_<?php echo $vendor['id']; ?>">
-                                            <input type="checkbox" id="vendor_<?php echo $vendor['id']; ?>" <?php if(in_array($vendor['id'],(array)$checkven) ){  echo "checked"; } ?>  name="lock_list[<?php echo $vendor['id']; ?>]" value="<?php echo $vendor['id']; ?>" aria-label="<?php echo htmlspecialchars($vendor['company']); ?>">
+                                            <input type="checkbox" id="vendor_<?php echo $vendor['id']; ?>" <?php if(in_array($vendor['id'],(array)$checkven) ){  echo "checked";
+                                            } ?>  name="lock_list[<?php echo $vendor['id']; ?>]" value="<?php echo $vendor['id']; ?>" aria-label="<?php echo htmlspecialchars($vendor['company']); ?>">
                                             <span class="cr">
                                                  <i class="cr-icon icofont icofont-ui-check txt-primary" aria-hidden="true"></i>
                                              </span>  <span class="f-14"><?php echo htmlspecialchars($vendor['company']); ?> </span>

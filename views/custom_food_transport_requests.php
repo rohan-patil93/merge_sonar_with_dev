@@ -74,14 +74,16 @@ if(isset($_POST['datefilter'])){
 													$req_types_names_list[] = $foodoptiondata[$rkey];
 													?>
 													<button type="button" class="btn circle-circle-xl border-<?php echo $bgcolorlist[$colorindex]; ?> m-l-5 "><div class="text-center font-size-h3"><?php echo count((array)$request) == '' ? '0' : count((array)$request); ?></div> <div class="text-center font-size-h6"><?php echo htmlspecialchars(__($foodoptiondata[$rkey] ?? ''));?></div></button>
-													<?php $colorindex++; }
+													<?php $colorindex++;
+													}
 												}else{
 														foreach($foodoptions as $rkey) {
 													$req_types_names_list[] = $rkey['food_option'];
 													$req_types_count_list[] = "0";
 															?>
 													<button type="button" class="btn circle-circle-xl border-<?php echo $bgcolorlist[$colorindex]; ?> m-l-5 "><div class="text-center font-size-h3"><?php echo "0"; ?></div> <div class="text-center font-size-h6"><?php echo htmlspecialchars(__($rkey['food_option'] ?? ''));?></div></button>
-													<?php $colorindex++; }
+													<?php $colorindex++;
+													}
 												}
 
 												array_push($req_types_count_list,$transport_req);

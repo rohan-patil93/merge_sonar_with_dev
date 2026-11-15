@@ -70,7 +70,8 @@ echo "<pre>"; print_r($result);echo "</pre>";
 	    html += '<div class="col-lg-3"><select name="transaction_table[]" class="form-control form-select js-example-basic-single" id="transaction_table_'+maxsar+'"  onchange="getTransactionTable('+maxsar+')" aria-label="Transaction Table"><option value="">Select Any One </option><?php foreach($transaction_table as $tableval) {  ?><option value="<?php echo $tableval; ?>"><?php echo $tableval;?></option><?php } ?></select></div>';
 	    html += '<div class="col-lg-2"><select name="option_type[]" class="form-control form-select js-example-basic-single" aria-label="Option Type"> <?php foreach($option_type as $optkey=>$optype) {  ?><option value="<?php echo $optkey; ?>" <?php echo $optkey ==$ttj['transaction_table']?"selected":""; ?>><?php echo $optype;?></option><?php } ?></select></div>';
 
-	    html += '<div class="col-lg-3"><select name="application_message_code[]" class="form-control form-select js-example-basic-single" aria-label="Application Message Code"><option value="">Select Any One </option><?php foreach($application_messages as $amessage) {  ?><option <?php if($amessage['message_number']=='9097'){ echo "selected"; } ?>  value="<?php echo $amessage['message_number']; ?>" ><?php echo preg_replace("/\s+/", " ", $amessage['message_number']." - ".$amessage['message_description']);?></option><?php } ?></select></div>';
+	    html += '<div class="col-lg-3"><select name="application_message_code[]" class="form-control form-select js-example-basic-single" aria-label="Application Message Code"><option value="">Select Any One </option><?php foreach($application_messages as $amessage) {  ?><option <?php if($amessage['message_number']=='9097'){ echo "selected";
+	    } ?>  value="<?php echo $amessage['message_number']; ?>" ><?php echo preg_replace("/\s+/", " ", $amessage['message_number']." - ".$amessage['message_description']);?></option><?php } ?></select></div>';
 
 	    html += '<div class="col-lg-3"><textarea type="text" class="form-control" name="extra_message[]" id="extra_message_'+maxsar+'" aria-label="Extra Message"></textarea> </div>';
 
@@ -181,7 +182,8 @@ echo "<pre>"; print_r($result);echo "</pre>";
 			    		<i role="button" tabindex="0" aria-label="Remove" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeRow('<?php echo $rowid; ?>')"></i>
 			    	</div>
 			    </div>
-			<?php $im++; } ?>
+			<?php $im++;
+			} ?>
 		</div>
 	    <div class="mt-3 mb-5">
 			<button type="button"  class="btn btn-success" onclick="addMoreApplicationEmptyTransactions()"><i class="ti-plus"></i>  <?= __('Add More Transaction') ?></button>

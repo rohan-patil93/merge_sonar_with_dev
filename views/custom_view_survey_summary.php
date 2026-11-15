@@ -155,15 +155,18 @@ $who_can_see_the_results = json_decode($survey_details['who_can_see_the_results'
 							<div class="d-flex overflow-auto mt-2">
 								<ul class="nav md-tabs infisuite_tab">
 									<li class="nav-item">
-										<a class="nav-link text-active-primary me-6 <?php if($display_id== 2){ echo "active"; } ?>"  href="index.php?option=COM_VIEW_SURVEY_SUMMARY&Rid=<?php echo $_GET['Rid']; ?>&CAT=<?php echo $_GET['CAT']; ?>&NI=<?php echo "2"; ?>">
+										<a class="nav-link text-active-primary me-6 <?php if($display_id== 2){ echo "active";
+										} ?>"  href="index.php?option=COM_VIEW_SURVEY_SUMMARY&Rid=<?php echo $_GET['Rid']; ?>&CAT=<?php echo $_GET['CAT']; ?>&NI=<?php echo "2"; ?>">
 											<?php echo $display_tag." Details"; ?></a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link text-active-primary me-6 <?php if($display_id== 1){ echo "active"; } ?>"  href="index.php?option=COM_VIEW_SURVEY_SUMMARY&Rid=<?php echo $_GET['Rid']; ?>&CAT=<?php echo $_GET['CAT']; ?>&NI=1">
+											<a class="nav-link text-active-primary me-6 <?php if($display_id== 1){ echo "active";
+											} ?>"  href="index.php?option=COM_VIEW_SURVEY_SUMMARY&Rid=<?php echo $_GET['Rid']; ?>&CAT=<?php echo $_GET['CAT']; ?>&NI=1">
 												<?php echo $display_tag." Responses"; ?></a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link text-active-primary me-6 <?php if($display_id== 3){ echo "active"; } ?>"  href="index.php?option=COM_VIEW_SURVEY_SUMMARY&Rid=<?php echo $_GET['Rid']; ?>&CAT=<?php echo $_GET['CAT']; ?>&NI=3">
+												<a class="nav-link text-active-primary me-6 <?php if($display_id== 3){ echo "active";
+												} ?>"  href="index.php?option=COM_VIEW_SURVEY_SUMMARY&Rid=<?php echo $_GET['Rid']; ?>&CAT=<?php echo $_GET['CAT']; ?>&NI=3">
 													<?php echo $display_tag." Report"; ?></a>
 												</li>
 

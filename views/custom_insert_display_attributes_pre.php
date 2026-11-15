@@ -336,7 +336,8 @@ function fileUplodingDisplay(){
 											</div>
 										</div>
 
-										<?php if(!isset($role['id'])){ $role['wizard']=1; } ?>
+										<?php if(!isset($role['id'])){ $role['wizard']=1;
+										} ?>
 						<?php /** rohan ?>
 						<div class="form-group  row">
 							<span class="col-xl-3 col-lg-3 col-form-label" ><?= __('Display As Tab?') ?></span>
@@ -490,7 +491,10 @@ function fileUplodingDisplay(){
 							</div>
 
 							<input type="hidden" name="add_exter[]" value="<?php echo $value['add_exter'] ?>">
-							<?php $len++; } else{ $add_cont = 1; } }
+							<?php $len++;
+							} else{ $add_cont = 1;
+							}
+							}
 							if($add_cont == 1){?>
 								<div id="display_content"></div>
 								<div > <div onclick="addContentRows()"  class="btn btn-success" type="button">+ Add More</div> </div>
@@ -549,7 +553,9 @@ function fileUplodingDisplay(){
 										<input class="form-control" type="text"   name="wizard_name[]" value="<?php echo $wdata; ?>" aria-label="Wizard Name">
 									</div>
 								</div>
-								<?php $z++; } }else{ ?>
+								<?php $z++;
+								}
+								}else{ ?>
 								<div class="form-group  row wizardcount">
 									<span class="col-xl-3 col-lg-3 col-form-label">Wizard 1 <span class="requried"></span></span>
 									<div class="col-lg-9 col-xl-6">

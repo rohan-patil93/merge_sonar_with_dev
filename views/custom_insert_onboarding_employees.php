@@ -714,7 +714,8 @@ function insertReleive(){
 			 				<select aria-label="<?= htmlspecialchars(__('Termination type'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" id="termination_type" name="termination_type">
 			 					<option value="0"><?php echo __('Select Any One'); ?></option>
 			 					<?php foreach($result['termination_type'] as $termination_types){ ?>
-			 						<option <?php if($data_termination['termination_type']==$termination_types['genc_detail_code']){ echo __('selected'); } ?> value="<?php echo $termination_types['genc_detail_code']; ?>"><?php echo $termination_types['genc_detail_name']; ?></option>
+			 						<option <?php if($data_termination['termination_type']==$termination_types['genc_detail_code']){ echo __('selected');
+			 						} ?> value="<?php echo $termination_types['genc_detail_code']; ?>"><?php echo $termination_types['genc_detail_name']; ?></option>
 			 					<?php } ?>
 			 				</select>
 			 			</div>
@@ -771,7 +772,9 @@ function insertReleive(){
 							</div>
 						</div>
 					</div>
-				<?php $mk++; } }else{  ?>
+				<?php $mk++;
+				}
+				}else{  ?>
 					<div class="card-px text-center py-20 mt-2">
 			            <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?php echo __('No Leaves'); ?> </p>
 			            <div class="text-center px-4">
@@ -939,7 +942,8 @@ function insertReleive(){
 					  		</form>
 					  	</div>
 				   	</div>
-				   	<?php } } ?>
+				   	<?php }
+				   	} ?>
 			   		<?php
 			            $fieldaccesright = $vafield['employee_buddies'];
 			            if($fieldaccesright['access'] !="NA"){
@@ -1320,14 +1324,22 @@ function insertReleive(){
 										<div class="row">
 											<div class="col-6">
 												<div class="s-cont d-inline-block">
-													<input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-success-sm" <?php if($team['on_off_site']==0){ echo __('checked'); } ?> onchange="changeonsite(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;<span style="font-size: 12px; <?php if($team['on_off_site']==1){ echo __('color: red'); } ?>" class="col-form-label onsite_lable<?php echo $team['id']; ?> d-inline-block fw-bold"><?php if($team['on_off_site']==1){ echo __('Off-Site'); }else{ echo __('On-Site'); } ?> </span>
+													<input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-success-sm" <?php if($team['on_off_site']==0){ echo __('checked');
+													} ?> onchange="changeonsite(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;<span style="font-size: 12px; <?php if($team['on_off_site']==1){ echo __('color: red');
+													} ?>" class="col-form-label onsite_lable<?php echo $team['id']; ?> d-inline-block fw-bold"><?php if($team['on_off_site']==1){ echo __('Off-Site');
+													}else{ echo __('On-Site');
+													} ?> </span>
 													<input type="hidden" id="onsite_<?php echo $team['id']; ?>" value="<?php echo $team['on_off_site']; ?>">
 												</div>
 											</div>
 											<div class="col-6 b-l-default">
 												<div class="s-cont d-inline-block">
-													<input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-primary-sm" <?php if($team['billable']=='0'){ echo __('checked'); } ?> onchange="changebillable(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;
-													<label style="font-size: 12px; <?php if($team['billable']=='1'){ echo __('color: red'); } ?>" class="col-form-label billable_lable<?php echo $team['id']; ?>" > <?php if($team['billable']=='1'){ echo __('Non Billable'); }else{ echo __('Billable'); } ?> </label>
+													<input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-primary-sm" <?php if($team['billable']=='0'){ echo __('checked');
+													} ?> onchange="changebillable(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;
+													<label style="font-size: 12px; <?php if($team['billable']=='1'){ echo __('color: red');
+													} ?>" class="col-form-label billable_lable<?php echo $team['id']; ?>" > <?php if($team['billable']=='1'){ echo __('Non Billable');
+													}else{ echo __('Billable');
+													} ?> </label>
 													<input type="hidden" id="billable_<?php echo $team['id']; ?>" value="<?php echo $team['billable']; ?>">
 												</div>
 											</div>

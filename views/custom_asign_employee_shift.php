@@ -74,7 +74,8 @@ $designations = json_decode($designations,1);
 										<select class="form-select js-example-basic-single" id="kt_datatable_search_department" name="department">
 											<option value=""><?= __("All") ?></option>
 											<?php foreach ($departments as $department) { ?>
-											<option  <?php if($_POST['department'] == $department['id']){ echo "selected"; } ?> value="<?php echo $department['id']; ?>"><?= htmlspecialchars(__($department['department_name'] ?? '')) ?></option>
+											<option  <?php if($_POST['department'] == $department['id']){ echo "selected";
+											} ?> value="<?php echo $department['id']; ?>"><?= htmlspecialchars(__($department['department_name'] ?? '')) ?></option>
 											<?php } ?>
 										</select>
 									</div>
@@ -85,7 +86,8 @@ $designations = json_decode($designations,1);
 										<select  class="form-select js-example-basic-single" id="kt_datatable_search_designation" name="designation">
 											<option value=""><?= __("All") ?></option>
 											<?php foreach ($designations as $designation) { ?>
-											<option <?php if($_POST['designation'] == $department['id']){ echo "selected"; } ?>  value="<?php echo $department['id']; ?>"><?= htmlspecialchars(__($designation['designation_name'] ?? '')) ?></option>
+											<option <?php if($_POST['designation'] == $department['id']){ echo "selected";
+											} ?>  value="<?php echo $department['id']; ?>"><?= htmlspecialchars(__($designation['designation_name'] ?? '')) ?></option>
 											<?php } ?>
 										</select>
 									</div>
@@ -97,7 +99,8 @@ $designations = json_decode($designations,1);
 										<select class="form-select js-example-basic-multiple" id="kt_select2_31" name="employee[]" multiple="multiple">
 											<option value=""><?= __("All") ?></option>
 											<?php foreach ($emp as $employee) { ?>
-											<option <?php if(in_array($employee['id'], (array)$_POST['employee'])){ echo "selected"; } ?>  value="<?php echo $employee['id']; ?>"><?php echo $employee['display_name']; ?></option>
+											<option <?php if(in_array($employee['id'], (array)$_POST['employee'])){ echo "selected";
+											} ?>  value="<?php echo $employee['id']; ?>"><?php echo $employee['display_name']; ?></option>
 											<?php } ?>
 										</select>
 									</div>

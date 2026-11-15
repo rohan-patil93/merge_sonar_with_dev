@@ -165,7 +165,8 @@ function deleteitem(cardid){
 
 
 	  </tr>
-	<?php  $i++; } ?>
+	<?php  $i++;
+	} ?>
 	 </tbody>
 
 </table>

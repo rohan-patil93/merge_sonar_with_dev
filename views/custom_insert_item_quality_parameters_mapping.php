@@ -105,7 +105,8 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
         }
     }
 
-    if(!empty($rid)){ $rid = "id:".($role['id'] ?? ''); }
+    if(!empty($rid)){ $rid = "id:".($role['id'] ?? '');
+    }
     $jsdata = json_decode($role['specifications'] ?? '{}', 1);
     $role_cat = $jsdata['group'] ?? array();
     if(isset($jsdata['parameters']) && is_array($jsdata['parameters'])){
@@ -204,7 +205,8 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                                     <div class="col-lg-7 mt-3">
                                         <div class="checkbox-fade fade-in-primary">
                                             <label class="form-label line-height24">
-                                                <input type="checkbox" <?php if(in_array($group['id'],(array)$role_cat)){ echo __('checked'); } ?> name="cat[<?php echo $group['id']; ?>]" id="cat_<?php echo $group['id']; ?>"
+                                                <input type="checkbox" <?php if(in_array($group['id'],(array)$role_cat)){ echo __('checked');
+                                                } ?> name="cat[<?php echo $group['id']; ?>]" id="cat_<?php echo $group['id']; ?>"
                                                 class="job-category-checkbox"
                                                 data-catid="<?php echo $group['id']; ?>"
                                                 aria-label="<?php echo htmlspecialchars($group['group_name'], ENT_QUOTES); ?>" />
@@ -217,13 +219,15 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                                     </div>
                                     <div class="col-lg-5"></div>
                                 </div>
-                                <div id="cate_<?php echo $group['id']; ?>" class="<?php if(!in_array($group['id'],(array)$role_cat)){ echo __('d-none'); } ?>">
+                                <div id="cate_<?php echo $group['id']; ?>" class="<?php if(!in_array($group['id'],(array)$role_cat)){ echo __('d-none');
+                                } ?>">
                                     <?php foreach ($qcparameters[$group['id']] as $par) { ?>
                                         <div class="col-lg-12 row ml-10 mt-2">
                                             <div class="col-lg-7">
                                                 <div class="checkbox-fade fade-in-primary mt-2 p-l-20">
                                                     <label class="form-label text-auto-hight line-height24">
-                                                        <input type="checkbox" <?php if(in_array($par['id'],(array)$role_des)){ echo __('checked'); } ?> name="desc[<?php echo $par['id']; ?>]" id="par_<?php echo $par['id']; ?>" aria-label="<?php echo htmlspecialchars($par['name'], ENT_QUOTES); ?>" />
+                                                        <input type="checkbox" <?php if(in_array($par['id'],(array)$role_des)){ echo __('checked');
+                                                        } ?> name="desc[<?php echo $par['id']; ?>]" id="par_<?php echo $par['id']; ?>" aria-label="<?php echo htmlspecialchars($par['name'], ENT_QUOTES); ?>" />
                                                         <span class="cr float-left">
                                                             <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                         </span>
@@ -241,9 +245,11 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                                                     <?php $mn=1; foreach((array)$selectdata as $selectkey => $selectvalue){
                                                         $id = "check_".$par['id']."_".$mn;
                                                     ?>
-                                                    <input aria-label="<?php echo htmlspecialchars($selectvalue, ENT_QUOTES); ?>" type="radio" <?php if($check==$selectkey){ echo __('checked'); } ?> name="descpass[<?php echo $par['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' />
+                                                    <input aria-label="<?php echo htmlspecialchars($selectvalue, ENT_QUOTES); ?>" type="radio" <?php if($check==$selectkey){ echo __('checked');
+                                                    } ?> name="descpass[<?php echo $par['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' />
                                                     <label for="<?php echo $id; ?>"><?php echo htmlspecialchars($selectvalue, ENT_QUOTES); ?></label>
-                                                    <?php $mn++; } ?>
+                                                    <?php $mn++;
+                                                    } ?>
                                                 </div>
                                                 <?php } ?>
                                                 <?php if($par['display_type']==3 || $par['display_type']==4){
@@ -254,9 +260,11 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                                                     <?php $mn=1; for($i=1;$i<=5;$i++){
                                                         $id = "check_".$par['id']."_".$mn;
                                                     ?>
-                                                    <input aria-label="Rating <?php echo $i; ?>" type="radio" <?php if($check==$i){ echo __('checked'); } ?> name="descpass[<?php echo $par['id']; ?>]" value='<?php echo $i; ?>' id='<?php echo $id; ?>' />
+                                                    <input aria-label="Rating <?php echo $i; ?>" type="radio" <?php if($check==$i){ echo __('checked');
+                                                    } ?> name="descpass[<?php echo $par['id']; ?>]" value='<?php echo $i; ?>' id='<?php echo $id; ?>' />
                                                     <label for="<?php echo $id; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo htmlspecialchars($selectdata[$i-1] ?? '', ENT_QUOTES); ?>"><?php echo $i; ?></label>
-                                                    <?php $mn++; } ?>
+                                                    <?php $mn++;
+                                                    } ?>
                                                 </div>
                                                 <?php } ?>
                                                 <?php if($par['display_type']==5){
@@ -267,9 +275,11 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                                                     <?php $mn=1; foreach($selectdata as $selectkey => $selectvalue){
                                                         $id = "check_".$par['id']."_".$mn;
                                                     ?>
-                                                    <input aria-label="<?php echo $selectvalue; ?>" type="radio" <?php if($check ==$selectkey){ echo __('checked'); } ?> name="descpass[<?php echo $par['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' />
+                                                    <input aria-label="<?php echo $selectvalue; ?>" type="radio" <?php if($check ==$selectkey){ echo __('checked');
+                                                    } ?> name="descpass[<?php echo $par['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' />
                                                     <label for="<?php echo $id; ?>"><?php echo $selectvalue; ?></label>
-                                                    <?php $mn++; } ?>
+                                                    <?php $mn++;
+                                                    } ?>
                                                 </div>
                                                 <div class="f-12 text-muted"> <?php echo __('With in range ?'); ?></div>
                                                 <?php } ?>
@@ -282,15 +292,18 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                                                         $id = "mand_".$par['id']."_".$mn;
                                                         $mcheck = (isset($jsdata['parameters'][$par['id']]['mand']) && $jsdata['parameters'][$par['id']]['mand']!="") ? $jsdata['parameters'][$par['id']]['mand'] : 1;
                                                         ?>
-                                                        <input aria-label="<?php echo $selectvalue; ?>" type="radio" <?php if($mcheck==$selectkey){ echo __('checked'); } ?> name="mand[<?php echo $par['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' />
+                                                        <input aria-label="<?php echo $selectvalue; ?>" type="radio" <?php if($mcheck==$selectkey){ echo __('checked');
+                                                        } ?> name="mand[<?php echo $par['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' />
                                                         <label for="<?php echo $id; ?>"><?php echo $selectvalue; ?></label>
-                                                    <?php $mn++; } ?>
+                                                    <?php $mn++;
+                                                    } ?>
                                                 </div>
                                             </div>
                                         </div>
                                     <?php } ?>
                                 </div>
-                            <?php } } ?>
+                            <?php }
+                            } ?>
                     <?php } ?>
                     <div class="card-footer mt-5 p-4">
                         <div class="row">

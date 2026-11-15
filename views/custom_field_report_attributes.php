@@ -182,7 +182,9 @@ $res_data = json_decode($res_data, 1);
 										</select>
 							</div>
 						</div>
-						<?php $i=$i+10; } }?>
+						<?php $i=$i+10;
+						}
+						}?>
 					</div>
 
 					<div class="form-group  row">

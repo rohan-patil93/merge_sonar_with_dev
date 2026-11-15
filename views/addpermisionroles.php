@@ -137,7 +137,8 @@ foreach($resutlvalue as $resultlist){
   </div>
 </div>
 </div>
-<?php $i++; }
+<?php $i++;
+}
 
 
 
@@ -281,7 +282,8 @@ foreach($resutlvalue as $resultlist){
         </label>
       </div>
     </div>
-    <?php $i++; } ?>
+    <?php $i++;
+    } ?>
   </div>
     <div class="pageswooow">
   <div class="form-group row">
@@ -409,7 +411,8 @@ foreach($resutlvalue22 as $resultlist){
   </div>
 </div>
 </div>
-<?php $i++; }  ?>
+<?php $i++;
+}  ?>
 
 </div>
     <div class="modal-footer">

@@ -33,7 +33,9 @@ foreach ($disarray as $diskey => $disvalue) {  // print_r($disvalue);
 	            <div class="card">
 	                <div class="card-header" id="headingTwo6">
 	                    <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo6<?php echo $diskey; ?>" aria-expanded="false" aria-controls="collapseTwo6">
-	                      <?php if($accord[$diskey] !=""){ echo htmlspecialchars(__($accord[$diskey])); } else{ echo __('Additional Information')."-".$lle;} ?>
+	                      <?php if($accord[$diskey] !=""){ echo htmlspecialchars(__($accord[$diskey]));
+	                      } else{ echo __('Additional Information')."-".$lle;
+	                      } ?>
 
 	                    </div>
 	                </div>
@@ -52,14 +54,16 @@ foreach($disvalue as  $fullvalue){
 	$sch = 0;
 	/*if($diskey == 'normal'){ $class = "form-group col-lg-".$fullvalue['width']; }*/
 	?>
-	<?php if($fullvalue['type'] == 'text' || $fullvalue['type'] == 'read_only' ){ $read_only=""; if($fullvalue['type'] == 'read_only'){ $read_only= "readonly"; }?>
+	<?php if($fullvalue['type'] == 'text' || $fullvalue['type'] == 'read_only' ){ $read_only=""; if($fullvalue['type'] == 'read_only'){ $read_only= "readonly";
+	}?>
 	<div class="<?php echo $class; ?>">
 		<span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></span>
 		<input class="form-control"  type="text" <?php echo $read_only; ?>  id="<?php echo $key; ?>"  name="<?php echo $key; ?>"  value="<?php echo $role[$key]; ?>">
 		<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please enter') ?> <?php echo __($value); ?> </div>
 	</div>
 	<?php } elseif($fullvalue['type'] == 'serial_no'){ $read_only= "readonly"; ?>
-<?php if( $role[$key] =="") { $role[$key] = dyanamicserialnumber($table_name); } ?>
+<?php if( $role[$key] =="") { $role[$key] = dyanamicserialnumber($table_name);
+} ?>
 	<div class="<?php echo $class; ?>">
 		<span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></span>
 		<div class="input-group input-icon-right">
@@ -68,7 +72,8 @@ foreach($disvalue as  $fullvalue){
 		</div>
 		<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please enter') ?> <?php echo __($value); ?> </div>
 	</div>
-<?php } elseif($fullvalue['type']=='select' || $fullvalue['type']=='disable_select' ) {  $read_only="";  $_SESSION['apply_js']['multiselest'] = 1; if($fullvalue['type'] == 'disable_select'){ $read_only= "disabled"; }?>
+<?php } elseif($fullvalue['type']=='select' || $fullvalue['type']=='disable_select' ) {  $read_only="";  $_SESSION['apply_js']['multiselest'] = 1; if($fullvalue['type'] == 'disable_select'){ $read_only= "disabled";
+}?>
 <?php
 $attribute_types_list = dyanamicSelectDataTablenameAllFileds($table_name,$key);
 if($attribute_types_list['refer_by_action']=='0'){
@@ -95,7 +100,9 @@ if($key == "hsn_and_sac_code_id"){
 	    <?php } ?>
 		<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?> </div>
 	</div>
-	<?php $select++; } elseif($fullvalue['type']=='auto_select' || $fullvalue['type']=='disable_select' ) {  $read_only=""; if($fullvalue['type'] == 'disable_select'){ $read_only= "disabled"; } ?>
+	<?php $select++;
+	} elseif($fullvalue['type']=='auto_select' || $fullvalue['type']=='disable_select' ) {  $read_only=""; if($fullvalue['type'] == 'disable_select'){ $read_only= "disabled";
+	} ?>
 <?php ///$selectdata = dyanamicselectdata($table_name,$key);
 
 $attribute_types_list = dyanamicSelectDataTablenameAllFileds($table_name,$key);
@@ -111,22 +118,26 @@ if($attribute_types_list['refer_by_action']=='0'){
         <option value="0"> <?= __('Select Any one') ?> <?php echo __($value); ?></option>
         <?php foreach ($selectdata as $selectkey => $selectvalue) {  if($selectkey == $role[$key] ){ ?>
 				<option  selected value="<?php echo $selectkey; ?>"><?= htmlspecialchars(__($selectvalue ?? '')) ?></option>
-		<?php  } } ?>
+		<?php  }
+		} ?>
     </select>
 	    <?php if($fullvalue['type']=='disable_select'){ ?>
 	        <input type="hidden" name="<?php echo $key?>" value=<?php echo $role[$key]; ?> />
 	    <?php } ?>
 		<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?> </div>
 	</div>
-	<?php $select++; }elseif($fullvalue['type']=='radio') {  ?>
+	<?php $select++;
+	}elseif($fullvalue['type']=='radio') {  ?>
 	<?php $selectdata = dyanamicselectdata($table_name,$key); ?>
 		<div class="<?php echo $class; ?>">
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
 			<div class="radio radio-outline  mt-1">
 			<?php foreach ($selectdata as $selectkey => $selectvalue) {
-				if($sch==0){ $role[$key] = $role[$key] !="" ? $role[$key] : $selectkey; } ?>
+				if($sch==0){ $role[$key] = $role[$key] !="" ? $role[$key] : $selectkey;
+				} ?>
 			<label class="radio radio-inline"> <input type="radio"  <?php if($selectkey == $role[$key]){ ?>checked <?php } ?> name="<?php echo $key; ?>" value='<?php echo $selectkey; ?>'>	<span></span><?= htmlspecialchars(__($selectvalue ?? '')) ?> </label>
-			<?php $sch++; } ?>
+			<?php $sch++;
+			} ?>
 			</div>
 			<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?> </div>
 		</div>
@@ -158,7 +169,8 @@ if($attribute_types_list['refer_by_action']=='0'){
 			}else{
 				break;
 			}
-		$k++; } //echo $one."##".$sen; exit;?>
+		$k++;
+		} //echo $one."##".$sen; exit;?>
 		<div class="<?php echo $class; ?>">
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
 			<div class="">
@@ -169,7 +181,9 @@ if($attribute_types_list['refer_by_action']=='0'){
 
 <?php } elseif($fullvalue['type']=='checkbox') { ?>
 		<?php $selectdata = dyanamicselectdata($table_name,$key);
-		if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_decode($role[$key],1); }
+		if(is_array($role[$key])){ $mulcheck = $role[$key];
+		}else{  $mulcheck = json_decode($role[$key],1);
+		}
 		?>
 		<div class="<?php echo $class; ?>">
 
@@ -187,7 +201,9 @@ if($attribute_types_list['refer_by_action']=='0'){
 			<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?> </div>
 		</div>
 <?php } elseif($fullvalue['type']=='multi_select') {
-if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_decode($role[$key],1); } ?>
+if(is_array($role[$key])){ $mulcheck = $role[$key];
+}else{  $mulcheck = json_decode($role[$key],1);
+} ?>
 	<div class="<?php echo $class; ?>">
 		<?php $selectdata = dyanamicselectdata($table_name,$key); ?>
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
@@ -207,7 +223,8 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 							<option <?php if($selectkey==$mulcheck){ ?> selected <?php } ?> value="<?php echo $selectkey; ?>"><?= htmlspecialchars(__($selectvalue ?? '')) ?></option>
 					<?php  } ?>
 				</select>
-			<?php } }else{ //noraml show multiselect ?>
+			<?php }
+			}else{ //noraml show multiselect ?>
 				<select class="form-select js-example-basic-multiple" id="kt_select2_3<?php echo $mutiselet; ?>" name="<?php echo $key."[]"?>" multiple="multiple">
 					<?php foreach ($selectdata as $selectkey => $selectvalue) {  ?>
 							<option <?php if(in_array($selectkey, (array)$mulcheck)){ ?> selected <?php } ?> value="<?php echo $selectkey; ?>"><?= htmlspecialchars(__($selectvalue ?? '')) ?></option>
@@ -226,7 +243,8 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 				<?php $date_pic = fromDate($role[$key]); ?>
 <input class="form-control datepicker" type="text" value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>" >
 		</div>
-<?php $dateid++; }elseif($fullvalue['type']=='month_year') {
+<?php $dateid++;
+}elseif($fullvalue['type']=='month_year') {
 		$month = $role[$key]!="" ? $role[$key] : date('Y-m');?>
 		<div class="<?php echo $class; ?>" >
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
@@ -244,7 +262,8 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
   <div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?> </div>
 
 		</div>
-<?php $dateid++; } elseif($fullvalue['type']=='email'){ ?>
+<?php $dateid++;
+} elseif($fullvalue['type']=='email'){ ?>
 
 		<div  class="<?php echo $class; ?>" >
 				<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
@@ -299,7 +318,8 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
     	<input type="hidden" class="form-control m-l-10"  name="<?php echo $key; ?>" id="star_value_input<?php echo $rattig; ?>"  value="<?php echo $role[$key]!="" ? $role[$key] :0; ?>"/>
 </div>
 		</div>
-<?php $rattig++; } elseif($fullvalue['type']=='password'){ ?>
+<?php $rattig++;
+} elseif($fullvalue['type']=='password'){ ?>
 
 		<div class="<?php echo $class; ?>">
 			<label><?php echo __($value).$key; if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
@@ -354,7 +374,8 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 
                 </div>
             </div>
-<?php $img++; }elseif($fullvalue['type']=='file_upload'){  ?>
+<?php $img++;
+}elseif($fullvalue['type']=='file_upload'){  ?>
 
 						<div class="<?php echo $class; ?>">
    						  <label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
@@ -362,7 +383,8 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
                                             <input type="file" class="form-control" name="<?php echo $key; ?>" id="<?php echo $key; ?>" value="<?php echo $role[$key]; ?>">
                                         </div>
                                     </div>
-<?php $img++; } elseif($fullvalue['type']=='editor'){ ?>
+<?php $img++;
+} elseif($fullvalue['type']=='editor'){ ?>
 		<div class="<?php echo $class; ?>">
 		<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?>
 			</label>
@@ -390,7 +412,8 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 			</div>
 			<div style="display: none;color: red;" id="<?php echo $key.'_err'; ?>"> <?= __('Please Select') ?> <?php echo __($value); ?>
 	</div></div>
-<?php $slider++; }elseif($fullvalue['type']=='hidden'){
+<?php $slider++;
+}elseif($fullvalue['type']=='hidden'){
         //echo $key."//".$role[$key]; print_r($role);
 	    $hidden_key = $role[$key] !="" ? $role[$key] : $_SEESSION[$key];
 
@@ -412,7 +435,8 @@ if(is_array($role[$key])){ $mulcheck = $role[$key]; }else{  $mulcheck = json_dec
 			<?php } ?>
 		</div>
 	</div>
-	<?php } } ?>
+	<?php }
+	} ?>
 	<?php }
 if($list['file_upload']=='0' && $rid!=""){ // rohan changes old check $list['file_upload']==0
 	$ridss = explode(':',$rid);
@@ -428,4 +452,5 @@ if($diskey != 'normal'){?>
         	</div>
     	</div>
 
-	 <?php }elseif(isset($disarray['right']) || isset($disarray['left'])){?>  </div> <?php } $lle++; }?>
+	 <?php }elseif(isset($disarray['right']) || isset($disarray['left'])){?>  </div> <?php } $lle++;
+	 }?>

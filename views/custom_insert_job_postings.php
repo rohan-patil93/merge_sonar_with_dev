@@ -641,7 +641,8 @@ $joblevel_list = $results['job_grade'];
 <div class="col-lg-12" id="videoquestiontextfileds">
     <?php $ij=1;
     $questiona = json_decode($jobpostlist['question'],1);
-    if(count((array)$questiona) == '0'){  $questiona[] =  array(); }
+    if(count((array)$questiona) == '0'){  $questiona[] =  array();
+    }
         foreach($questiona as $question){ ?>
              <div class="row rows<?php echo $ij; ?> mt-2">
                 <input type="hidden" name="screening_question_seq[<?php echo $ij; ?>]" name="<?php echo $ij; ?>">
@@ -661,7 +662,8 @@ $joblevel_list = $results['job_grade'];
                 </div>
             </div>
         <?php
-            $ij++; }
+            $ij++;
+            }
         ?>
 </div>
 <div class="col-lg-3">

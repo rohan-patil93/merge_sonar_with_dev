@@ -226,7 +226,8 @@ if($item_daata['tracking_type'] == 2){
 							<div class="col-1" >
 								 <label class="kt-checkbox" for="cck_<?php echo $ser['id']; ?>" aria-label="<?php echo __('Select Serial Number'); ?> <?php echo $i; ?>">
 								 	<span class="sr-only visually-hidden"><?php echo __('Select Serial Number'); ?> <?php echo $i; ?></span>
-								 	<input class="mt-3" id="cck_<?php echo $ser['id']; ?>" type="checkbox" <?php if($ser['check_return']==1){ echo "checked"; } ?>  onclick="updategrnretunsbyid(<?php echo $ser['id'].",'item_serial_nos'"; ?>)" onkeydown="if(event.key==='Enter'){this.click();}" aria-label="<?php echo __('Select Serial Number'); ?> <?php echo $i; ?>"> <span></span>
+								 	<input class="mt-3" id="cck_<?php echo $ser['id']; ?>" type="checkbox" <?php if($ser['check_return']==1){ echo "checked";
+								 	} ?>  onclick="updategrnretunsbyid(<?php echo $ser['id'].",'item_serial_nos'"; ?>)" onkeydown="if(event.key==='Enter'){this.click();}" aria-label="<?php echo __('Select Serial Number'); ?> <?php echo $i; ?>"> <span></span>
 								 	<input type="hidden" name="" id="sl_<?php echo $ser['id']; ?>" value="<?php echo $ser['check_return']; ?>">
 								 </label>
 							</div>
@@ -239,7 +240,8 @@ if($item_daata['tracking_type'] == 2){
 							</div>
 
 						</div>
-					<?php $i++; } ?>
+					<?php $i++;
+					} ?>
 				</div>
 				<?php }
 				if($item_daata['tracking_type'] == 2){ ?>

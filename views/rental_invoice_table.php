@@ -34,7 +34,8 @@
         <?php if($tab2['tax_value'] != "" && $tab2['tax_value'] != "0"){ ?>
             <span class="d-block"><?= __('HSN'); ?> - <?php echo $hsn_and_sac_codes[$tab2['tax_id']]; ?></span>
             <span class="d-block"><?= __('Tax'); ?> - <?php echo $tab2['tax_value']; ?></span>
-      <?php }else{ echo " - "; } ?>
+      <?php }else{ echo " - ";
+      } ?>
     </td>
 
     <td class="p-1">
@@ -52,7 +53,10 @@
         <input type="hidden" name="tax[]" id="tax_<?php echo $i; ?>" value="<?php echo $tab2['tax_value']; ?>">
         <input type="hidden" name="taxid[]" id="taxid_<?php echo $i; ?>" value="<?php echo $tab2['tax_id']; ?>">
          <input type="hidden" name="tax_name[]" id="tax_name_<?php echo $i; ?>" value="<?php echo $tab2['tax_name']; ?>">
-         <?php if($tab2['total_amount'] > 0){ $data_content = '<div class="dropdown-item"><i class="flaticon-coins"></i>&nbsp;&nbsp; A :'.customeummarmonyformate($response_code[$tab2['purchase_account']]['a']).'</div> <div class="dropdown-item" ><i class="flaticon-coins"></i>&nbsp;&nbsp; B :'.customeummarmonyformate($response_code[$tab2['purchase_account']]['b']).'</div> <div class="dropdown-item" href="#"><i class="flaticon-coins"></i>&nbsp;&nbsp; C :'.customeummarmonyformate($response_code[$tab2['purchase_account']]['c']).'</div>'; if($tab2['total_amount'] > $response_code[$tab2['purchase_account']]['a']){ $sty = "style='color:#F00'";} }else{ $data_content = '<div class="dropdown-item">'.__('No Item Selected').'</div>'; }
+         <?php if($tab2['total_amount'] > 0){ $data_content = '<div class="dropdown-item"><i class="flaticon-coins"></i>&nbsp;&nbsp; A :'.customeummarmonyformate($response_code[$tab2['purchase_account']]['a']).'</div> <div class="dropdown-item" ><i class="flaticon-coins"></i>&nbsp;&nbsp; B :'.customeummarmonyformate($response_code[$tab2['purchase_account']]['b']).'</div> <div class="dropdown-item" href="#"><i class="flaticon-coins"></i>&nbsp;&nbsp; C :'.customeummarmonyformate($response_code[$tab2['purchase_account']]['c']).'</div>'; if($tab2['total_amount'] > $response_code[$tab2['purchase_account']]['a']){ $sty = "style='color:#F00'";
+         }
+         }else{ $data_content = '<div class="dropdown-item">'.__('No Item Selected').'</div>';
+         }
              ?>
         <div> <div style="float: left;width: 90%;">
 
@@ -73,5 +77,7 @@
 
 </tr>
 
-<?php $i++; } } ?>
+<?php $i++;
+}
+} ?>
     </table>

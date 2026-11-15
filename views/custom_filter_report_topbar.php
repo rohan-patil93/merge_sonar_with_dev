@@ -31,7 +31,8 @@ $apires = callAPI($url);
                           <li>
                             <div class="border-checkbox-section">
                               <div class="border-checkbox-group border-checkbox-group-primary">
-                                <input  <?php if(in_array($jobpost['id'],(array)$view_post)){ echo "checked"; } ?> class="border-checkbox" type="checkbox" name="job_post[]" value="<?php echo $jobpost['id']; ?>" id="<?php echo $jobpost['job_number']; ?>" >
+                                <input  <?php if(in_array($jobpost['id'],(array)$view_post)){ echo "checked";
+                                } ?> class="border-checkbox" type="checkbox" name="job_post[]" value="<?php echo $jobpost['id']; ?>" id="<?php echo $jobpost['job_number']; ?>" >
                                 <label class="form-label border-checkbox-label" for="<?php echo $jobpost['job_number']; ?>">
                                   <?php echo htmlspecialchars(__($jobpost['job_name'] ?? '')) . " (" . htmlspecialchars($jobpost['job_number'] ?? '') . ")"; ?>
                                 </label>

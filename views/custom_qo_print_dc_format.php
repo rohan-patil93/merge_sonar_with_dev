@@ -111,7 +111,8 @@
                             <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px; font-weight: normal;"><?php echo emptyCheck($ta['item_quantity']); ?></td>
                             <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px; font-weight: normal;"><?php echo emptyCheck($printuom[$ta['purchase_uom']]); ?></td>
                         </tr>
-                         <?php  $seq++; } ?>
+                         <?php  $seq++;
+                         } ?>
                     </table>
                 </th>
             </tr>

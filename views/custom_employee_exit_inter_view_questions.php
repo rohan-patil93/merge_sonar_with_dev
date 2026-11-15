@@ -115,7 +115,8 @@ function formsubmit(){
 
          </div>
        </div>
-     <?php } }else{ ?>
+     <?php }
+     }else{ ?>
 		<div class="f-24 text-danger text-center"><?php echo $_SESSION['error_message']['8009']; ?> </div>
 	<?php } ?>
    </div>

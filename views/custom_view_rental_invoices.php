@@ -388,7 +388,8 @@ function emptyCheck($valu){
 			            	</tr>
 			           <?php } ?>
 
-	        	<?php } }else{ ?>
+	        	<?php }
+	        	}else{ ?>
 	            <tr style="background: #eeeeee;">
 	                <th style="padding:5px;text-align: left;font-size: 12px;"><?= __('Particular'); ?></th>
 	                <th scope="col" style="padding:5px;text-align: left;font-size: 12px;"><?= __('Note'); ?></th>
@@ -408,7 +409,8 @@ function emptyCheck($valu){
 	                <td style="padding:5px;text-align: right;font-size: 12px;"><?php echo currencyFormat($ta['item_price'],$config); ?></td>
 	                <td style="padding:5px;text-align: right;font-size: 12px;"><?php echo currencyFormat($ta['item_amount'],$config); ?></td>
 	            </tr>
-	        	<?php } } ?>
+	        	<?php }
+	        	} ?>
 	        </table>
 
 

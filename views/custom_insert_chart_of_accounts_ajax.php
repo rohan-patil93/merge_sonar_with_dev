@@ -58,7 +58,9 @@ $account_groups = $result['account_groups'];
         if($chartofaccountssingle['lock_and_unlock_user_id'] == $_SESSION['userid']){
    ?>
       <span class="pcoded-badge label label-primary  cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="clickChartOfAccountLockAndUnlock('N','<?php echo $chartofaccountssingle['id']; ?>')"><i class="ti-unlock"></i> <?= __('Click To Unlock') ?></span>
-  <?php }else{ echo "<span class='text-danger'>Chart Of Account is locked. ".$_SESSION['error_message']['9002']."</span>"; } } ?>
+  <?php }else{ echo "<span class='text-danger'>Chart Of Account is locked. ".$_SESSION['error_message']['9002']."</span>";
+  }
+  } ?>
 </div>
 <?php } ?>
 <form id="financereportgrpfrom" class="<?php echo $evendisable; ?>"> <!-- style="position: sticky;top: 10px;" -->
@@ -90,7 +92,8 @@ $account_groups = $result['account_groups'];
             <option  value="0"><?= __('Parent Account') ?></option>
           <?php
           foreach($chart_of_accounts as $chartofaccount){ ?>
-           <option <?php if($chartofaccount['account_code']== $reportgroupid){ echo "selected"; } ?> value="<?php echo $chartofaccount['account_code']; ?>"><?php echo $chartofaccount['account_name'].'-'.$chartofaccount['account_code']; ?></option>
+           <option <?php if($chartofaccount['account_code']== $reportgroupid){ echo "selected";
+           } ?> value="<?php echo $chartofaccount['account_code']; ?>"><?php echo $chartofaccount['account_name'].'-'.$chartofaccount['account_code']; ?></option>
          <?php } ?>
        </select>
      </div>
@@ -101,7 +104,8 @@ $account_groups = $result['account_groups'];
           <?php
           foreach($currencies as $currencie){ ?>
 
-           <option <?php if($currencie['id']== $chartofaccountssingle['currency_id']){ echo "selected"; } ?> value="<?php echo $currencie['id']; ?>"><?php echo $currencie['currency_name']." - ".$currencie['currency_symbol']; ?></option>
+           <option <?php if($currencie['id']== $chartofaccountssingle['currency_id']){ echo "selected";
+           } ?> value="<?php echo $currencie['id']; ?>"><?php echo $currencie['currency_name']." - ".$currencie['currency_symbol']; ?></option>
          <?php } ?>
        </select>
      </div>
@@ -129,7 +133,8 @@ $account_groups = $result['account_groups'];
           <?php
           foreach($account_type as $accounttype){ ?>
 
-           <option <?php if($accounttype['id']==$chartofaccountssingle['account_type']){ echo "selected"; } ?> value="<?php echo $accounttype['id']; ?>"><?php echo htmlspecialchars(__($accounttype['account_type_name'] ?? '')); ?></option>
+           <option <?php if($accounttype['id']==$chartofaccountssingle['account_type']){ echo "selected";
+           } ?> value="<?php echo $accounttype['id']; ?>"><?php echo htmlspecialchars(__($accounttype['account_type_name'] ?? '')); ?></option>
          <?php } ?>
        </select>
      </div>
@@ -267,7 +272,9 @@ $account_groups = $result['account_groups'];
 
   <div class="col-lg-12 form-group">
     <input type="hidden" name="Rid" id="Rid" value="<?php echo $chartofaccountssingle['id']; ?>">
-    <button type="button" class="btn btn-primary mt-2" onclick="addFinaanceAccGrp()" >  <?php if($chartofaccountssingle['id'] !="" && $chartofaccountssingle['id'] !="0"){ echo __("Update Chart Of Accounts"); }else{ echo "<i class='fa fa-plus'></i> " . __("Chart Of Accounts"); } ?></button></div>
+    <button type="button" class="btn btn-primary mt-2" onclick="addFinaanceAccGrp()" >  <?php if($chartofaccountssingle['id'] !="" && $chartofaccountssingle['id'] !="0"){ echo __("Update Chart Of Accounts");
+    }else{ echo "<i class='fa fa-plus'></i> " . __("Chart Of Accounts");
+    } ?></button></div>
   </div>
 </div>
 </form>

@@ -457,7 +457,8 @@ elem.forEach(function(html) {
 										<select class="form-control js-example-basic-single" id="table_name" name= "table_name" onchange="Getfields(this.value)" aria-label="Table Name">
 											<option value=""><?= __("Select Table Name") ?></option>
 											<?php foreach ($showtables1 as $key => $data) {  ?>
-												<option   value = <?php echo $data ?> <?php if($table_name_field == $data){ echo "selected";  } ?>   > <?php echo ucwords(str_replace('_',' ',$data)); ?> </option>
+												<option   value = <?php echo $data ?> <?php if($table_name_field == $data){ echo "selected";
+												} ?>   > <?php echo ucwords(str_replace('_',' ',$data)); ?> </option>
 											<?php	} ?>
 										</select>
 									</div>
@@ -467,7 +468,8 @@ elem.forEach(function(html) {
 											<select class="form-control js-example-basic-single" id='field_name' name="field_name" aria-label="Field Name">
 												<option value="-1"><?= __("Select Filed") ?></option>
 												<?php foreach ($view['list'] as  $list) { ?>
-													<option value="<?php echo $list; ?>" <?php if($view['value_field'] == $list){ echo "selected";  } ?> ><?php echo $list; ?></option>
+													<option value="<?php echo $list; ?>" <?php if($view['value_field'] == $list){ echo "selected";
+													} ?> ><?php echo $list; ?></option>
 												<?php } ?>
 											</select>
 										</div>
@@ -478,7 +480,8 @@ elem.forEach(function(html) {
 											<select class="form-control js-example-basic-single" id="value" name="value" aria-label="Value">
 												<option value="-1"><?= __("Select Filed") ?></option>
 												<?php foreach ($view['list'] as  $list) { ?>
-													<option value="<?php echo $list; ?>" <?php if($view['display_field'] == $list){ echo "selected";  } ?> ><?php echo $list; ?></option>
+													<option value="<?php echo $list; ?>" <?php if($view['display_field'] == $list){ echo "selected";
+													} ?> ><?php echo $list; ?></option>
 												<?php } ?>
 
 											</select>
@@ -491,7 +494,8 @@ elem.forEach(function(html) {
 											<select class="form-control form-select js-example-basic-single" id="order_by" name="order_by" aria-label="Order By">
 												<option value="-1"><?= __("Select Filed") ?></option>
 												<?php foreach ($view['list'] as  $list) { ?>
-													<option value="<?php echo $list; ?>" <?php if($view_details['order_by'] == $list){ echo "selected";  } ?> ><?php echo $list; ?></option>
+													<option value="<?php echo $list; ?>" <?php if($view_details['order_by'] == $list){ echo "selected";
+													} ?> ><?php echo $list; ?></option>
 												<?php } ?>
 
 											</select>
@@ -502,7 +506,8 @@ elem.forEach(function(html) {
 										<div>
 											<select class="form-control js-example-basic-single" id="sort" name="sort" aria-label="Sort">
 												<option  value="ASC">ASC</option>
-												<option  <?php if($view_details['sort'] == 'DESC'){ echo "selected";  } ?>  value="DESC">DESC</option>
+												<option  <?php if($view_details['sort'] == 'DESC'){ echo "selected";
+												} ?>  value="DESC">DESC</option>
 											</select>
 										</div>
 									</div>
@@ -510,29 +515,35 @@ elem.forEach(function(html) {
 								<div class="row align-items-center mt-4" >
 									<div class="col-lg-2">
 										<label for="refer_action" class="d-block"><?= __("Reference for") ?> </label>
-										<input type="checkbox" class="js-switch-s" name="refer_action" id="refer_action" onchange="swictchrefer1()" value="0" <?php if($view_details['refer_action'] == '0'){ echo "checked";  } ?> aria-label="Refer Action">
+										<input type="checkbox" class="js-switch-s" name="refer_action" id="refer_action" onchange="swictchrefer1()" value="0" <?php if($view_details['refer_action'] == '0'){ echo "checked";
+										} ?> aria-label="Refer Action">
 									</div>
 									<div class="col-lg-3 w-full">
 									<?php $fieldlists = getListAttributes($_POST['table']); ?>
-										<div class="referfieldname col-lg-12" style="display: <?php if($view_details['refer_action'] == '1' || $view_details['refer_action'] == ''){ echo 'none'; } ?>">
+										<div class="referfieldname col-lg-12" style="display: <?php if($view_details['refer_action'] == '1' || $view_details['refer_action'] == ''){ echo 'none';
+										} ?>">
 										<select class="form-control js-example-basic-single" id="refer_field" name= "refer_field" aria-label="Refer Field">
 											<option value="-1"><?= __("Select Filed") ?></option>
 											<?php foreach ($fieldlists as  $fieldlist) { ?>
-												<option value="<?php echo $fieldlist['Field']; ?>" <?php if($view_details['refer_field'] == $fieldlist['Field']){ echo "selected";  } ?>><?php echo $fieldlist['Field']; ?></option>
+												<option value="<?php echo $fieldlist['Field']; ?>" <?php if($view_details['refer_field'] == $fieldlist['Field']){ echo "selected";
+												} ?>><?php echo $fieldlist['Field']; ?></option>
 											<?php } ?>
 										</select>
 									</div>
 									</div>
 									<div class="col-lg-2">
 										<label for="refer_by_action" class="d-block"><?= __("Referenced By") ?></label>
-										<input type="checkbox" class="js-switch-s" name="refer_by_action" id="refer_by_action" onchange="swictchrefer_by1()" value="0" <?php if($view_details['refer_by_action'] == '0'){ echo "checked";  } ?> aria-label="Refer By Action">
+										<input type="checkbox" class="js-switch-s" name="refer_by_action" id="refer_by_action" onchange="swictchrefer_by1()" value="0" <?php if($view_details['refer_by_action'] == '0'){ echo "checked";
+										} ?> aria-label="Refer By Action">
 									</div>
 									<div class="col-lg-3 w-full">
-										<div class="referbyfieldname" style="display: <?php if($view_details['refer_by_action'] == '1' || $view_details['refer_by_action'] == ''){ echo 'none'; } ?>">
+										<div class="referbyfieldname" style="display: <?php if($view_details['refer_by_action'] == '1' || $view_details['refer_by_action'] == ''){ echo 'none';
+										} ?>">
 										<select class="form-control js-example-basic-single" id="refer_by_field" name= "refer_by_field" aria-label="Refer By Field">
 											<option value="-1"><?= __("Select Filed") ?></option>
 											<?php foreach ($view['list'] as  $list) { ?>
-												<option value="<?php echo $list; ?>"  <?php if($view_details['refer_by_field'] == $list){ echo "selected";  } ?>><?php echo $list; ?></option>
+												<option value="<?php echo $list; ?>"  <?php if($view_details['refer_by_field'] == $list){ echo "selected";
+												} ?>><?php echo $list; ?></option>
 											<?php } ?>
 										</select>
 									</div>
@@ -567,14 +578,16 @@ elem.forEach(function(html) {
 														<td>
 															<select class="form-control fitemRow form-select js-example-basic-single" id="whrfield_<?php echo $count; ?>" name= "whrfield[]" aria-label="Whrfield">
 																<?php foreach ($view['list'] as  $list) { ?>
-																	<option value="<?php echo $list; ?>" <?php if($td['drop_field'] == $list){ echo "selected";  } ?> ><?php echo $list; ?></option>
+																	<option value="<?php echo $list; ?>" <?php if($td['drop_field'] == $list){ echo "selected";
+																	} ?> ><?php echo $list; ?></option>
 																<?php } ?>
 															</select>
 														</td>
 														<td>
 															<select class="form-control form-select js-example-basic-single" id="comparator_<?php echo $count; ?>" name= "comparator[]" aria-label="Comparator">
 																<?php foreach ($comparator_array as $dd) {  ?>
-																	<option  <?php if($td['drop_condition'] == $dd){ echo "selected";  } ?>  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php } ?>
+																	<option  <?php if($td['drop_condition'] == $dd){ echo "selected";
+																	} ?>  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php } ?>
 																</select>
 															</td>
 															<td>
@@ -583,7 +596,8 @@ elem.forEach(function(html) {
 															<td>
 																<select class="form-control form-select js-example-basic-single"  id="operand_<?php echo $count; ?>"  name= "operand[]" id="" aria-label="Operand">
 																	<option value="AND"> AND </option>
-																	<option <?php if($td['drop_condition'] == $dd){ echo "selected";  } ?>  value = "OR"> OR </option>
+																	<option <?php if($td['drop_condition'] == $dd){ echo "selected";
+																	} ?>  value = "OR"> OR </option>
 																</select>
 															</td>
 															<td>
@@ -591,7 +605,9 @@ elem.forEach(function(html) {
 																<button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(this.id)"><?= __("Delete") ?></button>
 															</td>
 														</tr>
-														<?php $count++;  } } ?>
+														<?php $count++;
+														}
+														} ?>
 													</table>
 												</div>
 												<div class="col-lg-5">
@@ -640,7 +656,9 @@ elem.forEach(function(html) {
 																<button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)"><?= __("Delete") ?></button>
 															</div>
 														</div>
-														<?php $i++; } } else{ ?>
+														<?php $i++;
+														}
+														} else{ ?>
 															<div class="row align-items-center sfitemRow" id="static_div_1" style="margin-top: 10px;">
 																<div class="col-lg-3">
 																	<input type="text" class="form-control"  id="static_value_1"  value=""  name="type" aria-label="Type">

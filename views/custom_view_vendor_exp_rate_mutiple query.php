@@ -45,7 +45,8 @@ $_SESSION['download_data'] = array();
           ?>
             <td><?php echo $sl; ?></td>
             <td></td>
-          <?php $sl++; }
+          <?php $sl++;
+          }
             $_SESSION['download_data'] = $cssdata;
             ?>
             </table>

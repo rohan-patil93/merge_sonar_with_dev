@@ -88,7 +88,8 @@ if ($item_id != "") {
                     <option value=""><?= __('Select Location') ?></option>
                     <?php if (count((array)$loc_data) > 0) {
                         foreach ((array)$loc_data as $loc) { ?>
-                            <option <?php if ($item_details['location_id'] == $loc['id']) { echo "selected"; } ?> value="<?php echo $loc['id']; ?>"><?php echo $loc['location_name']; ?></option>
+                            <option <?php if ($item_details['location_id'] == $loc['id']) { echo "selected";
+                            } ?> value="<?php echo $loc['id']; ?>"><?php echo $loc['location_name']; ?></option>
                     <?php }
                     } ?>
                 </select>
@@ -99,7 +100,8 @@ if ($item_id != "") {
                     <option value=""><?= __('Select Category') ?></option>
                     <?php if (count((array)$cat_data) > 0) {
                         foreach ((array)$cat_data as $cat) { ?>
-                            <option <?php if ($item_details['category_id'] == $cat['id']) { echo "selected"; } ?> value="<?php echo $cat['id']; ?>"><?php echo __($cat['name']); ?></option>
+                            <option <?php if ($item_details['category_id'] == $cat['id']) { echo "selected";
+                            } ?> value="<?php echo $cat['id']; ?>"><?php echo __($cat['name']); ?></option>
                     <?php }
                     } ?>
                 </select>

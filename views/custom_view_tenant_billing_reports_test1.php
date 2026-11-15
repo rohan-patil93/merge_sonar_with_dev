@@ -217,7 +217,8 @@ function printReport(divId) {
                   <td class="p-2 text-right "><?php echo customeummarmonyformateifine($row_total_payment); ?></td>
                   <td class="p-2 text-right "><?php echo customeummarmonyformateifine($openingbaldue); ?></td>
                 </tr>
-                <?php $i++; } ?>
+                <?php $i++;
+                } ?>
                 <tr>
                   <th colspan="2" class="text-right border-right-black"><?= __('Total'); ?></th>
                   <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($column_rent_total); ?></td>

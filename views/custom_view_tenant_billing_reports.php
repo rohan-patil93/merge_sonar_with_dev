@@ -229,7 +229,8 @@ function printReport(divId) {
                   <td class="p-2 text-right"><?php echo customeummarmonyformateifine($st_payment); ?></td>
                   <td class="p-2 text-right border-right-black"><?php echo customeummarmonyformateifine($st_due); ?></td>
                 </tr>
-                <?php $i++; } ?>
+                <?php $i++;
+                } ?>
                 <tr>
                   <th colspan="2" class="text-right border-right-black"><?= __('Total'); ?></th>
                   <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($t_rent_total_amount); ?></td>
@@ -312,7 +313,8 @@ function printReport(divId) {
   </div>
   <?php } ?>
   </div>
-<?php }else{ echo "<span>".__('No Records')."</span>";  } ?>
+<?php }else{ echo "<span>".__('No Records')."</span>";
+} ?>
 
 
        <?php } ?>

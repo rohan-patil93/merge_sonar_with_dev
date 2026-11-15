@@ -241,7 +241,9 @@ function addMoreAdditionalSettings(){
 						<div class="form-group  mt-2">
 							<select aria-label="<?= htmlspecialchars(__('Serial number position'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="serial_number_position"  id="serial_number_position" onmousedown="storeOld(this)" onchange="positionChange(this)" >
 								<?php foreach($staticpoint as $i){ ?>
-					                <option value="<?php echo $i; ?>" <?php if($asnres['serial_number_position'] ==$i){ echo "selected"; }elseif($asnres['serial_number_position'] == "" && $i=='1'){ echo "selected"; } ?>>
+					                <option value="<?php echo $i; ?>" <?php if($asnres['serial_number_position'] ==$i){ echo "selected";
+					                }elseif($asnres['serial_number_position'] == "" && $i=='1'){ echo "selected";
+					                } ?>>
 					                <?php echo $i."- Position"; ?>
 					                </option>
 					          <?php } ?>
@@ -256,7 +258,9 @@ function addMoreAdditionalSettings(){
 						<div class="form-group mt-2 financial_year_check_css <?php echo $asnres['financial_year_check'] =="N"?"event_disabled":""; ?>">
 							<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="financial_year_position"  id="financial_year_position" onchange="positionChange(this)">
 								<?php foreach($staticpoint as $i){ ?>
-					                <option value="<?php echo $i; ?>" <?php if($asnres['financial_year_position'] ==$i){ echo "selected"; }elseif($asnres['financial_year_position'] == "" &&  $i=='2'){ echo "selected"; } ?>>
+					                <option value="<?php echo $i; ?>" <?php if($asnres['financial_year_position'] ==$i){ echo "selected";
+					                }elseif($asnres['financial_year_position'] == "" &&  $i=='2'){ echo "selected";
+					                } ?>>
 					                <?php echo $i."- Position"; ?>
 					                </option>
 					          <?php } ?>
@@ -332,7 +336,9 @@ function addMoreAdditionalSettings(){
 								<div class="form-group col-lg-3 ">
 									<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="additional_settings[positions][]" id="positions_<?php echo $seq; ?>"  onchange="positionChange(this)">
 										<?php foreach($staticpoint as $i){ ?>
-							                <option value="<?php echo $i; ?>" <?php if($asettings['positions'] ==$i){ echo "selected"; }elseif($asettings['positions'] == "" &&  $i=='3'){ echo "selected"; } ?> >
+							                <option value="<?php echo $i; ?>" <?php if($asettings['positions'] ==$i){ echo "selected";
+							                }elseif($asettings['positions'] == "" &&  $i=='3'){ echo "selected";
+							                } ?> >
 							                <?php echo $i."- Position"; ?>
 							                </option>
 							          <?php } ?>
@@ -346,7 +352,8 @@ function addMoreAdditionalSettings(){
 						</div>
 
 
-					<?php $seq++; } ?>
+					<?php $seq++;
+					} ?>
 				</div>
 						<div class="row">
 							<div class="col-lg-3 ">

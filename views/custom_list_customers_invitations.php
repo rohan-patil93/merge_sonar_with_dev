@@ -200,7 +200,8 @@ function listUserType(){
 <?php } ?>
         </div>
         <?php $tven++;
-        if($tven ==2){ $tven=0; }
+        if($tven ==2){ $tven=0;
+        }
           }
         }
     }else{   ?>

@@ -199,7 +199,8 @@ function SynchCandidateFolder(){
 				    </tr>
 				<?php
 				    }
-				$im++; }
+				$im++;
+				}
 				?>
 				</table>
 				<?php

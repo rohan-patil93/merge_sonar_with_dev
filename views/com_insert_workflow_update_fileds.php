@@ -88,7 +88,9 @@ if($_POST['approval_type'] =='custom_process'){
 				</select>
 			</div>
 		</div>
-	<?php $mk++;  } }else{
+	<?php $mk++;
+	}
+	}else{
 
 for($i=0;$i <= 1;$i++){
 		?>
@@ -122,7 +124,9 @@ for($i=0;$i <= 1;$i++){
 			</div>
 		</div>
 
-				<?php $mk++; } } ?>
+				<?php $mk++;
+				}
+				} ?>
 	</div>
 </div>
 

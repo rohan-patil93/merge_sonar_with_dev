@@ -713,7 +713,8 @@ function cancelInvoices(transaction_table,transaction_id){
         <div class="flex gap-2 mt-4 <?php echo $disable; ?>">
 	        <?php if($transaction_data['id'] !=""){ ?>
 	        <button type="submit" name="submitrentalinvoice" class="btn btn-primary">Update</button>
-	        <?php }else{ echo "Record Not Fund"; } ?>
+	        <?php }else{ echo "Record Not Fund";
+	        } ?>
 	    </div>
 
 

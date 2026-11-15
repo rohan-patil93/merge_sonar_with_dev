@@ -662,7 +662,9 @@ if(catlink=='PTX'){
                                                         <label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="form-label ">
                                                             <input type="hidden" name="addsaldata" id="<?php echo $addsaldata."_detail"; ?>" value='<?php echo json_encode($value); ?>' >
                                                             <input type="hidden" id="<?php echo $addsaldata."check"; ?>" value="<?php echo in_array($addsaldata, (array)$checkdata) ? 1 : 0 ; ?>">
-                                                            <input type="checkbox"   <?php if(in_array($addsaldata, (array)$checkdata)){ echo __('checked '); } ?> <?php if(in_array($addsaldata, (array)$mandatroy)){ echo __('disabled'); } ?>   name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)">
+                                                            <input type="checkbox"   <?php if(in_array($addsaldata, (array)$checkdata)){ echo __('checked ');
+                                                            } ?> <?php if(in_array($addsaldata, (array)$mandatroy)){ echo __('disabled');
+                                                            } ?>   name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)">
                                                             <span class="cr">
                                                               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                           </span>
@@ -672,7 +674,8 @@ if(catlink=='PTX'){
                                                   </div></div>
                                               <?php } ?>
                                           </div>
-                                          <?php $j++; } ?>
+                                          <?php $j++;
+                                          } ?>
 
                                       </div>
                                   </div>
@@ -706,7 +709,8 @@ if(catlink=='PTX'){
                                                 <select class="form-select js-example-basic-single" id="kt_select2_41" name='employee_id'>
                                                     <option> <?php echo __('Select Any One'); ?></option>
                                                     <?php foreach ($employees as $employe) { ?>
-                                                       <option <?php if( $sal_emp_id == $employe['id'] ){ echo __('selected'); } ?> value="<?php echo $employe['id'] ?>"> <?php echo $employe['display_name'] ?></option>
+                                                       <option <?php if( $sal_emp_id == $employe['id'] ){ echo __('selected');
+                                                       } ?> value="<?php echo $employe['id'] ?>"> <?php echo $employe['display_name'] ?></option>
                                                    <?php } ?>
                                                </select>
                                            </div>
@@ -835,9 +839,11 @@ if(catlink=='PTX'){
                                                 </td>
                                             </tr>
 
-                                        <?php }  } ?>
+                                        <?php }
+                                        } ?>
                                     </table>
-                                    <?php $j++; } ?>
+                                    <?php $j++;
+                                    } ?>
                                     <input type="hidden" name="sp" id="SPS" value="0">
                                     <input type="hidden" name="" id="xxx" value="<?php echo implode(",", (array)$checkdata);?>">
                                     <input type="hidden" name="" id="catlink_PF" value="<?php echo $pfval; ?>">

@@ -50,7 +50,8 @@ $datas = json_decode($apires,1);
                 <td class="text-right"><?php echo customeummarmonyformate($returnvendorind[$vendor_id]['90']); ?></td>
                 <td class="text-right"><?php echo customeummarmonyformate($returnvendorind[$vendor_id]['120']); ?></td>
 							</tr>
-							<?php $i++; } ?>
+							<?php $i++;
+							} ?>
 					</tbody>
 				</table>
 			</div>

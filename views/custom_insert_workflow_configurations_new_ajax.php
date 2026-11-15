@@ -92,7 +92,8 @@ if($_POST['work_level_type'] =="custom_process"){
 						foreach($sublist as $keyk=>$aray){  ?>
 							<option value='<?php echo $keyk; ?>'   <?php echo $approvalprocess['sub_approve_type']==$keyk?"selected":""; ?>><?php echo $aray; ?></option>";
 
-						<?php	} } ?>
+						<?php	}
+						} ?>
 					</select>
 				</div>
 				<div class="col-lg-4 form-group w-full" id="sub_approve_field<?php echo $i; ?>" style="display:<?php echo $approvalprocess['approval_type']=='location_wise'?'':'none'; ?>">
@@ -103,7 +104,8 @@ if($_POST['work_level_type'] =="custom_process"){
 						if(count((array)$fieldlist) > 0){
 						foreach($fieldlist as $fieldkey=>$fieldlabel){  ?>
 							<option value='<?php echo $fieldkey; ?>' <?php echo $approvalprocess['sub_approve_field']==$fieldkey?"selected":""; ?>><?php echo $fieldlabel; ?></option>
-						<?php	} } ?>
+						<?php	}
+						} ?>
 					</select>
 				</div>
 			</div>
@@ -168,7 +170,8 @@ if($_POST['work_level_type'] =="custom_process"){
 										$locname = is_array($loc)?$loc['location_name']:$loc->location_name;
 									?>
 									<option value="<?php echo $locid; ?>" <?php echo $locId==$locid?"selected":""; ?>><?php echo $locname; ?></option>
-									<?php }} ?>
+									<?php }
+									} ?>
 								</select>
 							</div>
 							<div class="col-lg-6 form-group">
@@ -178,7 +181,8 @@ if($_POST['work_level_type'] =="custom_process"){
 								<i class="ti-trash text-danger f-18 remove_location_wise_row"></i>
 							</div>
 						</div>
-						<?php }} ?>
+						<?php }
+						} ?>
 					</div>
 					<button type="button" class="btn btn-primary btn-sm mt-2 add_location_wise_row" data-level="<?php echo $i; ?>"><i class="ti-plus"></i> Add More</button>
 				</div>

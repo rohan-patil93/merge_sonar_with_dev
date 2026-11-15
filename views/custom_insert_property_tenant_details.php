@@ -1189,7 +1189,8 @@ if($property_tenant_details['parent_id'] !="0" && $property_tenant_details['orig
 										<input type="number" class="form-control mt-2" name="following_mobile[]" value="<?php echo $fa['following_mobile']; ?>" placeholder="<?php echo __('Contact Number'); ?>">
 									</div>
 								</div>
-								<?php $i++; } ?>
+								<?php $i++;
+								} ?>
 							</div>
 							<div class="">
 								 <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" onclick="addMoreFollowing()"><i class="icofont icofont-plus icon-white m-r-10"></i><?php echo __('Add More'); ?></button>

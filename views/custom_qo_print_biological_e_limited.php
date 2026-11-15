@@ -183,7 +183,8 @@
                                             <th scope="col" align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;"><?php echo $adcharge['charge_name']; ?></th>
                                             <td align="right" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;"><?php echo currencyFormat(($adcharge['shipping_amount']+$adcharge['shipping_tax_amount']),$config); ?></td>
                                         </tr>
-                                        <?php } } ?>
+                                        <?php }
+                                        } ?>
 
                                         <tr>
                                             <th scope="col" align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">CGST & SGST / IGST</th>

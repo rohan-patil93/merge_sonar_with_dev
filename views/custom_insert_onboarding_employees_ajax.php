@@ -376,7 +376,9 @@ $bank_work_flow = "Y";
 		                    		?>
 		                    		<span class="form-label label float-end d-inline-block fw-bold" style="color: <?php echo "#".$stausresult['color']; ?>;    background:  <?php echo $stausresult['background_color']; ?>; border-color: <?php echo $stausresult['background_color']; ?>;" ><?php echo $emp_bank_status[$emp_bank['current_status']]['name']; ?></span>
 
-		                    	<?php } } }?>
+		                    	<?php }
+		                    	}
+		                    	}?>
 		                    </span>
 		                   	<p><?php echo $banks[$emp_bank['bank_id']]['bank_name']!=""?$banks[$emp_bank['bank_id']]['bank_name']:"-";?></p>
 
@@ -416,7 +418,8 @@ $bank_work_flow = "Y";
 	          	<span class="form-label d-block fw-bold"><?php echo __('Account No'); ?> </span>
 	          	<p> <?php  echo emptytextdashShow($data['bank_account_no']);  ?></p>
 	      	</div>
-	      <?php } } ?>
+	      <?php }
+	      } ?>
 	    </div>
 
 	    <?php }elseif($_POST['pagetype'] =="proof_details" || $_POST['showpagetype'] =="proof_details"){
@@ -445,7 +448,8 @@ $bank_work_flow = "Y";
                  	<td class="p-2">
                  	<?php if($attached_files['aadhar_attachment'] !=""){ ?>
                 	<a href="uploads/all/<?php echo $attached_files['aadhar_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['aadhar_attachment']; ?></a>
-                	<?php }else{ echo "-"; } ?>
+                	<?php }else{ echo "-";
+                	} ?>
                 	 </td>
 	            </tr>
 	            <?php }
@@ -457,7 +461,8 @@ $bank_work_flow = "Y";
 	                <td class="p-2">
 	                <?php if($attached_files['passport_attachment'] !=""){ ?>
                 	<a href="uploads/all/<?php echo $attached_files['passport_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['passport_attachment']; ?></a>
-                	<?php }else{ echo "-"; } ?>
+                	<?php }else{ echo "-";
+                	} ?>
                 	 </td>
 	            </tr>
 	            <?php }
@@ -469,7 +474,8 @@ $bank_work_flow = "Y";
 	                <td class="p-2">
 		                <?php if($attached_files['driving_licence_attachment'] !=""){ ?>
 	                	<a href="uploads/all/<?php echo $attached_files['driving_licence_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['driving_licence_attachment']; ?></a>
-	                	<?php }else{ echo "-"; } ?>
+	                	<?php }else{ echo "-";
+	                	} ?>
                 	</td>
 	             </tr>
 	             <?php }
@@ -481,7 +487,8 @@ $bank_work_flow = "Y";
 	                <td class="p-2">
 	                	<?php if($attached_files['pan_attachment'] !=""){ ?>
                 	<a href="uploads/all/<?php echo $attached_files['pan_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['pan_attachment']; ?></a>
-                	<?php }else{ echo "-"; } ?>
+                	<?php }else{ echo "-";
+                	} ?>
 	                 </td>
 	              </tr>
 	              <?php }
@@ -493,7 +500,8 @@ $bank_work_flow = "Y";
 	                 <td class="p-2">
 	                 <?php if($attached_files['pf_attachment'] !=""){ ?>
                 	<a href="uploads/all/<?php echo $attached_files['pf_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['pf_attachment']; ?></a>
-                	<?php }else{ echo "-"; } ?>
+                	<?php }else{ echo "-";
+                	} ?>
                 	 </td>
 	              </tr>
 	              <?php }
@@ -505,7 +513,8 @@ $bank_work_flow = "Y";
 	                 	<td class="p-2">
 	                 	<?php if($attached_files['pf_uan_attachment'] !=""){ ?>
                 	<a href="uploads/all/<?php echo $attached_files['pf_uan_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['pf_uan_attachment']; ?></a>
-                	<?php }else{ echo "-"; } ?>
+                	<?php }else{ echo "-";
+                	} ?>
                 	 </td>
 	              </tr>
             	<?php }
@@ -516,7 +525,8 @@ $bank_work_flow = "Y";
 	                 <td class="p-2">
 	                 <?php if($attached_files['gosi_attachment'] !=""){ ?>
                 	<a href="uploads/all/<?php echo $attached_files['gosi_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['pf_attachment']; ?></a>
-                	<?php }else{ echo "-"; } ?>
+                	<?php }else{ echo "-";
+                	} ?>
                 	 </td>
 	              </tr>
 	            <?php }?>
@@ -1117,7 +1127,8 @@ $bank_work_flow = "Y";
 						    <option <?php if($data['location_id'] == $locations['id']){ ?>selected <?php } ?> value="<?php echo $locations['id']; ?>" >
 						      <?php echo $locations['location_name']; ?>
 						    </option>
-						<?php }  } ?>
+						<?php }
+						} ?>
 					</select>
 				</div>
 		    </div>
@@ -1897,7 +1908,8 @@ $bank_work_flow = "Y";
 	            	</span>
 				</td>
 			</tr>
-		<?php $k++; }  ?>
+		<?php $k++;
+		}  ?>
 		</table>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -1976,7 +1988,8 @@ $bank_work_flow = "Y";
 	            	</span>
 				</td>
 			</tr>
-		<?php $mk++; } ?>
+		<?php $mk++;
+		} ?>
 	</table>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -2026,7 +2039,8 @@ $bank_work_flow = "Y";
 	            	</span>
 				</td>
 			</tr>
-		<?php $dk++; } ?>
+		<?php $dk++;
+		} ?>
 	</table>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -2080,7 +2094,8 @@ $bank_work_flow = "Y";
 	            	</span>
 				</td>
 			</tr>
-		<?php $ck++; } ?>
+		<?php $ck++;
+		} ?>
 	</table>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -2134,7 +2149,8 @@ $bank_work_flow = "Y";
 	            	</span>
 				</td>
 			</tr>
-		<?php $vk++; } ?>
+		<?php $vk++;
+		} ?>
 	</table>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

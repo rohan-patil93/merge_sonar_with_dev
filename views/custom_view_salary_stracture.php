@@ -352,7 +352,8 @@ foreach((array)$earnings as $ern){
                                         <button type="button" onclick="earningdata(<?php echo $ern['id'].",'er',".$e; ?>)" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
                                     </div>
                                 </div>
-                                 <?php $e++; }
+                                 <?php $e++;
+                                 }
                                 } ?>
                             </div>
                             <div class="col-lg-12">
@@ -414,7 +415,8 @@ foreach((array)$earnings as $ern){
                                         <div class="form-group mt-3">
 
                                             <div id="code_text" <?php if($show_text == 'N'){ ?> style="display: none;" <?php } ?>>
-                                                <input class="form-control" id="dd_name_<?php echo $e; ?>" <?php if(in_array($ern['code'],(array)$fixedcd)){ echo "readonly"; } ?> type="text" name="code"  value="<?php echo $ern['code']; ?>" aria-label="<?= htmlspecialchars(__('Code'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                <input class="form-control" id="dd_name_<?php echo $e; ?>" <?php if(in_array($ern['code'],(array)$fixedcd)){ echo "readonly";
+                                                } ?> type="text" name="code"  value="<?php echo $ern['code']; ?>" aria-label="<?= htmlspecialchars(__('Code'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div id="code_select" <?php if($show_select == 'N'){ ?> style="display: none;" <?php } ?> >
                                                 <select class="form-control js-example-basic-single" name="code_select" id="dd_code_<?php echo $e; ?>" onchange="othervalchange(this.value)" aria-label="<?= htmlspecialchars(__('Code Select'), ENT_QUOTES, 'UTF-8'); ?>">
@@ -432,7 +434,9 @@ foreach((array)$earnings as $ern){
                                         <button type="button" onclick="earningdata(<?php echo $ern['id'].",'dd',".$e; ?>)" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
                                     </div>
                                 </div>
-                                 <?php $e++; } } ?>
+                                 <?php $e++;
+                                 }
+                                 } ?>
                             </div>
                             <div class="col-lg-12">
                                 <button class="btn btn-primary" type="button" onclick ="addearningdetails('deduction')"><i class="fa fa-plus"></i> <?= __('Add More'); ?></button>

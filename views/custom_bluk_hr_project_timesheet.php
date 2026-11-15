@@ -1,6 +1,8 @@
 <?php
-	if(!isset($_GET['PAY_MONTH']) || $_GET['PAY_MONTH']==''){ $_GET['PAY_MONTH'] = date('m'); }
-	if(!isset($_GET['PAY_YEAR']) || $_GET['PAY_YEAR']==''){ $_GET['PAY_YEAR'] = date('Y');}
+	if(!isset($_GET['PAY_MONTH']) || $_GET['PAY_MONTH']==''){ $_GET['PAY_MONTH'] = date('m');
+	}
+	if(!isset($_GET['PAY_YEAR']) || $_GET['PAY_YEAR']==''){ $_GET['PAY_YEAR'] = date('Y');
+	}
 	$emp_id = isset($_SESSION['emp_id']) ? $_SESSION['emp_id'] : '';
 	$approval_url = API."?mode=toGetblukHrProjectTimesheet&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&emp_id=".$emp_id;
 	//echo $approval_url;
@@ -569,7 +571,8 @@
 													</div>
 												</td>
 											</tr>
-											<?php $k= $k-1; } ?>
+											<?php $k= $k-1;
+											} ?>
 										</tbody>
 									</table>
 								</div>
@@ -657,7 +660,8 @@
 													</div>
 												</td>
 											</tr>
-											<?php $k= $k-1; } ?>
+											<?php $k= $k-1;
+											} ?>
 										</tbody>
 									</table>
 								</div>

@@ -808,7 +808,9 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                           <td><?php echo fromDate($empe['payment_date']); ?></td>
                           <td class="text-right"><?php echo $empe['amount']; ?></td>
                         </tr>
-                    <?php $mq++; } }else{
+                    <?php $mq++;
+                    }
+                    }else{
                           echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Approval Pending')."</h4></td></tr>";
                         } ?>
                       </tbody>
@@ -846,7 +848,9 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                           <td><?php echo fromDate($empe['payment_date']); ?></td>
                           <td class="text-right"><?php echo $empe['amount']; ?></td>
                         </tr>
-                    <?php $mq++; } }else{
+                    <?php $mq++;
+                    }
+                    }else{
                           echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Approved')."</h4></td></tr>";
                         } ?>
                       </tbody>
@@ -882,7 +886,8 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
         $pending_amount= $vendorslist['total_amount']-$vendorslist['pending_amount'];
         $percengraf = 0;
         if($tamount !="" && $tamount !=0){
-        $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100)); }
+        $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100));
+        }
 
 
                               ?>
@@ -926,7 +931,8 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
 
                                 </a>
                             </div>
-                            <?php $tven++; } ?>
+                            <?php $tven++;
+                            } ?>
                         <?php /** }else{?>
                             <div class="card-px text-center py-20 m-t-30">
                               <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Customers</p>
@@ -956,7 +962,8 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                           $pending_amount= $vendorsrecentjoin['total_amount']-$vendorsrecentjoin['pending_amount'];
                           $percengraf = 0;
                           if($tamount !="" && $tamount !=0){
-                          $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100)); }
+                          $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100));
+                          }
 
 
                       ?>

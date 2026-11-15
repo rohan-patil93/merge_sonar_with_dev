@@ -104,7 +104,8 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
                         if (isset($attendance_map[$date])) {
                             $clock_in  = $attendance_map[$date]['clock_in'] ?? '-';
                             $clock_out = $attendance_map[$date]['clock_out'] ?? '-';
-                            if($clock_out=='00:00:00'){ $clock_out = '-'; }
+                            if($clock_out=='00:00:00'){ $clock_out = '-';
+                            }
                             $timesheet_id = $attendance_map[$date]['timesheet_id'];
                             $employee_id = $attendance_map[$date]['employee_id'];
                             $save_type = 'update';

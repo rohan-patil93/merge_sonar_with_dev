@@ -31,7 +31,8 @@ if($gettype =="QuestionsAnswers"){
                 <p class="text-primar  w-b-w-s"><?php echo $qa['answers']; ?></p>
             </td>
         </tr>
-    <?php $seq++; } ?>
+    <?php $seq++;
+    } ?>
     </table>
     <?php
 
@@ -53,7 +54,8 @@ if($gettype =="QuestionsAnswers"){
                     <i role="button" tabindex="0" aria-label="<?= __('Delete Question') ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" title="<?= __('Delete Question') ?>" onclick="deleteQuestion(<?php echo $ij; ?>)" class="fa fa-trash text-danger cursor-pointer"></i>
                 </div>
             </div>
-        <?php $seq++; } ?>
+        <?php $seq++;
+        } ?>
         </div>
     </form>
     <div class="row">

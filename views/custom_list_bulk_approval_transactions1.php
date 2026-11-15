@@ -216,7 +216,8 @@
 							<?php } ?>
 
 						</div>
-					<?php $i++; } ?>
+					<?php $i++;
+					} ?>
 				</ul>
 			</div>
 		</div>
@@ -324,9 +325,12 @@
 											</div>
 											<div class="kt-todo__datetime" data-toggle="view">
 												<?php $days = dateDiffInDays($list['request_date']);
-													if($days == 0){ echo "To day"; }
-													elseif($days < 7){ echo $days ." days ago"; }
-													else{ echo date('M d, Y',strtotime($list['request_date'])); }
+													if($days == 0){ echo "To day";
+													}
+													elseif($days < 7){ echo $days ." days ago";
+													}
+													else{ echo date('M d, Y',strtotime($list['request_date']));
+													}
 												 ?>
 
 											</div>
@@ -343,7 +347,8 @@
 												<?php } ?>
 											</div>
 										</div>
-									<?php $j++; } ?>
+									<?php $j++;
+									} ?>
 										<input type="hidden" name="row" id="row" value="<?php echo $j; ?>">
 
 									</div>

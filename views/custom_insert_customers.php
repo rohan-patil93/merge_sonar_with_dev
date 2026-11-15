@@ -1065,7 +1065,8 @@ function toggleRowLock(button) {
 										<tbody>
 											<tr>
 												<th scope="row"><?= __('Shipping  Adderss') ?></th>
-												<td class="address-basic"><?php if($customers['shipping_address']!=""){ echo trim($customers['shipping_address']).",".$customers['shipping_city']; } ?></td>
+												<td class="address-basic"><?php if($customers['shipping_address']!=""){ echo trim($customers['shipping_address']).",".$customers['shipping_city'];
+												} ?></td>
 											</tr>
 											<tr>
 												<th scope="row"><?= __('Country') ?></th>
@@ -1496,7 +1497,8 @@ function toggleRowLock(button) {
 									</div>
 								</div>
 							</div>
-						<?php $mkseq++; } ?>
+						<?php $mkseq++;
+						} ?>
 						</div>
 						<div class="">
 							<button class="btn btn-success  col-lg-3" onclick="addMoreGSTBillingDetails()" type="button"><?= __('+ Add More GST & Billing Details') ?></button>

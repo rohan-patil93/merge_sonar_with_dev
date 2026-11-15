@@ -286,7 +286,8 @@ function refrashpage(){
                                                             <td>
 <input type="checkbox" class="js-switch" <?php echo $subscriptuser['payment_type']=="Y"?"checked disabled":"";?> onchange="acceptPaymentSubscription('<?php echo $subscriptuser['id']; ?>','<?php echo $subscriptuser['added_license_users']; ?>','<?php echo $subscriptuser['price']; ?>')"   / aria-label="Input"></td>
                                                         </tr>
-                                                        <?php $i++; } ?>
+                                                        <?php $i++;
+                                                        } ?>
                                                     </tbody>
                                                 </table>
                                             <?php }else{ ?>

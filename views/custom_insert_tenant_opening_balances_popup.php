@@ -158,7 +158,8 @@ function calculateRent(rowid){
 				</div>
 			</div>
 		</div>
-		<?php $mk++; } ?>
+		<?php $mk++;
+		} ?>
 	</div>
 	<form id="tenantopeningbalanceform" method="post">
 		<table class="table table-hover m-b-0" style="font-size:13px;" id="tenantopenbalancetable">

@@ -135,7 +135,8 @@ if(isset($_REQUEST['month'])){
 						</p>
 					</td>
 				</tr>
-				<?php $i++; } ?>
+				<?php $i++;
+				} ?>
 			</tbody>
 		</table>
 	</div>

@@ -262,7 +262,8 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
                     </div> -->
                   </div>
               </div>
-            <?php } }else{ ?>
+            <?php }
+            }else{ ?>
               <div class="card-px text-center ">
                   <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Rental Invices</p>
                   <div class="text-center px-4">

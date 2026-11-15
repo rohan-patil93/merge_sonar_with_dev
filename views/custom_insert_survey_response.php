@@ -288,8 +288,10 @@ function submitsurvey(){
           $selectedoption = json_decode($markedanswer[$display_questions[$questionid]['queid']],1);
           $addcss = "";
           $dispnext = "";
-          if($questionid!=1) {  $addcss = "style='display:none'"; }
-          if($questionid==1) {  $dispnext = "style='display:none'"; }
+          if($questionid!=1) {  $addcss = "style='display:none'";
+          }
+          if($questionid==1) {  $dispnext = "style='display:none'";
+          }
 
           ?>
           <input type="hidden" name="value_id[]" value="<?php echo $questionid;?>">

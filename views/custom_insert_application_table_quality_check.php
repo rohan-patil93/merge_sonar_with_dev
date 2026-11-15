@@ -1378,7 +1378,8 @@ function viewApprovalAllUsers(id){
             <form class="kt-form kt-form--label-right" name="myForm" id="myForm" action="" method="post" enctype="multipart/form-data"  >
             <div class="kt-portlet">
                          <div class="card">
-                            <?php if($rid != "" && $copy == 1){ echo $rtable_name ==""?$workflowsteps['current_status_ribbon']:""; } ?>
+                            <?php if($rid != "" && $copy == 1){ echo $rtable_name ==""?$workflowsteps['current_status_ribbon']:"";
+                            } ?>
                         <div class="card-header table-card-header">
                           <h5><?php echo $title;  ?></h5>
                           <div class="card-header-right table-card-header m-r-50">
@@ -1572,7 +1573,8 @@ function viewApprovalAllUsers(id){
                                         </td>
                                     </tr>
                                 <?php }?>
-                            <?php } } ?>
+                            <?php }
+                            } ?>
                                         <tr>
                                             <td class="p-2">Total Tax</td>
                                             <td class="text-end p-2"><span id="dis_taxRateid"><?php echo customeummarmonyformateifine($tattax); ?></span> </td>
@@ -1625,7 +1627,9 @@ function viewApprovalAllUsers(id){
                                 <td  ><span ><?= __('Amount Due') ?></span></td>
                                 <td><input value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="<?= __('Amount Due') ?>" aria-label="Amount Due"></td>
                             </tr>
-                            <?php if($table1['currency_id'] != $_SESSION['config']['default_currency_id'] && $table1['currency_id'] != '0'){ $css = ""; }else{ $css = 'style="display: none;"'; }?>
+                            <?php if($table1['currency_id'] != $_SESSION['config']['default_currency_id'] && $table1['currency_id'] != '0'){ $css = "";
+                            }else{ $css = 'style="display: none;"';
+                            }?>
                             <tr <?php echo $css; ?>>
                                 <td colspan="2" >
                                     <table  id='exchange'  class=" table table-bordered " style="float: right;">

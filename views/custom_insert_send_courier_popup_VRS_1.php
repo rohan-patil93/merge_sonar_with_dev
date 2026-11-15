@@ -52,7 +52,8 @@ $row = $data['rowdata'];
 			<select  name="requested_by" id="requested_by" class="form-select js-example-basic-single">
 				<option value=""><?php echo __('Select Any One'); ?></option>
 				<?php foreach($emps as $emp){ ?>
-					<option <?php if($row['requested_by']== $emp['id']){ echo __('selected'); } ?>  value="<?php echo $emp['id']; ?>"><?php echo $emp['display_name']; ?></option>
+					<option <?php if($row['requested_by']== $emp['id']){ echo __('selected');
+					} ?>  value="<?php echo $emp['id']; ?>"><?php echo $emp['display_name']; ?></option>
 				<?php } ?>
 			</select>
 		</div>
@@ -61,7 +62,8 @@ $row = $data['rowdata'];
 				<select  name="deliver_type" id="deliver_type" class="form-select js-example-basic-single">
 					<option value=""><?php echo __('Select Any One'); ?></option>
 					<?php foreach($data['deliver_type'] as $deliver_type){ ?>
-						<option <?php if($row['deliver_type']== $deliver_type['genc_detail_code']){ echo __('selected'); } ?> value="<?php echo $deliver_type['genc_detail_code']; ?>"><?php echo $deliver_type['genc_detail_name']; ?></option>
+						<option <?php if($row['deliver_type']== $deliver_type['genc_detail_code']){ echo __('selected');
+						} ?> value="<?php echo $deliver_type['genc_detail_code']; ?>"><?php echo $deliver_type['genc_detail_name']; ?></option>
 					<?php } ?>
 				</select>
 		</div>
@@ -82,7 +84,8 @@ $row = $data['rowdata'];
 				<div class="radio radio-outline  mt-1">
 					<?php foreach ($data['status'] as $selectkey => $selectvalue) {   ?>
 						<label class="radio radio-inline"> <input type="radio"  <?php if($selectkey == $row['current_status']){ ?> checked <?php } ?> name="current_status" value='<?php echo $selectkey; ?>'>	<span></span><?php echo $selectvalue; ?> </label>
-						<?php $sch++; } ?>
+						<?php $sch++;
+						} ?>
 					</div>
 				</div>
 	<?php } ?>

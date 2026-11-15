@@ -412,7 +412,8 @@ function addMoreAttachment(rowid){
                                 	 <input type="hidden" name="old_attachment[<?php echo $i; ?>][]" class="form-control" value="<?php echo $attachment['attachment']; ?>">
                                 	 <input type="hidden" name="old_attachment_name[<?php echo $i; ?>][]" class="form-control" value="<?php echo $attachment['attachment_name']; ?>">
                               </div>
-													<?php $attchmentseq++; }  ?>
+													<?php $attchmentseq++;
+													}  ?>
 														<div class="row">
 															<div class="col-lg-6">
 																<span class="form-label d-inline-block fw-bold"><?php echo __('File Name'); ?></span>
@@ -456,7 +457,8 @@ function addMoreAttachment(rowid){
 							               	?>
 								            <div class="row" id="<?php echo $deleteid; ?>">
 								                <div class="form-group col-lg-8">
-								                    <input aria-label="<?= htmlspecialchars(__('Joint owner names'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="joint_owner_names[<?php echo $i; ?>][]" value="<?php echo $pjo['joint_owner_names']; ?>"<?php if($mck == 1){ echo __('readonly'); } ?> >
+								                    <input aria-label="<?= htmlspecialchars(__('Joint owner names'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="joint_owner_names[<?php echo $i; ?>][]" value="<?php echo $pjo['joint_owner_names']; ?>"<?php if($mck == 1){ echo __('readonly');
+								                    } ?> >
 								                </div>
 								                <div class="form-group col-lg-3">
 								                   <input aria-label="Owner percentage" type="text" class="form-control text-right" name="owner_percentage[<?php echo $i; ?>][]" value="<?php echo $pjo['owner_percentage']; ?>">
@@ -467,7 +469,8 @@ function addMoreAttachment(rowid){
 								                	<?php } ?>
 								                </div>
 								            </div>
-								        <?php $mck++; } ?>
+								        <?php $mck++;
+								        } ?>
 								        </div>
 							            <div class="">
 								            <button type="button" class="btn btn-success waves-effect waves-light float-left" onclick="addMoreOwners('<?php echo $i; ?>')"><i class="icofont icofont-plus icon-white  m-r-10"></i><?php echo __('Add More Owner'); ?></button>
@@ -520,10 +523,12 @@ function addMoreAttachment(rowid){
 							                    <div class="form-group col-lg-1 p-1">
                                     <?php if($vd['property_tenant_detail_id'] ==""){ ?>
 							                       <i role="button" tabindex="0" aria-label="<?php echo __('Remove'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRow('<?php echo $mk; ?>','<?php echo $i; ?>')"></i>
-                                   <?php }else{ echo "<i class='ti ti-alert text-danger' data-bs-toggle='tooltip' data-placement='bottom' title='' data-bs-original-title='Already Area Available In Rent'></i>"; } ?>
+                                   <?php }else{ echo "<i class='ti ti-alert text-danger' data-bs-toggle='tooltip' data-placement='bottom' title='' data-bs-original-title='Already Area Available In Rent'></i>";
+                                   } ?>
 							                    </div>
 							                </div>
-									            <?php  $mk++; } ?>
+									            <?php  $mk++;
+									            } ?>
 									        	</div>
 									            <div class="">
 										            <button type="button" class="btn btn-success waves-effect waves-light float-left" onclick="addMore('<?php echo $i; ?>')"><i class="icofont icofont-plus icon-white  m-r-10"></i><?php echo __('Add More Property Area'); ?></button>
@@ -534,7 +539,8 @@ function addMoreAttachment(rowid){
 								</div>
 							</div>
 						</div>
-							<?php  $i++; $attchmentseq++; } ?>
+							<?php  $i++; $attchmentseq++;
+							} ?>
 					</div>
 				</div>
 

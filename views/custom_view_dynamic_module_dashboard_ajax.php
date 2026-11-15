@@ -105,10 +105,14 @@ $status_progress = $result['status_progress'];
 $allpermision = $_SESSION['role_permission'][$optiondetails['application_table_name']];
 //echo "<pre>"; print_r($sendbacklog); echo "</pre>";
 $permission_listbtn = $insert_permissionbtn = $permission_importbtn = $edit_permissionbtn = $approval_permissionbtn = "";
-if($allpermision['permission_view'] == '1'){$permission_listbtn = "disabled"; }
-if($allpermision['permission_insert'] == '1'){$insert_permissionbtn = "disabled"; }
-if($allpermision['permission_import'] == '1'){$permission_importbtn = "disabled"; }
-if($allpermision['permission_update'] == '1'){$edit_permissionbtn = "disabled"; }
+if($allpermision['permission_view'] == '1'){$permission_listbtn = "disabled";
+}
+if($allpermision['permission_insert'] == '1'){$insert_permissionbtn = "disabled";
+}
+if($allpermision['permission_import'] == '1'){$permission_importbtn = "disabled";
+}
+if($allpermision['permission_update'] == '1'){$edit_permissionbtn = "disabled";
+}
 //if($allpermision['permission_approval'] == '1'){$approval_permissionbtn = "disabled"; }
 //echo "<pre>";print_r($result['generatesql']);echo "</pre>";
 $generatedocs = $result['generate'];
@@ -353,7 +357,8 @@ if($totaldoc != 0 && $totaldoc !=""){
                                         <p class="text-muted m-b-5 f-12"><?php echo $Notification_Message; ?>  <span class="float-right"><?php echo $Notification_DateTime; ?></span></p>
                                     </div>
                                 </div>
-                            <?php } }else{
+                            <?php }
+                            }else{
                                 echo "<h4><i class='fa fa-warning'></i> ".__('No Holidays Available')."</h4>";
                             } ?>
                         </div>
@@ -937,7 +942,8 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                         </div>
                         <div class="card-body">
                             <?php //echo "<pre>"; print_r($draftres); echo "</pre>";
-                             $mm = 1; if(count((array)$draftres) !=0){ foreach($draftres as $activeres1){ if($mm == 4){ break; } ?>
+                             $mm = 1; if(count((array)$draftres) !=0){ foreach($draftres as $activeres1){ if($mm == 4){ break;
+                             } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
                                     <!-- <div class="p-1 b-radius-25 text-center left-icon-width" style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;"> -->
@@ -974,7 +980,9 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                                     </a>
                                 </div>
                             </div>
-                        <?php $mm++; } }else{ ?>
+                        <?php $mm++;
+                        }
+                        }else{ ?>
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Draft Records'); ?></p>
                                     <div class="text-center px-4">
@@ -992,7 +1000,8 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_ACTIVE; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
-                            <?php $mm = 1; if(count((array)$activeres) !=0){ foreach($activeres as $activeres1){ if($mm == 4){ break; } ?>
+                            <?php $mm = 1; if(count((array)$activeres) !=0){ foreach($activeres as $activeres1){ if($mm == 4){ break;
+                            } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
                                     <!-- <div class="p-2 b-radius-5 text-center left-icon-width" style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;">
@@ -1028,7 +1037,9 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                                     </a>
                                 </div>
                             </div>
-                        <?php $mm++; } }else{ ?>
+                        <?php $mm++;
+                        }
+                        }else{ ?>
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Active Records'); ?></p>
                                     <div class="text-center px-4">
@@ -1046,7 +1057,8 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','inprocess')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
-                            <?php $mm = 1; if(count((array)$inprocessres) !=0){ foreach($inprocessres as $activeres1){ if($mm == 4){ break; } ?>
+                            <?php $mm = 1; if(count((array)$inprocessres) !=0){ foreach($inprocessres as $activeres1){ if($mm == 4){ break;
+                            } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
                                     <!-- <div class="p-2 b-radius-5 text-center left-icon-width"style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;">
@@ -1084,7 +1096,9 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                                     </a>
                                 </div>
                             </div>
-                        <?php $mm++; } }else{ ?>
+                        <?php $mm++;
+                        }
+                        }else{ ?>
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No In-Process Records'); ?></p>
                                     <div class="text-center px-4">
@@ -1102,7 +1116,8 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_APPROVED; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
-                            <?php $mm = 1; if(count((array)$approvedres) !=0){ foreach($approvedres as $activeres1){ if($mm == 4){ break; } ?>
+                            <?php $mm = 1; if(count((array)$approvedres) !=0){ foreach($approvedres as $activeres1){ if($mm == 4){ break;
+                            } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
                                     <!-- <div class="p-2 b-radius-5 text-center left-icon-width" style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;">
@@ -1140,7 +1155,9 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                                     </a>
                                 </div>
                             </div>
-                        <?php $mm++; } }else{ ?>
+                        <?php $mm++;
+                        }
+                        }else{ ?>
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Approved Records'); ?></p>
                                     <div class="text-center px-4">
@@ -1162,7 +1179,8 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$pendinglog) !=0){ foreach($pendinglog as $logdetails){
                                 //$activeres1 = $alltransaction[$logdetails['transaction_id']];
-                                if($mm == 4){ break; } ?>
+                                if($mm == 4){ break;
+                                } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
                                     <!-- <div class="p-2 b-radius-5 text-center left-icon-width" style="color:<?php echo $statuse[$logdetails['current_status']]['color']; ?>; background-color:<?php echo $statuse[$logdetails['current_status']]['background_color']; ?>;">
@@ -1183,7 +1201,9 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                                     </a>
                                 </div>
                             </div>
-                        <?php $mm++; } }else{ ?>
+                        <?php $mm++;
+                        }
+                        }else{ ?>
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Approval Pending'); ?></p>
                                     <div class="text-center px-4">
@@ -1204,7 +1224,8 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$aprovedlog) !=0){ foreach($aprovedlog as $logdetails){
                                 //$activeres1 = $alltransaction[$logdetails['transaction_id']];
-                                if($mm == 4){ break; } ?>
+                                if($mm == 4){ break;
+                                } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
                                     <!-- <div class="p-2 b-radius-5 text-center left-icon-width" style="color:<?php echo $statuse[$logdetails['current_status']]['color']; ?>; background-color:<?php echo $statuse[$logdetails['current_status']]['background_color']; ?>;">
@@ -1225,7 +1246,9 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                                     </a>
                                 </div>
                             </div>
-                        <?php $mm++; } }else{ ?>
+                        <?php $mm++;
+                        }
+                        }else{ ?>
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Approved'); ?></p>
                                     <div class="text-center px-4">
@@ -1245,7 +1268,8 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$sendbacklog) !=0){ foreach($sendbacklog as $logdetails){
                                 //$activeres1 = $alltransaction[$logdetails['transaction_id']];
-                                if($mm == 4){ break; } ?>
+                                if($mm == 4){ break;
+                                } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
                                     <!-- <div class="p-2 b-radius-5 text-center left-icon-width" style="color:<?php echo $statuse[$logdetails['current_status']]['color']; ?>; background-color:<?php echo $statuse[$logdetails['current_status']]['background_color']; ?>;">
@@ -1266,7 +1290,9 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                                     </a>
                                 </div>
                             </div>
-                        <?php $mm++; } }else{ ?>
+                        <?php $mm++;
+                        }
+                        }else{ ?>
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Send back'); ?></p>
                                     <div class="text-center px-4">
@@ -1286,7 +1312,8 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$rejectlog) !=0){ foreach($rejectlog as $logdetails){
                                 //$activeres1 = $alltransaction[$logdetails['transaction_id']];
-                                if($mm == 4){ break; } ?>
+                                if($mm == 4){ break;
+                                } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-auto">
                                     <!-- <div class="p-2 b-radius-5 text-center left-icon-width" style="color:<?php echo $statuse[$logdetails['current_status']]['color']; ?>; background-color:<?php echo $statuse[$logdetails['current_status']]['background_color']; ?>;">
@@ -1307,7 +1334,9 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                                     </a>
                                 </div>
                             </div>
-                        <?php $mm++; } }else{ ?>
+                        <?php $mm++;
+                        }
+                        }else{ ?>
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Rejected'); ?></p>
                                     <div class="text-center px-4">
