@@ -122,7 +122,7 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 			<div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
 				<div class="row">
 					<div class="col-sm-12">
-						<table class="table table-bordered table-hover table-checkable mt-10 dataTable no-footer dtr-inline" id="kt_datatable" role="grid" aria-describedby="kt_datatable_info" style="width: 1236px;">
+						<table class="table table-bordered table-hover table-checkable mt-10 dataTable no-footer dtr-inline" id="kt_datatable" aria-describedby="kt_datatable_info" style="width: 1236px;">
 							<thead>
 								<tr role="row" bgcolor="#f7f7f7">
 									<th scope="col">Employee ID</th>
