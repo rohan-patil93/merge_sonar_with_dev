@@ -100,19 +100,19 @@ if ($scheduleVendorLabel == '') {
                 <input type="hidden" name="contract_amc_location_id" value="<?php echo (int) ($repairOrder['contract_amc_location_id'] ?? 0); ?>">
                 <div class="row g-3 mb-3">
                     <div class="col-md-3">
-                        <label class="form-label"><?= __('ServiceNow Ref') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('ServiceNow Ref') ?></span>
                         <input type="text" class="form-control" name="servicenow_ref" value="<?php echo htmlspecialchars($repairOrder['servicenow_ref'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= __('Optional') ?>" <?php echo $isRepairEditable ? '' : 'readonly'; ?> aria-label="Optional">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label"><?= __('Default PO Number') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Default PO Number') ?></span>
                         <input type="text" class="form-control" id="amc_repair_default_po" name="default_po_number" value="<?php echo htmlspecialchars($repairOrder['default_po_number'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= __('Optional') ?>" <?php echo $isRepairEditable ? '' : 'readonly'; ?> aria-label="Optional">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label"><?= __('Repair Date') ?> <span class="text-danger">*</span></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Repair Date') ?> <span class="text-danger">*</span></span>
                         <input type="date" class="form-control" name="repair_date" required value="<?php echo !empty($repairOrder['repair_date']) ? date('Y-m-d', strtotime($repairOrder['repair_date'])) : date('Y-m-d'); ?>" <?php echo $isRepairEditable ? '' : 'readonly'; ?> aria-label="Repair Date">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label"><?= __('AMC Contract') ?> <span class="text-danger">*</span></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('AMC Contract') ?> <span class="text-danger">*</span></span>
                         <?php if ($isFromSchedule) { ?>
                         <input type="hidden" name="contract_id" value="<?php echo (int) ($repairOrder['contract_id'] ?? 0); ?>">
                         <input type="text" class="form-control" readonly value="<?php echo htmlspecialchars($repairOrder['contract_name'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" aria-label="Input">
@@ -131,12 +131,12 @@ if ($scheduleVendorLabel == '') {
                         <?php } ?>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label"><?= __('Vendor') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Vendor') ?></span>
                         <input type="hidden" name="vendor_id" id="amc_repair_vendor_id" value="<?php echo (int) ($repairOrder['vendor_id'] ?? 0); ?>">
                         <input type="text" class="form-control" id="amc_repair_vendor_name" readonly value="<?php echo htmlspecialchars($repairOrder['vendor_name'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" aria-label="Input">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label"><?= __('Location') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Location') ?></span>
                         <?php if ($isFromSchedule) { ?>
                         <input type="hidden" name="location_id" value="<?php echo (int) ($repairOrder['location_id'] ?? 0); ?>">
                         <input type="text" class="form-control" readonly value="<?php echo htmlspecialchars($scheduleLocationLabel, ENT_QUOTES, 'UTF-8'); ?>" aria-label="Input">
@@ -155,7 +155,7 @@ if ($scheduleVendorLabel == '') {
                         <?php } ?>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label"><?= __('Default Asset') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Default Asset') ?></span>
                         <?php if ($isFromSchedule) { ?>
                         <input type="hidden" name="default_asset_id" value="<?php echo (int) ($repairOrder['default_asset_id'] ?? 0); ?>">
                         <input type="text" class="form-control" readonly value="<?php echo htmlspecialchars($scheduleAssetLabel, ENT_QUOTES, 'UTF-8'); ?>" aria-label="Input">
@@ -180,7 +180,7 @@ if ($scheduleVendorLabel == '') {
                         <?php } ?>
                     </div>
                     <div class="col-md-12">
-                        <label class="form-label"><?= __('Remarks') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Remarks') ?></span>
                         <textarea class="form-control" name="remarks" rows="2" <?php echo $isRepairEditable ? '' : 'readonly'; ?> aria-label="Remarks"><?php echo htmlspecialchars($repairOrder['remarks'] ?? '', ENT_QUOTES, 'UTF-8'); ?></textarea>
                     </div>
                 </div>
