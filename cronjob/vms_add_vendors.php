@@ -61,4 +61,3 @@ if(count((array)$datas)>0){
   }
 }
 
-?>

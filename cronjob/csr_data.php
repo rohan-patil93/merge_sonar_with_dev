@@ -45,4 +45,3 @@ if(count((array)$datas)>0){
   echo "No data found";
 }
 
-?>
