@@ -218,7 +218,7 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 	<div class="row">
 		<div class="form-group col-lg-4">
 			<label class="col-lg-4"><?php echo __('Tenant'); ?></label>
-			<select  class="form-select js-example-basic-single" name="cust_id" id="cust_id" onchange="getTenantDetails('getcustid',this.value)">
+			<select aria-label="<?= htmlspecialchars(__('Cust id'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single" name="cust_id" id="cust_id" onchange="getTenantDetails('getcustid',this.value)">
 				<option value=""><?php echo __('Select Any One'); ?></option>
 				<?php foreach ($customers as $cust) { ?>					
 					<option  value="<?php echo $cust['id']; ?>" <?php echo ($_SESSION['userid']!=$cust['created_by'] AND $_SESSION['admin_type'] != 1)?"disabled":""; ?>><?php echo ucwords($cust['display_name']); ?></option>
@@ -227,7 +227,7 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 		</div>
 		<div class="form-group col-lg-4">
 			<label class="col-lg-4"><?php echo __('Property'); ?></label>
-			<select  class="form-select js-example-basic-single " name="property_tenant_detail_id" id="property_tenant_detail_id" onchange="getTenantDetails('getproperty_tenant_detail_id',this.value)">
+			<select aria-label="<?= htmlspecialchars(__('Property tenant detail id'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="property_tenant_detail_id" id="property_tenant_detail_id" onchange="getTenantDetails('getproperty_tenant_detail_id',this.value)">
 				<option value=""><?php echo __('Select Any One'); ?></option>
 				<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>					
 					<option  value="<?php echo $ass_statukey; ?>"><?php echo ucwords($ass_statu); ?></option>
@@ -236,7 +236,7 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 		</div>
 		<div class="form-group col-lg-4">
 			<label class="col-lg-4"><?php echo __('Bills'); ?></label>
-			<select  class="form-select js-example-basic-single " name="property_tenant_billings_id" id="property_tenant_billings_id" onchange="getTenantDetails('getproperty_tenant_billings_id',this.value)">
+			<select aria-label="<?= htmlspecialchars(__('Property tenant billings id'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="property_tenant_billings_id" id="property_tenant_billings_id" onchange="getTenantDetails('getproperty_tenant_billings_id',this.value)">
 				<option value=""><?php echo __('Select Any One'); ?></option>
 				<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>					
 					<option  value="<?php echo $ass_statukey; ?>"><?php echo ucwords($ass_statu); ?></option>
