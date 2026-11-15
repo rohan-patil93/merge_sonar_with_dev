@@ -239,7 +239,7 @@ function addMoreAdditionalSettings(){
 						<input type="text" class="form-control  mt-2" name="serial_number" id="serial_number"  value="<?php echo $asnres['serial_number']!=""?$asnres['serial_number']:1; ?>" onblur="serialNumberPreview()" readonly>
 
 						<div class="form-group  mt-2">
-							<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="serial_number_position"  id="serial_number_position" onmousedown="storeOld(this)" onchange="positionChange(this)" > 
+							<select aria-label="<?= htmlspecialchars(__('Serial number position'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="serial_number_position"  id="serial_number_position" onmousedown="storeOld(this)" onchange="positionChange(this)" > 
 								<?php foreach($staticpoint as $i){ ?>
 					                <option value="<?php echo $i; ?>" <?php if($asnres['serial_number_position'] ==$i){ echo "selected"; }elseif($asnres['serial_number_position'] == "" AND $i=='1'){ echo "selected"; } ?>>
 					                <?php echo $i."- Position"; ?>
