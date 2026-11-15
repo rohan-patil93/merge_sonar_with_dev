@@ -55,7 +55,7 @@ function getOwnerProperty(valu){
 				<div class="col-lg-3">
 		            <div class=" form-group">
 		                <label class="form-label"> <?= __('Owner Name'); ?></label>
-		                <select class="js-example-basic-single form-control" onchange="getOwnerProperty(this.value)" name="property_owner_id">
+		                <select aria-label="<?= htmlspecialchars(__('Property owner id'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single form-control" onchange="getOwnerProperty(this.value)" name="property_owner_id">
 		                	<option value=""><?= __('All Owner'); ?></option>
 		                	<?php foreach($all_property_owners as $apo){ ?>
 		                		<option value="<?php echo $apo['id'];?>" <?php echo $_POST['property_owner_id'] == $apo['id']?"selected":""; ?>><?php echo $apo['owner_name'];?></option>
@@ -66,7 +66,7 @@ function getOwnerProperty(valu){
 		        <div class="col-lg-3">
 		            <div class=" form-group">
 		                <label class="form-label"> <?= __('Property Name'); ?></label>
-		                <select class="js-example-basic-single form-control " id="property_owner_detail_id" name="property_owner_detail_id">
+		                <select aria-label="<?= htmlspecialchars(__('Property owner detail id'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single form-control " id="property_owner_detail_id" name="property_owner_detail_id">
 		                	<option value=""><?= __('All Property'); ?></option>
 		                	<?php foreach($all_property_owner_details as $apo){ ?>
 		                		<option value="<?php echo $apo['id'];?>" <?php echo $_POST['property_owner_detail_id'] == $apo['id']?"selected":""; ?>><?php echo $apo['property_name'];?></option>
@@ -77,13 +77,13 @@ function getOwnerProperty(valu){
 			    <div class="col-lg-2">    
 		            <div class="form-group w-full table-card-header">
 		                <label class="form-label "><?= __('Start Month'); ?><span class="text-danger">*</span></label>
-						<input type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
+						<input aria-label="<?= htmlspecialchars(__('Start month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
 		            </div>
 		        </div>
 		        <div class="col-lg-2">
 		            <div class=" form-group">
 		                <label class="form-label"> <?= __('End Month'); ?></label>
-		                <input type="month" class="form-control" name="end_month"  value="<?php echo $end_month; ?>" >
+		                <input aria-label="<?= htmlspecialchars(__('End month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" name="end_month"  value="<?php echo $end_month; ?>" >
 		            </div>
 		        </div>
 		        <div class="col-lg-1">
