@@ -243,7 +243,7 @@ class tallyClass extends userClass{
 			$dmtsql = "SELECT id, page_title, application_table_name, display_table, item_table, tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$transaction_table."' AND is_active = 0";
 			$dmtres=$callConfig->getRow($dmtsql);
 
-			if($transaction_table == "credit_notes" or $transaction_table == "debit_notes"){
+			if($transaction_table == "credit_notes" || $transaction_table == "debit_notes"){
 				$item_transaction_sql = "SELECT titm.id, titm.company_id, titm.transaction_id, titm.item_id, titm.account_code, titm.item_name, titm.item_name, titm.item_quantity, titm.item_price, titm.item_amount FROM ".$dmtres->item_table." titm WHERE titm.company_id='".$company_id."' AND titm.is_active = '0'";
 
 			}else{
@@ -291,7 +291,7 @@ class tallyClass extends userClass{
 			$jvres = $callConfig->getAllRows($jvsql);
 			$journal_vouchers = array();
 			foreach($jvres as $jv){
-				$jv->amount = ($jv->debit_amount !="0" and $jv->debit_amount !="")?$jv->debit_amount:$jv->credit_amount;
+				$jv->amount = ($jv->debit_amount !="0" && $jv->debit_amount !="")?$jv->debit_amount:$jv->credit_amount;
 				$jv->ledger_group_name = $account_groups[$chart_of_accounts[$jv->account_code]->accgro_group_id] !=""?$account_groups[$chart_of_accounts[$jv->account_code]->accgro_group_id]:"";
 				$journal_vouchers[$jv->ref_id][] = $jv;
 
@@ -305,11 +305,11 @@ class tallyClass extends userClass{
 				$trans->company_id = $companies[$trans->company_id];
 				$trans->place_of_supply = $cities[$trans->place_of_supply];
 				$trans->supplier_state_id = $states[$trans->supplier_state_id];
-				if($transaction_table != "credit_notes" and $transaction_table != "debit_notes"){
+				if($transaction_table != "credit_notes" && $transaction_table != "debit_notes"){
 					$trans->party_name = $customers[$trans->party_id];
 				}
 
-				if(isset($item_trans[$trans->id]) and ($transaction_table != "credit_notes" and $transaction_table != "debit_notes")){
+				if(isset($item_trans[$trans->id]) && ($transaction_table != "credit_notes" && $transaction_table != "debit_notes")){
 					$trans->item_entries = $item_trans[$trans->id];
 				}else{
 					$trans->item_entries = array();
@@ -606,7 +606,7 @@ class tallyClass extends userClass{
 		$jvires = $callConfig->getAllRows($jvisql);
 		$journal_vouchers = array();
 		foreach($jvires as $jvi){
-			$jvi->amount = ($jvi->debit_amount !="0" and $jvi->debit_amount !="")?$jvi->debit_amount:$jvi->credit_amount;
+			$jvi->amount = ($jvi->debit_amount !="0" && $jvi->debit_amount !="")?$jvi->debit_amount:$jvi->credit_amount;
 			$jv_items[$jvi->transaction_id][] = $jvi;
 		}
 
@@ -677,7 +677,7 @@ class tallyClass extends userClass{
   				if($api_code == "SENDLEDGERMASTER"){   //Start ladger Masters
   					$return = $this->getLedgerMaster($get,$post);
 					//return $return;
-				}elseif($api_code == "SENDSALESINVOICES" or $api_code =="SENDSALESORDERS" or $api_code == "SENDPURCHASEORDERS" or $api_code == "SENDPURCHASEINVOICES" or $api_code == "SENDGOODSRECEIPTNOTES" or $api_code == "SENDDEBITNOTES" or $api_code == "SENDCREDITNOTES" or $api_code == "SENDDELIVERYORDERS"){   //Start Sales Invoice
+				}elseif($api_code == "SENDSALESINVOICES" || $api_code =="SENDSALESORDERS" || $api_code == "SENDPURCHASEORDERS" || $api_code == "SENDPURCHASEINVOICES" || $api_code == "SENDGOODSRECEIPTNOTES" || $api_code == "SENDDEBITNOTES" || $api_code == "SENDCREDITNOTES" || $api_code == "SENDDELIVERYORDERS"){   //Start Sales Invoice
 					$return = $this->getTransactionInvoices($get,$post,$apimastersres->application_table);
 					//echo "<pre>"; print_r($return);
 				}elseif($api_code == "SENDPAYMENTS"){   //Start Sales Invoice
@@ -869,25 +869,25 @@ class tallyClass extends userClass{
 					$popisosichildtablerequirdary = array('transaction_table','transaction_id','transaction_no');
 					$popisosimaintablerequirdary = array('party_id','payment_type','amount','cost_center','location_id');
 					foreach($application_usersres as $fieldkey=>$userdetails){
-						if(in_array($fieldkey, (array)$popisosimaintablerequirdary) and $fieldval ==""){
+						if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
 							$valuenotavailablefieldary[$fieldkey] =$fieldval;
 						}
 					}
 					//Start VALIDATION PARTS
 					foreach($paymentarray as $fieldkey=>$fieldval){
-						if(in_array($fieldkey, (array)$popisosimaintablerequirdary) and $fieldval ==""){
+						if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
 							$valuenotavailablefieldary[$fieldkey] =$fieldval;
 						}
 					}
 					foreach($paymentallocationarrayre as $itemtble){
 						foreach ($itemtble as  $fieldkey=>$fieldval) {
-							if(in_array($fieldkey, (array)$popisosichildtablerequirdary) and $fieldval ==""){
+							if(in_array($fieldkey, (array)$popisosichildtablerequirdary) && $fieldval ==""){
 								$valuenotavailablefieldary[$fieldkey] =$fieldval;
 							}
 						}
 					}
 					//End VALIDATION PART
-			    if($checkstatus == "S" and count((array)$valuenotavailablefieldary) ==0){ // Save
+			    if($checkstatus == "S" && count((array)$valuenotavailablefieldary) ==0){ // Save
 			    	$transaction_no	= $this->toGetApplicationSerialNumber('receipts');
 			    	$paymentarray['$transaction_no'] =$transaction_no;
 			    	$res = $callConfig->insertRecord('receipts',$paymentarray);
@@ -1028,26 +1028,26 @@ class tallyClass extends userClass{
 				$popisosichildtablerequirdary = array('transaction_table','transaction_id','transaction_no');
 				$popisosimaintablerequirdary = array('party_id','payment_type','amount','cost_center','location_id');
 				foreach($application_usersres as $fieldkey=>$userdetails){
-					if(in_array($fieldkey, (array)$popisosimaintablerequirdary) and $fieldval ==""){
+					if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
 						$valuenotavailablefieldary[$fieldkey] =$fieldval;
 					}
 				}
 				//Start VALIDATION PARTS
 				foreach($paymentarray as $fieldkey=>$fieldval){
-					if(in_array($fieldkey, (array)$popisosimaintablerequirdary) and $fieldval ==""){
+					if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
 						$valuenotavailablefieldary[$fieldkey] =$fieldval;
 					}
 				}
 				foreach($paymentallocationarrayre as $itemtble){
 					foreach ($itemtble as  $fieldkey=>$fieldval) {
-						if(in_array($fieldkey, (array)$popisosichildtablerequirdary) and $fieldval ==""){
+						if(in_array($fieldkey, (array)$popisosichildtablerequirdary) && $fieldval ==""){
 							$valuenotavailablefieldary[$fieldkey] =$fieldval;
 						}
 					}
 				}
 
 				//End VALIDATION PART
-			    if($checkstatus == "S" and count((array)$valuenotavailablefieldary) ==0){ // Save
+			    if($checkstatus == "S" && count((array)$valuenotavailablefieldary) ==0){ // Save
 			    	$transaction_no	= $this->toGetApplicationSerialNumber('receipts');
 			    	$paymentarray['$transaction_no'] =$transaction_no;
 			    	$res = $callConfig->insertRecord('receipts',$paymentarray);
@@ -1173,31 +1173,31 @@ class tallyClass extends userClass{
 				// 	$valuenotavailablefieldary['total_amount'] =$maintotal_amount;
 				// }
 				foreach($maintransactionary as $fieldkey=>$fieldval){
-					if(in_array($fieldkey, (array)$popisosimaintablerequirdary) and $fieldval ==""){
+					if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
 						$valuenotavailablefieldary[$fieldkey] =$fieldval;
 					}
 				}
 				foreach($transactionitemsql as $itemtble){
 					foreach ($itemtble as  $fieldkey=>$fieldval) {
-						if(in_array($fieldkey, (array)$popisosichildtablerequirdary) and $fieldval ==""){
+						if(in_array($fieldkey, (array)$popisosichildtablerequirdary) && $fieldval ==""){
 							$valuenotavailablefieldary[$fieldkey] =$fieldval;
 						}
 					}
 				}
 				//End VALIDATION PART
 
-				if($checkstatus == "S" and count((array)$valuenotavailablefieldary) ==0){
+				if($checkstatus == "S" && count((array)$valuenotavailablefieldary) ==0){
 					$maintransactionaryres = $callConfig->insertRecord($dmtres->application_table_name,$maintransactionary);
 					$transaction_id = $maintransactionaryres['LASTID'];
 				}
 				$transactionitemres = array();
-				if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' and count((array)$valuenotavailablefieldary) ==0){
+				if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' && count((array)$valuenotavailablefieldary) ==0){
 					foreach($transactionitemsql as $transitemarry){
 						$transitemarry['transaction_id'] = $transaction_id;
 			        	$transactionitemres[] = $callConfig->insertRecord($dmtres->item_table,$transitemarry);
 			    	}
 	        	}
-	        	if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' and count((array)$valuenotavailablefieldary) ==0 and $transaction_id !=""){
+	        	if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' && count((array)$valuenotavailablefieldary) ==0 && $transaction_id !=""){
 
 	        		$get['transaction_table'] = $dmtres->application_table_name;
 					$this->updateTransactionItemsQty($get,$apihitre,"-");
@@ -1414,27 +1414,27 @@ class tallyClass extends userClass{
 					$valuenotavailablefieldary['total_amount'] =$maintotal_amount;
 				}
 				foreach($maintransactionary as $fieldkey=>$fieldval){
-					if(in_array($fieldkey, (array)$popisosimaintablerequirdary) and $fieldval ==""){
+					if(in_array($fieldkey, (array)$popisosimaintablerequirdary) && $fieldval ==""){
 						$valuenotavailablefieldary[$fieldkey] =$fieldval;
 					}
 				}
 				foreach($transactionitemsql as $itemtble){
 					foreach ($itemtble as  $fieldkey=>$fieldval) {
 						//echo $fieldkey."====".$fieldval."</br>";
-						if(in_array($fieldkey, (array)$popisosichildtablerequirdary) and $fieldval ==""){
+						if(in_array($fieldkey, (array)$popisosichildtablerequirdary) && $fieldval ==""){
 							$valuenotavailablefieldary[$fieldkey] =$fieldval;
 						}
 					}
 				}
 				//VALIDATION PART
 
-				if($checkstatus == "S" and count((array)$valuenotavailablefieldary) ==0){
+				if($checkstatus == "S" && count((array)$valuenotavailablefieldary) ==0){
 					$maintransactionaryres = $callConfig->insertRecord($dmtres->application_table_name,$maintransactionary);
 					$transaction_id = $maintransactionaryres['LASTID'];
 				}
 				$transactionitemres = array();
 				$transactionitemtaxres = array();
-				if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' and count((array)$valuenotavailablefieldary) ==0){
+				if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' && count((array)$valuenotavailablefieldary) ==0){
 					foreach($transactionitemsql as $transitemarry){
 						$transitemarry['transaction_id'] = $transaction_id;
 			        	$transactionitemres[] = $callConfig->insertRecord($dmtres->item_table,$transitemarry);
@@ -1445,7 +1445,7 @@ class tallyClass extends userClass{
 		        	}
 	        	}
 
-				if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' and count((array)$valuenotavailablefieldary) ==0){
+				if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' && count((array)$valuenotavailablefieldary) ==0){
 					$get['transaction_table'] = $dmtres->application_table_name;
 					$this->updateTransactionItemsQty($get,$apihitre,"-");
 

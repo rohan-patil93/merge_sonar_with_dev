@@ -494,7 +494,7 @@ class manufacturingUserClass extends userClass{
 				}
 				$postdata = array('company_id'=>$post['company_id'],'transaction_id'=>$rid,'item_id'=>$post['item_id'][$seq],'uom'=>$post['uom'][$seq],'request_qty'=>$post['request_qty'][$seq],'bom_qty'=>$post['bom_qty'][$seq],'description'=>$post['description'][$seq],'scrap'=>$post['scrap'][$seq],'party_id'=>$partyId,'warehouse_id'=>$warehouseId,'bom_manufacturing_operation_id'=>$post['bom_manufacturing_operation_id'][$seq],'rate'=>$post['rate'][$seq],'amount'=>$post['amount'][$seq],'is_active'=>0);
 
-				if($post['manufacturing_work_order_item_id'][$seq]!="" and $post['form_updatetion_type'] == "update"){
+				if($post['manufacturing_work_order_item_id'][$seq]!="" && $post['form_updatetion_type'] == "update"){
 					$postdata['updated_date'] = date('Y-m-d H:i:s');
 					$postdata['updated_by'] = $post['user_id'];
 					$res=$callConfig->updateRecord('manufacturing_work_order_items',$postdata,'id',$post['manufacturing_work_order_item_id'][$seq]);
@@ -513,7 +513,7 @@ class manufacturingUserClass extends userClass{
 					if($itmid != ""){
 						$postdata = array('company_id'=>$post['company_id'],'transaction_id'=>$rid,'byitem_item_id'=>$post['byitem_item_id'][$seq],'byitem_uom'=>$post['byitem_uom'][$seq],'byitem_quantity'=>$post['byitem_quantity'][$seq],'byitem_description'=>$post['byitem_description'][$seq],'is_active'=>0);
 
-						if($post['manufacturing_work_order_items_by_product_id'][$seq]!="" and $post['form_updatetion_type'] == "update"){
+						if($post['manufacturing_work_order_items_by_product_id'][$seq]!="" && $post['form_updatetion_type'] == "update"){
 							$postdata['updated_date'] = date('Y-m-d H:i:s');
 							$postdata['updated_by'] = $userId;
 							$res=$callConfig->updateRecord('manufacturing_work_order_items_by_product',$postdata,'id',$post['manufacturing_work_order_items_by_product_id'][$seq]);
@@ -532,7 +532,7 @@ class manufacturingUserClass extends userClass{
 			foreach($post['manufacturing_operation_id'] as $seq=>$itmid){
 				$postdata = array('company_id'=>$post['company_id'],'transaction_id'=>$rid,'manufacturing_operation_id'=>$post['manufacturing_operation_id'][$seq],'operation_time'=>$post['operation_time'][$seq],'operation_manpower'=>$post['operation_manpower'][$seq],'operation_note'=>$post['operation_note'][$seq],'manufacturing_operation_machine_id'=>$post['manufacturing_operation_machine_id'][$seq],'operation_cost_per_hours'=>$post['operation_cost_per_hours'][$seq],'operation_total'=>$post['operation_total'][$seq],'is_active'=>0);
 
-				if($post['manufacturing_work_order_operation_id'][$seq]!="" and $post['form_updatetion_type'] == "update"){
+				if($post['manufacturing_work_order_operation_id'][$seq]!="" && $post['form_updatetion_type'] == "update"){
 					$postdata['updated_date'] = date('Y-m-d H:i:s');
 					$postdata['updated_by'] = $userId;
 					$res=$callConfig->updateRecord('manufacturing_work_order_operations',$postdata,'id',$post['manufacturing_work_order_operation_id'][$seq]);
@@ -730,7 +730,7 @@ class manufacturingUserClass extends userClass{
 		foreach($manufacturing_bomslist as $bomid=>$boms){
 			$bommain = $boms['main'];
 			$manufacturing_work_order_item = $manufacturing_work_order_items[$bommain->bom_item_id][0];
-			$manufacturing_boms_qty = ($bommain->bom_quantity!="" and $bommain->bom_quantity!="0")?$bommain->bom_quantity:1;
+			$manufacturing_boms_qty = ($bommain->bom_quantity!="" && $bommain->bom_quantity!="0")?$bommain->bom_quantity:1;
 			$workorderitemqty = ($manufacturing_work_order_item->request_qty/$manufacturing_boms_qty);
 			if(intval($manufacturing_work_order_item->party_id) > 0){
 				$return['subcontract_work_orders'][] = $this->createSubcontractWorkOrderFromManufacturingWip($mwores, $manufacturing_work_order_item, $bomid, $boms, $get, $workorderitemqty);

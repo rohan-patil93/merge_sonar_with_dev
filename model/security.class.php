@@ -390,7 +390,7 @@ public function getVisitorsDataBasedOnDate($get)
         $return = array();
         $company_id = (int)($get['company_id'] ?? 0);
         $rid        = trim($get['rid'] ?? '');
-        if($get['transaction_id']!="" and $get['transaction_table']!=""){
+        if($get['transaction_id']!="" && $get['transaction_table']!=""){
             $userObj=new userClass();
             $transaction_id = $get['transaction_id'];
             $transaction_table = $get['transaction_table'];

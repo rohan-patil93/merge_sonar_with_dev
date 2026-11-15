@@ -2474,7 +2474,7 @@ class vMSUserClass extends userClass{
 		$returnarray = array();
 		$workcheck = "SELECT id,work_order_id FROM emp_work_order WHERE company_id= '".$data['company_id']."' AND work_order_id !=".$data['workorder_id']." AND is_active= '0' AND emp_id=".$emp_id;
 		$workcheckdata = $callConfig->getRow($workcheck);
-		if($workcheckdata->id !="" and $data['newcreate'] !="Y"){
+		if($workcheckdata->id !="" && $data['newcreate'] !="Y"){
 			$returnarray['other_work_order'] = 'Y';
 		}else{
 			if($data['newcreate']=="Y"){
@@ -2570,7 +2570,7 @@ class vMSUserClass extends userClass{
     			$dateTo = new DateTime($expire_date);
     			$datenames = [];
     			while($dateFrom <= $dateTo){
-    				if(in_array($dateFrom->format('D'),$working_days) and !in_array($dateFrom->format('Y-m-d'), $holidaysdatas)){
+    				if(in_array($dateFrom->format('D'),$working_days) && !in_array($dateFrom->format('Y-m-d'), $holidaysdatas)){
     					$workday++;
     				}
     				$dateFrom->modify('+1 days');
@@ -2630,7 +2630,7 @@ class vMSUserClass extends userClass{
 		if($config->esign_time_sheet_lock == 1){
 			$esignid=1;
 		}
-        if($esignid !="" and  $post['timesheetdata']['0']['work_order'] !=""){
+        if($esignid !="" &&  $post['timesheetdata']['0']['work_order'] !=""){
         	for($i=0;$i<count($post['timesheetdata']);$i++){
         		$rowid = $post['timesheetdata'][$i]['rowid'];
         		unset($post['timesheetdata'][$i]['rowid']);
@@ -2725,7 +2725,7 @@ class vMSUserClass extends userClass{
     		$maxleaveused = $mpcitemddetails->max_leave;
     		while($dateFrom <= $dateTo){
     			$calculationdays++;
-    			if(in_array($dateFrom->format('l'),(array)$working_days) and !in_array($dateFrom->format('Y-m-d'), (array)$holidaysdatas)){
+    			if(in_array($dateFrom->format('l'),(array)$working_days) && !in_array($dateFrom->format('Y-m-d'), (array)$holidaysdatas)){
     				$testarrau['working_dates'][] = $dateFrom->format('Y-m-d');
 					//$testarrau['days'][] = $dateFrom->format('l');
     				$workday++;
@@ -3845,10 +3845,10 @@ class vMSUserClass extends userClass{
 		global $callConfig;
 		//	print_r($get); exit;
 		$condition = "";
-		if($get['old_ref_no']!="" and ($get['vrc_id']=="" || $get['vrc_id']=="0")){
+		if($get['old_ref_no']!="" && ($get['vrc_id']=="" || $get['vrc_id']=="0")){
 			$condition .= " AND vrc.transaction_number = '".$get['old_ref_no']."'";
 		}
-		if($get['vrc_id']!="" and $get['vrc_id']!="0"){
+		if($get['vrc_id']!="" && $get['vrc_id']!="0"){
 			$condition .= " AND vrc.id = '".$get['vrc_id']."'";
 		}
 		if($get['item_id'] !=""){
@@ -4397,16 +4397,16 @@ class vMSUserClass extends userClass{
 		foreach($row as $emplist){
 			$totalactive++;
 			$type_billable[$emplist->billable] = $type_billable[$emplist->billable]+1;
-			if($emplist->joining_date <= $enddate and $emplist->joining_date >= $startdate ){
+			if($emplist->joining_date <= $enddate && $emplist->joining_date >= $startdate ){
 				$join++;
 			}
-			if($emplist->date_of_leaving <= $enddate and $emplist->date_of_leaving >= $startdate){
+			if($emplist->date_of_leaving <= $enddate && $emplist->date_of_leaving >= $startdate){
 				$resign++;
 			}
-			if($emplist->joining_date <= $prevenddate and $emplist->joining_date >= $prevstartdate ){
+			if($emplist->joining_date <= $prevenddate && $emplist->joining_date >= $prevstartdate ){
 				$prejoin++;
 			}
-			if($emplist->date_of_leaving <= $prevenddate and $emplist->date_of_leaving >= $prevstartdate){
+			if($emplist->date_of_leaving <= $prevenddate && $emplist->date_of_leaving >= $prevstartdate){
 				$preresign++;
 			}
 			if($emplist->vendor_id != "" && $emplist->vendor_id != "0" ){
@@ -6360,7 +6360,7 @@ class vMSUserClass extends userClass{
             		$maxleaveused = $mpcitemddetails->max_leave;
             		while($dateFrom <= $dateTo){
             			$calculationdays++;
-            			if(in_array($dateFrom->format('l'),(array)$working_days) and !in_array($dateFrom->format('Y-m-d'), (array)$holidaysdatas)){
+            			if(in_array($dateFrom->format('l'),(array)$working_days) && !in_array($dateFrom->format('Y-m-d'), (array)$holidaysdatas)){
             				$testarrau['working_dates'][] = $dateFrom->format('Y-m-d');
 							//$testarrau['days'][] = $dateFrom->format('l');
             				$workday++;
@@ -6560,16 +6560,16 @@ class vMSUserClass extends userClass{
 		foreach($row as $emplist){
 			$totalactive++;
 			$type_billable[$emplist->billable] = $type_billable[$emplist->billable]+1;
-			if($emplist->joining_date <= $enddate and $emplist->joining_date >= $startdate ){
+			if($emplist->joining_date <= $enddate && $emplist->joining_date >= $startdate ){
 				$join++;
 			}
-			if($emplist->date_of_leaving <= $enddate and $emplist->date_of_leaving >= $startdate){
+			if($emplist->date_of_leaving <= $enddate && $emplist->date_of_leaving >= $startdate){
 				$resign++;
 			}
-			if($emplist->joining_date <= $prevenddate and $emplist->joining_date >= $prevstartdate ){
+			if($emplist->joining_date <= $prevenddate && $emplist->joining_date >= $prevstartdate ){
 				$prejoin++;
 			}
-			if($emplist->date_of_leaving <= $prevenddate and $emplist->date_of_leaving >= $prevstartdate){
+			if($emplist->date_of_leaving <= $prevenddate && $emplist->date_of_leaving >= $prevstartdate){
 				$preresign++;
 			}
 			if($emplist->vendor_id != "" && $emplist->vendor_id != "0" ){
@@ -6743,14 +6743,14 @@ public function  vendorstaqAdminDashboard($get){
 	$resign = 0;
 	$join = 0;
 	foreach($return as $emplist){
-		if($emplist->pt_month == $checkmonthyear and $emplist->joining_date <= $edate and $emplist->date_of_leaving >= $edate){
+		if($emplist->pt_month == $checkmonthyear && $emplist->joining_date <= $edate && $emplist->date_of_leaving >= $edate){
 			$postarray[$i->format('Y-m')][] = $emplist;
 		}
-		if($emplist->pt_month == $checkmonthyear and $emplist->joining_date <= $edate and $emplist->joining_date >= $sdane){
+		if($emplist->pt_month == $checkmonthyear && $emplist->joining_date <= $edate && $emplist->joining_date >= $sdane){
 			$join++;
 		}
 
-		if($emplist->pt_month == $checkmonthyear and $emplist->date_of_leaving <= $edate and $emplist->date_of_leaving >= $sdane){
+		if($emplist->pt_month == $checkmonthyear && $emplist->date_of_leaving <= $edate && $emplist->date_of_leaving >= $sdane){
 			$resign++;
 		}
 

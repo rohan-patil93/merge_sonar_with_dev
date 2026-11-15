@@ -1087,7 +1087,7 @@ public function getUsersMapPointsData($get){
                 }
                 // $return[$tableName]['row'.'****'.$key] = $row;
 
-                if (isset($existingRows[$pkValue]) and $existingRows[$pkValue] != '') {
+                if (isset($existingRows[$pkValue]) && $existingRows[$pkValue] != '') {
                     // $return[$tableName]['row'.'_'.$key] = $row;
 
                     if (!empty($existingRows[$pkValue][$timestampColumn]) && !empty($timestampValue)) {

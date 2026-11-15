@@ -581,7 +581,7 @@ class recruitmentUserClass extends userClass{
 			$candidatessql = "SELECT jpc.id, jpc.job_posting_id, jpc.candidate_id FROM job_posting_candidates jpc WHERE jpc.company_id = '".$get['company_id']."' AND jpc.id = '".$job_posting_candidate_id."'";
 	        $candidatesres=$callConfig->getRow($candidatessql);
 	        $return['job_posting_candidates'] = $candidatesres;
-	        if($candidatesres->job_posting_id !="" and $candidatesres->candidate_id !=""){
+	        if($candidatesres->job_posting_id !="" && $candidatesres->candidate_id !=""){
 				$sql = "SELECT id, questions, answers FROM candidate_screening_questions_and_answers WHERE company_id = '".$get['company_id']."' AND candidate_id = '".$candidatesres->candidate_id."' AND job_posting_id = '".$candidatesres->job_posting_id."' AND is_active = 0";
 				$candidate_screening_questions_and_answersres=$callConfig->getAllRows($sql);
 			}

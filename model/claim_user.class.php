@@ -258,7 +258,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			 		$tripscondition = "AND id !=".$res->id;
 			 	}
 			}
-			if($res->trip_id !="" or $get['trip_id'] !=""){
+			if($res->trip_id !="" || $get['trip_id'] !=""){
 				$get['trip_id'] = $get['trip_id'] !=""?$get['trip_id']:$res->trip_id;
 				$citiesid =$cities= array();
 				$tripssql = "SELECT * FROM trips WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND id='".$get['trip_id']."'";
@@ -466,7 +466,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
     	global $callConfig;
     	$return = array();
     	$fieldnames=array('company_id'=>$post['company_id'],'user_id'=>$post['user_id'],'emp_id'=>$post['emp_id'],'trip_id'=>$post['trip_id'],'expense_code'=>$post['expense_code'],'amount'=>$post['parent_amount'],'tax_amount'=>$post['parent_tax_amount'],'total_amount'=>$post['parent_total_amount'],'pending_amount'=>$post['parent_total_amount'],'cost_center_id'=>$post['cost_center_id']);
-	 	if($post['Rid'] != '0' and $post['Rid'] != ''){
+	 	if($post['Rid'] != '0' && $post['Rid'] != ''){
 	 		$fieldnames['updated_date'] = date('Y-m-d h:i:s');
 	 		$fieldnames['updated_by'] = $post['user_id'];
 	 		$insert_data=$callConfig->updateRecord('emp_expenses',$fieldnames,'id',$post['Rid']);
@@ -611,14 +611,14 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
         global $callConfig;
         $return = array();
         $cities_arr = array();
-         if($get['journyid'] != '' and ($get['trip_type'] =="journy" or $get['trip_type'] =="hotel")){
+         if($get['journyid'] != '' && ($get['trip_type'] =="journy" || $get['trip_type'] =="hotel")){
 
         	$sql = "SELECT rpc.category_id, rpc.max_expense_limit, rpc.receipt_required_limit, rpc.description_mandatory  FROM reimbursement_policy_categories rpc, user_reimbursement_policies urp WHERE urp.company_id = '".$get['company_id']."' AND urp.company_id = rpc.company_id AND urp.is_active = 0 AND urp.is_active = rpc.is_active AND urp.user_id = '".$get['user_id']."' AND urp.start_date <= '".$this->dateconvertdbformat($get['transaction_date'])."' AND urp.end_date >= '".$this->dateconvertdbformat($get['transaction_date'])."' AND rpc.category_id = '".$get['journyid']."' AND rpc.policy_id = urp.policy_id";
 		 	$res = $callConfig->getRow($sql);
 		 	//$return['expense_categories_sql'] = $sql;
 		 	$return['res'] = $res;
 
-		}elseif($get['journyid'] != '' and $get['trip_type'] =="localtrip"){
+		}elseif($get['journyid'] != '' && $get['trip_type'] =="localtrip"){
 		 	$sql = "SELECT emp.id, emp.expense_type, emp.name, emp.amount as max_expense_limit, emp.start_date, emp.end_date FROM expenses_mileages_perdiem emp, user_reimbursement_policies urp WHERE urp.company_id = '".$get['company_id']."' AND urp.is_active = emp.is_active AND urp.company_id = emp.company_id AND urp.is_active = 0 AND emp.policy_id= urp.policy_id AND urp.user_id = '".$get['user_id']."' AND emp.name = '".$get['journyid']."'";
 		 	$res = $callConfig->getRow($sql);
 		 	//$return['sql'] = $sql;

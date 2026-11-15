@@ -21,7 +21,7 @@ class accountUserClass extends userClass{
     		$financereportgroupsress = $callConfig->getRow($financereportgroupssqll);
     		$return['finance_report_groups_edit']= $financereportgroupsress;
     		//print_r($financereportgroupsress);
-    		if($financereportgroupsress->chart_of_account_codes !="" and $financereportgroupsress->chart_of_account_codes!='null'){
+    		if($financereportgroupsress->chart_of_account_codes !="" && $financereportgroupsress->chart_of_account_codes!='null'){
     			$imlpod = implode("','",json_decode($financereportgroupsress->chart_of_account_codes,1));
     			$get['chart_of_account_codes'] = "'".$imlpod."'";
     		}
@@ -448,7 +448,7 @@ class accountUserClass extends userClass{
         $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
         $return['chart_of_accounts']= $chart_of_accountsres;
 
-        if(isset($get['rid']) and $get['rid'] !=""){
+        if(isset($get['rid']) && $get['rid'] !=""){
             $tax_authoritiessql = "SELECT * FROM `tax_authorities` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
             $tax_authoritiesres = $callConfig->getRow($tax_authoritiessql);
             $return['tax_authorities']= $tax_authoritiesres;
@@ -525,7 +525,7 @@ class accountUserClass extends userClass{
             if($res11['status'] == "sucess"){
 
                 foreach($post['split_type'][$parseq] as $keyid=>$v){
-                    if($post['tax_rate_split'][$parseq][$keyid] !="" and $post['accountcode_split'][$parseq][$keyid] !=""){
+                    if($post['tax_rate_split'][$parseq][$keyid] !="" && $post['accountcode_split'][$parseq][$keyid] !=""){
                         $insertary=array('company_id'=>$post['company_id'],'split_type'=>$v,'tax_authority_id'=>$rid,'tax_rate'=>$post['tax_rate_split'][$parseq][$keyid],'account_code'=>$post['accountcode_split'][$parseq][$keyid],'authority_rate_id'=>$tax_authorities_rates_id,'is_active'=>'0');
                         if($post['srid'][$parseq][$keyid] !=""){
                             $insertary['updated_date']=date('Y-m-d h:i:s');
@@ -561,7 +561,7 @@ class accountUserClass extends userClass{
         $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
         $return['chart_of_accounts']= $chart_of_accountsres;
 
-        if(isset($get['rid']) and $get['rid'] !=""){
+        if(isset($get['rid']) && $get['rid'] !=""){
             $fiscal_positionssql = "SELECT * FROM `fiscal_positions` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
             $fiscal_positionsres = $callConfig->getRow($fiscal_positionssql);
             $return['fiscal_positions']= $fiscal_positionsres;
@@ -597,7 +597,7 @@ class accountUserClass extends userClass{
 
         $callConfig->updateRecord('fiscal_positions_mappings',array('is_active'=>null),'fiscal_positions_id',$rid);
         foreach($post['fiscal_type'] as $keyid=>$v){
-            if($post['get_type'][$keyid] !="" and $post['apply_type'][$keyid] !=""){
+            if($post['get_type'][$keyid] !="" && $post['apply_type'][$keyid] !=""){
                 $insertary=array('company_id'=>$post['company_id'],'fiscal_type'=>$v,'fiscal_positions_id'=>$rid,'get_type'=>$post['get_type'][$keyid],'apply_type'=>$post['apply_type'][$keyid],'is_active'=>'0');
                 if($post['srid'][$keyid] !=""){
                     $insertary['updated_date']=date('Y-m-d h:i:s');
@@ -627,7 +627,7 @@ class accountUserClass extends userClass{
         $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
         $return['chart_of_accounts']= $chart_of_accountsres;
 
-        if(isset($get['rid']) and $get['rid'] !=""){
+        if(isset($get['rid']) && $get['rid'] !=""){
             $fiscal_positionssql = "SELECT * FROM `deferred_revenues` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
             $fiscal_positionsres = $callConfig->getRow($fiscal_positionssql);
             $return['deferred_revenues']= $fiscal_positionsres;
@@ -690,7 +690,7 @@ class accountUserClass extends userClass{
         $follow_up_levelsres = $callConfig->getAllRows($follow_up_levelssql);
         $return['follow_up_levels_all']= $follow_up_levelsres;
 
-        if(isset($get['rid']) and $get['rid'] !=""){
+        if(isset($get['rid']) && $get['rid'] !=""){
             $fiscal_positionssql = "SELECT * FROM `follow_up_levels` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
             $fiscal_positionsres = $callConfig->getRow($fiscal_positionssql);
             $return['follow_up_levels']= $fiscal_positionsres;
@@ -754,7 +754,7 @@ class accountUserClass extends userClass{
         $customersres = $callConfig->getAllRows($customerssql);
         $return['customers']= $customersres;
 
-        if(isset($get['rid']) and $get['rid'] !=""){
+        if(isset($get['rid']) && $get['rid'] !=""){
             $reconciliationssql = "SELECT * FROM `reconciliations` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
             $reconciliationsres = $callConfig->getRow($reconciliationssql);
             $return['reconciliations']= $reconciliationsres;
@@ -877,7 +877,7 @@ class accountUserClass extends userClass{
     public function getJournalVouchers($get){
         global $callConfig;
         $return= $partylist = array();
-        if(isset($get['rid']) and $get['rid'] !=""){
+        if(isset($get['rid']) && $get['rid'] !=""){
             $journal_voucherssql = "SELECT * FROM `journal_vouchers` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
             $journal_vouchersres = $callConfig->getRow($journal_voucherssql);
             $return['journal_vouchers']= $journal_vouchersres;
@@ -1033,9 +1033,9 @@ class accountUserClass extends userClass{
 
             $closingbalamt = $this->getAccountClosingBalance($post,$post['account_code'][$key]);
             $return['closingbalamt'][] = $closingbalamt;
-            if($post['debit_amount'][$key] !="" and $post['debit_amount'][$key] !="0"){
+            if($post['debit_amount'][$key] !="" && $post['debit_amount'][$key] !="0"){
                 $insertaryitmledger['balance_amount'] = $closingbalamt-$post['debit_amount'][$key];
-            }elseif($post['credit_amount'][$key] !="" and $post['credit_amount'][$key] !="0"){
+            }elseif($post['credit_amount'][$key] !="" && $post['credit_amount'][$key] !="0"){
                 $insertaryitmledger['balance_amount'] = $post['credit_amount'][$key]+$closingbalamt;
             }
             $res2 = $callConfig->insertRecord('general_ledger',$insertaryitmledger);
@@ -1197,7 +1197,7 @@ class accountUserClass extends userClass{
 //account_balances_details start
         $isDebit = in_array($accountType, array('1', '4'));
         $amountChange = $isDebit ? $debitAmount - $creditAmount : $creditAmount - $debitAmount;
-        if($location_id !="" and $department_id !="" and $cost_center_id !=""){
+        if($location_id !="" && $department_id !="" && $cost_center_id !=""){
             $sql = "SELECT * FROM account_balances_details WHERE company_id ='".$company_id."' AND account_code = '".$accountId."' AND finance_year = '".$financeyear."' AND balance_date = '".$entryDate."' AND location_id = '".$location_id."'  AND department_id = '".$department_id."' AND cost_center_id = '".$cost_center_id."' AND is_active = 0 ORDER BY balance_date DESC LIMIT 1";
             $existingEntry1 = $callConfig->getRow($sql);
             $return['existingEntrysql_details'] = $sql;
@@ -1253,7 +1253,7 @@ class accountUserClass extends userClass{
     public function getBankVouchers($get){
         global $callConfig;
         $return= $partylist = array();
-        if(isset($get['rid']) and $get['rid'] !=""){
+        if(isset($get['rid']) && $get['rid'] !=""){
             $journal_voucherssql = "SELECT * FROM `bank_vouchers` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
             $journal_vouchersres = $callConfig->getRow($journal_voucherssql);
             $return['journal_vouchers']= $journal_vouchersres;
@@ -1469,7 +1469,7 @@ class accountUserClass extends userClass{
     public function getCashVouchers($get){
         global $callConfig;
         $return= $partylist = array();
-        if(isset($get['rid']) and $get['rid'] !=""){
+        if(isset($get['rid']) && $get['rid'] !=""){
             $journal_voucherssql = "SELECT * FROM `cash_vouchers` WHERE company_id = ".$get['company_id']." AND id = '".$get['rid']."' AND is_active =0";
             $journal_vouchersres = $callConfig->getRow($journal_voucherssql);
             $return['journal_vouchers']= $journal_vouchersres;
@@ -1707,7 +1707,7 @@ class accountUserClass extends userClass{
         // if($get['fourth_account_code'] !=""){
         //     $gl_condition = " AND voucher_id IN(SELECT voucher_id FROM `general_ledger` WHERE company_id = ".$get['company_id']." AND is_active =0 AND account_code = '".$get['fourth_account_code']."')";
         // }
-        if($get['from_date'] !="" and $get['to_date'] !=""){
+        if($get['from_date'] !="" && $get['to_date'] !=""){
             $gl_condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= voucher_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= voucher_date";
         }
         if($get['GLT'] !=""){
@@ -1784,7 +1784,7 @@ class accountUserClass extends userClass{
                         $enddate = $endyear."-03-31";
                     }
                 }
-                if($res->post_fix !="" and $res->pre_fix !="" and $res->doc_no_length !="" and $res->serial_number_type !="" and  $res->voucher_type !=""){
+                if($res->post_fix !="" && $res->pre_fix !="" && $res->doc_no_length !="" && $res->serial_number_type !="" &&  $res->voucher_type !=""){
                     $insertary=array('company_id'=>$get['company_id'],'application_table_name'=>$table_name,'serial_number'=>'1','pre_fix'=>$res->pre_fix,'post_fix'=>$res->post_fix,'doc_no_length'=>$res->doc_no_length,'serial_number_type'=>$res->serial_number_type,'voucher_type'=>$res->voucher_type,'start_date'=>$startdate,'end_date'=>$enddate,'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id'],'created_date'=>date("Y-m-d H:i:s"));
                     $return['res_item_insertary'] = $insertary;
                     $res1 = $callConfig->insertRecord('application_voucher_serial_numbers',$insertary);
@@ -1874,7 +1874,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
     public function getPurchaseLedger($get){
         global $callConfig;
         $condition = "";
-        if($get['from_date'] !="" and $get['to_date'] !=""){
+        if($get['from_date'] !="" && $get['to_date'] !=""){
             $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
         }
         if($get['vendor_id'] !=""){
@@ -1894,7 +1894,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
      public function getSalesLedger($get){
         global $callConfig;
         $condition = "";
-        if($get['from_date'] !="" and $get['to_date'] !=""){
+        if($get['from_date'] !="" && $get['to_date'] !=""){
             $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
         }
         if($get['customer_id'] !=""){
@@ -1999,7 +1999,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
             $notetyperes = $callConfig->getRow($notetypesql);
             $return['note_type_res']= $notetyperes;
         }
-        if(isset($notetyperes->id) and $notetyperes->id !=""){
+        if(isset($notetyperes->id) && $notetyperes->id !=""){
             $transaction_table = $notetyperes->ref_type;
             $transaction_id = $notetyperes->ref_id;
         }else{
@@ -2018,7 +2018,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $chart_of_accountsres = $callConfig->getAllRows($chart_of_accountssql);
         $return['chart_of_accounts']= $chart_of_accountsres;
 
-       if($transaction_table !="" and $transaction_id !=""){
+       if($transaction_table !="" && $transaction_id !=""){
 
             $transactionssql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND id ='".$transaction_id."' AND is_active =0";
             $transactionsres=$callConfig->getRow($transactionssql);
@@ -2068,7 +2068,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
 
         $amount = 0;
         foreach($post['account_code'] as $key=>$value){
-            if($post['account_code'][$key] !="" and $post['item_price'][$key] !=""){
+            if($post['account_code'][$key] !="" && $post['item_price'][$key] !=""){
                 $amount += $post['item_price'][$key];
             }
         }
@@ -2102,7 +2102,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
 
             $callConfig->updateRecord($parentdmtres->item_table,array('is_active'=>null),'transaction_id',$rid);
             foreach($post['account_code'] as $key=>$value){
-                if($post['account_code'][$key] !="" and $post['item_price'][$key] !=""){
+                if($post['account_code'][$key] !="" && $post['item_price'][$key] !=""){
                     $insertcust = array('company_id'=>$get['company_id'],'transaction_id'=>$rid,'item_id'=>'0','account_code'=>$post['account_code'][$key],'item_name'=>$chart_of_accounts[$post['account_code'][$key]]->account_name,'description'=>$post['description'][$key],'purchase_uom'=>'UN','item_quantity'=>'1','item_price'=>$post['item_price'][$key],'item_amount'=>$post['item_price'][$key],'tax_amount'=>'0','total_amount'=>$post['item_price'][$key],'approved_quantity'=>'1','transaction_qty'=>'1','pending_qty'=>'1','is_active'=>0,'current_status'=>0);
 
                     if($post['old_id'][$key] !=""){
@@ -2127,7 +2127,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return = array();
         $condition = "";
         $transaction_table = $get['transaction_table'];
-        if($get['from_date'] !="" and $get['to_date'] !=""){
+        if($get['from_date'] !="" && $get['to_date'] !=""){
             $condition .= " AND transaction_date >= '".$this->dateconvertdbformat($get['from_date'])."'  AND transaction_date <= '".$this->dateconvertdbformat($get['to_date'])."'";
         }
         $transactionssql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND is_active =0".$condition;
@@ -2177,7 +2177,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         }
         $return['customers'] =$customers;
 
-        if($get['from_date'] !="" and $get['to_date'] !=""){
+        if($get['from_date'] !="" && $get['to_date'] !=""){
             $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
            $paycondition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= rec.transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= rec.transaction_date";
         }
@@ -2244,7 +2244,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         }
         $return['customers'] =$customers;
 
-        if($get['from_date'] !="" and $get['to_date'] !=""){
+        if($get['from_date'] !="" && $get['to_date'] !=""){
             $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
             $paycondition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= rec.transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= rec.transaction_date";
         }
@@ -2315,7 +2315,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         }
         $return['customers'] =$customers;
 
-        if($get['from_date'] !="" and $get['to_date'] !=""){
+        if($get['from_date'] !="" && $get['to_date'] !=""){
             $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
            // $paycondition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= rec.transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= rec.transaction_date";
         }
@@ -2382,7 +2382,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         }
         $return['customers'] =$customers;
 
-        if($get['from_date'] !="" and $get['to_date'] !=""){
+        if($get['from_date'] !="" && $get['to_date'] !=""){
             $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
             $paycondition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= rec.transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= rec.transaction_date";
         }

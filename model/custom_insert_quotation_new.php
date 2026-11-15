@@ -206,7 +206,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
             $reftableitemidlist[] = $reftableitems['item_id'];
         }
     }
-    if(isset($rpres['2_ref_table_details']) and $rtable == 'purchase_orders'){
+    if(isset($rpres['2_ref_table_details']) && $rtable == 'purchase_orders'){
         $reftableitemlist = array();
         foreach($rpres['2_ref_table_details']['items'] as $reftableitems){
             $reftableitemlist[$reftableitems['item_id']] = $reftableitems;
@@ -426,7 +426,7 @@ foreach($items as $item){
         // if($rpdata['discount_type'] == 'A'){
         //     $table1['discount_amount'] = ($rpdata['discount_amount'] / $rpdata['total_amount']) * $subt_amount;
         // }
-        if($rpdata['shipping_amount'] != '' and $rpdata['shipping_amount'] != '0'){
+        if($rpdata['shipping_amount'] != '' && $rpdata['shipping_amount'] != '0'){
            $shipping_amounttax = $rpdata['shipping_amount'] * ($rpdata['shipping_tax'] /100);
         }
         $shipping_amountt = $rpdata['shipping_amount'] + $shipping_amounttax;
@@ -453,7 +453,7 @@ foreach($items as $item){
     //echo "<pre>"; print_r($meantableitemlist); echo "</pre>";//exit;
     //echo "<pre>"; print_r($reftableitemlist); echo "</pre>";//exit;
     foreach($meantableitemlist as $itm_id=>$qytvalue){
-        if(isset($reftableitemlist[$itm_id]['pending_qty']) and $qytvalue > $reftableitemlist[$itm_id]['pending_qty']){
+        if(isset($reftableitemlist[$itm_id]['pending_qty']) && $qytvalue > $reftableitemlist[$itm_id]['pending_qty']){
             $_GET['error_messages'] .= $reftableitemlist[$itm_id]['item_name']." - ".$_SESSION['error_message'][6030]." - (Qty - ".round($reftableitemlist[$itm_id]['pending_qty']).") Please Checked </br>";
         }
     }
@@ -1464,7 +1464,7 @@ function viewApprovalAllUsers(id= ""){
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 <?php } ?>
-<?php if($_GET['error_messages'] !="" and ($table1['current_status'] == ST_DRAFT or $table1['current_status'] == ST_ACTIVE or $copy == 0)){  $disable = "disabled"; ?>
+<?php if($_GET['error_messages'] !="" && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE || $copy == 0)){  $disable = "disabled"; ?>
      <div class="alert alert-danger alert-dismissible">
             <strong><?php echo $_GET['error_messages']; ?> </strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -1491,7 +1491,7 @@ function viewApprovalAllUsers(id= ""){
                     </a>
 
                     <?php
-                    if($_GET['error_messages'] and ($table1['current_status'] == ST_DRAFT or $table1['current_status'] == ST_ACTIVE)){ }else{
+                    if($_GET['error_messages'] && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE)){ }else{
 
                         echo $rtable_name ==""?$workflowsteps['workflow_btn']:"";
                     }
@@ -1505,7 +1505,7 @@ function viewApprovalAllUsers(id= ""){
                 <?php }  ?>
                  &nbsp;  &nbsp;
                     <!-- <input type="hidden" name="status_values" id="status_values" value="<?php //echo  $table1['current_status']!=""?$table1['current_status']:2; ?>"> -->
-                <input type="hidden" name="status_values" id="status_values" value="<?php echo  ($table1['current_status']!="" and $rtable_name =="")?$table1['current_status']:ST_DRAFT; ?>">
+                <input type="hidden" name="status_values" id="status_values" value="<?php echo  ($table1['current_status']!="" && $rtable_name =="")?$table1['current_status']:ST_DRAFT; ?>">
                 <input type="hidden" name="status_old_value" id="status_old_value" value="<?php echo $table1['current_status']; ?>">
                 </div>
             </div>
@@ -1514,7 +1514,7 @@ function viewApprovalAllUsers(id= ""){
               <?php echo $rtable_name ==""?$workflowsteps['breadcrumb']:"";?>
             </div>
             <?php $submitbtnnptshow = array(ST_REJECTED,ST_APPROVED); ?>
-            <div  style="<?php echo ($workflowsteps['current_transaction_details']['updatebtn'] ==1 or in_array($table1['current_status'], $submitbtnnptshow) and $rtable_name =="")?"pointer-events: none; opacity: 0.7;":"";?>">
+            <div  style="<?php echo ($workflowsteps['current_transaction_details']['updatebtn'] ==1 || in_array($table1['current_status'], $submitbtnnptshow) && $rtable_name =="")?"pointer-events: none; opacity: 0.7;":"";?>">
 
             <?php
             //if($table1['qo_number'] !=''){
@@ -1608,7 +1608,7 @@ function viewApprovalAllUsers(id= ""){
                                             <i class="helper"></i><?php echo $_SESSION['config']['currency_symbol']; ?>
                                         </label>
                                         <label class="m-l-10 d-inline-block">
-                                            <input type="radio" name="discount_type" id="disType" onclick="calculateTotal()" onkeydown="if(event.key==='Enter'||event.key===' '){calculateTotal();}" value="P" <?php echo ($table1['discount_type'] == 'P' or $table1['discount_type'] =="")?"checked":""; ?> aria-label="Discount Type">
+                                            <input type="radio" name="discount_type" id="disType" onclick="calculateTotal()" onkeydown="if(event.key==='Enter'||event.key===' '){calculateTotal();}" value="P" <?php echo ($table1['discount_type'] == 'P' || $table1['discount_type'] =="")?"checked":""; ?> aria-label="Discount Type">
                                             <i class="helper"></i> %
                                         </label>
                                     </div>
@@ -1774,7 +1774,7 @@ if($rid !='' && isset($file_data['file_upload']) && $file_data['file_upload']==0
  } ?>
 <?php
     $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,'');
-    if(!in_array($table1['current_status'], $check_array) and $rtable_name ==""){ $disable = "disabled" ;} ?>
+    if(!in_array($table1['current_status'], $check_array) && $rtable_name ==""){ $disable = "disabled" ;} ?>
             <div class="card-footer">
                 <div class="kt-form__actions">
                     <div class="row">

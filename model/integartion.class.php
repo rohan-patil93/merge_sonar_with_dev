@@ -486,7 +486,7 @@ class integartionClass{
  		global $callConfig;
  		$return['menu_data'] = $this->toreportempdropdown($get);
  		$whr = "";
- 		if($post['fromdate']!="" and $post['todate']!=""){
+ 		if($post['fromdate']!="" && $post['todate']!=""){
  			$whr.= " AND emp.joining_date <= '".$post['todate']."' AND  ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving > '".$post['fromdate']."'  ) THEN 1 WHEN ( emp.date_of_leaving IS NULL AND emp.is_active = 0 ) THEN 1 ELSE 2 END )= 1";
  		}else{
  			$whr.= " AND ( CASE WHEN ( emp.date_of_leaving IS NOT NULL AND emp.date_of_leaving >= now() ) THEN 1 WHEN ( emp.date_of_leaving IS NULL AND emp.is_active = 0 ) THEN 1 ELSE 2 END )= 1 ";
@@ -761,7 +761,7 @@ class integartionClass{
   	global $callConfig;
   	$return['menu_data'] = $this->toreportempdropdown($get);
   	$whr = "";
-  	if($post['fromdate']!="" and $post['todate']!=""){
+  	if($post['fromdate']!="" && $post['todate']!=""){
   		$whr.= " AND emp.joining_date <= '".$post['todate']."' ";
   	}
   	$whrarry = array('department_id'=>'departments', 'designation_id'=>'designations', 'location_id'=>'locations', 'employee_type'=>'employment_statuses', 'division_id'=>'divisions');
@@ -854,7 +854,7 @@ class integartionClass{
   	global $callConfig;
   	$return['menu_data'] = $this->toreportempdropdown($get);
   	$whr = "";
-  	if($post['fromdate']!="" and $post['todate']!=""){
+  	if($post['fromdate']!="" && $post['todate']!=""){
   		$whr.= " AND emp.joining_date <= '".$post['todate']."' ";
   	}
   	$whrarry = array('department_id'=>'departments', 'designation_id'=>'designations', 'location_id'=>'locations', 'employee_type'=>'employment_statuses', 'division_id'=>'divisions');
@@ -1026,7 +1026,7 @@ public function togetstandaredapprovedhours($post, $get){
 	global $callConfig;
 	$return['menu_data'] = $this->toreportempdropdown($get);
 	$whr = "";
-	if($post['fromdate']!="" and $post['todate']!=""){
+	if($post['fromdate']!="" && $post['todate']!=""){
 		$whr.= " AND eda.attendace_date >= '".$post['fromdate']."' AND eda.attendace_date <= '".$post['todate']."'";
 	}
 
@@ -1046,7 +1046,7 @@ public function togetstandaredtimeoffuser($post, $get){
 	global $callConfig;
 	$return['menu_data'] = $this->toreportempdropdown($get);
 	$whr = "";
-	if($post['fromdate']!="" and $post['todate']!=""){
+	if($post['fromdate']!="" && $post['todate']!=""){
 		$whr.= " AND el.leave_from >= '".$post['fromdate']."' AND el.leave_to <= '".$post['todate']."'";
 	}
 
@@ -4870,12 +4870,12 @@ public function toimportthedataintotablesemployeessalary($get){
 		            $parts[$m] = $finyaer;
 		            //$checksequincerow[$m] = $finyaer;
 		        }
-		        if(isset($position_with_val[$m]) and $position_with_val[$m]['display_type'] =="STATIC"){
+		        if(isset($position_with_val[$m]) && $position_with_val[$m]['display_type'] =="STATIC"){
 		            if($position_with_val[$m]['static_value'] != ""){
 		            	//$parts[$m] = $position_with_val[$m]['static_value'];
 		            	$checksequincerow[$m] = $position_with_val[$m]['static_value'];
 		            }
-		        }elseif(isset($position_with_val[$m]) and $position_with_val[$m]['display_type'] =="DYNAMIC"){
+		        }elseif(isset($position_with_val[$m]) && $position_with_val[$m]['display_type'] =="DYNAMIC"){
 		            if($position_with_val[$m]['dynamic_value'] != ""){
 		            	//$parts[$m] = $position_with_val[$m]['dynamic_value'];
 		            	$checksequincerow[$m] = $position_with_val[$m]['dynamic_value'];
@@ -4889,7 +4889,7 @@ public function toimportthedataintotablesemployeessalary($get){
 
 		    	if($seq_val == "PARTY_NAME"){
 
-					if($partytable !="" and $party_id !=""){
+					if($partytable !="" && $party_id !=""){
 						$partysql = "SELECT id, short_name FROM ".$partytable." WHERE company_id = ".$get['company_id']." AND id = ".$party_id." AND is_active = 0";
 						$partyres = $callConfig->getRow($partysql);
 						if($partyres->short_name !=""){

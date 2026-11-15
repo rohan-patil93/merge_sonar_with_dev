@@ -3088,11 +3088,11 @@ class mobileUserClass extends userClass{
 	    $current_transactionauthprized=$breadcrumb[$current_status];
 	 	$rejecturl = $sendbackurl = $workflow_btn = "";
 	    if(!isset($result['error'])){
-			if($current_status != ST_APPROVED and $current_status != ST_REJECTED){
+			if($current_status != ST_APPROVED && $current_status != ST_REJECTED){
 				//$workflow_btn .= '<div class="btn-group workflow-btn" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title=".btn-xlg">';
-	    		if($current_status == ST_ACTIVE or $current_status == ST_SEND_BACK or $current_status == ST_CALLBACK or $workflow_details->workflow_trigger_status == $current_status){  //Active Time Show Button
+	    		if($current_status == ST_ACTIVE || $current_status == ST_SEND_BACK || $current_status == ST_CALLBACK || $workflow_details->workflow_trigger_status == $current_status){  //Active Time Show Button
 	    			if($transaction_owner_id ==$userid){
-	    				if($current_status == ST_SEND_BACK or $current_status == ST_CALLBACK){
+	    				if($current_status == ST_SEND_BACK || $current_status == ST_CALLBACK){
 	    					$current_status = $workflow_details->workflow_trigger_status; // direct use accept
 		    				$nextstatus = $workflow_details->workflow_trigger_status; // direct use accept
 		    			}else{
@@ -3151,13 +3151,13 @@ class mobileUserClass extends userClass{
 
 
 		// $workflow_btn .= '<div class="btn-group workflow-btn" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title=".btn-xlg">';
-		 if($result['error'] == '9061' and $transaction_owner_id ==$userid and $current_status == ST_DRAFT){
+		 if($result['error'] == '9061' && $transaction_owner_id ==$userid && $current_status == ST_DRAFT){
 			$errorstatus = "success";
 			$workflow_btn = API."?mode=submitstatusdynamicworkflow&module_id=".$get['module_id']."&data_name=".$get['data_name']."&user_id=".$get['user_id']."&company_id=".$get['company_id']."&comment=AI&next_status=".ST_ACTIVE."&current_status=".$current_status."&transaction_no=".$transaction_no."&transaction_table=".$table_name;
 
 			//$dynamicfunction  = "submitDynamicWorkflow('".$table_name."','".$transaction_no."','".$current_status."','".ST_ACTIVE."','".$status_progress[$current_status]->name."','".$status_progress[ST_ACTIVE]->name."')";
 			//$workflow_btn .= '<button type="button" class="btn btn-info btn-sm waves-effect waves-light" onclick="'.$dynamicfunction.'"> <span class="fa fa-thumbs-up text-white"></span> &nbsp;'.$status_progress[ST_DRAFT]->action_label.'</button>';
-		 }elseif($result['error'] == '9063' or $result['error'] == '9062' or $result['error'] == '9060'){
+		 }elseif($result['error'] == '9063' || $result['error'] == '9062' || $result['error'] == '9060'){
 		 	$errorstatus = "fail";
 			$workflow_btn = $result['error'];
 			//$workflow_btn .= '<button type="button" class="btn btn-danger btn-sm waves-effect waves-light"><span class="fa fa-info text-white"></span> &nbsp;'.$_SESSION['error_message'][$result['error']].'</button>';
@@ -4029,7 +4029,7 @@ class mobileUserClass extends userClass{
 		$ref_table_dmtsql = "SELECT id, page_title, application_table_name,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$post['company_id']."' AND application_table_name = '".$transaction_table."' AND is_active = 0 AND item_table !='' AND tax_table!=''";
 		$ref_table_dmtres=$callConfig->getRow($ref_table_dmtsql);
 
-		if($ref_table_dmtres->item_table !="" and $ref_table_dmtres->tax_table !=""){
+		if($ref_table_dmtres->item_table !="" && $ref_table_dmtres->tax_table !=""){
 
 			$originatorsql = "SELECT * FROM application_users WHERE company_id = '".$post['company_id']."' AND id = '".$originator."' AND is_active = 0";
 			$originatorres=$callConfig->getRow($originatorsql);
@@ -4083,12 +4083,12 @@ class mobileUserClass extends userClass{
 
 	      // $mainfieldsary['payment_term_history'] = $this->getPaymentTermsResult($get,$post,$payment_terms);
 
-	        if($post['discount_amount'] !="" and $post['discount_amount'] !="0"){
+	        if($post['discount_amount'] !="" && $post['discount_amount'] !="0"){
 	        	$mainfieldsary['discount_type'] = 'A';
 	        	$mainfieldsary['discount_value'] = $post['discount_amount'];
 	        	$mainfieldsary['discount_amount'] = $post['discount_amount'];
 	        }
-	        if($post['rounding_off'] !="" and $post['rounding_off'] !="0"){
+	        if($post['rounding_off'] !="" && $post['rounding_off'] !="0"){
 	        	$mainfieldsary['rounding_off'] = $post['rounding_off'];
 	        }
 
@@ -4169,7 +4169,7 @@ class mobileUserClass extends userClass{
 					$return['item_insert_data'][] = $childtableres;
 
 					//tax related part Insert
-					if($childtableres['status'] == 'sucess' and $itemsdetails['tax_amount']!="0" and $itemsdetails['tax_amount']!=""){
+					if($childtableres['status'] == 'sucess' && $itemsdetails['tax_amount']!="0" && $itemsdetails['tax_amount']!=""){
 						$taxfield=array('company_id'=>$post['company_id'],'transaction_id'=>$insert_id,'transaction_item_id'=>$itemsdetails['item_id'],'tax_id'=>$itemsdetails['tax_id'],'tax_name'=>$itemsdetails['tax_name'],'amount'=>$itemsdetails['item_taxable_amount'],'tax_amount'=>$itemsdetails['tax_amount'],'total_amount'=>$itemsdetails['total_amount'],'tax_value'=>$itemsdetails['percentage'],'is_active'=>'0','transaction_item_row_id'=>$childtableres_id);
 
 						if($itemsdetails['tax_row_rid'] !=""){

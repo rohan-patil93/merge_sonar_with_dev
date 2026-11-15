@@ -15,7 +15,7 @@ class pmsUserClass extends userClass{
 			$show_filter_cond = explode('&',$show_filter_cond);
 			foreach($show_filter_cond as $show_filter_co){
 				$fieldname = explode("=",$show_filter_co);
-				if($fieldname['0']!="check" and $fieldname['0']!="table"){
+				if($fieldname['0']!="check" && $fieldname['0']!="table"){
 					$show_filter_condion[$fieldname['0']]=$fieldname['1'];
 				}
 			}
@@ -709,7 +709,7 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 		$show_filter_cond = explode('&',$show_filter_cond);
 		foreach($show_filter_cond as $show_filter_co){
 			$fieldname = explode("=",$show_filter_co);
-			if($fieldname['0']!="check" and $fieldname['0']!="table"){
+			if($fieldname['0']!="check" && $fieldname['0']!="table"){
 				$show_filter_condion[$fieldname['0']]=$fieldname['1'];
 			}
 		}
@@ -726,19 +726,19 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 			}
 		}
 	}
-	if($get['department_id'] !="" and $get['department_id'] !="all"){
+	if($get['department_id'] !="" && $get['department_id'] !="all"){
 		$ids = $get['department_id'];
 		$where .= " AND dept.id IN(".$ids.")";
 	}else{
 		$where .= $dipartcondition;
 	}
-	if($get['designation_id'] !="" and $get['designation_id'] !="all"){
+	if($get['designation_id'] !="" && $get['designation_id'] !="all"){
 		$ids = $get['designation_id'];
 		$where  .= " AND jt.id IN(".$ids.")";
 	}else{
 		$where .= $designationcondition;
 	}
-	if($get['location_id'] !="" and $get['location_id'] !="all"){
+	if($get['location_id'] !="" && $get['location_id'] !="all"){
 		$ids = $get['location_id'];
 		$where  .= " AND loc.id IN(".$ids.")";
 	}else{
@@ -775,7 +775,7 @@ public function getKRATagging($get){
 		$show_filter_cond = explode('&',$show_filter_cond);
 		foreach($show_filter_cond as $show_filter_co){
 			$fieldname = explode("=",$show_filter_co);
-			if($fieldname['0']!="check" and $fieldname['0']!="table"){
+			if($fieldname['0']!="check" && $fieldname['0']!="table"){
 				$show_filter_condion[$fieldname['0']]=$fieldname['1'];
 			}
 		}

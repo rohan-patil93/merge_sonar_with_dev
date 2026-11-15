@@ -338,7 +338,7 @@ class reactClass extends userClass{
 				if (isset($post['contact_persons']) && is_array($post['contact_persons'])) {
 					$contact_personsary = array();
 					foreach($post['contact_persons']['name'] as $key=>$conpers){
-						if($post['contact_persons']['name'][$key] !="" and $post['contact_persons']['number'][$key]!=""){
+						if($post['contact_persons']['name'][$key] !="" && $post['contact_persons']['number'][$key]!=""){
 							$contact_personsary[] =  array('name'=>$post['contact_persons']['name'][$key],'email'=>$post['contact_persons']['email'][$key],'number'=>$post['contact_persons']['number'][$key]);
 						}
 					}
@@ -524,7 +524,7 @@ class reactClass extends userClass{
 					if(count((array)$selected_location_ids) > 0){
 						$admin_cond = "(JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL AND location_id IN (".implode(',', $selected_location_ids)."))";
 					}
-					if($insert_array['originator'] !="" and $get['user_id'] !=""){
+					if($insert_array['originator'] !="" && $get['user_id'] !=""){
 						$conditins = " AND (".$admin_cond." OR id = '".$insert_array['originator']."' OR id = '".$get['user_id']."')";
 					}elseif($insert_array['originator'] !=""){
 						$conditins = " AND (".$admin_cond." OR id = '".$insert_array['originator']."')";
@@ -771,7 +771,7 @@ class reactClass extends userClass{
 			 			$cntsql = "SELECT COUNT(id) as cnt FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0".$condition.$admin_or_user_whr;
 			     		$cntres =  $callConfig->getRow($cntsql);
 			     		$return['total_record_cnt'] = $cntres;
-			     		$respons_data_cnt =  ($cntres->cnt!="" and $cntres->cnt !=0)?$cntres->cnt:0;
+			     		$respons_data_cnt =  ($cntres->cnt!="" && $cntres->cnt !=0)?$cntres->cnt:0;
 				     	$divide_limit = $respons_data_cnt/$get['limit_select'];
 						$total_pages = ceil($respons_data_cnt / $get['limit_select']);
 						$current_page = isset($get['current_page']) ? (int)$get['current_page'] : 1;
