@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $wh1["where"] = array('table_name'=>$_POST['process_type'],'is_active'=>0,'company_id'=>$_SESSION['company_id']);
 $wh1["field"] = "id,name,status";
 $data1 = urlencode(json_encode($wh1));

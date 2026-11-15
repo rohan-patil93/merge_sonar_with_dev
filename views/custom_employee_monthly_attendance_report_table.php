@@ -2,9 +2,9 @@
 if($_POST['page_ajax']=='Y'){
 
 
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 }
 ?>
 <link rel="stylesheet" href="assets/css/custom_employee_monthly_attendance_report_table.css">

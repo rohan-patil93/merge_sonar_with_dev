@@ -88,7 +88,7 @@
         <div class="col-lg-10">
           <div id="payslipview">
              <?php $_GET['month']=$monthkey;$_GET['year']=$keyyear; $_GET['employe_id']=$employee_id;
-             include_once("custom_list_payslip_template3.php"); ?>
+             include_once "custom_list_payslip_template3.php"; ?>
           </div>
         </div>
       </div>

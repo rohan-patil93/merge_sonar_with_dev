@@ -692,7 +692,7 @@ function fileUplodingDisplay(){
 
 				</div>
 
-				<?php include_once('custom_add_field.php'); ?>
+				<?php include_once 'custom_add_field.php'; ?>
 				<!--end::Portlet-->
 			</div>
 		</div>

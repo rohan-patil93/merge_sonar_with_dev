@@ -100,7 +100,7 @@ $module_setup = $result['module_setup'];
               if($count > '5'){ ?>
                 <li>
                   <p>
-                    <span class="icon"><i style="color: cornflowerblue;" class="fa fa-minus"></i></span> <span class="name">and <?php echo ($count-5); ?> more...</span>
+                    <span class="icon"><i style="color: cornflowerblue;" class="fa fa-minus"></i></span> <span class="name">and <?php echo $count-5; ?> more...</span>
                   </p>
                 </li>
               <?php  } ?>

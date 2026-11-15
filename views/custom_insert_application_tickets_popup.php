@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $url = API."?mode=getapplicationtickets&page_type=".$_POST['page_type'];
 $response = callAPI($url);
 $result = json_decode($response,1);

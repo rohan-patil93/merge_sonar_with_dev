@@ -76,7 +76,7 @@ $_SESSION['download_data'] = array();
 
 	</div>
 </div>
- <?php include_once("custom_standard_top_print.php"); ?>
+ <?php include_once "custom_standard_top_print.php"; ?>
 
 <div class="card">
     <div class="card-body">

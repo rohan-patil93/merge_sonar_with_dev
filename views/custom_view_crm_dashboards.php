@@ -688,7 +688,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
 </div>
 		<div class="tab-content tabs">
             <div class="tab-pane card-body p-0 active active_crm_home active_all_class" id="home-tab" role="tabpanel">
-                <?php include("views/custom_view_crm_home_dashboards.php"); ?>
+                <?php include "views/custom_view_crm_home_dashboards.php"; ?>
             </div>
 			<div class="tab-pane card-body p-0 dynamictabviews active_all_class" id="lead-tab" role="tabpanel" >
                  <?php //include("views/custom_list_crm_leads.php"); ?>

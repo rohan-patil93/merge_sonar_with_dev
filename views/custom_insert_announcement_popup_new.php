@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $fileupload_path = "uploads/all/";
 $announcement_id = $_POST['announcement_id'];
 $whrcondion = array('company_id'=> $_SESSION['company_id'],'is_active'=>'0','announcement_id'=>$announcement_id);

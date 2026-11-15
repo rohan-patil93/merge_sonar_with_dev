@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $job_posting_candidate_id = $_POST['job_posting_candidate_id'];
 $gettype = $_POST['gettype'];
 $candidate_id = $_POST['candidate_id'];

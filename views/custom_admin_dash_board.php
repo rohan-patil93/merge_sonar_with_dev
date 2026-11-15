@@ -149,7 +149,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 </div>-->
 
 <div class="col-lg-8  draggable-zone">
-	<?php include_once('custom_view_vms_budget.php'); ?>
+	<?php include_once 'custom_view_vms_budget.php'; ?>
 </div>
 <div class="col-lg-4">
 	<!--begin::Card-->

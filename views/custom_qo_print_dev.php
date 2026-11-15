@@ -1,11 +1,11 @@
 <?php
 if ($_GET['print'] == "Y") {
-    include_once('../includes/session.php');
-    include_once('../dbconfig.php');
-    include_once('../comm.php');
+    include_once '../includes/session.php';
+    include_once '../dbconfig.php';
+    include_once '../comm.php';
     $callapi = "Y";
 } else {
-    include_once('dbconfig.php');
+    include_once 'dbconfig.php';
 }
 if ($_POST['callapi'] == 'Y') {
     $config = $_POST['config'];

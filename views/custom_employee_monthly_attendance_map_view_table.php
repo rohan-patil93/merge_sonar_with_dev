@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 
 $employee_id = $_POST['employee_id'] ?? 0;
 $month       = $_POST['month'] ?? '';

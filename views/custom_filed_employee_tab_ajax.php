@@ -1,9 +1,9 @@
 <?php
 $year_month = date("Y-m");
 if (isset($_POST['year_month'])){
-    include_once('../includes/session.php');
-    include_once('../dbconfig.php');
-    include_once('../comm.php');
+    include_once '../includes/session.php';
+    include_once '../dbconfig.php';
+    include_once '../comm.php';
     $tburl = API . "?mode=togetoprationlistbasedonmonthly&year_month=".$_POST['year_month'];
     $field_res_call = callAPI($tburl);
     $field_res = json_decode($field_res_call, 1);

@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $File_Uploads_Path = "uploads/assets/";
 $rid = $_POST['asset_id'];
 $url = API."?mode=getassetallocation&Rid=".$rid."&resultgettype=INSERTPAGE";

@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $typeofquestion= array('1'=>'MCQ','2'=>'MCA','3'=>'FT');
 if($_GET['type']== $typeofquestion['1']){
 	$settype = 1;

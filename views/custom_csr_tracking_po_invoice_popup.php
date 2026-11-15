@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 
 $project_id  = $_POST['project_id'] ?? 0;
 $tracking_id = $_POST['traking_id'] ?? 0;

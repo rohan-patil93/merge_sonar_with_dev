@@ -607,15 +607,15 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 } else {
                                                     ?>
                                                     <div class="form-check form-check-inline mt-2">
-                                                        <input class="form-check-input" type="radio" name="purpose" id="purpose_official" value="official" data-icon="fa fa-briefcase" <?php echo ($purpose === 'official' ? 'checked' : ''); ?> title="Purpose" aria-label="Purpose">
+                                                        <input class="form-check-input" type="radio" name="purpose" id="purpose_official" value="official" data-icon="fa fa-briefcase" <?php echo $purpose === 'official' ? 'checked' : ''; ?> title="Purpose" aria-label="Purpose">
                                                         <label class="form-check-label" for="purpose_official">Official</label>
                                                     </div>
                                                     <div class="form-check form-check-inline mt-2">
-                                                        <input class="form-check-input" type="radio" name="purpose" id="purpose_personal" value="personal" data-icon="fa fa-user" <?php echo ($purpose === 'personal' ? 'checked' : ''); ?> title="Purpose" aria-label="Purpose">
+                                                        <input class="form-check-input" type="radio" name="purpose" id="purpose_personal" value="personal" data-icon="fa fa-user" <?php echo $purpose === 'personal' ? 'checked' : ''; ?> title="Purpose" aria-label="Purpose">
                                                         <label class="form-check-label" for="purpose_personal">Personal</label>
                                                     </div>
                                                     <div class="form-check form-check-inline mt-2">
-                                                        <input class="form-check-input" type="radio" name="purpose" id="purpose_others" value="others" data-icon="fa fa-ellipsis-h" <?php echo ($purpose === 'others' ? 'checked' : ''); ?> title="Purpose" aria-label="Purpose">
+                                                        <input class="form-check-input" type="radio" name="purpose" id="purpose_others" value="others" data-icon="fa fa-ellipsis-h" <?php echo $purpose === 'others' ? 'checked' : ''; ?> title="Purpose" aria-label="Purpose">
                                                         <label class="form-check-label" for="purpose_others">Others</label>
                                                     </div>
                                                     <?php
@@ -700,17 +700,17 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     Gender</span><br>
                                                 <div class="form-check form-check-inline mt-2">
                                                     <input class="form-check-input" type="radio" name="gender"
-                                                        id="gender_male" value="Male" <?php echo (($return['gender'] ?? '') === 'Male' ? 'checked' : ''); ?> title="Gender" aria-label="Gender">
+                                                        id="gender_male" value="Male" <?php echo ($return['gender'] ?? '') === 'Male' ? 'checked' : ''; ?> title="Gender" aria-label="Gender">
                                                     <label class="form-check-label" for="gender_male">Male</label>
                                                 </div>
                                                 <div class="form-check form-check-inline mt-2">
                                                     <input class="form-check-input" type="radio" name="gender"
-                                                        id="gender_female" value="Female" <?php echo (($return['gender'] ?? '') === 'Female' ? 'checked' : ''); ?> title="Gender" aria-label="Gender">
+                                                        id="gender_female" value="Female" <?php echo ($return['gender'] ?? '') === 'Female' ? 'checked' : ''; ?> title="Gender" aria-label="Gender">
                                                     <label class="form-check-label" for="gender_female">Female</label>
                                                 </div>
                                                 <div class="form-check form-check-inline mt-2">
                                                     <input class="form-check-input" type="radio" name="gender"
-                                                        id="gender_other" value="Other" <?php echo (($return['gender'] ?? '') === 'Other' ? 'checked' : ''); ?> title="Gender" aria-label="Gender">
+                                                        id="gender_other" value="Other" <?php echo ($return['gender'] ?? '') === 'Other' ? 'checked' : ''; ?> title="Gender" aria-label="Gender">
                                                     <label class="form-check-label" for="gender_other">Other</label>
                                                 </div>
                                             </div>
@@ -731,11 +731,11 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                              }
                                                          } else {
                                                             ?>
-                                                            <option value="1 hour" data-icon="ti-time" <?php echo (($return['expected_duration'] ?? '') === '1 hour' ? 'selected' : ''); ?>>1 Hour</option>
-                                                            <option value="2 hours" data-icon="ti-time" <?php echo (($return['expected_duration'] ?? '') === '2 hours' ? 'selected' : ''); ?>>2 Hours</option>
-                                                            <option value="4 hours" data-icon="ti-time" <?php echo (($return['expected_duration'] ?? '') === '4 hours' ? 'selected' : ''); ?>>4 Hours</option>
-                                                            <option value="Full Day" data-icon="ti-time" <?php echo (($return['expected_duration'] ?? '') === 'Full Day' ? 'selected' : ''); ?>>Full Day</option>
-                                                            <option value="Multi-day" data-icon="ti-time" <?php echo (($return['expected_duration'] ?? '') === 'Multi-day' ? 'selected' : ''); ?>>Multi-day</option>
+                                                            <option value="1 hour" data-icon="ti-time" <?php echo ($return['expected_duration'] ?? '') === '1 hour' ? 'selected' : ''; ?>>1 Hour</option>
+                                                            <option value="2 hours" data-icon="ti-time" <?php echo ($return['expected_duration'] ?? '') === '2 hours' ? 'selected' : ''; ?>>2 Hours</option>
+                                                            <option value="4 hours" data-icon="ti-time" <?php echo ($return['expected_duration'] ?? '') === '4 hours' ? 'selected' : ''; ?>>4 Hours</option>
+                                                            <option value="Full Day" data-icon="ti-time" <?php echo ($return['expected_duration'] ?? '') === 'Full Day' ? 'selected' : ''; ?>>Full Day</option>
+                                                            <option value="Multi-day" data-icon="ti-time" <?php echo ($return['expected_duration'] ?? '') === 'Multi-day' ? 'selected' : ''; ?>>Multi-day</option>
                                                             <?php
                                                         }
                                                         ?>
@@ -759,9 +759,9 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                             }
                                                         } else {
                                                             ?>
-                                                            <option value="Two Wheeler" data-icon="ti-car" <?php echo (($return['vehicle_type'] ?? '') === 'Two Wheeler' ? 'selected' : ''); ?>>Two Wheeler</option>
-                                                            <option value="Four Wheeler" data-icon="ti-car" <?php echo (($return['vehicle_type'] ?? '') === 'Four Wheeler' ? 'selected' : ''); ?>>Four Wheeler</option>
-                                                            <option value="Heavy Vehicle" data-icon="ti-car" <?php echo (($return['vehicle_type'] ?? '') === 'Heavy Vehicle' ? 'selected' : ''); ?>>Heavy Vehicle</option>
+                                                            <option value="Two Wheeler" data-icon="ti-car" <?php echo ($return['vehicle_type'] ?? '') === 'Two Wheeler' ? 'selected' : ''; ?>>Two Wheeler</option>
+                                                            <option value="Four Wheeler" data-icon="ti-car" <?php echo ($return['vehicle_type'] ?? '') === 'Four Wheeler' ? 'selected' : ''; ?>>Four Wheeler</option>
+                                                            <option value="Heavy Vehicle" data-icon="ti-car" <?php echo ($return['vehicle_type'] ?? '') === 'Heavy Vehicle' ? 'selected' : ''; ?>>Heavy Vehicle</option>
                                                             <?php
                                                         }
                                                         ?>
@@ -846,11 +846,11 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                         }
                                                     } else {
                                                         ?>
-                                                        <option value="Courier" data-icon="ti-package" <?php echo (($return['delivery_type'] ?? '') === 'Courier' ? 'selected' : ''); ?>>Courier / Package</option>
-                                                        <option value="Food Delivery" data-icon="ti-package" <?php echo (($return['delivery_type'] ?? '') === 'Food Delivery' ? 'selected' : ''); ?>>Food / Beverage</option>
-                                                        <option value="Office Supplies" data-icon="ti-package" <?php echo (($return['delivery_type'] ?? '') === 'Office Supplies' ? 'selected' : ''); ?>>Office Supplies</option>
-                                                        <option value="Heavy Cargo" data-icon="ti-package" <?php echo (($return['delivery_type'] ?? '') === 'Heavy Cargo' ? 'selected' : ''); ?>>Heavy Cargo</option>
-                                                        <option value="Miscellaneous" data-icon="ti-package" <?php echo (($return['delivery_type'] ?? '') === 'Miscellaneous' ? 'selected' : ''); ?>>Miscellaneous</option>
+                                                        <option value="Courier" data-icon="ti-package" <?php echo ($return['delivery_type'] ?? '') === 'Courier' ? 'selected' : ''; ?>>Courier / Package</option>
+                                                        <option value="Food Delivery" data-icon="ti-package" <?php echo ($return['delivery_type'] ?? '') === 'Food Delivery' ? 'selected' : ''; ?>>Food / Beverage</option>
+                                                        <option value="Office Supplies" data-icon="ti-package" <?php echo ($return['delivery_type'] ?? '') === 'Office Supplies' ? 'selected' : ''; ?>>Office Supplies</option>
+                                                        <option value="Heavy Cargo" data-icon="ti-package" <?php echo ($return['delivery_type'] ?? '') === 'Heavy Cargo' ? 'selected' : ''; ?>>Heavy Cargo</option>
+                                                        <option value="Miscellaneous" data-icon="ti-package" <?php echo ($return['delivery_type'] ?? '') === 'Miscellaneous' ? 'selected' : ''; ?>>Miscellaneous</option>
                                                         <?php
                                                     }
                                                     ?>
@@ -908,7 +908,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     Cleared?</span><br>
                                                 <div class="form-check form-switch mt-2">
                                                     <input class="form-check-input" type="checkbox"
-                                                        id="security_cleared" name="security_cleared" value="1" <?php echo (!empty($return['security_cleared']) ? 'checked' : ''); ?> title="Security Cleared" aria-label="Security Cleared">
+                                                        id="security_cleared" name="security_cleared" value="1" <?php echo !empty($return['security_cleared']) ? 'checked' : ''; ?> title="Security Cleared" aria-label="Security Cleared">
                                                     <label class="form-check-label ms-2" for="security_cleared">Yes,
                                                         Cleared</label>
                                                 </div>
@@ -1040,12 +1040,12 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                             }
                                                         } else {
                                                             ?>
-                                                            <option value="IT Support" data-icon="ti-settings" <?php echo (($return['service_classification'] ?? '') === 'IT Support' ? 'selected' : ''); ?>>IT Support / Hardware</option>
-                                                            <option value="HVAC Maintenance" data-icon="ti-support" <?php echo (($return['service_classification'] ?? '') === 'HVAC Maintenance' ? 'selected' : ''); ?>>HVAC Maintenance</option>
-                                                            <option value="Electrical" data-icon="ti-bolt" <?php echo (($return['service_classification'] ?? '') === 'Electrical' ? 'selected' : ''); ?>>Electrical Works</option>
-                                                            <option value="Plumbing" data-icon="ti-wand" <?php echo (($return['service_classification'] ?? '') === 'Plumbing' ? 'selected' : ''); ?>>Plumbing Works</option>
-                                                            <option value="Cleaning" data-icon="ti-brush" <?php echo (($return['service_classification'] ?? '') === 'Cleaning' ? 'selected' : ''); ?>>Cleaning / Housekeeping</option>
-                                                            <option value="General Maintenance" data-icon="ti-settings" <?php echo (($return['service_classification'] ?? '') === 'General Maintenance' ? 'selected' : ''); ?>>General Maintenance</option>
+                                                            <option value="IT Support" data-icon="ti-settings" <?php echo ($return['service_classification'] ?? '') === 'IT Support' ? 'selected' : ''; ?>>IT Support / Hardware</option>
+                                                            <option value="HVAC Maintenance" data-icon="ti-support" <?php echo ($return['service_classification'] ?? '') === 'HVAC Maintenance' ? 'selected' : ''; ?>>HVAC Maintenance</option>
+                                                            <option value="Electrical" data-icon="ti-bolt" <?php echo ($return['service_classification'] ?? '') === 'Electrical' ? 'selected' : ''; ?>>Electrical Works</option>
+                                                            <option value="Plumbing" data-icon="ti-wand" <?php echo ($return['service_classification'] ?? '') === 'Plumbing' ? 'selected' : ''; ?>>Plumbing Works</option>
+                                                            <option value="Cleaning" data-icon="ti-brush" <?php echo ($return['service_classification'] ?? '') === 'Cleaning' ? 'selected' : ''; ?>>Cleaning / Housekeeping</option>
+                                                            <option value="General Maintenance" data-icon="ti-settings" <?php echo ($return['service_classification'] ?? '') === 'General Maintenance' ? 'selected' : ''; ?>>General Maintenance</option>
                                                             <?php
                                                         }
                                                         ?>
@@ -1066,7 +1066,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     Completed?</span><br>
                                                 <div class="form-check form-switch mt-2">
                                                     <input class="form-check-input" type="checkbox" id="safety_briefing"
-                                                        name="safety_briefing" value="1" <?php echo (!empty($return['safety_briefing']) ? 'checked' : ''); ?> title="Safety Briefing" aria-label="Safety Briefing">
+                                                        name="safety_briefing" value="1" <?php echo !empty($return['safety_briefing']) ? 'checked' : ''; ?> title="Safety Briefing" aria-label="Safety Briefing">
                                                     <label class="form-check-label ms-2" for="safety_briefing">Yes,
                                                         Briefed</label>
                                                 </div>
@@ -1373,7 +1373,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     Visit?</span><br>
                                                 <div class="form-check form-switch mt-2">
                                                     <input class="form-check-input" type="checkbox" id="is_emergency"
-                                                        name="is_emergency" value="1" <?php echo (!empty($return['is_emergency']) ? 'checked' : ''); ?> title="Is Emergency" aria-label="Is Emergency">
+                                                        name="is_emergency" value="1" <?php echo !empty($return['is_emergency']) ? 'checked' : ''; ?> title="Is Emergency" aria-label="Is Emergency">
                                                     <label class="form-check-label ms-2" for="is_emergency">Yes,
                                                         Emergency</label>
                                                 </div>

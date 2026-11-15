@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $url1 = API."?mode=gettenantproperty&type=".$_POST['type']."&valu=".$_POST['valu'];
 $data_details1 = callAPI($url1);
 $result =  json_decode($data_details1,1);

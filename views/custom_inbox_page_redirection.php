@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $_GET['option'] = $_POST['option'];
 $_GET['Rid'] = $_POST['rid'];
 $option = '';
@@ -78,7 +78,7 @@ if($return == 0){
 	//echo $disptemp;// exit;
 	$_SESSION['ajaxpage'] = $disptemp;
 	echo '<input type="hidden" id="ajaxrefrashpagename" value="'.$option .'">';
-	include_once($disptemp);
+	include_once $disptemp;
 
 	//exit;
 	//echo $disptemp; //exit;

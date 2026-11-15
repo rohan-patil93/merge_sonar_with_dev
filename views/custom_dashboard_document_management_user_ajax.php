@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 
 $status_filter = isset($_POST['status_filter']) ? trim($_POST['status_filter']) : '';
 $company_id    = isset($_POST['company_id'])    ? (int)$_POST['company_id']    : (int)($_SESSION['company_id'] ?? 0);

@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 
 $project_id = isset($_POST['project_id']) ? $_POST['project_id'] : '';
 $employee_id = isset($_POST['employee_id']) ? $_POST['employee_id'] : '';

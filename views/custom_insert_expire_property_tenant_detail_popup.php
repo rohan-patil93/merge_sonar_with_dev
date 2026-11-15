@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $rid = $_POST['rid'];
 $url1 = API."?mode=getpropertytenantdetails&rid=".$rid;
 $data_details1 = callAPI($url1);

@@ -139,7 +139,7 @@ $disabledbtn = "";
                 </div>
                 <div class="form-group creatdebitcreaditnoteamount" <?php echo $shownoterequired; ?>>
                     <span class="form-label"><?php echo in_array($transaction_table, CREDIT_TRANSACTION_WITH_PARTY)?__('Debit'):__('Credit'); ?> <?php echo __('Note Amount'); ?><span class="text-danger">*</span></span>
-                    <input aria-label="<?php echo __('Note Amount'); ?>" type="number" class="form-control" name="cancel_pending_amount" id="cancel_pending_amount" value="<?php echo (($transaction['total_amount'] ?? 0) - ($transaction['pending_amount'] ?? 0));?>">
+                    <input aria-label="<?php echo __('Note Amount'); ?>" type="number" class="form-control" name="cancel_pending_amount" id="cancel_pending_amount" value="<?php echo ($transaction['total_amount'] ?? 0) - ($transaction['pending_amount'] ?? 0);?>">
                 </div>
             </div>
             <div class="form-group col-lg-8">

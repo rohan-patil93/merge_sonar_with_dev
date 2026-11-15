@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $filter_id = $_GET['filter_id'];
 $filter_table = 'employees';
 $url = API."?mode=getfilterdetails&company_id=".$company_id."&filter_id=".$filter_id."&filter_table=".$filter_table;

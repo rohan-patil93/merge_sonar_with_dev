@@ -1,8 +1,8 @@
 <?php
 if(isset($_POST['monthyear'])){
-	include_once('../includes/session.php');
-	include_once('../dbconfig.php');
-	include_once('../comm.php');
+	include_once '../includes/session.php';
+	include_once '../dbconfig.php';
+	include_once '../comm.php';
 	$monthyear = explode('-',$_POST['monthyear']);
 	$year = $monthyear[0];
 	$month = $monthyear[1];

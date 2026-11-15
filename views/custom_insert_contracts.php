@@ -134,7 +134,7 @@ function getFieldDisplay($field, $insert_attributes)
 
 function isContractFieldMandatory($field, $insert_attributes)
 {
-    return (($insert_attributes[$field]['mandatory'] ?? 2) == 1);
+    return ($insert_attributes[$field]['mandatory'] ?? 2) == 1;
 }
 
 // LIVE PATCH: role gating

@@ -1557,7 +1557,7 @@ function calculateTotal(){
 <div class="row">
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <?php
-    include_once('account_table.php');
+    include_once 'account_table.php';
 ?>
 </div>
 </div>
@@ -1832,7 +1832,7 @@ if($rid != ''){
         $question_display ='N';
         $replay_display = 'Y';
     }
-    include_once("queries.php");
+    include_once "queries.php";
 }?>
  </div> </div>
 </div>

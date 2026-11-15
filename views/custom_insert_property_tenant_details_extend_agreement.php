@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $transaction_id = $_POST['transaction_id'];
 $url1 = API."?mode=getpropertytenantdetails&rid=".$transaction_id;
 $data_details1 = callAPI($url1);

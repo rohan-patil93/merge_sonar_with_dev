@@ -1,12 +1,12 @@
 <?php
 
 if($_GET['print'] =="Y"){
-	include_once('../includes/session.php');
-	include_once('../dbconfig.php');
-	include_once('../comm.php');
+	include_once '../includes/session.php';
+	include_once '../dbconfig.php';
+	include_once '../comm.php';
 	$callapi = "Y";
 }else{
-	include_once('dbconfig.php');
+	include_once 'dbconfig.php';
 }
 //print_r($_GET);
 $transaction_table = $_GET['table']!=""?$_GET['table']:$_GET['transaction_table'];

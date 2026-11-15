@@ -6,9 +6,9 @@ $user_id = $_POST['user_id'] ?? '';
 $currentYear = $_POST['year'] ?? '';
 $current_status = $_POST['current_status'] ?? '';
 
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 
 if($current_status != ''){
     $table_name = 'csr_proposal_data';

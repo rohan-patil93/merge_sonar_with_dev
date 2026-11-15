@@ -1,8 +1,8 @@
 <?php
 if(isset($_POST['emp_id'])){
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 }
 if(isset($_GET['Rid']) and $_GET['Rid']!=""){
 	$idvalue = explode(':',encodeId($_GET['Rid']));
@@ -763,7 +763,7 @@ function insertReleive(){
 										<p class="m-b-0"><?php echo __('Consumed'); ?></p>
 									</div>
 									<div class="col-6 b-l-default text-center">
-										<h5 class="f-w-700 m-b-0"><?php echo ($leave_details['applicable_leaves']-$leave_details['consumed_leaves']); ?></h5>
+										<h5 class="f-w-700 m-b-0"><?php echo $leave_details['applicable_leaves']-$leave_details['consumed_leaves']; ?></h5>
 										<p class="m-b-0"><?php echo __('Available'); ?></p>
 									</div>
 								</div>
@@ -806,9 +806,9 @@ function insertReleive(){
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "basic_information";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-									include("views/custom_insert_onboarding_employees_ajax.php");
+									include "views/custom_insert_onboarding_employees_ajax.php";
 								}else{
-									include("custom_insert_onboarding_employees_ajax.php");
+									include "custom_insert_onboarding_employees_ajax.php";
 								}
 			  					//include('views/custom_insert_onboarding_employees_ajax.php');
 			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
@@ -838,9 +838,9 @@ function insertReleive(){
 					  					$_POST['edittype'] = "VIEW";
 					  					$_POST['showpagetype'] = "work_details";
 					  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-											include("views/custom_insert_onboarding_employees_ajax.php");
+											include "views/custom_insert_onboarding_employees_ajax.php";
 										}else{
-											include("custom_insert_onboarding_employees_ajax.php");
+											include "custom_insert_onboarding_employees_ajax.php";
 										}
 					  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 					  				?>
@@ -869,9 +869,9 @@ function insertReleive(){
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "personal_details";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-									include("views/custom_insert_onboarding_employees_ajax.php");
+									include "views/custom_insert_onboarding_employees_ajax.php";
 								}else{
-									include("custom_insert_onboarding_employees_ajax.php");
+									include "custom_insert_onboarding_employees_ajax.php";
 								}
 			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
@@ -899,9 +899,9 @@ function insertReleive(){
 		  					$_POST['edittype'] = "VIEW";
 		  					$_POST['showpagetype'] = "bank_details";
 		  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-								include("views/custom_insert_onboarding_employees_ajax.php");
+								include "views/custom_insert_onboarding_employees_ajax.php";
 							}else{
-								include("custom_insert_onboarding_employees_ajax.php");
+								include "custom_insert_onboarding_employees_ajax.php";
 							}
 		  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 		  				?>
@@ -929,9 +929,9 @@ function insertReleive(){
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "bank_details";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-									include("views/custom_insert_onboarding_employees_ajax.php");
+									include "views/custom_insert_onboarding_employees_ajax.php";
 								}else{
-									include("custom_insert_onboarding_employees_ajax.php");
+									include "custom_insert_onboarding_employees_ajax.php";
 								}
 			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
@@ -960,9 +960,9 @@ function insertReleive(){
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "employee_buddies";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-									include("views/custom_insert_onboarding_employees_ajax.php");
+									include "views/custom_insert_onboarding_employees_ajax.php";
 								}else{
-									include("custom_insert_onboarding_employees_ajax.php");
+									include "custom_insert_onboarding_employees_ajax.php";
 								}
 			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
@@ -992,9 +992,9 @@ function insertReleive(){
 			$_POST['edittype'] = "VIEW";
 			$_POST['showpagetype'] = "employee_access";
 			if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-			include("views/custom_insert_onboarding_employees_ajax.php");
+			include "views/custom_insert_onboarding_employees_ajax.php";
 		}else{
-			include("custom_insert_onboarding_employees_ajax.php");
+			include "custom_insert_onboarding_employees_ajax.php";
 		}
 			unset($_POST['edittype']); unset($_POST['showpagetype']);
 		?>
@@ -1025,9 +1025,9 @@ function insertReleive(){
 			$_POST['edittype'] = "VIEW";
 			$_POST['showpagetype'] = "employee_other_access";
 			if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-			include("views/custom_insert_onboarding_employees_ajax.php");
+			include "views/custom_insert_onboarding_employees_ajax.php";
 		}else{
-			include("custom_insert_onboarding_employees_ajax.php");
+			include "custom_insert_onboarding_employees_ajax.php";
 		}
 			unset($_POST['edittype']); unset($_POST['showpagetype']);
 		?>
@@ -1058,9 +1058,9 @@ function insertReleive(){
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "proof_details";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-									include("views/custom_insert_onboarding_employees_ajax.php");
+									include "views/custom_insert_onboarding_employees_ajax.php";
 								}else{
-									include("custom_insert_onboarding_employees_ajax.php");
+									include "custom_insert_onboarding_employees_ajax.php";
 								}
 			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
@@ -1089,9 +1089,9 @@ function insertReleive(){
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "experience_details";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-									include("views/custom_insert_onboarding_employees_ajax.php");
+									include "views/custom_insert_onboarding_employees_ajax.php";
 								}else{
-									include("custom_insert_onboarding_employees_ajax.php");
+									include "custom_insert_onboarding_employees_ajax.php";
 								}
 			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
@@ -1120,9 +1120,9 @@ function insertReleive(){
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "employee_qualifications";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-									include("views/custom_insert_onboarding_employees_ajax.php");
+									include "views/custom_insert_onboarding_employees_ajax.php";
 								}else{
-									include("custom_insert_onboarding_employees_ajax.php");
+									include "custom_insert_onboarding_employees_ajax.php";
 								}
 			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
@@ -1151,9 +1151,9 @@ function insertReleive(){
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "employee_dependents";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-									include("views/custom_insert_onboarding_employees_ajax.php");
+									include "views/custom_insert_onboarding_employees_ajax.php";
 								}else{
-									include("custom_insert_onboarding_employees_ajax.php");
+									include "custom_insert_onboarding_employees_ajax.php";
 								}
 			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
@@ -1182,9 +1182,9 @@ function insertReleive(){
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "employee_contacts";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-									include("views/custom_insert_onboarding_employees_ajax.php");
+									include "views/custom_insert_onboarding_employees_ajax.php";
 								}else{
-									include("custom_insert_onboarding_employees_ajax.php");
+									include "custom_insert_onboarding_employees_ajax.php";
 								}
 			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
@@ -1213,9 +1213,9 @@ function insertReleive(){
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "emp_visa";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-									include("views/custom_insert_onboarding_employees_ajax.php");
+									include "views/custom_insert_onboarding_employees_ajax.php";
 								}else{
-									include("custom_insert_onboarding_employees_ajax.php");
+									include "custom_insert_onboarding_employees_ajax.php";
 								}
 			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
@@ -1244,9 +1244,9 @@ function insertReleive(){
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "emp_skills";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
-									include("views/custom_insert_onboarding_employees_ajax.php");
+									include "views/custom_insert_onboarding_employees_ajax.php";
 								}else{
-									include("custom_insert_onboarding_employees_ajax.php");
+									include "custom_insert_onboarding_employees_ajax.php";
 								}
 			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
@@ -1348,13 +1348,13 @@ function insertReleive(){
 		<?php } ?>
 		</div>
 		<div class="tab-pane fade" id="home-7" role="tabpanel" aria-labelledby="home-tab-7">
-			<?php include('custom_list_calendor.php'); ?>
+			<?php include 'custom_list_calendor.php'; ?>
 		</div>
 		<div class="tab-pane fade" id="home-att" role="tabpanel" aria-labelledby="home-tab-att">
-			<?php include('custom_view_monthly_attendance.php'); ?>
+			<?php include 'custom_view_monthly_attendance.php'; ?>
 		</div>
 		<div class="tab-pane fade" id="home-70" role="tabpanel" aria-labelledby="home-tab-70">
-	          <?php include("custom_basic_info_pay.php");   ?>
+	          <?php include "custom_basic_info_pay.php";   ?>
 		</div>
 	</div>
 

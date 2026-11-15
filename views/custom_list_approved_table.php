@@ -1,8 +1,8 @@
 <?php
 //$data = array();
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $_SESSION['apply_js']['table']= 1;
 $_SESSION['apply_js']['multiselest'] = '1';
 if (isset($_POST['submit'])){

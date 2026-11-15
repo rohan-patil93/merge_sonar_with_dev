@@ -1,8 +1,8 @@
 <?php
 if(isset($_POST['process_name']) and $_POST['process_name'] !=""){
-	include_once('../includes/session.php');
-	include_once('../dbconfig.php');
-	include_once('../comm.php');
+	include_once '../includes/session.php';
+	include_once '../dbconfig.php';
+	include_once '../comm.php';
 	$process_name = $_POST['process_name'];
 	$rid = $_POST['rid'];
 	$url = API."?mode=getapplicationserialnumbers&process_name=".$process_name."&rid=".$rid;

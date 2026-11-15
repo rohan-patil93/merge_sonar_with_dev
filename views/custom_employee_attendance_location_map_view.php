@@ -1,7 +1,7 @@
 <?php
-include_once(__DIR__ . '/../includes/session.php');
-include_once(__DIR__ . '/../dbconfig.php');
-include_once(__DIR__ . '/../comm.php');
+include_once __DIR__ . '/../includes/session.php';
+include_once __DIR__ . '/../dbconfig.php';
+include_once __DIR__ . '/../comm.php';
 
 $employee_id = $_GET['employee_id'] ?? ($_POST['employee_id'] ?? 0);
 $attendance_date = $_GET['attendance_date'] ?? ($_POST['attendance_date'] ?? '');

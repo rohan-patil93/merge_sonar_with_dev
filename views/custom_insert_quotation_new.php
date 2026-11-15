@@ -2436,7 +2436,7 @@ if($checktimeprint > 0){
 </div>
 <div class="tab-content tabs">
     <div class="tab-pane card-body p-0" id="searchitem" role="tabpanel">
-        <?php include_once("views/custom_list_item_search.php"); ?>
+        <?php include_once "views/custom_list_item_search.php"; ?>
     </div>
     <div class="tab-pane card-body p-0" id="samerefdocuments" role="tabpanel">
     </div>
@@ -2636,7 +2636,7 @@ if($checktimeprint > 0){
                $tran_no =  $table1['qo_number'];
             //}
                //echo "<pre>"; print_r($table1); echo "</pre>";
-               include_once("custom_insert_quotation_topup.php");
+               include_once "custom_insert_quotation_topup.php";
              ?>
        <?php
                     if($checktimeprint > 0){
@@ -2694,7 +2694,7 @@ if($checktimeprint > 0){
                              $display_table =$array_table[$table_list[$option]['display_table']].'.php';
                             //echo "<pre>"; print_r($table1); echo "</pre>";
                             if(isset($table2[0]['item_id'])){
-                                include_once($display_table);
+                                include_once $display_table;
                             }else{
                                 ?>
 

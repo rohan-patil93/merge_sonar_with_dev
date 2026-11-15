@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $page =  $_GET['pagename'];
 if($_GET['tablename'] == "hsn_and_sac_codes"){
     $selectfiledextra = $_GET['fieldsname1'].",".$_GET['fieldsname2'].",".$_GET['fieldsname3'];

@@ -1,7 +1,7 @@
 <?php
-include_once('../includes/session.php');
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../includes/session.php';
+include_once '../dbconfig.php';
+include_once '../comm.php';
 
 $category = array('1' => __('Survey'), '2' => __('Poll'));
 $status_filter = isset($_POST['status_filter']) ? trim($_POST['status_filter']) : 'assigned';
