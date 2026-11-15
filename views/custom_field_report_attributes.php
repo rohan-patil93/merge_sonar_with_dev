@@ -97,7 +97,7 @@ $res_data = json_decode($res_data, 1);
 						<h3 class="kt-portlet__head-title">
 							<div>
 								<div style="float: left;">
-									<label style="margin-top: 10px;"> <?php echo htmlspecialchars(__($title ?? '')); ?><span class="requried">*</span> &nbsp;&nbsp; </label>
+									<span class="d-inline-block fw-bold" style="margin-bottom:5px;margin-top: 10px;"> <?php echo htmlspecialchars(__($title ?? '')); ?><span class="requried">*</span> &nbsp;&nbsp; </span>
 								<!-- <div class="col-lg-4" > </div> -->
 
 				 			  </div>
@@ -121,22 +121,22 @@ $res_data = json_decode($res_data, 1);
 					<div class="kt-portlet__body">
 						<div class="form-group row">
 							<div class="col-lg-3">
-								<label><?php echo __('Field'); ?> </label>
+								<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Field'); ?> </span>
 							</div>
 							<div class="col-lg-3">
-								<label class=""><?php echo __('Label'); ?> </label>
+								<span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Label'); ?> </span>
 							</div>
 							<div class="col-lg-1">
-								<label class="">   <?php echo __('Display'); ?></label>
+								<span class=" d-inline-block fw-bold" style="margin-bottom:5px">   <?php echo __('Display'); ?></span>
 							</div>
 							<div class="col-lg-2">
-								<label class=""> <?php echo __('Position'); ?> </label>
+								<span class=" d-inline-block fw-bold" style="margin-bottom:5px"> <?php echo __('Position'); ?> </span>
 							</div>
 							<div class="col-lg-1">
-								<label class=""> <?php echo __('Filter'); ?> </label>
+								<span class=" d-inline-block fw-bold" style="margin-bottom:5px"> <?php echo __('Filter'); ?> </span>
 							</div>
 							<div class="col-lg-2">
-								<label class=""> <?php echo __('Filter Type'); ?> </label>
+								<span class=" d-inline-block fw-bold" style="margin-bottom:5px"> <?php echo __('Filter Type'); ?> </span>
 							</div>
 						</div>
 						<input type="hidden" name="report_id" id='report_id'  value="<?php echo $report_id; ?>">
@@ -186,7 +186,7 @@ $res_data = json_decode($res_data, 1);
 					</div>
 
 					<div class="form-group  row">
-							<label class="col-xl-3 col-lg-3 col-form-label"><?php echo __('Content'); ?><span class="requried"></span></label>
+							<span class="col-xl-3 col-lg-3 col-form-label d-inline-block fw-bold"><?php echo __('Content'); ?><span class="requried"></span></span>
 							<div class="col-lg-9 col-xl-6">
 								<div class="input-group">
 									<div class="input-group-prepend"><span class="input-group-text"><i class="la la-user" aria-hidden="true"></i></span></div>
