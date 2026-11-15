@@ -76,9 +76,11 @@ function menudisplaytop($menuarray,$type){
 		   </span>
                     <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
                 </a>
-                <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');  } ?>
+                <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');
+                } ?>
             </li>
-            <?php } } ?>
+            <?php }
+            } ?>
         </ul>
     </div>
 </nav>

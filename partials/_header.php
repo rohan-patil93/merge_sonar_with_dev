@@ -317,7 +317,8 @@
 
 </script>
 <?php //echo "<pre>Goodddd";print_r($_SESSION['application_menu_TNC']); echo "</pre>";
-    if($timeprint == '1' && $maxtimeshow >= '18'){ echo "Start Header after script  - ".date('m/d/Y h:i:s a')."</br>"; }
+    if($timeprint == '1' && $maxtimeshow >= '18'){ echo "Start Header after script  - ".date('m/d/Y h:i:s a')."</br>";
+    }
 ?>
 
 
@@ -328,7 +329,8 @@
             <a href="index.php">
                 <?php if($_SESSION['config']['display_logo']!=""){ ?>
                     <img class="img-fluid" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
-                <?php }else{ echo $_SESSION['config']['display_logo']; } ?>
+                <?php }else{ echo $_SESSION['config']['display_logo'];
+                } ?>
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="ti-flickr"></i>
@@ -715,7 +717,8 @@
                             <img src="uploads/all/<?php echo $module_list['module_logo']; ?>" class="img-40" alt="" >
                             <h5 class=" f-12"><?php echo __($module_list['module_name']); ?></h5>
                         </div>
-                    <?php } } ?>
+                    <?php }
+                    } ?>
 
                 </div>
                 <div class="col-lg-12" style="height:10px;"></div>
@@ -726,7 +729,8 @@
     <input type="hidden" id="work_module_setup_id" value="<?php echo base64_encode($_SESSION['work_module_setup_id']); ?>">
 </ul>
 <?php //echo "<pre>Goodddd";print_r($_SESSION['application_menu_TNC']); echo "</pre>";
-    if($timeprint == '1' && $maxtimeshow >= '18'){ echo "After Header Menu  - ".date('m/d/Y h:i:s a')."</br>"; }
+    if($timeprint == '1' && $maxtimeshow >= '18'){ echo "After Header Menu  - ".date('m/d/Y h:i:s a')."</br>";
+    }
 ?>
 <?php
 //echo "<pre>Goodddd";print_r($_SESSION['role_nav']); print_r($topnavcenter); echo "</pre>";
@@ -826,7 +830,8 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
               </div><!-- end row -->
           </div> <!-- dropdown-mega-menu.// -->
       </li>
-  <?php } } ?>
+  <?php }
+  } ?>
     <?php  if (count((array)$toplistnav) >0 && in_array('TNL', (array)$_SESSION['role_nav'])){ foreach ($toplistnav as  $listnav) {?>
         <li class="nav-item dropdown has-megamenu">
             <a class="nav-link dropdown-toggle text-primary" href="#" data-bs-toggle="dropdown">
@@ -884,7 +889,8 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
               </div><!-- end row -->
           </div> <!-- dropdown-mega-menu.// -->
       </li>
-  <?php } } ?>
+  <?php }
+  } ?>
 
 <?php
         $ttimesheet ="";

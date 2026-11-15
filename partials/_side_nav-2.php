@@ -175,7 +175,8 @@ function menudisplaytop($menuarray,$type){
                                 </a>
                             </li>
                         </ul> -->
-                <?php } } ?>
+                <?php }
+                } ?>
                 <?php  if (count($topnav) >0 && in_array('TN', $_SESSION['role_nav'])){ foreach($topnav as $nav){    $child = count($nav['child']);
                         $link = $child >0 ?  'javascript:;' : 'index.php?option='.$nav['Page_Name'];
                         $drop =  $child >0 ?  'pcoded-hasmenu ' : '';
@@ -197,16 +198,20 @@ function menudisplaytop($menuarray,$type){
                                     <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
                                 </a>
 
-                            <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');  } ?>
+                            <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');
+                            } ?>
                             </li>
                         </ul>
 
-                <?php } } ?>
+                <?php }
+                } ?>
                 <?php if (count($topnavcenter) >0  && in_array('TNC', $_SESSION['role_nav'])){ foreach ($topnavcenter as  $nav) {
                         $child = count($nav['child']);
                     $listnav_pagename = $nav['Page_Name'];
-                    if($_SESSION['userid']==50 && $listnav['Page_Name']=='COM_BULK_PROJECT_TIMESHEET'){ $listnav_pagename  = "COM_BULK_HR_PROJECT_TIMESHEET"; }
-                    if($_SESSION['userid']==100 && $listnav['Page_Name']=='COM_BULK_PROJECT_TIMESHEET' ){ $listnav_pagename  = "COM_BULK_FINANCE_PROJECT_TIMESHEET"; }
+                    if($_SESSION['userid']==50 && $listnav['Page_Name']=='COM_BULK_PROJECT_TIMESHEET'){ $listnav_pagename  = "COM_BULK_HR_PROJECT_TIMESHEET";
+                    }
+                    if($_SESSION['userid']==100 && $listnav['Page_Name']=='COM_BULK_PROJECT_TIMESHEET' ){ $listnav_pagename  = "COM_BULK_FINANCE_PROJECT_TIMESHEET";
+                    }
                     $link = $child >0 ?  'javascript:;' : 'index.php?option='.$listnav_pagename;
                     $drop =  $child >0 ?  'menu-toggle' : '';
                 ?>
@@ -217,14 +222,16 @@ function menudisplaytop($menuarray,$type){
                                     <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
                                 </a>
 
-                            <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');  } ?>
+                            <?php if(count($nav['child'])>0){  echo menudisplaytop($nav['child'],'left');
+                            } ?>
                             </li>
                         </ul> -->
 
 
 
 
-                <?php } } ?>
+                <?php }
+                } ?>
 
 
 
